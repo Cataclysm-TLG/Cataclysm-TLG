@@ -3289,9 +3289,9 @@ class Character : public Creature, public visitable
         float speed_rating() const override;
 
         /**
-         * Check whether the this player can see the other creature with infrared. This implies
-         * this player can see infrared and the target is visible with infrared (is warm).
-         * And of course a line of sight exists.
+         * Check whether the this player can see the other creature with infrared. This requires
+         * a line of sight to the target which isn't blocked by anything solid - IR can see through
+         * smoke, but not glass. And of course we can't see cold-blooded targets.
         */
         bool sees_with_infrared( const Creature &critter ) const;
         // Put corpse+inventory on map at the place where this is.

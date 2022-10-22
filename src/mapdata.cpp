@@ -275,6 +275,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_FLOATS_IN_AIR: return "FLOATS_IN_AIR";
         case ter_furn_flag::TFLAG_HARVEST_REQ_CUT1: return "HARVEST_REQ_CUT1";
         case ter_furn_flag::TFLAG_HIT_WITHOUT_COVER: return "HIT_WITHOUT_COVER";
+        case ter_furn_flag::TFLAG_TRANSLUCENT: return "TRANSLUCENT";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:

@@ -10565,29 +10565,31 @@ bool Character::sees_with_infrared( const Creature &critter ) const
         return false;
     }
 
-    map &here = get_map();
-    const tripoint_bub_ms viewer_pov = pos_bub();
+    const map &here = get_map();
+    const tripoint_bub_ms viewer_bub = pos_bub();
+    const tripoint_bub_ms target_bub = critter.pos_bub();
 
-    // TODO: IR vision should have proper range values derived from the tech or limb scores.
-    int IR_range = 1 + ( 60 * get_per() / 20 );
-    if( here.sees( viewer_pov, critter.pos_bub(), IR_range, false ) ) {
-        const int IR_concealment = here.obstacle_coverage( viewer_pov, critter.pos_bub() );
-        // Return false if the critter is covered by something adjacent to it.
-        if( critter.is_monster() && IR_concealment > critter.as_monster()->eye_level() ) {
-            return false;
-            // Check ledge concealment as normal.
-        } else if( !critter.is_monster() && IR_concealment > critter.as_character()->eye_level() ) {
-            return false;
-        } else {
-            // If we can see over their coverage, let's make sure we can see over our own.
-            const int viewer_IR_concealment = here.obstacle_coverage( critter.pos_bub(), viewer_pov );
-            if( viewer_IR_concealment > eye_level() ) {
-                return false;
-            }
-        }
-        return true;
+    const tripoint viewer_pos = viewer_bub.raw();
+    const tripoint target_pos = target_bub.raw();
+
+    //TODO: IR_range should be determined by tech or mutations, not just per.
+    const int IR_range = 1 + ( 60 * get_per() / 20 );
+    const int target_eye = critter.is_monster()
+        ? critter.as_monster()->eye_level()
+        : critter.as_character()->eye_level();
+
+    if( !here.has_line_of_sight_IR( viewer_pos, target_pos, IR_range, std::min( eye_level(), target_eye ) ) ) {
+        return false;
     }
-    return false;
+
+    if( here.obstacle_coverage( viewer_bub, target_bub ) >= target_eye ) {
+        return false;
+    }
+    if( here.obstacle_coverage( target_bub, viewer_bub ) >= eye_level() ) {
+        return false;
+    }
+
+    return true;
 }
 
 bool Character::is_visible_in_range( const Creature &critter, const int range ) const
