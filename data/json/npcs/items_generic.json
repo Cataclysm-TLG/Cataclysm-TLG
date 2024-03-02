@@ -890,7 +890,7 @@
       [ "puck", 1 ],
       [ "puller", 1 ],
       [ "punch_dagger", 2 ],
-      { "group": "pur_tablets_bottle_plastic_small_5" },
+      { "group": "pur_tablets_bottle_plastic_small_15" },
       [ "purple_drink", 3 ],
       [ "purse", 4 ],
       [ "quikclot", 5 ],
@@ -1096,13 +1096,5 @@
       [ "xanax", 3 ],
       [ "yeast", 2 ]
     ]
-  },
-  {
-    "type": "item_group",
-    "id": "pur_tablets_bottle_plastic_small_5",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bottle_plastic_small",
-    "entries": [ { "item": "pur_tablets", "count": 5 } ]
   }
 ]
