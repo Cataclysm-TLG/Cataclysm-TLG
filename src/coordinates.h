@@ -776,6 +776,7 @@ tripoint_bub_ms rebase_bub( tripoint_rel_ms p );
 // as the reference remains the same location regardless, and the map operation still knows how large the map is.
 point_bub_ms rebase_bub( point_omt_ms p );
 tripoint_bub_ms rebase_bub( tripoint_omt_ms p );
+tripoint_omt_ms rebase_omt( tripoint_bub_ms p );
 
 template<typename Point, coords::origin Origin, coords::scale Scale>
 inline int square_dist( const coords::coord_point_ob<Point, Origin, Scale> &loc1,

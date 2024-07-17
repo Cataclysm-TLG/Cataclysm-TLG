@@ -1224,7 +1224,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             } else if( drop->count_by_charges() ) {
                 std::vector<item> objs = create_charge_items( drop, roll, entry, corpse_item, you );
                 for( item &obj : objs ) {
-                    here.add_item_or_charges( you.pos(), obj );
+                    here.add_item_or_charges( you.pos_bub(), obj );
                 }
             } else {
                 item obj( drop, calendar::turn );
@@ -1245,7 +1245,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.set_var( "activity_var", you.name );
                 }
                 for( int i = 0; i != roll; ++i ) {
-                    here.add_item_or_charges( you.pos(), obj );
+                    here.add_item_or_charges( you.pos_bub(), obj );
                 }
             }
             you.add_msg_if_player( m_good, _( "You harvest: %s" ), drop->nname( roll ) );
@@ -1286,7 +1286,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 ruined_parts.set_var( "activity_var", you.name );
             }
             for( int i = 0; i < item_charges; ++i ) {
-                here.add_item_or_charges( you.pos(), ruined_parts );
+                here.add_item_or_charges( you.pos_bub(), ruined_parts );
             }
         }
     }
@@ -1311,9 +1311,9 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 //~ %1$s - item name, %2$s - monster name
                 you.add_msg_if_player( m_good, _( "You discover a %1$s in the %2$s!" ), content->tname(),
                                        corpse_item->get_mtype()->nname() );
-                here.add_item_or_charges( you.pos(), *content );
+                here.add_item_or_charges( you.pos_bub(), *content );
             } else if( content->is_bionic() ) {
-                here.spawn_item( you.pos(), itype_burnt_out_bionic, 1, 0, calendar::turn );
+                here.spawn_item( you.pos_bub(), itype_burnt_out_bionic, 1, 0, calendar::turn );
             }
         }
     }
@@ -1329,7 +1329,7 @@ static void butchery_quarter( item *corpse_item, const Character &you )
                            _( "You roughly slice the corpse of %s into four parts and set them aside." ),
                            corpse_item->get_mtype()->nname() );
     map &here = get_map();
-    tripoint pos = you.pos();
+    tripoint_bub_ms pos = you.pos_bub();
 
     // 4 quarters (one exists, add 3, flag does the rest)
     for( int i = 1; i <= 3; i++ ) {
@@ -1837,7 +1837,7 @@ void activity_handlers::pickaxe_do_turn( player_activity *act, Character * )
 void activity_handlers::pickaxe_finish( player_activity *act, Character *you )
 {
     map &here = get_map();
-    const tripoint pos( here.getlocal( act->placement ) );
+    const tripoint_bub_ms pos( here.bub_from_abs( act->placement ) );
     // Invalidate the activity early to prevent a query from mod_pain()
     act->set_to_null();
     if( you->is_avatar() ) {
@@ -1902,15 +1902,14 @@ void activity_handlers::start_fire_finish( player_activity *act, Character *you 
 void activity_handlers::start_fire_do_turn( player_activity *act, Character *you )
 {
     map &here = get_map();
-    // TODO: fix point types
-    tripoint where = here.getlocal( act->placement );
+    tripoint_bub_ms where = here.bub_from_abs( act->placement );
     if( !here.is_flammable( where ) ) {
         try_fuel_fire( *act, *you, true );
         if( !here.is_flammable( where ) ) {
             if( here.has_field_at( where, fd_fire ) ||
                 here.has_flag_ter( ter_furn_flag::TFLAG_USABLE_FIRE, where ) ) {
                 you->add_msg_if_player( m_info, _( "It's already burning hot there." ) );
-            } else if( !here.is_dry( where ) ) {
+            } else if( !here.is_dry( where.raw() ) ) {
                 you->add_msg_if_player( m_info, _( "You need dry ground to light a fire." ) );
             } else if( here.has_flag_ter( ter_furn_flag::TFLAG_NO_FLOOR, where ) ) {
                 you->add_msg_if_player( m_info, _( "You can't light a fire in midair." ) );
@@ -2966,8 +2965,9 @@ static void rod_fish( Character *you, const std::vector<monster *> &fishables )
         const std::vector<mtype_id> fish_group = MonsterGroupManager::GetMonstersFromGroup(
                     GROUP_FISH, true );
         const mtype_id fish_mon = random_entry_ref( fish_group );
-        here.add_item_or_charges( you->pos(), item::make_corpse( fish_mon, calendar::turn + rng( 0_turns,
-                                  3_hours ) ) );
+        here.add_item_or_charges( you->pos_bub(), item::make_corpse( fish_mon,
+                                  calendar::turn + rng( 0_turns,
+                                          3_hours ) ) );
         you->add_msg_if_player( m_good, _( "You caught a %s." ), fish_mon.obj().nname() );
     } else {
         monster *chosen_fish = random_entry( fishables );
@@ -2975,13 +2975,13 @@ static void rod_fish( Character *you, const std::vector<monster *> &fishables )
         if( chosen_fish->fish_population <= 0 ) {
             g->catch_a_monster( chosen_fish, you->pos(), you, 50_hours );
         } else {
-            here.add_item_or_charges( you->pos(), item::make_corpse( chosen_fish->type->id,
+            here.add_item_or_charges( you->pos_bub(), item::make_corpse( chosen_fish->type->id,
                                       calendar::turn + rng( 0_turns,
                                               3_hours ) ) );
             you->add_msg_if_player( m_good, _( "You caught a %s." ), chosen_fish->type->nname() );
         }
     }
-    for( item &elem : here.i_at( you->pos() ) ) {
+    for( item &elem : here.i_at( you->pos_bub() ) ) {
         if( elem.is_corpse() && !elem.has_var( "activity_var" ) ) {
             elem.set_var( "activity_var", you->name );
         }
@@ -3328,7 +3328,7 @@ void activity_handlers::operation_finish( player_activity *act, Character *you )
 void activity_handlers::plant_seed_finish( player_activity *act, Character *you )
 {
     map &here = get_map();
-    tripoint examp = here.getlocal( act->placement );
+    tripoint_bub_ms examp = here.bub_from_abs( act->placement );
     const itype_id seed_id( act->str_values[0] );
     std::list<item> used_seed;
     if( item::count_by_charges( seed_id ) ) {
@@ -3529,7 +3529,7 @@ void activity_handlers::jackhammer_do_turn( player_activity *act, Character * )
 void activity_handlers::jackhammer_finish( player_activity *act, Character *you )
 {
     map &here = get_map();
-    const tripoint &pos = here.getlocal( act->placement );
+    const tripoint_bub_ms &pos = here.bub_from_abs( act->placement );
 
     here.destroy( pos, true );
 
