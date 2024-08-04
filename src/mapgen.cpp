@@ -7122,8 +7122,30 @@ void map::rotate( int turns )
         // Translate bubble -> global -> current map.
         const point_bub_ms old( bub_from_abs( get_map().getglobal( np.pos_bub() ).xy() ) );
 
-        const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
-        np.spawn_at_precise( getglobal( tripoint_bub_ms( new_pos, sq.z() ) ) );
+        point old( np_rc.sub_pos );
+        if( np_rc.om_sub.x % 2 != 0 ) {
+            old.x += SEEX;
+        }
+        if( np_rc.om_sub.y % 2 != 0 ) {
+            old.y += SEEY;
+        }
+
+        const point new_pos = old.rotate( turns, { SEEX * 2, SEEY * 2 } );
+        if( setpos_safe ) {
+            const point local_sq = bub_from_abs( sq ).xy().raw();
+            // setpos can't be used during mapgen, but spawn_at_precise clips position
+            // to be between 0-11,0-11 and teleports NPCs when used inside of update_mapgen
+            // calls
+            const tripoint new_global_sq = sq - local_sq + new_pos;
+            np.setpos( get_map().bub_from_abs( new_global_sq ) );
+        } else {
+            // OK, this is ugly: we remove the NPC from the whole map
+            // Then we place it back from scratch
+            // It could be rewritten to utilize the fact that rotation shouldn't cross overmaps
+            shared_ptr_fast<npc> npc_ptr = overmap_buffer.remove_npc( np.getID() );
+            np.spawn_at_precise( tripoint_abs_ms( getabs( tripoint( new_pos, sq.z ) ) ) );
+            overmap_buffer.insert_npc( npc_ptr );
+        }
     }
 
     clear_vehicle_level_caches();
