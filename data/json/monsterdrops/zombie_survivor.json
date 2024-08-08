@@ -205,7 +205,10 @@
       [ "knife_chef", 15 ],
       [ "knife_carving", 15 ],
       [ "knife_folding", 10 ],
-      [ "makeshift_knife", 1 ],
+      [ "balisong", 10 ],
+      [ "diveknife", 10 ],
+      [ "knife_folding", 10 ],
+      [ "makeshift_knife", 4 ],
       [ "knife_steak", 35 ],
       { "group": "knife_rambo_cont", "prob": 15 },
       [ "knife_hunting", 10 ],
@@ -239,11 +242,10 @@
     "//": "Survivor piercing weapons other than knives",
     "items": [
       [ "spear_copper", 3 ],
-      [ "spear_steel", 2 ],
-      [ "spear_forked", 15 ],
+      [ "spear_forked", 5 ],
       [ "sharpened_pipe", 15 ],
       [ "spear_knife", 15 ],
-      [ "spear_stone", 1 ],
+      [ "spear_wood_makeshift", 25 ],
       [ "spear_wood", 25 ]
     ]
   },
