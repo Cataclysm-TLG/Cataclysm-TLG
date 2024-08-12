@@ -862,7 +862,7 @@
       { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" }
     ],
     "pocket_data": [
-      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 120 } },
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 40 } },
       {
         "pocket_type": "E_FILE_STORAGE",
         "rigid": true,

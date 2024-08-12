@@ -514,7 +514,7 @@
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "MP3", "CALORIES_INTAKE_TRACKER", "FITNESS_CHECK" ],
     "pocket_data": [
-      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 80 } },
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 20 } },
       {
         "pocket_type": "E_FILE_STORAGE",
         "rigid": true,
@@ -3011,7 +3011,7 @@
     },
     "armor": [ { "encumbrance": 0, "coverage": 5, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ],
     "material_thickness": 1,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 20 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 10 } } ]
   },
   {
     "id": "powered_earplugs_on",
