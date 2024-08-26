@@ -90,25 +90,20 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_cell_phone",
-    "entries": [ { "item": "light_plus_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "cell_phone" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "cell_phone" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_laptop",
-    "entries": [ { "item": "medium_plus_battery_cell", "ammo-item": "battery", "charges": 600, "container-item": "laptop" } ]
+    "entries": [ { "item": "medium_battery_cell", "ammo-item": "battery", "charges": 600, "container-item": "laptop" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_soldering_iron",
     "entries": [
-      {
-        "item": "light_plus_battery_cell",
-        "ammo-item": "battery",
-        "charges": 150,
-        "container-item": "soldering_iron_portable"
-      }
+      { "item": "light_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "soldering_iron_portable" }
     ]
   },
   {
@@ -130,25 +125,25 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_flashlight",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "flashlight" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "flashlight" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_heavy_flashlight",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "heavy_flashlight" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "heavy_flashlight" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_mp3",
-    "entries": [ { "item": "light_plus_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "mp3" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "mp3" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_two_way_radio",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
   },
   {
     "type": "item_group",
@@ -160,7 +155,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_tazer",
-    "entries": [ { "item": "medium_disposable_cell", "ammo-item": "battery", "charges": 1200, "container-item": "tazer" } ]
+    "entries": [ { "item": "medium_battery_cell", "ammo-item": "battery", "charges": 1200, "container-item": "tazer" } ]
   },
   {
     "type": "item_group",
@@ -3320,7 +3315,7 @@
           { "item": "memory_card" },
           { "item": "usb_drive" },
           {
-            "item": "light_plus_battery_cell",
+            "item": "light_battery_cell",
             "ammo-item": "battery",
             "charges": 150,
             "container-item": "portable_game"
@@ -3711,7 +3706,7 @@
           { "item": "cheeseburger" },
           { "group": "charged_smart_phone" },
           {
-            "item": "light_plus_battery_cell",
+            "item": "light_battery_cell",
             "ammo-item": "battery",
             "charges": 150,
             "container-item": "eink_tablet_pc"
@@ -5039,7 +5034,7 @@
           { "item": "wristwatch" },
           { "item": "camera_bag" },
           { "group": "charged_smart_phone" },
-          { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera_pro" },
+          { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera_pro" },
           { "item": "pants" }
         ]
       },
@@ -5194,7 +5189,7 @@
           { "item": "touristmap" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" },
-          { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera" },
+          { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera" },
           { "item": "tshirt" },
           { "item": "pants" }
         ]
@@ -5497,7 +5492,7 @@
           { "item": "boots_combat" },
           { "item": "wristwatch" },
           { "item": "gloves_tactical" },
-          { "item": "flight_helmet", "ammo-item": "light_plus_battery_cell", "charges": 150 },
+          { "item": "flight_helmet", "ammo-item": "light_battery_cell", "charges": 150 },
           { "item": "mil_flight_suit" },
           { "item": "chestrig" },
           { "group": "loaded_webbing_belt" },
