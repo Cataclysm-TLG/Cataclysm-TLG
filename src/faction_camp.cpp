@@ -5684,10 +5684,6 @@ bool basecamp::distribute_food( bool player_command )
             return false;
         }
         nutrients_to_add += from_it;
-        if( from_it.kcal() <= 0 ) {
-            // can happen if calories is low and rot is high.
-            return false;
-        }
         return true;
     };
 
@@ -5739,9 +5735,7 @@ bool basecamp::distribute_food( bool player_command )
     }
 
     if( nutrients_to_add.kcal() <= 0 && nutrients_to_add.vitamins().empty() ) {
-        if( player_command ) {
-            popup( _( "No suitable items are located at the drop points…" ) );
-        }
+        popup( _( "No suitable items are located at the drop points…" ) );
         return false;
     }
 
@@ -5753,9 +5747,7 @@ bool basecamp::distribute_food( bool player_command )
         popup_msg = _( "You distribute vitamins and medicine to your companions." );
     }
 
-    if( player_command ) {
-        popup( popup_msg );
-    }
+    popup( popup_msg );
     camp_food_supply( nutrients_to_add );
     return true;
 }

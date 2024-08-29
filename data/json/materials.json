@@ -764,8 +764,9 @@
     "type": "material",
     "id": "drug_filler",
     "name": "Drug filler",
-    "copy-from": "flesh",
-    "//": "Any inert drug filler like glucose, gelatin, lactose, sucrose, etc.  Used for pills.",
+    "copy-from": "powder",
+    "vitamins": [  ],
+    "//": "Any another drug filler like glucose, lactose, sucrose and the like.  Created so we don't need to specify three billion chemicals used in pills.",
     "dmg_adj": [ "lightly damaged", "damaged", "very damaged", "thoroughly damaged" ]
   },
   {
