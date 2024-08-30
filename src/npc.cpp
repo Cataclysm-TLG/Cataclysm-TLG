@@ -1225,15 +1225,15 @@ void npc::place_on_map( map *here )
     if( g->is_empty( here, pos_abs() ) || is_mounted() ) {
         return;
     }
-    const tripoint_bub_ms pos = pos_bub( *here );
-    for( const tripoint_bub_ms &p : closest_points_first( pos, 1, SEEX + 1 ) ) {
+
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 1, SEEX + 1 ) ) {
         if( g->is_empty( p ) ) {
             setpos( *here, p );
             return;
         }
     }
 
-    debugmsg( "Failed to place NPC in a valid location near %s", pos.to_string() );
+    debugmsg( "Failed to place NPC in a valid location near %s", pos_bub().to_string() );
 }
 
 std::pair<skill_id, int> npc::best_combat_skill( combat_skills subset, bool randomize ) const

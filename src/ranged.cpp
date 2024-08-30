@@ -2450,14 +2450,16 @@ int RAS_time( const Character &p, const item_location &loc )
 
 static void cycle_action( item &weap, const itype_id &ammo, map *here, const tripoint_bub_ms &pos )
 {
-    // Eject casings and linkages in random direction avoiding walls using player position as fallback.
-    std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, 1 );
-    tiles.erase( tiles.begin() );
-    tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&pos,
-    &here]( const tripoint_bub_ms & e ) {
-        return !here->passable( e ) || here->obstructed_by_vehicle_rotation( pos, e );
-    } ), tiles.end() );
-    tripoint_bub_ms eject{ tiles.empty() ? pos : random_entry( tiles ) };
+    // eject casings and linkages in random direction avoiding walls using player position as fallback
+    std::vector<tripoint_bub_ms> tiles;
+    tiles.reserve( 8 );
+    find_point_closest_first( pos, 1, 1, [here, &tiles]( const tripoint_bub_ms & e ) {
+        if( here->passable( e ) ) {
+            tiles.push_back( e );
+        }
+        return false;
+    } );
+    tripoint_bub_ms eject { tiles.empty() ? pos : random_entry( tiles ) };
 
     // For turrets try and drop casings or linkages directly to any CARGO part on the same tile.
     const std::optional<vpart_reference> ovp_cargo = weap.has_flag( flag_VEHICLE )
@@ -3527,12 +3529,13 @@ tripoint_bub_ms target_ui::choose_initial_target()
     }
 
     // Try closest practice target
-    const std::vector<tripoint_bub_ms> nearby = closest_points_first( src, range );
-    const auto target_spot = std::find_if( nearby.begin(), nearby.end(),
-    [this, &here]( const tripoint_bub_ms & pt ) {
+    map &here = get_map();
+    std::optional<tripoint_bub_ms> target_spot = find_point_closest_first( src, 0, range, [this,
+    &here]( const tripoint_bub_ms & pt ) {
         return here.tr_at( pt ).id == tr_practice_target && this->you->sees( here, pt );
     } );
-    if( target_spot != nearby.end() ) {
+
+    if( target_spot != std::nullopt ) {
         return *target_spot;
     }
 
