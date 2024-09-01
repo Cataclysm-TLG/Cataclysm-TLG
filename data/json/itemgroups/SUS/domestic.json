@@ -356,11 +356,10 @@
       {
         "item": "flashlight",
         "prob": 10,
-        "ammo-item": "light_battery_cell",
         "charges": [ 100, 300 ],
         "damage": [ 0, 4 ]
       },
-      { "item": "flashlight", "prob": 10, "ammo-item": "light_battery_cell", "charges": [ 100, 300 ] },
+      { "item": "flashlight", "prob": 10, "charges": [ 100, 300 ] },
       { "item": "toothbrush_plain", "custom-flags": [ "FILTHY" ], "prob": 80 },
       { "item": "bottle_opener", "prob": 35, "damage": [ 0, 4 ] },
       { "item": "pockknife", "prob": 35, "damage": [ 0, 4 ] },
@@ -418,11 +417,11 @@
     "subtype": "collection",
     "entries": [
       { "group": "pens", "count": 2, "charges": [ 70, -1 ], "prob": 30 },
-      { "item": "paper", "charges": [ 1, 40 ], "prob": 20 },
+      { "item": "paper", "charges": [ 1, 30 ], "prob": 20 },
       { "item": "scissors", "prob": 10 },
       { "item": "scissors", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "stapler", "prob": 10, "damage": [ 0, 4 ] },
-      { "item": "flashlight", "prob": 10, "ammo-item": "battery", "charges": 300, "damage": [ 0, 2 ] },
+      { "item": "flashlight", "prob": 10, "charges": 300, "damage": [ 0, 2 ] },
       { "item": "flashlight", "prob": 10, "damage": [ 0, 2 ] },
       { "item": "pipe_cleaner", "prob": 10 },
       { "item": "hairbrush", "prob": 30 },
