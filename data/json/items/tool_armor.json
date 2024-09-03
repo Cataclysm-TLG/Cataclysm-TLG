@@ -929,28 +929,14 @@
     "description": "A point-and-shoot digital camera with a digital viewfinder, a backup 'iron-sight', and flash.  You can look at your photos on the digital screen, or transfer them with any standard electronic device. This one can be worn over your neck.",
     "price": "200 USD",
     "price_postapoc": "50 cent",
-    "flags": [ "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
-    "weight": "943 g",
-    "volume": "256 ml",
-    "charges_per_use": 5,
+    "material": [ "plastic", "steel" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
+    "weight": "520 g",
+    "volume": "500 ml",
+    "charges_per_use": 1,
     "ammo": "battery",
     "use_action": [ "CAMERA" ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      },
-      {
-        "pocket_type": "E_FILE_STORAGE",
-        "rigid": true,
-        "max_contains_volume": "1 ml",
-        "max_contains_weight": "1 g",
-        "weight_multiplier": 0.0,
-        "ememory_max": "32 GB"
-      }
-    ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 50 } } ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -965,28 +951,24 @@
     "description": "A 35 mm digital SLR (single-lens reflex) camera with optical and digital viewfinders, a zoom lens with auto-focus and stabilizer, and flash.  You can look at your photos on the digital screen or transfer them with any standard electronic device.  Before the Cataclysm, you could have taken professional-grade photos using this. This one can be worn over your neck",
     "price": "8000 USD",
     "price_postapoc": "1 USD",
-    "flags": [ "CAMERA_PRO", "ALWAYS_TWOHAND", "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
-    "weight": "2304 g",
-    "volume": "1256 ml",
-    "charges_per_use": 5,
+    "material": [ "plastic", "steel" ],
+    "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
+      "CAMERA_PRO",
+      "ALWAYS_TWOHAND",
+      "OVERSIZE",
+      "BELTED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "WATER_BREAK",
+      "ELECTRONIC"
+    ],
+    "weight": "520 g",
+    "volume": "500 ml",
+    "charges_per_use": 1,
     "ammo": "battery",
     "use_action": [ "CAMERA" ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      },
-      {
-        "pocket_type": "E_FILE_STORAGE",
-        "rigid": true,
-        "max_contains_volume": "1 ml",
-        "max_contains_weight": "1 g",
-        "weight_multiplier": 0.0,
-        "ememory_max": "64 GB"
-      }
-    ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } } ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
     "melee_damage": { "bash": 1 }
   },
