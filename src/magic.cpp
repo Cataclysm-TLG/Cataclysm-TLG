@@ -2972,7 +2972,7 @@ int known_magic::get_invlet( const spell_id &sp, std::set<int> &used_invlets )
     return 0;
 }
 
-int known_magic::select_spell( Character &guy )
+spell &known_magic::select_spell( Character &guy )
 {
     // max width of spell names
     const int max_spell_name_length = get_spellname_max_width();
@@ -3048,8 +3048,12 @@ int known_magic::select_spell( Character &guy )
     spell_menu.query( true, -1, true );
 
     casting_ignore = static_cast<spellcasting_callback *>( spell_menu.callback )->casting_ignore;
-
-    return spell_menu.ret;
+    if( spell_menu.ret < 0 ) {
+        static spell null_spell_reference( spell_id::NULL_ID() );
+        return null_spell_reference;
+    }
+    spell *selected_spell = known_spells[spell_menu.ret];
+    return *selected_spell;
 }
 
 void known_magic::on_mutation_gain( const trait_id &mid, Character &guy )
