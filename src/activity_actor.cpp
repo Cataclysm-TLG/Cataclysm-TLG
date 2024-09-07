@@ -7951,7 +7951,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             const mtype *corpse_mtype = corpse.get_mtype();
             const bool acid_immune = you.is_immune_damage( damage_acid ) ||
                                      you.is_immune_field( fd_acid );
-            if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune ||
+            if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune &&
                     !pulp_acid ) ) {
                 //don't smash acid zombies when auto pulping unprotected
                 continue;
@@ -8015,7 +8015,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     // If we reach this, all corpses have been pulped, finish the activity
     act.moves_left = 0;
     if( num_corpses == 0 ) {
-        you.add_msg_if_player( m_bad, _( "The corpse moved before you could finish smashing it!" ) );
+        you.add_msg_if_player( m_bad, _( "Your smashing was interrupted." ) );
         return;
     }
     // TODO: Factor in how long it took to do the smashing.
