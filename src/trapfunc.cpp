@@ -1587,7 +1587,7 @@ bool trapfunc::cast_spell( const tripoint &p, Creature *critter, item * )
             // remove all traps in 3-3 area area
             for( int x = p.x - 1; x <= p.x + 1; x++ ) {
                 for( int y = p.y - 1; y <= p.y + 1; y++ ) {
-                    tripoint pt( x, y, p.z );
+                    tripoint_bub_ms pt( x, y, p.z );
                     if( here.tr_at( pt ).loadid == tr.loadid ) {
                         here.remove_trap( pt );
                     }
@@ -1610,7 +1610,7 @@ bool trapfunc::cast_spell( const tripoint &p, Creature *critter, item * )
             // remove all traps in 3-3 area area
             for( int x = p.x - 1; x <= p.x + 1; x++ ) {
                 for( int y = p.y - 1; y <= p.y + 1; y++ ) {
-                    tripoint pt( x, y, p.z );
+                    tripoint_bub_ms pt( x, y, p.z );
                     if( here.tr_at( pt ).loadid == tr.loadid ) {
                         here.remove_trap( pt );
                     }
