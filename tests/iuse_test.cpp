@@ -43,6 +43,8 @@ static const efftype_id effect_took_xanax_visible( "took_xanax_visible" );
 static const efftype_id effect_valium( "valium" );
 static const efftype_id effect_visuals( "visuals" );
 
+static const furn_str_id furn_f_toilet("f_toilet");
+
 static const itype_id itype_55gal_drum( "55gal_drum" );
 static const itype_id itype_albuterol( "albuterol" );
 static const itype_id itype_antifungal( "antifungal" );
@@ -57,6 +59,8 @@ static const itype_id itype_water_clean( "water_clean" );
 static const itype_id itype_water_purifying( "water_purifying" );
 
 static const morale_type morale_wet( "morale_wet" );
+
+static const ter_str_id ter_t_grass("t_grass");
 
 TEST_CASE( "eyedrops", "[iuse][eyedrops]" )
 {
@@ -690,7 +694,7 @@ static item_location give_tablets( avatar &dummy, int count, bool in_inventory )
         for( int i = 0; i < count; ++i ) {
             container.put_in( item( itype_pur_tablets, calendar::turn ), pocket_type::CONTAINER );
         }
-        item_location container_loc = get_map().add_item_ret_loc( dummy.pos(), container, true );
+        item_location container_loc = get_map().add_item_ret_loc( dummy.pos_bub(), container, true );
         REQUIRE( container_loc );
         std::list<item *> all_tablets = container_loc->all_items_top();
         REQUIRE( !all_tablets.empty() );
@@ -713,7 +717,7 @@ static item_location give_water( avatar &dummy, int count, bool in_inventory )
     if( in_inventory ) {
         container_loc = dummy.i_add( container );
     } else {
-        container_loc = get_map().add_item_ret_loc( dummy.pos(), container, true );
+        container_loc = get_map().add_item_ret_loc( dummy.pos_bub(), container, true );
     }
     REQUIRE( container_loc );
     // Spawning a container of water next to the player does not update the crafting inventory, so force an update
@@ -726,7 +730,7 @@ TEST_CASE( "water_purification_tablet_activation", "[iuse][pur_tablets]" )
 {
     avatar dummy;
     dummy.normalize();
-    build_test_map( t_grass );
+    build_test_map( ter_t_grass );
     const tripoint test_origin( 20, 20, 0 );
     dummy.setpos( test_origin );
     // Give the player a backpack to hold the tablets
@@ -892,11 +896,11 @@ TEST_CASE( "water_purification_tablet_activation", "[iuse][pur_tablets]" )
 
     SECTION( "6 tablets will purify a toilet tank" ) {
         item_location tablet = give_tablets( dummy, 6, true );
-        get_map().furn_set( dummy.pos() + tripoint_north, f_toilet );
+        get_map().furn_set( dummy.pos_bub() + tripoint_north, furn_f_toilet );
         item water( itype_water );
         water.charges = 24;
-        get_map().add_item( dummy.pos() + tripoint_north, water );
-        item_location water_location( map_cursor( dummy.pos() + tripoint_north ), &water );
+        get_map().add_item( dummy.pos_bub() + tripoint_north, water );
+        item_location water_location( map_cursor( dummy.pos_bub() + tripoint_north ), &water );
 
         REQUIRE( water_location );
         REQUIRE( water_location.get_item()->typeId() == itype_water );
@@ -920,7 +924,7 @@ TEST_CASE( "water_tablet_purification_test", "[iuse][pur_tablets]" )
 {
     avatar dummy;
     dummy.normalize();
-    build_test_map( t_grass );
+    build_test_map( ter_t_grass );
     const tripoint test_origin( 20, 20, 0 );
     dummy.setpos( test_origin );
 
