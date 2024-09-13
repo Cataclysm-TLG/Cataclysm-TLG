@@ -422,8 +422,7 @@
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_tiny", "count": 2 },
-        { "item": "solder_wire", "count": [ 1, 15 ] }
+        { "item": "motor_tiny", "count": 2 }
       ]
     },
     "bash": {
@@ -468,8 +467,7 @@
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_tiny", "count": 2 },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "motor_tiny", "count": 2 }
       ]
     },
     "bash": {
@@ -511,8 +509,7 @@
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "sheet_metal", "count": [ 2, 4 ] },
         { "item": "pipe", "count": [ 1, 4 ] },
-        { "item": "cable", "charges": [ 1, 15 ] },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "cable", "charges": [ 1, 15 ] }
       ]
     },
     "bash": {
@@ -552,8 +549,7 @@
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "sheet_metal", "count": [ 2, 4 ] },
         { "item": "pipe", "count": [ 1, 4 ] },
-        { "item": "cable", "charges": [ 1, 15 ] },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "cable", "charges": [ 1, 15 ] }
       ]
     },
     "bash": {
@@ -593,8 +589,7 @@
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "sheet_metal", "count": [ 2, 4 ] },
         { "item": "pipe", "count": [ 1, 4 ] },
-        { "item": "cable", "charges": [ 1, 15 ] },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "cable", "charges": [ 1, 15 ] }
       ]
     },
     "bash": {
@@ -635,8 +630,7 @@
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "sheet_metal", "count": [ 2, 4 ] },
         { "item": "pipe", "count": [ 1, 4 ] },
-        { "item": "cable", "charges": [ 1, 15 ] },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "cable", "charges": [ 1, 15 ] }
       ]
     },
     "bash": {
@@ -677,8 +671,7 @@
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "sheet_metal", "count": [ 2, 4 ] },
         { "item": "pipe", "count": [ 1, 4 ] },
-        { "item": "cable", "charges": [ 1, 15 ] },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "cable", "charges": [ 1, 15 ] }
       ]
     },
     "bash": {
@@ -758,8 +751,7 @@
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "oxygen_tank", "count": [ 1, 2 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_micro", "count": 2 },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "motor_micro", "count": 2 }
       ]
     },
     "bash": {
@@ -804,8 +796,7 @@
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "metal_tank_little", "count": [ 0, 1 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_micro", "count": 2 },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "motor_micro", "count": 2 }
       ]
     },
     "bash": {
@@ -848,8 +839,7 @@
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "oxygen_tank", "count": [ 1, 2 ] },
-        { "item": "motor_tiny", "count": 2 },
-        { "item": "solder_wire", "charges": [ 1, 15 ] }
+        { "item": "motor_tiny", "count": 2 }
       ]
     },
     "bash": {
