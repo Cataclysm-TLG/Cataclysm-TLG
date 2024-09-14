@@ -160,9 +160,6 @@ static const json_character_flag json_flag_FOOT( "LIMB_FOOT" );
 static const json_character_flag json_flag_HAND( "LIMB_HAND" );
 static const json_character_flag json_flag_LIMB_LOWER( "LIMB_LOWER" );
 
-static const itype_id itype_water( "water" );
-static const itype_id itype_water_murky( "water_murky" );
-
 static const material_id material_glass( "glass" );
 
 static const mtype_id mon_zombie( "mon_zombie" );
@@ -200,7 +197,6 @@ static const ter_str_id ter_t_reb_cage( "t_reb_cage" );
 static const ter_str_id ter_t_rock( "t_rock" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 static const ter_str_id ter_t_rootcellar( "t_rootcellar" );
-static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_soil( "t_soil" );
 static const ter_str_id ter_t_stump( "t_stump" );
 static const ter_str_id ter_t_tree_birch( "t_tree_birch" );
@@ -2450,12 +2446,10 @@ bool map::ter_set( const tripoint_bub_ms &p, const ter_id &new_terrain, bool avo
         set_seen_cache_dirty( p );
     }
 
-    if( new_t.has_flag( "SPAWN_WITH_WATER" ) ) {
-        itype_id water_type = new_t.has_flag( ter_furn_flag::TFLAG_MURKY ) ? itype_water_murky :
-                              itype_water;
-        item water( water_type, calendar::start_of_cataclysm );
-        // TODO: Move all numeric values to json
-        water.charges = rng( 40, 240 );
+    if( !new_t.liquid_source_item_id.empty() && new_t.liquid_source_count != std::make_pair( 0, 0 ) ) {
+
+        item water( new_t.liquid_source_item_id, calendar::start_of_cataclysm );
+        water.charges = rng( new_t.liquid_source_count.first, new_t.liquid_source_count.second );
         add_item( p, water );
     }
 
@@ -5971,36 +5965,22 @@ item &map::add_item( const tripoint_bub_ms &p, item new_item, int copies )
 }
 
 // NOLINTNEXTLINE(readability-make-member-function-const)
-item map::water_from( const tripoint &p )
+item map::liquid_from( const tripoint &p )
 {
-    return map::water_from( tripoint_bub_ms( p ) );
+    return map::liquid_from( tripoint_bub_ms( p ) );
 }
 
-item map::water_from( const tripoint_bub_ms &p ) const
+item map::liquid_from( const tripoint_bub_ms &p ) const
 {
     weather_manager &weather = get_weather();
-    if( has_flag( ter_furn_flag::TFLAG_SALT_WATER, p ) ) {
-        item ret( "salt_water", calendar::turn, item::INFINITE_CHARGES );
-        ret.set_item_temperature( std::max( weather.get_temperature( p.raw() ),
-                                            temperatures::cold ) );
-        return ret;
-    }
+    ter_t source_terrain = ter( p ).obj();
 
-    const ter_id terrain_id = ter( p );
-    if( terrain_id == ter_t_sewage ) {
-        item ret( "water_sewage", calendar::turn, item::INFINITE_CHARGES );
-        ret.set_item_temperature( std::max( weather.get_temperature( p.raw() ),
-                                            temperatures::cold ) );
-        return ret;
-    }
+    if( !source_terrain.liquid_source_item_id.empty() &&
+        source_terrain.liquid_source_count == std::make_pair( 0, 0 ) ) {
 
-    // iexamine::water_source requires a valid liquid from this function.
-    if( terrain_id->has_examine( iexamine::water_source ) ||
-        furn( p )->has_examine( iexamine::water_source ) ) {
-        itype_id liquid_id = has_flag( ter_furn_flag::TFLAG_MURKY, p ) ? itype_water_murky : itype_water;
-        item ret( liquid_id, calendar::turn, item::INFINITE_CHARGES );
+        item ret( source_terrain.liquid_source_item_id, calendar::turn, item::INFINITE_CHARGES );
         ret.set_item_temperature( std::max( weather.get_temperature( p.raw() ),
-                                            temperatures::cold ) );
+                                            units::from_celsius( source_terrain.liquid_source_min_temp ) ) );
         return ret;
     }
     return item();
@@ -6507,7 +6487,7 @@ std::list<item> map::use_amount_square( const tripoint_bub_ms &p, const itype_id
 {
     std::list<item> ret;
     // Handle infinite map sources.
-    item water = water_from( p );
+    item water = liquid_from( p );
     if( water.typeId() == type && water.charges == item::INFINITE_CHARGES ) {
         ret.push_back( water );
         quantity = 0;
@@ -6704,7 +6684,7 @@ std::list<item> map::use_charges( const std::vector<tripoint_bub_ms> &reachable_
     // first
     for( const tripoint_bub_ms &p : reachable_pts ) {
         // Handle infinite map sources.
-        item water = water_from( p );
+        item water = liquid_from( p );
         if( water.typeId() == type && water.charges == item::INFINITE_CHARGES ) {
             water.charges = quantity;
             ret.push_back( water );

@@ -823,6 +823,7 @@
         { "item": "pipe", "count": [ 0, 2 ] }
       ]
     },
+    "liquid_source": { "id": "water" },
     "examine_action": "water_source"
   },
   {
@@ -849,6 +850,7 @@
       "ter_set": "t_covered_well",
       "items": [ { "item": "string_6", "count": [ 0, 18 ] }, { "item": "splinter", "count": [ 0, 24 ] } ]
     },
+    "liquid_source": { "id": "water" },
     "examine_action": "water_source"
   },
   {
@@ -862,7 +864,8 @@
     "move_cost": 6,
     "coverage": 40,
     "concealment": 40,
-    "flags": [ "TRANSPARENT", "THIN_OBSTACLE", "SALT_WATER" ],
+    "liquid_source": { "id": "salt_water", "min_temp": 2.2 },
+    "flags": [ "TRANSPARENT", "THIN_OBSTACLE" ],
     "deconstruct": { "ter_set": "t_covered_well", "items": [ { "item": "well_pump", "count": 1 }, { "item": "pipe", "count": [ 1, 6 ] } ] },
     "bash": {
       "str_min": 15,
@@ -891,6 +894,7 @@
     "coverage": 40,
     "concealment": 40,
     "flags": [ "TRANSPARENT", "LIQUIDCONT" ],
+    "liquid_source": { "id": "water_clean", "count": [ 40, 240 ] },
     "bash": {
       "str_min": 15,
       "str_max": 80,
