@@ -10441,11 +10441,18 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     } else if( grabbed && u.get_grab_type() == object_type::VEHICLE ) {
         grabbed_vehicle = veh_pointer_or_null( m.veh_at( u.pos_bub() + u.grab_point ) );
         if( grabbed_vehicle == nullptr ) {
-            // We were grabbing a vehicle that isn't there anymore
+            // We were grabbing a vehicle that isn't there anymore.
             grabbed = false;
         }
+        // Can't board vehicle with solid parts while grabbing it.
+        else if( vp_there && !pushing && !m.impassable( dest_loc ) &&
+                 !empty( grabbed_vehicle->get_avail_parts( VPFLAG_OBSTACLE ) ) &&
+                 &vp_there->vehicle() == grabbed_vehicle ) {
+            add_msg( m_warning, _( "You move into the %s, releasing it." ), grabbed_vehicle->name );
+            u.grab( object_type::NONE );
+        }
     } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
-        // We were grabbing something WEIRD, let's pretend we weren't
+        // We were grabbing something weird, let's pretend we weren't.
         grabbed = false;
     }
     if( u.grab_point != tripoint_rel_ms_zero && !grabbed && !furniture_move &&
