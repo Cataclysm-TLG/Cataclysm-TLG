@@ -15,7 +15,6 @@
 class Character;
 struct tripoint;
 
-class avatar;
 class repair_item_actor;
 class salvage_actor;
 
@@ -161,7 +160,7 @@ item_location veh_tool_attach( Character &you, const std::string &vp_name,
 /** Choose item to wear. */
 item_location wear( Character &you, const bodypart_id &bp = bodypart_str_id::NULL_ID() );
 /** Choose item to take off. */
-item_location take_off( avatar &you );
+item_location take_off();
 /** Item cut up menu. */
 item_location salvage( Character &you, const salvage_actor *actor );
 /** Repair menu. */
