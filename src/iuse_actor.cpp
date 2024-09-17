@@ -2962,7 +2962,7 @@ std::optional<int> holster_actor::use( Character *you, item &it, map *here,
 
         // iuse_actor really needs to work with item_location
         item_location item_loc = form_loc( *you, here, p, it );
-        game_menus::inv::insert_items( get_avatar(), item_loc );
+        game_menus::inv::insert_items( item_loc );
     }
 
     return 0;
