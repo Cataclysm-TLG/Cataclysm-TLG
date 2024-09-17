@@ -140,7 +140,7 @@ drop_locations edevice_select( Character &who, item_location &used_edevice, bool
 drop_locations efile_select( Character &who, item_location &used_edevice,
                              const std::vector<item_location> &target_edevices, efile_action action, bool from_used_edevice );
 /** Menu for stealing stuff. */
-item_location steal( avatar &you, Character &victim );
+item_location steal( Character &victim );
 /** Item activation menu. */
 item_location use( avatar &you );
 /** Item wielding/unwielding menu. */
