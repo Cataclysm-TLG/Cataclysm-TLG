@@ -142,7 +142,7 @@ drop_locations efile_select( Character &who, item_location &used_edevice,
 /** Menu for stealing stuff. */
 item_location steal( Character &victim );
 /** Item activation menu. */
-item_location use( avatar &you );
+item_location use();
 /** Item wielding/unwielding menu. */
 item_location wield( avatar &you );
 /** Item wielding/unwielding menu. */
