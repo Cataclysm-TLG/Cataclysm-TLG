@@ -8915,7 +8915,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
 
     do {
         if( action == "COMPARE" && activeItem ) {
-            game_menus::inv::compare( u, active_pos.raw() );
+            game_menus::inv::compare( active_pos.raw() );
         } else if( action == "FILTER" ) {
             ui.invalidate_ui();
             string_input_popup()
