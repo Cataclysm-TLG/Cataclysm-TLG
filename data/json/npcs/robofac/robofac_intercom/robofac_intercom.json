@@ -33,7 +33,7 @@
         "group": "robofac_robots",
         "rigid": true,
         "strict": true,
-        "condition": { "u_has_var": "completed_robofac_intercom_robot_sm_1", "type": "dialogue", "context": "hub_rnd", "value": "yes" }
+        "condition": { "u_has_var": "dialogue_intercom_completed_robofac_intercom_robot_sm_1", "value": "yes" }
       },
       {
         "group": "NC_ROBOFAC_INTERCOM_trade_hm12",
