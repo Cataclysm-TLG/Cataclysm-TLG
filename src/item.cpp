@@ -14001,7 +14001,7 @@ bool item::process_tool( Character *carrier, const tripoint &pos )
             carrier->add_msg_if_player( m_info, _( "The %s ran out of energy!" ), tname() );
         }
         if( type->revert_to.has_value() ) {
-            deactivate( carrier );
+            type->invoke( carrier, *this, pos );
             return false;
         } else {
             return true;
