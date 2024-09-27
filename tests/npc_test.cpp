@@ -557,7 +557,7 @@ TEST_CASE( "npc_can_target_player" )
     set_time_to_day();
 
     Character &player_character = get_player_character();
-    npc &hostile = spawn_npc( player_character.pos().xy() + point_south, "thug" );
+    npc &hostile = spawn_npc( player_character.pos_bub().xy() + point_south, "thug" );
     REQUIRE( rl_dist( player_character.pos(), hostile.pos() ) <= 1 );
     hostile.set_attitude( NPCATT_KILL );
     hostile.name = "Enemy NPC";

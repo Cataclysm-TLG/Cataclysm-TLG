@@ -1825,15 +1825,15 @@ void game::validate_npc_followers()
 
 void game::validate_camps()
 {
-    basecamp camp = m.hoist_submap_camp( u.pos() );
+    basecamp camp = m.hoist_submap_camp( u.pos_bub() );
     if( camp.is_valid() ) {
         overmap_buffer.add_camp( camp );
-        m.remove_submap_camp( u.pos() );
+        m.remove_submap_camp( u.pos_bub() );
     } else if( camp.camp_omt_pos() != tripoint_abs_omt() ) {
         std::string camp_name = _( "Faction Camp" );
         camp.set_name( camp_name );
         overmap_buffer.add_camp( camp );
-        m.remove_submap_camp( u.pos() );
+        m.remove_submap_camp( u.pos_bub() );
     }
 }
 
@@ -11479,7 +11479,7 @@ bool game::grabbed_furn_move( const tripoint &dp )
         std::string danger_tile = enumerate_as_string( get_dangerous_tile( fdest.raw() ) );
         add_msg( _( "You let go of the %1$s as it falls down the %2$s." ), furntype.name(), danger_tile );
         u.grab( object_type::NONE );
-        m.drop_furniture( fdest.raw() );
+        m.drop_furniture( fdest );
         return true;
     }
 
@@ -11881,7 +11881,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
                 adjacent_climb = true;
             }
         }
-        if( here.has_floor_or_support( stairs.raw() ) ) {
+        if( here.has_floor_or_support( stairs ) ) {
             add_msg( m_info, _( "You can't climb here - there's a ceiling above your head." ) );
             return;
         }
@@ -11917,7 +11917,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         std::vector<tripoint> pts;
         for( const tripoint_bub_ms &pt : here.points_in_radius( stairs, 1 ) ) {
             if( here.passable( pt ) &&
-                here.has_floor_or_support( pt.raw() ) ) {
+                here.has_floor_or_support( pt ) ) {
                 pts.push_back( pt.raw() );
             }
         }
@@ -11948,7 +11948,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     if( !force && movez == -1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, u.pos_bub() ) &&
         !u.is_underwater() && !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER, u.pos_bub() ) &&
         !u.has_effect( effect_gliding ) ) {
-        if( wall_cling && !here.has_floor_or_support( u.pos() ) ) {
+        if( wall_cling && !here.has_floor_or_support( u.pos_bub() ) ) {
             climbing = true;
             climbing_aid = climbing_aid_ability_WALL_CLING;
             u.set_activity_level( EXPLOSIVE_EXERCISE );
