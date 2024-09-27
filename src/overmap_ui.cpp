@@ -1885,7 +1885,7 @@ static tripoint_abs_omt display( const tripoint_abs_omt &orig,
     bool show_explored = true;
     static bool fast_scroll = false;
     int fast_scroll_offset = get_option<int>( "FAST_SCROLL_OFFSET" );
-    std::optional<tripoint> mouse_pos;
+    std::optional<tripoint_bub_ms> mouse_pos;
     std::chrono::time_point<std::chrono::steady_clock> last_blink = std::chrono::steady_clock::now();
     std::chrono::time_point<std::chrono::steady_clock> last_advance = std::chrono::steady_clock::now();
     auto display_path_iter = display_path.rbegin();
@@ -1938,7 +1938,7 @@ static tripoint_abs_omt display( const tripoint_abs_omt &orig,
             }
         } else if( action == "SELECT" &&
                    ( mouse_pos = ictxt.get_coordinates( g->w_overmap, point_zero, true ) ) ) {
-            curs += mouse_pos->xy();
+            curs += mouse_pos->xy().raw();
         } else if( action == "CENTER" ) {
             curs = orig;
         } else if( action == "LEVEL_DOWN" && curs.z() > -OVERMAP_DEPTH ) {

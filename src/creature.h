@@ -505,7 +505,7 @@ class Creature : public viewer
          * @param name Name of the implement used to pull the target.
          * @param p Position of the target creature.
         */
-        void longpull( const std::string &name, const tripoint &p );
+        void longpull( const std::string &name, const tripoint_bub_ms &p );
 
         // For pulling creatures while grabbing them and moving.
         bool grapple_drag( Creature *c );
