@@ -1342,8 +1342,8 @@ class map
         bool is_flammable( const tripoint_bub_ms &p );
         bool is_tinder( const tripoint &p );
         bool is_tinder( const tripoint_bub_ms &p );
-        bool cast_field_spell( const tripoint &p, Character &you, field_entry &cur );
-        bool cast_field_spell_on_monster( const tripoint &p, monster &z, field_entry &cur );
+        bool cast_field_spell( const tripoint_bub_ms &p, Character &you, field_entry &cur );
+        bool cast_field_spell_on_monster( const tripoint_bub_ms &p, monster &z, field_entry &cur );
         point_bub_ms random_outdoor_tile() const;
         // mapgen
 

@@ -628,7 +628,7 @@ static void field_processor_fd_fungal_haze( const tripoint &p, field_entry &cur,
     // if( cur_fd_type_id == fd_fungal_haze ) {
     if( one_in( 10 - 2 * cur.get_field_intensity() ) ) {
         // Haze'd terrain
-        fungal_effects().spread_fungus( p );
+        fungal_effects().spread_fungus( tripoint_bub_ms( p ) );
     }
 }
 
@@ -1553,7 +1553,7 @@ void map::player_in_field( Character &you )
         if( ft->spell_data.id != spell_id::NULL_ID() && ( !you.in_vehicle && !you.is_mounted() &&
                 ft.obj().phase != phase_id::GAS ) ) {
             map &here = get_map();
-            here.cast_field_spell( you.pos(), you, cur );
+            here.cast_field_spell( you.pos_bub(), you, cur );
         }
 
         if( ft == fd_sap ) {
@@ -1915,7 +1915,7 @@ void map::monster_in_field( monster &z )
         }
         if( cur_field_type->spell_data.id != spell_id::NULL_ID() ) {
             map &here = get_map();
-            here.cast_field_spell_on_monster( z.pos(), z, cur );
+            here.cast_field_spell_on_monster( z.pos_bub(), z, cur );
         }
         if( cur_field_type == fd_sap ) {
             z.mod_moves( -cur.get_field_intensity() * 5 );

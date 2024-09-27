@@ -2151,7 +2151,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
         guy.deal_damage( &caster, bp, damage_instance( damage.type, damage.amount ) );
     }
     if( sp.damage( caster ) < 0 ) {
-        sp.heal( guy.pos(), caster );
+        sp.heal( guy.pos_bub(), caster );
         add_msg_if_player_sees( guy, m_good, _( "%s wounds are closing up!" ),
                                 guy.disp_name( true ) );
     }

@@ -3890,7 +3890,7 @@ void map::decay_fields_and_scent( const time_duration &amount )
     }
 }
 
-bool map::cast_field_spell( const tripoint &p, Character &you, field_entry &cur )
+bool map::cast_field_spell( const tripoint_bub_ms &p, Character &you, field_entry &cur )
 {
     spell field_spell = cur.get_field_type()->spell_data.get_spell();
     npc dummy;
@@ -3958,18 +3958,18 @@ bool map::cast_field_spell( const tripoint &p, Character &you, field_entry &cur 
     if( field_spell.get_spell_type()->affected_bps.count() <= 0 ) {
         return false;
     }
-    field_spell.cast_all_effects( dummy, you.pos() );
+    field_spell.cast_all_effects( dummy, you.pos_bub() );
     field_spell.make_sound( p, get_player_character() );
     field_spell.get_spell_type()->affected_bps.clear();
     return true;
 }
 
-bool map::cast_field_spell_on_monster( const tripoint &p, monster &z, field_entry &cur )
+bool map::cast_field_spell_on_monster( const tripoint_bub_ms &p, monster &z, field_entry &cur )
 {
     spell field_spell = cur.get_field_type()->spell_data.get_spell();
     npc dummy;
     field_spell.set_level( dummy, cur.get_field_intensity() );
-    field_spell.cast_all_effects( dummy, z.pos() );
+    field_spell.cast_all_effects( dummy, z.pos_bub() );
     field_spell.make_sound( p, get_player_character() );
     return true;
 }
@@ -4589,7 +4589,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
 
     if( ( smash_furn && has_flag_furn( ter_furn_flag::TFLAG_FUNGUS, p ) ) ||
         ( smash_ter && has_flag_ter( ter_furn_flag::TFLAG_FUNGUS, p ) ) ) {
-        fungal_effects().create_spores( p.raw() );
+        fungal_effects().create_spores( p );
     }
 
     if( params.destroy ) {
