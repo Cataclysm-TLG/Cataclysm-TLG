@@ -153,24 +153,6 @@ bool mapbuffer::submap_exists_approx( const tripoint_abs_sm &p )
     return true;
 }
 
-bool mapbuffer::submap_exists_approx( const tripoint_abs_sm &p )
-{
-    const auto iter = submaps.find( p );
-    if( iter == submaps.end() ) {
-        try {
-            const tripoint_abs_omt om_addr = project_to<coords::omt>( p );
-            const cata_path dirname = find_dirname( om_addr );
-            cata_path quad_path = find_quad_path( dirname, om_addr );
-            return file_exist( quad_path );
-        } catch( const std::exception &err ) {
-            debugmsg( "Failed to load submap %s: %s", p.to_string(), err.what() );
-        }
-        return false;
-    }
-
-    return true;
-}
-
 void mapbuffer::save( bool delete_after_save )
 {
     assure_dir_exist( PATH_INFO::world_base_save_path() / "maps" );
