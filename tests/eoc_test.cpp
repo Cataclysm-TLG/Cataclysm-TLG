@@ -1305,7 +1305,7 @@ TEST_CASE( "EOC_map_test", "[eoc]" )
 
     map &m = get_map();
     const tripoint_abs_ms start = get_avatar().get_location();
-    const tripoint tgt = m.getlocal( start + tripoint_north );
+    const tripoint_bub_ms tgt = m.bub_from_abs( start + tripoint_north );
     m.furn_set( tgt, furn_test_f_eoc );
     m.furn( tgt )->examine( get_avatar(), tgt );
 

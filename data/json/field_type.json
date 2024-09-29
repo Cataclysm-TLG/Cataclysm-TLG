@@ -242,6 +242,7 @@
     "type": "field_type",
     "substance_name": "acid",
     "legacy_enum_id": 7,
+    "mopsafe": false,
     "intensity_levels": [
       { "name": "acid splatter", "sym": "5", "color": "light_green", "dangerous": true },
       { "name": "acid streak" },
