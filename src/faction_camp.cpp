@@ -446,7 +446,7 @@ static std::string mission_ui_activity_of( const mission_id &miss_id )
             return dir_abbr + _( " Plant fields" );
 
         case Camp_Harvest:
-            return dir_abbr + _( " Harvest fields" );
+            return dir_abbr + _( " Harvest Fields" );
 
         //  Actions that won't be used here
         case Scavenging_Patrol_Job:
