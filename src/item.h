@@ -2492,8 +2492,9 @@ class item : public visitable
         int ammo_remaining() const;
 
     private:
-        int ammo_remaining( const map &here, const std::set<ammotype> &ammo, const Character *carrier,
-                            bool include_linked ) const;
+        units::energy energy_per_second() const;
+        int ammo_remaining( const std::set<ammotype> &ammo, const Character *carrier = nullptr,
+                            bool include_linked = false ) const;
     public:
 
         /**
