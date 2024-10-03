@@ -180,7 +180,7 @@ void timed_event::actualize()
 
         case timed_event_type::ROOTS_DIE:
             get_event_bus().send<event_type::destroys_triffid_grove>();
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.bub_points_on_zlevel() ) {
                 if( here.ter( p ) == ter_t_root_wall && one_in( 3 ) ) {
                     here.ter_set( p, ter_t_underbrush );
                 }
