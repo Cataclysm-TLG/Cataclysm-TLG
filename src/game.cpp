@@ -10543,8 +10543,6 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
                       const bool furniture_move )
 {
 
-    const tripoint_abs_ms dest_loc_abs = m.getglobal( dest_loc );
-
     if( m.has_flag_ter( ter_furn_flag::TFLAG_SMALL_PASSAGE, dest_loc ) ) {
         if( u.get_size() > creature_size::medium ) {
             add_msg( m_warning, _( "You can't fit there." ) );
@@ -10583,7 +10581,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
                 return false;
             }
         }
-        if( !mons->move_effects( false, dest_loc ) ) {
+        if( !mons->move_effects( false, dest_loc.raw() ) ) {
             add_msg( m_bad, _( "You cannot move as your %s isn't able to move." ), mons->get_name() );
             return false;
         }

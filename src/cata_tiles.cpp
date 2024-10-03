@@ -4098,7 +4098,7 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
                 const enchant_cache::special_vision_descriptions special_vis_desc =
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 return draw_from_id_string( special_vis_desc.id, TILE_CATEGORY::NONE, empty_string, p, 0, 0,
-                                            lit_level::LIT, false, height_3d );
+                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             }
             return false;
         }
@@ -4195,7 +4195,7 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
                 const enchant_cache::special_vision_descriptions special_vis_desc =
                     you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
                 return draw_from_id_string( special_vis_desc.id, TILE_CATEGORY::NONE, empty_string, p,
-                                            0, 0, lit_level::LIT, false, height_3d );
+                                            0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             } else {
                 return false;
             }

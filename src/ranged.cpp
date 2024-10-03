@@ -1297,7 +1297,7 @@ int throw_cost( const Character &c, const item &to_throw )
 static double calculate_aim_cap_without_target( const Character &you,
         const tripoint_bub_ms &target )
 {
-    const int range = trig_dist_z_adjust( you.pos_bub(), target );
+    const int range = trig_dist_z_adjust( you.pos(), target.raw() );
     // Get angle of triangle that spans the target square.
     const double angle = 2 * atan2( 0.5, range );
     // Convert from radians to arcmin.

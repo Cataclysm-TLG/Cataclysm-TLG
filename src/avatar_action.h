@@ -39,9 +39,6 @@ inline bool move( avatar &you, map &m, const point_rel_ms &d )
     return move( you, m, tripoint_rel_ms( d, 0 ) );
 }
 
-// Handle moving from a ramp
-bool ramp_move( avatar &you, map &m, const tripoint &dest );
-
 /** Handles swimming by the player. Called by avatar_action::move(). */
 void swim( map &m, avatar &you, const tripoint_bub_ms &p );
 
