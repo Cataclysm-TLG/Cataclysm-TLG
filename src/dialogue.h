@@ -196,6 +196,16 @@ struct talk_response {
     //flag to hold result of show_anyways (not read from JSON)
     bool ignore_conditionals = false;
 
+    //whether to display this response in normal gameplay even if condition is false
+    bool show_always = false;
+    //appended to response if condition fails or show_always/show_condition
+    std::string show_reason;
+    //show_always, but on show_condition being true
+    std::function<bool( dialogue & )> show_condition;
+
+    //flag to hold result of show_anyways (not read from JSON)
+    bool ignore_conditionals = false;
+
     mission *mission_selected = nullptr;
     skill_id skill = skill_id();
     matype_id style = matype_id();
@@ -447,10 +457,11 @@ class json_talk_response
             return has_condition_;
         }
         bool test_condition( dialogue &d ) const;
+        bool show_anyways( dialogue &d ) const;
         /**
          * Callback from @ref json_talk_topic::gen_responses, see there.
          */
-        bool gen_responses( dialogue &d, bool switch_done ) const;
+        bool gen_responses( dialogue &d, bool switch_done );
         bool gen_repeat_response( dialogue &d, const itype_id &item_id, bool switch_done ) const;
 };
 
@@ -516,7 +527,7 @@ class json_talk_topic
          * @return true if built in response should excluded (not added). If false, built in
          * responses will be added (behind those added here).
          */
-        bool gen_responses( dialogue &d ) const;
+        bool gen_responses( dialogue &d );
 
         cata::flat_set<std::string> get_directly_reachable_topics( bool only_unconditional ) const;
 
