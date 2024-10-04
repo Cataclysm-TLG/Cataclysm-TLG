@@ -558,7 +558,8 @@ void iexamine::gaspump( Character &you, const tripoint_bub_ms &examp )
                 }
 
             } else {
-                liquid_handler::handle_liquid_from_ground( item_it, examp.raw(), 1 );
+                item_location loc( map_cursor( examp ), &*item_it );
+                liquid_handler::handle_liquid( loc, nullptr, 1 );
             }
             return;
         }
@@ -3560,7 +3561,8 @@ void iexamine::fvat_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             case REMOVE_BREW: {
-                liquid_handler::handle_liquid_from_ground( here.i_at( examp ).begin(), examp.raw() );
+                item_location loc( map_cursor( examp ), &*here.i_at( examp ).begin() );
+                liquid_handler::handle_liquid( loc );
                 return;
             }
             case START_FERMENT: {
@@ -3683,7 +3685,8 @@ void iexamine::fvat_full( Character &you, const tripoint_bub_ms &examp )
     }
 
     const std::string booze_name = brew_i.tname();
-    if( liquid_handler::handle_liquid_from_ground( items_here.begin(), examp.raw() ) ) {
+    item_location loc( map_cursor( examp ), &*items_here.begin() );
+    if( liquid_handler::handle_liquid( loc ) ) {
         fvat_set_empty( examp );
         add_msg( _( "You squeeze the last drops of %s from the vat." ), booze_name );
     }
@@ -3787,7 +3790,8 @@ void iexamine::compost_empty( Character &you, const tripoint_bub_ms &examp )
                 break;
             }
             case REMOVE_COMPOST: {
-                liquid_handler::handle_liquid_from_ground( here.i_at( examp ).begin(), examp.raw() );
+                item_location loc( map_cursor( examp ), &*here.i_at( examp ).begin() );
+                liquid_handler::handle_liquid( loc );
                 return;
             }
             case START_FERMENT: {
@@ -3964,7 +3968,8 @@ void iexamine::compost_full( Character &you, const tripoint_bub_ms &examp )
     }
 
     const std::string compost_name = compost_i.tname();
-    if( liquid_handler::handle_liquid_from_ground( items_here.begin(), examp.raw() ) ) {
+    item_location loc( map_cursor( examp ), &*items_here.begin() );
+    if( liquid_handler::handle_liquid( loc ) ) {
         compost_set_empty( examp );
         add_msg( _( "You squeeze the last drops of %s from the tank." ), compost_name );
     }
@@ -4125,13 +4130,14 @@ void iexamine::keg( Character &you, const tripoint_bub_ms &examp )
         selectmenu.query();
 
         switch( selectmenu.ret ) {
-            case DISPENSE:
-                if( liquid_handler::handle_liquid_from_ground( items.begin(), examp.raw() ) ) {
+            case DISPENSE: {
+                item_location loc( map_cursor( examp ), &*items.begin() );
+                if( liquid_handler::handle_liquid( loc ) ) {
                     add_msg( _( "You squeeze the last drops of %1$s from the %2$s." ),
                              drink_tname, keg_name );
                 }
                 return;
-
+            }
             case HAVE_A_DRINK:
                 if( !you.can_consume_as_is( drink ) ) {
                     return; // They didn't actually drink
@@ -4416,7 +4422,8 @@ void iexamine::tree_maple_tapped( Character &you, const tripoint_bub_ms &examp )
         }
 
         case HARVEST_SAP: {
-            liquid_handler::handle_liquid_from_container( *container, PICKUP_RANGE );
+            item_location loc( map_cursor( examp ), container );
+            liquid_handler::handle_all_liquids_from_container( loc, PICKUP_RANGE );
             return;
         }
 
@@ -4634,9 +4641,10 @@ void iexamine::water_source( Character &, const tripoint_bub_ms &examp )
 void iexamine::finite_water_source( Character &, const tripoint_bub_ms &examp )
 {
     map_stack items = get_map().i_at( examp );
-    for( auto item_it = items.begin(); item_it != items.end(); ++item_it ) {
-        if( item_it->made_of( phase_id::LIQUID ) ) {
-            liquid_handler::handle_liquid_from_ground( item_it, examp.raw() );
+    for( item &it : items ) {
+        if( it.made_of( phase_id::LIQUID ) ) {
+            item_location loc( map_cursor( examp ), &it );
+            liquid_handler::handle_liquid( loc );
             break;
         }
     }
