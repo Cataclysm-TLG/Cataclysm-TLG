@@ -930,7 +930,7 @@ void Character::activate_mutation( const trait_id &mut )
         bool adjacent_tree = false;
         bool adjacent_mutant_tree = false;
         map &here = get_map();
-        for( const tripoint &p2 : here.points_in_radius( pos(), 1 ) ) {
+        for( const tripoint_bub_ms &p2 : here.points_in_radius( pos_bub(), 1 ) ) {
             if( here.has_flag( ter_furn_flag::TFLAG_TREE, p2 ) ) {
                 adjacent_tree = true;
             }

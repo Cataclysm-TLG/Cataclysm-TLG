@@ -1240,8 +1240,8 @@ static bool sinkhole_safety_roll( Character &you, const itype_id &itemname, cons
         return false;
     }
 
-    std::vector<tripoint> safe;
-    for( const tripoint &tmp : here.points_in_radius( you.pos(), 1 ) ) {
+    std::vector<tripoint_bub_ms> safe;
+    for( const tripoint_bub_ms &tmp : here.points_in_radius( you.pos_bub(), 1 ) ) {
         if( here.passable( tmp ) && here.tr_at( tmp ) != tr_pit ) {
             safe.push_back( tmp );
         }
@@ -1325,18 +1325,17 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
     map &here = get_map();
 
     int height = 0;
-    tripoint where = p;
-    tripoint below = where;
-    below.z--;
+    tripoint_bub_ms where( p );
+    tripoint_bub_ms below( where + tripoint_below );
     creature_tracker &creatures = get_creature_tracker();
     while( here.valid_move( where, below, false, true ) ) {
-        where.z--;
+        where.z()--;
         if( get_creature_tracker().creature_at( where ) != nullptr ) {
-            where.z++;
+            where.z()++;
             break;
         }
 
-        below.z--;
+        below.z()--;
         height++;
     }
 
@@ -1347,8 +1346,8 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
             return false;
         }
 
-        std::vector<tripoint> valid;
-        for( const tripoint &pt : here.points_in_radius( below, 1 ) ) {
+        std::vector<tripoint_bub_ms> valid;
+        for( const tripoint_bub_ms &pt : here.points_in_radius( below, 1 ) ) {
             if( g->is_empty( pt ) ) {
                 valid.push_back( pt );
             }
@@ -1362,7 +1361,7 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
         }
 
         height++;
-        where.z--;
+        where.z()--;
     } else if( height == 0 ) {
         return false;
     }
@@ -1377,7 +1376,7 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
         if( c->has_effect( effect_strengthened_gravity ) ) {
             height += 1;
         }
-        c->impact( height * 10, where );
+        c->impact( height * 10, where.raw() );
         return true;
     }
 
@@ -1427,11 +1426,11 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
         } else {
             you->add_msg_if_player( m_bad,
                                     _( "You attempt to break the fall with your %s but it is out of fuel!" ), jetpack.tname() );
-            you->impact( height * 30, where );
+            you->impact( height * 30, where.raw() );
 
         }
     } else {
-        you->impact( height * 30, where );
+        you->impact( height * 30, where.raw() );
     }
 
     if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {

@@ -395,7 +395,7 @@ bool computer_session::can_activate( computer_action action )
         case COMPACT_TERMINATE: {
             map &here = get_map();
             creature_tracker &creatures = get_creature_tracker();
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
                 monster *const mon = creatures.creature_at<monster>( p );
                 if( !mon ) {
                     continue;
@@ -507,7 +507,7 @@ void computer_session::action_sample()
 {
     get_player_character().mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
     map &here = get_map();
-    for( const tripoint_bub_ms &p : here.bub_points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.ter( p ) != ter_t_sewage_pump ) {
             continue;
         }
@@ -573,7 +573,7 @@ void computer_session::action_terminate()
     Character &player_character = get_player_character();
     map &here = get_map();
     creature_tracker &creatures = get_creature_tracker();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         monster *const mon = creatures.creature_at<monster>( p );
         if( !mon ) {
             continue;
@@ -592,7 +592,7 @@ void computer_session::action_portal()
 {
     get_event_bus().send<event_type::opens_portal>();
     map &here = get_map();
-    for( const tripoint_bub_ms &tmp : here.bub_points_on_zlevel() ) {
+    for( const tripoint_bub_ms &tmp : here.points_on_zlevel() ) {
         int numtowers = 0;
         for( const tripoint_bub_ms &tmp2 : here.points_in_radius( tmp, 2 ) ) {
             if( here.ter( tmp2 ) == ter_t_radio_tower ) {
@@ -798,7 +798,7 @@ void computer_session::action_list_bionics()
     std::vector<std::string> names;
     int more = 0;
     map &here = get_map();
-    for( const tripoint_bub_ms &p : here.bub_points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         for( item &elem : here.i_at( p ) ) {
             if( elem.is_bionic() ) {
                 if( static_cast<int>( names.size() ) < TERMY - 8 ) {
@@ -830,7 +830,7 @@ void computer_session::action_list_bionics()
 void computer_session::action_elevator_on()
 {
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.ter( p ) == ter_t_elevator_control_off ) {
             here.ter_set( p, ter_t_elevator_control );
         }
@@ -1170,10 +1170,10 @@ void computer_session::action_srcf_seal()
     print_line( _( "Evacuate Immediately" ) );
     add_msg( m_warning, _( "Evacuate Immediately!" ) );
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.ter( p ) == ter_t_elevator || here.ter( p ) == ter_t_vat ) {
             here.make_rubble( p, furn_f_rubble_rock, true );
-            explosion_handler::explosion( &get_player_character(), p, 40, 0.7, true );
+            explosion_handler::explosion( &get_player_character(), p.raw(), 40, 0.7, true );
         }
         if( here.ter( p ) == ter_t_wall_glass ) {
             here.make_rubble( p, furn_f_rubble_rock, true );
@@ -1184,7 +1184,7 @@ void computer_session::action_srcf_seal()
         }
         if( here.ter( p ) == ter_t_sewage_pump ) {
             here.make_rubble( p, furn_f_rubble_rock, true );
-            explosion_handler::explosion( &get_player_character(), p, 50, 0.7, true );
+            explosion_handler::explosion( &get_player_character(), p.raw(), 50, 0.7, true );
         }
     }
     comp.options.clear(); // Disable the terminal.
@@ -1195,21 +1195,21 @@ void computer_session::action_srcf_elevator()
 {
     Character &player_character = get_player_character();
     map &here = get_map();
-    tripoint surface_elevator;
-    tripoint underground_elevator;
+    tripoint_bub_ms surface_elevator;
+    tripoint_bub_ms underground_elevator;
     bool is_surface_elevator_on = false;
     bool is_surface_elevator_exist = false;
     bool is_underground_elevator_on = false;
     bool is_underground_elevator_exist = false;
 
-    for( const tripoint &p : here.points_on_zlevel( 0 ) ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel( 0 ) ) {
         if( here.ter( p ) == ter_t_elevator_control_off || here.ter( p ) == ter_t_elevator_control ) {
             surface_elevator = p;
             is_surface_elevator_on = here.ter( p ) == ter_t_elevator_control;
             is_surface_elevator_exist = true;
         }
     }
-    for( const tripoint &p : here.points_on_zlevel( -2 ) ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel( -2 ) ) {
         if( here.ter( p ) == ter_t_elevator_control_off || here.ter( p ) == ter_t_elevator_control ) {
             underground_elevator = p;
             is_underground_elevator_on = here.ter( p ) == ter_t_elevator_control;
@@ -1535,7 +1535,7 @@ void computer_session::failure_shutdown()
 {
     bool found_tile = false;
     map &here = get_map();
-    for( const tripoint &p : here.points_in_radius( get_player_character().pos(), 1 ) ) {
+    for( const tripoint_bub_ms &p : here.points_in_radius( get_player_character().pos_bub(), 1 ) ) {
         if( here.has_flag( ter_furn_flag::TFLAG_CONSOLE, p ) ) {
             here.furn_set( p, furn_f_console_broken );
             add_msg( m_bad, _( "The console shuts down." ) );
@@ -1545,7 +1545,7 @@ void computer_session::failure_shutdown()
     if( found_tile ) {
         return;
     }
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.has_flag( ter_furn_flag::TFLAG_CONSOLE, p ) ) {
             here.furn_set( p, furn_f_console_broken );
             add_msg( m_bad, _( "The console shuts down." ) );
@@ -1602,10 +1602,10 @@ void computer_session::failure_pump_explode()
 {
     add_msg( m_warning, _( "The pump explodes!" ) );
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.ter( p ) == ter_t_sewage_pump ) {
             here.make_rubble( p );
-            explosion_handler::explosion( &get_player_character(), p, 10 );
+            explosion_handler::explosion( &get_player_character(), p.raw(), 10 );
         }
     }
 }
@@ -1614,13 +1614,13 @@ void computer_session::failure_pump_leak()
 {
     add_msg( m_warning, _( "Sewage leaks!" ) );
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
         if( here.ter( p ) != ter_t_sewage_pump ) {
             continue;
         }
         const int leak_size = rng( 4, 10 );
         for( int i = 0; i < leak_size; i++ ) {
-            std::vector<tripoint> next_move;
+            std::vector<tripoint_bub_ms> next_move;
             if( here.passable( p + point_north ) ) {
                 next_move.push_back( p + point_north );
             }

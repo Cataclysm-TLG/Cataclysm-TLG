@@ -230,7 +230,7 @@ bool Character::try_remove_grab( bool attacking )
                                        std::max( std::max( static_cast<float>( get_skill_level( skill_melee ) ) / 10, 0.1f ),
                                                std::max( static_cast<float>( get_skill_level( skill_unarmed ) ) / 8, 0.1f ) ) );
         int grab_break_factor = has_grab_break_tec() ? 10 : 0;
-        const tripoint_range<tripoint> &surrounding = here.points_in_radius( pos(), 1, 0 );
+        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
 
         // Iterate through all our grabs and attempt to break them one by one
         for( const effect &eff : get_effects_with_flag( json_flag_GRAB ) ) {
@@ -239,7 +239,7 @@ bool Character::try_remove_grab( bool attacking )
             // We need to figure out which Creature is responsible for this grab early for good messaging
             // For now, one grabber per limb TODO: handle multiple grabbers and decrement intensity
             Creature *grabber = nullptr;
-            for( const tripoint loc : surrounding ) {
+            for( const tripoint_bub_ms loc : surrounding ) {
                 Character *guy = creatures.creature_at<Character>( loc );
                 if( guy && guy->grab_1.grabbed_part == eff.get_bp() ) {
                     add_msg_debug( debugmode::DF_CHARACTER, "Grabber %s found", guy->disp_name() );
