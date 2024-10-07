@@ -181,7 +181,7 @@ void check_ter_in_line( tripoint_abs_ms const &first, tripoint_abs_ms const &sec
     tripoint_abs_ms const orig = coord_min( first, second );
     tm.load( project_to<coords::sm>( orig ), false, false );
     for( tripoint_abs_ms p : line_to( first, second ) ) {
-        REQUIRE( tm.ter( tm.getlocal( p ) ) == ter );
+        REQUIRE( tm.ter( tm.bub_from_abs( p ) ) == ter );
     }
 }
 
@@ -1072,11 +1072,11 @@ TEST_CASE( "EOC_run_inv_test", "[eoc]" )
 
     // Activate test for item
     CHECK( effect_on_condition_EOC_item_activate_test->activate( d ) );
-    CHECK( get_map().furn( get_map().getlocal( pos_after ) ) == furn_f_cardboard_box );
+    CHECK( get_map().furn( get_map().bub_from_abs( pos_after ) ) == furn_f_cardboard_box );
 
     // Teleport test for item
     CHECK( effect_on_condition_EOC_item_teleport_test->activate( d ) );
-    CHECK( get_map().i_at( get_map().getlocal( pos_after ) ).size() == 3 );
+    CHECK( get_map().i_at( get_map().bub_from_abs( pos_after ) ).size() == 3 );
 
     // Math function test for armor
     CHECK( effect_on_condition_EOC_armor_math_test->activate( d ) );
