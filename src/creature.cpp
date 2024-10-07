@@ -200,7 +200,7 @@ Creature::~Creature() = default;
 
 tripoint Creature::pos() const
 {
-    return get_map().getlocal( location );
+    return Creature::pos_bub().raw();
 }
 
 tripoint_bub_ms Creature::pos_bub() const
