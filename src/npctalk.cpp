@@ -1074,7 +1074,7 @@ void game::chat()
                 return;
             }
 
-            if( here.impassable( tripoint( *p ) ) ) {
+            if( here.impassable( tripoint_bub_ms( *p ) ) ) {
                 add_msg( m_info, _( "This destination can't be reached." ) );
                 return;
             }

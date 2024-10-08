@@ -1502,7 +1502,7 @@ bool Character::has_watch() const
 {
     map &here = get_map();
     return cache_has_item_with_flag( flag_WATCH, true ) ||
-           ( here.veh_at( pos() ) &&
+           ( here.veh_at( pos_bub() ) &&
              !empty( here.veh_at( pos_bub() )->vehicle().get_avail_parts( "WATCH" ) ) ) ||
            has_flag( json_flag_WATCH );
 }
@@ -10579,16 +10579,13 @@ bool Character::sees_with_infrared( const Creature &critter ) const
     const tripoint_bub_ms viewer_bub = pos_bub();
     const tripoint_bub_ms target_bub = critter.pos_bub();
 
-    const tripoint viewer_pos = viewer_bub.raw();
-    const tripoint target_pos = target_bub.raw();
-
     //TODO: IR_range should be determined by tech or mutations, not just per.
     const int IR_range = 1 + ( 60 * get_per() / 20 );
     const int target_eye = critter.is_monster()
                            ? critter.as_monster()->eye_level()
                            : critter.as_character()->eye_level();
 
-    if( !here.has_line_of_sight_IR( viewer_pos, target_pos, IR_range, std::min( eye_level(),
+    if( !here.has_line_of_sight_IR( viewer_bub, target_bub, IR_range, std::min( eye_level(),
                                     target_eye ) ) ) {
         return false;
     }
@@ -10625,9 +10622,9 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
         bool can_see = ( ( sees( critter ) || sees_with_infrared( critter ) ) && here.sees( pos_bub(), critter.pos_bub(), 100 ) );
         if( can_see && melee )  //handles the case where we can see something with glass in the way for melee attacks
         {
-            std::vector<tripoint> path = here.find_clear_path( pos(), critter.pos() );
-            for( const tripoint &point : path ) {
-                if( here.impassable( point ) && point != critter.pos() &&
+            std::vector<tripoint_bub_ms> path = here.find_clear_path( pos_bub(), critter.pos_bub() );
+            for( const tripoint_bub_ms &point : path ) {
+                if( here.impassable( point ) && point != critter.pos_bub() &&
                     !( weapon.has_flag( flag_SPEAR ) && // Fences etc. Spears can stab through those
                        here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE,
                                       point ) ) ) { //this mirrors melee.cpp function reach_attack
@@ -11353,49 +11350,42 @@ void Character::stagger_check()
 void Character::stagger()
 {
     map &here = get_map();
-    std::vector<tripoint> preferred_stumbles;
-    std::vector<tripoint> valid_stumbles;
+    std::vector<tripoint_bub_ms> preferred_stumbles;
+    std::vector<tripoint_bub_ms> valid_stumbles;
 
     preferred_stumbles.reserve( 11 );
     valid_stumbles.reserve( 11 );
 
     for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1 ) ) {
         if( dest != pos_bub() ) {
-            tripoint target;
+            tripoint_bub_ms target;
             if( here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest ) ) {
-                target = tripoint( dest.xy().raw(), dest.z() - 1 );
+                valid_stumbles.emplace_back( dest + tripoint_below );
             } else if( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest ) ) {
-                target = tripoint( dest.xy().raw(), dest.z() + 1 );
+                valid_stumbles.emplace_back( dest + tripoint_above );
             } else {
-                target = dest.raw();
-            }
-
-            if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
-                preferred_stumbles.push_back( target );
-            } else {
-                valid_stumbles.push_back( target );
+                valid_stumbles.push_back( dest );
             }
         }
     }
 
     const tripoint_bub_ms below( posx(), posy(), posz() - 1 );
     if( here.valid_move( pos_bub(), below, false, true ) ) {
-        tripoint target = below.raw();
-        if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
-            preferred_stumbles.push_back( target );
+        if( here.ter( below.raw() )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
+            preferred_stumbles.push_back( below );
         } else {
-            valid_stumbles.push_back( target );
+            valid_stumbles.push_back( below );
         }
     }
 
     creature_tracker &creatures = get_creature_tracker();
-    std::vector<tripoint> &pool = preferred_stumbles.empty() ? valid_stumbles : preferred_stumbles;
+    std::vector<tripoint_bub_ms> &pool = preferred_stumbles.empty() ? valid_stumbles : preferred_stumbles;
 
     while( !pool.empty() ) {
         bool blocked = false;
-        const tripoint dest = random_entry_removed( pool );
+        const tripoint_bub_ms dest = random_entry_removed( pool );
         const optional_vpart_position vp_there = here.veh_at( dest );
-        if( vp_there && vp_there->vehicle().enclosed_at( dest ) ) {
+        if( vp_there && vp_there->vehicle().enclosed_at( dest.raw() ) ) {
             blocked = true;
         }
 
