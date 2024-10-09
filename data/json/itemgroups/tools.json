@@ -1041,6 +1041,6 @@
     "type": "item_group",
     "subtype": "distribution",
     "id": "superglue",
-    "items": [ { "item": "super_glue", "charges-min": 0, "charges-max": 10, "container-item": "bottle_plastic_superglue" } ]
+    "items": [ { "item": "super_glue", "charges": [ 0, 10 ], "container-item": "bottle_plastic_superglue" } ]
   }
 ]
