@@ -246,7 +246,7 @@
     "material": [ "steel", "kevlar", "plastic_pad", "thermo_resin" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
@@ -281,7 +281,7 @@
     "material_thickness": 25,
     "non_functional": "destroyed_large_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -307,7 +307,7 @@
     "material": [ "kevlar", "nylon" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
@@ -340,7 +340,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 3,
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
@@ -373,7 +373,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6.35,
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 6.35 } ],
@@ -429,7 +429,7 @@
     "longest_side": "30 cm",
     "material": [ { "type": "steel", "portion": 4 }, { "type": "nylon" } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
@@ -461,7 +461,7 @@
     "color": "light_gray",
     "material_thickness": 14,
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE" ],
     "armor": [
       {
         "encumbrance": 4,
@@ -490,7 +490,7 @@
     "material_thickness": 25,
     "non_functional": "destroyed_medium_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE" ],
     "armor": [
       {
         "encumbrance": 2,
@@ -545,7 +545,7 @@
     "longest_side": "20 cm",
     "material": [ { "type": "steel", "portion": 4 }, { "type": "nylon" } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "STURDY" ],
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
