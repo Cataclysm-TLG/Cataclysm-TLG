@@ -12,7 +12,12 @@
       "TALK_GODCO_Gemma_Joinee"
     ],
     "responses": [
-      { "text": "What's your story?", "topic": "TALK_GODCO_Gemma_Story" },
+      { "text": "About that job…", "topic": "TALK_MISSION_INQUIRE", "condition": "has_assigned_mission" },
+      {
+        "text": "What's your story?",
+        "topic": "TALK_GODCO_Gemma_Story",
+        "condition": { "math": [ "n_npc_value()", ">=", "3" ] }
+      },
       { "text": "How are things here?", "topic": "TALK_GODCO_Gemma_Mood" },
       { "text": "What does a dorm leader do exactly?", "topic": "TALK_GODCO_Gemma_Leader" },
       {
