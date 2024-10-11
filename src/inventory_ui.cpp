@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "activity_actor_definitions.h"
+#include "avatar_action.h"
 #include "basecamp.h"
 #include "cata_assert.h"
 #include "cata_utility.h"

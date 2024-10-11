@@ -103,7 +103,25 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         if( wheel_indices.size() > 4 || wheel_indices.size() == 1 ) {
             str_req = mc / 4 + 1;
         } else {
-            str_req = mc / wheel_indices.size() + 1;
+            str_req = max_str_req / 10;
+            //determine movecost for terrain touching wheels
+            const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub();
+            for( int p : wheel_indices ) {
+                const tripoint_bub_ms wheel_pos = vehpos + grabbed_vehicle->part( p ).precalc[0];
+                const int mapcost = m.move_cost( wheel_pos, grabbed_vehicle );
+                mc += str_req * mapcost / wheel_indices.size();
+            }
+            //set strength check threshold
+            //if vehicle has many or only one wheel (shopping cart), it is as if it had four.
+            if( wheel_indices.size() > 4 || wheel_indices.size() == 1 ) {
+                str_req = mc / 4 + 1;
+            } else {
+                str_req = mc / wheel_indices.size() + 1;
+            }
+            //finally, adjust by the off-road coefficient (always 1.0 on a road, as low as 0.1 off road.)
+            str_req /= grabbed_vehicle->k_traction( get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
+            // If it would be easier not to use the wheels, don't use the wheels.
+            str_req = std::min( str_req, max_str_req );
         }
         //finally, adjust by the off-road coefficient (always 1.0 on a road, as low as 0.1 off road.)
         str_req /= grabbed_vehicle->k_traction( get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
