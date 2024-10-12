@@ -11048,8 +11048,25 @@ int item::ammo_remaining( ) const
     return ammo_remaining( nullptr );
 }
 
+bool item::uses_energy() const
+{
+    if( is_vehicle_battery() ) {
+        return true;
+    }
+    const item *mag = magazine_current();
+    if( mag && mag->uses_energy() ) {
+        return true;
+    }
+    return has_flag( flag_USES_BIONIC_POWER ) ||
+           has_flag( flag_USE_UPS ) ||
+           ( is_magazine() && ammo_capacity( ammo_battery ) > 0 );
+}
+
 units::energy item::energy_remaining( const Character *carrier ) const
 {
+    if( !uses_energy() ) {
+        return 0_kJ;
+    }
     units::energy ret = 0_kJ;
 
     // Future energy based batteries
@@ -14371,10 +14388,11 @@ units::energy item::energy_per_second() const
 bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
 {
     // If insufficient available charges, shut down the tool.
-    if( ( type->tool->turns_per_charge > 0 || type->tool->power_draw > 0_W ) &&
-        energy_remaining( carrier ) < energy_per_second() ) {
+    if( ( type->tool->power_draw > 0_W || type->tool->turns_per_charge > 0 ) &&
+        ( ( uses_energy() && energy_remaining( carrier ) < energy_per_second() ) ||
+          ( !uses_energy() && ammo_remaining( carrier, true ) == 0 ) ) ) {
         if( carrier && has_flag( flag_USE_UPS ) ) {
-            carrier->add_msg_if_player( m_info, _( "You need an UPS to run the %s!" ), tname() );
+            carrier->add_msg_if_player( m_info, _( "You need a UPS to run the %s!" ), tname() );
         }
         if( carrier ) {
             carrier->add_msg_if_player( m_info, _( "The %s ran out of energy!" ), tname() );
