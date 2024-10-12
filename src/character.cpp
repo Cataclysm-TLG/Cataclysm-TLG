@@ -412,15 +412,15 @@ static const species_id species_HUMAN( "HUMAN" );
 
 static const start_location_id start_location_sloc_shelter_a( "sloc_shelter_a" );
 
-static const ter_str_id ter_t_pit( "t_pit" );
-static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
-static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
-
 static const std::string type_hair_color( "hair_color" );
 static const std::string type_hair_style( "hair_style" );
 static const std::string type_skin_tone( "skin_tone" );
 static const std::string type_facial_hair( "facial_hair" );
 static const std::string type_eye_color( "eye_color" );
+
+static const ter_str_id ter_t_pit( "t_pit" );
+static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
+static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 static const trait_id trait_ADRENALINE( "ADRENALINE" );
 static const trait_id trait_ANTENNAE( "ANTENNAE" );

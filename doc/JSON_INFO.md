@@ -1959,9 +1959,47 @@ Professions are specified as JSON object with "type" member set to "profession":
 ```C++
 {
     "type": "profession",
-    "id": "hunter",
-    ...
-}
+    "id": "profession_example",                                // Unique ID for the profession
+    "name": { "male": "Groom", "female": "Bride" },            // String, either a single gender neutral (i.e. "Survivor") or object with members "male" and "female"
+    "description": "This is an example profession.",           // In-game description
+    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points.
+    "npc_background": "BG_survival_story_LAB",                 // (optional) BG_trait_group ID, provides list of background stories. (see BG_trait_groups.json)
+    "addictions": [ { "intensity": 10, "type": "nicotine" } ], // (optional) Array of addictions. Requires "type" as the string ID of the addiction (see JSON_FLAGS.md) and "intensity"
+    "skills": [ { "name": "archery", "level": 2 } ],           // (optional) Array of starting skills. Requires "name" as the string ID of the skill (see skills.json) and "level", which is a value added to the skill level after character creation
+    "missions": [ "MISSION_LAST_DELIVERY" ],                   // (optional) Array of starting mission IDs
+    "proficiencies": [ "prof_knapping" ],                      // (optional) Array of starting proficiencies
+    "items": {                                                 // (optional) Object of items the character starts with (see below for further explanation)
+      "both": {
+        "entries": [
+          { "item": "jeans" },
+          { "item": "tank_top", "variant": "tank_top_camo" },
+          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
+          { "item": "socks" },
+          { "item": "sneakers" },
+          { "item": "water_clean", "container-item": "canteen" },
+          { "item": "m1911", "ammo-item": "45_acp", "charges": 7, "container-item": "holster" },
+          { "item": "45_acp", "charges": 23 },
+          { "item": "legpouch_large", "contents-group": "army_mags_m4" }
+        ]
+      },
+      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+    }
+    "age_lower": 18,                                           // (optional) Int. The lowest age that a character with this profession can generate with. This places no limits on manual input, only on random generation (i.e. Play Now!). Defaults to 21
+    "age_upper": 25,                                           // (optional) Int. Similar as above
+    "pets": [ { "name": "mon_black_rat", "amount": 13 } ],     // (optional) Array of starting monster IDs, tamed as pets
+    "vehicle": "car_sports",                                   // (optional) String of a starting vehicle ID. The vehicle will be spawned at the closest road, with the character "remembering" its location in the overmap
+    "flags": [ "SCEN_ONLY", "NO_BONUS_ITEMS" ],                // (optional) Array of flags applied to the character, for character creation purposes
+    "CBMs": [ "bio_fuel_cell_blood" ],                         // (optional) Array of starting implanted CMBs
+    "traits": [ "PROF_CHURL", "ILLITERATE" ],                  // (optional) Array of starting traits/mutations. For further information, see mutations.json and MUTATIONS.md. Note: "trait" is also supported, used for a single trait/mutation ID (legacy!)
+    "requirement": "achievement_survive_28_days",              // (optional) String of an achievement ID required to unlock this profession
+    "spells": [                                                // (optional) Array of starting spell IDs the character knows upon creation. For further information, see MAGIC.md
+      { "id": "magic_missile", "level": 4 },
+      { "id": "summon_undead", "level": 5 },
+      { "id": "necrotic_gaze", "level": 1 }
+    ],
+    "recipes": [ "beartrap" ]                                  // (optional) Array of starting recipe IDs the character knows upon creation
+  },
 ```
 
 The id member should be the unique id of the profession.
