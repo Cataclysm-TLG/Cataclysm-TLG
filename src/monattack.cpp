@@ -421,7 +421,7 @@ bool mattack::absorb_items( monster *z )
     std::vector<material_id> absorb_material = z->get_absorb_material();
     std::vector<material_id> no_absorb_material = z->get_no_absorb_material();
 
-    for( item &elem : here.i_at( z->pos() ) ) {
+    for( item &elem : here.i_at( z->pos_bub() ) ) {
         bool any_materials_match = false;
 
         // there is no whitelist or blacklist so allow anything.
@@ -925,9 +925,9 @@ bool mattack::shockstorm( monster *z )
     bool seen = player_character.sees( *z );
     map &here = get_map();
 
-    bool can_attack = z->sees( *target ) && rl_dist( z->pos(), target->pos() ) <= 12;
-    std::vector<tripoint> path = here.find_clear_path( z->pos(), target->pos() );
-    for( const tripoint &point : path ) {
+    bool can_attack = z->sees( *target ) && rl_dist( z->pos_bub(), target->pos_bub() ) <= 12;
+    std::vector<tripoint_bub_ms> path = here.find_clear_path( z->pos_bub(), target->pos_bub() );
+    for( const tripoint_bub_ms &point : path ) {
         if( here.impassable( point ) &&
             !( here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, point ) ||
                here.has_flag( ter_furn_flag::TFLAG_PERMEABLE, point ) ) ) {
@@ -2598,15 +2598,15 @@ bool mattack::nurse_check_up( monster *z )
 {
     bool found_target = false;
     Character *target = nullptr;
-    tripoint tmp_pos( z->pos() + point( 12, 12 ) );
+    tripoint_bub_ms tmp_pos( z->pos_bub() + point( 12, 12 ) );
     map &here = get_map();
     for( Creature *critter : here.get_creatures_in_radius( z->pos_bub(), 6 ) ) {
         Character *tmp_player = dynamic_cast<Character *>( critter );
         if( tmp_player != nullptr && z->sees( *tmp_player ) &&
-            here.clear_path( z->pos(), tmp_player->pos(), 10, 0,
+            here.clear_path( z->pos_bub(), tmp_player->pos_bub(), 10, 0,
                              100 ) ) { // no need to scan players we can't reach
-            if( rl_dist( z->pos(), tmp_player->pos() ) < rl_dist( z->pos(), tmp_pos ) ) {
-                tmp_pos = tmp_player->pos();
+            if( rl_dist( z->pos_bub(), tmp_player->pos_bub() ) < rl_dist( z->pos_bub(), tmp_pos ) ) {
+                tmp_pos = tmp_player->pos_bub();
                 target = tmp_player;
                 found_target = true;
             }
@@ -2651,14 +2651,14 @@ bool mattack::nurse_assist( monster *z )
     bool found_target = false;
     Character *target = nullptr;
     map &here = get_map();
-    tripoint tmp_pos( z->pos() + point( 12, 12 ) );
+    tripoint_bub_ms tmp_pos( z->pos_bub() + point( 12, 12 ) );
     for( Creature *critter : here.get_creatures_in_radius( z->pos_bub(), 6 ) ) {
         Character *tmp_player = dynamic_cast<Character *>( critter );
         // No need to scan players we can't reach
         if( tmp_player != nullptr && z->sees( *tmp_player ) &&
-            here.clear_path( z->pos(), tmp_player->pos(), 10, 0, 100 ) ) {
-            if( rl_dist( z->pos(), tmp_player->pos() ) < rl_dist( z->pos(), tmp_pos ) ) {
-                tmp_pos = tmp_player->pos();
+            here.clear_path( z->pos_bub(), tmp_player->pos_bub(), 10, 0, 100 ) ) {
+            if( rl_dist( z->pos_bub(), tmp_player->pos_bub() ) < rl_dist( z->pos_bub(), tmp_pos ) ) {
+                tmp_pos = tmp_player->pos_bub();
                 target = tmp_player;
                 found_target = true;
             }
@@ -2707,15 +2707,15 @@ bool mattack::nurse_operate( monster *z )
     bool found_target = false;
     Character *target = nullptr;
     map &here = get_map();
-    tripoint tmp_pos( z->pos() + point( 12, 12 ) );
+    tripoint_bub_ms tmp_pos( z->pos_bub() + point( 12, 12 ) );
     for( Creature *critter : here.get_creatures_in_radius( z->pos_bub(), 6 ) ) {
         Character *tmp_player = dynamic_cast< Character *>( critter );
         // No need to scan players we can't reach
         if( tmp_player != nullptr && z->sees( *tmp_player ) &&
-            here.clear_path( z->pos(), tmp_player->pos(), 10, 0, 100 ) ) {
+            here.clear_path( z->pos_bub(), tmp_player->pos_bub(), 10, 0, 100 ) ) {
             if( tmp_player->has_any_bionic() ) {
-                if( rl_dist( z->pos(), tmp_player->pos() ) < rl_dist( z->pos(), tmp_pos ) ) {
-                    tmp_pos = tmp_player->pos();
+                if( rl_dist( z->pos_bub(), tmp_player->pos_bub() ) < rl_dist( z->pos_bub(), tmp_pos ) ) {
+                    tmp_pos = tmp_player->pos_bub();
                     target = tmp_player;
                     found_target = true;
                 }
@@ -3418,7 +3418,7 @@ bool mattack::flamethrower( monster *z )
 
 void mattack::flame( monster *z, Creature *target )
 {
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     Character &player_character = get_player_character();
     map &here = get_map();
     if( target != &player_character ) {
@@ -3429,14 +3429,14 @@ void mattack::flame( monster *z, Creature *target )
             // shouldn't happen
             debugmsg( "mattack::flame invoked on invisible target" );
         }
-        std::vector<tripoint> traj = here.find_clear_path( z->pos(), target->pos() );
+        std::vector<tripoint_bub_ms> traj = here.find_clear_path( z->pos_bub(), target->pos_bub() );
 
-        for( tripoint &i : traj ) {
+        for( tripoint_bub_ms &i : traj ) {
             // break out of attack if flame hits a wall
             // TODO: Z
-            if( here.hit_with_fire( { i.x, i.y, z->posz() } ) ) {
+            if( here.hit_with_fire( { i.x(), i.y(), z->posz() } ) ) {
                 add_msg_if_player_sees( i, _( "The tongue of flame hits the %s!" ),
-                                        here.tername( i.xy() ) );
+                                        here.tername( i ) );
                 return;
             }
             here.add_field( i, fd_fire, 1 );
@@ -3452,13 +3452,13 @@ void mattack::flame( monster *z, Creature *target )
         // shouldn't happen
         debugmsg( "mattack::flame invoked on invisible target" );
     }
-    std::vector<tripoint> traj = here.find_clear_path( z->pos(), target->pos() );
+    std::vector<tripoint_bub_ms> traj = here.find_clear_path( z->pos_bub(), target->pos_bub() );
 
-    for( tripoint &i : traj ) {
+    for( tripoint_bub_ms &i : traj ) {
         // break out of attack if flame hits a wall
-        if( here.hit_with_fire( { i.x, i.y, z->posz() } ) ) {
+        if( here.hit_with_fire( { i.x(), i.y(), z->posz() } ) ) {
             add_msg_if_player_sees( i,  _( "The tongue of flame hits the %s!" ),
-                                    here.tername( i.xy() ) );
+                                    here.tername( i ) );
             return;
         }
         here.add_field( i, fd_fire, 1 );
@@ -5122,7 +5122,7 @@ bool mattack::stretch_attack( monster *z )
 
     z->mod_moves( -to_moves<int>( 1_seconds ) );
     map &here = get_map();
-    for( tripoint &pnt : here.find_clear_path( z->pos(), target->pos() ) ) {
+    for( tripoint_bub_ms &pnt : here.find_clear_path( z->pos_bub(), target->pos_bub() ) ) {
         if( here.impassable( pnt ) ) {
             target->add_msg_player_or_npc( _( "The %1$s thrusts its arm at you, but bounces off the %2$s." ),
                                            _( "The %1$s thrusts its arm at <npcname>, but bounces off the %2$s." ),

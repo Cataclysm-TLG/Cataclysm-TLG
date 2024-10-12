@@ -1495,9 +1495,9 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
 
     // Spill the blood if there's any left.
     if( !corpse_item.has_flag( flag_BLED ) ) {
-        here.add_splatter( type_blood, you->pos(), rng( corpse->size + 0, ( corpse->size + 1 ) ) );
+        here.add_splatter( type_blood, you->pos_bub(), rng( corpse->size + 0, ( corpse->size + 1 ) ) );
         for( int i = 1; i <= corpse->size; i++ ) {
-            here.add_splatter_trail( type_blood, you->pos(), random_entry( here.points_in_radius( you->pos(),
+            here.add_splatter_trail( type_blood, you->pos_bub(), random_entry( here.points_in_radius( you->pos_bub(),
                                      corpse->size + 1 ) ) );
         }
         corpse_item.set_flag( flag_BLED );
