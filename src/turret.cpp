@@ -391,7 +391,7 @@ int vehicle::turrets_aim_and_fire( std::vector<vehicle_part *> &turrets )
                 turret_data turret = turret_query( *t );
                 npc &cpu = t->get_targeting_npc( *this );
                 shots += turret.fire( cpu, tripoint_bub_ms( t->target.second ) );
-                t->reset_target( global_part_pos3( *t ) );
+                t->reset_target( bub_part_pos( *t ) );
             }
         }
     }
@@ -406,7 +406,7 @@ bool vehicle::turrets_aim( std::vector<vehicle_part *> &turrets )
             debugmsg( "Expected a valid vehicle turret" );
             return false;
         }
-        t->reset_target( global_part_pos3( *t ) );
+        t->reset_target( bub_part_pos( *t ) );
     }
 
     avatar &player_character = get_avatar();
@@ -501,7 +501,7 @@ void vehicle::turrets_set_targeting()
         }
 
         // clear the turret's current targets to prevent unwanted auto-firing
-        tripoint pos = locations[ sel ];
+        tripoint_bub_ms pos = tripoint_bub_ms( locations[ sel ] );
         turrets[ sel ]->reset_target( pos );
     }
 }
@@ -601,7 +601,7 @@ int vehicle::automatic_fire_turret( vehicle_part &pt )
         // Manual target not set, find one automatically.
         // BEWARE: Calling turret_data.fire on tripoint min coordinates starts a crash
         //      triggered at `trajectory.insert( trajectory.begin(), source )` at ranged.cpp:236
-        pt.reset_target( pos.raw() );
+        pt.reset_target( pos );
         int boo_hoo;
 
         // TODO: calculate chance to hit and cap range based upon this
@@ -641,7 +641,7 @@ int vehicle::automatic_fire_turret( vehicle_part &pt )
 
     // Get the turret's target and reset it
     tripoint_bub_ms targ( target.second );
-    pt.reset_target( pos.raw() );
+    pt.reset_target( pos );
 
     shots = gun.fire( cpu, targ );
 
