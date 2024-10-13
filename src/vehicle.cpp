@@ -1593,6 +1593,68 @@ int vehicle::install_part( const point_rel_ms &dp, vehicle_part &&vp )
         }
     } else {
         // TODO: read toggle groups from JSON
+        static const std::vector<std::string> enable_like = { {
+                "CONE_LIGHT",
+                "CIRCLE_LIGHT",
+                "AISLE_LIGHT",
+                "AUTOPILOT",
+                "DOME_LIGHT",
+                "ATOMIC_LIGHT",
+                "STEREO",
+                "CHIMES",
+                "FRIDGE",
+                "FREEZER",
+                "RECHARGE",
+                "PLOW",
+                "REAPER",
+                "PLANTER",
+                "SCOOP",
+                "SPACE_HEATER",
+                "COOLER",
+                "WATER_PURIFIER",
+                "ROCKWHEEL",
+                "ROADHEAD"
+            }
+        };
+
+        for( const std::string &flag : enable_like ) {
+            if( vpi.has_flag( flag ) ) {
+                enable = has_part( flag, true );
+                break;
+            }
+        }
+    }
+    // refresh will add them back if needed
+    remove_fake_parts( true );
+    vehicle_part &vp_installed = parts.emplace_back( std::move( vp ) );
+    vp_installed.enabled = enable;
+    vp_installed.mount = point_rel_ms( dp );
+    const int vp_installed_index = parts.size() - 1;
+    refresh();
+    coeff_air_changed = true;
+    return vp_installed_index;
+}
+
+int vehicle::install_part( const point_rel_ms &dp, vehicle_part &&vp )
+{
+    const vpart_info &vpi = vp.info();
+    const ret_val<void> valid_mount = can_mount( dp, vpi );
+    if( !valid_mount.success() ) {
+        debugmsg( "installing %s would make invalid vehicle: %s", vpi.id.str(), valid_mount.str() );
+        return -1;
+    }
+    // Should be checked before installing the part
+    bool enable = false;
+    if( vp.is_engine() ) {
+        enable = true;
+        // if smart controller is enabled there is charge in battery, no need to test it
+        if( has_enabled_smart_controller && !engine_on && vpi.fuel_type == fuel_type_battery &&
+            !has_available_electric_engine() ) {
+            engine_on = true;
+            sfx::do_vehicle_engine_sfx();
+        }
+    } else {
+        // TODO: read toggle groups from JSON
         static const std::vector<std::string> enable_like = {{
                 "CONE_LIGHT",
                 "CIRCLE_LIGHT",
@@ -2497,12 +2559,10 @@ bool vehicle::split_vehicles( map &here,
                               std::vector<vehicle *> *added_vehicles )
 {
     std::vector<std::vector<point_rel_ms>> temp;
-    for( const std::vector<point> &sub : new_mounts ) {
+    for( const std::vector<point> sub : new_mounts ) {
         std::vector<point_rel_ms> temp2;
-        temp2.reserve( sub.size() );
         for( const point pt : sub ) {
-            const point_rel_ms temp3{pt};
-            temp2.emplace_back( temp3 );
+            temp2.emplace_back( point_rel_ms( pt ) );
         }
         temp.emplace_back( temp2 );
     }
