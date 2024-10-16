@@ -53,7 +53,7 @@ vpart_id vpart_appliance_from_item( const itype_id &item_id )
     return vpart_ap_standing_lamp;
 }
 
-void place_appliance( const tripoint_bub_ms &p, const vpart_id &vpart,
+bool place_appliance( const tripoint_bub_ms &p, const vpart_id &vpart,
                       const std::optional<item> &base )
 {
 
@@ -63,7 +63,7 @@ void place_appliance( const tripoint_bub_ms &p, const vpart_id &vpart,
 
     if( !veh ) {
         debugmsg( "error constructing vehicle" );
-        return;
+        return false;
     }
 
     veh->add_tag( flag_APPLIANCE );
@@ -78,6 +78,11 @@ void place_appliance( const tripoint_bub_ms &p, const vpart_id &vpart,
         partnum = veh->install_part( point_zero, vpart, std::move( copied ) );
     } else {
         partnum = veh->install_part( point_zero, vpart );
+    }
+    if( partnum == -1 ) {
+        // unrecoverable, failed to be installed somehow
+        here.destroy_vehicle( veh );
+        return false;
     }
     veh->name = vpart->name();
 
@@ -117,6 +122,7 @@ void place_appliance( const tripoint_bub_ms &p, const vpart_id &vpart,
     if( vpinfo.has_flag( flag_HALF_CIRCLE_LIGHT ) && partnum != -1 ) {
         orient_part( veh, vpinfo, partnum );
     }
+    return true;
 }
 
 // uilist_callback whose sole responsibility is to draw the
