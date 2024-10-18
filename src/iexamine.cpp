@@ -2761,7 +2761,7 @@ void iexamine::fertilize_plant( Character &you, const tripoint_bub_ms &tile,
     // The plant furniture has the NOITEM token which prevents adding items on that square,
     // spawned items are moved to an adjacent field instead, but the fertilizer token
     // must be on the square of the plant, therefore this hack:
-    const furn_id old_furn = here.furn( tile );
+    const furn_id &old_furn = here.furn( tile );
     here.furn_set( tile, furn_str_id::NULL_ID() );
     here.spawn_item( tile, itype_fertilizer, 1, 1, calendar::turn );
     here.furn_set( tile, old_furn );
@@ -3468,7 +3468,7 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
 static void fvat_set_empty( const tripoint_bub_ms &pos )
 {
     map &here = get_map();
-    furn_id furn = here.furn( pos );
+    const furn_id &furn = here.furn( pos );
     if( furn == furn_f_fvat_wood_empty || furn == furn_f_fvat_wood_full ) {
         here.furn_set( pos, furn_f_fvat_wood_empty );
     } else {
@@ -3479,7 +3479,7 @@ static void fvat_set_empty( const tripoint_bub_ms &pos )
 static void fvat_set_full( const tripoint_bub_ms &pos )
 {
     map &here = get_map();
-    furn_id furn = here.furn( pos );
+    const furn_id &furn = here.furn( pos );
     if( furn == furn_f_fvat_wood_empty || furn == furn_f_fvat_wood_full ) {
         here.furn_set( pos, furn_f_fvat_wood_full );
     } else {
@@ -3701,7 +3701,7 @@ void iexamine::fvat_full( Character &you, const tripoint_bub_ms &examp )
 static void compost_set_empty( const tripoint_bub_ms &pos )
 {
     map &here = get_map();
-    furn_id furn = here.furn( pos );
+    const furn_id &furn = here.furn( pos );
     if( furn == furn_f_compost_empty || furn == furn_f_compost_full ) {
         here.furn_set( pos, furn_f_compost_empty );
     }
@@ -3710,7 +3710,7 @@ static void compost_set_empty( const tripoint_bub_ms &pos )
 static void compost_set_full( const tripoint_bub_ms &pos )
 {
     map &here = get_map();
-    furn_id furn = here.furn( pos );
+    const furn_id &furn = here.furn( pos );
     if( furn == furn_f_compost_empty || furn == furn_f_compost_full ) {
         here.furn_set( pos, furn_f_compost_full );
     }
@@ -3998,7 +3998,7 @@ static void displace_items_except_one_liquid( const tripoint_bub_ms &examp )
 {
     map &here = get_map();
     // Temporarily replace the real furniture with a fake furniture with NOITEM
-    const furn_id previous_furn = here.furn( examp );
+    const furn_id &previous_furn = here.furn( examp );
     here.furn_set( examp, furn_id( "f_no_item" ) );
 
     bool liquid_present = false;
@@ -4859,7 +4859,7 @@ void iexamine::curtains( Character &you, const tripoint_bub_ms &examp )
         return;
     }
 
-    const ter_id ter = here.ter( examp );
+    const ter_id &ter = here.ter( examp );
 
     // Peek through the curtains, or tear them down.
     uilist window_menu;
@@ -4974,7 +4974,7 @@ std::optional<tripoint_bub_ms> iexamine::getNearFilledGasTank( const tripoint_bu
     map &here = get_map();
     for( const tripoint_bub_ms &tmp : here.points_in_radius( center, SEEX * 2 ) ) {
 
-        furn_id check_for_fuel_tank = here.furn( tmp );
+        const furn_id &check_for_fuel_tank = here.furn( tmp );
 
         if( ( fuel_type == FUEL_TYPE_GASOLINE && check_for_fuel_tank != furn_f_gas_tank ) ||
             ( fuel_type == FUEL_TYPE_DIESEL && check_for_fuel_tank != furn_f_diesel_tank ) ) {
@@ -5077,7 +5077,7 @@ std::optional<tripoint_bub_ms> iexamine::getGasPumpByNumber( const tripoint_bub_
     int k = 0;
     map &here = get_map();
     for( const tripoint_bub_ms &tmp : here.points_in_radius( p, 12 ) ) {
-        const ter_id t = here.ter( tmp );
+        const ter_id &t = here.ter( tmp );
         if( ( t == ter_t_gas_pump || t == ter_t_gas_pump_a
               || t == ter_t_diesel_pump || t == ter_t_diesel_pump_a ) && number == k++ ) {
             return tmp;
@@ -5124,8 +5124,8 @@ static int fromPumpFuel( const tripoint_bub_ms &dst, const tripoint_bub_ms &src 
             item liq_d( item_it->type, calendar::turn, amount );
 
             // add the charges to the destination
-            const ter_id backup_ter = here.ter( dst );
-            const furn_id backup_furn = here.furn( dst );
+            const ter_id &backup_ter = here.ter( dst );
+            const furn_id &backup_furn = here.furn( dst );
             here.ter_set( dst, ter_str_id::NULL_ID() );
             here.furn_set( dst, furn_str_id::NULL_ID() );
             here.add_item_or_charges( dst, liq_d );
@@ -5146,7 +5146,7 @@ static void turnOnSelectedPump( const tripoint_bub_ms &p, int number,
     int k = 0;
     map &here = get_map();
     for( const tripoint_bub_ms &tmp : here.points_in_radius( p, 12 ) ) {
-        const ter_id t = here.ter( tmp );
+        const ter_id &t = here.ter( tmp );
         if( fuel_type == FUEL_TYPE_GASOLINE ) {
             if( t == ter_t_gas_pump || t == ter_t_gas_pump_a ) {
                 if( number == k++ ) {
