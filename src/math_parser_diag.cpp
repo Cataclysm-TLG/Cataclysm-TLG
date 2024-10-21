@@ -401,7 +401,7 @@ std::function<double( dialogue & )> sum_traits_of_category_eval( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
 
-    diag_value type( std::string{ "ALL" } );
+    diag_value type( "ALL" );
     if( kwargs.count( "type" ) != 0 ) {
         type = *kwargs.at( "type" );
     }
@@ -431,7 +431,7 @@ std::function<double( dialogue & )> sum_traits_of_category_char_has_eval( char s
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
 
-    diag_value type( std::string{ "ALL" } );
+    diag_value type( "ALL" );
     if( kwargs.count( "type" ) != 0 ) {
         type = *kwargs.at( "type" );
     }
@@ -628,7 +628,7 @@ std::function<double( dialogue & )> item_count_eval( char scope,
 std::function<double( dialogue & )> item_rad_eval( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
-    diag_value agg_val( std::string{ "min" } );
+    diag_value agg_val( "min" );
     if( kwargs.count( "aggregate" ) != 0 ) {
         agg_val = *kwargs.at( "aggregate" );
     }
@@ -744,9 +744,9 @@ bool _filter_character( Character const *beta, Character const &guy, int radius,
 std::function<double( dialogue & )> _characters_nearby_eval( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
-    diag_value radius_val( 1000.0 );
-    diag_value filter_val( std::string{ "any" } );
-    diag_value allow_hallucinations_val( 0.0 );
+    diag_value radius_val( 1000 );
+    diag_value filter_val( "any" );
+    diag_value allow_hallucinations_val( 0 );
     std::optional<var_info> loc_var;
     if( kwargs.count( "radius" ) != 0 ) {
         radius_val = *kwargs.at( "radius" );
@@ -867,8 +867,8 @@ template<class ID>
 std::function<double( dialogue & )> _monsters_nearby_eval( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs, f_monster_match<ID> f )
 {
-    diag_value radius_val( 1000.0 );
-    diag_value filter_val( std::string{ "hostile" } );
+    diag_value radius_val( 1000 );
+    diag_value filter_val( "hostile" );
     std::optional<var_info> loc_var;
     if( kwargs.count( "radius" ) != 0 ) {
         radius_val = *kwargs.at( "radius" );
@@ -944,7 +944,7 @@ std::function<double( dialogue & )> moon_phase_eval( char /* scope */,
 std::function<double( dialogue & )> pain_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &kwargs )
 {
-    diag_value format_value( std::string( "raw" ) );
+    diag_value format_value( "raw" );
     if( kwargs.count( "type" ) != 0 ) {
         format_value = *kwargs.at( "type" );
     }
@@ -1039,8 +1039,8 @@ std::function<void( dialogue &, double )> school_level_adjustment_ass( char scop
 std::function<double( dialogue & )> get_daily_calories( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &kwargs )
 {
-    diag_value type_val( std::string( "total" ) );
-    diag_value day_val( 0.0 );
+    diag_value type_val( "total" );
+    diag_value day_val( 0 );
 
     if( kwargs.count( "day" ) != 0 ) {
         day_val = *kwargs.at( "day" );
@@ -1081,7 +1081,7 @@ std::function<void( dialogue &, double )> skill_ass( char scope,
 std::function<double( dialogue & )> skill_exp_eval( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
-    diag_value format_value( std::string( "percentage" ) );
+    diag_value format_value( "percentage" );
     if( kwargs.count( "format" ) != 0 ) {
         format_value = *kwargs.at( "format" );
     }
@@ -1100,7 +1100,7 @@ std::function<double( dialogue & )> skill_exp_eval( char scope,
 std::function<void( dialogue &, double )> skill_exp_ass( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
-    diag_value format_value( std::string( "percentage" ) );
+    diag_value format_value( "percentage" );
     if( kwargs.count( "format" ) != 0 ) {
         format_value = *kwargs.at( "format" );
     }
@@ -1135,7 +1135,7 @@ std::function<double( dialogue & )> spell_sum_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &kwargs )
 {
     diag_value school_value( std::string{} );
-    diag_value min_level( 0.0 );
+    diag_value min_level( 0 );
 
     if( kwargs.count( "school" ) != 0 ) {
         school_value = *kwargs.at( "school" );
@@ -1438,8 +1438,8 @@ std::function<double( dialogue & )> proficiency_eval( char scope,
 std::function<void( dialogue &, double )> proficiency_ass( char scope,
         std::vector<diag_value> const &params, diag_kwargs const &kwargs )
 {
-    diag_value fmt_val( std::string{"time_spent"} );
-    diag_value direct_val( 0.0 );
+    diag_value fmt_val( "time_spent" );
+    diag_value direct_val( 0 );
     if( kwargs.count( "format" ) != 0 ) {
         fmt_val = *kwargs.at( "format" );
     }
@@ -1647,13 +1647,13 @@ std::function<void( dialogue &, double )> npc_trust_ass( char scope,
 std::function<double( dialogue & )> calories_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &kwargs )
 {
-    diag_value format_value( std::string( "raw" ) );
+    diag_value format_value( "raw" );
     if( kwargs.count( "format" ) != 0 ) {
         format_value = *kwargs.at( "format" );
     }
 
     // dummy kwarg, intentionally discarded!
-    diag_value ignore_weariness_val( 0.0 );
+    diag_value ignore_weariness_val( 0 );
     if( kwargs.count( "dont_affect_weariness" ) != 0 ) {
         ignore_weariness_val = *kwargs.at( "dont_affect_weariness" );
     }
@@ -1699,7 +1699,7 @@ std::function<double( dialogue & )> calories_eval( char scope,
 std::function<void( dialogue &, double )> calories_ass( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &kwargs )
 {
-    diag_value ignore_weariness_val( 0.0 );
+    diag_value ignore_weariness_val( 0 );
     if( kwargs.count( "dont_affect_weariness" ) != 0 ) {
         ignore_weariness_val = *kwargs.at( "dont_affect_weariness" );
     }
