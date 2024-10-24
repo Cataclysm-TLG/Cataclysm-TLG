@@ -1262,6 +1262,11 @@
   },
   {
     "type": "construction_group",
+    "id": "place_glassblowers_crucible",
+    "name": "Place Glassblower's Crucible"
+  },
+  {
+    "type": "construction_group",
     "id": "place_drill_press",
     "name": "Place Drill Press"
   },
