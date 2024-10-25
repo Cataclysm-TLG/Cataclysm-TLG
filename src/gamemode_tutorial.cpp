@@ -153,7 +153,7 @@ bool tutorial_game::init()
     player_character.clear_effects();
     player_character.clear_morale();
     player_character.clear_vitamins();
-    player_character.set_sleepiness( 0 );
+    player_character.set_fatigue( 0 );
     player_character.set_focus( 100 );
     player_character.set_hunger( 0 );
     player_character.set_pain( 0 );
