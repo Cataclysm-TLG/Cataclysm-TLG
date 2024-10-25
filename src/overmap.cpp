@@ -7045,6 +7045,9 @@ std::vector<tripoint_om_omt> overmap::place_special(
 
     if( special.has_flag( "GLOBALLY_UNIQUE" ) ) {
         overmap_buffer.add_unique_special( special.id );
+        point_abs_omt location = coords::project_to<coords::omt>(this->pos()) + p.xy().raw();
+        DebugLog(DL_ALL, DC_ALL) << "Globally Unique " << special.id.c_str() << " added at " << location.to_string_writable();
+        add_msg("Globally Unique %s added at %s", special.id.c_str(), p.to_string_writable());
     }
     // CITY_UNIQUE is handled in place_building()
 
