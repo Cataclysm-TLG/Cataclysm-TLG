@@ -39,6 +39,7 @@
 #include "enums.h"
 #include "flat_set.h"
 #include "game_constants.h"
+#include "global_vars.h"
 #include "inventory.h"
 #include "item.h"
 #include "item_location.h"
@@ -299,7 +300,7 @@ struct queued_eoc {
     public:
         effect_on_condition_id eoc;
         time_point time;
-        std::unordered_map<std::string, std::string> context;
+        global_variables::impl_t context;
 };
 
 struct eoc_compare {
