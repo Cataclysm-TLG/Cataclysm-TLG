@@ -2431,7 +2431,7 @@
       [ "con_milk", 20 ],
       [ "milk_evap", 15 ],
       [ "milk_UHT", 10 ],
-      { "count": 20, "prob": 20, "group": "melatonin_tablet_bottle_plastic_pill_supplement_10" },
+      { "prob": 20, "group": "melatonin_tablet_bottle_plastic_pill_supplement_1_10" },
       [ "can_spam", 30 ],
       [ "can_tuna", 35 ],
       [ "can_salmon", 25 ],
@@ -2861,6 +2861,13 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bag_plastic",
     "entries": [ { "item": "quikclot", "container-item": "null", "count": 6 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "melatonin_tablet_bottle_plastic_pill_supplement_1_10",
+    "subtype": "collection",
+    "container-item": "bottle_plastic_pill_supplement",
+    "entries": [ { "item": "melatonin_tablet", "container-item": "null", "count": [ 1, 10 ] } ]
   },
   {
     "type": "item_group",
