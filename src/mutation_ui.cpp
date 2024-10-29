@@ -435,7 +435,8 @@ void avatar::power_mutations()
                             } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
                                        ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                        ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
-                                add_msg_if_player( m_neutral, _( "You activate your %s." ), mutation_name( mut_data.id ) );
+                                add_msg_if_player( m_neutral,
+                                                   string_format( mut_data.activation_msg, mutation_name( mut_data.id ) ) );
                                 // Reset menu in advance
                                 ui.reset();
                                 activate_mutation( mut_id );
@@ -608,7 +609,8 @@ void avatar::power_mutations()
                                 } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
                                            ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                            ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
-                                    add_msg_if_player( m_neutral, _( "You activate your %s." ), mutation_name( mut_data.id ) );
+                                    add_msg_if_player( m_neutral,
+                                                       string_format( mut_data.activation_msg, mutation_name( mut_data.id ) ) );
                                     // Reset menu in advance
                                     ui.reset();
                                     activate_mutation( mut_id );
