@@ -523,7 +523,10 @@
       { "group": "nested_converted_mdrx", "prob": 1 },
       { "group": "nested_converted_cz600", "prob": 1 },
       { "group": "nested_rdb_223", "prob": 1 },
-      { "group": "nested_hpt3895", "prob": 1 }
+      { "group": "nested_hpt3895", "prob": 1 },
+      { "group": "nested_ar15_retool_22", "prob": 1 },
+      { "group": "nested_rio_bravo", "prob": 3 },
+      { "group": "nested_henry_golden_boy", "prob": 4 }
     ]
   },
   {
@@ -570,7 +573,13 @@
       { "group": "mdrx", "prob": 1, "charges": [ 0, 30 ] },
       { "group": "cz600", "prob": 1, "charges": [ 0, 10 ] },
       { "item": "ak556", "variant": "zpapm90", "prob": 1, "charges": [ 0, 30 ] },
-      { "item": "rdb_223", "prob": 1, "charges": [ 0, 30 ] }
+      { "item": "rdb_223", "prob": 1, "charges": [ 0, 30 ] },
+      { "item": "rio_bravo", "prob": 2, "charges": [ 0, 15 ] },
+      { "item": "henry_golden_boy", "prob": 2, "charges": [ 0, 16 ] },
+      { "item": "rossi_r92_44_16", "prob": 2, "charges": [ 0, 8 ] },
+      { "item": "uberti_1873", "prob": 2, "charges": [ 0, 10 ] },
+      { "item": "rossi_r92_357_16", "prob": 2, "charges": [ 0, 8 ] },
+      { "item": "rossi_r92_357_20", "prob": 2, "charges": [ 0, 10 ] }
     ]
   },
   {
@@ -612,7 +621,12 @@
       { "group": "nested_ar15_with_kits", "prob": 15 },
       { "group": "nested_mdrx_with_kits", "prob": 10 },
       { "group": "nested_cz600_with_kits", "prob": 10 },
-      { "item": "rdb_223", "prob": 30 }
+      { "item": "rdb_223", "prob": 6 },
+      { "item": "uberti_1873", "prob": 8 },
+      { "item": "rossi_r92_357_16", "prob": 4 },
+      { "item": "rossi_r92_357_20", "prob": 8 },
+      { "item": "rio_bravo", "prob": 3 },
+      { "item": "henry_golden_boy", "prob": 4 }
     ]
   },
   {
@@ -659,7 +673,10 @@
       { "group": "nested_zpap85", "prob": 1 },
       { "group": "nested_rfb_308", "prob": 5 },
       { "group": "nested_steyr_scout", "prob": 5 },
-      { "group": "nested_greasegun", "prob": 1 }
+      { "group": "nested_greasegun", "prob": 1 },
+      { "item": "henry_big_boy", "prob": 2 },
+      { "item": "rossi_r92_44_16", "prob": 3 },
+      { "item": "rossi_r92_44_20", "prob": 3 }
     ]
   },
   {
