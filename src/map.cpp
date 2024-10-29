@@ -6019,6 +6019,10 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
             dischargeable = ( dischargeable / 1000 ) + x_in_y( dischargeable % 1000, 1000 );
             for( item &n : cur_veh.get_items( vp ) ) {
 
+                if( dischargeable <= 0 ) {
+                    break;
+                }
+
                 if( !n.has_flag( flag_RECHARGE ) && !n.has_flag( flag_USE_UPS ) ) {
                     continue;
                 }
@@ -6052,10 +6056,6 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
                         n.mod_energy( units::from_kilojoule( static_cast<std::int64_t>( charged ) ) );
                     } else {
                         n.ammo_set( itype_battery, n.ammo_remaining() + charged );
-                    }
-
-                    if( dischargeable <= 0 ) {
-                        break;
                     }
 
                 }
