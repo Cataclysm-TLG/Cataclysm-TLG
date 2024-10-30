@@ -2513,6 +2513,7 @@ void replace_city_tag( std::string &input, const std::string &name )
     replace_substring( input, "<city>", name, true );
 }
 
+// Legacy, moved to parse_tags
 void replace_keybind_tag( std::string &input )
 {
     std::string keybind_tag_start = "<keybind:";
