@@ -766,7 +766,7 @@ std::function<double( dialogue & )> _characters_nearby_eval( char scope,
         std::vector<Character *> const targets = g->get_characters_if( [ &beta, &d, &radius,
                &loc, filter, allow_hallucinations ]( const Character & guy ) {
             talker const *const tk = d.actor( beta );
-            return _filter_character( tk->get_character(), guy, radius, loc, filter,
+            return _filter_character( tk->get_const_character(), guy, radius, loc, filter,
                                       allow_hallucinations );
         } );
         return static_cast<double>( targets.size() );
@@ -1012,7 +1012,7 @@ std::function<double( dialogue & )> get_daily_calories( char scope,
             return 0;
         }
 
-        return static_cast<talker const *>( d.actor( beta ) )->get_daily_calories( day, type );
+        return d.actor( beta )->get_daily_calories( day, type );
     };
 }
 
@@ -1467,9 +1467,9 @@ std::function<double( dialogue & )> vision_range_eval( char scope,
 {
     return[beta = is_beta( scope )]( dialogue const & d ) {
         talker const *const actor = d.actor( beta );
-        if( Character const *const chr = actor->get_character(); chr != nullptr ) {
+        if( Character const *const chr = actor->get_const_character(); chr != nullptr ) {
             return chr->unimpaired_range();
-        } else if( monster const *const mon = actor->get_monster(); mon != nullptr ) {
+        } else if( monster const *const mon = actor->get_const_monster(); mon != nullptr ) {
             map &here = get_map();
             tripoint_bub_ms tripoint = get_map().bub_from_abs( mon->get_location() );
             return mon->sight_range( here.ambient_light_at( tripoint ) );
@@ -1594,7 +1594,7 @@ std::function<double( dialogue & )> calories_eval( char scope,
             if( d.actor( beta )->get_character() ) {
                 return d.actor( beta )->get_stored_kcal();
             }
-            item_location const *it = static_cast<talker const *>( d.actor( beta ) )->get_item();
+            item_location const *it = d.actor( beta )->get_const_item();
             if( it && *it ) {
                 npc dummy;
                 return dummy.compute_effective_nutrients( *it->get_item() ).kcal();
@@ -1622,10 +1622,10 @@ std::function<double( dialogue & )> weight_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &/* kwargs */ )
 {
     return[beta = is_beta( scope )]( dialogue const & d ) {
-        if( d.actor( beta )->get_character() || d.actor( beta )->get_monster() ) {
+        if( d.actor( beta )->get_character() || d.actor( beta )->get_const_monster() ) {
             return d.actor( beta )->get_weight();
         }
-        item_location const *it = static_cast<talker const *>( d.actor( beta ) )->get_item();
+        item_location const *it = d.actor( beta )->get_const_item();
         if( it && *it ) {
             return static_cast<int>( to_milligram( it->get_item()->weight() ) );
         }
@@ -1638,10 +1638,10 @@ std::function<double( dialogue & )> volume_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &/* kwargs */ )
 {
     return[beta = is_beta( scope )]( dialogue const & d ) {
-        if( d.actor( beta )->get_character() || d.actor( beta )->get_monster() ) {
+        if( d.actor( beta )->get_character() || d.actor( beta )->get_const_monster() ) {
             return d.actor( beta )->get_volume();
         }
-        item_location const *it = static_cast<talker const *>( d.actor( beta ) )->get_item();
+        item_location const *it = d.actor( beta )->get_const_item();
         if( it && *it ) {
             return to_milliliter( it->get_item()->volume() );
         }
@@ -1655,7 +1655,7 @@ std::function<double( dialogue & )> vitamin_eval( char scope,
 {
     return[beta = is_beta( scope ), id = params[0]]( dialogue const & d ) {
         talker const *const actor = d.actor( beta );
-        if( Character const *const chr = actor->get_character(); chr != nullptr ) {
+        if( Character const *const chr = actor->get_const_character(); chr != nullptr ) {
             return chr->vitamin_get( vitamin_id( id.str( d ) ) );
         }
         debugmsg( "Tried to access vitamins of a non-Character talker" );
@@ -1748,7 +1748,7 @@ std::function<double( dialogue & )> climate_control_str_heat_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &/* kwargs */ )
 {
     return [beta = is_beta( scope )]( dialogue const & d ) {
-        return static_cast<talker const *>( d.actor( beta ) )->climate_control_str_heat();
+        return d.actor( beta )->climate_control_str_heat();
     };
 }
 
@@ -1756,7 +1756,7 @@ std::function<double( dialogue & )> climate_control_str_chill_eval( char scope,
         std::vector<diag_value> const &/* params */, diag_kwargs const &/* kwargs */ )
 {
     return[beta = is_beta( scope )]( dialogue const & d ) {
-        return static_cast<talker const *>( d.actor( beta ) )->climate_control_str_chill();
+        return d.actor( beta )->climate_control_str_chill();
     };
 }
 
