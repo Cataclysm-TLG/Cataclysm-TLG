@@ -4757,7 +4757,7 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
         if( global ) {
             target = &get_player_character();
         } else {
-            target = d.actor( is_npc )->get_character();
+            target = d.actor( is_npc )->get_const_character();
         }
         if( !target || target->is_npc() ) {
             return;
