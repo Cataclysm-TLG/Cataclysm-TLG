@@ -94,7 +94,7 @@
     "price_postapoc": "2 cent",
     "material": [ "powder" ],
     "volume": "62 ml",
-    "flags": [ "EDIBLE_FROZEN", "NUTRIENT_OVERRIDE" ],
+    "flags": [ "EDIBLE_FROZEN" ],
     "fun": -10
   },
   {
