@@ -277,6 +277,7 @@
     "item": "disinfectant",
     "count": 50,
     "origins": [ "ORIGIN_SECONDARY" ],
+    "has_generic_rewards": false,
     "followup": "MISSION_REFUGEE_Uyen_2",
     "dialogue": {
       "describe": "We need help…",
@@ -308,6 +309,7 @@
     "item": "bandages",
     "count": 30,
     "origins": [ "ORIGIN_SECONDARY" ],
+    "has_generic_rewards": false,
     "followup": "MISSION_REFUGEE_Uyen_3",
     "dialogue": {
       "describe": "We need help…",
@@ -339,6 +341,7 @@
     "item": "prozac",
     "count": 60,
     "origins": [ "ORIGIN_SECONDARY" ],
+    "has_generic_rewards": false,
     "dialogue": {
       "describe": "We could still use your help…",
       "offer": "I probably shouldn't be prescribing things, but there's a ton of people needing help with sleep in here.  If you could get us some antidepressants, Rhyzaea and I can probably make sure they're doled out appropriately without people having to starve to pay for them.  Three month's worth - about 6 bottles - would last us a little while.",
