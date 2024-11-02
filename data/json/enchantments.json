@@ -171,7 +171,7 @@
         { "not": { "u_has_move_mode": "prone" } }
       ]
     },
-    "values": [ { "value": "MOVE_COST", "multiply": 0.15 }, { "value": "CARRY_WEIGHT", "multiply": -0.10 } ]
+    "values": [ { "value": "MOVE_COST", "multiply": 0.15 }, { "value": "CARRY_WEIGHT", "multiply": -0.1 } ]
   },
   {
     "id": "ench_quadruped_movement_full_crouch",
@@ -188,7 +188,7 @@
     "values": [ { "value": "MOVE_COST", "multiply": -0.45 }, { "value": "CARRY_WEIGHT", "multiply": 0.1 } ],
     "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
   },
-    {
+  {
     "id": "ench_quadruped_movement_full_run",
     "//": "For quadrupeds with all four of their animal limbs.  We should avoid giving this to every animal mutant, as it helps keep lines distinct.",
     "type": "enchantment",

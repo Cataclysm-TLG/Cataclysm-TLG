@@ -135,7 +135,8 @@ static const map_extra_id map_extra_mx_roadworks( "mx_roadworks" );
 static const map_extra_id map_extra_mx_shrubbery( "mx_shrubbery" );
 
 static const mongroup_id GROUP_FISH( "GROUP_FISH" );
-static const mongroup_id GROUP_FUNGI_FUNGALOID( "GROUP_FUNGI_FUNGALOID" );
+static const mongroup_id GROUP_FUNGI_FLOWERS( "GROUP_FUNGI_FLOWERS" );
+static const mongroup_id GROUP_FUNGI_ZOMBIE( "GROUP_FUNGI_ZOMBIE" );
 static const mongroup_id GROUP_JABBERWOCK( "GROUP_JABBERWOCK" );
 static const mongroup_id GROUP_MIL_PASSENGER( "GROUP_MIL_PASSENGER" );
 static const mongroup_id GROUP_MIL_PILOT( "GROUP_MIL_PILOT" );
@@ -1056,7 +1057,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
                 }
             }
             //50% chance to spawn pouf-maker
-            m.place_spawns( GROUP_FUNGI_FUNGALOID, 2, p + point_north_west, p + point_south_east,
+            m.place_spawns( GROUP_FUNGI_ZOMBIE, 2, p + point_north_west, p + point_south_east,
                             portal_location.z(), 1, true );
             break;
         }
@@ -2161,7 +2162,7 @@ static bool mx_fungal_zone( map &m, const tripoint &abs_sub )
     }
 
     const tripoint_bub_ms suitable_location = random_entry( suitable_locations, omt_center );
-    m.place_spawns( GROUP_FUNGI_FUNGALOID, 1,
+    m.place_spawns( GROUP_FUNGI_FLOWERS, 1,
                     suitable_location.xy() + point_north_west,
                     suitable_location.xy() + point_south_east,
                     suitable_location.z(),

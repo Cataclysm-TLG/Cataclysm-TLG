@@ -1493,7 +1493,7 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint & )
         p->set_mutation( trait_THRESH_MYCUS );
         g->invalidate_main_ui_adaptor();
         //~ The Mycus does not use the term (or encourage the concept of) "you".  The PC is a local/native organism, but is now the Mycus.
-        //~ It still understands the concept, but uninitelligent fungaloids and mind-bent symbiotes should not need it.
+        //~ It still understands the concept, but uninitelligent fungal zombies and mind-bent symbiotes should not need it.
         //~ We are the Mycus.
         popup( _( "we welcome into us.  we have endured long in this forbidding world." ) );
         p->add_msg_if_player( " " );

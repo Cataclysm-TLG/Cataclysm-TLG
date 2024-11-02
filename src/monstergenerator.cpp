@@ -622,7 +622,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "FUNGUS_BIG_BLOSSOM", mattack::fungus_big_blossom );
     add_hardcoded_attack( "FUNGUS_INJECT", mattack::fungus_inject );
     add_hardcoded_attack( "FUNGUS_BRISTLE", mattack::fungus_bristle );
-    add_hardcoded_attack( "FUNGUS_GROWTH", mattack::fungus_growth );
     add_hardcoded_attack( "FUNGUS_SPROUT", mattack::fungus_sprout );
     add_hardcoded_attack( "FUNGUS_FORTIFY", mattack::fungus_fortify );
     add_hardcoded_attack( "FUNGAL_TRAIL", mattack::fungal_trail );

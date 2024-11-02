@@ -198,8 +198,6 @@ static const mtype_id mon_creeper_vine( "mon_creeper_vine" );
 static const mtype_id mon_fungal_hedgerow( "mon_fungal_hedgerow" );
 static const mtype_id mon_fungal_tendril( "mon_fungal_tendril" );
 static const mtype_id mon_fungal_wall( "mon_fungal_wall" );
-static const mtype_id mon_fungaloid( "mon_fungaloid" );
-static const mtype_id mon_fungaloid_young( "mon_fungaloid_young" );
 static const mtype_id mon_headless_dog_thing( "mon_headless_dog_thing" );
 static const mtype_id mon_hound_tindalos_afterimage( "mon_hound_tindalos_afterimage" );
 static const mtype_id mon_manhack( "mon_manhack" );
@@ -1903,11 +1901,6 @@ bool mattack::fungus( monster *z )
         // 50  : 0.5
         // 75  : 0.22
         // 100 : 0.125
-        // Assuming all creatures in the bubble were fungaloids (unlikely), the average number of spores per generation:
-        // 25  : 50
-        // 50  : 25
-        // 75  : 17
-        // 100 : 13
         spore_chance *= ( 25.0 / g->num_creatures() ) * ( 25.0 / g->num_creatures() );
         if( x_in_y( g->num_creatures(), 100 ) ) {
             // Don't make the increased radius spawn more spores
@@ -2132,14 +2125,6 @@ bool mattack::fungus_bristle( monster *z )
     return true;
 }
 
-bool mattack::fungus_growth( monster *z )
-{
-    add_msg_if_player_sees( *z, m_warning, _( "The %s grows into an adult!" ), z->name() );
-    z->poly( mon_fungaloid );
-
-    return false;
-}
-
 bool mattack::fungus_sprout( monster *z )
 {
     // To avoid map shift weirdness
@@ -2306,26 +2291,15 @@ bool mattack::fungal_trail( monster *z )
 
 bool mattack::plant( monster *z )
 {
-    map &here = get_map();
     fungal_effects fe;
     const tripoint_bub_ms monster_position = z->pos_bub();
-    const bool is_fungi = here.has_flag_ter( ter_furn_flag::TFLAG_FUNGUS, monster_position );
-    // Spores taking seed and growing into a fungaloid
+    // Spores taking seed
     fe.spread_fungus( monster_position );
-    if( is_fungi && one_in( 10 + g->num_creatures() / 5 ) ) {
-        add_msg_if_player_sees( *z, m_warning, _( "The %s takes seed and becomes a young fungaloid!" ),
-                                z->name() );
-
-        z->poly( mon_fungaloid_young );
-        z->mod_moves( -to_moves<int>( 10_seconds ) ); // It takes a while
-        return false;
-    } else {
-        add_msg_if_player_sees( *z, _( "The %s falls to the ground and bursts!" ), z->name() );
-        z->set_hp( 0 );
-        // Try fungifying once again
-        fe.spread_fungus( monster_position );
-        return true;
-    }
+    add_msg_if_player_sees( *z, _( "The %s falls to the ground and bursts!" ), z->name() );
+    z->set_hp( 0 );
+    // Try fungifying once again
+    fe.spread_fungus( monster_position );
+    return true;
 }
 
 bool mattack::disappear( monster *z )
