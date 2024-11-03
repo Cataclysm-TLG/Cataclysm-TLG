@@ -7425,7 +7425,7 @@ static vehicle *pickveh( const tripoint &center, bool advanced )
 
     for( wrapped_vehicle &veh : get_map().get_vehicles() ) {
         vehicle *&v = veh.v;
-        if( rl_dist( center, v->global_pos3() ) < 40 &&
+        if( rl_dist( center, v->pos_bub().raw() ) < 40 &&
             v->fuel_left( itype_battery ) > 0 &&
             ( !empty( v->get_avail_parts( advctrl ) ) ||
               ( !advanced && !empty( v->get_avail_parts( ctrl ) ) ) ) ) {
@@ -7435,7 +7435,7 @@ static vehicle *pickveh( const tripoint &center, bool advanced )
     std::vector<tripoint> locations;
     for( int i = 0; i < static_cast<int>( vehs.size() ); i++ ) {
         vehicle *veh = vehs[i];
-        locations.push_back( veh->global_pos3() );
+        locations.push_back( veh->pos_bub().raw() );
         pmenu.addentry( i, true, MENU_AUTOASSIGN, veh->name );
     }
 
@@ -7531,9 +7531,9 @@ std::optional<int> iuse::remoteveh( Character *p, item *it, const tripoint &pos 
         const auto electronics_parts = veh->get_avail_parts( "CTRL_ELECTRONIC" );
         // Revert to original behavior if we can't find remote controls.
         if( empty( rctrl_parts ) ) {
-            veh->interact_with( electronics_parts.begin()->pos() );
+            veh->interact_with( electronics_parts.begin()->pos_bub() );
         } else {
-            veh->interact_with( rctrl_parts.begin()->pos() );
+            veh->interact_with( rctrl_parts.begin()->pos_bub() );
         }
     }
 

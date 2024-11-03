@@ -11573,8 +11573,11 @@ void Character::stagger()
         bool blocked = false;
         const tripoint_bub_ms dest = random_entry_removed( pool );
         const optional_vpart_position vp_there = here.veh_at( dest );
-        if( vp_there && vp_there->vehicle().enclosed_at( dest.raw() ) ) {
-            blocked = true;
+        if( vp_there ) {
+            vehicle &veh = vp_there->vehicle();
+            if( veh.enclosed_at( dest ) ) {
+                blocked = true;
+            }
         }
 
         if( here.passable( dest ) && !blocked &&
