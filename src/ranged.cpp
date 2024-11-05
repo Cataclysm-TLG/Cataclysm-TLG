@@ -2390,9 +2390,9 @@ static void cycle_action( item &weap, const itype_id &ammo, const tripoint_bub_m
 {
     map &here = get_map();
     // eject casings and linkages in random direction avoiding walls using player position as fallback
-    std::vector<tripoint> tiles;
+    std::vector<tripoint_bub_ms> tiles;
     tiles.reserve( 8 );
-    find_point_closest_first( pos, 1, 1, [&here, &tiles]( const tripoint & e ) {
+    find_point_closest_first( pos, 1, 1, [&here, &tiles]( const tripoint_bub_ms & e ) {
         if( here.passable( e ) ) {
             tiles.push_back( e );
         }

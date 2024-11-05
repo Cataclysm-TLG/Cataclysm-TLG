@@ -26,6 +26,8 @@
 #include "viewer.h"
 #include "map_iterator.h"
 
+static const damage_type_id damage_pure( "pure" );
+
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_DIMENSIONAL_ANCHOR( "DIMENSIONAL_ANCHOR" );
@@ -95,10 +97,9 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
     //handles teleporting into solids.
     if( dest->impassable( dest_target ) ) {
         if( force ) {
-            std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 5 );
-            nearest_points.erase( nearest_points.begin() );
-            //TODO: Swap for this once #75961 merges
-            //std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 1, 5 );
+            // std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 5 );
+            // nearest_points.erase( nearest_points.begin() );
+            std::vector<tripoint_bub_ms> nearest_points = closest_points_first( dest_target, 1, 5 );
             for( tripoint_bub_ms p : nearest_points ) {
                 if( dest->passable( p ) ) {
                     dest_target = p;
