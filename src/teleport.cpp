@@ -26,6 +26,8 @@
 #include "viewer.h"
 #include "map_iterator.h"
 
+static const damage_type_id damage_pure( "pure" );
+
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_DIMENSIONAL_ANCHOR( "DIMENSIONAL_ANCHOR" );
@@ -178,24 +180,25 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                                  critter.disp_name(), poor_soul->disp_name() );
                     }
                 }
-                //once collision this if block shouldn't run so everything here should only happen once
+                // Once collision this if block shouldn't run so everything here should only happen once.
                 collision = true;
-                //determine a random angle to throw the thing it teleported into, then fling it.
+                // Determine a random angle to throw the thing it teleported into, then fling it.
                 collision_angle = rng( 0, 360 );
                 g->fling_creature( poor_soul, units::from_degrees( collision_angle - 180 ), 40, false, true );
-                //spawn a mostly cosmetic explosion for flair.
+                // Spawn a mostly cosmetic explosion for flair.
                 explosion_handler::explosion( &critter, target.raw(), 10 );
-                //if it was grabbed, it isn't anymore.
+                // If it was grabbed, it isn't anymore.
                 for( const effect &grab : poor_soul->get_effects_with_flag( json_flag_GRAB ) ) {
                     poor_soul->remove_effect( grab.get_id() );
                 }
-                //apply a bunch of damage to it
+                // Apply a bunch of damage to it, similar to a tear in reality.
                 std::vector<bodypart_id> target_bdpts = poor_soul->get_all_body_parts(
                         get_body_part_flags::only_main );
-                for( const bodypart_id &bp_id : target_bdpts ) {
-                    const float damage_to_deal =
-                        static_cast<float>( poor_soul->get_part_hp_max( bp_id ) ) / static_cast<float>( rng( 6, 12 ) );
-                    poor_soul->apply_damage( nullptr, bp_id, damage_to_deal );
+                for( bodypart_id bp_id : target_bdpts ) {
+                    damage_instance bp_damage( damage_pure,
+                                               poor_soul->get_part_hp_max( bp_id ) / static_cast<float>( rng( 6,
+                                                       12 ) ) );
+                    poor_soul->deal_damage( nullptr, bp_id, bp_damage );
                 }
                 poor_soul->check_dead_state();
             }
@@ -209,10 +212,11 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
         //do a bunch of damage to it too.
         std::vector<bodypart_id> target_bdpts = critter.get_all_body_parts(
                 get_body_part_flags::only_main );
-        for( const bodypart_id &bp_id : target_bdpts ) {
-            float damage_to_deal =
-                static_cast<float>( critter.get_part_hp_max( bp_id ) ) / static_cast<float>( rng( 6, 12 ) );
-            critter.apply_damage( nullptr, bp_id, damage_to_deal );
+        for( bodypart_id bp_id : target_bdpts ) {
+            damage_instance bp_damage( damage_pure,
+                                       critter.get_part_hp_max( bp_id ) / static_cast<float>( rng( 6,
+                                               12 ) ) );
+            critter.deal_damage( nullptr, bp_id, bp_damage );
         }
         critter.check_dead_state();
     }
