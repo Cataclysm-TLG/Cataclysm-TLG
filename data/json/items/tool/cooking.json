@@ -83,21 +83,23 @@
     "symbol": "/",
     "color": "yellow",
     "ammo": [ "battery" ],
-    "charges_per_use": 5,
-    "use_action": {
-      "type": "effect_on_conditions",
-      "menu_text": "Turn on",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_activate__carver",
-          "effect": {
-            "run_eoc_with": "EOC_toolweapon_activate",
-            "variables": {
-              "turn_cost": "0.8",
-              "transform_target": "carver_on",
-              "success_message": { "i18n": true, "str": "The electric carver's serrated blades start buzzing!" },
-              "volume": "20",
-              "failure_message": { "i18n": true, "str": "You pull the trigger, but nothing happens." }
+    "charges_per_use": 1,
+    "use_action": [
+      {
+        "type": "effect_on_conditions",
+        "menu_text": "Turn on",
+        "effect_on_conditions": [
+          {
+            "id": "EOC_toolweapon_activate__carver",
+            "effect": {
+              "run_eocs": "EOC_toolweapon_activate",
+              "variables": {
+                "turn_cost": "0.8",
+                "transform_target": "carver_on",
+                "success_message": { "i18n": true, "str": "The electric carver's serrated blades start buzzing!" },
+                "volume": "20",
+                "failure_message": { "i18n": true, "str": "You pull the trigger, but nothing happens." }
+              }
             }
           }
         }
@@ -125,24 +127,27 @@
     "charges_per_use": 0,
     "revert_to": "carver_off",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 25 ] ],
-    "use_action": {
-      "type": "effect_on_conditions",
-      "ammo_scale": 0,
-      "menu_text": "Turn off",
-      "effect_on_conditions": [
-        {
-          "id": "EOC_toolweapon_deactivate__carver",
-          "effect": { "run_eoc_with": "EOC_toolweapon_deactivate", "variables": { "transform_target": "carver_off" } }
-        }
-      ]
-    },
+    "use_action": [
+      {
+        "type": "effect_on_conditions",
+        "ammo_scale": 0,
+        "menu_text": "Turn off",
+        "effect_on_conditions": [
+          {
+            "id": "EOC_toolweapon_deactivate__carver",
+            "effect": { "run_eocs": "EOC_toolweapon_deactivate", "variables": { "transform_target": "carver_off" } }
+          }
+        ]
+      },
+      { "type": "link_up", "cable_length": 2, "charge_rate": "120 W" }
+    ],
     "tick_action": {
       "type": "effect_on_conditions",
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_running__carver",
           "effect": {
-            "run_eoc_with": "EOC_toolweapon_running",
+            "run_eocs": "EOC_toolweapon_running",
             "variables": {
               "sound_chance": "10",
               "sound_message": { "i18n": true, "str": "Your electric carver buzzes." },

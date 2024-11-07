@@ -395,7 +395,7 @@
           {
             "id": "SALINE_INFUSION_250",
             "condition": { "math": [ "u_skill('firstaid')", ">=", "3" ] },
-            "effect": { "run_eoc_with": "SALINE_INFUSION", "variables": { "volume_of_saline": "250" } },
+            "effect": { "run_eocs": "SALINE_INFUSION", "variables": { "volume_of_saline": "250" } },
             "false_effect": [ { "u_message": "You lack the skill to properly use an IV.", "type": "bad" } ]
           }
         ]
@@ -423,7 +423,7 @@
           {
             "id": "SALINE_INFUSION_500",
             "condition": { "math": [ "u_skill('firstaid')", ">=", "4" ] },
-            "effect": { "run_eoc_with": "SALINE_INFUSION", "variables": { "volume_of_saline": "500" } },
+            "effect": { "run_eocs": "SALINE_INFUSION", "variables": { "volume_of_saline": "500" } },
             "false_effect": [ { "u_message": "You lack the skill to properly use an IV.", "type": "bad" } ]
           }
         ]
@@ -451,7 +451,7 @@
           {
             "id": "SALINE_INFUSION_1000",
             "condition": { "math": [ "u_skill('firstaid')", ">=", "4" ] },
-            "effect": { "run_eoc_with": "SALINE_INFUSION", "variables": { "volume_of_saline": "1000" } },
+            "effect": { "run_eocs": "SALINE_INFUSION", "variables": { "volume_of_saline": "1000" } },
             "false_effect": [ { "u_message": "You lack the skill to properly use an IV.", "type": "bad" } ]
           }
         ]
@@ -479,7 +479,7 @@
           {
             "id": "SALINE_INFUSION_2000",
             "condition": { "math": [ "u_skill('firstaid')", ">=", "4" ] },
-            "effect": { "run_eoc_with": "SALINE_INFUSION", "variables": { "volume_of_saline": "2000" } },
+            "effect": { "run_eocs": "SALINE_INFUSION", "variables": { "volume_of_saline": "2000" } },
             "false_effect": [ { "u_message": "You lack the skill to properly use an IV.", "type": "bad" } ]
           }
         ]

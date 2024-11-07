@@ -517,7 +517,7 @@
           {
             "id": "EOC_myopia_contacts_weekly",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": "604800" }
             }
           }
@@ -544,7 +544,7 @@
           {
             "id": "EOC_myopia_transition_contacts_weekly",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": "604800" }
             }
           }
@@ -569,7 +569,7 @@
           {
             "id": "EOC_myopia_contacts_daily",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "contacts", "time": "57600" }
             }
           }
@@ -594,7 +594,7 @@
           {
             "id": "EOC_myopia_transition_contacts_daily",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "effect": "transition_contacts", "time": "57600" }
             }
           }
@@ -618,7 +618,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_contacts_weekly",
-            "effect": { "run_eoc_with": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "604800" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "604800" } }
           }
         ]
       }
@@ -640,10 +640,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_transition_contacts_weekly",
-            "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
-              "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "604800" }
-            }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "604800" } }
           }
         ]
       }
@@ -665,7 +662,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_contacts_daily",
-            "effect": { "run_eoc_with": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "57600" } }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "contacts", "time": "57600" } }
           }
         ]
       }
@@ -687,10 +684,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_hyperopia_transition_contacts_daily",
-            "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
-              "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "57600" }
-            }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "flag1": "HYPEROPIC", "effect": "transition_contacts", "time": "57600" } }
           }
         ]
       }
@@ -713,7 +707,7 @@
           {
             "id": "EOC_bifocal_contacts_weekly",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": "604800" }
             }
           }
@@ -738,7 +732,7 @@
           {
             "id": "EOC_bifocal_transition_contacts_weekly",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": {
                 "flag1": "MYOPIC",
                 "flag2": "MYOPIC_IN_LIGHT",
@@ -769,7 +763,7 @@
           {
             "id": "EOC_bifocal_contacts_daily",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": { "flag1": "MYOPIC", "flag2": "MYOPIC_IN_LIGHT", "flag3": "HYPEROPIC", "effect": "contacts", "time": "57600" }
             }
           }
@@ -794,7 +788,7 @@
           {
             "id": "EOC_bifocal_transition_contacts_daily",
             "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
+              "run_eocs": "EOC_CONTACTS",
               "variables": {
                 "flag1": "MYOPIC",
                 "flag2": "MYOPIC_IN_LIGHT",
@@ -824,10 +818,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_plano_transition_contacts_weekly",
-            "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
-              "variables": { "effect": "transition_contacts_plano", "plano": "1", "time": "604800" }
-            }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "effect": "transition_contacts_plano", "plano": "1", "time": "604800" } }
           }
         ]
       }
@@ -849,10 +840,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_plano_transition_contacts_daily",
-            "effect": {
-              "run_eoc_with": "EOC_CONTACTS",
-              "variables": { "plano": "1", "effect": "transition_contacts_plano", "time": "57600" }
-            }
+            "effect": { "run_eocs": "EOC_CONTACTS", "variables": { "plano": "1", "effect": "transition_contacts_plano", "time": "57600" } }
           }
         ]
       }
