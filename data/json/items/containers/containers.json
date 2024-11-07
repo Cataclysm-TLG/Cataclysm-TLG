@@ -564,7 +564,6 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "airtight": true,
         "watertight": true,
         "rigid": true,
         "transparent": true,
@@ -742,7 +741,6 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "airtight": true,
         "watertight": true,
         "rigid": true,
         "transparent": true,
@@ -806,7 +804,6 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "airtight": true,
         "watertight": true,
         "rigid": true,
         "transparent": true,
@@ -845,7 +842,6 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "airtight": true,
         "watertight": true,
         "rigid": true,
         "transparent": true,
@@ -3474,7 +3470,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "250 ml",
         "max_contains_weight": "1500 g",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3502,7 +3497,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "510 ml",
         "max_contains_weight": "3 kg",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3530,7 +3524,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "1625 ml",
         "max_contains_weight": "4 kg",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3559,7 +3552,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "125 ml",
         "max_contains_weight": "750 g",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3587,7 +3579,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "31 ml",
         "max_contains_weight": "180 g",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3615,7 +3606,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "32 ml",
         "max_contains_weight": "180 g",
-        "airtight": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
         "watertight": true
@@ -3644,7 +3634,6 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "2000 ml",
         "max_contains_weight": "1500 g",
-        "airtight": true,
         "transparent": true,
         "moves": 50,
         "sealed_data": { "spoil_multiplier": 0.0 },
