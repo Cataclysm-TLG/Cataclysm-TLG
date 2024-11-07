@@ -2926,7 +2926,6 @@
     "points": 2,
     "visibility": 6,
     "ugliness": 3,
-    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 2 } ] } ],
     "description": "You've grown a chitin exoskeleton, much like that of an insect.  It provides considerable physical protection, and make your punches hit a little harder.  Somewhat reduces wet effects.",
     "types": [ "BODY_ARMOR" ],
     "prereqs": [ "CHITIN" ],
@@ -2988,7 +2987,6 @@
     "leads_to": [ "CRUSTACEAN_CLAW" ],
     "flags": [ "TOUGH_FEET" ],
     "enchantments": [
-      { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 3 } ] },
       { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -2 } ] }
     ],
     "integrated_armor": [ "integrated_carapace" ],
@@ -3088,7 +3086,6 @@
     "cancels": [ "NAILS", "CLAWS", "WEBBED", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
     "prereqs": [ "CRUSTACEAN_CARAPACE" ],
     "integrated_armor": [ "integrated_giant_pincer" ],
-    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 1 } ] } ],
     "threshreq": [ "THRESH_CRUSTACEAN" ],
     "category": [ "CRUSTACEAN" ],
     "restricts_gear": [ "hand_r" ],
@@ -3161,7 +3158,6 @@
     "types": [ "BODY_ARMOR" ],
     "prereqs": [ "PLANTSKIN" ],
     "changes_to": [ "BARK2_a", "BARK2_b", "BARK2_c" ],
-    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 2 } ] } ],
     "category": [ "PLANT" ],
     "integrated_armor": [ "integrated_bark" ]
   },
@@ -3181,7 +3177,6 @@
     "category": [ "PLANT" ],
     "threshreq": [ "THRESH_PLANT" ],
     "active": true,
-    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 2 } ] } ],
     "integrated_armor": [ "integrated_bark2_a" ],
     "transform": {
       "target": "BARK2_b",
@@ -3227,7 +3222,6 @@
     "prereqs": [ "PLANTSKIN" ],
     "active": true,
     "integrated_armor": [ "integrated_bark2_c" ],
-    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 2 } ] } ],
     "transform": {
       "target": "BARK2_a",
       "msg_transform": "Your bark ripples across your body, repositioning at a cellular level.",
@@ -3242,7 +3236,7 @@
     "points": 2,
     "visibility": 8,
     "ugliness": 4,
-    "enchantments": [ { "values": [ { "value": "ITEM_DAMAGE_STAB", "add": 2 } ] } ],
+    "enchantments": [ { "melee_damage_bonus": [ { "type": "stab", "add": 2 } ] } ],
     "description": "Your skin is covered in small, woody thorns.  Whenever an unarmed opponent strikes a part of your body that is not covered by clothing, they will receive minor damage.  Your punches may also deal extra damage.",
     "prereqs": [ "BARK", "BARK2_a", "BARK2_b", "BARK2_c" ],
     "category": [ "PLANT" ]
@@ -3903,7 +3897,7 @@
     "points": 1,
     "visibility": 5,
     "ugliness": 4,
-    "enchantments": [ { "values": [ { "value": "ITEM_DAMAGE_ACID", "add": { "math": [ "rng(2, 3)" ] } } ] } ],
+    "enchantments": [ { "melee_damage_bonus": [ { "type": "acid", "add": { "math": [ "rng(2, 3)" ] } } ] } ],
     "description": "The skin on your hands is now a mucous membrane that produces a thick, acrid slime.  Attacks using your hand will cause minor acid damage.  Slightly increases wet benefits.",
     "prereqs": [ "SLIMY" ],
     "category": [ "SLIME" ],
