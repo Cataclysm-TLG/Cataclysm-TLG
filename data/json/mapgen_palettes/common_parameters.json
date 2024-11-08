@@ -29,32 +29,6 @@
       }
     },
     "terrain": {
-      "|": { "param": "interior_wall_type", "fallback": "t_wall_w" },
-      "#": { "param": "exterior_wall_type", "fallback": "t_brick_wall" }
-    }
-  },
-  {
-    "type": "palette",
-    "id": "parametrized_highrise_walls_palette",
-    "//": "Intended as a palette for randomized walls for multi-story buildings",
-    "parameters": {
-      "interior_highrise_wall_type": {
-        "type": "ter_str_id",
-        "default": {
-          "distribution": [
-            [ "t_brick_wall", 6 ],
-            [ "t_rock_wall", 3 ],
-            [ "t_wall_wood", 3 ],
-            [ "t_concrete_wall", 4 ],
-            [ "t_adobe_brick_wall", 1 ],
-            [ "t_strconc_wall", 4 ],
-            [ "t_sconc_wall", 4 ]
-          ]
-        }
-      },
-      "exterior_highrise_wall_type": { "type": "ter_str_id", "default": { "distribution": [ [ "t_strconc_wall", 1 ] ] } }
-    },
-    "terrain": {
       "|": { "param": "interior_highrise_wall_type", "fallback": "t_strconc_wall" },
       "#": { "param": "exterior_highrise_wall_type", "fallback": "t_strconc_wall" }
     }
