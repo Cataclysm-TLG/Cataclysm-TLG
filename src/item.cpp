@@ -11104,7 +11104,7 @@ int item::activation_consume( int qty, const tripoint &pos, Character *carrier )
     return ammo_consume( qty * ammo_required(), pos, carrier );
 }
 
-const bool item::has_ammo() const
+bool item::has_ammo() const
 {
     const item *mag = magazine_current();
     if( mag ) {
@@ -11129,7 +11129,7 @@ const bool item::has_ammo() const
     return false;
 }
 
-const bool item::has_ammo_data() const
+bool item::has_ammo_data() const
 {
     const item *mag = magazine_current();
     if( mag ) {
