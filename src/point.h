@@ -91,7 +91,7 @@ struct point {
     // Dummy implementation of raw() to allow reasoning about
     // abstract generic points.
     constexpr point raw() const {
-        return point( x, y );
+        return this;
     }
 
     /**
@@ -261,7 +261,7 @@ struct tripoint {
     // Dummy implementation of raw() to allow reasoning about
     // abstract generic points.
     constexpr tripoint raw() const {
-        return tripoint( x, y, z );
+        return this;
     }
 
     /**
