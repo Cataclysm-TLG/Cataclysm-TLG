@@ -509,6 +509,30 @@ void activity_handlers::butcher_do_turn( player_activity *act, Character * )
     corpse_item.set_var( butcher_progress_var( action ), progress );
 }
 
+static bool do_cannibalism_piss_people_off( Character &you )
+{
+    if( !you.is_avatar() ) {
+        return true; // NPCs dont accidentally cause player hate
+    }
+
+    if( !query_yn(
+            _( "Really desecrate the mortal remains of a fellow human being by butchering them for meat?" ) ) ) {
+        return false; // player cancels
+    }
+
+    for( npc &guy : g->all_npcs() ) {
+        if( guy.is_active() && guy.sees( you ) && !( guy.has_flag( json_flag_CANNIBAL ) ||
+           guy.has_flag( json_flag_PSYCHOPATH ) ||
+           guy.has_flag( json_flag_SAPIOVORE ) ||
+           guy.has_flag( json_flag_BLOODFEEDER ) ) ) {
+            // massive opinion penalty
+            guy.op_of_u.trust -= 5;
+            guy.op_of_u.value -= 5;
+        }
+    }
+    return true;
+}
+
 static void set_up_butchery( player_activity &act, Character &you, butcher_type action )
 {
     const int factor = you.max_quality( action == butcher_type::DISSECT ? qual_CUT_FINE : qual_BUTCHER,
@@ -632,7 +656,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
         }
     }
 
-
+    // TODO: Extract this bool into a function
     const bool is_human = corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
                           corpse.in_species( species_FERAL ) ) &&
                           !corpse.in_species( species_ZOMBIE ) );
@@ -648,9 +672,8 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
         if( you.has_proficiency( proficiency_prof_dissect_humans ) ) {
             // If it's player doing the butchery, ask them first.
             if( you.is_avatar() ) {
-                if( query_yn(
-                        _( "Really desecrate the mortal remains of a fellow human being by butchering them for meat?" ) ) ) {
-                    // Give the player a random message showing their disgust and cause morale penalty.
+                if( do_cannibalism_piss_people_off( you ) ) {
+                    //give the player a random message showing their disgust and cause morale penalty.
                     switch( rng( 1, 3 ) ) {
                         case 1:
                             you.add_msg_if_player( m_bad, _( "You clench your teeth at the prospect of this gruesome job." ) );
@@ -706,7 +729,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     // applies to only dissections, so that dissect_humans training makes a difference.
-    if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
+     if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
             you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) ) ) {
         if( you.has_proficiency( proficiency_prof_dissect_humans ) ) {
             //you're either trained for this, densensitized, or both. doesn't bother you.
