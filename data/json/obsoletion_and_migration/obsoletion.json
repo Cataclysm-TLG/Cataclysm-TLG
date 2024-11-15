@@ -235,5 +235,9 @@
     "type": "MONSTER",
     "copy-from": "mon_goose_chick",
     "looks_like": "mon_goose_chick"
+  },
+  {
+    "id": "EOC_Nunez_Travel",
+    "type": "effect_on_condition"
   }
 ]
