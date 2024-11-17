@@ -525,9 +525,14 @@ static bool do_cannibalism_piss_people_off( Character &you )
            guy.has_flag( json_flag_PSYCHOPATH ) ||
            guy.has_flag( json_flag_SAPIOVORE ) ||
            guy.has_flag( json_flag_BLOODFEEDER ) ) ) {
+            guy.say( _( "<swear!>?  Are you butchering them?  That's not okay, <fuck_you>." ) );
             // massive opinion penalty
             guy.op_of_u.trust -= 5;
             guy.op_of_u.value -= 5;
+            guy.op_of_u.anger += 5;
+            if( guy.turned_hostile() ) {
+                guy.make_angry();
+            }
         }
     }
     return true;
@@ -700,7 +705,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
         } else {
             //this runs if the butcherer does NOT have prof_dissect_humans
             if( you.is_avatar() ) {
-                if( query_yn( _( "Would you dare desecrate the mortal remains of a fellow human being?" ) ) ) {
+                if( do_cannibalism_piss_people_off( you ) ) {
                     //random message and morale penalty
                     switch( rng( 1, 3 ) ) {
                         case 1:
