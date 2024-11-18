@@ -310,6 +310,7 @@ static const json_character_flag json_flag_WEB_RAPPEL( "WEB_RAPPEL" );
 
 static const mod_id MOD_INFORMATION_Graphical_Overmap( "Graphical_Overmap" );
 static const mod_id MOD_INFORMATION_tlg( "tlg" );
+static const mod_id MOD_INFORMATION_sees_player_hitbutton( "sees_player_hitbutton" );
 
 static const mongroup_id GROUP_BLACK_ROAD( "GROUP_BLACK_ROAD" );
 
@@ -3375,8 +3376,10 @@ void game::load_packs( const std::string &msg, const std::vector<mod_id> &packs,
         ui.proceed();
     }
 
-    std::unordered_set<mod_id> removed_mods {
-        MOD_INFORMATION_Graphical_Overmap
+    // Missing mods removed recently trigger a different message to make it clear they were removed on purpose.
+    const std::unordered_set<mod_id> removed_mods {
+        MOD_INFORMATION_Graphical_Overmap,
+        MOD_INFORMATION_sees_player_hitbutton
     };
     std::unordered_set<mod_id> mods_to_remove;
     for( const mod_id &e : missing ) {
