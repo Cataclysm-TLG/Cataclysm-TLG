@@ -54,7 +54,7 @@
     "v": "f_rack_coat",
     "w": "f_rubble",
     "^": "f_rubble",
-    "{": [ "f_vending_o", "f_vending_c_off" ]
+    "{": [ "f_vending_o", "f_vending_c" ]
   },
   "vendingmachines": {
     "U": { "item_group": "vending_drink", "lootable": true },
