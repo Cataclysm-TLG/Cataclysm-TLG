@@ -1259,7 +1259,6 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         }
     }
     bio_flag_cache.clear();
-    // Recalculate stats (strength, mods from pain etc.) that could have been affected
     calc_encumbrance();
 
     // Also reset crafting inventory cache if this bionic spawned a fake item
@@ -1356,7 +1355,6 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
         }
     }
 
-    // Recalculate stats (strength, mods from pain etc.) that could have been affected
     calc_encumbrance();
     if( !bio.id->enchantments.empty() ) {
         recalculate_enchantment_cache();
