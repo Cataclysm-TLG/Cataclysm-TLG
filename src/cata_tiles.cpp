@@ -892,18 +892,11 @@ void tileset_cache::loader::load_layers( const JsonObject &config )
             else if( item.has_array( "context" ) ) {
                 context = item.get_array( "context" ).next_value().get_string();
             }
-
-            if( item.has_string( "append_variants" ) ) {
-                append_suffix = item.get_string( "append_variants" );
-                if( append_suffix.empty() ) {
-                    config.throw_error( "append_variants cannot be empty string" );
-                }
-            }
             std::vector<layer_context_sprites> item_layers;
             std::vector<layer_context_sprites> field_layers;
             if( item.has_array( "item_variants" ) ) {
                 for( const JsonObject vars : item.get_array( "item_variants" ) ) {
-                    if( vars.has_member( "item" ) && vars.has_member( "layer" ) ) {
+                    if( vars.has_member( "item" ) && vars.has_array( "sprite" ) && vars.has_member( "layer" ) ) {
                         layer_context_sprites lcs;
                         lcs.id = vars.get_string( "item" );
 
@@ -916,20 +909,20 @@ void tileset_cache::loader::load_layers( const JsonObject &config )
                             offset.y = vars.get_int( "offset_y" );
                         }
                         lcs.offset = offset;
-                        lcs.append_suffix = append_suffix;
 
                         int total_weight = 0;
-                        if( vars.has_array( "sprite" ) ) {
-                            for( const JsonObject sprites : vars.get_array( "sprite" ) ) {
-                                std::string id = sprites.get_string( "id" );
-                                int weight = sprites.get_int( "weight", 1 );
-                                lcs.sprite.emplace( id, weight );
-                                total_weight += weight;
+                        for( const JsonObject sprites : vars.get_array( "sprite" ) ) {
+                            std::string id = sprites.get_string( "id" );
+                            int weight = sprites.get_int( "weight", 1 );
+                            lcs.sprite.emplace( id, weight );
+                            if( sprites.has_string( "append_variants" ) ) {
+                                lcs.append_variant = sprites.get_string( "append_variants" );
+                                if( lcs.append_variant.empty() ) {
+                                    config.throw_error( "append_variants cannot be empty string" );
+                                }
                             }
-                        } else {
-                            //default if unprovided = item name
-                            lcs.sprite.emplace( lcs.id, 1 );
-                            total_weight = 1;
+
+                            total_weight += weight;
                         }
                         lcs.total_weight = total_weight;
                         item_layers.push_back( lcs );
@@ -3724,6 +3717,9 @@ bool cata_tiles::draw_field_or_item( const tripoint &p, const lit_level ll, int 
 
                         if( i.has_itype_variant() ) {
                             variant = i.itype_variant().id;
+                            if( !layer_var.append_variant.empty() ) {
+                                variant += layer_var.append_variant;
+                            }
                         }
                         if( !layer_var.append_suffix.empty() ) {
                             variant += layer_var.append_suffix;
