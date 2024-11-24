@@ -45,6 +45,7 @@
 #include "flag.h"
 #include "gates.h"
 #include "harvest.h"
+#include "help.h"
 #include "input.h"
 #include "item_action.h"
 #include "item_category.h"
@@ -238,6 +239,8 @@ void DynamicDataLoader::initialize()
 {
     // Initialize loading data that must be in place before any loading functions are called
     init_mapdata();
+    help &h = get_help();
+    h.set_current_order_start();
 
     // all of the applicable types that can be loaded, along with their loading functions
     // Add to this as needed with new StaticFunctionAccessors or new ClassFunctionAccessors for new applicable types
@@ -312,6 +315,9 @@ void DynamicDataLoader::initialize()
     } );
     add( "item_action", []( const JsonObject & jo ) {
         item_action_generator::generator().load_item_action( jo );
+    } );
+    add( "help", [&h]( const JsonObject & jo, const std::string & src ) {
+        h.load( jo, src );
     } );
 
     add( "vehicle_part",  &vehicles::parts::load );
