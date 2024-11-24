@@ -86,6 +86,8 @@ static const itype_id itype_swim_fins( "swim_fins" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
+static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_ITEM_WATERPROOFING( "ITEM_WATERPROOFING" );
 
 static const move_mode_id move_mode_prone( "prone" );
@@ -191,6 +193,10 @@ static bool check_water_affect_items( avatar &you )
 
 bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
 {
+    if( you.has_flag( json_flag_CANNOT_MOVE ) ) {
+        return false;
+    }
+
     bool in_shell = you.has_active_mutation( trait_SHELL2 ) ||
                     you.has_active_mutation( trait_SHELL3 );
     if( ( !g->check_safe_mode_allowed() ) || in_shell ) {
@@ -407,7 +413,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
             g->draw_hit_mon( dest_loc, critter, critter.is_dead() );
             return false;
         } else if( critter.has_flag( mon_flag_IMMOBILE ) || critter.has_effect( effect_harnessed ) ||
-                   critter.has_effect( effect_ridden ) ) {
+                   critter.has_effect( effect_ridden ) || critter.has_flag( json_flag_CANNOT_MOVE ) ) {
             add_msg( m_info, _( "You can't displace your %s." ), critter.name() );
             return false;
         }
@@ -678,6 +684,10 @@ static float rate_critter( const Creature &c )
 
 void avatar_action::autoattack( avatar &you, map &m )
 {
+    if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        add_msg( m_info, _("You are incapable of attacking!" ) );
+        return;
+    }
     const item_location weapon = you.get_wielded_item();
     int reach = weapon ? weapon->reach_range( you ) : std::max( 1,
                 static_cast<int>( you.calculate_by_enchantment( 1, enchant_vals::mod::MELEE_RANGE_MODIFIER ) ) );
@@ -954,6 +964,9 @@ void avatar_action::plthrow( avatar &you, item_location loc,
         return;
     } else if( you.has_effect( effect_incorporeal ) ) {
         add_msg( m_info, _( "You lack the substance to affect anything." ) );
+        return;
+    } else if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        add_msg( m_info, _( "You are incapable of throwing anything!" ) );
         return;
     }
     if( you.is_mounted() ) {

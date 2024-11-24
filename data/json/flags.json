@@ -2567,5 +2567,20 @@
     "id": "PREVENT_TRAINING",
     "type": "json_flag",
     "//": "Effect flag that prevents earning EXP from fighting this creature."
+  },
+  {
+    "id": "CANNOT_ATTACK",
+    "type": "json_flag",
+    "//": "Creatures and players with this flag cannot attack (includes any spellcasting)."
+  },
+  {
+    "id": "CANNOT_MOVE",
+    "type": "json_flag",
+    "//": "Creatures and players with this flag cannot naturally move."
+  },
+  {
+    "id": "CANNOT_TAKE_DAMAGE",
+    "type": "json_flag",
+    "//": "Creatures and players with this flag cannot take damage."
   }
 ]

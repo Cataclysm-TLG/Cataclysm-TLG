@@ -152,6 +152,8 @@ static const gun_mode_id gun_mode_AUTO( "AUTO" );
 static const itype_id itype_120mm_HEAT( "120mm_HEAT" );
 static const itype_id itype_40x46mm_m433( "40x46mm_m433" );
 static const itype_id itype_556( "556" );
+static const flag_id json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
+
 static const itype_id itype_anesthetic( "anesthetic" );
 static const itype_id itype_badge_deputy( "badge_deputy" );
 static const itype_id itype_badge_detective( "badge_detective" );
