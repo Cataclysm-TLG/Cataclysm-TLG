@@ -328,7 +328,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "GEN_DORMANT"
     ],
     "armor": { "electric": 1 }
   },

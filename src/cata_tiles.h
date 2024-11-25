@@ -152,11 +152,13 @@ class layer_context_sprites
     public:
         std::string id;
         std::map<std::string, int> sprite;
-        // Draw order is sorted by layer.
+        //draw order is sorted by layer
         int layer;
         point offset;
         int total_weight;
-        // If set, appends to the "item+variant" name for item variant handling.
+        //if set, appends to the sprite name for handling contexts
+        std::string append_suffix;
+        //if set, appends to the "item+variant" name for item variant handling
         std::string append_variant;
 };
 

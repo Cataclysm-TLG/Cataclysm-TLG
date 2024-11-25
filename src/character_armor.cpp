@@ -271,14 +271,9 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // if this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
     if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
-                pos(), nullptr ) ) {
+                pos_bub(), nullptr ) ) {
         armor.deactivate( nullptr, false );
-        add_msg_if_player( _( "Your %s doesn't have enough power to absorb the blow and shuts down!" ),
-                           armor.tname() );
-    } else if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
-               units::from_kilojoule( du.amount ) < armor.energy_remaining( nullptr, true ) ) {
-        armor.energy_consume( units::from_kilojoule( du.amount ),
-                              pos_bub(), nullptr );
+        add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
     }
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
@@ -312,14 +307,9 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // If this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
     if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
-                pos(), nullptr ) ) {
+                pos_bub(), nullptr ) ) {
         armor.deactivate( nullptr, false );
-        add_msg_if_player( _( "Your %s doesn't have enough power to absorb the blow and shuts down!" ),
-                           armor.tname() );
-    } else if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
-               units::from_kilojoule( du.amount ) < armor.energy_remaining( nullptr, true ) ) {
-        armor.energy_consume( units::from_kilojoule( du.amount ),
-                              pos_bub(), nullptr );
+        add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
     }
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
