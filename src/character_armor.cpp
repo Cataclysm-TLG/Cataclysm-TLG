@@ -273,7 +273,12 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
                 pos(), nullptr ) ) {
         armor.deactivate( nullptr, false );
-        add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
+        add_msg_if_player( _( "Your %s doesn't have enough power to absorb the blow and shuts down!" ),
+                           armor.tname() );
+    } else if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
+               units::from_kilojoule( du.amount ) < armor.energy_remaining( nullptr, true ) ) {
+        armor.energy_consume( units::from_kilojoule( du.amount ),
+                              pos_bub(), nullptr );
     }
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
@@ -309,7 +314,12 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
                 pos(), nullptr ) ) {
         armor.deactivate( nullptr, false );
-        add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
+        add_msg_if_player( _( "Your %s doesn't have enough power to absorb the blow and shuts down!" ),
+                           armor.tname() );
+    } else if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
+               units::from_kilojoule( du.amount ) < armor.energy_remaining( nullptr, true ) ) {
+        armor.energy_consume( units::from_kilojoule( du.amount ),
+                              pos_bub(), nullptr );
     }
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
