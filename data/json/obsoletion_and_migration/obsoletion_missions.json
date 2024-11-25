@@ -33,5 +33,9 @@
     "condition": { "u_has_mission": "MISSION_CAMP_LEADERSHIP_CHANGE" },
     "effect": [ { "remove_active_mission": "MISSION_CAMP_LEADERSHIP_CHANGE" }, { "u_lose_var": "time_of_last_succession" } ],
     "deactivate_condition": { "not": { "u_has_var": "time_of_last_succession", "value": "yes" } }
+  },
+  {
+    "id": "EOC_vitrified_farm_entry",
+    "type": "effect_on_condition"
   }
 ]
