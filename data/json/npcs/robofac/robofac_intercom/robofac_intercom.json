@@ -148,7 +148,7 @@
               "condition": { "math": [ "free_merchants_hub_trade_route", "==", "1" ] },
               "effect": [
                 { "mapgen_update": "nest_robofac_add_free_merchant_camp", "om_terrain": "robofachq_surface_parking" },
-                { "math": [ "free_merchants_hub_trade_route", "=", "2" ] },
+                { "math": [ "free_merchants_hub_trade_route = 2" ] },
                 { "u_add_effect": "robofac_surveillance", "duration": "14 days" }
               ],
               "false_effect": { "u_add_effect": "robofac_surveillance", "duration": "14 days" }
@@ -333,7 +333,7 @@
           ]
         },
         "topic": "TALK_ROBOFAC_INTERCOM_FREE_MERCHANT_DELIVERY_1",
-        "effect": [ { "math": [ "u_talked_to_hub", "=", "1" ] } ]
+        "effect": [ { "math": [ "u_talked_to_hub = 1" ] } ]
       },
       { "text": "Wait, what?", "topic": "TALK_ROBOFAC_INTERCOM_INTRO_SILENCE" },
       { "text": "You do realize that the front door is just open?", "topic": "TALK_ROBOFAC_INTERCOM_INTRO_SILENCE" },
@@ -348,7 +348,7 @@
       {
         "text": "Look, there must be something we can work out.",
         "topic": "TALK_ROBOFAC_INTERCOM_INTRO_2",
-        "effect": [ { "math": [ "u_talked_to_hub", "=", "1" ] } ]
+        "effect": [ { "math": [ "u_talked_to_hub = 1" ] } ]
       },
       { "text": "[Leave.]", "topic": "TALK_DONE" }
     ]

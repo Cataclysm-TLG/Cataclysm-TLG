@@ -203,7 +203,7 @@
       {
         "text": "I'd better get going.",
         "topic": "TALK_DONE",
-        "condition": { "and": [ { "not": { "u_is_wearing": "badge_marshal" } }, { "math": [ "isherwood_barry_rescued", "!=", "1" ] } ] }
+        "condition": { "and": [ { "not": { "u_is_wearing": "badge_marshal" } }, { "math": [ "isherwood_barry_rescued != 1" ] } ] }
       }
     ]
   },
