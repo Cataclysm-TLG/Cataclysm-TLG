@@ -2667,7 +2667,7 @@ class Character : public Creature, public visitable
         bool immune_to( const bodypart_id &bp, damage_unit dam ) const;
 
         /** Modifies a pain value by player traits before passing it to Creature::mod_pain() */
-        void mod_pain( int npain ) override;
+        int mod_pain( int npain ) override;
         /** Returns a value used to cap pain from injury to this body part. 300 is a magic
          * number for now, but should eventually become the cap for pain overall. */
         int max_injury_pain( bodypart_id part );
