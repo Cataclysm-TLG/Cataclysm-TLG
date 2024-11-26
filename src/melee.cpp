@@ -122,6 +122,7 @@ static const itype_id itype_sheet_cotton( "sheet_cotton" );
 
 static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
+static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
 static const json_character_flag json_flag_CBQ_LEARN_BONUS( "CBQ_LEARN_BONUS" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_GRAB_FILTER( "GRAB_FILTER" );
@@ -679,6 +680,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                  !t.is_hallucination() &&
                                  ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) &&
                                  !t.has_flag( mon_flag_NO_TRAIN ) &&
+                                 !t.has_effect_with_flag( json_flag_CANNOT_MOVE ) &&
+                                 !t.has_effect_with_flag( json_flag_CANNOT_TAKE_DAMAGE ) &&
                                  !t.has_effect_with_flag( json_flag_PREVENT_TRAINING ) &&
                                  t.times_combatted_player <= 50;
     Character &player_character = get_player_character();
