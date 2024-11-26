@@ -6,6 +6,7 @@
       [ "rock", 80 ],
       [ "rock_flaking", 80 ],
       [ "stick", 80 ],
+      [ "stick_long", 10 ],
       [ "acorns", 80 ],
       [ "pinecone", 80 ],
       { "item": "withered", "prob": 80, "count": [ 1, 10 ] },
