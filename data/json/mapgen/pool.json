@@ -147,7 +147,7 @@
       ],
       "place_toilets": [ { "x": 2, "y": 3 }, { "x": 4, "y": 3 }, { "x": 19, "y": 3 }, { "x": 21, "y": 3 } ],
       "place_monster": [ { "group": "GROUP_MAPGEN_POOL", "x": [ 4, 19 ], "y": [ 11, 19 ], "repeat": [ 2, 6 ] } ],
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "ssssssssssssssssssssssss",
         "ssssssssssssssssssssssss",
@@ -174,14 +174,14 @@
         " ---------------------- ",
         "                        "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         "b": "t_concrete",
         "+": [ "t_door_o", "t_door_c" ],
         "-": "t_chainfence",
         ".": "t_concrete",
         " ": "t_region_groundcover_urban",
-        "f": "t_linoleum_gray",
+        "f": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "r": "t_reinforced_door_glass_c",
         "s": "t_sidewalk",
         "w": "t_water_pool",
@@ -267,7 +267,7 @@
       ],
       "place_toilets": [ { "x": 6, "y": 3 }, { "x": 8, "y": 3 }, { "x": 15, "y": 3 }, { "x": 17, "y": 3 } ],
       "place_monster": [ { "group": "GROUP_MAPGEN_POOL", "x": [ 5, 18 ], "y": [ 5, 18 ], "repeat": [ 2, 6 ] } ],
-      "fill_ter": "t_linoleum_white",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
       "rows": [
         "ssssssssssssssssssssssss",
         "ssssssssssssssssssssssss",
@@ -294,7 +294,7 @@
         " ###################### ",
         "                     4  "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         "B": "t_thconc_floor",
         "+": [ "t_door_o", "t_door_c" ],
@@ -304,7 +304,7 @@
         "S": "t_thconc_floor",
         " ": "t_region_groundcover_urban",
         "a": "t_thconc_floor",
-        "f": "t_linoleum_white",
+        "f": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "r": "t_reinforced_door_glass_c",
         "s": "t_sidewalk",
         "4": "t_gutter_downspout",
@@ -373,7 +373,7 @@
         { "chance": 15, "repeat": [ 1, 4 ], "item": "clothing_male", "x": 18, "y": 21 }
       ],
       "place_toilets": [ { "x": 2, "y": 19 }, { "x": 2, "y": 21 }, { "x": 21, "y": 19 }, { "x": 21, "y": 21 } ],
-      "fill_ter": "t_linoleum_white",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
       "rows": [
         "ssssssssssssssssssssssss",
         "ssssssssssssssssssssssss",
@@ -400,7 +400,7 @@
         " ###################### ",
         "                     4  "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         "+": "t_door_metal_c",
         "-": "t_wall_glass",
@@ -410,7 +410,7 @@
         " ": "t_region_groundcover_urban",
         "a": "t_door_c",
         "b": "t_thconc_floor",
-        "f": "t_linoleum_white",
+        "f": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "s": "t_sidewalk",
         "t": "t_thconc_floor",
         "4": "t_gutter_downspout",
@@ -492,7 +492,7 @@
       ],
       "place_toilets": [ { "x": 6, "y": 3 }, { "x": 8, "y": 3 }, { "x": 15, "y": 3 }, { "x": 17, "y": 3 } ],
       "place_monster": [ { "group": "GROUP_MAPGEN_POOL", "x": [ 6, 17 ], "y": [ 11, 17 ], "repeat": [ 2, 6 ] } ],
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "           ss           ",
         "           ss           ",
@@ -519,7 +519,7 @@
         "   4                    ",
         "                        "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         "B": "t_thconc_floor",
         "+": [ "t_door_o", "t_door_c" ],
@@ -528,7 +528,7 @@
         "P": "t_thconc_floor",
         "W": "t_wall_glass",
         "_": "t_thconc_floor",
-        "f": "t_linoleum_gray",
+        "f": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "r": "t_reinforced_door_glass_c",
         "s": "t_sidewalk",
         "t": "t_thconc_floor",
