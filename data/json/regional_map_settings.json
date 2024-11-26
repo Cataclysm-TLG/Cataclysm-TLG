@@ -81,7 +81,8 @@
           "t_shrub_rose": 8,
           "t_shrub_hydrangea": 20,
           "t_shrub_lilac": 20,
-          "t_shrub_chokeberry": 8,
+          "t_shrub_chokeberry": 3,
+          "t_tree_nannyberry": 3,
           "t_bamboo_long": 5
         },
         "t_region_shrub": { "t_region_shrub_decorative": 60, "t_underbrush": 16, "t_region_shrub_fruit": 2 },
@@ -119,6 +120,7 @@
           "t_tree_peach": 1,
           "t_tree_pear": 1,
           "t_tree_elderberry": 2,
+          "t_tree_nannyberry": 2,
           "t_tree_mulberry": 2,
           "t_tree_sassafras": 2,
           "t_tree_juniper": 5,
@@ -159,6 +161,7 @@
           "t_tree_pear": 1,
           "t_tree_plum": 1,
           "t_tree_elderberry": 2,
+          "t_tree_nannyberry": 2,
           "t_tree_mulberry": 2,
           "t_tree_sassafras": 3,
           "t_tree_deadpine": 120,
@@ -198,6 +201,7 @@
           "t_tree_pear": 2,
           "t_tree_plum": 2,
           "t_tree_elderberry": 2,
+          "t_tree_nannyberry": 2,
           "t_tree_mulberry": 2,
           "t_tree_dead": 45,
           "t_tree_very_dead": 16
@@ -521,6 +525,7 @@
               "t_tree_pear": 1,
               "t_tree_plum": 1,
               "t_tree_elderberry": 2,
+              "t_tree_nannyberry": 10,
               "t_tree_mulberry": 2,
               "t_tree_sassafras": 3,
               "t_region_tree_dead": 130
