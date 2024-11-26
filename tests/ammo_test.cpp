@@ -227,39 +227,49 @@ TEST_CASE( "battery_energy_test", "[ammo][energy][item]" )
     test_battery.ammo_set( test_battery.ammo_default(), 300 );
 
     SECTION( "Integer drain from battery" ) {
-        REQUIRE( test_battery.energy_remaining( nullptr ) == 300_kJ );
-        units::energy consumed = test_battery.energy_consume( 200_kJ, tripoint_zero, nullptr );
-        CHECK( test_battery.energy_remaining( nullptr ) == 100_kJ );
-        CHECK( consumed == 200_kJ );
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        units::energy consumed = test_battery.energy_consume( 40_kJ, tripoint::zero, nullptr );
+        CHECK( test_battery.energy_remaining( nullptr ) == 16_kJ );
+        CHECK( consumed == 40_kJ );
     }
 
     SECTION( "Integer over-drain from battery" ) {
-        REQUIRE( test_battery.energy_remaining( nullptr ) == 300_kJ );
-        units::energy consumed = test_battery.energy_consume( 400_kJ, tripoint_zero, nullptr );
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        units::energy consumed = test_battery.energy_consume( 400_kJ, tripoint::zero, nullptr );
         CHECK( test_battery.energy_remaining( nullptr ) == 0_kJ );
         CHECK( consumed == 300_kJ );
     }
 
     SECTION( "Non-integer drain from battery" ) {
-        // Battery charge is in chunks of kj. Non integer kj drain is rounded up.
-        // 4.5 kJ drain becomes 5 kJ drain
-        REQUIRE( test_battery.energy_remaining( nullptr ) == 300_kJ );
-        units::energy consumed = test_battery.energy_consume( 4500_J, tripoint_zero, nullptr );
-        CHECK( test_battery.energy_remaining( nullptr ) == 295_kJ );
-        CHECK( consumed == 5_kJ );
+        // Battery charge is in mJ now, so check for precise numbers.
+        // 4.5 kJ drain is 4.5 kJ drain
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        units::energy consumed = test_battery.energy_consume( 4500_J, tripoint::zero, nullptr );
+        CHECK( test_battery.energy_remaining( nullptr ) == 51.5_kJ );
+        CHECK( consumed == 4500_J );
+    }
+
+    SECTION( "Tiny Non-integer drain from battery" ) {
+        // Make sure lots of tiny discharges sum up as expected.
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        for( int i = 0; i < 133; ++i ) {
+            units::energy consumed = test_battery.energy_consume( 2_J, tripoint::zero, nullptr );
+            CHECK( consumed == 2_J );
+        }
+        CHECK( test_battery.energy_remaining( nullptr ) == 55734_J );
     }
 
     SECTION( "Non-integer over-drain from battery" ) {
-        REQUIRE( test_battery.energy_remaining( nullptr ) == 300_kJ );
-        units::energy consumed = test_battery.energy_consume( 500500_J, tripoint_zero, nullptr );
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        units::energy consumed = test_battery.energy_consume( 500500_J, tripoint::zero, nullptr );
         CHECK( test_battery.energy_remaining( nullptr ) == 0_kJ );
         CHECK( consumed == 300_kJ );
     }
 
     SECTION( "zero drain from battery" ) {
-        REQUIRE( test_battery.energy_remaining( nullptr ) == 300_kJ );
-        units::energy consumed = test_battery.energy_consume( 0_J, tripoint_zero, nullptr );
-        CHECK( test_battery.energy_remaining( nullptr ) == 300_kJ );
+        REQUIRE( test_battery.energy_remaining( nullptr ) == 56_kJ );
+        units::energy consumed = test_battery.energy_consume( 0_J, tripoint::zero, nullptr );
+        CHECK( test_battery.energy_remaining( nullptr ) == 56_kJ );
         CHECK( consumed == 0_kJ );
     }
 

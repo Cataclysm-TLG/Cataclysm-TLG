@@ -501,7 +501,7 @@ std::vector<tripoint> map::route( const tripoint &f, const tripoint &t,
                 const trap &trp = ter_trp.is_benign() ? tile.get_trap_t() : ter_trp;
                 if( !trp.is_benign() && terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) ) {
                     // Warning: really expensive, needs a cache
-                    tripoint_bub_ms below( p + tripoint_below );
+                    tripoint_bub_ms below( p + tripoint::below );
                     if( valid_move( p, below, false, true ) ) {
                         if( !has_flag( ter_furn_flag::TFLAG_NO_FLOOR, below ) ) {
                             // Otherwise this would have been a huge fall
@@ -569,7 +569,7 @@ std::vector<tripoint> map::route( const tripoint &f, const tripoint &t,
             }
         }
         if( cur.z() < max.z() && parent_terrain.has_flag( ter_furn_flag::TFLAG_RAMP ) &&
-            valid_move( cur, cur + tripoint_above, false, true ) ) {
+            valid_move( cur, cur + tripoint::above, false, true ) ) {
             path_data_layer &layer = pf.get_layer( cur.z() + 1 );
             for( size_t it = 0; it < 8; it++ ) {
                 const tripoint_bub_ms above( cur.x() + x_offset[it], cur.y() + y_offset[it], cur.z() + 1 );
@@ -582,7 +582,7 @@ std::vector<tripoint> map::route( const tripoint &f, const tripoint &t,
             }
         }
         if( cur.z() < max.z() && parent_terrain.has_flag( ter_furn_flag::TFLAG_RAMP_UP ) &&
-            valid_move( cur, cur + tripoint_above, false, true, true ) ) {
+            valid_move( cur, cur + tripoint::above, false, true, true ) ) {
             path_data_layer &layer = pf.get_layer( cur.z() + 1 );
             for( size_t it = 0; it < 8; it++ ) {
                 const tripoint_bub_ms above( cur.x() + x_offset[it], cur.y() + y_offset[it], cur.z() + 1 );
@@ -595,7 +595,7 @@ std::vector<tripoint> map::route( const tripoint &f, const tripoint &t,
             }
         }
         if( cur.z() > min.z() && parent_terrain.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN ) &&
-            valid_move( cur, cur + tripoint_below, false, true, true ) ) {
+            valid_move( cur, cur + tripoint::below, false, true, true ) ) {
             path_data_layer &layer = pf.get_layer( cur.z() - 1 );
             for( size_t it = 0; it < 8; it++ ) {
                 const tripoint_bub_ms below( cur.x() + x_offset[it], cur.y() + y_offset[it], cur.z() - 1 );

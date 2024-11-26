@@ -1126,10 +1126,10 @@ static ret_val<tripoint_bub_ms> check_deploy_square( Character *p, item &it,
     map &here = get_map();
 
     tripoint_bub_ms where = pnt;
-    tripoint_bub_ms below = pnt + tripoint_below;
+    tripoint_bub_ms below = pnt + tripoint::below;
     while( here.valid_move( where, below, false, true ) ) {
-        where += tripoint_below;
-        below += tripoint_below;
+        where += tripoint::below;
+        below += tripoint::below;
     }
 
     const int height = pnt.z() - where.z();
@@ -3889,10 +3889,10 @@ bool place_trap_actor::is_allowed( Character &p, const tripoint_bub_ms &pos,
         return false;
     }
     if( needs_solid_neighbor ) {
-        if( !is_solid_neighbor( pos, point_rel_ms_east ) &&
-            !is_solid_neighbor( pos, point_rel_ms_south ) &&
-            !is_solid_neighbor( pos, point_rel_ms_south_east ) &&
-            !is_solid_neighbor( pos, point_rel_ms_north_east ) ) {
+        if( !is_solid_neighbor( pos, point_rel_ms::east ) &&
+            !is_solid_neighbor( pos, point_rel_ms::south ) &&
+            !is_solid_neighbor( pos, point_rel_ms::south_east ) &&
+            !is_solid_neighbor( pos, point_rel_ms::north_east ) ) {
             p.add_msg_if_player( m_info, _( "You must place the %s between two solid tiles." ), name );
             return false;
         }

@@ -4,7 +4,6 @@
 #include <cstdlib>
 
 #include "avatar.h"
-#include "coordinate_constants.h"
 #include "debug.h"
 #include "map.h"
 #include "messages.h"
@@ -169,7 +168,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         units::angle turn = normalize( mdir.dir() - grabbed_vehicle->face.dir() );
         if( grabbed_vehicle->is_on_ramp && turn == 180_degrees ) {
             add_msg( m_bad, _( "The %s can't be turned around while on a ramp." ), grabbed_vehicle->name );
-            return tripoint_rel_ms_zero;
+            return tripoint_rel_ms::zero;
         }
         grabbed_vehicle->turn( turn );
         grabbed_vehicle->face = tileray( grabbed_vehicle->turn_dir );
@@ -185,32 +184,36 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 
         // Set player location to illegal value so it can't collide with vehicle.
         const tripoint player_prev = u.pos();
-        u.setpos( tripoint_zero );
+        u.setpos( tripoint::zero );
         std::vector<veh_collision> colls;
         const bool failed = grabbed_vehicle->collision( colls, actual_dir, true );
         u.setpos( player_prev );
         if( !colls.empty() ) {
             blocker_name = colls.front().target_name;
         }
-        return failed ? tripoint_rel_ms_zero : actual_dir;
+
+        return failed ? tripoint_rel_ms::invalid : actual_dir;
     };
 
     // First try the move as intended
     // But if that fails and the move is a zig-zag, try to recover:
     // Try to place the vehicle in the position player just left rather than "flattening" the zig-zag
     tripoint_rel_ms final_dp_veh = get_move_dir( dp_veh, next_grab );
-    if( final_dp_veh == tripoint_rel_ms_min && zigzag ) {
+    if( final_dp_veh == tripoint_rel_ms::invalid && zigzag ) {
         final_dp_veh = get_move_dir( - prev_grab, - dp );
         next_grab = - dp;
     }
 
-    if( final_dp_veh == tripoint_rel_ms_zero ) {
+    if( final_dp_veh == tripoint_rel_ms::invalid ) {
         add_msg( _( "The %s collides with %s." ), grabbed_vehicle->name, blocker_name );
         u.grab_point = prev_grab;
         return true;
     }
 
-    u.grab_point = next_grab;
+    //if grab was already released, do not set grab again
+    if( u.grab_point != tripoint_rel_ms::zero ) {
+        u.grab_point = next_grab;
+    }
 
     m.displace_vehicle( *grabbed_vehicle, final_dp_veh );
     m.rebuild_vehicle_level_caches();
@@ -221,6 +224,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         if( grabbed_vehicle->is_falling ) {
             add_msg( _( "You let go of the %1$s as it starts to fall." ), grabbed_vehicle->disp_name() );
             u.grab( object_type::NONE );
+            u.grab_point = tripoint_rel_ms::zero;
             m.set_seen_cache_dirty( grabbed_vehicle->pos_bub() );
             return true;
         }
