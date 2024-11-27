@@ -2582,5 +2582,9 @@
     "id": "CANNOT_TAKE_DAMAGE",
     "type": "json_flag",
     "//": "Creatures and players with this flag cannot take damage."
+  },
+  {
+    "id": "CANNOT_CHANGE_TEMPERATURE",
+    "type": "json_flag"
   }
 ]

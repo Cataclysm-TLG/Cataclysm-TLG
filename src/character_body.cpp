@@ -88,6 +88,7 @@ static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_wet( "wet" );
 
 static const json_character_flag json_flag_BARKY( "BARKY" );
+static const json_character_flag json_flag_CANNOT_CHANGE_TEMPERATURE( "CANNOT_CHANGE_TEMPERATURE" );
 static const json_character_flag json_flag_COLDBLOOD( "COLDBLOOD" );
 static const json_character_flag json_flag_COLDBLOOD2( "COLDBLOOD2" );
 static const json_character_flag json_flag_COLDBLOOD3( "COLDBLOOD3" );
@@ -436,6 +437,9 @@ void Character::update_bodytemp()
     if( has_trait( trait_DEBUG_NOTEMP ) ) {
         set_all_parts_temp_conv( BODYTEMP_NORM );
         set_all_parts_temp_cur( BODYTEMP_NORM );
+        return;
+    }
+    if( has_flag( json_flag_CANNOT_CHANGE_TEMPERATURE ) ) {
         return;
     }
     weather_manager &weather_man = get_weather();
