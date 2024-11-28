@@ -1795,9 +1795,15 @@ static bool try_travel_to_destination( avatar &player_character, const tripoint_
                                        const tripoint_abs_omt dest, const bool driving )
 {
     std::vector<tripoint_abs_omt> path = get_overmap_path_to( dest, driving );
+    if( path.empty() ) {
+    debugmsg( "try_travel_to_destination: no path returned to dest %s ( driving = %d )",
+              dest.to_string(), driving );
+    return false;
+    }
     bool dest_is_curs = curs == dest;
     bool path_changed = false;
-    if( path.front() == player_character.omt_path.front() && path != player_character.omt_path ) {
+    if( !path.empty() && !player_character.omt_path.empty() && 
+        path.front() == player_character.omt_path.front() && path != player_character.omt_path ) {
         // the player is trying to go to their existing destination but the path has changed
         path_changed = true;
         player_character.omt_path.swap( path );
