@@ -1551,11 +1551,7 @@ int Character::compute_calories_per_effective_volume( const item &food,
         return 0;
     }
     units::volume water_volume = masticated_volume( food ).first;
-<<<<<<< HEAD
     units::volume dry_volume = masticated_volume( food ).second;
-=======
-    units::volume dry_volume = masticated_volume( food ).second;    
->>>>>>> Audit `satiety.
     // Water is digested more quickly than solid mass, see get_digest_rates().
     // stomach_ratio is 0.278 for a default character, will be higher for mutants.
     const double stomach_ratio = stomach.capacity( *this ) / ( 36.000 * 250_ml );

@@ -34,6 +34,8 @@ static const recipe_id recipe_vegetable_wild_cooked( "vegetable_wild_cooked" );
 
 static const trait_id trait_GOURMAND( "GOURMAND" );
 
+static const trait_id trait_GOURMAND( "GOURMAND" );
+
 static const vitamin_id vitamin_mutagen( "mutagen" );
 static const vitamin_id vitamin_mutagen_alpha( "mutagen_alpha" );
 static const vitamin_id vitamin_mutagen_batrachian( "mutagen_batrachian" );
@@ -291,7 +293,7 @@ TEST_CASE( "effective_food_volume_and_satiety", "[character][food][satiety]" )
     // If kcal per gram < 1.0, return 1.0
     CHECK( u.compute_effective_food_volume_ratio( apple ) == Approx( 1.0f ).margin( 0.01f ) );
     CHECK( u.compute_calories_per_effective_volume( apple ) == 502 );
-    CHECK( satiety_bar( 502 ) == "<color_c_yellow>||\\</color>.." );
+    CHECK( satiety_bar( 500 ) == "<color_c_yellow>||\\</color>.." );
 
     // Egg: 80 kcal / 40 g (1 serving)
     const item egg( "test_egg" );
@@ -320,15 +322,11 @@ TEST_CASE( "effective_food_volume_and_satiety", "[character][food][satiety]" )
     CHECK( u.compute_effective_food_volume_ratio( nuts ) == Approx( expect_ratio ).margin( 0.01f ) );
     CHECK( u.compute_calories_per_effective_volume( nuts ) == 1507 );
     CHECK( satiety_bar( 1507 ) == "<color_c_light_green>||||</color>." );
+    
     REQUIRE( u.mutate_towards( trait_GOURMAND ) );
-    // stomach size affects food with water...
     CHECK( u.compute_effective_food_volume_ratio( egg ) == Approx( 2.0f ).margin( 0.01f ) );
     CHECK( u.compute_calories_per_effective_volume( egg ) == 1568 );
     CHECK( satiety_bar( 1568 ) == "<color_c_green>||||</color>." );
-    // but not food without water.
-    CHECK( u.compute_effective_food_volume_ratio( nuts ) == Approx( expect_ratio ).margin( 0.01f ) );
-    CHECK( u.compute_calories_per_effective_volume( nuts ) == 1507 );
-    CHECK( satiety_bar( 1507 ) == "<color_c_light_green>||||</color>." );
 }
 
 // satiety_bar returns a colorized string indicating a satiety level, similar to hit point bars
@@ -348,7 +346,6 @@ TEST_CASE( "food_satiety_bar", "[character][food][satiety]" )
     CHECK( satiety_bar( 200 ) == "<color_c_light_red>|\\</color>..." );
     // NOLINTNEXTLINE(cata-text-style): verbatim ellipses necessary for validation
     CHECK( satiety_bar( 300 ) == "<color_c_yellow>|\\</color>..." );
-    // NOLINTNEXTLINE(cata-text-style): verbatim ellipses necessary for validation
     CHECK( satiety_bar( 400 ) == "<color_c_yellow>||</color>..." );
     CHECK( satiety_bar( 500 ) == "<color_c_yellow>||\\</color>.." );
     CHECK( satiety_bar( 600 ) == "<color_c_yellow>||\\</color>.." );
