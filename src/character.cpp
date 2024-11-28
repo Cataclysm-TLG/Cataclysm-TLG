@@ -5997,7 +5997,7 @@ void Character::toolmod_add( item_location tool, item_location mod )
 
 void Character::temp_equalizer( const bodypart_id &bp1, const bodypart_id &bp2 )
 {
-    if (has_flag( json_flag_CANNOT_CHANGE_TEMPERATURE ) ) {
+    if( has_flag( json_flag_CANNOT_CHANGE_TEMPERATURE ) ) {
         return;
     }
     // Body heat is moved around.
@@ -8531,7 +8531,8 @@ void Character::on_hit( Creature *source, bodypart_id bp_hit,
 void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
                               const bool bypass_med )
 {
-    if( is_dead_state() || has_effect( effect_incorporeal ) || has_flag( json_flag_CANNOT_TAKE_DAMAGE) ) {
+    if( is_dead_state() || has_effect( effect_incorporeal ) ||
+        has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
         // don't do any more damage if we're already dead
         // Or if we're debugging and don't want to die
         // Or we are intangible
@@ -8555,10 +8556,12 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 
     mod_part_hp_cur( part_to_damage, - dam_to_bodypart );
     if( source ) {
-        cata::event e = cata::event::make<event_type::character_takes_damage>( getID(), dam_to_bodypart, part_to_damage.id(), pain );
+        cata::event e = cata::event::make<event_type::character_takes_damage>( getID(), dam_to_bodypart,
+                        part_to_damage.id(), pain );
         get_event_bus().send_with_talker( this, source, e );
     } else {
-        get_event_bus().send<event_type::character_takes_damage>( getID(), dam_to_bodypart, part_to_damage.id(), pain );
+        get_event_bus().send<event_type::character_takes_damage>( getID(), dam_to_bodypart,
+                part_to_damage.id(), pain );
     }
 
     // Cap and scale our pain based on how injured our body part actually is.
@@ -8775,7 +8778,7 @@ void Character::healall( int dam )
 void Character::hurtall( int dam, Creature *source, bool disturb /*= true*/ )
 {
     if( is_dead_state() || has_effect( effect_incorporeal ) ||
-        dam <= 0 || has_flag( json_flag_CANNOT_TAKE_DAMAGE) ) {
+        dam <= 0 || has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
         return;
     }
 
@@ -8789,10 +8792,12 @@ void Character::hurtall( int dam, Creature *source, bool disturb /*= true*/ )
         mod_part_hp_cur( bp, - dam_to_bodypart );
 
         if( source ) {
-            cata::event e = cata::event::make<event_type::character_takes_damage>( getID(), dam_to_bodypart, bp.id(), pain / body_parts.size() );
+            cata::event e = cata::event::make<event_type::character_takes_damage>( getID(), dam_to_bodypart,
+                            bp.id(), pain / body_parts.size() );
             get_event_bus().send_with_talker( this, source == nullptr ? nullptr : source, e );
         } else {
-            get_event_bus().send<event_type::character_takes_damage>( getID(), dam_to_bodypart, bp.id(), pain / body_parts.size() );
+            get_event_bus().send<event_type::character_takes_damage>( getID(), dam_to_bodypart, bp.id(),
+                    pain / body_parts.size() );
         }
 
     }
@@ -11025,7 +11030,8 @@ void Character::echo_pulse()
                 }
             }
             // It's not moving. Must be an obstacle
-            if( critter->has_flag( mon_flag_IMMOBILE ) || critter->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
+            if( critter->has_flag( mon_flag_IMMOBILE ) ||
+                critter->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
                 echo_string = _( "click." );
             }
             sounds::sound( origin, echo_volume, sounds::sound_t::sensory, _( echo_string ), false,
@@ -12896,7 +12902,7 @@ int Character::get_lift_assist() const
 bool Character::immune_to( const bodypart_id &bp, damage_unit dam ) const
 {
     if( is_immune_damage( dam.type ) ||
-        has_effect( effect_incorporeal ) || has_flag( json_flag_CANNOT_TAKE_DAMAGE) ) {
+        has_effect( effect_incorporeal ) || has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
         return true;
     }
 

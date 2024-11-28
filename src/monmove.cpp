@@ -894,14 +894,14 @@ void monster::move()
                 continue;
             }
 
-            // `special_attacks` might have changed at this point. Sadly `reset_special`
-            // doesn't check the attack name, so we need to do it here.
-            if( special_attacks.count( special_name ) == 0 ) {
-                continue;
+                // `special_attacks` might have changed at this point. Sadly `reset_special`
+                // doesn't check the attack name, so we need to do it here.
+                if( special_attacks.count( special_name ) == 0 ) {
+                    continue;
+                }
+                reset_special( special_name );
             }
-            reset_special( special_name );
         }
-    }
     }
 
     // Check if they're dragging a foe and find their hapless victim
@@ -2082,7 +2082,8 @@ bool monster::push_to( const tripoint &p, const int boost, const size_t depth )
         return false;
     }
 
-    if( !has_flag( mon_flag_PUSH_MON ) || depth > 2 || has_effect( effect_pushed ) || has_flag( json_flag_CANNOT_ATTACK ) ) {
+    if( !has_flag( mon_flag_PUSH_MON ) || depth > 2 || has_effect( effect_pushed ) ||
+        has_flag( json_flag_CANNOT_ATTACK ) ) {
         return false;
     }
 
@@ -2353,7 +2354,8 @@ bool monster::will_reach( const point &p )
         return false;
     }
 
-    if( ( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) || has_flag( json_flag_CANNOT_MOVE ) ) &&
+    if( ( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+          has_flag( json_flag_CANNOT_MOVE ) ) &&
         ( pos().xy() != p ) ) {
         return false;
     }

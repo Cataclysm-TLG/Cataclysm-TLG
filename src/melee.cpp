@@ -558,7 +558,7 @@ bool Character::melee_attack( Creature &t, bool allow_special, const matec_id &f
                               bool allow_unarmed, int forced_movecost )
 {
     if( has_flag( json_flag_CANNOT_ATTACK ) ) {
-        add_msg_if_player( m_info, _("You are incapable of attacking!" ) );
+        add_msg_if_player( m_info, _( "You are incapable of attacking!" ) );
         return false;
     }
     if( has_effect( effect_incorporeal ) ) {
@@ -1961,7 +1961,8 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         }
     }
 
-    if( technique.side_switch && !(t.has_flag( mon_flag_IMMOBILE ) || t.has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
+    if( technique.side_switch && !( t.has_flag( mon_flag_IMMOBILE ) ||
+                                    t.has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
         const tripoint b = t.pos();
         point new_;
 
@@ -1987,7 +1988,8 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         }
     }
     map &here = get_map();
-    if( technique.knockback_dist && !( t.has_flag( mon_flag_IMMOBILE ) || t.has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
+    if( technique.knockback_dist && !( t.has_flag( mon_flag_IMMOBILE ) ||
+                                       t.has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
         const tripoint_bub_ms prev_pos = t.pos_bub(); // track target startpoint for knockback_follow
         const point kb_offset( rng( -technique.knockback_spread, technique.knockback_spread ),
                                rng( -technique.knockback_spread, technique.knockback_spread ) );
