@@ -1546,14 +1546,16 @@ int Character::compute_calories_per_effective_volume( const item &food,
     } else {
         kcalories = compute_effective_nutrients( food ).kcal();
     }
-    double food_vol = round_up( units::to_liter( masticated_volume( food ).second ), 2 );
-    const double energy_density_ratio = compute_effective_food_volume_ratio( food );
-    const double effective_volume = food_vol * energy_density_ratio;
-    if( kcalories == 0 && effective_volume == 0.0 ) {
+    if( kcalories == 0 ) {
+        // Quick bail out if it does not cotain any energy.
         return 0;
     }
     units::volume water_volume = masticated_volume( food ).first;
+<<<<<<< HEAD
     units::volume dry_volume = masticated_volume( food ).second;
+=======
+    units::volume dry_volume = masticated_volume( food ).second;    
+>>>>>>> Audit `satiety.
     // Water is digested more quickly than solid mass, see get_digest_rates().
     // stomach_ratio is 0.278 for a default character, will be higher for mutants.
     const double stomach_ratio = stomach.capacity( *this ) / ( 36.000 * 250_ml );
