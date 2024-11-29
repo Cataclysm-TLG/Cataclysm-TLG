@@ -48,10 +48,11 @@
           "t_shrub_strawberry": 1,
           "t_shrub_grape": 1
         },
-        "t_region_shrub_forest": { "t_region_shrub_forest_dense": 100, "t_shrub_rose": 1, "t_shrub_blackberry": 1 },
+        "t_region_shrub_forest": { "t_region_shrub_forest_dense": 65, "t_shrub_rose": 1, "t_shrub_blackberry": 2, "t_shrub_autumn_olive": 1 },
         "t_region_shrub_plains": {
-          "t_shrub": 60,
+          "t_shrub": 15,
           "t_shrub_blueberry": 1,
+          "t_shrub_autumn_olive": 1,
           "t_shrub_blackberry": 2,
           "t_shrub_rose": 1,
           "t_shrub_huckleberry": 1,
