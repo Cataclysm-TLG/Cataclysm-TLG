@@ -3013,7 +3013,6 @@ void monster::generate_inventory( bool disableDrops )
     if( type->death_drops.is_empty() ) {
         return;
     }
-
     std::vector<item> new_items = item_group::items_from( type->death_drops,
                                   calendar::fall_of_civilization,
                                   spawn_flags::use_spawn_rate );
