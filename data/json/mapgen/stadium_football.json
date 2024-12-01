@@ -489,10 +489,6 @@
         "s____│││││#######│││~││││││#######││V││****************************││V││__s_s_s_s_s__s_s_s_s_s__││V││****************************││V││#######││││~~││││#######│││││____s"
       ],
       "palettes": [ "stadium_palette" ],
-      "sealed_item": {
-        "v": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" },
-        "w": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" }
-      },
       "terrain": {
         "#": "t_door_metal_locked",
         "6": "t_gates_mech_control_lab",
@@ -511,7 +507,7 @@
         "/": "t_thconc_floor",
         "A": "t_thconc_floor"
       },
-      "furniture": { "H": "f_camp_chair", "M": "f_metal_bench", "/": "f_canvas_door" },
+      "furniture": { "H": "f_camp_chair", "M": "f_metal_bench", "/": "f_canvas_door", "v": "f_hedge_short", "w": "f_hedge_short" },
       "items": {
         "E": { "item": "softdrinks_canned", "chance": 40, "repeat": [ 1, 10 ] },
         "r": { "item": "football_souvenir", "chance": 80 },

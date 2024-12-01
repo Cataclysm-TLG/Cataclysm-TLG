@@ -47,6 +47,20 @@
   },
   {
     "type": "furniture",
+    "id": "f_plant_dead",
+    "name": "dead plant",
+    "description": "This plant has joined the billions lost in the Cataclysm, and is now little more than a dry stalk.",
+    "symbol": "f",
+    "color": "brown",
+    "move_cost_mod": 0,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC", "SHORT", "GRAZER_INEDIBLE" ],
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "plant_dead_harv" } ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." }
+  },
+  {
+    "type": "furniture",
     "id": "f_carrot_wild",
     "name": "wild carrot",
     "description": "A common white wildflower which could be harvested for its root.",

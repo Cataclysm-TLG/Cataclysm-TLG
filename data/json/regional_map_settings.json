@@ -214,6 +214,7 @@
           "f_lily": 100,
           "f_flower_tulip": 100,
           "f_flower_spurge": 100,
+          "f_plant_dead": 100,
           "f_chamomile": 100,
           "f_dandelion": 100,
           "f_dahlia": 100,
@@ -229,6 +230,7 @@
           "f_fireweed": 1,
           "f_flower_spurge": 1,
           "f_dahlia": 1,
+          "f_plant_dead": 3,
           "f_salsify": 1,
           "f_chicory": 1,
           "f_sunflower": 1
@@ -242,6 +244,7 @@
           "f_salsify": 300,
           "f_datura": 300,
           "f_japanese_knotweed": 300,
+          "f_plant_dead": 200,
           "f_bluebell": 200,
           "f_dahlia": 100,
           "f_lily": 100,
@@ -257,6 +260,7 @@
           "f_datura": 300,
           "f_thistle": 300,
           "f_japanese_knotweed": 200,
+          "f_plant_dead": 300,
           "f_dahlia": 200,
           "f_maianthemum_stellatum": 200,
           "f_mutpoppy": 200,
@@ -283,6 +287,7 @@
           "f_dahlia": 200,
           "f_mutpoppy": 100,
           "f_maianthemum_stellatum": 100,
+          "f_plant_dead": 100,
           "f_wintergreen": 100,
           "f_dogbane": 80
         },
@@ -291,6 +296,7 @@
           "f_bluebell": 800,
           "f_lily": 500,
           "f_wild_sarsaparilla": 400,
+          "f_plant_dead": 50,
           "f_salsify": 300,
           "f_wintergreen": 200,
           "f_dogbane": 100

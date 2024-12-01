@@ -1677,8 +1677,7 @@
       "palettes": [ "mall_palette_2" ],
       "place_loot": [ { "group": "cash_register_random", "x": 2, "y": 4 } ],
       "terrain": { "y": "t_linoleum_gray", "Y": "t_linoleum_gray", "F": "t_linoleum_gray" },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
-      "furniture": { "%": "f_counter", "*": "f_crate_c", "!": "f_beaded_door", "p": "f_desk" },
+      "furniture": { "%": "f_counter", "*": "f_crate_c", "!": "f_beaded_door", "p": "f_desk", "1": "f_hedge_short" },
       "items": {
         "1": { "item": "ga_items_1", "chance": 100 },
         "K": { "item": "pottery", "chance": 30, "repeat": [ 2, 4 ] },
@@ -2382,7 +2381,7 @@
         "K": "t_carpet_green",
         "7": "t_carpet_green"
       },
-      "furniture": { "3": "f_wardrobe", "4": "f_table", "&": "f_counter" },
+      "furniture": { "3": "f_wardrobe", "4": "f_table", "&": "f_counter", "1": "f_hedge_short" },
       "items": {
         "4": { "item": "baked_goods", "chance": 20, "repeat": [ 1, 2 ] },
         "M": { "item": "costume_accessories", "chance": 20, "repeat": [ 1, 2 ] },
@@ -2399,7 +2398,6 @@
         "Y": { "item": "trash", "chance": 20, "repeat": [ 2, 4 ] },
         "P": [ { "item": "jackets", "chance": 10 }, { "item": "bags", "chance": 10 } ]
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "place_monster": [ { "group": "GROUP_MALL", "x": [ 3, 23 ], "y": [ 3, 23 ], "repeat": [ 7, 9 ] } ]
     }
   },

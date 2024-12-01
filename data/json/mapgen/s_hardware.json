@@ -184,10 +184,10 @@
         "4": "t_gutter_downspout"
       },
       "sealed_item": {
-        "1": { "item": { "item": "seed_cabbage" }, "furniture": "f_planter_seedling" },
-        "2": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling" },
-        "3": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling" },
-        "M": { "item": { "item": "seed_flower" }, "furniture": "f_planter_seedling" }
+        "1": { "item": { "item": "seed_cabbage" }, "furniture": "f_planter_seedling", "chance": 30 },
+        "2": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 30 },
+        "3": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 30 },
+        "M": { "item": { "item": "seed_flower" }, "furniture": "f_planter_seedling", "chance": 30 }
       },
       "furniture": {
         "r": "f_counter",

@@ -12,7 +12,12 @@
   {
     "id": "generic_flower_harv",
     "type": "harvest",
-    "entries": [ { "drop": "withered", "base_num": [ 1, 2 ] }, { "drop": "seed_flower", "base_num": [ 1, 2 ] } ]
+    "entries": [ { "drop": "withered", "base_num": [ 1, 2 ] }, { "drop": "seed_flower", "base_num": [ 0, 2 ] } ]
+  },
+  {
+    "id": "plant_dead_harv",
+    "type": "harvest",
+    "entries": [ { "drop": "withered", "base_num": [ 1, 2 ] } ]
   },
   {
     "id": "dandelion_harv",

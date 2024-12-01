@@ -136,14 +136,25 @@
         "J": "t_dirtfloor",
         "2": "t_dirtfloor"
       },
-      "furniture": { "J": "f_kiln_empty", "F": "f_forge_rock", "M": "f_workbench", "2": "f_locker" },
+      "furniture": {
+        "J": "f_kiln_empty",
+        "F": "f_forge_rock",
+        "M": "f_workbench",
+        "2": "f_locker",
+        "Q": "f_planter",
+        "e": "f_planter",
+        "I": "f_planter",
+        "j": "f_planter",
+        "m": "f_planter",
+        "u": "f_planter"
+      },
       "sealed_item": {
-        "Q": { "item": { "item": "seed_lentils" }, "furniture": "f_planter_harvest" },
-        "e": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_harvest" },
-        "I": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_harvest" },
-        "j": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_harvest" },
-        "m": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_harvest" },
-        "u": { "item": { "item": "seed_beans" }, "furniture": "f_planter_harvest" }
+        "Q": { "item": { "item": "seed_lentils" }, "furniture": "f_planter_harvest", "chance": 60 },
+        "e": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_harvest", "chance": 60 },
+        "I": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_harvest", "chance": 60 },
+        "j": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_harvest", "chance": 60 },
+        "m": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_harvest", "chance": 60 },
+        "u": { "item": { "item": "seed_beans" }, "furniture": "f_planter_harvest", "chance": 60 }
       },
       "items": { "k": { "item": "office", "chance": 30 }, "D": { "item": "trash", "chance": 20, "repeat": [ 2, 4 ] } },
       "place_loot": [

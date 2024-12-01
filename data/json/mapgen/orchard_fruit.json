@@ -41,16 +41,17 @@
         "o": "t_window_domestic",
         "#": "t_wall_wood"
       },
-      "furniture": { "D": "f_rack_wood", "f": "f_region_flower_decorative" },
+      "furniture": { "D": "f_rack_wood", "f": "f_region_flower_decorative", "1": "f_planter", "2": "f_planter", "3": "f_planter" },
       "items": { "D": { "item": "supplies_farming", "chance": 70, "repeat": [ 1, 5 ] } },
       "place_loot": [ { "item": "30gal_barrel", "x": 7, "y": 13, "chance": 80 } ],
       "sealed_item": {
-        "1": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 100 },
-        "2": { "item": { "item": "seed_corn" }, "furniture": "f_planter_seedling", "chance": 100 },
-        "3": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 100 }
+        "1": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "2": { "item": { "item": "seed_corn" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "3": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 20 }
       },
       "place_monsters": [
         { "monster": "GROUP_PARK_SCENIC", "x": 12, "y": 14, "chance": 3 },
+        { "monster": "GROUP_FARM_PESTS", "x": 12, "y": 14, "chance": 6 },
         { "monster": "GROUP_PARK_ANIMAL", "x": [ 3, 20 ], "y": [ 16, 20 ], "chance": 3 }
       ]
     }
@@ -89,7 +90,8 @@
         "                        "
       ],
       "palettes": [ "roof_palette" ],
-      "terrain": { ".": "t_shingle_flat_roof" }
+      "terrain": { ".": "t_shingle_flat_roof" },
+      "place_monster": [ { "monster": "mon_crow", "x": [ 10, 16 ], "y": [ 11, 14 ], "repeat": [ 0, 5 ] } ]
     }
   },
   {
@@ -136,10 +138,10 @@
         ".": "t_thconc_floor",
         "#": "t_wall_log"
       },
-      "furniture": { "H": "f_sofa", "f": "f_region_flower_decorative" },
+      "furniture": { "H": "f_sofa", "f": "f_region_flower_decorative", "1": "f_planter", "2": "f_planter" },
       "sealed_item": {
-        "1": { "item": { "item": "seed_blueberries" }, "furniture": "f_planter_seedling", "chance": 100 },
-        "2": { "item": { "item": "seed_strawberries" }, "furniture": "f_planter_seedling", "chance": 100 }
+        "1": { "item": { "item": "seed_blueberries" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "2": { "item": { "item": "seed_strawberries" }, "furniture": "f_planter_seedling", "chance": 20 }
       },
       "place_loot": [
         { "group": "supplies_farming", "x": 6, "y": 13, "chance": 50 },
@@ -149,6 +151,7 @@
       ],
       "place_monsters": [
         { "monster": "GROUP_PARK_SCENIC", "x": 12, "y": 14, "chance": 3 },
+        { "monster": "GROUP_FARM_PESTS", "x": [ 3, 20 ], "y": [ 16, 20 ], "chance": 3 },
         { "monster": "GROUP_PARK_ANIMAL", "x": [ 3, 20 ], "y": [ 16, 20 ], "chance": 3 }
       ]
     }
