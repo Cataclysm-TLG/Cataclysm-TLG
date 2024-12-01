@@ -285,7 +285,7 @@
         "_": [ { "item": "straw_pile", "chance": 3 }, { "item": "cattlefodder", "chance": 2 } ],
         "f": { "item": "cattlefodder", "chance": 40, "repeat": 10 }
       },
-      "sealed_item": { "D": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 70 } },
+      "sealed_item": { "D": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 20 } },
       "palettes": [ "farm" ]
     }
   },
@@ -533,15 +533,15 @@
         "%": "t_dirtfloor"
       },
       "sealed_item": {
-        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 30 },
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 30 },
-        "%": { "item": { "item": "seed_oats" }, "furniture": "f_planter_seedling", "chance": 30 }
+        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 20 },
+        "%": { "item": { "item": "seed_oats" }, "furniture": "f_planter_seedling", "chance": 20 }
       },
       "palettes": [ "farm" ]
     }

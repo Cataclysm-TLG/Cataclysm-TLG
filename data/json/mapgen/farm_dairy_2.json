@@ -83,7 +83,7 @@
         "                                                @    ,,,  ,,, d                                 ",
         "                                                     ,,,  ,,,   @                               "
       ],
-      "sealed_item": { "#": { "item": { "item": "seed_corn", "chance": 100 }, "furniture": "f_plant_seedling" } },
+      "sealed_item": { "#": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 20 } },
       "terrain": {
         "│": "t_hole",
         " ": [ [ "t_region_groundcover", 99 ], [ "t_region_shrub", 1 ] ],

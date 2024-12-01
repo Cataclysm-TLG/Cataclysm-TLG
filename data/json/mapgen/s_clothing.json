@@ -320,7 +320,6 @@
         "1": "t_sidewalk",
         "4": "t_gutter_downspout"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "#": "f_counter",
         "&": "f_counter_gate_c",
@@ -334,8 +333,10 @@
         "o": "f_sofa",
         "s": "f_sink",
         "u": "f_trashcan",
-        "}": "f_locker"
+        "}": "f_locker",
+        "1": "f_planter"
       },
+      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling", "chance": 40 } },
       "toilets": { "t": {  } },
       "place_items": [
         { "item": "shoestore_shoes", "x": 4, "y": [ 7, 13 ], "chance": 80, "repeat": [ 1, 8 ] },

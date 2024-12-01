@@ -101,10 +101,11 @@
       "place_item": [ { "item": "apple", "x": 20, "y": [ 15, 17 ], "chance": 100, "repeat": [ 5, 15 ] } ],
       "liquids": { "k": { "liquid": "apple_cider", "amount": [ 10, 100 ] } },
       "place_monsters": [
-        { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 30 },
+        { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 },
+        { "monster": "GROUP_FARM_PESTS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 30 },
         { "monster": "GROUP_SAFE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 30 },
         { "monster": "GROUP_DOMESTIC", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 40 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 45 }
+        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 25 }
       ],
       "place_vehicles": [ { "vehicle": "suburban_home", "x": 5, "y": 10, "chance": 45 } ]
     }

@@ -138,8 +138,8 @@
         { "chance": 25, "item": "trash", "x": 18, "y": 11 }
       ],
       "sealed_item": {
-        "p": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling" },
-        "P": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling" }
+        "p": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 20 },
+        "P": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 20 }
       },
       "place_monster": [ { "monster": "mon_cat", "chance": 30, "x": 19, "y": 10 } ],
       "place_nested": [ { "chunks": [ [ "ruins_4x4_front", 80 ], [ "ruins_4x4_junk", 20 ] ], "x": 15, "y": 11 } ]
@@ -338,7 +338,7 @@
       "terrain": { "p": "t_dirt" },
       "palettes": [ "desolatebarn_palette" ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "sealed_item": { "p": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling" } },
+      "sealed_item": { "p": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 70 } },
       "place_items": [
         { "chance": 10, "item": "hand_tools", "x": 7, "y": 20 },
         { "chance": 10, "item": "hand_tools", "x": 6, "y": 19 },

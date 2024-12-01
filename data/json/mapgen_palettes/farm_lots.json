@@ -29,11 +29,25 @@
     "terrain": {
       ",": "t_dirtfloor",
       ":": "t_metal_floor",
-      "#": [ [ "t_dirtmound", 2000 ], [ "t_region_grass", 310 ], [ "t_region_soil", 280 ], [ "t_puddle", 1 ], [ "t_shrub", 2 ], [ "t_pit_shallow", 1 ] ],
+      "#": [
+        [ "t_dirtmound", 2000 ],
+        [ "t_region_grass", 310 ],
+        [ "t_region_soil", 280 ],
+        [ "t_puddle", 1 ],
+        [ "t_shrub", 2 ],
+        [ "t_pit_shallow", 1 ]
+      ],
       "%": "t_fence_wire",
       "+": "t_door_c",
       "|": [ [ "t_wall_wood", 500 ], [ "t_wall_wood_chipped", 4 ], [ "t_wall_wood_broken", 1 ] ],
-      " ": [ [ "t_region_soil", 2500 ], [ "t_region_groundcover", 300 ], [ "t_region_grass", 300 ], [ "t_dirtmound", 200 ], [ "t_puddle", 1 ], [ "t_pit_shallow", 2 ] ],
+      " ": [
+        [ "t_region_soil", 2500 ],
+        [ "t_region_groundcover", 300 ],
+        [ "t_region_grass", 300 ],
+        [ "t_dirtmound", 200 ],
+        [ "t_puddle", 1 ],
+        [ "t_pit_shallow", 2 ]
+      ],
       "i": "t_region_groundcover",
       ".": "t_null",
       "/": [ [ "t_region_soil", 195 ], [ "t_region_groundcover", 5 ], [ "t_region_grass", 5 ] ],

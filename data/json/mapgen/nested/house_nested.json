@@ -2581,7 +2581,7 @@
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "palettes": [ "house_w_nest_garden_palette" ],
-      "sealed_item": { "P": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling" } },
+      "sealed_item": { "P": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_seedling", "chance": 20 } },
       "place_items": [
         { "item": "farming_tools", "x": [ 0, 2 ], "y": [ 0, 2 ], "chance": 5, "repeat": [ 1, 3 ] },
         { "item": "farming_seeds", "x": [ 0, 2 ], "y": [ 0, 2 ], "chance": 75, "repeat": [ 1, 3 ] }
