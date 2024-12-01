@@ -258,14 +258,14 @@
     },
     "sealed_item": {
       "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_seedling" },
-      "2": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_harvest" },
-      "3": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_harvest" },
-      "4": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_harvest" },
-      "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_harvest" },
-      "6": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_harvest" },
-      "7": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_harvest" },
-      "8": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_harvest" },
-      "9": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_harvest" }
+      "2": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_mature" },
+      "3": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_mature" },
+      "4": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_mature" },
+      "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_mature" },
+      "6": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling" },
+      "7": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling" },
+      "8": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_seedling" },
+      "9": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling" }
     }
   }
 ]

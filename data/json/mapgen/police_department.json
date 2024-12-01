@@ -57,7 +57,6 @@
         "    s     ||||||||||||||||s                     "
       ],
       "palettes": [ "police_dept" ],
-      "sealed_item": { "*": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "items": {
         "1": [ { "item": "SUS_dishes", "chance": 100 }, { "item": "SUS_silverware", "chance": 100 } ],
         "2": { "item": "SUS_cookware", "chance": 100, "repeat": [ 1, 3 ] },
@@ -66,7 +65,7 @@
         "5": { "item": "SUS_kitchen_sink", "chance": 100 }
       },
       "terrain": { " ": "t_region_groundcover_urban" },
-      "furniture": { "1": "f_cupboard", "2": "f_cupboard", "3": "f_cupboard", "4": "f_cupboard", "5": "f_sink" },
+      "furniture": { "*": "f_hedge_short", "1": "f_cupboard", "2": "f_cupboard", "3": "f_cupboard", "4": "f_cupboard", "5": "f_sink" },
       "place_vehicles": [
         { "vehicle": "police_pileup", "x": 44, "y": 43, "chance": 20, "rotation": 90 },
         { "vehicle": "police_pileup", "x": 39, "y": 43, "chance": 20, "rotation": 90 },

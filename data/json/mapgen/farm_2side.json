@@ -78,15 +78,15 @@
       },
       "furniture": { "l": "f_locker", "y": "f_hay" },
       "sealed_item": {
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_plant_seedling", "chance": 70 },
-        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 80 },
-        "%": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 80 }
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 20 },
+        "%": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 20 }
       },
       "items": {
         "l": [

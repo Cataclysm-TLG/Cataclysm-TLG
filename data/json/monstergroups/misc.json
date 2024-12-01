@@ -6,6 +6,11 @@
     "monsters": [ { "monster": "mon_null" } ]
   },
   {
+    "name": "GROUP_FARM_PESTS",
+    "type": "monstergroup",
+    "monsters": [ { "monster": "mon_null", "weight": 50000 }, { "monster": "mon_worm", "weight": 90 }, { "monster": "mon_aphid", "weight": 600, "pack_size": [ 3, 6 ] }, { "monster": "mon_rabbit", "weight": 100, "pack_size": [ 1, 3 ] }, { "monster": "mon_crow", "weight": 700, "pack_size": [ 1, 6 ] }, { "monster": "mon_locust_small", "weight": 200, "pack_size": [ 2, 5 ] }, { "monster": "mon_deer", "weight": 200, "pack_size": [ 1, 2 ] }, { "monster": "mon_mantis_small", "weight": 10 }, { "monster": "mon_lady_bug", "weight": 60, "pack_size": [ 1, 2 ] }, { "monster": "mon_rat", "weight": 40, "pack_size": [ 1, 3 ] }, { "monster": "mon_slug_forest", "weight": 60, "pack_size": [ 1, 3 ] }, { "monster": "mon_dog", "weight": 2, "pack_size": [ 1, 2 ] }, { "monster": "mon_worm_small", "weight": 400, "pack_size": [ 1, 2 ] }, { "monster": "mon_snail_forest", "weight": 60, "pack_size": [ 1, 2 ] }, { "monster": "mon_coyote", "weight": 10, "pack_size": [ 1, 4 ] }, { "monster": "mon_snail_forest", "weight": 60, "pack_size": [ 1, 2 ] } ]
+  },
+  {
     "type": "monstergroup",
     "name": "GROUP_BLACK_ROAD",
     "monsters": [

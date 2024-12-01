@@ -48,7 +48,7 @@
   {
     "type": "COMESTIBLE",
     "id": "feces_roach",
-    "name": { "str_sp": "roach dirt" },
+    "name": { "str_sp": "insect droppings" },
     "copy-from": "feces_bird",
     "description": "Large black pellets of rotting material."
   },

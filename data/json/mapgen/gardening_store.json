@@ -78,10 +78,10 @@
         "Z": "f_planter"
       },
       "sealed_item": {
-        "1": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_harvest" },
-        "2": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_harvest" },
-        "3": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_harvest" },
-        "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_harvest" }
+        "1": { "item": { "item": "seed_chamomile" }, "furniture": "f_planter_mature" },
+        "2": { "item": { "item": "seed_thyme" }, "furniture": "f_planter_mature" },
+        "3": { "item": { "item": "seed_bee_balm" }, "furniture": "f_planter_mature" },
+        "5": { "item": { "item": "seed_mugwort" }, "furniture": "f_planter_mature" }
       },
       "items": {
         "I": { "item": "office", "chance": 30 },
