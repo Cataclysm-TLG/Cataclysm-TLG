@@ -29,12 +29,12 @@
     "//": "Weights are set high in order to allow mods to add rare terrains.",
     "region_terrain_and_furniture": {
       "terrain": {
-        "t_region_groundcover": { "t_grass": 12000, "t_grass_dead": 4000, "t_dirt": 2000 },
-        "t_region_groundcover_urban": { "t_grass": 20, "t_grass_dead": 6, "t_dirt": 1 },
+        "t_region_groundcover": { "t_grass": 12000, "t_grass_dead": 4000, "t_grass_long": 200, "t_dirt": 2000 },
+        "t_region_groundcover_urban": { "t_grass": 20, "t_grass_dead": 6, "t_grass_long": 3, "t_dirt": 1 },
         "t_region_groundcover_forest": { "t_forestfloor": 20, "t_grass": 1, "t_grass_long": 1, "t_moss": 1, "t_grass_dead": 4 },
-        "t_region_groundcover_swamp": { "t_grass_long": 300, "t_grass_tall": 100, "t_moss": 200, "t_dirt": 200, "t_grass_dead": 110 },
+        "t_region_groundcover_swamp": { "t_grass_long": 300, "t_moss": 200, "t_dirt": 200, "t_grass_dead": 110 },
         "t_region_groundcover_barren": { "t_dirt": 30, "t_grass_dead": 2, "t_railroad_rubble": 1 },
-        "t_region_grass": { "t_grass": 20, "t_grass_dead": 10, "t_dirt": 2 },
+        "t_region_grass": { "t_grass": 18, "t_grass_dead": 10, "t_grass_long": 3, "t_dirt": 2 },
         "t_region_soil": { "t_dirt": 1 },
         "t_region_shrub_forest_dense": {
           "t_underbrush": 30,

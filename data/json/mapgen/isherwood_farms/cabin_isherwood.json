@@ -93,12 +93,12 @@
       "place_vehicles": [ { "vehicle": "uncovered_wagon", "x": 2, "y": 2, "rotation": 180, "chance": 100, "status": 0 } ],
       "place_monster": [ { "monster": "mon_horse", "x": 17, "y": 3, "chance": 100 } ],
       "sealed_item": {
-        "Q": { "item": { "item": "seed_lentils" }, "furniture": "f_planter_harvest" },
-        "e": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_harvest" },
-        "I": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_harvest" },
-        "j": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_harvest" },
-        "z": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_harvest" },
-        "u": { "item": { "item": "seed_beans" }, "furniture": "f_planter_harvest" }
+        "Q": { "item": { "item": "seed_lentils" }, "furniture": "f_planter_seedling" },
+        "e": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling" },
+        "I": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling" },
+        "j": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling" },
+        "z": { "item": { "item": "soybean_seed" }, "furniture": "f_planter_seedling" },
+        "u": { "item": { "item": "seed_beans" }, "furniture": "f_planter_seedling" }
       },
       "terrain": {
         " ": "t_floor",

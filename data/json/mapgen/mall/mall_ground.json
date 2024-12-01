@@ -275,10 +275,10 @@
         "}": "t_linoleum_gray",
         "F": "t_sidewalk"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
         "*": "f_trashcan",
+        "1": "f_hedge_short",
         "3": "f_table",
         "4": "f_chair",
         "!": "f_counter",
@@ -398,13 +398,11 @@
         "}": "t_linoleum_white_no_roof",
         "1": "t_linoleum_white"
       },
-      "sealed_item": {
-        "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" },
-        "{": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" }
-      },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
         "*": "f_trashcan",
+        "1": "f_hedge_short",
+        "{": "f_hedge_short",
         "3": "f_table",
         "&": "f_table",
         "4": "f_chair",
@@ -560,12 +558,10 @@
         { "item_group": "vending_drink", "x": 74, "y": 17, "lootable": true },
         { "item_group": "vending_food", "x": 74, "y": 18, "lootable": true }
       ],
-      "sealed_item": {
-        "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" },
-        "{": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" }
-      },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
+        "{": "f_hedge_short",
         "*": "f_trashcan",
         "!": "f_counter",
         "0": "f_counter",
@@ -770,9 +766,9 @@
         "A": "t_linoleum_white",
         "!": "t_linoleum_white"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
         "*": "f_trashcan",
         "3": "f_table",
         "!": "f_counter",
@@ -924,9 +920,9 @@
         "1": "t_linoleum_white_no_roof",
         "!": "t_linoleum_white"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
         "*": "f_trashcan",
         "!": "f_counter",
         "0": "f_counter",
@@ -1127,10 +1123,10 @@
         "A": "t_linoleum_white",
         "!": "t_linoleum_white"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
         "*": "f_trashcan",
+        "1": "f_hedge_short",
         "$": "f_counter",
         "±": "f_counter",
         "4": "f_wardrobe",
@@ -1272,9 +1268,9 @@
         "!": "t_linoleum_white",
         "]": "t_linoleum_white"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
         "*": "f_trashcan",
         "!": "f_counter",
         "0": "f_counter",
@@ -1408,12 +1404,10 @@
         "Ʉ": "t_carpet_concrete_green",
         ":": "t_carpet_concrete_green"
       },
-      "sealed_item": {
-        "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" },
-        "°": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" }
-      },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
+        "°": "f_hedge_short",
         "*": "f_trashcan",
         "!": "f_counter",
         "0": "f_counter",
@@ -1562,9 +1556,9 @@
         "4": "t_carpet_red",
         "Á": "t_carpet_red"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
+        "1": "f_hedge_short",
         "*": "f_trashcan",
         "!": "f_counter",
         "0": "f_counter",
@@ -1722,13 +1716,11 @@
         "Ʉ": "t_carpet_concrete_green",
         ":": "t_carpet_concrete_green"
       },
-      "sealed_item": {
-        "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" },
-        "{": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" }
-      },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
         "*": "f_trashcan",
+        "1": "f_hedge_short",
+        "{": "f_hedge_short",
         ":": "f_rack_wood",
         "Ʌ": "f_table",
         "$": "f_counter",
@@ -1888,10 +1880,10 @@
         "Δ": "t_atm",
         "1": "t_linoleum_white_no_roof"
       },
-      "sealed_item": { "1": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
         "*": "f_trashcan",
+        "1": "f_hedge_short",
         "!": "f_counter",
         "0": "f_counter",
         "$": "f_counter",

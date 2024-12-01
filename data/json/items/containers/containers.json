@@ -802,7 +802,7 @@
     "id": "box_snack",
     "type": "GENERIC",
     "category": "container",
-    "name": { "str": "snack cardboard box", "str_pl": "snack cardboard boxes" },
+    "name": { "str": "cardboard snack box", "str_pl": "cardboard snack boxes" },
     "description": "A small cardboard box for housing snacks.  Sized so you can take it on the go.",
     "ascii_picture": "box_snack",
     "weight": "12 g",

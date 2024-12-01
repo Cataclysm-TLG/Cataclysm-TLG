@@ -155,10 +155,10 @@
       "≠": "f_chest",
       "Ø": "f_pinball_machine",
       "Æ": "f_arcade_machine",
-      "ʭ": "f_ladder"
+      "ʭ": "f_ladder",
+      "ե": "f_hedge_short"
     },
     "terrain": { "a": "t_strconc_floor", ":": "t_wall_glass" },
-    "sealed_item": { "ե": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
     "items": {
       "a": { "item": "fireplace_fill", "chance": 30, "repeat": [ 2, 5 ] },
       "d": [
@@ -282,15 +282,15 @@
       "6": "f_machinery_heavy",
       "Ö": "f_machinery_light",
       "3": "f_vending_c",
-      "4": "f_vending_c"
+      "4": "f_vending_c",
+      "]": "f_hedge_short"
     },
     "items": {
       "3": { "item": "vending_food", "chance": 90 },
       "4": { "item": "vending_drink", "chance": 90 },
       "Q": { "item": "gas_charging_rack", "chance": 30 },
       "J": [ { "item": "mechanics", "chance": 30 } ]
-    },
-    "sealed_item": { "]": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } }
+    }
   },
   {
     "type": "palette",
@@ -357,9 +357,9 @@
       "7": "f_anesthetic",
       "8": "f_GC",
       "9": "f_MS",
-      "0": "f_NMR"
+      "0": "f_NMR",
+      "л": "f_hedge_short"
     },
-    "sealed_item": { "л": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
     "items": {
       "a": [
         { "item": "mutagen_kits", "chance": 4 },
@@ -482,9 +482,9 @@
       "4": "f_dialysis",
       "5": "f_ventilator",
       "7": "f_anesthetic",
-      "8": [ [ "f_MRI", 5 ], [ "f_CTscan", 5 ] ]
+      "8": [ [ "f_MRI", 5 ], [ "f_CTscan", 5 ] ],
+      "л": "f_hedge_short"
     },
-    "sealed_item": { "л": { "item": { "item": "seed_rose" }, "furniture": "f_planter_harvest" } },
     "items": {
       "a": [
         { "item": "virology_lab_fridge", "chance": 30 },
