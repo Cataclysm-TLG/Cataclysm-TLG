@@ -2956,6 +2956,7 @@ bool target_ui::set_cursor_pos( const tripoint &new_pos )
     } else if( new_pos == valid_pos ) {
         // We can reuse new_traj
         dst = valid_pos;
+        set_view_offset( dst - src );
         traj = new_traj;
     } else {
         dst = valid_pos;
