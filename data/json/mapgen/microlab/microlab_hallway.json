@@ -32,10 +32,10 @@
             "switch": { "param": "labtype", "fallback": "microlab_generic" },
             "cases": { "microlab_meat": "GROUP_MEATLAB", "microlab_generic": "GROUP_LAB" }
           },
-          "chance": 80,
+          "chance": 70,
           "x": [ 0, 23 ],
           "y": [ 0, 23 ],
-          "repeat": [ 2, 5 ]
+          "repeat": [ 1, 3 ]
         }
       ]
     }
@@ -59,10 +59,10 @@
             "switch": { "param": "labtype", "fallback": "microlab_generic" },
             "cases": { "microlab_meat": "GROUP_MEATLAB", "microlab_generic": "GROUP_LAB" }
           },
-          "chance": 80,
+          "chance": 70,
           "x": [ 0, 23 ],
           "y": [ 0, 23 ],
-          "repeat": [ 2, 5 ]
+          "repeat": [ 1, 3 ]
         }
       ]
     }
@@ -86,10 +86,10 @@
             "switch": { "param": "labtype", "fallback": "microlab_generic" },
             "cases": { "microlab_meat": "GROUP_MEATLAB", "microlab_generic": "GROUP_LAB" }
           },
-          "chance": 80,
+          "chance": 70,
           "x": [ 0, 23 ],
           "y": [ 0, 23 ],
-          "repeat": [ 2, 5 ]
+          "repeat": [ 1, 3 ]
         }
       ]
     }
@@ -113,10 +113,10 @@
             "switch": { "param": "labtype", "fallback": "microlab_generic" },
             "cases": { "microlab_meat": "GROUP_MEATLAB", "microlab_generic": "GROUP_LAB" }
           },
-          "chance": 80,
+          "chance": 70,
           "x": [ 0, 23 ],
           "y": [ 0, 23 ],
-          "repeat": [ 2, 5 ]
+          "repeat": [ 1, 3 ]
         }
       ]
     }

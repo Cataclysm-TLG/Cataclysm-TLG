@@ -56,10 +56,10 @@
             "switch": { "param": "labtype", "fallback": "microlab_generic" },
             "cases": { "microlab_meat": "GROUP_MEATLAB", "microlab_generic": "GROUP_MICROLAB" }
           },
-          "chance": 80,
+          "chance": 70,
           "x": [ 0, 23 ],
           "y": [ 0, 23 ],
-          "repeat": [ 10, 20 ]
+          "repeat": [ 5, 10 ]
         }
       ]
     }
