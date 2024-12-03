@@ -324,7 +324,8 @@ static void do_blast( const Creature *source, const tripoint &p, const float pow
         if( pl == nullptr ) {
             const double dmg = std::max( force - critter->get_armor_type( damage_bash,
                                          bodypart_id( "torso" ) ) / 2.0, 0.0 );
-            const int actual_dmg = rng_float( dmg * 2, dmg * 3 );
+            const int actual_dmg = std::max( 0.0, rng_float( ( -dmg * 0.5 ) / critter->ranged_target_size(),
+                                             dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state();
             add_msg_debug( debugmode::DF_EXPLOSION, "Blast hits %s for %d damage", critter->disp_name(),
@@ -432,6 +433,8 @@ static std::vector<tripoint> shrapnel( const Creature *source, const tripoint &s
         if( damage > 0 && critter && !critter->is_dead_state() ) {
             std::poisson_distribution<> d( cloud.density );
             int hits = d( rng_get_engine() );
+            hits = std::max( 0, rng( ( -hits / 2.5 ) / critter->ranged_target_size(),
+                                     hits * critter->ranged_target_size() ) );
             dealt_projectile_attack frag;
             frag.proj = proj;
             frag.proj.speed = cloud.velocity;
