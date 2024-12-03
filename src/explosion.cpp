@@ -444,7 +444,7 @@ static std::vector<tripoint> shrapnel( const Creature *source, const tripoint &s
             int damaging_hits = 0;
             int non_damaging_hits = 0;
             for( int i = 0; i < hits; ++i ) {
-                frag.missed_by = rng_float( 0.05, 1.0 / critter->ranged_target_size() );
+                frag.missed_by = rng_float( 0.05, 7.0 / critter->ranged_target_size() );
                 critter->deal_projectile_attack( mutable_source, frag, false );
                 if( frag.dealt_dam.total_damage() > 0 ) {
                     damaging_hits++;
