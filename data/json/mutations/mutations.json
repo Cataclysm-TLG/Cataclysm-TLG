@@ -8803,10 +8803,10 @@
   {
     "type": "mutation",
     "id": "DEBUG_NIGHTVISION",
-    "name": { "str": "Debug Night Vision" },
+    "name": { "str": "Debug Night and Map Vision" },
     "points": 99,
     "valid": false,
-    "description": "You can clearly see that this is for dev purposes only.",
+    "description": "Grants flawless night vision and the ability to see all of the overmaps without having to reveal them manually.  As such, you can clearly see that this is for dev purposes only.",
     "debug": true
   },
   {
@@ -8815,7 +8815,7 @@
     "name": { "str": "Debug Clairvoyance" },
     "points": 99,
     "valid": false,
-    "description": "You can clearly see that this is for dev purposes only.",
+    "description": "Being able to see through walls and the floor is clearly for dev purposes only.",
     "flags": [ "CLAIRVOYANCE_PLUS" ],
     "debug": true
   },
@@ -8825,7 +8825,7 @@
     "name": { "str": "Debug Clairvoyance Super" },
     "points": 99,
     "valid": false,
-    "description": "You can see all the bugs with this one.",
+    "description": "Much bigger range than the other Debug Clairvoyance trait.  Unsure which one to use?  Use them both!  You can see all the bugs with this one.",
     "flags": [ "SUPER_CLAIRVOYANCE" ],
     "debug": true
   },
