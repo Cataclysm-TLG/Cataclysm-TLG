@@ -431,7 +431,7 @@
     "symbol": "*",
     "color": "green",
     "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
-    "countdown_action": { "type": "explosion", "explosion": { "power": 260, "shrapnel": { "casing_mass": 100, "fragment_mass": 0.02 } } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 240, "shrapnel": { "casing_mass": 217, "fragment_mass": 0.02 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
     "melee_damage": { "bash": 6 }
   },
@@ -1192,7 +1192,7 @@
     "symbol": "*",
     "color": "light_gray",
     "explode_in_fire": true,
-    "explosion": { "power": 300, "shrapnel": { "casing_mass": 310, "fragment_mass": 0.5 } },
+    "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
     "use_action": {
       "need_wielding": true,
       "target": "pipebomb_act",
@@ -1222,8 +1222,8 @@
     "color": "light_gray",
     "use_action": { "type": "message", "message": "You've already lit the %s, try throwing it instead.", "name": "Pull pin" },
     "explode_in_fire": true,
-    "explosion": { "power": 300, "shrapnel": { "casing_mass": 310, "fragment_mass": 0.5 } },
-    "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 310, "fragment_mass": 0.5 } } },
+    "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
+    "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
     "melee_damage": { "bash": 5 }
   },
