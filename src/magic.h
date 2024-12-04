@@ -840,7 +840,7 @@ std::set<tripoint_bub_ms> spell_effect_cone( const override_parameters &params,
 std::set<tripoint_bub_ms> spell_effect_line( const override_parameters &params,
         const tripoint_bub_ms &source, const tripoint_bub_ms &target );
 
-void spawn_ethereal_item( const spell &sp, Creature &, const tripoint_bub_ms & );
+void spawn_ethereal_item( const spell &sp, Creature &, const tripoint_bub_ms &center );
 void recover_energy( const spell &sp, Creature &, const tripoint_bub_ms &target );
 void spawn_summoned_monster( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 void spawn_summoned_vehicle( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
