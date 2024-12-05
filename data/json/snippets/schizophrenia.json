@@ -39,7 +39,6 @@
   {
     "type": "snippet",
     "category": "<schizo_weapon_talk_monster>",
-    "//": "In the future, it would be preferable for the snippet to use the monster's name, instead of a generic insult.",
     "text": [
       "Hey, let's go kill that <name_b>!",
       "Did you see that <name_b>!?  Be careful.",
