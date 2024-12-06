@@ -3304,7 +3304,8 @@ class Character : public Creature, public visitable
         void clear_destination_activity();
 
         bool can_use_pockets() const;
-        bool can_use_hood() const;
+        bool can_use_hood( item armor ) const;
+        item get_usable_hood( Character &you ) const;
         bool can_use_collar() const;
         /** Returns warmth provided by an armor's bonus, like hoods, pockets, etc. */
         std::map<bodypart_id, int> bonus_item_warmth() const;

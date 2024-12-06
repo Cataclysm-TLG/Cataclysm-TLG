@@ -67,6 +67,9 @@ class outfit
     public:
         outfit() = default;
         explicit outfit( const std::list<item> &items ) : worn( items ) {}
+        const std::list<item> &get_worn() const {
+            return worn;
+        }
         bool is_worn( const item &clothing ) const;
         bool is_worn( const itype_id &clothing ) const;
         bool is_worn_module( const item &thing ) const;
@@ -124,7 +127,7 @@ class outfit
         units::volume small_pocket_volume( const units::volume &threshold )  const;
         int empty_holsters() const;
         int pocket_warmth() const;
-        int hood_warmth() const;
+        std::pair<int, item> hood_warmth() const;
         int collar_warmth() const;
         /** Returns warmth provided by armor, etc. */
         std::map<bodypart_id, int> warmth( const Character &guy ) const;
