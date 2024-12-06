@@ -1807,7 +1807,7 @@ void Character::release_grapple()
 
 void Character::mount_creature( monster &z )
 {
-    tripoint pnt = z.pos();
+    tripoint_bub_ms pnt = z.pos_bub();
     shared_ptr_fast<monster> mons = g->shared_from( z );
     if( mons == nullptr ) {
         add_msg_debug( debugmode::DF_CHARACTER, "mount_creature(): monster not found in critter_tracker" );

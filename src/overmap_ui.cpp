@@ -1971,14 +1971,16 @@ static tripoint_abs_omt display()
                 }
             }
         }
-        if( const std::optional<tripoint> vec = ictxt.get_direction( action ) ) {
+        if( const std::optional<tripoint_rel_omt> vec = ictxt.get_direction_rel_omt( action ) ) {
             int scroll_d = uistate.overmap_fast_scroll ? fast_scroll_offset : 1;
-            curs += vec->xy() * scroll_d;
+
+            curs += vec->xy().raw() *
+                    scroll_d; // TODO: Make += etc. available with corresponding relative coordinates.
         } else if( action == "MOUSE_MOVE" || action == "TIMEOUT" ) {
-            tripoint edge_scroll = g->mouse_edge_scrolling_overmap( ictxt );
-            if( edge_scroll != tripoint::zero ) {
+            tripoint_rel_omt edge_scroll = g->mouse_edge_scrolling_overmap( ictxt );
+            if( edge_scroll != tripoint_rel_omt::zero ) {
                 if( action == "MOUSE_MOVE" ) {
-                    edge_scroll *= 2;
+                    edge_scroll.raw() *= 2; // TODO: Make *= etc. available to relative coordinates
                 }
                 curs += edge_scroll;
             }
