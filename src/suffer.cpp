@@ -20,7 +20,6 @@
 #include "calendar.h"
 #include "cata_utility.h"
 #include "character.h"
-#include "character_attire.h"
 #include "creature.h"
 #include "creature_tracker.h"
 #include "debug.h"
@@ -996,7 +995,7 @@ void suffer::from_sunburn( Character &you, bool severe )
                         && you.can_use_pockets() )
                    || ( bp == body_part_head
                         && you.worn_with_flag( flag_HOOD )
-                        && you.can_use_hood( you.get_usable_hood( you ) ) )
+                        && you.can_use_hood() )
                    || ( ( ( bp == body_part_arm_l ) || ( bp == body_part_hand_l ) ) &&
                         you.has_trait( trait_NO_LEFT_ARM ) )
                    || ( ( ( bp == body_part_arm_r ) || ( bp == body_part_hand_r ) ) &&

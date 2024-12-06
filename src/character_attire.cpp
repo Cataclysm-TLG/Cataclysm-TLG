@@ -1746,14 +1746,15 @@ int outfit::pocket_warmth() const
     return warmth;
 }
 
-std::pair<int, item> outfit::hood_warmth() const
+int outfit::hood_warmth() const
 {
+    int warmth = 0;
     for( const item &w : worn ) {
         if( w.has_flag( flag_HOOD ) ) {
-            return { w.get_warmth(), w };
+            warmth = std::max( warmth, w.get_warmth() );
         }
     }
-    return { 0, null_item_reference() };
+    return warmth;
 }
 
 int outfit::collar_warmth() const
@@ -2467,7 +2468,7 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
                 //~ name of a clothing/armor item, indicating it has pockets providing hand warmth
                 info.worn_names.push_back( string_format( _( "%s (pockets)" ), armor.tname() ) );
             }
-            if( bp == body_part_head && armor.has_flag( flag_HOOD ) && person.can_use_hood( armor ) ) {
+            if( bp == body_part_head && armor.has_flag( flag_HOOD ) && person.can_use_hood() ) {
                 //~ name of a clothing/armor item, indicating it has a hood providing head warmth
                 info.worn_names.push_back( string_format( _( "%s (hood)" ), armor.tname() ) );
             }
