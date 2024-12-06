@@ -15,7 +15,6 @@
 #include <vector>
 
 #include "cata_assert.h"
-#include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "condition.h"
 #include "debug.h"
@@ -407,10 +406,6 @@ class math_exp::math_exp_impl
             if( str.empty() ) {
                 return false;
             }
-            std::locale const &oldloc = std::locale::global( std::locale::classic() );
-            on_out_of_scope reset_loc( [&oldloc]() {
-                std::locale::global( oldloc );
-            } );
             try {
                 _parse( str );
             } catch( math::syntax_error const &ex ) {
