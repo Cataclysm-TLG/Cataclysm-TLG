@@ -456,7 +456,7 @@
   {
     "id": "HOOD",
     "type": "json_flag",
-    "info": "This clothing will be pulled up to <info>keep your head warm</info> if it is unencumbered."
+    "info": "This clothing will be pulled up to <info>keep your head warm</info> if it is unencumbered and you're not already wearing something on that layer."
   },
   {
     "id": "HYGROMETER",

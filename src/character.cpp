@@ -9364,17 +9364,41 @@ std::string Character::is_snuggling() const
     return "nothing";
 }
 
-// If the player is not wielding anything big, check if hands can be put in pockets
+// If the player is not on all fours or wielding anything big, check if hands can be put in pockets
 bool Character::can_use_pockets() const
 {
     // TODO Check that the pocket actually has enough space for the wielded item?
-    return weapon.volume() < 500_ml;
+    if( !has_effect( effect_quadruped_full ) ) {
+        return weapon.volume() < 500_ml;
+    } else {
+        return false;
+    }
 }
 
 // If the player's head is not encumbered, check if hood can be put up
-bool Character::can_use_hood() const
+bool Character::can_use_hood( item armor ) const
 {
+    // Check for a conflicting item on the same layer that covers the head.
+    //for( auto it = worn.begin(); it != worn.end(); ++it ) {
+    // const item &worn_armor = *it;
+    //        for( const item &worn_armor : worn ) {
+    for( const item &worn_armor : worn.get_worn() ) {
+        if( worn_armor.covers( body_part_head ) && worn_armor.get_layer() == armor.get_layer() ) {
+            return false;
+        }
+    }
+    // Check encumbrance after verifying no conflicts
     return encumb( body_part_head ) < 10;
+}
+
+item Character::get_usable_hood( Character &you ) const
+{
+    for( const item &armor : you.worn.get_worn() ) {
+        if( armor.has_flag( flag_HOOD ) && can_use_hood( armor ) ) {
+            return armor;  // Return a copy of the found item
+        }
+    }
+    return null_item_reference();  // Return a copy of the "null" item
 }
 
 // If the player's mouth is not encumbered, check if collar can be put up
@@ -9386,7 +9410,9 @@ bool Character::can_use_collar() const
 std::map<bodypart_id, int> Character::bonus_item_warmth() const
 {
     const int pocket_warmth = worn.pocket_warmth();
-    const int hood_warmth = worn.hood_warmth();
+    std::pair<int, item> hood_info = worn.hood_warmth();
+    int hood_warmth_int = hood_info.first;
+    item hood = hood_info.second;
     const int collar_warmth = worn.collar_warmth();
 
     std::map<bodypart_id, int> ret;
@@ -9397,8 +9423,8 @@ std::map<bodypart_id, int> Character::bonus_item_warmth() const
             ret[bp] += pocket_warmth;
         }
 
-        if( bp == body_part_head && can_use_hood() ) {
-            ret[bp] += hood_warmth;
+        if( bp == body_part_head && can_use_hood( hood ) ) {
+            ret[bp] += hood_warmth_int;
         }
 
         if( bp == body_part_mouth && can_use_collar() ) {
