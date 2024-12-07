@@ -1597,7 +1597,7 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
                                     z->name() );
 
             const tripoint where = empty_neighbors.first[get_random_index( empty_neighbor_count )];
-            if( monster *const manhack = g->place_critter_at( mon_manhack, where ) ) {
+            if( monster *const manhack = g->place_critter_at( mon_manhack, tripoint_bub_ms( where ) ) ) {
                 manhack->make_ally( *z );
             }
         }
