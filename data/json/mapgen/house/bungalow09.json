@@ -58,8 +58,8 @@
         },
         {
           "chunks": [
-            [ "null", 30 ],
-            [ "carcrash_8x8_straight", 70 ]
+            [ "null", 80 ],
+            [ "carcrash_8x8_straight", 20 ]
           ],
           "x": [ 14, 15 ],
           "y": 0
