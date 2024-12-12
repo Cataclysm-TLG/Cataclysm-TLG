@@ -539,6 +539,13 @@ void veh_app_interact::plug( map &here )
     }
 }
 
+void veh_app_interact::hide()
+{
+    const int part_idx = veh->part_at( veh->coord_translate( a_point ) );
+    vehicle_part &vp = veh->part( part_idx );
+    vp.hidden = !vp.hidden;
+}
+
 void veh_app_interact::populate_app_actions( map &here )
 {
     vehicle_part *vp;
@@ -587,6 +594,14 @@ void veh_app_interact::populate_app_actions( map &here )
                     string_format( "%s%s", ctxt.get_action_name( "PLUG" ),
                                    //~ An addendum to Plug In's description, as in: Plug in appliance / merge power grid".
                                    veh->is_powergrid() ? _( " / merge power grid" ) : "" ) );
+#if defined(TILES)
+    // Hide
+    app_actions.emplace_back( [this]() {
+        hide();
+    } );
+    imenu.addentry( -1, use_tiles && vp->info().has_flag( flag_WIRING ),
+                    ctxt.keys_bound_to( "HIDE" ).front(), ctxt.get_action_name( "HIDE" ) );
+#endif
 
     if( veh->is_powergrid() && veh->part_count() > 1 && !vp->info().has_flag( VPFLAG_WALL_MOUNTED ) ) {
         // Disconnect from power grid
