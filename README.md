@@ -19,6 +19,10 @@ This project would not be possible without the work of thousands of contribution
 
 ## Frequently Asked Questions
 
+#### I am coming from Cataclysm: Dark Days Ahead, what has changed in this fork?
+
+See [CHANGELOG.md](doc/CHANGELOG.md)
+
 #### Is there a tutorial?
 
 Yes, you can find the tutorial in the **Special** menu at the main menu. You can also access documentation in-game via the `?` key.
