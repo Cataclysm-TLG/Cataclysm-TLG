@@ -1324,18 +1324,6 @@ static void test_string( const std::string &info, const std::string &tested, siz
     last_pos = pos;
 }
 
-// Check that a string is provided in some iteminfo
-// By providing last_pos, order can also be checked
-static void test_string( const std::string &info, const std::string &tested, size_t &last_pos )
-{
-    INFO( string_format( "Checking for \"%s\" in:", tested ) );
-    INFO( info );
-    size_t pos = info.find( tested );
-    CHECK( pos != std::string::npos );
-    CHECK( pos >= last_pos );
-    last_pos = pos;
-}
-
 // Armor protction is based on materials, thickness, and/or environmental protection rating.
 // For armor defined in JSON:
 //
