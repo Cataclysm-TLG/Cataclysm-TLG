@@ -23,3 +23,4 @@ Cataclysm: The Last Generation bases off Cataclysm: Dark Days Ahead. As such, th
 ## Minor changes
 
 - Being small or tiny means decreased HP
+- The steel variants have been removed. No more tempered, mild, etc steel. It is all one kind of steel now.
