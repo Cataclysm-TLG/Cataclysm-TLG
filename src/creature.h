@@ -310,10 +310,10 @@ class Creature : public viewer
         tripoint pos() const;
         tripoint_bub_ms pos_bub() const;
         inline int posx() const {
-            return pos().x;
+            return pos_bub().x();
         }
         inline int posy() const {
-            return pos().y;
+            return pos_bub().y();
         }
         inline int posz() const {
             return get_location().z();
@@ -400,6 +400,7 @@ class Creature : public viewer
          */
         /*@{*/
         bool sees( const Creature &critter ) const override;
+        // TODO: Get rid of untyped overload.
         bool sees( const tripoint &t, bool is_avatar = false, int range_mod = 0 ) const override;
         bool sees( const tripoint_bub_ms &t, bool is_avatar = false, int range_mod = 0 ) const override;
         /*@}*/
@@ -444,12 +445,12 @@ class Creature : public viewer
                                              damage_instance &dam ) = 0;
 
         // TODO: this is just a shim so knockbacks work
-        void knock_back_from( const tripoint &p );
+        void knock_back_from( const tripoint_bub_ms &p );
         double calculate_by_enchantment( double modify, enchant_vals::mod value,
                                          bool round_output = false ) const;
         void adjust_taken_damage_by_enchantments( damage_unit &du ) const;
         void adjust_taken_damage_by_enchantments_post_absorbed( damage_unit &du ) const;
-        virtual void knock_back_to( const tripoint &to ) = 0;
+        virtual void knock_back_to( const tripoint_bub_ms &to ) = 0;
 
         int size_melee_penalty() const;
         // begins a melee attack against the creature
@@ -525,7 +526,7 @@ class Creature : public viewer
         // Temporarily reveals an invisible player when a monster tries to enter their location
         bool stumble_invis( const Creature &player, bool stumblemsg = true );
         // Attack an empty location
-        bool attack_air( const tripoint &p );
+        bool attack_air( const tripoint_bub_ms &p );
 
         /**
          * This creature just dodged an attack - possibly special/ranged attack - from source.
@@ -600,7 +601,7 @@ class Creature : public viewer
         /** Returns multiplier on fall damage at low velocity (knockback/pit/1 z-level, not 5 z-levels) */
         virtual float fall_damage_mod() const = 0;
         /** Deals falling/collision damage with terrain/creature at pos */
-        virtual int impact( int force, const tripoint &pos ) = 0;
+        virtual int impact( int force, const tripoint_bub_ms &pos ) = 0;
 
         /**
          * This function checks the creatures @ref is_dead_state and (if true) calls @ref die.
@@ -802,7 +803,7 @@ class Creature : public viewer
         tripoint_abs_ms location;
     protected:
         // Sets the creature's position without any side-effects.
-        void set_pos_only( const tripoint &p );
+        void set_pos_only( const tripoint_bub_ms &p );
         // Sets the creature's position without any side-effects.
         void set_location( const tripoint_abs_ms &loc );
         // Invoked when the creature's position changes.
@@ -976,8 +977,6 @@ class Creature : public viewer
 
         bool underwater;
         void draw( const catacurses::window &w, const point_bub_ms &origin, bool inverted ) const;
-        // TODO: Get rid of the untyped overload
-        void draw( const catacurses::window &w, const tripoint &origin, bool inverted ) const;
         void draw( const catacurses::window &w, const tripoint_bub_ms &origin, bool inverted ) const;
         /**
          * Write information about this creature.

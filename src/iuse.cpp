@@ -4418,7 +4418,7 @@ std::optional<int> iuse::vibe( Character *p, item *it, const tripoint_bub_ms & )
 
 std::optional<int> iuse::vortex( Character *p, item *it, const tripoint_bub_ms & )
 {
-    std::vector<point_bub_ms> spawn;
+    std::vector<point_rel_ms> spawn;
     spawn.reserve( 28 );
     for( int i = -3; i <= 3; i++ ) {
         spawn.emplace_back( -3, i );
@@ -4428,8 +4428,8 @@ std::optional<int> iuse::vortex( Character *p, item *it, const tripoint_bub_ms &
     }
 
     while( !spawn.empty() ) {
-        const tripoint_bub_ms offset( random_entry_removed( spawn ), 0 );
-        monster *const mon = g->place_critter_at( mon_vortex, offset + p->pos() );
+        const tripoint_rel_ms offset( random_entry_removed( spawn ), 0 );
+        monster *const mon = g->place_critter_at( mon_vortex, p->pos_bub() + offset );
         if( !mon ) {
             continue;
         }
@@ -5500,7 +5500,7 @@ bool iuse::robotcontrol_can_target( Character *p, const monster &m )
     return !m.is_dead()
            && m.type->in_species( species_ROBOT )
            && m.friendly == 0
-           && rl_dist( p->pos(), m.pos() ) <= 10;
+           && rl_dist( p->pos_bub(), m.pos_bub() ) <= 10;
 }
 
 std::optional<int> iuse::robotcontrol( Character *p, item *it, const tripoint_bub_ms & )
@@ -6118,7 +6118,7 @@ static std::string effects_description_for_creature( Creature *const creature, s
         }
         if( creature->has_effect( effect_riding ) ) {
             pose = _( "rides" );
-            monster *const mon = get_creature_tracker().creature_at<monster>( creature->pos(), false );
+            monster *const mon = get_creature_tracker().creature_at<monster>( creature->pos_bub(), false );
             figure_effects += pronoun_gender + string_format( _( " is riding %s.  " ),
                               colorize( mon->name(), c_light_blue ) );
         }

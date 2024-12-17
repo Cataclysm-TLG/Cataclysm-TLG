@@ -1286,7 +1286,7 @@ void avatar::rebuild_aim_cache() const
             }
 
             // some basic angle inclusion math, but also everything with 15 is still seen
-            if( rl_dist( tripoint_bub_ms( smx, smy, pos_bub().z() ), pos_bub() ) < 15 ) {
+            if( rl_dist( tripoint_bub_ms( smx, smy, posz() ), pos_bub() ) < 15 ) {
                 aim_cache[smx][smy] = false;
             } else if( lower_bound > upper_bound ) {
                 aim_cache[smx][smy] = !( current_angle >= lower_bound ||
@@ -1325,7 +1325,9 @@ void avatar::set_movement_mode( const move_mode_id &new_mode )
         // Enchantments based on move modes can stack inappropriately without a recalc here
         recalculate_enchantment_cache();
         // crouching affects visibility
-        get_map().set_seen_cache_dirty( pos().z );
+        //TODO: Replace with dirtying vision_transparency_cache
+        get_map().set_transparency_cache_dirty( pos_bub() );
+        get_map().set_seen_cache_dirty( posz() );
         recoil = MAX_RECOIL;
         // TODO: Variable costs from traits, mutations, whether we were prone or crouching, limb scores.
         if( !instant ) {

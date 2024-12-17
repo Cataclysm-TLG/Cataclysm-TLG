@@ -324,7 +324,7 @@ monster::monster( const mtype_id &id ) : monster()
     aggro_character = type->aggro_character;
 }
 
-monster::monster( const mtype_id &id, const tripoint &p ) : monster( id )
+monster::monster( const mtype_id &id, const tripoint_bub_ms &p ) : monster( id )
 {
     set_pos_only( p );
     unset_dest();
@@ -703,7 +703,7 @@ void monster::try_biosignature()
     }
 }
 
-void monster::spawn( const tripoint &p )
+void monster::spawn( const tripoint_bub_ms &p )
 {
     set_pos_only( p );
     unset_dest();
@@ -1428,7 +1428,7 @@ void monster::set_patrol_route( const std::vector<point> &patrol_pts_rel_ms )
     next_patrol_point = 0;
 }
 
-void monster::shift( const point & )
+void monster::shift( const point_rel_sm & )
 {
     // TODO: migrate this to absolute coords and get rid of shift()
     path.clear();
@@ -1511,7 +1511,7 @@ bool monster::is_fleeing( Character &u ) const
         return false;
     }
     monster_attitude att = attitude( &u );
-    return att == MATT_FLEE || ( att == MATT_FOLLOW && rl_dist( pos(), u.pos() ) <= 4 );
+    return att == MATT_FLEE || ( att == MATT_FOLLOW && rl_dist( pos_bub(), u.pos_bub() ) <= 4 );
 }
 
 Creature::Attitude monster::attitude_to( const Creature &other ) const
@@ -2065,7 +2065,7 @@ bool monster::melee_attack( Creature &target, float accuracy )
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else if( target.is_npc() ) {
                 if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos() == player_character.pos() ) {
+                    pos_bub() == player_character.pos_bub() ) {
                     //~ %1$s: name of your mount, %2$s: target NPC name, %3$d: damage value
                     add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), name(), target.disp_name(),
                              total_dealt );
@@ -2077,7 +2077,7 @@ bool monster::melee_attack( Creature &target, float accuracy )
                 }
             } else {
                 if( has_effect( effect_ridden ) && has_flag( mon_flag_RIDEABLE_MECH ) &&
-                    pos() == player_character.pos() ) {
+                    pos_bub() == player_character.pos_bub() ) {
                     //~ %1$s: name of your mount, %2$s: target creature name, %3$d: damage value
                     add_msg( m_good, _( "Your %1$s hits %2$s for %3$d damage!" ), get_name(), target.disp_name(),
                              total_dealt );
@@ -2699,7 +2699,7 @@ float monster::fall_damage_mod() const
     return 0.0f;
 }
 
-int monster::impact( const int force, const tripoint &p )
+int monster::impact( const int force, const tripoint_bub_ms &p )
 {
     if( force <= 0 ) {
         return force;
@@ -3358,7 +3358,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         }
 
         avatar &you = get_avatar(); // No NPCs for now.
-        if( rl_dist( pos(), you.pos() ) <= 1 ) {
+        if( rl_dist( pos_bub(), you.pos_bub() ) <= 1 ) {
             you.get_sick( false );
         }
     } else if( id == effect_fake_flu ) {
@@ -3369,7 +3369,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         }
 
         avatar &you = get_avatar(); // No NPCs for now.
-        if( rl_dist( pos(), you.pos() ) <= 1 ) {
+        if( rl_dist( pos_bub(), you.pos_bub() ) <= 1 ) {
             you.get_sick( true );
         }
     }
@@ -3933,7 +3933,7 @@ float monster::get_mountable_weight_ratio() const
     return type->mountable_weight_ratio;
 }
 
-void monster::hear_sound( const tripoint &source, const int vol, const int dist,
+void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const int dist,
                           bool provocative )
 {
     if( !can_hear() ) {
@@ -3974,7 +3974,7 @@ void monster::hear_sound( const tripoint &source, const int vol, const int dist,
         return;
     }
     // only trigger this if the monster is not friendly or the source isn't the player
-    if( friendly == 0 || source != get_player_character().pos() ) {
+    if( friendly == 0 || source != get_player_character().pos_bub() ) {
         process_trigger( mon_trigger::SOUND, volume );
     }
     provocative_sound = tmp_provocative;

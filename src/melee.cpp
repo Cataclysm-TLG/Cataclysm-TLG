@@ -1754,8 +1754,8 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
     if( technique.aoe == "wide" ) {
         //check if either (or both) of the squares next to our target contain a possible victim
         //offsets are a pre-computed matrix allowing us to quickly lookup adjacent squares
-        tripoint left = pos() + tripoint( offset_a[lookup], offset_b[lookup], 0 );
-        tripoint right = pos() + tripoint( offset_b[lookup], -offset_a[lookup], 0 );
+        tripoint_bub_ms left = pos_bub() + tripoint_rel_ms( offset_a[lookup], offset_b[lookup], 0 );
+        tripoint_bub_ms right = pos_bub() + tripoint_rel_ms( offset_b[lookup], -offset_a[lookup], 0 );
 
         monster *const mon_l = creatures.creature_at<monster>( left );
         if( mon_l && mon_l->friendly == 0 ) {
@@ -1783,9 +1783,9 @@ bool Character::valid_aoe_technique( Creature const &t, const ma_technique &tech
         // Impale hits the target and a single target behind them
         // Check if the square cardinally behind our target, or to the left / right,
         // contains a possible target.
-        tripoint left = t.pos() + tripoint( offset_a[lookup], offset_b[lookup], 0 );
-        tripoint target_pos = t.pos() + ( t.pos() - pos() );
-        tripoint right = t.pos() + tripoint( offset_b[lookup], -offset_b[lookup], 0 );
+        tripoint_bub_ms left = t.pos_bub() + tripoint_rel_ms( offset_a[lookup], offset_b[lookup], 0 );
+        tripoint_bub_ms target_pos = t.pos_bub() + ( t.pos_bub() - pos_bub() );
+        tripoint_bub_ms right = t.pos_bub() + tripoint_rel_ms( offset_b[lookup], -offset_b[lookup], 0 );
 
         monster *const mon_l = creatures.creature_at<monster>( left );
         monster *const mon_t = creatures.creature_at<monster>( target_pos );
@@ -1964,26 +1964,26 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
 
     if( technique.side_switch && !( t.has_flag( mon_flag_IMMOBILE ) ||
                                     t.has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
-        const tripoint b = t.pos();
+        const tripoint_bub_ms b = t.pos_bub();
         point new_;
 
-        if( b.x > posx() ) {
+        if( b.x() > posx() ) {
             new_.x = posx() - 1;
-        } else if( b.x < posx() ) {
+        } else if( b.x() < posx() ) {
             new_.x = posx() + 1;
         } else {
-            new_.x = b.x;
+            new_.x = b.x();
         }
 
-        if( b.y > posy() ) {
+        if( b.y() > posy() ) {
             new_.y = posy() - 1;
-        } else if( b.y < posy() ) {
+        } else if( b.y() < posy() ) {
             new_.y = posy() + 1;
         } else {
-            new_.y = b.y;
+            new_.y = b.y();
         }
 
-        const tripoint_bub_ms &dest{ new_.x, new_.y, b.z };
+        const tripoint_bub_ms &dest{ new_.x, new_.y, b.z()};
         if( g->is_empty( dest ) ) {
             t.setpos( dest );
         }
@@ -1994,7 +1994,7 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         const tripoint_bub_ms prev_pos = t.pos_bub(); // track target startpoint for knockback_follow
         const point kb_offset( rng( -technique.knockback_spread, technique.knockback_spread ),
                                rng( -technique.knockback_spread, technique.knockback_spread ) );
-        tripoint kb_point( posx() + kb_offset.x, posy() + kb_offset.y, posz() );
+        tripoint_bub_ms kb_point( posx() + kb_offset.x, posy() + kb_offset.y, posz() );
         for( int dist = rng( 1, technique.knockback_dist ); dist > 0; dist-- ) {
             if( has_effect_with_flag( json_flag_GRAB_FILTER ) && grab_1.victim && &t == grab_1.victim.get() ) {
                 // Release grabbed creature just before launch

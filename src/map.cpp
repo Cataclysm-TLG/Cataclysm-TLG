@@ -1284,7 +1284,7 @@ bool map::deregister_vehicle_zone( zone_data &zone ) const
 
 std::set<tripoint_bub_ms> map::get_moving_vehicle_targets( const Creature &z, int max_range )
 {
-    const tripoint_bub_ms zpos( z.pos() );
+    const tripoint_bub_ms zpos( z.pos_bub() );
     std::set<tripoint_bub_ms> priority;
     std::set<tripoint_bub_ms> visible;
     for( wrapped_vehicle &v : get_vehicles() ) {
@@ -7388,7 +7388,7 @@ void map::update_visibility_cache( const int zlev )
         return;
     }
 
-    if( player_character.pos_bub().z() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
+    if( player_character.posz() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
         update_visibility_cache( zlev - 1 );
     }
     visibility_variables_cache.variables_set = true; // Not used yet
@@ -10184,15 +10184,15 @@ void map::build_obstacle_cache(
     }
     // Iterate over creatures and set them to block their squares relative to their size.
     for( Creature &critter : g->all_creatures() ) {
-        const tripoint loc = critter.pos();
-        if( loc.z != start.z() ) {
+        const tripoint_bub_ms loc = critter.pos_bub();
+        if( loc.z() != start.z() ) {
             continue;
         }
         // TODO: scale this with expected creature "thickness".
-        obstacle_cache[loc.x][loc.y].velocity = 1.2f;
+        obstacle_cache[loc.x()][loc.y()].velocity = 1.2f;
         // ranged_target_size is "proportion of square that is blocked", and density needs to be
         // "transmissivity of square", so we need the reciprocal.
-        obstacle_cache[loc.x][loc.y].density = 1.0 - critter.ranged_target_size();
+        obstacle_cache[loc.x()][loc.y()].density = 1.0 - critter.ranged_target_size();
     }
 }
 
@@ -10813,7 +10813,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         if( c->has_effect( effect_strengthened_gravity ) ) {
             height += 1;
         }
-        c->impact( height * 10, where.raw() );
+        c->impact( height * 10, where );
         return true;
     }
 
@@ -10863,11 +10863,11 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         } else {
             you->add_msg_if_player( m_bad,
                                     _( "You attempt to break the fall with your %s but it is out of fuel!" ), jetpack.tname() );
-            you->impact( height * 30, where.raw() );
+            you->impact( height * 30, where );
 
         }
     } else {
-        you->impact( height * 30, where.raw() );
+        you->impact( height * 30, where );
     }
 
     if( has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {

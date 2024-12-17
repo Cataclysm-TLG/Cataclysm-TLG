@@ -167,7 +167,7 @@ static void eff_fun_fake_common_cold( Character &u, effect & )
     }
 
     avatar &you = get_avatar(); // No NPCs for now.
-    if( rl_dist( u.pos(), you.pos() ) <= 1 ) {
+    if( rl_dist( u.pos_bub(), you.pos_bub() ) <= 1 ) {
         you.get_sick( false );
     }
 }
@@ -178,7 +178,7 @@ static void eff_fun_fake_flu( Character &u, effect & )
     }
 
     avatar &you = get_avatar(); // No NPCs for now.
-    if( rl_dist( u.pos(), you.pos() ) <= 1 ) {
+    if( rl_dist( u.pos_bub(), you.pos_bub() ) <= 1 ) {
         you.get_sick( true );
     }
 }

@@ -2188,9 +2188,9 @@ void inventory_selector::_add_map_items( tripoint_bub_ms const &target, item_cat
 void inventory_selector::add_nearby_items( int radius )
 {
     if( radius >= 0 ) {
-        const tripoint &center = u.pos();
+        const tripoint_bub_ms &center = u.pos_bub();
         map &here = get_map();
-        for( const tripoint &pos : closest_points_first( center, radius ) ) {
+        for( const tripoint_bub_ms &pos : closest_points_first( center, radius ) ) {
             if( square_dist( center, pos ) <= 1 ) {
                 add_map_items( tripoint_bub_ms( pos ) );
                 add_vehicle_items( tripoint_bub_ms( pos ) );

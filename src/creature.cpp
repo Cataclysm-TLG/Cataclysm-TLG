@@ -216,7 +216,7 @@ tripoint_bub_ms Creature::pos_bub() const
 void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = get_location();
-    set_pos_only( p.raw() );
+    set_pos_only( p );
     on_move( old_loc );
     if( check_gravity ) {
         gravity_check();
@@ -337,7 +337,7 @@ void Creature::move_to( const tripoint_abs_ms &loc )
     on_move( old_loc );
 }
 
-void Creature::set_pos_only( const tripoint &p )
+void Creature::set_pos_only( const tripoint_bub_ms &p )
 {
     location = get_map().getglobal( p );
 }
@@ -520,7 +520,7 @@ bool Creature::sees( const Creature &critter ) const
 
     map &here = get_map();
 
-    const int target_range = rl_dist( pos(), critter.pos() );
+    const int target_range = rl_dist( pos_bub(), critter.pos_bub() );
     if( target_range > MAX_VIEW_DISTANCE ) {
         return false;
     }
@@ -703,7 +703,7 @@ bool Creature::sees( const tripoint_bub_ms &t, bool is_avatar, int range_mod ) c
             const float player_visibility_factor = get_player_character().visibility() / 100.0f;
             int adj_range = std::floor( range * player_visibility_factor );
             return adj_range >= wanted_range &&
-                   here.get_cache_ref( pos().z ).seen_cache[pos().x][pos().y] > LIGHT_TRANSPARENCY_SOLID;
+                   here.get_cache_ref( posz() ).seen_cache[posx()][posy()] > LIGHT_TRANSPARENCY_SOLID;
         } else {
             return here.sees( pos_bub(), t, range );
         }
@@ -756,7 +756,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
             // granularity increases with proximity
             iff_hangle = ( pldist == 2 ? 30_degrees : 60_degrees );
         }
-        u_angle = coord_to_angle( pos(), player_pos.raw() );
+        u_angle = coord_to_angle( pos_bub(), player_pos );
     }
 
     if( area > 0 && in_veh != nullptr ) {
@@ -798,7 +798,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
                     }
                 } while( continueFlag );
 
-                tripoint oldPos = pos();
+                tripoint_bub_ms oldPos = pos_bub();
                 setpos( path_to_target.back() ); //Temporary moving targeting npc on vehicle boundary position
                 bool seesFromVehBound = sees( *m ); // And look from there
                 setpos( tripoint_bub_ms( oldPos ) );
@@ -809,7 +809,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
                 continue;
             }
         }
-        int dist = rl_dist( pos(), m->pos() ) + 1; // rl_dist can be 0
+        int dist = rl_dist( pos_bub(), m->pos_bub() ) + 1; // rl_dist can be 0
         if( dist > range + 1 || dist < area ) {
             // Too near or too far
             continue;
@@ -835,7 +835,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
         // only when the target is actually "hostile enough"
         bool maybe_boo = false;
         if( angle_iff ) {
-            units::angle tangle = coord_to_angle( pos(), m->pos() );
+            units::angle tangle = coord_to_angle( pos_bub(), m->pos_bub() );
             units::angle diff = units::fabs( u_angle - tangle );
             // Player is in the angle and not too far behind the target
             if( ( diff + iff_hangle > 360_degrees || diff < iff_hangle ) &&
@@ -859,7 +859,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
             continue; // Handle this late so that boo_hoo++ can happen
         }
         // Expensive check for proximity to vehicle
-        if( self_area_iff && overlaps_vehicle( in_veh->get_points(), tripoint_bub_ms( m->pos() ), area ) ) {
+        if( self_area_iff && overlaps_vehicle( in_veh->get_points(), m->pos_bub(), area ) ) {
             continue;
         }
 
@@ -901,7 +901,7 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
-    if( rl_dist( pos(), target->pos() ) != 1 ) {
+    if( rl_dist( pos_bub(), target->pos_bub() ) != 1 ) {
         return false;
     }
 
@@ -1626,7 +1626,7 @@ bool Creature::stumble_invis( const Creature &player, const bool stumblemsg )
     return true;
 }
 
-bool Creature::attack_air( const tripoint &p )
+bool Creature::attack_air( const tripoint_bub_ms &p )
 {
     // Calculate move cost differently for monsters and npcs
     int move_cost = 100;
@@ -1645,7 +1645,7 @@ bool Creature::attack_air( const tripoint &p )
     // Attack animation
     if( get_option<bool>( "ANIMATIONS" ) ) {
         std::map<tripoint_bub_ms, nc_color> area_color;
-        area_color[tripoint_bub_ms( p )] = c_black;
+        area_color[ p ] = c_black;
         explosion_handler::draw_custom_explosion( area_color, "animation_hit" );
     }
 
@@ -3321,13 +3321,14 @@ void Creature::draw( const catacurses::window &w, const point_bub_ms &origin, bo
     draw( w, tripoint_bub_ms( origin, posz() ), inverted );
 }
 
-void Creature::draw( const catacurses::window &w, const tripoint &origin, bool inverted ) const
+void Creature::draw( const catacurses::window &w, const tripoint_bub_ms &origin,
+                     bool inverted ) const
 {
     if( is_draw_tiles_mode() ) {
         return;
     }
 
-    point draw( -origin.xy() + point( getmaxx( w ) / 2 + posx(), getmaxy( w ) / 2 + posy() ) );
+    point draw( point( getmaxx( w ) / 2 + posx(), getmaxy( w ) / 2 + posy() ) - origin.xy().raw() );
     if( inverted ) {
         mvwputch_inv( w, draw, basic_symbol_color(), symbol() );
     } else if( is_symbol_highlighted() ) {
@@ -3335,12 +3336,8 @@ void Creature::draw( const catacurses::window &w, const tripoint &origin, bool i
     } else {
         mvwputch( w, draw, symbol_color(), symbol() );
     }
-}
 
-void Creature::draw( const catacurses::window &w, const tripoint_bub_ms &origin,
-                     bool inverted ) const
-{
-    Creature::draw( w, origin.raw(), inverted );
+    Creature::draw( w, origin, inverted );
 }
 
 bool Creature::is_symbol_highlighted() const
@@ -3460,27 +3457,27 @@ std::string Creature::replace_with_npc_name( std::string input ) const
     return input;
 }
 
-void Creature::knock_back_from( const tripoint &p )
+void Creature::knock_back_from( const tripoint_bub_ms &p )
 {
-    if( p == pos() ) {
+    if( p == pos_bub() ) {
         return; // No effect
     }
     if( is_hallucination() ) {
         die( nullptr );
         return;
     }
-    tripoint to = pos();
-    if( p.x < posx() ) {
-        to.x++;
+    tripoint_bub_ms to = pos_bub();
+    if( p.x() < posx() ) {
+        to.x()++;
     }
-    if( p.x > posx() ) {
-        to.x--;
+    if( p.x() > posx() ) {
+        to.x()--;
     }
-    if( p.y < posy() ) {
-        to.y++;
+    if( p.y() < posy() ) {
+        to.y()++;
     }
-    if( p.y > posy() ) {
-        to.y--;
+    if( p.y() > posy() ) {
+        to.y()--;
     }
 
     knock_back_to( to );

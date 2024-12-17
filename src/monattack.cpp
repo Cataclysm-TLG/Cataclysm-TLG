@@ -243,14 +243,14 @@ static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 static bool within_visual_range( monster *z, int max_range )
 {
     Character &player_character = get_player_character();
-    return !( rl_dist( z->pos(), player_character.pos() ) > max_range ||
+    return !( rl_dist( z->pos_bub(), player_character.pos_bub() ) > max_range ||
               !z->sees( player_character ) );
 }
 
 static bool within_target_range( const monster *const z, const Creature *const target, int range )
 {
     return target != nullptr &&
-           ( z->is_adjacent( target, true ) || ( trig_dist_z_adjust( z->pos(), target->pos() ) <= range ) ) &&
+           ( z->is_adjacent( target, true ) || ( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) <= range ) ) &&
            z->sees( *target );
 }
 
@@ -268,7 +268,7 @@ static Creature *sting_get_target( monster *z, float range = 5.0f )
         return nullptr;
     }
 
-    return rl_dist( z->pos(), target->pos() ) <= range ? target : nullptr;
+    return rl_dist( z->pos_bub(), target->pos_bub() ) <= range ? target : nullptr;
 }
 
 static bool sting_shoot( monster *z, Creature *target, damage_instance &dam, float range )
@@ -630,7 +630,7 @@ bool mattack::shriek( monster *z )
 {
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos(), target->pos() ) > 4 ||
+        rl_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
         !z->sees( *target ) ) {
         return false;
     }
@@ -650,7 +650,7 @@ bool mattack::shriek_alert( monster *z )
 
     Creature *target = z->attack_target();
 
-    if( target == nullptr || rl_dist( z->pos(), target->pos() ) > 15 ||
+    if( target == nullptr || rl_dist( z->pos_bub(), target->pos_bub() ) > 15 ||
         !z->sees( *target ) ) {
         return false;
     }
@@ -674,7 +674,7 @@ bool mattack::shriek_stun( monster *z )
         return false;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     // Currently the cone is 2D, so don't use it for 3D attacks
     if( dist > 7 ||
         z->posz() != target->posz() ||
@@ -682,7 +682,7 @@ bool mattack::shriek_stun( monster *z )
         return false;
     }
 
-    units::angle target_angle = coord_to_angle( z->pos(), target->pos() );
+    units::angle target_angle = coord_to_angle( z->pos_bub(), target->pos_bub() );
     units::angle cone_angle = 20_degrees;
     map &here = get_map();
     creature_tracker &creatures = get_creature_tracker();
@@ -750,7 +750,7 @@ bool mattack::rattle( monster *z )
     const int min_dist = z->friendly != 0 ? 1 : 4;
     Creature *target = &get_player_character();
     // Can't use attack_target - the snake has no target
-    if( rl_dist( z->pos(), target->pos() ) > min_dist ||
+    if( rl_dist( z->pos_bub(), target->pos_bub() ) > min_dist ||
         !z->sees( *target ) ) {
         return false;
     }
@@ -1007,7 +1007,7 @@ bool mattack::pull_metal_aoe( monster *z )
         // FIXME: Hardcoded damage type
         proj.impact.add_damage( STATIC( damage_type_id( "bash" ) ), pr.first.weight() / 250_gram );
         // make the projectile stop one tile short to prevent hitting the user
-        proj.range = trig_dist_z_adjust( pr.second.raw(), z->pos() ) - 1;
+        proj.range = trig_dist_z_adjust( pr.second, z->pos_bub() ) - 1;
         proj.proj_effects = {{ ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET }};
 
         dealt_projectile_attack dealt = projectile_attack(
@@ -1078,7 +1078,7 @@ bool mattack::pull_metal_weapon( monster *z )
                     proj.speed = 50;
                     proj.impact = damage_instance( damage_bash, pulled_weapon.weight() / 250_gram );
                     // make the projectile stop one tile short to prevent hitting the monster
-                    proj.range = rl_dist( foe->pos(), z->pos() ) - 1;
+                    proj.range = rl_dist( foe->pos_bub(), z->pos_bub() ) - 1;
                     proj.proj_effects = { { ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET } };
 
                     dealt_projectile_attack dealt = projectile_attack( proj, foe->pos_bub(), z->pos_bub(),
@@ -1113,7 +1113,7 @@ bool mattack::boomer( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos(), target->pos() ) > 3 || !z->sees( *target ) ) {
+    if( target == nullptr || rl_dist( z->pos_bub(), target->pos_bub() ) > 3 || !z->sees( *target ) ) {
         return false;
     }
 
@@ -1154,7 +1154,7 @@ bool mattack::boomer_glow( monster *z )
     }
 
     Creature *target = z->attack_target();
-    if( target == nullptr || rl_dist( z->pos(), target->pos() ) > 3 || !z->sees( *target ) ) {
+    if( target == nullptr || rl_dist( z->pos_bub(), target->pos_bub() ) > 3 || !z->sees( *target ) ) {
         return false;
     }
 
@@ -1395,7 +1395,7 @@ bool mattack::smash( monster *z )
     z->remove_effect( effect_grabbing );
 
     // TODO: Make this parabolic
-    g->fling_creature( target, coord_to_angle( z->pos(), target->pos() ),
+    g->fling_creature( target, coord_to_angle( z->pos_bub(), target->pos_bub() ),
                        z->type->melee_sides * z->type->melee_dice * 3 );
 
     return true;
@@ -1762,7 +1762,7 @@ bool mattack::growplants( monster *z )
 bool mattack::grow_vine( monster *z )
 {
     if( z->friendly ) {
-        if( rl_dist( get_player_character().pos(), z->pos() ) <= 3 ) {
+        if( rl_dist( get_player_character().pos_bub(), z->pos_bub() ) <= 3 ) {
             // Friendly vines keep the area around you free, so you can move.
             return false;
         }
@@ -1853,7 +1853,7 @@ bool mattack::spit_sap( monster *z )
 
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos(), target->pos() ) > 12 ||
+        rl_dist( z->pos_bub(), target->pos_bub() ) > 12 ||
         !z->sees( *target ) ) {
         return false;
     }
@@ -2037,7 +2037,7 @@ bool mattack::fungus_inject( monster *z )
     // For faster copy+paste
     Creature *target = &get_player_character();
     Character &player_character = get_player_character();
-    if( rl_dist( z->pos(), player_character.pos() ) > 1 ) {
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 1 ) {
         return false;
     }
 
@@ -2166,7 +2166,7 @@ bool mattack::fungus_sprout( monster *z )
     }
 
     if( push_player ) {
-        const units::angle angle = coord_to_angle( z->pos(), player_character.pos() );
+        const units::angle angle = coord_to_angle( z->pos_bub(), player_character.pos_bub() );
         add_msg( m_bad, _( "You're shoved away as a fungal wall grows!" ) );
         g->fling_creature( &player_character, angle, rng( 10, 50 ) );
     }
@@ -2196,7 +2196,7 @@ bool mattack::fungus_fortify( monster *z )
         // You have the other two.  Is it really necessary for us to fight?
         add_msg( m_info, _( "The %s spreads its tendrils.  It seems as though it's expecting you…" ),
                  z->name() );
-        if( rl_dist( z->pos(), player_character.pos() ) < 3 ) {
+        if( rl_dist( z->pos_bub(), player_character.pos_bub() ) < 3 ) {
             if( query_yn( _( "The tower extends and aims several tendrils from its depths.  Hold still?" ) ) ) {
                 add_msg( m_warning,
                          _( "The %s works several tendrils into your arms, legs, torso, and even neck…" ),
@@ -2207,7 +2207,7 @@ bool mattack::fungus_fortify( monster *z )
                 player_character.unset_mutation( trait_MARLOSS );
                 player_character.unset_mutation( trait_MARLOSS_BLUE );
                 player_character.set_mutation( trait_THRESH_MARLOSS );
-                here.ter_set( player_character.pos(),
+                here.ter_set( player_character.pos_bub(),
                               ter_t_marloss ); // We only show you the door.  You walk through it on your own.
                 get_memorial().add(
                     pgettext( "memorial_male", "Was shown to the Marloss Gateway." ),
@@ -2239,15 +2239,16 @@ bool mattack::fungus_fortify( monster *z )
     }
     if( push_player ) {
         add_msg( m_bad, _( "You're shoved away as a fungal hedgerow grows!" ) );
-        g->fling_creature( &player_character, coord_to_angle( z->pos(), player_character.pos() ), rng( 10,
-                           50 ) );
+        g->fling_creature( &player_character, coord_to_angle( z->pos_bub(), player_character.pos_bub() ),
+                           rng( 10,
+                                50 ) );
     }
     if( fortified || mycus || peaceful ) {
         return true;
     }
 
     // TODO: De-playerize the whole block
-    const int dist = rl_dist( z->pos(), player_character.pos() );
+    const int dist = rl_dist( z->pos_bub(), player_character.pos_bub() );
     if( dist >= 12 ) {
         return false;
     }
@@ -2410,7 +2411,7 @@ bool mattack::formblob( monster *z )
                 // If we're big enough, spawn a baby blob.
                 shared_ptr_fast<monster> mon = make_shared_fast<monster>( mon_blob_small );
                 mon->ammo = mon->type->starting_ammo;
-                if( mon->will_move_to( dest.raw() ) && mon->know_danger_at( dest.raw() ) ) {
+                if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                     didit = true;
                     z->set_speed_base( z->get_speed_base() - mon_blob_small->speed );
                     if( monster *const blob = g->place_critter_around( mon, dest, 0 ) ) {
@@ -2619,7 +2620,7 @@ bool mattack::nurse_check_up( monster *z )
                            string_format(
                                _( "a soft robotic voice say, \"Come here and stand still for a few minutes, I'll give you a check-up.\"" ) ) );
             z->add_effect( effect_countdown, 30_minutes );
-        } else if( rl_dist( target->pos(), z->pos() ) > 1 ) {
+        } else if( rl_dist( target->pos_bub(), z->pos_bub() ) > 1 ) {
             // Giving them some encouragement
             sounds::sound( z->pos_bub(), 8, sounds::sound_t::electronic_speech,
                            string_format(
@@ -2757,7 +2758,7 @@ bool mattack::nurse_operate( monster *z )
                                        string_format(
                                            _( "a soft robotic voice say, \"Unhand this patient immediately!  If you keep interfering with the procedure I'll be forced to call law enforcement.\"" ) ) );
                         // Try to push the perpetrator away
-                        z->push_to( mon->pos(), 6, 0 );
+                        z->push_to( mon->pos_bub(), 6, 0 );
                     } else {
                         sounds::sound( z->pos_bub(), 8, sounds::sound_t::electronic_speech,
                                        string_format(
@@ -3490,7 +3491,7 @@ bool mattack::copbot( monster *z )
         return true;
     }
 
-    if( rl_dist( z->pos(), target->pos() ) > 2 || foe == nullptr || !z->sees( *target ) ) {
+    if( rl_dist( z->pos_bub(), target->pos_bub() ) > 2 || foe == nullptr || !z->sees( *target ) ) {
         if( one_in( 3 ) ) {
             if( sees_u ) {
                 if( foe->unarmed_attack() ) {
@@ -3692,7 +3693,7 @@ bool mattack::ratking( monster *z )
     }
     Character &player_character = get_player_character();
     // Disable z-level ratting or it can get silly
-    if( rl_dist( z->pos(), player_character.pos() ) > 50 ||
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 50 ||
         z->posz() != player_character.posz() ) {
         return false;
     }
@@ -3714,7 +3715,7 @@ bool mattack::ratking( monster *z )
             add_msg( m_warning, _( "\"FOUL INTERLOPER…\"" ) );
             break;
     }
-    if( rl_dist( z->pos(), player_character.pos() ) <= 10 ) {
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) <= 10 ) {
         player_character.add_effect( effect_rat, 3_minutes );
     }
 
@@ -3800,7 +3801,7 @@ bool mattack::flesh_golem( monster *z )
         return false;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     if( dist > 20 ||
         !z->sees( *target ) ) {
         return false;
@@ -3916,7 +3917,7 @@ bool mattack::lunge( monster *z )
         return false;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     if( dist > 20 ||
         !z->sees( *target ) ) {
         return false;
@@ -4055,7 +4056,7 @@ bool mattack::darkman( monster *z )
         return false;
     }
     Character &player_character = get_player_character();
-    if( rl_dist( z->pos(), player_character.pos() ) > 40 ) {
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 40 ) {
         return false;
     }
     if( monster *const shadow = g->place_critter_around( mon_shadow, z->pos_bub(), 1 ) ) {
@@ -4099,7 +4100,7 @@ bool mattack::darkman( monster *z )
 bool mattack::slimespring( monster *z )
 {
     Character &player_character = get_player_character();
-    if( rl_dist( z->pos(), player_character.pos() ) > 30 ) {
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) > 30 ) {
         return false;
     }
 
@@ -4113,7 +4114,7 @@ bool mattack::slimespring( monster *z )
         add_msg( m_good, "%s", SNIPPET.random_from_category( "slime_cheers" ).value_or( translation() ) );
         player_character.remove_effect( effect_social_dissatisfied );
     }
-    if( rl_dist( z->pos(), player_character.pos() ) <= 3 && z->sees( player_character ) ) {
+    if( rl_dist( z->pos_bub(), player_character.pos_bub() ) <= 3 && z->sees( player_character ) ) {
         if( player_character.has_effect( effect_bleed ) ||
             player_character.has_effect( effect_bite ) ) {
             //~ Lowercase is intended: they're small voices.
@@ -4186,7 +4187,7 @@ bool mattack::riotbot( monster *z )
         return true;
     }
 
-    const int dist = rl_dist( z->pos(), target->pos() );
+    const int dist = rl_dist( z->pos_bub(), target->pos_bub() );
 
     // We need empty hands to arrest
     if( foe && foe->is_avatar() && !foe->is_armed() ) {
@@ -4476,7 +4477,7 @@ bool mattack::flesh_tendril( monster *z )
         return false;
     }
 
-    const int distance_to_target = rl_dist( z->pos(), target->pos() );
+    const int distance_to_target = rl_dist( z->pos_bub(), target->pos_bub() );
 
     // the monster summons stuff to fight you
     if( distance_to_target > 3 && one_in( 12 ) ) {
@@ -4506,7 +4507,7 @@ bool mattack::flesh_tendril( monster *z )
 
     if( distance_to_target <= 1 ) {
         if( one_in( 8 ) ) {
-            g->fling_creature( target, coord_to_angle( z->pos(), target->pos() ),
+            g->fling_creature( target, coord_to_angle( z->pos_bub(), target->pos_bub() ),
                                z->type->melee_sides * z->type->melee_dice * 3 );
         } else {
             z->type->special_attacks.at( "grab" )->call( *z );

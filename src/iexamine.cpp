@@ -1602,7 +1602,7 @@ void iexamine::deployed_furniture( Character &you, const tripoint_bub_ms &pos )
 
     const furn_t &fo = here.furn( pos ).obj();
     const std::string &name = fo.name();
-    if( you.pos_bub().z() != pos.z() ) {
+    if( you.posz() != pos.z() ) {
         drop_pos = you.pos_bub();
         if( !you.query_yn( _( "Pull up the %s?" ), name ) ) {
             return;
