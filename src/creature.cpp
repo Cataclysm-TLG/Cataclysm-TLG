@@ -209,34 +209,19 @@ tripoint_bub_ms Creature::pos_bub() const
     return get_map().bub_from_abs( location );
 }
 
-void Creature::setpos( const tripoint &p )
+void Creature::setpos( const tripoint &p, bool check_gravity/* = true*/ )
+{
+    Creature::setpos( tripoint_bub_ms( p ), check_gravity );
+}
+
+void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = get_location();
     set_pos_only( p );
     on_move( old_loc );
-}
-
-void Creature::setpos( const tripoint_bub_ms &p )
-{
-    Creature::setpos( p.raw() );
-}
-
-static units::volume size_to_volume( creature_size size_class )
-{
-    // TODO: size_to_volume and volume_to_size should be made into a single consistent function.
-    // TODO: Volume averages should be 8500, 23000, 75000, 136000, 244000
-    // TODO: This would necessitate increasing vpart capacity and resizing
-    // almost every monster in the game.
-    if( size_class == creature_size::tiny ) {
-        return 15625_ml;
-    } else if( size_class == creature_size::small ) {
-        return 31250_ml;
-    } else if( size_class == creature_size::medium ) {
-        return 62500_ml;
-    } else if( size_class == creature_size::large ) {
-        return 125000_ml;
+    if( check_gravity ) {
+        gravity_check();
     }
-    return 250000_ml;
 }
 
 int Creature::enum_size() const
@@ -351,6 +336,10 @@ std::vector<std::string> Creature::get_grammatical_genders() const
 {
     // Returning empty list means we use the language-specified default
     return {};
+}
+
+void Creature::gravity_check()
+{
 }
 
 void Creature::normalize()

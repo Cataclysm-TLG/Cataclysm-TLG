@@ -365,8 +365,6 @@ static const trait_id trait_VINES2( "VINES2" );
 static const trait_id trait_VINES3( "VINES3" );
 static const trait_id trait_WAYFARER( "WAYFARER" );
 
-static const trap_str_id tr_ledge( "tr_ledge" );
-
 static const zone_type_id zone_type_LOOT_CUSTOM( "LOOT_CUSTOM" );
 static const zone_type_id zone_type_NO_AUTO_PICKUP( "NO_AUTO_PICKUP" );
 
@@ -5182,7 +5180,11 @@ monster *game::place_critter_around( const shared_ptr_fast<monster> &mon,
         return nullptr;
     }
     mon->spawn( *where );
-    return critter_tracker->add( mon ) ? mon.get() : nullptr;
+    if( critter_tracker->add( mon ) ) {
+        mon->gravity_check();
+        return mon.get();
+    }
+    return nullptr;
 }
 
 monster *game::place_critter_within( const mtype_id &id, const tripoint_range<tripoint> &range )
@@ -5204,7 +5206,11 @@ monster *game::place_critter_within( const shared_ptr_fast<monster> &mon,
         return nullptr;
     }
     mon->spawn( *where );
-    return critter_tracker->add( mon ) ? mon.get() : nullptr;
+    if( critter_tracker->add( mon ) ) {
+        mon->gravity_check();
+        return mon.get();
+    }
+    return nullptr;
 }
 
 size_t game::num_creatures() const
@@ -10404,7 +10410,7 @@ bool game::prompt_dangerous_tile( const tripoint &dest_loc,
         !query_yn( _( "Really step into %s?" ), enumerate_as_string( *harmful_stuff ) ) ) {
         return false;
     }
-    if( !harmful_stuff->empty() && u.is_mounted() && m.tr_at( dest_loc ) == tr_ledge ) {
+    if( !harmful_stuff->empty() && u.is_mounted() && m.is_open_air( dest_loc ) ) {
         add_msg( m_warning, _( "Your %s refuses to move over that ledge!" ),
                  u.mounted_creature->get_name() );
         return false;
@@ -10485,12 +10491,9 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
         }
     }
 
-    const trap &tr = m.tr_at( dest_loc );
-    // HACK: Hack for now, later ledge should stop being a trap
-    if( tr == tr_ledge ) {
-        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) &&
-            !u.has_effect( effect_jumping ) ) {
-            harmful_stuff.push_back( tr.name() );
+    if( m.is_open_air( dest_loc ) ) {
+        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) && !u.has_effect( effect_jumping ) ) {
+            harmful_stuff.emplace_back( "ledge" );
             if( harmful_stuff.size() == max ) {
                 return harmful_stuff;
             }
@@ -11712,7 +11715,6 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
         std::string danger_tile = enumerate_as_string( get_dangerous_tile( fdest ) );
         add_msg( _( "You let go of the %1$s as it falls down the %2$s." ), furntype.name(), danger_tile );
         u.grab( object_type::NONE );
-        m.drop_furniture( fdest );
         return true;
     }
 
@@ -11995,9 +11997,8 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
 
     // Fall down to the ground - always on the last reached tile
     if( !m.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, c->pos_bub() ) ) {
-        const trap &trap_under_creature = m.tr_at( c->pos_bub() );
         // Didn't smash into a wall or a floor so only take the fall damage
-        if( thru && trap_under_creature == tr_ledge ) {
+        if( thru && m.is_open_air( c->pos_bub() ) ) {
             m.creature_on_trap( *c, false );
         } else {
             // Fall on ground
@@ -12463,7 +12464,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
 
     here.invalidate_map_cache( here.get_abs_sub().z() );
     // Upon force movement, traps can not be avoided.
-    if( !wall_cling && ( get_map().tr_at( u.pos_bub() ) == tr_ledge &&
+    if( !wall_cling && ( get_map().is_open_air( u.pos_bub() ) &&
                          !u.has_effect( effect_gliding ) && !u.has_effect( effect_airborne ) ) )  {
         here.creature_on_trap( u, !force );
     }
@@ -12551,7 +12552,7 @@ std::optional<tripoint> game::find_stairs( const map &mp, int z_after, const tri
                                         z_after ) ) );
     tripoint_bub_ms omtile_align_end( omtile_align_start + point( omtilesz, omtilesz ) );
 
-    if( get_map().tr_at( u.pos_bub() ) != tr_ledge ) {
+    if( !get_map().is_open_air( u.pos_bub() ) ) {
         for( const tripoint_bub_ms &dest : mp.points_in_rectangle( omtile_align_start,
                 omtile_align_end ) ) {
             if( rl_dist( u.pos_bub(), dest ) <= best &&
@@ -12630,7 +12631,7 @@ std::optional<tripoint> game::find_or_make_stairs( map &mp, const int z_after, b
         return stairs;
     }
 
-    if( u.has_effect( effect_gliding ) && get_map().tr_at( u.pos_bub() ) == tr_ledge ) {
+    if( u.has_effect( effect_gliding ) && get_map().is_open_air( u.pos_bub() ) ) {
         return stairs;
     }
 
@@ -13753,9 +13754,10 @@ bool game::slip_down( climb_maneuver maneuver, climbing_aid_id aid_id,
         if( slip >= 100 ) {
             add_msg( m_bad, _( "Climbing is impossible in your current state." ) );
         }
-        // Check for traps if climbing UP or DOWN.  Note that ledges (open air) count as traps.
+        // Check for traps and gravity if climbing up or down.
         if( maneuver != climb_maneuver::over_obstacle ) {
             m.creature_on_trap( u );
+            u.gravity_check();
         }
         return true;
     }
@@ -14018,7 +14020,7 @@ void game::climb_down_using( const tripoint &examp, climbing_aid_id aid_id, bool
     float weary_mult = 1.0f / you.exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
 
     you.mod_moves( -to_moves<int>( 1_seconds + 1_seconds * fall_mod ) * weary_mult );
-    you.setpos( examp );
+    you.setpos( examp, false );
 
     // Pre-descent message.
     if( !aid.down.msg_before.empty() ) {
@@ -14071,7 +14073,7 @@ void game::climb_down_using( const tripoint &examp, climbing_aid_id aid_id, bool
         you.mod_thirst( aid.down.cost.thirst );
     }
 
-    // vertical_move with force=true triggers traps (ie, fall) at the end of the move.
+    // vertical_move with force=true triggers traps at the end of the move.
     g->vertical_move( -descended_levels, true );
 
     if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.pos_bub() ) ) {

@@ -907,11 +907,11 @@ void monster::move()
     nursebot_operate( dragged_foe );
 
     // The monster can sometimes hang in air due to last fall being blocked
-    if( !flies() && !here.has_floor_or_water( pos_bub() ) && !here.has_vehicle_floor( pos_bub() ) ) {
-        here.creature_on_trap( *this, false );
-        if( is_dead() ) {
-            return;
-        }
+    if( !flies() && here.is_open_air( pos_bub() ) && !here.has_vehicle_floor( pos_bub() ) ) {
+        gravity_check();
+    }
+    if( is_dead() ) {
+        return;
     }
 
     // if the monster is in a deep water tile, it has a chance to drown

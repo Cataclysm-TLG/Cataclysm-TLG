@@ -16,7 +16,6 @@
 static furn_id f_null;
 
 static const furn_str_id furn_f_console( "f_console" );
-static const trap_str_id tr_ledge( "tr_ledge" );
 
 void maptile_soa::swap_soa_tile( const point_sm_ms &p1, const point_sm_ms &p2 )
 {
@@ -195,8 +194,7 @@ bool submap::contains_vehicle( vehicle *veh )
 
 bool submap::is_open_air( const point_sm_ms &p ) const
 {
-    const ter_id &t = get_ter( p );
-    return t->trap == tr_ledge;
+    return get_ter( p ).obj().has_flag( ter_furn_flag::TFLAG_NO_FLOOR );
 }
 
 void submap::rotate( int turns )
