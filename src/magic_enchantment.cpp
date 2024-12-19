@@ -773,6 +773,14 @@ bool enchant_cache::add( const enchant_cache &rhs )
     return true;
 }
 
+void enchant_cache::force_add_mutation( const enchantment &rhs, const Character &guy )
+{
+    for( const trait_id &branch : rhs.mutations ) {
+        mutations.push_back( branch );
+    }
+}
+
+
 void enchant_cache::force_add( const enchant_cache &rhs )
 {
     for( const std::pair<const enchant_vals::mod, double> &pair_values :
@@ -847,7 +855,7 @@ void enchant_cache::force_add( const enchant_cache &rhs )
     }
 
     for( const trait_id &branch : rhs.mutations ) {
-        mutations.emplace( branch );
+        mutations.push_back( branch );
     }
 
     for( const std::pair<const time_duration, std::vector<fake_spell>> &act_pair :
@@ -994,7 +1002,7 @@ void enchant_cache::force_add_with_dialogue( const enchantment &rhs, const const
     }
 
     for( const trait_id &branch : rhs.mutations ) {
-        mutations.emplace( branch );
+        mutations.push_back( branch );
     }
 
     for( const std::pair<const time_duration, std::vector<fake_spell>> &act_pair :
