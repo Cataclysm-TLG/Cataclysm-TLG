@@ -1291,7 +1291,7 @@ bool spell::can_cast( const Character &guy ) const
     }
 
     if( !type->spell_components.is_empty() &&
-        !type->spell_components->can_make_with_inventory( guy.crafting_inventory( guy.pos(), 0, false ),
+        !type->spell_components->can_make_with_inventory( guy.crafting_inventory( guy.pos_bub(), 0, false ),
                 return_true<item> ) ) {
         return false;
     }
@@ -2881,13 +2881,13 @@ void spellcasting_callback::spell_info_text( const spell &sp, int width )
     if( sp.has_components() ) {
         if( !sp.components().get_components().empty() ) {
             for( const std::string &line : sp.components().get_folded_components_list(
-                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos(), 0, false ), return_true<item> ) ) {
+                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos_bub(), 0, false ), return_true<item> ) ) {
                 info_txt.emplace_back( line );
             }
         }
         if( !( sp.components().get_tools().empty() && sp.components().get_qualities().empty() ) ) {
             for( const std::string &line : sp.components().get_folded_tools_list(
-                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos(), 0, false ) ) ) {
+                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos_bub(), 0, false ) ) ) {
                 info_txt.emplace_back( line );
             }
         }

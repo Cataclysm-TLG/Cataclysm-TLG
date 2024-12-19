@@ -7247,7 +7247,7 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
             } else if( you.has_effect( effect_incorporeal ) ) {
                 add_msg( m_info, _( "You lack the substance to affect anything." ) );
             } else {
-                you.craft( examp.raw() );
+                you.craft( examp );
             }
             break;
         }
@@ -7257,7 +7257,7 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
             } else if( you.has_effect( effect_incorporeal ) ) {
                 add_msg( m_info, _( "You lack the substance to affect anything." ) );
             } else {
-                you.recraft( examp.raw() );
+                you.recraft( examp );
             }
             break;
         }
@@ -7267,7 +7267,7 @@ void iexamine::workbench_internal( Character &you, const tripoint_bub_ms &examp,
             } else if( you.has_effect( effect_incorporeal ) ) {
                 add_msg( m_info, _( "You lack the substance to affect anything." ) );
             } else {
-                you.long_craft( examp.raw() );
+                you.long_craft( examp );
             }
             break;
         }

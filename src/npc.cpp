@@ -270,7 +270,7 @@ npc::npc()
     }
 }
 
-standard_npc::standard_npc( const std::string &name, const tripoint &pos,
+standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
                             const std::vector<std::string> &clothing,
                             int sk_lvl, int s_str, int s_dex, int s_int, int s_per )
 {
@@ -1556,7 +1556,7 @@ bool npc::wield( item &it )
     return true;
 }
 
-void npc::drop( const drop_locations &what, const tripoint &target,
+void npc::drop( const drop_locations &what, const tripoint_bub_ms &target,
                 bool stash )
 {
     Character::drop( what, target, stash );
@@ -2891,11 +2891,11 @@ static void maybe_shift( tripoint_bub_ms &pos, const point &d )
     }
 }
 
-void npc::shift( const point &s )
+void npc::shift( const point_rel_sm &s )
 {
-    const point shift = coords::project_to<coords::ms>( point_rel_sm( s ) ).raw();
+    const point_rel_ms shift = coords::project_to<coords::ms>( s );
     // TODO: convert these to absolute coords and get rid of shift()
-    maybe_shift( wanted_item_pos, point( -shift.x, -shift.y ) );
+    maybe_shift( wanted_item_pos, point( -shift.x(), -shift.y() ) );
     path.clear();
 }
 
@@ -2930,7 +2930,7 @@ void npc::reboot()
     ai_cache.ally.reset();
     ai_cache.can_heal.clear_all();
     ai_cache.sound_alerts.clear();
-    ai_cache.s_abs_pos = tripoint::zero;
+    ai_cache.s_abs_pos = tripoint_abs_ms::zero;
     ai_cache.stuck = 0;
     ai_cache.guard_pos = std::nullopt;
     ai_cache.my_weapon_value = 0;
