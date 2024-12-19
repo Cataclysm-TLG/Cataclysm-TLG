@@ -543,19 +543,28 @@ static bool get_and_assign_los( int &los, avatar &player_character, const tripoi
     return los;
 }
 
-static std::unordered_map<point_abs_omt, bool> generated_omts;
+static std::unordered_set<point_abs_omt> generated_omts;
 
-bool is_generated_omt( const point_abs_omt &omp )
+static void build_generated_omts()
 {
-    if( const auto it = generated_omts.find( omp ); it != generated_omts.end() ) {
-        return it->second;
+    const int om_map_width = OVERMAP_WINDOW_WIDTH;
+    const int om_map_height = OVERMAP_WINDOW_HEIGHT;
+    const int om_half_width = om_map_width / 2;
+    const int om_half_height = om_map_height / 2;
+    const tripoint_abs_omt corner = g->overmap_data.cursor_pos - point_rel_omt( om_half_width,
+                                    om_half_height );
+    for( int i = 0; i < om_map_width; ++i ) {
+        for( int j = 0; j < om_map_height; ++j ) {
+            const tripoint_abs_omt omp = corner + point_rel_omt( i, j );
+            if( MAPBUFFER.submap_exists( project_to<coords::sm>( omp ) ) ) {
+                generated_omts.insert( omp.xy() );
+            }
+        }
     }
-    const bool generated = MAPBUFFER.submap_exists_approx( { project_to<coords::sm>( omp ), 0 } );
-    generated_omts.insert( { omp, generated } );
-    return generated;
 }
 
-static void draw_ascii( const catacurses::window &w, overmap_draw_data_t &data )
+static void draw_ascii(
+    const catacurses::window &w, overmap_draw_data_t &data )
 {
     const tripoint_abs_omt &orig = data.origin_pos;
     const tripoint_abs_omt &cursor_pos = data.cursor_pos;
@@ -807,7 +816,7 @@ static void draw_ascii( const catacurses::window &w, overmap_draw_data_t &data )
                     }
                 }
                 // Highlight areas that already have been generated
-                if( is_generated_omt( omp.xy() ) ) {
+                if( generated_omts.find( omp.xy() ) != generated_omts.end() ) {
                     ter_color = red_background( ter_color );
                 }
             }
@@ -1586,6 +1595,8 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
             wnoutrefresh( w_editor );
         } );
 
+        build_generated_omts();
+
         std::string action;
         do {
             om_ui.invalidate_ui();
@@ -1634,6 +1645,7 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
             }
         } while( action != "CONFIRM" && action != "QUIT" );
 
+        generated_omts.clear();
         uistate.place_terrain = nullptr;
         uistate.place_special = nullptr;
     }
