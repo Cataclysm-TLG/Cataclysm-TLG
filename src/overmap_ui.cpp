@@ -1495,13 +1495,6 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
     std::vector<const overmap_special *> oslist;
     const bool terrain = om_action == "PLACE_TERRAIN";
 
-    //add_msg( m_info, _( "Hang on a bit…" ) );
-    //
-    //static_popup popup;
-    //popup.message( "%s", _( "Hang on a bit…" ) );
-    //ui_manager::redraw();
-    //refresh_display();
-
     build_generated_omts();
 
     if( terrain ) {
@@ -1546,6 +1539,11 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
 
         input_context ctxt( "OVERMAP_EDITOR" );
         ctxt.register_directions();
+        ctxt.register_action( "SELECT" );
+        ctxt.register_action( "LEVEL_UP" );
+        ctxt.register_action( "LEVEL_DOWN" );
+        ctxt.register_action( "zoom_in" );
+        ctxt.register_action( "zoom_out" );
         ctxt.register_action( "CONFIRM" );
         ctxt.register_action( "ROTATE" );
         ctxt.register_action( "QUIT" );
@@ -1600,13 +1598,9 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
                 mvwprintz( w_editor, point( 1, 10 ), c_white, _( "[%s] Rotate" ),
                            ctxt.get_desc( "ROTATE" ) );
             }
-<<<<<<< HEAD
-            mvwprintz( w_editor, point( 1, 12 ), c_white, _( "[%s] Apply" ),
-=======
             mvwprintz( w_editor, point( 1, 11 ), c_white, _( "[%s] Place" ),
                        ctxt.get_desc( "CONFIRM_MULTIPLE" ) );
             mvwprintz( w_editor, point( 1, 12 ), c_white, _( "[%s] Place and close" ),
->>>>>>> Only calc generated maps once
                        ctxt.get_desc( "CONFIRM" ) );
             mvwprintz( w_editor, point( 1, 13 ), c_white, _( "[ESCAPE/Q] Cancel" ) );
             wnoutrefresh( w_editor );
@@ -1621,6 +1615,15 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
 
             if( const std::optional<tripoint_rel_omt> vec = ctxt.get_direction_rel_omt( action ) ) {
                 curs += *vec;
+            } else if( action == "LEVEL_DOWN" && curs.z() > -OVERMAP_DEPTH ) {
+                curs.z()--;
+            } else if( action == "LEVEL_UP" && curs.z() < OVERMAP_HEIGHT ) {
+                curs.z()++;
+            } else if( action == "SELECT" ) {
+                if( std::optional<tripoint_rel_omt> mouse_pos = ctxt.get_coordinates_rel_omt( g->w_overmap,
+                        point::zero, true ); mouse_pos ) {
+                    curs = curs + mouse_pos->xy();
+                }
             } else if( action == "zoom_out" ) {
                 g->zoom_out_overmap();
                 om_ui.mark_resize();
@@ -1640,10 +1643,6 @@ static void place_ter_or_special( const ui_adaptor &om_ui, tripoint_abs_omt &cur
                         }
                     }
                 }
-<<<<<<< HEAD
-                break;
-=======
->>>>>>> Only calc generated maps once
             } else if( action == "ROTATE" && can_rotate ) {
                 uistate.omedit_rotation = om_direction::turn_right( uistate.omedit_rotation );
                 if( terrain ) {
@@ -1991,7 +1990,7 @@ static tripoint_abs_omt display()
     std::string action;
     data.show_explored = true;
     int fast_scroll_offset = get_option<int>( "FAST_SCROLL_OFFSET" );
-    std::optional<tripoint_bub_ms> mouse_pos;
+    std::optional<tripoint_rel_omt> mouse_pos;
     std::chrono::time_point<std::chrono::steady_clock> last_blink = std::chrono::steady_clock::now();
     std::chrono::time_point<std::chrono::steady_clock> last_advance = std::chrono::steady_clock::now();
     auto display_path_iter = display_path.rbegin();
@@ -2046,7 +2045,7 @@ static tripoint_abs_omt display()
                 curs += edge_scroll;
             }
         } else if( action == "SELECT" &&
-                   ( mouse_pos = ictxt.get_coordinates( g->w_overmap, point::zero, true ) ) ) {
+                   ( mouse_pos = ictxt.get_coordinates_rel_omt( g->w_overmap, point::zero, true ) ) ) {
             curs += mouse_pos->xy().raw();
         } else if( action == "CENTER" ) {
             curs = orig;
@@ -2207,6 +2206,7 @@ static tripoint_abs_omt display()
             last_blink = now;
         }
     } while( action != "QUIT" && action != "CONFIRM" );
+    overmap_ui::generated_omts.clear();
     if( !keep_overmap_ui ) {
         ui::omap::force_quit();
     } else {
@@ -2601,7 +2601,6 @@ std::optional<city> ui::omap::select_city( uilist &cities_menu,
 
 void ui::omap::force_quit()
 {
-    overmap_ui::generated_omts.clear();
     g->overmap_data.ui.reset();
     g->overmap_data.fast_traveling = false;
 }
