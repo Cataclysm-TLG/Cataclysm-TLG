@@ -35,3 +35,4 @@ Cataclysm: The Last Generation bases off Cataclysm: Dark Days Ahead. As such, th
 - Being small or tiny means decreased HP
 - The steel variants have been removed. No more tempered, mild, etc steel. It is all one kind of steel now.
 - Survivor suits have returned
+- Less slimes and leech plants in the labs so there will be less performance issues even when you are not in the lab.
