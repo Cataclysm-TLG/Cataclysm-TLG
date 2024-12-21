@@ -23,7 +23,6 @@ Cataclysm: The Last Generation bases off Cataclysm: Dark Days Ahead. As such, th
 - Less free food. Food was running out a year before the dead began to walk. Panic-buying, hoarding, and infighting made it difficult for governments to get supplies to their people. Homes are no longer totally stocked with all the food you could ever want.
 - Foraging is much more difficult. Fruit-bearing plants are harder to come by, and finding ones that aren't picked over or totally bare is hard work that requires a bit of survival and perception.
 - Skill rust has been removed. This was never a good mechanic. DDA's attempts to revive it were met with widespread resistance, and it was then nerfed to become a "bonus" that hardly counted for anything at all. Cataclysm games do not last long enough to model any sort of realistic skill rust, and constantly losing skills is not a fun experience, so the whole system is gone.
-- 
 - Acid additions
   - Acid can damage items now
   - Acid will also poison you
