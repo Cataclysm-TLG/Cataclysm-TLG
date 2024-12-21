@@ -1,6 +1,6 @@
 # Changes in The Last Generation
 
-Cataclysm: The Last Generation is forked from a March 2024 build of [Cataclysm: Dark Days Ahead](https://github.com/CleverRaven/Cataclysm-DDA). The changelog below details additions which have been made that diverge from Dark Days Ahead.
+Cataclysm: The Last Generation is forked from a March 2024 build of Cataclysm: Dark Days Ahead ( https://github.com/CleverRaven/Cataclysm-DDA ). The changelog below details additions which have been made that diverge from Dark Days Ahead.
 
 The changelog does not include backports from DDA. We will attempt to keep as current as possible with DDA and backport what we can so long as it fits our design goals, however as our two games diverge, fewer and fewer things will be backported.
 
