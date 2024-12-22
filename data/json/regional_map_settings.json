@@ -605,6 +605,7 @@
           "mx_portal": 3,
           "mx_portal_in": 3,
           "mx_helicopter": 1,
+          "mx_jabberwock": 2,
           "mx_beehive_natural": 20
         }
       },
@@ -770,13 +771,13 @@
       "research_facility_interior": {
         "chance": 2,
         "extras": {
-          "mx_jabberwock": 1,
-          "mx_military": 5,
-          "mx_portal": 100,
-          "mx_crater": 300,
-          "mx_portal_in": 40,
-          "mx_point_burned_ground": 125,
-          "mx_casings": 30
+          "mx_crater": 15000,
+          "mx_portal": 5000,
+          "mx_point_burned_ground": 6250,
+          "mx_portal_in": 2000,
+          "mx_casings": 1500,
+          "mx_military": 250,
+          "mx_jabberwock": 1
         }
       },
       "river": { "chance": 1, "extras": { "mx_null": 66, "mx_riverside_boat": 1, "mx_reed": 33 } },
