@@ -256,7 +256,7 @@ static int om_harvest_ter_break( npc &comp, const tripoint_abs_omt &omt_tgt, con
 static mass_volume om_harvest_itm( const npc_ptr &comp, const tripoint_abs_omt &omt_tgt,
                                    int chance = 100,
                                    bool take = true );
-static void apply_camp_ownership( map &here, const tripoint &camp_pos, int radius );
+static void apply_camp_ownership( map &here, const tripoint_bub_ms &camp_pos, int radius );
 /*
  * Counts or cuts trees into trunks and trunks into logs
  * @param omt_tgt the targeted OM tile
@@ -540,7 +540,7 @@ static bool update_emergency_recall( std::string &entry, const comp_list &npc_li
 }
 
 static bool extract_and_check_orientation_flags( const recipe_id &recipe,
-        const point &dir,
+        const point_rel_omt &dir,
         bool &mirror_horizontal,
         bool &mirror_vertical,
         int &rotation,
@@ -578,23 +578,23 @@ static bool extract_and_check_orientation_flags( const recipe_id &recipe,
         return false;
     }
 
-    if( dir == point::north_west ) {
+    if( dir == point_rel_omt::north_west ) {
         dir_string = "NW";
-    } else if( dir == point::north ) {
+    } else if( dir == point_rel_omt::north ) {
         dir_string = "N";
-    } else if( dir == point::north_east ) {
+    } else if( dir == point_rel_omt::north_east ) {
         dir_string = "NE";
-    } else if( dir == point::west ) {
+    } else if( dir == point_rel_omt::west ) {
         dir_string = "W";
-    } else if( dir == point::zero ) {
+    } else if( dir == point_rel_omt::zero ) {
         dir_string.clear();  //  Will result in "hidden" flags that can actually affect the core.
-    } else if( dir == point::east ) {
+    } else if( dir == point_rel_omt::east ) {
         dir_string = "E";
-    } else if( dir == point::south_west ) {
+    } else if( dir == point_rel_omt::south_west ) {
         dir_string = "SW";
-    } else if( dir == point::south ) {
+    } else if( dir == point_rel_omt::south ) {
         dir_string = "S";
-    } else if( dir == point::south_east ) {
+    } else if( dir == point_rel_omt::south_east ) {
         dir_string = "SE";
     }
 
@@ -771,7 +771,7 @@ void talk_function::basecamp_mission( npc &p )
 }
 
 void basecamp::add_available_recipes( mission_data &mission_key, mission_kind kind,
-                                      const point &dir,
+                                      const point_rel_omt &dir,
                                       const std::map<recipe_id, translation> &craft_recipes )
 {
     const std::string dir_abbr = base_camps::all_directions.at( dir ).bracket_abbr.translated();
@@ -786,7 +786,7 @@ void basecamp::add_available_recipes( mission_data &mission_key, mission_kind ki
     }
 }
 
-void basecamp::get_available_missions_by_dir( mission_data &mission_key, const point &dir )
+void basecamp::get_available_missions_by_dir( mission_data &mission_key, const point_rel_omt &dir )
 {
     std::string entry;
 
@@ -1387,7 +1387,7 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
 {
     std::string entry;
 
-    const point &base_dir = base_camps::base_dir;
+    const point_rel_omt &base_dir = base_camps::base_dir;
     const base_camps::direction_data &base_data = base_camps::all_directions.at( base_dir );
     const std::string base_dir_id = base_data.id;
     reset_camp_resources( here );
@@ -1549,7 +1549,7 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
     get_available_missions_by_dir( mission_key, base_camps::base_dir );
 
     // Loop over expansions
-    for( const point &dir : directions ) {
+    for( const point_rel_omt &dir : directions ) {
         get_available_missions_by_dir( mission_key, dir );
     }
 
@@ -1623,7 +1623,7 @@ bool basecamp::handle_mission( const ui_mission_id &miss_id )
         return true;
     }
     avatar &player_character = get_avatar();
-    const point &miss_dir = miss_id.id.dir.value();
+    const point_rel_omt &miss_dir = miss_id.id.dir.value();
     //  All missions should supply dir. Bug if they don't, so blow up during testing.
 
     switch( miss_id.id.id ) {
@@ -2028,7 +2028,7 @@ void basecamp::start_upgrade( const mission_id &miss_id )
             return;
         }
         components.consume_components();
-        const point dir = miss_id.dir.value();  //  Will always have a value
+        const point_rel_omt dir = miss_id.dir.value();  //  Will always have a value
 
         update_in_progress( miss_id.parameters,
                             dir );
@@ -2090,8 +2090,7 @@ void basecamp::scan_pseudo_items()
 {
     for( auto &expansion : expansions ) {
         expansion.second.available_pseudo_items.clear();
-        tripoint_abs_omt tile = tripoint_abs_omt( omt_pos.x() + expansion.first.x,
-                                omt_pos.y() + expansion.first.y, omt_pos.z() );
+        tripoint_abs_omt tile = omt_pos + expansion.first;
         tinymap expansion_map;
         expansion_map.load( tile, false );
 
@@ -2622,7 +2621,7 @@ void basecamp::start_relay_hide_site( const mission_id &miss_id, float exertion_
         units::volume total_import_volume;
         units::mass total_import_mass;
 
-        drop_locations gaining_equipment = get_equipment( &target_bay, relay_site_stash.raw(), pc, preset,
+        drop_locations gaining_equipment = get_equipment( &target_bay, relay_site_stash, pc, preset,
                                            _( "These are the items you've selected so far." ), _( "Select items to bring back" ),
                                            total_import_volume, total_import_mass );
 
@@ -2847,46 +2846,51 @@ using PathMap = cata::mdarray<double, point, path_map_size, path_map_size>;
 //  odd paths. At the time of this writing there is no corresponding
 //  construction cost difference, though, as that doesn't match with the fixed
 //  recipe approach taken.
-static point check_salt_pipe_neighbors( PathMap &path_map, point pt )
+static point_rel_omt check_salt_pipe_neighbors( PathMap &path_map, point_rel_omt pt )
 {
-    point found = point::invalid;
+    point_rel_omt found = point_rel_omt::invalid;
     double lowest_found = -10000.0;
     double cost;
 
     for( int i = -1; i <= 1; i++ ) {
         for( int k = -1; k <= 1; k++ ) {
-            if( pt.x + i > -max_salt_water_pipe_distance &&
-                pt.x + i < max_salt_water_pipe_distance &&
-                pt.y + k > -max_salt_water_pipe_distance &&
-                pt.y + k < max_salt_water_pipe_distance ) {
+            if( pt.x() + i > -max_salt_water_pipe_distance &&
+                pt.x() + i < max_salt_water_pipe_distance &&
+                pt.y() + k > -max_salt_water_pipe_distance &&
+                pt.y() + k < max_salt_water_pipe_distance ) {
                 if( i != 0 && k != 0 ) {
                     cost = diagonal_salt_pipe_cost;
                 } else {
                     cost = 1.0;
                 }
 
-                if( path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] ==
+                if( path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k]
+                    ==
                     salt_pipe_legal ||
-                    ( path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] >
+                    ( path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] >
                       0.0 &&
-                      path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] >
-                      path_map[max_salt_water_pipe_distance + pt.x][max_salt_water_pipe_distance + pt.y] + cost ) ) {
-                    path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] =
-                        path_map[max_salt_water_pipe_distance + pt.x][max_salt_water_pipe_distance + pt.y] + cost;
+                      path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] >
+                      path_map[max_salt_water_pipe_distance + pt.x()][max_salt_water_pipe_distance + pt.y()] + cost ) ) {
+                    path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] =
+                        path_map[max_salt_water_pipe_distance + pt.x()][max_salt_water_pipe_distance + pt.y()] + cost;
 
-                } else if( path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y +
+                } else if( path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y()
+                           +
                            k] <=
                            salt_pipe_swamp ) {
-                    if( path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] ==
+                    if( path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k]
+                        ==
                         salt_pipe_swamp ||
-                        path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] < -
-                        ( path_map[max_salt_water_pipe_distance + pt.x][max_salt_water_pipe_distance + pt.y] + cost ) ) {
-                        path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] = -
-                                ( path_map[max_salt_water_pipe_distance + pt.x][max_salt_water_pipe_distance + pt.y] + cost );
+                        path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] < -
+                        ( path_map[max_salt_water_pipe_distance + pt.x()][max_salt_water_pipe_distance + pt.y()] +
+                          cost ) ) {
+                        path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] = -
+                                ( path_map[max_salt_water_pipe_distance + pt.x()][max_salt_water_pipe_distance + pt.y()] + cost );
 
-                        if( path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y + k] >
+                        if( path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance + pt.y() + k] >
                             lowest_found ) {
-                            lowest_found = path_map[max_salt_water_pipe_distance + pt.x + i][max_salt_water_pipe_distance + pt.y
+                            lowest_found = path_map[max_salt_water_pipe_distance + pt.x() + i][max_salt_water_pipe_distance +
+                                           pt.y()
                                            + k];
                             found = pt + point( i, k );
                         }
@@ -2946,43 +2950,43 @@ int salt_water_pipe_segment_of( const recipe &making )
 //  The operation (ab)uses the conditional rotation/mirror flags of a recipe that uses a blueprint that isn't
 //  actually going to be used as a blueprint for something constructed in the expansion itself to determine
 //  the direction of the tile to connect to.
-static point connection_direction_of( const point &dir, const recipe &making );
+static point_rel_omt connection_direction_of( const point_rel_omt &dir, const recipe &making );
 
-point connection_direction_of( const point &dir, const recipe &making )
+point_rel_omt connection_direction_of( const point_rel_omt &dir, const recipe &making )
 {
-    point connection_dir = point::north;
+    point_rel_omt connection_dir = point_rel_omt::north;
     const std::string suffix = base_camps::all_directions.at( dir ).id.substr( 1,
                                base_camps::all_directions.at( dir ).id.length() - 2 );
     int count = 0;
 
     if( making.has_flag( "MAP_ROTATE_90_IF_" + suffix ) ) {
-        connection_dir = point::east;
+        connection_dir = point_rel_omt::east;
         count++;
     }
     if( making.has_flag( "MAP_ROTATE_180_IF_" + suffix ) ) {
-        connection_dir = point::south;
+        connection_dir = point_rel_omt::south;
         count++;
     }
     if( making.has_flag( "MAP_ROTATE_270_IF_" + suffix ) ) {
-        connection_dir = point::west;
+        connection_dir = point_rel_omt::west;
         count++;
     }
     if( count > 1 ) {
         popup( _( "Bug, Incorrect recipe: More than one rotation per orientation isn't valid" ) );
-        return point::invalid;
+        return point_rel_omt::invalid;
     }
 
     if( making.has_flag( "MAP_MIRROR_HORIZONTAL_IF_" + suffix ) ) {
-        connection_dir.x = -connection_dir.x;
+        connection_dir.x() = -connection_dir.x();
     }
     if( making.has_flag( "MAP_MIRROR_VERTICALL_IF_" + suffix ) ) {
-        connection_dir.y = -connection_dir.y;
+        connection_dir.y() = -connection_dir.y();
     }
 
     return connection_dir;
 }
 
-static void salt_water_pipe_orientation_adjustment( const point &dir, bool &orthogonal,
+static void salt_water_pipe_orientation_adjustment( const point_rel_omt &dir, bool &orthogonal,
         bool &mirror_vertical, bool &mirror_horizontal, int &rotation )
 {
     orthogonal = true;
@@ -3055,13 +3059,13 @@ bool basecamp::common_salt_water_pipe_construction(
                                     _( "Start constructing salt water pipes…" ),
                                     making.required_skills );
 
-        point connection_dir = pipe->connection_direction;
+        point_rel_omt connection_dir = pipe->connection_direction;
         const int segment_number = 0;
 
-        point next_construction_direction;
+        point_rel_omt next_construction_direction;
 
         if( segment_number == pipe->segments.size() - 1 ) {
-            next_construction_direction = { -connection_dir.x, -connection_dir.y };
+            next_construction_direction = { -connection_dir.x(), -connection_dir.y()};
         } else {
             next_construction_direction = { pipe->segments[segment_number + 1].point.x() - pipe->segments[segment_number].point.x(),
                                             pipe->segments[segment_number + 1].point.y() - pipe->segments[segment_number].point.y()
@@ -3093,16 +3097,16 @@ bool basecamp::common_salt_water_pipe_construction(
                                     _( "Continue constructing salt water pipes…" ),
                                     making.required_skills );
 
-        point connection_dir = pipe->connection_direction;
+        point_rel_omt connection_dir = pipe->connection_direction;
 
-        const point previous_construction_direction = { pipe->segments[segment_number - 1].point.x() - pipe->segments[segment_number].point.x(),
-                                                        pipe->segments[segment_number - 1].point.y() - pipe->segments[segment_number].point.y()
-                                                      };
+        const point_rel_omt previous_construction_direction = { pipe->segments[segment_number - 1].point.x() - pipe->segments[segment_number].point.x(),
+                                                                pipe->segments[segment_number - 1].point.y() - pipe->segments[segment_number].point.y()
+                                                              };
 
-        point next_construction_direction;
+        point_rel_omt next_construction_direction;
 
         if( segment_number == static_cast<int>( pipe->segments.size() - 1 ) ) {
-            next_construction_direction = { -connection_dir.x, -connection_dir.y };
+            next_construction_direction = { -connection_dir.x(), -connection_dir.y()};
         } else {
             next_construction_direction = { pipe->segments[segment_number + 1].point.x() - pipe->segments[segment_number].point.x(),
                                             pipe->segments[segment_number + 1].point.y() - pipe->segments[segment_number].point.y()
@@ -3156,9 +3160,9 @@ bool basecamp::common_salt_water_pipe_construction(
 
 void basecamp::start_salt_water_pipe( const mission_id &miss_id )
 {
-    const point dir = miss_id.dir.value();  //  Will always have a value
+    const point_rel_omt dir = miss_id.dir.value();  //  Will always have a value
     const recipe &making = recipe_id( miss_id.parameters ).obj();
-    point connection_dir = connection_direction_of( dir, making );
+    point_rel_omt connection_dir = connection_direction_of( dir, making );
 
     if( connection_dir.is_invalid() ) {
         return;
@@ -3343,7 +3347,7 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
 
 void basecamp::continue_salt_water_pipe( const mission_id &miss_id )
 {
-    const point dir = miss_id.dir.value();  //  Dir will always have a value
+    const point_rel_omt dir = miss_id.dir.value();  //  Dir will always have a value
     const recipe &making = recipe_id( miss_id.parameters ).obj();
 
     expansion_salt_water_pipe *pipe = nullptr;
@@ -3462,7 +3466,7 @@ static bool farm_valid_seed( const item &itm )
     return itm.is_seed() && itm.typeId() != itype_marloss_seed && itm.typeId() != itype_fungal_seeds;
 }
 
-std::pair<size_t, std::string> basecamp::farm_action( const point &dir, farm_ops op,
+std::pair<size_t, std::string> basecamp::farm_action( const point_rel_omt &dir, farm_ops op,
         const npc_ptr &comp )
 {
     size_t plots_cnt = 0;
@@ -3630,7 +3634,7 @@ std::pair<size_t, std::string> basecamp::farm_action( const point &dir, farm_ops
     return std::make_pair( plots_cnt, crops );
 }
 
-void basecamp::start_farm_op( const point &dir, const mission_id &miss_id,
+void basecamp::start_farm_op( const point_rel_omt &dir, const mission_id &miss_id,
                               float exertion_level )
 {
     farm_ops op = farm_ops::plow;
@@ -3828,7 +3832,7 @@ npc_ptr basecamp::emergency_recall( const mission_id &miss_id )
 
 bool basecamp::upgrade_return( const mission_id &miss_id )
 {
-    const point dir = miss_id.dir.value();  //  Will always have a value
+    const point_rel_omt dir = miss_id.dir.value();  //  Will always have a value
     const std::string bldg = miss_id.parameters.empty() ? next_upgrade( dir, 1 ) : miss_id.parameters;
     if( bldg == "null" ) {
         return false;
@@ -4004,7 +4008,7 @@ void basecamp::fortifications_return( const mission_id &miss_id )
 {
     npc_ptr comp = companion_choose_return( miss_id, 3_hours );
     if( comp != nullptr ) {
-        auto &build_point = comp->companion_mission_points;
+        std::vector<tripoint_abs_omt> &build_point = comp->companion_mission_points;
         for( std::vector<tripoint_abs_omt>::iterator::value_type point : build_point ) {
             if( miss_id.parameters == faction_wall_level_n_0_string ||
                 //  Handling of old format (changed mid 0.F) below
@@ -4025,7 +4029,7 @@ void basecamp::fortifications_return( const mission_id &miss_id )
 bool basecamp::salt_water_pipe_swamp_return( const mission_id &miss_id,
         const comp_list &npc_list )
 {
-    const point dir = miss_id.dir.value();  //  Will always have a value
+    const point_rel_omt dir = miss_id.dir.value();  //  Will always have a value
 
     expansion_salt_water_pipe *pipe = nullptr;
 
@@ -4043,13 +4047,13 @@ bool basecamp::salt_water_pipe_swamp_return( const mission_id &miss_id,
         return false;
     }
 
-    point connection_dir = pipe->connection_direction;
+    point_rel_omt connection_dir = pipe->connection_direction;
     const int segment_number = 0;
 
-    point next_construction_direction;
+    point_rel_omt next_construction_direction;
 
     if( segment_number == pipe->segments.size() - 1 ) {
-        next_construction_direction = { -connection_dir.x, -connection_dir.y };
+        next_construction_direction = { -connection_dir.x(), -connection_dir.y()};
     } else {
         next_construction_direction = { pipe->segments[segment_number + 1].point.x() - pipe->segments[segment_number].point.x(),
                                         pipe->segments[segment_number + 1].point.y() - pipe->segments[segment_number].point.y()
@@ -4086,7 +4090,7 @@ bool basecamp::salt_water_pipe_swamp_return( const mission_id &miss_id,
     //  Should be safe as the caller has already checked the result. Repeating rather than adding an additional parameter to the function.
 
     size_t finished_segments = 0;
-    for( std::vector<expansion_salt_water_pipe_segment>::iterator::value_type element :
+    for( const std::vector<expansion_salt_water_pipe_segment>::iterator::value_type &element :
          pipe->segments ) {
         if( element.finished ) {
             finished_segments++;
@@ -4117,7 +4121,7 @@ bool basecamp::salt_water_pipe_return( const mission_id &miss_id,
                                        const comp_list &npc_list )
 {
     const recipe &making = recipe_id( miss_id.parameters ).obj();
-    const point dir = miss_id.dir.value();  //  Will always have a value
+    const point_rel_omt dir = miss_id.dir.value();  //  Will always have a value
 
     expansion_salt_water_pipe *pipe = nullptr;
 
@@ -4135,21 +4139,21 @@ bool basecamp::salt_water_pipe_return( const mission_id &miss_id,
         return false;
     }
 
-    point connection_dir = pipe->connection_direction;
+    point_rel_omt connection_dir = pipe->connection_direction;
     const int segment_number = salt_water_pipe_segment_of( making );
 
     if( segment_number == -1 ) {
         return false;
     }
 
-    const point previous_construction_direction = { pipe->segments[segment_number - 1].point.x() - pipe->segments[segment_number].point.x(),
-                                                    pipe->segments[segment_number - 1].point.y() - pipe->segments[segment_number].point.y()
-                                                  };
+    const point_rel_omt previous_construction_direction = { pipe->segments[segment_number - 1].point.x() - pipe->segments[segment_number].point.x(),
+                                                            pipe->segments[segment_number - 1].point.y() - pipe->segments[segment_number].point.y()
+                                                          };
 
-    point next_construction_direction;
+    point_rel_omt next_construction_direction;
 
     if( segment_number == static_cast<int>( pipe->segments.size() - 1 ) ) {
-        next_construction_direction = { -connection_dir.x, -connection_dir.y };
+        next_construction_direction = { -connection_dir.x(), -connection_dir.y()};
     } else {
         next_construction_direction = { pipe->segments[segment_number + 1].point.x() - pipe->segments[segment_number].point.x(),
                                         pipe->segments[segment_number + 1].point.y() - pipe->segments[segment_number].point.y()
@@ -4205,7 +4209,7 @@ bool basecamp::salt_water_pipe_return( const mission_id &miss_id,
     //  Should be safe as the caller has already checked the result. Repeating rather than adding an additional parameter to the function.
 
     size_t finished_segments = 0;
-    for( std::vector<expansion_salt_water_pipe_segment>::iterator::value_type element :
+    for( const std::vector<expansion_salt_water_pipe_segment>::iterator::value_type &element :
          pipe->segments ) {
         if( element.finished ) {
             finished_segments++;
@@ -4425,7 +4429,7 @@ bool basecamp::survey_field_return( const mission_id &miss_id )
             popup( _( "Expansions must be on the same level as the camp" ) );
             continue;
         }
-        const point dir = talk_function::om_simple_dir( omt_pos, where );
+        const point_rel_omt dir = talk_function::om_simple_dir( omt_pos, where );
         if( expansions.find( dir ) != expansions.end() ) {
             if( query_yn(
                     _( "You already have an expansion at that location.  Do you want to finish this mission?  If not, another tile can be checked." ) ) ) {
@@ -4507,7 +4511,7 @@ bool basecamp::survey_return( const mission_id &miss_id )
             popup( _( "Expansions must be on the same level as the camp" ) );
             continue;
         }
-        const point dir = talk_function::om_simple_dir( omt_pos, where );
+        const point_rel_omt dir = talk_function::om_simple_dir( omt_pos, where );
         if( expansions.find( dir ) != expansions.end() ) {
             if( query_yn(
                     _( "You already have an expansion at that location.  Do you want to finish this mission?  If not, another tile can be checked." ) ) ) {
@@ -4581,7 +4585,7 @@ bool basecamp::survey_return( const mission_id &miss_id )
     }
 }
 
-bool basecamp::farm_return( const mission_id &miss_id, const point &dir )
+bool basecamp::farm_return( const mission_id &miss_id, const point_rel_omt &dir )
 {
     farm_ops op;
     if( miss_id.id == Camp_Plow ) {
@@ -4826,9 +4830,9 @@ int om_cutdown_trees( const tripoint_abs_omt &omt_tgt, int chance, bool estimate
                 continue;
             }
             // get a random number that is either 1 or -1
-            point dir( 3 * ( 2 * rng( 0, 1 ) - 1 ) + rng( -1, 1 ), 3 * rng( -1, 1 ) + rng( -1, 1 ) );
+            point_rel_ms dir( 3 * ( 2 * rng( 0, 1 ) - 1 ) + rng( -1, 1 ), 3 * rng( -1, 1 ) + rng( -1, 1 ) );
 
-            target_bay.cut_down_tree( tripoint_omt_ms( p ), dir );
+            target_bay.cut_down_tree( p, dir );
             target_bay.collapse_at( p, true, true, false );
             harvested++;
         }
@@ -5213,7 +5217,8 @@ drop_locations basecamp::give_equipment( Character *pc, const inventory_filter_p
     return selected;
 }
 
-drop_locations basecamp::get_equipment( tinymap *target_bay, const tripoint &target, Character *pc,
+drop_locations basecamp::get_equipment( tinymap *target_bay, const tripoint_omt_ms &target,
+                                        Character *pc,
                                         const inventory_filter_preset &preset,
                                         const std::string &msg, const std::string &title, units::volume &total_volume,
                                         units::mass &total_mass )
@@ -5248,7 +5253,7 @@ drop_locations basecamp::get_equipment( tinymap *target_bay, const tripoint &tar
     inventory_multiselector inv_s( *pc, preset, msg,
                                    make_raw_stats, /*allow_select_contained =*/ true );
 
-    inv_s.add_remote_map_items( target_bay, target );
+    inv_s.add_remote_map_items( target_bay, target.raw() );
     inv_s.set_title( title );
     inv_s.set_hint( _( "To select items, type a number before selecting." ) );
 
@@ -5302,8 +5307,8 @@ std::vector<std::pair<std::string, tripoint_abs_omt>> talk_function::om_building
     return om_camp_region;
 }
 
-point talk_function::om_simple_dir( const tripoint_abs_omt &omt_pos,
-                                    const tripoint_abs_omt &omt_tar )
+point_rel_omt talk_function::om_simple_dir( const tripoint_abs_omt &omt_pos,
+        const tripoint_abs_omt &omt_tar )
 {
     point_rel_omt diff = omt_tar.xy() - omt_pos.xy();
     return { clamp( diff.x(), -1, 1 ), clamp( diff.y(), -1, 1 ) };
@@ -5377,7 +5382,7 @@ int basecamp::recruit_evaluation( int &sbase, int &sexpansions, int &sfaction, i
     //How could we ever starve?
     //More than 5 farms at recruiting base
     int farm = 0;
-    for( const point &dir : directions ) {
+    for( const point_rel_omt &dir : directions ) {
         if( has_provides( "farming", dir ) ) {
             farm++;
         }
@@ -5463,7 +5468,7 @@ std::string basecamp::gathering_description()
     return output;
 }
 
-std::string basecamp::farm_description( const point &dir, size_t &plots_count,
+std::string basecamp::farm_description( const point_rel_omt &dir, size_t &plots_count,
                                         farm_ops operation )
 {
     std::pair<size_t, std::string> farm_data = farm_action( dir, operation );
@@ -5844,7 +5849,7 @@ std::string basecamp::name_display_of( const mission_id &miss_id )
     }
 }
 
-void basecamp::handle_reveal_mission( const point &dir )
+void basecamp::handle_reveal_mission( const point_rel_omt &dir )
 {
     if( hidden_missions.empty() ) { //  Should never happen
         return;
@@ -5872,7 +5877,7 @@ void basecamp::handle_reveal_mission( const point &dir )
     }
 }
 
-void basecamp::handle_hide_mission( const point &dir )
+void basecamp::handle_hide_mission( const point_rel_omt &dir )
 {
     const base_camps::direction_data &base_data = base_camps::all_directions.at( dir );
     const size_t previously_hidden_count = hidden_missions[size_t( base_data.tab_order )].size();
@@ -5952,15 +5957,15 @@ void basecamp::place_results( const item &result )
         }
     }
     target_bay.add_item_or_charges( new_spot, result, true );
-    apply_camp_ownership( target_bay, new_spot.raw(), 10 );
+    apply_camp_ownership( target_bay, new_spot, 10 );
     target_bay.save();
 }
 
-void apply_camp_ownership( map &here, const tripoint &camp_pos, int radius )
+void apply_camp_ownership( map &here, const tripoint_bub_ms &camp_pos, int radius )
 {
-    for( const tripoint_bub_ms &p : here.points_in_rectangle( tripoint_bub_ms( camp_pos ) + point(
+    for( const tripoint_bub_ms &p : here.points_in_rectangle( camp_pos + point(
                 -radius, -radius ),
-            tripoint_bub_ms( camp_pos ) + point( radius, radius ) ) ) {
+            camp_pos + point( radius, radius ) ) ) {
         map_stack items = here.i_at( p.xy() );
         for( item &elem : items ) {
             elem.set_owner( get_player_character() );

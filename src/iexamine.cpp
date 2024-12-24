@@ -663,7 +663,6 @@ void iexamine::attunement_altar( Character &you, const tripoint_bub_ms & )
 
 void iexamine::translocator( Character &, const tripoint_bub_ms &examp )
 {
-    /// @todo fix point types
     const tripoint_abs_omt omt_loc( coords::project_to<coords::omt>( get_map().getglobal( examp ) ) );
     avatar &player_character = get_avatar();
     const bool activated = player_character.translocators.knows_translocator( omt_loc );
@@ -1223,11 +1222,11 @@ int _get_rot_delta( tripoint_abs_omt const &this_omt, tripoint_abs_omt const &th
     return diff >= 0 ? diff : 4 + diff;
 }
 
-tripoint _rotate_point_sm( tripoint const &p, int erot, tripoint const &orig )
+tripoint_bub_ms _rotate_point_sm( tripoint_bub_ms const &p, int erot, tripoint_bub_ms const &orig )
 {
-    tripoint const p_sm( p - orig.xy() );
-    tripoint const rd = p_sm.rotate( erot, { SEEX * 2, SEEY * 2 } );
-    return tripoint{ rd + orig.xy() };
+    tripoint_rel_ms const p_sm( p - orig.xy() );
+    tripoint_rel_ms const rd = p_sm.rotate( erot, {SEEX * 2, SEEY * 2} );
+    return rd + orig.xy();
 }
 
 constexpr int uilist_positive = 10000; // workaround for uilist retval autoassign when retval == -1
@@ -1241,8 +1240,8 @@ int _choose_elevator_destz( tripoint_bub_ms const &examp, tripoint_abs_omt const
     for( int z = OVERMAP_HEIGHT; z >= -OVERMAP_DEPTH; z-- ) {
         tripoint_abs_omt const that_omt( this_omt.xy(), z );
         tripoint_bub_ms const zp =
-            tripoint_bub_ms( _rotate_point_sm( { examp.xy().raw(), z}, _get_rot_delta( this_omt, that_omt ),
-                                               sm_orig.raw() ) );
+            _rotate_point_sm( { examp.xy(), z}, _get_rot_delta( this_omt, that_omt ),
+                              sm_orig );
 
         if( here.ter( zp )->has_examine( iexamine::elevator ) ) {
             std::string const omt_name = overmap_buffer.ter_existing( that_omt )->get_name(
@@ -1324,7 +1323,7 @@ void iexamine::elevator( Character &you, const tripoint_bub_ms &examp )
     std::vector<tripoint_bub_ms> that_elevator;
     std::transform( this_elevator.begin(), this_elevator.end(), std::back_inserter( that_elevator ),
     [&erot, &sm_orig, &movez]( tripoint_bub_ms const & p ) {
-        return tripoint_bub_ms( _rotate_point_sm( { p.xy().raw(), movez}, erot, sm_orig.raw() ) );
+        return _rotate_point_sm( { p.xy(), movez}, erot, sm_orig );
     } );
 
     creature_tracker &creatures = get_creature_tracker();
@@ -1368,9 +1367,9 @@ void iexamine::elevator( Character &you, const tripoint_bub_ms &examp )
     }
 
     for( vehicle *v : vehs.v ) {
-        tripoint_bub_ms const p = tripoint_bub_ms( _rotate_point_sm( { v->pos_bub().xy().raw(), movez},
+        tripoint_bub_ms const p = _rotate_point_sm( { v->pos_bub().xy(), movez},
                                   erot,
-                                  sm_orig.raw() ) );
+                                  sm_orig );
         here.displace_vehicle( *v, p - v->pos_bub() );
         v->turn( erot * 90_degrees );
         v->face = tileray( v->turn_dir );
@@ -2012,7 +2011,6 @@ void iexamine::bulletin_board( Character &you, const tripoint_bub_ms &examp )
 {
     g->validate_camps();
     map &here = get_map();
-    // TODO: fix point types
     point_abs_omt omt( coords::project_to<coords::omt>( here.getglobal( examp ) ).xy() );
     std::optional<basecamp *> bcp = overmap_buffer.find_camp( omt );
     if( bcp ) {
@@ -4619,11 +4617,6 @@ void trap::examine( const tripoint_bub_ms &examp ) const
     trap::examine( examp.raw() );
 }
 
-void iexamine::part_con( Character &you, tripoint const &examp )
-{
-    iexamine::part_con( you, tripoint_bub_ms( examp ) );
-}
-
 void iexamine::part_con( Character &you, tripoint_bub_ms const &examp )
 {
     map &here = get_map();
@@ -6383,7 +6376,7 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     }
 }
 
-void iexamine::mill_finalize( Character &, const tripoint &examp )
+void iexamine::mill_finalize( Character &, const tripoint_bub_ms &examp )
 {
     map &here = get_map();
     const furn_id &cur_mill_type = here.furn( examp );
@@ -6499,7 +6492,8 @@ void iexamine::mill_finalize( Character &, const tripoint &examp )
     here.furn_set( examp, next_mill_type );
 }
 
-static void smoker_finalize( Character &, const tripoint &examp, const time_point &start_time )
+static void smoker_finalize( Character &, const tripoint_bub_ms &examp,
+                             const time_point &start_time )
 {
     map &here = get_map();
     const furn_id &cur_smoker_type = here.furn( examp );
@@ -6742,7 +6736,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     you.invalidate_crafting_inventory();
 }
 
-void iexamine::on_smoke_out( const tripoint &examp, const time_point &start_time )
+void iexamine::on_smoke_out( const tripoint_bub_ms &examp, const time_point &start_time )
 {
     const furn_id &f = get_map().furn( examp );
     if( f == furn_f_smoking_rack_active ||
