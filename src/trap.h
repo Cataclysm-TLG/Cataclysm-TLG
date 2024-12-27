@@ -164,6 +164,7 @@ struct trap {
         std::optional<itype_id> trap_item_type;
         // data required for trapfunc::spell()
         fake_spell spell_data;
+        std::vector<effect_on_condition_id> eocs;
         int comfort = 0;
         units::temperature_delta floor_bedding_warmth = 0_C_delta;
         vehicle_handle_trap_data vehicle_data;
