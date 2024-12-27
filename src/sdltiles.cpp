@@ -1107,12 +1107,14 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         const tripoint_abs_omt &guy_loc = guy->global_omt_location();
         if( guy_loc.z() == center_pos.z() && ( has_debug_vision ||
                                                overmap_buffer.seen_more_than( guy_loc, om_vision_level::details ) ) ) {
-            draw_entity_with_overlays( *guy, global_omt_to_draw_position( guy_loc ), lit_level::LIT,
+            draw_entity_with_overlays( *guy, tripoint_bub_ms( global_omt_to_draw_position( guy_loc ) ),
+                                       lit_level::LIT,
                                        height_3d, 1.0f, 1.0f );
         }
     }
 
-    draw_entity_with_overlays( get_player_character(), global_omt_to_draw_position( avatar_pos ),
+    draw_entity_with_overlays( get_player_character(),
+                               tripoint_bub_ms( global_omt_to_draw_position( avatar_pos ) ),
                                lit_level::LIT, height_3d, 1.0f, 1.0f );
     if( !fast_traveling ) {
         draw_from_id_string( "cursor", global_omt_to_draw_position( center_pos ), 0, 0, lit_level::LIT,
@@ -1519,7 +1521,7 @@ void cata_cursesport::curses_drawwindow( const catacurses::window &w )
         // skip the normal drawing code for it.
         tilecontext->draw(
             point( win->pos.x * fontwidth, win->pos.y * fontheight ),
-            g->ter_view_p.raw(),
+            g->ter_view_p,
             TERRAIN_WINDOW_TERM_WIDTH * font->width,
             TERRAIN_WINDOW_TERM_HEIGHT * font->height,
             overlay_strings,
@@ -1633,8 +1635,8 @@ void cata_cursesport::curses_drawwindow( const catacurses::window &w )
         clear_window_area( w );
         tilecontext->draw_minimap(
             point( win->pos.x * fontwidth, win->pos.y * fontheight ),
-            tripoint( get_player_character().pos_bub().raw().xy(), g->ter_view_p.z() ),
-            win->width * font->width, win->height * font->height );
+        { get_player_character().pos_bub().xy(), g->ter_view_p.z() },
+        win->width * font->width, win->height * font->height );
         update = true;
 
     } else {

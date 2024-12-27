@@ -1430,7 +1430,7 @@ void monster::footsteps( const tripoint &p )
     if( volume == 0 ) {
         return;
     }
-    int dist = rl_dist( p, get_player_character().pos() );
+    int dist = rl_dist( p, get_player_character().pos_bub() );
     sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
 }
 
@@ -2464,7 +2464,7 @@ void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
                 if( !this->has_effect( effect_invisibility ) ) {
                     monster_name = this->disp_name( false, true );
                 }
-                add_msg_if_player_sees( this->pos(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
+                add_msg_if_player_sees( this->pos_bub(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
                                         monster_name,
                                         veh.disp_name() );
                 int shove_moves = shove_veh_mass_moves_factor * veh_mass / 10_kilogram;

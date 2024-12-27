@@ -646,7 +646,7 @@ void suffer::from_asthma( Character &you, const int current_stim )
     map &here = get_map();
     if( you.in_sleep_state() && !you.has_effect( effect_narcosis ) ) {
         inventory map_inv;
-        map_inv.form_from_map( you.pos(), 2, &you );
+        map_inv.form_from_map( you.pos_bub(), 2, &you );
         // check if an inhaler is somewhere near
         bool nearby_use = auto_use || oxygenator || map_inv.has_charges( itype_inhaler, 1 ) ||
                           map_inv.has_charges( itype_oxygen_tank, 1 ) ||
@@ -807,7 +807,7 @@ void suffer::in_sunlight( Character &you, outfit &worn )
         const float weather_factor = std::min( incident_sun_irradiance( get_weather().weather_id,
                                                calendar::turn ) / irradiance::moderate, 1.f );
         const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature(
-                                          position.raw() ) );
+                                          position ) );
         int flux = ( player_local_temp - 32 ) / 5;
         // Efficiency rapidly falls off when it's too hot due to photosynthesis being an enzymatic process.
         // Some tropical plants can overcome this with specific adaptations, but that would probably be its own mutation.
