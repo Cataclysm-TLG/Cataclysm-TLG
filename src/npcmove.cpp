@@ -4107,22 +4107,24 @@ item *npc::evaluate_best_weapon() const
 
     //Now check through the NPC's inventory for melee weapons, guns, or holstered items
     visit_items( [this, can_use_gun, use_silent, &weap, &best_value, &best]( item * node, item * ) {
-        double weapon_value = 0.0;
-        bool using_same_type_bionic_weapon = is_using_bionic_weapon()
+        if( can_wield( *node ).success() ) {
+            double weapon_value = 0.0;
+            bool using_same_type_bionic_weapon = is_using_bionic_weapon()
                                              && node != &weap
                                              && node->type->get_id() == weap.type->get_id();
 
-        if( ( node->is_melee() || node->is_gun() ) && ( !node->has_flag( flag_INTEGRATED ) &&
+            if( ( node->is_melee() || node->is_gun() ) && ( !node->has_flag( flag_INTEGRATED ) &&
                 !is_worn( *node ) ) ) {
             weapon_value = evaluate_weapon( *node, can_use_gun, use_silent );
-            if( weapon_value > best_value && !using_same_type_bionic_weapon ) {
+                if( weapon_value > best_value && !using_same_type_bionic_weapon ) {
                 best = const_cast<item *>( node );
                 best_value = weapon_value;
-            }
+                }
             return VisitResponse::SKIP;
-        } else if( node->get_use( "holster" ) && !node->empty() ) {
-            // we just recur to the next farther down
-            return VisitResponse::NEXT;
+            } else if( node->get_use( "holster" ) && !node->empty() ) {
+                // We just recur to the next farther down,
+                return VisitResponse::NEXT;
+            }
         }
         return VisitResponse::SKIP;
     } );
