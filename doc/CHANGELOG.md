@@ -86,3 +86,4 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 - Updated gas stations to no longer give out free gas, but ensured that each one has a payment terminal and a tank to draw from. Characters will no longer spill gas all over the place like Mr. Bean unless they have the CLUMSY trait or something is wrong with their hands.
 - Made the wacky servant/maid enemies only spawn in the "Mansion Escape" scenario. Most mansions are just full of zombies. It would be nice to make the Mansion Escape building findable as a global unique in a normal run, but for now that isn't the case.
 - No more humanoid aliens. There is nothing humanoid out there that is friendly, either. As such, grackens have been removed.
+- Starting a fire now always needs tinder if the thing you want to light on fire does not have the `TINDER` flag.
