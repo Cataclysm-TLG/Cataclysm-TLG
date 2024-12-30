@@ -67,6 +67,8 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 
 ## Minor changes
 
+- Zombie animals have simpler names, e.g "zombie deer" vs "antlered horror".
+- Weapons and armor can be soft, having a 75% chance to resist being damaged. You will no longer rip your jeans and gloves super easily when doing karate.
 - Adjusted HP and stomach size values for small and tiny characters. They should no longer have trouble physically fitting enough food in themselves to survive, but are less durable.
 - Moved the bionic professions mod to mainline, as bionics are technology which was starting to become available just before the Cataclysm.
 - Made pounce and leap mutations actually functional, dramatically increasing the power of feline, batrachian, bird, and rabbit mutations.
@@ -87,3 +89,4 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 - Made the wacky servant/maid enemies only spawn in the "Mansion Escape" scenario. Most mansions are just full of zombies. It would be nice to make the Mansion Escape building findable as a global unique in a normal run, but for now that isn't the case.
 - No more humanoid aliens. There is nothing humanoid out there that is friendly, either. As such, grackens have been removed.
 - Starting a fire now always needs tinder if the thing you want to light on fire does not have the `TINDER` flag. This generally includes liquid fuels, paper, and other easily ignitable items. This flag has been added to many items, and will be given to more things that ought to have it as we come across them.
+- Missed melee attacks no longer damage your weapon.[[1]](https://github.com/CleverRaven/Cataclysm-DDA/pull/54439)
