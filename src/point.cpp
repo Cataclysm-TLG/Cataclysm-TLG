@@ -208,4 +208,4 @@ std::optional<Point> find_point_closest_first( const Point &center, int max_dist
         PredicateFn &&fn )
 {
     return find_point_closest_first( center, 0, max_dist, fn );
-};
+}
