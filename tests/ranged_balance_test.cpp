@@ -559,10 +559,10 @@ TEST_CASE( "shot_features_with_choke", "[gun]" "[slow]" )
     shoot_monster( "shotgun_s", { "choke" }, "shot_bird", 1, 61, "mon_zombie_brute" );
 
     // Unarmored target
-    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 18, 95, "mon_wolf_mutant_huge" );
-    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 12, 131, "mon_wolf_mutant_huge" );
-    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 5, 165, "mon_wolf_mutant_huge" );
-    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 1, 75, "mon_wolf_mutant_huge" );
+    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 18, 95, "mon_test_shotgun_0_bullet" );
+    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 12, 131, "mon_test_shotgun_0_bullet" );
+    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 5, 185, "mon_test_shotgun_0_bullet" );
+    shoot_monster( "shotgun_s", { "choke" }, "shot_00", 1, 75, "mon_test_shotgun_0_bullet" );
     // Triviallly armored target (armor_bullet: 1)
     shoot_monster( "shotgun_s", { "choke" }, "shot_00", 18, 32, "mon_zombie_tough" );
     shoot_monster( "shotgun_s", { "choke" }, "shot_00", 12, 61, "mon_zombie_tough" );
