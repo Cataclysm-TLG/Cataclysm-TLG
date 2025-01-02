@@ -42,7 +42,15 @@
         "0": "t_fungus_wall",
         "!": [ [ "t_thconc_floor", 4 ], [ "t_fungus_mound", 3 ] ]
       },
-      "furniture": { "&": "f_table", "=": "f_machinery_old", "}": "f_generator_broken", "!": [ "f_crate_c", "f_cardboard_box" ] },
+      "furniture": { 
+        "&": "f_table", "=": "f_machinery_old",
+        "}": [
+          [ "f_generator_broken", 35 ],
+          [ "f_portable_generator", 10 ],
+          [ "f_diesel_generator", 5 ],
+          [ "f_12000_gasoline_generator", 5 ]
+        ],
+        "!": [ "f_crate_c", "f_cardboard_box" ] },
       "items": {
         ".": { "item": "clutter_basement", "chance": 1 },
         "!": { "item": "crate_stack", "chance": 80 },

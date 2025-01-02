@@ -363,8 +363,8 @@
         "-": "t_metal_floor"
       },
       "furniture": {
-        "@": "f_generator_broken",
-        "Á": "f_generator_broken",
+        "@": [ [ "f_generator_broken", 25 ], [ "f_military_generator", 5 ] ],
+        "Á": [ [ "f_generator_broken", 25 ], [ "f_military_generator", 5 ] ],
         "J": "f_console_broken",
         "!": [ "f_machinery_light", "f_machinery_electronic", "f_machinery_heavy" ],
         "g": "f_bed",
