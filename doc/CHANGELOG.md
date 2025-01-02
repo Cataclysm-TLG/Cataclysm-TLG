@@ -13,6 +13,7 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 
 - Removal of imgui
   - imgui is, as of writing, still very unstable in Cataclysm: Dark Days Ahead and causes a major amount of breakage. This is why we got rid of it here.
+  - That also means it is still trivial to savescum. However, this is still behavior that is discouraged. Learn from your deaths instead of running from them.
 - Less mods
   - Due to incompatibility, most major mods have been removed. This includes Magiclysm, Mind over Matter and Xedra Evolved. Innawood and Sky Island are staying though.
   - `no_npc_needs` and `personal_portal_storms` have been removed. The former is default now, the latter got removed together with portal storms.
