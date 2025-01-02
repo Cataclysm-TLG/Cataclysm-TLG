@@ -67,6 +67,7 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 
 ## Minor changes
 
+- Strange temples have been removed due to being incompatible with the lore.
 - Zombie animals have simpler names, e.g "zombie deer" vs "antlered horror".
 - Weapons and armor can be soft, having a 75% chance to resist being damaged. You will no longer rip your jeans and gloves super easily when doing karate.
 - Adjusted HP and stomach size values for small and tiny characters. They should no longer have trouble physically fitting enough food in themselves to survive, but are less durable.
