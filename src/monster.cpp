@@ -4070,3 +4070,18 @@ double monster::calculate_by_enchantment( double modify, enchant_vals::mod value
     }
     return modify;
 }
+
+std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() const
+{
+    std::vector<std::pair<std::string, std::string>> rval;
+
+    // get effects
+    // at this moment we share id for effect overlay for character and for monster
+    if( show_creature_overlay_icons ) {
+        for( const auto &eff_pr : *effects ) {
+            rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
+        }
+    }
+
+    return rval;
+}
