@@ -3357,8 +3357,8 @@ void map::make_rubble( const tripoint_bub_ms &p, const furn_id &rubble_type, con
     if( overwrite ) {
         ter_set( p, floor_type );
         furn_set( p, rubble_type );
-        if( has_field_at( p.raw(), fd_fire ) ) {
-            mod_field_intensity( p.raw(), fd_fire, -3 );
+        if( has_field_at( p, fd_fire ) ) {
+            mod_field_intensity( p, fd_fire, -3 );
         }
     } else {
         // First see if there is existing furniture to destroy
@@ -8092,8 +8092,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
 
         for( int dx = -1; dx <= 1; ++dx ) {
             for( int dy = -1; dy <= 1; ++dy ) {
-                const tripoint check_lower = lower.raw() + tripoint( dx, dy, 0 );
-                const tripoint check_upper = upper.raw() + tripoint( dx, dy, 0 );
+                const tripoint_bub_ms check_lower = lower + tripoint( dx, dy, 0 );
+                const tripoint_bub_ms check_upper = upper + tripoint( dx, dy, 0 );
 
                 if( inbounds( check_lower ) && inbounds( check_upper ) &&
                     ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
@@ -8106,7 +8106,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // 3D path check
-    if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ) ||
+    if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
         !inbounds( t ) ) {
         return false;
     }
@@ -8144,8 +8144,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
 
             for( int dx = -1; dx <= 1; ++dx ) {
                 for( int dy = -1; dy <= 1; ++dy ) {
-                    tripoint check_lower = lower.raw() + tripoint( dx, dy, 0 );
-                    tripoint check_upper = upper.raw() + tripoint( dx, dy, 0 );
+                    tripoint_bub_ms check_lower = lower + tripoint( dx, dy, 0 );
+                    tripoint_bub_ms check_upper = upper + tripoint( dx, dy, 0 );
 
                     if( inbounds( check_lower ) && inbounds( check_upper ) &&
                         ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&

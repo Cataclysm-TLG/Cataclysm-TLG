@@ -13658,7 +13658,7 @@ void game::animate_weather()
             for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
                 const point screen_point( local_x, local_y );
                 const point map_point = screen_point + offset;
-                const tripoint mapp( map_point, u.posz() );
+                const tripoint_bub_ms mapp( map_point, u.posz() );
 
                 if( !m.inbounds( mapp ) ) {
                     continue;
@@ -13666,14 +13666,14 @@ void game::animate_weather()
 
                 const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
                 const visibility_variables &cache = m.get_visibility_variables_cache();
-                const auto &vis_cache_row = visibility_cache[mapp.x];
-                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
+                const auto &vis_cache_row = visibility_cache[mapp.x()];
+                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y()], cache );
 
                 // Don't display fog on indoor tiles when the player is indoors.
                 if( vis != visibility_type::CLEAR ) {
                     continue;
                 }
-                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( tripoint_bub_ms( mapp ) ) ) {
+                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );

@@ -2213,8 +2213,8 @@ void inventory_selector::add_nearby_items( int radius )
             if( !here.clear_path( center, pos, dist, 1, 100 ) ) {
                 continue;
             }
-            add_map_items( tripoint_bub_ms( pos ) );
-            add_vehicle_items( tripoint_bub_ms( pos ) );
+            add_map_items( pos );
+            add_vehicle_items( pos );
         }
     }
 }

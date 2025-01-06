@@ -1044,7 +1044,7 @@ static void place_fumarole( map &m, const point_bub_ms &p1, const point_bub_ms &
 
 }
 
-static bool mx_portal_in( map &m, const tripoint &abs_sub )
+static bool mx_portal_in( map &m, const tripoint_abs_sm &abs_sub )
 {
     static constexpr int omt_size = SEEX * 2;
     // minimum 9 tiles from the edge because ARTPROP_FRACTAL calls
@@ -1054,7 +1054,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
     static constexpr int max_coord = omt_size - 1 - min_coord;
     static_assert( min_coord < max_coord, "no space for randomness" );
     const tripoint_bub_ms portal_location{
-        rng( min_coord, max_coord ), rng( min_coord, max_coord ), abs_sub.z };
+        rng( min_coord, max_coord ), rng( min_coord, max_coord ), abs_sub.z() };
     const point_bub_ms p( portal_location.xy() );
 
     switch( rng( 1, 6 ) ) {
@@ -1084,10 +1084,10 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
         case 3: {
             m.add_field( portal_location, fd_fatigue, 3 );
             for( int i = 0; i < rng( 1, 10 ); i++ ) {
-                tripoint_bub_ms end_location = { rng( 0, SEEX * 2 - 1 ), rng( 0, SEEY * 2 - 1 ), abs_sub.z };
+                tripoint_bub_ms end_location = { rng( 0, SEEX * 2 - 1 ), rng( 0, SEEY * 2 - 1 ), abs_sub.z() };
                 std::vector<tripoint_bub_ms> failure = line_to( portal_location, end_location );
                 for( tripoint_bub_ms &i : failure ) {
-                    m.ter_set( tripoint_bub_ms{ i.xy(), abs_sub.z }, ter_t_pit );
+                    m.ter_set( tripoint_bub_ms{ i.xy(), abs_sub.z() }, ter_t_pit );
                 }
             }
             break;
@@ -1099,7 +1099,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
             for( int i = p.x() - rad; i <= p.x() + rad; i++ ) {
                 for( int j = p.y() - rad; j <= p.y() + rad; j++ ) {
                     if( trig_dist( p.raw(), point( i, j ) ) + rng( 0, 3 ) <= rad ) {
-                        const tripoint_bub_ms loc( i, j, abs_sub.z );
+                        const tripoint_bub_ms loc( i, j, abs_sub.z() );
                         dead_vegetation_parser( m, loc );
                         m.adjust_radiation( loc.xy(), rng( 20, 40 ) );
                     }
@@ -1109,35 +1109,35 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
         }
         //Lava seams originating from the portal
         case 5: {
-            if( abs_sub.z <= 0 ) {
+            if( abs_sub.z() <= 0 ) {
                 point_bub_ms p1( rng( 1,    SEEX     - 3 ), rng( 1,    SEEY     - 3 ) );
                 point_bub_ms p2( rng( SEEX, SEEX * 2 - 3 ), rng( SEEY, SEEY * 2 - 3 ) );
                 // Pick a random cardinal direction to also spawn lava in
                 // This will make the lava a single connected line, not just on diagonals
                 static const std::array<direction, 4> possibilities = { { direction::EAST, direction::WEST, direction::NORTH, direction::SOUTH } };
                 const direction extra_lava_dir = random_entry( possibilities );
-                point extra;
+                point_rel_ms extra;
                 switch( extra_lava_dir ) {
                     case direction::NORTH:
-                        extra.y = -1;
+                        extra.y() = -1;
                         break;
                     case direction::EAST:
-                        extra.x = 1;
+                        extra.x() = 1;
                         break;
                     case direction::SOUTH:
-                        extra.y = 1;
+                        extra.y() = 1;
                         break;
                     case direction::WEST:
-                        extra.x = -1;
+                        extra.x() = -1;
                         break;
                     default:
                         break;
                 }
 
-                const tripoint_bub_ms portal_location = { p1 + tripoint_bub_ms( extra.x, extra.y, abs_sub.z ) };
+                const tripoint_bub_ms portal_location = { p1 + tripoint_rel_ms( extra, abs_sub.z() ) };
                 m.add_field( portal_location, fd_fatigue, 3 );
 
-                std::set<point> ignited;
+                std::set<point_bub_ms> ignited;
                 place_fumarole( m, p1, p2, ignited );
                 place_fumarole( m, p1 + extra, p2 + extra,
                                 ignited );
@@ -1147,7 +1147,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
                     if( m.ter( i ) != ter_t_lava ) {
                         // Spawn an intense but short-lived fire
                         // Any furniture or buildings will catch fire, otherwise it will burn out quickly
-                        m.add_field( tripoint_bub_ms( i.x(), i.y(), abs_sub.z ), fd_fire, 15, 1_minutes );
+                        m.add_field( tripoint_bub_ms( i.x(), i.y(), abs_sub.z() ), fd_fire, 15, 1_minutes );
                     }
                 }
             }
@@ -1159,7 +1159,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
             artifact_natural_property prop =
                 static_cast<artifact_natural_property>( rng( ARTPROP_NULL + 1, ARTPROP_MAX - 1 ) );
             m.create_anomaly( portal_location, prop );
-            m.spawn_artifact( p + tripoint( rng( -1, 1 ), rng( -1, 1 ), abs_sub.z ),
+            m.spawn_artifact( p + tripoint( rng( -1, 1 ), rng( -1, 1 ), abs_sub.z() ),
                               relic_procgen_data_alien_reality, 5, 1000, -2000, true );
             break;
         }
@@ -1337,8 +1337,9 @@ static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
 
 static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
 {
-    const furn_t &fid = m.furn( loc ).obj();
-    const ter_id &tid = m.ter( loc );
+    tripoint_bub_ms loc_bub = tripoint_bub_ms( loc.raw() );
+    const furn_t &fid = m.furn( loc_bub ).obj();
+    const ter_id &tid = m.ter( loc_bub );
     const ter_t &tr = tid.obj();
 
     VehicleList vehs = m.get_vehicles();
@@ -1389,72 +1390,72 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
     const auto iter = dies_into.find( tid );
     if( iter != dies_into.end() ) {
         if( one_in( 6 ) ) {
-            m.ter_set( loc, ter_t_dirt );
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
+            m.ter_set( loc_bub, ter_t_dirt );
+            m.spawn_item( loc_bub, itype_ash, 1, rng( 10, 50 ) );
         } else if( one_in( 10 ) ) {
             // do nothing, save some spots from fire
         } else {
-            m.ter_set( loc, iter->second );
+            m.ter_set( loc_bub, iter->second );
         }
     }
 
     // fungus cannot be destroyed by map::destroy so ths method is employed
     if( fid.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
         if( one_in( 5 ) ) {
-            m.furn_set( loc, furn_f_ash );
+            m.furn_set( loc_bub, furn_f_ash );
         }
     }
     if( tr.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
-        m.ter_set( loc, ter_t_dirt );
+        m.ter_set( loc_bub, ter_t_dirt );
         if( one_in( 5 ) ) {
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
+            m.spawn_item( loc_bub, itype_ash, 1, rng( 10, 50 ) );
         }
     }
     // destruction of trees is not absolute
     if( tr.has_flag( ter_furn_flag::TFLAG_TREE ) ) {
         if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_trunk );
+            m.ter_set( loc_bub, ter_t_trunk );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_stump );
+            m.ter_set( loc_bub, ter_t_stump );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_tree_dead );
+            m.ter_set( loc_bub, ter_t_tree_dead );
         } else {
-            m.ter_set( loc, ter_t_dirt );
+            m.ter_set( loc_bub, ter_t_dirt );
             if( one_in( 4 ) ) {
-                m.furn_set( loc, furn_f_ash );
+                m.furn_set( loc_bub, furn_f_ash );
             } else {
-                m.furn_set( loc, furn_id( "f_fireweed" ) );
+                m.furn_set( loc_bub, furn_id( "f_fireweed" ) );
             }
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
+            m.spawn_item( loc_bub, itype_ash, 1, rng( 10, 1000 ) );
         }
         // everything else is destroyed, ash is added
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE ) ||
                ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) ) {
-        while( m.is_bashable( loc ) ) { // one is not enough
-            m.destroy( loc, true );
+        while( m.is_bashable( loc_bub ) ) { // one is not enough
+            m.destroy( loc_bub, true );
         }
         if( one_in( 5 ) && !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
             // This gives very little *wood* ash because the terrain is not flagged as flammable
-            m.spawn_item( loc, itype_ash, 1, rng( 1, 10 ) );
+            m.spawn_item( loc_bub, itype_ash, 1, rng( 1, 10 ) );
         }
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_ASH ) ) {
-        while( m.is_bashable( loc ) ) {
-            m.destroy( loc, true );
+        while( m.is_bashable( loc_bub ) ) {
+            m.destroy( loc_bub, true );
         }
-        if( !m.is_open_air( loc ) ) {
-            m.furn_set( loc, furn_f_ash );
+        if( !m.is_open_air( loc_bub ) ) {
+            m.furn_set( loc_bub, furn_f_ash );
             if( !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
-                m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
+                m.spawn_item( loc_bub, itype_ash, 1, rng( 10, 1000 ) );
             }
         }
     }
 
     // burn-away flammable items
-    while( m.flammable_items_at( loc ) ) {
-        map_stack stack = m.i_at( loc );
+    while( m.flammable_items_at( loc_bub ) ) {
+        map_stack stack = m.i_at( loc_bub );
         for( auto it = stack.begin(); it != stack.end(); ) {
             if( it->flammable() ) {
-                m.create_burnproducts( tripoint_bub_ms( loc.raw() ), *it, it->weight() );
+                m.create_burnproducts( loc_bub, *it, it->weight() );
                 it = stack.erase( it );
             } else {
                 it++;

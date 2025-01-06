@@ -7520,7 +7520,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
             } else {
                 int bioy = p1.y() + 2;
                 int biox = static_cast<int>( ( p1.x() + p2.x() ) / 2 );
-                mapf::formatted_set_simple( m, point( biox - 1, bioy - 1 ),
+                mapf::formatted_set_simple( m, point_bub_ms( biox - 1, bioy - 1 ),
                                             "|-|\n"
                                             "|c=\n"
                                             "|-|\n",
@@ -7539,7 +7539,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                     _( "ERROR!  Access denied!  Unauthorized access will be met with lethal force!" ) );
 
                 bioy = p2.y() - 2;
-                mapf::formatted_set_simple( m, point( biox - 1, bioy - 1 ),
+                mapf::formatted_set_simple( m, point_bub_ms( biox - 1, bioy - 1 ),
                                             "|-|\n"
                                             "=c|\n"
                                             "|-|\n",

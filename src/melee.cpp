@@ -883,10 +883,10 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                         if( reach_attacking ) {
                             // Check to see if we're on open ground.
                             map &here = get_map();
-                            tripoint next;
-                            next.x = pos_bub().x() + sgn( t.pos_bub().x() - pos_bub().x() );
-                            next.y = pos_bub().y() + sgn( t.pos_bub().y() - pos_bub().y() );
-                            next.z = posz();
+                            tripoint_bub_ms next;
+                            next.x() = pos_bub().x() + sgn( t.pos_bub().x() - pos_bub().x() );
+                            next.y() = pos_bub().y() + sgn( t.pos_bub().y() - pos_bub().y() );
+                            next.z() = posz();
                             // If we're attacking through a fence or something, we lose our weapon.
                             if( !cur_weap.has_flag( flag_NO_DROP ) && ( here.impassable( next ) ||
                                     ( here.ter( next )->has_flag( "EMPTY_SPACE" ) &&

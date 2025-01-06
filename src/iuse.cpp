@@ -8294,7 +8294,8 @@ heater find_heater( Character *p, item *it )
                 optional_vpart_position vp = get_map().veh_at( app.value().first );
                 available_heater = vp->vehicle().connected_battery_power_level().first;
                 heating_effect = app.value().second->charges_to_use();
-                vpt = tripoint_abs_ms( app.value().first );
+                map &here = get_map();
+                vpt = here.get_abs( app.value().first );
                 if( available_heater >= heating_effect ) {
                     return {loc, consume_flag, available_heater, heating_effect, vpt, pseudo_flag};
                 } else {

@@ -2853,7 +2853,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
                     seed = simple_point_hash( mount );
                 }
             } else {
-                const optional_vpart_position vp = here.veh_at( pos );
+                const optional_vpart_position vp = here.veh_at( tripoint_bub_ms( pos ) );
                 if( vp ) {
                     seed = simple_point_hash( vp->mount_pos().raw() );
                 }

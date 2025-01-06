@@ -11650,7 +11650,7 @@ void Character::stagger()
 
     const tripoint_bub_ms below( posx(), posy(), posz() - 1 );
     if( here.valid_move( pos_bub(), below, false, true ) ) {
-        if( here.ter( below.raw() )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
+        if( here.ter( below )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
             preferred_stumbles.push_back( below );
         } else {
             valid_stumbles.push_back( below );

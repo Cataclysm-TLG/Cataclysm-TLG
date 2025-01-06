@@ -1620,7 +1620,7 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
             map &here = get_map();
             // fill empty tiles with acid
             for( size_t i = 0; i < empty_neighbor_count; ++i ) {
-                const tripoint &p = empty_neighbors.first[i].raw();
+                const tripoint_bub_ms &p = empty_neighbors.first[i];
                 here.add_field( p, fd_acid, att_acid_intensity );
             }
         }
