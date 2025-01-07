@@ -8106,9 +8106,9 @@ static void add_item_recursive( std::vector<std::string> &item_order,
 
     if( std::find( item_order.begin(), item_order.end(), name ) == item_order.end() ) {
         item_order.push_back( name );
-        temp_items[name] = map_item_stack( it, relative_pos.raw() );
+        temp_items[name] = map_item_stack( it, relative_pos );
     } else {
-        temp_items[name].add_at_pos( it, relative_pos.raw() );
+        temp_items[name].add_at_pos( it, relative_pos );
     }
 
     for( const item *content : it->all_known_contents() ) {
@@ -8493,7 +8493,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
         }
     }
 
-    tripoint active_pos;
+    tripoint_rel_ms active_pos;
     map_item_stack *activeItem = nullptr;
 
     catacurses::window w_items;
@@ -8517,7 +8517,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
                                           point( offsetX, TERMY - iInfoHeight ) );
 
         if( activeItem ) {
-            centerlistview( active_pos, width );
+            centerlistview( active_pos.raw(), width );
         }
 
         ui.position( point( offsetX, 0 ), point( width, TERMY ) );
@@ -8916,7 +8916,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
             return game::vmenu_ret::CHANGE_TAB;
         }
 
-        active_pos = tripoint::zero;
+        active_pos = tripoint_rel_ms::zero;
         activeItem = nullptr;
 
         if( mSortCategory[iActive].empty() ) {
@@ -8933,7 +8933,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
         }
 
         if( activeItem ) {
-            centerlistview( active_pos, width );
+            centerlistview( active_pos.raw(), width );
             trail_start = u.pos_bub();
             trail_end = u.pos_bub() + active_pos;
             // Actually accessed from the terrain overlay callback `trail_cb` in the

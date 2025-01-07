@@ -983,12 +983,6 @@ mapgen_function_json_nested::mapgen_function_json_nested(
 {
 }
 
-jmapgen_int::jmapgen_int( point p ) : val( p.x ), valmax( p.y )
-{
-    cata_assert( p.x <= std::numeric_limits<int16_t>::max() );
-    cata_assert( p.y <= std::numeric_limits<int16_t>::max() );
-}
-
 jmapgen_int::jmapgen_int( const JsonObject &jo, const std::string_view tag )
 {
     if( jo.has_array( tag ) ) {
@@ -2566,7 +2560,7 @@ class jmapgen_monster : public jmapgen_piece
                     for( const JsonObject p_pt : patrol_pts ) {
                         jmapgen_int ptx = jmapgen_int( p_pt, "x" );
                         jmapgen_int pty = jmapgen_int( p_pt, "y" );
-                        data.patrol_points_rel_ms.emplace_back( ptx.get(), pty.get() );
+                        data.patrol_points_rel_ms.emplace_back( point_rel_ms{ ptx.get(), pty.get() } );
                     }
                 }
             }
@@ -6079,7 +6073,7 @@ void map::draw_lab( mapgendata &dat )
                                 // We want the actual debris, but not the rubble marker or dirt.
                                 make_rubble( { p, abs_sub.z() } );
                                 ter_set( p, fluid_type );
-                                furn_set( p, furn_str_id::NULL_ID() );
+                                furn_set( point_bub_ms( p ), furn_str_id::NULL_ID() );
                             }
                         }, point_bub_ms( rng( 1, SEEX * 2 - 2 ), rng( 1, SEEY * 2 - 2 ) ), rng( 3, 6 ) );
                     }
@@ -6170,7 +6164,7 @@ void map::draw_lab( mapgendata &dat )
                         } else {
                             ter_set( p, ter_t_fungus_floor_in );
                             if( one_in( 3 ) ) {
-                                furn_set( p, furn_f_flower_fungal );
+                                furn_set( point_bub_ms( p ), furn_f_flower_fungal );
                             } else if( one_in( 10 ) ) {
                                 ter_set( p, ter_t_marloss );
                             }
@@ -7771,33 +7765,17 @@ void map::create_anomaly( const tripoint_bub_ms &cp, artifact_natural_property p
 }
 ///////////////////// part of map
 
-void line( map *m, const ter_id &type, const point &p1, const point &p2, int z )
-{
-    line( m, type, point_bub_ms( p1 ), point_bub_ms( p2 ), z );
-}
 void line( map *m, const ter_id &type, const point_bub_ms &p1, const point_bub_ms &p2, int z )
 {
     m->draw_line_ter( type, p1, p2, z );
-}
-void line( tinymap *m, const ter_id &type, const point &p1, const point &p2 )
-{
-    line( m, type, point_omt_ms( p1 ), point_omt_ms( p2 ) );
 }
 void line( tinymap *m, const ter_id &type, const point_omt_ms &p1, const point_omt_ms &p2 )
 {
     m->draw_line_ter( type, p1, p2 );
 }
-void line_furn( map *m, const furn_id &type, const point &p1, const point &p2, int z )
-{
-    line_furn( m, type, point_bub_ms( p1 ), point_bub_ms( p2 ), z );
-}
 void line_furn( map *m, const furn_id &type, const point_bub_ms &p1, const point_bub_ms &p2, int z )
 {
     m->draw_line_furn( type, p1, p2, z );
-}
-void line_furn( tinymap *m, const furn_id &type, const point &p1, const point &p2 )
-{
-    line_furn( m, type, point_omt_ms( p1 ), point_omt_ms( p2 ) );
 }
 void line_furn( tinymap *m, const furn_id &type, const point_omt_ms &p1, const point_omt_ms &p2 )
 {

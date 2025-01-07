@@ -19,6 +19,7 @@
 #include "character.h"
 #include "colony.h"
 #include "color.h"
+#include "coordinates.h"
 #include "debug.h"
 #include "enums.h"
 #include "game_inventory.h"
@@ -287,7 +288,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
         }
         target.pos = *target_pos_;
 
-        if( source_pos != nullptr && *source_pos == target.pos ) {
+        if( source_pos != nullptr && source_pos->raw() == target.pos ) {
             add_msg( m_info, _( "That's where you took it from!" ) );
             return;
         }
@@ -536,7 +537,8 @@ bool handle_liquid( item &liquid, const item *const source, const int radius,
         return false;
     }
     struct liquid_dest_opt liquid_target;
-    if( get_liquid_target( liquid, source, radius, source_pos, source_veh, source_mon,
+    tripoint_bub_ms temp = tripoint_bub_ms( source_pos[0] );
+    if( get_liquid_target( liquid, source, radius, &temp, source_veh, source_mon,
                            liquid_target ) ) {
         success = perform_liquid_transfer( liquid, source_pos, source_veh, part_num, source_mon,
                                            liquid_target );
