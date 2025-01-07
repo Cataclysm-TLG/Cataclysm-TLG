@@ -327,9 +327,13 @@ TEST_CASE( "EOC_transform_line", "[eoc][timed_event]" )
 {
     clear_avatar();
     clear_map();
-    standard_npc npc( "Mr. Testerman" );
-    std::optional<tripoint> const dest = random_point( get_map(), []( tripoint const & p ) {
-        return p.xy() != get_avatar().pos().xy();
+    shared_ptr_fast<npc> guy = make_shared_fast<npc>();
+    overmap_buffer.insert_npc( guy );
+    npc &npc = *guy;
+    clear_character( npc );
+    std::optional<tripoint_bub_ms> const dest = random_point( get_map(), [](
+    tripoint_bub_ms const & p ) {
+        return p.xy() != get_avatar().pos_bub().xy();
     } );
     REQUIRE( dest.has_value() );
     npc.setpos( { dest.value().xy(), get_avatar().pos().z } );

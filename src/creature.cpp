@@ -212,11 +212,6 @@ tripoint_bub_ms Creature::pos_bub() const
     return get_map().bub_from_abs( location );
 }
 
-void Creature::setpos( const tripoint &p, bool check_gravity/* = true*/ )
-{
-    Creature::setpos( tripoint_bub_ms( p ), check_gravity );
-}
-
 void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = get_location();
@@ -805,7 +800,7 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
                 tripoint oldPos = pos();
                 setpos( path_to_target.back() ); //Temporary moving targeting npc on vehicle boundary position
                 bool seesFromVehBound = sees( *m ); // And look from there
-                setpos( oldPos );
+                setpos( tripoint_bub_ms( oldPos ) );
                 if( !seesFromVehBound ) {
                     continue;
                 }

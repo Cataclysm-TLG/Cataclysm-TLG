@@ -183,7 +183,7 @@ void spell_effect::short_range_teleport( const spell &sp, Creature &caster,
 static void swap_pos( Creature &caster, const tripoint_bub_ms &target )
 {
     Creature *const critter = get_creature_tracker().creature_at<Creature>( target );
-    critter->setpos( caster.pos() );
+    critter->setpos( caster.pos_bub() );
     caster.setpos( target );
 
     //update map in case a monster swapped positions with the player
@@ -1808,7 +1808,7 @@ void spell_effect::emit( const spell &sp, Creature &caster, const tripoint_bub_m
 {
     const std::set<tripoint_bub_ms> area = spell_effect_area( sp, target, caster );
     for( const tripoint_bub_ms &aoe : area ) {
-        get_map().emit_field( aoe.raw(), emit_id( sp.effect_data() ) );
+        get_map().emit_field( aoe, emit_id( sp.effect_data() ) );
     }
 }
 

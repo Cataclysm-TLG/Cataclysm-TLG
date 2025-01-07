@@ -2210,12 +2210,17 @@ drop_locations game_menus::inv::pickup( avatar &you,
     pickup_inventory_preset preset( you, /*skip_wield_check=*/true, /*ignore_liquidcont=*/true );
     preset.save_state = &pickup_ui_default_state;
 
-    pickup_selector pick_s( you, preset, _( "ITEMS TO PICK UP" ), target );
+    std::optional<tripoint_bub_ms> tmp;
+    if( target.has_value() ) {
+        tmp = tripoint_bub_ms( target.value() );
+    }
+
+    pickup_selector pick_s( you, preset, _( "ITEMS TO PICK UP" ), tmp->raw() );
 
     // Add items from the selected tile, or from current and all surrounding tiles
     if( target ) {
-        pick_s.add_vehicle_items( *target );
-        pick_s.add_map_items( *target );
+        pick_s.add_vehicle_items( tripoint_bub_ms( *target ) );
+        pick_s.add_map_items( tripoint_bub_ms( *target ) );
     } else {
         pick_s.add_nearby_items();
     }
@@ -2409,8 +2414,8 @@ void game_menus::inv::compare( avatar &you, const std::optional<tripoint> &offse
     inv_s.set_hint( _( "Select two items to compare them." ) );
 
     if( offset ) {
-        inv_s.add_map_items( you.pos() + *offset );
-        inv_s.add_vehicle_items( you.pos() + *offset );
+        inv_s.add_map_items( you.pos_bub() + *offset );
+        inv_s.add_vehicle_items( you.pos_bub() + *offset );
     } else {
         inv_s.add_nearby_items();
     }
