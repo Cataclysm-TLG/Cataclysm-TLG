@@ -537,8 +537,7 @@ bool handle_liquid( item &liquid, const item *const source, const int radius,
         return false;
     }
     struct liquid_dest_opt liquid_target;
-    tripoint_bub_ms temp = tripoint_bub_ms( source_pos[0] );
-    if( get_liquid_target( liquid, source, radius, &temp, source_veh, source_mon,
+    if( get_liquid_target( liquid, source, radius, source_pos, source_veh, source_mon,
                            liquid_target ) ) {
         success = perform_liquid_transfer( liquid, source_pos, source_veh, part_num, source_mon,
                                            liquid_target );
