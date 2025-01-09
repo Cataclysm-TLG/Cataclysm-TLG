@@ -80,7 +80,10 @@ static const efftype_id effect_winded( "winded" );
 
 static const furn_str_id furn_f_safe_c( "f_safe_c" );
 
+static const itype_id itype_grass( "grass" );
+static const itype_id itype_small_plant( "small_plant" );
 static const itype_id itype_swim_fins( "swim_fins" );
+static const itype_id itype_underbrush( "underbrush" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
@@ -851,10 +854,10 @@ bool avatar_action::eat_here( avatar &you )
           !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the leaves from the %s." ), furn_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
-            item food( "underbrush", calendar::turn, 1 );
+            item food( itype_underbrush, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -864,10 +867,10 @@ bool avatar_action::eat_here( avatar &you )
           !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the leaves from the %s." ), ter_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.ter_set( you.pos_bub(), ter_t_grass );
-            item food( "underbrush", calendar::turn, 1 );
+            item food( itype_underbrush, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -877,10 +880,10 @@ bool avatar_action::eat_here( avatar &you )
           !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to eat the %s." ), furn_underfoot->name() );
-            return true;
+            return false;
         } else {
             here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
-            item food( "small_plant", calendar::turn, 1 );
+            item food( itype_small_plant, calendar::turn, 1 );
             you.assign_activity( consume_activity_actor( food ) );
             return true;
         }
@@ -890,9 +893,9 @@ bool avatar_action::eat_here( avatar &you )
           !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to graze." ) );
-            return true;
+            return false;
         } else {
-            item food( item( "grass", calendar::turn, 1 ) );
+            item food( item( itype_grass, calendar::turn, 1 ) );
             you.assign_activity( consume_activity_actor( food ) );
             here.ter_set( you.pos_bub(), here.get_ter_transforms_into( you.pos_bub() ) );
             return true;
@@ -901,16 +904,16 @@ bool avatar_action::eat_here( avatar &you )
     if( is_grazer ) {
         if( ter_underfoot == ter_t_grass_golf || ter_underfoot == ter_t_grass ) {
             add_msg( _( "This grass is too short to graze." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_dead ) {
             add_msg( _( "This grass is dead and too mangled for you to graze." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_white ) {
             add_msg( _( "This grass is tainted with paint and thus inedible." ) );
-            return true;
+            return false;
         } else if( ter_underfoot == ter_t_grass_alien ) {
             add_msg( _( "This grass is razor sharp and would probably shred your mouth." ) );
-            return true;
+            return false;
         }
     }
     return false;

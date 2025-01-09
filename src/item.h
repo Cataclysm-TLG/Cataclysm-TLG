@@ -1965,6 +1965,7 @@ class item : public visitable
          * already used somewhere.
          */
         /*@{*/
+        //TODO: Add a set_var( const std::string &name, const cata_variant &id ) overload rather than using raw strings where appropriate
         double get_var( const std::string &key, double default_value ) const;
         std::string get_var( const std::string &key, std::string default_value = {} ) const;
         tripoint_abs_ms get_var( const std::string &key, tripoint_abs_ms default_value ) const;
@@ -1978,7 +1979,6 @@ class item : public visitable
         void remove_var( const std::string &key );
         diag_value const &get_value( const std::string &name ) const;
         diag_value const *maybe_get_value( const std::string &name ) const;
-        /** Whether the variable is defined at all. */
         bool has_var( const std::string &name ) const;
         /** Erase the value of the given variable. */
         void erase_var( const std::string &name );

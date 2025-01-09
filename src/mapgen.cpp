@@ -134,6 +134,7 @@ static const itype_id itype_avgas( "avgas" );
 static const itype_id itype_diesel( "diesel" );
 static const itype_id itype_gasoline( "gasoline" );
 static const itype_id itype_jp8( "jp8" );
+static const itype_id itype_water( "water" );
 
 static const mongroup_id GROUP_FUNGI_FLOWERS( "GROUP_FUNGI_FLOWERS" );
 static const mongroup_id GROUP_FUNGI_ZOMBIE( "GROUP_FUNGI_ZOMBIE" );
@@ -7885,7 +7886,7 @@ void map::place_gas_pump( const tripoint_bub_ms &p, int charges )
 
 void map::place_toilet( const tripoint_bub_ms &p, int charges )
 {
-    item water( "water", calendar::start_of_cataclysm );
+    item water( itype_water, calendar::start_of_cataclysm );
     water.charges = charges;
     add_item( p, water );
     furn_set( p, furn_f_toilet );

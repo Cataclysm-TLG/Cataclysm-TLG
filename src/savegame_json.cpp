@@ -5046,8 +5046,8 @@ void submap::load( const JsonValue &jv, const std::string &member_name, int vers
         JsonArray terrain_json = jv;
         // Small duplication here so that the update check is only performed once
         if( rubpow_update ) {
-            item rock = item( "rock", calendar::turn_zero );
-            item chunk = item( "steel_chunk", calendar::turn_zero );
+            item rock = item( itype_rock, calendar::turn_zero );
+            item chunk = item( itype_steel_chunk, calendar::turn_zero );
             for( int j = 0; j < SEEY; j++ ) {
                 for( int i = 0; i < SEEX; i++ ) {
                     const ter_str_id tid( terrain_json.next_string() );

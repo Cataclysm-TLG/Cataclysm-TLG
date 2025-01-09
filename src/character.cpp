@@ -302,10 +302,14 @@ static const itype_id fuel_type_muscle( "muscle" );
 static const itype_id itype_UPS( "UPS" );
 static const itype_id itype_apparatus( "apparatus" );
 static const itype_id itype_battery( "battery" );
+static const itype_id itype_beartrap( "beartrap" );
 static const itype_id itype_cookbook_human( "cookbook_human" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
 static const itype_id itype_fire( "fire" );
 static const itype_id itype_null( "null" );
+static const itype_id itype_human_sample( "human_sample" );
+static const itype_id itype_rope_6( "rope_6" );
+static const itype_id itype_snare_trigger( "snare_trigger" );
 
 static const json_character_flag json_flag_ACIDBLOOD( "ACIDBLOOD" );
 static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
@@ -649,7 +653,7 @@ Character::Character() :
     grab_point = tripoint_rel_ms::zero;
     hauling = false;
     set_focus( 100 );
-    last_item = itype_null;
+    last_item = itype_id::NULL_ID();
     sight_max = 9999;
     last_batch = 0;
     death_drops = true;
@@ -2649,7 +2653,7 @@ void Character::process_turn()
     process_items( &here );
     leak_items();
     // Didn't just pick something up
-    last_item = itype_null;
+    last_item = itype_id::NULL_ID();
 
     cache_visit_items_with( "is_relic", &item::is_relic, [this]( item & it ) {
         it.process_relic( this, pos_bub() );
@@ -4067,7 +4071,7 @@ void Character::normalize()
 
     activity_history.weary_clear();
     martial_arts_data->reset_style();
-    weapon = item( "null", calendar::turn_zero );
+    weapon = item( itype_id::NULL_ID(), calendar::turn_zero );
 
     set_body();
     recalc_hp();
@@ -4085,11 +4089,11 @@ void Character::die( map *, Creature *nkiller )
     set_time_died( calendar::turn );
 
     if( has_effect( effect_heavysnare ) ) {
-        inv->add_item( item( "rope_6", calendar::turn_zero ) );
-        inv->add_item( item( "snare_trigger", calendar::turn_zero ) );
+        inv->add_item( item( itype_rope_6, calendar::turn_zero ) );
+        inv->add_item( item( itype_snare_trigger, calendar::turn_zero ) );
     }
     if( has_effect( effect_beartrap ) ) {
-        inv->add_item( item( "beartrap", calendar::turn_zero ) );
+        inv->add_item( item( itype_beartrap, calendar::turn_zero ) );
     }
     mission::on_creature_death( *this );
 }
@@ -10883,11 +10887,11 @@ void Character::place_corpse( map *here )
         body.force_insert_item( *itm, pocket_type::CONTAINER );
     }
     // One sample, as you would get from dissecting any other human.
-    body.put_in( item( "human_sample" ), pocket_type::CORPSE );
+    body.put_in( item( itype_human_sample ), pocket_type::CORPSE );
 
     for( const bionic &bio : *my_bionics ) {
         if( item::type_is_defined( bio.info().itype() ) ) {
-            item cbm( bio.id.str(), calendar::turn );
+            item cbm( bio.info().itype(), calendar::turn );
             cbm.set_flag( flag_FILTHY );
             cbm.set_flag( flag_NO_STERILE );
             cbm.set_flag( flag_NO_PACKED );
@@ -10927,11 +10931,12 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
         body.force_insert_item( *itm, pocket_type::CONTAINER );
     }
     // One sample, as you would get from dissecting any other human.
-    body.put_in( item( "human_sample" ), pocket_type::CORPSE );
+    body.put_in( item( itype_human_sample ), pocket_type::CORPSE );
 
     for( const bionic &bio : *my_bionics ) {
-        if( item::type_is_defined( bio.info().itype() ) ) {
-            body.put_in( item( bio.id.str(), calendar::turn ), pocket_type::CORPSE );
+        const itype_id &bio_itype = bio.info().itype();
+        if( item::type_is_defined( bio_itype ) ) {
+            body.put_in( item( bio_itype, calendar::turn ), pocket_type::CORPSE );
         }
     }
 
