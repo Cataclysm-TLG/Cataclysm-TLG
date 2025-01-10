@@ -6290,7 +6290,6 @@ item &map::add_item( const tripoint_bub_ms &p, item new_item, int copies )
     return *new_pos;
 }
 
-// NOLINTNEXTLINE(readability-make-member-function-const)
 item map::liquid_from( const tripoint_bub_ms &p ) const
 {
     weather_manager &weather = get_weather();
@@ -6298,10 +6297,7 @@ item map::liquid_from( const tripoint_bub_ms &p ) const
 
     if( !source_terrain.liquid_source_item_id.is_null() &&
         source_terrain.liquid_source_count == std::make_pair( 0, 0 ) ) {
-
-        //BEFOREMERGE: Typify raw string ter_t::liquid_source_item_id
-        item ret( itype_id( source_terrain.liquid_source_item_id ), calendar::turn,
-                  item::INFINITE_CHARGES );
+        item ret( source_terrain.liquid_source_item_id, calendar::turn, item::INFINITE_CHARGES );
         ret.set_item_temperature( std::max( weather.get_temperature( p ),
                                             units::from_celsius( source_terrain.liquid_source_min_temp ) ) );
         return ret;
@@ -9643,7 +9639,6 @@ void map::handle_decayed_corpse( const item &it, const tripoint_abs_ms &pnt )
 
     bool anything_left = false;
     for( const harvest_entry &entry : *dead_monster->decay ) {
-        //BEFOREMERGE: Typify raw string harvest_entry::drop
         item harvest = item( itype_id( entry.drop ) );
         const float random_decay_modifier = rng_float( 0.0f, static_cast<float>( MAX_SKILL ) );
         const float min_num = entry.scale_num.first * random_decay_modifier + entry.base_num.first;
