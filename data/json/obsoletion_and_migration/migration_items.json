@@ -2582,5 +2582,15 @@
     "type": "MIGRATION",
     "id": "bio_sunglasses",
     "replace": "bio_armor_eyes"
+  },
+  {
+    "id": "generator_7500w",
+    "type": "MIGRATION",
+    "replace": "diesel_generator"
+  },
+  {
+    "id": "active_backup_generator",
+    "type": "MIGRATION",
+    "replace": "diesel_generator"
   }
 ]
