@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 
-#include "coords_fwd.h"
+#include "coordinates.h"
 #include "point.h"
 #include "sdl_wrappers.h"
 #include "sdl_geometry.h"
@@ -75,7 +75,7 @@ class pixel_minimap
         point pixel_size;
 
         //track the previous viewing area to determine if the minimap cache needs to be cleared
-        tripoint cached_center_sm;
+        tripoint_abs_sm cached_center_sm;
 
         SDL_Rect screen_rect;
         SDL_Rect main_tex_clip_rect;

@@ -3919,14 +3919,14 @@ class jmapgen_nested : public jmapgen_piece
 
             // Check whether any of the nests can attempt to place stuff out of
             // bounds
-            std::unordered_map<point, nested_mapgen_id> nest_placement_coords;
+            std::unordered_map<point_rel_ms, nested_mapgen_id> nest_placement_coords;
             auto add_coords_from = [&]( const mapgen_value<nested_mapgen_id> &nest_id_val ) {
                 for( const nested_mapgen_id &nest_id :
                      nest_id_val.all_possible_results( parameters ) ) {
                     if( nest_id.is_null() ) {
                         continue;
                     }
-                    for( const point &p : nest_id->all_placement_coords() ) {
+                    for( const point_rel_ms &p : nest_id->all_placement_coords() ) {
                         nest_placement_coords.emplace( p, nest_id );
                     }
                 }
@@ -3942,13 +3942,13 @@ class jmapgen_nested : public jmapgen_piece
             nested_mapgen_id offending_nest_x;
             nested_mapgen_id offending_nest_y;
 
-            for( const std::pair<const point, nested_mapgen_id> &p : nest_placement_coords ) {
-                if( p.first.x > max_relative.x ) {
-                    max_relative.x = p.first.x;
+            for( const std::pair<const point_rel_ms, nested_mapgen_id> &p : nest_placement_coords ) {
+                if( p.first.x() > max_relative.x ) {
+                    max_relative.x = p.first.x();
                     offending_nest_x = p.second;
                 }
-                if( p.first.y > max_relative.y ) {
-                    max_relative.y = p.first.y;
+                if( p.first.y() > max_relative.y ) {
+                    max_relative.y = p.first.y();
                     offending_nest_y = p.second;
                 }
             }
@@ -4623,7 +4623,7 @@ bool mapgen_function_json_base::setup_common( const JsonObject &jo )
     // mandatory: mapgensize rows of mapgensize character lines, each of which must have a
     // matching key in "terrain", unless fill_ter is set
     // "rows:" [ "aaaajustlikeinmapgen.cpp", "this.must!be!exactly.24!", "and_must_match_terrain_", .... ]
-    point_rel_ms expected_dim = mapgensize + m_offset.xy().raw();
+    point_rel_ms expected_dim = mapgensize + m_offset.xy();
     cata_assert( expected_dim.x() >= 0 );
     cata_assert( expected_dim.y() >= 0 );
     const std::string default_row( expected_dim.x(), ' ' );
@@ -4842,14 +4842,15 @@ void mapgen_function_json_base::check_common() const
     objects.check( context_, parameters );
 }
 
-void mapgen_function_json_base::add_placement_coords_to( std::unordered_set<point> &result ) const
+void mapgen_function_json_base::add_placement_coords_to( std::unordered_set<point_rel_ms> &result )
+const
 {
     objects.add_placement_coords_to( result );
 }
 
-std::unordered_set<point> nested_mapgen::all_placement_coords() const
+std::unordered_set<point_rel_ms> nested_mapgen::all_placement_coords() const
 {
-    std::unordered_set<point> result;
+    std::unordered_set<point_rel_ms> result;
     for( const weighted_object<int, std::shared_ptr<mapgen_function_json_nested>> &o : funcs_ ) {
         o.obj->add_placement_coords_to( result );
     }
@@ -4889,7 +4890,7 @@ void jmapgen_objects::merge_parameters_into( mapgen_parameters &params,
     }
 }
 
-void jmapgen_objects::add_placement_coords_to( std::unordered_set<point> &result ) const
+void jmapgen_objects::add_placement_coords_to( std::unordered_set<point_rel_ms> &result ) const
 {
     for( const jmapgen_obj &obj : objects ) {
         const jmapgen_place &where = obj.first;
@@ -6612,11 +6613,6 @@ void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bo
     }
 }
 
-character_id map::place_npc( const point &p, const string_id<npc_template> &type )
-{
-    return map::place_npc( point_bub_ms( p ), type );
-}
-
 character_id map::place_npc( const point_bub_ms &p, const string_id<npc_template> &type )
 {
     shared_ptr_fast<npc> temp = make_shared_fast<npc>();
@@ -6633,7 +6629,7 @@ void map::apply_faction_ownership( const point_bub_ms &p1, const point_bub_ms &p
     for( const tripoint_bub_ms &p : points_in_rectangle( tripoint_bub_ms( p1.x(), p1.y(), abs_sub.z() ),
             tripoint_bub_ms( p2.x(), p2.y(),
                              abs_sub.z() ) ) ) {
-        map_stack items = i_at( point_bub_ms( p.xy() ) );
+        map_stack items = i_at( p.xy() );
         for( item &elem : items ) {
             elem.set_owner( id );
         }
@@ -6792,14 +6788,6 @@ void map::add_spawn(
     }
     place_on_submap->spawns.emplace_back( type, count, offset, faction_id, mission_id, friendly, name,
                                           data );
-}
-
-vehicle *map::add_vehicle( const vproto_id &type, const tripoint &p, const units::angle &dir,
-                           const int veh_fuel, const int veh_status, const bool merge_wrecks,
-                           const bool force_status/* = false*/ )
-{
-    return map::add_vehicle( type, tripoint_bub_ms( p ), dir, veh_fuel, veh_status, merge_wrecks,
-                             force_status );
 }
 
 vehicle *map::add_vehicle( const vproto_id &type, const tripoint_bub_ms &p, const units::angle &dir,
@@ -7123,8 +7111,8 @@ void map::rotate( int turns )
         // Then rotate them and recalculate vehicle positions.
         for( int j = 0; j < 2; ++j ) {
             for( int i = 0; i < 2; ++i ) {
-                point_rel_ms p( i, j );
-                submap *sm = get_submap_at_grid( tripoint_rel_sm( p.x(), p.y(), z_level ) );
+                point_rel_sm p( i, j );
+                submap *sm = get_submap_at_grid( tripoint_rel_sm( p, z_level ) );
                 if( sm == nullptr ) {
                     debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", p.x(), p.y() );
                     continue;
