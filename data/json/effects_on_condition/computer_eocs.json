@@ -58,8 +58,8 @@
     "false_effect": [ { "npc_add_var": "map_cache", "possible_values": [ "has", "lack" ] }, { "run_eocs": "EOC_CHECK_MAP_CACHE" } ],
     "effect": [
       {
-        "if": { "npc_has_var": "map_cache", "value": "read" },
-        "then": [ { "u_message": "You already noted everything map application on this phone can offer." } ]
+        "if": { "compare_string": [ "read", { "npc_val": "map_cache" } ] },
+        "then": [ { "u_message": "You've already noted everything this map cache can offer." } ]
       },
       {
         "if": { "npc_has_var": "map_cache", "value": "has" },
@@ -67,12 +67,12 @@
           { "location_variable_adjust": { "npc_val": "spawn_location_omt" }, "z_adjust": 0, "z_override": true },
           { "reveal_map": { "npc_val": "spawn_location_omt" }, "radius": { "math": [ "rng(11, 36)" ] } },
           { "npc_add_var": "map_cache", "value": "read" },
-          { "u_message": "You found some cached map in the map application, and noted it.", "type": "good" }
+          { "u_message": "You find some useful data in the map cache and make a note of it.", "type": "good" }
         ]
       },
       {
-        "if": { "npc_has_var": "map_cache", "value": "lack" },
-        "then": [ { "u_message": "Whoever used this phone didn't ever open their map application.  Worthless." } ]
+        "if": { "compare_string": [ "lack", { "npc_val": "map_cache" } ] },
+        "then": [ { "u_message": "Whoever used this device didn't ever open their map application, so there's no data to view." } ]
       }
     ]
   }
