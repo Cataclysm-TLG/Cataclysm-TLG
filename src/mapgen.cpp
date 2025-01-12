@@ -205,7 +205,8 @@ static const vproto_id vehicle_prototype_shopping_cart( "shopping_cart" );
 
 static constexpr int MON_RADIUS = 3;
 
-static void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z, int rotate );
+static void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z,
+                          int rotate );
 
 // Assumptions:
 // - The map supplied is empty, i.e. no grid entries are in use
@@ -5593,6 +5594,8 @@ void map::draw_lab( mapgendata &dat )
             ter_set( point_bub_ms( SEEX, SEEY * 2 - 3 ), ter_t_stairs_down );
             science_room( this, point_bub_ms( 2, 2 ), point_bub_ms( SEEX - 3, SEEY * 2 - 3 ), dat.zlevel(), 1 );
             science_room( this, point_bub_ms( SEEX + 2, 2 ), point_bub_ms( SEEX * 2 - 3, SEEY * 2 - 3 ), dat.zlevel(), 3 );
+            science_room( this, point_bub_ms( SEEX + 2, 2 ), point_bub_ms( SEEX * 2 - 3, SEEY * 2 - 3 ),
+                          dat.zlevel(), 3 );
 
             place_spawns( GROUP_TURRET, 1, point_bub_ms( SEEX, 5 ), point_bub_ms( SEEX, 5 ), dat.zlevel(), 1,
                           true );
@@ -5784,7 +5787,8 @@ void map::draw_lab( mapgendata &dat )
                                 science_room( this, point_bub_ms( SEEX + 2, tw ), point_bub_ms( EAST_EDGE - rw, SEEY - 3 ),
                                               dat.zlevel(), 3 );
                             } else {
-                                ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY - 2 ), ter_t_door_glass_frosted_c );
+                                ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY - 2 ),
+                                         ter_t_door_glass_frosted_c );
                                 science_room( this, point_bub_ms( SEEX + 2, tw ), point_bub_ms( EAST_EDGE - rw, SEEY - 3 ),
                                               dat.zlevel(), 2 );
                             }
@@ -5794,18 +5798,23 @@ void map::draw_lab( mapgendata &dat )
                                 science_room( this, point_bub_ms( lw, SEEY + 2 ), point_bub_ms( SEEX - 3, SOUTH_EDGE - bw ),
                                               dat.zlevel(), 0 );
                             } else {
-                                ter_set( point_bub_ms( SEEX - 2, SEEY + static_cast<int>( SEEY / 2 ) ), ter_t_door_glass_frosted_c );
+                                ter_set( point_bub_ms( SEEX - 2, SEEY + static_cast<int>( SEEY / 2 ) ),
+                                         ter_t_door_glass_frosted_c );
                                 science_room( this, point_bub_ms( lw, SEEY + 2 ), point_bub_ms( SEEX - 3, SOUTH_EDGE - bw ),
                                               dat.zlevel(), 1 );
                             }
                             // Bottom right
                             if( one_in( 2 ) ) {
-                                ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY + 1 ), ter_t_door_glass_frosted_c );
-                                science_room( this, point_bub_ms( SEEX + 2, SEEY + 2 ), point_bub_ms( EAST_EDGE - rw, SOUTH_EDGE - bw ),
+                                ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY + 1 ),
+                                         ter_t_door_glass_frosted_c );
+                                science_room( this, point_bub_ms( SEEX + 2, SEEY + 2 ), point_bub_ms( EAST_EDGE - rw,
+                                              SOUTH_EDGE - bw ),
                                               dat.zlevel(), 0 );
                             } else {
-                                ter_set( point_bub_ms( SEEX + 1, SEEY + static_cast<int>( SEEY / 2 ) ), ter_t_door_glass_frosted_c );
-                                science_room( this, point_bub_ms( SEEX + 2, SEEY + 2 ), point_bub_ms( EAST_EDGE - rw, SOUTH_EDGE - bw ),
+                                ter_set( point_bub_ms( SEEX + 1, SEEY + static_cast<int>( SEEY / 2 ) ),
+                                         ter_t_door_glass_frosted_c );
+                                science_room( this, point_bub_ms( SEEX + 2, SEEY + 2 ), point_bub_ms( EAST_EDGE - rw,
+                                              SOUTH_EDGE - bw ),
                                               dat.zlevel(), 3 );
                             }
                             if( rw == 1 ) {
@@ -5818,6 +5827,7 @@ void map::draw_lab( mapgendata &dat )
                             }
                             if( is_ot_match( "stairs", terrain_type, ot_match_type::contains ) ) { // Stairs going down
                                 std::vector<point_bub_ms> stair_points;
+                                stair_points.reserve( 8 );
                                 if( tw != 0 ) {
                                     stair_points.emplace_back( SEEX - 1, 2 );
                                     stair_points.emplace_back( SEEX - 1, 2 );
@@ -5884,23 +5894,30 @@ void map::draw_lab( mapgendata &dat )
                             ter_set( point_bub_ms( SEEX + 3, static_cast<int>( SEEY / 2 ) ), ter_t_door_glass_frosted_c );
                             ter_set( point_bub_ms( SEEX / 2, SEEY - 4 ), ter_t_door_glass_frosted_c );
                             ter_set( point_bub_ms( SEEX / 2, SEEY + 3 ), ter_t_door_glass_frosted_c );
-                            ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY - 4 ), ter_t_door_glass_frosted_c );
-                            ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY + 3 ), ter_t_door_glass_frosted_c );
-                            ter_set( point_bub_ms( SEEX - 4, SEEY + static_cast<int>( SEEY / 2 ) ), ter_t_door_glass_frosted_c );
-                            ter_set( point_bub_ms( SEEX + 3, SEEY + static_cast<int>( SEEY / 2 ) ), ter_t_door_glass_frosted_c );
+                            ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY - 4 ),
+                                     ter_t_door_glass_frosted_c );
+                            ter_set( point_bub_ms( SEEX + static_cast<int>( SEEX / 2 ), SEEY + 3 ),
+                                     ter_t_door_glass_frosted_c );
+                            ter_set( point_bub_ms( SEEX - 4, SEEY + static_cast<int>( SEEY / 2 ) ),
+                                     ter_t_door_glass_frosted_c );
+                            ter_set( point_bub_ms( SEEX + 3, SEEY + static_cast<int>( SEEY / 2 ) ),
+                                     ter_t_door_glass_frosted_c );
                             science_room( this, point_bub_ms( lw, tw ), point_bub_ms( SEEX - 5, SEEY - 5 ), dat.zlevel(),
                                           rng( 1, 2 ) );
-                            science_room( this, point_bub_ms( SEEX - 3, tw ), point_bub_ms( SEEX + 2, SEEY - 5 ), dat.zlevel(), 2 );
+                            science_room( this, point_bub_ms( SEEX - 3, tw ), point_bub_ms( SEEX + 2, SEEY - 5 ), dat.zlevel(),
+                                          2 );
                             science_room( this, point_bub_ms( SEEX + 4, tw ), point_bub_ms( EAST_EDGE - rw, SEEY - 5 ),
                                           dat.zlevel(), rng( 2, 3 ) );
-                            science_room( this, point_bub_ms( lw, SEEY - 3 ), point_bub_ms( SEEX - 5, SEEY + 2 ), dat.zlevel(), 1 );
+                            science_room( this, point_bub_ms( lw, SEEY - 3 ), point_bub_ms( SEEX - 5, SEEY + 2 ), dat.zlevel(),
+                                          1 );
                             science_room( this, point_bub_ms( SEEX + 4, SEEY - 3 ), point_bub_ms( EAST_EDGE - rw, SEEY + 2 ),
                                           dat.zlevel(), 3 );
                             science_room( this, point_bub_ms( lw, SEEY + 4 ), point_bub_ms( SEEX - 5, SOUTH_EDGE - bw ),
                                           dat.zlevel(), rng( 0, 1 ) );
                             science_room( this, point_bub_ms( SEEX - 3, SEEY + 4 ), point_bub_ms( SEEX + 2, SOUTH_EDGE - bw ),
                                           dat.zlevel(), 0 );
-                            science_room( this, point_bub_ms( SEEX + 4, SEEX + 4 ), point_bub_ms( EAST_EDGE - rw, SOUTH_EDGE - bw ),
+                            science_room( this, point_bub_ms( SEEX + 4, SEEX + 4 ), point_bub_ms( EAST_EDGE - rw,
+                                          SOUTH_EDGE - bw ),
                                           dat.zlevel(), 3 * rng( 0, 1 ) );
                             if( rw == 1 ) {
                                 ter_set( point_bub_ms( EAST_EDGE, SEEY - 1 ), ter_t_door_metal_c );
@@ -6117,7 +6134,7 @@ void map::draw_lab( mapgendata &dat )
                     furn_set( center->xy(), furn_str_id::NULL_ID() );
                     if( !is_open_air( *center ) ) {
                         trap_set( *center, tr_portal );
-                        create_anomaly( tripoint_bub_ms( *center ), random_entry( valid_props ), false );
+                        create_anomaly( *center, random_entry( valid_props ), false );
                     }
                     break;
                 }
@@ -6443,10 +6460,14 @@ void map::draw_lab( mapgendata &dat )
                                   point_bub_ms( 6, SEEY * 2 - 7 ), dat.zlevel(), 1, true );
                     place_spawns( GROUP_ROBOT_SECUBOT, 1, point_bub_ms( SEEX * 2 - 7, SEEY * 2 - 7 ),
                                   point_bub_ms( SEEX * 2 - 7, SEEY * 2 - 7 ), dat.zlevel(), 1, true );
-                    line( this, ter_t_cvdbody, point_bub_ms( SEEX - 2, SEEY - 2 ), point_bub_ms( SEEX - 2, SEEY + 1 ), dat.zlevel() );
-                    line( this, ter_t_cvdbody, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX - 1, SEEY + 1 ), dat.zlevel() );
-                    line( this, ter_t_cvdbody, point_bub_ms( SEEX, SEEY - 1 ), point_bub_ms( SEEX, SEEY + 1 ), dat.zlevel() );
-                    line( this, ter_t_cvdbody, point_bub_ms( SEEX + 1, SEEY - 2 ), point_bub_ms( SEEX + 1, SEEY + 1 ), dat.zlevel() );
+                    line( this, ter_t_cvdbody, point_bub_ms( SEEX - 2, SEEY - 2 ), point_bub_ms( SEEX - 2, SEEY + 1 ),
+                          dat.zlevel() );
+                    line( this, ter_t_cvdbody, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX - 1, SEEY + 1 ),
+                          dat.zlevel() );
+                    line( this, ter_t_cvdbody, point_bub_ms( SEEX, SEEY - 1 ), point_bub_ms( SEEX, SEEY + 1 ),
+                          dat.zlevel() );
+                    line( this, ter_t_cvdbody, point_bub_ms( SEEX + 1, SEEY - 2 ), point_bub_ms( SEEX + 1, SEEY + 1 ),
+                          dat.zlevel() );
                     ter_set( point_bub_ms( SEEX, SEEY - 2 ), ter_t_cvdmachine );
                     spawn_item( point_bub_ms( SEEX, SEEY - 3 ), "id_science" );
                     break;
@@ -7300,11 +7321,12 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
         case room_lobby:
             if( rotate % 2 == 0 ) { // Vertical
                 int desk = p1.y() + rng( static_cast<int>( height / 2 ) - static_cast<int>( height / 4 ),
-                                       static_cast<int>( height / 2 ) + 1 );
-                for( int x = p1.x() + static_cast<int>( width / 4 ); x < p2.x() - static_cast<int>( width / 4 ); x++ ) {
+                                         static_cast<int>( height / 2 ) + 1 );
+                for( int x = p1.x() + static_cast<int>( width / 4 ); x < p2.x() - static_cast<int>( width / 4 );
+                     x++ ) {
                     m->furn_set( point_bub_ms( x, desk ), furn_f_counter );
                 }
-                computer *tmpcomp = m->add_computer( { p2.x() - static_cast<int>( width / 4 ), desk, z },
+                computer *tmpcomp = m->add_computer( { p2.x() - static_cast<int>( width / 4 ), desk, z},
                                                      _( "Log Console" ), 3 );
                 tmpcomp->add_option( _( "View Research Logs" ), COMPACT_RESEARCH, 0 );
                 tmpcomp->add_option( _( "Download Map Data" ), COMPACT_MAPS, 0 );
@@ -7316,11 +7338,12 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                  point_bub_ms( static_cast<int>( ( p1.x() + p2.x() ) / 2 ), desk ), z, 1, true );
             } else {
                 int desk = p1.x() + rng( static_cast<int>( height / 2 ) - static_cast<int>( height / 4 ),
-                                       static_cast<int>( height / 2 ) + 1 );
-                for( int y = p1.y() + static_cast<int>( width / 4 ); y < p2.y() - static_cast<int>( width / 4 ); y++ ) {
+                                         static_cast<int>( height / 2 ) + 1 );
+                for( int y = p1.y() + static_cast<int>( width / 4 ); y < p2.y() - static_cast<int>( width / 4 );
+                     y++ ) {
                     m->furn_set( point_bub_ms( desk, y ), furn_f_counter );
                 }
-                computer *tmpcomp = m->add_computer( { desk, p2.y() - static_cast<int>( width / 4 ), z },
+                computer *tmpcomp = m->add_computer( { desk, p2.y() - static_cast<int>( width / 4 ), z},
                                                      _( "Log Console" ), 3 );
                 tmpcomp->add_option( _( "View Research Logs" ), COMPACT_RESEARCH, 0 );
                 tmpcomp->add_option( _( "Download Map Data" ), COMPACT_MAPS, 0 );
@@ -7361,7 +7384,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                             point_bub_ms( p2.x() - 1, y ), z, false,
                                             calendar::start_of_cataclysm );
                         } else {
-                            m->place_items( Item_spawn_data_chem_lab, 70, point_bub_ms( p1.x()+ 1, y ),
+                            m->place_items( Item_spawn_data_chem_lab, 70, point_bub_ms( p1.x() + 1, y ),
                                             point_bub_ms( p2.x() - 1, y ), z, false,
                                             calendar::start_of_cataclysm );
                         }
@@ -7375,7 +7398,8 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
             m->furn_set( point_bub_ms( static_cast<int>( ( p1.x() + p2.x() ) / 2 ) + 1,
                                        static_cast<int>( ( p1.y() + p2.y() ) / 2 ) ),
                          furn_f_counter );
-            m->furn_set( point_bub_ms( ( p1.x() + p2.x() ) / 2, static_cast<int>( ( p1.y() + p2.y() ) / 2 ) + 1 ),
+            m->furn_set( point_bub_ms( ( p1.x() + p2.x() ) / 2,
+                                       static_cast<int>( ( p1.y() + p2.y() ) / 2 ) + 1 ),
                          furn_f_counter );
             m->furn_set( point_bub_ms( static_cast<int>( ( p1.x() + p2.x() ) / 2 ) + 1,
                                        static_cast<int>( ( p1.y() + p2.y() ) / 2 ) + 1 ),
@@ -7398,21 +7422,23 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
             if( rotate == 0 ) {
                 mremove_trap( m, tripoint_bub_ms( p1.x(), p2.y(), z ), tr_null );
                 m->furn_set( tripoint_bub_ms( p1.x(), p2.y(), z ), furn_f_fridge );
-                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p1.x(), p2.y() ), point_bub_ms( p1.x(), p2.y() ), z,
+                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p1.x(), p2.y() ), point_bub_ms( p1.x(),
+                                p2.y() ), z,
                                 false, calendar::start_of_cataclysm );
             } else if( rotate == 1 ) {
-                mremove_trap( m, tripoint_bub_ms( p1.x(), p1.y(), z ), tr_null );
-                m->furn_set( tripoint_bub_ms( p1.x(), p1.y(), z ), furn_f_fridge );
+                mremove_trap( m, tripoint_bub_ms( p1, z ), tr_null );
+                m->furn_set( tripoint_bub_ms( p1, z ), furn_f_fridge );
                 m->place_items( Item_spawn_data_goo, 60, p1, p1, z, false,
                                 calendar::start_of_cataclysm );
             } else if( rotate == 2 ) {
                 mremove_trap( m, tripoint_bub_ms( p2.x(), p1.y(), z ), tr_null );
                 m->furn_set( tripoint_bub_ms( p2.x(), p1.y(), z ), furn_f_fridge );
-                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p2.x(), p1.y() ), point_bub_ms( p2.x(), p1.y() ), z,
+                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p2.x(), p1.y() ), point_bub_ms( p2.x(),
+                                p1.y() ), z,
                                 false, calendar::start_of_cataclysm );
             } else {
-                mremove_trap( m, tripoint_bub_ms( p2.x(), p2.y(), z ), tr_null );
-                m->furn_set( tripoint_bub_ms( p2.x(), p2.y(), z ), furn_f_fridge );
+                mremove_trap( m, tripoint_bub_ms( p2, z ), tr_null );
+                m->furn_set( tripoint_bub_ms( p2, z ), furn_f_fridge );
                 m->place_items( Item_spawn_data_goo, 60, p2, p2, z, false,
                                 calendar::start_of_cataclysm );
             }
@@ -7434,12 +7460,12 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                     m->furn_set( tripoint_bub_ms( x, p2.y() - 1, z ), furn_f_counter );
                 }
                 m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p1.x(), p2.y() - 1 ),
-                                point_bub_ms( p2 + point::north ), z, false, calendar::start_of_cataclysm );
+                                p2 + point::north, z, false, calendar::start_of_cataclysm );
             } else if( rotate == 1 ) {
                 for( int y = p1.y(); y <= p2.y(); y++ ) {
                     m->furn_set( tripoint_bub_ms( p1.x() + 1, y, z ), furn_f_counter );
                 }
-                m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p1 + point::east ),
+                m->place_items( Item_spawn_data_dissection, 80, p1 + point::east,
                                 point_bub_ms( p1.x() + 1, p2.y() ), z, false, calendar::start_of_cataclysm );
             } else if( rotate == 2 ) {
                 for( int x = p1.x(); x <= p2.x(); x++ ) {
@@ -7454,7 +7480,8 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                 m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p2.x() - 1, p1.y() ),
                                 point_bub_ms( p2 + point::west ), z, false, calendar::start_of_cataclysm );
             }
-            mtrap_set( m, tripoint_bub_ms( ( p1.x() + p2.x() ) / 2, static_cast<int>( ( p1.y() + p2.y() ) / 2 ), z ),
+            mtrap_set( m, tripoint_bub_ms( ( p1.x() + p2.x() ) / 2, static_cast<int>( ( p1.y() + p2.y() ) / 2 ),
+                                           z ),
                        tr_dissector );
             m->place_spawns( GROUP_LAB_CYBORG, 10,
                              point_bub_ms( static_cast<int>( ( ( p1.x() + p2.x() ) / 2 ) + 1 ),
@@ -7466,7 +7493,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
         case room_bionics:
             if( rotate % 2 == 0 ) {
                 point_bub_ms bio( p1.x() + 2, static_cast<int>( ( p1.y() + p2.y() ) / 2 ) );
-                mapf::formatted_set_simple( m, bio + point::north_west,
+                mapf::formatted_set_simple( m, bio.raw() + point::north_west,
                                             "---\n"
                                             "|c|\n"
                                             "-=-\n",
@@ -7476,7 +7503,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                 bio, z, false, calendar::start_of_cataclysm );
 
                 m->furn_set( tripoint_bub_ms( bio.x(), bio.y() + 2, z ), furn_f_console );
-                computer *tmpcomp = m->add_computer( { bio.x(),  bio.y() + 2, z }, _( "Bionic access" ), 2 );
+                computer *tmpcomp = m->add_computer( { bio.x(),  bio.y() + 2, z}, _( "Bionic access" ), 2 );
                 tmpcomp->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp->add_failure( COMPFAIL_MANHACKS );
@@ -7485,7 +7512,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                     _( "ERROR!  Access denied!  Unauthorized access will be met with lethal force!" ) );
 
                 bio.x() = p2.x() - 2;
-                mapf::formatted_set_simple( m, bio + point::north_west,
+                mapf::formatted_set_simple( m, bio.raw() + point::north_west,
                                             "-=-\n"
                                             "|c|\n"
                                             "---\n",
@@ -7495,7 +7522,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                                 bio, z, false, calendar::start_of_cataclysm );
 
                 m->furn_set( tripoint_bub_ms( bio.x(), bio.y() - 2, z ), furn_f_console );
-                computer *tmpcomp2 = m->add_computer( { bio.x(),  bio.y() - 2, z }, _( "Bionic access" ), 2 );
+                computer *tmpcomp2 = m->add_computer( { bio.x(),  bio.y() - 2, z}, _( "Bionic access" ), 2 );
                 tmpcomp2->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp2->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp2->add_failure( COMPFAIL_MANHACKS );
@@ -7505,7 +7532,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
             } else {
                 int bioy = p1.y() + 2;
                 int biox = static_cast<int>( ( p1.x() + p2.x() ) / 2 );
-                mapf::formatted_set_simple( m, point_bub_ms( biox - 1, bioy - 1 ),
+                mapf::formatted_set_simple( m, point( biox - 1, bioy - 1 ),
                                             "|-|\n"
                                             "|c=\n"
                                             "|-|\n",
@@ -7524,7 +7551,7 @@ void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z
                     _( "ERROR!  Access denied!  Unauthorized access will be met with lethal force!" ) );
 
                 bioy = p2.y() - 2;
-                mapf::formatted_set_simple( m, point_bub_ms( biox - 1, bioy - 1 ),
+                mapf::formatted_set_simple( m, point( biox - 1, bioy - 1 ),
                                             "|-|\n"
                                             "=c|\n"
                                             "|-|\n",

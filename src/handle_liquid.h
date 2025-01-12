@@ -2,6 +2,7 @@
 #ifndef CATA_SRC_HANDLE_LIQUID_H
 #define CATA_SRC_HANDLE_LIQUID_H
 
+#include "coordinates.h"
 #include "item_location.h"
 #include "item_stack.h"
 #include "map.h"
