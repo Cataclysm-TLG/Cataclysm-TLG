@@ -2075,6 +2075,18 @@ void inventory_selector::add_contained_ebooks( item_location &container )
     }
 }
 
+void inventory_selector::add_contained_efiles( item_location &container )
+{
+    if( !container->is_estorage() ) {
+        return;
+    }
+
+    for( item *it : container->efiles() ) {
+        item_location child( container, it );
+        add_entry( own_inv_column, std::vector<item_location>( 1, child ) );
+    }
+}
+
 void inventory_selector::add_character_items( Character &character )
 {
     item_location weapon = character.get_wielded_item();
