@@ -5796,7 +5796,7 @@ void game::control_vehicle()
             add_msg( _( "No vehicle controls found." ) );
             return;
         } else if( num_valid_controls > 1 ) {
-            const std::optional<tripoint_bub_ms> temp = choose_adjacent_bub( _( "Control vehicle where?" ) );
+            const std::optional<tripoint_bub_ms> temp = choose_adjacent( _( "Control vehicle where?" ) );
             if( !vehicle_position ) {
                 return;
             } else {
@@ -6310,7 +6310,7 @@ void game::pickup( const tripoint_bub_ms &p )
 //represents carefully peeking around a corner, hence the large move cost.
 void game::peek()
 {
-    const std::optional<tripoint_rel_ms> p = choose_direction_rel_ms( _( "Peek where?" ), true );
+    const std::optional<tripoint_rel_ms> p = choose_direction( _( "Peek where?" ), true );
     if( !p ) {
         return;
     }
@@ -7876,7 +7876,8 @@ look_around_result game::look_around(
             action = ctxt.handle_input();
         }
         if( ( action == "LEVEL_UP" || action == "LEVEL_DOWN" || action == "MOUSE_MOVE" ||
-              ctxt.get_direction( action ) ) && ( ( select_zone && has_first_point ) || is_moving_zone ) ) {
+              ctxt.get_direction_rel_ms( action ) ) && ( ( select_zone && has_first_point ) ||
+                      is_moving_zone ) ) {
             blink = true; // Always draw blink symbols when moving cursor
         } else if( action == "TIMEOUT" ) {
             blink = !blink;
@@ -7936,7 +7937,7 @@ look_around_result game::look_around(
             toggle_debug_hour_timer();
         } else if( action == "EXTENDED_DESCRIPTION" ) {
             // TODO: fix point types
-            extended_description( lp.raw() );
+            extended_description( lp );
         } else if( action == "CHANGE_MONSTER_NAME" ) {
             creature_tracker &creatures = get_creature_tracker();
             monster *const mon = creatures.creature_at<monster>( lp, true );
@@ -9269,7 +9270,7 @@ void game::insert_item()
 
 void game::unload_container()
 {
-    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_bub( _( "Unload where?" ) ) ) {
+    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent( _( "Unload where?" ) ) ) {
         u.drop( game_menus::inv::unload_container( u ), *pnt );
     }
 }
@@ -10491,7 +10492,7 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
     const auto veh_dest = m.veh_at( dest_loc ).part_with_feature( "BOARDABLE", true );
     const bool veh_here_inside = veh_here && veh_here->is_inside();
     const bool veh_dest_inside = veh_dest && veh_dest->is_inside();
-    trap trap_here = m.tr_at( u.pos() );
+    trap trap_here = m.tr_at( u.pos_bub() );
     trap trap_there = m.tr_at( dest_loc );
 
     for( const std::pair<const field_type_id, field_entry> &e : m.field_at( dest_loc ) ) {
@@ -10634,7 +10635,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
                 return false;
             }
         }
-        if( !mons->move_effects( false, dest_loc.raw() ) ) {
+        if( !mons->move_effects( false, dest_loc ) ) {
             add_msg( m_bad, _( "You cannot move as your %s isn't able to move." ), mons->get_name() );
             return false;
         }
@@ -12273,8 +12274,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         add_msg( m_info, _( "Halfway up, the way up becomes blocked off." ) );
         return;
     }
-    tripoint destination = u.pos() + tripoint( 0, 0, movez );
-    if( !u.move_effects( false, destination ) && !force ) {
+    if( !u.move_effects( false, tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0, movez ) ) ) && !force ) {
         // move_effects determined we could not move, waste all moves
         u.set_moves( 0 );
         return;
@@ -12291,7 +12291,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     // > and < are used for diving underwater.
     if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, u.pos_bub() ) ) {
         swimming = true;
-        const ter_id &target_ter = here.ter( u.pos_bub() + tripoint( 0, 0, movez ) );
+        const ter_id &target_ter = here.ter( tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0, movez ) ) );
 
         // If we're in a water tile that has both air above and deep enough water to submerge in...
         if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, u.pos_bub() ) &&
@@ -12925,7 +12925,7 @@ void game::update_overmap_seen()
     for( const tripoint_abs_omt &p : points_in_radius( ompos, dist ) ) {
         const point_rel_omt delta = p.xy() - ompos.xy();
         const int h_squared = delta.x() * delta.x() + delta.y() * delta.y();
-        if( trigdist && h_squared > dist_squared ) {
+        if( h_squared > dist_squared ) {
             continue;
         }
         if( delta == point_rel_omt() ) {
@@ -12933,7 +12933,7 @@ void game::update_overmap_seen()
             // 2. Calculating multiplier would cause division by zero
             continue;
         }
-        // If circular distances are enabled, scale overmap distances by the diagonality of the sight line.
+        // Scale overmap distances by the diagonality of the sight line.
         point abs_delta = delta.raw().abs();
         int max_delta = std::max( abs_delta.x, abs_delta.y );
         const float multiplier = trigdist ? std::sqrt( h_squared ) / max_delta : 1;
@@ -13580,7 +13580,7 @@ void game::animate_weather()
                 if( vis != visibility_type::CLEAR ) {
                     continue;
                 }
-                if( !m.is_outside( u.pos() ) && !m.is_outside( mapp ) ) {
+                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( tripoint_bub_ms( mapp ) ) ) {
                     continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
@@ -13618,11 +13618,12 @@ void game::animate_weather()
 
                 const point screen_point( local_x + iStart.x, local_y + iStart.y );
                 const point map_point = screen_point + offset;
-                const tripoint mapp( map_point, u.posz() );
+                const tripoint map_point_tripoint( map_point, u.posz() );
+                const tripoint_bub_ms mapp = tripoint_bub_ms( map_point_tripoint );
 
                 if( m.inbounds( mapp ) &&
                     m.is_outside( mapp ) &&
-                    m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x][mapp.y],
+                    m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x()][mapp.y()],
                                       m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
                     !creatures.creature_at( mapp, true ) ) {
                     used[index] = true;
@@ -13924,7 +13925,7 @@ void game::climb_down_using( const tripoint_bub_ms &examp, climbing_aid_id aid_i
     map &here = get_map();
     Character &you = get_player_character();
     // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-    if( !you.move_effects( false, examp.raw() ) ) {
+    if( !you.move_effects( false, examp ) ) {
         // move_effects determined we could not move, waste all moves
         you.set_moves( 0 );
         return;

@@ -2882,7 +2882,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         case TILE_CATEGORY::NONE:
             // graffiti
             if( found_id == "graffiti" ) {
-                seed = std::hash<std::string> {}( here.graffiti_at( pos ) );
+                seed = std::hash<std::string> {}( here.graffiti_at( tripoint_bub_ms( pos ) ) );
             } else if( string_starts_with( found_id, "graffiti" ) ) {
                 seed = simple_point_hash( here.getglobal( pos ).raw().xy() );
             }
@@ -2897,7 +2897,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         case TILE_CATEGORY::MONSTER:
             // FIXME: add persistent id to Creature type, instead of using monster pointer address
             if( monster_override.find( tripoint_bub_ms( pos ) ) == monster_override.end() ) {
-                seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( pos ) );
+                seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( tripoint_bub_ms( pos ) ) );
             }
             break;
         default:
@@ -2908,7 +2908,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
             }
             // NPC
             if( string_starts_with( found_id, "npc_" ) ) {
-                if( npc *const guy = creatures.creature_at<npc>( pos ) ) {
+                if( npc *const guy = creatures.creature_at<npc>( tripoint_bub_ms( pos ) ) ) {
                     seed = guy->getID().get_value();
                 }
 

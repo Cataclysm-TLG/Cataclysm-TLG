@@ -72,7 +72,7 @@ static void drop_or_embed_projectile( const dealt_projectile_attack &attack )
         return;
     }
 
-    const tripoint_bub_ms &pt = tripoint_bub_ms( attack.end_point );
+    const tripoint_bub_ms &pt = attack.end_point;
 
     if( effects.count( ammo_effect_SHATTER_SELF ) ) {
         // Drop the contents, not the thrown item

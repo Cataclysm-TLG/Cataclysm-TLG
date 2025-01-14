@@ -2067,7 +2067,7 @@ void Character::dismount()
         add_msg_debug( debugmode::DF_CHARACTER, "dismount called when not riding" );
         return;
     }
-    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_bub( _( "Dismount where?" ) ) ) {
+    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent( _( "Dismount where?" ) ) ) {
         if( !g->is_empty( *pnt ) ) {
             add_msg( m_warning, _( "You cannot dismount there!" ) );
             return;
@@ -2721,7 +2721,7 @@ void Character::process_turn()
     // Question: Why don't we check monsters here?
     if( grab_1.victim != nullptr && !grab_1.victim->is_monster() ) {
         bool remove = false;
-        if( square_dist( grab_1.victim->pos(), pos() ) != 1 ) {
+        if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
             remove = true;
         }
         if( has_effect( effect_incorporeal ) ) {
@@ -2755,7 +2755,7 @@ void Character::process_turn()
             remove = true;
         } else {
             // This is for if we moved away, dropping our grab, but the victim moved adjacent before our next turn.
-            if( square_dist( grab_1.victim->pos(), pos() ) != 1 ) {
+            if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
                 remove = true;
             }
             bool grabfound = false;
@@ -3219,7 +3219,7 @@ float Character::throwforce( Creature &victim ) const
         throwforce += 8;
     }
     map &here = get_map();
-    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, victim.pos() ) ) {
+    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, victim.pos_bub() ) ) {
         throwforce *= 0.25;
     }
     return throwforce;
@@ -10888,9 +10888,9 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
                 }
             }
         }
-        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( pos().z == critter.pos().z ) && ( std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
+        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( posz() == critter.posz() ) && ( std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
         // TODO: get rid of fake npcs (pos() check)
-        bool valid_target = this != &critter && pos() != critter.pos() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
+        bool valid_target = this != &critter && pos_bub() != critter.pos_bub() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
         return valid_target && in_range && can_see;
     } );
 }
@@ -11051,17 +11051,17 @@ void Character::echo_pulse()
 bool Character::knows_trap( const tripoint_bub_ms &pos ) const
 {
     const tripoint_abs_ms p = get_map().getglobal( pos );
-    return known_traps.count( p.raw() ) > 0;
+    return known_traps.count( p ) > 0;
 }
 
 void Character::add_known_trap( const tripoint_bub_ms &pos, const trap &t )
 {
     const tripoint_abs_ms p = get_map().getglobal( pos );
     if( t.is_null() ) {
-        known_traps.erase( p.raw() );
+        known_traps.erase( p );
     } else {
         // TODO: known_traps should map to a trap_str_id
-        known_traps[p.raw()] = t.id.str();
+        known_traps[p] = t.id.str();
     }
 }
 
@@ -11512,12 +11512,12 @@ void Character::process_effects()
 
     map &here = get_map();
     if( has_effect( effect_slippery_terrain ) && !is_on_ground() &&
-        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
-        !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
         int rolls = -1;
         bool u_see = get_player_view().sees( *this );
         // ROAD tiles are hard, flat surfaces, so they are extra slippery.
-        if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos() ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) ) {
             rolls += 2;
         }
         if( has_trait( trait_DEFT ) ) {
@@ -11555,7 +11555,7 @@ void Character::process_effects()
     }
     if( has_effect( effect_cramped_space ) ) {
         // return is intentionally discarded, sets cramped if appropriate
-        can_move_to_vehicle_tile( get_map().getglobal( pos() ), cramped );
+        can_move_to_vehicle_tile( get_map().getglobal( pos_bub() ), cramped );
         if( !cramped ) {
             remove_effect( effect_cramped_space );
         }
@@ -11576,7 +11576,7 @@ void Character::gravity_check()
 void Character::stagger_check()
 {
     map &here = get_map();
-    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
         return;
     }
     float balance_factor = ( get_skill_level( skill_swimming ) / 2.0f + get_dex() / 2 + 3.0f *
@@ -11828,11 +11828,6 @@ Creature::Attitude Character::attitude_to( const Creature &other ) const
 npc_attitude Character::get_attitude() const
 {
     return NPCATT_NULL;
-}
-
-bool Character::sees( const tripoint &t, bool, int ) const
-{
-    return sees( tripoint_bub_ms( t ) );
 }
 
 bool Character::sees( const tripoint_bub_ms &t, bool, int ) const

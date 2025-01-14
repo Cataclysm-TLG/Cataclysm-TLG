@@ -1745,7 +1745,7 @@ bool monster::attack_at( const tripoint_bub_ms &p )
     if( has_flag( mon_flag_PACIFIST ) || has_flag( json_flag_CANNOT_ATTACK ) ) {
         return false;
     }
-    if( !move_effects( true, p.raw() ) ) {
+    if( !move_effects( true, p ) ) {
         moves = 0;
         return false;
     }
@@ -1824,7 +1824,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     if( has_effect( effect_airborne ) ) {
         force = true;
     }
-    if( !move_effects( false, p.raw() ) ) {
+    if( !move_effects( false, p ) ) {
         moves = 0;
         return false;
     }

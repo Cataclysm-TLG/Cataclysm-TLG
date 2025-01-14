@@ -2235,7 +2235,7 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
 
 static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                     const catacurses::window &w,
-                                    int &text_y, input_context &ctxt, const tripoint &target_pos )
+                                    int &text_y, input_context &ctxt, const tripoint_bub_ms &target_pos )
 {
     Creature *target = get_creature_tracker().creature_at( target_pos, true );
     if( target != nullptr && !you.sees( *target ) ) {
@@ -2243,14 +2243,14 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     }
     item weapon = null_item_reference();
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, false ) );
-    double range = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
+    double range = trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos );
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
     float throwforce = 0.0f;
     if( you.grab_1.victim ) {
         throwforce = you.throwforce( *you.grab_1.victim );
     }
     range = throwforce / 10;
-    float distance = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
+    float distance = trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos );
     distance /= range;
     throwforce *= distance;
     static const std::vector<confidence_rating> throwforce_config_critter = {{
@@ -2264,8 +2264,7 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                   get_map().ambient_light_at( tripoint_bub_ms( target_pos ) ),
                                   you.sees( target_pos ) );
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
-            throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes,
-            tripoint_bub_ms( target_pos ),
+            throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes, target_pos,
             item_location() );
 
     text_y = print_throwforce( w, 3, throwforce );
@@ -3121,9 +3120,9 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
                 set_view_offset( you->view_offset + edge_scroll );
             }
         }
-    } else if( const std::optional<tripoint> delta = ctxt.get_direction( action ) ) {
+    } else if( const std::optional<tripoint_rel_ms> delta = ctxt.get_direction_rel_ms( action ) ) {
         // Shift view/cursor with directional keys
-        shift_view_or_cursor( *delta );
+        shift_view_or_cursor( delta->raw() );
     } else if( action == "SELECT" &&
                ( mouse_pos = ctxt.get_coordinates( g->w_terrain, g->ter_view_p.raw().xy() ) ) ) {
         // Set pos by clicking with mouse
@@ -3951,7 +3950,7 @@ void target_ui::draw_ui_window()
             bool blind = mode == TargetMode::ThrowBlind;
             draw_throw_aim( *this, *you, w_target, text_y, ctxt, *relevant, dst, blind );
         } else if( mode == TargetMode::ThrowCreature ) {
-            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst.raw() );
+            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst );
         }
 
     }

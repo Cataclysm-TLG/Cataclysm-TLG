@@ -2944,7 +2944,7 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
     if( creatures.creature_at<monster>( p ) ) {
         attacking = true;
     }
-    if( !move_effects( attacking, pt.raw() ) ) {
+    if( !move_effects( attacking, pt ) ) {
         mod_moves( -get_speed() );
         return;
     }

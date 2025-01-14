@@ -203,11 +203,6 @@ Creature &Creature::operator=( Creature && ) noexcept = default;
 
 Creature::~Creature() = default;
 
-tripoint Creature::pos() const
-{
-    return Creature::pos_bub().raw();
-}
-
 tripoint_bub_ms Creature::pos_bub() const
 {
     return get_map().bub_from_abs( location );
@@ -610,7 +605,7 @@ bool Creature::sees( const Creature &critter ) const
     }
 
     // Night Invisibility check
-    if( has_night_invisibility && here.light_at( critter.pos() ) <= lit_level::LOW ) {
+    if( has_night_invisibility && here.light_at( critter.pos_bub() ) <= lit_level::LOW ) {
         return false;
     }
 
@@ -663,11 +658,6 @@ int Creature::eye_level() const
     } else {
         return this->as_character()->eye_level();
     }
-}
-
-bool Creature::sees( const tripoint &t, bool is_avatar, int range_mod ) const
-{
-    return Creature::sees( tripoint_bub_ms( t ), is_avatar, range_mod );
 }
 
 bool Creature::sees( const tripoint_bub_ms &t, bool is_avatar, int range_mod ) const
@@ -906,7 +896,7 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
     }
 
     // Diagonally offset targets are not adjacent.
-    if( pos().z != target->pos().z && pos().xy() != target->pos().xy() ) {
+    if( posz() != target->posz() && pos_bub().xy() != target->pos_bub().xy() ) {
         return false;
     }
 

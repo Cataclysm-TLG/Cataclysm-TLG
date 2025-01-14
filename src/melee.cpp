@@ -878,16 +878,17 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                                   std::max( 1, get_arm_str() ) + stab_skill - ( weight_factor ) ) / 2.f );
                     if( x_in_y( chance_to_recover, 100 ) ) {
                         move_cost *= 1.15;
-                        add_msg_if_player( m_warning, _( "You quickly pry your weapon free." ) );
+                        add_msg_if_player( m_warning, 
+                            _( "You quickly pry your weapon free." ) );
                     } else {
                         move_cost *= 1.3;
                         if( reach_attacking ) {
                             // Check to see if we're on open ground.
                             map &here = get_map();
                             tripoint next;
-                            next.x = pos().x + sgn( t.pos().x - pos().x );
-                            next.y = pos().y + sgn( t.pos().y - pos().y );
-                            next.z = pos().z;
+                            next.x = pos_bub().x() + sgn( t.pos_bub().x() - pos_bub().x() );
+                            next.y = pos_bub().y() + sgn( t.pos_bub().y() - pos_bub().y() );
+                            next.z = posz();
                             // If we're attacking through a fence or something, we lose our weapon.
                             if( !cur_weap.has_flag( flag_NO_DROP ) && ( here.impassable( next ) ||
                                     ( here.ter( next )->has_flag( "EMPTY_SPACE" ) &&
@@ -1042,7 +1043,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     if( drop_weapon && !cur_weap.is_null() && !cur_weap.has_flag( flag_INTEGRATED ) ) {
         map &here = get_map();
         item your_weapon = remove_weapon();
-        here.add_item_or_charges( t.pos(), your_weapon );
+        here.add_item_or_charges( t.pos_bub(), your_weapon );
     }
     return true;
 }

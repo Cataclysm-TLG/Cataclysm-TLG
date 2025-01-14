@@ -1746,7 +1746,7 @@ void activity_handlers::mutant_tree_communion_do_turn( player_activity *act, Cha
     if( calendar::once_every( 2_minutes ) ) {
         bool adjacent_mutant_tree = false;
         map &here = get_map();
-        for( const tripoint &p2 : here.points_in_radius( you->pos(), 1 ) ) {
+        for( const tripoint_bub_ms &p2 : here.points_in_radius( you->pos_bub(), 1 ) ) {
             if( here.has_flag( ter_furn_flag::TFLAG_MUTANT_TREE, p2 ) ) {
                 adjacent_mutant_tree = true;
             }
@@ -3672,7 +3672,6 @@ void activity_handlers::fertilize_plot_do_turn( player_activity *act, Character 
 
     const auto reject_tile = [&]( const tripoint_bub_ms & tile ) {
         check_fertilizer();
-        // TODO: fix point types
         ret_val<void> can_fert = iexamine::can_fertilize( *you, tile, fertilizer );
         return !can_fert.success();
     };
@@ -3680,7 +3679,6 @@ void activity_handlers::fertilize_plot_do_turn( player_activity *act, Character 
     const auto fertilize = [&]( Character & you, const tripoint_bub_ms & tile ) {
         check_fertilizer();
         if( have_fertilizer() ) {
-            // TODO: fix point types
             iexamine::fertilize_plant( you, tile, fertilizer );
             if( !have_fertilizer() ) {
                 add_msg( m_info, _( "You have run out of %s." ), item::nname( fertilizer ) );
@@ -3786,7 +3784,6 @@ void activity_handlers::pull_creature_finish( player_activity *act, Character *y
     if( you->is_avatar() ) {
         you->as_avatar()->longpull( act->name );
     } else {
-        // TODO: fix point types
         you->longpull( act->name, get_map().bub_from_abs( act->placement ) );
     }
     act->set_to_null();
@@ -3800,7 +3797,7 @@ void activity_handlers::tree_communion_do_turn( player_activity *act, Character 
         act->values.front() -= 1;
         if( act->values.front() == 0 ) {
             map &here = get_map();
-            for( const tripoint &p2 : here.points_in_radius( you->pos(), 1 ) ) {
+            for( const tripoint_bub_ms &p2 : here.points_in_radius( you->pos_bub(), 1 ) ) {
                 if( here.has_flag( ter_furn_flag::TFLAG_MUTANT_TREE, p2 ) ) {
                     adjacent_mutant_tree = true;
                 }

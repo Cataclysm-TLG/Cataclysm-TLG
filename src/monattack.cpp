@@ -715,7 +715,7 @@ bool mattack::howl( monster *z )
 {
     Creature *target = z->attack_target();
     if( target == nullptr ||
-        rl_dist( z->pos(), target->pos() ) > 4 ||
+        rl_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
         !z->sees( *target ) ) {
         return false;
     }
@@ -892,7 +892,7 @@ bool mattack::acid_accurate( monster *z )
         return false;
     }
 
-    const int range = rl_dist( z->pos(), target->pos() );
+    const int range = rl_dist( z->pos_bub(), target->pos_bub() );
     if( range > 10 || range < 2 || !z->sees( *target ) ) {
         return false;
     }
@@ -1509,7 +1509,7 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
     }
 
     // too far
-    const int dist = rl_dist( z->pos(), target->pos() );
+    const int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     if( dist > max_distance ) {
         return false;
     }
@@ -3136,7 +3136,7 @@ void mattack::tankgun( monster *z, Creature *target )
         z->ammo[ammo_type] = 40;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     if( dist > 50 ) {
         return;
     }
@@ -3558,8 +3558,8 @@ bool mattack::chickenbot( monster *z )
         cap += 2;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
-    int player_dist = rl_dist( target->pos(), player_character.pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
+    int player_dist = rl_dist( target->pos_bub(), player_character.pos_bub() );
     if( dist == 1 && one_in( 2 ) ) {
         // Use tazer at point-blank range, and even then, not continuously.
         mode = 1;
@@ -3642,7 +3642,7 @@ bool mattack::multi_robot( monster *z )
         cap += 2;
     }
 
-    int dist = rl_dist( z->pos(), target->pos() );
+    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
     if( dist <= 15 ) {
         mode = 1;
     } else if( dist <= 30 ) {
@@ -5121,9 +5121,9 @@ bool mattack::stretch_attack( monster *z )
         return false;
     }
 
-    int distance = rl_dist( z->pos(), target->pos() );
+    int distance = rl_dist( z->pos_bub(), target->pos_bub() );
     // Hack, only allow attacking above or below if the target is adjacent.
-    if( z->pos().z != target->pos().z ) {
+    if( z->posz() != target->posz() ) {
         distance += 2;
     }
     if( distance < 2 || distance > 3 || !z->sees( *target ) ) {
@@ -5263,12 +5263,12 @@ bool mattack::dsa_drone_scan( monster *z )
     // Select a target: the avatar or a nearby NPC.  Must be visible and within scan range
     Character *target = &get_player_character();
     Character &you = get_player_character();
-    bool avatar_in_range = z->posz() == target->posz() && z->sees( target->pos() ) &&
-                           rl_dist( z->pos(), target->pos() ) <= scan_range;
+    bool avatar_in_range = z->posz() == target->posz() && z->sees( target->pos_bub() ) &&
+                           rl_dist( z->pos_bub(), target->pos_bub() ) <= scan_range;
     const std::vector<npc *> available = g->get_npcs_if( [&]( const npc & guy ) {
         // TODO: Get rid of the z-level check when z-level vision gets "better"
-        return z->posz() == guy.posz() && z->sees( guy.pos() ) &&
-               rl_dist( z->pos(), guy.pos() ) <= scan_range;
+        return z->posz() == guy.posz() && z->sees( guy.pos_bub() ) &&
+               rl_dist( z->pos_bub(), guy.pos_bub() ) <= scan_range;
     } );
     if( !avatar_in_range && available.empty() ) {
         return true;
@@ -5317,7 +5317,7 @@ bool mattack::dsa_drone_scan( monster *z )
     }
     target->set_value( weapons_str, string_format( "%d", weapons_count ) );
 
-    if( you.sees( z->pos() ) ) {
+    if( you.sees( z->pos_bub() ) ) {
         target->add_msg_player_or_npc( _( "The %s shines its light at you." ),
                                        _( "The %s shines its light at <npcname>." ),
                                        z->name() );

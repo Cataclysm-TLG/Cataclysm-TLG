@@ -1209,21 +1209,6 @@ bool avatar::is_obeying( const Character &p ) const
     return guy.is_obeying( *this );
 }
 
-bool avatar::cant_see( const tripoint &p ) const
-{
-
-    // calc based on recoil
-    if( !last_target_pos.has_value() ) {
-        return false;
-    }
-
-    if( aim_cache_dirty ) {
-        rebuild_aim_cache();
-    }
-
-    return aim_cache[p.x][p.y];
-}
-
 bool avatar::cant_see( const tripoint_bub_ms &p ) const
 {
 

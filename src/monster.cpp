@@ -2291,7 +2291,7 @@ bool monster::movement_impaired()
     return effect_cache[MOVEMENT_IMPAIRED];
 }
 
-bool monster::move_effects( bool, tripoint dest_loc )
+bool monster::move_effects( bool, tripoint_bub_ms dest_loc )
 {
     // This function is relatively expensive, we want that cached
     // IMPORTANT: If adding any new effects here, make SURE to
@@ -2372,7 +2372,7 @@ bool monster::move_effects( bool, tripoint dest_loc )
             if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
                 add_msg( _( "The %s escapes the light snare!" ), name() );
             }
-            here.spawn_item( pos(), "light_snare_kit" );
+            here.spawn_item( pos_bub(), "light_snare_kit" );
         }
         return false;
     }
@@ -2396,7 +2396,7 @@ bool monster::move_effects( bool, tripoint dest_loc )
                 if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
                     add_msg( _( "The %s escapes the bear trap!" ), name() );
                 }
-                here.spawn_item( pos(), "beartrap" );
+                here.spawn_item( pos_bub(), "beartrap" );
             }
         }
         return false;
@@ -2419,7 +2419,7 @@ bool monster::move_effects( bool, tripoint dest_loc )
     if( has_effect( effect_in_pit ) ) {
         map &here = get_map();
         const ter_id target_ter = here.ter( dest_loc );
-        trap trap_here = here.tr_at( pos() );
+        trap trap_here = here.tr_at( pos_bub() );
         trap trap_there = here.tr_at( dest_loc );
 
         // Adjacent pits are contiguous, like a trench.
@@ -3550,12 +3550,12 @@ void monster::process_effects()
     if( has_effect( effect_slippery_terrain ) && !is_immune_effect( effect_downed ) && !flies() &&
         !digging() && !has_effect( effect_downed ) && !type->in_species( species_ROBOT ) ) {
         map &here = get_map();
-        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
-            !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos_bub() ) &&
+            !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
             int intensity = get_effect_int( effect_slippery_terrain );
             intensity -= 1;
             // ROAD tiles are hard, flat surfaces, and easier to slip on.
-            if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos() ) ) {
+            if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) ) {
                 intensity++;
             }
             if( has_flag( mon_flag_STUMBLES ) ) {
