@@ -24,6 +24,7 @@
 #include "mod_tracker.h"
 #include "npc.h"
 #include "output.h"
+#include "profession.h"
 #include "scenario.h"
 #include "string_formatter.h"
 #include "talker.h"
