@@ -3935,8 +3935,15 @@
       { "level": 3, "name": "unarmed" },
       { "level": 3, "name": "dodge" }
     ],
-    "proficiencies": [ "prof_knives_familiar", "prof_knives_pro", "prof_unarmed_familiar", "prof_unarmed_pro", "prof_shivs_familiar" ],
-    "traits": [ "PROF_ASSASSIN_CONVICT" ],
+    "proficiencies": [
+      "prof_knives_familiar",
+      "prof_knives_pro",
+      "prof_unarmed_familiar",
+      "prof_unarmed_pro",
+      "prof_shivs_familiar",
+      "prof_gross_anatomy"
+    ],
+    "effect_on_conditions": [ "scenario_assassin_conv" ],
     "items": {
       "both": {
         "entries": [
@@ -3944,7 +3951,7 @@
           { "item": "pants_costume", "variant": "pants_striped" },
           { "item": "sneakers" },
           { "item": "socks" },
-          { "item": "knife_rm42", "container-item": "gartersheath1" },
+          { "item": "switchblade", "container-item": "gartersheath1" },
           { "item": "polaroid_photo", "container-item": "ankle_wallet_pouch" }
         ]
       },
