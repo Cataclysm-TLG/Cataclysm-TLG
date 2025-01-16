@@ -717,7 +717,7 @@ static void grab()
             if( rng( 0, 100 ) <= static_cast<int>( z->type->def_chance ) ) {
                 z->type->sp_defense( *z, you.as_character(), nullptr );
             }
-            z->add_effect( effect_grabbed, 1_days, body_part_bp_null, true, grab_strength );
+            z->add_effect( effect_grabbed, 1_days, bodypart_str_id::NULL_ID(), true, grab_strength );
             you.add_effect( effect_grabbing, 1_days, true, 1 );
             you.grab_1.set( victimptr, grab_strength );
         } else {
