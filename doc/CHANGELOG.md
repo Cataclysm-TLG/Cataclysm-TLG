@@ -70,6 +70,7 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 
 ## Minor changes
 
+- Poison ivy was added as a naturally spawning trap, afflicting you with a rash
 - Strange temples have been removed due to being incompatible with the lore.
 - Many unnecessary item variants have been removed, which reduced file size greatly in some cases. There is no need for 100 variants of condoms, phone cases and t-shirts.
 - Less map extras will be autonoted. You will need to explore more. Road blocks, bandit ambushes and minefields are meant to be stealthy and you can not magically sense spiders in a house 5 blocks away.
