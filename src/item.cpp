@@ -132,8 +132,6 @@ static const ammotype ammo_bolt( "bolt" );
 static const ammotype ammo_money( "money" );
 static const ammotype ammo_plutonium( "plutonium" );
 
-static const attack_vector_id attack_vector_vector_null( "vector_null" );
-
 static const bionic_id bio_digestion( "bio_digestion" );
 
 static const bodygraph_id bodygraph_full_body_iteminfo( "full_body_iteminfo" );
@@ -5437,13 +5435,12 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     ///\EFFECT_MELEE >2 allows seeing melee damage stats on weapons
     if( ( player_character.get_skill_level( skill_melee ) >= 3 &&
           ( !dmg_types.empty() || type->m_to_hit > 0 ) ) || debug_mode ) {
-        bodypart_id bp = bodypart_id( "torso" );
         damage_instance non_crit;
-        player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_vector_null,
-                                          sub_bodypart_str_id::NULL_ID(), nullptr, bp );
+        player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_id::NULL_ID(),
+                                          sub_bodypart_str_id::NULL_ID() );
         damage_instance crit;
-        player_character.roll_all_damage( true, crit, true, *this, attack_vector_vector_null,
-                                          sub_bodypart_str_id::NULL_ID(), nullptr, bp );
+        player_character.roll_all_damage( true, crit, true, *this, attack_vector_id::NULL_ID(),
+                                          sub_bodypart_str_id::NULL_ID() );
         int attack_cost = player_character.attack_speed( *this );
         insert_separation_line( info );
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG ) ) {
