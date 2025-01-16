@@ -1,49 +1,48 @@
 [
-    {
-      "type": "mapgen",
-      "method": "json",
-      "nested_mapgen_id": "nested_poison_ivy",
-      "object": {
-        "mapgensize": [ 1, 1 ],
-        "place_terrain": [ { "ter": "t_grass", "x": 0, "y": 0 } ],
-        "place_traps": [ { "trap": "tr_poison_ivy", "x": 0, "y": 0 } ],
-        "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
-      }
-    },
-    {
-      "type": "mapgen",
-      "method": "json",
-      "update_mapgen_id": "mx_poison_ivy_patch",
-      "object": {
-        "rows": [
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        ",
-          "                        "
-        ],
-        "place_nested": [ { "chunks": [ [ "nested_poison_ivy", 100 ] ], "x": [ 0, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 8 ] } ],
-        "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
-      }
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "nested_poison_ivy",
+    "object": {
+      "mapgensize": [ 1, 1 ],
+      "place_terrain": [ { "ter": "t_grass", "x": 0, "y": 0 } ],
+      "place_traps": [ { "trap": "tr_poison_ivy", "x": 0, "y": 0 } ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
-  ]
-  
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "update_mapgen_id": "mx_poison_ivy_patch",
+    "object": {
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "place_nested": [ { "chunks": [ [ "nested_poison_ivy", 100 ] ], "x": [ 0, 23 ], "y": [ 0, 23 ], "repeat": [ 0, 8 ] } ],
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
+    }
+  }
+]
