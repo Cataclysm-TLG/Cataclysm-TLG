@@ -78,6 +78,7 @@
       { "monster": "mon_nether_unviable_chunk", "weight": 3, "cost_multiplier": 0, "pack_size": [ 2, 4 ] },
       { "monster": "mon_nether_unviable_root", "weight": 3, "cost_multiplier": 0, "pack_size": [ 2, 4 ] },
       { "monster": "mon_nether_unviable_butterfly", "weight": 2, "cost_multiplier": 0 },
+      { "monster": "mon_nether_unviable_glowstalk", "weight": 2, "cost_multiplier": 0 },
       { "monster": "mon_nether_unviable_stomper", "weight": 1, "cost_multiplier": 1 }
     ]
   },
