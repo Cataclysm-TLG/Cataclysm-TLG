@@ -1710,7 +1710,14 @@
     "grab_strength": 20,
     "special_attacks": [
       { "id": "grab" },
-      { "id": "ranged_pull", "cooldown": 30, "range": 3, "grab_data": { "pull_weight_ratio": 3 } },
+      {
+        "id": "ranged_pull",
+        "cooldown": 30,
+        "range": 3,
+        "miss_msg_u": "%s reaches for you, but you dodge!",
+        "miss_msg_npc": "%s reaches for <npcname>, but they dodge!",
+        "grab_data": { "pull_weight_ratio": 3 }
+      },
       {
         "type": "spell",
         "id": "glowstalk_blind",
