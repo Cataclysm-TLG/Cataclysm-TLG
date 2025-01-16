@@ -155,7 +155,16 @@
     "id": "real_thrusting_swords",
     "type": "requirement",
     "//": "Any real, quality weapon designed to be used in a thrusting fashion.  Needs to be a sword, not a spear.  This includes fencing weaponry.",
-    "tools": [ [ [ "estoc", -1 ], [ "sword_cane", -1 ], [ "rapier", -1 ], [ "talwar", -1 ], [ "jian", -1 ], [ "broadsword", -1 ] ] ]
+    "tools": [
+      [
+        [ "estoc", -1 ],
+        [ "sword_cane", -1 ],
+        [ "rapier", -1 ],
+        [ "talwar", -1 ],
+        [ "jian", -1 ],
+        [ "broadsword", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_short_swords",
@@ -252,7 +261,12 @@
     "id": "real_long_swords",
     "type": "requirement",
     "//": "Any real, edged long swords you could practice with, like katanas, longswords, etc.  I reckon that anything with a straight, sharp point to it that primarily swings side-to-side can qualify.",
-    "tools": [ [ [ "katana", -1 ], [ "longsword", -1 ] ] ]
+    "tools": [
+      [
+        [ "katana", -1 ],
+        [ "longsword", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_great_swords",
@@ -275,7 +289,13 @@
     "id": "real_great_swords",
     "type": "requirement",
     "//": "Any real, edged, big swords you could practice with, like zweihanders, greatswords, or the Dragonslayer, etc.  I reckon that anything with a straight, sharp point to it that primarily swings side-to-side, and is large enough to require a normal human to use two hands can qualify.",
-    "tools": [ [ [ "zweihander", -1 ], [ "nodachi", -1 ], [ "kriegsmesser", -1 ] ] ]
+    "tools": [
+      [
+        [ "zweihander", -1 ],
+        [ "nodachi", -1 ],
+        [ "kriegsmesser", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_axes",
@@ -422,7 +442,13 @@
     "id": "real_maces",
     "type": "requirement",
     "//": "Any real, top-heavy bashing weapons with a pointy ball at the end that doesn't independantly swing (those are flails).",
-    "tools": [ [ [ "mace", -1 ], [ "mace_bronze", -1 ], [ "morningstar", -1 ] ] ]
+    "tools": [
+      [
+        [ "mace", -1 ],
+        [ "mace_bronze", -1 ],
+        [ "morningstar", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_quarterstaves",
@@ -434,7 +460,15 @@
     "id": "real_quarterstaves",
     "type": "requirement",
     "//": "Any real, pole-like weapons designed for bashing and smashing.  Reserved for quality items.",
-    "tools": [ [ [ "i_staff", -1 ], [ "steel_staff", -1 ], [ "q_staff", -1 ], [ "bo", -1 ], [ "shock_staff", -1 ] ] ]
+    "tools": [
+      [
+        [ "i_staff", -1 ],
+        [ "steel_staff", -1 ],
+        [ "q_staff", -1 ],
+        [ "bo", -1 ],
+        [ "shock_staff", -1 ]
+      ]
+    ]
   },
   {
     "id": "basic_polearms",

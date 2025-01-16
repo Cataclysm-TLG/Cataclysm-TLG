@@ -376,7 +376,13 @@
     "type": "requirement",
     "//": "Materials for use in scrap armor",
     "components": [
-      [ [ "scrap", 50 ], [ "budget_steel_chunk", 4 ], [ "budget_steel_lump", 1 ], [ "steel_chunk", 4 ], [ "steel_lump", 1 ] ]
+      [
+        [ "scrap", 50 ],
+        [ "budget_steel_chunk", 4 ],
+        [ "budget_steel_lump", 1 ],
+        [ "steel_chunk", 4 ],
+        [ "steel_lump", 1 ]
+      ]
     ]
   },
   {
