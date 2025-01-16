@@ -1441,7 +1441,7 @@
     "id": "mon_nether_leech",
     "type": "MONSTER",
     "name": { "str": "strange leech", "str_pl": "strange leeches" },
-    "description": "A very wet, snake-like creature which you estimate to be five feet long, covered in slime and slithering about.  Occasionally, it will attach itself to the flesh around it and begin to suck.",
+    "description": "A very wet, snake-like creature which you estimate to be five feet long, covered in slime and slithering about.  Occasionally, it will attach itself to the flesh around it and begins to suck.",
     "copy-from": "mon_larva_abstract",
     "default_faction": "nether",
     "bodytype": "snake",
@@ -1688,31 +1688,31 @@
     "id": "mon_nether_unviable_glowstalk",
     "type": "MONSTER",
     "name": { "str": "glowstalk" },
-    "description": "A tall, thin stalk of rubbery flesh, creeping around on a sluglike foot at its base.  The blob you might call the \"head\" is riddled with brightly glowing, yellow-green pustules, while a line down the middle seems to function as its mouth.  It looks unhealthy, like it's withering away.",
+    "description": "A single, creeping stalk of unknown matter.  The blob you would call the \"head\" is riddled with brightly glowing, yellow-green pustules.  You guess that an odd line on its \"head\" might function as its mouth.  Despite this, it oddly does not look healthy.",
     "species": "ABERRATION",
-    "hp": 40,
-    "speed": 65,
+    "hp": 30,
+    "speed": 90,
     "diff": 6,
     "luminance": 12,
     "weight": "30 kg",
     "volume": "50 L",
     "vision_day": 4,
-    "vision_night": 5,
+    "vision_night": 30,
     "default_faction": "nether",
     "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
     "placate_triggers": [ "PLAYER_WEAK" ],
-    "melee_skill": 3,
+    "melee_skill": 4,
     "morale": 5,
     "symbol": "i",
     "color": "green",
     "bodytype": "snake",
     "harvest": "mutant_animal_noskin",
-    "grab_strength": 25,
+    "grab_strength": 20,
     "special_attacks": [
       { "id": "grab" },
       {
         "id": "ranged_pull",
-        "cooldown": 26,
+        "cooldown": 30,
         "range": 3,
         "miss_msg_u": "%s reaches for you, but you dodge!",
         "miss_msg_npc": "%s reaches for <npcname>, but they dodge!",
@@ -1723,7 +1723,7 @@
         "id": "glowstalk_blind",
         "monster_message": "",
         "spell_data": { "id": "glowstalk_blind", "min_level": 1 },
-        "condition": { "npc_has_flag": "GRAB" },
+        "condition": { "u_has_flag": "GRAB_FILTER" },
         "cooldown": 10
       },
       {
@@ -1734,11 +1734,10 @@
         "miss_msg_npc": "The %s opens its \"mouth\" and snaps at <npcname>, but they dodge!",
         "no_dmg_msg_u": "The %s opens its \"mouth\" and snaps at you, but fails to penetrate armor.",
         "no_dmg_msg_npc": "The %s opens its \"mouth\" and snaps at <npcname>, but fails to penetrate armor.",
-        "damage_max_instance": [ { "damage_type": "cut", "amount": 2 } ],
-        "cooldown": 4
+        "damage_max_instance": [ { "damage_type": "cut", "amount": 1, "armor_multiplier": 0.5 } ],
+        "cooldown": 30
       }
     ],
-    "flags": [ "SEES", "GRABS", "HARDTOSHOOT" ],
-    "armor": { "bash": 3, "cut": 1, "bullet": 6 }
+    "flags": [ "SEES", "GRABS" ]
   }
 ]
