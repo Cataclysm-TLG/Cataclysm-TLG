@@ -464,11 +464,11 @@ static bool mx_helicopter( map &m, const tripoint &abs_sub )
     return true;
 }
 
-static void place_trap_if_clear( tinymap &m, const point &target, trap_id trap_type )
+static void place_trap_if_clear( tinymap &m, const point_omt_ms &target, trap_id trap_type )
 {
-    tripoint_omt_ms tri_target( target.x, target.y, m.get_abs_sub().z() );
+    tripoint_omt_ms tri_target( target.x(), target.y(), m.get_abs_sub().z() );
     if( m.ter( tri_target ).obj().trap == tr_null ) {
-        mtrap_set( &m, target, trap_type );
+        mtrap_set( &m, target, trap_type, true );
     }
 }
 
@@ -573,9 +573,9 @@ static bool mx_minefield( map &, const tripoint &abs_sub )
         for( int i = 0; i < num_mines; i++ ) {
             const tripoint_omt_ms p( rng( 3, SEEX * 2 - 4 ), rng( SEEY, SEEY * 2 - 2 ), abs_sub.z );
             if( m.has_flag( ter_furn_flag::TFLAG_DIGGABLE, p ) ) {
-                place_trap_if_clear( m, p.xy().raw(), tr_landmine_buried );
+                place_trap_if_clear( m, p.xy(), tr_landmine_buried );
             } else {
-                place_trap_if_clear( m, p.xy().raw(), tr_landmine );
+                place_trap_if_clear( m, p.xy(), tr_landmine );
             }
         }
 
@@ -682,9 +682,9 @@ static bool mx_minefield( map &, const tripoint &abs_sub )
         for( int i = 0; i < num_mines; i++ ) {
             const tripoint_omt_ms p3( rng( 3, SEEX * 2 - 4 ), rng( 1, SEEY ), abs_sub.z );
             if( m.has_flag( ter_furn_flag::TFLAG_DIGGABLE, p3 ) ) {
-                place_trap_if_clear( m, p3.xy().raw(), tr_landmine_buried );
+                place_trap_if_clear( m, p3.xy(), tr_landmine_buried );
             } else {
-                place_trap_if_clear( m, p3.xy().raw(), tr_landmine );
+                place_trap_if_clear( m, p3.xy(), tr_landmine );
             }
         }
 
@@ -835,9 +835,9 @@ static bool mx_minefield( map &, const tripoint &abs_sub )
         for( int i = 0; i < num_mines; i++ ) {
             const tripoint_omt_ms p5( rng( SEEX + 1, SEEX * 2 - 2 ), rng( 3, SEEY * 2 - 4 ), abs_sub.z );
             if( m.has_flag( ter_furn_flag::TFLAG_DIGGABLE, p5 ) ) {
-                place_trap_if_clear( m, p5.xy().raw(), tr_landmine_buried );
+                place_trap_if_clear( m, p5.xy(), tr_landmine_buried );
             } else {
-                place_trap_if_clear( m, p5.xy().raw(), tr_landmine );
+                place_trap_if_clear( m, p5.xy(), tr_landmine );
             }
         }
 
@@ -978,9 +978,9 @@ static bool mx_minefield( map &, const tripoint &abs_sub )
         for( int i = 0; i < num_mines; i++ ) {
             const tripoint_omt_ms p7( rng( 1, SEEX ), rng( 3, SEEY * 2 - 4 ), abs_sub.z );
             if( m.has_flag( ter_furn_flag::TFLAG_DIGGABLE, p7 ) ) {
-                place_trap_if_clear( m, p7.xy().raw(), tr_landmine_buried );
+                place_trap_if_clear( m, p7.xy(), tr_landmine_buried );
             } else {
-                place_trap_if_clear( m, p7.xy().raw(), tr_landmine );
+                place_trap_if_clear( m, p7.xy(), tr_landmine );
             }
         }
 
@@ -1334,10 +1334,10 @@ static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
     return false;
 }
 
-static void burned_ground_parser( map &m, const tripoint &loc )
+static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
 {
-    const furn_t &fid = m.furn( loc ).obj();
-    const ter_id &tid = m.ter( loc );
+    const furn_t &fid = m.furn( loc.raw() ).obj();
+    const ter_id &tid = m.ter( loc.raw() );
     const ter_t &tr = tid.obj();
 
     VehicleList vehs = m.get_vehicles();
@@ -1352,7 +1352,7 @@ static void burned_ground_parser( map &m, const tripoint &loc )
             if( m.inbounds( t ) ) {
                 points.push_back( t );
             } else {
-                tripoint_abs_omt pos = project_to<coords::omt>( m.getglobal( loc ) );
+                tripoint_abs_omt pos = project_to<coords::omt>( loc );
                 oter_id terrain_type = overmap_buffer.ter( pos );
                 tripoint_bub_ms veh_origin = vehicle.v->pos_bub();
                 debugmsg( "burned_ground_parser: Vehicle %s (origin %s; rotation (%f,%f)) has "
@@ -1388,72 +1388,72 @@ static void burned_ground_parser( map &m, const tripoint &loc )
     const auto iter = dies_into.find( tid );
     if( iter != dies_into.end() ) {
         if( one_in( 6 ) ) {
-            m.ter_set( loc, ter_t_dirt );
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
+            m.ter_set( loc.raw(), ter_t_dirt );
+            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 50 ) );
         } else if( one_in( 10 ) ) {
             // do nothing, save some spots from fire
         } else {
-            m.ter_set( loc, iter->second );
+            m.ter_set( loc.raw(), iter->second );
         }
     }
 
     // fungus cannot be destroyed by map::destroy so ths method is employed
     if( fid.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
         if( one_in( 5 ) ) {
-            m.furn_set( loc, furn_f_ash );
+            m.furn_set( loc.raw(), furn_f_ash );
         }
     }
     if( tr.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
-        m.ter_set( loc, ter_t_dirt );
+        m.ter_set( loc.raw(), ter_t_dirt );
         if( one_in( 5 ) ) {
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
+            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 50 ) );
         }
     }
     // destruction of trees is not absolute
     if( tr.has_flag( ter_furn_flag::TFLAG_TREE ) ) {
         if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_trunk );
+            m.ter_set( loc.raw(), ter_t_trunk );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_stump );
+            m.ter_set( loc.raw(), ter_t_stump );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc, ter_t_tree_dead );
+            m.ter_set( loc.raw(), ter_t_tree_dead );
         } else {
-            m.ter_set( loc, ter_t_dirt );
+            m.ter_set( loc.raw(), ter_t_dirt );
             if( one_in( 4 ) ) {
-                m.furn_set( loc, furn_f_ash );
+                m.furn_set( loc.raw(), furn_f_ash );
             } else {
-                m.furn_set( loc, furn_id( "f_fireweed" ) );
+                m.furn_set( loc.raw(), furn_id( "f_fireweed" ) );
             }
-            m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
+            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 1000 ) );
         }
         // everything else is destroyed, ash is added
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE ) ||
                ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) ) {
-        while( m.is_bashable( loc ) ) { // one is not enough
-            m.destroy( loc, true );
+        while( m.is_bashable( loc.raw() ) ) { // one is not enough
+            m.destroy( loc.raw(), true );
         }
         if( one_in( 5 ) && !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
             // This gives very little *wood* ash because the terrain is not flagged as flammable
-            m.spawn_item( loc, itype_ash, 1, rng( 1, 10 ) );
+            m.spawn_item( loc.raw(), itype_ash, 1, rng( 1, 10 ) );
         }
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_ASH ) ) {
-        while( m.is_bashable( loc ) ) {
-            m.destroy( loc, true );
+        while( m.is_bashable( loc.raw() ) ) {
+            m.destroy( loc.raw(), true );
         }
-        if( !m.is_open_air( loc ) ) {
-            m.furn_set( loc, furn_f_ash );
+        if( !m.is_open_air( loc.raw() ) ) {
+            m.furn_set( loc.raw(), furn_f_ash );
             if( !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
-                m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
+                m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 1000 ) );
             }
         }
     }
 
     // burn-away flammable items
-    while( m.flammable_items_at( loc ) ) {
-        map_stack stack = m.i_at( loc );
+    while( m.flammable_items_at( loc.raw() ) ) {
+        map_stack stack = m.i_at( loc.raw() );
         for( auto it = stack.begin(); it != stack.end(); ) {
             if( it->flammable() ) {
-                m.create_burnproducts( tripoint_bub_ms( loc ), *it, it->weight() );
+                m.create_burnproducts( tripoint_bub_ms( loc.raw() ), *it, it->weight() );
                 it = stack.erase( it );
             } else {
                 it++;
@@ -1477,7 +1477,7 @@ static bool mx_point_burned_ground( map &m, const tripoint &abs_sub )
     for( int i = 0; i < width; i++ ) {
         for( int j = 0; j < height; j++ ) {
             if( current[i][j] == 1 ) {
-                const tripoint loc( i, j, abs_sub.z );
+                const tripoint_abs_sm loc( i, j, abs_sub.z );
                 burned_ground_parser( m, loc );
             }
         }
@@ -1494,7 +1494,7 @@ static bool mx_burned_ground( map &m, const tripoint &abs_sub )
     for( int i = 0; i < SEEX * 2; i++ ) {
         for( int j = 0; j < SEEY * 2; j++ ) {
             const tripoint loc( i, j, abs_sub.z );
-            burned_ground_parser( m, loc );
+            burned_ground_parser( m, tripoint_abs_sm( loc ) );
         }
     }
     VehicleList vehs = m.get_vehicles();

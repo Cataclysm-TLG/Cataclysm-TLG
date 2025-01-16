@@ -689,7 +689,7 @@ void monster::plan()
                 anger = 0;
                 remove_effect( effect_dragging );
             } else {
-                set_dest( here.getglobal( couch_loc ) );
+                set_dest( here.get_abs( couch_loc ) );
             }
         }
 
@@ -1007,7 +1007,7 @@ void monster::move()
 
     // If true, don't try to greedily avoid locally bad paths
     bool pathed = false;
-    tripoint_bub_ms local_dest = here.bub_from_abs( get_dest() );
+    tripoint_bub_ms local_dest = here.get_bub( get_dest() );
     if( try_to_move ) {
         // Move using vision by follow smells and sounds
         bool move_without_target = false;
@@ -1024,7 +1024,7 @@ void monster::move()
             if( !move_without_target && wandf > 0 && friendly == 0 ) {
                 unset_dest();
                 if( wander_pos != get_location() ) {
-                    local_dest = here.bub_from_abs( wander_pos );
+                    local_dest = here.get_bub( wander_pos );
                     move_without_target = true;
                     add_msg_debug( debugmode::DF_MONMOVE, "%s follows sound using vision", name() );
                 }
@@ -1084,7 +1084,7 @@ void monster::move()
     if( wandf > 0 && !moved && friendly == 0 ) { // No LOS, no scent, so as a fall-back follow sound
         unset_dest();
         if( wander_pos != get_location() ) {
-            destination = here.bub_from_abs( wander_pos );
+            destination = here.get_bub( wander_pos );
             moved = true;
             add_msg_debug( debugmode::DF_MONMOVE, "%s follows sound to not use vision", name() );
         }
@@ -1136,7 +1136,7 @@ void monster::move()
                 rampPos += 1;
                 candidate += tripoint_rel_ms::below;
             }
-            const tripoint_abs_ms candidate_abs = get_map().getglobal( candidate );
+            const tripoint_abs_ms candidate_abs = get_map().get_abs( candidate );
 
             if( candidate.z() != posz() ) {
                 bool can_z_move = true;
@@ -1221,7 +1221,7 @@ void monster::move()
                     continue;
                 }
                 // Don't bash if we're just tracking a noise.
-                if( !provocative_sound && is_wandering() && destination == here.bub_from_abs( wander_pos ) ) {
+                if( !provocative_sound && is_wandering() && destination == here.get_bub( wander_pos ) ) {
                     continue;
                 }
                 const int estimate = here.bash_rating( bash_estimate(), candidate );
@@ -1256,7 +1256,7 @@ void monster::move()
     // Finished logic section.  By this point, we should have chosen a square to
     //  move to (moved = true).
     if( moved ) { // Actual effects of moving to the square we've chosen
-        const tripoint_bub_ms local_next_step = here.bub_from_abs( next_step );
+        const tripoint_bub_ms local_next_step = here.get_bub( next_step );
         const bool did_something =
             ( !pacified && attack_at( local_next_step ) ) ||
             ( !pacified && can_open_doors &&
@@ -1330,7 +1330,7 @@ void monster::nursebot_operate( Character *dragged_foe )
     creature_tracker &creatures = get_creature_tracker();
     map &here = get_map();
     if( rl_dist( get_location(), get_dest() ) == 1 &&
-        !here.has_flag_furn( ter_furn_flag::TFLAG_AUTODOC_COUCH, here.bub_from_abs( get_dest() ) ) &&
+        !here.has_flag_furn( ter_furn_flag::TFLAG_AUTODOC_COUCH, here.get_bub( get_dest() ) ) &&
         !has_effect( effect_operating ) ) {
         if( dragged_foe->has_effect( effect_grabbed ) && !has_effect( effect_countdown ) &&
             ( creatures.creature_at( get_dest() ) == nullptr ||
@@ -1348,7 +1348,7 @@ void monster::nursebot_operate( Character *dragged_foe )
                            string_format(
                                _( "a soft robotic voice say, \"Please step away from the Autodoc, this patient needs immediate care.\"" ) ) );
             // TODO: Make it able to push NPC/player
-            push_to( here.bub_from_abs( get_dest() ), 4, 0 );
+            push_to( here.get_bub( get_dest() ), 4, 0 );
         }
     }
     if( get_effect_dur( effect_countdown ) == 1_turns && !has_effect( effect_operating ) ) {
@@ -1655,7 +1655,7 @@ bool monster::bash_at( const tripoint_bub_ms &p )
         return false;
     }
 
-    const bool too_cramped = !can_move_to_vehicle_tile( get_map().getglobal( p ) );
+    const bool too_cramped = !can_move_to_vehicle_tile( get_map().get_abs( p ) );
     bool try_bash = !can_move_to( p ) || one_in( 3 ) || too_cramped;
     if( !try_bash ) {
         return false;
@@ -1850,7 +1850,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     }
 
     bool cramped = false; // applies an effect if monster does end up moving there
-    if( !can_move_to_vehicle_tile( here.getglobal( p ), cramped ) ) {
+    if( !can_move_to_vehicle_tile( here.get_abs( p ), cramped ) ) {
         return false;
     }
 
@@ -2374,7 +2374,7 @@ bool monster::will_reach( const point_bub_ms &p )
         return true;
     }
 
-    if( can_hear() && wandf > 0 && rl_dist( get_map().bub_from_abs( wander_pos ).xy(), p ) <= 2 &&
+    if( can_hear() && wandf > 0 && rl_dist( get_map().get_bub( wander_pos ).xy(), p ) <= 2 &&
         rl_dist( get_location().xy(), wander_pos.xy() ) <= wandf ) {
         return true;
     }

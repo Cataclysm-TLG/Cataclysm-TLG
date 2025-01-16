@@ -54,9 +54,9 @@ static void serialize_liquid_source( player_activity &act, const vehicle &veh, c
     act.values.push_back( static_cast<int>( liquid_source_type::VEHICLE ) );
     act.values.push_back( part_num );
     if( part_num != -1 ) {
-        act.coords.push_back( veh.bub_part_pos( part_num ).raw() );
+        act.coords.push_back( get_map().get_abs( veh.bub_part_pos( part_num ) ) );
     } else {
-        act.coords.push_back( veh.pos_bub().raw() );
+        act.coords.push_back( get_map().get_abs( veh.pos_bub() ) );
     }
     act.str_values.push_back( serialize( liquid ) );
 }
@@ -77,7 +77,7 @@ static void serialize_liquid_source( player_activity &act, const tripoint_bub_ms
         act.values.push_back( static_cast<int>( liquid_source_type::MAP_ITEM ) );
         act.values.push_back( std::distance( stack.begin(), iter ) );
     }
-    act.coords.push_back( pos.raw() );
+    act.coords.push_back( get_map().get_abs( pos ) );
     act.str_values.push_back( serialize( liquid ) );
 }
 
@@ -85,7 +85,7 @@ static void serialize_liquid_target( player_activity &act, const vpart_reference
 {
     act.values.push_back( static_cast<int>( liquid_target_type::VEHICLE ) );
     act.values.push_back( 0 ); // dummy
-    act.coords.push_back( vp.vehicle().bub_part_pos( 0 ).raw() );
+    act.coords.push_back( get_map().get_abs( vp.vehicle().bub_part_pos( 0 ) ) );
     act.values.push_back( vp.part_index() ); // tank part index
 }
 
@@ -97,11 +97,11 @@ static void serialize_liquid_target( player_activity &act, const item_location &
     act.coords.emplace_back( ); // dummy
 }
 
-static void serialize_liquid_target( player_activity &act, const tripoint &pos )
+static void serialize_liquid_target( player_activity &act, const tripoint_bub_ms &pos )
 {
     act.values.push_back( static_cast<int>( liquid_target_type::MAP ) );
     act.values.push_back( 0 ); // dummy
-    act.coords.push_back( pos );
+    act.coords.push_back( get_map().get_abs( pos ) );
 }
 
 namespace liquid_handler
@@ -352,7 +352,7 @@ static bool handle_keg_or_ground_target( Character &player_character, item &liqu
         liquid_dest_opt &target, const std::function<bool()> &create_activity )
 {
     if( create_activity() ) {
-        serialize_liquid_target( player_character.activity, target.pos.raw() );
+        serialize_liquid_target( player_character.activity, target.pos );
     } else {
         if( target.dest_opt == LD_KEG ) {
             iexamine::pour_into_keg( target.pos, liquid );
