@@ -5437,12 +5437,13 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     ///\EFFECT_MELEE >2 allows seeing melee damage stats on weapons
     if( ( player_character.get_skill_level( skill_melee ) >= 3 &&
           ( !dmg_types.empty() || type->m_to_hit > 0 ) ) || debug_mode ) {
+        bodypart_id bp = bodypart_id( "torso" );
         damage_instance non_crit;
         player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug );
+                                          sub_bodypart_str_id::NULL_ID(), nullptr, bp );
         damage_instance crit;
         player_character.roll_all_damage( true, crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug );
+                                          sub_bodypart_str_id::NULL_ID(), nullptr, bp );
         int attack_cost = player_character.attack_speed( *this );
         insert_separation_line( info );
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG ) ) {
