@@ -4006,7 +4006,7 @@ static shared_ptr_fast<game::draw_callback_t> create_zone_callback(
     [&]() {
         if( zone_cursor ) {
             if( is_moving_zone ) {
-                g->draw_cursor( tripoint_bub_ms( (zone_start.value().raw() + zone_end.value().raw()) / 2));
+                g->draw_cursor( tripoint_bub_ms( ( zone_start.value().raw() + zone_end.value().raw() ) / 2 ) );
             } else {
                 if( zone_end ) {
                     g->draw_cursor( zone_end.value() );
@@ -4032,11 +4032,11 @@ static shared_ptr_fast<game::draw_callback_t> create_zone_callback(
             }
 #endif
 
-            const tripoint_bub_ms start( std::min( zone_start->x(), zone_end->x()),
-                                         std::min( zone_start->y(), zone_end->y()),
+            const tripoint_bub_ms start( std::min( zone_start->x(), zone_end->x() ),
+                                         std::min( zone_start->y(), zone_end->y() ),
                                          zone_end->z() );
-            const tripoint_bub_ms end( std::max( zone_start->x(), zone_end->x()),
-                                       std::max( zone_start->y(), zone_end->y()),
+            const tripoint_bub_ms end( std::max( zone_start->x(), zone_end->x() ),
+                                       std::max( zone_start->y(), zone_end->y() ),
                                        zone_end->z() );
             g->draw_zones( start, end, offset );
         }
