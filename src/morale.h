@@ -67,7 +67,7 @@ class player_morale
         void on_worn_item_washed( const item &it );
         void on_worn_item_soiled( const item &it );
         void on_effect_int_change( const efftype_id &eid, int intensity,
-                                   const bodypart_id &bp = bodypart_id( "bp_null" ) );
+                                   const bodypart_id &bp = bodypart_str_id::NULL_ID().id() );
 
         void store( JsonOut &jsout ) const;
         void load( const JsonObject &jsin );
