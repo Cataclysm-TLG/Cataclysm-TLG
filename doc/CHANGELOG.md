@@ -70,6 +70,7 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 
 ## Minor changes
 
+- Foodplace has been removed. Foodplace is DDA flavor and we are not DDA, plus it has immense "Programmer trying to be funny" energy. All things related to it have been rebranded in a more generic way.
 - Poison ivy was added as a naturally spawning trap, afflicting you with a rash
 - Strange temples have been removed due to being incompatible with the lore.
 - Many unnecessary item variants have been removed, which reduced file size greatly in some cases. There is no need for 100 variants of condoms, phone cases and t-shirts.
