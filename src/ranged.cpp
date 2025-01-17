@@ -1096,8 +1096,6 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots, item &gun, it
         // Keeps shooting non-deterministic, but perception helps a lot.
         dispersion.add_range( dispersion_variance() );
 
-        bool first = true;
-        bool headshot = false;
         dealt_projectile_attack shot;
         projectile_attack( shot, proj, pos_bub(), aim, dispersion, this, in_veh, wp_attack );
         if( !shot.targets_hit.empty() ) {
