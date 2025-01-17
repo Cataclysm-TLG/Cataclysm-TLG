@@ -98,3 +98,4 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 - Starting a fire now always needs tinder if the thing you want to light on fire does not have the `TINDER` flag. This generally includes liquid fuels, paper, and other easily ignitable items. This flag has been added to many items, and will be given to more things that ought to have it as we come across them.
 - Missed melee attacks no longer damage your weapon.[[1]](https://github.com/CleverRaven/Cataclysm-DDA/pull/54439)
 - The Hub01 Modular Defense System and their rifle have been removed. In order to find great guns, you must scavenge more now. The dazzle rifle remains in the game however.
+- New monster: glowstalk. An unviable portal monster, it can be encountered with other nether monsters of that kind.
