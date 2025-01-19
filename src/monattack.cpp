@@ -909,7 +909,8 @@ bool mattack::acid_accurate( monster *z )
     proj.proj_effects.insert( ammo_effect_NO_DAMAGE_SCALING );
     proj.impact.add_damage( damage_acid, rng( 3, 5 ) );
     // Make it arbitrarily less accurate at close ranges
-    projectile_attack( proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
+    dealt_projectile_attack dealt;
+    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
 
     return true;
 }
@@ -1013,8 +1014,8 @@ bool mattack::pull_metal_aoe( monster *z )
         proj.range = static_cast<int>( std::round( trig_dist_z_adjust( pr.second, z->pos_bub() ) ) ) - 1;
         proj.proj_effects = {{ ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET }};
 
-        dealt_projectile_attack dealt = projectile_attack(
-                                            proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
+        dealt_projectile_attack dealt;
+        projectile_attack( dealt, proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
         here.add_item_or_charges( dealt.end_point, pr.first );
     }
     // TODO: pull_metal_armor()

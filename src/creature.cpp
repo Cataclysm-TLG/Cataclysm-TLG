@@ -1157,7 +1157,6 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
     projectile_attack_results ret( proj );
     const float crit_multiplier = proj.critical_multiplier;
     const float std_hit_mult = std::sqrt( 2.0 * crit_multiplier );
-    float crit_mod = 1.0f;
     bool fatal_hit = false;
     double hit_roll = rng_float( goodhit, 1.0 );
     // 40% true when goodhit = 0, 20% true when goodhit = 0.2
@@ -1178,7 +1177,6 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
         // Range is -0.5 to 1.5 -> missed_by will be [1, 0], so the rng addition to it
         // will push it to at most 1.5 and at least -0.5
         ret.bp_hit = get_anatomy()->select_body_part_projectile_attack( -0.5, 1.5, hit_value );
-        crit_mod = get_crit_factor( ret.bp_hit );
         fatal_hit = ret.max_damage * crit_multiplier > get_hp_max( ret.bp_hit );
         ret.is_headshot = ret.bp_hit.id() == body_part_head;
     }
@@ -1189,15 +1187,15 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
         ret.message = _( "Critical!!" );
         ret.gmtSCTcolor = m_headshot;
         // ( 0.95, 1.05 ) when goodhit = 0, ( 0.95, 1.04 ) when nears 0.1
-        ret.damage_mult *= 0.6 + 0.45 * crit_mod - 0.1 * hit_roll;
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= 0.6 + 0.45 - 0.1 * hit_roll;
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_critical && ( crit_roll || fatal_hit ) ) {
         ret.message = _( "Critical!" );
         ret.gmtSCTcolor = m_critical;
         // ( 0.75, 1.0 ) when goodhit = 0, ( 0.75, 0.95 ) when nears 0.2
-        ret.damage_mult *= 0.75 + 0.25 * crit_mod - 0.25 * hit_roll;
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= 0.75 + 0.25 - 0.25 * hit_roll;
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_goodhit ) {
         ret.message = _( "Good hit!" );

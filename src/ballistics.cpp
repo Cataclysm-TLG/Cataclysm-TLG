@@ -575,7 +575,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             tp = prev_point;
         }
 
-        drop_or_embed_projectile( attack, proj );
+        drop_or_embed_projectile( attack );
 
         int dealt_damage = attack.dealt_dam.total_damage();
         apply_ammo_effects( null_source ? nullptr : origin, tp, proj.proj_effects, dealt_damage );
