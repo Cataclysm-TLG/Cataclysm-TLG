@@ -1412,7 +1412,7 @@ void npc::handle_sound( const sounds::sound_t spriority, const std::string &desc
 {
     const map &here = get_map();
     const tripoint_abs_ms s_abs_pos = here.get_abs( spos );
-    const tripoint_abs_ms my_abs_pos = get_location();
+    const tripoint_abs_ms my_abs_pos = pos_abs();
 
     add_msg_debug( debugmode::DF_NPC,
                    "%s heard '%s', priority %d at volume %d from %d:%d, my pos %d:%d",
@@ -4265,7 +4265,7 @@ talk_effect_fun_t::func f_transform_radius( const JsonObject &jo, std::string_vi
         key.str_val = "";
     }
     return [dov, transform, target_var, dov_time_in_future, key, is_npc]( dialogue & d ) {
-        tripoint_abs_ms target_pos = d.actor( is_npc )->global_pos();
+        tripoint_abs_ms target_pos = d.actor( is_npc )->pos_abs();
         if( target_var.has_value() ) {
             target_pos = get_tripoint_ms_from_var( target_var, d, is_npc );
         }
@@ -4374,7 +4374,7 @@ talk_effect_fun_t::func f_query_omt( const JsonObject &jo, std::string_view memb
         Character const *ch = d.const_actor( is_npc )->get_const_character();
         if( ch && ch->as_avatar() ) {
 
-            tripoint_abs_omt target_pos = d.actor( is_npc )->global_omt_location();
+            tripoint_abs_omt target_pos = d.actor( is_npc )->pos_abs_omt();
             if( target_var.has_value() ) {
                 tripoint_abs_ms abs_ms = get_tripoint_ms_from_var( target_var, d, is_npc );
                 target_pos = project_to<coords::omt>( abs_ms );
@@ -4551,7 +4551,7 @@ talk_effect_fun_t::func f_npc_goal( const JsonObject &jo, std::string_view membe
         if( guy ) {
             tripoint_abs_omt destination = mission_util::get_om_terrain_pos( dest_params, d );
             guy->goal = destination;
-            guy->omt_path = overmap_buffer.get_travel_path( guy->global_omt_location(), guy->goal,
+            guy->omt_path = overmap_buffer.get_travel_path( guy->pos_abs_omt(), guy->goal,
                             overmap_path_params::for_npc() );
             if( destination == tripoint_abs_omt() || destination.is_invalid() ||
                 guy->omt_path.empty() ) {
@@ -6205,7 +6205,7 @@ talk_effect_fun_t::func f_map_run_eocs( const JsonObject &jo, std::string_view m
         if( target_var.has_value() ) {
             pos = get_tripoint_ms_from_var( target_var, d, is_npc );
         } else {
-            pos = d.actor( is_npc )->global_pos();
+            pos = d.actor( is_npc )->pos_abs();
         }
 
         std::vector<tripoint_abs_ms> adjacent = closest_points_first( pos, range.evaluate( d ) );
@@ -6931,7 +6931,7 @@ talk_effect_fun_t::func f_field( const JsonObject &jo, std::string_view member,
         int radius = dov_radius.evaluate( d );
         int intensity = dov_intensity.evaluate( d );
 
-        tripoint_abs_ms target_pos = d.actor( is_npc )->global_pos();
+        tripoint_abs_ms target_pos = d.actor( is_npc )->pos_abs();
         if( target_var.has_value() ) {
             target_pos = get_tripoint_ms_from_var( target_var, d, is_npc );
         }

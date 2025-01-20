@@ -200,7 +200,7 @@ static void unfold_and_check( const vehicle_preset &veh_preset, const damage_pre
             complete_activity( u, vehicle_unfolding_activity_actor( veh_item ) );
 
             // should have no value because avatar has no required tool to unfold
-            REQUIRE( !m.veh_at( u.get_location() ).has_value() );
+            REQUIRE( !m.veh_at( u.pos_abs() ).has_value() );
 
             // the folded item should drop and needs to be deleted from the map
             map_stack map_items = m.i_at( u.pos_bub() );
@@ -216,7 +216,7 @@ static void unfold_and_check( const vehicle_preset &veh_preset, const damage_pre
     clear_spawned_tools( m, u );
 
     // should succeed now avatar has hand_pump
-    optional_vpart_position ovp = m.veh_at( u.get_location() );
+    optional_vpart_position ovp = m.veh_at( u.pos_abs() );
     REQUIRE( ovp.has_value() );
 
     // set damage/degradation on every part
@@ -235,7 +235,7 @@ static void unfold_and_check( const vehicle_preset &veh_preset, const damage_pre
     clear_spawned_tools( m, u );
 
     // should have no value as vehicle is now folded into item
-    REQUIRE( !m.veh_at( u.get_location() ).has_value() );
+    REQUIRE( !m.veh_at( u.pos_abs() ).has_value() );
 
     // copy the player-folded vehicle item and delete it from the map
     map_stack map_items = m.i_at( u.pos_bub() );
@@ -253,7 +253,7 @@ static void unfold_and_check( const vehicle_preset &veh_preset, const damage_pre
     complete_activity( u, vehicle_unfolding_activity_actor( player_folded_veh ) );
     clear_spawned_tools( m, u );
 
-    optional_vpart_position ovp_unfolded = m.veh_at( u.get_location() );
+    optional_vpart_position ovp_unfolded = m.veh_at( u.pos_abs() );
     REQUIRE( ovp_unfolded.has_value() );
 
     // verify the damage/degradation roundtripped via serialization on every part
@@ -328,7 +328,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
     // unfold fresh item factory item
     complete_activity( u, vehicle_unfolding_activity_actor( veh_item ) );
 
-    optional_vpart_position ovp = m.veh_at( u.get_location() );
+    optional_vpart_position ovp = m.veh_at( u.pos_abs() );
     REQUIRE( ovp.has_value() );
 
     // don't actually need point_rel_ms::north but damage_all filters out direct damage
@@ -338,7 +338,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
     // fold vehicle into an item
     complete_activity( u, vehicle_folding_activity_actor( ovp->vehicle() ) );
 
-    ovp = m.veh_at( u.get_location() );
+    ovp = m.veh_at( u.pos_abs() );
     REQUIRE( !ovp.has_value() );
 
     // copy the player-folded vehicle item and delete it from the map
@@ -353,7 +353,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
 
     complete_activity( u, vehicle_unfolding_activity_actor( player_folded_veh ) );
 
-    ovp = m.veh_at( u.get_location() );
+    ovp = m.veh_at( u.pos_abs() );
     REQUIRE( ovp.has_value() );
 
     int part_damage_before = 0;
@@ -366,7 +366,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
 
     complete_activity( u, vehicle_folding_activity_actor( ovp->vehicle() ) );
 
-    ovp = m.veh_at( u.get_location() );
+    ovp = m.veh_at( u.pos_abs() );
     REQUIRE( !ovp.has_value() );
     map_items = m.i_at( u.pos_bub() );
     REQUIRE( map_items.size() == 1 );
@@ -382,7 +382,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
 
     // unfold and check extra damage gets distributed into vehicleparts
     complete_activity( u, vehicle_unfolding_activity_actor( player_folded_veh ) );
-    ovp = m.veh_at( u.get_location() );
+    ovp = m.veh_at( u.pos_abs() );
     REQUIRE( ovp.has_value() );
 
     // add up damage on all parts
@@ -399,7 +399,7 @@ static void check_folded_item_to_parts_damage_transfer( const folded_item_damage
 
     complete_activity( u, vehicle_folding_activity_actor( ovp->vehicle() ) );
 
-    REQUIRE( !m.veh_at( u.get_location() ) );
+    REQUIRE( !m.veh_at( u.pos_abs() ) );
     map_items = m.i_at( u.pos_bub() );
     REQUIRE( map_items.size() == 1 );
     player_folded_veh = map_items.only_item();

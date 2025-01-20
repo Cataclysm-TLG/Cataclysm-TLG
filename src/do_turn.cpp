@@ -407,10 +407,10 @@ void overmap_npc_move()
     for( npc *&elem : travelling_npcs ) {
         if( elem->has_omt_destination() ) {
             if( !elem->omt_path.empty() ) {
-                if( rl_dist( elem->omt_path.back(), elem->global_omt_location() ) > 2 ) {
+                if( rl_dist( elem->omt_path.back(), elem->pos_abs_omt() ) > 2 ) {
                     // recalculate path, we got distracted doing something else probably
                     elem->omt_path.clear();
-                } else if( elem->omt_path.back() == elem->global_omt_location() ) {
+                } else if( elem->omt_path.back() == elem->pos_abs_omt() ) {
                     elem->omt_path.pop_back();
                 }
             }
@@ -634,7 +634,7 @@ bool do_turn()
     // No-scent debug mutation has to be processed here or else it takes time to start working
     if( !u.has_flag( STATIC( json_character_flag( "NO_SCENT" ) ) ) ) {
         scent.set( u.pos_bub(), u.scent, u.get_type_of_scent() );
-        overmap_buffer.set_scent( u.global_omt_location(),  u.scent );
+        overmap_buffer.set_scent( u.pos_abs_omt(),  u.scent );
     }
     scent.update( u.pos_bub(), m );
 
