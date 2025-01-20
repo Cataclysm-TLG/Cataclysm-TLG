@@ -719,13 +719,6 @@
       { "prob": 25, "group": "cereal_box_small_4" },
       { "prob": 55, "group": "cereal2_box_small_4" },
       { "prob": 55, "group": "cereal3_box_small_4" },
-      { "prob": 50, "group": "cereal_fp1_box_small_6" },
-      { "prob": 50, "group": "cereal_fp2_box_small_6" },
-      { "prob": 50, "group": "cereal_fp3_box_small_6" },
-      { "prob": 25, "group": "cereal_fp4_box_small_6" },
-      { "prob": 25, "group": "cereal_fp5_box_small_6" },
-      { "prob": 25, "group": "cereal_fp6_box_small_6" },
-      { "prob": 25, "group": "cereal_fp7_box_small_6" },
       { "prob": 40, "group": "toastem_box_small_8" },
       { "prob": 32, "group": "toastem2_box_small_8" },
       { "prob": 25, "group": "toastem3_box_small_8" }
@@ -1917,62 +1910,6 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "box_small",
     "entries": [ { "item": "oatmeal", "container-item": "null", "count": 4 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp1_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp1", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp2_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp2", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp3_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp3", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp4_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp4", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp5_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp5", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp6_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp6", "container-item": "null", "count": 6 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "cereal_fp7_box_small_6",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_small",
-    "entries": [ { "item": "cereal_fp7", "container-item": "null", "count": 6 } ]
   },
   {
     "type": "item_group",

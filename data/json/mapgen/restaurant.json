@@ -409,7 +409,7 @@
       ],
       "palettes": [ "restaurant_palette" ],
       "place_nested": [
-        { "chunks": [ "3x3_foodplace_stairwell" ], "x": 20, "y": 21 },
+        { "chunks": [ "3x3_restaurant_stairwell" ], "x": 20, "y": 21 },
         { "chunks": [ "13x13_checkered_floor" ], "x": 7, "y": 18 },
         {
           "else_chunks": [
@@ -433,16 +433,16 @@
   {
     "type": "mapgen",
     "method": "json",
-    "nested_mapgen_id": "3x3_foodplace_stairwell",
+    "nested_mapgen_id": "3x3_restaurant_stairwell",
     "object": {
       "mapgensize": [ 3, 3 ],
       "rows": [
-        "|@+",
+        "||+",
         "|< ",
         "|||"
       ],
       "palettes": [ "restaurant_palette" ],
-      "terrain": { "<": "t_stairs_up", "+": "t_door_metal_locked", "@": "t_card_fp", " ": "t_null" },
+      "terrain": { "<": "t_stairs_up", "+": [ "t_door_metal_locked", "t_door_metal_c" ], " ": "t_null" },
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ]
     }
   },

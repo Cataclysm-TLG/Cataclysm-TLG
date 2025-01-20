@@ -48,7 +48,7 @@
       [ "ceramic_shard", 15 ],
       [ "stick", 95 ],
       [ "joint_roach", 5 ],
-      [ "fp_loyalty_card", 1 ],
+      [ "loyalty_card", 1 ],
       [ "pipe", 20 ],
       [ "bag_plastic", 10 ],
       [ "bottle_plastic", 10 ],

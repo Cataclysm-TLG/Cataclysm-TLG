@@ -70,7 +70,7 @@
     "subtype": "hobby",
     "id": "heroin_addict",
     "name": "Heroin Dependence",
-    "description": "The last thing you remember was meeting God behind the local Foodplace.  Then people started eating each other.  This doesn't feel like a fever dream.",
+    "description": "The last thing you remember was meeting God behind the local restaurant.  Then people started eating each other.  This doesn't feel like a fever dream.",
     "points": -3,
     "addictions": [ { "intensity": 40, "type": "opiate" } ]
   },

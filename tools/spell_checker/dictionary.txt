@@ -2043,8 +2043,6 @@ foodborne
 foodburger
 foodcart
 Foodios
-Foodkid
-FoodLair
 foodless
 foon
 foons

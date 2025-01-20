@@ -2022,17 +2022,6 @@
     "description": "A plastic name tag marking the wearer as a real doctor of the medical kind."
   },
   {
-    "id": "badge_foodkid",
-    "copy-from": "badge_abstract",
-    "type": "ARMOR",
-    "name": { "str": "Foodkid badge" },
-    "material": [ "plastic" ],
-    "price_postapoc": 10,
-    "weight": "50 g",
-    "volume": "50 ml",
-    "description": "A star-shaped plastic badge.  \"Foodkid\" is printed on it in bold letters.  This badge marks its wearer as Foodperson's trusty sidekick, and comes included with every kid's meal at Foodplace."
-  },
-  {
     "id": "fur_cat_ears",
     "type": "ARMOR",
     "name": { "str": "pair of fuzzy cat ears", "str_pl": "pairs of fuzzy cat ears" },

@@ -255,7 +255,7 @@
       { "item": "shuttlecock", "prob": 8 },
       { "item": "bronze_medal", "prob": 8 },
       { "item": "book_binder", "prob": 8 },
-      { "item": "fp_loyalty_card", "prob": 8 },
+      { "item": "loyalty_card", "prob": 8 },
       { "item": "coin_quarter", "prob": 6, "count": [ 2, 12 ] },
       { "item": "copper_hairpin", "prob": 6 },
       { "item": "copper_necklace", "prob": 6 },

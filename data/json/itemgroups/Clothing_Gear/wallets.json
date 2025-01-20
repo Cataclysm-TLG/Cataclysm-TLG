@@ -282,6 +282,6 @@
   {
     "type": "item_group",
     "id": "discount_cards",
-    "items": [ [ "fp_loyalty_card", 40 ], [ "gasdiscount_silver", 20 ], [ "gasdiscount_gold", 10 ], [ "gasdiscount_platinum", 5 ] ]
+    "items": [ [ "loyalty_card", 40 ], [ "gasdiscount_silver", 20 ], [ "gasdiscount_gold", 10 ], [ "gasdiscount_platinum", 5 ] ]
   }
 ]

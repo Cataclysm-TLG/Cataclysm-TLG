@@ -5050,7 +5050,7 @@
     "name": { "str": "toast-em" },
     "copy-from": "toastem",
     "//": "toastem copy with a different material + manual values so monotony penalty is sure to apply",
-    "material": [ "foodplace_foodstuff" ],
+    "material": [ "junk" ],
     "fun": 20,
     "monotony_penalty": 4
   }
