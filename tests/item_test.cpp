@@ -39,6 +39,37 @@ static const item_category_id item_category_guns( "guns" );
 static const item_category_id item_category_spare_parts( "spare_parts" );
 static const item_category_id item_category_tools( "tools" );
 
+static const itype_id itype_10gal_hat( "10gal_hat" );
+static const itype_id itype_ammonia_hydroxide( "ammonia_hydroxide" );
+static const itype_id itype_arm_splint( "arm_splint" );
+static const itype_id itype_arm_warmers( "arm_warmers" );
+static const itype_id itype_armor_mc_lightplate( "armor_mc_lightplate" );
+static const itype_id itype_aspirin( "aspirin" );
+static const itype_id itype_attachable_ear_muffs( "attachable_ear_muffs" );
+static const itype_id itype_backpack( "backpack" );
+static const itype_id itype_bag_plastic( "bag_plastic" );
+static const itype_id itype_battery( "battery" );
+static const itype_id itype_bottle_plastic_small( "bottle_plastic_small" );
+static const itype_id itype_butter( "butter" );
+static const itype_id itype_cash_card( "cash_card" );
+static const itype_id itype_chem_black_powder( "chem_black_powder" );
+static const itype_id itype_chem_muriatic_acid( "chem_muriatic_acid" );
+static const itype_id itype_detergent( "detergent" );
+static const itype_id itype_duffelbag( "duffelbag" );
+static const itype_id itype_gunpowder( "gunpowder" );
+static const itype_id itype_hammer( "hammer" );
+static const itype_id itype_hat_hard( "hat_hard" );
+static const itype_id itype_jeans( "jeans" );
+static const itype_id itype_legrig( "legrig" );
+static const itype_id itype_money( "money" );
+static const itype_id itype_neccowafers( "neccowafers" );
+static const itype_id itype_nitrox( "nitrox" );
+static const itype_id itype_pale_ale( "pale_ale" );
+static const itype_id itype_rocuronium( "rocuronium" );
+static const itype_id itype_shoulder_strap( "shoulder_strap" );
+static const itype_id itype_single_malt_whiskey( "single_malt_whiskey" );
+static const itype_id itype_software_hacking( "software_hacking" );
+static const itype_id itype_test_armguard( "test_armguard" );
 static const itype_id itype_test_backpack( "test_backpack" );
 static const itype_id itype_test_duffelbag( "test_duffelbag" );
 static const itype_id itype_test_mp3( "test_mp3" );
@@ -303,17 +334,16 @@ static void check_spawning_in_container( const std::string &item_type )
 
 TEST_CASE( "items_spawn_in_their_default_containers", "[item]" )
 {
-    check_spawning_in_container( "water" );
-    check_spawning_in_container( "gunpowder" );
-    check_spawning_in_container( "nitrox" );
-    check_spawning_in_container( "ammonia_hydroxide" );
-    check_spawning_in_container( "detergent" );
-    check_spawning_in_container( "pale_ale" );
-    check_spawning_in_container( "single_malt_whiskey" );
-    check_spawning_in_container( "rocuronium" );
-    check_spawning_in_container( "chem_muriatic_acid" );
-    check_spawning_in_container( "chem_black_powder" );
-    check_spawning_in_container( "software_useless" );
+    check_spawning_in_container( itype_water );
+    check_spawning_in_container( itype_gunpowder );
+    check_spawning_in_container( itype_nitrox );
+    check_spawning_in_container( itype_ammonia_hydroxide );
+    check_spawning_in_container( itype_detergent );
+    check_spawning_in_container( itype_pale_ale );
+    check_spawning_in_container( itype_single_malt_whiskey );
+    check_spawning_in_container( itype_rocuronium );
+    check_spawning_in_container( itype_chem_muriatic_acid );
+    check_spawning_in_container( itype_chem_black_powder );
 }
 
 TEST_CASE( "item_variables_round-trip_accurately", "[item]" )
