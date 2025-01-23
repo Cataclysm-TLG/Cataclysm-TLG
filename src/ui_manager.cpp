@@ -13,7 +13,6 @@
 #include "game_ui.h"
 #include "point.h"
 #include "sdltiles.h" // IWYU pragma: keep
-#include "cata_imgui.h"
 
 #if defined(EMSCRIPTEN)
 #include <emscripten.h>
@@ -29,22 +28,19 @@ static std::optional<SDL_Rect> prev_clip_rect;
 #endif
 static ui_stack_t ui_stack;
 
-ui_adaptor::ui_adaptor() : is_imgui( false ), disabling_uis_below( false ),
-    is_debug_message_ui( false ),
+ui_adaptor::ui_adaptor() : disabling_uis_below( false ), is_debug_message_ui( false ),
     invalidated( false ), deferred_resize( false )
 {
     ui_stack.emplace_back( *this );
 }
 
-ui_adaptor::ui_adaptor( ui_adaptor::disable_uis_below ) : is_imgui( false ),
-    disabling_uis_below( true ),
+ui_adaptor::ui_adaptor( ui_adaptor::disable_uis_below ) : disabling_uis_below( true ),
     is_debug_message_ui( false ), invalidated( false ), deferred_resize( false )
 {
     ui_stack.emplace_back( *this );
 }
 
-ui_adaptor::ui_adaptor( ui_adaptor::debug_message_ui ) : is_imgui( false ),
-    disabling_uis_below( true ),
+ui_adaptor::ui_adaptor( ui_adaptor::debug_message_ui ) : disabling_uis_below( true ),
     is_debug_message_ui( true ), invalidated( false ), deferred_resize( false )
 {
     cata_assert( !showing_debug_message );
@@ -329,16 +325,6 @@ void ui_adaptor::invalidate( const rectangle<point> &rect, const bool reenable_u
     invalidation_consistency_and_optimization();
 }
 
-bool ui_adaptor::has_imgui()
-{
-    for( auto ui : ui_stack ) {
-        if( ui.get().is_imgui ) {
-            return true;
-        }
-    }
-    return false;
-}
-
 void ui_adaptor::redraw()
 {
     if( !ui_stack.empty() ) {
@@ -347,13 +333,11 @@ void ui_adaptor::redraw()
     redraw_invalidated();
 }
 
-void ui_adaptor::redraw_invalidated( bool draw_imgui )
+void ui_adaptor::redraw_invalidated()
 {
     if( test_mode || ui_stack.empty() ) {
         return;
     }
-
-    imclient->new_frame();
 
     restore_on_out_of_scope<bool> prev_redraw_in_progress( redraw_in_progress );
     restore_on_out_of_scope<bool> prev_restart_redrawing( restart_redrawing );
@@ -375,7 +359,6 @@ void ui_adaptor::redraw_invalidated( bool draw_imgui )
                 break;
             }
         }
-        bool imgui_is_on_top = ui_stack.back().get().is_imgui;
 
         // Avoid a copy if possible to improve performance. `ui_stack_orig`
         // always contains the original UI stack, and `first_enabled` always points
@@ -419,7 +402,7 @@ void ui_adaptor::redraw_invalidated( bool draw_imgui )
         if( !restart_redrawing ) {
             for( auto it = first_enabled; !needs_redraw && it != ui_stack_orig->end(); ++it ) {
                 const ui_adaptor &ui = *it;
-                if( ( ui.invalidated && ui.redraw_cb ) || ( draw_imgui && ui.is_imgui ) ) {
+                if( ui.invalidated && ui.redraw_cb ) {
                     needs_redraw = true;
                 }
             }
@@ -432,11 +415,9 @@ void ui_adaptor::redraw_invalidated( bool draw_imgui )
                 ui_stack_orig = &*ui_stack_copy;
             }
             std::optional<point> cursor_pos;
-            auto top_ui = std::prev( ui_stack_orig->end() );
             for( auto it = first_enabled; !restart_redrawing && it != ui_stack_orig->end(); ++it ) {
                 ui_adaptor &ui = *it;
-                ui.is_on_top = it == top_ui;
-                if( ui.invalidated || ui.is_imgui ) {
+                if( ui.invalidated ) {
                     if( ui.redraw_cb ) {
                         ui.default_cursor();
                         ui.redraw_cb( ui );
@@ -461,10 +442,7 @@ void ui_adaptor::redraw_invalidated( bool draw_imgui )
 #if defined(EMSCRIPTEN)
     emscripten_sleep( 1 );
 #endif
-
-    imclient->end_frame();
 }
-
 
 void ui_adaptor::screen_resized()
 {

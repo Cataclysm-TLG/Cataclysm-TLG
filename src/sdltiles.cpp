@@ -73,9 +73,6 @@
 #include "uistate.h"
 #include "ui_manager.h"
 #include "wcwidth.h"
-#include "cata_imgui.h"
-
-std::unique_ptr<cataimgui::client> imclient;
 
 #if defined(__linux__)
 #   include <cstdlib> // getenv()/setenv()
@@ -442,13 +439,6 @@ static void WinCreate()
     } else {
         geometry = std::make_unique<DefaultGeometryRenderer>();
     }
-
-    cataimgui::client::sdl_renderer = renderer.get();
-    cataimgui::client::sdl_window = window.get();
-    imclient = std::make_unique<cataimgui::client>();
-
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->Build();
 }
 
 static void WinDestroy()
@@ -456,7 +446,7 @@ static void WinDestroy()
 #if defined(__ANDROID__)
     touch_joystick.reset();
 #endif
-    imclient.reset();
+
     shutdown_sound();
     tilecontext.reset();
     gamepad::quit();
@@ -554,8 +544,6 @@ void refresh_display()
     if( test_mode ) {
         return;
     }
-
-    ui_adaptor::redraw_invalidated( true );
 
     // Select default target (the window), copy rendered buffer
     // there, present it, select the buffer as target again.
@@ -3064,7 +3052,6 @@ static void CheckMessages()
     bool render_target_reset = false;
 
     while( SDL_PollEvent( &ev ) ) {
-        imclient->process_input( &ev );
         switch( ev.type ) {
             case SDL_WINDOWEVENT:
                 switch( ev.window.event ) {
@@ -3641,9 +3628,6 @@ static void CheckMessages()
         ui_manager::invalidate( rectangle<point>( point_zero, point( WindowWidth, WindowHeight ) ), false );
         ui_manager::redraw_invalidated();
     }
-    if( ui_adaptor::has_imgui() ) {
-        needupdate = true;
-    }
     if( needupdate ) {
         try_sdl_update();
     }
@@ -4080,17 +4064,6 @@ static window_dimensions get_window_dimensions( const catacurses::window &win,
     dim.window_size_pixel.y = dim.window_size_cell.y * dim.scaled_font_size.y;
 
     return dim;
-}
-
-
-int get_window_width()
-{
-    return WindowWidth;
-}
-
-int get_window_height()
-{
-    return WindowHeight;
 }
 
 window_dimensions get_window_dimensions( const catacurses::window &win )
