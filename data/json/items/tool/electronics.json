@@ -844,7 +844,7 @@
       "CAMERA",
       "MP3",
       "CALORIES_INTAKE_TRACKER",
-      "PORTABLE_GAME"
+      "PORTABLE_GAME",
       {
         "target": "smart_phone_flashlight",
         "msg": "You activate the flashlight app.",
