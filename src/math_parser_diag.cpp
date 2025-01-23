@@ -381,7 +381,7 @@ diag_eval_dbl_f field_strength_eval( char scope, std::vector<diag_value> const &
         map &here = get_map();
         tripoint_abs_ms loc;
         if( loc_var.has_value() ) {
-            loc = get_tripoint_from_var( loc_var, d, beta );
+            loc = get_tripoint_ms_from_var( loc_var, d, beta );
         } else {
             loc = d.const_actor( beta )->global_pos();
         }
@@ -769,7 +769,7 @@ diag_eval_dbl_f _characters_nearby_eval( char scope, std::vector<diag_value> con
          allow_hallucinations_val ]( const_dialogue const & d ) {
         tripoint_abs_ms loc;
         if( loc_var.has_value() ) {
-            loc = get_tripoint_from_var( loc_var, d, beta );
+            loc = get_tripoint_ms_from_var( loc_var, d, beta );
         } else {
             loc = d.const_actor( beta )->global_pos();
         }
@@ -884,7 +884,7 @@ diag_eval_dbl_f _monsters_nearby_eval( char scope, std::vector<diag_value> const
          f]( const_dialogue const & d ) {
         tripoint_abs_ms loc;
         if( loc_var.has_value() ) {
-            loc = get_tripoint_from_var( loc_var, d, beta );
+            loc = get_tripoint_ms_from_var( loc_var, d, beta );
         } else {
             loc = d.const_actor( beta )->global_pos();
         }
