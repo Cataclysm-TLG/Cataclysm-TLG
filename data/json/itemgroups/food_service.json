@@ -1533,7 +1533,7 @@
     "entries": [
       { "item": "meat_canned", "prob": 4, "container-item": "null", "count": 12 },
       { "item": "veggy_canned", "prob": 4, "container-item": "null", "count": 12 },
-      { "item": "apple_canned", "prob": 4, "container-item": "null", "count": 24 },
+      { "item": "fruit_canned", "prob": 4, "container-item": "null", "count": 24 },
       { "item": "offal_canned", "prob": 1, "container-item": "null", "count": 12 },
       { "item": "can_tomato", "prob": 8, "container-item": "null", "count": 24 },
       { "item": "fish_pickled", "prob": 2, "container-item": "null", "count": 12 },

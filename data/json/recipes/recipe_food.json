@@ -6456,7 +6456,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "apple_sugar",
+    "result": "fruit_in_syrup",
     "id_suffix": "vacuum_packed",
     "container": "plastic_bag_vac",
     "category": "CC_FOOD",

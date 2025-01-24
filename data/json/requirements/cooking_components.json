@@ -1050,8 +1050,8 @@
       [
         [ "sweet_fruit", 1, "LIST" ],
         [ "lemon", 1 ],
-        [ "apple_canned", 1 ],
-        [ "apple_sugar", 1 ],
+        [ "fruit_canned", 1 ],
+        [ "fruit_in_syrup", 1 ],
         [ "dry_fruit", 1 ],
         [ "can_peach", 1 ],
         [ "juice_pulp", 2 ],

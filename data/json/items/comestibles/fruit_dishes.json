@@ -414,7 +414,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "apple_sugar",
+    "id": "fruit_in_syrup",
     "name": { "str_sp": "fruit slice" },
     "conditional_names": [
       { "type": "COMPONENT_ID", "condition": "apple", "name": { "str_sp": "%s, apple" } },
@@ -469,7 +469,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "apple_canned",
+    "id": "fruit_canned",
     "name": { "str_sp": "canned fruit" },
     "conditional_names": [
       { "type": "COMPONENT_ID", "condition": "apple", "name": { "str_sp": "%s, apple" } },

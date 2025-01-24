@@ -1967,7 +1967,7 @@
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_3l_glass_sealed",
-    "entries": [ { "item": "apple_canned", "container-item": "null", "count": 24 } ]
+    "entries": [ { "item": "fruit_canned", "container-item": "null", "count": 24 } ]
   },
   {
     "type": "item_group",

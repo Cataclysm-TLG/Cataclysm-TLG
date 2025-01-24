@@ -1370,7 +1370,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "apple_canned",
+    "result": "fruit_canned",
     "id_suffix": "jarred",
     "byproducts": [ [ "water_clean", 2 ] ],
     "container": "jar_glass_sealed",
@@ -1396,7 +1396,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "apple_canned",
+    "result": "fruit_canned",
     "id_suffix": "jarred_3l",
     "byproducts": [ [ "water_clean", 12 ] ],
     "container": "jar_3l_glass_sealed",
@@ -1903,7 +1903,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "apple_canned",
+    "result": "fruit_canned",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
     "skill_used": "cooking",
@@ -1922,7 +1922,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "apple_canned",
+    "result": "fruit_canned",
     "id_suffix": "canned_medium",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
@@ -1942,7 +1942,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "apple_canned",
+    "result": "fruit_canned",
     "id_suffix": "canned_big",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",

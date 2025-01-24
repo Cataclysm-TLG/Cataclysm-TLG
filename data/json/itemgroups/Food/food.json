@@ -161,7 +161,7 @@
       { "item": "milk_evap", "prob": 1 },
       { "item": "sauce_red", "prob": 1 },
       { "item": "can_peach", "prob": 1 },
-      { "item": "apple_canned", "prob": 1 },
+      { "item": "fruit_canned", "prob": 1 },
       { "group": "can_cheese_can_food_8", "prob": 1 },
       { "item": "fish_canned", "prob": 1 },
       { "item": "lobster_canned", "prob": 1 },
