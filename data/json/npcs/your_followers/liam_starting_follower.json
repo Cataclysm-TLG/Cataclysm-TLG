@@ -100,7 +100,7 @@
     "subtype": "collection",
     "entries": [
       { "group": "candy_chocolate" },
-      { "group": "foodintincan" },
+      { "group": "cannedfood" },
       { "item": "multitool" },
       { "item": "lighter", "charges": 100 },
       { "group": "bottle_otc_painkiller_20" },

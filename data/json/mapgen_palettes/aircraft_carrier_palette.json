@@ -139,7 +139,7 @@
       "A": [
         { "item": "dry_goods", "chance": 45, "repeat": [ 0, 4 ] },
         { "item": "condiments", "chance": 55, "repeat": [ 0, 4 ] },
-        { "item": "foodintincan", "chance": 55, "repeat": [ 0, 7 ] },
+        { "item": "cannedfood", "chance": 55, "repeat": [ 0, 7 ] },
         { "item": "produce", "chance": 30, "repeat": [ 0, 7 ] },
         { "item": "pantry_liquids", "chance": 25, "repeat": [ 0, 7 ] },
         { "item": "fresh_produce", "chance": 55, "repeat": [ 0, 1 ] }

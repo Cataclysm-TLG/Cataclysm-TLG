@@ -1316,7 +1316,8 @@
     "subtype": "collection",
     "entries": [
       { "group": "big_canned_food", "count": [ 0, 4 ], "prob": 20 },
-      { "group": "foodintincan", "count": [ 0, 3 ], "prob": 40 },
+      { "group": "homemade_preserved_food_simple", "count": [ 0, 3 ], "prob": 40 },
+      { "group": "homemade_preserved_food_complex", "count": [ 0, 3 ], "prob": 5 },
       { "group": "condiments", "count": [ 0, 2 ], "prob": 12 },
       { "group": "preserved_food", "count": [ 0, 4 ], "prob": 20 },
       { "group": "softdrinks_canned", "count": [ 0, 3 ], "prob": 35 },

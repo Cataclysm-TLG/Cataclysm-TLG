@@ -269,7 +269,8 @@
         "s": { "item": "bed", "chance": 20, "repeat": [ 1, 2 ] },
         "C": [
           { "item": "preserved_food", "chance": 85, "repeat": [ 6, 8 ] },
-          { "item": "foodintincan", "chance": 75, "repeat": [ 6, 8 ] },
+          { "item": "homemade_preserved_food", "chance": 75, "repeat": [ 6, 8 ] },
+          { "item": "cannedfood", "chance": 50, "repeat": [ 4, 8 ] },
           { "item": "dry_goods", "chance": 55, "repeat": [ 3, 6 ] },
           { "item": "big_canned_food", "chance": 33, "repeat": [ 3, 6 ] },
           { "item": "irradiated_food", "chance": 25, "repeat": [ 1, 5 ] },

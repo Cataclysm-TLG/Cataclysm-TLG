@@ -9,7 +9,7 @@
       { "group": "dry_goods", "prob": 90 },
       { "group": "pet_food", "prob": 90 },
       { "group": "pantry", "prob": 90 },
-      { "group": "foodintincan", "prob": 90 },
+      { "group": "homemade_preserved_food_simple", "prob": 90 },
       { "group": "cannedfood", "prob": 90 },
       { "group": "big_canned_food", "prob": 90 },
       { "group": "produce", "prob": 80 },

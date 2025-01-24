@@ -140,7 +140,7 @@
               { "prob": 50, "group": "softdrinks_canned" },
               { "prob": 50, "group": "crate_kitchen" },
               { "prob": 50, "group": "behindcounter" },
-              { "prob": 50, "group": "foodintincan" },
+              { "prob": 50, "group": "homemade_preserved_food" },
               { "prob": 50, "group": "cannedfood" }
             ]
           },
