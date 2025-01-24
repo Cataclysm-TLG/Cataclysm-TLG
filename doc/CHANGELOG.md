@@ -100,3 +100,4 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 - Missed melee attacks no longer damage your weapon.[[1]](https://github.com/CleverRaven/Cataclysm-DDA/pull/54439)
 - The Hub01 Modular Defense System and their rifle have been removed. In order to find great guns, you must scavenge more now. The dazzle rifle remains in the game however.
 - New monster: glowstalk. An unviable portal monster, it can be encountered with other nether monsters of that kind.
+- There have been some minor infrastructure changes, which do not affect gameplay. For example, some item IDs were renamed since they were misleading and not renamed since they'd need a migration in DDA master. For example `apple_canned`, which refers to canned fruit and not apples in particular, or `arrow_fire_hardened_fletched`, which was neither fire hardened or fletched.
