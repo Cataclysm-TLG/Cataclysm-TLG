@@ -234,7 +234,7 @@
       { "item": "instant_coffee", "prob": 15 },
       { "item": "soup_veggy", "prob": 50 },
       { "item": "soup_meat", "prob": 15 },
-      { "item": "soup_chicken", "prob": 15 },
+      { "item": "soup_chicken", "prob": 50 },
       { "item": "soup_mushroom", "prob": 50 },
       { "item": "soup_tomato", "prob": 50 },
       { "item": "soup_dumplings", "prob": 15 },
