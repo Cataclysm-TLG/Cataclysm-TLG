@@ -1191,6 +1191,8 @@ TEST_CASE( "EOC_event_test", "[eoc]" )
 
 TEST_CASE( "EOC_combat_event_test", "[eoc]" )
 {
+    map &here = get_map();
+
     size_t loop;
     global_variables &globvars = get_globals();
     globvars.clear_global_values();
@@ -1268,7 +1270,7 @@ TEST_CASE( "EOC_combat_event_test", "[eoc]" )
     // character_kills_monster
     clear_map();
     monster &victim = spawn_test_monster( "mon_zombie", target_pos );
-    victim.die( &get_avatar() );
+    victim.die( &here, &get_avatar() );
 
     CHECK( get_avatar().get_value( "test_event_last_event" ) == "character_kills_monster" );
     CHECK( globvars.get_global_value( "victim_type" ) == "mon_zombie" );

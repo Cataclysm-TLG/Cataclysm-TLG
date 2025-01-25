@@ -545,6 +545,7 @@ class game
         npc *find_npc_by_unique_id( const std::string &unique_id );
         /** Makes any nearby NPCs on the overmap active. */
         void load_npcs();
+        void load_npcs( map *here );
 
         /** NPCs who saw player interacting with their stuff (disassembling, cutting etc)
         * will notify the player that thievery was witnessed and make angry at the player. */

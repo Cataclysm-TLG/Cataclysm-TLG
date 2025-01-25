@@ -46,6 +46,7 @@ class effects_map;
 class field;
 class field_entry;
 class item;
+class map;
 class monster;
 class nc_color;
 class npc;
@@ -317,7 +318,9 @@ class Creature : public viewer
             return pos_abs().z();
         }
         virtual void gravity_check();
+        virtual void gravity_check( map *here );
         void setpos( const tripoint_bub_ms &p, bool check_gravity = true );
+        void setpos( map *here, const tripoint_bub_ms &p, bool check_gravity = true );
 
         // Convert size to int. TODO: use this everywhere instead of enuming every time.
         int enum_size() const;
@@ -341,7 +344,7 @@ class Creature : public viewer
         /** Adds an appropriate blood splatter. */
         virtual void bleed() const;
         /** Empty function. Should always be overwritten by the appropriate player/NPC/monster version. */
-        virtual void die( Creature *killer ) = 0;
+        virtual void die( map *here, Creature *killer ) = 0;
 
         /** Should always be overwritten by the appropriate player/NPC/monster version. */
         virtual float hit_roll() const = 0;
@@ -472,7 +475,7 @@ class Creature : public viewer
 
         // Makes a ranged projectile attack against the creature
         // Sets relevant values in `attack`.
-        virtual void deal_projectile_attack( Creature *source, dealt_projectile_attack &attack,
+        virtual void deal_projectile_attack( map *here, Creature *source, dealt_projectile_attack &attack,
                                              const double &missed_by = 0,
                                              bool print_messages = true, const weakpoint_attack &wp_attack = weakpoint_attack() );
 
@@ -539,7 +542,7 @@ class Creature : public viewer
          * This creature just got hit by an attack - possibly special/ranged attack - from source.
          * Players should train dodge, possibly counter-attack somehow.
          */
-        virtual void on_hit( Creature *source, bodypart_id bp_hit,
+        virtual void on_hit( map *here, Creature *source, bodypart_id bp_hit,
                              float difficulty = INT_MIN, dealt_projectile_attack const *proj = nullptr ) = 0;
 
         /** Returns true if this monster has a gun-type attack or the RANGED_ATTACKER flag*/
@@ -611,7 +614,7 @@ class Creature : public viewer
          * much damage has been dealt, how the attack was performed, what has been blocked...), do
          * it *before* calling this function.
          */
-        void check_dead_state();
+        void check_dead_state( map *here );
 
         /** Processes move stopping effects. Returns false if movement is stopped. */
         virtual bool move_effects( bool attacking, tripoint_bub_ms dest_loc ) = 0;

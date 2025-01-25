@@ -789,9 +789,11 @@ bool monster::is_aquatic_danger( const tripoint_bub_ms &at_pos ) const
 
 bool monster::die_if_drowning( const tripoint_bub_ms &at_pos, const int chance )
 {
+    map &here = get_map();
+
     if( is_aquatic_danger( at_pos ) && one_in( chance ) ) {
-        add_msg_if_player_sees( pos_bub(), _( "The %s drowns!" ), name() );
-        die( nullptr );
+        add_msg_if_player_sees( at_pos, _( "The %s drowns!" ), name() );
+        die( &here, nullptr );
         return true;
     }
     return false;
@@ -805,6 +807,8 @@ bool monster::die_if_drowning( const tripoint_bub_ms &at_pos, const int chance )
 // 4) Sound-based tracking
 void monster::move()
 {
+    map &here = get_map();
+
     add_msg_debug( debugmode::DF_MONMOVE, "Monster %s starting monmove::move, remaining moves %d",
                    name(), moves );
     // We decrement wandf no matter what.  We'll save our wander_to plans until
@@ -815,10 +819,9 @@ void monster::move()
 
     //Hallucinations have a chance of disappearing each turn
     if( is_hallucination() && one_in( 25 ) ) {
-        die( nullptr );
+        die( &here, nullptr );
         return;
     }
-    map &here = get_map();
     Character &player_character = get_player_character();
 
     behavior::monster_oracle_t oracle( this );
@@ -2079,6 +2082,8 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
 
 bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t depth )
 {
+    map &here = get_map();
+
     if( is_hallucination() ) {
         // Don't let hallucinations push, not even other hallucinations
         return false;
@@ -2103,7 +2108,7 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
 
     if( critter->is_hallucination() ) {
         // Kill the hallu, but return false so that the regular move_to is uses instead
-        critter->die( nullptr );
+        critter->die( &here, nullptr );
         return false;
     }
 
@@ -2115,7 +2120,6 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
         return false;
     }
 
-    map &here = get_map();
     const int movecost_from = 50 * here.move_cost( p );
     const int movecost_attacker = std::max( movecost_from, 200 - 10 * ( attack - defend ) );
     const tripoint_rel_ms dir = p - pos_bub();
@@ -2178,7 +2182,7 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
         critter_recur = creatures.creature_at( dest );
         if( critter_recur != nullptr ) {
             if( critter_recur->is_hallucination() ) {
-                critter_recur->die( nullptr );
+                critter_recur->die( &here, nullptr );
             }
         } else if( !critter->has_flag( mon_flag_IMMOBILE ) ) {
             critter->setpos( tripoint_bub_ms( dest ) );
@@ -2266,12 +2270,14 @@ void monster::stumble()
 
 void monster::knock_back_to( const tripoint_bub_ms &to )
 {
+    map &here = get_map();
+
     if( to == pos_bub() ) {
         return; // No effect
     }
 
     if( is_hallucination() ) {
-        die( nullptr );
+        die( &here, nullptr );
         return;
     }
 
@@ -2290,7 +2296,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
             z->apply_damage( this, bodypart_id( "torso" ), static_cast<float>( type->size ) );
             z->add_effect( effect_stunned, 1_turns );
         }
-        z->check_dead_state();
+        z->check_dead_state( &here );
 
         if( u_see ) {
             add_msg( _( "The %1$s bounces off a %2$s!" ), name(), z->name() );
@@ -2308,7 +2314,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
             add_msg( _( "The %1$s bounces off %2$s!" ), name(), p->get_name() );
         }
 
-        p->check_dead_state();
+        p->check_dead_state( &here );
         return;
     }
 
@@ -2316,13 +2322,12 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
     // die_if_drowning will kill the monster if necessary, but if the deep water
     // tile is on a vehicle, we should check for swimmers out of water
     if( !die_if_drowning( to ) && has_flag( mon_flag_AQUATIC ) ) {
-        die( nullptr );
+        die( &here, nullptr );
         if( u_see ) {
             add_msg( _( "The %s flops around and dies!" ), name() );
         }
     }
 
-    map &here = get_map();
     // It's some kind of wall.
     if( here.impassable( to ) ) {
         const int dam = static_cast<int>( type->size );
@@ -2336,7 +2341,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
     } else { // It's no wall
         setpos( tripoint_bub_ms( to ) );
     }
-    check_dead_state();
+    check_dead_state( &here );
 }
 
 /* will_reach() is used for determining whether we'll get to stairs (and
