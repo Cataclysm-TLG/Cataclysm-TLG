@@ -881,39 +881,7 @@ bool mattack::acid_barf( monster *z )
             body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( &here, z, hit, z->type->melee_skill );
-
-    return true;
-}
-
-bool mattack::acid_accurate( monster *z )
-{
-    if( !z->can_act() ) {
-        return false;
-    }
-
-    Creature *target = z->attack_target();
-    if( target == nullptr ) {
-        return false;
-    }
-
-    const int range = rl_dist( z->pos_bub(), target->pos_bub() );
-    if( range > 10 || range < 2 || !z->sees( *target ) ) {
-        return false;
-    }
-
-    z->mod_moves( -to_moves<int>( 1_seconds ) * 0.5 );
-
-    projectile proj;
-    proj.speed = 10;
-    proj.range = 10;
-    proj.proj_effects.insert( ammo_effect_BLINDS_EYES );
-    proj.proj_effects.insert( ammo_effect_NO_DAMAGE_SCALING );
-    proj.impact.add_damage( damage_acid, rng( 3, 5 ) );
-    // Make it arbitrarily less accurate at close ranges
-    dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range },
-                       z );
+    target->on_hit( &here, z, hit,  z->type->melee_skill );
 
     return true;
 }
