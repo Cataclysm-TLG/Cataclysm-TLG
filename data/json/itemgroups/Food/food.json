@@ -152,7 +152,7 @@
   {
     "type": "item_group",
     "id": "homemade_preserved_food",
-    "//": "These are mostly homemade and as such can contain less conventional food like lutefisk or woods soup.",
+    "//": "These are mostly homemade and as such can contain less conventional food like woods soup.",
     "subtype": "distribution",
     "entries": [
       { "group": "homemade_preserved_food_simple", "prob": 3 },
