@@ -179,6 +179,7 @@
       { "group": "fish_pickled_jar_glass_sealed_2", "prob": 1 },
       { "item": "soup_tomato", "prob": 1 },
       { "group": "dry_goods", "prob": 1 },
+      { "item": "jam_fruit", "prob": 1 },
       { "item": "fruit_canned", "prob": 1 }
     ]
   },
