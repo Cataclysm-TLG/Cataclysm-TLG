@@ -1831,6 +1831,7 @@ bool advanced_inventory::action_unload( advanced_inv_listitem *sitem,
     if( !src && sitem ) {
         src = sitem->items.front();
     } else {
+        add_msg( m_info, _( "Nothing to unload." ) );
         return false;
     }
 
