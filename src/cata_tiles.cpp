@@ -4418,16 +4418,6 @@ void cata_tiles::init_custom_explosion_layer( const std::map<tripoint_bub_ms, ex
         &layer )
 {
     do_draw_custom_explosion = true;
-    std::map<tripoint_bub_ms, explosion_tile> temp;
-    for( const auto &it : layer ) {
-        temp.insert( std::pair<tripoint_bub_ms, explosion_tile>( tripoint_bub_ms( it.first ), it.second ) );
-    }
-    custom_explosion_layer = temp;
-}
-void cata_tiles::init_custom_explosion_layer( const std::map<tripoint_bub_ms, explosion_tile>
-        &layer )
-{
-    do_draw_custom_explosion = true;
     custom_explosion_layer = layer;
 }
 void cata_tiles::init_draw_bullet( const tripoint_bub_ms &p, std::string name )
@@ -4455,10 +4445,6 @@ void cata_tiles::init_draw_cursor( const tripoint_bub_ms &p )
 {
     do_draw_cursor = true;
     cursors.emplace_back( p );
-}
-void cata_tiles::init_draw_highlight( const tripoint_bub_ms &p )
-{
-    cata_tiles::init_draw_highlight( tripoint_bub_ms( p ) );
 }
 void cata_tiles::init_draw_highlight( const tripoint_bub_ms &p )
 {
