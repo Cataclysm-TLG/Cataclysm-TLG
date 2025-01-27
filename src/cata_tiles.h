@@ -587,7 +587,7 @@ class cata_tiles
         void draw_explosion_frame();
         void void_explosion();
 
-        void init_custom_explosion_layer( const std::map<tripoint, explosion_tile> &layer );
+        void init_custom_explosion_layer( const std::map<tripoint_bub_ms, explosion_tile> &layer );
         void draw_custom_explosion_frame();
         void void_custom_explosion();
 
@@ -611,7 +611,7 @@ class cata_tiles
         void draw_cursor();
         void void_cursor();
 
-        void init_draw_highlight( const tripoint &p );
+        void init_draw_highlight( const tripoint_bub_ms &p );
         void draw_highlight();
         void void_highlight();
 

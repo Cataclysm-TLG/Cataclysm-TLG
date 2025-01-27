@@ -4412,7 +4412,8 @@ void cata_tiles::init_explosion( const tripoint &p, int radius )
     exp_pos = p;
     exp_rad = radius;
 }
-void cata_tiles::init_custom_explosion_layer( const std::map<tripoint, explosion_tile> &layer )
+void cata_tiles::init_custom_explosion_layer( const std::map<tripoint_bub_ms, explosion_tile>
+        &layer )
 {
     do_draw_custom_explosion = true;
     custom_explosion_layer = layer;
@@ -4443,7 +4444,7 @@ void cata_tiles::init_draw_cursor( const tripoint &p )
     do_draw_cursor = true;
     cursors.emplace_back( p );
 }
-void cata_tiles::init_draw_highlight( const tripoint &p )
+void cata_tiles::init_draw_highlight( const tripoint_bub_ms &p )
 {
     do_draw_highlight = true;
     highlights.emplace_back( p );

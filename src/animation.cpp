@@ -467,7 +467,7 @@ void draw_bullet_curses( map &m, const tripoint &t, const char bullet, const tri
     }
 
     shared_ptr_fast<game::draw_callback_t> bullet_cb = make_shared_fast<game::draw_callback_t>( [&]() {
-        if( p != nullptr && p->z == vp.z ) {
+        if( p != nullptr && p->z() == vp.z() ) {
             m.drawsq( g->w_terrain, *p, drawsq_params().center( vp ) );
         }
         mvwputch( g->w_terrain, t.xy() - vp.xy() + point( POSX, POSY ), c_red, bullet );
