@@ -164,7 +164,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     const auto get_move_dir = [&]( const tripoint_rel_ms & dir, const tripoint_rel_ms & from ) {
         tileray mdir;
 
-        mdir.init( dir.xy().raw() );
+        mdir.init( dir.xy() );
         units::angle turn = normalize( mdir.dir() - grabbed_vehicle->face.dir() );
         if( grabbed_vehicle->is_on_ramp && turn == 180_degrees ) {
             add_msg( m_bad, _( "The %s can't be turned around while on a ramp." ), grabbed_vehicle->name );
