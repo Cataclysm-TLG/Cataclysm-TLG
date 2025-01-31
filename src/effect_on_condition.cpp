@@ -39,7 +39,6 @@ namespace io
         switch ( data ) {
         case eoc_type::ACTIVATION: return "ACTIVATION";
         case eoc_type::RECURRING: return "RECURRING";
-        case eoc_type::SCENARIO_SPECIFIC: return "SCENARIO_SPECIFIC";
         case eoc_type::AVATAR_DEATH: return "AVATAR_DEATH";
         case eoc_type::NPC_DEATH: return "NPC_DEATH";
         case eoc_type::PREVENT_DEATH: return "PREVENT_DEATH";
@@ -139,9 +138,16 @@ static time_duration next_recurrence( const effect_on_condition_id &eoc, dialogu
 void effect_on_conditions::load_new_character( Character &you )
 {
     bool is_avatar = you.is_avatar();
-    // NPCs do not have scenarios, so check for that.
-    if( get_scenario() ) {
-        for( const effect_on_condition_id &eoc_id : get_scenario()->eoc() ) {
+    for( const effect_on_condition_id &eoc_id : get_scenario()->eoc() ) {
+        effect_on_condition eoc = eoc_id.obj();
+        if( is_avatar || eoc.run_for_npcs ) {
+            queued_eoc new_eoc = queued_eoc{ eoc.id, calendar::turn_zero, {} };
+            you.queued_effect_on_conditions.push( new_eoc );
+        }
+    }
+
+    if( you.get_profession() ) {
+        for( const effect_on_condition_id &eoc_id : you.get_profession()->get_eocs() ) {
             effect_on_condition eoc = eoc_id.obj();
             if( is_avatar || eoc.run_for_npcs ) {
                 queued_eoc new_eoc = queued_eoc{ eoc.id, calendar::turn_zero, {} };

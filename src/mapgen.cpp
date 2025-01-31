@@ -2180,12 +2180,10 @@ class jmapgen_vending_machine : public jmapgen_piece_with_has_vehicle_collision
     public:
         bool reinforced;
         mapgen_value<item_group_id> group_id;
-        bool lootable;
         bool powered;
         bool networked;
         jmapgen_vending_machine( const JsonObject &jsi, const std::string_view/*context*/ ) :
             reinforced( jsi.get_bool( "reinforced", false ) )
-            , lootable( jsi.get_bool( "lootable", false ) )
             , powered( jsi.get_bool( "powered", false ) )
             , networked( jsi.get_bool( "networked", false ) ) {
             if( jsi.has_member( "item_group" ) ) {
@@ -2202,7 +2200,7 @@ class jmapgen_vending_machine : public jmapgen_piece_with_has_vehicle_collision
             if( chosen_id.is_null() ) {
                 return;
             }
-            dat.m.place_vending( r, chosen_id, reinforced, lootable, powered, networked );
+            dat.m.place_vending( r, chosen_id, reinforced, powered, networked );
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -6600,26 +6598,32 @@ void map::place_toilet( const tripoint_bub_ms &p, int charges )
     furn_set( p, furn_f_toilet );
 }
 
-void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bool reinforced,
-                         bool lootable, bool powered, bool networked )
+void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bool reinforced, bool powered, bool networked )
 {
     if( reinforced ) {
         furn_set( p, furn_f_vending_reinforced );
         place_items( type, 100, p, p, false, calendar::start_of_cataclysm );
     } else {
         if( reinforced ) {
-            if( networked ) {
-                furn_set( p, furn_f_vending_reinforced_networked );
+            if( powered ) {
+                if( networked ) {
+                    furn_set( p, furn_f_vending_reinforced_networked );
+                } else {
+                    furn_set( p, furn_f_vending_reinforced );
+                }
             } else {
-                furn_set( p, furn_f_vending_reinforced );
+                furn_set( p, furn_f_vending_reinforced_off );
             }
         } else {
-            if( networked ) {
-                furn_set( p, furn_f_vending_c_networked );
+            if( powered ) {
+                if( networked ) {
+                    furn_set( p, furn_f_vending_c_networked );
+                } else {
+                    furn_set( p, furn_f_vending_c );
+                }
             } else {
-                furn_set( p, furn_f_vending_c );
+                furn_set( p, furn_f_vending_c_off );
             }
-
         }
     }
 }
