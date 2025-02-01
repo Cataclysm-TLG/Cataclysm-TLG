@@ -2652,5 +2652,10 @@
     "id": "FREEZE_EFFECTS",
     "type": "json_flag",
     "//": "Creatures with this flag will not have their effects change in duration except for the effects that contain this flag."
+  },
+  {
+    "id": "BANK_NETWORKED",
+    "type": "json_flag",
+    "//": "Vending machines with this flag will allow purchasing items with your bank balance."
   }
 ]
