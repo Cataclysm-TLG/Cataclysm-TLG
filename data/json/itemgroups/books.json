@@ -521,8 +521,7 @@
       { "item": "survival_book", "prob": 2 },
       { "item": "textbook_arthropod", "prob": 2 },
       { "item": "basic_chemistry", "prob": 30 },
-      { "item": "dnd_handbook", "prob": 2 },
-      { "item": "survnote", "prob": 3 }
+      { "item": "dnd_handbook", "prob": 2 }
     ]
   },
   {
