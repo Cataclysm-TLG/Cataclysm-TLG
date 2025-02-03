@@ -553,13 +553,14 @@ target_handler::trajectory target_handler::mode_turret_manual( avatar &you, turr
 target_handler::trajectory target_handler::mode_turrets( avatar &you, vehicle &veh,
         const std::vector<vehicle_part *> &turrets )
 {
+    map &here = get_map();
     // Find radius of a circle centered at u encompassing all points turrets can aim at
     // FIXME: this calculation is fine for square distances, but results in an underestimation
     //        when used with real circles
     int range_total = 0;
     for( vehicle_part *t : turrets ) {
         int range = veh.turret_query( *t ).range();
-        tripoint_bub_ms pos = veh.bub_part_pos( *t );
+        tripoint_bub_ms pos = veh.bub_part_pos( &here, *t );
 
         int res = 0;
         res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
@@ -3547,7 +3548,7 @@ void target_ui::update_turrets_in_range()
     for( vehicle_part *t : *vturrets ) {
         turret_data td = veh->turret_query( *t );
         if( td.in_range( here.get_abs( dst ) ) ) {
-            tripoint_bub_ms src = veh->bub_part_pos( *t );
+            tripoint_bub_ms src = veh->bub_part_pos( &here, *t );
             turrets_in_range.push_back( {t, line_to( src, dst )} );
         }
     }
