@@ -11167,6 +11167,11 @@ bool item::ammo_sufficient( const Character *carrier, const std::string &method,
 
 int item::ammo_consume( int qty, const tripoint_bub_ms &pos, Character *carrier )
 {
+    return item::ammo_consume( qty, &get_map(), pos, carrier );
+}
+
+int item::ammo_consume( int qty, map *here, const tripoint_bub_ms &pos, Character *carrier )
+{
     if( qty < 0 ) {
         debugmsg( "Cannot consume negative quantity of ammo for %s", tname() );
         return 0;
@@ -11177,7 +11182,7 @@ int item::ammo_consume( int qty, const tripoint_bub_ms &pos, Character *carrier 
     if( is_tool_with_carrier && has_flag( flag_USES_NEARBY_AMMO ) ) {
         const ammotype ammo = ammo_type();
         if( !ammo.is_null() ) {
-            const inventory &carrier_inventory = carrier->crafting_inventory();
+            const inventory &carrier_inventory = carrier->crafting_inventory( here );
             itype_id ammo_type = ammo->default_ammotype();
             const int charges_avalable = carrier_inventory.charges_of( ammo_type, INT_MAX );
 
@@ -11195,7 +11200,7 @@ int item::ammo_consume( int qty, const tripoint_bub_ms &pos, Character *carrier 
         if( link().t_veh && link().efficiency >= MIN_LINK_EFFICIENCY ) {
             qty = link().t_veh->discharge_battery( qty, true );
         } else {
-            const optional_vpart_position vp = get_map().veh_at( link().t_abs_pos );
+            const optional_vpart_position vp = here->veh_at( link().t_abs_pos );
             if( vp ) {
                 qty = vp->vehicle().discharge_battery( qty, true );
             }
@@ -11204,7 +11209,7 @@ int item::ammo_consume( int qty, const tripoint_bub_ms &pos, Character *carrier 
 
     // Consume charges loaded in the item or its magazines
     if( is_magazine() || uses_magazine() ) {
-        qty -= contents.ammo_consume( qty, pos );
+        qty -= contents.ammo_consume( qty, here, pos );
         if( ammo_capacity( ammo_battery ) == 0 && carrier != nullptr ) {
             carrier->invalidate_weight_carried_cache();
         }
@@ -11252,6 +11257,13 @@ units::energy item::energy_consume( units::energy qty, const tripoint_bub_ms &po
                                     Character *carrier,
                                     float fuel_efficiency )
 {
+    return item::energy_consume( qty, &get_map(), pos, carrier, fuel_efficiency );
+}
+
+units::energy item::energy_consume( units::energy qty, map *here, const tripoint_bub_ms &pos,
+                                    Character *carrier,
+                                    float fuel_efficiency )
+{
     if( qty < 0_kJ ) {
         debugmsg( "Cannot consume negative quantity of energy for %s", tname() );
         return 0_kJ;
@@ -11261,7 +11273,7 @@ units::energy item::energy_consume( units::energy qty, const tripoint_bub_ms &po
 
     // Consume battery(ammo) and other fuel (if allowed)
     if( is_battery() || fuel_efficiency >= 0 ) {
-        int consumed_kj = contents.ammo_consume( units::to_kilojoule( qty ), pos, fuel_efficiency );
+        int consumed_kj = contents.ammo_consume( units::to_kilojoule( qty ), here, pos, fuel_efficiency );
         qty -= units::from_kilojoule( static_cast<std::int64_t>( consumed_kj ) );
         // fix negative quantity
         if( qty < 0_J ) {
@@ -11271,7 +11283,7 @@ units::energy item::energy_consume( units::energy qty, const tripoint_bub_ms &po
 
     // Consume energy from contained magazine
     if( magazine_current() ) {
-        qty -= magazine_current()->energy_consume( qty, pos, carrier );
+        qty -= magazine_current()->energy_consume( qty, here, pos, carrier );
     }
 
     // Consume UPS energy from various sources

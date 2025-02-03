@@ -206,6 +206,11 @@ tripoint_bub_ms Creature::pos_bub() const
     return get_map().get_bub( location );
 }
 
+tripoint_bub_ms Creature::pos_bub( map *here ) const
+{
+    return here->get_bub( location );
+}
+
 void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     map &here = get_map();
