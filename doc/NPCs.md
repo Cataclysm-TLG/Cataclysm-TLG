@@ -1401,7 +1401,7 @@ These can be read or written to with `val()`.
 | `bmi_permil` | ❌ | Current BMI per mille (Body Mass Index x 1000) |
 | `body_temp` | ❌ | Current body temperature. |
 | `body_temp_delta` | ❌ | Difference in temperature between the hottest/coldest part and what feels like the hottest/coldest part. |
-| `cash` | ❌ | Amount of money |
+| `cash` | ✅ | Amount of money |
 | `dodge` | ❌ | Current effective dodge |
 | `exp` | ✅ | Total experience earned. |
 | `fatigue` | ✅ | Current fatigue level. |
