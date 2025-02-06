@@ -3401,8 +3401,6 @@ void smart_controller_config::serialize( JsonOut &json ) const
 
 void vehicle::deserialize( const JsonObject &data )
 {
-    map &here = get_map();
-
     data.allow_omitted_members();
 
     int fdir = 0;
@@ -3481,7 +3479,7 @@ void vehicle::deserialize( const JsonObject &data )
     data.read( "fuel_remainder", fuel_remainder );
     data.read( "fuel_used_last_turn", fuel_used_last_turn );
 
-    refresh( &here );
+    refresh( );
 
     point p;
     zone_data zd;
