@@ -1901,6 +1901,8 @@ void activity_handlers::pickaxe_finish( player_activity *act, Character *you )
 
 void activity_handlers::start_fire_finish( player_activity *act, Character *you )
 {
+    map &here = get_map();
+
     static const std::string iuse_name_string( "firestarter" );
 
     item &it = *act->targets.front();
@@ -1924,7 +1926,7 @@ void activity_handlers::start_fire_finish( player_activity *act, Character *you 
 
     you->practice( skill_survival, act->index, 5 );
 
-    firestarter_actor::resolve_firestarter_use( you, get_map().get_bub( act->placement ) );
+    firestarter_actor::resolve_firestarter_use( you, &here, here.get_bub( act->placement ) );
     act->set_to_null();
 }
 
@@ -2012,7 +2014,7 @@ void activity_handlers::start_fire_do_turn( player_activity *act, Character *you
 
     you->mod_moves( -you->get_moves() );
     const firestarter_actor *actor = dynamic_cast<const firestarter_actor *>( usef->get_actor_ptr() );
-    const float light = actor->light_mod( you->pos_bub() );
+    const float light = actor->light_mod( &here, you->pos_bub( &here ) );
     act->moves_left -= light * 100;
     if( light < 0.1 ) {
         add_msg( m_bad, _( "There is not enough sunlight to start a fire now.  You stop trying." ) );

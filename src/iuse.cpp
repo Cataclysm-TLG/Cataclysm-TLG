@@ -4994,30 +4994,30 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
         }
         return 1;
     } else {
-        return handle_ground_graffiti( *p, it, _( "Spray what?" ), dest_.value() );
+        map &here = get_map();
+        return handle_ground_graffiti( *p, it, _( "Spray what?" ), &here, dest_.value() );
     }
 }
 
 std::optional<int> iuse::handle_ground_graffiti( Character &p, item *it, const std::string &prefix,
-        const tripoint_bub_ms &where )
+        map *here, const tripoint_bub_ms &where )
 {
-    map &here = get_map();
     string_input_popup popup;
     std::string message = popup
                           .description( prefix + " " + _( "(To delete, clear the text and confirm)" ) )
-                          .text( here.has_graffiti_at( where ) ? here.graffiti_at( where ) : std::string() )
+                          .text( here->has_graffiti_at( where ) ? here->graffiti_at( where ) : std::string() )
                           .identifier( "graffiti" )
                           .query_string();
     if( popup.canceled() ) {
         return std::nullopt;
     }
 
-    bool grave = here.ter( where ) == ter_t_grave_new;
+    bool grave = here->ter( where ) == ter_t_grave_new;
     int move_cost;
     if( message.empty() ) {
-        if( here.has_graffiti_at( where ) ) {
-            move_cost = 3 * here.graffiti_at( where ).length();
-            here.delete_graffiti( where );
+        if( here->has_graffiti_at( where ) ) {
+            move_cost = 3 * here->graffiti_at( where ).length();
+            here->delete_graffiti( where );
             if( grave ) {
                 p.add_msg_if_player( m_info, _( "You blur the inscription on the grave." ) );
             } else {
@@ -5027,7 +5027,7 @@ std::optional<int> iuse::handle_ground_graffiti( Character &p, item *it, const s
             return std::nullopt;
         }
     } else {
-        here.set_graffiti( where, message );
+        here->set_graffiti( where, message );
         if( grave ) {
             p.add_msg_if_player( m_info, _( "You carve an inscription on the grave." ) );
         } else {
@@ -9184,6 +9184,12 @@ void use_function::dump_info( const item &it, std::vector<iteminfo> &dump ) cons
 ret_val<void> use_function::can_call( const Character &p, const item &it,
                                       const tripoint_bub_ms &pos ) const
 {
+    return use_function::can_call( p, it, &get_map(), pos );
+}
+
+ret_val<void> use_function::can_call( const Character &p, const item &it,
+                                      map *here, const tripoint_bub_ms &pos ) const
+{
     if( actor == nullptr ) {
         return ret_val<void>::make_failure( _( "You can't do anything interesting with your %s." ),
                                             it.tname() );
@@ -9192,11 +9198,18 @@ ret_val<void> use_function::can_call( const Character &p, const item &it,
                                             it.tname() );
     }
 
-    return actor->can_use( p, it, pos );
+    return actor->can_use( p, it, here, pos );
 }
 
 std::optional<int> use_function::call( Character *p, item &it,
                                        const tripoint_bub_ms &pos ) const
 {
+    return use_function::call( p, it, &get_map(), pos );
+}
+
+std::optional<int> use_function::call( Character *p, item &it,
+                                       map */*here*/, const tripoint_bub_ms &pos ) const
+{
+    // TODO: Make use map aware
     return actor->use( p, it, pos );
 }
