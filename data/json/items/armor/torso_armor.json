@@ -344,18 +344,18 @@
   {
     "id": "platemail_cuirass_xl",
     "type": "ARMOR",
-    "name": { "str": "XL platemail cuirass", "str_pl": "XL platemail cuirasses" },
+    "name": { "str": "plate cuirass", "str_pl": "plate cuirasses" },
     "copy-from": "platemail_cuirass",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "platemail_cuirass_xs",
     "type": "ARMOR",
     "copy-from": "platemail_cuirass",
-    "name": { "str": "XS platemail cuirass", "str_pl": "XS platemail cuirasses" },
+    "name": { "str": "plate cuirass", "str_pl": "plate cuirasses" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "tire_cuirass",
