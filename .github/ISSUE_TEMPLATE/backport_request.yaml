@@ -1,0 +1,33 @@
+name: Backport request
+description: When something, often from the far future, needs urgent backporting.
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered. Repeatedly submitting duplicate issues may lead to consequences.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: dropdown
+  attributes:
+    label: From where does this need to be backported?
+    default: 1
+    options:
+      - DDA
+      - BN
+      - Something else (specify below)
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: Link to PR to backport
+    description: E.g `CleverRaven/Cataclysm-DDA#12345`
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Why does this need to be backported?
+    description: Especially if it is out of order.
+    placeholder: Due to the game making heavy use of feature X, this bug triggers constantly and makes the game nigh-unplayable.
+  validations:
+    required: true

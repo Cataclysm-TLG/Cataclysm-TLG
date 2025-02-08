@@ -1,0 +1,55 @@
+name: Unfixed DDA bug
+description: When a bug exists **unfixed** in DDA or applicable forks and it is severely impacting TLG. Use the backport request if it is already fixed.
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered. Repeatedly submitting duplicate issues may lead to consequences.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: dropdown
+  attributes:
+    label: Where does the bug come from?
+    default: 1
+    options:
+      - DDA
+      - BN
+      - Something else (specify below)
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: Link to bug report
+    description: E.g `CleverRaven/Cataclysm-DDA#12345`
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: How is this affecting TLG?
+    description: And how bad is it?
+    placeholder: It interferes with the grappling code and due to an edge case in XYZ, it triggers constantly.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Upload your save (optional)
+    description: |
+      If the issue can only be reproduced with a specific save.
+      1. Press `ESC` and then `d` to enter the debug menu.
+      2. Press `i` to enter "Info…"
+      3. Press `!` to generate a minimized save archive.
+    placeholder: Drag and drop your file here!
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Game version
+    description: The version you are using. If you use many mods, please narrow down what mod it is causing first.
+    placeholder: |
+      1. Press `ESC` and then `d` to enter the debug menu.
+      2. Press `i` to enter "Info…"
+      3. Press `r` generate information about your game.
+      4. This is automatically copied. Paste it here.
+  validations:
+    required: true
