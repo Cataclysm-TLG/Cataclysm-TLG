@@ -960,7 +960,7 @@
     "id": "xl_ballistic_vest",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "XL plate carrier" },
+    "name": { "str": "plate carrier" },
     "description": "An enormous handmade ballistic vest built with of lots of salvaged ballistic Kevlar panels.  It's bulkier than a factory made US Army vest, but it is customized for the benefit of an abnormally large mutant who couldn't wear such armors otherwise.  Coated in MOLLE webbing to support modular loadouts for the tacticool mutant.  It could be outfitted with steel plates for further protection.",
     "weight": "4500 g",
     "volume": "9 L",
