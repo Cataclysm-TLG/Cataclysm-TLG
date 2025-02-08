@@ -8,16 +8,6 @@ body:
     options:
     - label: I have searched the existing issues
       required: true
-- type: dropdown
-  attributes:
-    label: From where does this need to be backported?
-    default: 1
-    options:
-      - DDA
-      - BN
-      - Something else (specify below)
-  validations:
-    required: true
 - type: input
   attributes:
     label: Link to PR to backport

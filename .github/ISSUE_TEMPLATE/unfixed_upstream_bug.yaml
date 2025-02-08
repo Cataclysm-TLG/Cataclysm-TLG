@@ -8,16 +8,6 @@ body:
     options:
     - label: I have searched the existing issues
       required: true
-- type: dropdown
-  attributes:
-    label: Where does the bug come from?
-    default: 1
-    options:
-      - DDA
-      - BN
-      - Something else (specify below)
-  validations:
-    required: true
 - type: input
   attributes:
     label: Link to bug report
