@@ -1358,7 +1358,7 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
             } else {
                 tripoint_abs_omt pos = project_to<coords::omt>( loc );
                 oter_id terrain_type = overmap_buffer.ter( pos );
-                tripoint_bub_ms veh_origin = vehicle.v->pos_bub( &here );
+                tripoint_bub_ms veh_origin = vehicle.v->pos_bub( here );
                 debugmsg( "burned_ground_parser: Vehicle %s (origin %s; rotation (%f,%f)) has "
                           "out of bounds part at %s in terrain_type %s\n",
                           vehicle.v->name, veh_origin.to_string(),

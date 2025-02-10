@@ -438,6 +438,7 @@ static void grant_profs_to_character( Character &you, const recipe &r )
 static void prep_craft( const recipe_id &rid, const std::vector<item> &tools,
                         bool expect_craftable, int offset = 0, bool grant_profs = false, bool plug_in_tools = true )
 {
+    map &here = get_map();
     clear_avatar();
     clear_map();
 
@@ -453,7 +454,7 @@ static void prep_craft( const recipe_id &rid, const std::vector<item> &tools,
 
     const tripoint_bub_ms battery_pos = test_origin + tripoint::north;
     std::optional<item> battery_item( "test_storage_battery" );
-    place_appliance( battery_pos, vpart_ap_test_storage_battery, player_character, battery_item );
+    place_appliance( here, battery_pos, vpart_ap_test_storage_battery, player_character, battery_item );
 
     give_tools( tools, plug_in_tools );
     const inventory &crafting_inv = player_character.crafting_inventory();
@@ -2339,7 +2340,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                 CHECK( player.crafting_inventory().charges_of( itype_water ) == 0 );
             }
             WHEN( "the vehicle has a water faucet part" ) {
-                REQUIRE( veh->install_part( point_rel_ms::zero, vpart_water_faucet ) >= 0 );
+                REQUIRE( veh->install_part( here, point_rel_ms::zero, vpart_water_faucet ) >= 0 );
                 THEN( "crafting inventory contains the liquid" ) {
                     player.invalidate_crafting_inventory();
                     CHECK( player.crafting_inventory().count_item( itype_water_faucet ) == 1 );
@@ -2347,7 +2348,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                 }
             }
             WHEN( "the vehicle has two water faucets" ) {
-                REQUIRE( veh->install_part( point_rel_ms::south, vpart_water_faucet ) >= 0 );
+                REQUIRE( veh->install_part( here, point_rel_ms::south, vpart_water_faucet ) >= 0 );
                 THEN( "crafting inventory contains the liquid" ) {
                     player.invalidate_crafting_inventory();
                     CHECK( player.crafting_inventory().count_item( itype_water_faucet ) == 1 );
