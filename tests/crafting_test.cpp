@@ -764,6 +764,8 @@ TEST_CASE( "crafting_failure_rates_match_calculated", "[crafting][random]" )
 
 TEST_CASE( "UPS_shows_as_a_crafting_component", "[crafting][ups]" )
 {
+    map &here = get_map();
+
     avatar dummy;
     clear_character( dummy );
     dummy.worn.wear_item( dummy, item( "backpack" ), false, false );
@@ -774,13 +776,15 @@ TEST_CASE( "UPS_shows_as_a_crafting_component", "[crafting][ups]" )
     INFO( result.c_str() );
     REQUIRE( result.success() );
     REQUIRE( dummy.has_item( *ups ) );
-    REQUIRE( ups->ammo_remaining() == 500 );
-    REQUIRE( units::to_kilojoule( dummy.available_ups() ) == 500 );
+    REQUIRE( ups->ammo_remaining( here ) == 259 );
+    REQUIRE( units::to_kilojoule( dummy.available_ups() ) == 259 );
 }
 
 TEST_CASE( "UPS_modded_tools", "[crafting][ups]" )
 {
-    constexpr int ammo_count = 500;
+    map &here = get_map();
+
+    constexpr int ammo_count = 259;
     bool const ups_on_ground = GENERATE( true, false );
     CAPTURE( ups_on_ground );
     avatar dummy;
@@ -793,7 +797,7 @@ TEST_CASE( "UPS_modded_tools", "[crafting][ups]" )
     CAPTURE( ups.typeId() );
     item_location ups_loc;
     if( ups_on_ground ) {
-        item &ups_on_map = get_map().add_item( test_loc, ups );
+        item &ups_on_map = here.add_item( test_loc, ups );
         REQUIRE( !ups_on_map.is_null() );
         ups_loc = item_location( map_cursor( tripoint_bub_ms( test_loc ) ), &ups_on_map );
     } else {
@@ -812,7 +816,7 @@ TEST_CASE( "UPS_modded_tools", "[crafting][ups]" )
     REQUIRE( ret_solder.success() );
     REQUIRE( soldering_iron->has_flag( json_flag_USE_UPS ) );
 
-    REQUIRE( ups_loc->ammo_remaining() == ammo_count );
+    REQUIRE( ups_loc->ammo_remaining( here ) == ammo_count );
     if( !ups_on_ground ) {
         REQUIRE( dummy.charges_of( soldering_iron->typeId() ) == ammo_count );
     }
@@ -830,6 +834,8 @@ TEST_CASE( "tools_use_charge_to_craft", "[crafting][charge]" )
     std::vector<item> tools;
 
     GIVEN( "recipe and required tools/materials" ) {
+        map &here = get_map();
+
         recipe_id carver( "carver_off" );
         // Uses fabrication skill
         // Requires electronics 3
@@ -857,10 +863,10 @@ TEST_CASE( "tools_use_charge_to_craft", "[crafting][charge]" )
 
         WHEN( "each tool has enough charges" ) {
             item popcan_stove = tool_with_ammo( "popcan_stove", 60 );
-            REQUIRE( popcan_stove.ammo_remaining() == 60 );
+            REQUIRE( popcan_stove.ammo_remaining( here ) == 60 );
             tools.push_back( popcan_stove );
             item soldering = tool_with_ammo( "soldering_iron_portable", 20 );
-            REQUIRE( soldering.ammo_remaining() == 20 );
+            REQUIRE( soldering.ammo_remaining( here ) == 20 );
             tools.push_back( soldering );
 
             THEN( "crafting succeeds, and uses charges from each tool" ) {
@@ -2069,7 +2075,7 @@ TEST_CASE( "tools_with_charges_as_components", "[crafting]" )
     item sheet_cotton( "sheet_cotton" );
     thread.charges = 100;
     sew_kit.put_in( thread, pocket_type::MAGAZINE );
-    REQUIRE( sew_kit.ammo_remaining() == 100 );
+    REQUIRE( sew_kit.ammo_remaining( m ) == 100 );
     clear_and_setup( c, m, pocketknife );
     c.learn_recipe( &*recipe_balaclava );
     c.set_skill_level( skill_survival, 10 );
@@ -2098,7 +2104,7 @@ TEST_CASE( "tools_with_charges_as_components", "[crafting]" )
                     } else if( i.typeId() == itype_thread ) {
                         threads += i.count_by_charges() ? i.charges : 1;
                     } else if( i.typeId() == itype_sewing_kit ) {
-                        threads_in_tool += i.ammo_remaining();
+                        threads_in_tool += i.ammo_remaining( m );
                     }
                 }
                 CHECK( cotton_sheets == 0 );
@@ -2135,7 +2141,7 @@ TEST_CASE( "tools_with_charges_as_components", "[crafting]" )
                     } else if( i->typeId() == itype_thread ) {
                         threads += i->count_by_charges() ? i->charges : 1;
                     } else if( i->typeId() == itype_sewing_kit ) {
-                        threads_in_tool += i->ammo_remaining();
+                        threads_in_tool += i->ammo_remaining( m );
                     }
                 }
                 CHECK( cotton_sheets == 0 );
@@ -2329,7 +2335,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
             REQUIRE( veh->fuel_left( here, itype_water ) == 0 );
             int charges = 50;
             for( const vpart_reference &tank : veh->get_avail_parts( vpart_bitflags::VPFLAG_FLUIDTANK ) ) {
-                tank.part().ammo_set( itype_water, charges );
+                tank.part().ammo_set( here, itype_water, charges );
                 charges = 0;
             }
             REQUIRE( veh->fuel_left( here, itype_water ) == 50 );
@@ -2368,7 +2374,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                 const int pos = player.crafting_inventory().position_by_type( pseudo_tool );
                 REQUIRE( pos >= 0 );
                 const item &rack = player.crafting_inventory().find_item( pos );
-                CHECK( rack.ammo_remaining() == 0 );
+                CHECK( rack.ammo_remaining( here ) == 0 );
             }
         }
         WHEN( "the smoking rack contains charcoal" ) {
@@ -2379,7 +2385,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                 const int pos = player.crafting_inventory().position_by_type( pseudo_tool );
                 REQUIRE( pos >= 0 );
                 const item &rack = player.crafting_inventory().find_item( pos );
-                CHECK( rack.ammo_remaining() == 200 );
+                CHECK( rack.ammo_remaining( here ) == 200 );
             }
             GIVEN( "an additional smoking rack" ) {
                 REQUIRE( here.furn_set( furn2_pos, furn_f_smoking_rack ) );
@@ -2391,7 +2397,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                         const int pos = player.crafting_inventory().position_by_type( pseudo_tool );
                         REQUIRE( pos >= 0 );
                         const item &rack = player.crafting_inventory().find_item( pos );
-                        CHECK( rack.ammo_remaining() == 200 );
+                        CHECK( rack.ammo_remaining( here ) == 200 );
                     }
                 }
                 WHEN( "the second smoking rack also contains charcoal" ) {
@@ -2402,7 +2408,7 @@ TEST_CASE( "pseudo_tools_in_crafting_inventory", "[crafting][tools]" )
                         const int pos = player.crafting_inventory().position_by_type( pseudo_tool );
                         REQUIRE( pos >= 0 );
                         const item &rack = player.crafting_inventory().find_item( pos );
-                        CHECK( rack.ammo_remaining() == 300 );
+                        CHECK( rack.ammo_remaining( here ) == 300 );
                     }
                 }
             }
