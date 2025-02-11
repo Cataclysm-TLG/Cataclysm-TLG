@@ -303,5 +303,10 @@
     "type": "TRAIT_MIGRATION",
     "id": "PROF_ASSASSIN_CONVICT",
     "remove": true
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_arc_furnace",
+    "to_furn": "f_arcfurnace_empty"
   }
 ]
