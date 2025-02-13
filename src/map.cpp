@@ -8699,12 +8699,12 @@ void map::rotten_item_spawn( const item &item, const tripoint_bub_ms &pnt )
         return;
     }
     const auto &comest = item.get_comestible();
-    mongroup_id mgroup = comest->rot_spawn;
+    mongroup_id mgroup = comest->rot_spawn.rot_spawn_group;
     if( mgroup.is_null() ) {
         return;
     }
 
-    if( rng( 0, 100 ) < comest->rot_spawn_chance ) {
+    if( rng( 0, 100 ) < comest->rot_spawn.rot_spawn_chance ) {
         std::vector<MonsterGroupResult> spawn_details = MonsterGroupManager::GetResultFromGroup( mgroup );
         for( const MonsterGroupResult &mgr : spawn_details ) {
             add_spawn( mgr, tripoint_bub_ms( pnt ) );
