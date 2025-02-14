@@ -107,6 +107,7 @@ The changelog does not include backports from DDA. We will attempt to keep as cu
 - Starting a fire now always needs tinder if the thing you want to light on fire does not have the `TINDER` flag. This generally includes liquid fuels, paper, and other easily ignitable items. This flag has been added to many items, and will be given to more things that ought to have it as we come across them.
 - Missed melee attacks no longer damage your weapon.[[1]](https://github.com/CleverRaven/Cataclysm-DDA/pull/54439)
 - New monster: glowstalk. An unviable portal monster, it can be encountered with other nether monsters of that kind.
+- Adjusted reload time for guns and magazines, adding stricter skill-based scaling to reload speed penalties and reducing the speed of loading cartridges into magazines overall.
 - Stat descriptors have been added to aid understanding, for example, if you had 0 strength, it would show up as "Helpless", while 16 strength would be "World-Class". See [GAME_BALANCE.md](GAME_BALANCE.md)
 - Tons and tons of back-end infrastructural changes to itemgroups, ids, mapgen, etc.
 - Removed DDA's tutorial character, Liam. TLG is not interested in hand-holding: While we will keep quests and NPC factions, the story is meant to be told by the player, not to the player.
