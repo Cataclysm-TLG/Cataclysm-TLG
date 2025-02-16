@@ -5742,7 +5742,7 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
                     chargeable = std::ceil( units::to_kilojoule<double>( n.type->battery->max_capacity -
                                             n.energy_remaining( nullptr ) ) );
                 } else if( n.ammo_capacity( ammo_battery ) ) {
-                    chargeable = n.ammo_capacity( ammo_battery ) - n.ammo_remaining( here );
+                    chargeable = n.ammo_capacity( ammo_battery ) - n.ammo_remaining( );
                 }
 
                 if( !is_running && chargeable > 0 ) {
@@ -5771,7 +5771,7 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
                     if( n.is_vehicle_battery() ) {
                         n.mod_energy( units::from_kilojoule( static_cast<std::int64_t>( charged ) ) );
                     } else {
-                        n.ammo_set( itype_battery, n.ammo_remaining( here ) + charged );
+                        n.ammo_set( itype_battery, n.ammo_remaining( ) + charged );
                     }
 
                 }
@@ -6265,7 +6265,7 @@ static void use_charges_from_furn( const furn_t &f, const itype_id &type, int &q
                 if( furn_item.use_charges( type, quantity, ret, p, return_true<item>, nullptr, in_tools ) ) {
                     stack.erase( iter );
                 } else {
-                    iter->charges = furn_item.ammo_remaining( *m );
+                    iter->charges = furn_item.ammo_remaining( );
                 }
             }
         }
