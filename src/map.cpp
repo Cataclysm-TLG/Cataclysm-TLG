@@ -765,9 +765,12 @@ bool map::vehproceed( VehicleList &vehicle_list )
 // TODO: Make reality bubble independent.
 static bool sees_veh( const Creature &c, vehicle &veh, bool force_recalc )
 {
+    const map &here = get_map();
+
     const std::set<tripoint_abs_ms> &veh_points = veh.get_points( force_recalc );
-    return std::any_of( veh_points.begin(), veh_points.end(), [&c]( const tripoint_abs_ms & pt ) {
-        return c.sees( get_map().get_bub( pt ) );
+    return std::any_of( veh_points.begin(), veh_points.end(), [&c,
+    &here]( const tripoint_abs_ms & pt ) {
+        return c.sees( here, here.get_bub( pt ) );
     } );
 }
 
@@ -1046,7 +1049,7 @@ float map::vehicle_vehicle_collision( vehicle &veh, vehicle &veh2,
     const avatar &you = get_avatar();
     const tripoint_bub_ms part1_pos = veh.bub_part_pos( *this, vp1 );
     const tripoint_bub_ms part2_pos = veh2.bub_part_pos( *this, vp2 );
-    if( you.sees( part1_pos ) || you.sees( part2_pos ) ) {
+    if( you.sees( *this, part1_pos ) || you.sees( *this, part2_pos ) ) {
         //~ %1$s: first vehicle name (without "the")
         //~ %2$s: first part name
         //~ %3$s: second vehicle display name (with "the")
@@ -1284,7 +1287,7 @@ std::set<tripoint_bub_ms> map::get_moving_vehicle_targets( const Creature &z, in
             if( rl_dist( zpos, vppos ) > max_range ) {
                 continue;
             }
-            if( !z.sees( vppos ) ) {
+            if( !z.sees( *this, vppos ) ) {
                 continue;
             }
             if( vpr.has_feature( VPFLAG_CONTROLS ) ||
@@ -1406,7 +1409,7 @@ void map::board_vehicle( const tripoint_bub_ms &pos, Character *p )
     vp->part().passenger_id = p->getID();
     vp->vehicle().invalidate_mass();
 
-    p->setpos( pos );
+    p->setpos( *this, pos );
     p->in_vehicle = true;
     if( p->is_avatar() ) {
         g->update_map( *p->as_avatar() );
@@ -1591,7 +1594,7 @@ bool map::displace_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const bool 
                 z_change = psgp.z() - part_pos.z();
             }
 
-            psg->setpos( psgp );
+            psg->setpos( *this, psgp );
             r.moved = true;
         }
     }
@@ -1839,7 +1842,7 @@ bool map::furn_set( const tripoint_bub_ms &p, const furn_id &new_furniture, cons
     invalidate_max_populated_zlev( p.z() );
 
     memory_cache_dec_set_dirty( p, true );
-    if( player_character.sees( p ) ) {
+    if( player_character.sees( *this, p ) ) {
         player_character.memorize_clear_decoration( get_abs( p ), "f_" );
     }
 
@@ -2290,7 +2293,7 @@ bool map::ter_set( const tripoint_bub_ms &p, const ter_id &new_terrain, bool avo
     memory_cache_dec_set_dirty( p, true );
     memory_cache_ter_set_dirty( p, true );
     avatar &player_character = get_avatar();
-    if( player_character.sees( p ) ) {
+    if( player_character.sees( *this, p ) ) {
         player_character.memorize_clear_decoration( get_abs( p ), "t_" );
     }
 
@@ -6458,7 +6461,7 @@ void map::partial_con_remove( const tripoint_bub_ms &p )
     current_submap->partial_constructions.erase( tripoint_sm_ms( l, p.z() ) );
     memory_cache_dec_set_dirty( p, true );
     avatar &player_character = get_avatar();
-    if( player_character.sees( p ) ) {
+    if( player_character.sees( *this, p ) ) {
         player_character.memorize_clear_decoration( get_abs( p ), "tr_" );
     }
 }
@@ -6501,7 +6504,7 @@ void map::trap_set( const tripoint_bub_ms &p, const trap_id &type )
 
     memory_cache_dec_set_dirty( p, true );
     avatar &player_character = get_avatar();
-    if( player_character.sees( p ) ) {
+    if( player_character.sees( *this, p ) ) {
         player_character.memorize_clear_decoration( get_abs( p ), "tr_" );
     }
     // If there was already a trap here, remove it.
@@ -6533,7 +6536,7 @@ void map::remove_trap( const tripoint_bub_ms &p )
         if( g != nullptr && this == &get_map() ) {
             memory_cache_dec_set_dirty( p, true );
             avatar &player_character = get_avatar();
-            if( player_character.sees( p ) ) {
+            if( player_character.sees( *this,  p ) ) {
                 player_character.memorize_clear_decoration( get_abs( p ), "tr_" );
             }
             player_character.add_known_trap( p, tr_null.obj() );
@@ -8715,7 +8718,7 @@ void map::rotten_item_spawn( const item &item, const tripoint_bub_ms &pnt )
         for( const MonsterGroupResult &mgr : spawn_details ) {
             add_spawn( mgr, tripoint_bub_ms( pnt ) );
         }
-        if( get_player_view().sees( pnt ) ) {
+        if( get_player_view().sees( *this,  pnt ) ) {
             if( item.is_seed() ) {
                 add_msg( m_warning, _( "Something has crawled out of the %s plants!" ), item.get_plant_name() );
             } else {
@@ -9773,7 +9776,7 @@ void map::build_obstacle_cache(
     }
     // Iterate over creatures and set them to block their squares relative to their size.
     for( Creature &critter : g->all_creatures() ) {
-        const tripoint_bub_ms loc = critter.pos_bub( this );
+        const tripoint_bub_ms loc = critter.pos_bub( *this );
         if( loc.z() != start.z() || !inbounds( loc ) ) {
             continue;
         }
@@ -10338,7 +10341,7 @@ void map::maybe_trigger_prox_trap( const tripoint_bub_ms &pos, Creature &c,
 }
 
 // TODO: Should be moved to submap or Creature?
-bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
+bool map::try_fall( const tripoint_bub_ms &p, Creature *c )
 {
     if( c == nullptr ) {
         return false;
@@ -10378,10 +10381,10 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         }
 
         if( valid.empty() ) {
-            critter->setpos( c->pos_bub() );
+            critter->setpos( c->pos_abs() );
             add_msg( m_bad, _( "You fall down under %s!" ), critter->disp_name() );
         } else {
-            critter->setpos( random_entry( valid ) );
+            critter->setpos( *this, random_entry( valid ) );
         }
 
         height++;
@@ -10393,7 +10396,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
     c->add_msg_if_npc( _( "<npcname> falls down a level!" ) );
     Character *you = dynamic_cast<Character *>( c );
     if( you == nullptr ) {
-        c->setpos( where );
+        c->setpos( *this, where );
         if( c->get_size() == creature_size::tiny ) {
             height = std::max( 0, height - 1 );
         }
@@ -10421,7 +10424,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
                  height );
         g->vertical_move( -height, true );
     } else {
-        you->setpos( where );
+        you->setpos( *this, where );
     }
     if( you->has_effect( effect_weakened_gravity ) ) {
         height = std::max( 0, height - 1 );

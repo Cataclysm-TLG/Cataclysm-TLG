@@ -20,7 +20,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 {
     map &here = get_map();
 
-    const optional_vpart_position grabbed_vehicle_vp = m.veh_at( u.pos_bub( &here ) + u.grab_point );
+    const optional_vpart_position grabbed_vehicle_vp = m.veh_at( u.pos_bub( here ) + u.grab_point );
     if( !grabbed_vehicle_vp ) {
         add_msg( m_info, _( "No vehicle at grabbed point." ) );
         u.grab( object_type::NONE );
@@ -38,7 +38,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         u.grab( object_type::NONE );
         return false;
     }
-    const vehicle *veh_under_player = veh_pointer_or_null( m.veh_at( u.pos_bub( &here ) ) );
+    const vehicle *veh_under_player = veh_pointer_or_null( m.veh_at( u.pos_bub( here ) ) );
     if( grabbed_vehicle == veh_under_player ) {
         u.grab_point = - dp;
         return false;
@@ -185,8 +185,8 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         const tripoint_rel_ms actual_dir = tripoint_rel_ms( ( expected_pos - new_part_pos ).xy(), 0 );
 
         // Set player location to illegal value so it can't collide with vehicle.
-        const tripoint_bub_ms player_prev = u.pos_bub( &here );
-        u.setpos( tripoint_bub_ms::zero, false );
+        const tripoint_abs_ms player_prev = u.pos_abs( );
+        u.setpos( here, tripoint_bub_ms::zero, false );
         std::vector<veh_collision> colls;
         const bool failed = grabbed_vehicle->collision( here, colls, actual_dir, true );
         u.setpos( player_prev );

@@ -243,6 +243,8 @@ class user_turn
 
 input_context game::get_player_input( std::string &action )
 {
+    const map &here = get_map();
+
     input_context ctxt;
     if( uquit == QUIT_WATCH ) {
         ctxt = input_context( "DEFAULTMODE", keyboard_mode::keycode );
@@ -495,8 +497,10 @@ static void pldrive( point_rel_ms d )
 
 static void open()
 {
+    map &here = get_map();
+
     avatar &player_character = get_avatar();
-    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( _( "Open where?" ),
+    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( here, _( "Open where?" ),
             pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
             ACTION_OPEN, false );
 
@@ -504,7 +508,6 @@ static void open()
         return;
     }
     const tripoint_bub_ms openp = *openp_;
-    map &here = get_map();
 
     player_character.mod_moves( -to_moves<int>( 1_seconds ) );
 
@@ -581,8 +584,10 @@ static void open()
 
 static void close()
 {
+    map &here = get_map();
+
     if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_highlight(
-                _( "Close where?" ),
+                here, _( "Close where?" ),
                 pgettext( "no door, gate, etc.", "There is nothing that can be closed nearby." ),
                 ACTION_CLOSE, false ) ) {
         doors::close_door( get_map(), get_player_character(), *pnt );
@@ -3118,6 +3123,8 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
 bool game::handle_action()
 {
+    map &here = get_map();
+
     std::string action;
     input_context ctxt;
     action_id act = ACTION_NULL;
@@ -3190,7 +3197,7 @@ bool game::handle_action()
             // No auto-move actions have or can be set at this point.
             player_character.clear_destination();
             destination_preview.clear();
-            act = handle_action_menu();
+            act = handle_action_menu( here );
             if( act == ACTION_NULL ) {
                 return false;
             }
@@ -3237,7 +3244,7 @@ bool game::handle_action()
             if( !mouse_pos ) {
                 return false;
             }
-            if( !player_character.sees( *mouse_pos ) ) {
+            if( !player_character.sees( here, *mouse_pos ) ) {
                 // Not clicked in visible terrain
                 return false;
             }

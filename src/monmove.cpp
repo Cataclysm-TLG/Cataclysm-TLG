@@ -306,7 +306,9 @@ bool monster::can_move_to( const tripoint_bub_ms &p ) const
 
 float monster::rate_target( Creature &c, float best, bool smart ) const
 {
-    const FastDistanceApproximation d = rl_dist_fast( pos_bub(), c.pos_bub() );
+    const map &here = get_map();
+
+    const FastDistanceApproximation d = rl_dist_fast( pos_bub( here ), c.pos_bub( here ) );
     if( d <= 0 ) {
         return FLT_MAX;
     }
@@ -316,7 +318,7 @@ float monster::rate_target( Creature &c, float best, bool smart ) const
         return FLT_MAX;
     }
 
-    if( !sees( c ) ) {
+    if( !sees( here, c ) ) {
         return FLT_MAX;
     }
 
@@ -471,7 +473,7 @@ void monster::plan()
     Character &player_character = get_player_character();
     // If we can see the player, move toward them or flee.
     if( friendly == 0 && seen_levels.test( player_character.posz() + OVERMAP_DEPTH ) &&
-        sees( player_character ) ) {
+        sees( here, player_character ) ) {
         mon_plan.dist = rate_target( player_character, mon_plan.dist, mon_plan.smart_planning );
         mon_plan.fleeing = mon_plan.fleeing || is_fleeing( player_character );
         mon_plan.target = &player_character;
@@ -752,7 +754,7 @@ void monster::plan()
     } else if( friendly > 0 && one_in( 3 ) ) {
         // Grow restless with no targets
         friendly--;
-    } else if( is_pet_follow() && sees( player_character ) &&
+    } else if( is_pet_follow() && sees( here, player_character ) &&
                ( pos_abs().z() == player_character.pos_abs().z() ||
                  pos_abs().z() == get_dest().z() ) ) {
         // Simpleminded animals are too dumb to follow the player.
@@ -983,7 +985,7 @@ void monster::move()
     if( is_pet_follow() || ( friendly != 0 && has_effect( effect_led_by_leash ) ) ) {
         const int dist = rl_dist( pos_abs(), get_dest() );
         if( ( dist <= 1 || ( dist <= 2 && !has_effect( effect_led_by_leash ) &&
-                             sees( player_character ) ) ) &&
+                             sees( here, player_character ) ) ) &&
             ( get_dest() == player_character.pos_abs() &&
               pos_abs().z() == player_character.pos_abs().z() ) ) {
             moves = 0;
@@ -1648,6 +1650,8 @@ static std::vector<tripoint_bub_ms> get_bashing_zone( const tripoint_bub_ms &bas
 
 bool monster::bash_at( const tripoint_bub_ms &p )
 {
+    map &here = get_map();
+
     if( p.z() != posz() ) {
         // TODO: Remove this
         return false;
@@ -1751,6 +1755,8 @@ int monster::group_bash_skill( const tripoint_bub_ms &target )
 
 bool monster::attack_at( const tripoint_bub_ms &p )
 {
+    const map &here = get_map();
+
     if( has_flag( mon_flag_PACIFIST ) || has_flag( json_flag_CANNOT_ATTACK ) ) {
         return false;
     }
@@ -1759,7 +1765,7 @@ bool monster::attack_at( const tripoint_bub_ms &p )
         return false;
     }
     Character &player_character = get_player_character();
-    const bool sees_player = sees( player_character );
+    const bool sees_player = sees( here, player_character );
     // Targeting player location
     if( p == player_character.pos_bub() ) {
         if( sees_player ) {
@@ -1949,12 +1955,12 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
         }
     }
 
-    optional_vpart_position vp_orig = here.veh_at( pos_bub() );
+    optional_vpart_position vp_orig = here.veh_at( pos_abs() );
     if( vp_orig ) {
         vp_orig->vehicle().invalidate_mass();
     }
 
-    setpos( destination );
+    setpos( here, destination );
     footsteps( destination );
     underwater = will_be_water;
     optional_vpart_position vp_dest = here.veh_at( destination );
@@ -2191,7 +2197,7 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
                 critter_recur->die( &here, nullptr );
             }
         } else if( !critter->has_flag( mon_flag_IMMOBILE ) ) {
-            critter->setpos( tripoint_bub_ms( dest ) );
+            critter->setpos( here, dest );
             move_to( p );
             mod_moves( -movecost_attacker );
             critter->add_effect( effect_downed, time_duration::from_turns( movecost_from / 100 + 1 ) );
@@ -2278,7 +2284,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
 {
     map &here = get_map();
 
-    if( to == pos_bub() ) {
+    if( to == pos_bub( here ) ) {
         return; // No effect
     }
 
@@ -2287,7 +2293,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
         return;
     }
 
-    bool u_see = get_player_view().sees( to );
+    bool u_see = get_player_view().sees( here, to );
 
     creature_tracker &creatures = get_creature_tracker();
     // First, see if we hit another monster
@@ -2345,7 +2351,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
         }
 
     } else { // It's no wall
-        setpos( tripoint_bub_ms( to ) );
+        setpos( here, to );
     }
     check_dead_state( &here );
 }
@@ -2358,6 +2364,8 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
  */
 bool monster::will_reach( const point_bub_ms &p )
 {
+    const map &here = get_map();
+
     monster_attitude att = attitude( &get_player_character() );
     if( att != MATT_FOLLOW && att != MATT_ATTACK && att != MATT_FRIEND ) {
         return false;
@@ -2373,7 +2381,7 @@ bool monster::will_reach( const point_bub_ms &p )
         return false;
     }
 
-    const std::vector<tripoint_bub_ms> path = get_map().route( pos_bub(), tripoint_bub_ms( p,
+    const std::vector<tripoint_bub_ms> path = here.route( pos_bub(), tripoint_bub_ms( p,
             posz() ), get_pathfinding_settings() );
     if( path.empty() ) {
         return false;
@@ -2384,12 +2392,12 @@ bool monster::will_reach( const point_bub_ms &p )
         return true;
     }
 
-    if( can_hear() && wandf > 0 && rl_dist( get_map().get_bub( wander_pos ).xy(), p ) <= 2 &&
+    if( can_hear() && wandf > 0 && rl_dist( here.get_bub( wander_pos ).xy(), p ) <= 2 &&
         rl_dist( pos_abs().xy(), wander_pos.xy() ) <= wandf ) {
         return true;
     }
 
-    if( can_see() && sees( tripoint_bub_ms( p, posz() ) ) ) {
+    if( can_see() && sees( here, tripoint_bub_ms( p, posz() ) ) ) {
         return true;
     }
 

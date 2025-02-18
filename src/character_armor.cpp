@@ -282,7 +282,7 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
 bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_bodypart_id &bp,
                                        int roll )
 {
-
+    const map &here = get_map();
     for( item_pocket *const pocket : armor.get_all_ablative_pockets() ) {
         // if the pocket is ablative and not empty we should use its values
         if( !pocket->empty() ) {
@@ -349,7 +349,7 @@ bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_b
                 if( damaged == item::armor_status::DESTROYED ) {
                     //the plate is damaged like normal armor but also ends up destroyed
                     describe_damage( du, ablative_armor );
-                    if( get_player_view().sees( *this ) ) {
+                    if( get_player_view().sees( here, *this ) ) {
                         SCT.add( point( posx(), posy() ), direction::NORTH, remove_color_tags( ablative_armor.tname() ),
                                  m_neutral, _( "destroyed" ), m_info );
                     }

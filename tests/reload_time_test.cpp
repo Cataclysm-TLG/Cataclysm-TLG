@@ -25,7 +25,7 @@ static void check_reload_time( const std::string &weapon, const std::string &amm
     clear_map();
     avatar &shooter = get_avatar();
     g->place_critter_at( pseudo_debug_mon, spot );
-    shooter.setpos( test_origin );
+    shooter.setpos( here, test_origin );
     shooter.set_wielded_item( item( weapon, calendar::turn_zero, 0 ) );
     if( container.empty() ) {
         get_map().add_item( test_origin, item( ammo ) );
@@ -47,7 +47,7 @@ static void check_reload_time( const std::string &weapon, const std::string &amm
     CAPTURE( shooter.used_weapon()->get_reload_time() );
     aim_activity_actor act = aim_activity_actor::use_wielded();
     int moves_before = shooter.get_moves();
-    REQUIRE( shooter.fire_gun( &here, spot, 1, *shooter.used_weapon(), shooter.ammo_location ) );
+    REQUIRE( shooter.fire_gun( here, spot, 1, *shooter.used_weapon(), shooter.ammo_location ) );
     int moves_after = shooter.get_moves();
     int spent_moves = moves_before - moves_after;
     int expected_upper = expected_moves * 1.05;

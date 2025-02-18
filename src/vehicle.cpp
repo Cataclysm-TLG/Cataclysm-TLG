@@ -788,12 +788,12 @@ void vehicle::drive_to_local_target( map *here, const tripoint_abs_ms &target,
                                          player_character.current_movement_mode()->move_speed_mult();
     if( follow_protocol ) {
         if( ( ( turn_x > 0 || turn_x < 0 ) && velocity > safe_player_follow_speed ) ||
-            rl_dist( vehpos, here->get_abs( player_character.pos_bub( here ) ) ) < 7 + ( (
+            rl_dist( vehpos, here->get_abs( player_character.pos_bub( *here ) ) ) < 7 + ( (
                         mount_max.y() * 3 ) + 4 ) ) {
             accel_y = 1;
         }
         if( ( velocity < std::min( safe_velocity( *here ), safe_player_follow_speed ) && turn_x == 0 &&
-              rl_dist( vehpos, here->get_abs( player_character.pos_bub( here ) ) ) > 8 + ( (
+              rl_dist( vehpos, here->get_abs( player_character.pos_bub( *here ) ) ) > 8 + ( (
                           mount_max.y() * 3 ) + 4 ) ) ||
             velocity < 100 ) {
             accel_y = -1;
@@ -1900,7 +1900,7 @@ bool vehicle::merge_appliance_into_grid( map *here, vehicle &veh_target )
     }
     // Release grab if player is dragging either appliance
     if( get_avatar().get_grab_type() == object_type::VEHICLE ) {
-        const tripoint_bub_ms grab_point = get_avatar().pos_bub( here ) + get_avatar().grab_point;
+        const tripoint_bub_ms grab_point = get_avatar().pos_bub( *here ) + get_avatar().grab_point;
         const optional_vpart_position grabbed_veh = here->veh_at( grab_point );
         if( grabbed_veh && ( &grabbed_veh->vehicle() == this || &grabbed_veh->vehicle() == &veh_target ) ) {
             add_msg( _( "You release the %s." ), grabbed_veh->vehicle().name );
@@ -4815,6 +4815,8 @@ void vehicle::set_owner( const Character &c )
 
 bool vehicle::handle_potential_theft( Character const &you, bool check_only, bool prompt )
 {
+    const map &here = get_map();
+
     const bool is_owned_by_player =
         is_owned_by( you ) || ( you.is_npc() && is_owned_by( get_avatar() ) &&
                                 you.as_npc()->is_friendly( get_avatar() ) );
@@ -4822,10 +4824,12 @@ bool vehicle::handle_potential_theft( Character const &you, bool check_only, boo
     if( is_owned_by_player ) {
         return true;
     }
-    std::vector<Creature *> witnesses = g->get_creatures_if( [&you, this]( Creature const & cr ) {
+    std::vector<Creature *> witnesses = g->get_creatures_if( [&you, this,
+          &here]( Creature const & cr ) {
         Character const *const elem = cr.as_character();
         return elem != nullptr && you.getID() != elem->getID() && is_owned_by( *elem ) &&
-               rl_dist( elem->pos_bub(), you.pos_bub() ) < MAX_VIEW_DISTANCE && elem->sees( you.pos_bub() );
+               rl_dist( elem->pos_bub( here ), you.pos_bub( here ) ) < MAX_VIEW_DISTANCE &&
+               elem->sees( here, you.pos_bub( here ) );
     } );
     if( !has_owner() || ( witnesses.empty() && ( has_old_owner() || you.is_npc() ) ) ) {
         if( !has_owner() ||
@@ -5430,7 +5434,7 @@ void vehicle::power_parts( map &here )
                 for( int elem : reactors ) {
                     parts[ elem ].enabled = false;
                 }
-                if( player_is_driving_this_veh( &here ) || player_character.sees( pos_bub( here ) ) ) {
+                if( player_is_driving_this_veh( &here ) || player_character.sees( here, pos_bub( here ) ) ) {
                     add_msg( _( "The %s's reactor dies!" ), name );
                 }
             }
@@ -5465,13 +5469,13 @@ void vehicle::power_parts( map &here )
 
         is_alarm_on = false;
         camera_on = false;
-        if( player_is_driving_this_veh( &here ) || player_character.sees( pos_bub( here ) ) ) {
+        if( player_is_driving_this_veh( &here ) || player_character.sees( here, pos_bub( here ) ) ) {
             add_msg( _( "The %s's battery dies!" ), name );
         }
         if( engine_epower < 0_W ) {
             // Not enough epower to run gas engine ignition system
             engine_on = false;
-            if( player_is_driving_this_veh( &here ) || player_character.sees( pos_bub( here ) ) ) {
+            if( player_is_driving_this_veh( &here ) || player_character.sees( here, pos_bub( here ) ) ) {
                 add_msg( _( "The %s's engine dies!" ), name );
             }
         }
@@ -5831,7 +5835,7 @@ void vehicle::idle( map &here, bool on_map )
         engine_on = false;
     }
 
-    if( !warm_enough_to_plant( player_character.pos_bub( &here ) ) ) {
+    if( !warm_enough_to_plant( player_character.pos_bub( here ) ) ) {
         for( int i : planters ) {
             vehicle_part &vp = parts[ i ];
             if( vp.enabled ) {
@@ -5896,7 +5900,7 @@ void vehicle::idle( map &here, bool on_map )
     for( vehicle_part *turret : turrets() ) {
         item_location base = turret_query( *turret ).base();
         // Notify player about status of a turret if they're on the same tile
-        if( player_at_controls || player_character.pos_bub( &here ) == base.pos_bub() ) {
+        if( player_at_controls || player_character.pos_bub( here ) == base.pos_bub() ) {
             base->process( here, &player_character, base.pos_bub() );
         } else {
             base->process( here, nullptr, base.pos_bub() );
