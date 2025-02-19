@@ -1408,11 +1408,6 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
         return;
     }
 
-    map &here = get_map();
-    // if( action == butcher_type::DISMEMBER ) {
-    //     here.add_splatter( type_gib, you->pos_bub(), rng( corpse->size + 2, ( corpse->size + 1 ) * 2 ) );
-    // }
-
     // all action types - yields
     if( !butchery_drops_harvest( &corpse_item, *corpse, *you, action ) ) {
         // FATAL FAILURE
