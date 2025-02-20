@@ -1849,8 +1849,9 @@ class item : public visitable
         bool spill_contents( const tripoint_bub_ms &pos );
         bool spill_contents( map *here, const tripoint_bub_ms &pos );
         bool spill_open_pockets( Character &guy, const item *avoid = nullptr );
-        // spill items that don't fit in the container
-        void overflow( const tripoint_bub_ms &pos, const item_location &loc = item_location::nowhere );
+        /** Spill items that don't fit in the container. */
+        void overflow( map &here, const tripoint_bub_ms &pos,
+                       const item_location &loc = item_location::nowhere );
 
         /**
          * Check if item is a holster and currently capable of storing obj.
@@ -2541,7 +2542,7 @@ class item : public visitable
          * @return amount of ammo consumed which will be between 0 and qty
          */
         int ammo_consume( int qty, const tripoint_bub_ms &pos, Character *carrier );
-        int ammo_consume( int qty, map *here, const tripoint_bub_ms &pos, Character *carrier );
+        int ammo_consume( int qty, map &here, const tripoint_bub_ms &pos, Character *carrier );
 
         /**
          * Consume energy (if available) and return the amount of energy that was consumed

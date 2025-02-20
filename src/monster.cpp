@@ -3125,7 +3125,7 @@ void monster::die( map *here, Creature *nkiller )
         }
     }
     if( corpse ) {
-        corpse->process( *here, nullptr, corpse.pos_bub() );
+        corpse->process( *here, nullptr, corpse.pos_bub( *here ) );
         if( get_map().inbounds( pos_abs() ) ) {
             corpse.make_active();
         }

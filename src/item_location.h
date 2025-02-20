@@ -13,6 +13,7 @@ class JsonObject;
 class JsonOut;
 class item;
 class item_pocket;
+class map;
 class map_cursor;
 class vehicle_cursor;
 class talker;
@@ -68,7 +69,8 @@ class item_location
         type where_recursive() const;
 
         /** Returns the position where the item is found */
-        tripoint_bub_ms pos_bub() const;
+        tripoint_bub_ms pos_bub( const map &here ) const;
+        tripoint_abs_ms pos_abs() const;
 
         /** Describes the item location
          *  @param ch if set description is relative to character location */
@@ -159,7 +161,7 @@ class item_location
         /**
          * Overflow items into parent pockets recursively
          */
-        void overflow();
+        void overflow( map &here );
 
         /**
          * returns whether the item can be reloaded with the specified item.

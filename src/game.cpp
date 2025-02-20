@@ -10367,7 +10367,6 @@ void game::reload_weapon( bool try_everything )
     reload_item();
 }
 
-
 bool game::check_safe_mode_allowed( bool repeat_safe_mode_warnings )
 {
     if( !repeat_safe_mode_warnings && safe_mode_warning_logged ) {
