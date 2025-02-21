@@ -2003,7 +2003,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     if( destroy ) {
                         map &here = get_map();
                         if( get_player_view().sees( here, guy ) ) {
-                            SCT.add( point( guy.posx(), guy.posy() ), direction::NORTH, remove_color_tags( pre_damage_name ),
+                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH, remove_color_tags( pre_damage_name ),
                                      m_neutral, _( "destroyed" ), m_info );
                         }
                         destroyed_armor_msg( guy, pre_damage_name );
@@ -2044,7 +2044,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
         guy.deal_damage( &caster, bp, damage_instance( damage.type, damage.amount ) );
     }
     if( sp.damage( caster ) < 0 ) {
-        sp.heal( guy.pos_bub(), caster );
+        map &here = get_map();
+        sp.heal( guy.pos_bub( here ), caster );
         add_msg_if_player_sees( guy, m_good, _( "%s wounds are closing up!" ),
                                 guy.disp_name( true ) );
     }

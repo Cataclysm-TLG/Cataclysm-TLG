@@ -10745,8 +10745,6 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     map &here = get_map();
     const tripoint_bub_ms pos = u.pos_bub( here );
 
-    const tripoint_abs_ms dest_loc_abs = here.get_abs( dest_loc );
-
     if( here.has_flag_ter( ter_furn_flag::TFLAG_SMALL_PASSAGE, dest_loc ) ) {
         if( u.get_size() > creature_size::medium ) {
             add_msg( m_warning, _( "You can't fit there." ) );
@@ -12453,7 +12451,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos ) ) {
         swimming = true;
         const ter_id &target_ter = here.ter( pos + tripoint( 0, 0,
-                                             movez ) ) );
+                                             movez ) );
 
         // If we're in a water tile that has both air above and deep enough water to submerge in...
         if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos ) &&
@@ -13722,8 +13720,9 @@ void game::animate_weather()
         iEnd.x = TERMX;
         iEnd.y = TERMY;
     }
-    point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
-                  -getmaxy( w_terrain ) / 2 + u.posy() ) );
+    map &here = get_map();
+    point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx( here ),
+                  -getmaxy( w_terrain ) / 2 + u.posy( here ) ) );
 
 #if defined(TILES)
     if( is_tileset_isometric() ) {
@@ -13777,7 +13776,7 @@ void game::animate_weather()
                 if( vis != visibility_type::CLEAR ) {
                     continue;
                 }
-                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( mapp ) ) {
+                if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );

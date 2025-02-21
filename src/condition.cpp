@@ -1715,14 +1715,16 @@ conditional_t::func f_is_underwater( bool is_npc )
 conditional_t::func f_is_on_land( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
-        return get_map().has_floor( d.const_actor( is_npc )->pos_bub() );
+        map &here = get_map();
+        return get_map().has_floor( d.const_actor( is_npc )->pos_bub( here ) );
     };
 }
 
 conditional_t::func f_is_on_liquid( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
-        return !get_map().is_dry( d.const_actor( is_npc )->pos_bub() );
+        map &here = get_map();
+        return !get_map().is_dry( d.const_actor( is_npc )->pos_bub( here ) );
     };
 }
 

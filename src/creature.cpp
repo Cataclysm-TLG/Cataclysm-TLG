@@ -569,8 +569,6 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return ch == nullptr || !ch->is_invisible();
     };
 
-    const Character *ch = critter.as_character();
-
     // Can always see adjacent monsters on the same level.
     // We also bypass lighting for vertically adjacent monsters, but still check for floors.
     if( target_range <= 1 ) {
