@@ -6,6 +6,8 @@
 #include "magic.h"
 #include "point.h"
 #include "vehicle.h"
+#include "messages.h"
+#include "units.h"
 
 static const ammotype ammo_battery( "battery" );
 
@@ -21,17 +23,13 @@ std::string talker_item_const::get_name() const
     return me_it_const->get_item()->type_name();
 }
 
-int talker_item_const::posx() const
+int talker_item_const::posx( const map &here ) const
 {
-    const map &here = get_map();
-
     return me_it_const->pos_bub( here ).x();
 }
 
-int talker_item_const::posy() const
+int talker_item_const::posy( const map &here ) const
 {
-    const map &here = get_map();
-
     return me_it_const->pos_bub( here ).y();
 }
 
@@ -40,10 +38,8 @@ int talker_item_const::posz() const
     return me_it_const->pos_abs().z();
 }
 
-tripoint_bub_ms talker_item_const::pos_bub() const
+tripoint_bub_ms talker_item_const::pos_bub( const map &here ) const
 {
-    const map &here = get_map();
-
     return me_it_const->pos_bub( here );
 }
 

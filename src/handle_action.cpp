@@ -245,6 +245,8 @@ input_context game::get_player_input( std::string &action )
 {
     const map &here = get_map();
 
+    const tripoint_bub_ms pos = u.pos_bub( here );
+
     input_context ctxt;
     if( uquit == QUIT_WATCH ) {
         ctxt = input_context( "DEFAULTMODE", keyboard_mode::keycode );

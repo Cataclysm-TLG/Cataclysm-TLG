@@ -522,6 +522,11 @@ static bool majority_rule( const bool a_vote, const bool b_vote, const bool c_vo
 
 bool Creature::sees( const map &here, const Creature &critter ) const
 {
+    const Character *ch = critter.as_character();
+
+    const tripoint_bub_ms pos = pos_bub( here );
+    const tripoint_bub_ms critter_pos = critter.pos_bub( here );
+
     // Creatures always see themselves (simplifies drawing).
     if( &critter == this ) {
         return true;
@@ -531,7 +536,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    const int target_range = rl_dist( pos_bub( here ), critter.pos_bub( here ) );
+    const int target_range = rl_dist( pos_abs( ), critter.pos_abs( ) );
     if( target_range > MAX_VIEW_DISTANCE ) {
         return false;
     }
@@ -554,7 +559,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     // Creature has stumbled into an invisible player and is now aware of them.
     // REVIEW: Why is this only done for the player?
     if( has_effect( effect_stumbled_into_invisible ) &&
-        here.has_field_at( critter.pos_bub(), field_fd_last_known ) && critter.is_avatar() ) {
+        here.has_field_at( critter_pos, field_fd_last_known ) && critter.is_avatar() ) {
         return true;
     }
 
@@ -569,12 +574,12 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     // Can always see adjacent monsters on the same level.
     // We also bypass lighting for vertically adjacent monsters, but still check for floors.
     if( target_range <= 1 ) {
-        return ( posz() == critter.posz() || here.sees( pos_bub( here ), critter.pos_bub( here ), 1 ) ) &&
+        return ( posz() == critter.posz() || here.sees( pos, critter_pos, 1 ) ) &&
                visible( ch );
     }
 
     // If we cannot see without any of the penalties below, bail now.
-    if( !sees( here, critter.pos_bub( here ), critter.is_avatar() ) ) {
+    if( !sees( here, critter_pos, critter.is_avatar() ) ) {
         return false;
     }
 
@@ -684,12 +689,13 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
         return false;
     }
 
+    const tripoint_bub_ms pos = pos_bub( here );
     const int range_cur = sight_range( here.ambient_light_at( t ) );
     const int range_day = sight_range( default_daylight_level() );
     const int range_night = sight_range( 0 );
     const int range_max = std::max( range_day, range_night );
     const int range_min = std::min( range_cur, range_max );
-    const int wanted_range = rl_dist( pos_bub( here ), t );
+    const int wanted_range = rl_dist( pos, t );
     if( wanted_range <= range_min ||
         ( wanted_range <= range_max &&
           here.ambient_light_at( t ) > here.get_cache_ref( t.z() ).natural_light_level_cache ) ) {
@@ -710,9 +716,9 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
             const float player_visibility_factor = get_player_character().visibility() / 100.0f;
             int adj_range = std::floor( range * player_visibility_factor );
             return adj_range >= wanted_range &&
-                   here.get_cache_ref( posz() ).seen_cache[posx()][posy()] > LIGHT_TRANSPARENCY_SOLID;
+                   here.get_cache_ref( posz() ).seen_cache[pos.x()][pos.y()] > LIGHT_TRANSPARENCY_SOLID;
         } else {
-            return here.sees( pos_bub( here ), t, range );
+            return here.sees( pos, t, range );
         }
     } else {
         return false;
@@ -1246,6 +1252,8 @@ void Creature::messaging_projectile_attack( const Creature *source,
 {
     const map &here = get_map();
 
+    const tripoint_bub_ms pos = pos_bub( here );
+    const tripoint_bub_ms source_pos = source->pos_bub( here );
     const viewer &player_view = get_player_view();
     const bool u_see_this = player_view.sees( here, *this );
 
@@ -1275,14 +1283,14 @@ void Creature::messaging_projectile_attack( const Creature *source,
         } else if( source != nullptr ) {
             if( source->is_avatar() ) {
                 //player hits monster ranged
-                SCT.add( point( posx(), posy() ),
-                         direction_from( point::zero, point( posx() - source->posx(), posy() - source->posy() ) ),
+                SCT.add( pos.xy().raw(),
+                         direction_from( point::zero, point( pos.x() - source_pos.x(), pos.y() - source_pos.y() ) ),
                          get_hp_bar( total_damage, get_hp_max(), true ).first,
                          m_good, hit_selection.message, hit_selection.gmtSCTcolor );
 
                 if( get_hp() > 0 ) {
-                    SCT.add( point( posx(), posy() ),
-                             direction_from( point::zero, point( posx() - source->posx(), posy() - source->posy() ) ),
+                    SCT.add( pos.xy().raw(),
+                             direction_from( point::zero, point( pos.x() - source_pos.x(), pos.y() - source_pos.y() ) ),
                              get_hp_bar( get_hp(), get_hp_max(), true ).first, m_good,
                              //~ "hit points", used in scrolling combat text
                              _( "HP" ), m_neutral, "hp" );
@@ -3372,7 +3380,8 @@ void Creature::draw( const catacurses::window &w, const point_bub_ms &origin, bo
 void Creature::draw( const catacurses::window &w, const tripoint_bub_ms &origin,
                      bool inverted ) const
 {
-    const tripoint_bub_ms pos = pos_bub();
+    map &here = get_map();
+    const tripoint_bub_ms pos = pos_bub( here );
 
     if( is_draw_tiles_mode() ) {
         return;
@@ -3508,25 +3517,26 @@ std::string Creature::replace_with_npc_name( std::string input ) const
 void Creature::knock_back_from( const tripoint_bub_ms &p )
 {
     map &here = get_map();
+    const tripoint_bub_ms pos = pos_bub( here );
 
-    if( p == pos_bub() ) {
+    if( p == pos ) {
         return; // No effect
     }
     if( is_hallucination() ) {
         die( &here, nullptr );
         return;
     }
-    tripoint_bub_ms to = pos_bub();
-    if( p.x() < posx() ) {
+    tripoint_bub_ms to = pos;
+    if( p.x() < pos.x() ) {
         to.x()++;
     }
-    if( p.x() > posx() ) {
+    if( p.x() > pos.x() ) {
         to.x()--;
     }
-    if( p.y() < posy() ) {
+    if( p.y() < pos.y() ) {
         to.y()++;
     }
-    if( p.y() > posy() ) {
+    if( p.y() > pos.y() ) {
         to.y()--;
     }
 
