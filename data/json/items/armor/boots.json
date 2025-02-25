@@ -724,7 +724,7 @@
     "copy-from": "boots",
     "type": "ARMOR",
     "name": { "str": "pair of western boots", "str_pl": "pairs of western boots" },
-    "description": "Stiff leather cowboy boots with pointed toes and a low heel.  The wide cuffs could be used as as hoc pockets, or maybe even holsters.",
+    "description": "Stiff leather cowboy boots with pointed toes and a low heel.  The wide cuffs could be used as ad hoc pockets, or maybe even holsters.",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "leather_treated" ],
     "environmental_protection": 2,
@@ -749,7 +749,7 @@
           "foot_arch_l"
         ],
         "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "encumbrance": 34,
+        "encumbrance": 12,
         "coverage": 100
       },
       {
