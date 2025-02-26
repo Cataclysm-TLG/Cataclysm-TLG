@@ -1011,7 +1011,7 @@ Condition | Type | Description
 --- | --- | ---
 `"is_season"` | string or [variable object](#variable-object) | `true` if the current season matches `is_season`, which must be one of "`spring"`, `"summer"`, `"autumn"`, or `"winter"`.
 `"is_day"` | simple string | `true` if it is currently daytime (sun is at or above the [civil dawn](https://en.wikipedia.org/wiki/Dawn#Civil_dawn) point)
-`"u_is_outside"`<br/>`"npc_is_outside"`  | simple string | `true` if you or the NPC is on a tile without a roof.
+`"u_is_outside"`<br/>`"npc_is_outside"`<br/>`"is_outside"`  | simple string or object | `true` if you or the NPC is on a tile without a roof. if `is_outside`, you can pass a variable with coordinates to check if this tile is outside, like `{ "is_outside": { "context_val": "loc" } }`
 `"u_is_underwater"`<br/>`"npc_is_underwater"`  | simple string | `true` if you or the NPC is underwater.
 `"u_is_in_water"`<br/>`"npc_is_in_water"`  | simple string | `true` if you or the NPC is standing in a tile that isn't dry. Includes fields and non-flammable puddles.
 `"one_in_chance"` | int or [variable object](#variable-object) | `true` if a one in `one_in_chance` random chance occurs.
