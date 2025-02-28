@@ -7015,7 +7015,10 @@ units::mass item::weight( bool include_contents, bool integral ) const
 
     }
 
-    ret *= ret_mul;
+    // prevent units::mass::max() * 1.0, which results in -units::mass::max()
+    if( ret_mul != 1 ) {
+        ret *= ret_mul;
+    }
 
     // if it has additional pockets include the mass of those
     if( contents.has_additional_pockets() ) {
