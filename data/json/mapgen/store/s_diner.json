@@ -106,6 +106,7 @@
           { "item": "coffee_table", "chance": 20 }
         ],
         "m": { "item": "bar_trash", "chance": 50, "repeat": [ 1, 2 ] },
+        "j": { "item": "SUS_toilet", "chance": 50 },
         "I": { "item": "office", "chance": 30, "repeat": [ 1, 2 ] }
       },
       "place_loot": [

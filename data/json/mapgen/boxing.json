@@ -69,6 +69,7 @@
         "^": "f_indoor_plant",
         "f": "f_trashcan"
       },
+      "items": { "T": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "T": {  } },
       "place_items": [
         { "item": "boxing_clothes", "x": [ 3, 11 ], "y": [ 18, 18 ], "chance": 80, "repeat": [ 3, 5 ] },
