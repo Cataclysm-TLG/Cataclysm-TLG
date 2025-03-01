@@ -783,8 +783,8 @@ TEST_CASE( "npc_talk_items", "[npc_talk]" )
     CHECK( d.responses[7].text == "This is a basic test response." );
 
     d.add_topic( "TALK_TEST_ITEM_WIELDED" );
-    item_location loc = player_character.i_add( item( itype_knife_butcher ) );
-    CHECK( player_character.wield( *loc ) );
+    item_location loc = player_character.i_add( item( itype_knife_huge ) );
+    CHECK( player_character.wield( loc ) );
     gen_response_lines( d, 2 );
     CHECK( d.responses[0].text == "This is a basic test response." );
     CHECK( d.responses[1].text ==
