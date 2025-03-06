@@ -5213,7 +5213,7 @@ void insert_item_activity_actor::finish( player_activity &act, Character &who )
         ret_val<void> ret = ret_val<void>::make_failure( _( "item can't be stored there" ) );
 
         if( !it.count_by_charges() ) {
-            ret = try_insert( holster, holstered_item, nullptr, carrier ,allow_fill_charge_item_nested);
+            ret = try_insert( holster, holstered_item, nullptr, carrier ,allow_fill_count_by_charge_item_nested);
 
             if( ret.success() ) {
                 //~ %1$s: item to put in the container, %2$s: container to put item in
@@ -5225,7 +5225,7 @@ void insert_item_activity_actor::finish( player_activity &act, Character &who )
             }
         } else {
             int charges_added = 0;
-            ret = try_insert( holster, holstered_item, &charges_added, carrier ,allow_fill_charge_item_nested);
+            ret = try_insert( holster, holstered_item, &charges_added, carrier ,allow_fill_count_by_charge_item_nested);
 
             if( ret.success() ) {
                 item copy( it );
