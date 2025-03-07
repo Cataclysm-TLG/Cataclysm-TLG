@@ -243,5 +243,17 @@
         [ "grenade", 1 ]
       ]
     ]
+  },
+  {
+    "type": "recipe",
+    "result": "glass_shard_trap",
+    "activity_level": "NO_EXERCISE",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TRAPS",
+    "skill_used": "traps",
+    "time": "1 s",
+    "reversible": true,
+    "autolearn": true,
+    "components": [ [ [ "glass_shard", 1 ] ] ]
   }
 ]

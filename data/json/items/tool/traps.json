@@ -315,5 +315,27 @@
     },
     "flags": [ "SINGLE_USE" ],
     "melee_damage": { "cut": 12 }
-  }
+  },
+{
+ "id": "glass_shard_trap",
+    "type": "GENERIC",
+    "category": "deployables",
+    "symbol": ",",
+    "color": "light_cyan",
+    "name": { "str": "broken glass trap" },
+    "description": "Same glass shard as before, now prepared to be spread on the ground. It will make noise when stepped on.",
+    "material": "glass",
+    "weight": "75 g",
+    "volume": "30 ml",
+    "looks_like": "glass_shard",
+    "use_action": {
+      "type": "place_trap",
+      "trap": "tr_glass",
+      "moves": 150,
+      "practice": 2,
+      "done_message": "You scatter the shards on the %s, ready to be cracked by something passing by."
+    },
+    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE" ],
+    "to_hit": -1
+    }
 ]
