@@ -1461,6 +1461,9 @@ bool outfit::takeoff( item_location loc, std::list<item> *res, Character &guy )
     } );
 
     it.on_takeoff( guy );
+    cata::event e = cata::event::make<event_type::character_takeoff_item>( guy.getID(),
+                    it.typeId() );
+    get_event_bus().send_with_talker( &guy, &loc, e );
     item takeoff_copy( it );
     worn.erase( iter );
     if( res == nullptr ) {
