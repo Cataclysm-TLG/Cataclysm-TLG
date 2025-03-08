@@ -775,13 +775,9 @@ struct sound_effect_handler {
                     float interpolation_factor = handler->current_sample_index - low_index;
                     sample interpolated = ( high_value - low_value ) * interpolation_factor + low_value;
 
-            handler->current_sample_index += 1.0f * playback_speed;
-            if( handler->loops_remaining >= 0 &&
-                handler->current_sample_index >= num_source_samples ) {
-                handler->loops_remaining--;
-                handler->current_sample_index = fmodf( handler->current_sample_index, num_source_samples );
-            }
-        }
+                    memcpy( static_cast<uint8_t *>( stream ) + dst_index * bytes_per_sample + ear_offset, &interpolated,
+                            sizeof( sample ) );
+                }
 
                 // update handler->current_sample_index
                 handler->current_sample_index += 1.0f * playback_speed;
