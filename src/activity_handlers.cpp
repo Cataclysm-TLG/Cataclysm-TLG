@@ -2036,6 +2036,10 @@ void activity_handlers::start_fire_do_turn( player_activity *act, Character *you
         inv_s.add_nearby_items( PICKUP_RANGE );
         inv_s.add_character_items( *you );
 
+        // Removes firestarter from potential tinder options
+        item *firestarter_ptr = act->targets.front().get_item();
+        inv_s.RemoveItem(firestarter_ptr);
+
         inv_s.set_title( _( "Select tinder to use for lighting a fire" ) );
 
         item_location tinder;
