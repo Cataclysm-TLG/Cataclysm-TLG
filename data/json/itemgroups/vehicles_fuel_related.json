@@ -85,8 +85,8 @@
         ],
         "prob": 40
       },
-      { "item": "duct_tape", "charges": [ 20, 200 ], "prob": 30 },
-      { "item": "duct_tape", "charges": [ 20, 200 ], "prob": 30 },
+      { "group": "duct_tape_roll_part", "prob": 35 },
+      { "group": "duct_tape_roll_part", "prob": 35 },
       { "group": "superglue", "prob": 20 },
       { "item": "cotton_patchwork", "prob": 8, "custom-flags": [ "FILTHY" ] },
       { "item": "tshirt", "prob": 4, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },

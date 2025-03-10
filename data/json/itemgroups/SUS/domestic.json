@@ -137,7 +137,7 @@
       { "item": "string_36", "count": [ 1, 4 ], "prob": 60 },
       { "item": "string_36", "count": [ 1, 4 ], "prob": 30 },
       { "item": "string_36", "count": [ 1, 4 ], "prob": 10 },
-      { "item": "duct_tape", "prob": 30, "charges": [ 25, 400 ] },
+      { "group": "duct_tape_roll_part", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "item": "plastic_straw", "prob": 70, "count": [ 1, 6 ] },
@@ -307,7 +307,7 @@
       { "item": "solder_wire", "prob": 30 },
       { "group": "superglue", "prob": 40 },
       { "item": "knitting_needles", "prob": 40 },
-      { "item": "duct_tape", "prob": 40, "charges": [ 5, 160 ] },
+      { "group": "duct_tape_roll_part", "prob": 40 },
       { "item": "wax_paraffin", "prob": 10 },
       { "item": "zipper_short_plastic", "prob": 35 },
       { "item": "zipper_short_plastic", "prob": 15 },
@@ -347,7 +347,7 @@
       { "group": "tools_common", "count": 2, "damage": [ 0, 4 ], "prob": 30 },
       { "group": "superglue", "prob": 40 },
       { "item": "boxcutter", "prob": 35, "damage": [ 0, 4 ] },
-      { "item": "duct_tape", "prob": 35, "charges": [ 5, 200 ] },
+      { "group": "duct_tape_roll_part", "prob": 35 },
       {
         "item": "flashlight",
         "prob": 10,
@@ -425,7 +425,7 @@
       { "item": "candle", "count": [ 1, 2 ], "prob": 35, "charges": [ 70, -1 ] },
       { "item": "corkscrew", "prob": 30 },
       { "group": "adhesive_bandages_box_used", "prob": 30 },
-      { "item": "duct_tape", "prob": 30, "charges": [ 100, 400 ] },
+      { "group": "duct_tape_roll_part", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "item": "light_battery_cell", "count": 4, "prob": 50, "charges": 100 },
       { "item": "deck_of_cards", "prob": 40 },
@@ -583,7 +583,7 @@
       { "item": "hotplate", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "hotplate_induction", "prob": 1, "damage": [ 0, 4 ] },
       {
-        "collection": [ { "item": "charcoal", "prob": 70 }, { "item": "char_smoker", "prob": 100, "damage": [ 0, 4 ] } ],
+        "collection": [ { "group": "charcoal_bag_part", "prob": 70 }, { "item": "char_smoker", "prob": 100, "damage": [ 0, 4 ] } ],
         "prob": 5
       },
       {
