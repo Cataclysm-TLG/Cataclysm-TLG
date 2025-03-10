@@ -2093,6 +2093,38 @@ void inventory_selector::add_character_items( Character &character )
     }
 }
 
+bool inventory_column::RemoveItem(item *&remove)
+{
+    for (inventory_entry &entry : entries)
+    {
+        std::vector<item_location> &item_locations = entry.locations;
+        for (unsigned int i = 0; i < item_locations.size(); i++)
+        {
+            if (item_locations.at(i).get_item() == remove)
+            {
+                item_locations.erase(item_locations.begin() + i);
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+void inventory_selector::RemoveItem(item *&remove)
+{
+    for (inventory_column *column : columns)
+        if (column->RemoveItem(remove))
+            return;
+
+    if (own_inv_column.RemoveItem(remove))
+        return;
+    if (own_gear_column.RemoveItem(remove))
+        return;
+    if (map_column.RemoveItem(remove))
+        return;
+}
+
 void inventory_selector::add_map_items( const tripoint &target )
 {
     map &here = get_map();
