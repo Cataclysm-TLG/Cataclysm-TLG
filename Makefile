@@ -1147,9 +1147,9 @@ install: version $(TARGET)
 	cp -R --no-preserve=ownership data/help $(DATA_PREFIX)
 ifeq ($(TILES), 1)
 	cp -R --no-preserve=ownership gfx $(DATA_PREFIX)
-	install -Dm644 -t $(SHARE_DIR)/applications/ data/xdg/com.cataclysm-tlg.cataclysm-tlg.desktop
-	install -Dm644 -t $(SHARE_DIR)/metainfo/ data/xdg/com.cataclysm-tlg.cataclysm-tlg.appdata.xml
-	install -Dm644 -t $(SHARE_DIR)/icons/hicolor/scalable/apps/ data/xdg/com.cataclysm-tlg.cataclysm-tlg.svg
+	install -Dm644 -t $(SHARE_DIR)/applications/ data/xdg/com.cataclysmtlg.CataclysmTLG.desktop
+	install -Dm644 -t $(SHARE_DIR)/metainfo/ data/xdg/com.cataclysmtlg.CataclysmTLG.appdata.xml
+	install -Dm644 -t $(SHARE_DIR)/icons/hicolor/scalable/apps/ data/xdg/com.cataclysmtlg.CataclysmTLG.svg
 endif
 ifeq ($(SOUND), 1)
 	cp -R --no-preserve=ownership data/sound $(DATA_PREFIX)
