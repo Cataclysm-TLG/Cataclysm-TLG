@@ -263,6 +263,7 @@
       "msg": "Your %s deactivates.",
       "target": "military_nvg"
     },
+    "relic_data": { "passive_effects": [ { "id": "nvg_bad" } ] },
     "armor": [ { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 20, "rigid_layer_only": true } ]
   },
   {
@@ -298,7 +299,6 @@
         "default_magazine": "medium_plus_battery_cell"
       }
     ],
-    "relic_data": { "passive_effects": [ { "id": "nvg_good" } ] },
     "flags": [ "HELMET_FRONT_ATTACHMENT", "CANT_WEAR", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "armor": [
       { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
@@ -327,6 +327,7 @@
       "msg": "Your %s deactivates.",
       "target": "advanced_gpnvg"
     },
+    "relic_data": { "passive_effects": [ { "id": "nvg_good" } ] },
     "armor": [
       { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 15, "rigid_layer_only": true },
       { "covers": [ "head" ], "encumbrance": 3, "coverage": 80, "specifically_covers": [ "head_crown" ] }
@@ -365,7 +366,6 @@
         "default_magazine": "medium_plus_battery_cell"
       }
     ],
-    "relic_data": { "passive_effects": [ { "id": "nvg_good" } ] },
     "flags": [ "HELMET_FRONT_ATTACHMENT", "CANT_WEAR", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "armor": [
       { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
@@ -394,6 +394,7 @@
       "msg": "Your %s deactivates.",
       "target": "enhanced_nvg"
     },
+    "relic_data": { "passive_effects": [ { "id": "nvg_great" } ] },
     "armor": [
       { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 10, "rigid_layer_only": true },
       { "covers": [ "head" ], "encumbrance": 3, "coverage": 80, "specifically_covers": [ "head_crown" ] }
