@@ -231,6 +231,7 @@ class enchantment
         }
         double get_value_add( enchant_vals::mod value, const Character &guy ) const;
         double get_value_multiply( enchant_vals::mod value, const Character &guy ) const;
+        double get_value_set( enchant_vals::mod value, const Character &guy ) const;
 
         body_part_set modify_bodyparts( const body_part_set &unmodified ) const;
         // does the enchantment modify bodyparts?
@@ -260,10 +261,12 @@ class enchantment
         // values that get multiplied to the base value
         // multipliers add to each other instead of multiply against themselves
         std::map<enchant_vals::mod, dbl_or_var> values_multiply; // NOLINT(cata-serialize)
+        std::map<enchant_vals::mod, dbl_or_var> values_set; // NOLINT(cata-serialize)
 
         // the exact same as above, though specifically for skills
         std::map<skill_id, dbl_or_var> skill_values_add; // NOLINT(cata-serialize)
         std::map<skill_id, dbl_or_var> skill_values_multiply; // NOLINT(cata-serialize)
+        std::map<skill_id, dbl_or_var> skill_values_set; // NOLINT(cata-serialize)
 
         std::vector<fake_spell> hit_me_effect;
         std::vector<fake_spell> hit_you_effect;
@@ -298,10 +301,12 @@ class enchant_cache : public enchantment
         void activate_passive( Character &guy ) const;
         double get_value_add( enchant_vals::mod value ) const;
         double get_value_multiply( enchant_vals::mod value ) const;
+        double get_value_set( enchant_vals::mod value ) const;
         int mult_bonus( enchant_vals::mod value_type, int base_value ) const;
 
         int get_skill_value_add( const skill_id &value ) const;
         double get_skill_value_multiply( const skill_id &value ) const;
+        int get_skill_value_set( const skill_id &value ) const;
         int skill_mult_bonus( const skill_id &value_type, int base_value ) const;
         // attempts to add two like enchantments together.
         // if their conditions don't match, return false. else true.
@@ -324,6 +329,7 @@ class enchant_cache : public enchantment
 
         void set_has( enchantment::has value );
         void add_value_mult( enchant_vals::mod value, float mult_value );
+        void add_value_set( enchant_vals::mod value, int set_value );
         void add_hit_you( const fake_spell &sp );
         void add_hit_me( const fake_spell &sp );
         void load( const JsonObject &jo, std::string_view src = {},
@@ -338,10 +344,12 @@ class enchant_cache : public enchantment
         // values that get multiplied to the base value
         // multipliers add to each other instead of multiply against themselves
         std::map<enchant_vals::mod, double> values_multiply; // NOLINT(cata-serialize)
+        std::map<enchant_vals::mod, double> values_set; // NOLINT(cata-serialize)
 
         // the exact same as above, though specifically for skills
         std::map<skill_id, int> skill_values_add; // NOLINT(cata-serialize)
         std::map<skill_id, int> skill_values_multiply; // NOLINT(cata-serialize)
+        std::map<skill_id, int> skill_values_set; // NOLINT(cata-serialize)
 };
 
 template <typename E> struct enum_traits;

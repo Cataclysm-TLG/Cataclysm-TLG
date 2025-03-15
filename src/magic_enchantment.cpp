@@ -446,6 +446,8 @@ void enchantment::load( const JsonObject &jo, const std::string_view,
                 }
             }
             values_multiply.emplace( value, mult );
+            dbl_or_var set = get_dbl_or_var( value_obj, "set", false );
+            values_set.emplace( value, set );
         }
     }
 
@@ -468,6 +470,10 @@ void enchantment::load( const JsonObject &jo, const std::string_view,
                 }
                 skill_values_multiply.emplace( value, mult );
             }
+            if( value_obj.has_member( "set" ) ) {
+                dbl_or_var set = get_dbl_or_var( value_obj, "set", false );
+                skill_values_add.emplace( value, set );
+            }
         }
     }
 }
@@ -484,11 +490,15 @@ void enchant_cache::load( const JsonObject &jo, const std::string_view,
                 const int add = value_obj.has_int( "add" ) ? value_obj.get_int( "add", 0 ) : 0;
                 const double mult = value_obj.has_float( "multiply" ) ? value_obj.get_float( "multiply",
                                     0.0 ) : 0.0;
+                const int set = value_obj.has_int( "set" ) ? value_obj.get_int( "set", 0 ) : 0;
                 if( add != 0 ) {
                     values_add.emplace( value, add );
                 }
                 if( mult != 0.0 ) {
                     values_multiply.emplace( value, mult );
+                }
+                if( set != 0 ) {
+                    values_set.emplace( value, set );
                 }
             } catch( ... ) {
                 debugmsg( "A relic attempted to load invalid enchantment %s.  If you updated versions this may be a removed enchantment and will fix itself.",
@@ -573,6 +583,9 @@ void enchant_cache::serialize( JsonOut &jsout ) const
         if( get_value_multiply( enum_value ) != 0 ) {
             jsout.member( "multiply", get_value_multiply( enum_value ) );
         }
+        if( get_value_set( enum_value ) != 0 ) {
+            jsout.member( "set", get_value_set( enum_value ) );
+        }
         jsout.end_object();
     }
     jsout.end_array();
@@ -591,6 +604,9 @@ void enchant_cache::serialize( JsonOut &jsout ) const
         }
         if( get_skill_value_multiply( skid ) != 0 ) {
             jsout.member( "multiply", get_skill_value_multiply( skid ) );
+        }
+        if( get_skill_value_set( skid ) != 0 ) {
+            jsout.member( "set", get_skill_value_set( skid ) );
         }
         jsout.end_object();
     }
@@ -789,6 +805,9 @@ void enchant_cache::force_add( const enchantment &rhs )
         // so +10% and -10% will add to 0%
         values_multiply[pair_values.first] += pair_values.second.constant();
     }
+    for ( const std::pair<const enchant_vals::mod, dbl_or_var>& pair_values : rhs.values_set ) {
+        values_set[pair_values.first] = std::max( values_set[pair_values.first], pair_values.second.constant() );
+    }
 
     for( const std::pair<const skill_id, dbl_or_var> &pair_values :
          rhs.skill_values_add ) {
@@ -799,6 +818,9 @@ void enchant_cache::force_add( const enchantment &rhs )
         // values do not multiply against each other, they add.
         // so +10% and -10% will add to 0%
         skill_values_multiply[pair_values.first] += pair_values.second.constant();
+    }
+    for (const std::pair<const skill_id, dbl_or_var>& pair_values : rhs.skill_values_set) {
+        skill_values_set[pair_values.first] = std::max(skill_values_set[pair_values.first], static_cast<int>(pair_values.second.constant()));
     }
 
     hit_me_effect.insert( hit_me_effect.end(), rhs.hit_me_effect.begin(), rhs.hit_me_effect.end() );
@@ -844,6 +866,11 @@ void enchant_cache::add_value_mult( enchant_vals::mod value, float mult_value )
     values_multiply[value] = mult_value;
 }
 
+void enchant_cache::add_value_set( enchant_vals::mod value, int set_value )
+{
+    values_set[value] = set_value;
+}
+
 void enchant_cache::add_hit_me( const fake_spell &sp )
 {
     hit_me_effect.push_back( sp );
@@ -868,6 +895,16 @@ double enchantment::get_value_multiply( const enchant_vals::mod value, const Cha
 {
     const auto found = values_multiply.find( value );
     if( found == values_multiply.cend() ) {
+        return 0;
+    }
+    dialogue d( get_talker_for( guy ), nullptr );
+    return found->second.evaluate( d );
+}
+
+double enchantment::get_value_set( const enchant_vals::mod value, const Character &guy ) const
+{
+    const auto found = values_set.find( value );
+    if( found == values_set.cend() ) {
         return 0;
     }
     dialogue d( get_talker_for( guy ), nullptr );
@@ -910,10 +947,32 @@ double enchant_cache::get_skill_value_multiply( const skill_id &value ) const
     return found->second;
 }
 
+double enchant_cache::get_value_set( const enchant_vals::mod value ) const
+{
+    const auto found = values_set.find( value );
+    if( found == values_set.cend() ) {
+        return 0;
+    }
+    return found->second;
+}
+
+int enchant_cache::get_skill_value_set( const skill_id &value ) const
+{
+    const auto found = skill_values_set.find( value );
+    if( found == skill_values_set.cend() ) {
+        return 0;
+    }
+    return found->second;
+}
+
 double enchant_cache::modify_value( const enchant_vals::mod mod_val, double value ) const
 {
     value += get_value_add( mod_val );
     value *= 1.0 + get_value_multiply( mod_val );
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = found->second;
+    }
     return value;
 }
 
@@ -921,14 +980,20 @@ double enchant_cache::modify_value( const skill_id &mod_val, double value ) cons
 {
     value += get_skill_value_add( mod_val );
     value *= 1.0 + get_skill_value_multiply( mod_val );
+    value = get_skill_value_set( mod_val );
     return value;
 }
 
-units::energy enchant_cache::modify_value( const enchant_vals::mod mod_val,
-        units::energy value ) const
+units::energy enchant_cache::modify_value( const enchant_vals::mod mod_val, units::energy value ) const
 {
     value += units::from_millijoule<double>( get_value_add( mod_val ) );
     value *= 1.0 + get_value_multiply( mod_val );
+    // Explicitly use an iterator to check if mod_val is set
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = units::from_millijoule<double>( found->second );
+    }
+
     return value;
 }
 
@@ -937,6 +1002,10 @@ units::mass enchant_cache::modify_value( const enchant_vals::mod mod_val,
 {
     value += units::from_gram<double>( get_value_add( mod_val ) );
     value *= 1.0 + get_value_multiply( mod_val );
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = units::from_gram<double>( found->second );
+    }
     return value;
 }
 
@@ -945,6 +1014,10 @@ units::volume enchant_cache::modify_value( const enchant_vals::mod mod_val,
 {
     value += units::from_milliliter<double>( get_value_add( mod_val ) );
     value *= 1.0 + get_value_multiply( mod_val );
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = units::from_milliliter<double>( found->second );
+    }
     return value;
 }
 
@@ -953,6 +1026,10 @@ units::temperature_delta enchant_cache::modify_value( const enchant_vals::mod mo
 {
     value += units::from_celsius_delta<double>( get_value_add( mod_val ) );
     value *= 1 + get_value_multiply( mod_val );
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = units::from_celsius_delta<double>( found->second );
+    }
     return value;
 }
 
@@ -961,6 +1038,10 @@ time_duration enchant_cache::modify_value( const enchant_vals::mod mod_val,
 {
     value += time_duration::from_seconds<double>( get_value_add( mod_val ) );
     value *= 1.0 + get_value_multiply( mod_val );
+    std::map<enchant_vals::mod, double>::const_iterator found = values_set.find( mod_val );
+    if( found != values_set.end() ) {
+        value = time_duration::from_seconds<double>( found->second );
+    }
     return value;
 }
 
@@ -1082,8 +1163,10 @@ void enchant_cache::clear()
     //Fingers crossed!
     values_add.clear();
     values_multiply.clear();
+    values_set.clear();
     skill_values_add.clear();
     skill_values_multiply.clear();
+    skill_values_set.clear();
     hit_me_effect.clear();
     hit_you_effect.clear();
     ench_effects.clear();

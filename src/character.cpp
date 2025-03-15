@@ -2806,15 +2806,16 @@ float Character::get_vision_threshold( float light_level ) const
     }
 
     // bionic night vision and other old night vision flagged items
-    if( worn_with_flag( flag_GNV_EFFECT ) || has_flag( json_flag_NIGHT_VISION ) ) {
-        range += 10;
-    } else {
-        range = enchantment_cache->modify_value( enchant_vals::mod::NIGHT_VIS, range );
+    //if( worn_with_flag( flag_GNV_EFFECT ) || has_flag( json_flag_NIGHT_VISION ) ) {
+    //    range += 10;
+    //} else 
+    if( has_nv_goggles() ) {
+        range = std::max( 1.0f, enchantment_cache->modify_value( enchant_vals::mod::NIGHT_VIS, range ) );
+        return std::min( LIGHT_AMBIENT_LOW, threshold_for_range( range ) * dimming_from_light );
     }
 
     // Clamp range to 1+, so that we can always see where we are
     range = std::max( 1.0f, range * get_limb_score( limb_score_night_vis ) );
-
     return std::min( LIGHT_AMBIENT_LOW,
                      threshold_for_range( range ) * dimming_from_light );
 }
