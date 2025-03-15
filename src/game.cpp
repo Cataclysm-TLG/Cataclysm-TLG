@@ -12741,7 +12741,7 @@ void game::update_overmap_seen()
     for( const tripoint_abs_omt &p : points_in_radius( ompos, dist ) ) {
         const point_rel_omt delta = p.xy() - ompos.xy();
         const int h_squared = delta.x() * delta.x() + delta.y() * delta.y();
-        if( h_squared > dist_squared ) {
+        if( trigdist && h_squared > dist_squared ) {
             continue;
         }
         if( delta == point_rel_omt() ) {
@@ -12749,29 +12749,16 @@ void game::update_overmap_seen()
             // 2. Calculating multiplier would cause division by zero
             continue;
         }
-        // Scale overmap distances by the diagonality of the sight line.
-        point_rel_omt abs_delta = delta.abs();
-        int max_delta = std::max( abs_delta.x(), abs_delta.y() );
-        const float multiplier = std::sqrt( h_squared ) / max_delta;
+        // If circular distances are enabled, scale overmap distances by the diagonality of the sight line.
+        point abs_delta = delta.raw().abs();
+        int max_delta = std::max( abs_delta.x, abs_delta.y );
+        const float multiplier = trigdist ? std::sqrt( h_squared ) / max_delta : 1;
         const std::vector<tripoint_abs_omt> line = line_to( ompos, p );
         float sight_points = dist;
-        bool can_see = false;
-        for( auto it = line.begin(); it != line.end(); ++it ) {
+        for( auto it = line.begin();
+             it != line.end() && sight_points >= 0; ++it ) {
             const oter_id &ter = overmap_buffer.ter( *it );
-            const int see_cost = static_cast<int>( ter->get_see_cost() );
-
-            if( see_cost >= 5 ) {
-                break; // Solid wall blocks sight
-            }
-
-            sight_points -= see_cost * multiplier;
-            if( sight_points < 0 ) {
-                break;
-            }
-            if( *it == p ) {
-                can_see = true;
-                break;
-            }
+            sight_points -= static_cast<int>( ter->get_see_cost() ) * multiplier;
         }
         if( sight_points < 0 ) {
             continue;

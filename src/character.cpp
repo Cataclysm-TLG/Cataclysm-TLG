@@ -404,6 +404,7 @@ static const skill_id skill_melee( "melee" );
 static const skill_id skill_pistol( "pistol" );
 static const skill_id skill_speech( "speech" );
 static const skill_id skill_swimming( "swimming" );
+static const skill_id skill_survival( "survival" );
 static const skill_id skill_throw( "throw" );
 static const skill_id skill_unarmed( "unarmed" );
 
@@ -1447,7 +1448,7 @@ bool Character::overmap_los( const tripoint_abs_omt &omt, int sight_points ) con
 
 int Character::overmap_sight_range( float light_level ) const
 {
-    // How many map tiles I can given the light??
+    // How many map tiles can I see given the light?
     int sight = sight_range( light_level );
     // What are these doing???
     if( sight < SEEX ) {
@@ -1468,8 +1469,8 @@ int Character::overmap_sight_range( float light_level ) const
 
     // If sight got changed due OVERMAP_SIGHT, process the rest of the modifiers, otherwise skip them
     if( sight > 0 ) {
-        // The higher your perception, the farther you can see.
-        sight += static_cast<int>( get_per() / 2 );
+        // The higher your perception and survival, the farther you can see.
+        sight += static_cast<int>( get_per() / 2 + get_skill_level( skill_survival ) / 3 );
     }
 
     if( sight == 0 ) {
@@ -1500,7 +1501,7 @@ int Character::overmap_modified_sight_range( float light_level ) const
     if( sight == 0 ) {
         return 0;
     }
-
+    
     return std::max( sight, 3 );
 }
 
