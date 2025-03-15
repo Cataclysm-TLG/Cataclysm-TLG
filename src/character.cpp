@@ -1494,7 +1494,16 @@ int Character::overmap_modified_sight_range( float light_level ) const
                            ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ||
                            get_map().veh_at( pos_bub() ).avail_part_with_feature( "ENHANCED_VISION" ).has_value();
 
-    if( has_optic ) {
+    const bool has_scoped_gun = cache_has_item_with( "is_gun", &item::is_gun, [&]( const item & gun ) {
+        for( const item *mod : gun.gunmods() ) {
+            if( mod->has_flag( flag_ZOOM ) ) {
+                return true;
+            }
+        }
+        return false;
+    } );
+
+    if( has_optic || has_scoped_gun ) {
         sight *= 2;
     }
 
