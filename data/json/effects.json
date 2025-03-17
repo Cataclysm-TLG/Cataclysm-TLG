@@ -5146,5 +5146,12 @@
     "show_in_info": true,
     "max_duration": "100000 s",
     "desc": [ "Monster effect used to enable a weakpoint.  This is a bug if you have it." ]
+  },
+  {
+    "type": "effect_type",
+    "id": "aimed_60mm",
+    "max_duration": "3 m",
+    "name": [ "" ],
+    "desc": [ "" ]
   }
 ]
