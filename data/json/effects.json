@@ -684,7 +684,7 @@
     "type": "effect_type",
     "id": "blind",
     "name": [ "Blind" ],
-    "desc": [ "Range of Sight: 0.  You cannot see anything." ],
+    "desc": [ "You cannot see anything." ],
     "removes_effects": [ "glare", "snow_glare", "darkness" ],
     "apply_message": "You're blinded!",
     "remove_message": "Your sight returns!",
@@ -1937,7 +1937,7 @@
     "rating": "bad",
     "miss_messages": [ [ "Your eyes burn from the tear gas.", 2 ] ],
     "harmful_cough": true,
-    "max_duration": "30 m",
+    "max_duration": "20 m",
     "base_mods": { "str_mod": [ -2 ], "dex_mod": [ -2 ], "per_mod": [ -5 ], "speed_mod": [ -10 ], "cough_chance": [ 5 ] },
     "limb_score_mods": [
       { "limb_score": "vision", "modifier": 0.5 },

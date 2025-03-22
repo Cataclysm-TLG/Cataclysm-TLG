@@ -136,6 +136,7 @@ extern const flag_id flag_FIN;
 extern const flag_id flag_FIRE;
 extern const flag_id flag_FIRESTARTER;
 extern const flag_id flag_FIREWOOD;
+extern const flag_id flag_FIRE_SAFE_EXPLOSIVE;
 extern const flag_id flag_FIRE_100;
 extern const flag_id flag_FIRE_20;
 extern const flag_id flag_FIRE_50;

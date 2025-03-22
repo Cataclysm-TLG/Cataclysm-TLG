@@ -1946,12 +1946,13 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
         // Even though it doesn't cause direct physical damage to it
         // FIXME: Hardcoded damage type
         if( outermost && elem.type == STATIC( damage_type_id( "heat" ) ) && elem.amount >= 1.0f ) {
-            // TODO: Different fire intensity values based on damage
-            fire_data frd{ 2 };
+            int fire_intensity = std::clamp( static_cast<int>( std::round(elem.amount / 4 ) ), 1, 3 );
+            fire_data frd{ fire_intensity };
             destroy = !armor.has_flag( flag_INTEGRATED ) && armor.burn( frd );
             int fuel = roll_remainder( frd.fuel_produced );
+            add_msg( _( "fuel %s" ), fuel );
             // Don't add fire duration to people who are already on fire, or they'll never go out.
-            if( fuel > 0 && !guy.has_effect( effect_onfire, bp ) ) {
+            if( fuel > 0 && !guy.has_effect( effect_onfire, bp ) && rng( 0, 3 ) <= fuel ) {
                 guy.add_effect( effect_onfire, time_duration::from_turns( fuel * 5 ), bp, false, 0, false,
                                 true );
             }
@@ -2088,7 +2089,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                             fire_data frd{ fire_intensity };
                             destroy = !armor.has_flag( flag_INTEGRATED ) && armor.burn( frd );
                             int fuel = roll_remainder( frd.fuel_produced );
-                            if( fuel > 0 && !guy.has_effect( effect_onfire, bp ) ) {
+                            add_msg( _( "fuel %s" ), fuel );
+                            if( fuel > 0 && !guy.has_effect( effect_onfire, bp ) && rng( 0, 3 ) <= fuel ) {
                                 guy.add_effect( effect_onfire, time_duration::from_turns( fuel * 5 ), bp, false, 0, false,
                                                 true );
                             }

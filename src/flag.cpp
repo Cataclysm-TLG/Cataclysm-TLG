@@ -128,6 +128,7 @@ const flag_id flag_FIN( "FIN" );
 const flag_id flag_FIRE( "FIRE" );
 const flag_id flag_FIRESTARTER( "FIRESTARTER" );
 const flag_id flag_FIREWOOD( "FIREWOOD" );
+const flag_id flag_FIRE_SAFE_EXPLOSIVE( "FIRE_SAFE_EXPLOSIVE" );
 const flag_id flag_FIRE_100( "FIRE_100" );
 const flag_id flag_FIRE_20( "FIRE_20" );
 const flag_id flag_FIRE_50( "FIRE_50" );

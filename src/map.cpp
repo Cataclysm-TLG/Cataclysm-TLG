@@ -4847,7 +4847,7 @@ bool map::hit_with_acid( const tripoint &p )
     return true;
 }
 
-// returns true if terrain stops fire
+// Returns true if terrain stops fire. TODO: Old hardcoded monattack, defunct?
 bool map::hit_with_fire( const tripoint &p )
 {
     if( passable( p ) ) {
@@ -4857,7 +4857,7 @@ bool map::hit_with_fire( const tripoint &p )
     // non passable but flammable terrain, set it on fire
     if( has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ||
         has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ) {
-        add_field( p, fd_fire, 3 );
+        add_field( p, fd_fire, rng( 1, 3 ) );
     }
     return true;
 }
@@ -5560,7 +5560,7 @@ item &map::add_item( const tripoint &p, item new_item, int copies )
     }
 
     if( new_item.has_flag( flag_ACT_IN_FIRE ) && get_field( p, fd_fire ) != nullptr ) {
-        if( new_item.has_flag( flag_BOMB ) && new_item.is_transformable() ) {
+        if( new_item.has_flag( flag_BOMB ) && !new_item.has_flag( flag_FIRE_SAFE_EXPLOSIVE ) && new_item.is_transformable() ) {
             //Convert a bomb item into its transformable version, e.g. incendiary grenade -> active incendiary grenade
             new_item.convert( dynamic_cast<const iuse_transform *>
                               ( new_item.type->get_use( "transform" )->get_actor_ptr() )->target );

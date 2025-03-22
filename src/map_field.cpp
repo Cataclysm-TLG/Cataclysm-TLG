@@ -936,7 +936,8 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
     maptile &map_tile = pd.map_tile;
     const oter_id om_ter = pd.om_ter;
 
-    cur.set_field_age( std::max( -24_hours, cur.get_field_age() ) );
+    // Cap raging fires at one hour. They can refuel or be fed by neighbors, so this is mostly a failsafe.
+    cur.set_field_age( std::max( -560_minutes, cur.get_field_age() ) );
     // Entire objects for ter/frn for flags
     bool sheltered = g->is_sheltered( p );
     weather_manager &weather = get_weather();
@@ -1029,8 +1030,12 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
     }
     if( can_burn ) {
         if( ter.has_flag( ter_furn_flag::TFLAG_SWIMMABLE ) ) {
-            // Flames die quickly on water
+            // Flames die quickly on water.
             cur.set_field_age( cur.get_field_age() + 4_minutes );
+        }
+        if( one_in( 1000 ) ) {
+            // Uncontained fires have a habit of randomly burning out.
+            cur.set_field_age( cur.get_field_age() + 50_minutes );
         }
 
         // Consume the terrain we're on
@@ -1082,8 +1087,7 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
             time_added += 1_turns * ( 5 - cur.get_field_intensity() );
             smoke += 2;
             smoke += static_cast<int>( windpower / 5 );
-            if( cur.get_field_intensity() > 1 &&
-                one_in( 200 - cur.get_field_intensity() * 50 ) ) {
+            if( cur.get_field_intensity() > 1 && one_in( 200 - cur.get_field_intensity() * 50 ) ) {
                 here.furn_set( p, furn_f_ash );
                 here.add_item_or_charges( p, item( "ash" ) );
             }
@@ -1159,7 +1163,7 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
 
     // If the flames are big, they contribute to adjacent flames
     if( can_spread ) {
-        if( cur.get_field_intensity() > 1 && one_in( 3 ) ) {
+        if( cur.get_field_intensity() > 1 && one_in( 36 / cur.get_field_intensity() ) ) {
             // Basically: Scan around for a spot,
             // if there is more fire there, make it bigger and give it some fuel.
             // This is how big fires spend their excess age:
@@ -1490,6 +1494,7 @@ void map::player_in_field( Character &you )
         }
         if( ft == fd_fire ) {
             // Heatsink or suit prevents ALL fire damage.
+            // TODO: Why would a heatsink stop open flames from cooking your skin?
             if( !you.has_flag( json_flag_HEATSINK ) && !you.is_wearing( itype_rm13_armor_on ) ) {
 
                 // To modify power of a field based on... whatever is relevant for the effect.
@@ -1527,7 +1532,7 @@ void map::player_in_field( Character &you )
                         }
                     };
 
-                    const int burn_min = adjusted_intensity;
+                    const int burn_min = std::min( 1, adjusted_intensity );
                     const int burn_max = 3 * adjusted_intensity + 3;
                     std::list<bodypart_id> parts_burned;
                     int msg_num = adjusted_intensity - 1;
@@ -1576,9 +1581,9 @@ void map::player_in_field( Character &you )
             if( ( cur.get_field_intensity() > 1 || !one_in( 3 ) ) && ( !inside || one_in( 3 ) ) ) {
                 you.add_env_effect( effect_teargas, bodypart_id( "mouth" ), 5, 20_seconds );
             }
-            if( cur.get_field_intensity() > 1 && ( !inside || one_in( 3 ) ) ) {
-                you.add_env_effect( effect_blind, bodypart_id( "eyes" ), cur.get_field_intensity() * 2,
-                                    10_seconds );
+            // Prevent stacking ridiculous amounts of blindness.
+            if( cur.get_field_intensity() > 1 && ( !inside || one_in( 3 ) ) && ( !you.has_effect( effect_blind ) || you.get_effect_dur( effect_blind ) < 30_seconds ) ) {
+                you.add_env_effect( effect_blind, bodypart_id( "eyes" ), 1, cur.get_field_intensity() * 2_seconds );
             }
         }
         if( ft == fd_fungal_haze ) {
@@ -1881,14 +1886,14 @@ void map::monster_in_field( monster &z )
         if( cur_field_type == fd_tear_gas ) {
             if( z.made_of_any( Creature::cmat_fleshnveg ) && !z.has_flag( mon_flag_NO_BREATHE ) ) {
                 if( cur.get_field_intensity() == 3 ) {
-                    z.add_effect( effect_stunned, rng( 1_minutes, 2_minutes ) );
+                    z.add_effect( effect_stunned, rng( 8_turns, 15_turns ) );
                 } else if( cur.get_field_intensity() == 2 ) {
-                    z.add_effect( effect_stunned, rng( 5_turns, 10_turns ) );
+                    z.add_effect( effect_stunned, rng( 3_turns, 10_turns ) );
                 } else {
                     z.add_effect( effect_stunned, rng( 1_turns, 5_turns ) );
                 }
-                if( z.has_flag( mon_flag_SEES ) ) {
-                    z.add_effect( effect_blind, cur.get_field_intensity() * 8_turns );
+                if( z.has_flag( mon_flag_SEES ) && !z.has_effect( effect_blind ) ) {
+                    z.add_effect( effect_blind, cur.get_field_intensity() * 5_turns );
                 }
             }
 

@@ -411,6 +411,11 @@
     "info": "This item can serve as a firewood."
   },
   {
+    "id": "FIRE_SAFE_EXPLOSIVE",
+    "type": "json_flag",
+    "//": "This explosive is stable and won't blow up if lit on fire."
+  },
+  {
     "id": "FIX_FARSIGHT",
     "type": "json_flag",
     "info": "This gear <good>corrects farsightedness</good>."
