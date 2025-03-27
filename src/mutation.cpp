@@ -317,17 +317,14 @@ void Character::set_mutation_unsafe( const trait_id &trait, const mutation_varia
     } else {
         update_cached_mutations();
     }
+    reset();
+    enchantment_cache->activate_passive( *this );
 }
 
 void Character::do_mutation_updates()
 {
     recalc_sight_limits();
     calc_encumbrance();
-
-    // If the stamina is higher than the max (Languorous), set it back to max
-    if( get_stamina() > get_stamina_max() ) {
-        set_stamina( get_stamina_max() );
-    }
 }
 
 void Character::set_mutations( const std::vector<trait_id> &traits )
@@ -375,8 +372,12 @@ void Character::unset_mutation( const trait_id &trait_ )
         cached_mutations.erase( trait_ );
         if( !mut.enchantments.empty() ) {
             recalculate_enchantment_cache();
+        } else {
+            update_cached_mutations();
         }
         mutation_loss_effect( trait );
+        reset();
+        enchantment_cache->activate_passive( *this );
     }
 }
 
@@ -560,7 +561,6 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
     if( mut == trait_GLASSJAW ) {
         recalc_hp();
     }
-    reset();
     trait_flag_cache.clear();
     recalculate_size();
 
@@ -646,7 +646,6 @@ void Character::mutation_loss_effect( const trait_id &mut )
     if( mut == trait_GLASSJAW ) {
         recalc_hp();
     }
-    reset();
     trait_flag_cache.clear();
     recalculate_size();
 
