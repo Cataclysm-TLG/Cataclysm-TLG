@@ -13,7 +13,7 @@
     "symbol": "!",
     "color": "yellow",
     "container": "bottle_plastic_pill_supplement",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You pop a melatonin tablet.",
@@ -46,7 +46,7 @@
     "fun": 10,
     "addiction_potential": 10,
     "addiction_type": "amphetamine",
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take some %s." }
   },
   {
@@ -86,7 +86,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "use_action": [ "ANTIBIOTIC" ],
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ]
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ]
   },
   {
     "id": "antifungal",
@@ -103,7 +103,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "use_action": [ "ANTIFUNGAL" ],
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ]
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ]
   },
   {
     "id": "antiparasitic",
@@ -121,7 +121,7 @@
     "container": "bottle_plastic_pill_prescription",
     "healthy": -5,
     "use_action": [ "ANTIPARASITIC" ],
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ]
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ]
   },
   {
     "id": "aspirin",
@@ -138,7 +138,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some aspirin.",
@@ -161,7 +161,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some ibuprofen.",
@@ -184,7 +184,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some naproxen.",
@@ -207,7 +207,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some acetaminophen.",
@@ -229,7 +229,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_painkiller",
     "healthy": -1,
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take some metaprolol." },
     "vitamins": [ [ "vit_betablocker", 864 ] ]
   },
@@ -247,7 +247,7 @@
     "symbol": "!",
     "color": "white",
     "container": "bottle_plastic_small",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "heal", "disinfectant_power": 4, "bite": 0.95, "move_cost": 2000 }
   },
   {
@@ -284,7 +284,7 @@
     "symbol": "!",
     "color": "cyan",
     "container": "bottle_plastic_pill_supplement",
-    "flags": [ "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "WATER_DISSOLVE", "NO_TEMP" ],
     "stim": 12,
     "addiction_potential": 3,
     "addiction_type": "caffeine",
@@ -372,7 +372,7 @@
     "fun": 5,
     "addiction_potential": 50,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "use_action": [ "SMOKING" ]
   },
   {
@@ -392,7 +392,7 @@
     "fun": 15,
     "addiction_potential": 60,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "use_action": [ "SMOKING" ]
   },
   {
@@ -433,7 +433,7 @@
     "container": "bottle_plastic_pill_painkiller",
     "stim": -2,
     "fun": 10,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 10,
     "vitamins": [ [ "vit_mme", 450 ] ],
     "addiction_type": "opioid",
@@ -462,7 +462,7 @@
     "fun": 25,
     "addiction_potential": 50,
     "addiction_type": "cocaine",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": [ "COKE" ]
   },
   {
@@ -877,7 +877,7 @@
     "fun": 50,
     "addiction_potential": 80,
     "addiction_type": "crack",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You smoke your crack rocks.  Mother would be proud.",
@@ -962,7 +962,7 @@
     "stim": -8,
     "healthy": -1,
     "fun": 8,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 20,
     "addiction_type": "diazepam",
     "use_action": [ "ANTICONVULSANT" ]
@@ -1147,7 +1147,7 @@
     "fun": 5,
     "addiction_potential": 50,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": [ "SMOKING" ]
   },
   {
@@ -1171,7 +1171,7 @@
     "//": "Heroin due to being cut is at best 50% its weight equivalent in morphine.  Injectables are triple the MME per weight per Venera.",
     "addiction_potential": 75,
     "addiction_type": "opioid",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You shoot up.",
@@ -1197,7 +1197,7 @@
     "symbol": "!",
     "color": "white",
     "container": "bottle_plastic_pill_supplement",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take some potassium iodide.",
@@ -1221,7 +1221,7 @@
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
-    "flags": [ "NO_INGEST", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": [ "SMOKING" ]
   },
   {
@@ -1239,7 +1239,7 @@
     "color": "pink",
     "stim": 20,
     "fun": 25,
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You eat the pink tablet.",
@@ -1266,7 +1266,7 @@
     "fun": 30,
     "addiction_potential": 50,
     "addiction_type": "amphetamine",
-    "flags": [ "NO_INGEST", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": [ "METH" ]
   },
   {
@@ -1290,7 +1290,7 @@
     "fun": 25,
     "addiction_potential": 40,
     "addiction_type": "amphetamine",
-    "flags": [ "NO_INGEST", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": [ "METH" ]
   },
   {
@@ -1424,7 +1424,7 @@
     "color": "light_red",
     "container": "bottle_plastic_pill_supplement",
     "stim": -6,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 4,
     "addiction_type": "sleeping pill",
     "use_action": {
@@ -1451,7 +1451,7 @@
     "healthy": -1,
     "stim": -4,
     "fun": 18,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 16,
     "vitamins": [ [ "vit_mme", 2250 ] ],
     "addiction_type": "opioid",
@@ -1486,7 +1486,7 @@
     ],
     "stim": -8,
     "fun": 5,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 40,
     "addiction_type": "sleeping pill",
     "use_action": {
@@ -1603,7 +1603,7 @@
     "variant_type": "drug",
     "variants": [ { "id": "prozac", "name": { "str_sp": "Prozac" }, "append": true, "description": "Its generic name is fluoxetine." } ],
     "stim": -5,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 5,
     "addiction_type": "amphetamine",
     "use_action": [ "PROZAC" ]
@@ -1619,7 +1619,7 @@
     "price": "15 cent",
     "price_postapoc": "1 USD",
     "material": [ "drug_filler" ],
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "symbol": "!",
     "color": "blue",
     "container": "bottle_plastic_pill_supplement",
@@ -1643,7 +1643,7 @@
     "symbol": "!",
     "color": "light_gray",
     "container": "bag_plastic_small",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "heal", "bleed": 20, "move_cost": 2000 }
   },
   {
@@ -1689,7 +1689,7 @@
       }
     ],
     "stim": -30,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": [ "THORAZINE" ]
   },
   {
@@ -1730,7 +1730,7 @@
     "fun": 5,
     "addiction_potential": 50,
     "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You smoke some tobacco.",
@@ -1782,7 +1782,7 @@
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take the %s.",
@@ -1802,8 +1802,8 @@
     "weight": "1 g",
     "volume": "5 ml",
     "price": "20 cent",
-    "price_postapoc": "50 cent",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "price_postapoc": "9 cent",
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
@@ -1825,7 +1825,7 @@
     "symbol": "!",
     "color": "white",
     "looks_like": "calcium_tablet",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 24 ] ] },
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
@@ -1845,7 +1845,7 @@
     "symbol": "!",
     "color": "yellow",
     "looks_like": "calcium_tablet",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 23 ] ] },
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
@@ -1860,7 +1860,7 @@
     "volume": "5 ml",
     "price": "7 cent",
     "price_postapoc": "15 cent",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "symbol": "!",
     "color": "magenta",
     "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "vitC", 556 ] ] }
@@ -1875,7 +1875,7 @@
     "price_postapoc": "1 USD",
     "fun": 4,
     "container": "null",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "volume": "10 ml"
   },
   {
@@ -1893,7 +1893,7 @@
     "symbol": "!",
     "color": "white",
     "container": "bottle_plastic_pill_supplement",
-    "flags": [ "EDIBLE_FROZEN" ],
+    "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You swallow the %s.  You wait in anticipation of its effects." },
     "snippet_category": [
       {
@@ -1934,7 +1934,7 @@
     "price_postapoc": "75 cent",
     "symbol": "!",
     "color": "magenta",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE" ],
+    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject some iron.",
@@ -1960,7 +1960,7 @@
     "fun": 15,
     "addiction_potential": 5,
     "material": [ "vegetable" ],
-    "flags": [ "NO_INGEST", "EDIBLE_FROZEN" ],
+    "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You smoke some weed.  Good stuff, man!",
@@ -1999,7 +1999,7 @@
     "stim": -4,
     "healthy": -2,
     "fun": 20,
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "EDIBLE_FROZEN" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "addiction_potential": 40,
     "addiction_type": "sleeping pill",
     "use_action": [ "XANAX" ]
@@ -2020,7 +2020,7 @@
     "container": "bottle_plastic_pill_prescription",
     "healthy": -2,
     "use_action": [ "WEAK_ANTIBIOTIC" ],
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ]
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ]
   },
   {
     "id": "pepto",
@@ -2061,7 +2061,7 @@
     "symbol": "!",
     "color": "white",
     "container": "bottle_plastic_small",
-    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN", "NPC_SAFE" ],
+    "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NPC_SAFE", "NO_TEMP" ],
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You take an antacid tablet.",
@@ -2089,7 +2089,7 @@
       "activation_message": "You feel AMAZING!",
       "effects": [ { "id": "panacea", "duration": "1 m" }, { "id": "cureall" } ]
     },
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ]
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ]
   },
   {
     "id": "cattail_jelly",
@@ -2132,7 +2132,7 @@
     "color": "white",
     "container": "bottle_plastic_pill_prescription",
     "healthy": -10,
-    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
+    "flags": [ "NPC_SAFE", "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "use_action": { "type": "STRONG_ANTIBIOTIC" }
   },
   {
