@@ -8,9 +8,6 @@
 #include <variant>
 #include <vector>
 
-#include "dialogue_helpers.h"
-
-class math_exp;
 struct const_dialogue;
 struct diag_value;
 using diag_array = std::vector<diag_value>;
@@ -27,7 +24,7 @@ using is_variant_type = is_one_of<T, V>;
 // *INDENT-ON*
 
 struct diag_value {
-    using impl_t = std::variant<std::monostate, double, std::string, var_info, diag_array>;
+    using impl_t = std::variant<std::monostate, double, std::string, diag_array>;
 
     diag_value() = default;
 
@@ -53,7 +50,6 @@ struct diag_value {
 
     bool is_dbl() const;
     bool is_str() const;
-    bool is_var() const;
     bool is_array() const;
     bool is_empty() const;
 
@@ -63,13 +59,11 @@ struct diag_value {
     double dbl() const;
     std::string_view str() const;
     diag_array const &array() const;
-    var_info var() const;
 
     // Evaluate and possibly convert the parameter to this type.
     // These throw a math::runtime_error for failed conversions
     double dbl( const_dialogue const &d ) const;
     std::string str( const_dialogue const &d ) const;
-    var_info var( const_dialogue const &/* d */ ) const;
     diag_array const &array( const_dialogue const &/* d */ ) const;
 
     impl_t data;
