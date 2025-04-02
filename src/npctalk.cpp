@@ -6057,7 +6057,8 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
                              is_alpha_loc, is_beta_loc, false_eocs );
 
         for( const auto &val : context ) {
-            newDialog.set_value( val.first, val.second.evaluate( d ) );
+            // FXIXME: typed variables
+            newDialog.set_value( val.first, diag_value::legacy_value{ val.second.evaluate( d, true ) } );
         }
 
         int i = 0;
@@ -6236,7 +6237,8 @@ talk_effect_fun_t::func f_run_eoc_selector( const JsonObject &jo, std::string_vi
         }
         if( !context.empty() ) {
             for( const auto &val : context[contextIndex] ) {
-                newDialog.set_value( val.first, val.second.evaluate( d ) );
+                // FIXME: typed variables
+                newDialog.set_value( val.first, diag_value::legacy_value{ val.second.evaluate( d, true ) } );
             }
         }
 
