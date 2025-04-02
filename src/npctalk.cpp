@@ -5948,56 +5948,45 @@ void run_eoc_once( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue new
     };
 }
 
-
-dialogue generate_new_dialogue( dialogue &d, bool has_alpha_var, bool has_beta_var,
-                                const str_or_var &alpha_var, const str_or_var &beta_var, bool is_alpha_loc, bool is_beta_loc,
-                                const std::vector<effect_on_condition_id> &false_eocs )
+std::unique_ptr<talker> get_talker( dialogue const &d, std::optional<str_or_var> const &var,
+                                    std::optional<var_info> loc, bool parent_beta )
 {
-    // to generate new dialogue from existing one, and possibly swap talkers
-
-    dialogue newDialog( d );
-
-    if( has_alpha_var || has_beta_var ) {
-        bool alpha_invalid = false; // whether alpha talker exists in the game
-        bool beta_invalid = false; // whether beta talker exists in the game
-        auto get_talker = [&d]( const str_or_var & var, bool is_loc, bool & invalid ) {
-            Creature *guy;
-            std::string str = var.evaluate( d );
-            if( is_loc ) {
-                tripoint_abs_ms pos = tripoint_abs_ms( tripoint::from_string( str ) );
-                guy = get_creature_tracker().creature_at( pos );
-                if( guy == nullptr ) {
-                    invalid = true;
-                }
-            } else if( str.empty() ) {
-                guy = nullptr;
-            } else if( str == "u" ) {
-                guy = d.has_alpha ? d.actor( false )->get_creature() : nullptr;
-            } else if( str == "npc" ) {
-                guy = d.has_beta ? d.actor( true )->get_creature() : nullptr;
-            } else if( str == "avatar" ) {
-                guy = &get_avatar();
-            } else {
-                guy = get_character_from_id( str, g.get() );
-                if( guy == nullptr ) {
-                    invalid = true;
-                }
-            }
-            return guy;
-        };
-
-        Creature *alpha_guy = get_talker( alpha_var, is_alpha_loc, alpha_invalid );
-        Creature *beta_guy = get_talker( beta_var, is_beta_loc, beta_invalid );
-        if( alpha_invalid || beta_invalid || ( alpha_guy == nullptr && beta_guy == nullptr ) ) {
-            run_eoc_vector( false_eocs, d );
-        } else {
-            newDialog = dialogue( ( alpha_guy == nullptr ) ? nullptr : get_talker_for( alpha_guy ),
-                                  ( beta_guy == nullptr ) ? nullptr : get_talker_for( beta_guy ),
-                                  d.get_conditionals(),
-                                  d.get_context() );
+    if( !var && !loc ) {
+        if( d.has_actor( parent_beta ) ) {
+            return d.actor( parent_beta )->clone();
         }
-    };
-    return newDialog;
+        return {};
+    }
+
+    Creature *crit = nullptr;
+
+    if( var ) {
+        std::string str = var->evaluate( d );
+
+        if( str.empty() ) {
+            return {};
+        } else if( str == "u" && d.has_alpha ) {
+            return  d.actor( false )->clone();
+        } else if( str == "npc" && d.has_beta ) {
+            return d.actor( true )->clone();
+        } else if( str == "avatar" ) {
+            return get_talker_for( get_avatar() );
+        } else {
+            crit = get_character_from_id( str, g.get() );
+        }
+
+    } else if( loc ) {
+        diag_value const *dv = read_var_value( *loc, d );
+        tripoint_abs_ms pos = dv ? dv->tripoint() : tripoint_abs_ms{};
+        crit = get_creature_tracker().creature_at( pos );
+    }
+
+    if( crit != nullptr ) {
+        return get_talker_for( *crit );
+    }
+
+    debugmsg( R"(run_eocs error: no valid talker\n%s)", d.get_callstack() );
+    return {};
 }
 
 talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view member,
@@ -6029,16 +6018,13 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
         }
     }
 
-    str_or_var alpha_var;
-    str_or_var beta_var;
-    bool is_alpha_loc = false;
-    bool is_beta_loc = false;
-    bool has_alpha_var = true;
-    bool has_beta_var = true;
+    std::optional<str_or_var> alpha_var;
+    std::optional<var_info> alpha_loc;
+    std::optional<str_or_var> beta_var;
+    std::optional<var_info> beta_loc;
 
     if( jo.has_member( "beta_loc" ) ) {
-        beta_var = get_str_or_var( jo.get_member( "beta_loc" ), "beta_loc", false, "npc" );
-        is_beta_loc = true;
+        beta_loc = read_var_info( jo.get_object( "beta_loc" ) );
     } else if( jo.has_member( "beta_talker" ) ) {
         beta_var = get_str_or_var( jo.get_member( "beta_talker" ), "beta_talker", false, "npc" );
     } else {
@@ -6047,9 +6033,7 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
     }
 
     if( jo.has_member( "alpha_loc" ) ) {
-        alpha_var = get_str_or_var( jo.get_member( "alpha_loc" ), "alpha_loc", has_beta_var,
-                                    "u" ); // alpha_talker is mandatory if beta_talker exists
-        is_alpha_loc = true;
+        alpha_loc = read_var_info( jo.get_object( "alpha_loc" ) );
     } else if( jo.has_member( "alpha_talker" ) ) {
         alpha_var = get_str_or_var( jo.get_member( "alpha_talker" ), "alpha_talker", false, "u" );
     } else {
@@ -6059,8 +6043,15 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
 
     std::vector<effect_on_condition_id> false_eocs = load_eoc_vector( jo, "false_eocs", src );
 
-    return [eocs, cond, has_cond, iterations, dov_time, random_time, alpha_var, beta_var, is_alpha_loc,
-          is_beta_loc, has_alpha_var, has_beta_var, false_eocs, context]( dialogue & d ) {
+    return [eocs, cond, iterations, dov_time, random_time, alpha_var, beta_var, alpha_loc,
+          beta_loc, false_eocs, context]( dialogue & d ) {
+
+        std::unique_ptr<talker> alpha = get_talker( d, alpha_var, alpha_loc, false );
+        std::unique_ptr<talker> beta = get_talker( d, beta_var, beta_loc, true );
+        if( !alpha && !beta ) {
+            run_eoc_vector( false_eocs, d );
+            return;
+        }
 
         dialogue newDialog = generate_new_dialogue( d, has_alpha_var, has_beta_var, alpha_var, beta_var,
                              is_alpha_loc, is_beta_loc, false_eocs );
@@ -6563,7 +6554,8 @@ talk_effect_fun_t::func f_set_talker( const JsonObject &jo, std::string_view mem
     std::string var_name = var.name;
     return [is_npc, var, type, var_name]( dialogue & d ) {
         int id = d.actor( is_npc )->getID().get_value();
-        write_var_value( type, var_name, &d, id );
+        // stringify for `run_eocs` - see get_talker() above
+        write_var_value( type, var_name, &d, std::to_string( id ) );
     };
 }
 
