@@ -112,7 +112,7 @@
   {
     "abstract": "abstract_efile_exclusive",
     "copy-from": "abstract_efile",
-    "type": "ITEM",
+    "type": "GENERIC",
     "symbol": "o",
     "name": { "str": "abstract e-only electronic file", "//~": "NO_I18N" },
     "description": { "str": "abstract e-only electronic file", "//~": "NO_I18N" },
@@ -133,7 +133,7 @@
   {
     "abstract": "abstract_efile_exclusive_copiable",
     "copy-from": "abstract_efile",
-    "type": "ITEM",
+    "type": "GENERIC",
     "symbol": "o",
     "name": { "str": "abstract copiable electronic file", "//~": "NO_I18N" },
     "description": { "str": "abstract copiable electronic file", "//~": "NO_I18N" },
