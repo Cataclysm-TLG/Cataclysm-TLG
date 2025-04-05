@@ -36,7 +36,7 @@
       { "id": "bite_humanoid", "cooldown": 5 }
     ],
     "death_drops": "mon_zombie_magnetic_death_drops",
-    "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_MAGNETIC_UPGRADE" },
+    "upgrades": { "half_life": 120, "into_group": "GROUP_ZOMBIE_MAGNETIC_UPGRADE" },
     "flags": [
       "SEES",
       "HEARS",
@@ -90,7 +90,7 @@
       { "id": "bite_humanoid", "cooldown": 5 }
     ],
     "death_drops": "mon_zombie_magnetic_death_drops",
-    "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_MAGNETOKINETIC_UPGRADE" },
+    "upgrades": { "half_life": 120, "into_group": "GROUP_ZOMBIE_MAGNETOKINETIC_UPGRADE" },
     "flags": [
       "SEES",
       "HEARS",
@@ -137,7 +137,7 @@
     "attack_effs": [ { "id": "tetanus", "duration": 300, "chance": 10 } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched_rust",
-    "upgrades": { "half_life": 30, "into_group": "GROUP_FERROUS_UPGRADE" },
+    "upgrades": { "half_life": 120, "into_group": "GROUP_FERROUS_UPGRADE" },
     "flags": [
       "SEES",
       "HEARS",
