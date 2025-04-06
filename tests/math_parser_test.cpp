@@ -313,6 +313,7 @@ TEST_CASE( "math_parser_dialogue_integration", "[math_parser]" )
         CHECK_FALSE( testexp.parse( "u_val( 3 )" ) ); // this function doesn't support numbers
         CHECK_FALSE( testexp.parse( "u_val(myval)" ) ); // this function doesn't support variables
         CHECK_FALSE( testexp.parse( "val( 'stamina' )" ) ); // invalid scope for this function
+        CHECK_FALSE( testexp.parse( "_test_str_len_([]) = 2" ) ); // dialogue function cannot assign
     } );
     CHECK( testexp.parse( "u_val('stamina')" ) );
     CHECK( testexp.eval( d ) == get_avatar().get_stamina() );
@@ -349,4 +350,5 @@ TEST_CASE( "math_parser_dialogue_integration", "[math_parser]" )
     CHECK( testexp.parse( "u_val('stamina') = 459" ) );
     testexp.eval( d );
     CHECK( get_avatar().get_stamina() == 459 );
+
 }
