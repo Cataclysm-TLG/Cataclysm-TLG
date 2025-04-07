@@ -1473,6 +1473,8 @@ class read_inventory_preset: public pickup_inventory_preset
                   !denials.empty() &&
                   !loc->type->can_use( "learn_spell" ) ) ) {
                 return denials.front();
+            } else if( loc.is_efile() ) {
+                return std::string();
             }
             return pickup_inventory_preset::get_denial( loc.is_efile() ? loc.parent_item() : loc );
         }
