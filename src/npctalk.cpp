@@ -3554,8 +3554,10 @@ talk_effect_fun_t::func f_remove_var( const JsonObject &jo, std::string_view mem
 
 void map_add_item( item &it, tripoint_abs_ms target_pos )
 {
-    if( get_map().inbounds( target_pos ) ) {
-        get_map().add_item_or_charges( get_map().get_bub( target_pos ), it );
+    map &here = get_map();
+
+    if( here.inbounds( target_pos ) ) {
+        here.add_item_or_charges( here.get_bub( target_pos ), it );
     } else {
         tinymap target_bay;
         target_bay.load( project_to<coords::omt>( target_pos ), false );
@@ -4131,14 +4133,14 @@ talk_effect_fun_t::func f_location_variable( const JsonObject &jo, std::string_v
         }
         const tripoint_abs_ms abs_ms( target_pos );
         map *here_ptr = &get_map();
+        map &here = *here_ptr;
         std::unique_ptr<map> distant_map = std::make_unique<map>();
-        if( !get_map().inbounds( abs_ms ) ) {
+        if( !here.inbounds( abs_ms ) ) {
             distant_map->load( project_to<coords::sm>( abs_ms ), false );
             here_ptr = distant_map.get();
         }
-        map &here = *here_ptr;
         if( search_target.has_value() ) {
-            if( search_type.value() == "monster" && !get_map().inbounds( abs_ms ) ) {
+            if( search_type.value() == "monster" && !here.inbounds( abs_ms ) ) {
                 here.spawn_monsters( true, true );
             }
             int min_target_dist = dov_target_min_radius.evaluate( d );
@@ -4165,7 +4167,7 @@ talk_effect_fun_t::func f_location_variable( const JsonObject &jo, std::string_v
                         break;
                     }
                 } else if( search_type.value() == "field" ) {
-                    field &fields_here = get_map().field_at( search_loc );
+                    field &fields_here = here.field_at( search_loc );
                     if( fields_here.find_field( field_type_id( cur_search_target ) ) || cur_search_target.empty() ) {
                         target_pos = here.get_abs( search_loc );
                         found = true;
@@ -4329,10 +4331,11 @@ talk_effect_fun_t::func f_transform_radius( const JsonObject &jo, std::string_vi
                                     //Timed events happen before the player turn and eocs are during so we add a second here to sync them up using the same variable
                                     -1, target_pos, radius, transform.evaluate( d ), key.evaluate( d ) );
         } else {
+            map &bubble_map = reality_bubble();
             // Use the main map when possible to reduce performance overhead.
-            if( get_map().inbounds( target_pos - point{ radius, radius} ) &&
-                get_map().inbounds( target_pos + point{ radius, radius} ) ) {
-                get_map().transform_radius( ter_furn_transform_id( transform.evaluate( d ) ), radius, target_pos );
+            if( bubble_map.inbounds( target_pos - point{ radius, radius} ) &&
+                bubble_map.inbounds( target_pos + point{ radius, radius} ) ) {
+                bubble_map.transform_radius( ter_furn_transform_id( transform.evaluate( d ) ), radius, target_pos );
             } else {
                 map tm;
                 tm.load( project_to<coords::sm>( target_pos - point{ radius, radius} ), false );
@@ -4472,7 +4475,8 @@ talk_effect_fun_t::func f_query_tile( const JsonObject &jo, std::string_view mem
         }
         if( loc.has_value() ) {
             tripoint_abs_ms pos_global = here.get_abs( *loc );
-            write_var_value( target_var.type, target_var.name, &d, pos_global );
+            write_var_value( target_var.type, target_var.name, &d,
+                             pos_global.to_string() );
         }
         return loc.has_value();
     };
@@ -4527,6 +4531,7 @@ talk_effect_fun_t::func f_query_omt( const JsonObject &jo, std::string_view memb
 talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::string_view member,
         const std::string_view src, bool is_npc )
 {
+    map &here = get_map();
 
     var_info output_var = read_var_info( jo.get_object( member ) );
 
@@ -4560,8 +4565,7 @@ talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::
     read_condition( jo, "condition", cond, true );
 
     return [output_var, target_var, message, failure_message, allow_vertical, allow_autoselect, cond,
-                false_eocs, is_npc]( dialogue & d ) {
-        map &here = get_map();
+                false_eocs, is_npc, &here]( dialogue & d ) {
         tripoint_bub_ms target_pos;
         if( target_var.has_value() ) {
             tripoint_abs_ms abs_ms = read_var_value( *target_var, d ).tripoint();
@@ -4570,9 +4574,9 @@ talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::
             target_pos = d.actor( is_npc )->pos_bub( here );
         }
 
-        const std::function<bool( const tripoint_bub_ms & )> f = [cond, &d](
+        const std::function<bool( const tripoint_bub_ms & )> f = [cond, &d, &here](
         const tripoint_bub_ms & pnt ) {
-            write_var_value( var_type::context, "loc", &d, get_map().get_abs( pnt ) );
+            write_var_value( var_type::context, "loc", &d, here.get_abs( pnt ).to_string_writable() );
             return cond( d );
         };
 
@@ -4581,7 +4585,7 @@ talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::
 
         if( picked_coord.has_value() ) {
             write_var_value( output_var.type, output_var.name, &d,
-                             here.get_abs( picked_coord.value() ) );
+                             here.get_abs( picked_coord.value() ).to_string_writable() );
         } else {
             run_eoc_vector( false_eocs, d );
         }
@@ -4704,7 +4708,7 @@ talk_effect_fun_t::func f_mapgen_update( const JsonObject &jo, std::string_view 
                                         d.actor( d.has_beta )->selected_mission() );
                 set_queued_points();
             }
-            get_map().invalidate_map_cache( omt_pos.z() );
+            reality_bubble().invalidate_map_cache( omt_pos.z() );
         }
     };
 }
@@ -4756,7 +4760,7 @@ talk_effect_fun_t::func f_revert_location( const JsonObject &jo, std::string_vie
             }
         }
 
-        get_map().invalidate_map_cache( omt_pos.z() );
+        reality_bubble().invalidate_map_cache( omt_pos.z() );
     };
 }
 
@@ -5758,13 +5762,15 @@ talk_effect_fun_t::func f_unset_flag( const JsonObject &jo, std::string_view mem
 talk_effect_fun_t::func f_activate( const JsonObject &jo, std::string_view member,
                                     const std::string_view, bool is_npc )
 {
+    map &here = get_map();
+
     str_or_var method = get_str_or_var( jo.get_member( member ), member, true );
     std::optional<var_info> target_var;
     if( jo.has_member( "target_var" ) ) {
         target_var = read_var_info( jo.get_object( "target_var" ) );
     }
 
-    return [is_npc, method, target_var]( dialogue & d ) {
+    return [is_npc, method, target_var, &here]( dialogue & d ) {
         Character *guy = d.actor( is_npc )->get_character();
         item_location *it = d.actor( !is_npc )->get_item();
 
@@ -5778,7 +5784,7 @@ talk_effect_fun_t::func f_activate( const JsonObject &jo, std::string_view membe
                 if( target_var.has_value() ) {
                     tripoint_abs_ms target_pos = read_var_value( *target_var, d ).tripoint();
                     if( get_map().inbounds( target_pos ) ) {
-                        guy->invoke_item( it->get_item(), method_str, get_map().get_bub( target_pos ) );
+                        guy->invoke_item( it->get_item(), method_str, here.get_bub( target_pos ) );
                         return;
                     }
                 }
@@ -5896,7 +5902,8 @@ talk_effect_fun_t::func f_make_sound( const JsonObject &jo, std::string_view mem
         } else {
             translated_message = message.evaluate( d );
         }
-        sounds::sound( get_map().get_bub( target_pos ), volume.evaluate( d ), type, translated_message,
+        sounds::sound( reality_bubble().get_bub( target_pos ), volume.evaluate( d ), type,
+                       translated_message,
                        ambient );
     };
 }
@@ -6452,13 +6459,13 @@ talk_effect_fun_t::func f_map_run_item_eocs( const JsonObject &jo, std::string_v
         Character *guy = d.actor( is_npc )->get_character();
         guy = guy ? guy : &get_player_character();
         const auto f = [d, guy, title, center, min_radius,
-           max_radius]( const item_location_filter & filter ) {
+           max_radius, &here]( const item_location_filter & filter ) {
             inventory_filter_preset preset( filter );
             inventory_pick_selector inv_s( *guy, preset );
             inv_s.set_title( title.evaluate( d ) );
             inv_s.set_display_stats( false );
             inv_s.clear_items();
-            for( const tripoint_bub_ms &pos : get_map().points_in_radius( center, max_radius ) ) {
+            for( const tripoint_bub_ms &pos : here.points_in_radius( center, max_radius ) ) {
                 if( rl_dist( center, pos ) >= min_radius ) {
                     inv_s.add_map_items( pos );
                 }
@@ -6470,13 +6477,13 @@ talk_effect_fun_t::func f_map_run_item_eocs( const JsonObject &jo, std::string_v
             return inv_s.execute();
         };
         const item_menu_mul f_mul = [d, guy, title, center, min_radius,
-           max_radius]( const item_location_filter & filter ) {
+           max_radius, &here]( const item_location_filter & filter ) {
             inventory_filter_preset preset( filter );
             inventory_multiselector inv_s( *guy, preset );
             inv_s.set_title( title.evaluate( d ) );
             inv_s.set_display_stats( false );
             inv_s.clear_items();
-            for( const tripoint_bub_ms &pos : get_map().points_in_radius( center, max_radius ) ) {
+            for( const tripoint_bub_ms &pos : here.points_in_radius( center, max_radius ) ) {
                 if( rl_dist( center, pos ) >= min_radius ) {
                     inv_s.add_map_items( pos );
                 }
@@ -7294,6 +7301,8 @@ talk_effect_fun_t::func f_field( const JsonObject &jo, std::string_view member,
     }
     return [new_field, dov_intensity, dov_age, dov_radius, outdoor_only,
                hit_player, target_var, is_npc, indoor_only]( dialogue & d ) {
+        map &here = get_map();
+
         int radius = dov_radius.evaluate( d );
         int intensity = dov_intensity.evaluate( d );
 
@@ -7301,13 +7310,13 @@ talk_effect_fun_t::func f_field( const JsonObject &jo, std::string_view member,
         if( target_var.has_value() ) {
             target_pos = read_var_value( *target_var, d ).tripoint();
         }
-        for( const tripoint_bub_ms &dest : get_map().points_in_radius( get_map().get_bub( target_pos ),
+        for( const tripoint_bub_ms &dest : here.points_in_radius( here.get_bub( target_pos ),
                 radius ) ) {
-            if( ( !outdoor_only || get_map().is_outside( dest ) ) && ( !indoor_only ||
-                    !get_map().is_outside( dest ) ) ) {
-                get_map().add_field( dest, field_type_str_id( new_field.evaluate( d ) ), intensity,
-                                     dov_age.evaluate( d ),
-                                     hit_player );
+            if( ( !outdoor_only || here.is_outside( dest ) ) && ( !indoor_only ||
+                    !here.is_outside( dest ) ) ) {
+                here.add_field( dest, field_type_str_id( new_field.evaluate( d ) ), intensity,
+                                dov_age.evaluate( d ),
+                                hit_player );
             }
         }
     };

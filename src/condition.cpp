@@ -1611,7 +1611,7 @@ conditional_t::func f_follower_present( const JsonObject &jo, std::string_view m
         !npc_to_check->is_following() ) {
             return false;
         }
-        return rl_dist( npc_to_check->pos_bub(), d_npc->pos_bub() ) < 5 &&
+        return rl_dist( npc_to_check->pos_abs(), d_npc->pos_abs() ) < 5 &&
                get_map().clear_path( npc_to_check->pos_bub(), d_npc->pos_bub(), 5, 0, 100 );
     };
 }
@@ -1810,11 +1810,12 @@ conditional_t::func f_map_ter_furn_with_flag( const JsonObject &jo, std::string_
     }
     return [terrain, furn_type, loc_var]( const_dialogue const & d ) {
         map &here = get_map();
+
         tripoint_bub_ms loc = here.get_bub( read_var_value( loc_var, d ).tripoint() );
         if( terrain ) {
-            return get_map().ter( loc )->has_flag( furn_type.evaluate( d ) );
+            return here.ter( loc )->has_flag( furn_type.evaluate( d ) );
         } else {
-            return get_map().furn( loc )->has_flag( furn_type.evaluate( d ) );
+            return here.furn( loc )->has_flag( furn_type.evaluate( d ) );
         }
     };
 }
@@ -1826,13 +1827,14 @@ conditional_t::func f_map_ter_furn_id( const JsonObject &jo, std::string_view me
 
     return [member, furn_type, loc_var]( const_dialogue const & d ) {
         map &here = get_map();
+
         tripoint_bub_ms loc = here.get_bub( read_var_value( loc_var, d ).tripoint() );
         if( member == "map_terrain_id" ) {
-            return get_map().ter( loc ) == ter_id( furn_type.evaluate( d ) );
+            return here.ter( loc ) == ter_id( furn_type.evaluate( d ) );
         } else if( member == "map_furniture_id" ) {
-            return get_map().furn( loc ) == furn_id( furn_type.evaluate( d ) );
+            return here.furn( loc ) == furn_id( furn_type.evaluate( d ) );
         } else if( member == "map_field_id" ) {
-            const field &fields_here = get_map().field_at( loc );
+            const field &fields_here = here.field_at( loc );
             return !!fields_here.find_field( field_type_id( furn_type.evaluate( d ) ) );
         } else {
             debugmsg( "Invalid map id: %s", member );

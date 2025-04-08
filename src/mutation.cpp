@@ -555,6 +555,8 @@ void Character::recalculate_size()
 
 void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_override )
 {
+    map &here = get_map();
+
     if( mut.obj().vanity ) {
         return;
     }
@@ -585,7 +587,7 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
                                    _( "Your %s is pushed off!" ),
                                    _( "<npcname>'s %s is pushed off!" ),
                                    armor.tname() );
-            get_map().add_item_or_charges( pos_bub(), armor );
+            here.add_item_or_charges( pos_bub(), armor );
             return true;
         }
         if( !branch.conflicts_with_item( armor ) ) {
@@ -619,7 +621,7 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
                                    _( "Your %s is pushed off!" ),
                                    _( "<npcname>'s %s is pushed off!" ),
                                    armor.tname() );
-            get_map().add_item_or_charges( pos_bub(), armor );
+            here.add_item_or_charges( pos_bub(), armor );
         }
         return true;
     } );
@@ -805,6 +807,8 @@ void Character::activate_mutation( const trait_id &mut )
 
 void Character::activate_cached_mutation( const trait_id &mut )
 {
+    map &here = get_map();
+
     const mutation_branch &mdata = mut.obj();
     trait_data &tdata = cached_mutations[mut];
     int cost = mdata.cost;
@@ -870,10 +874,10 @@ void Character::activate_cached_mutation( const trait_id &mut )
     }
 
     if( mut == trait_WEB_WEAVER ) {
-        get_map().add_field( pos_bub(), fd_web, 1 );
+        here.add_field( pos_bub(), fd_web, 1 );
         add_msg_if_player( _( "You start spinning web with your spinnerets!" ) );
     } else if( mut == trait_SNAIL_TRAIL ) {
-        get_map().add_field( pos_bub(), fd_sludge, 1 );
+        here.add_field( pos_bub(), fd_sludge, 1 );
         add_msg_if_player( _( "You start leaving a trail of sludge as you go." ) );
     } else if( mut == trait_BURROW || mut == trait_BURROWLARGE ) {
         tdata.powered = false;

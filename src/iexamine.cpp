@@ -661,7 +661,9 @@ void iexamine::attunement_altar( Character &you, const tripoint_bub_ms & )
 
 void iexamine::translocator( Character &, const tripoint_bub_ms &examp )
 {
-    const tripoint_abs_omt omt_loc( coords::project_to<coords::omt>( get_map().get_abs( examp ) ) );
+    map &here = get_map();
+
+    const tripoint_abs_omt omt_loc( coords::project_to<coords::omt>( here.get_abs( examp ) ) );
     avatar &player_character = get_avatar();
     const bool activated = player_character.translocators.knows_translocator( omt_loc );
     if( !activated ) {
@@ -1029,11 +1031,13 @@ void iexamine::atm( Character &you, const tripoint_bub_ms & )
  */
 void iexamine::vending( Character &you, const tripoint_bub_ms &examp )
 {
+    map &here = get_map();
+
     constexpr int moves_cost = to_moves<int>( 5_seconds );
     int money = you.charges_of( itype_cash_card );
-    map_stack vend_items = get_map().i_at( examp );
+    map_stack vend_items = here.i_at( examp );
 
-    bool use_bank = get_map().has_flag_furn( "BANK_NETWORKED", examp );
+    bool use_bank = here.has_flag_furn( "BANK_NETWORKED", examp );
 
     if( use_bank ) {
         money = you.cash + you.charges_of( itype_cash_card );
@@ -1388,7 +1392,7 @@ void iexamine::elevator( Character &you, const tripoint_bub_ms &examp )
     if( you.is_avatar() ) {
         g->vertical_shift( movez );
         g->update_map( you, true );
-        cata_event_dispatch::avatar_moves( old_abs_pos, *you.as_avatar(), get_map() );
+        cata_event_dispatch::avatar_moves( old_abs_pos, *you.as_avatar(), here );
     }
 }
 
@@ -1428,7 +1432,7 @@ bool iexamine::try_start_hacking( Character &you, const tripoint_bub_ms &examp )
         item_location hacking_tool = item_location{you, &you.best_item_with_quality( qual_HACK )};
         hacking_tool->ammo_consume( hacking_tool->ammo_required(), hacking_tool.pos_bub( here ), &you );
         you.assign_activity( hacking_activity_actor( hacking_tool ) );
-        you.activity.placement = get_map().get_abs( examp );
+        you.activity.placement = here.get_abs( examp );
         return true;
     }
 }
@@ -1770,6 +1774,8 @@ void iexamine::pit_covered( Character &you, const tripoint_bub_ms &examp )
  */
 void iexamine::safe( Character &you, const tripoint_bub_ms &examp )
 {
+    map &here = get_map();
+
     bool has_cracking_tool = you.has_flag( json_flag_SAFECRACK_NO_TOOL );
     // short-circuit to avoid the more expensive iteration over items
     has_cracking_tool = has_cracking_tool || you.cache_has_item_with( flag_SAFECRACK );
@@ -1789,7 +1795,7 @@ void iexamine::safe( Character &you, const tripoint_bub_ms &examp )
         if( you.has_proficiency( proficiency_prof_safecracking ) ) {
             if( one_in( 8000 ) ) {
                 you.add_msg_if_player( m_good, _( "You carefully dial a combination… and it opens!" ) );
-                get_map().furn_set( examp, furn_f_safe_o );
+                here.furn_set( examp, furn_f_safe_o );
                 return;
             } else {
                 you.add_msg_if_player( m_info, _( "You carefully dial a combination." ) );
@@ -1798,7 +1804,7 @@ void iexamine::safe( Character &you, const tripoint_bub_ms &examp )
         } else {
             if( one_in( 80000 ) ) {
                 you.add_msg_if_player( m_good, _( "You mess with the dial for a little bit… and it opens!" ) );
-                get_map().furn_set( examp, furn_f_safe_o );
+                here.furn_set( examp, furn_f_safe_o );
                 return;
             } else {
                 you.add_msg_if_player( m_info, _( "You mess with the dial for a little bit." ) );
@@ -6217,7 +6223,7 @@ static void mill_activate( Character &you, const tripoint_bub_ms &examp )
     for( item &it : here.i_at( examp ) ) {
         if( it.type->milling_data && !it.type->milling_data->into_.is_null() ) {
             // Do one final rot check before milling, then apply the PROCESSING flag to prevent further checks.
-            it.process_temperature_rot( 1, examp, get_map(), nullptr );
+            it.process_temperature_rot( 1, examp, here, nullptr );
             it.set_flag( flag_PROCESSING );
         }
     }
@@ -6318,7 +6324,7 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     you.use_charges( itype_fire, 1 );
     for( item &it : here.i_at( examp ) ) {
         if( it.has_flag( flag_SMOKABLE ) ) {
-            it.process_temperature_rot( 1, examp, get_map(), nullptr );
+            it.process_temperature_rot( 1, examp, here, nullptr );
             it.set_flag( flag_PROCESSING );
         }
     }
@@ -7128,13 +7134,15 @@ void iexamine::open_safe( Character &, const tripoint_bub_ms &examp )
 
 void iexamine::workbench( Character &you, const tripoint_bub_ms &examp )
 {
+    map &here = get_map();
+
     if( get_option<bool>( "WORKBENCH_ALL_OPTIONS" ) ) {
         workbench_internal( you, examp, std::nullopt );
     } else {
-        if( !get_map().i_at( examp ).empty() ) {
+        if( !here.i_at( examp ).empty() ) {
             g->pickup( examp );
         }
-        if( item::type_is_defined( get_map().furn( examp ).obj().deployed_item ) ) {
+        if( item::type_is_defined( here.furn( examp ).obj().deployed_item ) ) {
             deployed_furniture( you, examp );
         }
     }

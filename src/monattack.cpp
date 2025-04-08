@@ -271,7 +271,7 @@ static Creature *sting_get_target( monster *z, float range = 5.0f )
 
     // Can't see/reach target, no attack
     if( !z->sees( here,  *target ) ||
-        !get_map().clear_path( z->pos_bub(), target->pos_bub(), range, 1, 100 ) ) {
+        !here.clear_path( z->pos_bub(), target->pos_bub(), range, 1, 100 ) ) {
         return nullptr;
     }
 
@@ -851,7 +851,7 @@ bool mattack::acid_barf( monster *z )
 
     z->mod_moves( -to_moves<int>( 1_seconds ) * 0.8 );
     // Make sure it happens before uncanny dodge
-    get_map().add_field( target->pos_bub(), fd_acid, 1 );
+    here.add_field( target->pos_bub(), fd_acid, 1 );
 
     bodypart_id hit = target->get_random_body_part();
     damage_instance dam_inst = damage_instance( damage_acid, rng( 5, 12 ) );
@@ -4936,7 +4936,7 @@ bool mattack::kamikaze( monster *z )
             item i_explodes( act_bomb_type, calendar::turn );
             i_explodes.active = true;
             i_explodes.countdown_point = calendar::turn_zero;
-            i_explodes.process( get_map(), nullptr, z->pos_bub() );
+            i_explodes.process( here, nullptr, z->pos_bub() );
             return false;
         }
         return false;

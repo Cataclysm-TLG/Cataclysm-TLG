@@ -19,6 +19,7 @@
 #include "item_pocket.h"
 #include "itype.h"
 #include "map.h"
+#include "mutation.h"
 #include "options.h"
 #include "point.h"
 #include "recipe.h"
@@ -296,8 +297,8 @@ std::string location_hint( item const &it, unsigned int /* quantity */,
     if( it.has_flag( json_flag_HINT_THE_LOCATION ) && it.has_var( "spawn_location" ) ) {
         tripoint_abs_omt loc( coords::project_to<coords::omt>(
                                   it.get_var( "spawn_location", tripoint_abs_ms::zero ) ) );
-        tripoint_abs_omt player_loc( coords::project_to<coords::omt>( get_map().get_abs(
-                                         get_avatar().pos_bub() ) ) );
+        tripoint_abs_omt player_loc( coords::project_to<coords::omt>(
+                                         get_avatar().pos_abs() ) );
         int dist = rl_dist( player_loc, loc );
         if( dist < 1 ) {
             return _( " (from here)" );

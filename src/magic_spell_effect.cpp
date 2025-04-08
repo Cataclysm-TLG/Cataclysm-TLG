@@ -195,7 +195,7 @@ static void swap_pos( Creature &caster, const tripoint_bub_ms &target )
 
     //update map in case a monster swapped positions with the player
     Character &you = get_player_character();
-    get_map().vertical_shift( you.posz() );
+    here.vertical_shift( you.posz() );
     g->update_map( you );
 }
 
@@ -980,6 +980,8 @@ static void spell_move( const spell &sp, const Creature &caster,
         return;
     }
 
+    map &here = get_map();
+
     // Moving creatures
     const bool can_target_self = sp.is_valid_target( spell_target::self );
     const bool can_target_ally = sp.is_valid_target( spell_target::ally );
@@ -1004,12 +1006,12 @@ static void spell_move( const spell &sp, const Creature &caster,
 
     // Moving items
     if( sp.is_valid_target( spell_target::item ) ) {
-        move_items( get_map(), from, to );
+        move_items( here, from, to );
     }
 
     // Moving fields.
     if( sp.is_valid_target( spell_target::field ) ) {
-        move_field( get_map(), from, to );
+        move_field( here, from, to );
     }
 }
 
@@ -1169,7 +1171,7 @@ static void character_push_effects( Creature *caster, Character &guy, tripoint_b
     int dist_left = std::abs( push_distance );
     tripoint_bub_ms old_pushed_point = guy.pos_bub( here );
     for( const tripoint_bub_ms &pushed_point : push_vec ) {
-        if( get_map().impassable( pushed_point ) ) {
+        if( here.impassable( pushed_point ) ) {
             guy.hurtall( dist_left * 4, caster );
             push_dest = old_pushed_point;
             break;
@@ -1246,7 +1248,7 @@ void spell_effect::directed_push( const spell &sp, Creature &caster, const tripo
                     int dist_left = std::abs( push_distance );
                     tripoint_bub_ms old_pushed_push_point = push_point;
                     for( const tripoint_bub_ms &pushed_push_point : push_vec ) {
-                        if( get_map().impassable( pushed_push_point ) ) {
+                        if( here.impassable( pushed_push_point ) ) {
                             mon->apply_damage( &caster, bodypart_id(), dist_left * 10 );
                             push_dest = old_pushed_push_point;
                             break;
@@ -2016,6 +2018,8 @@ void spell_effect::banishment( const spell &sp, Creature &caster, const tripoint
 void spell_effect::effect_on_condition( const spell &sp, Creature &caster,
                                         const tripoint_bub_ms &target )
 {
+    ::map &here = get_map();
+
     const std::set<tripoint_bub_ms> area = spell_effect_area( sp, target, caster );
 
     creature_tracker &creatures = get_creature_tracker();
@@ -2024,7 +2028,7 @@ void spell_effect::effect_on_condition( const spell &sp, Creature &caster,
             continue;
         }
         dialogue d;
-        optional_vpart_position veh = get_map().veh_at( target );
+        optional_vpart_position veh = here.veh_at( target );
         Creature *victim = creatures.creature_at<Creature>( potential_target );
         if( victim && ( sp.is_valid_target( spell_target::ally ) ||
                         sp.is_valid_target( spell_target::hostile ) || sp.is_valid_target( spell_target::self ) ) ) {
@@ -2034,8 +2038,9 @@ void spell_effect::effect_on_condition( const spell &sp, Creature &caster,
         } else {
             d = dialogue( nullptr, get_talker_for( caster ) );
         }
-        const tripoint_abs_ms target_abs = get_map().get_abs( potential_target );
-        write_var_value( var_type::context, "spell_location", &d, target_abs );
+        const tripoint_abs_ms target_abs = here.get_abs( potential_target );
+        write_var_value( var_type::context, "spell_location", &d,
+                         target_abs.to_string() );
         d.amend_callstack( string_format( "Spell: %s Caster: %s", sp.id().c_str(), caster.disp_name() ) );
         effect_on_condition_id eoc = effect_on_condition_id( sp.effect_data() );
         if( eoc->type == eoc_type::ACTIVATION ) {
