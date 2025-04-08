@@ -67,11 +67,7 @@
     "color": "light_green",
     "acceptable_ammo": [ "battery" ],
     "pocket_mods": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "flag_restriction": [ "BATTERY_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      }
+      { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_LIGHT" ], "default_magazine": "light_battery_cell" }
     ]
   },
   {

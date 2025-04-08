@@ -1995,7 +1995,7 @@
     "price_postapoc": "10 cent",
     "material": [ "aluminum", "plastic" ],
     "flags": [ "WATER_BREAK" ],
-    "ammo": [ "battery" ],
+    "tool_ammo": [ "battery" ],
     "charges_per_use": 4,
     "use_action": [ { "type": "link_up", "cable_length": 3, "charge_rate": "35 W" } ],
     "charged_qualities": [ [ "WINNOW", 1 ] ],
@@ -3070,7 +3070,7 @@
     "price": "10 USD",
     "extend": { "flags": [ "NO_UNLOAD", "NO_RELOAD", "TRADER_AVOID" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "money": 200000000 } } ],
-    "ammo": [ "money" ]
+    "tool_ammo": [ "money" ]
   },
   {
     "id": "robofac_test_data",

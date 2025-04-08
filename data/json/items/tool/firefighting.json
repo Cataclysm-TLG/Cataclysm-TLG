@@ -72,11 +72,11 @@
         "ammo_restriction": { "extinguishing_agent": 10 }
       }
     ],
-    "ammo": "extinguishing_agent",
     "charges_per_use": 1,
     "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
     "use_action": [ "EXTINGUISHER" ],
-    "melee_damage": { "bash": 4 }
+    "melee_damage": { "bash": 4 },
+    "tool_ammo": "extinguishing_agent"
   },
   {
     "id": "throw_extinguisher",
@@ -131,10 +131,7 @@
     "name": { "str": "pike pole" },
     "description": "A durable tool consisting of a sturdy fiberglass shaft tipped with a small steel hook.",
     "price": "100 USD",
-    "material": [
-      { "type": "steel", "portion": 1 },
-      { "type": "fiberglass", "portion": 9 }
-    ],
+    "material": [ { "type": "steel", "portion": 1 }, { "type": "fiberglass", "portion": 9 } ],
     "weapon_category": [ "POLEARMS", "HOOKING_WEAPONRY" ],
     "flags": [ "DURABLE_MELEE", "REACH_ATTACK", "POLEARM", "NONCONDUCTIVE", "SHEATH_SPEAR", "ALWAYS_TWOHAND" ],
     "weight": "3100 g",

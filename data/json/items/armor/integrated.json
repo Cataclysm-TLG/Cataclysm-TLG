@@ -105,10 +105,7 @@
         "encumbrance": 20
       },
       {
-        "material": [
-          { "type": "wood", "covered_by_mat": 100, "thickness": 4 },
-          { "type": "wood", "covered_by_mat": 50, "thickness": 3 }
-        ],
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 50, "thickness": 3 } ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "head" ],
         "coverage": 100,
         "encumbrance": 10
@@ -2382,7 +2379,16 @@
     "material": [ "titanium_alloy" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "ALLOWS_NATURAL_ATTACKS", "TRANSPARENT", "PERSONAL", "CUSHION_FALL" ],
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "TRANSPARENT",
+      "PERSONAL",
+      "CUSHION_FALL"
+    ],
     "armor": [
       {
         "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1.5 } ],

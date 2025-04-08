@@ -900,7 +900,6 @@
     "material": [ { "type": "plastic", "portion": 1 }, { "type": "steel", "portion": 1 }, { "type": "wood", "portion": 8 } ],
     "symbol": "/",
     "color": "brown",
-    "ammo": [ "battery" ],
     "charges_per_use": 2,
     "qualities": [ [ "HAMMER", 1 ] ],
     "techniques": [ "WBLOCK_2", "SWEEP" ],
@@ -915,7 +914,8 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "melee_damage": { "bash": 19 }
+    "melee_damage": { "bash": 19 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "shocktonfa_off",
@@ -932,7 +932,6 @@
     "material": [ { "type": "plastic", "portion": 8 }, { "type": "steel", "portion": 2 } ],
     "symbol": "/",
     "color": "dark_gray",
-    "ammo": [ "battery" ],
     "charges_per_use": 1,
     "techniques": [ "WBLOCK_2", "RAPID", "PRECISE" ],
     "use_action": [ "SHOCKTONFA_OFF" ],
@@ -946,7 +945,8 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "melee_damage": { "bash": 14 }
+    "melee_damage": { "bash": 14 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "shocktonfa_on",

@@ -14,7 +14,7 @@
     "looks_like": "story_book",
     "color": "green",
     "intelligence": 7,
-    "skill": "archery",
+    "read_skill": "archery",
     "time": "20 m"
   },
   {
@@ -47,10 +47,10 @@
     "material": [ "paper" ],
     "symbol": "?",
     "color": "pink",
-    "skill": "archery",
     "max_level": 1,
     "intelligence": 2,
     "time": "7 m",
-    "fun": 1
+    "read_skill": "archery",
+    "read_fun": 1
   }
 ]

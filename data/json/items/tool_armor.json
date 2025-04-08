@@ -467,7 +467,6 @@
     "material": [ "plastic" ],
     "flags": [ "WATCH", "ALARMCLOCK", "WATER_FRIENDLY", "BELTED", "FRAGILE", "ALLOWS_NATURAL_ATTACKS", "OVERSIZE" ],
     "symbol": "[",
-    "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "PORTABLE_GAME" ],
     "pocket_data": [
@@ -478,7 +477,8 @@
         "default_magazine": "light_minus_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
+    "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ],
+    "tool_ammo": "battery"
   },
   {
     "type": "TOOL_ARMOR",
@@ -510,9 +510,9 @@
       "ELECTRONIC"
     ],
     "symbol": "[",
-    "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "MP3", "CALORIES_INTAKE_TRACKER", "FITNESS_CHECK" ],
+    "tool_ammo": "battery",
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 20 } },
       {
@@ -600,7 +600,6 @@
     "symbol": "[",
     "color": "light_gray",
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "rigid": true, "item_restriction": [ "light_battery_cell" ] } ],
-    "ammo": "battery",
     "charges_per_use": 25,
     "warmth": 10,
     "material_thickness": 0.5,
@@ -622,7 +621,8 @@
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "type": "TOOL_ARMOR",
@@ -659,7 +659,6 @@
     "weight": "182 g",
     "volume": "750 ml",
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -678,7 +677,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 100, "covers": [ "foot_l", "foot_r" ], "encumbrance": [ 2, 2 ] } ]
+    "armor": [ { "coverage": 100, "covers": [ "foot_l", "foot_r" ], "encumbrance": [ 2, 2 ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "thermal_socks_on",
@@ -713,7 +713,6 @@
     "weight": "3972 g",
     "volume": "2 L",
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -732,7 +731,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 100, "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ], "encumbrance": [ 5, 5 ] } ]
+    "armor": [ { "coverage": 100, "covers": [ "torso", "arm_l", "arm_r", "leg_l", "leg_r" ], "encumbrance": [ 5, 5 ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "thermal_suit_on",
@@ -767,7 +767,6 @@
     "weight": "210 g",
     "volume": "750 ml",
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -786,7 +785,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "encumbrance": [ 5, 5 ] } ]
+    "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "encumbrance": [ 5, 5 ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "thermal_gloves_on",
@@ -821,7 +821,6 @@
     "weight": "196 g",
     "volume": "1 L",
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -840,7 +839,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 100, "covers": [ "head", "mouth" ], "encumbrance": [ 5, 5 ] } ]
+    "armor": [ { "coverage": 100, "covers": [ "head", "mouth" ], "encumbrance": [ 5, 5 ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "thermal_mask_on",
@@ -897,7 +897,7 @@
     "weight": "520 g",
     "volume": "500 ml",
     "charges_per_use": 1,
-    "ammo": "battery",
+    "tool_ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You turn the headlamp on.",
@@ -933,11 +933,11 @@
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
     "weight": "520 g",
     "volume": "500 ml",
-    "ammo": "battery",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" } ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 50 } } ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": "battery"
   },
   {
     "id": "wearable_camera_pro",
@@ -964,11 +964,11 @@
     ],
     "weight": "520 g",
     "volume": "500 ml",
-    "ammo": "battery",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "50 W" } ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } } ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": "battery"
   },
   {
     "id": "wearable_light_on",
@@ -1052,7 +1052,6 @@
     "symbol": "[",
     "looks_like": "glasses_safety",
     "color": "light_gray",
-    "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA" ],
     "etransfer_rate": "20 MB",
@@ -1075,7 +1074,8 @@
     "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ], "rigid_layer_only": true } ],
     "material_thickness": 1,
     "environmental_protection": 1,
-    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC", "SKINTIGHT" ]
+    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC", "SKINTIGHT" ],
+    "tool_ammo": "battery"
   },
   {
     "id": "ar_glasses_advanced",
@@ -1091,7 +1091,6 @@
     "symbol": "[",
     "looks_like": "glasses_safety",
     "color": "light_gray",
-    "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "PORTABLE_GAME", "EBOOKSAVE", "E_FILE_DEVICE" ],
     "etransfer_rate": "30 MB",
@@ -1128,7 +1127,8 @@
       "ELECTRONIC",
       "CAN_USE_IN_DARK",
       "SKINTIGHT"
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "helmet_eod",
@@ -1174,7 +1174,6 @@
     "symbol": "[",
     "color": "light_green",
     "environmental_protection": 3,
-    "ammo": "battery",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -1192,7 +1191,8 @@
       "need_charges": 1,
       "need_charges_msg": "\"Illumination disabled, low power.\""
     },
-    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "WATCH", "ALARMCLOCK", "CUSHION_FALL" ]
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "WATCH", "ALARMCLOCK", "CUSHION_FALL" ],
+    "tool_ammo": "battery"
   },
   {
     "id": "helmet_eod_on",
@@ -1226,7 +1226,6 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "An LED light in the %s flickers on.",
@@ -1238,7 +1237,8 @@
     "warmth": 10,
     "material_thickness": 2,
     "flags": [ "UNRESTRICTED", "BELTED", "SOFT" ],
-    "armor": [ { "encumbrance": 2, "coverage": 50, "covers": [ "torso" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 50, "covers": [ "torso" ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "dimensional_anchor_on",
@@ -1288,7 +1288,6 @@
     "weight": "9500 g",
     "volume": "4500 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 7000 } } ],
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "Initiating\nRunning suit integrity diagnostics…\nAll systems operational.",
@@ -1420,7 +1419,8 @@
         "layers": [ "OUTER" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "phase_immersion_suit_on",
@@ -1488,7 +1488,6 @@
         "default_magazine": "rebreather_cartridge_o2"
       }
     ],
-    "ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ],
     "charges_per_use": 1,
     "use_action": {
       "type": "transform",
@@ -1503,7 +1502,8 @@
     "material_thickness": 1,
     "armor": [
       { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
-    ]
+    ],
+    "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
     "id": "rebreather_on",
@@ -1544,7 +1544,6 @@
         "default_magazine": "rebreather_cartridge_o2"
       }
     ],
-    "ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ],
     "charges_per_use": 1,
     "use_action": {
       "type": "transform",
@@ -1559,7 +1558,8 @@
     "material_thickness": 1,
     "armor": [
       { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
-    ]
+    ],
+    "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
     "id": "rebreather_xl_on",
@@ -1606,7 +1606,6 @@
         "default_magazine": "rebreather_cartridge_o2"
       }
     ],
-    "ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ],
     "charges_per_use": 1,
     "use_action": {
       "type": "transform",
@@ -1622,7 +1621,8 @@
     "material_thickness": 1,
     "armor": [
       { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
-    ]
+    ],
+    "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
     "id": "rebreather_xs_on",
@@ -1674,7 +1674,6 @@
         "default_magazine": "gasfilter_sm"
       }
     ],
-    "ammo": "gasfilter_s",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "armor": [
@@ -1685,7 +1684,8 @@
         "layers": [ "NORMAL", "OUTER", "BELTED" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "tool_ammo": [ "gasfilter_s" ]
   },
   {
     "id": "mask_gas",
@@ -1724,7 +1724,7 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
+    "tool_ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ]
   },
@@ -1764,7 +1764,7 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
+    "tool_ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "flags": [ "OVERSIZE", "PREFIX_XL", "SLEEP_IGNORE" ]
@@ -1805,10 +1805,10 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "flags": [ "VARSIZE", "UNDERSIZE", "PREFIX_XS", "SLEEP_IGNORE" ]
+    "flags": [ "VARSIZE", "UNDERSIZE", "PREFIX_XS", "SLEEP_IGNORE" ],
+    "tool_ammo": [ "gasfilter_m" ]
   },
   {
     "id": "mask_gas_half",
@@ -1837,7 +1837,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "armor": [
@@ -1848,7 +1847,8 @@
         "covers": [ "mouth" ],
         "layers": [ "NORMAL", "OUTER", "BELTED" ]
       }
-    ]
+    ],
+    "tool_ammo": [ "gasfilter_m" ]
   },
   {
     "id": "mask_fsurvivor",
@@ -1869,7 +1869,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "material": [ "nomex", "leather_treated", "hard_plastic_transp" ],
@@ -1898,7 +1897,8 @@
     "warmth": 25,
     "environmental_protection": 4,
     "environmental_protection_with_filter": 16,
-    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "UNRESTRICTED", "PADDED" ]
+    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "UNRESTRICTED", "PADDED" ],
+    "tool_ammo": "gasfilter_m"
   },
   {
     "id": "mask_fsurvivor_xl",
@@ -1941,7 +1941,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "warmth": 25,
@@ -1966,7 +1965,8 @@
         "encumbrance": 12,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "tool_ammo": "gasfilter_m"
   },
   {
     "id": "mask_hsurvivor",
@@ -1987,7 +1987,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "material": [ "steel", "hard_plastic_transp", "leather_treated" ],
@@ -2019,7 +2018,8 @@
     "warmth": 28,
     "environmental_protection": 4,
     "environmental_protection_with_filter": 16,
-    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "PADDED", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "PADDED", "UNRESTRICTED" ],
+    "tool_ammo": "gasfilter_m"
   },
   {
     "id": "mask_hsurvivor_xl",
@@ -2058,7 +2058,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "material": [ "leather_treated" ],
@@ -2077,7 +2076,8 @@
     "warmth": 15,
     "environmental_protection": 4,
     "environmental_protection_with_filter": 15,
-    "flags": [ "VARSIZE", "STURDY", "SLEEP_IGNORE", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "SLEEP_IGNORE", "UNRESTRICTED" ],
+    "tool_ammo": "gasfilter_m"
   },
   {
     "id": "mask_lsurvivor_xl",
@@ -2116,7 +2116,6 @@
         "default_magazine": "gasfilter_med"
       }
     ],
-    "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
     "material": [ "leather_treated", "hard_plastic_transp" ],
@@ -2142,7 +2141,8 @@
     "warmth": 20,
     "environmental_protection": 4,
     "environmental_protection_with_filter": 15,
-    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "PADDED", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "PADDED", "UNRESTRICTED" ],
+    "tool_ammo": "gasfilter_m"
   },
   {
     "id": "mask_survivor_xl",
@@ -2178,7 +2178,6 @@
     "volume": "1 L",
     "to_hit": -3,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -2199,7 +2198,8 @@
       }
     ],
     "relic_data": { "passive_effects": [ { "id": "nvg_bad" } ] },
-    "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ]
+    "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "goggles_nv_on",
@@ -2232,7 +2232,6 @@
     "volume": "1 L",
     "to_hit": -3,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -2253,7 +2252,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ]
+    "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "goggles_ir_on",
@@ -2314,7 +2314,7 @@
     "weight": "212 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "stimpack_ammo": 5 } } ],
-    "ammo": "stimpack_ammo",
+    "tool_ammo": "stimpack_ammo",
     "armor": [
       {
         "material": [
@@ -2353,7 +2353,6 @@
         "default_magazine": "rebreather_cartridge_o2"
       }
     ],
-    "ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ],
     "charges_per_use": 1,
     "use_action": {
       "type": "transform",
@@ -2388,7 +2387,8 @@
         "coverage": 100,
         "encumbrance": 30
       }
-    ]
+    ],
+    "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
     "id": "mask_h2osurvivor_on",
@@ -2517,7 +2517,6 @@
     "volume": "150 ml",
     "to_hit": -1,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": [ "RADGLOVE" ],
     "sided": true,
     "material_thickness": 0.1,
@@ -2530,7 +2529,8 @@
         "default_magazine": "light_minus_battery_cell"
       }
     ],
-    "armor": [ { "coverage": 50, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
+    "armor": [ { "coverage": 50, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "hairpin",
@@ -2842,7 +2842,6 @@
     "weight": "179 g",
     "volume": "1 L",
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You turn the earmuffs on.",
@@ -2861,7 +2860,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ]
+    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "powered_earmuffs_on",
@@ -2879,7 +2879,6 @@
     "volume": "1 L",
     "//": "3M Peltors claim to go 100 hours on 2 AAs",
     "power_draw": "60 mW",
-    "ammo": "battery",
     "charges_per_use": 1,
     "revert_to": "powered_earmuffs",
     "use_action": {
@@ -2899,7 +2898,8 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ]
+    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "powered_earplugs",
@@ -2926,7 +2926,6 @@
     "material": [ "plastic" ],
     "weight": "20 g",
     "volume": "200 ml",
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You turn the earplugs on.",
@@ -2937,7 +2936,8 @@
     },
     "armor": [ { "encumbrance": 0, "coverage": 5, "covers": [ "head" ], "specifically_covers": [ "head_ear_r", "head_ear_l" ] } ],
     "material_thickness": 1,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 10 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 10 } } ],
+    "tool_ammo": "battery"
   },
   {
     "id": "powered_earplugs_on",
@@ -3235,7 +3235,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": "nitrox",
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "airtight": true, "rigid": true, "watertight": true, "ammo_restriction": { "nitrox": 60 } }
     ],
@@ -3245,7 +3244,8 @@
     "material_thickness": 4,
     "use_action": [ "DIVE_TANK_ACTIVATE" ],
     "armor": [ { "encumbrance": 30, "coverage": 50, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
-    "melee_damage": { "bash": 10 }
+    "melee_damage": { "bash": 10 },
+    "tool_ammo": "nitrox"
   },
   {
     "id": "scuba_tank_on",
@@ -3262,7 +3262,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": "nitrox",
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "airtight": true, "rigid": true, "watertight": true, "ammo_restriction": { "nitrox": 60 } }
     ],
@@ -3278,7 +3277,8 @@
     "armor": [
       { "encumbrance": 30, "coverage": 50, "covers": [ "torso", "mouth" ], "specifically_covers": [ "torso_hanging_back" ] }
     ],
-    "melee_damage": { "bash": 10 }
+    "melee_damage": { "bash": 10 },
+    "tool_ammo": "nitrox"
   },
   {
     "id": "small_scuba_tank",
@@ -3295,7 +3295,6 @@
     "material": [ "aluminum", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": "nitrox",
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "airtight": true, "rigid": true, "watertight": true, "ammo_restriction": { "nitrox": 20 } }
     ],
@@ -3305,7 +3304,8 @@
     "material_thickness": 4,
     "use_action": [ "DIVE_TANK_ACTIVATE" ],
     "armor": [ { "encumbrance": 30, "coverage": 50, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
-    "melee_damage": { "bash": 6 }
+    "melee_damage": { "bash": 6 },
+    "tool_ammo": "nitrox"
   },
   {
     "id": "small_scuba_tank_on",
@@ -3322,7 +3322,6 @@
     "material": [ "aluminum", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": "nitrox",
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "airtight": true, "rigid": true, "watertight": true, "ammo_restriction": { "nitrox": 20 } }
     ],
@@ -3338,7 +3337,8 @@
     "armor": [
       { "encumbrance": 30, "coverage": 50, "covers": [ "torso", "mouth" ], "specifically_covers": [ "torso_hanging_back" ] }
     ],
-    "melee_damage": { "bash": 6 }
+    "melee_damage": { "bash": 6 },
+    "tool_ammo": "nitrox"
   },
   {
     "id": "electric_blanket",
@@ -3357,7 +3357,6 @@
     "material_thickness": 1,
     "environmental_protection": 2,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": [
       {
         "type": "transform",
@@ -3386,7 +3385,8 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
       }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "electric_blanket_on",
@@ -3492,7 +3492,6 @@
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "STURDY", "DEAF", "SUN_GLASSES", "PADDED" ],
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You turn the flight helmet on.",
@@ -3531,7 +3530,8 @@
         "transparent": true
       }
     ],
-    "melee_damage": { "bash": 10 }
+    "melee_damage": { "bash": 6 },
+    "tool_ammo": "battery"
   },
   {
     "id": "flight_helmet_on",
@@ -3558,7 +3558,7 @@
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "STURDY", "PARTIAL_DEAF", "SUN_GLASSES", "TWO_WAY_RADIO", "PADDED" ],
     "charges_per_use": 1,
-    "ammo": "battery",
+    "tool_ammo": "battery",
     "power_draw": "60 mW",
     "revert_to": "flight_helmet",
     "use_action": {
@@ -3576,7 +3576,7 @@
         "default_magazine": "light_battery_cell"
       }
     ],
-    "melee_damage": { "bash": 10 }
+    "melee_damage": { "bash": 6 }
   },
   {
     "type": "TOOL_ARMOR",

@@ -149,7 +149,7 @@
     "type": "GENERIC",
     "name": { "str": "durable plastic sack, cement" },
     "looks_like": "bag_plastic",
-    "description": "A large and sturdy sack, made out plastic material.  Stores cement and has instructions on how to use it to make mortar.",
+    "description": "A big bag made of woven plastic.  Simple instructions printed on the side explain how to make mortar for all your masonry needs.",
     "//": "durasack woven polypropylene bags",
     "copy-from": "bag_durasack",
     "use_action": {

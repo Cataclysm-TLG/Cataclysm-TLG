@@ -13,7 +13,7 @@
     "flags": [ "INSPIRATIONAL" ],
     "intelligence": 8,
     "time": "10 m",
-    "fun": 1
+    "read_fun": 1
   },
   {
     "id": "mycenacean_hymns",
@@ -1119,8 +1119,8 @@
     "color": "dark_gray",
     "intelligence": 8,
     "time": "10 m",
-    "fun": 1,
-    "flags": [ "INSPIRATIONAL" ]
+    "flags": [ "INSPIRATIONAL" ],
+    "read_fun": 1
   },
   {
     "id": "holybook_wicca",
@@ -1164,8 +1164,8 @@
     "color": "dark_gray",
     "intelligence": 8,
     "time": "10 m",
-    "fun": -1,
-    "flags": [ "INSPIRATIONAL" ]
+    "flags": [ "INSPIRATIONAL" ],
+    "read_fun": -1
   },
   {
     "id": "holybook_slack",
