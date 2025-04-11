@@ -4172,7 +4172,10 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
         itype &used_itype;
         explicit melee_accuracy_reader( itype &used_itype ) : used_itype( used_itype ) {};
         int get_next( const JsonValue &val ) const {
+            // Reset to false so inherited legacy to_hit s aren't flagged
+            used_itype.using_legacy_to_hit = false;
             if( val.test_int() ) {
+                used_itype.using_legacy_to_hit = true;
                 return val.get_int();
             } else if( val.test_object() ) {
                 melee_accuracy temp;
@@ -4190,6 +4193,7 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
                 if( !relative.has_member( name ) ) {
                     return false;
                 }
+                used_itype.using_legacy_to_hit = false; //inherited to-hit is false
                 member += relative.get_int( name );
                 return true;
             }
@@ -4292,18 +4296,19 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "repairs_with", def.repairs_with );
     assign( jo, "ememory_size", def.ememory_size );
 
+    optional( jo, def.was_loaded, "color", def.color, color_reader{} );
+
     if( jo.has_member( "repairs_like" ) ) {
         jo.read( "repairs_like", def.repairs_like );
     }
 
     optional( jo, true, "weapon_category", def.weapon_category, auto_flags_reader<weapon_category_id> {} );
-    optional( jo, def.was_loaded, "melee_damage", def.melee );
-    optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
-    optional( jo, def.was_loaded, "explosion", def.explosion );
 
     optional( jo, def.was_loaded, "melee_damage", def.melee );
     optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
     optional( jo, def.was_loaded, "explosion", def.explosion );
+
+    def.using_legacy_to_hit = false; //required for inherited but undefined "to_hit" field
     optional( jo, def.was_loaded, "to_hit", def.m_to_hit, melee_accuracy_reader{ def }, -2 );
     float degrade_mult = 1.0f;
     optional( jo, false, "degradation_multiplier", degrade_mult, 1.0f );
@@ -4498,21 +4503,6 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "pocket_data", def.pockets );
 
     mod_tracker::assign_src( def, src );
-
-    if( def.magazines.empty() ) {
-        migrate_mag_from_pockets( def );
-    }
-    if( def.magazine && def.magazine->capacity == 0 ) {
-        int largest = 0;
-        for( pocket_data &pocket : def.pockets ) {
-            for( const ammotype &atype : def.magazine->type ) {
-                int current = pocket.ammo_restriction[atype];
-                largest = largest < current ? current : largest;
-            }
-        }
-        def.magazine->capacity = largest;
-    }
-
 
     optional( jo, def.was_loaded, "expand_snippets", def.expand_snippets, false );
 
