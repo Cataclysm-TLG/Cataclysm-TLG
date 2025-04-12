@@ -1053,7 +1053,7 @@ void monster::move()
                 ( path.empty() || rl_dist( pos_bub(), path.front() ) >= 2 || path.back() != local_dest ) ) {
                 // We need a new path
                 if( can_pathfind() ) {
-                    path = here.route( pos_bub(), local_dest, pf_settings, get_path_avoid() );
+                    path = here.route( *this, pathfinding_target::point( local_dest ) );
                     if( path.empty() ) {
                         increment_pathfinding_cd();
                     }
@@ -2367,6 +2367,7 @@ void monster::knock_back_to( const tripoint_bub_ms &to )
 bool monster::will_reach( const point_bub_ms &p )
 {
     const map &here = get_map();
+    const tripoint_bub_ms t = { p, posz() };
 
     monster_attitude att = attitude( &get_player_character() );
     if( att != MATT_FOLLOW && att != MATT_ATTACK && att != MATT_FRIEND ) {
@@ -2383,8 +2384,7 @@ bool monster::will_reach( const point_bub_ms &p )
         return false;
     }
 
-    const std::vector<tripoint_bub_ms> path = here.route( pos_bub(), tripoint_bub_ms( p,
-            posz() ), get_pathfinding_settings() );
+    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
     if( path.empty() ) {
         return false;
     }
@@ -2409,9 +2409,9 @@ bool monster::will_reach( const point_bub_ms &p )
 int monster::turns_to_reach( const point_bub_ms &p )
 {
     map &here = get_map();
+    const tripoint_bub_ms t = { p, posz() };
     // HACK: This function is a(n old) temporary hack that should soon be removed
-    const std::vector<tripoint_bub_ms> path = here.route( pos_bub(), tripoint_bub_ms( p,
-            posz() ), get_pathfinding_settings() );
+    const std::vector<tripoint_bub_ms> path = here.route( *this, pathfinding_target::point( t ) );
     if( path.empty() ) {
         return 999;
     }

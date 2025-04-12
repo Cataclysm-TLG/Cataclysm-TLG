@@ -101,6 +101,7 @@
 #include "overmap_ui.h"
 #include "overmapbuffer.h"
 #include "path_info.h"
+#include "pathfinding.h"
 #include "pimpl.h"
 #include "point.h"
 #include "popup.h"
@@ -3622,10 +3623,8 @@ static void set_automove()
         return;
     }
 
-    std::vector<tripoint_bub_ms> rt = get_map().route( player_character.pos_bub(),
-                                      tripoint_bub_ms( *dest ),
-                                      player_character.get_pathfinding_settings(),
-                                      player_character.get_path_avoid() );
+    std::vector<tripoint_bub_ms> rt = get_map().route( player_character,
+                                      pathfinding_target::point( *dest ) );
     if( !rt.empty() ) {
         player_character.set_destination( rt );
     } else {
