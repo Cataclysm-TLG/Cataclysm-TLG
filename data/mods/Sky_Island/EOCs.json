@@ -366,9 +366,34 @@
           "fetid_goop",
           "sap",
           "nausea",
-          "bleed"
+          "bleed",
+          "fungus",
+          "dermatik",
+          "bloodworms",
+          "paincysts",
+          "brainworms",
+          "tapeworm",
+          "blind",
+          "poison",
+          "venom_dmg",
+          "venom_weaken",
+          "stung",
+          "badpoison",
+          "foodpoison",
+          "paralyzepoison",
+          "tetanus",
+          "rat_bite_fever",
+          "infected",
+          "asthma",
+          "common_cold",
+          "flu",
+          "pre_flu",
+          "pre_common_cold",
+          "incorporeal",
+          "VITRIFYING"
         ]
       },
+      { "alter_timed_events": "vitrified_farm_escape_key" },
       {
         "run_eocs": [ "EOC_FIX_MAGICLYSM_PROBLEMS", "EOC_FIX_MIND_OVER_MATTER_PROBLEMS", "EOC_FIX_XEDRA_EVOLVED_PROBLEMS" ]
       }
