@@ -16,7 +16,6 @@
 #include "anatomy.h"
 #include "bionics.h"
 #include "body_part_set.h"
-#include "cached_options.h"
 #include "calendar.h"
 #include "cata_assert.h"
 #include "cata_utility.h"

@@ -18,6 +18,7 @@
 #include "avatar.h"
 #include "bionics.h"
 #include "ballistics.h"
+#include "bodypart.h"
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_scope_helpers.h"

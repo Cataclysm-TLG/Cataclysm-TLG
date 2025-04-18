@@ -20,6 +20,7 @@
 #include "flexbuffer_json.h"
 #include "line.h"
 #include "json_loader.h"
+#include "game_constants.h"
 #include "map_memory.h"
 #include "path_info.h"
 #include "string_formatter.h"
