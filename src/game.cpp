@@ -5015,7 +5015,7 @@ void game::cleanup_dead()
                 overmap_buffer.remove_npc( ( *it )->getID() );
                 it = critter_tracker->active_npc.erase( it );
             } else {
-                it++;
+                ++it;
             }
         }
     }
@@ -13258,7 +13258,7 @@ point_rel_sm game::update_map( int &x, int &y, bool z_level_changed )
             ( *it )->on_unload();
             it = critter_tracker->active_npc.erase( it );
         } else {
-            it++;
+            ++it;
         }
     }
 

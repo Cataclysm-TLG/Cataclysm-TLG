@@ -1648,7 +1648,7 @@ static std::vector<std::tuple<tripoint_bub_ms, itype_id, int>> requirements_map(
                     }
                     break;
                 }
-                it++;
+                ++it;
             }
             if( line_found ) {
                 while( true ) {
@@ -1672,7 +1672,7 @@ static std::vector<std::tuple<tripoint_bub_ms, itype_id, int>> requirements_map(
                             remainder -= quantity_here2;
                         }
                     }
-                    it--;
+                    --it;
                 }
             }
         }
@@ -1706,7 +1706,7 @@ static std::vector<std::tuple<tripoint_bub_ms, itype_id, int>> requirements_map(
                     }
                     break;
                 }
-                it++;
+                ++it;
             }
             if( line_found ) {
                 while( true ) {
@@ -1730,7 +1730,7 @@ static std::vector<std::tuple<tripoint_bub_ms, itype_id, int>> requirements_map(
                             remainder -= quantity_here2;
                         }
                     }
-                    it--;
+                    --it;
                 }
             }
         }
@@ -1753,7 +1753,7 @@ static std::vector<std::tuple<tripoint_bub_ms, itype_id, int>> requirements_map(
                     line_found = true;
                     break;
                 }
-                it++;
+                ++it;
             }
         }
     }
