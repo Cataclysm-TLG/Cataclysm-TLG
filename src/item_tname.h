@@ -28,6 +28,7 @@ enum class segments : std::size_t {
     TYPE,
     CATEGORY,
     CUSTOM_ITEM_SUFFIX,
+    FAULTS_SUFFIX,
     MODS,
     CRAFT,
     WHITEBLACKLIST,

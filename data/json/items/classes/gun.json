@@ -11,12 +11,12 @@
     "color": "light_gray",
     "use_action": [ "GUN_REPAIR" ],
     "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_gun_chamber_spent" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_stovepipe" },
+      { "fault": "fault_double_feed" }
     ],
     "ranged_damage": { "damage_type": "bullet", "amount": 0 }
   },
@@ -42,7 +42,7 @@
     "handling": 10,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "sights", 1 ], [ "sling", 1 ] ],
     "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS" ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
   },
   {
     "abstract": "flamethrower_base",
@@ -134,7 +134,7 @@
     "//proportional": { "reload": 0.7 },
     "extend": { "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ] },
     "//": "Revolvers exclude the muzzle location preventing installation of suppressors",
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "grip", 1 ],
@@ -156,7 +156,7 @@
     "extend": { "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
     "//": "Slower reloads, no unloading.  Base, unskilled person should take 1.5 seconds per chamber.  No underbarrel mods, that's where the ram goes.",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "grip", 1 ], [ "stock", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
   },
   {
     "abstract": "rifle_base",
@@ -189,7 +189,7 @@
     "subtypes": [ "GUN" ],
     "name": { "str": "rifle with manual actions", "str_pl": "rifles with manual actions" },
     "//": "Manual actions exclude the magazine location preventing installation of belt-feed adaptors",
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "extend": { "flags": [ "RELOAD_ONE", "NO_TURRET" ] },
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -212,7 +212,7 @@
     "subtypes": [ "GUN" ],
     "name": { "str": "vintage semi rifle" },
     "range": 6,
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -276,7 +276,7 @@
     "name": { "str": "pump-action shotgun" },
     "reload_noise": "chuk chuk.",
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "PUMP_ACTION" ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
+    "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
   },
   {
     "abstract": "shotgun_pump_3gun",
@@ -311,12 +311,12 @@
     "symbol": "(",
     "color": "light_gray",
     "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
+      { "fault": "fault_gun_blackpowder" },
+      { "fault": "fault_gun_dirt" },
+      { "fault": "fault_gun_chamber_spent" },
+      { "fault": "fault_fail_to_feed" },
+      { "fault": "fault_stovepipe" },
+      { "fault": "fault_double_feed" }
     ],
     "ranged_damage": { "damage_type": "bullet", "amount": 0 }
   }
