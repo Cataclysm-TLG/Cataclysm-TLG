@@ -147,6 +147,7 @@
   {
     "id": "bag_durasack_cement",
     "type": "GENERIC",
+    "subtypes": [ "BOOK" ],
     "name": { "str": "durable plastic sack, cement" },
     "looks_like": "bag_plastic",
     "description": "A big bag made of woven plastic.  Simple instructions printed on the side explain how to make mortar for all your masonry needs.",
