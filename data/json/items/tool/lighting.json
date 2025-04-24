@@ -1,7 +1,7 @@
 [
   {
     "id": "atomic_lamp",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "tools",
     "name": { "str": "atomic lamp" },
     "description": "Powered by the magic of nuclear decay and low-energy LEDs, this very expensive lamp will emit a small amount of light for at least a decade.  Before the Cataclysm, it was mostly an expensive way to show off your preparedness.  Now, it's actually really useful.  Use it to close the cover and hide the light.",
@@ -19,7 +19,7 @@
   },
   {
     "id": "atomic_lamp_off",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "tools",
     "name": { "str": "atomic lamp (covered)", "str_pl": "atomic lamps (covered)" },
     "description": "Powered by the magic of nuclear decay and low-energy LEDs, this very expensive lamp will emit a small amount of light for at least a decade.  Before the Cataclysm, it was mostly an expensive way to show off your preparedness.  Now, it's actually really useful.  The cover is closed.  Use it to open the cover and show the light.",
@@ -43,7 +43,7 @@
   },
   {
     "id": "atomic_light",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "tools",
     "name": { "str": "atomic reading light" },
     "description": "Powered by the magic of nuclear decay and low-energy LEDs, this extremely expensive little light will provide just enough light to read by for at least a decade.  It is also available with a cute cartoon bear cover to turn it into a nightlight for a very wealthy child with a fear of the dark.  Use it to close the cover and hide the light.",
@@ -66,7 +66,7 @@
   },
   {
     "id": "atomic_light_off",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "tools",
     "name": { "str": "atomic reading light (covered)", "str_pl": "atomic reading lights (covered)" },
     "description": "Powered by the magic of nuclear decay and low-energy LEDs, this extremely expensive little light will provide just enough light to read by for at least a decade.  It is also available with a cute cartoon bear cover to turn it into a nightlight for a very wealthy child with a fear of the dark.  The cover is closed.  Use it to open the cover and show the light.",
@@ -90,7 +90,8 @@
   },
   {
     "id": "candle",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "candle" },
     "description": "A thick wax candle.  It doesn't provide very much light, but it can burn for quite a long time.  You'll need a lighter or matches to light it.",
     "//": "Based on this: https://www.amazon.com/dp/B0843HQMZ1",
@@ -117,7 +118,8 @@
   },
   {
     "id": "candle_lit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "copy-from": "candle",
     "name": { "str": "candle" },
     "description": "A thick wax candle.  It doesn't provide very much light, but it can burn for quite a long time.  This candle is lit.",
@@ -136,7 +138,8 @@
   },
   {
     "id": "electric_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "electric lantern (off)", "str_pl": "electric lanterns (off)" },
     "description": "A battery-powered lamp.  It does not provide much light, but it lasts a long time.",
     "weight": "980 g",
@@ -167,7 +170,8 @@
   {
     "id": "electric_lantern_on",
     "copy-from": "electric_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "electric lantern (on)", "str_pl": "electric lanterns (on)" },
     "power_draw": "1 W",
     "revert_to": "electric_lantern",
@@ -185,7 +189,8 @@
   },
   {
     "id": "flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "flashlight (off)", "str_pl": "flashlights (off)" },
     "description": "A typical household flashlight with a plastic handle, powered by batteries.",
     "//": "https://www.amazon.com/dp/B0CFLGMKQM",
@@ -220,7 +225,8 @@
   {
     "id": "flashlight_on",
     "copy-from": "flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "flashlight (on)", "str_pl": "flashlights (on)" },
     "power_draw": "750 mW",
     "revert_to": "flashlight",
@@ -236,7 +242,8 @@
   },
   {
     "id": "diving_flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "diving flashlight (off)", "str_pl": "diving flashlights (off)" },
     "description": "A little waterproof light.  It can easily be clipped to a belt or a helmet, or to some diving masks.",
     "material": [ "plastic", "aluminum" ],
@@ -271,7 +278,8 @@
   {
     "id": "diving_flashlight_on",
     "copy-from": "diving_flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "diving flashlight (on)", "str_pl": "diving flashlights (on)" },
     "looks_like": "flashlight_on",
     "power_draw": "575 mW",
@@ -287,7 +295,8 @@
   },
   {
     "id": "gasoline_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "gasoline lantern (off)", "str_pl": "gasoline lanterns (off)" },
     "description": "A small gasoline-powered lantern.  It does not provide much light, but it lasts a long time.  Use it to turn it on.",
     "weight": "1400 g",
@@ -316,7 +325,8 @@
   {
     "id": "gasoline_lantern_on",
     "copy-from": "gasoline_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "gasoline lantern (on)", "str_pl": "gasoline lanterns (on)" },
     "description": "A small gasoline-powered lantern.  It does not provide much light, but it lasts a long time.  It is turned on.  Use it to turn it off.",
     "turns_per_charge": 60,
@@ -335,7 +345,8 @@
   },
   {
     "id": "glowstick",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "glowstick" },
     "description": "A small blue-light glowstick.  Use it to bend the plastic and break the glass cylinder inside to start the reaction.  It will produce a small amount of light.",
     "weight": "29 g",
@@ -359,7 +370,8 @@
   },
   {
     "id": "glowstick_dead",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "other",
     "name": { "str": "dead glowstick" },
     "description": "A spent glowstick.  It is essentially trash.",
@@ -376,7 +388,8 @@
   },
   {
     "id": "glowstick_lit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "active glowstick" },
     "description": "An active glowstick, currently producing light.  It will last for a few hours before burning out.",
     "weight": "29 g",
@@ -393,7 +406,8 @@
   },
   {
     "id": "handflare",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "flare" },
     "description": "A slow-burning magnesium flare.  Use it to strike the striker and light it.  It will produce a bright light for about a half hour.",
     "material": [ "plastic", "powder" ],
@@ -417,7 +431,8 @@
   {
     "id": "handflare_lit",
     "copy-from": "handflare",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "active flare" },
     "description": "A burning magnesium flare that is producing light.  It will last for about a half hour before burning out.",
     "color": "white",
@@ -430,7 +445,8 @@
   {
     "id": "sigflare_lit",
     "copy-from": "handflare",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "active flare" },
     "description": "A bright burning flare that is producing light.  It will last for about a minute before burning out.",
     "color": "white",
@@ -442,7 +458,8 @@
   },
   {
     "id": "heavy_flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "heavy-duty flashlight (off)", "str_pl": "heavy-duty flashlights (off)" },
     "description": "A heavy-duty aluminum LED flashlight, often used by security guards.  It even works underwater, and it's not bad for smacking hooligans.",
     "weight": "720 g",
@@ -478,7 +495,8 @@
   {
     "id": "heavy_flashlight_on",
     "copy-from": "heavy_flashlight",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "heavy-duty flashlight (on)", "str_pl": "heavy-duty flashlights (on)" },
     "power_draw": "5 W",
     "revert_to": "heavy_flashlight",
@@ -503,7 +521,8 @@
   },
   {
     "id": "lightstrip",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "LED strip" },
     "copy-from": "lightstrip_inactive",
     "color": "green",
@@ -525,7 +544,8 @@
   },
   {
     "id": "lightstrip_inactive",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "LED strip (inactive)", "str_pl": "LED strips (inactive)" },
     "description": "25 feet of colorful LED strip, that are often used as house lights or on some holidays.",
     "weight": "158 g",
@@ -544,7 +564,8 @@
   },
   {
     "id": "oil_lamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "oil lamp (off)", "str_pl": "oil lamps (off)" },
     "description": "An oil-fueled lamp.  It does not provide much light, but it lasts a long time.  Use it to turn it on.",
     "weight": "1720 g",
@@ -573,7 +594,8 @@
   {
     "id": "oil_lamp_on",
     "copy-from": "oil_lamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "oil lamp" },
     "description": "An oil-fueled lamp.  It does not provide much light, but it lasts a long time.  It is turned on.  Use it to turn it off.",
     "turns_per_charge": 240,
@@ -592,7 +614,8 @@
   },
   {
     "id": "oil_lamp_clay",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "clay oil lamp (off)", "str_pl": "clay oil lamps (off)" },
     "description": "A specialized small clay container with a wick, an ancient form of oil lamp.  Unlike newer designs, it isn't windproof, so the flame is likely to be extinguished if exposed to wind; better use it indoors.  It does not provide much light, but it lasts a long time.  Use it to light it.",
     "weight": "620 g",
@@ -622,7 +645,8 @@
     "copy-from": "oil_lamp_clay",
     "looks_like": "oil_lamp_on",
     "sub": "oil_lamp_on",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "clay oil lamp" },
     "description": "A specialized small clay container with a wick, an ancient form of oil lamp.  Unlike newer designs, it isn't windproof, so the flame is likely to be extinguished if exposed to wind; better use it indoors.  It does not provide much light, but lasts a long time.  It is lit, consuming oil and providing light.  Use it to extinguish the flame.",
     "turns_per_charge": 240,
@@ -641,7 +665,8 @@
   },
   {
     "id": "oxylamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "acetylene lamp (off)", "str_pl": "acetylene lamps (off)" },
     "description": "An antique brass lamp designed to run from a pressurized cylinder of acetylene.  It is an efficient, if somewhat dangerous, light source.",
     "weight": "800 g",
@@ -666,7 +691,8 @@
   {
     "id": "oxylamp_on",
     "copy-from": "oxylamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "acetylene lamp (on)", "str_pl": "acetylene lamps (on)" },
     "turns_per_charge": 240,
     "revert_to": "oxylamp",
@@ -678,7 +704,8 @@
   },
   {
     "id": "reading_light",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "reading light" },
     "description": "A little clip-on LED light, meant for reading books in the dark.",
     "//": "https://www.amazon.com/dp/B08GG42WXY",
@@ -705,7 +732,8 @@
   {
     "id": "reading_light_on",
     "copy-from": "reading_light",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "reading light (active)", "str_pl": "reading lights (active)" },
     "description": "A little clip-on LED light, meant for reading books in the dark.  This one is turned on.",
     "power_draw": "46 mW",
@@ -721,7 +749,8 @@
   },
   {
     "id": "smart_lamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "smart lamp (off)", "str_pl": "smart lamps (off)" },
     "description": "A smart lamp that can be activated remotely.",
     "//": "https://www.amazon.com/dp/B0CM3RKR5Z",
@@ -761,7 +790,8 @@
   {
     "id": "smart_lamp_on",
     "copy-from": "smart_lamp",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "smart lamp (on)", "str_pl": "smart lamps (on)" },
     "description": "A smart lamp which can be deactivated remotely.  Currently it is turned on.",
     "power_draw": "1321 mW",
@@ -789,7 +819,8 @@
   },
   {
     "id": "torch",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "torch", "str_pl": "torches" },
     "description": "A large stick wrapped in rags that are soaked with flammable material.  When lit, it produces a fair amount of light.  You'll need a lighter or matches to light it.",
     "weight": "623 g",
@@ -818,7 +849,8 @@
   },
   {
     "id": "torch_lit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "torch", "str_pl": "torches" },
     "description": "A large stick wrapped in rags that are soaked with flammable material.  It is burning, producing plenty of light.",
     "weight": "623 g",
@@ -851,7 +883,8 @@
   },
   {
     "id": "propane_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "propane lantern (off)", "str_pl": "propane lanterns (off)" },
     "description": "A small propane-powered lantern.  It does not provide much light, but it lasts a long time.  Use it to turn it on.",
     "weight": "1400 g",
@@ -879,7 +912,8 @@
   {
     "id": "propane_lantern_on",
     "copy-from": "propane_lantern",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "propane lantern (on)", "str_pl": "propane lanterns (on)" },
     "description": "A small propane-powered lantern.  It does not provide much light, but it lasts a long time.  It is turned on.  Use it to turn it off.",
     "turns_per_charge": 60,

@@ -46,7 +46,7 @@
     "weapon_category": [ "SHIVS" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_sheet",
     "symbol": "]",
     "color": "light_cyan",
@@ -64,7 +64,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "reinforced_glass_sheet",
     "symbol": "]",
     "color": "light_blue",
@@ -81,7 +81,7 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "reinforced_glass_pane",
     "symbol": "]",
     "color": "light_blue",
@@ -98,7 +98,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "tempered_glass_sheet",
     "symbol": "]",
     "color": "light_cyan",

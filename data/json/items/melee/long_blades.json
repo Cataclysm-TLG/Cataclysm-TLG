@@ -1,6 +1,6 @@
 [
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_wood",
     "symbol": "!",
     "color": "brown",
@@ -18,7 +18,7 @@
     "melee_damage": { "bash": 12, "cut": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_wood_large",
     "symbol": "!",
     "color": "brown",
@@ -37,7 +37,7 @@
     "melee_damage": { "bash": 16, "cut": 2 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_sheets_welded",
     "symbol": "!",
     "color": "light_gray",
@@ -57,7 +57,7 @@
     "melee_damage": { "bash": 4, "cut": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_sheets_welded_large",
     "symbol": "!",
     "color": "light_gray",
@@ -77,7 +77,7 @@
     "melee_damage": { "bash": 8, "cut": 25 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_metal",
     "symbol": "!",
     "color": "light_gray",
@@ -97,7 +97,7 @@
     "melee_damage": { "bash": 6, "cut": 20 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "sword_metal_large",
     "name": { "str": "crude greatsword" },
     "description": "A large, crudely-forged blade.  It's too big to be called a sword.  Too massive, too thick, too heavy, and far too rough.",
@@ -120,7 +120,8 @@
   },
   {
     "id": "makeshift_machete",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "makeshift machete" },
     "description": "A large blade with one end wrapped in duct tape to make a crude handle, making it easier to wield as a rough machete.",
@@ -141,7 +142,8 @@
   },
   {
     "id": "machete",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "machete" },
     "description": "This intimidating blade makes an excellent tool for chopping through vegetation, or anything else you don't want in your yard.",
@@ -164,7 +166,8 @@
   {
     "id": "machete_gimmick",
     "name": { "str": "machete multitool" },
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "description": "A thin, wobbly steel blade with sawteeth on one side and a flat chisel tip for digging.  More of a jackass of all trades than a jack of them.",
     "longest_side": "58 cm",
     "symbol": "/",
@@ -182,7 +185,8 @@
   },
   {
     "id": "cavalry_sabre",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "looks_like": "cavalry_sabre",
     "name": { "str": "cavalry saber" },
     "category": "weapons",
@@ -205,7 +209,8 @@
   },
   {
     "id": "jian",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "looks_like": "arming_sword",
     "name": { "str_sp": "jian" },
@@ -228,7 +233,8 @@
   },
   {
     "id": "scimitar",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "scimitar" },
     "description": "A curved sword associated with various Middle Eastern and Central Asian countries.  Designed for slashing, and quite deadly against unarmored targets.",
@@ -251,7 +257,7 @@
   },
   {
     "id": "estoc",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "name": { "str": "estoc" },
     "description": "Also called a tuck, the estoc is a very long thrusting sword designed for piercing armor on the battlefield.",
@@ -274,7 +280,8 @@
   },
   {
     "id": "longsword",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "longsword" },
     "description": "A classic medieval sword, in between the lighter arming sword and later two-handed swords in size.  It's well-balanced and surprisingly easy to use due to its two-handed grip, but requires a larger baldric or scabbard compared to smaller swords.",
@@ -296,7 +303,8 @@
   },
   {
     "id": "arming_sword",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "arming sword" },
     "description": "A classic medieval sword, just the right size to use one-handed.",
@@ -319,7 +327,8 @@
   },
   {
     "id": "sword_xiphos",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "xiphos", "str_pl": "xiphe" },
     "description": "A bronze sword of ancient Greek origin.",
@@ -340,7 +349,8 @@
   },
   {
     "id": "khopesh",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "khopesh", "str_pl": "khopeshes" },
     "description": "This ancient bronze weapon features a curved, sickle-like blade sharpened on the outside edge.  Associated with the New Kingdom period of Ancient Egypt, it was designed mainly to hack through the light armor common to the region.",
@@ -361,7 +371,8 @@
   },
   {
     "id": "dao",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str_sp": "dao" },
     "description": "An ancient Chinese saber consisting of a curved blade and a guard with a cupped design.  This one is made of bronze.",
@@ -382,7 +393,8 @@
   },
   {
     "id": "sword_bronze",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "bronze sword" },
     "description": "A simple short sword made of bronze.",
@@ -404,7 +416,8 @@
   },
   {
     "id": "sword_bayonet",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "sword bayonet" },
     "description": "A long, knife bladed bayonet that can be attached to the front of a rifle, converting it into a pike.  It is long enough to be used as a short sword when unmounted.",
@@ -452,7 +465,8 @@
   },
   {
     "id": "tanto",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str_sp": "tanto" },
     "description": "An ornate knife that dates back to the Heian period in Japan.  Originally a backup weapon for samurai, these blades took on a ceremonial purpose, becoming the instrument used for seppuku.",
@@ -473,7 +487,8 @@
   },
   {
     "id": "wakizashi",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str_sp": "wakizashi" },
     "description": "A comparatively-common Japanese short sword.  Smaller and lighter than a katana, but still effective in combat.",
@@ -495,7 +510,7 @@
     "melee_damage": { "bash": 2, "cut": 21 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "glass_shiv",
     "symbol": ",",
     "color": "light_cyan",
@@ -514,7 +529,8 @@
   },
   {
     "id": "zweihander",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "zweihänder" },
     "description": "A huge two-handed sword from Germany.  It packs a real wallop.",
@@ -537,7 +553,8 @@
   },
   {
     "id": "karambit",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "karambit" },
     "description": "A traditional Indonesian knife.  The blade is very short, but its curved design is perfect for precision attacks.",
     "looks_like": "kirpan",
@@ -558,7 +575,8 @@
   },
   {
     "id": "kirpan",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "kirpan" },
     "description": "A ceremonial dagger carried by Sikh men.  This one is sharp and could be an effective weapon.",
     "looks_like": "kukri",
@@ -579,7 +597,8 @@
   },
   {
     "id": "nodachi",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str_sp": "nodachi" },
     "description": "A two-handed sword from Japan resembling an extremely long katana.",
@@ -602,7 +621,7 @@
   },
   {
     "id": "fencing_foil",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "weapons",
     "symbol": "/",
     "color": "light_gray",
@@ -622,7 +641,7 @@
   },
   {
     "id": "fencing_foil_sharpened",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "fencing_foil",
     "looks_like": "fencing_foil",
     "name": { "str": "sharpened foil" },
@@ -632,7 +651,8 @@
   },
   {
     "id": "shock_foil",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "copy-from": "fencing_foil_sharpened",
     "name": { "str": "electrified foil" },
     "description": "The modifications made to this fencing foil may not be sporting, but they might give you an edge in this final competition.  Extra effort has been made to insulate the grip and a high voltage stun gun has been attached to the guard, wired through the electronic scoring circuit to the tip.  Thrusting the sharpened tip into a foe and activating the momentary switch will deliver a painful electric shock.",
@@ -653,7 +673,7 @@
   },
   {
     "id": "fencing_epee",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "fencing épée" },
@@ -672,7 +692,7 @@
   },
   {
     "id": "fencing_epee_sharpened",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "fencing_epee",
     "looks_like": "fencing_epee",
     "name": { "str": "sharpened épée" },
@@ -682,7 +702,8 @@
   },
   {
     "id": "shock_epee",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "copy-from": "fencing_epee_sharpened",
     "looks_like": "fencing_epee",
@@ -705,7 +726,7 @@
   },
   {
     "id": "fencing_sabre",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "fencing saber" },
@@ -724,7 +745,7 @@
   },
   {
     "id": "fencing_sabre_sharpened",
-    "type": "GENERIC",
+    "type": "ITEM",
     "copy-from": "fencing_sabre",
     "looks_like": "fencing_sabre",
     "name": { "str": "sharpened saber" },
@@ -734,7 +755,8 @@
   },
   {
     "id": "shock_sabre",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "copy-from": "fencing_sabre_sharpened",
     "looks_like": "fencing_sabre",
@@ -757,7 +779,7 @@
   },
   {
     "id": "hollow_cane",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "brown",
     "name": { "str": "hollow cane" },
@@ -789,7 +811,7 @@
   },
   {
     "id": "sword_cane",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "sword cane" },
@@ -809,7 +831,8 @@
   },
   {
     "id": "broadsword",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "broadsword" },
     "description": "A straight sword that was ubiquitous during the Early Modern era, with a wide blade suitable for slashing or stabbing.  These were called \"broad\" to contrast with the slimmer rapiers of the day.",
@@ -831,7 +854,8 @@
   },
   {
     "id": "rapier",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "rapier" },
     "description": "A thin, straight sword of the type once preferred by musketeers, masked gentlemen, and swashbucklers of all sorts.",
@@ -854,7 +878,8 @@
   },
   {
     "id": "katana",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str_sp": "katana" },
     "description": "A slightly curved sword from Japan, world-famous for its artistic design and association with the age of the samurai.",
@@ -877,7 +902,8 @@
   },
   {
     "id": "butterfly_swords",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "butterfly sword" },
@@ -898,7 +924,8 @@
   },
   {
     "id": "cutlass",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "cutlass", "str_pl": "cutlasses" },
     "description": "A broad saber known for its use by sailors and pirates, as its short blade is easy to handle in close quarters.",
@@ -921,7 +948,8 @@
   },
   {
     "id": "kriegsmesser",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "kriegsmesser" },
     "description": "A single-edged two-handed sword of German design, with a long, curved blade.  It became popular across Europe due to its low cost while maintaining strong cutting power in comparison to the more sophisticated longsword.",
@@ -944,7 +972,8 @@
   },
   {
     "id": "falx",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "falx", "str_pl": "falxes" },
     "description": "A distinct Dacian sword that curves forward, allowing you to bypass shields or hook and pull enemies, while delivering decent chopping damage.",
@@ -967,7 +996,8 @@
   },
   {
     "id": "combatsaw_off",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "combat chainsaw (off)", "str_pl": "combat chainsaws (off)" },
     "description": "A chainsaw that has been lightened, tuned, and extensively modified to be easier to handle as a weapon.  Unfortunately, these modifications have rendered it much less effective as a woodcutting tool.",
@@ -1009,7 +1039,8 @@
   {
     "id": "combatsaw_on",
     "copy-from": "combatsaw_off",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "combat chainsaw (on)", "str_pl": "combat chainsaws (on)" },
     "description": "This combat chainsaw is on, and is continuously draining gasoline.  Use it to turn it off.",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "every", "balance": "neutral" },
@@ -1050,7 +1081,8 @@
   },
   {
     "id": "e_combatsaw_off",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "electric combat chainsaw (off)", "str_pl": "electric combat chainsaws (off)" },
     "description": "An electric chainsaw that has been lightened, tuned, and extensively modified to be easier to handle as a weapon.  Unfortunately, these modifications have rendered it much less effective as a woodcutting tool.",
@@ -1099,7 +1131,8 @@
   {
     "id": "e_combatsaw_on",
     "copy-from": "e_combatsaw_off",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "electric combat chainsaw (on)", "str_pl": "electric combat chainsaws (on)" },
     "description": "This electric combat chainsaw is on, and is continuously draining power.  Use it to turn it off.",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "every", "balance": "neutral" },
@@ -1139,7 +1172,7 @@
     "relative": { "melee_damage": { "cut": 50 } }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "punch_dagger",
     "name": { "str": "punch dagger" },
     "description": "A short, sharp double-edged dagger made to be gripped in the palm, with the blade protruding between the fingers.",
@@ -1158,7 +1191,7 @@
     "melee_damage": { "bash": 2, "stab": 12 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "knuckle_katar",
     "symbol": "!",
     "color": "dark_gray",
@@ -1177,7 +1210,8 @@
   },
   {
     "id": "enfield_bayonet",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "Enfield No. 4 bayonet" },
     "description": "This is a vintage spike bayonet for the British Lee Enfield No. 4 rifle, featuring a distinct cruciform blade and socket-based mounting system.",
@@ -1225,7 +1259,8 @@
   },
   {
     "id": "arisaka_bayonet",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "Type 30 bayonet" },
     "description": "An essential tool within any 20th-century Japanese soldier's toolbox, the Type 30 is a massive, single-edged sword-style bayonet intended for use with Arisaka rifles and even light machineguns.  Possessing a J-shaped quillon guard for hooking an opponent's weapon during combat, the bayonet, when dismounted, acts like a particularly sizable machete.",
@@ -1271,7 +1306,8 @@
   },
   {
     "id": "talwar",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "talwar" },
     "description": "A curved sword used by the Raj of India in the 16th century, a talwar is usually impeccably decorated and able to take off a limb with a single swipe.",
     "weight": "1450 g",
@@ -1293,7 +1329,8 @@
   },
   {
     "id": "kilij",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "kilij", "str_pl": "kilijes" },
     "description": "A Turkish sabre, the kilij is quite a bit heavier than most Middle Eastern sabres and has a distinctive wide tip called a yelman, which gives it vicious cutting power but means it requires a special scabbard.",

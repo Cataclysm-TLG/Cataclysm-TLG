@@ -1,7 +1,7 @@
 [
   {
     "id": "resin_chunk",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "spare_parts",
     "name": { "str": "alien resin chunk" },
     "description": "A shattered fragment of alien resin.  It looks a bit like a large piece of sea glass, frosted and gritty with the edges rounded off.  It is somewhat warm to the touch.",
@@ -16,7 +16,8 @@
   },
   {
     "id": "alien_pod_resin",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "alien resin pod" },
     "description": "A large pod the size of a beer keg, filled with gooey alien resin.  Squeezing it firmly causes resin to squirt from the broken stalk at the end, hardening within a few seconds of being exposed to the air.",
@@ -30,7 +31,7 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "alien_fern",
     "symbol": "y",
     "color": "red_green",
@@ -47,7 +48,7 @@
     "melee_damage": { "bash": 1 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "cbm_wire_kit",
     "symbol": ",",
     "color": "light_gray",
@@ -63,7 +64,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "nomad_ac_kit",
     "symbol": ",",
     "color": "light_gray",
@@ -79,7 +80,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_electronics",
     "name": { "str_sp": "woven metallics" },
     "description": "Thin metallic strips with an ochre sheen, interlaid together into a flexible mesh.  You can't tell whether it's a circuit, a heat dissipation component, or a mechanical actuator.",
@@ -92,7 +93,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_metal",
     "name": { "str_sp": "alien metal plating" },
     "description": "A slightly curved plate of white metal.  It readily collects low amounts of static charge.",
@@ -105,7 +106,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_scrap",
     "name": { "str_sp": "alien metal scrap" },
     "description": "A collection of tiny metal strips, spheres, and other geometric primitives taken from a disassembled alien machine.",
@@ -118,7 +119,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_computer",
     "name": { "str_sp": "monolithic machine" },
     "description": "A very heavy sphere, presumably made almost entirely of gold.  The complex pattern etched across its surface implies that it might serve some exotic function.",
@@ -131,7 +132,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_robotics",
     "name": { "str_sp": "robotic innards" },
     "description": "A robotic assembly of unknown function.  Entirely made from tight-fitting metal plates, it somewhat resembles the interior of a mechanical clock.",
@@ -144,7 +145,7 @@
     "category": "spare_parts"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "yrax_sensor",
     "name": { "str_sp": "sensor assembly" },
     "description": "A carved sphere embedded with small black glass screens.  It's probably a sensor of some kind.",

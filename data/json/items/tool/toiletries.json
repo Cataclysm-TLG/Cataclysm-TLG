@@ -1,7 +1,8 @@
 [
   {
     "id": "bathroom_scale",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "bathroom scale" },
     "symbol": "_",
     "color": "light_gray",
@@ -19,7 +20,8 @@
   },
   {
     "id": "brush",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "scrub brush", "str_pl": "scrub brushes" },
     "description": "A simple scrub brush for cleaning hard objects.",
     "weight": "70 g",
@@ -37,7 +39,8 @@
   },
   {
     "id": "dish_towel",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "other",
     "name": { "str": "dish towel" },
     "description": "A dish towel, useful for cleaning hard surfaces.",
@@ -54,7 +57,8 @@
   },
   {
     "id": "elec_hairtrimmer",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "electric hair trimmer" },
     "description": "A pocket-sized electric trimmer made for cutting hair.  You can use it to cut your hair if it's supplied with batteries.  It requires 1 unit of charge per use.",
     "weight": "138 g",
@@ -76,7 +80,8 @@
   },
   {
     "id": "mop",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "mop" },
     "description": "An unwieldy mop.  Good for cleaning up spills.  Use to mop up any 'mess' you may have made.",
     "weight": "780 g",
@@ -97,7 +102,8 @@
   },
   {
     "id": "mop_folded",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "collapsible mop" },
     "description": "A long, unwieldy mop with a collapsible handle for convenient transportation.  You may use it to clean up any 'mess' you have made.",
     "weight": "730 g",
@@ -118,7 +124,8 @@
   },
   {
     "id": "cotton_patch",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "cloth patch", "str_pl": "cloth patches" },
     "description": "A 6-inch square patch of fabric, suitable for repairing and tailoring clothing.",
@@ -138,7 +145,7 @@
     "flags": [ "NO_SALVAGE", "TINDER" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "razor_blade",
     "symbol": ",",
     "color": "light_cyan",
@@ -154,7 +161,8 @@
   },
   {
     "id": "shavingkit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "shaving kit" },
     "description": "A compact, lightweight shaving kit made for travelers.  You can use it to shave if it's supplied with soap.  It requires 1 unit of soap per use.",
     "weight": "99 g",
@@ -173,7 +181,8 @@
   },
   {
     "id": "sponge",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "sponge" },
     "description": "A cleaning aid made of soft, porous material.  Typically used for cleaning hard objects.",
     "weight": "17 g",
@@ -198,7 +207,8 @@
   },
   {
     "id": "survivor_hairtrimmer",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "makeshift haircut kit" },
     "description": "A kit containing various improvised tools for cutting hair.",
     "weight": "642 g",
@@ -215,7 +225,8 @@
   },
   {
     "id": "survivor_shavingkit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "makeshift shaving kit" },
     "description": "A makeshift shaving kit.  You can use it to shave if it's supplied with soap.  It requires 1 unit of soap per use.",
     "weight": "540 g",
@@ -235,7 +246,8 @@
   },
   {
     "id": "washboard",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "washboard" },
     "description": "A wooden washboard.  You can use it to wash filthy clothing if it's supplied with cleansing agent.",
     "weight": "1160 g",
@@ -252,7 +264,8 @@
   },
   {
     "id": "wash_kit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "washing kit" },
     "description": "A combination of a washboard and a scrubbing tool.  Everything you need to clean items after the apocalypse.",
     "weight": "866 g",
@@ -268,7 +281,8 @@
   },
   {
     "id": "hair_dye_kit",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "hair dye kit" },
     "description": "A kit featuring all the tools needed to dye hair, including an applicator brush, combs, and plastic gloves.",
     "weight": "154 g",

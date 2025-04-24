@@ -127,7 +127,7 @@
     "fun": -10
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skewer_bone",
     "symbol": ",",
@@ -145,7 +145,7 @@
     "recipe": "meal_bone_tainted_mill_6_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "abstract": "skull_abstract",
     "name": { "str": "abstract skull" },
     "description": "This is a dummy item.  If you see it something went wrong.",
@@ -160,14 +160,14 @@
     "material": [ "bone" ]
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_human",
     "name": { "str": "human skull" },
     "description": "The skull of a human being.  Carrying this around probably isn't going to win you any friends.",
     "copy-from": "skull_abstract"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_human_tainted",
     "name": { "str": "tainted human skull" },
     "description": "The stained skull of what was once a human being.  It is rotted and noticeably warped from its lively form.  Carrying this around probably isn't going to win you any friends.",
@@ -176,7 +176,7 @@
     "snippet_category": "skull_human_tainted_desc"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_canis_small",
     "name": { "str": "tiny canine skull" },
@@ -189,7 +189,7 @@
     "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_canis_medium",
     "name": { "str": "small canine skull" },
@@ -202,7 +202,7 @@
     "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_canis",
     "name": { "str": "large canine skull" },
     "description": "The skull of a wolf or a dog.  Essential material for building an articulated wolf skeleton.",
@@ -212,7 +212,7 @@
     "longest_side": "29 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_canis_triclopean",
     "name": { "str": "triclopean canine skull" },
     "description": "The skull of a what looks like a dog, although it has an extra eye socket.",
@@ -222,7 +222,7 @@
     "longest_side": "12 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_feline_small",
     "name": { "str": "small feline skull" },
@@ -235,7 +235,7 @@
     "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_feline_medium",
     "name": { "str": "medium feline skull" },
@@ -248,7 +248,7 @@
     "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_tiger",
     "name": { "str": "tiger skull" },
     "description": "The skull of a tiger.",
@@ -258,7 +258,7 @@
     "longest_side": "21 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_raccoon",
     "name": { "str": "raccoon skull" },
@@ -271,7 +271,7 @@
     "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_bear",
     "name": { "str": "bear skull" },
     "description": "The skull of a bear.",
@@ -281,7 +281,7 @@
     "longest_side": "30 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_opossum",
     "name": { "str": "opossum skull" },
@@ -294,7 +294,7 @@
     "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_skunk",
     "name": { "str": "skunk skull" },
@@ -307,7 +307,7 @@
     "recipe": "meal_bone_mill_2_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_rodent",
     "name": { "str": "rodent skull" },
@@ -320,7 +320,7 @@
     "recipe": "meal_bone_mill_20_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "subtypes": [ "MILLING" ],
     "id": "skull_rabbit",
     "name": { "str": "rabbit skull" },
@@ -333,7 +333,7 @@
     "recipe": "meal_bone_mill_1_1"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_beaver",
     "name": { "str": "beaver skull" },
     "description": "The skull of a beaver.",
@@ -343,7 +343,7 @@
     "longest_side": "16 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_pig",
     "name": { "str": "pig skull" },
     "description": "The skull of a pig, either a domestic or a wild one.",
@@ -353,7 +353,7 @@
     "longest_side": "30 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_sheep",
     "name": { "str": "sheep skull" },
     "description": "The skull of a domestic sheep.",
@@ -363,7 +363,7 @@
     "longest_side": "25 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_goat",
     "name": { "str": "goat skull" },
     "description": "The skull of a goat with the horns still attached.",
@@ -373,7 +373,7 @@
     "longest_side": "25 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_bovine",
     "name": { "str": "cow skull" },
     "description": "The skull of a bovine, likely a domestic cow, with the horns still attached.",
@@ -383,7 +383,7 @@
     "longest_side": "35 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_equine",
     "name": { "str": "horse skull" },
     "description": "The skull of a horse.  Given the circumstances you can be pretty sure it was a domestic horse.",
@@ -393,7 +393,7 @@
     "longest_side": "55 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_cervine",
     "name": { "str": "deer skull" },
     "description": "The skull of a cervine, either a deer or a reindeer.",
@@ -403,7 +403,7 @@
     "longest_side": "50 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_cervine_spideer",
     "name": { "str": "deer skull" },
     "description": "The skull of a cervine, probably a deer…  But why does it have eight eye sockets?",
@@ -413,7 +413,7 @@
     "longest_side": "40 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_moose",
     "name": { "str": "moose skull" },
     "description": "The skull of a moose.",
@@ -423,7 +423,7 @@
     "longest_side": "65 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_moose_tusked",
     "name": { "str": "tusked moose skull" },
     "description": "The skull of a moose, sporting big curving tusks, like a boar.",
@@ -433,7 +433,7 @@
     "longest_side": "120 cm"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "skull_llama",
     "name": { "str": "llama skull" },
     "description": "The skull of a llama.",

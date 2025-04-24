@@ -1,7 +1,7 @@
 [
   {
     "id": "shrink_wrap",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "container",
     "name": { "str": "shrink wrapping" },
     "looks_like": "bag_plastic",
@@ -16,7 +16,7 @@
   },
   {
     "id": "trashcan",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "container",
     "name": { "str": "trash can" },
     "looks_like": "f_trashcan",
@@ -45,7 +45,7 @@
   },
   {
     "id": "saline_bag_250_empty",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "container",
     "name": { "str": "small liquid bag" },
     "description": "Small bag, similar to an IV bag, that previously stored a sterilized saline solution.  Whatever it stores now, it is not safe to put in your veins.",
@@ -71,7 +71,7 @@
   },
   {
     "id": "saline_bag_500_empty",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "medium liquid bag" },
     "description": "Bag, similar to an IV bag, that previously stored a sterilized saline solution.  Whatever it stores now, it is not safe to put in your veins.",
     "copy-from": "saline_bag_250_empty",
@@ -92,7 +92,7 @@
   },
   {
     "id": "saline_bag_1000_empty",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "large liquid bag" },
     "description": "Large bag, similar to an IV bag, that previously stored a sterilized saline solution.  Whatever it stores now, it is not safe to put in your veins.",
     "copy-from": "saline_bag_250_empty",
@@ -113,7 +113,7 @@
   },
   {
     "id": "saline_bag_2000_empty",
-    "type": "GENERIC",
+    "type": "ITEM",
     "name": { "str": "huge liquid bag" },
     "description": "Huge bag, similar to an IV bag, that previously stored a sterilized saline solution.  Whatever it stores now, it is not safe to put in your veins.",
     "copy-from": "saline_bag_250_empty",
@@ -134,7 +134,7 @@
   },
   {
     "id": "box_paper_small",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "container",
     "name": { "str": "small paper box", "str_pl": "small paper boxes" },
     "looks_like": "box_tea",

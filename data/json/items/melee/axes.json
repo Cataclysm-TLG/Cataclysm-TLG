@@ -1,6 +1,7 @@
 [
   {
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "id": "crash_axe",
     "symbol": ";",
     "color": "light_gray",
@@ -24,7 +25,8 @@
   },
   {
     "id": "fire_ax",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "fire axe" },
     "description": "A hefty two-handed axe normally used by firefighters.  It makes a powerful melee weapon, but is a bit slow to recover between swings.  Thanks to its prying head, it can also be used to force locked doors and windows open.",
     "weight": "3628 g",
@@ -55,7 +57,8 @@
   },
   {
     "id": "battleaxe",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "battle axe" },
     "description": "An axe designed for medieval warfare, the head secured to the haft with langets.  Though formidable, it's lighter than the sort you'd use for felling trees, and would make an inferior tool for that purpose.",
     "weight": "2002 g",
@@ -75,7 +78,7 @@
     "melee_damage": { "bash": 19, "cut": 34 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "street_sign",
     "name": { "str": "street sign" },
     "description": "A large street sign, its aluminum pole uprooted.  An unreasonably strong person might be able to wield it like a crude axe.",
@@ -95,7 +98,8 @@
   },
   {
     "id": "ax",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "wood axe" },
     "description": "A large, two-handed wood axe.  It makes a good melee weapon, but is a bit slow to recover between swings.",
     "weight": "2227 g",
@@ -115,7 +119,8 @@
   },
   {
     "id": "copper_ax",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "copper hatchet" },
     "description": "A primitive axe made from a small wedge of copper affixed to a short haft.",
     "weight": "459 g",
@@ -134,7 +139,8 @@
   },
   {
     "id": "bronze_axe",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "bronze axe" },
     "description": "A socketed bronze axe with a work-hardened edge, tightly bound to the shaft with cords.",
     "weight": "1489 g",
@@ -154,7 +160,7 @@
     "melee_damage": { "bash": 14, "cut": 18 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "hatchet",
     "symbol": ";",
     "color": "light_gray",
@@ -176,7 +182,8 @@
   },
   {
     "id": "hand_axe",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "stone axe head" },
     "description": "A broad piece of stone with an edge narrow enough to roughly chop wood.",
     "weight": "453 g",
@@ -194,7 +201,8 @@
   {
     "id": "makeshift_axe",
     "copy-from": "hand_axe",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "metal axe head" },
     "description": "A chunk of steel with one edge hammered down to something resembling a cutting edge.  It works passably well, but really can't compare to a proper axe.",
     "material": [ "steel" ],
@@ -203,7 +211,8 @@
   },
   {
     "id": "primitive_adze",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "stone adze" },
     "description": "A stone adze, a primitive tool for smoothing or scraping wood objects.",
     "weight": "950 g",
@@ -221,7 +230,8 @@
   },
   {
     "id": "primitive_axe",
-    "type": "TOOL",
+    "type": "ITEM",
+"subtypes": [ "TOOL" ],
     "name": { "str": "stone axe" },
     "description": "A stone with a narrow edge affixed to a stick.  It can chop wood, but requires much more effort than a modern axe.",
     "weight": "822 g",

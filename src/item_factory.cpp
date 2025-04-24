@@ -4473,11 +4473,6 @@ void itype::load( const JsonObject &jo, const std::string_view src )
     assign( jo, "armor_data", armor, src == "tlg" );
     assign( jo, "pet_armor_data", pet_armor, src == "tlg" );
     assign( jo, "book_data", book, src == "tlg" );
-    //this is temporary; gunmods/tools are presently the only types that use gun_data
-    if( gunmod || tool ) {
-        bool gun_loaded = gun ? gun->was_loaded : false;
-        optional( jo, gun_loaded, "gun_data", gun );
-    }
     assign( jo, "ammo_data", ammo, src == "tlg" );
     assign( jo, "seed_data", seed, src == "tlg" );
     assign( jo, "brewable", brewable, src == "tlg" );
@@ -4511,6 +4506,12 @@ void itype::load( const JsonObject &jo, const std::string_view src )
 
     if( jo.has_member( "subtypes" ) ) { //TO-DO: allows both types of item loading, remove this line
         load_slots( jo, was_loaded );
+    }
+
+    //this is temporary; gunmods/tools are presently the only types that use gun_data
+    if( gunmod || tool ) {
+        bool gun_loaded = gun ? gun->was_loaded : false;
+        optional( jo, gun_loaded, "gun_data", gun );
     }
 
     if( jo.get_string( "type" ) != "ITEM" ) {

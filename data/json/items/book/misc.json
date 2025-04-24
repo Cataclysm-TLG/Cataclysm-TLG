@@ -1548,7 +1548,7 @@
     "read_fun": 1
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "book_ruined",
     "category": "books",
     "symbol": ",",
@@ -1563,7 +1563,7 @@
     "volume": "1500 ml"
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "book_pieces",
     "category": "books",
     "symbol": ",",

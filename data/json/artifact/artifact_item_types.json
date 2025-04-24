@@ -1,7 +1,7 @@
 [
   {
     "id": "art_sphere",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "smooth sphere" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -14,7 +14,7 @@
   },
   {
     "id": "art_rod",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "slim rod" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -28,7 +28,7 @@
   },
   {
     "id": "art_teardrop",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "teardrop-shaped stone" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -40,7 +40,7 @@
   },
   {
     "id": "art_lamp",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "hollow, transparent cube" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -52,7 +52,7 @@
   },
   {
     "id": "art_snake",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "winding, flexible rod" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -66,7 +66,7 @@
   },
   {
     "id": "art_disc",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "smooth disc" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -79,7 +79,7 @@
   },
   {
     "id": "art_beads",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "string of beads", "str_pl": "strings of beads" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -91,7 +91,7 @@
   },
   {
     "id": "art_napkin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "very thin sheet" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -103,7 +103,7 @@
   },
   {
     "id": "art_urchin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "spiked sphere" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -116,7 +116,7 @@
   },
   {
     "id": "art_jelly",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "malleable blob" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -128,7 +128,7 @@
   },
   {
     "id": "art_spiral",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "spiraling rod" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -142,7 +142,7 @@
   },
   {
     "id": "art_pin",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "small pin" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -156,7 +156,7 @@
   },
   {
     "id": "art_tube",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "hollow tube" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -169,7 +169,7 @@
   },
   {
     "id": "art_pyramid",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "regular tetrahedron" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -182,7 +182,7 @@
   },
   {
     "id": "art_crystal",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "translucent crystal" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -195,7 +195,7 @@
   },
   {
     "id": "art_knot",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "twisted, knotted cord" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -207,7 +207,7 @@
   },
   {
     "id": "art_crescent",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "artifacts",
     "name": { "str": "crescent-shaped stone" },
     "description": "It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -296,20 +296,23 @@
   },
   {
     "id": "art_staff",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "copy-from": "i_staff",
     "name": { "str": "ancient staff" },
     "description": "A well-balanced stick of treated wood with metal caps.  A red stone is embedded in the handle.  It is the only one of its kind.\nIt may have unknown powers; try activating them."
   },
   {
     "id": "art_sword",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "copy-from": "longsword",
     "name": { "str": "ancient sword" },
     "description": "A sword made out of a striking black metal.  It is the only one of its kind.\nIt may have unknown powers; try activating them."
   },
   {
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "art_harp",
     "name": { "str": "ancient harp" },
     "category": "tools",
@@ -342,7 +345,8 @@
   },
   {
     "id": "art_dagger",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "ancient athame" },
     "//": "Tool qualities equivalent to steak knife, combat equiv.  to copper knife + 1 w/ RAPID and BLOCK1, size/weight off combat knife +1",
     "description": "A ritual knife used by some ancient civilization.  Unreadable runes are carved into the handle.  It is the only one of its kind.\nIt may have unknown powers; try activating them.",
@@ -362,14 +366,16 @@
   },
   {
     "id": "art_spear",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "copy-from": "spear_steel",
     "name": { "str": "ancient spear" },
     "description": "A sturdy wooden pole with a sharp metal spike on the end.  The handle has the symbol of a blue sun on it.  It is the only one of its kind.\nIt may have unknown powers; try activating them."
   },
   {
     "id": "art_club",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "copy-from": "cudgel",
     "name": { "str": "ancient club" },
     "description": "A misshapen rod of gnarled, knotted wood.  The knots in the wood exhibit a strange fractal pattern.  It is the only one of its kind.\nIt may have unknown powers; try activating them."
