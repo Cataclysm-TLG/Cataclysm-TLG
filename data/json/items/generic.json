@@ -3645,7 +3645,8 @@
   },
   {
     "id": "wallet_travel",
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "clothing",
     "symbol": ";",
     "color": "dark_gray",
@@ -3674,7 +3675,7 @@
   },
   {
     "id": "lanyard",
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "category": "clothing",
     "symbol": "[",
     "color": "white",

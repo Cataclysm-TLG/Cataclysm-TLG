@@ -1,7 +1,8 @@
 [
   {
     "id": "antarvasa",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "antarvasa" },
     "description": "A traditional, ankle-length Buddhist skirt.  The bottom protrudes, and appears in the rough shape of a triangle.",
     "weight": "500 g",
@@ -41,7 +42,8 @@
   },
   {
     "id": "b_shorts",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "basketball shorts" },
     "description": "A pair of athletic shorts.  Comfortable and light.",
     "weight": "190 g",
@@ -89,7 +91,8 @@
   },
   {
     "id": "breeches",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "breeches" },
     "description": "A well-made pair of old-fashioned pants, made of stiff yet baggy material.  Comfortable, but lacks pockets.",
     "weight": "520 g",
@@ -121,7 +124,8 @@
   },
   {
     "id": "fishing_waders",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "fishing waders", "str_pl": "pairs of fishing waders" },
     "description": "Waterproof plastic fishing waders with a single large front pocket.",
     "weight": "1360 g",
@@ -153,7 +157,8 @@
   },
   {
     "id": "hot_pants",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "hot pants" },
     "description": "A pair of very short shorts.",
     "weight": "92 g",
@@ -177,7 +182,8 @@
   },
   {
     "id": "hot_pants_fur",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "fur hot pants" },
     "description": "A pair of fur short shorts.",
     "weight": "118 g",
@@ -202,7 +208,8 @@
   },
   {
     "id": "hot_pants_leather",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "leather hot pants" },
     "description": "A pair of hip-hugging leather short shorts.",
     "weight": "106 g",
@@ -227,7 +234,8 @@
   },
   {
     "id": "jeans",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "jeans" },
     "description": "A classic pair of denim pants.",
     "weight": "600 g",
@@ -296,7 +304,8 @@
   },
   {
     "id": "jeans_skinny",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "skinny jeans" },
     "description": "A pair of form-fitting jeans.  There's some stretch to the fabric, but they're thinner and a little more restrictive than the normal kind.",
     "weight": "500 g",
@@ -359,7 +368,8 @@
   },
   {
     "id": "kilt",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "kilt" },
     "description": "No true Scotsman would leave home without his kilt.  Kilts lack pockets and thus a belt and sporran are necessary accessories.",
     "weight": "500 g",
@@ -390,7 +400,8 @@
   },
   {
     "id": "kilt_utility",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "utility kilt" },
     "description": "Common among American nerds and rivetheads, the utility kilt is a durable canvas kilt with a large front pocket.",
     "weight": "500 g",
@@ -430,7 +441,8 @@
   },
   {
     "id": "kilt_leather",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather kilt" },
     "description": "No true Scotsman would leave home without his kilt.",
     "weight": "1814 g",
@@ -470,7 +482,8 @@
   },
   {
     "id": "leggings",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leggings", "str_pl": "pairs of leggings" },
     "description": "Stretchy legwear made of skin-tight spandex, sometimes used when exercising.  Some say they're pants, some say they're not.",
     "weight": "155 g",
@@ -507,7 +520,8 @@
   },
   {
     "id": "loincloth",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "loincloth" },
     "description": "Rags stitched together and tied into a makeshift loincloth.  Covers your modesty, but not much else.",
     "weight": "75 g",
@@ -531,7 +545,8 @@
   },
   {
     "id": "loincloth_fur",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "fur loincloth" },
     "description": "A fur pelt tied into a loincloth.  Covers your modesty, but not much else.",
     "weight": "250 g",
@@ -556,7 +571,8 @@
   },
   {
     "id": "loincloth_leather",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather loincloth" },
     "description": "Leather patches stitched together and tied into a makeshift loincloth.  Covers your modesty, but not much else.",
     "weight": "550 g",
@@ -580,7 +596,8 @@
   },
   {
     "id": "loincloth_wool",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "wool loincloth" },
     "description": "Bits of wool stitched together and tied into a makeshift loincloth.  Covers your modesty, but not much else.",
     "weight": "56 g",
@@ -605,7 +622,8 @@
   },
   {
     "id": "nanoskirt",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "nanoskirt" },
     "description": "Apparently the microskirt wasn't short enough.",
     "weight": "75 g",
@@ -629,7 +647,8 @@
   },
   {
     "id": "sweatpants",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "sweatpants" },
     "description": "Loose-fitting pants ostensibly designed for exercise, though they frequently wind up as pajamas.",
     "weight": "560 g",
@@ -667,7 +686,8 @@
   },
   {
     "id": "pants",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "slacks" },
     "description": "A pair of cotton pants.  Less durable than denim, but a little more comfortable.",
     "weight": "560 g",
@@ -735,7 +755,8 @@
   },
   {
     "id": "pants_costume",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "pants" },
     "description": "A pair of cotton pants.  Less durable than denim, but a little more comfortable.",
     "copy-from": "pants",
@@ -757,7 +778,8 @@
   },
   {
     "id": "pants_army",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "army pants" },
     "description": "A tough pair of camouflage pants, lined with pockets.",
     "weight": "720 g",
@@ -838,7 +860,8 @@
   },
   {
     "id": "pants_cargo",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "cargo pants" },
     "description": "A pair of pants lined with pockets, offering lots of storage.",
     "weight": "670 g",
@@ -919,7 +942,8 @@
   },
   {
     "id": "pants_fur",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "fur pants" },
     "description": "A hefty pair of fur-lined pants.",
     "weight": "920 g",
@@ -958,7 +982,8 @@
   },
   {
     "id": "pants_faux_fur",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "pants_fur",
     "name": { "str_sp": "faux fur pants" },
     "description": "A pair of long cotton pants lined with warm imitation fur.",
@@ -967,7 +992,8 @@
   },
   {
     "id": "pants_leather",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "leather pants" },
     "description": "A pair of black leather pants.  Very tough, but cumbersome and without much storage.",
     "weight": "980 g",
@@ -1035,7 +1061,8 @@
   },
   {
     "id": "pants_ski",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "ski pants" },
     "description": "A pair of pants meant for alpine skiing.",
     "weight": "450 g",
@@ -1103,7 +1130,8 @@
   },
   {
     "id": "police_breeches",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "police breeches" },
     "description": "A pair of tight-fitting police breeches.  They offer plenty of mobility for motorized officers.",
     "weight": "560 g",
@@ -1141,14 +1169,16 @@
   },
   {
     "id": "postman_shorts",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "mail carrier shorts" },
     "description": "A pair of dark blue shorts, the kind used by postal service workers.",
     "copy-from": "shorts_cargo"
   },
   {
     "id": "santa_shorts",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "Santa shorts" },
     "description": "A pair of red shorts with white trim.  For when Santa is on summer vacation.",
     "copy-from": "shorts",
@@ -1156,7 +1186,8 @@
   },
   {
     "id": "santa_pants",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "Santa pants" },
     "description": "A pair of red pants with white faux fur trim, commonly used by bearded men on Christmas.  Somewhat warm and has two deep pockets.",
     "copy-from": "pants",
@@ -1166,7 +1197,8 @@
   },
   {
     "id": "shorts",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "shorts" },
     "description": "A pair of short pants that leave the lower legs exposed.",
     "weight": "230 g",
@@ -1228,7 +1260,8 @@
   },
   {
     "id": "shorts_cargo",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "cargo shorts" },
     "description": "A pair of shorts lined with pockets, offering decent storage.",
     "weight": "340 g",
@@ -1318,7 +1351,8 @@
   },
   {
     "id": "shorts_denim",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "jorts" },
     "description": "A pair of denim shorts.",
     "weight": "260 g",
@@ -1381,7 +1415,8 @@
   },
   {
     "id": "skirt_denim",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "denim skirt" },
     "description": "A skirt made from denim.",
     "weight": "300 g",
@@ -1413,7 +1448,8 @@
   },
   {
     "id": "skirt",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "skirt" },
     "description": "A short, breezy cotton skirt.  Easy to move in, but only has a single small pocket.",
     "weight": "225 g",
@@ -1445,7 +1481,8 @@
   },
   {
     "id": "skirt_long",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "long skirt" },
     "description": "An ankle-length skirt.",
     "weight": "500 g",
@@ -1482,7 +1519,8 @@
   },
   {
     "id": "skirt_grass",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "grass skirt" },
     "description": "A primitive skirt made from grass.",
     "weight": "72 g",
@@ -1513,7 +1551,8 @@
   },
   {
     "id": "skirt_leather",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "leather skirt" },
     "description": "A short leather skirt.",
     "weight": "230 g",
@@ -1544,7 +1583,8 @@
   },
   {
     "id": "technician_pants_gray",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "work pants", "str_pl": "pairs of work pants" },
     "description": "Durable pocketed pants made of chemical-resistant synthetics, perfect for the jobsite.",
     "weight": "1040 g",
@@ -1612,7 +1652,8 @@
   },
   {
     "id": "winter_pants_army",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str_sp": "army winter pants" },
     "description": "A tough pair of pants lined with pockets, thickly padded for warmth.  Favored by the military.",
     "weight": "1000 g",
@@ -1693,7 +1734,8 @@
   },
   {
     "id": "zubon_gi",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "zubon" },
     "description": "Loose-fitting pants made for use in martial arts.",
     "weight": "150 g",
@@ -1730,7 +1772,8 @@
   },
   {
     "id": "pants_hiking",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "hiking pants", "str_pl": "pairs of hiking pants" },
     "description": "A water-resistant pair of lightweight, flexible hiking pants with a good number of pockets.",
     "weight": "250 g",
@@ -1811,7 +1854,8 @@
   },
   {
     "id": "pants_tactical",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "//": "Based on Vertx Cutback Technical Pants, https://vertx.com/cutback-pants",
     "name": { "str": "tactical pants", "str_pl": "pairs of tactical pants" },
     "description": "Coated in more pockets than is probably either necessary or healthy and looking like they belong within a SWAT locker, these rugged combat pants possess a water-repellent coating, tough double-stitched seams, reinforced belt loops, and articulated knees.",
@@ -1893,7 +1937,8 @@
   },
   {
     "id": "skirt_bostonchan",
-    "type": "ARMOR",
+        "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "Boston-Chan skirt" },
     "description": "A short skirt for the Boston-Chan costume.",
     "weight": "230 g",

@@ -74,7 +74,8 @@
   },
   {
     "id": "folded_trashcan_large",
-    "type": "WHEEL",
+        "type": "ITEM",
+    "subtypes": [ "WHEEL" ],
     "category": "container",
     "name": { "str": "outdoor trash bin" },
     "looks_like": "f_recycle_bin",

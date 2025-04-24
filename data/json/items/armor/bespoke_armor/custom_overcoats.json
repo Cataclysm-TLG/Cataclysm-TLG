@@ -1,7 +1,8 @@
 [
   {
     "id": "longcoat_survivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor longcoat" },
     "description": "A full-length Kevlar armored coat painted with a layer of butyl rubber to ward off inclement weather and chemical attacks.  Comfortable, durable, and great for storage.",
@@ -88,7 +89,8 @@
   },
   {
     "id": "longcoat_survivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "survivor longcoat" },
     "copy-from": "longcoat_survivor",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -96,7 +98,8 @@
   },
   {
     "id": "longcoat_survivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "longcoat_survivor",
     "name": { "str": "survivor longcoat" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -104,7 +107,8 @@
   },
   {
     "id": "sleeveless_longcoat_survivor",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "sleeveless survivor longcoat" },
     "//": "The general guideline for sleeveless longcoats is the components, volume, weight, time to craft, and value are 15% lower (rounded down) than the original.  Making it from an original takes 50% the time.",
@@ -156,7 +160,8 @@
   },
   {
     "id": "sleeveless_longcoat_survivor_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "XL sleeveless survivor longcoat" },
     "copy-from": "sleeveless_longcoat_survivor",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -164,7 +169,8 @@
   },
   {
     "id": "sleeveless_longcoat_survivor_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "sleeveless_longcoat_survivor",
     "name": { "str": "XS sleeveless survivor longcoat" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

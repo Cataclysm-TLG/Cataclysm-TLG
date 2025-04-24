@@ -1,7 +1,8 @@
 [
   {
     "id": "brigandine_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "brigandine vest" },
     "description": "Body armor made from tough fabric with steel plates riveted on the inside.",
@@ -32,7 +33,8 @@
   },
   {
     "id": "brigandine_vest_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_vest",
     "name": { "str": "brigandine vest" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -40,7 +42,8 @@
   },
   {
     "id": "brigandine_vest_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_vest",
     "name": { "str": "brigandine vest" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -48,7 +51,8 @@
   },
   {
     "id": "brigandine_arm_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "splint arm guards", "str_pl": "pairs of splint arm guards" },
     "description": "A pair of arm guards made of tough fabric sandwiched between alternating strips of steel.",
@@ -80,7 +84,8 @@
   },
   {
     "id": "brigandine_arm_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_arm_guards",
     "name": { "str": "splint arm guards", "str_pl": "pairs of splint arm guards" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -88,7 +93,8 @@
   },
   {
     "id": "brigandine_arm_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_arm_guards",
     "name": { "str": "splint arm guards", "str_pl": "pairs of splint arm guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -96,7 +102,8 @@
   },
   {
     "id": "brigandine_leg_guards",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "splint leg guards", "str_pl": "pairs of splint leg guards" },
     "description": "A pair of leg guards made of tough fabric sandwiched between alternating strips of steel.  Can be comfortably worn over chainmail for extra protection.",
@@ -127,7 +134,8 @@
   },
   {
     "id": "brigandine_leg_guards_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_leg_guards",
     "name": { "str": "splint leg guards", "str_pl": "pairs of splint leg guards" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -135,7 +143,8 @@
   },
   {
     "id": "brigandine_leg_guards_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_leg_guards",
     "name": { "str": "splint leg guards", "str_pl": "pairs of splint leg guards" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -143,7 +152,8 @@
   },
   {
     "id": "brigandine_gloves",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "brigandine gloves", "str_pl": "pairs of brigandine gloves" },
     "description": "A pair of gloves made of tough fabric, with steel plates of various size and shape riveted for additional protection, while still remaining relatively unhindering",
@@ -184,7 +194,8 @@
   },
   {
     "id": "brigandine_gloves_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_gloves",
     "name": { "str": "brigandine gloves", "str_pl": "pairs of brigandine gloves" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -192,7 +203,8 @@
   },
   {
     "id": "brigandine_gloves_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "brigandine_gloves",
     "name": { "str": "brigandine gloves", "str_pl": "pairs of brigandine gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },

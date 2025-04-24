@@ -1,7 +1,8 @@
 [
   {
     "id": "lsurvivor_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "light survivor suit" },
     "description": "Body armor handmade from a durable coverall with quilted Kevlar lining.  It's tough and chemical-resistant, but not waterproofed and it likely won't stand up to gunfire.",
@@ -131,7 +132,8 @@
   },
   {
     "id": "lsurvivor_suit_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "light survivor suit" },
     "copy-from": "lsurvivor_suit",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -139,7 +141,8 @@
   },
   {
     "id": "lsurvivor_suit_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "light survivor suit" },
     "copy-from": "lsurvivor_suit",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -147,7 +150,8 @@
   },
   {
     "id": "survivor_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor suit" },
     "description": "Body armor handmade from a durable coverall with quilted Kevlar lining and a rubberized coating.  It provides good all-around protection from many of the hazards of the Cataclysm.",
@@ -266,7 +270,8 @@
   },
   {
     "id": "survivor_suit_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "survivor suit" },
     "copy-from": "survivor_suit",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
@@ -274,7 +279,8 @@
   },
   {
     "id": "survivor_suit_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "survivor suit" },
     "copy-from": "survivor_suit",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -282,7 +288,8 @@
   },
   {
     "id": "fsurvivor_suit",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "survivor firesuit" },
     "description": "Handcrafted armor made from a flame-resistant jumpsuit with additional Kevlar padding and strategically placed butyl rubber coating.  It protects from brief exposure to flames as well as many other Cataclysmic hazards, though additional armor will be needed to stop bullets.",
@@ -380,7 +387,8 @@
   },
   {
     "id": "fsurvivor_suit_xs",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "survivor firesuit" },
     "copy-from": "fsurvivor_suit",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
@@ -388,7 +396,8 @@
   },
   {
     "id": "fsurvivor_suit_xl",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "name": { "str": "survivor firesuit" },
     "copy-from": "fsurvivor_suit",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },

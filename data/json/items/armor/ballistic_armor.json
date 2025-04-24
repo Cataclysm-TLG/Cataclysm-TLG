@@ -1,7 +1,8 @@
 [
   {
     "id": "ballistic_vest_concealable",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "concealable ballistic vest" },
     "description": "A lightweight ballistic armor vest, suitable for wearing under clothing.  Its level II rating suggests that it should help against lower-caliber pistol rounds.",
@@ -42,7 +43,8 @@
   },
   {
     "id": "ballistic_vest_esapi",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "//": "Based on US Army SPCS. Used weight of size M cummerband configuration, data from: https://ciehub.info/ref/TM/10-8470-209-10_2013.pdf ",
     "name": { "str": "plate carrier" },
@@ -131,7 +133,8 @@
   },
   {
     "id": "jacket_eod",
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "armor",
     "name": { "str": "EOD jacket" },
     "description": "A thick armored jacket constructed from Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians.  It features a central pocket for a large plate, and near complete coverage in fragmentation resistant materials.  Aside from the plate, it offers insufficient protection from ballistic threats.",
@@ -176,7 +179,8 @@
   },
   {
     "id": "jacket_eod_light",
-    "type": "TOOL_ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "armor",
     "name": { "str": "tactical EOD jacket" },
     "description": "An armored jacket constructed from Kevlar, Nomex, and foam padding, for use by explosive ordnance disposal technicians in 'non-permissive environments'.  It is lighter than normal EOD armor to allow for wearing a plate carrier beneath it.  It features two pockets in the arms covering the deltoids for additional optional protection.",
@@ -233,7 +237,8 @@
   },
   {
     "id": "eod_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "EOD fragmentation plate" },
     "description": "A polygonal fragmentation plate with a slightly concave profile, made of thin layers of steel, UHMW polyethylene, foam, and Kevlar.  Though certified to provide protection from fragmentation, it will not provide much protection from firearms.  This is intended to be inserted into an EOD suit, and can't be worn on its own.",
@@ -265,7 +270,8 @@
   },
   {
     "id": "esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ESAPI ballistic plate" },
     "description": "A polygonal ballistic plate with a slightly concave profile, made of ceramic.  Its inner surface is coated with UHMW polyethylene and is labeled \"TOP\", while the outer surface is labeled \"STRIKE FACE\".  This is intended to be worn in a ballistic vest, and can withstand several high-energy rifle rounds before breaking.",
@@ -294,7 +300,8 @@
   },
   {
     "id": "wood_esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "wooden ballistic plate" },
     "description": "A sheet of wood cut into an irregular hexagon, slightly concave.  It would fit in a plate carrier, and while by no means capable of stopping gunfire, it may still hold up against other threats.",
@@ -321,7 +328,8 @@
   },
   {
     "id": "paper_esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "paper ballistic plate" },
     "description": "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the front or back of the torso.  This could be used in a plate carrier in lieu of an ESAPI plate, though it probably won't stand up to much.",
@@ -348,7 +356,8 @@
   },
   {
     "id": "fiberglass_esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "fiberglass ballistic plate" },
     "description": "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate for the torso.  In a pinch, this could be used in a plate carrier to provide a modicum of protection.",
@@ -374,7 +383,8 @@
   },
   {
     "id": "stab_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "soft stab panel" },
     "description": "A soft armor insert designed to protect against stab wounds.  This is intended to be inserted into a ballistic vest, and can't be worn on its own.",
@@ -403,7 +413,8 @@
   },
   {
     "id": "steel_ballistic_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "steel ballistic plate" },
     "//": "based on 3a plates. Discuss high temp quenching so gonna assume tempered steel",
@@ -435,7 +446,8 @@
   },
   {
     "id": "heavy_steel_ballistic_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "heavy steel ballistic plate" },
     "//": "based on level 3 plates. Discuss high temp quenching so gonna assume tempered steel",
@@ -468,7 +480,8 @@
   },
   {
     "id": "scrap_esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "scrap ESAPI plate" },
     "description": "A crudely-hammered piece of salvaged steel, wrapped in rags in an attempt to prevent spalling.  If used in a ballistic vest, it might offer some protection.",
@@ -499,7 +512,8 @@
   },
   {
     "id": "steel_esapi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "scrap_esapi_plate",
     "looks_like": "scrap_esapi_plate",
     "repairs_like": "platemail_cuirass",
@@ -527,7 +541,8 @@
   },
   {
     "id": "deltoid_plates",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str_sp": "deltoid ballistic plates" },
     "//": "2x 20.5cm x 13.0cm x 3.0cm",
@@ -555,7 +570,8 @@
   },
   {
     "id": "esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ESBI ballistic plate" },
     "//3": "20.32cm x 15.24cm x 2.5cm",
@@ -584,7 +600,8 @@
   },
   {
     "id": "scrap_esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "scrap ballistic side plate" },
     "description": "A flat piece of salvaged steel, crudely cut and bent into the shape of an ESBI ballistic plate.",
@@ -615,7 +632,8 @@
   },
   {
     "id": "steel_esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "scrap_esbi_plate",
     "looks_like": "scrap_esbi_plate",
     "repairs_like": "platemail_cuirass",
@@ -643,7 +661,8 @@
   },
   {
     "id": "wood_esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "wooden ballistic side plate" },
     "description": "A sheet of wood cut into a small irregular hexagon.  It would fit in the side pockets of a plate carrier, and while by no means capable of stopping gunfire, it may still hold up against other threats.",
@@ -670,7 +689,8 @@
   },
   {
     "id": "paper_esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "paper ballistic side plate" },
     "description": "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the sides of the torso.  This could be used in a plate carrier in lieu of an ESBI plate, though it probably won't stand up to much.",
@@ -697,7 +717,8 @@
   },
   {
     "id": "fiberglass_esbi_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "fiberglass ballistic side plate" },
     "description": "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate shaped for the side of the torso.  In a pinch, this could be used in a plate carrier to provide a modicum of protection.",
@@ -723,7 +744,8 @@
   },
   {
     "id": "destroyed_large_ceramic_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "esapi_plate",
     "name": { "str": "compromised ceramic front plate" },
     "description": "A large ballistic plate that has been cracked by damage.  It no longer provides reliable protection, but it's still just as heavy.",
@@ -734,7 +756,8 @@
   },
   {
     "id": "destroyed_medium_ceramic_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "esbi_plate",
     "name": { "str": "compromised ceramic side plate" },
     "description": "A medium-sized ballistic plate that has been cracked by damage.  It no longer provides reliable protection, but it's still just as heavy.",
@@ -745,7 +768,8 @@
   },
   {
     "id": "ballistic_vest_heavy",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "//": "Based on US Army IOTV. Weight from size M base piece plus lower back protector, data from: https://www.moore.army.mil/tenant/lrc/content/pdf/IOTV%20GEN%20III%20TM%2010-8470-210-10.pdf ",
     "name": { "str": "heavy plate carrier" },
@@ -867,7 +891,8 @@
   },
   {
     "id": "ballistic_vest_light",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "copy-from": "ballistic_vest_esapi",
     "name": { "str": "half plate carrier", "str_pl": "half plate carrier" },
     "description": "A simple plate carrier vest covering just the upper torso, with a soft kevlar liner and a front and back pockets for armor plates to keep your organs from being perforated by small-arms fire.  It features a MOLLE cummerbund that you can tuck a few magazines into.",
@@ -925,7 +950,8 @@
   },
   {
     "id": "stab_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "looks_like": "ballistic_vest_concealable",
     "name": { "str": "stab vest" },
@@ -980,7 +1006,8 @@
   },
   {
     "id": "soft_3a_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "soft ballistic vest" },
     "looks_like": "ballistic_vest_concealable",
@@ -1021,7 +1048,8 @@
   },
   {
     "id": "level_3_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "lightweight plate carrier" },
     "looks_like": "ballistic_vest_esapi",
@@ -1085,7 +1113,8 @@
   },
   {
     "id": "dragonskin",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "dragon skin vest" },
     "description": "A ballistic vest made of disc-shaped ceramic scales arranged in an overlapping pattern, like the scales of a mythical dragon.  The design allows it to absorb many more impacts without becoming fully compromised like a ballistic plate might, but it was never widely adopted due to its failure to meet high-temperature operational tests.  While well past its warranty date, it remains a highly sought after collecter's item.",
@@ -1119,7 +1148,8 @@
   },
   {
     "id": "xl_ballistic_vest",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "plate carrier" },
     "description": "An enormous handmade ballistic vest built with of lots of salvaged ballistic Kevlar panels.  It's bulkier than a factory made US Army vest, but it is customized for the benefit of an abnormally large mutant who couldn't wear such armors otherwise.  Coated in MOLLE webbing to support modular loadouts for the tacticool mutant.  It could be outfitted with steel plates for further protection.",
@@ -1149,7 +1179,8 @@
   },
   {
     "id": "xl_ballistic_vest_steel",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "steel-plated plate carrier" },
     "description": "An enormous handmade ballistic vest built with lots of salvaged ballistic Kevlar panels and homemade \"ballistic inserts\" made of steel.  The thin metal isn't the most protective, but it's probably better than just plain Kevlar.",
@@ -1180,7 +1211,8 @@
   },
   {
     "id": "iotv_shoulder_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ballistic shoulder protectors", "str_pl": "pairs of ballistic shoulder protectors" },
     "description": "Nylon pads with bulky armor inserts protecting the deltoid and upper arm.  Specifically designed to be attached to a heavy plate carrier.",
@@ -1210,7 +1242,8 @@
   },
   {
     "id": "iotv_groin_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ballistic groin protector" },
     "description": "Front and back nylon armor with soft armor inserts for groin and butt protection.  Specifically designed to be attached to a heavy plate carrier.",
@@ -1240,7 +1273,8 @@
   },
   {
     "id": "iotv_neck_plate",
-    "type": "ARMOR",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ballistic collar" },
     "description": "Front and back nylon collar assemblies with soft armor inserts for neck protection.  Specifically designed to be attached to a heavy plate carrier.",

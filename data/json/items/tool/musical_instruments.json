@@ -350,7 +350,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "harmonica_holder",
     "looks_like": "flute",
     "name": { "str_pl": "harmonicas with holders", "str": "harmonica with a holder" },
@@ -380,7 +380,7 @@
     "armor": [ { "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ]
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "acoustic_guitar",
     "name": { "str": "acoustic guitar" },
     "category": "tools",
@@ -416,7 +416,7 @@
     "melee_damage": { "bash": 18 }
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "guitar_electric",
     "looks_like": "acoustic_guitar",
     "name": { "str": "electric guitar" },
@@ -458,7 +458,7 @@
     "melee_damage": { "bash": 26 }
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "bagpipes",
     "looks_like": "flute",
     "name": { "str_sp": "bagpipes" },
@@ -498,7 +498,7 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "tuba",
     "looks_like": "flute",
     "name": { "str": "tuba" },
@@ -540,7 +540,7 @@
     "melee_damage": { "bash": 13 }
   },
   {
-    "type": "TOOL_ARMOR",
+    "type": "TOOL",
     "id": "saxophone",
     "looks_like": "flute",
     "name": { "str": "saxophone" },
