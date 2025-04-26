@@ -369,7 +369,8 @@
   },
   {
     "id": "pseudo_magazine",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "category": "spare_parts",
     "name": { "str": "pseudo magazine" },
     "description": "Pseudo magazine for use in dirty vehicle hacks.",

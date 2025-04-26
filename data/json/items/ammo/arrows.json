@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_crude",
     "name": { "str": "crude wooden arrow" },
     "symbol": "=",
@@ -23,7 +24,8 @@
     "melee_damage": { "stab": 2 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood",
     "name": { "str": "wooden arrow" },
     "symbol": "=",
@@ -48,7 +50,8 @@
     "melee_damage": { "stab": 3 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_horn",
     "name": { "str": "horn-tipped arrow" },
     "looks_like": "arrow_cf",
@@ -68,7 +71,8 @@
     "melee_damage": { "stab": 3 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_stone",
     "name": { "str": "stone-tipped arrow" },
     "looks_like": "arrow_cf",
@@ -89,7 +93,8 @@
     "melee_damage": { "stab": 4 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_bodkin",
     "name": { "str": "wooden bodkin arrow" },
     "looks_like": "arrow_cf",
@@ -109,7 +114,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_tooth",
     "name": { "str": "monster tooth arrow" },
     "looks_like": "arrow_cf",
@@ -130,7 +136,8 @@
     "melee_damage": { "stab": 6 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_wood_broadhead",
     "name": { "str": "wooden broadhead arrow" },
     "looks_like": "arrow_cf",
@@ -151,7 +158,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_metal",
     "name": { "str": "aluminum broadhead arrow" },
     "symbol": "=",
@@ -167,7 +175,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_metal_bodkin",
     "name": { "str": "aluminum field point arrow" },
     "symbol": "=",
@@ -183,7 +192,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_cf",
     "name": { "str": "carbon fiber hunting arrow" },
     "symbol": "=",
@@ -199,7 +209,8 @@
     "melee_damage": { "stab": 5 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_flammable",
     "name": { "str": "flammable arrow" },
     "description": "This arrow has a rag soaked in a flammable liquid wrapped around the shaft near the head.  You need to light it before shooting.",
@@ -232,7 +243,8 @@
     "melee_damage": { "stab": 3 }
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "arrow_flaming",
     "copy-from": "arrow_flammable",
     "name": { "str": "flaming arrow" },

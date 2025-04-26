@@ -1,7 +1,8 @@
 [
   {
     "id": "bolas",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "bolas", "str_pl": "bolases" },
     "description": "Some ropes with weights, designed to tangle the legs of a target when thrown, usually at an animal.  Used by the Gauchos of Argentina.",
@@ -51,7 +52,8 @@
   },
   {
     "id": "net",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "net" },
     "description": "A mesh of string and weights, traditionally used to catch fish and to entangle opponents in combat.",
@@ -143,7 +145,8 @@
   },
   {
     "id": "throwing_stick",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "category": "weapons",
     "name": { "str": "throwing stick" },
     "description": "A stick carved into a shape suitable for throwing at a target.  It's not a boomerang, so don't expect it to return to your hand.",

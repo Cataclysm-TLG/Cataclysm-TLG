@@ -2,7 +2,8 @@
   {
     "id": "22_speedloader8",
     "looks_like": "38_speedloader",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 8-round speedloader" },
     "description": "This speedloader can hold 8 rounds of .22 and quickly reload a compatible revolver.",
     "weight": "32 g",
@@ -19,7 +20,8 @@
   {
     "id": "a180mag",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 165-round magazine" },
     "description": "An unusually-shaped pan magazine for use with .22 caliber submachine guns.",
     "variant_type": "gun",
@@ -46,7 +48,8 @@
   {
     "id": "a180mag1",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 165-round polymer magazine" },
     "description": "An unusually-shaped polymer constructed pan magazine for use with .22 caliber submachine guns.",
     "variant_type": "gun",
@@ -73,7 +76,8 @@
   {
     "id": "a180mag2",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 177-round magazine" },
     "description": "An unusually-shaped pan magazine for use with .22 caliber submachine guns.",
     "variant_type": "gun",
@@ -100,7 +104,8 @@
   {
     "id": "a180mag3",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 220-round polymer magazine" },
     "description": "An unusually-shaped polymer pan magazine for use with .22 caliber submachine guns.",
     "variant_type": "gun",
@@ -127,7 +132,8 @@
   {
     "id": "a180mag4",
     "looks_like": "mp5mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 275-round polymer magazine" },
     "description": "An unusually-shaped polymer pan magazine for use with .22 caliber submachine guns.",
     "variant_type": "gun",
@@ -154,7 +160,8 @@
   {
     "id": "marlin_tubeloader",
     "looks_like": "stanag30",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "small game rifle 19-round tube loader" },
     "description": "A tube which holds 19 rounds of .22, designed for quick reloading of a compatible rifle with a tubular magazine.",
     "variant_type": "gun",
@@ -179,7 +186,8 @@
   },
   {
     "id": "22_ar15mag_10",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 10-round conversion magazine" },
     "description": "A black, 10-round polymer magazine for AR-platform rifles converted to fire .22 Long Rifle ammunition.",
     "weight": "130 g",
@@ -196,7 +204,8 @@
   },
   {
     "id": "22_ar15mag_28",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 28-round conversion magazine" },
     "description": "A black, 28-round polymer magazine for AR-platform rifles converted to fire .22 Long Rifle ammunition.",
     "weight": "220 g",
@@ -213,7 +222,8 @@
   {
     "id": "mosquitomag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "Firefly 10-round magazine" },
     "//": "Was the sig mosquito, has been renamed to the more common GSG firefly",
     "description": "A factory specification 10-round magazine for the Firefly pistol.",
@@ -240,7 +250,8 @@
   {
     "id": "ruger1022bigmag",
     "looks_like": "stanag30",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "25-round varmint magazine" },
     "description": "An extended capacity 25-round magazine, for use with .22 caliber varmint rifles.",
     "variant_type": "gun",
@@ -266,7 +277,8 @@
   {
     "id": "ruger1022mag",
     "looks_like": "stanag30",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "10-round varmint magazine" },
     "description": "A flush fitting 10-round rotary magazine, for use with .22 caliber varmint rifles.",
     "variant_type": "gun",
@@ -293,7 +305,8 @@
   {
     "id": "sw22mag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 10-round S&W magazine" },
     "description": "A 10-round handgun magazine for use with Smith and Wesson's .22 caliber pocket pistol.",
     "variant_type": "gun",
@@ -319,7 +332,8 @@
   {
     "id": "j22mag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "cheap 6-round magazine" },
     "description": "A cheaply built, low quality 6-round magazine, for use in only the most ineffectual of .22 caliber pocket pistols.",
     "variant_type": "gun",
@@ -345,7 +359,8 @@
   {
     "id": "wp22mag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".22 10-round Walther magazine" },
     "description": "A 10-round handgun magazine for use with Walther's .22 caliber pocket pistol.",
     "variant_type": "gun",
@@ -371,7 +386,8 @@
   {
     "id": "cp33_mag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "high capacity 33 round magazine" },
     "description": "A 33-round capacity magazine for .22 ammunition, for use in a high capacity handgun.",
     "variant_type": "gun",
@@ -397,7 +413,8 @@
   {
     "id": "cp33_mag_50",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "high capacity 50 round magazine" },
     "description": "A 50-round capacity magazine for .22 ammunition, for use in a high capacity handgun.",
     "variant_type": "gun",
@@ -423,7 +440,8 @@
   {
     "id": "ruger_mk4_mag",
     "looks_like": "glock17_17",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "Ruger target pistol magazine" },
     "description": "A 10-round magazine for a Ruger target pistol.",
     "variant_type": "gun",

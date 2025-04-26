@@ -1,7 +1,8 @@
 [
   {
     "id": "357mag_fmj",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum FMJ" },
     "description": "Jacketed .357 Magnum ammunition.  The .357 Magnum round is derived from the earlier .38 Special, with a marginally longer case and generating greater pressure.",
     "//": ".357 140gr Speer, 10.7 gr Hodgdon HS-6",
@@ -55,7 +56,8 @@
   {
     "id": "357mag_jhp",
     "copy-from": "357mag_fmj",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum JHP" },
     "description": "Jacketed hollow point .357 Magnum ammunition.  The .357 Magnum round is derived from the earlier .38 Special, with a marginally longer case and generating greater pressure.",
     "relative": { "damage": { "damage_type": "bullet", "amount": 4, "armor_penetration": -2 } }
@@ -63,7 +65,8 @@
   {
     "id": "bp_357mag_fmj",
     "copy-from": "357mag_fmj",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum FMJ, black powder" },
     "proportional": {
       "price": 0.3,
@@ -77,7 +80,8 @@
   {
     "id": "bp_357mag_jhp",
     "copy-from": "357mag_jhp",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum JHP, black powder" },
     "proportional": {
       "price": 0.3,
@@ -91,21 +95,24 @@
   {
     "id": "reloaded_357mag_fmj",
     "copy-from": "357mag_fmj",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum FMJ, reloaded" },
     "proportional": { "price": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 }, "dispersion": 1.1, "recoil": 0.9 }
   },
   {
     "id": "reloaded_357mag_jhp",
     "copy-from": "357mag_jhp",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "name": { "str_sp": ".357 Magnum JHP, reloaded" },
     "proportional": { "price": 0.7, "damage": { "damage_type": "bullet", "amount": 0.9 }, "dispersion": 1.1, "recoil": 0.9 }
   },
   {
     "id": "matchhead_357mag_fmj",
     "copy-from": "bp_357mag_fmj",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "//": "matchhead bullets assumed to have about 75% of the muzzle energy of black powder",
     "name": { "str_sp": ".357 Magnum FMJ, matchhead powder" },
     "proportional": { "price": 0.5, "damage": { "damage_type": "bullet", "amount": 0.85 }, "dispersion": 1.1 },
@@ -115,7 +122,8 @@
   {
     "id": "matchhead_357mag_jhp",
     "copy-from": "bp_357mag_jhp",
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "//": "matchhead bullets assumed to have about 75% of the muzzle energy of black powder",
     "name": { "str_sp": ".357 Magnum JHP, matchhead powder" },
     "proportional": { "price": 0.5, "damage": { "damage_type": "bullet", "amount": 0.85 }, "dispersion": 1.1 },

@@ -1,6 +1,7 @@
 [
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "glass_shard",
     "ammo_type": "NULL",
     "symbol": ",",
@@ -13,7 +14,8 @@
     "volume": "30 ml"
   },
   {
-    "type": "AMMO",
+    "type": "ITEM",
+    "subtypes": [ "AMMO" ],
     "id": "tempered_glass_shard",
     "ammo_type": "NULL",
     "symbol": ",",

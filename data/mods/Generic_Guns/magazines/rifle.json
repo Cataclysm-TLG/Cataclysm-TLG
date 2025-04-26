@@ -2,7 +2,8 @@
   {
     "id": "rifle_belt",
     "copy-from": "magazine_belt",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "ammo belt" },
     "description": "An ammo belt consisting of metal linkages which separate from the belt upon firing.  Holds rifle ammunition.",
     "ammo_type": [ "ammo_rifle" ],
@@ -15,7 +16,8 @@
   {
     "id": "rifle_mag",
     "copy-from": "falbigmag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "material": [ "aluminum" ],
     "name": "standard rifle magazine",
     "description": "A 30 round standard capacity magazine for service rifles, cheaper than the cost of a meal due to its adoption by nearly every other common rifle.  They're made of aluminum and were originally meant to be disposable, so they're not the most durable; don't let them get damaged.",
@@ -33,7 +35,8 @@
   {
     "id": "rifle_sniper_mag",
     "copy-from": "m2010mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "compact rifle magazine" },
     "description": "A short 5 round steel magazine compatible with nearly every common rifle.  Although it has a low capacity it is easy to store and quick to reload.",
     "ammo_type": [ "ammo_rifle" ],
@@ -42,7 +45,8 @@
   {
     "id": "rifle_rail_mag",
     "copy-from": "hk_g80mag",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "railgun rifle magazine" },
     "description": "A railgun rifle magazine which can hold up to 20 ferromagnetic projectiles.",
     "ammo_type": [ "ammo_railgun" ],
@@ -51,7 +55,8 @@
   {
     "id": "rifle_clip",
     "copy-from": "clip223_10rd",
-    "type": "MAGAZINE",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
     "name": { "str": "rifle clip" },
     "description": "A tiny piece of grooved metal designed to allow a shooter to quickly load ten rifle rounds into a magazine.",
     "ammo_type": [ "ammo_rifle" ],
