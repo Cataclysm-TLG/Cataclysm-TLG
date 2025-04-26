@@ -660,7 +660,8 @@
   {
     "id": "bio_railgun",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Magnetic Repulsor CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A powerful electromagnetic system housed in the palms which, when powered up, will expend power to greatly increasing the force of thrown magnetic objects.",

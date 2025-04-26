@@ -2881,6 +2881,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "ARMOR", "TOOL" ],
     "id": "cigar_lit",
     "name": { "str": "cigar" },
     "color": "brown",
@@ -2929,6 +2930,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "ARMOR", "TOOL" ],
     "id": "cig_lit",
     "name": { "str": "cigarette" },
     "color": "white",
@@ -2977,6 +2979,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "ARMOR", "TOOL" ],
     "id": "joint_lit",
     "name": { "str": "joint" },
     "color": "light_green",
