@@ -1,7 +1,8 @@
 [
   {
     "abstract": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "category": "bionics",
     "name": { "str": "abstract bionic module" },
     "weight": "2041 g",
@@ -19,14 +20,16 @@
   {
     "abstract": "bionic_general_npc_usable",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "abstract bionic module (NPC usable)", "str_pl": "abstract bionic modules (NPC usable)" },
     "extend": { "flags": [ "BIONIC_NPC_USABLE" ] }
   },
   {
     "abstract": "bionic_general_faulty",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "abstract faulty bionic module" },
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -36,7 +39,8 @@
   {
     "id": "bio_adrenaline",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Adrenaline Pump CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A stimulator system that is implanted alongside the adrenal glands, allowing the user to trigger their body's adrenaline response at the cost of some bionic power.",
@@ -48,7 +52,8 @@
   {
     "id": "bio_ads",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Active Defense System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic that projects a thin forcefield around the user's body.  Everything loses velocity when penetrating this field, which results in a reduced amount of dealt damage at the cost of user's bionic energy.  Bullets and stabbing attacks will lose more velocity than cutting attacks, and those in turn more than bashing attacks.",
@@ -60,7 +65,8 @@
   {
     "id": "bio_alarm",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Alarm System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A motion-detecting alarm system will notice almost all movement within a fifteen-foot radius, and will silently alert the user.  This is very useful during sleep, or if the user suspects a cloaked pursuer.",
@@ -72,7 +78,8 @@
   {
     "id": "bio_ar",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Integrated AR System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This bionic module integrates augmented reality interface into user's eyes.",
@@ -83,7 +90,8 @@
   {
     "id": "bio_armor_arms",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Arms Alloy Plating CBM" },
     "description": "An advanced protective mesh that weaves into the user's flesh.  Provides passive protection at the cost of mild encumbrance, and can be used in conjunction with bionic martial arts.",
     "price": "3500 USD",
@@ -93,7 +101,8 @@
   {
     "id": "bio_armor_eyes",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Protective Lenses CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic package that seals the user's eye sockets with highly-protective mirrored lenses which can retract into their frames at will.",
@@ -105,7 +114,8 @@
   {
     "id": "bio_armor_head",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Cranial Reinforcement CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of interlocking subdermal plates, slightly cushioned where they overlap, which bolt securely to the skull and cervical vertebrae to provide a modicum of protection from trauma.",
@@ -117,7 +127,8 @@
   {
     "id": "bio_armor_legs",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Legs Alloy Plating CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An advanced protective mesh that weaves into the user's flesh.  Provides passive protection at the cost of mild encumbrance, and can be used in conjunction with bionic martial arts.",
@@ -128,7 +139,8 @@
   {
     "id": "bio_armor_torso",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Visceral Armorgel CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of small packets of sintered gel which are to be installed inside the thoracic and abdominal cavities to protect the organs and spine.  Functionally, this will not reduce incoming damage, but instead allow the user to withstand greater injury to the torso.",
@@ -141,7 +153,8 @@
   {
     "id": "bio_batteries",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Battery System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A battery draining attachment to make use of the energy contained in normal, everyday batteries.",
@@ -153,7 +166,8 @@
   {
     "id": "bio_blade",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Monomolecular Blade CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A deadly foot-long blade made of advanced material that is installed inside the forearm, capable of being extended through the back of the user's wrist at the cost of a small amount of power.  Though exceptionally sharp, it will prevent the user from holding anything else while extended.",
@@ -165,7 +179,8 @@
   {
     "id": "bio_shotgun",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Shotgun Arm CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A concealed, single shot 12 gauge shotgun that is implanted inside the left forearm.  Perfect in a pinch.",
@@ -176,7 +191,8 @@
   {
     "id": "bio_blood_anal",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Blood Analysis CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Small sensors that are implanted in the user's heart, allowing them to analyze their blood.  This will detect many illnesses, drugs, and other conditions.",
@@ -188,7 +204,8 @@
   {
     "id": "bio_blood_filter",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Blood Filter CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A filtration system that is installed in the heart and can actively filter out chemical impurities, primarily drugs, with limited impact on viruses.  Note that it is not a targeted filter; ALL drugs in the system will be affected.",
@@ -200,7 +217,8 @@
   {
     "id": "bio_cable",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Cable Charger System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A retractable set of electrical leads.  While active, it will recharge bionic power when connected to a battery via jumper cable.",
@@ -212,7 +230,8 @@
   {
     "id": "bio_carbon",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Subdermal Carbon Filament CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Thin armor made of carbon nanotubes, implanted just beneath the skin.  It reduces cutting, stabbing and ballistic damage.",
@@ -223,7 +242,8 @@
   {
     "id": "bio_chain_lightning",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Chain Lightning CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An integrated weapon that ionizes the air between the user and target via a laser before releasing a blast of electricity at it, which can then jump to nearby targets.",
@@ -233,7 +253,8 @@
   {
     "id": "bio_climate",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Internal Climate Control CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A network of thermal piping which eases the effects of high and low ambient temperatures once activated.",
@@ -244,7 +265,8 @@
   {
     "id": "bio_cloak",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Cloaking System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A high-power system that uses a set of cameras and LEDs to make the user blend into their surroundings, rendering them fully invisible to eyes and optical sensors.  However, this doesn't prevent detection from other means such as infrared, sonar, etc.",
@@ -255,7 +277,8 @@
   {
     "id": "bio_cqb",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Close Quarters Battle CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of bionic processors and databanks, loaded with martial arts combat programs.  While active, the CQB module will improve the user's hand-to-hand combat skills, but prevents them from improving them through combat experience.",
@@ -267,7 +290,8 @@
   {
     "id": "bio_dex_enhancer",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Wired Reflexes CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of bionic nerve stimulators that greatly enhance reaction times, granting a +2 bonus to dexterity when active, and a -1 penalty when not.",
@@ -279,7 +303,8 @@
   {
     "id": "bio_digestion",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Expanded Digestive System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This module contains three synthetic stomachs and industrial-grade intestines which replace the user's corresponding organs.  Not only will these extract much more nutrition from food, but also increase the user's resistance to foodborne illness, and occasionally allow the digestion of rotten food.  Installing this CBM will correct any abnormalities in the user's digestive system.",
@@ -290,7 +315,8 @@
   {
     "id": "bio_ears",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Enhanced Hearing CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "While this bionic is active, the user's hearing will be drastically improved, allowing them to hear ten times better than the average person.  Additionally, high-intensity sounds will be automatically dampened before they can damage the user's hearing.",
@@ -302,7 +328,8 @@
   {
     "id": "bio_sonar",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Subaquatic Navigation System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A tiny device implanted in the inner ear.  When active, it will periodically generate ultrasonic pulses which aid in navigation, provided the user is underwater and able to hear.",
@@ -314,7 +341,8 @@
   {
     "id": "bio_emp",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Directional EMP CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of small parabolic EMP field generators that are mounted in the palm of the user's right hand.  They can be used to instantly fire a wide, but short-ranged blast which will disable electronics and robots.",
@@ -325,7 +353,8 @@
   {
     "id": "bio_emp_armgun",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "EMP Projector CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A ranged EMP generator system that is implanted in the user's right arm and hand.  The system fires precise, single-target pulses that require time to aim.  Extremely effective against electronic targets, but mostly useless otherwise.",
@@ -336,7 +365,8 @@
   {
     "id": "bio_evap",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Aero-Evaporator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This unit draws moisture from the surrounding air, which slowly trickles directly into the user's blood stream.  It may fail in very dry environments.",
@@ -347,7 +377,8 @@
   {
     "id": "bio_eye_enhancer",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Thalamic Buffer CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A microcomputer which is meant to be housed inside the skull and wired to the thalamus, where it helps the user proritize and filter sensory input.  It grants +2 perception while active, but -1 when not.  This bionic is integrated into the brain and cannot be removed once installed.",
@@ -359,7 +390,8 @@
   {
     "id": "bio_eye_optic",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Eyes CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A pair of artificial eyes with internal cameras and bioconnectors that link them to the optic nerve.  These will cure almost any vision problem so long as they're active, but will render the user blind if unpowered.  They also feature zoom lenses that allow the user to see much farther, and can even act as a scope when using ranged weapons.",
@@ -371,7 +403,8 @@
   {
     "id": "bio_face_mask",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Facial Distortion CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Through controlled application of electrochemical impulses, this bionic module lets the user alter their facial structure so as to subtly affect the reactions of others.  This grants a bonus to all social interactions.",
@@ -383,7 +416,8 @@
   {
     "id": "bio_faraday",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Dielectric Capacitance System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A network of miniature piezoelectric capacitors, implanted throughout the user's body to protect from external electrical discharge.",
@@ -395,7 +429,8 @@
   {
     "id": "bio_fingerhack",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Fingerhack CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A miniature electrohack, surgically embedded in a finger of the user's right hand.  This is an all-purpose hacking unit used to override control panels and the like, but not computers.  Computer proficiency is important, and a failed use may cause damage.",
@@ -407,7 +442,8 @@
   {
     "id": "bio_fitnessband",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Calorie Tracker CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A small medical implant that passively tracks your calorie expenditure and consumption.",
@@ -419,7 +455,8 @@
   {
     "id": "bio_flashbang",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Flashbang Generator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A combination of LEDs and speakers that create a flash and sound comparable to a flashbang grenade, deafening and blinding nearby enemies.",
@@ -431,7 +468,8 @@
   {
     "id": "bio_flashlight",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Cranial Flashlight CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A small, but powerful LED flashlight that is mounted between the user's eyes.",
@@ -443,7 +481,8 @@
   {
     "id": "bio_tattoo_led",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "LED Tattoo CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An LED display implanted beneath the epidermis that can display patterns or pictures through the skin.  When active it glows dimly, providing a very small amount of light.",
@@ -455,7 +494,8 @@
   {
     "id": "bio_geiger",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Radiation Biomonitor CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of tiny implanted sensors which can diagnose the presence and severity of acute radiation syndrome.  They are also able to detect ionizing radiation within the user's environment.",
@@ -467,7 +507,8 @@
   {
     "id": "bio_gills",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Respirator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A complex respiration augmentation system that increases the user's maximal oxygen uptake and allows for underwater breathing akin to gills.  Will automatically activate if the user is drowning.",
@@ -479,7 +520,8 @@
   {
     "id": "bio_ground_sonar",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Terranian Sonar CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of precision sonar equipment, implanted in the user's feet to allow the detection of below-ground movement, buried traps, and unstable terrain.",
@@ -491,7 +533,8 @@
   {
     "id": "bio_heat_absorb",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Heat Drain CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "While fighting unarmed against a warm-blooded opponent, there is a chance that a successful hit will drain body heat, inflicting a small amount of extra damage and recharging the user's bionic power reserves slightly.",
@@ -503,7 +546,8 @@
   {
     "id": "bio_heatsink",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Thermal Dissipation CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of powerful heatsinks and supermaterials woven into the user's flesh.  While powered, this system will prevent external heat damage up to 2000 degrees Fahrenheit.  Note that this does not affect the internal body temperature.",
@@ -514,7 +558,8 @@
   {
     "id": "bio_hydraulics",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Hydraulic Muscles CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A hydraulic muscle support system that when active, increases the user's strength by 20.",
@@ -525,7 +570,8 @@
   {
     "id": "bio_infrared",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Infrared Vision CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic module that extends the user's range of vision into the infrared, allowing them to see warm-blooded creatures in the dark and through smoke.",
@@ -537,7 +583,8 @@
   {
     "id": "bio_int_enhancer",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Cerebral Booster CBM" },
     "description": "A set of bionic coprocessors that are implanted in the user's brain, granting a +2 bonus to intelligence while powered, but a -1 penalty when not.  It takes over and replaces numerous cognitive functions once installed and cannot be removed.",
     "price": "8000 USD",
@@ -548,7 +595,8 @@
   {
     "id": "bio_laser",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Finger-Mounted Laser CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A small, high-powered laser that is embedded in the user's fingertip.  This long-range weapon is not incredibly damaging, but is very accurate, and has the potential to start fires.",
@@ -560,7 +608,8 @@
   {
     "id": "bio_leukocyte",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Leukocyte Breeder System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of bionic stimulators which augment the user's haematopoiesis system, allowing them to accelerate white blood cell production using bionic power.  It is designed for continuous use and may cause unpleasant side effects when turned off.",
@@ -572,7 +621,8 @@
   {
     "id": "bio_lighter",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Finger Lighter CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A pair of powerful fire starters which extend from the tip of both hands' index fingers.",
@@ -584,7 +634,8 @@
   {
     "id": "bio_lockpick",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Fingerpick CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An electronic lockpick that is embedded in a fingertip.  This automatic system will quickly unlock all but the most advanced key locks without any skill required on the part of the user.",
@@ -596,7 +647,8 @@
   {
     "id": "bio_magnet",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Electromagnetic Unit CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A powerful implanted electromagnet that allows the user to indiscriminately pull all nearby magnetic objects towards them.  Unlucky bystanders might be injured or killed by flying objects.",
@@ -608,7 +660,8 @@
   {
     "id": "bio_railgun",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Magnetic Repulsor CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A powerful electromagnetic system housed in the palms which, when powered up, will expend power to greatly increasing the force of thrown magnetic objects.",
@@ -620,7 +673,8 @@
   {
     "id": "bio_membrane",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Nictitating Membrane CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Thin membranes that cover the user's eyes while underwater, negating any vision penalties.",
@@ -632,7 +686,8 @@
   {
     "id": "bio_memory",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Enhanced Memory Banks CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of highly-advanced quantum storage drives used to enhance memory.  While active, they increase the rate that the user learns skills.  Once it is installed, it will partially replace the functionality of the hippocampus, and thus cannot be removed without risk of severe permanent amnesia and difficulty forming new memories.",
@@ -644,7 +699,8 @@
   {
     "id": "bio_metabolics",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Metabolic Interchange CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This module interconnects the user's digestive system and power supply, letting them replenish bionic energy by burning calories.",
@@ -656,7 +712,8 @@
   {
     "id": "bio_meteorologist",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Weather Reader CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A multitude of scientific instruments and sensors collects environmental data.  The data are compiled and presented as a simple readout of the current weather.  It also passively tells the user their external temperature.",
@@ -668,7 +725,8 @@
   {
     "id": "bio_nanobots",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Repair Nanobots CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A fleet of tiny, dormant robots.  While activated, they will flit about the user's body, repairing damage and stopping bleeding at the cost of power.",
@@ -680,7 +738,8 @@
   {
     "id": "bio_night",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Artificial Night Generator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "When active, this bionic eliminates all light within a 2-tile radius of the user through destructive interference.",
@@ -691,7 +750,8 @@
   {
     "id": "bio_night_vision",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Implanted Night Vision CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This bionic module modifies the user's eyes to amplify existing light, allowing them to see in the dark.",
@@ -703,7 +763,8 @@
   {
     "id": "bio_ods",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Offensive Defense System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A thin forcefield gets projected around the user's body, continually draining power.  This field does not deflect attacks, but rather delivers a strong shock, damaging unarmed attackers and those with a conductive weapon.",
@@ -715,7 +776,8 @@
   {
     "id": "bio_painkiller",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Sensory Dulling CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "This module lets the user's nervous system inhibit pain signals, allowing them to dull their senses at will.  However, the use of this system may cause delayed reaction times and drowsiness.",
@@ -727,7 +789,8 @@
   {
     "id": "bio_power_storage",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Power Storage CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A Compact Bionics Module consisting of a miniaturized battery which increases the user's maximum bionic power by 100 units.  Once installed, it will likely require some sort of charger CBM to power it.",
@@ -739,7 +802,8 @@
   {
     "id": "bio_power_storage_mkII",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Power Storage Mk. II CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A Compact Bionics Module consisting of a miniaturized battery which increases the user's maximum bionic power by 250 units.  Once installed, it will likely require some sort of charger CBM to power it.",
@@ -751,7 +815,8 @@
   {
     "id": "bio_probability_travel",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Probability Travel CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Increases the body's wavelength, allowing the user to quantum tunnel through walls, reappearing on the other side.  Power drain in standby is minimal, but each tile tunneled through costs 250 bionic power.",
@@ -762,7 +827,8 @@
   {
     "id": "bio_purifier",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Air Filtration System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An advanced filtration system that is implanted in the user's trachea.  If toxins or airborne diseases find their way into the windpipe, the filter will attempt to remove them.",
@@ -774,7 +840,8 @@
   {
     "id": "bio_radio",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Infolink CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A wireless communications device that integrates with the ear canal to enable hands-free communication over radio waves.",
@@ -786,7 +853,8 @@
   {
     "id": "bio_radscrubber",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Radiation Scrubber System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A system of advanced piezomechanical blood filters that are implanted throughout the body, allowing the user to purge themself of absorbed radiation at the cost of some bionic power.",
@@ -798,7 +866,8 @@
   {
     "id": "bio_razors",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Fingertip Razors CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of ten double-edged, four centimeter long razor-sharp claws that are implanted underneath the fingernails.  They deal a small amount of unarmed slashing damage whenever the user's fingertips are uncovered.",
@@ -810,7 +879,8 @@
   {
     "id": "bio_recycler",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Recycler Unit CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A series of filters and reservoirs implanted into the urinary tract, allowing the user's body to reclaim water from metabolic waste while the device is active.  The result is a greatly reduced need for hydration.",
@@ -822,7 +892,8 @@
   {
     "id": "bio_remote",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Remote Controller CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A small module that connects to the user's brain and allows them to interface with nearby devices with wireless capabilities.",
@@ -834,7 +905,8 @@
   {
     "id": "bio_resonator",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Sonic Resonator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic module that allows the user's entire body to resonate at very high power, creating a short-range shockwave.  While it will not do much damage to creatures, solid objects such as walls and doors will be damaged.",
@@ -845,7 +917,8 @@
   {
     "id": "bio_scent_mask",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Olfactory Mask CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "While this system is powered, the user's body will produce very little odor, making it nearly impossible for creatures to track them by scent.",
@@ -857,7 +930,8 @@
   {
     "id": "bio_shock",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Electroshock Unit CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "While fighting unarmed, or with a weapon that conducts electricity, there is a chance that a successful hit will shock the user's opponent, inflicting extra damage and disabling them temporarily at the cost of some energy.",
@@ -869,7 +943,8 @@
   {
     "id": "bio_shockwave",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Shockwave Generator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic module that generates a powerful shockwave, knocking back all nearby creatures.  Targets are stunned briefly, take damage and additional stun upon impact with impassable terrain, and knock back any creatures they collide with.",
@@ -881,7 +956,8 @@
   {
     "id": "bio_speed",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Synaptic Accelerator CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of bionic stimulators that enhance the user's nervous system, granting a 10% boost to speed.",
@@ -893,7 +969,8 @@
   {
     "id": "bio_str_enhancer",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Muscle Augmentation CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of myomer fibers that enhance the user's muscular system, granting a +2 bonus to strength when active, but a -1 penalty when not.",
@@ -905,7 +982,8 @@
   {
     "id": "bio_surgical_razor",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Autonomous Surgical Scalpels CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A system of surgical-grade scalpels that is implanted in the user's fingers.  They allow for automated precise cuts and can be used as a high-quality butchering tool.",
@@ -917,7 +995,8 @@
   {
     "id": "bio_synlungs",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Synthetic Lungs CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "Highly efficient synthetic lungs which replace the user's own.  After installation the user's cardio fitness will be greatly increased and will not need regular exercise to maintain but the user will need continuous power to remain breathing.  Further, they will weaken the user's immune system somewhat.",
@@ -929,7 +1008,8 @@
   {
     "id": "bio_targeting",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Targeting System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "While active, this bionic provides a visual HUD synced to sensors in the user's hands that greatly aid in targeting ranged weapons.",
@@ -941,7 +1021,8 @@
   {
     "id": "bio_taser",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Implanted Stun Gun CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "More or less a miniaturized taser designed to be installed in one hand.  When activated, the user can attempt to make contact with the target's skin to deliver an incapacitating blast similar to what you'd get out of a handheld device.",
@@ -953,7 +1034,8 @@
   {
     "id": "bio_teleport",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Teleportation Unit CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A highly experimental unit that folds space over short distances, instantly transporting the user's body up to 25 feet in a random direction at the cost of much power.  Note that prolonged or frequent use may have dangerous side effects.",
@@ -964,7 +1046,8 @@
   {
     "id": "bio_time_freeze",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Time Dilation CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "At the cost of all stored bionic power, the user may increase their body speed and reactions dramatically, essentially freezing time.  Violent or rapid movements may cause damage due to friction.",
@@ -975,7 +1058,8 @@
   {
     "id": "bio_tools",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Integrated Multitool CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A surgically-implanted set of compact tools and a welder which runs off the user's power banks.  Includes screwdriving heads, a multi-purpose knife, a low-power impact wrench and a nail prying tool.",
@@ -986,7 +1070,8 @@
   {
     "id": "bio_multimeter",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Integrated Multimeter CBM" },
     "looks_like": "bio_tools",
     "description": "A set of electrical leads to be embedded in the user's fingers, connected to a multimeter unit in their hand.  Allows the user to measure voltage, resistance, and current using their fingertips, and provides slight protection against electric shocks.",
@@ -997,7 +1082,8 @@
   {
     "id": "bio_electrokit",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Integrated Circuitry Toolset CBM" },
     "looks_like": "bio_tools",
     "description": "A soldering iron, multimeter, and set of fine screwdrivers implanted in the user's hands.  Contains all the tools required for manipulating bench-scale electrical circuits, and provides slight protection against electric shocks.",
@@ -1008,7 +1094,8 @@
   {
     "id": "bio_torsionratchet",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Joint Torsion Ratchet CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of torsion ratchets that replace the user's joints to slowly generate power when they move.  These can be toggled to generate more power, but movement will require more effort.",
@@ -1020,7 +1107,8 @@
   {
     "id": "bio_jointservo",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Joint Servo CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of servomotors installed on the leg joints to provide power-assisted movement.  They are optimized for running, but walking also requires less effort while this bionic is active.  However, when it's offline it will hamper the user's movement.",
@@ -1032,7 +1120,8 @@
   {
     "id": "bio_uncanny_dodge",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Uncanny Dodge CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of bionic processors that augment the user's nervous system, allowing them to dodge attacks beyond normal human capability.",
@@ -1044,7 +1133,8 @@
   {
     "id": "bio_ups",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Unified Power System CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A Unified Power System that is wired into the user's bionic power banks.  Objects that run on a UPS can now directly draw power from the bionic power supply.",
@@ -1056,7 +1146,8 @@
   {
     "id": "bio_watch",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Internal Chronometer CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A bionic module containing an atomic clock, complete with a silent alarm clock function.",
@@ -1068,7 +1159,8 @@
   {
     "id": "bio_water_extractor",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Water Extraction Unit CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A module containing nanotubes that are embedded in the palm of the user's hand to pump any available fluid out of a dead body, cleanse it of impurities, and convert it into potable water.  Water container not included.",
@@ -1080,7 +1172,8 @@
   {
     "id": "bio_syringe",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Intravenous Needletip CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A small tube with a retractable needle that terminates in a net of tiny hoses instead of a plunger.  When installed, it allows the user to draw substances directly into their bloodstream akin to a regular syringe.",
@@ -1092,7 +1185,8 @@
   {
     "id": "bio_weight",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Titanium Skeletal Bracing CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of hinges, springs, and other synthetic augments for the skeletal structure.  These artificial enhancers strengthen the knees and elbows, allowing the user to carry more weight.  The reinforcement also provides 2 bashing armor to the torso, legs and arms.",
@@ -1104,7 +1198,8 @@
   {
     "id": "bio_taste_blocker",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Taste Modifier CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A set of highly-sensitive sensors implanted in the user's mouth, combined with a sophisticated analyzer.  While active, it will block all unpleasant taste and texture at the cost of bionic energy.",
@@ -1116,7 +1211,8 @@
   {
     "id": "bio_ankles",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Squeaky Ankles CBM" },
     "description": "A pair of defective bionics that make squeaking noises.",
     "weight": "100 g",
@@ -1125,7 +1221,8 @@
   {
     "id": "bio_deformity",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic-Induced Deformity CBM" },
     "description": "A jumble of broken metal pieces that were removed during reconstructive surgery.",
     "difficulty": 5
@@ -1133,7 +1230,8 @@
   {
     "id": "bio_dis_acid",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Acidic Discharge CBM" },
     "description": "A CBM that has been breached in several places.  Some acid is leaking from it.",
     "weight": "700 g",
@@ -1142,7 +1240,8 @@
   {
     "id": "bio_dis_shock",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Electrical Discharge CBM" },
     "description": "A formerly-functional CBM that is now a mess of naked wires and burnt resistors.",
     "weight": "700 g",
@@ -1151,7 +1250,8 @@
   {
     "id": "bio_drain",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Electrical Drain CBM" },
     "description": "This CBM was wired incorrectly and would drain power from any system connected to it.",
     "weight": "900 g",
@@ -1160,7 +1260,8 @@
   {
     "id": "bio_itchy",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Itchy Metal Thing CBM" },
     "description": "You can't recognize what this is supposed to be, but you imagine it'd be a very awkward thing to have in one's body.",
     "weight": "200 g",
@@ -1169,7 +1270,8 @@
   {
     "id": "bio_glowy",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Glowy Thing CBM" },
     "description": "It's a… thing?  And it glows, at least it did when it was installed.",
     "weight": "5 g",
@@ -1178,7 +1280,8 @@
   {
     "id": "bio_leaky",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Leaky Bionic CBM" },
     "description": "A mess of pierced pipes and broken seals, something unpleasant is leaking from it.",
     "weight": "600 g",
@@ -1187,7 +1290,8 @@
   {
     "id": "bio_noise",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Noisemaker CBM" },
     "description": "A malfunctioning bionic.  When installed, it occasionally emits a loud burst of noise.",
     "weight": "250 g",
@@ -1196,7 +1300,8 @@
   {
     "id": "bio_nostril",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Nostril CBM" },
     "description": "This thing was up someone's nose, they're probably glad to be rid of it.",
     "weight": "50 g",
@@ -1205,7 +1310,8 @@
   {
     "id": "bio_pokedeye",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Visual Impairment CBM" },
     "description": "A defective bionic that impairs vision.",
     "weight": "100 g",
@@ -1214,7 +1320,8 @@
   {
     "id": "bio_power_weakness",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Power Overload CBM" },
     "description": "A bunch of defective power circuits that are prone to short-circuiting.",
     "difficulty": 7
@@ -1222,7 +1329,8 @@
   {
     "id": "bio_shakes",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic Short Circuit CBM" },
     "description": "This bionic is poorly wired and occasionally short-circuits.",
     "difficulty": 7
@@ -1230,7 +1338,8 @@
   {
     "id": "bio_sleepy",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Endocrine Enervator CBM" },
     "description": "A malfunctioning bionic that causes fatigue by altering the unfortunate user's brain chemistry.",
     "weight": "100 g",
@@ -1239,7 +1348,8 @@
   {
     "id": "bio_synaptic_regen",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Synaptic Regeneration System CBM" },
     "description": "An electromagnetic stimulator surgically implanted on the back of the head and along the spine, continually draining power.  As long as it's active, the user will not suffer from sleep deprivation, although they may still feel sleepy; if activated by a user that is already sleep-deprived, it will gradually reduce the symptoms of lacking sleep.",
     "price": "100 USD",
@@ -1249,7 +1359,8 @@
   {
     "id": "bio_spasm",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Motor Control Overstimulator CBM" },
     "description": "The result of poor configuration, this bionic module frequently causes debilitating muscle spasms.",
     "difficulty": 11
@@ -1257,7 +1368,8 @@
   {
     "id": "bio_stiff",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Wire-Induced Stiffness CBM" },
     "description": "A length of poorly installed wiring that would cause stiffness.",
     "difficulty": 7
@@ -1265,7 +1377,8 @@
   {
     "id": "bio_thumbs",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Self-Locking Thumbs CBM" },
     "description": "A pair of faulty, self-locking thumb bionics.",
     "weight": "50 g",
@@ -1274,7 +1387,8 @@
   {
     "id": "bio_trip",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Visual Disruptor CBM" },
     "description": "A pair of defective ocular bionics that cause visual distortion and pixelation.",
     "weight": "100 g",
@@ -1283,7 +1397,8 @@
   {
     "id": "bio_voice",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Voice Remodulator CBM" },
     "description": "Part of the Autodoc's 'Cyborg Identity Package', this bionic gives the user a creepy robot voice.",
     "weight": "100 g",
@@ -1292,7 +1407,8 @@
   {
     "id": "bio_faulty_electromagnetic_leak",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Electromagnetic Leak CBM" },
     "description": "A broken implant that sends electromagnetic impulses that reduce other implants' capacity to store charge.",
     "weight": "100 g",
@@ -1301,7 +1417,8 @@
   {
     "id": "bio_faulty_grossfood",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Taste Fouler CBM" },
     "description": "A broken and mis-wired module that would cause food and drink to taste terrible if installed.",
     "weight": "100 g",
@@ -1310,7 +1427,8 @@
   {
     "id": "bio_radleak",
     "copy-from": "bionic_general_faulty",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Radioactive Leak CBM" },
     "description": "A broken CBM that has been leaking radiation into its user.  The danger seems to have been sealed off during the removal process, but you definitely shouldn't put it back.",
     "weight": "100 g",
@@ -1319,7 +1437,8 @@
   {
     "id": "bio_recoil",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Recoil Compensators CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A CBM that contains shock absorbers and kinetic braces which greatly reduce the recoil of guns.",
@@ -1331,7 +1450,8 @@
   {
     "id": "bio_sleep_shutdown",
     "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Sleep Mode CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "A CBM that completely shuts down all communication between the user's brain and the rest of their body when they fall asleep, preventing them from waking up under any circumstance until their natural sleep cycle completes.  An inability to trigger its effects manually makes it useless as an anesthesia substitute.",
@@ -1342,7 +1462,8 @@
   {
     "id": "bio_pitch_perfect",
     "copy-from": "bionic_general",
-    "type": "BIONIC_ITEM",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Throwing Assist CBM" },
     "looks_like": "bio_int_enhancer",
     "description": "An implant that works on simple physics rather than electronics, this CBM replaces the ulnar collateral ligaments with assistive biocompatible tethers that automatically constrict and relax to improve the user's throwing distance and accuracy.",
