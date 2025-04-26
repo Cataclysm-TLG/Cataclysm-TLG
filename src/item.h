@@ -1719,11 +1719,7 @@ class item : public visitable
         /** What faults can potentially occur with this item? */
         std::set<fault_id> faults_potential() const;
 
-        bool can_have_fault_type( const std::string &fault_type ) const;
-
         std::set<fault_id> faults_potential_of_type( const std::string &fault_type ) const;
-
-        void apply_fault();
 
         /** Returns the total area of this wheel or 0 if it isn't one. */
         int wheel_area() const;
@@ -2061,12 +2057,8 @@ class item : public visitable
         void set_random_fault_of_type( const std::string &fault_type, bool force = false,
                                        bool message = true );
 
-        weighted_int_list<fault_id> all_potential_faults() const;
-
-        weighted_int_list<fault_id> all_potential_faults_of_type( const std::string
-                &fault_type ) const;
-
-        const fault_id &random_potential_fault_of_type( const std::string &fault_type ) const;
+        /** Checks all the faults in item, and if there is any of this type, removes it. */
+        void remove_single_fault_of_type( const std::string &fault_type );
 
         // Check if adding this fault is possible
         bool can_have_fault( const fault_id &f_id );
@@ -2091,6 +2083,8 @@ class item : public visitable
 
         /** Does this item have the specified fault? */
         bool has_fault( const fault_id &fault ) const;
+
+        bool has_fault_of_type( const std::string &fault_type ) const;
 
         /** Does this item part have a fault with this flag */
         bool has_fault_flag( const std::string &searched_flag ) const;

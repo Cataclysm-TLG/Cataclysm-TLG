@@ -101,12 +101,12 @@ class fault
         bool was_loaded = false; // used by generic_factory
         friend class generic_factory<fault>;
         friend class fault_fix;
-        translation message_;
         std::string type_;
         translation name_;
         translation description_;
         translation item_prefix_; // prefix added to affected item's name
         translation item_suffix_;
+        translation message_;
         std::set<fault_fix_id> fixes;
         std::set<std::string> flags;
         std::set<fault_id> block_faults;
