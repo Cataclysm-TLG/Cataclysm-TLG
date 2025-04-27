@@ -1030,7 +1030,7 @@ void vehicle::operate_reaper()
 {
     map &here = get_map();
     for( const vpart_reference &vp : get_enabled_parts( "REAPER" ) ) {
-        const tripoint_bub_ms reaper_pos = vp.pos_bub();
+        const tripoint reaper_pos = vp.pos();
         const int plant_produced = rng( 1, vp.info().bonus );
         const int seed_produced = rng( 1, 3 );
         const units::volume max_pickup_volume = vp.info().size / 20;

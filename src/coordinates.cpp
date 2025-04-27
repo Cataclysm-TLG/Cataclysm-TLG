@@ -90,8 +90,3 @@ tripoint_bub_ms rebase_bub( tripoint_omt_ms p )
 {
     return tripoint_bub_ms( p.raw() );
 }
-
-tripoint_omt_ms rebase_omt( tripoint_bub_ms p )
-{
-    return tripoint_omt_ms( p.raw() );
-}

@@ -207,27 +207,27 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
     }
 
     const bool is_riding = you.is_mounted();
-    tripoint_bub_ms dest_loc;
+    tripoint dest_loc;
     if( d.z == 0 && ( you.has_effect( effect_stunned ) || you.has_effect( effect_psi_stunned ) ) ) {
-        dest_loc.x() = rng( you.posx() - 1, you.posx() + 1 );
-        dest_loc.y() = rng( you.posy() - 1, you.posy() + 1 );
-        dest_loc.z() = you.posz();
+        dest_loc.x = rng( you.posx() - 1, you.posx() + 1 );
+        dest_loc.y = rng( you.posy() - 1, you.posy() + 1 );
+        dest_loc.z = you.posz();
     } else {
-        dest_loc.x() = you.posx() + d.x;
-        dest_loc.y() = you.posy() + d.y;
-        dest_loc.z() = you.posz() + d.z;
+        dest_loc.x = you.posx() + d.x;
+        dest_loc.y = you.posy() + d.y;
+        dest_loc.z = you.posz() + d.z;
     }
 
-    if( dest_loc == you.pos_bub() ) {
+    if( dest_loc == you.pos() ) {
         // Well that sure was easy
         return true;
     }
     bool via_ramp = false;
     if( m.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest_loc ) ) {
-        dest_loc.z() += 1;
+        dest_loc.z += 1;
         via_ramp = true;
     } else if( m.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest_loc ) ) {
-        dest_loc.z() -= 1;
+        dest_loc.z -= 1;
         via_ramp = true;
     }
 
@@ -239,14 +239,14 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         if( weapon && weapon->has_flag( flag_DIG_TOOL ) ) {
             if( weapon->type->can_use( "JACKHAMMER" ) &&
                 weapon->ammo_sufficient( &you ) ) {
-                you.invoke_item( &*weapon, "JACKHAMMER", dest_loc.raw() );
+                you.invoke_item( &*weapon, "JACKHAMMER", dest_loc );
                 // don't move into the tile until done mining
-                you.defer_move( dest_loc.raw() );
+                you.defer_move( dest_loc );
                 return true;
             } else if( weapon->type->can_use( "PICKAXE" ) ) {
-                you.invoke_item( &*weapon, "PICKAXE", dest_loc.raw() );
+                you.invoke_item( &*weapon, "PICKAXE", dest_loc );
                 // don't move into the tile until done mining
-                you.defer_move( dest_loc.raw() );
+                you.defer_move( dest_loc );
                 return true;
             }
         }
@@ -259,15 +259,15 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
     }
 
     // If the player is *attempting to* move on the X axis, update facing direction of their sprite to match.
-    point_rel_ms new_d( dest_loc.xy().raw() + point_rel_ms( -you.posx(), -you.posy() ) );
+    point new_d( dest_loc.xy() + point( -you.posx(), -you.posy() ) );
 
     if( !g->is_tileset_isometric() ) {
-        if( new_d.x() > 0 ) {
+        if( new_d.x > 0 ) {
             you.facing = FacingDirection::RIGHT;
             if( is_riding ) {
                 you.mounted_creature->facing = FacingDirection::RIGHT;
             }
-        } else if( new_d.x() < 0 ) {
+        } else if( new_d.x < 0 ) {
             you.facing = FacingDirection::LEFT;
             if( is_riding ) {
                 you.mounted_creature->facing = FacingDirection::LEFT;
@@ -304,14 +304,14 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         // y: left-up key       =>  __ -y       FacingDirection::LEFT
         // down key             =>  -x +y       ______
         //
-        if( new_d.x() >= 0 && new_d.y() >= 0 ) {
+        if( new_d.x >= 0 && new_d.y >= 0 ) {
             you.facing = FacingDirection::RIGHT;
             if( is_riding ) {
                 auto *mons = you.mounted_creature.get();
                 mons->facing = FacingDirection::RIGHT;
             }
         }
-        if( new_d.y() <= 0 && new_d.x() <= 0 ) {
+        if( new_d.y <= 0 && new_d.x <= 0 ) {
             you.facing = FacingDirection::LEFT;
             if( is_riding ) {
                 auto *mons = you.mounted_creature.get();
@@ -327,11 +327,11 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         const tripoint maxp = tripoint( MAPSIZE_X, MAPSIZE_Y, you.posz() );
         for( const tripoint &pt : m.points_in_rectangle( minp, maxp ) ) {
             if( m.ter( pt ) == ter_t_fault ) {
-                int dist = rl_dist( pt, you.pos_bub().raw() );
+                int dist = rl_dist( pt, you.pos() );
                 if( dist < curdist ) {
                     curdist = dist;
                 }
-                dist = rl_dist( pt, dest_loc.raw() );
+                dist = rl_dist( pt, dest_loc );
                 if( dist < newdist ) {
                     newdist = dist;
                 }
@@ -345,7 +345,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
 
     dbg( D_PEDANTIC_INFO ) << "game:plmove: From (" <<
                            you.posx() << "," << you.posy() << "," << you.posz() << ") to (" <<
-                           dest_loc.x() << "," << dest_loc.y() << "," << dest_loc.z() << ")";
+                           dest_loc.x << "," << dest_loc.y << "," << dest_loc.z << ")";
 
     if( g->disable_robot( dest_loc ) ) {
         return false;
@@ -448,7 +448,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
     if( veh0 != nullptr && std::abs( veh0->velocity ) > 100 ) {
         if( veh1 == nullptr ) {
             if( query_yn( _( "Dive from moving vehicle?" ) ) ) {
-                g->moving_vehicle_dismount( dest_loc.raw() );
+                g->moving_vehicle_dismount( dest_loc );
             }
             return false;
         } else if( veh1 != veh0 ) {
@@ -468,7 +468,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
     bool fromBoat = veh0 != nullptr;
     bool toBoat = veh1 != nullptr;
     if( is_riding ) {
-        if( !you.check_mount_will_move( dest_loc.raw() ) ) {
+        if( !you.check_mount_will_move( dest_loc ) ) {
             if( you.is_auto_moving() ) {
                 you.clear_destination();
             }
@@ -493,7 +493,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
                 add_msg( m_info, _( "%s to dive underwater." ),
                          press_x( ACTION_MOVE_DOWN ) );
             }
-            avatar_action::swim( get_map(), get_avatar(), dest_loc.raw() );
+            avatar_action::swim( get_map(), get_avatar(), dest_loc );
         }
 
         g->on_move_effects();
@@ -512,14 +512,14 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         you.add_msg_if_player( _( "You open the %s." ), door_name );
         // if auto move is on, continue moving next turn
         if( you.is_auto_moving() ) {
-            you.defer_move( dest_loc.raw() );
+            you.defer_move( dest_loc );
         }
         return true;
     }
     if( g->walk_move( dest_loc, via_ramp ) ) {
         return true;
     }
-    if( g->phasing_move( dest_loc.raw() ) ) {
+    if( g->phasing_move( dest_loc ) ) {
         return true;
     }
     if( veh_closed_door ) {
@@ -538,7 +538,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         you.mod_moves( -you.get_speed() );
         // if auto move is on, continue moving next turn
         if( you.is_auto_moving() ) {
-            you.defer_move( dest_loc.raw() );
+            you.defer_move( dest_loc );
         }
         return true;
     }
@@ -554,14 +554,14 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         }
         // if auto move is on, continue moving next turn
         if( you.is_auto_moving() ) {
-            you.defer_move( dest_loc.raw() );
+            you.defer_move( dest_loc );
         }
         return true;
     }
 
     // Invalid move
     const bool waste_moves = you.is_blind() || you.has_effect( effect_stunned );
-    if( waste_moves || dest_loc.z() != you.posz() ) {
+    if( waste_moves || dest_loc.z != you.posz() ) {
         add_msg( _( "You bump into the %s!" ), m.obstacle_name( dest_loc ) );
         // Only lose movement if we're blind
         if( waste_moves ) {
