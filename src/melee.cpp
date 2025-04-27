@@ -317,7 +317,7 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
                 if( comp.typeId() == big_comp && !has_wield_conflicts( comp ) ) {
                     wield( comp );
                 } else {
-                    get_map().add_item_or_charges( pos_bub(), comp );
+                    get_map().add_item_or_charges( pos(), comp );
                 }
             }
         }
@@ -1973,7 +1973,7 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
 
     if( technique.disarms && you != nullptr && you->is_armed() && !you->is_hallucination() ) {
         item weap = you->remove_weapon();
-        here.add_item_or_charges( you->pos_bub(), weap );
+        here.add_item_or_charges( you->pos(), weap );
         if( you->is_avatar() ) {
             add_msg_if_npc( _( "<npcname> disarms you!" ) );
         } else {
@@ -2887,7 +2887,7 @@ void avatar::disarm( npc &target )
         } else if( my_roll >= their_roll / 2 ) {
             add_msg( _( "You grab at %s and pull with all your force, but it drops nearby!" ),
                      it->tname() );
-            const tripoint_bub_ms tp = target.pos_bub() + tripoint( rng( -1, 1 ), rng( -1, 1 ), 0 );
+            const tripoint tp = target.pos() + tripoint( rng( -1, 1 ), rng( -1, 1 ), 0 );
             here.add_item_or_charges( tp, target.i_rem( &*it ) );
             mod_moves( -100 );
         } else {
@@ -2902,7 +2902,7 @@ void avatar::disarm( npc &target )
         if( my_roll >= their_roll ) {
             add_msg( _( "You smash %s with all your might forcing their %s to drop down nearby!" ),
                      target.get_name(), it->tname() );
-            const tripoint_bub_ms tp = target.pos_bub() + tripoint( rng( -1, 1 ), rng( -1, 1 ), 0 );
+            const tripoint tp = target.pos() + tripoint( rng( -1, 1 ), rng( -1, 1 ), 0 );
             here.add_item_or_charges( tp, target.i_rem( &*it ) );
         } else {
             add_msg( _( "You smash %s with all your might but %s remains in their hands!" ),
