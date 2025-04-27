@@ -4346,13 +4346,7 @@
     "category": [ "RAPTOR" ],
     "restricts_gear": [ "foot_toes_l", "foot_toes_r" ],
     "destroys_gear": true,
-    "allowed_items": [ "ALLOWS_TALONS" ],
-    "attacks": {
-      "attack_text_u": "You slash %s with one of your talons!",
-      "attack_text_npc": "%1$s slashes %2$s with one of their talons!",
-      "chance": 20,
-      "strength_damage": { "damage_type": "cut", "amount": 4 }
-    }
+    "allowed_items": [ "ALLOWS_TALONS" ]
   },
   {
     "type": "mutation",
@@ -4366,19 +4360,14 @@
     "active": true,
     "activated_is_setup": false,
     "activated_eocs": [ "EOC_AVIAN_LEAP" ],
-    "types": [ "LEGS", "FEET" ],
+    "types": [ "LEGS", "SOLES" ],
     "prereqs": [ "WINGS_BIRD" ],
     "threshreq": [ "THRESH_BIRD" ],
     "category": [ "BIRD" ],
     "restricts_gear": [ "foot_l", "foot_r" ],
     "destroys_gear": true,
     "allowed_items": [ "ALLOWS_TALONS" ],
-    "attacks": {
-      "attack_text_u": "You slash %s with your talons!",
-      "attack_text_npc": "%1$s slashes %2$s with their talons!",
-      "chance": 20,
-      "strength_damage": { "damage_type": "cut", "amount": 2 }
-    }
+    "flags": [ "TOUGH_FEET" ]
   },
   {
     "type": "mutation",
@@ -4395,12 +4384,6 @@
     "restricts_gear": [ "foot_sole_l", "foot_sole_r" ],
     "destroys_gear": true,
     "armor": [ { "parts": [ "foot_l", "foot_r" ], "bash": 1 } ],
-    "attacks": {
-      "attack_text_u": "You kick %s with your hooves!",
-      "attack_text_npc": "%1$s kicks %2$s with their hooves!",
-      "chance": 15,
-      "strength_damage": { "damage_type": "bash", "amount": 3 }
-    },
     "flags": [ "TOUGH_FEET" ]
   },
   {
