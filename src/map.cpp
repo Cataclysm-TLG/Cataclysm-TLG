@@ -9304,7 +9304,7 @@ void map::spawn_monsters_submap_group( const tripoint_rel_sm &gp, mongroup &grou
             }
 
             monster *const placed = g->place_critter_at( make_shared_fast<monster>( tmp ),
-                                    reality_bubble().get_bub( abs_pos ) );
+                                    local_pos );
             if( placed ) {
                 placed->on_load();
             }
