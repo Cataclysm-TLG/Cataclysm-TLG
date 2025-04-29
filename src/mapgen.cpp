@@ -598,7 +598,7 @@ static void GENERATOR_pre_burn( map &md,
     }
 }
 
-static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
+static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p, bool is_a_road )
 {
     std::list<tripoint_bub_ms> all_points_in_map;
 
@@ -618,7 +618,10 @@ static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
     GENERATOR_bash_damage( md, all_points_in_map, days_since_fall_of_civ );
     GENERATOR_move_items( md, all_points_in_map, days_since_fall_of_civ );
     GENERATOR_add_fire( md, all_points_in_map, days_since_fall_of_civ );
-    GENERATOR_pre_burn( md, all_points_in_map, days_since_fall_of_civ );
+    // HACK: Don't burn roads to the ground! This should be resolved when the system is moved to json
+    if( !is_a_road ) {
+        GENERATOR_pre_burn( md, all_points_in_map, days_since_fall_of_civ );
+    }
 
     // NOTE: Below currently only runs for bloodstains.
     for( size_t i = 0; i < all_points_in_map.size(); i++ ) {
@@ -825,17 +828,16 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
             if( any_missing || !save_results ) {
                 const tripoint_abs_omt omt_point = { p.x(), p.y(), gridz };
                 oter_id omt = overmap_buffer.ter( omt_point );
-                /*
-                * DDA applies the riot damage quite broadly. We don't want to apply any at all,
-                * but when we do, it should be by flag and not just willy-nilly.
-                */
-                // if( omt->has_flag(
-                //         oter_flags::pp_generate_riot_damage ) || ( omt->has_flag( oter_flags::road ) &&
-                //                 overmap_buffer.is_in_city( omt_point ) ) ) {
-                if( omt->has_flag(
-                        oter_flags::pp_generate_riot_damage ) ) {
-                    GENERATOR_riot_damage( *this, omt_point );
+                if( omt->has_flag( oter_flags::pp_generate_riot_damage ) && !omt->has_flag( oter_flags::road ) ) {
+                    GENERATOR_riot_damage( *this, omt_point, false );
                 }
+
+                // This is commented out for now as riot damage isn't ready for general use.
+
+                //  else if( ( omt->has_flag( oter_flags::road ) && overmap_buffer.is_in_city( omt_point ) ) ) {
+                //     // HACK: Hardcode running only certain sub-generators on roads
+                //     GENERATOR_riot_damage( *this, omt_point, true );
+                // }
             }
         }
     }
