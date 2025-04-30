@@ -26,7 +26,10 @@
 #include <jni.h>
 #include <SDL_keyboard.h>
 
-#include "options.h"
+#endif
+
+#if defined(TILES)
+#include <SDL_mouse.h>
 #endif
 
 catacurses::window new_centered_win( int nlines, int ncols )
