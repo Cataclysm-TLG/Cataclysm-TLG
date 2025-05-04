@@ -7,6 +7,7 @@
 #include <iterator>
 #include <list>
 #include <optional>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -15,6 +16,8 @@
 #include "color.h"
 #include "creature_tracker.h"
 #include "debug.h"
+#include "enums.h"
+#include "flexbuffer_json.h"
 #include "game.h"
 #include "game_constants.h"
 #include "item.h"
@@ -23,6 +26,7 @@
 #include "line.h"
 #include "map.h"
 #include "map_selector.h"
+#include "pimpl.h"
 #include "point.h"
 #include "ret_val.h"
 #include "safe_reference.h"

@@ -934,10 +934,12 @@ void emp_blast( const tripoint_bub_ms &p )
                 !player_character.has_flag( json_flag_EMP_IMMUNE ) ) {
                 add_msg( m_bad, _( "The electromagnetic pulse fries your %s!" ), it->tname() );
                 it->deactivate();
-                if( one_in( 4 ) ) {
-                    it->set_random_fault_of_type( "shorted" );
+                item &electronic_item = *it.get_item();
+                // Items in inventory might be shielded by even thin clothing, so slightly lower chance.
+                if( one_in( 5 ) ) {
+                    electronic_item.set_random_fault_of_type( "shorted" );
                 } else {
-                    it->set_fault( fault_emp_reboot );
+                    electronic_item.set_fault( fault_emp_reboot );
                 }
             }
         }
@@ -950,10 +952,11 @@ void emp_blast( const tripoint_bub_ms &p )
                 add_msg( _( "The electromagnetic pulse fries the %s!" ), it.tname() );
             }
             it.deactivate();
-            if( one_in( 3 ) ) {
-                it.set_random_fault_of_type( "shorted" );
+            item_location loc = item_location( map_cursor( p ), &it );
+            if( one_in( 4 ) ) {
+                it.set_random_fault_of_type( "shorted", true, false );
             } else {
-                it.set_fault( fault_emp_reboot );
+                it.set_fault( fault_emp_reboot, true, false );
             }
             //map::make_active adds the item to the active item processing list, so that it can reboot without further interaction
             item_location loc = item_location( map_cursor( p ), &it );

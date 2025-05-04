@@ -2050,10 +2050,16 @@ class item : public visitable
         /** Idempotent filter setting an item specific flag. */
         item &set_flag( const flag_id &flag );
 
-        /** Idempotent filter setting an item specific fault. */
-        void set_fault( const fault_id &fault_id );
+        /** Check if item can have a fault, and if yes, applies it. This version do not print a message, use item_location version instead
+         * `force`, if true, bypasses the check and applies the fault item do not define
+         */
+        bool set_fault( const fault_id &f_id, bool force = false, bool message = true );
 
-        void set_random_fault_of_type( const std::string &fault_type, const bool &force = false );
+        /** Check if item can have any fault of type, and if yes, applies it. This version do not print a message, use item_location version instead
+        * `force`, if true, bypasses the check and applies the fault item do not define
+        */
+        void set_random_fault_of_type( const std::string &fault_type, bool force = false,
+                                       bool message = true );
 
         weighted_int_list<fault_id> all_potential_faults() const;
 
@@ -2061,6 +2067,9 @@ class item : public visitable
                 &fault_type ) const;
 
         const fault_id &random_potential_fault_of_type( const std::string &fault_type ) const;
+
+        // Check if adding this fault is possible
+        bool can_have_fault( const fault_id &f_id );
 
         /** Idempotent filter removing an item specific flag */
         item &unset_flag( const flag_id &flag );
@@ -2077,6 +2086,11 @@ class item : public visitable
 
         /**How much of the specified vitamin is there?*/
         int get_vitamin_amount( const vitamin_id &vitamin ) const;
+        
+        std::string get_fault_description( const fault_id &f_id ) const;
+
+        /** Does this item have the specified fault? */
+        bool has_fault( const fault_id &fault ) const;
 
         /**Does this item have the specified fault*/
         bool has_fault( const fault_id &fault ) const;
