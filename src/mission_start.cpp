@@ -9,6 +9,7 @@
 #include "character.h"
 #include "computer.h"
 #include "coordinates.h"
+#include "current_map.h"
 #include "debug.h"
 #include "enum_traits.h"
 #include "game.h"
@@ -181,6 +182,8 @@ void mission_start::place_npc_software( mission *miss )
 
     tinymap compmap;
     compmap.load( place, false );
+    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+    swap_map swap( *compmap.cast_to_map() );
     tripoint_omt_ms comppoint;
 
     oter_id oter = overmap_buffer.ter( place );
@@ -223,6 +226,8 @@ void mission_start::place_deposit_box( mission *miss )
 
     tinymap compmap;
     compmap.load( site, false );
+    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+    swap_map swap( *compmap.cast_to_map() );
     std::vector<tripoint_omt_ms> valid;
     for( const tripoint_omt_ms &p : compmap.points_on_zlevel() ) {
         if( compmap.ter( p ) == ter_t_floor ) {
@@ -358,6 +363,8 @@ void static create_lab_consoles(
 
         tinymap compmap;
         compmap.load( om_place, false );
+        // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+        swap_map swap( *compmap.cast_to_map() );
 
         tripoint_omt_ms comppoint = find_potential_computer_point( compmap );
 
