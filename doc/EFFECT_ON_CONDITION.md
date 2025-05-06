@@ -1337,16 +1337,21 @@ Check the location is in a city.
 },
 ```
 
-Each time the avatar enters an OMT message them whether they're in a city or not.
-```
+Each time the avatar enters an OMT display a message as to whether or not they're in a city.
+```jsonc
   {
     "type": "effect_on_condition",
     "id": "EOC_TEST_IS_IN_CITY",
     "eoc_type": "EVENT",
     "required_event": "avatar_enters_omt",
-    "condition": { "map_in_city": { "mutator": "u_loc_relative", "target": "(0,0,0)" } },
-    "effect": [ { "u_message": "You are in a city OMT.", "type": "good" } ],
-    "false_effect": [ { "u_message": "You are NOT in a city OMT.", "type": "bad" } ]
+    "effect": [
+      { "u_location_variable": { "context_val": "loc" } },
+      {
+        "if": { "map_in_city": { "context_val": "loc" } },
+        "then": { "u_message": "You are in a city OMT.", "type": "good" },
+        "else": { "u_message": "You are NOT in a city OMT.", "type": "bad" }
+      }
+    ]
   },
 ```
 
