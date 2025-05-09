@@ -9172,6 +9172,11 @@ bool item::mod_damage( int qty )
             set_degradation( degradation_ + get_degrade_amount( *this, damage_, dmg_before ) );
         }
 
+        // TODO: think about better way to telling the game what faults should be applied when
+        if( qty > 0 ) {
+            set_random_fault_of_type( "mechanical_damage" );
+        }
+
         return destroy;
     }
 }
