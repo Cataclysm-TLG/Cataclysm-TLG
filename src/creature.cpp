@@ -1160,6 +1160,12 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
     // Range is -0.5 to 1.5 -> missed_by will be [1, 0], so the rng addition to it
     // will push it to at most 1.5 and at least -0.5
     ret.bp_hit = get_anatomy()->select_body_part_projectile_attack( -0.5, 1.5, hit_value );
+
+
+    // ret.bp_hit = get_anatomy()->select_body_part( const Creature *you, int min_hit, int max_hit,
+    //     true,
+    //     int hit_roll ) const
+    
     float crit_mod = get_crit_factor( ret.bp_hit );
 
     const float crit_multiplier = proj.critical_multiplier;
