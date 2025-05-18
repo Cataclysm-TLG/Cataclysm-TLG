@@ -156,7 +156,7 @@
     "ammo": 20,
     "entries": [
       { "item": "heavy_flashlight", "prob": 100, "damage": [ 2, 4 ], "charges": [ 0, 300 ] },
-      { "item": "tazer", "prob": 100, "damage": [ 2, 4 ] },
+      { "item": "tazer", "prob": 100, "damage": [ 2, 4 ], "charges": [ 0, 500 ] },
       { "group": "cop_gloves", "prob": 30, "damage": [ 1, 4 ] },
       { "group": "security_pants", "damage": [ 1, 4 ] },
       { "group": "security_shoes", "prob": 70, "damage": [ 1, 4 ] },
