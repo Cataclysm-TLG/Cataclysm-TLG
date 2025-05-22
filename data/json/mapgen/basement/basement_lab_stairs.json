@@ -4,7 +4,6 @@
     "method": "json",
     "om_terrain": [ "basement_hidden_lab_stairs" ],
     "//": "used by house_31 and house_32",
-    "weight": 100,
     "object": {
       "fill_ter": "t_thconc_floor",
       "rotation": [ 0, 3 ],
@@ -36,6 +35,7 @@
       ],
       "palettes": [ "lab_palette" ],
       "terrain": {
+        "#": "t_soil",
         "=": "t_wall",
         ",": "t_thconc_floor",
         "!": "t_card_science",
@@ -56,7 +56,6 @@
     "type": "mapgen",
     "method": "json",
     "om_terrain": [ "basement_hidden_lab_stairs" ],
-    "weight": 100,
     "//": "used by house_31 and house_32",
     "object": {
       "rotation": [ 0, 3 ],
