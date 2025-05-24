@@ -1683,7 +1683,7 @@
   {
     "id": "mon_rabbit_baby",
     "type": "MONSTER",
-    "name": { "str": "wild bunny" },
+    "name": { "str": "wild bunny", "str_pl": "wild bunnies" },
     "copy-from": "mon_rabbit",
     "description": "A baby rabbit with a cute wiggling nose and long ears.  It is extremely skittish.",
     "volume": "150 ml",
@@ -1709,7 +1709,7 @@
   {
     "id": "mon_rabbit_domestic_baby",
     "type": "MONSTER",
-    "name": { "str": "bunny" },
+    "name": { "str": "bunny", "str_pl": "bunnies" },
     "description": "A baby rabbit with a cute wiggling nose and long ears.  This one is of the domesticated variety, commonly kept as a pet, a research subject, or a source of food.",
     "copy-from": "mon_rabbit_baby",
     "upgrades": { "age_grow": 45, "into": "mon_rabbit_domestic" },
