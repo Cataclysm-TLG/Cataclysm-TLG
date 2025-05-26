@@ -4103,7 +4103,7 @@ void addiction::deserialize( const JsonObject &jo )
                 type = STATIC( addiction_id( "sleeping pill" ) );
                 break;
             case add_type_legacy::PKILLER:
-                type = STATIC( addiction_id( "opiate" ) );
+                type = STATIC( addiction_id( "opioid" ) );
                 break;
             case add_type_legacy::SPEED:
                 type = STATIC( addiction_id( "amphetamine" ) );
