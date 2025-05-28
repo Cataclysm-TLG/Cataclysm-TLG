@@ -141,8 +141,8 @@ class faction : public faction_template
         std::string describe() const;
         std::vector<std::string> epilogue() const;
 
-        std::string food_supply_text();
-        nc_color food_supply_color();
+        std::string food_supply_text() const;
+        nc_color food_supply_color() const;
 
         std::pair<nc_color, std::string> vitamin_stores( vitamin_type vit );
 
