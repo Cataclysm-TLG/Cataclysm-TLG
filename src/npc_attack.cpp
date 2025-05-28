@@ -242,7 +242,13 @@ void npc_attack_melee::use( npc &source, const tripoint &location ) const
         debugmsg( "ERROR: npc tried to attack null critter" );
         return;
     }
-    int target_distance = rl_dist( source.pos(), location );
+    // TODO: Move this to line.h
+    int target_distance = static_cast<int>( std::round( trig_dist_z_adjust( source.pos(),
+                                            location ) ) );
+    if( source.pos().z != location.z ) {
+        // Always round up so that the Z adjustment actually matters.
+        target_distance = static_cast<int>( std::ceil( trig_dist_z_adjust( source.pos(), location ) ) );
+    }
     if( !source.is_adjacent( critter, true ) ) {
         if( target_distance <= weapon.reach_range( source ) ) {
             add_msg_debug( debugmode::debug_filter::DF_NPC, "%s is attempting a reach attack",

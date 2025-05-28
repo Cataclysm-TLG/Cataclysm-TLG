@@ -3328,8 +3328,12 @@ int target_ui::dist_fn( const tripoint &p )
             z_adjust = 100 * std::abs( src.z - p.z );
         }
     }
-    // Always round up so that the Z adjustment actually matters.
-    return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );
+    if( src.z == p.z ) {
+        return static_cast<int>( z_adjust + std::round( trig_dist_z_adjust( src, p ) ) );
+    } else {
+        // Always round up so that the Z adjustment actually matters.
+        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );
+    }
 }
 
 void target_ui::set_last_target()
