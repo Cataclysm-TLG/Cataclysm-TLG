@@ -1476,30 +1476,31 @@ bool game::cancel_activity_or_ignore_query( const distraction_type type, const s
     const bool force_uc = get_option<bool>( "FORCE_CAPITAL_YN" );
     const auto &allow_key = force_uc ? input_context::disallow_lower_case_or_non_modified_letters
                             : input_context::allow_all_keys;
-  
-    while (true) {
+
+    while( true ) {
         query_popup qp;
-        qp.preferred_keyboard_mode(keyboard_mode::keycode)
-            .context("CANCEL_ACTIVITY_OR_IGNORE_QUERY")
-            .message(force_uc && !is_keycode_mode_supported() ?
-                pgettext("cancel_activity_or_ignore_query",
-                    "<color_light_red>%s %s (Case Sensitive)</color>") :
-                pgettext("cancel_activity_or_ignore_query",
-                    "<color_light_red>%s %s</color>"),
-                text, u.activity.get_stop_phrase())
-            .option("YES", allow_key)
-            .option("NO", allow_key)
-            .option("MANAGER", allow_key)
-            .option("IGNORE", allow_key);
+        qp.preferred_keyboard_mode( keyboard_mode::keycode )
+        .context( "CANCEL_ACTIVITY_OR_IGNORE_QUERY" )
+        .message( force_uc && !is_keycode_mode_supported() ?
+                  pgettext( "cancel_activity_or_ignore_query",
+                            "<color_light_red>%s %s (Case Sensitive)</color>" ) :
+                  pgettext( "cancel_activity_or_ignore_query",
+                            "<color_light_red>%s %s</color>" ),
+                  text, u.activity.get_stop_phrase() )
+        .option( "YES", allow_key )
+        .option( "NO", allow_key )
+        .option( "MANAGER", allow_key )
+        .option( "IGNORE", allow_key );
 
         // Only show VIEW if the distraction is from a hostile enemy
-        if (type == distraction_type::hostile_spotted_near || type == distraction_type::hostile_spotted_far) {
-            qp.option("VIEW", allow_key);
+        if( type == distraction_type::hostile_spotted_near ||
+            type == distraction_type::hostile_spotted_far ) {
+            qp.option( "VIEW", allow_key );
         }
 
-        const std::string& action = qp.query().action;
+        const std::string &action = qp.query().action;
 
-        if (action == "YES") {
+        if( action == "YES" ) {
             u.cancel_activity();
             return true;
         }

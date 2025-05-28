@@ -963,10 +963,12 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                enchant_vals::mod::MELEE_STAMINA_CONSUMPTION,
                                get_total_melee_stamina_cost() );
 
-    // Train weapon proficiencies
-    for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
-        for( const proficiency_id &prof : cat->category_proficiencies() ) {
-            practice_proficiency( prof, 1_seconds );
+    // Train weapon proficiencies unless reach attacking
+    if( !reach_attacking ) {
+        for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
+            for( const proficiency_id &prof : cat->category_proficiencies() ) {
+                practice_proficiency( prof, 1_seconds );
+            }
         }
     }
 
