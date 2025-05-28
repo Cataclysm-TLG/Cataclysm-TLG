@@ -340,7 +340,7 @@
     "melee_dice": 4,
     "melee_dice_sides": 9,
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
-    "bleed_rate": 20,
+    "bleed_rate": 10,
     "vision_night": 6,
     "//grab": "Assuming it's grabbing with its mouth a bit grabbier than a zed should be about right",
     "grab_strength": 30,
