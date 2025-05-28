@@ -99,7 +99,7 @@
     "melee_dice": 3,
     "melee_dice_sides": 3,
     "dodge": 6,
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "vision_day": 20,
     "vision_night": 8,
     "aggression": 100,

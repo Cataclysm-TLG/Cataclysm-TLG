@@ -119,6 +119,7 @@
     "bleed_rate": 50,
     "delete": { "upgrades": { "half_life": 42, "into_group": "GROUP_SOLDIER_UPGRADE" }, "categories": [ "CLASSIC" ] },
     "relative": { "hp": 20, "speed": 10, "melee_skill": 1, "vision_day": 10, "vision_night": 10 },
+    "harvest": "zombie_humanoid_acid",
     "extend": {
       "special_attacks": [
         [ "ACID_BARF", 10 ],
@@ -155,6 +156,7 @@
     "bleed_rate": 50,
     "delete": { "upgrades": { "half_life": 42, "into_group": "GROUP_SOLDIER_UPGRADE" }, "categories": [ "CLASSIC" ] },
     "relative": { "hp": 40, "speed": -10, "melee_skill": 2, "armor": { "bash": 5 } },
+    "harvest": "zombie_humanoid_acid",
     "extend": {
       "special_attacks": [
         [ "ACID_BARF", 5 ],
