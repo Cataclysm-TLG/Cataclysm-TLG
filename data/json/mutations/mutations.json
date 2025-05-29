@@ -995,7 +995,6 @@
     "points": 1,
     "description": "You can handle intoxicants well.  Their effects clear up more quickly for you.",
     "starting_trait": true,
-    "leads_to": [ "ALCMET" ],
     "category": [ "TROGLOBITE", "RAPTOR", "RAT", "CHIMERA", "BATRACHIAN", "CRUSTACEAN" ],
     "cancels": [ "LIGHTWEIGHT" ]
   },
@@ -1682,9 +1681,9 @@
   {
     "type": "mutation",
     "id": "PROJUNK2",
-    "name": { "str": "Sugar-Loving" },
+    "name": { "str": "Snackaholic" },
     "points": 2,
-    "description": "You *adore* the taste of junk food, and find it preferable to everything else!",
+    "description": "You *adore* the taste of junk food, and find it preferable to everything else!  Additionally, you suffer no negative health effects from eating it.",
     "purifiable": false,
     "prereqs": [ "PROJUNK" ],
     "cancels": [ "ANTIJUNK" ],
@@ -4399,10 +4398,8 @@
     "id": "ALCMET",
     "name": { "str": "Alcohol Metabolism" },
     "points": 2,
-    "description": "So it's fermented?  Whatever, it's still good drinking.  You've developed the ability to metabolize alcohol as a food source.",
-    "prereqs": [ "TOLERANCE" ],
-    "prereqs2": [ "SAPROVORE" ],
-    "category": [ "TROGLOBITE" ]
+    "description": "Your body produces enzymes that process alcohol more quickly.  Sobering up faster makes it less addictive, and you won't suffer as many negative health effects.",
+    "category": [ "TROGLOBITE", "MEDICAL", "SLIME", "ELFA", "PLANT" ]
   },
   {
     "type": "mutation",

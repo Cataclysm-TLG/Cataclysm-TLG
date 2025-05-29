@@ -3393,9 +3393,9 @@
     "desc": [
       "You drank some alcohol.  You feel warm inside.",
       "You drank alcohol.  Party on!",
-      "You drank lots of alcohol.  Are those white mice?",
-      "You drank unholy amounts of alcohol.  It's the end of the world, what do you care?",
-      "You embalmed yourself alive with so much alcohol, that even zombies will leave your dead body alone."
+      "You drank lots of alcohol.  Now you're feeling it.",
+      "You drank too much alcohol.  It's the end of the world, what do you care?",
+      "You drank so much that you're probably not going to remember this."
     ],
     "max_intensity": 5,
     "apply_message": "You feel lightheaded.",
@@ -3422,7 +3422,7 @@
       "pkill_tick": [ -10 ]
     },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
       { "limb_score": "block", "modifier": 1.0, "scaling": -0.1 },
       { "limb_score": "vision", "modifier": 1.0, "scaling": -0.05 },
       { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },

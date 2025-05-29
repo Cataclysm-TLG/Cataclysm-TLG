@@ -138,6 +138,7 @@ static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire
 static const morale_type morale_wet( "morale_wet" );
 
 static const trait_id trait_ADDICTIVE( "ADDICTIVE" );
+static const trait_id trait_ALCMET( "ALCMET" );
 static const trait_id trait_ASTHMA( "ASTHMA" );
 static const trait_id trait_CHAOTIC( "CHAOTIC" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
@@ -1981,7 +1982,8 @@ void Character::mend( int rate_multiplier )
         healing_factor *= addiction_scaling( 0.25f, 0.75f, addiction_level( addiction_nicotine ) );
     }
 
-    if( has_effect( effect_drunk ) ) {
+    // ALCMET prevents the short-term harm done by alcohol, but not the long-term harm.
+    if( has_effect( effect_drunk ) && !has_trait( trait_ALCMET ) ) {
         healing_factor *= 0.5;
     } else {
         healing_factor *= addiction_scaling( 0.25f, 0.75f, addiction_level( addiction_alcohol ) );
@@ -2210,7 +2212,8 @@ void Character::add_addiction( const addiction_id &type, int strength )
     if( has_trait( trait_ADDICTIVE ) ) {
         strength *= 2;
         timer = 1_hours;
-    } else if( has_trait( trait_NONADDICTIVE ) ) {
+    } else if( has_trait( trait_NONADDICTIVE ) || ( type == addiction_alcohol &&
+               has_trait( trait_ALCMET ) ) ) {
         strength /= 2;
         timer = 6_hours;
     }

@@ -524,10 +524,8 @@ static int alcohol( Character &p, const item &it, const int strength )
     if( p.has_trait( trait_ALCMET ) ) {
         duration = alc_strength( strength, 6_minutes, 14_minutes, 18_minutes ) - ( alc_strength( strength,
                    36_seconds, 1_minutes, 1_minutes ) * p.str_max );
-        // Metabolizing the booze improves the nutritional value;
-        // might not be healthy, and still causes Thirst problems, though
-        p.stomach.mod_nutr( -std::abs( it.get_comestible() ? it.type->comestible->stim : 0 ) );
         // Metabolizing it cancels out the depressant
+        p.stomach.mod_nutr( -std::abs( it.get_comestible() ? it.type->comestible->stim : 0 ) );
         p.mod_stim( std::abs( it.get_comestible() ? it.get_comestible()->stim : 0 ) );
     } else if( p.has_trait( trait_TOLERANCE ) ) {
         duration -= alc_strength( strength, 9_minutes, 16_minutes, 24_minutes );

@@ -125,6 +125,7 @@ static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
 static const json_character_flag json_flag_SPIRITUAL( "SPIRITUAL" );
 static const json_character_flag json_flag_STRICT_HUMANITARIAN( "STRICT_HUMANITARIAN" );
 
+static const material_id material_alcohol( "alcohol" );
 static const material_id material_all( "all" );
 
 static const morale_type morale_antifruit( "morale_antifruit" );
@@ -152,6 +153,7 @@ static const skill_id skill_cooking( "cooking" );
 static const skill_id skill_survival( "survival" );
 
 static const trait_id trait_ACIDBLOOD( "ACIDBLOOD" );
+static const trait_id trait_ALCMET( "ALCMET" );
 static const trait_id trait_AMORPHOUS( "AMORPHOUS" );
 static const trait_id trait_ANTIFRUIT( "ANTIFRUIT" );
 static const trait_id trait_ANTIJUNK( "ANTIJUNK" );
@@ -1603,7 +1605,8 @@ bool Character::consume_effects( item &food )
 
     // Used in hibernation messages.
     const int nutr = nutrition_for( food );
-    const bool skip_health = has_trait( trait_PROJUNK2 ) && comest.healthy < 0;
+    const bool skip_health = ( has_trait( trait_PROJUNK2 ) && comest.healthy < 0 ) ||
+                             ( has_trait( trait_ALCMET ) && food.made_of( material_alcohol ) && comest.healthy < 0 ) ;
     // We can handle junk just fine
     if( !skip_health ) {
         modify_health( comest );
