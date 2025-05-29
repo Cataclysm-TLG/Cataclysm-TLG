@@ -1382,19 +1382,14 @@
     "id": "bio_recycler",
     "type": "bionic",
     "name": { "str": "Recycler Unit" },
-    "description": "Your digestive system has been outfitted with a series of filters and processors, allowing you to reclaim waste liquid and, to a lesser degree, nutrients.  The net effect is a greatly reduced need to eat and drink.",
-    "occupied_bodyparts": [ [ "torso", 15 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ],
-    "enchantments": [
-      {
-        "condition": "ALWAYS",
-        "values": [
-          { "value": "HUNGER", "multiply": -0.5 },
-          { "value": "THIRST", "multiply": -0.5 },
-          { "value": "METABOLISM", "multiply": -0.5 }
-        ]
-      }
-    ]
+    "description": "Your urinary tract is fitted with filters and reservoirs that allow your body to reclaim water from metabolic waste while this device is powered, greatly reducing your need to hydrate.",
+    "occupied_bodyparts": [ [ "torso", 10 ] ],
+    "act_cost": "1 J",
+    "react_cost": "2 J",
+    "time": "1 s",
+    "activated_on_install": true,
+    "trigger_cost": "1 J",
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "THIRST", "multiply": -0.5 } ] } ]
   },
   {
     "id": "bio_remote",
@@ -1566,10 +1561,15 @@
     "id": "bio_targeting",
     "type": "bionic",
     "name": { "str": "Targeting System" },
-    "description": "Your eyes are surgically equipped with range finders, and their movement is synced with that of your arms, to a degree.  Shots you fire will be much more accurate, particularly at long range.",
+    "description": "While active, this bionic provides a visual HUD synced to sensors in your hands that greatly aid in targeting ranged weapons.",
     "occupied_bodyparts": [ [ "eyes", 1 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "hand_l", 1 ], [ "hand_r", 1 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "WEAPON_DISPERSION", "multiply": -0.25 } ] } ]
+    "flags": [ "BIONIC_TOGGLED" ],
+    "act_cost": "20 J",
+    "react_cost": "20 J",
+    "time": "1 s",
+    "activated_on_install": false,
+    "trigger_cost": "3 J",
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "WEAPON_DISPERSION", "multiply": -0.25 } ] } ]
   },
   {
     "id": "bio_sonar",
