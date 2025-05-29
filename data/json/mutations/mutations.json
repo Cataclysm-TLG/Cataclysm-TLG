@@ -1681,9 +1681,9 @@
   {
     "type": "mutation",
     "id": "PROJUNK2",
-    "name": { "str": "Sugar-Loving" },
+    "name": { "str": "Snackaholic" },
     "points": 2,
-    "description": "You *adore* the taste of junk food, and find it preferable to everything else!",
+    "description": "You *adore* the taste of junk food, and find it preferable to everything else!  Additionally, you suffer no negative health effects from eating it.",
     "purifiable": false,
     "prereqs": [ "PROJUNK" ],
     "cancels": [ "ANTIJUNK" ],
