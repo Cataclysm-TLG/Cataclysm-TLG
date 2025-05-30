@@ -90,8 +90,11 @@
         { "item": "straw_pile", "x": [ 19, 19 ], "y": [ 10, 15 ], "amount": [ 2, 7 ] },
         { "item": "cattlefodder", "x": [ 19, 19 ], "y": [ 10, 15 ], "amount": [ 2, 7 ] }
       ],
-      "place_monster": [ { "group": "GROUP_DOMESTIC", "x": [ 10, 12 ], "y": [ 15, 17 ], "repeat": [ 1, 10 ] } ],
-      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 70 } }
+      "place_monster": [
+        { "group": "GROUP_DOMESTIC", "x": [ 10, 12 ], "y": [ 15, 17 ], "repeat": [ 1, 5 ] },
+        { "group": "GROUP_FARM_PESTS", "x": [ 4, 22 ], "y": [ 29, 39 ], "repeat": [ 1, 2 ] }
+      ],
+      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 2 } }
     }
   },
   {
@@ -285,7 +288,7 @@
         "_": [ { "item": "straw_pile", "chance": 3 }, { "item": "cattlefodder", "chance": 2 } ],
         "f": { "item": "cattlefodder", "chance": 40, "repeat": 10 }
       },
-      "sealed_item": { "D": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 20 } },
+      "sealed_item": { "D": { "item": { "item": "seed_oats" }, "furniture": "f_plant_seedling", "chance": 10 } },
       "palettes": [ "farm" ]
     }
   },
@@ -432,7 +435,7 @@
         " F                    F "
       ],
       "monster": { "7": { "monster": "mon_chicken" }, "8": { "monster": "mon_chicken_chick" } },
-      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 70 } },
+      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 6 } },
       "place_item": [
         { "item": "straw_pile", "x": 12, "y": 3, "chance": 75 },
         { "item": "straw_pile", "x": 14, "y": 3, "chance": 75 },
@@ -444,7 +447,7 @@
         { "item": "straw_pile", "x": 16, "y": 7, "chance": 75 },
         { "item": "straw_pile", "x": 18, "y": 7, "chance": 75 },
         { "item": "straw_pile", "x": 20, "y": 7, "chance": 75 },
-        { "item": "birdfood", "x": [ 3, 7 ], "y": [ 5, 11 ], "chance": 75, "repeat": [ 4, 7 ] },
+        { "item": "birdfood", "x": [ 3, 7 ], "y": [ 5, 11 ], "chance": 75, "repeat": [ 1, 4 ] },
         { "item": "straw_pile", "x": 20, "y": 7, "chance": 75 }
       ],
       "palettes": [ "farm" ]
@@ -533,15 +536,15 @@
         "%": "t_dirtfloor"
       },
       "sealed_item": {
-        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 20 },
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 20 },
-        "%": { "item": { "item": "seed_oats" }, "furniture": "f_planter_seedling", "chance": 20 }
+        "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 10 },
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "Δ": { "item": { "item": "seed_celery" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "‡": { "item": { "item": "seed_pumpkin" }, "furniture": "f_planter_seedling", "chance": 10 },
+        "%": { "item": { "item": "seed_oats" }, "furniture": "f_planter_seedling", "chance": 10 }
       },
       "palettes": [ "farm" ]
     }
@@ -625,7 +628,7 @@
         "r": { "item": "honey_market_stall", "repeat": [ 4, 12 ] }
       },
       "furniture": { "♥": "f_machinery_light", "♠": "f_locker", "♦": "f_woodchips" },
-      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 70 } },
+      "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 10 } },
       "palettes": [ "farm" ],
       "place_monster": [
         { "group": "GROUP_BEEKEEPER", "x": [ 6, 21 ], "y": [ 3, 10 ], "pack_size": 1, "chance": 10 },

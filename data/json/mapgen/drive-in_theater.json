@@ -156,17 +156,17 @@
       ],
       "palettes": [ { "distribution": [ [ "car_theater_full", 1 ], [ "car_theater", 1 ] ] } ],
       "place_vehicles": [
-        { "vehicle": "parking_garage", "chance": 20, "x": 105, "y": 39, "rotation": 0 },
-        { "vehicle": "parking_garage", "chance": 20, "x": 105, "y": 51, "rotation": 0 }
+        { "vehicle": "parking_garage", "chance": 10, "x": 105, "y": 39, "rotation": 0 },
+        { "vehicle": "parking_garage", "chance": 10, "x": 105, "y": 51, "rotation": 0 }
       ],
       "items": {
         "a": { "item": "trash", "chance": 60, "repeat": [ 1, 3 ] },
         "&": { "item": "trash", "chance": 60, "repeat": [ 1, 3 ] },
         "O": { "item": "SUS_oven", "chance": 100 },
-        "M": { "item": "fridgesnacks", "chance": 75, "repeat": [ 5, 10 ] },
-        "m": { "item": "groce_softdrink", "chance": 75, "repeat": [ 5, 10 ] },
-        "x": { "item": "groce_softdrink", "chance": 80, "repeat": [ 10, 15 ] },
-        "X": { "item": "salty_snacks", "chance": 80, "repeat": [ 10, 15 ] }
+        "M": { "item": "fridgesnacks", "chance": 55, "repeat": [ 0, 5 ] },
+        "m": { "item": "groce_softdrink", "chance": 55, "repeat": [ 0, 5 ] },
+        "x": { "item": "groce_softdrink", "chance": 60, "repeat": [ 0, 8 ] },
+        "X": { "item": "salty_snacks", "chance": 60, "repeat": [ 0, 15 ] }
       },
       "place_loot": [ { "group": "cash_register_random", "x": 85, "y": 50 }, { "item": "microwave", "x": 85, "y": 47 } ]
     }
@@ -314,8 +314,8 @@
     "type": "palette",
     "id": "car_theater_full",
     "palettes": [ "car_theater", "commercial" ],
-    "vehicles": { "1": { "vehicle": "cars_only", "chance": 80, "rotation": 270 } },
-    "monster": { "_": { "group": "GROUP_MALL", "chance": 1 } }
+    "vehicles": { "1": { "vehicle": "cars_only", "chance": 10, "rotation": 270 } },
+    "monster": { "_": { "group": "GROUP_MALL", "chance": 3 } }
   },
   {
     "type": "palette",
