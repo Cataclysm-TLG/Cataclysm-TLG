@@ -90,7 +90,10 @@
         { "item": "straw_pile", "x": [ 19, 19 ], "y": [ 10, 15 ], "amount": [ 2, 7 ] },
         { "item": "cattlefodder", "x": [ 19, 19 ], "y": [ 10, 15 ], "amount": [ 2, 7 ] }
       ],
-      "place_monster": [ { "group": "GROUP_DOMESTIC", "x": [ 10, 12 ], "y": [ 15, 17 ], "repeat": [ 1, 5 ] }, { "group": "GROUP_FARM_PESTS", "x": [ 4, 22 ], "y": [ 29, 39 ], "repeat": [ 1, 2 ] } ],
+      "place_monster": [
+        { "group": "GROUP_DOMESTIC", "x": [ 10, 12 ], "y": [ 15, 17 ], "repeat": [ 1, 5 ] },
+        { "group": "GROUP_FARM_PESTS", "x": [ 4, 22 ], "y": [ 29, 39 ], "repeat": [ 1, 2 ] }
+      ],
       "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 2 } }
     }
   },
