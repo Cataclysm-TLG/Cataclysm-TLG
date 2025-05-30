@@ -6,7 +6,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "rows": [ "#" ],
-      "sealed_item": { "#": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 15 } }
+      "sealed_item": { "#": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 5 } }
     }
   },
   {
@@ -16,7 +16,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "rows": [ "#" ],
-      "sealed_item": { "#": { "item": { "item": "seed_wheat" }, "furniture": "f_plant_seedling", "chance": 15 } }
+      "sealed_item": { "#": { "item": { "item": "seed_wheat" }, "furniture": "f_plant_seedling", "chance": 5 } }
     }
   },
   {
