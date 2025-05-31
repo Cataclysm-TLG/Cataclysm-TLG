@@ -403,6 +403,11 @@ float Character::hit_roll() const
         hit -= 2.0f;
     }
 
+    // Fighting in the dark is hard.
+    if( !sight_impaired() && fine_detail_vision_mod() >= 6.0f ) {
+        hit -= 1.0f;
+    }
+
     hit *= get_modifier( character_modifier_melee_attack_roll_mod );
     return melee::melee_hit_range( hit );
 }
@@ -447,6 +452,9 @@ std::string Character::get_miss_reason()
         _( "Using this weapon is awkward at close range." ),
         !reach_attacking &&
         cur_weap.has_flag( flag_POLEARM ) );
+    add_miss_reason(
+        _( "You can't see well enough to fight in the dark." ),
+        fine_detail_vision_mod() >= 6 );
 
     const std::string *const reason = melee_miss_reasons.pick();
     if( reason == nullptr ) {
@@ -1239,7 +1247,7 @@ float Character::get_dodge() const
     if( worn_with_flag( flag_ROLLER_INLINE ) ||
         worn_with_flag( flag_ROLLER_QUAD ) ||
         worn_with_flag( flag_ROLLER_ONE ) ) {
-        ret /= has_trait( trait_PROF_SKATER ) ? 2 : 5;
+        ret *= has_trait( trait_PROF_SKATER ) ? 0.8 : 0.25;
         add_msg_debug( debugmode::DF_MELEE, "Dodge after skate penalty %.1f", ret );
     }
 
@@ -1253,7 +1261,6 @@ float Character::get_dodge() const
     //Dodge decreases logisticaly with stamina.
     const double stamina_logistic = get_stamina_dodge_modifier();
     ret *= stamina_logistic;
-
     add_msg_debug( debugmode::DF_MELEE, "Dodge after stamina penalty %.1f", ret );
 
     // Reaction score of limbs influences dodge chances
@@ -1267,6 +1274,12 @@ float Character::get_dodge() const
     // Modify by how much bigger/smaller we got from our limbs
     ret /= anatomy( get_all_body_parts() ).get_size_ratio( anatomy_human_anatomy );
     add_msg_debug( debugmode::DF_MELEE, "Dodge after bodysize modifier %.1f", ret );
+
+    // It's much harder to dodge when you can't see well
+    if( !sight_impaired() && fine_detail_vision_mod() >= 6.0f ) {
+        add_msg_debug( debugmode::DF_MELEE, "Dodge after vision penalty %.1f", ret );
+        ret *= 0.8;
+    }
 
     return std::max( 0.0f, ret );
 }
