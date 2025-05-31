@@ -69,6 +69,7 @@ struct nutrients {
         }
 
         nutrients operator-();
+        nutrients operator-( const nutrients &r );
 
         nutrients &operator+=( const nutrients &r );
         nutrients &operator-=( const nutrients &r );
