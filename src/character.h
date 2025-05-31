@@ -2745,7 +2745,8 @@ class Character : public Creature, public visitable
 
         std::vector<effect_on_condition_id> death_eocs;
         outfit worn;
-        bool nv_cached = false;
+        mutable bool nv_cached = false;
+        mutable bool nv_result = false;
         // Means player sit inside vehicle on the tile he is now
         bool in_vehicle = false;
 
@@ -3520,6 +3521,11 @@ class Character : public Creature, public visitable
         const inventory &crafting_inventory( const tripoint &src_pos = tripoint_zero,
                                              int radius = PICKUP_RANGE, bool clear_path = true ) const;
         void invalidate_crafting_inventory();
+
+        /** Some of the worst code I have ever written. Gins up a modifier to
+         * fine_detail_vision_mod() which lets people with night vision mutations
+         * actually make use of them to do things in the dark. */
+        float interpolate_night_vision( float vision_threshold ) const;
 
         /** Returns a value from 1.0 to 11.0 that acts as a multiplier
          * for the time taken to perform tasks that require detail vision,

@@ -329,6 +329,7 @@ static const json_character_flag json_flag_INVERTEBRATEBLOOD( "INVERTEBRATEBLOOD
 static const json_character_flag json_flag_INVISIBLE( "INVISIBLE" );
 static const json_character_flag json_flag_MYOPIC( "MYOPIC" );
 static const json_character_flag json_flag_MYOPIC_IN_LIGHT( "MYOPIC_IN_LIGHT" );
+static const json_character_flag json_flag_NIGHT_BLINDNESS( "NIGHT_BLINDNESS" );
 static const json_character_flag json_flag_NIGHT_VISION( "NIGHT_VISION" );
 static const json_character_flag json_flag_NON_THRESH( "NON_THRESH" );
 static const json_character_flag json_flag_NO_RADIATION( "NO_RADIATION" );
@@ -2848,6 +2849,10 @@ float Character::get_vision_threshold( float light_level ) const
         range++;
     }
 
+    if( has_flag( json_flag_NIGHT_BLINDNESS ) ) {
+        range -= 2;
+    }
+
     // Electronics override biological night vision.  Perception still helps you pick details out of the feed.
     if( vision_mode_cache[NV_GOGGLES] ) {
         range = get_per() / 9;
@@ -3011,6 +3016,30 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
     return level_up;
 }
 
+// The dumbest shit in the universe. This code exists to correct a deficiency in
+// the existing night vision code.
+// Normal Vision = 1.374320
+// Night Vision = 1.272479
+// High Night Vision = 1.155692
+// Full Night Vision = .934998
+// We want high/full NV to enable crafting in the dark, but they don't scale linearly, so here we are
+float Character::interpolate_night_vision( float vision_threshold ) const
+{
+    if( vision_threshold >= 1.155692f ) {
+        // Region 1: [1.155692, 1.374320] → [4.0, 10.0]
+        float x1 = 1.155692f, y1 = 7.0f;
+        float x2 = 1.374320f, y2 = 10.0f;
+        float t = ( vision_threshold - x1 ) / ( x2 - x1 );
+        return y1 + t * ( y2 - y1 );
+    } else {
+        // Region 2: [0.934998, 1.155692] → [3.5, 4.0]
+        float x1 = 0.934998f, y1 = 3.5f;
+        float x2 = 1.155692f, y2 = 7.0f;
+        float t = ( vision_threshold - x1 ) / ( x2 - x1 );
+        return y1 + t * ( y2 - y1 );
+    }
+}
+
 // Returned values range from 1.0 (unimpeded vision) to 11.0 (totally blind).
 //  1.0 is LIGHT_AMBIENT_LIT or brighter
 //  4.0 is a dark clear night, barely bright enough for reading and crafting
@@ -3038,8 +3067,14 @@ float Character::fine_detail_vision_mod( const tripoint &p ) const
                                         tripoint_min ) ? pos_bub() : tripoint_bub_ms( p );
     tripoint const avatar_p = get_avatar().pos();
     if( is_avatar() || check_p.z() == avatar_p.z ) {
+        float vision_threshold = get_vision_threshold( 0.0f );
         ambient_light = std::max( 1.0f,
-                                  LIGHT_AMBIENT_LIT - get_map().ambient_light_at( check_p ) + 1.0f );
+                                  interpolate_night_vision( vision_threshold ) + 1.0f - get_map().ambient_light_at( check_p ) );
+        // NVGs make reading and detail work possible, but only just, no matter the conditions.
+        if( ambient_light < 4.0f && const_cast<Character *>( this )->has_nv_goggles() ) {
+            ambient_light = 4.0f;
+            own_light = 4.0f;
+        }
     } else {
         // light map is not calculated outside the player character's z-level
         // even if fov_3d_z_range > 0, and building light map on multiple levels
@@ -4037,14 +4072,12 @@ void Character::reset()
 
 bool Character::has_nv_goggles()
 {
-    static bool nv = false;
-
     if( !nv_cached ) {
         nv_cached = true;
-        nv = worn_with_flag( flag_GNV_EFFECT ) || has_flag( json_flag_NIGHT_VISION ) ||
-             worn_with_flag( json_flag_NVG_GREEN ) || has_worn_module_with_flag( json_flag_NVG_GREEN );
+        nv_result = worn_with_flag( flag_GNV_EFFECT ) || has_flag( json_flag_NIGHT_VISION ) ||
+                    worn_with_flag( json_flag_NVG_GREEN ) || has_worn_module_with_flag( json_flag_NVG_GREEN );
     }
-    return nv;
+    return nv_result;
 }
 
 bool Character::has_worn_module_with_flag( const flag_id &f )
@@ -5777,9 +5810,12 @@ void Character::temp_equalizer( const bodypart_id &bp1, const bodypart_id &bp2 )
 
 float Character::get_dodge_base() const
 {
-    /** @EFFECT_DEX increases dodge base */
+    /** @EFFECT_DEX slightly increases dodge base */
+    /** @EFFECT_PER increases dodge base a bit less */
     /** @EFFECT_DODGE increases dodge_base */
-    return get_dex() / 2.0f + get_skill_level( skill_dodge );
+    float dex_bonus = get_dex() / 4.0f;
+    float per_bonus = get_per() / 6.0f;
+    return dex_bonus + per_bonus + get_skill_level( skill_dodge );
 }
 float Character::get_hit_base() const
 {

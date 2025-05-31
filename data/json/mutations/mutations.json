@@ -586,24 +586,23 @@
     "id": "GOODCARDIO",
     "name": { "str": "Indefatigable" },
     "points": 2,
-    "description": "Whether due to exercise and good diet, or due to a natural propensity to physical endurance, you tire due to physical exertion much less readily than others.  Your cardio fitness and maximum stamina are higher than usual.",
-    "starting_trait": true,
+    "description": "Your powerful heart delivers oxygen to your cells with greater than human efficiency, improving your fitness and stamina.",
     "types": [ "CARDIO" ],
     "changes_to": [ "GOODCARDIO2" ],
     "category": [ "FISH", "LUPINE", "MOUSE", "INSECT", "RABBIT", "CHIROPTERAN" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.2 } ] } ]
   },
   {
     "type": "mutation",
     "id": "GOODCARDIO2",
     "name": { "str": "Hyperactive" },
     "points": 4,
-    "description": "Your body's efficiency is like that of a tiny furnace, greatly increasing your cardio and stamina.",
+    "description": "Your heartbeat is so rapid, it sometimes feels like it's vibrating in your chest.  Your fitness and stamina are greatly improved.",
     "types": [ "CARDIO" ],
     "prereqs": [ "GOODCARDIO" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
     "category": [ "MOUSE", "RABBIT" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.6 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.4 } ] } ]
   },
   {
     "type": "mutation",
@@ -745,12 +744,21 @@
   },
   {
     "type": "mutation",
+    "id": "NYCTALOPIA",
+    "name": { "str": "Night Blindness" },
+    "points": -2,
+    "description": "Whether congenital or acquired, you suffer from nyctalopia, and see poorly in the dark.",
+    "types": [ "VISION" ],
+    "flags": [ "NIGHT_BLINDNESS" ],
+    "starting_trait": true
+  },
+  {
+    "type": "mutation",
     "id": "NIGHTVISION",
     "name": { "str": "Night Vision" },
     "points": 2,
     "description": "You possess natural night vision, and can see further in the dark than most.  Activate to toggle NV-visible areas on or off.",
     "types": [ "VISION" ],
-    "starting_trait": true,
     "changes_to": [ "NIGHTVISION2" ],
     "category": [
       "BIRD",
@@ -1382,11 +1390,10 @@
     "id": "BADCARDIO",
     "name": { "str": "Languorous" },
     "points": -2,
-    "description": "Whether due to lack of exercise and poor diet, or due to a natural disinclination to physical endurance, you tire due to physical exertion much more readily than others.  Your total cardio fitness and stamina are lower than normal.",
-    "starting_trait": true,
+    "description": "Whether due to lack of exercise and poor diet, or due to a natural disinclination to physical endurance, you tire due to physical exertion much more readily than others.",
     "valid": false,
     "types": [ "CARDIO" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": -0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": -0.1 } ] } ]
   },
   {
     "type": "mutation",
@@ -2127,7 +2134,7 @@
     "id": "NIGHTVISION3",
     "name": { "str": "Full Night Vision" },
     "points": 6,
-    "description": "You can see in pitch blackness as if you were wearing night-vision goggles.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see perfectly well even in near-total darkness.  Activate to toggle NV-visible areas on or off.",
     "prereqs": [ "NIGHTVISION2" ],
     "leads_to": [ "INFRARED" ],
     "types": [ "VISION" ],
@@ -2203,7 +2210,7 @@
     "id": "ELFA_FNV",
     "name": { "str": "Fey Nightsight" },
     "points": 5,
-    "description": "You have great low-light vision now, but it doesn't allow you to perform fine tasks such as crafting and reading in darkness.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see almost perfectly in the dark.  Activate to toggle NV-visible areas on or off.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFA_NV" ],
     "category": [ "ELFA" ],
@@ -9327,8 +9334,7 @@
     "name": { "str": "Fast Reflexes" },
     "points": 2,
     "description": "You have fast reflexes, allowing you to dodge attacks more easily.",
-    "starting_trait": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 3 } ] } ],
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ],
     "category": [ "FELINE" ]
   },
   {
