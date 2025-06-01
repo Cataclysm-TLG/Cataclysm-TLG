@@ -2236,17 +2236,15 @@ class item : public visitable
         /*
          * Returns the average coverage of each piece of data this item
          */
-        int get_avg_coverage( const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_avg_coverage() const;
         /**
          * Returns the highest coverage that any piece of data that this item has that covers the bodypart.
          * Values range from 0 (not covering anything) to 100 (covering the whole body part).
          * Items that cover more are more likely to absorb damage from attacks.
          */
-        int get_coverage( const bodypart_id &bodypart,
-                          const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_coverage( const bodypart_id &bodypart ) const;
 
-        int get_coverage( const sub_bodypart_id &bodypart,
-                          const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_coverage( const sub_bodypart_id &bodypart ) const;
 
         enum class encumber_flags : int {
             none = 0,

@@ -1240,11 +1240,9 @@ class Character : public Creature, public visitable
         // If average == true, adds expected values of random rolls instead of rolling.
         /** Adds all 3 types of physical damage to instance */
         void roll_all_damage( bool crit, damage_instance &di, bool average, const item &weap,
-                              const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact,
-                              const Creature *target, const bodypart_id &bp ) const;
+                              const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact ) const;
         void roll_damage( const damage_type_id &dt, bool crit, damage_instance &di, bool average,
-                          const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact,
-                          float crit_mod ) const;
+                          const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact ) const;
 
         /** Returns true if the player should be dead */
         bool is_dead_state() const override;

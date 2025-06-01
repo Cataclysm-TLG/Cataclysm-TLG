@@ -279,16 +279,6 @@ std::vector<std::string> clothing_properties(
     int coverage = worn_item.get_coverage( used_bp );
     add_folded_name_and_value( props, _( "Coverage:" ), string_format( "%3d", coverage ),
                                width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_MELEE );
-    add_folded_name_and_value( props, _( "Coverage (Melee):" ), string_format( "%3d",
-                               coverage ), width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_RANGED );
-    add_folded_name_and_value( props, _( "Coverage (Ranged):" ), string_format( "%3d",
-                               coverage ), width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_VITALS );
-    add_folded_name_and_value( props, _( "Coverage (Vitals):" ), string_format( "%3d",
-                               coverage ), width );
-
     const int encumbrance = worn_item.get_encumber( c, used_bp );
     add_folded_name_and_value( props, _( "Encumbrance:" ), string_format( "%3d", encumbrance ),
                                width );

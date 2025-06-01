@@ -2296,7 +2296,7 @@ double item::effective_dps( const Character &guy, Creature &mon ) const
         double subtotal_damage = 0;
         damage_instance base_damage;
         guy.roll_all_damage( crit, base_damage, true, *this, attack_vector_vector_null,
-                             sub_body_part_sub_limb_debug, &mon, bp );
+                             sub_body_part_sub_limb_debug );
         damage_instance dealt_damage = base_damage;
         // TODO: Modify DPS calculation to consider weakpoints.
         resistances r = resistances( *static_cast<monster *>( temp_mon ) );
@@ -2322,7 +2322,7 @@ double item::effective_dps( const Character &guy, Creature &mon ) const
             Creature *temp_rs_mon = &mon;
             damage_instance rs_base_damage;
             guy.roll_all_damage( crit, rs_base_damage, true, *this, attack_vector_vector_null,
-                                 sub_body_part_sub_limb_debug, &mon, bp );
+                                 sub_body_part_sub_limb_debug );
             damage_instance dealt_rs_damage = rs_base_damage;
             for( damage_unit &dmg_unit : dealt_rs_damage.damage_units ) {
                 dmg_unit.damage_multiplier *= 0.66;
@@ -3791,17 +3791,8 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
         //~ Limb-specific coverage (for guns strapped to torso)
         info.emplace_back( "DESCRIPTION", _( "<bold>Torso coverage</bold>:" ) );
         //~ Regular/Default coverage
-        info.emplace_back( "ARMOR", space + _( "Default:" ) + space, "",
+        info.emplace_back( "ARMOR", "",
                            iteminfo::no_flags, get_coverage( body_part_torso.id() ) );
-        //~ Melee coverage
-        info.emplace_back( "ARMOR", space + _( "Melee:" ) + space, "",
-                           iteminfo::no_flags, get_coverage( body_part_torso.id(), cover_type::COVER_MELEE ) );
-        //~ Ranged coverage
-        info.emplace_back( "ARMOR", space + _( "Ranged:" ) + space, "",
-                           iteminfo::no_flags, get_coverage( body_part_torso.id(), cover_type::COVER_RANGED ) );
-        //~ Vitals coverage
-        info.emplace_back( "ARMOR", space + _( "Vitals:" ) + space, "",
-                           iteminfo::no_flags, get_coverage( body_part_torso.id(), cover_type::COVER_VITALS ) );
     }
 
     return ret;
@@ -3858,25 +3849,10 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
             }
         }
         //~ Limb-specific coverage (%s = name of limb)
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Coverage</bold>:%s" ), layering ) );
+        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
         //~ Regular/Default coverage
-        info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Default:" ), space ), "",
+        info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Coverage:" ), space ), "",
                            iteminfo::no_flags, get_coverage( sbp ) );
-        if( get_coverage( sbp ) != get_coverage( sbp, item::cover_type::COVER_MELEE ) ) {
-            //~ Melee coverage
-            info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Melee:" ), space ), "",
-                               iteminfo::no_flags, get_coverage( sbp, item::cover_type::COVER_MELEE ) );
-        }
-        if( get_coverage( sbp ) != get_coverage( sbp, item::cover_type::COVER_RANGED ) ) {
-            //~ Ranged coverage
-            info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Ranged:" ), space ), "",
-                               iteminfo::no_flags, get_coverage( sbp, item::cover_type::COVER_RANGED ) );
-        }
-        if( get_coverage( sbp, item::cover_type::COVER_VITALS ) > 0 ) {
-            //~ Vitals coverage
-            info.emplace_back( bp_cat, string_format( "%s%s%s", space, _( "Vitals:" ), space ), "",
-                               iteminfo::no_flags, get_coverage( sbp, item::cover_type::COVER_VITALS ) );
-        }
 
         bool printed_any = false;
 
@@ -4078,6 +4054,19 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     const std::string space = "  ";
     body_part_set covered_parts = get_covered_body_parts();
+    // Remove any parts from the list which we do not have.
+    // TODO: Maybe parts we don't have could be displayed another way?
+    const Character &you = get_player_character();
+    std::vector<bodypart_str_id> to_reset;
+    for (const bodypart_str_id &bp : covered_parts) {
+        if (!you.has_part(bp)) {
+            to_reset.push_back(bp);
+        }
+    }
+    for (const bodypart_str_id &bp : to_reset) {
+        covered_parts.reset(bp);
+    }
+
     bool covers_anything = covered_parts.any();
     const bool show_bodygraph = get_option<bool>( "ITEM_BODYGRAPH" ) &&
                                 parts->test( iteminfo_parts::ARMOR_BODYGRAPH );
@@ -4085,6 +4074,7 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
         std::vector<sub_bodypart_id> covered = get_covered_sub_body_parts();
+        // WEBBED HANDS: this is showing the wrong part
         std::string coverage = _( "<bold>Covers</bold>:" );
 
         if( !covered.empty() ) {
@@ -4181,10 +4171,13 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( parts->test( iteminfo_parts::ARMOR_COVERAGE ) && covers_anything ) {
         std::map<int, std::vector<bodypart_id>> limb_groups;
-        for( const bodypart_str_id &bp : get_covered_body_parts() ) {
+        for( const bodypart_str_id &bp : covered_parts ) {
+            if( !you.has_part( bp ) ) {
+                continue;
+            }
             const armor_portion_data *portion = portion_for_bodypart( bp );
             if( portion ) {
-                limb_groups[ get_coverage( bp )].emplace_back( bp );
+                limb_groups[ get_coverage( bp ) ].emplace_back( bp );
             }
         }
         // keep on one line if only 1 entry
@@ -4210,7 +4203,7 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         const Character &c = get_player_character();
 
         armor_encumb_header_info( *this, info );
-        for( const bodypart_str_id &bp : get_covered_body_parts() ) {
+        for( const bodypart_str_id &bp : covered_parts ) {
             armor_encumb_data encumbrance( get_encumber( c, bp, item::encumber_flags::assume_empty ),
                                            get_encumber( c, bp ), get_encumber( c, bp, item::encumber_flags::assume_full ) );
 
@@ -4254,9 +4247,8 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 
     if( parts->test( iteminfo_parts::ARMOR_WARMTH ) && covers_anything ) {
-        // TODO: Make this less inflexible on anatomy
         std::map<int, std::vector<bodypart_id>> limb_groups;
-        for( const bodypart_str_id &bp : get_covered_body_parts() ) {
+        for( const bodypart_str_id &bp : covered_parts ) {
             limb_groups[get_warmth( bp )].emplace_back( bp );
         }
         // keep on one line if only 1 entry
@@ -4279,7 +4271,7 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     if( parts->test( iteminfo_parts::ARMOR_BREATHABILITY ) && covers_anything ) {
 
         std::map<int, std::vector<bodypart_id>> limb_groups;
-        for( const bodypart_str_id &bp : get_covered_body_parts() ) {
+        for( const bodypart_str_id &bp : covered_parts ) {
             const armor_portion_data *portion = portion_for_bodypart( bp );
             if( portion ) {
                 limb_groups[portion->breathability].emplace_back( bp );
@@ -5595,13 +5587,12 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     ///\EFFECT_MELEE >2 allows seeing melee damage stats on weapons
     if( ( player_character.get_skill_level( skill_melee ) >= 3 &&
           ( !dmg_types.empty() || type->m_to_hit > 0 ) ) || debug_mode ) {
-        bodypart_id bp = bodypart_id( "torso" );
         damage_instance non_crit;
         player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug, nullptr, bp );
+                                          sub_body_part_sub_limb_debug );
         damage_instance crit;
         player_character.roll_all_damage( true, crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug, nullptr, bp );
+                                          sub_body_part_sub_limb_debug );
         int attack_cost = player_character.attack_speed( *this );
         insert_separation_line( info );
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG ) ) {
@@ -8346,20 +8337,7 @@ layer_level item::get_highest_layer( const sub_bodypart_id &sbp ) const
     return highest_layer;
 }
 
-item::cover_type item::get_cover_type( const damage_type_id &type )
-{
-    item::cover_type ctype = item::cover_type::COVER_DEFAULT;
-    if( type->physical ) {
-        if( type->melee_only ) {
-            ctype = item::cover_type::COVER_MELEE;
-        } else {
-            ctype = item::cover_type::COVER_RANGED;
-        }
-    }
-    return ctype;
-}
-
-int item::get_avg_coverage( const cover_type &type ) const
+int item::get_avg_coverage() const
 {
     const islot_armor *t = find_armor_data();
 
@@ -8371,7 +8349,7 @@ int item::get_avg_coverage( const cover_type &type ) const
     for( const armor_portion_data &entry : t->data ) {
         if( entry.covers.has_value() ) {
             for( const bodypart_str_id &limb : entry.covers.value() ) {
-                int coverage = get_coverage( limb, type );
+                int coverage = get_coverage( limb );
                 if( coverage ) {
                     avg_coverage += coverage;
                     ++avg_ctr;
@@ -8387,34 +8365,21 @@ int item::get_avg_coverage( const cover_type &type ) const
     }
 }
 
-int item::get_coverage( const bodypart_id &bodypart, const cover_type &type ) const
+int item::get_coverage( const bodypart_id &bodypart ) const
 {
     int adjusted_coverage = 0;
     if( const armor_portion_data *portion_data = portion_for_bodypart( bodypart ) ) {
         float damage_factor = std::min( 1.0f, ( get_relative_health() + 0.2f ) );
-        switch( type ) {
-            case cover_type::COVER_DEFAULT:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->coverage );
-                break;
-            case cover_type::COVER_MELEE:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_melee );
-                break;
-            case cover_type::COVER_RANGED:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_ranged );
-                break;
-            case cover_type::COVER_VITALS:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_vitals );
-                break;
-        }
+        adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->coverage );
     }
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( !pocket->empty() ) {
                 // get the contained plate
                 const item &ablative_armor = pocket->front();
-                //Rationale for this kind of aggregation is that ablative armor
-                //can't be bigger than an armor that contains it. But it may cover
-                //new body parts, e.g. face shield attached to hard hat.
+                // Rationale for this kind of aggregation is that ablative armor
+                // can't be bigger than an armor that contains it. But it may cover
+                // new body parts, e.g. face shield attached to hard hat.
                 adjusted_coverage = std::max( adjusted_coverage, ablative_armor.get_coverage( bodypart ) );
             }
         }
@@ -8422,25 +8387,12 @@ int item::get_coverage( const bodypart_id &bodypart, const cover_type &type ) co
     return adjusted_coverage;
 }
 
-int item::get_coverage( const sub_bodypart_id &bodypart, const cover_type &type ) const
+int item::get_coverage( const sub_bodypart_id &bodypart ) const
 {
     int adjusted_coverage = 0;
     if( const armor_portion_data *portion_data = portion_for_bodypart( bodypart ) ) {
         float damage_factor = std::min( 1.0f, ( get_relative_health() + 0.2f ) );
-        switch( type ) {
-            case cover_type::COVER_DEFAULT:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->coverage );
-                break;
-            case cover_type::COVER_MELEE:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_melee );
-                break;
-            case cover_type::COVER_RANGED:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_ranged );
-                break;
-            case cover_type::COVER_VITALS:
-                adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->cover_vitals );
-                break;
-        }
+        adjusted_coverage = std::floor( ( ( 1 + damage_factor ) / 2 ) * portion_data->coverage );
     }
     if( is_ablative() ) {
         for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
@@ -8943,10 +8895,10 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
             // Acid (being both enviro and physical, 'cause it's a liquid) cares about breathability rather than environmental protection.
             // Gas/etc attacks still care about enviro.
             if( !dmg_type->physical ) {
-                const int env = get_env_resist( resist_value );
-                if( env < 10 ) {
-                    resist *= env / 10.0f;
-                }
+                // const int env = get_env_resist( resist_value );
+                // if( env < 10 ) {
+                //     resist *= env / 10.0f;
+                // }
                 // Average by portion of materials
                 resist /= total;
             }
@@ -9146,6 +9098,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, const bodypar
     }
     // Scale chance of article taking damage based on the number of parts it covers.
     // Large articles are able to take more punishment before being destroyed.
+    // TODO: Remove redundant BPs (ie webbed hands) from consideration here
     int num_parts_covered = get_covered_body_parts().count();
     // Acid spreads out to cover the surface of the item, ignoring this mitigation.
     if( !one_in( num_parts_covered ) && !du.type->env ) {

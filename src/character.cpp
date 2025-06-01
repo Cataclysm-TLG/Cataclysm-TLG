@@ -8386,20 +8386,13 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
     recoil = std::min( MAX_RECOIL, recoil );
 
     int sum_cover = 0;
-    bool dealt_melee = false;
-    bool dealt_ranged = false;
+    // Skip the rest if the attack isn't from something solid.
     for( const damage_unit &du : d ) {
         if( !du.type->physical ) {
             continue;
         }
-        // Assume that ranged == getting shot
-        if( !du.type->melee_only ) {
-            dealt_ranged = true;
-        } else {
-            dealt_melee = true;
-        }
     }
-    sum_cover += worn.sum_filthy_cover( dealt_ranged, dealt_melee, bp );
+    sum_cover += worn.sum_filthy_cover( bp );
 
     // Chance of infection is damage (with cut and stab x4) * sum of coverage on affected body part, in percent.
     // i.e. if the body part has a sum of 100 coverage from filthy clothing,
