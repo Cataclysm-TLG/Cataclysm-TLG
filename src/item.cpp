@@ -4058,13 +4058,13 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     // TODO: Maybe parts we don't have could be displayed another way?
     const Character &you = get_player_character();
     std::vector<bodypart_str_id> to_reset;
-    for (const bodypart_str_id &bp : covered_parts) {
-        if (!you.has_part(bp)) {
-            to_reset.push_back(bp);
+    for( const bodypart_str_id &bp : covered_parts ) {
+        if( !you.has_part( bp ) ) {
+            to_reset.push_back( bp );
         }
     }
-    for (const bodypart_str_id &bp : to_reset) {
-        covered_parts.reset(bp);
+    for( const bodypart_str_id &bp : to_reset ) {
+        covered_parts.reset( bp );
     }
 
     bool covers_anything = covered_parts.any();

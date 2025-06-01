@@ -951,7 +951,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     if( hits && cur_weapon && !t.is_hallucination() ) {
         if( !cur_weapon->is_soft() && !cur_weapon->made_of( material_rubber ) ) {
             handle_melee_wear( cur_weapon );
-            add_msg( _( "wearing weapon") ); 
+            add_msg( _( "wearing weapon" ) );
             // Soft weapons and clothing (IE a whip or cloth gloves on a punch) should not fall apart.
             // Neither should rubber-soled shoes.
         } else if( one_in( 5 ) ) {
