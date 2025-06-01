@@ -274,9 +274,9 @@
     "id": "chainmail_chausses_xl",
     "type": "ARMOR",
     "copy-from": "chainmail_chausses",
-    "name": { "str": "XL chainmail chausses", "str_pl": "pairs of XL chainmail chausses" },
+    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "chainmail_junk_chausses",
@@ -353,7 +353,7 @@
     "id": "chainmail_skirt_xl",
     "type": "ARMOR",
     "copy-from": "chainmail_skirt",
-    "name": { "str": "XL chainmail skirt" },
+    "name": { "str": "chainmail skirt" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -361,7 +361,7 @@
       "target": "chainmail_skirt_loose_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "chainmail_skirt_budget",
@@ -664,7 +664,7 @@
     "id": "tire_tasset_xs",
     "type": "ARMOR",
     "copy-from": "tire_tasset",
-    "name": { "str": "XS tire tasset" },
+    "name": { "str": "tire tasset" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
       "type": "transform",
@@ -678,7 +678,7 @@
     "id": "tire_tasset_xl",
     "type": "ARMOR",
     "copy-from": "tire_tasset",
-    "name": { "str": "XL tire tasset" },
+    "name": { "str": "tire tasset" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -686,7 +686,7 @@
       "target": "tire_tasset_loose_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "tire_tasset_loose",
@@ -730,7 +730,7 @@
       "target": "tire_tasset_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "platemail_tasset",

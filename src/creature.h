@@ -447,10 +447,6 @@ class Creature : public viewer
         void knock_back_from( const tripoint &p );
         virtual void knock_back_to( const tripoint &to ) = 0;
 
-        // Converts the "cover_vitals" protection on the specified body part into
-        // a modifier (between 0 and 1) that would be applied to incoming critical damage
-        float get_crit_factor( const bodypart_id &bp ) const;
-
         int size_melee_penalty() const;
         // begins a melee attack against the creature
         // returns hit - dodge (>=0 = hit, <0 = miss)

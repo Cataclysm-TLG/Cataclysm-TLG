@@ -2109,7 +2109,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 4, "cut": 6, "acid": 7, "heat": 3, "bullet": 2 },
+    "resist": { "bash": 1.25, "cut": 4, "acid": 6, "heat": 3, "bullet": 2 },
     "repair_difficulty": 2
   },
   {
@@ -2132,7 +2132,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 4, "cut": 6, "acid": 7, "heat": 3, "bullet": 4.5 },
+    "resist": { "bash": 1.75, "cut": 5, "acid": 7, "heat": 3, "bullet": 4.5 },
     "repair_difficulty": 2
   },
   {

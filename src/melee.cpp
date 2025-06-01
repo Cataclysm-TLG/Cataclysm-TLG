@@ -464,16 +464,10 @@ std::string Character::get_miss_reason()
 }
 
 void Character::roll_all_damage( bool crit, damage_instance &di, bool average,
-                                 const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact,
-                                 const Creature *target,
-                                 const bodypart_id &bp ) const
+                                 const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact ) const
 {
-    float crit_mod = 1.f;
-    if( target != nullptr ) {
-        crit_mod = target->get_crit_factor( bp );
-    }
     for( const damage_type &dt : damage_type::get_all() ) {
-        roll_damage( dt.id, crit, di, average, weap, attack_vector, contact, crit_mod );
+        roll_damage( dt.id, crit, di, average, weap, attack_vector, contact );
     }
 }
 
@@ -808,7 +802,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         }
 
         damage_instance d;
-        roll_all_damage( critical_hit, d, false, cur_weap, vector_id, contact_area, &t, target_bp );
+        roll_all_damage( critical_hit, d, false, cur_weap, vector_id, contact_area );
 
         // Most reach weapons are less effective in melee.
         if( cur_weap.reach_range( *this ) > 1 && !reach_attacking &&
@@ -957,9 +951,10 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     if( hits && cur_weapon && !t.is_hallucination() ) {
         if( !cur_weapon->is_soft() && !cur_weapon->made_of( material_rubber ) ) {
             handle_melee_wear( cur_weapon );
+            add_msg( _( "wearing weapon" ) );
             // Soft weapons and clothing (IE a whip or cloth gloves on a punch) should not fall apart.
             // Neither should rubber-soled shoes.
-        } else if( one_in( 4 ) ) {
+        } else if( one_in( 5 ) ) {
             handle_melee_wear( cur_weapon );
         }
     }
@@ -1312,7 +1307,7 @@ float Character::bonus_damage( bool random ) const
 
 static void roll_melee_damage_internal( const Character &u, const damage_type_id &dt, bool crit,
                                         damage_instance &di, bool average, const item &weap,
-                                        const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact, float crit_mod )
+                                        const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact )
 {
     // FIXME: Hardcoded damage type
     float dmg = dt == damage_bash ? 0.f : u.mabuff_damage_bonus( dt ) + weap.damage_melee( dt );
@@ -1397,18 +1392,18 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
         // FIXME: Hardcoded damage type effects (stab, cut, bash)
         if( dt == damage_stab ) {
             // Critical damage bonus for stabbing scales with skill
-            dmg_mul *= 1.0 + ( skill / 10.0 ) * crit_mod;
+            dmg_mul *= 1.0 + ( skill / 10.0 );
             // Stab criticals have extra %arpen
-            armor_mult = 1.f - 0.34f * crit_mod;
+            armor_mult = 1.f - 0.34f;
         } else if( dt == damage_cut ) {
-            dmg_mul *= 1.f + 0.25f * crit_mod;
-            arpen += static_cast<int>( 5.f * crit_mod );
+            dmg_mul *= 1.f + 0.25f;
+            arpen += static_cast<int>( 5.f );
             // 25% armor penetration
-            armor_mult = 1.f - 0.25f * crit_mod;
+            armor_mult = 1.f - 0.25f;
         } else if( dt == damage_bash ) {
-            dmg_mul *= 1.f + 0.5f * crit_mod;
+            dmg_mul *= 1.f + 0.5f;
             // 50% armor penetration
-            armor_mult = 0.5f * crit_mod;
+            armor_mult = 0.5f;
         }
     }
 
@@ -1416,12 +1411,11 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
 }
 
 void Character::roll_damage( const damage_type_id &dt, bool crit, damage_instance &di, bool average,
-                             const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact,
-                             float crit_mod ) const
+                             const item &weap, const attack_vector_id &attack_vector, const sub_bodypart_str_id &contact ) const
 {
     // For handling typical melee damage types (bash, cut, stab)
     if( dt->melee_only ) {
-        roll_melee_damage_internal( *this, dt, crit, di, average, weap, attack_vector, contact, crit_mod );
+        roll_melee_damage_internal( *this, dt, crit, di, average, weap, attack_vector, contact );
         return;
     }
 

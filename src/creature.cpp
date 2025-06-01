@@ -911,19 +911,6 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
            ( !here.has_floor( above ) || here.ter( above )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) );
 }
 
-float Creature::get_crit_factor( const bodypart_id &bp ) const
-{
-    float crit_mod = 1.f;
-    const Character *c = as_character();
-    if( c != nullptr ) {
-        const int total_cover = clamp<int>( c->worn.get_coverage( bp, item::cover_type::COVER_VITALS ), 0,
-                                            100 );
-        crit_mod = 1.f - total_cover / 100.f;
-    }
-    // TODO: as_monster()
-    return crit_mod;
-}
-
 int Creature::deal_melee_attack( Creature *source, int hitroll )
 {
 
@@ -1165,7 +1152,6 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
     // Range is -0.5 to 1.5 -> missed_by will be [1, 0], so the rng addition to it
     // will push it to at most 1.5 and at least -0.5
     ret.bp_hit = get_anatomy()->select_body_part_projectile_attack( -0.5, 1.5, hit_value );
-    float crit_mod = get_crit_factor( ret.bp_hit );
 
     const float crit_multiplier = proj.critical_multiplier;
     const float std_hit_mult = std::sqrt( 2.0 * crit_multiplier );
@@ -1175,15 +1161,15 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
                ret.max_damage * crit_multiplier > get_hp_max( ret.bp_hit ) ) {
         ret.message = _( "Critical!!" );
         ret.gmtSCTcolor = m_headshot;
-        ret.damage_mult *= rng_float( 0.5 + 0.45 * crit_mod, 0.75 + 0.3 * crit_mod ); // ( 0.95, 1.05 )
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= rng_float( 0.5 + 0.45, 0.75 + 0.3 ); // ( 0.95, 1.05 )
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_critical &&
                ret.max_damage * crit_multiplier > get_hp_max( ret.bp_hit ) ) {
         ret.message = _( "Critical!" );
         ret.gmtSCTcolor = m_critical;
-        ret.damage_mult *= rng_float( 0.5 + 0.25 * crit_mod, 0.75 + 0.25 * crit_mod ); // ( 0.75, 1.0 )
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= rng_float( 0.5 + 0.25, 0.75 + 0.25 ); // ( 0.75, 1.0 )
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_goodhit ) {
         ret.message = _( "Good hit!" );
@@ -2876,11 +2862,13 @@ std::vector<bodypart_id> Creature::get_all_body_parts( get_body_part_flags flags
     std::vector<bodypart_id> all_bps;
     all_bps.reserve( body.size() );
     for( const std::pair<const bodypart_str_id, bodypart> &elem : body ) {
-        if( ( only_main && elem.first->main_part != elem.first ) || ( only_minor &&
-                elem.first->main_part == elem.first ) ) {
-            continue;
+        if( has_part( elem.first ) ) {
+            if( ( only_main && elem.first->main_part != elem.first ) || ( only_minor &&
+                    elem.first->main_part == elem.first ) ) {
+                continue;
+            }
+            all_bps.emplace_back( elem.first );
         }
-        all_bps.emplace_back( elem.first );
     }
 
     if( flags & get_body_part_flags::sorted ) {

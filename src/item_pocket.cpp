@@ -1210,19 +1210,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
             info.emplace_back( arm_type_str, string_format( "%s%s", _( "Coverage:" ), space ), "",
                                iteminfo::no_newline,
                                ablative_armor.get_avg_coverage() );
-            //~ (M)elee coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(M):" ), space ), "",
-                               iteminfo::no_newline,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_MELEE ) );
-            //~ (R)anged coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(R):" ), space ), "",
-                               iteminfo::no_newline,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_RANGED ) );
-            //~ (V)itals coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(V):" ), space ), "",
-                               iteminfo::no_flags,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_VITALS ) );
-
             info.back().bNewLine = true;
 
             size_t idx = 0;

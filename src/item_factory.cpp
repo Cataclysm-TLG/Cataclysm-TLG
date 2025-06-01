@@ -961,7 +961,6 @@ void Item_factory::finalize_post_armor( itype &obj )
                     if( it.covers->test( bp ) ) {
                         found = true;
                         // modify the values with additional info
-
                         it.encumber += sub_armor.encumber;
                         it.max_encumber += sub_armor.max_encumber;
 

@@ -1561,12 +1561,12 @@ bool outfit::empty() const
     return worn.empty();
 }
 
-int outfit::get_coverage( bodypart_id bp, item::cover_type cover_type ) const
+int outfit::get_coverage( bodypart_id bp ) const
 {
     int total_cover = 0;
     for( const item &it : worn ) {
         if( it.covers( bp ) ) {
-            total_cover += it.get_coverage( bp, cover_type );
+            total_cover += it.get_coverage( bp );
         }
     }
     return total_cover;
@@ -1593,18 +1593,12 @@ int outfit::coverage_with_flags_exclude( const bodypart_id &bp,
     return coverage;
 }
 
-int outfit::sum_filthy_cover( bool ranged, bool melee, bodypart_id bp ) const
+int outfit::sum_filthy_cover( bodypart_id bp ) const
 {
     int sum_cover = 0;
     for( const item &i : worn ) {
         if( i.covers( bp ) && i.is_filthy() ) {
-            if( melee ) {
-                sum_cover += i.get_coverage( bp, item::cover_type::COVER_MELEE );
-            } else if( ranged ) {
-                sum_cover += i.get_coverage( bp, item::cover_type::COVER_RANGED );
-            } else {
-                sum_cover += i.get_coverage( bp );
-            }
+            sum_cover += i.get_coverage( bp );
         }
     }
     return sum_cover;
