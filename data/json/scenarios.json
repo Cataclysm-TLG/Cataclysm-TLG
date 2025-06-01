@@ -657,9 +657,6 @@
     "professions": [
       "convict",
       "convict_assassin",
-      "convict_embezzler",
-      "convict_drugs",
-      "convict_political",
       "convict_ratman",
       "k9_cop",
       "cop"
@@ -677,9 +674,6 @@
     "professions": [
       "convict",
       "convict_assassin",
-      "convict_embezzler",
-      "convict_drugs",
-      "convict_political",
       "convict_ratman",
       "k9_cop",
       "cop"
@@ -811,14 +805,7 @@
       "national_guard",
       "politician",
       "hitman",
-      "assassin",
-      "mil_marksman",
       "mil_auto_rifleman",
-      "mil_grenadier",
-      "mil_breacher",
-      "mil_sniper",
-      "mil_hacker",
-      "mil_undercover",
       "mili_pilot",
       "mili_medic",
       "major-general",
@@ -860,13 +847,7 @@
       "specops",
       "labtech",
       "medic",
-      "mil_marksman",
       "mil_auto_rifleman",
-      "mil_grenadier",
-      "mil_breacher",
-      "mil_sniper",
-      "mil_hacker",
-      "mil_undercover",
       "mili_pilot",
       "mili_medic",
       "hazmat_unit",
@@ -913,9 +894,7 @@
       "musician",
       "super_biker",
       "local_drug_dealer",
-      "mafia_boss",
-      "hitman",
-      "assassin"
+      "hitman"
     ],
     "flags": [ "CHALLENGE", "LONE_START" ]
   },
@@ -974,10 +953,8 @@
       "burglar",
       "urban_samurai",
       "fencer",
-      "mafia_boss",
       "major-general",
-      "hitman",
-      "assassin"
+      "hitman"
     ],
     "requirement": "achievement_reach_mansion",
     "missions": [ "MISSION_MANSION_START" ]
