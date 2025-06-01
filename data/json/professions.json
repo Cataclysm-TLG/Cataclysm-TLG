@@ -706,33 +706,6 @@
   },
   {
     "type": "profession",
-    "id": "video_blogger",
-    "name": "Video Blogger",
-    "description": "You made a career out of creating and commentating video content and posting it on various platforms.  Now most of your fans are dead, alongside your equipment.  Maybe you didn't cultivate the most practical skillset through your career, but you have learned a thing or two about troubleshooting software and getting people to listen to you.",
-    "points": 2,
-    "skills": [ { "level": 4, "name": "speech" }, { "level": 4, "name": "computer" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "longshirt" },
-          { "item": "socks" },
-          { "item": "sneakers" },
-          { "item": "backpack" },
-          { "item": "pockknife" },
-          { "item": "water_clean" },
-          { "item": "wearable_camera" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_laptop" },
-          { "group": "charged_matches" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": { "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "jeans_skinny" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "sheltered_survivor",
     "name": "Sheltered Survivor",
     "description": "At the start of the Cataclysm, you hunkered down in a bomb shelter.  You've spent the past months eating canned food, reading books, and tinkering.  Now it is winter - time to face the world above.",
@@ -5714,7 +5687,7 @@
   {
     "type": "profession",
     "id": "tourist_swimmer",
-    "name": "Beachgoer",
+    "name": "Swimmer",
     "description": "You were looking forward to a nice, relaxing day at the beach.  You had to run when some lunatics tried to rip your head off and play beach volleyball with it, but at least you managed to grab your bag on the way out.",
     "points": 0,
     "skills": [ { "level": 2, "name": "swimming" } ],

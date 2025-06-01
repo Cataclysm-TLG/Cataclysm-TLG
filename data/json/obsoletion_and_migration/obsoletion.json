@@ -92,7 +92,7 @@
     "valid": false,
     "player_display": false
   },
-    {
+  {
     "type": "mutation",
     "id": "MARTIAL_ARTS2",
     "name": { "str": "Self Defense" },
@@ -110,7 +110,7 @@
     "valid": false,
     "player_display": false
   },
-    {
+  {
     "type": "mutation",
     "id": "MARTIAL_ARTS3",
     "name": { "str": "Melee Training" },
@@ -146,7 +146,7 @@
     "valid": false,
     "player_display": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PROF_BOXER",
     "name": { "str": "Boxer" },
@@ -163,5 +163,33 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "type": "profession",
+    "id": "computer_literate",
+    "name": "Computer Literate",
+    "description": "You are computer literate.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "social_skills",
+    "name": "Social Skills",
+    "description": "You possess basic social skills.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "high_school_graduate",
+    "name": "High School Graduate",
+    "description": "You're a high school graduate, for all that's worth.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "mundane_survial",
+    "name": "Mundane Survival",
+    "description": "You survived the mundane world, but that's all over now.",
+    "points": 0
   }
 ]

@@ -434,7 +434,7 @@
       "sloc_bikeshop",
       "sloc_petstore"
     ],
-    "professions": [ "svictim", "naked", "unemployed", "homeless", "hitchhiker", "patriot", "clown", "lost_sub", "spouse", "musician" ],
+    "professions": [ "svictim", "naked", "unemployed", "homeless", "hitchhiker", "patriot", "clown", "lost_sub", "spouse" ],
     "eoc": [ "scenario_infected", "scenario_bad_day" ],
     "requirement": "achievement_survive_28_days",
     "flags": [ "FIRE_START", "CHALLENGE", "CITY_START", "LONE_START" ]
@@ -654,13 +654,7 @@
     "description": "When the Cataclysm happened, you were convicted or working in a prison.  Now the inmates and guards alike have turned into mindless horrors and joined forces… you might need to expedite your escape plans.",
     "allowed_locs": [ "sloc_prison" ],
     "start_name": "Prison",
-    "professions": [
-      "convict",
-      "convict_assassin",
-      "convict_ratman",
-      "k9_cop",
-      "cop"
-    ],
+    "professions": [ "convict", "convict_assassin", "convict_ratman", "k9_cop", "cop" ],
     "flags": [ "CITY_START", "LONE_START" ]
   },
   {
@@ -671,13 +665,7 @@
     "description": "You were convicted or working in a high-security prison before the Cataclysm.  Unfortunately, you're still in it, so you need to figure out how to escape.  It's located on a remote island to boot; you'll eventually need to escape that also.",
     "allowed_locs": [ "sloc_prison_alcatraz", "sloc_prison_island" ],
     "start_name": "Island prison",
-    "professions": [
-      "convict",
-      "convict_assassin",
-      "convict_ratman",
-      "k9_cop",
-      "cop"
-    ],
+    "professions": [ "convict", "convict_assassin", "convict_ratman", "k9_cop", "cop" ],
     "requirement": "achievement_reach_island_prison",
     "reveal_locale": false,
     "flags": [ "LONE_START", "CHALLENGE" ]
@@ -828,7 +816,7 @@
     "description": "You were participating in a mining operation when you found… something.  You're not sure what, but it sure is dark down here.",
     "start_name": "Bottom of a mine",
     "allowed_locs": [ "sloc_mine_finale" ],
-    "professions": [ "miner", "labtech", "security", "archaeologist" ],
+    "professions": [ "miner", "labtech", "security" ],
     "requirement": "achievement_reach_mine",
     "flags": [ "CITY_START", "LONE_START", "CHALLENGE" ]
   },
@@ -879,7 +867,6 @@
       "cheerleader",
       "patriot",
       "tourist_swimmer",
-      "video_blogger",
       "chef",
       "scoundrel",
       "baseball_player",
@@ -891,7 +878,6 @@
       "clown",
       "spouse",
       "naked",
-      "musician",
       "super_biker",
       "local_drug_dealer",
       "hitman"
@@ -935,9 +921,7 @@
       "basketball_player",
       "baseball_player",
       "tailor",
-      "video_blogger",
       "spouse",
-      "musician",
       "chef",
       "senior",
       "otaku",
@@ -946,10 +930,7 @@
       "groundskeeper",
       "homemaker",
       "pizzaboy",
-      "paranormal_investigator",
-      "archaeologist",
       "tourist",
-      "urbex",
       "burglar",
       "urban_samurai",
       "fencer",
