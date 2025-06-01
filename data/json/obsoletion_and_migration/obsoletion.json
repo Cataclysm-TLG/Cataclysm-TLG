@@ -73,5 +73,123 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "MARTIAL_FENCING",
+    "name": { "str": "Competitive Fencer" },
+    "description": "Obsoleted Competitive Fencer mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "TINYSTOMACH",
+    "name": { "str": "Tiny Stomach" },
+    "description": "Obsoleted Tiny Stomach mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "MARTIAL_ARTS2",
+    "name": { "str": "Self Defense" },
+    "description": "Obsoleted Self Defense mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "MARTIAL_ARTS5",
+    "name": { "str": "Melee Training" },
+    "description": "Obsoleted Melee Martial Arts mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "MARTIAL_ARTS3",
+    "name": { "str": "Melee Training" },
+    "description": "Obsoleted Melee Martial Arts mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_MA_ORANGE",
+    "name": { "str": "Orange Belt" },
+    "description": "Obsoleted Orange Belt mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_MA_BLACK",
+    "name": { "str": "Black Belt" },
+    "description": "Obsoleted Black Belt mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "MUT_JUNKIE",
+    "name": { "str": "Metallassimophile" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_BOXER",
+    "name": { "str": "Boxer" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_KICKBOXER",
+    "name": { "str": "Kickboxer" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "profession",
+    "id": "computer_literate",
+    "name": "Computer Literate",
+    "description": "You are computer literate.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "social_skills",
+    "name": "Social Skills",
+    "description": "You possess basic social skills.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "high_school_graduate",
+    "name": "High School Graduate",
+    "description": "You're a high school graduate, for all that's worth.",
+    "points": 0
+  },
+  {
+    "type": "profession",
+    "id": "mundane_survial",
+    "name": "Mundane Survival",
+    "description": "You survived the mundane world, but that's all over now.",
+    "points": 0
   }
 ]

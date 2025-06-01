@@ -568,6 +568,7 @@
     "points": 1,
     "description": "You are accustomed to being exposed to the elements.  This decreases morale penalties for being wet.",
     "valid": false,
+    "starting_trait": true,
     "wet_protection": [
       { "part": "head", "neutral": 6 },
       { "part": "leg_l", "neutral": 8 },
@@ -1012,7 +1013,7 @@
     "name": { "str": "Gourmand" },
     "points": 2,
     "description": "You eat faster, and can eat and drink more, than anyone else!  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
-    "category": [ "MOUSE", "LUPINE" ],
+    "category": [ "MOUSE", "LUPINE", "RAT" ],
     "cancels": [ "PICKYEATER" ],
     "starting_trait": true,
     "active": true,
@@ -1024,21 +1025,12 @@
   },
   {
     "type": "mutation",
-    "id": "TINYSTOMACH",
-    "name": { "str": "Tiny Stomach" },
-    "points": -3,
-    "description": "Either as the result of a lifesaving surgery, or as a congenital defect, your stomach is much smaller than usual.  You'll have to eat your food in small servings during the day, rather than one or two large daily meals.",
-    "starting_trait": true,
-    "active": false,
-    "enchantments": [ { "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.7 } ] } ]
-  },
-  {
-    "type": "mutation",
     "id": "LOVES_BOOKS",
     "name": { "str": "Bookworm" },
     "points": 1,
     "description": "There's nothing quite like the smell of a good book!  Books are more fun (or less boring) for you!",
     "valid": false,
+    "starting_trait": true,
     "cancels": [ "ILLITERATE", "HATES_BOOKS" ]
   },
   {
@@ -1188,7 +1180,6 @@
     "id": "RESTRICTED",
     "name": { "str": "Restricted Genetics" },
     "points": 3,
-    "vitamin_cost": 160,
     "description": "Your genome has become an impregnable fortress to lesser genetic deviations.  You are no longer able to mutate traits that are outside of the Alpha category.  Any that you previously developed are safe, for now.",
     "allowed_category": [ "ALPHA", "HUMAN" ],
     "cancels": [ "CHAOTIC_BAD", "ROBUST" ],
@@ -1197,7 +1188,6 @@
   {
     "type": "mutation",
     "id": "EAGLEEYED",
-    "//": "Can't change the ID as that breaks save-compatibility.",
     "name": { "str": "Scout" },
     "points": 1,
     "description": "You're an excellent navigator and your ability to recognize distant landmarks is unmatched.  Your sight radius on the overmap extends beyond the normal range.",
@@ -1241,46 +1231,7 @@
   },
   {
     "type": "mutation",
-    "id": "MARTIAL_ARTS",
-    "name": { "str": "Martial Arts Training" },
-    "points": 2,
-    "description": "You have received some martial arts training at a local dojo.  You start with your choice of Karate, Judo, Aikido, Tai Chi, Taekwondo, or Pankration.",
-    "player_display": false,
-    "initial_ma_styles": [ "style_karate", "style_judo", "style_aikido", "style_tai_chi", "style_taekwondo", "style_pankration" ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS2",
-    "name": { "str": "Self-Defense Classes" },
-    "points": 2,
-    "description": "You have taken some self-defense classes at a nearby gym.  You start with your choice of Boxing, Kickboxing, Capoeira, Krav Maga, Muay Thai, Ninjutsu, Wing Chun, or Zui Quan.",
-    "player_display": false,
-    "initial_ma_styles": [
-      "style_krav_maga",
-      "style_muay_thai",
-      "style_ninjutsu",
-      "style_capoeira",
-      "style_zui_quan",
-      "style_wingchun",
-      "style_kickboxing",
-      "style_boxing"
-    ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS3",
-    "name": { "str": "Shaolin Adept" },
-    "points": 2,
-    "description": "You have studied the arts of the Shaolin monks.  You start with one of the five animal fighting styles: Tiger, Crane, Leopard, Snake, or Dragon.",
-    "player_display": false,
-    "initial_ma_styles": [ "style_tiger", "style_crane", "style_leopard", "style_snake", "style_dragon" ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS5",
+    "id": "MARTIAL_ARTS_MELEE",
     "name": { "str": "Melee Weapon Training" },
     "points": 3,
     "description": "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu.",
@@ -1296,15 +1247,6 @@
       "style_swordsmanship",
       "style_medievalpole"
     ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_FENCING",
-    "name": { "str": "Competitive Fencer" },
-    "points": 0,
-    "description": "You were an avid fencer, starting with foil and moving onto saber, then épée.  You competed nationally and dabbled with some of the historical fencing weapons afforded by HEMA's popularity.",
-    "initial_ma_styles": [ "style_fencing" ],
     "valid": false
   },
   {
@@ -1325,6 +1267,7 @@
     "points": 1,
     "description": "You have no qualms about bending the truth, and have practically no tells.  Telling lies and otherwise bluffing will be much easier for you.",
     "cancels": [ "TRUTHTELLER" ],
+    "starting_trait": true,
     "social_modifiers": { "lie": 40 }
   },
   {
@@ -1631,6 +1574,7 @@
     "points": -1,
     "description": "Reading is for nerds!  Boring books are more boring, and you can't have fun by reading books.",
     "valid": false,
+    "starting_trait": true,
     "cancels": [ "ILLITERATE", "LOVES_BOOKS" ]
   },
   {
@@ -6294,17 +6238,6 @@
   },
   {
     "type": "mutation",
-    "id": "MUT_JUNKIE",
-    "name": { "str": "Metallassomaiphile" },
-    "//": "name courtesy of wiktionary's Greek for 'mutate'.  Greek-speakers, feel free to correct the term",
-    "points": -1,
-    "mixed_effect": true,
-    "description": "Just thinking of mutagen (such a lovely word!  'Mutagen'.  Perfect!) makes you thirsty.  And you so love your new parts.  You simply must have more mutagen!",
-    "threshreq": [ "THRESH_MEDICAL", "THRESH_CHIMERA" ],
-    "category": [ "MEDICAL", "CHIMERA" ]
-  },
-  {
-    "type": "mutation",
     "id": "HEADBUMPS",
     "name": { "str": "Head Bumps" },
     "points": 0,
@@ -6456,7 +6389,7 @@
     "description": "You have a pair of stubby little wings projecting from your shoulderblades.  They can be wiggled at will, but are useless.",
     "types": [ "WINGS" ],
     "changes_to": [ "WINGS_INSECT" ],
-    "category": [ "INSECT" ]
+    "category": [ "INSECT", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -8750,46 +8683,19 @@
   },
   {
     "type": "mutation",
-    "id": "PROF_MA_ORANGE",
+    "id": "MARTIAL_ARTS",
     "name": { "str": "Martial Artist" },
     "points": 0,
-    "description": "You were shaping up to be a pretty decent student of the martial arts before the Cataclysm struck.  Time to see just how good you really are.",
-    "valid": false,
+    "description": "You are trained in a hand-to-hand fighting style.",
     "initial_ma_styles": [
       "style_aikido",
+      "style_boxing",
       "style_capoeira",
       "style_crane",
       "style_dragon",
       "style_judo",
       "style_karate",
-      "style_krav_maga",
-      "style_leopard",
-      "style_muay_thai",
-      "style_ninjutsu",
-      "style_pankration",
-      "style_snake",
-      "style_taekwondo",
-      "style_tai_chi",
-      "style_tiger",
-      "style_wingchun",
-      "style_zui_quan"
-    ],
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_MA_BLACK",
-    "name": { "str": "Black Belt" },
-    "points": 0,
-    "description": "You were competitive at national levels, and had considered teaching your art.  Defending against the entire town may still be a challenge, though.",
-    "initial_ma_styles": [
-      "style_aikido",
-      "style_capoeira",
-      "style_crane",
-      "style_dragon",
-      "style_judo",
-      "style_karate",
+      "style_kickboxing",
       "style_krav_maga",
       "style_leopard",
       "style_muay_thai",
@@ -8804,28 +8710,7 @@
     ],
     "valid": false,
     "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_BOXER",
-    "name": { "str": "Pugilist" },
-    "points": 0,
-    "description": "You are experienced in the Sweet Science of boxing.  You could've had a shot at a local boxing tournament, if the Cataclysm hadn't screwed that up.",
-    "valid": false,
-    "initial_ma_styles": [ "style_boxing" ],
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_KICKBOXER",
-    "name": { "str": "Kickboxer" },
-    "points": 0,
-    "description": "You have some training in the art of kickboxing.  It's just boxing with kicks, right?",
-    "valid": false,
-    "initial_ma_styles": [ "style_kickboxing" ],
-    "purifiable": false,
+    "player_display": false,
     "profession": true
   },
   {
