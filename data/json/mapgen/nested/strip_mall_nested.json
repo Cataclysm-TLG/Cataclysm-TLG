@@ -3227,21 +3227,21 @@
         "z": "f_counter_gate_c"
       },
       "items": {
-        "1": { "item": "SUS_hunting_archery", "chance": 35, "repeat": [ 0, 3 ] },
+        "1": { "item": "SUS_hunting_archery", "chance": 35, "repeat": [ 0, 1 ] },
         "2": [
           { "item": "archery_ammo", "chance": 50, "repeat": [ 0, 5 ] },
           { "item": "archery_mods", "chance": 45, "repeat": [ 0, 2 ] }
         ],
-        "n": { "item": "tools_hunting", "chance": 55, "repeat": [ 0, 3 ] },
-        "3": { "item": "gun_cases", "chance": 30, "repeat": [ 0, 2 ] },
-        "4": { "item": "guns_rifle_common", "chance": 50, "repeat": 2 },
+        "n": { "item": "tools_hunting", "chance": 35, "repeat": [ 0, 2 ] },
+        "3": { "item": "gun_cases", "chance": 20, "repeat": [ 0, 2 ] },
+        "4": { "item": "guns_rifle_common", "chance": 20, "repeat": [ 0, 1 ] },
         "5": { "item": "jackets", "chance": 30, "repeat": [ 0, 2 ] },
         "6": { "item": "clothing_hunting", "chance": 40, "repeat": [ 0, 3 ] },
-        "C": { "item": "guns_shotgun_common", "chance": 30, "repeat": [ 0, 1 ] },
+        "C": { "item": "guns_shotgun_common", "chance": 20, "repeat": [ 0, 1 ] },
         "B": { "item": "SUS_dishes", "chance": 70 },
         "b": { "item": "SUS_silverware", "chance": 70 },
-        "0": { "item": "ammo_rifle_common", "chance": 60, "repeat": [ 0, 3 ] },
-        "o": { "item": "ammo_shotgun_common", "chance": 80, "repeat": [ 3, 4 ] },
+        "0": { "item": "ammo_rifle_common", "chance": 40, "repeat": [ 0, 3 ] },
+        "o": { "item": "ammo_shotgun_common", "chance": 50, "repeat": [ 3, 4 ] },
         "d": { "item": "SUS_office_desk", "chance": 50 },
         "$": { "item": "cash_register_random", "chance": 50 },
         "L": { "item": "SUS_janitors_closet", "chance": 70 },
