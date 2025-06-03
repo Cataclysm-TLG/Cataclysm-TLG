@@ -3617,7 +3617,7 @@
     "id": "grabbed",
     "name": [ "Grabbed" ],
     "desc": [
-      "You have been grabbed and held in place by an attack.  You're not able to move until breaking the grab, and depending on the strength of your opponent using this limb is difficult to impossible.\nWait in place or attempt to move without attacking to try and remove this effect."
+      "You have been grabbed and held in place by an attack.  You cannot move or dodge, and depending on the strength of your opponent, use of this body part is hindered.\nWait in place or attempt to move without attacking to try and remove this effect."
     ],
     "rating": "bad",
     "//": "Removal handled in code, so no max duration needed, intensity set by the grab_strength, all effects are local-only",
@@ -3625,7 +3625,7 @@
     "show_in_info": true,
     "show_intensity": true,
     "//mods": "No swimmin' or manipulatin' with a held limb, other scores start severly debilitated and reach useless at about 50 grab strength",
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "multiply": 0.0 } ] } ],
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": -100.0 } ] } ],
     "limb_score_mods": [
       { "limb_score": "manip", "modifier": 0.0 },
       { "limb_score": "grip", "modifier": 0.0 },

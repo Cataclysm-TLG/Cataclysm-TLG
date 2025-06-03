@@ -1275,7 +1275,10 @@ float Character::get_dodge() const
         ret *= 0.8;
     }
 
-    return std::max( 0.0f, ret );
+    ret = std::max( 0.0, ret + ( enchantment_cache->modify_value( enchant_vals::mod::DODGE_CHANCE, 0 ) ) );
+        add_msg_debug( debugmode::DF_MELEE, "Dodge after DODGE_CHANCE enchantment modifier %.1f", ret );
+
+    return ret;
 }
 
 float Character::dodge_roll() const

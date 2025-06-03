@@ -489,8 +489,8 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 1 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                        _( "Dexterity affects your chance to hit in melee combat, helps you steady your "
-                           "gun for ranged combat, and enhances many actions that require finesse." ) );
+                        _( "Dexterity affects your chance to hit in melee combat, helps you aim faster in "
+                           "ranged combat, and enhances many actions that require finesse." ) );
         print_colored_text( w_info, point( 1, 3 ), col_temp, c_light_gray,
                             string_format( _( "Melee to-hit bonus: <color_white>%+.1lf</color>" ), you.get_melee_hit_base() ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
@@ -502,8 +502,8 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 2 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                        _( "Intelligence is less important in most situations, but it is vital for more complex tasks like "
-                           "electronics crafting.  It also affects how much skill you can pick up from reading a book." ) );
+                        _( "Intelligence affects your learning and crafting speed, your social skills, and your "
+                            "ability to perform complex intellectual tasks such as surgery." ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
                             string_format( _( "Read times: <color_white>%d%%</color>" ), you.read_speed() ) );
         print_colored_text( w_info, point( 1, 5 ), col_temp, c_light_gray,
@@ -512,7 +512,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
                         _( "Perception is the most important stat for ranged combat.  It's also used for "
-                           "detecting traps and other things of interest." ) );
+                           "detecting traps, seeing in the dark, and noticing points of interest." ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
                             string_format( _( "Trap detection level: <color_white>%d</color>" ), you.get_per() ) );
         if( you.ranged_per_mod() > 0 ) {
@@ -524,7 +524,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
         const int lines = fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
                                           _( "Your weight is a general indicator of how much fat your body has stored up,"
                                              " which in turn shows how prepared you are to survive for a time without food."
-                                             "  Having too much, or too little, can be unhealthy." ) );
+                                             "  Having too much or too little can be unhealthy." ) );
         fold_and_print( w_info, point( 1, 1 + lines ), FULL_SCREEN_WIDTH - 2, c_light_gray,
                         display::weight_long_description( you ) );
     } else if( line == 5 ) {
@@ -534,7 +534,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 6 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         const int lines = fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                                          _( "Your height.  Simply how tall you are." ) );
+                                          _( "Your height when standing fully upright." ) );
         fold_and_print( w_info, point( 1, 1 + lines ), FULL_SCREEN_WIDTH - 2, c_light_gray,
                         you.height_string() );
     } else if( line == 7 ) {
