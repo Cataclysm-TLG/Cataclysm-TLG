@@ -492,7 +492,7 @@
         "k": { "item": "SUS_toilet", "chance": 100 },
         "M": { "item": "dress_shoes", "chance": 65, "repeat": [ 0, 3 ] },
         "K": { "item": "fur_shoes_unisex", "chance": 65, "repeat": [ 0, 3 ] },
-        "J": { "item": "clothing_outdoor_shoes", "chance": 60, "repeat": [ 0, 3 ]},
+        "J": { "item": "clothing_outdoor_shoes", "chance": 60, "repeat": [ 0, 3 ] },
         "Z": { "item": "shoestore_accessories", "chance": 60, "repeat": [ 0, 3 ] },
         "U": { "item": "swimmer_shoes", "chance": 60, "repeat": [ 0, 3 ] },
         "I": { "item": "shoes_womens", "chance": 60, "repeat": [ 0, 3 ] },
@@ -2140,11 +2140,20 @@
           { "item": "pants_mens", "chance": 5, "repeat": [ 0, 3 ] }
         ],
         "K": { "item": "coats_unisex", "chance": 50, "repeat": [ 0, 3 ] },
-        "J": [ { "item": "shoes_unisex", "chance": 60, "repeat": [ 0, 3 ] }, { "item": "shoes_womens", "chance": 20, "repeat": [ 0, 3 ] } ],
-        "Z": [ { "item": "shirts_unisex", "chance": 60, "repeat": [ 0, 3 ] }, { "item": "shirts_womens", "chance": 30, "repeat": [ 0, 3 ] } ],
+        "J": [
+          { "item": "shoes_unisex", "chance": 60, "repeat": [ 0, 3 ] },
+          { "item": "shoes_womens", "chance": 20, "repeat": [ 0, 3 ] }
+        ],
+        "Z": [
+          { "item": "shirts_unisex", "chance": 60, "repeat": [ 0, 3 ] },
+          { "item": "shirts_womens", "chance": 30, "repeat": [ 0, 3 ] }
+        ],
         "U": { "item": "underwear_mens", "chance": 60, "repeat": [ 0, 3 ] },
         "I": { "item": "underwear_womens", "chance": 60, "repeat": [ 0, 3 ] },
-        "T": [ { "item": "gloves_unisex", "chance": 55, "repeat": [ 0, 3 ] }, { "item": "scarfs_unisex", "chance": 30, "repeat": [ 0, 3 ] } ],
+        "T": [
+          { "item": "gloves_unisex", "chance": 55, "repeat": [ 0, 3 ] },
+          { "item": "scarfs_unisex", "chance": 30, "repeat": [ 0, 3 ] }
+        ],
         "O": [
           { "item": "clothing_outdoor_torso", "chance": 50, "repeat": 3 },
           { "item": "clothing_outdoor_pants", "chance": 50, "repeat": 3 }
@@ -2424,7 +2433,10 @@
         "C": { "item": "camping", "chance": 60, "repeat": [ 3, 4 ] },
         "B": { "item": "SUS_dishes", "chance": 100 },
         "b": { "item": "SUS_silverware", "chance": 100 },
-        "2": [ { "item": "swimmer_shoes", "chance": 50, "repeat": [ 0, 3 ] }, { "item": "NC_COWBOY_shoes", "chance": 50, "repeat": [ 0, 3 ] } ],
+        "2": [
+          { "item": "swimmer_shoes", "chance": 50, "repeat": [ 0, 3 ] },
+          { "item": "NC_COWBOY_shoes", "chance": 50, "repeat": [ 0, 3 ] }
+        ],
         "o": { "item": "camping", "chance": 50, "repeat": [ 3, 5 ] },
         "d": { "item": "SUS_office_desk", "chance": 60 },
         "$": { "item": "cash_register_random", "chance": 80 },
@@ -2925,15 +2937,24 @@
           { "item": "pants_womens", "chance": 5, "repeat": 3 },
           { "item": "pants_mens", "chance": 5, "repeat": 3 }
         ],
-        "K": { "item": "coats_unisex", "chance": 50, "repeat":  [ 0, 3 ] },
-        "J": [ { "item": "shoes_unisex", "chance": 60, "repeat": [ 0, 3 ] }, { "item": "shoes_womens", "chance": 20, "repeat":  [ 0, 3 ] } ],
-        "Z": [ { "item": "shirts_unisex", "chance": 60, "repeat":  [ 0, 3 ] }, { "item": "shirts_womens", "chance": 25, "repeat":  [ 0, 3 ] } ],
-        "U": { "item": "underwear_mens", "chance": 65, "repeat":  [ 0, 3 ] },
-        "I": { "item": "underwear_womens", "chance": 65, "repeat":  [ 0, 3 ] },
-        "T": [ { "item": "gloves_unisex", "chance": 65, "repeat":  [ 0, 3 ] }, { "item": "scarfs_unisex", "chance": 40, "repeat":  [ 0, 3 ] } ],
+        "K": { "item": "coats_unisex", "chance": 50, "repeat": [ 0, 3 ] },
+        "J": [
+          { "item": "shoes_unisex", "chance": 60, "repeat": [ 0, 3 ] },
+          { "item": "shoes_womens", "chance": 20, "repeat": [ 0, 3 ] }
+        ],
+        "Z": [
+          { "item": "shirts_unisex", "chance": 60, "repeat": [ 0, 3 ] },
+          { "item": "shirts_womens", "chance": 25, "repeat": [ 0, 3 ] }
+        ],
+        "U": { "item": "underwear_mens", "chance": 65, "repeat": [ 0, 3 ] },
+        "I": { "item": "underwear_womens", "chance": 65, "repeat": [ 0, 3 ] },
+        "T": [
+          { "item": "gloves_unisex", "chance": 65, "repeat": [ 0, 3 ] },
+          { "item": "scarfs_unisex", "chance": 40, "repeat": [ 0, 3 ] }
+        ],
         "O": [
-          { "item": "clothing_outdoor_torso", "chance": 50, "repeat":  [ 0, 3 ] },
-          { "item": "clothing_outdoor_pants", "chance": 50, "repeat":  [ 0, 3 ] }
+          { "item": "clothing_outdoor_torso", "chance": 50, "repeat": [ 0, 3 ] },
+          { "item": "clothing_outdoor_pants", "chance": 50, "repeat": [ 0, 3 ] }
         ],
         "B": { "item": "bags", "chance": 50, "repeat": [ 0, 3 ] },
         "$": { "item": "SUS_office_filing_cabinet", "chance": 80 },
