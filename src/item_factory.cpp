@@ -157,25 +157,29 @@ static void migrate_mag_from_pockets( itype &def )
     }
 }
 
-static std::vector<itype>::const_iterator find_template_list_const( const itype_id &it_id )
+static std::optional<std::reference_wrapper<const itype>> find_template_list_const(
+            const itype_id &it_id )
+
 {
-    const std::vector<itype> &itypes = item_controller->get_generic_factory().get_all();
-    return std::find_if( itypes.begin(), itypes.end(), [&it_id]( const itype & def ) {
-        return def.get_id() == it_id;
-    } );
+    generic_factory<itype> &factory = item_controller->get_generic_factory();
+    if( factory.is_valid( it_id ) ) {
+        return factory.obj( it_id );
+    }
+    return std::nullopt;
 }
 
-static std::vector<itype>::iterator find_template_list_mod( const itype_id &it_id )
+static std::optional<std::reference_wrapper<itype>> find_template_list_mod( const itype_id &it_id )
 {
-    std::vector<itype> &itypes = item_controller->get_generic_factory().get_all_mod();
-    return std::find_if( itypes.begin(), itypes.end(), [&it_id]( const itype & def ) {
-        return def.get_id() == it_id;
-    } );
+    std::optional<std::reference_wrapper<const itype>> it = find_template_list_const( it_id );
+    if( it.has_value() ) {
+        return const_cast<itype &>( it->get() );
+    }
+    return std::nullopt;
 }
 
-static std::size_t count_template_list( const itype_id &it_id )
+static bool template_list_contains( const itype_id &it_id )
 {
-    return find_template_list_const( it_id ) != item_controller->get_generic_factory().get_all().end();
+    return find_template_list_const( it_id ).has_value();
 }
 
 template<>
@@ -837,7 +841,7 @@ void Item_factory::finalize_post( itype &obj )
 
         // check if item can be repaired with any of the actions?
         for( const auto &act : repair_actions ) {
-            const use_function *func = find_template_list_const( tool )->get_use( act );
+            const use_function *func = find_template_list_const( tool )->get().get_use( act );
             if( func == nullptr ) {
                 continue;
             }
@@ -1485,8 +1489,8 @@ void Item_factory::finalize()
         }
         const itype_id &result = rec.result();
         auto it = find_template_list_mod( result );
-        if( it != item_factory.get_all().end() ) {
-            it->recipes.push_back( p.first );
+        if( it.has_value() ) {
+            it->get().recipes.push_back( p.first );
         }
     }
     for( auto &e : m_template_groups ) {
@@ -1537,23 +1541,23 @@ void Item_factory::finalize_item_blacklist()
 
     for( const itype_id &blackout : item_blacklist.blacklist ) {
         auto candidate = find_template_list_const( blackout );
-        if( candidate == item_factory.get_all().end() ) {
+        if( !candidate.has_value() ) {
             debugmsg( "item on blacklist %s does not exist", blackout.c_str() );
             continue;
         }
 
         for( std::pair<const item_group_id, std::unique_ptr<Item_spawn_data>> &g : m_template_groups ) {
-            g.second->remove_item( candidate->get_id() );
+            g.second->remove_item( blackout );
         }
 
         // remove any blacklisted items from requirements
         for( const std::pair<const requirement_id, requirement_data> &r : requirement_data::all() ) {
-            const_cast<requirement_data &>( r.second ).blacklist_item( candidate->get_id() );
+            const_cast<requirement_data &>( r.second ).blacklist_item( blackout );
         }
 
         // remove any recipes used to craft the blacklisted item
-        recipe_dictionary::delete_if( [&candidate]( const recipe & r ) {
-            return r.result() == candidate->get_id();
+        recipe_dictionary::delete_if( [&blackout]( const recipe & r ) {
+            return r.result() == blackout;
         } );
     }
     for( const vehicle_prototype &const_prototype : vehicles::get_all_prototypes() ) {
@@ -1588,7 +1592,7 @@ void Item_factory::finalize_item_blacklist()
         if( valid == nullptr ) {
             continue;
         }
-        if( count_template_list( valid->replace ) == 0 ) {
+        if( !template_list_contains( valid->replace ) ) {
             // Errors for missing item templates will be reported below
             continue;
         }
@@ -1606,7 +1610,7 @@ void Item_factory::finalize_item_blacklist()
     for( const std::pair<const itype_id, std::vector<migration>> &migrate : migrations ) {
         const migration *parent = nullptr;
         for( const migration &migrant : migrate.second ) {
-            if( count_template_list( migrant.replace ) == 0 ) {
+            if( !template_list_contains( migrant.replace ) ) {
                 debugmsg( "Replacement item (%s) for migration %s does not exist", migrant.replace.str(),
                           migrate.first.c_str() );
                 continue;
@@ -1637,10 +1641,10 @@ void Item_factory::finalize_item_blacklist()
         // To do that we need to store a map of ammo to the migration replacement thereof.
         auto maybe_ammo = find_template_list_const( migrate.first );
         // If the itype_id is valid and the itype has ammo data
-        if( maybe_ammo != item_factory.get_all().end() && maybe_ammo->ammo ) {
+        if( maybe_ammo.has_value() && maybe_ammo->get().ammo ) {
             auto replacement = find_template_list_const( parent->replace );
-            if( replacement->ammo ) {
-                migrated_ammo.emplace( migrate.first, replacement->ammo->type );
+            if( replacement->get().ammo ) {
+                migrated_ammo.emplace( migrate.first, replacement->get().ammo->type );
             } else {
                 debugmsg( "Replacement item %s for migrated ammo %s is not ammo.",
                           parent->replace.str(), migrate.first.str() );
@@ -1649,9 +1653,9 @@ void Item_factory::finalize_item_blacklist()
 
         // migrate magazines as well
         auto maybe_mag = find_template_list_const( migrate.first );
-        if( maybe_mag != item_factory.get_all().end() && maybe_mag->magazine ) {
+        if( maybe_mag.has_value() && maybe_mag->get().magazine ) {
             auto replacement = find_template_list_const( parent->replace );
-            if( replacement->magazine ) {
+            if( replacement->get().magazine ) {
                 migrated_magazines.emplace( migrate.first, parent->replace );
             } else {
                 debugmsg( "Replacement item %s for migrated magazine %s is not a magazine.",
@@ -1670,7 +1674,7 @@ void Item_factory::finalize_item_blacklist()
                 }
                 const migration *parent = nullptr;
                 for( const migration &migrant : replacement->second ) {
-                    if( count_template_list( migrant.replace ) == 0 ) {
+                    if( !template_list_contains( migrant.replace ) ) {
                         // Error reported above
                         continue;
                     }
@@ -2723,11 +2727,11 @@ void Item_factory::check_definitions() const
     }
     for( const auto &e : migrations ) {
         for( const migration &m : e.second ) {
-            if( !count_template_list( m.replace ) ) {
+            if( !template_list_contains( m.replace ) ) {
                 debugmsg( "Invalid migration target: %s", m.replace.c_str() );
             }
             for( const migration::content &c : m.contents ) {
-                if( !count_template_list( c.id ) ) {
+                if( !template_list_contains( c.id ) ) {
                     debugmsg( "Invalid migration contents: %s", c.id.str() );
                 }
             }
@@ -2757,8 +2761,8 @@ const itype *Item_factory::find_template( const itype_id &id ) const
     cata_assert( frozen );
 
     auto found = find_template_list_const( id );
-    if( found != item_factory.get_all().end() ) {
-        return &*found;
+    if( found.has_value() ) {
+        return &found->get();
     }
 
     auto rt = m_runtimes.find( id );
@@ -5318,7 +5322,7 @@ void item_group::debug_spawn()
 
 bool Item_factory::has_template( const itype_id &id ) const
 {
-    return count_template_list( id ) || m_runtimes.count( id );
+    return template_list_contains( id ) || m_runtimes.count( id );
 }
 
 const std::vector<const itype *> &Item_factory::all() const
