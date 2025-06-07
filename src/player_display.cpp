@@ -503,7 +503,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
                         _( "Intelligence affects your learning and crafting speed, your social skills, and your "
-                            "ability to perform complex intellectual tasks such as surgery." ) );
+                           "ability to perform complex intellectual tasks such as surgery." ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
                             string_format( _( "Read times: <color_white>%d%%</color>" ), you.read_speed() ) );
         print_colored_text( w_info, point( 1, 5 ), col_temp, c_light_gray,
