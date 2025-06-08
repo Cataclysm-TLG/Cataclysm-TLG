@@ -658,12 +658,6 @@
   },
   {
     "type": "vehicle_part",
-    "id": "big_portable_fridge",
-    "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
-    "copy-from": "ap_big_portable_fridge"
-  },
-  {
-    "type": "vehicle_part",
     "id": "minifreezer",
     "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
     "copy-from": "ap_minifreezer"
@@ -673,12 +667,6 @@
     "id": "chest_minifreezer",
     "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
     "copy-from": "ap_chest_minifreezer"
-  },
-  {
-    "type": "vehicle_part",
-    "id": "big_portable_freezer",
-    "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
-    "copy-from": "ap_big_portable_freezer"
   },
   {
     "type": "vehicle_part",

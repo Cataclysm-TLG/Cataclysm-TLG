@@ -812,5 +812,15 @@
     "id": "bottle_plastic_tiny_glue",
     "type": "MIGRATION",
     "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "big_portable_fridge",
+    "type": "MIGRATION",
+    "replace": "minifridge"
+  },
+  {
+    "id": "big_portable_freezer",
+    "type": "MIGRATION",
+    "replace": "chest_minifreezer"
   }
 ]

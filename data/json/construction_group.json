@@ -1172,11 +1172,6 @@
   },
   {
     "type": "construction_group",
-    "id": "place_big_portable_fridge",
-    "name": "Place Food Truck Fridge"
-  },
-  {
-    "type": "construction_group",
     "id": "place_glass_fridge",
     "name": "Place Single Glass Door Fridge"
   },
@@ -1209,11 +1204,6 @@
     "type": "construction_group",
     "id": "place_minifreezer",
     "name": "Place Minifreezer"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_big_portable_freezer",
-    "name": "Place Food Truck Freezer"
   },
   {
     "type": "construction_group",
