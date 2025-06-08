@@ -66,12 +66,6 @@
     "components": [ [ [ "meal_bone", 1 ], [ "meal_bone_tainted", 1 ] ] ]
   },
   {
-    "id": "bronze_bits",
-    "type": "requirement",
-    "//": "Chunks of bronze.",
-    "components": [ [ [ "bronze_scrap", 1 ] ] ]
-  },
-  {
     "id": "copper_scrap_equivalent",
     "type": "requirement",
     "//": "Material used for equivalence between one unit of scrap copper and corresponding amount of elemental copper.",
