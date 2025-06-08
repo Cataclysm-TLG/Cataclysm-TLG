@@ -1475,7 +1475,7 @@
       { "group": "hotdogs_frozen_bag_plastic_10", "prob": 6, "count": [ 0, 4 ] },
       { "group": "frozen_dinner_box_small_2", "prob": 10, "count": [ 0, 3 ] },
       { "group": "corndogs_frozen_bag_plastic_2", "prob": 5, "count": [ 0, 3 ] },
-      { "group": "pizza_veggy_box_small_4", "prob": 10 },
+      { "group": "pizza_vegetable_box_small_4", "prob": 10 },
       { "group": "pizza_meat_box_small_4", "prob": 12 },
       { "item": "frozen_lemonade", "prob": 10 },
       { "item": "icecream", "prob": 8, "count": [ 0, 4 ] },
@@ -1502,7 +1502,7 @@
       { "group": "hotdogs_frozen_bag_plastic_10", "prob": 2, "count": [ 0, 4 ] },
       { "group": "frozen_dinner_box_small_2", "prob": 5, "count": [ 0, 3 ] },
       { "group": "corndogs_frozen_bag_plastic_2", "prob": 2, "count": [ 0, 3 ] },
-      { "group": "pizza_veggy_box_small_4", "prob": 5 },
+      { "group": "pizza_vegetable_box_small_4", "prob": 5 },
       { "group": "pizza_meat_box_small_4", "prob": 5 },
       { "item": "frozen_lemonade", "prob": 5 },
       { "item": "icecream", "prob": 4, "count": [ 0, 4 ] },
@@ -1530,7 +1530,7 @@
       {
         "collection": [
           { "item": "brain", "prob": 2 },
-          { "item": "trash_domestic", "prob": 15 },
+          { "group": "trash_domestic", "prob": 15 },
           { "item": "meat_tainted", "prob": 20, "count": [ 0, 6 ] },
           { "item": "meat_scrap", "prob": 15, "count": [ 0, 3 ] },
           { "item": "human_meat_scrap", "prob": 15, "count": [ 0, 3 ] },

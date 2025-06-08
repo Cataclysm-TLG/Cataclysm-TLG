@@ -293,7 +293,6 @@
         "om_terrain": "lighthouse_ground",
         "om_special": "Lighthouse Island",
         "reveal_radius": 10,
-        "search_range": 360,
         "cant_see": true
       },
       "update_mapgen": [
