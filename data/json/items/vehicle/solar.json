@@ -106,7 +106,7 @@
     "weight": "24153 g",
     "color": "light_blue",
     "material": [ "tempered_glass", "steel" ],
-    "volume": "6500 ml",
+    "volume": "16000 ml",
     "price": "1200 USD",
     "price_postapoc": "15 USD",
     "copy-from": "solar_panel"

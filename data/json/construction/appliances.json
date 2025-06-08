@@ -193,30 +193,6 @@
   },
   {
     "type": "construction",
-    "id": "app_big_portable_freezer",
-    "group": "place_big_portable_freezer",
-    "category": "APPLIANCE",
-    "required_skills": [ [ "fabrication", 0 ] ],
-    "time": "5 m",
-    "components": [ [ [ "big_portable_freezer", 1 ] ] ],
-    "pre_special": "check_empty",
-    "post_special": "done_appliance",
-    "activity_level": "LIGHT_EXERCISE"
-  },
-  {
-    "type": "construction",
-    "id": "app_big_portable_fridge",
-    "group": "place_big_portable_fridge",
-    "category": "APPLIANCE",
-    "required_skills": [ [ "fabrication", 0 ] ],
-    "time": "5 m",
-    "components": [ [ [ "big_portable_fridge", 1 ] ] ],
-    "pre_special": "check_empty",
-    "post_special": "done_appliance",
-    "activity_level": "BRISK_EXERCISE"
-  },
-  {
-    "type": "construction",
     "id": "app_catalytic_cracking_reactor",
     "group": "place_catalytic_cracking_reactor",
     "category": "APPLIANCE",
