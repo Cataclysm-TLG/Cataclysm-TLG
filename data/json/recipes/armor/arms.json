@@ -449,27 +449,26 @@
     "autolearn": true,
     "reversible": true,
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
-    "using": [ [ "forging_standard", 6 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 4 ], [ "clasps", 4 ] ],
+    "using": [ [ "forging_standard", 6 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 4 ], [ "clasps", 4 ], [ "bronze_bits", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_articulation" }
-    ],
-    "components": [ [ [ "scrap_bronze", 6 ] ] ]
+    ]
   },
   {
     "result": "bronze_vambraces_xs",
     "type": "recipe",
     "copy-from": "bronze_vambraces",
     "time": "7 h 30 m",
-    "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 3 ], [ "clasps", 3 ] ]
+    "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 3 ], [ "clasps", 3 ], [ "bronze_bits", 4 ] ]
   },
   {
     "result": "bronze_vambraces_xl",
     "type": "recipe",
     "copy-from": "bronze_vambraces",
     "time": "8 h 30 m",
-    "using": [ [ "forging_standard", 8 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
+    "using": [ [ "forging_standard", 8 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 4 ], [ "clasps", 4 ], [ "bronze_bits", 8 ] ]
   },
   {
     "result": "platemail_arm_guards",
