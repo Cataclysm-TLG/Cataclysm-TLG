@@ -301,6 +301,11 @@
     ]
   },
   {
+    "id": "bronze_bits",
+    "type": "item_group",
+    "items": [ { "item": "scrap_bronze" } ]
+  },
+  {
     "id": "pencil_case_with_contents",
     "type": "item_group",
     "subtype": "collection",
