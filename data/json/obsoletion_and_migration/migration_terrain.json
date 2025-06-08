@@ -14,7 +14,7 @@
     "from": "ap_big_portable_freezer",
     "to": "ap_chest_minifreezer"
   },
-    {
+  {
     "type": "vehicle_part_migration",
     "from": "stowed_big_portable_fridge",
     "to": "stowed_minifridge"
