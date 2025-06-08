@@ -8431,20 +8431,29 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
         return is_clear;
     }
 
+    // 3D path check
     if( ( range >= 0 && range < rl_dist( f, t ) ) ||
         !inbounds( t ) ) {
-        return false; // Out of range!
+        return false;
     }
+
     bool is_clear = true;
     tripoint last_point = f;
+
     bresenham( f, t, 0, 0,
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint & new_point ) {
-        // Exit before checking the last square, it's still reachable even if it is an obstacle.
         if( new_point == t ) {
+            is_clear = false;
             return false;
         }
 
-        // We have to check a weird case where the move is both vertical and horizontal
+        // No vertical diagonal stepping is possible in this game.
+        const tripoint delta = new_point - last_point;
+        if( delta.z != 0 && ( delta.x != 0 || delta.y != 0 ) ) {
+            is_clear = false;
+            return false;
+        }
+
         if( new_point.z == last_point.z ) {
             const int cost = move_cost( new_point );
             if( cost < cost_min || cost > cost_max ) {
@@ -8452,31 +8461,21 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
                 return false;
             }
         } else {
-            bool this_clear = false;
-            const int max_z = std::max( new_point.z, last_point.z );
-            if( !has_floor_or_support( {new_point.xy(), max_z} ) ) {
-                const int cost = move_cost( {new_point.xy(), last_point.z} );
-                if( cost > cost_min && cost < cost_max ) {
-                    this_clear = true;
-                }
-            }
-
-            if( !this_clear && has_floor_or_support( {last_point.xy(), max_z} ) ) {
-                const int cost = move_cost( {last_point.xy(), new_point.z} );
-                if( cost > cost_min && cost < cost_max ) {
-                    this_clear = true;
-                }
-            }
-
-            if( !this_clear ) {
+            const int cost = move_cost( new_point );
+            const bool going_up = new_point.z > last_point.z;
+            if( ( cost < cost_min || cost > cost_max ) || ( going_up &&
+                    ( !ter( new_point )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) &&
+                      !ter( last_point )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) ) ) ||
+                ( !going_up && ( !ter( new_point )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
+                                 !ter( last_point )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) ) ) {
                 is_clear = false;
                 return false;
             }
         }
-
         last_point = new_point;
         return true;
     } );
+
     return is_clear;
 }
 

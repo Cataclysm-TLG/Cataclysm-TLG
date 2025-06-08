@@ -495,6 +495,28 @@ void activity_handlers::butcher_do_turn( player_activity *act, Character * )
         return;
     }
     item &corpse_item = *target;
+    if( action == butcher_type::DISSECT && ( corpse_item.has_flag( flag_QUARTERED ) ||
+            corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ||
+            corpse_item.has_flag( flag_GIBBED ) ) ) {
+        add_msg( m_bad, _( "You back off from the ruined corpse, unable to continue." ) );
+        act->set_to_null();
+        return;
+    }
+    if( action == butcher_type::BLEED && ( corpse_item.has_flag( flag_BLED ) ||
+                                           corpse_item.has_flag( flag_SKINNED ) ||
+                                           corpse_item.has_flag( flag_QUARTERED ) || corpse_item.has_flag( flag_PULPED ) ||
+                                           corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) ||
+                                           corpse_item.has_flag( flag_FIELD_DRESS ) ) ) {
+        add_msg( m_bad, _( "There's not much blood left in the corpse, so you give up." ) );
+        act->set_to_null();
+        return;
+    }
+    if( action == butcher_type::SKIN && ( corpse_item.has_flag( flag_SKINNED ) ||
+                                          corpse_item.has_flag( flag_QUARTERED ) || corpse_item.has_flag( flag_PULPED ) ) ) {
+        add_msg( m_bad, _( "The corpse is too damaged now, there's no usable hide left." ) );
+        act->set_to_null();
+        return;
+    }
     corpse_item.set_var( butcher_progress_var( action ), progress );
 }
 
