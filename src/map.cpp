@@ -8431,20 +8431,46 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
         return is_clear;
     }
 
+    // Handle direct vertical neighbor (1 tile away, different Z)
+    if( rl_dist( f, t ) == 1 && f.z != t.z ) {
+        const bool going_up = t.z > f.z;
+        const tripoint &lower = going_up ? f : t;
+        const tripoint &upper = going_up ? t : f;
+
+        for( int dx = -1; dx <= 1; ++dx ) {
+            for( int dy = -1; dy <= 1; ++dy ) {
+                const tripoint check_lower = lower + tripoint( dx, dy, 0 );
+                const tripoint check_upper = upper + tripoint( dx, dy, 0 );
+
+                if( inbounds( check_lower ) && inbounds( check_upper ) &&
+                    ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
+                    ter( check_upper )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 3D path check
     if( ( range >= 0 && range < rl_dist( f, t ) ) ||
         !inbounds( t ) ) {
-        return false; // Out of range!
+        return false;
     }
+
     bool is_clear = true;
     tripoint last_point = f;
+
     bresenham( f, t, 0, 0,
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint & new_point ) {
-        // Exit before checking the last square, it's still reachable even if it is an obstacle.
         if( new_point == t ) {
+            const int cost = move_cost( new_point );
+            if( cost < cost_min || cost > cost_max ) {
+                is_clear = false;
+            }
             return false;
         }
 
-        // We have to check a weird case where the move is both vertical and horizontal
         if( new_point.z == last_point.z ) {
             const int cost = move_cost( new_point );
             if( cost < cost_min || cost > cost_max ) {
@@ -8452,23 +8478,36 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
                 return false;
             }
         } else {
-            bool this_clear = false;
-            const int max_z = std::max( new_point.z, last_point.z );
-            if( !has_floor_or_support( {new_point.xy(), max_z} ) ) {
-                const int cost = move_cost( {new_point.xy(), last_point.z} );
-                if( cost > cost_min && cost < cost_max ) {
-                    this_clear = true;
+            const int cost = move_cost( new_point );
+            if( cost < cost_min || cost > cost_max ) {
+                is_clear = false;
+                return false;
+            }
+
+            const bool going_up = new_point.z > last_point.z;
+            const tripoint &lower = going_up ? last_point : new_point;
+            const tripoint &upper = going_up ? new_point : last_point;
+
+            bool found_stair = false;
+
+            for( int dx = -1; dx <= 1; ++dx ) {
+                for( int dy = -1; dy <= 1; ++dy ) {
+                    tripoint check_lower = lower + tripoint( dx, dy, 0 );
+                    tripoint check_upper = upper + tripoint( dx, dy, 0 );
+
+                    if( inbounds( check_lower ) && inbounds( check_upper ) &&
+                        ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
+                        ter( check_upper )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) {
+                        found_stair = true;
+                        break;
+                    }
+                }
+                if( found_stair ) {
+                    break;
                 }
             }
 
-            if( !this_clear && has_floor_or_support( {last_point.xy(), max_z} ) ) {
-                const int cost = move_cost( {last_point.xy(), new_point.z} );
-                if( cost > cost_min && cost < cost_max ) {
-                    this_clear = true;
-                }
-            }
-
-            if( !this_clear ) {
+            if( !found_stair ) {
                 is_clear = false;
                 return false;
             }
@@ -8477,8 +8516,10 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
         last_point = new_point;
         return true;
     } );
+
     return is_clear;
 }
+
 
 bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const int range,
                       const int cost_min, const int cost_max ) const

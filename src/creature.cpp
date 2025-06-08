@@ -889,6 +889,12 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
+    // Explicitly check for Z difference > 1
+    if( std::abs( posz() - target->posz() ) > 1 ) {
+
+        return false;
+    }
+
     map &here = get_map();
     if( posz() == target->posz() ) {
         return
