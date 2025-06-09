@@ -1914,6 +1914,10 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
                                rng( -technique.knockback_spread, technique.knockback_spread ) );
         tripoint kb_point( posx() + kb_offset.x, posy() + kb_offset.y, posz() );
         for( int dist = rng( 1, technique.knockback_dist ); dist > 0; dist-- ) {
+            if( has_effect_with_flag( json_flag_GRAB_FILTER ) && grab_1.victim && &t == grab_1.victim.get() ) {
+                // Release grabbed creature just before launch
+                release_grapple();
+            }
             t.knock_back_from( kb_point );
         }
 

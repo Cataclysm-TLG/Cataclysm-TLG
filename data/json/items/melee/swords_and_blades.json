@@ -1213,7 +1213,7 @@
     "repairs_with": [ "steel" ],
     "qualities": [ [ "CUT", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 18 ] ],
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
-    "weapon_category": [ "KNIVES" ],
+    "weapon_category": [ "KNIVES", "NINJUTSU_WEAPONS" ],
     "melee_damage": { "bash": 2, "stab": 18 }
   },
   {
@@ -1257,7 +1257,7 @@
     "techniques": [ "RAPID", "WBLOCK_2" ],
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 12 ] ],
-    "weapon_category": [ "MEDIUM_SWORDS" ],
+    "weapon_category": [ "MEDIUM_SWORDS", "NINJUTSU_WEAPONS" ],
     "melee_damage": { "bash": 2, "cut": 27 }
   },
   {
