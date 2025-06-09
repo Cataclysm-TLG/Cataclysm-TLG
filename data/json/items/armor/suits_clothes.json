@@ -268,7 +268,16 @@
     "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "XL long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
   },
   {
     "id": "jumpsuit_long_xs",
@@ -276,7 +285,16 @@
     "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "XS long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
   },
   {
     "id": "jumpsuit",
