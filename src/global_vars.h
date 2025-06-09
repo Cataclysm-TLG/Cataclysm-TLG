@@ -48,7 +48,7 @@ class global_variables
         void set_global_values( std::unordered_map<std::string, std::string> input ) {
             global_values = std::move( input );
         }
-        void unserialize( JsonObject &jo );
+        void unserialize( const JsonObject &jo );
         void serialize( JsonOut &jsout ) const;
 
         std::map<std::string, std::string> migrations; // NOLINT(cata-serialize)

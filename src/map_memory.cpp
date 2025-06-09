@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #include <algorithm>
 #include <cstddef>
 #include <exception>
@@ -12,7 +10,6 @@
 #include <utility>
 
 #include "cached_options.h"
->>>>>>> Compress map memory too.
 #include "cata_assert.h"
 #include "cached_options.h"
 #include "cata_utility.h"
@@ -20,13 +17,9 @@
 #include "cuboid_rectangle.h"
 #include "debug.h"
 #include "filesystem.h"
-<<<<<<< HEAD
-#include "line.h"
-=======
 #include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "json_loader.h"
->>>>>>> Compress map memory too.
 #include "map_memory.h"
 #include "path_info.h"
 #include "string_formatter.h"

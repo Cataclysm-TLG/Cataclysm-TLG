@@ -67,6 +67,7 @@ enum safe_mode_type {
 
 enum action_id : int;
 
+class JsonObject;
 class JsonValue;
 class achievements_tracker;
 class avatar;
@@ -203,10 +204,14 @@ class game
     public:
         void setup();
         /** Saving and loading functions. */
-        void serialize( std::ostream &fout ); // for save
+        void serialize_json( std::ostream &fout ); // for save
         void unserialize( std::istream &fin, const cata_path &path ); // for load
+        void unserialize( std::string fin ); // for load
         void unserialize_master( const cata_path &file_name, std::istream &fin ); // for load
         void unserialize_master( const JsonValue &jv ); // for load
+    private:
+        void unserialize_impl( const JsonObject &data );
+    public:
 
         /** Returns false if saving failed. */
         bool save();
