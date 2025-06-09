@@ -133,7 +133,7 @@
     "price_postapoc": "1 cent",
     "material": [ "fruit" ],
     "volume": "62 ml",
-    "flags": [ "MYCUS_OK" ],
+    "flags": [ "MYCUS_OK", "NO_AUTO_CONSUME" ],
     "fun": 30,
     "vitamins": [ [ "fruit_allergen", 1 ] ]
   },
@@ -155,6 +155,7 @@
     "price": "1 cent",
     "price_postapoc": "1 cent",
     "material": [ "fruit" ],
+    "flags": [ "NO_AUTO_CONSUME" ],
     "volume": "10 ml",
     "fun": 30,
     "vitamins": [ [ "fruit_allergen", 1 ] ]
