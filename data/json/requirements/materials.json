@@ -42,6 +42,12 @@
     "components": [ [ [ "lead", 1 ] ] ]
   },
   {
+    "id": "antler",
+    "type": "requirement",
+    "//": "Will I ever add more antler types? Who knows.",
+    "components": [ [ [ "antler", 1 ] ] ]
+  },
+  {
     "id": "bone_edible",
     "type": "requirement",
     "//": "Any kind of non-poisonous bones, human or not.",

@@ -1,12 +1,6 @@
 [
   {
     "type": "item_group",
-    "id": "shia_stuff",
-    "subtype": "distribution",
-    "entries": [ { "item": "knife_steak", "prob": 3 }, { "item": "ax", "prob": 1 } ]
-  },
-  {
-    "type": "item_group",
     "id": "monparts",
     "subtype": "distribution",
     "entries": [
@@ -18,6 +12,7 @@
       { "item": "ant_egg", "prob": 5 },
       { "item": "bee_sting", "prob": 5 },
       { "item": "fighter_sting", "prob": 5 },
+      { "item": "antler", "prob": 1 },
       { "item": "chitin_piece", "prob": 10 }
     ]
   },
@@ -74,6 +69,7 @@
       { "item": "survivormap", "prob": 1 },
       { "group": "hat_hard_flashlight", "prob": 10 },
       { "item": "honey_ant", "prob": 30, "count": 2 },
+      { "item": "antler", "prob": 1 },
       { "item": "homemade_bomb_act", "prob": 1 }
     ]
   },
@@ -235,6 +231,7 @@
       { "item": "stomach", "prob": 5 },
       { "item": "stomach_large", "prob": 5 },
       { "item": "kidney", "prob": 5, "count": 4 },
+      { "item": "antler", "prob": 5 },
       { "item": "jabberwock_heart", "prob": 1 }
     ]
   },

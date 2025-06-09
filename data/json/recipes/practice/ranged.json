@@ -55,13 +55,10 @@
         "compbow_high",
         "compbow_low",
         "compositebow",
-        "reflexbow",
         "recurbow",
-        "takedown_recurbow",
         "longbow",
         "woodgreatbow",
-        "compgreatbow",
-        "reflexrecurvebow"
+        "compgreatbow"
       ]
     ],
     "components": [ [ [ "arrow_wood_crude", 10 ] ] ],
@@ -107,18 +104,15 @@
         "compbow_high",
         "compbow_low",
         "compositebow",
-        "reflexbow",
         "recurbow",
-        "takedown_recurbow",
         "longbow",
         "woodgreatbow",
-        "compgreatbow",
-        "reflexrecurvebow"
+        "compgreatbow"
       ],
       [ "pseudo_archery_target_box", "pseudo_archery_target_bale" ]
     ],
-    "components": [ [ [ "arrow_wood_heavy", 20 ] ] ],
-    "byproduct_group": [ { "item": "arrow_wood_heavy", "count": [ 0, 4 ] } ]
+    "components": [ [ [ "arrow_wood", 20 ] ] ],
+    "byproduct_group": [ { "item": "arrow_wood", "count": [ 0, 4 ] } ]
   },
   {
     "id": "prac_crossbow_int",
