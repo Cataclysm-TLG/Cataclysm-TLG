@@ -2790,13 +2790,13 @@
   {
     "type": "effect_type",
     "id": "hot_speed",
-    "name": [ "Slowdown", "Hampered", "Crushed" ],
-    "desc": [ "The heat slows you down.", "You struggle to move in this heat.", "The heat is crushing you." ],
+    "name": [ "Hot", "Sweltering", "Overheating" ],
+    "desc": [ "The heat slows you down.", "The heat is really slowing you down.", "The heat is crushing you." ],
     "speed_name": "Heat slowdown",
     "max_intensity": 3,
     "part_descs": true,
-    "base_mods": { "speed_mod": [ -2 ] },
-    "scaling_mods": { "speed_mod": [ -4 ] }
+    "base_mods": { "speed_mod": [ -1 ] },
+    "scaling_mods": { "speed_mod": [ -2 ] }
   },
   {
     "type": "effect_type",
