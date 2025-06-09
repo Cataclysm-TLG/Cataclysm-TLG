@@ -51,6 +51,22 @@
     "melee_damage": { "bash": 2, "cut": 2 },
     "weapon_category": [ "SHIVS" ]
   },
+    {
+    "type": "GENERIC",
+    "id": "antler",
+    "symbol": "%",
+    "color": "white",
+    "name": { "str": "antler" },
+    "description": "A branching length of antler, dropped by or harvested from one of the local ungulates terrorizing the region.",
+    "price": "0 cent",
+    "material": [ "keratin" ],
+    "techniques": [ "WBLOCK_1" ],
+    "weight": "1400 g",
+    "volume": "800 ml",
+    "longest_side": "40 cm",
+    "to_hit": { "grip": "solid", "length": "hand", "surface": "line", "balance": "clumsy" },
+    "melee_damage": { "bash": 3 }
+  },
   {
     "type": "GENERIC",
     "id": "fighter_sting",

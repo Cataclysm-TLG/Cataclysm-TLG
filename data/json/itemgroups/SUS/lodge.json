@@ -5,14 +5,15 @@
     "//": "items found in an archery space",
     "subtype": "collection",
     "entries": [
-      { "item": "compbow", "prob": 40 },
-      { "item": "compbow_high", "prob": 20 },
-      { "item": "compbow_low", "prob": 30 },
+      { "item": "compbow", "prob": 30 },
+      { "item": "compbow_high", "prob": 10 },
+      { "item": "compbow_low", "prob": 20 },
       { "item": "compcrossbow", "prob": 25 },
       { "item": "recurbow", "prob": 25 },
-      { "item": "takedown_recurbow", "prob": 3 },
+      { "item": "longbow", "prob": 10 },
+      { "item": "shortbow", "prob": 10 },
+      { "item": "compositebow", "prob": 1 },
       { "item": "quiver_takedown_bow", "prob": 1 },
-      { "item": "reflexrecurvebow", "prob": 10 },
       { "item": "bow_sling", "prob": 10 }
     ]
   },

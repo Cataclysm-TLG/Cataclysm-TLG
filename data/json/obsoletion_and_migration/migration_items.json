@@ -822,5 +822,65 @@
     "id": "big_portable_freezer",
     "type": "MIGRATION",
     "replace": "chest_minifreezer"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_small_game_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_fire_hardened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_heavy",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_metal_sharpened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_metal_target",
+    "type": "MIGRATION",
+    "replace": "arrow_metal"
+  },
+  {
+    "id": "takedown_recurbow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
+  },
+  {
+    "id": "takedown_recurbow_folded",
+    "type": "MIGRATION",
+    "replace": "recurbow_folded"
+  },
+  {
+    "id": "reflexcurvebow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
   }
 ]
