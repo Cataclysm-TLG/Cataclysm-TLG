@@ -73,7 +73,7 @@
       {
         "id": "buff_aikido_onblock",
         "name": "Fluid Blocking",
-        "description": "After a smooth block, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 turn.",
+        "description": "After a smooth block, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -85,7 +85,7 @@
       {
         "id": "buff_aikido_ondodge",
         "name": "Fluid Dodging",
-        "description": "After a smooth dodge, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 turn.",
+        "description": "After a smooth dodge, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 second.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "buff_duration": 1,
@@ -132,7 +132,7 @@
       {
         "id": "buff_bojutsu_onmove",
         "name": "Rolling Staff",
-        "description": "As you move you begin to rapidly and fluidly roll your staff between your hands.\n\n+10% bash damage.\nEnables \"Rolling Strike\" technique.\nLasts 1 turn.",
+        "description": "As you move you begin to rapidly and fluidly roll your staff between your hands.\n\n+10% bash damage.\nEnables \"Rolling Strike\" technique.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "melee_allowed": true,
         "buff_duration": 1,
@@ -179,7 +179,7 @@
       {
         "id": "buff_barbaran_onblock",
         "name": "Reversing Destreza",
-        "description": "Blocking a key strike will turn the battle around.\n\n+5% move speed.\nLasts 3 turns.  Stacks 2 times.",
+        "description": "Blocking a key strike will turn the battle around.\n\n+5% move speed.\nLasts 3 seconds.  Stacks 2 times.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
         "max_stacks": 2,
@@ -191,7 +191,7 @@
       {
         "id": "buff_barbaran_onkill",
         "name": "Movimiento Natural",
-        "description": "Formal victory is attained, and your mind is cleared to focus on your next moves.\n\n+1 block attempt.\nLasts 5 turns.",
+        "description": "Formal victory is attained, and your mind is cleared to focus on your next moves.\n\n+1 block attempt.\nLasts 5 seconds.",
         "skill_requirements": [ { "name": "melee", "level": 5 } ],
         "melee_allowed": true,
         "buff_duration": 5,
@@ -202,7 +202,7 @@
       {
         "id": "buff_barbaran_onmove",
         "name": "Ricasso Step",
-        "description": "You switch or sturdy your grip mid-step to aid your blocking.\n\nBlocked damage reduced by 40% of Strength.\nLasts 3 turns.  Stacks 3 times.",
+        "description": "You switch or sturdy your grip mid-step to aid your blocking.\n\nBlocked damage reduced by 40% of Strength.\nLasts 3 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "melee_allowed": true,
         "max_stacks": 3,
@@ -214,7 +214,7 @@
       {
         "id": "buff_barbaran_onpause",
         "name": "Vulgar Preparation",
-        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 225% of Strength.\nLasts 1 turn.",
+        "description": "You prepare for the final crushing strike.\n\nAccuracy increased by 15% of Strength, armor penetration increased by 225% of Strength.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 4 } ],
         "melee_allowed": true,
         "flat_bonuses": [
@@ -251,7 +251,7 @@
       {
         "id": "buff_boxing_onmove",
         "name": "Footwork",
-        "description": "You make yourself harder to hit by bobbing and weaving as you move.\n\n+1.0 Dodging skill.\nLasts 1 turn.  Stacks 2 times.",
+        "description": "You make yourself harder to hit by bobbing and weaving as you move.\n\n+1.0 Dodging skill.\nLasts 1 second.  Stacks 2 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -263,7 +263,7 @@
       {
         "id": "buff_boxing_ondodge",
         "name": "Counter Chance",
-        "description": "You've seen your chance.  Now strike back!\n\n+25% damage.\nLasts 1 turn.",
+        "description": "You've seen your chance.  Now strike back!\n\n+25% damage.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -302,7 +302,7 @@
       {
         "id": "buff_brawling_onpause",
         "name": "Preparation to Hit",
-        "description": "You take a moment to prepare your stance before the enemy, allowing you to hit a little more accurately.\n\n+1 accuracy.  Lasts 2 turns.  Stacks 2 times",
+        "description": "You take a moment to prepare your stance before the enemy, allowing you to hit a little more accurately.\n\n+1 accuracy.  Lasts 2 seconds.  Stacks 2 times",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
@@ -345,7 +345,7 @@
       {
         "id": "buff_capoeira_onmiss",
         "name": "Capoeira Tempo",
-        "description": "Hit or miss, it's just part of the dance!  And the best part is about to start!\n\n+5% damage.\nLasts 1 turn.  Stacks 3 times.",
+        "description": "Hit or miss, it's just part of the dance!  And the best part is about to start!\n\n+5% damage.\nLasts 1 second.  Stacks 3 times.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "buff_duration": 1,
@@ -361,7 +361,7 @@
       {
         "id": "buff_capoeira_onmove",
         "name": "Capoeira Momentum",
-        "description": "You can feel the rhythm as you move.  You are harder to hit, and your kicks are even more amazing!\n\n+1.0 Dodging skill.\nEnables \"Spin Kick\" and \"Sweep Kick\" techniques.\nLasts 3 turns.",
+        "description": "You can feel the rhythm as you move.  You are harder to hit, and your kicks are even more amazing!\n\n+1.0 Dodging skill.\nEnables \"Spin Kick\" and \"Sweep Kick\" techniques.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "buff_duration": 3,
@@ -416,7 +416,7 @@
       {
         "id": "buff_crane_ondodge",
         "name": "Crane's Flight",
-        "description": "Much like the crane, you are quick to avoid danger and strike back.\n\n+1 accuracy, +1.0 Dodging skill.\nEnables \"Crane Kick\" and \"Crane Strike\" techniques.\nLasts 3 turns.",
+        "description": "Much like the crane, you are quick to avoid danger and strike back.\n\n+1 accuracy, +1.0 Dodging skill.\nEnables \"Crane Kick\" and \"Crane Strike\" techniques.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "buff_duration": 3,
@@ -460,7 +460,7 @@
       {
         "id": "buff_dragon_onblock",
         "name": "Dragon's Vortex",
-        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 turns.",
+        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "buff_duration": 3,
@@ -475,7 +475,7 @@
       {
         "id": "buff_dragon_ondodge",
         "name": "Dragon Wing",
-        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 turns.",
+        "description": "Life and combat are a circle.  An attack leads to a counter and to an attack once again.  Seek to complete this loop.\n\n+10% damage.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "buff_duration": 3,
@@ -490,7 +490,7 @@
       {
         "id": "buff_dragon_onpause",
         "name": "Dragon Power",
-        "description": "You take a moment to reflect on battles past and to come.  This insight will protect you from future harm.\n\n+2 blocking effectiveness, blocked damage reduced by 100% of Intelligence, +1.0 Dodging skill.\nLasts 2 turns.",
+        "description": "You take a moment to reflect on battles past and to come.  This insight will protect you from future harm.\n\n+2 blocking effectiveness, blocked damage reduced by 100% of Intelligence, +1.0 Dodging skill.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "buff_duration": 2,
@@ -527,7 +527,7 @@
       {
         "id": "buff_eskrima_oncrit",
         "name": "Eskrima Combination",
-        "description": "You can follow up a critical hit with a stronger attack if the opportunity presents itself.\n\n+15% damage.\nEnables \"Combination Strike\" technique.\nLasts 3 turns.  Stacks 3 times.",
+        "description": "You can follow up a critical hit with a stronger attack if the opportunity presents itself.\n\n+15% damage.\nEnables \"Combination Strike\" technique.\nLasts 3 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "melee", "level": 2 } ],
         "melee_allowed": true,
         "buff_duration": 3,
@@ -572,7 +572,7 @@
       {
         "id": "buff_fencing_onblock",
         "name": "Parry",
-        "description": "Your next strike will find its mark much easier after your parry.\n\n+1 accuracy.\nLasts 1 turn.",
+        "description": "Your next strike will find its mark much easier after your parry.\n\n+1 accuracy.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
         "buff_duration": 1,
@@ -583,7 +583,7 @@
       {
         "id": "buff_fencing_onmiss",
         "name": "Remise",
-        "description": "Your feint is the perfect setup for a devastating followup attack!\n\n+1 accuracy.\nEnables \"Compound Attack\" technique.\nLasts 1 turn.",
+        "description": "Your feint is the perfect setup for a devastating followup attack!\n\n+1 accuracy.\nEnables \"Compound Attack\" technique.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "melee_allowed": true,
         "buff_duration": 1,
@@ -594,7 +594,7 @@
       {
         "id": "buff_fencing_onpause",
         "name": "Counter Time",
-        "description": "You fake an attack and prepare yourself to unleash a Compound Attack.\n\n+2 blocking effectiveness.\nEnables \"Compound Attack\" technique.\nLasts 2 turns.",
+        "description": "You fake an attack and prepare yourself to unleash a Compound Attack.\n\n+2 blocking effectiveness.\nEnables \"Compound Attack\" technique.\nLasts 2 seconds.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 4 } ],
         "buff_duration": 2,
@@ -632,7 +632,7 @@
       {
         "id": "buff_medievalpole_onmove",
         "name": "Tactical Retreat",
-        "description": "You moved and nullified the effects of Stand Your Ground!\n\n-2 blocking effectiveness, -1 block attempt, +1.0 Dodging skill, blocked damage increased by 50% of Strength.\nPrevents \"High Round Strike\" technique.\nLasts 2 turns.",
+        "description": "You moved and nullified the effects of Stand Your Ground!\n\n-2 blocking effectiveness, -1 block attempt, +1.0 Dodging skill, blocked damage increased by 50% of Strength.\nPrevents \"High Round Strike\" technique.\nLasts 2 seconds.",
         "melee_allowed": true,
         "persists": true,
         "buff_duration": 2,
@@ -648,7 +648,7 @@
       {
         "id": "buff_medievalpole_onmiss",
         "name": "Tactical Feinting",
-        "description": "They fell for your feint!\n\nEnables \"Hook and Drag\" technique.\nLasts 1 turn.",
+        "description": "They fell for your feint!\n\nEnables \"Hook and Drag\" technique.\nLasts 1 second.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "buff_duration": 1
@@ -658,7 +658,7 @@
       {
         "id": "buff_medievalpole_onblock",
         "name": "Defense Break",
-        "description": "Each successful block reveals an opening in your opponent's guard.\n\n+1 accuracy.\nEnables \"Displace and Hook\" technique.\nLasts 1 turn.  Stacks 3 times.",
+        "description": "Each successful block reveals an opening in your opponent's guard.\n\n+1 accuracy.\nEnables \"Displace and Hook\" technique.\nLasts 1 second.  Stacks 3 times.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "buff_duration": 1,
@@ -698,7 +698,7 @@
       {
         "id": "buff_judo_ondodge",
         "name": "Perfect Position",
-        "description": "You've moved into a perfect position to counter attack!\n\n+30% damage.\nLasts 1 turn.",
+        "description": "You've moved into a perfect position to counter attack!\n\n+30% damage.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -736,7 +736,7 @@
       {
         "id": "buff_karate_onhit",
         "name": "Karate Kata",
-        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\nLasts 2 turns.",
+        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\nLasts 2 seconds.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -802,7 +802,7 @@
       {
         "id": "buff_krav_maga_onblock",
         "name": "Strike Vitals",
-        "description": "Like a fool, your opponent has left themselves wide open.\n\n+5% critical hit chance.\nLasts 1 turn.",
+        "description": "Like a fool, your opponent has left themselves wide open.\n\n+5% critical hit chance.\nLasts 1 second.",
         "melee_allowed": true,
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 4 } ],
@@ -851,7 +851,7 @@
       {
         "id": "buff_leopard_oncrit",
         "name": "Leopard's Agility",
-        "description": "Just like a cat, you are quick, agile, and hard to pin down.\n\n+1.0 Dodging skill.\nLasts 2 turns.",
+        "description": "Just like a cat, you are quick, agile, and hard to pin down.\n\n+1.0 Dodging skill.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "buff_duration": 2,
@@ -893,7 +893,7 @@
       {
         "id": "buff_swordsmanship_onblock",
         "name": "Mastercut",
-        "description": "You parry and return the attack with greater vigor!\n\n+10% damage, +10% move speed.\nLasts 1 turn.",
+        "description": "You parry and return the attack with greater vigor!\n\n+10% damage, +10% move speed.\nLasts 1 second.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 5 } ],
         "buff_duration": 1,
@@ -909,7 +909,7 @@
       {
         "id": "buff_swordsmanship_onhit",
         "name": "Conserve Momentum",
-        "description": "You maintain the momentum from your last strike to move more quickly.\n\n+20% move speed.\nLasts 2 turns.",
+        "description": "You maintain the momentum from your last strike to move more quickly.\n\n+20% move speed.\nLasts 2 seconds.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 2 } ],
         "buff_duration": 2,
@@ -920,7 +920,7 @@
       {
         "id": "buff_swordsmanship_onpause",
         "name": "Half Swording",
-        "description": "You grip the blade partway down for greater control.\n\nBlocked damage reduced by 50% of Strength, -1 accuracy.\nEnables \"Grab\" and \"Lethal Strike\" techniques.\nLasts 2 turns.",
+        "description": "You grip the blade partway down for greater control.\n\nBlocked damage reduced by 50% of Strength, -1 accuracy.\nEnables \"Grab\" and \"Lethal Strike\" techniques.\nLasts 2 seconds.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "melee_allowed": true,
         "buff_duration": 2,
@@ -953,7 +953,7 @@
       {
         "id": "buff_muay_thai_ongethit",
         "name": "Determination",
-        "description": "Taking a hit will not slow you down.  You will outlast your opponent and win this fight.\n\nBash damage increased by 25% of Strength, blocked damage reduced by 50% of Strength.\nLasts 5 turns.",
+        "description": "Taking a hit will not slow you down.  You will outlast your opponent and win this fight.\n\nBash damage increased by 25% of Strength, blocked damage reduced by 50% of Strength.\nLasts 5 seconds.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "unarmed_allowed": true,
         "buff_duration": 5,
@@ -1006,7 +1006,7 @@
       {
         "id": "buff_ninjutsu_onattack",
         "name": "Loss of Surprise",
-        "description": "Your intentions are known!  It will take you a few moments to sneak attack again.\n\nDisables \"Sneak Attack\" buff and \"Assassinate\" and \"Ninjutsu Takedown\" techniques.  Enables \"Swift Strike (crit)\" technique.\nLasts 3 turns, persists after switching styles.",
+        "description": "Your intentions are known!  It will take you a few moments to sneak attack again.\n\nDisables \"Sneak Attack\" buff and \"Assassinate\" and \"Ninjutsu Takedown\" techniques.  Enables \"Swift Strike (crit)\" technique.\nLasts 3 seconds, persists after switching styles.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "buff_duration": 3,
@@ -1017,7 +1017,7 @@
       {
         "id": "buff_ninjutsu_onmove",
         "name": "Momentum Shift",
-        "description": "Ninja are trained to be extremely agile and mobile.\n\n+1.0 Dodging skill, accuracy increased by 20% of Dexterity.\nLasts 1 turn.",
+        "description": "Ninja are trained to be extremely agile and mobile.\n\n+1.0 Dodging skill, accuracy increased by 20% of Dexterity.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -1029,7 +1029,7 @@
       {
         "id": "buff_ninjutsu_onkill",
         "name": "Escape Plan",
-        "description": "Your target has perished.  It is time to leave and plan your next attack.\n\n+2 dodge attempts, +10% movement speed.\nLasts 3 turns, persists after switching styles.",
+        "description": "Your target has perished.  It is time to leave and plan your next attack.\n\n+2 dodge attempts, +10% movement speed.\nLasts 3 seconds, persists after switching styles.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -1078,7 +1078,7 @@
       {
         "id": "buff_niten_onmove",
         "name": "Waning Moon",
-        "description": "Blackened like darkness,\nnightmares approach from all sides.\nFlee at any cost!\n\n-5.0 Dodging skill.\nLasts 1 turn.",
+        "description": "Blackened like darkness,\nnightmares approach from all sides.\nFlee at any cost!\n\n-5.0 Dodging skill.\nLasts 1 second.",
         "melee_allowed": true,
         "buff_duration": 1,
         "persists": true,
@@ -1089,7 +1089,7 @@
       {
         "id": "buff_niten_onattack",
         "name": "Falling Leaf",
-        "description": "A sharp sword cuts true.\nAlthough, all things fade with time.\nRestraint hones your skills.\n\n-1.0 Dodging skill, -5% damage.\nLasts 1 turn.  Stacks 5 times.",
+        "description": "A sharp sword cuts true.\nAlthough, all things fade with time.\nRestraint hones your skills.\n\n-1.0 Dodging skill, -5% damage.\nLasts 1 second.  Stacks 5 times.",
         "melee_allowed": true,
         "buff_duration": 1,
         "max_stacks": 5,
@@ -1106,7 +1106,7 @@
       {
         "id": "buff_niten_ondodge",
         "name": "Moonlight",
-        "description": "Luck be the light,\non a dark and cloudy night,\nas the moon shines down.\n\nEnables \"In-One Timing\" technique.\nLasts 1 turn.",
+        "description": "Luck be the light,\non a dark and cloudy night,\nas the moon shines down.\n\nEnables \"In-One Timing\" technique.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 5 } ],
         "melee_allowed": true,
         "buff_duration": 1
@@ -1116,7 +1116,7 @@
       {
         "id": "buff_niten_onpause",
         "name": "Stillness",
-        "description": "The eye of the storm,\na fleeting moment of peace,\ngone without a trace.\n\n+2 accuracy, Dodging skill increased by 50% of Perception.\nLasts 2 turns.",
+        "description": "The eye of the storm,\na fleeting moment of peace,\ngone without a trace.\n\n+2 accuracy, Dodging skill increased by 50% of Perception.\nLasts 2 seconds.",
         "melee_allowed": true,
         "buff_duration": 2,
         "flat_bonuses": [ { "stat": "hit", "scale": 2.0 }, { "stat": "dodge", "scaling-stat": "per", "scale": 0.5 } ]
@@ -1139,7 +1139,7 @@
       {
         "id": "buff_pankration_ondodge",
         "name": "Counter Chance",
-        "description": "The enemy has presented an opening in their defense.\n\n+10% damage.\nEnables \"Close Combat\" buff.\nLasts 1 turn.",
+        "description": "The enemy has presented an opening in their defense.\n\n+10% damage.\nEnables \"Close Combat\" buff.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -1154,7 +1154,7 @@
       {
         "id": "buff_pankration_oncrit",
         "name": "Close Combat",
-        "description": "You have your opponent right where you want them!\n\n+20% damage.\nLasts 1 turn.",
+        "description": "You have your opponent right where you want them!\n\n+20% damage.\nLasts 1 second.",
         "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
         "unarmed_allowed": true,
         "required_buffs_all": [ "buff_pankration_ondodge" ],
@@ -1197,7 +1197,7 @@
       {
         "id": "buff_silat_ondodge",
         "name": "Silat Appraisal",
-        "description": "Each time you dodge an attack, you learn a bit more about your opponent's fighting style.  This allows you to make more precise attacks against them.\n\nAccuracy increased by 15% of Dexterity.\nLasts 2 turns.  Stacks 3 times.",
+        "description": "Each time you dodge an attack, you learn a bit more about your opponent's fighting style.  This allows you to make more precise attacks against them.\n\nAccuracy increased by 15% of Dexterity.\nLasts 2 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
         "buff_duration": 2,
@@ -1209,7 +1209,7 @@
       {
         "id": "buff_silat_onmove",
         "name": "Silat Ambush",
-        "description": "You stay low as you move, making it harder for enemies to defend against you.\n\n+5% critical hit chance.\nLasts 1 turn.",
+        "description": "You stay low as you move, making it harder for enemies to defend against you.\n\n+5% critical hit chance.\nLasts 1 second.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
         "buff_duration": 1,
@@ -1246,7 +1246,7 @@
       {
         "id": "buff_snake_onhit",
         "name": "Snake Bite",
-        "description": "Each snake bite is more painful than the last.\n\nArmor penetration increased by 25% of Perception.\nLasts 2 turns.  Stacks 4 times.",
+        "description": "Each snake bite is more painful than the last.\n\nArmor penetration increased by 25% of Perception.\nLasts 2 seconds.  Stacks 4 times.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "buff_duration": 2,
@@ -1262,7 +1262,7 @@
       {
         "id": "buff_snake_oncrit",
         "name": "Snake Fang",
-        "description": "You hit a weakpoint!  Your next attack will be extra painful.\n\nArmor penetration increased by 100% of Perception.\nLasts 1 turn.",
+        "description": "You hit a weakpoint!  Your next attack will be extra painful.\n\nArmor penetration increased by 100% of Perception.\nLasts 1 second.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "buff_duration": 1,
@@ -1277,7 +1277,7 @@
       {
         "id": "buff_snake_onpause",
         "name": "Snake's Coil",
-        "description": "Every snake waits for the perfect moment to strike.  Aim as your opponents approach and attack their weak spots without mercy!\n\n+1 accuracy, +1 blocking effectiveness, +5% critical hit chance.\nLasts 4 turns.  Stacks 3 times.",
+        "description": "Every snake waits for the perfect moment to strike.  Aim as your opponents approach and attack their weak spots without mercy!\n\n+1 accuracy, +1 blocking effectiveness, +5% critical hit chance.\nLasts 4 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "buff_duration": 4,
@@ -1323,7 +1323,7 @@
       {
         "id": "buff_sojutsu_onmove",
         "name": "Superior Positioning",
-        "description": "You have given up your defenses for a moment to increase the damage of your attacks.\n\n+10% damage, -1 block attempt.\nLasts 1 turn.",
+        "description": "You have given up your defenses for a moment to increase the damage of your attacks.\n\n+10% damage, -1 block attempt.\nLasts 1 second.",
         "melee_allowed": true,
         "buff_duration": 1,
         "bonus_blocks": -1,
@@ -1403,7 +1403,7 @@
       {
         "id": "buff_tai_chi_onblock",
         "name": "Repulse the Monkey",
-        "description": "By perfectly positioning yourself and your opponent, you have become more accurate and can bypass your opponent's defenses.\n\nAccuracy increased by 20% of Perception, armor penetration increased by 50% of Perception.\nLasts 2 turns.",
+        "description": "By perfectly positioning yourself and your opponent, you have become more accurate and can bypass your opponent's defenses.\n\nAccuracy increased by 20% of Perception, armor penetration increased by 50% of Perception.\nLasts 2 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "buff_duration": 2,
@@ -1419,7 +1419,7 @@
       {
         "id": "buff_tai_chi_onpause",
         "name": "Cross Hands",
-        "description": "By taking a moment to prepare yourself, you are able to use your entire body fully for attacking and defending.\n\n+2 blocking effectiveness, blocked damage reduced by 50% of Perception.\nEnables \"Palm Strike\" and \"Double Palm Strike\" techniques.\nLasts 3 turns.",
+        "description": "By taking a moment to prepare yourself, you are able to use your entire body fully for attacking and defending.\n\n+2 blocking effectiveness, blocked damage reduced by 50% of Perception.\nEnables \"Palm Strike\" and \"Double Palm Strike\" techniques.\nLasts 3 seconds.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "buff_duration": 3,
@@ -1449,7 +1449,7 @@
       {
         "id": "buff_tiger_onhit",
         "name": "Tiger Fury",
-        "description": "You attack with an endless barrage of strikes.  The more you hit, the stronger you become.\n\n+1 accuracy, +5% damage.\nLasts 3 turns.  Stacks 3 times.",
+        "description": "You attack with an endless barrage of strikes.  The more you hit, the stronger you become.\n\n+1 accuracy, +5% damage.\nLasts 3 seconds.  Stacks 3 times.",
         "unarmed_allowed": true,
         "skill_requirements": [ { "name": "unarmed", "level": 2 } ],
         "buff_duration": 3,
@@ -1499,7 +1499,7 @@
       {
         "id": "buff_wingchun_onhit",
         "name": "Chain Punch",
-        "description": "Your punches are properly timed to give your opponent no rest from your strikes.\n\n+10% move speed.\nLasts 2 turns.  Stacks 3 times.",
+        "description": "Your punches are properly timed to give your opponent no rest from your strikes.\n\n+10% move speed.\nLasts 2 seconds.  Stacks 3 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "buff_duration": 2,
@@ -1511,7 +1511,7 @@
       {
         "id": "buff_wingchun_onpause",
         "name": "Biu Ji",
-        "description": "Through the perfect application of the Thrusting Fingers form, you can strike your opponents' weak points, force them away, and follow!\n\nAccuracy increased by 20% of Perception\nEnables \"Straight Punch (Knockback)\" and \"L-Hook (Knockback)\" techniques.\nLasts 3 turns.",
+        "description": "Through the perfect application of the Thrusting Fingers form, you can strike your opponents' weak points, force them away, and follow!\n\nAccuracy increased by 20% of Perception\nEnables \"Straight Punch (Knockback)\" and \"L-Hook (Knockback)\" techniques.\nLasts 3 seconds.",
         "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
         "unarmed_allowed": true,
         "buff_duration": 3,
@@ -1548,7 +1548,7 @@
       {
         "id": "buff_zuiquan_onmove",
         "name": "Drunken Stumble",
-        "description": "With a few quick steps, you can completely change your orientation and dodge attacks easier.\n\n+1.0 Dodging skill.\nLasts 1 turn.  Stacks 2 times.",
+        "description": "With a few quick steps, you can completely change your orientation and dodge attacks easier.\n\n+1.0 Dodging skill.\nLasts 1 second.  Stacks 2 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -1560,7 +1560,7 @@
       {
         "id": "buff_zuiquan_ondodge",
         "name": "Drunken Dodging",
-        "description": "Each time you dodge, your positional advantage increases against your opponents.  This makes your attacks hit harder with each successful dodge.\n\n+20% damage, accuracy increase by 20% of Intelligence.\nLasts 1 turn.  Stacks 3 times.",
+        "description": "Each time you dodge, your positional advantage increases against your opponents.  This makes your attacks hit harder with each successful dodge.\n\n+20% damage, accuracy increase by 20% of Intelligence.\nLasts 1 second.  Stacks 3 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "buff_duration": 1,
@@ -1611,7 +1611,7 @@
       {
         "id": "debug_crit_buff",
         "name": "Lightning Strike",
-        "description": "Lightning strikes twice.\n\nElectric damage equal to 100% of Perception.\nLasts 3 turns.  Stacks 2 times.",
+        "description": "Lightning strikes twice.\n\nElectric damage equal to 100% of Perception.\nLasts 3 seconds.  Stacks 2 times.",
         "unarmed_allowed": true,
         "buff_duration": 3,
         "max_stacks": 2,
@@ -1622,7 +1622,7 @@
       {
         "id": "debug_miss_buff",
         "name": "Getting Angry",
-        "description": "When I get my hands on you…\n\n+2 bash damage.\nLasts 2 turns.  Stacks 5 times.",
+        "description": "When I get my hands on you…\n\n+2 bash damage.\nLasts 2 seconds.  Stacks 5 times.",
         "unarmed_allowed": true,
         "buff_duration": 2,
         "max_stacks": 5,
@@ -1633,7 +1633,7 @@
       {
         "id": "debug_kill_buff",
         "name": "On Fire",
-        "description": "YOU ARE ON FIRE!\n\n+5 fire damage.\nLasts 5 turns.",
+        "description": "YOU ARE ON FIRE!\n\n+5 fire damage.\nLasts 5 seconds.",
         "unarmed_allowed": true,
         "buff_duration": 5,
         "flat_bonuses": [ { "stat": "damage", "type": "heat", "scale": 5.0 } ]
