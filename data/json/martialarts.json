@@ -73,7 +73,7 @@
       {
         "id": "buff_aikido_onblock",
         "name": "Fluid Blocking",
-        "description": "After a smooth block, you prepare to counter your foe.\n\n-10% move cost.\nLasts 1 turn.",
+        "description": "After a smooth block, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 turn.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -85,7 +85,7 @@
       {
         "id": "buff_aikido_ondodge",
         "name": "Fluid Dodging",
-        "description": "After a smooth dodge, you prepare to counter your foe.\n\n-10% move cost.\nLasts 1 turn.",
+        "description": "After a smooth dodge, you prepare to counter your foe.\n\n+10% move speed.\nLasts 1 turn.",
         "unarmed_allowed": true,
         "melee_allowed": true,
         "buff_duration": 1,
@@ -179,7 +179,7 @@
       {
         "id": "buff_barbaran_onblock",
         "name": "Reversing Destreza",
-        "description": "Blocking a key strike will turn the battle around.\n\n-5% move cost.\nLasts 3 turns.  Stacks 2 times.",
+        "description": "Blocking a key strike will turn the battle around.\n\n+5% move speed.\nLasts 3 turns.  Stacks 2 times.",
         "skill_requirements": [ { "name": "melee", "level": 1 } ],
         "melee_allowed": true,
         "max_stacks": 2,
@@ -736,7 +736,7 @@
       {
         "id": "buff_karate_onhit",
         "name": "Karate Kata",
-        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, -10% move cost.\nLasts 2 turns.",
+        "description": "Landing a hit allows you to perfectly position yourself for maximum defense against multiple opponents.\n\n+1 block attempt, +1 dodge attempt, blocked damage reduced by 50% of Strength, +10% move speed.\nLasts 2 turns.",
         "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
@@ -893,7 +893,7 @@
       {
         "id": "buff_swordsmanship_onblock",
         "name": "Mastercut",
-        "description": "You parry and return the attack with greater vigor!\n\n+10% damage, -10% move cost.\nLasts 1 turn.",
+        "description": "You parry and return the attack with greater vigor!\n\n+10% damage, +10% move speed.\nLasts 1 turn.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 5 } ],
         "buff_duration": 1,
@@ -909,7 +909,7 @@
       {
         "id": "buff_swordsmanship_onhit",
         "name": "Conserve Momentum",
-        "description": "You maintain the momentum from your last strike to move more quickly.\n\n-20% move cost.\nLasts 2 turns.",
+        "description": "You maintain the momentum from your last strike to move more quickly.\n\n+20% move speed.\nLasts 2 turns.",
         "melee_allowed": true,
         "skill_requirements": [ { "name": "melee", "level": 2 } ],
         "buff_duration": 2,
@@ -1029,14 +1029,14 @@
       {
         "id": "buff_ninjutsu_onkill",
         "name": "Escape Plan",
-        "description": "Your target has perished.  It is time to leave and plan your next attack.\n\n+2 dodge attempts, +10 movement speed.\nLasts 3 turns, persists after switching styles.",
+        "description": "Your target has perished.  It is time to leave and plan your next attack.\n\n+2 dodge attempts, +10% movement speed.\nLasts 3 turns, persists after switching styles.",
         "skill_requirements": [ { "name": "melee", "level": 3 } ],
         "unarmed_allowed": true,
         "melee_allowed": true,
         "buff_duration": 3,
         "persists": true,
         "bonus_dodges": 2,
-        "flat_bonuses": [ { "stat": "movecost", "scale": 10.0 } ]
+        "mult_bonuses": [ { "stat": "movecost", "scale": 0.9 } ]
       }
     ],
     "techniques": [
@@ -1499,7 +1499,7 @@
       {
         "id": "buff_wingchun_onhit",
         "name": "Chain Punch",
-        "description": "Your punches are properly timed to give your opponent no rest from your strikes.\n\n-10% move cost.\nLasts 2 turns.  Stacks 3 times.",
+        "description": "Your punches are properly timed to give your opponent no rest from your strikes.\n\n+10% move speed.\nLasts 2 turns.  Stacks 3 times.",
         "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
         "unarmed_allowed": true,
         "buff_duration": 2,
