@@ -51,7 +51,7 @@
     "melee_damage": { "bash": 2, "cut": 2 },
     "weapon_category": [ "SHIVS" ]
   },
-    {
+  {
     "type": "GENERIC",
     "id": "antler",
     "symbol": "%",

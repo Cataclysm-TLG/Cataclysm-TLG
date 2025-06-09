@@ -1603,10 +1603,7 @@
     "type": "technique",
     "id": "tec_judo_break",
     "name": "Grab Break",
-    "messages": [
-      "You were almost grabbed by %s, but you break their feeble grapple!",
-      "<npcname> was almost grabbed by %s, but they break its feeble grapple!"
-    ],
+    "messages": [ "You were almost grabbed by %s, but you break free!", "<npcname> was almost grabbed by %s, but they break free!" ],
     "skill_requirements": [ { "name": "unarmed", "level": 1 } ],
     "unarmed_allowed": true,
     "melee_allowed": true,
@@ -2067,7 +2064,12 @@
     },
     "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>identical or smaller</info> size incapable of flight",
     "down_dur": 1,
-    "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 }, { "stat": "damage", "type": "bash", "scale": 2.0 } ],
+    "mult_bonuses": [
+      { "stat": "movecost", "scale": 0.8 },
+      { "stat": "damage", "type": "bash", "scale": 2.0 },
+      { "stat": "damage", "type": "cut", "scale": 2.0 },
+      { "stat": "damage", "type": "stab", "scale": 2.0 }
+    ],
     "attack_vectors": [ "vector_punch" ]
   },
   {
@@ -2246,7 +2248,11 @@
       ]
     },
     "condition_desc": "* Only works on a <info>non-stunned mundane</info> target of <info>similar or smaller</info> size",
-    "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.35 } ],
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 1.35 },
+      { "stat": "damage", "type": "cut", "scale": 1.35 },
+      { "stat": "damage", "type": "stab", "scale": 1.35 }
+    ],
     "attack_vectors": [ "vector_knee" ]
   },
   {
@@ -2324,7 +2330,6 @@
     "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "weighting": 3,
-    "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 2.0 } ],
     "attack_vectors": [ "vector_grasp" ]
   },
   {
@@ -2348,7 +2353,6 @@
     "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "weighting": 3,
-    "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 2.0 } ],
     "attack_vectors": [ "vector_grasp" ]
   },
   {
@@ -2594,7 +2598,7 @@
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
     "unarmed_allowed": true,
     "condition": { "and": [ { "npc_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] },
-    "condition_desc": "* Only works on a <info>downed</info> target",
+    "condition_desc": "* Only works on a target you are <info>grabbing</info>.",
     "weighting": 3,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.5 } ],
     "attack_vectors": [ "vector_knee" ]
@@ -2607,7 +2611,7 @@
     "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
     "unarmed_allowed": true,
     "condition": { "and": [ { "npc_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] },
-    "condition_desc": "* Only works on a <info>downed</info> target",
+    "condition_desc": "* Only works on a target you are <info>grabbing</info>.",
     "crit_ok": true,
     "weighting": 3,
     "disarms": true,
@@ -2615,49 +2619,6 @@
     "flat_bonuses": [ { "stat": "arpen", "type": "bash", "scaling-stat": "str", "scale": 1.0 } ],
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.25 } ],
     "attack_vectors": [ "vector_arm_grapple" ]
-  },
-  {
-    "type": "technique",
-    "id": "tec_pankration_grabthrow",
-    "name": "Grab and Throw",
-    "messages": [ "You throw %s", "<npcname> throws %s!" ],
-    "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
-    "unarmed_allowed": true,
-    "weighting": 3,
-    "crit_tec": true,
-    "down_dur": 2,
-    "knockback_dist": 2,
-    "knockback_spread": 2,
-    "//condition": "Humanoids of similar size and no flying",
-    "condition": {
-      "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
-        { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
-        { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
-        {
-          "or": [
-            { "and": [ { "npc_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] },
-            {
-              "and": [
-                { "npc_has_flag": "GRAB_FILTER" },
-                { "u_has_flag": "GRAB" },
-                {
-                  "roll_contested": { "math": [ "u_val('strength')" ] },
-                  "die_size": 20,
-                  "difficulty": { "math": [ "n_val('grab_strength')" ] }
-                }
-              ]
-            },
-            { "not": { "and": [ { "npc_has_flag": "GRAB_FILTER" }, { "u_has_flag": "GRAB" } ] } }
-          ]
-        }
-      ]
-    },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
-    "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 2.0 } ],
-    "attack_vectors": [ "vector_grasp" ]
   },
   {
     "type": "technique",
@@ -2822,7 +2783,11 @@
       { "stat": "arpen", "type": "cut", "scaling-stat": "per", "scale": 1.0 },
       { "stat": "arpen", "type": "stab", "scaling-stat": "per", "scale": 1.0 }
     ],
-    "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.5 } ],
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 1.5 },
+      { "stat": "damage", "type": "cut", "scale": 1.5 },
+      { "stat": "damage", "type": "stab", "scale": 1.5 }
+    ],
     "attack_vectors": [ "vector_punch" ]
   },
   {
@@ -3287,7 +3252,7 @@
     "type": "technique",
     "id": "tec_tiger_wide",
     "name": "Tiger Rampage",
-    "messages": [ "You slash wildly at %s and those nearby", "<npcname> slashes wildly at %s and those nearby!" ],
+    "messages": [ "You slash wildly at %s and anything else nearby", "<npcname> slashes wildly at %s and anything else nearby!" ],
     "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
     "unarmed_allowed": true,
     "crit_tec": true,
