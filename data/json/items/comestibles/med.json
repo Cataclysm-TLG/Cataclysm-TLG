@@ -2127,6 +2127,6 @@
     "addiction_potential": 5,
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE" ],
-    "use_action": { "type": "heal", "bleed": 20, "move_cost": 3000, "effects": [ { "id": "pkill1_generic", "duration": 720 } ] }
+    "use_action": { "type": "heal", "bleed": 10, "move_cost": 3000, "effects": [ { "id": "pkill1_generic", "duration": 720 } ] }
   }
 ]
