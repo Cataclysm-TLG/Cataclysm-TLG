@@ -11061,7 +11061,7 @@ void Character::process_one_effect( effect &it, bool is_new )
                                          it.get_max_val( "HEART_RATE", reduced ), 0 ) );
         }
     }
-    // handle perspiration rate
+    // handle respiration rate
     val = get_effect( "RESPIRATION_RATE", reduced );
     if( val != 0 ) {
         if( is_new || it.activated( calendar::turn, "RESPIRATION_RATE", val, reduced, mod ) ) {
