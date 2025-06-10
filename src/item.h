@@ -2892,7 +2892,12 @@ class item : public visitable
         /** Puts the skill in context of the item */
         skill_id contextualize_skill( const skill_id &id ) const;
 
-        /* Remove a monster from this item and spawn it.
+        // returns itype to_hit, modified by stuff like gunmods
+        // TODO: tie faults here
+        int get_to_hit() const;
+
+        /**
+         * Remove a monster from this item and spawn it.
          * See @game::place_critter for meaning of @p target and @p pos.
          * @return Whether the monster has been spawned (may fail if no space available).
          */
