@@ -1373,25 +1373,19 @@
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "stunned" } },
-        {
-          "and": [
-            { "not": { "npc_has_species": "ZOMBIE" } },
-            { "not": { "npc_has_species": "NETHER" } },
-            { "not": { "npc_has_species": "NETHER_EMANATION" } },
-            { "not": { "npc_has_species": "SLIME" } },
-            { "not": { "npc_has_species": "FUNGUS" } },
-            { "not": { "npc_has_species": "PLANT" } },
-            { "not": { "npc_has_species": "ROBOT" } },
-            { "not": { "npc_has_species": "HALLUCINATION" } },
-            { "not": { "npc_has_species": "HORROR" } },
-            { "not": { "npc_has_species": "ABERRATION" } }
-          ]
-        }
+        { "not": { "npc_has_effect": "immobile" } }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned living</info> target of <info>similar or smaller</info> size",
-    "stun_dur": 1,
+    "tech_effects": [
+      {
+        "id": "staggered",
+        "chance": 80,
+        "duration": 200,
+        "on_damage": true,
+        "message": "%s is knocked off-balance!"
+      }
+    ],
+    "condition_desc": "* Only works on a <info>mobile</info> target of <info>similar or smaller</info> size",
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.66 },
       { "stat": "damage", "type": "bash", "scale": 1.2 },
@@ -1910,11 +1904,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "attack_vectors": [ "vector_grasp" ]
   },
@@ -2306,11 +2302,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "weighting": 3,
     "attack_vectors": [ "vector_grasp" ]
@@ -2329,11 +2327,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "weighting": 3,
     "attack_vectors": [ "vector_grasp" ]
@@ -2421,14 +2421,16 @@
     "type": "technique",
     "id": "niten_red_leaf",
     "name": "Red Leaf's Cut",
-    "messages": [ "Your strike knocks %s off balance", "<npcname>'s strike knocks %s off balance!" ],
+    "messages": [ "Your strike knocks %s sprawling", "<npcname>'s strike knocks %s sprawling!" ],
     "skill_requirements": [ { "name": "melee", "level": 3 } ],
     "melee_allowed": true,
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
@@ -2440,39 +2442,21 @@
     "type": "technique",
     "id": "niten_stone_cut",
     "name": "Fire and Stone's Cut",
-    "messages": [ "You stun %s with the force of your cut", "<npcname> stuns %s with the force of their cut!" ],
+    "messages": [ "You overwhelm %s with the force of your cut", "<npcname> overwhelms %s with the force of their cut!" ],
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "melee_allowed": true,
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "stunned" } },
-        {
-          "and": [
-            { "not": { "npc_has_species": "ZOMBIE" } },
-            { "not": { "npc_has_species": "NETHER" } },
-            { "not": { "npc_has_species": "NETHER_EMANATION" } },
-            { "not": { "npc_has_species": "MIGO" } },
-            { "not": { "npc_has_species": "SLIME" } },
-            { "not": { "npc_has_species": "FUNGUS" } },
-            { "not": { "npc_has_species": "PLANT" } },
-            { "not": { "npc_has_species": "ROBOT" } },
-            { "not": { "npc_has_species": "CYBORG" } },
-            { "not": { "npc_has_species": "HALLUCINATION" } },
-            { "not": { "npc_has_species": "HORROR" } },
-            { "not": { "npc_has_species": "ABERRATION" } },
-            { "not": { "npc_has_species": "KRAKEN" } }
-          ]
-        }
+        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned mundane</info> target of <info>similar or smaller</info> size",
-    "stun_dur": 1,
+    "tech_effects": [ { "id": "staggered", "chance": 100, "duration": 300 } ],
+    "condition_desc": "* Only works on a target of <info>similar or smaller</info> size",
     "mult_bonuses": [
-      { "stat": "damage", "type": "bash", "scale": 1.5 },
-      { "stat": "damage", "type": "cut", "scale": 1.5 },
-      { "stat": "damage", "type": "stab", "scale": 1.5 }
+      { "stat": "damage", "type": "bash", "scale": 1.33 },
+      { "stat": "damage", "type": "cut", "scale": 1.33 },
+      { "stat": "damage", "type": "stab", "scale": 1.33 }
     ],
     "attack_vectors": [ "vector_null" ]
   },
@@ -2480,40 +2464,13 @@
     "type": "technique",
     "id": "niten_timing_attack",
     "name": "In-One Timing",
-    "messages": [ "You strike at %s's weak spot", "<npcname> strikes at %s's weak spot!" ],
+    "messages": [ "You suddenly strike at %s", "<npcname> suddenly strikes at %s!" ],
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "melee_allowed": true,
     "required_buffs_all": [ "buff_niten_ondodge" ],
     "crit_ok": true,
-    "condition": {
-      "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "stunned" } },
-        {
-          "and": [
-            { "not": { "npc_has_species": "ZOMBIE" } },
-            { "not": { "npc_has_species": "NETHER" } },
-            { "not": { "npc_has_species": "NETHER_EMANATION" } },
-            { "not": { "npc_has_species": "MIGO" } },
-            { "not": { "npc_has_species": "SLIME" } },
-            { "not": { "npc_has_species": "FUNGUS" } },
-            { "not": { "npc_has_species": "PLANT" } },
-            { "not": { "npc_has_species": "ROBOT" } },
-            { "not": { "npc_has_species": "CYBORG" } },
-            { "not": { "npc_has_species": "HALLUCINATION" } },
-            { "not": { "npc_has_species": "HORROR" } },
-            { "not": { "npc_has_species": "ABERRATION" } },
-            { "not": { "npc_has_species": "KRAKEN" } }
-          ]
-        }
-      ]
-    },
-    "condition_desc": "* Only works on a <info>non-stunned mundane</info> target of <info>similar or smaller</info> size",
-    "stun_dur": 1,
     "mult_bonuses": [
-      { "stat": "movecost", "scale": 0.5 },
-      { "stat": "damage", "type": "bash", "scale": 1.5 },
-      { "stat": "damage", "type": "cut", "scale": 1.5 }
+      { "stat": "movecost", "scale": 0.5 }
     ],
     "attack_vectors": [ "vector_null" ]
   },
@@ -3074,7 +3031,8 @@
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "stunned" } },
+        { "not": { "npc_has_effect": "staggered" } },
+        { "not": { "npc_has_effect": "immobile" } },
         {
           "or": [
             {
@@ -3093,9 +3051,17 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned living</info> target of <info>similar or smaller</info> size",
+    "condition_desc": "* Only works on a <info>mobile</info> target of <info>similar or smaller</info> size",
+    "tech_effects": [
+      {
+        "id": "staggered",
+        "chance": 80,
+        "duration": 200,
+        "on_damage": true,
+        "message": "%s is knocked off-balance!"
+      }
+    ],
     "knockback_dist": 1,
-    "stun_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 2.0 },
       { "stat": "damage", "type": "cut", "scale": 2.0 },
@@ -3126,11 +3092,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.25 } ],
     "attack_vectors": [ "vector_grasp" ]
@@ -3163,31 +3131,6 @@
     "skill_requirements": [ { "name": "unarmed", "level": 4 } ],
     "unarmed_allowed": true,
     "crit_tec": true,
-    "condition": {
-      "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "stunned" } },
-        {
-          "and": [
-            { "not": { "npc_has_species": "ZOMBIE" } },
-            { "not": { "npc_has_species": "NETHER" } },
-            { "not": { "npc_has_species": "NETHER_EMANATION" } },
-            { "not": { "npc_has_species": "MIGO" } },
-            { "not": { "npc_has_species": "SLIME" } },
-            { "not": { "npc_has_species": "FUNGUS" } },
-            { "not": { "npc_has_species": "PLANT" } },
-            { "not": { "npc_has_species": "ROBOT" } },
-            { "not": { "npc_has_species": "CYBORG" } },
-            { "not": { "npc_has_species": "HALLUCINATION" } },
-            { "not": { "npc_has_species": "HORROR" } },
-            { "not": { "npc_has_species": "ABERRATION" } },
-            { "not": { "npc_has_species": "KRAKEN" } }
-          ]
-        }
-      ]
-    },
-    "condition_desc": "* Only works on a <info>non-stunned mundane</info> target of <info>similar or smaller</info> size",
-    "stun_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.25 },
       { "stat": "damage", "type": "cut", "scale": 1.25 },
@@ -3411,17 +3354,20 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
+        { "not": { "npc_has_flag": "immobile" } },
         { "not": { "u_has_effect": "downed" } },
         { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "tech_effects": [ { "id": "downed", "chance": 100, "duration": 100, "hit_self": true } ],
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
-    "down_dur": 2,
+    "tech_effects": [ { "id": "downed", "chance": 100, "duration": 100, "hit_self": true }, { "id": "staggered", "chance": 100, "duration": 300 } ],
+    "condition_desc": "* Only works on a <info>non-downed mobile</info> target of <info>similar or smaller</info> size incapable of flight",
+    "down_dur": 3,
     "messages": [ "You throw yourself down, dragging %s with you", "<npcname> falls, dragging %s down as well!" ],
-    "description": "Down 2 turns, min 3 melee",
+    "description": "Down self and enemy, stagger enemy for 3 seconds",
     "attack_vectors": [ "vector_arm_grapple" ]
   },
   {
