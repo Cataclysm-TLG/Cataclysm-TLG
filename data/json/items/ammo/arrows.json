@@ -58,6 +58,7 @@
     "longest_side": "76 cm",
     "ammo_type": "arrow",
     "damage": { "damage_type": "stab", "amount": 7, "armor_penetration": 2 },
+    "range": 3,
     "dispersion": 150,
     "melee_damage": { "stab": 3 }
   },
@@ -76,6 +77,7 @@
     "longest_side": "76 cm",
     "ammo_type": "arrow",
     "damage": { "damage_type": "stab", "amount": 9, "armor_penetration": 2 },
+    "range": 3,
     "dispersion": 150,
     "recovery_chance": 70,
     "melee_damage": { "stab": 4 }
@@ -95,6 +97,7 @@
     "longest_side": "76 cm",
     "ammo_type": "arrow",
     "damage": { "damage_type": "stab", "amount": 12, "armor_penetration": 6 },
+    "range": 3,
     "dispersion": 150,
     "melee_damage": { "stab": 5 }
   },
@@ -113,6 +116,7 @@
     "longest_side": "76 cm",
     "ammo_type": "arrow",
     "damage": { "damage_type": "stab", "amount": 13, "armor_penetration": 9 },
+    "range": 3,
     "dispersion": 150,
     "recovery_chance": 50,
     "melee_damage": { "stab": 6 }
@@ -132,6 +136,7 @@
     "longest_side": "76 cm",
     "ammo_type": "arrow",
     "damage": { "damage_type": "stab", "amount": 14, "armor_penetration": 3 },
+    "range": 3,
     "dispersion": 150,
     "recovery_chance": 80,
     "melee_damage": { "stab": 5 }
@@ -148,7 +153,7 @@
     "relative": { "dispersion": -75 },
     "price_postapoc": "40 cent",
     "damage": { "damage_type": "stab", "amount": 15, "armor_penetration": 3 },
-    "range": 3,
+    "range": 4,
     "recovery_chance": 65,
     "melee_damage": { "stab": 5 }
   },
@@ -164,7 +169,7 @@
     "relative": { "dispersion": -75 },
     "price_postapoc": "40 cent",
     "damage": { "damage_type": "stab", "amount": 13, "armor_penetration": 6 },
-    "range": 3,
+    "range": 4,
     "recovery_chance": 70,
     "melee_damage": { "stab": 5 }
   },
@@ -180,7 +185,7 @@
     "relative": { "dispersion": -50 },
     "price_postapoc": "40 cent",
     "damage": { "damage_type": "stab", "amount": 14, "armor_penetration": 3 },
-    "range": 3,
+    "range": 4,
     "recovery_chance": 95,
     "melee_damage": { "stab": 5 }
   },
