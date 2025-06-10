@@ -95,8 +95,8 @@
     "time": "1 h",
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 2 },
     "proficiencies": [ { "proficiency": "prof_bow_basic", "time_multiplier": 1.5, "skill_penalty": 0 } ],
-    "autolearn": [ [ "archery", 2 ] ],
-    "book_learn": [ [ "book_archery", 2 ], [ "manual_archery", 2 ] ],
+    "autolearn": [ [ "archery", 3 ] ],
+    "book_learn": [ [ "book_archery", 1 ], [ "manual_archery", 1 ] ],
     "tools": [
       [
         "selfbow",
