@@ -91,7 +91,7 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
     "attack_vectors": [ "vector_grasp" ]
@@ -283,11 +283,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "messages": [ "You sweep %s", "<npcname> sweeps %s!" ],
     "description": "Down 2 turns, min 3 melee",
@@ -363,7 +365,7 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out ot their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
     "attack_vectors": [ "vector_null" ]
@@ -437,7 +439,9 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
         {
           "or": [
@@ -457,7 +461,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Fluid Blocking</info>",
     "down_dur": 1,
     "knockback_dist": 1,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.7 } ],
@@ -478,7 +482,9 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
         {
           "or": [
@@ -498,7 +504,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Fluid Blocking</info>",
     "down_dur": 1,
     "knockback_dist": 1,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.7 } ],
@@ -521,16 +527,18 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out ot their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
-    "//condition": "Humanoids of similar size and no flying",
+    "//condition": "No flying",
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
         {
           "or": [
@@ -550,7 +558,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
     "down_dur": 1,
     "knockback_dist": 1,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.7 } ],
@@ -567,22 +575,16 @@
     "required_buffs_all": [ "buff_aikido_ondodge" ],
     "crit_ok": true,
     "disarms": true,
-    "tech_effects": [
-      {
-        "id": "disarmed",
-        "chance": 100,
-        "duration": 400,
-        "on_damage": true,
-        "message": "The weapon of %s has been forced out ot their hands!"
-      }
-    ],
+    "tech_effects": [ { "id": "disarmed", "chance": 100, "duration": 400, "on_damage": true, "message": "%s has lost their weapon!" } ],
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
         {
           "or": [
@@ -602,7 +604,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
     "down_dur": 1,
     "knockback_dist": 1,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.7 } ],
@@ -650,11 +652,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 } ],
     "attack_vectors": [ "vector_null" ]
@@ -718,15 +722,7 @@
     "melee_allowed": true,
     "crit_ok": true,
     "disarms": true,
-    "tech_effects": [
-      {
-        "id": "disarmed",
-        "chance": 100,
-        "duration": 400,
-        "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
-      }
-    ],
+    "tech_effects": [ { "id": "disarmed", "chance": 100, "duration": 400, "on_damage": true, "message": "%s has lost their weapon!" } ],
     "attack_vectors": [ "vector_null" ]
   },
   {
@@ -790,11 +786,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.5 } ],
     "attack_vectors": [ "vector_punch" ]
@@ -828,6 +826,7 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size') - 1", "<=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
+        { "not": { "npc_has_effect": "downed" } },
         {
           "or": [
             { "npc_bodytype": "human" },
@@ -840,7 +839,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned</info> target of <info>similar</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-stunned upright</info> target of <info>similar</info> size incapable of flight",
     "stun_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.4 } ],
     "attack_vectors": [ "vector_punch" ]
@@ -899,15 +898,7 @@
     "skill_requirements": [ { "name": "melee", "level": 6 } ],
     "melee_allowed": true,
     "disarms": true,
-    "tech_effects": [
-      {
-        "id": "disarmed",
-        "chance": 100,
-        "duration": 400,
-        "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
-      }
-    ],
+    "tech_effects": [ { "id": "disarmed", "chance": 100, "duration": 400, "on_damage": true, "message": "%s has lost their weapon!" } ],
     "attack_vectors": [ "vector_null" ]
   },
   {
@@ -918,15 +909,7 @@
     "skill_requirements": [ { "name": "unarmed", "level": 6 } ],
     "unarmed_allowed": true,
     "disarms": true,
-    "tech_effects": [
-      {
-        "id": "disarmed",
-        "chance": 100,
-        "duration": 400,
-        "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
-      }
-    ],
+    "tech_effects": [ { "id": "disarmed", "chance": 100, "duration": 400, "on_damage": true, "message": "%s has lost their weapon!" } ],
     "attack_vectors": [ "vector_grasp" ]
   },
   {
@@ -939,7 +922,7 @@
     "crit_tec": true,
     "knockback_dist": 1,
     "stun_dur": 1,
-    "//condition": "Similar size and no flying or blobs.",
+    "//condition": "Similar size and no flying.",
     "condition": {
       "and": [
         { "not": { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] } },
@@ -958,18 +941,26 @@
     "name": "Trip",
     "messages": [ "You trip %s", "<npcname> trips %s!" ],
     "skill_requirements": [ { "name": "unarmed", "level": 5 } ],
+    "weighting": -2,
     "unarmed_allowed": true,
     "condition": {
       "and": [
         { "not": { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] } },
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
-        { "or": [ { "npc_bodytype": "angel" }, { "npc_bodytype": "human" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "not": { "npc_has_effect": "downed" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar</info> size incapable of flight",
+    "mult_bonuses": [
+      { "stat": "damage", "type": "bash", "scale": 0.5 },
+      { "stat": "damage", "type": "cut", "scale": 0.5 },
+      { "stat": "damage", "type": "stab", "scale": 0.5 }
+    ],
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar</info> size incapable of flight",
     "down_dur": 1,
     "attack_vectors": [ "vector_shin" ]
   },
@@ -1024,18 +1015,20 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
-        { "or": [ { "npc_bodytype": "angel" }, { "npc_bodytype": "human" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "not": { "npc_has_effect": "downed" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.75 },
-      { "stat": "damage", "type": "bash", "scale": 1.2 },
-      { "stat": "damage", "type": "cut", "scale": 1.2 },
-      { "stat": "damage", "type": "stab", "scale": 1.2 }
+      { "stat": "damage", "type": "bash", "scale": 0.66 },
+      { "stat": "damage", "type": "cut", "scale": 0.66 },
+      { "stat": "damage", "type": "stab", "scale": 0.66 }
     ],
     "attack_vectors": [ "vector_foot_toes" ]
   },
@@ -1082,11 +1075,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.25 },
@@ -1171,12 +1166,14 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
-        { "or": [ { "npc_bodytype": "angel" }, { "npc_bodytype": "human" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "not": { "npc_has_effect": "downed" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.4 },
@@ -1296,11 +1293,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "attack_vectors": [ "vector_null" ]
   },
@@ -1370,21 +1369,8 @@
     "crit_ok": true,
     "weighting": 2,
     "//condition": "Living creatures of similar size",
-    "condition": {
-      "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "not": { "npc_has_effect": "immobile" } }
-      ]
-    },
-    "tech_effects": [
-      {
-        "id": "staggered",
-        "chance": 80,
-        "duration": 200,
-        "on_damage": true,
-        "message": "%s is knocked off-balance!"
-      }
-    ],
+    "condition": { "and": [ { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] }, { "not": { "npc_has_effect": "immobile" } } ] },
+    "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "condition_desc": "* Only works on a <info>mobile</info> target of <info>similar or smaller</info> size",
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.66 },
@@ -1409,11 +1395,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.5 },
@@ -1476,11 +1464,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 0.5 },
@@ -1523,11 +1513,13 @@
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
-        { "npc_bodytype": "human" },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>identical</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>identical</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.25 } ],
     "attack_vectors": [ "vector_grasp" ]
@@ -1547,7 +1539,7 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
     "condition": {
@@ -1557,11 +1549,13 @@
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
-        { "npc_bodytype": "human" },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>identical</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>identical</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.25 } ],
     "attack_vectors": [ "vector_grasp" ]
@@ -1583,11 +1577,13 @@
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
-        { "npc_bodytype": "human" },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>identical</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>identical</info> size incapable of flight",
     "down_dur": 1,
     "stun_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.5 } ],
@@ -1696,11 +1692,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.1 },
@@ -1783,6 +1781,7 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size') - 1", "<=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
+        { "not": { "npc_has_effect": "downed" } },
         {
           "or": [
             { "npc_bodytype": "human" },
@@ -1795,7 +1794,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned</info> target of <info>similar</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-stunned upright</info> target of <info>similar</info> size incapable of flight",
     "stun_dur": 1,
     "mult_bonuses": [ { "stat": "damage", "type": "bash", "scale": 1.4 } ],
     "attack_vectors": [ "vector_punch" ]
@@ -1848,7 +1847,7 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
     "attack_vectors": [ "vector_null", "vector_grasp" ]
@@ -2037,11 +2036,13 @@
       "and": [
         { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>identical or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>identical or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.8 },
@@ -2061,21 +2062,23 @@
     "required_buffs_all": [ "buff_swordsmanship_onpause" ],
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 0.5 },
-      { "stat": "damage", "type": "cut", "scale": 0.5 },
-      { "stat": "damage", "type": "stab", "scale": 0.33 }
+      { "stat": "damage", "type": "cut", "scale": 0 },
+      { "stat": "damage", "type": "stab", "scale": 0 }
     ],
     "crit_tec": true,
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
-    "attack_vectors": [ "vector_null" ]
+    "attack_vectors": [ "vector_arm_grapple" ]
   },
   {
     "type": "technique",
@@ -2354,11 +2357,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "weighting": 2,
     "attack_vectors": [ "vector_null" ]
@@ -2434,7 +2439,7 @@
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "attack_vectors": [ "vector_null" ]
   },
@@ -2446,11 +2451,7 @@
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "melee_allowed": true,
     "crit_tec": true,
-    "condition": {
-      "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] }
-      ]
-    },
+    "condition": { "and": [ { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] } ] },
     "tech_effects": [ { "id": "staggered", "chance": 100, "duration": 300 } ],
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size",
     "mult_bonuses": [
@@ -2469,9 +2470,7 @@
     "melee_allowed": true,
     "required_buffs_all": [ "buff_niten_ondodge" ],
     "crit_ok": true,
-    "mult_bonuses": [
-      { "stat": "movecost", "scale": 0.5 }
-    ],
+    "mult_bonuses": [ { "stat": "movecost", "scale": 0.5 } ],
     "attack_vectors": [ "vector_null" ]
   },
   {
@@ -2512,11 +2511,13 @@
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "attack_vectors": [ "vector_foot_sole" ]
   },
@@ -2572,11 +2573,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
     "attack_vectors": [ "vector_null" ]
   },
@@ -2753,15 +2756,18 @@
     "skill_requirements": [ { "name": "melee", "level": 3 } ],
     "melee_allowed": true,
     "reach_ok": true,
+    "weighting": -2,
     "condition": {
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 0.5 },
@@ -2826,7 +2832,9 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] },
         {
           "or": [
@@ -2846,7 +2854,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets <info>grabbing you</info>",
     "knockback_dist": 2,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 1.5 },
@@ -2901,11 +2909,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "attack_vectors": [ "vector_foot_toes", "vector_shin" ]
   },
@@ -2948,7 +2958,7 @@
         "chance": 100,
         "duration": 400,
         "on_damage": true,
-        "message": "The weapon of %s has been forced out of their hands!"
+        "message": "%s has lost control of their weapon!"
       }
     ],
     "attack_vectors": [ "vector_grasp" ]
@@ -2982,7 +2992,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, may fail on enemies grabbing you",
+    "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, requires <info>Cross Hands</info>",
     "knockback_dist": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.5 },
@@ -3004,11 +3014,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Repulse the Monkey</info>",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "movecost", "scale": 0.75 },
@@ -3052,15 +3064,7 @@
       ]
     },
     "condition_desc": "* Only works on a <info>mobile</info> target of <info>similar or smaller</info> size",
-    "tech_effects": [
-      {
-        "id": "staggered",
-        "chance": 80,
-        "duration": 200,
-        "on_damage": true,
-        "message": "%s is knocked off-balance!"
-      }
-    ],
+    "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "knockback_dist": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 2.0 },
@@ -3198,7 +3202,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, may fail on enemies grabbing you",
+    "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, requires <info>Biu Ji</info>",
     "knockback_dist": 1,
     "knockback_follow": true,
     "mult_bonuses": [
@@ -3220,11 +3224,13 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 1.2 },
@@ -3263,11 +3269,13 @@
           ]
         },
         { "not": { "npc_has_effect": "downed" } },
-        { "or": [ { "npc_bodytype": "human" }, { "npc_bodytype": "angel" } ] },
+        { "not": { "npc_bodytype": "blob" } },
+        { "not": { "npc_bodytype": "fish" } },
+        { "not": { "npc_bodytype": "snake" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-downed humanoid</info> target of <info>similar or smaller</info> size incapable of flight, may fail on targets grabbing you",
+    "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight, requires <info>Biu Ji</info>",
     "down_dur": 1,
     "knockback_dist": 1,
     "knockback_follow": true,
@@ -3363,7 +3371,10 @@
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
       ]
     },
-    "tech_effects": [ { "id": "downed", "chance": 100, "duration": 100, "hit_self": true }, { "id": "staggered", "chance": 100, "duration": 300 } ],
+    "tech_effects": [
+      { "id": "downed", "chance": 100, "duration": 100, "hit_self": true },
+      { "id": "staggered", "chance": 100, "duration": 300 }
+    ],
     "condition_desc": "* Only works on a <info>non-downed mobile</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 3,
     "messages": [ "You throw yourself down, dragging %s with you", "<npcname> falls, dragging %s down as well!" ],
