@@ -20,7 +20,7 @@
     "charges_per_use": 1,
     "etransfer_rate": "30 MB",
     "e_port": "laptop",
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "CAN_USE_IN_DARK" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -32,6 +32,17 @@
     "charges_per_use": 1,
     "etransfer_rate": "30 MB",
     "e_port": "phone",
+    "flags": [
+      "WATCH",
+      "WATER_BREAK",
+      "ELECTRONIC",
+      "ALARMCLOCK",
+      "CALORIES_INTAKE",
+      "CAN_USE_IN_DARK",
+      "USE_UPS",
+      "NO_UNLOAD",
+      "NO_RELOAD"
+    ],
     "e_ports_banned": [ "USB-A" ]
   },
   {
@@ -845,7 +856,6 @@
       },
       { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" }
     ],
-    "flags": [ "WATCH", "ALARMCLOCK", "USE_UPS", "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "CALORIES_INTAKE", "ELECTRONIC" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 120 } },
       {
@@ -924,7 +934,6 @@
         "effect_on_conditions": [ "EOC_SMARTPHONE_RECOVERY" ]
       }
     ],
-    "flags": [ "WATCH", "USE_UPS", "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "ELECTRONIC" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 56 } },
       {

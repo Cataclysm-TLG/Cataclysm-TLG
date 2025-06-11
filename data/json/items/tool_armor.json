@@ -1162,7 +1162,8 @@
       "THERMOMETER",
       "WATER_BREAK",
       "PADDED",
-      "ELECTRONIC"
+      "ELECTRONIC",
+      "CAN_USE_IN_DARK"
     ]
   },
   {
