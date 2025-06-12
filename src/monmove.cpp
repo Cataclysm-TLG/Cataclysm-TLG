@@ -66,6 +66,7 @@ static const efftype_id effect_dragging( "dragging" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_immobilization( "immobilization" );
+static const efftype_id effect_in_pit( "in_pit" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_operating( "operating" );
@@ -79,6 +80,7 @@ static const field_type_str_id field_fd_last_known( "fd_last_known" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_pressurized_tank( "pressurized_tank" );
 
@@ -209,10 +211,12 @@ bool monster::know_danger_at( const tripoint &p ) const
                 if( !here.has_floor_or_water( p ) && !flies() ) {
                     return false;
                 }
+                // Don't enter open pits unless tiny or flying, unless we're alread in one.
+                const trap trap_there = here.tr_at( p );
 
-                // Don't enter open pits ever unless tiny, can fly or climb well
-                if( !( type->size == creature_size::tiny || can_climb() ) &&
-                    ( target == ter_t_pit || target == ter_t_pit_spiked || target == ter_t_pit_glass ) ) {
+                if( ( ( type->size != creature_size::tiny ) && !flies() && !has_effect( effect_in_pit ) ) &&
+                    ( target == ter_t_pit || target == ter_t_pit_spiked || target == ter_t_pit_glass ||
+                      trap_there.has_flag( json_flag_PIT ) ) ) {
                     return false;
                 }
             }
@@ -912,12 +916,6 @@ void monster::move()
         return;
     }
 
-    // TODO: Move this to attack_at/move_to/etc. functions
-    bool attacking = false;
-    if( !move_effects( attacking ) ) {
-        moves = 0;
-        return;
-    }
     if( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ) {
         moves = 0;
         return;
@@ -1735,7 +1733,10 @@ bool monster::attack_at( const tripoint &p )
     if( has_flag( mon_flag_PACIFIST ) ) {
         return false;
     }
-
+    if( !move_effects( true, p ) ) {
+        moves = 0;
+        return false;
+    }
     Character &player_character = get_player_character();
     const bool sees_player = sees( player_character );
     // Targeting player location
@@ -1809,6 +1810,10 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
 {
     if( has_effect( effect_airborne ) ) {
         force = true;
+    }
+    if( !move_effects( false, p ) ) {
+        moves = 0;
+        return false;
     }
     const bool on_ground = !digging() && !flies();
 

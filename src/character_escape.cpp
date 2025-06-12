@@ -25,6 +25,7 @@
 #include "pimpl.h"
 #include "point.h"
 #include "rng.h"
+#include "trap.h"
 #include "translation.h"
 #include "translations.h"
 #include "type_id.h"
@@ -43,11 +44,13 @@ static const efftype_id effect_webbed( "webbed" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_NO_GRAB( "NO_GRAB" );
+static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_rope_6( "rope_6" );
 static const itype_id itype_snare_trigger( "snare_trigger" );
 
 static const json_character_flag json_flag_DOWNED_RECOVERY( "DOWNED_RECOVERY" );
+static const json_character_flag json_flag_WALL_CLING( "WALL_CLING" );
 
 static const limb_score_id limb_score_balance( "balance" );
 static const limb_score_id limb_score_grip( "grip" );
@@ -55,6 +58,10 @@ static const limb_score_id limb_score_manip( "manip" );
 
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_unarmed( "unarmed" );
+
+static const ter_str_id ter_t_pit( "t_pit" );
+static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
+static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
@@ -420,7 +427,7 @@ void Character::try_remove_impeding_effect()
     }
 }
 
-bool Character::move_effects( bool attacking )
+bool Character::move_effects( bool attacking, tripoint dest_loc )
 {
     if( has_effect( effect_downed ) && !attacking ) {
         try_remove_downed();
@@ -457,14 +464,25 @@ bool Character::move_effects( bool attacking )
     // Currently we only have one thing that forces movement if you succeed, should we get more
     // than this will need to be reworked to only have success effects if /all/ checks succeed
     if( has_effect( effect_in_pit ) ) {
-        /** @EFFECT_DEX increases chance to escape pit, slightly */
-        if( !can_escape_trap( 40 - dex_cur / 2 ) ) {
-            add_msg_if_player( m_bad, _( "You try to escape the pit, but slip back in." ) );
-            return false;
-        } else {
-            add_msg_player_or_npc( m_good, _( "You escape the pit!" ),
-                                   _( "<npcname> escapes the pit!" ) );
-            remove_effect( effect_in_pit );
+        map &here = get_map();
+        trap trap_here = here.tr_at( pos() );
+        trap trap_there = here.tr_at( dest_loc );
+        const ter_id target_ter = here.ter( dest_loc );
+
+        // Adjacent pits are contiguous. We're not climbing out, we're just walking around at the bottom.
+        if( has_effect( effect_in_pit ) && !trap_there.has_flag( json_flag_PIT ) &&
+            target_ter != ter_t_pit && target_ter != ter_t_pit_spiked && target_ter != ter_t_pit_glass ) {
+            /** @EFFECT_DEX increases chance to escape pit, slightly.
+             * And of course if we can spider climb, we can just casually leave.
+             */
+            if( !has_flag( json_flag_WALL_CLING ) && !can_escape_trap( 40 - dex_cur / 2 ) ) {
+                add_msg_if_player( m_bad, _( "You try to escape the pit, but slip back in." ) );
+                return false;
+            } else {
+                add_msg_player_or_npc( m_good, _( "You escape the pit!" ),
+                                       _( "<npcname> escapes the pit!" ) );
+                remove_effect( effect_in_pit );
+            }
         }
     }
     // Attempt to break grabs, only check for orphan grabs on attack

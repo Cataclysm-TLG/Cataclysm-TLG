@@ -1049,7 +1049,7 @@ class Character : public Creature, public visitable
 
         /** Processes effects which may prevent the Character from moving (bear traps, crushed, etc.).
          *  Returns false if movement is stopped. */
-        bool move_effects( bool attacking ) override;
+        bool move_effects( bool attacking, tripoint dest_loc ) override;
 
         void wait_effects( bool attacking = false );
 

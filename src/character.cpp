@@ -290,6 +290,8 @@ static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
 static const field_type_str_id field_fd_clairvoyant( "fd_clairvoyant" );
 
+static const flag_id json_flag_PIT( "PIT" );
+
 static const itype_id fuel_type_animal( "animal" );
 static const itype_id fuel_type_muscle( "muscle" );
 static const itype_id itype_UPS( "UPS" );
@@ -408,6 +410,10 @@ static const skill_id skill_throw( "throw" );
 static const species_id species_HUMAN( "HUMAN" );
 
 static const start_location_id start_location_sloc_shelter_a( "sloc_shelter_a" );
+
+static const ter_str_id ter_t_pit( "t_pit" );
+static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
+static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 static const trait_id trait_ADRENALINE( "ADRENALINE" );
 static const trait_id trait_ANTENNAE( "ANTENNAE" );
@@ -7674,9 +7680,14 @@ tripoint Character::adjacent_tile() const
             continue;
         }
         const trap &curtrap = here.tr_at( p );
+        const ter_id target_ter = here.ter( p );
         // If we don't known a trap here, the spot "appears" to be good, so consider it.
-        // Same if we know a benign trap (as it's not dangerous).
-        if( curtrap.can_see( p, *this ) && !curtrap.is_benign() ) {
+        // Same if we know a benign trap (as it's not dangerous), or we're in a pit and it's a pit.
+        if( !curtrap.can_see( p, *this ) ||
+            curtrap.is_benign() ||
+            ( ( target_ter == ter_t_pit || target_ter == ter_t_pit_spiked || target_ter == ter_t_pit_glass ||
+                curtrap.has_flag( json_flag_PIT ) ) && has_effect( effect_in_pit ) ) ) {
+        } else {
             continue;
         }
         // Only consider tile if unoccupied, passable and has no traps

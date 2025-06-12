@@ -922,6 +922,9 @@ bool trapfunc::pit( const tripoint &p, Creature *c, item * )
     if( c == nullptr ) {
         return false;
     }
+    if( c->has_effect( effect_in_pit ) ) {
+        return false;
+    }
     const float eff = pit_effectiveness( p );
     c->add_msg_player_or_npc( m_bad, _( "You fall in a pit!" ), _( "<npcname> falls in a pit!" ) );
     c->add_effect( effect_in_pit, 1_turns, true );
@@ -958,6 +961,9 @@ bool trapfunc::pit( const tripoint &p, Creature *c, item * )
             add_msg( m_bad, _( "Your %s falls into a pit!" ), z->get_name() );
             get_player_character().forced_dismount();
         }
+        if( z->get_size() == creature_size::tiny ) {
+            return false;
+        }
         z->deal_damage( nullptr, bodypart_id( "leg_l" ), damage_instance( damage_bash, eff * rng( 10,
                         20 ) ) );
         z->deal_damage( nullptr, bodypart_id( "leg_r" ), damage_instance( damage_bash, eff * rng( 10,
@@ -970,6 +976,9 @@ bool trapfunc::pit( const tripoint &p, Creature *c, item * )
 bool trapfunc::pit_spikes( const tripoint &p, Creature *c, item * )
 {
     if( c == nullptr ) {
+        return false;
+    }
+    if( c->has_effect( effect_in_pit ) ) {
         return false;
     }
     c->add_msg_player_or_npc( m_bad, _( "You fall in a spiked pit!" ),
@@ -1035,6 +1044,9 @@ bool trapfunc::pit_spikes( const tripoint &p, Creature *c, item * )
             add_msg( m_bad, _( "Your %s falls into a pit!" ), z->get_name() );
             player_character.forced_dismount();
         }
+        if( z->get_size() == creature_size::tiny ) {
+            return false;
+        }
         z->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_cut, rng( 20, 50 ) ) );
     }
     c->check_dead_state();
@@ -1055,6 +1067,9 @@ bool trapfunc::pit_spikes( const tripoint &p, Creature *c, item * )
 bool trapfunc::pit_glass( const tripoint &p, Creature *c, item * )
 {
     if( c == nullptr ) {
+        return false;
+    }
+    if( c->has_effect( effect_in_pit ) ) {
         return false;
     }
     c->add_msg_player_or_npc( m_bad, _( "You fall in a pit filled with glass shards!" ),
@@ -1123,6 +1138,9 @@ bool trapfunc::pit_glass( const tripoint &p, Creature *c, item * )
         if( z->has_effect( effect_ridden ) ) {
             add_msg( m_bad, _( "Your %s falls into a pit!" ), z->get_name() );
             player_character.forced_dismount();
+        }
+        if( z->get_size() == creature_size::tiny ) {
+            return false;
         }
         z->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_cut, rng( 20,
                         50 ) ) );

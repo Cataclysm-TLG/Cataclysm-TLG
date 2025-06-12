@@ -144,6 +144,7 @@ static const emit_id emit_emit_shock_cloud_big( "emit_shock_cloud_big" );
 static const flag_id json_flag_DISABLE_FLIGHT( "DISABLE_FLIGHT" );
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_milk( "milk" );
 static const itype_id itype_milk_raw( "milk_raw" );
@@ -187,6 +188,9 @@ static const species_id species_nether_player_hate( "nether_player_hate" );
 
 static const ter_str_id ter_t_gas_pump( "t_gas_pump" );
 static const ter_str_id ter_t_gas_pump_a( "t_gas_pump_a" );
+static const ter_str_id ter_t_pit( "t_pit" );
+static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
+static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 static const trait_id trait_ANIMALDISCORD( "ANIMALDISCORD" );
 static const trait_id trait_ANIMALDISCORD2( "ANIMALDISCORD2" );
@@ -2257,7 +2261,7 @@ bool monster::movement_impaired()
     return effect_cache[MOVEMENT_IMPAIRED];
 }
 
-bool monster::move_effects( bool )
+bool monster::move_effects( bool, tripoint dest_loc )
 {
     // This function is relatively expensive, we want that cached
     // IMPORTANT: If adding any new effects here, make SURE to
@@ -2383,13 +2387,27 @@ bool monster::move_effects( bool )
     // If we ever get more effects that force movement on success this will need to be reworked to
     // only trigger success effects if /all/ rolls succeed
     if( has_effect( effect_in_pit ) ) {
-        if( rng( 0, 40 ) > type->melee_dice * type->melee_sides ) {
-            return false;
-        } else {
-            if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
-                add_msg( _( "The %s escapes the pit!" ), name() );
+        map &here = get_map();
+        const ter_id target_ter = here.ter( dest_loc );
+        trap trap_here = here.tr_at( pos() );
+        trap trap_there = here.tr_at( dest_loc );
+
+        // Adjacent pits are contiguous, like a trench.
+        if( !trap_there.has_flag( json_flag_PIT ) && target_ter != ter_t_pit &&
+            target_ter != ter_t_pit_spiked && target_ter != ter_t_pit_glass ) {
+            int climb_factor = 0;
+            if( has_flag( mon_flag_CLIMBS ) ) {
+                climb_factor = 6;
             }
-            remove_effect( effect_in_pit );
+            climb_factor += std::max( 0, ( ( type->speed - 90 ) / 10 ) );
+            if( rng( 0, 40 ) > type->melee_dice * type->melee_sides + climb_factor ) {
+                return false;
+            } else {
+                if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
+                    add_msg( _( "The %s escapes the pit!" ), name() );
+                }
+                remove_effect( effect_in_pit );
+            }
         }
     }
     if( has_effect_with_flag( json_flag_GRAB ) ) {

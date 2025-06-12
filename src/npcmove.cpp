@@ -2947,7 +2947,7 @@ void npc::move_to( const tripoint &pt, bool no_bashing, std::set<tripoint> *nomo
     if( creatures.creature_at<monster>( p ) ) {
         attacking = true;
     }
-    if( !move_effects( attacking ) ) {
+    if( !move_effects( attacking, pt ) ) {
         mod_moves( -get_speed() );
         return;
     }

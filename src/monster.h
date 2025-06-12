@@ -394,7 +394,7 @@ class monster : public Creature
         bool movement_impaired();
         /** Processes effects which may prevent the monster from moving (bear traps, crushed, etc.).
          *  Returns false if movement is stopped. */
-        bool move_effects( bool attacking ) override;
+        bool move_effects( bool attacking, tripoint dest_loc ) override;
 
         /** Returns a std::string containing effects for descriptions */
         std::string get_effect_status() const;
