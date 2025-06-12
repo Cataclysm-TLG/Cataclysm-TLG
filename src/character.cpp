@@ -3250,19 +3250,21 @@ void Character::conduct_blood_analysis()
     }
 }
 
+
 int Character::get_standard_stamina_cost( const item *thrown_item ) const
 {
     // Previously calculated as 2_gram * std::max( 1, str_cur )
-    // using 16_gram normalizes it to 8 str. Same effort expenditure
-    // for each strike, regardless of weight. This is compensated
-    // for by the additional move cost as weapon weight increases
+    // using 20_gram normalizes it to 10 str. Heavier weapons
+    // get a discount on stamina burned/second.
     // If the item is thrown, override with the thrown item instead.
-
     item current_weapon = used_weapon() ? *used_weapon() : null_item_reference();
 
-    const int weight_cost = ( thrown_item == nullptr ) ? current_weapon.weight() /
-                            16_gram : thrown_item->weight() / 16_gram;
-    return ( weight_cost + 50 ) * -1 * get_modifier( character_modifier_melee_stamina_cost_mod );
+     const double normalized_weight = static_cast<double>( thrown_item == nullptr ) ? current_weapon.weight() /
+                             20_gram : thrown_item->weight() / 20_gram;
+
+    // Logarithmic stamina scaling
+    const double weight_cost = std::log( normalized_weight + 1.0 ) * 30.0;
+    return static_cast<int>( weight_cost * -1.0 * get_modifier( character_modifier_melee_stamina_cost_mod ) );
 }
 
 std::vector<item_location> Character::nearby( const

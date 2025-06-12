@@ -975,7 +975,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     }
 
     burn_energy_arms( std::min( -50, total_stam + deft_bonus ) );
-    add_msg_debug( debugmode::DF_MELEE, "Stamina burn base/total (capped at -50): %d/%d", base_stam,
+    add_msg_debug( debugmode::DF_MELEE, "Stamina burn base/total (always burn at least 50): %d/%d", base_stam,
                    total_stam + deft_bonus );
     // Weariness handling - 1 / the value, because it returns what % of the normal speed
     const float weary_mult = exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
