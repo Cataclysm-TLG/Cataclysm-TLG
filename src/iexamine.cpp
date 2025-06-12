@@ -1524,7 +1524,7 @@ void iexamine::rubble( Character &you, const tripoint &examp )
 void iexamine::chainfence( Character &you, const tripoint &examp )
 {
     // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-    if( !you.move_effects( false ) ) {
+    if( !you.move_effects( false, examp ) ) {
         you.mod_moves( -to_moves<int>( 1_seconds ) );
         return;
     }
@@ -5406,7 +5406,7 @@ void iexamine::ledge( Character &you, const tripoint &examp )
     switch( cmenu.ret ) {
         case ledge_jump_across: {
             // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-            if( !you.move_effects( false ) ) {
+            if( !you.move_effects( false, examp ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 return;
             }
@@ -5482,7 +5482,7 @@ void iexamine::ledge( Character &you, const tripoint &examp )
         }*/
         case ledge_glide: {
             // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-            if( !you.move_effects( false ) ) {
+            if( !you.move_effects( false, examp ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 return;
             }
@@ -5524,7 +5524,7 @@ void iexamine::ledge( Character &you, const tripoint &examp )
             if( query_yn( _( "Climbing might be safer.  Really fall from the ledge?" ) ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-                if( !you.move_effects( false ) ) {
+                if( !you.move_effects( false, examp ) ) {
                     return;
                 }
                 // Step into open air, then fall...

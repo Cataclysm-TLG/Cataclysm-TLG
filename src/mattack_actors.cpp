@@ -111,7 +111,7 @@ std::unique_ptr<mattack_actor> leap_actor::clone() const
 
 bool leap_actor::call( monster &z ) const
 {
-    if( !z.has_dest() || !z.can_act() || !z.move_effects( false ) ) {
+    if( !z.has_dest() || !z.can_act() || !z.move_effects( false, z.get_dest().raw() ) ) {
         add_msg_debug( debugmode::DF_MATTACK, "Monster has no destination or can't act" );
         return false;
     }

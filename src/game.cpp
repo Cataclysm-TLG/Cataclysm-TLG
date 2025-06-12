@@ -251,6 +251,7 @@ static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
 static const efftype_id effect_gliding( "gliding" );
+static const efftype_id effect_in_pit( "in_pit" );
 static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_laserlocked( "laserlocked" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
@@ -273,6 +274,7 @@ static const faction_id faction_your_followers( "your_followers" );
 static const flag_id json_flag_CONVECTS_TEMPERATURE( "CONVECTS_TEMPERATURE" );
 static const flag_id json_flag_LEVITATION( "LEVITATION" );
 static const flag_id json_flag_NO_RELOAD( "NO_RELOAD" );
+static const flag_id json_flag_PIT( "PIT" );
 static const flag_id json_flag_SPLINT( "SPLINT" );
 
 static const furn_str_id furn_f_rope_up( "f_rope_up" );
@@ -10269,6 +10271,8 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint &dest_loc ) co
     const auto veh_dest = m.veh_at( dest_loc ).part_with_feature( "BOARDABLE", true );
     const bool veh_here_inside = veh_here && veh_here->is_inside();
     const bool veh_dest_inside = veh_dest && veh_dest->is_inside();
+    trap trap_here = m.tr_at( u.pos() );
+    trap trap_there = m.tr_at( dest_loc );
 
     for( const std::pair<const field_type_id, field_entry> &e : m.field_at( dest_loc ) ) {
         if( !u.is_dangerous_field( e.second ) ) {
@@ -10282,6 +10286,7 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint &dest_loc ) co
         // means effects are hardcoded in map_field.cpp so we should...
         bool danger_dest = empty_effects; // ... warn if effects are empty
         bool danger_here = has_field_here && empty_effects;
+
         for( const field_effect &fe : e.second.field_effects() ) {
             if( !danger_dest ) {
                 danger_dest = true;
@@ -10325,7 +10330,8 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint &dest_loc ) co
             harmful_stuff.emplace_back( tr.name() );
         }
     } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest &&
-               !u.has_effect_with_flag( json_flag_LEVITATION ) ) {
+               !u.has_effect_with_flag( json_flag_LEVITATION ) && ( !u.has_effect( effect_in_pit ) &&
+                       trap_there.has_flag( json_flag_PIT ) ) ) {
         harmful_stuff.emplace_back( tr.name() );
     }
 
@@ -10399,7 +10405,7 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
                 return false;
             }
         }
-        if( !mons->move_effects( false ) ) {
+        if( !mons->move_effects( false, dest_loc ) ) {
             add_msg( m_bad, _( "You cannot move as your %s isn't able to move." ), mons->get_name() );
             return false;
         }
@@ -11962,8 +11968,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
         add_msg( m_info, _( "Halfway up, the way up becomes blocked off." ) );
         return;
     }
-
-    if( !u.move_effects( false ) && !force ) {
+    tripoint destination = u.pos() + tripoint( 0, 0, movez );
+    if( !u.move_effects( false, destination ) && !force ) {
         // move_effects determined we could not move, waste all moves
         u.set_moves( 0 );
         return;
@@ -13459,9 +13465,8 @@ void game::climb_down_using( const tripoint &examp, climbing_aid_id aid_id, bool
 
     map &here = get_map();
     Character &you = get_player_character();
-
     // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-    if( !you.move_effects( false ) ) {
+    if( !you.move_effects( false, examp ) ) {
         // move_effects determined we could not move, waste all moves
         you.set_moves( 0 );
         return;

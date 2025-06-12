@@ -73,18 +73,7 @@
     "special_attacks": [ { "type": "bite", "cooldown": 15 } ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "flags": [
-      "SEES",
-      "SMELLS",
-      "HEARS",
-      "GOODHEARING",
-      "WARM",
-      "FLIES",
-      "ANIMAL",
-      "PATH_AVOID_DANGER",
-      "PATH_AVOID_DANGER",
-      "SMALL_HIDER"
-    ]
+    "flags": [ "SEES", "SMELLS", "HEARS", "GOODHEARING", "WARM", "FLIES", "ANIMAL", "PATH_AVOID_DANGER", "SMALL_HIDER" ]
   },
   {
     "id": "mon_bear_cub",
@@ -148,7 +137,7 @@
     "//": "220 days gestation period, the mother and cubs remain together for 16-17 months.",
     "baby_flags": [ "SPRING" ],
     "special_attacks": [ [ "EAT_FOOD", 20 ], { "type": "bite", "cooldown": 15, "infection_chance": 44 }, [ "BROWSE", 40 ] ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "BASHES", "PUSH_MON", "CORNERED_FIGHTER", "EATS" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "BASHES", "PUSH_MON", "CORNERED_FIGHTER", "EATS", "CLIMBS" ],
     "armor": { "bash": 7, "cut": 8, "bullet": 7, "electric": 1 }
   },
   {
@@ -556,7 +545,6 @@
       "SMELLS",
       "ANIMAL",
       "PATH_AVOID_DANGER",
-      "PATH_AVOID_FIRE",
       "WARM",
       "CANPLAY",
       "PET_WONT_FOLLOW",
@@ -611,7 +599,6 @@
       "PET_MOUNTABLE",
       "ANIMAL",
       "PATH_AVOID_DANGER",
-      "PATH_AVOID_FIRE",
       "WARM",
       "CANPLAY",
       "PET_WONT_FOLLOW",

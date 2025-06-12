@@ -34,7 +34,6 @@
       "HEARS",
       "ANIMAL",
       "PATH_AVOID_DANGER",
-      "PATH_AVOID_FIRE",
       "WARM",
       "FLIES",
       "SWARMS",
@@ -308,18 +307,7 @@
     "upgrades": { "age_grow": 14, "into": "mon_chicken" },
     "//": "Grows up into a standard chicken as a fallback",
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE", "FRIEND_ATTACKED", "FRIEND_DIED", "FIRE", "HURT" ],
-    "flags": [
-      "SEES",
-      "HEARS",
-      "ANIMAL",
-      "PATH_AVOID_DANGER",
-      "PATH_AVOID_FIRE",
-      "WARM",
-      "SWARMS",
-      "CAN_BE_CULLED",
-      "CANPLAY",
-      "SMALL_HIDER"
-    ]
+    "flags": [ "SEES", "HEARS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "SWARMS", "CAN_BE_CULLED", "CANPLAY", "SMALL_HIDER" ]
   },
   {
     "abstract": "mon_generic_chick_tiny",
@@ -467,7 +455,7 @@
     "harvest": "mutant_bird",
     "dissect": "dissect_bird_sample_single",
     "fear_triggers": [ "FIRE", "HURT", "FRIEND_DIED" ],
-    "anger_triggers": [ "FIRE", "HURT", "FRIEND_DIED", "PLAYER_CLOSE" ],
+    "anger_triggers": [ "HURT", "FRIEND_DIED", "PLAYER_CLOSE" ],
     "special_attacks": [ [ "SHRIEK", 100 ], [ "EAT_CARRION", 40 ], [ "EAT_FOOD", 120 ] ],
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 8 },
     "upgrades": { "half_life": 21, "into_group": "GROUP_CROW_MUTANT" },
@@ -476,7 +464,6 @@
       "HEARS",
       "SMELLS",
       "PATH_AVOID_DANGER",
-      "PATH_AVOID_FIRE",
       "WARM",
       "FLIES",
       "EATS",
@@ -523,7 +510,7 @@
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
-    "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER", "PATH_AVOID_FIRE", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER", "STUMBLES", "WARM", "EATS", "CORNERED_FIGHTER" ]
   },
   {
     "id": "mon_pigeon",

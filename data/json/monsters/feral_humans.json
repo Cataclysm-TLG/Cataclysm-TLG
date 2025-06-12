@@ -73,7 +73,8 @@
       "PATH_AVOID_DANGER",
       "DROPS_AMMO",
       "WIELDED_WEAPON",
-      "EATS"
+      "EATS",
+      "CLIMBS"
     ]
   },
   {
@@ -185,7 +186,8 @@
     "speed": 90,
     "upgrades": { "age_grow": 4, "into": "mon_feral_human_pipe_fungal_corpse" },
     "burn_into": "mon_starer_pipe",
-    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] }
+    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] },
+    "delete": { "flags": [ "CLIMBS" ] }
   },
   {
     "id": "mon_feral_human_crowbar_fungal_infected",
@@ -194,7 +196,8 @@
     "speed": 90,
     "upgrades": { "age_grow": 4, "into": "mon_feral_human_crowbar_fungal_corpse" },
     "burn_into": "mon_starer_crowbar",
-    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] }
+    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] },
+    "delete": { "flags": [ "CLIMBS" ] }
   },
   {
     "id": "mon_feral_human_axe_fungal_infected",
@@ -203,7 +206,8 @@
     "speed": 90,
     "upgrades": { "age_grow": 4, "into": "mon_feral_human_axe_fungal_corpse" },
     "burn_into": "mon_starer_axe",
-    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] }
+    "extend": { "flags": [ "NO_FUNG_DMG" ], "species": [ "FUNGUS" ] },
+    "delete": { "flags": [ "CLIMBS" ] }
   },
   {
     "id": "mon_feral_human_pipe_fungal_corpse",
@@ -288,7 +292,7 @@
     ],
     "death_drops": "feral_security_death_drops_9mm",
     "zombify_into": "mon_zombie_labsecurity",
-    "extend": { "flags": [ "CLIMBS" ], "weakpoint_sets": [ "wps_humanoid_body_armor" ], "families": [ "prof_wp_syn_armored" ] },
+    "extend": { "weakpoint_sets": [ "wps_humanoid_body_armor" ], "families": [ "prof_wp_syn_armored" ] },
     "armor": { "bash": 4, "cut": 6, "stab": 4, "bullet": 4 }
   },
   {
@@ -418,7 +422,7 @@
     "id": "mon_feral_prepper",
     "type": "MONSTER",
     "name": { "str": "feral prepper" },
-    "description": "A quick glance at this person would suggest that they have prepared well enough for the apocalypse.  Unfortunately, their bloodshot eyes, and the excluding treatment by the undead, shows that they have turned feral.  One of their hands clasps the handle of a makeshift weapon, while the other grips a handgun.",
+    "description": "A quick glance at this person would suggest that they have prepared well enough for the apocalypse.  Unfortunately, they've been swept up in the tide of madness that killed the world.  One of their hands clasps the handle of a makeshift weapon, while the other grips a handgun.",
     "copy-from": "mon_feral_human_pipe",
     "aggression": 75,
     "dodge": 3,
@@ -453,14 +457,14 @@
     ],
     "death_drops": "mon_feral_prepper_death_drops",
     "zombify_into": "mon_zombie_survivor",
-    "extend": { "flags": [ "CLIMBS" ], "weakpoint_sets": [ "wps_humanoid_light_armor" ], "families": [ "prof_wp_syn_armored" ] },
+    "extend": { "weakpoint_sets": [ "wps_humanoid_light_armor" ], "families": [ "prof_wp_syn_armored" ] },
     "armor": { "bash": 4, "cut": 4, "acid": 4, "bullet": 4 }
   },
   {
     "id": "mon_feral_survivalist",
     "type": "MONSTER",
     "name": { "str": "crazed survivalist" },
-    "description": "Grasping a sharp bladed weapon, this feral prepper has an athletic physique, a sign that they trained extensively before turning feral.  In addition to remembering how to use a flashlight, their survival instincts seem to kick in when critically harmed, causing them to act in self-preservation unlike most of their fellows.",
+    "description": "Grasping a sharp bladed weapon, this feral prepper has an athletic physique, a sign that they trained extensively before turning feral.  They seem to retain a few scraps of intelligence, using tools and exhibiting at least some signs of self-preservation.",
     "copy-from": "mon_feral_human_pipe",
     "hp": 90,
     "//": "Due to the description I assumed a str 10 character instead of the standard str 8 as for the others",
@@ -476,7 +480,6 @@
     "zombify_into": "mon_zombie_survivor",
     "delete": { "anger_triggers": [ "HURT" ] },
     "extend": {
-      "flags": [ "CLIMBS" ],
       "anger_triggers": [ "STALK" ],
       "weakpoint_sets": [ "wps_humanoid_light_armor" ],
       "families": [ "prof_wp_syn_armored" ]
@@ -529,7 +532,6 @@
     "zombify_into": "mon_zombie_milbase_personnel",
     "delete": { "anger_triggers": [ "HURT" ] },
     "extend": {
-      "flags": [ "CLIMBS" ],
       "anger_triggers": [ "STALK" ],
       "weakpoint_sets": [ "wps_humanoid_body_armor", "wps_humanoid_open_helmet" ],
       "families": [ "prof_wp_syn_armored" ]
@@ -591,8 +593,7 @@
       [ "BROWSE", 100 ],
       [ "EAT_FOOD", 100 ]
     ],
-    "death_drops": "mon_feral_jackboot_death_drops",
-    "extend": { "flags": [ "CLIMBS" ] }
+    "death_drops": "mon_feral_jackboot_death_drops"
   },
   {
     "id": "mon_feral_sailor_wrench",
@@ -698,8 +699,7 @@
       [ "EAT_FOOD", 100 ]
     ],
     "death_drops": "mon_feral_officer_death_drops",
-    "zombify_into": "mon_zombie_officer",
-    "extend": { "flags": [ "CLIMBS" ] }
+    "zombify_into": "mon_zombie_officer"
   },
   {
     "id": "mon_feral_cop",

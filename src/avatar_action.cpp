@@ -363,7 +363,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         attacking = true;
     }
 
-    if( !you.move_effects( attacking ) ) {
+    if( !you.move_effects( attacking, dest_loc ) ) {
         // move_effects determined we could not move, waste all moves
         you.set_moves( 0 );
         return false;

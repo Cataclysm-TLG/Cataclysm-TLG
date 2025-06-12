@@ -608,7 +608,7 @@ class Creature : public viewer
         void check_dead_state();
 
         /** Processes move stopping effects. Returns false if movement is stopped. */
-        virtual bool move_effects( bool attacking ) = 0;
+        virtual bool move_effects( bool attacking, tripoint dest_loc ) = 0;
 
         // Next three functions don't do anything but forward to next functions with nullptr
         // as source they should be removed once all effect sources are assigned
