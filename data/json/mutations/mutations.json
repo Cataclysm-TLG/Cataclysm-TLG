@@ -1334,6 +1334,7 @@
     "name": { "str": "Languorous" },
     "points": -2,
     "description": "Whether due to lack of exercise and poor diet, or due to a natural disinclination to physical endurance, you tire due to physical exertion much more readily than others.",
+    "starting_trait": true,
     "valid": false,
     "types": [ "CARDIO" ],
     "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": -0.1 } ] } ]
