@@ -131,7 +131,6 @@ static const limb_score_id limb_score_reaction( "reaction" );
 static const matec_id WBLOCK_1( "WBLOCK_1" );
 static const matec_id WBLOCK_2( "WBLOCK_2" );
 static const matec_id WBLOCK_3( "WBLOCK_3" );
-static const matec_id WHIP_DISARM( "WHIP_DISARM" );
 
 static const material_id material_glass( "glass" );
 static const material_id material_rubber( "rubber" );
@@ -157,6 +156,7 @@ static const trait_id trait_VINES2( "VINES2" );
 static const trait_id trait_VINES3( "VINES3" );
 
 static const weapon_category_id weapon_category_UNARMED( "UNARMED" );
+static const weapon_category_id weapon_category_WHIP( "WHIP" );
 
 static void player_hit_message( Character *attacker, const std::string &message,
                                 Creature &t, int dam, bool crit = false, bool technique = false, const std::string &wp_hit = {} );
@@ -975,7 +975,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     }
 
     burn_energy_arms( std::min( -50, total_stam + deft_bonus ) );
-    add_msg_debug( debugmode::DF_MELEE, "Stamina burn base/total (capped at -50): %d/%d", base_stam,
+    add_msg_debug( debugmode::DF_MELEE, "Stamina burn base/total (always burn at least 50): %d/%d",
+                   base_stam,
                    total_stam + deft_bonus );
     // Weariness handling - 1 / the value, because it returns what % of the normal speed
     const float weary_mult = exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
@@ -1029,10 +1030,6 @@ void Character::reach_attack( const tripoint &p, int forced_movecost )
 {
     static const matec_id no_technique_id( "" );
     matec_id force_technique = no_technique_id;
-    /** @EFFECT_MELEE >5 allows WHIP_DISARM technique */
-    if( weapon.has_flag( flag_WHIP ) && ( get_skill_level( skill_melee ) > 5 ) && one_in( 3 ) ) {
-        force_technique = WHIP_DISARM;
-    }
 
     // Fighting is hard work
     set_activity_level( EXPLOSIVE_EXERCISE );
@@ -1198,7 +1195,7 @@ double Character::crit_chance( float roll_hit, float target_dodge, const item &w
     // Chance to get all 3 criticals (a guaranteed critical regardless of hit/dodge)
     const double chance_triple = weapon_crit_chance * stat_crit_chance * skill_crit_chance;
     // Only check double critical (one that requires hit/dodge comparison) if we have good
-    // hit vs dodge
+    // hit vs ( dodge * 6 ) or ( melee * 5 ), accounting for enemy debuffs
     if( roll_hit > target_dodge * 3 / 2 ) {
         const double chance_double = 0.5 * (
                                          weapon_crit_chance * stat_crit_chance +
@@ -1298,8 +1295,16 @@ float Character::dodge_roll() const
     return get_dodge() * 5;
 }
 
-float Character::bonus_damage( bool random ) const
+float Character::bonus_damage( bool random, bool whip ) const
 {
+    // Whips rely on timing, thus intelligence.
+    if( whip ) {
+        if( random ) {
+            return rng_float( ( get_arm_str() + get_int() ) / 2.0f, ( get_arm_str() + get_int() ) / 2.0f );
+        }
+        return ( get_arm_str() + get_int() ) * 0.375f;
+    }
+
     /** @ARM_STR increases bashing damage */
     if( random ) {
         return rng_float( get_arm_str() / 2.0f, get_arm_str() );
@@ -1333,13 +1338,20 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
             arpen += contact->parent->unarmed_arpen( dt );
         }
     }
-    /** @ARM_STR increases bashing damage */
-    float stat_bonus = u.bonus_damage( !average );
+    /** @ARM_STR increases bashing damage, whips use intelligence too */
+    static const std::set<weapon_category_id> category_whip{ weapon_category_WHIP };
+    bool whip = !unarmed && weap.typeId()->weapon_category == category_whip;
+
+    float stat_bonus = u.bonus_damage( !average, whip );
     stat_bonus += u.mabuff_damage_bonus( dt );
+
     /** @EFFECT_STR increases bashing damage */
     float weap_dam = weap.damage_melee( dt ) + stat_bonus;
     /** @EFFECT_BASHING caps bash damage with bashing weapons */
     float bash_cap = 2 * u.get_arm_str() + 2 * skill;
+    if( whip ) {
+        bash_cap = u.get_int() + u.get_arm_str() + 2 * skill;
+    }
 
     // FIXME: Hardcoded damage type effects (bash)
     if( dt != damage_bash && dmg <= 0 ) {
@@ -2797,20 +2809,32 @@ double Character::weapon_value( const item &weap, int ammo ) const
 
 double Character::melee_value( const item &weap ) const
 {
-    // start with average effective dps against a range of enemies
-    double my_value = weap.average_dps( *this );
+    // Start with damage.
+    double my_value = weap.damage();
+
+    // Adjust for how heavy it is.
+    if( !weap.is_null() ) {
+        my_value *= std::min( 1.0, static_cast<double>( 1200_gram / weap.weight() ) );
+    }
 
     float reach = weap.reach_range( *this );
-    // value reach weapons more
+    // Value reach weapons more.
     if( reach > 1.0f ) {
         my_value *= 1.0f + 0.5f * ( std::sqrt( reach ) - 1.0f );
     }
-    // value polearms less to account for the trickiness of keeping the right range
+    // Value polearms less to account for the trickiness of keeping the right range.
     if( weapon.has_flag( flag_POLEARM ) ) {
         my_value *= 0.8;
     }
 
-    // value style weapons more
+    // If weapon category is empty, it's probably a random object and not a real weapon.
+    if( weapon.type->weapon_category.empty() ) {
+        my_value *= 0.5;
+    }
+
+    // Walue style weapons more.
+    // TODO: Value proficient categories more.
+    // TODO: Make sure we're not a weakling trying to use a bash weapon over a knife.
     if( !martial_arts_data->enumerate_known_styles( weap.type->get_id() ).empty() ) {
         my_value *= 1.5;
     }
@@ -2822,7 +2846,7 @@ double Character::melee_value( const item &weap ) const
 
 double Character::unarmed_value() const
 {
-    // TODO: Martial arts
+    // TODO: Martial arts and integrated items
     return melee_value( item() );
 }
 

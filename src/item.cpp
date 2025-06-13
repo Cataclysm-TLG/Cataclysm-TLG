@@ -2254,154 +2254,6 @@ static constexpr std::array<double, 41> hits_by_accuracy = {
     9993, 9997, 9998, 9999, 10000 // 16 to 20
 };
 
-double item::effective_dps( const Character &guy, Creature &mon ) const
-{
-    const float mon_dodge = mon.get_dodge();
-    float base_hit = guy.get_dex() / 4.0f + guy.get_hit_weapon( *this );
-    base_hit *= std::max( 0.25f, 1.0f - guy.avg_encumb_of_limb_type( body_part_type::type::torso ) /
-                          100.0f );
-    float mon_defense = mon_dodge + mon.size_melee_penalty() / 5.0f;
-    constexpr double hit_trials = 10000.0;
-    const int rng_mean = std::max( std::min( static_cast<int>( base_hit - mon_defense ), 20 ),
-                                   -20 ) + 20;
-    double num_all_hits = hits_by_accuracy[ rng_mean ];
-    /* critical hits have two chances to occur: triple critical hits happen much less frequently,
-     * and double critical hits can only occur if a hit roll is more than 1.5 * monster dodge.
-     * Not the hit roll used to determine the attack, another one.
-     * the way the math works, some percentage of the total hits are eligible to be double
-     * critical hits, and the rest are eligible to be triple critical hits, but in each case,
-     * only some small percent of them actually become critical hits.
-     */
-    const int rng_high_mean = std::max( std::min( static_cast<int>( base_hit - 1.5 * mon_dodge ),
-                                        20 ), -20 ) + 20;
-    double num_high_hits = hits_by_accuracy[ rng_high_mean ] * num_all_hits / hit_trials;
-    double double_crit_chance = guy.crit_chance( 4, 0, *this );
-    double crit_chance = guy.crit_chance( 0, 0, *this );
-    double num_low_hits = std::max( 0.0, num_all_hits - num_high_hits );
-
-    double moves_per_attack = guy.attack_speed( *this );
-    // attacks that miss do no damage but take time
-    double total_moves = ( hit_trials - num_all_hits ) * moves_per_attack;
-    double total_damage = 0.0;
-    double num_crits = std::min( num_low_hits * crit_chance + num_high_hits * double_crit_chance,
-                                 num_all_hits );
-    // critical hits are counted separately
-    double num_hits = num_all_hits - num_crits;
-    // sum average damage past armor and return the number of moves required to achieve
-    // that damage
-    const auto calc_effective_damage = [ &, moves_per_attack]( const double num_strikes,
-    const bool crit, const Character & guy, Creature & mon ) {
-        bodypart_id bp = bodypart_id( "torso" );
-        Creature *temp_mon = &mon;
-        double subtotal_damage = 0;
-        damage_instance base_damage;
-        guy.roll_all_damage( crit, base_damage, true, *this, attack_vector_vector_null,
-                             sub_body_part_sub_limb_debug );
-        damage_instance dealt_damage = base_damage;
-        // TODO: Modify DPS calculation to consider weakpoints.
-        resistances r = resistances( *static_cast<monster *>( temp_mon ) );
-        for( damage_unit &dmg_unit : dealt_damage.damage_units ) {
-            dmg_unit.amount -= std::min( r.get_effective_resist( dmg_unit ), dmg_unit.amount );
-        }
-
-        dealt_damage_instance dealt_dams;
-        for( const damage_unit &dmg_unit : dealt_damage.damage_units ) {
-            int cur_damage = 0;
-            int total_pain = 0;
-            temp_mon->deal_damage_handle_type( effect_source::empty(), dmg_unit, bp,
-                                               cur_damage, total_pain );
-            if( cur_damage > 0 ) {
-                dealt_dams.dealt_dams[dmg_unit.type] += cur_damage;
-            }
-        }
-        double damage_per_hit = dealt_dams.total_damage();
-        subtotal_damage = damage_per_hit * num_strikes;
-        double subtotal_moves = moves_per_attack * num_strikes;
-
-        if( has_technique( RAPID ) ) {
-            Creature *temp_rs_mon = &mon;
-            damage_instance rs_base_damage;
-            guy.roll_all_damage( crit, rs_base_damage, true, *this, attack_vector_vector_null,
-                                 sub_body_part_sub_limb_debug );
-            damage_instance dealt_rs_damage = rs_base_damage;
-            for( damage_unit &dmg_unit : dealt_rs_damage.damage_units ) {
-                dmg_unit.damage_multiplier *= 0.66;
-            }
-            // TODO: Modify DPS calculation to consider weakpoints.
-            resistances rs_r = resistances( *static_cast<monster *>( temp_rs_mon ) );
-            for( damage_unit &dmg_unit : dealt_rs_damage.damage_units ) {
-                dmg_unit.amount -= std::min( rs_r.get_effective_resist( dmg_unit ), dmg_unit.amount );
-            }
-            dealt_damage_instance rs_dealt_dams;
-            for( const damage_unit &dmg_unit : dealt_rs_damage.damage_units ) {
-                int cur_damage = 0;
-                int total_pain = 0;
-                temp_rs_mon->deal_damage_handle_type( effect_source::empty(), dmg_unit, bp,
-                                                      cur_damage, total_pain );
-                if( cur_damage > 0 ) {
-                    rs_dealt_dams.dealt_dams[dmg_unit.type] += cur_damage;
-                }
-            }
-            double rs_damage_per_hit = rs_dealt_dams.total_damage();
-            subtotal_moves *= 0.5;
-            subtotal_damage *= 0.5;
-            subtotal_moves += moves_per_attack * num_strikes * 0.33;
-            subtotal_damage += rs_damage_per_hit * num_strikes * 0.5;
-        }
-        return std::make_pair( subtotal_moves, subtotal_damage );
-    };
-    std::pair<double, double> crit_summary = calc_effective_damage( num_crits, true, guy, mon );
-    total_moves += crit_summary.first;
-    total_damage += crit_summary.second;
-    std::pair<double, double> summary = calc_effective_damage( num_hits, false, guy, mon );
-    total_moves += summary.first;
-    total_damage += summary.second;
-    return total_damage * to_moves<double>( 1_seconds ) / total_moves;
-}
-
-struct dps_comp_data {
-    mtype_id mon_id;
-    bool display;
-    bool evaluate;
-};
-
-static const std::vector<std::pair<translation, dps_comp_data>> dps_comp_monsters = {
-    { to_translation( "Best" ), { pseudo_debug_mon, true, false } },
-    { to_translation( "Vs. Agile" ), { mon_zombie_smoker, true, true } },
-    { to_translation( "Vs. Armored" ), { mon_zombie_soldier, true, true } },
-    { to_translation( "Vs. Mixed" ), { mon_zombie_survivor, false, true } },
-};
-
-std::map<std::string, double> item::dps( const bool for_display, const bool for_calc,
-        const Character &guy ) const
-{
-    std::map<std::string, double> results;
-    for( const std::pair<translation, dps_comp_data> &comp_mon : dps_comp_monsters ) {
-        if( ( comp_mon.second.display != for_display ) &&
-            ( comp_mon.second.evaluate != for_calc ) ) {
-            continue;
-        }
-        monster test_mon = monster( comp_mon.second.mon_id );
-        results[ comp_mon.first.translated() ] = effective_dps( guy, test_mon );
-    }
-    return results;
-}
-
-std::map<std::string, double> item::dps( const bool for_display, const bool for_calc ) const
-{
-    return dps( for_display, for_calc, get_avatar() );
-}
-
-double item::average_dps( const Character &guy ) const
-{
-    double dmg_count = 0.0;
-    const std::map<std::string, double> &dps_data = dps( false, true, guy );
-    for( const std::pair<const std::string, double> &dps_entry : dps_data ) {
-        dmg_count += dps_entry.second;
-    }
-    return dmg_count / dps_data.size();
-}
-
 void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                        bool /* debug */ ) const
 {
@@ -5468,7 +5320,7 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
         insert_separation_line( info );
         std::string sep;
         if( !dmg_types.empty() ) {
-            info.emplace_back( "BASE", _( "<bold>Melee damage</bold>: " ), "", iteminfo::no_newline );
+            info.emplace_back( "BASE", _( "<bold>Base melee damage</bold>: " ), "", iteminfo::no_newline );
         }
         for( const auto &dmg_type : dmg_types ) {
             if( !dmg_type.first->melee_only ) {
@@ -5483,21 +5335,14 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     if( !dmg_types.empty() ) {
         int stam = 0;
         float stam_pct = 0.0f;
-        std::map<std::string, double> dps_data;
 
         bool base_tohit = parts->test( iteminfo_parts::BASE_TOHIT );
         bool base_moves = parts->test( iteminfo_parts::BASE_MOVES );
-        bool base_dps = parts->test( iteminfo_parts::BASE_DPS );
         bool base_stamina = parts->test( iteminfo_parts::BASE_STAMINA );
-        bool base_dpstam = parts->test( iteminfo_parts::BASE_DPSTAM );
 
-        if( base_stamina || base_dpstam ) {
+        if( base_stamina ) {
             stam = player_character.get_total_melee_stamina_cost( this ) * -1;
             stam_pct = std::truncf( stam * 1000.0 / player_character.get_stamina_max() ) / 10;
-        }
-
-        if( base_dps || base_dpstam ) {
-            dps_data = dps( true, false );
         }
 
         if( base_tohit ) {
@@ -5510,18 +5355,6 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
                                iteminfo::lower_is_better, attack_time( player_character ) );
         }
 
-        if( base_dps ) {
-            info.emplace_back( "BASE", _( "Typical damage per second:" ), "" );
-            std::string sep;
-            for( const std::pair<const std::string, double> &dps_entry : dps_data ) {
-                info.emplace_back( "BASE", sep + dps_entry.first + ": ", "",
-                                   iteminfo::no_newline | iteminfo::is_decimal,
-                                   dps_entry.second );
-                sep = space;
-            }
-            info.emplace_back( "BASE", "" );
-        }
-
         if( base_stamina ) {
             info.emplace_back( "BASE", _( "<bold>Stamina use</bold>: Costs " ), "", iteminfo::no_newline );
             info.emplace_back( "BASE", ( stam_pct ? _( "about " ) : _( "less than " ) ), "",
@@ -5530,17 +5363,6 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
             info.emplace_back( "BASE", _( "% stamina to swing." ), "" );
         }
 
-        if( base_dpstam ) {
-            info.emplace_back( "BASE", _( "Typical damage per stamina:" ), "" );
-            std::string sep;
-            for( const std::pair<const std::string, double> &dps_entry : dps_data ) {
-                info.emplace_back( "BASE", sep + dps_entry.first + ": ", "",
-                                   iteminfo::no_newline | iteminfo::is_decimal,
-                                   100 * dps_entry.second / stam );
-                sep = space;
-            }
-            info.emplace_back( "BASE", "" );
-        }
     }
 
     if( parts->test( iteminfo_parts::DESCRIPTION_TECHNIQUES ) ) {
@@ -5612,16 +5434,23 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
                      damage_info_order::info_type::MELEE ) ) {
                 // NOTE: Using "BASE" instead of "DESCRIPTION", so numerical formatting will work
                 // (output.cpp:format_item_info does not interpolate <num> for DESCRIPTION info)
+                const int base = non_crit.type_damage( dio.dmg_type );
+                const int critd = crit.type_damage( dio.dmg_type );
+                if( base == 0 && critd == 0 ) {
+                    continue; // Skip if both normal and critical damage are zero
+                }
                 info.emplace_back( "BASE", string_format( "%s: ",
                                    uppercase_first_letter( dio.dmg_type->name.translated() ) ),
-                                   "<num>", iteminfo::no_newline, non_crit.type_damage( dio.dmg_type ) );
+                                   "<num>", iteminfo::no_newline, base );
+
                 //~ Label used in the melee damage section in the item info screen (ex: "  Critical bash: ")
-                //~ %1$s = a prepended space, %2$s = the name of the damage type (bash, cut, pierce, etc.)
+                //~ %1$s = a prepended space, %2$s = the name of the damage type (bash, cut, stab, etc.)
                 info.emplace_back( "BASE", string_format( _( "%1$sCritical %2$s: " ), space,
                                    dio.dmg_type->name.translated() ),
-                                   "<num>", iteminfo::no_flags, crit.type_damage( dio.dmg_type ) );
+                                   "<num>", iteminfo::no_flags, critd );
             }
         }
+
         // Moves
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG_MOVES ) ) {
             info.emplace_back( "BASE", _( "Adjusted moves per attack: " ), "<num>",

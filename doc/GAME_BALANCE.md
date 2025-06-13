@@ -125,7 +125,7 @@ Even a world class dodger should not be able to dodge continuously when attacked
 # MELEE WEAPONS:
 
 ## To-Hit Value
-The "to_hit" value of an object represents the base likelihood that it will solidly strike an enemy during an attack. This can then be modified by martial arts, skills, proficiences, etc... to get your final chance to-hit.
+The "to_hit" value of an object represents the base likelihood that it will solidly strike an enemy during an attack. This can then be modified by martial arts, skills, proficiences, etc... to get your final chance to-hit. This value is triply important as it governs whether the attack hits at all, how likely it is to score a critical hit, and how likely it is to block attacks.
 
 For basic objects it isn't important to get a perfect value since it's highly unlikely for players to use that item as a weapon. These items start with a base of -2 and, if you wish, you may go through the categories and manually add to the to-hit value the listed numbers based on the object's characteristics, then enter the final result number directly in the format "to_hit": X, (where X is the positive or negative integer you have decided on).
 
@@ -177,28 +177,18 @@ A measure of how well-suited the item is for being swung/thrust/etc. This factor
 +1 - "good" - Well-balanced for swinging or stabbing. Baseball bat, golf club, swords, quarterstaff, knives.
 
 ## Damage
-Weapon's relative strength is based on an approximate formula involving its damage, to-hit, techniques and few other factors.
+The damage listed on the weapon in the item menu is its base damage. This damage is further modified by a number of factors including the user's skills, stats, and techniques, as well as miscellaneous factors like the POLEARM flag. These further modifications are not displayed in the item window, and account for the discrepancy between what the player sees looking at the item, and what they actually deal in combat.
 
-### Damage per second
-A melee's weapon damage per second (dps) is calculated past armor against a sample group of monsters with a range of dodge and armor values: a soldier zombie (low dodge, high bash and cut armor), a survivor zombie (medium dodge, some bash and cut armor), and a smoker zombie (high dodge, no armor).  This should correctly weigh accuracy, criticals, and damage without over valuing any of them.
+### Damage Types
+Broadly speaking, bash damage relies on strength, cut damage relies on dexterity, and stab damage relies on perception. Bash has a heavier stat reliance, and stab has a heavier skill reliance. Cut receives less benefit from either, but typically has the highest base damage of the three types. Cut and stab will cause enemies to bleed. Bash attacks tend to deal moderate damage against armor, while stab weapons are specialized for punching through it. Cut damage fares worst against armor.
 
-In code, this is calculated using the item::effective_dps() function, which takes a character and a monster.  It calculates the relative accuracy of the character and weapon against the monster's defenses and determines the hit rate from a table lookup.  It also determines the number of critical hits.  Number of hits is hit rate * 10,000, and number of misses is 10,000 - number of hits.
-
-For both critical and non-critical hits, average damage is calculated based on the weapon's stats and the user's skill.  Monster armor absorbs the damage, and then the damage is multiplied by the number of hits: either critical hits for the critical hit case, or total hits - critical hits for the non critical hit case.  If the weapon has the rapid strike technique, the total damage is halved, and then the average damage is recalculated, multiplied by 0.66, and absorbed by monster armor again to account for rapid strikes.
-
-Number of moves is calculated as attack speed * ( number of misses + number of non-critical hits + number of critical hits ) for weapons without rapid strike, or attack speed * ( number of misses + number of non-critical hits / 2  + number of critical hits / 2  ) + attack speed / 2 * ( number of non-critical hits / 2  + number of critical hits / 2 ) for weapons without rapid strikes.
-
-Damage per second against a particular monster is total damage * 100 / number of moves (100 for the 100 moves/second).  Overall dps is the average of the dps against the three reference monsters.
+These are generalizations, and exceptions exist in all cases.
 
 ### Critical hits
-A double critical can occur when a second hit roll is made against 1.5 * the monster's dodge.  Double critical hits have a higher chance of occurring than normal critical hits.  For each hit, the chance of achieving either a double critical hit or a normal critical hit is calculated, and then if a random number is less than the critical chance, the critical occurs.  Both double and normal critical hits have the same effect, but the chance of them occurring is different.
-
-**Note** The critical hit system is stupid and complicated and produces weird results.  Double critical hits should have a chance of occurring when the original hit roll is more than 1 standard deviation above the mean, which is simple and faster to calculate than the current system.
+Critical hits have three different conditions which are checked separately. Weapon crit chance is based on the attack roll and the weapon's to-hit value. Stat crit chance is based on the attacker's stats, and skill crit chance is based on the user's bash, cut, or stab skill(s). Critical hits can deal up to double damage, and receive a variety of bonuses on top of that based on the damage types involved. Bash does extra damage and halves the target's bash armor for the attack, cut and stab deal extra stat-based damage and armor penetration.
 
 ### Other factors
-Reach is worth +20% at reach 2, +35% at reach 3.
-
-A weapon that is usable by a known martial art is worth +50%.
+When NPCs evaluate melee weapons for use, reach 2 adds 20% to the weapon's rating, and reach 3 adds 35%.  A weapon that is usable by a known martial art is worth +50%.
 
 ### Weapon tiers
 Relative value should put the weapon into one of those categories:

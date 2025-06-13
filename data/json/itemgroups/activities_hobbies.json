@@ -445,8 +445,7 @@
       { "item": "ar_glasses_basic", "prob": 1, "charges": [ 0, -1 ] },
       { "item": "ar_glasses_advanced", "prob": 1, "charges": [ 0, -1 ] },
       [ "light_snare_kit", 5 ],
-      [ "camping_multitool", 5 ],
-      [ "utility_knife_folding", 5 ]
+      [ "camping_multitool", 5 ]
     ]
   },
   {
