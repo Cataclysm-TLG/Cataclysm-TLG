@@ -882,5 +882,10 @@
     "id": "reflexcurvebow",
     "type": "MIGRATION",
     "replace": "recurbow"
+  },
+  {
+    "id": "utility_knife_folding",
+    "type": "MIGRATION",
+    "replace": "knife_folding"
   }
 ]

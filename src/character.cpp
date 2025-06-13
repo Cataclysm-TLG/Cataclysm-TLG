@@ -3259,12 +3259,14 @@ int Character::get_standard_stamina_cost( const item *thrown_item ) const
     // If the item is thrown, override with the thrown item instead.
     item current_weapon = used_weapon() ? *used_weapon() : null_item_reference();
 
-     const double normalized_weight = static_cast<double>( thrown_item == nullptr ) ? current_weapon.weight() /
-                             20_gram : thrown_item->weight() / 20_gram;
+    const double normalized_weight = static_cast<double>( thrown_item == nullptr ) ?
+                                     current_weapon.weight() /
+                                     20_gram : thrown_item->weight() / 20_gram;
 
     // Logarithmic stamina scaling
     const double weight_cost = std::log( normalized_weight + 1.0 ) * 30.0;
-    return static_cast<int>( weight_cost * -1.0 * get_modifier( character_modifier_melee_stamina_cost_mod ) );
+    return static_cast<int>( weight_cost * -1.0 * get_modifier(
+                                 character_modifier_melee_stamina_cost_mod ) );
 }
 
 std::vector<item_location> Character::nearby( const

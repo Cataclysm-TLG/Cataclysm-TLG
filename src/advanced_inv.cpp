@@ -599,8 +599,8 @@ struct advanced_inv_sorter {
                 }
                 break;
             case SORTBY_DAMAGE: {
-                const double dam1 = d1.items.front()->average_dps( get_player_character() );
-                const double dam2 = d2.items.front()->average_dps( get_player_character() );
+                const double dam1 = d1.items.front()->damage();
+                const double dam2 = d2.items.front()->damage();
                 if( dam1 != dam2 ) {
                     return dam1 > dam2;
                 }
