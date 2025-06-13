@@ -156,7 +156,7 @@ static const trait_id trait_VINES2( "VINES2" );
 static const trait_id trait_VINES3( "VINES3" );
 
 static const weapon_category_id weapon_category_UNARMED( "UNARMED" );
-static const weapon_category_id weapon_category_WHIP( "WHIP" );
+static const weapon_category_id weapon_category_WHIPS( "WHIPS" );
 
 static void player_hit_message( Character *attacker, const std::string &message,
                                 Creature &t, int dam, bool crit = false, bool technique = false, const std::string &wp_hit = {} );
@@ -165,7 +165,7 @@ static std::string melee_message( const ma_technique &tec, Character &p,
                                   const dealt_damage_instance &ddi );
 
 /* Melee Functions!
- * These all belong to class player.
+ * These all belong to class Character.
  *
  * STATE QUERIES
  * bool is_armed() - True if we are armed with any item.
@@ -173,8 +173,8 @@ static std::string melee_message( const ma_technique &tec, Character &p,
  * (cestus, bionic claws etc.) or no weapon.
  *
  * HIT DETERMINATION
- * int hit_roll() - The player's hit roll, to be compared to a monster's or
- *   player's dodge_roll().  This handles weapon bonuses, weapon-specific
+ * int hit_roll() - The Character's hit roll, to be compared to a monster's or
+ *   Character's dodge_roll().  This handles weapon bonuses, weapon-specific
  *   skills.
  */
 
@@ -1339,8 +1339,13 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
         }
     }
     /** @ARM_STR increases bashing damage, whips use intelligence too */
-    static const std::set<weapon_category_id> category_whip{ weapon_category_WHIP };
-    bool whip = !unarmed && weap.typeId()->weapon_category == category_whip;
+    static const std::set<weapon_category_id> category_whips{ weapon_category_WHIPS };
+    bool whip = !unarmed && std::any_of(
+                    category_whips.begin(), category_whips.end(),
+    [&]( const weapon_category_id & cat ) {
+        return weap.typeId()->weapon_category.count( cat );
+    }
+                );
 
     float stat_bonus = u.bonus_damage( !average, whip );
     stat_bonus += u.mabuff_damage_bonus( dt );
