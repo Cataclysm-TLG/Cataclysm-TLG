@@ -10648,10 +10648,10 @@ void Character::echo_pulse()
 {
     map &here = get_map();
     int echo_volume = 0;
-    int pulse_range = 10;
+    int pulse_range = 16;
     // Sound travels farther underwater
     if( has_effect( effect_subaquatic_sonar ) && is_underwater() ) {
-        pulse_range = 16;
+        pulse_range = 20;
         sounds::sound( this->pos(), 5, sounds::sound_t::movement, _( "boop." ), true,
                        "none", "none" );
     } else if( !has_effect( effect_subaquatic_sonar ) && is_underwater() ) {
