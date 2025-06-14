@@ -86,17 +86,18 @@
     "name": { "str": "chain whip" },
     "description": "A long spool of chain with a steel weight at one end.  What a terrible night it'll be for anyone who gets hit by this thing.",
     "weight": "1950 g",
+    "looks_like": "chain",
     "color": "dark_gray",
     "symbol": "/",
     "material": [ "steel" ],
-    "techniques": [ "WRAP" ],
+    "techniques": [ "WRAP", "WHIP_DISARM" ],
     "to_hit": { "grip": "bad", "length": "long", "surface": "any", "balance": "uneven" },
     "volume": "1600 ml",
     "price": "30 USD",
     "flags": [ "ALWAYS_TWOHAND", "REACH_ATTACK", "WHIP", "DURABLE_MELEE" ],
     "price_postapoc": "75 cent",
     "weapon_category": [ "WHIPS", "NINJUTSU_WEAPONS", "KUNG_FU_WEAPONS" ],
-    "melee_damage": { "bash": 20 }
+    "melee_damage": { "bash": 18 }
   },
   {
     "type": "GENERIC",
