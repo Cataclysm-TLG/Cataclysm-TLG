@@ -8200,13 +8200,24 @@ int map::concealment( const tripoint_bub_ms &p ) const
     // Vehicle concealment values.
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_opaque = vp->part_with_feature( VPFLAG_OPAQUE, true ).has_value();
+        bool is_opaque = false;
+        const vehicle &veh = vp->vehicle();
+        const point rel = vp->mount();
+        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+            const vehicle_part &vp_here = veh.part( idx );
+            const vpart_info &vpi_here = vp_here.info();
+            if( vpi_here.has_flag( "OPAQUE" ) &&
+                ( !vpi_here.has_flag( "OPENABLE" ) || !vp_here.open ) ) {
+                is_opaque = true;
+                break;
+            }
+        }
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
-        if( is_obstacle && is_opaque ) {
+        if( is_opaque ) {
             return 100;
-        } else if( is_obstacle ) {
+        } else if( !is_opaque && is_obstacle ) {
             return 60;
-        } else if( !is_aisle ) {
+        } else if( !is_opaque && !is_obstacle && !is_aisle ) {
             return 45;
         }
     }
