@@ -3254,14 +3254,13 @@ void Character::conduct_blood_analysis()
 int Character::get_standard_stamina_cost( const item *thrown_item ) const
 {
     // Previously calculated as 2_gram * std::max( 1, str_cur )
-    // using 20_gram normalizes it to 10 str. Heavier weapons
-    // get a discount on stamina burned/second.
-    // If the item is thrown, override with the thrown item instead.
+    // using 20_gram normalizes it to 10 str. Log scaling so heavier
+    // weapons get a discount on stamina burned/second.
+    // If the item is thrown, override with thrown_item instead.
     item current_weapon = used_weapon() ? *used_weapon() : null_item_reference();
 
-    const double normalized_weight = static_cast<double>( thrown_item == nullptr ) ?
-                                     current_weapon.weight() /
-                                     20_gram : thrown_item->weight() / 20_gram;
+    const double normalized_weight = static_cast<double>( ( thrown_item == nullptr ?
+                                     current_weapon.weight() : thrown_item->weight() ) / 20_gram );
 
     // Logarithmic stamina scaling
     const double weight_cost = std::log( normalized_weight + 1.0 ) * 30.0;
