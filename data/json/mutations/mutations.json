@@ -1109,7 +1109,7 @@
     "fatigue": true,
     "kcal": true,
     "thirst": true,
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": -0.1 }, { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": -0.1 }, { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -3969,7 +3969,7 @@
     "cancels": [ "HUMAN_ARMS", "HUMAN_LEGS" ],
     "threshreq": [ "THRESH_SLIME", "THRESH_ELFA" ],
     "category": [ "SLIME", "ELFA" ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4720,7 +4720,7 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4729,7 +4729,7 @@
     "points": 0,
     "visibility": 6,
     "ugliness": 2,
-    "description": "You have a long tail with a tuft on the end.  You find yourself instinctively swatting away flies with it, though it's not as effective at balancing you as you'd like.  Prevents wearing non-fabric pants.",
+    "description": "You have a long tail with a tuft on the end.  You find yourself instinctively swatting away flies with it.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG" ],
     "category": [ "CATTLE" ],
@@ -4745,14 +4745,14 @@
     "points": 1,
     "visibility": 6,
     "ugliness": 4,
-    "description": "You have a long but hairless tail.  It's a pretty effective balancing aid, but does look, uh, ratty.  Prevents wearing non-fabric pants.",
+    "description": "You have a long, hairless tail.  It's a pretty effective balancing aid, but does look, uh, ratty.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG", "TAIL_STUB" ],
     "category": [ "RAT", "MOUSE" ],
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4806,7 +4806,7 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4814,7 +4814,7 @@
     "name": { "str": "Fluffy Tail" },
     "points": 1,
     "visibility": 7,
-    "description": "You have a long, fluffy-furred tail.  It greatly improves your balance, making your ability to dodge much higher.  Prevents wearing non-fabric pants.",
+    "description": "You have a long, furry tail.  It helps you dodge, but it also tends to betray how you're feeling in social situations.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG" ],
     "category": [ "LUPINE" ],
@@ -4822,7 +4822,7 @@
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
     "social_modifiers": { "lie": -20, "persuade": 10 },
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 4 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -6181,7 +6181,7 @@
     "enchantments": [
       {
         "values": [
-          { "value": "DODGE_CHANCE", "add": 2 },
+          { "value": "DODGE_CHANCE", "add": 1 },
           { "value": "MAX_HP", "multiply": -0.3 },
           { "value": "FOOTSTEP_NOISE", "multiply": -1 },
           { "value": "CARRY_WEIGHT", "multiply": -0.5 },
