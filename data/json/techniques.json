@@ -232,7 +232,9 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
-        { "or": [ { "math": [ "u_val('intelligence')", ">", "rand(14)" ] }, { "math": [ "u_val('strength')", ">", "rand(14)" ] } ] },
+        {
+          "or": [ { "math": [ "u_val('intelligence')", ">", "rand(14)" ] }, { "math": [ "u_val('strength')", ">", "rand(14)" ] } ]
+        },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } }
@@ -257,7 +259,9 @@
       "and": [
         { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
-        { "or": [ { "math": [ "u_val('intelligence')", ">", "rand(12)" ] }, { "math": [ "u_val('strength')", ">", "rand(12)" ] } ] },
+        {
+          "or": [ { "math": [ "u_val('intelligence')", ">", "rand(12)" ] }, { "math": [ "u_val('strength')", ">", "rand(12)" ] } ]
+        },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } }
