@@ -1069,22 +1069,6 @@ void avatar::reset_stats()
     if( is_mounted() ) {
         mod_dodge_bonus( -4 );
     }
-    // Spider hair is basically a full-body set of whiskers, once you get the brain for it
-    if( has_trait( trait_CHITIN_FUR3 ) ) {
-        static const std::array<bodypart_str_id, 5> parts {
-            body_part_head, body_part_arm_r, body_part_arm_l,
-            body_part_leg_r, body_part_leg_l
-        };
-        for( const bodypart_str_id &bp : parts ) {
-            if( !wearing_something_on( bp ) ) {
-                mod_dodge_bonus( +1 );
-            }
-        }
-        // Torso handled separately, bigger bonus
-        if( !wearing_something_on( bodypart_id( "torso" ) ) ) {
-            mod_dodge_bonus( 4 );
-        }
-    }
 
     // Apply static martial arts buffs
     martial_arts_data->ma_static_effects( *this );
