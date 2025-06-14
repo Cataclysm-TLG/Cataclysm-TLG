@@ -2237,23 +2237,6 @@ static void insert_separation_line( std::vector<iteminfo> &info )
     }
 }
 
-/*
- * 0 based lookup table of accuracy - monster defense converted into number of hits per 10000
- * attacks
- * data painstakingly looked up at http://onlinestatbook.com/2/calculators/normal_dist.html
- */
-static constexpr std::array<double, 41> hits_by_accuracy = {
-    0,    1,   2,   3,   7, // -20 to -16
-    13,   26,  47,   82,  139, // -15 to -11
-    228,   359,  548,  808, 1151, // -10 to -6
-    1587, 2119, 2743, 3446, 4207, // -5 to -1
-    5000,  // 0
-    5793, 6554, 7257, 7881, 8413, // 1 to 5
-    8849, 9192, 9452, 9641, 9772, // 6 to 10
-    9861, 9918, 9953, 9974, 9987, // 11 to 15
-    9993, 9997, 9998, 9999, 10000 // 16 to 20
-};
-
 void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                        bool /* debug */ ) const
 {
