@@ -101,7 +101,7 @@
     "volume": "5 ml",
     "weight": "8 g",
     "ammo_type": "components",
-    "charges": 1,
+    "count": 1,
     "melee_damage": { "bash": 1 }
   },
   {
