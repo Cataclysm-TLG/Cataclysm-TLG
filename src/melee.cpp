@@ -1074,12 +1074,16 @@ void Character::reach_attack( const tripoint &p, int forced_movecost )
             break;
         } else if( here.impassable( path_point ) &&
                    // Fences etc. Spears can stab through those
-                   !( weapon.has_flag( flag_SPEAR ) &&
-                      here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, path_point ) ) ) {
+                   !( ( weapon.has_flag( flag_SPEAR ) &&
+                        here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, path_point ) &&
+                        ( rng( 1, 100 ) ) > ( here.coverage( path_point ) - ( std::min( 1.0f,
+                                              skill / 10.0f ) * here.coverage( path_point ) ) ) ) ) ) {
             /** @ARM_STR increases bash effects when reach attacking past something */
             here.bash( path_point, get_arm_str() + weapon.damage_melee( damage_bash ) );
             handle_melee_wear( get_wielded_item() );
             mod_moves( forced_movecost >= 0 ? -forced_movecost : -move_cost );
+            add_msg_if_player( m_warning, _( "Your attack gets caught on the %s." ),
+                               here.ter( path_point ).obj().name() );
             return;
         }
     }
