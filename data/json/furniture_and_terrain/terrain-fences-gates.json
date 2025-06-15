@@ -641,7 +641,7 @@
       "byproducts": [ { "item": "pipe", "count": 6 }, { "item": "wire", "count": [ 4, 16 ] } ]
     },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -667,7 +667,7 @@
     "flags": [ "TRANSPARENT", "THIN_OBSTACLE" ],
     "oxytorch": { "result": "t_dirt", "duration": "1 seconds", "byproducts": [ { "item": "pipe", "count": [ 1, 4 ] } ] },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 30,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -749,8 +749,8 @@
     "flags": [ "TRANSPARENT", "THIN_OBSTACLE" ],
     "deconstruct": { "ter_set": "t_dirt", "items": [ { "item": "2x4", "count": 2 } ] },
     "bash": {
-      "str_min": 8,
-      "str_max": 20,
+      "str_min": 6,
+      "str_max": 10,
       "sound": "crack.",
       "sound_fail": "whump.",
       "ter_set": "t_null",
@@ -870,7 +870,7 @@
     "connects_to": "WOODFENCE",
     "deconstruct": { "ter_set": "t_fence_post", "items": [ { "item": "2x4", "count": 2 }, { "item": "nail", "charges": 20 } ] },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
       "sound": "whump!",
       "sound_fail": "whack!",
@@ -903,9 +903,9 @@
       ]
     },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
-      "str_min_blocked": 8,
+      "str_min_blocked": 7,
       "str_max_blocked": 16,
       "sound": "crack.",
       "sound_fail": "wham.",
@@ -942,9 +942,9 @@
       ]
     },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
-      "str_min_blocked": 8,
+      "str_min_blocked": 7,
       "str_max_blocked": 16,
       "sound": "crack.",
       "sound_fail": "wham.",
@@ -981,7 +981,7 @@
       ]
     },
     "bash": {
-      "str_min": 10,
+      "str_min": 7,
       "str_max": 18,
       "sound": "clang!",
       "sound_fail": "smash!",
@@ -1020,9 +1020,9 @@
       ]
     },
     "bash": {
-      "str_min": 10,
+      "str_min": 7,
       "str_max": 20,
-      "str_min_blocked": 12,
+      "str_min_blocked": 7,
       "str_max_blocked": 30,
       "sound": "crack.",
       "sound_fail": "wham.",
@@ -1060,9 +1060,9 @@
       ]
     },
     "bash": {
-      "str_min": 10,
+      "str_min": 7,
       "str_max": 20,
-      "str_min_blocked": 12,
+      "str_min_blocked": 7,
       "str_max_blocked": 30,
       "sound": "crack.",
       "sound_fail": "wham.",
@@ -1092,7 +1092,7 @@
     "connects_to": "WOODFENCE",
     "deconstruct": { "ter_set": "t_fence_post", "items": [ { "item": "2x4", "count": 8 }, { "item": "nail", "charges": 20 } ] },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
       "sound": "whump!",
       "sound_fail": "whack!",
@@ -1124,9 +1124,9 @@
       ]
     },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
-      "str_min_blocked": 8,
+      "str_min_blocked": 7,
       "str_max_blocked": 16,
       "sound": "crack.",
       "sound_fail": "wham.",
@@ -1163,9 +1163,9 @@
       ]
     },
     "bash": {
-      "str_min": 8,
+      "str_min": 7,
       "str_max": 16,
-      "str_min_blocked": 8,
+      "str_min_blocked": 7,
       "str_max_blocked": 16,
       "sound": "crack.",
       "sound_fail": "wham.",
