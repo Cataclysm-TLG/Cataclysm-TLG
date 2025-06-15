@@ -224,7 +224,7 @@ static bool in_spell_aoe( const tripoint &start, const tripoint &end, const int 
     map &here = get_map();
     const std::vector<tripoint> trajectory = line_to( start, end );
     for( const tripoint &pt : trajectory ) {
-        if( here.impassable( pt ) ) {
+        if( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) {
             return false;
         }
     }
@@ -271,7 +271,7 @@ static std::set<tripoint> spell_effect_cone_range_override( const spell_effect::
         for( const tripoint &ep : end_points ) {
             std::vector<tripoint> trajectory = line_to( source, ep );
             for( const tripoint &tp : trajectory ) {
-                if( here.passable( tp ) ) {
+                if( here.coverage( tp ) == 0 || rng( 1, 100 ) > here.coverage( tp ) ) {
                     targets.emplace( tp );
                 } else {
                     break;
@@ -296,9 +296,10 @@ static bool test_always_true( const tripoint & )
 {
     return true;
 }
-static bool test_passable( const tripoint &p )
+
+static bool test_coverage( const tripoint &p )
 {
-    return get_map().passable( p );
+    return get_map().coverage( p ) == 0 || rng( 1, 100 ) > get_map().coverage( p );
 }
 
 std::set<tripoint> spell_effect::spell_effect_line( const override_parameters &params,
@@ -332,7 +333,7 @@ std::set<tripoint> spell_effect::spell_effect_line( const override_parameters &p
     // is delta aligned with, cw, or ccw of primary axis
     int delta_side = spell_detail::side_of( point_zero, axis_delta, delta );
 
-    bool ( *test )( const tripoint & ) = params.ignore_walls ? test_always_true : test_passable;
+    bool ( *test )( const tripoint & ) = params.ignore_walls ? test_always_true : test_coverage;
 
     // Canonical path from source to target, offset to local space
     std::vector<point> path_to_target = line_to( point_zero, delta );
@@ -439,9 +440,10 @@ std::set<tripoint> calculate_spell_effect_area( const spell &sp, const tripoint 
     tripoint epicenter( target );
     // stop short if we hit a wall, if the spell has a projectile
     if( sp.shape() == spell_shape::blast && !sp.has_flag( spell_flag::NO_PROJECTILE ) ) {
+        map &here = get_map();
         std::vector<tripoint> trajectory = line_to( caster.pos(), target );
         for( std::vector<tripoint>::iterator iter = trajectory.begin(); iter != trajectory.end(); iter++ ) {
-            if( get_map().impassable( *iter ) ) {
+            if( here.impassable( *iter ) ) {
                 if( iter != trajectory.begin() ) {
                     epicenter = *( iter - 1 );
                 } else {
@@ -870,7 +872,7 @@ int area_expander::run( const tripoint &center )
             node &best = area[best_index];
             const tripoint &pt = best.position + point( x_offset[ i ], y_offset[ i ] );
 
-            if( here.impassable( pt ) ) {
+            if( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) {
                 continue;
             }
 
