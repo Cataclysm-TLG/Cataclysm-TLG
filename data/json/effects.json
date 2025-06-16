@@ -682,7 +682,7 @@
     "type": "effect_type",
     "id": "bouldering",
     "name": [ "Unstable Footing" ],
-    "desc": [ "Your footing is unstable.  It's more difficult to fight while standing here." ],
+    "desc": [ "Your footing is unstable.  It's more difficult to fight while standing here, and you could easily stumble or fall." ],
     "apply_message": "You try to keep your balance.",
     "resist_traits": [ "GASTROPOD_BALANCE", "BIRD_LEGS", "SCUTTLE", "LEG_TENT_BRACE" ],
     "rating": "bad",

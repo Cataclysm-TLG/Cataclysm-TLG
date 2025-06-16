@@ -95,6 +95,7 @@ static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_amigara( "amigara" );
 static const efftype_id effect_beartrap( "beartrap" );
+static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_contacts( "contacts" );
 static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_fearparalyze( "fearparalyze" );
@@ -105,6 +106,8 @@ static const efftype_id effect_lightsnare( "lightsnare" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_natural_stance( "natural_stance" );
 static const efftype_id effect_pet( "pet" );
+static const efftype_id effect_slippery_terrain( "slippery_terrain" );
+static const efftype_id effect_sludged( "sludged" );
 static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_transition_contacts( "transition_contacts" );
 static const efftype_id effect_venom_dmg( "venom_dmg" );
@@ -124,6 +127,8 @@ static const json_character_flag json_flag_HARDTOHIT( "HARDTOHIT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_NULL( "NULL" );
 static const json_character_flag json_flag_PSEUDOPOD_GRASP( "PSEUDOPOD_GRASP" );
+
+static const limb_score_id limb_score_balance( "balance" );
 static const limb_score_id limb_score_block( "block" );
 static const limb_score_id limb_score_grip( "grip" );
 static const limb_score_id limb_score_reaction( "reaction" );
@@ -145,7 +150,6 @@ static const skill_id skill_unarmed( "unarmed" );
 static const trait_id trait_ARM_TENTACLES( "ARM_TENTACLES" );
 static const trait_id trait_ARM_TENTACLES_4( "ARM_TENTACLES_4" );
 static const trait_id trait_ARM_TENTACLES_8( "ARM_TENTACLES_8" );
-static const trait_id trait_CLAWS_TENTACLE( "CLAWS_TENTACLE" );
 static const trait_id trait_CLUMSY( "CLUMSY" );
 static const trait_id trait_DEBUG_NIGHTVISION( "DEBUG_NIGHTVISION" );
 static const trait_id trait_DEFT( "DEFT" );
@@ -717,7 +721,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             if( miss_recovery.id != tec_none ) {
                 add_msg( miss_recovery.avatar_message.translated(), t.disp_name() );
             } else if( stumble_pen >= 60 ) {
-                add_msg( m_bad, _( "You miss and stumble with the momentum." ) );
+                add_msg( m_bad, _( "You miss and are thrown off balance by the momentum." ) );
             } else if( stumble_pen >= 10 ) {
                 add_msg( _( "You swing wildly and miss." ) );
             } else {
@@ -727,7 +731,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             if( miss_recovery.id != tec_none ) {
                 add_msg_if_npc( miss_recovery.npc_message.translated(), t.disp_name() );
             } else if( stumble_pen >= 60 ) {
-                add_msg( _( "%s misses and stumbles with the momentum." ), get_name() );
+                add_msg( _( "%s misses and is thrown off balance by the momentum." ), get_name() );
             } else if( stumble_pen >= 10 ) {
                 add_msg( _( "%s swings wildly and misses." ), get_name() );
             } else {
@@ -1109,27 +1113,31 @@ void Character::reach_attack( const tripoint &p, int forced_movecost )
 
 int stumble( Character &u, const item_location &weap )
 {
+    int stumble = 0;
     if( !weap || u.has_trait( trait_DEFT ) ) {
-        return 0;
+        stumble = 0;
+    } else {
+        item cur_weap = weap ? *weap : null_item_reference();
+        units::mass str_mod = u.get_arm_str() * 10_gram;
+        if( u.is_on_ground() ) {
+            str_mod /= 4;
+            // Quadrupeds fight naturally on all fours, with their natural weapons anyway.
+        } else if( u.is_crouching() && ( !u.has_effect( effect_natural_stance ) && !u.unarmed_attack() ) ) {
+            str_mod /= 2;
+        }
+        /** @EFFECT_STR reduces chance of stumbling with heavier weapons */
+        // Examples:
+        // 10 str with a hatchet: 4 + 8 = 12
+        // 5 str with a battle axe: 26 + 49 = 75
+        // Fist: 0
+        stumble = ( weap->volume() / 125_ml ) +
+                  ( weap->weight() / ( str_mod + 13.0_gram ) );
     }
-    item cur_weap = weap ? *weap : null_item_reference();
-    units::mass str_mod = u.get_arm_str() * 10_gram;
-    // Ceph and Slime mutants still need good posture to prevent stumbling
-    if( u.is_on_ground() ) {
-        str_mod /= 4;
-        // but quadrupeds fight naturally on all fours
-    } else if( u.is_crouching() && ( !u.has_effect( effect_natural_stance ) && !u.unarmed_attack() ) ) {
-        str_mod /= 2;
+    // 20% chance minimum to stagger_check().
+    if( ( u.has_effect( effect_bouldering ) ) && ( rng( 0, 100 ) <= stumble + 20 ) ) {
+        u.stagger_check();
     }
-
-    // Examples:
-    // 10 str with a hatchet: 4 + 8 = 12
-    // 5 str with a battle axe: 26 + 49 = 75
-    // Fist: 0
-
-    /** @EFFECT_STR reduces chance of stumbling with heavier weapons */
-    return ( weap->volume() / 125_ml ) +
-           ( weap->weight() / ( str_mod + 13.0_gram ) );
+    return stumble;
 }
 
 bool Character::scored_crit( float target_dodge, const item &weap ) const

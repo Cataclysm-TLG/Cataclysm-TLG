@@ -276,6 +276,7 @@ static const efftype_id effect_riding( "riding" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_slept_through_alarm( "slept_through_alarm" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
+static const efftype_id effect_sludged( "sludged" );
 static const efftype_id effect_stumbled_into_invisible( "stumbled_into_invisible" );
 static const efftype_id effect_stunned( "stunned" );
 static const efftype_id effect_subaquatic_sonar( "subaquatic_sonar" );
@@ -289,6 +290,7 @@ static const faction_id faction_no_faction( "no_faction" );
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
 
 static const field_type_str_id field_fd_clairvoyant( "fd_clairvoyant" );
+static const field_type_str_id field_fd_web( "fd_web" );
 
 static const flag_id json_flag_PIT( "PIT" );
 
@@ -351,6 +353,7 @@ static const json_character_flag json_flag_UNCANNY_DODGE( "UNCANNY_DODGE" );
 static const json_character_flag json_flag_WALK_UNDERWATER( "WALK_UNDERWATER" );
 static const json_character_flag json_flag_WATCH( "WATCH" );
 static const json_character_flag json_flag_WEBBED_FEET( "WEBBED_FEET" );
+static const json_character_flag json_flag_WEBWALK( "WEBWALK" );
 static const json_character_flag json_flag_WINGS_1( "WINGS_1" );
 static const json_character_flag json_flag_WINGS_2( "WINGS_2" );
 static const json_character_flag json_flag_WING_ARMS( "WING_ARMS" );
@@ -444,6 +447,7 @@ static const trait_id trait_ELFA_NV( "ELFA_NV" );
 static const trait_id trait_FAERIECREATURE( "FAERIECREATURE" );
 static const trait_id trait_FAT( "FAT" );
 static const trait_id trait_FEL_NV( "FEL_NV" );
+static const trait_id trait_GASTROPOD_BALANCE( "GASTROPOD_BALANCE" );
 static const trait_id trait_GILLS( "GILLS" );
 static const trait_id trait_GILLS_CEPH( "GILLS_CEPH" );
 static const trait_id trait_GLASSJAW( "GLASSJAW" );
@@ -11296,44 +11300,89 @@ void Character::gravity_check()
     }
 }
 
+void Character::stagger_check()
+{
+    map &here = get_map();
+    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        return;
+    }
+    float balance_factor = ( get_skill_level( skill_swimming ) / 2.0f + get_dex() / 2 + 3.0f *
+                             get_limb_score( limb_score_balance ) + 2.0f * get_limb_score( limb_score_footing ) );
+    if( has_trait( trait_DEFT ) || has_effect( effect_sludged ) ) {
+        balance_factor += 2.0f;
+    }
+    if( has_trait( trait_CLUMSY ) ) {
+        balance_factor -= 2.0f;
+    }
+    if( !has_trait( trait_GASTROPOD_BALANCE ) && has_effect( effect_slippery_terrain ) ) {
+        balance_factor -= 2.0f;
+    }
+    if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) &&
+          is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
+                               here.get_field( pos(), field_fd_web ) != nullptr ) ) {
+        balance_factor += 6.0f;
+    }
+    if( one_in( balance_factor ) ) {
+        stagger();
+    }
+}
+
 void Character::stagger()
 {
     map &here = get_map();
+    std::vector<tripoint> preferred_stumbles;
     std::vector<tripoint> valid_stumbles;
+
+    preferred_stumbles.reserve( 11 );
     valid_stumbles.reserve( 11 );
+
     for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1 ) ) {
         if( dest != pos_bub() ) {
+            tripoint target;
             if( here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest ) ) {
-                valid_stumbles.emplace_back( dest.xy().raw(), dest.z() - 1 );
+                target = tripoint( dest.xy().raw(), dest.z() - 1 );
             } else if( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest ) ) {
-                valid_stumbles.emplace_back( dest.xy().raw(), dest.z() + 1 );
+                target = tripoint( dest.xy().raw(), dest.z() + 1 );
             } else {
-                valid_stumbles.push_back( dest.raw() );
+                target = dest.raw();
+            }
+
+            if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
+                preferred_stumbles.push_back( target );
+            } else {
+                valid_stumbles.push_back( target );
             }
         }
     }
+
     const tripoint_bub_ms below( posx(), posy(), posz() - 1 );
     if( here.valid_move( pos_bub(), below, false, true ) ) {
-        valid_stumbles.push_back( below.raw() );
-    }
-    creature_tracker &creatures = get_creature_tracker();
-    while( !valid_stumbles.empty() ) {
-        bool blocked = false;
-        const tripoint dest = random_entry_removed( valid_stumbles );
-        const optional_vpart_position vp_there = here.veh_at( dest );
-        if( vp_there ) {
-            vehicle &veh = vp_there->vehicle();
-            if( veh.enclosed_at( dest ) ) {
-                blocked = true;
-            }
+        tripoint target = below.raw();
+        if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
+            preferred_stumbles.push_back( target );
+        } else {
+            valid_stumbles.push_back( target );
         }
+    }
+
+    creature_tracker &creatures = get_creature_tracker();
+    std::vector<tripoint> &pool = preferred_stumbles.empty() ? valid_stumbles : preferred_stumbles;
+
+    while( !pool.empty() ) {
+        bool blocked = false;
+        const tripoint dest = random_entry_removed( pool );
+        const optional_vpart_position vp_there = here.veh_at( dest );
+        if( vp_there && vp_there->vehicle().enclosed_at( dest ) ) {
+            blocked = true;
+        }
+
         if( here.passable( dest ) && !blocked &&
             ( creatures.creature_at( dest, is_hallucination() ) == nullptr ) ) {
             avatar &player_avatar = get_avatar();
             if( is_avatar() && player_avatar.get_grab_type() != object_type::NONE ) {
                 player_avatar.grab( object_type::NONE );
             }
-            add_msg_player_or_npc( m_warning,
+            add_msg_player_or_npc( m_bad,
                                    _( "You stumble!" ),
                                    _( "<npcname> stumbles!" ) );
             setpos( dest );

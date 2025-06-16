@@ -753,7 +753,11 @@ class Character : public Creature, public visitable
 
     public:
 
+        // Wile E Coyote looking down.
         void gravity_check();
+        // For events which might cause a stagger, such as missing an attack on unstable ground.
+        void stagger_check();
+        // Called by stagger_check(), or directly by things like being drunk.
         void stagger();
 
         void mod_stat( const std::string &stat, float modifier ) override;
