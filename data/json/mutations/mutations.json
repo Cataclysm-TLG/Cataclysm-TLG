@@ -980,9 +980,9 @@
   {
     "type": "mutation",
     "id": "DEFT",
-    "name": { "str": "Deft" },
+    "name": { "str": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain." },
     "points": 1,
-    "description": "While you're not any better at melee combat, you are better at recovering from a miss, and will be able to attempt another strike faster.",
+    "description": ".",
     "starting_trait": true,
     "category": [ "BIRD", "BEAST", "RAPTOR", "FELINE" ]
   },
@@ -1012,7 +1012,7 @@
     "id": "GOURMAND",
     "name": { "str": "Gourmand" },
     "points": 2,
-    "description": "You eat faster, and can eat and drink more, than anyone else!  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
+    "description": "You eat faster, and can eat and drink more in a single sitting.  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
     "category": [ "MOUSE", "LUPINE", "RAT" ],
     "cancels": [ "PICKYEATER" ],
     "starting_trait": true,
