@@ -11302,23 +11302,29 @@ void Character::gravity_check()
 
 void Character::stagger_check()
 {
-        float balance_factor = ( get_dex() / 2 + 5.f * get_limb_score( limb_score_balance ) );
-        if( has_trait( trait_DEFT ) || has_effect( effect_sludged ) ) {
-            balance_factor += 2.0f;
-        }
-        if( has_trait( trait_CLUMSY ) ) {
-            balance_factor -= 2.0f;
-        }
-        if( !has_trait( trait_GASTROPOD_BALANCE ) && has_effect( effect_slippery_terrain ) ) {
-            balance_factor -= 2.0f;
-        }
-        map &here = get_map();
-        if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) && is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) && here.get_field( pos(), field_fd_web ) != nullptr ) ) {
-            balance_factor += 6.0f;
-        }
-        if( one_in( balance_factor ) ) {
-            stagger();
-        }
+    map &here = get_map();
+    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        return;
+    }
+    float balance_factor = ( get_skill_level( skill_swimming ) / 2.0f + get_dex() / 2 + 3.0f *
+                             get_limb_score( limb_score_balance ) + 2.0f * get_limb_score( limb_score_footing ) );
+    if( has_trait( trait_DEFT ) || has_effect( effect_sludged ) ) {
+        balance_factor += 2.0f;
+    }
+    if( has_trait( trait_CLUMSY ) ) {
+        balance_factor -= 2.0f;
+    }
+    if( !has_trait( trait_GASTROPOD_BALANCE ) && has_effect( effect_slippery_terrain ) ) {
+        balance_factor -= 2.0f;
+    }
+    if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) &&
+          is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
+                               here.get_field( pos(), field_fd_web ) != nullptr ) ) {
+        balance_factor += 6.0f;
+    }
+    if( one_in( balance_factor ) ) {
+        stagger();
+    }
 }
 
 void Character::stagger()
@@ -11341,7 +11347,7 @@ void Character::stagger()
                 target = dest.raw();
             }
 
-            if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 2 ) ) {
+            if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
                 preferred_stumbles.push_back( target );
             } else {
                 valid_stumbles.push_back( target );
@@ -11352,7 +11358,7 @@ void Character::stagger()
     const tripoint_bub_ms below( posx(), posy(), posz() - 1 );
     if( here.valid_move( pos_bub(), below, false, true ) ) {
         tripoint target = below.raw();
-        if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 2 ) ) {
+        if( here.ter( target )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
             preferred_stumbles.push_back( target );
         } else {
             valid_stumbles.push_back( target );
@@ -11376,7 +11382,7 @@ void Character::stagger()
             if( is_avatar() && player_avatar.get_grab_type() != object_type::NONE ) {
                 player_avatar.grab( object_type::NONE );
             }
-            add_msg_player_or_npc( m_warning,
+            add_msg_player_or_npc( m_bad,
                                    _( "You stumble!" ),
                                    _( "<npcname> stumbles!" ) );
             setpos( dest );

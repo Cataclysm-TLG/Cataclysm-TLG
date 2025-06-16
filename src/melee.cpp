@@ -1121,7 +1121,7 @@ int stumble( Character &u, const item_location &weap )
         units::mass str_mod = u.get_arm_str() * 10_gram;
         if( u.is_on_ground() ) {
             str_mod /= 4;
-        // Quadrupeds fight naturally on all fours, with their natural weapons anyway.
+            // Quadrupeds fight naturally on all fours, with their natural weapons anyway.
         } else if( u.is_crouching() && ( !u.has_effect( effect_natural_stance ) && !u.unarmed_attack() ) ) {
             str_mod /= 2;
         }
@@ -1131,7 +1131,7 @@ int stumble( Character &u, const item_location &weap )
         // 5 str with a battle axe: 26 + 49 = 75
         // Fist: 0
         stumble = ( weap->volume() / 125_ml ) +
-           ( weap->weight() / ( str_mod + 13.0_gram ) );
+                  ( weap->weight() / ( str_mod + 13.0_gram ) );
     }
     // 20% chance minimum to stagger_check().
     if( ( u.has_effect( effect_bouldering ) ) && ( rng( 0, 100 ) <= stumble + 20 ) ) {
