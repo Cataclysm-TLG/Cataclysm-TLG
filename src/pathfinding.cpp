@@ -13,6 +13,8 @@
 
 #include "cata_utility.h"
 #include "coordinates.h"
+#include "creature.h"
+#include "creature_tracker.h"
 #include "debug.h"
 #include "game.h"
 #include "gates.h"
@@ -291,11 +293,18 @@ int map::cost_to_pass( const tripoint_bub_ms &cur, const tripoint_bub_ms &p,
         }
     }
 
-    // If we can climb it, great!
+    // We might be able to climb this. Let's check our size.
+    // TODO: Huge creatures might need to be more heavily penalized here.
     if( climb_cost > 0 && p_special & PathfindingFlag::Climbable ) {
+        creature_tracker &creatures = get_creature_tracker();
+        Creature *climber = creatures.creature_at<Creature>( p );
+        if( ( ( furniture.has_flag(ter_furn_flag::TFLAG_LADDER) || furniture.has_flag(ter_furn_flag::TFLAG_CLIMBABLE) ) ? climber->enum_size() * 2 > furniture.bash.str_min : false ) && ( ( terrain.has_flag(ter_furn_flag::TFLAG_LADDER) || terrain.has_flag(ter_furn_flag::TFLAG_CLIMBABLE) ) ? climber->enum_size() * 2 > terrain.bash.str_min : false ) ) {
+            return 0;
+        }
         return climb_cost;
     }
 
+    
     // If it's a door and we can open it from the tile we're on, cool.
     if( allow_open_doors && ( terrain.open || furniture.open ) &&
         ( ( !terrain.has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE ) &&

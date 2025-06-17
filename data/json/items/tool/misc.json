@@ -694,8 +694,8 @@
   {
     "id": "stepladder",
     "type": "TOOL",
-    "name": { "str": "wooden stepladder" },
-    "description": "A ten-foot wooden stepladder.  Activate it to set it down.",
+    "name": { "str": "wooden stepladder (folded)" },
+    "description": "A single-story wooden A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "weight": "20000 g",
     "volume": "50 L",
     "longest_side": "150 cm",
@@ -1042,8 +1042,8 @@
   {
     "id": "aluminum_stepladder",
     "type": "TOOL",
-    "name": { "str": "aluminum stepladder" },
-    "description": "A ten-foot aluminum stepladder.  Activate it to set it down.",
+    "name": { "str": "aluminum stepladder (folded)" },
+    "description": "A single-story aluminum A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "looks_like": "stepladder",
     "weight": "15750 g",
     "volume": "50 L",

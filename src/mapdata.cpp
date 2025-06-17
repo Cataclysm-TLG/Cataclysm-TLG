@@ -246,6 +246,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_ALIGN_WORKBENCH: return "ALIGN_WORKBENCH";
         case ter_furn_flag::TFLAG_NO_SPOIL: return "NO_SPOIL";
         case ter_furn_flag::TFLAG_EASY_DECONSTRUCT: return "EASY_DECONSTRUCT";
+        case ter_furn_flag::TFLAG_BASH_UNDEPLOY: return "BASH_UNDEPLOY";
         case ter_furn_flag::TFLAG_LADDER: return "LADDER";
         case ter_furn_flag::TFLAG_ALARMED: return "ALARMED";
         case ter_furn_flag::TFLAG_CHOCOLATE: return "CHOCOLATE";

@@ -980,7 +980,9 @@
   {
     "type": "mutation",
     "id": "DEFT",
-    "name": { "str": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain." },
+    "name": {
+      "str": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain."
+    },
     "points": 1,
     "description": ".",
     "starting_trait": true,

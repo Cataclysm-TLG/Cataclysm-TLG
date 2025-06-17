@@ -172,6 +172,7 @@ struct plant_data {
  * PERMEABLE - Allows gases to flow through unimpeded.
  * RAMP - Higher z-levels can be accessed from this tile
  * EASY_DECONSTRUCT - Player can deconstruct this without tools
+ * BASH_UNDEPLOY - Bashing this furniture has a chance to un-deploy it, rather than destroy it.
  * HIDE_PLACE - Creature on this tile can't be seen by other creature not standing on adjacent tiles
  * BLOCK_WIND - This tile will partially block wind
  * FLAT_SURF - Furniture or terrain or vehicle part with flat hard surface (ex. table, but not chair; tree stump, etc.).
@@ -310,6 +311,7 @@ enum class ter_furn_flag : int {
     TFLAG_ALIGN_WORKBENCH,
     TFLAG_NO_SPOIL,
     TFLAG_EASY_DECONSTRUCT,
+    TFLAG_BASH_UNDEPLOY,
     TFLAG_LADDER,
     TFLAG_ALARMED,
     TFLAG_CHOCOLATE,

@@ -13327,6 +13327,25 @@ int Character::climbing_cost( const tripoint &from, const tripoint &to ) const
         return 0;
     }
 
+    bool furn_supports_weight = ( here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, from ) ||
+                                  here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, from ) );
+    bool ter_supports_weight = ( here.has_flag_ter( ter_furn_flag::TFLAG_LADDER, from ) ||
+                                 here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, from ) );
+    // Check both furn and ter. Only one needs to be climbable for us.
+    if( furn_supports_weight && get_weight() / 10000_gram > here.furn( from ).obj().bash.str_min ) {
+        add_msg_if_player( _( "The %s can't support your weight." ), here.furn( from ).obj().name() );
+        furn_supports_weight = false;
+    }
+    if( ter_supports_weight && get_weight() / 10000_gram > here.ter( from ).obj().bash.str_min ) {
+        add_msg_if_player( _( "The %s can't support your weight." ), here.ter( from ).obj().name() );
+        ter_supports_weight = false;
+    }
+
+    if( !furn_supports_weight && !ter_supports_weight ) {
+        return 0;
+    }
+
+
     return 50 + diff * 100;
     // TODO: All sorts of mutations, equipment weight etc.
 }
