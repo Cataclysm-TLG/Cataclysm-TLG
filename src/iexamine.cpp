@@ -1566,6 +1566,13 @@ void iexamine::chainfence( Character &you, const tripoint &examp )
             add_msg( _( "You vault over the obstacle." ) );
             move_cost = 300; // Most common move cost for barricades pre-change.
         }
+    // Weight discounted 50% here vs ladders etc. as we're just climbing over, not up to another level.
+    } else if( !( ( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&
+                    you.get_weight() / 15000_gram <= here.furn( examp ).obj().bash.str_min ) ||
+                  ( here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&
+                    you.get_weight() / 15000_gram <= here.ter( examp ).obj().bash.str_min ) ) ) {
+        add_msg( m_bad, _( "You are too heavy to climb over." ) );
+        return;
     } else if( you.has_trait( trait_ARACHNID_ARMS_OK ) &&
                !you.wearing_fitting_on( bodypart_id( "torso" ) ) ) {
         add_msg( _( "Climbing this obstacle is trivial for one such as you." ) );

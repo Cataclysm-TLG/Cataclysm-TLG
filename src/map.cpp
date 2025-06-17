@@ -4498,6 +4498,13 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         return;
     }
 
+    if( smash_furn && has_flag_furn( ter_furn_flag::TFLAG_BASH_UNDEPLOY, p ) &&
+        furn( p ).obj().deployed_item && one_in( bash->str_min - std::max( 1, params.strength ) ) ) {
+        add_item_or_charges( p, item( furn( p ).obj().deployed_item, calendar::turn ) );
+        furn_set( p, furn_str_id::NULL_ID() );
+        return;
+    }
+
     int smin = bash->str_min;
     int smax = bash->str_max;
     int sound_vol = bash->sound_vol;
