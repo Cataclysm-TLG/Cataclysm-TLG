@@ -980,11 +980,9 @@
   {
     "type": "mutation",
     "id": "DEFT",
-    "name": {
-      "str": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain."
-    },
+    "name": { "str": "Deft" },
     "points": 1,
-    "description": ".",
+    "description": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain.",
     "starting_trait": true,
     "category": [ "BIRD", "BEAST", "RAPTOR", "FELINE" ]
   },
