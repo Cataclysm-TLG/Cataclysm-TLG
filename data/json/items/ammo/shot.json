@@ -146,7 +146,7 @@
     "range": 10,
     "count": 10,
     "damage": { "damage_type": "bullet", "amount": 5 },
-    "recoil": 1000,
+    "recoil": 2000,
     "loudness": 100,
     "effects": [ "BEANBAG", "COOKOFF", "NOGIB" ]
   },
@@ -164,7 +164,7 @@
     "range": 18,
     "shot_damage": { "damage_type": "bullet", "amount": 0.2 },
     "damage": { "damage_type": "bullet", "amount": 50 },
-    "recoil": 800,
+    "recoil": 2000,
     "loudness": 128,
     "effects": [ "COOKOFF", "SHOT", "NOGIB" ]
   },
