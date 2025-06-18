@@ -145,6 +145,7 @@ static const move_mode_id move_mode_prone( "prone" );
 
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_spellcraft( "spellcraft" );
+static const skill_id skill_stabbing( "stabbing" );
 static const skill_id skill_unarmed( "unarmed" );
 
 static const trait_id trait_ARM_TENTACLES( "ARM_TENTACLES" );
@@ -860,6 +861,25 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             weakpoint_attack attack;
             attack.weapon = &cur_weap;
             t.deal_melee_hit( this, hit_spread, critical_hit, d, dealt_dam, attack, &target_bp );
+
+            // Handle lodging.
+            // TODO: This scaling is horrible. It needs to scale very gently with both damage and skill.
+            // Should also account for proficiency and per.
+            // Retrieving the weapon should be skill, manipulation, and strength, penalized by weapon weight. This should be a chance to take less of a movecost hit in melee, and a chance to not lose it in a reach attack
+
+            int stab_damage = dealt_dam.type_damage( damage_stab );
+            float stab_skill = get_skill_level( skill_stabbing );
+            if( stab_damage > 9 ) {
+
+                // Avoid division by zero and clamp skill range
+                stab_skill = std::clamp( stab_skill, 0.01f, 10.0f );
+                float base = (stab_damage * 0.01f) / stab_skill;
+
+                // Clamp to 20% max chance
+                float chance_to_lodge = std::clamp( base, 0.0f, 0.2f );
+                move_cost *= 1.1;
+                add_msg( _( "You struggle to pry your weapon free!" ) );
+            }
 
             bool has_edged_damage = false;
             for( const damage_type &dt : damage_type::get_all() ) {
