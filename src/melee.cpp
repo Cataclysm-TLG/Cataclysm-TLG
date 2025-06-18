@@ -2840,12 +2840,12 @@ double Character::melee_value( const item &weap ) const
         my_value *= 1.0f + 0.5f * ( std::sqrt( reach ) - 1.0f );
     }
     // Value polearms less to account for the trickiness of keeping the right range.
-    if( weapon.has_flag( flag_POLEARM ) ) {
+    if( weap.has_flag( flag_POLEARM ) ) {
         my_value *= 0.8;
     }
 
     // If weapon category is empty, it's probably a random object and not a real weapon.
-    if( weapon.type->weapon_category.empty() ) {
+    if( weap.type->weapon_category.empty() ) {
         my_value *= 0.5;
     }
 
