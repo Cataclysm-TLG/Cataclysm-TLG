@@ -1566,7 +1566,7 @@ void iexamine::chainfence( Character &you, const tripoint &examp )
             add_msg( _( "You vault over the obstacle." ) );
             move_cost = 300; // Most common move cost for barricades pre-change.
         }
-    // Weight discounted 50% here vs ladders etc. as we're just climbing over, not up to another level.
+        // Weight discounted 50% here vs ladders etc. as we're just climbing over, not up to another level.
     } else if( !( ( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&
                     you.get_weight() / 15000_gram <= here.furn( examp ).obj().bash.str_min ) ||
                   ( here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&

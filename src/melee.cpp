@@ -2826,40 +2826,49 @@ double Character::weapon_value( const item &weap, int ammo ) const
 
 double Character::melee_value( const item &weap ) const
 {
-    // Start with damage.
-    double my_value = weap.damage();
-
-    // Adjust for how heavy it is.
+    double my_value = 0.0;
     if( !weap.is_null() ) {
-        my_value *= std::min( 1.0, static_cast<double>( 1200_gram / weap.weight() ) );
+        // Tally up all the damage.
+        int total = 0;
+        std::map<damage_type_id, int> dmg_vals;
+        for( const damage_type &dt : damage_type::get_all() ) {
+            if( !dt.melee_only ) {
+                continue;
+            }
+            int dmg = weap.damage_melee( dt.id );
+            dmg_vals[dt.id] = dmg;
+            total += dmg;
+        }
+        my_value += total;
+        if( weap.weight() > 0_gram ) {
+            my_value *= std::min( 1.0, static_cast<double>( 1200_gram / weap.weight() ) );
+        }
+        float reach = weap.reach_range( *this );
+        if( reach > 1.0f ) {
+            my_value *= 1.0f + 0.5f * ( std::sqrt( reach ) - 1.0f );
+        }
+        // POLEARMs are valued lower due to the difficulty of keeping at proper range.
+        if( weap.has_flag( flag_POLEARM ) ) {
+            my_value *= 0.8;
+        }
+        // Items without categories are probably just random objects and not real weapons.
+        if( weap.type != nullptr && weap.type->weapon_category.empty() ) {
+            my_value *= 0.5;
+        }
+        // Items we can use with our martial arts are heavily favored.
+        if( !martial_arts_data->enumerate_known_styles( weap.type->get_id() ).empty() ) {
+            my_value *= 1.5;
+        }
+        if( weap.type != nullptr ) {
+            add_msg_debug( debugmode::DF_MELEE, "%s as melee: %.1f", weap.type->get_id().str(), my_value );
+        } else {
+            add_msg_debug( debugmode::DF_MELEE, "Unarmed as melee: 0.0" );
+        }
     }
-
-    float reach = weap.reach_range( *this );
-    // Value reach weapons more.
-    if( reach > 1.0f ) {
-        my_value *= 1.0f + 0.5f * ( std::sqrt( reach ) - 1.0f );
-    }
-    // Value polearms less to account for the trickiness of keeping the right range.
-    if( weapon.has_flag( flag_POLEARM ) ) {
-        my_value *= 0.8;
-    }
-
-    // If weapon category is empty, it's probably a random object and not a real weapon.
-    if( weapon.type->weapon_category.empty() ) {
-        my_value *= 0.5;
-    }
-
-    // Walue style weapons more.
-    // TODO: Value proficient categories more.
-    // TODO: Make sure we're not a weakling trying to use a bash weapon over a knife.
-    if( !martial_arts_data->enumerate_known_styles( weap.type->get_id() ).empty() ) {
-        my_value *= 1.5;
-    }
-
-    add_msg_debug( debugmode::DF_MELEE, "%s as melee: %.1f", weap.type->get_id().str(), my_value );
 
     return std::max( 0.0, my_value );
 }
+
 
 double Character::unarmed_value() const
 {
