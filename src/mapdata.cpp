@@ -278,6 +278,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_TRANSLUCENT: return "TRANSLUCENT";
         case ter_furn_flag::TFLAG_DEPLOYED_FURNITURE_ABOVE: return "DEPLOYED_FURNITURE_ABOVE";
         case ter_furn_flag::TFLAG_NATURAL_UNDERGROUND: return "NATURAL_UNDERGROUND";
+        case ter_furn_flag::TFLAG_WIRED_WALL: return "WIRED_WALL";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:
