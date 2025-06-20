@@ -125,12 +125,14 @@ static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_GRAB_FILTER( "GRAB_FILTER" );
 static const json_character_flag json_flag_HARDTOHIT( "HARDTOHIT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
+static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_NULL( "NULL" );
 static const json_character_flag json_flag_PSEUDOPOD_GRASP( "PSEUDOPOD_GRASP" );
 
 static const limb_score_id limb_score_balance( "balance" );
 static const limb_score_id limb_score_block( "block" );
 static const limb_score_id limb_score_grip( "grip" );
+static const limb_score_id limb_score_manip( "manip" );
 static const limb_score_id limb_score_reaction( "reaction" );
 
 static const matec_id WBLOCK_1( "WBLOCK_1" );
@@ -383,7 +385,7 @@ float Character::hit_roll() const
     item_location cur_weapon = used_weapon();
     item cur_weap = cur_weapon ? *cur_weapon : null_item_reference();
 
-    // Spears are for reach attacks.
+    // Spears are for reach attacks, and awkward up close.
     if( !reach_attacking && cur_weap.has_flag( flag_POLEARM ) ) {
         hit -= 2.0f;
     }
@@ -504,11 +506,11 @@ static void melee_train( Character &you, int lo, int hi, const item &weap,
     total = std::max( total, 1.f );
 
     // Unarmed may deal cut, stab, and bash damage depending on the weapon
-    if( !vector->weapon && !reach_attacking ) {
+    if( !vector->weapon ) {
         you.practice( skill_unarmed, std::ceil( 1 * rng( lo, hi ) ), hi );
     } else {
         for( const std::pair<const damage_type_id, int> &dmg : dmg_vals ) {
-            if( !dmg.first->skill.is_null() && !reach_attacking ) {
+            if( !dmg.first->skill.is_null() ) {
                 you.practice( dmg.first->skill, std::ceil( dmg.second / total * rng( lo, hi ) ), hi );
             }
         }
@@ -625,7 +627,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             return false;
         }
     }
-
+    bool drop_weapon = false;
     melee::melee_stats.attack_count += 1;
     int hit_spread = t.deal_melee_attack( this, hit_roll() );
     if( !t.is_avatar() ) {
@@ -863,22 +865,64 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             t.deal_melee_hit( this, hit_spread, critical_hit, d, dealt_dam, attack, &target_bp );
 
             // Handle lodging.
-            // TODO: This scaling is horrible. It needs to scale very gently with both damage and skill.
-            // Should also account for proficiency and per.
-            // Retrieving the weapon should be skill, manipulation, and strength, penalized by weapon weight. This should be a chance to take less of a movecost hit in melee, and a chance to not lose it in a reach attack
-
+            // Lodge chance is based on damage, skill, manipulation, proficiencies, and perception. Capped at 25% chance.
             int stab_damage = dealt_dam.type_damage( damage_stab );
             float stab_skill = get_skill_level( skill_stabbing );
-            if( stab_damage > 9 ) {
-
+            if( stab_damage > 9 && !cur_weap.is_null() && !cur_weap.has_flag( flag_INTEGRATED ) &&
+                t.enum_size() > 1 ) {
                 // Avoid division by zero and clamp skill range
-                stab_skill = std::clamp( stab_skill, 0.01f, 10.0f );
-                float base = (stab_damage * 0.01f) / stab_skill;
-
+                stab_skill = std::clamp( stab_skill, 0.5f, 10.0f );
+                // As skill increases, so does damage. Cap damage_factor it so that skill doesn't cancel itself out.
+                float damage_factor = std::max( 65, stab_damage ) * 0.01f;
+                float chance_to_lodge = rng_float( 0.0f, damage_factor ) / ( ( ( stab_skill + ( std::max( 1,
+                                        per_cur ) / 2 ) ) * get_limb_score( limb_score_manip ) ) / 2 );
+                int profs_counted = 0;
+                for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
+                    for( const proficiency_id &prof : cat->category_proficiencies() ) {
+                        if( !has_proficiency( prof ) || profs_counted > 2 ) {
+                            continue;
+                        }
+                        profs_counted += 1;
+                    }
+                }
+                chance_to_lodge -= 0.02 * profs_counted;
                 // Clamp to 20% max chance
-                float chance_to_lodge = std::clamp( base, 0.0f, 0.2f );
-                move_cost *= 1.1;
-                add_msg( _( "You struggle to pry your weapon free!" ) );
+                chance_to_lodge = std::clamp( chance_to_lodge, 0.0f, 0.20f );
+                int percent = chance_to_lodge * 100;
+                if( x_in_y( percent, 100 ) ) {
+                    add_msg( m_warning, _( "Your %1s gets briefly stuck in %2s." ), cur_weap.tname(), t.disp_name() );
+                    // Handle recovery check, which halfs the movecost.
+                    // Retrieving the weapon is skill, grip, and strength, penalized by weapon weight.
+                    float weight_factor = static_cast<float>( cur_weap.weight() / 400_gram );
+                    float chance_to_recover = profs_counted * 5 + 10.f * get_limb_score( limb_score_grip ) * ( (
+                                                  std::max( 1, get_arm_str() ) + stab_skill - ( weight_factor ) ) / 2.f );
+                    if( x_in_y( chance_to_recover, 100 ) ) {
+                        move_cost *= 1.15;
+                        add_msg( m_warning, _( "You quickly pry it free." ) );
+                    } else {
+                        move_cost *= 1.3;
+                        if( reach_attacking ) {
+                            // Check to see if we're on open ground.
+                            map &here = get_map();
+                            tripoint next;
+                            next.x = pos().x + sgn( t.pos().x - pos().x );
+                            next.y = pos().y + sgn( t.pos().y - pos().y );
+                            next.z = pos().z;
+                            // If we're attacking through a fence or something, we lose our weapon.
+                            if( !cur_weap.has_flag( flag_NO_DROP ) && ( here.impassable( next ) ||
+                                    ( here.ter( next )->has_flag( "EMPTY_SPACE" ) &&
+                                      !has_effect_with_flag( json_flag_LEVITATION ) ) ) )  {
+                                add_msg( m_bad, _( "You lose your grip and drop it!" ) );
+                                drop_weapon = true;
+                            } else {
+                                add_msg( m_bad, _( "With some effort, you pull it free." ) );
+                            }
+                        } else {
+                            add_msg( m_bad, _( "With some effort, you pull it free." ) );
+                        }
+                    }
+
+                }
             }
 
             bool has_edged_damage = false;
@@ -989,12 +1033,10 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                enchant_vals::mod::MELEE_STAMINA_CONSUMPTION,
                                get_total_melee_stamina_cost() );
 
-    // Train weapon proficiencies unless reach attacking
-    if( !reach_attacking ) {
-        for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
-            for( const proficiency_id &prof : cat->category_proficiencies() ) {
-                practice_proficiency( prof, 1_seconds );
-            }
+    // Train weapon proficiencies
+    for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
+        for( const proficiency_id &prof : cat->category_proficiencies() ) {
+            practice_proficiency( prof, 1_seconds );
         }
     }
 
@@ -1013,6 +1055,11 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     if( t.as_character() ) {
         dealt_projectile_attack dp = dealt_projectile_attack();
         t.as_character()->on_hit( this, bodypart_id( "bp_null" ), 0.0f, &dp );
+    }
+    if( drop_weapon && !cur_weap.is_null() && !cur_weap.has_flag( flag_INTEGRATED ) ) {
+        map &here = get_map();
+        item your_weapon = remove_weapon();
+        here.add_item_or_charges( t.pos(), your_weapon );
     }
     return true;
 }
