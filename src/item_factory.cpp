@@ -323,8 +323,7 @@ void Item_factory::finalize_pre( itype &obj )
     }
 
     if( obj.thrown_damage.empty() ) {
-        obj.thrown_damage.add_damage( damage_bash,
-                                      obj.melee.damage_map[damage_bash] + obj.weight / 1.0_kilogram );
+        obj.thrown_damage.add_damage( damage_bash, obj.melee.damage_map[damage_bash] * 0.75 );
     }
 
     // add usage methods (with default values) based upon qualities
