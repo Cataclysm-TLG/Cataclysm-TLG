@@ -7973,12 +7973,12 @@
     "description": "Arms?  No, you've got a pair of long tentacles with broad paddle-shaped structures at the tips, granting +1 Dexterity and the ability to strike while prone at a reduced penalty, along with 25 permanent hand encumbrance.  Their grasping surface is lined with suckers and dozens of swiveling hooks that function like vicious claws.",
     "encumbrance_always": [ [ "hand_l", 25 ], [ "hand_r", 25 ] ],
     "flags": [ "PSEUDOPOD_GRASP" ],
-      "wet_protection": [
+    "wet_protection": [
       { "part": "arm_l", "neutral": 19 },
       { "part": "arm_r", "neutral": 19 },
       { "part": "hand_l", "neutral": 5 },
       { "part": "hand_r", "neutral": 5 }
-        ],
+    ],
     "types": [ "ARMS", "HANDS", "CLAWS" ],
     "prereqs": [ "ARM_TENTACLES", "ARM_TENTACLES_4" ],
     "threshreq": [ "THRESH_CEPHALOPOD" ],
