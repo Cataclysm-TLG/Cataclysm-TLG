@@ -3944,8 +3944,6 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
                 if( !spell_being_cast.is_max_level( *you ) && level_override == -1 ) {
                     // still get some experience for trying
                     spell_being_cast.gain_exp( *you, exp_gained / 5 );
-                    you->add_msg_if_player( m_good, _( "You gain %i experience.  New total %i." ), exp_gained / 5,
-                                            spell_being_cast.xp() );
                 }
                 get_event_bus().send<event_type::spellcasting_finish>( you->getID(), false, sp,
                         spell_being_cast.spell_class(), spell_being_cast.get_difficulty( *you ),
@@ -3998,16 +3996,14 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
                     if( old_level == 0 ) {
                         spell_being_cast.gain_level( *you );
                         you->add_msg_if_player( m_good,
-                                                _( "Something about how this spell works just clicked!  You gained a level!" ) );
+                                                _( "You are now comfortable with the fundamentals of %s." ) );
                     } else {
                         spell_being_cast.gain_exp( *you, exp_gained );
-                        you->add_msg_if_player( m_good, _( "You gain %i experience.  New total %i." ), exp_gained,
-                                                spell_being_cast.xp() );
                     }
                     if( spell_being_cast.get_level() != old_level ) {
                         // Level 0-1 message is printed above - notify player when leveling up further
                         if( old_level > 0 ) {
-                            you->add_msg_if_player( m_good, _( "You gained a level in %s!" ), spell_being_cast.name() );
+                            you->add_msg_if_player( m_good, _( "You improve your ability to use %s!" ), spell_being_cast.name() );
                         }
                     }
                 }
