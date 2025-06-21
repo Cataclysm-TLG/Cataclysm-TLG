@@ -163,5 +163,14 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "ARM_TENTACLES_8",
+    "name": { "str": "8 Tentacles" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
   }
 ]
