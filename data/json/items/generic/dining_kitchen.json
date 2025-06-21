@@ -1416,6 +1416,7 @@
     "weight": "300 g",
     "volume": "250 ml",
     "to_hit": -1,
+    "longest_side": "40 cm",
     "qualities": [ [ "COOK", 1 ], [ "CONTAIN", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "melee_damage": { "bash": 2 }
