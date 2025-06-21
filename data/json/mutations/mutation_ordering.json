@@ -154,7 +154,7 @@
       },
       { "id": [ "LEAVES", "LEAVES_WINTER", "LEAVES2", "LEAVES2_FALL", "LEAVES3", "LEAVES3_FALL" ], "order": 1900 },
       {
-        "id": [ "ARACHNID_ARMS", "ARACHNID_ARMS_OK", "ARM_FEATHERS", "ARM_TENTACLES", "ARM_TENTACLES_4", "ARM_TENTACLES_8" ],
+        "id": [ "ARACHNID_ARMS", "ARACHNID_ARMS_OK", "ARM_FEATHERS", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
         "order": 2000
       },
       { "id": [ "PAWS", "PAWS_LARGE", "SLIME_HANDS" ], "order": 2500 },
