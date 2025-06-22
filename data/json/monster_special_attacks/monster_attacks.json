@@ -86,6 +86,7 @@
     "type": "monster_attack",
     "attack_type": "melee",
     "id": "grab_2",
+    "cooldown": 0,
     "damage_max_instance": [ { "damage_type": "bash", "amount": 0 } ],
     "grab": true,
     "grab_data": { "grab_effect": "grabbed" },
@@ -111,6 +112,7 @@
     "type": "monster_attack",
     "attack_type": "melee",
     "id": "grab_3",
+    "cooldown": 0,
     "damage_max_instance": [ { "damage_type": "bash", "amount": 0 } ],
     "grab": true,
     "grab_data": { "grab_effect": "grabbed" },
@@ -234,6 +236,7 @@
     "type": "monster_attack",
     "attack_type": "bite",
     "id": "bite_grab",
+    "cooldown": 0,
     "//": "For monsters like dogs who bite and hold",
     "grab": true,
     "condition": {
