@@ -52,13 +52,16 @@ def print_modlist(modlist, master_list):
 
 all_mod_dependencies = {}
 total_conversions = set()
+obsolete_mods = set()
 
 for info in glob.glob('data/mods/*/modinfo.json'):
     mod_info = json.load(open(info, encoding='utf-8'))
     for e in mod_info:
-        if (e["type"] == "MOD_INFO" and
-                ("obsolete" not in e or not e["obsolete"])):
+        if (e["type"] == "MOD_INFO"):
             ident = e["id"]
+            if ("obsolete" in e and e["obsolete"]):
+                obsolete_mods.add(ident)
+                continue
             all_mod_dependencies[ident] = e.get("dependencies", [])
             if e["category"] == "total_conversion":
                 total_conversions.add(ident)
@@ -79,6 +82,9 @@ for r, d, f in os.walk('data/mods'):
         continue
     add_mods([ident])
     for mod in os.scandir(os.path.join(r, 'mod_interactions')):
+        ident = os.path.basename(mod.path)
+        if ident in obsolete_mods:
+            continue
         mods_this_time.append(os.path.basename(mod.path))
     print(','.join(mods_this_time))
     mods_this_time.clear()
