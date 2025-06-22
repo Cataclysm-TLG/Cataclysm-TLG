@@ -1287,7 +1287,7 @@
         }
       ]
     },
-    "condition_desc": "* Only works on a <info>non-stunned living/info> target of <info>similar or smaller</info> size",
+    "condition_desc": "* Only works on a <info>non-stunned living</info> target of <info>similar or smaller</info> size",
     "stun_dur": 1,
     "attack_vectors": [ "vector_null" ]
   },
