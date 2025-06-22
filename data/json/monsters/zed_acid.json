@@ -332,11 +332,15 @@
     "id": "mon_zombie_dog_brute_acidic",
     "type": "MONSTER",
     "copy-from": "mon_zombie_dog_acidic",
-    "name": { "str": "blistered horror" },
-    "description": "A huge canine with multiple large, foul-looking blisters covering its body.  A corrosive liquid spills from its menacing-looking mouth.",
+    "name": { "str": "festering acid hound" },
+    "description": "The reeking remains of what was once a dog.  Its torso is swollen up like a barrel, supported by unnaturally elongated legs.  Its fur has mostly been burned off by a corrosive liquid that leaks from is jaws and puckered sores all over its body.",
     "color": "yellow_white",
+    "volume": "62500 ml",
+    "weight": "81500 g",
+    "hp": 74,
     "upgrades": false,
     "relative": {
+      "melee_skill": 1,
       "melee_dice": 1,
       "melee_dice_sides": 4,
       "melee_damage": 2,
@@ -364,7 +368,7 @@
       { "id": "scratch_grab_required", "min_mul": 0.75, "max_mul": 1.5 }
     ],
     "bleed_rate": 50,
-    "proportional": { "hp": 1.8, "speed": 1.3, "volume": 1.4, "weigth": 1.1 },
+    "proportional": { "speed": 1.3 },
     "death_function": {
       "message": "The %s bursts apart in a shower of acid!",
       "effect": { "id": "acid_burst", "hit_self": true, "min_level": 5 }
