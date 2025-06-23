@@ -1033,7 +1033,7 @@ void suffer::from_sunburn( Character &you, bool severe )
 
         // Damage player if coverage of body part is <95%
         Sunburn eff;
-        if( exposure > 0.95 ) {
+        if( exposure > 0.05 || ( bp == bodypart_id( "head" ) && exposure > 0.1 ) ) {
             float heavy_cumul_chance = heavy_eff_chance( exposure );
             float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
             float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
