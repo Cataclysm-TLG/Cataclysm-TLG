@@ -1031,24 +1031,29 @@ void suffer::from_sunburn( Character &you, bool severe )
             continue;
         }
 
-        float heavy_cumul_chance = heavy_eff_chance( exposure );
-        float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
-        float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
-        float roll = rng_float( 0.0, 0.98 );
-
+        // Damage player if coverage of body part is <95%
         Sunburn eff;
-        if( roll < heavy_cumul_chance ) {
-            eff = heavy_sunburn( bp );
-        } else if( roll < medium_cumul_chance ) {
-            eff = medium_sunburn( );
-        } else if( roll < light_cumul_chance ) {
-            eff = light_sunburn( );
+        if( exposure > 0.95 ) {
+            float heavy_cumul_chance = heavy_eff_chance( exposure );
+            float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
+            float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
+            float roll = rng_float( 0.0, 1.0 );
+
+            if( roll < heavy_cumul_chance ) {
+                eff = heavy_sunburn( bp );
+            } else if( roll < medium_cumul_chance ) {
+                eff = medium_sunburn( );
+            } else if( roll < light_cumul_chance ) {
+                eff = light_sunburn( );
+            } else {
+                // Do nothing. Assert that exposure is lower than 0.05 as above that point at least light_eff should always happen
+                if( exposure > 0.05 ) {
+                    debugmsg( "No sunburn effect was applied although the bodypart %s is sufficiently exposed at %f exposure",
+                            body_part_name( bp ), exposure );
+                };
+                eff = None;
+            }
         } else {
-            // Do nothing. Assert that exposure is lower than 0.05 as above that point at least light_eff should always happen
-            if( exposure > 0.05 ) {
-                debugmsg( "No sunburn effect was applied although the bodypart %s is sufficiently exposed at %f exposure",
-                          body_part_name( bp ), exposure );
-            };
             eff = None;
         }
         affected_bodyparts.emplace( bp, eff );
