@@ -1034,7 +1034,7 @@ void suffer::from_sunburn( Character &you, bool severe )
         float heavy_cumul_chance = heavy_eff_chance( exposure );
         float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
         float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
-        float roll = rng_float( 0.0, 1.0 );
+        float roll = rng_float( 0.0, 0.98 );
 
         Sunburn eff;
         if( roll < heavy_cumul_chance ) {
