@@ -29,6 +29,7 @@
 #include "game_constants.h"
 #include "line.h"
 #include "map.h"
+#include "mapgendata.h"
 #include "memory_fast.h"
 #include "mod_manager.h"
 #include "mongroup.h"
@@ -1092,6 +1093,13 @@ std::optional<overmap_special_id> overmapbuffer::overmap_special_at(
 {
     const overmap_with_local_coords om_loc = get_om_global( loc );
     return om_loc.om->overmap_special_at( om_loc.local );
+}
+
+std::optional<mapgen_arguments> overmapbuffer::get_existing_omt_stack_arguments(
+    const point_abs_omt &p )
+{
+    const overmap_with_local_coords om_loc = get_om_global( p );
+    return om_loc.om->get_existing_omt_stack_arguments( p );
 }
 
 bool overmapbuffer::check_ot( const std::string &type, ot_match_type match_type,
