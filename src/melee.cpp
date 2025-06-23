@@ -887,7 +887,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                 chance_to_lodge = std::clamp( chance_to_lodge, 0.0f, 0.20f );
                 int percent = chance_to_lodge * 100;
                 if( x_in_y( percent, 100 ) ) {
-                    add_msg( m_warning, _( "Your %1s gets briefly stuck in %2s." ), cur_weap.tname(), t.disp_name() );
+                    add_msg_player_or_npc( m_warning, _( "Your %1s gets briefly stuck in %2s." ),
+                                           _( "<npcname>'s %1s gets briefly stuck in %2s." ), cur_weap.tname(), t.disp_name() );
                     // Handle recovery check, which halfs the movecost.
                     // Retrieving the weapon is skill, grip, and strength, penalized by weapon weight.
                     float weight_factor = static_cast<float>( cur_weap.weight() / 400_gram );
@@ -895,7 +896,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                                   std::max( 1, get_arm_str() ) + stab_skill - ( weight_factor ) ) / 2.f );
                     if( x_in_y( chance_to_recover, 100 ) ) {
                         move_cost *= 1.15;
-                        add_msg( m_warning, _( "You quickly pry it free." ) );
+                        add_msg_if_player( m_warning, _( "You quickly pry your weapon free." ) );
                     } else {
                         move_cost *= 1.3;
                         if( reach_attacking ) {
@@ -909,13 +910,14 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                             if( !cur_weap.has_flag( flag_NO_DROP ) && ( here.impassable( next ) ||
                                     ( here.ter( next )->has_flag( "EMPTY_SPACE" ) &&
                                       !has_effect_with_flag( json_flag_LEVITATION ) ) ) )  {
-                                add_msg( m_bad, _( "You lose your grip and drop it!" ) );
+                                add_msg_player_or_npc( m_bad, _( "You lose your grip and drop your weapon!" ),
+                                                       _( "<npcname> loses their grip and drops their weapon!" ) );
                                 drop_weapon = true;
                             } else {
-                                add_msg( m_bad, _( "With some effort, you pull it free." ) );
+                                add_msg_if_player( m_bad, _( "With some effort, you pull your weapon free." ) );
                             }
                         } else {
-                            add_msg( m_bad, _( "With some effort, you pull it free." ) );
+                            add_msg_if_player( m_bad, _( "With some effort, you pull your weapon free." ) );
                         }
                     }
 
@@ -2880,8 +2882,9 @@ double Character::melee_value( const item &weap ) const
             total += dmg;
         }
         my_value += total;
+        my_value += weap.type->m_to_hit * 2;
         if( weap.weight() > 0_gram ) {
-            my_value *= std::min( 1.0, static_cast<double>( 1200_gram / weap.weight() ) );
+            my_value *= 1.0 / ( 1.0 + ( weap.weight() / 3000_gram ) );
         }
         float reach = weap.reach_range( *this );
         if( reach > 1.0f ) {
@@ -2895,9 +2898,9 @@ double Character::melee_value( const item &weap ) const
         if( weap.type != nullptr && weap.type->weapon_category.empty() ) {
             my_value *= 0.5;
         }
-        // Items we can use with our martial arts are heavily favored.
+        // Items we can use with our martial arts are favored.
         if( !martial_arts_data->enumerate_known_styles( weap.type->get_id() ).empty() ) {
-            my_value *= 1.5;
+            my_value *= 1.2;
         }
         if( weap.type != nullptr ) {
             add_msg_debug( debugmode::DF_MELEE, "%s as melee: %.1f", weap.type->get_id().str(), my_value );
