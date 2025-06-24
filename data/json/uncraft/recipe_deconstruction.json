@@ -6858,6 +6858,29 @@
     "time": "1 m",
     "components": [ [ [ "armor_riot_leg", 1 ] ], [ [ "armor_riot_arm", 1 ] ], [ [ "armor_riot_torso", 1 ] ] ]
   },
+    {
+    "result": "leather_armor_suit",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "1 m",
+    "components": [ [ [ "leather_cuirass", 1 ] ], [ [ "leather_leg_guards", 1 ] ], [ [ "leather_arm_guards", 1 ] ], [ [ "leather_pauldrons", 1 ] ] ]
+  },
+  
+    {
+    "result": "leather_armor_suit_xl",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "1 m",
+    "components": [ [ [ "leather_cuirass_xl", 1 ] ], [ [ "leather_leg_guards_xl", 1 ] ], [ [ "leather_arm_guards_xl", 1 ] ], [ [ "leather_pauldrons_xl", 1 ] ] ]
+  },
+  
+    {
+    "result": "leather_armor_suit_xs",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "1 m",
+    "components": [ [ [ "leather_cuirass_xs", 1 ] ], [ [ "leather_leg_guards_xs", 1 ] ], [ [ "leather_arm_guards_xs", 1 ] ], [ [ "leather_pauldrons_xs", 1 ] ] ]
+  },
   {
     "result": "matches",
     "type": "uncraft",
