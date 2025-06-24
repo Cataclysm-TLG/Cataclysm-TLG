@@ -1049,7 +1049,7 @@ void suffer::from_sunburn( Character &you, bool severe )
                 // Do nothing. Assert that exposure is lower than 0.05 as above that point at least light_eff should always happen
                 if( exposure > 0.05 ) {
                     debugmsg( "No sunburn effect was applied although the bodypart %s is sufficiently exposed at %f exposure",
-                            body_part_name( bp ), exposure );
+                              body_part_name( bp ), exposure );
                 };
                 eff = None;
             }

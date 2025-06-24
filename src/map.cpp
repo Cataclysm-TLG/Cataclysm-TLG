@@ -123,6 +123,7 @@ static const ammo_effect_str_id ammo_effect_PLASMA( "PLASMA" );
 static const ammotype ammo_battery( "battery" );
 
 static const damage_type_id damage_bash( "bash" );
+static const damage_type_id damage_bullet( "bullet" );
 
 static const efftype_id effect_boomered( "boomered" );
 static const efftype_id effect_crushed( "crushed" );
@@ -5066,10 +5067,11 @@ void map::shoot( const tripoint &p, const tripoint &source, projectile &proj, co
                         dam -= rng( shoot.reduce_dmg_min, shoot.reduce_dmg_max );
                     }
                 };
-                // So that arrows aren't destroying brick walls.
+                // Arrows and swords should not be destroying brick walls unless something insane is happening.
                 float modified_dam = dam;
-                if( main_damage_type != damage_bash && modified_dam > 0.0f ) {
-                    modified_dam /= 3;
+                if( ( main_damage_type != damage_bash && main_damage_type != damage_bullet ) &&
+                    modified_dam > 0.0f ) {
+                    modified_dam /= 2.f;
                 }
                 if( veh_hit ) {
                     if( const optional_vpart_position vp = veh_at( p ) ) {
@@ -5088,8 +5090,10 @@ void map::shoot( const tripoint &p, const tripoint &source, projectile &proj, co
                     if( ( laser_passthrough == false && laser ) || !laser ) {
                         int damdown = std::min( static_cast<int>( dam ), rng( terrain->bash.str_min,
                                                 terrain->bash.str_max ) );
-                        bash( p, modified_dam, false );
+                        add_msg( _( "Dam is %s" ), dam );
+                        add_msg( _( "Bashing for %s" ), modified_dam );
                         dam -= damdown;
+                        bash( p, modified_dam, false );
                     }
                 }
 
