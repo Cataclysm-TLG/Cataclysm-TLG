@@ -26,7 +26,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "carpet_legguards",
@@ -47,7 +47,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [
@@ -80,7 +80,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [
@@ -121,7 +121,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "xl_legguard_chitin",
@@ -148,7 +149,8 @@
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "pair of biosilicified chitin leg guards", "str_pl": "pairs of biosilicified chitin leg guards" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
-    "material": [ "acidchitin" ]
+    "material": [ "acidchitin" ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "xl_legguard_acidchitin",
@@ -238,7 +240,7 @@
     "looks_like": "legguard_hard",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY", "ALLOWS_TAIL" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
@@ -260,7 +262,8 @@
         "coverage": 100,
         "encumbrance": 2
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_chausses_xs",
@@ -440,7 +443,7 @@
     "id": "chaps_leather",
     "type": "ARMOR",
     "name": { "str_sp": "leather chaps" },
-    "description": "A pair of black leather chaps.  Very tough and light, but doesn't offer any storage.",
+    "description": "A pair of tough leather chaps, meant to tie on over pants for extra protection.",
     "weight": "1414 g",
     "volume": "1250 ml",
     "price": "210 USD",
@@ -451,7 +454,7 @@
     "looks_like": "pants_leather",
     "color": "dark_gray",
     "warmth": 10,
-    "material_thickness": 3,
+    "material_thickness": 2.5,
     "flags": [ "OUTER", "ALLOWS_TAIL" ],
     "armor": [
       {
@@ -525,7 +528,7 @@
     "looks_like": "legguard_hard",
     "color": "dark_gray",
     "material_thickness": 5,
-    "flags": [ "WATER_FRIENDLY", "OUTER", "ALLOWS_TAIL" ],
+    "flags": [ "WATER_FRIENDLY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [
@@ -538,7 +541,8 @@
         "encumbrance": 3,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "bronze_greaves",
@@ -557,7 +561,7 @@
     "color": "yellow",
     "warmth": 15,
     "material_thickness": 3,
-    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -566,7 +570,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "bronze_greaves_xl",
@@ -602,7 +607,7 @@
     "warmth": 20,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -615,7 +620,8 @@
         "coverage": 80,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "tire_tasset",
@@ -863,7 +869,7 @@
     "looks_like": "legguard_hard",
     "color": "light_gray",
     "warmth": 20,
-    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [
@@ -885,7 +891,8 @@
         "coverage": 85,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_leg_guards_xl",
@@ -920,7 +927,7 @@
     "color": "blue",
     "warmth": 5,
     "material_thickness": 3,
-    "flags": [ "OUTER", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -929,7 +936,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 1 }
   },
   {
     "id": "tire_greaves",
@@ -948,7 +956,7 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 4,
-    "flags": [ "OUTER", "NONCONDUCTIVE", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "NONCONDUCTIVE", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -957,7 +965,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "tire_greaves_xl",
@@ -1048,7 +1057,8 @@
         "max_item_length": "165 mm",
         "moves": 100
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "jeans_mod",
@@ -1066,7 +1076,7 @@
     "color": "light_blue",
     "warmth": 20,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "POCKETS", "ALLOWS_TAIL" ],
+    "flags": [ "VARSIZE", "POCKETS", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "encumbrance": [ 12, 16 ],
@@ -1120,7 +1130,8 @@
         "max_item_length": "165 mm",
         "moves": 100
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "trousers_eod",
@@ -1138,7 +1149,7 @@
     "color": "light_green",
     "environmental_protection": 2,
     "material_thickness": 15,
-    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL" ],
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL", "BLOCK_WHILE_WORN" ],
     "use_action": [ { "type": "attach_molle", "size": 4 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -1151,7 +1162,8 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 40
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "trousers_eod_light",
@@ -1169,7 +1181,7 @@
     "color": "light_gray",
     "environmental_protection": 2,
     "material_thickness": 7,
-    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL" ],
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "ONLY_ONE", "NORMAL", "BLOCK_WHILE_WORN" ],
     "use_action": [ { "type": "attach_molle", "size": 6 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -1182,7 +1194,8 @@
         "coverage": 98,
         "covers": [ "leg_l", "leg_r" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "armor_riot_leg",
@@ -1223,15 +1236,16 @@
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "leather_leg_guards",
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "pair of leather leg guards", "str_pl": "pairs of leather leg guards" },
-    "description": "A pair of tough leather leg guards.  Light and comfortable.",
-    "weight": "765 g",
+    "description": "A set of soft leather cuisses, poleyns, and greaves that strap on over the legs, providing excellent protection from cutting and stabbing attacks.",
+    "weight": "2040 g",
     "volume": "2 L",
     "price": "40 USD",
     "price_postapoc": "10 USD",
@@ -1242,8 +1256,9 @@
     "color": "brown",
     "warmth": 25,
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
-    "armor": [ { "covers": [ "leg_l", "leg_r" ], "encumbrance": 7, "coverage": 90 } ]
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "armor": [ { "covers": [ "leg_l", "leg_r" ], "encumbrance": 7, "coverage": 90 } ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "leather_leg_guards_xl",

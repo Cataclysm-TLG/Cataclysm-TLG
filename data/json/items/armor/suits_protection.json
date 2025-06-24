@@ -4,13 +4,13 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "suit of boiled leather armor", "str_pl": "suits of boiled leather armor" },
-    "description": "A suit of thick leather body armor that has been hardened via chemical treatment.  Light and strong.",
-    "weight": "6600 g",
-    "volume": "9500 ml",
+    "description": "A suit of armor constructed in a similar fashion to plate mail, but made of leather which has been boiled until stiff.  It's lighter and cooler than standard leather, but less flexible, making it harder to move in.",
+    "weight": "3200 g",
+    "volume": "6600 ml",
     "price": "260 USD",
     "price_postapoc": "30 USD",
     "to_hit": -5,
-    "material": [ "leather" ],
+    "material": [ "leather_boiled" ],
     "symbol": "[",
     "longest_side": "60 cm",
     "looks_like": "leather_armor_suit",
@@ -19,48 +19,60 @@
       {
         "covers": [ "torso" ],
         "coverage": 95,
-        "encumbrance": 22,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 6.5 } ],
+        "encumbrance": 24,
+        "material": [ { "type": "leather_boiled", "covered_by_mat": 100, "thickness": 2.5 } ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 18,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "material": [ { "type": "leather_boiled", "covered_by_mat": 100, "thickness": 2.5 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 8,
         "rigid_layer_only": true
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": 18, "rigid_layer_only": true },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 85, "encumbrance": 18, "rigid_layer_only": true }
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
     ],
     "warmth": 20,
-    "material_thickness": 6,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
-    "melee_damage": { "bash": 2 }
+    "material_thickness": 2.5,
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "armor_chitin",
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "chitinous armor" },
-    "description": "Leg and body armor made from the exoskeletons of insects.",
+    "description": "Lightweight leg and body armor made from the exoskeletons of giant arthropods.",
     "weight": "2632 g",
-    "volume": "17500 ml",
+    "volume": "5800 ml",
     "price": "1200 USD",
     "price_postapoc": "30 USD",
     "to_hit": -5,
     "material": [ "chitin" ],
     "symbol": "[",
     "looks_like": "leather_armor_suit",
-    "color": "green",
+    "color": "brown",
     "warmth": 10,
     "longest_side": "60 cm",
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL" ],
+    "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       { "covers": [ "torso" ], "coverage": 90, "encumbrance": 10 },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 90,
-        "encumbrance": [ 5, 5 ],
+        "encumbrance": 5,
         "specifically_covers": [ "leg_upper_r", "leg_upper_l", "leg_hip_r", "leg_hip_l" ],
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 2 }
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "xl_armor_chitin",
@@ -89,7 +101,7 @@
     "material": [ "acidchitin" ],
     "environmental_protection": 2,
     "price_postapoc": "35 USD",
-    "relative": { "melee_damage": { "bash": 1 } }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "xl_armor_acidchitin",
@@ -125,9 +137,27 @@
     "looks_like": "leather_armor_suit",
     "color": "brown",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 17, 17 ] },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 85, "encumbrance": [ 17, 17 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": [ 17, 17 ] }
+      {
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": 24,
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 18,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 8,
+        "rigid_layer_only": true
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
     ],
     "pocket_data": [
       {
@@ -147,7 +177,7 @@
     ],
     "warmth": 45,
     "material_thickness": 4,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL" ],
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -184,9 +214,27 @@
     "looks_like": "leather_armor_suit",
     "color": "brown",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 90, "encumbrance": [ 21, 25 ] },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": [ 21, 21 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": [ 21, 21 ] }
+      {
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": 24,
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 18,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 8,
+        "rigid_layer_only": true
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
     ],
     "pocket_data": [
       {
@@ -231,9 +279,9 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "suit of leather armor", "str_pl": "suts of leather armor" },
-    "description": "A full suit of thick leather armor.  Relatively light and comfortable.",
-    "weight": "4400 g",
-    "volume": "7 L",
+    "description": "A full suit of thick leather armor.  It's fairly heavy, but could be deconstructed into its constituent parts if desired.",
+    "weight": "5890 g",
+    "volume": "6200 ml",
     "price": "120 USD",
     "price_postapoc": "25 USD",
     "to_hit": -5,
@@ -246,11 +294,24 @@
       {
         "covers": [ "torso" ],
         "coverage": 95,
-        "encumbrance": 12,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4.5 } ]
+        "encumbrance": 24,
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
       },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 90, "encumbrance": 12 },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 85, "encumbrance": 12 }
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 18,
+        "coverage": 90,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
+      },
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
+        "covers": [ "arm_l", "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "coverage": 100,
+        "encumbrance": 8,
+        "rigid_layer_only": true
+      },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
     ],
     "warmth": 25,
     "material_thickness": 4,
@@ -292,7 +353,7 @@
     "warmth": 25,
     "longest_side": "60 cm",
     "material_thickness": 1.6,
-    "flags": [ "VARSIZE", "OUTER", "ALLOWS_TAIL" ],
+    "flags": [ "VARSIZE", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "encumbrance": 34,
@@ -301,7 +362,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "platemail_suit",
@@ -378,7 +439,7 @@
         "coverage": 90
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_suit_xl",
@@ -516,7 +577,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_suit_faraday_xl",
@@ -599,8 +660,8 @@
     ],
     "warmth": 35,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
-    "melee_damage": { "bash": 2 }
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "armor_samurai_xl",
@@ -692,7 +753,8 @@
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "armor_tiresuit",
@@ -720,7 +782,8 @@
         "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "beekeeping_suit",
@@ -732,7 +795,7 @@
     "price": "120 USD",
     "price_postapoc": "1 USD",
     "to_hit": -5,
-    "material": [ "cotton" ],
+    "material": [ "nylon", "cotton" ],
     "symbol": "[",
     "looks_like": "hazmat_suit",
     "color": "white",
@@ -752,7 +815,7 @@
       }
     ],
     "warmth": 25,
-    "material_thickness": 2,
+    "material_thickness": 1.5,
     "environmental_protection": 1,
     "flags": [ "VARSIZE", "OUTER" ]
   },
@@ -773,14 +836,14 @@
     "looks_like": "boiled_leather_armor_suit",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL", "BLOCK_WHILE_WORN" ],
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a looser fit.",
       "target": "chainmail_hauberk_loose",
       "menu_text": "Loosen"
     },
-    "//": "Suits have better coverage than separates because the parts are all attached to each other, leaving fewer gaps.",
+    "//": "Some suits have better coverage than separates because the parts are all attached to each other, leaving fewer gaps.",
     "armor": [
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
@@ -822,7 +885,8 @@
         "coverage": 40,
         "encumbrance": 2
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_hauberk_xl",
@@ -943,7 +1007,7 @@
     "looks_like": "touring_suit",
     "color": "light_red",
     "warmth": 15,
-    "flags": [ "STURDY", "ALLOWS_TAIL" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
@@ -1011,7 +1075,8 @@
         "encumbrance": 10,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_suit_xl",
@@ -1154,7 +1219,8 @@
         "layers": [ "OUTER", "NORMAL" ]
       }
     ],
-    "flags": [ "GROUNDING" ]
+    "flags": [ "GROUNDING", "BLOCK_WHILE_WORN" ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_suit_faraday_xl",
@@ -1422,7 +1488,7 @@
     "color": "light_gray",
     "warmth": 50,
     "material_thickness": 4,
-    "flags": [ "STURDY", "NONCONDUCTIVE", "NORMAL", "OUTER" ],
+    "flags": [ "STURDY", "NONCONDUCTIVE", "NORMAL", "OUTER", "BLOCK_WHILE_WORN" ],
     "armor": [
       {
         "material": [
@@ -2054,7 +2120,7 @@
     "id": "mil_flight_suit",
     "type": "ARMOR",
     "name": { "str": "military flight suit" },
-    "description": "A sage-green US military flight suit.  It has various insignia embroidered onto it.",
+    "description": "A long-sleeved jumpsuit worn by military pilots.  It's made of nomex, rendering it fireproof.",
     "weight": "1315 g",
     "volume": "4687 ml",
     "price": "220 USD 65 cent",
@@ -2065,9 +2131,9 @@
     "looks_like": "touring_suit",
     "color": "green",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 1, 2 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 1, 1 ] },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 80, "encumbrance": [ 1, 2 ] }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 6, 10 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 6, 6 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 80, "encumbrance": [ 6, 10 ] }
     ],
     "pocket_data": [
       { "pocket_type": "CONTAINER", "max_contains_volume": "700 ml", "max_contains_weight": "2 kg", "moves": 80 },

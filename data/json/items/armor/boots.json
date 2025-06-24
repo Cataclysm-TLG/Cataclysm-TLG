@@ -196,7 +196,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 2 }
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "xl_boots_chitin",
@@ -223,7 +223,7 @@
     "description": "Boots crafted from glassy-looking arthropod exoskeleton.  The material is a little more brittle, but might withstand fire and acid better than the regular stuff.",
     "price_postapoc": "17 USD 50 cent",
     "material": [ "acidchitin" ],
-    "relative": { "melee_damage": { "bash": 3 } }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "xl_boots_acidchitin",
@@ -331,7 +331,8 @@
         "coverage": 100,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "boots_fur",
@@ -449,7 +450,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "xl_boots_faux_fur",
@@ -556,7 +557,7 @@
         "coverage": 100
       }
     ],
-    "melee_damage": { "bash": 4 }
+    "melee_damage": { "bash": 3, "cut": 1 }
   },
   {
     "id": "xl_boots_plate",
@@ -611,7 +612,8 @@
         "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 } ],
         "coverage": 100
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "boots_steel",
@@ -663,7 +665,7 @@
         "coverage": 100
       }
     ],
-    "melee_damage": { "bash": 5 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "sneakers_steel",
@@ -2158,7 +2160,8 @@
         "encumbrance": 5,
         "coverage": 90
       }
-    ]
+    ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_sollerets_xl",
