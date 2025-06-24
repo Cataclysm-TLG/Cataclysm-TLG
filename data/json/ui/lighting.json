@@ -2,38 +2,67 @@
   {
     "id": "lighting_desc",
     "type": "widget",
-    "label": "Lighting",
+    "label": "Visibility",
     "style": "text",
     "clauses": [
       {
-        "id": "bright",
-        "text": "bright",
-        "color": "yellow",
+        "id": "blind",
+        "text": "blind!",
+        "color": "red",
+        "condition": {
+          "or": [
+            { "u_has_effect": "blind" },
+            { "u_has_effect": "boomered" },
+            { "math": [ "u_val('fine_detail_vision_mod')", ">=", "11" ] }
+          ]
+        }
+      },
+      {
+        "id": "full",
+        "text": "full",
+        "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "<=", "1" ] }
       },
       {
-        "id": "cloudy",
-        "text": "cloudy",
+        "id": "fair",
+        "text": "fair",
         "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "2" ] }
       },
       {
-        "id": "shady",
-        "text": "shady",
-        "color": "light_gray",
+        "id": "moderate",
+        "text": "moderate",
+        "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "3" ] }
       },
       {
-        "id": "dark",
-        "text": "dark",
-        "color": "dark_gray",
+        "id": "poor",
+        "text": "poor",
+        "color": "light_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "4" ] }
       },
       {
-        "id": "very dark",
-        "text": "very dark",
+        "id": "murky",
+        "text": "murky",
+        "color": "dark_gray",
+        "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "5" ] }
+      },
+      {
+        "id": "very_murky",
+        "text": "very murky",
+        "color": "dark_gray",
+        "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "6" ] }
+      },
+      {
+        "id": "nearly_blind",
+        "text": "nearly blind",
         "color": "black_white",
-        "condition": { "math": [ "u_val('fine_detail_vision_mod')", ">=", "5" ] }
+        "condition": {
+          "and": [
+            { "math": [ "u_val('fine_detail_vision_mod')", ">=", "7" ] },
+            { "math": [ "u_val('fine_detail_vision_mod')", "<", "11" ] }
+          ]
+        }
       }
     ]
   },
