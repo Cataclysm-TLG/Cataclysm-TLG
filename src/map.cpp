@@ -5090,8 +5090,6 @@ void map::shoot( const tripoint &p, const tripoint &source, projectile &proj, co
                     if( ( laser_passthrough == false && laser ) || !laser ) {
                         int damdown = std::min( static_cast<int>( dam ), rng( terrain->bash.str_min,
                                                 terrain->bash.str_max ) );
-                        add_msg( _( "Dam is %s" ), dam );
-                        add_msg( _( "Bashing for %s" ), modified_dam );
                         dam -= damdown;
                         bash( p, modified_dam, false );
                     }
