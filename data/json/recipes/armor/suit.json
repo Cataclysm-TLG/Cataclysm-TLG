@@ -175,7 +175,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "tailor",
-    "difficulty": 0,
     "time": "10 m",
     "reversible": true,
     "autolearn": true,
@@ -1063,6 +1062,7 @@
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "survival",
     "difficulty": 2,
+    "reversible": true,
     "autolearn": true,
     "time": "5 m",
     "components": [ [ [ "bag_body_bag", 1 ] ], [ [ "withered", 180 ], [ "straw_pile", 180 ] ] ]
@@ -1075,7 +1075,6 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "fabrication",
-    "skill": 0,
     "time": "2 m",
     "reversible": true,
     "autolearn": true,

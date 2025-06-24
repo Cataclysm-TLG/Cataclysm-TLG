@@ -408,7 +408,7 @@ float Character::hit_roll() const
     }
 
     // Fighting in the dark is hard.
-    if( !sight_impaired() && fine_detail_vision_mod() >= 6.0f ) {
+    if( !sight_impaired() && fine_detail_vision_mod() >= 7.0f ) {
         hit -= 1.0f;
     }
 
@@ -457,8 +457,8 @@ std::string Character::get_miss_reason()
         !reach_attacking &&
         cur_weap.has_flag( flag_POLEARM ) );
     add_miss_reason(
-        _( "You can't see well enough to fight in the dark." ),
-        fine_detail_vision_mod() >= 6 );
+        _( "You can't see well enough to fight." ),
+        fine_detail_vision_mod() >= 7 );
 
     const std::string *const reason = melee_miss_reasons.pick();
     if( reason == nullptr ) {
@@ -1345,7 +1345,7 @@ float Character::get_dodge() const
     add_msg_debug( debugmode::DF_MELEE, "Dodge after bodysize modifier %.1f", ret );
 
     // It's much harder to dodge when you can't see well
-    if( !sight_impaired() && fine_detail_vision_mod() >= 6.0f ) {
+    if( !sight_impaired() && fine_detail_vision_mod() >= 7.0f ) {
         add_msg_debug( debugmode::DF_MELEE, "Dodge after vision penalty %.1f", ret );
         ret *= 0.8;
     }
