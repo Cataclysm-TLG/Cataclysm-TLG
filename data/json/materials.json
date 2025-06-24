@@ -1451,7 +1451,7 @@
     "resist": { "bash": 1.2, "cut": 2.5, "acid": 8, "heat": 2.2, "bullet": 2 },
     "repair_difficulty": 3
   },
-    {
+  {
     "type": "material",
     "id": "leather_boiled",
     "name": "Boiled Leather",
