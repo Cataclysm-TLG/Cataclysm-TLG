@@ -2,12 +2,12 @@
   {
     "id": "lighting_desc",
     "type": "widget",
-    "label": "Visibility",
+    "label": "Vision",
     "style": "text",
     "clauses": [
       {
         "id": "blind",
-        "text": "blind!",
+        "text": "Blind!",
         "color": "red",
         "condition": {
           "or": [
@@ -19,43 +19,43 @@
       },
       {
         "id": "full",
-        "text": "full",
+        "text": "Full",
         "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "<=", "1" ] }
       },
       {
         "id": "fair",
-        "text": "fair",
+        "text": "Fair",
         "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "2" ] }
       },
       {
         "id": "moderate",
-        "text": "moderate",
+        "text": "Moderate",
         "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "3" ] }
       },
       {
         "id": "poor",
-        "text": "poor",
+        "text": "Poor",
         "color": "light_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "4" ] }
       },
       {
         "id": "murky",
-        "text": "murky",
+        "text": "Murky",
         "color": "dark_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "5" ] }
       },
       {
         "id": "very_murky",
-        "text": "very murky",
+        "text": "Very Murky",
         "color": "dark_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "==", "6" ] }
       },
       {
         "id": "nearly_blind",
-        "text": "nearly blind",
+        "text": "Nearly Blind",
         "color": "black_white",
         "condition": {
           "and": [
