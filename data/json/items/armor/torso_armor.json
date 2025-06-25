@@ -683,7 +683,7 @@
     "warmth": 15,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "WATERPROOF", "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "WATERPROOF", "OUTER" ],
     "melee_damage": { "bash": 2 }
   },
   {

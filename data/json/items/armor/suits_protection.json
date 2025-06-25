@@ -40,7 +40,7 @@
     ],
     "warmth": 20,
     "material_thickness": 2.5,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
     "melee_damage": { "bash": 3 }
   },
   {
@@ -61,7 +61,7 @@
     "warmth": 10,
     "longest_side": "60 cm",
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL" ],
     "armor": [
       { "covers": [ "torso" ], "coverage": 90, "encumbrance": 10 },
       {
@@ -177,7 +177,7 @@
     ],
     "warmth": 45,
     "material_thickness": 4,
-    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "POCKETS", "RAINPROOF", "STURDY", "OUTER", "ALLOWS_TAIL" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -353,7 +353,7 @@
     "warmth": 25,
     "longest_side": "60 cm",
     "material_thickness": 1.6,
-    "flags": [ "VARSIZE", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "OUTER", "ALLOWS_TAIL" ],
     "armor": [
       {
         "encumbrance": 34,
@@ -381,7 +381,7 @@
     "warmth": 20,
     "longest_side": "60 cm",
     "material_thickness": 2,
-    "flags": [ "OUTER", "STURDY", "CONDUCTIVE", "ONLY_ONE", "BLOCK_WHILE_WORN", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "STURDY", "CONDUCTIVE", "ONLY_ONE", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
@@ -474,7 +474,7 @@
     "color": "light_gray",
     "warmth": 20,
     "longest_side": "60 cm",
-    "flags": [ "STURDY", "GROUNDING", "ONLY_ONE", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "GROUNDING", "ONLY_ONE" ],
     "armor": [
       {
         "material": [
@@ -660,7 +660,7 @@
     ],
     "warmth": 35,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -696,7 +696,7 @@
     "color": "dark_gray",
     "warmth": 20,
     "longest_side": "60 cm",
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "BLOCK_WHILE_WORN", "ALLOWS_TAIL" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "ALLOWS_TAIL" ],
     "use_action": [ { "type": "attach_molle", "size": 6 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -836,7 +836,7 @@
     "looks_like": "boiled_leather_armor_suit",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL" ],
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a looser fit.",
@@ -1007,7 +1007,7 @@
     "looks_like": "touring_suit",
     "color": "light_red",
     "warmth": 15,
-    "flags": [ "STURDY", "ALLOWS_TAIL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
@@ -1219,7 +1219,7 @@
         "layers": [ "OUTER", "NORMAL" ]
       }
     ],
-    "flags": [ "GROUNDING", "BLOCK_WHILE_WORN" ],
+    "flags": [ "GROUNDING" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1488,7 +1488,7 @@
     "color": "light_gray",
     "warmth": 50,
     "material_thickness": 4,
-    "flags": [ "STURDY", "NONCONDUCTIVE", "NORMAL", "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "NONCONDUCTIVE", "NORMAL", "OUTER" ],
     "armor": [
       {
         "material": [
