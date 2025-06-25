@@ -67,6 +67,7 @@ static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_immobilization( "immobilization" );
 static const efftype_id effect_in_pit( "in_pit" );
+static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_led_by_leash( "led_by_leash" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_operating( "operating" );
@@ -2439,8 +2440,12 @@ void monster::shove_vehicle( const tripoint &remote_destination,
             }
             if( shove_velocity > 0 ) {
                 //~ %1$s - monster name, %2$s - vehicle name
-                add_msg_if_player_sees( this->pos(), m_bad, _( "%1$s shoves %2$s out of their way!" ),
-                                        this->disp_name(),
+                std::string monster_name = "Something";
+                if( !this->has_effect( effect_invisibility ) ) {
+                    monster_name = this->disp_name( false, true );
+                }
+                add_msg_if_player_sees( this->pos(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
+                                        monster_name,
                                         veh.disp_name() );
                 int shove_moves = shove_veh_mass_moves_factor * veh_mass / 10_kilogram;
                 shove_moves = std::max( shove_moves, shove_moves_minimal );
