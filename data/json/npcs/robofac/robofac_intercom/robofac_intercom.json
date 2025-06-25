@@ -53,7 +53,27 @@
         "refusal": "You're not yet qualified to buy this"
       }
     ],
-    "shopkeeper_blacklist": "robofac_blacklist"
+    "shopkeeper_blacklist": "robofac_blacklist",
+    "shopkeeper_price_rules": [
+      { "item": "petrified_eye", "price": 2000 },
+      { "item": "altered_phone", "price": 4000 },
+      { "item": "spiral_stone", "price": 1000 },
+      { "item": "altered_exposed_wiring_prototype", "price": 4000 },
+      { "item": "altered_comb", "price": 4000 },
+      { "item": "altered_rubiks_cube", "price": 4000 },
+      { "item": "altered_keyring", "price": 4000 },
+      { "item": "altered_teapot", "price": 4000 },
+      { "item": "altered_stopwatch", "price": 4000 },
+      { "item": "altered_shirt", "price": 4000 },
+      { "item": "altered_badge", "price": 4000 },
+      { "item": "altered_sunglasses", "price": 4000 },
+      { "item": "altered_scissors", "price": 4000 },
+      { "item": "altered_necklace", "price": 4000 },
+      { "item": "altered_jacket", "price": 4000 },
+      { "item": "altered_apron", "price": 4000 },
+      { "item": "monolith_disc", "price": 1000 },
+      { "item": "monolith_brick", "price": 1000 }
+    ]
   },
   {
     "type": "item_group",
@@ -211,6 +231,7 @@
     "responses": [
       { "text": "Let's discuss contracts.", "topic": "TALK_ROBOFAC_INTERCOM_CONTRACTS" },
       { "text": "Let's trade.", "topic": "TALK_ROBOFAC_INTERCOM_SERVICES", "effect": "start_trade" },
+      { "text": "You mentioned wanting unusual items?", "topic": "TALK_ROBOFAC_INTERCOM_UNUSUAL_ITEMS" },
       {
         "text": "The traders at the refugee center asked me to deliver this drive of FEMA data…",
         "condition": {
@@ -233,6 +254,12 @@
       },
       { "text": "I have to go.", "topic": "TALK_DONE" }
     ]
+  },
+  {
+    "id": "TALK_ROBOFAC_INTERCOM_UNUSUAL_ITEMS",
+    "type": "talk_topic",
+    "dynamic_line": "You may rarely come across certain items which have been affected by the…ongoing phenomena.  They may seem like mundane household objects, but exhibit properties which seem to defy casual explanation.  I'm afraid that we cannot be clearer on this matter - suffice to say that you will likely know it when you see it.  We are willing to barter for these items at a high value.",
+    "responses": [ { "text": "I see.", "topic": "TALK_ROBOFAC_INTERCOM_SERVICES" } ]
   },
   {
     "id": "TALK_ROBOFAC_INTERCOM_INTRO",
@@ -349,7 +376,7 @@
   {
     "id": "TALK_ROBOFAC_INTERCOM_1_JOBS_2",
     "type": "talk_topic",
-    "dynamic_line": "Certainly.  I've just finished speaking with a certain individual, who has authorized you limited access to a selection of our internal stores.  We will provide you with pay for contracts in the form of tokens to be used as an exchange currency, which you can then trade for goods.  We are also amenable to bartering in exchange for supplies that are currently difficult for us to obtain from outside the facility.",
+    "dynamic_line": "Certainly.  I've just finished speaking with a certain individual, who has authorized you limited access to a selection of our internal stores.  We will provide you with pay for contracts in the form of tokens to be used as an exchange currency, which you can then trade for goods.  We are also amenable to bartering in exchange for supplies that are currently difficult for us to obtain from outside the facility, and are especially interested in any…especially unusual items you may find.",
     "speaker_effect": {
       "effect": [
         { "npc_add_var": "dialogue_intercom_npc_intercom_trade", "value": "yes" },
