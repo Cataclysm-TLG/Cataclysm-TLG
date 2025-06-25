@@ -1709,13 +1709,13 @@ void Character::release_grapple()
                 }
             }
         }
+        // TODO: Track our grabbing effects the same way we track grab_strength on the victim
         for( const effect &eff : get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
             const efftype_id effid = eff.get_id();
-            if( eff.get_intensity() == grab_1.grab_strength ) {
-                remove_effect( effid );
-            }
+            remove_effect( effid );
         }
     }
+    grab_1.clear();
 }
 
 void Character::mount_creature( monster &z )
