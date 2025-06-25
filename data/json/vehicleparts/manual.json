@@ -69,7 +69,7 @@
       "removal": { "skills": [ [ "fabrication", 2 ] ], "time": "6 m" },
       "repair": { "skills": [ [ "fabrication", 2 ] ], "time": "60 m" }
     },
-    "flags": [ "ENGINE", "CONTROLS", "MUSCLE_ARMS", "E_STARTS_INSTANTLY" ],
+    "flags": [ "ENGINE", "CONTROLS", "MUSCLE_ARMS", "E_STARTS_INSTANTLY", "WATER_ONLY" ],
     "breaks_into": [ { "item": "splinter", "count": [ 2, 4 ] } ],
     "damage_reduction": { "all": 5 },
     "variants": [ { "symbols": "*", "symbols_broken": "#" } ]
