@@ -706,6 +706,11 @@ static void grab()
     map &here = get_map();
     creature_tracker &creatures = get_creature_tracker();
 
+    if( you.grab_1.victim != nullptr ) {
+        you.release_grapple();
+        return;
+    }
+
     if( you.get_grab_type() != object_type::NONE ) {
         if( const optional_vpart_position vp = here.veh_at( you.pos_bub() + you.grab_point ) ) {
             add_msg( _( "You release the %s." ), vp->vehicle().name );
@@ -715,8 +720,6 @@ static void grab()
         you.grab( object_type::NONE );
         return;
     }
-
-    you.release_grapple();
 
     const std::optional<tripoint> grabp_ = choose_adjacent( _( "Grab where?" ) );
     if( !grabp_ ) {
