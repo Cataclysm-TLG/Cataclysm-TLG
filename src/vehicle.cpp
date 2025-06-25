@@ -1102,6 +1102,12 @@ units::power vehicle::part_vpower_w( const vehicle_part &vp, const bool at_full_
     const int vp_index = index_of_part( &vp );
     units::power pwr = vpi.power;
     if( vpi.has_flag( VPFLAG_ENGINE ) ) {
+        if( vpi.has_flag( "WATER_ONLY" ) ) {
+            map &here = get_map();
+            if( !here.has_flag_ter( ter_furn_flag::TFLAG_SWIMMABLE, bub_part_pos( vp_index ) ) ) {
+                return 0_W;
+            }
+        }
         if( vpi.fuel_type == fuel_type_animal ) {
             int factor = 0;
             if( const monster *mon = get_monster( vp_index ); mon && mon->has_effect( effect_harnessed ) ) {
