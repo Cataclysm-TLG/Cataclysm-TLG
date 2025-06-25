@@ -51,7 +51,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER",  "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
@@ -84,7 +84,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER",  "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
@@ -116,7 +116,7 @@
     "warmth": 5,
     "material_thickness": 3,
     "environmental_protection": 2,
-    "flags": [ "STURDY", "OUTER",  "WATER_FRIENDLY" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -289,7 +289,7 @@
     "color": "brown",
     "warmth": 25,
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER",  "WATER_FRIENDLY" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -361,7 +361,7 @@
     "color": "light_gray",
     "warmth": 5,
     "material_thickness": 4,
-    "flags": [ "OUTER",  "NONCONDUCTIVE" ],
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -454,7 +454,7 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 4,
-    "flags": [ "OUTER",  "NONCONDUCTIVE" ],
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
