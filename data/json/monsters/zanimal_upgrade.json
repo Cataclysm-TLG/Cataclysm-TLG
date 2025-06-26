@@ -398,6 +398,7 @@
     "attack_effs": [ { "id": "paralyzepoison", "duration": 33 } ],
     "//grab": "Let's say the thorns make it half again as grabby",
     "grab_strength": 45,
+    "path_settings": { "max_dist": 45 },
     "special_attacks": [ { "id": "scratch" }, { "id": "grab", "cooldown": 7 }, [ "PARA_STING", 30 ] ],
     "flags": [
       "SEES",
@@ -411,6 +412,8 @@
       "REVIVES",
       "PUSH_MON",
       "FILTHY",
+      "PATH_AVOID_FIRE",
+      "PATH_AVOID_FALL",
       "PARALYZEVENOM"
     ],
     "armor": { "electric": 2, "bash": 8, "cut": 8, "bullet": 6 }
