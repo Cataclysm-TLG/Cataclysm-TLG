@@ -213,9 +213,11 @@ bool map::build_vision_transparency_cache( const int zlev )
             // The tile player is standing on should always be visible
             vision_transparency_cache[p.x][p.y] = LIGHT_TRANSPARENCY_OPEN_AIR;
         } else if( player_character.eye_level() < concealment( loc ) ) {
-            // If we're crouching or prone behind an obstacle, we can't see past it.
-            vision_transparency_cache[loc.x][loc.y] = LIGHT_TRANSPARENCY_SOLID;
-            dirty = true;
+            // Can we see over the obstacle?
+            if( vision_transparency_cache[loc.x][loc.y] != LIGHT_TRANSPARENCY_SOLID ) {
+                vision_transparency_cache[loc.x][loc.y] = LIGHT_TRANSPARENCY_SOLID;
+                dirty = true;
+            }
         }
     }
 
