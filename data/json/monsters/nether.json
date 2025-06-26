@@ -217,6 +217,7 @@
     "special_attacks": [ [ "DARKMAN", 5 ], [ "scratch", 15 ] ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away.", "effect": { "id": "death_darkman" } },
     "regenerates_in_dark": true,
+    "melee_training_cap": 3,
     "flags": [ "NOHEAD", "HARDTOSHOOT", "WEBWALK", "FLIES", "PLASTIC", "ELECTRIC", "ACIDPROOF", "SUNDEATH", "NO_BREATHE" ],
     "armor": { "bash": 12, "cut": 8, "bullet": 6, "electric": 3 }
   },
@@ -959,6 +960,7 @@
     "path_settings": { "max_dist": 5 },
     "special_attacks": [ [ "PARROT", 400 ], [ "ABSORB_ITEMS", 0 ], [ "SPLIT", 5 ] ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
+    "melee_training_cap": 5,
     "regenerates": 50,
     "regen_morale": true,
     "absorb_ml_per_hp": 250,

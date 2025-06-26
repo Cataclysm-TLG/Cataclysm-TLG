@@ -11,8 +11,6 @@
     "cooldown": 2,
     "//": "Cooldown to simulate grab break attempts, or trying to re-equip its weapon, etc",
     "move_cost": 80,
-    "accuracy": 3,
-    "//2": "Feral melee skill + weapon's to hit, so 3+0=3",
     "damage_max_instance": [ { "damage_type": "bash", "amount": 6 } ],
     "condition": { "or": [ { "not": { "test_eoc": "is_disarmed" } }, { "u_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] },
     "hit_dmg_u": "%1$s flails a fist at your %2$s!",
@@ -21,6 +19,15 @@
     "miss_msg_npc": "%1$s swings a fist, but <npcname> dodges!",
     "no_dmg_msg_u": "%1$s hits your %2$s without penetrating your armor.",
     "no_dmg_msg_npc": "%1$s hits <npcname>'s %2$s without penetrating their armor."
+  },
+    {
+    "type": "monster_attack",
+    "attack_type": "bite",
+    "id": "feral_bite",
+    "cooldown": 2,
+    "//": "Cooldown to simulate grab break attempts, or trying to re-equip its weapon, etc",
+    "move_cost": 100,
+    "condition": { "or": [ { "not": { "test_eoc": "is_disarmed" } }, { "u_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] }
   },
   {
     "type": "monster_attack",
