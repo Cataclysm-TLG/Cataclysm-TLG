@@ -10575,10 +10575,11 @@ bool Character::sees_with_infrared( const Creature &critter ) const
     //TODO: IR_range should be determined by tech or mutations, not just per.
     const int IR_range = 1 + ( 60 * get_per() / 20 );
     const int target_eye = critter.is_monster()
-        ? critter.as_monster()->eye_level()
-        : critter.as_character()->eye_level();
+                           ? critter.as_monster()->eye_level()
+                           : critter.as_character()->eye_level();
 
-    if( !here.has_line_of_sight_IR( viewer_pos, target_pos, IR_range, std::min( eye_level(), target_eye ) ) ) {
+    if( !here.has_line_of_sight_IR( viewer_pos, target_pos, IR_range, std::min( eye_level(),
+                                    target_eye ) ) ) {
         return false;
     }
 

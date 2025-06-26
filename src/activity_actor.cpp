@@ -7954,7 +7954,8 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             const mtype *corpse_mtype = corpse.get_mtype();
             const bool acid_immune = you.is_immune_damage( damage_acid ) ||
                                      you.is_immune_field( fd_acid );
-            if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune || !pulp_acid ) ) {
+            if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune ||
+                    !pulp_acid ) ) {
                 //don't smash acid zombies when auto pulping unprotected
                 continue;
             }
@@ -7975,13 +7976,13 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
                     if( !corpse.has_flag( flag_BLED ) ) {
                         const field_type_id type_blood = ( mess_radius > 1 && x_in_y( pulp_power, 10000 ) ) ?
-                                                        corpse.get_mtype()->gibType() :
-                                                        corpse.get_mtype()->bloodType();
+                                                         corpse.get_mtype()->gibType() :
+                                                         corpse.get_mtype()->bloodType();
                         here.add_splatter_trail( type_blood, pos, dest );
                     } else {
                         const field_type_id type_blood = ( mess_radius > 1 && x_in_y( pulp_power, 10000 ) ) ?
-                                                        corpse.get_mtype()->gibType() :
-                                                        fd_null;
+                                                         corpse.get_mtype()->gibType() :
+                                                         fd_null;
                         here.add_splatter_trail( type_blood, pos, dest );
                     }
                 }

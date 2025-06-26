@@ -10955,7 +10955,8 @@ point game::place_player( const tripoint &dest_loc, bool quick )
             const auto corpse_available = [&]( const tripoint_bub_ms & pos ) {
                 for( const item &maybe_corpse : m.i_at( pos ) ) {
                     if( maybe_corpse.is_corpse() && maybe_corpse.can_revive() &&
-                        ( !maybe_corpse.get_mtype()->bloodType().obj().has_acid || acid_immune || maybe_corpse.has_flag( flag_BLED ) ) ) {
+                        ( !maybe_corpse.get_mtype()->bloodType().obj().has_acid || acid_immune ||
+                          maybe_corpse.has_flag( flag_BLED ) ) ) {
                         if( pulp_butcher == "pulp_zombie_only" || pulp_butcher == "pulp_adjacent_zombie_only" ) {
                             if( !maybe_corpse.get_mtype()->has_flag( mon_flag_REVIVES ) ) {
                                 continue;
