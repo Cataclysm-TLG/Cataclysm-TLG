@@ -481,12 +481,8 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
             ++it;
         }
     }
-    // If there is only one world to pick from, autoreturn it.
-    if( world_names.size() == 1 ) {
-        return get_world( world_names[0] );
-    }
     // If there are no worlds to pick from, immediately try to make one.
-    else if( world_names.empty() ) {
+    if( world_names.empty() ) {
         return make_new_world( show_prompt );
     }
     // If we're skipping prompts, return the world with 0 save if there is one

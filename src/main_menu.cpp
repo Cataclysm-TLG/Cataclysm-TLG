@@ -945,17 +945,10 @@ bool main_menu::new_character_tab()
                     world_generator->set_active_world( nullptr );
                 } );
                 g->gamemode = nullptr;
-                WORLD *world = world_generator->pick_world();
+                WORLD *world = world_generator->pick_world( true, true );
                 if( world == nullptr ) {
                     continue;
                 }
-                if( !world->world_saves.empty() ) {
-                    if( !query_yn(
-                            _( "Many game features will not work correctly with multiple characters in the same world. Create a new character anyway?" ) ) ) {
-                        return false;
-                    }
-                }
-
                 world_generator->set_active_world( world );
                 try {
                     g->setup();
@@ -990,15 +983,9 @@ bool main_menu::new_character_tab()
         // loading the world.
         // Pick a world, suppressing prompts if it's "play now" mode.
         const bool is_play_now = sel2 == 3 || sel2 == 4;
-        WORLD *world = world_generator->pick_world( !is_play_now, is_play_now );
+        WORLD *world = world_generator->pick_world( !is_play_now, true );
         if( world == nullptr ) {
             return false;
-        }
-        if( !world->world_saves.empty() ) {
-            if( !query_yn(
-                    _( "Many game features will not work correctly with multiple characters in the same world. Create a new character anyway?" ) ) ) {
-                return false;
-            }
         }
         world_generator->set_active_world( world );
         try {
