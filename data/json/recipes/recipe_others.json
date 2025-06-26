@@ -970,10 +970,7 @@
       [ "mag_mechanics", 2 ],
       [ "mag_rifle", 2 ]
     ],
-    "components": [
-      [ [ "wire", 2 ], [ "cable", 2 ] ],
-      [ [ "yarn", 1 ], [ "cotton_ball", 1 ], [ "wool_staple", 1 ] ]
-    ]
+    "components": [ [ [ "wire", 2 ], [ "cable", 2 ] ], [ [ "yarn", 1 ], [ "cotton_ball", 1 ], [ "wool_staple", 1 ] ] ]
   },
   {
     "type": "recipe",
