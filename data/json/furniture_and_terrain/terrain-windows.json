@@ -1451,6 +1451,7 @@
     "color": "light_green",
     "move_cost": 0,
     "coverage": 100,
+    "concealment": 0,
     "roof": "t_flat_roof",
     "flags": [
       "NOITEM",
@@ -1461,6 +1462,7 @@
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",
+      "TRANSLUCENT",
       "SUPPORTS_ROOF"
     ],
     "bash": {
@@ -1481,6 +1483,7 @@
     "color": "light_red",
     "move_cost": 0,
     "coverage": 100,
+    "concealment": 0,
     "roof": "t_flat_roof",
     "flags": [
       "NOITEM",
@@ -1491,6 +1494,7 @@
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",
+      "TRANSLUCENT",
       "SUPPORTS_ROOF"
     ],
     "bash": {
@@ -1511,6 +1515,7 @@
     "color": "light_blue",
     "move_cost": 0,
     "coverage": 100,
+    "concealment": 0,
     "roof": "t_flat_roof",
     "flags": [
       "NOITEM",
@@ -1521,6 +1526,7 @@
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",
+      "TRANSLUCENT",
       "SUPPORTS_ROOF"
     ],
     "bash": {

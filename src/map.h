@@ -685,6 +685,9 @@ class map
         bool sees( const tripoint &F, const tripoint &T, int range, bool with_fields = true ) const;
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                    bool with_fields = true ) const;
+        // Same but for IR, checking for solid obstructions etc
+        bool has_line_of_sight_IR( const tripoint &from, const tripoint &to, int range,
+                                   int eye_level ) const;
     private:
         /**
          * Don't expose the slope adjust outside map functions.

@@ -83,11 +83,10 @@
       }
     },
     "end": {
-      "opinion": { "trust": 5, "value": 5 },
       "effect": [
-        "leave",
-        { "u_add_var": "general_meeting_u_saved_barry", "value": "yes" },
-        { "u_spawn_item": "hsurvivor_jumpsuit", "count": 1 }
+        "stop_following",
+        { "math": [ "isherwood_barry_rescued", "=", "1" ] },
+        { "u_add_var": "u_saved_barry_isherwood", "value": "yes" }
       ]
     },
     "origins": [ "ORIGIN_SECONDARY" ],

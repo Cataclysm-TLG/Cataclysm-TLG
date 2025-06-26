@@ -8109,6 +8109,54 @@ bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int ra
     return visible;
 }
 
+bool map::has_line_of_sight_IR( const tripoint &from, const tripoint &to, int range,
+                                int eye_level ) const
+{
+    if( std::abs( from.z - to.z ) > fov_3d_z_range ||
+        ( range >= 0 && range < rl_dist( from, to ) ) ||
+        !inbounds( to ) ) {
+        return false;
+    }
+
+    bool visible = true;
+    tripoint last_point = from;
+
+    bresenham( from, to, 0, 0,
+    [this, eye_level, &visible, &to, &last_point]( const tripoint & new_point ) {
+        // Exit before checking the last square if not a vertical transition
+        if( new_point == to && last_point.z == to.z ) {
+            return false;
+        }
+
+        // 2D movement
+        if( new_point.z == last_point.z ) {
+            if( coverage( new_point ) >= eye_level ) {
+                visible = false;
+                return false;
+            }
+        }
+        // Z-level transition (vertical line)
+        else {
+            const int max_z = std::max( new_point.z, last_point.z );
+            tripoint floor1 = { new_point.xy(), last_point.z };
+            tripoint floor2 = { last_point.xy(), new_point.z };
+
+            if( ( has_floor_or_support( { new_point.xy(), max_z } ) ||
+                  coverage( floor1 ) >= eye_level ) &&
+                ( has_floor_or_support( { last_point.xy(), max_z } ) ||
+                  coverage( floor2 ) >= eye_level ) ) {
+                visible = false;
+                return false;
+            }
+        }
+
+        last_point = new_point;
+        return true;
+    } );
+
+    return visible;
+}
+
 int map::obstacle_concealment( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const
 {
     const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
