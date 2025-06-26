@@ -24,8 +24,7 @@
     "type": "monster_attack",
     "attack_type": "bite",
     "id": "feral_bite",
-    "cooldown": 2,
-    "//": "Cooldown to simulate grab break attempts, or trying to re-equip its weapon, etc",
+    "cooldown": 10,
     "move_cost": 100,
     "condition": { "or": [ { "not": { "test_eoc": "is_disarmed" } }, { "u_has_flag": "GRAB" }, { "u_has_flag": "GRAB_FILTER" } ] }
   },
