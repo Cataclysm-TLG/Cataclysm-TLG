@@ -2475,7 +2475,7 @@ std::optional<int> iuse::water_purifier( Character *p, item *it, const tripoint 
         return std::nullopt;
     }
 
-    p->moves -= to_moves<int>( 2_seconds );
+    p->mod_moves( -to_moves<int>( 2_seconds ) );
 
     for( item *water : liquids ) {
         water->convert( itype_water_clean, p ).poison = 0;
