@@ -3127,11 +3127,11 @@ talk_effect_fun_t::func f_remove_var( const JsonObject &jo, std::string_view mem
 void map_add_item( item &it, tripoint_abs_ms target_pos )
 {
     if( get_map().inbounds( target_pos ) ) {
-        get_map().add_item_or_charges( get_map().getlocal( target_pos ), it );
+        get_map().add_item_or_charges( get_map().bub_from_abs( target_pos ), it );
     } else {
         tinymap target_bay;
         target_bay.load( project_to<coords::omt>( target_pos ), false );
-        target_bay.add_item_or_charges( target_bay.getlocal( target_pos ), it );
+        target_bay.add_item_or_charges( target_bay.omt_from_abs( target_pos ), it );
     }
 }
 
@@ -3648,10 +3648,10 @@ talk_effect_fun_t::func f_location_variable( const JsonObject &jo, std::string_v
             int min_target_dist = dov_target_min_radius.evaluate( d );
             std::string cur_search_target = search_target.value().evaluate( d );
             bool found = false;
-            tripoint_range<tripoint> points = here.points_in_radius( here.getlocal( abs_ms ),
-                                              size_t( dov_target_max_radius.evaluate( d ) ), size_t( 0 ) );
-            for( const tripoint &search_loc : points ) {
-                if( rl_dist( here.bub_from_abs( talker_pos ).raw(), search_loc ) <= min_target_dist ) {
+            tripoint_range<tripoint_bub_ms> points = here.points_in_radius( here.bub_from_abs( abs_ms ),
+                    size_t( dov_target_max_radius.evaluate( d ) ), size_t( 0 ) );
+            for( const tripoint_bub_ms &search_loc : points ) {
+                if( rl_dist( here.bub_from_abs( talker_pos ), search_loc ) <= min_target_dist ) {
                     continue;
                 }
                 if( search_type.value() == "terrain" ) {
@@ -3695,8 +3695,8 @@ talk_effect_fun_t::func f_location_variable( const JsonObject &jo, std::string_v
                 } else if( search_type.value() == "npc" ) {
                     for( shared_ptr_fast<npc> &person : overmap_buffer.get_npcs_near( project_to<coords::sm>( abs_ms ),
                             1 ) ) {
-                        if( person->pos() == search_loc && ( person->myclass.c_str() == cur_search_target ||
-                                                             cur_search_target.empty() ) ) {
+                        if( person->pos_bub() == search_loc && ( person->myclass.c_str() == cur_search_target ||
+                                cur_search_target.empty() ) ) {
                             target_pos = here.getabs( search_loc );
                             found = true;
                             break;
@@ -6226,7 +6226,7 @@ talk_effect_fun_t::func f_field( const JsonObject &jo, std::string_view member,
         if( target_var.has_value() ) {
             target_pos = get_tripoint_from_var( target_var, d, is_npc );
         }
-        for( const tripoint &dest : get_map().points_in_radius( get_map().getlocal( target_pos ),
+        for( const tripoint_bub_ms &dest : get_map().points_in_radius( get_map().bub_from_abs( target_pos ),
                 radius ) ) {
             if( ( !outdoor_only || get_map().is_outside( dest ) ) && ( !indoor_only ||
                     !get_map().is_outside( dest ) ) ) {

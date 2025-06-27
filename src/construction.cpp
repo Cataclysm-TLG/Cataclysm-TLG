@@ -536,8 +536,8 @@ construction_id construction_menu( const bool blueprint )
     tilecontext->set_disable_occlusion( true );
     g->invalidate_main_ui_adaptor();
 #endif
-    std::unique_ptr<restore_on_out_of_scope<tripoint>> restore_view
-            = std::make_unique<restore_on_out_of_scope<tripoint>>( player_character.view_offset );
+    std::unique_ptr<restore_on_out_of_scope<tripoint_rel_ms>> restore_view
+            = std::make_unique<restore_on_out_of_scope<tripoint_rel_ms>>( player_character.view_offset );
 
     const auto recalc_buffer = [&]() {
         //leave room for top and bottom UI text
@@ -777,9 +777,9 @@ construction_id construction_menu( const bool blueprint )
                                         visible_center,
                                         ter_dims.scaled_font_size, ter_dims.window_size_pixel,
                                         player_character.pos_bub().xy(), g->is_tileset_isometric() );
-        player_character.view_offset = tripoint( ( player_character.pos_bub().xy() - target ).raw(), 0 );
+        player_character.view_offset = tripoint_rel_ms( player_character.pos_bub().xy() - target, 0 );
 #else
-        player_character.view_offset = tripoint( 0, ( w_height + 1 ) / 2, 0 );
+        player_character.view_offset = tripoint_rel_ms( 0, ( w_height + 1 ) / 2, 0 );
 #endif
         g->invalidate_main_ui_adaptor();
 
@@ -1230,12 +1230,12 @@ void place_construction( std::vector<construction_group_str_id> const &groups )
             blink = true;
         }
         if( action == "MOUSE_MOVE" ) {
-            const std::optional<tripoint> mouse_pos_raw = ctxt.get_coordinates(
+            const std::optional<tripoint_bub_ms> mouse_pos_raw = ctxt.get_coordinates(
                         g->w_terrain, g->ter_view_p.xy(), true );
-            if( mouse_pos_raw.has_value() && mouse_pos_raw->z == loc.z()
-                && mouse_pos_raw->x >= loc.x() - 1 && mouse_pos_raw->x <= loc.x() + 1
-                && mouse_pos_raw->y >= loc.y() - 1 && mouse_pos_raw->y <= loc.y() + 1 ) {
-                mouse_pos = tripoint_bub_ms( *mouse_pos_raw );
+            if( mouse_pos_raw.has_value() && mouse_pos_raw->z() == loc.z()
+                && mouse_pos_raw->x() >= loc.x() - 1 && mouse_pos_raw->x() <= loc.x() + 1
+                && mouse_pos_raw->y() >= loc.y() - 1 && mouse_pos_raw->y() <= loc.y() + 1 ) {
+                mouse_pos = *mouse_pos_raw;
             } else {
                 mouse_pos = std::nullopt;
             }
@@ -1382,7 +1382,7 @@ void complete_construction( Character *you )
 
     // Spawn byproducts
     if( built.byproduct_item_group ) {
-        here.spawn_items( you->pos(), item_group::items_from( *built.byproduct_item_group,
+        here.spawn_items( you->pos_bub(), item_group::items_from( *built.byproduct_item_group,
                           calendar::turn ) );
     }
 
@@ -1825,7 +1825,7 @@ static void unroll_digging( const int numer_of_2x4s )
     // refund components!
     item rope( "rope_30" );
     map &here = get_map();
-    tripoint avatar_pos = get_player_character().pos();
+    tripoint_bub_ms avatar_pos = get_player_character().pos_bub();
     here.add_item_or_charges( avatar_pos, rope );
     // presuming 2x4 to conserve lumber.
     here.spawn_item( avatar_pos, itype_2x4, numer_of_2x4s );
@@ -1880,13 +1880,11 @@ void construct::done_dig_grave( const tripoint_bub_ms &p, Character &who )
             { mon_zombie, mon_zombie_fat, mon_zombie_rot, mon_skeleton, mon_zombie_crawler }
         };
 
-        // TODO: fix point types
-        g->place_critter_at( random_entry( monids ), p.raw() );
+        g->place_critter_at( random_entry( monids ), p );
         here.furn_set( p, furn_f_coffin_o );
         who.add_msg_if_player( m_warning, _( "Something crawls out of the coffin!" ) );
     } else {
-        // TODO: fix point types
-        here.spawn_item( p.raw(), itype_bone_human, rng( 5, 15 ) );
+        here.spawn_item( p, itype_bone_human, rng( 5, 15 ) );
         here.furn_set( p, furn_f_coffin_c );
     }
     std::vector<item *> dropped =
@@ -1961,7 +1959,7 @@ void construct::done_wood_stairs( const tripoint_bub_ms &p, Character &/*who*/ )
 void construct::done_window_curtains( const tripoint_bub_ms &, Character &who )
 {
     map &here = get_map();
-    tripoint avatar_pos = who.pos();
+    tripoint_bub_ms avatar_pos = who.pos_bub();
     // copied from iexamine::curtains
     here.spawn_item( avatar_pos, itype_nail, 1, 4 );
     here.spawn_item( avatar_pos, itype_sheet, 2 );

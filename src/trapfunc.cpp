@@ -1236,7 +1236,7 @@ static bool sinkhole_safety_roll( Character &you, const itype_id &itemname, cons
     if( roll < diff ) {
         you.add_msg_if_player( m_bad, _( "You fail to attach it…" ) );
         you.use_amount( itemname, 1 );
-        here.spawn_item( random_neighbor( you.pos() ), itemname );
+        here.spawn_item( tripoint_bub_ms( random_neighbor( you.pos() ) ), itemname );
         return false;
     }
 
@@ -1249,7 +1249,7 @@ static bool sinkhole_safety_roll( Character &you, const itype_id &itemname, cons
     if( safe.empty() ) {
         you.add_msg_if_player( m_bad, _( "There's nowhere to pull yourself to, and you sink!" ) );
         you.use_amount( itemname, 1 );
-        here.spawn_item( random_neighbor( you.pos() ), itemname );
+        here.spawn_item( tripoint_bub_ms( random_neighbor( you.pos() ) ), itemname );
         return false;
     } else {
         you.add_msg_player_or_npc( m_good, _( "You pull yourself to safety!" ),
@@ -1587,7 +1587,7 @@ bool trapfunc::cast_spell( const tripoint &p, Creature *critter, item * )
             // remove all traps in 3-3 area area
             for( int x = p.x - 1; x <= p.x + 1; x++ ) {
                 for( int y = p.y - 1; y <= p.y + 1; y++ ) {
-                    tripoint pt( x, y, p.z );
+                    tripoint_bub_ms pt( x, y, p.z );
                     if( here.tr_at( pt ).loadid == tr.loadid ) {
                         here.remove_trap( pt );
                     }
@@ -1610,7 +1610,7 @@ bool trapfunc::cast_spell( const tripoint &p, Creature *critter, item * )
             // remove all traps in 3-3 area area
             for( int x = p.x - 1; x <= p.x + 1; x++ ) {
                 for( int y = p.y - 1; y <= p.y + 1; y++ ) {
-                    tripoint pt( x, y, p.z );
+                    tripoint_bub_ms pt( x, y, p.z );
                     if( here.tr_at( pt ).loadid == tr.loadid ) {
                         here.remove_trap( pt );
                     }

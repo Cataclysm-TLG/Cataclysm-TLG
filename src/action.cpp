@@ -733,7 +733,7 @@ bool can_interact_at( action_id action, const tripoint_bub_ms &p )
     tripoint_bub_ms player_pos = get_player_character().pos_bub();
     switch( action ) {
         case ACTION_OPEN:
-            return here.open_door( get_avatar(), p.raw(), !here.is_outside( player_pos ), true );
+            return here.open_door( get_avatar(), p, !here.is_outside( player_pos ), true );
         case ACTION_CLOSE: {
             const optional_vpart_position vp = here.veh_at( p );
             return ( vp &&
@@ -1216,10 +1216,10 @@ std::optional<tripoint_bub_ms> choose_adjacent( const tripoint_bub_ms &pos,
                 message, allow_vertical, /*allow_mouse=*/true, timeout,
     [&]( const input_context & ctxt, const std::string & action ) {
         if( action == "SELECT" ) {
-            const std::optional<tripoint> mouse_pos = ctxt.get_coordinates(
+            const std::optional<tripoint_bub_ms> mouse_pos = ctxt.get_coordinates(
                         g->w_terrain, g->ter_view_p.xy(), true );
             if( mouse_pos ) {
-                const tripoint_rel_ms vec = tripoint_bub_ms( *mouse_pos ) - pos;
+                const tripoint_rel_ms vec = *mouse_pos - pos;
                 if( vec.x() >= -1 && vec.x() <= 1
                     && vec.y() >= -1 && vec.y() <= 1
                     && ( allow_vertical ? vec.z() >= -1 && vec.y() <= 1 : vec.z() == 0 ) ) {

@@ -1425,12 +1425,12 @@ void game::set_driving_view_offset( const point &p )
 {
     // remove the previous driving offset,
     // store the new offset and apply the new offset.
-    u.view_offset.x -= driving_view_offset.x;
-    u.view_offset.y -= driving_view_offset.y;
+    u.view_offset.x() -= driving_view_offset.x;
+    u.view_offset.y() -= driving_view_offset.y;
     driving_view_offset.x = p.x;
     driving_view_offset.y = p.y;
-    u.view_offset.x += driving_view_offset.x;
-    u.view_offset.y += driving_view_offset.y;
+    u.view_offset.x() += driving_view_offset.x;
+    u.view_offset.y() += driving_view_offset.y;
 }
 
 void game::catch_a_monster( monster *fish, const tripoint &pos, Character *p,
@@ -1825,15 +1825,15 @@ void game::validate_npc_followers()
 
 void game::validate_camps()
 {
-    basecamp camp = m.hoist_submap_camp( u.pos() );
+    basecamp camp = m.hoist_submap_camp( u.pos_bub() );
     if( camp.is_valid() ) {
         overmap_buffer.add_camp( camp );
-        m.remove_submap_camp( u.pos() );
+        m.remove_submap_camp( u.pos_bub() );
     } else if( camp.camp_omt_pos() != tripoint_abs_omt() ) {
         std::string camp_name = _( "Faction Camp" );
         camp.set_name( camp_name );
         overmap_buffer.add_camp( camp );
-        m.remove_submap_camp( u.pos() );
+        m.remove_submap_camp( u.pos_bub() );
     }
 }
 
@@ -2377,15 +2377,16 @@ int game::inventory_item_menu( item_location locThisItem,
 // Returns true if input requires breaking out into a game action.
 bool game::handle_mouseview( input_context &ctxt, std::string &action )
 {
-    std::optional<tripoint> liveview_pos;
+    std::optional<tripoint_bub_ms> liveview_pos;
 
     do {
         action = ctxt.handle_input();
         if( action == "MOUSE_MOVE" ) {
-            const std::optional<tripoint> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(), true );
+            const std::optional<tripoint_bub_ms> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(),
+                    true );
             if( mouse_pos && ( !liveview_pos || *mouse_pos != *liveview_pos ) ) {
                 liveview_pos = mouse_pos;
-                liveview.show( *liveview_pos );
+                liveview.show( liveview_pos->raw() );
             } else if( !mouse_pos ) {
                 liveview_pos.reset();
                 liveview.hide();
@@ -3940,7 +3941,7 @@ static shared_ptr_fast<game::draw_callback_t> create_zone_callback(
         }
         if( zone_blink && zone_start && zone_end ) {
             avatar &player_character = get_avatar();
-            const point offset2( player_character.view_offset.xy() +
+            const point offset2( player_character.view_offset.xy().raw() +
                                  point( player_character.posx() - getmaxx( g->w_terrain ) / 2,
                                         player_character.posy() - getmaxy( g->w_terrain ) / 2 ) );
 
@@ -4018,7 +4019,7 @@ void game::draw_blink_curses()
     // game::draw_blink_curses can be called multiple times, storing each animation to be played in blink_layer_curses
     // Iterate through every animation in async_anim_layer
     for( const auto &anim : blink_layer_curses ) {
-        const tripoint p = anim.first - u.view_offset + tripoint( POSX - u.posx(), POSY - u.posy(),
+        const tripoint p = anim.first - u.view_offset.raw() + tripoint( POSX - u.posx(), POSY - u.posy(),
                            -u.posz() );
         const std::string ncstr = anim.second.first;
         const nc_color nccol = anim.second.second;
@@ -4043,7 +4044,7 @@ void game::draw( ui_adaptor &ui )
         return;
     }
 
-    ter_view_p.z = ( u.pos() + u.view_offset ).z;
+    ter_view_p.z = ( u.pos() + u.view_offset ).z();
     m.build_map_cache( ter_view_p.z );
     m.update_visibility_cache( ter_view_p.z );
 
@@ -4072,7 +4073,7 @@ void game::draw( ui_adaptor &ui )
     // This allows screen readers to describe the area around the player, making it
     // much easier to play with them
     // (e.g. for blind players)
-    ui.set_cursor( w_terrain, -u.view_offset.xy() + point( POSX, POSY ) );
+    ui.set_cursor( w_terrain, -u.view_offset.xy().raw() + point( POSX, POSY ) );
 }
 
 void game::draw_panels( bool force_draw )
@@ -4200,7 +4201,7 @@ bool game::is_in_viewport( const tripoint_bub_ms &p, int margin ) const
 
 void game::draw_ter( const bool draw_sounds )
 {
-    draw_ter( u.pos() + u.view_offset, is_looking,
+    draw_ter( u.pos() + u.view_offset.raw(), is_looking,
               draw_sounds );
 }
 
@@ -4218,14 +4219,14 @@ void game::draw_ter( const tripoint &center, const bool looking, const bool draw
         draw_critter( critter, center );
     }
 
-    if( !destination_preview.empty() && u.view_offset.z == 0 ) {
+    if( !destination_preview.empty() && u.view_offset.z() == 0 ) {
         // Draw auto move preview trail
         const tripoint_bub_ms &final_destination = destination_preview.back();
         tripoint_bub_ms line_center = u.pos_bub() + u.view_offset;
         draw_line( final_destination, line_center, destination_preview, true );
         // TODO: fix point types
         mvwputch( w_terrain,
-                  final_destination.xy().raw() - u.view_offset.xy() +
+                  final_destination.xy().raw() - u.view_offset.xy().raw() +
                   point( POSX - u.posx(), POSY - u.posy() ), c_white, 'X' );
     }
 
@@ -4254,7 +4255,8 @@ void game::draw_veh_dir_indicator( bool next )
 {
     if( const std::optional<tripoint> indicator_offset = get_veh_dir_indicator_location( next ) ) {
         nc_color col = next ? c_white : c_dark_gray;
-        mvwputch( w_terrain, indicator_offset->xy() - u.view_offset.xy() + point( POSX, POSY ), col, 'X' );
+        mvwputch( w_terrain, indicator_offset->xy() - u.view_offset.xy().raw() + point( POSX, POSY ), col,
+                  'X' );
     }
 }
 
@@ -4373,7 +4375,7 @@ Creature *game::is_hostile_within( int distance, bool dangerous )
 field_entry *game::is_in_dangerous_field()
 {
     map &here = get_map();
-    for( std::pair<const field_type_id, field_entry> &field : here.field_at( u.pos() ) ) {
+    for( std::pair<const field_type_id, field_entry> &field : here.field_at( u.pos_bub() ) ) {
         if( u.is_dangerous_field( field.second ) ) {
             return &field.second;
         }
@@ -4482,7 +4484,7 @@ void game::mon_info_update( )
     }
     std::fill( dangerous.begin(), dangerous.end(), false );
 
-    const tripoint view = u.pos() + u.view_offset;
+    const tripoint view = u.pos() + u.view_offset.raw();
     new_seen_mon.clear();
 
     static time_point previous_turn = calendar::turn_zero;
@@ -5769,7 +5771,7 @@ bool game::npc_menu( npc &who )
         }
         // TODO: Make NPCs protest when displaced onto dangerous crap
         tripoint oldpos = who.pos();
-        who.move_away_from( u.pos(), true );
+        who.move_away_from( u.pos_bub(), true );
         u.mod_moves( -20 );
         if( oldpos != who.pos() ) {
             add_msg( _( "%s moves out of the way." ), who.get_name() );
@@ -6138,14 +6140,14 @@ void game::peek()
     if( !p ) {
         return;
     }
-    tripoint new_pos = u.pos() + *p;
+    tripoint_bub_ms new_pos = u.pos_bub() + *p;
     if( p->z != 0 ) {
         // Character might peek to a different submap; ensures return location is accurate.
         const tripoint_abs_ms old_loc = u.get_location();
         vertical_move( p->z, false, true );
 
         if( old_loc != u.get_location() ) {
-            new_pos = u.pos();
+            new_pos = u.pos_bub();
             u.move_to( old_loc );
             m.vertical_shift( old_loc.z() );
         } else {
@@ -6160,19 +6162,19 @@ void game::peek()
     peek( new_pos );
 }
 
-void game::peek( const tripoint &p )
+void game::peek( const tripoint_bub_ms &p )
 {
     u.mod_moves( -u.get_speed() * 2 );
     tripoint prev = u.pos();
     u.setpos( p );
     const bool is_same_pos = u.pos() == prev;
     const bool is_standup_peek = is_same_pos && u.is_crouching();
-    tripoint center = p;
-    m.build_map_cache( p.z );
-    m.update_visibility_cache( p.z );
+    tripoint_bub_ms center = p;
+    m.build_map_cache( p.z() );
+    m.update_visibility_cache( p.z() );
 
     look_around_result result;
-    const look_around_params looka_params = { true, center, center, false, false, true, true };
+    const look_around_params looka_params = { true, center.raw(), center.raw(), false, false, true, true};
     if( is_standup_peek ) {   // Non moving peek from crouch is a standup peek
         u.reset_move_mode();
         result = look_around( looka_params );
@@ -6186,7 +6188,7 @@ void game::peek( const tripoint &p )
         item_location loc;
         avatar_action::plthrow( u, loc, p );
     }
-    m.invalidate_map_cache( p.z );
+    m.invalidate_map_cache( p.z() );
     m.invalidate_visibility_cache();
 }
 
@@ -6737,9 +6739,9 @@ static void zones_manager_draw_borders( const catacurses::window &w_border,
 
 void game::zones_manager()
 {
-    const tripoint stored_view_offset = u.view_offset;
+    const tripoint_rel_ms stored_view_offset = u.view_offset;
 
-    u.view_offset = tripoint_zero;
+    u.view_offset = tripoint_rel_ms_zero;
 
     const int zone_ui_height = 14;
     const int zone_options_height = debug_mode ? 6 : 7;
@@ -6904,7 +6906,7 @@ void game::zones_manager()
         popup.on_top( true );
         popup.message( "%s", _( "Select first point." ) );
 
-        tripoint center = u.pos() + u.view_offset;
+        tripoint center = u.pos() + u.view_offset.raw();
 
         const look_around_result first =
         look_around( /*show_window=*/false, center, center, false, true, false );
@@ -7432,7 +7434,7 @@ std::optional<std::vector<tripoint_bub_ms>> game::safe_route_to( Character &who,
 
 std::optional<tripoint> game::look_around()
 {
-    tripoint center = u.pos() + u.view_offset;
+    tripoint center = u.pos() + u.view_offset.raw();
     look_around_result result = look_around( /*show_window=*/true, center, center, false, false,
                                 false );
     return result.position;
@@ -7594,7 +7596,7 @@ look_around_result game::look_around(
     add_draw_callback( zone_cb );
 
     is_looking = true;
-    const tripoint prev_offset = u.view_offset;
+    const tripoint_rel_ms prev_offset = u.view_offset;
 #if defined(TILES)
     const int prev_tileset_zoom = tileset_zoom;
     while( is_moving_zone && square_dist( start_point, end_point ) > 256 / get_zoom() &&
@@ -7604,7 +7606,7 @@ look_around_result game::look_around(
     mark_main_ui_adaptor_resize();
 #endif
     do {
-        u.view_offset = center - u.pos();
+        u.view_offset = tripoint_rel_ms( center - u.pos() );
         if( select_zone ) {
             if( has_first_point ) {
                 zone_start = start_point;
@@ -7676,7 +7678,7 @@ look_around_result game::look_around(
 
             add_msg_debug( debugmode::DF_GAME, "levx: %d, levy: %d, levz: %d",
                            get_map().get_abs_sub().x(), get_map().get_abs_sub().y(), center.z );
-            u.view_offset.z = center.z - u.posz();
+            u.view_offset.z() = center.z - u.posz();
             m.invalidate_map_cache( center.z );
             // Fix player character not visible from above
             m.build_map_cache( u.posz() );
@@ -7728,7 +7730,7 @@ look_around_result game::look_around(
         } else if( action == "CENTER" ) {
             center = u.pos();
             lp = u.pos_bub();
-            u.view_offset.z = 0;
+            u.view_offset.z() = 0;
         } else if( action == "MOUSE_MOVE" || action == "TIMEOUT" ) {
             // This block is structured this way so that edge scroll can work
             // whether the mouse is moving at the edge or simply stationary
@@ -7738,10 +7740,11 @@ look_around_result game::look_around(
             if( edge_scrolling ) {
                 center += action == "MOUSE_MOVE" ? edge_scroll * 2 : edge_scroll;
             } else if( action == "MOUSE_MOVE" ) {
-                const std::optional<tripoint> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(), true );
+                const std::optional<tripoint_bub_ms> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(),
+                        true );
                 if( mouse_pos ) {
-                    lx = mouse_pos->x;
-                    ly = mouse_pos->y;
+                    lx = mouse_pos->x();
+                    ly = mouse_pos->y();
                 }
             }
         } else if( std::optional<tripoint> vec = ctxt.get_direction( action ) ) {
@@ -7775,7 +7778,7 @@ look_around_result game::look_around(
     if( center.z != old_levz ) {
         m.invalidate_map_cache( old_levz );
         m.build_map_cache( old_levz );
-        u.view_offset.z = 0;
+        u.view_offset.z() = 0;
     }
 
     ctxt.reset_timeout();
@@ -7836,15 +7839,15 @@ std::vector<map_item_stack> game::find_nearby_items( int iRadius )
         return ret;
     }
 
-    for( tripoint &points_p_it : closest_points_first( u.pos(), iRadius ) ) {
-        if( points_p_it.y >= u.posy() - iRadius && points_p_it.y <= u.posy() + iRadius &&
+    for( tripoint_bub_ms &points_p_it : closest_points_first( u.pos_bub(), iRadius ) ) {
+        if( points_p_it.y() >= u.posy() - iRadius && points_p_it.y() <= u.posy() + iRadius &&
             u.sees( points_p_it ) &&
             m.sees_some_items( points_p_it, u ) ) {
 
             for( item &elem : m.i_at( points_p_it ) ) {
-                const tripoint relative_pos = points_p_it - u.pos();
+                const tripoint_rel_ms relative_pos = points_p_it - u.pos_bub();
 
-                add_item_recursive( item_order, temp_items, &elem, relative_pos );
+                add_item_recursive( item_order, temp_items, &elem, relative_pos.raw() );
             }
         }
     }
@@ -7860,7 +7863,7 @@ void draw_trail( const tripoint &start, const tripoint &end, const bool bDrawX )
 {
     std::vector<tripoint> pts;
     avatar &player_character = get_avatar();
-    tripoint center = player_character.pos() + player_character.view_offset;
+    tripoint_bub_ms center = player_character.pos_bub() + player_character.view_offset;
     if( start != end ) {
         //Draw trail
         pts = line_to( start, end, 0, 0 );
@@ -7869,18 +7872,18 @@ void draw_trail( const tripoint &start, const tripoint &end, const bool bDrawX )
         pts.emplace_back( start );
     }
 
-    g->draw_line( end, center, pts );
+    g->draw_line( end, center.raw(), pts );
     if( bDrawX ) {
         char sym = 'X';
-        if( end.z > center.z ) {
+        if( end.z > center.z() ) {
             sym = '^';
-        } else if( end.z < center.z ) {
+        } else if( end.z < center.z() ) {
             sym = 'v';
         }
         if( pts.empty() ) {
             mvwputch( g->w_terrain, point( POSX, POSY ), c_white, sym );
         } else {
-            mvwputch( g->w_terrain, pts.back().xy() - player_character.view_offset.xy() +
+            mvwputch( g->w_terrain, pts.back().xy() - player_character.view_offset.xy().raw() +
                       point( POSX - player_character.posx(), POSY - player_character.posy() ),
                       c_white, sym );
         }
@@ -7896,10 +7899,10 @@ static void centerlistview( const tripoint &active_item_position, int ui_width )
 {
     Character &u = get_avatar();
     if( get_option<std::string>( "SHIFT_LIST_ITEM_VIEW" ) != "false" ) {
-        u.view_offset.z = active_item_position.z;
+        u.view_offset.z() = active_item_position.z;
         if( get_option<std::string>( "SHIFT_LIST_ITEM_VIEW" ) == "centered" ) {
-            u.view_offset.x = active_item_position.x;
-            u.view_offset.y = active_item_position.y;
+            u.view_offset.x() = active_item_position.x;
+            u.view_offset.y() = active_item_position.y;
         } else {
             point pos( active_item_position.xy() + point( POSX, POSY ) );
 
@@ -7916,19 +7919,19 @@ static void centerlistview( const tripoint &active_item_position, int ui_width )
             int terrain_width = TERRAIN_WINDOW_WIDTH - right_offset;
 
             if( pos.x < 0 ) {
-                u.view_offset.x = pos.x;
+                u.view_offset.x() = pos.x;
             } else if( pos.x >= terrain_width ) {
-                u.view_offset.x = pos.x - ( terrain_width - 1 );
+                u.view_offset.x() = pos.x - ( terrain_width - 1 );
             } else {
-                u.view_offset.x = 0;
+                u.view_offset.x() = 0;
             }
 
             if( pos.y < 0 ) {
-                u.view_offset.y = pos.y;
+                u.view_offset.y() = pos.y;
             } else if( pos.y >= TERRAIN_WINDOW_HEIGHT ) {
-                u.view_offset.y = pos.y - ( TERRAIN_WINDOW_HEIGHT - 1 );
+                u.view_offset.y() = pos.y - ( TERRAIN_WINDOW_HEIGHT - 1 );
             } else {
-                u.view_offset.y = 0;
+                u.view_offset.y() = 0;
             }
         }
     }
@@ -8265,9 +8268,9 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
     int lowPStart = list_filter_low_priority( filtered_items, highPEnd, list_item_downvote );
     int iItemNum = ground_items.size();
 
-    const tripoint stored_view_offset = u.view_offset;
+    const tripoint_rel_ms stored_view_offset = u.view_offset;
 
-    u.view_offset = tripoint_zero;
+    u.view_offset = tripoint_rel_ms_zero;
 
     int iActive = 0; // Item index that we're looking at
     bool refilter = true;
@@ -8719,8 +8722,8 @@ game::vmenu_ret game::list_monsters( const std::vector<Creature *> &monster_list
         max_gun_range = u.get_wielded_item()->gun_range( &u );
     }
 
-    const tripoint stored_view_offset = u.view_offset;
-    u.view_offset = tripoint_zero;
+    const tripoint_rel_ms stored_view_offset = u.view_offset;
+    u.view_offset = tripoint_rel_ms_zero;
 
     int iActive = 0; // monster index that we're looking at
 
@@ -9490,7 +9493,7 @@ void game::butcher()
     std::vector<map_stack::iterator> corpses;
     std::vector<map_stack::iterator> disassembles;
     std::vector<map_stack::iterator> salvageables;
-    map_stack items = m.i_at( u.pos() );
+    map_stack items = m.i_at( u.pos_bub() );
     const inventory &crafting_inv = u.crafting_inventory();
 
     // TODO: Properly handle different material whitelists
@@ -9976,7 +9979,7 @@ void game::wield( item_location loc )
     // Can't use loc.obtain() here because that would cause things to spill.
     item to_wield = *loc.get_item();
     item_location::type location_type = loc.where();
-    tripoint pos = loc.position();
+    tripoint_bub_ms pos = loc.pos_bub();
     const int obtain_cost = loc.obtain_cost( u );
     int worn_index = INT_MIN;
 
@@ -10417,7 +10420,8 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     bool shifting_furniture = false; // moving furniture and staying still; skip check for move_cost > 0
 
     const tripoint_bub_ms furn_pos = u.pos_bub() + u.grab_point;
-    const tripoint furn_dest = dest_loc + tripoint( u.grab_point.xy().raw(), 0 );
+    const tripoint_bub_ms furn_dest = tripoint_bub_ms( dest_loc ) + tripoint_rel_ms( u.grab_point.xy(),
+                                      0 );
 
     bool grabbed = u.get_grab_type() != object_type::NONE;
     if( grabbed ) {
@@ -10440,11 +10444,18 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     } else if( grabbed && u.get_grab_type() == object_type::VEHICLE ) {
         grabbed_vehicle = veh_pointer_or_null( m.veh_at( u.pos_bub() + u.grab_point ) );
         if( grabbed_vehicle == nullptr ) {
-            // We were grabbing a vehicle that isn't there anymore
+            // We were grabbing a vehicle that isn't there anymore.
             grabbed = false;
         }
+        // Can't board vehicle with solid parts while grabbing it.
+        else if( vp_there && !pushing && !m.impassable( dest_loc ) &&
+                 !empty( grabbed_vehicle->get_avail_parts( VPFLAG_OBSTACLE ) ) &&
+                 &vp_there->vehicle() == grabbed_vehicle ) {
+            add_msg( m_warning, _( "You move into the %s, releasing it." ), grabbed_vehicle->name );
+            u.grab( object_type::NONE );
+        }
     } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
-        // We were grabbing something WEIRD, let's pretend we weren't
+        // We were grabbing something weird, let's pretend we weren't.
         grabbed = false;
     }
     if( u.grab_point != tripoint_rel_ms_zero && !grabbed && !furniture_move &&
@@ -10698,8 +10709,8 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     }
 
     if( pulling ) {
-        const tripoint shifted_furn_pos = furn_pos.raw() - ms_shift;
-        const tripoint shifted_furn_dest = furn_dest - ms_shift;
+        const tripoint_bub_ms shifted_furn_pos = furn_pos - ms_shift;
+        const tripoint_bub_ms shifted_furn_dest = furn_dest - ms_shift;
         const time_duration fire_age = m.get_field_age( shifted_furn_pos, fd_fire );
         const int fire_intensity = m.get_field_intensity( shifted_furn_pos, fd_fire );
         m.remove_field( shifted_furn_pos, fd_fire );
@@ -10939,7 +10950,7 @@ point game::place_player( const tripoint &dest_loc, bool quick )
             u.max_quality( qual_BUTCHER, PICKUP_RANGE ) > INT_MIN ) {
             std::vector<item *> corpses;
 
-            for( item &it : m.i_at( u.pos() ) ) {
+            for( item &it : m.i_at( u.pos_bub() ) ) {
                 corpses.push_back( &it );
             }
 
@@ -11310,7 +11321,7 @@ bool game::grabbed_furn_move( const tripoint &dp )
 {
     // Furniture: pull, push, or standing still and nudging object around.
     // Can push furniture out of reach.
-    tripoint fpos = ( u.pos_bub() + u.grab_point ).raw();
+    tripoint_bub_ms fpos = ( u.pos_bub() + u.grab_point );
     // supposed position of grabbed furniture
     if( !m.has_furn( fpos ) ) {
         // Where did it go? We're grabbing thin air so reset.
@@ -11332,11 +11343,11 @@ bool game::grabbed_furn_move( const tripoint &dp )
     const bool shifting_furniture = !pushing_furniture && !pulling_furniture;
 
     // Intended destination of furniture.
-    const tripoint fdest = fpos + tripoint( dp.xy(), ramp_z_offset );
+    const tripoint_bub_ms fdest = fpos + tripoint( dp.xy(), ramp_z_offset );
 
     // Unfortunately, game::is_empty fails for tiles we're standing on,
     // which will forbid pulling, so:
-    const bool canmove = can_move_furniture( fdest, dp );
+    const bool canmove = can_move_furniture( fdest.raw(), dp );
     // @TODO: it should be possible to move over invisible traps. This should probably
     // trigger the trap.
     // The current check (no move if trap) allows a player to detect invisible traps by
@@ -11465,7 +11476,7 @@ bool game::grabbed_furn_move( const tripoint &dp )
     }
 
     if( !m.has_floor_or_water( fdest ) && !m.has_flag( ter_furn_flag::TFLAG_FLAT, fdest ) ) {
-        std::string danger_tile = enumerate_as_string( get_dangerous_tile( fdest ) );
+        std::string danger_tile = enumerate_as_string( get_dangerous_tile( fdest.raw() ) );
         add_msg( _( "You let go of the %1$s as it falls down the %2$s." ), furntype.name(), danger_tile );
         u.grab( object_type::NONE );
         m.drop_furniture( fdest );
@@ -11859,9 +11870,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     bool climbing = false;
     climbing_aid_id climbing_aid = climbing_aid_default;
     int move_cost = 100;
-    tripoint stairs( u.posx(), u.posy(), u.posz() + movez );
-    // TODO: Clean up/finish this typification.
-    tripoint_bub_ms bub_stairs = here.bub_from_abs( stairs );
+    tripoint_bub_ms stairs( u.posx(), u.posy(), u.posz() + movez );
     bool wall_cling = u.has_flag( json_flag_WALL_CLING );
     bool adjacent_climb = false;
     if( !force && movez == 1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_UP, u.pos_bub() ) &&
@@ -11882,7 +11891,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
             return;
         }
 
-        const int cost = u.climbing_cost( u.pos(), stairs );
+        const int cost = u.climbing_cost( u.pos_bub().raw(), stairs.raw() );
         add_msg_debug( debugmode::DF_GAME, "Climb cost %d", cost );
         const bool can_climb_here = cost > 0 ||
                                     u.has_flag( json_flag_CLIMB_NO_LADDER ) || wall_cling;
@@ -11906,16 +11915,15 @@ void game::vertical_move( int movez, bool force, bool peeking )
         }
 
         std::vector<tripoint> pts;
-        for( const tripoint &pt : here.points_in_radius( stairs, 1 ) ) {
+        for( const tripoint_bub_ms &pt : here.points_in_radius( stairs, 1 ) ) {
             if( here.passable( pt ) &&
                 here.has_floor_or_support( pt ) ) {
-                pts.push_back( pt );
+                pts.push_back( pt.raw() );
             }
         }
 
-        // TODO: Unify the tripoint types here.
-        if( wall_cling && here.is_clingable_wall_adjacent( bub_stairs ) ) {
-            pts.push_back( stairs );
+        if( wall_cling && here.is_clingable_wall_adjacent( stairs ) ) {
+            pts.push_back( stairs.raw() );
         }
 
         if( pts.empty() ) {
@@ -11933,14 +11941,14 @@ void game::vertical_move( int movez, bool force, bool peeking )
             if( !pnt ) {
                 return;
             }
-            stairs = *pnt;
+            stairs = tripoint_bub_ms( *pnt );
         }
     }
 
     if( !force && movez == -1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, u.pos_bub() ) &&
         !u.is_underwater() && !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER, u.pos_bub() ) &&
         !u.has_effect( effect_gliding ) ) {
-        if( wall_cling && !here.has_floor_or_support( u.pos() ) ) {
+        if( wall_cling && !here.has_floor_or_support( u.pos_bub() ) ) {
             climbing = true;
             climbing_aid = climbing_aid_ability_WALL_CLING;
             u.set_activity_level( EXPLOSIVE_EXERCISE );
@@ -12083,7 +12091,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         if( !pnt ) {
             return;
         }
-        stairs = *pnt;
+        stairs = tripoint_bub_ms( *pnt );
     }
 
     std::vector<monster *> monsters_following;
@@ -12124,7 +12132,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     point submap_shift;
     const bool z_level_changed = vertical_shift( z_after );
     if( !force ) {
-        submap_shift = update_map( stairs.x, stairs.y, z_level_changed );
+        submap_shift = update_map( stairs.x(), stairs.y(), z_level_changed );
     }
 
     // if an NPC or monster is on the stairs when player ascends/descends
@@ -12144,7 +12152,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
             crit_name = guy->get_name();
             tripoint old_pos = guy->pos();
             if( !guy->is_enemy() ) {
-                guy->move_away_from( u.pos(), true );
+                guy->move_away_from( u.pos_bub(), true );
                 if( old_pos != guy->pos() ) {
                     add_msg( _( "%s moves out of the way for you." ), guy->get_name() );
                 }
@@ -12206,7 +12214,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
 
     here.invalidate_map_cache( here.get_abs_sub().z() );
     // Upon force movement, traps can not be avoided.
-    if( !wall_cling && ( get_map().tr_at( u.pos() ) == tr_ledge &&
+    if( !wall_cling && ( get_map().tr_at( u.pos_bub() ) == tr_ledge &&
                          !u.has_effect( effect_gliding ) && !u.has_effect( effect_airborne ) ) )  {
         here.creature_on_trap( u, !force );
     }
@@ -12281,19 +12289,23 @@ std::optional<tripoint> game::find_stairs( const map &mp, int z_after, const tri
     int best = INT_MAX;
     std::optional<tripoint> stairs;
     const int omtilesz = SEEX * 2 - 1;
-    real_coords rc( mp.getabs( pos.xy() ) );
-    tripoint omtile_align_start( mp.getlocal( rc.begin_om_pos() ), z_after );
-    tripoint omtile_align_end( omtile_align_start + point( omtilesz, omtilesz ) );
+    const tripoint_abs_ms abs_omt_base( project_to<coords::ms>( project_to<coords::omt>( mp.getglobal(
+                                            pos ) ) ) );
 
-    if( get_map().tr_at( u.pos() ) != tr_ledge ) {
-        for( const tripoint &dest : mp.points_in_rectangle( omtile_align_start, omtile_align_end ) ) {
-            if( rl_dist( u.pos(), dest ) <= best &&
+    tripoint_bub_ms omtile_align_start( mp.bub_from_abs( tripoint_abs_ms( abs_omt_base.xy(),
+                                        z_after ) ) );
+    tripoint_bub_ms omtile_align_end( omtile_align_start + point( omtilesz, omtilesz ) );
+
+    if( get_map().tr_at( u.pos_bub() ) != tr_ledge ) {
+        for( const tripoint_bub_ms &dest : mp.points_in_rectangle( omtile_align_start,
+                omtile_align_end ) ) {
+            if( rl_dist( u.pos_bub(), dest ) <= best &&
                 ( ( going_down_1 && mp.has_flag( ter_furn_flag::TFLAG_GOES_UP, dest ) ) ||
                   ( going_up_1 && ( mp.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, dest ) ||
                                     mp.ter( dest ) == ter_t_manhole_cover ) ) ||
                   ( ( movez == 2 || movez == -2 ) && mp.ter( dest ) == ter_t_elevator ) ) ) {
-                stairs.emplace( dest );
-                best = rl_dist( u.pos(), dest );
+                stairs.emplace( dest.raw() );
+                best = rl_dist( u.pos_bub(), dest );
             }
         }
     }
@@ -12363,7 +12375,7 @@ std::optional<tripoint> game::find_or_make_stairs( map &mp, const int z_after, b
         return stairs;
     }
 
-    if( u.has_effect( effect_gliding ) && get_map().tr_at( u.pos() ) == tr_ledge ) {
+    if( u.has_effect( effect_gliding ) && get_map().tr_at( u.pos_bub() ) == tr_ledge ) {
         return stairs;
     }
 
@@ -12836,7 +12848,7 @@ void game::display_scent()
             return;
         }
         shared_ptr_fast<game::draw_callback_t> scent_cb = make_shared_fast<game::draw_callback_t>( [&]() {
-            scent.draw( w_terrain, div * 2, u.pos() + u.view_offset );
+            scent.draw( w_terrain, div * 2, u.pos() + u.view_offset.raw() );
         } );
         g->add_draw_callback( scent_cb );
 

@@ -391,7 +391,7 @@ TEST_CASE( "npc-board-player-vehicle" )
 
             CAPTURE( companion->path );
             if( !companion->path.empty() ) {
-                tripoint &p = companion->path.front();
+                tripoint_bub_ms &p = companion->path.front();
 
                 int part = -1;
                 const vehicle *veh = here.veh_at_internal( p, part );
@@ -442,7 +442,7 @@ TEST_CASE( "npc-movement" )
     for( int y = 0; y < height; ++y ) {
         for( int x = 0; x < width; ++x ) {
             const char type = setup[y][x];
-            const tripoint p = player_character.pos() + point( x, y );
+            const tripoint_bub_ms p = player_character.pos_bub() + point( x, y );
             // create walls
             if( type == '#' ) {
                 here.ter_set( p, t_wall_metal );
@@ -500,7 +500,7 @@ TEST_CASE( "npc-movement" )
     for( int y = 0; y < height; ++y ) {
         for( int x = 0; x < width; ++x ) {
             const char type = setup[y][x];
-            const tripoint p = player_character.pos() + point( x, y );
+            const tripoint_bub_ms p = player_character.pos_bub() + point( x, y );
             if( type == '#' ) {
                 REQUIRE( !here.passable( p ) );
             } else {
@@ -557,7 +557,7 @@ TEST_CASE( "npc_can_target_player" )
     set_time_to_day();
 
     Character &player_character = get_player_character();
-    npc &hostile = spawn_npc( player_character.pos().xy() + point_south, "thug" );
+    npc &hostile = spawn_npc( player_character.pos_bub().xy() + point_south, "thug" );
     REQUIRE( rl_dist( player_character.pos(), hostile.pos() ) <= 1 );
     hostile.set_attitude( NPCATT_KILL );
     hostile.name = "Enemy NPC";

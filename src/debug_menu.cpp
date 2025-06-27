@@ -1578,7 +1578,8 @@ static void spawn_artifact()
                 if( query_yn( _( "Is the artifact resonant?" ) ) ) {
                     artifact_is_resonant = true;
                 }
-                here.spawn_artifact( *center, relic_list[relic_menu.ret], artifact_max_attributes,
+                here.spawn_artifact( tripoint_bub_ms( *center ), relic_list[relic_menu.ret],
+                                     artifact_max_attributes,
                                      artifact_power_level, artifact_max_negative_value, artifact_is_resonant );
             }
         }
@@ -3388,7 +3389,7 @@ static void show_sound()
 
     shared_ptr_fast<game::draw_callback_t> sound_cb = make_shared_fast<game::draw_callback_t>( [&]() {
         const point offset {
-            player_character.view_offset.xy() + point( POSX - player_character.posx(), POSY - player_character.posy() )
+            player_character.view_offset.xy().raw() + point( POSX - player_character.posx(), POSY - player_character.posy() )
         };
         for( const tripoint &sound : sounds_to_draw.first ) {
             mvwputch( g->w_terrain, offset + sound.xy(), c_yellow, '?' );

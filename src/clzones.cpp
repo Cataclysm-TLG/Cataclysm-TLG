@@ -281,8 +281,8 @@ unload_options::query_unload_result unload_options::query_unload()
     molle = query_yn( _( "Detach MOLLE attached pouches?" ) );
     mods = query_yn(
                _( "Detach mods from weapons?  (Be careful as you may not have the skills to reattach them)" ) );
-    sparse_only = query_yn( _
-                            ( string_format( "Avoid unloading items stacks (not charges) greater than a certain amount?  (Amount defined in next window)" ) ) );
+    sparse_only = query_yn( string_format(
+                                _( "Avoid unloading items stacks (not charges) greater than a certain amount?  (Amount defined in next window)" ) ) );
     if( sparse_only ) {
         int threshold;
         if( query_int( threshold,
@@ -310,7 +310,7 @@ plot_options::query_seed_result plot_options::query_seed()
     const std::unordered_set<tripoint_abs_ms> zone_src_set =
         mgr.get_near( zone_type_LOOT_SEEDS, here.getglobal( player_character.pos() ), 60 );
     for( const tripoint_abs_ms &elem : zone_src_set ) {
-        tripoint elem_loc = here.getlocal( elem );
+        tripoint_bub_ms elem_loc = here.bub_from_abs( elem );
         for( item &it : here.i_at( elem_loc ) ) {
             if( it.is_seed() ) {
                 seed_inv.push_back( &it );
@@ -666,22 +666,22 @@ bool zone_data::set_type()
 }
 
 void zone_data::set_position( const std::pair<tripoint, tripoint> &position,
-                              const bool manual, bool update_avatar, bool skip_cache_update )
+                              const bool manual, bool update_avatar, bool skip_cache_update, bool suppress_display_update )
 {
     if( is_vehicle && manual ) {
         debugmsg( "Tried moving a lootzone bound to a vehicle part" );
         return;
     }
-    bool displayed = is_displayed;
+    bool adjust_display = is_displayed && !suppress_display_update;
 
-    if( displayed ) {
+    if( adjust_display ) {
         toggle_display();
     }
 
     start = position.first;
     end = position.second;
 
-    if( displayed ) {
+    if( adjust_display ) {
         toggle_display();
     }
 
@@ -1502,7 +1502,7 @@ void _rotate_zone( map &target_map, zone_data &zone, int turns )
             target_map.getglobal( tripoint( std::max( z_l_start.x, z_l_end.x ),
                                             std::max( z_l_start.y, z_l_end.y ),
                                             z_end.z ) );
-        zone.set_position( std::make_pair( first.raw(), second.raw() ), false );
+        zone.set_position( std::make_pair( first.raw(), second.raw() ), false, true, false, true );
     }
 }
 

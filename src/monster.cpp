@@ -613,7 +613,7 @@ void monster::try_reproduce()
             } else {
                 const item egg( type->baby_egg, *baby_timer );
                 for( int i = 0; i < spawn_cnt; i++ ) {
-                    here.add_item_or_charges( pos(), egg, true );
+                    here.add_item_or_charges( pos_bub(), egg, true );
                 }
             }
         }
@@ -707,7 +707,7 @@ void monster::try_biosignature()
         if( *biosig_timer > calendar::turn || counter > 50 ) {
             return;
         }
-        here.add_item_or_charges( pos(), item( type->biosig_item, *biosig_timer, 1 ), true );
+        here.add_item_or_charges( pos_bub(), item( type->biosig_item, *biosig_timer, 1 ), true );
         *biosig_timer += *type->biosig_timer;
         counter += 1;
     }
@@ -1728,7 +1728,7 @@ void monster::process_triggers()
         int ret = 0;
         map &here = get_map();
         const field_type_id fd_fire = ::fd_fire; // convert to int_id once
-        for( const tripoint &p : here.points_in_radius( pos(), 3 ) ) {
+        for( const tripoint_bub_ms &p : here.points_in_radius( pos_bub(), 3 ) ) {
             // note using `has_field_at` without bound checks,
             // as points that come from `points_in_radius` are guaranteed to be in bounds
             const int fire_intensity =
@@ -2291,7 +2291,7 @@ bool monster::move_effects( bool, tripoint dest_loc )
                 if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
                     add_msg( _( "The %s easily slips out of its bonds." ), name() );
                 }
-                here.add_item_or_charges( pos(), *tied_item );
+                here.add_item_or_charges( pos_bub(), *tied_item );
                 tied_item.reset();
             }
         } else {
@@ -2299,7 +2299,7 @@ bool monster::move_effects( bool, tripoint dest_loc )
                 const bool broken = rng( type->melee_dice * type->melee_sides, std::min( 10000,
                                          type->melee_dice * type->melee_sides * 250 ) ) > 800;
                 if( !broken ) {
-                    here.add_item_or_charges( pos(), *tied_item );
+                    here.add_item_or_charges( pos_bub(), *tied_item );
                 }
                 tied_item.reset();
                 if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
@@ -2350,8 +2350,8 @@ bool monster::move_effects( bool, tripoint dest_loc )
         if( type->melee_dice * type->melee_sides >= 7 ) {
             if( x_in_y( type->melee_dice * type->melee_sides, 32 ) ) {
                 remove_effect( effect_heavysnare );
-                here.spawn_item( pos(), "rope_6" );
-                here.spawn_item( pos(), "snare_trigger" );
+                here.spawn_item( pos_bub(), "rope_6" );
+                here.spawn_item( pos_bub(), "snare_trigger" );
                 if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
                     add_msg( _( "The %s escapes the heavy snare!" ), name() );
                 }
@@ -2763,11 +2763,11 @@ void monster::process_turn()
                 if( has_effect( effect_emp ) ) {
                     continue; // don't emit electricity while EMPed
                 } else if( has_effect( effect_supercharged ) ) {
-                    here.emit_field( pos(), emit_emit_shock_cloud_big );
+                    here.emit_field( pos_bub(), emit_emit_shock_cloud_big );
                     continue;
                 }
             }
-            here.emit_field( pos(), emid );
+            here.emit_field( pos_bub(), emid );
         }
     }
 
@@ -2816,7 +2816,7 @@ void monster::process_turn()
             }
         } else {
             weather_manager &weather = get_weather();
-            for( const tripoint &zap : here.points_in_radius( pos(), 1 ) ) {
+            for( const tripoint_bub_ms &zap : here.points_in_radius( pos_bub(), 1 ) ) {
                 const map_stack items = here.i_at( zap );
                 for( const item &item : items ) {
                     if( item.made_of( phase_id::LIQUID ) && item.flammable() ) { // start a fire!
@@ -2825,17 +2825,17 @@ void monster::process_turn()
                         break;
                     }
                 }
-                if( zap != pos() ) {
-                    explosion_handler::emp_blast( zap ); // Fries electronics due to the intensity of the field
+                if( zap != pos_bub() ) {
+                    explosion_handler::emp_blast( zap.raw() ); // Fries electronics due to the intensity of the field
                 }
                 const ter_id t = here.ter( zap );
                 if( t == ter_t_gas_pump || t == ter_t_gas_pump_a ) {
                     if( one_in( 4 ) ) {
                         explosion_handler::explosion( this, pos(), 40, 0.8, true );
-                        add_msg_if_player_sees( zap, m_warning, _( "The %s explodes in a fiery inferno!" ),
+                        add_msg_if_player_sees( zap.raw(), m_warning, _( "The %s explodes in a fiery inferno!" ),
                                                 here.tername( zap ) );
                     } else {
-                        add_msg_if_player_sees( zap, m_warning, _( "Lightning from %1$s engulfs the %2$s!" ),
+                        add_msg_if_player_sees( zap.raw(), m_warning, _( "Lightning from %1$s engulfs the %2$s!" ),
                                                 name(), here.tername( zap ) );
                         here.add_field( zap, fd_fire, 1, 2_turns );
                     }
@@ -3058,14 +3058,14 @@ void monster::die( Creature *nkiller )
             if( corpse ) {
                 corpse->force_insert_item( it, pocket_type::CONTAINER );
             } else {
-                get_map().add_item_or_charges( pos(), it );
+                get_map().add_item_or_charges( pos_bub(), it );
             }
         }
         for( const item &it : dissectable_inv ) {
             if( corpse ) {
                 corpse->put_in( it, pocket_type::CORPSE );
             } else {
-                get_map().add_item( pos(), it );
+                get_map().add_item( pos_bub(), it );
             }
         }
     }
@@ -3185,7 +3185,7 @@ void monster::drop_items_on_death( item *corpse )
     // for non corpses this is much simpler
     if( !corpse ) {
         for( item &it : new_items ) {
-            get_map().add_item_or_charges( pos(), it );
+            get_map().add_item_or_charges( pos_bub(), it );
         }
         return;
     }

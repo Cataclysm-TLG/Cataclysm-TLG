@@ -438,21 +438,23 @@ void computer_session::action_open_disarm()
 void computer_session::action_open()
 {
     get_map().translate_radius( ter_t_door_metal_locked, ter_t_floor, 25.0,
-                                get_player_character().pos(),
+                                get_player_character().pos_bub(),
                                 true );
     query_any( _( "Doors opened.  Press any key…" ) );
 }
 
 void computer_session::action_open_gate()
 {
-    get_map().translate_radius( ter_t_wall_metal, ter_t_metal_floor, 8.0, get_player_character().pos(),
+    get_map().translate_radius( ter_t_wall_metal, ter_t_metal_floor, 8.0,
+                                get_player_character().pos_bub(),
                                 true );
     query_any( _( "Gates opened.  Press any key…" ) );
 }
 
 void computer_session::action_close_gate()
 {
-    get_map().translate_radius( ter_t_metal_floor, ter_t_wall_metal, 8.0, get_player_character().pos(),
+    get_map().translate_radius( ter_t_metal_floor, ter_t_wall_metal, 8.0,
+                                get_player_character().pos_bub(),
                                 true );
     query_any( _( "Gates closed.  Press any key…" ) );
 }
@@ -465,7 +467,7 @@ void computer_session::action_close_gate()
 void computer_session::action_lock()
 {
     get_map().translate_radius( ter_t_door_metal_c, ter_t_door_metal_locked, 8.0,
-                                get_player_character().pos(),
+                                get_player_character().pos_bub(),
                                 true );
     query_any( _( "Lock enabled.  Press any key…" ) );
 }
@@ -479,7 +481,7 @@ void computer_session::action_unlock_disarm()
 void computer_session::action_unlock()
 {
     get_map().translate_radius( ter_t_door_metal_locked, ter_t_door_metal_c, 8.0,
-                                get_player_character().pos(),
+                                get_player_character().pos_bub(),
                                 true );
     query_any( _( "Lock disabled.  Press any key…" ) );
 }
@@ -505,11 +507,11 @@ void computer_session::action_sample()
 {
     get_player_character().mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.bub_points_on_zlevel() ) {
         if( here.ter( p ) != ter_t_sewage_pump ) {
             continue;
         }
-        for( const tripoint &n : here.points_in_radius( p, 1 ) ) {
+        for( const tripoint_bub_ms &n : here.points_in_radius( p, 1 ) ) {
             if( here.furn( n ) != furn_f_counter ) {
                 continue;
             }
@@ -542,7 +544,7 @@ void computer_session::action_release()
                    "environment",
                    "alarm" );
     get_map().translate_radius( ter_t_reinforced_glass, ter_t_thconc_floor, 25.0,
-                                player_character.pos(),
+                                player_character.pos_bub(),
                                 true );
     query_any( _( "Containment shields opened.  Press any key…" ) );
 }
@@ -559,7 +561,8 @@ void computer_session::action_release_bionics()
     sounds::sound( player_character.pos(), 40, sounds::sound_t::alarm, _( "an alarm sound!" ), false,
                    "environment",
                    "alarm" );
-    get_map().translate_radius( ter_t_reinforced_glass, ter_t_thconc_floor, 3.0, player_character.pos(),
+    get_map().translate_radius( ter_t_reinforced_glass, ter_t_thconc_floor, 3.0,
+                                player_character.pos_bub(),
                                 true );
     query_any( _( "Containment shields opened.  Press any key…" ) );
 }
@@ -589,9 +592,9 @@ void computer_session::action_portal()
 {
     get_event_bus().send<event_type::opens_portal>();
     map &here = get_map();
-    for( const tripoint &tmp : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &tmp : here.bub_points_on_zlevel() ) {
         int numtowers = 0;
-        for( const tripoint &tmp2 : here.points_in_radius( tmp, 2 ) ) {
+        for( const tripoint_bub_ms &tmp2 : here.points_in_radius( tmp, 2 ) ) {
             if( here.ter( tmp2 ) == ter_t_radio_tower ) {
                 numtowers++;
             }
@@ -750,15 +753,15 @@ void computer_session::action_miss_launch()
     }
 
     //Put some smoke gas and explosions at the nuke location.
-    const tripoint nuke_location = { get_player_character().pos() - point( 12, 0 ) };
-    for( const tripoint &loc : get_map().points_in_radius( nuke_location, 5, 0 ) ) {
+    const tripoint_bub_ms nuke_location = { get_player_character().pos_bub() - point( 12, 0 ) };
+    for( const tripoint_bub_ms &loc : get_map().points_in_radius( nuke_location, 5, 0 ) ) {
         if( one_in( 4 ) ) {
             get_map().add_field( loc, fd_smoke, rng( 1, 9 ) );
         }
     }
 
     //Only explode once. But make it large.
-    explosion_handler::explosion( &get_player_character(), nuke_location, 2000, 0.7, true );
+    explosion_handler::explosion( &get_player_character(), nuke_location.raw(), 2000, 0.7, true );
 
     //...ERASE MISSILE, OPEN SILO, DISABLE COMPUTER
     // For each level between here and the surface, remove the missile
@@ -795,7 +798,7 @@ void computer_session::action_list_bionics()
     std::vector<std::string> names;
     int more = 0;
     map &here = get_map();
-    for( const tripoint &p : here.points_on_zlevel() ) {
+    for( const tripoint_bub_ms &p : here.bub_points_on_zlevel() ) {
         for( item &elem : here.i_at( p ) ) {
             if( elem.is_bionic() ) {
                 if( static_cast<int>( names.size() ) < TERMY - 8 ) {
@@ -985,7 +988,7 @@ void computer_session::action_blood_anal()
     Character &player_character = get_player_character();
     player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.7 );
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 2 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 2 ) ) {
         if( here.furn( dest ) == furn_f_centrifuge ) {
             map_stack items = here.i_at( dest );
             if( items.empty() ) {
@@ -1033,7 +1036,7 @@ void computer_session::action_data_anal()
     Character &player_character = get_player_character();
     player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 2 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 2 ) ) {
         if( here.ter( dest ) == ter_t_floor_blue ) {
             print_error( _( "PROCESSING DATA" ) );
             map_stack items = here.i_at( dest );
@@ -1051,7 +1054,7 @@ void computer_session::action_data_anal()
                 if( items.only_item().typeId() == itype_black_box ) {
                     print_line( _( "Memory Bank: Military Hexron Encryption\nPrinting Transcript\n" ) );
                     item transcript( "black_box_transcript", calendar::turn );
-                    here.add_item_or_charges( player_character.pos(), transcript );
+                    here.add_item_or_charges( player_character.pos_bub(), transcript );
                 } else {
                     print_line( _( "Memory Bank: Unencrypted\nNothing of interest.\n" ) );
                 }
@@ -1263,7 +1266,7 @@ void computer_session::action_irradiator()
     bool error = false;
     bool platform_exists = false;
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 10 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 10 ) ) {
         if( here.ter( dest ) == ter_t_rad_platform ) {
             platform_exists = true;
             if( here.i_at( dest ).empty() ) {
@@ -1278,7 +1281,7 @@ void computer_session::action_irradiator()
                     // critical failure - radiation spike sets off electronic detonators
                     if( it->typeId() == itype_mininuke || it->typeId() == itype_mininuke_act ||
                         it->typeId() == itype_c4 ) {
-                        explosion_handler::explosion( &get_player_character(), dest, 40 );
+                        explosion_handler::explosion( &get_player_character(), dest.raw(), 40 );
                         reset_terminal();
                         print_error( _( "WARNING [409]: Primary sensors offline!" ) );
                         print_error( _( "  >> Initialize secondary sensors: Geiger profiling…" ) );
@@ -1293,14 +1296,14 @@ void computer_session::action_irradiator()
                         here.propagate_field( dest, fd_nuke_gas, 100, 3 );
                         here.translate_radius( ter_t_water_pool, ter_t_sewage, 8.0, dest, true );
                         here.adjust_radiation( dest, rng( 50, 500 ) );
-                        for( const tripoint &radorigin : here.points_in_radius( dest, 5 ) ) {
+                        for( const tripoint_bub_ms &radorigin : here.points_in_radius( dest, 5 ) ) {
                             here.adjust_radiation( radorigin, rng( 50, 500 ) / ( rl_dist( radorigin,
                                                    dest ) > 0 ? rl_dist( radorigin, dest ) : 1 ) );
                         }
                         if( here.pl_sees( dest, 10 ) ) {
-                            player_character.irradiate( rng_float( 50, 250 ) / rl_dist( player_character.pos(), dest ) );
+                            player_character.irradiate( rng_float( 50, 250 ) / rl_dist( player_character.pos_bub(), dest ) );
                         } else {
-                            player_character.irradiate( rng_float( 20, 100 ) / rl_dist( player_character.pos(), dest ) );
+                            player_character.irradiate( rng_float( 20, 100 ) / rl_dist( player_character.pos_bub(), dest ) );
                         }
                         query_any( _( "EMERGENCY SHUTDOWN!  Press any key…" ) );
                         error = true;
@@ -1309,13 +1312,13 @@ void computer_session::action_irradiator()
                         break;
                     }
                     here.adjust_radiation( dest, rng( 20, 50 ) );
-                    for( const tripoint &radorigin : here.points_in_radius( dest, 5 ) ) {
+                    for( const tripoint_bub_ms &radorigin : here.points_in_radius( dest, 5 ) ) {
                         here.adjust_radiation( radorigin, rng( 20, 50 ) / ( rl_dist( radorigin,
                                                dest ) > 0 ? rl_dist( radorigin, dest ) : 1 ) );
                     }
                     // if unshielded, rad source irradiates player directly, reduced by distance to source
                     if( here.pl_sees( dest, 10 ) ) {
-                        player_character.irradiate( rng_float( 5, 25 ) / rl_dist( player_character.pos(), dest ) );
+                        player_character.irradiate( rng_float( 5, 25 ) / rl_dist( player_character.pos_bub(), dest ) );
                     }
                 }
                 if( !error && platform_exists ) {
@@ -1339,21 +1342,21 @@ void computer_session::action_geiger()
 {
     Character &player_character = get_player_character();
     player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
-    tripoint platform;
+    tripoint_bub_ms platform;
     bool source_exists = false;
     int sum_rads = 0;
     int peak_rad = 0;
     int tiles_counted = 0;
     map &here = get_map();
     print_error( _( "RADIATION MEASUREMENTS:" ) );
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 10 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 10 ) ) {
         if( here.ter( dest ) == ter_t_rad_platform ) {
             source_exists = true;
             platform = dest;
         }
     }
     if( source_exists ) {
-        for( const tripoint &dest : here.points_in_radius( platform, 3 ) ) {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( platform, 3 ) ) {
             sum_rads += here.get_radiation( dest );
             tiles_counted ++;
             if( here.get_radiation( dest ) > peak_rad ) {
@@ -1370,7 +1373,7 @@ void computer_session::action_geiger()
         print_newline();
     }
     print_error( _( "GEIGER COUNTER @ CONSOLE:… %s mSv/h." ),
-                 here.get_radiation( player_character.pos() ) );
+                 here.get_radiation( player_character.pos_bub() ) );
     print_error( _( "PERSONAL DOSIMETRY:… %s mSv." ), player_character.get_rad() );
     print_newline();
     query_any( _( "Press any key…" ) );
@@ -1382,14 +1385,14 @@ void computer_session::action_conveyor()
 {
     Character &player_character = get_player_character();
     player_character.mod_moves( -to_moves<int>( 3_seconds ) );
-    tripoint loading; // red tile = loading bay
-    tripoint unloading; // green tile = unloading bay
-    tripoint platform; // radiation platform = middle point
+    tripoint_bub_ms loading; // red tile = loading bay
+    tripoint_bub_ms unloading; // green tile = unloading bay
+    tripoint_bub_ms platform; // radiation platform = middle point
     bool l_exists = false;
     bool u_exists = false;
     bool p_exists = false;
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 10 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 10 ) ) {
         if( here.ter( dest ) == ter_t_rad_platform ) {
             platform = dest;
             p_exists = true;
@@ -1438,7 +1441,7 @@ void computer_session::action_shutters()
     player_character.mod_moves( -to_moves<int>( 3_seconds ) );
     get_map().translate_radius( ter_t_reinforced_glass_shutter_open, ter_t_reinforced_glass_shutter,
                                 8.0,
-                                player_character.pos(),
+                                player_character.pos_bub(),
                                 true, true );
     query_any( _( "Toggling shutters.  Press any key…" ) );
 }
@@ -1449,10 +1452,10 @@ void computer_session::action_extract_rad_source()
     Character &player_character = get_player_character();
     if( query_yn( _( "Operation irreversible.  Extract radioactive material?" ) ) ) {
         player_character.mod_moves( -to_moves<int>( 3_seconds ) );
-        tripoint platform;
+        tripoint_bub_ms platform;
         bool p_exists = false;
         map &here = get_map();
-        for( const tripoint &dest : here.points_in_radius( player_character.pos(), 10 ) ) {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 10 ) ) {
             if( here.ter( dest ) == ter_t_rad_platform ) {
                 platform = dest;
                 p_exists = true;
@@ -1460,7 +1463,7 @@ void computer_session::action_extract_rad_source()
         }
         if( p_exists ) {
             here.spawn_item( platform, itype_cobalt_60, rng( 8, 15 ) );
-            here.translate_radius( ter_t_rad_platform, ter_t_concrete, 8.0, player_character.pos(), true );
+            here.translate_radius( ter_t_rad_platform, ter_t_concrete, 8.0, player_character.pos_bub(), true );
             comp.remove_option( COMPACT_IRRADIATOR );
             comp.remove_option( COMPACT_EXTRACT_RAD_SOURCE );
             query_any( _( "Extraction sequence complete…  Press any key." ) );
@@ -1477,7 +1480,7 @@ void computer_session::action_deactivate_shock_vent()
     player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.3 );
     bool has_vent = false;
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( player_character.pos(), 10 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( player_character.pos_bub(), 10 ) ) {
         if( here.get_field( dest, fd_shock_vent ) != nullptr ) {
             has_vent = true;
         }
@@ -1654,7 +1657,7 @@ void computer_session::failure_destroy_blood()
 {
     print_error( _( "ERROR: Disruptive Spin" ) );
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( get_player_character().pos(), 2 ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( get_player_character().pos_bub(), 2 ) ) {
         if( here.furn( dest ) == furn_f_centrifuge ) {
             map_stack items = here.i_at( dest );
             if( items.empty() ) {
@@ -1681,7 +1684,7 @@ void computer_session::failure_destroy_data()
 {
     print_error( _( "ERROR: ACCESSING DATA MALFUNCTION" ) );
     map &here = get_map();
-    for( const tripoint &p : here.points_in_radius( get_player_character().pos(), 2 ) ) {
+    for( const tripoint_bub_ms &p : here.points_in_radius( get_player_character().pos_bub(), 2 ) ) {
         if( here.ter( p ) == ter_t_floor_blue ) {
             map_stack items = here.i_at( p );
             if( items.empty() ) {

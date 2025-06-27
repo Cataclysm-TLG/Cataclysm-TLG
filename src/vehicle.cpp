@@ -1860,8 +1860,8 @@ bool vehicle::merge_vehicle_parts( vehicle *veh )
             item drop = veh->part_to_item( part );
             if( drop.link().t_veh.get() == this ) {
                 if( !veh->magic && part.info().id != vpart_power_cord ) {
-                    const tripoint drop_pos = veh->global_part_pos3( part );
-                    drop.reset_link( false, nullptr, -1, true, drop_pos );
+                    const tripoint_bub_ms drop_pos = veh->bub_part_pos( part );
+                    drop.reset_link( false, nullptr, -1, true, drop_pos.raw() );
                     here.add_item_or_charges( drop_pos, drop );
                 }
                 veh->remove_remote_part( part );
@@ -1921,9 +1921,17 @@ bool vehicle::merge_appliance_into_grid( vehicle &veh_target )
 
     //Make sure the resulting vehicle would not be too large
     if( size.x <= MAX_WIRE_VEHICLE_SIZE && size.y <= MAX_WIRE_VEHICLE_SIZE ) {
+        // Find all item connections to the merging network so they can be updated after merge.
+        std::vector<item_reference> network_connections = get_map().item_network_connections( &veh_target );
+        tripoint_bub_ms old_grid_reference{veh_target.pos_bub()};
         if( !merge_vehicle_parts( &veh_target ) ) {
             debugmsg( "failed to merge vehicle parts" );
         } else {
+            //  Adjust the connections after the change of the power_grid origo.
+            for( const item_reference &item_ref : network_connections ) {
+                item_ref.item_ref->link().t_mount += ( old_grid_reference - this->pos_bub() ).xy().raw();
+            }
+
             //Keep wall wiring sections from losing their flag
             //A grid with only wires needs this flag to count as a powergrid
             //But it's not a problem if a grid without any has this flag, thus we can add it without issue
@@ -4079,7 +4087,7 @@ void vehicle::spew_field( double joules, int part, field_type_id type, int inten
         return;
     }
     intensity = std::max( joules / 10000, static_cast<double>( intensity ) );
-    const tripoint dest = exhaust_dest( part );
+    const tripoint_bub_ms dest = tripoint_bub_ms( exhaust_dest( part ) );
     get_map().mod_field_intensity( dest, type, intensity );
 }
 
@@ -5794,11 +5802,11 @@ void vehicle::idle( bool on_map )
             continue;
         }
         for( const emit_id &e : pt.info().emissions ) {
-            here.emit_field( global_part_pos3( pt ), e );
+            here.emit_field( bub_part_pos( pt ), e );
         }
         for( const emit_id &e : pt.info().exhaust ) {
             if( exhaust_and_muffle.first == -1 ) {
-                here.emit_field( global_part_pos3( pt ), e );
+                here.emit_field( bub_part_pos( pt ), e );
             } else {
                 here.emit_field( exhaust_dest( exhaust_and_muffle.first ), e );
             }
@@ -5875,7 +5883,7 @@ void vehicle::slow_leak()
         itype_id fuel = p.ammo_current();
         int qty = std::max( ( 0.5 - health ) * ( 0.5 - health ) * p.ammo_remaining() / 10, 1.0 );
         point q = coord_translate( p.mount );
-        const tripoint dest = global_pos3() + tripoint( q, 0 );
+        const tripoint_bub_ms dest = pos_bub() + tripoint( q, 0 );
 
         // damaged batteries self-discharge without leaking, plutonium leaks slurry
         if( fuel != fuel_type_battery && fuel != fuel_type_plutonium_cell ) {
@@ -6955,7 +6963,7 @@ void vehicle::invalidate_towing( bool first_vehicle, Character *remover )
             vehicle_part &vp = parts[tow_cable_idx];
             item drop = part_to_item( vp );
             drop.set_damage( 0 );
-            tripoint drop_pos = global_part_pos3( vp );
+            tripoint_bub_ms drop_pos = bub_part_pos( vp );
             remove_part( vp );
             if( other_tow_cable_idx > -1 ) {
                 drop.reset_link( false );
@@ -7122,7 +7130,7 @@ void vehicle::shed_loose_parts( const trinary shed_cables, const tripoint_bub_ms
         }
         const item drop = part_to_item( vp_loose );
         if( !magic ) {
-            here.add_item_or_charges( global_part_pos3( vp_loose ), drop );
+            here.add_item_or_charges( bub_part_pos( vp_loose ), drop );
         }
 
         if( remove_remote ) {
@@ -7427,12 +7435,12 @@ int vehicle::break_off( map &here, vehicle_part &vp, int dmg )
     if( rng( 0, vpi.durability / 10 ) >= dmg ) {
         return dmg;
     }
-    const tripoint pos = global_part_pos3( vp );
+    const tripoint_bub_ms pos = bub_part_pos( vp );
     const auto scatter_parts = [&]( const vehicle_part & pt ) {
         for( const item &piece : pt.pieces_for_broken_part() ) {
             // inside the loop, so each piece goes to a different place
             // TODO: this may spawn items behind a wall
-            const tripoint where = random_entry( here.points_in_radius( pos, SCATTER_DISTANCE ) );
+            const tripoint_bub_ms where = random_entry( here.points_in_radius( pos, SCATTER_DISTANCE ) );
             // TODO: balance audit, ensure that less pieces are generated than one would need
             // to build the component (smash a vehicle box that took 10 lumps of steel,
             // find 12 steel lumps scattered after atom-smashing it with a tree trunk)
@@ -7457,20 +7465,24 @@ int vehicle::break_off( map &here, vehicle_part &vp, int dmg )
                 continue; // Ignore the frame being destroyed
             } else if( vpi_here.has_flag( "TOW_CABLE" ) ) {
                 // Tow cables - remove it in one piece, remove remote part, and remove towing data
-                add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp_here.name() );
+                add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                        vp_here.name() );
                 invalidate_towing( true );
             } else if( vpi_here.has_flag( VPFLAG_POWER_TRANSFER ) ) {
                 // Electrical cables - remove it in one piece and remove remote part
-                add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp_here.name() );
+                add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                        vp_here.name() );
                 here.add_item_or_charges( pos, part_to_item( vp_here ) );
                 remove_remote_part( vp_here );
             } else if( vp_here.is_broken() ) {
                 // Tearing off a broken part - break it up
-                add_msg_if_player_sees( pos, m_bad, _( "The %s's %s breaks into pieces!" ), name, vp_here.name() );
+                add_msg_if_player_sees( pos.raw(), m_bad, _( "The %s's %s breaks into pieces!" ), name,
+                                        vp_here.name() );
                 scatter_parts( vp_here );
             } else {
                 // Intact (but possibly damaged) part - remove it in one piece
-                add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is torn off!" ), name, vp_here.name() );
+                add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is torn off!" ), name,
+                                        vp_here.name() );
                 if( !magic ) {
                     here.add_item_or_charges( pos, part_to_item( vp_here ) );
                 }
@@ -7478,23 +7490,25 @@ int vehicle::break_off( map &here, vehicle_part &vp, int dmg )
             remove_part( vp_here, *handler_ptr );
         }
         // After clearing the frame, remove it.
-        add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is destroyed!" ), name, vp.name() );
+        add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is destroyed!" ), name, vp.name() );
         scatter_parts( vp );
         remove_part( vp, *handler_ptr );
         find_and_split_vehicles( here, { index_of_part( &vp, /* include_removed = */ true ) } );
     } else {
         if( vpi.has_flag( "TOW_CABLE" ) ) {
             // Tow cables - remove it in one piece, remove remote part, and remove towing data
-            add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp.name() );
+            add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                    vp.name() );
             invalidate_towing( true );
         } else if( vpi.has_flag( VPFLAG_POWER_TRANSFER ) ) {
             // Electrical cables - remove it in one piece and remove remote part
-            add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp.name() );
+            add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                    vp.name() );
             here.add_item_or_charges( pos, part_to_item( vp ) );
             remove_remote_part( vp );
         } else {
             //Just break it off
-            add_msg_if_player_sees( pos, m_bad, _( "The %1$s's %2$s is destroyed!" ), name, vp.name() );
+            add_msg_if_player_sees( pos.raw(), m_bad, _( "The %1$s's %2$s is destroyed!" ), name, vp.name() );
             scatter_parts( vp );
         }
         const point position = vp.mount;
@@ -7570,7 +7584,7 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
         return dmg; // part is already dead
     }
     const vpart_info &vpi = vp.info();
-    const tripoint vppos = global_part_pos3( vp );
+    const tripoint_bub_ms vppos = bub_part_pos( vp );
     // If auto-driving and damage happens, bail out
     if( is_autodriving ) {
         stop_autodriving();
@@ -7635,9 +7649,10 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
         } else {
             item part_as_item = part_to_item( vp );
             if( vpi.has_flag( "INITIAL_PART" ) ) {
-                add_msg_if_player_sees( vppos, m_bad, _( "The %s falls over!" ), name );
+                add_msg_if_player_sees( vppos.raw(), m_bad, _( "The %s falls over!" ), name );
             } else {
-                add_msg_if_player_sees( vppos, m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp.name() );
+                add_msg_if_player_sees( vppos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                        vp.name() );
             }
             if( vpi.has_flag( VPFLAG_POWER_TRANSFER ) ) {
                 remove_remote_part( vp );

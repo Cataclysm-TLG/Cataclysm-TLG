@@ -88,7 +88,6 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     int str = u.get_arm_str();
 
     //if vehicle is rollable we modify str_req based on a function of movecost per wheel.
-
     const auto &wheel_indices = grabbed_vehicle->wheelcache;
     if( grabbed_vehicle->valid_wheel_config() ) {
         str_req = max_str_req / 10;

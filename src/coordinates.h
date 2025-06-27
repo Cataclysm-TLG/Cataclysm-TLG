@@ -2,6 +2,7 @@
 #ifndef CATA_SRC_COORDINATES_H
 #define CATA_SRC_COORDINATES_H
 
+#include <cmath>
 #include <functional>
 #include <iosfwd>
 #include <iterator>
@@ -776,6 +777,7 @@ tripoint_bub_ms rebase_bub( tripoint_rel_ms p );
 // as the reference remains the same location regardless, and the map operation still knows how large the map is.
 point_bub_ms rebase_bub( point_omt_ms p );
 tripoint_bub_ms rebase_bub( tripoint_omt_ms p );
+tripoint_omt_ms rebase_omt( tripoint_bub_ms p );
 
 template<typename Point, coords::origin Origin, coords::scale Scale>
 inline int square_dist( const coords::coord_point_ob<Point, Origin, Scale> &loc1,
@@ -796,6 +798,13 @@ inline int rl_dist( const coords::coord_point_ob<Point, Origin, Scale> &loc1,
                     const coords::coord_point_ob<Point, Origin, Scale> &loc2 )
 {
     return rl_dist( loc1.raw(), loc2.raw() );
+}
+
+template<typename Point, coords::origin Origin, coords::scale Scale>
+inline int rl_dist_exact( const coords::coord_point_ob<Point, Origin, Scale> &loc1,
+                          const coords::coord_point_ob<Point, Origin, Scale> &loc2 )
+{
+    return rl_dist_exact( loc1.raw(), loc2.raw() );
 }
 
 template<typename Point, coords::origin Origin, coords::scale Scale>
@@ -924,6 +933,23 @@ template<typename Tripoint>
 Tripoint midpoint( const half_open_cuboid<Tripoint> &box )
 {
     return midpoint( box.p_min, box.p_max );
+}
+
+template<typename Point, coords::origin Origin, coords::scale Scale>
+coords::coord_point<Point, Origin, Scale>
+midpoint_round_to_nearest( std::vector<coords::coord_point_ob<Point, Origin, Scale>> &locs )
+{
+    tripoint mid;
+    for( const auto &loc : locs ) {
+        mid += loc.raw();
+    }
+
+    float num = locs.size();
+    mid.x = std::round( mid.x / num );
+    mid.y = std::round( mid.y / num );
+    mid.z = std::round( mid.z / num );
+
+    return coords::coord_point_ib < Point, Origin, Scale >::make_unchecked( mid );
 }
 
 template<typename Point, coords::origin Origin, coords::scale Scale>

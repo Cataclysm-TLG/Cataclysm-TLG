@@ -301,7 +301,7 @@ input_context game::get_player_input( std::string &action )
 
         //x% of the Viewport, only shown on visible areas
         const weather_animation_t weather_info = weather.weather_id->weather_animation;
-        point offset( u.view_offset.xy() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
+        point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
                       -getmaxy( w_terrain ) / 2 + u.posy() ) );
 
 #if defined(TILES)
@@ -459,8 +459,8 @@ static void rcdrive( const point &d )
         add_msg( m_warning, _( "No radio car connected." ) );
         return;
     }
-    tripoint c;
-    car_location_string >> c.x >> c.y >> c.z;
+    tripoint_bub_ms c;
+    car_location_string >> c.x() >> c.y() >> c.z();
 
     auto rc_pairs = here.get_rc_items( c );
     auto rc_pair = rc_pairs.begin();
@@ -476,20 +476,20 @@ static void rcdrive( const point &d )
     }
     item *rc_car = rc_pair->second;
 
-    tripoint dest( c + d );
+    tripoint_bub_ms dest( c + d );
     if( here.impassable( dest ) || !here.can_put_items_ter_furn( dest ) ||
         here.has_furn( dest ) ) {
         sounds::sound( dest, 7, sounds::sound_t::combat,
                        _( "sound of a collision with an obstacle." ), true, "misc", "rc_car_hits_obstacle" );
         return;
     } else if( !here.add_item_or_charges( dest, *rc_car ).is_null() ) {
-        tripoint src( c );
+        tripoint_bub_ms src( c );
         //~ Sound of moving a remote controlled car
         sounds::sound( src, 6, sounds::sound_t::movement, _( "zzz…" ), true, "misc", "rc_car_drives" );
         player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.5 );
         here.i_rem( src, rc_car );
         car_location_string.clear();
-        car_location_string << dest.x << ' ' << dest.y << ' ' << dest.z;
+        car_location_string << dest.x() << ' ' << dest.y() << ' ' << dest.z();
         player_character.set_value( "remote_controlling", car_location_string.str() );
         return;
     }
@@ -590,7 +590,7 @@ static void open()
     if( !openp_ ) {
         return;
     }
-    const tripoint openp = *openp_;
+    const tripoint_bub_ms openp = tripoint_bub_ms( *openp_ );
     map &here = get_map();
 
     player_character.mod_moves( -to_moves<int>( 1_seconds ) );
@@ -856,6 +856,16 @@ static void grab()
                 return;
             }
         }
+        //solid vehicles can't be grabbed while boarded
+        const optional_vpart_position vp_boarded = here.veh_at( you.pos_bub() );
+        if( vp_boarded ) {
+            const std::set<tripoint> grabbed_veh_points = vp->vehicle().get_points();
+            if( &vp_boarded->vehicle() == &vp->vehicle() &&
+                !empty( vp->vehicle().get_avail_parts( VPFLAG_OBSTACLE ) ) ) {
+                add_msg( m_info, _( "You can't move the %s while you're boarding it." ), veh_name );
+                return;
+            }
+        }
         you.grab( object_type::VEHICLE, grabp - you.pos_bub() );
         add_msg( _( "You grab the %s." ), veh_name );
     } else if( here.has_furn( grabp ) ) {
@@ -1018,16 +1028,16 @@ static void smash()
     if( !smashp_ ) {
         return;
     }
-    tripoint smashp = *smashp_;
+    tripoint_bub_ms smashp = tripoint_bub_ms( *smashp_ );
 
     bool smash_floor = false;
-    if( smashp.z != player_character.posz() ) {
-        if( smashp.z > player_character.posz() ) {
+    if( smashp.z() != player_character.posz() ) {
+        if( smashp.z() > player_character.posz() ) {
             // TODO: Knock on the ceiling
             return;
         }
 
-        smashp.z = player_character.posz();
+        smashp.z() = player_character.posz();
         smash_floor = true;
     }
     get_event_bus().send<event_type::character_smashes_tile>(
@@ -2144,8 +2154,8 @@ static void do_deathcam_action( const action_id &act, avatar &player_character )
             break;
 
         case ACTION_CENTER:
-            player_character.view_offset.x = g->driving_view_offset.x;
-            player_character.view_offset.y = g->driving_view_offset.y;
+            player_character.view_offset.x() = g->driving_view_offset.x;
+            player_character.view_offset.y() = g->driving_view_offset.y;
             break;
 
         case ACTION_SHIFT_N:
@@ -3129,7 +3139,7 @@ bool game::handle_action()
 
     // If performing an action with right mouse button, co-ordinates
     // of location clicked.
-    std::optional<tripoint> mouse_target;
+    std::optional<tripoint_bub_ms> mouse_target;
 
     if( uquit == QUIT_EXIT ) {
         return false;
@@ -3209,7 +3219,8 @@ bool game::handle_action()
                 return false;
             }
 
-            const std::optional<tripoint> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(), true );
+            const std::optional<tripoint_bub_ms> mouse_pos = ctxt.get_coordinates( w_terrain, ter_view_p.xy(),
+                    true );
             if( !mouse_pos ) {
                 return false;
             }
@@ -3224,12 +3235,12 @@ bool game::handle_action()
                 // setting auto-move destination state in addition to setting
                 // act.
                 // TODO: fix point types
-                if( !try_get_left_click_action( act, tripoint_bub_ms( *mouse_target ) ) ) {
+                if( !try_get_left_click_action( act, *mouse_target ) ) {
                     return false;
                 }
             } else if( act == ACTION_SEC_SELECT ) {
                 // TODO: fix point types
-                if( !try_get_right_click_action( act, tripoint_bub_ms( *mouse_target ) ) ) {
+                if( !try_get_right_click_action( act, *mouse_target ) ) {
                     return false;
                 }
             }
@@ -3276,7 +3287,8 @@ bool game::handle_action()
 
     // actions allowed only while alive
     if( !player_character.is_dead_state() ) {
-        if( !do_regular_action( act, player_character, mouse_target ) ) {
+        if( !do_regular_action( act, player_character,
+                                mouse_target ? std::make_optional( mouse_target->raw() ) : std::nullopt ) ) {
             return false;
         }
     }

@@ -647,11 +647,11 @@ void suffer::from_asthma( Character &you, const int current_stim )
         } else if( nearby_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
             // create new variable to resolve a reference issue
             int amount = 1;
-            if( !here.use_charges( you.pos(), 2, itype_inhaler, amount ).empty() ) {
+            if( !here.use_charges( you.pos_bub(), 2, itype_inhaler, amount ).empty() ) {
                 you.add_msg_if_player( m_info, _( "You use your inhaler and go back to sleep." ) );
                 you.add_effect( effect_took_antiasthmatic, rng( 6_hours, 12_hours ) );
-            } else if( !here.use_charges( you.pos(), 2, itype_oxygen_tank, amount ).empty() ||
-                       !here.use_charges( you.pos(), 2, itype_smoxygen_tank, amount ).empty() ) {
+            } else if( !here.use_charges( you.pos_bub(), 2, itype_oxygen_tank, amount ).empty() ||
+                       !here.use_charges( you.pos_bub(), 2, itype_smoxygen_tank, amount ).empty() ) {
                 you.add_msg_if_player( m_info, _( "You take a deep breath from your oxygen tank "
                                                   "and go back to sleep." ) );
             }
@@ -1176,7 +1176,7 @@ void suffer::from_item_dropping( Character &you )
 void suffer::from_other_mutations( Character &you )
 {
     map &here = get_map();
-    const tripoint position = you.pos();
+    const tripoint_bub_ms position = you.pos_bub();
 
     if( you.has_trait( trait_WINGS_INSECT_active ) ) {
         //~Sound of buzzing Insect Wings
@@ -1274,7 +1274,7 @@ void suffer::from_radiation( Character &you )
     map &here = get_map();
     // get radioactive leak level of your inventory
     float item_radiation = you.get_leak_level();
-    const int map_radiation = here.get_radiation( you.pos() );
+    const int map_radiation = here.get_radiation( you.pos_bub() );
     float rads = map_radiation / 100.0f + item_radiation / 10.0f;
 
     int rad_mut = 0;
@@ -1305,7 +1305,7 @@ void suffer::from_radiation( Character &you )
         if( rad_mut_proc && !kept_in ) {
             // Irradiate a random nearby point
             // If you can't, irradiate the player instead
-            tripoint rad_point = you.pos() + point( rng( -3, 3 ), rng( -3, 3 ) );
+            tripoint_bub_ms rad_point = you.pos_bub() + point( rng( -3, 3 ), rng( -3, 3 ) );
             // TODO: Radioactive vehicles?
             if( here.get_radiation( rad_point ) < rad_mut ) {
                 here.adjust_radiation( rad_point, 1 );
@@ -1740,7 +1740,7 @@ void suffer::from_artifact_resonance( Character &you, int amt )
                 you.add_msg_player_or_npc( m_bad, _( "You attract the attention of something horrible." ),
                                            _( "<npcname> attracts the attention of something horrible." ) );
                 map &here = get_map();
-                for( const tripoint &dest : here.points_in_radius( you.pos(), 12 ) ) {
+                for( const tripoint_bub_ms &dest : here.points_in_radius( you.pos_bub(), 12 ) ) {
                     if( here.is_cornerfloor( dest ) ) {
                         here.add_field( dest, fd_tindalos_rift, 3 );
                         add_msg( m_info, _( "You hear a low-pitched echoing howl." ) );
@@ -1750,7 +1750,7 @@ void suffer::from_artifact_resonance( Character &you, int amt )
                 you.add_msg_player_or_npc( m_bad, _( "Reality gives way under your feet like rotten scaffolding." ),
                                            _( "Reality gives way under <npcname>'s feet like rotten scaffolding." ) );
                 map &here = get_map();
-                here.add_field( you.pos(), fd_fatigue, 1 );
+                here.add_field( you.pos_bub(), fd_fatigue, 1 );
             } else if( rng_outcome == 3 ) {
                 you.add_msg_player_or_npc( m_bad, _( "You suddenly lose all substance and corporeality." ),
                                            _( "<npcname> suddenly loses all substance and corporeality." ) );

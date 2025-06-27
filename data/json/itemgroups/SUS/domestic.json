@@ -162,6 +162,7 @@
       { "item": "aluminum_foil", "prob": 25 },
       { "item": "wrapper_foil", "prob": 12, "count": [ 5, 40 ], "container-item": "wrapper_foil_roll" },
       { "item": "nuts_bolts", "prob": 20, "charges": [ 1, 4 ] },
+      { "item": "plastic_shopping_bag", "prob": 30, "count": [ 0, 8 ] },
       {
         "distribution": [
           { "item": "matches", "charges": [ 1, -1 ] },
@@ -534,6 +535,7 @@
       { "item": "sponge", "prob": 40, "damage": [ 0, 2 ] },
       { "item": "brush", "custom-flags": [ "FILTHY" ], "prob": 20, "damage": [ 0, 4 ] },
       { "item": "sponge", "custom-flags": [ "FILTHY" ], "prob": 40, "damage": [ 0, 4 ] },
+      { "item": "plastic_shopping_bag", "prob": 10, "count": [ 0, 3 ] },
       { "item": "sponge", "prob": 85 },
       { "item": "chem_washing_soda", "prob": 20, "charges": [ 1, -1 ] },
       { "item": "bleach", "prob": 55, "charges": [ 1, -1 ] },

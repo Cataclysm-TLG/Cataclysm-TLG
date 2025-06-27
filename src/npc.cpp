@@ -230,7 +230,7 @@ npc::npc()
     last_updated = calendar::turn;
     last_player_seen_pos = std::nullopt;
     last_seen_player_turn = 999;
-    wanted_item_pos = tripoint_min;
+    wanted_item_pos = tripoint_bub_ms_min;
     guard_pos = std::nullopt;
     goal = tripoint_abs_omt( tripoint_min );
     fetching_item = false;
@@ -1342,7 +1342,7 @@ void npc::stow_item( item &it )
         if( avatar_sees ) {
             add_msg_if_npc( m_info, _( "<npcname> drops the %s." ), it.tname() );
         }
-        get_map().add_item_or_charges( pos(), remove_item( it ) );
+        get_map().add_item_or_charges( pos_bub(), remove_item( it ) );
     }
 }
 
@@ -1599,36 +1599,15 @@ float npc::vehicle_danger( int radius ) const
     const tripoint_bub_ms to( posx() + radius, posy() + radius, posz() );
     VehicleList vehicles = get_map().get_vehicles( from, to );
 
-    int danger = 0;
+    int danger = -1;
 
     // TODO: check for most dangerous vehicle?
     for( size_t i = 0; i < vehicles.size(); ++i ) {
         const wrapped_vehicle &wrapped_veh = vehicles[i];
         if( wrapped_veh.v->is_moving() ) {
-            // FIXME: this can't be the right way to do this
-            units::angle facing = wrapped_veh.v->face.dir();
-
-            point a( wrapped_veh.v->global_pos3().xy() );
-            point b( static_cast<int>( a.x + units::cos( facing ) * radius ),
-                     static_cast<int>( a.y + units::sin( facing ) * radius ) );
-
-            // fake size
-            /* This will almost certainly give the wrong size/location on customized
-             * vehicles. This should just count frames instead. Or actually find the
-             * size. */
-            vehicle_part last_part;
-            // vehicle_part_range is a forward only iterator, see comment in vpart_range.h
-            for( const vpart_reference &vpr : wrapped_veh.v->get_all_parts() ) {
-                last_part = vpr.part();
-            }
-            int size = std::max( last_part.mount.x, last_part.mount.y );
-
-            double normal = std::sqrt( static_cast<float>( ( b.x - a.x ) * ( b.x - a.x ) + ( b.y - a.y ) *
-                                       ( b.y - a.y ) ) );
-            int closest = static_cast<int>( std::abs( ( posx() - a.x ) * ( b.y - a.y ) - ( posy() - a.y ) *
-                                            ( b.x - a.x ) ) / normal );
-
-            if( size > closest ) {
+            const auto &points_to_check = wrapped_veh.v->immediate_path();
+            point p( get_map().getglobal( pos() ).x(), get_map().getglobal( pos() ).y() );
+            if( points_to_check.find( p ) != points_to_check.end() ) {
                 danger = i;
             }
         }
@@ -2383,7 +2362,7 @@ bool npc::is_stationary( bool include_guards ) const
     if( include_guards && is_guarding() ) {
         return true;
     }
-    return mission == NPC_MISSION_SHELTER || mission == NPC_MISSION_SHOPKEEP ||
+    return ( !is_following() && mission == NPC_MISSION_SHELTER ) || mission == NPC_MISSION_SHOPKEEP ||
            has_effect( effect_infection );
 }
 
@@ -2752,9 +2731,9 @@ std::string npc::opinion_text() const
     return ret;
 }
 
-static void maybe_shift( tripoint &pos, const point &d )
+static void maybe_shift( tripoint_bub_ms &pos, const point &d )
 {
-    if( pos != tripoint_min ) {
+    if( pos != tripoint_bub_ms_min ) {
         pos += d;
     }
 }
@@ -2783,7 +2762,7 @@ void npc::reboot()
     path.clear();
     last_player_seen_pos = std::nullopt;
     last_seen_player_turn = 999;
-    wanted_item_pos = tripoint_min;
+    wanted_item_pos = tripoint_bub_ms_min;
     guard_pos = std::nullopt;
     goal = no_goal_point;
     fetching_item = false;
@@ -3349,11 +3328,12 @@ std::function<bool( const tripoint & )> npc::get_path_avoid() const
             doors::can_unlock_door( here, *this, tripoint_bub_ms( p ) ) ) {
             return true;
         }
-        if( rules.has_flag( ally_rule::hold_the_line ) && ( here.close_door( p, true, true ) ||
-                here.move_cost( p ) > 2 ) ) {
+        if( rules.has_flag( ally_rule::hold_the_line ) &&
+            ( here.close_door( tripoint_bub_ms( p ), true, true ) ||
+              here.move_cost( p ) > 2 ) ) {
             return true;
         }
-        if( sees_dangerous_field( p ) ) {
+        if( sees_dangerous_field( tripoint_bub_ms( p ) ) ) {
             return true;
         }
         if( !can_move_to_vehicle_tile( here.getglobal( p ) ) ) {
