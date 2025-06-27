@@ -4556,7 +4556,7 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
         } else if( action == "RANDOMIZE_CHAR_DESCRIPTION" ) {
             bool gender_selection = one_in( 2 );
             you.male = gender_selection;
-            if( one_in( 10 ) ) {
+            if( one_in( 30 ) ) {
                 outfit = !gender_selection;
             } else {
                 outfit = gender_selection;
