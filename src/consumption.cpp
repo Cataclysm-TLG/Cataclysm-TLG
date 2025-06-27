@@ -911,6 +911,17 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
                 _( "The thought of eating that makes you feel sick." ) );
     }
+
+    if( !has_flag( json_flag_SAPIOVORE ) && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
+        !has_flag( json_flag_PSYCHOPATH ) && ( !food.has_flag( flag_HEMOVORE_FUN ) ||
+                ( !has_flag( json_flag_HEMOVORE ) ) ) &&
+        food.has_vitamin( vitamin_human_flesh_vitamin ) && !food.is_medication() &&
+        !has_effect( effect_hunger_near_starving ) &&
+        !has_effect( effect_hunger_starving ) && !has_effect( effect_hunger_famished ) ) {
+        return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
+                _( "You cannot bring yourself to consume human flesh." ) );
+    }
+
     const std::array<flag_id, 6> vegan_blacklist {{
             json_flag_ALLERGEN_MEAT, json_flag_ALLERGEN_EGG,
             json_flag_ALLERGEN_MILK, json_flag_ANIMAL_PRODUCT,
@@ -975,9 +986,7 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
     }
 
     const bool carnivore = has_trait( trait_CARNIVORE );
-    const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin ) ||
-                                     ( food.has_flag( flag_STRICT_HUMANITARIANISM ) &&
-                                       !has_flag( json_flag_STRICT_HUMANITARIAN ) );
+    const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin );
     if( ( food_is_human_flesh && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
           !has_flag( json_flag_PSYCHOPATH ) && !has_flag( json_flag_SAPIOVORE ) ) &&
         ( !food.has_flag( flag_HEMOVORE_FUN ) || ( !has_flag( json_flag_BLOODFEEDER ) ) ) ) {
@@ -1354,56 +1363,39 @@ void Character::modify_morale( item &food, const int nutr )
                                      ( food.has_flag( flag_STRICT_HUMANITARIANISM ) &&
                                        !has_flag( json_flag_STRICT_HUMANITARIAN ) );
     if( food_is_human_flesh ) {
-        // Sapiovores don't recognize humans as the same species.
-        // But let them possibly feel cool about eating sapient stuff - treat like psycho
-        // However, spiritual sapiovores should still recognize humans as having a soul or special for religious reasons
+        // Sapiovores don't recognize humans as the same species, and are totally fine with it.
+        // For everyone else, there are two factors: One is that it's gross, the other is that it's immoral.
+        // Spiritual people feel increased guilt, psychopaths feel none.
+        // Everybody finds it gross except cannibals/hemovores
         const bool cannibal = has_flag( json_flag_CANNIBAL );
         const bool psycho = has_flag( json_flag_PSYCHOPATH );
         const bool sapiovore = has_flag( json_flag_SAPIOVORE );
         const bool spiritual = has_flag( json_flag_SPIRITUAL );
         const bool numb = has_flag( json_flag_NUMB );
-        if( cannibal && psycho && spiritual ) {
-            add_msg_if_player( m_good,
-                               _( "You feast upon the human flesh, and in doing so, devour their spirit." ) );
-            // You're not really consuming anything special; you just think you are.
-            add_morale( morale_cannibal, 25, 300 );
-        } else if( cannibal && psycho ) {
-            add_msg_if_player( m_good, _( "You feast upon the human flesh." ) );
-            add_morale( morale_cannibal, 15, 200 );
-        } else if( cannibal && spiritual ) {
-            add_msg_if_player( m_good, _( "You consume the sacred human flesh." ) );
-            // Boosted because you understand the philosophical implications of your actions, and YOU LIKE THEM.
-            add_morale( morale_cannibal, 15, 200 );
-        } else if( sapiovore && spiritual ) {
-            add_msg_if_player( m_good, _( "You eat the human flesh, and in doing so, devour their spirit." ) );
-            add_morale( morale_cannibal, 10, 50 );
-        } else if( cannibal ) {
-            add_msg_if_player( m_good, _( "You indulge your shameful hunger." ) );
-            add_morale( morale_cannibal, 10, 50 );
-        } else if( psycho && spiritual ) {
-            add_msg_if_player( _( "You greedily devour the taboo meat." ) );
-            // Small bonus for violating a taboo.
-            add_morale( morale_cannibal, 5, 50 );
-        } else if( has_flag( json_flag_BLOODFEEDER ) && food.has_flag( flag_HEMOVORE_FUN ) ) {
+        if( has_flag( json_flag_BLOODFEEDER ) && food.has_flag( flag_HEMOVORE_FUN ) ) {
             add_msg_if_player( _( "The human blood tastes as good as any other." ) );
-        } else if( psycho ) {
-            add_msg_if_player( _( "Meh.  You've eaten worse." ) );
-        } else if( sapiovore ) {
-            add_msg_if_player( _( "Mmh.  Tastes like venison." ) );
+        } else if( sapiovore || ( cannibal && psycho ) ) {
+            add_msg_if_player( _( "It's meat, that's all that matters." ) );
+        } else if( cannibal && spiritual ) {
+            add_msg_if_player( _( "You feel a cold twinge of guilt.  It will pass." ) );
+            add_morale( morale_cannibal, -10, -30, 8_hours, 1_hours );
+        } else if( cannibal ) {
+            add_msg_if_player( _( "This is wrong, but you can't stop yourself." ) );
+            add_morale( morale_cannibal, -10, -25, 4_hours, 30_minutes );
         } else if( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) {
             add_msg_if_player(
                 _( "Despite your cravings, you still can't help feeling weird about drinking somebody's blood." ) );
-            add_morale( morale_cannibal, -10, -30, 30_minutes, 15_minutes );
-        } else if( spiritual ) {
+            add_morale( morale_cannibal, -10, -30, 4_hours, 30_minutes );
+        } else if( spiritual && !psycho ) {
             add_msg_if_player( m_bad,
                                _( "This is probably going to count against you if there's still an afterlife." ) );
-            add_morale( morale_cannibal, -30, -200, 4_hours, 3_hours );
-        } else if( numb ) {
-            add_msg_if_player( m_bad, _( "You find this meal distasteful, but necessary." ) );
-            add_morale( morale_cannibal, -30, -200, 4_hours, 3_hours );
+            add_morale( morale_cannibal, -60, -400, 4_days, 16_hours );
+        } else if( numb || psycho ) {
+            add_msg_if_player( m_bad, _( "You find this meal distasteful, but you'll get over it." ) );
+            add_morale( morale_cannibal, -20, -50, 16_hours, 4_hours );
         } else {
             add_msg_if_player( m_bad, _( "You feel horrible for eating a person." ) );
-            add_morale( morale_cannibal, -60, -400, 18_hours, 12_hours );
+            add_morale( morale_cannibal, -50, -300, 3_days, 12_hours );
         }
     }
 
