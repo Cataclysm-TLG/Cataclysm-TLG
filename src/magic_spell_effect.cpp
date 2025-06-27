@@ -462,7 +462,7 @@ std::set<tripoint_bub_ms> calculate_spell_effect_area( const spell &sp, const tr
 
     targets = sp.effect_area( caster.pos(), target, caster );
     for( std::set<tripoint_bub_ms>::iterator it = targets.begin(); it != targets.end(); ) {
-        if( !sp.is_valid_target( caster, *it.raw() ) ) {
+        if( !sp.is_valid_target( caster, it->raw() ) ) {
             it = targets.erase( it );
         } else {
             ++it;
@@ -648,7 +648,7 @@ static void damage_targets( const spell &sp, Creature &caster,
 
             // If it's a liquid attack and the target is a character, splash_target will handle the rest
             if( liquid && !cr->is_monster() ) {
-                splash_target( target, sp, caster );
+                splash_target( target.raw(), sp, caster );
                 continue;
             }
 

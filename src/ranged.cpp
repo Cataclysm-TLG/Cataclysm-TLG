@@ -507,7 +507,7 @@ target_handler::trajectory target_handler::mode_throw_creature( avatar &you,
     ui.thrown_creature = thrown_creature;
     ui.range = range;
 
-    restore_on_out_of_scope<tripoint> view_offset_prev( you.view_offset );
+    restore_on_out_of_scope<tripoint_rel_ms> view_offset_prev( you.view_offset );
     return ui.run();
 }
 
@@ -1557,7 +1557,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     // throw from the the blind throw position instead.
     const tripoint_bub_ms throw_from = blind_throw_from_pos ? *blind_throw_from_pos : pos_bub();
 
-    float range = trig_dist_z_adjust( throw_from, target );
+    float range = trig_dist_z_adjust( throw_from.raw(), target.raw() );
     proj.range = range;
     float skill_lvl = get_skill_level( skill_throw );
     // Avoid awarding tons of xp for lucky throws against hard to hit targets
@@ -1749,7 +1749,7 @@ Target_attributes::Target_attributes( tripoint_bub_ms src, tripoint_bub_ms targe
 {
     Creature *target_critter = get_creature_tracker().creature_at( target );
     Creature *shooter = get_creature_tracker().creature_at( src );
-    range = trig_dist_z_adjust( src, target );
+    range = trig_dist_z_adjust( src.raw(), target.raw() );
     size = target_critter != nullptr ?
            target_critter->ranged_target_size() :
            get_map().ranged_target_size( target );
@@ -2194,7 +2194,7 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                   you.sees( target_pos ) );
 
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
-            throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes, target_pos,
+            throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes, tripoint_bub_ms( target_pos ),
             item_location() );
 
     text_y = print_ranged_chance( w, text_y, aim_chances, 0 );
@@ -3113,13 +3113,13 @@ bool target_ui::set_cursor_pos( const tripoint_bub_ms &new_pos )
             }
             if( dist_fn( valid_pos ) > range ) {
                 auto dist_fn_unrounded = [this]( const tripoint & p ) {
-                    return trig_dist_z_adjust( src, p );
+                    return trig_dist_z_adjust( src.raw(), p );
                 };
 
                 bool found = false;
                 for( size_t i = new_traj.size(); i > 0; i-- ) {
-                    const tripoint &test_pt = new_traj[i - 1];
-                    double raw_dist = dist_fn_unrounded( test_pt );
+                    const tripoint_bub_ms &test_pt = new_traj[i - 1];
+                    double raw_dist = dist_fn_unrounded( test_pt.raw() );
                     if( std::ceil( raw_dist ) <= range || raw_dist <= range + 0.001 ) {
                         valid_pos = test_pt;
                         found = true;
@@ -3337,14 +3337,14 @@ int target_ui::dist_fn( const tripoint_bub_ms &p )
     if( casting && casting->effect() == "dash" ) {
         if( !casting->has_flag( spell_flag::AIRBORNE ) ) {
             // Arbitrarily high number to prevent ascending or descending.
-            z_adjust = 100 * std::abs( src.z - p.z );
+            z_adjust = 100 * std::abs( src.z() - p.z() );
         }
     }
-    if( src.z == p.z ) {
-        return static_cast<int>( z_adjust + std::round( trig_dist_z_adjust( src, p ) ) );
+    if( src.z() == p.z() ) {
+        return static_cast<int>( z_adjust + std::round( trig_dist_z_adjust( src.raw(), p.raw() ) ) );
     } else {
         // Always round up so that the Z adjustment actually matters.
-        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );
+        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src.raw(), p.raw() ) ) );
     }
 }
 
@@ -3884,7 +3884,7 @@ void target_ui::draw_ui_window()
             bool blind = mode == TargetMode::ThrowBlind;
             draw_throw_aim( *this, *you, w_target, text_y, ctxt, *relevant, dst, blind );
         } else if( mode == TargetMode::ThrowCreature ) {
-            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst );
+            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst.raw() );
         }
 
     }

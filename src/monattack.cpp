@@ -905,7 +905,7 @@ bool mattack::acid_accurate( monster *z )
     proj.proj_effects.insert( ammo_effect_NO_DAMAGE_SCALING );
     proj.impact.add_damage( damage_acid, rng( 3, 5 ) );
     // Make it arbitrarily less accurate at close ranges
-    projectile_attack( proj, z->pos(), target->pos(), dispersion_sources{ 8000.0 * range }, z );
+    projectile_attack( proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
 
     return true;
 }
@@ -3056,7 +3056,7 @@ void mattack::rifle( monster *z, Creature *target )
     item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
 
-    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos(), burst ) * weapon->ammo_required();
+    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos_bub(), burst ) * weapon->ammo_required();
 
     if( target && target->is_avatar() ) {
         z->add_effect( effect_targeted, 3_turns );
@@ -3116,7 +3116,7 @@ void mattack::frag( monster *z, Creature *target ) // This is for the bots, not 
     const item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
 
-    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos(), burst ) * weapon->ammo_required();
+    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos_bub(), burst ) * weapon->ammo_required();
 
     if( target && target->is_avatar() ) {
         z->add_effect( effect_targeted, 3_turns );
@@ -3174,7 +3174,7 @@ void mattack::tankgun( monster *z, Creature *target )
     const item_location weapon = tmp.get_wielded_item();
     int burst = std::max( weapon->gun_get_mode( gun_mode_AUTO ).qty, 1 );
 
-    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos(), burst ) * weapon->ammo_required();
+    z->ammo[ ammo_type ] -= tmp.fire_gun( target->pos_bub(), burst ) * weapon->ammo_required();
 }
 
 bool mattack::searchlight( monster *z )

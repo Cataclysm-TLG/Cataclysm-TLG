@@ -1106,7 +1106,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
             // Proportionally reduce the force of the throw by how far we threw them compared to how far we could have thrown them.
             // This lets us shove someone out of the way without gibbing them. Also means we only throw creatures roughly as far
             // as we intended.
-            float distance = rl_dist( you.grab_1.victim->pos(), trajectory.back() );
+            float distance = rl_dist( you.grab_1.victim->pos_bub(), trajectory.back() );
             if( distance == 0.0 ) {
                 debugmsg( "Error: Invalid throw distance." );
                 return;
@@ -1115,7 +1115,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
             throwforce *= distance;
             bool do_harm = false;
             // TODO: Add some trajectory data to the sidebar.
-            units::angle target_angle = coord_to_angle( you.pos(), trajectory.back() );
+            units::angle target_angle = coord_to_angle( you.pos_bub(), trajectory.back() );
             if( ( you.grab_1.victim->is_npc() && throwforce > 24 && !you.grab_1.victim->as_npc()->is_enemy() &&
                   ( !you.grab_1.victim->as_npc()->is_player_ally() && you.is_avatar() ) ) ||
                 ( you.grab_1.victim->is_npc() && throwforce > 60 ) ) {
