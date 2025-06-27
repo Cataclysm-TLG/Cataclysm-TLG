@@ -2900,7 +2900,7 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
     if( !can_move_to_vehicle_tile( here.getglobal( p ) ) ) {
         auto other_points = here.get_dir_circle( pos_bub(), p );
         for( const tripoint_bub_ms &ot : other_points ) {
-            if( could_move_onto( ot ) && ( nomove == nullptr || nomove->find( ot.raw() ) == nomove->end() ) ) {
+            if( could_move_onto( ot ) && ( nomove == nullptr || nomove->find( ot ) == nomove->end() ) ) {
                 p = ot;
                 break;
             } else {
@@ -2937,7 +2937,7 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
     if( creatures.creature_at<monster>( p ) ) {
         attacking = true;
     }
-    if( !move_effects( attacking, pt ) ) {
+    if( !move_effects( attacking, pt.raw() ) ) {
         mod_moves( -get_speed() );
         return;
     }
