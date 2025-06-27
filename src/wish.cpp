@@ -809,6 +809,7 @@ void debug_menu::wishmonstergroup_mon_selection( mongroup &group )
     }
 }
 
+
 void debug_menu::wishmonster( const std::optional<tripoint> &p )
 {
     std::vector<const mtype *> mtypes;
@@ -824,6 +825,16 @@ void debug_menu::wishmonster( const std::optional<tripoint> &p )
     wmenu.selected = uistate.wishmonster_selected;
     wish_monster_callback cb( mtypes );
     wmenu.callback = &cb;
+
+    int i = 0;
+    for( const mtype &montype : MonsterGenerator::generator().get_all_mtypes() ) {
+        wmenu.addentry( i, true, 0, montype.nname() );
+        wmenu.entries[i].extratxt.txt = montype.sym;
+        wmenu.entries[i].extratxt.color = montype.color;
+        wmenu.entries[i].extratxt.left = 1;
+        ++i;
+        mtypes.push_back( &montype );
+    }
 
     do {
         wmenu.query();
