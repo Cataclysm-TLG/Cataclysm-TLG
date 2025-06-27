@@ -1381,7 +1381,7 @@ void Character::modify_morale( item &food, const int nutr )
             add_morale( morale_cannibal, -10, -30, 8_hours, 1_hours );
         } else if( cannibal ) {
             add_msg_if_player( _( "This is wrong, but you can't stop yourself." ) );
-            add_morale( morale_cannibal, -10, -30, 4_hours, 30_minutes );
+            add_morale( morale_cannibal, -10, -25, 4_hours, 30_minutes );
         } else if( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) {
             add_msg_if_player(
                 _( "Despite your cravings, you still can't help feeling weird about drinking somebody's blood." ) );
@@ -1389,13 +1389,13 @@ void Character::modify_morale( item &food, const int nutr )
         } else if( spiritual && !psycho ) {
             add_msg_if_player( m_bad,
                                _( "This is probably going to count against you if there's still an afterlife." ) );
-            add_morale( morale_cannibal, -30, -200, 3_days, 8_hours );
+            add_morale( morale_cannibal, -60, -400, 4_days, 16_hours );
         } else if( numb || psycho ) {
-            add_msg_if_player( m_bad, _( "You find this meal distasteful, but necessary." ) );
-            add_morale( morale_cannibal, -30, -200, 1_days, 4_hours );
+            add_msg_if_player( m_bad, _( "You find this meal distasteful, but you'll get over it." ) );
+            add_morale( morale_cannibal, -20, -50, 16_hours, 4_hours );
         } else {
             add_msg_if_player( m_bad, _( "You feel horrible for eating a person." ) );
-            add_morale( morale_cannibal, -60, -400, 4_days, 12_hours );
+            add_morale( morale_cannibal, -50, -300, 3_days, 12_hours );
         }
     }
 
