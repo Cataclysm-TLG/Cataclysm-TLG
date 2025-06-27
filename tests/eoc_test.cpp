@@ -1133,7 +1133,7 @@ TEST_CASE( "EOC_event_test", "[eoc]" )
     // character_casts_spell
     spell temp_spell( spell_test_eoc_spell );
     temp_spell.set_level( get_avatar(), 5 );
-    temp_spell.cast_all_effects( get_avatar(), tripoint() );
+    temp_spell.cast_all_effects( get_avatar(), tripoint_bub_ms() );
 
     CHECK( globvars.get_global_value( "npctalk_var_key1" ) == "test_eoc_spell" );
     CHECK( globvars.get_global_value( "npctalk_var_key2" ) == "test_trait" );
@@ -1305,7 +1305,7 @@ TEST_CASE( "EOC_map_test", "[eoc]" )
 
     map &m = get_map();
     const tripoint_abs_ms start = get_avatar().get_location();
-    const tripoint tgt = m.getlocal( start + tripoint_north );
+    const tripoint_bub_ms tgt = m.bub_from_abs( start + tripoint_north );
     m.furn_set( tgt, furn_test_f_eoc );
     m.furn( tgt )->examine( get_avatar(), tgt );
 

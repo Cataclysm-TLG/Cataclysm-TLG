@@ -3201,15 +3201,15 @@ bool target_ui::set_cursor_pos( const tripoint_bub_ms &new_pos )
         switch( casting->shape() ) {
             case spell_shape::blast:
                 spell_aoe = spell_effect::spell_effect_blast(
-                                spell_effect::override_parameters( *casting, get_player_character() ), src.raw(), dst.raw() );
+                                spell_effect::override_parameters( *casting, get_player_character() ), src, dst );
                 break;
             case spell_shape::cone:
                 spell_aoe = spell_effect::spell_effect_cone(
-                                spell_effect::override_parameters( *casting, get_player_character() ), src.raw(), dst.raw() );
+                                spell_effect::override_parameters( *casting, get_player_character() ), src, dst );
                 break;
             case spell_shape::line:
                 spell_aoe = spell_effect::spell_effect_line(
-                                spell_effect::override_parameters( *casting, get_player_character() ), src.raw(), dst.raw() );
+                                spell_effect::override_parameters( *casting, get_player_character() ), src, dst );
                 break;
             default:
                 spell_aoe.clear();
@@ -3351,10 +3351,11 @@ int target_ui::dist_fn( const tripoint_bub_ms &p )
 
 void target_ui::set_last_target()
 {
-    if( !you->last_target_pos.has_value() || you->last_target_pos.value() != get_map().getabs( dst ) ) {
+    if( !you->last_target_pos.has_value() ||
+        you->last_target_pos.value() != get_map().getglobal( dst ).raw() ) {
         you->aim_cache_dirty = true;
     }
-    you->last_target_pos = get_map().getabs( dst );
+    you->last_target_pos = get_map().getglobal( dst ).raw();
     if( dst_critter ) {
         you->last_target = g->shared_from( *dst_critter );
     } else {
@@ -4206,7 +4207,7 @@ void target_ui::panel_spell_info( int &text_y )
                                           _( "Line width: %s" ), aoes );
             } else {
                 text_y += fold_and_print( w_target, point( 1, text_y ), getmaxx( w_target ) - 2, color,
-                                          _( "Effective Spell Radius: %s%s" ), aoes, casting->in_aoe( src.raw(), dst.raw(),
+                                          _( "Effective Spell Radius: %s%s" ), aoes, casting->in_aoe( src, dst,
                                                   get_player_character() ) ? colorize( _( " WARNING!  IN RANGE" ), c_red ) : "" );
             }
         }
