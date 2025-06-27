@@ -2901,7 +2901,7 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
         parts->test( iteminfo_parts::AMMO_FX_RECYCLED ) ) {
         fx.emplace_back(
             _( "This ammo has been <bad>hand-loaded</bad>, "
-               "which resulted in slightly inferior performance compared to factory-produced ammo." ) );
+               "resulting in slightly inferior performance compared to factory-produced ammo." ) );
     }
     if( ammo.ammo_effects.count( ammo_effect_MATCHHEAD ) &&
         parts->test( iteminfo_parts::AMMO_FX_BLACKPOWDER ) ) {
