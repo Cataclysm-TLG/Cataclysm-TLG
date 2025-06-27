@@ -1201,7 +1201,6 @@
     "name": { "str": "Directionally Challenged" },
     "points": -1,
     "description": "You get lost easily.  Even in good conditions, you will uncover much less of your overmap while exploring.",
-    "valid": false,
     "starting_trait": true,
     "cancels": [ "EAGLEEYED" ],
     "enchantments": [ { "values": [ { "value": "OVERMAP_SIGHT", "add": -10 } ] } ]
@@ -1211,9 +1210,9 @@
     "id": "CANNIBAL",
     "name": { "str": "Cannibal" },
     "points": 2,
-    "description": "For your whole life you've been forbidden from indulging in your peculiar tastes.  Now the world's ended, and you'll be damned if anyone is going to tell you that you can't eat people.",
-    "starting_trait": true,
-    "valid": false,
+    "description": "You can't afford to pass up any opportunity to eat, even if it means gorging yourself on human flesh to survive.  Besides, it's not as if you're really one of them anymore…right?",
+    "threshreq": [ "THRESH_TROGLOBITE", "THRESH_RAT", "THRESH_CHIMERA", "THRESH_CRUSTACEAN" ],
+    "category": [ "TROGLOBITE", "RAT", "CHIMERA", "CRUSTACEAN" ],
     "cancels": [ "VEGETARIAN", "VEGAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "flags": [ "CANNIBAL" ]
   },
