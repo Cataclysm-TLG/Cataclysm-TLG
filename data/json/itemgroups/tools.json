@@ -268,7 +268,7 @@
       { "item": "mess_kit", "prob": 20 },
       [ "multitool", 10 ],
       [ "pockknife", 30 ],
-      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_0_15" },
+      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_1_15" },
       { "item": "ref_lighter", "prob": 20, "charges": [ 0, 50 ] },
       [ "rope_30", 20 ],
       [ "flint_steel", 10 ],
@@ -489,7 +489,7 @@
       { "item": "whistle_multitool", "prob": 70 },
       { "item": "glowstick", "charges": 1400, "prob": 60 },
       { "item": "handflare", "count": [ 0, 4 ], "charges": 300 },
-      { "group": "pur_tablets_bottle_plastic_small_0_15" },
+      { "group": "pur_tablets_bottle_plastic_small_1_15" },
       { "item": "pocket_survival", "prob": 40 }
     ]
   },
@@ -678,7 +678,7 @@
       [ "multitool", 5 ],
       [ "pockknife", 50 ],
       [ "knife_folding", 30 ],
-      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_0_15" },
+      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_1_15" },
       { "item": "ref_lighter", "prob": 20, "charges": [ 0, 50 ] },
       {
         "collection": [ { "item": "ref_lighter_butane" }, { "item": "butane_can", "charges": [ 350, 400 ] } ],
@@ -1004,11 +1004,11 @@
   },
   {
     "type": "item_group",
-    "id": "pur_tablets_bottle_plastic_small_0_15",
+    "id": "pur_tablets_bottle_plastic_small_1_15",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_small",
-    "entries": [ { "item": "pur_tablets", "count": [ 0, 15 ] } ]
+    "entries": [ { "item": "pur_tablets", "count": [ 1, 15 ] } ]
   },
   {
     "type": "item_group",
