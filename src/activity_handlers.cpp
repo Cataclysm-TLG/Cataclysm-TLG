@@ -1397,10 +1397,12 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
         here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
         here.add_splatter( type_blood, you->pos_bub(), rng( corpse->size + 0, ( corpse->size + 1 ) ) );
         for( int i = 1; i <= corpse->size; i++ ) {
-            here.add_splatter_trail( type_gib, you->pos_bub(), random_entry( here.points_in_radius( you->pos_bub(),
-                                     std::max( 1, ( corpse->size - 1 ) ) ) ) );
-            here.add_splatter_trail( type_blood, you->pos_bub(), random_entry( here.points_in_radius( you->pos_bub(),
-                                     corpse->size + 1 ) ) );
+            here.add_splatter_trail( type_gib, you->pos_bub(),
+                                     random_entry( here.points_in_radius( you->pos_bub(),
+                                                   std::max( 1, ( corpse->size - 1 ) ) ) ) );
+            here.add_splatter_trail( type_blood, you->pos_bub(),
+                                     random_entry( here.points_in_radius( you->pos_bub(),
+                                                   corpse->size + 1 ) ) );
         }
 
         // Ready to move on to the next item, if there is one
@@ -1442,8 +1444,9 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
             corpse_item.set_flag( success ? flag_FIELD_DRESS : flag_FIELD_DRESS_FAILED );
             here.add_splatter( type_gib, you->pos_bub(), rng( corpse->size + 0, ( corpse->size + 0 ) ) );
             for( int i = 1; i <= corpse->size; i++ ) {
-                here.add_splatter_trail( type_gib, you->pos_bub(), random_entry( here.points_in_radius( you->pos_bub(),
-                                         std::max( 1, ( corpse->size - 1 ) ) ) ) );
+                here.add_splatter_trail( type_gib, you->pos_bub(),
+                                         random_entry( here.points_in_radius( you->pos_bub(),
+                                                       std::max( 1, ( corpse->size - 1 ) ) ) ) );
             }
             if( !act->targets.empty() ) {
                 act->targets.pop_back();

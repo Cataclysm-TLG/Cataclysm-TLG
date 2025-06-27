@@ -246,7 +246,8 @@ void npc_attack_melee::use( npc &source, const tripoint_bub_ms &location ) const
                                             location.raw() ) ) );
     if( source.pos().z != location.raw().z ) {
         // Always round up so that the Z adjustment actually matters.
-        target_distance = static_cast<int>( std::ceil( trig_dist_z_adjust( source.pos(), location.raw() ) ) );
+        target_distance = static_cast<int>( std::ceil( trig_dist_z_adjust( source.pos(),
+                                            location.raw() ) ) );
     }
     if( !source.is_adjacent( critter, true ) ) {
         if( target_distance <= weapon.reach_range( source ) ) {

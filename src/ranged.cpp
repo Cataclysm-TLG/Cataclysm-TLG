@@ -2194,7 +2194,8 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                   you.sees( target_pos ) );
 
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
-            throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes, tripoint_bub_ms( target_pos ),
+            throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes,
+            tripoint_bub_ms( target_pos ),
             item_location() );
 
     text_y = print_ranged_chance( w, text_y, aim_chances, 0 );

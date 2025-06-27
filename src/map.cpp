@@ -4940,12 +4940,14 @@ void map::crush( const tripoint_bub_ms &p )
         vp->vehicle().damage( *this, vp->part_index(), rng( 100, 1000 ), damage_bash, false );
     }
 }
-void map::shoot( const tripoint &p, const tripoint &source, projectile &proj, const bool hit_items, double dispersion )
+void map::shoot( const tripoint &p, const tripoint &source, projectile &proj, const bool hit_items,
+                 double dispersion )
 {
     map::shoot( tripoint_bub_ms( p ), tripoint_bub_ms( source ), proj, hit_items, dispersion );
 }
 
-void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj, const bool hit_items, double dispersion )
+void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+                 const bool hit_items, double dispersion )
 {
     // TODO: make bashing better a destroying, worse at penetrating
     std::map<damage_type_id, float> dmg_by_type {};

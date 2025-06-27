@@ -1397,8 +1397,10 @@ class map
         void destroy_furn( const tripoint_bub_ms &, bool silent = false );
         void crush( const tripoint_bub_ms &p );
         // TODO: Get rid of untyped overload.
-        void shoot( const tripoint &p, const tripoint &source, projectile &proj, bool hit_items, double dispersion );
-        void shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj, bool hit_items, double dispersion );
+        void shoot( const tripoint &p, const tripoint &source, projectile &proj, bool hit_items,
+                    double dispersion );
+        void shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+                    bool hit_items, double dispersion );
         /** Checks if a square should collapse, returns the X for the one_in(X) collapse chance */
         int collapse_check( const tripoint_bub_ms &p ) const;
         /** Causes a collapse at p, such as from destroying a wall */

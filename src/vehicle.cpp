@@ -7651,7 +7651,8 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
             if( vpi.has_flag( "INITIAL_PART" ) ) {
                 add_msg_if_player_sees( vppos.raw(), m_bad, _( "The %s falls over!" ), name );
             } else {
-                add_msg_if_player_sees( vppos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name, vp.name() );
+                add_msg_if_player_sees( vppos.raw(), m_bad, _( "The %1$s's %2$s is disconnected!" ), name,
+                                        vp.name() );
             }
             if( vpi.has_flag( VPFLAG_POWER_TRANSFER ) ) {
                 remove_remote_part( vp );
