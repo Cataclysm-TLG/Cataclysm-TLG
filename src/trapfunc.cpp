@@ -1383,7 +1383,7 @@ bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
 
     item jetpack = you->item_worn_with_flag( STATIC( flag_id( "JETPACK" ) ) );
     // TODO: Typify this whole function
-    tripoint_bub_ms p_bub = tripoint_bub_ms( p );
+    tripoint_bub_ms p_bub = here.bub_from_abs( p );
     if( you->has_flag( json_flag_WALL_CLING ) &&  get_map().is_clingable_wall_adjacent( p_bub ) ) {
         you->add_msg_player_or_npc( _( "You cling to the nearby wall." ),
                                     _( "<npcname> clings to the wall." ) );

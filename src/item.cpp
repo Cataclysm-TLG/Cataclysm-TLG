@@ -14251,7 +14251,7 @@ bool item::process_internal( map &here, Character *carrier, const tripoint &pos,
             process_temperature_rot( insulation, pos, here, carrier, flag, spoil_modifier,
                                      watertight_container ) ) {
             if( is_comestible() ) {
-                here.rotten_item_spawn( *this, tripoint_bub_ms( pos ) );
+                here.rotten_item_spawn( *this, pos );
             }
             if( is_corpse() ) {
                 here.handle_decayed_corpse( *this, here.getglobal( pos ) );
