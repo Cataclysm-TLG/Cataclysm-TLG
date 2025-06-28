@@ -421,7 +421,7 @@ void map::invalidate_map_cache( const int zlev )
     }
 }
 
-const_maptile map::maptile_at( const tripoint &p ) const
+const_maptile map::maptile_at( const tripoint_bub_ms &p ) const
 {
     if( !inbounds( p ) ) {
         return const_maptile( &null_submap, point_sm_ms_zero );
@@ -430,28 +430,18 @@ const_maptile map::maptile_at( const tripoint &p ) const
     return maptile_at_internal( p );
 }
 
-const_maptile map::maptile_at( const tripoint_bub_ms &p ) const
+maptile map::maptile_at( const tripoint &p )
 {
-    return maptile_at( p.raw() );
+    return maptile_at( tripoint_bub_ms( p ) );
 }
 
-maptile map::maptile_at( const tripoint &p )
+maptile map::maptile_at( const tripoint_bub_ms &p )
 {
     if( !inbounds( p ) ) {
         return maptile( &null_submap, point_sm_ms_zero );
     }
 
     return maptile_at_internal( p );
-}
-
-maptile map::maptile_at( const tripoint_bub_ms &p )
-{
-    return maptile_at( p.raw() );
-}
-
-const_maptile map::maptile_at_internal( const tripoint &p ) const
-{
-    return map::maptile_at_internal( tripoint_bub_ms( p ) );
 }
 
 const_maptile map::maptile_at_internal( const tripoint_bub_ms &p ) const
@@ -689,7 +679,7 @@ void map::vehmove()
     VehicleList vehicle_list;
     int minz = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
     int maxz = zlevels ? OVERMAP_HEIGHT : abs_sub.z();
-    const tripoint player_pos = get_player_character().pos();
+    const tripoint_bub_ms player_pos = get_player_character().pos_bub();
     for( int zlev = minz; zlev <= maxz; ++zlev ) {
         level_cache *cache_lazy = get_cache_lazy( zlev );
         if( !cache_lazy ) {
@@ -793,11 +783,6 @@ static bool sees_veh( const Creature &c, vehicle &veh, bool force_recalc )
     return std::any_of( veh_points.begin(), veh_points.end(), [&c]( const tripoint & pt ) {
         return c.sees( pt );
     } );
-}
-
-vehicle *map::move_vehicle( vehicle &veh, const tripoint &dp, const tileray &facing )
-{
-    return map::move_vehicle( veh, tripoint_rel_ms( dp ), facing );
 }
 
 vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tileray &facing )
@@ -1326,11 +1311,6 @@ std::set<tripoint_bub_ms> map::get_moving_vehicle_targets( const Creature &z, in
 
 // 3D vehicle functions
 
-VehicleList map::get_vehicles( const tripoint &start, const tripoint &end )
-{
-    return map::get_vehicles( tripoint_bub_ms( start ), tripoint_bub_ms( end ) );
-}
-
 VehicleList map::get_vehicles( const tripoint_bub_ms &start, const tripoint_bub_ms &end )
 {
     const int chunk_sx = std::max( 0, ( start.x() / SEEX ) - 1 );
@@ -1388,11 +1368,6 @@ optional_vpart_position map::veh_at( const tripoint_bub_ms &p ) const
     return optional_vpart_position( vpart_position( *veh, part_num ) );
 }
 
-const vehicle *map::veh_at_internal( const tripoint &p, int &part_num ) const
-{
-    return map::veh_at_internal( tripoint_bub_ms( p ), part_num );
-}
-
 const vehicle *map::veh_at_internal( const tripoint_bub_ms &p, int &part_num ) const
 {
     // This function is called A LOT. Move as much out of here as possible.
@@ -1419,7 +1394,7 @@ vehicle *map::veh_at_internal( const tripoint_bub_ms &p, int &part_num )
     return const_cast<vehicle *>( const_cast<const map *>( this )->veh_at_internal( p, part_num ) );
 }
 
-void map::board_vehicle( const tripoint &pos, Character *p )
+void map::board_vehicle( const tripoint_bub_ms &pos, Character *p )
 {
     if( p == nullptr ) {
         debugmsg( "map::board_vehicle: null player" );
@@ -1453,11 +1428,6 @@ void map::board_vehicle( const tripoint &pos, Character *p )
     }
 }
 
-void map::board_vehicle( const tripoint_bub_ms &pos, Character *p )
-{
-    map::board_vehicle( pos.raw(), p );
-}
-
 void map::unboard_vehicle( const vpart_reference &vp, Character *passenger, bool dead_passenger )
 {
     // Mark the part as un-occupied regardless of whether there's a live passenger here.
@@ -1480,11 +1450,6 @@ void map::unboard_vehicle( const vpart_reference &vp, Character *passenger, bool
     passenger->controlling_vehicle = false;
 }
 
-void map::unboard_vehicle( const tripoint &p, bool dead_passenger )
-{
-    map::unboard_vehicle( tripoint_bub_ms( p ), dead_passenger );
-}
-
 void map::unboard_vehicle( const tripoint_bub_ms &p, bool dead_passenger )
 {
     const std::optional<vpart_reference> vp = veh_at( p ).part_with_feature( VPFLAG_BOARDABLE, false );
@@ -1501,12 +1466,6 @@ void map::unboard_vehicle( const tripoint_bub_ms &p, bool dead_passenger )
     }
     passenger = vp->get_passenger();
     unboard_vehicle( *vp, passenger, dead_passenger );
-}
-
-bool map::displace_vehicle( vehicle &veh, const tripoint &dp, const bool adjust_pos,
-                            const std::set<int> &parts_to_move )
-{
-    return map::displace_vehicle( veh, tripoint_rel_ms( dp ), adjust_pos, parts_to_move );
 }
 
 bool map::displace_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const bool adjust_pos,
@@ -1752,11 +1711,6 @@ bool map::displace_water( const tripoint_bub_ms &p )
 
 // End of 3D vehicle
 
-void map::set( const tripoint &p, const ter_id &new_terrain, const furn_id &new_furniture )
-{
-    map::set( tripoint_bub_ms( p ), new_terrain, new_furniture );
-}
-
 void map::set( const tripoint_bub_ms &p, const ter_id &new_terrain, const furn_id &new_furniture )
 {
     furn_set( p, new_furniture );
@@ -1785,15 +1739,15 @@ std::string map::disp_name( const tripoint_bub_ms &p )
 
 std::string map::obstacle_name( const tripoint &p )
 {
-    if( const std::optional<vpart_reference> vp = veh_at( p ).obstacle_at_part() ) {
-        return vp->info().name();
-    }
-    return name( p );
+    return obstacle_name( tripoint_bub_ms( p ) );
 }
 
 std::string map::obstacle_name( const tripoint_bub_ms &p )
 {
-    return obstacle_name( p.raw() );
+    if( const std::optional<vpart_reference> vp = veh_at( p ).obstacle_at_part() ) {
+        return vp->info().name();
+    }
+    return name( p );
 }
 
 bool map::has_furn( const tripoint &p ) const
@@ -1974,6 +1928,11 @@ bool map::can_move_furniture( const tripoint_bub_ms &pos, Character *you ) const
 
 std::string map::furnname( const tripoint &p )
 {
+    return furnname( tripoint_bub_ms( p ) );
+}
+
+std::string map::furnname( const tripoint_bub_ms &p )
+{
     const furn_t &f = furn( p ).obj();
     if( f.has_flag( ter_furn_flag::TFLAG_PLANT ) ) {
         // Can't use item_stack::only_item() since there might be fertilizer
@@ -1982,7 +1941,7 @@ std::string map::furnname( const tripoint &p )
             return it.is_seed();
         } );
         if( seed == items.end() ) {
-            debugmsg( "Missing seed for plant at (%d, %d, %d)", p.x, p.y, p.z );
+            debugmsg( "Missing seed for plant at (%d, %d, %d)", p.x(), p.y(), p.z() );
             return "null";
         }
         const std::string &plant = seed->get_plant_name();
@@ -1990,11 +1949,6 @@ std::string map::furnname( const tripoint &p )
     } else {
         return f.name();
     }
-}
-
-std::string map::furnname( const tripoint_bub_ms &p )
-{
-    return furnname( p.raw() );
 }
 
 /*
@@ -2067,18 +2021,18 @@ uint8_t map::get_known_connections( const tripoint_bub_ms &p,
 
     const level_cache &ch = access_cache( p.z() );
     uint8_t val = 0;
-    std::function<bool( const tripoint & )> is_memorized;
+    std::function<bool( const tripoint_bub_ms & )> is_memorized;
     avatar &player_character = get_avatar();
 #ifdef TILES
     if( use_tiles ) {
         is_memorized =
-        [&]( const tripoint & q ) {
+        [&]( const tripoint_bub_ms & q ) {
             return !player_character.get_memorized_tile( getglobal( q ) ).get_ter_id().empty();
         };
     } else {
 #endif
         is_memorized =
-        [&]( const tripoint & q ) {
+        [&]( const tripoint_bub_ms & q ) {
             return player_character.get_memorized_tile( getglobal( q ) ).symbol != 0;
         };
 #ifdef TILES
@@ -2101,7 +2055,7 @@ uint8_t map::get_known_connections( const tripoint_bub_ms &p,
                                  get_visibility( ch.visibility_cache[neighbour.x()][neighbour.y()],
                                          get_visibility_variables_cache() ) == visibility_type::CLEAR ||
                                  // or if an actual center tile is transparent or next to a memorized tile
-                                 ( !overridden && ( is_transparent || is_memorized( neighbour.raw() ) ) );
+                                 ( !overridden && ( is_transparent || is_memorized( neighbour ) ) );
         if( may_connect ) {
             const ter_t &neighbour_terrain = neighbour_overridden ?
                                              neighbour_override->second.obj() : ter( neighbour ).obj();
@@ -2274,11 +2228,6 @@ uint8_t map::get_known_rotates_to_f( const tripoint_bub_ms &p,
 /*
  * Get the results of harvesting this tile's furniture or terrain
  */
-const harvest_id &map::get_harvest( const tripoint &pos ) const
-{
-    return map::get_harvest( tripoint_bub_ms( pos ) );
-}
-
 const harvest_id &map::get_harvest( const tripoint_bub_ms &pos ) const
 {
     const furn_id furn_here = furn( pos );
@@ -2325,11 +2274,6 @@ const std::set<std::string> &map::get_harvest_names( const tripoint_bub_ms &pos 
 /*
  * Get the terrain transforms_into id (what will the terrain transforms into)
  */
-ter_id map::get_ter_transforms_into( const tripoint &p ) const
-{
-    return map::get_ter_transforms_into( tripoint_bub_ms( p ) );
-}
-
 ter_id map::get_ter_transforms_into( const tripoint_bub_ms &p ) const
 {
     return ter( p ).obj().transforms_into.id();
@@ -2339,11 +2283,6 @@ ter_id map::get_ter_transforms_into( const tripoint_bub_ms &p ) const
  * Examines the tile pos, with character as the "examinator"
  * Casts Character to player because player/NPC split isn't done yet
  */
-void map::examine( Character &you, const tripoint &pos ) const
-{
-    map::examine( you, tripoint_bub_ms( pos ) );
-}
-
 void map::examine( Character &you, const tripoint_bub_ms &pos ) const
 {
     const furn_t furn_here = furn( pos ).obj();
@@ -2352,11 +2291,6 @@ void map::examine( Character &you, const tripoint_bub_ms &pos ) const
     } else {
         ter( pos ).obj().examine( dynamic_cast<Character &>( you ), pos );
     }
-}
-
-bool map::is_harvestable( const tripoint &pos ) const
-{
-    return map::is_harvestable( tripoint_bub_ms( pos ) );
 }
 
 bool map::is_harvestable( const tripoint_bub_ms &pos ) const
@@ -2487,6 +2421,11 @@ std::string map::tername( const tripoint_bub_ms &p ) const
 
 std::string map::features( const tripoint &p ) const
 {
+    return map::features( tripoint_bub_ms( p ) );
+}
+
+std::string map::features( const tripoint_bub_ms &p ) const
+{
     std::string result;
     const auto add = [&]( const std::string & text ) {
         if( !result.empty() ) {
@@ -2515,11 +2454,6 @@ std::string map::features( const tripoint &p ) const
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ||
             has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD, p ), _( "Flammable." ) );
     return result;
-}
-
-std::string map::features( const tripoint_bub_ms &p ) const
-{
-    return map::features( p.raw() );
 }
 
 int map::move_cost_internal( const furn_t &furniture, const ter_t &terrain, const field &field,
@@ -2624,22 +2558,22 @@ int map::move_cost( const tripoint_bub_ms &p, const vehicle *ignored_vehicle ) c
 
 bool map::impassable( const tripoint &p ) const
 {
-    return !passable( p );
+    return impassable( tripoint_bub_ms( p ) );
 }
 
 bool map::impassable( const tripoint_bub_ms &p ) const
 {
-    return impassable( p.raw() );
+    return !passable( p );
 }
 
 bool map::passable( const tripoint &p ) const
 {
-    return move_cost( p ) != 0;
+    return passable( tripoint_bub_ms( p ) );
 }
 
 bool map::passable( const tripoint_bub_ms &p ) const
 {
-    return passable( p.raw() );
+    return move_cost( p ) != 0;
 }
 
 int map::move_cost_ter_furn( const tripoint &p ) const
@@ -2682,11 +2616,6 @@ bool map::impassable_ter_furn( const tripoint &p ) const
 bool map::impassable_ter_furn( const tripoint_bub_ms &p ) const
 {
     return !passable_ter_furn( p );
-}
-
-bool map::passable_ter_furn( const tripoint &p ) const
-{
-    return map::passable_ter_furn( tripoint_bub_ms( p ) );
 }
 
 bool map::passable_ter_furn( const tripoint_bub_ms &p ) const
@@ -3329,7 +3258,7 @@ bool map::can_put_items_ter_furn( const tripoint_bub_ms &p ) const
 
 bool map::has_flag_ter( const std::string &flag, const tripoint &p ) const
 {
-    return ter( p ).obj().has_flag( flag );
+    return ter( tripoint_bub_ms( p ) ).obj().has_flag( flag );
 }
 
 bool map::has_flag_ter( const std::string &flag, const tripoint_bub_ms &p ) const
@@ -3376,7 +3305,7 @@ bool map::has_flag( const ter_furn_flag flag, const tripoint_bub_ms &p ) const
 
 bool map::has_flag_ter( const ter_furn_flag flag, const tripoint &p ) const
 {
-    return ter( p ).obj().has_flag( flag );
+    return ter( tripoint_bub_ms( p ) ).obj().has_flag( flag );
 }
 
 bool map::has_flag_ter( const ter_furn_flag flag, const tripoint_bub_ms &p ) const
@@ -8094,13 +8023,13 @@ bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int ra
 
     // Ugly `if` for now
     if( F.z() == T.z() ) {
-        bresenham( F.xy().raw(), T.xy().raw(), bresenham_slope,
-        [this, f_transparent, &visible, &T]( const point & new_point ) {
+        bresenham( F.xy(), T.xy(), bresenham_slope,
+        [this, f_transparent, &visible, &T]( const point_bub_ms & new_point ) {
             // Exit before checking the last square, it's still visible even if opaque.
-            if( new_point.x == T.x() && new_point.y == T.y() ) {
+            if( new_point.x() == T.x() && new_point.y() == T.y() ) {
                 return false;
             }
-            if( !( this->*f_transparent )( tripoint_bub_ms( new_point.x, new_point.y, T.z() ) ) ) {
+            if( !( this->*f_transparent )( { new_point.x(), new_point.y(), T.z()} ) ) {
                 visible = false;
                 return false;
             }
@@ -8110,27 +8039,27 @@ bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int ra
         return visible;
     }
 
-    tripoint last_point = F.raw();
-    bresenham( F.raw(), T.raw(), bresenham_slope, 0,
-    [this, f_transparent, &visible, &T, &last_point]( const tripoint & new_point ) {
+    tripoint_bub_ms last_point = F;
+    bresenham( F, T, bresenham_slope, 0,
+    [this, f_transparent, &visible, &T, &last_point]( const tripoint_bub_ms & new_point ) {
         // Exit before checking the last square if it's not a vertical transition,
         // it's still visible even if opaque.
-        if( new_point == T.raw() && last_point.z == T.z() ) {
+        if( new_point == T && last_point.z() == T.z() ) {
             return false;
         }
 
         // TODO: Allow transparent floors (and cache them!)
-        if( new_point.z == last_point.z ) {
-            if( !( this->*f_transparent )( tripoint_bub_ms( new_point ) ) ) {
+        if( new_point.z() == last_point.z() ) {
+            if( !( this->*f_transparent )( new_point ) ) {
                 visible = false;
                 return false;
             }
         } else {
-            const int max_z = std::max( new_point.z, last_point.z );
+            const int max_z = std::max( new_point.z(), last_point.z() );
             if( ( has_floor_or_support( { point_bub_ms( new_point.xy() ), max_z } ) ||
-                  !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z } ) ) &&
+                  !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
                 ( has_floor_or_support( { point_bub_ms( last_point.xy() ), max_z } ) ||
-                  !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z } ) ) ) {
+                  !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
                 visible = false;
                 return false;
             }
@@ -8144,27 +8073,27 @@ bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int ra
     return visible;
 }
 
-bool map::has_line_of_sight_IR( const tripoint &from, const tripoint &to, int range,
+bool map::has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int range,
                                 int eye_level ) const
 {
-    if( std::abs( from.z - to.z ) > fov_3d_z_range ||
+    if( std::abs( from.z() - to.z() ) > fov_3d_z_range ||
         ( range >= 0 && range < rl_dist( from, to ) ) ||
         !inbounds( to ) ) {
         return false;
     }
 
     bool visible = true;
-    tripoint last_point = from;
+    tripoint_bub_ms last_point = from;
 
     bresenham( from, to, 0, 0,
-    [this, eye_level, &visible, &to, &last_point]( const tripoint & new_point ) {
+    [this, eye_level, &visible, &to, &last_point]( const tripoint_bub_ms & new_point ) {
         // Exit before checking the last square if not a vertical transition
-        if( new_point == to && last_point.z == to.z ) {
+        if( new_point == to && last_point.z() == to.z() ) {
             return false;
         }
 
         // 2D movement
-        if( new_point.z == last_point.z ) {
+        if( new_point.z() == last_point.z() ) {
             if( coverage( new_point ) >= eye_level ) {
                 visible = false;
                 return false;
@@ -8172,9 +8101,9 @@ bool map::has_line_of_sight_IR( const tripoint &from, const tripoint &to, int ra
         }
         // Z-level transition (vertical line)
         else {
-            const int max_z = std::max( new_point.z, last_point.z );
-            tripoint floor1 = { new_point.xy(), last_point.z };
-            tripoint floor2 = { last_point.xy(), new_point.z };
+            const int max_z = std::max( new_point.z(), last_point.z() );
+            tripoint_bub_ms floor1 = { new_point.xy(), last_point.z() };
+            tripoint_bub_ms floor2 = { last_point.xy(), new_point.z() };
 
             if( ( has_floor_or_support( { new_point.xy(), max_z } ) ||
                   coverage( floor1 ) >= eye_level ) &&
@@ -8196,8 +8125,8 @@ int map::obstacle_concealment( const tripoint_bub_ms &loc1, const tripoint_bub_m
 {
     const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    tripoint obstaclepos;
-    bresenham( loc2.raw(), loc1.raw(), offset, 0, [&obstaclepos]( const tripoint & new_point ) {
+    tripoint_bub_ms obstaclepos;
+    bresenham( loc2, loc1, offset, 0, [&obstaclepos]( const tripoint_bub_ms & new_point ) {
         // Only adjacent tile between viewer and enemy is checked for concealment.
         obstaclepos = new_point;
         return false;
@@ -8209,8 +8138,8 @@ int map::obstacle_coverage( const tripoint_bub_ms &loc1, const tripoint_bub_ms &
 {
     const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    tripoint obstaclepos;
-    bresenham( loc2.raw(), loc1.raw(), offset, 0, [&obstaclepos]( const tripoint & new_point ) {
+    tripoint_bub_ms obstaclepos;
+    bresenham( loc2, loc1, offset, 0, [&obstaclepos]( const tripoint_bub_ms & new_point ) {
         // Only adjacent tile between viewer and enemy is checked for cover.
         obstaclepos = new_point;
         return false;
@@ -8251,17 +8180,17 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
         high_p = target_p;
         low_p = viewer_p;
     }
-    tripoint ledge_p = high_p.raw();
-    bresenham( tripoint( low_p.xy().raw(), high_p.z() ), high_p.raw(), 0, 0, [this,
-    &ledge_p]( const tripoint & new_point ) {
-        if( dont_draw_lower_floor( tripoint_bub_ms( new_point ) ) ) {
+    tripoint_bub_ms ledge_p = high_p;
+    bresenham( tripoint_bub_ms( low_p.xy(), high_p.z() ), high_p, 0, 0, [this,
+    &ledge_p]( const tripoint_bub_ms & new_point ) {
+        if( dont_draw_lower_floor( new_point ) ) {
             ledge_p = new_point;
             return false;
         }
         return true;
     } );
 
-    float dist_to_ledge_base = trig_dist( viewer_p, tripoint_bub_ms( ledge_p.x, ledge_p.y,
+    float dist_to_ledge_base = trig_dist( viewer_p, tripoint_bub_ms( ledge_p.x(), ledge_p.y(),
                                           viewer_p.z() ) );
     // Adjustment to ledge distance because ledge is assumed to be between two grids
     dist_to_ledge_base *= ( viewer_p.z() < target_p.z() ) ? -2.0f : 2.0f;
@@ -8269,7 +8198,7 @@ int map::ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_
     // Similarly adjust relative Z comparisons.
     const float adjusted_viewer_z = viewer_p.z() * 2;
     // "Opposite" of the angle between the viewer level and ledge
-    const float adjusted_ledge_z_delta = ( ledge_p.z ) - adjusted_viewer_z;
+    const float adjusted_ledge_z_delta = ( ledge_p.z() ) - adjusted_viewer_z;
     const float tangent = adjusted_ledge_z_delta / dist_to_ledge_base;
     // Absolute level concealed by ledge, anything below this point is invisible
     const float covered_z = adjusted_viewer_z + ( tangent * flat_dist );
@@ -8503,28 +8432,28 @@ void map::reachable_flood_steps( std::vector<tripoint_bub_ms> &reachable_pts,
     }
 }
 
-bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
+bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const int range,
                       const int cost_min, const int cost_max ) const
 {
-    if( std::abs( f.z - t.z ) > fov_3d_z_range ) {
+    if( std::abs( f.z() - t.z() ) > fov_3d_z_range ) {
         return false;
     }
 
     // Ugly `if` for now
-    if( f.z == t.z ) {
+    if( f.z() == t.z() ) {
         if( ( range >= 0 && range < rl_dist( f.xy(), t.xy() ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }
         bool is_clear = true;
         bresenham( f.xy(), t.xy(), 0,
-        [this, &is_clear, cost_min, cost_max, &t]( const point & new_point ) {
+        [this, &is_clear, cost_min, cost_max, &t]( const point_bub_ms & new_point ) {
             // Exit before checking the last square, it's still reachable even if it is an obstacle.
-            if( new_point.x == t.x && new_point.y == t.y ) {
+            if( new_point.x() == t.x() && new_point.y() == t.y() ) {
                 return false;
             }
 
-            const int cost = this->move_cost( point_bub_ms( new_point ) );
+            const int cost = this->move_cost( new_point );
             if( cost < cost_min || cost > cost_max ) {
                 is_clear = false;
                 return false;
@@ -8535,15 +8464,15 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
     }
 
     // Handle direct vertical neighbor (1 tile away, different Z)
-    if( rl_dist( f, t ) == 1 && f.z != t.z ) {
-        const bool going_up = t.z > f.z;
-        const tripoint &lower = going_up ? f : t;
-        const tripoint &upper = going_up ? t : f;
+    if( rl_dist( f, t ) == 1 && f.z() != t.z() ) {
+        const bool going_up = t.z() > f.z();
+        const tripoint_bub_ms &lower = going_up ? f : t;
+        const tripoint_bub_ms &upper = going_up ? t : f;
 
         for( int dx = -1; dx <= 1; ++dx ) {
             for( int dy = -1; dy <= 1; ++dy ) {
-                const tripoint check_lower = lower + tripoint( dx, dy, 0 );
-                const tripoint check_upper = upper + tripoint( dx, dy, 0 );
+                const tripoint check_lower = lower.raw() + tripoint( dx, dy, 0 );
+                const tripoint check_upper = upper.raw() + tripoint( dx, dy, 0 );
 
                 if( inbounds( check_lower ) && inbounds( check_upper ) &&
                     ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
@@ -8562,10 +8491,10 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
     }
 
     bool is_clear = true;
-    tripoint last_point = f;
+    tripoint_bub_ms last_point = f;
 
     bresenham( f, t, 0, 0,
-    [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint & new_point ) {
+    [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint_bub_ms & new_point ) {
         if( new_point == t ) {
             const int cost = move_cost( new_point );
             if( cost < cost_min || cost > cost_max ) {
@@ -8574,7 +8503,7 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
             return false;
         }
 
-        if( new_point.z == last_point.z ) {
+        if( new_point.z() == last_point.z() ) {
             const int cost = move_cost( new_point );
             if( cost < cost_min || cost > cost_max ) {
                 is_clear = false;
@@ -8587,16 +8516,16 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
                 return false;
             }
 
-            const bool going_up = new_point.z > last_point.z;
-            const tripoint &lower = going_up ? last_point : new_point;
-            const tripoint &upper = going_up ? new_point : last_point;
+            const bool going_up = new_point.z() > last_point.z();
+            const tripoint_bub_ms &lower = going_up ? last_point : new_point;
+            const tripoint_bub_ms &upper = going_up ? new_point : last_point;
 
             bool found_stair = false;
 
             for( int dx = -1; dx <= 1; ++dx ) {
                 for( int dy = -1; dy <= 1; ++dy ) {
-                    tripoint check_lower = lower + tripoint( dx, dy, 0 );
-                    tripoint check_upper = upper + tripoint( dx, dy, 0 );
+                    tripoint check_lower = lower.raw() + tripoint( dx, dy, 0 );
+                    tripoint check_upper = upper.raw() + tripoint( dx, dy, 0 );
 
                     if( inbounds( check_lower ) && inbounds( check_upper ) &&
                         ter( check_lower )->has_flag( ter_furn_flag::TFLAG_GOES_UP ) &&
@@ -8624,10 +8553,10 @@ bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
 }
 
 
-bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const int range,
+bool map::clear_path( const tripoint &f, const tripoint &t, const int range,
                       const int cost_min, const int cost_max ) const
 {
-    return clear_path( f.raw(), t.raw(), range, cost_min, cost_max );
+    return clear_path( tripoint_bub_ms( f ), tripoint_bub_ms( t ), range, cost_min, cost_max );
 }
 
 bool map::accessible_items( const tripoint &t ) const
@@ -10732,7 +10661,7 @@ void map::draw_rough_circle_ter( const ter_id &type, const point_bub_ms &p, int 
 void map::draw_rough_circle_furn( const furn_id &type, const point_bub_ms &p, int rad )
 {
     draw_rough_circle( [this, type]( const point & q ) {
-        if( !is_open_air( tripoint( q, abs_sub.z() ) ) ) {
+        if( !is_open_air( tripoint_bub_ms( q.x, q.y, abs_sub.z() ) ) ) {
             this->furn_set( q, type );
         }
     }, p.raw(), rad );
