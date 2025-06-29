@@ -3268,8 +3268,8 @@ int Character::get_standard_stamina_cost( const item *thrown_item ) const
 
     // Logarithmic stamina scaling
     const double weight_cost = std::log( normalized_weight + 1.0 ) * 30.0;
-    return std::min( 30, static_cast<int>( weight_cost * -1.0 * get_modifier(
-                                 character_modifier_melee_stamina_cost_mod ) ) );
+    return static_cast<int>( weight_cost * -1.0 * get_modifier(
+                                 character_modifier_melee_stamina_cost_mod ) );
 }
 
 std::vector<item_location> Character::nearby( const
