@@ -2269,7 +2269,7 @@ int game::inventory_item_menu( item_location locThisItem,
                     u.change_side( locThisItem );
                     break;
                 case 'T':
-                    u.takeoff( locThisItem );
+                    u.takeoff( locThisItem.obtain( u ) );
                     break;
                 case 'd':
                     u.drop( locThisItem, u.pos() );
@@ -12820,6 +12820,7 @@ void game::perhaps_add_random_npc( bool ignore_spawn_timers_and_rates )
 
     std::string new_fac_id = "solo_";
     new_fac_id += tmp->name;
+    new_fac_id += std::to_string( tmp->getID().get_value() );
     // create a new "lone wolf" faction for this one NPC
     faction *new_solo_fac = faction_manager_ptr->add_new_faction( tmp->name, faction_id( new_fac_id ),
                             faction_no_faction );
