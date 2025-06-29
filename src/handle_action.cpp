@@ -1128,12 +1128,9 @@ static void smash()
             player_character.handle_melee_wear( weapon );
             weary_mult = 1.0f / player_character.exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
 
-            const int mod_sta = 2 * player_character.get_standard_stamina_cost();
+            const int mod_sta = std::min( -150, 2 * player_character.get_standard_stamina_cost() );
             player_character.burn_energy_arms( mod_sta );
 
-            if( static_cast<int>( player_character.get_skill_level( skill_melee ) ) == 0 ) {
-                player_character.practice( skill_melee, rng( 0, 1 ) * rng( 0, 1 ) );
-            }
             if( weapon ) {
                 const int glass_portion = weapon->made_of( material_glass );
                 float glass_fraction = glass_portion / static_cast<float>( weapon->type->mat_portion_total );

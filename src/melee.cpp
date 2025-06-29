@@ -1065,7 +1065,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
 int Character::get_base_melee_stamina_cost( const item *weap ) const
 {
-    return std::min( -50, get_standard_stamina_cost( weap ) );
+    return std::min( -75, get_standard_stamina_cost( weap ) );
 }
 
 int Character::get_total_melee_stamina_cost( const item *weap ) const
@@ -1093,7 +1093,7 @@ int Character::get_total_melee_stamina_cost( const item *weap ) const
         proficiency_multiplier = std::clamp( 1.f - loss, 0.f, proficiency_multiplier );
     }
 
-    return std::min<int>( -50, proficiency_multiplier * ( mod_sta + melee - stance_malus ) );
+    return std::min<int>( -75, proficiency_multiplier * ( mod_sta + melee - stance_malus ) );
 }
 
 void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
