@@ -441,7 +441,8 @@ std::set<tripoint_bub_ms> calculate_spell_effect_area( const spell &sp,
     if( sp.shape() == spell_shape::blast && !sp.has_flag( spell_flag::NO_PROJECTILE ) ) {
         map &here = get_map();
         std::vector<tripoint_bub_ms> trajectory = line_to( caster.pos_bub(), target );
-        for( std::vector<tripoint_bub_ms>::iterator iter = trajectory.begin(); iter != trajectory.end(); iter++ ) {
+        for( std::vector<tripoint_bub_ms>::iterator iter = trajectory.begin(); iter != trajectory.end();
+             iter++ ) {
             if( here.impassable( *iter ) ) {
                 if( iter != trajectory.begin() ) {
                     epicenter = *( iter - 1 );
@@ -1022,7 +1023,8 @@ static std::pair<field, tripoint_bub_ms> spell_remove_field( const spell &sp,
     return std::pair<field, tripoint_bub_ms> {field_removed, field_position};
 }
 
-static void handle_remove_fd_fatigue_field( const std::pair<field, tripoint_bub_ms> &fd_fatigue_field,
+static void handle_remove_fd_fatigue_field( const std::pair<field, tripoint_bub_ms>
+        &fd_fatigue_field,
         Creature &caster )
 {
     for( const std::pair<const field_type_id, field_entry> &fd : std::get<0>( fd_fatigue_field ) ) {
