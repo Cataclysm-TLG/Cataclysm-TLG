@@ -106,6 +106,7 @@ static const faction_id faction_no_faction( "no_faction" );
 static const faction_id faction_your_followers( "your_followers" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
+static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 
 static const item_group_id Item_spawn_data_guns_pistol_common( "guns_pistol_common" );
 static const item_group_id Item_spawn_data_guns_rifle_common( "guns_rifle_common" );
@@ -2821,6 +2822,36 @@ void npc::die( Creature *nkiller )
         }
     }
     assigned_camp = std::nullopt;
+
+    // Find and break any grabs on us, as well as any we may be doing.
+    if( has_effect_with_flag( json_flag_GRAB ) ) {
+        map &here = get_map();
+        creature_tracker &creatures = get_creature_tracker();
+        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
+        Creature *grabber = nullptr;
+        for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            // Is our grabber around?
+            for( const tripoint_bub_ms loc : surrounding ) {
+                Creature *someone = creatures.creature_at( loc );
+                if( someone && someone->has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+                    add_msg_debug( debugmode::DF_MATTACK, "Grabber found: %s", someone->disp_name() );
+                    grabber = someone;
+                    break;
+                }
+            }
+            if( grabber == nullptr ) {
+                remove_effect( grab.get_id() );
+                add_msg_debug( debugmode::DF_MATTACK, "Orphan grab found and removed from dead NPC" );
+                continue;
+            }
+            if( grabber && !grabber->is_monster() ) {
+                grabber->as_character()->release_grapple();
+            }
+            remove_effect( grab.get_id() );
+        }
+    }
+    release_grapple();
+
     // Need to unboard from vehicle before dying, otherwise
     // the vehicle code cannot find us
     if( in_vehicle ) {

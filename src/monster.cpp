@@ -2927,11 +2927,7 @@ void monster::die( Creature *nkiller )
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
-                for( const effect &eff : grabber->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
-                    const efftype_id effid = eff.get_id();
-                    grabber->remove_effect( effid );
-                    grabber->as_character()->grab_1.clear();
-                }
+                grabber->as_character()->release_grapple();
             }
             remove_effect( grab.get_id() );
         }

@@ -11380,7 +11380,8 @@ void Character::stagger()
     }
 
     creature_tracker &creatures = get_creature_tracker();
-    std::vector<tripoint_bub_ms> &pool = preferred_stumbles.empty() ? valid_stumbles : preferred_stumbles;
+    std::vector<tripoint_bub_ms> &pool = preferred_stumbles.empty() ? valid_stumbles :
+                                         preferred_stumbles;
 
     while( !pool.empty() ) {
         bool blocked = false;
