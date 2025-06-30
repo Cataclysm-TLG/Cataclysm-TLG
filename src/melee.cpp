@@ -1261,11 +1261,11 @@ double Character::crit_chance( float roll_hit, float target_dodge, const item &w
 
     // Examples (survivor stats/chances of each critical):
     // Fresh (skill-less) 8/8/8/8, unarmed:
-    //  50%, 49%, 25%; ~1/16 guaranteed critical + ~1/8 if roll>dodge*1.5
+    //  50%, 49%, 25%; ~1/16 guaranteed critical + ~1/8 if roll>defense*1.5
     // Expert (skills 10) 10/10/10/10, unarmed:
-    //  100%, 55%, 60%; ~1/3 guaranteed critical + ~4/10 if roll>dodge*1.5
+    //  100%, 55%, 60%; ~1/3 guaranteed critical + ~4/10 if roll>defense*1.5
     // Godlike with combat CBM 20/20/20/20, pipe (+1 accuracy):
-    //  60%, 100%, 42%; ~1/4 guaranteed critical + ~3/8 if roll>dodge*1.5
+    //  60%, 100%, 42%; ~1/4 guaranteed critical + ~3/8 if roll>defense*1.5
 
     // Note: the formulas below are only valid if none of the 3 critical chance values go above 1.0
     // It is therefore important to limit them to between 0.0 and 1.0
