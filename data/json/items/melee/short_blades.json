@@ -370,7 +370,8 @@
     ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 15 } ],
-    "melee_damage": { "stab": 17 }
+    "melee_damage": { "stab": 17 },
+    "to_hit_mod": 1
   },
   {
     "id": "knife_combat_army",
@@ -438,7 +439,8 @@
     ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 13 } ],
-    "melee_damage": { "stab": 15 }
+    "melee_damage": { "stab": 15 },
+    "to_hit_mod": 1
   },
   {
     "id": "knife_combat",
@@ -493,7 +495,8 @@
     ],
     "weapon_category": [ "KNIVES" ],
     "thrown_damage": [ { "damage_type": "stab", "amount": 14 } ],
-    "melee_damage": { "stab": 16 }
+    "melee_damage": { "stab": 16 },
+    "to_hit_mod": 1
   },
   {
     "id": "knife_KABAR",
