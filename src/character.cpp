@@ -4031,11 +4031,11 @@ void Character::reset_stats()
 
     /** @EFFECT_STR_MAX above 15 decreases Dodge bonus by 1 (NEGATIVE) */
     if( str_max >= 16 ) {
-        mod_dodge_bonus( -1 );   // Penalty if we're huge
+        mod_dodge_bonus( -1 );   // Penalty if we're buff
     }
     /** @EFFECT_STR_MAX below 6 increases Dodge bonus by 1 */
     else if( str_max <= 5 ) {
-        mod_dodge_bonus( 1 );   // Bonus if we're small
+        mod_dodge_bonus( 1 );   // Bonus if we're scrawny
     }
 
     apply_skill_boost();
@@ -5822,7 +5822,7 @@ float Character::get_dodge_base() const
     /** @EFFECT_DEX slightly increases dodge base */
     /** @EFFECT_PER increases dodge base a bit less */
     /** @EFFECT_DODGE increases dodge_base */
-    float dex_bonus = get_dex() / 4.0f;
+    float dex_bonus = get_dex() / 5.0f;
     float per_bonus = get_per() / 6.0f;
     return dex_bonus + per_bonus + get_skill_level( skill_dodge );
 }
