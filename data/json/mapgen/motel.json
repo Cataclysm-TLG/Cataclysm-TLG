@@ -607,8 +607,8 @@
         "           |||||||||||||||||||||||||||||||||||||",
         "                                              4 "
       ],
-      "palettes": [ "roof_palette", "motel_2x2_palette" ],
-      "terrain": { " ": "t_open_air", "*": "t_shingle_flat_roof" }
+      "palettes": [ "motel_2x2_palette" ],
+      "terrain": { " ": "t_open_air", "*": "t_shingle_flat_roof", "5": "t_gutter_drop" }
     }
   },
   {
