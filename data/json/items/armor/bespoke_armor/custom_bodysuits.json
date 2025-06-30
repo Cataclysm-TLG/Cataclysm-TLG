@@ -38,7 +38,7 @@
           { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "encumbrance": [ 14, 22 ],
+        "encumbrance": [ 14, 18 ],
         "specifically_covers": [
           "arm_shoulder_l",
           "arm_shoulder_r",
@@ -186,7 +186,7 @@
           { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "encumbrance": [ 16, 24 ],
+        "encumbrance": [ 16, 20 ],
         "specifically_covers": [
           "arm_shoulder_l",
           "arm_shoulder_r",
@@ -341,7 +341,7 @@
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
         "coverage": 98,
-        "encumbrance": [ 16, 22 ]
+        "encumbrance": [ 16, 20 ]
       }
     ],
     "pocket_data": [
