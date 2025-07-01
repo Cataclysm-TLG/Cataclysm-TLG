@@ -887,5 +887,30 @@
     "id": "utility_knife_folding",
     "type": "MIGRATION",
     "replace": "knife_folding"
+  },
+  {
+    "id": "bolt_simple_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_wood_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_metal",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_makeshift",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_steel_target",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
   }
 ]

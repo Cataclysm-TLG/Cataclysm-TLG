@@ -241,7 +241,7 @@
     "name": "crossbows",
     "description": "Recipes related to constructing crossbows to shoot bolts with.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "bullet_crossbow", "compositecrossbow", "huge_crossbow", "hand_crossbow", "rep_crossbow", "crossbow" ],
+    "nested_category_data": [ "bullet_crossbow", "huge_crossbow", "hand_crossbow", "rep_crossbow", "crossbow" ],
     "difficulty": 3
   },
   {

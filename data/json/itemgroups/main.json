@@ -244,11 +244,8 @@
       { "item": "bolt_makeshift", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_small_game", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_metal", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_steel", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_steel_bodkin", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_steel_target", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_cf", "prob": 100, "count": [ 10, 30 ] }
     ]
   },
@@ -259,11 +256,8 @@
     "entries": [
       { "item": "bolt_crude", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_simple_wood", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_simple_small_game", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_makeshift", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_small_game", "prob": 100, "count": [ 10, 30 ] }
+      { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] }
     ]
   }
 ]

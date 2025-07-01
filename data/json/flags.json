@@ -2523,5 +2523,10 @@
   {
     "id": "NIGHT_BLINDNESS",
     "type": "json_flag"
+  },
+  {
+    "id": "CROSSBOW",
+    "type": "json_flag",
+    "//": "If this ranged weapon uses the archery skill, it will not drain stamina when aiming, nor will it teach archer's form."
   }
 ]

@@ -143,6 +143,7 @@ static const fault_id fault_overheat_melting( "fault_overheat_melting" );
 static const fault_id fault_overheat_safety( "fault_overheat_safety" );
 static const fault_id fault_overheat_venting( "fault_overheat_venting" );
 
+static const flag_id json_flag_CROSSBOW( "CROSSBOW" );
 static const flag_id json_flag_FILTHY( "FILTHY" );
 
 static const limb_score_id limb_score_vision( "vision" );
@@ -1668,7 +1669,7 @@ static void do_aim( Character &you, const item &relevant, const double min_recoi
         you.recoil = std::max( min_recoil, you.recoil - aim_amount );
 
         // Train archery proficiencies if we are doing archery
-        if( relevant.gun_skill() == skill_archery ) {
+        if( relevant.gun_skill() == skill_archery && !relevant.has_flag( json_flag_CROSSBOW ) ) {
             practice_archery_proficiency( you, relevant );
 
             // Only drain stamina on initial draw
