@@ -349,7 +349,7 @@ static void debug_error_prompt(
                                           " %s\n" // translated user string: where to find backtrace
 #endif
                                           , _( "An error has occurred!  Written below is the error report:" ),
-                                          formatted_report,
+                                          formatted_report
 #if defined(BACKTRACE)
                                           backtrace_instructions
 #endif

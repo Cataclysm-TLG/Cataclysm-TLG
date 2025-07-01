@@ -807,7 +807,6 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
             const SkillLevel &level = you.get_skill_level_object( aSkill->ident() );
             int exercise = level.knowledgeExperience();
             int level_num = level.knowledgeLevel();
-            const bool can_train = level.can_train();
             const bool skill_gap = level_num > level.level();
             const bool skill_small_gap = exercise > level.exercise();
             bool locked = false;
@@ -833,8 +832,6 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
                     cstatus = c_yellow;
                 } else if( skill_gap || skill_small_gap ) {
                     cstatus = c_light_cyan;
-                } else if( !can_train ) {
-                    cstatus = c_white;
                 } else {
                     cstatus = c_light_blue;
                 }
