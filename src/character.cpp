@@ -884,17 +884,24 @@ creature_size Character::get_size() const
 
 std::string Character::disp_name( bool possessive, bool capitalize_first ) const
 {
-    if( !possessive ) {
-        if( is_avatar() ) {
-            return capitalize_first ? _( "You" ) : _( "you" );
-        }
-        return get_name();
-    } else {
-        if( is_avatar() ) {
-            return capitalize_first ? _( "Your" ) : _( "your" );
-        }
-        return string_format( _( "%s's" ), get_name() );
+    return is_avatar() ? as_avatar()->display_name( possessive,
+            capitalize_first ) : as_npc()->display_name( possessive );
+}
+
+std::string Character::disp_profession() const
+{
+    if( !custom_profession.empty() ) {
+        return custom_profession;
     }
+    if( is_npc() && as_npc()->myclass != npc_class_id::NULL_ID() ) {
+        if( play_name_suffix ) {
+            return play_name_suffix.value();
+        }
+    }
+    if( prof != nullptr && prof != profession::generic() ) {
+        return prof->gender_appropriate_name( male );
+    }
+    return "";
 }
 
 std::string Character::name_and_maybe_activity() const
@@ -7822,7 +7829,7 @@ weighted_int_list<mutation_category_id> Character::get_vitamin_weighted_categori
 
 int Character::vitamin_RDA( const vitamin_id &vitamin, int ammount ) const
 {
-    const double multiplier = vitamin_rate( vitamin ) / 1_days * 100;
+    const double multiplier = vitamin_rate( vitamin ) * 100 / 1_days;
     return std::lround( ammount * multiplier );
 }
 
@@ -8718,7 +8725,7 @@ void Character::rooted()
 // TODO: The rates for iron, calcium, and thirst should probably be pulled from the nutritional data rather than being hardcoded here, so that future balance changes don't break this.
 {
     if( ( has_trait( trait_ROOTS2 ) || has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) &&
-        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos() ) && is_barefoot() ) {
+        get_map().has_flag( ter_furn_flag::TFLAG_PLOWABLE, pos_bub() ) && is_barefoot() ) {
         int time_to_full = 43200; // 12 hours
         if( has_trait( trait_ROOTS3 ) || has_trait( trait_CHLOROMORPH ) ) {
             time_to_full += -14400;    // -4 hours
@@ -11225,7 +11232,7 @@ void Character::process_effects()
     // Being stuck in tight spaces sucks. TODO: could be expanded to apply to non-vehicle conditions.
     bool cramped = has_effect( effect_cramped_space );
     // return is intentionally discarded, sets cramped if appropriate
-    can_move_to_vehicle_tile( get_map().getglobal( pos() ), cramped );
+    can_move_to_vehicle_tile( get_map().getglobal( pos_bub() ), cramped );
     if( cramped ) {
         if( is_npc() && !has_effect( effect_narcosis ) && !in_sleep_state() ) {
             npc &as_npc = dynamic_cast<npc &>( *this );
@@ -11340,7 +11347,7 @@ void Character::stagger_check()
     }
     if( ( ( has_trait( trait_GASTROPOD_BALANCE ) || has_trait( trait_LEG_TENT_BRACE ) ) &&
           is_barefoot() ) || ( has_flag( json_flag_WEBWALK ) &&
-                               here.get_field( pos(), field_fd_web ) != nullptr ) ) {
+                               here.get_field( pos_bub(), field_fd_web ) != nullptr ) ) {
         balance_factor += 6.0f;
     }
     if( one_in( balance_factor ) ) {

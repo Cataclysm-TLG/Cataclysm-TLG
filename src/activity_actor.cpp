@@ -2384,48 +2384,49 @@ void move_items_activity_actor::do_turn( player_activity &act, Character &who )
         }
 
         // Check that we can pick it up.
-        if( target->made_of_from_type( phase_id::SOLID ) ) {
-            // Spill out any invalid contents first
-            target.overflow();
+        if( !target->made_of_from_type( phase_id::SOLID ) ) {
+            continue;
+        }
+        // Spill out any invalid contents first
+        target.overflow();
 
-            item &leftovers = *target;
-            // Make a copy to be put in the destination location
-            item newit = leftovers;
+        item &leftovers = *target;
+        // Make a copy to be put in the destination location
+        item newit = leftovers;
 
-            if( newit.is_owned_by( who, true ) ) {
-                newit.set_owner( who );
-            } else {
-                continue;
-            }
+        if( newit.is_owned_by( who, true ) ) {
+            newit.set_owner( who );
+        } else {
+            continue;
+        }
 
-            // Handle charges, quantity == 0 means move all
-            if( quantity != 0 && newit.count_by_charges() ) {
-                newit.charges = std::min( newit.charges, quantity );
-                leftovers.charges -= quantity;
-            } else {
-                leftovers.charges = 0;
-            }
+        // Handle charges, quantity == 0 means move all
+        if( quantity != 0 && newit.count_by_charges() ) {
+            newit.charges = std::min( newit.charges, quantity );
+            leftovers.charges -= quantity;
+        } else {
+            leftovers.charges = 0;
+        }
 
-            // This is for hauling across zlevels, remove when going up and down stairs
-            // is no longer teleportation
-            const tripoint_bub_ms src = target.pos_bub();
-            const int distance = src.z() == dest.z() ? std::max( rl_dist( src, dest ), 1 ) : 1;
-            // Yuck, I'm sticking weariness scaling based on activity level here
-            const float weary_mult = who.exertion_adjusted_move_multiplier( exertion_level() );
-            who.mod_moves( -Pickup::cost_to_move_item( who, newit ) * distance * weary_mult );
-            if( to_vehicle ) {
-                put_into_vehicle_or_drop( who, item_drop_reason::deliberate, { newit }, dest );
-            } else {
-                std::vector<item_location> dropped_items = drop_on_map( who, item_drop_reason::deliberate, { newit },
-                        dest );
-                if( hauling_mode ) {
-                    who.haul_list.insert( who.haul_list.end(), dropped_items.begin(), dropped_items.end() );
-                }
+        // This is for hauling across zlevels, remove when going up and down stairs
+        // is no longer teleportation
+        const tripoint_bub_ms src = target.pos_bub();
+        const int distance = src.z() == dest.z() ? std::max( rl_dist( src, dest ), 1 ) : 1;
+        // Yuck, I'm sticking weariness scaling based on activity level here
+        const float weary_mult = who.exertion_adjusted_move_multiplier( exertion_level() );
+        who.mod_moves( -Pickup::cost_to_move_item( who, newit ) * distance / weary_mult );
+        if( to_vehicle ) {
+            put_into_vehicle_or_drop( who, item_drop_reason::deliberate, { newit }, dest );
+        } else {
+            std::vector<item_location> dropped_items = drop_on_map( who, item_drop_reason::deliberate, { newit },
+                    dest );
+            if( hauling_mode ) {
+                who.haul_list.insert( who.haul_list.end(), dropped_items.begin(), dropped_items.end() );
             }
-            // If we picked up a whole stack, remove the leftover item
-            if( leftovers.charges <= 0 ) {
-                target.remove_item();
-            }
+        }
+        // If we picked up a whole stack, remove the leftover item
+        if( leftovers.charges <= 0 ) {
+            target.remove_item();
         }
     }
 
@@ -4010,7 +4011,7 @@ void workout_activity_actor::do_turn( player_activity &act, Character &who )
         }
         // morale bonus kicks in gradually after 5 minutes of exercise
         if( calendar::once_every( 2_minutes ) &&
-            ( ( elapsed + act.moves_total - act.moves_left ) / 100 * 1_turns ) > 5_minutes ) {
+            ( ( elapsed + act.moves_total - act.moves_left ) * 1_turns / 100 ) > 5_minutes ) {
             who.add_morale( morale_feeling_good, intensity_modifier, 20, 6_hours, 30_minutes );
         }
         if( calendar::once_every( 2_minutes ) ) {
@@ -5707,7 +5708,7 @@ time_duration prying_activity_actor::prying_time( const activity_data_common &da
         const item_location &tool, const Character &who )
 {
     const pry_data &pdata = data.prying_data();
-    if( pdata.prying_nails ) {
+    if( data.duration() > 1_seconds ) {
         return data.duration();
     }
 
@@ -5810,23 +5811,21 @@ void prying_activity_actor::handle_prying( Character &who )
     };
 
     auto handle_failure = [&]( const pry_data & pdata ) -> void {
-        if( !pdata.breakable )
+        if( pdata.breakable )
         {
-            return;
-        }
+            int difficulty = pdata.difficulty;
+            difficulty -= tool->get_quality( qual_PRY ) - pdata.prying_level;
 
-        int difficulty = pdata.difficulty;
-        difficulty -= tool->get_quality( qual_PRY ) - pdata.prying_level;
+            /** @EFFECT_MECHANICS reduces chance of breaking when prying */
+            const int dice_mech = dice( 2,
+                                        static_cast<int>( round( who.get_skill_level( skill_mechanics ) ) ) );
+            /** @ARM_STR reduces chance of breaking when prying */
+            const int dice_str = dice( 2, who.get_arm_str() );
 
-        /** @EFFECT_MECHANICS reduces chance of breaking when prying */
-        const int dice_mech = dice( 2, static_cast<int>( round( who.get_skill_level( skill_mechanics ) ) ) );
-        /** @ARM_STR reduces chance of breaking when prying */
-        const int dice_str = dice( 2, who.get_arm_str() );
-
-        if( dice( 4, difficulty ) > dice_mech + dice_str )
-        {
-            // bash will always succeed
-            here.bash( target, 0, false, true );
+            if( dice( 4, difficulty ) > dice_mech + dice_str ) {
+                // bash will always succeed
+                here.bash( target, 0, false, true );
+            }
         }
 
         if( !data->prying_data().failure.empty() )

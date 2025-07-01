@@ -3522,7 +3522,7 @@ void monster::process_effects()
     if( has_effect( effect_cramped_space ) ) {
         bool cramped = false;
         // return is intentionally discarded, sets cramped if appropriate
-        can_move_to_vehicle_tile( get_map().getglobal( pos() ), cramped );
+        can_move_to_vehicle_tile( get_map().getglobal( pos_bub() ), cramped );
         if( !cramped ) {
             remove_effect( effect_cramped_space );
         }

@@ -1106,6 +1106,23 @@ static ret_val<tripoint> check_deploy_square( Character *p, item &it, const trip
     }
 
     map &here = get_map();
+
+    tripoint_bub_ms where = pnt;
+    tripoint_bub_ms below = pnt + tripoint_below;
+    while( here.valid_move( where, below, false, true ) ) {
+        where += tripoint_below;
+        below += tripoint_below;
+    }
+
+    const int height = pnt.z() - where.z();
+    if( height > 1 && here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_NO_FLOOR, pnt ) ) {
+        if( !query_yn(
+                _( "Deploying %s there will make it fall down %i stories.  Do you still want to deploy it?" ),
+                it.tname(), height ) ) {
+            return ret_val<tripoint>::make_failure( pos );
+        }
+    }
+
     optional_vpart_position veh_there = here.veh_at( pnt );
     if( veh_there.has_value() ) {
         // TODO: check for protrusion+short furniture, wheels+tiny furniture, NOCOLLIDE flag, etc.
@@ -1164,6 +1181,7 @@ std::optional<int> deploy_furn_actor::use( Character *p, item &it,
     }
 
     get_map().furn_set( suitable.value(), furn_type );
+    get_map().drop_furniture( tripoint_bub_ms( suitable.value() ) );
     it.spill_contents( suitable.value() );
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
@@ -1195,7 +1213,11 @@ std::optional<int> deploy_appliance_actor::use( Character *p, item &it, const tr
     }
 
     it.spill_contents( suitable.value() );
-    place_appliance( tripoint_bub_ms( suitable.value() ), vpart_appliance_from_item( appliance_base ) );
+    if( !place_appliance( tripoint_bub_ms( suitable.value() ),
+                          vpart_appliance_from_item( appliance_base ), it ) ) {
+        // failed to place somehow, cancel!!
+        return 0;
+    }
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
 }
@@ -2821,8 +2843,8 @@ bool repair_item_actor::handle_components( Character &pl, const item &fix,
     // Round up if checking, but roll if actually consuming
     // TODO: should 250_ml be part of the cost_scaling?
     const int items_needed = std::max<int>( 1, just_check ?
-                                            std::ceil( fix.base_volume() / 250_ml * cost_scaling ) :
-                                            roll_remainder( fix.base_volume() / 250_ml * cost_scaling ) );
+                                            std::ceil( fix.base_volume() * cost_scaling / 250_ml ) :
+                                            roll_remainder( fix.base_volume() * cost_scaling / 250_ml ) );
 
     std::function<bool( const item & )> filter;
     if( fix.is_filthy() ) {

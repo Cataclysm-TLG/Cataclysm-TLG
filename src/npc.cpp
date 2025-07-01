@@ -318,7 +318,9 @@ void npc_template::load( const JsonObject &jsobj, const std::string_view src )
     if( jsobj.has_string( "class" ) ) {
         guy.myclass = npc_class_id( jsobj.get_string( "class" ) );
     }
-
+    if( jsobj.has_string( "temp_suffix" ) ) {
+        jsobj.read( "temp_suffix", tem.temp_suffix );
+    }
     guy.set_attitude( static_cast<npc_attitude>( jsobj.get_int( "attitude" ) ) );
     guy.mission = static_cast<npc_mission>( jsobj.get_int( "mission" ) );
     guy.chatbin.first_topic = jsobj.get_string( "chat" );
@@ -523,8 +525,10 @@ void npc::load_npc_template( const string_id<npc_template> &ident )
         name = tem.name_unique.translated();
     }
     if( !tem.name_suffix.empty() ) {
-        //~ %1$s: npc name, %2$s: name suffix
-        name = string_format( pgettext( "npc name", "%1$s, %2$s" ), name, tem.name_suffix );
+        play_name_suffix = tem.name_suffix.translated();
+    }
+    if( !tem.temp_suffix.empty() ) {
+        custom_profession = tem.temp_suffix.translated();
     }
     fac_id = tguy.fac_id;
     set_fac( fac_id );
@@ -1606,7 +1610,7 @@ float npc::vehicle_danger( int radius ) const
         const wrapped_vehicle &wrapped_veh = vehicles[i];
         if( wrapped_veh.v->is_moving() ) {
             const auto &points_to_check = wrapped_veh.v->immediate_path();
-            point p( get_map().getglobal( pos() ).x(), get_map().getglobal( pos() ).y() );
+            point p( get_map().getglobal( pos_bub() ).xy().raw() );
             if( points_to_check.find( p ) != points_to_check.end() ) {
                 danger = i;
             }
@@ -3335,7 +3339,7 @@ const pathfinding_settings &npc::get_pathfinding_settings( bool no_bashing ) con
     if( climb > 1 ) {
         // Success is !one_in(dex), so 0%, 50%, 66%, 75%...
         // Penalty for failure chance is 1/success = 1/(1-failure) = 1/(1-(1/dex)) = dex/(dex-1)
-        path_settings->climb_cost = ( 10 - climb / 5 ) * climb / ( climb - 1 );
+        path_settings->climb_cost = ( 10 - climb / 5.0f ) * climb / ( climb - 1 );
     } else {
         // Climbing at this dexterity will always fail
         path_settings->climb_cost = 0;
@@ -3792,13 +3796,23 @@ std::string npc::describe_mission() const
     } // switch (mission)
 }
 
+std::string npc::display_name( bool possessive ) const
+{
+    const std::string profession = disp_profession();
+    if( profession.empty() ) {
+        return possessive ? string_format( _( "%1$s's" ), get_name() ) : get_name();
+    }
+    return possessive ? string_format( _( "%1$s, %2$s's" ), get_name(),
+                                       profession ) : string_format( _( "%1$s, %2$s" ), get_name(), profession );
+}
+
 std::string npc::name_and_activity() const
 {
     if( current_activity_id ) {
         //~ %1$s - npc name, %2$s - npc current activity name.
-        return string_format( _( "%1$s (%2$s)" ), get_name(), get_current_activity() );
+        return string_format( _( "%1$s (%2$s)" ), disp_name(), get_current_activity() );
     } else {
-        return get_name();
+        return disp_name();
     }
 }
 

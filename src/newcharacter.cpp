@@ -370,7 +370,7 @@ static void reset_scenario( avatar &u, const scenario *scen );
 
 void Character::pick_name( bool bUseDefault )
 {
-    if( bUseDefault && !get_option<std::string>( "DEF_CHAR_NAME" ).empty() ) {
+    if( bUseDefault && !get_option<std::string>( "DEF_CHAR_NAME" ).empty() && is_avatar() ) {
         name = get_option<std::string>( "DEF_CHAR_NAME" );
     } else {
         name = SNIPPET.expand( male ? "<male_full_name>" : "<female_full_name>" );
@@ -451,7 +451,10 @@ void avatar::randomize( const bool random_scenario, bool play_now )
         }
     }
 
-    prof = get_scenario()->weighted_random_profession();
+    const scenario *scenario_from = is_avatar() ? get_scenario() : scenario::generic();
+    prof = scenario_from->weighted_random_profession();
+    play_name_suffix = prof->gender_appropriate_name( male );
+
     init_age = rng( this->prof->age_lower, this->prof->age_upper );
     starting_city = std::nullopt;
     world_origin = std::nullopt;

@@ -7030,7 +7030,7 @@ units::mass item::weight( bool include_contents, bool integral ) const
 static units::length sawn_off_reduction( const itype *type )
 {
     int barrel_percentage = type->gun->barrel_volume / ( type->volume / 100 );
-    return ( type->longest_side / 100 ) * barrel_percentage;
+    return type->longest_side * barrel_percentage / 100;
 }
 
 units::length item::length() const
@@ -7840,7 +7840,8 @@ void item::calc_rot( units::temperature temp, const float spoil_modifier,
         temp = std::min( temperatures::fridge, temp );
     }
 
-    rot += factor * time_delta / 1_hours * calc_hourly_rotpoints_at_temp( temp ) * 1_turns;
+    rot += factor * time_delta / 1_seconds * calc_hourly_rotpoints_at_temp( temp ) * 1_turns /
+           ( 1_hours / 1_seconds );
 }
 
 void item::calc_rot_while_processing( time_duration processing_duration )
@@ -12346,7 +12347,7 @@ bool item::use_charges( const itype_id &what, int &qty, std::list<item> &used,
             return VisitResponse::NEXT;
         }
 
-        if( e->is_tool() ) {
+        if( e->is_tool() || e->is_gun() ) {
             if( e->typeId() == what || ( in_tools && e->ammo_current() == what ) ) {
                 int n;
                 if( carrier ) {
@@ -13490,7 +13491,7 @@ ret_val<void> item::link_to( vehicle &veh, const point &mount, link_state link_t
         link().source = bio_link ? link_state::bio_cable : link_state::no_link;
         link().target = link_type;
         link().t_veh = veh.get_safe_reference();
-        link().t_abs_pos = get_map().getglobal( link().t_veh->global_pos3() );
+        link().t_abs_pos = get_map().getglobal( link().t_veh->pos_bub() );
         link().t_mount = mount;
         link().s_bub_pos = tripoint_min; // Forces the item to check the length during process_link.
 
@@ -13794,7 +13795,7 @@ bool item::process_link( map &here, Character *carrier, const tripoint &pos )
     link().last_processed = calendar::turn;
 
     // Set the new absolute position to the vehicle's origin.
-    tripoint t_veh_bub_pos = t_veh->global_pos3();
+    tripoint_bub_ms t_veh_bub_pos = t_veh->pos_bub();
     tripoint_abs_ms new_t_abs_pos = here.getglobal( t_veh_bub_pos );
     if( link().t_abs_pos != new_t_abs_pos ) {
         link().t_abs_pos = new_t_abs_pos;
@@ -13803,7 +13804,7 @@ bool item::process_link( map &here, Character *carrier, const tripoint &pos )
 
     // If either of the link's connected sides moved, check the cable's length.
     if( length_check_needed ) {
-        link().length = rl_dist( pos, t_veh_bub_pos + t_veh->part( link_vp_index ).precalc[0] );
+        link().length = rl_dist( pos, t_veh_bub_pos.raw() + t_veh->part( link_vp_index ).precalc[0] );
         if( check_length() ) {
             return reset_link( true, carrier, link_vp_index );
         }
