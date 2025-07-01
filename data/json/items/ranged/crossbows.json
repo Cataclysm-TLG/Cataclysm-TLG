@@ -25,13 +25,11 @@
     "clip_size": 1,
     "reload": 1200,
     "loudness": 8,
-    "valid_mod_locations": [
-      [ "dampening", 1 ], [ "sling", 1 ]
-    ],
+    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "pebble": 1 } } ],
     "melee_damage": { "bash": 6 }
   },
-    {
+  {
     "id": "pistol_crossbow",
     "looks_like": "crossbow",
     "type": "GUN",

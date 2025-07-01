@@ -877,7 +877,13 @@
     "reversible": true,
     "decomp_learn": 3,
     "book_learn": [ [ "recipe_bows", 3 ], [ "manual_archery", 5 ], [ "book_archery", 4 ], [ "textbook_weapwest", 6 ] ],
-    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 }, { "id": "SAW_M", "level": 1 }, { "id": "HAMMER", "level": 1 } ],
+    "qualities": [
+      { "id": "GRIND", "level": 1 },
+      { "id": "CUT", "level": 1 },
+      { "id": "SAW_W", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "HAMMER", "level": 1 }
+    ],
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
       { "proficiency": "prof_gunsmithing_spring" }
@@ -906,8 +912,19 @@
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
       { "proficiency": "prof_carving", "time_multiplier": 1.5 }
     ],
-    "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_armschina", 5 ], [ "textbook_weapwest", 6 ] ],
-    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 }, { "id": "HAMMER", "level": 1 } ],
+    "book_learn": [
+      [ "recipe_bows", 1 ],
+      [ "manual_archery", 3 ],
+      [ "book_archery", 2 ],
+      [ "textbook_armschina", 5 ],
+      [ "textbook_weapwest", 6 ]
+    ],
+    "qualities": [
+      { "id": "GRIND", "level": 1 },
+      { "id": "CUT", "level": 1 },
+      { "id": "SAW_W", "level": 1 },
+      { "id": "HAMMER", "level": 1 }
+    ],
     "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
   },
   {
