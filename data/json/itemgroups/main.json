@@ -122,6 +122,8 @@
     "entries": [
       { "item": "crossbow", "prob": 70 },
       { "item": "compcrossbow", "prob": 10 },
+      { "item": "rep_compcrossbow", "prob": 5 },
+      { "item": "pistol_crossbow", "prob": 5 },
       { "item": "bullet_crossbow", "prob": 10 },
       { "item": "hand_crossbow", "prob": 10 },
       { "item": "bow_sling", "prob": 10 },
