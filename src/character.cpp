@@ -11359,7 +11359,6 @@ void Character::stagger()
 
     for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1 ) ) {
         if( dest != pos_bub() ) {
-            tripoint_bub_ms target;
             if( here.has_flag( ter_furn_flag::TFLAG_RAMP_DOWN, dest ) ) {
                 valid_stumbles.emplace_back( dest + tripoint_below );
             } else if( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, dest ) ) {
