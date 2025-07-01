@@ -58,10 +58,10 @@
     },
     "items": {
       "H": { "item": "cash_register_random" },
-      "s": { "item": "SUS_welding_gear", "chance": 65, "repeat": [ 0, 4 ] },
-      "C": { "item": "SUS_welding_gear", "chance": 40, "repeat": [ 0, 8 ] },
-      "r": { "item": "SUS_welding_gear", "chance": 50, "repeat": [ 4, 7 ] },
-      "S": { "item": "tools_common_small", "chance": 65, "repeat": [ 0, 8 ] },
+      "s": { "item": "SUS_welding_gear", "chance": 45, "repeat": [ 0, 4 ] },
+      "C": { "item": "SUS_welding_gear", "chance": 40, "repeat": [ 0, 4 ] },
+      "r": { "item": "SUS_welding_gear", "chance": 40, "repeat": [ 0, 4 ] },
+      "S": { "item": "tools_common_small", "chance": 45, "repeat": [ 0, 4 ] },
       "l": { "item": "clothing_work_set", "chance": 45, "repeat": [ 0, 1 ] }
     },
     "vehicles": {
