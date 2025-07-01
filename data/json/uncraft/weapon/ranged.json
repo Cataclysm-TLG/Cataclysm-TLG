@@ -9,13 +9,6 @@
   {
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "compositecrossbow",
-    "time": "30 s",
-    "components": [ [ [ "splinter", 7 ] ], [ [ "string_36", 1 ] ] ]
-  },
-  {
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
     "result": "coilgun",
     "time": "30 m",
     "components": [

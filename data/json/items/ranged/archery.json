@@ -18,8 +18,7 @@
       "WATER_FRIENDLY",
       "SHEATH_BOW",
       "WATERPROOF_GUN",
-      "NEVER_JAMS",
-      "FRAGILE_MELEE"
+      "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
     "weapon_category": [ "SHORT_BOWS" ],
@@ -73,8 +72,7 @@
       "WATER_FRIENDLY",
       "SHEATH_BOW",
       "WATERPROOF_GUN",
-      "NEVER_JAMS",
-      "FRAGILE_MELEE"
+      "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
     "weapon_category": [ "SHORT_BOWS" ],
@@ -210,8 +208,7 @@
       "WATER_FRIENDLY",
       "SHEATH_BOW",
       "WATERPROOF_GUN",
-      "NEVER_JAMS",
-      "FRAGILE_MELEE"
+      "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
     "skill": "archery",
@@ -268,8 +265,7 @@
       "WATER_FRIENDLY",
       "SHEATH_BOW",
       "WATERPROOF_GUN",
-      "NEVER_JAMS",
-      "FRAGILE_MELEE"
+      "NEVER_JAMS"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],
     "skill": "archery",
@@ -331,7 +327,7 @@
     "longest_side": "60 cm",
     "//2": "When taken down.",
     "price_postapoc": "20 USD",
-    "flags": [ "NO_TURRET", "FRAGILE_MELEE" ],
+    "flags": [ "NO_TURRET" ],
     "modes": [ [ "DEFAULT", "disassembled", 0, [ "MELEE" ] ] ],
     "valid_mod_locations": [ [ "underbarrel", 1 ], [ "sights", 1 ], [ "stabilizer", 1 ], [ "dampening", 1 ], [ "arrow rest", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "arrow": 1 }, "open_container": true } ],
@@ -365,7 +361,6 @@
       "SHEATH_BOW",
       "WATERPROOF_GUN",
       "NEVER_JAMS",
-      "FRAGILE_MELEE",
       "NO_TURRET"
     ],
     "ammo_effects": [ "NEVER_MISFIRES" ],

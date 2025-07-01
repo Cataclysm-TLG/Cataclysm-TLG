@@ -72,7 +72,6 @@
       { "id": "copper_knife", "description": " Craft: Knife, Copper" },
       { "id": "sword_crude", "description": " Craft: Sword, Crude" },
       { "id": "pot_copper", "description": " Craft: Pot, Copper" },
-      { "id": "bolt_metal", "description": " Craft: Crossbow Bolt, Steel" },
       { "id": "chisel", "description": " Craft: Metalworking Chisel" },
       { "id": "hammer", "description": " Craft: Hammer" },
       { "id": "metal_file", "description": " Craft: Metal Fileset" },
