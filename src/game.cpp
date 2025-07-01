@@ -10936,13 +10936,13 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         pulling = dp.xy() == -u.grab_point.xy();
     }
 
-    // Now make sure we're actually holding something
+    // Now make sure we're actually holding something.
     if( grabbed && u.get_grab_type() == object_type::FURNITURE ) {
-        // We only care about shifting, because it's the only one that can change our destination
+        // We only care about shifting, because it's the only one that can change our destination.
         if( here.has_furn( pos + u.grab_point ) ) {
             shifting_furniture = !pushing && !pulling;
         } else {
-            // We were grabbing a furniture that isn't there
+            // We were grabbing a furniture that isn't there.
             grabbed = false;
         }
     } else if( grabbed && u.get_grab_type() == object_type::VEHICLE ) {
@@ -10951,14 +10951,14 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             // We were grabbing a vehicle that isn't there anymore.
             grabbed = false;
         }
-        //can't board vehicle with solid parts while grabbing it
+        // Can't board vehicle with solid parts while grabbing it.
         else if( vp_there && !pushing && !here.impassable( dest_loc ) &&
                  !empty( grabbed_vehicle->get_avail_parts( VPFLAG_OBSTACLE ) ) &&
                  &vp_there->vehicle() == grabbed_vehicle ) {
             add_msg( m_warning, _( "You move into the %s, releasing it." ), grabbed_vehicle->name );
             u.grab( object_type::NONE );
         }
-    } else if( grabbed && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+    } else if( grabbed && && !u.has_effect_with_flag( json_flag_GRAB_FILTER ) && u.get_grab_type() != object_type::FURNITURE_ON_VEHICLE ) {
         // We were grabbing something weird, let's pretend we weren't.
         grabbed = false;
     }
@@ -12119,6 +12119,11 @@ bool game::grabbed_move( const tripoint_rel_ms &dp, const bool via_ramp )
 
     if( u.get_grab_type() == object_type::FURNITURE ) {
         u.assign_activity( move_furniture_activity_actor( dp, via_ramp ) );
+        return true;
+    }
+
+    if( u.get_grab_type() == object_type::FURNITURE_ON_VEHICLE ) {
+        u.assign_activity( move_furniture_on_vehicle_activity_actor( dp, via_ramp ) );
         return true;
     }
 
