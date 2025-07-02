@@ -992,6 +992,7 @@
   {
     "id": "WONT_TRAIN_MARKSMANSHIP",
     "type": "json_flag",
+    "info": "This isn't a proper gun, and <info>can't be used to train</info> for more than the basics.",
     "//": "This gun wont train marksmanship when fired.  Used in Aftershock smart guns."
   },
   {
