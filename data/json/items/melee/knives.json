@@ -674,5 +674,24 @@
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "NONCONDUCTIVE" ],
     "weapon_category": [ "KNIVES" ],
     "melee_damage": { "cut": 20 }
+  },
+  {
+    "type": "GENERIC",
+    "id": "sharp_toothbrush",
+    "symbol": ",",
+    "color": "light_blue",
+    "name": { "str": "plastic shank" },
+    "description": "An oblong plastic object with the far end ground down into a stabbing point.",
+    "category": "weapons",
+    "price": "4 USD",
+    "price_postapoc": "0 cent",
+    "material": [ "plastic" ],
+    "weight": "49 g",
+    "volume": "250 ml",
+    "longest_side": "20 cm",
+    "to_hit": { "grip": "none", "length": "hand", "surface": "point", "balance": "good" },
+    "flags": [ "SHEATH_KNIFE", "CONDUCTIVE", "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "SHIVS" ],
+    "melee_damage": { "bash": 1, "stab": 3 }
   }
 ]

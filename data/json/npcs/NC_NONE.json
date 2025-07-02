@@ -51,7 +51,25 @@
     "type": "item_group",
     "id": "NC_NONE_stabbing",
     "subtype": "distribution",
-    "items": [ "knife_folding" ]
+    "items": [
+      [ "iceaxe", 1 ],
+      [ "knife_butcher", 10 ],
+      [ "knife_chef", 10 ],
+      [ "knife_steak", 10 ],
+      [ "switchblade", 6 ],
+      [ "balisong", 4 ],
+      [ "pointy_stick", 2 ],
+      [ "knife_folding", 6 ],
+      [ "knife_rambo", 1 ],
+      [ "knife_combat_marine", 2 ],
+      [ "knife_combat_army", 3 ],
+      [ "knife_combat", 3 ],
+      [ "knife_KABAR", 1 ],
+      [ "spear_wood", 6 ],
+      [ "spear_knife_proper", 1 ],
+      [ "spear_steel_crude", 1 ],
+      [ "spear_pipe", 1 ]
+    ]
   },
   {
     "type": "item_group",
@@ -59,17 +77,55 @@
     "items": [
       [ "hammer", 20 ],
       [ "wrench", 20 ],
-      [ "hammer_sledge", 20 ],
+      [ "pipe", 15 ],
+      [ "hammer_sledge", 10 ],
+      [ "bat", 10 ],
+      [ "bat_metal", 10 ],
+      [ "bwirebat", 3 ],
+      [ "bat_metal", 10 ],
+      [ "nailboard", 3 ],
+      [ "walking_stick", 5 ],
+      [ "tonfa", 3 ],
+      [ "nailbat", 5 ],
+      [ "cudgel", 5 ],
+      [ "stick", 5 ],
+      [ "hammer_sledge_engineer", 5 ],
+      [ "golf_club", 3 ],
+      [ "cudgel_spiked", 1 ],
+      [ "chain", 10 ],
       [ "pipe", 20 ],
+      [ "shovel", 8 ],
+      [ "shovel_snow", 2 ],
       [ "baton-extended", 20 ],
-      [ "crowbar", 20 ]
+      [ "crowbar", 10 ],
+      [ "claw_bar", 10 ],
+      [ "rake", 5 ],
+      [ "nunchaku", 1 ],
+      [ "bokken", 1 ],
+      [ "extinguisher", 1 ],
+      [ "bowling_pin", 1 ]
     ]
   },
   {
     "type": "item_group",
     "id": "NC_NONE_cutting",
     "subtype": "distribution",
-    "items": [ "knife_cleaver" ]
+    "items": [
+      [ "knife_vegetable_cleaver", 10 ],
+      [ "knife_meat_cleaver", 10 ],
+      [ "knife_vegetable_cleaver", 10 ],
+      [ "machete", 10 ],
+      [ "brush_axe", 5 ],
+      [ "fire_ax", 5 ],
+      [ "ax", 7 ],
+      [ "hatchet", 10 ],
+      [ "makeshift_machete", 4 ],
+      [ "hoe", 5 ],
+      [ "cavalry_sabre", 1 ],
+      [ "katana", 1 ],
+      [ "katana_inferior", 1 ],
+      [ "kukri", 1 ]
+    ]
   },
   {
     "type": "item_group",

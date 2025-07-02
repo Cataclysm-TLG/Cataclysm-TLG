@@ -200,8 +200,8 @@
     "color": "brown",
     "qualities": [ [ "DIG", 3 ], [ "COOK", 1 ], [ "BUTCHER", -70 ] ],
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "NONCONDUCTIVE", "NO_SALVAGE" ],
-    "melee_damage": { "bash": 14, "cut": 3 }
+    "flags": [ "NONCONDUCTIVE", "NO_SALVAGE", "ALWAYS_TWOHAND" ],
+    "melee_damage": { "bash": 16, "cut": 3 }
   },
   {
     "id": "shovel_snow",
@@ -209,12 +209,12 @@
     "type": "TOOL",
     "name": { "str": "snow shovel" },
     "description": "A sturdy metal shovel used for picking up snow and moving it somewhere else.  It was useful before the cataclysm, but now it's useless.",
-    "weight": "2000 g",
+    "weight": "2200 g",
     "volume": "4000 ml",
     "longest_side": "150 cm",
     "price": "20 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": 2,
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
     "material": [ "steel", "wood" ],
     "symbol": "/",
     "color": "brown",
