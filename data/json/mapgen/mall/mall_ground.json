@@ -593,30 +593,30 @@
           { "item": "archery_mods", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "`": [
-          { "item": "ammo_shotgun_common", "chance": 50, "repeat": [ 0, 2 ] },
-          { "item": "ammo_rifle_common", "chance": 50, "repeat": [ 0, 2 ] }
+          { "item": "ammo_shotgun_common", "chance": 50, "repeat": [ 1, 3 ] },
+          { "item": "ammo_rifle_common", "chance": 30, "repeat": [ 0, 2 ] }
         ],
         "z": [
-          { "item": "clothing_hunting", "chance": 40, "repeat": [ 1, 2 ] },
-          { "item": "tools_hunting", "chance": 20, "repeat": [ 1, 2 ] },
-          { "item": "gun_cases", "chance": 30, "repeat": [ 1, 2 ] },
+          { "item": "clothing_hunting", "chance": 40, "repeat": [ 0, 2 ] },
+          { "item": "tools_hunting", "chance": 20, "repeat": [ 0, 2 ] },
+          { "item": "gun_cases", "chance": 20, "repeat": [ 0, 2 ] },
           { "item": "camping", "chance": 5, "repeat": [ 1, 2 ] }
         ],
         "[": [
-          { "item": "guns_rifle_common", "chance": 10, "repeat": [ 1, 2 ] },
-          { "item": "guns_shotgun_common", "chance": 20, "repeat": [ 1, 2 ] },
-          { "item": "archery", "chance": 35, "repeat": [ 1, 2 ] }
+          { "item": "guns_rifle_hunting_display", "chance": 10, "repeat": [ 1, 2 ] },
+          { "item": "guns_shotgun_common_display", "chance": 20, "repeat": [ 1, 2 ] },
+          { "item": "archery", "chance": 35, "repeat": [ 0, 2 ] }
         ],
         ":": [
           { "item": "clothing_hunting", "chance": 40 },
           { "item": "tools_hunting", "chance": 20 },
-          { "item": "gun_cases", "chance": 30 },
+          { "item": "gun_cases", "chance": 20 },
           { "item": "camping", "chance": 5 }
         ],
-        "±": { "item": "clothing_hunting", "chance": 20, "repeat": [ 1, 2 ] },
-        "Ŧ": { "item": "camping", "chance": 20, "repeat": [ 1, 2 ] },
-        "U": { "item": "cleaning", "chance": 20, "repeat": [ 1, 2 ] },
-        "3": { "item": "fast_table", "chance": 20, "repeat": [ 2, 4 ] },
+        "±": { "item": "clothing_hunting", "chance": 20, "repeat": [ 0, 2 ] },
+        "Ŧ": { "item": "camping", "chance": 20, "repeat": [ 0, 2 ] },
+        "U": { "item": "cleaning", "chance": 20, "repeat": [ 0, 2 ] },
+        "3": { "item": "fast_table", "chance": 20, "repeat": [ 0, 4 ] },
         "j": { "item": "public_sink", "chance": 100 },
         "I": { "item": "cubical_office", "chance": 70, "repeat": [ 2, 4 ] },
         "~": { "item": "cubical_office", "chance": 70, "repeat": [ 2, 4 ] },
@@ -630,7 +630,7 @@
         "4": { "item": "bags", "chance": 1 },
         "K": { "item": "snacks", "chance": 5 },
         "n": { "item": "restaur_sink", "chance": 20, "repeat": [ 1, 2 ] },
-        "l": { "item": "fast_fridge", "chance": 30, "repeat": [ 2, 4 ] },
+        "l": { "item": "fast_fridge", "chance": 30, "repeat": [ 0, 2 ] },
         "Q": [
           { "item": "fast_kitchen", "chance": 30, "repeat": [ 1, 2 ] },
           { "item": "big_canned_food", "chance": 30, "repeat": [ 2, 3 ] }
@@ -960,12 +960,12 @@
           { "item": "archery_mods", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "Δ": [
-          { "item": "guns_pistol_common", "chance": 70, "repeat": [ 1, 2 ] },
+          { "item": "guns_pistol_hunting_display", "chance": 40, "repeat": [ 0, 2 ] },
           { "item": "knife_shop", "chance": 30, "repeat": [ 1, 2 ] }
         ],
         "`": [
-          { "item": "ammo_shotgun_common", "chance": 50, "repeat": [ 0, 2 ] },
-          { "item": "ammo_rifle_common", "chance": 50, "repeat": [ 0, 2 ] }
+          { "item": "ammo_shotgun_common", "chance": 60, "repeat": [ 2, 3 ] },
+          { "item": "ammo_rifle_common", "chance": 30, "repeat": [ 0, 2 ] }
         ],
         "z": [
           { "item": "clothing_hunting", "chance": 40, "repeat": [ 1, 2 ] },
@@ -974,9 +974,9 @@
           { "item": "camping", "chance": 5, "repeat": [ 1, 2 ] }
         ],
         "[": [
-          { "item": "guns_rifle_common", "chance": 10, "repeat": [ 1, 2 ] },
-          { "item": "guns_shotgun_common", "chance": 20, "repeat": [ 1, 2 ] },
-          { "item": "archery", "chance": 35, "repeat": [ 1, 2 ] }
+          { "item": "guns_rifle_hunting_display", "chance": 10, "repeat": [ 0, 2 ] },
+          { "item": "guns_shotgun_common_display", "chance": 20, "repeat": [ 0, 2 ] },
+          { "item": "archery", "chance": 35, "repeat": [ 0, 2 ] }
         ],
         ":": [
           { "item": "clothing_hunting", "chance": 40 },
