@@ -8,6 +8,7 @@
     "bgcolor": "yellow",
     "move_cost_mod": 3,
     "comfort": 2,
+    "fall_damage_reduction": 5,
     "floor_bedding_warmth": 100,
     "required_str": 6,
     "coverage": 38,

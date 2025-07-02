@@ -214,8 +214,8 @@ bool map::build_vision_transparency_cache( int zlev )
             vision_transparency_cache[p.x()][p.y()] = LIGHT_TRANSPARENCY_OPEN_AIR;
         } else if( player_character.eye_level() < concealment( loc ) ) {
             // Can we see over the obstacle?
-                dirty |= vision_transparency_cache[loc.x()][loc.y()] != LIGHT_TRANSPARENCY_SOLID;
-                solid_tiles.emplace_back( loc );
+            dirty |= vision_transparency_cache[loc.x()][loc.y()] != LIGHT_TRANSPARENCY_SOLID;
+            solid_tiles.emplace_back( loc );
         }
     }
 

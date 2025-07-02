@@ -909,6 +909,7 @@ void ter_t::load( const JsonObject &jo, const std::string &src )
     optional( jo, was_loaded, "trap", trap_id_str );
     optional( jo, was_loaded, "heat_radiation", heat_radiation );
     optional( jo, was_loaded, "light_emitted", light_emitted );
+    optional( jo, was_loaded, "fall_damage_reduction", fall_damage_reduction, 0 );
     int legacy_floor_bedding_warmth = units::to_legacy_bodypart_temp_delta( floor_bedding_warmth );
     optional( jo, was_loaded, "floor_bedding_warmth", legacy_floor_bedding_warmth, 0 );
     floor_bedding_warmth = units::from_legacy_bodypart_temp_delta( legacy_floor_bedding_warmth );

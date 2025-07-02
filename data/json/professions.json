@@ -4349,7 +4349,7 @@
     "name": { "male": "Pizza Delivery Boy", "female": "Pizza Delivery Girl" },
     "description": "You were delivering the last pizza of the night to the local cryogenics lab when hungry zombies attempted to make a meal out of you.  Fleeing for safety, you find yourself with only your wits and some leftover pizza.  And they didn't even leave a tip!",
     "points": 0,
-        "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
+    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "skills": [ { "level": 3, "name": "driving" }, { "level": 1, "name": "speech" } ],
     "items": {
       "both": {
@@ -6116,7 +6116,7 @@
     "type": "profession",
     "id": "bionic_customer",
     "name": "Commercial Cyborg",
-        "npc_background": "BG_survival_story_TOURIST",
+    "npc_background": "BG_survival_story_TOURIST",
     "description": "You always had to have the latest and best gadgets and gizmos, so is it any wonder that you upgraded your flesh along with your smart phone?",
     "points": 5,
     "CBMs": [ "bio_flashlight", "bio_tools", "bio_ups", "bio_watch", "bio_batteries", "bio_power_storage_mkII" ],
@@ -6240,7 +6240,7 @@
     "type": "profession",
     "id": "bio_sniper",
     "name": "Bionic Sniper",
-        "npc_background": "BG_survival_story_SOLDIER",
+    "npc_background": "BG_survival_story_SOLDIER",
     "description": "A top-secret military program sought to convert you into the perfect sniper.  Your bionics, equipment, and extensive field training enable you to drop targets from implausible distances, even after weeks of total isolation in enemy territory.",
     "points": 7,
     "proficiencies": [
@@ -6312,7 +6312,7 @@
     "type": "profession",
     "id": "bio_soldier",
     "name": "Bio-Operator",
-        "npc_background": "BG_survival_story_SOLDIER",
+    "npc_background": "BG_survival_story_SOLDIER",
     "description": "You are the result of one of the military's last research programs: a prototype cyborg soldier.  The wars they expected you to fight have become obsolete, but war never changes.",
     "points": 6,
     "proficiencies": [
@@ -6442,7 +6442,7 @@
     "type": "profession",
     "id": "drone_op",
     "name": "Drone Operator",
-        "npc_background": "BG_survival_story_WORKER_PUBLIC",
+    "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have a… RC car?",
     "points": 1,
     "CBMs": [ "bio_batteries", "bio_power_storage", "bio_remote" ],
