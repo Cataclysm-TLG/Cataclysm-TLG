@@ -378,11 +378,11 @@
                       { "item": "leather_belt", "prob": 30, "damage": [ 1, 4 ] }
                     ]
                   },
-                  { "item": "suit", "prob": 5, "damage": [ 1, 4 ] },
-                  { "item": "tux", "prob": 5, "damage": [ 1, 4 ] },
-                  { "item": "thawb", "prob": 10, "damage": [ 1, 4 ] },
-                  { "item": "cassock", "prob": 10, "damage": [ 1, 4 ] },
-                  { "item": "haori", "prob": 10, "damage": [ 1, 4 ] }
+                  { "item": "suit", "prob": 4, "damage": [ 1, 4 ] },
+                  { "item": "tux", "prob": 1, "damage": [ 1, 4 ] },
+                  { "item": "thawb", "prob": 1, "damage": [ 1, 4 ] },
+                  { "item": "cassock", "prob": 1, "damage": [ 1, 4 ] },
+                  { "item": "haori", "prob": 1, "damage": [ 1, 4 ] }
                 ]
               },
               { "group": "neckties", "prob": 15, "damage": [ 1, 4 ] },
@@ -418,22 +418,22 @@
                       {
                         "distribution": [ { "item": "stockings", "prob": 50, "damage": [ 1, 4 ] }, { "item": "tights", "prob": 50, "damage": [ 1, 4 ] } ]
                       },
-                      { "item": "garter_belt", "prob": 50, "damage": [ 1, 4 ] }
+                      { "item": "garter_belt", "prob": 5, "damage": [ 1, 4 ] }
                     ]
                   },
-                  { "group": "socks_unisex", "prob": 50, "damage": [ 1, 4 ] }
+                  { "group": "socks_unisex", "prob": 40, "damage": [ 1, 4 ] }
                 ]
               }
             ],
-            "prob": 70
+            "prob": 80
           },
           {
             "collection": [
               {
                 "distribution": [
-                  { "item": "gown", "prob": 10, "damage": [ 1, 4 ] },
-                  { "item": "dress", "prob": 70, "damage": [ 1, 4 ] },
-                  { "item": "sundress", "prob": 50, "damage": [ 1, 4 ] }
+                  { "item": "gown", "prob": 5, "damage": [ 1, 4 ] },
+                  { "item": "dress", "prob": 10, "damage": [ 1, 4 ] },
+                  { "item": "sundress", "prob": 15, "damage": [ 1, 4 ] }
                 ]
               },
               { "group": "dress_shoes", "prob": 30, "damage": [ 1, 4 ] },
@@ -447,7 +447,7 @@
               },
               { "item": "long_glove_white", "prob": 20, "damage": [ 1, 4 ] }
             ],
-            "prob": 20
+            "prob": 9
           },
           {
             "collection": [
@@ -464,7 +464,7 @@
               },
               { "item": "long_glove_white", "prob": 20, "damage": [ 1, 4 ] }
             ],
-            "prob": 10
+            "prob": 1
           }
         ]
       }

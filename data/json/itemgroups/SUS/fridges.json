@@ -530,8 +530,8 @@
       { "prob": 35, "group": "bacon_bag_plastic_2" },
       {
         "distribution": [
-          { "item": "pickle", "prob": 60, "count": [ 1, -1 ], "entry-wrapper": "jar_glass_sealed", "sealed": false },
-          { "item": "pickle", "prob": 40, "count": [ 2, 3 ], "entry-wrapper": "jar_3l_glass_sealed", "sealed": false }
+          { "item": "pickle", "prob": 95, "count": [ 1, -1 ], "entry-wrapper": "jar_glass_sealed", "sealed": false },
+          { "item": "pickle", "prob": 5, "count": [ 2, 3 ], "entry-wrapper": "jar_3l_glass_sealed", "sealed": false }
         ],
         "prob": 55
       },
