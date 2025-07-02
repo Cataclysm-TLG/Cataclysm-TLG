@@ -1054,13 +1054,6 @@ static void smash()
         mech_smash = true;
     }
 
-    const bool allow_floor_bash = debug_mode; // Should later become "true"
-    const std::optional<tripoint> smashp_ = choose_adjacent( _( "Smash where?" ), allow_floor_bash );
-    if( !smashp_ ) {
-        return;
-    }
-    tripoint_bub_ms smashp = tripoint_bub_ms( *smashp_ );
-
     if( !g->warn_player_maybe_anger_local_faction( true ) ) {
         return; // player declined to smash faction's stuff
     }
