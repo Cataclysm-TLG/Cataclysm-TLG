@@ -148,7 +148,7 @@ static const matype_id style_none( "style_none" );
 
 static const mfaction_str_id monfaction_factionless( "factionless" );
 
-static const mtype_id mon_breather( "mon_breather" );
+static const mtype_id mon_cat( "mon_cat" );
 
 static const skill_id skill_chemistry( "chemistry" );
 
@@ -2397,8 +2397,8 @@ void monster::load( const JsonObject &data )
     if( montype.is_valid() ) {
         type = &montype.obj();
     } else { // type is invalid (monster deleted from data - replace with something neutral)
-        type = &mon_breather.obj();
-        DebugLog( D_WARNING, DC_ALL ) << "mtype '" << montype.str() << "' is invalid, set to mon_breather";
+        type = &mon_cat.obj();
+        DebugLog( D_WARNING, DC_ALL ) << "mtype '" << montype.str() << "' is invalid, set to mon_cat";
     }
 
     data.read( "unique_name", unique_name );

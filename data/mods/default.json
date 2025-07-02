@@ -4,6 +4,6 @@
     "id": "dev:default",
     "name": "default",
     "description": "contains all the mods recommended by the developers",
-    "dependencies": [ "tlg", "no_fungal_growth", "No_Rail_Stations" ]
+    "dependencies": [ "tlg", "No_Rail_Stations" ]
   }
 ]
