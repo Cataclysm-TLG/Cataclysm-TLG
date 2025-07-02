@@ -4,17 +4,8 @@
     "id": "no_fungal_growth",
     "name": "Slowdown Fungal Growth",
     "authors": [ "eltank" ],
-    "description": "Removes the exponential growth ability of fungaloids.",
+    "description": "Removes the exponential growth ability of fungaloids.  Deprecated as fungaloids have been removed from the game.",
     "category": "rebalance",
     "dependencies": [ "tlg" ]
-  },
-  {
-    "id": "mon_spore",
-    "copy-from": "mon_spore",
-    "type": "MONSTER",
-    "name": { "str": "spore cloud" },
-    "upgrades": false,
-    "special_attacks": [ [ "DISAPPEAR", 5 ] ],
-    "delete": { "special_attacks": [ "PLANT" ] }
   }
 ]

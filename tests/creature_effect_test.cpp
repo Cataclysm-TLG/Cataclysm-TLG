@@ -21,7 +21,6 @@ static const efftype_id effect_venom_weaken( "venom_weaken" );
 static const flag_id json_flag_INVISIBLE( "INVISIBLE" );
 
 static const mtype_id mon_flaming_eye( "mon_flaming_eye" );
-static const mtype_id mon_fungaloid( "mon_fungaloid" );
 static const mtype_id mon_graboid( "mon_graboid" );
 static const mtype_id mon_hallu_mom( "mon_hallu_mom" );
 static const mtype_id mon_razorclaw( "mon_razorclaw" );
@@ -448,33 +447,6 @@ TEST_CASE( "monster_is_immune_effect", "[creature][monster][effect][immune]" )
 
         THEN( "they can't be downed" ) {
             CHECK( feye.is_immune_effect( effect_downed ) );
-        }
-    }
-
-    WHEN( "monster is not made of flesh or iflesh" ) {
-        // Fungaloid - veggy, has no blood or bodytype
-        monster fungaloid( mon_fungaloid );
-        fungaloid.clear_effects();
-        REQUIRE_FALSE( fungaloid.made_of_any( Creature::cmat_flesh ) );
-        REQUIRE( fungaloid.type->in_species( species_FUNGUS ) );
-        REQUIRE( fungaloid.type->bleed_rate == 0 );
-
-        THEN( "their zero bleed rate makes them immune to bleed" ) {
-            CHECK( fungaloid.is_immune_effect( effect_bleed ) );
-        }
-
-        THEN( "they can't be poisoned" ) {
-            CHECK( fungaloid.is_immune_effect( effect_poison ) );
-            CHECK( fungaloid.is_immune_effect( effect_badpoison ) );
-            CHECK( fungaloid.is_immune_effect( effect_paralyzepoison ) );
-            CHECK( fungaloid.is_immune_effect( effect_venom_dmg ) );
-            CHECK( fungaloid.is_immune_effect( effect_venom_player1 ) );
-            CHECK( fungaloid.is_immune_effect( effect_venom_player2 ) );
-            CHECK( fungaloid.is_immune_effect( effect_venom_weaken ) );
-        }
-
-        THEN( "they can be downed" ) {
-            CHECK_FALSE( fungaloid.is_immune_effect( effect_downed ) );
         }
     }
 

@@ -159,7 +159,6 @@
     "dissect": "dissect_plant_sample_single",
     "upgrades": { "age_grow": 14, "into": "mon_triffid" },
     "special_attacks": [ [ "TRIFFID_GROWTH", 28800 ] ],
-    "fungalize_into": "mon_fungaloid",
     "flags": [ "HEARS", "SMELLS", "HAS_MIND", "NOHEAD", "PARALYZEVENOM" ],
     "armor": { "electric": 2 }
   },
@@ -188,7 +187,6 @@
     "families": [ "prof_intro_biology", "prof_wp_triffid_basic", "prof_wp_triffid_advanced" ],
     "harvest": "triffid_paralytic",
     "dissect": "dissect_plant_sample_single",
-    "fungalize_into": "mon_fungaloid",
     "flags": [ "SEES", "SMELLS", "HAS_MIND", "BASHES", "GROUP_BASH", "NOHEAD", "PARALYZEVENOM" ],
     "armor": { "bash": 10, "cut": 4, "bullet": 3, "electric": 2 }
   },
@@ -218,7 +216,6 @@
     "harvest": "triffid_queen",
     "dissect": "dissect_plant_sample_small",
     "special_attacks": [ [ "GROWPLANTS", 20 ] ],
-    "fungalize_into": "mon_fungaloid",
     "flags": [ "HEARS", "SMELLS", "HAS_MIND", "BASHES", "NOHEAD", "PARALYZEVENOM" ],
     "armor": { "bash": 12, "cut": 8, "bullet": 6, "electric": 4 }
   },
