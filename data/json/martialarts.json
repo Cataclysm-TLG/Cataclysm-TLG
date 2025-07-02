@@ -6,8 +6,6 @@
     "description": "Not a martial art, this is just plain old punching and kicking.",
     "initiate": [ "You decide to not use any martial arts.", "%s enters a generic combat stance." ],
     "priority": 0,
-    "arm_block": 99,
-    "leg_block": 99,
     "allow_all_weapons": true,
     "teachable": false
   },
@@ -18,8 +16,6 @@
     "description": "Not a martial art, setting this style will prevent weapon attacks and force punches (with a free hand) or kicks.",
     "initiate": [ "You force yourself to fight unarmed.", "%s decides to fight unarmed." ],
     "priority": -1,
-    "arm_block": 99,
-    "leg_block": 99,
     "force_unarmed": true,
     "prevent_weapon_blocking": true,
     "teachable": false
