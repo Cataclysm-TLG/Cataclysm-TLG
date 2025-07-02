@@ -2917,6 +2917,7 @@
     "material": [ "cotton" ],
     "weight": "774 g",
     "volume": "1750 ml",
+    "fall_damage_reduction": 1,
     "flags": [ "SLEEP_AID" ],
     "variant_type": "generic",
     "variants": [

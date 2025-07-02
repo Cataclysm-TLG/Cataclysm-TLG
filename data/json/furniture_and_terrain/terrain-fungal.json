@@ -6,6 +6,7 @@
     "description": "This alien plant superficially resembles a blueberry bush, and hangs with large, juicy pink pomes that emit a heady, fruity aroma.",
     "symbol": "#",
     "color": "pink",
+    "fall_damage_reduction": 5,
     "move_cost": 8,
     "coverage": 40,
     "concealment": 40,
@@ -20,6 +21,7 @@
     "description": "Fungus grows thick here, obscuring the ground beneath it.",
     "symbol": ".",
     "color": "light_gray",
+    "fall_damage_reduction": 5,
     "move_cost": 3,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "DIGGABLE", "FUNGUS", "NOCOLLIDE" ],
     "bash": {

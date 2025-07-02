@@ -4383,6 +4383,11 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         }
     }
 
+    if( has_flag( ter_furn_flag::TFLAG_ALARMED, p ) ) {
+        sounds::sound( p, 40, sounds::sound_t::alarm, _( "an alarm go off!" ),
+                       false, "environment", "alarm" );
+    }
+
     if( bash == nullptr || ( bash->destroy_only && !params.destroy ) ) {
         // Nothing bashable here
         if( impassable( p ) ) {
@@ -4815,7 +4820,8 @@ void map::crush( const tripoint_bub_ms &p )
         vp->vehicle().damage( *this, vp->part_index(), rng( 100, 1000 ), damage_bash, false );
     }
 }
-void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj, const bool hit_items, double dispersion )
+void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+                 const bool hit_items, double dispersion )
 {
     // TODO: make bashing better a destroying, worse at penetrating
     std::map<damage_type_id, float> dmg_by_type {};

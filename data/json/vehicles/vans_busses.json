@@ -2029,7 +2029,11 @@
       { "x": -3, "y": -1, "parts": [ "reinforced_windshield#vertical_left", "roof" ] },
       { "x": -3, "y": -1, "parts": [ "plating_steel" ] },
       { "x": -3, "y": 0, "parts": [ "frame#cross", "metal_bench", "roof" ] },
-      { "x": -3, "y": 1, "parts": [ "frame#cross", "aisle#vertical", "mountable_heater", "integrated_cooler", "roof" ] },
+      {
+        "x": -3,
+        "y": 1,
+        "parts": [ "frame#cross", "aisle#vertical", "mountable_heater", "integrated_cooler", "roof" ]
+      },
       { "x": -3, "y": 2, "parts": [ "frame#cross", "aisle#vertical", "roof" ] },
       { "x": -3, "y": 3, "parts": [ "frame#vertical_right" ] },
       { "x": -3, "y": 3, "parts": [ "hddoor#right", "door_lock", "roof" ] },

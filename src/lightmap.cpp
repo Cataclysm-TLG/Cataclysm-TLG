@@ -191,44 +191,51 @@ bool map::build_transparency_cache( const int zlev )
     return true;
 }
 
-bool map::build_vision_transparency_cache( const int zlev )
+bool map::build_vision_transparency_cache( int zlev )
 {
     level_cache &map_cache = get_cache( zlev );
-    auto &transparency_cache = map_cache.transparency_cache;
-    auto &vision_transparency_cache = map_cache.vision_transparency_cache;
-
-    memcpy( &vision_transparency_cache, &transparency_cache, sizeof( transparency_cache ) );
+    cata::mdarray<float, point_bub_ms> &transparency_cache = map_cache.transparency_cache;
+    cata::mdarray<float, point_bub_ms> &vision_transparency_cache = map_cache.vision_transparency_cache;
 
     Character &player_character = get_player_character();
     const tripoint_bub_ms p = player_character.pos_bub();
 
     if( p.z() != zlev ) {
+        // Just copy the transparency cache and be done with it.
+        memcpy( &vision_transparency_cache, &transparency_cache, sizeof( transparency_cache ) );
         return false;
     }
 
     bool dirty = false;
+    std::vector<tripoint_bub_ms> solid_tiles;
     for( const tripoint_bub_ms &loc : points_in_radius( p, 1 ) ) {
         if( loc == p ) {
             // The tile player is standing on should always be visible
             vision_transparency_cache[p.x()][p.y()] = LIGHT_TRANSPARENCY_OPEN_AIR;
         } else if( player_character.eye_level() < concealment( loc ) ) {
             // Can we see over the obstacle?
-            if( vision_transparency_cache[loc.x()][loc.y()] != LIGHT_TRANSPARENCY_SOLID ) {
-                vision_transparency_cache[loc.x()][loc.y()] = LIGHT_TRANSPARENCY_SOLID;
-                dirty = true;
-            }
+            dirty |= vision_transparency_cache[loc.x()][loc.y()] != LIGHT_TRANSPARENCY_SOLID;
+            solid_tiles.emplace_back( loc );
         }
     }
 
     // This segment handles blocking vision through TRANSLUCENT flagged terrain.
     for( const tripoint_bub_ms &loc : points_in_radius( p, MAX_VIEW_DISTANCE ) ) {
-        if( loc == p ) {
-            // The tile player is standing on should always be visible
-            vision_transparency_cache[p.x()][p.y()] = LIGHT_TRANSPARENCY_OPEN_AIR;
-        } else if( map::ter( loc ).obj().has_flag( ter_furn_flag::TFLAG_TRANSLUCENT ) ) {
-            vision_transparency_cache[loc.x()][loc.y()] = LIGHT_TRANSPARENCY_SOLID;
-            dirty = true;
+        if( map::ter( loc ).obj().has_flag( ter_furn_flag::TFLAG_TRANSLUCENT ) && loc != p ) {
+            dirty |= vision_transparency_cache[loc.x()][loc.y()] != LIGHT_TRANSPARENCY_SOLID;
+            solid_tiles.emplace_back( loc );
         }
+    }
+
+    memcpy( &vision_transparency_cache, &transparency_cache, sizeof( transparency_cache ) );
+
+    // The tile player is standing on should always be visible
+    if( inbounds( p ) ) {
+        vision_transparency_cache[p.x()][p.y()] = LIGHT_TRANSPARENCY_OPEN_AIR;
+    }
+
+    for( const tripoint_bub_ms loc : solid_tiles ) {
+        vision_transparency_cache[loc.x()][loc.y()] = LIGHT_TRANSPARENCY_SOLID;
     }
 
     return dirty;

@@ -10423,13 +10423,15 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint &dest_loc,
     const trap &tr = m.tr_at( dest_loc );
     // HACK: Hack for now, later ledge should stop being a trap
     if( tr == tr_ledge ) {
-        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) && !u.has_effect( effect_jumping ) ) {
+        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) &&
+            !u.has_effect( effect_jumping ) ) {
             harmful_stuff.push_back( tr.name() );
             if( harmful_stuff.size() == max ) {
                 return harmful_stuff;
             }
         }
-    } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) && ( !u.has_effect( effect_in_pit ) &&
+    } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest &&
+               !u.has_effect_with_flag( json_flag_LEVITATION ) && ( !u.has_effect( effect_in_pit ) &&
                        trap_there.has_flag( json_flag_PIT ) ) ) {
         harmful_stuff.push_back( tr.name() );
         if( harmful_stuff.size() == max ) {

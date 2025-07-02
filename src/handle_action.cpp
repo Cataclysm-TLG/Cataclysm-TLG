@@ -1103,7 +1103,7 @@ static void smash()
 
     bool should_pulp = false;
     for( const item &maybe_corpse : here.i_at( smashp ) ) {
-        if( is_smashable_corpse( maybe_corpse )  ) {
+        if( is_smashable_corpse( maybe_corpse ) ) {
             if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
                 !player_character.is_immune_field( fd_acid ) ) {
                 if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
