@@ -3526,6 +3526,110 @@ removes morale type, delivered by `morale_id`
 ```
 
 
+
+#### `u_consume_item_sum`, `npc_consume_item_sum`
+Consumes all items you have in your inventory, treating count as weight
+Effect does not validate do player actually has enough items to consume, use `_has_items_sum`
+See examples for more info
+
+| Syntax | Optionality | Value  | Info |
+| ------ | ----------- | ------ | ---- | 
+| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](#variable-object) | runs the effect |
+| "item"  | **mandatory** | string or [variable object](#variable-object) | id of item that should be removed |
+| "amount"  | **mandatory** | int or [variable object](#variable-object) | amount of items or charges that should be removed |
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+##### Examples
+Consume 10 blankets. Effect allows to be consumed any item, so in this case player may have 3 `blanket`, 2 `blanket_fur`, and 5 `electric_blanket`, and effect would consume all of it
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": "blanket", "amount": 10 },
+          { "item": "blanket_fur", "amount": 10 },
+          { "item": "electric_blanket", "amount": 10 }
+        ]
+      }
+    ]
+  },
+```
+Effect is order dependent, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
+
+
+Variable `amount` is also supported. In this case amount would be also treated as the weight;  In the next example, having 10 `blanket`, 10 `blanket_fur` and 10 `electric_blanket` would be treated as covering 100% of requirement, 10 `blanket` delivering 40%, 10 `blanket_fur` delivering another 40%, and 10 `electric_blanket` delivering the last 20%
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": "blanket", "amount": 25 },
+          { "item": "blanket_fur", "amount": 25 },
+          { "item": "electric_blanket", "amount": 50 }
+        ]
+      }
+    ]
+  },
+```
+Because of how variable amount is calculated, it is recommended to put the values with the smallest `amount` on the top;  It would prevent code overshooting, as:
+```c++
+ // example: we have 99 blankets and 1 blanket_fur
+ // json below would result in 99 blankets and 1 blanket_fur consumed
+{ "item": "blanket", "amount": 100 }, { "item": "blanket_fur", "amount": 2 }
+
+// this json, however, would result in 1 blanket_fur and 50 blanket consumed
+{ "item": "blanket_fur", "amount": 2 }, { "item": "blanket", "amount": 100 }
+```
+
+Variables are also supported
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": { "global_val": "foo" }, "amount": { "math": "20 + 2" } }
+        ]
+      }
+    ]
+  },
+```
+
+#### `u_set_fac_relation`, `npc_set_fac_relation`
+Can be used only in `talk_topic`, as the code relies on the NPC you talk with to obtain info about it's faction.
+ 
+ | Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_set_fac_relation" / "npc_set_fac_relation" | **mandatory** | string or [variable object](#variable-object) | Rule to set. See [the factions doc](FACTIONS.md#faction-relations) for a list of rules and what they cover.  |
+| "set_value_to" | optional | boolean | default true; Whether to set, or unset, this rule. | 
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+##### Examples
+Adds the "share public goods" rule 
+```json
+{ "u_set_fac_relation": "share public goods" }
+```
+
+Removes the "kill on sight" rule
+```json
+{ "u_set_fac_relation": "kill on sight", "set_value_to": false }
+```
+
 #### `u_add_faction_trust`
  Your character gains trust with the speaking NPC's faction, which affects which items become available for trading from shopkeepers of that faction. Can be used only in `talk_topic`, as the code relies on the NPC you talk with to obtain info about it's faction
 

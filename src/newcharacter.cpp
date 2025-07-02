@@ -75,12 +75,6 @@ static const std::string flag_CHALLENGE( "CHALLENGE" );
 static const std::string flag_CITY_START( "CITY_START" );
 static const std::string flag_SECRET( "SECRET" );
 
-static const std::string type_hair_color( "hair_color" );
-static const std::string type_hair_style( "hair_style" );
-static const std::string type_skin_tone( "skin_tone" );
-static const std::string type_facial_hair( "facial_hair" );
-static const std::string type_eye_color( "eye_color" );
-
 static const flag_id json_flag_auto_wield( "auto_wield" );
 static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
 
@@ -91,7 +85,6 @@ static const matype_id style_none( "style_none" );
 static const profession_group_id
 profession_group_adult_basic_background( "adult_basic_background" );
 
-static const trait_id trait_FACIAL_HAIR_NONE( "FACIAL_HAIR_NONE" );
 static const trait_id trait_SMELLY( "SMELLY" );
 static const trait_id trait_WEAKSCENT( "WEAKSCENT" );
 static const trait_id trait_XS( "XS" );
@@ -202,7 +195,7 @@ static int stat_point_pool()
 {
     return 4 * 8 + get_option<int>( "INITIAL_STAT_POINTS" );
 }
-static int stat_points_used( const avatar &u )
+static int stat_points_used( const Character &u )
 {
     int used = 0;
     for( int stat : {
@@ -217,7 +210,7 @@ static int trait_point_pool()
 {
     return get_option<int>( "INITIAL_TRAIT_POINTS" );
 }
-static int trait_points_used( const avatar &u )
+static int trait_points_used( const Character &u )
 {
     int used = 0;
     for( trait_id cur_trait : u.get_mutations( true ) ) {
@@ -240,7 +233,7 @@ static int skill_point_pool()
 {
     return get_option<int>( "INITIAL_SKILL_POINTS" );
 }
-static int skill_points_used( const avatar &u )
+static int skill_points_used( const Character &u )
 {
     int scenario = get_scenario()->point_cost();
     int profession_points = u.prof->point_cost();
@@ -261,12 +254,12 @@ static int point_pool_total()
 {
     return stat_point_pool() + trait_point_pool() + skill_point_pool();
 }
-static int points_used_total( const avatar &u )
+static int points_used_total( const Character &u )
 {
     return stat_points_used( u ) + trait_points_used( u ) + skill_points_used( u );
 }
 
-static int has_unspent_points( const avatar &u )
+static int has_unspent_points( const Character &u )
 {
     return points_used_total( u ) < point_pool_total();
 }
@@ -277,7 +270,7 @@ struct multi_pool {
     // The amount of points awailable in a pool minus the points that are borrowed
     // by lower pools plus the points that can be borrowed from higher pools
     const int stat_points_left, trait_points_left, skill_points_left;
-    explicit multi_pool( const avatar &u ):
+    explicit multi_pool( const Character &u ):
         pure_stat_points( stat_point_pool() - stat_points_used( u ) ),
         pure_trait_points( trait_point_pool() - trait_points_used( u ) ),
         pure_skill_points( skill_point_pool() - skill_points_used( u ) ),
@@ -418,11 +411,14 @@ static matype_id choose_ma_style( const character_type type, const std::vector<m
     }
 }
 
-void avatar::randomize( const bool random_scenario, bool play_now )
+void Character::randomize( const bool random_scenario, bool play_now )
 {
     const int max_trait_points = get_option<int>( "MAX_TRAIT_POINTS" );
     // Reset everything to the defaults to have a clean state.
-    *this = avatar();
+    if( is_avatar() ) {
+        *this->as_avatar() = avatar();
+    }
+
     bool gender_selection = one_in( 2 );
     male = gender_selection;
     outfit = gender_selection;
@@ -453,8 +449,7 @@ void avatar::randomize( const bool random_scenario, bool play_now )
 
     const scenario *scenario_from = is_avatar() ? get_scenario() : scenario::generic();
     prof = scenario_from->weighted_random_profession();
-    play_name_suffix = prof->gender_appropriate_name( male );
-
+    zero_all_skills();
     init_age = rng( this->prof->age_lower, this->prof->age_upper );
     starting_city = std::nullopt;
     world_origin = std::nullopt;
@@ -467,6 +462,10 @@ void avatar::randomize( const bool random_scenario, bool play_now )
 
     set_body();
     randomize_hobbies();
+    const trait_id background = prof->pick_background();
+    if( !background.is_empty() ) {
+        set_mutation( background );
+    }
 
     int num_gtraits = 0;
     int num_btraits = 0;
@@ -594,23 +593,17 @@ void avatar::randomize( const bool random_scenario, bool play_now )
 
     // Restart cardio accumulator
     reset_cardio_acc();
-}
 
-void avatar::randomize_cosmetics()
-{
-    randomize_cosmetic_trait( type_hair_color );
-    randomize_cosmetic_trait( type_hair_style );
-    randomize_cosmetic_trait( type_skin_tone );
-    randomize_cosmetic_trait( type_eye_color );
-    //arbitrary 50% chance to add beard to male characters
-    if( male && one_in( 2 ) ) {
-        randomize_cosmetic_trait( type_facial_hair );
-    } else {
-        set_mutation( trait_FACIAL_HAIR_NONE );
+    if( is_npc() ) {
+        as_npc()->randomize_personality();
+        as_npc()->generate_personality_traits();
+        initialize();
+        add_profession_items();
+        as_npc()->catchup_skills();
     }
 }
 
-void avatar::add_profession_items()
+void Character::add_profession_items()
 {
     // Our profession should not be a hobby
     if( prof->is_hobby() ) {
@@ -618,41 +611,109 @@ void avatar::add_profession_items()
     }
 
     std::list<item> prof_items = prof->items( outfit, get_mutations() );
+    std::list<item> try_adding_again;
 
-    for( item &it : prof_items ) {
-        if( it.has_flag( STATIC( flag_id( "WET" ) ) ) ) {
-            it.active = true;
-            it.item_counter = 450; // Give it some time to dry off
-        }
-
-        // TODO: debugmsg if food that isn't a seed is inedible
-        if( it.has_flag( json_flag_no_auto_equip ) ) {
-            it.unset_flag( json_flag_no_auto_equip );
-            inv->push_back( it );
-        } else if( it.has_flag( json_flag_auto_wield ) ) {
-            it.unset_flag( json_flag_auto_wield );
-            if( !has_wield_conflicts( it ) ) {
-                wield( it );
-            } else {
-                inv->push_back( it );
+    auto attempt_add_items = [this]( std::list<item> &prof_items, std::list<item> &failed_to_add ) {
+        for( item &it : prof_items ) {
+            if( it.has_flag( STATIC( flag_id( "WET" ) ) ) ) {
+                it.active = true;
+                it.item_counter = 450; // Give it some time to dry off
             }
-        } else if( it.is_armor() ) {
-            if( can_wear( it ).success() ) {
-                wear_item( it, false, false );
-            } else {
-                inv->push_back( it );
-            }
-        } else {
-            inv->push_back( it );
-        }
 
-        if( it.is_book() ) {
-            items_identified.insert( it.typeId() );
+            item_location success;
+            item *wield_or_wear = nullptr;
+            // TODO: debugmsg if food that isn't a seed is inedible
+            if( it.has_flag( json_flag_no_auto_equip ) ) {
+                it.unset_flag( json_flag_no_auto_equip );
+                success = try_add( it, nullptr, nullptr, false );
+            } else if( it.has_flag( json_flag_auto_wield ) ) {
+                it.unset_flag( json_flag_auto_wield );
+                if( !has_wield_conflicts( it ) ) {
+                    wield( it );
+                    wield_or_wear = &it;
+                    success = item_location( *this, wield_or_wear );
+                } else {
+                    success = try_add( it, nullptr, nullptr, false );
+                }
+            } else if( it.is_armor() ) {
+                if( can_wear( it ).success() ) {
+                    wear_item( it, false, false );
+                    wield_or_wear = &it;
+                    success = item_location( *this, wield_or_wear );
+                } else {
+                    success = try_add( it, nullptr, nullptr, false );
+                }
+            } else {
+                success = try_add( it, nullptr, nullptr, false );
+            }
+
+            if( it.is_book() && this->is_avatar() ) {
+                as_avatar()->identify( it );
+            }
+
+            if( !success ) {
+                failed_to_add.emplace_back( it );
+            }
+        }
+    };
+
+    //storage items may not be added first, so a second attempt is needed
+    attempt_add_items( prof_items, try_adding_again );
+    prof_items.clear();
+    attempt_add_items( try_adding_again, prof_items );
+    //if there's one item left that still can't be added, attempt to wield it
+    if( prof_items.size() == 1 ) {
+        item last_item = prof_items.front();
+        if( !has_wield_conflicts( last_item ) ) {
+            bool success_wield = wield( last_item );
+            if( success_wield ) {
+                prof_items.pop_front();
+            }
         }
     }
-
+    if( !prof_items.empty() ) {
+        debugmsg( "Failed to place %d items in inventory for profession %s", prof_items.size(),
+                  prof->gender_appropriate_name( male ) );
+    }
     recalc_sight_limits();
     calc_encumbrance();
+}
+
+void Character::randomize_hobbies()
+{
+    hobbies.clear();
+    std::vector<profession_id> choices = get_scenario()->permitted_hobbies();
+    choices.erase( std::remove_if( choices.begin(), choices.end(),
+    [this]( const string_id<profession> &hobby ) {
+        return !prof->allows_hobby( hobby );
+    } ), choices.end() );
+    if( choices.empty() ) {
+        debugmsg( "Why would you blacklist all hobbies?" );
+        choices = profession::get_all_hobbies();
+    };
+
+    int random = rng( 0, 5 );
+
+    if( random >= 1 ) {
+        add_random_hobby( choices );
+    }
+    if( random >= 3 ) {
+        add_random_hobby( choices );
+    }
+    if( random >= 5 ) {
+        add_random_hobby( choices );
+    }
+}
+
+void Character::add_random_hobby( std::vector<profession_id> &choices )
+{
+    const profession_id hobby = random_entry_removed( choices );
+    hobbies.insert( &*hobby );
+
+    // Add or remove traits from hobby
+    for( const trait_and_var &cur : hobby->get_locked_traits() ) {
+        toggle_trait( cur.trait );
+    }
 }
 
 static int calculate_cumulative_experience( int level )

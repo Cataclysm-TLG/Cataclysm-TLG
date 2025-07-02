@@ -140,6 +140,7 @@ static const flag_id json_flag_MOP( "MOP" );
 static const flag_id json_flag_NO_GRAB( "NO_GRAB" );
 
 static const gun_mode_id gun_mode_AUTO( "AUTO" );
+static const gun_mode_id gun_mode_BURST( "BURST" );
 
 static const itype_id fuel_type_animal( "animal" );
 static const itype_id itype_radiocontrol( "radiocontrol" );
@@ -873,6 +874,9 @@ static void grab()
             add_msg( _( "You can not grab the %s." ), here.furnname( grabp ) );
             return;
         }
+        if( !g->warn_player_maybe_anger_local_faction( true ) ) {
+            return; // player declined to mess with faction's stuff
+        }
         you.grab( object_type::FURNITURE, grabp - you.pos_bub() );
         if( !here.can_move_furniture( grabp, &you ) ) {
             add_msg( _( "You grab the %s. It feels really heavy." ), here.furnname( grabp ) );
@@ -1001,8 +1005,35 @@ static void haul_toggle()
     get_avatar().toggle_hauling();
 }
 
+static bool is_smashable_corpse( const item &maybe_corpse )
+{
+    return maybe_corpse.is_corpse() && maybe_corpse.damage() < maybe_corpse.max_damage() &&
+           maybe_corpse.can_revive();
+}
+
 static void smash()
 {
+    const bool allow_floor_bash = debug_mode; // Should later become "true"
+    const std::optional<tripoint> smashp_ = choose_adjacent( _( "Smash where?" ), allow_floor_bash );
+    if( !smashp_ ) {
+        return;
+    }
+    tripoint_bub_ms smashp = tripoint_bub_ms( *smashp_ );
+
+    // Little hack: If there's a smashable corpse, it'll always be bashed first. So don't bother warning about
+    // terrain smashing unless it's actually possible.
+    bool smashable_corpse_at_target = false;
+    for( const item &maybe_corpse : get_map().i_at( smashp ) ) {
+        if( is_smashable_corpse( maybe_corpse ) ) {
+            smashable_corpse_at_target = true;
+            break;
+        }
+    }
+
+    if( !smashable_corpse_at_target && !g->warn_player_maybe_anger_local_faction( true ) ) {
+        return; // player declined to smash faction's stuff
+    }
+
     avatar &player_character = get_avatar();
     map &here = get_map();
     if( player_character.is_mounted() ) {
@@ -1024,12 +1055,9 @@ static void smash()
         mech_smash = true;
     }
 
-    const bool allow_floor_bash = debug_mode; // Should later become "true"
-    const std::optional<tripoint> smashp_ = choose_adjacent( _( "Smash where?" ), allow_floor_bash );
-    if( !smashp_ ) {
-        return;
+    if( !g->warn_player_maybe_anger_local_faction( true ) ) {
+        return; // player declined to smash faction's stuff
     }
-    tripoint_bub_ms smashp = tripoint_bub_ms( *smashp_ );
 
     bool smash_floor = false;
     if( smashp.z() != player_character.posz() ) {
@@ -1075,8 +1103,7 @@ static void smash()
 
     bool should_pulp = false;
     for( const item &maybe_corpse : here.i_at( smashp ) ) {
-        if( maybe_corpse.is_corpse() && maybe_corpse.damage() < maybe_corpse.max_damage() &&
-            maybe_corpse.can_revive() ) {
+        if( is_smashable_corpse( maybe_corpse )  ) {
             if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
                 !player_character.is_immune_field( fd_acid ) ) {
                 if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
@@ -1452,6 +1479,10 @@ static void sleep()
         g->quicksave();
     } else if( as_m.ret == 2 || as_m.ret < 0 ) {
         return;
+    }
+
+    if( !g->warn_player_maybe_anger_local_faction( false, true ) ) {
+        return; // player declined to annoy locals by illegally sleeping in their territory
     }
 
     time_duration try_sleep_dur = 24_hours;
@@ -2646,10 +2677,8 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_FIRE_BURST: {
             if( weapon ) {
-                gun_mode_id original_mode = weapon->gun_get_mode_id();
-                if( weapon->gun_set_mode( gun_mode_AUTO ) ) {
+                if( weapon->gun_set_mode( gun_mode_BURST ) || weapon->gun_set_mode( gun_mode_AUTO ) ) {
                     avatar_action::fire_wielded_weapon( player_character );
-                    weapon->gun_set_mode( original_mode );
                 }
             }
             break;
@@ -2747,6 +2776,9 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             if( player_character.in_vehicle ) {
                 add_msg( m_info, _( "You can't construct while in a vehicle." ) );
             } else {
+                if( !g->warn_player_maybe_anger_local_faction( true ) ) {
+                    break; // player declined to mess with faction's stuff
+                }
                 construction_menu( false );
             }
             break;

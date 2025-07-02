@@ -597,7 +597,7 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint & )
     p->use_charges_if_avail( itype_fire, 1 );
     cig.active = true;
     p->inv->add_item( cig, false, true );
-    p->add_msg_if_player( m_neutral, _( "You light a %s." ), cig.tname() );
+    p->add_msg_if_player( m_neutral, _( "You light a %s." ), it->tname() );
 
     // Parting messages
     if( it->typeId() == itype_joint ) {
@@ -4674,6 +4674,9 @@ std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint & )
             p->add_msg_if_player( m_info, _( "You can't chop down that." ) );
         }
         return std::nullopt;
+    }
+    if( p->is_avatar() && !g->warn_player_maybe_anger_local_faction( true ) ) {
+        return std::nullopt; // player declined to anger locals
     }
     int moves = chop_moves( p, it );
     const std::vector<Character *> helpers = p->get_crafting_helpers();
