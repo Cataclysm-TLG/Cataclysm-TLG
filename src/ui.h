@@ -584,6 +584,7 @@ class pointmenu_cb : public uilist_callback
         void select( uilist *menu ) override;
 };
 
+void kill_advanced_inv();
 void temp_hide_advanced_inv();
 
 /**
