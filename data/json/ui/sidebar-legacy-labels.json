@@ -197,7 +197,8 @@
     "label": "Weight Carried",
     "arrange": "minimum_columns",
     "widgets": [ "ll_carry_weight_label", "ll_carry_weight_value" ],
-    "type": "widget"
+    "type": "widget",
+    "flags": [ "W_DISABLED_BY_DEFAULT" ]
   },
   {
     "id": "legacy_labels_sidebar",
