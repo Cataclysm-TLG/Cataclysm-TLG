@@ -51,7 +51,7 @@
       "signs": { "s": { "signage": "Restricted area!  Violators will be shot!", "furniture": "f_sign_warning" } },
       "monster": {
         "S": { "monster": "mon_turret_searchlight" },
-        "T": { "monster": "mon_turret_rifle", "spawn_data": { "ammo": [ { "ammo_id": "556", "qty": [ 200, 800 ] } ] } }
+        "T": { "monster": "mon_turret_rifle", "spawn_data": { "ammo": [ { "ammo_id": "556", "qty": [ 100, 400 ] } ] } }
       }
     }
   },
@@ -424,10 +424,10 @@
         "l": { "item": "bunker_basement_clothing", "chance": 50 },
         "L": [ { "item": "milspec_arsenal_group_only_guns", "chance": 100 } ],
         "r": [
-          { "item": "milspec_arsenal_group_only_ammo", "chance": 100 },
-          { "item": "grenade_can_pa120_grenades_full", "chance": 30 },
-          { "item": "c4_box_part", "chance": 100 },
-          { "item": "arsenal_mics_group", "chance": 100 }
+          { "item": "milspec_arsenal_group_only_ammo", "chance": 5 },
+          { "item": "grenade_can_pa120_grenades_full", "chance": 3 },
+          { "item": "c4_box_part", "chance": 5 },
+          { "item": "arsenal_mics_group", "chance": 5 }
         ]
       },
       "place_graffiti": [ { "text": "Warning!  Automatic security measures engaged due to the lockdown order!", "x": 17, "y": 20 } ],
