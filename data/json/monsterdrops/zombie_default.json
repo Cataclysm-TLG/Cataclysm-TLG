@@ -262,7 +262,12 @@
       {
         "distribution": [
           { "group": "large_bags", "damage": [ 1, 4 ], "contents-group": "default_zombie_items_bags", "prob": 60 },
-          { "group": "small_bags", "damage": [ 1, 4 ], "contents-group": "default_zombie_items_bags_small", "prob": 39 },
+          {
+            "group": "small_bags",
+            "damage": [ 1, 4 ],
+            "contents-group": "default_zombie_items_bags_small",
+            "prob": 39
+          },
           { "group": "bugout_bag", "damage": [ 1, 4 ], "prob": 1 }
         ],
         "prob": 4

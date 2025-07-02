@@ -225,7 +225,6 @@
     "harvest": "exempt",
     "special_attacks": [ [ "PLANT", 100 ] ],
     "death_function": { "message": "The %s disintegrates!", "corpse_type": "NO_CORPSE" },
-    "upgrades": { "age_grow": 21, "into": "mon_fungaloid" },
     "flags": [ "STUMBLES", "FLIES", "POISON", "NO_BREATHE", "NOHEAD", "NOGIB" ]
   },
   {

@@ -697,7 +697,7 @@
       [ "binoculars", 20 ],
       { "group": "crossbow_bolts", "prob": 7 },
       [ "compcrossbow", 2 ],
-      [ "pistlol_crossbow", 2 ],
+      [ "pistol_crossbow", 2 ],
       { "group": "book_gunmags", "prob": 70 },
       [ "mag_fieldrepair", 100 ],
       [ "manual_brawl", 30 ],
