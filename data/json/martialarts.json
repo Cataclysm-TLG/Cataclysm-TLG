@@ -6,7 +6,7 @@
     "description": "Not a martial art, this is just plain old punching and kicking.",
     "initiate": [ "You decide to not use any martial arts.", "%s enters a generic combat stance." ],
     "priority": 0,
-    "arm_block": 1,
+    "arm_block": 99,
     "leg_block": 99,
     "allow_all_weapons": true,
     "teachable": false
@@ -18,7 +18,7 @@
     "description": "Not a martial art, setting this style will prevent weapon attacks and force punches (with a free hand) or kicks.",
     "initiate": [ "You force yourself to fight unarmed.", "%s decides to fight unarmed." ],
     "priority": -1,
-    "arm_block": 1,
+    "arm_block": 99,
     "leg_block": 99,
     "force_unarmed": true,
     "prevent_weapon_blocking": true,
@@ -32,7 +32,7 @@
     "initiate": [ "You enter the hanmi stance.", "%s enters a relaxed combat posture." ],
     "priority": 1,
     "learn_difficulty": 5,
-    "arm_block": 0,
+    "arm_block": 1,
     "static_buffs": [
       {
         "id": "buff_aikido_static1",
@@ -1388,7 +1388,7 @@
     "initiate": [ "You settle into a gentle stance and prepare to defend yourself.", "%s settles into a gentle stance." ],
     "priority": 1,
     "learn_difficulty": 4,
-    "arm_block": 0,
+    "arm_block": 1,
     "static_buffs": [
       {
         "id": "buff_tai_chi_static",
