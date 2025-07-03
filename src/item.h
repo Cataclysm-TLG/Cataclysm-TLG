@@ -501,8 +501,7 @@ class item : public visitable
         void armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                    bool debug, const sub_bodypart_id &sbp = sub_bodypart_id() ) const;
         void pet_armor_protection_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
-        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
-                         bool debug ) const;
+        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
         void animal_armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                 bool debug ) const;
         void armor_fit_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
