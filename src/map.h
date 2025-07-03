@@ -2182,7 +2182,7 @@ class map
          * to get regional translation code to deal with chunks instead of terrain, and then use these
          * chunks everywhere instead of tree terrain tokens. Maybe some day...
          */
-        void add_roofs( const tripoint_rel_sm &grid );
+        void add_tree_tops( const tripoint_rel_sm &grid );
         /**
          * Try to fill funnel based items here. Simulates rain from @p since till now.
          * @param p The location in this map where to fill funnels.

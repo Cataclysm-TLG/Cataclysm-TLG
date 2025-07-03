@@ -8920,9 +8920,9 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
                     }
                 }
 
-                if( zlevels ) {
-                    add_roofs( tripoint_rel_sm( grid.x(), grid.y(), z ) );
-                }
+        if( zlevels ) {
+            add_tree_tops( tripoint_rel_sm( grid.x(), grid.y(), z ) );
+        }
 
                 ++iter;
             } else {
@@ -9369,7 +9369,7 @@ void map::actualize( const tripoint_rel_sm &grid )
     tmpsub->last_touched = calendar::turn;
 }
 
-void map::add_roofs( const tripoint_rel_sm &grid )
+void map::add_tree_tops( const tripoint_rel_sm &grid )
 {
     if( !zlevels ) {
         // Can't add things on the level above when the map doesn't contain that level.
@@ -9378,17 +9378,18 @@ void map::add_roofs( const tripoint_rel_sm &grid )
 
     submap *const sub_here = get_submap_at_grid( grid );
     if( sub_here == nullptr ) {
-        debugmsg( "Tried to add roofs/floors on null submap on %d,%d,%d",
+        debugmsg( "Tried to add tree tops on null submap on %d,%d,%d",
                   grid.x(), grid.y(), grid.z() );
         return;
     }
 
-    bool check_roof = grid.z() > -OVERMAP_DEPTH;
+    bool check_tree_tops = grid.z() > -OVERMAP_DEPTH;
 
-    submap *const sub_below = check_roof ? get_submap_at_grid( grid + tripoint_rel_sm_below ) : nullptr;
+    submap *const sub_below = check_tree_tops ? get_submap_at_grid( grid + tripoint_rel_sm_below ) :
+                              nullptr;
 
-    if( check_roof && sub_below == nullptr ) {
-        debugmsg( "Tried to add roofs to sm at %d,%d,%d, but sm below doesn't exist",
+    if( check_tree_tops && sub_below == nullptr ) {
+        debugmsg( "Tried to add tree tops to sm at %d,%d,%d, but sm below doesn't exist",
                   grid.x(), grid.y(), grid.z() );
         return;
     }
@@ -9400,7 +9401,7 @@ void map::add_roofs( const tripoint_rel_sm &grid )
                 continue;
             }
 
-            if( !check_roof ) {
+            if( !check_tree_tops ) {
                 // Make sure we don't have empty space at lowest z-level
                 sub_here->set_ter( { x, y }, ter_t_rock_floor );
                 continue;
