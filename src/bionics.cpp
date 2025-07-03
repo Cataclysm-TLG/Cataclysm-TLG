@@ -1549,11 +1549,6 @@ static bool attempt_recharge( Character &p, bionic &bio, units::energy &amount )
 
     if( power_cost > 0_kJ ) {
         if( info.has_flag( STATIC( json_character_flag( "BIONIC_ARMOR_INTERFACE" ) ) ) ) {
-            // Don't spend any power on armor interfacing unless we're wearing active powered armor.
-            if( !p.worn.is_wearing_active_power_armor() ) {
-                const units::energy armor_power_cost = 1_kJ;
-                power_cost -= armor_power_cost;
-            }
         }
         if( p.get_power_level() >= power_cost ) {
             // Set the recharging cost and charge the bionic.

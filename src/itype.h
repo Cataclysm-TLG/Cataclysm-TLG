@@ -399,10 +399,6 @@ struct islot_armor {
          */
         int warmth = 0;
         /**
-         * Whether this is a power armor item.
-         */
-        bool power_armor = false;
-        /**
          * Whether this item has ablative pockets
          */
         bool ablative = false;
@@ -493,10 +489,6 @@ struct islot_pet_armor {
      * What animal bodytype can wear this armor
      */
     std::string bodytype = "none";
-    /**
-     * Whether this is a power armor item.
-     */
-    bool power_armor = false;
 
     bool was_loaded = false;
 

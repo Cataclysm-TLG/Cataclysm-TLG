@@ -5320,7 +5320,7 @@ std::optional<int> sew_advanced_actor::use( Character *p, item &it, const tripoi
     }
 
     auto filter = [this]( const item & itm ) {
-        return itm.is_armor() && !itm.is_firearm() && !itm.is_power_armor() && !itm.is_gunmod() &&
+        return itm.is_armor() && !itm.is_firearm() && !itm.is_gunmod() &&
                itm.made_of_any( materials ) && !itm.has_flag( flag_INTEGRATED );
     };
     // note: if !p.is_npc() then p is avatar.

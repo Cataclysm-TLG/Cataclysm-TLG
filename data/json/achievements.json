@@ -353,20 +353,6 @@
     ]
   },
   {
-    "id": "achievement_wear_power_armor",
-    "type": "achievement",
-    "name": "Impenetrable",
-    "requirements": [
-      {
-        "event_statistic": "num_avatar_wears_power_armor_heavy",
-        "is": ">=",
-        "target": 1,
-        "visible": "when_achievement_completed",
-        "description": "Wear a tank suit"
-      }
-    ]
-  },
-  {
     "id": "achievement_reach_lab_finale",
     "type": "achievement",
     "name": "What are they hiding?",
@@ -1930,13 +1916,6 @@
     "hidden_by": [ "achievement_lvl_7_chemistry" ]
   },
   {
-    "id": "achievement_witnessed_portal_storm",
-    "type": "achievement",
-    "name": "Reality is falling apart",
-    "description": "You will be baked, and then there will be cake.",
-    "requirements": [ { "event_statistic": "witnessed_portal_storm", "is": ">=", "target": 1, "description": "Survive a portal storm" } ]
-  },
-  {
     "id": "escaped_the_cataclysm",
     "type": "achievement",
     "name": "True Freedom",
@@ -1947,7 +1926,7 @@
   {
     "id": "achievement_officer_kill",
     "type": "achievement",
-    "name": "Killed the XEDRA officer",
+    "name": "Killed the military officer",
     "manually_given": true,
     "description": "The haunting has finished and I am victorious.",
     "requirements": [  ]

@@ -725,20 +725,6 @@
     "description": { "str": "time worn an item", "str_pl": "times worn an item" }
   },
   {
-    "id": "avatar_wears_power_armor_heavy",
-    "type": "event_transformation",
-    "event_transformation": "avatar_wears_item",
-    "value_constraints": { "itype": { "equals": [ "itype_id", "power_armor_heavy" ] } },
-    "drop_fields": [ "itype" ]
-  },
-  {
-    "id": "num_avatar_wears_power_armor_heavy",
-    "type": "event_statistic",
-    "stat_type": "count",
-    "event_transformation": "avatar_wears_power_armor_heavy",
-    "description": { "str": "time worn tank suit", "str_pl": "times worn tank suit" }
-  },
-  {
     "id": "avatar_eats_item",
     "type": "event_transformation",
     "event_type": "character_eats_item",
@@ -2450,19 +2436,6 @@
     "stat_type": "count",
     "event_transformation": "avatar_reads_book",
     "description": { "str_sp": "read a book" }
-  },
-  {
-    "id": "portal_storm_happened",
-    "type": "event_transformation",
-    "event_type": "u_var_changed",
-    "value_constraints": { "var": { "equals": [ "string", "portal_storm_counter" ] } }
-  },
-  {
-    "id": "witnessed_portal_storm",
-    "type": "event_statistic",
-    "stat_type": "count",
-    "event_transformation": "portal_storm_happened",
-    "description": { "str_sp": "portal storms seen" }
   },
   {
     "id": "avatar_enters_hospital",

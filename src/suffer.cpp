@@ -1291,9 +1291,7 @@ void suffer::from_radiation( Character &you )
     const bool rad_mut_proc = rad_mut > 0 && x_in_y( rad_mut, to_turns<int>( you.in_sleep_state() ?
                               3_hours : 30_minutes ) );
 
-    bool has_helmet = false;
-    const bool power_armored = you.is_wearing_power_armor( &has_helmet );
-    const bool rad_resist = power_armored || you.worn_with_flag( flag_RAD_RESIST );
+    const bool rad_resist = you.worn_with_flag( flag_RAD_RESIST );
 
     if( rad_mut > 0 ) {
         const bool kept_in = you.is_rad_immune() || ( rad_resist && !one_in( 4 ) );
@@ -1901,9 +1899,7 @@ bool Character::irradiate( float rads, bool bypass )
     }
 
     if( rads > 0 ) {
-        bool has_helmet = false;
-        const bool power_armored = is_wearing_power_armor( &has_helmet );
-        const bool rad_resist = power_armored || worn_with_flag( flag_RAD_RESIST );
+        const bool rad_resist = worn_with_flag( flag_RAD_RESIST );
 
         if( is_rad_immune() && !bypass ) {
             // Power armor and some high-tech gear protects completely from radiation

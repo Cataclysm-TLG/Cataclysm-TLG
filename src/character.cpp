@@ -301,10 +301,7 @@ static const itype_id itype_battery( "battery" );
 static const itype_id itype_cookbook_human( "cookbook_human" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
 static const itype_id itype_fire( "fire" );
-static const itype_id itype_foodperson_mask( "foodperson_mask" );
-static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
 static const itype_id itype_null( "null" );
-static const itype_id itype_rm13_armor_on( "rm13_armor_on" );
 
 static const json_character_flag json_flag_ACIDBLOOD( "ACIDBLOOD" );
 static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
@@ -482,7 +479,6 @@ static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
 static const trait_id trait_PER_SLIME( "PER_SLIME" );
 static const trait_id trait_PER_SLIME_OK( "PER_SLIME_OK" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
-static const trait_id trait_PROF_FOODP( "PROF_FOODP" );
 static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
 static const trait_id trait_QUILLS( "QUILLS" );
@@ -2829,7 +2825,7 @@ void Character::recalc_sight_limits()
     if( has_nv_goggles() ) {
         vision_mode_cache.set( NV_GOGGLES );
     }
-    if( has_active_mutation( trait_NIGHTVISION3 ) || is_wearing( itype_rm13_armor_on ) ||
+    if( has_active_mutation( trait_NIGHTVISION3 ) ||
         ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ) {
         vision_mode_cache.set( NIGHTVISION_3 );
     }
@@ -3371,7 +3367,7 @@ std::list<item *> Character::get_dependent_worn_items( const item &it )
     std::list<item *> dependent;
 
     if( is_worn( it ) ) {
-        worn.add_dependent_item( dependent, it );
+        worn.add_dependent_item( dependent );
     }
 
     return dependent;
@@ -4928,9 +4924,7 @@ bool Character::is_deaf() const
 
 bool Character::is_mute() const
 {
-    return has_flag( flag_MUTE ) || worn_with_flag( flag_MUTE ) ||
-           ( has_trait( trait_PROF_FOODP ) && !( is_wearing( itype_foodperson_mask ) ||
-                   is_wearing( itype_foodperson_mask_on ) ) );
+    return has_flag( flag_MUTE ) || worn_with_flag( flag_MUTE );
 }
 
 void Character::on_damage_of_type( const effect_source &source, int adjusted_damage,
@@ -6017,7 +6011,7 @@ bool Character::is_immune_field( const field_type_id &fid ) const
         return is_elec_immune();
     }
     if( ft.has_fire ) {
-        return has_flag( json_flag_HEATSINK ) || is_wearing( itype_rm13_armor_on );
+        return has_flag( json_flag_HEATSINK );
     }
     // If we haven't found immunity yet fall up to the next level
     return Creature::is_immune_field( fid );
@@ -6039,8 +6033,7 @@ bool Character::is_immune_effect( const efftype_id &eff ) const
     } else if( eff == effect_deaf ) {
         return worn_with_flag( flag_DEAF ) || has_flag( json_flag_DEAF ) ||
                worn_with_flag( flag_PARTIAL_DEAF ) ||
-               has_flag( json_flag_IMMUNE_HEARING_DAMAGE ) ||
-               is_wearing( itype_rm13_armor_on ) || is_deaf();
+               has_flag( json_flag_IMMUNE_HEARING_DAMAGE ) || is_deaf();
     } else if( eff->has_flag( flag_MUTE ) ) {
         return has_bionic( bio_voice );
     } else if( eff == effect_corroding ) {
@@ -6070,8 +6063,7 @@ bool Character::is_immune_damage( const damage_type_id &dt ) const
 
 bool Character::is_rad_immune() const
 {
-    bool has_helmet = false;
-    return ( is_wearing_power_armor( &has_helmet ) && has_helmet ) || worn_with_flag( flag_RAD_PROOF );
+    return worn_with_flag( flag_RAD_PROOF );
 }
 
 bool Character::is_knockdown_immune() const
@@ -7583,13 +7575,6 @@ int Character::get_shout_volume() const
     shout_multiplier = enchantment_cache->modify_value( enchant_vals::mod::SHOUT_NOISE_STR_MULT,
                        shout_multiplier );
 
-    // You can't shout without your face
-    if( has_trait( trait_PROF_FOODP ) && !( is_wearing( itype_foodperson_mask ) ||
-                                            is_wearing( itype_foodperson_mask_on ) ) ) {
-        base = 0;
-        shout_multiplier = 0;
-    }
-
     // Masks and such dampen the sound
     // Balanced around whisper for wearing bondage mask
     // and noise ~= 10 (door smashing) for wearing dust mask for character with strength = 8
@@ -7615,13 +7600,6 @@ void Character::shout( std::string msg, bool order )
 {
     int base = 10;
     std::string shout;
-
-    // You can't shout without your face
-    if( has_trait( trait_PROF_FOODP ) && !( is_wearing( itype_foodperson_mask ) ||
-                                            is_wearing( itype_foodperson_mask_on ) ) ) {
-        add_msg_if_player( m_warning, _( "You try to shout, but you have no face!" ) );
-        return;
-    }
 
     // Mutations make shouting louder, they also define the default message
     if( has_trait( trait_SHOUT3 ) ) {
@@ -10353,9 +10331,6 @@ float Character::power_rating() const
     }
     if( get_size() == creature_size::huge ) {
         ret += 1;
-    }
-    if( is_wearing_power_armor( nullptr ) ) {
-        ret = 5; // No mercy!
     }
     return ret;
 }
@@ -13179,11 +13154,7 @@ void Character::process_items()
         const units::energy available_charges = available_ups();
         units::energy ups_used = 0_kJ;
         for( item * const &it : inv_use_ups ) {
-            // For powered armor, an armor-powering bionic should always be preferred over UPS usage.
-            if( it->is_power_armor() && can_interface_armor() && has_power() ) {
-                // Bionic power costs are handled elsewhere
-                continue;
-            } else if( it->active && !it->ammo_sufficient( this ) ) {
+            if( it->active && !it->ammo_sufficient( this ) ) {
                 it->deactivate();
             } else if( available_charges - ups_used >= 1_kJ &&
                        it->ammo_remaining() < it->ammo_capacity( ammo_battery ) ) {

@@ -939,7 +939,7 @@ class Character : public Creature, public visitable
          * Check player capable of taking off an item.
          * @param it Thing to be taken off
          */
-        ret_val<void> can_takeoff( const item &it, const std::list<item> *res = nullptr );
+        ret_val<void> can_takeoff( const item &it );
 
         /** @return Odds for success (pair.first) and gunmod damage (pair.second) */
         std::pair<int, int> gunmod_installation_odds( const item_location &gun, const item &mod ) const;

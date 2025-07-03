@@ -501,8 +501,7 @@ class item : public visitable
         void armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                    bool debug, const sub_bodypart_id &sbp = sub_bodypart_id() ) const;
         void pet_armor_protection_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
-        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
-                         bool debug ) const;
+        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
         void animal_armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                 bool debug ) const;
         void armor_fit_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
@@ -2290,19 +2289,10 @@ class item : public visitable
          */
         int get_base_env_resist_w_filter() const;
         /**
-         * Whether this is a power armor item. Not necessarily the main armor, it could be a helmet
-         * or similar.
-         */
-        bool is_power_armor() const;
-        /**
          * If this is an armor item, return its armor data. You should probably not use this function,
          * use the various functions above (like @ref get_storage) to access armor data directly.
          */
         const islot_armor *find_armor_data() const;
-        /**
-         * Returns true whether this item can be worn only when @param it is worn.
-         */
-        bool is_worn_only_with( const item &it ) const;
         /**
         * Returns true wether this item is worn or not
         */

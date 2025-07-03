@@ -108,7 +108,6 @@
       { "monster": "mon_zombullfrog", "weight": 10 },
       { "monster": "mon_zombie_survivor_elite", "weight": 15 },
       { "monster": "mon_zombie_spitter", "weight": 75 },
-      { "monster": "mon_zombie_armored", "weight": 10 },
       { "monster": "mon_zombie_predator", "weight": 10 },
       { "monster": "mon_zombie_pig_gas", "weight": 5 }
     ]
@@ -136,7 +135,6 @@
       { "monster": "mon_zombie_bio_op", "weight": 50 },
       { "monster": "mon_zombie_survivor_elite", "weight": 50 },
       { "monster": "mon_zombie_brute_ninja", "weight": 20 },
-      { "monster": "mon_zombie_armored", "weight": 10 },
       { "monster": "mon_zombull", "weight": 50 },
       { "monster": "mon_zombie_predator", "weight": 50 },
       { "monster": "mon_zombie_corrosive", "weight": 25 },

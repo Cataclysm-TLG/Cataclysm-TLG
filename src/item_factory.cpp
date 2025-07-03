@@ -3097,7 +3097,6 @@ void islot_armor::load( const JsonObject &jo )
     optional( jo, was_loaded, "warmth", warmth, 0 );
     optional( jo, was_loaded, "non_functional", non_functional, itype_id() );
     optional( jo, was_loaded, "damage_verb", damage_verb );
-    optional( jo, was_loaded, "power_armor", power_armor, false );
     optional( jo, was_loaded, "valid_mods", valid_mods );
 }
 
@@ -3114,7 +3113,6 @@ void islot_pet_armor::load( const JsonObject &jo )
     optional( jo, was_loaded, "pet_bodytype", bodytype );
     optional( jo, was_loaded, "environmental_protection", env_resist, 0 );
     optional( jo, was_loaded, "environmental_protection_with_filter", env_resist_w_filter, 0 );
-    optional( jo, was_loaded, "power_armor", power_armor, false );
 }
 
 void islot_pet_armor::deserialize( const JsonObject &jo )

@@ -404,10 +404,13 @@
     "item": "blazer",
     "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "jacket_leather" ] }, { "present": [ "VEGAN" ], "new": [ "jacket_light" ] } ]
   },
-    {
+  {
     "type": "profession_item_substitutions",
     "item": "suit",
-    "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "jacket_light", "pants", "dress_shirt" ] }, { "present": [ "VEGAN" ], "new": [ "jacket_light", "pants", "dress_shirt" ] } ]
+    "sub": [
+      { "present": [ "WOOLALLERGY" ], "new": [ "jacket_light", "pants", "dress_shirt" ] },
+      { "present": [ "VEGAN" ], "new": [ "jacket_light", "pants", "dress_shirt" ] }
+    ]
   },
   {
     "type": "profession_item_substitutions",
