@@ -8920,10 +8920,6 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
                     }
                 }
 
-        if( zlevels ) {
-            add_tree_tops( tripoint_rel_sm( grid.x(), grid.y(), z ) );
-        }
-
                 ++iter;
             } else {
                 if( veh->tracking_on ) {
@@ -8932,6 +8928,9 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
                 dirty_vehicle_list.erase( veh );
                 iter = veh_vec.erase( iter );
             }
+        }
+        if( zlevels ) {
+            add_tree_tops( tripoint_rel_sm( grid.x(), grid.y(), z ) );
         }
     }
 }

@@ -11978,7 +11978,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     if( !force && movez == 1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_UP, u.pos_bub() ) &&
         !u.is_underwater() ) {
         // Climbing
-        for( const tripoint_bub_ms &p : here.points_in_radius( u.pos_bub(), 2 ) ) {
+        for( const tripoint_bub_ms &p : here.points_in_radius( u.pos_bub(), 1 ) ) {
             if( here.has_flag( ter_furn_flag::TFLAG_CLIMB_ADJACENT, p ) ) {
                 adjacent_climb = true;
             }
@@ -12323,6 +12323,12 @@ void game::vertical_move( int movez, bool force, bool peeking )
     }
 
     u.recoil = MAX_RECOIL;
+    if( m.has_flag( ter_furn_flag::TFLAG_UNSTABLE, u.pos_bub() ) &&
+        !u.is_mounted() && !m.has_vehicle_floor( u.pos_bub() ) ) {
+        u.add_effect( effect_bouldering, 1_turns, true );
+    } else if( u.has_effect( effect_bouldering ) ) {
+        u.remove_effect( effect_bouldering );
+    }
 
     cata_event_dispatch::avatar_moves( old_abs_pos.raw(), u, m );
 }
