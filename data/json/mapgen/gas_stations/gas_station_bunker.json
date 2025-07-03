@@ -363,7 +363,7 @@
       },
       "furniture": {
         "@": "f_generator_broken",
-        "Á": "f_compact_ASRG_containment",
+        "Á": "f_generator_broken",
         "J": "f_console_broken",
         "!": [ "f_machinery_light", "f_machinery_electronic", "f_machinery_heavy" ],
         "g": "f_bed",

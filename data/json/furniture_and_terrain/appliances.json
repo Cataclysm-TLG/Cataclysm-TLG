@@ -916,37 +916,6 @@
   },
   {
     "type": "vehicle_part",
-    "id": "ap_compact_ASRG_containment",
-    "name": { "str": "advanced Stirling radioisotope generator" },
-    "looks_like": "f_compact_ASRG_containment",
-    "categories": [ "energy" ],
-    "color": "green_white",
-    "broken_color": "blue",
-    "location": "structure",
-    "damage_modifier": 80,
-    "durability": 400,
-    "description": "A rather heavy brick of metal housing an ASRG, formerly designed by NASA and repurposed for terrestrial use.  Will provide about 130 W, basically forever as far as you're concerned.  Even though the alpha radiation these run off of isn't very dangerous in case of a breach, this unit appears to be armored to take a beating and is a good deal heavier owing to its composite plating.",
-    "epower": "130 W",
-    "item": "compact_ASRG_containment",
-    "requirements": {
-      "repair": {
-        "skills": [ [ "mechanics", 7 ] ],
-        "time": "60 m",
-        "using": [ [ "repair_welding_standard", 5 ], [ "soldering_standard", 5 ] ]
-      }
-    },
-    "flags": [ "OBSTACLE", "RADIOACTIVE", "COVERED", "APPLIANCE", "PERPETUAL", "REACTOR" ],
-    "breaks_into": [
-      { "item": "scrap", "count": [ 4, 16 ] },
-      { "item": "steel_chunk", "count": [ 1, 6 ] },
-      { "item": "plutonium", "count": [ 0, 2 ] },
-      { "item": "lead", "charges": [ 12, 18 ] }
-    ],
-    "damage_reduction": { "all": 60 },
-    "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
-  },
-  {
-    "type": "vehicle_part",
     "id": "ap_active_backup_generator",
     "name": { "str": "active backup generator" },
     "looks_like": "f_active_backup_generator",

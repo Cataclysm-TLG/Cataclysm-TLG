@@ -4945,7 +4945,7 @@ static int getNearPumpCount( const tripoint_bub_ms &p, fuel_station_fuel_type &f
 {
     int result = 0;
     map &here = get_map();
-    for( const tripoint_bub_ms &tmp : here.points_in_radius( p, 12 ) ) {
+    for( const tripoint_bub_ms &tmp : here.points_in_radius( p, 9 ) ) {
         const ter_id t = here.ter( tmp );
         if( t == ter_t_gas_pump || t == ter_t_gas_pump_a ) {
             result++;
