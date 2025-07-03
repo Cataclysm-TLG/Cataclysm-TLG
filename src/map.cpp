@@ -9230,7 +9230,7 @@ void map::cut_down_tree( tripoint_bub_ms p, point dir )
     // TODO: make line_to type aware.
     std::vector<tripoint_bub_ms> tree = line_to( p, to, rng( 1, 8 ) );
     for( tripoint_bub_ms &elem : tree ) {
-        batter( elem, 300, 5 );
+        batter( elem, rng( 100, 250 ), 4 );
         ter_set( elem, ter_t_trunk );
     }
     ter_set( p, ter_t_stump );

@@ -1830,8 +1830,8 @@
     "connects_to": "WALL",
     "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
     "bash": {
-      "str_min": 60,
-      "str_max": 160,
+      "str_min": 70,
+      "str_max": 250,
       "sound": "crash!",
       "sound_fail": "bash!",
       "ter_set": "t_null",
@@ -2130,8 +2130,8 @@
     "connects_to": "WALL",
     "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "UNCLINGABLE" ],
     "bash": {
-      "str_min": 90,
-      "str_max": 350,
+      "str_min": 70,
+      "str_max": 300,
       "sound": "crash!",
       "sound_fail": "whump!",
       "ter_set": "t_pit_shallow",
