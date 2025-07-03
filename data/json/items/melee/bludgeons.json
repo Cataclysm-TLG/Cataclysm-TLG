@@ -66,7 +66,7 @@
     "name": { "str": "nunchaku" },
     "description": "A weapon originating from East Asia consisting of a pair of short sticks connected by a shorter rope or chain.  The design is a bit unwieldy, but fast and deadly in the right hands.",
     "weight": "800 g",
-    "longest_side": "160 cm",
+    "longest_side": "33 cm",
     "volume": "1030 ml",
     "price": "40 USD",
     "price_postapoc": "10 USD",
