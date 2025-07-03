@@ -912,15 +912,5 @@
     "id": "bolt_steel_target",
     "type": "MIGRATION",
     "replace": "bolt_simple_wood"
-  },
-    {
-    "id": "ap_compact_asrg_containment",
-    "type": "MIGRATION",
-    "replace": "ap_active_backup_generator"
-  },
-  {
-    "id": "f_compact_asrg_containment",
-    "type": "MIGRATION",
-    "replace": "f_generator_broken"
   }
 ]
