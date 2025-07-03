@@ -1200,7 +1200,7 @@ int stumble( Character &u, const item_location &weap )
                   ( weap->weight() / ( str_mod + 13.0_gram ) );
     }
     // 20% chance minimum to stagger_check().
-    if( ( u.has_effect( effect_bouldering ) ) && ( rng( 0, 100 ) <= stumble + 20 ) ) {
+    if( ( u.has_effect( effect_bouldering ) ) && ( rng( 0, 100 ) <= stumble + 10 ) ) {
         u.stagger_check();
     }
     return stumble;

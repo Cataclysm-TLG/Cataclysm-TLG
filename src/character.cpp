@@ -219,6 +219,7 @@ static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_blood_spiders( "blood_spiders" );
 static const efftype_id effect_bloodworms( "bloodworms" );
 static const efftype_id effect_boomered( "boomered" );
+static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_brainworms( "brainworms" );
 static const efftype_id effect_chafing( "chafing" );
 static const efftype_id effect_common_cold( "common_cold" );
@@ -8317,6 +8318,9 @@ void Character::on_hit( Creature *source, bodypart_id bp_hit,
             add_effect( effect_downed, 2_turns, false, 0, true );
         }
     }
+    if( has_effect( effect_bouldering ) && ( rng( 0, 100 ) <= 10 ) ) {
+        stagger_check();
+    }
 
     enchantment_cache->cast_hit_me( *this, source );
 }
@@ -9165,7 +9169,7 @@ void Character::resume_backlog_activity()
 
 void Character::fall_asleep()
 {
-    // Communicate to the player that he is using items on the floor
+    // Communicate to the player that they are using items on the floor
     std::string item_name = is_snuggling();
     if( item_name == "many" ) {
         if( one_in( 15 ) ) {
@@ -11482,7 +11486,6 @@ bool Character::can_sleep()
         // Sleep ain't happening until that meth wears off completely.
         return false;
     }
-
     // Since there's a bit of randomness to falling asleep, we want to
     // prevent exploiting this if can_sleep() gets called over and over.
     // Only actually check if we can fall asleep no more frequently than
