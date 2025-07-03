@@ -47,7 +47,7 @@
     "entries": [
       { "item": "under_armor" },
       { "item": "under_armor_shorts" },
-      { "item": "rm13_armor" },
+      { "item": "suit" },
       { "item": "legrig", "count": 2 },
       { "item": "tacvest" }
     ]

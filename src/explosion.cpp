@@ -84,7 +84,6 @@ static const furn_str_id furn_f_machinery_electronic( "f_machinery_electronic" )
 static const itype_id fuel_type_none( "null" );
 static const itype_id itype_e_handcuffs( "e_handcuffs" );
 static const itype_id itype_mininuke_act( "mininuke_act" );
-static const itype_id itype_rm13_armor_on( "rm13_armor_on" );
 
 static const json_character_flag json_flag_EMP_IMMUNE( "EMP_IMMUNE" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
@@ -609,8 +608,7 @@ void flashbang( const tripoint &p, bool player_immune )
     int dist = rl_dist( player_character.pos(), p );
     map &here = get_map();
     if( dist <= 8 && !player_immune ) {
-        if( !player_character.has_flag( STATIC( json_character_flag( "IMMUNE_HEARING_DAMAGE" ) ) ) &&
-            !player_character.is_wearing( itype_rm13_armor_on ) ) {
+        if( !player_character.has_flag( STATIC( json_character_flag( "IMMUNE_HEARING_DAMAGE" ) ) ) ) {
             player_character.add_effect( effect_deaf, time_duration::from_turns( 40 - dist * 4 ) );
         }
         if( here.sees( player_character.pos(), p, 8 ) ) {
@@ -621,8 +619,7 @@ void flashbang( const tripoint &p, bool player_immune )
                 }
             } else if( player_character.has_trait( trait_PER_SLIME_OK ) ) {
                 flash_mod = 8; // Just retract those and extrude fresh eyes
-            } else if( player_character.has_flag( json_flag_GLARE_RESIST ) ||
-                       player_character.is_wearing( itype_rm13_armor_on ) ) {
+            } else if( player_character.has_flag( json_flag_GLARE_RESIST ) ) {
                 flash_mod = 6;
             } else if( player_character.worn_with_flag( STATIC( flag_id( "BLIND" ) ) ) ||
                        player_character.worn_with_flag( STATIC( flag_id( "FLASH_PROTECTION" ) ) ) ) {

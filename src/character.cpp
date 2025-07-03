@@ -13179,11 +13179,7 @@ void Character::process_items()
         const units::energy available_charges = available_ups();
         units::energy ups_used = 0_kJ;
         for( item * const &it : inv_use_ups ) {
-            // For powered armor, an armor-powering bionic should always be preferred over UPS usage.
-            if( it->is_power_armor() && can_interface_armor() && has_power() ) {
-                // Bionic power costs are handled elsewhere
-                continue;
-            } else if( it->active && !it->ammo_sufficient( this ) ) {
+            if( it->active && !it->ammo_sufficient( this ) ) {
                 it->deactivate();
             } else if( available_charges - ups_used >= 1_kJ &&
                        it->ammo_remaining() < it->ammo_capacity( ammo_battery ) ) {

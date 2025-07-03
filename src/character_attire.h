@@ -153,9 +153,6 @@ class outfit
         std::map<bodypart_id, int> warmth( const Character &guy ) const;
         int get_env_resist( bodypart_id bp ) const;
         int sum_filthy_cover( bodypart_id bp ) const;
-        ret_val<void> power_armor_conflicts( const item &clothing ) const;
-        bool is_wearing_power_armor( bool *has_helmet = nullptr ) const;
-        bool is_wearing_active_power_armor() const;
         bool is_wearing_active_optcloak() const;
         ret_val<void> only_one_conflicts( const item &clothing ) const;
         bool one_per_layer_change_side( item &it, const Character &guy ) const;

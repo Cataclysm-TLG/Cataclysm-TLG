@@ -1,49 +1,5 @@
 [
   {
-    "id": "power_armor_sets",
-    "type": "item_group",
-    "//": "This group is for matched power armor sets and combat armor for end game reward locations.",
-    "subtype": "collection",
-    "entries": [
-      {
-        "distribution": [
-          {
-            "collection": [
-              { "item": "power_armor_frame" },
-              { "item": "power_armor_generator" },
-              { "item": "power_armor_basic" },
-              { "item": "power_armor_helmet_basic" }
-            ],
-            "prob": 30
-          },
-          {
-            "collection": [
-              { "item": "power_armor_frame" },
-              { "item": "power_armor_generator" },
-              { "item": "power_armor_heavy" },
-              { "item": "power_armor_helmet_heavy" }
-            ],
-            "prob": 10
-          },
-          {
-            "collection": [
-              { "item": "power_armor_frame" },
-              { "item": "power_armor_generator" },
-              { "item": "power_armor_helmet_light" },
-              { "item": "power_armor_light" }
-            ],
-            "prob": 55
-          },
-          {
-            "collection": [ { "item": "rm13_armor" }, { "item": "heavy_atomic_battery_cell", "charges": 10000 } ],
-            "prob": 5
-          }
-        ],
-        "prob": 100
-      }
-    ]
-  },
-  {
     "id": "UPS_power",
     "type": "item_group",
     "//": "This group is for UPS spawns.",

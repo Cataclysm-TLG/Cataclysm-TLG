@@ -155,7 +155,7 @@ std::string mods( item const &it, unsigned int /* quantity */,
     if( it.is_armor() && it.has_clothing_mod() ) {
         amt++;
     }
-    if( ( ( it.is_gun() || it.is_tool() || it.is_magazine() ) && !it.is_power_armor() ) ||
+    if( ( ( it.is_gun() || it.is_tool() || it.is_magazine() ) ) ||
         it.get_contents().has_additional_pockets() ) {
 
         for( const item *mod : it.is_gun() ? it.gunmods() : it.toolmods() ) {

@@ -183,7 +183,6 @@ static const itype_id itype_joint_roach( "joint_roach" );
 static const itype_id itype_null( "null" );
 static const itype_id itype_power_cord( "power_cord" );
 static const itype_id itype_rad_badge( "rad_badge" );
-static const itype_id itype_rm13_armor( "rm13_armor" );
 static const itype_id itype_stock_none( "stock_none" );
 static const itype_id itype_tuned_mechanism( "tuned_mechanism" );
 static const itype_id itype_water( "water" );
@@ -1232,10 +1231,6 @@ bool item::has_noisy_pockets() const
     return t ? t->noisy : false;
 }
 
-bool item::is_worn_only_with( const item &it ) const
-{
-    return is_power_armor() && it.is_power_armor() && it.covers( bodypart_id( "torso" ) );
-}
 bool item::is_worn_by_player() const
 {
     return get_player_character().is_worn( *this );
@@ -4136,47 +4131,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     insert_separation_line( info );
 
-    if( covers_anything ) {
-
-        if( is_power_armor() || type->get_id() == itype_rm13_armor ) {
-            item tmp = *this;
-
-            //no need to clutter the ui with inactive versions when the armor is already active
-            if( !( active || ( type->tool && type->tool->power_draw > 0_W ) ) ) {
-                bool print_prot = true;
-                if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
-                    print_prot = !tmp.armor_full_protection_info( info, parts );
-                }
-                if( print_prot ) {
-                    tmp.armor_protection_info( info, parts, batch, debug );
-                }
-                armor_protect_dmg_info( tmp.damage(), info );
-
-                insert_separation_line( info );
-                info.emplace_back( "ARMOR", _( "<bold>When active</bold>:" ) );
-                tmp = tmp.convert( itype_id( tmp.typeId().str() + "_on" ) );
-            }
-
-            bool print_prot = true;
-            if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
-                print_prot = !tmp.armor_full_protection_info( info, parts );
-            }
-            if( print_prot ) {
-                tmp.armor_protection_info( info, parts, batch, debug );
-            }
-            armor_protect_dmg_info( tmp.damage(), info );
-        } else {
-            bool print_prot = true;
-            if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
-                print_prot = !armor_full_protection_info( info, parts );
-            }
-            if( print_prot ) {
-                armor_protection_info( info, parts, batch, debug );
-            }
-            armor_protect_dmg_info( damage(), info );
-        }
-    }
-
     // Whatever the last entry was, we want a newline at this point
     info.back().bNewLine = true;
 
@@ -4357,24 +4311,7 @@ void item::armor_fit_info( std::vector<iteminfo> &info, const iteminfo_query *pa
                            _( "* This item can be worn on <info>either side</info> of "
                               "the body." ) );
     }
-    if( is_power_armor() && parts->test( iteminfo_parts::DESCRIPTION_FLAGS_POWERARMOR ) ) {
-        info.emplace_back( "DESCRIPTION",
-                           _( "* This gear is a part of power armor." ) );
-        if( parts->test( iteminfo_parts::DESCRIPTION_FLAGS_POWERARMOR_RADIATIONHINT ) ) {
-            if( covers( bodypart_id( "head" ) ) ) {
-                info.emplace_back( "DESCRIPTION",
-                                   _( "* When worn with a power armor suit, it will "
-                                      "<good>fully protect</good> you from "
-                                      "<info>radiation</info>." ) );
-            } else {
-                info.emplace_back( "DESCRIPTION",
-                                   _( "* When worn with a power armor helmet, it will "
-                                      "<good>fully protect</good> you from "
-                                      "<info>radiation</info>." ) );
-            }
-        }
-    }
-
+    
     if( typeId() == itype_rad_badge && parts->test( iteminfo_parts::DESCRIPTION_IRRADIATION ) ) {
         info.emplace_back( "DESCRIPTION",
                            string_format( _( "* The film strip on the badge is %s." ),
@@ -7895,14 +7832,6 @@ int item::get_base_env_resist_w_filter() const
     return t->avg_env_resist_w_filter();
 }
 
-bool item::is_power_armor() const
-{
-    const islot_armor *t = find_armor_data();
-    if( t == nullptr ) {
-        return is_pet_armor() ? type->pet_armor->power_armor : false;
-    }
-    return t->power_armor;
-}
 
 int item::get_avg_encumber( const Character &p, encumber_flags flags ) const
 {
@@ -8968,7 +8897,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, const bodypar
         }
     } else {
         // Fixed 0.5% chance of chip dmg, even if the armor blocked everything. Sturdy items and power armors never take chip damage.
-        if( has_flag( flag_STURDY ) || is_power_armor() || !one_in( 200 ) ) {
+        if( has_flag( flag_STURDY ) || !one_in( 200 ) ) {
             return armor_status::UNDAMAGED;
         }
     }
@@ -14034,11 +13963,6 @@ bool item::process_wet( Character *carrier, const tripoint & /*pos*/ )
 
 bool item::process_tool( Character *carrier, const tripoint &pos )
 {
-    // FIXME: remove this once power armors don't need to be TOOL_ARMOR anymore
-    if( is_power_armor() && carrier && carrier->can_interface_armor() && carrier->has_power() ) {
-        return false;
-    }
-
     // if insufficient available charges shutdown the tool
     if( ( type->tool->turns_per_charge > 0 || type->tool->power_draw > 0_W ) &&
         ammo_remaining( carrier, true ) == 0 ) {

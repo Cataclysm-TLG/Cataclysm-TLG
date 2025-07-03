@@ -582,7 +582,7 @@
         ],
         "q": [ { "item": "adderall", "amount": [ 2, 5 ] } ],
         "E": [ { "item": "television", "amount": 1 } ],
-        "R": [ { "item": "rm13_armor", "amount": 1 }, { "item": "id_LIXA_mil", "amount": 1 } ],
+        "R": [ { "item": "id_LIXA_mil", "amount": 1 } ],
         "O": [ { "item": "phase_immersion_suit", "amount": 1 } ]
       },
       "place_item": [
