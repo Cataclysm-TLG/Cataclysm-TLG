@@ -188,7 +188,7 @@ class outfit
         body_part_set exclusive_flag_coverage( body_part_set bps, const flag_id &flag ) const;
         bool check_item_encumbrance_flag( bool update_required );
         // creates a list of items dependent upon @it
-        void add_dependent_item( std::list<item *> &dependent, const item &it );
+        void add_dependent_item( std::list<item *> &dependent );
         std::list<item> remove_worn_items_with( const std::function<bool( item & )> &filter,
                                                 Character &guy );
         bool takeoff( item_location loc, std::list<item> *res, Character &guy );

@@ -2294,10 +2294,6 @@ class item : public visitable
          */
         const islot_armor *find_armor_data() const;
         /**
-         * Returns true whether this item can be worn only when @param it is worn.
-         */
-        bool is_worn_only_with( const item &it ) const;
-        /**
         * Returns true wether this item is worn or not
         */
         bool is_worn_by_player() const;

@@ -4310,7 +4310,7 @@ void item::armor_fit_info( std::vector<iteminfo> &info, const iteminfo_query *pa
                            _( "* This item can be worn on <info>either side</info> of "
                               "the body." ) );
     }
-    
+
     if( typeId() == itype_rad_badge && parts->test( iteminfo_parts::DESCRIPTION_IRRADIATION ) ) {
         info.emplace_back( "DESCRIPTION",
                            string_format( _( "* The film strip on the badge is %s." ),

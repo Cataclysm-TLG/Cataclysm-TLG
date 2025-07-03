@@ -1709,19 +1709,16 @@ std::list<item> outfit::use_amount( const itype_id &it, int quantity,
     return used;
 }
 
-void outfit::add_dependent_item( std::list<item *> &dependent, const item &it )
+void outfit::add_dependent_item( std::list<item *> &dependent )
 {
     // Adds dependent worn items recursively
     for( item &wit : worn ) {
-        if( &wit == &it || !wit.is_worn_only_with( it ) ) {
-            continue;
-        }
         const auto iter = std::find_if( dependent.begin(), dependent.end(),
         [&wit]( const item * dit ) {
             return &wit == dit;
         } );
         if( iter == dependent.end() ) { // Not in the list yet
-            add_dependent_item( dependent, wit );
+            add_dependent_item( dependent );
             dependent.push_back( &wit );
         }
     }
