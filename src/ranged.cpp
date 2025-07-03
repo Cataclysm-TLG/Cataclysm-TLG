@@ -1208,12 +1208,14 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots, item &gun, it
     }
 
     // Practice the base gun skill proportionally to number of hits, but always by one.
-    if( !gun.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) ) {
+    if( !gun.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) || get_skill_level( skill_gun ) < 2 ) {
         practice( skill_gun, ( hits + 1 ) * 5 );
     }
     // launchers train weapon skill for both hits and misses.
     int practice_units = gun_skill == skill_launcher ? curshot : hits;
-    practice( gun_skill, ( practice_units + 1 ) * 5 );
+    if( !gun.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) || get_skill_level( gun_skill ) < 1 ) {
+        practice( gun_skill, ( practice_units + 1 ) * 5 );
+    }
 
     if( !gun.is_gun() ) {
         // If we lose our gun as a side effect of firing it, skip the rest of the function.
