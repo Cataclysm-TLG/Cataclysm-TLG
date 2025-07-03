@@ -1948,38 +1948,6 @@
   },
   {
     "type": "vehicle_part",
-    "id": "compact_ASRG_containment",
-    "name": { "str": "advanced Stirling radioisotope generator" },
-    "looks_like": "f_compact_ASRG_containment",
-    "categories": [ "energy" ],
-    "color": "green_white",
-    "broken_color": "blue",
-    "damage_modifier": 80,
-    "durability": 400,
-    "description": "A military ASRG covered in heavy plating.  Provides constant albeit low power to your car.",
-    "//": "40 cm of weld per damage quadrant",
-    "epower": "130 W",
-    "location": "center",
-    "item": "compact_ASRG_containment",
-    "requirements": {
-      "repair": {
-        "skills": [ [ "mechanics", 5 ] ],
-        "time": "25 m",
-        "using": [ [ "repair_welding_standard", 4 ], [ "soldering_standard", 5 ] ]
-      }
-    },
-    "flags": [ "OBSTACLE", "RADIOACTIVE", "COVERED", "PERPETUAL", "REACTOR" ],
-    "breaks_into": [
-      { "item": "scrap", "charges": [ 4, 16 ] },
-      { "item": "steel_chunk", "count": [ 1, 6 ] },
-      { "item": "plutonium", "count": [ 0, 2 ] },
-      { "item": "lead", "charges": [ 12, 18 ] }
-    ],
-    "damage_reduction": { "all": 58 },
-    "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
-  },
-  {
-    "type": "vehicle_part",
     "id": "water_faucet",
     "name": { "str": "water faucet" },
     "looks_like": "f_sink",

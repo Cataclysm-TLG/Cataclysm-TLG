@@ -1772,11 +1772,6 @@
   },
   {
     "type": "construction_group",
-    "id": "place_asrg_containment",
-    "name": "Place ASRG"
-  },
-  {
-    "type": "construction_group",
     "id": "place_active_backup_generator",
     "name": "Place backup generator"
   },
