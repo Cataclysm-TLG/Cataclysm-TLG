@@ -362,7 +362,7 @@ class armor_inventory_preset: public inventory_selector_preset
             }, _( "WARMTH" ) );
 
             for( const damage_type &dt : damage_type::get_all() ) {
-                if( dt.no_resist ) {
+                if( dt.no_resist || dt.env ) {
                     continue;
                 }
                 const damage_type_id &dtid = dt.id;
