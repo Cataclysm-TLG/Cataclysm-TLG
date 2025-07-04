@@ -3880,7 +3880,8 @@ static bool operator<( const armor_encumb_data &lhs, const armor_encumb_data &rh
     return lhs.encumb < rhs.encumb;
 }
 
-void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const
+void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
+                       bool debug ) const
 {
     if( !is_armor() ) {
         return;
@@ -4129,6 +4130,19 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts 
     }
 
     insert_separation_line( info );
+    
+    
+    if( covers_anything ) {
+        bool print_prot = true;
+        if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
+            print_prot = !armor_full_protection_info( info, parts );
+        }
+        if( print_prot ) {
+            armor_protection_info( info, parts, batch, debug );
+        }
+        armor_protect_dmg_info( damage(), info );
+    }
+
 
     // Whatever the last entry was, we want a newline at this point
     info.back().bNewLine = true;
@@ -5978,7 +5992,7 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
             }
 
             gunmod_info( info, parts, batch, debug );
-            armor_info( info, parts );
+            armor_info( info, parts, batch, debug );
             animal_armor_info( info, parts, batch, debug );
             book_info( info, parts, batch, debug );
             battery_info( info, parts, batch, debug );
