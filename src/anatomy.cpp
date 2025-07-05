@@ -217,7 +217,10 @@ bodypart_id anatomy::select_body_part( const Creature *you, int min_hit, int max
                                        bool can_attack_high,
                                        int hit_roll ) const
 {
-
+    if( you->is_dead_state() ) {
+        add_msg_debug( debugmode::DF_ANATOMY_BP, "Creature is dead; skipping body part selection." );
+        return bodypart_str_id::NULL_ID().id();
+    }
     weighted_float_list<bodypart_id> hit_weights;
     for( const bodypart_id &bp : cached_bps ) {
         float weight = bp->hit_size;
