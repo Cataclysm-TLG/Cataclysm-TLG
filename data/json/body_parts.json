@@ -1171,6 +1171,7 @@
     "side": 2,
     "opposite": "hand_wrist_l",
     "name_multiple": "wrists",
+    "similar_bodyparts": [ "hand_webbed_wrist_r" ],
     "name": "right wrist"
   },
   {
@@ -1180,6 +1181,7 @@
     "parent": "hand_r",
     "side": 2,
     "opposite": "hand_palm_l",
+    "similar_bodyparts": [ "hand_webbed_palm_r" ],
     "name_multiple": "palms",
     "name": "right palm"
   },
@@ -1190,6 +1192,7 @@
     "parent": "hand_r",
     "side": 2,
     "opposite": "hand_back_l",
+    "similar_bodyparts": [ "hand_webbed_back_r" ],
     "name_multiple": "back of hands",
     "name": "right back of hand"
   },
@@ -1200,6 +1203,7 @@
     "parent": "hand_r",
     "side": 2,
     "opposite": "hand_fingers_l",
+    "similar_bodyparts": [ "hand_webbed_fingers_r" ],
     "name_multiple": "fingers",
     "name": "right fingers"
   },
@@ -1210,6 +1214,7 @@
     "parent": "hand_l",
     "side": 1,
     "opposite": "hand_wrist_r",
+    "similar_bodyparts": [ "hand_webbed_wrist_l" ],
     "name_multiple": "wrists",
     "name": "left wrist"
   },
@@ -1220,6 +1225,7 @@
     "parent": "hand_l",
     "side": 1,
     "opposite": "hand_palm_r",
+    "similar_bodyparts": [ "hand_webbed_palm_l" ],
     "name_multiple": "palms",
     "name": "left palm"
   },
@@ -1231,6 +1237,7 @@
     "side": 1,
     "opposite": "hand_back_r",
     "name_multiple": "back of hands",
+    "similar_bodyparts": [ "hand_webbed_back_l" ],
     "name": "left back of hand"
   },
   {
@@ -1240,6 +1247,7 @@
     "parent": "hand_l",
     "side": 1,
     "opposite": "hand_fingers_r",
+    "similar_bodyparts": [ "hand_webbed_fingers_l" ],
     "name_multiple": "fingers",
     "name": "left fingers"
   },

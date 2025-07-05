@@ -1033,11 +1033,24 @@ std::vector<sub_bodypart_id> item::get_covered_sub_body_parts() const
 std::vector<sub_bodypart_id> item::get_covered_sub_body_parts( const side s ) const
 {
     std::vector<sub_bodypart_id> res;
+    std::unordered_set<sub_bodypart_id> seen;
+
     iterate_covered_sub_body_parts_internal( s, [&]( const sub_bodypart_id & bp ) {
-        res.push_back( bp );
+        if( seen.insert( bp ).second ) {
+            res.push_back( bp );
+        }
+
+        for( const sub_bodypart_str_id &similar : bp->similar_bodyparts ) {
+            sub_bodypart_id similar_id = similar.id();
+            if( seen.insert( similar_id ).second ) {
+                res.push_back( similar_id );
+            }
+        }
     } );
+
     return res;
 }
+
 
 body_part_set item::get_covered_body_parts() const
 {
@@ -1047,9 +1060,15 @@ body_part_set item::get_covered_body_parts() const
 body_part_set item::get_covered_body_parts( const side s ) const
 {
     body_part_set res;
+
     iterate_covered_body_parts_internal( s, [&]( const bodypart_str_id & bp ) {
         res.set( bp );
+
+        for( const bodypart_str_id &similar : bp->similar_bodyparts ) {
+            res.set( similar );
+        }
     } );
+
     return res;
 }
 
@@ -3580,7 +3599,7 @@ static bool armor_encumb_header_info( const item &it, std::vector<iteminfo> &inf
 }
 
 bool item::armor_full_protection_info( std::vector<iteminfo> &info,
-                                       const iteminfo_query *parts ) const
+                                       const iteminfo_query *parts, const Character &you ) const
 {
     bool divider_needed = false;
     const std::string space = "  ";
@@ -3590,17 +3609,34 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
         if( t->data.empty() ) {
             return ret;
         }
+        std::set<sub_bodypart_id> character_subparts;
+        for( const bodypart_id &bp : you.get_all_body_parts() ) {
+            for( const sub_bodypart_str_id &sbp : bp->sub_parts ) {
+                character_subparts.insert( sbp.id() );
+            }
+        }
 
         for( const armor_portion_data &p : t->sub_data ) {
             if( divider_needed ) {
                 insert_separation_line( info );
             }
 
-            std::vector<sub_bodypart_id> covered( p.sub_coverage.size() );
-            std::transform( p.sub_coverage.begin(), p.sub_coverage.end(),
-            covered.begin(), []( sub_bodypart_str_id a ) {
-                return a.id();
-            } );
+            std::vector<sub_bodypart_id> covered;
+            for( const sub_bodypart_str_id &sbp_str : p.sub_coverage ) {
+                sub_bodypart_id sid = sbp_str.id();
+                if( character_subparts.count( sid ) > 0 &&
+                    std::find( covered.begin(), covered.end(), sid ) == covered.end() ) {
+                    covered.push_back( sid );
+                }
+                for( const sub_bodypart_str_id &similar : sbp_str->similar_bodyparts ) {
+                    sub_bodypart_id similar_id = similar.id();
+                    if( character_subparts.count( similar_id ) > 0 &&
+                        std::find( covered.begin(), covered.end(), similar_id ) == covered.end() ) {
+                        covered.push_back( similar_id );
+                    }
+                }
+            }
+
             std::set<translation, localized_comparator> to_print = body_part_type::consolidate( covered );
             std::string coverage = _( "<bold>Protection for</bold>:" );
             for( const translation &entry : to_print ) {
@@ -3881,7 +3917,7 @@ static bool operator<( const armor_encumb_data &lhs, const armor_encumb_data &rh
 }
 
 void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
-                       bool debug ) const
+                       bool debug, const Character &you ) const
 {
     if( !is_armor() ) {
         return;
@@ -3891,7 +3927,6 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     body_part_set covered_parts = get_covered_body_parts();
     // Remove any parts from the list which we do not have.
     // TODO: Maybe parts we don't have could be displayed another way?
-    const Character &you = get_player_character();
     std::vector<bodypart_str_id> to_reset;
     for( const bodypart_str_id &bp : covered_parts ) {
         if( !you.has_part( bp ) ) {
@@ -3908,8 +3943,15 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 
     if( parts->test( iteminfo_parts::ARMOR_BODYPARTS ) ) {
         insert_separation_line( info );
-        std::vector<sub_bodypart_id> covered = get_covered_sub_body_parts();
-        // WEBBED HANDS: this is showing the wrong part
+        std::vector<sub_bodypart_id> covered;
+        const Character &you = get_player_character();
+
+        for( const sub_bodypart_id sbp : get_covered_sub_body_parts() ) {
+            if( you.has_part( sbp->parent ) ) {
+                covered.push_back( sbp );
+            }
+        }
+
         std::string coverage = _( "<bold>Covers</bold>:" );
 
         if( !covered.empty() ) {
@@ -4130,12 +4172,12 @@ void item::armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 
     insert_separation_line( info );
-    
-    
+
+
     if( covers_anything ) {
         bool print_prot = true;
         if( parts->test( iteminfo_parts::ARMOR_PROTECTION ) ) {
-            print_prot = !armor_full_protection_info( info, parts );
+            print_prot = !armor_full_protection_info( info, parts, you );
         }
         if( print_prot ) {
             armor_protection_info( info, parts, batch, debug );
@@ -5991,8 +6033,10 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
                 gun_info( gun, info, parts, batch, debug );
             }
 
+            Character &you = get_player_character();
+
             gunmod_info( info, parts, batch, debug );
-            armor_info( info, parts, batch, debug );
+            armor_info( info, parts, batch, debug, you );
             animal_armor_info( info, parts, batch, debug );
             book_info( info, parts, batch, debug );
             battery_info( info, parts, batch, debug );
@@ -8189,16 +8233,23 @@ const armor_portion_data *item::portion_for_bodypart( const bodypart_id &bodypar
     return nullptr;
 }
 
+
 const armor_portion_data *item::portion_for_bodypart( const sub_bodypart_id &bodypart ) const
 {
     const islot_armor *t = find_armor_data();
     if( !t ) {
         return nullptr;
     }
+    const sub_bodypart_str_id &bodypart_sid = bodypart.id();
     for( const armor_portion_data &entry : t->sub_data ) {
-        for( const sub_bodypart_str_id &tmp : entry.sub_coverage ) {
-            const sub_bodypart_id &subpart = tmp;
-            if( subpart == bodypart ) {
+        if( entry.sub_coverage.count( bodypart_sid ) > 0 ) {
+            return &entry;
+        }
+    }
+    // Try similar sub-bodyparts
+    for( const sub_bodypart_str_id &similar : bodypart->similar_bodyparts ) {
+        for( const armor_portion_data &entry : t->sub_data ) {
+            if( entry.sub_coverage.count( similar ) > 0 ) {
                 return &entry;
             }
         }

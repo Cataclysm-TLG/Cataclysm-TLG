@@ -262,7 +262,6 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
 bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &bp,
                               const sub_bodypart_id &sbp, int roll ) const
 {
-
     // if the core armor is missed then exit
     if( roll > armor.get_coverage( sbp ) ) {
         return false;
@@ -291,6 +290,9 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
 
 bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &bp, int roll ) const
 {
+    if( !has_part( bp ) ) {
+        return false;
+    }
 
     if( roll > armor.get_coverage( bp ) ) {
         return false;
