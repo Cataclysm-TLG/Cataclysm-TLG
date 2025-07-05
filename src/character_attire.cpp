@@ -127,6 +127,17 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
     if( !it.is_armor() ) {
         return ret_val<void>::make_failure( _( "Putting on a %s would be tricky." ), it.tname() );
     }
+    {
+        body_part_set covered = it.get_covered_body_parts();
+        body_part_set character_parts;
+        for( const bodypart_id &bp : get_all_body_parts() ) {
+            character_parts.set( bp.id() );
+        }
+        covered.intersect_set( character_parts );
+        if( covered.none() ) {
+            return ret_val<void>::make_failure( _( "You lack the appropriate body parts to wear that." ) );
+        }
+    }
 
     if( has_trait( trait_WOOLALLERGY ) && ( it.made_of( material_wool ) ||
                                             it.has_own_flag( flag_wooled ) ) ) {

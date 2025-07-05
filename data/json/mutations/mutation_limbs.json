@@ -33,7 +33,14 @@
     "smash_message": "You buffet the %s with your wing.",
     "side": "left",
     "base_hp": 45,
-    "sub_parts": [ "arm_shoulder_l", "arm_upper_l", "arm_elbow_l", "arm_lower_l", "hand_fingers_l", "hand_wrist_l" ],
+    "sub_parts": [
+      "wing_bird_shoulder_l",
+      "wing_bird_upper_l",
+      "wing_bird_elbow_l",
+      "wing_bird_lower_l",
+      "wing_bird_fingers_l",
+      "wing_bird_wrist_l"
+    ],
     "armor": { "cut": 3, "bash": 4 },
     "unarmed_damage": [ { "damage_type": "bash", "amount": -2 } ]
   },
@@ -71,9 +78,136 @@
     "smash_message": "You buffet the %s with your wing.",
     "side": "right",
     "base_hp": 45,
-    "sub_parts": [ "arm_shoulder_r", "arm_upper_r", "arm_elbow_r", "arm_lower_r", "hand_fingers_r", "hand_wrist_r" ],
+    "sub_parts": [
+      "wing_bird_shoulder_r",
+      "wing_bird_upper_r",
+      "wing_bird_elbow_r",
+      "wing_bird_lower_r",
+      "wing_bird_fingers_r",
+      "wing_bird_wrist_r"
+    ],
     "armor": { "cut": 3, "bash": 4 },
     "unarmed_damage": [ { "damage_type": "bash", "amount": -2 } ]
+  },
+  {
+    "id": "wing_bird_shoulder_r",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "wing_bird_r",
+    "side": 2,
+    "opposite": "wing_bird_shoulder_l",
+    "name_multiple": "shoulders",
+    "name": "right shoulder"
+  },
+  {
+    "id": "wing_bird_upper_r",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "wing_bird_r",
+    "side": 2,
+    "opposite": "wing_bird_upper_l",
+    "name_multiple": "brachia",
+    "name": "right brachium"
+  },
+  {
+    "id": "wing_bird_elbow_r",
+    "type": "sub_body_part",
+    "max_coverage": 5,
+    "parent": "wing_bird_r",
+    "side": 2,
+    "opposite": "wing_bird_elbow_l",
+    "name_multiple": "elbows",
+    "name": "right elbow"
+  },
+  {
+    "id": "wing_bird_lower_r",
+    "type": "sub_body_part",
+    "max_coverage": 35,
+    "parent": "wing_bird_r",
+    "side": 2,
+    "opposite": "wing_bird_lower_l",
+    "name_multiple": "antebrachia",
+    "name": "right antebrachium"
+  },
+  {
+    "id": "wing_bird_shoulder_l",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "wing_bird_l",
+    "side": 1,
+    "opposite": "wing_bird_shoulder_r",
+    "name_multiple": "shoulders",
+    "name": "left shoulder"
+  },
+  {
+    "id": "wing_bird_upper_l",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "wing_bird_l",
+    "side": 1,
+    "opposite": "wing_bird_upper_r",
+    "name_multiple": "brachia",
+    "name": "left brachium"
+  },
+  {
+    "id": "wing_bird_elbow_l",
+    "type": "sub_body_part",
+    "max_coverage": 5,
+    "parent": "wing_bird_l",
+    "side": 1,
+    "opposite": "wing_bird_elbow_r",
+    "name_multiple": "elbows",
+    "name": "left elbow"
+  },
+  {
+    "id": "wing_bird_lower_l",
+    "type": "sub_body_part",
+    "max_coverage": 35,
+    "parent": "wing_bird_l",
+    "side": 1,
+    "opposite": "wing_bird_lower_r",
+    "name_multiple": "antebrachia",
+    "name": "left antebrachium"
+  },
+  {
+    "id": "wing_bird_fingers_r",
+    "type": "sub_body_part",
+    "max_coverage": 15,
+    "parent": "wing_bird_r",
+    "side": 2,
+    "opposite": "wing_bird_fingers_l",
+    "name_multiple": "fingers",
+    "name": "right fingers"
+  },
+  {
+    "id": "wing_bird_wrist_l",
+    "type": "sub_body_part",
+    "max_coverage": 5,
+    "parent": "wing_bird_l",
+    "side": 1,
+    "opposite": "wing_bird_wrist_r",
+    "name_multiple": "wrists",
+    "name": "left wrist"
+  },
+  {
+    "id": "wing_bird_fingers_l",
+    "type": "sub_body_part",
+    "max_coverage": 15,
+    "parent": "wing_bird_l",
+    "side": 2,
+    "opposite": "wing_bird_fingers_r",
+    "name_multiple": "fingers",
+    "name": "left fingers"
+  },
+  {
+    "id": "wing_bird_wrist_r",
+    "type": "sub_body_part",
+    "max_coverage": 5,
+    "parent": "wing_bird_r",
+    "side": 1,
+    "opposite": "wing_bird_wrist_l",
+    "name_multiple": "wrists",
+    "name": "right wrist"
   },
   {
     "id": "hand_webbed_l",
@@ -103,7 +237,7 @@
     "drench_capacity": 400,
     "smash_message": "You smash the %s with your fist.",
     "bionic_slots": 5,
-    "sub_parts": [ "hand_wrist_l", "hand_palm_l", "hand_back_l", "hand_fingers_l" ],
+    "sub_parts": [ "hand_webbed_wrist_l", "hand_webbed_palm_l", "hand_webbed_back_l", "hand_webbed_fingers_l" ],
     "bmi_encumbrance_threshold": 20,
     "bmi_encumbrance_scalar": 0.15
   },
@@ -134,8 +268,88 @@
     "drench_capacity": 400,
     "smash_message": "You smash the %s with your fist.",
     "bionic_slots": 5,
-    "sub_parts": [ "hand_wrist_r", "hand_palm_r", "hand_back_r", "hand_fingers_r" ],
+    "sub_parts": [ "hand_webbed_wrist_r", "hand_webbed_palm_r", "hand_webbed_back_r", "hand_webbed_fingers_r" ],
     "bmi_encumbrance_threshold": 20,
     "bmi_encumbrance_scalar": 0.15
+  },
+  {
+    "id": "hand_webbed_wrist_r",
+    "type": "sub_body_part",
+    "max_coverage": 10,
+    "parent": "hand_webbed_r",
+    "side": 2,
+    "opposite": "hand_webbed_wrist_l",
+    "name_multiple": "wrists",
+    "name": "right wrist"
+  },
+  {
+    "id": "hand_webbed_palm_r",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "hand_webbed_r",
+    "side": 2,
+    "opposite": "hand_webbed_palm_l",
+    "name_multiple": "palms",
+    "name": "right palm"
+  },
+  {
+    "id": "hand_webbed_back_r",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "hand_webbed_r",
+    "side": 2,
+    "opposite": "hand_webbed_back_l",
+    "name_multiple": "back of hands",
+    "name": "right back of hand"
+  },
+  {
+    "id": "hand_webbed_fingers_r",
+    "type": "sub_body_part",
+    "max_coverage": 50,
+    "parent": "hand_webbed_r",
+    "side": 2,
+    "opposite": "hand_webbed_fingers_l",
+    "name_multiple": "webbed fingers",
+    "name": "right fingers"
+  },
+  {
+    "id": "hand_webbed_wrist_l",
+    "type": "sub_body_part",
+    "max_coverage": 10,
+    "parent": "hand_webbed_l",
+    "side": 1,
+    "opposite": "hand_webbed_wrist_r",
+    "name_multiple": "wrists",
+    "name": "left wrist"
+  },
+  {
+    "id": "hand_webbed_palm_l",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "hand_webbed_l",
+    "side": 1,
+    "opposite": "hand_webbed_palm_r",
+    "name_multiple": "palms",
+    "name": "left palm"
+  },
+  {
+    "id": "hand_webbed_back_l",
+    "type": "sub_body_part",
+    "max_coverage": 20,
+    "parent": "hand_webbed_l",
+    "side": 1,
+    "opposite": "hand_webbed_back_r",
+    "name_multiple": "back of hands",
+    "name": "left back of hand"
+  },
+  {
+    "id": "hand_webbed_fingers_l",
+    "type": "sub_body_part",
+    "max_coverage": 50,
+    "parent": "hand_webbed_l",
+    "side": 1,
+    "opposite": "hand_webbed_fingers_r",
+    "name_multiple": "webbed fingers",
+    "name": "left fingers"
   }
 ]
