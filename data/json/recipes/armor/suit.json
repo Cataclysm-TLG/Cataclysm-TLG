@@ -175,12 +175,10 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "tailor",
-    "using": [ [ "cordage", 2 ] ],
-    "difficulty": 1,
-    "time": "20 m",
+    "time": "10 m",
+    "reversible": true,
     "autolearn": true,
-    "qualities": [ { "id": "LEATHER_AWL", "level": 1 } ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
+    "flags": [ "NO_RESIZE" ],
     "components": [
       [ [ "leather_cuirass", 1 ] ],
       [ [ "leather_pauldrons", 1 ] ],
@@ -192,9 +190,7 @@
     "result": "leather_armor_suit_xs",
     "type": "recipe",
     "copy-from": "leather_armor_suit",
-    "time": "20 m",
-    "qualities": [ { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "cordage", 2 ] ],
+    "time": "10 m",
     "components": [
       [ [ "leather_cuirass_xs", 1 ] ],
       [ [ "leather_pauldrons_xs", 1 ] ],
@@ -206,9 +202,7 @@
     "result": "leather_armor_suit_xl",
     "type": "recipe",
     "copy-from": "leather_armor_suit",
-    "time": "25 m",
-    "qualities": [ { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "cordage", 3 ] ],
+    "time": "12 m",
     "components": [
       [ [ "leather_cuirass_xl", 1 ] ],
       [ [ "leather_pauldrons_xl", 1 ] ],
@@ -257,47 +251,6 @@
     "tools": [ [ [ "swage", -1 ] ] ]
   },
   {
-    "result": "plated_leather_armor_suit",
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_SUIT",
-    "skill_used": "fabrication",
-    "difficulty": 2,
-    "skills_required": [ "tailor", 3 ],
-    "time": "2 h",
-    "book_learn": [ [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ], [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ] ],
-    "using": [ [ "sewing_standard", 26 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic", "time_multiplier": 1.1, "skill_penalty": 0.15 },
-      { "proficiency": "prof_closures", "time_multiplier": 1.1 },
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_armorsmithing" },
-      { "proficiency": "prof_articulation" }
-    ],
-    "components": [ [ [ "sheet_metal_small", 18 ] ], [ [ "leather_armor_suit", 1 ] ] ]
-  },
-  {
-    "result": "plated_leather_armor_suit_xs",
-    "type": "recipe",
-    "copy-from": "plated_leather_armor_suit",
-    "time": "2 h",
-    "using": [ [ "sewing_standard", 19 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "components": [ [ [ "sheet_metal_small", 14 ] ], [ [ "leather_armor_suit_xs", 1 ] ] ]
-  },
-  {
-    "result": "plated_leather_armor_suit_xl",
-    "type": "recipe",
-    "copy-from": "plated_leather_armor_suit",
-    "time": "2 h 15 m",
-    "using": [ [ "sewing_standard", 38 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "components": [ [ [ "sheet_metal_small", 24 ] ], [ [ "leather_armor_suit_xl", 1 ] ] ]
-  },
-  {
     "result": "armor_samurai",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
@@ -323,6 +276,24 @@
       { "proficiency": "prof_armorsmithing" },
       { "proficiency": "prof_articulation" }
     ]
+  },
+  {
+    "result": "armor_samurai_xs",
+    "type": "recipe",
+    "copy-from": "armor_samurai",
+    "time": "2 h",
+    "using": [ [ "sewing_standard", 19 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 3 } ],
+    "components": [ [ [ "sheet_metal_small", 14 ] ], [ [ "leather_armor_suit_xs", 1 ] ] ]
+  },
+  {
+    "result": "armor_samurai_xl",
+    "type": "recipe",
+    "copy-from": "armor_samurai",
+    "time": "2 h 15 m",
+    "using": [ [ "sewing_standard", 38 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 3 } ],
+    "components": [ [ [ "sheet_metal_small", 24 ] ], [ [ "leather_armor_suit_xl", 1 ] ] ]
   },
   {
     "result": "platemail_suit",
@@ -732,7 +703,7 @@
     "skills_required": [ "tailor", 6 ],
     "time": "6 h",
     "book_learn": [ [ "textbook_fireman", 8 ], [ "tailor_portfolio", 8 ] ],
-    "using": [ [ "sewing_standard", 200 ], [ "tailoring_nomex_patchwork", 40 ] ],
+    "using": [ [ "sewing_standard", 200 ], [ "tailoring_nomex_patchwork", 40 ], [ "glue_strong", 5 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
@@ -741,7 +712,7 @@
     ],
     "components": [
       [ [ "sheet_kevlar_layered", 8 ] ],
-      [ [ "duct_tape", 200 ], [ "superglue", 5 ] ],
+      [ [ "duct_tape", 200 ] ],
       [
         [ "kevlar", 1 ],
         [ "ballistic_vest_light", 1 ],
@@ -755,11 +726,11 @@
     "type": "recipe",
     "copy-from": "entry_suit",
     "time": "6 h",
-    "using": [ [ "sewing_standard", 150 ], [ "tailoring_nomex_patchwork", 30 ] ],
+    "using": [ [ "sewing_standard", 150 ], [ "tailoring_nomex_patchwork", 30 ], [ "glue_strong", 3 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
     "components": [
       [ [ "sheet_kevlar_layered", 6 ] ],
-      [ [ "duct_tape", 150 ], [ "superglue", 3 ] ],
+      [ [ "duct_tape", 150 ] ],
       [
         [ "kevlar", 1 ],
         [ "ballistic_vest_light", 1 ],
@@ -773,11 +744,11 @@
     "type": "recipe",
     "copy-from": "entry_suit",
     "time": "6 h 45 m",
-    "using": [ [ "sewing_standard", 300 ], [ "tailoring_nomex_patchwork", 50 ] ],
+    "using": [ [ "sewing_standard", 300 ], [ "tailoring_nomex_patchwork", 50 ], [ "glue_strong", 1 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
     "components": [
       [ [ "sheet_kevlar_layered", 12 ] ],
-      [ [ "duct_tape", 300 ], [ "superglue", 7 ] ],
+      [ [ "duct_tape", 300 ] ],
       [
         [ "kevlar", 2 ],
         [ "ballistic_vest_light", 2 ],
@@ -1091,6 +1062,7 @@
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "survival",
     "difficulty": 2,
+    "reversible": true,
     "autolearn": true,
     "time": "5 m",
     "components": [ [ [ "bag_body_bag", 1 ] ], [ [ "withered", 180 ], [ "straw_pile", 180 ] ] ]

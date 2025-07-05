@@ -87,7 +87,7 @@
       },
       { "item": "duct_tape", "charges": [ 20, 200 ], "prob": 30 },
       { "item": "duct_tape", "charges": [ 20, 200 ], "prob": 30 },
-      { "item": "superglue", "prob": 20 },
+      { "group": "superglue", "prob": 20 },
       { "item": "cotton_patchwork", "prob": 8, "custom-flags": [ "FILTHY" ] },
       { "item": "tshirt", "prob": 4, "damage": [ 0, 4 ], "custom-flags": [ "FILTHY" ] },
       { "item": "cotton_patchwork", "prob": 8 },
@@ -110,8 +110,8 @@
     "id": "car_kit",
     "subtype": "collection",
     "items": [
-      { "group": "tools_car_kit", "prob": 70 },
-      { "distribution": [ { "item": "jerrycan" }, { "item": "jerrycan_big" } ], "prob": 12 },
+      { "group": "tools_car_kit", "prob": 20 },
+      { "distribution": [ { "item": "jerrycan" }, { "item": "jerrycan_big" } ], "prob": 8 },
       {
         "distribution": [ { "item": "sm_extinguisher", "charges": 10 }, { "item": "extinguisher", "charges": 100 } ],
         "prob": 20
@@ -127,9 +127,11 @@
       [ "plastic_sheet", 12 ],
       [ "hd_tow_cable", 5 ],
       [ "hose", 10 ],
+      [ "blanket", 2 ],
+      [ "towel", 3 ],
       [ "funnel", 10 ],
       [ "jumper_cable", 30 ],
-      [ "hand_pump", 30 ],
+      [ "hand_pump", 15 ],
       [ "folding_solar_panel_v2", 1 ],
       { "group": "bugout_bag", "prob": 1 }
     ]

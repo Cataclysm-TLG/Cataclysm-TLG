@@ -7,7 +7,7 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 6,
-    "time": "6 h",
+    "time": "12 h",
     "autolearn": true,
     "using": [ [ "tailoring_kevlar_fabric", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls", 1 ] ] ],
@@ -18,7 +18,7 @@
     "result": "lsurvivor_suit_xs",
     "type": "recipe",
     "copy-from": "lsurvivor_suit",
-    "time": "6 h",
+    "time": "11 h",
     "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "byproducts": [ [ "scrap_kevlar", 22 ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
@@ -27,7 +27,7 @@
     "result": "lsurvivor_suit_xl",
     "type": "recipe",
     "copy-from": "lsurvivor_suit",
-    "time": "7 h",
+    "time": "13 h",
     "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "byproducts": [ [ "scrap_kevlar", 25 ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
@@ -40,16 +40,11 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 6,
-    "time": "7 h",
+    "time": "16 h",
     "autolearn": true,
-    "using": [
-      [ "tailoring_kevlar_fabric", 20 ],
-      [ "liquid_rubber", 12 ],
-      [ "fabric_nylon", 2 ],
-      [ "fastener_large", 1 ],
-      [ "clasps", 8 ]
-    ],
+    "using": [ [ "tailoring_kevlar_fabric", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls", 1 ] ] ],
+    "tools": [ [ [ "rubber_spray_can", 12 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
@@ -62,15 +57,10 @@
     "type": "recipe",
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "7 h",
-    "using": [
-      [ "tailoring_kevlar_fabric", 35 ],
-      [ "liquid_rubber", 10 ],
-      [ "fabric_nylon", 1 ],
-      [ "fastener_large", 1 ],
-      [ "clasps", 8 ]
-    ],
+    "time": "10 h",
+    "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "byproducts": [ [ "scrap_kevlar", 18 ] ],
+    "tools": [ [ [ "rubber_spray_can", 10 ] ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
   },
   {
@@ -78,15 +68,10 @@
     "type": "recipe",
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "8 h 10 m",
-    "using": [
-      [ "tailoring_kevlar_fabric", 50 ],
-      [ "liquid_rubber", 18 ],
-      [ "fabric_nylon", 3 ],
-      [ "fastener_large", 1 ],
-      [ "clasps", 8 ]
-    ],
+    "time": "19 h",
+    "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "byproducts": [ [ "scrap_kevlar", 25 ] ],
+    "tools": [ [ [ "rubber_spray_can", 18 ] ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
   },
   {
@@ -98,9 +83,9 @@
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
     "difficulty": 2,
-    "time": "1 h",
+    "time": "4 h",
     "autolearn": true,
-    "using": [ [ "liquid_rubber", 12 ] ],
+    "tools": [ [ [ "rubber_spray_can", 12 ] ] ],
     "components": [ [ [ "lsurvivor_suit", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ]
   },
@@ -110,8 +95,8 @@
     "type": "recipe",
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "1 h",
-    "using": [ [ "liquid_rubber", 10 ] ],
+    "time": "3 h",
+    "tools": [ [ [ "rubber_spray_can", 10 ] ] ],
     "components": [ [ [ "lsurvivor_suit_xs", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ]
   },
@@ -121,8 +106,8 @@
     "type": "recipe",
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "1 h 10 m",
-    "using": [ [ "liquid_rubber", 18 ] ],
+    "time": "5 h",
+    "tools": [ [ [ "rubber_spray_can", 18 ] ] ],
     "components": [ [ [ "lsurvivor_suit_xl", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ]
   },
@@ -162,12 +147,12 @@
     "autolearn": true,
     "using": [
       [ "tailoring_kevlar_fabric", 20 ],
-      [ "liquid_rubber", 8 ],
       [ "tailoring_cotton_patchwork", 10 ],
       [ "fabric_nomex", 2 ],
       [ "fastener_large", 1 ],
       [ "clasps", 8 ]
     ],
+    "tools": [ [ [ "rubber_spray_can", 8 ] ] ],
     "components": [ [ [ "nomex_suit", 1 ], [ "mil_flight_suit", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
@@ -182,12 +167,12 @@
     "time": "12 h 20 m",
     "using": [
       [ "tailoring_kevlar_fabric", 35 ],
-      [ "liquid_rubber", 6 ],
       [ "tailoring_cotton_patchwork", 8 ],
       [ "fabric_nomex", 1 ],
       [ "fastener_large", 1 ],
       [ "clasps", 8 ]
     ],
+    "tools": [ [ [ "rubber_spray_can", 6 ] ] ],
     "components": [ [ [ "nomex_suit_xs", 1 ] ] ]
   },
   {
@@ -197,12 +182,12 @@
     "time": "14 h 18 m",
     "using": [
       [ "tailoring_kevlar_fabric", 50 ],
-      [ "liquid_rubber", 12 ],
       [ "tailoring_cotton_patchwork", 12 ],
       [ "fabric_nomex", 3 ],
       [ "fastener_large", 1 ],
       [ "clasps", 12 ]
     ],
+    "tools": [ [ [ "rubber_spray_can", 12 ] ] ],
     "components": [ [ [ "xl_nomex_suit", 1 ] ] ]
   }
 ]

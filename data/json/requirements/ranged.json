@@ -7,7 +7,11 @@
       [
         [ "bullet_crossbow", -1 ],
         [ "crossbow", -1 ],
-        [ "compositecrossbow", -1 ],
+        [ "pistol_crossbow", -1 ],
+        [ "hand_crossbow", -1 ],
+        [ "bullet_crossbow", -1 ],
+        [ "rep_crossbow", -1 ],
+        [ "rep_compcrossbow", -1 ],
         [ "compcrossbow", -1 ],
         [ "huge_crossbow", -1 ]
       ]

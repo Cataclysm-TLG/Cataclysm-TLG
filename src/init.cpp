@@ -43,6 +43,7 @@
 #include "field_type.h"
 #include "filesystem.h"
 #include "flag.h"
+#include "game.h"
 #include "gates.h"
 #include "harvest.h"
 #include "input.h"
@@ -101,6 +102,7 @@
 #include "translations.h"
 #include "trap.h"
 #include "type_id.h"
+#include "ui_manager.h"
 #include "veh_type.h"
 #include "vehicle_group.h"
 #include "vitamin.h"
@@ -121,6 +123,20 @@ DynamicDataLoader &DynamicDataLoader::get_instance()
     static DynamicDataLoader theDynamicDataLoader;
     return theDynamicDataLoader;
 }
+
+namespace
+{
+
+void check_sigint()
+{
+    if( g && g->uquit == quit_status::QUIT_EXIT ) {
+        if( g->query_exit_to_OS() ) {
+            throw game::exit_exception();
+        }
+    }
+}
+
+} // namespace
 
 void DynamicDataLoader::load_object( const JsonObject &jo, const std::string &src,
                                      const cata_path &base_path,
@@ -171,6 +187,7 @@ void DynamicDataLoader::load_deferred( deferred_json &data )
             }
             ++it;
             inp_mngr.pump_events();
+            check_sigint();
         }
         data.erase( data.begin(), it );
         if( data.size() == n ) {
@@ -413,6 +430,7 @@ void DynamicDataLoader::initialize()
     add( "oter_id_migration", &overmap::load_oter_id_migration );
     add( "camp_migration", &overmap::load_oter_id_camp_migration );
     add( "overmap_terrain", &overmap_terrains::load );
+    add( "oter_vision", &oter_vision::load_oter_vision );
     add( "construction_category", &construction_categories::load );
     add( "construction_group", &construction_groups::load );
     add( "construction", &load_construction );
@@ -540,6 +558,7 @@ void DynamicDataLoader::load_all_from_json( const JsonValue &jsin, const std::st
         // find type and dispatch each object until array close
         for( JsonObject jo : ja ) {
             load_object( jo, src, base_path, full_path );
+            check_sigint();
         }
     } else {
         // not an object or an array?
@@ -611,6 +630,7 @@ void DynamicDataLoader::unload_data()
     overmap_connections::reset();
     overmap_land_use_codes::reset();
     overmap_locations::reset();
+    oter_vision::reset();
     city::reset();
     overmap_specials::reset();
     overmap_special_migration::reset();
@@ -774,7 +794,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
     ui.show();
     for( const named_entry &e : entries ) {
         e.second();
-        ui.proceed();
+        check_sigint();
     }
 
     if( !get_option<bool>( "SKIP_VERIFICATION" ) ) {
@@ -841,6 +861,7 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Overmap land use codes" ), &overmap_land_use_codes::check_consistency },
             { _( "Overmap connections" ), &overmap_connections::check_consistency },
             { _( "Overmap terrain" ), &overmap_terrains::check_consistency },
+            { _( "Overmap terrain vision" ), &oter_vision::check_oter_vision },
             { _( "Overmap locations" ), &overmap_locations::check_consistency },
             { _( "Cities" ), &city::check_consistency },
             { _( "Overmap specials" ), &overmap_specials::check_consistency },
@@ -884,6 +905,6 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
     ui.show();
     for( const named_entry &e : entries ) {
         e.second();
-        ui.proceed();
+        check_sigint();
     }
 }

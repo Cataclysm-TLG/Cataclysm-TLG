@@ -26,9 +26,12 @@
       { "id": [ "PALE", "SKIN_DARK", "SKIN_LIGHT", "SKIN_MEDIUM", "SKIN_PINK", "SKIN_TAN" ], "order": 1100 },
       {
         "id": [
-          "AMORPHOUS",
+          "CHLOROMORPH",
           "ALBINO",
-          "bio_deformity",
+          "TROGLO",
+          "TROGLO2",
+          "TROGLO3",
+          "SUNBURN",
           "CHITIN",
           "CHITIN_MOLTED",
           "CHITIN2",
@@ -37,7 +40,6 @@
           "CHITIN_FUR",
           "CHITIN_FUR2",
           "CHITIN_FUR3",
-          "CHLOROMORPH",
           "FEATHERS",
           "FELINE_FUR",
           "FUR",
@@ -62,12 +64,10 @@
           "SLEEK_SCALES",
           "SORES",
           "THICK_SCALES",
-          "THORNS",
-          "TROGLO",
-          "TROGLO2",
-          "TROGLO3",
           "URSINE_FUR",
-          "VISCOUS"
+          "THORNS",
+          "VISCOUS",
+          "AMORPHOUS"
         ],
         "order": 1500
       },
@@ -82,6 +82,7 @@
           "SHELL3",
           "CRUSTACEAN_CARAPACE",
           "CRUSTACEAN_CARAPACE_MOLTED",
+          "bio_deformity",
           "bio_armor_head",
           "bio_armor_legs",
           "bio_armor_torso",
@@ -153,7 +154,7 @@
       },
       { "id": [ "LEAVES", "LEAVES_WINTER", "LEAVES2", "LEAVES2_FALL", "LEAVES3", "LEAVES3_FALL" ], "order": 1900 },
       {
-        "id": [ "ARACHNID_ARMS", "ARACHNID_ARMS_OK", "ARM_FEATHERS", "ARM_TENTACLES", "ARM_TENTACLES_4", "ARM_TENTACLES_8" ],
+        "id": [ "ARACHNID_ARMS", "ARACHNID_ARMS_OK", "ARM_FEATHERS", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
         "order": 2000
       },
       { "id": [ "PAWS", "PAWS_LARGE", "SLIME_HANDS" ], "order": 2500 },

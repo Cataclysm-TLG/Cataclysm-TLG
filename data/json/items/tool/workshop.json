@@ -1329,19 +1329,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [
-          "iron",
-          "steel",
-          "steel_chain",
-          "aluminum",
-          "copper",
-          "bronze",
-          "fancy_bronze",
-          "silver",
-          "gold",
-          "platinum",
-          "superalloy"
-        ],
+        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
         "skill": "fabrication",
         "tool_quality": 10,
         "cost_scaling": 0.1,
@@ -1372,19 +1360,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [
-          "iron",
-          "steel",
-          "steel_chain",
-          "aluminum",
-          "copper",
-          "bronze",
-          "fancy_bronze",
-          "silver",
-          "gold",
-          "platinum",
-          "superalloy"
-        ],
+        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
         "skill": "fabrication",
         "tool_quality": 5,
         "cost_scaling": 0.1,
@@ -1423,7 +1399,6 @@
           "aluminum",
           "copper",
           "bronze",
-          "fancy_bronze",
           "silver",
           "gold",
           "platinum",
@@ -1455,22 +1430,6 @@
     "color": "brown",
     "qualities": [ [ "SMOOTH", 1 ] ],
     "melee_damage": { "bash": 12 }
-  },
-  {
-    "id": "wool_staple",
-    "type": "TOOL",
-    "category": "spare_parts",
-    "name": { "str": "wool staple" },
-    "description": "A natural cluster of wool fibers.  Could be processed into felt patches or yarn.",
-    "weight": "200 g",
-    "volume": "500 ml",
-    "price": "0 cent",
-    "price_postapoc": "10 cent",
-    "to_hit": -4,
-    "material": [ "wool" ],
-    "symbol": ",",
-    "color": "white",
-    "flags": [ "NO_SALVAGE" ]
   },
   {
     "id": "xacto",

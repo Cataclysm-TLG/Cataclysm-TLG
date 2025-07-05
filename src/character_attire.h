@@ -152,10 +152,7 @@ class outfit
         /** Returns warmth provided by armor, etc. */
         std::map<bodypart_id, int> warmth( const Character &guy ) const;
         int get_env_resist( bodypart_id bp ) const;
-        int sum_filthy_cover( bool ranged, bool melee, bodypart_id bp ) const;
-        ret_val<void> power_armor_conflicts( const item &clothing ) const;
-        bool is_wearing_power_armor( bool *has_helmet = nullptr ) const;
-        bool is_wearing_active_power_armor() const;
+        int sum_filthy_cover( bodypart_id bp ) const;
         bool is_wearing_active_optcloak() const;
         ret_val<void> only_one_conflicts( const item &clothing ) const;
         bool one_per_layer_change_side( item &it, const Character &guy ) const;
@@ -181,8 +178,7 @@ class outfit
         // Used with splash_attack. Returns a string relative to the amount of liquid involved in the attack.
         std::string get_liquid_descriptor( int liquid_remaining = 0 );
 
-        int get_coverage( bodypart_id bp,
-                          item::cover_type cover_type = item::cover_type::COVER_DEFAULT ) const;
+        int get_coverage( bodypart_id bp ) const;
         void bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
                                 const std::vector<bodypart_id> &all_body_parts ) const;
         void prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
@@ -192,7 +188,7 @@ class outfit
         body_part_set exclusive_flag_coverage( body_part_set bps, const flag_id &flag ) const;
         bool check_item_encumbrance_flag( bool update_required );
         // creates a list of items dependent upon @it
-        void add_dependent_item( std::list<item *> &dependent, const item &it );
+        void add_dependent_item( std::list<item *> &dependent );
         std::list<item> remove_worn_items_with( const std::function<bool( item & )> &filter,
                                                 Character &guy );
         bool takeoff( item_location loc, std::list<item> *res, Character &guy );

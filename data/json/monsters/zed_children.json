@@ -290,7 +290,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_child" ],
     "vision_day": 20,
     "vision_night": 3,
-    "bleed_rate": 0,
+    "bleed_rate": 20,
     "harvest": "zombie_humanoid",
     "special_attacks": [
       {

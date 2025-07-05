@@ -57,35 +57,6 @@
     ]
   },
   {
-    "result": "big_portable_fridge",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "2 h",
-    "qualities": [
-      { "id": "HAMMER", "level": 2 },
-      { "id": "WRENCH", "level": 2 },
-      { "id": "SAW_M", "level": 1 },
-      { "id": "SCREW", "level": 1 }
-    ],
-    "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 3 ] ],
-      [ [ "sheet_metal_small", 28 ] ],
-      [ [ "steel_chunk", 6 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 349 ] ],
-      [ [ "chunk_rubber", 3 ] ],
-      [ [ "material_aluminium_ingot", 14 ] ],
-      [ [ "glass", 6 ] ],
-      [ [ "cable", 50 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
-    ]
-  },
-  {
     "result": "glass_fridge",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
@@ -284,35 +255,6 @@
       [ [ "material_aluminium_ingot", 5 ] ],
       [ [ "glass", 2 ] ],
       [ [ "cable", 17 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
-    ]
-  },
-  {
-    "result": "big_portable_freezer",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "2 h",
-    "qualities": [
-      { "id": "HAMMER", "level": 2 },
-      { "id": "WRENCH", "level": 2 },
-      { "id": "SAW_M", "level": 1 },
-      { "id": "SCREW", "level": 1 }
-    ],
-    "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 3 ] ],
-      [ [ "sheet_metal_small", 39 ] ],
-      [ [ "steel_chunk", 8 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 375 ] ],
-      [ [ "chunk_rubber", 3 ] ],
-      [ [ "material_aluminium_ingot", 15 ] ],
-      [ [ "glass", 6 ] ],
-      [ [ "cable", 53 ] ],
       [ [ "hose", 1 ] ],
       [ [ "cu_pipe", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ]

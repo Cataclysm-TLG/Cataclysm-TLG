@@ -4418,7 +4418,6 @@
     "symbol": "[",
     "color": "light_gray",
     "name": { "str": "phase immersion suit" },
-    "looks_like": "rm13_armor",
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles both plate armor and an astronaut's spacesuit.  Designed to protect its wearer during extradimensional excursions, it offers unparalleled environmental protection, both in this Earth and beyond.  Use it to turn it on.",
     "price": "1500 USD",
     "price_postapoc": "150 USD",
@@ -5054,5 +5053,43 @@
     "material": [ "junk" ],
     "fun": 20,
     "monotony_penalty": 4
+  },
+  {
+    "type": "AMMO",
+    "id": "rock_volume_test",
+    "name": { "str": "10L rock" },
+    "copy-from": "rock",
+    "volume": "10 L"
+  },
+  {
+    "id": "acidbomb_test",
+    "type": "AMMO",
+    "category": "weapons",
+    "name": { "str": "acid bomb" },
+    "description": "A fragile container filled with acid.  Throw it to spill out a pool of potent acid.  It could also be used in a staff sling with a modified cradle.",
+    "weight": "650 g",
+    "volume": "680 ml",
+    "longest_side": "132 mm",
+    "price": "50 USD",
+    "price_postapoc": "5 USD",
+    "to_hit": { "grip": "bad", "length": "hand", "surface": "any", "balance": "clumsy" },
+    "material": [ "glass" ],
+    "symbol": "*",
+    "color": "yellow",
+    "use_action": [ "ACIDBOMB_ACT" ],
+    "flags": [ "ACT_ON_RANGED_HIT", "NPC_THROWN" ],
+    "ammo_type": "sling-ready_grenade",
+    "damage": { "damage_type": "bash", "amount": 4 },
+    "range": 11,
+    "dispersion": 14,
+    "effects": [ "NEVER_MISFIRES", "NON_FOULING", "ACIDBOMB" ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "debug_modular_m4_carbine",
+    "type": "GUN",
+    "copy-from": "modular_m4_carbine",
+    "name": { "str": "debug m4 carbine" },
+    "default_mods": [ "retool_ar15_223rem_medium" ]
   }
 ]

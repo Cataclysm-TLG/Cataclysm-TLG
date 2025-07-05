@@ -130,6 +130,12 @@ int talker_character_const::attack_speed() const
     return me_chr_const->attack_speed( cur_weap );
 }
 
+dealt_damage_instance talker_character_const::deal_damage( Creature *source, bodypart_id bp,
+        const damage_instance &dam ) const
+{
+    return source->deal_damage( source, bp, dam );
+}
+
 void talker_character::set_str_max( int value )
 {
     me_chr->str_max = value;
@@ -215,6 +221,23 @@ bool talker_character_const::has_trait( const trait_id &trait_to_check ) const
     return me_chr_const->has_trait( trait_to_check );
 }
 
+int talker_character_const::get_total_in_category( const mutation_category_id &categ,
+        mut_count_type count_type ) const
+{
+    return me_chr_const->get_total_in_category( categ, count_type );
+}
+
+int talker_character_const::get_total_in_category_char_has( const mutation_category_id &categ,
+        mut_count_type count_type ) const
+{
+    return me_chr_const->get_total_in_category_char_has( categ, count_type );
+}
+
+bool talker_character_const::is_trait_purifiable( const trait_id &trait_to_check ) const
+{
+    return me_chr_const->purifiable( trait_to_check );
+}
+
 bool talker_character_const::has_recipe( const recipe_id &recipe_to_check ) const
 {
     return me_chr_const->knows_recipe( &*recipe_to_check );
@@ -255,6 +278,22 @@ void talker_character::mutate_towards( const trait_id &trait, const mutation_cat
                                        const bool &use_vitamins )
 {
     me_chr->mutate_towards( trait, mut_cat, nullptr, use_vitamins );
+}
+
+void talker_character::set_trait_purifiability( const trait_id &trait, const bool &purifiable )
+{
+    // If we want to set it non-purifiable and we didn't already do that and we really do have the trait
+    if( me_chr->has_trait( trait ) ) {
+        if( !purifiable && !me_chr->my_intrinsic_mutations.count( trait ) ) {
+            me_chr->my_intrinsic_mutations.insert( trait );
+            add_msg_debug( debugmode::DF_MUTATION, "Setting trait %s unpurifiable", trait.c_str() );
+        };
+        // If we want to set it purifiable
+        if( purifiable && me_chr->my_intrinsic_mutations.count( trait ) ) {
+            me_chr->my_intrinsic_mutations.erase( trait );
+            add_msg_debug( debugmode::DF_MUTATION, "Setting trait %s purifiable", trait.c_str() );
+        }
+    }
 }
 
 void talker_character::set_mutation( const trait_id &new_trait, const mutation_variant *variant )
@@ -681,6 +720,10 @@ void talker_character::set_stored_kcal( int value )
 {
     me_chr->set_stored_kcal( value );
 }
+void talker_character::mod_stored_kcal( int value, bool ignore_weariness )
+{
+    me_chr->mod_stored_kcal( value, ignore_weariness );
+}
 void talker_character::set_thirst( int value )
 {
     me_chr->set_thirst( value );
@@ -812,6 +855,21 @@ void talker_character::mod_daily_health( int amount, int cap )
 int talker_character_const::morale_cur() const
 {
     return me_chr_const->get_morale_level();
+}
+
+void talker_character::set_fac_relation( const Character *guy, npc_factions::relationship rule,
+        bool should_set_value )
+{
+    if( !guy || !me_chr ) {
+        debugmsg( "Missing character to set new faction relationship" );
+        return;
+    }
+
+    faction *u_fac = me_chr->get_faction();
+    faction *npc_fac = guy->get_faction();
+
+    npc_fac->relations[u_fac->id.c_str()].set( static_cast<size_t>( rule ), should_set_value );
+
 }
 
 void talker_character::add_morale( const morale_type &new_morale, int bonus, int max_bonus,
@@ -1090,8 +1148,8 @@ std::string talker_character_const::proficiency_training_text( const talker &stu
 
     const int cost = calc_proficiency_training_cost( *me_chr_const, *pupil, proficiency );
     const std::string name = proficiency->name();
-    const float pct_before = current_time / time_needed * 100;
-    const float pct_after = ( current_time + 15_minutes ) / time_needed * 100;
+    const float pct_before = current_time * 100.0f / time_needed;
+    const float pct_after = ( current_time + 15_minutes ) * 100.0f / time_needed;
     const std::string after_str = pct_after >= 100.0f ? pgettext( "NPC training: proficiency learned",
                                   "done" ) : string_format( "%2.0f%%", pct_after );
 

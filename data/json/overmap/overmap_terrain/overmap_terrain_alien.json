@@ -2,16 +2,18 @@
   {
     "type": "overmap_terrain",
     "id": [ "slimepit_bottom" ],
+    "vision_levels": "underground_dirt",
     "name": "slime pit",
     "sym": "~",
     "color": "light_green",
-    "see_cost": 2,
+    "see_cost": "all_clear",
     "flags": [ "KNOWN_DOWN", "NO_ROTATE" ]
   },
   {
     "type": "overmap_terrain",
     "id": [ "slimepit_top" ],
     "copy-from": "slimepit_bottom",
+    "vision_levels": "natural_depression",
     "flags": [ "KNOWN_DOWN", "NO_ROTATE", "REQUIRES_PREDECESSOR" ]
   }
 ]

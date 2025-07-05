@@ -259,7 +259,7 @@ class basecamp
         void player_eats_meal();
         /// Takes all the food from the camp_food zone and increases the faction
         /// food_supply
-        bool distribute_food();
+        bool distribute_food( bool player_command = true );
         std::string name_display_of( const mission_id &miss_id );
         void handle_hide_mission( const point &dir );
         void handle_reveal_mission( const point &dir );
@@ -466,17 +466,9 @@ class basecamp
         void serialize( JsonOut &json ) const;
         void deserialize( const JsonObject &data );
         void load_data( const std::string &data );
-        inline const std::vector<const zone_data * > &get_storage_zone() const {
-            return storage_zones;
-        }
-        // dumping spot in absolute co-ords
-        inline void set_storage_zone( const std::vector<const zone_data *> &zones ) {
-            storage_zones = zones;
-        }
         inline const std::unordered_set<tripoint_abs_ms> &get_storage_tiles() const {
             return src_set;
         }
-        // dumping spot in absolute co-ords
         inline void set_storage_tiles( const std::unordered_set<tripoint_abs_ms> &tiles ) {
             src_set = tiles;
         }
@@ -503,10 +495,10 @@ class basecamp
         std::map<point, expansion_data> expansions;
         comp_list camp_workers; // NOLINT(cata-serialize)
         basecamp_map camp_map; // NOLINT(cata-serialize)
+        // dumping spot in absolute co-ords
         tripoint_abs_ms dumping_spot;
         // Tiles inside STORAGE-type zones that have LIQUIDCONT terrain
         std::vector<tripoint_abs_ms> liquid_dumping_spots;
-        std::vector<const zone_data *> storage_zones; // NOLINT(cata-serialize)
         std::unordered_set<tripoint_abs_ms> src_set; // NOLINT(cata-serialize)
         std::set<itype_id> fuel_types; // NOLINT(cata-serialize)
         std::vector<basecamp_fuel> fuels; // NOLINT(cata-serialize)

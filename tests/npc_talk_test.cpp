@@ -8,7 +8,6 @@
 #include "cata_catch.h"
 #include "character.h"
 #include "character_id.h"
-#include "coordinate_conversions.h"
 #include "coordinates.h"
 #include "dialogue.h"
 #include "dialogue_chatbin.h"
@@ -75,7 +74,7 @@ static const trait_id trait_test_trait( "test_trait" );
 static npc &create_test_talker( bool shopkeep = false )
 {
     const string_id<npc_template> test_talker( shopkeep ? "test_shopkeep" : "test_talker" );
-    const character_id model_id = get_map().place_npc( point( 25, 25 ), test_talker );
+    const character_id model_id = get_map().place_npc( point_bub_ms( 25, 25 ), test_talker );
     g->load_npcs();
 
     npc *model_npc = g->find_npc( model_id );
@@ -119,9 +118,8 @@ static std::string gen_dynamic_line( dialogue &d )
 
 static void change_om_type( const std::string &new_type )
 {
-    // TODO: fix point types
-    const tripoint_abs_omt omt_pos( ms_to_omt_copy( get_map().getabs(
-                                        get_player_character().pos() ) ) );
+    const tripoint_abs_omt omt_pos( coords::project_to<coords::omt>( get_map().getglobal(
+                                        get_player_character().pos_bub() ) ) );
     overmap_buffer.ter_set( omt_pos, oter_id( new_type ) );
 }
 

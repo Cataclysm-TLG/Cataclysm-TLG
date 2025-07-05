@@ -133,7 +133,7 @@
     "price_postapoc": "1 cent",
     "material": [ "fruit" ],
     "volume": "62 ml",
-    "flags": [ "MYCUS_OK" ],
+    "flags": [ "MYCUS_OK", "NO_AUTO_CONSUME" ],
     "fun": 30,
     "vitamins": [ [ "fruit_allergen", 1 ] ]
   },
@@ -155,6 +155,7 @@
     "price": "1 cent",
     "price_postapoc": "1 cent",
     "material": [ "fruit" ],
+    "flags": [ "NO_AUTO_CONSUME" ],
     "volume": "10 ml",
     "fun": 30,
     "vitamins": [ [ "fruit_allergen", 1 ] ]
@@ -362,7 +363,7 @@
     "symbol": "%",
     "quench": -4,
     "calories": 203,
-    "description": "Dehydrated great northern beans.  Tasty and nutritious when cooked, virtually inedible when dry.",
+    "description": "Dehydrated beans.  Tasty and nutritious when cooked, virtually inedible when dry.",
     "price": "50 cent",
     "price_postapoc": "25 cent",
     "material": [ "bean" ],
@@ -384,7 +385,7 @@
     "symbol": "%",
     "quench": 1,
     "calories": 203,
-    "description": "A hearty serving of cooked great northern beans.",
+    "description": "A hearty serving of cooked beans.",
     "price": "1 USD",
     "price_postapoc": "1 USD",
     "material": [ "bean" ],
@@ -1046,16 +1047,6 @@
     "fun": -15,
     "freezing_point": -274,
     "vitamins": [ [ "veggy_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "blood_pancakes_wheat_free",
-    "copy-from": "blood_pancakes",
-    "name": { "str": "wheat-free blodplättar" },
-    "description": "Blodplättar is not your average pancake.  It does not taste of blood at all and it tastes like a crispier black pudding.  Made with wheat-free flour.",
-    "material": [ "veggy", "blood" ],
-    "primary_material": "veggy",
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

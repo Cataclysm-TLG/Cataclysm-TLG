@@ -1,0 +1,7 @@
+[
+  {
+    "id": "bottle_plastic_tiny",
+    "type": "MIGRATION",
+    "replace": "clay_canister"
+  }
+]

@@ -658,17 +658,44 @@
     "longest_side": "21 cm",
     "price": "10 USD",
     "price_postapoc": "50 cent",
-    "material": [ "aluminum", "soft_rubber" ],
+    "material": [ "aluminum" ],
     "symbol": ";",
     "color": "light_gray",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "liquid_rubber_spray": 10 }, "watertight": true, "rigid": true } ],
     "flags": [ "NO_RELOAD", "NO_UNLOAD" ]
   },
   {
+    "id": "bottle_plastic_superglue",
+    "type": "GENERIC",
+    "category": "container",
+    "name": { "str": "superglue bottle" },
+    "looks_like": "bottle_plastic_tiny",
+    "weight": "2 g",
+    "volume": "20 ml",
+    "longest_side": "4 cm",
+    "price_postapoc": "50 cent",
+    "material": [ "plastic" ],
+    "color": "white",
+    "symbol": ")",
+    "description": "A little plastic bottle with a narrow tip, designed to store and dispense superglue.  It's gunked up with the stuff and wouldn't be good for much else.",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "watertight": true,
+        "rigid": true,
+        "max_contains_volume": "10 ml",
+        "max_item_volume": "10 ml",
+        "max_contains_weight": "300 g",
+        "moves": 400
+      }
+    ],
+    "flags": [ "NO_RELOAD", "NO_UNLOAD" ]
+  },
+  {
     "id": "stepladder",
     "type": "TOOL",
-    "name": { "str": "wooden stepladder" },
-    "description": "A ten-foot wooden stepladder.  Activate it to set it down.",
+    "name": { "str": "wooden stepladder (folded)" },
+    "description": "A single-story wooden A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "weight": "20000 g",
     "volume": "50 L",
     "longest_side": "150 cm",
@@ -1015,8 +1042,8 @@
   {
     "id": "aluminum_stepladder",
     "type": "TOOL",
-    "name": { "str": "aluminum stepladder" },
-    "description": "A ten-foot aluminum stepladder.  Activate it to set it down.",
+    "name": { "str": "aluminum stepladder (folded)" },
+    "description": "A single-story aluminum A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "looks_like": "stepladder",
     "weight": "15750 g",
     "volume": "50 L",

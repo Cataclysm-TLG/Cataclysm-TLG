@@ -61,9 +61,9 @@ For example, `{ "npc_has_effect": "Shadow_Reveal" }`, used by shadow lieutenant,
 
 ### Typical Alpha and Beta Talkers by cases
 
-| EOC                                              | Alpha (possible types)      | Beta (possible types)       |
-| ------------------------------------------------ | ----------------------      | --------------------------- |
-| Talk with NPC                                    | player (Avatar)             | NPC (NPC)                   |
+| EOC                                              | Alpha (possible types)      | Beta (possible types)       | variables sent              |
+| ------------------------------------------------ | ----------------------      | --------------------------- | --------------------------- |
+| Talk with NPC                                    | player (Avatar)             | NPC (NPC)                   |                             |
 | Talk with monster                                | player (Avatar)             | monster (monster)           |
 | Use computer                                     | player (Avatar)             | computer (Furniture)        |
 | furniture: "examine_action"                      | player (Avatar)             | NONE                        |
@@ -76,17 +76,26 @@ For example, `{ "npc_has_effect": "Shadow_Reveal" }`, used by shadow lieutenant,
 | activity_type: "completion_eoc"                  | character (Character)       | NONE                        |
 | activity_type: "do_turn_eoc"                     | character (Character)       | NONE                        |
 | addiction_type: "effect_on_condition"            | character (Character)       | NONE                        |
-| bionics: "activated_eocs"                        | character (Character)       | NONE                        |
+| bionics: "activated_eocs"                        | character (Character)       | NONE                        | `act_cost`, int, cost of activation of item
 | bionics: "deactivated_eocs"                      | character (Character)       | NONE                        |
 | bionics: "processed_eocs"                        | character (Character)       | NONE                        |
 | mutation: "activated_eocs"                       | character (Character)       | NONE                        |
 | mutation: "deactivated_eocs"                     | character (Character)       | NONE                        |
 | mutation: "processed_eocs"                       | character (Character)       | NONE                        |
 | recipe: "result_eocs"                            | crafter (Character)         | NONE                        |
-| monster death: "death_function"                  | killed monster (monster)    | you (avatar)                |
+| monster death: "death_function"                  | victim (Creature)           | NONE                        |
+| ammo_effect: "eoc"                               | shooter (Creature)          | victim (if exist, otherwise NONE) (Creature) | `proj_damage`, int, amount of damage projectile dealt. Detonation via SPECIAL_COOKOFF ammo effect return `proj_damage` as 1. Note that if projectile miss the target, EoC would be built without beta talker, so using EoC referencing `npc_` or `n_` would result in error. Use `has_beta` condition before manipulating with npc
 
-Using `use_action: "type": "effect_on_conditions"` automatically passes the context variable `id`, that stores the id of an item that was activated
-Using `bionics: "activated_eocs"` automatically passes the context variable `act_cost` that stores the value of `act_cost` field
+Some actions sent additional context variables, that can be used in EoC, in format:
+
+```json
+{ "compare_string": [ "bio_uncanny_dodge", { "context_val": "id" } ] }
+```
+
+```json
+{ "math": [ "_act_cost", "==", "2000" ] }
+```
+
 ## Value types
 
 Effect on Condition uses a huge variety of different values for effects or for conditions to check against, so to standardize it, most of them are explained here
@@ -238,7 +247,7 @@ Checks you are **not** close to refugee center (at least 4 overmap tiles afar)
 Checks you don't have any traits from the list
 ```json
 "condition": {
-  "or": [
+  "and": [
     { "not": { "u_has_trait": "HUMAN_ARMS" } },
     { "not": { "u_has_trait": "HUMAN_SKIN" } },
     { "not": { "u_has_trait": "HUMAN_EYES" } },
@@ -279,6 +288,22 @@ Checks there is portal storm **and** you have `MAKAYLA_MUTATOR` mutation **and**
 
 ## Possible conditions
 
+### `has_alpha`, `has_beta`
+- type: simple string
+- return true if alpha or beta talker exist
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ |
+
+#### Examples
+return true if beta talker exists
+```json
+"condition": "has_beta",
+```
+
 ### `u_male`, `u_female`, `npc_male`, `npc_female`
 - type: simple string
 - return true if alpha or beta talker is male or female
@@ -301,6 +326,13 @@ return true if alpha talker is female
 - `avatar` is you, player, that control specific NPC (yes, your character is still NPC, you just can control it, as you can control another NPC using faction succession)
 - `npc` is any NPC, except Avatar
 - `character` is both NPC or Avatar
+
+```
+Creature ---> Character ---> avatar
+          \              \
+           \              \--> npc
+            \---> monster
+```
 
 #### Valid talkers:
 
@@ -383,6 +415,24 @@ Checks do alpha talker has `FEATHERS` mutation
 ```json
 { "u_has_trait": "FEATHERS" }
 ```
+
+### `u_is_trait_purifiable`, `npc_is_trait_purifiable`
+- type: string or [variable object](##variable-object)
+- return true if the checked trait is purifiable for the alpha or beta talker
+- non-purifiability is either set globally in the trait definition or per-character via `u/npc_set_trait_purifiability`
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+Checks if the `FEATHERS` trait is purifiable for the character (returns true as per the trait definition unless another effect set the trait non-purifiable for the target)
+```json
+{ "u_is_trait_purifiable": "FEATHERS" }
+```
+
 
 ### `u_has_martial_art`, `npc_has_martial_art`
 - type: string or [variable object](##variable-object)
@@ -750,9 +800,30 @@ You don't wield anything
 { "not": "u_has_weapon" }
 ```
 
+### `u_controlling_vehicle`, `npc_controlling_vehicle`
+- type: simple string
+- return true if alpha or beta talker control a vehicle; Nota bene: NPCs cannot currently operate vehicles
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+
+```json
+"u_controlling_vehicle"
+```
+
+true if you do not drive
+```json
+{ "not": "u_controlling_vehicle" }
+```
+
 ### `u_driving`, `npc_driving`
 - type: simple string
-- return true if alpha or beta talker operate a vehicles; Nota bene: NPCs cannot currently operate vehicles
+- return true if alpha or beta talker operate a moving vehicle; Nota bene: NPCs cannot currently operate vehicles
 
 #### Valid talkers:
 
@@ -1033,9 +1104,9 @@ Check the north terrain or furniture has `TRANSPARENT` flag.
 },
 ```
 
-### `map_terrain_id`, `map_furniture_id`
+### `map_terrain_id`, `map_furniture_id`, `map_field_id`
 - type: string or [variable object](##variable-object)
-- return true if the terrain or furniture has specific id
+- return true if the terrain, furniture or field has specific id
 - `loc` will specify location of terrain or furniture (**mandatory**)
 
 #### Valid talkers:
@@ -1066,7 +1137,7 @@ Runs a query, allowing you to pick specific tile around. When picked, stores coo
 
 ### `map_in_city`
 - type: location string or [variable object](##variable-object)
-- return true if the location is in a city
+- return true if the location is in the bounds of a city at or above z-1
 
 #### Valid talkers:
 
@@ -1081,6 +1152,19 @@ Check the location is in a city.
   "then": { "u_message": "Inside city" },
   "else": { "u_message": "Outside city" }
 },
+```
+
+Each time the avatar enters an OMT message them whether they're in a city or not.
+```
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST_IS_IN_CITY",
+    "eoc_type": "EVENT",
+    "required_event": "avatar_enters_omt",
+    "condition": { "map_in_city": { "mutator": "u_loc_relative", "target": "(0,0,0)" } },
+    "effect": [ { "u_message": "You are in a city OMT.", "type": "good" } ],
+    "false_effect": [ { "u_message": "You are NOT in a city OMT.", "type": "bad" } ]
+  },
 ```
 
 ### `player_see_u`, `player_see_npc`
@@ -1194,7 +1278,8 @@ Every event EOC passes context vars with each of their key value pairs that the 
 | character_ranged_attacks_monster | | { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "victim_type", `mtype_id` }, | character / monster |
 | character_smashes_tile | | { "character", `character_id` },<br/> { "terrain", `ter_str_id` },  { "furniture", `furn_str_id` }, | character / NONE |
 | character_starts_activity | Triggered when character starts or resumes activity | { "character", `character_id` },<br/> { "activity", `activity_id` },<br/> { "resume", `bool` } | character / NONE |
-| character_takes_damage | | { "character", `character_id` },<br/> { "damage", `int` }, | character / NONE |
+| character_takes_damage | triggers when character gets any damage from any creature | { "character", `character_id` },<br/> { "damage", `int` }, | character / attacker if exists, otherwise NONE(character or monster) | use `has_beta` conditon before interacting with beta talker
+| monster_takes_damage | triggers when monster gets any damage from any creature. Includes damages from effects like bleeding | { "damage", `int` },<br/> { "dies", `bool` }, | monster / attacker if exists, otherwise NONE(character or monster) | use `has_beta` conditon before interacting with beta talker
 | character_triggers_trap | | { "character", `character_id` },<br/> { "trap", `trap_str_id` }, | character / NONE |
 | character_wakes_up | triggers in the moment player lost it's sleep effect and wakes up | { "character", `character_id` }, | character / NONE |
 | character_attempt_to_fall_asleep | triggers in the moment character tries to fall asleep, after confirming and setting an alarm, but before "you lie down" | { "character", `character_id` }, | character / NONE |
@@ -1404,6 +1489,7 @@ Will assign mission to the player
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
 | "assign_mission" | **mandatory** | string or [variable object](#variable-object) | Mission that would be assigned to the player |
+| "deadline" | optional | string or [variable object](#variable-object) | Time point when mission will be failed automatically if not already complete |
 
 ##### Valid talkers:
 
@@ -1412,9 +1498,9 @@ Will assign mission to the player
 | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ##### Examples
-Assign you a `MISSION_REACH_FAKE_DAVE` mission
+Assign you a `MISSION_REACH_FAKE_DAVE` mission which must be completed within the next 17 hours
 ```json
-{ "assign_mission": "MISSION_REACH_FAKE_DAVE" }
+{ "assign_mission": "MISSION_REACH_FAKE_DAVE", "deadline": { "math": [ "time('now') + time(' 17 h')" ] } }
 ```
 
 #### `remove_active_mission`
@@ -1505,7 +1591,16 @@ Runs another EoC. It can be a separate EoC, or an inline EoC inside `run_eocs` e
 
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
-| "run_eocs" | **mandatory** | string (eoc id or inline eoc) or [variable object](#variable-object)) or array of eocs | EoC or EoCS that would be run |
+| "run_eocs" | **mandatory** | string (eoc id or inline eoc) or [variable object](#variable-object)) or array of eocs | EoC or EoCs that would be run |
+| "iterations" | optional | int or [variable object](#variable-object)) | if used, all eocs in run_eocs would be repeated this amount of times. Eocs are repeated in order; having `"run_eocs": [ "A", "B" ], "repeat": 3` would look like `A, B, A, B, A, B`. Default 1 |
+| "condition" | optional | int or [variable object](#variable-object)) | if used, eoc would be run as long as this condition will return true. if "condition" is used, "iterations" can be used to limit amount of runs to specific amount (default is 100 runs until terminated) |
+| "time_in_future" | optional | int, duration, [variable object](#variable-object) or value between two | if used, EoC would be activated this amount of time in future; default 0, meaning it would run instantly. If eoc is global, the avatar will be u and npc will be invalid. If eoc is not global, it will be queued for the current alpha if they are a character (avatar or npc) and not be queued otherwise. Works with "iterations", doesn't work with "condition" | 
+| "randomize_time_in_future" | optional | bool | used with time_in_future, and if "iterations" is bigger than 1; if false, entire eoc array would run at the exact same moment; if true, each eoc in array would pick it's own time again and again | 
+| "alpha_loc","beta_loc" | optional | string, [variable object](#variable-object) | Allows to swap talker by defining `u_location_variable`, where the EoC should be run. Set the alpha/beta talker to the creature at the location. |
+| "alpha_talker","beta_talker" | optional (If you use both "alpha_loc" and "alpha_talker", "alpha_talker" will be ignored, same for beta.) | string, [variable object](#variable-object) | Set alpha/beta talker. This can be either a `character_id` (you can get from [EOC event](#event-eocs) or result of [u_set_talker](#u_set_talkernpc_set_talker) ), or some hard-coded values: <br> `""`: null talker <br> `"u"/"npc": the alpha/beta talker of the EOC`(Should be Avatar/Character/NPC/Monster) <br> `"avatar"`: your avatar|
+| "false_eocs" | optional | string, [variable object](#variable-object), inline EoC, or range of all of them | false EOCs will run if<br>1. there is no creature at "alpha_loc"/"beta_loc",or<br>2. "alpha_talker" or "beta_talker" doesn't exist in the game (eg. dead NPC),or<br>3. alpha and beta talker are both null |
+| "variables" | optional | pair of `"variable_name": "variable"` | context variables, that would be passed to the EoC; numeric values should be specified as strings; when a variable is an object and has the `i18n` member set to true, the variable will be localized; `expects_vars` condition can be used inside running eoc to ensure every variable exist before the EoC is run | 
+
 
 ##### Valid talkers:
 
@@ -1514,6 +1609,7 @@ Runs another EoC. It can be a separate EoC, or an inline EoC inside `run_eocs` e
 | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ |
 
 ##### Examples
+
 Run `EOC_DO_GOOD_THING` EoC
 ```json
 { "run_eocs": [ "EOC_DO_GOOD_THING" ] }
@@ -1559,76 +1655,18 @@ if it's bigger, `are_you_super_strong` effect is run, that checks is your str is
 }
 ```
 
-Use Context Variable as a eoc (A trick for loop)
+EOC_until_nested will run 10 times
 ```json
   {
     "type": "effect_on_condition",
-    "id": "debug_eoc_for_loop",
-    "effect": [ { "run_eoc_with": "eoc_for_loop", "variables": { "i": "0", "length": "10", "eoc": "eoc_msg_hello_world" } } ]
+    "id": "EOC_run_until",
+    "effect": { "run_eocs": "EOC_until_nested", "iterations": 10 }
   },
-  {
-    "type": "effect_on_condition",
-    "id": "eoc_msg_hello_world",
-    "effect": [ { "u_message": "hello world" } ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "eoc_for_loop",
-    "condition": { "and": [ { "expects_vars": [ "i", "length", "eoc" ] }, { "math": [ "_i", "<", "_length" ] } ] },
-    "effect": [ { "run_eocs": [ { "context_val": "eoc" } ] }, { "math": [ "_i", "++" ] }, { "run_eocs": "eoc_for_loop" } ],
-    "//": "Checks i is lesser than length, and if true, runs EoC, stored in context val 'eoc', increment i, and runs itself again; all context variables would be saved and passed to the next iteration"
-  }
-```
-#### `u_set_talker`, `npc_set_talker`
-Store the character_id of You or NPC into a variable object
-
-| Syntax | Optionality | Value  | Info |
-| --- | --- | --- | --- | 
-| "u_set_talker" / "npc_set_talker" | **mandatory** | [variable object](#variable-object) | the variable object to store the character_id |
-
-##### Examples
-
-```json
-{
-  "effect": [ 
-    { "u_set_talker": { "global_val": "u_character_id" } }, 
-    { "u_message": "Your character id is <global_val:u_character_id>" }
-  ]
-}
-```
-
-##### Valid talkers:
-
-| Avatar | Character | NPC | Monster |  Furniture | Item |
-| ------ | --------- | --------- | ---- | ------- | --- | 
-| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
-
-#### `run_eoc_with`
-Same as `run_eocs`, but runs the specific EoC with provided variables as context variables
-
-| Syntax | Optionality | Value  | Info |
-| --- | --- | --- | --- | 
-| "run_eoc_with" | **mandatory** | string (eoc id or inline eoc) | EoC or EoCS that would be run |
-| "alpha_loc","beta_loc" | optional | string, [variable object](#variable-object) | `u_location_variable`, where the EoC should be run. Set the alpha/beta talker to the creature at the location. |
-| "alpha_talker","beta_talker" | optional (If you use both "alpha_loc" and "alpha_talker", "alpha_talker" will be ignored.) | string, [variable object](#variable-object) | Set alpha/beta talker. This can be either a `character_id` (you can get from [EOC event](#event-eocs) or [u_set_talker](#u_set_talkernpc_set_talker) ) or some hard-coded values: <br> `""`: null talker <br> `"u"/"npc": the alpha/beta talker of the EOC`(Should be Avatar/Character/NPC/Monster) <br> `"avatar"`: your avatar|
-| "false_eocs" | optional | string, [variable object](#variable-object), inline EoC, or range of all of them | false EOCs will run if<br>1. there is no creature at "alpha_loc"/"beta_loc",or<br>2. "alpha_talker" or "beta_talker" doesn't exist in the game (eg. dead NPC),or<br>3. alpha and beta talker are both null |
-| "variables" | optional | pair of `"variable_name": "variable"` | variables, that would be passed to the EoC; numeric values should be specified as strings; when a variable is an object and has the `i18n` member set to true, the variable will be localized; `expects_vars` condition can be used to ensure every variable exist before the EoC is run | 
-
-##### Valid talkers:
-
-| Avatar | Character | NPC | Monster |  Furniture | Item |
-| ------ | --------- | --------- | ---- | ------- | --- | 
-| ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ |
-
-##### Examples
-Run `EOC_BOOM` EoC; completely same as `run_eocs`
-```json
-{ "run_eoc_with": "EOC_BOOM" }
 ```
 
 Run `EOC_BOOM` EoC at `where_my_enemy_is` location variable
 ```json
-{ "run_eoc_with": "EOC_BOOM", "beta_loc": { "global_val": "where_my_enemy_is" } },
+{ "run_eocs": "EOC_BOOM", "beta_loc": { "global_val": "where_my_enemy_is" } },
 ```
 
 The first EoC `EOC_I_NEED_AN_AR15` run another `EOC_GIVE_A_GUN` EoC, and give it two variables: variable `gun_name` with value `ar15_223medium` and variable `amount_of_guns` with value `5`;
@@ -1640,7 +1678,7 @@ Second EoC `EOC_I_NEED_AN_AK47` aslo run `EOC_GIVE_A_GUN` with the same variable
   "id": "EOC_I_NEED_AN_AR15",
   "effect": [
     {
-      "run_eoc_with": "EOC_GIVE_A_GUN",
+      "run_eocs": "EOC_GIVE_A_GUN",
       "variables": {
         "gun_name": "ar15_223medium",
         "amount_of_guns": "5"
@@ -1653,7 +1691,7 @@ Second EoC `EOC_I_NEED_AN_AK47` aslo run `EOC_GIVE_A_GUN` with the same variable
   "id": "EOC_I_NEED_AN_AK47",
   "effect": [
     {
-      "run_eoc_with": "EOC_GIVE_A_GUN",
+      "run_eocs": "EOC_GIVE_A_GUN",
       "variables": {
         "gun_name": "ak47",
         "amount_of_guns": "3"
@@ -1673,6 +1711,7 @@ Second EoC `EOC_I_NEED_AN_AK47` aslo run `EOC_GIVE_A_GUN` with the same variable
   ]
 }
 ```
+
 Control a NPC and return to your original body.
 By using `EOC_control_npc`, you can gain control of an NPC, and your original body's character_id will be stored in the global variable `"player_id"`.
 Then, by using `EOC_return_to_player`, you can return to your original body.
@@ -1686,7 +1725,7 @@ Then, by using `EOC_return_to_player`, you can return to your original body.
     {
       "if": { "u_query_tile": "anywhere", "target_var": { "context_val": "loc" }, "message": "Select point" },
       "then": {
-        "run_eoc_with": {
+        "run_eocs": {
           "id": "_EOC_control_npc_do",
           "effect": [
             {
@@ -1708,7 +1747,7 @@ Then, by using `EOC_return_to_player`, you can return to your original body.
   "id": "EOC_return_to_player",
   "effect": [
     {
-      "run_eoc_with": { "id": "_EOC_return_to_player_do", "effect": [ "follow", "take_control" ] },
+      "run_eocs": { "id": "_EOC_return_to_player_do", "effect": [ "follow", "take_control" ] },
       "alpha_talker": "avatar",
       "beta_talker": { "global_val": "player_id" },
       "false_eocs": { "id": "_EOC_return_to_player_fail_msg", "effect": { "message": "Unable to locate your original body." } }
@@ -1717,50 +1756,43 @@ Then, by using `EOC_return_to_player`, you can return to your original body.
 }
 ```
 
-#### `queue_eocs`
-  Same as `run_eocs`, but instead of running EoCs right now, put it in queue and run it in some future
-
-
-| Syntax | Optionality | Value  | Info |
-| --- | --- | --- | --- | 
-| "queue_eocs" | **mandatory** | string (eoc id or inline eoc) or [variable object](#variable-object) or array of eocs | EoCs, that would be added into queue; Could be an inline EoC |
-| "time_in_future" | optional | int, duration, [variable object](#variable-object) or value between two | When in the future EoC would be run; default 0 | 
-
-##### Valid talkers:
-If the eoc is global the avatar will be u and npc will be invalid. Otherwise it will be queued for the current alpha if they are a character and not be queued otherwise.
-
-| Avatar | Character | NPC | Monster |  Furniture | Item |
-| ------ | --------- | --------- | ---- | ------- | --- | 
-| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
-
-##### Examples
-run `EOC_BOOM_RIGHT_NOW` instantly
-```json
-{ "queue_eocs": "EOC_BOOM_RIGHT_NOW" }
-```
-
 run `EOC_BOOM_RANDOM` randomly in 20-30 seconds
 ```json
-{ "queue_eocs": "EOC_BOOM_RANDOM", "time_in_future": [ "20 seconds", "30 seconds" ] },
+{ "run_eocs": "EOC_BOOM_RANDOM", "time_in_future": [ "20 seconds", "30 seconds" ] },
 ```
 
-#### `queue_eoc_with`
-Combination of `run_eoc_with` and `queue_eocs` - Put EoC into queue and run into some future, with provided variables as context variables
+EoCs `EOC_K`and `EOC_L` will run 10 times total, 5 times each, at exactly same second (for example, 17 seconds in future)
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "run_eocs_6",
+    "effect": [
+      {
+        "run_eocs": [ "EOC_K", "EOC_L" ],
+        "time_in_future": [ "0 seconds", "20 seconds" ],
+        "randomize_time_in_future": false,
+        "iterations": 5
+      }
+    ]
+  },
+```
 
-| Syntax | Optionality | Value  | Info |
-| --- | --- | --- | --- | 
-| "queue_eoc_with" | **mandatory** | string (eoc id or inline eoc) | EoC, that would be added into queue; Could be an inline EoC |
-| "time_in_future" | optional | int, duration, [variable object](#variable-object) or value between two | When in the future EoC would be run; default 0 |
-| "variables" | optional | pair of `"variable_name": "variable"` | variables, that would be passed to the EoC; numeric values should be specified as strings; when a variable is an object and has the `i18n` member set to true, the variable will be localized; `expects_vars` condition can be used to ensure every variable exist before the EoC is run | 
+EoCs `EOC_K`and `EOC_L` will run 10 times total, 5 times each, randomly; for example, `EOC_K` gonna run 0 seconds in the future, 3 seconds, 9 seconds, 19 seconds and 20 seconds; `EOC_L` gonna run, for example, 4 seconds, 5 seconds, 9 seconds, 14 secodns and 17 seconds in the future
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "run_eocs_6",
+    "effect": [
+      {
+        "run_eocs": [ "EOC_K", "EOC_L" ],
+        "time_in_future": [ "0 seconds", "20 seconds" ],
+        "randomize_time_in_future": false,
+        "iterations": 5
+      }
+    ]
+  },
+```
 
-##### Valid talkers:
-
-| Avatar | Character | NPC | Monster |  Furniture | Item |
-| ------ | --------- | --------- | ---- | ------- | --- | 
-| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
-
-##### Examples
-see a detailed example in `run_eoc_with`
 In three hours, you will be given five AR-15
 ```json
 {
@@ -1768,7 +1800,7 @@ In three hours, you will be given five AR-15
   "id": "EOC_I_NEED_AN_AR15_BUT_NOT_NOW",
   "effect": [
     {
-      "queue_eoc_with": "EOC_GIVE_A_GUN",
+      "run_eocs": "EOC_GIVE_A_GUN",
       "time_in_future": "3 h",
       "variables": {
         "gun_name": "ar15_223medium",
@@ -1786,6 +1818,49 @@ In three hours, you will be given five AR-15
       "u_spawn_item": { "context_val": "gun_name" },
       "count": { "context_val": "amount_of_guns" }
     }
+  ]
+}
+```
+
+`EOC_until_nested` is run until `my_variable` hit 10; in this case 10 times
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_run_until",
+    "effect": [
+      { "run_eocs": "EOC_until_nested", "condition": { "math": [ "my_variable", "<", "10" ] } }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_until_nested",
+    "effect": [ { "u_spawn_item": "knife_combat" }, { "math": [ "my_variable", "++" ] } ]
+  }
+```
+
+runs `EOC_POWER_TOGGLE_REMOVE_EFFECTS`, but current beta talker would be made alpha talker
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MELEE_MONSTER_CANCEL_TOGGLES",
+    "effect": [ { "run_eocs": "EOC_POWER_TOGGLE_REMOVE_EFFECTS", "alpha_talker": "npc" } ]
+  },
+```
+
+#### `u_set_talker`, `npc_set_talker`
+Store the character_id of You or NPC into a variable object
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_set_talker" / "npc_set_talker" | **mandatory** | [variable object](#variable-object) | the variable object to store the character_id |
+
+##### Examples
+
+```json
+{
+  "effect": [ 
+    { "u_set_talker": { "global_val": "u_character_id" } }, 
+    { "u_message": "Your character id is <global_val:u_character_id>" }
   ]
 }
 ```
@@ -1995,6 +2070,52 @@ Move refugee center guards `GUARD1` - `GUARD7` to the `_First` position - EoC fo
 }
 ```
 
+#### `u_run_monster_eocs`, `npc_run_monster_eocs`
+Monsters run EoCs, provided by this effect; only works inside reality bubble
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_run_monster_eocs"/ "npc_run_monster_eocs" | **mandatory** | array of eocs | EoCs that would be run by monsters |
+| "mtype_ids" | optional | array or [variable objects](#variable-object) | mtype_id(s) that should be affected |
+| "monster_range" | optional | int or [variable object](#variable-object) | if used, only monsters in this range are affected |
+| "monster_must_see" | optional | boolean | default false; if true, only monsters you can see are affected | 
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ❌ | ❌ | ❌ | ✔️ | ❌ | ❌ |
+
+##### Examples
+
+Run EOC_KILL_SHADOW on half the monsters in a 36 range around u_mansion_centre
+```json
+  { "run_eocs": "EOC_BANISH_MANSION_MONSTERS", "beta_loc": { "u_val": "mansion_centre" } },
+```
+...
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_BANISH_MANSION_MONSTERS",
+    "//": "Banish half the mapgen monsters from the mansion to make room for special scenario ferals",
+    "eoc_type": "ACTIVATION",
+    "effect": [
+      {
+        "npc_run_monster_eocs": [ { "id": "EOC_BANISH_MONSTERS_AROUND_MANSION_CENTER", "condition": { "math": [ "rand(1)", "==", "0" ] }, "effect": { "run_eocs": "EOC_KILL_SHADOW" } } ],
+        "monster_range": 36
+      }
+    ]
+  },
+```
+
+Run EOC_KILL_SHADOW on any mon_zombie_dog, mon_dog_zombie_cop or mon_dog_zombie_rot in a 12 range around the alpha talker
+```json
+  {
+    "u_run_monster_eocs": [ { "id": "EOC_BANISH_ZOMBIE_DOGS_AROUND_PLAYER", "effect": { "run_eocs": "EOC_KILL_SHADOW" } } ],
+    "mtype_ids": [ "mon_zombie_dog", "mon_dog_zombie_cop", "mon_dog_zombie_rot" ]
+    "monster_range": 12
+  }
+```
 
 #### `u_run_inv_eocs`, `npc_run_inv_eocs`
 Run EOCs on items in your or NPC's inventory
@@ -2002,7 +2123,7 @@ Run EOCs on items in your or NPC's inventory
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
 | "u_run_inv_eocs" / "npc_run_inv_eocs" | **mandatory** | string or [variable object](#variable-object) | way the item would be picked; <br/>values can be:<br/>`all` - all items that match the conditions are picked;<br/> `random` - from all items that match the conditions, one picked;<br/>`manual` - menu is open with all items that can be picked, and you can choose one;<br/>`manual_mult` - same as `manual`, but multiple items can be picked |
-| "search_data" | optional | `search_data` | sets the condition(s) for the target item; lack of search_data means any item can be picked; conditions can be:<br/>`id` - id of a specific item;<br/>`category` - category of an item (case sensitive, should always be in lower case);<br/>`flags`- flag or flags the item has<br/>`excluded_flags`- flag or flags the item doesn't have<br/>`material` - material of an item;<br/>`worn_only` - if true, return only items, that are worn;<br/>`wielded_only` - if true, return only wielded items;<br/>`calories` - minimum amount of kcal of an item | 
+| "search_data" | optional | `search_data` | sets the condition(s) for the target item; lack of search_data means any item can be picked; see [search_data](#search_data) for syntax | 
 | "title" | optional | string or [variable object](#variable-object) | name of the menu, that would be shown, if `manual` or `manual_mult` is used | 
 | "true_eocs" / "false_eocs" | optional | string, [variable object](##variable-object), inline EoC, or range of all of them | if item was picked successfully, all EoCs from `true_eocs` are run, otherwise all EoCs from `false_eocs` are run; picked item is returned as npc; for example, `n_hp()` return hp of an item | 
 
@@ -2036,7 +2157,7 @@ Pick a wooden item with `DURABLE_MELEE` and `ALWAYS_TWOHAND` flags, and run `EOC
     {
       "u_run_inv_eocs": "manual",
       "search_data": [ { "material": "wood", "flags": [ "DURABLE_MELEE", "ALWAYS_TWOHAND" ] } ],
-      "true_eocs": [ "EOC_DO_SOMETHING_WITH_ITEM" ]
+      "true_eocs": [ "EOC_DO_SOMETHING_WITH_ITEM" ],
       "false_eocs": [ { "id": "EOC_NO_SUCH_ITEM", "effect": [ { "u_message": "You don't have an item i need" } ] } ]
     }
   ]
@@ -2057,6 +2178,66 @@ Pick all items with `RECHARGE` _or_ `ELECTRONIC` flags, and run `EOC_PRINT_ITEM_
 }
 ```
 
+#### `u_map_run_eocs`, `npc_map_run_eocs`
+Picks all tiles around you, npc or target_var, stores it's coordinates in `store_coordinates_in`, and then checks EoC conditions for each tile picked
+Used if you need to check if specific furniture or terrain is around
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_map_run_eocs", "npc_map_run_eocs" | **mandatory** | string, [variable object](#variable-object) or array | EoC or EoCs that would be run |
+| "store_coordinates_in" | optional | [variable object](#variable-object) | variable, where tested coordinate is stored | 
+| "condition" | optional | condition | condition that would be checked if eoc need to be run or not. Can (and intended to) use variable from `store_coordinates_in`. Default true (run always) | 
+| "target_var" | optional | [variable object](#variable-object) | location variable, around which the game should scan; if omitted, sticks to `u_` or `npc_` position | 
+| "range" | optional | int or [variable object](#variable-object) | how big the search radius should be; default 1 ( 3x3 square with character in the middle ) | 
+| stop_at_first | optional | bool | If true, stops execution after the first `condition` is met; if false, runs EoC on all tiles that met condition. Default false | 
+
+##### Examples
+
+Picks range of 6 tiles around the player, and check is there any terrain with `TREE` flag
+```json
+{
+  "type": "effect_on_condition",
+  "id": "SOME_TEST_EOC",
+  "effect": [
+    {
+      "u_map_run_eocs": [ "SOME_ANOTHER_TEST_EOC" ],
+      "range": 6,
+      "store_coordinates_in": { "context_val": "loc" },
+      "condition": { "map_terrain_with_flag": "TREE", "loc": { "context_val": "loc" } }
+    }
+  ]
+},
+{
+  "type": "effect_on_condition",
+  "id": "SOME_ANOTHER_TEST_EOC",
+  "effect": [ { "u_message": "tripoint <context_val:loc> contains TREE" } ]
+}
+```
+
+Picks all TREEs in 50 tiles range, and burn it
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "QWERTY",
+    "effect": [
+      {
+        "u_map_run_eocs": [ "QWERTYYUIOP" ],
+        "range": 50,
+        "store_coordinates_in": { "context_val": "loc" },
+        "stop_at_first": false,
+        "condition": { "map_terrain_with_flag": "TREE", "loc": { "context_val": "loc" } }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "QWERTYYUIOP",
+    "effect": [
+      { "u_set_field": "fd_fire", "radius": 0, "intensity": 10, "target_var": { "context_val": "loc" } }
+    ]
+  }
+```
+
 #### `u_map_run_item_eocs`, `npc_map_run_item_eocs`
 Search items around you on the map, and run EoC on them
 
@@ -2066,8 +2247,8 @@ Search items around you on the map, and run EoC on them
 | "loc" | optional | location variable | location, where items would be scanned; lack of it would scan only tile the talker stands on | 
 | "min_radius", "max_radius" | optional | int or [variable object](#variable-object) | radius around the location/talker that would be searched | 
 | "title" | optional | string or [variable object](#variable-object) | name of the menu that would be shown, if `manual` or `manual_mult` values are used | 
-| "search_data" | optional | `search_data` | sets the condition(s) for the target item; lack of search_data means any item can be picked; conditions can be:<br/>`id` - id of a specific item;<br/>`category` - category of an item (case sensitive, should always be in lower case);<br/>`flags`- flag or flags the item has<br/>`excluded_flags`- flag or flags the item doesn't have<br/>`material` - material of an item;<br/>`worn_only` - if true, return only items, that are worn;<br/>`wielded_only` - if true, return only wielded items | 
-| "true_eocs", "false_eocs" | optional | string, [variable object](##variable-object), inline EoC, or range of all of them | if item was picked successfully, all EoCs from `true_eocs` are run, otherwise all EoCs from `false_eocs` are run; picked item is returned as npc | 
+| "search_data" | optional | `search_data` | sets the condition(s) for the target item; lack of search_data means any item can be picked; see [search_data](#search_data) for syntax | 
+| "true_eocs", "false_eocs" | optional | string, [variable object](#variable-object), inline EoC, or range of all of them | if item was picked successfully, all EoCs from `true_eocs` are run, otherwise all EoCs from `false_eocs` are run; picked item is returned as npc | 
 
 ##### Valid talkers:
 
@@ -2151,6 +2332,140 @@ Teleport player to `new_map`
 }
 ```
 
+#### `reveal_map`
+Reveal the overmap area around specific location variable
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "reveal_map" | **mandatory** | [variable object](#variable-object) | location variable, around which the map would be revealed |
+| "radius" | **mandatory** | int or [variable object](#variable-object) | default 0; the size of revealed zone |
+
+##### Examples
+
+Reveal the zone three tiles around the character
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      { "set_string_var": { "mutator": "u_loc_relative", "target": "(0,0,0)" }, "target_var": { "context_val": "loc" } },
+      { "reveal_map": { "context_val": "loc" }, "radius": 3 }
+    ]
+  }
+```
+
+Same, but using different syntax
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      { "u_location_variable": { "context_val": "loc" } },
+      { "reveal_map": { "context_val": "loc" }, "radius": 3 }
+    ]
+  }
+```
+
+Find overmap tile using `target_params`, store coordinates in `loc`, and reveal the area 20 tiles around `loc`
+```json
+{
+  "type": "effect_on_condition",
+  "id": "EOC_HOUSE_REVEAL",
+  "effect": [
+    {
+      "u_location_variable": { "context_val": "loc" },
+      "target_params": { "om_terrain": "house_02", "search_range": 100, "z": 0 }
+    },
+    { "reveal_map": { "context_val": "loc" }, "radius": 20 }
+  ]
+}
+```
+
+#### `reveal_route`
+Reveal the route between two location variables, using closest roads
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "reveal_route" | **mandatory** | [variable object](#variable-object) | location variable, starting point in the route |
+| "target_var" | **mandatory** | [variable object](#variable-object) | location variable, ending point in the route |
+| "radius" |  | int or [variable object](#variable-object) | the size of revealed path |
+| "road_only" | optional | boolean | default false; if true, reveal only road tiles |
+
+##### Examples
+
+Reveal the path between you and 50 overmap tiles west of you
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      { "set_string_var": { "mutator": "u_loc_relative", "target": "(0,0,0)" }, "target_var": { "context_val": "loc_a" } },
+      { "set_string_var": { "mutator": "u_loc_relative", "target": "(-1200,0,0)" }, "target_var": { "context_val": "loc_b" } },
+      { "reveal_route": { "context_val": "loc_a" }, "target_var": { "context_val": "loc_b" }, "radius": 3 }
+    ]
+  },
+```
+
+Reveal the route between you and `house_02`
+```json
+{
+  "type": "effect_on_condition",
+  "id": "EOC_HOUSE_route",
+  "effect": [
+    {
+      "u_location_variable": { "context_val": "loc" },
+      "target_params": { "om_terrain": "house_02", "search_range": 100, "z": 0 }
+    },
+    {
+        "reveal_route": { "mutator": "u_loc_relative", "target": "(0,0,0)" },
+        "target_var": { "context_val": "loc" },
+        "radius": 3,
+        "road_only": true
+      }
+  ]
+}
+```
+
+#### `closest_city`
+Store coordinates of the closest city nearby in a variable
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "closest_city" | **mandatory** | [variable object](#variable-object) | location variable, center of the found city |
+| "known" | optional | boolean | default true; if true, picks the closest city you know (has yellow text of the city name on your map), otherwise picks the closest city even if you didn't visit it yet |
+
+Additionaly sends context variables `city_name` (string) and `city_size` (int)
+
+##### Examples
+
+Stores coordinates of closest known city, and print variables
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_DEBUG_CITY_NEARBY",
+    "effect": [
+      { "closest_city": { "context_val": "city" } },
+      { "u_message": "Known city: <context_val:city>" },
+      { "u_message": "city_name: <context_val:city_name>" },
+      { "u_message": "city_size: <context_val:city_size>" }
+    ]
+  },
+```
+
+Same, but return any city nearby
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_DEBUG_CITY_NEARBY_UNKNOWN",
+    "effect": [
+      { "closest_city": { "context_val": "city" }, "known": false },
+      { "u_message": "Unknown city: <context_val:city>" },
+      { "u_message": "city_name: <context_val:city_name>" },
+      { "u_message": "city_size: <context_val:city_size>" }
+    ]
+  },
+```
+
 #### `weighted_list_eocs`
 Will choose one of a list of eocs to activate based on it's weight
 
@@ -2215,52 +2530,41 @@ you can pick one of four options from `Choose your destiny` list;
 }
 ```
 
-#### `run_eoc_until`
-Run EoC multiple times, until specific condition would be met
+## Character effects
+
+#### `u_deal_damage`, `npc_deal_damage`
+
+Deal damage, the same way melee attack deals damage; it can't be dodged, but it can be mitigated by armor
 
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
-| "run_eoc_until" | **mandatory** | string or [variable object](#variable-object) | EoC that would be run multiple times |
-| "condition" | optional | [dialogue condition](#dialogue-conditions) | default a condition that always return true; **condition should return "false" to terminate the loop** | 
-| "iteration" | optional | int or [variable object](#variable-object) | default 100; max amount of iteration, that is allowed to run; if the condition always returns true, the EOC will run for this number of iterations.| 
+| "u_deal_damage" / "npc_deal_damage" | **mandatory** | string or [variable object](#variable-object) | Damage type that would be dealt |
+| "amount" | optional | int or [variable object](#variable-object) | Amount of damage that would be dealt; Default 0 | 
+| "bodypart" | optional | string or [variable object](#variable-object) | Bodypart that take the damage. Reminder that only characters can have limbs. Default is RANDOM | 
+| "arpen" | optional | int or [variable object](#variable-object) | Armor penetration of attack; Default 0 |
+| "arpen_mult" | optional | int or [variable object](#variable-object) | Multiplier for armor penetration; Default 1 | 
+| "dmg_mult" | optional | int or [variable object](#variable-object) | Multiplier for damage amount. Default 1 | 
+| "min_hit" | optional | int or [variable object](#variable-object) | If bodypart is RANDOM, limit body part only to bodyparts that has `hit_size` bigger than this; default -1 |
+| "max_hit" | optional | int or [variable object](#variable-object) | If bodypart is RANDOM, limit body part only to bodyparts that has `hit_size` smaller than this; default the size of your biggest body part |
+| "can_attack_high" | optional | bool | If true, can attack limbs with flag LIMB_UPPER, if false, such limbs are discarded; Default true |
+| "hit_roll" | optional | int or [variable object](#variable-object) | hit_roll |
 
 ##### Valid talkers:
 
 | Avatar | Character | NPC | Monster |  Furniture | Item |
 | ------ | --------- | --------- | ---- | ------- | --- | 
-| ✔️ | ✔️ | ✔️ | ✔️ | ✔️ | ✔️ |
+| ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ❌ |
 
 ##### Examples
-`EOC_until_nested` is run until `my_variable` hit 10; in this case 10 times
-```json
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_run_until",
-    "effect": [
-      { "run_eoc_until": "EOC_until_nested", "condition": { "math": [ "my_variable", "<", "10" ] } }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_until_nested",
-    "effect": [ { "u_spawn_item": "knife_combat" }, { "math": [ "my_variable", "++" ] } ]
-  }
-```
-A loop of 10 iterations.
-```json
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_run_until",
-    "effect": { "run_eoc_until": "EOC_until_nested", "iteration": 10 }
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_until_nested",
-    "effect": { "u_message": "!!!" }
-  }
-```
 
-## Character effects
+Deal 20 biological damage to your torso
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "TEST",
+    "effect": [ { "u_deal_damage": "biological", "amount": 20, "bodypart": "torso" } ]
+  },
+```
 
 #### `u_mutate`, `npc_mutate`
 
@@ -2324,6 +2628,23 @@ Mutate towards Tail Stub (removing any incompatibilities) using the category set
         "category": { "u_val": "upcoming_mutation_category", },
         "use_vitamins": true
       },
+```
+
+#### `u_set_trait_purifiability`, `npc_set_trait_purifiability`
+
+If you have the given trait it will be added to /removed from your list of non-purifiable traits, overriding `purifiable: true` in the given trait's definition.
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u/npc_set_trait_purifiablility" | **mandatory** | string or [variable object](##variable-object) | id of the trait to change
+| "purifiable" | **mandatory** | bool | `true` adds the trait to the unpurifiable trait list, `false` removes it |
+
+```json
+{
+  "u_set_trait_purifiability": "BEAK",   // Trait ID to change
+  "purifiable": false   // Turns the trait unpurifiable for the talker
+}
+
 ```
 
 #### `u_add_effect`, `npc_add_effect`
@@ -2837,7 +3158,7 @@ Search a specific coordinates of map around `u_`, `npc_` or `target_params` and 
 | "target_params" | optional | assign_mission_target | if used, the search would be performed not from `u_` or `npc_` location, but from `mission_target`. it uses an [assign_mission_target](MISSIONS_JSON.md) syntax | 
 | "x_adjust", "y_adjust", "z_adjust" | optional | int, float or [variable object](##variable-object) | add this amount to `x`, `y` or `z` coordinate in the end; `"x_adjust": 2` would save the coordinate with 2 tile shift to the right from targeted | 
 | "z_override" | optional | boolean | default is false; if true, instead of adding up to `z` level, override it with absolute value; `"z_adjust": 3` with `"z_override": true` turn the value of `z` to `3` | 
-| "terrain" / "furniture" / "trap" / "monster" / "zone" / "npc" | optional | string or [variable object](##variable-object) | if used, search the entity with corresponding id between `target_min_radius` and `target_max_radius`; if empty string is used (e.g. `"monster": ""`), return any entity from the same radius  | 
+| "terrain" / "furniture" / "field" / "trap" / "monster" / "zone" / "npc" | optional | string or [variable object](##variable-object) | if used, search the entity with corresponding id between `target_min_radius` and `target_max_radius`; if empty string is used (e.g. `"monster": ""`), return any entity from the same radius  | 
 | "target_min_radius", "target_max_radius" | optional | int, float or [variable object](##variable-object) | default 0, min and max radius for search, if previous field was used | 
 | "true_eocs", "false_eocs" | optional | string, [variable object](##variable-object), inline EoC, or range of all of them | if the location was found, all EoCs from `true_eocs` are run, otherwise all EoCs from `false_eocs` are run | 
 
@@ -2879,6 +3200,26 @@ Search the map, that contain `house` in it's id on a range 200-1200 overmap tile
 }
 ```
 
+Check the map 26 tiles around to find `fd_fire`; if fire is presented, prints it's coordinates, otherwise prints "no fire".
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_FIRE_IS_NEARBY",
+    "effect": [
+      { "u_location_variable": { "context_val": "test" }, "field": "fd_fire", "target_max_radius": 26 },
+      {
+        "if": { "map_field_id": "fd_fire", "loc": { "context_val": "test" } },
+        "then": { "u_message": "Fire is in <context_val:test>" },
+        "else": { "u_message": "No fire nearby" }
+      },
+      {
+        "if": { "math": [ "has_var(_test)" ] },
+        "then": { "u_message": "Fire is in <context_val:test>" },
+        "else": { "u_message": "No fire nearby" }
+      }
+    ]
+  },
+```
 
 #### `location_variable_adjust`
 Allow adjust location value, obtained by `u_location_variable`, and share the same syntax and rules
@@ -3184,6 +3525,110 @@ removes morale type, delivered by `morale_id`
 { "u_lose_morale": { "context_val": "morale_id" } }
 ```
 
+
+
+#### `u_consume_item_sum`, `npc_consume_item_sum`
+Consumes all items you have in your inventory, treating count as weight
+Effect does not validate do player actually has enough items to consume, use `_has_items_sum`
+See examples for more info
+
+| Syntax | Optionality | Value  | Info |
+| ------ | ----------- | ------ | ---- | 
+| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](#variable-object) | runs the effect |
+| "item"  | **mandatory** | string or [variable object](#variable-object) | id of item that should be removed |
+| "amount"  | **mandatory** | int or [variable object](#variable-object) | amount of items or charges that should be removed |
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+##### Examples
+Consume 10 blankets. Effect allows to be consumed any item, so in this case player may have 3 `blanket`, 2 `blanket_fur`, and 5 `electric_blanket`, and effect would consume all of it
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": "blanket", "amount": 10 },
+          { "item": "blanket_fur", "amount": 10 },
+          { "item": "electric_blanket", "amount": 10 }
+        ]
+      }
+    ]
+  },
+```
+Effect is order dependent, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
+
+
+Variable `amount` is also supported. In this case amount would be also treated as the weight;  In the next example, having 10 `blanket`, 10 `blanket_fur` and 10 `electric_blanket` would be treated as covering 100% of requirement, 10 `blanket` delivering 40%, 10 `blanket_fur` delivering another 40%, and 10 `electric_blanket` delivering the last 20%
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": "blanket", "amount": 25 },
+          { "item": "blanket_fur", "amount": 25 },
+          { "item": "electric_blanket", "amount": 50 }
+        ]
+      }
+    ]
+  },
+```
+Because of how variable amount is calculated, it is recommended to put the values with the smallest `amount` on the top;  It would prevent code overshooting, as:
+```c++
+ // example: we have 99 blankets and 1 blanket_fur
+ // json below would result in 99 blankets and 1 blanket_fur consumed
+{ "item": "blanket", "amount": 100 }, { "item": "blanket_fur", "amount": 2 }
+
+// this json, however, would result in 1 blanket_fur and 50 blanket consumed
+{ "item": "blanket_fur", "amount": 2 }, { "item": "blanket", "amount": 100 }
+```
+
+Variables are also supported
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "effect": [
+      {
+        "u_consume_item_sum": [
+          { "item": { "global_val": "foo" }, "amount": { "math": "20 + 2" } }
+        ]
+      }
+    ]
+  },
+```
+
+#### `u_set_fac_relation`, `npc_set_fac_relation`
+Can be used only in `talk_topic`, as the code relies on the NPC you talk with to obtain info about it's faction.
+ 
+ | Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_set_fac_relation" / "npc_set_fac_relation" | **mandatory** | string or [variable object](#variable-object) | Rule to set. See [the factions doc](FACTIONS.md#faction-relations) for a list of rules and what they cover.  |
+| "set_value_to" | optional | boolean | default true; Whether to set, or unset, this rule. | 
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+##### Examples
+Adds the "share public goods" rule 
+```json
+{ "u_set_fac_relation": "share public goods" }
+```
+
+Removes the "kill on sight" rule
+```json
+{ "u_set_fac_relation": "kill on sight", "set_value_to": false }
+```
 
 #### `u_add_faction_trust`
  Your character gains trust with the speaking NPC's faction, which affects which items become available for trading from shopkeepers of that faction. Can be used only in `talk_topic`, as the code relies on the NPC you talk with to obtain info about it's faction
@@ -3938,3 +4383,71 @@ Convert the beta talker (which must be an item) into a different item, optionall
 | Avatar | Character | NPC | Monster |  Furniture | Item |
 | ------ | --------- | --------- | ---- | ------- | --- |
 | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ |
+
+
+## Mics
+
+### search_data
+search_data is an array, that allow to filter specific items from the list. At this moment it is used for `u_run_inv_eocs` (picks items from your inventory) and `u_map_run_item_eocs` (picks items from around the character)
+
+| Syntax | Value  | Info |
+| --- | --- | --- |
+| "id" | string, [variable object](#variable-object) or array of strings or variable objects | if used, filter the list of items by item id |
+| "id_blacklist" | string, [variable object](#variable-object) or array of strings or variable objects | if used, excludes items from the list by their id |
+| "category" | string, [variable object](#variable-object) or array of strings or variable objects | filter the list of items by their category |
+| "flags" | string, [variable object](#variable-object) or array of strings or variable objects | filter the list of items by flags they have |
+| "excluded_flags" | string, [variable object](#variable-object) or array of strings or variable objects | excludes items from the list by flags they have |
+| "material" | string, [variable object](#variable-object) or array of strings or variable objects | filter the list of items by their material |
+| "worn_only" | boolean | return only items you you wear (clothes) |
+| "wielded_only" | boolean | return only item you hold in your hands right now. if you hold nothing, and picking object is not manual, it return string `none` |
+| "held_only" | boolean | return both items you wear and item you hold in your hands |
+| "condition" | condition object | allows to use same conditions as EoC. Alpha talker in this case is whoever runs the effect, and beta is the item |
+
+Examples:
+
+```c++
+  {
+    "type": "effect_on_condition",
+    "id": "INV_EOCS_SHOWCASE",
+    "effect": [
+      { "set_string_var": "knife_large", "target_var": { "context_val": "val" } },
+      {
+        "u_run_inv_eocs": "manual_mult",
+        "search_data": [
+          { "id": "knife_large" },
+          { "id": { "context_val": "val" } },
+          { "id": [ "1l_aluminum", { "context_val": "val" } ] },
+          { "category": "weapons" },
+          { "category": { "context_val": "val" } },
+          { "category": [ "tools", { "context_val": "val" } ] },
+          { "material": "steel" },
+          { "material": { "context_val": "val" } },
+          { "material": [ "aluminum", { "context_val": "val" } ] },
+          { "flags": "SHEATH_KNIFE" },
+          { "flags": { "context_val": "val" } },
+          { "flags": [ "WATCH", { "context_val": "val" } ] },
+          { "excluded_flags": "SHEATH_KNIFE" },
+          { "excluded_flags": { "context_val": "val" } },
+          { "excluded_flags": [ "WATCH", { "context_val": "val" } ] },
+          { "worn_only": true },
+          { "wielded_only": true },
+          { "held_only": true },
+          { "condition": { "math": [ "rand(1)" ] } }, // since 0 for conditions is evaluated as "false", this would randomly discard ~half of items from picked
+          { "condition": { "math": [ "n_calories() >= 200" ] } }, // can check beta talker for it's specific properties via math
+          { "condition": { "and": [ { "math": [ "n_calories() >= 200" ] }, { "math": [ "n_calories() <= 500" ] } ] } }, // and even as range!
+          { "condition": { "math": [ "n_melee_damage('ALL') > 20" ] } }, // and more!
+          { "condition": { "compare_string": [ "yes", { "u_val": "general_examples_VIP" } ] } }
+        ],
+        "true_eocs": [ { "id": "EOC_WHATEVER", "effect": { "u_message": "alpha: <u_name>, beta: <npc_name>" } } ]
+      }
+    ]
+  }
+  ```
+
+Combination of values work as `and`, no matter how they are arranged. This two notation work exactly the same, and will return item you wield if it has `weapon` type:
+```json
+"search_data": [ { "category": "weapons" }, { "wielded_only": true } ]
+```
+```json
+"search_data": [ { "category": "weapons", "wielded_only": true } ]
+```

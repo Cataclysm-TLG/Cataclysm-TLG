@@ -1484,6 +1484,9 @@ Dickinson
 Didascalia
 Diego
 Diemaco
+diaspora
+dichloroisocyanurate
+didn
 dieselpunk
 diggable
 Dighton
@@ -4596,6 +4599,7 @@ peto
 petos
 petpack
 petpacks
+Petri
 petrichor
 peytral
 PF

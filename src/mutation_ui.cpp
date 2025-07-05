@@ -343,7 +343,12 @@ void avatar::power_mutations()
 
         if( menu_mode == mutation_menu_mode::examining && examine_id.has_value() ) {
             werase( w_description );
-            std::vector<std::string> desc = foldstring( mutation_desc( examine_id.value() ), WIDTH - 2 );
+            std::string description = mutation_desc( examine_id.value() );
+            if( !purifiable( examine_id.value() ) ) {
+                description +=
+                    _( "\n<color_yellow>This trait is an intrinsic part of you now, purifier won't be able to remove it.</color>" );
+            }
+            std::vector<std::string> desc = foldstring( description, WIDTH - 2 );
             const int winh = catacurses::getmaxy( w_description );
             const bool do_scroll = desc.size() > static_cast<unsigned>( std::abs( winh ) );
             const int fline = do_scroll ? examine_pos % ( desc.size() + 1 - winh ) : 0;
@@ -430,7 +435,8 @@ void avatar::power_mutations()
                             } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
                                        ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                        ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
-                                add_msg_if_player( m_neutral, _( "You activate your %s." ), mutation_name( mut_data.id ) );
+                                add_msg_if_player( m_neutral,
+                                                   string_format( mut_data.activation_msg, mutation_name( mut_data.id ) ) );
                                 // Reset menu in advance
                                 ui.reset();
                                 activate_mutation( mut_id );
@@ -603,7 +609,8 @@ void avatar::power_mutations()
                                 } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
                                            ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                            ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
-                                    add_msg_if_player( m_neutral, _( "You activate your %s." ), mutation_name( mut_data.id ) );
+                                    add_msg_if_player( m_neutral,
+                                                       string_format( mut_data.activation_msg, mutation_name( mut_data.id ) ) );
                                     // Reset menu in advance
                                     ui.reset();
                                     activate_mutation( mut_id );

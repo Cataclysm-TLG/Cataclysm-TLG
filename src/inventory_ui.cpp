@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "activity_actor_definitions.h"
+#include "avatar_action.h"
 #include "basecamp.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
@@ -395,6 +396,7 @@ void uistatedata::serialize( JsonOut &json ) const
     json.member( "distraction_temperature", distraction_temperature );
     json.member( "distraction_mutation", distraction_mutation );
     json.member( "distraction_oxygen", distraction_oxygen );
+    json.member( "distraction_withdrawal", distraction_withdrawal );
     json.member( "numpad_navigation", numpad_navigation );
 
     json.member( "input_history" );
@@ -467,6 +469,7 @@ void uistatedata::deserialize( const JsonObject &jo )
     jo.read( "distraction_temperature", distraction_temperature );
     jo.read( "distraction_mutation", distraction_mutation );
     jo.read( "distraction_oxygen", distraction_oxygen );
+    jo.read( "distraction_withdrawal", distraction_withdrawal );
     jo.read( "numpad_navigation", numpad_navigation );
 
     if( !jo.read( "vmenu_show_items", vmenu_show_items ) ) {
@@ -2126,6 +2129,13 @@ void inventory_selector::RemoveItem( item *&remove )
     }
 }
 
+void inventory_selector::add_character_ebooks( Character &character )
+{
+    for( item_location &ereader : character.all_items_loc() ) {
+        add_contained_ebooks( ereader );
+    }
+}
+
 void inventory_selector::add_map_items( const tripoint &target )
 {
     map &here = get_map();
@@ -2195,7 +2205,7 @@ void inventory_selector::add_nearby_items( int radius )
 void inventory_selector::add_remote_map_items( tinymap *remote_map, const tripoint &target )
 {
     map_stack items = remote_map->i_at( target );
-    const std::string name = to_upper_case( remote_map->name( target ) );
+    const std::string name = to_upper_case( remote_map->name( tripoint_omt_ms( target ) ) );
     const item_category map_cat( name, no_translation( name ), translation(), 100 );
     _add_map_items( target, map_cat, items, [target]( item & it ) {
         return item_location( map_cursor( tripoint_bub_ms( target ) ), &it );
@@ -2946,7 +2956,7 @@ drop_location inventory_selector::get_only_choice() const
     for( const inventory_column *col : columns ) {
         const std::vector<inventory_entry *> ent = col->get_entries( return_item, true );
         if( !ent.empty() ) {
-            return { ent.front()->any_item(), static_cast<int>( ent.front()->get_available_count() ) };
+            return { ent.front()->any_item(), static_cast<int>( ent.front()->chosen_count ) };
         }
     }
 
@@ -3413,7 +3423,7 @@ void ammo_inventory_selector::set_all_entries_chosen_count()
         for( inventory_entry *entry : col->get_entries( return_item, true ) ) {
             for( const item_location &loc : get_possible_reload_targets( reload_loc ) ) {
                 item_location it = entry->any_item();
-                if( loc.can_reload_with( it, true ) ) {
+                if( loc->can_reload_with( *it, true ) ) {
                     item::reload_option tmp_opt( &u, loc, it );
                     int count = entry->get_available_count();
                     if( it->has_flag( flag_SPEEDLOADER ) || it->has_flag( flag_SPEEDLOADER_CLIP ) ) {
@@ -3965,9 +3975,9 @@ void inventory_multiselector::on_input( const inventory_input &input )
         if( entry.is_selectable() ) {
             size_t const count = entry.chosen_count;
             size_t const max = entry.get_available_count();
-            size_t const newcount = std::clamp<size_t>( 0,
-                                    count + ( input.action == "INCREASE_COUNT" ? +1 : -1 ),
-                                    max );
+            size_t const newcount = input.action == "INCREASE_COUNT"
+                                    ? count < max ? count + 1 : max
+                                    : count > 1 ? count - 1 : 0;
             toggle_entry( entry, newcount );
         }
     } else if( input.action == "VIEW_CATEGORY_MODE" ) {
@@ -4524,6 +4534,10 @@ std::pair<item_location, bool> unload_selector::execute()
         } else if( input.action == "CONFIRM" ) {
             const inventory_entry &highlighted = get_active_column().get_highlighted();
             if( highlighted && highlighted.is_selectable() ) {
+                item to_unload = *highlighted.any_item();
+                if( !avatar_action::check_stealing( get_player_character(), to_unload ) ) {
+                    return { item_location(), uistate.unload_auto_contain };
+                }
                 return { highlighted.any_item(), uistate.unload_auto_contain };
             }
         } else if( input.action == "CONTAIN_MODE" ) {

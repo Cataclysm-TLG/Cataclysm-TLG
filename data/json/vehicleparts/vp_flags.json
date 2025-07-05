@@ -703,5 +703,10 @@
     "id": "NEEDS_WHEEL_MOUNT_CONCRETE_MIX",
     "type": "json_flag",
     "requires_flag": "WHEEL_MOUNT_CONCRETE_MIX"
+  },
+  {
+    "id": "WATER_ONLY",
+    "info": "This part can only power a vehicle on water.",
+    "type": "json_flag"
   }
 ]

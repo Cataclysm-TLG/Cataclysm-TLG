@@ -138,8 +138,8 @@
       { "item": "string_36", "count": [ 1, 4 ], "prob": 30 },
       { "item": "string_36", "count": [ 1, 4 ], "prob": 10 },
       { "item": "duct_tape", "prob": 30, "charges": [ 25, 400 ] },
-      { "item": "superglue", "prob": 20 },
-      { "item": "superglue", "prob": 20 },
+      { "group": "superglue", "prob": 30 },
+      { "group": "superglue", "prob": 30 },
       { "item": "plastic_straw", "prob": 70, "count": [ 1, 6 ] },
       { "item": "plastic_straw", "prob": 40, "count": [ 1, 6 ] },
       { "item": "corkscrew", "prob": 60 },
@@ -162,6 +162,7 @@
       { "item": "aluminum_foil", "prob": 25 },
       { "item": "wrapper_foil", "prob": 12, "count": [ 5, 40 ], "container-item": "wrapper_foil_roll" },
       { "item": "nuts_bolts", "prob": 20, "charges": [ 1, 4 ] },
+      { "item": "plastic_shopping_bag", "prob": 30, "count": [ 0, 8 ] },
       {
         "distribution": [
           { "item": "matches", "charges": [ 1, -1 ] },
@@ -196,7 +197,7 @@
       { "item": "plastic_straw", "prob": 60, "count": [ 1, 2 ] },
       { "item": "plastic_spoon", "prob": 50 },
       { "item": "plastic_fork", "prob": 50 },
-      { "item": "superglue", "prob": 10 },
+      { "group": "superglue", "prob": 10 },
       { "item": "plastic_knife", "prob": 50 },
       { "item": "flyer", "prob": 70 },
       { "item": "lighter", "prob": 45, "charges": [ 0, 9 ] },
@@ -304,7 +305,7 @@
       { "item": "thread", "prob": 30 },
       { "item": "sewing_kit", "prob": 40, "charges": [ 50, 150 ], "damage": [ 0, 4 ] },
       { "item": "solder_wire", "prob": 30 },
-      { "item": "superglue", "prob": 40 },
+      { "group": "superglue", "prob": 40 },
       { "item": "knitting_needles", "prob": 40 },
       { "item": "duct_tape", "prob": 40, "charges": [ 5, 160 ] },
       { "item": "wax_paraffin", "prob": 10 },
@@ -344,7 +345,7 @@
     "subtype": "collection",
     "entries": [
       { "group": "tools_common", "count": 2, "damage": [ 0, 4 ], "prob": 30 },
-      { "item": "superglue", "prob": 40 },
+      { "group": "superglue", "prob": 40 },
       { "item": "boxcutter", "prob": 35, "damage": [ 0, 4 ] },
       { "item": "duct_tape", "prob": 35, "charges": [ 5, 200 ] },
       {
@@ -364,7 +365,7 @@
       { "item": "pliers", "prob": 25, "damage": [ 0, 4 ] },
       { "item": "permanent_marker", "prob": 70, "charges": [ 50, -1 ] },
       { "group": "adhesive_bandages_box_used", "prob": 60 },
-      { "item": "superglue", "prob": 20 },
+      { "group": "superglue", "prob": 20 },
       { "item": "rubber_spray_can", "prob": 3, "charges": [ 0, 10 ] },
       { "group": "pens", "count": [ 1, 3 ], "prob": 55, "charges": [ 50, -1 ] },
       { "item": "sandpaper", "prob": 10 },
@@ -416,16 +417,16 @@
       { "item": "scissors", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "stapler", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "flashlight", "prob": 10, "ammo-item": "battery", "charges": 300, "damage": [ 0, 2 ] },
-      { "item": "flashlight", "prob": 10, "ammo-item": "battery", "charges": 300, "damage": [ 0, 2 ] },
+      { "item": "flashlight", "prob": 10, "damage": [ 0, 2 ] },
       { "item": "hairbrush", "prob": 30 },
-      { "item": "superglue", "prob": 10 },
+      { "group": "superglue", "prob": 10 },
       { "item": "office_letter_opener", "prob": 35 },
       { "item": "rubber_spray_can", "prob": 3, "charges": [ 0, 10 ] },
       { "item": "candle", "count": [ 1, 2 ], "prob": 35, "charges": [ 70, -1 ] },
       { "item": "corkscrew", "prob": 30 },
       { "group": "adhesive_bandages_box_used", "prob": 30 },
       { "item": "duct_tape", "prob": 30, "charges": [ 100, 400 ] },
-      { "item": "superglue", "prob": 30 },
+      { "group": "superglue", "prob": 30 },
       { "item": "light_battery_cell", "count": 4, "prob": 50, "charges": 100 },
       { "item": "deck_of_cards", "prob": 40 },
       { "item": "teleumbrella", "prob": 30 },
@@ -534,6 +535,7 @@
       { "item": "sponge", "prob": 40, "damage": [ 0, 2 ] },
       { "item": "brush", "custom-flags": [ "FILTHY" ], "prob": 20, "damage": [ 0, 4 ] },
       { "item": "sponge", "custom-flags": [ "FILTHY" ], "prob": 40, "damage": [ 0, 4 ] },
+      { "item": "plastic_shopping_bag", "prob": 10, "count": [ 0, 3 ] },
       { "item": "sponge", "prob": 85 },
       { "item": "chem_washing_soda", "prob": 20, "charges": [ 1, -1 ] },
       { "item": "bleach", "prob": 55, "charges": [ 1, -1 ] },
@@ -587,11 +589,9 @@
       {
         "collection": [
           { "item": "small_propane_tank", "prob": 70, "count": [ 0, 2 ], "charges": [ 0, 3000 ] },
-          { "item": "medium_propane_tank", "prob": 85, "count": [ 0, 2 ], "charges": [ 0, 15000 ] },
-          { "item": "large_propane_tank", "prob": 25, "charges": [ 0, 60000 ] },
           { "item": "propane_cooker", "prob": 80, "damage": [ 0, 4 ] }
         ],
-        "prob": 12
+        "prob": 1
       },
       { "item": "can_sealer", "prob": 2, "damage": [ 0, 4 ] },
       { "item": "oil_press_manual", "prob": 2, "damage": [ 0, 4 ] },
@@ -620,8 +620,8 @@
         ],
         "prob": 80
       },
-      { "count": [ 1, 10 ], "prob": 80, "group": "tea_raw_bag_plastic_33" },
-      { "count": [ 1, 10 ], "prob": 40, "group": "tea_green_raw_bag_plastic_33" },
+      { "prob": 30, "group": "tea_raw_bag_plastic_33" },
+      { "prob": 20, "group": "tea_green_raw_bag_plastic_33" },
       { "item": "teapot", "prob": 70 },
       { "item": "kettle", "prob": 50 },
       { "prob": 90, "sealed": false, "group": "sugar_jar_glass_sealed_10_140" },
@@ -629,10 +629,10 @@
         "distribution": [
           {
             "item": "milk_powder",
-            "count": [ 5, 20 ],
+            "count": [ 1, 20 ],
             "container-item": "null",
             "entry-wrapper": "jar_3l_glass_sealed",
-            "prob": 60,
+            "prob": 30,
             "sealed": false
           },
           { "item": "con_milk", "count": [ 1, 6 ], "prob": 10 },
@@ -647,7 +647,7 @@
       },
       { "item": "spoon", "count": [ 1, 6 ] },
       { "item": "ceramic_mug", "count": [ 1, 6 ] },
-      { "group": "teabag_box", "prob": 60 }
+      { "group": "teabag_box", "prob": 40 }
     ]
   },
   {
@@ -711,10 +711,10 @@
         "distribution": [
           {
             "item": "milk_powder",
-            "count": [ 5, 20 ],
+            "count": [ 1, 20 ],
             "container-item": "null",
             "entry-wrapper": "jar_3l_glass_sealed",
-            "prob": 40,
+            "prob": 20,
             "sealed": false
           },
           { "item": "milk_evap", "count": [ 1, 6 ], "prob": 10 },
@@ -740,7 +740,6 @@
     "type": "item_group",
     "//": "SUS item groups are collections that contain a reasonable realistic distribution of items that might spawn in a given storage furniture.",
     "//2": "This group is for an oven that might have some pots and pans in the warming drawer.",
-    "//3": "added propane spawns here, even if it's not technically a gas oven, it *does* have a pilot light in it.",
     "subtype": "collection",
     "entries": [
       {
@@ -792,13 +791,6 @@
           { "item": "dutch_oven", "prob": 5, "damage": [ 0, 4 ] }
         ],
         "prob": 50
-      },
-      {
-        "distribution": [
-          { "item": "medium_propane_tank", "prob": 20, "charges": [ 0, 3000 ] },
-          { "item": "small_propane_tank", "prob": 10, "charges": [ 0, 3000 ] }
-        ],
-        "prob": 8
       }
     ]
   },

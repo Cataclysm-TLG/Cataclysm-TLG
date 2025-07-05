@@ -2425,7 +2425,7 @@
     "looks_like": "vest_leather",
     "color": "dark_gray",
     "warmth": 2,
-    "material_thickness": 1,
+    "material_thickness": 0.3,
     "flags": [ "VARSIZE" ],
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 3 },

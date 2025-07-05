@@ -223,7 +223,7 @@
     "points": 3,
     "proficiencies": [ "prof_bow_basic", "prof_fletching", "prof_knives_familiar" ],
     "skills": [
-      { "level": 2, "name": "rifle" },
+      { "level": 2, "name": "archery" },
       { "level": 1, "name": "gun" },
       { "level": 1, "name": "swimming" },
       { "level": 1, "name": "survival" }
@@ -235,7 +235,7 @@
           { "item": "shirt_straw" },
           { "item": "skirt_grass" },
           {
-            "item": "compositecrossbow",
+            "item": "crossbow",
             "ammo-item": "bolt_simple_wood",
             "charges": 1,
             "contents-item": "shoulder_strap",
@@ -534,7 +534,7 @@
     "points": 3,
     "proficiencies": [ "prof_bow_basic", "prof_bow_expert", "prof_fletching", "prof_knives_familiar" ],
     "skills": [
-      { "level": 3, "name": "rifle" },
+      { "level": 3, "name": "archery" },
       { "level": 3, "name": "gun" },
       { "level": 2, "name": "swimming" },
       { "level": 2, "name": "survival" }
@@ -550,10 +550,10 @@
           { "item": "vest_leather" },
           { "item": "leather_leg_guards" },
           {
-            "item": "compositecrossbow",
+            "item": "crossbow",
             "ammo-item": "bolt_simple_wood",
             "charges": 1,
-            "contents-item": [ "shoulder_strap", "primitive_bow_silencer", "wooden_grip" ],
+            "contents-item": [ "shoulder_strap", "primitive_bow_silencer" ],
             "custom-flags": [ "no_auto_equip" ]
           },
           { "item": "quiver_large_birchbark", "contents-group": "quiver_arbalist" },

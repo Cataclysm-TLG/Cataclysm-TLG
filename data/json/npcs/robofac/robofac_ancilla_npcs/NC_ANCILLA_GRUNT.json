@@ -36,7 +36,7 @@
       { "item": "under_armor" },
       { "item": "under_armor_shorts" },
       { "item": "holster" },
-      { "item": "survivor_machete", "container-item": "scabbard" },
+      { "item": "machete", "container-item": "scabbard" },
       { "item": "gloves_fingerless_mod" }
     ]
   },
@@ -57,14 +57,6 @@
     "type": "item_group",
     "id": "NC_ANCILLA_GRUNT_wield",
     "subtype": "collection",
-    "items": [
-      {
-        "item": "modular_m4_carbine",
-        "variant": "modular_m4a1",
-        "ammo-item": "556",
-        "charges": 30,
-        "contents-item": [ "shoulder_strap", "suppressor" ]
-      }
-    ]
+    "items": [ { "group": "modular_m4a1", "ammo-item": "556", "charges": 30, "contents-item": [ "shoulder_strap", "suppressor" ] } ]
   }
 ]

@@ -1,21 +1,21 @@
 # The ASCII art must be 18 lines in height (6 lines per ascii art text line).
 # Max length of a line (excluding color tags) is 80 characters; the following line is for reference.
 ################################################################################
-<color_light_gray>   _________            __                   .__                                </color>
-<color_light_gray>   \_   ___ \ _____   _/  |_ _____     ____  |  |   ___.__   ______  _____      </color>
-<color_light_gray>   /    \  \/ \__  \  \   __\\__  \  _/ ___\ |  |  <   |  | /  ___/ /     \  '  </color>
-<color_light_gray>   \     \____ / __ \_ |  |   / __ \_\  \___ |  |__ \___  | \___ \ |  Y Y  \    </color>
-<color_light_gray>    \______  /(____  / |__|  (____  / \___  >|____/ / ____|/____  >|__|_|  / '  </color>
-<color_light_gray>           \/      \/             \/      \/        \/          \/       \/     </color>
-<color_red>            ________ .               .__                     __                 </color>
-<color_red>            \______ \|\       ____   |  |  _____    ______ _/  |_               </color>
-<color_red>               |  |  | \__  _/ __ \  |  |  \__  \  /  ___/ \   __\              </color>
-<color_red>               |  |  |  _ \ \  ___/  |  |__ / __ \ \___ \   |  |                </color>
-<color_red>               |__|  |_| \_\ \___  > |____/(____  /_____  > |__|                </color>
-<color_red>                                 \/             \/      \/                      </color>
-<color_light_gray>  _________                                           __                        </color>
-<color_light_gray>  \_   ____\   ____   ______     ___   ____ _____   _/  |_ ._    ___   ______   </color>
-<color_light_gray>  /   / ______/ __ \ |      \ _/ __ \ |   _|\__  \  \   __\| \  /   \ |      \  </color>
-<color_light_gray>  \   \/__  /\  ___/ |  |\   \\  ___/ |  /   / __ \  |  |  |  |<  |  >|  |\   \ </color>
-<color_light_gray>   \_____  /  \____ >|__| \  / \___  >|__|  (____  / |__|  |__| \___/ |__| \  / </color>
-<color_light_gray>         \/       \/       \/      \/            \/                         \/  </color>
+<color_green>   _________            __                   .__                                </color>
+<color_green>   \_   ___ \ _____   _/  |_ _____     ____  |  |   ___.__   ______  _____      </color>
+<color_green>   /    \  \/ \__  \  \   __\\__  \  _/ ___\ |  |  <   |  | /  ___/ /     \  '  </color>
+<color_green>   \     \____ / __ \_ |  |   / __ \_\  \___ |  |__ \___  | \___ \ |  Y Y  \    </color>
+<color_green>    \______  /(____  / |__|  (____  / \___  >|____/ / ____|/____  >|__|_|  / '  </color>
+<color_green>           \/      \/             \/      \/        \/          \/       \/     </color>
+<color_red>            ________ .              </color><color_light_gray>  _________                 .__             </color>
+<color_red>            \______ \|\       ____  </color><color_light_gray>  \_   ___ \   ___  _____   |  |            </color>
+<color_red>               |  |  | \__  _/ __ \ </color><color_light_gray>  /    \  \/  /   \ \__  \  |  |            </color>
+<color_red>               |  |  |  _ \ \  ___/ </color><color_light_gray>  \     \____<  |  > / __ \ |  |__          </color>
+<color_red>               |__|  |_| \_\ \___  ></color><color_light_gray>   \______  / \___/ (____  /|____/          </color>
+<color_red>                                 \/ </color><color_light_gray>          \/             \/                 </color>
+<color_green>  _________                                           __                        </color>
+<color_green>  \_   ____\   ____   ______     ___   ____ _____   _/  |_ ._    ___   ______   </color>
+<color_green>  /   / ______/ __ \ |      \ _/ __ \ |   _|\__  \  \   __\| \  /   \ |      \  </color>
+<color_green>  \   \/__  /\  ___/ |  |\   \\  ___/ |  /   / __ \  |  |  |  |<  |  >|  |\   \ </color>
+<color_green>   \_____  /  \____ >|__| \  / \___  >|__|  (____  / |__|  |__| \___/ |__| \  / </color>
+<color_green>         \/       \/       \/      \/            \/                         \/  </color>

@@ -242,7 +242,7 @@
     "//": "Medical consumables for emergency use excluding painkillers",
     "items": [
       [ "adrenaline_injector", 50 ],
-      { "item": "inhaler", "prob": 100, "charges": [ 10, 100 ] },
+      { "item": "inhaler", "prob": 70, "charges": [ 10, 100 ] },
       { "prob": 50, "group": "quikclot_bag_plastic_1_6" },
       { "item": "smoxygen_tank", "prob": 70, "charges": [ 0, 12 ] },
       { "distribution": [ { "group": "full_ifak" }, { "group": "used_ifak" } ], "prob": 40 }
@@ -255,8 +255,8 @@
     "subtype": "distribution",
     "entries": [
       { "group": "bfipowder_bottle_plastic_5_60", "prob": 100 },
-      { "item": "dayquil", "count": [ 1, 30 ], "container-item": "bottle_plastic", "prob": 50 },
-      { "item": "nyquil", "count": [ 1, 30 ], "container-item": "bottle_plastic", "prob": 50 }
+      { "item": "dayquil", "charges": [ 1, 10 ], "container-item": "bottle_plastic", "prob": 50 },
+      { "item": "nyquil", "charges": [ 1, 10 ], "container-item": "bottle_plastic", "prob": 50 }
     ]
   },
   {
@@ -338,8 +338,8 @@
       { "prob": 15, "group": "antihistamine_bottle_plastic_pill_supplement_1_30" },
       { "prob": 5, "group": "iodine_bottle_plastic_pill_supplement_1_10" },
       { "prob": 5, "group": "prussian_blue_bottle_plastic_pill_supplement_1_10" },
-      { "item": "dayquil", "prob": 70, "charges": [ 1, 5 ] },
-      { "item": "nyquil", "prob": 70, "charges": [ 1, 5 ] },
+      { "item": "dayquil", "prob": 70, "charges": [ 1, 10 ] },
+      { "item": "nyquil", "prob": 70, "charges": [ 1, 10 ] },
       { "group": "alcohol_wipes_box_used", "prob": 75 },
       { "group": "alcohol_wipes_box_full", "prob": 10 },
       { "item": "disinfectant", "prob": 35, "charges": [ 1, 10 ] },
@@ -358,7 +358,6 @@
     "type": "item_group",
     "id": "harddrugs",
     "items": [
-      { "item": "inhaler", "prob": 14, "charges": [ 10, 100 ] },
       { "prob": 15, "group": "codeine_bottle_plastic_pill_painkiller_1_10" },
       { "prob": 4, "group": "oxycodone_bottle_plastic_pill_prescription_1_10" },
       { "item": "morphine", "prob": 4, "count": [ 1, 4 ] },

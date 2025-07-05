@@ -5,8 +5,8 @@
     "category": "armor",
     "name": { "str": "light survivor suit" },
     "description": "Body armor handmade from a durable coverall with quilted Kevlar lining.  It's tough and chemical-resistant, but not waterproofed and it likely won't stand up to gunfire.",
-    "weight": "5200 g",
-    "volume": "10500 ml",
+    "weight": "4000 g",
+    "volume": "5800 ml",
     "price": "1100 USD",
     "price_postapoc": "50 USD",
     "material": [ "soft_rubber", "nylon", "kevlar" ],
@@ -17,7 +17,7 @@
     "//": "A mechanic's polyester boiler suit with a bunch of cut up Kevlar from cut-resistant garments sewn underneath.  No rubber, so it's breathable.",
     "armor": [
       {
-        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 } ],
         "encumbrance": [ 2, 2 ],
         "covers": [ "head" ],
         "specifically_covers": [ "head_throat" ],
@@ -26,7 +26,7 @@
       {
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
         ],
         "encumbrance": [ 14, 22 ],
         "covers": [ "torso" ],
@@ -35,10 +35,10 @@
       {
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
-          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "encumbrance": [ 14, 22 ],
+        "encumbrance": [ 14, 18 ],
         "specifically_covers": [
           "arm_shoulder_l",
           "arm_shoulder_r",
@@ -58,7 +58,7 @@
       {
         "material": [
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
-          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.5 }
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
         "encumbrance": [ 0, 0 ],
@@ -151,8 +151,8 @@
     "category": "armor",
     "name": { "str": "survivor suit" },
     "description": "Body armor handmade from a durable coverall with quilted Kevlar lining and a rubberized coating.  It provides good all-around protection from many of the hazards of the Cataclysm.",
-    "weight": "5200 g",
-    "volume": "10500 ml",
+    "weight": "4500 g",
+    "volume": "6000 ml",
     "price": "1800 USD",
     "price_postapoc": "200 USD",
     "material": [ "soft_rubber", "nylon", "kevlar", "kevlar_layered" ],
@@ -163,7 +163,7 @@
     "//": "A little extra kevlar and a rubberized coating.",
     "armor": [
       {
-        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [ { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 } ],
         "encumbrance": [ 2, 2 ],
         "covers": [ "head" ],
         "specifically_covers": [ "head_throat" ],
@@ -173,7 +173,7 @@
         "material": [
           { "type": "soft_rubber", "covered_by_mat": 86, "thickness": 0.1 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
         ],
         "encumbrance": [ 16, 24 ],
         "covers": [ "torso" ],
@@ -183,10 +183,10 @@
         "material": [
           { "type": "soft_rubber", "covered_by_mat": 90, "thickness": 0.1 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 },
-          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 97, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "encumbrance": [ 16, 24 ],
+        "encumbrance": [ 16, 20 ],
         "specifically_covers": [
           "arm_shoulder_l",
           "arm_shoulder_r",
@@ -207,7 +207,7 @@
         "material": [
           { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.1 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 },
-          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.5 }
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
         "encumbrance": [ 0, 0 ],
@@ -299,9 +299,9 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "survivor firesuit" },
-    "description": "A heavy, hand-built combination armor made from a flame-resistant jumpsuit with additional Kevlar padding and strategically placed butyl rubber coating.  It protects from brief exposure to flames as well as many other Cataclysmic hazards, though additional armor will be needed to stop bullets.",
-    "weight": "6800 g",
-    "volume": "11500 ml",
+    "description": "Handcrafted armor made from a flame-resistant jumpsuit with additional Kevlar padding and strategically placed butyl rubber coating.  It protects from brief exposure to flames as well as many other Cataclysmic hazards, though additional armor will be needed to stop bullets.",
+    "weight": "4500 g",
+    "volume": "6800 ml",
     "price": "2000 USD",
     "price_postapoc": "50 USD",
     "to_hit": -3,
@@ -314,7 +314,7 @@
       {
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "kevlar", "covered_by_mat": 100, "thickness": 1.5 }
         ],
         "encumbrance": [ 2, 2 ],
         "covers": [ "head" ],
@@ -326,7 +326,7 @@
           { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
           { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
         ],
         "covers": [ "torso" ],
         "coverage": 100,
@@ -337,11 +337,11 @@
           { "type": "soft_rubber", "covered_by_mat": 60, "thickness": 0.1 },
           { "type": "nomex", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 0.4 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.0 }
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 2.25 }
         ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
         "coverage": 98,
-        "encumbrance": [ 16, 22 ]
+        "encumbrance": [ 16, 20 ]
       }
     ],
     "pocket_data": [

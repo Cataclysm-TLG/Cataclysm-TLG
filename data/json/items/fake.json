@@ -54,7 +54,6 @@
     "description": "Extremely thin lenses provides user with augmented reality overlay allowing the user to zoom, and it displays handy information about local topology.",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "PORTABLE_GAME", "EINKTABLETPC", "ELECTRICSTORAGE", "EBOOKSAVE", "EBOOKREAD" ],
-    "tick_action": [ "EPIC_MUSIC" ],
     "pocket_data": [
       {
         "pocket_type": "EBOOK",
@@ -124,13 +123,6 @@
     "copy-from": "fake_item",
     "name": { "str": "heavy anvil" },
     "qualities": [ [ "ANVIL", 4 ] ]
-  },
-  {
-    "id": "fake_anvil_crude",
-    "type": "TOOL",
-    "copy-from": "fake_item",
-    "name": { "str": "anvil" },
-    "qualities": [ [ "ANVIL", 2 ] ]
   },
   {
     "id": "fake_milling_item",
@@ -209,6 +201,15 @@
     "copy-from": "fake_appliance_tool",
     "charges_per_use": 25,
     "charged_qualities": [ [ "DRILL", 3 ] ]
+  },
+  {
+    "id": "glassblowers_crucible_tool",
+    "type": "TOOL",
+    "name": { "str": "glassblower's crucible" },
+    "copy-from": "fake_appliance_tool",
+    "symbol": "o",
+    "color": "brown",
+    "extend": { "flags": [ "ALLOWS_REMOTE_USE" ] }
   },
   {
     "id": "tablesaw_tool",

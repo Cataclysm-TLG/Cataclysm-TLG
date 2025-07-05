@@ -25,7 +25,6 @@
 #include "common_types.h"
 #include "computer.h"
 #include "condition.h"
-#include "coordinate_conversions.h"
 #include "coordinates.h"
 #include "cuboid_rectangle.h"
 #include "debug.h"
@@ -300,10 +299,11 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
         density = density / 100;
 
         // Not sure if we actually have to check all submaps.
-        const bool any_missing = !generated.at( get_nonant( { point_rel_sm_zero, p_sm.z() } ) ) ||
-                                 !generated.at( get_nonant( { point_rel_sm_east, p_sm.z() } ) ) ||
-                                 !generated.at( get_nonant( { point_rel_sm_south_east, p_sm.z() } ) ) ||
-                                 !generated.at( get_nonant( { point_rel_sm_south, p_sm.z() } ) );
+        const bool any_missing = !generated.at( get_nonant( tripoint_rel_sm{ point_rel_sm_zero, p_sm.z() } ) )
+                                 ||
+                                 !generated.at( get_nonant( tripoint_rel_sm{ point_rel_sm_east, p_sm.z() } ) ) ||
+                                 !generated.at( get_nonant( tripoint_rel_sm{ point_rel_sm_south_east, p_sm.z() } ) ) ||
+                                 !generated.at( get_nonant( tripoint_rel_sm{ point_rel_sm_south, p_sm.z() } ) );
 
         mapgendata dat( { p.xy(), gridz}, *this, density, when, nullptr );
         if( ( any_missing || !save_results ) &&
@@ -759,6 +759,14 @@ load_mapgen_function( const JsonObject &jio, const std::string &id_base, const p
                       const point &total )
 {
     dbl_or_var weight = get_dbl_or_var( jio, "weight", false,  1000 );
+    if( weight.min.is_constant() && ( weight.min.constant() < 0 ||
+                                      weight.min.constant() >= INT_MAX ) ) {
+        jio.throw_error_at( "weight", "min value out of bounds (0 - max int)" );
+    }
+    if( weight.pair && weight.max.is_constant() && ( weight.max.constant() < 0 ||
+            weight.max.constant() >= INT_MAX ) ) {
+        jio.throw_error_at( "weight", "max value out of bounds (0 - max int)" );
+    }
 
     if( jio.get_bool( "disabled", false ) ) {
         jio.allow_omitted_members();
@@ -1883,8 +1891,14 @@ class jmapgen_alternatively : public jmapgen_piece
                 chosen->get().apply( dat, x, y, z, context );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 
@@ -1958,9 +1972,9 @@ class jmapgen_field : public jmapgen_piece
                 return;
             }
             if( remove ) {
-                dat.m.remove_field( tripoint( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id );
+                dat.m.remove_field( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id );
             } else {
-                dat.m.add_field( tripoint( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id,
+                dat.m.add_field( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id,
                                  random_entry( intensities ), age );
             }
         }
@@ -2005,7 +2019,7 @@ class jmapgen_npc : public jmapgen_piece
                 add_msg_debug( debugmode::DF_NPC, "NPC with unique id %s already exists.", unique_id );
                 return;
             }
-            tripoint const dst( x.get(), y.get(), dat.zlevel() + z.get() );
+            tripoint_bub_ms const dst( x.get(), y.get(), dat.zlevel() + z.get() );
             // TODO: Make place_npc 3D aware.
             character_id npc_id = dat.m.place_npc( dst.xy(), chosen_id );
             if( get_map().inbounds( dat.m.getglobal( dst ) ) ) {
@@ -2108,15 +2122,21 @@ class jmapgen_sign : public jmapgen_piece
                 }
                 signtext = apply_all_tags( signtext, cityname );
             }
-            dat.m.set_signage( r.raw(), signtext );
+            dat.m.set_signage( r, signtext );
         }
         std::string apply_all_tags( std::string signtext, const std::string &cityname ) const {
             signtext = SNIPPET.expand( signtext );
             replace_city_tag( signtext, cityname );
             return signtext;
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 /**
@@ -2158,7 +2178,7 @@ class jmapgen_graffiti : public jmapgen_piece
                 }
                 graffiti = apply_all_tags( graffiti, cityname );
             }
-            dat.m.set_graffiti( r.raw(), graffiti );
+            dat.m.set_graffiti( r, graffiti );
         }
         std::string apply_all_tags( std::string graffiti, const std::string &cityname ) const {
             graffiti = SNIPPET.expand( graffiti );
@@ -2195,8 +2215,14 @@ class jmapgen_vending_machine : public jmapgen_piece
             }
             dat.m.place_vending( r, chosen_id, reinforced, lootable );
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -2230,8 +2256,14 @@ class jmapgen_toilet : public jmapgen_piece
                 dat.m.place_toilet( r, charges );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 /**
@@ -2277,8 +2309,14 @@ class jmapgen_gaspump : public jmapgen_piece
                 dat.m.place_gas_pump( r, charges, chosen_fuel );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 
@@ -2326,7 +2364,7 @@ class jmapgen_liquid_item : public jmapgen_piece
                 }
                 if( newliquid.charges > 0 ) {
                     dat.m.add_item_or_charges(
-                        tripoint( x.get(), y.get(), dat.zlevel() + z.get() ), newliquid );
+                        tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), newliquid );
                 }
             }
         }
@@ -2360,7 +2398,7 @@ class jmapgen_corpse : public jmapgen_piece
             const mtype_id &corpse_type = random_entry_ref( monster_group );
             item corpse = item::make_corpse( corpse_type,
                                              std::max( calendar::turn - age, calendar::fall_of_civilization ) );
-            dat.m.add_item_or_charges( tripoint( x.get(), y.get(), dat.zlevel() + z.get() ),
+            dat.m.add_item_or_charges( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ),
                                        corpse );
         }
 };
@@ -2399,7 +2437,8 @@ class jmapgen_item_group : public jmapgen_piece
         }
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &/*context*/ ) const override {
-            dat.m.place_items( group_id, chance.get(), point( x.val, y.val ), point( x.valmax, y.valmax ),
+            dat.m.place_items( group_id, chance.get(), point_bub_ms( x.val, y.val ), point_bub_ms( x.valmax,
+                               y.valmax ),
                                dat.zlevel() + z.get(), true,
                                calendar::start_of_cataclysm, 0, 0, faction );
         }
@@ -2452,8 +2491,8 @@ class jmapgen_loot : public jmapgen_piece
                 spawn.reserve( 20 );
                 isd->create( spawn, calendar::start_of_cataclysm,
                              spawn_flags::use_spawn_rate );
-                dat.m.spawn_items( tripoint( rng( x.val, x.valmax ), rng( y.val, y.valmax ),
-                                             dat.zlevel() + z.get() ), spawn );
+                dat.m.spawn_items( tripoint_bub_ms( rng( x.val, x.valmax ), rng( y.val, y.valmax ),
+                                                    dat.zlevel() + z.get() ), spawn );
             }
         }
 
@@ -2720,7 +2759,7 @@ class jmapgen_vehicle : public jmapgen_piece
             if( chosen_id.is_null() ) {
                 return;
             }
-            tripoint const dst( x.get(), y.get(), dat.zlevel() + z.get() );
+            tripoint_bub_ms const dst( x.get(), y.get(), dat.zlevel() + z.get() );
             vehicle *veh = dat.m.add_vehicle( chosen_id->pick(), dst, random_entry( rotation ),
                                               fuel, status );
             if( veh && !faction.empty() ) {
@@ -2730,8 +2769,14 @@ class jmapgen_vehicle : public jmapgen_piece
                 dat.m.queue_main_cleanup();
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 
         void check( const std::string &context, const mapgen_parameters &parameters,
@@ -2907,7 +2952,8 @@ class jmapgen_spawn_item : public jmapgen_piece
             const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
             int spawn_count = ( c == 100 ) ? 1 : roll_remainder( c * spawn_rate / 100.0f );
             for( int i = 0; i < spawn_count; i++ ) {
-                dat.m.spawn_item( tripoint( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id, amount.get(),
+                dat.m.spawn_item( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id,
+                                  amount.get(),
                                   0, calendar::start_of_cataclysm, 0, flags, variant, faction );
             }
         }
@@ -2950,15 +2996,21 @@ class jmapgen_trap : public jmapgen_piece
             if( chosen_id.id().is_null() ) {
                 return;
             }
-            const tripoint actual_loc = tripoint( x.get(), y.get(), dat.zlevel() + z.get() );
+            const tripoint_bub_ms actual_loc{ x.get(), y.get(), dat.zlevel() + z.get() };
             if( remove ) {
                 dat.m.remove_trap( actual_loc );
             } else {
                 dat.m.trap_set( actual_loc, chosen_id );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -2991,12 +3043,18 @@ class jmapgen_furniture : public jmapgen_piece
             if( chosen_id.id().is_null() ) {
                 return;
             }
-            if( !dat.m.furn_set( tripoint( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id ) ) {
+            if( !dat.m.furn_set( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id ) ) {
                 debugmsg( "Problem setting furniture in %s", context );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -3034,7 +3092,7 @@ class jmapgen_terrain : public jmapgen_piece
             if( chosen_id.id().is_null() ) {
                 return;
             }
-            tripoint p( x.get(), y.get(), dat.zlevel() + z.get() );
+            tripoint_bub_ms p( x.get(), y.get(), dat.zlevel() + z.get() );
 
             ter_id terrain_here = dat.m.ter( p );
             const ter_t &chosen_ter = *chosen_id;
@@ -3129,7 +3187,7 @@ class jmapgen_terrain : public jmapgen_piece
             if( is_boring_wall || act_trap == apply_action::act_erase ) {
                 dat.m.remove_trap( p );
             } else if( act_trap == apply_action::act_dismantle ) {
-                dat.m.tr_at( p ).on_disarmed( dat.m, p );
+                dat.m.tr_at( p ).on_disarmed( dat.m, p.raw() );
             }
 
             if( is_boring_wall || act_item == apply_action::act_erase ) {
@@ -3163,8 +3221,14 @@ class jmapgen_terrain : public jmapgen_piece
             }
             dat.m.ter_set( p, chosen_id );
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -3294,7 +3358,7 @@ class jmapgen_computer : public jmapgen_piece
             const tripoint_bub_ms r( x.get(), y.get(), dat.zlevel() + z.get() );
             dat.m.furn_set( r, furn_f_console );
             computer *cpu =
-                dat.m.add_computer( r.raw(), name.translated(),
+                dat.m.add_computer( r, name.translated(),
                                     security );
             for( const computer_option &opt : options ) {
                 cpu->add_option( opt );
@@ -3316,8 +3380,14 @@ class jmapgen_computer : public jmapgen_piece
                 cpu->set_access_denied_msg( access_denied.translated() );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 
@@ -3453,8 +3523,14 @@ class jmapgen_sealed_item : public jmapgen_piece
             furn_id chosen_furn = furniture.get( dat );
             dat.m.furn_set( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_furn );
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
-            return dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value();
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
+            if( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(), dat.zlevel() + p.z() ) ).has_value() ) {
+                return ret_val<void>::make_failure( dat.m.veh_at( tripoint_bub_ms( p.x(), p.y(),
+                                                    dat.zlevel() + p.z() ) ).value().vehicle().disp_name() );
+            } else {
+                return ret_val<void>::make_success();
+            }
         }
 };
 
@@ -3485,9 +3561,11 @@ class jmapgen_zone : public jmapgen_piece
                     const std::string &/*context*/ ) const override {
             zone_type_id chosen_zone_type = zone_type.get( dat );
             faction_id chosen_faction = faction.get( dat );
-            const tripoint start = dat.m.getabs( tripoint( x.val, y.val, dat.zlevel() + z.get() ) );
-            const tripoint end = dat.m.getabs( tripoint( x.valmax, y.valmax, dat.zlevel() + z.get() ) );
-            mapgen_place_zone( start, end, chosen_zone_type, chosen_faction, name, filter, &dat.m );
+            const tripoint_abs_ms start = dat.m.getglobal( tripoint_bub_ms( int( x.val ), int( y.val ),
+                                          dat.zlevel() + z.get() ) );
+            const tripoint_abs_ms end = dat.m.getglobal( tripoint_bub_ms( int( x.valmax ), int( y.valmax ),
+                                        dat.zlevel() + z.get() ) );
+            mapgen_place_zone( start.raw(), end.raw(), chosen_zone_type, chosen_faction, name, filter, &dat.m );
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -3513,7 +3591,7 @@ class jmapgen_variable : public jmapgen_piece
         }
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &/*context*/ ) const override {
-            queued_points[name] = dat.m.getglobal( tripoint( x.val, y.val,
+            queued_points[name] = dat.m.getglobal( tripoint_bub_ms( int( x.val ), int( y.val ),
                                                    dat.zlevel() + z.get() ) );
         }
 };
@@ -3536,15 +3614,15 @@ class jmapgen_remove_vehicles : public jmapgen_piece
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &/*context*/ ) const override {
 
-            const tripoint start( x.val, y.val, dat.zlevel() + z.get() );
-            const tripoint end( x.valmax, y.valmax, dat.zlevel() + z.get() );
-            const tripoint_range<tripoint> range = tripoint_range<tripoint>( start, end );
-            for( const tripoint &p : range ) {
+            const tripoint_bub_ms start( int( x.val ), int( y.val ), dat.zlevel() + z.get() );
+            const tripoint_bub_ms end( int( x.valmax ), int( y.valmax ), dat.zlevel() + z.get() );
+            const tripoint_range<tripoint_bub_ms> range = tripoint_range<tripoint_bub_ms>( start, end );
+            for( const tripoint_bub_ms &p : range ) {
                 if( optional_vpart_position vp = dat.m.veh_at( p ) ) {
                     const auto rit = std::find( vehicles_to_remove.begin(), vehicles_to_remove.end(),
                                                 vp->vehicle().type );
                     if( rit != vehicles_to_remove.end() ) {
-                        get_map().remove_vehicle_from_cache( &vp->vehicle(), start.z, end.z );
+                        get_map().remove_vehicle_from_cache( &vp->vehicle(), start.z(), end.z() );
                         dat.m.destroy_vehicle( &vp->vehicle() );
                     }
                 }
@@ -3596,9 +3674,10 @@ class jmapgen_remove_all : public jmapgen_piece
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &/*context*/ ) const override {
 
-            const tripoint start = tripoint( x.val, y.val, dat.zlevel() + z.get() );
-            const tripoint end = tripoint( x.valmax, y.valmax, dat.zlevel() + z.get() );
-            for( const tripoint &p : tripoint_range<tripoint>( start, end ) ) {
+            const tripoint_bub_ms start = tripoint_bub_ms( int( x.val ), int( y.val ), dat.zlevel() + z.get() );
+            const tripoint_bub_ms end = tripoint_bub_ms( int( x.valmax ), int( y.valmax ),
+                                        dat.zlevel() + z.get() );
+            for( const tripoint_bub_ms &p : tripoint_range<tripoint_bub_ms>( start, end ) ) {
                 dat.m.furn_clear( p );
                 dat.m.i_clear( p );
                 dat.m.remove_trap( p );
@@ -3606,7 +3685,7 @@ class jmapgen_remove_all : public jmapgen_piece
                 dat.m.delete_graffiti( p );
                 if( optional_vpart_position vp = dat.m.veh_at( p ) ) {
                     if( get_map().inbounds( dat.m.getglobal( start ) ) ) {
-                        get_map().remove_vehicle_from_cache( &vp->vehicle(), start.z, end.z );
+                        get_map().remove_vehicle_from_cache( &vp->vehicle(), start.z(), end.z() );
                     }
                     dat.m.destroy_vehicle( &vp->vehicle() );
                 }
@@ -3994,11 +4073,12 @@ class jmapgen_nested : public jmapgen_piece
                           offending_nest_x.str(), oter_name, z.val, z.valmax );
             }
         }
-        bool has_vehicle_collision( const mapgendata &dat, const tripoint_rel_ms &p ) const override {
+        ret_val<void> has_vehicle_collision( const mapgendata &dat,
+                                             const tripoint_rel_ms &p ) const override {
             const weighted_int_list<mapgen_value<nested_mapgen_id>> &selected_entries =
                         get_entries( dat );
             if( selected_entries.empty() ) {
-                return false;
+                return ret_val<void>::make_success();
             }
 
             for( const auto &entry : selected_entries ) {
@@ -4008,16 +4088,17 @@ class jmapgen_nested : public jmapgen_piece
                 }
                 const auto iter = nested_mapgens.find( id );
                 if( iter == nested_mapgens.end() ) {
-                    return false;
+                    return ret_val<void>::make_success();
                 }
                 for( const auto &nest : iter->second.funcs() ) {
-                    if( nest.obj->has_vehicle_collision( dat, p ) ) {
-                        return true;
+                    const ret_val<void> has_vehicle_collision = nest.obj->has_vehicle_collision( dat, p );
+                    if( !has_vehicle_collision.success() ) {
+                        return has_vehicle_collision;
                     }
                 }
             }
 
-            return false;
+            return ret_val<void>::make_success();
         }
 };
 
@@ -5014,7 +5095,7 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
             }
             break;
             case JMAPGEN_SETMAP_RADIATION: {
-                m.set_radiation( target_pos.raw(), val.get() );
+                m.set_radiation( target_pos, val.get() );
             }
             break;
             case JMAPGEN_SETMAP_TRAP_REMOVE: {
@@ -5022,8 +5103,8 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
             }
             break;
             case JMAPGEN_SETMAP_CREATURE_REMOVE: {
-                Creature *tmp_critter = get_creature_tracker().creature_at( tripoint_abs_ms( m.getabs(
-                                            target_pos ) ), true );
+                Creature *tmp_critter = get_creature_tracker().creature_at( m.getglobal(
+                                            target_pos ), true );
                 if( tmp_critter && !tmp_critter->is_avatar() ) {
                     tmp_critter->die( nullptr );
                 }
@@ -5038,7 +5119,7 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
             }
             break;
             case JMAPGEN_SETMAP_BASH: {
-                m.bash( target_pos.raw(), 9999 );
+                m.bash( target_pos, 9999 );
             }
             break;
             case JMAPGEN_SETMAP_VARIABLE: {
@@ -5062,30 +5143,34 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
             }
             break;
             case JMAPGEN_SETMAP_LINE_TRAP: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
                     // TODO: the trap_id should be stored separately and not be wrapped in an jmapgen_int
-                    mtrap_set( &m, tripoint_bub_ms( i.x, i.y, z_level ), trap_id( val.get() ),
+                    mtrap_set( &m, tripoint_bub_ms( i.x(), i.y(), z_level ), trap_id( val.get() ),
                                dat.has_flag( jmapgen_flags::avoid_creatures ) );
                 }
             }
             break;
             case JMAPGEN_SETMAP_LINE_TRAP_REMOVE: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
                     // TODO: the trap_id should be stored separately and not be wrapped in an jmapgen_int
-                    mremove_trap( &m, tripoint_bub_ms( i.x, i.y, z_level ), trap_id( val.get() ).id() );
+                    mremove_trap( &m, tripoint_bub_ms( i.x(), i.y(), z_level ), trap_id( val.get() ).id() );
                 }
             }
             break;
             case JMAPGEN_SETMAP_LINE_CREATURE_REMOVE: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
-                    Creature *tmp_critter = get_creature_tracker().creature_at( tripoint_abs_ms( m.getabs( tripoint( i,
-                                            z_level ) ) ), true );
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
+                    Creature *tmp_critter = get_creature_tracker().creature_at( tripoint_abs_ms( m.getglobal(
+                                                tripoint_bub_ms( i.x(), i.y(),
+                                                        z_level ) ) ), true );
                     if( tmp_critter && !tmp_critter->is_avatar() ) {
                         tmp_critter->die( nullptr );
                     }
@@ -5093,39 +5178,44 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
             }
             break;
             case JMAPGEN_SETMAP_LINE_ITEM_REMOVE: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
-                    m.i_clear( tripoint_bub_ms( i.x, i.y, z_level ) );
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
+                    m.i_clear( tripoint_bub_ms( i.x(), i.y(), z_level ) );
                 }
             }
             break;
             case JMAPGEN_SETMAP_LINE_FIELD_REMOVE: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
-                    mremove_fields( &m, tripoint_bub_ms( i.x, i.y, z_level ) );
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
+                    mremove_fields( &m, tripoint_bub_ms( i.x(), i.y(), z_level ) );
                 }
             }
             break;
             case JMAPGEN_SETMAP_LINE_RADIATION: {
-                const std::vector<point> line = line_to( point( x_get(), y_get() ), point( x2_get(), y2_get() ),
-                                                0 );
-                for( const point &i : line ) {
-                    m.set_radiation( tripoint( i, z_level ), static_cast<int>( val.get() ) );
+                const std::vector<point_bub_ms> line = line_to( point_bub_ms( x_get(), y_get() ),
+                                                       point_bub_ms( x2_get(), y2_get() ),
+                                                       0 );
+                for( const point_bub_ms &i : line ) {
+                    m.set_radiation( tripoint_bub_ms( i.x(), i.y(), z_level ), static_cast<int>( val.get() ) );
                 }
             }
             break;
             case JMAPGEN_SETMAP_SQUARE_TER: {
                 // TODO: the ter_id should be stored separately and not be wrapped in an jmapgen_int
-                m.draw_square_ter( ter_id( val.get() ), point( x_get(), y_get() ), point( x2_get(), y2_get() ),
+                m.draw_square_ter( ter_id( val.get() ), point_bub_ms( x_get(), y_get() ), point_bub_ms( x2_get(),
+                                   y2_get() ),
                                    z_level,
                                    dat.has_flag( jmapgen_flags::avoid_creatures ) );
             }
             break;
             case JMAPGEN_SETMAP_SQUARE_FURN: {
                 // TODO: the furn_id should be stored separately and not be wrapped in an jmapgen_int
-                m.draw_square_furn( furn_id( val.get() ), point( x_get(), y_get() ), point( x2_get(), y2_get() ),
+                m.draw_square_furn( furn_id( val.get() ), point_bub_ms( x_get(), y_get() ), point_bub_ms( x2_get(),
+                                    y2_get() ),
                                     z_level,
                                     dat.has_flag( jmapgen_flags::avoid_creatures ) );
             }
@@ -5161,8 +5251,9 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
                 const int cy2 = y2_get();
                 for( int tx = c.x; tx <= cx2; tx++ ) {
                     for( int ty = c.y; ty <= cy2; ty++ ) {
-                        Creature *tmp_critter = get_creature_tracker().creature_at( tripoint_abs_ms( m.getabs( tripoint( tx,
-                                                ty, z_level ) ) ), true );
+                        Creature *tmp_critter = get_creature_tracker().creature_at( tripoint_abs_ms( m.getglobal(
+                                                    tripoint_bub_ms( tx,
+                                                            ty, z_level ) ) ), true );
                         if( tmp_critter && !tmp_critter->is_avatar() ) {
                             tmp_critter->die( nullptr );
                         }
@@ -5198,7 +5289,7 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
                 const int cy2 = y2_get();
                 for( int tx = c2.x; tx <= cx2; tx++ ) {
                     for( int ty = c2.y; ty <= cy2; ty++ ) {
-                        m.set_radiation( tripoint( tx, ty, z_level ), static_cast<int>( val.get() ) );
+                        m.set_radiation( tripoint_bub_ms( tx, ty, z_level ), static_cast<int>( val.get() ) );
                     }
                 }
             }
@@ -5212,7 +5303,7 @@ bool jmapgen_setmap::apply( const mapgendata &dat, const tripoint_rel_ms &offset
     return true;
 }
 
-bool jmapgen_setmap::has_vehicle_collision( const mapgendata &dat,
+ret_val<void> jmapgen_setmap::has_vehicle_collision( const mapgendata &dat,
         const tripoint_rel_ms &offset ) const
 {
     static const auto get = []( const jmapgen_int & v, int v_offset ) {
@@ -5233,8 +5324,8 @@ bool jmapgen_setmap::has_vehicle_collision( const mapgendata &dat,
     const auto y2_get = [this, &offset]() {
         return get( y2, offset.y() );
     };
-    const tripoint_rel_ms start = tripoint_rel_ms( x_get(), y_get(), dat.zlevel() + z_get() );
-    tripoint_rel_ms end = start;
+    const tripoint_bub_ms start = tripoint_bub_ms( x_get(), y_get(), dat.zlevel() + z_get() );
+    tripoint_bub_ms end = start;
     switch( op ) {
         case JMAPGEN_SETMAP_TER:
         case JMAPGEN_SETMAP_FURN:
@@ -5256,35 +5347,38 @@ bool jmapgen_setmap::has_vehicle_collision( const mapgendata &dat,
             break;
         /* if it's not a terrain, furniture, or trap, it can't collide */
         default:
-            return false;
+            return ret_val<void>::make_success();
     }
-    for( const tripoint &p : dat.m.points_in_rectangle( start.raw(), end.raw() ) ) {
+    for( const tripoint_bub_ms &p : dat.m.points_in_rectangle( start, end ) ) {
         if( dat.m.veh_at( p ) ) {
-            return true;
+            return ret_val<void>::make_failure( dat.m.veh_at( p ).value().vehicle().disp_name() );
         }
     }
-    return false;
+    return ret_val<void>::make_success();
 }
 
-bool mapgen_function_json_base::has_vehicle_collision(
+ret_val<void> mapgen_function_json_base::has_vehicle_collision(
     const mapgendata &dat, const tripoint_rel_ms &offset ) const
 {
     for( const jmapgen_setmap &elem : setmap_points ) {
-        if( elem.has_vehicle_collision( dat, offset ) ) {
-            return true;
+        const ret_val<void> has_vehicle_collision = elem.has_vehicle_collision( dat, offset );
+        if( !has_vehicle_collision.success() ) {
+            return has_vehicle_collision;
         }
     }
 
     return objects.has_vehicle_collision( dat, offset );
 }
 
-static bool apply_mapgen_in_phases(
+static ret_val<void> apply_mapgen_in_phases(
     const mapgendata &md, const std::vector<jmapgen_setmap> &setmap_points,
     const jmapgen_objects &objects, const tripoint_rel_ms &offset, const std::string &context,
     bool verify = false )
 {
-    if( verify && objects.has_vehicle_collision( md, offset ) ) {
-        return false;
+    const ret_val<void> has_vehicle_collision = objects.has_vehicle_collision( md, offset );
+    if( verify &&  !has_vehicle_collision.success() ) {
+
+        return has_vehicle_collision;
     }
 
     // We must apply all the mapgen in phases, but the mapgen is split between
@@ -5300,8 +5394,9 @@ static bool apply_mapgen_in_phases(
             if( elem.phase() != phase ) {
                 break;
             }
-            if( verify && elem.has_vehicle_collision( md, offset ) ) {
-                return false;
+            const ret_val<void> has_vehicle_collision = elem.has_vehicle_collision( md, offset );
+            if( verify && !has_vehicle_collision.success() ) {
+                return has_vehicle_collision;
             }
             elem.apply( md, offset );
         }
@@ -5312,7 +5407,7 @@ static bool apply_mapgen_in_phases(
 
     resolve_regional_terrain_and_furniture( md );
 
-    return true;
+    return ret_val<void>::make_success();
 }
 
 /*
@@ -5447,19 +5542,22 @@ void jmapgen_objects::apply( const mapgendata &dat, mapgen_phase phase,
     }
 }
 
-bool jmapgen_objects::has_vehicle_collision( const mapgendata &dat,
+ret_val<void> jmapgen_objects::has_vehicle_collision( const mapgendata &dat,
         const tripoint_rel_ms &offset ) const
 {
     for( const jmapgen_obj &obj : objects ) {
         jmapgen_place where = obj.first;
         where.offset( tripoint_rel_ms( - offset.raw() ) );
         const auto &what = *obj.second;
-        if( what.has_vehicle_collision( dat, tripoint_rel_ms( where.x.get(), where.y.get(),
-                                        where.z.get() ) ) ) {
-            return true;
+        const ret_val<void> has_vehicle_collision = what.has_vehicle_collision( dat,
+                tripoint_rel_ms( where.x.get(),
+                                 where.y.get(),
+                                 where.z.get() ) );
+        if( !has_vehicle_collision.success() ) {
+            return has_vehicle_collision;
         }
     }
-    return false;
+    return ret_val<void>::make_success();
 }
 
 /////////////
@@ -5486,7 +5584,7 @@ void map::draw_map( mapgendata &dat )
         // not one of the hardcoded ones!
         // load from JSON???
         debugmsg( "Error: tried to generate map for omtype %s, \"%s\" (id_mapgen %s)",
-                  terrain_type.id().c_str(), terrain_type->get_name(), function_key.c_str() );
+                  terrain_type.id().c_str(), terrain_type->get_name( om_vision_level::full ), function_key.c_str() );
         fill_background( this, ter_t_floor );
     }
 
@@ -5505,7 +5603,7 @@ void map::draw_lab( mapgendata &dat )
     bool central_lab = false;
     bool tower_lab = false;
 
-    point p2;
+    point_bub_ms p2;
 
     int lw = 0;
     int rw = 0;
@@ -5653,14 +5751,13 @@ void map::draw_lab( mapgendata &dat )
 
             const auto maybe_insert_stairs = [this]( const oter_id & terrain,  const ter_id & t_stair_type ) {
                 if( is_ot_match( "stairs", terrain, ot_match_type::contains ) ) {
-                    const auto predicate = [this]( const tripoint & p ) {
+                    const auto predicate = [this]( const tripoint_bub_ms & p ) {
                         return ter( p ) == ter_t_thconc_floor && furn( p ) == furn_str_id::NULL_ID() &&
                                tr_at( p ).is_null();
                     };
-                    // Can't the tripoint_bub_ms because 'random_point' below only supports the untyped version.
-                    const tripoint_range<tripoint> range =
-                        points_in_rectangle( tripoint{ 0, 0, abs_sub.z() },
-                                             tripoint{ SEEX * 2 - 2, SEEY * 2 - 2, abs_sub.z() } );
+                    const tripoint_range<tripoint_bub_ms> range =
+                        points_in_rectangle( tripoint_bub_ms{ 0, 0, abs_sub.z() },
+                                             tripoint_bub_ms{ SEEX * 2 - 2, SEEY * 2 - 2, abs_sub.z() } );
 
                     if( const auto p = random_point( range, predicate ) ) {
                         ter_set( *p, t_stair_type );
@@ -5704,7 +5801,7 @@ void map::draw_lab( mapgendata &dat )
                     // Rotated maps cannot handle borders and have to be caught in code.
                     // We determine if a border isn't handled by checking the east-facing
                     // border space where the door normally is -- it should be a wall or door.
-                    tripoint east_border( 23, 11, abs_sub.z() );
+                    tripoint_bub_ms east_border( 23, 11, abs_sub.z() );
                     if( !has_flag_ter( ter_furn_flag::TFLAG_WALL, east_border ) &&
                         !has_flag_ter( ter_furn_flag::TFLAG_DOOR, east_border ) ) {
                         // TODO: create a ter_reset function that does ter_set,
@@ -5716,32 +5813,32 @@ void map::draw_lab( mapgendata &dat )
                         ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_reinforced_glass :
                                              ter_t_concrete_wall;
                         for( int i = 0; i < SEEX * 2; i++ ) {
-                            ter_set( point( 23, i ), rw_type );
-                            furn_set( point( 23, i ), furn_str_id::NULL_ID() );
-                            i_clear( tripoint( 23, i, dat.zlevel() ) );
+                            ter_set( point_bub_ms( 23, i ), rw_type );
+                            furn_set( point_bub_ms( 23, i ), furn_str_id::NULL_ID() );
+                            i_clear( tripoint_bub_ms( 23, i, dat.zlevel() ) );
 
-                            ter_set( point( i, 23 ), bw_type );
-                            furn_set( point( i, 23 ), furn_str_id::NULL_ID() );
-                            i_clear( tripoint( i, 23, dat.zlevel() ) );
+                            ter_set( point_bub_ms( i, 23 ), bw_type );
+                            furn_set( point_bub_ms( i, 23 ), furn_str_id::NULL_ID() );
+                            i_clear( tripoint_bub_ms( i, 23, dat.zlevel() ) );
 
                             if( lw == 2 ) {
-                                ter_set( point( 0, i ), lw_type );
-                                furn_set( point( 0, i ), furn_str_id::NULL_ID() );
-                                i_clear( tripoint( 0, i, dat.zlevel() ) );
+                                ter_set( point_bub_ms( 0, i ), lw_type );
+                                furn_set( point_bub_ms( 0, i ), furn_str_id::NULL_ID() );
+                                i_clear( tripoint_bub_ms( 0, i, dat.zlevel() ) );
                             }
                             if( tw == 2 ) {
-                                ter_set( point( i, 0 ), tw_type );
-                                furn_set( point( i, 0 ), furn_str_id::NULL_ID() );
-                                i_clear( tripoint( i, 0, dat.zlevel() ) );
+                                ter_set( point_bub_ms( i, 0 ), tw_type );
+                                furn_set( point_bub_ms( i, 0 ), furn_str_id::NULL_ID() );
+                                i_clear( tripoint_bub_ms( i, 0, dat.zlevel() ) );
                             }
                         }
                         if( rw != 2 ) {
-                            ter_set( point( 23, 11 ), ter_t_door_metal_c );
-                            ter_set( point( 23, 12 ), ter_t_door_metal_c );
+                            ter_set( point_bub_ms( 23, 11 ), ter_t_door_metal_c );
+                            ter_set( point_bub_ms( 23, 12 ), ter_t_door_metal_c );
                         }
                         if( bw != 2 ) {
-                            ter_set( point( 11, 23 ), ter_t_door_metal_c );
-                            ter_set( point( 12, 23 ), ter_t_door_metal_c );
+                            ter_set( point_bub_ms( 11, 23 ), ter_t_door_metal_c );
+                            ter_set( point_bub_ms( 12, 23 ), ter_t_door_metal_c );
                         }
                     }
 
@@ -6108,12 +6205,11 @@ void map::draw_lab( mapgendata &dat )
                 }
                 // portal with an artifact effect.
                 case 5: {
-                    // Can't use tripoint_bub_ms because 'random_point' below only supports the untyped version.
-                    tripoint_range<tripoint> options =
-                    points_in_rectangle( tripoint{ 6, 6, abs_sub.z() },
+                    tripoint_range<tripoint_bub_ms> options =
+                    points_in_rectangle( tripoint_bub_ms{ 6, 6, abs_sub.z() },
                     { SEEX * 2 - 7, SEEY * 2 - 7, abs_sub.z() } );
-                    std::optional<tripoint> center = random_point(
-                    options, [&]( const tripoint & p ) {
+                    std::optional<tripoint_bub_ms> center = random_point(
+                    options, [&]( const tripoint_bub_ms & p ) {
                         return tr_at( p ).is_null();
                     } );
                     if( !center ) {
@@ -6135,11 +6231,11 @@ void map::draw_lab( mapgendata &dat )
                         }
                         make_rubble( {p, abs_sub.z() } );
                         ter_set( p, ter_t_thconc_floor );
-                    }, center->xy(), 4 );
+                    }, center->xy().raw(), 4 );
                     furn_set( center->xy(), furn_str_id::NULL_ID() );
                     if( !is_open_air( *center ) ) {
                         trap_set( *center, tr_portal );
-                        create_anomaly( *center, random_entry( valid_props ), false );
+                        create_anomaly( tripoint_bub_ms( *center ), random_entry( valid_props ), false );
                     }
                     break;
                 }
@@ -6150,7 +6246,7 @@ void map::draw_lab( mapgendata &dat )
                             // Create a mostly spread fungal area throughout entire lab.
                             if( !one_in( 5 ) && has_flag( ter_furn_flag::TFLAG_FLAT, point( i, j ) ) ) {
                                 ter_set( point( i, j ), ter_t_fungus_floor_in );
-                                if( has_flag_furn( ter_furn_flag::TFLAG_ORGANIC, point( i, j ) ) ) {
+                                if( has_flag_furn( ter_furn_flag::TFLAG_ORGANIC, tripoint_bub_ms( i, j, abs_sub.z() ) ) ) {
                                     furn_set( point( i, j ), furn_f_fungal_clump );
                                 }
                             } else if( has_flag_ter( ter_furn_flag::TFLAG_DOOR, point( i, j ) ) && !one_in( 5 ) ) {
@@ -6221,7 +6317,7 @@ void map::draw_lab( mapgendata &dat )
             // Rotated maps cannot handle borders and have to be caught in code.
             // We determine if a border isn't handled by checking the east-facing
             // border space where the door normally is -- it should be a wall or door.
-            tripoint east_border( 23, 11, abs_sub.z() );
+            tripoint_bub_ms east_border( 23, 11, abs_sub.z() );
             if( !has_flag_ter( ter_furn_flag::TFLAG_WALL, east_border ) &&
                 !has_flag_ter( ter_furn_flag::TFLAG_DOOR, east_border ) ) {
                 // TODO: create a ter_reset function that does ter_set, furn_set, and i_clear?
@@ -6230,32 +6326,32 @@ void map::draw_lab( mapgendata &dat )
                 ter_str_id rw_type = tower_lab && rw == 2 ? ter_t_reinforced_glass : ter_t_concrete_wall;
                 ter_str_id bw_type = tower_lab && bw == 2 ? ter_t_reinforced_glass : ter_t_concrete_wall;
                 for( int i = 0; i < SEEX * 2; i++ ) {
-                    ter_set( point( 23, i ), rw_type );
-                    furn_set( point( 23, i ), furn_str_id::NULL_ID() );
-                    i_clear( tripoint( 23, i, dat.zlevel() ) );
+                    ter_set( point_bub_ms( 23, i ), rw_type );
+                    furn_set( point_bub_ms( 23, i ), furn_str_id::NULL_ID() );
+                    i_clear( tripoint_bub_ms( 23, i, dat.zlevel() ) );
 
-                    ter_set( point( i, 23 ), bw_type );
-                    furn_set( point( i, 23 ), furn_str_id::NULL_ID() );
-                    i_clear( tripoint( i, 23, dat.zlevel() ) );
+                    ter_set( point_bub_ms( i, 23 ), bw_type );
+                    furn_set( point_bub_ms( i, 23 ), furn_str_id::NULL_ID() );
+                    i_clear( tripoint_bub_ms( i, 23, dat.zlevel() ) );
 
                     if( lw == 2 ) {
-                        ter_set( point( 0, i ), lw_type );
-                        furn_set( point( 0, i ), furn_str_id::NULL_ID() );
-                        i_clear( tripoint( 0, i, dat.zlevel() ) );
+                        ter_set( point_bub_ms( 0, i ), lw_type );
+                        furn_set( point_bub_ms( 0, i ), furn_str_id::NULL_ID() );
+                        i_clear( tripoint_bub_ms( 0, i, dat.zlevel() ) );
                     }
                     if( tw == 2 ) {
-                        ter_set( point( i, 0 ), tw_type );
-                        furn_set( point( i, 0 ), furn_str_id::NULL_ID() );
-                        i_clear( tripoint( i, 0, dat.zlevel() ) );
+                        ter_set( point_bub_ms( i, 0 ), tw_type );
+                        furn_set( point_bub_ms( i, 0 ), furn_str_id::NULL_ID() );
+                        i_clear( tripoint_bub_ms( i, 0, dat.zlevel() ) );
                     }
                 }
                 if( rw != 2 ) {
-                    ter_set( point( 23, 11 ), ter_t_door_metal_c );
-                    ter_set( point( 23, 12 ), ter_t_door_metal_c );
+                    ter_set( point_bub_ms( 23, 11 ), ter_t_door_metal_c );
+                    ter_set( point_bub_ms( 23, 12 ), ter_t_door_metal_c );
                 }
                 if( bw != 2 ) {
-                    ter_set( point( 11, 23 ), ter_t_door_metal_c );
-                    ter_set( point( 12, 23 ), ter_t_door_metal_c );
+                    ter_set( point_bub_ms( 11, 23 ), ter_t_door_metal_c );
+                    ter_set( point_bub_ms( 12, 23 ), ter_t_door_metal_c );
                 }
             }
         } else { // then no json maps for lab_finale_1level were found
@@ -6293,7 +6389,7 @@ void map::draw_lab( mapgendata &dat )
                                   point_bub_ms( 6, SEEY * 2 - 7 ), abs_sub.z(), 1, true );
                     place_spawns( GROUP_ROBOT_SECUBOT, 1, point_bub_ms( SEEX * 2 - 7, SEEY * 2 - 7 ),
                                   point_bub_ms( SEEX * 2 - 7, SEEY * 2 - 7 ), abs_sub.z(), 1, true );
-                    spawn_item( point( SEEX - 4, SEEY - 2 ), "id_science" );
+                    spawn_item( point_bub_ms( SEEX - 4, SEEY - 2 ), "id_science" );
                     if( loot_variant <= 96 ) {
                         mtrap_set( this, tripoint_bub_ms( SEEX - 3, SEEY - 3, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX + 2, SEEY - 3, dat.zlevel() ), tr_dissector );
@@ -6312,22 +6408,22 @@ void map::draw_lab( mapgendata &dat )
                         furn_set( point( SEEX - 1, SEEY ), furn_f_table );
                         furn_set( point( SEEX, SEEY ), furn_f_table );
                         if( loot_variant <= 67 ) {
-                            spawn_item( point( SEEX, SEEY - 1 ), "UPS_off" );
-                            spawn_item( point( SEEX, SEEY - 1 ), "heavy_battery_cell" );
-                            spawn_item( point( SEEX - 1, SEEY ), "v29" );
-                            spawn_item( point( SEEX - 1, SEEY ), "laser_rifle", dice( 1, 0 ) );
-                            spawn_item( point( SEEX, SEEY ), "plasma_gun" );
-                            spawn_item( point( SEEX, SEEY ), "plasma" );
-                            spawn_item( point( SEEX - 1, SEEY ), "recipe_atomic_battery" );
-                            spawn_item( point( SEEX + 1, SEEY ), "plut_cell", rng( 8, 20 ) );
+                            spawn_item( point_bub_ms( SEEX, SEEY - 1 ), "UPS_off" );
+                            spawn_item( point_bub_ms( SEEX, SEEY - 1 ), "heavy_battery_cell" );
+                            spawn_item( point_bub_ms( SEEX - 1, SEEY ), "v29" );
+                            spawn_item( point_bub_ms( SEEX - 1, SEEY ), "laser_rifle", dice( 1, 0 ) );
+                            spawn_item( point_bub_ms( SEEX, SEEY ), "plasma_gun" );
+                            spawn_item( point_bub_ms( SEEX, SEEY ), "plasma" );
+                            spawn_item( point_bub_ms( SEEX - 1, SEEY ), "recipe_atomic_battery" );
+                            spawn_item( point_bub_ms( SEEX + 1, SEEY ), "plut_cell", rng( 8, 20 ) );
                         } else if( loot_variant < 89 ) {
-                            spawn_item( point( SEEX, SEEY ), "recipe_atomic_battery" );
-                            spawn_item( point( SEEX + 1, SEEY ), "plut_cell", rng( 8, 20 ) );
+                            spawn_item( point_bub_ms( SEEX, SEEY ), "recipe_atomic_battery" );
+                            spawn_item( point_bub_ms( SEEX + 1, SEEY ), "plut_cell", rng( 8, 20 ) );
                         }  else { // loot_variant between 90 and 96.
-                            spawn_item( point( SEEX - 1, SEEY - 1 ), "rm13_armor" );
-                            spawn_item( point( SEEX, SEEY - 1 ), "plut_cell" );
-                            spawn_item( point( SEEX - 1, SEEY ), "plut_cell" );
-                            spawn_item( point( SEEX, SEEY ), "recipe_caseless" );
+                            spawn_item( point_bub_ms( SEEX - 1, SEEY - 1 ), "rm13_armor" );
+                            spawn_item( point_bub_ms( SEEX, SEEY - 1 ), "plut_cell" );
+                            spawn_item( point_bub_ms( SEEX - 1, SEEY ), "plut_cell" );
+                            spawn_item( point_bub_ms( SEEX, SEEY ), "recipe_caseless" );
                         }
                     } else { // 4% of the lab ends will be this weapons testing end.
                         mtrap_set( this, tripoint_bub_ms( SEEX - 4, SEEY - 3, dat.zlevel() ), tr_dissector );
@@ -6335,30 +6431,32 @@ void map::draw_lab( mapgendata &dat )
                         mtrap_set( this, tripoint_bub_ms( SEEX - 4, SEEY + 2, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX + 3, SEEY + 2, dat.zlevel() ), tr_dissector );
 
-                        furn_set( point( SEEX - 2, SEEY - 1 ), furn_f_rack );
-                        furn_set( point( SEEX - 1, SEEY - 1 ), furn_f_rack );
-                        furn_set( point( SEEX, SEEY - 1 ), furn_f_rack );
-                        furn_set( point( SEEX + 1, SEEY - 1 ), furn_f_rack );
-                        furn_set( point( SEEX - 2, SEEY ), furn_f_rack );
-                        furn_set( point( SEEX - 1, SEEY ), furn_f_rack );
-                        furn_set( point( SEEX, SEEY ), furn_f_rack );
-                        furn_set( point( SEEX + 1, SEEY ), furn_f_rack );
-                        line( this, ter_t_reinforced_door_glass_c, point( SEEX - 2, SEEY - 2 ),
-                              point( SEEX + 1, SEEY - 2 ), dat.zlevel() );
-                        line( this, ter_t_reinforced_door_glass_c, point( SEEX - 2, SEEY + 1 ),
-                              point( SEEX + 1, SEEY + 1 ), dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point( SEEX - 3, SEEY - 2 ), point( SEEX - 3, SEEY + 1 ),
+                        furn_set( point_bub_ms( SEEX - 2, SEEY - 1 ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX - 1, SEEY - 1 ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX, SEEY - 1 ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX + 1, SEEY - 1 ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX - 2, SEEY ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX - 1, SEEY ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX, SEEY ), furn_f_rack );
+                        furn_set( point_bub_ms( SEEX + 1, SEEY ), furn_f_rack );
+                        line( this, ter_t_reinforced_door_glass_c, point_bub_ms( SEEX - 2, SEEY - 2 ),
+                              point_bub_ms( SEEX + 1, SEEY - 2 ), dat.zlevel() );
+                        line( this, ter_t_reinforced_door_glass_c, point_bub_ms( SEEX - 2, SEEY + 1 ),
+                              point_bub_ms( SEEX + 1, SEEY + 1 ), dat.zlevel() );
+                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 3, SEEY - 2 ), point_bub_ms( SEEX - 3,
+                                SEEY + 1 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point( SEEX + 2, SEEY - 2 ), point( SEEX + 2, SEEY + 1 ),
+                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 2, SEEY - 2 ), point_bub_ms( SEEX + 2,
+                                SEEY + 1 ),
                               dat.zlevel() );
                         place_items( Item_spawn_data_ammo_rare, 96,
-                                     point( SEEX - 2, SEEY - 1 ),
-                                     point( SEEX + 1, SEEY - 1 ), abs_sub.z(), false,
+                                     point_bub_ms( SEEX - 2, SEEY - 1 ),
+                                     point_bub_ms( SEEX + 1, SEEY - 1 ), abs_sub.z(), false,
                                      calendar::start_of_cataclysm );
-                        place_items( Item_spawn_data_guns_rare, 96, point( SEEX - 2, SEEY ),
-                                     point( SEEX + 1, SEEY ), abs_sub.z(), false,
+                        place_items( Item_spawn_data_guns_rare, 96, point_bub_ms( SEEX - 2, SEEY ),
+                                     point_bub_ms( SEEX + 1, SEEY ), abs_sub.z(), false,
                                      calendar::start_of_cataclysm );
-                        spawn_item( point( SEEX + 1, SEEY ), "plut_cell", rng( 1, 10 ) );
+                        spawn_item( point_bub_ms( SEEX + 1, SEEY ), "plut_cell", rng( 1, 10 ) );
                     }
                     break;
                 // Netherworld access
@@ -6387,8 +6485,8 @@ void map::draw_lab( mapgendata &dat )
                         }
                     }
 
-                    spawn_item( point( SEEX - 1, 8 ), "id_science" );
-                    tmpcomp = add_computer( tripoint( SEEX,  8, abs_sub.z() ),
+                    spawn_item( point_bub_ms( SEEX - 1, 8 ), "id_science" );
+                    tmpcomp = add_computer( { SEEX,  8, abs_sub.z() },
                                             _( "Sub-prime contact console" ), 7 );
                     if( monsters_end ) { //only add these options when there are monsters.
                         tmpcomp->add_option( _( "Terminate Specimens" ), COMPACT_TERMINATE, 2 );
@@ -6421,25 +6519,29 @@ void map::draw_lab( mapgendata &dat )
                     mtrap_set( this, tripoint_bub_ms( SEEX + 1, SEEY - 2, dat.zlevel() ), tr_dissector );
                     mtrap_set( this, tripoint_bub_ms( SEEX - 2, SEEY + 1, dat.zlevel() ), tr_dissector );
                     mtrap_set( this, tripoint_bub_ms( SEEX + 1, SEEY + 1, dat.zlevel() ), tr_dissector );
-                    square_furn( this, furn_f_counter, point( SEEX - 1, SEEY - 1 ), point( SEEX, SEEY ) );
+                    square_furn( this, furn_f_counter, point_bub_ms( SEEX - 1, SEEY - 1 ), point_bub_ms( SEEX, SEEY ) );
                     int item_count = 0;
                     while( item_count < 5 ) {
                         item_count +=
                             place_items(
-                                Item_spawn_data_bionics, 75, point( SEEX - 1, SEEY - 1 ),
-                                point( SEEX, SEEY ), abs_sub.z(), false, calendar::start_of_cataclysm ).size();
+                                Item_spawn_data_bionics, 75, point_bub_ms( SEEX - 1, SEEY - 1 ),
+                                point_bub_ms( SEEX, SEEY ), abs_sub.z(), false, calendar::start_of_cataclysm ).size();
                     }
-                    line( this, ter_t_reinforced_glass, point( SEEX - 2, SEEY - 2 ), point( SEEX + 1, SEEY - 2 ),
+                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY - 2 ), point_bub_ms( SEEX + 1,
+                            SEEY - 2 ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point( SEEX - 2, SEEY + 1 ), point( SEEX + 1, SEEY + 1 ),
+                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY + 1 ), point_bub_ms( SEEX + 1,
+                            SEEY + 1 ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point( SEEX - 2, SEEY - 1 ), point( SEEX - 2, SEEY ),
+                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY - 1 ), point_bub_ms( SEEX - 2,
+                            SEEY ),
                           dat.zlevel() );
-                    line( this, ter_t_reinforced_glass, point( SEEX + 1, SEEY - 1 ), point( SEEX + 1, SEEY ),
+                    line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 1, SEEY - 1 ), point_bub_ms( SEEX + 1,
+                            SEEY ),
                           dat.zlevel() );
-                    spawn_item( point( SEEX - 4, SEEY - 3 ), "id_science" );
-                    furn_set( point( SEEX - 3, SEEY - 3 ), furn_f_console );
-                    tmpcomp = add_computer( tripoint( SEEX - 3,  SEEY - 3, abs_sub.z() ),
+                    spawn_item( point_bub_ms( SEEX - 4, SEEY - 3 ), "id_science" );
+                    furn_set( point_bub_ms( SEEX - 3, SEEY - 3 ), furn_f_console );
+                    tmpcomp = add_computer( { SEEX - 3,  SEEY - 3, abs_sub.z() },
                                             _( "Bionic access" ), 3 );
                     tmpcomp->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                     tmpcomp->add_option( _( "Open Chambers" ), COMPACT_RELEASE, 5 );
@@ -6465,7 +6567,7 @@ void map::draw_lab( mapgendata &dat )
                     line( this, ter_t_cvdbody, point( SEEX, SEEY - 1 ), point( SEEX, SEEY + 1 ), dat.zlevel() );
                     line( this, ter_t_cvdbody, point( SEEX + 1, SEEY - 2 ), point( SEEX + 1, SEEY + 1 ), dat.zlevel() );
                     ter_set( point( SEEX, SEEY - 2 ), ter_t_cvdmachine );
-                    spawn_item( point( SEEX, SEEY - 3 ), "id_science" );
+                    spawn_item( point_bub_ms( SEEX, SEEY - 3 ), "id_science" );
                     break;
             }
         } // end use_hardcoded_lab_finale
@@ -6475,12 +6577,11 @@ void map::draw_lab( mapgendata &dat )
         const auto maybe_insert_stairs = [this]( const oter_id & terrain,
         const ter_str_id & t_stair_type ) {
             if( is_ot_match( "stairs", terrain, ot_match_type::contains ) ) {
-                const auto predicate = [this]( const tripoint & p ) {
+                const auto predicate = [this]( const tripoint_bub_ms & p ) {
                     return ter( p ) == ter_t_thconc_floor && furn( p ) == furn_str_id::NULL_ID() &&
                            tr_at( p ).is_null();
                 };
-                // Can't use tripoint_bub_ms because 'random_point' below only supports the untyped version.
-                const tripoint_range<tripoint> range = points_in_rectangle( tripoint{ 0, 0, abs_sub.z() },
+                const tripoint_range<tripoint_bub_ms> range = points_in_rectangle( tripoint_bub_ms{ 0, 0, abs_sub.z() },
                 { SEEX * 2 - 2, SEEY * 2 - 2, abs_sub.z() } );
                 if( const auto p = random_point( range, predicate ) ) {
                     ter_set( *p, t_stair_type );
@@ -6555,7 +6656,8 @@ void map::draw_slimepit( const mapgendata &dat )
         }
         place_spawns( GROUP_SLIME, 1, point_bub_ms( SEEX, SEEY ), point_bub_ms( SEEX, SEEY ), dat.zlevel(),
                       0.15 );
-        place_items( Item_spawn_data_sewer, 40, tripoint_zero, tripoint( EAST_EDGE, SOUTH_EDGE,
+        place_items( Item_spawn_data_sewer, 40, tripoint_bub_ms_zero, tripoint_bub_ms( EAST_EDGE,
+                     SOUTH_EDGE,
                      dat.zlevel() ), true,
                      calendar::start_of_cataclysm );
     }
@@ -6617,9 +6719,7 @@ void map::place_gas_pump( const tripoint_bub_ms &p, int charges, const itype_id 
 {
     item fuel( fuel_type, calendar::start_of_cataclysm );
     fuel.charges = charges;
-    if( fuel.charges > 0 ) {
-        add_item( p.raw(), fuel );
-    }
+    add_item( p, fuel );
     ter_set( p, ter_id( fuel.fuel_pump_terrain() ) );
 }
 
@@ -6632,7 +6732,7 @@ void map::place_toilet( const tripoint_bub_ms &p, int charges )
 {
     item water( "water", calendar::start_of_cataclysm );
     water.charges = charges;
-    add_item( p.raw(), water );
+    add_item( p, water );
     furn_set( p, furn_f_toilet );
 }
 
@@ -6648,7 +6748,7 @@ void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bo
         if( lootable &&
             !one_in( std::max( to_days<int>( calendar::turn - calendar::start_of_cataclysm ), 0 ) + 4 ) ) {
             furn_set( p, furn_f_vending_o );
-            for( const tripoint &loc : points_in_radius( p.raw(), 1 ) ) {
+            for( const tripoint_bub_ms &loc : points_in_radius( p, 1 ) ) {
                 if( one_in( 4 ) ) {
                     spawn_item( loc, "glass_shard", rng( 1, 25 ) );
                 }
@@ -6662,10 +6762,15 @@ void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bo
 
 character_id map::place_npc( const point &p, const string_id<npc_template> &type )
 {
+    return map::place_npc( point_bub_ms( p ), type );
+}
+
+character_id map::place_npc( const point_bub_ms &p, const string_id<npc_template> &type )
+{
     shared_ptr_fast<npc> temp = make_shared_fast<npc>();
     temp->normalize();
     temp->load_npc_template( type );
-    temp->spawn_at_precise( tripoint_abs_ms( getabs( tripoint( p, abs_sub.z() ) ) ) );
+    temp->spawn_at_precise( getglobal( { p, abs_sub.z() } ) );
     temp->toggle_trait( trait_NPC_STATIC_NPC );
     overmap_buffer.insert_npc( temp );
     return temp->getID();
@@ -6673,9 +6778,10 @@ character_id map::place_npc( const point &p, const string_id<npc_template> &type
 
 void map::apply_faction_ownership( const point &p1, const point &p2, const faction_id &id )
 {
-    for( const tripoint &p : points_in_rectangle( tripoint( p1, abs_sub.z() ), tripoint( p2,
-            abs_sub.z() ) ) ) {
-        map_stack items = i_at( p.xy() );
+    for( const tripoint_bub_ms &p : points_in_rectangle( tripoint_bub_ms( p1.x, p1.y, abs_sub.z() ),
+            tripoint_bub_ms( p2.x, p2.y,
+                             abs_sub.z() ) ) ) {
+        map_stack items = i_at( point_bub_ms( p.xy() ) );
         for( item &elem : items ) {
             elem.set_owner( id );
         }
@@ -6691,9 +6797,9 @@ void map::apply_faction_ownership( const point &p1, const point &p2, const facti
 // A chance of 100 indicates that items should always spawn,
 // the item group should be responsible for determining the amount of items.
 std::vector<item *> map::place_items(
-    const item_group_id &group_id, const int chance, const tripoint &p1, const tripoint &p2,
-    const bool ongrass, const time_point &turn, const int magazine, const int ammo,
-    const std::string &faction )
+    const item_group_id &group_id, const int chance, const tripoint_bub_ms &p1,
+    const tripoint_bub_ms &p2, const bool ongrass, const time_point &turn, const int magazine,
+    const int ammo, const std::string &faction )
 {
     std::vector<item *> res;
 
@@ -6710,24 +6816,24 @@ std::vector<item *> map::place_items(
     }
 
     // spawn rates < 1 are handled in item_group
-    const float spawn_rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f ) ;
+    const float spawn_rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f );
     const int spawn_count = roll_remainder( chance * spawn_rate / 100.0f );
     for( int i = 0; i < spawn_count; i++ ) {
         // Might contain one item or several that belong together like guns & their ammo
         int tries = 0;
-        auto is_valid_terrain = [this, ongrass]( const tripoint & p ) {
+        auto is_valid_terrain = [this, ongrass]( const tripoint_bub_ms & p ) {
             const ter_t &terrain = ter( p ).obj();
-            return terrain.movecost == 0           &&
+            return terrain.movecost == 0 &&
                    !terrain.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) &&
-                   !ongrass                                   &&
+                   !ongrass &&
                    !terrain.has_flag( ter_furn_flag::TFLAG_FLAT );
         };
 
-        tripoint p;
+        tripoint_bub_ms p;
         do {
-            p.x = rng( p1.x, p2.x );
-            p.y = rng( p1.y, p2.y );
-            p.z = rng( p1.z, p2.z );
+            p.x() = rng( p1.x(), p2.x() );
+            p.y() = rng( p1.y(), p2.y() );
+            p.z() = rng( p1.z(), p2.z() );
             tries++;
         } while( is_valid_terrain( p ) && tries < 20 );
         if( tries < 20 ) {
@@ -6789,28 +6895,13 @@ std::vector<item *> map::place_items(
     return res;
 }
 
-std::vector<item *> map::place_items(
-    const item_group_id &group_id, const int chance, const tripoint_bub_ms &p1,
-    const tripoint_bub_ms &p2, const bool ongrass, const time_point &turn, const int magazine,
-    const int ammo, const std::string &faction )
-{
-    return place_items( group_id, chance, p1.raw(), p2.raw(), ongrass, turn, magazine, ammo,
-                        faction );
-}
-
-std::vector<item *> map::put_items_from_loc( const item_group_id &group_id, const tripoint &p,
+std::vector<item *> map::put_items_from_loc( const item_group_id &group_id,
+        const tripoint_bub_ms &p,
         const time_point &turn )
 {
     const std::vector<item> items =
         item_group::items_from( group_id, turn, spawn_flags::use_spawn_rate );
     return spawn_items( p, items );
-}
-
-std::vector<item *> map::put_items_from_loc( const item_group_id &group_id,
-        const tripoint_bub_ms &p,
-        const time_point &turn )
-{
-    return map::put_items_from_loc( group_id, p.raw(), turn );
 }
 
 void map::add_spawn( const MonsterGroupResult &spawn_details, const tripoint_bub_ms &p )
@@ -6855,20 +6946,29 @@ void map::add_spawn(
 vehicle *map::add_vehicle( const vproto_id &type, const tripoint &p, const units::angle &dir,
                            const int veh_fuel, const int veh_status, const bool merge_wrecks )
 {
+    return map::add_vehicle( type, tripoint_bub_ms( p ), dir, veh_fuel, veh_status, merge_wrecks );
+}
+
+vehicle *map::add_vehicle( const vproto_id &type, const tripoint_bub_ms &p, const units::angle &dir,
+                           const int veh_fuel, const int veh_status, const bool merge_wrecks )
+{
     if( !type.is_valid() ) {
         debugmsg( "Nonexistent vehicle type: \"%s\"", type.c_str() );
         return nullptr;
     }
     if( !inbounds( p ) ) {
         dbg( D_WARNING ) << string_format( "Out of bounds add_vehicle t=%s d=%d p=%d,%d,%d",
-                                           type.str(), to_degrees( dir ), p.x, p.y, p.z );
+                                           type.str(), to_degrees( dir ), p.x(), p.y(), p.z() );
         return nullptr;
     }
 
     std::unique_ptr<vehicle> veh = std::make_unique<vehicle>( type );
-    tripoint p_ms = p;
-    veh->sm_pos = ms_to_sm_remain( p_ms );
-    veh->pos = p_ms.xy();
+    tripoint_bub_ms p_ms( p );
+    tripoint_bub_sm quotient;
+    point_sm_ms remainder;
+    std::tie( quotient, remainder ) = coords::project_remain<coords::sm>( p_ms );
+    veh->sm_pos = quotient.raw();
+    veh->pos = remainder.raw();
     veh->init_state( *this, veh_fuel, veh_status );
     veh->place_spawn_items();
     veh->face.init( dir );
@@ -6890,23 +6990,17 @@ vehicle *map::add_vehicle( const vproto_id &type, const tripoint &p, const units
         }
         place_on_submap->ensure_nonuniform();
         place_on_submap->vehicles.push_back( std::move( placed_vehicle_up ) );
-        invalidate_max_populated_zlev( p.z );
+        invalidate_max_populated_zlev( p.z() );
 
         level_cache &ch = get_cache( placed_vehicle->sm_pos.z );
         ch.vehicle_list.insert( placed_vehicle );
         add_vehicle_to_cache( placed_vehicle );
 
         rebuild_vehicle_level_caches();
-        set_pathfinding_cache_dirty( p.z );
+        set_pathfinding_cache_dirty( p.z() );
         placed_vehicle->place_zones( *this );
     }
     return placed_vehicle;
-}
-
-vehicle *map::add_vehicle( const vproto_id &type, const tripoint_bub_ms &p, const units::angle &dir,
-                           const int veh_fuel, const int veh_status, const bool merge_wrecks )
-{
-    return map::add_vehicle( type, p.raw(), dir, veh_fuel, veh_status, merge_wrecks );
 }
 
 /**
@@ -6932,7 +7026,7 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
 
     for( std::vector<int>::const_iterator part = frame_indices.begin();
          part != frame_indices.end(); part++ ) {
-        const tripoint p = veh_to_add->global_part_pos3( *part );
+        const tripoint_bub_ms p = veh_to_add->bub_part_pos( *part );
 
         if( veh_to_add->part( *part ).is_fake ) {
             continue;
@@ -6999,8 +7093,8 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
                                   map_pos.to_string() );
                     }
                     did_merge = true;
-                    const point target_point = first_veh_parts.front()->mount;
-                    const point source_point = parts_to_move.front()->mount;
+                    const point_rel_ms target_point = first_veh_parts.front()->mount;
+                    const point_rel_ms source_point = parts_to_move.front()->mount;
                     for( const vehicle_part *vp : parts_to_move ) {
                         const vpart_info &vpi = vp->info();
                         // TODO: change mount points to be tripoint
@@ -7073,18 +7167,18 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
     return veh_to_add;
 }
 
-computer *map::add_computer( const tripoint &p, const std::string &name, int security )
+computer *map::add_computer( const tripoint_bub_ms &p, const std::string &name, int security )
 {
     // TODO: Turn this off?
     furn_set( p, furn_f_console );
     point_sm_ms l;
-    submap *const place_on_submap = get_submap_at( tripoint_bub_ms( p ), l );
+    submap *const place_on_submap = get_submap_at( p, l );
     if( place_on_submap == nullptr ) {
         debugmsg( "Tried to add computer at (%d,%d) but the submap is not loaded", l.x(), l.y() );
-        static computer null_computer = computer( name, security, p );
+        static computer null_computer = computer( name, security, p.raw() );
         return &null_computer;
     }
-    place_on_submap->set_computer( l, computer( name, security, p ) );
+    place_on_submap->set_computer( l, computer( name, security, p.raw() ) );
     return place_on_submap->get_computer( l );
 }
 
@@ -7093,8 +7187,11 @@ computer *map::add_computer( const tripoint &p, const std::string &name, int sec
  * degrees.
  * @param turns How many 90-degree turns to rotate the map.
  */
-void map::rotate( int turns, const bool setpos_safe )
+void map::rotate( int turns )
 {
+    if( this->my_MAPSIZE != 2 ) {
+        debugmsg( "map::rotate called with map too large to be rotated properly.  Only the top left overmap will be rotated." );
+    }
 
     //Handle anything outside the 1-3 range gracefully; rotate(0) is a no-op.
     turns = turns % 4;
@@ -7102,53 +7199,27 @@ void map::rotate( int turns, const bool setpos_safe )
         return;
     }
 
-    real_coords rc;
     const tripoint_abs_sm &abs_sub = get_abs_sub();
-    // TODO: fix point types
-    rc.fromabs( project_to<coords::ms>( abs_sub.xy() ).raw() );
+    const tripoint_abs_omt abs_omt = project_to<coords::omt>( abs_sub );
 
-    // TODO: This radius can be smaller - how small?
-    const int radius = HALF_MAPSIZE + 3;
-    // uses submap coordinates
-    const std::vector<shared_ptr_fast<npc>> npcs = overmap_buffer.get_npcs_near( abs_sub, radius );
+    if( abs_sub.x() % 2 != 0 || abs_sub.y() % 2 != 0 ) {
+        debugmsg( "map::rotate called with map not aligned with overmap boundary.  Results will be incorrect at best." );
+    }
+
+    const std::vector<shared_ptr_fast<npc>> npcs = overmap_buffer.get_npcs_near_omt( abs_omt, 0 );
     for( const shared_ptr_fast<npc> &i : npcs ) {
         npc &np = *i;
-        const tripoint sq = np.get_location().raw();
-        real_coords np_rc;
-        np_rc.fromabs( sq.xy() );
-        // Note: We are rotating the entire overmap square (2x2 of submaps)
-        if( np_rc.om_pos != rc.om_pos || ( sq.z != abs_sub.z() && !zlevels ) ) {
+        const tripoint_abs_ms sq( np.get_location() );
+
+        if( sq.z() != abs_sub.z() && !zlevels ) {
             continue;
         }
 
-        // OK, this is ugly: we remove the NPC from the whole map
-        // Then we place it back from scratch
-        // It could be rewritten to utilize the fact that rotation shouldn't cross overmaps
+        // Translate bubble -> global -> current map.
+        const point_bub_ms old( bub_from_abs( get_map().getglobal( np.pos_bub() ).xy() ) );
 
-        point old( np_rc.sub_pos );
-        if( np_rc.om_sub.x % 2 != 0 ) {
-            old.x += SEEX;
-        }
-        if( np_rc.om_sub.y % 2 != 0 ) {
-            old.y += SEEY;
-        }
-
-        const point new_pos = old.rotate( turns, { SEEX * 2, SEEY * 2 } );
-        if( setpos_safe ) {
-            const point local_sq = bub_from_abs( sq ).xy().raw();
-            // setpos can't be used during mapgen, but spawn_at_precise clips position
-            // to be between 0-11,0-11 and teleports NPCs when used inside of update_mapgen
-            // calls
-            const tripoint new_global_sq = sq - local_sq + new_pos;
-            np.setpos( get_map().bub_from_abs( new_global_sq ) );
-        } else {
-            // OK, this is ugly: we remove the NPC from the whole map
-            // Then we place it back from scratch
-            // It could be rewritten to utilize the fact that rotation shouldn't cross overmaps
-            shared_ptr_fast<npc> npc_ptr = overmap_buffer.remove_npc( np.getID() );
-            np.spawn_at_precise( tripoint_abs_ms( getabs( tripoint( new_pos, abs_sub.z() ) ) ) );
-            overmap_buffer.insert_npc( npc_ptr );
-        }
+        const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
+        np.spawn_at_precise( getglobal( tripoint_bub_ms( new_pos, sq.z() ) ) );
     }
 
     clear_vehicle_level_caches();
@@ -7163,10 +7234,10 @@ void map::rotate( int turns, const bool setpos_safe )
     for( int z_level = bottom_level; z_level <= top_level; z_level++ ) {
         clear_vehicle_list( z_level );
 
-        submap *pz = get_submap_at_grid( { point_rel_sm_zero, z_level } );
-        submap *pse = get_submap_at_grid( { point_rel_sm_south_east, z_level } );
-        submap *pe = get_submap_at_grid( { point_rel_sm_east, z_level } );
-        submap *ps = get_submap_at_grid( { point_rel_sm_south, z_level } );
+        submap *pz = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_zero, z_level } );
+        submap *pse = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south_east, z_level } );
+        submap *pe = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_east, z_level } );
+        submap *ps = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south, z_level } );
         if( pz == nullptr || pse == nullptr || pe == nullptr || ps == nullptr ) {
             debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", point_zero.x,
                       point_zero.y );
@@ -7220,22 +7291,25 @@ void map::rotate( int turns, const bool setpos_safe )
         queued_points.clear();
         for( std::pair<const std::string, tripoint_abs_ms> &queued_point : temp_points ) {
             //This is all just a copy of the section rotating NPCs above
-            real_coords np_rc;
-            np_rc.fromabs( queued_point.second.xy().raw() );
+            const point_abs_omt queued_point_omt( project_to<coords::omt>( queued_point.second.xy() ) );
+
             // Note: We are rotating the entire overmap square (2x2 of submaps)
-            if( np_rc.om_pos != rc.om_pos || ( queued_point.second.z() != abs_sub.z() && !zlevels ) ) {
+            if( queued_point_omt != abs_omt.xy() || ( queued_point.second.z() != abs_sub.z() && !zlevels ) ) {
                 continue;
             }
-            point old( np_rc.sub_pos );
-            if( np_rc.om_sub.x % 2 != 0 ) {
-                old.x += SEEX;
+            const point_abs_sm queued_point_sm( project_to<coords::sm>( queued_point.second.xy() ) );
+            const point_bub_ms queued_point_bub( get_map().bub_from_abs( queued_point.second.xy() ) );
+            point_bub_ms old( queued_point_bub.x() % SEEX, queued_point_bub.y() % SEEY );
+
+            if( queued_point_sm.x() % 2 != 0 ) {
+                old.x() += SEEX;
             }
-            if( np_rc.om_sub.y % 2 != 0 ) {
-                old.y += SEEY;
+            if( queued_point_sm.y() % 2 != 0 ) {
+                old.y() += SEEY;
             }
-            const point new_pos = old.rotate( turns, { SEEX * 2, SEEY * 2 } );
-            queued_points[queued_point.first] = tripoint_abs_ms( getabs( tripoint( new_pos,
-                                                queued_point.second.z() ) ) );
+            const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
+            queued_points[queued_point.first] = getglobal( tripoint_bub_ms( new_pos,
+                                                queued_point.second.z() ) );
         }
     }
 }
@@ -7250,18 +7324,15 @@ void map::mirror( bool mirror_horizontal, bool mirror_vertical )
         return;
     }
 
-    real_coords rc;
     const tripoint_abs_sm &abs_sub = get_abs_sub();
-    // TODO: fix point types
-    rc.fromabs( project_to<coords::ms>( abs_sub.xy() ).raw() );
 
     for( int z_level = zlevels ? -OVERMAP_DEPTH : abs_sub.z();
          z_level <= ( zlevels ? OVERMAP_HEIGHT : abs_sub.z() ); z_level++ ) {
-        submap *pz = get_submap_at_grid( { point_rel_sm_zero, z_level } );
-        submap *pse = get_submap_at_grid( { point_rel_sm_south_east, z_level } );
-        submap *pe = get_submap_at_grid( {point_rel_sm_east, z_level
-                                         } );
-        submap *ps = get_submap_at_grid( { point_rel_sm_south, z_level } );
+        submap *pz = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_zero, z_level } );
+        submap *pse = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south_east, z_level } );
+        submap *pe = get_submap_at_grid( tripoint_rel_sm{point_rel_sm_east, z_level
+                                                        } );
+        submap *ps = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south, z_level } );
         if( pz == nullptr || pse == nullptr || pe == nullptr || ps == nullptr ) {
             debugmsg( "Tried to mirror map at (%d, %d, %d) but the submap is not loaded", point_zero.x,
                       point_zero.y, z_level );
@@ -7282,7 +7353,7 @@ void map::mirror( bool mirror_horizontal, bool mirror_vertical )
         for( int j = 0; j < 2; ++j ) {
             for( int i = 0; i < 2; ++i ) {
                 point_rel_sm p( i, j );
-                submap *sm = get_submap_at_grid( { p, z_level } );
+                submap *sm = get_submap_at_grid( tripoint_rel_sm{ p, z_level } );
                 if( sm == nullptr ) {
                     debugmsg( "Tried to mirror map at (%d, %d, %d) but the submap is not loaded", p.x(), p.y(),
                               z_level );
@@ -7400,7 +7471,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int x = p1.x + static_cast<int>( width / 4 ); x < p2.x - static_cast<int>( width / 4 ); x++ ) {
                     m->furn_set( point( x, desk ), furn_f_counter );
                 }
-                computer *tmpcomp = m->add_computer( tripoint( p2.x - static_cast<int>( width / 4 ), desk, z ),
+                computer *tmpcomp = m->add_computer( { p2.x - static_cast<int>( width / 4 ), desk, z },
                                                      _( "Log Console" ), 3 );
                 tmpcomp->add_option( _( "View Research Logs" ), COMPACT_RESEARCH, 0 );
                 tmpcomp->add_option( _( "Download Map Data" ), COMPACT_MAPS, 0 );
@@ -7416,7 +7487,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int y = p1.y + static_cast<int>( width / 4 ); y < p2.y - static_cast<int>( width / 4 ); y++ ) {
                     m->furn_set( point( desk, y ), furn_f_counter );
                 }
-                computer *tmpcomp = m->add_computer( tripoint( desk, p2.y - static_cast<int>( width / 4 ), z ),
+                computer *tmpcomp = m->add_computer( { desk, p2.y - static_cast<int>( width / 4 ), z },
                                                      _( "Log Console" ), 3 );
                 tmpcomp->add_option( _( "View Research Logs" ), COMPACT_RESEARCH, 0 );
                 tmpcomp->add_option( _( "Download Map Data" ), COMPACT_MAPS, 0 );
@@ -7433,15 +7504,15 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int x = p1.x; x <= p2.x; x++ ) {
                     if( x % 3 == 0 ) {
                         for( int y = p1.y + 1; y <= p2.y - 1; y++ ) {
-                            m->furn_set( point( x, y ), furn_f_counter );
+                            m->furn_set( point_bub_ms( x, y ), furn_f_counter );
                         }
                         if( one_in( 3 ) ) {
-                            m->place_items( Item_spawn_data_mut_lab, 35, point( x, p1.y + 1 ),
-                                            point( x, p2.y - 1 ), z, false,
+                            m->place_items( Item_spawn_data_mut_lab, 35, point_bub_ms( x, p1.y + 1 ),
+                                            point_bub_ms( x, p2.y - 1 ), z, false,
                                             calendar::start_of_cataclysm );
                         } else {
-                            m->place_items( Item_spawn_data_chem_lab, 70, point( x, p1.y + 1 ),
-                                            point( x, p2.y - 1 ), z, false,
+                            m->place_items( Item_spawn_data_chem_lab, 70, point_bub_ms( x, p1.y + 1 ),
+                                            point_bub_ms( x, p2.y - 1 ), z, false,
                                             calendar::start_of_cataclysm );
                         }
                     }
@@ -7450,15 +7521,15 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int y = p1.y; y <= p2.y; y++ ) {
                     if( y % 3 == 0 ) {
                         for( int x = p1.x + 1; x <= p2.x - 1; x++ ) {
-                            m->furn_set( point( x, y ), furn_f_counter );
+                            m->furn_set( point_bub_ms( x, y ), furn_f_counter );
                         }
                         if( one_in( 3 ) ) {
-                            m->place_items( Item_spawn_data_mut_lab, 35, point( p1.x + 1, y ),
-                                            point( p2.x - 1, y ), z, false,
+                            m->place_items( Item_spawn_data_mut_lab, 35, point_bub_ms( p1.x + 1, y ),
+                                            point_bub_ms( p2.x - 1, y ), z, false,
                                             calendar::start_of_cataclysm );
                         } else {
-                            m->place_items( Item_spawn_data_chem_lab, 70, point( p1.x + 1, y ),
-                                            point( p2.x - 1, y ), z, false,
+                            m->place_items( Item_spawn_data_chem_lab, 70, point_bub_ms( p1.x + 1, y ),
+                                            point_bub_ms( p2.x - 1, y ), z, false,
                                             calendar::start_of_cataclysm );
                         }
                     }
@@ -7466,20 +7537,21 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
             }
             break;
         case room_teleport:
-            m->furn_set( point( ( p1.x + p2.x ) / 2, static_cast<int>( ( p1.y + p2.y ) / 2 ) ),
+            m->furn_set( point_bub_ms( ( p1.x + p2.x ) / 2, static_cast<int>( ( p1.y + p2.y ) / 2 ) ),
                          furn_f_counter );
-            m->furn_set( point( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1,
-                                static_cast<int>( ( p1.y + p2.y ) / 2 ) ),
+            m->furn_set( point_bub_ms( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1,
+                                       static_cast<int>( ( p1.y + p2.y ) / 2 ) ),
                          furn_f_counter );
-            m->furn_set( point( ( p1.x + p2.x ) / 2, static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
+            m->furn_set( point_bub_ms( ( p1.x + p2.x ) / 2, static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
                          furn_f_counter );
-            m->furn_set( point( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1,
-                                static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
+            m->furn_set( point_bub_ms( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1,
+                                       static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
                          furn_f_counter );
             mtrap_set( m, trap, tr_telepad );
-            m->place_items( Item_spawn_data_teleport, 70, point( ( p1.x + p2.x ) / 2,
+            m->place_items( Item_spawn_data_teleport, 70, point_bub_ms( ( p1.x + p2.x ) / 2,
                             static_cast<int>( ( p1.y + p2.y ) / 2 ) ),
-                            point( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1, static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
+                            point_bub_ms( static_cast<int>( ( p1.x + p2.x ) / 2 ) + 1,
+                                          static_cast<int>( ( p1.y + p2.y ) / 2 ) + 1 ),
                             z,
                             false,
                             calendar::start_of_cataclysm );
@@ -7493,7 +7565,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
             if( rotate == 0 ) {
                 mremove_trap( m, tripoint_bub_ms( p1.x, p2.y, z ), tr_null );
                 m->furn_set( tripoint_bub_ms( p1.x, p2.y, z ), furn_f_fridge );
-                m->place_items( Item_spawn_data_goo, 60, point( p1.x, p2.y ), point( p1.x, p2.y ), z,
+                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p1.x, p2.y ), point_bub_ms( p1.x, p2.y ), z,
                                 false, calendar::start_of_cataclysm );
             } else if( rotate == 1 ) {
                 mremove_trap( m, tripoint_bub_ms( p1.x, p1.y, z ), tr_null );
@@ -7503,7 +7575,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
             } else if( rotate == 2 ) {
                 mremove_trap( m, tripoint_bub_ms( p2.x, p1.y, z ), tr_null );
                 m->furn_set( tripoint_bub_ms( p2.x, p1.y, z ), furn_f_fridge );
-                m->place_items( Item_spawn_data_goo, 60, point( p2.x, p1.y ), point( p2.x, p1.y ), z,
+                m->place_items( Item_spawn_data_goo, 60, point_bub_ms( p2.x, p1.y ), point_bub_ms( p2.x, p1.y ), z,
                                 false, calendar::start_of_cataclysm );
             } else {
                 mremove_trap( m, tripoint_bub_ms( p2.x, p2.y, z ), tr_null );
@@ -7517,8 +7589,8 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int y = p1.y + 1; y <= p2.y - 1; y++ ) {
                     if( x % 3 == 0 && y % 3 == 0 ) {
                         m->ter_set( tripoint_bub_ms( x, y, z ), ter_t_vat );
-                        m->place_items( Item_spawn_data_cloning_vat, 20, point( x, y ),
-                                        point( x, y ), z, false, calendar::start_of_cataclysm );
+                        m->place_items( Item_spawn_data_cloning_vat, 20, point_bub_ms( x, y ),
+                                        point_bub_ms( x, y ), z, false, calendar::start_of_cataclysm );
                     }
                 }
             }
@@ -7528,26 +7600,26 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                 for( int x = p1.x; x <= p2.x; x++ ) {
                     m->furn_set( tripoint_bub_ms( x, p2.y - 1, z ), furn_f_counter );
                 }
-                m->place_items( Item_spawn_data_dissection, 80, point( p1.x, p2.y - 1 ),
-                                p2 + point_north, z, false, calendar::start_of_cataclysm );
+                m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p1.x, p2.y - 1 ),
+                                point_bub_ms( p2 + point_north ), z, false, calendar::start_of_cataclysm );
             } else if( rotate == 1 ) {
                 for( int y = p1.y; y <= p2.y; y++ ) {
                     m->furn_set( tripoint_bub_ms( p1.x + 1, y, z ), furn_f_counter );
                 }
-                m->place_items( Item_spawn_data_dissection, 80, p1 + point_east,
-                                point( p1.x + 1, p2.y ), z, false, calendar::start_of_cataclysm );
+                m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p1 + point_east ),
+                                point_bub_ms( p1.x + 1, p2.y ), z, false, calendar::start_of_cataclysm );
             } else if( rotate == 2 ) {
                 for( int x = p1.x; x <= p2.x; x++ ) {
                     m->furn_set( tripoint_bub_ms( x, p1.y + 1, z ), furn_f_counter );
                 }
-                m->place_items( Item_spawn_data_dissection, 80, p1 + point_south,
-                                point( p2.x, p1.y + 1 ), z, false, calendar::start_of_cataclysm );
+                m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p1 + point_south ),
+                                point_bub_ms( p2.x, p1.y + 1 ), z, false, calendar::start_of_cataclysm );
             } else if( rotate == 3 ) {
                 for( int y = p1.y; y <= p2.y; y++ ) {
                     m->furn_set( tripoint_bub_ms( p2.x - 1, y, z ), furn_f_counter );
                 }
-                m->place_items( Item_spawn_data_dissection, 80, point( p2.x - 1, p1.y ),
-                                p2 + point_west, z, false, calendar::start_of_cataclysm );
+                m->place_items( Item_spawn_data_dissection, 80, point_bub_ms( p2.x - 1, p1.y ),
+                                point_bub_ms( p2 + point_west ), z, false, calendar::start_of_cataclysm );
             }
             mtrap_set( m, tripoint_bub_ms( ( p1.x + p2.x ) / 2, static_cast<int>( ( p1.y + p2.y ) / 2 ), z ),
                        tr_dissector );
@@ -7571,7 +7643,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                                 bio, z, false, calendar::start_of_cataclysm );
 
                 m->furn_set( tripoint_bub_ms( bio.x, bio.y + 2, z ), furn_f_console );
-                computer *tmpcomp = m->add_computer( tripoint( bio.x,  bio.y + 2, z ), _( "Bionic access" ), 2 );
+                computer *tmpcomp = m->add_computer( { bio.x,  bio.y + 2, z }, _( "Bionic access" ), 2 );
                 tmpcomp->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp->add_failure( COMPFAIL_MANHACKS );
@@ -7590,7 +7662,7 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                                 bio, z, false, calendar::start_of_cataclysm );
 
                 m->furn_set( tripoint_bub_ms( bio.x, bio.y - 2, z ), furn_f_console );
-                computer *tmpcomp2 = m->add_computer( tripoint( bio.x,  bio.y - 2, z ), _( "Bionic access" ), 2 );
+                computer *tmpcomp2 = m->add_computer( { bio.x,  bio.y - 2, z }, _( "Bionic access" ), 2 );
                 tmpcomp2->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp2->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp2->add_failure( COMPFAIL_MANHACKS );
@@ -7606,11 +7678,11 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                                             "|-|\n",
                                             mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
-                m->place_items( Item_spawn_data_bionics_common, 70, point( biox, bioy ),
-                                point( biox, bioy ), z, false, calendar::start_of_cataclysm );
+                m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
+                                point_bub_ms( biox, bioy ), z, false, calendar::start_of_cataclysm );
 
                 m->furn_set( tripoint_bub_ms( biox + 2, bioy, z ), furn_f_console );
-                computer *tmpcomp = m->add_computer( tripoint( biox + 2,  bioy, z ), _( "Bionic access" ), 2 );
+                computer *tmpcomp = m->add_computer( { biox + 2,  bioy, z }, _( "Bionic access" ), 2 );
                 tmpcomp->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp->add_failure( COMPFAIL_MANHACKS );
@@ -7625,11 +7697,11 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
                                             "|-|\n",
                                             mapf::ter_bind( "- | =", ter_t_concrete_wall, ter_t_concrete_wall, ter_t_reinforced_glass ),
                                             mapf::furn_bind( "c", furn_f_counter ) );
-                m->place_items( Item_spawn_data_bionics_common, 70, point( biox, bioy ),
-                                point( biox, bioy ), z, false, calendar::turn_zero );
+                m->place_items( Item_spawn_data_bionics_common, 70, point_bub_ms( biox, bioy ),
+                                point_bub_ms( biox, bioy ), z, false, calendar::turn_zero );
 
                 m->furn_set( tripoint_bub_ms( biox - 2, bioy, z ), furn_f_console );
-                computer *tmpcomp2 = m->add_computer( tripoint( biox - 2,  bioy, z ), _( "Bionic access" ), 2 );
+                computer *tmpcomp2 = m->add_computer( { biox - 2,  bioy, z }, _( "Bionic access" ), 2 );
                 tmpcomp2->add_option( _( "Manifest" ), COMPACT_LIST_BIONICS, 0 );
                 tmpcomp2->add_option( _( "Open Chambers" ), COMPACT_RELEASE_BIONICS, 3 );
                 tmpcomp2->add_failure( COMPFAIL_MANHACKS );
@@ -7642,44 +7714,44 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
             if( rotate % 2 == 0 ) {
                 for( int y = p1.y + 1; y <= p2.y - 1; y += 3 ) {
                     m->furn_set( tripoint_bub_ms( p1.x, y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( p1.x, y ), point( p1.x, y ), z,
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( p1.x, y ), point_bub_ms( p1.x, y ), z,
                                     false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( p1.x + 1, y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( p1.x + 1, y ),
-                                    point( p1.x + 1, y ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( p1.x + 1, y ),
+                                    point_bub_ms( p1.x + 1, y ), z, false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( p2.x, y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( p2.x, y ), point( p2.x, y ), z,
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( p2.x, y ), point_bub_ms( p2.x, y ), z,
                                     false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( p2.x - 1, y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( p2.x - 1, y ),
-                                    point( p2.x - 1, y ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( p2.x - 1, y ),
+                                    point_bub_ms( p2.x - 1, y ), z, false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( p1.x, y + 1, z ), furn_f_dresser );
                     m->furn_set( tripoint_bub_ms( p2.x, y + 1, z ), furn_f_dresser );
-                    m->place_items( Item_spawn_data_dresser, 70, point( p1.x, y + 1 ),
-                                    point( p1.x, y + 1 ), z, false, calendar::start_of_cataclysm );
-                    m->place_items( Item_spawn_data_dresser, 70, point( p2.x, y + 1 ),
-                                    point( p2.x, y + 1 ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_dresser, 70, point_bub_ms( p1.x, y + 1 ),
+                                    point_bub_ms( p1.x, y + 1 ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_dresser, 70, point_bub_ms( p2.x, y + 1 ),
+                                    point_bub_ms( p2.x, y + 1 ), z, false, calendar::start_of_cataclysm );
                 }
             } else if( rotate % 2 == 1 ) {
                 for( int x = p1.x + 1; x <= p2.x - 1; x += 3 ) {
                     m->furn_set( tripoint_bub_ms( x, p1.y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( x, p1.y ), point( x, p1.y ), z,
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( x, p1.y ), point_bub_ms( x, p1.y ), z,
                                     false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( x, p1.y + 1, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( x, p1.y + 1 ),
-                                    point( x, p1.y + 1 ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( x, p1.y + 1 ),
+                                    point_bub_ms( x, p1.y + 1 ), z, false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( x, p2.y, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( x, p2.y ), point( x, p2.y ), z,
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( x, p2.y ), point_bub_ms( x, p2.y ), z,
                                     false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( x, p2.y - 1, z ), furn_f_bed );
-                    m->place_items( Item_spawn_data_bed, 60, point( x, p2.y - 1 ),
-                                    point( x, p2.y - 1 ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_bed, 60, point_bub_ms( x, p2.y - 1 ),
+                                    point_bub_ms( x, p2.y - 1 ), z, false, calendar::start_of_cataclysm );
                     m->furn_set( tripoint_bub_ms( x + 1, p1.y, z ), furn_f_dresser );
                     m->furn_set( tripoint_bub_ms( x + 1, p2.y, z ), furn_f_dresser );
-                    m->place_items( Item_spawn_data_dresser, 70, point( x + 1, p1.y ),
-                                    point( x + 1, p1.y ), z, false, calendar::start_of_cataclysm );
-                    m->place_items( Item_spawn_data_dresser, 70, point( x + 1, p2.y ),
-                                    point( x + 1, p2.y ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_dresser, 70, point_bub_ms( x + 1, p1.y ),
+                                    point_bub_ms( x + 1, p1.y ), z, false, calendar::start_of_cataclysm );
+                    m->place_items( Item_spawn_data_dresser, 70, point_bub_ms( x + 1, p2.y ),
+                                    point_bub_ms( x + 1, p2.y ), z, false, calendar::start_of_cataclysm );
                 }
             }
             m->place_items( Item_spawn_data_lab_dorm, 84, p1, p2, z, false,
@@ -7717,11 +7789,12 @@ void science_room( map *m, const point &p1, const point &p2, int z, int rotate )
     }
 }
 
-void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bool create_rubble )
+void map::create_anomaly( const tripoint_bub_ms &cp, artifact_natural_property prop,
+                          bool create_rubble )
 {
     // TODO: Z
-    const int z = cp.z;
-    point c( cp.xy() );
+    const int z = cp.z();
+    point_bub_ms c( cp.xy() );
     if( create_rubble ) {
         rough_circle( this, ter_t_dirt, c, 11 );
         rough_circle_furn( this, furn_f_rubble, c, 5 );
@@ -7730,12 +7803,12 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
     switch( prop ) {
         case ARTPROP_WRIGGLING:
         case ARTPROP_MOVING:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble ) {
-                        add_field( tripoint_bub_ms{i, j, z}, fd_push_items, 1 );
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble ) {
+                        add_field( tripoint_bub_ms{ i, j, z }, fd_push_items, 1 );
                         if( one_in( 3 ) ) {
-                            spawn_item( point( i, j ), "rock" );
+                            spawn_item( point_bub_ms( i, j ), "rock" );
                         }
                     }
                 }
@@ -7744,9 +7817,9 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
 
         case ARTPROP_GLOWING:
         case ARTPROP_GLITTERING:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble && one_in( 2 ) ) {
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble && one_in( 2 ) ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_glow );
                     }
                 }
@@ -7755,9 +7828,9 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
 
         case ARTPROP_HUMMING:
         case ARTPROP_RATTLING:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble && one_in( 2 ) ) {
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble && one_in( 2 ) ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_hum );
                     }
                 }
@@ -7766,9 +7839,9 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
 
         case ARTPROP_WHISPERING:
         case ARTPROP_ENGRAVED:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble && one_in( 3 ) ) {
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble && one_in( 3 ) ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_shadow );
                     }
                 }
@@ -7776,9 +7849,9 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
             break;
 
         case ARTPROP_BREATHING:
-            for( int i = c.x - 1; i <= c.x + 1; i++ ) {
-                for( int j = c.y - 1; j <= c.y + 1; j++ ) {
-                    if( i == c.x && j == c.y ) {
+            for( int i = c.x() - 1; i <= c.x() + 1; i++ ) {
+                for( int j = c.y() - 1; j <= c.y() + 1; j++ ) {
+                    if( i == c.x() && j == c.y() ) {
                         place_spawns( GROUP_BREATHER_HUB, 1, point_bub_ms( i, j ), point_bub_ms( i, j ), z, 1,
                                       true );
                     } else {
@@ -7789,9 +7862,9 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
             break;
 
         case ARTPROP_DEAD:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble ) {
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_drain );
                     }
                 }
@@ -7799,10 +7872,10 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
             break;
 
         case ARTPROP_ITCHY:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble ) {
-                        set_radiation( point( i, j ), rng( 0, 10 ) );
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble ) {
+                        set_radiation( point_bub_ms( i, j ), rng( 0, 10 ) );
                     }
                 }
             }
@@ -7810,28 +7883,28 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
 
         case ARTPROP_ELECTRIC:
         case ARTPROP_CRACKLING:
-            add_field( {c, abs_sub.z()}, fd_shock_vent, 3 );
+            add_field( { c, abs_sub.z() }, fd_shock_vent, 3 );
             break;
 
         case ARTPROP_SLIMY:
-            add_field( {c, abs_sub.z()}, fd_acid_vent, 3 );
+            add_field( { c, abs_sub.z() }, fd_acid_vent, 3 );
             break;
 
         case ARTPROP_WARM:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble ) {
-                        add_field( tripoint_bub_ms{i, j, abs_sub.z()}, fd_fire_vent,
-                                   1 + ( rl_dist( c, point( i, j ) ) % 3 ) );
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble ) {
+                        add_field( tripoint_bub_ms{ i, j, abs_sub.z() }, fd_fire_vent,
+                                   1 + ( rl_dist( c, point_bub_ms( i, j ) ) % 3 ) );
                     }
                 }
             }
             break;
 
         case ARTPROP_SCALED:
-            for( int i = c.x - 5; i <= c.x + 5; i++ ) {
-                for( int j = c.y - 5; j <= c.y + 5; j++ ) {
-                    if( furn( point( i, j ) ) == furn_f_rubble ) {
+            for( int i = c.x() - 5; i <= c.x() + 5; i++ ) {
+                for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
+                    if( furn( point_bub_ms( i, j ) ) == furn_f_rubble ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_snake );
                     }
                 }
@@ -7860,11 +7933,6 @@ void map::create_anomaly( const tripoint &cp, artifact_natural_property prop, bo
         default:
             break;
     }
-}
-void map::create_anomaly( const tripoint_bub_ms &cp, artifact_natural_property prop,
-                          bool create_rubble )
-{
-    create_anomaly( cp.raw(), prop, create_rubble );
 }
 ///////////////////// part of map
 
@@ -7908,31 +7976,32 @@ void fill_background( map *m, ter_id( *f )() )
 {
     m->draw_fill_background( f );
 }
-void square( map *m, const ter_id &type, const point &p1, const point &p2 )
+void square( map *m, const ter_id &type, const point_bub_ms &p1, const point_bub_ms &p2 )
 {
     m->draw_square_ter( type, p1, p2, m->get_abs_sub().z() );
 }
-void square_furn( map *m, const furn_id &type, const point &p1, const point &p2 )
+void square_furn( map *m, const furn_id &type, const point_bub_ms &p1, const point_bub_ms &p2 )
 {
     m->draw_square_furn( type, p1, p2, m->get_abs_sub().z() );
 }
-void square_furn( tinymap *m, const furn_id &type, const point &p1, const point &p2 )
+void square_furn( tinymap *m, const furn_id &type, const point_omt_ms &p1, const point_omt_ms &p2 )
 {
     m->draw_square_furn( type, p1, p2 );
 }
-void square( map *m, ter_id( *f )(), const point &p1, const point &p2 )
+void square( map *m, ter_id( *f )(), const point_bub_ms &p1, const point_bub_ms &p2 )
 {
     m->draw_square_ter( f, p1, p2 );
 }
-void square( map *m, const weighted_int_list<ter_id> &f, const point &p1, const point &p2 )
+void square( map *m, const weighted_int_list<ter_id> &f, const point_bub_ms &p1,
+             const point_bub_ms &p2 )
 {
     m->draw_square_ter( f, p1, p2 );
 }
-void rough_circle( map *m, const ter_id &type, const point &p, int rad )
+void rough_circle( map *m, const ter_id &type, const point_bub_ms &p, int rad )
 {
     m->draw_rough_circle_ter( type, p, rad );
 }
-void rough_circle_furn( map *m, const furn_id &type, const point &p, int rad )
+void rough_circle_furn( map *m, const furn_id &type, const point_bub_ms &p, int rad )
 {
     m->draw_rough_circle_furn( type, p, rad );
 }
@@ -7940,17 +8009,17 @@ void circle( map *m, const ter_id &type, double x, double y, double rad )
 {
     m->draw_circle_ter( type, rl_vec2d( x, y ), rad );
 }
-void circle( map *m, const ter_id &type, const point &p, int rad )
+void circle( map *m, const ter_id &type, const point_bub_ms &p, int rad )
 {
     m->draw_circle_ter( type, p, rad );
 }
-void circle_furn( map *m, const furn_id &type, const point &p, int rad )
+void circle_furn( map *m, const furn_id &type, const point_bub_ms &p, int rad )
 {
     m->draw_circle_furn( type, p, rad );
 }
-void add_corpse( map *m, const point &p )
+void add_corpse( map *m, const point_bub_ms &p )
 {
-    m->add_corpse( tripoint( p, m->get_abs_sub().z() ) );
+    m->add_corpse( { p, m->get_abs_sub().z() } );
 }
 
 //////////////////// mapgen update
@@ -7984,13 +8053,13 @@ bool update_mapgen_function_json::setup_internal( const JsonObject &/*jo*/ )
     return true;
 }
 
-bool update_mapgen_function_json::update_map(
+ret_val<void> update_mapgen_function_json::update_map(
     const tripoint_abs_omt &omt_pos, const mapgen_arguments &args, const tripoint_rel_ms &offset,
     mission *miss, bool verify, bool mirror_horizontal, bool mirror_vertical, int rotation ) const
 {
     if( omt_pos == overmap::invalid_tripoint ) {
         debugmsg( "Mapgen update function called with overmap::invalid_tripoint" );
-        return false;
+        return ret_val<void>::make_failure( _( "invalid position (not vehicle/appliance)" ) );
     }
 
     std::unique_ptr<smallmap> p_update_smap = std::make_unique<smallmap>();
@@ -8003,7 +8072,7 @@ bool update_mapgen_function_json::update_map(
     mapgendata md_base( omt_pos, *update_smap.cast_to_map(), 0.0f, calendar::start_of_cataclysm, miss );
     mapgendata md( md_base, args );
 
-    bool const u = update_map( md, offset, verify );
+    ret_val<void> const u = update_map( md, offset, verify );
     update_smap.mirror( mirror_horizontal, mirror_vertical );
     update_smap.rotate( rotation );
 
@@ -8034,7 +8103,7 @@ class rotation_guard
             // If the existing map is rotated, we need to rotate it back to the north
             // orientation before applying our updates.
             if( rotation != 0 && !md.has_flag( jmapgen_flags::no_underlying_rotate ) ) {
-                md.m.rotate( rotation, true );
+                md.m.rotate( rotation );
             }
         }
 
@@ -8042,7 +8111,7 @@ class rotation_guard
             // If we rotated the map before applying updates, we now need to rotate
             // it back to where we found it.
             if( rotation != 0 && !md.has_flag( jmapgen_flags::no_underlying_rotate ) ) {
-                md.m.rotate( 4 - rotation, true );
+                md.m.rotate( 4 - rotation );
             }
         }
     private:
@@ -8050,7 +8119,8 @@ class rotation_guard
         const int rotation;
 };
 
-bool update_mapgen_function_json::update_map( const mapgendata &md, const tripoint_rel_ms &offset,
+ret_val<void> update_mapgen_function_json::update_map( const mapgendata &md,
+        const tripoint_rel_ms &offset,
         const bool verify ) const
 {
     mapgendata md_with_params( md, get_args( md, mapgen_parameter_scope::omt ), flags_ );
@@ -8081,14 +8151,17 @@ mapgen_update_func add_mapgen_update_func( const JsonObject &jo, bool &defer )
         return null_function;
     }
     const auto update_function = [json_data]( const tripoint_abs_omt & omt_pos, mission * miss ) {
-        json_data.update_map( omt_pos, {}, tripoint_rel_ms( tripoint_zero ), miss );
+        json_data.update_map( omt_pos, {}, tripoint_rel_ms_zero, miss );
     };
     defer = mapgen_defer::defer;
     mapgen_defer::jsi = JsonObject();
     return update_function;
 }
 
-bool run_mapgen_update_func(
+static const std::string missing_update_operation =
+    "missing update operation (not vehicle/appliance)";
+
+ret_val<void> run_mapgen_update_func(
     const update_mapgen_id &update_mapgen_id, const tripoint_abs_omt &omt_pos,
     const mapgen_arguments &args, mission *miss, bool cancel_on_collision, bool mirror_horizontal,
     bool mirror_vertical, int rotation )
@@ -8096,21 +8169,21 @@ bool run_mapgen_update_func(
     const auto update_function = update_mapgens.find( update_mapgen_id );
 
     if( update_function == update_mapgens.end() || update_function->second.funcs().empty() ) {
-        return false;
+        return ret_val<void>::make_failure( _( missing_update_operation ) );
     }
     return update_function->second.funcs()[0]->update_map(
-               omt_pos, args, tripoint_rel_ms( tripoint_zero ), miss, cancel_on_collision, mirror_horizontal,
+               omt_pos, args, tripoint_rel_ms_zero, miss, cancel_on_collision, mirror_horizontal,
                mirror_vertical, rotation );
 }
 
-bool run_mapgen_update_func( const update_mapgen_id &update_mapgen_id, mapgendata &dat,
-                             const bool cancel_on_collision )
+ret_val<void> run_mapgen_update_func( const update_mapgen_id &update_mapgen_id, mapgendata &dat,
+                                      const bool cancel_on_collision )
 {
     const auto update_function = update_mapgens.find( update_mapgen_id );
     if( update_function == update_mapgens.end() || update_function->second.funcs().empty() ) {
-        return false;
+        return ret_val<void>::make_failure( _( missing_update_operation ) );
     }
-    return update_function->second.funcs()[0]->update_map( dat, tripoint_rel_ms( tripoint_zero ),
+    return update_function->second.funcs()[0]->update_map( dat, tripoint_rel_ms_zero,
             cancel_on_collision );
 }
 
@@ -8159,8 +8232,8 @@ bool apply_construction_marker( const update_mapgen_id &update_mapgen_id,
 
         rotation_guard rot( md );
 
-        if( update_function->second.funcs()[0]->update_map( fake_md ) ) {
-            for( const tripoint &pos : tmp_map.points_on_zlevel( omt_pos.z() ) ) {
+        if( update_function->second.funcs()[0]->update_map( fake_md ).success() ) {
+            for( const tripoint_omt_ms &pos : tmp_map.points_on_zlevel( omt_pos.z() ) ) {
                 if( tmp_map.ter( pos ) != ter_t_grass || tmp_map.has_furn( pos ) ) {
                     if( apply ) {
                         update_tmap.add_field( pos, fd_construction_site, 1, time_duration::from_turns( 0 ), false );
@@ -8197,9 +8270,9 @@ std::pair<std::map<ter_id, int>, std::map<furn_id, int>> get_changed_ids_from_up
     mapgendata fake_md( base_fake_md, mapgen_args );
     fake_md.skip = { mapgen_phase::zones };
 
-    if( update_function->second.funcs()[0]->update_map( fake_md ) ) {
+    if( update_function->second.funcs()[0]->update_map( fake_md ).success() ) {
         for( int z = -OVERMAP_DEPTH; z <= OVERMAP_DEPTH; z++ ) {
-            for( const tripoint &pos : tmp_map.points_on_zlevel( z ) ) {
+            for( const tripoint_omt_ms &pos : tmp_map.points_on_zlevel( z ) ) {
                 ter_id ter_at_pos = tmp_map.ter( pos );
                 if( ter_at_pos != base_ter ) {
                     terrains[ter_at_pos] += 1;

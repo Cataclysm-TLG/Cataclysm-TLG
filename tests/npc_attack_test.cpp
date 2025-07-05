@@ -16,8 +16,6 @@ static const ammotype ammo_battery( "battery" );
 static const faction_id faction_your_followers( "your_followers" );
 
 static const itype_id itype_knife_chef( "knife_chef" );
-static const itype_id itype_power_armor_basic( "power_armor_basic" );
-static const itype_id itype_power_armor_basic_on( "power_armor_basic_on" );
 static const itype_id itype_rock( "rock" );
 static const itype_id itype_wearable_light( "wearable_light" );
 
@@ -27,8 +25,8 @@ static const string_id<npc_template> npc_template_test_talker( "test_talker" );
 
 static const weather_type_id weather_sunny( "sunny" );
 
-static constexpr point main_npc_start{ 50, 50 };
-static constexpr tripoint main_npc_start_tripoint{ main_npc_start, 0 };
+static constexpr point_bub_ms main_npc_start{ 50, 50 };
+static constexpr tripoint_bub_ms main_npc_start_tripoint{ main_npc_start, 0 };
 
 namespace npc_attack_setup
 {
@@ -91,7 +89,7 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                 const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                 CHECK( rating.value() );
                 CHECK( *rating.value() > 0 );
-                CHECK( rating.target() == zombie->pos() );
+                CHECK( rating.target() == zombie->pos_bub() );
             }
         }
         WHEN( "NPC only has an m16a4" ) {
@@ -111,7 +109,7 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                     const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                     CHECK( rating.value() );
                     CHECK( *rating.value() > 0 );
-                    CHECK( rating.target() == zombie->pos() );
+                    CHECK( rating.target() == zombie->pos_bub() );
                 }
             }
             WHEN( "NPC isn't allowed to use loud weapons" ) {
@@ -149,44 +147,6 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                 CHECK( !throw_attack );
             }
         }
-        WHEN( "NPC has power armor" ) {
-            main_npc.clear_worn();
-
-            item armor( "power_armor_basic" );
-            std::optional<std::list<item>::iterator> wear_success = main_npc.wear_item( armor );
-            REQUIRE( wear_success );
-
-            // If the flag gets removed from power armor, some other item with the flag will need to replace it.
-            REQUIRE( main_npc.worn_with_flag( flag_COMBAT_TOGGLEABLE ) );
-
-            WHEN( "NPC has a UPS for their armor" ) {
-                item ps( "UPS_ON" );
-                item battery( "heavy_plus_battery_cell" );
-                battery.ammo_set( battery.ammo_default(), battery.ammo_capacity( ammo_battery ) );
-
-                ps.put_in( battery, pocket_type::MAGAZINE_WELL );
-
-                item_location stored_ps = main_npc.try_add( ps );
-                REQUIRE( stored_ps != item_location::nowhere );
-
-                THEN( "NPC activates their power armor successfully" ) {
-                    // target is not exposed, so regen_ai_cache is used to have the npc re-assess threat and store the target.
-                    main_npc.regen_ai_cache();
-                    main_npc.method_of_attack();
-                    CHECK( main_npc.is_wearing( itype_power_armor_basic_on ) );
-                    CHECK( !main_npc.is_wearing( itype_power_armor_basic ) );
-                }
-            }
-
-            WHEN( "NPC has no power supply for their armor" ) {
-                THEN( "NPC fails to activate their power armor" ) {
-                    main_npc.regen_ai_cache();
-                    main_npc.method_of_attack();
-                    CHECK( main_npc.is_wearing( itype_power_armor_basic ) );
-                    CHECK( !main_npc.is_wearing( itype_power_armor_basic_on ) );
-                }
-            }
-        }
         WHEN( "NPC has a headlamp" ) {
             main_npc.clear_worn();
 
@@ -221,7 +181,7 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                 const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                 CHECK( rating.value() );
                 CHECK( *rating.value() > 0 );
-                CHECK( rating.target() == zombie->pos() );
+                CHECK( rating.target() == zombie->pos_bub() );
             }
         }
 
@@ -257,7 +217,7 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                     const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                     CHECK( rating.value() );
                     CHECK( *rating.value() > 0 );
-                    CHECK( rating.target() == zombie->pos() );
+                    CHECK( rating.target() == zombie->pos_bub() );
                 }
             }
             WHEN( "NPC is targetting farthest zombie" ) {
@@ -271,7 +231,7 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                         const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                         CHECK( rating.value() );
                         CHECK( *rating.value() > 0 );
-                        CHECK( rating.target() == zombie->pos() );
+                        CHECK( rating.target() == zombie->pos_bub() );
                     }
                 }
                 WHEN( "Furthest zombie is at low HP" ) {
@@ -285,25 +245,9 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
                         const npc_attack_rating &rating = main_npc.get_current_attack_evaluation();
                         CHECK( rating.value() );
                         CHECK( *rating.value() > 0 );
-                        CHECK( rating.target() == zombie_far->pos() );
+                        CHECK( rating.target() == zombie_far->pos_bub() );
                     }
                 }
-            }
-        }
-    }
-    GIVEN( "There is no zombie nearby. " ) {
-        WHEN( "NPC is wearing active power armor. " ) {
-            item armor( "power_armor_basic_on" );
-            armor.activate();
-            std::optional<std::list<item>::iterator> wear_success = main_npc.wear_item( armor );
-            REQUIRE( wear_success );
-
-            THEN( "NPC deactivates their power armor. " ) {
-                // This is somewhat cheating, but going up one level is testing all of npc::move.
-                main_npc.cleanup_on_no_danger();
-
-                CHECK( !main_npc.is_wearing( itype_power_armor_basic_on ) );
-                CHECK( main_npc.is_wearing( itype_power_armor_basic ) );
             }
         }
     }
@@ -311,4 +255,5 @@ TEST_CASE( "NPC_faces_zombies", "[npc_attack]" )
 
 // TODO: Add scenarios for:
 // - NPCs carrying a mix of weapons
+// - NPCs shooting rather than being indecisive about range
 // - NPCs trying to shoot through allies

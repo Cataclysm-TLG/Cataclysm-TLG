@@ -43,6 +43,19 @@
   },
   {
     "type": "GENERIC",
+    "id": "arc_furnace",
+    "looks_like": "f_arc_furnace",
+    "symbol": "U",
+    "description": "An arc furnace designed to burn a powdery mix of coke and limestone to create calcium carbide.  Needs to be placed and plugged into a power source.",
+    "color": "blue",
+    "name": { "str": "disconnected arc furnace" },
+    "material": [ "budget_steel" ],
+    "longest_side": "200 cm",
+    "volume": "400 L",
+    "weight": "1024 kg"
+  },
+  {
+    "type": "GENERIC",
     "id": "drill_press",
     "looks_like": "f_machinery_light",
     "symbol": "7",
@@ -314,8 +327,6 @@
     "name": { "str": "disconnected advanced Stirling radioisotope generator" },
     "looks_like": "t_plut_generator",
     "description": "A rather heavy brick of metal housing an ASRG, formerly designed by NASA and repurposed for terrestrial use.  Will provide about 130 W, basically forever as far as you're concerned.  Even though the alpha radiation these run off of isn't very dangerous in case of a breach, this unit appears to be armored to take a beating and is a good deal heavier owing to its composite plating.",
-    "//0": "the base unit is 39x46x76cm (136 liters) and weighs 32 kg. I am assuming that XEDRA or another org added a lot of armor as a hedge against portal fuckery",
-    "//1": "being enclosed in a solid box of milcomp plating I'm assuming about another 68 kg (3 armor platings' worth + shocks etc)",
     "weight": "100 kg",
     "to_hit": -10,
     "material": [ "lead", "steel" ],
@@ -389,5 +400,21 @@
     "price_postapoc": "20 USD",
     "symbol": "&",
     "color": "light_gray"
+  },
+  {
+    "type": "GENERIC",
+    "category": "other",
+    "id": "glassblowers_crucible",
+    "name": { "str": "disconnected glassblower's crucible" },
+    "description": "An electric crucible, powered by your electric grid.  Designed for melting large quantities of glass for batch crafting and production of large items, it needs to be placed and plugged into a power source.",
+    "//": "Loosely based off Jen-Ken Kiln - Crucible 1813, but homemade",
+    "weight": "50 kg",
+    "material": [ "steel", "clay" ],
+    "volume": "62500 ml",
+    "longest_side": "100 cm",
+    "price": "2179 USD",
+    "price_postapoc": "25 USD",
+    "symbol": "o",
+    "color": "brown"
   }
 ]

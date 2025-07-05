@@ -1229,6 +1229,13 @@
   },
   {
     "type": "keybinding",
+    "id": "MODIFY_HORDE",
+    "category": "OVERMAP",
+    "name": "Modify existing horde or place new one",
+    "bindings": [ { "input_method": "keyboard_any", "key": "p" } ]
+  },
+  {
+    "type": "keybinding",
     "name": "View missions",
     "category": "OVERMAP",
     "id": "MISSIONS",
@@ -4161,6 +4168,17 @@
       { "input_method": "keyboard_char", "key": "M" },
       { "input_method": "keyboard_code", "key": "m", "mod": [ "shift" ] },
       { "input_method": "keyboard_any", "key": "m" }
+    ]
+  },
+  {
+    "type": "keybinding",
+    "id": "VIEW",
+    "category": "CANCEL_ACTIVITY_OR_IGNORE_QUERY",
+    "name": "View enemy",
+    "bindings": [
+      { "input_method": "keyboard_char", "key": "V" },
+      { "input_method": "keyboard_code", "key": "v", "mod": [ "shift" ] },
+      { "input_method": "keyboard_any", "key": "v" }
     ]
   },
   {

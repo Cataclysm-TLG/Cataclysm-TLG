@@ -803,6 +803,8 @@ void item_pocket::handle_liquid_or_spill( Character &guy, const item *avoid )
             item i_copy( *iter );
             guy.i_add_or_drop( i_copy, 1, avoid, &*iter );
             iter = contents.erase( iter );
+            guy.add_msg_if_player( m_warning, _( "The %s falls out of the %s." ), i_copy.display_name(),
+                                   get_name() );
         }
     }
 }
@@ -1208,19 +1210,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
             info.emplace_back( arm_type_str, string_format( "%s%s", _( "Coverage:" ), space ), "",
                                iteminfo::no_newline,
                                ablative_armor.get_avg_coverage() );
-            //~ (M)elee coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(M):" ), space ), "",
-                               iteminfo::no_newline,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_MELEE ) );
-            //~ (R)anged coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(R):" ), space ), "",
-                               iteminfo::no_newline,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_RANGED ) );
-            //~ (V)itals coverage
-            info.emplace_back( arm_type_str, string_format( "%s%s%s", space, _( "(V):" ), space ), "",
-                               iteminfo::no_flags,
-                               ablative_armor.get_avg_coverage( item::cover_type::COVER_VITALS ) );
-
             info.back().bNewLine = true;
 
             size_t idx = 0;
@@ -2482,7 +2471,7 @@ units::volume pocket_data::max_contains_volume() const
         int stack_size = ammo_type->stack_size ? ammo_type->stack_size : 1;
         int max_count = ammo_restriction.at( ammo_type->ammo->type );
         units::volume this_volume =
-            1_ml * divide_round_up( ammo_type->volume / 1_ml * max_count, stack_size );
+            1_ml * divide_round_up( ammo_type->volume * max_count / 1_ml, stack_size );
         max_total_volume = std::max( max_total_volume, this_volume );
     }
     return max_total_volume;

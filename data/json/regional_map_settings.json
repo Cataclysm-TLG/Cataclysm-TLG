@@ -884,6 +884,7 @@
         "house_40": 50,
         "house_41": 50,
         "house_42": 50,
+        "house_43": 50,
         "house_garage": 50,
         "house_garage2": 50,
         "house_garage3": 50,
@@ -951,7 +952,8 @@
         "s_apt_2": 30,
         "school": 15,
         "motel_city": 10,
-        "fishing_pond_city": 10
+        "fishing_pond_city": 10,
+        "house_fungus_01": 10
       },
       "parks": {
         "park": 50,
@@ -1064,6 +1066,7 @@
         "s_library_1": 200,
         "s_library_2": 200,
         "s_library_3": 200,
+        "urban_library": 100,
         "s_bookstore": 200,
         "s_bookstore_1": 200,
         "s_bookstore_2": 200,
@@ -1079,6 +1082,7 @@
         "s_pizza_parlor_1": 400,
         "bar": 400,
         "bar_1": 400,
+        "s_weldingstore": 200,
         "s_electronics": 400,
         "s_electronics_1": 400,
         "s_electronicstore": 400,

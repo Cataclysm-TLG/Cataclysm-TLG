@@ -127,8 +127,8 @@
     "symbol": "[",
     "color": "light_blue",
     "armor": [
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": [ 7, 12 ] },
-      { "covers": [ "torso" ], "coverage": 80, "encumbrance": [ 7, 12 ] }
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 100, "encumbrance": [ 14, 16 ] },
+      { "covers": [ "torso" ], "coverage": 70, "encumbrance": [ 10, 12 ] }
     ],
     "pocket_data": [
       {
@@ -192,8 +192,8 @@
     "looks_like": "jumpsuit",
     "color": "light_blue",
     "armor": [
-      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 1, 2 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 1, 1 ] }
+      { "covers": [ "torso", "leg_l", "leg_r" ], "coverage": 95, "encumbrance": [ 5, 6 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 5, 9 ] }
     ],
     "pocket_data": [
       {
@@ -265,18 +265,36 @@
   {
     "id": "jumpsuit_long_xl",
     "type": "ARMOR",
-    "name": { "str": "long_sleeved jumpsuit" },
+    "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "XL long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
   },
   {
     "id": "jumpsuit_long_xs",
     "type": "ARMOR",
-    "name": { "str": "long_sleeved jumpsuit" },
+    "name": { "str": "long-sleeved jumpsuit" },
     "copy-from": "jumpsuit_long",
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] },
+    "variant_type": "generic",
+    "variants": [
+      {
+        "id": "standard",
+        "name": { "str": "XS long-sleeved jumpsuit" },
+        "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
+        "weight": 0
+      }
+    ]
   },
   {
     "id": "jumpsuit",
@@ -372,7 +390,7 @@
       {
         "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 0.6 } ],
         "covers": [ "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "encumbrance": [ 9, 13 ],
+        "encumbrance": [ 9, 10 ],
         "specifically_covers": [
           "arm_shoulder_l",
           "arm_shoulder_r",
@@ -482,9 +500,9 @@
     "looks_like": "jumpsuit",
     "color": "yellow",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 3, 7 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 2, 2 ] },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 2, 5 ] }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 8, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 4, 4 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 8, 10 ] }
     ],
     "pocket_data": [
       { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
@@ -509,9 +527,9 @@
     "looks_like": "jumpsuit",
     "color": "yellow",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 3, 7 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 2, 2 ] },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 2, 5 ] }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 8, 12 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 50, "encumbrance": [ 4, 4 ] },
+      { "covers": [ "leg_l", "leg_r" ], "coverage": 60, "encumbrance": [ 8, 10 ] }
     ],
     "pocket_data": [
       { "pocket_type": "CONTAINER", "max_contains_volume": "500 ml", "max_contains_weight": "2 kg", "moves": 80 },
@@ -535,8 +553,8 @@
     "looks_like": "jumpsuit",
     "color": "light_gray",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 3 },
-      { "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 3 }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 6 },
+      { "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 6 }
     ],
     "warmth": 10,
     "material_thickness": 0.2,

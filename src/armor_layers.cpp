@@ -279,16 +279,6 @@ std::vector<std::string> clothing_properties(
     int coverage = worn_item.get_coverage( used_bp );
     add_folded_name_and_value( props, _( "Coverage:" ), string_format( "%3d", coverage ),
                                width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_MELEE );
-    add_folded_name_and_value( props, _( "Coverage (Melee):" ), string_format( "%3d",
-                               coverage ), width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_RANGED );
-    add_folded_name_and_value( props, _( "Coverage (Ranged):" ), string_format( "%3d",
-                               coverage ), width );
-    coverage = worn_item.get_coverage( used_bp, item::cover_type::COVER_VITALS );
-    add_folded_name_and_value( props, _( "Coverage (Vitals):" ), string_format( "%3d",
-                               coverage ), width );
-
     const int encumbrance = worn_item.get_encumber( c, used_bp );
     add_folded_name_and_value( props, _( "Encumbrance:" ), string_format( "%3d", encumbrance ),
                                width );
@@ -1105,7 +1095,7 @@ void outfit::sort_armor( Character &guy )
                     // wear the item
                     std::optional<std::list<item>::iterator> new_equip_it =
                         guy.wear( obtained );
-                    if( new_equip_it ) {
+                    if( new_equip_it && !tmp_worn.empty() ) {
                         // save iterator to cursor's position
                         std::list<item>::iterator cursor_it = tmp_worn[leftListIndex];
                         item &item_to_check = *cursor_it;
@@ -1116,7 +1106,7 @@ void outfit::sort_armor( Character &guy )
                             // reorder `worn` vector to place new item at cursor
                             worn.splice( cursor_it, worn, *new_equip_it );
                         }
-                    } else if( guy.is_npc() ) {
+                    } else if( guy.is_npc() && !tmp_worn.empty() ) {
                         // TODO: Pass the reason here
                         popup( _( "Can't put this on!" ) );
                     }

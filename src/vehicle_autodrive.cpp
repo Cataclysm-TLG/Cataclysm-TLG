@@ -636,19 +636,19 @@ vehicle_profile vehicle::autodrive_controller::compute_profile( orientation faci
     tileray tdir( to_angle( facing ) );
     ret.tdir = tdir;
     std::map<int, std::pair<int, int>> extent_map;
-    const point pivot = driven_veh.pivot_point();
+    const point_rel_ms pivot = driven_veh.pivot_point_rel();
     for( const vehicle_part &part : driven_veh.parts ) {
         if( part.removed ) {
             continue;
         }
-        tripoint pos;
+        tripoint_rel_ms pos;
         driven_veh.coord_translate( tdir, pivot, part.mount, pos );
-        if( extent_map.find( pos.y ) == extent_map.end() ) {
-            extent_map[pos.y] = { pos.x, pos.x };
+        if( extent_map.find( pos.y() ) == extent_map.end() ) {
+            extent_map[pos.y()] = {pos.x(), pos.x()};
         } else {
-            auto &extent = extent_map[pos.y];
-            extent.first = std::min( extent.first, pos.x );
-            extent.second = std::max( extent.second, pos.x );
+            auto &extent = extent_map[pos.y()];
+            extent.first = std::min( extent.first, pos.x() );
+            extent.second = std::max( extent.second, pos.x() );
         }
     }
     for( const auto &extent : extent_map ) {
@@ -664,10 +664,10 @@ vehicle_profile vehicle::autodrive_controller::compute_profile( orientation faci
         const int diameter = part.info().rotor_info->rotor_diameter;
         const int radius = ( diameter + 1 ) / 2;
         if( radius > 0 ) {
-            tripoint pos;
+            tripoint_rel_ms pos;
             driven_veh.coord_translate( tdir, pivot, part.mount, pos );
-            for( tripoint pt : points_in_radius( pos, radius ) ) {
-                ret.occupied_zone.emplace_back( pt.xy() );
+            for( tripoint_rel_ms pt : points_in_radius( pos, radius ) ) {
+                ret.occupied_zone.emplace_back( pt.xy().raw() );
             }
         }
     }
@@ -740,7 +740,7 @@ bool vehicle::autodrive_controller::check_drivable( const tripoint_bub_ms &pt ) 
     }
 
     // don't drive over visible traps
-    if( here.can_see_trap_at( pt.raw(), driver ) ) {
+    if( here.can_see_trap_at( pt, driver ) ) {
         return false;
     }
 
@@ -794,7 +794,7 @@ void vehicle::autodrive_controller::compute_obstacles()
     point_queue ramp_points;
     for( int dx = 0; dx < NAV_VIEW_SIZE_X; dx++ ) {
         for( int dy = 0; dy < NAV_VIEW_SIZE_Y; dy++ ) {
-            const tripoint abs_map_pt = data.view_to_map.transform( point( dx, dy ), z );
+            const tripoint_abs_ms abs_map_pt( data.view_to_map.transform( point( dx, dy ), z ) );
             const tripoint_bub_ms p = here.bub_from_abs( abs_map_pt );
             data.is_obstacle[dx][dy] = !check_drivable( p );
             data.ground_z[dx][dy] = z;

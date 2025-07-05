@@ -720,6 +720,12 @@
     ]
   },
   {
+    "id": "dissect_mon_jabberwock",
+    "type": "harvest",
+    "message": "The myriad bodies have merged into such a confusing tangle of flesh that it's hard to even tell what you're cutting into.",
+    "entries": [ { "drop": "jabberwock_heart", "type": "offal" } ]
+  },
+  {
     "id": "dissect_mon_broken_cyborg",
     "type": "harvest",
     "message": "You search for any salvageable hardware in what's left of the cyborg.",

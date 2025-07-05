@@ -28,17 +28,9 @@
       { "item": "plasma_rifle", "prob": 10 },
       { "item": "portal", "prob": 10 },
       { "item": "atomic_coffeepot", "prob": 10 },
-      { "item": "power_armor_basic", "prob": 10 },
-      { "item": "power_armor_frame", "prob": 10 },
-      { "item": "power_armor_heavy", "prob": 10 },
-      { "item": "power_armor_helmet_basic", "prob": 10 },
-      { "item": "power_armor_helmet_heavy", "prob": 10 },
-      { "item": "power_armor_helmet_light", "prob": 10 },
       { "item": "high_density_capacitor", "prob": 10 },
       { "item": "beam_scatterer", "prob": 10 },
-      { "item": "power_armor_light", "prob": 10 },
       { "item": "rm11b_sniper_rifle", "prob": 10 },
-      { "item": "rm13_armor", "prob": 10 },
       { "item": "v29", "prob": 10 }
     ]
   },
@@ -122,6 +114,8 @@
     "entries": [
       { "item": "crossbow", "prob": 70 },
       { "item": "compcrossbow", "prob": 10 },
+      { "item": "rep_compcrossbow", "prob": 5 },
+      { "item": "pistol_crossbow", "prob": 5 },
       { "item": "bullet_crossbow", "prob": 10 },
       { "item": "hand_crossbow", "prob": 10 },
       { "item": "bow_sling", "prob": 10 },
@@ -129,9 +123,7 @@
       { "item": "compbow", "prob": 40 },
       { "item": "shortbow", "prob": 20 },
       { "item": "recurbow", "prob": 40 },
-      { "item": "takedown_recurbow", "prob": 2 },
       { "item": "quiver_takedown_bow", "prob": 1 },
-      { "item": "reflexbow", "prob": 20 },
       { "item": "slingshot", "prob": 50 },
       { "item": "wristrocket", "prob": 50 }
     ]
@@ -246,11 +238,8 @@
       { "item": "bolt_makeshift", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_small_game", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_metal", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_steel", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_steel_bodkin", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_steel_target", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_cf", "prob": 100, "count": [ 10, 30 ] }
     ]
   },
@@ -261,11 +250,8 @@
     "entries": [
       { "item": "bolt_crude", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_simple_wood", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_simple_small_game", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_makeshift", "prob": 100, "count": [ 10, 30 ] },
       { "item": "bolt_wood", "prob": 100, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] },
-      { "item": "bolt_wood_small_game", "prob": 100, "count": [ 10, 30 ] }
+      { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 10, 30 ] }
     ]
   }
 ]

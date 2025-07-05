@@ -2921,7 +2921,7 @@
     "skill_used": "fabrication",
     "difficulty": 1,
     "time": "3 m",
-    "components": [ [ [ "charcoal", 10000 ] ], [ [ "char_kiln", 1 ] ] ]
+    "components": [ [ [ "charcoal", 5000 ] ], [ [ "char_kiln", 1 ] ] ]
   },
   {
     "type": "uncraft",
@@ -3362,44 +3362,6 @@
     "time": "3 m",
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
     "components": [ [ [ "scrap_copper", 3 ] ] ]
-  },
-  {
-    "result": "power_armor_basic",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "skill_used": "fabrication",
-    "difficulty": 7,
-    "skills_required": [ "electronics", 5 ],
-    "time": "2 h",
-    "qualities": [ { "id": "SAW_M", "level": 1 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ] ] ],
-    "components": [
-      [ [ "depowered_armor", 1 ] ],
-      [ [ "power_supply", 6 ] ],
-      [ [ "element", 2 ] ],
-      [ [ "cable", 12 ] ],
-      [ [ "circuit", 6 ] ],
-      [ [ "transponder", 1 ] ]
-    ]
-  },
-  {
-    "result": "power_armor_helmet_basic",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "skill_used": "fabrication",
-    "difficulty": 8,
-    "skills_required": [ "electronics", 4 ],
-    "time": "45 m",
-    "qualities": [ { "id": "SAW_M", "level": 1 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ] ] ],
-    "components": [
-      [ [ "depowered_helmet", 1 ] ],
-      [ [ "power_supply", 1 ] ],
-      [ [ "element", 1 ] ],
-      [ [ "small_lcd_screen", 2 ] ],
-      [ [ "circuit", 2 ] ],
-      [ [ "RAM", 1 ] ]
-    ]
   },
   {
     "result": "processor",
@@ -5014,7 +4976,7 @@
     "time": "5 m",
     "difficulty": 1,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 8 ] ], [ [ "element", 5 ] ], [ [ "cable", 5 ] ] ]
+    "components": [ [ [ "sheet_nylon", 8 ] ], [ [ "element", 5 ] ], [ [ "cable", 5 ] ] ]
   },
   {
     "result": "wearable_light",
@@ -5033,25 +4995,6 @@
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "heavy_flashlight", 1 ] ], [ [ "cotton_patchwork", 4 ] ] ]
-  },
-  {
-    "result": "miner_hat",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "skill_used": "fabrication",
-    "time": "3 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "hat_hard", 1 ], [ "helmet_bike", 1 ] ],
-      [ [ "flashlight", 1 ] ],
-      [
-        [ "cotton_patchwork", 2 ],
-        [ "leather", 2 ],
-        [ "cordage", 1, "LIST" ],
-        [ "duct_tape", 10 ],
-        [ "medical_tape", 20 ]
-      ]
-    ]
   },
   {
     "result": "adobe_pallet_done",
@@ -6445,7 +6388,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "5 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "aluminum_foil", 22 ] ], [ [ "plastic_sheet_small", 4 ] ] ]
+    "components": [ [ [ "aluminum_foil", 250 ] ], [ [ "plastic_sheet_small", 7 ] ] ]
   },
   {
     "result": "mre_bag",
@@ -6453,7 +6396,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "5 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "aluminum_foil", 66 ] ], [ [ "plastic_sheet_small", 9 ] ] ]
+    "components": [ [ [ "aluminum_foil", 665 ] ], [ [ "plastic_sheet_small", 18 ] ] ]
   },
   {
     "result": "mre_package",
@@ -6461,7 +6404,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "12 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "aluminum_foil", 118 ] ], [ [ "plastic_sheet_small", 16 ] ] ]
+    "components": [ [ [ "aluminum_foil", 1150 ] ], [ [ "plastic_sheet_small", 32 ] ] ]
   },
   {
     "result": "missing_poster_adult",
@@ -6869,13 +6812,6 @@
     "time": "1 s",
     "components": [ [ [ "cardboard", 1 ] ] ],
     "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "result": "armor_riot",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "1 m",
-    "components": [ [ [ "armor_riot_leg", 1 ] ], [ [ "armor_riot_arm", 1 ] ], [ [ "armor_riot_torso", 1 ] ] ]
   },
   {
     "result": "matches",

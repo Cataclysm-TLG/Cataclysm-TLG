@@ -11,7 +11,7 @@
     "price": "80 USD",
     "price_postapoc": "50 cent",
     "material": [ "aluminum", "plastic" ],
-    "flags": [ "NEVER_JAMS", "NON_FOULING" ],
+    "flags": [ "NEVER_JAMS", "NON_FOULING", "WONT_TRAIN_MARKSMANSHIP" ],
     "skill": "smg",
     "ammo": [ "paintball" ],
     "weight": "1600 g",
@@ -19,10 +19,10 @@
     "to_hit": -1,
     "range": 8,
     "ranged_damage": { "damage_type": "bash", "amount": 1 },
-    "dispersion": 150,
+    "dispersion": 350,
     "durability": 7,
     "clip_size": 50,
-    "reload": 50,
+    "reload": 200,
     "valid_mod_locations": [
       [ "sling", 1 ],
       [ "grip mount", 1 ],
@@ -32,6 +32,6 @@
       [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "paintball": 50 } } ],
-    "melee_damage": { "bash": 5 }
+    "melee_damage": { "bash": 4 }
   }
 ]

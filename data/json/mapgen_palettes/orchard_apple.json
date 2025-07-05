@@ -60,7 +60,7 @@
     "terrain": {
       " ": "t_region_groundcover_forest",
       "*": "t_region_soil",
-      "7": [ [ "t_tree_apple", 7 ], [ "t_tree_young", 2 ], "t_tree_dead" ]
+      "7": [ [ "t_tree_apple", 3 ], [ "t_tree_young", 3 ], [ "t_tree_dead", 4 ], "t_stump" ]
     }
   }
 ]

@@ -126,10 +126,6 @@ std::string kill_tracker::get_kills_text() const
         buffer = _( "You haven't killed any monsters yet!" );
     } else {
         buffer = string_format( _( "KILL COUNT: %d" ), totalkills );
-        if( get_option<bool>( "STATS_THROUGH_KILLS" ) ) {
-            buffer += string_format( _( "\nExperience: %d (%d points available)" ), get_avatar().kill_xp,
-                                     get_avatar().free_upgrade_points() );
-        }
         buffer += "\n";
     }
     for( const std::string &line : data ) {

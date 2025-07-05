@@ -27,9 +27,10 @@
       "GMLODGE3_roof_2",
       "GMLODGE3_roof_3"
     ],
-    "name": "militia lodge",
+    "name": "Militia Lodge",
+    "vision_levels": "isolated_building",
     "sym": "L",
     "color": "brown",
-    "see_cost": 5
+    "see_cost": "high"
   }
 ]

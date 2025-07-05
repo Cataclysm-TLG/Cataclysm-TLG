@@ -200,7 +200,7 @@ Creature::~Creature() = default;
 
 tripoint Creature::pos() const
 {
-    return get_map().getlocal( location );
+    return Creature::pos_bub().raw();
 }
 
 tripoint_bub_ms Creature::pos_bub() const
@@ -360,7 +360,7 @@ void Creature::reset()
 
 void Creature::bleed() const
 {
-    get_map().add_splatter( bloodType(), pos() );
+    get_map().add_splatter( bloodType(), pos_bub() );
 }
 
 void Creature::reset_bonuses()
@@ -522,7 +522,7 @@ bool Creature::sees( const Creature &critter ) const
     // Creature has stumbled into an invisible player and is now aware of them.
     // REVIEW: Why is this only done for the player?
     if( has_effect( effect_stumbled_into_invisible ) &&
-        here.has_field_at( critter.pos(), field_fd_last_known ) && critter.is_avatar() ) {
+        here.has_field_at( critter.pos_bub(), field_fd_last_known ) && critter.is_avatar() ) {
         return true;
     }
 
@@ -762,8 +762,8 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
                 // Hack: trying yo avoid turret LOS blocking by frames bug by trying to see target from vehicle boundary
                 // Or turret wallhack for turret's car
                 // TODO: to visibility checking another way, probably using 3D FOV
-                std::vector<tripoint> path_to_target = line_to( pos(), m->pos() );
-                path_to_target.insert( path_to_target.begin(), pos() );
+                std::vector<tripoint_bub_ms> path_to_target = line_to( pos_bub(), m->pos_bub() );
+                path_to_target.insert( path_to_target.begin(), pos_bub() );
 
                 // Getting point on vehicle boundaries and on line between target and turret
                 bool continueFlag = true;
@@ -884,6 +884,17 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
+    // Diagonally offset targets are not adjacent.
+    if( pos().z != target->pos().z && pos().xy() != target->pos().xy() ) {
+        return false;
+    }
+
+    // Explicitly check for Z difference > 1
+    if( std::abs( posz() - target->posz() ) > 1 ) {
+
+        return false;
+    }
+
     map &here = get_map();
     if( posz() == target->posz() ) {
         return
@@ -899,24 +910,11 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
     // The square above must have no floor.
     // The square below must have no ceiling (i.e. no floor on the tile above it).
     const bool target_above = target->posz() > posz();
-    const tripoint up = target_above ? target->pos() : pos();
-    const tripoint down = target_above ? pos() : target->pos();
-    const tripoint above{ down.xy(), up.z };
+    const tripoint_bub_ms up = target_above ? target->pos_bub() : pos_bub();
+    const tripoint_bub_ms down = target_above ? pos_bub() : target->pos_bub();
+    const tripoint_bub_ms above{ down.xy(), up.z()};
     return ( !here.has_floor( up ) || here.ter( up )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) &&
            ( !here.has_floor( above ) || here.ter( above )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) );
-}
-
-float Creature::get_crit_factor( const bodypart_id &bp ) const
-{
-    float crit_mod = 1.f;
-    const Character *c = as_character();
-    if( c != nullptr ) {
-        const int total_cover = clamp<int>( c->worn.get_coverage( bp, item::cover_type::COVER_VITALS ), 0,
-                                            100 );
-        crit_mod = 1.f - total_cover / 100.f;
-    }
-    // TODO: as_monster()
-    return crit_mod;
 }
 
 int Creature::deal_melee_attack( Creature *source, int hitroll )
@@ -1160,7 +1158,6 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
     // Range is -0.5 to 1.5 -> missed_by will be [1, 0], so the rng addition to it
     // will push it to at most 1.5 and at least -0.5
     ret.bp_hit = get_anatomy()->select_body_part_projectile_attack( -0.5, 1.5, hit_value );
-    float crit_mod = get_crit_factor( ret.bp_hit );
 
     const float crit_multiplier = proj.critical_multiplier;
     const float std_hit_mult = std::sqrt( 2.0 * crit_multiplier );
@@ -1170,15 +1167,15 @@ projectile_attack_results Creature::select_body_part_projectile_attack(
                ret.max_damage * crit_multiplier > get_hp_max( ret.bp_hit ) ) {
         ret.message = _( "Critical!!" );
         ret.gmtSCTcolor = m_headshot;
-        ret.damage_mult *= rng_float( 0.5 + 0.45 * crit_mod, 0.75 + 0.3 * crit_mod ); // ( 0.95, 1.05 )
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= rng_float( 0.5 + 0.45, 0.75 + 0.3 ); // ( 0.95, 1.05 )
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_critical &&
                ret.max_damage * crit_multiplier > get_hp_max( ret.bp_hit ) ) {
         ret.message = _( "Critical!" );
         ret.gmtSCTcolor = m_critical;
-        ret.damage_mult *= rng_float( 0.5 + 0.25 * crit_mod, 0.75 + 0.25 * crit_mod ); // ( 0.75, 1.0 )
-        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult ) * crit_mod;
+        ret.damage_mult *= rng_float( 0.5 + 0.25, 0.75 + 0.25 ); // ( 0.75, 1.0 )
+        ret.damage_mult *= std_hit_mult + ( crit_multiplier - std_hit_mult );
         ret.is_crit = true;
     } else if( goodhit < accuracy_goodhit ) {
         ret.message = _( "Good hit!" );
@@ -1267,6 +1264,25 @@ void Creature::messaging_projectile_attack( const Creature *source,
     }
 }
 
+void Creature::print_proj_avoid_msg( Creature *source, viewer &player_view ) const
+{
+    // "Avoid" rather than "dodge", because it includes removing self from the line of fire
+    //  rather than just Matrix-style bullet dodging
+    if( source != nullptr && player_view.sees( *source ) ) {
+        add_msg_player_or_npc(
+            m_warning,
+            _( "You avoid %s projectile!" ),
+            get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids %s projectile." ) : "",
+            source->disp_name( true ) );
+    } else {
+        add_msg_player_or_npc(
+            m_warning,
+            _( "You avoid an incoming projectile!" ),
+            get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids an incoming projectile." ) :
+            "" );
+    }
+}
+
 /**
  * Attempts to harm a creature with a projectile.
  *
@@ -1302,28 +1318,28 @@ void Creature::deal_projectile_attack( Creature *source, dealt_projectile_attack
     const bool u_see_this = player_view.sees( *this );
 
     const double goodhit = accuracy_projectile_attack( attack );
-    on_try_dodge(); // There's a doge roll in accuracy_projectile_attack()
+    // We only trigger a dodge attempt if it's a relatively slow projectile.
+    if( attack.proj.speed < 20 ) {
+        on_try_dodge(); // There's a dodge roll in accuracy_projectile_attack()
+    }
+
+    Character *guy = as_character();
+    if( guy ) {
+        double range_dodge_chance = guy->enchantment_cache->modify_value( enchant_vals::mod::RANGE_DODGE,
+                                    1.0f ) - 1.0f;
+        if( x_in_y( range_dodge_chance, 1.0f ) ) {
+            on_try_dodge();
+            print_proj_avoid_msg( source, player_view );
+            return;
+        }
+    }
 
     if( goodhit >= 1.0 && !magic ) {
         attack.missed_by = 1.0; // Arbitrary value
         if( !print_messages ) {
             return;
         }
-        // "Avoid" rather than "dodge", because it includes removing self from the line of fire
-        //  rather than just Matrix-style bullet dodging
-        if( source != nullptr && player_view.sees( *source ) ) {
-            add_msg_player_or_npc(
-                m_warning,
-                _( "You avoid %s projectile!" ),
-                get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids %s projectile." ) : "",
-                source->disp_name( true ) );
-        } else {
-            add_msg_player_or_npc(
-                m_warning,
-                _( "You avoid an incoming projectile!" ),
-                get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids an incoming projectile." ) :
-                "" );
-        }
+        print_proj_avoid_msg( source, player_view );
         return;
     }
 
@@ -1492,16 +1508,16 @@ void Creature::heal_bp( bodypart_id /* bp */, int /* dam */ )
 {
 }
 
-void Creature::longpull( const std::string &name, const tripoint &p )
+void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
 {
-    if( pos() == p ) {
+    if( pos_bub() == p ) {
         add_msg_if_player( _( "You try to pull yourself together." ) );
         return;
     }
 
-    std::vector<tripoint> path = line_to( pos(), p, 0, 0 );
+    std::vector<tripoint_bub_ms> path = line_to( pos_bub(), p, 0, 0 );
     Creature *c = nullptr;
-    for( const tripoint &path_p : path ) {
+    for( const tripoint_bub_ms &path_p : path ) {
         c = get_creature_tracker().creature_at( path_p );
         if( c == nullptr && get_map().impassable( path_p ) ) {
             add_msg_if_player( m_warning, _( "There's an obstacle in the way!" ) );
@@ -1580,10 +1596,10 @@ bool Creature::stumble_invis( const Creature &player, const bool stumblemsg )
     add_effect( effect_stumbled_into_invisible, 6_seconds );
     map &here = get_map();
     // Mark last known location, or extend duration if exists
-    if( here.has_field_at( player.pos(), field_fd_last_known ) ) {
-        here.set_field_age( player.pos(), field_fd_last_known, 0_seconds );
+    if( here.has_field_at( player.pos_bub(), field_fd_last_known ) ) {
+        here.set_field_age( player.pos_bub(), field_fd_last_known, 0_seconds );
     } else {
-        here.add_field( player.pos(), field_fd_last_known );
+        here.add_field( player.pos_bub(), field_fd_last_known );
     }
     moves = 0;
     return true;
@@ -2852,11 +2868,13 @@ std::vector<bodypart_id> Creature::get_all_body_parts( get_body_part_flags flags
     std::vector<bodypart_id> all_bps;
     all_bps.reserve( body.size() );
     for( const std::pair<const bodypart_str_id, bodypart> &elem : body ) {
-        if( ( only_main && elem.first->main_part != elem.first ) || ( only_minor &&
-                elem.first->main_part == elem.first ) ) {
-            continue;
+        if( has_part( elem.first ) ) {
+            if( ( only_main && elem.first->main_part != elem.first ) || ( only_minor &&
+                    elem.first->main_part == elem.first ) ) {
+                continue;
+            }
+            all_bps.emplace_back( elem.first );
         }
-        all_bps.emplace_back( elem.first );
     }
 
     if( flags & get_body_part_flags::sorted ) {

@@ -730,36 +730,19 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "reflexbow",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_RANGED",
-    "skill_used": "fabrication",
-    "skills_required": [ [ "archery", 2 ] ],
-    "difficulty": 4,
-    "time": "8 h",
-    "autolearn": true,
-    "book_learn": [ [ "recipe_bows", 4 ], [ "manual_archery", 5 ] ],
-    "using": [ [ "adhesive", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_bowyery" }, { "proficiency": "prof_carving" } ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "stick", 3 ], [ "2x4", 2 ] ], [ [ "bone_sturdy", 3, "LIST" ] ], [ [ "cordage_superior", 2, "LIST" ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "compositebow",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
     "skills_required": [ [ "archery", 2 ] ],
-    "difficulty": 4,
+    "difficulty": 5,
     "time": "8 h",
     "autolearn": true,
     "book_learn": [ [ "recipe_bows", 4 ], [ "manual_archery", 5 ] ],
     "using": [ [ "adhesive", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_bowyery" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "stick", 3 ], [ "2x4", 2 ] ], [ [ "bone_sturdy", 3, "LIST" ] ], [ [ "cordage_superior", 2, "LIST" ] ] ]
+    "components": [ [ [ "stick", 2 ], [ "2x4", 2 ] ], [ [ "antler", 2, "LIST" ] ], [ [ "cordage_superior", 2, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -792,7 +775,6 @@
       [ [ "steel_standard", 2, "LIST" ] ],
       [ [ "plastic_chunk", 10 ] ],
       [ [ "sheet_metal_small", 8 ] ],
-      [ [ "duct_tape", 200 ], [ "superglue", 8 ] ],
       [ [ "cordage_superior", 18, "LIST" ] ]
     ]
   },
@@ -889,17 +871,18 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 1 ], [ "archery", 2 ] ],
+    "skills_required": [ [ "mechanics", 1 ], [ "archery", 2 ] ],
     "difficulty": 3,
-    "time": "4 h",
+    "time": "10 h",
     "reversible": true,
     "decomp_learn": 3,
-    "book_learn": [ [ "recipe_bows", 3 ], [ "manual_archery", 5 ], [ "book_archery", 4 ] ],
+    "book_learn": [ [ "recipe_bows", 3 ], [ "manual_archery", 5 ], [ "book_archery", 4 ], [ "textbook_weapwest", 6 ] ],
     "qualities": [
-      { "id": "CUT", "level": 2 },
-      { "id": "HAMMER", "level": 2 },
-      { "id": "SCREW", "level": 1 },
-      { "id": "WRENCH", "level": 1 }
+      { "id": "GRIND", "level": 1 },
+      { "id": "CUT", "level": 1 },
+      { "id": "SAW_W", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "HAMMER", "level": 1 }
     ],
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
@@ -910,7 +893,7 @@
       [ [ "cordage_superior_short", 1, "LIST" ] ],
       [ [ "spring", 1 ] ],
       [ [ "scrap", 4 ] ],
-      [ [ "nails", 10, "LIST" ] ]
+      [ [ "nails", 4, "LIST" ] ]
     ]
   },
   {
@@ -920,38 +903,29 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 1 ], [ "archery", 2 ] ],
+    "skills_required": [ [ "mechanics", 1 ], [ "archery", 1 ] ],
     "difficulty": 3,
-    "time": "5 h",
+    "time": "12 h",
     "reversible": true,
     "decomp_learn": 2,
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
-      { "proficiency": "prof_gunsmithing_spring" }
-    ],
-    "book_learn": [ [ "recipe_bows", 2 ], [ "manual_archery", 4 ], [ "book_archery", 3 ], [ "textbook_armschina", 5 ] ],
-    "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "scrap", 1 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
-    "result": "compositecrossbow",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 2 ], [ "archery", 2 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
-      { "proficiency": "prof_gunsmithing_spring" },
       { "proficiency": "prof_carving", "time_multiplier": 1.5 }
     ],
-    "difficulty": 5,
-    "time": "10 h",
-    "using": [ [ "adhesive", 3 ] ],
-    "book_learn": [ [ "recipe_bows", 5 ], [ "manual_archery", 6 ], [ "book_archery", 6 ], [ "textbook_armschina", 6 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "stick", 5 ], [ "2x4", 3 ] ], [ [ "bone_sturdy", 3, "LIST" ] ], [ [ "cordage_superior", 1, "LIST" ] ] ]
+    "book_learn": [
+      [ "recipe_bows", 1 ],
+      [ "manual_archery", 3 ],
+      [ "book_archery", 2 ],
+      [ "textbook_armschina", 5 ],
+      [ "textbook_weapwest", 6 ]
+    ],
+    "qualities": [
+      { "id": "GRIND", "level": 1 },
+      { "id": "CUT", "level": 1 },
+      { "id": "SAW_W", "level": 1 },
+      { "id": "HAMMER", "level": 1 }
+    ],
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -960,18 +934,18 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 1 ], [ "archery", 1 ] ],
+    "skills_required": [ [ "mechanics", 2 ], [ "archery", 1 ] ],
     "difficulty": 3,
-    "time": "2 h",
+    "time": "12 h",
     "reversible": true,
     "decomp_learn": 2,
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
-      { "proficiency": "prof_gunsmithing_spring" }
+      { "proficiency": "prof_carving", "time_multiplier": 1.5 }
     ],
-    "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ] ],
-    "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "scrap", 1 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+    "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
+    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1292,9 +1266,9 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 2 ], [ "mechanics", 1 ], [ "archery", 1 ] ],
+    "skills_required": [ [ "mechanics", 3 ], [ "archery", 2 ] ],
     "difficulty": 6,
-    "time": "6 h",
+    "time": "18 h",
     "reversible": true,
     "decomp_learn": 5,
     "book_learn": [ [ "recipe_bows", 6 ], [ "textbook_weapwest", 6 ] ],
@@ -1322,29 +1296,23 @@
   },
   {
     "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
+    "activity_level": "LIGHT_EXERCISE",
     "result": "rep_crossbow",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "skills_required": [ [ "traps", 2 ], [ "mechanics", 1 ], [ "archery", 1 ] ],
-    "difficulty": 3,
-    "time": "7 h",
+    "skills_required": [ [ "mechanics", 2 ], [ "archery", 1 ] ],
+    "difficulty": 4,
+    "time": "14 h",
     "reversible": true,
-    "decomp_learn": 4,
-    "book_learn": [ [ "recipe_bows", 4 ], [ "textbook_weapeast", 6 ] ],
+    "decomp_learn": 2,
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
-      { "proficiency": "prof_gunsmithing_spring" },
       { "proficiency": "prof_carving", "time_multiplier": 1.5 }
     ],
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SCREW", "level": 1 }, { "id": "HAMMER", "level": 1 } ],
-    "components": [
-      [ [ "2x4", 4 ], [ "stick", 8 ] ],
-      [ [ "spring", 1 ] ],
-      [ [ "cordage_superior", 1, "LIST" ] ],
-      [ [ "nails", 20, "LIST" ] ]
-    ]
+    "book_learn": [ [ "textbook_armschina", 4 ] ],
+    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
+    "components": [ [ [ "2x4", 4 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1393,7 +1361,7 @@
     "difficulty": 5,
     "time": "8 h",
     "book_learn": [ [ "advanced_electronics", 5 ], [ "textbook_electronics", 5 ], [ "textbook_anarch", 6 ] ],
-    "using": [ [ "soldering_standard", 20 ], [ "plastic_molding", 7 ] ],
+    "using": [ [ "soldering_standard", 20 ], [ "plastic_molding", 7 ], [ "glue_any", 1 ] ],
     "qualities": [ { "id": "SAW_M_FINE", "level": 1 }, { "id": "SCREW", "level": 1 }, { "id": "SCREW_FINE", "level": 1 } ],
     "proficiencies": [
       { "proficiency": "prof_elec_soldering" },
@@ -1404,7 +1372,6 @@
     "tools": [ [ [ "laptop", -1 ] ] ],
     "components": [
       [ [ "plastic_chunk", 10 ] ],
-      [ [ "superglue", 1 ] ],
       [ [ "processor", 1 ] ],
       [ [ "circuit", 2 ] ],
       [ [ "power_supply", 2 ] ],
@@ -1537,7 +1504,7 @@
       [ [ "ruger_1022", 1 ] ],
       [ [ "wire", 1 ], [ "piano_wire", 1 ] ],
       [ [ "sheet_metal_small", 2 ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 2 ] ]
     ]
   },
   {
@@ -1565,7 +1532,7 @@
       [ [ "ruger_charger", 1 ] ],
       [ [ "wire", 1 ], [ "piano_wire", 1 ] ],
       [ [ "sheet_metal_small", 2 ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 2 ] ]
     ]
   }
 ]

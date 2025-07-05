@@ -541,5 +541,376 @@
     "id": "bee_dress",
     "replace": "dress_costume_skimpy",
     "variant": "bee_dress"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit",
+    "replace": "armor_samurai"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit_xs",
+    "replace": "armor_samurai_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plated_leather_armor_suit_xl",
+    "replace": "armor_samurai_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tireplate",
+    "replace": "tire_cuirass"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "survivor_machete",
+    "replace": "machete"
+  },
+  {
+    "id": "flatbread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "bread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "brown_bread_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "buttered_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "jam_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "peanut_butter_toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "toad_in_a_hole_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "PBJ_Toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "toast_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_fairy_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "soup_blood_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "fried_egg_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "deluxe_fried_egg_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chilidogs_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hotdogs_newyork_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "cheeseburger_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hamburger_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sloppyjoe_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "blood_pancakes_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cheese_grilled_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_deluxe_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_reuben_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cucumber_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_jam_butter_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_honey_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_veggy_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_t_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pb_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbj_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbh_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_pbm_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "fish_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "blt_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chicken_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "hotdogs_cooked_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_egg_salad_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_sauce_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "chicken_sandwich_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "sandwich_veggy_cheese_wheat_free",
+    "type": "MIGRATION",
+    "replace": "bread"
+  },
+  {
+    "id": "superglue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue",
+    "contents": [ { "id": "super_glue", "count": 10 } ]
+  },
+  {
+    "id": "stabilizer",
+    "type": "MIGRATION",
+    "replace": "rail_laser_sight"
+  },
+  {
+    "id": "stabilizer_mod",
+    "type": "MIGRATION",
+    "replace": "rail_laser_sight"
+  },
+  {
+    "id": "ar_pistol",
+    "type": "MIGRATION",
+    "replace": "modular_ar_pistol"
+  },
+  {
+    "id": "miner_hat",
+    "type": "MIGRATION",
+    "replace": "hat_hard"
+  },
+  {
+    "id": "small_squeeze_tube",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "big_portable_fridge",
+    "type": "MIGRATION",
+    "replace": "minifridge"
+  },
+  {
+    "id": "big_portable_freezer",
+    "type": "MIGRATION",
+    "replace": "chest_minifreezer"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_small_game_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_rubber",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_fire_hardened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_heavy_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_wood_heavy",
+    "type": "MIGRATION",
+    "replace": "arrow_wood"
+  },
+  {
+    "id": "arrow_metal_sharpened_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_field_point_fletched",
+    "type": "MIGRATION",
+    "replace": "arrow_wood_bodkin"
+  },
+  {
+    "id": "arrow_metal_target",
+    "type": "MIGRATION",
+    "replace": "arrow_metal"
+  },
+  {
+    "id": "takedown_recurbow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
+  },
+  {
+    "id": "takedown_recurbow_folded",
+    "type": "MIGRATION",
+    "replace": "recurbow_folded"
+  },
+  {
+    "id": "reflexcurvebow",
+    "type": "MIGRATION",
+    "replace": "recurbow"
+  },
+  {
+    "id": "utility_knife_folding",
+    "type": "MIGRATION",
+    "replace": "knife_folding"
+  },
+  {
+    "id": "bolt_simple_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_wood_small_game",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_metal",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_makeshift",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "bolt_steel_target",
+    "type": "MIGRATION",
+    "replace": "bolt_simple_wood"
   }
 ]

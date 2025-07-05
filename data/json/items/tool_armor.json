@@ -218,9 +218,9 @@
     "looks_like": "blindfold",
     "color": "dark_gray",
     "warmth": 0,
-    "material_thickness": 1,
+    "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "BLIND", "SKINTIGHT" ],
+    "flags": [ "BLIND", "SKINTIGHT", "SOFT" ],
     "armor": [ { "encumbrance": 10, "coverage": 95, "covers": [ "eyes" ], "rigid_layer_only": true } ]
   },
   {
@@ -238,9 +238,8 @@
     "looks_like": "blindfold",
     "color": "dark_gray",
     "warmth": 0,
-    "material_thickness": 1,
-    "environmental_protection": 1,
-    "flags": [ "SKINTIGHT" ],
+    "material_thickness": 0.2,
+    "flags": [ "SKINTIGHT", "SOFT" ],
     "armor": [ { "encumbrance": 10, "coverage": 95, "covers": [ "head" ], "rigid_layer_only": true } ]
   },
   {
@@ -337,109 +336,6 @@
     "price": "250 USD",
     "price_postapoc": "50 cent",
     "flags": [ "UNDERSIZE", "PREFIX_XS", "WATER_FRIENDLY", "OUTER", "SPLINT", "ALLOWS_TAIL" ]
-  },
-  {
-    "id": "miner_hat",
-    "type": "TOOL_ARMOR",
-    "category": "armor",
-    "symbol": "[",
-    "color": "yellow",
-    "name": { "str": "mining helmet" },
-    "description": "A mining helmet with a heavy-duty LED flashlight.  Using this will turn the flashlight on and provide light, assuming it is charged with batteries.",
-    "flags": [ "WATERPROOF", "PADDED" ],
-    "price": "125 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "material": [ "plastic" ],
-    "weight": "1196 g",
-    "volume": "3 L",
-    "charges_per_use": 1,
-    "ammo": "battery",
-    "use_action": {
-      "type": "transform",
-      "msg": "You turn the helmet on.",
-      "target": "miner_hat_on",
-      "active": true,
-      "need_charges": 1,
-      "need_charges_msg": "The helmet's batteries are dead."
-    },
-    "techniques": [ "WBLOCK_1" ],
-    "warmth": 8,
-    "material_thickness": 4,
-    "environmental_protection": 1,
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "ablative": true,
-        "volume_encumber_modifier": 0,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "500 g",
-        "moves": 250,
-        "description": "Pocket for a face shield or a shield visor.",
-        "flag_restriction": [ "HELMET_FACE_SHIELD" ]
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "ablative": true,
-        "volume_encumber_modifier": 0,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "400 g",
-        "moves": 250,
-        "description": "Pocket for an ear attachment.",
-        "flag_restriction": [ "HELMET_EAR_ATTACHMENT" ],
-        "inherits_flags": true
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "ablative": true,
-        "volume_encumber_modifier": 0,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "250 g",
-        "moves": 250,
-        "description": "Pocket for a nape protector.",
-        "flag_restriction": [ "HELMET_NAPE_PROTECTOR" ]
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "ablative": true,
-        "volume_encumber_modifier": 0,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "400 g",
-        "moves": 250,
-        "description": "Pocket for a strapped mandible guard.",
-        "flag_restriction": [ "HELMET_MANDIBLE_GUARD_STRAPPED" ]
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "volume_encumber_modifier": 0,
-        "max_contains_volume": "400 ml",
-        "max_contains_weight": "400 g",
-        "moves": 250,
-        "description": "Pocket for a counterweight pouch.",
-        "flag_restriction": [ "HELMET_BACK_POUCH" ]
-      }
-    ],
-    "armor": [
-      { "encumbrance": 15, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown", "head_forehead" ] }
-    ],
-    "melee_damage": { "bash": 6 }
-  },
-  {
-    "id": "miner_hat_on",
-    "copy-from": "miner_hat",
-    "type": "TOOL_ARMOR",
-    "name": { "str": "mining helmet (on)", "str_pl": "mining helmets (on)" },
-    "description": "A mining helmet with a heavy-duty LED flashlight.  The flashlight is turned on, and continually draining its batteries.  Use it to turn it off.",
-    "flags": [ "LIGHT_450", "CHARGEDIM", "WATERPROOF", "TRADER_AVOID", "PADDED" ],
-    "power_draw": "15 W",
-    "revert_to": "miner_hat",
-    "use_action": { "ammo_scale": 0, "menu_text": "Turn off", "type": "transform", "msg": "The %s flicks off.", "target": "miner_hat" },
-    "techniques": [ "WBLOCK_1" ]
   },
   {
     "id": "welding_mask",
@@ -1329,212 +1225,17 @@
       "need_charges": 1,
       "need_charges_msg": "\"Illumination disabled, low power.\""
     },
-    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "TWO_WAY_RADIO", "WATCH", "ALARMCLOCK" ]
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "WATCH", "ALARMCLOCK" ]
   },
   {
     "id": "helmet_eod_on",
     "type": "TOOL_ARMOR",
     "copy-from": "helmet_eod",
     "name": { "str": "EOD helmet (on)", "str_pl": "EOD helmets (on)" },
-    "extend": { "flags": [ "LIGHT_350", "CHARGEDIM", "TRADER_AVOID" ] },
+    "extend": { "flags": [ "LIGHT_350", "CHARGEDIM", "TRADER_AVOID", "TWO_WAY_RADIO" ] },
     "power_draw": "10 W",
     "revert_to": "helmet_eod",
     "use_action": { "type": "transform", "menu_text": "Turn off headlamps", "msg": "\"Disabling illumination.\"", "target": "helmet_eod" }
-  },
-  {
-    "id": "rm13_armor",
-    "type": "TOOL_ARMOR",
-    "category": "armor",
-    "symbol": "[",
-    "color": "dark_gray",
-    "name": { "str": "RM13 combat armor" },
-    "description": "A full-body suit of sleek black military armor that represents the pinnacle of Rivtech's powered armor technology.  It has a proprietary internal battery recharged by UPS.  Use it to turn it on.",
-    "flags": [
-      "STURDY",
-      "WATERPROOF",
-      "RAINPROOF",
-      "WATCH",
-      "ALARMCLOCK",
-      "SWIM_GOGGLES",
-      "SUN_GLASSES",
-      "RAD_RESIST",
-      "NO_REPAIR",
-      "NANOFAB_REPAIR",
-      "PADDED",
-      "USE_UPS",
-      "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE"
-    ],
-    "price": "500000 USD",
-    "price_postapoc": "100 USD",
-    "material": [ "hyperweave_off", "carbide" ],
-    "weight": "9540 g",
-    "volume": "9 L",
-    "to_hit": -3,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 5000 } } ],
-    "ammo": "battery",
-    "charges_per_use": 1,
-    "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" }, { "id": "ench_dampened_steps" } ] },
-    "use_action": {
-      "type": "transform",
-      "msg": "You activate your RM13 combat armor.\nRivtech Model 13 RivOS v2.19:   ONLINE.\nCBRN defense system:            ONLINE.\nAcoustic dampening system:      ONLINE.\nThermal regulation system:      ONLINE.\nVision enhancement system:      ONLINE.\nElectro-reactive armor system:  ONLINE.\nAll systems nominal.",
-      "target": "rm13_armor_on",
-      "active": true,
-      "need_worn": true,
-      "need_charges": 1,
-      "need_charges_msg": "The RM13 combat armor's battery is dead."
-    },
-    "warmth": 30,
-    "environmental_protection": 10,
-    "material_thickness": 3,
-    "armor": [
-      {
-        "material": [
-          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.0 }
-        ],
-        "encumbrance": 5,
-        "coverage": 100,
-        "covers": [ "eyes" ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "hyperweave_off", "covered_by_mat": 100, "thickness": 2.0 }
-        ],
-        "encumbrance": 10,
-        "coverage": 100,
-        "covers": [ "mouth", "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r", "hand_l", "hand_r" ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "hyperweave_off", "covered_by_mat": 100, "thickness": 2.0 }
-        ],
-        "encumbrance": 10,
-        "coverage": 100,
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [
-          "foot_toes_r",
-          "foot_toes_l",
-          "foot_ankle_r",
-          "foot_ankle_l",
-          "foot_heel_r",
-          "foot_heel_l",
-          "foot_arch_r",
-          "foot_arch_l"
-        ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "rubber", "covered_by_mat": 100, "thickness": 5.0 }
-        ],
-        "encumbrance": 0,
-        "coverage": 100,
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
-        "volume_encumber_modifier": 0
-      }
-    ]
-  },
-  {
-    "id": "rm13_armor_on",
-    "copy-from": "rm13_armor",
-    "type": "TOOL_ARMOR",
-    "name": { "str": "RM13 combat armor (on)", "str_pl": "RM13 combat armors (on)" },
-    "description": "A full-body suit of sleek black military armor that represents the pinnacle of Rivtech's powered armor technology.  As you move your fingers over the surface, the armor tenses, almost as though it were alive.  Use it to turn it off.",
-    "flags": [
-      "STURDY",
-      "WATERPROOF",
-      "RAINPROOF",
-      "WATCH",
-      "ALARMCLOCK",
-      "SWIM_GOGGLES",
-      "SUN_GLASSES",
-      "RAD_PROOF",
-      "GAS_PROOF",
-      "ELECTRIC_IMMUNE",
-      "THERMOMETER",
-      "TRADER_AVOID",
-      "NO_REPAIR",
-      "NANOFAB_REPAIR",
-      "PADDED",
-      "USE_UPS",
-      "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE",
-      "USE_POWER_WHEN_HIT"
-    ],
-    "material": [ "hyperweave_on", "carbide" ],
-    "power_draw": "100 W",
-    "revert_to": "rm13_armor",
-    "use_action": {
-      "type": "transform",
-      "msg": "You deactivate your RM13 combat armor.\nRivOS v2.19 shutdown sequence initiated.\nShutting down.\nYour RM13 combat armor turns off.",
-      "target": "rm13_armor",
-      "need_worn": true
-    },
-    "environmental_protection": 40,
-    "qualities": [ [ "GLARE", 1 ] ],
-    "material_thickness": 3,
-    "armor": [
-      {
-        "material": [
-          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.0 }
-        ],
-        "encumbrance": 5,
-        "coverage": 100,
-        "covers": [ "eyes" ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "hyperweave_on", "covered_by_mat": 100, "thickness": 2.0 }
-        ],
-        "encumbrance": 10,
-        "coverage": 100,
-        "covers": [ "mouth", "head", "torso", "arm_l", "arm_r", "leg_l", "leg_r", "hand_l", "hand_r" ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "hyperweave_on", "covered_by_mat": 100, "thickness": 2.0 }
-        ],
-        "encumbrance": 10,
-        "coverage": 100,
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [
-          "foot_toes_r",
-          "foot_toes_l",
-          "foot_ankle_r",
-          "foot_ankle_l",
-          "foot_heel_r",
-          "foot_heel_l",
-          "foot_arch_r",
-          "foot_arch_l"
-        ],
-        "volume_encumber_modifier": 0
-      },
-      {
-        "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "rubber", "covered_by_mat": 100, "thickness": 5.0 }
-        ],
-        "encumbrance": 0,
-        "coverage": 100,
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
-        "volume_encumber_modifier": 0
-      }
-    ]
   },
   {
     "id": "dimensional_anchor",
@@ -1569,7 +1270,7 @@
     },
     "warmth": 10,
     "material_thickness": 2,
-    "flags": [ "OVERSIZE", "BELTED", "SOFT" ],
+    "flags": [ "UNRESTRICTED", "BELTED", "SOFT" ],
     "armor": [ { "encumbrance": 2, "coverage": 50, "covers": [ "torso" ] } ]
   },
   {
@@ -1583,11 +1284,12 @@
     "revert_to": "dimensional_anchor",
     "use_action": {
       "type": "transform",
+      "ammo_scale": 0,
       "menu_text": "Turn off",
       "msg": "The %s LED light flickers off.",
       "target": "dimensional_anchor"
     },
-    "flags": [ "DIMENSIONAL_ANCHOR", "OVERSIZE", "BELTED", "PORTAL_PROOF", "SOFT" ]
+    "flags": [ "DIMENSIONAL_ANCHOR", "UNRESTRICTED", "BELTED", "PORTAL_PROOF", "SOFT" ]
   },
   {
     "id": "broken_dimensional_anchor",
@@ -1658,8 +1360,9 @@
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "mouth", "eyes" ],
-        "layers": [ "OUTER" ],
-        "volume_encumber_modifier": 0
+        "layers": [ "BELTED" ],
+        "volume_encumber_modifier": 0,
+        "rigid_layer_only": true
       },
       {
         "material": [
@@ -1671,8 +1374,9 @@
         "encumbrance": 0,
         "coverage": 100,
         "covers": [ "head" ],
-        "layers": [ "OUTER" ],
-        "volume_encumber_modifier": 0
+        "layers": [ "OUTER", "BELTED" ],
+        "volume_encumber_modifier": 0,
+        "rigid_layer_only": true
       },
       {
         "material": [
@@ -1684,7 +1388,9 @@
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "torso" ],
-        "volume_encumber_modifier": 0
+        "volume_encumber_modifier": 0,
+        "layers": [ "OUTER" ],
+        "rigid_layer_only": true
       },
       {
         "material": [
@@ -1695,7 +1401,9 @@
         "encumbrance": 5,
         "coverage": 100,
         "covers": [ "hand_l", "hand_r" ],
-        "volume_encumber_modifier": 0
+        "volume_encumber_modifier": 0,
+        "layers": [ "NORMAL", "OUTER" ],
+        "rigid_layer_only": true
       },
       {
         "material": [
@@ -1707,7 +1415,8 @@
         "coverage": 100,
         "covers": [ "foot_l", "foot_r" ],
         "layers": [ "NORMAL", "OUTER" ],
-        "volume_encumber_modifier": 0
+        "volume_encumber_modifier": 0,
+        "rigid_layer_only": true
       },
       {
         "material": [
@@ -1716,11 +1425,13 @@
           { "type": "superalloy", "covered_by_mat": 40, "thickness": 0.5 },
           { "type": "superalloy", "covered_by_mat": 40, "thickness": 0.5 }
         ],
-        "//": "limbs are lighter armored than torso but still strongly armored this is the non joints so extra hardsteel",
+        "//": "limbs are lighter armored than torso but still strongly armored",
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
-        "volume_encumber_modifier": 0
+        "volume_encumber_modifier": 0,
+        "layers": [ "OUTER" ],
+        "rigid_layer_only": true
       }
     ]
   },
@@ -1733,7 +1444,13 @@
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles both plate armor and an astronaut's spacesuit.  It is turned on, and continually draining power.  Use it to turn it off.",
     "turns_per_charge": 25,
     "revert_to": "phase_immersion_suit",
-    "use_action": { "type": "transform", "menu_text": "Turn off", "msg": "Suit shutting down.", "target": "phase_immersion_suit" },
+    "use_action": {
+      "type": "transform",
+      "ammo_scale": 0,
+      "menu_text": "Turn off",
+      "msg": "Suit shutting down.",
+      "target": "phase_immersion_suit"
+    },
     "environmental_protection": 80,
     "flags": [
       "RAD_PROOF",
@@ -1798,7 +1515,9 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "rebreather_on",
@@ -1812,7 +1531,9 @@
     "revert_to": "rebreather",
     "use_action": { "ammo_scale": 0, "type": "transform", "menu_text": "Turn off", "msg": "Your %s deactivates.", "target": "rebreather" },
     "environmental_protection": 15,
-    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "rebreather_xl",
@@ -1850,7 +1571,9 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "rebreather_xl_on",
@@ -1870,7 +1593,9 @@
       "target": "rebreather_xl"
     },
     "environmental_protection": 15,
-    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "rebreather_xs",
@@ -1909,7 +1634,9 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "rebreather_xs_on",
@@ -1920,10 +1647,18 @@
     "flags": [ "WATER_FRIENDLY", "REBREATHER", "UNDERSIZE", "PREFIX_XS", "TRADER_AVOID" ],
     "turns_per_charge": 60,
     "revert_to": "rebreather_xs",
-    "use_action": { "type": "transform", "menu_text": "Turn off", "msg": "Your %s deactivates.", "target": "rebreather_xs" },
+    "use_action": {
+      "type": "transform",
+      "ammo_scale": 0,
+      "menu_text": "Turn off",
+      "msg": "Your %s deactivates.",
+      "target": "rebreather_xs"
+    },
     "covers": [ "mouth" ],
     "environmental_protection": 15,
-    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ] } ]
+    "armor": [
+      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ], "rigid_layer_only": true }
+    ]
   },
   {
     "id": "mask_filter",
@@ -1956,7 +1691,15 @@
     "ammo": "gasfilter_s",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "armor": [ { "encumbrance": 15, "rigid_layer_only": true, "coverage": 100, "covers": [ "mouth" ] } ]
+    "armor": [
+      {
+        "encumbrance": 15,
+        "coverage": 100,
+        "covers": [ "mouth" ],
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
+      }
+    ]
   },
   {
     "id": "mask_gas",
@@ -1975,7 +1718,13 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 25 },
-      { "covers": [ "mouth" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 35 }
+      {
+        "covers": [ "mouth" ],
+        "rigid_layer_only": true,
+        "coverage": 100,
+        "encumbrance": 35,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -2009,7 +1758,13 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 25 },
-      { "covers": [ "mouth" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 35 }
+      {
+        "covers": [ "mouth" ],
+        "rigid_layer_only": true,
+        "coverage": 100,
+        "encumbrance": 35,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -2044,7 +1799,13 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 25 },
-      { "covers": [ "mouth" ], "rigid_layer_only": true, "coverage": 100, "encumbrance": 35 }
+      {
+        "covers": [ "mouth" ],
+        "rigid_layer_only": true,
+        "coverage": 100,
+        "encumbrance": 35,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -2093,7 +1854,15 @@
     "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "armor": [ { "encumbrance": 35, "rigid_layer_only": true, "coverage": 100, "covers": [ "mouth" ] } ]
+    "armor": [
+      {
+        "encumbrance": 35,
+        "rigid_layer_only": true,
+        "coverage": 100,
+        "covers": [ "mouth" ],
+        "layers": [ "NORMAL", "OUTER", "BELTED" ]
+      }
+    ]
   },
   {
     "id": "mask_fsurvivor",
@@ -2124,17 +1893,20 @@
       {
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 4 }
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 3 }
         ],
         "covers": [ "mouth" ],
         "coverage": 100,
-        "encumbrance": 37
+        "encumbrance": 37,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 5 } ],
+        "material": [ { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 25
+        "encumbrance": 25,
+        "rigid_layer_only": true
       }
     ],
     "warmth": 25,
@@ -2193,17 +1965,20 @@
       {
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 3 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 3 }
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3 }
         ],
         "covers": [ "mouth" ],
         "coverage": 100,
-        "encumbrance": 25
+        "encumbrance": 25,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 3 } ],
+        "material": [ { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 12
+        "encumbrance": 12,
+        "rigid_layer_only": true
       }
     ]
   },
@@ -2229,27 +2004,30 @@
     "ammo": "gasfilter_m",
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "material": [ "leather_treated", "hard_plastic_transp", "steel" ],
+    "material": [ "steel", "hard_plastic_transp", "leather_treated" ],
     "symbol": "[",
     "color": "brown",
     "armor": [
       {
         "material": [
-          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 4 },
-          { "type": "steel", "covered_by_mat": 90, "thickness": 1 }
+          { "type": "steel", "covered_by_mat": 90, "thickness": 1 },
+          { "type": "leather_treated", "covered_by_mat": 100, "thickness": 3 }
         ],
         "covers": [ "mouth" ],
         "coverage": 100,
-        "encumbrance": 38
+        "encumbrance": 38,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
       },
       {
         "material": [
-          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 5 },
-          { "type": "steel", "covered_by_mat": 15, "thickness": 1 }
+          { "type": "steel", "covered_by_mat": 15, "thickness": 1 },
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3 }
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 28
+        "encumbrance": 28,
+        "rigid_layer_only": true
       }
     ],
     "warmth": 28,
@@ -2305,13 +2083,15 @@
         "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 4 } ],
         "covers": [ "mouth" ],
         "coverage": 100,
-        "encumbrance": 35
+        "encumbrance": 35,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
       }
     ],
     "warmth": 15,
     "environmental_protection": 4,
     "environmental_protection_with_filter": 15,
-    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "SLEEP_IGNORE", "UNRESTRICTED" ]
   },
   {
     "id": "mask_lsurvivor_xl",
@@ -2320,7 +2100,7 @@
     "looks_like": "mask_lsurvivor",
     "name": { "str": "survivor half mask" },
     "proportional": { "weight": 1.25, "volume": 1.25, "price": 0.5 },
-    "flags": [ "VARSIZE", "STURDY", "OVERSIZE", "PREFIX_XL", "SUN_GLASSES", "SLEEP_IGNORE", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "OVERSIZE", "PREFIX_XL", "SLEEP_IGNORE", "UNRESTRICTED" ]
   },
   {
     "id": "mask_lsurvivor_xs",
@@ -2329,7 +2109,7 @@
     "looks_like": "mask_lsurvivor",
     "name": { "str": "survivor half mask" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "flags": [ "VARSIZE", "STURDY", "SUN_GLASSES", "SLEEP_IGNORE", "UNDERSIZE", "PREFIX_XS", "UNRESTRICTED" ]
+    "flags": [ "VARSIZE", "STURDY", "SLEEP_IGNORE", "UNDERSIZE", "PREFIX_XS", "UNRESTRICTED" ]
   },
   {
     "id": "mask_survivor",
@@ -2358,16 +2138,19 @@
     "color": "brown",
     "armor": [
       {
-        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 4 } ],
+        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "mouth" ],
         "coverage": 100,
-        "encumbrance": 35
+        "encumbrance": 35,
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 5 } ],
+        "material": [ { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 25
+        "encumbrance": 25,
+        "rigid_layer_only": true
       }
     ],
     "warmth": 20,
@@ -2549,7 +2332,7 @@
     "flags": [ "VARSIZE", "STURDY", "WATER_FRIENDLY", "SWIM_GOGGLES", "UNRESTRICTED" ],
     "price": "400 USD",
     "price_postapoc": "20 USD",
-    "material": [ "kevlar_layered", "plastic" ],
+    "material": [ "kevlar_layered", "hard_plastic_transp" ],
     "weight": "982 g",
     "volume": "1500 ml",
     "to_hit": -3,
@@ -2576,8 +2359,8 @@
     "armor": [
       {
         "material": [
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "neoprene", "covered_by_mat": 25, "thickness": 1.0 }
+          { "type": "neoprene", "covered_by_mat": 25, "thickness": 1.0 },
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "covers": [ "eyes" ],
         "rigid_layer_only": true,
@@ -2587,7 +2370,7 @@
       {
         "material": [
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 1.1, "ignore_sheet_thickness": true },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "aluminum", "covered_by_mat": 75, "thickness": 0.5 },
           { "type": "neoprene", "covered_by_mat": 50, "thickness": 1.0 }
         ],
@@ -3250,8 +3033,8 @@
       },
       {
         "material": [
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "thermo_resin", "covered_by_mat": 30, "thickness": 1.0 }
         ],
         "covers": [ "eyes" ],
         "rigid_layer_only": true,
@@ -3261,8 +3044,8 @@
       },
       {
         "material": [
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 2.0 },
+          { "type": "thermo_resin", "covered_by_mat": 20, "thickness": 1.0 }
         ],
         "covers": [ "mouth" ],
         "rigid_layer_only": true,
@@ -3700,6 +3483,28 @@
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
         "default_magazine": "light_plus_battery_cell"
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "ablative": true,
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "2 kg",
+        "moves": 250,
+        "description": "Pocket for a front night vision attachment.",
+        "flag_restriction": [ "HELMET_FRONT_ATTACHMENT" ],
+        "inherits_flags": false
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "500 g",
+        "max_item_length": "14 cm",
+        "moves": 100,
+        "description": "Pocket for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "transparent": true
       }
     ],
     "melee_damage": { "bash": 10 }
@@ -3732,7 +3537,13 @@
     "ammo": "battery",
     "power_draw": "60 mW",
     "revert_to": "flight_helmet",
-    "use_action": { "type": "transform", "menu_text": "Turn off", "msg": "The %s flicks off.", "target": "flight_helmet" },
+    "use_action": {
+      "type": "transform",
+      "ammo_scale": 0,
+      "menu_text": "Turn off",
+      "msg": "The %s flicks off.",
+      "target": "flight_helmet"
+    },
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -3767,117 +3578,5 @@
     "armor": [ { "covers": [ "head" ], "coverage": 80, "encumbrance": 10 } ],
     "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
     "material_thickness": 0.5
-  },
-  {
-    "id": "utility_exoskeleton_off",
-    "type": "TOOL_ARMOR",
-    "category": "armor",
-    "name": { "str": "battery powered utility exoskeleton" },
-    "//": "This is based on the Sarcos Guardian, a production model with independent battery power, all weather operation, and capable of lifting up to 200 lbs. It uses three 12 lb batteries that provide 8 hours of operation. The battery life in-game is significantly less in order to utilize medium storage batteries, otherwise this would require the unit to be active to reload itself. This can also be changed out to use other battery types.",
-    "description": "A skeletal frame of sturdy metal with attached motors to allow the user to move heavier loads with less strain on the body.",
-    "weight": "90 kg",
-    "volume": "130 L",
-    "price": "115000 USD",
-    "price_postapoc": "400 USD",
-    "to_hit": 1,
-    "material": [ "steel", "plastic" ],
-    "symbol": "[",
-    "looks_like": "depowered_armor",
-    "color": "dark_gray",
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "item_restriction": [ "medium_storage_battery" ],
-        "default_magazine": "medium_storage_battery"
-      }
-    ],
-    "warmth": 0,
-    "material_thickness": 8,
-    "environmental_protection": 0,
-    "ammo": "battery",
-    "charges_per_use": 1,
-    "use_action": { "type": "transform", "msg": "The %s engages.", "target": "utility_exoskeleton_on", "active": true },
-    "flags": [ "STURDY", "OVERSIZE", "BELTED", "WATER_FRIENDLY", "ELECTRONIC" ],
-    "relic_data": {
-      "passive_effects": [
-        { "id": "ench_exo_strength" },
-        { "condition": "ACTIVE", "values": [ { "value": "CARRY_WEIGHT", "add": 215000 } ] },
-        { "condition": "ALWAYS", "values": [ { "value": "MOVE_COST", "multiply": -0.1 } ] }
-      ]
-    },
-    "armor": [
-      {
-        "encumbrance": 20,
-        "coverage": 20,
-        "covers": [ "torso", "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r", "foot_l", "foot_r" ]
-      }
-    ],
-    "melee_damage": { "bash": 1 }
-  },
-  {
-    "id": "utility_exoskeleton_on",
-    "copy-from": "utility_exoskeleton_off",
-    "looks_like": "power_armor_light",
-    "type": "TOOL_ARMOR",
-    "name": { "str": "battery powered utility exoskeleton (on)", "str_pl": "battery powered utility exoskeletons (on)" },
-    "description": "A skeletal frame of sturdy metal with attached motors to allow the user to move heavier loads with less strain on the body.  It is turned on and continually drawing power.  Use it to turn it off.",
-    "flags": [ "STURDY", "OVERSIZE", "BELTED", "WATER_FRIENDLY", "TRADER_AVOID" ],
-    "ammo": "battery",
-    "power_draw": "972216 mW",
-    "//": "Battery should last two hours (02:00:07). Weight capacity bonus should include weight of item AND battery, plus 90kg.",
-    "revert_to": "utility_exoskeleton_off",
-    "use_action": { "type": "transform", "menu_text": "Turn off", "msg": "The %s disengages.", "target": "utility_exoskeleton_off" }
-  },
-  {
-    "id": "ice_utility_exoskeleton_off",
-    "type": "TOOL_ARMOR",
-    "category": "armor",
-    "name": { "str": "ICE utility exoskeleton" },
-    "description": "A skeletal frame of sturdy metal with attached motors to allow the user to move heavier loads with less strain on the body.  This model uses a compact internal combustion engine for power.",
-    "weight": "110 kg",
-    "volume": "130 L",
-    "price": "115000 USD",
-    "price_postapoc": "400 USD",
-    "to_hit": 1,
-    "material": [ "steel", "plastic" ],
-    "symbol": "[",
-    "looks_like": "depowered_armor",
-    "color": "dark_gray",
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "watertight": true, "ammo_restriction": { "gasoline": 10000 } } ],
-    "warmth": 0,
-    "material_thickness": 8,
-    "environmental_protection": 0,
-    "ammo": "gasoline",
-    "charges_per_use": 1,
-    "use_action": { "type": "transform", "msg": "The %s engages.", "target": "ice_utility_exoskeleton_on", "active": true },
-    "flags": [ "STURDY", "OVERSIZE", "BELTED", "WATER_FRIENDLY", "ELECTRONIC" ],
-    "relic_data": {
-      "passive_effects": [
-        { "id": "ench_exo_strength" },
-        { "condition": "ACTIVE", "values": [ { "value": "CARRY_WEIGHT", "add": 190000 } ] },
-        { "condition": "ALWAYS", "values": [ { "value": "MOVE_COST", "multiply": -0.1 } ] }
-      ]
-    },
-    "armor": [
-      {
-        "encumbrance": 20,
-        "coverage": 20,
-        "covers": [ "torso", "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r", "foot_l", "foot_r" ]
-      }
-    ],
-    "melee_damage": { "bash": 1 }
-  },
-  {
-    "id": "ice_utility_exoskeleton_on",
-    "copy-from": "ice_utility_exoskeleton_off",
-    "looks_like": "power_armor_light",
-    "type": "TOOL_ARMOR",
-    "name": { "str": "ICE utility exoskeleton (on)", "str_pl": "ICE utility exoskeletons (on)" },
-    "description": "A skeletal frame of sturdy metal with attached motors to allow the user to move heavier loads with less strain on the body.  This model uses a compact internal combustion engine for power.  It is turned on and continually draining gasoline.  Use it to turn it off.",
-    "flags": [ "STURDY", "OVERSIZE", "BELTED", "WATER_FRIENDLY", "TRADER_AVOID" ],
-    "turns_per_charge": 1,
-    "//": "Full tank lasts a bit under three hours (166.66 minutes). Has less carry bonus than the battery one since the weight of the fuel will drop over time.",
-    "revert_to": "ice_utility_exoskeleton_off",
-    "use_action": { "type": "transform", "menu_text": "Turn off", "msg": "The %s disengages.", "target": "ice_utility_exoskeleton_off" }
   }
 ]

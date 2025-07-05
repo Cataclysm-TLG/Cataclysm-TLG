@@ -682,7 +682,7 @@
     "type": "effect_type",
     "id": "bouldering",
     "name": [ "Unstable Footing" ],
-    "desc": [ "Your footing is unstable.  It's more difficult to fight while standing here." ],
+    "desc": [ "Your footing is unstable.  It's more difficult to fight while standing here, and you could easily stumble or fall." ],
     "apply_message": "You try to keep your balance.",
     "resist_traits": [ "GASTROPOD_BALANCE", "BIRD_LEGS", "SCUTTLE", "LEG_TENT_BRACE" ],
     "rating": "bad",
@@ -2252,11 +2252,11 @@
   {
     "type": "effect_type",
     "id": "bite",
-    "name": [ "Bite", "Painful Bite" ],
-    "desc": [ "You have a nasty bite wound." ],
-    "apply_memorial_log": "Received a deep bite wound.",
-    "remove_memorial_log": "Recovered from a bite wound.",
-    "apply_message": "The bite wound feels really deep…",
+    "name": [ "Dirty Wound", "Contaminated Wound" ],
+    "desc": [ "You have a wound that needs cleaning." ],
+    "apply_memorial_log": "Received a deep wound.",
+    "remove_memorial_log": "Recovered from a deep wound.",
+    "apply_message": "The wound feels really deep…",
     "resist_traits": [ "INFRESIST" ],
     "immune_bp_flags": [ "BIONIC_LIMB" ],
     "main_parts_only": true,
@@ -2790,13 +2790,13 @@
   {
     "type": "effect_type",
     "id": "hot_speed",
-    "name": [ "Slowdown", "Hampered", "Crushed" ],
-    "desc": [ "The heat slows you down.", "You struggle to move in this heat.", "The heat is crushing you." ],
+    "name": [ "Hot", "Sweltering", "Overheating" ],
+    "desc": [ "The heat slows you down.", "The heat is really slowing you down.", "The heat is crushing you." ],
     "speed_name": "Heat slowdown",
     "max_intensity": 3,
     "part_descs": true,
-    "base_mods": { "speed_mod": [ -2 ] },
-    "scaling_mods": { "speed_mod": [ -4 ] }
+    "base_mods": { "speed_mod": [ -1 ] },
+    "scaling_mods": { "speed_mod": [ -2 ] }
   },
   {
     "type": "effect_type",
@@ -2852,7 +2852,42 @@
     "type": "effect_type",
     "id": "dermatik",
     "immune_bp_flags": [ "BIONIC_LIMB" ],
-    "blood_analysis_description": "Insect Parasite"
+    "blood_analysis_description": "Insect Parasite",
+    "vitamins": [
+      { "vitamin": "dermatik_larva_size", "rate": [ [ 1, 1 ] ], "tick": [ "1 m" ] },
+      { "vitamin": "vitC", "rate": [ [ -1, -1 ] ], "tick": [ "5 m" ] },
+      { "vitamin": "iron", "rate": [ [ -1, -1 ] ], "tick": [ "5 m" ] },
+      { "vitamin": "calcium", "rate": [ [ -1, -1 ] ], "tick": [ "5 m" ] },
+      { "vitamin": "mutant_toxin", "rate": [ [ 1, 1 ] ], "tick": [ "5 m" ] }
+    ],
+    "base_mods": {
+      "hunger_min": [ 1 ],
+      "hunger_tick": [ 20 ],
+      "thirst_min": [ 1 ],
+      "thirst_tick": [ 300 ],
+      "fatigue_min": [ 1 ],
+      "fatigue_tick": [ 300 ],
+      "h_mod_min": [ 1 ],
+      "h_mod_tick": [ 300 ],
+      "healing_rate": [ 0.05 ]
+    },
+    "enchantments": [ { "values": [ { "value": "METABOLISM", "multiply": 3.0 } ] } ],
+    "immune_flags": [ "ACIDBLOOD", "PARAIMMUNE" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "dermatik_visible",
+    "name": [ "Wriggling Skin", "Crawling Lump", "Distended Flesh" ],
+    "desc": [
+      "You can feel something wriggling beneath the skin…",
+      "There's a small lump under your skin, it shifts and writhes with a life of its own…",
+      "An area of your flesh bulges unnaturally, stretched by the presence of something inside.  It feels like it's desperately trying to push its way out…"
+    ],
+    "rating": "bad",
+    "max_intensity": 3,
+    "show_in_info": true,
+    "base_mods": { "vomit_chance": [ 25200 ], "pain_amount": [ 3 ] },
+    "scaling_mods": { "vomit_chance": [ -7200 ], "pain_amount": [ 6 ] }
   },
   {
     "type": "effect_type",
@@ -2863,6 +2898,7 @@
     "rating": "bad",
     "resist_effects": [ "took_flumed", "took_antihistamine" ],
     "main_parts_only": true,
+    "show_in_info": true,
     "immune_bp_flags": [ "BIONIC_LIMB" ],
     "max_intensity": 3,
     "base_mods": { "str_mod": [ -0.34 ], "int_mod": [ -1 ] },
@@ -3357,9 +3393,9 @@
     "desc": [
       "You drank some alcohol.  You feel warm inside.",
       "You drank alcohol.  Party on!",
-      "You drank lots of alcohol.  Are those white mice?",
-      "You drank unholy amounts of alcohol.  It's the end of the world, what do you care?",
-      "You embalmed yourself alive with so much alcohol, that even zombies will leave your dead body alone."
+      "You drank lots of alcohol.  Now you're feeling it.",
+      "You drank too much alcohol.  It's the end of the world, what do you care?",
+      "You drank so much that you're probably not going to remember this."
     ],
     "max_intensity": 5,
     "apply_message": "You feel lightheaded.",
@@ -3386,7 +3422,7 @@
       "pkill_tick": [ -10 ]
     },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.2 },
+      { "limb_score": "manip", "modifier": 0.9, "scaling": -0.1 },
       { "limb_score": "block", "modifier": 1.0, "scaling": -0.1 },
       { "limb_score": "vision", "modifier": 1.0, "scaling": -0.05 },
       { "limb_score": "reaction", "modifier": 0.9, "scaling": -0.2 },
@@ -3581,7 +3617,7 @@
     "id": "grabbed",
     "name": [ "Grabbed" ],
     "desc": [
-      "You have been grabbed and held in place by an attack.  You're not able to move until breaking the grab, and depending on the strength of your opponent using this limb is difficult to impossible.\nWait in place or attempt to move without attacking to try and remove this effect."
+      "You have been grabbed and held in place by an attack.  You cannot move or dodge, and depending on the strength of your opponent, use of this body part is hindered.\nWait in place or attempt to move without attacking to try and remove this effect."
     ],
     "rating": "bad",
     "//": "Removal handled in code, so no max duration needed, intensity set by the grab_strength, all effects are local-only",
@@ -3589,7 +3625,7 @@
     "show_in_info": true,
     "show_intensity": true,
     "//mods": "No swimmin' or manipulatin' with a held limb, other scores start severly debilitated and reach useless at about 50 grab strength",
-    "base_mods": { "dodge_mod": [ -10 ] },
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": -100.0 } ] } ],
     "limb_score_mods": [
       { "limb_score": "manip", "modifier": 0.0 },
       { "limb_score": "grip", "modifier": 0.0 },
@@ -3611,7 +3647,7 @@
     "max_intensity": 1,
     "show_in_info": true,
     "//": "-dodge (can't really miss something holding you)",
-    "base_mods": { "dodge_mod": [ -8 ] },
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": -8.0 } ] } ],
     "flags": [ "GRAB_FILTER" ]
   },
   {
@@ -3622,7 +3658,7 @@
     "max_intensity": 1,
     "show_in_info": true,
     "//": "-dodge (can't really miss something holding you)",
-    "base_mods": { "dodge_mod": [ -8 ] },
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": -8.0 } ] } ],
     "flags": [ "GRAB_FILTER" ]
   },
   {
@@ -3633,7 +3669,7 @@
     "max_intensity": 1,
     "show_in_info": true,
     "//": "-dodge (can't really miss something holding you)",
-    "base_mods": { "dodge_mod": [ -8 ] },
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": -8.0 } ] } ],
     "flags": [ "GRAB_FILTER" ]
   },
   {
@@ -4677,7 +4713,8 @@
     "rating": "bad",
     "show_intensity": false,
     "//": "Don't multiply speed by 0 or else the effect will never be removed for creatures with 0 damage(e.g. rabbits)",
-    "enchantments": [ { "values": [ { "value": "SPEED", "multiply": 0.01 } ] } ]
+    "enchantments": [ { "values": [ { "value": "SPEED", "multiply": 0.01 } ] } ],
+    "show_in_info": true
   },
   {
     "id": "Shadow_Reveal",
@@ -5021,6 +5058,17 @@
   },
   {
     "type": "effect_type",
+    "id": "anticoagulant_alboserpin",
+    "max_intensity": 3,
+    "int_add_val": 1,
+    "max_duration": "30 m",
+    "rating": "bad",
+    "blood_analysis_description": "Alboserpin",
+    "immune_flags": [ "DRACULIN_IMMUNE" ],
+    "effect_dur_scaling": [ { "effect_id": "bleed", "modifier": 1.2, "same_bp": false } ]
+  },
+  {
+    "type": "effect_type",
     "id": "grounded",
     "name": [ "Grounded" ],
     "rating": "good",
@@ -5035,7 +5083,15 @@
     "id": "airborne",
     "max_intensity": 1,
     "max_duration": "1 s",
+    "flags": [ "LEVITATION" ],
     "//": "Temporary effect for creatures who are leaping or getting flung.  Should only be applied during such events so that creatures aren't left hovering around."
+  },
+  {
+    "type": "effect_type",
+    "id": "jumping",
+    "max_intensity": 20,
+    "max_duration": "1 s",
+    "//": "Helper for airborne effect, handles interactions with terrain, traps etc when landing after using AIRBORNE spells."
   },
   {
     "type": "effect_type",

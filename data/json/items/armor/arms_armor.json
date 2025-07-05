@@ -17,7 +17,7 @@
     "warmth": 5,
     "material_thickness": 3,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "OUTER", "WATER_FRIENDLY", "BLOCK_WHILE_WORN" ],
+    "flags": [ "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -30,7 +30,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "carpet_arm_guards",
@@ -51,7 +51,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN", "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
@@ -59,7 +59,7 @@
           { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 15,
+        "encumbrance": 28,
         "coverage": 90,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_upper_r", "arm_upper_l" ]
       }
@@ -84,7 +84,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN", "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
@@ -116,16 +116,17 @@
     "warmth": 5,
     "material_thickness": 3,
     "environmental_protection": 2,
-    "flags": [ "STURDY", "OUTER", "BLOCK_WHILE_WORN", "WATER_FRIENDLY" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 8,
         "coverage": 90,
-        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l" ],
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "xl_armguard_chitin",
@@ -150,7 +151,8 @@
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "pair of biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
     "description": "A pair of arm guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
-    "material": [ "acidchitin" ]
+    "material": [ "acidchitin" ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "xl_armguard_acidchitin",
@@ -217,7 +219,7 @@
     "warmth": 20,
     "material_thickness": 3,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "WATER_FRIENDLY", "BLOCK_WHILE_WORN" ],
+    "flags": [ "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -250,7 +252,8 @@
         "coverage": 80,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "xl_armguard_hard",
@@ -274,9 +277,9 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "pair of leather arm guards", "str_pl": "pairs of leather arm guards" },
-    "description": "A pair of tough leather arm guards.  Light and comfortable.",
-    "weight": "730 g",
-    "volume": "2 L",
+    "description": "A set of tough leather braces and poleyns that provide protection against blades and teeth alike.",
+    "weight": "750 g",
+    "volume": "800 ml",
     "price": "40 USD",
     "price_postapoc": "10 USD",
     "to_hit": 1,
@@ -286,7 +289,7 @@
     "color": "brown",
     "warmth": 25,
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER", "BLOCK_WHILE_WORN", "WATER_FRIENDLY" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -294,7 +297,8 @@
         "coverage": 90,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "leather_arm_guards_xl",
@@ -329,7 +333,7 @@
     "color": "blue",
     "warmth": 5,
     "material_thickness": 3,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "OUTER" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -357,7 +361,7 @@
     "color": "light_gray",
     "warmth": 5,
     "material_thickness": 4,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN", "NONCONDUCTIVE" ],
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -366,7 +370,8 @@
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "tire_bracers_xl",
@@ -400,7 +405,7 @@
     "looks_like": "leather_vambraces",
     "color": "light_gray",
     "warmth": 10,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "OUTER" ],
     "armor": [
       {
         "material": [
@@ -414,7 +419,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 1, "cut": 1 }
+    "melee_damage": { "bash": 3, "cut": 1 }
   },
   {
     "id": "sheet_metal_bracers_xl",
@@ -449,16 +454,17 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 4,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN", "NONCONDUCTIVE" ],
+    "flags": [ "OUTER", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 14,
+        "encumbrance": 21,
         "coverage": 80,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_upper_r", "arm_upper_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "tire_arm_guards_xl",
@@ -499,9 +505,10 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 5,
-        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l" ],
-        "coverage": 100
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
+        "coverage": 95
       },
+      { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ], "coverage": 100 },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_upper_l", "arm_upper_r" ], "coverage": 80 }
     ]
   },
@@ -669,7 +676,7 @@
     "looks_like": "armguard_metal",
     "color": "light_red",
     "warmth": 10,
-    "flags": [ "STURDY" ],
+    "flags": [ "STURDY", "NORMAL" ],
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a looser fit.",
@@ -705,7 +712,8 @@
         "coverage": 95,
         "encumbrance": 2
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_sleeves_xs",
@@ -747,7 +755,8 @@
       "msg": "You adjust your mail for a looser fit.",
       "target": "chainmail_junk_sleeves_loose",
       "menu_text": "Loosen"
-    }
+    },
+    "delete": { "flags": [ "STURDY" ] }
   },
   {
     "id": "chainmail_sleeves_loose",
@@ -761,6 +770,7 @@
       "target": "chainmail_junk_sleeves",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -775,6 +785,7 @@
       "target": "chainmail_sleeves_xs",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -789,6 +800,7 @@
       "target": "chainmail_sleeves_xl",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -802,6 +814,7 @@
       "target": "chainmail_junk_sleeves",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL", "STURDY" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -833,7 +846,8 @@
         "encumbrance": 3,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "bronze_vambraces",
@@ -851,7 +865,7 @@
     "looks_like": "armguard_lightplate",
     "color": "yellow",
     "warmth": 15,
-    "material_thickness": 4,
+    "material_thickness": 2,
     "flags": [ "OUTER", "STURDY" ],
     "armor": [
       {
@@ -861,7 +875,8 @@
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "bronze_vambraces_xl",
@@ -905,7 +920,8 @@
         "coverage": 95,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "leather_vambraces_xl",
@@ -952,11 +968,11 @@
     "warmth": 10,
     "longest_side": "60 cm",
     "material_thickness": 1.3,
-    "flags": [ "OUTER", "STURDY", "CONDUCTIVE", "BLOCK_WHILE_WORN" ],
+    "flags": [ "OUTER", "STURDY", "CONDUCTIVE" ],
     "armor": [
       {
         "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -966,7 +982,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 4 }
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_arm_guards_xs",
@@ -1001,12 +1017,11 @@
     "color": "light_gray",
     "warmth": 10,
     "longest_side": "60 cm",
-    "sided": true,
     "material_thickness": 1.3,
     "flags": [ "OUTER", "STURDY", "CONDUCTIVE" ],
     "armor": [
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
         "coverage": 100,
@@ -1014,7 +1029,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 4 }
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_pauldrons_xs",
@@ -1038,8 +1053,8 @@
     "category": "armor",
     "name": { "str": "pair of leather pauldrons", "str_pl": "pairs of leather pauldrons" },
     "description": "Shoulder guards made of thick leather.  They're a little restrictive, but provide important protection.",
-    "weight": "900 g",
-    "volume": "900 ml",
+    "weight": "600 g",
+    "volume": "600 ml",
     "price": "30 USD",
     "price_postapoc": "6 USD",
     "to_hit": -5,
@@ -1049,7 +1064,6 @@
     "color": "brown",
     "warmth": 10,
     "longest_side": "60 cm",
-    "sided": true,
     "material_thickness": 4,
     "flags": [ "OUTER", "STURDY" ],
     "armor": [
@@ -1061,7 +1075,8 @@
         "encumbrance": 4,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "leather_pauldrons_xs",
@@ -1096,7 +1111,7 @@
     "color": "dark_gray",
     "warmth": 20,
     "longest_side": "40 cm",
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED" ],
     "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
@@ -1109,6 +1124,7 @@
         "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_elbow_l", "arm_elbow_r" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   }
 ]

@@ -37,7 +37,7 @@
       [ "stock accessory", 2 ],
       [ "underbarrel", 1 ]
     ],
-    "flags": [ "WATERPROOF_GUN", "NEVER_JAMS" ],
+    "flags": [ "WATERPROOF_GUN", "NEVER_JAMS", "ALLOWS_BODY_BLOCK" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "5x50_20_mag", "5x50_40_mag" ] } ],
     "melee_damage": { "bash": 11 }
   },

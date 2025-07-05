@@ -233,7 +233,7 @@
     "result": "iron_armor_horse",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
-    "copy-from": "plated_leather_armor_suit",
+    "copy-from": "jacket_leather_mod",
     "category": "CC_ANIMALS",
     "subcategory": "CSC_ANIMALS_EQUINE ARMOR",
     "skills_required": [ "tailor", 3 ],

@@ -481,6 +481,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "super_glue",
+    "name": "superglue",
+    "default": "super_glue"
+  },
+  {
+    "type": "ammunition_type",
     "id": "battery",
     "name": "kJ",
     "default": "battery"
@@ -862,5 +868,11 @@
     "id": "airgun_pellet",
     "name": "airgun pellet",
     "default": "airgun_pellet_target"
+  },
+  {
+    "type": "ammunition_type",
+    "id": "gene_sting",
+    "name": "gene sting barb",
+    "default": "gene_sting_barb"
   }
 ]

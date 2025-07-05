@@ -345,11 +345,23 @@ climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
         cond.uses_item = you.amount_of( itype_id( cond.flag ) );
         return cond.uses_item > 0;
     };
-    auto detect_ter_furn_flag = [&here, &fall]( condition & cond ) {
+
+    auto detect_ter_furn_flag = [&you, &here, &fall]( condition & cond ) {
         tripoint pos = fall.pos_furniture_or_floor();
         cond.range = fall.pos_top().z - pos.z;
-        return here.has_flag( cond.flag, pos );
+        bool furn_ok = false;
+        if( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
+            here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, pos ) ) {
+            furn_ok = ( you.get_weight() / 10000_gram <= here.furn( pos ).obj().bash.str_min );
+        }
+        bool ter_ok = false;
+        if( here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
+            here.has_flag_ter( ter_furn_flag::TFLAG_LADDER, pos ) ) {
+            ter_ok = ( you.get_weight() / 10000_gram <= here.ter( pos ).obj().bash.str_min );
+        }
+        return ( furn_ok || ter_ok ) && here.has_flag( cond.flag, pos );
     };
+
     auto detect_vehicle = [&fall]( condition & cond ) {
         // TODO implement flags and range?
         cond.range = 1;
@@ -378,15 +390,14 @@ climbing_aid::fall_scan::fall_scan( const tripoint &examp )
 
     // Get coordinates just below and at ground level.
     // Also detect if furniture would block our tools/abilities.
-    tripoint bottom = examp;
-    tripoint just_below = examp;
-    just_below.z--;
+    tripoint_bub_ms bottom( examp );
+    tripoint_bub_ms just_below( bottom + tripoint_below );
 
     int hit_furn = false;
     int hit_crea = false;
     int hit_veh = false;
 
-    for( tripoint lower = just_below; here.valid_move( bottom, lower, false, true ); ) {
+    for( tripoint_bub_ms lower = just_below; here.valid_move( bottom, lower, false, true ); ) {
         if( !hit_furn ) {
             if( here.has_furn( lower ) ) {
                 hit_furn = true;
@@ -410,7 +421,7 @@ climbing_aid::fall_scan::fall_scan( const tripoint &examp )
             }
         }
         ++height;
-        bottom.z--;
-        lower.z--;
+        bottom.z()--;
+        lower.z()--;
     }
 }

@@ -212,6 +212,7 @@ Use the `Home` key to return to the top.
       - [`symbol`](#symbol)
       - [`comfort`](#comfort)
       - [`floor_bedding_warmth`](#floor_bedding_warmth)
+      - [`fall_damage_reduction`](#fall_damage_reduction)
       - [`bonus_fire_warmth_feet`](#bonus_fire_warmth_feet)
       - [`looks_like`](#looks_like)
       - [`color` or `bgcolor`](#color-or-bgcolor)
@@ -468,6 +469,21 @@ order of the entries does not matter.
 ```
 
 Currently, only some JSON values support this syntax (see [here](/doc/TRANSLATING.md#translation) for a list of supported values and more detailed explanation).
+
+The string extractor will extract all encountered strings from JSON for translation. But if some string should not be translated, such as text that is not normally visible to the player (names and descriptions of monster-only effects and spells), then you can write `"NO_I18N"` in the comment for translators:
+
+```JSON
+"name": {
+    "//~": "NO_I18N",
+    "str": "Fake Monster-Only Spell"
+},
+"description": {
+    "//~": "NO_I18N",
+    "str": "Fake Monster-Only Spell Description"
+}
+```
+
+The extractor will skip these two specified strings and only these, extracting the remaining unmarked strings from the same JSON object.
 
 ## Comments
 
@@ -1944,9 +1960,47 @@ Professions are specified as JSON object with "type" member set to "profession":
 ```C++
 {
     "type": "profession",
-    "id": "hunter",
-    ...
-}
+    "id": "profession_example",                                // Unique ID for the profession
+    "name": { "male": "Groom", "female": "Bride" },            // String, either a single gender neutral (i.e. "Survivor") or object with members "male" and "female"
+    "description": "This is an example profession.",           // In-game description
+    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points.
+    "npc_background": "BG_survival_story_LAB",                 // (optional) BG_trait_group ID, provides list of background stories. (see BG_trait_groups.json)
+    "addictions": [ { "intensity": 10, "type": "nicotine" } ], // (optional) Array of addictions. Requires "type" as the string ID of the addiction (see JSON_FLAGS.md) and "intensity"
+    "skills": [ { "name": "archery", "level": 2 } ],           // (optional) Array of starting skills. Requires "name" as the string ID of the skill (see skills.json) and "level", which is a value added to the skill level after character creation
+    "missions": [ "MISSION_LAST_DELIVERY" ],                   // (optional) Array of starting mission IDs
+    "proficiencies": [ "prof_knapping" ],                      // (optional) Array of starting proficiencies
+    "items": {                                                 // (optional) Object of items the character starts with (see below for further explanation)
+      "both": {
+        "entries": [
+          { "item": "jeans" },
+          { "item": "tank_top", "variant": "tank_top_camo" },
+          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
+          { "item": "socks" },
+          { "item": "sneakers" },
+          { "item": "water_clean", "container-item": "canteen" },
+          { "item": "m1911", "ammo-item": "45_acp", "charges": 7, "container-item": "holster" },
+          { "item": "45_acp", "charges": 23 },
+          { "item": "legpouch_large", "contents-group": "army_mags_m4" }
+        ]
+      },
+      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+    }
+    "age_lower": 18,                                           // (optional) Int. The lowest age that a character with this profession can generate with. This places no limits on manual input, only on random generation (i.e. Play Now!). Defaults to 21
+    "age_upper": 25,                                           // (optional) Int. Similar as above
+    "pets": [ { "name": "mon_black_rat", "amount": 13 } ],     // (optional) Array of starting monster IDs, tamed as pets
+    "vehicle": "car_sports",                                   // (optional) String of a starting vehicle ID. The vehicle will be spawned at the closest road, with the character "remembering" its location in the overmap
+    "flags": [ "SCEN_ONLY", "NO_BONUS_ITEMS" ],                // (optional) Array of flags applied to the character, for character creation purposes
+    "CBMs": [ "bio_fuel_cell_blood" ],                         // (optional) Array of starting implanted CMBs
+    "traits": [ "PROF_CHURL", "ILLITERATE" ],                  // (optional) Array of starting traits/mutations. For further information, see mutations.json and MUTATIONS.md. Note: "trait" is also supported, used for a single trait/mutation ID (legacy!)
+    "requirement": "achievement_survive_28_days",              // (optional) String of an achievement ID required to unlock this profession
+    "spells": [                                                // (optional) Array of starting spell IDs the character knows upon creation. For further information, see MAGIC.md
+      { "id": "magic_missile", "level": 4 },
+      { "id": "summon_undead", "level": 5 },
+      { "id": "necrotic_gaze", "level": 1 }
+    ],
+    "recipes": [ "beartrap" ]                                  // (optional) Array of starting recipe IDs the character knows upon creation
+  },
 ```
 
 The id member should be the unique id of the profession.
@@ -3182,13 +3236,13 @@ Vehicle components when installed on a vehicle.
                               // quality and the quality level, that the vehicle part provides.
                               // Only the "LIFT", "JACK", and "SELF_JACK" qualities are valid.
 "transform_terrain": {        // (Optional) This part can transform terrain, like a plow.
-                              // One of "post_terain", "post_furniture", or "post_field" is required.
-  "pre_flags": [ "PLOWABLE" ], // List of flags for the terrain that can be transformed.
-  "post_terrain": "t_dirtmound", // (Optional, default to "t_null") The resulting terrain, if any.
-  "post_furniture": "f_boulder", // (Optional, default to "f_null") The resulting furniture, if any.
-  "post_field": "fd_fire",    // (Optional, default to "fd_null") The resulting field, if any.
-  "post_field_intensity": 10, // (Optional, default to 0) The field's intensity, if any.
-  "post_field_age": "20 s"    // (Optional, default to 0 turns) The field's time to live, if any.
+  "pre_flags": [ "PLOWABLE" ], // (Optional) List of flags for the terrain that can be transformed.
+  "post_terrain": "t_dirtmound", // (Optional*) The resulting terrain.
+  "post_furniture": "f_boulder", // (Optional*) The resulting furniture.
+  "post_field": "fd_fire",    // (Optional*) The resulting field.
+  "post_field_intensity": 10, // (Mandatory if post_field is specified) The field's intensity.
+  "post_field_age": "20 s"    // (Mandatory if post_field is specified) The field's time to live.
+                              // *One of "post_terrain", "post_furniture", or "post_field" is required.
 },
 "variants_bases": [ // variant bases to generate (see below)
   { "id": "scooter", "label": "Scooter" },
@@ -3504,7 +3558,8 @@ Weakpoints only match if they share the same id, so it's important to define the
 ],
 "milling": {                                 // Optional. If given, the item can be milled in a water/wind mill.
   "into": "flour",                           // The item id of the result of the milling.
-  "conversion_rate": 1.0                     // Conversion of number of items that are milled (e.g. with a rate of 2, 10 input items will yield 20 milled items).
+  "recipe": "paste_nut_mill_10_1"            // Reference to the recipe that performs the task. The syntax is <product name>_mill_<source amount>_<product amount>. The recipe is then defined as a normal recipe for the source with the product as its result and an id_suffix of "mill_X_Y". 
+                                             // See data/json/recipes/food/milling.json for such recipes. Can also use "milling": { "into": "null", "recipe": "" } to override milling from a copied base item.
 },
 "explode_in_fire": true,                     // Should the item explode if set on fire
 "nanofab_template_group": "nanofab_recipes", // This item is nanofabricator recipe, and point to itemgroup with items, that it could possibly contain; require nanofab_template_group
@@ -3539,39 +3594,60 @@ See [GAME_BALANCE.md](GAME_BALANCE.md)'s `MELEE_WEAPONS` section for the criteri
 
 ### Ammo
 
-```C++
-"type" : "AMMO",      // Defines this as ammo
-...                   // same entries as above for the generic item.
-                      // additional some ammo specific entries:
-"ammo_type" : "shot", // Determines what it can be loaded in 
-"damage": {           // Ranged damage when fired
-  "damage_type": "bullet", // Type of the damage that would be dealt
-  "amount": 39,            // Amount of the damage to deal
-  "armor_penetration": 2,  // Flat armor penetration
-  "barrels": [             // Replaces the `amount` when weapon has barrel lenghth defined, allow to change the damage of the single round depending on the barrel length.
-    { "barrel_length": "28 mm", "amount": 13 }, //if weapon has barrel lengh this or less, this amount of the damage would be applied
-    { "barrel_length": "30 mm", "amount": 14 },
-    { "barrel_length": "35 mm", "amount": 15 },
-    { "barrel_length": "39 mm", "amount": 16 }
-  ]
+```json
+{
+  "id": "223",            // ID of the ammo
+  "type": "AMMO",         // Defines this as ammo. It can use the same entries as a GENERIC item
+                          // Additionally, some AMMO specific entries consist of the following:
+  "ammo_type": "shot",    // Determines where the items can be loaded in. Requires a proper `"ammunition_type"` to be declared (see below). In this case, the `223` rounds can be loaded into magazines that accept `shot`-type ammo
+  "damage": {             // Ranged damage when fired
+    "damage_type": "bullet",  // Type of the damage that would be dealt
+    "amount": 39,             // Amount of damage to be dealt
+    "armor_penetration": 2,   // Flat armor penetration
+    "barrels": [              // Replaces the `amount` when weapon has barrel lenghth defined, allow to change the damage of the single round depending on the barrel length.
+      { "barrel_length": "28 mm", "amount": 13 },  // If weapon has barrel lengh this or less, this amount of the damage would be applied
+      { "barrel_length": "30 mm", "amount": 14 },
+      { "barrel_length": "35 mm", "amount": 15 },
+      { "barrel_length": "39 mm", "amount": 16 }
+    ]
+  },
+  "range": 5,             // Range when fired
+  "recovery_chance": 6,   // Percentage of chance to recover the ammo after firing
+  "dispersion": 0,        // Inaccuracy of ammo, measured in 100ths of Minutes Of Angle (MOA)
+  "shot_counter": 5,      // Increases amount of shots produced by gun by this amount. `"shot_counter": 5` means each shot will be counted as 6 shots (1 you actually perform + 5). Designed for using in suppressor mod breakage and for stuff like replaceable barrels, but not used anywhere at this moment
+  "projectile_count": 5,  // Amount of pellets, that the ammo will shot, like in shotgun-like weapon. If used, `"shot_damage"` should be specified
+  "multi_projectile_effects": true,  // (Optional) Boolean, default false. If the projectile_count is greater than 1, determines if the extra projectiles will also trigger any ammo effects. (For more on ammo effects see below)
+  "shot_damage": { "damage_type": "bullet", "amount": 15 },  // (Optional) Specifies the damage caused by a single projectile fired from this round. If present, projectile_count must also be specified. Syntax is the same as `"damage"`
+  "critical_multiplier": 4,  // If the hit is a critical hit, all ranged damage dealt will be multiplied by this
+  "shot_spread": 100,     // (Optional) Specifies the additional dispersion of single projectiles. Only meaningful if shot_count is present.
+  "recoil": 18,           // Recoil caused when firing. Roughly set to the projectile's muzzle energy in J, the same value the ammo's damage is derived from. See also the gun's min_cycle_recoil value
+  "count": 25,            // Number of rounds that spawn together
+  "stack_size": 50,       // (Optional) How many rounds are in the above-defined volume. If omitted, is the same as 'count'
+  "show_stats": true,     // (Optional) Force stat display for combat ammo. (for projectiles lacking both damage and prop_damage)
+  "loudness": 10,         // (Optional) Modifier that can increase or decrease base gun's noise when firing. If loudness value is not specified, then game calculates it automatically from ammo's range, damage, and armor penetration.
+  "casing": "223_casing", // Casing of the ammo that would be left after shooting
+  "effects": ["COOKOFF", "SHOT"]  // Ammo effcts, see below
 },
-"range" : 5,          // Range when fired
-"recovery_chance": 6, // Percentage of chance to recover the ammo after firing
-"dispersion" : 0,     // Inaccuracy of ammo, measured in 100ths of Minutes Of Angle (MOA)
-"shot_counter": 5,    // Increases amount of shots produced by gun by this amount. `"shot_counter": 5` means each shot will be counted as 6 shots (1 you actually perform + 5); designed for using in suppressor mod breakage and for stuff like replaceable barrels, but not used anywhere at this moment
-"projectile_count": 5,// amount of pellets, that the ammo will shot, like in shotgun-like weapon; if used, shot_damage should be specified
-"multi_projectile_effects": true,// (Optional) Boolean, default false. If the projectile_count is greater than 1, determines if the extra projectiles will also trigger any ammo effects. (For more on ammo effects see below)
-"shot_damage": { "damage_type": "bullet", "amount": 15 } // Optional field specifying the damage caused by a single projectile fired from this round. If present projectile_count must also be specified; syntax is equal to damage
-"critical_multiplier": 4, // All ranged damage dealt would be multiplied by this, if it was a critical hit
-"shot_spread": 100,   // Optional field specifying the additional dispersion of single projectiles. Only meaningful if shot_count is present.
-"recoil" : 18,        // Recoil caused when firing
-"count" : 25,         // Number of rounds that spawn together
-"stack_size" : 50,    // (Optional) How many rounds are in the above-defined volume. If omitted, is the same as 'count'
-"show_stats" : true,  // (Optional) Force stat display for combat ammo. (for projectiles lacking both damage and prop_damage)
-"loudness": 10,       // (Optional) Modifier that can increase or decrease base gun's noise when firing. If loudness value is not specified, then game calculates it automatically from ammo's range, damage, and armor penetration.
-"casing": "223_casing", // casing of the ammo, that would be left after the shot
-"effects" : ["COOKOFF", "SHOT"] // ammo effcts, see below
 ```
+
+Additionally, non-`"type": "AMMO"` items can be considered as ammo (capable of being shot, capable of being loaded into a `MAGAZINE` pocket), by adding the `ammo_data` field, which supports the same fields as the `AMMO` type. Do note that a proper `ammunition_type` is also required:
+
+```json
+  {
+    "id": "water_clean",
+    "type": "COMESTIBLE",
+    ...
+    "ammo_data": { "ammo_type": "water", "damage": { "damage_type": "cold", "amount": 2 }, "range": 4 },
+    ...
+  },
+  {
+    "id": "water",
+    "type": "ammunition_type",
+    "name": "water",
+    "default": "water"
+  },
+```
+
 
 ### Ammo Effects
 
@@ -3613,6 +3689,10 @@ ammo_effects define what effect the projectile, that you shoot, would have. List
   "do_flashbang": false,     // Creates a one tile radius EMP explosion at the hit location; default false
   "do_emp_blast": false      // Creates a hardcoded flashbang explosion; default false
   "foamcrete_build": false   // Creates foamcrete fields and walls on the hit location, used in aftershock; default false
+  "eoc": [ "EOC_CAUSE_PAIN", "EOC_CAUSE_VOMIT" ], // Runs EoC when hit the target. See EFFECT_ON_CONDITION.md#typical-alpha-and-beta-talkers-by-cases for more information
+  "spell_data": { "id": "bear_trap" } // Spell, that would be casted when projectile hits an enemy
+  "spell_data": { "id": "release_the_deltas", "hit_self": true, "min_level": 10 }, //another example
+  "always_cast_spell ": false // if spell_data is used, and this is true, spell would be casted even if projectile did not deal any damage. Default false.
 }
 ```
 
@@ -3627,6 +3707,7 @@ ammo_effects define what effect the projectile, that you shoot, would have. List
 "count" : 0,                     // Default amount of ammo contained by a magazine (set this for ammo belts)
 "default_ammo": "556",           // If specified override the default ammo (optionally set this for ammo belts)
 "reload_time" : 100,             // How long it takes to load each unit of ammo into the magazine
+"mag_jam_mult": 1.25             // Multiplier for gun mechanincal malfunctioning from magazine, mostly when it's damaged; Values lesser than 1 reflect better quality of the magazine, that jam less; bigger than 1 result in gun being more prone to malfunction and jam at lesser damage level; zero mag_jam_mult (and zero gun_jam_mult in a gun) would remove any chance for a gun to malfunction. Only works if gun has any fault from gun_mechanical_simple group presented; Jam chances are described in Character::handle_gun_damage(); at this moment it is roughly: 0.027% for undamaged magazine, 5% for 1 damage (|\), 24% for 2 damage (|.), 96% for 3 damage (\.), and 250% for 4 damage (XX), then this and gun values are summed up. Rule of thumb: helical mags should have 3, drum mags should have 2, the rest can be tweaked case by case, but mostly doesn't worth emulating it
 "linkage" : "ammolink"           // If set one linkage (of given type) is dropped for each unit of ammo consumed (set for disintegrating ammo belts)
 ```
 
@@ -3650,7 +3731,6 @@ Armor can be defined like this:
 "cover_ranged": 45,                 // What percentage of body part is covered (against ranged)
 "cover_vitals": 10,                 // What percentage of critical hit damage is mitigated
 "material_thickness" : 1,           // Thickness of material, in millimeter units (approximately).  Ordinary clothes range from 0.1 to 0.5. Particularly rugged cloth may reach as high as 1-2mm, and armor or protective equipment can range as high as 10 or rarely more.
-"power_armor" : false,              // If this is a power armor item (those are special).
 "non_functional" : "destroyed",     //this is the itype_id of an item that this turns into when destroyed. Currently only works for ablative armor.
 "damage_verb": "makes a crunch, something has shifted", // if an item uses non-functional this will be the description when it turns into its non functional variant.
 "valid_mods" : ["steel_padded"],    // List of valid clothing mods. Note that if the clothing mod doesn't have "restricted" listed, this isn't needed.
@@ -3790,8 +3870,7 @@ Alternately, every item (book, tool, gun, even food) can be used as armor if it 
         "cover_ranged": 70,
         "cover_vitals": 5
       }
-    ],
-    "power_armor" : false
+    ]
 }
 ```
 #### Guidelines for thickness: ####
@@ -3852,7 +3931,6 @@ Pet armor can be defined like this:
 "pet_bodytype":        // the body type of the pet that this monster will fit. See MONSTERS.md
 "max_pet_vol":          // the maximum volume of the pet that will fit into this armor. Volume in ml or L can be used - "50 ml" or "2 L".
 "min_pet_vol":          // the minimum volume of the pet that will fit into this armor. Volume in ml or L can be used - "50 ml" or "2 L".
-"power_armor" : false, // If this is a power armor item (those are special).
 ```
 Alternately, every item (book, tool, gun, even food) can be used as armor if it has armor_data:
 ```C++
@@ -3863,8 +3941,7 @@ Alternately, every item (book, tool, gun, even food) can be used as armor if it 
     "pet_bodytype": "dog",
     "max_pet_vol": "35000 ml",
     "min_pet_vol": "25000 ml",
-    "material_thickness" : 1,
-    "power_armor" : false
+    "material_thickness" : 1
 }
 ```
 
@@ -4169,8 +4246,9 @@ Guns can be defined like this:
 "sight_dispersion": 10,    // Inaccuracy of gun derived from the sight mechanism, measured in 100ths of Minutes Of Angle (MOA)
 "recoil": 0,               // Recoil caused when firing, measured in 100ths of Minutes Of Angle (MOA)
 "durability": 8,           // Resistance to damage/rusting, also determines misfire chance
+"gun_jam_mult": 1.25       // Multiplier for gun mechanincal malfunctioning, mostly when it's damaged; Values lesser than 1 reflect better quality of the gun, that jam less; bigger than 1 result in gun being more prone to malfunction and jam at lesser damage level; zero gun_jam_mult (and zero mag_jam_mult if magazine is presented) would remove any chance for a gun to malfunction. Only apply if gun has any fault from gun_mechanical_simple group presented; Jam chances are described in Character::handle_gun_damage(); at this moment it is roughly: 0.05% for undamaged gun, 3% for 1 damage (|\), 15% for 2 damage (|.), 45% for 3 damage (\.), and 80% for 4 damage (XX), then this and magazine values are summed up
 "blackpowder_tolerance": 8,// One in X chance to get clogged up (per shot) when firing blackpowder ammunition (higher is better). Optional, default is 8.
-"min_cycle_recoil": 0,     // Minimum ammo recoil for gun to be able to fire more than once per attack.
+"min_cycle_recoil": 0,     // Minimum ammo recoil for the gun to be able to fire more than once per attack (to cycle), else shooting it results in a cycling failure. Set at 90% of the base ammo recoil, or 75% of the value if the weapon is known to cycle with blackpowder. This is to prevent the weapon from cycling with any kind of ammo
 "clip_size": 100,          // Maximum amount of ammo that can be loaded
 "faults": [ "fault_gun_dirt", "fault_gun_chamber_spent" ], // Type of faults, that can be applied to this gun; usually are inherited from single abstract like rifle_base, but exceptions exist
 "handling": 10             // handling of the weapon; better handling means less recoil
@@ -4216,9 +4294,10 @@ Gun mods can be defined like this:
 "ammo_modifier": [ "57" ],     // Optional field which if specified modifies parent gun to use these ammo types
 "magazine_adaptor": [ [ "223", [ "stanag30" ] ] ], // Optional field which changes the types of magazines the parent gun accepts
 "pocket_mods": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ai_338mag", "ai_338mag_10" ] } ], // Optional field, alters the original pockets of the weapon ; share the syntax with pocket_data; pocket type MAGAZINE and MAGAZINE_WELL are always overwritten, pocket type CONTAINER is always added to existing pockets; for MAGAZINE and MAGAZINE_WELL both ammo_modifier and magazine_adaptor fields are required to correctly migrate ammo type; type: TOOLMOD can use this field also
-"damage_modifier": -1,         // Optional field increasing or decreasing base gun damage
+"damage_modifier": { "damage_type": "bullet", "amount": -1 }, // Optional field increasing or decreasing base gun damage
 "dispersion_modifier": 15,     // Optional field increasing or decreasing base gun dispersion
 "loudness_modifier": 4,        // Optional field increasing or decreasing base guns loudness
+"loudness_multiplier": 0.5     // Optional field increasing or decreasing base guns loudness as multiplier. 0.5 would halve the gun loudness, 2 would double it
 "range_modifier": 2,           // Optional field increasing or decreasing base gun range
 "range_multiplier": 1.2,       // Optional field multiplying base gun range
 "integral_longest_side": "5 cm", // Length that would be added to a gun when this mod is installed
@@ -5150,11 +5229,11 @@ oxytorch: {
 ```
 
 #### `prying`
-(Optional) Data for using with pyring tools
+(Optional) Data for using with prying tools
 ```cpp
 "prying": {
     "result": "furniture_id", // (optional) furniture it will become when done, defaults to f_null
-    "duration": "1 seconds", // (optional) time required for prying nails, default is 1 second
+    "duration": "1 seconds", // (optional) time required for prying, default is 1 second
     "message": "You finish prying the door.", // (optional) message that will be displayed when finished prying successfully
     "byproducts": [ // (optional) list of items that will be spawned when finished successfully
         {
@@ -5232,6 +5311,7 @@ Strength required to move the furniture around. Negative values indicate an unmo
       { "seasons": [ "spring", "autumn" ], "id": "burdock_harv" },
       { "seasons": [ "summer" ], "id": "burdock_summer_harv" }
     ],
+    "liquid_source": { "id": "water", "min_temp": 7.8, "count": [ 24, 48 ] },
     "roof": "t_roof",
     "examine_action": "pit",
     "boltcut": {
@@ -5442,6 +5522,19 @@ Example:
 "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "blackjack_harv" } ],
 ```
 
+#### `liquid_source`
+
+(Optional) Object, that contain liquids this terrain or furniture can give
+
+Example:
+```c++
+"liquid_source": {
+  "id": "water",      // id of a liquid given by ter/furn
+  "min_temp": 7.8,    // liquid picked from here can't go below this temperature, in centigrade; Used only by "water_source" examine action
+  "count": [ 24, 48 ] // if source is finite, how much there should be of it. Omit if it need to have infinite amount of liquid. Accepts either single number, or array of two numbers. Used only by "finite_water_source" examine action
+}
+```
+
 #### `roof`
 
 (Optional) The terrain of the terrain on top of this (the roof).
@@ -5534,6 +5627,10 @@ How comfortable this terrain/furniture is. Impact ability to fall asleep on it.
 #### `floor_bedding_warmth`
 
 Bonus warmth offered by this terrain/furniture when used to sleep. Also affects how comfortable a resting place this is(affects healing). Vanilla values should not exceed 1000.
+
+#### `fall_damage_reduction`
+
+Flat damage reduction or increase if negative number. Like falling on a bush or soft chair or mattress or sofa.
 
 #### `bonus_fire_warmth_feet`
 

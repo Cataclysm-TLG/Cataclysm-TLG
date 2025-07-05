@@ -49,7 +49,7 @@
       { "group": "clothing_watch" },
       { "item": "phase_immersion_suit" },
       { "item": "id_science_security_black" },
-      { "item": "survivor_machete", "container-item": "scabbard" },
+      { "item": "machete", "container-item": "scabbard" },
       {
         "collection": [
           { "item": "rm103a_pistol", "prob": 100, "charges": 6, "container-item": "holster" },

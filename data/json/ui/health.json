@@ -4,16 +4,16 @@
     "type": "widget",
     "style": "clause",
     "clauses": [
-      { "id": "horrible", "text": "Horrible", "color": "red", "condition": { "math": [ "u_val('health')", "<", "-100" ] } },
+      { "id": "horrible", "text": "Sickly", "color": "red", "condition": { "math": [ "u_val('health')", "<", "-100" ] } },
       {
         "id": "very_bad",
-        "text": "Very bad",
+        "text": "Listless",
         "color": "light_red",
         "condition": { "and": [ { "math": [ "u_val('health')", ">=", "-100" ] }, { "math": [ "u_val('health')", "<", "-50" ] } ] }
       },
       {
         "id": "bad",
-        "text": "Bad",
+        "text": "Unhealthy",
         "color": "yellow",
         "condition": { "and": [ { "math": [ "u_val('health')", ">=", "-50" ] }, { "math": [ "u_val('health')", "<", "-10" ] } ] }
       },
@@ -25,19 +25,19 @@
       },
       {
         "id": "good",
-        "text": "Good",
+        "text": "Healthy",
         "color": "white",
         "condition": { "and": [ { "math": [ "u_val('health')", ">=", "10" ] }, { "math": [ "u_val('health')", "<", "50" ] } ] }
       },
       {
         "id": "very_good",
-        "text": "Very good",
+        "text": "Robust",
         "color": "green",
         "condition": { "and": [ { "math": [ "u_val('health')", ">=", "50" ] }, { "math": [ "u_val('health')", "<", "100" ] } ] }
       },
       {
         "id": "excellent",
-        "text": "Excellent",
+        "text": "Thriving",
         "color": "light_green",
         "condition": { "math": [ "u_val('health')", ">=", "100" ] }
       }

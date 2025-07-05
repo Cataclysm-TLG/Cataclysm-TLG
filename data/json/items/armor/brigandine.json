@@ -63,7 +63,7 @@
     "looks_like": "armguard_hard",
     "color": "light_gray",
     "environmental_protection": 1,
-    "flags": [ "OUTER", "BLOCK_WHILE_WORN", "STURDY", "VARSIZE" ],
+    "flags": [ "OUTER", "STURDY", "VARSIZE" ],
     "armor": [
       {
         "material": [

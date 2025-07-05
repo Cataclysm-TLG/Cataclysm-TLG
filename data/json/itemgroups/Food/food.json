@@ -7,23 +7,25 @@
     "subtype": "distribution",
     "entries": [
       { "item": "jar_glass_sealed", "prob": 10 },
-      { "item": "jar_3l_glass_sealed", "prob": 10 },
+      { "item": "jar_3l_glass_sealed", "prob": 3 },
       { "group": "cheese_hard_wrapper_8", "prob": 5 },
       { "group": "veggy_pickled_jar_glass_sealed_2", "prob": 50 },
       { "group": "sauerkraut_jar_glass_sealed_2", "prob": 10 },
       { "group": "meat_pickled_jar_glass_sealed_2", "prob": 20 },
-      { "group": "confit_meat_jar_3l_glass_sealed_12", "prob": 5 },
+      { "group": "confit_meat_jar_3l_glass_sealed_12", "prob": 3 },
       { "group": "fish_pickled_jar_glass_sealed_2", "prob": 30 },
       { "group": "lobster_canned_jar_glass_sealed_2", "prob": 10 },
-      { "group": "meat_canned_jar_3l_glass_sealed_12", "prob": 5 },
-      { "group": "veggy_canned_jar_3l_glass_sealed_12", "prob": 5 },
-      { "group": "apple_canned_jar_3l_glass_sealed_24", "prob": 5 },
-      { "group": "can_tomato_jar_3l_glass_sealed_24", "prob": 5 },
-      { "group": "meat_pickled_jar_3l_glass_sealed_12", "prob": 5 },
-      { "group": "veggy_pickled_jar_3l_glass_sealed_12", "prob": 5 },
-      { "item": "brandied_fruit", "prob": 10, "charges": 12, "container-item": "jar_3l_glass_sealed" },
-      { "group": "fish_pickled_jar_3l_glass_sealed_12", "prob": 5 },
-      { "item": "sauce_red", "prob": 60, "charges": 48, "container-item": "jar_3l_glass_sealed" },
+      { "group": "meat_canned_jar_3l_glass_sealed_12", "prob": 3 },
+      { "group": "veggy_canned_jar_3l_glass_sealed_12", "prob": 3 },
+      { "group": "apple_canned_jar_3l_glass_sealed_24", "prob": 3 },
+      { "group": "can_tomato_jar_3l_glass_sealed_24", "prob": 3 },
+      { "group": "meat_pickled_jar_3l_glass_sealed_12", "prob": 3 },
+      { "group": "veggy_pickled_jar_3l_glass_sealed_12", "prob": 3 },
+      { "item": "brandied_fruit", "prob": 3, "charges": 12, "container-item": "jar_3l_glass_sealed" },
+      { "item": "brandied_fruit", "prob": 3, "charges": 2, "container-item": "jar_glass_sealed" },
+      { "group": "fish_pickled_jar_3l_glass_sealed_12", "prob": 3 },
+      { "item": "sauce_red", "prob": 5, "charges": 48, "container-item": "jar_3l_glass_sealed" },
+      { "item": "sauce_red", "prob": 60, "charges": 8, "container-item": "jar_glass_sealed" },
       { "item": "kompot", "prob": 10, "charges": 12, "container-item": "jar_3l_glass_sealed" },
       { "item": "freeze_dried_meal", "prob": 10 }
     ]
@@ -384,8 +386,9 @@
       { "item": "cooking_oil2", "prob": 40 },
       { "item": "honey_bottled", "prob": 15 },
       { "group": "honey_glassed_jar_glass_sealed_5", "prob": 5 },
+      { "item": "sauce_red", "prob": 10, "charges": 8, "container-item": "jar_glass_sealed" },
       { "item": "jar_glass_sealed", "prob": 20 },
-      { "item": "jar_3l_glass_sealed", "prob": 30 },
+      { "item": "jar_3l_glass_sealed", "prob": 5 },
       { "item": "vinegar", "prob": 15 }
     ]
   },
@@ -1176,9 +1179,8 @@
     "type": "item_group",
     "id": "bread_wheat_free_bag_plastic_14",
     "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
     "container-item": "bag_plastic",
-    "entries": [ { "item": "bread_wheat_free", "container-item": "null", "count": 14 } ]
+    "entries": [ { "item": "bread_wheat_free", "container-item": "null", "components": [ "flour_wheat_free" ], "count": 14 } ]
   },
   {
     "type": "item_group",

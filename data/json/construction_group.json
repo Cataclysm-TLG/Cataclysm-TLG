@@ -1172,11 +1172,6 @@
   },
   {
     "type": "construction_group",
-    "id": "place_big_portable_fridge",
-    "name": "Place Food Truck Fridge"
-  },
-  {
-    "type": "construction_group",
     "id": "place_glass_fridge",
     "name": "Place Single Glass Door Fridge"
   },
@@ -1209,11 +1204,6 @@
     "type": "construction_group",
     "id": "place_minifreezer",
     "name": "Place Minifreezer"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_big_portable_freezer",
-    "name": "Place Food Truck Freezer"
   },
   {
     "type": "construction_group",
@@ -1269,6 +1259,11 @@
     "type": "construction_group",
     "id": "place_kiln",
     "name": "Place Kiln"
+  },
+  {
+    "type": "construction_group",
+    "id": "place_glassblowers_crucible",
+    "name": "Place Glassblower's Crucible"
   },
   {
     "type": "construction_group",
@@ -1478,7 +1473,7 @@
   {
     "type": "construction_group",
     "id": "place_anvil_crude",
-    "name": "Place Crude Anvil"
+    "name": "Place Small Anvil"
   },
   {
     "type": "construction_group",
@@ -1774,11 +1769,6 @@
     "type": "construction_group",
     "id": "build_clay_oven",
     "name": "Build Clay Oven"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_asrg_containment",
-    "name": "Place ASRG"
   },
   {
     "type": "construction_group",

@@ -2,10 +2,11 @@
   {
     "type": "overmap_terrain",
     "id": [ "nether_glass", "nether_glass_deep", "nether_glass_impassable" ],
+    "vision_levels": "always_full",
     "name": "abyss",
     "sym": " ",
     "color": "black",
-    "see_cost": 10,
+    "see_cost": "opaque",
     "flags": [ "RISK_EXTREME" ]
   }
 ]

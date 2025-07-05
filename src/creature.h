@@ -447,10 +447,6 @@ class Creature : public viewer
         void knock_back_from( const tripoint &p );
         virtual void knock_back_to( const tripoint &to ) = 0;
 
-        // Converts the "cover_vitals" protection on the specified body part into
-        // a modifier (between 0 and 1) that would be applied to incoming critical damage
-        float get_crit_factor( const bodypart_id &bp ) const;
-
         int size_melee_penalty() const;
         // begins a melee attack against the creature
         // returns hit - dodge (>=0 = hit, <0 = miss)
@@ -509,7 +505,7 @@ class Creature : public viewer
          * @param name Name of the implement used to pull the target.
          * @param p Position of the target creature.
         */
-        void longpull( const std::string &name, const tripoint &p );
+        void longpull( const std::string &name, const tripoint_bub_ms &p );
 
         // For pulling creatures while grabbing them and moving.
         bool grapple_drag( Creature *c );
@@ -612,7 +608,7 @@ class Creature : public viewer
         void check_dead_state();
 
         /** Processes move stopping effects. Returns false if movement is stopped. */
-        virtual bool move_effects( bool attacking ) = 0;
+        virtual bool move_effects( bool attacking, tripoint dest_loc ) = 0;
 
         // Next three functions don't do anything but forward to next functions with nullptr
         // as source they should be removed once all effect sources are assigned
@@ -1366,6 +1362,7 @@ class Creature : public viewer
         // do messaging and SCT for projectile hit
         void messaging_projectile_attack( const Creature *source,
                                           const projectile_attack_results &hit_selection, int total_damage ) const;
+        void print_proj_avoid_msg( Creature *source, viewer &player_view ) const;
 };
 std::unique_ptr<talker> get_talker_for( Creature &me );
 std::unique_ptr<talker> get_talker_for( const Creature &me );

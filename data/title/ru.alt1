@@ -1,18 +1,21 @@
-<color_light_cyan>   ______  ___                                                                  </color>
-<color_light_cyan>   \_    |/ _/_____ ________ _____   ___  __   ___   __ __  ______   __ __      </color>
-<color_light_cyan>    |      <  \__  \\__   __\\__  \  \  |/ /  /   \ |  |  | \____ \ /  V  \     </color>
-<color_light_cyan>    |    |  \  / __ \_ |  |   / __ \_|    <  /  Y  \|  /  | _(__  <|  Y Y  \    </color>
-<color_light_cyan>    |____|__ \(____  / |__|  (____  /|__|_ \|___|  /\__/  //____  /|__|_|  /    </color>
-<color_light_cyan>            \/     \/             \/      \/     \/     \/      \/       \/     </color>
-<color_red>            ________ .               .__                     __                 </color>
-<color_red>            \______ \|\       ____   |  |  _____    ______ _/  |_               </color>
-<color_red>               |  |  | \__  _/ __ \  |  |  \__  \  /  ___/ \   __\              </color>
-<color_red>               |  |  |  _ \ \  ___/  |  |__ / __ \ \___ \   |  |                </color>
-<color_red>               |__|  |_| \_\ \___  > |____/(____  /_____  > |__|                </color>
-<color_red>                                 \/             \/      \/                      </color>
-<color_light_gray>  _________                                           __                        </color>
-<color_light_gray>  \_   ____\   ____   ______     ___   ____ _____   _/  |_ ._    ___   ______   </color>
-<color_light_gray>  /   / ______/ __ \ |      \ _/ __ \ |   _|\__  \  \   __\| \  /   \ |      \  </color>
-<color_light_gray>  \   \/__  /\  ___/ |  |\   \\  ___/ |  /   / __ \  |  |  |  |<  |  >|  |\   \ </color>
-<color_light_gray>   \_____  /  \____ >|__| \  / \___  >|__|  (____  / |__|  |__| \___/ |__| \  / </color>
-<color_light_gray>         \/       \/       \/      \/            \/                         \/  </color>
+# The ASCII art must be 18 lines in height (6 lines per ascii art text line).
+# Max length of a line (excluding color tags) is 80 characters; the following line is for reference.
+################################################################################
+<color_light_gray>NNNNNNNNNNNNNNNNNNNNNNNNNWWWWWWNNNNNNNNNNNNNNNNNNWWWWWWNNNWWWWWWWWWWNWO,l0WXWWWW
+<color_light_gray>NNKXNNNNNNNN0o0NNNNNN <color_red> катаклизм: The Last Generation <color_light_gray>WWWWWWWWWNWd,lONWWWWW
+<color_light_gray>oxlld0KK0O0dc,cx0XOXXXXXXXXXXXXXXXNNNNNNNWWWWNNWWWWWWWWWWWWWWWWWWWWWNx;,dXWWWNWW
+<color_light_gray>''.,;:oc;,,'.',;:c:oxklkOOKKKKKKKKKKKKKXXXXXXXXXXXNNNNNNNNNNNNNNNWWXW0';oXNWNx00
+<color_light_gray>.'.,,,,......'',,;;;;,,:;cdoxkOOOO00000Ox0XXKKKKKKKKKKKKKKKKKKXXXXXKKk',okxko::;
+<color_light_gray>...''.......'''',,;;;,;,,;::coxxxkkkkkd:;:oO0OOOOOO0OOO0KKOOOOOOOkkxd;.,l:;,,,,'
+<color_light_gray>......',,','..;;;;;;:,;:::cldO00KKXXK0c..':ldOKKKKKXKXNNXK000Okooolc:..,:,''''''
+<color_light_gray>::;;;,,;:;:c,,oooolllccloodxkOO00KXNNl' .';:clkXNNNXXXXXXOxdlc:::::::..,,''''.'.
+<color_light_gray>cccccc::odlccc:;;::cloodooodxO00OOO00. .....,cdK0OOkdolc:::::;;,:::,..;;,,,,,''
+<color_light_gray>:::cloc:;:cllol:;:c::::cloddddxxkkOOc . .',oooollccc::::::;;;;;;'.'c:;;,,,''
+<color_light_gray>::;:ddl;;;,,',lc;;,;;:cdl::clooodddx,.. .c.lxxdollc::;;;:;,:l.,;..,c:;,',,''
+<color_light_gray>:xOxxxkxl:;::',oo'..'ldkddddocclclodl'c. ;. 'd:dddoc::;;,,;;;',;:c,,..;:::,',,''
+<color_light_gray>::clddxkkollclc:;,''..''''',',::cccclcd, '. lOdOkkxoc;;,,,'','.',.,'.'cc:;,,:Okl
+<color_light_gray>:;,,;::;cd00Oxdoccoddoollllllcllllllllo.cl;.;ddoloc::;;;,.....''';;..,c;lk0000kd
+<color_light_gray> .......,,;:clloodolooolll:;:::llllllcl:.;;.lllllllc::;;. .',:lldo:..'cllll:::cc
+<color_light_gray> .............':cclllloodxxxxxxxddddx.'.,k00OOkkkxxxdddoolcc:;'..'',,',,,'...
+<color_light_gray> ..................''''',;:ccccccclll:cxOOOkkkkxxxxxdlcl:,,'................
+<color_light_gray> ... ...........'',:cloxxxxxxxxxxxxdddool:,'.......................

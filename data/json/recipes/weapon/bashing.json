@@ -1,5 +1,20 @@
 [
   {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "bat",
+    "byproducts": [ [ "splinter", 10 ] ],
+    "category": "CC_WEAPON",
+    "subcategory": "CSC_WEAPON_BASHING",
+    "skill_used": "fabrication",
+    "difficulty": 4,
+    "time": "3 h",
+    "autolearn": true,
+    "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 2 } ],
+    "components": [ [ [ "wooden_post", 1 ] ] ]
+  },
+  {
     "result": "hollow_cane",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
@@ -28,7 +43,7 @@
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "tools": [ [ [ "char_smoker", 100 ] ] ],
-    "components": [ [ [ "log", 1 ] ], [ [ "butter", 30 ], [ "edible_lard", 4, "LIST" ] ] ]
+    "components": [ [ [ "log", 1 ] ], [ [ "butter", 30 ], [ "raw_butter", 30 ], [ "edible_lard", 4, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -119,13 +134,14 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
-    "skills_required": [ "bashing", 2 ],
-    "difficulty": 3,
+    "skills_required": [ [ "bashing", 2 ], [ "mechanics", 1 ] ],
+    "difficulty": 4,
+    "book_learn": [ [ "textbook_weapwest", 3 ] ],
     "time": "3 h",
     "autolearn": true,
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "proficiencies": [ { "proficiency": "prof_carving" }, { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 } ],
-    "components": [ [ [ "2x4", 1 ], [ "stick_long", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "DRILL", "level": 1 } ],
+    "proficiencies": [ { "proficiency": "prof_carving" } ],
+    "components": [ [ [ "2x4", 1 ], [ "stick_long", 1 ] ], [ [ "rope_6", 1 ], [ "chain", 1 ], [ "rope_makeshift_6", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -134,6 +150,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
+    "skills_required": [ [ "bashing", 2 ], [ "mechanics", 1 ] ],
     "difficulty": 7,
     "time": "7 h",
     "book_learn": [ [ "textbook_weapwest", 6 ] ],
@@ -195,7 +212,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
-    "skills_required": [ "bashing", 2 ],
+    "skills_required": [ [ "bashing", 2 ], [ "mechanics", 1 ] ],
     "difficulty": 3,
     "time": "3 h",
     "autolearn": true,
@@ -272,14 +289,14 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "glass_macuahuitl",
+    "result": "macuahuitl_glass",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_CUTTING",
     "skill_used": "fabrication",
-    "difficulty": 1,
+    "difficulty": 3,
     "time": "10 m",
     "reversible": true,
-    "autolearn": true,
+    "book_learn": [ [ "textbook_mesoam", 3 ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "using": [ [ "adhesive", 5 ] ],
     "components": [ [ [ "glass_shard", 30 ], [ "black_glass_shard", 30 ], [ "ceramic_shard", 30 ], [ "flint", 30 ] ], [ [ "2x4", 1 ] ] ]
@@ -291,10 +308,10 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_CUTTING",
     "skill_used": "fabrication",
-    "difficulty": 1,
+    "difficulty": 3,
     "time": "10 m",
     "reversible": true,
-    "autolearn": true,
+    "book_learn": [ [ "textbook_mesoam", 3 ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "using": [ [ "adhesive", 5 ] ],
     "components": [ [ [ "nm_teeth", 30 ] ], [ [ "2x4", 1 ] ] ]

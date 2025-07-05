@@ -823,6 +823,7 @@
         { "item": "pipe", "count": [ 0, 2 ] }
       ]
     },
+    "liquid_source": { "id": "water" },
     "examine_action": "water_source"
   },
   {
@@ -849,6 +850,7 @@
       "ter_set": "t_covered_well",
       "items": [ { "item": "string_6", "count": [ 0, 18 ] }, { "item": "splinter", "count": [ 0, 24 ] } ]
     },
+    "liquid_source": { "id": "water" },
     "examine_action": "water_source"
   },
   {
@@ -862,7 +864,8 @@
     "move_cost": 6,
     "coverage": 40,
     "concealment": 40,
-    "flags": [ "TRANSPARENT", "THIN_OBSTACLE", "SALT_WATER" ],
+    "liquid_source": { "id": "salt_water", "min_temp": 2.2 },
+    "flags": [ "TRANSPARENT", "THIN_OBSTACLE" ],
     "deconstruct": { "ter_set": "t_covered_well", "items": [ { "item": "well_pump", "count": 1 }, { "item": "pipe", "count": [ 1, 6 ] } ] },
     "bash": {
       "str_min": 15,
@@ -891,6 +894,7 @@
     "coverage": 40,
     "concealment": 40,
     "flags": [ "TRANSPARENT", "LIQUIDCONT" ],
+    "liquid_source": { "id": "water_clean", "count": [ 40, 240 ] },
     "bash": {
       "str_min": 15,
       "str_max": 80,
@@ -1415,6 +1419,7 @@
       "sound_fail": "whump!",
       "items": [ { "item": "rock_large", "count": [ 0, 20 ] }, { "item": "sharp_rock", "count": [ 0, 16 ] } ]
     },
+    "deconstruct": { "ter_set": "t_dirt", "items": [ { "item": "rock_large", "count": 22 } ] },
     "flags": [ "TRANSPARENT", "THIN_OBSTACLE", "SHORT", "ROUGH", "UNSTABLE", "PERMEABLE", "EASY_DECONSTRUCT" ]
   },
   {
@@ -1535,11 +1540,11 @@
       "INDOORS",
       "MOUNTABLE",
       "HIDE_PLACE",
-      "EASY_DECONSTRUCT",
       "FIRE_CONTAINER",
       "PLACE_ITEM"
     ],
     "examine_action": "fireplace",
+    "deconstruct": { "ter_set": "t_pit_shallow", "items": [ { "item": "stick", "count": 12 }, { "item": "pine_bough", "count": 24 } ] },
     "bash": {
       "str_min": 4,
       "str_max": 60,
@@ -1572,9 +1577,12 @@
       "FLAMMABLE_ASH",
       "TINDER",
       "MOUNTABLE",
-      "HIDE_PLACE",
-      "EASY_DECONSTRUCT"
+      "HIDE_PLACE"
     ],
+    "deconstruct": {
+      "ter_set": "t_pit_shallow",
+      "items": [ { "item": "stick", "count": 12 }, { "item": "pine_bough", "count": 24 }, { "item": "withered", "count": 80 } ]
+    },
     "bash": {
       "str_min": 4,
       "str_max": 60,
@@ -1603,10 +1611,15 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "items": [
-        { "item": "stick", "count": [ 2, 7 ] },
-        { "item": "splinter", "count": [ 8, 20 ] },
-        { "item": "pine_bough", "count": [ 0, 2 ] }
+        { "item": "pointy_stick", "count": [ 1, 4 ] },
+        { "item": "splinter", "count": [ 0, 10 ] },
+        { "item": "string_6", "count": [ 0, 4 ] },
+        { "item": "pine_bough", "count": [ 0, 4 ] }
       ]
+    },
+    "deconstruct": {
+      "ter_set": "t_dirt",
+      "items": [ { "item": "pointy_stick", "count": 4 }, { "item": "string_6", "count": 4 }, { "item": "pine_bough", "count": 4 } ]
     },
     "connect_groups": "INDOORFLOOR",
     "flags": [

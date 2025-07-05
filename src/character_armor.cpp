@@ -251,7 +251,7 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
     }
     map &here = get_map();
     for( item &remain : worn_remains ) {
-        here.add_item_or_charges( pos(), remain );
+        here.add_item_or_charges( pos_bub(), remain );
     }
     if( armor_destroyed ) {
         drop_invalid_inventory();
@@ -262,10 +262,8 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
 bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &bp,
                               const sub_bodypart_id &sbp, int roll ) const
 {
-    item::cover_type ctype = item::get_cover_type( du.type );
-
     // if the core armor is missed then exit
-    if( roll > armor.get_coverage( sbp, ctype ) ) {
+    if( roll > armor.get_coverage( sbp ) ) {
         return false;
     }
     // if this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
@@ -292,9 +290,11 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
 
 bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &bp, int roll ) const
 {
-    item::cover_type ctype = item::get_cover_type( du.type );
+    if( !has_part( bp ) ) {
+        return false;
+    }
 
-    if( roll > armor.get_coverage( bp, ctype ) ) {
+    if( roll > armor.get_coverage( bp ) ) {
         return false;
     }
     // If this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
@@ -322,7 +322,6 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
 bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_bodypart_id &bp,
                                        int roll )
 {
-    item::cover_type ctype = item::get_cover_type( du.type );
 
     for( item_pocket *const pocket : armor.get_all_ablative_pockets() ) {
         // if the pocket is ablative and not empty we should use its values
@@ -330,7 +329,7 @@ bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_b
             // get the contained plate
             item &ablative_armor = pocket->front();
 
-            float coverage = ablative_armor.get_coverage( bp, ctype );
+            float coverage = ablative_armor.get_coverage( bp );
 
             // if the attack hits this plate
             if( roll <= coverage ) {

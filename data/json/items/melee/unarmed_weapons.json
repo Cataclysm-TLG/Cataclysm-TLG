@@ -66,11 +66,56 @@
   },
   {
     "type": "ARMOR",
+    "id": "bagh_nakha",
+    "name": { "str": "pair of bagh nakh", "str_pl": "pairs of bagh nakh" },
+    "description": "Also called tiger claws, these Indian weapons consist of two sets of finger rings that secure curved steel claws to the wearer's palms, allowing for vicious unarmed attacks while worn.",
+    "weight": "320 g",
+    "volume": "250 ml",
+    "color": "dark_gray",
+    "symbol": "3",
+    "material": [ "steel" ],
+    "to_hit": { "grip": "weapon", "length": "hand", "surface": "any", "balance": "neutral" },
+    "flags": [ "DURABLE_MELEE", "WORN_WEAPON", "ALLOWS_NATURAL_ATTACKS", "PADDED", "OUTER", "BELTED", "PROVIDES_TECHNIQUES" ],
+    "weapon_category": [ "CLAWS" ],
+    "material_thickness": 1.5,
+    "armor": [
+      {
+        "encumbrance": 15,
+        "coverage": 20,
+        "covers": [ "hand_l", "hand_r" ],
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
+        "rigid_layer_only": true
+      }
+    ],
+    "techniques": [ "TEC_CLAW_PALM" ],
+    "price": "200 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 14 ] ],
+    "melee_damage": { "bash": 2, "cut": 15 }
+  },
+  {
+    "id": "bagh_nakha_xl",
+    "type": "ARMOR",
+    "name": { "str": "pair of bagh nakh", "str_pl": "pairs of bagh nakh" },
+    "copy-from": "bagh_nakha",
+    "proportional": { "weight": 1.5, "volume": 1.5 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "bagh_nakha_xs",
+    "type": "ARMOR",
+    "name": { "str": "pair of bagh nakh", "str_pl": "pairs of bagh nakh" },
+    "copy-from": "bagh_nakha",
+    "proportional": { "weight": 0.75, "volume": 0.75 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "type": "ARMOR",
     "id": "knuckle_brass",
     "symbol": "3",
     "color": "yellow",
     "name": { "str": "pair of brass knuckles", "str_pl": "pairs of brass knuckles" },
-    "description": "A metal weapon made of brass, designed to be gripped in the palm to cause punches to do extra damage.  A good, quick weapon - but you have to get within punching range to use it.",
+    "description": "Two sets of metal rings connected to lugs which are worn over the fingers to add a good deal of power to the user's punches.",
     "material": [ "brass" ],
     "weight": "320 g",
     "volume": "250 ml",

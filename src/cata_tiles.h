@@ -34,6 +34,7 @@ class JsonObject;
 class pixel_minimap;
 
 extern void set_displaybuffer_rendertarget();
+using ter_str_id = string_id<ter_t>;
 
 /** Structures */
 struct tile_type {
@@ -65,6 +66,7 @@ enum class TILE_CATEGORY {
     HIT_ENTITY,
     WEATHER,
     OVERMAP_TERRAIN,
+    OVERMAP_VISION_LEVEL,
     OVERMAP_WEATHER,
     MAP_EXTRA,
     OVERMAP_NOTE,
@@ -85,6 +87,7 @@ const std::unordered_map<std::string, TILE_CATEGORY> to_TILE_CATEGORY = {
     {"hit_entity", TILE_CATEGORY::HIT_ENTITY},
     {"weather", TILE_CATEGORY::WEATHER},
     {"overmap_terrain", TILE_CATEGORY::OVERMAP_TERRAIN},
+    {"overmap_vision_level", TILE_CATEGORY::OVERMAP_VISION_LEVEL},
     {"overmap_weather", TILE_CATEGORY::OVERMAP_WEATHER},
     {"map_extra", TILE_CATEGORY::MAP_EXTRA},
     {"overmap_note", TILE_CATEGORY::OVERMAP_NOTE}
@@ -140,14 +143,21 @@ class texture
         }
 };
 
-class layer_variant
+/**
+* Holds weighted map of sprites for contextual tile layering
+* e.g. different sprites for item "pen" on "f_desk"
+*/
+class layer_context_sprites
 {
     public:
         std::string id;
         std::map<std::string, int> sprite;
+        //draw order is sorted by layer
         int layer;
         point offset;
         int total_weight;
+        //if set, appends to the sprite name for handling contexts
+        std::string append_suffix;
 };
 
 class tileset
@@ -198,8 +208,8 @@ class tileset
 
     public:
 
-        std::unordered_map<std::string, std::vector<layer_variant>> item_layer_data;
-        std::unordered_map<std::string, std::vector<layer_variant>> field_layer_data;
+        std::unordered_map<std::string, std::vector<layer_context_sprites>> item_layer_data;
+        std::unordered_map<std::string, std::vector<layer_context_sprites>> field_layer_data;
 
         void clear();
 
@@ -716,8 +726,8 @@ class cata_tiles
         static std::vector<options_manager::id_and_option> build_renderer_list();
         static std::vector<options_manager::id_and_option> build_display_list();
     private:
-        std::string get_omt_id_rotation_and_subtile(
-            const tripoint_abs_omt &omp, int &rota, int &subtile );
+        std::pair<std::string, bool> get_omt_id_rotation_and_subtile( const tripoint_abs_omt &omp,
+                int &rota, int &subtile );
     protected:
         template <typename maptype>
         void tile_loading_report_map( const maptype &tiletypemap, TILE_CATEGORY category,

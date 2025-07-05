@@ -380,7 +380,7 @@
     "type": "COMESTIBLE",
     "comestible_type": "MED",
     "name": { "str": "cigar" },
-    "description": "Rolled, cured tobacco leaf, addictive and hazardous to health.\nA gentleman's vice, cigars set the civil man apart from the savage.",
+    "description": "Rolled, cured tobacco leaf, addictive and hazardous to health.",
     "weight": "9 g",
     "volume": "50 ml",
     "price": "2 USD",
@@ -1776,7 +1776,10 @@
       "type": "consume_drug",
       "activation_message": "You take the %s.",
       "vitamins": [ [ "calcium", 24, 48 ], [ "iron", 24, 48 ], [ "vitC", 24, 48 ] ]
-    }
+    },
+    "//": "Yes, the vitamins are intentionally duplicated here. The consume/use/iteminfo UI needs them in use_action, but to actually pass on the vitamins they need to be in the comestible data, as below.",
+    "//2": "TODO: Fix this...",
+    "vitamins": [ [ "calcium", 36 ], [ "iron", 36 ], [ "vitC", 36 ] ]
   },
   {
     "id": "calcium_tablet",
@@ -2124,6 +2127,6 @@
     "addiction_potential": 5,
     "addiction_type": "cocaine",
     "flags": [ "NO_INGEST", "WATER_DISSOLVE" ],
-    "use_action": { "type": "heal", "bleed": 20, "move_cost": 3000, "effects": [ { "id": "pkill1_generic", "duration": 720 } ] }
+    "use_action": { "type": "heal", "bleed": 10, "move_cost": 3000, "effects": [ { "id": "pkill1_generic", "duration": 720 } ] }
   }
 ]

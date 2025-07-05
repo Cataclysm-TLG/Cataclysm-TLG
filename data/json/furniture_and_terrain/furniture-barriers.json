@@ -47,7 +47,7 @@
     "examine_action": "chainfence",
     "deconstruct": { "items": [ { "group": "gravelbag", "count": 16 } ] },
     "bash": {
-      "str_min": 12,
+      "str_min": 10,
       "str_max": 60,
       "sound": "rrrip!",
       "sound_fail": "whump.",
@@ -111,7 +111,7 @@
     "examine_action": "chainfence",
     "deconstruct": { "items": [ { "group": "earthbag", "count": 16 } ] },
     "bash": {
-      "str_min": 12,
+      "str_min": 10,
       "str_max": 60,
       "sound": "rrrip!",
       "sound_fail": "whump.",

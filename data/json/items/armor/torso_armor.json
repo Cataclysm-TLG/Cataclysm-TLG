@@ -71,7 +71,7 @@
     "longest_side": "60 cm",
     "warmth": 15,
     "material_thickness": 2,
-    "flags": [ "OUTER", "STURDY" ],
+    "flags": [ "OUTER" ],
     "armor": [ { "encumbrance": 17, "coverage": 95, "covers": [ "torso" ], "rigid_layer_only": true } ],
     "melee_damage": { "bash": 6 }
   },
@@ -101,6 +101,7 @@
     "volume": "9250 ml",
     "price": "1 USD 20 cent",
     "price_postapoc": "50 cent",
+    "category": "armor",
     "material": [ "carpet_pilling", "plastic" ],
     "symbol": "[",
     "looks_like": "tunic_rag",
@@ -115,7 +116,7 @@
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
         ],
-        "encumbrance": 16,
+        "encumbrance": 38,
         "coverage": 85,
         "covers": [ "torso" ]
       },
@@ -124,7 +125,7 @@
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
         ],
-        "encumbrance": 5,
+        "encumbrance": 10,
         "coverage": 85,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
@@ -134,7 +135,7 @@
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
           { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
         ],
-        "encumbrance": 5,
+        "encumbrance": 10,
         "coverage": 85,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
@@ -158,11 +159,24 @@
     "category": "armor",
     "color": "light_gray",
     "warmth": 15,
-    "material_thickness": 2,
     "flags": [ "VARSIZE", "OUTER", "STURDY" ],
     "armor": [
-      { "encumbrance": 30, "coverage": 90, "covers": [ "torso" ] },
       {
+        "material": [
+          { "type": "steel", "covered_by_mat": 80, "thickness": 1.3 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "coverage": 90,
+        "encumbrance": 17,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [
+          { "type": "steel", "covered_by_mat": 80, "thickness": 1.3 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
         "encumbrance": 4,
         "coverage": 90,
         "covers": [ "arm_l", "arm_r" ],
@@ -187,27 +201,6 @@
     "name": { "str_sp": "lorica segmentata" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
-    "id": "tireplate",
-    "type": "ARMOR",
-    "category": "armor",
-    "name": { "str": "tireplate" },
-    "description": "Armor fashioned from from overlapping chunks of tire and rolls of duct tape, covering the shoulders and torso.",
-    "weight": "5790 g",
-    "volume": "9500 ml",
-    "price": "42 USD",
-    "price_postapoc": "1 USD",
-    "to_hit": -1,
-    "material": [ "rubber" ],
-    "symbol": "O",
-    "looks_like": "armor_lorica",
-    "color": "light_gray",
-    "warmth": 10,
-    "longest_side": "40 cm",
-    "material_thickness": 4,
-    "flags": [ "OUTER", "NONCONDUCTIVE" ],
-    "armor": [ { "encumbrance": 22, "coverage": 80, "covers": [ "torso" ], "rigid_layer_only": true } ]
   },
   {
     "id": "cloth_shirt_padded",
@@ -317,22 +310,13 @@
     "color": "light_gray",
     "warmth": 20,
     "longest_side": "60 cm",
-    "material_thickness": 1.3,
     "flags": [ "OUTER", "STURDY", "RAINPROOF" ],
     "armor": [
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2 } ],
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "coverage": 90,
+        "coverage": 95,
         "encumbrance": 17,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 } ],
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "coverage": 100,
         "rigid_layer_only": true
       }
     ]
@@ -372,7 +356,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "flags": [ "OUTER", "NONCONDUCTIVE" ],
-    "armor": [ { "encumbrance": 22, "coverage": 80, "covers": [ "torso" ], "rigid_layer_only": true } ]
+    "armor": [ { "encumbrance": 21, "coverage": 80, "covers": [ "torso" ], "rigid_layer_only": true } ]
   },
   {
     "id": "tire_cuirass_xl",
@@ -380,14 +364,14 @@
     "name": { "str": "tire cuirass", "str_pl": "tire cuirasses" },
     "copy-from": "tire_cuirass",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "flags": [ "OVERSIZE", "OUTER", "NONCONDUCTIVE", "PREFIX_XL" ]
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "tire_cuirass_xs",
     "type": "ARMOR",
     "copy-from": "tire_cuirass",
     "looks_like": "tire_cuirass",
-    "name": { "str": "tire cuirass", "str_pl": "XS tire cuirasses" },
+    "name": { "str": "tire cuirass", "str_pl": "tire cuirasses" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -407,16 +391,17 @@
     "warmth": 20,
     "material_thickness": 3,
     "flags": [ "STURDY" ],
-    "armor": [ { "encumbrance": 9, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r" ] } ]
+    "armor": [ { "encumbrance": 14, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r" ] } ]
   },
   {
     "id": "jacket_leather_mod",
     "type": "ARMOR",
     "name": { "str": "armored riding jacket" },
-    "description": "A heavy-duty leather jacket with metal plates drilled onto various areas for increased protection.",
+    "description": "A heavy-duty leather jacket with sheet metal plates secured over it for increased protection.",
     "weight": "7500 g",
     "volume": "4500 ml",
     "price": "179 USD",
+    "category": "armor",
     "price_postapoc": "25 USD",
     "to_hit": -3,
     "material": [ "steel", "leather" ],
@@ -427,7 +412,7 @@
       {
         "covers": [ "torso" ],
         "coverage": 100,
-        "encumbrance": [ 28, 32 ],
+        "encumbrance": [ 34, 38 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
@@ -437,7 +422,7 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 100,
-        "encumbrance": [ 28, 28 ],
+        "encumbrance": [ 36, 36 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
@@ -469,9 +454,10 @@
     "id": "jacket_jean_mod",
     "type": "ARMOR",
     "name": { "str": "armored jean jacket" },
-    "description": "A denim jacket reinforced with metal plates.  Adequately protective, but not very sturdy.",
+    "description": "A denim jacket reinforced with sheet metal plates.",
     "weight": "6350 g",
     "volume": "5750 ml",
+    "category": "armor",
     "price": "150 USD",
     "price_postapoc": "20 USD",
     "material": [ "steel", "denim" ],
@@ -482,7 +468,7 @@
       {
         "covers": [ "torso" ],
         "coverage": 100,
-        "encumbrance": [ 24, 28 ],
+        "encumbrance": [ 32, 36 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
@@ -492,7 +478,7 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 100,
-        "encumbrance": [ 24, 24 ],
+        "encumbrance": [ 34, 34 ],
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
@@ -524,7 +510,7 @@
     "id": "vest_jean_mod",
     "type": "ARMOR",
     "name": { "str": "armored jean vest" },
-    "description": "A denim vest reinforced with metal plates.  Adequately protective, but not very sturdy.",
+    "description": "A denim vest reinforced with sheet metal plates.",
     "weight": "4100 g",
     "volume": "4100 ml",
     "price": "130 USD",
@@ -537,7 +523,7 @@
       {
         "covers": [ "torso" ],
         "coverage": 100,
-        "encumbrance": [ 24, 28 ],
+        "encumbrance": [ 32, 36 ],
         "material": [
           { "type": "steel", "covered_by_mat": 80, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
@@ -568,7 +554,6 @@
   {
     "id": "jacket_leather_tire",
     "type": "ARMOR",
-    "category": "armor",
     "name": { "str_sp": "tire armor jacket" },
     "description": "A heavy leather jacket reinforced with chunks of thick rubber tire.  Thick and highly resistant to blunt force.",
     "weight": "5800 g",
@@ -582,7 +567,7 @@
       {
         "covers": [ "torso" ],
         "coverage": 100,
-        "encumbrance": [ 24, 28 ],
+        "encumbrance": [ 46, 48 ],
         "material": [
           { "type": "rubber", "covered_by_mat": 80, "thickness": 3.0 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
@@ -592,7 +577,7 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 100,
-        "encumbrance": [ 32, 32 ],
+        "encumbrance": [ 46, 48 ],
         "material": [
           { "type": "rubber", "covered_by_mat": 75, "thickness": 3.0 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
@@ -698,7 +683,7 @@
     "warmth": 15,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "WATERPROOF", "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "WATERPROOF", "OUTER" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -728,6 +713,7 @@
     "price": "179 USD",
     "price_postapoc": "12 USD",
     "to_hit": -3,
+    "category": "armor",
     "material": [ "steel", "leather" ],
     "symbol": "[",
     "looks_like": "vest_leather",
@@ -757,7 +743,7 @@
         "coverage": 90,
         "covers": [ "torso" ],
         "material": [
-          { "type": "steel", "covered_by_mat": 90, "thickness": 1.5 },
+          { "type": "steel", "covered_by_mat": 90, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
         ],
         "rigid_layer_only": true
@@ -823,8 +809,8 @@
     "category": "armor",
     "name": { "str": "leather cuirass", "str_pl": "leather cuirasses" },
     "description": "A durable breastplate made of thick leather.",
-    "weight": "3250 g",
-    "volume": "3500 ml",
+    "weight": "2500 g",
+    "volume": "2800 ml",
     "price": "60 USD",
     "price_postapoc": "12 USD 50 cent",
     "to_hit": -5,
@@ -838,7 +824,7 @@
         "covers": [ "torso" ],
         "coverage": 95,
         "encumbrance": 24,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4.5 } ]
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
       }
     ],
     "warmth": 25,
@@ -1033,7 +1019,8 @@
       "msg": "You adjust your mail for a looser fit.",
       "target": "chainmail_junk_vest_loose",
       "menu_text": "Loosen"
-    }
+    },
+    "delete": { "flags": [ "STURDY" ] }
   },
   {
     "id": "chainmail_junk_vest_loose",
@@ -1045,6 +1032,7 @@
       "msg": "You adjust your mail for a closer fit.",
       "target": "chainmail_junk_vest",
       "menu_text": "Tighten"
-    }
+    },
+    "delete": { "flags": [ "STURDY" ] }
   }
 ]

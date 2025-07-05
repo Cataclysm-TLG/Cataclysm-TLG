@@ -131,8 +131,6 @@ static const json_character_flag json_flag_SUNBURN( "SUNBURN" );
 static const limb_score_id limb_score_breathing( "breathing" );
 static const morale_type morale_feeling_bad( "morale_feeling_bad" );
 static const morale_type morale_feeling_good( "morale_feeling_good" );
-static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
-static const morale_type morale_killer_need_to_kill( "morale_killer_need_to_kill" );
 static const morale_type morale_moodswing( "morale_moodswing" );
 static const morale_type morale_pyromania_nearfire( "morale_pyromania_nearfire" );
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
@@ -140,6 +138,7 @@ static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire
 static const morale_type morale_wet( "morale_wet" );
 
 static const trait_id trait_ADDICTIVE( "ADDICTIVE" );
+static const trait_id trait_ALCMET( "ALCMET" );
 static const trait_id trait_ASTHMA( "ASTHMA" );
 static const trait_id trait_CHAOTIC( "CHAOTIC" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
@@ -150,7 +149,6 @@ static const trait_id trait_FRESHWATEROSMOSIS( "FRESHWATEROSMOSIS" );
 static const trait_id trait_HAS_NEMESIS( "HAS_NEMESIS" );
 static const trait_id trait_JAUNDICE( "JAUNDICE" );
 static const trait_id trait_JITTERY( "JITTERY" );
-static const trait_id trait_KILLER( "KILLER" );
 static const trait_id trait_LEAVES( "LEAVES" );
 static const trait_id trait_LEAVES2( "LEAVES2" );
 static const trait_id trait_LEAVES2_FALL( "LEAVES2_FALL" );
@@ -356,7 +354,7 @@ void suffer::while_grabbed( Character &you )
     crush_grabs_req = std::max( 2, crush_grabs_req );
 
     int crush_resist = 5;
-    for( auto&& dest : here.points_in_radius( you.pos(), 1, 0 ) ) { // *NOPAD*
+    for( auto&& dest : here.points_in_radius( you.pos_bub(), 1, 0 ) ) { // *NOPAD*
         const monster *const mon = creatures.creature_at<monster>( dest );
         if( mon ) {
             int mon_size = static_cast<std::underlying_type_t<creature_size>>( mon->get_size() );
@@ -441,6 +439,10 @@ void suffer::from_addictions( Character &you )
     for( addiction &cur_addiction : you.addictions ) {
         if( cur_addiction.sated <= 0_turns &&
             cur_addiction.intensity >= MIN_ADDICTION_LEVEL ) {
+            if( uistate.distraction_withdrawal && !you.is_npc() ) {
+                g->cancel_activity_or_ignore_query( distraction_type::withdrawal,
+                                                    _( "You start having withdrawals!" ) );
+            }
             cur_addiction.run_effect( you );
         }
         cur_addiction.sated -= 1_turns;
@@ -645,11 +647,11 @@ void suffer::from_asthma( Character &you, const int current_stim )
         } else if( nearby_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
             // create new variable to resolve a reference issue
             int amount = 1;
-            if( !here.use_charges( you.pos(), 2, itype_inhaler, amount ).empty() ) {
+            if( !here.use_charges( you.pos_bub(), 2, itype_inhaler, amount ).empty() ) {
                 you.add_msg_if_player( m_info, _( "You use your inhaler and go back to sleep." ) );
                 you.add_effect( effect_took_antiasthmatic, rng( 6_hours, 12_hours ) );
-            } else if( !here.use_charges( you.pos(), 2, itype_oxygen_tank, amount ).empty() ||
-                       !here.use_charges( you.pos(), 2, itype_smoxygen_tank, amount ).empty() ) {
+            } else if( !here.use_charges( you.pos_bub(), 2, itype_oxygen_tank, amount ).empty() ||
+                       !here.use_charges( you.pos_bub(), 2, itype_smoxygen_tank, amount ).empty() ) {
                 you.add_msg_if_player( m_info, _( "You take a deep breath from your oxygen tank "
                                                   "and go back to sleep." ) );
             }
@@ -1029,24 +1031,29 @@ void suffer::from_sunburn( Character &you, bool severe )
             continue;
         }
 
-        float heavy_cumul_chance = heavy_eff_chance( exposure );
-        float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
-        float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
-        float roll = rng_float( 0.0, 1.0 );
-
+        // Damage player if coverage of body part is <95%
         Sunburn eff;
-        if( roll < heavy_cumul_chance ) {
-            eff = heavy_sunburn( bp );
-        } else if( roll < medium_cumul_chance ) {
-            eff = medium_sunburn( );
-        } else if( roll < light_cumul_chance ) {
-            eff = light_sunburn( );
+        if( exposure > 0.05 || ( bp == bodypart_id( "head" ) && exposure > 0.1 ) ) {
+            float heavy_cumul_chance = heavy_eff_chance( exposure );
+            float medium_cumul_chance = heavy_cumul_chance + medium_eff_chance( exposure );
+            float light_cumul_chance = medium_cumul_chance + light_eff_chance( exposure );
+            float roll = rng_float( 0.0, 1.0 );
+
+            if( roll < heavy_cumul_chance ) {
+                eff = heavy_sunburn( bp );
+            } else if( roll < medium_cumul_chance ) {
+                eff = medium_sunburn( );
+            } else if( roll < light_cumul_chance ) {
+                eff = light_sunburn( );
+            } else {
+                // Do nothing. Assert that exposure is lower than 0.05 as above that point at least light_eff should always happen
+                if( exposure > 0.05 ) {
+                    debugmsg( "No sunburn effect was applied although the bodypart %s is sufficiently exposed at %f exposure",
+                              body_part_name( bp ), exposure );
+                };
+                eff = None;
+            }
         } else {
-            // Do nothing. Assert that exposure is lower than 0.05 as above that point at least light_eff should always happen
-            if( exposure > 0.05 ) {
-                debugmsg( "No sunburn effect was applied although the bodypart %s is sufficiently exposed at %f exposure",
-                          body_part_name( bp ), exposure );
-            };
             eff = None;
         }
         affected_bodyparts.emplace( bp, eff );
@@ -1169,7 +1176,7 @@ void suffer::from_item_dropping( Character &you )
 void suffer::from_other_mutations( Character &you )
 {
     map &here = get_map();
-    const tripoint position = you.pos();
+    const tripoint_bub_ms position = you.pos_bub();
 
     if( you.has_trait( trait_WINGS_INSECT_active ) ) {
         //~Sound of buzzing Insect Wings
@@ -1247,15 +1254,6 @@ void suffer::from_other_mutations( Character &you )
             you.add_msg_if_player( m_bad, "%s", smokin_hot_fiyah );
         }
     }
-    if( you.has_trait( trait_KILLER ) && !you.has_morale( morale_killer_has_killed ) &&
-        calendar::once_every( 2_hours ) ) {
-        you.add_morale( morale_killer_need_to_kill, -1, -30, 24_hours, 24_hours );
-        if( calendar::once_every( 4_hours ) ) {
-            const translation snip = SNIPPET.random_from_category( "killer_withdrawal" ).value_or(
-                                         translation() );
-            you.add_msg_if_player( m_bad, "%s", snip );
-        }
-    }
 }
 
 void suffer::from_mutagen( Character &you )
@@ -1276,7 +1274,7 @@ void suffer::from_radiation( Character &you )
     map &here = get_map();
     // get radioactive leak level of your inventory
     float item_radiation = you.get_leak_level();
-    const int map_radiation = here.get_radiation( you.pos() );
+    const int map_radiation = here.get_radiation( you.pos_bub() );
     float rads = map_radiation / 100.0f + item_radiation / 10.0f;
 
     int rad_mut = 0;
@@ -1293,9 +1291,7 @@ void suffer::from_radiation( Character &you )
     const bool rad_mut_proc = rad_mut > 0 && x_in_y( rad_mut, to_turns<int>( you.in_sleep_state() ?
                               3_hours : 30_minutes ) );
 
-    bool has_helmet = false;
-    const bool power_armored = you.is_wearing_power_armor( &has_helmet );
-    const bool rad_resist = power_armored || you.worn_with_flag( flag_RAD_RESIST );
+    const bool rad_resist = you.worn_with_flag( flag_RAD_RESIST );
 
     if( rad_mut > 0 ) {
         const bool kept_in = you.is_rad_immune() || ( rad_resist && !one_in( 4 ) );
@@ -1307,7 +1303,7 @@ void suffer::from_radiation( Character &you )
         if( rad_mut_proc && !kept_in ) {
             // Irradiate a random nearby point
             // If you can't, irradiate the player instead
-            tripoint rad_point = you.pos() + point( rng( -3, 3 ), rng( -3, 3 ) );
+            tripoint_bub_ms rad_point = you.pos_bub() + point( rng( -3, 3 ), rng( -3, 3 ) );
             // TODO: Radioactive vehicles?
             if( here.get_radiation( rad_point ) < rad_mut ) {
                 here.adjust_radiation( rad_point, 1 );
@@ -1742,7 +1738,7 @@ void suffer::from_artifact_resonance( Character &you, int amt )
                 you.add_msg_player_or_npc( m_bad, _( "You attract the attention of something horrible." ),
                                            _( "<npcname> attracts the attention of something horrible." ) );
                 map &here = get_map();
-                for( const tripoint &dest : here.points_in_radius( you.pos(), 12 ) ) {
+                for( const tripoint_bub_ms &dest : here.points_in_radius( you.pos_bub(), 12 ) ) {
                     if( here.is_cornerfloor( dest ) ) {
                         here.add_field( dest, fd_tindalos_rift, 3 );
                         add_msg( m_info, _( "You hear a low-pitched echoing howl." ) );
@@ -1752,7 +1748,7 @@ void suffer::from_artifact_resonance( Character &you, int amt )
                 you.add_msg_player_or_npc( m_bad, _( "Reality gives way under your feet like rotten scaffolding." ),
                                            _( "Reality gives way under <npcname>'s feet like rotten scaffolding." ) );
                 map &here = get_map();
-                here.add_field( you.pos(), fd_fatigue, 1 );
+                here.add_field( you.pos_bub(), fd_fatigue, 1 );
             } else if( rng_outcome == 3 ) {
                 you.add_msg_player_or_npc( m_bad, _( "You suddenly lose all substance and corporeality." ),
                                            _( "<npcname> suddenly loses all substance and corporeality." ) );
@@ -1903,9 +1899,7 @@ bool Character::irradiate( float rads, bool bypass )
     }
 
     if( rads > 0 ) {
-        bool has_helmet = false;
-        const bool power_armored = is_wearing_power_armor( &has_helmet );
-        const bool rad_resist = power_armored || worn_with_flag( flag_RAD_RESIST );
+        const bool rad_resist = worn_with_flag( flag_RAD_RESIST );
 
         if( is_rad_immune() && !bypass ) {
             // Power armor and some high-tech gear protects completely from radiation
@@ -1989,7 +1983,8 @@ void Character::mend( int rate_multiplier )
         healing_factor *= addiction_scaling( 0.25f, 0.75f, addiction_level( addiction_nicotine ) );
     }
 
-    if( has_effect( effect_drunk ) ) {
+    // ALCMET prevents the short-term harm done by alcohol, but not the long-term harm.
+    if( has_effect( effect_drunk ) && !has_trait( trait_ALCMET ) ) {
         healing_factor *= 0.5;
     } else {
         healing_factor *= addiction_scaling( 0.25f, 0.75f, addiction_level( addiction_alcohol ) );
@@ -2114,8 +2109,9 @@ void Character::drench( int saturation, const body_part_set &flags, bool ignore_
 
     if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) > 0 ) {
         add_msg_if_player( m_bad, _( "You feel the water burning your skin." ) );
-    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 ) {
-        add_msg_if_player( m_bad, _( "The water is making you feel better." ) );
+    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 &&
+               one_in( 300 ) ) {
+        add_msg_if_player( m_good, _( "The water is making you feel better." ) );
     }
 
     // Remove onfire effect
@@ -2217,7 +2213,8 @@ void Character::add_addiction( const addiction_id &type, int strength )
     if( has_trait( trait_ADDICTIVE ) ) {
         strength *= 2;
         timer = 1_hours;
-    } else if( has_trait( trait_NONADDICTIVE ) ) {
+    } else if( has_trait( trait_NONADDICTIVE ) || ( type == addiction_alcohol &&
+               has_trait( trait_ALCMET ) ) ) {
         strength /= 2;
         timer = 6_hours;
     }

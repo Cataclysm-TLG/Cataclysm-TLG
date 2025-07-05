@@ -90,8 +90,7 @@
     "vision_night": 3,
     "special_attacks": [ [ "FLESH_GOLEM", 5 ] ],
     "harvest": "jabberwock",
-    "dissect": "dissect_beast_sample_large",
-    "zombify_into": "mon_meat_cocoon_med",
+    "dissect": "dissect_mon_jabberwock",
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "DESTROYS", "ATTACKMON", "POISON", "NEVER_WANDER" ],
     "armor": { "bash": 12, "cut": 8, "bullet": 6, "electric": 3 }
   }

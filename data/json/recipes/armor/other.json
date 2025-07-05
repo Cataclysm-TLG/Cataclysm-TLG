@@ -61,7 +61,7 @@
     "time": "60 m",
     "difficulty": 2,
     "book_learn": [ [ "atomic_survival", 2 ], [ "manual_survival", 2 ], [ "textbook_survival", 2 ], [ "mag_survival", 2 ] ],
-    "using": [ [ "liquid_rubber", 18 ] ],
+    "tools": [ [ [ "rubber_spray_can", 18 ] ] ],
     "components": [ [ [ "sheet", 1 ] ] ]
   },
   {
@@ -112,7 +112,7 @@
     "skills_required": [ "electronics", 2 ],
     "time": "120 m",
     "book_learn": [ [ "textbook_tailor", 2 ], [ "manual_tailor", 2 ] ],
-    "using": [ [ "tailoring_cotton_patchwork", 33 ], [ "soldering_standard", 20 ] ],
+    "using": [ [ "tailoring_nylon_patchwork", 33 ], [ "soldering_standard", 20 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" } ],
     "components": [
       [ [ "plastic_chunk", 4 ] ],
@@ -120,7 +120,7 @@
       [ [ "cable", 10 ] ],
       [ [ "amplifier", 1 ] ]
     ],
-    "byproducts": [ [ "cotton_patchwork", 6 ], [ "scrap_cotton", 2 ] ]
+    "byproducts": [ [ "sheet_nylon_patchwork", 6 ], [ "scrap_nylon", 2 ] ]
   },
   {
     "result": "gold_ring",
@@ -454,12 +454,11 @@
       [ "manual_swimming", 3 ]
     ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ],
-    "using": [ [ "soldering_standard", 40 ] ],
+    "using": [ [ "soldering_standard", 40 ], [ "glue_waterproof", 10 ] ],
     "qualities": [ { "id": "PRESSURIZATION", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "hose", 2 ] ],
       [ [ "rebreather_filler_soda_lime", 90 ] ],
-      [ [ "superglue", 1 ] ],
       [ [ "wire_mesh", 1 ] ],
       [ [ "scrap", 8 ], [ "can_food", 4 ], [ "can_drink", 4 ], [ "canister_empty", 4 ] ],
       [ [ "small_scuba_tank", 1 ], [ "oxygen_tank", 1 ] ]
@@ -484,13 +483,12 @@
       [ "manual_swimming", 3 ]
     ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ],
-    "using": [ [ "soldering_standard", 40 ] ],
+    "using": [ [ "soldering_standard", 40 ], [ "glue_waterproof", 10 ] ],
     "tools": [ [ [ "pseudo_app_oxygen_concentrator", 1620 ] ], [ [ "pseudo_app_hd_compressor_unit", 1350 ] ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "hose", 2 ] ],
       [ [ "rebreather_filler_soda_lime", 180 ] ],
-      [ [ "superglue", 1 ] ],
       [ [ "wire_mesh", 1 ] ],
       [ [ "scrap", 8 ], [ "can_food", 4 ], [ "can_drink", 4 ], [ "canister_empty", 4 ] ],
       [ [ "small_scuba_tank", 1 ], [ "oxygen_tank", 1 ] ]
@@ -545,12 +543,11 @@
       [ "manual_swimming", 3 ]
     ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ],
-    "using": [ [ "soldering_standard", 40 ] ],
+    "using": [ [ "soldering_standard", 40 ], [ "glue_waterproof", 10 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "hose", 2 ] ],
       [ [ "rebreather_filler_ko2", 360 ] ],
-      [ [ "superglue", 1 ] ],
       [ [ "wire_mesh", 1 ] ],
       [ [ "scrap", 10 ], [ "can_food", 5 ], [ "can_drink", 5 ], [ "canister_empty", 5 ] ]
     ]

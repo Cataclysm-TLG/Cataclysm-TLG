@@ -489,8 +489,8 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 1 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                        _( "Dexterity affects your chance to hit in melee combat, helps you steady your "
-                           "gun for ranged combat, and enhances many actions that require finesse." ) );
+                        _( "Dexterity affects your chance to hit in melee combat, helps you aim faster in "
+                           "ranged combat, and enhances many actions that require finesse." ) );
         print_colored_text( w_info, point( 1, 3 ), col_temp, c_light_gray,
                             string_format( _( "Melee to-hit bonus: <color_white>%+.1lf</color>" ), you.get_melee_hit_base() ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
@@ -502,8 +502,8 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 2 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                        _( "Intelligence is less important in most situations, but it is vital for more complex tasks like "
-                           "electronics crafting.  It also affects how much skill you can pick up from reading a book." ) );
+                        _( "Intelligence affects your learning and crafting speed, your social skills, and your "
+                           "ability to perform complex intellectual tasks such as surgery." ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
                             string_format( _( "Read times: <color_white>%d%%</color>" ), you.read_speed() ) );
         print_colored_text( w_info, point( 1, 5 ), col_temp, c_light_gray,
@@ -512,7 +512,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
                         _( "Perception is the most important stat for ranged combat.  It's also used for "
-                           "detecting traps and other things of interest." ) );
+                           "detecting traps, seeing in the dark, and noticing points of interest." ) );
         print_colored_text( w_info, point( 1, 4 ), col_temp, c_light_gray,
                             string_format( _( "Trap detection level: <color_white>%d</color>" ), you.get_per() ) );
         if( you.ranged_per_mod() > 0 ) {
@@ -524,7 +524,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
         const int lines = fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
                                           _( "Your weight is a general indicator of how much fat your body has stored up,"
                                              " which in turn shows how prepared you are to survive for a time without food."
-                                             "  Having too much, or too little, can be unhealthy." ) );
+                                             "  Having too much or too little can be unhealthy." ) );
         fold_and_print( w_info, point( 1, 1 + lines ), FULL_SCREEN_WIDTH - 2, c_light_gray,
                         display::weight_long_description( you ) );
     } else if( line == 5 ) {
@@ -534,7 +534,7 @@ static void draw_stats_info( const catacurses::window &w_info, const Character &
     } else if( line == 6 ) {
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         const int lines = fold_and_print( w_info, point( 1, 0 ), FULL_SCREEN_WIDTH - 2, c_magenta,
-                                          _( "Your height.  Simply how tall you are." ) );
+                                          _( "Your height when standing fully upright." ) );
         fold_and_print( w_info, point( 1, 1 + lines ), FULL_SCREEN_WIDTH - 2, c_light_gray,
                         you.height_string() );
     } else if( line == 7 ) {
@@ -629,14 +629,20 @@ static void draw_traits_tab( ui_adaptor &ui, const catacurses::window &w_traits,
     wnoutrefresh( w_traits );
 }
 
-static void draw_traits_info( const catacurses::window &w_info, const unsigned line,
+static void draw_traits_info( const catacurses::window &w_info, const Character &you,
+                              const unsigned line,
                               const std::vector<trait_and_var> &traitslist, const unsigned info_line )
 {
     werase( w_info );
     if( line < traitslist.size() ) {
         const trait_and_var &cur = traitslist[line];
+        std::string trait_desc = cur.desc();
+        if( !you.purifiable( cur.trait ) ) {
+            trait_desc +=
+                _( "\n<color_yellow>This trait is an intrinsic part of you now, purifier won't be able to remove it.</color>" );
+        }
         const std::string desc =
-            string_format( "%s: %s", colorize( cur.name(), cur.trait->get_display_color() ), cur.desc() );
+            string_format( "%s: %s", colorize( cur.name(), cur.trait->get_display_color() ), trait_desc );
         draw_x_info( w_info, desc, info_line );
     }
     wnoutrefresh( w_info );
@@ -1054,7 +1060,7 @@ static void draw_info_window( const catacurses::window &w_info, const Character 
             draw_skills_info( w_info, you, line, skillslist, info_line );
             break;
         case player_display_tab::traits:
-            draw_traits_info( w_info, line, traitslist, info_line );
+            draw_traits_info( w_info, you, line, traitslist, info_line );
             break;
         case player_display_tab::bionics:
             draw_bionics_info( w_info, line, bionicslist, info_line );
@@ -1077,24 +1083,19 @@ static void draw_tip( const catacurses::window &w_tip, const Character &you,
     werase( w_tip );
 
     // Print name and header
-    if( you.custom_profession.empty() ) {
-        if( you.crossed_threshold() ) {
-            //~ player info window: 1s - name, 2s - gender, 3s - Prof or Mutation name
-            mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s | %3$s" ), you.get_name(),
-                       you.male ? _( "Male" ) : _( "Female" ), race );
-        } else if( you.prof == nullptr || you.prof == profession::generic() ) {
-            // Regular person. Nothing interesting.
-            //~ player info window: 1s - name, 2s - gender '|' - field separator.
-            mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s" ), you.get_name(),
-                       you.male ? _( "Male" ) : _( "Female" ) );
-        } else {
-            mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s | %3$s" ), you.get_name(),
-                       you.male ? _( "Male" ) : _( "Female" ),
-                       you.prof->gender_appropriate_name( you.male ) );
-        }
-    } else {
+    if( you.crossed_threshold() ) {
+        //~ player info window: 1s - name, 2s - gender, 3s - Prof or Mutation name
         mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s | %3$s" ), you.get_name(),
-                   you.male ? _( "Male" ) : _( "Female" ), you.custom_profession );
+                   you.male ? _( "Male" ) : _( "Female" ), race );
+    } else {
+        std::string profession = you.disp_profession();
+        if( !profession.empty() ) {
+            mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s | %3$s " ), you.get_name(),
+                       you.male ? _( "Male" ) : _( "Female" ), profession );
+        } else {
+            mvwprintz( w_tip, point_zero, c_white, _( " %1$s | %2$s " ), you.get_name(),
+                       you.male ? _( "Male" ) : _( "Female" ) );
+        }
     }
 
     const auto btn_color = [&tip_btn_highlight]( const int btn_to_draw ) {
@@ -1389,10 +1390,7 @@ static bool handle_player_display_action( Character &you, unsigned int &line,
             case player_display_tab::stats:
                 if( header_clicked ) {
                     display_bodygraph( you );
-                } else if( line < 4 && get_option<bool>( "STATS_THROUGH_KILLS" ) && you.is_avatar() ) {
-                    you.as_avatar()->upgrade_stat_prompt( static_cast<character_stat>( line ) );
                 }
-
                 invalidate_tab( curtab );
                 break;
             case player_display_tab::skills: {
@@ -1409,7 +1407,9 @@ static bool handle_player_display_action( Character &you, unsigned int &line,
             }
             case player_display_tab::proficiencies:
                 const std::vector<display_proficiency> profs = you.display_proficiencies();
-                show_proficiencies_window( you, profs[line].id );
+                if( !profs.empty() ) {
+                    show_proficiencies_window( you, profs[line].id );
+                }
                 break;
         }
     } else if( action == "CHANGE_PROFESSION_NAME" ) {

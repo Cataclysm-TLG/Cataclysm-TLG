@@ -29,16 +29,6 @@
   },
   {
     "type": "enchantment",
-    "id": "RM13",
-    "condition": "ACTIVE",
-    "values": [
-      { "value": "FOOTSTEP_NOISE", "multiply": -0.67 },
-      { "value": "CLIMATE_CONTROL_HEAT", "add": 50 },
-      { "value": "CLIMATE_CONTROL_CHILL", "add": 50 }
-    ]
-  },
-  {
-    "type": "enchantment",
     "id": "SQUEAKY_ANKLES",
     "condition": "ALWAYS",
     "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 1.0 } ]

@@ -890,7 +890,7 @@
       [ "puck", 1 ],
       [ "puller", 1 ],
       [ "punch_dagger", 2 ],
-      { "group": "pur_tablets_bottle_plastic_small_5" },
+      { "group": "pur_tablets_bottle_plastic_small_15" },
       [ "purple_drink", 3 ],
       [ "purse", 4 ],
       [ "quikclot", 5 ],
@@ -985,7 +985,6 @@
       [ "spork", 3 ],
       [ "sports_drink", 4 ],
       [ "spray_can", 3 ],
-      [ "stabilizer", 1 ],
       [ "stethoscope", 2 ],
       [ "stick", 5 ],
       [ "story_book", 1 ],
@@ -994,7 +993,7 @@
       [ "string_6", 4 ],
       [ "sugar", 7 ],
       [ "sugar_beet", 2 ],
-      [ "superglue", 8 ],
+      { "group": "superglue", "prob": 8 },
       [ "suppressor", 1 ],
       [ "survival_book", 3 ],
       [ "survnote", 3 ],
@@ -1097,13 +1096,5 @@
       [ "xanax", 3 ],
       [ "yeast", 2 ]
     ]
-  },
-  {
-    "type": "item_group",
-    "id": "pur_tablets_bottle_plastic_small_5",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bottle_plastic_small",
-    "entries": [ { "item": "pur_tablets", "count": 5 } ]
   }
 ]

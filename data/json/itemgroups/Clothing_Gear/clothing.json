@@ -692,9 +692,16 @@
       { "group": "hat_hard_modified", "prob": 30 },
       { "item": "hat_hard_hooded", "prob": 10 },
       { "group": "hat_hard_hooded_modified", "prob": 5 },
-      { "item": "miner_hat", "prob": 10, "charges": [ 0, 100 ] },
+      { "group": "hat_hard_flashlight", "prob": 10 },
       { "item": "wearable_light", "prob": 15, "charges": [ 0, 100 ] }
     ]
+  },
+  {
+    "id": "hat_hard_flashlight",
+    "type": "item_group",
+    "subtype": "collection",
+    "container-item": "hat_hard",
+    "items": [ { "item": "light_disposable_cell", "charges": [ 0, -1 ], "container-item": "flashlight" } ]
   },
   {
     "id": "hat_hard_modified",
@@ -703,6 +710,7 @@
     "container-item": "hat_hard",
     "items": [
       { "group": "common_nape_protectors", "prob": 50 },
+      { "item": "light_minus_disposable_cell", "charges": 100, "container-item": "flashlight", "prob": 50 },
       { "group": "common_face_shields", "prob": 15 },
       { "item": "plastic_chin_guard", "prob": 10 },
       { "item": "attachable_ear_muffs", "prob": 5 }
@@ -829,7 +837,7 @@
       [ "gloves_leather", 40 ],
       [ "gloves_work", 45 ],
       { "item": "wearable_light", "prob": 10, "charges": [ 0, 100 ] },
-      { "item": "miner_hat", "prob": 1, "charges": [ 0, 100 ] }
+      { "group": "hat_hard_flashlight", "prob": 1 }
     ]
   },
   {
@@ -1608,7 +1616,7 @@
       [ "10gal_hat", 3 ],
       [ "glasses_monocle", 2 ],
       [ "duct_tape", 60 ],
-      [ "superglue", 20 ],
+      { "group": "superglue", "prob": 20 },
       [ "firecracker_pack", 5 ],
       [ "firecracker", 5 ],
       [ "fursuit", 1 ],
@@ -2792,8 +2800,6 @@
       [ "chestguard_hard", 20 ],
       [ "armguard_hard", 20 ],
       [ "legguard_hard", 15 ],
-      [ "power_armor_frame", 4 ],
-      [ "power_armor_generator", 4 ],
       [ "elbow_pads", 40 ],
       [ "knee_pads", 40 ],
       [ "mask_bal", 5 ],
@@ -2916,9 +2922,7 @@
       [ "mask_dust", 30 ],
       { "item": "mask_gas", "prob": 20, "charges": [ 0, -1 ] },
       { "item": "mask_gas_half", "prob": 20, "charges": [ 0, -1 ] },
-      { "item": "mask_filter", "prob": 10, "charges": [ 0, -1 ] },
-      { "item": "goggles_nv", "prob": 2, "charges": [ 0, 100 ] },
-      { "item": "goggles_ir", "prob": 1, "charges": [ 0, 100 ] }
+      { "item": "mask_filter", "prob": 10, "charges": [ 0, -1 ] }
     ]
   },
   {
@@ -3216,7 +3220,7 @@
       { "distribution": [ { "group": "full_survival_kit" }, { "group": "used_survival_kit" } ], "prob": 3 },
       { "group": "tools_toolbox", "prob": 1 },
       [ "survivor_belt_notools", 2 ],
-      [ "survivor_machete", 2 ],
+      [ "machete", 2 ],
       [ "survivor_mess_kit", 6 ],
       [ "acetylene_cooker", 12 ],
       [ "survivor_shavingkit", 3 ],

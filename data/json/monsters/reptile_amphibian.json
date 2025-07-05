@@ -49,7 +49,7 @@
   {
     "id": "mon_rattlesnake_s",
     "type": "MONSTER",
-    "name": { "str_sp": "rattlesnake snakelet" },
+    "name": { "str_sp": "juvenile rattlesnake" },
     "description": "A timber rattlesnake in its hatchling stage.  It will eventually grow a rattle and learn how to hunt.",
     "default_faction": "small_animal",
     "bodytype": "snake",
@@ -142,7 +142,7 @@
   {
     "id": "mon_rattlesnake_big_s",
     "type": "MONSTER",
-    "name": { "str_sp": "mutant rattlesnake snakelet" },
+    "name": { "str_sp": "juvenile mutant rattlesnake" },
     "description": "A large mutated timber rattlesnake in its hatchling stage.  It will eventually grow a rattle and learn how to hunt.",
     "copy-from": "mon_rattlesnake_s",
     "default_faction": "mutant",
@@ -400,7 +400,6 @@
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "PLAYER_CLOSE", "MATING_SEASON" ],
     "baby_flags": [ "SPRING", "SUMMER" ],
     "upgrades": { "half_life": 30, "into": "mon_giant_frog" },
-    "zombify_into": "mon_zombullfrog",
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "SWIMS", "WATER_CAMOUFLAGE", "CLIMBS" ]
   },
   {

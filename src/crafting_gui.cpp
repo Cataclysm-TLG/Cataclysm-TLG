@@ -1029,6 +1029,38 @@ static recipe_subset filter_recipes( const recipe_subset &available_recipes,
                     filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
                                        recipe_subset::search_type::activity_level, progress_callback );
                     break;
+
+                case 'C': {
+                    // Filter by category e.g. armor
+                    std::string user_cat = qry_filter_str.substr( 2 );
+                    if( !user_cat.empty() ) {
+                        for( std::string::size_type i = 0; i < user_cat.size(); ++i ) {
+                            user_cat[i] = std::toupper( static_cast<unsigned char>( user_cat[i] ) );
+                        }
+                    }
+                    std::string cat_id = "CC_" + user_cat;
+                    filtered_recipes = recipe_subset( filtered_recipes,
+                                                      filtered_recipes.in_category( crafting_category_id( cat_id ) ) );
+                    break;
+                }
+                case 'S': {
+                    // Filter by subcategory e.g. food_snack
+                    std::string user_subcat = qry_filter_str.substr( 2 );
+                    if( !user_subcat.empty() ) {
+                        for( std::string::size_type i = 0; i < user_subcat.size(); ++i ) {
+                            user_subcat[i] = std::toupper( static_cast<unsigned char>( user_subcat[i] ) );
+                        }
+                    }
+                    std::string subcat_id = "CSC_" + user_subcat;
+                    recipe_subset result;
+                    for( const crafting_category &cat : craft_cat_list.get_all() ) {
+                        auto matches = filtered_recipes.in_category( cat.id, subcat_id );
+                        result.include( recipe_subset( filtered_recipes, matches ) );
+                    }
+                    filtered_recipes = result;
+                    break;
+                }
+
                 default:
                     break;
             }
@@ -1062,20 +1094,19 @@ static const std::vector<SearchPrefix> prefixes = {
     { 's', to_translation( "food handling" ), to_translation( "<color_cyan>any skill</color> used to craft" ) },
     { 'Q', to_translation( "fine bolt turning" ), to_translation( "<color_cyan>quality</color> required to craft" ) },
     { 't', to_translation( "soldering iron" ), to_translation( "<color_cyan>tool</color> required to craft" ) },
-    { 'm', to_translation( "yes" ), to_translation( "recipes which are <color_cyan>memorized</color> or not (hides nested)" ) },
+    { 'm', to_translation( "yes" ), to_translation( "<color_cyan>memorized</color> or not (hides nested)" ) },
     { 'P', to_translation( "Blacksmithing" ), to_translation( "<color_cyan>proficiency</color> used to craft" ) },
     { 'l', to_translation( "5" ), to_translation( "<color_cyan>difficulty</color> of the recipe as a number or range" ) },
     { 'r', to_translation( "buttermilk" ), to_translation( "recipe's (<color_cyan>by</color>)<color_cyan>products</color>; use * as wildcard" ) },
-    { 'a', to_translation( "brisk" ), to_translation( "recipe's <color_cyan>activity level</color>" ) }
+    { 'a', to_translation( "brisk" ), to_translation( "recipe's <color_cyan>activity level</color>" ) },
+    { 'C', to_translation( "armor" ), to_translation( "<color_cyan>category</color> of the resulting item" ) },
+    { 'S', to_translation( "food_snack" ), to_translation( "<color_cyan>subcategory</color> of the resulting item" ) }
 };
 
 static const translation filter_help_start = to_translation(
             "The default is to search result names.  Some single-character prefixes "
             "can be used with a colon <color_red>:</color> to search in other ways.  Additional filters "
-            "are separated by commas <color_red>,</color>.\n"
-            "Filtering by difficulty can accept range; "
-            "<color_yellow>l</color><color_white>:5~10</color> for all recipes from difficulty 5 to 10.\n"
-            "\n\n"
+            "are separated by commas <color_red>,</color>.\n\n\n"
             "<color_white>Examples:</color>\n" );
 
 static bool mouse_in_window( std::optional<point> coord, const catacurses::window &w_ )

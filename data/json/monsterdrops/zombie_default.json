@@ -259,9 +259,19 @@
     "//2": "any zombie could have died carrying a gun, or holding one",
     "id": "default_zombie_items",
     "entries": [
-      { "group": "large_bags", "damage": [ 1, 4 ], "contents-group": "default_zombie_items_bags", "prob": 6 },
-      { "group": "small_bags", "damage": [ 1, 4 ], "contents-group": "default_zombie_items_bags_small", "prob": 8 },
-      { "group": "bugout_bag", "damage": [ 1, 4 ], "prob": 1 },
+      {
+        "distribution": [
+          { "group": "large_bags", "damage": [ 1, 4 ], "contents-group": "default_zombie_items_bags", "prob": 60 },
+          {
+            "group": "small_bags",
+            "damage": [ 1, 4 ],
+            "contents-group": "default_zombie_items_bags_small",
+            "prob": 39
+          },
+          { "group": "bugout_bag", "damage": [ 1, 4 ], "prob": 1 }
+        ],
+        "prob": 4
+      },
       { "group": "default_zombie_items_pockets", "prob": 10 },
       {
         "distribution": [
@@ -272,7 +282,7 @@
           },
           {
             "collection": [ { "item": "holster", "damage": [ 0, 2 ] }, { "item": "tazer", "damage": [ 0, 2 ], "charges": [ 0, 100 ] } ],
-            "prob": 5
+            "prob": 2
           }
         ],
         "prob": 2

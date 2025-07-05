@@ -111,11 +111,6 @@
           ]
         },
         "topic": "TALK_FREE_MERCHANT_TEAMSTER_Godco_Trader_Mission_Fail"
-      },
-      {
-        "text": "I wanted to tell you about a potential new trading partner I met recently.",
-        "topic": "TALK_FREE_MERCHANT_TEAMSTER_FACTION_INTRO",
-        "condition": { "u_has_var": "general_meeting_u_met_Rubik", "value": "yes" }
       }
     ]
   },
@@ -140,6 +135,24 @@
         "topic": "TALK_DONE",
         "effect": { "u_add_var": "general_meeting_u_met_teamster", "value": "yes" }
       }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_FREE_MERCHANT_TEAMSTER_Boris_Mission_1",
+    "dynamic_line": {
+      "gendered_line": "Alright, sure.  The mess is in my way, after all.  I'll let Boris know.",
+      "relevant_genders": [ "npc" ]
+    },
+    "speaker_effect": {
+      "effect": [
+        { "npc_add_var": "mission_Boris_mission_1_cleanup_asked", "value": "yes" },
+        { "math": [ "u_mission_cleanup_promises_Boris_mission_1", "++" ] }
+      ]
+    },
+    "responses": [
+      { "text": "Thanks!  <done_conversation_section>", "topic": "TALK_FREE_MERCHANT_TEAMSTER_CHAT" },
+      { "text": "Thanks!  I'll see you around.", "topic": "TALK_DONE" }
     ]
   },
   {
@@ -193,7 +206,7 @@
       },
       {
         "text": "Ah, that's nothing new to me.  Thanks anyway though.",
-        "topic": "TALK_NONE",
+        "topic": "TALK_DONE",
         "switch": true,
         "default": true
       },

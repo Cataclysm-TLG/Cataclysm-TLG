@@ -1409,8 +1409,10 @@ std::vector<matec_id> character_martial_arts::get_all_techniques( const item_loc
     const std::vector<const item *> tech_providing_items = u.cache_get_items_with(
                 json_flag_PROVIDES_TECHNIQUES );
     for( const item *it : tech_providing_items ) {
-        const std::set<matec_id> &item_techs = it->get_techniques();
-        tecs.insert( tecs.end(), item_techs.begin(), item_techs.end() );
+        if( u.is_wearing( it->typeId() ) ) {
+            const std::set<matec_id> &item_techs = it->get_techniques();
+            tecs.insert( tecs.end(), item_techs.begin(), item_techs.end() );
+        }
     }
     // and martial art techniques
     tecs.insert( tecs.end(), style.techniques.begin(), style.techniques.end() );

@@ -377,9 +377,16 @@ void MonsterGenerator::finalize_mtypes()
                 armor_diff += dt.second;
             }
         }
+        std::unordered_set<std::string> blacklisted_specials{"PARROT", "PARROT_AT_DANGER", "GRAZE", "EAT_CROP", "EAT_FOOD", "EAT_CARRION"};
+        int special_attacks_diff = 0;
+        for( const auto &special : mon.special_attacks ) {
+            if( !blacklisted_specials.count( special.first ) ) {
+                special_attacks_diff++;
+            }
+        }
         mon.difficulty = ( mon.melee_skill + 1 ) * mon.melee_dice * ( melee_dmg_total + mon.melee_sides ) *
                          0.04 + ( mon.sk_dodge + 1 ) * armor_diff * 0.04 +
-                         ( mon.difficulty_base + mon.special_attacks.size() + 8 * mon.emit_fields.size() );
+                         ( mon.difficulty_base + special_attacks_diff + 8 * mon.emit_fields.size() );
         mon.difficulty *= ( mon.hp + mon.speed - mon.attack_cost + ( mon.morale + mon.agro ) * 0.1 ) * 0.01
                           + ( mon.vision_day + 2 * mon.vision_night ) * 0.01;
 
@@ -407,6 +414,8 @@ void MonsterGenerator::finalize_mtypes()
 
         build_behavior_tree( mon );
         finalize_pathfinding_settings( mon );
+
+        mon.mdeath_effect.has_effect = mon.mdeath_effect.sp.is_valid();
 
         mon.weakpoints.clear();
         for( const weakpoints_id &wpset : mon.weakpoints_deferred ) {
@@ -616,8 +625,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "FUNGUS_GROWTH", mattack::fungus_growth );
     add_hardcoded_attack( "FUNGUS_SPROUT", mattack::fungus_sprout );
     add_hardcoded_attack( "FUNGUS_FORTIFY", mattack::fungus_fortify );
-    add_hardcoded_attack( "DERMATIK", mattack::dermatik );
-    add_hardcoded_attack( "DERMATIK_GROWTH", mattack::dermatik_growth );
     add_hardcoded_attack( "FUNGAL_TRAIL", mattack::fungal_trail );
     add_hardcoded_attack( "PLANT", mattack::plant );
     add_hardcoded_attack( "DISAPPEAR", mattack::disappear );
@@ -1184,6 +1191,7 @@ void mtype::load( const JsonObject &jo, const std::string &src )
         }
         optional( repro, was_loaded, "baby_monster", baby_monster, string_id_reader<::mtype> {},
                   mtype_id::NULL_ID() );
+        optional( repro, was_loaded, "baby_monster_group", baby_monster_group, mongroup_id::NULL_ID() );
         optional( repro, was_loaded, "baby_egg", baby_egg, string_id_reader<::itype> {},
                   itype_id::NULL_ID() );
         reproduces = true;
@@ -1491,10 +1499,8 @@ void mtype::add_special_attack( const JsonObject &obj, const std::string &src )
         if( iter != special_attacks_names.end() ) {
             special_attacks_names.erase( iter );
         }
-        if( test_mode ) {
-            debugmsg( "%s specifies more than one attack of (sub)type %s, ignoring all but the last",
-                      id.c_str(), new_attack->id.c_str() );
-        }
+        debugmsg( "%s specifies more than one attack of (sub)type %s, ignoring all but the last.  Add different `id`s to each attack of this type to prevent this.",
+                  id.c_str(), new_attack->id.c_str() );
     }
 
     special_attacks.emplace( new_attack->id, new_attack );
@@ -1758,14 +1764,24 @@ void MonsterGenerator::check_monster_definitions() const
                 debugmsg( "Number of children (%d) is invalid for %s",
                           mon.baby_count, mon.id.c_str() );
             }
-            if( !mon.baby_monster && mon.baby_egg.is_null() ) {
-                debugmsg( "No baby or egg defined for monster %s", mon.id.c_str() );
+            if( !mon.baby_monster && mon.baby_egg.is_null() && !mon.baby_monster_group ) {
+                debugmsg( "No baby, baby group, or egg defined for monster %s", mon.id.c_str() );
             }
             if( mon.baby_monster && !mon.baby_egg.is_null() ) {
                 debugmsg( "Both an egg and a live birth baby are defined for %s", mon.id.c_str() );
             }
+            if( mon.baby_monster_group && !mon.baby_egg.is_null() ) {
+                debugmsg( "Both an egg and a baby group are defined for %s", mon.id.c_str() );
+            }
+            if( mon.baby_monster && mon.baby_monster_group ) {
+                debugmsg( "Both baby and a baby group are defined for %s", mon.id.c_str() );
+            }
             if( !mon.baby_monster.is_valid() ) {
                 debugmsg( "baby_monster %s of monster %s is not a valid monster id",
+                          mon.baby_monster.c_str(), mon.id.c_str() );
+            }
+            if( !mon.baby_monster_group.is_valid() ) {
+                debugmsg( "baby_monster_group %s of monster %s is not a valid monster group id",
                           mon.baby_monster.c_str(), mon.id.c_str() );
             }
             if( !item::type_is_defined( mon.baby_egg ) ) {
@@ -1815,7 +1831,6 @@ void monster_death_effect::load( const JsonObject &jo )
 {
     optional( jo, was_loaded, "message", death_message, to_translation( "The %s dies!" ) );
     optional( jo, was_loaded, "effect", sp );
-    has_effect = sp.is_valid();
     optional( jo, was_loaded, "corpse_type", corpse_type, mdeath_type::NORMAL );
     optional( jo, was_loaded, "eoc", eoc );
 }

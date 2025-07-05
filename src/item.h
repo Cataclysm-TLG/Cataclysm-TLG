@@ -251,7 +251,7 @@ class item : public visitable
          * @param alert whether to display any messages
          * @return same instance to allow method chaining
          */
-        item &deactivate( const Character *ch = nullptr, bool alert = true );
+        item &deactivate( Character *ch = nullptr, bool alert = true );
 
         /** Filter converting instance to active state */
         item &activate();
@@ -366,6 +366,12 @@ class item : public visitable
         bool is_software_storage() const;
 
         bool is_ebook_storage() const;
+
+        /**
+         * Checks whether the item's components (and sub-components if deep_search) are food items
+         * Used for calculating nutrients of crafted food
+         */
+        bool made_of_any_food_components( bool deep_search = false ) const;
 
         /**
          * A heuristic on whether it's a good idea to use this as a melee weapon.
@@ -495,8 +501,8 @@ class item : public visitable
         void armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                    bool debug, const sub_bodypart_id &sbp = sub_bodypart_id() ) const;
         void pet_armor_protection_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
-        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
-                         bool debug ) const;
+        void armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch, bool debug,
+                         const Character &you ) const;
         void animal_armor_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                                 bool debug ) const;
         void armor_fit_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
@@ -712,23 +718,6 @@ class item : public visitable
         damage_instance base_damage_melee() const;
         /** All damage types this item deals when thrown (no skill modifiers etc. applied). */
         damage_instance base_damage_thrown() const;
-
-        /**
-        * Calculate the item's effective damage per second past armor when wielded by a
-         * character against a monster.
-         */
-        double effective_dps( const Character &guy, Creature &mon ) const;
-        /**
-         * calculate effective dps against a stock set of monsters.  by default, assume g->u
-         * is wielding
-        * for_display - include monsters intended for display purposes
-         * for_calc - include monsters intended for evaluation purposes
-         * for_display and for_calc are inclusive
-               */
-        std::map<std::string, double> dps( bool for_display, bool for_calc, const Character &guy ) const;
-        std::map<std::string, double> dps( bool for_display, bool for_calc ) const;
-        /** return the average dps of the weapon against evaluation monsters */
-        double average_dps( const Character &guy ) const;
 
         /**
          * Whether the character needs both hands to wield this item.
@@ -1536,7 +1525,10 @@ class item : public visitable
          * @param link_type What type of connection to make. If set to link_state::automatic, will automatically determine which type to use. Defaults to link_state::no_link.
          * @return true if the item was successfully connected.
          */
+        // TODO: Get rid of untyped overload.
         ret_val<void> link_to( vehicle &veh, const point &mount,
+                               link_state link_type = link_state::no_link );
+        ret_val<void> link_to( vehicle &veh, const point_rel_ms &mount,
                                link_state link_type = link_state::no_link );
 
         /**
@@ -1680,6 +1672,10 @@ class item : public visitable
         /** What faults can potentially occur with this item? */
         std::set<fault_id> faults_potential() const;
 
+        bool can_have_fault_type( const std::string &fault_type ) const;
+
+        std::set<fault_id> faults_potential_of_type( const std::string &fault_type ) const;
+
         /** Returns the total area of this wheel or 0 if it isn't one. */
         int wheel_area() const;
 
@@ -1799,6 +1795,11 @@ class item : public visitable
         /** return the unique identifier of the items underlying type */
         itype_id typeId() const;
 
+        /** Checks is item affect fall */
+        bool affects_fall() const;
+
+        //flat damage reduction (increase if negative) on fall (some logic may apply)
+        int fall_damage_reduction() const;
         /**
           * if the item will spill if placed into a container
           */
@@ -2236,17 +2237,15 @@ class item : public visitable
         /*
          * Returns the average coverage of each piece of data this item
          */
-        int get_avg_coverage( const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_avg_coverage() const;
         /**
          * Returns the highest coverage that any piece of data that this item has that covers the bodypart.
          * Values range from 0 (not covering anything) to 100 (covering the whole body part).
          * Items that cover more are more likely to absorb damage from attacks.
          */
-        int get_coverage( const bodypart_id &bodypart,
-                          const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_coverage( const bodypart_id &bodypart ) const;
 
-        int get_coverage( const sub_bodypart_id &bodypart,
-                          const cover_type &type = cover_type::COVER_DEFAULT ) const;
+        int get_coverage( const sub_bodypart_id &bodypart ) const;
 
         enum class encumber_flags : int {
             none = 0,
@@ -2291,19 +2290,10 @@ class item : public visitable
          */
         int get_base_env_resist_w_filter() const;
         /**
-         * Whether this is a power armor item. Not necessarily the main armor, it could be a helmet
-         * or similar.
-         */
-        bool is_power_armor() const;
-        /**
          * If this is an armor item, return its armor data. You should probably not use this function,
          * use the various functions above (like @ref get_storage) to access armor data directly.
          */
         const islot_armor *find_armor_data() const;
-        /**
-         * Returns true whether this item can be worn only when @param it is worn.
-         */
-        bool is_worn_only_with( const item &it ) const;
         /**
         * Returns true wether this item is worn or not
         */
@@ -2546,7 +2536,7 @@ class item : public visitable
          *  @param conversion whether to include the effect of any flags or mods which convert the type
          *  @return empty set if item does not have a magazine for a specific ammo type */
         std::set<ammotype> ammo_types( bool conversion = true ) const;
-        /** Default ammo for the the item magazine pocket, if item has ammo_types().
+        /** Default ammo for the item magazine pocket, if item has ammo_types().
          *  @param conversion whether to include the effect of any flags or mods which convert the type
          *  @return itype_id::NULL_ID() if item does have a magazine for a specific ammo type */
         itype_id ammo_default( bool conversion = true ) const;
@@ -3050,7 +3040,8 @@ class item : public visitable
         std::list<const item *> all_items_top_recursive( pocket_type pk_type ) const;
 
         /** Returns true if protection info was printed as well */
-        bool armor_full_protection_info( std::vector<iteminfo> &info, const iteminfo_query *parts ) const;
+        bool armor_full_protection_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
+                                         const Character &you ) const;
 
         void update_inherited_flags();
         /**

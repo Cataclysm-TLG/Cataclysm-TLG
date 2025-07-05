@@ -66,6 +66,7 @@
 #include "music.h"
 #include "mutation.h"
 #include "output.h"
+#include "overmap.h"
 #include "overmapbuffer.h"
 #include "pimpl.h"
 #include "player_activity.h"
@@ -238,6 +239,8 @@ std::optional<int> iuse_transform::use( Character *p, item &it, const tripoint &
                   it.typeId().str() );
         return std::nullopt;
     }
+
+    it.set_var( "last_act_by_char_id", p->getID().get_value() );
 
     int result = 0;
 
@@ -517,7 +520,7 @@ std::optional<int> unpack_actor::use( Character *p, item &it, const tripoint & )
             content.set_flag( flag_FILTHY );
         }
 
-        here.add_item_or_charges( p->pos(), content );
+        here.add_item_or_charges( p->pos_bub(), content );
     }
 
     p->i_rem( &it );
@@ -650,10 +653,19 @@ void explosion_iuse::load( const JsonObject &obj, const std::string & )
     obj.read( "scrambler_blast_radius", scrambler_blast_radius );
 }
 
-std::optional<int> explosion_iuse::use( Character *p, item &, const tripoint &pos ) const
+std::optional<int> explosion_iuse::use( Character *p, item &it, const tripoint &pos ) const
 {
     if( explosion.power >= 0.0f ) {
-        explosion_handler::explosion( p, pos, explosion );
+        Character *source = p;
+        if( it.has_var( "last_act_by_char_id" ) ) {
+            character_id thrower( it.get_var( "last_act_by_char_id", 0 ) );
+            if( thrower == get_player_character().getID() ) {
+                source = &get_player_character();
+            } else {
+                source = g->find_npc( thrower );
+            }
+        }
+        explosion_handler::explosion( source, pos, explosion );
     }
 
     if( draw_explosion_radius >= 0 ) {
@@ -1079,21 +1091,38 @@ static ret_val<tripoint> check_deploy_square( Character *p, item &it, const trip
     if( p->cant_do_mounted() ) {
         return ret_val<tripoint>::make_failure( pos );
     }
-    tripoint pnt = pos;
-    if( pos == p->pos() ) {
+    tripoint_bub_ms pnt( pos );
+    if( pos == p->pos_bub().raw() ) {
         if( const std::optional<tripoint> pnt_ = choose_adjacent( _( "Deploy where?" ) ) ) {
-            pnt = *pnt_;
+            pnt = tripoint_bub_ms( *pnt_ );
         } else {
             return ret_val<tripoint>::make_failure( pos );
         }
     }
 
-    if( pnt == p->pos() ) {
+    if( pnt == p->pos_bub() ) {
         return ret_val<tripoint>::make_failure( pos,
                                                 _( "You attempt to become one with the %s.  It doesn't work." ), it.tname() );
     }
 
     map &here = get_map();
+
+    tripoint_bub_ms where = pnt;
+    tripoint_bub_ms below = pnt + tripoint_below;
+    while( here.valid_move( where, below, false, true ) ) {
+        where += tripoint_below;
+        below += tripoint_below;
+    }
+
+    const int height = pnt.z() - where.z();
+    if( height > 1 && here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_NO_FLOOR, pnt ) ) {
+        if( !query_yn(
+                _( "Deploying %s there will make it fall down %i stories.  Do you still want to deploy it?" ),
+                it.tname(), height ) ) {
+            return ret_val<tripoint>::make_failure( pos );
+        }
+    }
+
     optional_vpart_position veh_there = here.veh_at( pnt );
     if( veh_there.has_value() ) {
         // TODO: check for protrusion+short furniture, wheels+tiny furniture, NOCOLLIDE flag, etc.
@@ -1139,7 +1168,7 @@ static ret_val<tripoint> check_deploy_square( Character *p, item &it, const trip
         }
     }
 
-    return ret_val<tripoint>::make_success( pnt );
+    return ret_val<tripoint>::make_success( pnt.raw() );
 }
 
 std::optional<int> deploy_furn_actor::use( Character *p, item &it,
@@ -1152,6 +1181,7 @@ std::optional<int> deploy_furn_actor::use( Character *p, item &it,
     }
 
     get_map().furn_set( suitable.value(), furn_type );
+    get_map().drop_furniture( tripoint_bub_ms( suitable.value() ) );
     it.spill_contents( suitable.value() );
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
@@ -1183,7 +1213,11 @@ std::optional<int> deploy_appliance_actor::use( Character *p, item &it, const tr
     }
 
     it.spill_contents( suitable.value() );
-    place_appliance( suitable.value(), vpart_appliance_from_item( appliance_base ), it );
+    if( !place_appliance( tripoint_bub_ms( suitable.value() ),
+                          vpart_appliance_from_item( appliance_base ), *p, it ) ) {
+        // failed to place somehow, cancel!!
+        return 0;
+    }
     p->mod_moves( -to_moves<int>( 2_seconds ) );
     return 1;
 }
@@ -1220,7 +1254,7 @@ void reveal_map_actor::reveal_targets( const tripoint_abs_omt &center,
     const auto places = overmap_buffer.find_all( center, target.first, radius, false,
                         target.second );
     for( const tripoint_abs_omt &place : places ) {
-        if( !overmap_buffer.seen( place ) ) {
+        if( overmap_buffer.seen( place ) != om_vision_level::full ) {
             // Should be replaced with the character using the item passed as an argument if NPCs ever learn to use maps
             get_avatar().map_revealed_omts.emplace( place );
         }
@@ -1745,7 +1779,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
              cut.get_item()->tname() );
 
     const item_location::type cut_type = cut.where();
-    const tripoint pos = cut.position();
+    const tripoint_bub_ms pos = cut.pos_bub();
     const bool filthy = cut.get_item()->is_filthy();
 
     // Clean up before removing the item.
@@ -2809,8 +2843,8 @@ bool repair_item_actor::handle_components( Character &pl, const item &fix,
     // Round up if checking, but roll if actually consuming
     // TODO: should 250_ml be part of the cost_scaling?
     const int items_needed = std::max<int>( 1, just_check ?
-                                            std::ceil( fix.base_volume() / 250_ml * cost_scaling ) :
-                                            roll_remainder( fix.base_volume() / 250_ml * cost_scaling ) );
+                                            std::ceil( fix.base_volume() * cost_scaling / 250_ml ) :
+                                            roll_remainder( fix.base_volume() * cost_scaling / 250_ml ) );
 
     std::function<bool( const item & )> filter;
     if( fix.is_filthy() ) {
@@ -3776,8 +3810,8 @@ std::unique_ptr<iuse_actor> place_trap_actor::clone() const
 static bool is_solid_neighbor( const tripoint &pos, const point &offset )
 {
     map &here = get_map();
-    const tripoint a = pos + tripoint( offset, 0 );
-    const tripoint b = pos - tripoint( offset, 0 );
+    const tripoint_bub_ms a = tripoint_bub_ms( pos ) + tripoint( offset, 0 );
+    const tripoint_bub_ms b = tripoint_bub_ms( pos ) - tripoint( offset, 0 );
     return here.move_cost( a ) != 2 && here.move_cost( b ) != 2;
 }
 
@@ -5163,10 +5197,10 @@ std::optional<int> deploy_tent_actor::use( Character *p, item &it, const tripoin
     // We place the center of the structure (radius + 1)
     // spaces away from the player.
     // First check there's enough room.
-    const tripoint center = p->pos() + tripoint( ( radius + 1 ) * direction.x,
-                            ( radius + 1 ) * direction.y, 0 );
+    const tripoint_bub_ms center = p->pos_bub() + tripoint( ( radius + 1 ) * direction.x,
+                                   ( radius + 1 ) * direction.y, 0 );
     creature_tracker &creatures = get_creature_tracker();
-    for( const tripoint &dest : here.points_in_radius( center, radius ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( center, radius ) ) {
         if( const optional_vpart_position vp = here.veh_at( dest ) ) {
             add_msg( m_info, _( "The %s is in the way." ), vp->vehicle().name );
             return std::nullopt;
@@ -5194,10 +5228,10 @@ std::optional<int> deploy_tent_actor::use( Character *p, item &it, const tripoin
     return 0;
 }
 
-bool deploy_tent_actor::check_intact( const tripoint &center ) const
+bool deploy_tent_actor::check_intact( const tripoint_bub_ms &center ) const
 {
     map &here = get_map();
-    for( const tripoint &dest : here.points_in_radius( center, radius ) ) {
+    for( const tripoint_bub_ms &dest : here.points_in_radius( center, radius ) ) {
         const furn_id fid = here.furn( dest );
         if( dest == center && floor_center ) {
             if( fid != *floor_center ) {
@@ -5286,7 +5320,7 @@ std::optional<int> sew_advanced_actor::use( Character *p, item &it, const tripoi
     }
 
     auto filter = [this]( const item & itm ) {
-        return itm.is_armor() && !itm.is_firearm() && !itm.is_power_armor() && !itm.is_gunmod() &&
+        return itm.is_armor() && !itm.is_firearm() && !itm.is_gunmod() &&
                itm.made_of_any( materials ) && !itm.has_flag( flag_INTEGRATED );
     };
     // note: if !p.is_npc() then p is avatar.

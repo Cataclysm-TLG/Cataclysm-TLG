@@ -9,6 +9,7 @@
 #include <numeric>
 #include <ostream>
 
+#include "avatar_action.h"
 #include "bodygraph.h"
 #include "calendar.h"
 #include "cata_utility.h"
@@ -126,6 +127,17 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
     if( !it.is_armor() ) {
         return ret_val<void>::make_failure( _( "Putting on a %s would be tricky." ), it.tname() );
     }
+    {
+        body_part_set covered = it.get_covered_body_parts();
+        body_part_set character_parts;
+        for( const bodypart_id &bp : get_all_body_parts() ) {
+            character_parts.set( bp.id() );
+        }
+        covered.intersect_set( character_parts );
+        if( covered.none() ) {
+            return ret_val<void>::make_failure( _( "You lack the appropriate body parts to wear that." ) );
+        }
+    }
 
     if( has_trait( trait_WOOLALLERGY ) && ( it.made_of( material_wool ) ||
                                             it.has_own_flag( flag_wooled ) ) ) {
@@ -221,13 +233,6 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
         return ret_val<void>::make_success();
     }
 
-    {
-        ret_val<void> power_armor_conflicts = worn.power_armor_conflicts( it );
-        if( !power_armor_conflicts.success() ) {
-            return power_armor_conflicts;
-        }
-    }
-
     // Check if we don't have both hands available before wearing a briefcase, shield, etc. Also occurs if we're already wearing one.
     if( it.has_flag( flag_RESTRICT_HANDS ) && ( worn_with_flag( flag_RESTRICT_HANDS ) ||
             weapon.is_two_handed( *this ) ) ) {
@@ -267,7 +272,13 @@ Character::wear( int pos, bool interactive )
 std::optional<std::list<item>::iterator>
 Character::wear( item_location item_wear, bool interactive )
 {
-    item to_wear = *item_wear;
+    item &to_wear = *item_wear;
+
+    // Need to account for case where we're trying to wear something that belongs to someone else
+    if( !avatar_action::check_stealing( *this, to_wear ) ) {
+        return std::nullopt;
+    }
+
     if( is_worn( to_wear ) ) {
         if( interactive ) {
             add_msg_player_or_npc( m_info,
@@ -509,7 +520,7 @@ int Character::item_wear_cost( const item &it ) const
     return mv;
 }
 
-ret_val<void> Character::can_takeoff( const item &it, const std::list<item> *res )
+ret_val<void> Character::can_takeoff( const item &it )
 {
     if( !worn.is_worn( it ) ) {
         return ret_val<void>::make_failure( !is_npc() ? _( "You are not wearing that item." ) :
@@ -520,11 +531,6 @@ ret_val<void> Character::can_takeoff( const item &it, const std::list<item> *res
         return ret_val<void>::make_failure( !is_npc() ?
                                             _( "You can't remove a part of your body." ) :
                                             _( "<npcname> can't remove a part of their body." ) );
-    }
-    if( res == nullptr && !get_dependent_worn_items( it ).empty() ) {
-        return ret_val<void>::make_failure( !is_npc() ?
-                                            _( "You can't take off power armor while wearing other power armor components." ) :
-                                            _( "<npcname> can't take off power armor while wearing other power armor components." ) );
     }
     if( it.has_flag( flag_NO_TAKEOFF ) ) {
         return ret_val<void>::make_failure( !is_npc() ?
@@ -829,16 +835,6 @@ bool Character::change_side( item_location &loc, bool interactive )
     }
 
     return change_side( *loc, interactive );
-}
-
-bool Character::is_wearing_power_armor( bool *hasHelmet ) const
-{
-    return worn.is_wearing_power_armor( hasHelmet );
-}
-
-bool Character::is_wearing_active_power_armor() const
-{
-    return worn.is_wearing_active_power_armor();
 }
 
 bool Character::is_wearing_active_optcloak() const
@@ -1146,7 +1142,7 @@ int outfit::swim_modifier( const int swim_skill ) const
     int ret = 0;
     if( swim_skill < 10 ) {
         for( const item &i : worn ) {
-            ret += i.volume() / 125_ml * ( 10 - swim_skill );
+            ret += i.volume() * ( 10 - swim_skill ) / 125_ml;
         }
     }
     return ret;
@@ -1196,6 +1192,9 @@ std::list<item> outfit::remove_worn_items_with( const std::function<bool( item &
     std::list<item> result;
     for( auto iter = worn.begin(); iter != worn.end(); ) {
         if( filter( *iter ) ) {
+            if( iter->can_unload() ) {
+                iter->spill_contents( guy );
+            }
             iter->on_takeoff( guy );
             result.splice( result.begin(), worn, iter++ );
         } else {
@@ -1244,82 +1243,6 @@ const
         }
     }
     return ret;
-}
-
-ret_val<void> outfit::power_armor_conflicts( const item &clothing ) const
-{
-    if( clothing.is_power_armor() ) {
-        for( const item &elem : worn ) {
-            // Allow power armor with compatible parts and integrated (Subdermal CBM and mutant skin armor)
-            if( elem.get_covered_body_parts().make_intersection( clothing.get_covered_body_parts() ).any() &&
-                !elem.has_flag( flag_POWERARMOR_COMPATIBLE ) && !elem.has_flag( flag_INTEGRATED ) &&
-                !elem.has_flag( flag_AURA ) ) {
-                return ret_val<void>::make_failure( _( "Can't wear power armor over other gear!" ) );
-            }
-        }
-        if( !clothing.covers( body_part_torso ) ) {
-            bool power_armor = false;
-            for( const item &elem : worn ) {
-                if( elem.is_power_armor() ) {
-                    power_armor = true;
-                    break;
-                }
-            }
-            if( !power_armor ) {
-                return ret_val<void>::make_failure(
-                           _( "You can only wear power armor components with power armor!" ) );
-            }
-        }
-
-        for( const item &i : worn ) {
-            if( i.is_power_armor() && i.typeId() == clothing.typeId() ) {
-                return ret_val<void>::make_failure( _( "Can't wear more than one %s!" ), clothing.tname() );
-            }
-        }
-    } else {
-        // You can only wear headgear or non-covering items with power armor, except other power armor components.
-        // You can't wear headgear if power armor helmet is already sitting on your head.
-        bool has_helmet = false;
-        if( !clothing.get_covered_body_parts().none() && !clothing.has_flag( flag_POWERARMOR_COMPATIBLE ) &&
-            !clothing.has_flag( flag_AURA ) &&
-            ( is_wearing_power_armor( &has_helmet ) &&
-              ( has_helmet || !( clothing.covers( body_part_head ) || clothing.covers( body_part_mouth ) ||
-                                 clothing.covers( body_part_eyes ) ) ) ) ) {
-            return ret_val<void>::make_failure( _( "Can't wear %s with power armor!" ), clothing.tname() );
-        }
-    }
-    return ret_val<void>::make_success();
-}
-
-bool outfit::is_wearing_power_armor( bool *has_helmet ) const
-{
-    bool result = false;
-    for( const item &elem : worn ) {
-        if( !elem.is_power_armor() ) {
-            continue;
-        }
-        if( has_helmet == nullptr ) {
-            // found power armor, helmet not requested, cancel loop
-            return true;
-        }
-        // found power armor, continue search for helmet
-        result = true;
-        if( elem.covers( body_part_head ) ) {
-            *has_helmet = true;
-            return true;
-        }
-    }
-    return result;
-}
-
-bool outfit::is_wearing_active_power_armor() const
-{
-    for( const item &w : worn ) {
-        if( w.is_power_armor() && w.active ) {
-            return true;
-        }
-    }
-    return false;
 }
 
 bool outfit::is_wearing_active_optcloak() const
@@ -1523,7 +1446,7 @@ bool outfit::takeoff( item_location loc, std::list<item> *res, Character &guy )
 {
     item &it = *loc;
 
-    const auto ret = guy.can_takeoff( it, res );
+    const auto ret = guy.can_takeoff( it );
     if( !ret.success() ) {
         add_msg( m_info, "%s", ret.c_str() );
         return false;
@@ -1558,12 +1481,12 @@ bool outfit::empty() const
     return worn.empty();
 }
 
-int outfit::get_coverage( bodypart_id bp, item::cover_type cover_type ) const
+int outfit::get_coverage( bodypart_id bp ) const
 {
     int total_cover = 0;
     for( const item &it : worn ) {
         if( it.covers( bp ) ) {
-            total_cover += it.get_coverage( bp, cover_type );
+            total_cover += it.get_coverage( bp );
         }
     }
     return total_cover;
@@ -1590,18 +1513,12 @@ int outfit::coverage_with_flags_exclude( const bodypart_id &bp,
     return coverage;
 }
 
-int outfit::sum_filthy_cover( bool ranged, bool melee, bodypart_id bp ) const
+int outfit::sum_filthy_cover( bodypart_id bp ) const
 {
     int sum_cover = 0;
     for( const item &i : worn ) {
         if( i.covers( bp ) && i.is_filthy() ) {
-            if( melee ) {
-                sum_cover += i.get_coverage( bp, item::cover_type::COVER_MELEE );
-            } else if( ranged ) {
-                sum_cover += i.get_coverage( bp, item::cover_type::COVER_RANGED );
-            } else {
-                sum_cover += i.get_coverage( bp );
-            }
+            sum_cover += i.get_coverage( bp );
         }
     }
     return sum_cover;
@@ -1803,19 +1720,16 @@ std::list<item> outfit::use_amount( const itype_id &it, int quantity,
     return used;
 }
 
-void outfit::add_dependent_item( std::list<item *> &dependent, const item &it )
+void outfit::add_dependent_item( std::list<item *> &dependent )
 {
     // Adds dependent worn items recursively
     for( item &wit : worn ) {
-        if( &wit == &it || !wit.is_worn_only_with( it ) ) {
-            continue;
-        }
         const auto iter = std::find_if( dependent.begin(), dependent.end(),
         [&wit]( const item * dit ) {
             return &wit == dit;
         } );
         if( iter == dependent.end() ) { // Not in the list yet
-            add_dependent_item( dependent, wit );
+            add_dependent_item( dependent );
             dependent.push_back( &wit );
         }
     }
@@ -2147,7 +2061,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
         guy.deal_damage( &caster, bp, damage_instance( damage.type, damage.amount ) );
     }
     if( sp.damage( caster ) < 0 ) {
-        sp.heal( guy.pos(), caster );
+        sp.heal( guy.pos_bub(), caster );
         add_msg_if_player_sees( guy, m_good, _( "%s wounds are closing up!" ),
                                 guy.disp_name( true ) );
     }

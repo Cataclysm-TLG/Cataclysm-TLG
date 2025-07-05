@@ -16,7 +16,7 @@
     "color": "brown",
     "warmth": 5,
     "material_thickness": 3,
-    "flags": [ "OUTER", "WATER_FRIENDLY" ],
+    "flags": [ "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -26,7 +26,7 @@
         "rigid_layer_only": true
       }
     ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "carpet_legguards",
@@ -47,7 +47,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [
@@ -55,7 +55,7 @@
           { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
         ],
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 5,
+        "encumbrance": 38,
         "coverage": 90,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_upper_r", "leg_upper_l" ]
       }
@@ -80,7 +80,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "NO_REPAIR" ],
+    "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [
@@ -112,7 +112,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "environmental_protection": 2,
-    "flags": [ "STURDY", "OUTER", "BLOCK_WHILE_WORN", "WATER_FRIENDLY" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -121,7 +121,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "xl_legguard_chitin",
@@ -148,7 +149,8 @@
     "price_postapoc": "12 USD 50 cent",
     "name": { "str": "pair of biosilicified chitin leg guards", "str_pl": "pairs of biosilicified chitin leg guards" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
-    "material": [ "acidchitin" ]
+    "material": [ "acidchitin" ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "xl_legguard_acidchitin",
@@ -238,7 +240,7 @@
     "looks_like": "legguard_hard",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
@@ -260,7 +262,8 @@
         "coverage": 100,
         "encumbrance": 2
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "chainmail_chausses_xs",
@@ -274,9 +277,9 @@
     "id": "chainmail_chausses_xl",
     "type": "ARMOR",
     "copy-from": "chainmail_chausses",
-    "name": { "str": "XL chainmail chausses", "str_pl": "pairs of XL chainmail chausses" },
+    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "chainmail_junk_chausses",
@@ -284,7 +287,8 @@
     "copy-from": "chainmail_chausses",
     "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
     "description": "Protective leggings made of interlocking links of low-quality steel wire, covering from the thighs to the tops of the feet.",
-    "replace_materials": { "steel_chain": "budget_steel_chain" }
+    "replace_materials": { "steel_chain": "budget_steel_chain" },
+    "delete": { "flags": [ "STURDY" ] }
   },
   {
     "id": "chainmail_skirt",
@@ -303,7 +307,7 @@
     "looks_like": "skirt_leather",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY" ],
+    "flags": [ "STURDY", "ALLOWS_TAIL", "NORMAL" ],
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a looser fit.",
@@ -352,7 +356,7 @@
     "id": "chainmail_skirt_xl",
     "type": "ARMOR",
     "copy-from": "chainmail_skirt",
-    "name": { "str": "XL chainmail skirt" },
+    "name": { "str": "chainmail skirt" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -360,7 +364,7 @@
       "target": "chainmail_skirt_loose_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "chainmail_skirt_budget",
@@ -373,7 +377,8 @@
       "msg": "You adjust your mail for a looser fit.",
       "target": "chainmail_skirt_budget_loose",
       "menu_text": "Loosen"
-    }
+    },
+    "delete": { "flags": [ "STURDY" ] }
   },
   {
     "id": "chainmail_skirt_loose",
@@ -387,6 +392,7 @@
       "target": "chainmail_skirt",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -401,6 +407,7 @@
       "target": "chainmail_skirt_xs",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -415,6 +422,7 @@
       "target": "chainmail_skirt_xl",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
@@ -428,13 +436,14 @@
       "target": "chainmail_skirt_budget",
       "menu_text": "Tighten"
     },
+    "delete": { "flags": [ "NORMAL", "STURDY" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
     "id": "chaps_leather",
     "type": "ARMOR",
     "name": { "str_sp": "leather chaps" },
-    "description": "A pair of black leather chaps.  Very tough and light, but doesn't offer any storage.",
+    "description": "A pair of tough leather chaps, meant to tie on over pants for extra protection.",
     "weight": "1414 g",
     "volume": "1250 ml",
     "price": "210 USD",
@@ -445,8 +454,8 @@
     "looks_like": "pants_leather",
     "color": "dark_gray",
     "warmth": 10,
-    "material_thickness": 3,
-    "flags": [ "OUTER" ],
+    "material_thickness": 2.5,
+    "flags": [ "OUTER", "ALLOWS_TAIL" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -493,7 +502,7 @@
     ],
     "warmth": 25,
     "material_thickness": 2.5,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "ALLOWS_TAIL" ],
     "armor": [
       {
         "encumbrance": [ 7, 9 ],
@@ -532,7 +541,8 @@
         "encumbrance": 3,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "bronze_greaves",
@@ -550,7 +560,7 @@
     "looks_like": "platemail_leg_guards",
     "color": "yellow",
     "warmth": 15,
-    "material_thickness": 4,
+    "material_thickness": 3,
     "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
     "armor": [
       {
@@ -560,7 +570,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "bronze_greaves_xl",
@@ -609,7 +620,8 @@
         "coverage": 80,
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "tire_tasset",
@@ -658,7 +670,7 @@
     "id": "tire_tasset_xs",
     "type": "ARMOR",
     "copy-from": "tire_tasset",
-    "name": { "str": "XS tire tasset" },
+    "name": { "str": "tire tasset" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
       "type": "transform",
@@ -672,7 +684,7 @@
     "id": "tire_tasset_xl",
     "type": "ARMOR",
     "copy-from": "tire_tasset",
-    "name": { "str": "XL tire tasset" },
+    "name": { "str": "tire tasset" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -680,7 +692,7 @@
       "target": "tire_tasset_loose_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "tire_tasset_loose",
@@ -724,7 +736,7 @@
       "target": "tire_tasset_xl",
       "menu_text": "Loosen"
     },
-    "extend": { "flags": [ "UNDERSIZE" ] }
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "platemail_tasset",
@@ -752,7 +764,7 @@
     },
     "armor": [
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 90,
@@ -760,7 +772,7 @@
         "rigid_layer_only": true
       },
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 } ],
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 70,
@@ -857,12 +869,11 @@
     "looks_like": "legguard_hard",
     "color": "light_gray",
     "warmth": 20,
-    "material_thickness": 1.3,
     "flags": [ "OUTER", "STURDY", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -872,7 +883,7 @@
       },
       {
         "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 1.3 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "leather", "covered_by_mat": 2, "thickness": 1.0 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -880,7 +891,8 @@
         "coverage": 85,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 6 }
   },
   {
     "id": "platemail_leg_guards_xl",
@@ -924,7 +936,8 @@
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 1 }
   },
   {
     "id": "tire_greaves",
@@ -947,12 +960,13 @@
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 6,
+        "encumbrance": 12,
         "coverage": 80,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "tire_greaves_xl",
@@ -981,12 +995,13 @@
     "price_postapoc": "7 USD 50 cent",
     "material": [ "kevlar", "denim", "plastic_pad" ],
     "symbol": "[",
+    "category": "armor",
     "looks_like": "jeans",
     "color": "dark_gray",
     "warmth": 15,
     "material_thickness": 2,
     "environmental_protection": 2,
-    "flags": [ "VARSIZE", "WATERPROOF", "POCKETS", "NORMAL" ],
+    "flags": [ "VARSIZE", "WATERPROOF", "POCKETS", "NORMAL", "ALLOWS_TAIL" ],
     "armor": [
       {
         "material": [
@@ -1042,7 +1057,8 @@
         "max_item_length": "165 mm",
         "moves": 100
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "jeans_mod",
@@ -1056,10 +1072,11 @@
     "material": [ "steel", "denim" ],
     "symbol": "[",
     "looks_like": "motorbike_pants",
+    "category": "armor",
     "color": "light_blue",
     "warmth": 20,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "POCKETS" ],
+    "flags": [ "VARSIZE", "POCKETS", "ALLOWS_TAIL" ],
     "armor": [
       {
         "encumbrance": [ 12, 16 ],
@@ -1113,7 +1130,8 @@
         "max_item_length": "165 mm",
         "moves": 100
       }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "trousers_eod",
@@ -1144,7 +1162,8 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 40
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "trousers_eod_light",
@@ -1175,7 +1194,8 @@
         "coverage": 98,
         "covers": [ "leg_l", "leg_r" ]
       }
-    ]
+    ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "armor_riot_leg",
@@ -1194,7 +1214,7 @@
     "color": "dark_gray",
     "warmth": 20,
     "longest_side": "40 cm",
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "BLOCK_WHILE_WORN" ],
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "ALLOWS_TAIL" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -1216,15 +1236,16 @@
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
       }
-    ]
+    ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "leather_leg_guards",
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "pair of leather leg guards", "str_pl": "pairs of leather leg guards" },
-    "description": "A pair of tough leather leg guards.  Light and comfortable.",
-    "weight": "765 g",
+    "description": "A set of soft leather cuisses, poleyns, and greaves that strap on over the legs, providing excellent protection from cutting and stabbing attacks.",
+    "weight": "2040 g",
     "volume": "2 L",
     "price": "40 USD",
     "price_postapoc": "10 USD",
@@ -1235,8 +1256,9 @@
     "color": "brown",
     "warmth": 25,
     "material_thickness": 4,
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY" ],
-    "armor": [ { "covers": [ "leg_l", "leg_r" ], "encumbrance": 7, "coverage": 90 } ]
+    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
+    "armor": [ { "covers": [ "leg_l", "leg_r" ], "encumbrance": 7, "coverage": 90 } ],
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "leather_leg_guards_xl",

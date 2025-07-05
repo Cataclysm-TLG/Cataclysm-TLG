@@ -137,6 +137,7 @@ struct plant_data {
 /*
  * List of known flags, used in both terrain.json and furniture.json.
  * TRANSPARENT - Players and monsters can see through/past it. Also sets ter_t.transparent
+ * TRANSLUCENT - Must be paired with TRANSPARENT. Allows light to pass through, but blocks vision.
  * FLAT - Player can build and move furniture on
  * CONTAINER - Items on this square are hidden until looted by the player
  * PLACE_ITEM - Valid terrain for place_item() to put items on
@@ -172,6 +173,7 @@ struct plant_data {
  * PERMEABLE - Allows gases to flow through unimpeded.
  * RAMP - Higher z-levels can be accessed from this tile
  * EASY_DECONSTRUCT - Player can deconstruct this without tools
+ * BASH_UNDEPLOY - Bashing this furniture has a chance to un-deploy it, rather than destroy it.
  * HIDE_PLACE - Creature on this tile can't be seen by other creature not standing on adjacent tiles
  * BLOCK_WIND - This tile will partially block wind
  * FLAT_SURF - Furniture or terrain or vehicle part with flat hard surface (ex. table, but not chair; tree stump, etc.).
@@ -205,6 +207,7 @@ struct plant_data {
  */
 enum class ter_furn_flag : int {
     TFLAG_TRANSPARENT,
+    TFLAG_TRANSLUCENT,
     TFLAG_FLAMMABLE,
     TFLAG_REDUCE_SCENT,
     TFLAG_SWIMMABLE,
@@ -310,6 +313,7 @@ enum class ter_furn_flag : int {
     TFLAG_ALIGN_WORKBENCH,
     TFLAG_NO_SPOIL,
     TFLAG_EASY_DECONSTRUCT,
+    TFLAG_BASH_UNDEPLOY,
     TFLAG_LADDER,
     TFLAG_ALARMED,
     TFLAG_CHOCOLATE,
@@ -322,7 +326,6 @@ enum class ter_furn_flag : int {
     TFLAG_MURKY,
     TFLAG_AMMOTYPE_RELOAD,
     TFLAG_TRANSPARENT_FLOOR,
-    TFLAG_TOILET_WATER,
     TFLAG_ELEVATOR,
     TFLAG_ACTIVE_GENERATOR,
     TFLAG_SMALL_HIDE,
@@ -500,14 +503,10 @@ struct map_data_common_t {
         */
         std::array<int, NUM_SEASONS> symbol_;
 
-        // TODO: Get rid of untyped overload.
-        bool can_examine( const tripoint &examp ) const;
         bool can_examine( const tripoint_bub_ms &examp ) const;
         bool has_examine( iexamine_examine_function func ) const;
         bool has_examine( const std::string &action ) const;
         void set_examine( iexamine_functions func );
-        // TODO: Get rid of untyped overload.
-        void examine( Character &, const tripoint & ) const;
         void examine( Character &, const tripoint_bub_ms & ) const;
 
         int light_emitted = 0;
@@ -521,8 +520,14 @@ struct map_data_common_t {
         // Warmth provided by the terrain (for sleeping, etc.)
         units::temperature_delta floor_bedding_warmth = 0_C_delta;
         int comfort = 0;
+        //flat damage reduction (increase if negative) on fall (some logic may apply)
+        int fall_damage_reduction = 0;
         // Maximal volume of items that can be stored in/on this furniture
         units::volume max_volume = DEFAULT_TILE_VOLUME;
+
+        std::string liquid_source_item_id; // id of a liquid this tile provides
+        double liquid_source_min_temp = 4; // in centigrades, cold water as default value
+        std::pair<int, int> liquid_source_count = { 0, 0 }; // charges of liquid, if it's finite source
 
         translation description;
 

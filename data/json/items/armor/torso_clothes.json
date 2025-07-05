@@ -11,7 +11,8 @@
     "material": [ "cotton" ],
     "material_thickness": 0.5,
     "color": "white",
-    "delete": { "flags": [ "WATER_FRIENDLY" ] },
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED" ] },
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ], "coverage": 100, "encumbrance": [ 1, 1 ] },
       {
@@ -51,7 +52,8 @@
     "material": [ "cotton" ],
     "material_thickness": 0.5,
     "color": "white",
-    "delete": { "flags": [ "WATER_FRIENDLY" ] },
+    "delete": { "flags": [ "OUTER" ] },
+    "extend": { "flags": [ "BELTED" ] },
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ], "coverage": 80, "encumbrance": [ 0, 0 ] },
       {
@@ -84,7 +86,7 @@
     "material": [ "cotton" ],
     "color": "white",
     "material_thickness": 0.5,
-    "delete": { "flags": [ "WATER_FRIENDLY" ] }
+    "delete": { "flags": [ "RAINPROOF" ] }
   },
   {
     "id": "apron_leather",
@@ -106,7 +108,8 @@
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 42,
         "encumbrance": [ 1, 1 ],
-        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ]
+        "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
+        "layers": [ "BELTED" ]
       }
     ],
     "pocket_data": [
@@ -128,7 +131,7 @@
     "warmth": 2,
     "material_thickness": 2,
     "environmental_protection": 1,
-    "flags": [ "POCKETS", "BELTED", "WATER_FRIENDLY" ]
+    "flags": [ "POCKETS", "OUTER", "RAINPROOF" ]
   },
   {
     "id": "apron_plastic",
@@ -141,7 +144,7 @@
     "material": [ "vinyl" ],
     "material_thickness": 1.5,
     "color": "light_cyan",
-    "extend": { "flags": [ "TRANSPARENT" ] }
+    "extend": { "flags": [ "TRANSPARENT", "RAINPROOF" ] }
   },
   {
     "id": "apron_cut_resistant",
@@ -214,7 +217,7 @@
     "looks_like": "sundress",
     "color": "blue",
     "material_thickness": 0.1,
-    "flags": [ "VARSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "VARSIZE" ],
     "armor": [
       { "coverage": 85, "covers": [ "torso" ] },
       { "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_hip_l", "leg_hip_r" ], "coverage": 100 },
@@ -574,6 +577,87 @@
         "color": "light_gray"
       }
     ]
+  },
+  {
+    "id": "shirt_leather",
+    "type": "ARMOR",
+    "name": { "str": "buckskin shirt" },
+    "description": "An overshirt made of very thin, lightweight leather.",
+    "weight": "500 g",
+    "volume": "1250 ml",
+    "price": "42 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "sheriffshirt",
+    "color": "brown",
+    "warmth": 2,
+    "material_thickness": 0.5,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 18 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 18 }
+    ]
+  },
+  {
+    "id": "shirt_leather_xl",
+    "type": "ARMOR",
+    "name": { "str": "buckskin shirt" },
+    "copy-from": "shirt_leather",
+    "looks_like": "shirt_leather",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "shirt_leather_xs",
+    "type": "ARMOR",
+    "copy-from": "shirt_leather",
+    "looks_like": "shirt_leather",
+    "name": { "str": "buckskin shirt" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
+    "id": "vest_leather_light",
+    "type": "ARMOR",
+    "name": { "str": "buckskin vest" },
+    "description": "A vest made of very thin, lightweight leather.",
+    "weight": "500 g",
+    "volume": "1250 ml",
+    "price": "42 USD",
+    "price_postapoc": "1 USD",
+    "to_hit": -5,
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "tacvest",
+    "color": "brown",
+    "warmth": 2,
+    "material_thickness": 0.5,
+    "flags": [ "VARSIZE" ],
+    "armor": [
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 18 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 }
+    ]
+  },
+  {
+    "id": "vest_leather_light_xl",
+    "type": "ARMOR",
+    "name": { "str": "buckskin vest" },
+    "copy-from": "vest_leather_light",
+    "looks_like": "vest_leather_light",
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "vest_leather_light_xs",
+    "type": "ARMOR",
+    "copy-from": "vest_leather_light",
+    "looks_like": "vest_leather_light",
+    "name": { "str": "buckskin vest" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "polo_shirt",

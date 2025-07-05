@@ -25,7 +25,7 @@
     "shopkeeper_price_rules": [
       { "group": "NC_ANCILLA_DOCTOR_stock", "premium": 2.0 },
       { "group": "NC_ANCILLA_DOCTOR_EXPENSIVE_ITEMS", "premium": 6.0 },
-      { "item": "RobofacCoin", "price": 50, "fixed_adj": 0 }
+      { "item": "RobofacCoin", "price": 5000, "fixed_adj": 0 }
     ],
     "skills": [
       {
@@ -52,12 +52,12 @@
     "id": "NC_ANCILLA_DOCTOR_stock",
     "subtype": "collection",
     "entries": [
-      { "item": "RobofacCoin", "prob": 100, "count": [ 8, 10 ] },
-      { "item": "disinfectant", "prob": 100, "count": [ 2, 10 ] },
+      { "item": "RobofacCoin", "prob": 100, "count": [ 2, 4 ] },
+      { "item": "disinfectant", "prob": 70, "count": [ 2, 10 ] },
       { "item": "bandages", "prob": 100, "count": [ 3, 10 ] },
       { "item": "saline", "prob": 100, "count": [ 1, 2 ] },
-      { "group": "drugs_emergency", "prob": 100, "count": [ 4, 6 ] },
-      { "group": "drugs_analgesic", "prob": 100, "count": [ 2, 4 ] }
+      { "group": "drugs_emergency", "prob": 70, "count": [ 1, 4 ] },
+      { "group": "drugs_analgesic", "prob": 70, "count": [ 2, 4 ] }
     ]
   },
   {
@@ -65,12 +65,12 @@
     "id": "NC_ANCILLA_DOCTOR_EXPENSIVE_ITEMS",
     "subtype": "collection",
     "entries": [
-      { "item": "morphine", "prob": 100, "count": 4 },
-      { "prob": 100, "group": "antibiotics_bottle_plastic_pill_prescription_15" },
-      { "prob": 100, "group": "strong_antibiotic_bottle_plastic_pill_prescription_5" },
-      { "item": "anesthetic", "prob": 100 },
-      { "prob": 100, "group": "oxycodone_bottle_plastic_pill_prescription_10" },
-      { "prob": 100, "group": "codeine_bottle_plastic_pill_painkiller_10" }
+      { "item": "morphine", "prob": 80, "count": 4 },
+      { "prob": 80, "group": "antibiotics_bottle_plastic_pill_prescription_15" },
+      { "prob": 80, "group": "strong_antibiotic_bottle_plastic_pill_prescription_5" },
+      { "item": "anesthetic", "prob": 90 },
+      { "prob": 80, "group": "oxycodone_bottle_plastic_pill_prescription_10" },
+      { "prob": 80, "group": "codeine_bottle_plastic_pill_painkiller_10" }
     ]
   },
   {
@@ -115,14 +115,14 @@
       {
         "text": "[4 HGC, 30m] I need you to patch me up.",
         "topic": "TALK_ANCILLA_DOCTOR_AID_DONE",
-        "effect": [ { "u_spend_cash": 20000, "true_eocs": { "id": "give_aid", "effect": "give_aid" } } ],
-        "condition": { "npc_service": 20000 }
+        "effect": [ { "u_consume_item": "RobofacCoin", "count": 4 }, "give_aid" ],
+        "condition": { "u_has_items": { "item": "RobofacCoin", "count": 4 } }
       },
       {
         "text": "[8 HGC, 1h] I need you to patch my friends up.",
         "topic": "TALK_ANCILLA_DOCTOR_AID_DONE",
-        "effect": { "u_spend_cash": 40000, "true_eocs": { "id": "give_all_aid", "effect": "give_all_aid" } },
-        "condition": { "npc_service": 40000 }
+        "effect": [ { "u_consume_item": "RobofacCoin", "count": 8 }, "give_all_aid" ],
+        "condition": { "u_has_items": { "item": "RobofacCoin", "count": 8 } }
       },
       { "text": "I should be fine.", "topic": "TALK_ANCILLA_DOCTOR" }
     ]
@@ -136,25 +136,25 @@
         "text": "I was wondering if you could install a cybernetic implant…",
         "topic": "TALK_DONE",
         "effect": "bionic_install",
-        "condition": { "npc_service": 0 }
+        "condition": { "not": { "npc_has_effect": "currently_busy" } }
       },
       {
         "text": "I was wondering if you could install a cybernetic implant in my friend here…",
         "topic": "TALK_DONE",
         "effect": "bionic_install_allies",
-        "condition": { "npc_service": 0 }
+        "condition": { "not": { "npc_has_effect": "currently_busy" } }
       },
       {
         "text": "I need help removing an implant…",
         "topic": "TALK_DONE",
         "effect": "bionic_remove",
-        "condition": { "npc_service": 0 }
+        "condition": { "not": { "npc_has_effect": "currently_busy" } }
       },
       {
         "text": "I need help removing an implant from one of my friends…",
         "topic": "TALK_DONE",
         "effect": "bionic_remove_allies",
-        "condition": { "npc_service": 0 }
+        "condition": { "not": { "npc_has_effect": "currently_busy" } }
       },
       { "text": "Oh no, I was wondering if you knew where to get some.", "topic": "TALK_ANCILLA_DOCTOR_FIND_BIONICS" },
       { "text": "Never mind.", "topic": "TALK_NONE" }

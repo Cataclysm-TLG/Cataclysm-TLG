@@ -67,5 +67,12 @@
     "material": [ { "type": "sand", "portion": 29 }, { "type": "clay", "portion": 1 } ],
     "symbol": ";",
     "color": "brown"
+  },
+  {
+    "id": "super_glue",
+    "type": "AMMO",
+    "copy-from": "super_glue",
+    "name": { "str": "glue" },
+    "description": "A thick, goopy glue that cures fast."
   }
 ]

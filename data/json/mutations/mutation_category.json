@@ -77,7 +77,7 @@
     "id": "GASTROPOD",
     "name": "Gastropod",
     "threshold_mut": "THRESH_GASTROPOD",
-    "mutagen_message": "Your split lower body starts to come back together.",
+    "mutagen_message": "Something twists inside you.",
     "memorial_message": "Left a trail.",
     "vitamin": "mutagen_gastropod",
     "base_removal_chance": 75,
@@ -210,7 +210,6 @@
     "threshold_mut": "THRESH_ALPHA",
     "mutagen_message": "You feel… better.  Somehow.",
     "memorial_message": "Started representing.",
-    "threshold_min": 2800,
     "vitamin": "mutagen_alpha",
     "base_removal_chance": 20
   },

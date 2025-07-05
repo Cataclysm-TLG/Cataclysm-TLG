@@ -1422,7 +1422,7 @@
       { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 95, "encumbrance": 40 }
     ],
     "warmth": 10,
-    "material_thickness": 5,
+    "material_thickness": 2.2,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "STURDY", "OUTER" ],
@@ -1468,7 +1468,7 @@
       }
     ],
     "warmth": 5,
-    "material_thickness": 4,
+    "material_thickness": 2,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "STURDY", "SUN_GLASSES", "RAINPROOF" ],
@@ -1508,7 +1508,7 @@
     "color": "light_gray",
     "warmth": 35,
     "flags": [ "OUTER" ],
-    "material_thickness": 6.5,
+    "material_thickness": 1.5,
     "techniques": [ "WBLOCK_1" ],
     "armor": [
       {
@@ -1540,7 +1540,7 @@
     "looks_like": "helmet_bike",
     "color": "dark_gray",
     "warmth": 10,
-    "material_thickness": 4,
+    "material_thickness": 3,
     "flags": [ "PADDED", "OUTER" ],
     "techniques": [ "WBLOCK_1" ],
     "armor": [
@@ -1796,7 +1796,7 @@
     "armor": [
       {
         "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.2 },
           { "type": "leather", "covered_by_mat": 1, "thickness": 1.0 }
         ],
         "covers": [ "head" ],
@@ -1841,7 +1841,7 @@
     "armor": [
       {
         "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2.2 },
           { "type": "leather", "covered_by_mat": 1, "thickness": 1.0 }
         ],
         "covers": [ "head" ],

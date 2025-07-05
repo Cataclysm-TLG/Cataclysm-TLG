@@ -343,7 +343,6 @@
   {
     "id": "MISSION_ROBOFAC_INTERCOM_2_ADVICE_DARPA",
     "type": "talk_topic",
-    "//": "This is a lie.  The researcher was XEDRA; DARPA is just the organization being used as a front.",
     "dynamic_line": "Officially speaking, they were a senior DARPA researcher.  Their corpse should stick out; it's likely the only one not wearing camouflage.  That's all you need to know."
   },
   {

@@ -25,6 +25,7 @@
 #include "pimpl.h"
 #include "point.h"
 #include "rng.h"
+#include "trap.h"
 #include "translation.h"
 #include "translations.h"
 #include "type_id.h"
@@ -43,11 +44,13 @@ static const efftype_id effect_webbed( "webbed" );
 
 static const flag_id json_flag_GRAB( "GRAB" );
 static const flag_id json_flag_NO_GRAB( "NO_GRAB" );
+static const flag_id json_flag_PIT( "PIT" );
 
 static const itype_id itype_rope_6( "rope_6" );
 static const itype_id itype_snare_trigger( "snare_trigger" );
 
 static const json_character_flag json_flag_DOWNED_RECOVERY( "DOWNED_RECOVERY" );
+static const json_character_flag json_flag_WALL_CLING( "WALL_CLING" );
 
 static const limb_score_id limb_score_balance( "balance" );
 static const limb_score_id limb_score_grip( "grip" );
@@ -55,6 +58,10 @@ static const limb_score_id limb_score_manip( "manip" );
 
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_unarmed( "unarmed" );
+
+static const ter_str_id ter_t_pit( "t_pit" );
+static const ter_str_id ter_t_pit_glass( "t_pit_glass" );
+static const ter_str_id ter_t_pit_spiked( "t_pit_spiked" );
 
 static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
@@ -98,9 +105,12 @@ void Character::try_remove_bear_trap()
         auto *mon = mounted_creature.get();
         if( mon->type->melee_dice * mon->type->melee_sides >= 18 ) {
             if( x_in_y( mon->type->melee_dice * mon->type->melee_sides, 200 ) ) {
+                map &here = get_map();
                 mon->remove_effect( effect_beartrap );
                 remove_effect( effect_beartrap );
                 add_msg( _( "The %s escapes the bear trap!" ), mon->get_name() );
+
+                here.spawn_item( mon->pos(), "beartrap" );
             } else {
                 add_msg_if_player( m_bad,
                                    _( "Your %s tries to free itself from the bear trap, but can't get loose!" ), mon->get_name() );
@@ -111,6 +121,8 @@ void Character::try_remove_bear_trap()
             remove_effect( effect_beartrap );
             add_msg_player_or_npc( m_good, _( "You free yourself from the bear trap!" ),
                                    _( "<npcname> frees themselves from the bear trap!" ) );
+            map &here = get_map();
+            here.spawn_item( pos(), "beartrap" );
         } else {
             add_msg_if_player( m_bad,
                                _( "You try to free yourself from the bear trap, but can't get loose!" ) );
@@ -123,15 +135,19 @@ void Character::try_remove_lightsnare()
     if( is_mounted() ) {
         auto *mon = mounted_creature.get();
         if( x_in_y( mon->type->melee_dice * mon->type->melee_sides, 12 ) ) {
+            map &here = get_map();
             mon->remove_effect( effect_lightsnare );
             remove_effect( effect_lightsnare );
             add_msg( _( "The %s escapes the light snare!" ), mon->get_name() );
+            here.spawn_item( pos(), "light_snare_kit" );
         }
     } else {
         if( can_escape_trap( 12 ) ) {
+            map &here = get_map();
             remove_effect( effect_lightsnare );
             add_msg_player_or_npc( m_good, _( "You free yourself from the light snare!" ),
                                    _( "<npcname> frees themselves from the light snare!" ) );
+            here.spawn_item( pos(), "light_snare_kit" );
         } else {
             add_msg_if_player( m_bad,
                                _( "You try to free yourself from the light snare, but can't get loose!" ) );
@@ -148,8 +164,8 @@ void Character::try_remove_heavysnare()
             if( x_in_y( mon->type->melee_dice * mon->type->melee_sides, 32 ) ) {
                 mon->remove_effect( effect_heavysnare );
                 remove_effect( effect_heavysnare );
-                here.spawn_item( pos(), itype_rope_6 );
-                here.spawn_item( pos(), itype_snare_trigger );
+                here.spawn_item( pos_bub(), itype_rope_6 );
+                here.spawn_item( pos_bub(), itype_snare_trigger );
                 add_msg( _( "The %s escapes the heavy snare!" ), mon->get_name() );
             }
         }
@@ -160,8 +176,8 @@ void Character::try_remove_heavysnare()
                                    _( "<npcname> frees themselves from the heavy snare!" ) );
             item rope( "rope_6", calendar::turn );
             item snare( "snare_trigger", calendar::turn );
-            here.add_item_or_charges( pos(), rope );
-            here.add_item_or_charges( pos(), snare );
+            here.add_item_or_charges( pos_bub(), rope );
+            here.add_item_or_charges( pos_bub(), snare );
         } else {
             add_msg_if_player( m_bad,
                                _( "You try to free yourself from the heavy snare, but can't get loose!" ) );
@@ -214,7 +230,7 @@ bool Character::try_remove_grab( bool attacking )
                                        std::max( std::max( static_cast<float>( get_skill_level( skill_melee ) ) / 10, 0.1f ),
                                                std::max( static_cast<float>( get_skill_level( skill_unarmed ) ) / 8, 0.1f ) ) );
         int grab_break_factor = has_grab_break_tec() ? 10 : 0;
-        const tripoint_range<tripoint> &surrounding = here.points_in_radius( pos(), 1, 0 );
+        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
 
         // Iterate through all our grabs and attempt to break them one by one
         for( const effect &eff : get_effects_with_flag( json_flag_GRAB ) ) {
@@ -223,7 +239,7 @@ bool Character::try_remove_grab( bool attacking )
             // We need to figure out which Creature is responsible for this grab early for good messaging
             // For now, one grabber per limb TODO: handle multiple grabbers and decrement intensity
             Creature *grabber = nullptr;
-            for( const tripoint loc : surrounding ) {
+            for( const tripoint_bub_ms loc : surrounding ) {
                 Character *guy = creatures.creature_at<Character>( loc );
                 if( guy && guy->grab_1.grabbed_part == eff.get_bp() ) {
                     add_msg_debug( debugmode::DF_CHARACTER, "Grabber %s found", guy->disp_name() );
@@ -411,9 +427,9 @@ void Character::try_remove_impeding_effect()
     }
 }
 
-bool Character::move_effects( bool attacking )
+bool Character::move_effects( bool attacking, tripoint dest_loc )
 {
-    if( has_effect( effect_downed ) ) {
+    if( has_effect( effect_downed ) && !attacking ) {
         try_remove_downed();
         return false;
     }
@@ -421,16 +437,16 @@ bool Character::move_effects( bool attacking )
         try_remove_webs();
         return false;
     }
-    if( has_effect( effect_lightsnare ) ) {
+    if( has_effect( effect_lightsnare ) && !attacking ) {
         try_remove_lightsnare();
         return false;
 
     }
-    if( has_effect( effect_heavysnare ) ) {
+    if( has_effect( effect_heavysnare ) && !attacking ) {
         try_remove_heavysnare();
         return false;
     }
-    if( has_effect( effect_beartrap ) ) {
+    if( has_effect( effect_beartrap ) && !attacking ) {
         try_remove_bear_trap();
         return false;
     }
@@ -448,14 +464,25 @@ bool Character::move_effects( bool attacking )
     // Currently we only have one thing that forces movement if you succeed, should we get more
     // than this will need to be reworked to only have success effects if /all/ checks succeed
     if( has_effect( effect_in_pit ) ) {
-        /** @EFFECT_DEX increases chance to escape pit, slightly */
-        if( !can_escape_trap( 40 - dex_cur / 2 ) ) {
-            add_msg_if_player( m_bad, _( "You try to escape the pit, but slip back in." ) );
-            return false;
-        } else {
-            add_msg_player_or_npc( m_good, _( "You escape the pit!" ),
-                                   _( "<npcname> escapes the pit!" ) );
-            remove_effect( effect_in_pit );
+        map &here = get_map();
+        trap trap_here = here.tr_at( pos() );
+        trap trap_there = here.tr_at( dest_loc );
+        const ter_id target_ter = here.ter( dest_loc );
+
+        // Adjacent pits are contiguous. We're not climbing out, we're just walking around at the bottom.
+        if( has_effect( effect_in_pit ) && !trap_there.has_flag( json_flag_PIT ) &&
+            target_ter != ter_t_pit && target_ter != ter_t_pit_spiked && target_ter != ter_t_pit_glass ) {
+            /** @EFFECT_DEX increases chance to escape pit, slightly.
+             * And of course if we can spider climb, we can just casually leave.
+             */
+            if( !has_flag( json_flag_WALL_CLING ) && !can_escape_trap( 40 - dex_cur / 2 ) ) {
+                add_msg_if_player( m_bad, _( "You try to escape the pit, but slip back in." ) );
+                return false;
+            } else {
+                add_msg_player_or_npc( m_good, _( "You escape the pit!" ),
+                                       _( "<npcname> escapes the pit!" ) );
+                remove_effect( effect_in_pit );
+            }
         }
     }
     // Attempt to break grabs, only check for orphan grabs on attack

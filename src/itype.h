@@ -399,10 +399,6 @@ struct islot_armor {
          */
         int warmth = 0;
         /**
-         * Whether this is a power armor item.
-         */
-        bool power_armor = false;
-        /**
          * Whether this item has ablative pockets
          */
         bool ablative = false;
@@ -493,10 +489,6 @@ struct islot_pet_armor {
      * What animal bodytype can wear this armor
      */
     std::string bodytype = "none";
-    /**
-     * Whether this is a power armor item.
-     */
-    bool power_armor = false;
 
     bool was_loaded = false;
 
@@ -787,6 +779,11 @@ struct islot_gun : common_ranged_data {
     */
     double overheat_threshold = -1.0;
 
+    /**
+    *  Multiplier of the chance for the gun to jam.
+    */
+    double gun_jam_mult = 1;
+
     std::map<ammotype, std::set<itype_id>> cached_ammos;
 
     /**
@@ -857,6 +854,9 @@ struct islot_gunmod : common_ranged_data {
 
     /** Modifies base loudness as provided by the currently loaded ammo */
     int loudness = 0;
+
+    /** Multiplies base loudness as provided by the currently loaded ammo */
+    float loudness_multiplier = 1;
 
     /** How many moves does this gunmod take to install? */
     int install_time = -1;
@@ -944,6 +944,9 @@ struct islot_magazine {
 
     /** How long it takes to load each unit of ammo into the magazine */
     int reload_time = 100;
+
+    /** Multiplier for the gun jamming from physical damage */
+    double mag_jam_mult = 1 ;
 
     /** For ammo belts one linkage (of given type) is dropped for each unit of ammo consumed */
     std::optional<itype_id> linkage;
@@ -1428,6 +1431,9 @@ struct itype {
         * greater than zero, transfers faster, cannot be less than zero.
         */
         float insulation_factor = 1.0f;
+
+        /** Flat damage reduction (increase if negative) on fall (some logic may apply). */
+        int fall_damage_reduction = 0;
 
         /**
         * Efficiency of solar energy conversion for solarpacks.

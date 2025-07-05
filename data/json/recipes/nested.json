@@ -8,7 +8,7 @@
     "name": "bows",
     "description": "Recipes related to constructing bows to launch arrows with.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "selfbow", "shortbow", "reflexbow", "longbow", "compositebow", "compgreatbow", "woodgreatbow" ],
+    "nested_category_data": [ "selfbow", "shortbow", "longbow", "compositebow", "woodgreatbow", "compgreatbow" ],
     "difficulty": 1
   },
   {
@@ -241,7 +241,7 @@
     "name": "crossbows",
     "description": "Recipes related to constructing crossbows to shoot bolts with.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "bullet_crossbow", "compositecrossbow", "huge_crossbow", "hand_crossbow", "rep_crossbow", "crossbow" ],
+    "nested_category_data": [ "bullet_crossbow", "huge_crossbow", "hand_crossbow", "rep_crossbow", "crossbow" ],
     "difficulty": 3
   },
   {
@@ -502,6 +502,30 @@
     "description": "Recipes related to tailoring armored vests from leather.",
     "skill_used": "tailor",
     "nested_category_data": [ "vest_leather_mod", "vest_leather_mod_xs", "vest_leather_mod_xl" ],
+    "difficulty": 3
+  },
+  {
+    "id": "nested_shirt_leather",
+    "type": "nested_category",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_TORSO",
+    "name": "buckskin shirts",
+    "description": "Recipes related to tailoring lightweight leather shirts.",
+    "skill_used": "tailor",
+    "nested_category_data": [ "shirt_leather", "shirt_leather_xs", "shirt_leather_xl" ],
+    "difficulty": 3
+  },
+  {
+    "id": "nested_vest_leather_light",
+    "type": "nested_category",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_TORSO",
+    "name": "buckskin vests",
+    "description": "Recipes related to tailoring lightweight leather vests.",
+    "skill_used": "tailor",
+    "nested_category_data": [ "vest_leather_light", "vest_leather_light_xs", "vest_leather_light_xl" ],
     "difficulty": 3
   },
   {
@@ -1996,14 +2020,7 @@
     "name": "modified attachments",
     "description": "Recipes related to modifying weapon accessories to attach to a wider variety of guns and crossbows.",
     "skill_used": "fabrication",
-    "nested_category_data": [
-      "bipod_mod",
-      "grip_mod",
-      "stabilizer_mod",
-      "muzzle_brake_mod",
-      "nested_modified_gunmods_weapons",
-      "nested_modified_gunmods_sights"
-    ]
+    "nested_category_data": [ "bipod_mod", "grip_mod", "muzzle_brake_mod", "nested_modified_gunmods_weapons", "nested_modified_gunmods_sights" ]
   },
   {
     "id": "nested_modified_gunmods_weapons",

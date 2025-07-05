@@ -647,6 +647,10 @@ bool main_menu::opening_screen()
 #endif
 
     while( !start ) {
+        if( g->uquit == QUIT_EXIT ) {
+            return false;
+        }
+
         ui_manager::redraw();
         std::string action = ctxt.handle_input();
         input_event sInput = ctxt.get_raw_input();
@@ -736,9 +740,12 @@ bool main_menu::opening_screen()
         // also check special keys
         if( action == "QUIT" ) {
 #if !defined(EMSCRIPTEN)
+            g->uquit = QUIT_EXIT_PENDING;
             if( query_yn( _( "Really quit?" ) ) ) {
+                g->uquit = QUIT_EXIT;
                 return false;
             }
+            g->uquit = QUIT_NO;
 #endif
         } else if( action == "LEFT" || action == "PREV_TAB" || action == "RIGHT" || action == "NEXT_TAB" ) {
             sel_line = 0;
@@ -938,7 +945,7 @@ bool main_menu::new_character_tab()
                     world_generator->set_active_world( nullptr );
                 } );
                 g->gamemode = nullptr;
-                WORLD *world = world_generator->pick_world();
+                WORLD *world = world_generator->pick_world( true, true );
                 if( world == nullptr ) {
                     continue;
                 }
@@ -976,7 +983,7 @@ bool main_menu::new_character_tab()
         // loading the world.
         // Pick a world, suppressing prompts if it's "play now" mode.
         const bool is_play_now = sel2 == 3 || sel2 == 4;
-        WORLD *world = world_generator->pick_world( !is_play_now, is_play_now );
+        WORLD *world = world_generator->pick_world( !is_play_now, true );
         if( world == nullptr ) {
             return false;
         }
@@ -1035,6 +1042,8 @@ bool main_menu::load_game( std::string const &worldname, save_t const &savegame 
 
     try {
         g->setup();
+    } catch( game::exit_exception const &/* ex */ ) {
+        return false;
     } catch( const std::exception &err ) {
         debugmsg( "Error: %s", err.what() );
         return false;

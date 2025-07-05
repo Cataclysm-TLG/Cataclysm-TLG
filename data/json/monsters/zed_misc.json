@@ -10,7 +10,7 @@
     "volume": "120 L",
     "weight": "150 kg",
     "hp": 160,
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "speed": 60,
     "material": [ "flesh" ],
     "symbol": "M",
@@ -109,7 +109,8 @@
         "monster_message": "Some of the pustules pop, and the frog mother opens her mouth and vomits tadpoles!"
       }
     ],
-    "regenerates": 40,
+    "regenerates": 12,
+    "melee_training_cap": 2,
     "armor": { "bash": 12, "cut": 2, "bullet": 1, "electric": 2 }
   },
   {
@@ -230,7 +231,7 @@
       { "name": "the eye", "armor_mult": { "physical": 0 }, "coverage": 1 }
     ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "vision_day": 15,
     "vision_night": 3,
     "harvest": "zombie_humanoid",
@@ -267,7 +268,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 5, "cut": 2, "bullet": 2, "electric": 1 }
+    "armor": { "bash": 5, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
     "id": "mon_zombie_brainless",
@@ -324,8 +325,8 @@
     "description": "This headless zombie has swollen to frightening proportions, towering almost nine feet tall.  Six-foot-long feelers of black ooze blindly wave from its neck, violently twitching at nearby sounds.  Its long stride allows it to quickly pursue its targets, which it pummels into pulp with its huge, swollen fists.",
     "default_faction": "zombie",
     "species": [ "ZOMBIE", "HUMAN" ],
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "875000 ml",
+    "weight": "180 kg",
     "hp": 300,
     "speed": 130,
     "material": [ "flesh" ],
@@ -333,10 +334,10 @@
     "color": "black_magenta",
     "aggression": 100,
     "morale": 100,
-    "melee_skill": 5,
+    "melee_skill": 6,
     "melee_dice": 4,
     "melee_dice_sides": 6,
-    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
+    "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
     "//": "the headless horror is technically blind, but its feelers allow it to sense your presence if you're close to it",
     "vision_day": 2,
     "vision_night": 2,
@@ -485,7 +486,7 @@
     "id": "mon_zombie_brute_ninja",
     "type": "MONSTER",
     "name": { "str": "zombie nightstalker" },
-    "description": "Somehow, this brute hides in the dark like some kind of boogeyman.  Very agile for such a large zombie.",
+    "description": "Somehow, this brute hides in the dark like some kind of boogeyman.  It is very agile for such a large zombie.",
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -507,7 +508,7 @@
     "dodge": 4,
     "weakpoint_sets": [ "wps_humanoid_body", "wps_humanoid_head_small" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "vision_day": 5,
     "vision_night": 40,
     "harvest": "zombie_humanoid_shadow",
@@ -566,7 +567,7 @@
       { "name": "the eye", "armor_mult": { "physical": 0 }, "coverage": 1 }
     ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 20,
     "vision_day": 6,
     "vision_night": 40,
     "harvest": "zombie_humanoid_shadow",
@@ -680,6 +681,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "smash" } ],
     "death_drops": "mon_zombie_hulk_death_drops",
     "regenerates": 15,
+    "melee_training_cap": 2,
     "flags": [
       "ALL_SEEING",
       "SEES",
@@ -883,7 +885,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "weakpoint_sets": [ "wps_humanoid_body", "wps_humanoid_head_small" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_hulk" ],
-    "bleed_rate": 0,
+    "bleed_rate": 10,
     "vision_day": 83,
     "vision_night": 4,
     "harvest": "zombie_hulk",
@@ -955,14 +957,29 @@
     "burn_into": "mon_zombie_scorched",
     "upgrades": { "half_life": 42, "into": "mon_zombie_predator" },
     "fungalize_into": "mon_zombie_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "CLIMBS", "PUSH_MON", "FILTHY" ],
+    "path_settings": { "max_dist": 45 },
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "WARM",
+      "BASHES",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "CLIMBS",
+      "PUSH_MON",
+      "FILTHY",
+      "PATH_AVOID_FIRE",
+      "PATH_AVOID_FALL"
+    ],
     "armor": { "electric": 1 }
   },
   {
     "id": "mon_zombie_mancroc",
     "type": "MONSTER",
     "name": { "str": "zombie snapper" },
-    "description": "With a crocodile-like snout and rows of protruding teeth, this swimwear-clad zombie lurks in the water.",
+    "description": "This zombie's elongated head is nearly entirely given over to a crocodilian maw full of daggerlike teeth.",
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -986,7 +1003,7 @@
       { "name": "the eye", "armor_mult": { "physical": 0 }, "coverage": 1 }
     ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "vision_day": 25,
     "vision_night": 5,
     "harvest": "zombie_humanoid",
@@ -1051,7 +1068,7 @@
     "dodge": 4,
     "weakpoint_sets": [ "wps_humanoid_body" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 20,
     "vision_day": 50,
     "vision_night": 5,
     "harvest": "zombie_humanoid",
@@ -1102,7 +1119,7 @@
     "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
     "dodge": 2,
-    "bleed_rate": 0,
+    "bleed_rate": 20,
     "vision_day": 50,
     "vision_night": 5,
     "weakpoint_sets": [ "wps_humanoid_body" ],
@@ -1221,6 +1238,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "default_zombie_death_drops",
     "regenerates": 12,
+    "melee_training_cap": 2,
     "burn_into": "mon_zombie_scorched",
     "flags": [
       "SEES",
@@ -1268,11 +1286,11 @@
       { "name": "the eye", "armor_mult": { "physical": 0 }, "coverage": 1 }
     ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "bleed_rate": 0,
+    "bleed_rate": 20,
     "vision_day": 45,
     "vision_night": 15,
     "harvest": "zombie_humanoid",
-    "path_settings": { "max_dist": 5 },
+    "path_settings": { "max_dist": 45 },
     "special_attacks": [
       { "type": "leap", "cooldown": 10, "max_range": 5, "min_consider_range": 2, "max_consider_range": 4 },
       {
@@ -1284,7 +1302,21 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "CLIMBS", "FILTHY" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "WARM",
+      "BASHES",
+      "GROUP_BASH",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "CLIMBS",
+      "FILTHY",
+      "PATH_AVOID_FIRE",
+      "PATH_AVOID_FALL"
+    ],
     "armor": { "bash": 5, "cut": 5, "bullet": 4, "electric": 1 }
   },
   {
@@ -1462,7 +1494,7 @@
     "melee_dice_sides": 4,
     "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
     "dodge": 1,
-    "bleed_rate": 0,
+    "bleed_rate": 50,
     "vision_day": 25,
     "vision_night": 5,
     "weakpoint_sets": [ "wps_humanoid_body_headless" ],
@@ -1543,7 +1575,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "heat": 5, "electric": 1 }
+    "armor": { "heat": 10, "electric": 1 }
   },
   {
     "id": "mon_smoker_brute",
@@ -1601,13 +1633,13 @@
       "FILTHY",
       "RANGED_ATTACKER"
     ],
-    "armor": { "bash": 2, "cut": 8, "stab": 8, "heat": 5, "bullet": 10, "electric": 2 }
+    "armor": { "bash": 2, "cut": 8, "stab": 8, "heat": 10, "bullet": 10, "electric": 2 }
   },
   {
     "id": "mon_zombie_swimmer_base",
     "type": "MONSTER",
-    "name": { "str": "swimmer zombie" },
-    "description": "A zombie clad in swimwear.  Probably not a very graceful swimmer anymore.",
+    "name": { "str": "drowned zombie" },
+    "description": "A zombie that must have died in or near water judging by its pallor and swollen state.",
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -1655,8 +1687,8 @@
   {
     "id": "mon_zombie_swimmer",
     "type": "MONSTER",
-    "name": { "str": "webbed zombie" },
-    "description": "A slick and glistening human body clad in swimwear.  Its hands and feet are heavily webbed, suggesting some kind of rapid evolutionary adaptation to water.",
+    "name": { "str": "swimmer zombie" },
+    "description": "A slick and glistening human body, bloated from what must have been a watery death.  Its hands and feet are elongated and webbed, suggesting some kind of rapid aquatic evolution.",
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -1802,6 +1834,7 @@
     "harvest": "zombie_thorny",
     "attack_effs": [ { "id": "paralyzepoison", "duration": 33 } ],
     "grab_strength": 20,
+    "path_settings": { "max_dist": 15 },
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, [ "PARA_STING", 30 ] ],
     "death_drops": "mon_zombie_thorny_death_drops",
     "burn_into": "mon_zombie_scorched",
@@ -1818,7 +1851,9 @@
       "REVIVES",
       "PUSH_MON",
       "FILTHY",
-      "PARALYZEVENOM"
+      "PARALYZEVENOM",
+      "PATH_AVOID_FIRE",
+      "PATH_AVOID_FALL"
     ],
     "armor": { "bash": 2, "cut": 4, "bullet": 3, "electric": 1 }
   },
@@ -1834,8 +1869,7 @@
   {
     "id": "mon_zombie_fursuit",
     "type": "MONSTER",
-    "name": { "str": "malicious mane" },
-    "//": "A pun. 'Mane' being an archaic synonym of zombie, which also refers hair on the back of an animals neck.",
+    "name": { "str": "zombie fursuiter" },
     "description": "A human body, swaying awkwardly in a torn cloth suit of an anthropomorphized animal.  Black goo and blood cakes the suit, and it gives off a foul, rotting odor.",
     "copy-from": "mon_zombie",
     "default_faction": "zombie",

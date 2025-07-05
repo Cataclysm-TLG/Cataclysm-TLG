@@ -346,13 +346,13 @@
   {
     "id": "wheel_caster",
     "type": "vehicle_part",
-    "name": { "str": "casters" },
+    "name": { "str": "small casters" },
     "item": "wheel_caster",
     "location": "under",
     "categories": [ "movement" ],
     "color": "dark_gray",
     "durability": 70,
-    "description": "A set of small wheels, mounted on pivots, like the ones on a rolling office chair.",
+    "description": "A set of small wheels mounted on pivots, like you'd find on a rolling office chair.",
     "damage_modifier": 50,
     "folded_volume": "1250 ml",
     "breaks_into": [ { "item": "plastic_chunk", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 1, 2 ] } ],
@@ -365,18 +365,18 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "adhesive", 5 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
     "id": "wheel_caster_large",
     "type": "vehicle_part",
-    "name": { "str": "large casters" },
+    "name": { "str": "medium casters" },
     "item": "wheel_caster_large",
     "location": "under",
     "categories": [ "movement" ],
     "color": "dark_gray",
-    "description": "A set of wheels, mounted on pivots, like the ones on a grocery cart.",
+    "description": "A set of medium wheels mounted on pivots, like you'd find on a shopping cart.",
     "durability": 70,
     "damage_modifier": 50,
     "folded_volume": "3150 ml",
@@ -390,7 +390,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "adhesive", 6 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
@@ -474,7 +474,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {

@@ -6,19 +6,19 @@
     "clauses": [
       {
         "id": "tired",
-        "text": "Tired",
+        "text": "Drowsy",
         "color": "yellow",
         "condition": { "and": [ { "math": [ "u_val('fatigue')", ">=", "191" ] }, { "math": [ "u_val('fatigue')", "<", "383" ] } ] }
       },
       {
         "id": "dead_tired",
-        "text": "Dead Tired",
+        "text": "Very Sleepy",
         "color": "light_red",
         "condition": { "and": [ { "math": [ "u_val('fatigue')", ">=", "383" ] }, { "math": [ "u_val('fatigue')", "<", "575" ] } ] }
       },
       {
         "id": "exhausted",
-        "text": "Exhausted",
+        "text": "Nodding Off",
         "color": "red",
         "condition": { "math": [ "u_val('fatigue')", ">=", "575" ] }
       }

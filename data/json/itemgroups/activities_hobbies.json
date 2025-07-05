@@ -325,14 +325,13 @@
       [ "string_36", 40 ],
       [ "longbow", 5 ],
       [ "compbow", 1 ],
+      [ "selfbow", 1 ],
       [ "bow_sight", 10 ],
       [ "bow_stabilizer", 10 ],
       [ "arrowrest", 10 ],
       [ "shortbow", 5 ],
-      [ "recurbow", 2 ],
-      [ "takedown_recurbow", 1 ],
+      [ "recurbow", 3 ],
       [ "quiver_takedown_bow", 1 ],
-      [ "reflexbow", 2 ],
       [ "leather_vambraces", 1 ],
       [ "quiver", 3 ],
       [ "nylon_quiver", 3 ],
@@ -446,8 +445,7 @@
       { "item": "ar_glasses_basic", "prob": 1, "charges": [ 0, -1 ] },
       { "item": "ar_glasses_advanced", "prob": 1, "charges": [ 0, -1 ] },
       [ "light_snare_kit", 5 ],
-      [ "camping_multitool", 5 ],
-      [ "utility_knife_folding", 5 ]
+      [ "camping_multitool", 5 ]
     ]
   },
   {
@@ -740,13 +738,5 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_small",
     "entries": [ { "item": "bfipowder", "container-item": "null", "count": [ 1, 4 ] } ]
-  },
-  {
-    "type": "item_group",
-    "id": "pur_tablets_bottle_plastic_small_1_15",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bottle_plastic_small",
-    "entries": [ { "item": "pur_tablets", "count": [ 1, 15 ] } ]
   }
 ]

@@ -6,11 +6,3 @@
 <color_white>Report bugs, suggestion and follow the development at:</color>
 
 <color_light_gray>* Github: </color><color_light_cyan>https://github.com/Cataclysm-TLG/Cataclysm-TLG</color>
-
-<color_light_red>******************************************************************************</color>
-<color_light_red>    This game is in beta!</color>
-<color_light_red>******************************************************************************</color>
-
-<color_white>Q: </color><color_yellow>What does that mean exactly?</color>
-
-<color_white>A: </color><color_light_gray>This game is undergoing heavy development, and will likely contain bugs or other issues.  Saves may not be compatible between versions, so make backups before you update.</color>

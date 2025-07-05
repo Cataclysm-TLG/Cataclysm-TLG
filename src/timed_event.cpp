@@ -10,7 +10,6 @@
 #include "avatar.h"
 #include "avatar_action.h"
 #include "character.h"
-#include "coordinate_conversions.h"
 #include "coordinates.h"
 #include "debug.h"
 #include "enums.h"
@@ -118,9 +117,9 @@ void timed_event::actualize()
                 pgettext( "memorial_female", "Drew the attention of more dark wyrms!" ) );
 
             // 50% chance to spawn a dark wyrm near every orifice on the level.
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
                 if( here.ter( p ) == ter_id( "t_orifice" ) ) {
-                    g->place_critter_around( mon_dark_wyrm, p, 1 );
+                    g->place_critter_around( mon_dark_wyrm, p.raw(), 1 );
                 }
             }
 
@@ -141,9 +140,9 @@ void timed_event::actualize()
         case timed_event_type::AMIGARA: {
             get_event_bus().send<event_type::angers_amigara_horrors>();
             int num_horrors = rng( 3, 5 );
-            std::optional<tripoint> fault_point;
+            std::optional<tripoint_bub_ms> fault_point;
             bool horizontal = false;
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
                 if( here.ter( p ) == ter_t_fault ) {
                     fault_point = p;
                     horizontal = here.ter( p + tripoint_east ) == ter_t_fault ||
@@ -153,20 +152,20 @@ void timed_event::actualize()
             }
             for( int i = 0; fault_point && i < num_horrors; i++ ) {
                 for( int tries = 0; tries < 10; ++tries ) {
-                    tripoint monp = player_character.pos();
+                    tripoint_bub_ms monp = player_character.pos_bub();
                     if( horizontal ) {
-                        monp.x = rng( fault_point->x, fault_point->x + 2 * SEEX - 8 );
+                        monp.x() = rng( fault_point->x(), fault_point->x() + 2 * SEEX - 8 );
                         for( int n = -1; n <= 1; n++ ) {
-                            if( here.ter( point( monp.x, fault_point->y + n ) ) == ter_t_rock_floor ) {
-                                monp.y = fault_point->y + n;
+                            if( here.ter( point_bub_ms( monp.x(), fault_point->y() + n ) ) == ter_t_rock_floor ) {
+                                monp.y() = fault_point->y() + n;
                             }
                         }
                     } else {
                         // Vertical fault
-                        monp.y = rng( fault_point->y, fault_point->y + 2 * SEEY - 8 );
+                        monp.y() = rng( fault_point->y(), fault_point->y() + 2 * SEEY - 8 );
                         for( int n = -1; n <= 1; n++ ) {
-                            if( here.ter( point( fault_point->x + n, monp.y ) ) == ter_t_rock_floor ) {
-                                monp.x = fault_point->x + n;
+                            if( here.ter( point_bub_ms( fault_point->x() + n, monp.y() ) ) == ter_t_rock_floor ) {
+                                monp.x() = fault_point->x() + n;
                             }
                         }
                     }
@@ -180,7 +179,7 @@ void timed_event::actualize()
 
         case timed_event_type::ROOTS_DIE:
             get_event_bus().send<event_type::destroys_triffid_grove>();
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
                 if( here.ter( p ) == ter_t_root_wall && one_in( 3 ) ) {
                     here.ter_set( p, ter_t_underbrush );
                 }
@@ -190,7 +189,7 @@ void timed_event::actualize()
         case timed_event_type::DSA_ALRP_SUMMON: {
             const tripoint_abs_sm u_pos = player_character.global_sm_location();
             if( rl_dist( u_pos, map_point ) <= 4 ) {
-                const tripoint spot = here.bub_from_abs( project_to<coords::ms>( map_point ) ).raw();
+                const tripoint_bub_ms spot = here.bub_from_abs( project_to<coords::ms>( map_point ) );
                 monster dispatcher( mon_dsa_alien_dispatch );
                 fake_spell summoning( spell_dks_summon_alrp, true, 12 );
                 summoning.get_spell( player_character ).cast_all_effects( dispatcher, spot );
@@ -256,7 +255,7 @@ void timed_event::per_turn()
 
         case timed_event_type::AMIGARA_WHISPERS: {
             bool faults = false;
-            for( const tripoint &p : here.points_on_zlevel() ) {
+            for( const tripoint_bub_ms &p : here.points_on_zlevel() ) {
                 if( here.ter( p ) == ter_t_fault ) {
                     faults = true;
                     break;

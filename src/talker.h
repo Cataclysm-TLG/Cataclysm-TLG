@@ -25,6 +25,11 @@ class vehicle;
 struct mutation_variant;
 enum class get_body_part_flags;
 
+namespace npc_factions
+{
+enum class relationship : int;
+} // namespace npc_factions
+
 using bodytype_id = std::string;
 
 /*
@@ -55,7 +60,7 @@ class talker
         virtual item_location *get_item() {
             return nullptr;
         }
-        virtual item_location *get_item() const {
+        virtual item_location const *get_item() const {
             return nullptr;
         }
         virtual monster *get_monster() {
@@ -225,6 +230,16 @@ class talker
         virtual bool has_trait( const trait_id & ) const {
             return false;
         }
+        virtual int get_total_in_category( const mutation_category_id &, enum mut_count_type ) const {
+            return 0;
+        }
+        virtual int get_total_in_category_char_has( const mutation_category_id &,
+                enum mut_count_type ) const {
+            return 0;
+        }
+        virtual bool is_trait_purifiable( const trait_id & ) const {
+            return false;
+        }
         virtual bool has_recipe( const recipe_id & ) const {
             return false;
         }
@@ -240,6 +255,7 @@ class talker
         virtual void unset_mutation( const trait_id & ) {}
         virtual void activate_mutation( const trait_id & ) {}
         virtual void deactivate_mutation( const trait_id & ) {}
+        virtual void set_trait_purifiability( const trait_id &, const bool & ) {}
         virtual void set_fatigue( int ) {};
         virtual bool has_flag( const json_character_flag & ) const {
             return false;
@@ -484,6 +500,8 @@ class talker
         virtual void set_ai_rule( const std::string &, const std::string & ) {}
         virtual void clear_ai_rule( const std::string &, const std::string & ) {}
 
+        virtual void set_fac_relation( const Character *, npc_factions::relationship, bool ) {}
+
         // other descriptors
         virtual std::string get_job_description() const {
             return "";
@@ -541,6 +559,7 @@ class talker
             return 0;
         }
         virtual void set_addiction_turns( const addiction_id &, int ) {}
+        virtual void mod_stored_kcal( int, bool ) {}
         virtual void set_stored_kcal( int ) {}
         virtual void set_stim( int ) {}
         virtual void set_thirst( int ) {}
@@ -578,6 +597,10 @@ class talker
         virtual int attack_speed() const {
             return 0;
         }
+        virtual dealt_damage_instance deal_damage( Creature *, bodypart_id,
+                const damage_instance & ) const {
+            return dealt_damage_instance();
+        };
         virtual double armor_at( damage_type_id &, bodypart_id & ) const {
             return 0;
         }

@@ -47,7 +47,7 @@
     "longest_side": "82 cm",
     "price": "80 USD",
     "price_postapoc": "5 USD",
-    "to_hit": -3,
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
     "material": [ "steel", "plastic" ],
     "symbol": "/",
     "color": "red",
@@ -83,7 +83,7 @@
     "type": "TOOL",
     "name": { "str": "chainsaw (on)", "str_pl": "chainsaws (on)" },
     "description": "This chainsaw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": -4,
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
     "turns_per_charge": 4,
     "charges_per_use": 0,
     "revert_to": "chainsaw_off",
@@ -92,6 +92,7 @@
     "use_action": {
       "type": "effect_on_conditions",
       "menu_text": "Turn off",
+      "ammo_scale": 0,
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_deactivate__chainsaw",
@@ -178,6 +179,7 @@
     "use_action": {
       "type": "effect_on_conditions",
       "menu_text": "Turn off",
+      "ammo_scale": 0,
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_deactivate__polesaw",
@@ -265,6 +267,7 @@
     "use_action": {
       "type": "effect_on_conditions",
       "menu_text": "Turn off",
+      "ammo_scale": 0,
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_deactivate__circsaw",
@@ -427,7 +430,7 @@
     "type": "TOOL",
     "name": { "str": "electric chainsaw (on)", "str_pl": "electric chainsaws (on)" },
     "description": "This electric chainsaw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": -4,
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
     "power_draw": "2 kW",
     "charges_per_use": 0,
     "revert_to": "elec_chainsaw_off",
@@ -435,6 +438,7 @@
     "use_action": {
       "type": "effect_on_conditions",
       "menu_text": "Turn off",
+      "ammo_scale": 0,
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_deactivate__elec_chainsaw",
@@ -506,6 +510,7 @@
       {
         "type": "effect_on_conditions",
         "menu_text": "Turn off",
+        "ammo_scale": 0,
         "effect_on_conditions": [
           {
             "id": "EOC_toolweapon_deactivate__elec_chainsaw_cord",

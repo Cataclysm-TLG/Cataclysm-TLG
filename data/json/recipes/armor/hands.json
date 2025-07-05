@@ -171,12 +171,8 @@
     "skills_required": [ "fabrication", 6 ],
     "time": "20 h",
     "autolearn": true,
-    "using": [
-      [ "tailoring_leather_small", 2 ],
-      [ "tailoring_nomex_patchwork", 2 ],
-      [ "tailoring_kevlar_fabric", 1 ],
-      [ "liquid_rubber", 3 ]
-    ],
+    "using": [ [ "tailoring_leather_small", 2 ], [ "tailoring_nomex_patchwork", 2 ], [ "tailoring_kevlar_fabric", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -189,12 +185,8 @@
     "type": "recipe",
     "copy-from": "gloves_fsurvivor",
     "time": "20 h",
-    "using": [
-      [ "tailoring_leather_small", 1 ],
-      [ "tailoring_nomex_patchwork", 1 ],
-      [ "tailoring_kevlar_fabric", 1 ],
-      [ "liquid_rubber", 2 ]
-    ],
+    "using": [ [ "tailoring_leather_small", 1 ], [ "tailoring_nomex_patchwork", 1 ], [ "tailoring_kevlar_fabric", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "components": [ [ [ "duct_tape", 90 ] ], [ [ "nomex_gloves", 1 ], [ "fire_gauntlets", 1 ] ] ]
   },
   {
@@ -202,12 +194,8 @@
     "type": "recipe",
     "copy-from": "gloves_fsurvivor",
     "time": "22 h 45 m",
-    "using": [
-      [ "tailoring_leather_small", 3 ],
-      [ "tailoring_nomex_patchwork", 3 ],
-      [ "tailoring_kevlar_fabric", 2 ],
-      [ "liquid_rubber", 4 ]
-    ],
+    "using": [ [ "tailoring_leather_small", 3 ], [ "tailoring_nomex_patchwork", 3 ], [ "tailoring_kevlar_fabric", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "components": [ [ [ "duct_tape", 170 ] ], [ [ "nomex_gloves", 1 ], [ "fire_gauntlets", 1 ] ] ]
   },
   {
@@ -280,13 +268,14 @@
     "skills_required": [ "fabrication", 5 ],
     "time": "20 h",
     "autolearn": true,
-    "using": [ [ "sewing_standard", 50 ], [ "liquid_rubber", 3 ] ],
+    "using": [ [ "sewing_standard", 50 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_polymerworking" },
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_articulation" }
     ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
       [ [ "faux_fur", 4 ] ],
@@ -300,13 +289,14 @@
     "type": "recipe",
     "copy-from": "gloves_wsurvivor_nofur",
     "time": "20 h",
-    "using": [ [ "sewing_standard", 37 ], [ "tailoring_kevlar_fabric", 1 ], [ "liquid_rubber", 2 ] ],
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_kevlar_fabric", 1 ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
       [ [ "faux_fur", 3 ] ],
       [ [ "kevlar_patch", 6 ] ],
       [ [ "gloves_tactical", 1 ], [ "xs_gloves_faux_fur", 1 ], [ "xs_gloves_light", 1 ] ]
     ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "byproducts": [ [ "scrap_faux_fur", 4 ] ]
   },
   {
@@ -314,7 +304,7 @@
     "type": "recipe",
     "copy-from": "gloves_wsurvivor_nofur",
     "time": "26 h",
-    "using": [ [ "sewing_standard", 75 ], [ "tailoring_kevlar_fabric", 2 ], [ "liquid_rubber", 4 ] ],
+    "using": [ [ "sewing_standard", 75 ], [ "tailoring_kevlar_fabric", 2 ] ],
     "components": [
       [ [ "duct_tape", 120 ] ],
       [ [ "duct_tape", 80 ] ],
@@ -322,6 +312,7 @@
       [ [ "kevlar_patch", 12 ] ],
       [ [ "gloves_tactical", 1 ], [ "xl_gloves_faux_fur", 1 ], [ "xl_gloves_light", 1 ] ]
     ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "byproducts": [ [ "scrap_faux_fur", 4 ] ]
   },
   {
@@ -443,12 +434,7 @@
     "skills_required": [ "fabrication", 4 ],
     "time": "20 h",
     "autolearn": true,
-    "using": [
-      [ "sewing_standard", 50 ],
-      [ "tailoring_leather_small", 6 ],
-      [ "tailoring_kevlar_fabric", 1 ],
-      [ "liquid_rubber", 3 ]
-    ],
+    "using": [ [ "sewing_standard", 50 ], [ "tailoring_leather_small", 6 ], [ "tailoring_kevlar_fabric", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_polymerworking" },
@@ -456,6 +442,7 @@
       { "proficiency": "prof_leatherworking" },
       { "proficiency": "prof_articulation" }
     ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
       [ [ "leather", 4 ] ],
@@ -468,12 +455,8 @@
     "type": "recipe",
     "copy-from": "gloves_survivor",
     "time": "20 h",
-    "using": [
-      [ "sewing_standard", 37 ],
-      [ "tailoring_leather_small", 4 ],
-      [ "tailoring_kevlar_fabric", 1 ],
-      [ "liquid_rubber", 2 ]
-    ],
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_leather_small", 4 ], [ "tailoring_kevlar_fabric", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
       [ [ "leather", 3 ] ],
@@ -653,7 +636,7 @@
     "skills_required": [ "fabrication", 5 ],
     "time": "20 h",
     "autolearn": true,
-    "using": [ [ "sewing_standard", 50 ], [ "tailoring_fur_small", 4 ], [ "tailoring_kevlar_fabric", 1 ], [ "liquid_rubber", 3 ] ],
+    "using": [ [ "sewing_standard", 50 ], [ "tailoring_fur_small", 4 ], [ "tailoring_kevlar_fabric", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_polymerworking" },
@@ -661,6 +644,7 @@
       { "proficiency": "prof_furriery" },
       { "proficiency": "prof_articulation" }
     ],
+    "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
       [ [ "leather", 4 ] ],
@@ -680,7 +664,8 @@
     "type": "recipe",
     "copy-from": "gloves_wsurvivor",
     "time": "20 h",
-    "using": [ [ "sewing_standard", 37 ], [ "tailoring_fur_small", 3 ], [ "tailoring_kevlar_fabric", 1 ], [ "liquid_rubber", 2 ] ],
+    "using": [ [ "sewing_standard", 37 ], [ "tailoring_fur_small", 3 ], [ "tailoring_kevlar_fabric", 1 ] ],
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
       [ [ "leather", 3 ] ],
@@ -700,7 +685,8 @@
     "type": "recipe",
     "copy-from": "gloves_wsurvivor",
     "time": "22 h 30 m",
-    "using": [ [ "sewing_standard", 75 ], [ "tailoring_fur_small", 5 ], [ "tailoring_kevlar_fabric", 2 ], [ "liquid_rubber", 4 ] ],
+    "using": [ [ "sewing_standard", 75 ], [ "tailoring_fur_small", 5 ], [ "tailoring_kevlar_fabric", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "components": [
       [ [ "duct_tape", 120 ] ],
       [ [ "leather", 6 ] ],
@@ -726,12 +712,8 @@
     "skills_required": [ "fabrication", 4 ],
     "time": "22h 30 m",
     "autolearn": true,
-    "using": [
-      [ "sewing_standard", 100 ],
-      [ "tailoring_leather_small", 16 ],
-      [ "tailoring_kevlar_fabric", 2 ],
-      [ "liquid_rubber", 4 ]
-    ],
+    "using": [ [ "sewing_standard", 100 ], [ "tailoring_leather_small", 16 ], [ "tailoring_kevlar_fabric", 2 ] ],
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_polymerworking" },
@@ -894,7 +876,7 @@
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HANDS",
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "2 h",
@@ -992,7 +974,7 @@
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HANDS",
     "skill_used": "fabrication",
     "difficulty": 5,
     "time": "6 h",
@@ -1016,8 +998,6 @@
     "result": "brigandine_gloves_xl",
     "type": "recipe",
     "copy-from": "brigandine_gloves",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
     "time": "7 h",
     "using": [
       [ "tailoring_canvas_patchwork", 2 ],
@@ -1032,8 +1012,6 @@
     "result": "brigandine_gloves_xs",
     "type": "recipe",
     "copy-from": "brigandine_gloves",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
     "time": "5 h",
     "using": [
       [ "tailoring_canvas_patchwork", 2 ],

@@ -119,6 +119,7 @@
     "bleed_rate": 50,
     "delete": { "upgrades": { "half_life": 42, "into_group": "GROUP_SOLDIER_UPGRADE" }, "categories": [ "CLASSIC" ] },
     "relative": { "hp": 20, "speed": 10, "melee_skill": 1, "vision_day": 10, "vision_night": 10 },
+    "harvest": "zombie_humanoid_acid",
     "extend": {
       "special_attacks": [
         [ "ACID_BARF", 10 ],
@@ -155,6 +156,7 @@
     "bleed_rate": 50,
     "delete": { "upgrades": { "half_life": 42, "into_group": "GROUP_SOLDIER_UPGRADE" }, "categories": [ "CLASSIC" ] },
     "relative": { "hp": 40, "speed": -10, "melee_skill": 2, "armor": { "bash": 5 } },
+    "harvest": "zombie_humanoid_acid",
     "extend": {
       "special_attacks": [
         [ "ACID_BARF", 5 ],
@@ -439,49 +441,6 @@
     "//": "This is a variation which will drop default military equipment, rather than specific naval uniforms and gear.",
     "description": "Lumbering about on all fours, this mutated beast's dagger-like claws clack against the ground as it predatorially moves: thick strands of exposed muscle tissue running across its rotting body.  The addition of its new bulk has caused the skin along its arms and back to split, and the brute's teeth have extended into spikes of bone.  The military insignias on the remains of the creature's pulverized gear are the only testaments to the soldier that this hulking abomination used to be.",
     "death_drops": "mon_zombie_soldier_death_drops"
-  },
-  {
-    "id": "mon_zombie_armored",
-    "type": "MONSTER",
-    "name": { "str": "armored zombie" },
-    "description": "Despite being encased in a what was once a nigh-impenetrable combat exoskeleton, something still managed to kill this soldier.",
-    "default_faction": "zombie",
-    "bodytype": "human",
-    "species": [ "ZOMBIE", "HUMAN" ],
-    "diff": 5,
-    "volume": "62500 ml",
-    "weight": "81500 g",
-    "hp": 120,
-    "speed": 70,
-    "material": [ "flesh" ],
-    "symbol": "Z",
-    "color": "white_red",
-    "scents_tracked": [ "sc_human", "sc_fetid" ],
-    "aggression": 100,
-    "morale": 100,
-    "melee_skill": 5,
-    "melee_dice": 3,
-    "melee_dice_sides": 6,
-    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
-    "weakpoint_sets": [ "wps_humanoid_full_helmet" ],
-    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_syn_armored" ],
-    "weakpoints": [
-      {
-        "name": "a crack in the armor",
-        "armor_mult": { "bullet": 0.5, "cut": 0.5, "stab": 0.25, "bash": 0.25 },
-        "coverage": 4,
-        "coverage_mult": { "broad": 0.75 },
-        "difficulty": { "ranged": 7, "melee": 5 }
-      }
-    ],
-    "bleed_rate": 0,
-    "vision_day": 30,
-    "vision_night": 3,
-    "harvest": "zombie_humanoid",
-    "death_drops": "mon_zombie_armored_death_drops",
-    "burn_into": "mon_zombie_scorched",
-    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
-    "armor": { "bash": 64, "cut": 64, "acid": 20, "heat": 20, "bullet": 51, "electric": 10 }
   },
   {
     "id": "mon_zombie_bio_op",

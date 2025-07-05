@@ -139,7 +139,7 @@
     "id": "log_immersion27",
     "copy-from": "file",
     "name": { "str": "INCIDENT REPORT: IMMERSION-27A" },
-    "description": "A white piece of paper, with the logo of XEDRA printed on its upper left corner.  It seems to be an internal report of some kind.",
+    "description": "A white piece of paper on official-looking stationary.  It seems to be an internal report of some kind.",
     "snippet_category": "log_immersion27"
   },
   {
@@ -160,7 +160,7 @@
     "type": "GENERIC",
     "id": "monitoring_equipment_doc",
     "copy-from": "log_immersion27",
-    "name": { "str": "XEDRA document" },
+    "name": { "str": "lab document" },
     "snippet_category": "monitoring_equipment"
   },
   {
@@ -313,19 +313,22 @@
     "flags": [ "TRADER_AVOID", "FIREWOOD", "TINDER" ]
   },
   {
-    "type": "GENERIC",
-    "id": "superglue",
+    "type": "AMMO",
+    "id": "super_glue",
     "category": "spare_parts",
     "symbol": ",",
+    "phase": "liquid",
     "color": "white",
     "name": { "str_sp": "superglue" },
-    "description": "A tube of strong glue.  Used in many crafting recipes.",
+    "description": "Strong cyanoacrylate glue.",
     "price": "18 USD",
     "price_postapoc": "1 USD",
     "material": [ "plastic" ],
-    "weight": "8 g",
-    "volume": "10 ml",
-    "to_hit": -2,
+    "weight": "26 mg",
+    "volume": "1 ml",
+    "ammo_type": "super_glue",
+    "//": "1 charge of superglue should cover an area of 5mm^2",
+    "count": 10,
     "flags": [ "UNRECOVERABLE" ]
   },
   {
@@ -335,7 +338,7 @@
     "symbol": ",",
     "color": "white",
     "name": { "str_sp": "rubber cement" },
-    "looks_like": "superglue",
+    "looks_like": "super_glue",
     "description": "A tin of adhesive typically used to glue rubber together.  It forms a less rigid bond than typical superglue, making it ideal for projects requiring flexibility.  Typically smelly and toxic.",
     "price": "18 USD",
     "price_postapoc": "80 cent",
@@ -1381,19 +1384,6 @@
   },
   {
     "type": "GENERIC",
-    "id": "toaster",
-    "symbol": ",",
-    "color": "light_gray",
-    "name": { "str": "toaster" },
-    "description": "A small two-slice toaster, not much use as anything but spare parts.",
-    "price": "10 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "aluminum", "plastic" ],
-    "weight": "725 g",
-    "volume": "750 ml"
-  },
-  {
-    "type": "GENERIC",
     "id": "broken_robofac_camspy",
     "symbol": ",",
     "color": "green",
@@ -2235,8 +2225,8 @@
     "type": "GENERIC",
     "id": "memory_card_science",
     "copy-from": "memory_card",
-    "name": { "str": "memory card (XEDRA)", "str_pl": "memory cards (XEDRA)" },
-    "description": "A memory card, can be used to store data.  This one has a label on which is written 'XEDRA' followed by a long string of numbers.",
+    "name": { "str": "memory card (CLASSIFIED)", "str_pl": "memory cards (CLASSIFIED)" },
+    "description": "A memory card, can be used to store data.  This one has an ominous label warning that it contains classified information.",
     "memory_card": {
       "data_chance": 1.0,
       "on_read_convert_to": "memory_card",
@@ -2927,6 +2917,7 @@
     "material": [ "cotton" ],
     "weight": "774 g",
     "volume": "1750 ml",
+    "fall_damage_reduction": 1,
     "flags": [ "SLEEP_AID" ],
     "variant_type": "generic",
     "variants": [

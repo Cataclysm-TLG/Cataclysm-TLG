@@ -357,6 +357,7 @@
     "looks_like": "t_dirtpile",
     "move_cost_mod": 3,
     "coverage": 5,
+    "fall_damage_reduction": 5,
     "concealment": 15,
     "comfort": 1,
     "floor_bedding_warmth": 50,
@@ -604,6 +605,7 @@
     "coverage": 10,
     "concealment": 38,
     "required_str": -1,
+    "fall_damage_reduction": 2,
     "connect_groups": "WOODFENCE",
     "connects_to": "WOODFENCE",
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "ORGANIC", "PERMEABLE", "SMALL_HIDE" ],
@@ -631,6 +633,7 @@
     "coverage": 20,
     "concealment": 90,
     "required_str": 14,
+    "fall_damage_reduction": 5,
     "connect_groups": "WOODFENCE",
     "connects_to": "WOODFENCE",
     "flags": [ "FLAMMABLE_ASH", "ORGANIC", "PERMEABLE", "BLOCK_WIND", "NOITEM", "SMALL_HIDE" ],
@@ -658,6 +661,7 @@
     "coverage": 10,
     "concealment": 38,
     "required_str": -1,
+    "fall_damage_reduction": 4,
     "flags": [ "FLAMMABLE_ASH", "ORGANIC", "PERMEABLE" ],
     "bash": {
       "str_min": 10,
@@ -683,6 +687,7 @@
     "coverage": 10,
     "concealment": 38,
     "required_str": -1,
+    "fall_damage_reduction": 4,
     "flags": [ "FLAMMABLE_ASH", "ORGANIC", "PERMEABLE" ],
     "bash": {
       "str_min": 10,
@@ -708,6 +713,7 @@
     "coverage": 10,
     "concealment": 38,
     "required_str": -1,
+    "fall_damage_reduction": 4,
     "flags": [ "FLAMMABLE_ASH", "ORGANIC", "PERMEABLE" ],
     "bash": {
       "str_min": 10,

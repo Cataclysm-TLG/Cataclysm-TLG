@@ -289,12 +289,12 @@
     "description": "A figure of an adult human, as seen in the display case at the mall.  It might be able to fool some zombies if it could attract their attention.",
     "price": "150 USD",
     "price_postapoc": "5 USD",
-    "material": [ "wood" ],
-    "weight": "81500 g",
+    "material": [ "fiberglass" ],
+    "weight": "13600 g",
     "volume": "62500 ml",
     "longest_side": "180 cm",
     "to_hit": -2,
-    "melee_damage": { "bash": 18 },
+    "melee_damage": { "bash": 4 },
     "use_action": [ { "type": "deploy_furn", "furn_type": "f_mannequin" } ]
   },
   {
@@ -307,8 +307,8 @@
     "description": "A figure of an adult human, as seen in the display case at the mall.  This one is cradling a talking doll.  It can make sound when powered by batteries and can be used to distract some zombies.",
     "price": "150 USD",
     "price_postapoc": "5 USD",
-    "material": [ "wood" ],
-    "weight": "81500 g",
+    "material": [ "fiberglass" ],
+    "weight": "13600 g",
     "volume": "62500 ml",
     "longest_side": "180 cm",
     "to_hit": -2,
@@ -331,6 +331,6 @@
       "need_charges": 100,
       "moves": 20
     },
-    "melee_damage": { "bash": 18 }
+    "melee_damage": { "bash": 4 }
   }
 ]

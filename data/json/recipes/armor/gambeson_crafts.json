@@ -161,7 +161,7 @@
     "//2": "roughly 5 hours total for the craft while skilled.  Lower time thanks to big premade sheets.",
     "//3": "byproducts are 25% patches and 75% scraps (scrap is 1g and patch is 3g)",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_quilting" } ],
     "difficulty": 5,
@@ -204,7 +204,7 @@
     "//2": "roughly 5 hours total for the craft while skilled.  Lower time thanks to big premade sheets.",
     "//3": "byproducts are 25% patches and 75% scraps (scrap is 1g and patch is 3g)",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HANDS",
     "skill_used": "tailor",
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_articulation" }, { "proficiency": "prof_quilting" } ],
     "difficulty": 5,
@@ -263,8 +263,7 @@
         [ "thread", 200 ],
         [ "yarn", 200 ],
         [ "plant_fibre", 200 ],
-        [ "straw_pile", 10 ],
-        [ "cable", 37 ]
+        [ "straw_pile", 10 ]
       ]
     ]
   },
@@ -372,7 +371,7 @@
     "//2": "roughly 24 hours for the craft, less material here overall than the jack, though articulation still needed.  Much lower time thanks to big premade sheets + batting layers and being overall much thinner..",
     "//3": "no byproducts because whatever is left would get shredded up and stuffed in the gambeson (batting is 50g each)",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_LEGS",
     "skill_used": "tailor",
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_articulation" }, { "proficiency": "prof_quilting" } ],
     "difficulty": 4,
@@ -410,7 +409,7 @@
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_TORSO",
+    "subcategory": "CSC_ARMOR_HEAD",
     "skill_used": "tailor",
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_quilting" } ],
     "difficulty": 5,

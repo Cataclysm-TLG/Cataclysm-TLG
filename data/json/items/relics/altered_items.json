@@ -137,7 +137,7 @@
   },
   {
     "id": "altered_jacket",
-    "copy-from": "jacket_leather",
+    "copy-from": "jacket_varsity",
     "type": "ARMOR",
     "name": { "str": "varsity jacket" },
     "description": "A jacket traditionally worn by school athletes.  The logo of the school has an oddly detailed fractal pattern that draws your eye in whenever you look at it."

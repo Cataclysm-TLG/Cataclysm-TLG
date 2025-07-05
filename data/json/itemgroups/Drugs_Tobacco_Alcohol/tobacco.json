@@ -7,7 +7,7 @@
       { "prob": 20, "group": "tobacco_bag_plastic_1_20" },
       { "prob": 20, "group": "chaw_wrapper_1_20" },
       { "item": "cigar", "prob": 10, "count": [ 1, 5 ] },
-      { "item": "ecig", "prob": 10, "count": [ 1, 40 ] },
+      { "item": "ecig", "prob": 10 },
       { "item": "advanced_ecig", "prob": 8, "charges": [ 1, 100 ] },
       [ "nicotine_liquid", 15 ],
       [ "pipe_tobacco", 10 ]

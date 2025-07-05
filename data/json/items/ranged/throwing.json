@@ -115,6 +115,7 @@
     "material": [ "steel", "wood" ],
     "volume": "750 ml",
     "weight": "792 g",
+    "longest_side": "30 cm",
     "to_hit": -1,
     "weapon_category": [ "HAND_AXES" ],
     "thrown_damage": [ { "damage_type": "bash", "amount": 6 }, { "damage_type": "cut", "amount": 16 } ],

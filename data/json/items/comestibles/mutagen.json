@@ -56,7 +56,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the mutagenic infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen", 250, 350 ] ]
+      "vitamins": [ [ "mutagen", 220, 320 ] ]
     }
   },
   {
@@ -73,7 +73,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the alpha infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_alpha", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_alpha", 220, 320 ] ]
     }
   },
   {
@@ -88,7 +88,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the beast infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_beast", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_beast", 220, 320 ] ]
     }
   },
   {
@@ -103,7 +103,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the avian infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_bird", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_bird", 220, 320 ] ]
     }
   },
   {
@@ -118,7 +118,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the bovoid infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_cattle", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_cattle", 220, 320 ] ]
     }
   },
   {
@@ -133,7 +133,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the cephalopod infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_cephalopod", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_cephalopod", 220, 320 ] ]
     }
   },
   {
@@ -152,7 +152,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the chimera infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_chimera", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_chimera", 220, 320 ] ]
     }
   },
   {
@@ -169,7 +169,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the chiropteran infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_chiropteran", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_chiropteran", 220, 320 ] ]
     }
   },
   {
@@ -185,7 +185,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the sylvan infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_elfa", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_elfa", 220, 320 ] ]
     }
   },
   {
@@ -200,7 +200,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the feline infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_feline", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_feline", 220, 320 ] ]
     }
   },
   {
@@ -215,7 +215,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the piscine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_fish", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_fish", 220, 320 ] ]
     }
   },
   {
@@ -230,7 +230,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the insect infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_insect", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_insect", 220, 320 ] ]
     }
   },
   {
@@ -245,7 +245,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the reptilian infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_lizard", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_lizard", 220, 320 ] ]
     }
   },
   {
@@ -260,7 +260,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the lupine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_lupine", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_lupine", 220, 320 ] ]
     }
   },
   {
@@ -277,7 +277,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the medical infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_medical", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_medical", 220, 320 ] ]
     }
   },
   {
@@ -292,7 +292,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the plant infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_plant", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_plant", 220, 320 ] ]
     }
   },
   {
@@ -308,7 +308,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the theropod infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_raptor", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_raptor", 220, 320 ] ]
     }
   },
   {
@@ -323,7 +323,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the rattine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_rat", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_rat", 220, 320 ] ]
     }
   },
   {
@@ -338,7 +338,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the slime infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_slime", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_slime", 220, 320 ] ]
     }
   },
   {
@@ -353,7 +353,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the aranean infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_spider", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_spider", 220, 320 ] ]
     }
   },
   {
@@ -368,7 +368,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the gastropod infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_gastropod", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_gastropod", 220, 320 ] ]
     }
   },
   {
@@ -383,7 +383,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the batrachian infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_batrachian", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_batrachian", 220, 320 ] ]
     }
   },
   {
@@ -398,7 +398,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the troglobite infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_troglobite", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_troglobite", 220, 320 ] ]
     }
   },
   {
@@ -413,7 +413,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the ursine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_ursine", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_ursine", 220, 320 ] ]
     }
   },
   {
@@ -428,7 +428,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the murine infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_mouse", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_mouse", 220, 320 ] ]
     }
   },
   {
@@ -442,7 +442,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the lagomorph infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_rabbit", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_rabbit", 220, 320 ] ]
     }
   },
   {
@@ -457,7 +457,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the crustacean infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_crustacean", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_crustacean", 220, 320 ] ]
     }
   },
   {
@@ -467,7 +467,7 @@
     "name": { "str_sp": "mutagen" },
     "description": "A syrupy black goop that reeks of noxious chemicals.  Drinking this may cause you to mutate.",
     "addiction_potential": 6,
-    "use_action": { "type": "consume_drug", "activation_message": "You drink the mutagen.", "vitamins": [ [ "mutagen", 225 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You drink the mutagen.", "vitamins": [ [ "mutagen", 120, 220 ] ] }
   },
   {
     "id": "mutagen_jabberblood",
@@ -484,8 +484,9 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You choke down the congealed blood.",
-      "vitamins": [ [ "mutagen_beast", 120 ], [ "mutagen", 90 ] ]
-    }
+      "vitamins": [ [ "mutagen_beast", 44, 64 ], [ "mutagen", 18 ] ]
+    },
+    "flags": [ "HEMOVORE_FUN" ]
   },
   {
     "id": "mutagen_alpha",
@@ -499,7 +500,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the alpha mutagen.",
-      "vitamins": [ [ "mutagen_alpha", 225 ], [ "mutagen", 125 ] ]
+      "vitamins": [ [ "mutagen_alpha", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -511,7 +512,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the beast mutagen.",
-      "vitamins": [ [ "mutagen_beast", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_beast", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -523,7 +524,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the avian mutagen.",
-      "vitamins": [ [ "mutagen_bird", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_bird", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -535,7 +536,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the bovoid mutagen.",
-      "vitamins": [ [ "mutagen_cattle", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_cattle", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -547,7 +548,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the cephalopod mutagen.",
-      "vitamins": [ [ "mutagen_cephalopod", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_cephalopod", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -561,7 +562,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the chimera mutagen.",
-      "vitamins": [ [ "mutagen_chimera", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_chimera", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -574,7 +575,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the chiropteran mutagen.",
-      "vitamins": [ [ "mutagen_chiropteran", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_chiropteran", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -588,7 +589,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the sylvan mutagen.",
-      "vitamins": [ [ "mutagen_elfa", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_elfa", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -600,7 +601,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the feline mutagen.",
-      "vitamins": [ [ "mutagen_feline", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_feline", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -612,7 +613,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the piscine mutagen.",
-      "vitamins": [ [ "mutagen_fish", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_fish", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -624,7 +625,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the insect mutagen.",
-      "vitamins": [ [ "mutagen_insect", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_insect", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -636,7 +637,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the reptilian mutagen.",
-      "vitamins": [ [ "mutagen_lizard", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_lizard", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -648,7 +649,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the lupine mutagen.",
-      "vitamins": [ [ "mutagen_lupine", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_lupine", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -662,7 +663,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the medical mutagen.",
-      "vitamins": [ [ "mutagen_medical", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_medical", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -674,7 +675,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the plant mutagen.",
-      "vitamins": [ [ "mutagen_plant", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_plant", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -687,7 +688,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the theropod mutagen.",
-      "vitamins": [ [ "mutagen_raptor", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_raptor", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -699,7 +700,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the rattine mutagen.",
-      "vitamins": [ [ "mutagen_rat", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_rat", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -711,7 +712,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the slime mutagen.",
-      "vitamins": [ [ "mutagen_slime", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_slime", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -723,7 +724,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the aranean mutagen.",
-      "vitamins": [ [ "mutagen_spider", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_spider", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -736,7 +737,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the batrachian mutagen.",
-      "vitamins": [ [ "mutagen_batrachian", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_batrachian", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -749,7 +750,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the gastropod mutagen.",
-      "vitamins": [ [ "mutagen_gastropod", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_gastropod", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -761,7 +762,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the troglobite mutagen.",
-      "vitamins": [ [ "mutagen_troglobite", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_troglobite", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -773,7 +774,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the ursine mutagen.",
-      "vitamins": [ [ "mutagen_ursine", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_ursine", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -785,7 +786,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the murine mutagen.",
-      "vitamins": [ [ "mutagen_mouse", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_mouse", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -798,7 +799,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the lagomorph mutagen.",
-      "vitamins": [ [ "mutagen_rabbit", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_rabbit", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -812,7 +813,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the crustacean mutagen.",
-      "vitamins": [ [ "mutagen_crustacean", 225 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_crustacean", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
@@ -826,7 +827,11 @@
     "color": "pink",
     "healthy": -3,
     "addiction_potential": 8,
-    "use_action": { "type": "consume_drug", "activation_message": "You drink the purifier.", "vitamins": [ [ "mutagen_human", 225 ] ] }
+    "use_action": {
+      "type": "consume_drug",
+      "activation_message": "You drink the purifier.",
+      "vitamins": [ [ "mutagen_human", 120, 220 ] ]
+    }
   },
   {
     "id": "iv_purifier",
@@ -842,7 +847,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the processed purifier.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_human", 250, 350 ] ]
+      "vitamins": [ [ "mutagen_human", 220, 320 ] ]
     }
   },
   {

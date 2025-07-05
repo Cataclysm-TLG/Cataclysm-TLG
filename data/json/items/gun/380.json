@@ -80,6 +80,8 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 270,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "rugerlcpmag" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -102,6 +104,8 @@
     "ammo": [ "380" ],
     "dispersion": 480,
     "durability": 7,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "min_cycle_recoil": 270,
     "pocket_data": [
       {
@@ -121,7 +125,8 @@
     "description": "A .380 subcompact pistol.  Designed for concealed carry and built from high-quality, durable materials.",
     "weight": "283 g",
     "volume": "187 ml",
-    "longest_side": "71 mm",
+    "longest_side": "137 mm",
+    "barrel_length": "71 mm",
     "price": "640 USD",
     "price_postapoc": "12 USD 50 cent",
     "to_hit": -2,
@@ -131,6 +136,8 @@
     "ammo": [ "380" ],
     "dispersion": 480,
     "durability": 7,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "min_cycle_recoil": 225,
     "pocket_data": [ { "magazine_well": "74 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "taurus_spectrum_mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -220,7 +227,15 @@
       [ "stock accessory", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent" ],
+    "faults": [
+      "fault_gun_blackpowder",
+      "fault_gun_dirt",
+      "fault_gun_chamber_spent",
+      "fault_fail_to_feed",
+      "fault_stovepipe",
+      "fault_double_feed"
+    ],
+    "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "pocket_data": [ { "magazine_well": "236 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hpt3895mag_10rd" ] } ],
     "melee_damage": { "bash": 10 }
   }

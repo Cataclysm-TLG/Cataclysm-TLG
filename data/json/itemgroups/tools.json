@@ -5,6 +5,7 @@
     "//": "Tools commonly used by blacksmiths",
     "items": [
       [ "anvil", 30 ],
+      [ "anvil_crude", 10 ],
       [ "chisel", 90 ],
       [ "crucible", 30 ],
       [ "swage", 60 ],
@@ -76,14 +77,14 @@
     "type": "item_group",
     "//": "Portable tools used for luthier",
     "items": [
-      { "item": "luthier_toolset", "prob": 100 },
-      { "item": "tonewood", "prob": 100, "count": [ 1, 6 ] },
-      { "item": "tuning_pegs", "prob": 100, "count": [ 5, 15 ] },
-      { "item": "piano_wire", "prob": 100, "count": [ 1, 3 ] },
+      { "item": "luthier_toolset", "prob": 90 },
+      { "item": "tonewood", "prob": 90, "count": [ 1, 6 ] },
+      { "item": "tuning_pegs", "prob": 90, "count": [ 1, 15 ] },
+      { "item": "piano_wire", "prob": 90, "count": [ 1, 3 ] },
       [ "hand_drill", 20 ],
-      { "item": "superglue", "prob": 100, "count": [ 1, 3 ] },
+      { "group": "superglue", "prob": 90, "count": [ 0, 2 ] },
       [ "chisel", 10 ],
-      [ "sandpaper", 100 ]
+      [ "sandpaper", 90 ]
     ]
   },
   {
@@ -137,7 +138,7 @@
       [ "screwdriver_set", 50 ],
       [ "socket_screwdriver_set", 10 ],
       [ "duct_tape", 10 ],
-      [ "superglue", 10 ],
+      { "group": "superglue", "prob": 10 },
       [ "tin_snips", 10 ],
       [ "wrench", 20 ],
       [ "wrench_small", 20 ],
@@ -280,8 +281,7 @@
       { "item": "teargas_sprayer", "prob": 15, "charges": 10 },
       { "group": "book_mag_surv", "prob": 10 },
       { "group": "vfw_books", "prob": 20 },
-      [ "camping_multitool", 2 ],
-      [ "utility_knife_folding", 2 ]
+      [ "camping_multitool", 2 ]
     ]
   },
   {
@@ -330,7 +330,7 @@
       [ "shovel", 40 ],
       [ "hammer_sledge", 10 ],
       [ "hammer_sledge_engineer", 20 ],
-      { "item": "spray_can", "prob": 100, "charges": [ 0, 10 ] },
+      { "item": "spray_can", "prob": 90, "charges": [ 0, 10 ] },
       { "item": "rubber_spray_can", "prob": 20, "charges": [ 0, 10 ] },
       { "item": "permanent_marker", "prob": 50, "charges": [ 0, 500 ] },
       [ "funnel", 200 ],
@@ -345,7 +345,7 @@
       { "item": "soldering_iron", "prob": 150 },
       { "item": "soldering_iron_portable", "prob": 150, "charges": [ 0, 50 ] },
       { "item": "reciprocating_saw", "prob": 50, "charges": [ 0, 500 ] },
-      { "item": "cordless_drill", "prob": 100, "charges": [ 0, 500 ] },
+      { "item": "cordless_drill", "prob": 80, "charges": [ 0, 500 ] },
       [ "pin_reamer", 30 ],
       [ "clamp", 10 ],
       [ "sandpaper", 90 ],
@@ -357,12 +357,12 @@
     "type": "item_group",
     "//": "Portable tools used by electricians and for electronics repair",
     "items": [
-      { "group": "tools_common_small", "prob": 100 },
-      { "item": "soldering_iron", "prob": 100 },
-      { "item": "soldering_iron_portable", "prob": 100, "charges": [ 0, 50 ] },
+      { "group": "tools_common_small", "prob": 90 },
+      { "item": "soldering_iron", "prob": 90 },
+      { "item": "soldering_iron_portable", "prob": 70, "charges": [ 0, 50 ] },
       [ "magnifying_glass", 100 ],
       { "item": "voltmeter", "prob": 10, "charges": [ 0, 100 ] },
-      { "item": "multimeter", "prob": 100, "charges": [ 0, 100 ] },
+      { "item": "multimeter", "prob": 90, "charges": [ 0, 100 ] },
       [ "recharge_station", 10 ],
       [ "vac_mold", 10 ],
       [ "polycarbonate_sheet", 50 ],
@@ -389,7 +389,7 @@
     "type": "item_group",
     "//": "Tools commonly found in the home or other domestic settings",
     "items": [
-      { "group": "tools_common", "prob": 100 },
+      { "group": "tools_common", "prob": 90 },
       { "group": "tools_lighting", "prob": 50 },
       { "group": "tools_tailor", "prob": 50 },
       { "group": "tools_toolbox", "prob": 4 },
@@ -409,7 +409,7 @@
       [ "polycarbonate_sheet", 50 ],
       {
         "collection": [
-          { "item": "oxy_torch", "prob": 100 },
+          { "item": "oxy_torch", "prob": 90 },
           {
             "distribution": [ { "item": "weldtank", "prob": 100, "count": [ 1, 2 ] }, { "item": "tinyweldtank", "prob": 100, "count": [ 1, 3 ] } ],
             "prob": 100
@@ -490,7 +490,7 @@
       { "item": "whistle_multitool", "prob": 70 },
       { "item": "glowstick", "charges": 1400, "prob": 60 },
       { "item": "handflare", "count": [ 0, 4 ], "charges": 300 },
-      { "group": "pur_tablets_bottle_plastic_small_0_15" },
+      { "group": "pur_tablets_bottle_plastic_small_1_15" },
       { "item": "pocket_survival", "prob": 40 }
     ]
   },
@@ -679,7 +679,7 @@
       [ "multitool", 5 ],
       [ "pockknife", 50 ],
       [ "knife_folding", 30 ],
-      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_75_100" },
+      { "prob": 10, "group": "pur_tablets_bottle_plastic_small_1_15" },
       { "item": "ref_lighter", "prob": 20, "charges": [ 0, 50 ] },
       {
         "collection": [ { "item": "ref_lighter_butane" }, { "item": "butane_can", "charges": [ 350, 400 ] } ],
@@ -700,8 +700,7 @@
       [ "light_snare_kit", 3 ],
       { "item": "propane_lantern", "prob": 15, "charges": [ 2000, 3000 ] },
       { "item": "propane_cooker", "prob": 15, "charges": [ 2000, 3000 ] },
-      [ "camping_multitool", 2 ],
-      [ "utility_knife_folding", 2 ]
+      [ "camping_multitool", 2 ]
     ]
   },
   {
@@ -791,6 +790,7 @@
       [ "stopcock", 3 ],
       [ "beaker", 5 ],
       [ "gradcylinder", 5 ],
+      { "item": "petri_dish", "prob": 5 },
       [ "rack_test_tube", 5 ],
       [ "test_tube_micro", 5 ],
       [ "rack_test_tube_micro", 5 ],
@@ -852,7 +852,7 @@
       [ "teleporter", 1 ],
       { "item": "laptop", "prob": 4, "charges": [ 0, 500 ] },
       { "item": "plut_cell", "prob": 4, "charges": [ 1, 5 ] },
-      [ "superglue", 30 ],
+      { "group": "superglue", "prob": 30 },
       [ "pliers", 10 ],
       [ "tin_snips", 10 ],
       { "item": "matches", "prob": 10, "charges": [ 1, 20 ] },
@@ -1005,11 +1005,11 @@
   },
   {
     "type": "item_group",
-    "id": "pur_tablets_bottle_plastic_small_0_15",
+    "id": "pur_tablets_bottle_plastic_small_1_15",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_small",
-    "entries": [ { "item": "pur_tablets", "count": [ 0, 15 ] } ]
+    "entries": [ { "item": "pur_tablets", "count": [ 1, 15 ] } ]
   },
   {
     "type": "item_group",
@@ -1066,5 +1066,11 @@
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bottle_plastic_small",
     "entries": [ { "item": "pur_tablets", "count": [ 75, 100 ] } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "distribution",
+    "id": "superglue",
+    "items": [ { "item": "super_glue", "charges-min": 0, "charges-max": 10, "container-item": "bottle_plastic_superglue" } ]
   }
 ]

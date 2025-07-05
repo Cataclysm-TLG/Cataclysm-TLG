@@ -45,7 +45,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 6, "electric": 1 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 6, "electric": 1, "heat": 1 }
   },
   {
     "id": "mon_zombie",
@@ -276,7 +276,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 6, "cut": 6, "acid": 6, "heat": 9, "bullet": 5, "electric": 4 }
+    "armor": { "bash": 6, "cut": 6, "acid": 6, "heat": 10, "bullet": 5, "electric": 4 }
   },
   {
     "id": "mon_zombie_hazmat",
@@ -332,7 +332,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 5, "cut": 4, "bullet": 3, "heat": 3, "electric": 8 }
+    "armor": { "bash": 5, "cut": 4, "bullet": 3, "heat": 5, "electric": 8 }
   },
   {
     "id": "mon_zombie_rot",
@@ -416,7 +416,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 10, "cut": 16, "bullet": 18, "electric": 3, "heat": 2 }
+    "armor": { "bash": 10, "cut": 16, "bullet": 18, "electric": 3, "heat": 4 }
   },
   {
     "id": "mon_zombie_tough",
@@ -470,7 +470,7 @@
       "FILTHY",
       "GEN_DORMANT"
     ],
-    "armor": { "bash": 2, "cut": 1, "bullet": 1, "electric": 2 }
+    "armor": { "bash": 2, "cut": 1, "bullet": 1, "electric": 2, "heat": 2 }
   },
   {
     "id": "mon_zombie_resort_dancer",

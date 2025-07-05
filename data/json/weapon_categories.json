@@ -179,5 +179,15 @@
     "type": "weapon_category",
     "id": "KUNG_FU_WEAPONS",
     "name": "KUNG FU WEAPONS"
+  },
+  {
+    "type": "weapon_category",
+    "id": "SHORT_BOWS",
+    "name": "SHORT BOWS"
+  },
+  {
+    "type": "weapon_category",
+    "id": "LONG_BOWS",
+    "name": "LONG BOWS"
   }
 ]

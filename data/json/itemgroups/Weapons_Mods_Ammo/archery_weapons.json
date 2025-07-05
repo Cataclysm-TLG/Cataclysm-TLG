@@ -1,0 +1,32 @@
+[
+  {
+    "type": "item_group",
+    "id": "archery_common",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "longbow", "prob": 4 },
+      { "item": "recurbow", "prob": 2 },
+      { "item": "compcrossbow", "prob": 4 },
+      { "item": "rep_compcrossbow", "prob": 1 },
+      { "item": "pistol_crossbow", "prob": 2 },
+      { "item": "compbow", "prob": 8 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "archery_rare",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "crossbow", "prob": 1 },
+      { "item": "shortbow", "prob": 1 },
+      { "item": "bullet_crossbow", "prob": 1 },
+      { "item": "woodgreatbow", "prob": 1 },
+      { "item": "compgreatbow", "prob": 1 },
+      { "item": "compositebow", "prob": 1 },
+      { "item": "hand_crossbow", "prob": 1 },
+      { "item": "rep_compcrossbow", "prob": 1 },
+      { "item": "huge_crossbow", "prob": 1 },
+      { "item": "rep_crossbow", "prob": 1 }
+    ]
+  }
+]

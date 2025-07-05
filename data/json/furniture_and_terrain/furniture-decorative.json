@@ -136,6 +136,7 @@
     "concealment": 40,
     "required_str": 5,
     "flags": [ "PLACE_ITEM", "TRANSPARENT", "FLAMMABLE", "EASY_DECONSTRUCT" ],
+    "deconstruct": { "items": [ { "item": "mannequin", "count": 1 } ] },
     "deployed_item": "mannequin",
     "examine_action": "deployed_furniture",
     "bash": {
@@ -143,7 +144,7 @@
       "str_max": 40,
       "sound": "smash!",
       "sound_fail": "whump.",
-      "items": [ { "item": "splinter", "count": [ 9, 12 ] } ]
+      "items": [ { "item": "epoxy_chunk", "count": [ 9, 12 ] } ]
     }
   },
   {
@@ -349,6 +350,26 @@
       "sound_fail": "whack!",
       "sound_vol": 16,
       "items": [ { "item": "glass_shard", "count": [ 25, 50 ] }, { "item": "splinter", "count": [ 5, 15 ] } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_indoor_flagpole",
+    "name": "indoor flagpole",
+    "description": "A 2.5-meter tall flagpole on a weighted stand.  You could hoist up a flag here.",
+    "symbol": "F",
+    "color": "light_gray",
+    "move_cost_mod": 2,
+    "coverage": 20,
+    "required_str": 1,
+    "flags": [ "TRANSPARENT", "PLACE_ITEM" ],
+    "max_volume": "2 L",
+    "bash": {
+      "str_min": 10,
+      "str_max": 30,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "items": [ { "item": "material_aluminium_ingot", "count": [ 4, 8 ] }, { "item": "scrap", "count": [ 2, 6 ] } ]
     }
   }
 ]

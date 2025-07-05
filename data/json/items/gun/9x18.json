@@ -29,6 +29,7 @@
     "durability": 6,
     "min_cycle_recoil": 270,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -48,7 +49,7 @@
     "looks_like": "modular_ar15",
     "type": "GUN",
     "reload_noise_volume": 10,
-    "name": { "str": "9x18mm pipe rifle" },
+    "name": { "str": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
     "ascii_picture": "sm_pipe_gun",
     "weight": "1953 g",

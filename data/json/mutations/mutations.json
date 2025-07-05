@@ -67,7 +67,7 @@
     "dummy": true,
     "category": [ "HUMAN" ],
     "types": [ "EYES", "VISION" ],
-    "cancels": [ "EAGLEEYED", "EYEBULGE", "INFRARED", "MEMBRANE", "MYOPIC", "SEESLEEP" ],
+    "cancels": [ "EAGLEEYED", "EYEBULGE", "INFRARED", "MEMBRANE", "MYOPIC", "SEESLEEP", "MESOPIC" ],
     "description": "You have human eyes."
   },
   {
@@ -568,6 +568,7 @@
     "points": 1,
     "description": "You are accustomed to being exposed to the elements.  This decreases morale penalties for being wet.",
     "valid": false,
+    "starting_trait": true,
     "wet_protection": [
       { "part": "head", "neutral": 6 },
       { "part": "leg_l", "neutral": 8 },
@@ -586,24 +587,23 @@
     "id": "GOODCARDIO",
     "name": { "str": "Indefatigable" },
     "points": 2,
-    "description": "Whether due to exercise and good diet, or due to a natural propensity to physical endurance, you tire due to physical exertion much less readily than others.  Your cardio fitness and maximum stamina are higher than usual.",
-    "starting_trait": true,
+    "description": "Your powerful heart delivers oxygen to your cells with greater than human efficiency, improving your fitness and stamina.",
     "types": [ "CARDIO" ],
     "changes_to": [ "GOODCARDIO2" ],
     "category": [ "FISH", "LUPINE", "MOUSE", "INSECT", "RABBIT", "CHIROPTERAN" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.2 } ] } ]
   },
   {
     "type": "mutation",
     "id": "GOODCARDIO2",
     "name": { "str": "Hyperactive" },
     "points": 4,
-    "description": "Your body's efficiency is like that of a tiny furnace, greatly increasing your cardio and stamina.",
+    "description": "Your heartbeat is so rapid, it sometimes feels like it's vibrating in your chest.  Your fitness and stamina are greatly improved.",
     "types": [ "CARDIO" ],
     "prereqs": [ "GOODCARDIO" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
     "category": [ "MOUSE", "RABBIT" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.6 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": 0.4 } ] } ]
   },
   {
     "type": "mutation",
@@ -706,7 +706,7 @@
     "points": 2,
     "description": "Your body's demanding energy needs mean you can fall asleep just about anywhere.",
     "types": [ "SLEEPINESS" ],
-    "prereqs": [ "MET_RAT" ],
+    "prereqs": [ "MET_RAT", "EASYSLEEPER" ],
     "cancels": [ "INSOMNIA" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
     "category": [ "MOUSE", "RABBIT" ],
@@ -745,15 +745,25 @@
   },
   {
     "type": "mutation",
+    "id": "NYCTALOPIA",
+    "name": { "str": "Night Blindness" },
+    "points": -2,
+    "description": "Whether congenital or acquired, you suffer from nyctalopia, and see poorly in the dark.",
+    "types": [ "VISION" ],
+    "flags": [ "NIGHT_BLINDNESS" ],
+    "starting_trait": true
+  },
+  {
+    "type": "mutation",
     "id": "NIGHTVISION",
     "name": { "str": "Night Vision" },
     "points": 2,
     "description": "You possess natural night vision, and can see further in the dark than most.  Activate to toggle NV-visible areas on or off.",
     "types": [ "VISION" ],
-    "starting_trait": true,
     "changes_to": [ "NIGHTVISION2" ],
     "category": [
       "BIRD",
+      "BATRACHIAN",
       "CATTLE",
       "INSECT",
       "BATRACHIAN",
@@ -764,6 +774,7 @@
       "LUPINE",
       "MOUSE",
       "SPIDER",
+      "URSINE",
       "TROGLOBITE"
     ],
     "active": true,
@@ -971,7 +982,7 @@
     "id": "DEFT",
     "name": { "str": "Deft" },
     "points": 1,
-    "description": "While you're not any better at melee combat, you are better at recovering from a miss, and will be able to attempt another strike faster.",
+    "description": "You're especially nimble, making you better at a variety of tasks.  You're less likely to be thrown off-balance when missing an attack, to fall down when skating, or to lose your footing on slippery terrain.",
     "starting_trait": true,
     "category": [ "BIRD", "BEAST", "RAPTOR", "FELINE" ]
   },
@@ -993,7 +1004,6 @@
     "points": 1,
     "description": "You can handle intoxicants well.  Their effects clear up more quickly for you.",
     "starting_trait": true,
-    "leads_to": [ "ALCMET" ],
     "category": [ "TROGLOBITE", "RAPTOR", "RAT", "CHIMERA", "BATRACHIAN", "CRUSTACEAN" ],
     "cancels": [ "LIGHTWEIGHT" ]
   },
@@ -1002,8 +1012,8 @@
     "id": "GOURMAND",
     "name": { "str": "Gourmand" },
     "points": 2,
-    "description": "You eat faster, and can eat and drink more, than anyone else!  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
-    "category": [ "MOUSE", "LUPINE" ],
+    "description": "You eat faster, and can eat and drink more in a single sitting.  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
+    "category": [ "MOUSE", "LUPINE", "RAT" ],
     "cancels": [ "PICKYEATER" ],
     "starting_trait": true,
     "active": true,
@@ -1015,21 +1025,12 @@
   },
   {
     "type": "mutation",
-    "id": "TINYSTOMACH",
-    "name": { "str": "Tiny Stomach" },
-    "points": -3,
-    "description": "Either as the result of a lifesaving surgery, or as a congenital defect, your stomach is much smaller than usual.  You'll have to eat your food in small servings during the day, rather than one or two large daily meals.",
-    "starting_trait": true,
-    "active": false,
-    "enchantments": [ { "values": [ { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.7 } ] } ]
-  },
-  {
-    "type": "mutation",
     "id": "LOVES_BOOKS",
     "name": { "str": "Bookworm" },
     "points": 1,
     "description": "There's nothing quite like the smell of a good book!  Books are more fun (or less boring) for you!",
     "valid": false,
+    "starting_trait": true,
     "cancels": [ "ILLITERATE", "HATES_BOOKS" ]
   },
   {
@@ -1108,7 +1109,7 @@
     "fatigue": true,
     "kcal": true,
     "thirst": true,
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": -0.1 }, { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": -0.1 }, { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -1170,6 +1171,7 @@
     "points": 3,
     "description": "Your genome has rapidly adapted to the Cataclysm and can handle the strain of mutation better.  Taking different kinds of mutagen won't result in more defective mutations than normal.",
     "starting_trait": true,
+    "flags": [ "ROBUST_GENETIC" ],
     "cancels": [ "CHAOTIC_BAD", "RESTRICTED" ],
     "category": [ "FISH", "SLIME", "MEDICAL", "PLANT" ]
   },
@@ -1178,7 +1180,6 @@
     "id": "RESTRICTED",
     "name": { "str": "Restricted Genetics" },
     "points": 3,
-    "vitamin_cost": 160,
     "description": "Your genome has become an impregnable fortress to lesser genetic deviations.  You are no longer able to mutate traits that are outside of the Alpha category.  Any that you previously developed are safe, for now.",
     "allowed_category": [ "ALPHA", "HUMAN" ],
     "cancels": [ "CHAOTIC_BAD", "ROBUST" ],
@@ -1187,7 +1188,6 @@
   {
     "type": "mutation",
     "id": "EAGLEEYED",
-    "//": "Can't change the ID as that breaks save-compatibility.",
     "name": { "str": "Scout" },
     "points": 1,
     "description": "You're an excellent navigator and your ability to recognize distant landmarks is unmatched.  Your sight radius on the overmap extends beyond the normal range.",
@@ -1201,7 +1201,6 @@
     "name": { "str": "Directionally Challenged" },
     "points": -1,
     "description": "You get lost easily.  Even in good conditions, you will uncover much less of your overmap while exploring.",
-    "valid": false,
     "starting_trait": true,
     "cancels": [ "EAGLEEYED" ],
     "enchantments": [ { "values": [ { "value": "OVERMAP_SIGHT", "add": -10 } ] } ]
@@ -1211,9 +1210,9 @@
     "id": "CANNIBAL",
     "name": { "str": "Cannibal" },
     "points": 2,
-    "description": "For your whole life you've been forbidden from indulging in your peculiar tastes.  Now the world's ended, and you'll be damned if anyone is going to tell you that you can't eat people.",
-    "starting_trait": true,
-    "valid": false,
+    "description": "You can't afford to pass up any opportunity to eat, even if it means gorging yourself on human flesh to survive.  Besides, it's not as if you're really one of them anymore…right?",
+    "threshreq": [ "THRESH_TROGLOBITE", "THRESH_RAT", "THRESH_CHIMERA", "THRESH_CRUSTACEAN" ],
+    "category": [ "TROGLOBITE", "RAT", "CHIMERA", "CRUSTACEAN" ],
     "cancels": [ "VEGETARIAN", "VEGAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "flags": [ "CANNIBAL" ]
   },
@@ -1231,57 +1230,7 @@
   },
   {
     "type": "mutation",
-    "id": "KILLER",
-    "name": { "str": "Killer Drive" },
-    "points": 2,
-    "description": "You derive enjoyment from killing things.  Putting end to life seem to spark some dark satisfaction and thrill, and you crave it every moment.",
-    "starting_trait": true,
-    "valid": false,
-    "social_modifiers": { "intimidate": 5 },
-    "prereqs": [ "PSYCHOPATH" ]
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS",
-    "name": { "str": "Martial Arts Training" },
-    "points": 2,
-    "description": "You have received some martial arts training at a local dojo.  You start with your choice of Karate, Judo, Aikido, Tai Chi, Taekwondo, or Pankration.",
-    "player_display": false,
-    "initial_ma_styles": [ "style_karate", "style_judo", "style_aikido", "style_tai_chi", "style_taekwondo", "style_pankration" ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS2",
-    "name": { "str": "Self-Defense Classes" },
-    "points": 2,
-    "description": "You have taken some self-defense classes at a nearby gym.  You start with your choice of Boxing, Kickboxing, Capoeira, Krav Maga, Muay Thai, Ninjutsu, Wing Chun, or Zui Quan.",
-    "player_display": false,
-    "initial_ma_styles": [
-      "style_krav_maga",
-      "style_muay_thai",
-      "style_ninjutsu",
-      "style_capoeira",
-      "style_zui_quan",
-      "style_wingchun",
-      "style_kickboxing",
-      "style_boxing"
-    ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS3",
-    "name": { "str": "Shaolin Adept" },
-    "points": 2,
-    "description": "You have studied the arts of the Shaolin monks.  You start with one of the five animal fighting styles: Tiger, Crane, Leopard, Snake, or Dragon.",
-    "player_display": false,
-    "initial_ma_styles": [ "style_tiger", "style_crane", "style_leopard", "style_snake", "style_dragon" ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_ARTS5",
+    "id": "MARTIAL_ARTS_MELEE",
     "name": { "str": "Melee Weapon Training" },
     "points": 3,
     "description": "You have practiced fighting with weapons.  You start with your choice of Barbaran Montante, Bōjutsu, Eskrima, Fencing, Fior Di Battaglia, Medieval Swordsmanship, Niten Ichi-Ryu, Pencak Silat, or Sōjutsu.",
@@ -1297,15 +1246,6 @@
       "style_swordsmanship",
       "style_medievalpole"
     ],
-    "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "MARTIAL_FENCING",
-    "name": { "str": "Competitive Fencer" },
-    "points": 0,
-    "description": "You were an avid fencer, starting with foil and moving onto saber, then épée.  You competed nationally and dabbled with some of the historical fencing weapons afforded by HEMA's popularity.",
-    "initial_ma_styles": [ "style_fencing" ],
     "valid": false
   },
   {
@@ -1326,6 +1266,7 @@
     "points": 1,
     "description": "You have no qualms about bending the truth, and have practically no tells.  Telling lies and otherwise bluffing will be much easier for you.",
     "cancels": [ "TRUTHTELLER" ],
+    "starting_trait": true,
     "social_modifiers": { "lie": 40 }
   },
   {
@@ -1336,6 +1277,7 @@
     "description": "You lost an awful lot of weight before the Cataclysm.  Whatever the reason, now that food is not always close at hand, your skeletal figure presents an additional danger.  You need to gain weight or die trying.",
     "purifiable": false,
     "starting_trait": true,
+    "player_display": false,
     "valid": false,
     "cancels": [ "XXXL" ]
   },
@@ -1347,6 +1289,7 @@
     "description": "You gained an awful lot of weight before the Cataclysm.  Whatever the reason, now that mobility is key to survival, your oversized figure presents an additional danger.  You need to lose weight or die trying.",
     "purifiable": false,
     "starting_trait": true,
+    "player_display": false,
     "valid": false,
     "cancels": [ "XS" ]
   },
@@ -1389,11 +1332,11 @@
     "id": "BADCARDIO",
     "name": { "str": "Languorous" },
     "points": -2,
-    "description": "Whether due to lack of exercise and poor diet, or due to a natural disinclination to physical endurance, you tire due to physical exertion much more readily than others.  Your total cardio fitness and stamina are lower than normal.",
+    "description": "Whether due to lack of exercise and poor diet, or due to a natural disinclination to physical endurance, you tire due to physical exertion much more readily than others.",
     "starting_trait": true,
     "valid": false,
     "types": [ "CARDIO" ],
-    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": -0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARDIO_MULTIPLIER", "multiply": -0.1 } ] } ]
   },
   {
     "type": "mutation",
@@ -1402,7 +1345,7 @@
     "points": -2,
     "description": "Without glasses, your seeing radius is severely reduced!  However, you are guaranteed to start with a pair of glasses.",
     "starting_trait": true,
-    "cancels": [ "URSINE_EYE" ],
+    "cancels": [ "MESOPIC" ],
     "category": [ "BEAST" ],
     "flags": [ "MYOPIC" ]
   },
@@ -1631,6 +1574,7 @@
     "points": -1,
     "description": "Reading is for nerds!  Boring books are more boring, and you can't have fun by reading books.",
     "valid": false,
+    "starting_trait": true,
     "cancels": [ "ILLITERATE", "LOVES_BOOKS" ]
   },
   {
@@ -1688,9 +1632,9 @@
   {
     "type": "mutation",
     "id": "PROJUNK2",
-    "name": { "str": "Sugar-Loving" },
+    "name": { "str": "Snackaholic" },
     "points": 2,
-    "description": "You *adore* the taste of junk food, and find it preferable to everything else!",
+    "description": "You *adore* the taste of junk food, and find it preferable to everything else!  Additionally, you suffer no negative health effects from eating it.",
     "purifiable": false,
     "prereqs": [ "PROJUNK" ],
     "cancels": [ "ANTIJUNK" ],
@@ -2134,7 +2078,7 @@
     "id": "NIGHTVISION3",
     "name": { "str": "Full Night Vision" },
     "points": 6,
-    "description": "You can see in pitch blackness as if you were wearing night-vision goggles.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see perfectly well even in near-total darkness.  Activate to toggle NV-visible areas on or off.",
     "prereqs": [ "NIGHTVISION2" ],
     "leads_to": [ "INFRARED" ],
     "types": [ "VISION" ],
@@ -2210,7 +2154,7 @@
     "id": "ELFA_FNV",
     "name": { "str": "Fey Nightsight" },
     "points": 5,
-    "description": "You have great low-light vision now, but it doesn't allow you to perform fine tasks such as crafting and reading in darkness.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see almost perfectly in the dark.  Activate to toggle NV-visible areas on or off.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFA_NV" ],
     "category": [ "ELFA" ],
@@ -2245,26 +2189,12 @@
   },
   {
     "type": "mutation",
-    "id": "URSINE_EYE",
-    "name": { "str": "Ursine Vision" },
-    "points": 1,
-    "description": "Your visual processing has shifted: though you can see better in the dark, you're nearsighted in the light.  Maybe glasses would help.  Activate to toggle NV-visible areas on or off.",
-    "types": [ "EYES", "VISION" ],
-    "cancels": [ "MYOPIC", "MESOPIC" ],
-    "category": [ "URSINE" ],
-    "flags": [ "MYOPIC_IN_LIGHT" ],
-    "active": true,
-    "starts_active": true
-  },
-  {
-    "type": "mutation",
     "id": "MESOPIC",
     "name": { "str": "Mesopic" },
     "points": -1,
     "description": "You find it difficult to see very far in bright light.  On its own, this doesn't necessarily make you any better in the dark.",
-    "types": [ "EYES", "VISION" ],
     "cancels": [ "MYOPIC" ],
-    "category": [ "CHIROPTERAN", "TROGLOBITE" ],
+    "category": [ "CHIROPTERAN", "TROGLOBITE", "URSINE" ],
     "flags": [ "MYOPIC_IN_LIGHT" ]
   },
   {
@@ -2431,7 +2361,6 @@
   {
     "type": "mutation",
     "id": "FROG_EYES",
-    "//": "Currently without the NV from URSINE_EYE",
     "name": { "str": "Frog Eyes" },
     "points": 1,
     "visibility": 8,
@@ -2440,8 +2369,8 @@
     "prereqs": [ "EYEBULGE" ],
     "category": [ "BATRACHIAN" ],
     "flags": [ "EYE_MEMBRANE", "SEESLEEP", "MYOPIC_IN_LIGHT" ],
-    "types": [ "EYES", "VISION" ],
-    "cancels": [ "MEMBRANE", "MYOPIC", "URSINE_EYE", "MESOPIC" ],
+    "types": [ "EYES" ],
+    "cancels": [ "MEMBRANE", "MYOPIC", "MESOPIC" ],
     "threshreq": [ "THRESH_BATRACHIAN" ],
     "wet_protection": [ { "part": "eyes", "neutral": 1 } ],
     "armor": [ { "parts": "eyes", "cut": 3, "bash": 1 } ],
@@ -2559,7 +2488,17 @@
       { "part": "torso", "ignored": 60 }
     ],
     "armor": [ { "part_types": [ "ALL" ], "cut": 3, "bash": 5 } ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": -0.2 } ] } ]
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": -0.2 } ] } ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "terrain", "flag": "FUNGUS" } ],
+        "comfort": "very_comfortable",
+        "msg_try": {
+          "text": "Our fibers meld with the ground beneath us.  The gills on our neck begin to seed the air with spores as our awareness fades.",
+          "rating": "good"
+        }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -3135,7 +3074,7 @@
     "visibility": 10,
     "ugliness": 9,
     "description": "Your right hand has become a crab claw.  It encumbers you greatly, but you can use it while grappling to deal massive damage.",
-    "cancels": [ "NAILS", "CLAWS", "TALONS", "WEBBED", "ARM_TENTACLES", "ARM_TENTACLES_4", "ARM_TENTACLES_8" ],
+    "cancels": [ "NAILS", "CLAWS", "TALONS", "WEBBED", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
     "prereqs": [ "CRUSTACEAN_CARAPACE" ],
     "integrated_armor": [ "integrated_giant_pincer" ],
     "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 1 } ] } ],
@@ -3722,21 +3661,6 @@
   },
   {
     "type": "mutation",
-    "id": "CLAWS_TENTACLE",
-    "name": { "str": "Feeding Tentacles" },
-    "points": 0,
-    "visibility": 4,
-    "ugliness": 4,
-    "mixed_effect": true,
-    "description": "Arms?  No, you've got a pair of long tentacles with broad paddle-shaped structures at the tips.  Their grasping surface is lined with suckers and dozens of swiveling hooks that function like vicious claws.",
-    "encumbrance_always": [ [ "hand_l", 20 ], [ "hand_r", 20 ] ],
-    "flags": [ "PSEUDOPOD_GRASP" ],
-    "prereqs": [ "ARM_TENTACLES", "ARM_TENTACLES_4", "ARM_TENTACLES_8" ],
-    "threshreq": [ "THRESH_CEPHALOPOD" ],
-    "category": [ "CEPHALOPOD" ]
-  },
-  {
-    "type": "mutation",
     "id": "INK_GLANDS",
     "name": { "str": "Ink Glands" },
     "points": 1,
@@ -4029,7 +3953,7 @@
     "cancels": [ "HUMAN_ARMS", "HUMAN_LEGS" ],
     "threshreq": [ "THRESH_SLIME", "THRESH_ELFA" ],
     "category": [ "SLIME", "ELFA" ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4341,9 +4265,10 @@
     "visibility": 4,
     "ugliness": 2,
     "mixed_effect": true,
-    "description": "You have grown large, curved, and wickedly sharp talons in place of your big toes.  Fortunately, they don't get in the way of your movement.  Unfortunately, they do prevent wearing footgear.",
+    "description": "You have grown wickedly sharp talons on your feet.  Fortunately, they don't get in the way of your movement.  Unfortunately, they do prevent wearing footgear.",
     "types": [ "FEET" ],
     "category": [ "RAPTOR" ],
+    "flags": [ "TOUGH_FEET" ],
     "restricts_gear": [ "foot_toes_l", "foot_toes_r" ],
     "destroys_gear": true,
     "allowed_items": [ "ALLOWS_TALONS" ]
@@ -4362,6 +4287,7 @@
     "activated_eocs": [ "EOC_AVIAN_LEAP" ],
     "types": [ "LEGS", "SOLES" ],
     "prereqs": [ "WINGS_BIRD" ],
+    "flags": [ "TOUGH_FEET" ],
     "threshreq": [ "THRESH_BIRD" ],
     "category": [ "BIRD" ],
     "restricts_gear": [ "foot_l", "foot_r" ],
@@ -4391,10 +4317,8 @@
     "id": "ALCMET",
     "name": { "str": "Alcohol Metabolism" },
     "points": 2,
-    "description": "So it's fermented?  Whatever, it's still good drinking.  You've developed the ability to metabolize alcohol as a food source.",
-    "prereqs": [ "TOLERANCE" ],
-    "prereqs2": [ "SAPROVORE" ],
-    "category": [ "TROGLOBITE" ]
+    "description": "Your body produces enzymes that process alcohol more quickly.  Sobering up faster makes it less addictive, and you won't suffer as many negative health effects.",
+    "category": [ "TROGLOBITE", "MEDICAL", "SLIME", "ELFA", "PLANT" ]
   },
   {
     "type": "mutation",
@@ -4763,7 +4687,7 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4772,7 +4696,7 @@
     "points": 0,
     "visibility": 6,
     "ugliness": 2,
-    "description": "You have a long tail with a tuft on the end.  You find yourself instinctively swatting away flies with it, though it's not as effective at balancing you as you'd like.  Prevents wearing non-fabric pants.",
+    "description": "You have a long tail with a tuft on the end.  You find yourself instinctively swatting away flies with it.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG" ],
     "category": [ "CATTLE" ],
@@ -4788,14 +4712,14 @@
     "points": 1,
     "visibility": 6,
     "ugliness": 4,
-    "description": "You have a long but hairless tail.  It's a pretty effective balancing aid, but does look, uh, ratty.  Prevents wearing non-fabric pants.",
+    "description": "You have a long, hairless tail.  It's a pretty effective balancing aid, but does look, uh, ratty.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG", "TAIL_STUB" ],
     "category": [ "RAT", "MOUSE" ],
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4849,7 +4773,7 @@
     "restricts_gear": [ "leg_hip_l", "leg_hip_r" ],
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4857,7 +4781,7 @@
     "name": { "str": "Fluffy Tail" },
     "points": 1,
     "visibility": 7,
-    "description": "You have a long, fluffy-furred tail.  It greatly improves your balance, making your ability to dodge much higher.  Prevents wearing non-fabric pants.",
+    "description": "You have a long, furry tail.  It helps you dodge, but it also tends to betray how you're feeling in social situations.  Prevents wearing non-fabric pants.",
     "types": [ "TAIL" ],
     "prereqs": [ "TAIL_LONG" ],
     "category": [ "LUPINE" ],
@@ -4865,7 +4789,7 @@
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
     "social_modifiers": { "lie": -20, "persuade": 10 },
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 4 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -5524,7 +5448,30 @@
     "description": "Your body excretes very fine amounts of a chemical which prevents you from sticking to webs.  Walking through webs does not affect you at all.",
     "leads_to": [ "WEB_WEAVER" ],
     "flags": [ "WEBWALK" ],
-    "category": [ "SPIDER" ]
+    "category": [ "SPIDER" ],
+    "comfort": [
+      {
+        "conditions": [
+          { "type": "field", "id": "fd_web", "intensity": 3 },
+          { "type": "trait", "id": "WEB_SPINNER", "invert": true },
+          { "type": "trait", "id": "WEB_WEAVER", "invert": true }
+        ],
+        "comfort": "sleep_aid",
+        "use_better_comfort": true,
+        "add_sleep_aids": true,
+        "msg_try": { "text": "These thick webs support your weight, and are strangely comfortable…", "rating": "good" }
+      },
+      {
+        "conditions": [
+          { "type": "field", "id": "fd_web" },
+          { "type": "trait", "id": "WEB_SPINNER", "invert": true },
+          { "type": "trait", "id": "WEB_WEAVER", "invert": true }
+        ],
+        "add_human_comfort": true,
+        "add_sleep_aids": true,
+        "msg_try": { "text": "You try to sleep, but the webs get in the way.  You brush them aside.", "rating": "info" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -5536,7 +5483,20 @@
     "prereqs": [ "WEB_WALKER" ],
     "threshreq": [ "THRESH_SPIDER" ],
     "changes_to": [ "WEB_WEAVER" ],
-    "category": [ "SPIDER" ]
+    "category": [ "SPIDER" ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "field", "id": "fd_web", "intensity": 3, "invert": true } ],
+        "comfort": "impossible",
+        "msg_try": { "text": "You try to sleep, but you feel exposed and your spinnerets keep twitching.", "rating": "bad" },
+        "msg_hint": { "text": "Maybe a nice thick web would help you sleep.", "rating": "info" }
+      },
+      {
+        "conditions": [ { "type": "field", "id": "fd_web", "intensity": 3 } ],
+        "comfort": "very_comfortable",
+        "msg_try": { "text": "You relax into your web.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -5553,7 +5513,20 @@
     "cost": 69,
     "time": "100 s",
     "kcal": true,
-    "thirst": true
+    "thirst": true,
+    "comfort": [
+      {
+        "conditions": [ { "type": "field", "id": "fd_web", "intensity": 3, "invert": true } ],
+        "comfort": "impossible",
+        "msg_try": { "text": "You try to sleep, but you feel exposed and your spinnerets keep twitching.", "rating": "bad" },
+        "msg_hint": { "text": "Maybe a nice thick web would help you sleep.", "rating": "info" }
+      },
+      {
+        "conditions": [ { "type": "field", "id": "fd_web", "intensity": 3 } ],
+        "comfort": "very_comfortable",
+        "msg_try": { "text": "You relax into your web.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -6143,6 +6116,7 @@
     "mixed_effect": true,
     "description": "You've noticeably shrunk in size.  You're able to move with increased litheness, but your smaller stature prevents you from driving a car or carrying as much.",
     "types": [ "SIZE" ],
+    "prereqs": [ "SMALL_NATURAL" ],
     "changes_to": [ "SMALL2" ],
     "category": [ "MOUSE", "RABBIT" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
@@ -6174,7 +6148,7 @@
     "enchantments": [
       {
         "values": [
-          { "value": "DODGE_CHANCE", "add": 2 },
+          { "value": "DODGE_CHANCE", "add": 1 },
           { "value": "MAX_HP", "multiply": -0.3 },
           { "value": "FOOTSTEP_NOISE", "multiply": -1 },
           { "value": "CARRY_WEIGHT", "multiply": -0.5 },
@@ -6229,17 +6203,6 @@
         ]
       }
     ]
-  },
-  {
-    "type": "mutation",
-    "id": "MUT_JUNKIE",
-    "name": { "str": "Metallassomaiphile" },
-    "//": "name courtesy of wiktionary's Greek for 'mutate'.  Greek-speakers, feel free to correct the term",
-    "points": -1,
-    "mixed_effect": true,
-    "description": "Just thinking of mutagen (such a lovely word!  'Mutagen'.  Perfect!) makes you thirsty.  And you so love your new parts.  You simply must have more mutagen!",
-    "threshreq": [ "THRESH_MEDICAL", "THRESH_CHIMERA" ],
-    "category": [ "MEDICAL", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -6394,7 +6357,7 @@
     "description": "You have a pair of stubby little wings projecting from your shoulderblades.  They can be wiggled at will, but are useless.",
     "types": [ "WINGS" ],
     "changes_to": [ "WINGS_INSECT" ],
-    "category": [ "INSECT" ]
+    "category": [ "INSECT", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -7585,9 +7548,45 @@
     "category": [ "PLANT" ],
     "scent_type": "sc_flower",
     "encumbrance_covered": [ [ "foot_l", 10 ], [ "foot_r", 10 ] ],
-    "active": true,
-    "cost": 0,
-    "flags": [ "TOUGH_FEET", "ROOTS3" ]
+    "flags": [ "TOUGH_FEET", "ROOTS3" ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "vehicle" } ],
+        "comfort": "impossible",
+        "msg_try": { "text": "It's impossible to sleep in this wheeled pot!", "rating": "bad" }
+      },
+      {
+        "conditions": [ { "type": "furniture", "id": "f_null", "invert": true } ],
+        "comfort": "impossible",
+        "msg_try": { "text": "The furniture blocks your roots.  You can't get comfortable.", "rating": "bad" }
+      },
+      {
+        "conditions": [
+          { "type": "terrain", "flag": "PLOWABLE", "invert": true },
+          { "type": "terrain", "flag": "PLANTABLE", "invert": true },
+          { "type": "terrain", "id": "t_pit", "invert": true },
+          { "type": "terrain", "id": "t_pit_shallow", "invert": true }
+        ],
+        "comfort": "impossible",
+        "msg_try": { "text": "Your roots scrabble ineffectively at the unyielding surface.", "rating": "bad" }
+      },
+      {
+        "conditions": [
+          { "type": "terrain", "flag": "PLANTABLE" },
+          { "type": "terrain", "id": "t_dirt" },
+          { "type": "terrain", "id": "t_pit" },
+          { "type": "terrain", "id": "t_pit_shallow" }
+        ],
+        "conditions_any": true,
+        "comfort": "very_comfortable",
+        "msg_try": { "text": "You relax as your roots embrace the soil.", "rating": "good" }
+      },
+      {
+        "conditions": [ { "type": "terrain", "flag": "PLOWABLE" } ],
+        "comfort": "comfortable",
+        "msg_try": { "text": "You relax as your roots embrace the soil.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -7909,11 +7908,10 @@
     "visibility": 4,
     "ugliness": 4,
     "mixed_effect": true,
-    "description": "Your arms have transformed into tentacles, resulting in a +1 bonus to Dexterity, permanent hand encumbrance of 30, and an inability to wear gloves.  Reduces penalties for attacking while prone and somewhat decreases wet penalties.",
-    "encumbrance_always": [ [ "hand_l", 30 ], [ "hand_r", 30 ] ],
+    "description": "Your arms have transformed into tentacles, giving you the ability to attack while prone at a greatly reduced penalty.  Your new limbs are much clumsier than hands, leaving you with a permanent +40 encumbrance and the inability to wear gloves.",
+    "encumbrance_always": [ [ "hand_l", 40 ], [ "hand_r", 40 ] ],
     "restricts_gear": [ "hand_l", "hand_r" ],
-    "types": [ "HANDS", "CLAWS" ],
-    "leads_to": [ "CLAWS_TENTACLE" ],
+    "types": [ "ARMS", "HANDS", "CLAWS" ],
     "changes_to": [ "ARM_TENTACLES_4" ],
     "flags": [ "PSEUDOPOD_GRASP" ],
     "category": [ "CEPHALOPOD" ],
@@ -7922,100 +7920,51 @@
       { "part": "arm_r", "neutral": 19 },
       { "part": "hand_l", "neutral": 5 },
       { "part": "hand_r", "neutral": 5 }
-    ],
-    "attacks": [
-      {
-        "attack_text_u": "You slap %s with one of your tentacles!",
-        "attack_text_npc": "%1$s slaps %2$s with one of their tentacles!",
-        "blocker_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      },
-      {
-        "attack_text_u": "You rake %s with one of your tentacles!",
-        "attack_text_npc": "%1$s rakes %2$s with one of their tentacles!",
-        "required_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      }
-    ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
+    ]
   },
   {
     "type": "mutation",
     "id": "ARM_TENTACLES_4",
-    "name": { "str": "4 Tentacles" },
+    "name": { "str": "Four Tentacles" },
     "points": 0,
-    "visibility": 5,
-    "ugliness": 5,
-    "description": "Your arms have transformed into four tentacles, resulting in a +1 bonus to Dexterity, permanent hand encumbrance of 30, and an inability to wear gloves.  You can make up to 3 extra attacks with them, and you suffer reduced penalties to attacking while prone.  Somewhat decreases wet penalties.",
-    "encumbrance_always": [ [ "hand_l", 30 ], [ "hand_r", 30 ] ],
+    "visibility": 4,
+    "ugliness": 4,
+    "description": "Your arms have transformed into four tentacles, giving you +1 Dexterity and the ability to attack while prone at a greatly reduced penalty, however they're not as useful as hands for fine manipulation, resulting in a permanent +30 encumbrance.",
+    "encumbrance_always": [ [ "hand_l", 20 ], [ "hand_r", 20 ] ],
     "restricts_gear": [ "hand_l", "hand_r" ],
-    "types": [ "HANDS", "CLAWS" ],
+    "types": [ "ARMS", "HANDS", "CLAWS" ],
     "prereqs": [ "ARM_TENTACLES" ],
-    "leads_to": [ "CLAWS_TENTACLE" ],
-    "changes_to": [ "ARM_TENTACLES_8" ],
+    "changes_to": [ "CLAWS_TENTACLE" ],
     "category": [ "CEPHALOPOD" ],
     "wet_protection": [
       { "part": "arm_l", "neutral": 19 },
       { "part": "arm_r", "neutral": 19 },
       { "part": "hand_l", "neutral": 5 },
       { "part": "hand_r", "neutral": 5 }
-    ],
-    "attacks": [
-      {
-        "attack_text_u": "You slap %s with one of your tentacles!",
-        "attack_text_npc": "%1$s slaps %2$s with one of their tentacles!",
-        "blocker_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      },
-      {
-        "attack_text_u": "You rake %s with one of your tentacles!",
-        "attack_text_npc": "%1$s rakes %2$s with one of their tentacles!",
-        "required_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      }
     ],
     "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
-    "id": "ARM_TENTACLES_8",
-    "name": { "str": "8 Tentacles" },
+    "id": "CLAWS_TENTACLE",
+    "name": { "str": "Feeding Tentacles" },
     "points": 0,
-    "visibility": 6,
-    "ugliness": 6,
-    "description": "Your arms have transformed into eight tentacles, resulting in a +1 bonus to Dexterity, permanent hand encumbrance of 30, and an inability to wear gloves.  You can make up to 7 extra attacks with them, and suffer reduced penalties to attacking while prone.  Somewhat decreases wet penalties.",
-    "encumbrance_always": [ [ "hand_l", 30 ], [ "hand_r", 30 ] ],
-    "restricts_gear": [ "hand_l", "hand_r" ],
-    "types": [ "HANDS", "CLAWS" ],
-    "prereqs": [ "ARM_TENTACLES_4" ],
-    "leads_to": [ "CLAWS_TENTACLE" ],
-    "category": [ "CEPHALOPOD" ],
+    "visibility": 4,
+    "ugliness": 4,
+    "mixed_effect": true,
+    "description": "Arms?  No, you've got a pair of long tentacles with broad paddle-shaped structures at the tips, granting +1 Dexterity and the ability to strike while prone at a reduced penalty, along with 25 permanent hand encumbrance.  Their grasping surface is lined with suckers and dozens of swiveling hooks that function like vicious claws.",
+    "encumbrance_always": [ [ "hand_l", 25 ], [ "hand_r", 25 ] ],
+    "flags": [ "PSEUDOPOD_GRASP" ],
     "wet_protection": [
       { "part": "arm_l", "neutral": 19 },
       { "part": "arm_r", "neutral": 19 },
       { "part": "hand_l", "neutral": 5 },
       { "part": "hand_r", "neutral": 5 }
     ],
-    "attacks": [
-      {
-        "attack_text_u": "You slap %s with one of your tentacles!",
-        "attack_text_npc": "%1$s slaps %2$s with one of their tentacles!",
-        "blocker_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      },
-      {
-        "attack_text_u": "You rake %s with one of your tentacles!",
-        "attack_text_npc": "%1$s rakes %2$s with one of their tentacles!",
-        "required_mutations": [ "CLAWS_TENTACLE" ],
-        "chance": 1,
-        "hardcoded_effect": true
-      }
-    ],
+    "types": [ "ARMS", "HANDS", "CLAWS" ],
+    "prereqs": [ "ARM_TENTACLES", "ARM_TENTACLES_4" ],
+    "threshreq": [ "THRESH_CEPHALOPOD" ],
+    "category": [ "CEPHALOPOD" ],
     "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
@@ -8056,7 +8005,15 @@
     "active": true,
     "integrated_armor": [ "integrated_shell2" ],
     "restricts_gear": [ "torso" ],
-    "vitamin_rates": [ [ "calcium", -250 ] ]
+    "vitamin_rates": [ [ "calcium", -250 ] ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "trait", "id": "SHELL2", "active": true } ],
+        "comfort": "sleep_aid",
+        "add_sleep_aids": true,
+        "msg_try": { "text": "Your shell is the perfect place to rest.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -8075,7 +8032,15 @@
     "active": true,
     "integrated_armor": [ "integrated_shell3" ],
     "restricts_gear": [ "torso" ],
-    "vitamin_rates": [ [ "calcium", -300 ] ]
+    "vitamin_rates": [ [ "calcium", -300 ] ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "trait", "id": "SHELL3", "active": true } ],
+        "comfort": "sleep_aid",
+        "add_sleep_aids": true,
+        "msg_try": { "text": "Your shell is the perfect place to rest.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -8477,9 +8442,21 @@
     "name": { "str": "Aqueous Repose" },
     "points": 1,
     "description": "Falling asleep underwater is easy for you, and you spend less time asleep when you rest there.  You can also eat underwater, though you can't drink.",
-    "prereqs": [ "SEESLEEP", "FROG_EYES" ],
-    "category": [ "FISH", "BATRACHIAN" ],
-    "threshreq": [ "THRESH_FISH", "THRESH_BATRACHIAN" ]
+    "prereqs": [ "SEESLEEP", "FROG_EYES", "GILLS_CEPH" ],
+    "category": [ "FISH", "BATRACHIAN", "CEPHALOPOD" ],
+    "threshreq": [ "THRESH_FISH", "THRESH_BATRACHIAN", "THRESH_CEPHALOPOD" ],
+    "comfort": [
+      {
+        "conditions": [ { "type": "terrain", "flag": "DEEP_WATER" } ],
+        "comfort": "very_comfortable",
+        "msg_try": { "text": "You settle comfortably beneath the surface.", "rating": "good" }
+      },
+      {
+        "conditions": [ { "type": "terrain", "flag": "WATER_CUBE" } ],
+        "comfort": "very_comfortable",
+        "msg_try": { "text": "You relax, embraced by the water.", "rating": "good" }
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -8624,46 +8601,19 @@
   },
   {
     "type": "mutation",
-    "id": "PROF_MA_ORANGE",
+    "id": "MARTIAL_ARTS",
     "name": { "str": "Martial Artist" },
     "points": 0,
-    "description": "You were shaping up to be a pretty decent student of the martial arts before the Cataclysm struck.  Time to see just how good you really are.",
-    "valid": false,
+    "description": "You are trained in a hand-to-hand fighting style.",
     "initial_ma_styles": [
       "style_aikido",
+      "style_boxing",
       "style_capoeira",
       "style_crane",
       "style_dragon",
       "style_judo",
       "style_karate",
-      "style_krav_maga",
-      "style_leopard",
-      "style_muay_thai",
-      "style_ninjutsu",
-      "style_pankration",
-      "style_snake",
-      "style_taekwondo",
-      "style_tai_chi",
-      "style_tiger",
-      "style_wingchun",
-      "style_zui_quan"
-    ],
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_MA_BLACK",
-    "name": { "str": "Black Belt" },
-    "points": 0,
-    "description": "You were competitive at national levels, and had considered teaching your art.  Defending against the entire town may still be a challenge, though.",
-    "initial_ma_styles": [
-      "style_aikido",
-      "style_capoeira",
-      "style_crane",
-      "style_dragon",
-      "style_judo",
-      "style_karate",
+      "style_kickboxing",
       "style_krav_maga",
       "style_leopard",
       "style_muay_thai",
@@ -8678,28 +8628,7 @@
     ],
     "valid": false,
     "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_BOXER",
-    "name": { "str": "Pugilist" },
-    "points": 0,
-    "description": "You are experienced in the Sweet Science of boxing.  You could've had a shot at a local boxing tournament, if the Cataclysm hadn't screwed that up.",
-    "valid": false,
-    "initial_ma_styles": [ "style_boxing" ],
-    "purifiable": false,
-    "profession": true
-  },
-  {
-    "type": "mutation",
-    "id": "PROF_KICKBOXER",
-    "name": { "str": "Kickboxer" },
-    "points": 0,
-    "description": "You have some training in the art of kickboxing.  It's just boxing with kicks, right?",
-    "valid": false,
-    "initial_ma_styles": [ "style_kickboxing" ],
-    "purifiable": false,
+    "player_display": false,
     "profession": true
   },
   {
@@ -9208,8 +9137,7 @@
     "name": { "str": "Fast Reflexes" },
     "points": 2,
     "description": "You have fast reflexes, allowing you to dodge attacks more easily.",
-    "starting_trait": true,
-    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 3 } ] } ],
+    "enchantments": [ { "values": [ { "value": "DODGE_CHANCE", "add": 1 } ] } ],
     "category": [ "FELINE" ]
   },
   {

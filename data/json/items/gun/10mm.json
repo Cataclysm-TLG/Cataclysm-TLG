@@ -22,6 +22,7 @@
     "//": "165mm + 32mm max OAL for 10mm. Revolvers just built different.",
     "price": "740 USD",
     "price_postapoc": "22 USD 50 cent",
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "to_hit": -2,
     "material": [ "steel", "wood" ],
     "symbol": "(",
@@ -65,6 +66,8 @@
     "price_postapoc": "25 USD",
     "to_hit": -2,
     "material": [ "plastic", "steel" ],
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "symbol": "(",
     "color": "dark_gray",
     "ammo": "10mm",
@@ -105,6 +108,8 @@
     "price_postapoc": "25 USD",
     "to_hit": -2,
     "material": [ "plastic", "steel" ],
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "symbol": "(",
     "color": "dark_gray",
     "ammo": "10mm",
@@ -150,7 +155,7 @@
     "variants": [
       {
         "id": "hk_mp5_10_semi",
-        "name": { "str": "H&K MP5/10 SMG" },
+        "name": { "str": "H&K MP5/10 rifle" },
         "description": "The MP5/10 served the FBI briefly alongside their 10mm Auto pistols, adding to the caliber's overall mystique.  Though the gun's usage was short-lived, a handful of clones were made and sold occasionally.  This semi-automatic clone manufactured by Brethren Arms features a welded-on M1913 rail and a collapsible arm brace."
       }
     ],
@@ -199,6 +204,8 @@
     "durability": 6,
     "min_cycle_recoil": 570,
     "blackpowder_tolerance": 48,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1911_10mag" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -230,6 +237,8 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 675,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "84 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "witness_mag_10" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -262,6 +271,8 @@
     "dispersion": 410,
     "durability": 7,
     "min_cycle_recoil": 675,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p220_10_mag" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -294,6 +305,8 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 675,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "81 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "xd_10_mag" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -325,6 +338,8 @@
     "skill": "pistol",
     "ammo": "10mm",
     "min_cycle_recoil": 675,
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "103 ml", "item_restriction": [ "glock_20mag", "tdi_10mm_mag" ] } ]
   },
@@ -360,6 +375,7 @@
     "min_cycle_recoil": 570,
     "blackpowder_tolerance": 48,
     "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "2011_17_mag", "2011_22_mag" ] } ],
     "melee_damage": { "bash": 12 }
   }

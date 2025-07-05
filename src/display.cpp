@@ -687,25 +687,25 @@ std::pair<std::string, nc_color> display::health_text_color( const Character &u 
     nc_color health_color = c_light_gray;
 
     if( health > character_health_category::great ) {
-        health_string = translate_marker( "Feel Great" );
+        health_string = translate_marker( "Thriving" );
         health_color = c_green;
     } else if( health > character_health_category::very_good ) {
-        health_string = translate_marker( "Feel Very Good" );
+        health_string = translate_marker( "Robust" );
         health_color = c_green;
     } else if( health > character_health_category::good ) {
-        health_string = translate_marker( "Feel Good" );
+        health_string = translate_marker( "Healthy" );
         health_color = c_green;
     } else if( health > character_health_category::fine ) {
-        health_string = translate_marker( "Feel Fine" );
+        health_string = translate_marker( "OK" );
         health_color = c_light_gray;
     } else if( health > character_health_category::bad ) {
-        health_string = translate_marker( "Feel Bad" );
+        health_string = translate_marker( "Unhealthy" );
         health_color = c_red;
     } else if( health > character_health_category::very_bad ) {
-        health_string = translate_marker( "Feel Very Bad" );
+        health_string = translate_marker( "Listless" );
         health_color = c_red;
     } else {
-        health_string = translate_marker( "Feel Awful" );
+        health_string = translate_marker( "Sickly" );
         health_color = c_red;
     }
     return std::make_pair( _( health_string ), health_color );
@@ -752,13 +752,13 @@ std::pair<std::string, nc_color> display::fatigue_text_color( const Character &u
     nc_color fatigue_color = c_white;
     if( fatigue >= fatigue_levels::EXHAUSTED ) {
         fatigue_color = c_red;
-        fatigue_string = translate_marker( "Exhausted" );
+        fatigue_string = translate_marker( "Nodding Off" );
     } else if( fatigue >= fatigue_levels::DEAD_TIRED ) {
         fatigue_color = c_light_red;
-        fatigue_string = translate_marker( "Dead Tired" );
+        fatigue_string = translate_marker( "Very Sleepy" );
     } else if( fatigue >= fatigue_levels::TIRED ) {
         fatigue_color = c_yellow;
-        fatigue_string = translate_marker( "Tired" );
+        fatigue_string = translate_marker( "Drowsy" );
     }
     return std::make_pair( _( fatigue_string ), fatigue_color );
 }
@@ -768,9 +768,17 @@ std::pair<std::string, nc_color> display::pain_text_color( const Creature &c )
     float scale = c.get_perceived_pain() / 10.f;
     std::string pain_string;
     nc_color pain_color = c_yellow;
-    if( scale > 7 ) {
+    if( scale > 17 ) {
+        pain_string = _( "Agonizing pain" );
+    } else if( scale > 16 ) {
+        pain_string = _( "Debilitating pain" );
+    } else if( scale > 13 ) {
+        pain_string = _( "Unbearable pain" );
+    } else if( scale > 10 ) {
+        pain_string = _( "Excrutiating pain" );
+    } else if( scale > 8 ) {
         pain_string = _( "Severe pain" );
-    } else if( scale > 6 ) {
+    } else if( scale > 7 ) {
         pain_string = _( "Intense pain" );
     } else if( scale > 5 ) {
         pain_string = _( "Unmanageable pain" );
@@ -1013,6 +1021,35 @@ std::pair<std::string, nc_color> display::carry_weight_text_color( const avatar 
     return std::make_pair( weight_text, weight_color );
 }
 
+// Weight carried, formatted as "current/max" in kg
+std::pair<std::string, nc_color> display::carry_weight_value_color( const avatar &ava )
+{
+    float carry_wt = convert_weight( ava.weight_carried() );
+    float max_wt = convert_weight( ava.weight_capacity() );
+
+    // Create a string showing "current_weight / max_weight"
+    std::string weight_text = string_format( "%.1f/%.1f %s", carry_wt, max_wt, weight_units() );
+
+    // Set the color based on carry weight
+    nc_color weight_color = c_green;  // Default color
+
+    if( max_wt > 0 ) {
+        if( carry_wt > max_wt ) {
+            weight_color = c_red;  // Exceeds capacity
+        } else if( carry_wt > 0.75 * max_wt ) {
+            weight_color = c_light_red;  // Approaching capacity (75%)
+        } else if( carry_wt > 0.5 * max_wt ) {
+            weight_color = c_yellow;  // At half capacity (50%)
+        } else if( carry_wt > 0.25 * max_wt ) {
+            weight_color = c_light_green;  // Below half capacity (25%)
+        } else {
+            weight_color = c_green;  // Light load
+        }
+    }
+
+    return std::make_pair( weight_text, weight_color );
+}
+
 std::pair<std::string, nc_color> display::overmap_note_symbol_color( const std::string_view
         note_text )
 {
@@ -1124,7 +1161,8 @@ std::string display::colorized_overmap_text( const avatar &u, const int width, c
     const int top = -( height / 2 );
     const int bottom = height + top - 1;
 
-    oter_display_options opts( center_xyz, u.overmap_sight_range( g->light_level( u.posz() ) ) );
+    oter_display_options opts( center_xyz,
+                               u.overmap_modified_sight_range( g->light_level( u.posz() ) ) );
     opts.showhordes = true;
     if( mission_xyz != overmap::invalid_tripoint ) {
         opts.mission_target = mission_xyz;
@@ -1176,7 +1214,8 @@ std::string display::current_position_text( const tripoint_abs_omt &loc )
     if( const timed_event *e = get_timed_events().get( timed_event_type::OVERRIDE_PLACE ) ) {
         return e->string_id;
     }
-    return overmap_buffer.ter( loc )->get_name();
+    om_vision_level seen = overmap_buffer.seen( loc );
+    return overmap_buffer.ter( loc )->get_name( seen );
 }
 
 // Return (x, y) position of mission target, relative to avatar location, within an overmap of the
@@ -1391,6 +1430,8 @@ nc_color display::get_bodygraph_bp_color( const Character &u, const bodypart_id 
     cata_fatal( "Invalid widget_var" );
 }
 
+static const std::vector<std::string> bodygraph_var_labels = { "Health", "Temperature", "Encumbrance", "Status", "Wet" };
+
 std::string display::colorized_bodygraph_text( const Character &u, const std::string &graph_id,
         const bodygraph_var var, int width, int max_height, int &height )
 {
@@ -1415,7 +1456,8 @@ std::string display::colorized_bodygraph_text( const Character &u, const std::st
         return colorize( sym, sym_col.second );
     };
 
-    std::vector<std::string> rows = get_bodygraph_lines( u, process_sym, graph, width, max_height );
+    std::vector<std::string> rows = get_bodygraph_lines( u, process_sym, graph, width, max_height,
+                                    bodygraph_var_labels[ int( var ) ] );
     height = rows.size();
 
     std::string ret;

@@ -246,6 +246,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_ALIGN_WORKBENCH: return "ALIGN_WORKBENCH";
         case ter_furn_flag::TFLAG_NO_SPOIL: return "NO_SPOIL";
         case ter_furn_flag::TFLAG_EASY_DECONSTRUCT: return "EASY_DECONSTRUCT";
+        case ter_furn_flag::TFLAG_BASH_UNDEPLOY: return "BASH_UNDEPLOY";
         case ter_furn_flag::TFLAG_LADDER: return "LADDER";
         case ter_furn_flag::TFLAG_ALARMED: return "ALARMED";
         case ter_furn_flag::TFLAG_CHOCOLATE: return "CHOCOLATE";
@@ -259,7 +260,6 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_MURKY: return "MURKY";
         case ter_furn_flag::TFLAG_AMMOTYPE_RELOAD: return "AMMOTYPE_RELOAD";
         case ter_furn_flag::TFLAG_TRANSPARENT_FLOOR: return "TRANSPARENT_FLOOR";
-        case ter_furn_flag::TFLAG_TOILET_WATER: return "TOILET_WATER";
         case ter_furn_flag::TFLAG_ELEVATOR: return "ELEVATOR";
 		case ter_furn_flag::TFLAG_ACTIVE_GENERATOR: return "ACTIVE_GENERATOR";
 		case ter_furn_flag::TFLAG_NO_FLOOR_WATER: return "NO_FLOOR_WATER";
@@ -274,6 +274,7 @@ std::string enum_to_string<ter_furn_flag>( ter_furn_flag data )
         case ter_furn_flag::TFLAG_FLOATS_IN_AIR: return "FLOATS_IN_AIR";
         case ter_furn_flag::TFLAG_HARVEST_REQ_CUT1: return "HARVEST_REQ_CUT1";
         case ter_furn_flag::TFLAG_HIT_WITHOUT_COVER: return "HIT_WITHOUT_COVER";
+        case ter_furn_flag::TFLAG_TRANSLUCENT: return "TRANSLUCENT";
 
         // *INDENT-ON*
         case ter_furn_flag::NUM_TFLAG_FLAGS:
@@ -350,8 +351,15 @@ map_bash_info::map_bash_info() : str_min( -1 ), str_max( -1 ),
     str_min_supported( -1 ), str_max_supported( -1 ),
     explosive( 0 ), sound_vol( -1 ), sound_fail_vol( -1 ),
     collapse_radius( 1 ), destroy_only( false ), bash_below( false ),
-    drop_group( Item_spawn_data_EMPTY_GROUP ),
-    ter_set( ter_str_id::NULL_ID() ), furn_set( furn_str_id::NULL_ID() ) {}
+    ter_set( ter_str_id::NULL_ID() ), furn_set( furn_str_id::NULL_ID() )
+{
+    // NOTE: This got pulled out of the initializer list above
+    //       to fix a segmentation fault at startup on newer Arch Linux systems.
+    //       If/when C:DDA's commit 89657123e0124f1e75fd5d7fd6a1a85b74b5a98b from Nov 2024
+    //       gets backported, this divergence of the old versions should be safe to
+    //       ignore, as the new code of that commit stopped using initializer lists for this.
+    drop_group = Item_spawn_data_EMPTY_GROUP;
+}
 
 bool map_bash_info::load( const JsonObject &jsobj, const std::string_view member,
                           map_object_type obj_type, const std::string &context )
@@ -575,14 +583,9 @@ std::string map_data_common_t::name() const
     return name_.translated();
 }
 
-bool map_data_common_t::can_examine( const tripoint &examp ) const
-{
-    return examine_actor || examine_func.can_examine( examp );
-}
-
 bool map_data_common_t::can_examine( const tripoint_bub_ms &examp ) const
 {
-    return map_data_common_t::can_examine( examp.raw() );
+    return examine_actor || examine_func.can_examine( examp );
 }
 
 bool map_data_common_t::has_examine( iexamine_examine_function func ) const
@@ -600,18 +603,13 @@ void map_data_common_t::set_examine( iexamine_functions func )
     examine_func = func;
 }
 
-void map_data_common_t::examine( Character &you, const tripoint &examp ) const
+void map_data_common_t::examine( Character &you, const tripoint_bub_ms &examp ) const
 {
     if( !examine_actor ) {
         examine_func.examine( you, examp );
         return;
     }
     examine_actor->call( you, examp );
-}
-
-void map_data_common_t::examine( Character &you, const tripoint_bub_ms &examp ) const
-{
-    map_data_common_t::examine( you, examp.raw() );
 }
 
 void map_data_common_t::load_symbol( const JsonObject &jo, const std::string &context )
@@ -688,7 +686,8 @@ void load_terrain( const JsonObject &jo, const std::string &src )
 
 void map_data_common_t::extraprocess_flags( const ter_furn_flag flag )
 {
-    if( !transparent && flag == ter_furn_flag::TFLAG_TRANSPARENT ) {
+    if( !transparent && ( flag == ter_furn_flag::TFLAG_TRANSPARENT ||
+                          flag == ter_furn_flag::TFLAG_TRANSLUCENT ) ) {
         transparent = true;
     }
 
@@ -872,6 +871,19 @@ void map_data_common_t::load( const JsonObject &jo, const std::string &src )
         }
     }
 
+    if( jo.has_object( "liquid_source" ) ) {
+        JsonObject liquid_source = jo.get_object( "liquid_source" );
+        mandatory( liquid_source, was_loaded, "id", liquid_source_item_id );
+        optional( liquid_source, was_loaded, "min_temp", liquid_source_min_temp );
+        if( liquid_source.has_int( "count" ) ) {
+            mandatory( liquid_source, was_loaded, "count", liquid_source_count.first );
+            mandatory( liquid_source, was_loaded, "count", liquid_source_count.second );
+        } else if( liquid_source.has_array( "count" ) ) {
+            JsonArray ja = liquid_source.get_array( "count" );
+            liquid_source_count = { ja.get_int( 0 ), ja.get_int( 1 ) };
+        }
+    }
+
     mandatory( jo, was_loaded, "description", description );
     optional( jo, was_loaded, "curtain_transform", curtain_transform );
 
@@ -897,6 +909,7 @@ void ter_t::load( const JsonObject &jo, const std::string &src )
     optional( jo, was_loaded, "trap", trap_id_str );
     optional( jo, was_loaded, "heat_radiation", heat_radiation );
     optional( jo, was_loaded, "light_emitted", light_emitted );
+    optional( jo, was_loaded, "fall_damage_reduction", fall_damage_reduction, 0 );
     int legacy_floor_bedding_warmth = units::to_legacy_bodypart_temp_delta( floor_bedding_warmth );
     optional( jo, was_loaded, "floor_bedding_warmth", legacy_floor_bedding_warmth, 0 );
     floor_bedding_warmth = units::from_legacy_bodypart_temp_delta( legacy_floor_bedding_warmth );
@@ -1049,6 +1062,10 @@ void ter_t::check() const
             debugmsg( "ter %s has invalid emission %s set", id.c_str(), e.str().c_str() );
         }
     }
+    if( has_flag( ter_furn_flag::TFLAG_EASY_DECONSTRUCT ) && !deconstruct.can_do ) {
+        debugmsg( "ter %s has EASY_DECONSTRUCT flag but cannot be deconstructed",
+                  id.c_str(), deconstruct.drop_group.c_str() );
+    }
 }
 
 furn_t::furn_t() : open( furn_str_id::NULL_ID() ), close( furn_str_id::NULL_ID() ) {}
@@ -1071,6 +1088,7 @@ void furn_t::load( const JsonObject &jo, const std::string &src )
     optional( jo, was_loaded, "concealment", concealment );
     optional( jo, was_loaded, "coverage", coverage );
     optional( jo, was_loaded, "comfort", comfort, 0 );
+    optional( jo, was_loaded, "fall_damage_reduction", fall_damage_reduction, 0 );
     int legacy_floor_bedding_warmth = units::to_legacy_bodypart_temp_delta( floor_bedding_warmth );
     optional( jo, was_loaded, "floor_bedding_warmth", legacy_floor_bedding_warmth, 0 );
     floor_bedding_warmth = units::from_legacy_bodypart_temp_delta( legacy_floor_bedding_warmth );

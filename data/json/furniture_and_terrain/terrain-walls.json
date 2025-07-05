@@ -1830,8 +1830,8 @@
     "connects_to": "WALL",
     "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
     "bash": {
-      "str_min": 60,
-      "str_max": 160,
+      "str_min": 70,
+      "str_max": 250,
       "sound": "crash!",
       "sound_fail": "bash!",
       "ter_set": "t_null",
@@ -2130,8 +2130,8 @@
     "connects_to": "WALL",
     "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "UNCLINGABLE" ],
     "bash": {
-      "str_min": 90,
-      "str_max": 350,
+      "str_min": 70,
+      "str_max": 300,
       "sound": "crash!",
       "sound_fail": "whump!",
       "ter_set": "t_pit_shallow",
@@ -2677,8 +2677,7 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
-    "coverage": 30,
-    "concealment": 30,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
@@ -2692,7 +2691,7 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
+      "items": [ { "item": "glass_shard", "charges": [ 20, 44 ] }, { "item": "glass_shard_large", "count": [ 0, 3 ] } ]
     },
     "shoot": { "reduce_damage": [ 1, 8 ], "reduce_damage_laser": [ 0, 5 ], "destroy_damage": [ 2, 8 ], "no_laser_destroy": true }
   },
@@ -2706,8 +2705,7 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
-    "coverage": 30,
-    "concealment": 30,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
@@ -2721,7 +2719,7 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
+      "items": [ { "item": "glass_shard", "charges": [ 20, 44 ] }, { "item": "glass_shard_large", "count": [ 0, 3 ] } ]
     },
     "shoot": { "reduce_damage": [ 1, 8 ], "reduce_damage_laser": [ 0, 5 ], "destroy_damage": [ 2, 8 ], "no_laser_destroy": true }
   },
@@ -2735,6 +2733,7 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
@@ -2747,7 +2746,7 @@
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
+      "items": [ { "item": "glass_shard", "charges": [ 20, 44 ] } ]
     },
     "shoot": { "reduce_damage": [ 2, 12 ], "reduce_damage_laser": [ 0, 7 ], "destroy_damage": [ 40, 120 ], "no_laser_destroy": true }
   },
@@ -2761,22 +2760,23 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "UNCLINGABLE" ],
     "bash": {
-      "str_min": 200,
-      "str_max": 400,
+      "str_min": 25,
+      "str_max": 90,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
+      "items": [ { "item": "glass_shard", "charges": [ 20, 44 ] } ]
     },
     "shoot": {
-      "reduce_damage": [ 30, 60 ],
+      "reduce_damage": [ 5, 20 ],
       "reduce_damage_laser": [ 0, 10 ],
       "destroy_damage": [ 80, 200 ],
       "no_laser_destroy": true
@@ -2791,22 +2791,23 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "UNCLINGABLE" ],
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "wire", "prob": 20 } ]
+      "items": [ { "item": "glass_shard", "count": [ 20, 44 ] }, { "item": "wire", "prob": 20 } ]
     },
     "shoot": {
-      "reduce_damage": [ 15, 30 ],
+      "reduce_damage": [ 5, 10 ],
       "reduce_damage_laser": [ 0, 10 ],
       "destroy_damage": [ 60, 160 ],
       "no_laser_destroy": true
@@ -2821,6 +2822,7 @@
     "symbol": "LINE_OXOX",
     "color": "light_gray",
     "move_cost": 0,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
@@ -2835,7 +2837,7 @@
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "count": [ 20, 44 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
@@ -2856,6 +2858,7 @@
     "symbol": "LINE_OXOX",
     "color": "light_cyan",
     "move_cost": 0,
+    "coverage": 100,
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
@@ -2872,21 +2875,21 @@
     ],
     "close": "t_reinforced_glass_shutter",
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_floor",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "charges": [ 20, 44 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
     },
     "shoot": {
-      "reduce_damage": [ 20, 40 ],
+      "reduce_damage": [ 5, 10 ],
       "reduce_damage_laser": [ 15, 25 ],
       "destroy_damage": [ 60, 160 ],
       "no_laser_destroy": true
@@ -2902,6 +2905,7 @@
     "color": "light_cyan",
     "move_cost": 0,
     "connect_groups": "WALL",
+    "coverage": 100,
     "connects_to": "WALL",
     "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
     "rotates_to": "INDOORFLOOR",
@@ -2913,7 +2917,11 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_null",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [
+        { "item": "glass_shard", "charges": [ 20, 44 ] },
+        { "item": "glass_shard_large", "count": [ 0, 3 ] },
+        { "item": "scrap", "count": [ 3, 6 ] }
+      ]
     }
   },
   {
@@ -2925,6 +2933,7 @@
     "symbol": "\"",
     "color": "light_gray",
     "move_cost": 0,
+    "coverage": 15,
     "hacksaw": {
       "result": "t_floor",
       "duration": "15 minutes",
@@ -3352,7 +3361,7 @@
     "roof": "t_rock_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "WALL", "SUPPORTS_ROOF", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
     "bash": {
       "str_min": 50,
       "str_max": 200,

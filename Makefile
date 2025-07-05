@@ -1184,7 +1184,7 @@ ifeq ($(TILES), 1)
 	cp -R --no-preserve=ownership gfx $(DATA_PREFIX)
 	install -Dm755 -t $(SHARE_DIR)/applications/ data/xdg/org.cataclysmtlg.Cataclysmtlg.desktop
 	install -Dm644 -t $(SHARE_DIR)/metainfo/ data/xdg/org.cataclysmtlg.Cataclysmtlg.appdata.xml
-	install -Dm644 -t $(SHARE_DIR)/icons/hicolor/scalable/apps/ data/xdg/org.cataclysmtlg.Cataclysmtlg.svg
+	install -Dm644 -t $(SHARE_DIR)/icons/hicolor/scalable/apps/ data/xdg/com.cataclysm-tlg.cataclysm-tlg.svg
 endif
 ifeq ($(SOUND), 1)
 	cp -R --no-preserve=ownership data/sound $(DATA_PREFIX)
@@ -1299,7 +1299,7 @@ ctags: $(ASTYLE_SOURCES)
 
 etags: $(ASTYLE_SOURCES)
 	etags $^
-	./tools/json_tools/ctlgtags.py
+	find data -name "*.json" -print0 | xargs -0 -L 50 etags --append
 
 ifneq ($(IS_WINDOWS_HOST),1)
 # Parallel astyle for posix hosts where fork and filesystem are cheap.

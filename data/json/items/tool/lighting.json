@@ -179,7 +179,13 @@
     "power_draw": "1 W",
     "revert_to": "electric_lantern",
     "use_action": [
-      { "menu_text": "Turn off", "type": "transform", "target": "electric_lantern", "msg": "You turn the lamp off." },
+      {
+        "menu_text": "Turn off",
+        "ammo_scale": 0,
+        "type": "transform",
+        "target": "electric_lantern",
+        "msg": "You turn the lamp off."
+      },
       { "type": "link_up", "cable_length": 2, "charge_rate": "20 W" }
     ],
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
@@ -953,13 +959,16 @@
     "description": "A smart lamp which can be deactivated remotely.  Currently it is turned on.",
     "power_draw": "10 W",
     "revert_to": "smart_lamp",
-    "use_action": {
-      "ammo_scale": 0,
-      "target": "smart_lamp",
-      "msg": "Your smart lamp turned off.",
-      "menu_text": "Turn off",
-      "type": "transform"
-    },
+    "use_action": [
+      {
+        "ammo_scale": 0,
+        "target": "smart_lamp",
+        "msg": "Your smart lamp turned off.",
+        "menu_text": "Turn off",
+        "type": "transform"
+      },
+      { "type": "link_up", "cable_length": 3, "charge_rate": "6 W" }
+    ],
     "flags": [
       "ALLOWS_REMOTE_USE",
       "RADIO_ACTIVATION",

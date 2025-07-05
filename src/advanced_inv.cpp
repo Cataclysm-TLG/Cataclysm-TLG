@@ -599,8 +599,8 @@ struct advanced_inv_sorter {
                 }
                 break;
             case SORTBY_DAMAGE: {
-                const double dam1 = d1.items.front()->average_dps( get_player_character() );
-                const double dam2 = d2.items.front()->average_dps( get_player_character() );
+                const double dam1 = d1.items.front()->damage();
+                const double dam2 = d2.items.front()->damage();
                 if( dam1 != dam2 ) {
                     return dam1 > dam2;
                 }
@@ -2279,7 +2279,7 @@ void advanced_inventory::draw_minimap()
     tripoint pc = {getmaxx( minimap ) / 2, getmaxy( minimap ) / 2, 0};
     Character &player_character = get_player_character();
     // draw the 3x3 tiles centered around player
-    get_map().draw( minimap, player_character.pos() );
+    get_map().draw( minimap, player_character.pos_bub() );
     for( const side s : sides ) {
         char sym = get_minimap_sym( s );
         if( sym == '\0' ) {

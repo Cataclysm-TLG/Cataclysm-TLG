@@ -1920,6 +1920,7 @@
     "move_cost": 6,
     "coverage": 5,
     "concealment": 40,
+    "fall_damage_reduction": 5,
     "flags": [
       "TRANSPARENT",
       "DIGGABLE",
@@ -1951,6 +1952,7 @@
     "color": "green",
     "move_cost": 6,
     "coverage": 5,
+    "fall_damage_reduction": 5,
     "concealment": 40,
     "flags": [
       "TRANSPARENT",
@@ -1984,6 +1986,7 @@
     "color": "green",
     "move_cost": 6,
     "coverage": 5,
+    "fall_damage_reduction": 5,
     "concealment": 40,
     "flags": [
       "TRANSPARENT",
@@ -2015,6 +2018,7 @@
     "description": "A dense patch of vegetation.  It has been rummaged through and doesn't have anything useful left to forage from it.",
     "symbol": "#",
     "color": "green",
+    "fall_damage_reduction": 5,
     "move_cost": 6,
     "coverage": 5,
     "concealment": 40,
@@ -2050,6 +2054,7 @@
     "color": "green",
     "move_cost": 6,
     "coverage": 5,
+    "fall_damage_reduction": 5,
     "concealment": 40,
     "flags": [
       "TRANSPARENT",
@@ -2158,6 +2163,7 @@
     "move_cost": 8,
     "coverage": 5,
     "concealment": 40,
+    "fall_damage_reduction": 2,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "PLACE_ITEM", "SHRUB", "SHORT", "SMALL_HIDE" ],
     "bash": {
       "str_min": 4,
@@ -2624,6 +2630,7 @@
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE" ],
     "transforms_into": "t_shrub_hydrangea_harvested",
+    "fall_damage_reduction": 5,
     "examine_action": "harvest_ter_nectar",
     "looks_like": "t_shrub",
     "bash": {
@@ -2652,6 +2659,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "HARVESTED", "SMALL_HIDE" ],
     "transforms_into": "t_shrub_hydrangea",
     "examine_action": "harvested_plant",
+    "fall_damage_reduction": 5,
     "looks_like": "t_shrub",
     "bash": {
       "str_min": 4,
@@ -2674,6 +2682,7 @@
     "symbol": "#",
     "color": "magenta",
     "move_cost": 8,
+    "fall_damage_reduction": 5,
     "coverage": 5,
     "concealment": 40,
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "SMALL_HIDE" ],
@@ -2706,6 +2715,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE_ASH", "THIN_OBSTACLE", "SHRUB", "SHORT", "HARVESTED", "SMALL_HIDE" ],
     "transforms_into": "t_shrub_lilac",
     "examine_action": "harvested_plant",
+    "fall_damage_reduction": 5,
     "looks_like": "t_shrub",
     "bash": {
       "str_min": 4,
@@ -2783,6 +2793,7 @@
     "symbol": ".",
     "color": "light_green",
     "move_cost": 2,
+    "fall_damage_reduction": 1,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
     "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
   },
@@ -2790,11 +2801,12 @@
     "type": "terrain",
     "id": "t_grass",
     "name": "grass",
-    "description": "An area of hardy Kentucky bluegrass about ankle high.  Cutting the grass short enough would destroy the root system, causing this area to turn into a patch of dirt.",
+    "description": "An area of hardy grass about ankle high.",
     "symbol": ".",
     "color": "green",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
+    "transforms_into": "t_grass_shorn",
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "GRAZABLE" ],
     "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
   },
   {
@@ -2802,7 +2814,7 @@
     "id": "t_grass_white",
     "name": "white grass",
     "looks_like": "t_grass",
-    "description": "An area of Kentucky bluegrass covered in white latex-based paint, with neat lines designed for recreational sports.",
+    "description": "An area of grass covered in white latex-based paint, with neat lines designed for recreational sports.",
     "symbol": ".",
     "color": "white",
     "move_cost": 2,
@@ -2816,6 +2828,7 @@
     "description": "An area of long, shaggy grass about shin high.",
     "looks_like": "t_grass",
     "transforms_into": "t_grass",
+    "fall_damage_reduction": 2,
     "symbol": ",",
     "color": "green",
     "move_cost": 3,
@@ -2830,6 +2843,7 @@
     "looks_like": "t_shrub",
     "transforms_into": "t_grass_long",
     "symbol": "'",
+    "fall_damage_reduction": 7,
     "color": "green",
     "move_cost": 5,
     "coverage": 50,
@@ -2847,6 +2861,19 @@
     "color": "brown",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
+    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+  },
+  {
+    "type": "terrain",
+    "id": "t_grass_shorn",
+    "name": "shorn grass",
+    "description": "An area of grass clipped nearly down to the roots.",
+    "looks_like": "t_grass_dead",
+    "symbol": ".",
+    "color": "brown",
+    "move_cost": 2,
+    "transforms_into": "t_grass",
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "HARVESTED" ],
     "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
   },
   {
@@ -2999,6 +3026,7 @@
     "description": "A large pile of organic matter which has molded over with fungus.  The caps of many mundane mushrooms spring from the top, you can even recognize some.  The fungi growing here don't seem edible, though.",
     "symbol": "#",
     "color": "dark_gray",
+    "fall_damage_reduction": 10,
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "FLAMMABLE", "NOCOLLIDE" ],
     "bash": { "str_min": 2, "str_max": 6, "ter_set": "t_dirt", "sound": "crunch.", "sound_fail": "whish." }

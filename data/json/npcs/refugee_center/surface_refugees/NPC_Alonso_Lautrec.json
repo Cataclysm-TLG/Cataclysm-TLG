@@ -4,7 +4,7 @@
     "id": "refugee_AlonsoLautrec",
     "name_unique": "Alonso Lautrec",
     "gender": "male",
-    "name_suffix": "refugee",
+    "name_suffix": "Refugee",
     "class": "NC_REFUGEE_Alonso",
     "attitude": 0,
     "mission": 7,
@@ -346,6 +346,7 @@
       ]
     },
     "origins": [ "ORIGIN_SECONDARY" ],
+    "has_generic_rewards": false,
     "dialogue": {
       "describe": "I think I might know where those special pants might be though…",
       "offer": "This clown was into some of the different things, not the vanilla, you understand me?  Yes.  I think you will find my valuables in a toy shop not so so far.",

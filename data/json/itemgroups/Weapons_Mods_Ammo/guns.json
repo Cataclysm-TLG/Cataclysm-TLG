@@ -30,6 +30,8 @@
       { "group": "nested_sw_686P", "prob": 20 },
       { "group": "nested_model_10_revolver", "prob": 20 },
       { "group": "nested_taurus_spectrum", "prob": 15 },
+      { "group": "nested_rough_rider_pistol", "prob": 2 },
+      { "group": "nested_rough_rider_pistol_9", "prob": 2 },
       { "group": "nested_p220_10", "prob": 1 },
       { "group": "nested_p50", "prob": 2 },
       { "group": "nested_ruger_57", "prob": 2 },
@@ -194,6 +196,8 @@
       { "group": "nested_p08", "prob": 20 },
       { "group": "nested_raging_bull", "prob": 10 },
       { "group": "nested_raging_judge", "prob": 10 },
+      { "group": "nested_rough_rider_pistol", "prob": 2 },
+      { "group": "nested_rough_rider_pistol_9", "prob": 2 },
       { "group": "nested_m714", "prob": 8 },
       { "group": "nested_mr73", "prob": 5 },
       { "group": "nested_m1911-460", "prob": 5 },
@@ -327,7 +331,7 @@
     "items": [
       { "item": "af2011a1_38super", "prob": 25 },
       { "item": "draco", "prob": 30 },
-      { "item": "ar_pistol", "prob": 35 },
+      { "group": "ar_pistol", "prob": 35 },
       { "item": "plr16", "prob": 3 },
       { "group": "guns_pistol_collectible", "prob": 1 },
       { "item": "minidraco556", "prob": 30 }
@@ -345,6 +349,7 @@
     "//": "Makeshift or otherwise poor quality pistols.",
     "items": [
       { "item": "ashot", "prob": 100 },
+      { "item": "2_shot_special", "prob": 100 },
       { "item": "surv_hand_cannon", "prob": 100, "charges": [ 0, 5 ] },
       { "item": "surv_six_shooter", "prob": 100, "charges": [ 0, 6 ] }
     ]
@@ -354,7 +359,7 @@
     "id": "guns_smg_common",
     "//": "Semi-auto civilian SMGs owned by citizens and found in many locations.",
     "//2": "Making the assumption any loaded gun will have additional ammo and mags with it.",
-    "items": [ { "group": "nested_mp40semi", "prob": 200 }, { "group": "nested_hk_mp5_semi_pistol", "prob": 70 } ]
+    "items": [ { "group": "nested_mp40semi", "prob": 10 }, { "group": "nested_hk_mp5_semi_pistol", "prob": 70 } ]
   },
   {
     "type": "item_group",
@@ -362,7 +367,7 @@
     "//": "Semi-auto civilian SMGs owned by citizens and found in many locations.",
     "//2": "This is for worn items so ammo should be handled elsewhere so that mods can be added directly.",
     "items": [
-      { "item": "mp40semi", "charges": [ 0, 32 ], "prob": 200 },
+      { "item": "mp40semi", "charges": [ 0, 32 ], "prob": 10 },
       { "item": "hk_mp5_semi_pistol", "charges": [ 0, 30 ], "prob": 70 }
     ]
   },
@@ -371,7 +376,7 @@
     "subtype": "distribution",
     "id": "guns_smg_common_display",
     "//": "Empty Semi-auto civilian SMGs owned by citizens and found in many locations.",
-    "items": [ { "item": "mp40semi", "prob": 70 }, { "item": "hk_mp5_semi_pistol", "prob": 70 }, { "item": "TDI_10", "prob": 70 } ]
+    "items": [ { "item": "mp40semi", "prob": 10 }, { "item": "hk_mp5_semi_pistol", "prob": 70 }, { "item": "TDI_10", "prob": 70 } ]
   },
   {
     "type": "item_group",
@@ -381,7 +386,7 @@
     "items": [
       { "group": "nested_calico", "prob": 30 },
       { "group": "nested_fn_p90", "prob": 50 },
-      { "group": "nested_mp40", "prob": 185 },
+      { "group": "nested_mp40", "prob": 5 },
       { "group": "nested_tommygun", "prob": 70 },
       { "group": "nested_sten", "prob": 100 },
       { "group": "nested_uzi", "prob": 100 },
@@ -406,7 +411,7 @@
     "items": [
       { "item": "calico", "prob": 30 },
       { "item": "fn_p90", "prob": 50 },
-      { "item": "mp40", "prob": 185 },
+      { "item": "mp40", "prob": 5 },
       { "item": "tommygun", "prob": 70 },
       { "item": "sten", "prob": 100 },
       { "item": "uzi", "prob": 100 },
@@ -518,7 +523,10 @@
       { "group": "nested_converted_mdrx", "prob": 1 },
       { "group": "nested_converted_cz600", "prob": 1 },
       { "group": "nested_rdb_223", "prob": 1 },
-      { "group": "nested_hpt3895", "prob": 1 }
+      { "group": "nested_hpt3895", "prob": 1 },
+      { "group": "nested_ar15_retool_22", "prob": 1 },
+      { "group": "nested_rio_bravo", "prob": 3 },
+      { "group": "nested_henry_golden_boy", "prob": 4 }
     ]
   },
   {
@@ -565,7 +573,13 @@
       { "group": "mdrx", "prob": 1, "charges": [ 0, 30 ] },
       { "group": "cz600", "prob": 1, "charges": [ 0, 10 ] },
       { "item": "ak556", "variant": "zpapm90", "prob": 1, "charges": [ 0, 30 ] },
-      { "item": "rdb_223", "prob": 1, "charges": [ 0, 30 ] }
+      { "item": "rdb_223", "prob": 1, "charges": [ 0, 30 ] },
+      { "item": "rio_bravo", "prob": 2, "charges": [ 0, 15 ] },
+      { "item": "henry_golden_boy", "prob": 2, "charges": [ 0, 16 ] },
+      { "item": "rossi_r92_44_16", "prob": 2, "charges": [ 0, 8 ] },
+      { "item": "uberti_1873", "prob": 2, "charges": [ 0, 10 ] },
+      { "item": "rossi_r92_357_16", "prob": 2, "charges": [ 0, 8 ] },
+      { "item": "rossi_r92_357_20", "prob": 2, "charges": [ 0, 10 ] }
     ]
   },
   {
@@ -607,7 +621,12 @@
       { "group": "nested_ar15_with_kits", "prob": 15 },
       { "group": "nested_mdrx_with_kits", "prob": 10 },
       { "group": "nested_cz600_with_kits", "prob": 10 },
-      { "item": "rdb_223", "prob": 30 }
+      { "item": "rdb_223", "prob": 6 },
+      { "item": "uberti_1873", "prob": 8 },
+      { "item": "rossi_r92_357_16", "prob": 4 },
+      { "item": "rossi_r92_357_20", "prob": 8 },
+      { "item": "rio_bravo", "prob": 3 },
+      { "item": "henry_golden_boy", "prob": 4 }
     ]
   },
   {
@@ -654,7 +673,10 @@
       { "group": "nested_zpap85", "prob": 1 },
       { "group": "nested_rfb_308", "prob": 5 },
       { "group": "nested_steyr_scout", "prob": 5 },
-      { "group": "nested_greasegun", "prob": 1 }
+      { "group": "nested_greasegun", "prob": 1 },
+      { "item": "henry_big_boy", "prob": 2 },
+      { "item": "rossi_r92_44_16", "prob": 3 },
+      { "item": "rossi_r92_44_20", "prob": 3 }
     ]
   },
   {
@@ -816,7 +838,7 @@
       { "item": "hk_g3", "prob": 40 },
       { "item": "hk_g36", "prob": 30 },
       { "item": "m1918", "prob": 30 },
-      { "item": "modular_m4_carbine", "variant": "modular_m4a1", "prob": 45 },
+      { "group": "modular_m4a1", "prob": 45 },
       { "item": "m14ebr", "prob": 15 },
       { "item": "arx160", "prob": 10 },
       { "item": "modular_m16_auto_rifle", "variant": "modular_acr", "prob": 25 },
@@ -832,7 +854,7 @@
     "type": "item_group",
     "id": "guns_rifle_improvised",
     "//": "Makeshift or otherwise poor quality rifles.",
-    "items": [ { "item": "rifle_22", "prob": 60 }, { "item": "remington_700", "prob": 30 }, { "item": "rifle_9mm", "prob": 60 } ]
+    "items": [ { "item": "rifle_22", "prob": 60 }, { "item": "rifle_38", "prob": 30 }, { "item": "rifle_44", "prob": 5 } ]
   },
   {
     "type": "item_group",
@@ -1024,12 +1046,12 @@
     "id": "guns_shotgun_improvised",
     "//": "Makeshift or otherwise poor quality shotguns.",
     "items": [
-      { "item": "blunderbuss", "prob": 70 },
-      { "item": "bigun", "prob": 10, "charges": [ 0, 6 ] },
-      { "item": "pipe_double_shotgun", "prob": 70, "charges": [ 0, 2 ] },
-      { "item": "pipe_shotgun", "prob": 100 },
-      { "item": "revolver_shotgun", "prob": 30, "charges": [ 0, 6 ] },
-      { "item": "lever_shotgun", "prob": 10, "charges": [ 0, 6 ] }
+      { "item": "blunderbuss", "prob": 10 },
+      { "item": "pipe_double_shotgun", "prob": 10 },
+      { "item": "pipe_shotgun", "prob": 20 },
+      { "item": "revolver_shotgun", "prob": 1 },
+      { "item": "slamfire_shotgun", "prob": 100 },
+      { "item": "slamfire_shotgun_d", "prob": 30 }
     ]
   },
   {
@@ -1211,16 +1233,14 @@
         "prob": 40
       },
       {
-        "item": "modular_m4_carbine",
-        "variant": "modular_m4a1",
+        "group": "modular_m4a1",
         "ammo-item": "556_mk318",
         "charges": [ 0, 30 ],
         "contents-item": "shoulder_strap",
         "prob": 8
       },
       {
-        "item": "modular_m4_carbine",
-        "variant": "m4_cqbr",
+        "group": "modular_m4a1",
         "ammo-item": "556_mk318",
         "charges": [ 0, 30 ],
         "contents-item": "shoulder_strap",
@@ -1292,16 +1312,14 @@
       { "group": "ar15_223short", "ammo-item": "223", "charges": 30, "contents-item": "shoulder_strap", "prob": 70 },
       { "group": "ar15_223long", "ammo-item": "223", "charges": 30, "contents-item": "shoulder_strap", "prob": 40 },
       {
-        "item": "modular_m4_carbine",
-        "variant": "modular_m4a1",
+        "group": "modular_m4a1",
         "ammo-item": "556_mk318",
         "charges": 30,
         "contents-item": "shoulder_strap",
         "prob": 8
       },
       {
-        "item": "modular_m4_carbine",
-        "variant": "m4_cqbr",
+        "group": "modular_m4a1",
         "ammo-item": "556_mk318",
         "charges": 30,
         "contents-item": "shoulder_strap",
@@ -1403,8 +1421,7 @@
       {
         "collection": [
           {
-            "item": "modular_m4_carbine",
-            "variant": "modular_m4a1",
+            "group": "modular_m4a1",
             "ammo-item": "556_mk318",
             "charges": [ 0, 30 ],
             "contents-item": "shoulder_strap",
@@ -1421,8 +1438,7 @@
       {
         "collection": [
           {
-            "item": "modular_m4_carbine",
-            "variant": "m4_cqbr",
+            "group": "m4_cqbr",
             "ammo-item": "556_mk318",
             "charges": [ 0, 30 ],
             "contents-item": "shoulder_strap",
@@ -1774,8 +1790,7 @@
       {
         "collection": [
           {
-            "item": "modular_m4_carbine",
-            "variant": "modular_m4a1",
+            "group": "modular_m4a1",
             "ammo-item": "556_mk318",
             "charges": [ 0, 30 ],
             "contents-item": "shoulder_strap",
@@ -1792,8 +1807,7 @@
       {
         "collection": [
           {
-            "item": "modular_m4_carbine",
-            "variant": "m4_cqbr",
+            "group": "m4_cqbr",
             "ammo-item": "556_mk318",
             "charges": [ 0, 30 ],
             "contents-item": "shoulder_strap",
@@ -2098,7 +2112,7 @@
     "items": [
       { "group": "guns_improvised", "prob": 50 },
       { "group": "modular_ar15", "prob": 13, "charges": [ 0, 30 ] },
-      { "item": "ar_pistol", "prob": 2, "charges": [ 0, 30 ] },
+      { "group": "ar_pistol", "prob": 2, "charges": [ 0, 30 ] },
       { "item": "plr16", "prob": 1, "charges": [ 0, 30 ] },
       { "item": "mossberg_500", "prob": 10, "charges": [ 0, 6 ] },
       { "item": "remington_870", "prob": 11, "charges": [ 0, 5 ] },

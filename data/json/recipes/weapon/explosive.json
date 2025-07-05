@@ -5,7 +5,7 @@
     "activity_level": "NO_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
     "time": "1 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
@@ -28,9 +28,10 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "difficulty": 5,
+    "skills_required": [ [ "traps", 2 ] ],
+    "difficulty": 6,
     "time": "10 m",
-    "book_learn": [ [ "textbook_anarch", 5 ], [ "adv_chemistry", 4 ], [ "textbook_chemistry", 4 ] ],
+    "book_learn": [ [ "textbook_anarch", 6 ], [ "adv_chemistry", 5 ], [ "textbook_chemistry", 5 ] ],
     "//": [
       "Now, this IS huge. This is in fact a very complex invention. ",
       "After all, Svante Arrhenius got a Nobel Prize for this!"
@@ -57,6 +58,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "electronics",
+    "skills_required": [ [ "traps", 3 ], [ "fabrication", 2 ] ],
     "difficulty": 4,
     "time": "32 m",
     "reversible": true,
@@ -79,7 +81,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
     "difficulty": 1,
     "time": "1 m",
     "reversible": true,
@@ -98,7 +100,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
     "time": "3 m",
     "reversible": true,
     "autolearn": true,
@@ -111,8 +113,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "skills_required": [ "chemistry", 5 ],
+    "skill_used": "traps",
+    "skills_required": [ [ "chemistry", 5 ], [ "fabrication", 1 ] ],
     "difficulty": 6,
     "time": "40 m",
     "reversible": true,
@@ -122,7 +124,7 @@
     "using": [ [ "small_grenade_case", 1 ] ],
     "components": [
       [ [ "pilot_light", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "oxy_powder", 75 ] ],
       [ [ "incendiary", 50 ] ]
     ]
@@ -135,7 +137,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "skills_required": [ "mechanics", 1 ],
+    "skills_required": [ [ "traps", 2 ] ],
     "difficulty": 4,
     "time": "8 m",
     "autolearn": true,
@@ -146,7 +148,7 @@
     "components": [
       [ [ "bleach", 2 ], [ "oxy_powder", 200 ] ],
       [ [ "ammonia_liquid", 2 ], [ "lye_powder", 200 ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 5 ] ]
     ]
   },
   {
@@ -156,7 +158,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "skills_required": [ "mechanics", 1 ],
+    "skills_required": [ [ "traps", 2 ] ],
     "difficulty": 4,
     "time": "8 m",
     "autolearn": true,
@@ -168,7 +170,7 @@
       [ [ "triffid_fungicide", 1 ], [ "fungicide", 50 ] ],
       [ [ "chem_sulphur", 150 ] ],
       [ [ "small_gas_canister_case", 1, "LIST" ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 5 ] ]
     ]
   },
   {
@@ -178,7 +180,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "skills_required": [ "mechanics", 1 ],
+    "skills_required": [ [ "traps", 2 ] ],
     "difficulty": 4,
     "time": "8 m",
     "autolearn": true,
@@ -190,7 +192,7 @@
       [ [ "insecticide", 1 ] ],
       [ [ "water", 2 ], [ "water_clean", 2 ] ],
       [ [ "small_gas_canister_case", 1, "LIST" ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 5 ] ]
     ]
   },
   {
@@ -199,12 +201,22 @@
     "activity_level": "NO_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
     "time": "30 s",
     "reversible": true,
     "autolearn": true,
     "using": [ [ "accelerant_liquid", 500 ] ],
-    "components": [ [ [ "cotton_patchwork", 1 ] ], [ [ "bottle_glass", 1 ], [ "flask_glass", 2 ], [ "clay_canister", 2 ] ] ]
+    "components": [
+      [ [ "cotton_patchwork", 1 ] ],
+      [
+        [ "bottle_glass", 1 ],
+        [ "jar_glass_sealed", 1 ],
+        [ "bottle_glass_seasoning", 1 ],
+        [ "bottle_glass_seasoning_small", 2 ],
+        [ "flask_glass", 2 ],
+        [ "clay_canister", 2 ]
+      ]
+    ]
   },
   {
     "result": "dynamite_bomb",
@@ -212,8 +224,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "skills_required": [ "mechanics", 2 ],
+    "skill_used": "traps",
+    "skills_required": [ "fabrication", 2 ],
     "difficulty": 3,
     "time": "12 m",
     "reversible": true,
@@ -244,7 +256,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "skills_required": [ "mechanics", 1 ],
+    "skills_required": [ [ "traps", 2 ] ],
     "difficulty": 2,
     "book_learn": [
       [ "basic_chemistry", 2 ],
@@ -261,7 +273,7 @@
       [ [ "water", 1 ], [ "water_clean", 1 ], [ "salt_water", 1 ], [ "saline", 5 ] ],
       [ [ "sugar", 16 ] ],
       [ [ "chem_saltpetre", 24 ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 5 ] ]
     ]
   },
   {
@@ -272,7 +284,7 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
     "skill_used": "chemistry",
-    "skills_required": [ "mechanics", 1 ],
+    "skills_required": [ [ "traps", 2 ] ],
     "difficulty": 2,
     "book_learn": [ [ "textbook_gaswarfare", 2 ], [ "textbook_chemistry", 3 ], [ "adv_chemistry", 3 ], [ "textbook_anarch", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
@@ -282,7 +294,7 @@
     "components": [
       [ [ "water", 1 ], [ "water_clean", 1 ], [ "salt_water", 1 ], [ "saline", 5 ] ],
       [ [ "white_phosphorous", 20 ] ],
-      [ [ "superglue", 1 ] ]
+      [ [ "super_glue", 5 ] ]
     ]
   },
   {
@@ -291,7 +303,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 4,
     "time": "10 m",
     "reversible": true,
@@ -302,7 +315,7 @@
     "using": [ [ "military_explosive", 46 ], [ "explosives_casting_standard", 1 ], [ "small_grenade_case", 1 ] ],
     "components": [
       [ [ "delay_fuze", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "nails", 50, "LIST" ], [ "scrap", 2 ] ]
     ]
   },
@@ -312,7 +325,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 4,
     "time": "10 m",
     "reversible": true,
@@ -323,7 +337,7 @@
     "using": [ [ "military_explosive", 92 ], [ "explosives_casting_standard", 1 ] ],
     "components": [
       [ [ "delay_fuze", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "can_medium", 1 ] ],
       [ [ "nails", 100, "LIST" ], [ "scrap", 4 ] ]
     ]
@@ -351,7 +365,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 5,
     "time": "15 m",
     "reversible": true,
@@ -361,7 +376,7 @@
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
     "components": [
       [ [ "delay_fuze", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "jug_plastic", 1 ] ],
       [ [ "nails", 750, "LIST" ], [ "scrap", 30 ] ]
     ]
@@ -381,7 +396,7 @@
     "using": [ [ "explosives_casting_standard", 5 ], [ "military_explosive", 10000 ] ],
     "components": [
       [ [ "delay_fuze", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "keg_steel", 1 ] ]
     ]
   },
@@ -400,7 +415,7 @@
     "using": [ [ "explosives_casting_standard", 10 ], [ "military_explosive", 20000 ] ],
     "components": [
       [ [ "delay_fuze", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "30gal_drum", 1 ] ]
     ]
   },
@@ -411,8 +426,9 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "difficulty": 2,
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
+    "difficulty": 3,
     "time": "5 m",
     "reversible": true,
     "autolearn": true,
@@ -422,7 +438,7 @@
       [ [ "small_grenade_case", 1, "LIST" ] ],
       [ [ "stable_explosive", 15, "LIST" ], [ "volatile_explosive", 15, "LIST" ] ],
       [ [ "fuse", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "nails", 50, "LIST" ], [ "scrap", 2 ] ]
     ]
   },
@@ -433,8 +449,9 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "difficulty": 2,
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
+    "difficulty": 3,
     "time": "7 m",
     "reversible": true,
     "autolearn": true,
@@ -444,7 +461,7 @@
       [ [ "can_medium", 1 ] ],
       [ [ "stable_explosive", 30, "LIST" ], [ "volatile_explosive", 30, "LIST" ] ],
       [ [ "fuse", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "nails", 100, "LIST" ], [ "scrap", 4 ] ]
     ]
   },
@@ -454,8 +471,9 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "difficulty": 1,
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
+    "difficulty": 3,
     "time": "15 m",
     "//": "You cut the tube to make the bomb.",
     "autolearn": true,
@@ -471,8 +489,9 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
-    "difficulty": 1,
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
+    "difficulty": 3,
     "time": "15 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_handloading" } ],
@@ -498,7 +517,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 3,
     "time": "5 m",
     "reversible": true,
@@ -509,7 +529,7 @@
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
     "components": [
       [ [ "fuse", 1 ] ],
-      [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ],
+      [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ],
       [ [ "jug_plastic", 1 ] ],
       [ [ "nails", 750, "LIST" ], [ "scrap", 30 ] ]
     ]
@@ -520,7 +540,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 3,
     "time": "5 m",
     "reversible": true,
@@ -529,7 +550,7 @@
     "proficiencies": [ { "proficiency": "prof_handloading" } ],
     "using": [ [ "stable_explosive", 253 ], [ "volatile_explosive", 6 ] ],
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "fuse", 1 ] ], [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ], [ [ "jug_plastic", 1 ] ] ]
+    "components": [ [ [ "fuse", 1 ] ], [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ], [ [ "jug_plastic", 1 ] ] ]
   },
   {
     "result": "half_barrel_bomb",
@@ -537,14 +558,15 @@
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 3,
     "time": "30 m",
     "reversible": true,
     "book_learn": [ [ "manual_launcher", 7 ], [ "textbook_anarch", 8 ] ],
     "proficiencies": [ { "proficiency": "prof_handloading" } ],
     "using": [ [ "volatile_explosive", 86 ], [ "stable_explosive", 3354 ] ],
-    "components": [ [ [ "fuse", 1 ] ], [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ], [ [ "keg_steel", 1 ] ] ]
+    "components": [ [ [ "fuse", 1 ] ], [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ], [ [ "keg_steel", 1 ] ] ]
   },
   {
     "result": "full_barrel_bomb",
@@ -552,13 +574,14 @@
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_EXPLOSIVE",
-    "skill_used": "fabrication",
+    "skill_used": "traps",
+    "skills_required": [ [ "fabrication", 2 ] ],
     "difficulty": 3,
     "time": "1 h",
     "reversible": true,
     "book_learn": [ [ "manual_launcher", 7 ], [ "textbook_anarch", 8 ] ],
     "proficiencies": [ { "proficiency": "prof_handloading" } ],
     "using": [ [ "volatile_explosive", 173 ], [ "stable_explosive", 6747 ] ],
-    "components": [ [ [ "fuse", 1 ] ], [ [ "superglue", 1 ], [ "duct_tape", 75 ], [ "cordage", 1, "LIST" ] ], [ [ "30gal_drum", 1 ] ] ]
+    "components": [ [ [ "fuse", 1 ] ], [ [ "super_glue", 4 ], [ "duct_tape", 10 ], [ "cordage", 1, "LIST" ] ], [ [ "30gal_drum", 1 ] ] ]
   }
 ]

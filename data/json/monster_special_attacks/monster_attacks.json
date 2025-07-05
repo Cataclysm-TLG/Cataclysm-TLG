@@ -308,6 +308,36 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
+    "id": "mosquito_bite",
+    "cooldown": 30,
+    "move_cost": 150,
+    "damage_max_instance": [ { "damage_type": "stab", "amount": 5 } ],
+    "effects": [ { "id": "anticoagulant_alboserpin", "duration": 600 } ],
+    "hit_dmg_u": "%1$s stabs your %2$s with its proboscis!",
+    "hit_dmg_npc": "%1$s stabs <npcname> with its proboscis!",
+    "miss_msg_u": "%1$s tries to bite you, but you dodge!",
+    "miss_msg_npc": "%1$s tries to bite <npcname>, but they dodge!",
+    "no_dmg_msg_u": "%1$s tries to bite your %2$s, but fails to penetrate your armor.",
+    "no_dmg_msg_npc": "%1$s tries to bite <npcname>, but fails to penetrate their armor."
+  },
+  {
+    "type": "monster_attack",
+    "attack_type": "melee",
+    "id": "mosquito_bite_big",
+    "cooldown": 30,
+    "move_cost": 150,
+    "damage_max_instance": [ { "damage_type": "stab", "amount": 14 } ],
+    "effects": [ { "id": "anticoagulant_alboserpin", "duration": 600 } ],
+    "hit_dmg_u": "%1$s stabs your %2$s with its proboscis!",
+    "hit_dmg_npc": "%1$s stabs <npcname> with its proboscis!",
+    "miss_msg_u": "%1$s tries to bite you, but you dodge!",
+    "miss_msg_npc": "%1$s tries to bite <npcname>, but they dodge!",
+    "no_dmg_msg_u": "%1$s tries to bite your %2$s, but fails to penetrate your armor.",
+    "no_dmg_msg_npc": "%1$s tries to bite <npcname>, but fails to penetrate their armor."
+  },
+  {
+    "type": "monster_attack",
+    "attack_type": "melee",
     "id": "wicked_impale",
     "cooldown": 15,
     "move_cost": 400,
@@ -454,14 +484,12 @@
     "id": "cut_throat",
     "cooldown": 20,
     "move_cost": 100,
-    "hitsize_min": 4,
-    "hitsize_max": 4,
-    "damage_max_instance": [ { "damage_type": "cut", "amount": 23 } ],
+    "damage_max_instance": [ { "damage_type": "cut", "amount": 23, "armor_penetration": 10 } ],
     "condition": { "not": { "u_has_effect": "maimed_arm" } },
-    "hit_dmg_u": "%1$s slashes at your neck, cutting your throat!",
-    "hit_dmg_npc": "%1$s slashes at <npcname>!",
-    "no_dmg_msg_u": "%1$s slashes at your neck, but glances off your armor.",
-    "no_dmg_msg_npc": "%1$s slashes at <npcname>, but glances off armor.",
+    "hit_dmg_u": "%1$s slashes, seeking a weak point!",
+    "hit_dmg_npc": "%1$s slashes at <npcname>, seeking a weak point!",
+    "no_dmg_msg_u": "%1$s slashes precisely at you, but glances off your armor.",
+    "no_dmg_msg_npc": "%1$s slashes precisely at <npcname>, but glances off armor.",
     "miss_msg_u": "%s slashes at your neck!  You duck!",
     "miss_msg_npc": "%s slashes at <npcname>, but they duck!"
   },
@@ -720,5 +748,28 @@
     "no_dmg_msg_npc": "%1$s tries to impale <npcname>, but fails to penetrate their armor.",
     "dodgeable": true,
     "blockable": true
+  },
+  {
+    "type": "monster_attack",
+    "attack_type": "melee",
+    "id": "dermatik_impale",
+    "condition": {
+      "and": [
+        { "and": [ { "u_has_flag": "GRAB_FILTER" } ] },
+        {
+          "not": { "or": [ { "u_has_flag": "ACIDBLOOD" }, { "u_has_flag": "PARAIMMUNE" }, { "u_has_effect": "dermatik" } ] }
+        }
+      ]
+    },
+    "damage_max_instance": [ { "damage_type": "stab", "amount": 4, "armor_multiplier": 0.33 } ],
+    "effects": [ { "id": "dermatik", "duration": 86400, "affect_hit_bp": true } ],
+    "cooldown": 25,
+    "move_cost": 300,
+    "hit_dmg_u": "The %1$s sinks its ovipositor into your %2$s!",
+    "hit_dmg_npc": "The %1$s sinks its ovipositor into <npcname>'s %2$s!",
+    "miss_msg_u": "The %s tries to land on you, but you dodge!",
+    "miss_msg_npc": "The %1$s tries to land on <npcname>, but they dodge!",
+    "no_dmg_msg_u": "The %1$s lands on your %2$s, but can't penetrate your armor!",
+    "no_dmg_msg_npc": "The %1$s lands on <npcname>'s %2$s, but can't penetrate their armor!"
   }
 ]

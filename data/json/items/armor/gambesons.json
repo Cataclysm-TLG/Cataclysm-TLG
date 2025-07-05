@@ -14,7 +14,7 @@
     "looks_like": "jacket_light",
     "color": "light_gray",
     "warmth": 50,
-    "flags": [ "VARSIZE", "STURDY", "NORMAL", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "STURDY", "NORMAL" ],
     "use_action": {
       "type": "transform",
       "menu_text": "Loosen",
@@ -97,7 +97,7 @@
     "looks_like": "jacket_light",
     "color": "light_gray",
     "warmth": 50,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "BLOCK_WHILE_WORN" ],
+    "flags": [ "VARSIZE", "STURDY", "OUTER" ],
     "use_action": { "type": "transform", "menu_text": "Tighten", "target": "gambeson", "msg": "You tighten the fit of your gambeson." },
     "armor": [
       {

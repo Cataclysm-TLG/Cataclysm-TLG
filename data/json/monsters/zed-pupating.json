@@ -7,9 +7,11 @@
     "copy-from": "mon_zombie_crawler",
     "delete": { "categories": [ "CLASSIC" ] },
     "bleed_rate": 50,
-    "regenerates": 10,
+    "regenerates": 5,
+    "melee_skill": 0,
     "harvest": "zombie_pupating",
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF" ] },
+    "upgrades": { "half_life": 4, "into": "mon_zombie_crawler_pupa" },
     "armor": { "electric": 1, "bash": 7, "cut": 5, "bullet": 5 }
   },
   {
@@ -40,7 +42,9 @@
     "delete": { "categories": [ "CLASSIC" ] },
     "bleed_rate": 50,
     "special_attacks": [ { "type": "bite", "cooldown": 3 } ],
-    "regenerates": 10,
+    "upgrades": { "half_life": 4, "into": "mon_zombie_pupa" },
+    "regenerates": 5,
+    "melee_skill": 0,
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF" ] },
     "armor": { "electric": 2, "bash": 8, "cut": 6, "bullet": 6 }
   },
@@ -71,7 +75,7 @@
     "delete": { "categories": [ "CLASSIC" ] },
     "harvest": "zombie_pupating",
     "speed": 95,
-    "regenerates": 10,
+    "regenerates": 5,
     "upgrades": { "half_life": 42, "into_group": "GROUP_BRUTE_PUPA" },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF" ] }
   },
@@ -118,6 +122,7 @@
     "melee_dice_sides": 7,
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "weakpoint_sets": [ "wps_humanoid_body", "wps_humanoid_head_small" ],
+    "upgrades": { "half_life": 4, "into": "mon_hulk_pupa" },
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_hulk" ],
     "vision_day": 83,
     "vision_night": 4,
@@ -130,7 +135,7 @@
       { "id": "smash", "cooldown": 30 }
     ],
     "death_drops": "mon_zombie_hulk_death_drops",
-    "regenerates": 10,
+    "regenerates": 8,
     "flags": [
       "SEES",
       "HEARS",
@@ -193,7 +198,7 @@
       }
     ],
     "death_drops": "mon_zombie_hulk_death_drops",
-    "regenerates": 10,
+    "regenerates": 8,
     "flags": [
       "SEES",
       "HEARS",
@@ -226,7 +231,9 @@
     "bleed_rate": 0,
     "vision_day": 8,
     "vision_night": 15,
+    "melee_skill": 0,
     "harvest": "zombie_humanoid_pupating_shadow",
+    "upgrades": { "half_life": 4, "into": "mon_zombie_pupa_shady" },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NIGHT_INVISIBILITY" ] },
     "armor": { "electric": 2, "bash": 8, "cut": 6, "bullet": 6 }
   },

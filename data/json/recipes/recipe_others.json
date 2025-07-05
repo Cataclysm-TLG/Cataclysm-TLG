@@ -970,7 +970,7 @@
       [ "mag_mechanics", 2 ],
       [ "mag_rifle", 2 ]
     ],
-    "components": [ [ [ "wire", 2 ], [ "cable", 2 ] ] ]
+    "components": [ [ [ "wire", 2 ], [ "cable", 2 ] ], [ [ "yarn", 1 ], [ "cotton_ball", 1 ], [ "wool_staple", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1036,17 +1036,38 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "anvil",
+    "result": "glassblowers_crucible",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
-    "difficulty": 6,
-    "time": "6 h",
-    "autolearn": true,
-    "qualities": [ { "id": "HAMMER", "level": 3 }, { "id": "CHISEL", "level": 3 }, { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "drill_press_tool", 20 ] ], [ [ "angle_grinder", 20 ] ] ],
-    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
-    "components": [ [ [ "anvil_crude", 1 ] ] ]
+    "difficulty": 4,
+    "time": "3 h",
+    "reversible": true,
+    "decomp_learn": 4,
+    "autolearn": false,
+    "book_learn": [ [ "glassblowing_book", 5 ] ],
+    "using": [ [ "welding_standard", 100 ] ],
+    "qualities": [
+      { "id": "HAMMER", "level": 2 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "SCREW", "level": 1 },
+      { "id": "WRENCH", "level": 1 }
+    ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_pottery" } ],
+    "components": [
+      [ [ "element", 8 ], [ "crude_heating_element", 12 ] ],
+      [ [ "pot_canning_clay", 1 ] ],
+      [ [ "cable", 4 ] ],
+      [ [ "power_supply", 1 ] ],
+      [ [ "fire_brick", 25 ] ],
+      [ [ "clay_lump", 10 ] ],
+      [ [ "pipe", 8 ] ],
+      [ [ "pipe_fittings", 4 ] ],
+      [ [ "sheet_metal_small", 4 ] ],
+      [ [ "small_lcd_screen", 1 ] ],
+      [ [ "processor", 1 ] ],
+      [ [ "thermostat", 1 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -1409,7 +1430,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "components": [
       [ [ "steel_lump", 5 ], [ "steel_chunk", 20 ], [ "scrap", 60 ] ],
-      [ [ "metal_tank_little", 1 ] ],
+      [ [ "metal_tank", 1 ] ],
       [ [ "pipe", 6 ] ],
       [ [ "pipe_fittings", 4 ] ]
     ]
@@ -1426,12 +1447,11 @@
     "autolearn": true,
     "components": [
       [
-        [ "splinter", 40 ],
-        [ "2x4", 6 ],
-        [ "stick", 8 ],
-        [ "bone_any", 40, "LIST" ],
-        [ "skewer_bone", 1000 ],
-        [ "pine_bough", 20 ],
+        [ "splinter", 200 ],
+        [ "2x4", 12 ],
+        [ "stick", 20 ],
+        [ "bone_any", 156, "LIST" ],
+        [ "skewer_bone", 2000 ],
         [ "log", 1 ]
       ],
       [ [ "char_kiln", 1 ] ]
@@ -2595,12 +2615,13 @@
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
     "difficulty": 3,
-    "time": "4 h",
+    "time": "10 h",
     "autolearn": true,
-    "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "tools": [ [ [ "angle_grinder", 200 ] ] ],
-    "proficiencies": [ { "proficiency": "prof_metalworking" } ],
-    "components": [ [ [ "railroad_track_item_half", 1 ] ] ]
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 3 }, { "id": "GRIND", "level": 2 } ],
+    "tools": [ [ [ "angle_grinder", 220 ] ], [ [ "drill_press_tool", 20 ] ] ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
+    "components": [ [ [ "railroad_track_item_half", 1 ] ] ],
+    "byproducts": [ [ "steel_lump", 15 ] ]
   },
   {
     "result": "anvil_bronze",
