@@ -743,8 +743,15 @@
     "color": "light_gray",
     "warmth": 40,
     "material_thickness": 2,
-    "flags": [ "VARSIZE", "OVERSIZE" ],
-    "armor": [ { "encumbrance": 7, "coverage": 60, "covers": [ "foot_l", "foot_r" ] } ]
+    "flags": [ "OVERSIZE" ],
+    "armor": [
+      {
+        "encumbrance": 4,
+        "coverage": 80,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r" ]
+      }
+    ]
   },
   {
     "id": "leg_warmers_xsf",

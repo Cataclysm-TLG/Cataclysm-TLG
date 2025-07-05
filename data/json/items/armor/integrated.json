@@ -1677,123 +1677,7 @@
         "encumbrance": 1
       }
     ],
-    "melee_damage": { "cut": 11 }
-  },
-  {
-    "id": "integrated_claws_rat",
-    "type": "ARMOR",
-    "category": "armor",
-    "name": { "str_sp": "gnarled claws" },
-    "description": "Your fingernails have become gnarled, twisted claws.",
-    "weight": "100 g",
-    "volume": "250 ml",
-    "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 6 ] ],
-    "price": "0 cent",
-    "price_postapoc": "0 cent",
-    "weapon_category": [ "CLAWS" ],
-    "material": [ "keratin" ],
-    "symbol": ";",
-    "color": "dark_gray",
-    "flags": [
-      "INTEGRATED",
-      "ALLOWS_NATURAL_ATTACKS",
-      "UNBREAKABLE",
-      "PERSONAL",
-      "PADDED",
-      "NO_SALVAGE",
-      "TRANSPARENT",
-      "PROVIDES_TECHNIQUES",
-      "NATURAL_WEAPON"
-    ],
-    "techniques": [ "TEC_CLAW" ],
-    "armor": [
-      {
-        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "coverage": 20,
-        "encumbrance": 3
-      }
-    ],
     "melee_damage": { "cut": 12 }
-  },
-  {
-    "id": "integrated_claws_st",
-    "type": "ARMOR",
-    "category": "armor",
-    "name": { "str_sp": "stainless claws" },
-    "description": "Your claws have toughened to become something akin to miniature butcher knives.",
-    "weight": "100 g",
-    "volume": "300 ml",
-    "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 8 ] ],
-    "price": "0 cent",
-    "price_postapoc": "0 cent",
-    "material": [ "keratin" ],
-    "weapon_category": [ "CLAWS" ],
-    "symbol": ";",
-    "color": "dark_gray",
-    "flags": [
-      "INTEGRATED",
-      "ALLOWS_NATURAL_ATTACKS",
-      "UNBREAKABLE",
-      "PERSONAL",
-      "PADDED",
-      "NO_SALVAGE",
-      "TRANSPARENT",
-      "PROVIDES_TECHNIQUES",
-      "NATURAL_WEAPON"
-    ],
-    "techniques": [ "TEC_CLAW" ],
-    "armor": [
-      {
-        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "coverage": 40,
-        "encumbrance": 5
-      }
-    ],
-    "melee_damage": { "cut": 13 }
-  },
-  {
-    "id": "integrated_talons",
-    "type": "ARMOR",
-    "category": "armor",
-    "name": { "str_sp": "talons" },
-    "description": "Your index fingers have become talons.  They make for wicked natural daggers.  Unfortunately, they get in the way of everything including gloves.",
-    "weight": "100 g",
-    "volume": "350 ml",
-    "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 12 ] ],
-    "price": "0 cent",
-    "price_postapoc": "0 cent",
-    "material": [ "keratin" ],
-    "weapon_category": [ "CLAWS" ],
-    "symbol": ";",
-    "color": "dark_gray",
-    "flags": [
-      "INTEGRATED",
-      "ALLOWS_NATURAL_ATTACKS",
-      "UNBREAKABLE",
-      "SKINTIGHT",
-      "NORMAL",
-      "OUTER",
-      "PADDED",
-      "NO_SALVAGE",
-      "TRANSPARENT",
-      "PROVIDES_TECHNIQUES",
-      "NATURAL_WEAPON"
-    ],
-    "techniques": [ "TEC_CLAW" ],
-    "armor": [
-      {
-        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "coverage": 10,
-        "encumbrance": 7
-      }
-    ],
-    "melee_damage": { "cut": 17 }
   },
   {
     "id": "integrated_sucker_hooks",
@@ -1847,7 +1731,7 @@
     "color": "white",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "techniques": [ "SHARKTEETH_BITE", "SHARKTEETH_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 5 } ],
@@ -2022,13 +1906,23 @@
     "color": "white",
     "qualities": [ [ "HAMMER", 1 ] ],
     "techniques": [ "BEAK_BITE", "BEAK_BITE_NATURAL", "BEAK_BITE_MOUTH_TENTACLES" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "SKINTIGHT",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 7 } ],
         "covers": [ "mouth" ],
         "coverage": 60,
-        "encumbrance": 0
+        "encumbrance": 0,
+        "rigid_layer_only": true
       }
     ],
     "melee_damage": { "cut": 8, "bash": 11 }
@@ -2048,15 +1942,313 @@
     "color": "yellow",
     "qualities": [ [ "DRILL", 1 ], [ "CHISEL_WOOD", 1 ] ],
     "techniques": [ "DRILL_BEAK_PECK", "DRILL_BEAK_PECK_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "SKINTIGHT",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 7 } ],
         "covers": [ "mouth" ],
         "coverage": 60,
-        "encumbrance": 0
+        "encumbrance": 0,
+        "rigid_layer_only": true
       }
     ],
     "melee_damage": { "stab": 19, "bash": 5 }
+  },
+  {
+    "id": "integrated_hooves",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "hooves" },
+    "description": "A pair of hard, solid hooves sheathing the unguligrade feet in a protective layer of horn.",
+    "weight": "400 g",
+    "volume": "500 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "qualities": [ [ "HAMMER", 1 ] ],
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "PROVIDES_TECHNIQUES"
+    ],
+    "techniques": [ "tec_hooves_kick" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_frog_l", "hoof_frog_r" ],
+        "coverage": 90,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_toe_l", "hoof_toe_r", "hoof_sole_l", "hoof_sole_r" ],
+        "coverage": 100,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 16, "cut": 3 }
+  },
+  {
+    "id": "integrated_toe_talons",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "toe talons" },
+    "description": "Curved talons adorn the feet like sickles, perfect for the killing blow.",
+    "weight": "150 g",
+    "volume": "400 ml",
+    "qualities": [ [ "CUT", 2 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 12 ] ],
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL",
+      "OUTER",
+      "PROVIDES_TECHNIQUES",
+      "ALLOWS_TALONS"
+    ],
+    "techniques": [ "tec_toe_talons_kick" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 9 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_l", "foot_toes_r", "foot_heel_l", "foot_heel_r" ],
+        "coverage": 60,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "cut": 19 }
+  },
+  {
+    "id": "integrated_toe_claws",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "toe claws" },
+    "description": "Curved claws adorn the feet, ideal for gripping perch and prey alike.",
+    "weight": "100 g",
+    "volume": "300 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL",
+      "OUTER",
+      "ALLOWS_TALONS"
+    ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 6 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_toes_l", "foot_toes_r", "foot_heel_l", "foot_heel_r" ],
+        "coverage": 60,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "cut": 14 }
+  },
+  {
+    "id": "integrated_horns",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "horns" },
+    "description": "A pair of short horns protruding from the scalp.",
+    "weight": "100 g",
+    "volume": "300 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "NATURAL_WEAPON", "ALLOWS_NATURAL_ATTACKS", "SKINTIGHT", "NORMAL" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 15 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown" ],
+        "coverage": 10,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 7, "stab": 4 }
+  },
+  {
+    "id": "integrated_antlers_fresh",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "fresh antlers" },
+    "description": "A pair of short antlers, still covered in fuzzy velvet.  Until they're fully grown in, they likely won't be much use outside of a grapple.",
+    "weight": "100 g",
+    "volume": "300 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "NATURAL_WEAPON", "ALLOWS_NATURAL_ATTACKS", "SKINTIGHT", "NORMAL" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 15 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown" ],
+        "coverage": 10,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 4, "stab": 5 }
+  },
+  {
+    "id": "integrated_horns_curled",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "curled horns" },
+    "description": "Curled horns, like those of a ram.",
+    "weight": "300 g",
+    "volume": "600 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL",
+      "OUTER",
+      "PROVIDES_TECHNIQUES"
+    ],
+    "techniques": [ "tec_horns_headbutt" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 20 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown" ],
+        "coverage": 50,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 14, "stab": 5 }
+  },
+  {
+    "id": "integrated_horns_long",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "long horns" },
+    "description": "Long, stabbing horns protruding from the skull.",
+    "weight": "300 g",
+    "volume": "600 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL",
+      "OUTER",
+      "PROVIDES_TECHNIQUES"
+    ],
+    "techniques": [ "tec_horns_headbutt" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 20 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown" ],
+        "coverage": 60,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 7, "stab": 13 }
+  },
+  {
+    "id": "integrated_antlers",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "antlers" },
+    "description": "A regal pair of branching antlers.",
+    "weight": "300 g",
+    "volume": "600 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [
+      "INTEGRATED",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL",
+      "OUTER",
+      "PROVIDES_TECHNIQUES"
+    ],
+    "techniques": [ "tec_horns_headbutt" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 16 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown" ],
+        "coverage": 30,
+        "encumbrance": 0,
+        "rigid_layer_only": true
+      }
+    ],
+    "melee_damage": { "bash": 11, "stab": 7 }
   }
 ]

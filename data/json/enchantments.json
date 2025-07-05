@@ -146,6 +146,13 @@
     ]
   },
   {
+    "type": "enchantment",
+    "id": "ench_hooves",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "foot_l" }, { "lose": "foot_r" }, { "gain": "hoof_l" }, { "gain": "hoof_r" } ],
+    "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 0.2 } ]
+  },
+  {
     "id": "ench_wings_insect_active",
     "type": "enchantment",
     "name": { "str": "Insect Wings (Buzzing)" },

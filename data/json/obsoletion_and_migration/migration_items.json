@@ -538,6 +538,21 @@
   },
   {
     "type": "MIGRATION",
+    "id": "integrated_talons",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_claws_rat",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "integrated_claws_st",
+    "replace": "gloves_claws"
+  },
+  {
+    "type": "MIGRATION",
     "id": "bee_dress",
     "replace": "dress_costume_skimpy",
     "variant": "bee_dress"

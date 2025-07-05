@@ -1569,5 +1569,43 @@
     "condition_desc": "* Only works on a <info>mundane</info> target of <info>similar or smaller</info> size",
     "tech_effects": [ { "id": "choking", "chance": 100, "duration": 200, "on_damage": false, "message": "%s struggles to breathe!" } ],
     "attack_vectors": [ "vector_claw" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_hooves_kick",
+    "name": "Hoof Kick",
+    "crit_ok": true,
+    "weighting": -3,
+    "condition": { "not": { "u_has_flag": "GRAB_FILTER" } },
+    "unarmed_allowed": true,
+    "melee_allowed": true,
+    "messages": [ "You kick %s", "<npcname> kicks %s" ],
+    "description": "A powerful kick with sharp hooves",
+    "attack_vectors": [ "vector_hoof_toe", "vector_hoof_sole" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_toe_talons_kick",
+    "name": "Toe Talons Kick",
+    "crit_ok": true,
+    "weighting": -3,
+    "condition": { "not": { "u_has_flag": "GRAB_FILTER" } },
+    "unarmed_allowed": true,
+    "melee_allowed": true,
+    "messages": [ "You kick %s", "<npcname> kicks %s" ],
+    "description": "A powerful kick with sharp talons",
+    "attack_vectors": [ "vector_foot_toes", "vector_foot_heel" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_horns_headbutt",
+    "name": "Gore",
+    "crit_ok": true,
+    "unarmed_allowed": true,
+    "melee_allowed": true,
+    "weighting": -2,
+    "messages": [ "You gore %s", "<npcname> gores %s" ],
+    "description": "Headbutt using a pair of horns or antlers",
+    "attack_vectors": [ "vector_horns" ]
   }
 ]
