@@ -23,7 +23,7 @@
     "messages": [ "You headbutt %s", "<npcname> headbutts %s" ],
     "description": "A basic headbutt",
     "skill_requirements": [ { "name": "unarmed", "level": 3 } ],
-    "attack_vectors": [ "vector_headbutt" ]
+    "attack_vectors": [ "vector_headbutt", "vector_horns" ]
   },
   {
     "type": "technique",
@@ -993,7 +993,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.2 },
       { "stat": "damage", "type": "stab", "scale": 1.2 }
     ],
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -1008,7 +1008,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -1038,7 +1038,7 @@
       { "stat": "damage", "type": "cut", "scale": 0.66 },
       { "stat": "damage", "type": "stab", "scale": 0.66 }
     ],
-    "attack_vectors": [ "vector_foot_toes" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -1059,7 +1059,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.33 },
       { "stat": "damage", "type": "stab", "scale": 1.33 }
     ],
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -1096,7 +1096,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.25 },
       { "stat": "damage", "type": "stab", "scale": 1.25 }
     ],
-    "attack_vectors": [ "vector_foot_toes" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -1192,7 +1192,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.2 },
       { "stat": "damage", "type": "stab", "scale": 1.2 }
     ],
-    "attack_vectors": [ "vector_foot_heel" ]
+    "attack_vectors": [ "vector_foot_heel", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -1676,7 +1676,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.2 },
       { "stat": "damage", "type": "stab", "scale": 1.2 }
     ],
-    "attack_vectors": [ "vector_foot_toes" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -1776,7 +1776,7 @@
     },
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, may fail on enemies grabbing you",
     "knockback_dist": 1,
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -1824,7 +1824,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_foot_toes" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -1898,7 +1898,17 @@
     },
     "condition_desc": "* Only works on a <info>non-stunned mundane</info> target of <info>similar or smaller</info> size",
     "stun_dur": 1,
-    "attack_vectors": [ "vector_null", "vector_headbutt", "vector_punch", "vector_elbow", "vector_foot_toes", "vector_shin", "vector_knee" ]
+    "attack_vectors": [
+      "vector_null",
+      "vector_headbutt",
+      "vector_punch",
+      "vector_elbow",
+      "vector_foot_toes",
+      "vector_shin",
+      "vector_knee",
+      "vector_hoof_toe",
+      "vector_hoof_sole"
+    ]
   },
   {
     "type": "technique",
@@ -2174,7 +2184,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.4 },
       { "stat": "damage", "type": "stab", "scale": 1.4 }
     ],
-    "attack_vectors": [ "vector_shin", "vector_foot_toes" ]
+    "attack_vectors": [ "vector_shin", "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -2206,7 +2216,7 @@
     },
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, may fail on enemies grabbing you",
     "knockback_dist": 1,
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -2271,7 +2281,17 @@
     "unarmed_allowed": true,
     "melee_allowed": true,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 } ],
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right", "vector_punch", "vector_elbow", "vector_foot_toes", "vector_shin" ]
+    "attack_vectors": [
+      "vector_null",
+      "vector_claw",
+      "vector_claw_right",
+      "vector_punch",
+      "vector_elbow",
+      "vector_foot_toes",
+      "vector_shin",
+      "vector_hoof_toe",
+      "vector_hoof_sole"
+    ]
   },
   {
     "type": "technique",
@@ -2284,7 +2304,17 @@
     "required_buffs_all": [ "buff_ninjutsu_onattack" ],
     "crit_tec": true,
     "mult_bonuses": [ { "stat": "movecost", "scale": 0.8 } ],
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right", "vector_punch", "vector_elbow", "vector_foot_toes", "vector_shin" ]
+    "attack_vectors": [
+      "vector_null",
+      "vector_claw",
+      "vector_claw_right",
+      "vector_punch",
+      "vector_elbow",
+      "vector_foot_toes",
+      "vector_shin",
+      "vector_hoof_toe",
+      "vector_hoof_sole"
+    ]
   },
   {
     "type": "technique",
@@ -2417,7 +2447,17 @@
     "stun_dur": 2,
     "disarms": true,
     "tech_effects": [ { "id": "disarmed", "chance": 100, "duration": 400, "on_damage": true, "message": "The hand of %s is forced open!" } ],
-    "attack_vectors": [ "vector_null", "vector_claw", "vector_claw_right", "vector_punch", "vector_elbow", "vector_foot_heel", "vector_shin" ]
+    "attack_vectors": [
+      "vector_null",
+      "vector_claw",
+      "vector_claw_right",
+      "vector_punch",
+      "vector_elbow",
+      "vector_foot_heel",
+      "vector_shin",
+      "vector_hoof_toe",
+      "vector_hoof_sole"
+    ]
   },
   {
     "type": "technique",
@@ -2530,7 +2570,7 @@
     },
     "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 2,
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -2873,7 +2913,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.5 },
       { "stat": "damage", "type": "stab", "scale": 1.5 }
     ],
-    "attack_vectors": [ "vector_foot_heel" ]
+    "attack_vectors": [ "vector_foot_heel", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -2905,7 +2945,7 @@
     },
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size, may fail on enemies grabbing you",
     "knockback_dist": 1,
-    "attack_vectors": [ "vector_foot_sole" ]
+    "attack_vectors": [ "vector_foot_sole", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
@@ -2928,7 +2968,7 @@
     },
     "condition_desc": "* Only works on a <info>non-downed</info> target of <info>similar or smaller</info> size incapable of flight",
     "down_dur": 1,
-    "attack_vectors": [ "vector_foot_toes", "vector_shin" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_shin", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -2942,7 +2982,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.2 },
       { "stat": "damage", "type": "stab", "scale": 1.2 }
     ],
-    "attack_vectors": [ "vector_foot_toes" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",
@@ -3360,7 +3400,7 @@
       { "stat": "damage", "type": "cut", "scale": 1.3 },
       { "stat": "damage", "type": "stab", "scale": 1.3 }
     ],
-    "attack_vectors": [ "vector_claw", "vector_claw_right", "vector_punch", "vector_foot_toes" ]
+    "attack_vectors": [ "vector_claw", "vector_claw_right", "vector_punch", "vector_foot_toes", "vector_hoof_toe" ]
   },
   {
     "type": "technique",

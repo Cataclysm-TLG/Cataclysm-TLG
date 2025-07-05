@@ -172,5 +172,32 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "TALONS",
+    "name": { "str": "Talons" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "CLAWS_ST",
+    "name": { "str": "Stainless Claws" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "CLAWS_RAT",
+    "name": { "str": "Grizzled Claws" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
   }
 ]

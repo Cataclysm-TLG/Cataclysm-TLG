@@ -130,11 +130,8 @@
       "PAWS",
       "PAWS_LARGE",
       "NAILS",
-      "TALONS",
       "CLAWS",
       "CLAWS_RETRACT",
-      "CLAWS_RAT",
-      "CLAWS_ST",
       "WEBBED",
       "PATCHSKIN1",
       "PATCHSKIN2",
@@ -1363,18 +1360,7 @@
     "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "passive_pseudo_items": [ "integrated_fingertip_razors" ],
     "flags": [ "BIONIC_NPC_USABLE" ],
-    "mutation_conflicts": [
-      "BENDY3",
-      "ARM_TENTACLES",
-      "ARM_TENTACLES_4",
-      "CLAWS_TENTACLE",
-      "TALONS",
-      "NAILS",
-      "CLAWS",
-      "CLAWS_RETRACT",
-      "CLAWS_RAT",
-      "CLAWS_ST"
-    ]
+    "mutation_conflicts": [ "BENDY3", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE", "NAILS", "CLAWS", "CLAWS_RETRACT" ]
   },
   {
     "id": "bio_recycler",

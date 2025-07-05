@@ -905,5 +905,46 @@
     "recurrence": [ "5 minutes", "30 minutes" ],
     "condition": { "and": [ { "u_has_trait": "EATHEALTH_active" }, { "math": [ "u_val('instant_thirst')", "<", "240" ] } ] },
     "effect": [ { "math": [ "u_val('thirst')", "+=", "10" ] }, { "u_message": "Steam rises from your sweltering skin." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "antlers_spring_timer",
+    "recurrence": [ "12 hours", "120 hours" ],
+    "condition": { "and": [ { "or": [ { "u_has_trait": "ANTLERS_SHED" } ] }, { "or": [ { "is_season": "spring" } ] } ] },
+    "effect": [
+      { "u_message": "An itching in your scalp signifies the growth of a new pair of antlers.", "type": "good" },
+      { "u_lose_trait": "ANTLERS_SHED" },
+      { "u_add_trait": "ANTLERS_GROWING" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "antlers_summer_timer",
+    "recurrence": [ "12 hours", "120 hours" ],
+    "condition": {
+      "and": [ { "or": [ { "u_has_trait": "ANTLERS_SHED" }, { "u_has_trait": "ANTLERS_GROWING" } ] }, { "is_season": "summer" } ]
+    },
+    "effect": [
+      { "u_message": "The last of the bloody velvet falls free.  Your antlers have grown to full size.", "type": "good" },
+      { "u_lose_trait": "ANTLERS_SHED" },
+      { "u_lose_trait": "ANTLERS_GROWING" },
+      { "u_set_field": "fd_blood", "radius": 0, "intensity": 1 },
+      { "u_add_trait": "ANTLERS" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "antlers_winter_timer",
+    "recurrence": [ "240 hours", "480 hours" ],
+    "condition": { "and": [ { "u_has_trait": "ANTLERS" }, { "is_season": "winter" } ] },
+    "effect": [
+      {
+        "u_message": "They've been growing looser for some time, and finally with a tearing sensation, your antlers come free.",
+        "type": "bad"
+      },
+      { "u_lose_trait": "ANTLERS" },
+      { "u_spawn_item": "antler", "count": 2 },
+      { "u_add_trait": "ANTLERS_SHED" }
+    ]
   }
 ]

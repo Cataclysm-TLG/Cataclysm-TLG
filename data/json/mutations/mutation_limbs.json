@@ -352,7 +352,7 @@
     "name_multiple": "webbed fingers",
     "name": "left fingers"
   },
-    {
+  {
     "id": "hoof_l",
     "type": "body_part",
     "name": "left hoof",
@@ -376,11 +376,10 @@
     "fire_warmth_bonus": 300,
     "squeamish_penalty": 3,
     "base_hp": 60,
-    "drench_capacity": 300,
+    "drench_capacity": 0,
     "smash_message": "You kick the %s.",
-    "techniques": [ "TEC_HOOVES_KICK" ],
     "bionic_slots": 7,
-    "sub_parts": [  "hoof_fetlock_l", "hoof_toe_l", "hoof_sole_l", "hoof_frog_l" ],
+    "sub_parts": [ "hoof_fetlock_l", "hoof_toe_l", "hoof_sole_l", "hoof_frog_l" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT" ],
     "bmi_encumbrance_threshold": 20,
     "bmi_encumbrance_scalar": 0.15
@@ -409,12 +408,11 @@
     "fire_warmth_bonus": 300,
     "squeamish_penalty": 3,
     "base_hp": 60,
-    "drench_capacity": 300,
+    "drench_capacity": 0,
     "smash_message": "You kick the %s.",
     "technique_encumbrance_limit": 40,
-    "techniques": [ "TEC_HOOVES_KICK" ],
     "bionic_slots": 7,
-    "sub_parts": [  "hoof_fetlock_r", "hoof_toe_r", "hoof_sole_r", "hoof_frog_r" ],
+    "sub_parts": [ "hoof_fetlock_r", "hoof_toe_r", "hoof_sole_r", "hoof_frog_r" ],
     "flags": [ "LIMB_LOWER", "LIMB_FOOT" ],
     "bmi_encumbrance_threshold": 20,
     "bmi_encumbrance_scalar": 0.15

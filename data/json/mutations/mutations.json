@@ -3074,7 +3074,7 @@
     "visibility": 10,
     "ugliness": 9,
     "description": "Your right hand has become a crab claw.  It encumbers you greatly, but you can use it while grappling to deal massive damage.",
-    "cancels": [ "NAILS", "CLAWS", "TALONS", "WEBBED", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
+    "cancels": [ "NAILS", "CLAWS", "WEBBED", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE" ],
     "prereqs": [ "CRUSTACEAN_CARAPACE" ],
     "integrated_armor": [ "integrated_giant_pincer" ],
     "enchantments": [ { "condition": { "not": "u_has_weapon" }, "values": [ { "value": "ITEM_DAMAGE_BASH", "add": 1 } ] } ],
@@ -3585,8 +3585,8 @@
     "integrated_armor": [ "integrated_nails" ],
     "description": "Your fingernails are long and sharp.  If you're barehanded and not wearing gloves, you'll be able to fight with them.",
     "types": [ "CLAWS" ],
-    "changes_to": [ "CLAWS", "TALONS" ],
-    "category": [ "RAPTOR", "BIRD", "CHIMERA", "BEAST", "RAT", "URSINE", "LIZARD", "FELINE", "RABBIT", "LUPINE" ]
+    "changes_to": [ "CLAWS" ],
+    "category": [ "RAPTOR", "CHIMERA", "BEAST", "RAT", "URSINE", "LIZARD", "FELINE", "RABBIT", "LUPINE" ]
   },
   {
     "type": "mutation",
@@ -3599,39 +3599,9 @@
     "description": "You have claws on the ends of your fingers.  If you aren't wearing gloves, you'll be able to make barehanded attacks with these.",
     "types": [ "CLAWS" ],
     "prereqs": [ "NAILS" ],
-    "changes_to": [ "CLAWS_RETRACT", "CLAWS_RAT" ],
-    "category": [ "BEAST", "RAT", "URSINE", "FELINE" ],
+    "changes_to": [ "CLAWS_RETRACT" ],
+    "category": [ "BEAST", "URSINE", "FELINE", "RAPTOR" ],
     "//": "No Lupine, wolf claws aren't long or sharp enough."
-  },
-  {
-    "type": "mutation",
-    "id": "CLAWS_RAT",
-    "name": { "str": "Gnarled Claws" },
-    "points": 3,
-    "visibility": 3,
-    "ugliness": 4,
-    "integrated_armor": [ "integrated_claws_rat" ],
-    "description": "Your claws have grown tougher and slightly gnarled.",
-    "types": [ "CLAWS" ],
-    "prereqs": [ "CLAWS" ],
-    "changes_to": [ "CLAWS_ST" ],
-    "category": [ "RAT", "URSINE" ]
-  },
-  {
-    "type": "mutation",
-    "id": "CLAWS_ST",
-    "name": { "str": "Stainless Claws" },
-    "points": 6,
-    "visibility": 3,
-    "ugliness": 5,
-    "purifiable": false,
-    "integrated_armor": [ "integrated_claws_st" ],
-    "description": "Your paws are bone, muscle, and claw with a thin layer of skin and fur.  They might as well be made of stainless steel.",
-    "types": [ "CLAWS" ],
-    "prereqs": [ "CLAWS_RAT" ],
-    "prereqs2": [ "PAWS" ],
-    "threshreq": [ "THRESH_RAT", "THRESH_URSINE" ],
-    "category": [ "RAT", "URSINE" ]
   },
   {
     "type": "mutation",
@@ -3727,20 +3697,6 @@
         "strength_damage": { "damage_type": "heat", "amount": 2 }
       }
     ]
-  },
-  {
-    "type": "mutation",
-    "id": "TALONS",
-    "name": { "str": "Large Talons" },
-    "points": 2,
-    "visibility": 4,
-    "ugliness": 3,
-    "integrated_armor": [ "integrated_talons" ],
-    "mixed_effect": true,
-    "description": "Your index fingers have grown into huge talons.  After a bit of practice, you find that this does not affect your dexterity, but allows for a deadly unarmed attack.  They also prevent wearing gloves.",
-    "types": [ "CLAWS" ],
-    "prereqs": [ "NAILS" ],
-    "category": [ "LIZARD", "BIRD", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -4270,8 +4226,8 @@
     "category": [ "RAPTOR" ],
     "flags": [ "TOUGH_FEET" ],
     "restricts_gear": [ "foot_toes_l", "foot_toes_r" ],
-    "destroys_gear": true,
-    "allowed_items": [ "ALLOWS_TALONS" ]
+    "allowed_items": [ "ALLOWS_TALONS" ],
+    "integrated_armor": [ "integrated_toe_talons" ]
   },
   {
     "type": "mutation",
@@ -4281,7 +4237,7 @@
     "visibility": 4,
     "ugliness": 2,
     "mixed_effect": true,
-    "description": "Your legs and feet have become bird-like, with long talons arranged three ahead and one behind.  They're perfect gripping onto precarious perches, or for making a long-ranged leap attack.",
+    "description": "Your legs and feet have become bird-like, with scaly skin and grasping claws arranged three ahead and one behind.  They're perfect gripping onto precarious perches, or for making a long-ranged leap attack.",
     "active": true,
     "activated_is_setup": false,
     "activated_eocs": [ "EOC_AVIAN_LEAP" ],
@@ -4292,7 +4248,8 @@
     "restricts_gear": [ "foot_l", "foot_r" ],
     "destroys_gear": true,
     "allowed_items": [ "ALLOWS_TALONS" ],
-    "flags": [ "TOUGH_FEET" ]
+    "flags": [ "TOUGH_FEET" ],
+    "integrated_armor": [ "integrated_toe_claws" ]
   },
   {
     "type": "mutation",
@@ -4466,7 +4423,7 @@
     "points": 10,
     "purifiable": false,
     "description": "Your dextrous paws and long teeth allow you to dig through dirt and rubble with ease.",
-    "prereqs": [ "CLAWS_ST", "PAWS", "PAWS_LITTLE" ],
+    "prereqs": [ "PAWS", "NAILS", "PAWS_LITTLE" ],
     "prereqs2": [ "INCISORS" ],
     "threshreq": [ "THRESH_RAT", "THRESH_RABBIT" ],
     "category": [ "RAT", "RABBIT" ],
@@ -4541,19 +4498,14 @@
     "points": 1,
     "visibility": 3,
     "ugliness": 1,
-    "description": "You have a pair of small horns on your head.  They allow you to make a weak piercing headbutt attack, but prevent the use of most rigid headwear.",
+    "description": "You have a pair of small horns on your head.  They'll make your headbutts do more damage if uncovered, but prevent the use of most rigid headwear.",
     "types": [ "HORNS" ],
     "prereqs": [ "HEADBUMPS" ],
     "changes_to": [ "HORNS_CURLED", "HORNS_POINTED", "ANTLERS" ],
-    "category": [ "CATTLE", "CHIMERA" ],
+    "category": [ "CATTLE", "CHIMERA", "BEAST" ],
     "restricts_gear": [ "head_crown" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You headbutt %s with your horns!",
-      "attack_text_npc": "%1$s headbutts %2$s with their horns!",
-      "chance": 20,
-      "base_damage": [ { "damage_type": "stab", "amount": 3 }, { "damage_type": "bash", "amount": 3 } ]
-    }
+    "integrated_armor": [ "integrated_horns" ]
   },
   {
     "type": "mutation",
@@ -4563,37 +4515,29 @@
     "visibility": 8,
     "ugliness": 2,
     "mixed_effect": true,
-    "description": "You have a pair of large curled horns, like those of a ram.  They allow you to make a strong bashing headbutt attack, but prevent wearing any headwear.",
+    "description": "You have a pair of large curled horns, like those of a ram.  They allow you to make a strong bashing headbutt attack, but prevent wearing most headwear.",
     "types": [ "HORNS" ],
     "prereqs": [ "HORNS" ],
     "category": [ "CHIMERA" ],
     "restricts_gear": [ "head_crown" ],
-    "attacks": {
-      "attack_text_u": "You headbutt %s with your curled horns!",
-      "attack_text_npc": "%1$s headbutts %2$s with their curled horns!",
-      "chance": 20,
-      "base_damage": { "damage_type": "bash", "amount": 14 }
-    }
+    "allow_soft_gear": true,
+    "integrated_armor": [ "integrated_horns_curled" ]
   },
   {
     "type": "mutation",
     "id": "HORNS_POINTED",
-    "name": { "str": "Pointed Horns" },
+    "name": { "str": "Long Horns" },
     "points": 1,
     "visibility": 8,
     "ugliness": 2,
     "mixed_effect": true,
     "description": "You have a pair of long, pointed horns, like those of an antelope.  They allow you to make a strong piercing headbutt attack, but prevent wearing headwear that is not made of fabric.",
     "types": [ "HORNS" ],
+    "category": [ "CATTLE" ],
     "prereqs": [ "HORNS" ],
     "restricts_gear": [ "head_crown" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You stab %s with your pointed horns!",
-      "attack_text_npc": "%1$s stabs %2$s with their pointed horns!",
-      "chance": 22,
-      "base_damage": { "damage_type": "stab", "amount": 24 }
-    }
+    "integrated_armor": [ "integrated_horns_long" ]
   },
   {
     "type": "mutation",
@@ -4603,17 +4547,39 @@
     "visibility": 10,
     "ugliness": 3,
     "mixed_effect": true,
-    "description": "You have a huge rack of antlers, like those of a moose.  They allow you to make a weak headbutt attack, but prevent wearing headwear that is not made of fabric.",
+    "description": "You have a huge rack of antlers, like those of a stag.  They allow you to make a powerful headbutt attack, but prevent wearing headwear that is not made of fabric.",
     "types": [ "HORNS" ],
     "prereqs": [ "HORNS" ],
     "restricts_gear": [ "head_crown" ],
+    "category": [ "BEAST" ],
     "allow_soft_gear": true,
-    "attacks": {
-      "attack_text_u": "You butt %s with your antlers!",
-      "attack_text_npc": "%1$s butts %2$s with their antlers!",
-      "chance": 20,
-      "base_damage": { "damage_type": "bash", "amount": 4 }
-    }
+    "integrated_armor": [ "integrated_antlers" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ANTLERS_SHED",
+    "name": { "str": "Antlers (Shed)" },
+    "points": 0,
+    "player_display": false,
+    "mixed_effect": true,
+    "purifiable": false,
+    "description": "Your antlers have shed for the season.  If you can see this, you're using debug, or you've encountered a bug.",
+    "types": [ "HORNS" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ANTLERS_GROWING",
+    "name": { "str": "Antlers (Fresh)" },
+    "points": 0,
+    "visibility": 3,
+    "ugliness": 4,
+    "mixed_effect": true,
+    "description": "A pair of short, nubby antlers, still covered in velvet, are growing from your skull.",
+    "types": [ "HORNS" ],
+    "restricts_gear": [ "head_crown" ],
+    "purifiable": false,
+    "allow_soft_gear": true,
+    "integrated_armor": [ "integrated_antlers_growing" ]
   },
   {
     "type": "mutation",
@@ -5292,7 +5258,7 @@
     "mixed_effect": true,
     "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You move about a fourth of your previous speed and can no longer wear pants or shoes, on the other hand you make significantly less noise.  In addition to being harder to knock down, you can move through sludge-covered surfaces easily.",
     "category": [ "GASTROPOD" ],
-    "types": [ "RUNNING", "LEGS", "FEET" ],
+    "types": [ "RUNNING", "LEGS", "FEET", "SOLES" ],
     "prereqs": [ "SLIMY" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "leads_to": [ "GASTROPOD_BALANCE" ],
@@ -5375,7 +5341,7 @@
     "ugliness": 1,
     "description": "You have large ears with broad pinnae, like a dog or a cow.  They enhance your hearing, allowing you to hear at greater distances.",
     "types": [ "EARS" ],
-    "category": [ "BEAST", "CATTLE", "CHIMERA", "LUPINE" ],
+    "category": [ "BEAST", "CATTLE", "LUPINE" ],
     "changes_to": [ "LUPINE_EARS" ],
     "enchantments": [ { "values": [ { "value": "HEARING_MULT", "multiply": 0.5 } ] } ]
   },
@@ -5389,7 +5355,7 @@
     "description": "Your hearing has evolved further and is now on par with that of wolves.  You can hear things significantly farther away.",
     "types": [ "EARS" ],
     "prereqs": [ "CANINE_EARS" ],
-    "category": [ "LUPINE" ],
+    "category": [ "LUPINE", "BEAST" ],
     "enchantments": [ { "values": [ { "value": "HEARING_MULT", "multiply": 0.75 } ] } ]
   },
   {
@@ -5400,8 +5366,8 @@
     "visibility": 4,
     "description": "Your ears have extended into long, pointed, velvety ones, like those of a feline.  You find it easier to tune in on sounds from afar.",
     "types": [ "EARS" ],
-    "category": [ "FELINE" ],
-    "enchantments": [ { "values": [ { "value": "HEARING_MULT", "multiply": 0.25 } ] } ]
+    "category": [ "FELINE", "CHIMERA" ],
+    "enchantments": [ { "values": [ { "value": "HEARING_MULT", "multiply": 0.33 } ] } ]
   },
   {
     "type": "mutation",
@@ -6208,12 +6174,12 @@
     "id": "HEADBUMPS",
     "name": { "str": "Head Bumps" },
     "points": 0,
-    "visibility": 3,
-    "ugliness": 3,
-    "description": "You have a pair of bumps on your skull.",
+    "visibility": 1,
+    "ugliness": 1,
+    "description": "You have a pair of bumps on your skull, like something's growing beneath the skin.",
     "types": [ "HORNS" ],
     "changes_to": [ "HORNS", "ANTENNAE" ],
-    "category": [ "CATTLE", "CHIMERA", "INSECT" ]
+    "category": [ "CATTLE", "CHIMERA", "INSECT", "BEAST" ]
   },
   {
     "type": "mutation",
@@ -7036,8 +7002,7 @@
     "restricts_gear": [ "hand_l", "hand_r" ],
     "craft_skill_bonus": [ [ "electronics", -2 ], [ "tailor", -2 ], [ "mechanics", -2 ] ],
     "types": [ "HANDS" ],
-    "prereqs": [ "NAILS", "CLAWS", "CLAWS_RETRACT", "CLAWS_RAT" ],
-    "cancels": [ "TALONS" ],
+    "prereqs": [ "NAILS", "CLAWS", "CLAWS_RETRACT" ],
     "flags": [ "QUADRUPED_CROUCH" ],
     "changes_to": [ "PAWS_LARGE" ],
     "triggers": [
@@ -7051,7 +7016,7 @@
               { "not": { "u_has_flag": "QUADRUPED_RUN" } }
             ]
           },
-          "msg_on": { "text": "Your paws make it easier to crawl around." }
+          "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
       ]
     ],
@@ -7082,7 +7047,6 @@
     "restricts_gear": [ "hand_l", "hand_r" ],
     "types": [ "HANDS" ],
     "prereqs": [ "PAWS" ],
-    "cancels": [ "TALONS" ],
     "flags": [ "QUADRUPED_CROUCH" ],
     "triggers": [
       [
@@ -7095,7 +7059,7 @@
               { "not": { "u_has_flag": "QUADRUPED_RUN" } }
             ]
           },
-          "msg_on": { "text": "Your paws make it easier to crawl around." }
+          "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
       ]
     ],
@@ -9196,22 +9160,13 @@
     "visibility": 2,
     "ugliness": 2,
     "mixed_effect": true,
-    "description": "Your feet have grown into strong and large rabbit feet.  This makes your kicks pack a little more oomph.  Emphasis on little.  It also offers some warmth, and the lucky part is but superstition.  The downside is you are unable to wear shoes.",
+    "description": "Lucky you, your feet have grown padded and elongated - great for running around on all fours, provided you have a matching hand mutation.",
     "types": [ "FEET" ],
     "category": [ "RABBIT" ],
     "flags": [ "QUADRUPED_RUN" ],
     "prereqs": [ "PADDED_FEET" ],
     "wet_protection": [ { "part": "foot_l", "neutral": 10 }, { "part": "foot_r", "neutral": 10 } ],
     "restricts_gear": [ "foot_l", "foot_r" ],
-    "destroys_gear": true,
-    "bodytemp_modifiers": [ 25, 50 ],
-    "armor": [ { "parts": [ "foot_l", "foot_r" ], "bash": 1 } ],
-    "attacks": {
-      "attack_text_u": "You kick %s with your large feet!",
-      "attack_text_npc": "%1$s kicks %2$s with their large feet!",
-      "chance": 15,
-      "strength_damage": { "damage_type": "bash", "amount": 1.5 }
-    },
     "enchantments": [ "ench_quadruped_movement_full", { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] } ]
   },
   {
@@ -9238,7 +9193,6 @@
     "craft_skill_bonus": [ [ "electronics", -1 ], [ "tailor", -1 ], [ "mechanics", -1 ] ],
     "types": [ "HANDS" ],
     "prereqs": [ "NAILS" ],
-    "cancels": [ "TALONS" ],
     "flags": [ "QUADRUPED_CROUCH" ],
     "triggers": [
       [
@@ -9251,7 +9205,7 @@
               { "not": { "u_has_flag": "QUADRUPED_RUN" } }
             ]
           },
-          "msg_on": { "text": "Your paws make it easier to crawl around." }
+          "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
       ]
     ],
@@ -9622,7 +9576,7 @@
     "description": "Your teeth have grown into long, sharp fangs.  If your mouth is uncovered, you'll sometimes bite your enemies.",
     "types": [ "TEETH" ],
     "changes_to": [ "SABER_TEETH", "SHARKTEETH", "FANGS_VAMPIRE" ],
-    "category": [ "LIZARD", "FISH", "LUPINE", "FELINE", "CHIMERA", "CHIROPTERAN", "URSINE", "BEAST" ],
+    "category": [ "LIZARD", "FISH", "LUPINE", "FELINE", "CHIMERA", "CHIROPTERAN", "URSINE", "BEAST", "RAPTOR" ],
     "integrated_armor": [ "integrated_fangs" ]
   },
   {
