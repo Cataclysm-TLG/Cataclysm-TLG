@@ -2058,5 +2058,39 @@
       }
     ],
     "melee_damage": { "stab": 19, "bash": 5 }
+  },
+  {
+    "id": "integrated_hooves",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "hooves" },
+    "description": "A pair of hard, solid hooves sheathing the unguligrade feet in a protective layer of horn.",
+    "weight": "400 g",
+    "volume": "500 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "keratin" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "qualities": [ [ "HAMMER", 1 ] ],
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "NATURAL_WEAPON", "ALLOWS_NATURAL_ATTACKS", "SKINTIGHT", "PROVIDES_TECHNIQUES" ],
+    "techniques": [ "TEC_HOOVES_KICK" ],
+    "armor": [
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_frog_l", "hoof_frog_r" ],
+        "coverage": 90,
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_toe_l", "hoof_toe_r", "hoof_sole_l", "hoof_sole_r" ],
+        "coverage": 100,
+        "encumbrance": 0
+      }
+    ],
+    "melee_damage": { "bash": 16, "cut": 3 }
   }
 ]

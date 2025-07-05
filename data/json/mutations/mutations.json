@@ -4287,7 +4287,6 @@
     "activated_eocs": [ "EOC_AVIAN_LEAP" ],
     "types": [ "LEGS", "SOLES" ],
     "prereqs": [ "WINGS_BIRD" ],
-    "flags": [ "TOUGH_FEET" ],
     "threshreq": [ "THRESH_BIRD" ],
     "category": [ "BIRD" ],
     "restricts_gear": [ "foot_l", "foot_r" ],
@@ -4306,10 +4305,10 @@
     "description": "Your feet have fused into hooves.  This allows you to perform a powerful kicking attack, provides natural armor, and removes the need to wear shoes; however, you cannot wear normal shoes.  Reduces wet effects.",
     "types": [ "FEET", "SOLES" ],
     "category": [ "CATTLE", "CHIMERA" ],
-    "wet_protection": [ { "part": "foot_l", "neutral": 10 }, { "part": "foot_r", "neutral": 10 } ],
-    "restricts_gear": [ "foot_sole_l", "foot_sole_r" ],
-    "destroys_gear": true,
-    "armor": [ { "parts": [ "foot_l", "foot_r" ], "bash": 1 } ],
+    "enchantments": [ "ench_hooves" ],
+    "wet_protection": [ { "part": "hoof_l", "neutral": 10 }, { "part": "hoof_r", "neutral": 10 } ],
+    "restricts_gear": [ "foot_l", "foot_r" ],
+    "integrated_armor": [ "integrated_hooves" ],
     "flags": [ "TOUGH_FEET" ]
   },
   {

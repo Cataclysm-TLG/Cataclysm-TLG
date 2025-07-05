@@ -48,7 +48,7 @@
     "unarmed_allowed": true,
     "messages": [ "You kick %s", "<npcname> kicks %s" ],
     "description": "A basic kick",
-    "attack_vectors": [ "vector_foot_toes", "vector_knee", "vector_shin" ]
+    "attack_vectors": [ "vector_foot_toes", "vector_foot_sole", "vector_shin", "vector_knee", "vector_hoof_toe", "vector_hoof_sole" ]
   },
   {
     "type": "technique",
