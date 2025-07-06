@@ -99,7 +99,7 @@
     "name": { "str": "biosilicified chitin armor" },
     "description": "Leg and body armor crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "material": [ "acidchitin" ],
-        "armor": [
+    "armor": [
       { "covers": [ "torso" ], "coverage": 90, "encumbrance": 14 },
       {
         "covers": [ "leg_l", "leg_r" ],

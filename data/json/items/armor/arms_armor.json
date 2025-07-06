@@ -152,7 +152,7 @@
     "name": { "str": "pair of biosilicified chitin arm guards", "str_pl": "pairs of biosilicified chitin arm guards" },
     "description": "A pair of arm guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "material": [ "acidchitin" ],
-        "armor": [
+    "armor": [
       {
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 9,
