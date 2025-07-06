@@ -1134,8 +1134,8 @@
     "color": "white",
     "warmth": 5,
     "material_thickness": 1.5,
-    "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 4, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 4, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
   },
   {
     "id": "footrags_fur",
@@ -1152,8 +1152,8 @@
     "color": "brown",
     "warmth": 20,
     "material_thickness": 1.5,
-    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 20, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
   },
   {
     "id": "footrags_faux_fur",
@@ -1170,8 +1170,8 @@
     "color": "brown",
     "warmth": 18,
     "material_thickness": 1.5,
-    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 20, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
   },
   {
     "id": "footrags_leather",
@@ -1188,8 +1188,8 @@
     "color": "brown",
     "warmth": 10,
     "material_thickness": 1.5,
-    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 17, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 14, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
   },
   {
     "id": "footrags_wool",
@@ -1206,8 +1206,26 @@
     "color": "blue",
     "warmth": 15,
     "material_thickness": 1.5,
-    "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 16, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+  },
+    {
+    "id": "footrags_nomex",
+    "type": "ARMOR",
+    "name": { "str": "pair of Nomex foot wraps", "str_pl": "pairs of Nomex foot wraps" },
+    "description": "Strips of fireproof fabric that can be tied around the feet.  These leave a lot to be desired, but they might be better than nothing.",
+    "weight": "56 g",
+    "volume": "250 ml",
+    "price": "5 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "nomex" ],
+    "symbol": "[",
+    "looks_like": "socks_nomex",
+    "color": "blue",
+    "warmth": 15,
+    "material_thickness": 1.5,
+    "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
+    "armor": [ { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 4, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
   },
   {
     "id": "geta",
