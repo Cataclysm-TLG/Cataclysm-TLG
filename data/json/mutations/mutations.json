@@ -4237,7 +4237,7 @@
     "visibility": 4,
     "ugliness": 2,
     "mixed_effect": true,
-    "description": "Your legs and feet have become bird-like, with scaly skin and grasping claws arranged three ahead and one behind.  They're perfect gripping onto precarious perches, or for making a long-ranged leap attack.",
+    "description": "Your legs and feet have become bird-like; digitigrade with scaly skin and grasping claws arranged three ahead and one behind.  They're perfect gripping onto precarious perches, or for making a long-ranged leap attack.",
     "active": true,
     "activated_is_setup": false,
     "activated_eocs": [ "EOC_AVIAN_LEAP" ],
@@ -4249,7 +4249,7 @@
     "destroys_gear": true,
     "allowed_items": [ "ALLOWS_TALONS" ],
     "flags": [ "TOUGH_FEET" ],
-    "integrated_armor": [ "integrated_toe_claws" ]
+    "integrated_armor": [ "integrated_toe_claws", "integrated_reticulae" ]
   },
   {
     "type": "mutation",

@@ -116,15 +116,15 @@
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 50, "thickness": 1 } ],
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_palm_l", "hand_palm_r", "hand_wrist_l", "hand_wrist_r" ],
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
         "coverage": 100,
-        "encumbrance": 8
+        "encumbrance": 6
       },
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 50, "thickness": 1 } ],
         "covers": [ "foot_l", "foot_r" ],
-        "coverage": 100,
-        "encumbrance": 8
+        "coverage": 75,
+        "encumbrance": 4
       }
     ],
     "melee_damage": { "bash": 4 }
@@ -148,7 +148,7 @@
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 3 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
         "coverage": 100,
         "encumbrance": 18
       },
@@ -157,6 +157,19 @@
         "covers": [ "mouth", "eyes" ],
         "coverage": 90,
         "encumbrance": 18
+      },
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 50, "thickness": 3 } ],
+        "covers": [ "hand_l", "hand_r" ],
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
+        "coverage": 100,
+        "encumbrance": 12
+      },
+      {
+        "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 50, "thickness": 3 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "coverage": 80,
+        "encumbrance": 8
       }
     ],
     "melee_damage": { "bash": 4 }
@@ -738,21 +751,27 @@
     "price_postapoc": "0 cent",
     "material": [ "leather_arthropod" ],
     "symbol": "x",
-    "color": "green",
+    "color": "light_gray",
     "warmth": 2,
     "environmental_protection": 2,
     "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "SOFT", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
-        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "leg_l", "leg_r", "arm_l", "arm_r", "torso", "head" ],
+        "covers": [ "leg_l", "leg_r", "arm_l", "arm_r", "torso" ],
         "coverage": 100,
         "encumbrance": 2
       },
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
+        "covers": [ "hand_l", "hand_r", "foot_l", "foot_r", "head" ],
+        "coverage": 50,
+        "encumbrance": 0
+      },
+      {
+        "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 0.5 } ],
         "covers": [ "mouth" ],
-        "coverage": 85,
+        "coverage": 50,
         "encumbrance": 0
       }
     ]
@@ -1250,6 +1269,40 @@
         "encumbrance": 0,
         "layers": [ "BELTED" ],
         "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "integrated_reticulae",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "reticulae" },
+    "description": "Soft, flexible scales cover the lower legs and feet.  Though not especially tough, they provide some protection.",
+    "weight": "400 g",
+    "volume": "400 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "scales" ],
+    "symbol": "x",
+    "color": "light_red",
+    "warmth": 5,
+    "environmental_protection": 1,
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
+    "armor": [
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ],
+        "coverage": 90,
+        "encumbrance": 0,
+        "breathability": "GOOD"
+      },
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.8 } ],
+        "covers": [ "foot_l", "foot_r" ],
+        "coverage": 90,
+        "encumbrance": 2,
+        "breathability": "GOOD"
       }
     ]
   },
@@ -1993,7 +2046,7 @@
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
         "covers": [ "hoof_l", "hoof_r" ],
         "specifically_covers": [ "hoof_frog_l", "hoof_frog_r" ],
-        "coverage": 100,
+        "coverage": 80,
         "encumbrance": 0,
         "rigid_layer_only": true
       },
