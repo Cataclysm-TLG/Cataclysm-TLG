@@ -1135,7 +1135,15 @@
     "warmth": 5,
     "material_thickness": 1.5,
     "flags": [ "SKINTIGHT", "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 4, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 4,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
   {
     "id": "footrags_fur",
@@ -1153,7 +1161,15 @@
     "warmth": 20,
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 6,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
   {
     "id": "footrags_faux_fur",
@@ -1171,7 +1187,15 @@
     "warmth": 18,
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 6, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 15, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 6,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
   {
     "id": "footrags_leather",
@@ -1189,7 +1213,15 @@
     "warmth": 10,
     "material_thickness": 1.5,
     "flags": [ "UNRESTRICTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 14, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 14, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 5,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
   {
     "id": "footrags_wool",
@@ -1207,9 +1239,17 @@
     "warmth": 15,
     "material_thickness": 1.5,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 5, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 13, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 5,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
-    {
+  {
     "id": "footrags_nomex",
     "type": "ARMOR",
     "name": { "str": "pair of Nomex foot wraps", "str_pl": "pairs of Nomex foot wraps" },
@@ -1225,7 +1265,15 @@
     "warmth": 15,
     "material_thickness": 1.5,
     "flags": [ "SKINTIGHT", "OVERSIZE", "UNRESTRICTED", "ALLOWS_NATURAL_ATTACKS", "ALLOWS_TALONS" ],
-    "armor": [ { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] }, { "encumbrance": 4, "coverage": 85, "covers": [ "hoof_l", "hoof_r" ], "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ] } ]
+    "armor": [
+      { "encumbrance": 12, "coverage": 65, "covers": [ "foot_l", "foot_r" ] },
+      {
+        "encumbrance": 4,
+        "coverage": 85,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r", "hoof_toe_r", "hoof_toe_l" ]
+      }
+    ]
   },
   {
     "id": "geta",
@@ -2393,16 +2441,9 @@
         "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
         "coverage": 20
       },
-            {
+      {
         "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [
-          "hoof_frog_r",
-          "hoof_frog_l",
-          "hoof_sole_r",
-          "hoof_sole_l",
-          "hoof_toe_r",
-          "hoof_toe_l"
-        ],
+        "specifically_covers": [ "hoof_frog_r", "hoof_frog_l", "hoof_sole_r", "hoof_sole_l", "hoof_toe_r", "hoof_toe_l" ],
         "material": [ { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.01 } ],
         "encumbrance": 15,
         "coverage": 100

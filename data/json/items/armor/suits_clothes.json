@@ -553,8 +553,8 @@
     "looks_like": "jumpsuit",
     "color": "light_gray",
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 6 },
-      { "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 6 }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": 8 },
+      { "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 8 }
     ],
     "warmth": 10,
     "material_thickness": 0.2,

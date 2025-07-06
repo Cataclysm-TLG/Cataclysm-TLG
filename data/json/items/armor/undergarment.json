@@ -57,13 +57,13 @@
     "warmth": 10,
     "material_thickness": 0.2,
     "flags": [ "SKINTIGHT", "OVERSIZE" ],
-    "armor": [ { "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "bellywrap",
     "type": "ARMOR",
     "name": { "str": "belly wrap" },
-    "description": "Rags wrapped around the belly.  Usually worn in combination with a chestwrap.  Provides negligible protection against punches to your stomach.",
+    "description": "Rags wrapped around the belly.  Usually worn in combination with a chestwrap.",
     "weight": "120 g",
     "volume": "500 ml",
     "looks_like": "bellyband",
@@ -75,7 +75,7 @@
     "warmth": 3,
     "material_thickness": 0.2,
     "flags": [ "SKINTIGHT", "OVERSIZE" ],
-    "armor": [ { "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "bellywrap_fur",
@@ -96,7 +96,7 @@
     "id": "bellywrap_leather",
     "type": "ARMOR",
     "name": { "str": "leather belly wrap" },
-    "description": "Leather patches wrapped around the belly.  Usually worn in combination with a chestwrap.  Provides weak protection against punches to your stomach.",
+    "description": "Leather patches wrapped around the belly.  Usually worn in combination with a chestwrap.",
     "copy-from": "bellywrap",
     "weight": "888 g",
     "volume": "750 ml",
@@ -111,7 +111,7 @@
     "id": "bellywrap_wool",
     "type": "ARMOR",
     "name": { "str": "wool belly wrap" },
-    "description": "Felt patches wrapped around the belly.  Usually worn in combination with a chestwrap.  Provides negligible protection against punches to your stomach.",
+    "description": "Felt patches wrapped around the belly.  Usually worn in combination with a chestwrap.",
     "copy-from": "bellywrap",
     "price": "5 USD",
     "material": [ "wool" ],
@@ -136,7 +136,7 @@
     "warmth": 10,
     "material_thickness": 0.5,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "bikini_top_leather",
@@ -154,7 +154,7 @@
     "warmth": 5,
     "material_thickness": 0.5,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "binder_top",
@@ -172,121 +172,7 @@
     "warmth": 5,
     "material_thickness": 0.5,
     "flags": [ "SKINTIGHT" ],
-    "armor": [ { "encumbrance": 10, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ],
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "binder_top_black",
-        "name": { "str": "black binder" },
-        "description": "This one is black.",
-        "weight": 140,
-        "append": true
-      },
-      {
-        "id": "binder_top_gray",
-        "name": { "str": "gray binder" },
-        "description": "This one is gray.",
-        "weight": 90,
-        "append": true
-      },
-      {
-        "id": "binder_top_white",
-        "name": { "str": "white binder" },
-        "description": "This one is white.",
-        "weight": 70,
-        "append": true
-      },
-      {
-        "id": "binder_top_blue",
-        "name": { "str": "blue binder" },
-        "description": "This one is blue.",
-        "weight": 25,
-        "append": true
-      },
-      {
-        "id": "binder_top_green",
-        "name": { "str": "green binder" },
-        "description": "This one is green.",
-        "weight": 25,
-        "append": true
-      },
-      {
-        "id": "binder_top_red",
-        "name": { "str": "red binder" },
-        "description": "This one is red.",
-        "weight": 12,
-        "append": true
-      },
-      {
-        "id": "binder_top_orange",
-        "name": { "str": "orange binder" },
-        "description": "This one is orange.",
-        "weight": 12,
-        "append": true
-      },
-      {
-        "id": "binder_top_pink",
-        "name": { "str": "pink binder" },
-        "description": "This one is pink.",
-        "weight": 4,
-        "append": true
-      },
-      {
-        "id": "binder_top_american",
-        "name": { "str": "American binder" },
-        "description": "This one is painted with the star spangled banner, the red white and blue, old glory, the American flag.",
-        "append": true
-      },
-      {
-        "id": "binder_top_ribcage",
-        "name": { "str": "ribcage binder" },
-        "description": "This one is black, with white rib bones.",
-        "weight": 12,
-        "append": true
-      },
-      {
-        "id": "binder_top_mushroom",
-        "name": { "str": "mushroom binder" },
-        "description": "This one has a row of mushrooms on it.",
-        "weight": 10,
-        "append": true
-      },
-      {
-        "id": "binder_top_floral",
-        "name": { "str": "floral binder" },
-        "description": "This one has a floral pattern.",
-        "weight": 10,
-        "append": true
-      },
-      {
-        "id": "binder_top_dinos",
-        "name": { "str": "dinosaur binder" },
-        "description": "This one has a cartoon rendition of a stegosaurus on it.",
-        "weight": 8,
-        "append": true
-      },
-      {
-        "id": "binder_top_trans",
-        "name": { "str": "trans flag binder" },
-        "description": "This one is painted after the trans pride flag.",
-        "weight": 20,
-        "append": true
-      },
-      {
-        "id": "binder_top_nonbinary",
-        "name": { "str": "non-binary flag binder" },
-        "description": "This one is painted after the non-binary pride flag.",
-        "weight": 6,
-        "append": true
-      },
-      {
-        "id": "binder_top_meme",
-        "name": { "str": "meme binder" },
-        "description": "This one has an image of a stuffed rat chef, looking up with arms spread to the heavens, with text above reading \"I don't want to cook anymore\", and the bottom text reading \"I want to DIE\" all in a comic sans font.",
-        "weight": 4,
-        "append": true
-      }
-    ]
+    "armor": [ { "encumbrance": 6, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "xl_binder_top",
@@ -344,21 +230,6 @@
     "type": "ARMOR",
     "name": { "str": "boxer shorts", "str_pl": "pairs of boxer shorts" },
     "description": "Men's boxer shorts.  More fashionable than briefs and just as comfortable.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_boxer_shorts",
-        "name": { "str": "boxer shorts", "str_pl": "pairs of boxer shorts" },
-        "description": "Men's boxer shorts.  More fashionable than briefs and just as comfortable.",
-        "weight": 30
-      },
-      {
-        "id": "flag_boxer_shorts",
-        "name": { "str": "star-spangled boxer shorts", "str_pl": "pairs of star-spangled boxer shorts" },
-        "description": "This pair has been printed with the pattern of an American flag, with stars and miniature eagles embroidered at strategic positions.",
-        "append": true
-      }
-    ],
     "weight": "42 g",
     "volume": "250 ml",
     "price": "10 USD",
@@ -397,21 +268,6 @@
     "type": "ARMOR",
     "name": { "str": "boy shorts", "str_pl": "pairs of boy shorts" },
     "description": "Female underwear similar to men's boxer shorts, but much more close-fitting.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_boy_shorts",
-        "name": { "str": "boy shorts", "str_pl": "pairs of boy shorts" },
-        "description": "Female underwear similar to men's boxer shorts, but much more close-fitting.",
-        "weight": 30
-      },
-      {
-        "id": "flag_boy_shorts",
-        "name": { "str": "star-spangled boy shorts", "str_pl": "pairs of star-spangled boy shorts" },
-        "description": "This pair has been printed with the pattern of an American flag, with stars and miniature eagles embroidered at strategic positions.",
-        "append": true
-      }
-    ],
     "weight": "42 g",
     "volume": "250 ml",
     "price": "10 USD",
@@ -811,7 +667,7 @@
     "warmth": 10,
     "material_thickness": 0.2,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "encumbrance": 3, "coverage": 100, "covers": [ "leg_l", "leg_r" ] } ]
+    "armor": [ { "encumbrance": 8, "coverage": 100, "covers": [ "leg_l", "leg_r" ] } ]
   },
   {
     "id": "long_undertop",
@@ -830,12 +686,12 @@
     "material_thickness": 0.2,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [
-      { "encumbrance": 3, "coverage": 100, "covers": [ "arm_l", "arm_r" ] },
+      { "encumbrance": 8, "coverage": 100, "covers": [ "arm_l", "arm_r" ] },
       {
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper", "torso_lower" ],
         "coverage": 100,
-        "encumbrance": 3
+        "encumbrance": 8
       }
     ]
   },
