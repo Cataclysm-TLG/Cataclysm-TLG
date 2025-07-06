@@ -6,6 +6,8 @@
 #include <cmath>
 #include <string>
 #include <string_view>
+#include <type_traits>
+#include <utility>
 #include <variant>
 #include <vector>
 
@@ -136,19 +138,37 @@ struct ternary {
 };
 struct thingie {
     thingie() = default;
+
     template <class U>
     explicit thingie( U u ) : data( std::in_place_type<U>, std::forward<U>( u ) ) {}
+
     template <class T, class... Args>
     explicit thingie( std::in_place_type_t<T> /*t*/, Args &&...args )
         : data( std::in_place_type<T>, std::forward<Args>( args )... ) {}
 
     constexpr double eval( dialogue &d ) const;
 
-    using impl_t =
-        std::variant<double, std::string, oper, func, func_jmath, func_diag_eval, func_diag_ass, var, kwarg, ternary, array>;
+    using impl_t = std::variant <
+                   double,
+                   std::string,
+                   oper,
+                   func,
+                   func_jmath,
+                   func_diag_eval,
+                   func_diag_ass,
+                   var,
+                   kwarg,
+                   ternary,
+                   array
+                   >;
+
     impl_t data;
 };
-
+template<typename T, typename = void>
+struct has_eval : std::false_type {};
+template<typename T>
+struct has_eval<T, std::void_t<decltype( std::declval<const T>().eval( std::declval<dialogue &>() ) )>> :
+std::true_type {};
 constexpr double thingie::eval( dialogue &d ) const
 {
     return std::visit( overloaded{
@@ -156,7 +176,6 @@ constexpr double thingie::eval( dialogue &d ) const
         {
             return v;
         },
-        // NOLINTNEXTLINE(cata-use-string_view)
         []( std::string const & v )
         {
             debugmsg( "Unexpected string operand %s", v );
@@ -172,12 +191,17 @@ constexpr double thingie::eval( dialogue &d ) const
             debugmsg( "Unexpected array" );
             return 0.0;
         },
-        [&d]( auto const & v ) -> double
-        {
-            return v.eval( d );
-        },
-    },
-    data );
+        [&d]( auto const & v ) -> double {
+            if constexpr( has_eval<decltype( v )>::value )
+            {
+                return v.eval( d );
+            } else
+            {
+                debugmsg( "thingie::eval(): unhandled type: %s", typeid( v ).name() );
+                return 0.0;
+            }
+        }
+    }, data );
 }
 
 using op_t =
