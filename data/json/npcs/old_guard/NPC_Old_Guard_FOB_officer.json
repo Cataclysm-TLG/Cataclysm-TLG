@@ -52,8 +52,7 @@
       { "item": "webbing_belt", "prob": 80 },
       { "item": "m18", "ammo-item": "9mmP2", "container-item": "holster", "charges": 16 },
       { "distribution": [ { "item": "gold_watch", "prob": 30 }, { "item": "sf_watch", "prob": 70 } ] },
-      { "item": "collarpin" },
-      { "item": "diamond_silver_cufflinks" }
+      { "item": "collarpin" }
     ]
   },
   {

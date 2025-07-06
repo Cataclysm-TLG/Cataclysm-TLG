@@ -276,7 +276,6 @@
       {
         "collection": [
           { "item": "ring_wedding", "damage": [ 1, 4 ] },
-          { "item": "cufflinks_intricate", "prob": 95, "damage": [ 1, 4 ] },
           { "item": "tie_bow", "prob": 85, "damage": [ 1, 4 ] },
           { "group": "costume_masks", "prob": 10, "damage": [ 1, 4 ] },
           { "item": "leather_belt", "prob": 75, "damage": [ 1, 4 ] },
@@ -316,8 +315,8 @@
         "collection": [
           { "group": "costume_masks", "prob": 10, "damage": [ 1, 4 ] },
           { "item": "ring_wedding", "damage": [ 1, 4 ] },
-          { "group": "tiaras_silver", "prob": 75, "damage": [ 1, 4 ] },
-          { "group": "earrings_silver", "prob": 85, "damage": [ 1, 4 ] },
+          { "item": "silver_tiara", "prob": 75, "damage": [ 1, 4 ] },
+          { "item": "silver_earring", "prob": 85, "damage": [ 1, 4 ] },
           { "item": "veil_wedding", "prob": 85, "damage": [ 1, 4 ] },
           { "item": "dress_wedding", "damage": [ 1, 4 ] },
           {
@@ -398,13 +397,6 @@
           { "item": "vampire_fangs", "damage": [ 1, 4 ] },
           {
             "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 80, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 20, "damage": [ 1, 4 ] }
-            ],
-            "prob": 75
-          },
-          {
-            "distribution": [
               { "item": "gloves_black", "prob": 80, "damage": [ 1, 4 ] },
               { "item": "gloves_claws", "prob": 20, "damage": [ 1, 4 ] }
             ],
@@ -452,13 +444,6 @@
           { "item": "cloak_costume", "damage": [ 1, 4 ] },
           { "item": "dress_shirt", "prob": 85, "damage": [ 1, 4 ] },
           { "item": "pants", "damage": [ 1, 4 ] },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 80, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 20, "damage": [ 1, 4 ] }
-            ],
-            "prob": 55
-          },
           {
             "distribution": [
               { "item": "gloves_black", "prob": 80, "damage": [ 1, 4 ] },
@@ -604,13 +589,6 @@
         "collection": [
           { "item": "mummy_dress", "damage": [ 1, 4 ] },
           {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 5
-          },
-          {
             "distribution": [ { "item": "dress_shoes", "prob": 40, "damage": [ 1, 4 ] }, { "item": "heels", "prob": 60, "damage": [ 1, 4 ] } ]
           },
           { "group": "female_underwear", "damage": [ 1, 4 ] },
@@ -629,13 +607,6 @@
       {
         "collection": [
           { "item": "mummy_jumpsuit", "damage": [ 1, 4 ] },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 3
-          },
           {
             "distribution": [
               { "item": "dress_shoes", "prob": 40, "damage": [ 1, 4 ] },
@@ -675,13 +646,6 @@
         "collection": [
           { "item": "gloves_black", "prob": 5, "damage": [ 1, 4 ] },
           { "distribution": [ { "item": "wizard_hat_costume", "prob": 60, "damage": [ 1, 4 ] } ], "prob": 60 },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 5
-          },
           {
             "distribution": [
               { "item": "witch_dress_long", "prob": 25, "damage": [ 1, 4 ] },
@@ -730,13 +694,6 @@
           { "item": "gloves_black", "prob": 5, "damage": [ 1, 4 ] },
           { "item": "robe_wizard", "damage": [ 1, 4 ] },
           { "distribution": [ { "item": "wizard_hat_costume", "prob": 80, "damage": [ 1, 4 ] } ], "prob": 60 },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 5
-          },
           {
             "distribution": [
               { "item": "cane", "prob": 5, "damage": [ 1, 4 ] },
@@ -842,13 +799,6 @@
           { "group": "costume_masks", "prob": 10, "damage": [ 1, 4 ] },
           {
             "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 5
-          },
-          {
-            "distribution": [
               { "item": "dress_shoes", "prob": 20, "damage": [ 1, 4 ] },
               { "item": "boots", "prob": 10, "damage": [ 1, 4 ] },
               { "item": "sneakers", "prob": 60, "damage": [ 1, 4 ] },
@@ -890,13 +840,6 @@
           { "item": "jumpsuit_skeleton", "prob": 30, "damage": [ 1, 4 ] },
           { "item": "mask_skull", "prob": 95, "damage": [ 1, 4 ] },
           { "item": "mask_skull", "damage": [ 1, 4 ] },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 5
-          },
           {
             "distribution": [
               { "item": "ghost_robe", "prob": 55, "damage": [ 1, 4 ] },
@@ -949,13 +892,6 @@
           { "item": "scythe_toy", "prob": 75, "damage": [ 1, 4 ] },
           {
             "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 15
-          },
-          {
-            "distribution": [
               { "item": "dress_shoes", "prob": 30, "damage": [ 1, 4 ] },
               { "item": "boots", "prob": 30, "damage": [ 1, 4 ] },
               { "item": "sneakers", "prob": 30, "damage": [ 1, 4 ] },
@@ -998,13 +934,6 @@
           { "item": "clown_suit", "damage": [ 1, 4 ] },
           { "item": "clownshoes", "prob": 95, "damage": [ 1, 4 ] },
           { "group": "socks_unisex", "damage": [ 1, 4 ] },
-          {
-            "distribution": [
-              { "group": "costume_jewelry_vampire", "prob": 25, "damage": [ 1, 4 ] },
-              { "group": "costume_jewelry_dark", "prob": 75, "damage": [ 1, 4 ] }
-            ],
-            "prob": 15
-          },
           {
             "distribution": [
               {

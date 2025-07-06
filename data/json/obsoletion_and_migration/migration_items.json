@@ -927,5 +927,1430 @@
     "id": "bolt_steel_target",
     "type": "MIGRATION",
     "replace": "bolt_simple_wood"
+  },
+  {
+    "id": "diamond_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "garnet_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "amethyst_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "aquamarine_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "emerald_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "alexandrite_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "ruby_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "peridot_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "sapphire_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "tourmaline_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "citrine_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "cowrie_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "platinum_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "amethyst_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "aquamarine_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "emerald_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "alexandrite_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "peridot_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "sapphire_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "tourmaline_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "citrine_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "blue_topaz_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "blue_topaz_dental_grill",
+    "type": "MIGRATION",
+    "replace": "gold_dental_grill"
+  },
+  {
+    "id": "opal_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "pearl_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "onyx_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "garnet_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "diamond_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "amethyst_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "aquamarine_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "emerald_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "alexandrite_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "ruby_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "peridot_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "sapphire_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "tourmaline_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "citrine_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "blue_topaz_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "opal_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "pearl_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "onyx_gold_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "amethyst_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "aquamarine_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "emerald_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "alexandrite_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "ruby_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "peridot_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "sapphire_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "tourmaline_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "citrine_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "blue_topaz_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "opal_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "pearl_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "onyx_gold_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "garnet_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "amethyst_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "aquamarine_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "emerald_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "alexandrite_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "ruby_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "peridot_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "sapphire_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "tourmaline_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "citrine_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "blue_topaz_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "opal_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "pearl_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "onyx_silver_ring",
+    "type": "MIGRATION",
+    "replace": "silver_ring"
+  },
+  {
+    "id": "garnet_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "amethyst_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "aquamarine_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "emerald_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "alexandrite_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "ruby_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "peridot_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "sapphire_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "tourmaline_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "citrine_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "blue_topaz_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "opal_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "pearl_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "onyx_platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "garnet_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "amethyst_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "aquamarine_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "emerald_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "alexandrite_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "ruby_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "peridot_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "sapphire_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "tourmaline_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "citrine_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "blue_topaz_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "opal_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "pearl_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "onyx_gold_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "garnet_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "amethyst_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "aquamarine_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "emerald_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "alexandrite_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "ruby_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "peridot_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "sapphire_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "tourmaline_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "citrine_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "blue_topaz_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "opal_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "pearl_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "onyx_silver_bracelet",
+    "type": "MIGRATION",
+    "replace": "silver_bracelet"
+  },
+  {
+    "id": "garnet_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "amethyst_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "aquamarine_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "emerald_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "alexandrite_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "ruby_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "peridot_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "sapphire_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "tourmaline_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "citrine_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "blue_topaz_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "opal_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "pearl_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "onyx_platinum_bracelet",
+    "type": "MIGRATION",
+    "replace": "gold_bracelet"
+  },
+  {
+    "id": "garnet_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "amethyst_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "aquamarine_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "emerald_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "alexandrite_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "ruby_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "peridot_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "sapphire_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "tourmaline_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "citrine_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "blue_topaz_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "opal_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "pearl_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "onyx_gold_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "garnet_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "amethyst_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "aquamarine_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "emerald_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "alexandrite_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "ruby_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "peridot_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "sapphire_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "tourmaline_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "citrine_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "blue_topaz_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "opal_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "pearl_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "onyx_platinum_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "garnet_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "amethyst_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "aquamarine_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "emerald_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "alexandrite_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "ruby_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "peridot_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "sapphire_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "tourmaline_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "citrine_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "blue_topaz_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "opal_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "pearl_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "onyx_silver_pendant_necklace",
+    "type": "MIGRATION",
+    "replace": "silver_necklace"
+  },
+  {
+    "id": "garnet_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "amethyst_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "aquamarine_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "emerald_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "alexandrite_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "ruby_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "peridot_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "sapphire_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "tourmaline_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "citrine_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "blue_topaz_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "opal_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "pearl_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "onyx_platinum_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "garnet_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "amethyst_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "aquamarine_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "emerald_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "alexandrite_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "ruby_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "peridot_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "sapphire_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "tourmaline_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "citrine_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "blue_topaz_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "opal_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "pearl_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "onyx_gold_tiara",
+    "type": "MIGRATION",
+    "replace": "gold_tiara"
+  },
+  {
+    "id": "gold_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "silver_hair_beads",
+    "type": "MIGRATION",
+    "replace": "wooden_hair_beads"
+  },
+  {
+    "id": "garnet_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "amethyst_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "aquamarine_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "emerald_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "alexandrite_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "ruby_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "peridot_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "sapphire_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "tourmaline_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "citrine_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "blue_topaz_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "opal_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "pearl_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "onyx_silver_tiara",
+    "type": "MIGRATION",
+    "replace": "silver_tiara"
+  },
+  {
+    "id": "platinum_ring",
+    "type": "MIGRATION",
+    "replace": "gold_ring"
+  },
+  {
+    "id": "copper_locket",
+    "type": "MIGRATION",
+    "replace": "silver_locket"
+  },
+  {
+    "id": "platinum_locket",
+    "type": "MIGRATION",
+    "replace": "gold_locket"
+  },
+  {
+    "id": "platinum_necklace",
+    "type": "MIGRATION",
+    "replace": "gold_necklace"
+  },
+  {
+    "id": "platinum_hairpin",
+    "type": "MIGRATION",
+    "replace": "gold_hairpin"
+  },
+  {
+    "id": "platinum_ear",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_platinum_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "garnet_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_gold_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "garnet_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "amethyst_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "aquamarine_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "emerald_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "alexandrite_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ruby_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "peridot_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "sapphire_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "tourmaline_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "citrine_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "blue_topaz_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "opal_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "pearl_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "onyx_silver_cufflinks",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
+  },
+  {
+    "id": "ear_spool",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "gold_ear",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "silver_ear",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "copper_ear",
+    "type": "MIGRATION",
+    "replace": "copper_earring"
+  },
+  {
+    "id": "opal_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "pearl_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "onyx_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "garnet_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
+    "id": "diamond_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "garnet_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "amethyst_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "aquamarine_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "emerald_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "alexandrite_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "ruby_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "peridot_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "sapphire_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "tourmaline_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "citrine_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "blue_topaz_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "opal_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "pearl_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "onyx_platinum_earring",
+    "type": "MIGRATION",
+    "replace": "gold_earring"
+  },
+  {
+    "id": "silver_ear",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
   }
 ]

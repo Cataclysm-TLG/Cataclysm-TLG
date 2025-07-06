@@ -22,7 +22,7 @@
       }
     ],
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT", "BELTED", "OVERSIZE" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "bead_ear",
@@ -33,11 +33,12 @@
     "volume": "1 ml",
     "price": "1 USD",
     "price_postapoc": "10 cent",
-    "material": [ "wood" ],
+    "material": [ "wood", "steel" ],
     "symbol": "[",
     "looks_like": "gold_ear",
     "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "bead_necklace",
@@ -53,7 +54,8 @@
     "symbol": "u",
     "color": "brown",
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "bracelet_friendship",
@@ -77,7 +79,7 @@
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ]
       }
     ],
-    "flags": [ "NO_WEAR_EFFECT", "BELTED", "OVERSIZE" ]
+    "flags": [ "NO_WEAR_EFFECT", "PERSONAL", "UNRESTRICTED" ]
   },
   {
     "id": "bronze_medal",
@@ -92,7 +94,8 @@
     "symbol": "[",
     "looks_like": "copper_locket",
     "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "cowrie_bracelet",
@@ -101,18 +104,7 @@
     "name": { "str": "cowrie bracelet" },
     "description": "A bracelet made of cowrie shells, valued in many African cultures such as the Yoruba.  If you want, you could meditate with this.",
     "material": [ "bone" ],
-    "color": "white",
-    "flags": [ "NO_WEAR_EFFECT", "FANCY" ]
-  },
-  {
-    "id": "cowrie_hair_beads",
-    "copy-from": "wooden_hair_beads",
-    "type": "ARMOR",
-    "name": { "str": "cowrie hair beads", "str_pl": "sets of cowrie hair beads" },
-    "description": "An assortment of cowrie shells used to decorate locs or braids.",
-    "material": [ "bone" ],
-    "color": "white",
-    "flags": [ "NO_WEAR_EFFECT", "FANCY" ]
+    "color": "white"
   },
   {
     "id": "cowrie_necklace",
@@ -121,113 +113,7 @@
     "name": { "str": "cowrie necklace" },
     "description": "A necklace made of cowrie shells, valued in many African cultures such as the Yoruba.  If you want, you could meditate with this.",
     "material": [ "bone" ],
-    "color": "white",
-    "flags": [ "NO_WEAR_EFFECT", "FANCY" ]
-  },
-  {
-    "id": "diamond_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "diamond dental grill" },
-    "description": "Fake teeth inlaid with diamonds, worn over the teeth.  Fits horribly, but looks very shiny.  For that high-class gangsta rap look.",
-    "weight": "10 g",
-    "volume": "1 ml",
-    "price": "500 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "material": [ "gold" ],
-    "symbol": "[",
-    "looks_like": "gold_dental_grill",
-    "color": "yellow",
-    "flags": [ "SKINTIGHT", "NO_WEAR_EFFECT" ],
-    "armor": [ { "encumbrance": 10, "covers": [ "mouth" ] } ],
-    "melee_damage": { "bash": 3, "cut": 3 }
-  },
-  {
-    "id": "garnet_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "garnet dental grill" },
-    "description": "Fake teeth inlaid with garnets, worn over the teeth.  It looks very shiny.",
-    "weight": "10 g",
-    "volume": "1 ml",
-    "price": "300 USD",
-    "price_postapoc": "1 USD",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "gemstone" } ],
-    "symbol": "[",
-    "looks_like": "gold_dental_grill",
-    "color": "red",
-    "flags": [ "SKINTIGHT", "NO_WEAR_EFFECT" ],
-    "armor": [ { "encumbrance": 10, "covers": [ "mouth" ] } ],
-    "melee_damage": { "bash": 3, "cut": 3 }
-  },
-  {
-    "id": "amethyst_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "amethyst dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with amethysts, worn over the teeth.  It looks very shiny.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with aquamarines, worn over the teeth.  It looks very shiny.",
-    "color": "cyan"
-  },
-  {
-    "id": "emerald_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "emerald dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with emeralds, worn over the teeth.  It looks very shiny.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with alexandrites, worn over the teeth.  It looks very shiny.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "ruby dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with rubies, worn over the teeth.  It looks very shiny."
-  },
-  {
-    "id": "peridot_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "peridot dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with peridots, worn over the teeth.  It looks very shiny.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "sapphire dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with sapphires, worn over the teeth.  It looks very shiny.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with tourmaline, worn over the teeth.  It looks very shiny.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "citrine dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with citrines, worn over the teeth.  It looks very shiny.",
-    "color": "yellow"
+    "color": "white"
   },
   {
     "id": "barrette",
@@ -242,14 +128,6 @@
     "symbol": "[",
     "color": "pink",
     "flags": [ "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "blue_topaz_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz dental grill" },
-    "copy-from": "garnet_dental_grill",
-    "description": "Fake teeth inlaid with blue topaz, worn over the teeth.  It looks very shiny.",
-    "color": "light_blue"
   },
   {
     "id": "diamond_ring",
@@ -335,19 +213,20 @@
     "flags": [ "BELTED", "NO_WEAR_EFFECT", "OVERSIZE" ]
   },
   {
-    "id": "copper_ear",
+    "id": "copper_earring",
     "type": "ARMOR",
     "name": { "str": "pair of copper earrings", "str_pl": "pairs of copper earrings" },
-    "description": "A pair of copper earrings.  They're pretty heavy.",
+    "description": "A pair of copper earrings.",
     "weight": "8 g",
     "volume": "1 ml",
     "price": "29 USD",
     "price_postapoc": "10 cent",
     "material": [ "copper" ],
     "symbol": "[",
-    "looks_like": "gold_ear",
+    "looks_like": "gold_earring",
     "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "copper_hairpin",
@@ -360,33 +239,7 @@
     "price_postapoc": "10 cent",
     "material": [ "copper" ],
     "looks_like": "tieclip",
-    "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "copper_locket",
-    "type": "ARMOR",
-    "name": { "str": "copper locket" },
-    "description": "A circular copper locket.  It's been tarnished with use, and has gained some dull green spots.",
-    "weight": "45 g",
-    "volume": "10 ml",
-    "price": "10 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "copper" ],
-    "symbol": "[",
-    "looks_like": "silver_necklace",
-    "color": "brown",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_weight": "12 mg",
-        "max_contains_volume": "1 ml",
-        "description": "Slot for a photograph",
-        "item_restriction": [ "wallet_photo" ]
-      }
-    ],
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "color": "brown"
   },
   {
     "id": "copper_necklace",
@@ -401,13 +254,14 @@
     "symbol": "[",
     "looks_like": "silver_necklace",
     "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "copper_ring",
     "type": "ARMOR",
     "name": { "str": "copper ring" },
-    "description": "A plain, copper ring.  Not very shiny, and not very popular.",
+    "description": "A plain copper ring.  Not very shiny, and not very popular.",
     "weight": "8 g",
     "volume": "1 ml",
     "price": "20 USD",
@@ -427,458 +281,6 @@
       }
     ],
     "flags": [ "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
-  },
-  {
-    "id": "cufflinks",
-    "type": "ARMOR",
-    "name": { "str": "pair of cufflinks", "str_pl": "pairs of cufflinks" },
-    "description": "An unmarked pair of silver cufflinks.  Cufflinks are used to secure the cuffs of dress shirts - a must-have for men in formal wear.",
-    "weight": "10 g",
-    "volume": "1 ml",
-    "price": "30 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "silver" ],
-    "symbol": "[",
-    "color": "light_gray",
-    "flags": [ "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "cufflinks_intricate",
-    "type": "ARMOR",
-    "name": { "str": "pair of intricate cufflinks", "str_pl": "pairs of intricate cufflinks" },
-    "description": "An expensive pair of silver cufflinks, stylized with detailed overlays of gold gears and fractal patterns.",
-    "weight": "11 g",
-    "volume": "1 ml",
-    "price": "70 USD",
-    "price_postapoc": "50 cent",
-    "material": [ { "type": "silver", "portion": 8 }, { "type": "gold", "portion": 2 } ],
-    "symbol": "[",
-    "color": "light_gray",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "garnet and gold cufflinks" },
-    "description": "A pair of cufflinks with inset garnets.",
-    "weight": "15 g",
-    "volume": "1 ml",
-    "price": "35 USD",
-    "price_postapoc": "50 cent",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "cufflinks",
-    "symbol": "[",
-    "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "diamond_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "diamond and gold cufflinks" },
-    "description": "A pair of cufflinks with inset diamonds.",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "amethyst and gold cufflinks" },
-    "description": "A pair of cufflinks with inset amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "aquamarine and gold cufflinks" },
-    "description": "A pair of cufflinks with inset aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "emerald and gold cufflinks" },
-    "description": "A pair of cufflinks with inset emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "alexandrite and gold cufflinks" },
-    "description": "A pair of cufflinks with inset alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "ruby and gold cufflinks" },
-    "description": "A pair of cufflinks with inset rubies."
-  },
-  {
-    "id": "peridot_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "peridot and gold cufflinks" },
-    "description": "A pair of cufflinks with inset peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "sapphire and gold cufflinks" },
-    "description": "A pair of cufflinks with inset sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "tourmaline and gold cufflinks" },
-    "description": "A pair of cufflinks with inset tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "citrine and gold cufflinks" },
-    "description": "A pair of cufflinks with inset citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "blue topaz and gold cufflinks" },
-    "description": "A pair of cufflinks with inset blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "opal and gold cufflinks" },
-    "description": "A pair of cufflinks with inset opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "pearl and gold cufflinks" },
-    "description": "A pair of cufflinks with inset pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_cufflinks",
-    "copy-from": "garnet_gold_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "onyx and gold cufflinks" },
-    "description": "A pair of cufflinks with inset onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "garnet and silver cufflinks" },
-    "description": "A pair of cufflinks with inset garnets.",
-    "weight": "9 g",
-    "volume": "1 ml",
-    "price": "35 USD",
-    "price_postapoc": "1 USD",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "cufflinks",
-    "symbol": "[",
-    "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "diamond_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "diamond and silver cufflinks" },
-    "description": "A pair of cufflinks with inset diamonds.",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "amethyst and silver cufflinks" },
-    "description": "A pair of cufflinks with inset amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "aquamarine and silver cufflinks" },
-    "description": "A pair of cufflinks with inset aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "emerald and silver cufflinks" },
-    "description": "A pair of cufflinks with inset emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "alexandrite and silver cufflinks" },
-    "description": "A pair of cufflinks with inset alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "ruby and silver cufflinks" },
-    "description": "A pair of cufflinks with inset rubies.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_cufflinks",
-        "name": { "str_sp": "ruby and silver cufflinks" },
-        "description": "A pair of cufflinks with inset rubies.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_cufflinks",
-        "name": { "str_sp": "vampire cufflinks" },
-        "description": "A pair of cufflinks with inset blood-red rubies in the shape of a drop of blood."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "peridot and silver cufflinks" },
-    "description": "A pair of cufflinks with inset peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "sapphire and silver cufflinks" },
-    "description": "A pair of cufflinks with inset sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "tourmaline and silver cufflinks" },
-    "description": "A pair of cufflinks with inset tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "citrine and silver cufflinks" },
-    "description": "A pair of cufflinks with inset citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "blue topaz and silver cufflinks" },
-    "description": "A pair of cufflinks with inset blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "opal and silver cufflinks" },
-    "description": "A pair of cufflinks with inset opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "pearl and silver cufflinks" },
-    "description": "A pair of cufflinks with inset pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_cufflinks",
-    "copy-from": "garnet_silver_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "onyx and silver cufflinks" },
-    "description": "A pair of cufflinks with inset onyx.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_cufflinks",
-        "name": { "str_sp": "onyx and silver cufflinks" },
-        "description": "A pair of cufflinks with inset onyx.",
-        "weight": 99
-      },
-      {
-        "id": "dark_cufflinks",
-        "name": { "str_sp": "dark cufflinks" },
-        "description": "A pair of cufflinks with inset onyx and a couple of dark silver cat decorations."
-      }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "garnet and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset garnets.",
-    "weight": "15 g",
-    "volume": "1 ml",
-    "price": "35 USD",
-    "price_postapoc": "1 USD",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "cufflinks",
-    "symbol": "[",
-    "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "diamond_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "diamond and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset diamonds.",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "amethyst and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "aquamarine and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "emerald and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "alexandrite and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "ruby and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset rubies."
-  },
-  {
-    "id": "peridot_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "peridot and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "sapphire and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "tourmaline and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "citrine and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "blue topaz and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "opal and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "pearl and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_cufflinks",
-    "copy-from": "garnet_platinum_cufflinks",
-    "type": "ARMOR",
-    "name": { "str_sp": "onyx and platinum cufflinks" },
-    "description": "A pair of cufflinks with inset onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "ear_spool",
-    "type": "ARMOR",
-    "name": { "str": "plug" },
-    "description": "One of those round things people plug into their earlobes as earrings, also called an \"ear plug\" or \"ear spool.\"",
-    "weight": "5 g",
-    "volume": "5 ml",
-    "price": "12 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "plastic" ],
-    "symbol": "[",
-    "color": "dark_gray",
-    "material_thickness": 1,
-    "flags": [ "NO_WEAR_EFFECT" ]
   },
   {
     "id": "gold_bracelet",
@@ -920,20 +322,6 @@
     "melee_damage": { "bash": 2, "cut": 2 }
   },
   {
-    "id": "gold_ear",
-    "type": "ARMOR",
-    "name": { "str": "pair of gold earrings", "str_pl": "pairs of gold earrings" },
-    "description": "A pair of shiny gold earrings.",
-    "weight": "19 g",
-    "volume": "1 ml",
-    "price": "130 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "gold" ],
-    "symbol": "[",
-    "color": "yellow",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
     "id": "gold_hairpin",
     "type": "ARMOR",
     "name": { "str": "gold hairpin" },
@@ -943,7 +331,7 @@
     "price_postapoc": "25 cent",
     "material": [ "gold" ],
     "color": "yellow",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT", "FANCY", "ALLOWS_NATURAL_ATTACKS" ]
   },
   {
     "id": "gold_locket",
@@ -996,20 +384,6 @@
     "symbol": "[",
     "color": "brown",
     "flags": [ "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "gold_necklace",
-    "type": "ARMOR",
-    "name": { "str": "gold necklace" },
-    "description": "A shiny, unadorned gold necklace.",
-    "weight": "50 g",
-    "volume": "25 ml",
-    "price": "400 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "gold" ],
-    "symbol": "[",
-    "color": "yellow",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
   },
   {
     "id": "gold_ring",
@@ -1107,20 +481,6 @@
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "BELTED", "OVERSIZE" ]
   },
   {
-    "id": "silver_ear",
-    "type": "ARMOR",
-    "name": { "str": "pair of silver earrings", "str_pl": "pairs of silver earrings" },
-    "description": "A pair of beautiful silver earrings.",
-    "weight": "10 g",
-    "volume": "1 ml",
-    "price": "80 USD",
-    "price_postapoc": "25 cent",
-    "material": [ "silver" ],
-    "symbol": "[",
-    "color": "light_gray",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
     "id": "sf_watch",
     "type": "ARMOR",
     "name": { "str": "fancy watch", "str_pl": "fancy watches" },
@@ -1136,7 +496,7 @@
     "color": "yellow",
     "sided": true,
     "flags": [ "WATCH", "ALARMCLOCK", "SUPER_FANCY", "BELTED", "FRAGILE", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY", "OVERSIZE" ],
-    "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
+    "armor": [ { "coverage": 80, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
   },
   {
     "id": "small_relic",
@@ -1155,22 +515,22 @@
   },
   {
     "id": "wooden_hair_beads",
-    "copy-from": "garnet_silver_tiara",
     "type": "ARMOR",
-    "name": { "str": "wooden hair beads", "str_pl": "sets of wooden hair beads" },
-    "description": "An assortment of wooden beads used to decorate locs or braids.",
+    "name": { "str": "hair beads", "str_pl": "sets of hair beads" },
+    "description": "An assortment of beads used to decorate locs or braids.",
     "weight": "6 g",
     "volume": "10 ml",
     "material": [ "wood" ],
     "symbol": ".",
-    "color": "brown",
-    "delete": { "flags": [ "SUPER_FANCY" ] }
+    "color": "white",
+    "armor": [ { "encumbrance": 0, "coverage": 5, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "PERSONAL", "SOFT" ]
   },
   {
     "id": "holy_symbol",
     "type": "ARMOR",
     "name": { "str": "holy symbol" },
-    "description": "A necklace made of fine gold chain, bearing the symbol of a forgotten faith.",
+    "description": "A necklace made of fine gold chain, bearing the symbol of a faith that endures, despite everything.",
     "weight": "50 g",
     "volume": "25 ml",
     "price": "50 USD",
@@ -1179,7 +539,8 @@
     "symbol": ",",
     "color": "yellow",
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT" ],
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ],
     "variant_type": "generic",
     "variants": [
       {
@@ -1379,20 +740,6 @@
         "weight": 9
       },
       {
-        "id": "odin_necklace1",
-        "name": { "str": "Horn of Odin necklace" },
-        "description": "A necklace made of a fine gold chain with the Horn of Odin symbol as a pendant.  It is a symbol of the Asatru faith.  The Horn of Odin is one of the most recognizable Norse symbols, consisting of three interlocking drinking horns and symbolizing poetic inspiration and wisdom.  It is also a nod to Viking drinking customs and the camaraderie derived from them.",
-        "color": "yellow",
-        "weight": 6
-      },
-      {
-        "id": "odin_necklace2",
-        "name": { "str": "Valknut necklace" },
-        "description": "A necklace made of a fine gold chain with the Valknut symbol as a pendant.  It is a symbol of the Asatru faith.  Also known as Hrungnir's Heart, the Valknut or 'knot of the slain' is an old Norse symbol that often represented the afterlife in carvings and designs.  It is often considered a symbol of the Norse god Odin.",
-        "color": "yellow",
-        "weight": 6
-      },
-      {
         "id": "buddhist_necklace",
         "name": { "str": "Lotus of Buddha necklace" },
         "description": "A necklace made of a fine gold chain with the Lotus of Buddha symbol as a pendant.  It is a symbol of the Buddhist faith, representing a figure of Siddhartha Gautama, the Buddha, meditating on top of a lotus flower.",
@@ -1568,7 +915,8 @@
     "symbol": ",",
     "color": "brown",
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "jade_brooch",
@@ -1582,7 +930,8 @@
     "material": [ "stone" ],
     "symbol": "[",
     "color": "green",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "FANCY", "NO_WEAR_EFFECT" ]
   },
   {
     "id": "pearl_collar",
@@ -1631,110 +980,6 @@
     "sided": true,
     "flags": [ "FANCY", "BELTED", "NO_WEAR_EFFECT", "OVERSIZE" ],
     "armor": [ { "coverage": 50, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
-  },
-  {
-    "id": "platinum_dental_grill",
-    "type": "ARMOR",
-    "name": { "str": "platinum dental grill" },
-    "description": "Fake platinum-and-silver teeth.  They may be cheaper than fake gold teeth, but they're much more rare.  Fits horribly, but looks very shiny.",
-    "weight": "15 g",
-    "volume": "1 ml",
-    "price": "150 USD",
-    "price_postapoc": "1 USD",
-    "material": [ "platinum", "silver" ],
-    "symbol": "[",
-    "color": "white",
-    "flags": [ "SKINTIGHT", "NO_WEAR_EFFECT" ],
-    "armor": [ { "covers": [ "mouth" ] } ],
-    "melee_damage": { "bash": 2, "cut": 2 }
-  },
-  {
-    "id": "platinum_ear",
-    "type": "ARMOR",
-    "name": { "str": "pair of platinum earrings", "str_pl": "pairs of platinum earrings" },
-    "description": "A pair of plain platinum earrings - if gold is getting boring, just use another rare metal.",
-    "weight": "20 g",
-    "volume": "1 ml",
-    "price": "120 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "platinum" ],
-    "symbol": "[",
-    "color": "white",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "platinum_hairpin",
-    "type": "ARMOR",
-    "name": { "str": "platinum hairpin" },
-    "description": "The ultimate in esoteric, metal hair accessories, this hairpin is made from pure platinum.",
-    "copy-from": "hairpin",
-    "weight": "300 mg",
-    "price": "35 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "platinum" ],
-    "color": "white",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "platinum_locket",
-    "type": "ARMOR",
-    "name": { "str": "platinum locket" },
-    "description": "A small, platinum locket for storing photographs or other small objects.",
-    "weight": "65 g",
-    "volume": "40 ml",
-    "price": "160 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "platinum" ],
-    "symbol": "[",
-    "color": "white",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_weight": "12 mg",
-        "max_contains_volume": "1 ml",
-        "description": "Slot for a photograph",
-        "item_restriction": [ "wallet_photo" ]
-      }
-    ],
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "platinum_necklace",
-    "type": "ARMOR",
-    "name": { "str": "platinum necklace" },
-    "description": "A platinum necklace, with a small, empty heart-shaped frame hanging from a chain.",
-    "weight": "47 g",
-    "volume": "25 ml",
-    "price": "500 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "platinum" ],
-    "symbol": "[",
-    "color": "white",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "platinum ring" },
-    "description": "A platinum ring, engraved with all manner of swirls and spirals.",
-    "weight": "15 g",
-    "volume": "1 ml",
-    "price": "240 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "platinum" ],
-    "symbol": "[",
-    "color": "white",
-    "sided": true,
-    "armor": [
-      {
-        "coverage": 0,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
-      }
-    ],
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
   },
   {
     "id": "ring_engagement",
@@ -1829,20 +1074,6 @@
     "flags": [ "SUPER_FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
   },
   {
-    "id": "silver_necklace",
-    "type": "ARMOR",
-    "name": { "str": "silver necklace" },
-    "description": "A nice silver necklace.",
-    "weight": "30 g",
-    "volume": "25 ml",
-    "price": "120 USD",
-    "price_postapoc": "25 cent",
-    "material": [ "silver" ],
-    "symbol": "[",
-    "color": "light_gray",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
     "id": "silver_hairpin",
     "type": "ARMOR",
     "name": { "str": "silver hairpin" },
@@ -1853,7 +1084,7 @@
     "price_postapoc": "10 cent",
     "material": [ "silver" ],
     "color": "light_gray",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT", "FANCY", "ALLOWS_NATURAL_ATTACKS" ]
   },
   {
     "id": "silver_locket",
@@ -1961,7 +1192,8 @@
     "material": [ "plastic" ],
     "symbol": "[",
     "color": "light_blue",
-    "flags": [ "OVERSIZE", "RAD_DETECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ] } ],
+    "flags": [ "OVERSIZE", "RAD_DETECT", "SOFT" ]
   },
   {
     "abstract": "badge_abstract",
@@ -1977,7 +1209,8 @@
     "color": "yellow",
     "//": "typical badges are 1-4 oz and are usually brass with a possible very thin precious metal plating.",
     "material_thickness": 2,
-    "flags": [ "ALLOWS_NATURAL_ATTACKS", "BELTED", "OVERSIZE", "WATER_FRIENDLY" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ] } ],
+    "flags": [ "ALLOWS_NATURAL_ATTACKS", "BELTED", "UNRESTRICTED", "WATER_FRIENDLY", "SOFT" ]
   },
   {
     "id": "badge_deputy",
@@ -2121,1280 +1354,40 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "id": "diamond_gold_earring",
-    "copy-from": "garnet_gold_earring",
+    "id": "gold_earring",
     "type": "ARMOR",
-    "name": { "str": "pair of diamond and gold earrings", "str_pl": "pairs of diamond and gold earrings" },
-    "description": "A pair of shiny diamond and gold earrings.",
-    "price": "130 USD",
-    "price_postapoc": "50 cent",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of garnet and gold earrings", "str_pl": "pairs of garnet and gold earrings" },
-    "description": "A pair of shiny garnet and gold earrings.",
+    "name": { "str": "pair of gold earrings", "str_pl": "pairs of gold earrings" },
+    "description": "A pair of shiny gold earrings.",
     "weight": "18 mg",
     "volume": "1 ml",
     "price": "100 USD",
     "price_postapoc": "25 cent",
     "material": [ { "type": "gold", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "gold_ear",
     "symbol": "[",
     "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT", "FANCY" ]
   },
   {
-    "id": "amethyst_gold_earring",
-    "copy-from": "garnet_gold_earring",
+    "id": "silver_earring",
     "type": "ARMOR",
-    "name": { "str": "pair of amethyst and gold earrings", "str_pl": "pairs of amethyst and gold earrings" },
-    "description": "A pair of shiny amethyst and gold earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of aquamarine and gold earrings", "str_pl": "pairs of aquamarine and gold earrings" },
-    "description": "A pair of shiny aquamarine and gold earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of emerald and gold earrings", "str_pl": "pairs of emerald and gold earrings" },
-    "description": "A pair of shiny emerald and gold earrings.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of alexandrite and gold earrings", "str_pl": "pairs of alexandrite and gold earrings" },
-    "description": "A pair of shiny alexandrite and gold earrings.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of ruby and gold earrings", "str_pl": "pairs of ruby and gold earrings" },
-    "description": "A pair of shiny ruby and gold earrings."
-  },
-  {
-    "id": "peridot_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of peridot and gold earrings", "str_pl": "pairs of peridot and gold earrings" },
-    "description": "A pair of shiny peridot and gold earrings.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of sapphire and gold earrings", "str_pl": "pairs of sapphire and gold earrings" },
-    "description": "A pair of shiny sapphire and gold earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of tourmaline and gold earrings", "str_pl": "pairs of tourmaline and gold earrings" },
-    "description": "A pair of shiny tourmaline and gold earrings.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of citrine and gold earrings", "str_pl": "pairs of citrine and gold earrings" },
-    "description": "A pair of shiny citrine and gold earrings.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of blue topaz and gold earrings", "str_pl": "pairs of blue topaz and gold earrings" },
-    "description": "A pair of shiny blue topaz and gold earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of opal and gold earrings", "str_pl": "pairs of opal and gold earrings" },
-    "description": "A pair of shiny opal and gold earrings.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of pearl and gold earrings", "str_pl": "pairs of pearl and gold earrings" },
-    "description": "A pair of shiny pearl and gold earrings.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_earring",
-    "copy-from": "garnet_gold_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of onyx and gold earrings", "str_pl": "pairs of onyx and gold earrings" },
-    "description": "A pair of shiny onyx and gold earrings.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of diamond and silver earrings", "str_pl": "pairs of diamond and silver earrings" },
-    "description": "A pair of shiny diamond and silver earrings.",
-    "price": "80 USD",
-    "price_postapoc": "20 USD",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of garnet and silver earrings", "str_pl": "pairs of garnet and silver earrings" },
-    "description": "A pair of shiny garnet and silver earrings.",
+    "name": { "str": "pair of silver earrings", "str_pl": "pairs of silver earrings" },
+    "description": "A pair of shiny silver earrings.",
     "weight": "10 mg",
     "volume": "1 ml",
     "price": "60 USD",
     "price_postapoc": "10 USD",
     "material": [ { "type": "silver", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "silver_ear",
     "symbol": "[",
     "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT", "FANCY" ]
   },
   {
-    "id": "amethyst_silver_earring",
-    "copy-from": "garnet_silver_earring",
+    "id": "gold_necklace",
     "type": "ARMOR",
-    "name": { "str": "pair of amethyst and silver earrings", "str_pl": "pairs of amethyst and silver earrings" },
-    "description": "A pair of shiny amethyst and silver earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of aquamarine and silver earrings", "str_pl": "pairs of aquamarine and silver earrings" },
-    "description": "A pair of shiny aquamarine and silver earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of emerald and silver earrings", "str_pl": "pairs of emerald and silver earrings" },
-    "description": "A pair of shiny emerald and silver earrings.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of alexandrite and silver earrings", "str_pl": "pairs of alexandrite and silver earrings" },
-    "description": "A pair of shiny alexandrite and silver earrings.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of ruby and silver earrings", "str_pl": "pairs of ruby and silver earrings" },
-    "description": "A pair of shiny ruby and silver earrings.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_earring",
-        "name": { "str": "pair of ruby and silver earrings", "str_pl": "pairs of ruby and silver earrings" },
-        "description": "A pair of shiny ruby and silver earrings.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_earring",
-        "name": { "str": "pair of vampire earrings", "str_pl": "pairs of vampire earrings" },
-        "description": "A pair of blood-red ruby and silver earrings, adorned with sinister motifs."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of peridot and silver earrings", "str_pl": "pairs of peridot and silver earrings" },
-    "description": "A pair of shiny peridot and silver earrings.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of sapphire and silver earrings", "str_pl": "pairs of sapphire and silver earrings" },
-    "description": "A pair of shiny sapphire and silver earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of tourmaline and silver earrings", "str_pl": "pairs of tourmaline and silver earrings" },
-    "description": "A pair of shiny tourmaline and silver earrings.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of citrine and silver earrings", "str_pl": "pairs of citrine and silver earrings" },
-    "description": "A pair of shiny citrine and silver earrings.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of blue topaz and silver earrings", "str_pl": "pairs of blue topaz and silver earrings" },
-    "description": "A pair of shiny blue topaz and silver earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of opal and silver earrings", "str_pl": "pairs of opal and silver earrings" },
-    "description": "A pair of shiny opal and silver earrings.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of pearl and silver earrings", "str_pl": "pairs of pearl and silver earrings" },
-    "description": "A pair of shiny pearl and silver earrings.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_earring",
-    "copy-from": "garnet_silver_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of onyx and silver earrings", "str_pl": "pairs of onyx and silver earrings" },
-    "description": "A pair of shiny onyx and silver earrings.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_earring",
-        "name": { "str": "pair of onyx and silver earrings", "str_pl": "pairs of onyx and silver earrings" },
-        "description": "A pair of shiny onyx and silver earrings.",
-        "weight": 99
-      },
-      {
-        "id": "dark_earring",
-        "name": { "str": "pair of dark earrings", "str_pl": "pairs of dark earrings" },
-        "description": "A pair of dark silver earrings featuring onyx in the shape of two dark hearts."
-      }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of diamond and platinum earrings", "str_pl": "pairs of diamond and platinum earrings" },
-    "description": "A pair of shiny diamond and platinum earrings.",
-    "price": "120 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of garnet and platinum earrings", "str_pl": "pairs of garnet and platinum earrings" },
-    "description": "A pair of shiny garnet and platinum earrings.",
-    "weight": "19 mg",
-    "volume": "1 ml",
-    "price": "100 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "platinum_ear",
-    "symbol": "[",
-    "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "amethyst_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of amethyst and platinum earrings", "str_pl": "pairs of amethyst and platinum earrings" },
-    "description": "A pair of shiny amethyst and platinum earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of aquamarine and platinum earrings", "str_pl": "pairs of aquamarine and platinum earrings" },
-    "description": "A pair of shiny aquamarine and platinum earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of emerald and platinum earrings", "str_pl": "pairs of emerald and platinum earrings" },
-    "description": "A pair of shiny emerald and platinum earrings.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of alexandrite and platinum earrings", "str_pl": "pairs of alexandrite and platinum earrings" },
-    "description": "A pair of shiny alexandrite and platinum earrings.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of ruby and platinum earrings", "str_pl": "pairs of ruby and platinum earrings" },
-    "description": "A pair of shiny ruby and platinum earrings."
-  },
-  {
-    "id": "peridot_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of peridot and platinum earrings", "str_pl": "pairs of peridot and platinum earrings" },
-    "description": "A pair of shiny peridot and platinum earrings.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of sapphire and platinum earrings", "str_pl": "pairs of sapphire and platinum earrings" },
-    "description": "A pair of shiny sapphire and platinum earrings.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of tourmaline and platinum earrings", "str_pl": "pairs of tourmaline and platinum earrings" },
-    "description": "A pair of shiny tourmaline and platinum earrings.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of citrine and platinum earrings", "str_pl": "pairs of citrine and platinum earrings" },
-    "description": "A pair of shiny citrine and platinum earrings.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of blue topaz and platinum earrings", "str_pl": "pairs of blue topaz and platinum earrings" },
-    "description": "A pair of shiny blue topaz and platinum earrings.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of opal and platinum earrings", "str_pl": "pairs of opal and platinum earrings" },
-    "description": "A pair of shiny opal and platinum earrings.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of pearl and platinum earrings", "str_pl": "pairs of pearl and platinum earrings" },
-    "description": "A pair of shiny pearl and platinum earrings.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_earring",
-    "copy-from": "garnet_platinum_earring",
-    "type": "ARMOR",
-    "name": { "str": "pair of onyx and platinum earrings", "str_pl": "pairs of onyx and platinum earrings" },
-    "description": "A pair of shiny onyx and platinum earrings.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "garnet and gold ring" },
-    "description": "A gold ring with a garnet mounted on top of it.",
-    "weight": "18 mg",
-    "volume": "1 ml",
-    "price": "100 USD",
-    "price_postapoc": "18 USD",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "gold_ring",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "armor": [
-      {
-        "coverage": 0,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
-      }
-    ],
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
-  },
-  {
-    "id": "amethyst_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and gold ring" },
-    "description": "A gold ring with an amethyst mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and gold ring" },
-    "description": "A gold ring with an aquamarine mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "emerald and gold ring" },
-    "description": "A gold ring with an emerald mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and gold ring" },
-    "description": "A gold ring with an alexandrite mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "ruby and gold ring" },
-    "description": "A gold ring with a ruby mounted on top of it."
-  },
-  {
-    "id": "peridot_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "peridot and gold ring" },
-    "description": "A gold ring with a peridot mounted on top of it.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and gold ring" },
-    "description": "A gold ring with a sapphire mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and gold ring" },
-    "description": "A gold ring with a tourmaline mounted on top of it.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "citrine and gold ring" },
-    "description": "A gold ring with a citrine mounted on top of it.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and gold ring" },
-    "description": "A gold ring with a blue topaz mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "opal and gold ring" },
-    "description": "A gold ring with an opal mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "pearl and gold ring" },
-    "description": "A gold ring with a pearl mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_ring",
-    "copy-from": "garnet_gold_ring",
-    "type": "ARMOR",
-    "name": { "str": "onyx and gold ring" },
-    "description": "A gold ring with an onyx mounted on top of it.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "diamond and silver ring" },
-    "description": "A silver ring with a diamond mounted on top of it.",
-    "price": "120 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "garnet and silver ring" },
-    "description": "A silver ring with a garnet mounted on top of it.",
-    "weight": "10 mg",
-    "volume": "1 ml",
-    "price": "100 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "silver_ring",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "ALLOWS_TALONS" ],
-    "armor": [
-      {
-        "coverage": 0,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
-      }
-    ]
-  },
-  {
-    "id": "amethyst_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and silver ring" },
-    "description": "A silver ring with an amethyst mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and silver ring" },
-    "description": "A silver ring with an aquamarine mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "emerald and silver ring" },
-    "description": "A silver ring with an emerald mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and silver ring" },
-    "description": "A silver ring with an alexandrite mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "ruby and silver ring" },
-    "description": "A silver ring with a ruby mounted on top of it.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_ring",
-        "name": { "str": "ruby and silver ring" },
-        "description": "A silver ring with a ruby mounted on top of it.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_ring",
-        "name": { "str": "vampire ring" },
-        "description": "A silver ring with a sinister claw clutching a blood-red ruby mounted on top of it."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "peridot and silver ring" },
-    "description": "A silver ring with a peridot mounted on top of it.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and silver ring" },
-    "description": "A silver ring with a sapphire mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and silver ring" },
-    "description": "A silver ring with a tourmaline mounted on top of it.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "citrine and silver ring" },
-    "description": "A silver ring with a citrine mounted on top of it.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and silver ring" },
-    "description": "A silver ring with a blue topaz mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "opal and silver ring" },
-    "description": "A silver ring with an opal mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "pearl and silver ring" },
-    "description": "A silver ring with a pearl mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_ring",
-    "copy-from": "garnet_silver_ring",
-    "type": "ARMOR",
-    "name": { "str": "onyx and silver ring" },
-    "description": "A silver ring with an onyx mounted on top of it.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_ring",
-        "name": { "str": "onyx and silver ring" },
-        "description": "A silver ring with an onyx mounted on top of it.",
-        "weight": 99
-      },
-      {
-        "id": "dark_ring",
-        "name": { "str": "dark ring" },
-        "description": "A dark silver ring with skull decorations and a pitch-black onyx mounted on top of it."
-      }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "diamond and platinum ring" },
-    "description": "A platinum ring with a diamond mounted on top of it.",
-    "price": "120 USD",
-    "price_postapoc": "50 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "garnet and platinum ring" },
-    "description": "A platinum ring with a garnet mounted on top of it.",
-    "weight": "19 mg",
-    "volume": "1 ml",
-    "price": "100 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "platinum_ring",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ],
-    "armor": [
-      {
-        "coverage": 0,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
-      }
-    ]
-  },
-  {
-    "id": "amethyst_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and platinum ring" },
-    "description": "A platinum ring with an amethyst mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and platinum ring" },
-    "description": "A platinum ring with an aquamarine mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "emerald and platinum ring" },
-    "description": "A platinum ring with an emerald mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and platinum ring" },
-    "description": "A platinum ring with an alexandrite mounted on top of it.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "ruby and platinum ring" },
-    "description": "A platinum ring with a ruby mounted on top of it."
-  },
-  {
-    "id": "peridot_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "peridot and platinum ring" },
-    "description": "A platinum ring with a peridot mounted on top of it.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and platinum ring" },
-    "description": "A platinum ring with a sapphire mounted on top of it.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and platinum ring" },
-    "description": "A platinum ring with a tourmaline mounted on top of it.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "citrine and platinum ring" },
-    "description": "A platinum ring with a citrine mounted on top of it.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and platinum ring" },
-    "description": "A platinum ring with a blue topaz mounted on top of it.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "opal and platinum ring" },
-    "description": "A platinum ring with an opal mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "pearl and platinum ring" },
-    "description": "A platinum ring with a pearl mounted on top of it.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_ring",
-    "copy-from": "garnet_platinum_ring",
-    "type": "ARMOR",
-    "name": { "str": "onyx and platinum ring" },
-    "description": "A platinum ring with an onyx mounted on top of it.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "diamond and gold bracelet" },
-    "description": "A gold bracelet with sparkling diamonds.",
-    "price": "2000 USD",
-    "looks_like": "gold_bracelet",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "garnet and gold bracelet" },
-    "description": "A gold bracelet with sparkling garnets.",
-    "weight": "190 mg",
-    "volume": "10 ml",
-    "price": "150 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "gold_bracelet",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "OVERSIZE" ],
-    "armor": [ { "coverage": 20, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
-  },
-  {
-    "id": "amethyst_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and gold bracelet" },
-    "description": "A gold bracelet with sparkling amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and gold bracelet" },
-    "description": "A gold bracelet with sparkling aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "emerald and gold bracelet" },
-    "description": "A gold bracelet with sparkling emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and gold bracelet" },
-    "description": "A gold bracelet with sparkling alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "ruby and gold bracelet" },
-    "description": "A gold bracelet with sparkling rubies."
-  },
-  {
-    "id": "peridot_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "peridot and gold bracelet" },
-    "description": "A gold bracelet with sparkling peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and gold bracelet" },
-    "description": "A gold bracelet with sparkling sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and gold bracelet" },
-    "description": "A gold bracelet with sparkling tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "citrine and gold bracelet" },
-    "description": "A gold bracelet with sparkling citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and gold bracelet" },
-    "description": "A gold bracelet with sparkling blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "opal and gold bracelet" },
-    "description": "A gold bracelet with beautiful opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "pearl and gold bracelet" },
-    "description": "A gold bracelet with beautiful pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_bracelet",
-    "copy-from": "garnet_gold_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "onyx and gold bracelet" },
-    "description": "A gold bracelet with striking onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "diamond and silver bracelet" },
-    "description": "A silver bracelet with sparkling diamonds.",
-    "price": "2000 USD",
-    "looks_like": "silver_bracelet",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "garnet and silver bracelet" },
-    "description": "A silver bracelet with sparkling garnets.",
-    "weight": "100 mg",
-    "volume": "10 ml",
-    "price": "150 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "silver_bracelet",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "flags": [ "FANCY", "NO_WEAR_EFFECT", "OVERSIZE" ],
-    "armor": [ { "coverage": 20, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
-  },
-  {
-    "id": "amethyst_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and silver bracelet" },
-    "description": "A silver bracelet with sparkling amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and silver bracelet" },
-    "description": "A silver bracelet with sparkling aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "emerald and silver bracelet" },
-    "description": "A silver bracelet with sparkling emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and silver bracelet" },
-    "description": "A silver bracelet with sparkling alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "ruby and silver bracelet" },
-    "description": "A silver bracelet with sparkling rubies.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_bracelet",
-        "name": { "str": "ruby and silver bracelet" },
-        "description": "A silver bracelet with sparkling rubies.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_bracelet",
-        "name": { "str": "vampire bracelet" },
-        "description": "A dark silver bracelet with blood-red rubies in the shape of two sinister-looking hearts."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "peridot and silver bracelet" },
-    "description": "A silver bracelet with sparkling peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and silver bracelet" },
-    "description": "A silver bracelet with sparkling sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and silver bracelet" },
-    "description": "A silver bracelet with sparkling tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "citrine and silver bracelet" },
-    "description": "A silver bracelet with sparkling citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and silver bracelet" },
-    "description": "A silver bracelet with sparkling blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "opal and silver bracelet" },
-    "description": "A silver bracelet with beautiful opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "pearl and silver bracelet" },
-    "description": "A silver bracelet with beautiful pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_bracelet",
-    "copy-from": "garnet_silver_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "onyx and silver bracelet" },
-    "description": "A silver bracelet with striking onyx.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_bracelet",
-        "name": { "str": "onyx and silver bracelet" },
-        "description": "A silver bracelet with striking onyx.",
-        "weight": 99
-      },
-      {
-        "id": "dark_bracelet",
-        "name": { "str": "dark bracelet" },
-        "description": "A dark silver bracelet with occult decorations and one single onyx as the center of a dark eye."
-      }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "diamond_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "diamond and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling diamonds.",
-    "price": "2000 USD",
-    "looks_like": "platinum_bracelet",
-    "price_postapoc": "50 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "garnet and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling garnets.",
-    "weight": "190 g",
-    "volume": "10 ml",
-    "price": "150 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "platinum_bracelet",
-    "symbol": "[",
-    "color": "red",
-    "sided": true,
-    "flags": [ "FANCY", "BELTED", "NO_WEAR_EFFECT", "OVERSIZE" ],
-    "armor": [ { "coverage": 20, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
-  },
-  {
-    "id": "amethyst_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "emerald and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "ruby and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling rubies."
-  },
-  {
-    "id": "peridot_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "peridot and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "citrine and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and platinum bracelet" },
-    "description": "A platinum bracelet with sparkling blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "opal and platinum bracelet" },
-    "description": "A platinum bracelet with beautiful opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "pearl and platinum bracelet" },
-    "description": "A platinum bracelet with beautiful pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_bracelet",
-    "copy-from": "garnet_platinum_bracelet",
-    "type": "ARMOR",
-    "name": { "str": "onyx and platinum bracelet" },
-    "description": "A platinum bracelet with striking onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "garnet and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a garnet pendant.",
+    "name": { "str": "gold necklace" },
+    "description": "A pendant with a fine gold chain.",
     "weight": "70 g",
     "volume": "15 ml",
     "price": "500 USD",
@@ -3403,125 +1396,14 @@
     "looks_like": "gold_necklace",
     "symbol": "[",
     "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "FANCY" ]
   },
   {
-    "id": "diamond_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
+    "id": "silver_necklace",
     "type": "ARMOR",
-    "name": { "str": "diamond and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a diamond pendant.",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an amethyst pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an aquamarine pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "emerald and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an emerald pendant.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an alexandrite pendant.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "ruby and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a ruby pendant."
-  },
-  {
-    "id": "peridot_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "peridot and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a peridot pendant.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a sapphire pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a tourmaline pendant.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "citrine and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a citrine pendant.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a blue topaz pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "opal and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an opal pendant.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "pearl and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with a pearl pendant.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_pendant_necklace",
-    "copy-from": "garnet_gold_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "onyx and gold pendant necklace" },
-    "description": "A shiny, gold necklace adorned with an onyx pendant.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "garnet and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a garnet pendant.",
+    "name": { "str": "silver necklace" },
+    "description": "A pendant with a fine silver chain.",
     "weight": "70 g",
     "volume": "15 ml",
     "price": "500 USD",
@@ -3530,409 +1412,14 @@
     "looks_like": "silver_necklace",
     "symbol": "[",
     "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "FANCY" ]
   },
   {
-    "id": "diamond_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
+    "id": "gold_tiara",
     "type": "ARMOR",
-    "name": { "str": "diamond and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a diamond pendant.",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an amethyst pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an aquamarine pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "emerald and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an emerald pendant.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an alexandrite pendant.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "ruby and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a ruby pendant.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_pendant_necklace",
-        "name": { "str": "ruby and silver pendant necklace" },
-        "description": "A shiny, silver necklace adorned with a ruby pendant.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_necklace",
-        "name": { "str": "vampire necklace" },
-        "description": "A sinister silver necklace adorned with a blood-red ruby pendant."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "peridot and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a peridot pendant.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a sapphire pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a tourmaline pendant.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "citrine and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a citrine pendant.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a blue topaz pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "opal and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an opal pendant.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "pearl and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with a pearl pendant.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_pendant_necklace",
-    "copy-from": "garnet_silver_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "onyx and silver pendant necklace" },
-    "description": "A shiny, silver necklace adorned with an onyx pendant.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_pendant_necklace",
-        "name": { "str": "onyx and silver pendant necklace" },
-        "description": "A shiny, silver necklace adorned with an onyx pendant.",
-        "weight": 99
-      },
-      {
-        "id": "dark_necklace",
-        "name": { "str": "dark necklace" },
-        "description": "A dark silver necklace with an onyx pendant in the shape of a dark heart."
-      }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "garnet and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a garnet pendant.",
-    "weight": "70 g",
-    "volume": "15 ml",
-    "price": "500 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "platinum_necklace",
-    "symbol": "[",
-    "color": "red",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
-  },
-  {
-    "id": "diamond_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "diamond and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a diamond pendant.",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an amethyst pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an aquamarine pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "emerald and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an emerald pendant.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an alexandrite pendant.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "ruby and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a ruby pendant."
-  },
-  {
-    "id": "peridot_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "peridot and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a peridot pendant.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a sapphire pendant.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a tourmaline pendant.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "citrine and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a citrine pendant.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a blue topaz pendant.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "opal and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an opal pendant.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "pearl and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with a pearl pendant.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_pendant_necklace",
-    "copy-from": "garnet_platinum_pendant_necklace",
-    "type": "ARMOR",
-    "name": { "str": "onyx and platinum pendant necklace" },
-    "description": "A shiny, platinum necklace adorned with an onyx pendant.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "garnet and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with garnets.",
-    "weight": "200 g",
-    "volume": "100 ml",
-    "price": "5000 USD",
-    "price_postapoc": "25 cent",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "gemstone" } ],
-    "looks_like": "crown_golden",
-    "symbol": "[",
-    "color": "red",
-    "material_thickness": 1,
-    "flags": [ "SUPER_FANCY", "NO_WEAR_EFFECT" ],
-    "armor": [ { "encumbrance": 1, "coverage": 20, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
-  },
-  {
-    "id": "diamond_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "diamond and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with diamonds.",
-    "material": [ { "type": "platinum", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "emerald and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "ruby and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with rubies."
-  },
-  {
-    "id": "peridot_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "peridot and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "citrine and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "opal and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "pearl and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_platinum_tiara",
-    "copy-from": "garnet_platinum_tiara",
-    "type": "ARMOR",
-    "name": { "str": "onyx and platinum tiara" },
-    "description": "A shiny, platinum tiara adorned with onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "garnet and gold tiara" },
-    "description": "A shiny, gold tiara adorned with garnets.",
+    "name": { "str": "gold tiara" },
+    "description": "A glittering gold tiara adorned with jewels.",
     "weight": "190 g",
     "volume": "100 ml",
     "price": "4000 USD",
@@ -3946,134 +1433,10 @@
     "armor": [ { "encumbrance": 1, "coverage": 20, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
   {
-    "id": "diamond_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
+    "id": "silver_tiara",
     "type": "ARMOR",
-    "name": { "str": "diamond and gold tiara" },
-    "description": "A shiny, gold tiara adorned with diamonds.",
-    "material": [ { "type": "gold", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and gold tiara" },
-    "description": "A shiny, gold tiara adorned with amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and gold tiara" },
-    "description": "A shiny, gold tiara adorned with aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "emerald and gold tiara" },
-    "description": "A shiny, gold tiara adorned with emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and gold tiara" },
-    "description": "A shiny, gold tiara adorned with alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "ruby and gold tiara" },
-    "description": "A shiny, gold tiara adorned with rubies."
-  },
-  {
-    "id": "peridot_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "peridot and gold tiara" },
-    "description": "A shiny, gold tiara adorned with peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and gold tiara" },
-    "description": "A shiny, gold tiara adorned with sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and gold tiara" },
-    "description": "A shiny, gold tiara adorned with tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "citrine and gold tiara" },
-    "description": "A shiny, gold tiara adorned with citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and gold tiara" },
-    "description": "A shiny, gold tiara adorned with blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "opal and gold tiara" },
-    "description": "A shiny, gold tiara adorned with opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "pearl and gold tiara" },
-    "description": "A shiny, gold tiara adorned with pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_gold_tiara",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "onyx and gold tiara" },
-    "description": "A shiny, gold tiara adorned with onyx.",
-    "color": "dark_gray"
-  },
-  {
-    "id": "gold_hair_beads",
-    "copy-from": "garnet_gold_tiara",
-    "type": "ARMOR",
-    "name": { "str": "gold hair beads", "str_pl": "sets of gold hair beads" },
-    "description": "An assortment of gold beads used to decorate locs or braids.",
-    "weight": "15 g",
-    "volume": "25 ml",
-    "material": [ "gold" ],
-    "symbol": ".",
-    "color": "yellow"
-  },
-  {
-    "id": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "garnet and silver tiara" },
-    "description": "A shiny, silver tiara adorned with garnets.",
+    "name": { "str": "silver tiara" },
+    "description": "A sparkling silver tiara adorned with gems.",
     "weight": "130 g",
     "volume": "100 ml",
     "price": "2000 USD",
@@ -4085,154 +1448,5 @@
     "material_thickness": 1,
     "flags": [ "SUPER_FANCY", "NO_WEAR_EFFECT" ],
     "armor": [ { "encumbrance": 1, "coverage": 20, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
-  },
-  {
-    "id": "diamond_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "diamond and silver tiara" },
-    "description": "A shiny, silver tiara adorned with diamonds.",
-    "material": [ { "type": "silver", "portion": 9 }, { "type": "diamond" } ],
-    "color": "white"
-  },
-  {
-    "id": "amethyst_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "amethyst and silver tiara" },
-    "description": "A shiny, silver tiara adorned with amethysts.",
-    "color": "blue"
-  },
-  {
-    "id": "aquamarine_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "aquamarine and silver tiara" },
-    "description": "A shiny, silver tiara adorned with aquamarines.",
-    "color": "light_blue"
-  },
-  {
-    "id": "emerald_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "emerald and silver tiara" },
-    "description": "A shiny, silver tiara adorned with emeralds.",
-    "color": "green"
-  },
-  {
-    "id": "alexandrite_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "alexandrite and silver tiara" },
-    "description": "A shiny, silver tiara adorned with alexandrites.",
-    "color": "green"
-  },
-  {
-    "id": "ruby_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "ruby and silver tiara" },
-    "description": "A shiny, silver tiara adorned with rubies.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_ruby_silver_tiara",
-        "name": { "str": "ruby and silver tiara" },
-        "description": "A shiny, silver tiara adorned with rubies.",
-        "weight": 99
-      },
-      {
-        "id": "vampire_tiara",
-        "name": { "str": "vampire tiara" },
-        "description": "A sinister dark silver tiara adorned with blood-red rubies."
-      }
-    ]
-  },
-  {
-    "id": "peridot_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "peridot and silver tiara" },
-    "description": "A shiny, silver tiara adorned with peridots.",
-    "color": "light_green"
-  },
-  {
-    "id": "sapphire_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "sapphire and silver tiara" },
-    "description": "A shiny, silver tiara adorned with sapphires.",
-    "color": "blue"
-  },
-  {
-    "id": "tourmaline_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "tourmaline and silver tiara" },
-    "description": "A shiny, silver tiara adorned with tourmaline.",
-    "color": "light_red"
-  },
-  {
-    "id": "citrine_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "citrine and silver tiara" },
-    "description": "A shiny, silver tiara adorned with citrines.",
-    "color": "yellow"
-  },
-  {
-    "id": "blue_topaz_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "blue topaz and silver tiara" },
-    "description": "A shiny, silver tiara adorned with blue topaz.",
-    "color": "light_blue"
-  },
-  {
-    "id": "opal_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "opal and silver tiara" },
-    "description": "A shiny, silver tiara adorned with opals.",
-    "color": "white"
-  },
-  {
-    "id": "pearl_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "pearl and silver tiara" },
-    "description": "A shiny, silver tiara adorned with pearls.",
-    "color": "white"
-  },
-  {
-    "id": "onyx_silver_tiara",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "onyx and silver tiara" },
-    "description": "A shiny, silver tiara adorned with onyx.",
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "generic_onyx_silver_tiara",
-        "name": { "str": "onyx and silver tiara" },
-        "description": "A shiny, silver tiara adorned with onyx.",
-        "weight": 99
-      },
-      { "id": "dark_tiara", "name": { "str": "dark tiara" }, "description": "A dark silver tiara adorned with onyx." }
-    ],
-    "color": "dark_gray"
-  },
-  {
-    "id": "silver_hair_beads",
-    "copy-from": "garnet_silver_tiara",
-    "type": "ARMOR",
-    "name": { "str": "silver hair beads", "str_pl": "sets of silver hair beads" },
-    "description": "An assortment of shiny silver beads used to decorate locs or braids.",
-    "weight": "10 g",
-    "volume": "20 ml",
-    "material": [ "silver" ],
-    "symbol": ".",
-    "color": "white",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
   }
 ]

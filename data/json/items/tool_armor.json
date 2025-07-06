@@ -2532,24 +2532,27 @@
     "name": { "str": "hairpin" },
     "description": "A plain hairpin to keep your hair in place.",
     "price": "4 cent",
-    "price_postapoc": "10 cent",
+    "price_postapoc": "5 cent",
     "material": [ "steel" ],
     "weight": "200 mg",
     "volume": "1 ml",
-    "longest_side": "45 mm"
+    "longest_side": "45 mm",
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "ALLOWS_NATURAL_ATTACKS" ]
   },
   {
     "id": "fc_hairpin",
     "type": "TOOL_ARMOR",
     "copy-from": "hairpin",
     "color": "pink",
-    "name": { "str": "fancy hairpin" },
+    "name": { "str": "flower hairpin" },
     "description": "A pink hairpin with cute flower textures.",
     "price": "10 USD",
-    "price_postapoc": "5 cent",
+    "price_postapoc": "0 cent",
     "material": [ "plastic" ],
     "weight": "100 mg",
-    "flags": [ "FANCY" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ],
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "ALLOWS_NATURAL_ATTACKS" ]
   },
   {
     "id": "towel",
