@@ -990,424 +990,6 @@
     ]
   },
   {
-    "id": "cufflinks_silver",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "cufflinks", "prob": 50 },
-      { "item": "cufflinks_intricate", "prob": 50 },
-      { "item": "citrine_silver_cufflinks", "prob": 50 },
-      { "item": "diamond_silver_cufflinks", "prob": 50 },
-      { "item": "emerald_silver_cufflinks", "prob": 50 },
-      { "item": "peridot_silver_cufflinks", "prob": 50 },
-      { "item": "amethyst_silver_cufflinks", "prob": 50 },
-      { "item": "sapphire_silver_cufflinks", "prob": 50 },
-      { "item": "aquamarine_silver_cufflinks", "prob": 50 },
-      { "item": "blue_topaz_silver_cufflinks", "prob": 50 },
-      { "item": "tourmaline_silver_cufflinks", "prob": 50 },
-      { "item": "alexandrite_silver_cufflinks", "prob": 50 },
-      { "item": "pearl_silver_cufflinks", "prob": 50 },
-      { "item": "onyx_silver_cufflinks", "prob": 50 },
-      { "item": "opal_silver_cufflinks", "prob": 50 },
-      { "item": "ruby_silver_cufflinks", "prob": 50 },
-      { "item": "garnet_silver_cufflinks", "prob": 50 }
-    ]
-  },
-  {
-    "id": "cufflinks_gold",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "citrine_gold_cufflinks", "prob": 50 },
-      { "item": "diamond_gold_cufflinks", "prob": 50 },
-      { "item": "emerald_gold_cufflinks", "prob": 50 },
-      { "item": "peridot_gold_cufflinks", "prob": 50 },
-      { "item": "amethyst_gold_cufflinks", "prob": 50 },
-      { "item": "sapphire_gold_cufflinks", "prob": 50 },
-      { "item": "aquamarine_gold_cufflinks", "prob": 50 },
-      { "item": "blue_topaz_gold_cufflinks", "prob": 50 },
-      { "item": "tourmaline_gold_cufflinks", "prob": 50 },
-      { "item": "alexandrite_gold_cufflinks", "prob": 50 },
-      { "item": "pearl_gold_cufflinks", "prob": 50 },
-      { "item": "onyx_gold_cufflinks", "prob": 50 },
-      { "item": "opal_gold_cufflinks", "prob": 50 },
-      { "item": "ruby_gold_cufflinks", "prob": 50 },
-      { "item": "garnet_gold_cufflinks", "prob": 50 }
-    ]
-  },
-  {
-    "id": "cufflinks_platinum",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "citrine_platinum_cufflinks", "prob": 50 },
-      { "item": "diamond_platinum_cufflinks", "prob": 50 },
-      { "item": "emerald_platinum_cufflinks", "prob": 50 },
-      { "item": "peridot_platinum_cufflinks", "prob": 50 },
-      { "item": "amethyst_platinum_cufflinks", "prob": 50 },
-      { "item": "sapphire_platinum_cufflinks", "prob": 50 },
-      { "item": "aquamarine_platinum_cufflinks", "prob": 50 },
-      { "item": "blue_topaz_platinum_cufflinks", "prob": 50 },
-      { "item": "tourmaline_platinum_cufflinks", "prob": 50 },
-      { "item": "alexandrite_platinum_cufflinks", "prob": 50 },
-      { "item": "pearl_platinum_cufflinks", "prob": 50 },
-      { "item": "onyx_platinum_cufflinks", "prob": 50 },
-      { "item": "opal_platinum_cufflinks", "prob": 50 },
-      { "item": "ruby_platinum_cufflinks", "prob": 50 },
-      { "item": "garnet_platinum_cufflinks", "prob": 50 }
-    ]
-  },
-  {
-    "id": "dental_grills",
-    "type": "item_group",
-    "items": [
-      [ "gold_dental_grill", 50 ],
-      [ "platinum_dental_grill", 50 ],
-      [ "citrine_dental_grill", 50 ],
-      [ "diamond_dental_grill", 50 ],
-      [ "emerald_dental_grill", 50 ],
-      [ "peridot_dental_grill", 50 ],
-      [ "amethyst_dental_grill", 50 ],
-      [ "sapphire_dental_grill", 50 ],
-      [ "aquamarine_dental_grill", 50 ],
-      [ "blue_topaz_dental_grill", 50 ],
-      [ "tourmaline_dental_grill", 50 ],
-      [ "alexandrite_dental_grill", 50 ],
-      [ "ruby_dental_grill", 50 ],
-      [ "garnet_dental_grill", 50 ]
-    ]
-  },
-  {
-    "id": "tiaras_silver",
-    "type": "item_group",
-    "items": [
-      [ "citrine_silver_tiara", 50 ],
-      [ "diamond_silver_tiara", 50 ],
-      [ "emerald_silver_tiara", 50 ],
-      [ "peridot_silver_tiara", 50 ],
-      [ "amethyst_silver_tiara", 50 ],
-      [ "sapphire_silver_tiara", 50 ],
-      [ "aquamarine_silver_tiara", 50 ],
-      [ "blue_topaz_silver_tiara", 50 ],
-      [ "tourmaline_silver_tiara", 50 ],
-      [ "alexandrite_silver_tiara", 50 ],
-      [ "pearl_silver_tiara", 50 ],
-      [ "onyx_silver_tiara", 50 ],
-      [ "opal_silver_tiara", 50 ],
-      [ "ruby_silver_tiara", 50 ],
-      [ "garnet_silver_tiara", 50 ]
-    ]
-  },
-  {
-    "id": "tiaras_gold",
-    "type": "item_group",
-    "items": [
-      [ "citrine_gold_tiara", 50 ],
-      [ "diamond_gold_tiara", 50 ],
-      [ "emerald_gold_tiara", 50 ],
-      [ "peridot_gold_tiara", 50 ],
-      [ "amethyst_gold_tiara", 50 ],
-      [ "sapphire_gold_tiara", 50 ],
-      [ "aquamarine_gold_tiara", 50 ],
-      [ "blue_topaz_gold_tiara", 50 ],
-      [ "tourmaline_gold_tiara", 50 ],
-      [ "alexandrite_gold_tiara", 50 ],
-      [ "pearl_gold_tiara", 50 ],
-      [ "onyx_gold_tiara", 50 ],
-      [ "opal_gold_tiara", 50 ],
-      [ "ruby_gold_tiara", 50 ],
-      [ "garnet_gold_tiara", 50 ]
-    ]
-  },
-  {
-    "id": "tiaras_platinum",
-    "type": "item_group",
-    "items": [
-      [ "citrine_platinum_tiara", 50 ],
-      [ "diamond_platinum_tiara", 50 ],
-      [ "emerald_platinum_tiara", 50 ],
-      [ "peridot_platinum_tiara", 50 ],
-      [ "amethyst_platinum_tiara", 50 ],
-      [ "sapphire_platinum_tiara", 50 ],
-      [ "aquamarine_platinum_tiara", 50 ],
-      [ "blue_topaz_platinum_tiara", 50 ],
-      [ "tourmaline_platinum_tiara", 50 ],
-      [ "alexandrite_platinum_tiara", 50 ],
-      [ "pearl_platinum_tiara", 50 ],
-      [ "onyx_platinum_tiara", 50 ],
-      [ "opal_platinum_tiara", 50 ],
-      [ "ruby_platinum_tiara", 50 ],
-      [ "garnet_platinum_tiara", 50 ]
-    ]
-  },
-  {
-    "id": "pendant_necklaces_silver",
-    "type": "item_group",
-    "items": [
-      [ "silver_necklace", 50 ],
-      [ "citrine_silver_pendant_necklace", 50 ],
-      [ "diamond_silver_pendant_necklace", 50 ],
-      [ "emerald_silver_pendant_necklace", 50 ],
-      [ "peridot_silver_pendant_necklace", 50 ],
-      [ "amethyst_silver_pendant_necklace", 50 ],
-      [ "sapphire_silver_pendant_necklace", 50 ],
-      [ "aquamarine_silver_pendant_necklace", 50 ],
-      [ "blue_topaz_silver_pendant_necklace", 50 ],
-      [ "tourmaline_silver_pendant_necklace", 50 ],
-      [ "alexandrite_silver_pendant_necklace", 50 ],
-      [ "pearl_silver_pendant_necklace", 50 ],
-      [ "onyx_silver_pendant_necklace", 50 ],
-      [ "opal_silver_pendant_necklace", 50 ],
-      [ "ruby_silver_pendant_necklace", 50 ],
-      [ "garnet_silver_pendant_necklace", 50 ]
-    ]
-  },
-  {
-    "id": "pendant_necklaces_gold",
-    "type": "item_group",
-    "items": [
-      [ "gold_necklace", 50 ],
-      [ "citrine_gold_pendant_necklace", 50 ],
-      [ "diamond_gold_pendant_necklace", 50 ],
-      [ "emerald_gold_pendant_necklace", 50 ],
-      [ "peridot_gold_pendant_necklace", 50 ],
-      [ "amethyst_gold_pendant_necklace", 50 ],
-      [ "sapphire_gold_pendant_necklace", 50 ],
-      [ "aquamarine_gold_pendant_necklace", 50 ],
-      [ "blue_topaz_gold_pendant_necklace", 50 ],
-      [ "tourmaline_gold_pendant_necklace", 50 ],
-      [ "alexandrite_gold_pendant_necklace", 50 ],
-      [ "pearl_gold_pendant_necklace", 50 ],
-      [ "onyx_gold_pendant_necklace", 50 ],
-      [ "opal_gold_pendant_necklace", 50 ],
-      [ "ruby_gold_pendant_necklace", 50 ],
-      [ "garnet_gold_pendant_necklace", 50 ]
-    ]
-  },
-  {
-    "id": "pendant_necklaces_platinum",
-    "type": "item_group",
-    "items": [
-      [ "platinum_necklace", 50 ],
-      [ "citrine_platinum_pendant_necklace", 50 ],
-      [ "diamond_platinum_pendant_necklace", 50 ],
-      [ "emerald_platinum_pendant_necklace", 50 ],
-      [ "peridot_platinum_pendant_necklace", 50 ],
-      [ "amethyst_platinum_pendant_necklace", 50 ],
-      [ "sapphire_platinum_pendant_necklace", 50 ],
-      [ "aquamarine_platinum_pendant_necklace", 50 ],
-      [ "blue_topaz_platinum_pendant_necklace", 50 ],
-      [ "tourmaline_platinum_pendant_necklace", 50 ],
-      [ "alexandrite_platinum_pendant_necklace", 50 ],
-      [ "pearl_platinum_pendant_necklace", 50 ],
-      [ "onyx_platinum_pendant_necklace", 50 ],
-      [ "opal_platinum_pendant_necklace", 50 ],
-      [ "ruby_platinum_pendant_necklace", 50 ],
-      [ "garnet_platinum_pendant_necklace", 50 ]
-    ]
-  },
-  {
-    "id": "earrings_silver",
-    "type": "item_group",
-    "items": [
-      [ "silver_ear", 50 ],
-      [ "citrine_silver_earring", 50 ],
-      [ "diamond_silver_earring", 50 ],
-      [ "emerald_silver_earring", 50 ],
-      [ "peridot_silver_earring", 50 ],
-      [ "amethyst_silver_earring", 50 ],
-      [ "sapphire_silver_earring", 50 ],
-      [ "aquamarine_silver_earring", 50 ],
-      [ "blue_topaz_silver_earring", 50 ],
-      [ "tourmaline_silver_earring", 50 ],
-      [ "alexandrite_silver_earring", 50 ],
-      [ "pearl_silver_earring", 50 ],
-      [ "onyx_silver_earring", 50 ],
-      [ "opal_silver_earring", 50 ],
-      [ "ruby_silver_earring", 50 ],
-      [ "garnet_silver_earring", 50 ]
-    ]
-  },
-  {
-    "id": "earrings_gold",
-    "type": "item_group",
-    "items": [
-      [ "gold_ear", 50 ],
-      [ "citrine_gold_earring", 50 ],
-      [ "diamond_gold_earring", 50 ],
-      [ "emerald_gold_earring", 50 ],
-      [ "peridot_gold_earring", 50 ],
-      [ "amethyst_gold_earring", 50 ],
-      [ "sapphire_gold_earring", 50 ],
-      [ "aquamarine_gold_earring", 50 ],
-      [ "blue_topaz_gold_earring", 50 ],
-      [ "tourmaline_gold_earring", 50 ],
-      [ "alexandrite_gold_earring", 50 ],
-      [ "pearl_gold_earring", 50 ],
-      [ "onyx_gold_earring", 50 ],
-      [ "opal_gold_earring", 50 ],
-      [ "ruby_gold_earring", 50 ],
-      [ "garnet_gold_earring", 50 ]
-    ]
-  },
-  {
-    "id": "earrings_platinum",
-    "type": "item_group",
-    "items": [
-      [ "platinum_ear", 50 ],
-      [ "citrine_platinum_earring", 50 ],
-      [ "diamond_platinum_earring", 50 ],
-      [ "emerald_platinum_earring", 50 ],
-      [ "peridot_platinum_earring", 50 ],
-      [ "amethyst_platinum_earring", 50 ],
-      [ "sapphire_platinum_earring", 50 ],
-      [ "aquamarine_platinum_earring", 50 ],
-      [ "blue_topaz_platinum_earring", 50 ],
-      [ "tourmaline_platinum_earring", 50 ],
-      [ "alexandrite_platinum_earring", 50 ],
-      [ "pearl_platinum_earring", 50 ],
-      [ "onyx_platinum_earring", 50 ],
-      [ "opal_platinum_earring", 50 ],
-      [ "ruby_platinum_earring", 50 ],
-      [ "garnet_platinum_earring", 50 ]
-    ]
-  },
-  {
-    "id": "rings_silver",
-    "type": "item_group",
-    "items": [
-      [ "silver_ring", 50 ],
-      [ "citrine_silver_ring", 50 ],
-      [ "diamond_silver_ring", 50 ],
-      [ "emerald_silver_ring", 50 ],
-      [ "peridot_silver_ring", 50 ],
-      [ "amethyst_silver_ring", 50 ],
-      [ "sapphire_silver_ring", 50 ],
-      [ "aquamarine_silver_ring", 50 ],
-      [ "blue_topaz_silver_ring", 50 ],
-      [ "tourmaline_silver_ring", 50 ],
-      [ "alexandrite_silver_ring", 50 ],
-      [ "pearl_silver_ring", 50 ],
-      [ "onyx_silver_ring", 50 ],
-      [ "opal_silver_ring", 50 ],
-      [ "ruby_silver_ring", 50 ],
-      [ "garnet_silver_ring", 50 ]
-    ]
-  },
-  {
-    "id": "rings_gold",
-    "type": "item_group",
-    "items": [
-      [ "gold_ring", 50 ],
-      [ "citrine_gold_ring", 50 ],
-      [ "diamond_ring", 50 ],
-      [ "emerald_gold_ring", 50 ],
-      [ "peridot_gold_ring", 50 ],
-      [ "amethyst_gold_ring", 50 ],
-      [ "sapphire_gold_ring", 50 ],
-      [ "aquamarine_gold_ring", 50 ],
-      [ "blue_topaz_gold_ring", 50 ],
-      [ "tourmaline_gold_ring", 50 ],
-      [ "alexandrite_gold_ring", 50 ],
-      [ "pearl_gold_ring", 50 ],
-      [ "onyx_gold_ring", 50 ],
-      [ "opal_gold_ring", 50 ],
-      [ "ruby_gold_ring", 50 ],
-      [ "garnet_gold_ring", 50 ]
-    ]
-  },
-  {
-    "id": "rings_platinum",
-    "type": "item_group",
-    "items": [
-      [ "platinum_ring", 50 ],
-      [ "citrine_platinum_ring", 50 ],
-      [ "diamond_platinum_ring", 50 ],
-      [ "emerald_platinum_ring", 50 ],
-      [ "peridot_platinum_ring", 50 ],
-      [ "amethyst_platinum_ring", 50 ],
-      [ "sapphire_platinum_ring", 50 ],
-      [ "aquamarine_platinum_ring", 50 ],
-      [ "blue_topaz_platinum_ring", 50 ],
-      [ "tourmaline_platinum_ring", 50 ],
-      [ "alexandrite_platinum_ring", 50 ],
-      [ "pearl_platinum_ring", 50 ],
-      [ "onyx_platinum_ring", 50 ],
-      [ "opal_platinum_ring", 50 ],
-      [ "ruby_platinum_ring", 50 ],
-      [ "garnet_platinum_ring", 50 ]
-    ]
-  },
-  {
-    "id": "bracelets_silver",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "silver_bracelet", "prob": 50 },
-      { "item": "citrine_silver_bracelet", "prob": 50 },
-      { "item": "diamond_silver_bracelet", "prob": 50 },
-      { "item": "emerald_silver_bracelet", "prob": 50 },
-      { "item": "peridot_silver_bracelet", "prob": 50 },
-      { "item": "amethyst_silver_bracelet", "prob": 50 },
-      { "item": "sapphire_silver_bracelet", "prob": 50 },
-      { "item": "aquamarine_silver_bracelet", "prob": 50 },
-      { "item": "blue_topaz_silver_bracelet", "prob": 50 },
-      { "item": "tourmaline_silver_bracelet", "prob": 50 },
-      { "item": "alexandrite_silver_bracelet", "prob": 50 },
-      { "item": "pearl_silver_bracelet", "prob": 50 },
-      { "item": "onyx_silver_bracelet", "prob": 50 },
-      { "item": "opal_silver_bracelet", "prob": 50 },
-      { "item": "ruby_silver_bracelet", "prob": 50 },
-      { "item": "garnet_silver_bracelet", "prob": 50 }
-    ]
-  },
-  {
-    "id": "bracelets_gold",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "gold_bracelet", "prob": 50 },
-      { "item": "citrine_gold_bracelet", "prob": 50 },
-      { "item": "diamond_gold_bracelet", "prob": 50 },
-      { "item": "emerald_gold_bracelet", "prob": 50 },
-      { "item": "peridot_gold_bracelet", "prob": 50 },
-      { "item": "amethyst_gold_bracelet", "prob": 50 },
-      { "item": "sapphire_gold_bracelet", "prob": 50 },
-      { "item": "aquamarine_gold_bracelet", "prob": 50 },
-      { "item": "blue_topaz_gold_bracelet", "prob": 50 },
-      { "item": "tourmaline_gold_bracelet", "prob": 50 },
-      { "item": "alexandrite_gold_bracelet", "prob": 50 },
-      { "item": "pearl_gold_bracelet", "prob": 50 },
-      { "item": "onyx_gold_bracelet", "prob": 50 },
-      { "item": "opal_gold_bracelet", "prob": 50 },
-      { "item": "ruby_gold_bracelet", "prob": 50 },
-      { "item": "garnet_gold_bracelet", "prob": 50 }
-    ]
-  },
-  {
-    "id": "bracelets_platinum",
-    "type": "item_group",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "platinum_bracelet", "prob": 50 },
-      { "item": "citrine_platinum_bracelet", "prob": 50 },
-      { "item": "diamond_platinum_bracelet", "prob": 50 },
-      { "item": "emerald_platinum_bracelet", "prob": 50 },
-      { "item": "peridot_platinum_bracelet", "prob": 50 },
-      { "item": "amethyst_platinum_bracelet", "prob": 50 },
-      { "item": "sapphire_platinum_bracelet", "prob": 50 },
-      { "item": "aquamarine_platinum_bracelet", "prob": 50 },
-      { "item": "blue_topaz_platinum_bracelet", "prob": 50 },
-      { "item": "tourmaline_platinum_bracelet", "prob": 50 },
-      { "item": "alexandrite_platinum_bracelet", "prob": 50 },
-      { "item": "pearl_platinum_bracelet", "prob": 50 },
-      { "item": "onyx_platinum_bracelet", "prob": 50 },
-      { "item": "opal_platinum_bracelet", "prob": 50 },
-      { "item": "ruby_platinum_bracelet", "prob": 50 },
-      { "item": "garnet_platinum_bracelet", "prob": 50 }
-    ]
-  },
-  {
     "type": "item_group",
     "id": "shirts_summer_womens",
     "subtype": "distribution",
@@ -4063,11 +3645,7 @@
     "type": "item_group",
     "//": "decorative earrings and miscellaneous ear accessories worn by people.",
     "subtype": "distribution",
-    "items": [
-      { "group": "earrings_silver", "prob": 70 },
-      { "group": "earrings_gold", "prob": 25 },
-      { "group": "earrings_platinum", "prob": 5 }
-    ]
+    "items": [ [ "silver_earring", 70 ], [ "gold_earring", 30 ] ]
   },
   {
     "id": "accessory_bracelet",
@@ -4080,7 +3658,8 @@
       { "item": "copper_bracelet", "prob": 50, "count": [ 1, 2 ] },
       { "item": "silver_bracelet", "prob": 40, "count": [ 1, 2 ] },
       { "item": "gold_bracelet", "prob": 10, "count": [ 1, 2 ] },
-      { "item": "platinum_bracelet", "prob": 10 }
+      { "item": "cowrie_bracelet", "prob": 5, "count": [ 1, 2 ] },
+      { "item": "platinum_bracelet", "prob": 5 }
     ]
   },
   {
@@ -4088,11 +3667,7 @@
     "type": "item_group",
     "//": "decorative or functional teeth miscellany that may be present in people's mouths.",
     "subtype": "distribution",
-    "items": [
-      { "item": "gold_dental_grill", "prob": 50, "count": [ 1, 2 ] },
-      { "item": "platinum_dental_grill", "prob": 30, "count": [ 1, 2 ] },
-      { "item": "diamond_dental_grill", "prob": 10 }
-    ]
+    "items": [ { "item": "gold_dental_grill", "prob": 50, "count": [ 1, 2 ] } ]
   },
   {
     "id": "accessory_necklace",
@@ -4100,19 +3675,17 @@
     "//": "decorative necklaces or neck accessories worn by people.",
     "subtype": "distribution",
     "items": [
-      { "item": "bead_necklace", "prob": 80, "count": [ 1, 2 ] },
-      { "item": "copper_necklace", "prob": 60, "count": [ 1, 2 ] },
-      { "item": "silver_necklace", "prob": 40, "count": [ 1, 2 ] },
-      { "item": "gold_necklace", "prob": 20, "count": [ 1, 2 ] },
-      { "item": "platinum_necklace", "prob": 10, "count": [ 1, 2 ] },
-      { "item": "copper_locket", "prob": 60, "count": [ 1, 2 ] },
-      { "item": "silver_locket", "prob": 40, "count": [ 1, 2 ] },
-      { "item": "gold_locket", "prob": 20, "count": [ 1, 2 ] },
-      { "item": "platinum_locket", "prob": 10, "count": [ 1, 2 ] },
+      { "item": "bead_necklace", "prob": 80 },
+      { "item": "copper_necklace", "prob": 60 },
+      { "item": "silver_necklace", "prob": 40 },
+      { "item": "gold_necklace", "prob": 20 },
+      { "item": "silver_locket", "prob": 40 },
+      { "item": "gold_locket", "prob": 20 },
       { "item": "collarpin", "prob": 10 },
-      { "item": "bronze_medal", "prob": 6 },
-      { "item": "silver_medal", "prob": 4 },
-      { "item": "gold_medal", "prob": 2 },
+      { "item": "cowrie_necklace", "prob": 10 },
+      { "item": "bronze_medal", "prob": 3 },
+      { "item": "silver_medal", "prob": 2 },
+      { "item": "gold_medal", "prob": 1 },
       { "item": "small_relic", "prob": 10 },
       { "item": "holy_symbol", "prob": 10 },
       { "item": "holy_symbol_wood", "prob": 10 }
@@ -4185,9 +3758,10 @@
       { "item": "american_flag", "prob": 1 },
       { "item": "pride_flag", "prob": 1 },
       { "item": "national_flag", "prob": 1 },
+      { "item": "protest_flag", "prob": 1 },
       { "item": "state_flag", "prob": 1 },
-      { "item": "tool_belt", "prob": 2 },
-      { "group": "flask_liquor", "prob": 3 }
+      { "item": "tool_belt", "prob": 1 },
+      { "group": "flask_liquor", "prob": 2 }
     ]
   },
   {
@@ -4198,15 +3772,15 @@
     "items": [
       { "group": "clothing_glasses", "prob": 50 },
       { "group": "clothing_watch", "prob": 15 },
-      { "item": "copper_ring", "prob": 6, "count": [ 1, 3 ] },
-      { "item": "silver_ring", "prob": 4, "count": [ 1, 3 ] },
-      { "item": "gold_ring", "prob": 3, "count": [ 1, 3 ] },
-      { "item": "diamond_ring", "prob": 1 },
-      { "item": "platinum_ring", "prob": 1 },
-      { "group": "accessory_earring", "prob": 15 },
-      { "group": "accessory_bracelet", "prob": 15 },
-      { "group": "accessory_teeth", "prob": 2 },
-      { "group": "accessory_necklace", "prob": 15 },
+      { "item": "wooden_hair_beads", "prob": 1 },
+      { "item": "copper_ring", "prob": 4, "count": [ 1, 3 ] },
+      { "item": "silver_ring", "prob": 2, "count": [ 1, 3 ] },
+      { "item": "gold_ring", "prob": 1, "count": [ 1, 2 ] },
+      { "item": "ring_engagement", "prob": 10 },
+      { "item": "ring_wedding", "prob": 10 },
+      { "group": "accessory_earring", "prob": 5 },
+      { "group": "accessory_bracelet", "prob": 5 },
+      { "group": "accessory_necklace", "prob": 10 },
       { "group": "accessory_sportsgear", "prob": 5 },
       { "item": "folding_poncho", "prob": 5 },
       { "item": "leather_belt", "prob": 30 },
@@ -4214,8 +3788,7 @@
       { "item": "binoculars", "prob": 2 },
       { "item": "whistle", "prob": 3 },
       { "item": "harmonica_holder", "prob": 1 },
-      { "group": "costume_accessories", "prob": 1 },
-      { "group": "costume_jewelry", "prob": 1 }
+      { "group": "costume_accessories", "prob": 1 }
     ]
   },
   {
@@ -4225,8 +3798,8 @@
     "subtype": "distribution",
     "items": [
       { "group": "accesories_personal_womens_child", "prob": 380 },
-      { "item": "ring_engagement", "prob": 5 },
-      { "item": "ring_purity", "prob": 10 }
+      { "group": "accesories_personal_mens", "prob": 30 },
+      { "item": "ring_purity", "prob": 1 }
     ]
   },
   {
@@ -4236,12 +3809,11 @@
     "subtype": "distribution",
     "items": [
       { "item": "hairpin", "prob": 90 },
-      { "item": "fc_hairpin", "prob": 70 },
-      { "item": "copper_hairpin", "prob": 60 },
-      { "item": "silver_hairpin", "prob": 50 },
-      { "item": "gold_hairpin", "prob": 30 },
-      { "item": "platinum_hairpin", "prob": 10 },
-      { "item": "barrette", "prob": 60 },
+      { "item": "fc_hairpin", "prob": 50 },
+      { "item": "copper_hairpin", "prob": 20 },
+      { "item": "silver_hairpin", "prob": 10 },
+      { "item": "gold_hairpin", "prob": 5 },
+      { "item": "barrette", "prob": 70 },
       { "item": "pearl_collar", "prob": 5 },
       { "item": "jade_brooch", "prob": 5 }
     ]
@@ -4256,9 +3828,7 @@
       { "item": "tie_clipon", "prob": 10 },
       { "item": "tie_necktie", "prob": 80 },
       { "item": "tieclip", "prob": 20 },
-      { "item": "cufflinks", "prob": 20 },
-      { "item": "cufflinks_intricate", "prob": 5 },
-      { "item": "ring_signet", "prob": 30 },
+      { "item": "ring_signet", "prob": 1 },
       { "item": "tie_skinny", "prob": 20 }
     ]
   },

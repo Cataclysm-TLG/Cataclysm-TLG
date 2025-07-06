@@ -38,7 +38,6 @@
       { "group": "costume_gloves", "prob": 5 },
       { "group": "costume_hats_hoods", "prob": 20 },
       { "group": "costume_jackets", "prob": 10 },
-      { "group": "costume_jewelry", "prob": 15 },
       { "group": "costume_masks", "prob": 20 },
       { "group": "costume_pants_skirts", "prob": 10 },
       { "group": "costume_shirts", "prob": 10 },
@@ -193,41 +192,6 @@
       { "item": "fedora", "prob": 10 },
       { "item": "porkpie", "prob": 10 },
       { "item": "nun_wimple", "prob": 12 }
-    ]
-  },
-  {
-    "type": "item_group",
-    "id": "costume_jewelry",
-    "//": "jewelry for costumes, cosplay and costume parties",
-    "subtype": "distribution",
-    "entries": [ { "group": "costume_jewelry_dark", "prob": 50 }, { "group": "costume_jewelry_vampire", "prob": 50 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "costume_jewelry_dark",
-    "//": "jewelry for costumes, cosplay and costume parties",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "onyx_silver_cufflinks", "variant": "dark_cufflinks", "prob": 10 },
-      { "item": "onyx_silver_earring", "variant": "dark_earring", "prob": 25 },
-      { "item": "onyx_silver_ring", "variant": "dark_ring", "prob": 25 },
-      { "item": "onyx_silver_bracelet", "variant": "dark_bracelet", "prob": 10 },
-      { "item": "onyx_silver_pendant_necklace", "variant": "dark_necklace", "prob": 15 },
-      { "item": "onyx_silver_tiara", "variant": "dark_tiara", "prob": 15 }
-    ]
-  },
-  {
-    "type": "item_group",
-    "id": "costume_jewelry_vampire",
-    "//": "jewelry for costumes, cosplay and costume parties",
-    "subtype": "distribution",
-    "entries": [
-      { "item": "ruby_silver_cufflinks", "variant": "vampire_cufflinks", "prob": 10 },
-      { "item": "ruby_silver_earring", "variant": "vampire_earring", "prob": 25 },
-      { "item": "ruby_silver_ring", "variant": "vampire_ring", "prob": 25 },
-      { "item": "ruby_silver_bracelet", "variant": "vampire_bracelet", "prob": 10 },
-      { "item": "ruby_silver_pendant_necklace", "variant": "vampire_necklace", "prob": 15 },
-      { "item": "ruby_silver_tiara", "variant": "vampire_tiara", "prob": 15 }
     ]
   },
   {

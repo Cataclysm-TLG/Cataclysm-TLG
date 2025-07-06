@@ -420,7 +420,7 @@
   {
     "id": "hoof_sole_l",
     "type": "sub_body_part",
-    "max_coverage": 25,
+    "max_coverage": 35,
     "parent": "hoof_l",
     "side": 1,
     "opposite": "hoof_sole_r",
@@ -430,17 +430,17 @@
   {
     "id": "hoof_toe_l",
     "type": "sub_body_part",
-    "max_coverage": 10,
+    "max_coverage": 35,
     "parent": "hoof_l",
     "side": 1,
     "opposite": "hoof_toe_r",
-    "name_multiple": "toe",
+    "name_multiple": "toes",
     "name": "left toe"
   },
   {
     "id": "hoof_fetlock_l",
     "type": "sub_body_part",
-    "max_coverage": 20,
+    "max_coverage": 5,
     "parent": "hoof_l",
     "side": 1,
     "opposite": "hoof_fetlock_r",
@@ -450,7 +450,7 @@
   {
     "id": "hoof_frog_l",
     "type": "sub_body_part",
-    "max_coverage": 20,
+    "max_coverage": 25,
     "parent": "hoof_l",
     "side": 1,
     "opposite": "hoof_frog_r",
@@ -460,7 +460,7 @@
   {
     "id": "hoof_sole_r",
     "type": "sub_body_part",
-    "max_coverage": 25,
+    "max_coverage": 35,
     "parent": "hoof_r",
     "side": 2,
     "opposite": "hoof_sole_l",
@@ -470,7 +470,7 @@
   {
     "id": "hoof_toe_r",
     "type": "sub_body_part",
-    "max_coverage": 10,
+    "max_coverage": 35,
     "parent": "hoof_r",
     "side": 2,
     "opposite": "hoof_toe_l",
@@ -480,7 +480,7 @@
   {
     "id": "hoof_fetlock_r",
     "type": "sub_body_part",
-    "max_coverage": 20,
+    "max_coverage": 5,
     "parent": "hoof_r",
     "side": 2,
     "opposite": "hoof_fetlock_l",
@@ -490,7 +490,7 @@
   {
     "id": "hoof_frog_r",
     "type": "sub_body_part",
-    "max_coverage": 20,
+    "max_coverage": 25,
     "parent": "hoof_r",
     "side": 2,
     "opposite": "hoof_frog_l",

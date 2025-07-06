@@ -721,6 +721,7 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "chipped",
     "acid_dmg_verb": "burned",
+    "breathability": "IMPERMEABLE",
     "//": "burn data copied from chitin",
     "burn_data": [
       { "fuel": 0, "smoke": 0, "burn": 0.0001 },

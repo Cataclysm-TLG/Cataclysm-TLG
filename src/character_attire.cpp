@@ -134,7 +134,7 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
             character_parts.set( bp.id() );
         }
         covered.intersect_set( character_parts );
-        if( covered.none() ) {
+        if( covered.none() && !it.has_flag( flag_NO_WEAR_EFFECT ) ) {
             return ret_val<void>::make_failure( _( "You lack the appropriate body parts to wear that." ) );
         }
     }

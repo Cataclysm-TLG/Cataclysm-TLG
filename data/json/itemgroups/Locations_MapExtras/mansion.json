@@ -77,8 +77,6 @@
       { "group": "stash_drugs", "prob": 5 },
       [ "file", 70 ],
       { "group": "jewelry_front", "prob": 40 },
-      { "group": "costume_jewelry_vampire", "prob": 5 },
-      { "group": "costume_jewelry_dark", "prob": 5 },
       { "group": "mansion_guns", "prob": 95 },
       { "group": "mansion_guns", "prob": 80 }
     ]
@@ -94,9 +92,7 @@
       { "item": "money_bundle_hundred", "prob": 20, "count": [ 1, 2 ] },
       { "group": "stash_drugs", "prob": 5 },
       [ "file", 70 ],
-      { "group": "jewelry_front", "prob": 40 },
-      { "group": "costume_jewelry_vampire", "prob": 5 },
-      { "group": "costume_jewelry_dark", "prob": 5 }
+      { "group": "jewelry_front", "prob": 40 }
     ]
   },
   {
@@ -631,8 +627,6 @@
       [ "vampire_fangs", 5 ],
       { "item": "cape_costume", "variant": "vampire_cape", "prob": 2 },
       { "item": "cloak", "prob": 2 },
-      { "group": "costume_jewelry_dark", "prob": 20 },
-      { "group": "costume_jewelry_vampire", "prob": 20 },
       { "item": "cane_toy", "prob": 5 },
       { "item": "cloak_costume", "variant": "wizard_cloak", "prob": 2 },
       [ "grim_reaper_robe", 4 ],
@@ -689,7 +683,6 @@
       { "group": "costume_skirts", "prob": 10 },
       { "group": "costume_pants", "prob": 2 },
       { "group": "costume_masks", "prob": 15 },
-      { "group": "costume_jewelry", "prob": 5 },
       { "group": "costume_hats_hoods", "prob": 2 },
       { "group": "costume_gloves", "prob": 2 },
       { "group": "costume_dresses", "prob": 10 },
@@ -1064,9 +1057,8 @@
       [ "mask_guy_fawkes", 10 ],
       [ "gold_ear", 10 ],
       [ "bone_tainted", 5 ],
-      [ "silver_ear", 5 ],
+      [ "silver_earring", 5 ],
       [ "bead_ear", 5 ],
-      [ "platinum_ear", 1 ],
       { "group": "corpse_mansion", "prob": 5 },
       { "group": "neckties", "prob": 1 }
     ]
@@ -1311,9 +1303,7 @@
       [ "comb_pocket", 15 ],
       [ "curler_hair", 10 ],
       [ "curling_iron", 15 ],
-      [ "brush_toilet", 15 ],
-      { "group": "costume_jewelry_dark", "prob": 2 },
-      { "group": "costume_jewelry_vampire", "prob": 2 }
+      [ "brush_toilet", 15 ]
     ]
   },
   {

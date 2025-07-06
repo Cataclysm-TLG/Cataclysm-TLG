@@ -1993,7 +1993,7 @@
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 8 } ],
         "covers": [ "hoof_l", "hoof_r" ],
         "specifically_covers": [ "hoof_frog_l", "hoof_frog_r" ],
-        "coverage": 90,
+        "coverage": 100,
         "encumbrance": 0,
         "rigid_layer_only": true
       },
