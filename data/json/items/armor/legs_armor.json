@@ -150,7 +150,16 @@
     "name": { "str": "pair of biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "material": [ "acidchitin" ],
-    "melee_damage": { "bash": 5 }
+    "melee_damage": { "bash": 5 },
+    "armor": [
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 6,
+        "coverage": 85,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
+        "rigid_layer_only": true
+      }
+    ]
   },
   {
     "id": "xl_legguard_acidchitin",
