@@ -1962,7 +1962,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
     int liquid_remaining = liquid_amount;
     for( auto iter = worn.rbegin(); iter != worn.rend(); ) {
         item &armor = *iter;
-        if( !armor.covers( bp ) || armor.has_flag( flag_INTEGRATED ) ) {
+        if( !armor.covers( bp ) ) {
             ++iter;
             continue;
         }
