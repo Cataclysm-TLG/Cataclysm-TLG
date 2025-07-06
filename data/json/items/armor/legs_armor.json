@@ -98,7 +98,7 @@
     "id": "legguard_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of chitin leg guards", "str_pl": "pairs of chitin leg guards" },
+    "name": { "str": "pair of chitin greaves", "str_pl": "pairs of chitin greaves" },
     "description": "A pair of guards for the lower legs and knees made from the exoskeletons of insects.",
     "weight": "790 g",
     "volume": "5000 ml",
@@ -116,8 +116,8 @@
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 2,
-        "coverage": 90,
+        "encumbrance": 4,
+        "coverage": 85,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
         "rigid_layer_only": true
       }
@@ -128,7 +128,7 @@
     "id": "xl_legguard_chitin",
     "copy-from": "legguard_chitin",
     "type": "ARMOR",
-    "name": { "str": "pair of chitin leg guards", "str_pl": "pairs of chitin leg guards" },
+    "name": { "str": "pair of chitin greaves", "str_pl": "pairs of chitin greaves" },
     "material": [ "chitin" ],
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -137,7 +137,7 @@
     "id": "xs_legguard_chitin",
     "type": "ARMOR",
     "copy-from": "legguard_chitin",
-    "name": { "str": "pair of chitin leg guards", "str_pl": "pairs of chitin leg guards" },
+    "name": { "str": "pair of chitin greaves", "str_pl": "pairs of chitin greaves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -147,7 +147,7 @@
     "looks_like": "legguard_chitin",
     "type": "ARMOR",
     "price_postapoc": "12 USD 50 cent",
-    "name": { "str": "pair of biosilicified chitin leg guards", "str_pl": "pairs of biosilicified chitin leg guards" },
+    "name": { "str": "pair of biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "material": [ "acidchitin" ],
     "melee_damage": { "bash": 5 }
@@ -156,7 +156,7 @@
     "id": "xl_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
     "type": "ARMOR",
-    "name": { "str": "pair of biosilicified chitin leg guards", "str_pl": "pairs of biosilicified chitin leg guards" },
+    "name": { "str": "pair of biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -165,7 +165,7 @@
     "id": "xs_legguard_acidchitin",
     "copy-from": "legguard_acidchitin",
     "type": "ARMOR",
-    "name": { "str": "pair of biosilicified chitin leg guards", "str_pl": "pairs of biosilicified chitin leg guards" },
+    "name": { "str": "pair of biosilicified chitin greaves", "str_pl": "pairs of biosilicified chitin greaves" },
     "material": [ "acidchitin" ],
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }

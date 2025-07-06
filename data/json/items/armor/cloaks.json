@@ -19,7 +19,7 @@
     "flags": [ "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "POCKETS", "COLLAR" ],
     "use_action": [ "POST_UP" ],
     "armor": [
-      { "encumbrance": 13, "coverage": 60, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 10, "coverage": 60, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 60,
@@ -1801,7 +1801,7 @@
     "material_thickness": 0.5,
     "flags": [ "OVERSIZE", "BELTED", "POCKETS" ],
     "armor": [
-      { "encumbrance": 6, "coverage": 95, "covers": [ "torso", "arm_r", "arm_l", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 8, "coverage": 95, "covers": [ "torso", "arm_r", "arm_l", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 95,
@@ -1858,7 +1858,7 @@
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 4,
+        "encumbrance": 2,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -1885,11 +1885,11 @@
     "color": "light_blue",
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "STURDY", "POCKETS" ],
     "armor": [
-      { "encumbrance": 8, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 6, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 8,
+        "encumbrance": 3,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -1916,7 +1916,7 @@
     "flags": [ "OVERSIZE", "BELTED", "POCKETS" ],
     "variant_type": "generic",
     "armor": [
-      { "encumbrance": 2, "coverage": 50, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 3, "coverage": 50, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 50,
@@ -1959,11 +1959,11 @@
     "flags": [ "OVERSIZE", "BELTED", "POCKETS", "HOOD" ],
     "variant_type": "generic",
     "armor": [
-      { "encumbrance": 2, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 3, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 3,
+        "encumbrance": 2,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -2002,11 +2002,11 @@
     "environmental_protection": 3,
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "RAINPROOF", "POCKETS" ],
     "armor": [
-      { "encumbrance": 9, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 8, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 9,
+        "encumbrance": 4,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -2035,7 +2035,7 @@
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 8,
+        "encumbrance": 4,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -2060,11 +2060,11 @@
     "environmental_protection": 3,
     "flags": [ "OVERSIZE", "HOOD", "BELTED", "POCKETS" ],
     "armor": [
-      { "encumbrance": 5, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
+      { "encumbrance": 6, "coverage": 65, "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 5,
+        "encumbrance": 3,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -2102,7 +2102,7 @@
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 65,
-        "encumbrance": 25,
+        "encumbrance": 12,
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "layers": [ "BELTED" ]
       }
@@ -2157,18 +2157,18 @@
     "environmental_protection": 1,
     "flags": [ "BELTED", "OVERSIZE", "POCKETS" ],
     "armor": [
-      { "encumbrance": 5, "coverage": 85, "covers": [ "torso" ] },
+      { "encumbrance": 7, "coverage": 85, "covers": [ "torso" ] },
       {
         "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ],
         "coverage": 100,
-        "encumbrance": 5,
+        "encumbrance": 7,
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
         "layers": [ "BELTED" ]
       },
       {
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 85,
-        "encumbrance": 5,
+        "encumbrance": 0,
         "specifically_covers": [ "arm_upper_r", "arm_upper_l" ],
         "layers": [ "BELTED" ]
       }
@@ -2263,7 +2263,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_draped_l", "leg_draped_r" ],
         "coverage": 100,
-        "encumbrance": 8
+        "encumbrance": 4
       },
       { "covers": [ "arm_l", "arm_r" ], "coverage": 40, "encumbrance": 8 },
       { "covers": [ "wing_bird_l", "wing_bird_r" ], "coverage": 40, "encumbrance": 8 }
