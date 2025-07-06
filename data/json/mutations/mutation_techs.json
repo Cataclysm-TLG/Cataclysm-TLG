@@ -591,7 +591,7 @@
     "messages": [ "You maul %s", "<npcname> mauls %s" ],
     "unarmed_allowed": true,
     "basic": true,
-    "weighting": -4,
+    "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_bite" ],
