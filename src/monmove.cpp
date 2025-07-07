@@ -767,9 +767,9 @@ static float get_stagger_adjust( const tripoint &source, const tripoint &destina
 {
     // TODO: push this down into rl_dist
     const float initial_dist =
-        trigdist ? trig_dist( source, destination ) : rl_dist( source, destination );
+        trig_dist_z_adjust( source, destination );
     const float new_dist =
-        trigdist ? trig_dist( next_step, destination ) : rl_dist( next_step, destination );
+        trig_dist_z_adjust( next_step, destination );
     // If we return 0, it wil cancel the action.
     return std::max( 0.01f, initial_dist - new_dist );
 }
@@ -1111,9 +1111,7 @@ void monster::move()
         moved = false;
         float switch_chance = 0.0f;
         const bool can_bash = bash_skill() > 0;
-        // This is a float and using trig_dist() because that Does the Right Thing(tm)
-        // in both circular and roguelike distance modes.
-        const float distance_to_target = trig_dist( pos_bub(), destination );
+        const float distance_to_target = trig_dist_z_adjust( pos(), destination.raw() );
         for( tripoint &candidate : squares_closer_to( pos_bub().raw(), destination.raw() ) ) {
             // rare scenario when monster is on the border of the map and it's goal is outside of the map
             if( !here.inbounds( candidate ) ) {
@@ -1229,7 +1227,7 @@ void monster::move()
                 }
             }
 
-            const float progress = distance_to_target - trig_dist( tripoint( candidate.xy(),
+            const float progress = distance_to_target - trig_dist_z_adjust( tripoint( candidate.xy(),
                                    candidate.z + rampPos ), destination.raw() );
             // The x2 makes the first (and most direct) path twice as likely,
             // since the chance of switching is 1/1, 1/4, 1/6, 1/8

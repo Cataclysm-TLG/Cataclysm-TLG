@@ -196,7 +196,7 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
         if( source.sees( *critter ) ) {
             damage = attack_spell.dps( source, *critter );
         }
-        const int distance_to_me = rl_dist( source.pos_bub(), potential_target );
+        const int distance_to_me = trig_dist_z_adjust( source.pos(), potential_target.raw() );
         const bool friendly_fire = att == Creature::Attitude::FRIENDLY &&
                                    !source.rules.has_flag( ally_rule::avoid_friendly_fire );
         int attitude_mult = 3;

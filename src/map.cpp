@@ -2626,25 +2626,31 @@ int map::combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &
                             const vehicle *ignored_vehicle,
                             const int modifier, const bool flying, const bool via_ramp ) const
 {
-    static constexpr std::array<int, 4> mults = { 0, 50, 71, 100 };
+    static constexpr std::array<int, 5> mults = { 0, 50, 71, 100, 100 };
     const int cost1 = move_cost( from, ignored_vehicle );
     const int cost2 = move_cost( to, ignored_vehicle );
-    // Multiply cost depending on the number of differing axes
-    // 0 if all axes are equal, 100% if only 1 differs, 141% for 2, 200% for 3
-    size_t match = trigdist ? ( from.x() != to.x() ) + ( from.y() != to.y() ) +
-                   ( from.z() != to.z() ) : 1;
+    size_t match = 0;
+    if( from.x() != to.x() ) {
+        match += 1;
+    }
+    if( from.y() != to.y() ) {
+        match += 1;
+    }
+    if( from.z() != to.z() ) {
+        match += 2;  // Z levels count double.
+    }
+    // Clamp match to max index of mults
+    match = std::min( match, mults.size() - 1 );
     if( flying || from.z() == to.z() ) {
         return ( cost1 + cost2 + modifier ) * mults[match] / 2;
     }
-
-    // Inter-z-level movement by foot (not flying)
     if( !valid_move( from, to, false, via_ramp ) ) {
         return 0;
     }
-
     // TODO: Penalize for using stairs
     return ( cost1 + cost2 + modifier ) * mults[match] / 2;
 }
+
 
 bool map::valid_move( const tripoint &from, const tripoint &to,
                       const bool bash, const bool flying, const bool via_ramp ) const
@@ -8190,7 +8196,7 @@ std::vector<tripoint_bub_ms> map::find_clear_path( const tripoint_bub_ms &source
     const int max_start_offset = std::abs( ideal_start_offset ) * 2 + 1;
     for( int horizontal_offset = -1; horizontal_offset <= max_start_offset; ++horizontal_offset ) {
         int candidate_offset = horizontal_offset * ( start_sign == 0 ? 1 : start_sign );
-        if( sees( source, destination, rl_dist( source, destination ),
+        if( sees( source, destination, trig_dist_z_adjust( source.raw(), destination.raw() ),
                   candidate_offset, /*with_fields=*/true, /*allow_cached=*/false ) ) {
             return line_to( source, destination, candidate_offset, 0 );
         }
@@ -8330,7 +8336,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     // Ugly `if` for now
     if( f.z() == t.z() ) {
         if( ( range >= 0 &&
-            range < trig_dist( f.raw(), t.raw() ) ) ||
+              range < trig_dist( f.raw(), t.raw() ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }

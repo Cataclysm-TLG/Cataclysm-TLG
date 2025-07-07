@@ -4921,27 +4921,8 @@ void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes,
 {
     std::vector<tripoint_abs_omt> note_pts;
 
-    if( trigdist ) {
-        for( const tripoint_abs_omt &pos : points_on_radius_circ( origin, range ) ) {
-            note_pts.emplace_back( pos );
-        }
-    } else {
-        //North Limit
-        for( int x = origin.x() - range; x < origin.x() + range + 1; x++ ) {
-            note_pts.emplace_back( x, origin.y() - range, origin.z() );
-        }
-        //South
-        for( int x = origin.x() - range; x < origin.x() + range + 1; x++ ) {
-            note_pts.emplace_back( x, origin.y() + range, origin.z() );
-        }
-        //West
-        for( int y = origin.y() - range; y < origin.y() + range + 1; y++ ) {
-            note_pts.emplace_back( origin.x() - range, y, origin.z() );
-        }
-        //East
-        for( int y = origin.y() - range; y < origin.y() + range + 1; y++ ) {
-            note_pts.emplace_back( origin.x() + range, y, origin.z() );
-        }
+    for( const tripoint_abs_omt &pos : points_on_radius_circ( origin, range ) ) {
+        note_pts.emplace_back( pos );
     }
 
     for( tripoint_abs_omt &pt : note_pts ) {

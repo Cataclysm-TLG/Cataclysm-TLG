@@ -405,8 +405,12 @@ static const skill_id skill_pistol( "pistol" );
 static const skill_id skill_speech( "speech" );
 static const skill_id skill_swimming( "swimming" );
 static const skill_id skill_throw( "throw" );
+static const skill_id skill_unarmed( "unarmed" );
 
+static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_HUMAN( "HUMAN" );
+static const species_id species_ROBOT( "ROBOT" );
+static const species_id species_ROBOT_FLYING( "ROBOT_FLYING" );
 
 static const start_location_id start_location_sloc_shelter_a( "sloc_shelter_a" );
 
@@ -3139,6 +3143,39 @@ float Character::fine_detail_vision_mod( const tripoint &p ) const
 
     return std::min( own_light, ambient_light );
 }
+
+
+float Character::throwforce( Creature &victim ) const
+{
+    int their_size = victim.enum_size();
+    int your_size = enum_size();
+    int size_factor = std::max( 0, ( their_size - 3 ) ) * 15;
+    // A zombie hulk has a throwforce of 96. Fully evolved crab mutant starting from 10 strength has 25 strength. At 5/5 skills.
+    // A fully evolved crab mutant hits ~98. Big mutants can rapidly catch up and exceed this by adding bionics, but are subject to
+    // stamina, pain etc. while monsters are not.
+    float strength_factor = 0;
+    if( get_arm_str() > 10 ) {
+        strength_factor = get_arm_str() / 100;
+    }
+    // TODO: Get encumbrance and burden involved here.
+    float throwforce = ( ( ( get_arm_str() * ( 1.1 + strength_factor ) + ( ( get_skill_level(
+                                 skill_unarmed ) * 2 ) + get_skill_level( skill_throw ) / 4 ) + 2 *
+                             ( your_size - their_size ) ) - size_factor ) *
+                         2 );
+    if( has_active_bionic( bio_railgun ) && ( victim.in_species( species_ROBOT ) ||
+            victim.in_species( species_ROBOT_FLYING ) ) ) {
+        throwforce += 16;
+    }
+    if( has_active_bionic( bio_railgun ) && grab_1.victim->in_species( species_CYBORG ) ) {
+        throwforce += 8;
+    }
+    map &here = get_map();
+    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, victim.pos() ) ) {
+        throwforce *= 0.25;
+    }
+    return throwforce;
+}
+
 
 units::energy Character::get_power_level() const
 {

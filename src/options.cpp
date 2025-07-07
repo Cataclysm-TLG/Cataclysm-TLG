@@ -1689,11 +1689,6 @@ void options_manager::add_options_general()
     add_option_group( "general", Group( "misc_general_opts", to_translation( "Misc Options" ),
                                         to_translation( "Miscellaneous Options." ) ),
     [&]( const std::string & page_id ) {
-        add( "CIRCLEDIST", page_id, to_translation( "Circular distances" ),
-             to_translation( "If true, the game will calculate range in a realistic way: light sources will be circles, diagonal movement will cover more ground and take longer.  If false, everything is square: moving to the northwest corner of a building takes as long as moving to the north wall." ),
-             true
-           );
-
         add( "DROP_EMPTY", page_id, to_translation( "Drop empty containers" ),
              to_translation( "Set to drop empty containers after use.  No: Don't drop any.  - Watertight: All except watertight containers.  - All: Drop all containers." ),
         { { "no", to_translation( "No" ) }, { "watertight", to_translation( "Watertight" ) }, { "all", to_translation( "All" ) } },
@@ -4079,7 +4074,6 @@ std::string options_manager::migrateOptionValue( const std::string &name,
 void options_manager::update_options_cache()
 {
     // cache to global due to heavy usage.
-    trigdist = ::get_option<bool>( "CIRCLEDIST" );
     use_tiles = ::get_option<bool>( "USE_TILES" );
 
     prevent_occlusion = ::get_option<int>( "PREVENT_OCCLUSION" );

@@ -15,7 +15,9 @@
 template <typename T> struct enum_traits;
 struct rl_vec2d;
 
-extern bool trigdist;
+// This was extern bool trigdist, but that option has not worked well for years.
+// The option is removed, but some code still relies on this bool.
+constexpr bool trigdist = true;
 
 /**
  * Calculate base of an isosceles triangle

@@ -700,7 +700,7 @@ void avatar_action::swim( map &m, avatar &you, const tripoint &p )
         m.board_vehicle( you.pos_bub(), &you );
     }
     // 500 means we can't swim, so for now that's the cap.
-    you.mod_moves( -( ( movecost > 500 ? 500 : movecost ) * ( trigdist && diagonal ? M_SQRT2 : 1 ) ) );
+    you.mod_moves( -( ( movecost > 500 ? 500 : movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
     you.inv->rust_iron_items();
 
     if( !you.is_mounted() ) {
@@ -1026,55 +1026,29 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     // TODO: Move this to Character or ranged. As of this writing, bionics.h can be removed from header at that time.
     if( you.has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         if( you.grab_1.victim != nullptr ) {
-            int your_size = static_cast<std::underlying_type_t<creature_size>>( you.get_size() );
-            int their_size = 0;
-            if( you.grab_1.victim->is_monster() ) {
-                their_size = static_cast<std::underlying_type_t<creature_size>>
-                             ( you.grab_1.victim->as_monster()->get_size() );
-            } else {
-                their_size = static_cast<std::underlying_type_t<creature_size>>
-                             ( you.grab_1.victim->as_character()->get_size() );
-            }
-            int size_factor = std::max( 0, ( their_size - 3 ) ) * 15;
-            // A zombie hulk has a throwforce of 96. Fully evolved crab mutant starting from 10 strength has 25 strength. At 5/5 skills.
-            // A fully evolved crab mutant hits ~98. Big mutants can rapidly catch up and exceed this by adding bionics, but are subject to
-            // stamina, pain etc. while monsters are not.
-            float strength_factor = 0;
-            if( you.get_arm_str() > 10 ) {
-                strength_factor = you.get_arm_str() / 100;
-            }
-            // TODO: Get encumbrance and burden involved here.
-            float throwforce = ( ( ( you.get_arm_str() * ( 1.1 + strength_factor ) + ( ( you.get_skill_level(
-                                         skill_unarmed ) * 2 ) + you.get_skill_level( skill_throw ) / 4 ) + 2 *
-                                     ( your_size - their_size ) ) - size_factor ) *
-                                 2 );
+            int your_size = you.enum_size();
+            int their_size = you.grab_1.victim->enum_size();
+            float throwforce = 0.0f;
             bool railgun = false;
             if( you.has_active_bionic( bio_railgun ) && ( you.grab_1.victim->in_species( species_ROBOT ) ||
-                    you.grab_1.victim->in_species( species_ROBOT_FLYING ) ) ) {
-                throwforce += 16;
+                    you.grab_1.victim->in_species( species_ROBOT_FLYING ) ||
+                    you.grab_1.victim->in_species( species_CYBORG ) ) ) {
                 railgun = true;
             }
-            if( you.has_active_bionic( bio_railgun ) && you.grab_1.victim->in_species( species_CYBORG ) ) {
-                throwforce += 8;
-                railgun = true;
-            }
-            // 16_gram comes from Character::get_standard_stamina_cost()
-            // TODO: Standardize to 10 str at 20_gram in both functions
-            int weight_cost = you.grab_1.victim->get_weight() / 16_gram;
+            int weight_cost = you.grab_1.victim->get_weight() / 20_gram;
             // Adjust for relative size and thrower skill.
             weight_cost /= ( ( 2 / ( static_cast<float>( their_size ) / static_cast<float>
                                      ( your_size ) ) ) + 1 * ( ( you.get_skill_level(
-                                                 skill_throw ) + you.get_skill_level( skill_unarmed ) ) / 16 ) );
-            int stamina_mod = ( weight_cost + 50 ) * -1 * you.get_modifier(
-                                  character_modifier_melee_stamina_cost_mod );
+                                                 skill_throw ) + you.get_skill_level( skill_unarmed ) ) / 20 ) );
+            int stamina_mod = std::max( 75, static_cast<int>( ( weight_cost + 50 ) * -1 * you.get_modifier(
+                                            character_modifier_melee_stamina_cost_mod ) ) );
 
             // Ensure that characters with high skill but low strength aren't throwing people across the street.
             // 10 strength = average.
             // fling_creature()'s range is throwforce/10. Use the same calc here so that trajectory() knows how
             // far to let the cursor extend.
-            map &here = get_map();
-            if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.grab_1.victim->pos() ) ) {
-                throwforce *= 0.25;
+            if( you.grab_1.victim ) {
+                throwforce = you.as_character()->throwforce( *you.grab_1.victim );
             }
             int range = static_cast<int>( throwforce / 10 );
             if( !you.try_break_relax_gas( _( "You concentrate mightily, and your body obeys!" ),
