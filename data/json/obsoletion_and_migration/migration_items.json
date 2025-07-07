@@ -2374,19 +2374,9 @@
     "replace": "soup_vegetable"
   },
   {
-    "id": "dry_veggy",
-    "type": "MIGRATION",
-    "replace": "dry_vegetable"
-  },
-  {
     "id": "raw_veggy",
     "type": "MIGRATION",
     "replace": "raw_vegetable"
-  },
-  {
-    "id": "dry_veggy",
-    "type": "MIGRATION",
-    "replace": "dry_vegetable"
   },
   {
     "id": "deluxe_veggy_rice",
@@ -2457,6 +2447,21 @@
     "id": "pemmican_veggy",
     "type": "MIGRATION",
     "replace": "pemmican_vegetable"
+  },
+  {
+    "id": "rehydrated_veggy",
+    "type": "MIGRATION",
+    "replace": "rehydrated_vegetable"
+  },
+  {
+    "id": "veggy_wild_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "sandwich_veggy_cheese",
+    "type": "MIGRATION",
+    "replace": "sandwich_vegetable_cheese"
   },
   {
     "id": "sandwich_veggy",
