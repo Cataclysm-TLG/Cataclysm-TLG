@@ -3037,7 +3037,7 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
         attack_air( p.raw() );
         move_pause();
     } else if( here.passable( p ) && !here.has_flag( ter_furn_flag::TFLAG_DOOR, p ) ) {
-        bool diag = trigdist && posx() != p.x() && posy() != p.y();
+        bool diag = posx() != p.x() && posy() != p.y();
         if( is_mounted() ) {
             const double base_moves = run_cost( here.combined_movecost( pos_bub(), p ),
                                                 diag ) * 100.0 / mounted_creature->get_speed();
@@ -3193,8 +3193,8 @@ void npc::avoid_friendly_fire()
     candidates.erase( candidates.begin() );
     std::sort( candidates.begin(), candidates.end(),
     [&tar, &center]( const tripoint_bub_ms & l, const tripoint_bub_ms & r ) {
-        return ( rl_dist( l, tar ) - rl_dist( l, center ) ) <
-               ( rl_dist( r, tar ) - rl_dist( r, center ) );
+        return ( trig_dist_z_adjust( l.raw(), tar.raw() ) - trig_dist_z_adjust( l.raw(), center.raw() ) ) <
+               ( trig_dist_z_adjust( r.raw(), tar.raw() ) - trig_dist_z_adjust( r.raw(), center.raw() ) );
     } );
 
     for( const tripoint_bub_ms &pt : candidates ) {

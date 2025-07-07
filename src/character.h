@@ -863,6 +863,8 @@ class Character : public Creature, public visitable
 
         float get_stamina_dodge_modifier() const;
 
+        float throwforce( Creature &victim ) const;
+
         /** Called after the player has successfully dodged an attack */
         void on_dodge( Creature *source, float difficulty, float training_level = 0.0f ) override;
         /** Called after the player has tryed to dodge an attack */

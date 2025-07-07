@@ -15,8 +15,6 @@
 #include "units.h"
 #include "units_fwd.h"
 
-bool trigdist;
-
 double iso_tangent( double distance, const units::angle &vertex )
 {
     return tan( vertex / 2 )  * distance * 2;
@@ -257,10 +255,7 @@ std::vector <tripoint> line_to( const tripoint &loc1, const tripoint &loc2, int 
 
 float rl_dist_exact( const tripoint &loc1, const tripoint &loc2 )
 {
-    if( trigdist ) {
-        return trig_dist( loc1, loc2 );
-    }
-    return square_dist( loc1, loc2 );
+    return trig_dist( loc1, loc2 );
 }
 
 int manhattan_dist( const point &loc1, const point &loc2 )
@@ -946,26 +941,8 @@ void calc_ray_end( units::angle angle, const int range, const tripoint &p, tripo
         angle += 360_degrees;
     }
     out.z = p.z;
-    if( trigdist ) {
-        out.x = p.x + range * cos( angle );
-        out.y = p.y + range * sin( angle );
-    } else {
-        int mult = 0;
-        if( angle >= 135_degrees && angle <= 315_degrees ) {
-            mult = -1;
-        } else {
-            mult = 1;
-        }
-
-        if( angle <= 45_degrees || ( 135_degrees <= angle && angle <= 215_degrees ) ||
-            315_degrees < angle ) {
-            out.x = p.x + range * mult;
-            out.y = p.y + range * tan( angle ) * mult;
-        } else {
-            out.x = p.x + range * 1 / tan( angle ) * mult;
-            out.y = p.y + range * mult;
-        }
-    }
+    out.x = p.x + range * cos( angle );
+    out.y = p.y + range * sin( angle );
 }
 
 units::angle coord_to_angle( const tripoint &a, const tripoint &b )

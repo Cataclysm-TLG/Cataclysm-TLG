@@ -2087,6 +2087,50 @@ static int print_ranged_chance( const catacurses::window &w, int line_number,
     }
 }
 
+
+static int print_throwforce( const catacurses::window &w, int line_number, float throwforce )
+{
+    std::string panel_type = panel_manager::get_manager().get_current_layout_id();
+    Character &you = get_player_character();
+    const float weary_mult = you.exertion_adjusted_move_multiplier( EXPLOSIVE_EXERCISE );
+    item weap = null_item_reference();
+    int movecost = ( -100 - you.attack_speed( weap ) / weary_mult );
+    // Start printing by panel type, inside each branch whether to output numbers or "bars"
+    if( panel_type == "legacy_labels_narrow_sidebar" || panel_type == "legacy_compact_sidebar" ) {
+        // TODO: who uses this? this is broken likely since work started
+        // on sidebar widgets and yet nobody complains...
+        if( throwforce < 25 ) {
+            right_print( w, line_number++, 1, c_light_green, string_format( _( "Throw Force: Low" ) ) );
+        } else if( throwforce < 60 ) {
+            right_print( w, line_number++, 1, c_yellow, string_format( _( "Throw Force: Moderate" ) ) );
+        } else {
+            right_print( w, line_number++, 1, c_red, string_format( _( "Throw Force: High" ) ) );
+        }
+        right_print( w, line_number++, 1, c_light_blue, string_format( _( "%s %d" ), _( "Move Cost:" ),
+                     movecost ) );
+        return line_number;
+
+    } else { // print the "legacy classic" one
+        // there's more legacy sidebars but appear to not be used
+        int column_number = 1;
+        if( !( panel_type == "compact" || panel_type == "labels-narrow" ) ) {
+            std::string label = _( "Throwing Creature" );
+            mvwprintw( w, point( column_number, line_number ), label );
+            column_number += utf8_width( label ) + 1; // 1 for whitespace after 'Symbols:'
+        }
+    }
+    if( throwforce < 25 ) {
+        right_print( w, line_number++, 1, c_light_green, string_format( _( "Throw Force: Low" ) ) );
+    } else if( throwforce < 60 ) {
+        right_print( w, line_number++, 1, c_yellow, string_format( _( "Throw Force: Moderate" ) ) );
+    } else {
+        right_print( w, line_number++, 1, c_red, string_format( _( "Throw Force: High" ) ) );
+    }
+    right_print( w, line_number++, 1, c_light_blue, string_format( _( "%s %d" ), _( "Move Cost:" ),
+                 movecost ) );
+    return line_number;
+}
+
 // Whether player character knows creature's position and can roughly track it with the aim cursor
 static bool pl_sees( const Creature &cr )
 {
@@ -2173,36 +2217,33 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
         target = nullptr;
     }
     item weapon = null_item_reference();
-
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, false ) );
-    const double range = trig_dist_z_adjust( you.pos(), target_pos );
-
+    double range = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
-
-    static const std::vector<confidence_rating> confidence_config_critter = {{
-            { accuracy_critical, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
-            { accuracy_standard, '+', "light_gray", translate_marker_context( "aim_confidence", "Normal" ) },
+    float throwforce = 0.0f;
+    if( you.grab_1.victim ) {
+        throwforce = you.throwforce( *you.grab_1.victim );
+    }
+    range = throwforce / 10;
+    float distance = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
+    distance /= range;
+    throwforce *= distance;
+    static const std::vector<confidence_rating> throwforce_config_critter = {{
+            { 80, '*', "green", translate_marker_context( "aim_confidence", "Great" ) },
+            { 60, '+', "light_gray", translate_marker_context( "aim_confidence", "Normal" ) },
             { accuracy_grazing, '|', "magenta", translate_marker_context( "aim_confidence", "Graze" ) }
         }
     };
-    static const std::vector<confidence_rating> confidence_config_object = {{
-            { accuracy_grazing, '*', "white", translate_marker_context( "aim_confidence", "Hit" ) }
-        }
-    };
-    const auto &confidence_config = target != nullptr ?
-                                    confidence_config_critter : confidence_config_object;
-
     const target_ui::TargetMode throwing_target_mode = target_ui::TargetMode::ThrowCreature;
     Target_attributes attributes( range, target_size,
                                   get_map().ambient_light_at( tripoint_bub_ms( target_pos ) ),
                                   you.sees( target_pos ) );
-
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
-            throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes,
+            throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes,
             tripoint_bub_ms( target_pos ),
             item_location() );
 
-    text_y = print_ranged_chance( w, text_y, aim_chances, 0 );
+    text_y = print_throwforce( w, 3, throwforce );
 }
 
 std::vector<aim_type> Character::get_aim_types( const item &gun ) const
