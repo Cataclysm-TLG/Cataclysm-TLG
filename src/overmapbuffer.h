@@ -33,6 +33,13 @@ class npc;
 class overmap;
 class overmap_special_batch;
 class vehicle;
+enum class cube_direction : int;
+enum class oter_travel_cost_type : int;
+namespace om_direction
+{
+enum class type : int;
+}  // namespace om_direction
+struct horde_entity;
 struct mapgen_arguments;
 struct mongroup;
 struct region_settings;
@@ -489,7 +496,7 @@ class overmapbuffer
         /**
          * Spawn a specified monster type at a specified location on an overmap.
          */
-        monster &spawn_monster( const tripoint_abs_ms &p, mtype_id id );
+        horde_entity &spawn_monster( const tripoint_abs_ms &p, mtype_id id );
         /**
          * Despawn the monster back onto the overmap. The monsters position
          * (monster::pos()) is interpreted as relative to the main map.
