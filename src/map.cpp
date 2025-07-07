@@ -8359,7 +8359,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // Handle direct vertical neighbor (1 tile away, different Z)
-    if( rl_dist( f, t ) == 1 && f.z() != t.z() ) {
+    if( trig_dist_z_adjust( f.raw(), t.raw() ) == 1 && f.z() != t.z() ) {
         const bool going_up = t.z() > f.z();
         const tripoint_bub_ms &lower = going_up ? f : t;
         const tripoint_bub_ms &upper = going_up ? t : f;

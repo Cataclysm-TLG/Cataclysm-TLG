@@ -2190,10 +2190,18 @@ void inventory_selector::_add_map_items( tripoint const &target, item_category c
 void inventory_selector::add_nearby_items( int radius )
 {
     if( radius >= 0 ) {
+        const tripoint &center = u.pos();
         map &here = get_map();
-        for( const tripoint &pos : closest_points_first( u.pos(), radius ) ) {
-            // can not reach this -> can not access its contents
-            if( u.pos() != pos && !here.clear_path( u.pos(), pos, rl_dist( u.pos(), pos ), 1, 100 ) ) {
+        for( const tripoint &pos : closest_points_first( center, radius ) ) {
+            if( square_dist( center, pos ) <= 1 ) {
+                add_map_items( pos );
+                add_vehicle_items( pos );
+                continue;
+            }
+            int dist = ( radius <= 1 ) ?
+                       square_dist( center, pos ) :
+                       static_cast<int>( trig_dist_z_adjust( center, pos ) );
+            if( !here.clear_path( center, pos, dist, 1, 100 ) ) {
                 continue;
             }
             add_map_items( pos );
