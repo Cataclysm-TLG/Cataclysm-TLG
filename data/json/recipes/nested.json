@@ -2446,7 +2446,7 @@
     "name": "pemmican",
     "description": "Recipes related to making pemmican.",
     "skill_used": "cooking",
-    "nested_category_data": [ "pemmican", "pemmican_veggy", "pemmican_meat" ]
+    "nested_category_data": [ "pemmican", "pemmican_vegetable", "pemmican_meat" ]
   },
   {
     "id": "nested_chairs",

@@ -1296,7 +1296,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         mt.families.practice_dissect( you );
     } else {
         you.practice( skill_survival, std::max( 0, practice ), std::max( mt.size - creature_size::medium,
-                      0 ) + 4 );
+                      0 ) + 5 );
     }
 
     // after this point, if there was a liquid handling from the harvest,

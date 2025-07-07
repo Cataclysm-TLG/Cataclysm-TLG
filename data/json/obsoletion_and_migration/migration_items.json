@@ -723,7 +723,7 @@
     "replace": "bread"
   },
   {
-    "id": "sandwich_veggy_wheat_free",
+    "id": "sandwich_vegetable_wheat_free",
     "type": "MIGRATION",
     "replace": "bread"
   },
@@ -788,7 +788,7 @@
     "replace": "bread"
   },
   {
-    "id": "sandwich_veggy_cheese_wheat_free",
+    "id": "sandwich_vegetable_cheese_wheat_free",
     "type": "MIGRATION",
     "replace": "bread"
   },
@@ -2352,5 +2352,145 @@
     "id": "silver_ear",
     "type": "MIGRATION",
     "replace": "silver_earring"
+  },
+  {
+    "id": "pizza_veggy",
+    "type": "MIGRATION",
+    "replace": "pizza_vegetable"
+  },
+  {
+    "id": "mre_veggy",
+    "type": "MIGRATION",
+    "replace": "mre_vegetarian_taco"
+  },
+  {
+    "id": "dry_veggy",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable"
+  },
+  {
+    "id": "soup_veggy",
+    "type": "MIGRATION",
+    "replace": "soup_vegetable"
+  },
+  {
+    "id": "dry_veggy",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable"
+  },
+  {
+    "id": "raw_veggy",
+    "type": "MIGRATION",
+    "replace": "raw_vegetable"
+  },
+  {
+    "id": "dry_veggy",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable"
+  },
+  {
+    "id": "deluxe_veggy_rice",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_rice"
+  },
+  {
+    "id": "veggy_tainted",
+    "type": "MIGRATION",
+    "replace": "vegetable_tainted"
+  },
+  {
+    "id": "veggy",
+    "type": "MIGRATION",
+    "replace": "vegetable"
+  },
+  {
+    "id": "soup_veggy",
+    "type": "MIGRATION",
+    "replace": "soup_vegetable"
+  },
+  {
+    "id": "curry_veggy",
+    "type": "MIGRATION",
+    "replace": "curry_vegetable"
+  },
+  {
+    "id": "veggy_salad",
+    "type": "MIGRATION",
+    "replace": "vegetable_salad"
+  },
+  {
+    "id": "veggy_pickled",
+    "type": "MIGRATION",
+    "replace": "vegetable_pickled"
+  },
+  {
+    "id": "pie_veggy",
+    "type": "MIGRATION",
+    "replace": "pie_vegetable"
+  },
+  {
+    "id": "veggy_wild",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild"
+  },
+  {
+    "id": "veggy_aspic",
+    "type": "MIGRATION",
+    "replace": "vegetable_aspic"
+  },
+  {
+    "id": "veggy_salted",
+    "type": "MIGRATION",
+    "replace": "vegetable_salted"
+  },
+  {
+    "id": "veggy_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_cooked"
+  },
+  {
+    "id": "samosa_veggy",
+    "type": "MIGRATION",
+    "replace": "samosa_vegetable"
+  },
+  {
+    "id": "pemmican_veggy",
+    "type": "MIGRATION",
+    "replace": "pemmican_vegetable"
+  },
+  {
+    "id": "sandwich_veggy",
+    "type": "MIGRATION",
+    "replace": "sandwich_vegetable"
+  },
+  {
+    "id": "dry_veggy_tainted",
+    "type": "MIGRATION",
+    "replace": "dry_vegetable_tainted"
+  },
+  {
+    "id": "seed_veggy_wild",
+    "type": "MIGRATION",
+    "replace": "seed_vegetable_wild"
+  },
+  {
+    "id": "sushi_veggyroll",
+    "type": "MIGRATION",
+    "replace": "sushi_vegetableroll"
+  },
+  {
+    "id": "deluxe_veggy_beans",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_beans"
+  },
+  {
+    "id": "deluxe_veggy_beansnrice",
+    "type": "MIGRATION",
+    "replace": "deluxe_vegetable_beansnrice"
+  },
+  {
+    "id": "veggy_pickled_fried",
+    "type": "MIGRATION",
+    "replace": "vegetable_pickled_fried"
   }
 ]

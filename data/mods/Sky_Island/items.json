@@ -321,7 +321,7 @@
     "stack_size": 100,
     "looks_like": "seed_wild_herbs",
     "flags": [ "UNBREAKABLE" ],
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ".",
     "color": "light_gray",
     "ammo_type": "components"

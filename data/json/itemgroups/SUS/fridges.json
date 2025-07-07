@@ -54,10 +54,10 @@
       { "prob": 30, "sealed": false, "group": "pickle_jar_glass_sealed_1_inf" },
       { "prob": 5, "sealed": false, "group": "meat_pickled_jar_glass_sealed_1_inf" },
       { "prob": 10, "sealed": false, "group": "fish_pickled_jar_glass_sealed_1_inf" },
-      { "prob": 20, "sealed": false, "group": "veggy_pickled_jar_glass_sealed_1_inf" },
+      { "prob": 20, "sealed": false, "group": "vegetable_pickled_jar_glass_sealed_1_inf" },
       {
         "distribution": [
-          { "item": "veggy_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },
+          { "item": "vegetable_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },
           { "item": "blt", "count": [ 1, -1 ], "prob": 5, "container-item": "null", "entry-wrapper": "wrapper" },
           { "item": "protein_shake", "charges": [ 1, -1 ], "prob": 5 },
           { "item": "fries", "count": [ 1, -1 ], "prob": 5, "container-item": "null", "entry-wrapper": "box_small" },
@@ -87,7 +87,7 @@
             "entry-wrapper": "box_small"
           },
           {
-            "item": "pizza_veggy",
+            "item": "pizza_vegetable",
             "count": [ 1, -1 ],
             "prob": 8,
             "container-item": "null",
@@ -545,7 +545,7 @@
       { "item": "frozen_lemonade", "charges": [ 1, -1 ], "prob": 10 },
       { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 },
       { "prob": 10, "group": "pizza_meat_box_small_1_inf" },
-      { "prob": 10, "group": "pizza_veggy_box_small_1_inf" },
+      { "prob": 10, "group": "pizza_vegetable_box_small_1_inf" },
       { "prob": 10, "group": "pizza_cheese_box_small_1_inf" },
       { "prob": 10, "group": "pizza_supreme_box_small_1_inf" },
       { "prob": 10, "group": "nachosv_bag_plastic_1_inf" },
@@ -810,12 +810,12 @@
       { "item": "tofu", "prob": 40, "count": [ 0, 5 ] },
       { "prob": 22, "sealed": false, "group": "sauerkraut_jar_glass_sealed_1_inf" },
       { "prob": 30, "sealed": false, "group": "pickle_jar_glass_sealed_1_inf" },
-      { "prob": 30, "sealed": false, "group": "veggy_pickled_jar_glass_sealed_1_inf" },
-      { "prob": 25, "group": "veggy_salad_bowl_plastic_1_inf" },
+      { "prob": 30, "sealed": false, "group": "vegetable_pickled_jar_glass_sealed_1_inf" },
+      { "prob": 25, "group": "vegetable_salad_bowl_plastic_1_inf" },
       { "item": "protein_shake", "charges": [ 1, -1 ], "prob": 25 },
       { "prob": 4, "group": "fries_box_small_1_inf" },
       { "prob": 4, "group": "onion_rings_box_small_1_inf" },
-      { "prob": 10, "group": "pizza_veggy_box_small_1_inf" },
+      { "prob": 10, "group": "pizza_vegetable_box_small_1_inf" },
       { "prob": 10, "group": "nachosv_bag_plastic_1_inf" },
       { "item": "gelatin_dessert_vegan", "prob": 15 },
       { "item": "gelatin_dessert_vegan_fruit", "prob": 15 },
@@ -946,10 +946,10 @@
       { "prob": 10, "sealed": false, "group": "pickle_jar_glass_sealed_1_inf" },
       { "prob": 5, "sealed": false, "group": "meat_pickled_jar_glass_sealed_1_inf" },
       { "prob": 10, "sealed": false, "group": "fish_pickled_jar_glass_sealed_1_inf" },
-      { "prob": 10, "sealed": false, "group": "veggy_pickled_jar_glass_sealed_1_inf" },
+      { "prob": 10, "sealed": false, "group": "vegetable_pickled_jar_glass_sealed_1_inf" },
       {
         "distribution": [
-          { "item": "veggy_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },
+          { "item": "vegetable_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },
           { "item": "blt", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "wrapper" },
           { "item": "protein_shake", "charges": [ 1, -1 ], "prob": 5 },
           { "item": "fries", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "box_small" },
@@ -979,7 +979,7 @@
             "entry-wrapper": "box_small"
           },
           {
-            "item": "pizza_veggy",
+            "item": "pizza_vegetable",
             "count": [ 1, -1 ],
             "prob": 10,
             "container-item": "null",
@@ -1400,11 +1400,11 @@
       { "prob": 25, "group": "butter_wrapper_32" },
       { "item": "pudding", "prob": 15 },
       { "item": "gelatin_dessert_processed", "prob": 5 },
-      { "prob": 10, "group": "veggy_salad_bowl_plastic_1_inf" },
+      { "prob": 10, "group": "vegetable_salad_bowl_plastic_1_inf" },
       { "prob": 7, "group": "blt_wrapper_1_inf" },
       { "item": "protein_shake", "charges": [ 1, -1 ], "prob": 3 },
       { "prob": 6, "group": "sandwich_t_wrapper_1_inf" },
-      { "prob": 5, "group": "sandwich_veggy_wrapper_1_inf" },
+      { "prob": 5, "group": "sandwich_vegetable_wrapper_1_inf" },
       { "prob": 1, "group": "sandwich_jam_butter_wrapper_1_inf" },
       { "prob": 3, "group": "sandwich_jam_wrapper_1_inf" },
       { "prob": 3, "group": "sandwich_cheese_wrapper_1_inf" },
@@ -1486,11 +1486,11 @@
   },
   {
     "type": "item_group",
-    "id": "veggy_pickled_jar_glass_sealed_1_inf",
+    "id": "vegetable_pickled_jar_glass_sealed_1_inf",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "veggy_pickled", "container-item": "null", "count": [ 1, -1 ] } ]
+    "entries": [ { "item": "vegetable_pickled", "container-item": "null", "count": [ 1, -1 ] } ]
   },
   {
     "type": "item_group",
@@ -1542,11 +1542,11 @@
   },
   {
     "type": "item_group",
-    "id": "pizza_veggy_box_small_1_inf",
+    "id": "pizza_vegetable_box_small_1_inf",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "box_small",
-    "entries": [ { "item": "pizza_veggy", "container-item": "null", "count": [ 1, -1 ] } ]
+    "entries": [ { "item": "pizza_vegetable", "container-item": "null", "count": [ 1, -1 ] } ]
   },
   {
     "type": "item_group",
@@ -1662,19 +1662,19 @@
   },
   {
     "type": "item_group",
-    "id": "veggy_salad_bowl_plastic_1_inf",
+    "id": "vegetable_salad_bowl_plastic_1_inf",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "bowl_plastic",
-    "entries": [ { "item": "veggy_salad", "container-item": "null", "count": [ 1, -1 ] } ]
+    "entries": [ { "item": "vegetable_salad", "container-item": "null", "count": [ 1, -1 ] } ]
   },
   {
     "type": "item_group",
-    "id": "sandwich_veggy_wrapper_1_inf",
+    "id": "sandwich_vegetable_wrapper_1_inf",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "wrapper",
-    "entries": [ { "item": "sandwich_veggy", "container-item": "null", "count": [ 1, -1 ] } ]
+    "entries": [ { "item": "sandwich_vegetable", "container-item": "null", "count": [ 1, -1 ] } ]
   },
   {
     "type": "item_group",

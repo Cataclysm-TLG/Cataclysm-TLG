@@ -331,11 +331,11 @@
     "description": "A handful of colorful fruit- and soda-flavored vegan gummy candies made from agar instead of animal gelatin.  They have kind of a strange texture, but they're still tasty.",
     "price": "60 cent",
     "price_postapoc": "66 cent",
-    "material": [ "junk", "veggy" ],
+    "material": [ "junk", "vegetable" ],
     "volume": "30 ml",
     "flags": [ "EDIBLE_FROZEN" ],
     "fun": 4,
-    "vitamins": [ [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -598,11 +598,11 @@
     "description": "Roasted coffee beans coated with dark chocolate, a natural source of concentrated caffeine.",
     "price": "10 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy", "junk" ],
+    "material": [ "vegetable", "junk" ],
     "volume": "8 ml",
     "fun": 2,
     "flags": [ "EDIBLE_FROZEN", "NO_AUTO_CONSUME" ],
-    "vitamins": [ [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -875,11 +875,11 @@
     "spoils_in": "1 day",
     "price_postapoc": "2 USD",
     "container": "bag_plastic_small",
-    "material": [ "junk", "veggy" ],
+    "material": [ "junk", "vegetable" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 16,
-    "vitamins": [ [ "calcium", 8 ], [ "iron", 17 ], [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 8 ], [ "iron", 17 ], [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -895,12 +895,12 @@
     "description": "Salted chips made from corn tortillas, smothered in cheese and beans.  Delicious, even if you're not a vegetarian.",
     "price": "1 USD",
     "price_postapoc": "166 cent",
-    "material": [ "veggy", "milk", "junk" ],
+    "material": [ "vegetable", "milk", "junk" ],
     "primary_material": "processed_food",
     "volume": "166 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 20,
-    "vitamins": [ [ "calcium", 13 ], [ "iron", 17 ], [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ], [ "milk_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 13 ], [ "iron", 17 ], [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ], [ "milk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1174,11 +1174,11 @@
     "description": "Battered and fried onions.  Crunchy and delicious.",
     "price": "4 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy", "junk" ],
+    "material": [ "vegetable", "junk" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "EDIBLE_FROZEN", "FREEZERBURN" ],
     "fun": 6,
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 7 ], [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 7 ], [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1432,9 +1432,9 @@
     "color": "light_green",
     "description": "A vegan friendly homemade jiggly, sugary treat made from agar and sugar, flavored with fruit juice.  A kid favorite pre-Cataclysm.  They'll never know the difference.",
     "fun": 20,
-    "material": [ "veggy", "junk" ],
+    "material": [ "vegetable", "junk" ],
     "copy-from": "gelatin_dessert_base",
-    "vitamins": [ [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1443,9 +1443,9 @@
     "color": "light_green",
     "description": "A vegan friendly jiggly, sugary treat made from agar and sugar, flavored with fruit juice and set with fruit.  A kid favorite pre-Cataclysm and a healthy treat.",
     "fun": 15,
-    "material": [ "veggy", "junk" ],
+    "material": [ "vegetable", "junk" ],
     "copy-from": "gelatin_dessert_base",
-    "vitamins": [ [ "veggy_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1486,11 +1486,11 @@
     "description": "A famous Italian pasta dish made with red sauce, pecorino and bacon.",
     "price": "1 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "wheat", "veggy" ],
+    "material": [ "wheat", "vegetable" ],
     "primary_material": "wheat",
     "volume": "250 ml",
     "flags": [ "EDIBLE_FROZEN" ],
-    "vitamins": [ [ "calcium", 10 ], [ "iron", 6 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 10 ], [ "iron", 6 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ],
     "fun": 8
   },
   {

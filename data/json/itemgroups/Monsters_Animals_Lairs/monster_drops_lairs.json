@@ -5,9 +5,9 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "veggy", "prob": 30 },
+      { "item": "vegetable", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
-      { "item": "veggy_tainted", "prob": 35 },
+      { "item": "vegetable_tainted", "prob": 35 },
       { "item": "royal_jelly", "prob": 8 },
       { "item": "ant_egg", "prob": 5 },
       { "item": "bee_sting", "prob": 5 },
@@ -22,9 +22,9 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "veggy", "prob": 30 },
+      { "item": "vegetable", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
-      { "item": "veggy_tainted", "prob": 35 },
+      { "item": "vegetable_tainted", "prob": 35 },
       { "item": "apple", "prob": 70 },
       { "item": "orange", "prob": 65 },
       { "item": "banana", "prob": 40 },

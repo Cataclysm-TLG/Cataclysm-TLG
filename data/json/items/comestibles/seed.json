@@ -9,11 +9,11 @@
     "weight": "1 g",
     "price": "1 cent",
     "price_postapoc": "1 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ".",
     "color": "brown",
     "//": "Note that in most cases this item typically represents many seeds, enough to fill an entire tile with plants.",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "abstract": "seed_fruit",
@@ -313,9 +313,9 @@
     "looks_like": "lotus_rhizome",
     "calories": 25,
     "description": "Boiled lotus seeds, with a soft taste.",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "100 ml",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -661,13 +661,13 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "seed_veggy_wild",
+    "id": "seed_vegetable_wild",
     "copy-from": "seed",
     "name": { "str_sp": "wild vegetable stems" },
     "color": "green",
     "description": "Some wild vegetable stems.",
     "flags": [ "PLANTABLE_SEED", "NUTRIENT_OVERRIDE", "INEDIBLE" ],
-    "seed_data": { "plant_name": "wild vegetable", "fruit": "veggy_wild", "byproducts": [ "withered" ], "grow": "91 days" },
+    "seed_data": { "plant_name": "wild vegetable", "fruit": "vegetable_wild", "byproducts": [ "withered" ], "grow": "91 days" },
     "volume": "2 ml"
   },
   {
@@ -914,13 +914,13 @@
     "//": "4 per cup",
     "price": "20 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
     "volume": "62 ml",
     "flags": [ "SMOKED" ],
     "freezing_point": -274,
     "fun": 3,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -937,21 +937,21 @@
     "description": "Coffee pods taken from a Kentucky coffeetree.  If washed thoroughly and roasted, you could use them to make a dark and bitter brew much like coffee.",
     "price": "25 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
     "volume": "62 ml",
     "fun": -10,
     "flags": [ "HIDDEN_POISON", "RAW" ],
     "use_action": [ "POISON" ],
     "//": "USDA states that the pods of the Kentucky coffeetree contain a toxic alkaloid broken down in the roasting process, so they're poisonous",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
     "id": "coffee_bean",
     "container": "bag_plastic_small",
     "price": "1 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
     "name": { "str_sp": "coffee beans" },
     "symbol": ".",
@@ -962,7 +962,7 @@
     "addiction_potential": 1,
     "calories": 549,
     "volume": "6 ml",
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 8 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 8 ], [ "vegetable_allergen", 1 ] ],
     "flags": [ "EDIBLE_FROZEN", "RAW", "NO_AUTO_CONSUME", "INEDIBLE", "NUTRIENT_OVERRIDE" ],
     "//": "You can technically eat 20 or 30 coffee beans before getting sick, but any more than that and you'll have a very bad time.  This is a negligible amount of calories so we either need to greatly reduce portion size here or find a way to simulate the agony someone would be in after eating an entire cup of the things.",
     "weight": "106 g"
@@ -1077,7 +1077,7 @@
     "weight": "1 g",
     "price": "1 cent",
     "price_postapoc": "1 cent",
-    "material": [ "veggy", "bone" ],
+    "material": [ "vegetable", "bone" ],
     "symbol": ".",
     "flags": [ "TRADER_AVOID" ],
     "vitamins": [ [ "human_flesh_vitamin", 10 ] ],

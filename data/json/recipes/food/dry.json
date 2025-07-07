@@ -378,7 +378,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "dry_veggy",
+    "result": "dry_vegetable",
     "charges": 1,
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRY",
@@ -391,7 +391,7 @@
     "//": "highly variable - most hover around 100-120g but some (tomato) are much heavier.  Basing this off plant marrow (119g) since it's the most common ingredient",
     "components": [
       [
-        [ "veggy_any_fresh_uncooked", 1, "LIST" ],
+        [ "vegetable_any_fresh_uncooked", 1, "LIST" ],
         [ "dandelion_cooked", 1 ],
         [ "burdock_cooked", 1 ],
         [ "bamboo_cooked", 1 ],
@@ -403,7 +403,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "dry_veggy",
+    "result": "dry_vegetable",
     "charges": 1,
     "category": "CC_FOOD",
     "id_suffix": "frozen_ingredients",
@@ -417,7 +417,7 @@
     "//": "highly variable - most hover around 100-120g but some (tomato) are much heavier.  Basing this off plant marrow (119g) since it's the most common ingredient",
     "components": [
       [
-        [ "veggy_any_fresh_uncooked", 1, "LIST" ],
+        [ "vegetable_any_fresh_uncooked", 1, "LIST" ],
         [ "dandelion_cooked", 1 ],
         [ "burdock_cooked", 1 ],
         [ "bamboo_cooked", 1 ],
@@ -677,7 +677,7 @@
     "components": [ [ [ "buckwheat_stalks", 1 ] ] ]
   },
   {
-    "result": "dry_veggy_tainted",
+    "result": "dry_vegetable_tainted",
     "charges": 1,
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
@@ -690,10 +690,10 @@
     "autolearn": true,
     "tools": [ [ [ "dehydrating_heat", 12, "LIST" ] ] ],
     "//": "119g of stuff",
-    "components": [ [ [ "veggy_tainted", 1 ] ] ]
+    "components": [ [ [ "vegetable_tainted", 1 ] ] ]
   },
   {
-    "result": "dry_veggy_tainted",
+    "result": "dry_vegetable_tainted",
     "charges": 1,
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
@@ -707,7 +707,7 @@
     "autolearn": true,
     "tools": [ [ [ "dehydrating_heat", 12, "LIST" ] ], [ [ "surface_heat", 2, "LIST" ] ] ],
     "//": "119g of stuff, 2u heat to 'cook'",
-    "components": [ [ [ "veggy_tainted", 1 ] ] ]
+    "components": [ [ [ "vegetable_tainted", 1 ] ] ]
   },
   {
     "type": "recipe",

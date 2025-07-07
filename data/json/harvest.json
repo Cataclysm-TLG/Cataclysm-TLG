@@ -102,7 +102,7 @@
   {
     "id": "cattails_summer_harv",
     "type": "harvest",
-    "entries": [ { "drop": "cattail_rhizome" }, { "drop": "cattail_stalk", "base_num": [ 1, 4 ] } ]
+    "entries": [ { "drop": "cattail_rhizome", "base_num": [ 0, 1 ] }, { "drop": "cattail_stalk", "base_num": [ 1, 4 ] } ]
   },
   {
     "id": "lotus_harv",
@@ -1820,7 +1820,7 @@
       { "drop": "meat_tainted", "type": "flesh", "mass_ratio": 0.25 },
       { "drop": "blood_tainted", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "fat_tainted", "type": "flesh", "mass_ratio": 0.08 },
-      { "drop": "veggy_tainted", "type": "offal", "mass_ratio": 0.15 },
+      { "drop": "vegetable_tainted", "type": "offal", "mass_ratio": 0.15 },
       { "drop": "tainted_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "bone_tainted", "type": "bone", "mass_ratio": 0.1 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 }
@@ -1835,7 +1835,7 @@
       { "drop": "meat_tainted", "type": "flesh", "mass_ratio": 0.25 },
       { "drop": "blood_tainted", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "fat_tainted", "type": "flesh", "mass_ratio": 0.08 },
-      { "drop": "veggy_tainted", "type": "offal", "mass_ratio": 0.15 },
+      { "drop": "vegetable_tainted", "type": "offal", "mass_ratio": 0.15 },
       { "drop": "tainted_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "bone_tainted", "type": "bone", "mass_ratio": 0.1 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 }
@@ -2184,7 +2184,7 @@
     "type": "harvest",
     "message": "<fungaloid_harvest>",
     "entries": [
-      { "drop": "veggy_tainted", "type": "flesh", "mass_ratio": 0.5 },
+      { "drop": "vegetable_tainted", "type": "flesh", "mass_ratio": 0.5 },
       { "drop": "plant_sac", "type": "offal", "mass_ratio": 0.2 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.1 }
     ]
@@ -2194,8 +2194,8 @@
     "type": "harvest",
     "message": "You laboriously hack and dig through the remains of the fungal mass.",
     "entries": [
-      { "drop": "veggy", "base_num": [ 6, 10 ], "scale_num": [ 0.6, 0.8 ], "max": 20, "type": "flesh" },
-      { "drop": "veggy_tainted", "base_num": [ 16, 25 ], "scale_num": [ 0.6, 0.8 ], "max": 50, "type": "flesh" },
+      { "drop": "vegetable", "base_num": [ 6, 10 ], "scale_num": [ 0.6, 0.8 ], "max": 20, "type": "flesh" },
+      { "drop": "vegetable_tainted", "base_num": [ 16, 25 ], "scale_num": [ 0.6, 0.8 ], "max": 50, "type": "flesh" },
       { "drop": "plant_sac", "base_num": [ 3, 6 ], "scale_num": [ 0.7, 0.9 ], "max": 10, "type": "offal" },
       { "drop": "stick_fiber", "base_num": [ 4, 8 ], "scale_num": [ 0.5, 0.7 ], "max": 10, "type": "bone" }
     ]
@@ -2207,8 +2207,8 @@
     "//": "todo: add biollante item",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2217,8 +2217,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2227,8 +2227,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.4 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "stick", "type": "bone", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.0075 }
     ]
@@ -2241,8 +2241,8 @@
     "entries": [
       { "drop": "blood_acid_plant", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2251,8 +2251,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.4 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "stick", "type": "bone", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.0075 },
       { "drop": "triffid_fungicide", "type": "offal", "mass_ratio": 0.0075 }
@@ -2265,8 +2265,8 @@
     "entries": [
       { "drop": "log", "type": "bone", "mass_ratio": 0.35 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.15 },
-      { "drop": "veggy", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "veggy", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.02 }
     ]
   },

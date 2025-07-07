@@ -284,7 +284,7 @@
     "price": "10 USD",
     "price_postapoc": "1 USD",
     "to_hit": -3,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "qualities": [ [ "SURFACE", 3 ] ],
     "symbol": "*",
     "color": "yellow",

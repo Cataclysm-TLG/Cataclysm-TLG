@@ -92,7 +92,7 @@
     "name": { "str": "sylvan sample" },
     "description": "A slurry of responsibility.",
     "looks_like": "medical_sample",
-    "material": [ "veggy", "hblood" ]
+    "material": [ "vegetable", "hblood" ]
   },
   {
     "type": "GENERIC",
@@ -191,7 +191,7 @@
     "name": { "str": "plant sample" },
     "description": "A slurry of peace.",
     "looks_like": "medical_sample",
-    "material": [ "veggy", "wood" ]
+    "material": [ "vegetable", "wood" ]
   },
   {
     "type": "GENERIC",

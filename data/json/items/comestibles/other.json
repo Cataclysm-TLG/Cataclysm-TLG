@@ -350,7 +350,7 @@
     "material": [ "bean" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "calcium", 9 ], [ "iron", 24 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 9 ], [ "iron", 24 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -369,7 +369,7 @@
     "material": [ "bean" ],
     "volume": "41 ml",
     "cooks_like": "beans_cooked",
-    "vitamins": [ [ "calcium", 56 ], [ "iron", 22 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 56 ], [ "iron", 22 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
     "seed_data": { "plant_name": "beans", "fruit": "raw_beans", "seeds": false, "byproducts": [ "withered" ], "grow": "91 days" }
@@ -392,7 +392,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
     "fun": 1,
-    "vitamins": [ [ "calcium", 8 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 8 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -408,11 +408,11 @@
     "price": "90 cent",
     "price_postapoc": "50 cent",
     "fun": -4,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "85 ml",
     "flags": [ "SMOKABLE", "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
     "smoking_result": "dry_tofu",
-    "vitamins": [ [ "calcium", 20 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 20 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -428,10 +428,10 @@
     "description": "Tofu, a soy protein crucial to East Asian cuisine.  It absorbs flavors very well and can be used as a meat alternative in many dishes.",
     "price": "90 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "85 ml",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "calcium", 16 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 16 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -446,9 +446,9 @@
     "description": "Dehydrated tofu, sealed and still extra firm to last a long time.",
     "price": "90 cent",
     "price_postapoc": "75 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "85 ml",
-    "vitamins": [ [ "calcium", 16 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 16 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -465,9 +465,9 @@
     "description": "Beige colored beans.  They have many uses, but in their raw form are fairly poisonous to humans.",
     "price": "90 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "fun": -5,
-    "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "vegetable_allergen", 1 ] ],
     "smoking_result": "dry_soybean",
     "milling": { "into": "paste_nut", "recipe": "paste_nut_mill_5_1" },
     "seed_data": {
@@ -494,10 +494,10 @@
     "description": "Beige colored beans, dried until rock hard.  They'll need to be cooked or processed before use.",
     "price": "90 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "fun": -5,
     "milling": { "into": "flour_wheat_free", "recipe": "flour_wheat_free_mill_1_1" },
-    "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 25 ], [ "vitC", 1 ], [ "calcium", 3 ], [ "vegetable_allergen", 1 ] ],
     "seed_data": {
       "plant_name": "soybean",
       "fruit": "soybean",
@@ -523,9 +523,9 @@
     "description": "Raw soybeans still in their pod.  They can be cooked as-is or shelled for further processing, but in their raw form, they're toxic to humans.",
     "price": "1 USD 50 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "fun": 1,
-    "vitamins": [ [ "iron", 26 ], [ "vitC", 16 ], [ "calcium", 6 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 26 ], [ "vitC", 16 ], [ "calcium", 6 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "SMOKABLE", "NUTRIENT_OVERRIDE", "RAW", "INEDIBLE", "CATTLE" ],
     "smoking_result": "edamame_roasted"
@@ -544,10 +544,10 @@
     "price": "30 cent",
     "price_postapoc": "16 cent",
     "fun": 10,
-    "material": [ "veggy", "blood" ],
+    "material": [ "vegetable", "blood" ],
     "volume": "83 ml",
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -634,7 +634,7 @@
     "price_postapoc": "50 cent",
     "material": [ "tomato" ],
     "volume": "125 ml",
-    "vitamins": [ [ "vitC", "11 mg" ], [ "iron", "1600 μg" ], [ "calcium", "40800 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "11 mg" ], [ "iron", "1600 μg" ], [ "calcium", "40800 μg" ], [ "vegetable_allergen", 1 ] ],
     "flags": [ "RAW" ]
   },
   {
@@ -669,11 +669,11 @@
     "price": "1 USD",
     "price_postapoc": "25 cent",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ";",
     "quench": 1,
     "calories": 170,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -692,11 +692,11 @@
     "price": "7 USD",
     "price_postapoc": "1 USD 75 cent",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ";",
     "quench": 1,
     "calories": 1190,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -715,11 +715,11 @@
     "price": "360 USD",
     "price_postapoc": "9 USD",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ";",
     "quench": 1,
     "calories": 6120,
-    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 45 ], [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -738,10 +738,10 @@
     "price": "20 cent",
     "price_postapoc": "25 cent",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": ";",
     "calories": 400,
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 7 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 7 ], [ "vegetable_allergen", 1 ] ],
     "fun": 5,
     "freezing_point": -274,
     "color": "brown",
@@ -857,11 +857,11 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 70,
-    "vitamins": [ [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vegetable_allergen", 1 ] ],
     "description": "Some grass, edible by grazers and ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "TRADER_AVOID" ],
     "volume": "250 ml"
   },
@@ -874,11 +874,11 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 50,
-    "vitamins": [ [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vegetable_allergen", 1 ] ],
     "description": "A small plant or flower, edible by grazers and ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "TRADER_AVOID" ],
     "volume": "250 ml"
   },
@@ -891,11 +891,11 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 174,
-    "vitamins": [ [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vegetable_allergen", 1 ] ],
     "description": "Some underbrush, edible by ruminants only.  Seeing this item is a bug.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "TRADER_AVOID" ],
     "volume": "250 ml"
   },
@@ -1038,7 +1038,7 @@
     "price": "1 USD",
     "price_postapoc": "25 cent",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": "%",
     "color": "yellow",
     "spoils_in": "300 days",
@@ -1046,7 +1046,7 @@
     "quench": -15,
     "fun": -15,
     "freezing_point": -274,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1155,7 +1155,7 @@
     "price": "1 USD",
     "price_postapoc": "25 cent",
     "to_hit": -5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": "%",
     "color": "brown",
     "spoils_in": "3 days",
@@ -1163,7 +1163,7 @@
     "quench": -15,
     "fun": -15,
     "freezing_point": -274,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

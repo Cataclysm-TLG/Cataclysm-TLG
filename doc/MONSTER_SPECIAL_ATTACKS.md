@@ -111,7 +111,7 @@ These special attacks are mostly hardcoded in C++ and are generally not configur
 - ```FLAMETHROWER``` Shoots a stream of fire.
 - ```FLESH_GOLEM``` Attacks the player with 5-10 bash, has a chance to inflict `downed` if the attack connects.  Also roars menacingly for some reason.
 - ```FLESH_TENDRIL``` Spawns gangrenous impalers or crawlers, pulls targets close when 4 > range > 1, either flings or grabs them when adjacent.
-- ```FORMBLOB``` Attacks a neighboring tile, effect depends on the tile's inhabitant: spawns small slimes depending on its speed if empty, slimes players/NPCs, speeds up friendly slimes, heals brain slimes, converts nonfriendly flesh/veggy non-huge monsters to slimes of appropriate size.  Decreases in size if it did any of those and its current speed is below a threshold.
+- ```FORMBLOB``` Attacks a neighboring tile, effect depends on the tile's inhabitant: spawns small slimes depending on its speed if empty, slimes players/NPCs, speeds up friendly slimes, heals brain slimes, converts nonfriendly flesh/vegetable non-huge monsters to slimes of appropriate size.  Decreases in size if it did any of those and its current speed is below a threshold.
 - ```FUNGUS``` Releases fungal spores and attempts to infect the player.
 - ```FUNGUS_BIG_BLOSSOM``` Spreads fire suppressing fungal haze.
 - ```FUNGUS_BRISTLE``` Performs a barbed tendril attack that can cause fungal infections.

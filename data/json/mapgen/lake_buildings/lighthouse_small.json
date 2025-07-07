@@ -19,13 +19,13 @@
         "distribution": [
           { "item": "can_sardine", "count": [ 1, 10 ] },
           { "item": "can_tomato", "count": [ 1, 10 ] },
-          { "item": "soup_veggy", "count": [ 1, 10 ] },
+          { "item": "soup_vegetable", "count": [ 1, 10 ] },
           { "item": "soup_meat", "count": [ 1, 10 ] },
           { "item": "soup_chicken", "count": [ 1, 10 ] },
           { "item": "soup_mushroom", "count": [ 1, 10 ] },
           { "item": "soup_tomato", "count": [ 1, 10 ] },
           { "item": "soup_dumplings", "count": [ 1, 10 ] },
-          { "item": "curry_veggy", "count": [ 1, 10 ] },
+          { "item": "curry_vegetable", "count": [ 1, 10 ] },
           { "item": "curry_meat", "count": [ 1, 10 ] },
           { "item": "can_corn", "count": [ 1, 10 ] },
           { "item": "noodles_fast", "count": [ 1, 10 ] }

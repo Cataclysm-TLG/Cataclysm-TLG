@@ -23,7 +23,7 @@
       { "prob": 10, "group": "salt_various" },
       { "prob": 5, "group": "seasoning_salt_various" },
       [ "vinegar", 10 ],
-      { "prob": 30, "group": "veggy_pickled_jar_glass_sealed_2" },
+      { "prob": 30, "group": "vegetable_pickled_jar_glass_sealed_2" },
       { "prob": 20, "group": "sauerkraut_jar_glass_sealed_2" },
       [ "con_milk", 10 ],
       [ "milk_evap", 10 ],

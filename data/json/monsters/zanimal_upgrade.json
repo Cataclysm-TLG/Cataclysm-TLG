@@ -387,7 +387,7 @@
     "description": "This once-great moose is covered with long, matted hair twisted with thorny vines that wrap together and then twist back into its body.  Long, interlocking thorns wrap its antlers, dripping with a silvery liquid.",
     "species": [ "ZOMBIE", "PLANT" ],
     "speed": 100,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "color": "light_green",
     "aggression": 100,
     "melee_skill": 5,

@@ -872,12 +872,12 @@
     "description": "The edible bud of a cholla cactus, with its spines removed; the candy of the Mojave indigenous peoples.  Tastes similar to asparagus.",
     "price": "9 USD",
     "price_postapoc": "1 USD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "175 ml",
     "fun": 6,
     "flags": [ "FREEZERBURN", "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 18 ], [ "iron", 1 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 18 ], [ "iron", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -893,12 +893,12 @@
     "description": "A handful of edible pads from a cactus.",
     "price": "50 cent",
     "price_postapoc": "25 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -1,
     "flags": [ "RAW", "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "8 mg" ], [ "iron", "500 μg" ], [ "calcium", "141 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "8 mg" ], [ "iron", "500 μg" ], [ "calcium", "141 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

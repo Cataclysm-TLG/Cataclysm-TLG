@@ -158,7 +158,7 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "veggy_tainted" },
+            { "u_has_item": "vegetable_tainted" },
             { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
@@ -169,7 +169,7 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "veggy_tainted" },
+            { "u_has_item": "vegetable_tainted" },
             { "not": { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
@@ -271,7 +271,7 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "veggy_tainted" },
+            { "u_has_item": "vegetable_tainted" },
             { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
@@ -572,7 +572,7 @@
     "responses": [
       {
         "condition": {
-          "and": [ { "u_has_item": "veggy_tainted" }, { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } ]
+          "and": [ { "u_has_item": "vegetable_tainted" }, { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } ]
         },
         "text": "It just so happens I have a chunk of fungal matter on me right now.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS4_RECRUIT"
@@ -580,7 +580,7 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "veggy_tainted" },
+            { "u_has_item": "vegetable_tainted" },
             { "not": { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } }
           ]
         },

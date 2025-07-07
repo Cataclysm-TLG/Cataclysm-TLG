@@ -298,13 +298,13 @@
       { "id": "tinder", "description": " Craft: Tinder" },
       { "id": "meat_cooked", "description": " Cook: Meat, Cooked" },
       { "id": "fish_cooked", "description": " Cook: Fish, Cooked" },
-      { "id": "veggy_cooked", "description": " Cook: Veggy, Cooked" },
+      { "id": "vegetable_cooked", "description": " Cook: vegetable, Cooked" },
       { "id": "boiled_egg", "description": " Cook: Egg, Boiled" },
       { "id": "starch", "description": " Cook: Starch" },
       { "id": "water_clean", "description": " Boil: Water" },
       { "id": "starch_from_fibrous_stuff", "description": " Cook: Cattail Starch" },
       { "id": "flatbread", "description": " Cook: Flatbread" },
-      { "id": "veggy_wild_cooked", "description": " Cook: Veggy, Cooked Wild" }
+      { "id": "vegetable_wild_cooked", "description": " Cook: vegetable, Cooked Wild" }
     ]
   },
   {
@@ -334,14 +334,14 @@
     "building_type": "COOK",
     "recipes": [
       { "id": "pie_meat", "description": " Cook: Meat Pie" },
-      { "id": "pie_veggy", "description": " Cook: Veggy Pie" },
+      { "id": "pie_vegetable", "description": " Cook: vegetable Pie" },
       { "id": "sugar", "description": " Cook: Sugar" },
       { "id": "hardtack", "description": " Cook: Hardtack" },
-      { "id": "veggy_pickled_jarred", "description": " Cook: Veggy, Pickled" },
+      { "id": "vegetable_pickled_jarred", "description": " Cook: vegetable, Pickled" },
       { "id": "cheese_hard", "description": " Cook: Cheese, Hard" },
       { "id": "pemmican", "description": " Cook: Pemmican, Meat + Berries" },
-      { "id": "pemmican_veggy", "description": " Cook: Pemmican, Meat + Veg" },
-      { "id": "veggy_aspic", "description": " Cook: Veggy Aspic" },
+      { "id": "pemmican_vegetable", "description": " Cook: Pemmican, Meat + Veg" },
+      { "id": "vegetable_aspic", "description": " Cook: vegetable Aspic" },
       { "id": "meat_canned_jarred", "description": " Cook: Meat, Canned" },
       { "id": "meat_aspic", "description": " Cook: Meat Aspic" },
       { "id": "kompot", "description": " Cook: Kompot" }
@@ -398,7 +398,7 @@
     "id": "farm_recipes_1",
     "building_type": "FARM",
     "recipes": [
-      { "id": "seed_veggy_wild", "description": " Craft: Wild Veggy Stems" },
+      { "id": "seed_vegetable_wild", "description": " Craft: Wild vegetable Stems" },
       { "id": "seed_raw_dandelion", "description": " Craft: Dandelion Seeds" },
       { "id": "seed_potato_raw", "description": " Craft: Potato, Starter" },
       { "id": "seed_buckwheat", "description": " Craft: Buckwheat Seeds" }

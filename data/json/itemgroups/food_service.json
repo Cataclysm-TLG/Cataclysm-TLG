@@ -230,7 +230,7 @@
       { "item": "fries", "prob": 7 },
       { "item": "cheese_fries", "prob": 5 },
       { "item": "onion_rings", "prob": 7 },
-      { "prob": 7, "group": "pizza_veggy_box_small_4" },
+      { "prob": 7, "group": "pizza_vegetable_box_small_4" },
       { "prob": 7, "group": "pizza_meat_box_small_4" }
     ]
   },
@@ -294,7 +294,7 @@
   {
     "id": "pizza_display",
     "type": "item_group",
-    "items": [ [ "pizza_meat", 50 ], [ "pizza_veggy", 50 ] ]
+    "items": [ [ "pizza_meat", 50 ], [ "pizza_vegetable", 50 ] ]
   },
   {
     "id": "pizza_kitchen",
@@ -848,7 +848,7 @@
     "subtype": "distribution",
     "entries": [
       { "prob": 80, "group": "frozen_dinner_box_small_2" },
-      { "prob": 50, "group": "pizza_veggy_box_small_4" },
+      { "prob": 50, "group": "pizza_vegetable_box_small_4" },
       { "prob": 50, "group": "pizza_meat_box_small_4" },
       { "item": "junk_burrito", "prob": 50 },
       { "item": "icecream_artificial", "prob": 30 },
@@ -1175,7 +1175,7 @@
     "type": "item_group",
     "items": [
       [ "bowl_plastic", 80 ],
-      [ "veggy_salad", 6 ],
+      [ "vegetable_salad", 6 ],
       { "item": "tomato", "prob": 8, "container-item": "bowl_plastic" },
       { "item": "onion", "prob": 6, "container-item": "bowl_plastic" },
       { "item": "broccoli", "prob": 6, "container-item": "bowl_plastic" },
@@ -1195,8 +1195,8 @@
       { "item": "soup_fish", "prob": 4, "charges": 2, "container-item": "pot" },
       { "item": "soup_tomato", "prob": 10, "charges": 1, "container-item": "pot" },
       { "item": "soup_tomato", "prob": 5, "charges": 2, "container-item": "pot" },
-      { "item": "soup_veggy", "prob": 10, "charges": 1, "container-item": "pot" },
-      { "item": "soup_veggy", "prob": 5, "charges": 2, "container-item": "pot" },
+      { "item": "soup_vegetable", "prob": 10, "charges": 1, "container-item": "pot" },
+      { "item": "soup_vegetable", "prob": 5, "charges": 2, "container-item": "pot" },
       { "prob": 25, "group": "oyster_crackers_plastic_bag_vac_8" }
     ]
   },
@@ -1256,7 +1256,7 @@
       { "item": "waffles", "prob": 20 },
       { "item": "tomato", "prob": 20 },
       { "item": "lettuce", "prob": 20, "count": 5 },
-      { "item": "soup_veggy", "prob": 20 },
+      { "item": "soup_vegetable", "prob": 20 },
       { "item": "soup_meat", "prob": 20 },
       { "item": "soup_tomato", "prob": 20 },
       { "prob": 12, "group": "crab_cakes_box_small_1_inf" },
@@ -1511,7 +1511,7 @@
     "container-item": "jar_3l_glass_sealed",
     "entries": [
       { "item": "meat_canned", "prob": 4, "container-item": "null", "count": 12 },
-      { "item": "veggy_canned", "prob": 4, "container-item": "null", "count": 12 },
+      { "item": "vegetable_canned", "prob": 4, "container-item": "null", "count": 12 },
       { "item": "fruit_canned", "prob": 4, "container-item": "null", "count": 24 },
       { "item": "offal_canned", "prob": 1, "container-item": "null", "count": 12 },
       { "item": "can_tomato", "prob": 8, "container-item": "null", "count": 24 },

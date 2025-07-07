@@ -63,11 +63,11 @@
     "description": "Wait, you can milk soybeans?  Not quite, but you can blend them with water!  A dairy-free alternative high in protein, and rival to almond milk.",
     "price": "40 cent",
     "price_postapoc": "50 cent",
-    "material": [ "water", "veggy" ],
+    "material": [ "water", "vegetable" ],
     "volume": "250 ml",
     "charges": 1,
     "phase": "liquid",
-    "vitamins": [ [ "iron", 1 ], [ "calcium", 7 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 1 ], [ "calcium", 7 ], [ "vegetable_allergen", 1 ] ],
     "flags": [ "EATEN_COLD" ],
     "fun": 1
   },
@@ -781,7 +781,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_COLD" ],
     "fun": 12,
-    "vitamins": [ [ "vitC", 23 ], [ "calcium", 1 ], [ "iron", 2 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 23 ], [ "calcium", 1 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1212,7 +1212,7 @@
     "charges": 1,
     "phase": "liquid",
     "flags": [ "EATEN_COLD", "MYCUS_OK", "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "vitC", 20 ], [ "calcium", 20 ], [ "iron", 16 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 20 ], [ "calcium", 20 ], [ "iron", 16 ], [ "vegetable_allergen", 1 ] ],
     "fun": 30
   },
   {
@@ -1487,14 +1487,14 @@
     "description": "Contains up to eight vegetables!  Nutritious and tasty.",
     "price": "71 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "water",
     "volume": "250 ml",
     "charges": 1,
     "phase": "liquid",
     "flags": [ "EATEN_COLD" ],
     "fun": 1,
-    "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "700 μg" ], [ "calcium", "19200 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "700 μg" ], [ "calcium", "19200 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "water",
@@ -1664,7 +1664,7 @@
     "charges": 1,
     "phase": "liquid",
     "flags": [ "EATEN_COLD" ],
-    "vitamins": [ [ "vitC", "170300 μg" ], [ "iron", "900 μg" ], [ "calcium", "24300 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "170300 μg" ], [ "iron", "900 μg" ], [ "calcium", "24300 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": 2
   },
   {

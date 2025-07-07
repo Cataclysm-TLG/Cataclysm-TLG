@@ -62,7 +62,7 @@
     "volume": "3 L",
     "price": "2 USD 50 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": "%",
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "candle_wax": 100 }, "rigid": true } ],

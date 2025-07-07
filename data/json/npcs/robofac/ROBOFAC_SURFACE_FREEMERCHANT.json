@@ -55,7 +55,7 @@
       { "item": "pemmican", "count": [ 10, 25 ], "prob": 100 },
       { "item": "dry_meat", "count": [ 10, 25 ], "prob": 100 },
       { "item": "dry_fish", "count": [ 10, 25 ], "prob": 100 },
-      { "item": "dry_veggy", "prob": 100, "count": [ 20, 50 ] },
+      { "item": "dry_vegetable", "prob": 100, "count": [ 20, 50 ] },
       { "item": "dry_fruit", "count": [ 10, 25 ], "prob": 100 },
       { "item": "longcoat", "prob": 25 },
       { "item": "longcoat_leather", "prob": 20 },

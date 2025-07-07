@@ -1932,7 +1932,7 @@
     "healthy": -1,
     "fun": 15,
     "addiction_potential": 5,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "NO_INGEST", "EDIBLE_FROZEN" ],
     "use_action": {
       "type": "consume_drug",
@@ -1944,7 +1944,7 @@
       "tools_needed": { "apparatus": -1 },
       "moves": 40
     },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "xanax",

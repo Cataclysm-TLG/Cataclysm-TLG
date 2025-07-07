@@ -180,7 +180,7 @@
       [ "sandwich_pbj", 30 ],
       [ "sandwich_pbh", 30 ],
       [ "sandwich_pbm", 30 ],
-      [ "pizza_veggy", 8 ],
+      [ "pizza_vegetable", 8 ],
       [ "pizza_cheese", 8 ],
       [ "pizza_meat", 8 ],
       [ "hamburger", 40 ],
@@ -195,7 +195,7 @@
       [ "salted_fish", 15 ],
       [ "pie", 20 ],
       [ "pie_meat", 20 ],
-      [ "pie_veggy", 20 ],
+      [ "pie_vegetable", 20 ],
       [ "pie_maple", 10 ],
       [ "cinnamon", 15 ],
       [ "coffee_bean", 20 ],
@@ -802,7 +802,7 @@
       [ "juice", 31 ],
       [ "pie", 40 ],
       [ "pie_meat", 28 ],
-      [ "pie_veggy", 15 ],
+      [ "pie_vegetable", 15 ],
       [ "pie_maple", 7 ],
       [ "yoghurt", 30 ],
       [ "soy_milk", 20 ]
@@ -1259,7 +1259,7 @@
       {
         "distribution": [
           { "item": "protein_powder", "prob": 7 },
-          { "item": "dry_veggy", "prob": 10 },
+          { "item": "dry_vegetable", "prob": 10 },
           { "item": "jerky", "prob": 10 },
           { "item": "dry_fruit", "prob": 10 },
           { "item": "granola", "prob": 5 }

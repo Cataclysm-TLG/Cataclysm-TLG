@@ -574,7 +574,7 @@
   {
     "type": "COMESTIBLE",
     "id": "jerusalem_artichoke_fruitmash",
-    "looks_like": "veggy_salad",
+    "looks_like": "vegetable_salad",
     "name": { "str_sp": "Jerusalem artichoke fruit dessert" },
     "weight": "80 g",
     "color": "yellow",
@@ -586,11 +586,11 @@
     "description": "Chopped Jerusalem artichoke combined with any fruit that is in season or at hand.  Surprisingly tasty.",
     "price": "12 cent",
     "price_postapoc": "25 cent",
-    "material": [ "fruit", "veggy" ],
+    "material": [ "fruit", "vegetable" ],
     "volume": "80 ml",
     "flags": [ "USE_EAT_VERB", "NUTRIENT_OVERRIDE" ],
     "fun": 4,
-    "vitamins": [ [ "vitC", 2 ], [ "iron", 15 ], [ "veggy_allergen", 1 ], [ "fruit_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 2 ], [ "iron", 15 ], [ "vegetable_allergen", 1 ], [ "fruit_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

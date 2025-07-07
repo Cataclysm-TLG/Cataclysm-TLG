@@ -1973,14 +1973,14 @@
           "rotates": false
         },
         {
-          "id": [ "deluxe_veggy_rice", "deluxe_veggy_beansnrice", "deluxe_rice", "deluxe_beansnrice", "beansnrice", "tofu_rice" ],
+          "id": [ "deluxe_vegetable_rice", "deluxe_vegetable_beansnrice", "deluxe_rice", "deluxe_beansnrice", "beansnrice", "tofu_rice" ],
           "fg": 2129,
           "rotates": false
         },
         {
           "id": [
-            "deluxe_veggy_rice_season_autumn",
-            "deluxe_veggy_beansnrice_season_autumn",
+            "deluxe_vegetable_rice_season_autumn",
+            "deluxe_vegetable_beansnrice_season_autumn",
             "deluxe_rice_season_autumn",
             "deluxe_beansnrice_season_autumn",
             "beansnrice_season_autumn",
@@ -1991,8 +1991,8 @@
         },
         {
           "id": [
-            "deluxe_veggy_rice_season_winter",
-            "deluxe_veggy_beansnrice_season_winter",
+            "deluxe_vegetable_rice_season_winter",
+            "deluxe_vegetable_beansnrice_season_winter",
             "deluxe_rice_season_winter",
             "deluxe_beansnrice_season_winter",
             "beansnrice_season_winter",
@@ -2003,8 +2003,8 @@
         },
         {
           "id": [
-            "deluxe_veggy_rice_season_summer",
-            "deluxe_veggy_beansnrice_season_summer",
+            "deluxe_vegetable_rice_season_summer",
+            "deluxe_vegetable_beansnrice_season_summer",
             "deluxe_rice_season_summer",
             "deluxe_beansnrice_season_summer",
             "beansnrice_season_summer",
@@ -2201,10 +2201,10 @@
           "fg": 2287,
           "rotates": false
         },
-        { "id": [ "mre_beeftaco", "mre_veggy" ], "fg": 2369, "rotates": false },
-        { "id": [ "mre_beeftaco_season_autumn", "mre_veggy_season_autumn" ], "fg": 2370, "rotates": false },
-        { "id": [ "mre_beeftaco_season_winter", "mre_veggy_season_winter" ], "fg": 2372, "rotates": false },
-        { "id": [ "mre_beeftaco_season_summer", "mre_veggy_season_summer" ], "fg": 2371, "rotates": false },
+        { "id": [ "mre_beeftaco", "mre_vegetarian_taco" ], "fg": 2369, "rotates": false },
+        { "id": [ "mre_beeftaco_season_autumn", "mre_vegetarian_taco_season_autumn" ], "fg": 2370, "rotates": false },
+        { "id": [ "mre_beeftaco_season_winter", "mre_vegetarian_taco_season_winter" ], "fg": 2372, "rotates": false },
+        { "id": [ "mre_beeftaco_season_summer", "mre_vegetarian_taco_season_summer" ], "fg": 2371, "rotates": false },
         { "id": [ "nachos", "nachoshc", "nachosmc", "nachoshf", "nachosc", "nachosm" ], "fg": 2397, "rotates": false },
         {
           "id": [
@@ -2259,7 +2259,7 @@
           "rotates": false
         },
         {
-          "id": [ "pie", "pie_human", "humble_pie", "pie_maple", "pie_veggy", "pie_meat" ],
+          "id": [ "pie", "pie_human", "humble_pie", "pie_maple", "pie_vegetable", "pie_meat" ],
           "fg": 2433,
           "rotates": false
         },
@@ -2269,7 +2269,7 @@
             "pie_human_season_autumn",
             "humble_pie_season_autumn",
             "pie_maple_season_autumn",
-            "pie_veggy_season_autumn",
+            "pie_vegetable_season_autumn",
             "pie_meat_season_autumn"
           ],
           "fg": 2434,
@@ -2281,7 +2281,7 @@
             "pie_human_season_winter",
             "humble_pie_season_winter",
             "pie_maple_season_winter",
-            "pie_veggy_season_winter",
+            "pie_vegetable_season_winter",
             "pie_meat_season_winter"
           ],
           "fg": 2436,
@@ -2293,25 +2293,25 @@
             "pie_human_season_summer",
             "humble_pie_season_summer",
             "pie_maple_season_summer",
-            "pie_veggy_season_summer",
+            "pie_vegetable_season_summer",
             "pie_meat_season_summer"
           ],
           "fg": 2435,
           "rotates": false
         },
-        { "id": [ "pizza_meat", "pizza_human", "pizza_veggy" ], "fg": 2445, "rotates": false },
+        { "id": [ "pizza_meat", "pizza_human", "pizza_vegetable" ], "fg": 2445, "rotates": false },
         {
-          "id": [ "pizza_meat_season_autumn", "pizza_human_season_autumn", "pizza_veggy_season_autumn" ],
+          "id": [ "pizza_meat_season_autumn", "pizza_human_season_autumn", "pizza_vegetable_season_autumn" ],
           "fg": 2446,
           "rotates": false
         },
         {
-          "id": [ "pizza_meat_season_winter", "pizza_human_season_winter", "pizza_veggy_season_winter" ],
+          "id": [ "pizza_meat_season_winter", "pizza_human_season_winter", "pizza_vegetable_season_winter" ],
           "fg": 2448,
           "rotates": false
         },
         {
-          "id": [ "pizza_meat_season_summer", "pizza_human_season_summer", "pizza_veggy_season_summer" ],
+          "id": [ "pizza_meat_season_summer", "pizza_human_season_summer", "pizza_vegetable_season_summer" ],
           "fg": 2447,
           "rotates": false
         },
@@ -2399,13 +2399,13 @@
           "rotates": false
         },
         {
-          "id": [ "sandwich_veggy", "sandwich_cucumber", "sandwich_cheese", "sandwich_honey" ],
+          "id": [ "sandwich_vegetable", "sandwich_cucumber", "sandwich_cheese", "sandwich_honey" ],
           "fg": 2517,
           "rotates": false
         },
         {
           "id": [
-            "sandwich_veggy_season_autumn",
+            "sandwich_vegetable_season_autumn",
             "sandwich_cucumber_season_autumn",
             "sandwich_cheese_season_autumn",
             "sandwich_honey_season_autumn"
@@ -2415,7 +2415,7 @@
         },
         {
           "id": [
-            "sandwich_veggy_season_winter",
+            "sandwich_vegetable_season_winter",
             "sandwich_cucumber_season_winter",
             "sandwich_cheese_season_winter",
             "sandwich_honey_season_winter"
@@ -2425,7 +2425,7 @@
         },
         {
           "id": [
-            "sandwich_veggy_season_summer",
+            "sandwich_vegetable_season_summer",
             "sandwich_cucumber_season_summer",
             "sandwich_cheese_season_summer",
             "sandwich_honey_season_summer"
@@ -2507,19 +2507,19 @@
           "fg": 2535,
           "rotates": false
         },
-        { "id": [ "sushi_meatroll", "sushi_fishroll", "sushi_veggyroll" ], "fg": 2561, "rotates": false },
+        { "id": [ "sushi_meatroll", "sushi_fishroll", "sushi_vegetableroll" ], "fg": 2561, "rotates": false },
         {
-          "id": [ "sushi_meatroll_season_autumn", "sushi_fishroll_season_autumn", "sushi_veggyroll_season_autumn" ],
+          "id": [ "sushi_meatroll_season_autumn", "sushi_fishroll_season_autumn", "sushi_vegetableroll_season_autumn" ],
           "fg": 2562,
           "rotates": false
         },
         {
-          "id": [ "sushi_meatroll_season_winter", "sushi_fishroll_season_winter", "sushi_veggyroll_season_winter" ],
+          "id": [ "sushi_meatroll_season_winter", "sushi_fishroll_season_winter", "sushi_vegetableroll_season_winter" ],
           "fg": 2564,
           "rotates": false
         },
         {
-          "id": [ "sushi_meatroll_season_summer", "sushi_fishroll_season_summer", "sushi_veggyroll_season_summer" ],
+          "id": [ "sushi_meatroll_season_summer", "sushi_fishroll_season_summer", "sushi_vegetableroll_season_summer" ],
           "fg": 2563,
           "rotates": false
         },
@@ -15829,10 +15829,10 @@
         { "id": "underbrush_season_spring", "fg": 2602 },
         { "id": "underbrush_season_summer", "fg": 2603 },
         { "id": "underbrush_season_winter", "fg": 2604 },
-        { "id": "veggy_wild_season_autumn", "fg": 2605 },
-        { "id": "veggy_wild_season_spring", "fg": 2606 },
-        { "id": "veggy_wild_season_summer", "fg": 2607 },
-        { "id": "veggy_wild_season_winter", "fg": 2608 },
+        { "id": "vegetable_wild_season_autumn", "fg": 2605 },
+        { "id": "vegetable_wild_season_spring", "fg": 2606 },
+        { "id": "vegetable_wild_season_summer", "fg": 2607 },
+        { "id": "vegetable_wild_season_winter", "fg": 2608 },
         { "id": "wastebread_season_autumn", "fg": 2613 },
         { "id": "wastebread_season_spring", "fg": 2614 },
         { "id": "wastebread_season_summer", "fg": 2615 },

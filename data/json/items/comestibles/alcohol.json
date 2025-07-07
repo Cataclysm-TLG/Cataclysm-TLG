@@ -26,7 +26,7 @@
     "flags": [ "EATEN_COLD", "MYCUS_OK", "NO_AUTO_CONSUME" ],
     "fun": 25,
     "freezing_point": -8,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1792,7 +1792,7 @@
     "flags": [ "EATEN_COLD", "NO_AUTO_CONSUME" ],
     "freezing_point": -34,
     "fun": 25,
-    "vitamins": [ [ "vitC", 23 ], [ "calcium", 1 ], [ "iron", 2 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 23 ], [ "calcium", 1 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

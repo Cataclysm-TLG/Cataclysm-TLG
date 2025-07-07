@@ -332,7 +332,7 @@
       { "item": "fat", "prob": 10 },
       { "item": "dry_meat", "prob": 10 },
       { "item": "dry_fish", "prob": 10 },
-      { "item": "dry_veggy", "prob": 10 },
+      { "item": "dry_vegetable", "prob": 10 },
       { "item": "dry_fruit", "prob": 10 },
       { "item": "meat_smoked", "prob": 10 },
       { "item": "meat_smoked", "prob": 10 },

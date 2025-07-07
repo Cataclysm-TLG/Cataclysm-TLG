@@ -4337,8 +4337,11 @@ void harvest_activity_actor::finish( player_activity &act, Character &who )
         int forage_roll = rng( 0, 49 );
         const float min_num = entry.scale_num.first * survival_skill + entry.base_num.first;
         const float max_num = entry.scale_num.second * survival_skill + entry.base_num.second;
+        int vision_factor = std::clamp( 5 - static_cast<int>( std::floor( who.fine_detail_vision_mod() ) ),
+                                        -4, 4 );
         const int roll = std::min<int>( entry.max, std::round( rng_float( min_num, max_num ) ) );
-        got_anything = ( std::min( ( survival_skill * 3 + ( who.per_cur / 2 ) ), 42.0f ) > forage_roll ) &&
+        got_anything = ( std::min( ( survival_skill * 3 + ( who.per_cur + vision_factor ) ),
+                                   42.0f ) > forage_roll ) &&
                        ( roll > 0 );
         if( got_anything ) {
             for( int i = 0; i < roll; i++ ) {
@@ -6749,7 +6752,7 @@ void forage_activity_actor::finish( player_activity &act, Character &who )
         act.set_to_null();
         return;
     }
-    const int veggy_chance = rng( 1, 100 );
+    const int vegetable_chance = rng( 1, 100 );
     bool found_something = false;
 
     item_group_id group_id;
@@ -6786,8 +6789,8 @@ void forage_activity_actor::finish( player_activity &act, Character &who )
     ///\EFFECT_SURVIVAL increases forage success chance
     // The survival+per check here is unlikely to ever get anywhere near 84, but we may as well keep parity with act_harvest's fail chance.
     // per_cur is not divided by 2 here because foraging underbrush is more about searching for hidden things.
-    if( veggy_chance < ( std::min( ( who.get_skill_level( skill_survival ) * 3 + who.per_cur ),
-                                   84.0f ) ) ) {
+    if( vegetable_chance < ( std::min( ( who.get_skill_level( skill_survival ) * 3 + who.per_cur ),
+                                       84.0f ) ) ) {
         const std::vector<item *> dropped =
             here.put_items_from_loc( group_id, who.pos_bub(), calendar::turn );
         // map::put_items_from_loc can create multiple items and merge them into one stack.
