@@ -123,6 +123,7 @@ static const proficiency_id proficiency_prof_athlete_master( "prof_athlete_maste
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
 static const proficiency_id proficiency_prof_driver( "prof_driver" );
 
+static const skill_id skill_driving( "driving" );
 static const skill_id skill_swimming( "swimming" );
 
 static const vpart_id vpart_power_cord( "power_cord" );
@@ -7594,17 +7595,14 @@ void vehicle::damage_all( int dmg1, int dmg2, const damage_type_id &type,
 
     for( const vpart_reference &vpr : get_all_parts() ) {
         vehicle_part &vp = vpr.part();
-        const vpart_info &vpi = vp.info();
         const int distance = 1 + square_dist( vp.mount, impact );
+        int reduced = 0;
+        // Driver skill can mitigate damage.
+        if( get_driver() && get_driver()->get_skill_level( skill_driving ) >= rng( 0, 11 ) ) {
+            reduced = rng( 0, 1 );
+        }
         if( distance > 1 ) {
-            int net_dmg = rng( dmg1, dmg2 ) / ( distance * distance );
-            if( vpi.location != part_location_structure || !vpi.has_flag( "PROTRUSION" ) ) {
-                const int shock_absorber = part_with_feature( vp.mount, "SHOCK_ABSORBER", true );
-                if( shock_absorber >= 0 ) {
-                    const vehicle_part &vp_shock_absorber = part( shock_absorber );
-                    net_dmg = std::max( 0, net_dmg - vp_shock_absorber.info().bonus );
-                }
-            }
+            int net_dmg = rng( dmg1, dmg2 ) / ( reduced + distance * distance );
             damage_direct( get_map(), vp, net_dmg, type );
         }
     }
