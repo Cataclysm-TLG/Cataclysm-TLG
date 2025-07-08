@@ -7595,15 +7595,12 @@ void vehicle::damage_all( int dmg1, int dmg2, const damage_type_id &type,
     for( const vpart_reference &vpr : get_all_parts() ) {
         vehicle_part &vp = vpr.part();
         const vpart_info &vpi = vp.info();
-        const int distance = 1 + square_dist( vp.mount, impact );
+        const int distance = 1 + trig_dist( vp.mount, impact );
         if( distance > 1 ) {
-            int net_dmg = rng( dmg1, dmg2 ) / ( distance * distance );
+            int net_dmg = rng( dmg1, dmg2 ) / 1 + ( distance * distance );
             if( vpi.location != part_location_structure || !vpi.has_flag( "PROTRUSION" ) ) {
-                const int shock_absorber = part_with_feature( vp.mount, "SHOCK_ABSORBER", true );
-                if( shock_absorber >= 0 ) {
-                    const vehicle_part &vp_shock_absorber = part( shock_absorber );
-                    net_dmg = std::max( 0, net_dmg - vp_shock_absorber.info().bonus );
-                }
+                int randomize = rng( 0, net_dmg / 2 );
+                net_dmg -= randomize;
             }
             damage_direct( get_map(), vp, net_dmg, type );
         }
