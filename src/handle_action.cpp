@@ -734,8 +734,9 @@ static void grab()
         return;
     }
 
+    const optional_vpart_position &vp = here.veh_at( grabp );
     // Object might not be on the same z level if on a ramp.
-    if( !( here.veh_at( grabp ) || here.has_furn( grabp ) || creatures.creature_at( grabp ) ) ) {
+    if( !( vp || here.has_furn( grabp ) || creatures.creature_at( grabp ) ) ) {
         if( here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, grabp ) ||
             here.has_flag( ter_furn_flag::TFLAG_RAMP_UP, you.pos_bub() ) ) {
             grabp.z() += 1;
@@ -832,7 +833,7 @@ static void grab()
                 guy->as_npc()->on_attacked( you );
             }
         }
-    } else if( const optional_vpart_position vp = here.veh_at( grabp ) ) {
+    } else if( vp ) {
         std::string veh_name = vp->vehicle().name;
         if( !vp->vehicle().handle_potential_theft( you ) ) {
             return;
@@ -850,7 +851,7 @@ static void grab()
             }
             get_player_character().pause();
             vp->vehicle().separate_from_grid( vp.value().mount() );
-            if( const optional_vpart_position split_vp = here.veh_at( grabp ) ) {
+            if( const optional_vpart_position &split_vp = here.veh_at( grabp ) ) {
                 veh_name = split_vp->vehicle().name;
             } else {
                 debugmsg( "Lost the part to drag after splitting power grid!" );
@@ -1008,7 +1009,8 @@ static void haul_toggle()
 static bool is_smashable_corpse( const item &maybe_corpse )
 {
     return maybe_corpse.is_corpse() && maybe_corpse.damage() < maybe_corpse.max_damage() &&
-           maybe_corpse.can_revive();
+           ( maybe_corpse.can_revive() || ( maybe_corpse.has_var( "zombie_form" ) &&
+                                            maybe_corpse.has_flag( flag_FROZEN ) && !maybe_corpse.has_flag( flag_PULPED ) ) );
 }
 
 static void smash()
@@ -1053,10 +1055,6 @@ static void smash()
     int smashskill = player_character.smash_ability();
     if( player_character.is_mounted() ) {
         mech_smash = true;
-    }
-
-    if( !g->warn_player_maybe_anger_local_faction( true ) ) {
-        return; // player declined to smash faction's stuff
     }
 
     bool smash_floor = false;
@@ -1107,7 +1105,7 @@ static void smash()
             if( maybe_corpse.get_mtype()->bloodType()->has_acid && !maybe_corpse.has_flag( flag_BLED ) &&
                 !player_character.is_immune_field( fd_acid ) ) {
                 if( !query_yn( _( "Are you sure you want to pulp an acid filled corpse?" ) ) ) {
-                    return; // Player doesn't want an acid bath
+                    return;
                 }
             }
             should_pulp = true; // There is at least one corpse to pulp

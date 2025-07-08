@@ -1593,7 +1593,7 @@ int vehicle::install_part( const point_rel_ms &dp, vehicle_part &&vp )
         }
     } else {
         // TODO: read toggle groups from JSON
-        static const std::vector<std::string> enable_like = {{
+        static const std::vector<std::string> enable_like = { {
                 "CONE_LIGHT",
                 "CIRCLE_LIGHT",
                 "AISLE_LIGHT",
@@ -1628,7 +1628,7 @@ int vehicle::install_part( const point_rel_ms &dp, vehicle_part &&vp )
     remove_fake_parts( true );
     vehicle_part &vp_installed = parts.emplace_back( std::move( vp ) );
     vp_installed.enabled = enable;
-    vp_installed.mount = dp;
+    vp_installed.mount = point_rel_ms( dp );
     const int vp_installed_index = parts.size() - 1;
     refresh();
     coeff_air_changed = true;
@@ -2673,7 +2673,7 @@ bool vehicle::split_vehicles( map &here,
             new_vehicle->refresh();
         } else {
             // include refresh
-            new_vehicle->shift_parts( here, point_rel_ms_zero - mnt_offset );
+            new_vehicle->shift_parts( here, - mnt_offset );
         }
 
         // update the precalc points
