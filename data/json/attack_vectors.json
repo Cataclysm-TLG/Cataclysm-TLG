@@ -132,14 +132,16 @@
     "id": "vector_hoof_toe",
     "limbs": [ "hoof_l", "hoof_r" ],
     "contact_area": [ "hoof_toe_l", "hoof_toe_r" ],
-    "limb_req": [ [ "leg", 2 ] ]
+    "limb_req": [ [ "leg", 2 ] ],
+    "natural_attack": true
   },
   {
     "type": "attack_vector",
     "id": "vector_hoof_sole",
     "limbs": [ "hoof_l", "hoof_r" ],
     "contact_area": [ "hoof_sole_l", "hoof_sole_r" ],
-    "limb_req": [ [ "leg", 2 ] ]
+    "limb_req": [ [ "leg", 2 ] ],
+    "natural_attack": true
   },
   {
     "type": "attack_vector",
