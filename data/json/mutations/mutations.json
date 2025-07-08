@@ -4600,13 +4600,13 @@
   {
     "type": "mutation",
     "id": "FLEET2",
-    "name": { "str": "Road-Runner" },
+    "name": { "str": "Roadrunner" },
     "points": 3,
-    "description": "Your legs are extremely limber and fast-moving.  You move 30% faster on flat surfaces.",
+    "description": "Your legs are extremely limber and fast-moving.  You can walk and run 30% faster on flat surfaces.",
     "prereqs": [ "FLEET" ],
     "types": [ "RUNNING" ],
     "category": [ "BIRD" ],
-    "enchantments": [ { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.3 } ] } ]
+    "enchantments": [ { "condition": { "or": [ { "u_has_move_mode": "walk" }, { "u_has_move_mode": "run" } ] } }, { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.3 } ] } ]
   },
   {
     "type": "mutation",
