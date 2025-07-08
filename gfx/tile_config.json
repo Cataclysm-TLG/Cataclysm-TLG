@@ -290,7 +290,7 @@
     { "id": "fd_blood", "rotates": false },
     { "id": "fd_bile", "rotates": false },
     { "id": "fd_gibs_flesh", "rotates": false },
-    { "id": "fd_gibs_veggy", "rotates": false },
+    { "id": "fd_gibs_vegetable", "rotates": false },
     { "id": "fd_web", "rotates": false },
     { "id": "fd_slime", "rotates": false },
     { "id": "fd_acid", "rotates": false },

@@ -425,7 +425,7 @@ TEST_CASE( "player_in_field_test", "[field][player]" )
     // Also add bunch of unrelated fields
     m.add_field( p, fd_blood, 3 );
     m.add_field( p, fd_blood_insect, 3 );
-    m.add_field( p, fd_blood_veggy, 3 );
+    m.add_field( p, fd_blood_vegetable, 3 );
     m.add_field( p, fd_blood_invertebrate, 3 );
 
     const int time_limit_turns = to_turns<int>( 5_minutes );

@@ -46,11 +46,11 @@ When you have a comestible you want to add to the files, just go down this list,
 
 `meat_dishes.json` -- comestible made with meat.
 
-`raw_veggy.json` -- comestible that is a vegetable in its raw form.
+`raw_vegetable.json` -- comestible that is a vegetable in its raw form.
 
 `raw_fruit.json` -- comestible that is a fruit in its raw form.
 
-`veggy_dishes.json` -- comestible made of vegetables.
+`vegetable_dishes.json` -- comestible made of vegetables.
 
 `bread.json` -- comestible that is either a bread starter, or a cooked bread.
 

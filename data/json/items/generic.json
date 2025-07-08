@@ -269,7 +269,7 @@
     "weight": "30 g",
     "color": "green",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "100 ml",
     "flags": [ "TRADER_AVOID", "FIREWOOD", "TINDER" ]
   },
@@ -371,7 +371,7 @@
     "color": "green",
     "name": { "str": "fertilizer" },
     "description": "A token representing fertilization of a plant.",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "ZERO_WEIGHT" ]
   },
   {
@@ -681,7 +681,7 @@
     "description": "An unopened biollante flower, brilliant purple in color.  It may still have its sap-producing organ intact.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "weight": "60 g",
     "volume": "250 ml",
     "to_hit": -3
@@ -2304,7 +2304,7 @@
     "looks_like": "rice_cooked",
     "name": { "str_sp": "unfinished koji rice" },
     "description": "Some cooked rice mixed with yeast and koji mold fragments, set aside to let koji mold grow on it so that it can make a passable sake base.",
-    "material": [ "veggy", "mold", "yeast" ],
+    "material": [ "vegetable", "mold", "yeast" ],
     "weight": "200 g",
     "color": "white",
     "container": "bottle_glass",
@@ -2327,7 +2327,7 @@
     "id": "sake_koji_rice",
     "looks_like": "rice_cooked",
     "name": { "str_sp": "koji rice" },
-    "material": [ "veggy", "mold", "yeast" ],
+    "material": [ "vegetable", "mold", "yeast" ],
     "weight": "200 g",
     "color": "white",
     "container": "bag_plastic_small",
@@ -2342,7 +2342,7 @@
     "looks_like": "rice_cooked",
     "name": { "str_sp": "growing wild koji mold" },
     "description": "Some cooked rice sprinkled with ash and wrapped into a corn husk.  If left alone for a while, it will most likely grow koji mold.",
-    "material": [ "veggy", "mold", "yeast" ],
+    "material": [ "vegetable", "mold", "yeast" ],
     "weight": "200 g",
     "color": "white",
     "flags": [ "TRADER_AVOID" ],
@@ -2364,7 +2364,7 @@
     "looks_like": "rice_cooked",
     "name": { "str_sp": "grown wild koji mold" },
     "description": "Some cooked rice sprinkled with ash and wrapped into a corn husk.  It has grown patches of koji mold inside; disassemble this item to extract it.",
-    "material": [ "veggy", "mold", "yeast" ],
+    "material": [ "vegetable", "mold", "yeast" ],
     "weight": "200 g",
     "color": "white",
     "symbol": ",",
@@ -2414,7 +2414,7 @@
     "to_hit": -3,
     "color": "light_red",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "5 ml",
     "price": "2 USD",
     "price_postapoc": "50 cent"
@@ -2428,7 +2428,7 @@
     "to_hit": -2,
     "color": "yellow",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "1500 ml",
     "price": "0 cent",
     "price_postapoc": "10 cent"
@@ -2441,7 +2441,7 @@
     "weight": "10 g",
     "color": "white",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "20 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent"
@@ -2454,7 +2454,7 @@
     "weight": "20 g",
     "color": "white",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent"
@@ -2467,7 +2467,7 @@
     "weight": "50 g",
     "color": "white",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent"
@@ -2481,7 +2481,7 @@
     "weight": "300 g",
     "color": "white",
     "symbol": ",",
-    "material": [ { "type": "veggy", "portion": 4 }, { "type": "glass", "portion": 1 } ],
+    "material": [ { "type": "vegetable", "portion": 4 }, { "type": "glass", "portion": 1 } ],
     "//1": "A medium sized bouquet is roughly 13\" x 5.5\" x 5.5\", or roughly 6.4 L. When withered, I'm estimating a 30% shrinkage in volume, or 4.5 L.",
     "volume": "4500 ml",
     "price": "0 cent",
@@ -2852,12 +2852,12 @@
     "color": "light_gray",
     "calories": 15,
     "description": "A pile of dry grass.  Can be used to craft a straw bed if there is nothing else to sleep on.",
-    "material": [ "veggy", "dry_plant" ],
+    "material": [ "vegetable", "dry_plant" ],
     "flags": [ "TRADER_AVOID", "INEDIBLE", "CATTLE", "TINDER", "RABBIT" ],
     "weight": "34 g",
     "volume": "250 ml",
     "to_hit": -2,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "GENERIC",
@@ -3185,7 +3185,7 @@
     "description": "A psychoactive plant indigenous to Central Asia and the Indian subcontinent traditionally cultivated for its fiber, oil, for medicinal purposes, and for use as a recreational drug.  It requires further processing to be useful.",
     "price": "20 USD",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "weight": "420 g",
     "volume": "1 L"
   },
@@ -3199,7 +3199,7 @@
     "looks_like": "wild_herbs",
     "price": "3 USD",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "weight": "100 g",
     "volume": "250 ml"
   },

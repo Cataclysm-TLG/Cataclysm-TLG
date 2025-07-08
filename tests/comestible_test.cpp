@@ -30,7 +30,7 @@ static const itype_id itype_marloss_berry( "marloss_berry" );
 static const itype_id itype_marloss_gel( "marloss_gel" );
 static const itype_id itype_marloss_seed( "marloss_seed" );
 
-static const recipe_id recipe_veggy_wild_cooked( "veggy_wild_cooked" );
+static const recipe_id recipe_vegetable_wild_cooked( "vegetable_wild_cooked" );
 
 static const trait_id trait_GOURMAND( "GOURMAND" );
 
@@ -247,14 +247,14 @@ TEST_CASE( "cooked_veggies_get_correct_calorie_prediction", "[recipe]" )
 {
     // This test verifies that predicted calorie ranges properly take into
     // account the "RAW"/"COOKED" flags.
-    const item veggy_wild_cooked( "veggy_wild_cooked" );
+    const item vegetable_wild_cooked( "vegetable_wild_cooked" );
 
     const Character &u = get_player_character();
 
-    nutrients default_nutrition = u.compute_effective_nutrients( veggy_wild_cooked );
+    nutrients default_nutrition = u.compute_effective_nutrients( vegetable_wild_cooked );
     std::map<recipe_id, std::pair<nutrients, nutrients>> rec_cache;
     std::pair<nutrients, nutrients> predicted_nutrition =
-        u.compute_nutrient_range( veggy_wild_cooked, recipe_veggy_wild_cooked, rec_cache );
+        u.compute_nutrient_range( vegetable_wild_cooked, recipe_vegetable_wild_cooked, rec_cache );
 
     CHECK( default_nutrition.kcal() == predicted_nutrition.first.kcal() );
     CHECK( default_nutrition.kcal() == predicted_nutrition.second.kcal() );

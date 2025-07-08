@@ -320,7 +320,7 @@
         "meat_smoked",
         "fish_smoked",
         "dry_meat",
-        "dry_veggy",
+        "dry_vegetable",
         "dry_fruit",
         "dry_fish",
         "dry_lobster",
@@ -357,11 +357,11 @@
         "can_tomato",
         "broth",
         "broth_bone",
-        "soup_veggy",
+        "soup_vegetable",
         "soup_meat",
         "soup_fish",
         "soup_lobsterstew",
-        "curry_veggy",
+        "curry_vegetable",
         "curry_meat",
         "soup_woods",
         "soup_chicken",
@@ -370,7 +370,7 @@
         "soup_dumplings",
         "soup_cullenskink",
         "cooked_pumpkin",
-        "veggy_canned"
+        "vegetable_canned"
       ],
       "response": { "text": "I have <topic_item>.", "topic": "TALK_DELIVER_ASK" }
     },

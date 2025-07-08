@@ -271,12 +271,12 @@
     "description": "Healthy and filling cornbread, a Native American recipe that quickly became a staple of U.S. cuisine.",
     "price": "37 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
-    "primary_material": "veggy",
+    "material": [ "vegetable" ],
+    "primary_material": "vegetable",
     "volume": "60 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 2,
-    "vitamins": [ [ "calcium", 8 ], [ "iron", 6 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 8 ], [ "iron", 6 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -312,12 +312,12 @@
     "description": "A round, thin flatbread made from finely ground corn flour.",
     "price": "4 cent",
     "price_postapoc": "4 cent",
-    "material": [ "veggy" ],
-    "primary_material": "veggy",
+    "material": [ "vegetable" ],
+    "primary_material": "vegetable",
     "volume": "20 ml",
     "flags": [ "EATEN_HOT", "EDIBLE_FROZEN" ],
     "fun": 1,
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

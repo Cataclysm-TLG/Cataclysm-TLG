@@ -183,7 +183,7 @@ static const material_id material_lc_steel( "lc_steel" );
 static const material_id material_mc_steel( "mc_steel" );
 static const material_id material_qt_steel( "qt_steel" );
 static const material_id material_steel( "steel" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 static const material_id material_water( "water" );
 
 static const morale_type morale_support( "morale_support" );
@@ -553,7 +553,7 @@ bool mattack::eat_carrion( monster *z )
             if( item.has_flag( flag_CORPSE ) && item.damage() < item.max_damage() &&
                 z->amount_eaten < z->stomach_size &&
                 ( item.made_of( material_flesh ) || item.made_of( material_iflesh ) ||
-                  item.made_of( material_hflesh ) || item.made_of( material_veggy ) ) ) {
+                  item.made_of( material_hflesh ) || item.made_of( material_vegetable ) ) ) {
                 item.mod_damage( 750 );
                 if( item.damage() >= item.max_damage() ) {
                     item.set_flag( flag_PULPED );
@@ -2477,7 +2477,7 @@ bool mattack::formblob( monster *z )
                 return true;
             }
         } else if( ( othermon.made_of( material_flesh ) ||
-                     othermon.made_of( material_veggy ) ||
+                     othermon.made_of( material_vegetable ) ||
                      othermon.made_of( material_iflesh ) ) &&
                    rng( 0, z->get_hp() ) > rng( othermon.get_hp() / 2, othermon.get_hp() ) ) {
             didit = blobify( *z, othermon );

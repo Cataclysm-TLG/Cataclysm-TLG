@@ -163,7 +163,7 @@
     "description": "A fine mix of water, koji rice and yeast, ready to be fermented into sake once set in a fermenting vat.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -181,7 +181,7 @@
     "phase": "liquid",
     "comestible_type": "DRINK",
     "brewable": { "time": "7 days", "results": [ "sake_unfiltered", "koji", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -190,7 +190,7 @@
     "description": "Brine with mashed soybeans, wheat flour and koji mold added to it.  If you want to make soy sauce from this, the next step would be to let it ferment.",
     "material": [
       { "type": "water", "portion": 100 },
-      { "type": "veggy", "portion": 40 },
+      { "type": "vegetable", "portion": 40 },
       { "type": "wheat", "portion": 20 },
       { "type": "mold", "portion": 10 }
     ],
@@ -210,14 +210,14 @@
     "comestible_type": "DRINK",
     "freezing_point": -30,
     "brewable": { "time": "21 days", "results": [ "soy_sauce_unstrained" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
     "id": "soy_sauce_unstrained",
     "name": { "str_sp": "unstrained soy sauce" },
     "description": "Nearly-finished soy sauce that still has some solid particles floating in it.  Still needs to be strained, and also pasteurized to get rid of harmful bacteria.",
-    "material": [ { "type": "water", "portion": 100 }, { "type": "veggy", "portion": 40 } ],
+    "material": [ { "type": "water", "portion": 100 }, { "type": "vegetable", "portion": 40 } ],
     "weight": "24 g",
     "color": "white",
     "container": "bottle_glass",
@@ -233,7 +233,7 @@
     "comestible_type": "DRINK",
     "freezing_point": -30,
     "flags": [ "NUTRIENT_OVERRIDE" ],
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -241,7 +241,7 @@
     "looks_like": "vodka",
     "name": { "str_sp": "vodka wort" },
     "description": "Unfermented vodka.  Water with sugar from the enzymatic breakdown of malted grains, or just added in pure form.",
-    "material": [ { "type": "water", "portion": 757 }, { "type": "veggy", "portion": 1500 }, { "type": "yeast", "portion": 1 } ],
+    "material": [ { "type": "water", "portion": 757 }, { "type": "vegetable", "portion": 1500 }, { "type": "yeast", "portion": 1 } ],
     "weight": "34 g",
     "color": "light_cyan",
     "container": "bottle_glass",
@@ -257,7 +257,7 @@
     "comestible_type": "DRINK",
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "brewable": { "time": "7 days", "results": [ "wash_vodka", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -410,7 +410,7 @@
     "description": "Unfermented dandelion wine.  A sticky mixture of water, sugar, yeast, and dandelion petals.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -429,7 +429,7 @@
     "comestible_type": "DRINK",
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "brewable": { "time": "7 days", "results": [ "dandelion_wine", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -439,7 +439,7 @@
     "description": "Unfermented burdock wine.  A sticky mixture of water, sugar, yeast, and burdock roots.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -458,7 +458,7 @@
     "comestible_type": "DRINK",
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "brewable": { "time": "7 days", "results": [ "burdock_wine", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -468,7 +468,7 @@
     "description": "Unfermented pine wine.  A sticky mixture of water, sugar, yeast, and pine resin.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -487,7 +487,7 @@
     "comestible_type": "DRINK",
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "brewable": { "time": "7 days", "results": [ "pine_wine", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -497,7 +497,7 @@
     "description": "Unfermented homebrew beer.  A boiled and chilled mash of malted barley, spiced with some fine hops.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -517,7 +517,7 @@
     "phase": "liquid",
     "comestible_type": "DRINK",
     "brewable": { "time": "7 days", "results": [ "hb_beer", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -527,7 +527,7 @@
     "description": "Unfermented seltzer.  A boiled and chilled mash of refined sugar and fruit.",
     "material": [
       { "type": "water", "portion": 757 },
-      { "type": "veggy", "portion": 757 },
+      { "type": "vegetable", "portion": 757 },
       { "type": "sugar", "portion": 53 },
       { "type": "yeast", "portion": 1 }
     ],
@@ -547,7 +547,7 @@
     "phase": "liquid",
     "comestible_type": "DRINK",
     "brewable": { "time": "7 days", "results": [ "hb_seltzer", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -555,7 +555,7 @@
     "looks_like": "moonshine",
     "name": { "str_sp": "moonshine mash" },
     "description": "Unfermented moonshine.  Just some water, sugar and corn, like good ol' auntie's recipe.  Using pumpkin instead of corn would reduce the amount of extra sugar you need to add.",
-    "material": [ { "type": "water", "portion": 757 }, { "type": "veggy", "portion": 757 }, { "type": "sugar", "portion": 53 } ],
+    "material": [ { "type": "water", "portion": 757 }, { "type": "vegetable", "portion": 757 }, { "type": "sugar", "portion": 53 } ],
     "weight": "34 g",
     "color": "brown",
     "container": "jug_plastic",
@@ -571,7 +571,7 @@
     "phase": "liquid",
     "comestible_type": "DRINK",
     "brewable": { "time": "5 days", "results": [ "wash_moonshine", "yeast" ] },
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -690,10 +690,10 @@
     "description": "Malting grain that can be used for brewing.",
     "price": "20 cent",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "1 L",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "vegetable_allergen", 1 ] ],
     "fun": -15,
     "use_action": {
       "target": "malted_grain",
@@ -718,10 +718,10 @@
     "description": "Grainy cereal used for malting.  A staple of brewing everywhere.  It can also be ground into flour.",
     "price": "20 cent",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "1 L",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "vegetable_allergen", 1 ] ],
     "fun": -15
   },
   {
@@ -738,10 +738,10 @@
     "description": "Soaked dandelions that can be used for brewing.",
     "price": "20 cent",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "vegetable_allergen", 1 ] ],
     "fun": -15,
     "use_action": {
       "target": "soaked_dandelion",
@@ -767,10 +767,10 @@
     "description": "Dandelions soaked in hot water, used for making dandelion wine.",
     "price": "20 cent",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ],
     "fun": -4
   },
   {

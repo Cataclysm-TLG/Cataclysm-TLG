@@ -130,7 +130,7 @@
     "id": "PLANT",
     "description": "a plant",
     "fear_triggers": [ "HURT", "FIRE" ],
-    "bleeds": "fd_blood_veggy",
+    "bleeds": "fd_blood_vegetable",
     "flags": [ "DRACULIN_IMMUNE" ]
   },
   {

@@ -471,7 +471,7 @@ Mutations are given completely subjective point values.  The most important fact
 
 Food recipes that use surface_heat are made up of a combination of individual costs per type of ingredient in most cases. 
 - 1u of surface_heat: 1u of flour, up to 2u of butter/oil, 1u of sugar_standard, cook one corn tortilla, process 100 grams of fruit
-- 2u of surface_heat: one scrap of meat (30 grams), 1u of non-raw milk, 1u of batter (breading/frying), 100 grams of non-startchy veggy (for things like potatoes that are highly starchy, assume they are equal to their weight in flour - 1u of flour weighs 13 grams)
+- 2u of surface_heat: one scrap of meat (30 grams), 1u of non-raw milk, 1u of batter (breading/frying), 100 grams of non-startchy vegetable (for things like potatoes that are highly starchy, assume they are equal to their weight in flour - 1u of flour weighs 13 grams)
 - 3u of surface_heat: cook one unit of oatmeal.
 - 4u of surface_heat: cook one unit of beans, rice or lentils, use cooked meat in a recipe, cook 1u of raw organs.
 - 5u of surface_heat: cook one unit of cornmeal or bread flour.

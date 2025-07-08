@@ -652,7 +652,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "pie_veggy",
+    "result": "pie_vegetable",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_VEGGI",
     "skill_used": "cooking",
@@ -665,7 +665,7 @@
     "tools": [ [ [ "surface_heat", 6, "LIST" ] ] ],
     "components": [
       [ [ "flour_any", 30, "LIST" ] ],
-      [ [ "veggy_any", 8, "LIST" ], [ "wild_herbs", 40 ] ],
+      [ [ "vegetable_any", 8, "LIST" ], [ "wild_herbs", 40 ] ],
       [ [ "water", 1 ], [ "water_clean", 1 ] ]
     ]
   },
@@ -719,7 +719,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "veggy_pickled",
+    "result": "vegetable_pickled",
     "id_suffix": "jarred",
     "container": "jar_glass_sealed",
     "category": "CC_FOOD",
@@ -738,8 +738,8 @@
       [ [ "water", 1 ], [ "water_clean", 1 ], [ "salt_water", 1 ], [ "saline", 5 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
       [
-        [ "veggy", 2 ],
-        [ "veggy_wild", 2 ],
+        [ "vegetable", 2 ],
+        [ "vegetable_wild", 2 ],
         [ "mushroom", 2 ],
         [ "tomato", 2 ],
         [ "broccoli", 2 ],
@@ -771,7 +771,7 @@
       [ [ "water", 1 ], [ "water_clean", 1 ] ],
       [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "veggy", 2 ], [ "lettuce", 2 ], [ "veggy_wild", 2 ], [ "cabbage", 2 ] ]
+      [ [ "vegetable", 2 ], [ "lettuce", 2 ], [ "vegetable_wild", 2 ], [ "cabbage", 2 ] ]
     ]
   },
   {
@@ -932,7 +932,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "veggy_pickled",
+    "result": "vegetable_pickled",
     "id_suffix": "jarred_3l",
     "container": "jar_3l_glass_sealed",
     "category": "CC_FOOD",
@@ -951,8 +951,8 @@
       [ [ "water", 6 ], [ "water_clean", 6 ], [ "salt_water", 6 ], [ "saline", 30 ] ],
       [ [ "jar_3l_glass_sealed", 1 ] ],
       [
-        [ "veggy", 12 ],
-        [ "veggy_wild", 12 ],
+        [ "vegetable", 12 ],
+        [ "vegetable_wild", 12 ],
         [ "mushroom", 12 ],
         [ "tomato", 12 ],
         [ "broccoli", 12 ],

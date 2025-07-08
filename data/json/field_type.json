@@ -98,7 +98,7 @@
     "looks_like": "fd_blood"
   },
   {
-    "id": "fd_gibs_veggy",
+    "id": "fd_gibs_vegetable",
     "type": "field_type",
     "substance_name": "vegetation",
     "legacy_enum_id": 4,
@@ -115,7 +115,7 @@
     "phase": "liquid",
     "accelerated_decay": true,
     "display_field": true,
-    "looks_like": "fd_blood_veggy"
+    "looks_like": "fd_blood_vegetable"
   },
   {
     "id": "fd_web",
@@ -235,7 +235,7 @@
     "phase": "liquid",
     "accelerated_decay": true,
     "display_field": true,
-    "looks_like": "fd_blood_veggy"
+    "looks_like": "fd_blood_vegetable"
   },
   {
     "id": "fd_acid",
@@ -366,7 +366,7 @@
     "half_life": "2 minutes",
     "phase": "liquid",
     "display_field": true,
-    "looks_like": "fd_blood_veggy"
+    "looks_like": "fd_blood_vegetable"
   },
   {
     "id": "fd_sludge",
@@ -1174,7 +1174,7 @@
     "looks_like": "fd_laser"
   },
   {
-    "id": "fd_blood_veggy",
+    "id": "fd_blood_vegetable",
     "type": "field_type",
     "substance_name": "sap",
     "legacy_enum_id": 28,

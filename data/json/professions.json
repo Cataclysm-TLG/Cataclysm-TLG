@@ -557,11 +557,11 @@
     "item": "cheeseburger",
     "sub": [
       { "present": [ "ANTIWHEAT" ], "absent": [ "ANTIJUNK" ], "new": [ { "item": "fries", "ratio": 4 } ] },
-      { "present": [ "ANTIWHEAT", "ANTIJUNK" ], "absent": [ "MEATARIAN" ], "new": [ "veggy_salad", "fork" ] },
+      { "present": [ "ANTIWHEAT", "ANTIJUNK" ], "absent": [ "MEATARIAN" ], "new": [ "vegetable_salad", "fork" ] },
       { "present": [ "ANTIWHEAT", "ANTIJUNK", "MEATARIAN" ], "new": [ "fried_spam", "fork" ] },
       { "present": [ "LACTOSE" ], "absent": [ "ANTIWHEAT", "VEGETARIAN" ], "new": [ "hamburger" ] },
-      { "present": [ "LACTOSE", "VEGETARIAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "sandwich_veggy" ] },
-      { "present": [ "VEGAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "sandwich_veggy" ] },
+      { "present": [ "LACTOSE", "VEGETARIAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "sandwich_vegetable" ] },
+      { "present": [ "VEGAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "sandwich_vegetable" ] },
       {
         "present": [ "VEGETARIAN" ],
         "absent": [ "ANTIWHEAT", "LACTOSE" ],
@@ -573,10 +573,10 @@
     "type": "profession_item_substitutions",
     "item": "pizza_meat",
     "sub": [
-      { "present": [ "VEGETARIAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "pizza_veggy" ] },
-      { "present": [ "VEGAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "pizza_veggy" ] },
-      { "present": [ "VEGETARIAN", "ANTIWHEAT" ], "new": [ "veggy_salad", "fork" ] },
-      { "present": [ "VEGAN", "ANTIWHEAT" ], "new": [ "veggy_salad", "fork" ] },
+      { "present": [ "VEGETARIAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "pizza_vegetable" ] },
+      { "present": [ "VEGAN" ], "absent": [ "ANTIWHEAT" ], "new": [ "pizza_vegetable" ] },
+      { "present": [ "VEGETARIAN", "ANTIWHEAT" ], "new": [ "vegetable_salad", "fork" ] },
+      { "present": [ "VEGAN", "ANTIWHEAT" ], "new": [ "vegetable_salad", "fork" ] },
       {
         "present": [ "ANTIWHEAT" ],
         "absent": [ "VEGETARIAN", "ANTIJUNK" ],
@@ -591,10 +591,10 @@
   },
   {
     "type": "profession_item_substitutions",
-    "item": "pizza_veggy",
+    "item": "pizza_vegetable",
     "sub": [
-      { "present": [ "ANTIWHEAT", "VEGETARIAN" ], "new": [ "veggy_salad", "fork" ] },
-      { "present": [ "ANTIWHEAT", "VEGAN" ], "new": [ "veggy_salad", "fork" ] },
+      { "present": [ "ANTIWHEAT", "VEGETARIAN" ], "new": [ "vegetable_salad", "fork" ] },
+      { "present": [ "ANTIWHEAT", "VEGAN" ], "new": [ "vegetable_salad", "fork" ] },
       {
         "present": [ "ANTIWHEAT" ],
         "absent": [ "VEGETARIAN", "ANTIJUNK" ],

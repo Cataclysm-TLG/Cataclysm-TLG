@@ -11,11 +11,11 @@
     "to_hit": -3,
     "color": "white",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "20 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -27,7 +27,7 @@
     "price": "0 cent",
     "price_postapoc": "50 cent",
     "color": "brown",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "calories": 29,
     "spoils_in": "20 days",
     "description": "An almost forgotten staple of the native tribes, called the Indian potato by some.  Very nutritious, but mildly toxic unless cooked.",
@@ -35,7 +35,7 @@
     "symbol": ",",
     "looks_like": "potato",
     "flags": [ "RAW" ],
-    "vitamins": [ [ "calcium", 14 ], [ "iron", 1 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 14 ], [ "iron", 1 ], [ "vegetable_allergen", 1 ] ],
     "fun": -3
   },
   {
@@ -48,14 +48,14 @@
     "price_postapoc": "5 cent",
     "color": "brown",
     "calories": 40,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "stim": 1,
     "spoils_in": "20 days",
     "description": "This aromatic rhizome can be eaten as is in an emergency, but it is much better used for making beverages.  Its taste is pleasant but it is also tough and stringy.",
     "comestible_type": "FOOD",
     "symbol": ",",
     "flags": [ "RAW" ],
-    "vitamins": [ [ "calcium", 10 ], [ "iron", 8 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 10 ], [ "iron", 8 ], [ "vegetable_allergen", 1 ] ],
     "fun": -3
   },
   {
@@ -75,8 +75,8 @@
     "healthy": -1,
     "symbol": ",",
     "flags": [ "RAW" ],
-    "material": [ "veggy" ],
-    "vitamins": [ [ "calcium", 1 ], [ "iron", 8 ], [ "vitC", 2 ], [ "veggy_allergen", 1 ] ],
+    "material": [ "vegetable" ],
+    "vitamins": [ [ "calcium", 1 ], [ "iron", 8 ], [ "vitC", 2 ], [ "vegetable_allergen", 1 ] ],
     "fun": -2
   },
   {
@@ -94,8 +94,8 @@
     "description": "Also called ramps, this delicate leafy vegetable is healthy and a tasty ingredient for many dishes.",
     "symbol": ",",
     "flags": [ "RAW" ],
-    "material": [ "veggy" ],
-    "vitamins": [ [ "vitC", 10 ], [ "iron", 2 ], [ "veggy_allergen", 1 ] ],
+    "material": [ "vegetable" ],
+    "vitamins": [ [ "vitC", 10 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ],
     "fun": -2
   },
   {
@@ -111,11 +111,11 @@
     "description": "A big stalk of broccoli.  It's a bit tough, but rich in Vitamin C and quite delicious when properly cooked.",
     "price": "47 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "180 ml",
     "flags": [ "EATEN_HOT", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "134700 μg" ], [ "iron", "1100 μg" ], [ "calcium", "71 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "134700 μg" ], [ "iron", "1100 μg" ], [ "calcium", "71 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -131,12 +131,12 @@
     "description": "A head of crisp white cabbage.  You should probably prepare it before eating.",
     "price": "104 cent",
     "price_postapoc": "104 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "1632 ml",
     "fun": -2,
     "flags": [ "SMOKABLE", "RAW", "CATTLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "332800 μg" ], [ "iron", "12900 μg" ], [ "calcium", "364 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "332800 μg" ], [ "iron", "12900 μg" ], [ "calcium", "364 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -152,12 +152,12 @@
     "description": "A handful of shredded cabbage.",
     "price": "8 cent",
     "price_postapoc": "8 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -2,
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "25600 μg" ], [ "iron", "300 μg" ], [ "calcium", "28 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "25600 μg" ], [ "iron", "300 μg" ], [ "calcium", "28 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -172,11 +172,11 @@
     "calories": 22,
     "description": "Edible leaves of the grape vine.  Typically used in salads or as a food wrapping.",
     "price": "80 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 2 ], [ "calcium", 4 ], [ "iron", 2 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 2 ], [ "calcium", 4 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -192,12 +192,12 @@
     "description": "A bunch of spinach leaves.  Their ability to provide one with superhuman strength has been greatly exaggerated by popular media.",
     "price": "18 cent",
     "price_postapoc": "5 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -2,
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -212,13 +212,13 @@
     "description": "A healthy root vegetable.  Rich in vitamin A!",
     "price": "23 cent",
     "price_postapoc": "8 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "146 ml",
     "longest_side": "19 cm",
     "fun": 1,
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "4200 μg" ], [ "iron", "200 μg" ], [ "calcium", "23800 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "4200 μg" ], [ "iron", "200 μg" ], [ "calcium", "23800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -233,11 +233,11 @@
     "description": "A stout, branching rhizome from a cattail plant.  Its crisp white flesh is very starchy and fibrous, but you really ought to cook it before you attempt to eat it.",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -12,
     "flags": [ "RAW" ],
-    "vitamins": [ [ "iron", 8 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 8 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -252,11 +252,11 @@
     "description": "The rhizome of the lotus, which has many tubular cavities inside, can be eaten both raw and cooked.",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "500 ml",
     "flags": [ "SMOKABLE", "FREEZERBURN" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 94 ], [ "calcium", 9 ], [ "iron", 12 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 94 ], [ "calcium", 9 ], [ "iron", 12 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -271,12 +271,12 @@
     "description": "A stiff, green stalk from a cattail plant.  It is starchy and fibrous, but it would be much better if you cooked it.",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -8,
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "calcium", 5 ], [ "iron", 5 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -299,12 +299,12 @@
     "description": "A single stalk of celery.  Neither tasty nor very nutritious, but it goes well with salad.",
     "price": "10 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "146 ml",
     "longest_side": "19 cm",
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -320,10 +320,10 @@
     "description": "A tough protective capsule bulging with densely-packed fibers and seeds, this cotton boll can be processed into usable material with the right tools.",
     "price": "25 cent",
     "price_postapoc": "2 cent",
-    "material": [ "veggy", "cotton" ],
+    "material": [ "vegetable", "cotton" ],
     "volume": "62 ml",
     "fun": -10,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -338,11 +338,11 @@
     "description": "A spicy chili pepper.  Not the best on its own, but adds great flavor when used in cooking.",
     "price": "8 cent",
     "price_postapoc": "16 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "70 ml",
     "smoking_result": "dry_chili",
     "flags": [ "FREEZERBURN", "RAW", "SMOKABLE" ],
-    "vitamins": [ [ "vitC", "64700 μg" ], [ "iron", "500 μg" ], [ "calcium", "6300 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "64700 μg" ], [ "iron", "500 μg" ], [ "calcium", "6300 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -2
   },
   {
@@ -370,12 +370,12 @@
     "description": "The larger cousin of a pickle.  A vegetable from the gourd family.  Not especially flavorful, but very refreshing.",
     "price": "84 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "275 ml",
     "longest_side": "22 cm",
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "48200 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "48200 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -403,12 +403,12 @@
     "description": "The large, tuberous root of a dahlia flower.  It smells spicy, but is too starchy to eat without cooking.",
     "price": "1 USD",
     "price_postapoc": "25 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -4,
     "flags": [ "RAW" ],
     "//": "Dahlia roots contain an incredible amount of vitamin B6. This isn't a vitamin tracked in Cataclysm, but be careful of vitamin overdose when eating dahlia in real life.",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -424,12 +424,12 @@
     "description": "A highly nutritious root, it is tough and bland until cooked, at which point it tastes strangely similar to oysters.",
     "price": "39 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -2,
-    "smoking_result": "dry_veggy",
+    "smoking_result": "dry_vegetable",
     "flags": [ "RAW", "SMOKABLE" ],
-    "vitamins": [ [ "vitC", "10600 μg" ], [ "iron", "900 μg" ], [ "calcium", "79800 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "10600 μg" ], [ "iron", "900 μg" ], [ "calcium", "79800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -444,11 +444,11 @@
     "description": "A very bitter root, not meant to be eaten raw.",
     "price": "4 cent",
     "price_postapoc": "25 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "135 ml",
     "fun": -8,
     "flags": [ "RAW" ],
-    "vitamins": [ [ "vitC", "3 mg" ], [ "iron", "500 μg" ], [ "calcium", "24600 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "3 mg" ], [ "iron", "500 μg" ], [ "calcium", "24600 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -478,11 +478,11 @@
     "to_hit": -3,
     "color": "magenta",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -502,7 +502,7 @@
     "volume": "45 ml",
     "fun": -18,
     "flags": [ "RAW", "PLANTABLE_SEED" ],
-    "vitamins": [ [ "vitC", "5400 μg" ], [ "iron", "600 μg" ], [ "calcium", "32400 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "5400 μg" ], [ "iron", "600 μg" ], [ "calcium", "32400 μg" ], [ "vegetable_allergen", 1 ] ],
     "//": "Who in their right mind would eat an entire garlic bulb raw?",
     "seed_data": { "plant_name": "garlic", "fruit": "garlic", "byproducts": [ "withered" ], "grow": "65 days" }
   },
@@ -523,7 +523,7 @@
     "fun": -3,
     "price": "2 cent",
     "price_postapoc": "8 cent",
-    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "900 μg" ], [ "iron", "100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -538,11 +538,11 @@
     "description": "A cluster of small cone-like flowers, indispensable for brewing beer.",
     "price": "5 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "62 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "fun": -15,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -557,11 +557,11 @@
     "description": "A large white tapered root of a horseradish plant.  Way too spicy to eat in this form, but can be used for making condiments.",
     "price": "107 cent",
     "price_postapoc": "80 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "400 ml",
     "fun": -12,
     "flags": [ "FREEZERBURN", "RAW" ],
-    "vitamins": [ [ "vitC", "62300 μg" ], [ "iron", "1100 μg" ], [ "calcium", "140 mg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "62300 μg" ], [ "iron", "1100 μg" ], [ "calcium", "140 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -577,11 +577,11 @@
     "description": "A crisp head of iceberg lettuce.  You should probably prepare it before eating.",
     "price": "264 cent",
     "price_postapoc": "132 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "1850 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "14 mg" ], [ "iron", "2100 μg" ], [ "calcium", "91 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "14 mg" ], [ "iron", "2100 μg" ], [ "calcium", "91 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -597,11 +597,11 @@
     "description": "A handful of shredded iceberg lettuce.",
     "price": "35 cent",
     "price_postapoc": "20 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "2 mg" ], [ "iron", "300 μg" ], [ "calcium", "13 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "2 mg" ], [ "iron", "300 μg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -616,11 +616,11 @@
     "to_hit": -3,
     "color": "magenta",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -635,13 +635,13 @@
     "description": "An aromatic onion used in cooking.  Cutting these up can make your eyes sting!",
     "price": "17 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "135 ml",
     "fun": -1,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
+    "smoking_result": "dry_vegetable",
     "//": "Raw onions probably aren't all that tasty to most people.",
-    "vitamins": [ [ "vitC", "8100 μg" ], [ "iron", "200 μg" ], [ "calcium", "25300 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "8100 μg" ], [ "iron", "200 μg" ], [ "calcium", "25300 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -660,11 +660,11 @@
     "description": "A fluid bladder from a fungus-based lifeform.  Not very nutritious, but safe to eat.",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -680,12 +680,12 @@
     "description": "A potato, mildly toxic and not very tasty raw.  Delicious and filling when properly cooked.",
     "price": "84 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "232 ml",
     "fun": -3,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "42 mg" ], [ "iron", "1700 μg" ], [ "calcium", "25600 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "42 mg" ], [ "iron", "1700 μg" ], [ "calcium", "25600 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -700,12 +700,12 @@
     "description": "A much less sweet and more starchy relative of the banana; unlike dessert bananas, they usually are eaten cooked rather than raw, and can be processed into flour.  They are a staple food in tropical regions of the world.  Also known as plantains.",
     "price": "72 cent",
     "price_postapoc": "1 USD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "190 ml",
     "fun": -1,
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "32900 μg" ], [ "iron", "1100 μg" ], [ "calcium", "5400 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "32900 μg" ], [ "iron", "1100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -720,11 +720,11 @@
     "description": "A large gourd, about the size of a person's head.  It'll require some disassembly before use.",
     "price": "250 cent",
     "price_postapoc": "6 USD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "2062 ml",
     "fun": -1,
     "flags": [ "RAW", "INEDIBLE" ],
-    "vitamins": [ [ "vitC", "102 mg" ], [ "iron", "9200 μg" ], [ "calcium", "237600 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "102 mg" ], [ "iron", "9200 μg" ], [ "calcium", "237600 μg" ], [ "vegetable_allergen", 1 ] ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -741,7 +741,7 @@
     "weight": "283 g",
     "price_postapoc": "60 cent",
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
+    "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "25500 μg" ], [ "iron", "2300 μg" ], [ "calcium", "59400 μg" ] ],
     "melee_damage": { "bash": 0 }
   },
@@ -757,12 +757,12 @@
     "calories": 22,
     "description": "Leaves of a horseradish plant with a sharp, bitter and peppery taste.  They're edible, but not commonly eaten.",
     "price": "80 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "140 ml",
     "fun": -2,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 30 ], [ "calcium", 2 ], [ "iron", 3 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 30 ], [ "calcium", 2 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -777,12 +777,12 @@
     "description": "A handful of freshly-picked yellow dandelions.  In their current raw state they are quite bitter.",
     "price": "15 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "107 ml",
     "fun": -12,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -797,12 +797,12 @@
     "description": "Burdock, a bitter thistle-like vegetable.  Can be eaten raw or cooked.",
     "price": "15 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "117 ml",
     "fun": -12,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", 1 ], [ "calcium", 23 ], [ "iron", 10 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", 1 ], [ "calcium", 23 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -818,12 +818,12 @@
     "description": "Raw woody bamboo shoots, they require some preparation before they can be eaten safely.",
     "price": "15 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -12,
     "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "6 mg" ], [ "iron", "1 mg" ], [ "calcium", "20 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "6 mg" ], [ "iron", "1 mg" ], [ "calcium", "20 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -839,12 +839,12 @@
     "description": "A sour stalk of the rhubarb plant, often used in baking pies.",
     "price": "29 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "186 ml",
     "longest_side": "19 cm",
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "4100 μg" ], [ "iron", "100 μg" ], [ "calcium", "43900 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "4100 μg" ], [ "iron", "100 μg" ], [ "calcium", "43900 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -859,12 +859,12 @@
     "description": "This fleshy root is ripe and flowing with sugars; it'll just take some processing to extract them.",
     "price": "12 cent",
     "price_postapoc": "12 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "75 ml",
     "fun": -10,
     "flags": [ "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "4 mg" ], [ "iron", "1 mg" ], [ "calcium", "13 mg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "4 mg" ], [ "iron", "1 mg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -881,13 +881,13 @@
     "description": "Dried leaves of a tropical plant.  You can boil them into tea, or you can just eat them raw.  They're pretty gross and not too filling that way, though.",
     "price": "31 cent",
     "price_postapoc": "7 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
     "volume": "9 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW", "IRREPLACEABLE_CONSUMABLE" ],
     "//": "Tea is sold by weight not by volume. 1 kg of tea has a volume of 3,4 liters. We use smaller packs of at least 100 mg. Such a tea has a volume of 340 ml minus package makes it around 320 ml. 3 g per serving makes 33 charges.",
     "fun": -1,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -909,12 +909,12 @@
       "activation_message": "You chew the wintergreen leaves.",
       "effects": [ { "id": "pkill_wintergreen", "duration": "30 m" } ]
     },
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dried_vegetable",
     "volume": "50 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "fun": -10,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -940,8 +940,8 @@
     "material": [ "tomato" ],
     "volume": "150 ml",
     "flags": [ "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "16900 μg" ], [ "iron", "300 μg" ], [ "calcium", "12300 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "16900 μg" ], [ "iron", "300 μg" ], [ "calcium", "12300 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -954,7 +954,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "veggy",
+    "id": "vegetable",
     "name": { "str_sp": "plant marrow" },
     "weight": "119 g",
     "color": "green",
@@ -965,33 +965,33 @@
     "description": "A nutrient-rich chunk of plant matter, could be eaten raw or cooked.",
     "price": "6 USD",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "TRADER_AVOID", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
+    "smoking_result": "dry_vegetable",
     "volume": "250 ml",
     "//": "average of broccoli, cabbage, carrot, cattail_stalk, celery, chili_pepper, cucumber, lettuce, onion, pumpkin, raw_dandelion, rhubarb, sugar_beet, tomato, zucchini",
-    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
-    "id": "veggy_tainted",
+    "id": "vegetable_tainted",
     "//": "Note: Legacy item ID, this is not actually a vegetable at all anymore.",
     "category": "other",
     "name": { "str": "alien fungus chunk" },
-    "copy-from": "veggy",
+    "copy-from": "vegetable",
     "looks_like": "mushroom",
     "spoils_in": "40 hours",
     "use_action": [ "POISON" ],
     "description": "A chunk of fungal matter from some sort of alien mushroom creature.  Eating unfamiliar mushrooms is a bad idea.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "smoking_result": "dry_veggy_tainted"
+    "smoking_result": "dry_vegetable_tainted"
   },
   {
     "type": "COMESTIBLE",
-    "id": "veggy_wild",
+    "id": "vegetable_wild",
     "name": { "str_sp": "wild vegetables" },
-    "copy-from": "veggy",
+    "copy-from": "vegetable",
     "description": "An assortment of edible-looking wild plants.  Most are quite bitter-tasting.  Some are inedible until cooked.",
     "//": "In real life many root vegetables are mildly toxic until cooked",
     "fun": -10,
@@ -1011,12 +1011,12 @@
     "description": "A tasty summer squash.",
     "price": "46 cent",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "180 ml",
     "longest_side": "22 cm",
     "flags": [ "EATEN_HOT", "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "vitC", "35100 μg" ], [ "iron", "700 μg" ], [ "calcium", "31400 μg" ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "vitC", "35100 μg" ], [ "iron", "700 μg" ], [ "calcium", "31400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1041,10 +1041,10 @@
     "description": "Raw, uncooked beans.  They are mildly toxic to humans in this form, but you could cook them to make them tasty.",
     "price": "90 cent",
     "price_postapoc": "25 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "cooks_like": "beans_cooked",
     "smoking_result": "dry_beans",
-    "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "1 mg" ], [ "calcium", "31 mg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "71 mg" ], [ "iron", "1 mg" ], [ "calcium", "31 mg" ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "SMOKABLE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED" ],
     "seed_data": { "plant_name": "beans", "fruit": "raw_beans", "seeds": false, "byproducts": [ "withered" ], "grow": "91 days" }
@@ -1063,12 +1063,12 @@
     "description": "A handful of immature fern fronds, still curled up like the head of a fiddle.  Delicious when cooked, but consuming them raw can cause food poisoning.",
     "price": "40 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "62 ml",
     "fun": -10,
     "use_action": [ "POISON" ],
     "//": "Fiddleheads that haven't been boiled can make you sick.",
-    "vitamins": [ [ "vitC", 6 ], [ "calcium", 4 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 6 ], [ "calcium", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1084,10 +1084,10 @@
     "description": "Some young leaves from miscellaneous plants.  They're tender enough to eat, but not very tasty on their own.",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "45 ml",
     "fun": -2,
-    "vitamins": [ [ "vitC", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1117,10 +1117,10 @@
     "description": "Some young Japanese knotweed stems.  They taste a bit like rhubarb and contain good amounts of vitamin A.  Refreshing.",
     "price": "40 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "62 ml",
     "longest_side": "20 cm",
-    "vitamins": [ [ "vitC", 6 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 6 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1136,12 +1136,12 @@
     "description": "A green bell pepper.  Eating it whole and raw would be kind of a hassle, considering all the seeds.",
     "price": "54 cent",
     "price_postapoc": "20 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "221 ml",
     "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_veggy",
+    "smoking_result": "dry_vegetable",
     "fun": -5,
-    "vitamins": [ [ "vitC", "95700 μg" ], [ "iron", "400 μg" ], [ "calcium", "11900 μg" ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", "95700 μg" ], [ "iron", "400 μg" ], [ "calcium", "11900 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1168,11 +1168,11 @@
     "description": "This wheat-free white flour is useful for baking items for those with grain intolerances.",
     "price": "45 cent",
     "price_postapoc": "10 cent",
-    "material": [ "veggy", "powder" ],
+    "material": [ "vegetable", "powder" ],
     "volume": "25 ml",
     "//": "250 ml is equivalent to 1 cup of flour.  10 charges is roughly equivalent to a cup of flour for American recipes.  Nutritional data based off buckwheat flour.",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
-    "vitamins": [ [ "iron", "500 μg" ], [ "calcium", "5 mg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "iron", "500 μg" ], [ "calcium", "5 mg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -5
   },
   {
@@ -1205,14 +1205,14 @@
     "price": "3 USD",
     "price_postapoc": "50 cent",
     "color": "black",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "calories": 137,
     "spoils_in": "20 days",
     "description": "A normal and healthy purple eggplant.  Needs to be disassembled before being useful for cooking.",
     "healthy": -1,
     "symbol": "e",
     "flags": [ "RAW" ],
-    "vitamins": [ [ "vitC", "12100 μg" ], [ "iron", "1300 μg" ], [ "calcium", "49300 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "12100 μg" ], [ "iron", "1300 μg" ], [ "calcium", "49300 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -8
   },
   {
@@ -1225,7 +1225,7 @@
     "price": "150 cent",
     "price_postapoc": "20 cent",
     "color": "black",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "calories": 68,
     "spoils_in": "4 days",
     "description": "A cut-up eggplant with many of the seeds picked out.",
@@ -1233,7 +1233,7 @@
     "symbol": "e",
     "looks_like": "eggplant",
     "flags": [ "RAW" ],
-    "vitamins": [ [ "vitC", "60500 μg" ], [ "iron", "650 μg" ], [ "calcium", "24650 μg" ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "60500 μg" ], [ "iron", "650 μg" ], [ "calcium", "24650 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -5
   },
   {
@@ -1246,11 +1246,11 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "description": "A handful of slimy seaweed.  It doesn't look edible, but properly dried, it might make for decent kindling.",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "30 ml",
     "flags": [ "SMOKABLE", "INEDIBLE" ],
     "smoking_result": "dry_seaweed",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1262,11 +1262,11 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "description": "A slimy heap of seaweed.  It doesn't look edible, but properly dried, it might make for decent kindling.",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "600 ml",
     "flags": [ "SMOKABLE", "INEDIBLE" ],
     "smoking_result": "dry_seaweed_pile",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1281,11 +1281,11 @@
     "description": "A handful of edible green seaweed.  It makes a good snack as-is, but can be dried or prepared in a number of ways.",
     "price": 10,
     "price_postapoc": 10,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1300,11 +1300,11 @@
     "description": "A sizable strip of new growth harvested from a sugar kelp.  While these are most often dried, it seems edible enough as is.",
     "price": 10,
     "price_postapoc": 10,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE" ],
     "smoking_result": "kombu",
-    "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1319,10 +1319,10 @@
     "description": "A leafy bunch of seaweed covered in air bladders.  Many claims are made about its health benefits, but at least as a foodstuff, it's no better or worse than other edible seaweed.",
     "price": 10,
     "price_postapoc": 10,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "FREEZERBURN", "SMOKABLE" ],
-    "smoking_result": "dry_veggy",
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 4 ], [ "vitC", 1 ], [ "veggy_allergen", 1 ] ]
+    "smoking_result": "dry_vegetable",
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 4 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   }
 ]

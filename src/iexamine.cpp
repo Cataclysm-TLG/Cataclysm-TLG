@@ -4494,7 +4494,7 @@ void iexamine::shrub_wildveggies( Character &you, const tripoint_bub_ms &examp )
     move_cost /= rng( std::max( 4, you.per_cur ), 4 + you.per_cur * 2 );
     if( you.has_quality( qual_GRASS_CUT ) || you.has_quality( qual_AXE ) ) {
         add_msg( _( "You quickly hack through the dense undergrowth." ) );
-        move_cost *= 0.9;
+        move_cost *= 0.85;
     }
     you.assign_activity( forage_activity_actor( move_cost ) );
     you.activity.placement = here.getglobal( examp );

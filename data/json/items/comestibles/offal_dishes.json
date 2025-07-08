@@ -28,7 +28,7 @@
     "looks_like": "meat_cooked",
     "description": "A classic way to serve liver.",
     "price_postapoc": "1 USD 50 cent",
-    "material": [ "flesh", "veggy" ],
+    "material": [ "flesh", "vegetable" ],
     "color": "brown",
     "weight": "206 g",
     "volume": "250 ml",
@@ -36,7 +36,7 @@
     "calories": 398,
     "quench": -3,
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
-    "vitamins": [ [ "vitC", 1 ], [ "calcium", 0 ], [ "iron", 8 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 1 ], [ "calcium", 0 ], [ "iron", 8 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "fried_livers",
@@ -104,7 +104,7 @@
     "fun": 7,
     "description": "Chunks of heart filled with vegetables and spices.",
     "price_postapoc": "41 cent",
-    "material": [ "flesh", "wheat", "veggy" ],
+    "material": [ "flesh", "wheat", "vegetable" ],
     "primary_material": "flesh",
     "color": "brown",
     "spoils_in": "1 days",
@@ -112,7 +112,7 @@
     "weight": "89 g",
     "calories": 400,
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "humble_pie",
@@ -186,7 +186,7 @@
     "quench": -2,
     "description": "A traditional Danish pate.  Probably better if you spread it on some bread.",
     "price_postapoc": "10 cent",
-    "material": [ "flesh", "wheat", "milk", "veggy" ],
+    "material": [ "flesh", "wheat", "milk", "vegetable" ],
     "primary_material": "processed_food",
     "color": "magenta",
     "spoils_in": "360 days",
@@ -198,7 +198,7 @@
       [ "calcium", 1 ],
       [ "iron", 5 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -235,7 +235,7 @@
     "fun": 5,
     "description": "A delicious way to prepare kidneys, originating from Victorian England.  You had to make some substitutions in the devilling sauce, but it still came out damn good.",
     "price_postapoc": "150 cent",
-    "material": [ "flesh", "wheat", "veggy" ],
+    "material": [ "flesh", "wheat", "vegetable" ],
     "primary_material": "flesh",
     "color": "yellow",
     "spoils_in": "1 days",
@@ -248,7 +248,7 @@
       [ "iron", 6 ],
       [ "calcium", 1 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ]
     ]
   },
@@ -289,7 +289,7 @@
     "fun": 8,
     "description": "A French lung dish, made by poaching the lungs before pan-frying them with onion, tomato, seasonings, and a generous amount of wine.",
     "price_postapoc": "41 cent",
-    "material": [ "flesh", "wheat", "veggy" ],
+    "material": [ "flesh", "wheat", "vegetable" ],
     "primary_material": "flesh",
     "color": "yellow",
     "spoils_in": "1 days",
@@ -297,7 +297,7 @@
     "weight": "180 g",
     "calories": 100,
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "id": "tÖttchen",
@@ -310,7 +310,7 @@
     "fun": 7,
     "description": "A German peasant dish that converts many less-desirable meat cuts and organs into a palatable meal with the liberal application of butter, sugar, and wine.",
     "price_postapoc": "10 USD",
-    "material": [ "flesh", "wheat", "veggy" ],
+    "material": [ "flesh", "wheat", "vegetable" ],
     "primary_material": "flesh",
     "color": "yellow",
     "spoils_in": "2 days",
@@ -318,7 +318,7 @@
     "weight": "180 g",
     "calories": 400,
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "id": "scrambledeggsandbrain",
@@ -331,7 +331,7 @@
     "fun": 3,
     "description": "Brain and eggs, why didn't you ever think to put these together?",
     "price_postapoc": "166 cent",
-    "material": [ "flesh", "wheat", "veggy" ],
+    "material": [ "flesh", "wheat", "vegetable" ],
     "primary_material": "flesh",
     "color": "yellow",
     "spoils_in": "2 days",
@@ -339,7 +339,7 @@
     "weight": "180 g",
     "calories": 400,
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "id": "sausage_casings",

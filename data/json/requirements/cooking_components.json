@@ -621,7 +621,7 @@
     "components": [
       [ [ "broth", 2 ], [ "broth_bone", 2 ], [ "broth_meat", 2 ] ],
       [
-        [ "veggy_potatolike", 1, "LIST" ],
+        [ "vegetable_potatolike", 1, "LIST" ],
         [ "celery", 1 ],
         [ "cabbage", 1 ],
         [ "sauerkraut", 1 ],
@@ -660,11 +660,11 @@
         [ "spaghetti_raw", 1 ],
         [ "macaroni_raw", 1 ],
         [ "noodles_fast", 1 ],
-        [ "veggy_any", 1, "LIST" ],
+        [ "vegetable_any", 1, "LIST" ],
         [ "sauerkraut", 1 ],
         [ "can_corn", 1 ],
         [ "hominy", 1 ],
-        [ "dry_veggy", 1 ],
+        [ "dry_vegetable", 1 ],
         [ "dry_corn", 1 ],
         [ "corn_kernels", 1 ],
         [ "con_milk", 1 ],
@@ -725,11 +725,11 @@
         [ "spaghetti_raw", 1 ],
         [ "macaroni_raw", 1 ],
         [ "noodles_fast", 1 ],
-        [ "veggy_any", 1, "LIST" ],
+        [ "vegetable_any", 1, "LIST" ],
         [ "sauerkraut", 1 ],
         [ "can_corn", 1 ],
         [ "hominy", 1 ],
-        [ "dry_veggy", 1 ],
+        [ "dry_vegetable", 1 ],
         [ "dry_corn", 1 ],
         [ "corn_kernels", 1 ],
         [ "con_milk", 1 ],
@@ -803,12 +803,12 @@
         [ "bratwurst_sausage", 1 ]
       ],
       [
-        [ "veggy_wild", 2 ],
-        [ "veggy", 2 ],
+        [ "vegetable_wild", 2 ],
+        [ "vegetable", 2 ],
         [ "corn_kernels", 2 ],
-        [ "rehydrated_veggy", 2 ],
+        [ "rehydrated_vegetable", 2 ],
         [ "rehydrated_corn_kernels", 2 ],
-        [ "dry_veggy", 2 ],
+        [ "dry_vegetable", 2 ],
         [ "dry_corn", 2 ],
         [ "dry_beans", 2 ],
         [ "can_beans", 2 ],
@@ -834,17 +834,17 @@
     ]
   },
   {
-    "id": "woods_soup_ingredients_veggy",
+    "id": "woods_soup_ingredients_vegetable",
     "type": "requirement",
     "components": [
       [ [ "broth", 1 ], [ "broth_bone", 1 ], [ "broth_meat", 1 ], [ "pine_tea", 1 ] ],
       [ [ "powder_eggs", 1 ], [ "eggs_bird", 1, "LIST" ], [ "egg_reptile", 1 ] ],
       [
-        [ "veggy_wild", 1 ],
-        [ "veggy", 1 ],
-        [ "rehydrated_veggy", 1 ],
+        [ "vegetable_wild", 1 ],
+        [ "vegetable", 1 ],
+        [ "rehydrated_vegetable", 1 ],
         [ "rehydrated_corn_kernels", 1 ],
-        [ "dry_veggy", 1 ],
+        [ "dry_vegetable", 1 ],
         [ "dry_corn", 1 ],
         [ "dry_beans", 1 ],
         [ "can_beans", 1 ],
@@ -1059,7 +1059,7 @@
     ]
   },
   {
-    "id": "veggy_green",
+    "id": "vegetable_green",
     "type": "requirement",
     "//": "anything you would consider a leafy green vegetable",
     "components": [
@@ -1070,12 +1070,12 @@
         [ "horseradish_greens", 1 ],
         [ "raw_dandelion", 1 ],
         [ "raw_burdock", 1 ],
-        [ "rehydrated_veggy", 1 ],
+        [ "rehydrated_vegetable", 1 ],
         [ "rehydrated_corn_kernels", 1 ],
         [ "corn_kernels", 1 ],
-        [ "veggy", 1 ],
-        [ "veggy_wild", 1 ],
-        [ "veggy_salted", 1 ],
+        [ "vegetable", 1 ],
+        [ "vegetable_wild", 1 ],
+        [ "vegetable_salted", 1 ],
         [ "spinach", 1 ],
         [ "sea_lettuce", 1 ],
         [ "bladderwrack", 1 ],
@@ -1084,23 +1084,29 @@
     ]
   },
   {
-    "id": "veggy_potatolike",
+    "id": "vegetable_potatolike",
     "type": "requirement",
     "//": "Any edible tuber that can be used like potato",
     "components": [ [ [ "potato", 1 ], [ "groundnut_prepared", 5 ] ] ]
   },
   {
-    "id": "veggy_any_corn_uncooked",
+    "id": "vegetable_any_corn_uncooked",
     "type": "requirement",
     "components": [ [ [ "corn", 1 ], [ "corn_kernels", 1 ], [ "rehydrated_corn_kernels", 1 ], [ "can_corn", 1 ] ] ]
   },
   {
-    "id": "veggy_any_uncooked",
+    "id": "vegetable_any_uncooked",
     "type": "requirement",
-    "components": [ [ [ "rehydrated_veggy", 1 ], [ "veggy_any_corn_uncooked", 1, "LIST" ], [ "veggy_any_fresh_uncooked", 1, "LIST" ] ] ]
+    "components": [
+      [
+        [ "rehydrated_vegetable", 1 ],
+        [ "vegetable_any_corn_uncooked", 1, "LIST" ],
+        [ "vegetable_any_fresh_uncooked", 1, "LIST" ]
+      ]
+    ]
   },
   {
-    "id": "veggy_any_fresh_uncooked",
+    "id": "vegetable_any_fresh_uncooked",
     "type": "requirement",
     "components": [
       [
@@ -1127,8 +1133,8 @@
         [ "tomato_cut", 1 ],
         [ "bell_pepper", 1 ],
         [ "bell_pepper_cut", 1 ],
-        [ "veggy", 1 ],
-        [ "veggy_wild", 1 ],
+        [ "vegetable", 1 ],
+        [ "vegetable_wild", 1 ],
         [ "zucchini", 1 ],
         [ "zucchini_cut", 1 ],
         [ "eggplant_cut", 1 ],
@@ -1140,7 +1146,7 @@
     ]
   },
   {
-    "id": "veggy_any",
+    "id": "vegetable_any",
     "type": "requirement",
     "components": [
       [
@@ -1150,9 +1156,9 @@
         [ "bamboo_cooked", 1 ],
         [ "salsify_baked", 1 ],
         [ "groundnut_prepared", 1 ],
-        [ "veggy_any_uncooked", 1, "LIST" ],
-        [ "veggy_canned", 1 ],
-        [ "veggy_salted", 1 ]
+        [ "vegetable_any_uncooked", 1, "LIST" ],
+        [ "vegetable_canned", 1 ],
+        [ "vegetable_salted", 1 ]
       ]
     ]
   },
@@ -1176,7 +1182,7 @@
     "type": "requirement",
     "components": [
       [
-        [ "veggy_any", 1, "LIST" ],
+        [ "vegetable_any", 1, "LIST" ],
         [ "empty_corn_cob", 1 ],
         [ "corn", 1 ],
         [ "mushroom_cooked", 1 ],
@@ -1215,7 +1221,7 @@
     ]
   },
   {
-    "id": "veggy_soup_ingredients",
+    "id": "vegetable_soup_ingredients",
     "type": "requirement",
     "components": [
       [ [ "broth", 1 ] ],
@@ -1224,8 +1230,8 @@
         [ "macaroni_raw", 1 ],
         [ "noodles_fast", 1 ],
         [ "celery", 1 ],
-        [ "veggy_green", 1, "LIST" ],
-        [ "veggy_potatolike", 1, "LIST" ],
+        [ "vegetable_green", 1, "LIST" ],
+        [ "vegetable_potatolike", 1, "LIST" ],
         [ "sauerkraut", 1 ],
         [ "powder_eggs", 1 ],
         [ "eggs_bird", 1, "LIST" ],
@@ -1246,7 +1252,7 @@
         [ "dry_soybean", 1 ],
         [ "dry_lentils", 1 ]
       ],
-      [ [ "veggy_any", 1, "LIST" ] ]
+      [ [ "vegetable_any", 1, "LIST" ] ]
     ]
   },
   {

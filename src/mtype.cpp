@@ -26,14 +26,14 @@ static const itype_id itype_fish( "fish" );
 static const itype_id itype_human_flesh( "human_flesh" );
 static const itype_id itype_meat( "meat" );
 static const itype_id itype_meat_tainted( "meat_tainted" );
-static const itype_id itype_veggy( "veggy" );
-static const itype_id itype_veggy_tainted( "veggy_tainted" );
+static const itype_id itype_vegetable( "vegetable" );
+static const itype_id itype_vegetable_tainted( "vegetable_tainted" );
 
 static const material_id material_bone( "bone" );
 static const material_id material_flesh( "flesh" );
 static const material_id material_hflesh( "hflesh" );
 static const material_id material_iflesh( "iflesh" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 
 static const species_id species_MOLLUSK( "MOLLUSK" );
 
@@ -432,8 +432,8 @@ field_type_id mtype::bloodType() const
     if( has_flag( mon_flag_ARTHROPOD_BLOOD ) ) {
         return fd_blood_invertebrate;
     }
-    if( made_of( material_veggy ) ) {
-        return fd_blood_veggy;
+    if( made_of( material_vegetable ) ) {
+        return fd_blood_vegetable;
     }
     if( made_of( material_iflesh ) ) {
         return fd_blood_insect;
@@ -449,8 +449,8 @@ field_type_id mtype::gibType() const
     if( in_species( species_MOLLUSK ) ) {
         return fd_gibs_invertebrate;
     }
-    if( made_of( material_veggy ) ) {
-        return fd_gibs_veggy;
+    if( made_of( material_vegetable ) ) {
+        return fd_gibs_vegetable;
     }
     if( made_of( material_iflesh ) ) {
         return fd_gibs_insect;
@@ -469,8 +469,8 @@ itype_id mtype::get_meat_itype() const
             //In the future, insects could drop insect flesh rather than plain ol' meat.
             made_of( material_iflesh ) ) {
             return itype_meat_tainted;
-        } else if( made_of( material_veggy ) ) {
-            return itype_veggy_tainted;
+        } else if( made_of( material_vegetable ) ) {
+            return itype_vegetable_tainted;
         } else if( made_of( material_bone ) ) {
             return itype_bone_tainted;
         }
@@ -486,8 +486,8 @@ itype_id mtype::get_meat_itype() const
         } else if( made_of( material_iflesh ) ) {
             //In the future, insects could drop insect flesh rather than plain ol' meat.
             return itype_meat;
-        } else if( made_of( material_veggy ) ) {
-            return itype_veggy;
+        } else if( made_of( material_vegetable ) ) {
+            return itype_vegetable;
         } else if( made_of( material_bone ) ) {
             return itype_bone;
         }

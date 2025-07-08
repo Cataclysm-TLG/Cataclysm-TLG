@@ -69,7 +69,7 @@
       { "prob": 10, "group": "salt_various" },
       { "prob": 5, "group": "seasoning_salt_various" },
       { "item": "vinegar", "prob": 10 },
-      { "prob": 30, "group": "veggy_pickled_jar_glass_sealed_2" },
+      { "prob": 30, "group": "vegetable_pickled_jar_glass_sealed_2" },
       { "item": "con_milk", "prob": 20 },
       { "prob": 26, "group": "fish_pickled_jar_glass_sealed_2" },
       { "item": "lutefisk", "prob": 1 },

@@ -13,10 +13,10 @@
     "price": "1 USD 70 cent",
     "//": "Thinking this is a single ear here.",
     "price_postapoc": "50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "195 ml",
     "flags": [ "EATEN_HOT", "RAW" ],
-    "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ],
     "use_action": { "type": "consume_drug", "used_up_item": "empty_corn_cob", "moves": 500 }
   },
   {
@@ -32,10 +32,10 @@
     "description": "Delicious golden kernels of corn.",
     "price": "2 USD",
     "price_postapoc": "60 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "83 ml",
     "smoking_result": "dry_corn",
-    "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 12 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "EATEN_HOT", "SMOKABLE", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED", "BIRD", "RAT", "MOUSE" ],
     "seed_data": { "plant_name": "corn", "fruit": "corn", "seeds": false, "byproducts": [ "withered" ], "grow": "80 days" }
@@ -52,11 +52,11 @@
     "description": "An empty corn cob.  No longer contains any edible kernels, but it can be used to make stock or as fuel.",
     "price": "1 cent",
     "price_postapoc": "1 cent",
-    "material": [ "veggy", "wood" ],
+    "material": [ "vegetable", "wood" ],
     "volume": "111 ml",
     "fun": -8,
     "flags": [ "RAW" ],
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -120,11 +120,11 @@
     "description": "Plain, unseasoned popcorn.  Not as tasty as other kinds, but healthier as a result.",
     "price": "28 cent",
     "price_postapoc": "6 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "62 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 4,
-    "vitamins": [ [ "iron", 2 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -164,19 +164,19 @@
     "calories": 707,
     "//": "Wheatstraw has about 4410 kcal/kg, about 30 kcal will be lost when the wheat is threshed, and another 10 when it's winnowed. Humans can't digest wheatstraw, but many herbivores can.",
     "price_postapoc": "20 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "SMOKABLE", "FRESH_GRAIN", "INEDIBLE", "CATTLE" ],
     "petfood": [ "CATTLEFOOD" ],
     "smoking_result": "dry_wheat_stalks",
     "volume": "1 L",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
     "id": "dry_wheat_stalks",
     "name": { "str_sp": "dried wheat stalks" },
     "comestible_type": "FOOD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dry_plant",
     "weight": "273 g",
     "color": "brown",
@@ -189,7 +189,7 @@
     "price": "25 cent",
     "price_postapoc": "20 cent",
     "volume": "900 ml",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -216,7 +216,7 @@
     "name": { "str_sp": "chaff" },
     "comestible_type": "FOOD",
     "category": "other",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dry_plant",
     "weight": "2 g",
     "color": "brown",
@@ -228,7 +228,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "volume": "2 ml",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -290,10 +290,10 @@
     "description": "A pile of dried barleycorn, a staple of brewing everywhere.  It can be planted, boiled, or ground into flour.",
     "price": "5 cent",
     "price_postapoc": "62 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "milling": { "into": "flour", "recipe": "flour_mill_1_15" },
-    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 6 ], [ "iron", 29 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD", "BIRDFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED", "CUT_HARVEST", "BIRD", "RAT", "MOUSE" ],
     "seed_data": { "plant_name": "barley", "fruit": "barley_stalks", "seeds": false, "grow": "70 days" }
@@ -391,7 +391,7 @@
     "id": "wild_rice",
     "name": { "str_sp": "wild rice" },
     "copy-from": "oats",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "calories": 120,
     "description": "Raw wild rice, still in its fibrous shell.  It'll need to be milled before it's edible for humans.",
     "milling": { "into": "dry_wild_rice", "recipe": "dry_wild_rice_mill_1_5" },
@@ -413,10 +413,10 @@
     "description": "Dry seeds from a wild buckwheat plant.  Inedible in their present state, they are commonly cooked or ground into flour.",
     "price": "45 cent",
     "price_postapoc": "2 USD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "milling": { "into": "flour_wheat_free", "recipe": "flour_wheat_free_mill_1_15" },
-    "vitamins": [ [ "calcium", 3 ], [ "iron", 22 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 3 ], [ "iron", 22 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD", "BIRDFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "CATTLE", "PLANTABLE_SEED", "CUT_HARVEST", "BIRD", "RAT", "MOUSE" ],
     "seed_data": { "plant_name": "buckwheat", "fruit": "buckwheat_stalks", "seeds": false, "grow": "91 days" }
@@ -475,9 +475,9 @@
     "description": "A heap of round black seeds, typically milled and pressed for their oil.",
     "price": "20 cent",
     "price_postapoc": "1 USD 50 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 47 ], [ "vitC", 7 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 47 ], [ "vitC", 7 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD", "BIRDFOOD" ],
     "flags": [
       "EDIBLE_FROZEN",
@@ -534,9 +534,9 @@
     "description": "A humble but nutrient-rich legume.  They should be cooked prior to consumption, unless you're planning to plant them.",
     "price": "10 cent",
     "price_postapoc": "75 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "125 ml",
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 47 ], [ "vitC", 7 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 47 ], [ "vitC", 7 ], [ "vegetable_allergen", 1 ] ],
     "petfood": [ "CATTLEFOOD", "BIRDFOOD" ],
     "flags": [ "EDIBLE_FROZEN", "RAW", "INEDIBLE", "NUTRIENT_OVERRIDE", "CATTLE", "PLANTABLE_SEED", "BIRD", "RAT", "MOUSE" ],
     "seed_data": { "plant_name": "lentils", "fruit": "dry_lentil_stalks", "seeds": false, "grow": "91 days" }
@@ -554,19 +554,19 @@
     "price": "25 cent",
     "calories": 679,
     "price_postapoc": "20 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "flags": [ "SMOKABLE", "FRESH_GRAIN", "INEDIBLE", "CATTLE" ],
     "petfood": [ "CATTLEFOOD" ],
     "smoking_result": "dry_buckwheat_stalks",
     "volume": "315 ml",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
     "id": "dry_buckwheat_stalks",
     "name": { "str_sp": "dried buckwheat stalks" },
     "comestible_type": "FOOD",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "primary_material": "dry_plant",
     "weight": "258 g",
     "color": "brown",
@@ -579,7 +579,7 @@
     "price": "25 cent",
     "price_postapoc": "20 cent",
     "volume": "315 ml",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

@@ -297,10 +297,10 @@ TEST_CASE( "what_carnivores_can_eat", "[can_eat][edible_rating][carnivore]" )
         std::string expect_reason = "Eww.  Inedible plant stuff!";
 
         THEN( "they cannot eat veggies" ) {
-            item veggy( "veggy" );
-            REQUIRE( veggy.has_flag( flag_ALLERGEN_VEGGY ) );
+            item vegetable( "vegetable" );
+            REQUIRE( vegetable.has_flag( flag_ALLERGEN_vegetable ) );
 
-            expect_cannot_eat( dummy, veggy, expect_reason, INEDIBLE_MUTATION );
+            expect_cannot_eat( dummy, vegetable, expect_reason, INEDIBLE_MUTATION );
         }
 
         THEN( "they cannot eat fruit" ) {
@@ -372,7 +372,7 @@ TEST_CASE( "what_you_can_drink_with_a_proboscis", "[can_eat][edible_rating][prob
         std::string expect_reason = "Ugh, you can't drink that!";
 
         GIVEN( "a drink that is 'eaten' (USE_EAT_VERB)" ) {
-            item soup( "soup_veggy" );
+            item soup( "soup_vegetable" );
             REQUIRE( soup.has_flag( flag_USE_EAT_VERB ) );
 
             THEN( "they cannot drink it" ) {

@@ -399,7 +399,7 @@ Character flags can be `trait_id`, `json_flag_id` or `flag_id`.  Some of these a
 - ```NYCTOPHOBIA``` Apply some negative effects when the ambient light is too low.
 - ```PAIN_IMMUNE``` Character don't feel pain.
 - ```PARAIMMUNE``` You are immune to parasites.
-- ```PLANTBLOOD``` Your body drip veggy blood if wounded.
+- ```PLANTBLOOD``` Your body drip vegetable blood if wounded.
 - ```PORTAL_PROOF``` You are immune to personal portal storm effects.
 - ```PRED1``` Small morale bonus from foods with the `PREDATOR_FUN` flag.  Lower morale penalty from the guilt mondeath effect.
 - ```PRED2``` Learn combat skills with double catchup modifier.  Resist skill rust on combat skills.  Small morale bonus from foods with the `PREDATOR_FUN` flag.  Lower morale penalty from the guilt mondeath effect.

@@ -14,7 +14,7 @@
     "tools": [ [ [ "surface_heat", 18, "LIST" ] ] ],
     "//": "17u for corn (840g), 1u for oil",
     "components": [
-      [ [ "veggy_any_corn_uncooked", 4, "LIST" ] ],
+      [ [ "vegetable_any_corn_uncooked", 4, "LIST" ] ],
       [ [ "salt", 2 ], [ "saline", 2 ], [ "seasoning_salt", 2 ], [ "soysauce", 1 ] ],
       [
         [ "seasoning_italian", 3 ],

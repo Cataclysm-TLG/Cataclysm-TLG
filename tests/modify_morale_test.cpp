@@ -17,7 +17,7 @@
 static const morale_type morale_antifruit( "morale_antifruit" );
 static const morale_type morale_antijunk( "morale_antijunk" );
 static const morale_type morale_antimeat( "morale_antimeat" );
-static const morale_type morale_antiveggy( "morale_antiveggy" );
+static const morale_type morale_antivegetable( "morale_antivegetable" );
 static const morale_type morale_antiwheat( "morale_antiwheat" );
 static const morale_type morale_ate_with_table( "morale_ate_with_table" );
 static const morale_type morale_ate_without_table( "morale_ate_without_table" );
@@ -527,11 +527,11 @@ TEST_CASE( "food_allergies_and_intolerances", "[food][modify_morale][allergy]" )
         REQUIRE( dummy.has_trait( trait_MEATARIAN ) );
 
         THEN( "they get a morale penalty for eating vegetables" ) {
-            item_location veggy = dummy.i_add( item( "broccoli" ) );
-            REQUIRE( veggy->has_flag( flag_ALLERGEN_VEGGY ) );
+            item_location vegetable = dummy.i_add( item( "broccoli" ) );
+            REQUIRE( vegetable->has_flag( flag_ALLERGEN_vegetable ) );
             dummy.clear_morale();
-            dummy.modify_morale( *veggy );
-            CHECK( dummy.has_morale( morale_antiveggy ) <= penalty );
+            dummy.modify_morale( *vegetable );
+            CHECK( dummy.has_morale( morale_antivegetable ) <= penalty );
         }
     }
 

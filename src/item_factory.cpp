@@ -115,7 +115,7 @@ static const material_id material_mushroom( "mushroom" );
 static const material_id material_nut( "nut" );
 static const material_id material_oil( "oil" );
 static const material_id material_tomato( "tomato" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 static const material_id material_wheat( "wheat" );
 static const material_id material_wool( "wool" );
 
@@ -3667,13 +3667,13 @@ void Item_factory::set_allergy_flags( itype &item_template )
             { material_bone, flag_ALLERGEN_MEAT },
             { material_wheat, flag_ALLERGEN_WHEAT },
             { material_fruit, flag_ALLERGEN_FRUIT },
-            { material_veggy, flag_ALLERGEN_VEGGY },
+            { material_vegetable, flag_ALLERGEN_vegetable },
             { material_dried_vegetable, flag_ALLERGEN_DRIED_VEGETABLE },
-            { material_bean, flag_ALLERGEN_VEGGY },
-            { material_tomato, flag_ALLERGEN_VEGGY },
-            { material_garlic, flag_ALLERGEN_VEGGY },
+            { material_bean, flag_ALLERGEN_vegetable },
+            { material_tomato, flag_ALLERGEN_vegetable },
+            { material_garlic, flag_ALLERGEN_vegetable },
             { material_nut, flag_ALLERGEN_NUT },
-            { material_mushroom, flag_ALLERGEN_VEGGY },
+            { material_mushroom, flag_ALLERGEN_vegetable },
             { material_milk, flag_ALLERGEN_MILK },
             { material_egg, flag_ALLERGEN_EGG },
             { material_junk, flag_ALLERGEN_JUNK },

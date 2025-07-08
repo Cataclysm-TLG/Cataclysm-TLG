@@ -80,7 +80,7 @@ static const json_character_flag json_flag_WINGS_2( "WINGS_2" );
 static const material_id material_kevlar( "kevlar" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 
 static const mtype_id mon_blob( "mon_blob" );
 static const mtype_id mon_shadow( "mon_shadow" );
@@ -1215,7 +1215,7 @@ bool trapfunc::lava( const tripoint &p, Creature *c, item * )
         if( z->made_of_any( Creature::cmat_flesh ) ) {
             dam = 50;
         }
-        if( z->made_of( material_veggy ) ) {
+        if( z->made_of( material_vegetable ) ) {
             dam = 80;
         }
         if( z->made_of( phase_id::LIQUID ) || z->made_of_any( Creature::cmat_flammable ) ) {

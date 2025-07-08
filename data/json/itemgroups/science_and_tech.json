@@ -273,7 +273,7 @@
       { "item": "oxy_powder", "prob": 12, "charges": [ 100, 200 ] },
       { "item": "chemistry_set", "prob": 5 },
       [ "meat_tainted", 8 ],
-      [ "veggy_tainted", 4 ],
+      [ "vegetable_tainted", 4 ],
       [ "slime_scrap", 8 ],
       { "item": "chem_nitric_acid", "prob": 5, "charges": [ 1, -1 ] }
     ]

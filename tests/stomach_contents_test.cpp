@@ -442,10 +442,10 @@ TEST_CASE( "hunger" )
     CHECK( hunger_time >= 240 );
     if( print_tests ) {
         print_stomach_contents( dummy, print_tests );
-        printf( "eat 16 veggy\n" );
+        printf( "eat 16 vegetable\n" );
     }
     for( int i = 0; i < 16; i++ ) {
-        f = item( "veggy" );
+        f = item( "vegetable" );
         dummy.consume( f );
     }
     dummy.update_body();
@@ -458,13 +458,13 @@ TEST_CASE( "hunger" )
     CHECK( hunger_time <= 390 );
     CHECK( hunger_time >= 330 );
     if( print_tests ) {
-        printf( "eat 16 veggy with extreme metabolism\n" );
+        printf( "eat 16 vegetable with extreme metabolism\n" );
     }
     while( !dummy.has_trait( trait_HUNGER3 ) ) {
         dummy.mutate_towards( trait_HUNGER3 );
     }
     for( int i = 0; i < 16; i++ ) {
-        f = item( "veggy" );
+        f = item( "vegetable" );
         dummy.consume( f );
     }
     dummy.update_body();

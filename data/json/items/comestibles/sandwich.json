@@ -69,7 +69,7 @@
     "description": "A sandwich of meat, vegetables, and cheese with condiments.  Tasty and nutritious!",
     "price": "6 USD",
     "price_postapoc": "150 cent",
-    "material": [ "flesh", "veggy", "wheat", "milk" ],
+    "material": [ "flesh", "vegetable", "wheat", "milk" ],
     "primary_material": "processed_food",
     "volume": "125 ml",
     "fun": 12,
@@ -78,7 +78,7 @@
       [ "calcium", 8 ],
       [ "iron", 49 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -105,7 +105,7 @@
     "description": "A pre-Cataclysm classic, probably made with significant substitutions.  Key components are the special sauce and sauerkraut, with bread, meat, and cheese fried in a pan.",
     "price": "6 USD",
     "price_postapoc": "150 cent",
-    "material": [ "flesh", "veggy", "wheat", "milk" ],
+    "material": [ "flesh", "vegetable", "wheat", "milk" ],
     "primary_material": "processed_food",
     "volume": "125 ml",
     "fun": 14,
@@ -114,7 +114,7 @@
       [ "calcium", 8 ],
       [ "iron", 49 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -134,10 +134,10 @@
     "description": "A refreshing cucumber sandwich.  Not very filling, but quite tasty.",
     "price": "4 USD",
     "volume": "250 ml",
-    "material": [ "wheat", "veggy" ],
+    "material": [ "wheat", "vegetable" ],
     "flags": [ "EATEN_COLD" ],
     "fun": 8,
-    "vitamins": [ [ "vitC", 9 ], [ "calcium", 16 ], [ "iron", 30 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 9 ], [ "calcium", 16 ], [ "iron", 30 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -293,7 +293,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "sandwich_veggy",
+    "id": "sandwich_vegetable",
     "name": { "str": "vegetable sandwich", "str_pl": "vegetable sandwiches" },
     "weight": "189 g",
     "color": "light_gray",
@@ -306,15 +306,15 @@
     "description": "Bread and vegetables, that's it.",
     "price": "8 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy", "wheat" ],
+    "material": [ "vegetable", "wheat" ],
     "volume": "250 ml",
     "flags": [ "EATEN_COLD" ],
     "fun": 1,
-    "vitamins": [ [ "vitC", 36 ], [ "calcium", 34 ], [ "iron", 28 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 36 ], [ "calcium", 34 ], [ "iron", 28 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
-    "id": "sandwich_veggy_cheese",
+    "id": "sandwich_vegetable_cheese",
     "name": { "str": "vegetable sandwich with cheese", "str_pl": "vegetable sandwiches with cheese" },
     "weight": "189 g",
     "color": "light_gray",
@@ -327,7 +327,7 @@
     "description": "A vegetarian combination of cheese and vegetable on bread, simple yet satisfying.",
     "price": "8 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "veggy", "wheat", "milk" ],
+    "material": [ "vegetable", "wheat", "milk" ],
     "volume": "250 ml",
     "flags": [ "EATEN_COLD" ],
     "fun": 1,
@@ -335,7 +335,7 @@
       [ "vitC", 36 ],
       [ "calcium", 34 ],
       [ "iron", 28 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -517,7 +517,7 @@
     "description": "A bacon, lettuce, and tomato sandwich on toasted bread.",
     "price": "2 USD",
     "price_postapoc": "125 cent",
-    "material": [ "flesh", "veggy", "wheat", "tomato" ],
+    "material": [ "flesh", "vegetable", "wheat", "tomato" ],
     "primary_material": "processed_food",
     "volume": "125 ml",
     "flags": [ "EATEN_HOT" ],
@@ -527,7 +527,7 @@
       [ "calcium", 7 ],
       [ "iron", 18 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ]
     ]
   }

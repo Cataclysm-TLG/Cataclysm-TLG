@@ -131,7 +131,7 @@ static const material_id material_all( "all" );
 static const morale_type morale_antifruit( "morale_antifruit" );
 static const morale_type morale_antijunk( "morale_antijunk" );
 static const morale_type morale_antimeat( "morale_antimeat" );
-static const morale_type morale_antiveggy( "morale_antiveggy" );
+static const morale_type morale_antivegetable( "morale_antivegetable" );
 static const morale_type morale_antiwheat( "morale_antiwheat" );
 static const morale_type morale_ate_with_table( "morale_ate_with_table" );
 static const morale_type morale_ate_without_table( "morale_ate_without_table" );
@@ -202,13 +202,13 @@ static const vitamin_id vitamin_junk_allergen( "junk_allergen" );
 static const vitamin_id vitamin_meat_allergen( "meat_allergen" );
 static const vitamin_id vitamin_milk_allergen( "milk_allergen" );
 static const vitamin_id vitamin_nut_allergen( "nut_allergen" );
-static const vitamin_id vitamin_veggy_allergen( "veggy_allergen" );
+static const vitamin_id vitamin_vegetable_allergen( "vegetable_allergen" );
 static const vitamin_id vitamin_wheat_allergen( "wheat_allergen" );
 
-// note: cannot use constants from flag.h (e.g. flag_ALLERGEN_VEGGY) here, as they
+// note: cannot use constants from flag.h (e.g. flag_ALLERGEN_vegetable) here, as they
 // might be uninitialized at the time these const arrays are created
 static const std::array<vitamin_id, 5> carnivore_blacklist {{
-        vitamin_veggy_allergen, vitamin_fruit_allergen,
+        vitamin_vegetable_allergen, vitamin_fruit_allergen,
         vitamin_wheat_allergen, vitamin_nut_allergen,
         vitamin_bread_allergen
     }};
@@ -773,7 +773,7 @@ morale_type Character::allergy_type( const item &food ) const
     using allergy_tuple = std::tuple<trait_id, vitamin_id, morale_type>;
     static const std::array<allergy_tuple, 8> allergy_tuples = {{
             std::make_tuple( trait_VEGETARIAN, vitamin_meat_allergen, morale_antimeat ),
-            std::make_tuple( trait_MEATARIAN, vitamin_veggy_allergen, morale_antiveggy ),
+            std::make_tuple( trait_MEATARIAN, vitamin_vegetable_allergen, morale_antivegetable ),
             std::make_tuple( trait_LACTOSE, vitamin_milk_allergen, morale_lactose ),
             std::make_tuple( trait_ANTIFRUIT, vitamin_fruit_allergen, morale_antifruit ),
             std::make_tuple( trait_ANTIJUNK, vitamin_junk_allergen, morale_antijunk ),

@@ -91,7 +91,7 @@ static const itype_id itype_rock( "rock" );
 static const json_character_flag json_flag_HEATSINK( "HEATSINK" );
 
 static const material_id material_iflesh( "iflesh" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 
 static const species_id species_CENTIPEDE( "CENTIPEDE" );
 static const species_id species_CYBORG( "CYBORG" );
@@ -1931,7 +1931,7 @@ void map::monster_in_field( monster &z )
             if( z.made_of_any( Creature::cmat_flesh ) ) {
                 dam += 2;
             }
-            if( z.made_of( material_veggy ) ) {
+            if( z.made_of( material_vegetable ) ) {
                 dam += 3;
             }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
@@ -1973,7 +1973,7 @@ void map::monster_in_field( monster &z )
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.1, 0.2 ) );
                 }
                 // Plants suffer from smoke even worse
-                if( z.made_of( material_veggy ) ) {
+                if( z.made_of( material_vegetable ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.01, cur.get_field_intensity() * 0.12 ) );
                 }
             }
@@ -2040,7 +2040,7 @@ void map::monster_in_field( monster &z )
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.0, 0.15 ) );
                     dam += rng( 0, 12 );
                 }
-                if( z.made_of( material_veggy ) ) {
+                if( z.made_of( material_vegetable ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( cur.get_field_intensity() * 0.05,
                                  cur.get_field_intensity() * 0.12 ) );
                     dam *= cur.get_field_intensity();
@@ -2053,7 +2053,7 @@ void map::monster_in_field( monster &z )
             if( z.has_flag( mon_flag_FIREPROOF ) || z.has_flag( mon_flag_FIREY ) ) {
                 return;
             }
-            if( z.made_of( material_veggy ) ) {
+            if( z.made_of( material_vegetable ) ) {
                 dam += 3;
             }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
@@ -2081,7 +2081,7 @@ void map::monster_in_field( monster &z )
             if( z.has_flag( mon_flag_FIREPROOF ) || z.has_flag( mon_flag_FIREY ) ) {
                 return;
             }
-            if( z.made_of( material_veggy ) ) {
+            if( z.made_of( material_vegetable ) ) {
                 dam += 3;
             }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {

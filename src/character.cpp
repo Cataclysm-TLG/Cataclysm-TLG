@@ -854,7 +854,7 @@ field_type_id Character::bloodType() const
         return fd_acid;
     }
     if( has_flag( json_flag_PLANTBLOOD ) ) {
-        return fd_blood_veggy;
+        return fd_blood_vegetable;
     }
     if( has_flag( json_flag_INSECTBLOOD ) ) {
         return fd_blood_insect;

@@ -397,10 +397,10 @@
     "components": [ [ [ "thyme", 1 ] ] ]
   },
   {
-    "result": "seed_veggy_wild",
+    "result": "seed_vegetable_wild",
     "type": "recipe",
     "copy-from": "seed_extraction_cutting",
-    "components": [ [ [ "veggy_wild", 1 ] ] ]
+    "components": [ [ [ "vegetable_wild", 1 ] ] ]
   },
   {
     "result": "seed_wild_herbs",

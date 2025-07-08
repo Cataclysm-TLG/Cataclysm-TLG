@@ -143,7 +143,7 @@ static const material_id material_paper( "paper" );
 static const material_id material_powder( "powder" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 static const material_id material_wood( "wood" );
 static const material_id material_wool( "wool" );
 
@@ -167,7 +167,7 @@ const std::set<material_id> Creature::cmat_flesh{
     material_flesh, material_iflesh, material_hflesh,
 };
 const std::set<material_id> Creature::cmat_fleshnveg{
-    material_flesh, material_iflesh, material_hflesh, material_veggy
+    material_flesh, material_iflesh, material_hflesh, material_vegetable
 };
 const std::set<material_id> Creature::cmat_flammable{
     material_paper, material_powder,
@@ -1033,7 +1033,7 @@ void projectile::apply_effects_damage( Creature &target, Creature *source,
     Character &player_character = get_player_character();
     if( proj_effects.count( ammo_effect_INCENDIARY ) ) {
         if( x_in_y( 1, 100 ) ) { // 1% chance
-            if( target.made_of( material_veggy ) || target.made_of_any( Creature::cmat_flammable ) ) {
+            if( target.made_of( material_vegetable ) || target.made_of_any( Creature::cmat_flammable ) ) {
                 target.add_effect( effect_source( source ), effect_onfire, rng( 2_turns, 6_turns ),
                                    dealt_dam.bp_hit );
             } else if( target.made_of_any( Creature::cmat_flesh ) && one_in( 4 ) ) {
@@ -1051,7 +1051,7 @@ void projectile::apply_effects_damage( Creature &target, Creature *source,
         }
     } else if( proj_effects.count( ammo_effect_IGNITE ) ) {
         if( x_in_y( 1, 2 ) ) { // 50% chance
-            if( target.made_of( material_veggy ) || target.made_of_any( Creature::cmat_flammable ) ) {
+            if( target.made_of( material_vegetable ) || target.made_of_any( Creature::cmat_flammable ) ) {
                 target.add_effect( effect_source( source ), effect_onfire, 10_turns, dealt_dam.bp_hit );
             } else if( target.made_of_any( Creature::cmat_flesh ) ) {
                 target.add_effect( effect_source( source ), effect_onfire, 6_turns, dealt_dam.bp_hit );

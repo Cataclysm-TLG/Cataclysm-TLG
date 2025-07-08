@@ -167,7 +167,7 @@
       { "item": "fat_tainted", "prob": 80, "damage": [ 2, 3 ], "count": [ 1, 5 ] },
       { "item": "bone_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 5, 10 ] },
       { "item": "tainted_marrow", "prob": 50, "damage": [ 2, 3 ], "count": [ 1, 5 ] },
-      { "item": "veggy_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 5, 10 ] },
+      { "item": "vegetable_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 5, 10 ] },
       { "item": "raw_tainted_leather_scraps", "prob": 50, "damage": [ 2, 3 ], "count": [ 2, 5 ] },
       { "item": "sinew", "prob": 50, "damage": [ 2, 3 ], "count": [ 5, 10 ] }
     ]
@@ -185,7 +185,7 @@
       { "item": "fat_tainted", "prob": 80, "damage": [ 2, 3 ], "count": [ 1, 5 ] },
       { "item": "bone_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 15, 25 ] },
       { "item": "tainted_marrow", "prob": 50, "damage": [ 2, 3 ], "count": [ 10, 15 ] },
-      { "item": "veggy_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 5, 10 ] },
+      { "item": "vegetable_tainted", "prob": 100, "damage": [ 2, 3 ], "count": [ 5, 10 ] },
       { "item": "raw_tainted_leather_scraps", "prob": 50, "damage": [ 2, 3 ], "count": [ 1, 3 ] },
       { "item": "sinew", "prob": 50, "damage": [ 2, 3 ], "count": [ 5, 10 ] }
     ]

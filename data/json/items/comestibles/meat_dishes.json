@@ -288,12 +288,12 @@
     "description": "A tender piece of meat, perfectly seasoned with a thin sweet glaze and a vegetable accompaniment.  A gourmet dish that is both healthy and delicious.",
     "price": "1333 cent",
     "price_postapoc": "333 cent",
-    "material": [ "flesh", "veggy" ],
+    "material": [ "flesh", "vegetable" ],
     "primary_material": "flesh",
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 18,
-    "vitamins": [ [ "vitC", 17 ], [ "calcium", 8 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 17 ], [ "calcium", 8 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -309,12 +309,12 @@
     "description": "Fresh lobster meat, perfectly seasoned with lemon juice and a vegetable accompaniment.  A gourmet dish that is both healthy and delicious.",
     "price": "1333 cent",
     "price_postapoc": "5 USD",
-    "material": [ "flesh", "veggy" ],
+    "material": [ "flesh", "vegetable" ],
     "primary_material": "flesh",
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 18,
-    "vitamins": [ [ "vitC", 17 ], [ "calcium", 8 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 17 ], [ "calcium", 8 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -707,7 +707,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 9,
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ], [ "wheat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -736,7 +736,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "pemmican_veggy",
+    "id": "pemmican_vegetable",
     "name": { "str_sp": "pemmican" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "prepper %s" } },
@@ -754,9 +754,9 @@
     "description": "A concentrated mixture of fat and protein, first said to have been used as a nutritious high-energy food by the Querecho and Teya people of what is Texas today.  Composed of meat, tallow, and edible plants or mushrooms, it provides excellent nutrition in an easy to carry form.",
     "price": "5 USD 99 cent",
     "price_postapoc": "3 USD 50 cent",
-    "material": [ "flesh", "veggy" ],
+    "material": [ "flesh", "vegetable" ],
     "volume": "120 ml",
-    "vitamins": [ [ "vitC", 3 ], [ "calcium", 5 ], [ "iron", 21 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", 3 ], [ "calcium", 5 ], [ "iron", 21 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
     "fun": 3
   },
   {
@@ -855,11 +855,11 @@
     "description": "A spicy stew containing chili peppers, meat, tomatoes and beans.",
     "price": "145 cent",
     "price_postapoc": "250 cent",
-    "material": [ "flesh", "veggy", "bean", "tomato" ],
+    "material": [ "flesh", "vegetable", "bean", "tomato" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 5,
-    "vitamins": [ [ "vitC", 7 ], [ "calcium", 7 ], [ "iron", 27 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 7 ], [ "calcium", 7 ], [ "iron", 27 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -880,7 +880,7 @@
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 5,
-    "vitamins": [ [ "vitC", 0 ], [ "calcium", 14 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 0 ], [ "calcium", 14 ], [ "iron", 32 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1022,7 +1022,7 @@
     "//": "One beans + one protein = 2 servings",
     "flags": [ "EATEN_HOT" ],
     "fun": 4,
-    "vitamins": [ [ "vitC", 10 ], [ "calcium", 6 ], [ "iron", 51 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 10 ], [ "calcium", 6 ], [ "iron", 51 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1038,12 +1038,12 @@
     "description": "Delicious fried rice with meat.  Tasty and very filling.",
     "price": "350 cent",
     "price_postapoc": "2 USD",
-    "material": [ "veggy", "flesh" ],
+    "material": [ "vegetable", "flesh" ],
     "volume": "500 ml",
     "//": "One rice + one protein/veg = 2 servings",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 5,
-    "vitamins": [ [ "vitC", 8 ], [ "calcium", 1 ], [ "iron", 40 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 8 ], [ "calcium", 1 ], [ "iron", 40 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1059,11 +1059,11 @@
     "description": "Slow-cooked beans and rice with meat and seasonings.  Tasty and very filling.",
     "price": "375 cent",
     "price_postapoc": "2 USD",
-    "material": [ "veggy", "bean", "flesh" ],
+    "material": [ "vegetable", "bean", "flesh" ],
     "volume": "187 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 4,
-    "vitamins": [ [ "vitC", 5 ], [ "calcium", 4 ], [ "iron", 10 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 5 ], [ "calcium", 4 ], [ "iron", 10 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1127,14 +1127,14 @@
     "description": "A supreme pizza with ALL the toppings.",
     "price": "15 USD",
     "price_postapoc": "15 USD",
-    "material": [ "wheat", "flesh", "veggy", "milk" ],
+    "material": [ "wheat", "flesh", "vegetable", "milk" ],
     "fun": 11,
     "vitamins": [
       [ "vitC", 20 ],
       [ "calcium", 32 ],
       [ "iron", 28 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -1320,7 +1320,7 @@
     "calories": 500,
     "description": "A cheeseburger with more vegetables and condiments.  This is the apex of pre-Cataclysm culinary achievement.",
     "price_postapoc": "3 USD",
-    "material": [ "flesh", "wheat", "milk", "veggy", "tomato" ],
+    "material": [ "flesh", "wheat", "milk", "vegetable", "tomato" ],
     "primary_material": "processed_food",
     "volume": "350 ml",
     "fun": 7,
@@ -1329,7 +1329,7 @@
       [ "calcium", 60 ],
       [ "iron", 65 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
@@ -1392,7 +1392,7 @@
       [ "calcium", 4 ],
       [ "iron", 5 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "wheat_allergen", 1 ]
     ]
   },
@@ -1573,10 +1573,10 @@
     "description": "Delicious slivers of thinly-sliced raw fish, wrapped in tasty sushi rice and rolled up in a healthy green vegetable.",
     "price": "116 cent",
     "price_postapoc": "1 USD",
-    "material": [ "veggy", "flesh" ],
+    "material": [ "vegetable", "flesh" ],
     "volume": "250 ml",
     "fun": 14,
-    "vitamins": [ [ "vitC", 23 ], [ "calcium", 3 ], [ "iron", 3 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 23 ], [ "calcium", 3 ], [ "iron", 3 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1592,10 +1592,10 @@
     "description": "Delicious slivers of raw meat, wrapped in tasty sushi rice and rolled up in a healthy green vegetable.",
     "price": "185 cent",
     "price_postapoc": "150 cent",
-    "material": [ "veggy", "flesh" ],
+    "material": [ "vegetable", "flesh" ],
     "volume": "500 ml",
     "fun": 13,
-    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 37 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 37 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1608,9 +1608,9 @@
     "description": "Delicious slivers of thinly sliced raw fish, served with tasty vegetables.",
     "price": "6 USD",
     "price_postapoc": "3 USD",
-    "material": [ "veggy", "flesh" ],
+    "material": [ "vegetable", "flesh" ],
     "fun": 7,
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1670,11 +1670,11 @@
     "description": "A traditional Mexican dish of meat, beans or rice, and vegetables spread on a corn tortilla and rolled into a tube shape.  The fresh ingredients make this one taste way better than those gas station knockoffs.",
     "price": "233 cent",
     "price_postapoc": "166 cent",
-    "material": [ "flesh", "veggy" ],
+    "material": [ "flesh", "vegetable" ],
     "volume": "83 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 7,
-    "vitamins": [ [ "vitC", 3 ], [ "calcium", 19 ], [ "iron", 12 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 3 ], [ "calcium", 19 ], [ "iron", 12 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1731,11 +1731,11 @@
     "description": "A traditional dish originating from Spain, more specifically from the region of Valencia.  A very tasty and filling dish made traditionally of rabbit, beans, rice, chicken, spices and sometimes snails.",
     "price": "375 cent",
     "price_postapoc": "2 USD",
-    "material": [ "veggy", "bean", "flesh" ],
+    "material": [ "vegetable", "bean", "flesh" ],
     "volume": "110 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 4,
-    "vitamins": [ [ "vitC", 8 ], [ "calcium", 5 ], [ "iron", 11 ], [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 8 ], [ "calcium", 5 ], [ "iron", 11 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1751,7 +1751,7 @@
     "//": "Nutrition information roughly based on a serving of 6 snails + butter and veggies. if you know more pls expand",
     "price": "125 cent",
     "price_postapoc": "66 cent",
-    "material": [ "veggy", "flesh", "milk" ],
+    "material": [ "vegetable", "flesh", "milk" ],
     "volume": "20 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 4,
@@ -1760,7 +1760,7 @@
       [ "calcium", 18 ],
       [ "iron", 6 ],
       [ "meat_allergen", 1 ],
-      [ "veggy_allergen", 1 ],
+      [ "vegetable_allergen", 1 ],
       [ "milk_allergen", 1 ]
     ]
   },
@@ -1853,11 +1853,11 @@
     "description": "A traditional Turkish dish prepared by rolling rice and minced meat in grape leaves.",
     "price": "187 cent",
     "price_postapoc": "1 USD",
-    "material": [ "veggy", "flesh" ],
+    "material": [ "vegetable", "flesh" ],
     "volume": "240 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 4,
-    "vitamins": [ [ "meat_allergen", 1 ], [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "scrapple",

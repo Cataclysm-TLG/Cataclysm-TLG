@@ -536,7 +536,7 @@ struct mtype {
         field_type_id bloodType() const;
         field_type_id gibType() const;
         // The item id of the meat items that are produced by this monster (or "null")
-        // if there is no matching item type. e.g. "veggy" for plant monsters.
+        // if there is no matching item type. e.g. "vegetable" for plant monsters.
         itype_id get_meat_itype() const;
         int get_meat_chunks_count() const;
         std::string get_description() const;

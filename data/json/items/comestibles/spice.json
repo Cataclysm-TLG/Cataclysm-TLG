@@ -128,11 +128,11 @@
     "description": "A tasty collection of wild herbs including violet, sassafras, mint, clover, purslane, and fireweed.",
     "price": "1 cent",
     "price_postapoc": "1 cent",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "2 ml",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "fun": -1,
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "soysauce",
@@ -167,11 +167,11 @@
     "to_hit": -3,
     "color": "magenta",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "vitamins": [ [ "veggy_allergen", 1 ] ]
+    "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
     "id": "mustard_powder",

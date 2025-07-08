@@ -122,7 +122,7 @@
         { "id": "fd_acid_vent", "fg": 97, "rotates": false },
         { "id": "fd_bees", "fg": 78, "rotates": false },
         {
-          "id": [ "fd_bile", "fd_gibs_veggy", "fd_sap" ],
+          "id": [ "fd_bile", "fd_gibs_vegetable", "fd_sap" ],
           "fg": 104,
           "rotates": false,
           "multitile": true,
@@ -138,7 +138,7 @@
         { "id": "fd_blood", "fg": 165, "rotates": false },
         { "id": [ "fd_blood_insect", "fd_gibs_insect" ], "fg": 168, "rotates": false },
         { "id": [ "fd_blood_invertebrate", "fd_gibs_invertebrate" ], "fg": 167, "rotates": false },
-        { "id": "fd_blood_veggy", "fg": 166, "rotates": false },
+        { "id": "fd_blood_vegetable", "fg": 166, "rotates": false },
         {
           "id": [ "fd_cigsmoke", "fd_weedsmoke", "fd_methsmoke", "fd_cracksmoke" ],
           "fg": 143,
@@ -1191,7 +1191,7 @@
             "bag_canvas",
             "bag_canvas_small",
             "mre_beef_box",
-            "mre_veggy_box",
+            "mre_vegetarian_taco_box",
             "mre_chicken_box",
             "mre_hotdog_box",
             "mre_ravioli_box"
@@ -1560,9 +1560,9 @@
             "peanutbutter",
             "mushroom_cooked",
             "deluxe_beans",
-            "deluxe_veggy_beans",
+            "deluxe_vegetable_beans",
             "deluxe_beansnrice",
-            "deluxe_veggy_beansnrice",
+            "deluxe_vegetable_beansnrice",
             "acorns_cooked",
             "buckwheat",
             "buckwheat_cooked",
@@ -1634,7 +1634,7 @@
             "powder_eggs",
             "cornmeal",
             "deluxe_rice",
-            "deluxe_veggy_rice",
+            "deluxe_vegetable_rice",
             "can_cheese",
             "chem_sulphur"
           ],
@@ -1691,13 +1691,13 @@
             "chaw",
             "dandelion_cooked",
             "wild_herbs",
-            "veggy_salad",
+            "vegetable_salad",
             "dried_salad",
             "insta_salad",
-            "veggy_aspic",
-            "veggy_canned",
-            "veggy_salted",
-            "dry_veggy",
+            "vegetable_aspic",
+            "vegetable_canned",
+            "vegetable_salted",
+            "dry_vegetable",
             "homebrew_antiseptic",
             "chem_chromium_oxide"
           ],
@@ -1972,7 +1972,7 @@
         { "id": [ "drivebelt_makeshift", "drivebelt" ], "fg": 1462, "rotates": false },
         { "id": "dry_fruit", "fg": 1789, "rotates": false },
         { "id": [ "dry_meat", "dry_hflesh" ], "fg": 1790, "rotates": false },
-        { "id": [ "dry_meat_tainted", "dry_veggy_tainted" ], "fg": 1791, "rotates": false },
+        { "id": [ "dry_meat_tainted", "dry_vegetable_tainted" ], "fg": 1791, "rotates": false },
         { "id": "duct_tape", "fg": 536, "rotates": false },
         { "id": "duffelbag", "fg": 601, "rotates": false },
         { "id": "dump_pouch", "fg": 1252, "rotates": false },
@@ -3157,7 +3157,7 @@
         { "id": "pipe_tobacco", "fg": 1002, "rotates": false },
         { "id": "pizza_cheese", "fg": 512, "rotates": false },
         { "id": [ "pizza_meat", "pizza_human" ], "fg": 513, "rotates": false },
-        { "id": [ "pizza_veggy", "pie_veggy" ], "fg": 514, "rotates": false },
+        { "id": [ "pizza_vegetable", "pie_vegetable" ], "fg": 514, "rotates": false },
         { "id": "plant_fibre", "fg": 708, "rotates": false },
         { "id": "plant_sac", "fg": 1757, "rotates": false },
         {
@@ -3337,7 +3337,7 @@
           "fg": 1793,
           "rotates": false
         },
-        { "id": [ "rehydrated_veggy", "veggy_pickled" ], "fg": 1794, "rotates": false },
+        { "id": [ "rehydrated_vegetable", "vegetable_pickled" ], "fg": 1794, "rotates": false },
         { "id": [ "reinforced_glass_sheet", "reinforced_glass_pane" ], "fg": 1476, "rotates": false },
         { "id": [ "reinforced_solar_panel", "reinforced_solar_panel_v2" ], "fg": 1681, "rotates": false },
         { "id": [ "reloaded_5x50dart", "5x50heavy", "5x50dart" ], "fg": 647, "rotates": false },
@@ -3915,7 +3915,7 @@
             "bum_wine",
             "drink_kalimotxo",
             "mutagen_jabberblood",
-            "curry_veggy",
+            "curry_vegetable",
             "curry_meat",
             "brew_bum_wine",
             "taint_tornado",
@@ -3928,7 +3928,7 @@
         },
         {
           "id": [
-            "soup_veggy",
+            "soup_vegetable",
             "herbal_tea",
             "iv_mutagen",
             "iv_mutagen_plant",
@@ -4095,7 +4095,7 @@
           "fg": 1521,
           "rotates": false
         },
-        { "id": [ "sushi_fishroll", "sushi_meatroll", "sushi_veggyroll" ], "fg": 510, "rotates": false },
+        { "id": [ "sushi_fishroll", "sushi_meatroll", "sushi_vegetableroll" ], "fg": 510, "rotates": false },
         { "id": "swage", "fg": 1040, "rotates": false },
         { "id": "swat_armor", "fg": 1080, "rotates": false },
         { "id": [ "swat_shield_act", "swat_shield" ], "fg": 1400, "rotates": false },
@@ -4215,7 +4215,7 @@
         { "id": "throwing_axe", "fg": 715, "rotates": false },
         { "id": [ "throwing_knife", "fighter_sting_juice" ], "fg": 1942 },
         { "id": "throwing_stick", "fg": 716, "rotates": false },
-        { "id": [ "thyme", "seed_veggy_wild" ], "fg": 471, "rotates": false },
+        { "id": [ "thyme", "seed_vegetable_wild" ], "fg": 471, "rotates": false },
         { "id": "tie_bow", "fg": 1624, "rotates": false },
         { "id": [ "tie_skinny", "tie_necktie", "tie_clipon", "ecig" ], "fg": 554, "rotates": false },
         { "id": [ "tieclip", "collarpin" ], "fg": 1201, "rotates": false },
@@ -4310,8 +4310,8 @@
         { "id": "vacutainer", "fg": 639, "rotates": false },
         {
           "id": [
-            "veggy_cooked",
-            "veggy_wild_cooked",
+            "vegetable_cooked",
+            "vegetable_wild_cooked",
             "choco_coffee_beans",
             "maltballs",
             "acorns",
@@ -4326,7 +4326,7 @@
             "seed_sunflower",
             "macaroni_raw",
             "seed_onion",
-            "mre_veggy",
+            "mre_vegetarian_taco",
             "hickory_nut",
             "pistachio_roasted",
             "pistachio_unshelled"
@@ -4334,8 +4334,8 @@
           "fg": 1763,
           "rotates": false
         },
-        { "id": "veggy_tainted", "fg": 1764, "rotates": false },
-        { "id": [ "veggy", "veggy_wild" ], "fg": 1762, "rotates": false },
+        { "id": "vegetable_tainted", "fg": 1764, "rotates": false },
+        { "id": [ "vegetable", "vegetable_wild" ], "fg": 1762, "rotates": false },
         { "id": "veh_tracker", "fg": 3467, "rotates": false },
         { "id": "vehicle_controls", "fg": 3456, "rotates": false },
         { "id": "vehicle_dashboard", "fg": 1567, "rotates": false },
@@ -4570,7 +4570,7 @@
           "fg": 1956
         },
         {
-          "id": [ "sandwich_veggy", "sandwich_veggy_wheat_free", "sandwich_cucumber", "sandwich_cucumber_wheat_free" ],
+          "id": [ "sandwich_vegetable", "sandwich_vegetable_wheat_free", "sandwich_cucumber", "sandwich_cucumber_wheat_free" ],
           "fg": 1957
         },
         { "id": [ "animation_bullet_shrapnel", "animation_bullet_normal" ], "fg": 1966 },

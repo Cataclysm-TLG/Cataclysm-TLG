@@ -1817,7 +1817,7 @@
     "weight": "81500 g",
     "hp": 80,
     "speed": 50,
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "symbol": "Z",
     "color": "light_green",
     "scents_tracked": [ "sc_human", "sc_fetid", "sc_flower" ],

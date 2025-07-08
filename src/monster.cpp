@@ -157,7 +157,7 @@ static const material_id material_iflesh( "iflesh" );
 static const material_id material_iron( "iron" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 
 static const mfaction_str_id monfaction_acid_ant( "acid_ant" );
 static const mfaction_str_id monfaction_ant( "ant" );
@@ -764,7 +764,7 @@ std::string monster::name_with_armor() const
     std::string ret;
     if( made_of( material_iflesh ) ) {
         ret = _( "carapace" );
-    } else if( made_of( material_veggy ) ) {
+    } else if( made_of( material_vegetable ) ) {
         ret = _( "thick bark" );
     } else if( made_of( material_bone ) ) {
         ret = _( "exoskeleton" );
@@ -3302,7 +3302,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         effect_cache[MOVEMENT_IMPAIRED] = true;
     } else if( id == effect_onfire ) {
         int dam = 0;
-        if( made_of( material_veggy ) ) {
+        if( made_of( material_vegetable ) ) {
             dam = rng( 2, 12 );
         } else if( made_of( material_flesh ) || made_of( material_iflesh ) ) {
             dam = rng( 1, 8 );
@@ -3540,7 +3540,7 @@ bool monster::make_fungus()
         return true;
     }
     if( !made_of( material_flesh ) && !made_of( material_hflesh ) &&
-        !made_of( material_veggy ) && !made_of( material_iflesh ) &&
+        !made_of( material_vegetable ) && !made_of( material_iflesh ) &&
         !made_of( material_bone ) ) {
         // No fungalizing robots or weird stuff (mi-gos are technically fungi, blobs are goo)
         return true;
@@ -4061,7 +4061,7 @@ void monster::on_load()
         if( has_flag( mon_flag_REVIVES ) && !has_flag( mon_flag_DORMANT ) ) {
             regen = 0.02f * type->hp / to_turns<int>( 1_hours );
         } else if( made_of( material_flesh ) || made_of( material_iflesh ) ||
-                   made_of( material_veggy ) ) {
+                   made_of( material_vegetable ) ) {
             // Most living stuff here
             regen = 0.005f * type->hp / to_turns<int>( 1_hours );
         }

@@ -716,7 +716,7 @@
       { "item": "cookbook_eatyrway", "prob": 8 },
       { "item": "family_cookbook", "prob": 6 },
       { "item": "brewing_cookbook", "prob": 4 },
-      { "prob": 8, "group": "pizza_veggy_box_small_4" },
+      { "prob": 8, "group": "pizza_vegetable_box_small_4" },
       { "prob": 8, "group": "pizza_meat_box_small_4" },
       { "prob": 8, "group": "pizza_cheese_box_small_4" },
       { "item": "cheeseburger", "prob": 8 },
@@ -745,13 +745,13 @@
       { "prob": 35, "group": "can_chowder_can_medium_2" },
       { "prob": 30, "group": "can_herring_jar_glass_sealed_2" },
       { "item": "broth", "prob": 15 },
-      { "item": "soup_veggy", "prob": 15 },
+      { "item": "soup_vegetable", "prob": 15 },
       { "item": "soup_meat", "prob": 15 },
       { "item": "soup_chicken", "prob": 15 },
       { "item": "soup_mushroom", "prob": 15 },
       { "item": "soup_tomato", "prob": 15 },
       { "item": "soup_dumplings", "prob": 15 },
-      { "item": "curry_veggy", "prob": 15 },
+      { "item": "curry_vegetable", "prob": 15 },
       { "item": "curry_meat", "prob": 15 },
       { "prob": 15, "group": "curry_powder_various" },
       { "prob": 10, "group": "chilly-p_various" },
@@ -780,7 +780,7 @@
       { "item": "yoghurt", "prob": 8 },
       { "item": "pudding", "prob": 10 },
       { "item": "gelatin_dessert_processed", "prob": 10 },
-      { "prob": 8, "group": "veggy_pickled_jar_glass_sealed_2" },
+      { "prob": 8, "group": "vegetable_pickled_jar_glass_sealed_2" },
       { "prob": 5, "group": "sauerkraut_jar_glass_sealed_2" },
       { "prob": 4, "group": "meat_pickled_jar_glass_sealed_2" },
       { "prob": 6, "group": "fish_pickled_jar_glass_sealed_2" },
@@ -808,12 +808,12 @@
       { "item": "eclipse_glasses", "prob": 1 },
       { "item": "thermos", "prob": 15 },
       { "prob": 4, "group": "meat_canned_jar_3l_glass_sealed_12" },
-      { "prob": 4, "group": "veggy_canned_jar_3l_glass_sealed_12" },
+      { "prob": 4, "group": "vegetable_canned_jar_3l_glass_sealed_12" },
       { "prob": 4, "group": "apple_canned_jar_3l_glass_sealed_24" },
       { "prob": 4, "group": "can_tomato_jar_3l_glass_sealed_24" },
       { "prob": 4, "group": "fish_pickled_jar_3l_glass_sealed_12" },
       { "prob": 4, "group": "meat_pickled_jar_3l_glass_sealed_12" },
-      { "prob": 4, "group": "veggy_pickled_jar_3l_glass_sealed_12" },
+      { "prob": 4, "group": "vegetable_pickled_jar_3l_glass_sealed_12" },
       { "prob": 4, "group": "fish_pickled_jar_3l_glass_sealed_12" },
       { "item": "sauce_red", "prob": 4, "charges": 48, "container-item": "jar_3l_glass_sealed" },
       { "item": "kompot", "prob": 4, "charges": 12, "container-item": "jar_3l_glass_sealed" },
@@ -856,7 +856,7 @@
       { "prob": 65, "group": "egg_bird_unfert_carton_egg_1_12" },
       { "item": "yoghurt", "prob": 50 },
       { "item": "pudding", "prob": 60 },
-      { "item": "veggy_salad", "prob": 25 },
+      { "item": "vegetable_salad", "prob": 25 },
       { "item": "insta_salad", "prob": 40 },
       { "item": "dried_salad", "prob": 50 },
       { "item": "V8", "prob": 15 },
@@ -912,7 +912,7 @@
       { "item": "cake2", "prob": 1, "count": 12 },
       { "item": "cake3", "prob": 1, "count": 12 },
       { "prob": 8, "group": "pizza_meat_box_small_4" },
-      { "prob": 8, "group": "pizza_veggy_box_small_4" },
+      { "prob": 8, "group": "pizza_vegetable_box_small_4" },
       { "prob": 8, "group": "pizza_cheese_box_small_4" },
       { "item": "cheeseburger", "prob": 8 },
       { "item": "hamburger", "prob": 8 },
@@ -982,7 +982,7 @@
       { "item": "plantain", "prob": 1, "custom-flags": [ "IRRADIATED" ] },
       { "prob": 40, "group": "pickle_jar_glass_sealed_2" },
       { "item": "vinegar", "prob": 15 },
-      { "prob": 8, "group": "veggy_pickled_jar_glass_sealed_2" },
+      { "prob": 8, "group": "vegetable_pickled_jar_glass_sealed_2" },
       { "prob": 5, "group": "sauerkraut_jar_glass_sealed_2" },
       { "prob": 25, "group": "bacon_bag_plastic_2" },
       { "item": "lunchmeat", "prob": 45 },
@@ -1880,11 +1880,11 @@
   },
   {
     "type": "item_group",
-    "id": "pizza_veggy_box_small_4",
+    "id": "pizza_vegetable_box_small_4",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "box_small",
-    "entries": [ { "item": "pizza_veggy", "container-item": "null", "count": 4 } ]
+    "entries": [ { "item": "pizza_vegetable", "container-item": "null", "count": 4 } ]
   },
   {
     "type": "item_group",
@@ -2257,11 +2257,11 @@
   },
   {
     "type": "item_group",
-    "id": "veggy_pickled_jar_glass_sealed_2",
+    "id": "vegetable_pickled_jar_glass_sealed_2",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_glass_sealed",
-    "entries": [ { "item": "veggy_pickled", "container-item": "null", "count": 2 } ]
+    "entries": [ { "item": "vegetable_pickled", "container-item": "null", "count": 2 } ]
   },
   {
     "type": "item_group",
@@ -2313,11 +2313,11 @@
   },
   {
     "type": "item_group",
-    "id": "veggy_canned_jar_3l_glass_sealed_12",
+    "id": "vegetable_canned_jar_3l_glass_sealed_12",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_3l_glass_sealed",
-    "entries": [ { "item": "veggy_canned", "container-item": "null", "count": 12 } ]
+    "entries": [ { "item": "vegetable_canned", "container-item": "null", "count": 12 } ]
   },
   {
     "type": "item_group",
@@ -2353,11 +2353,11 @@
   },
   {
     "type": "item_group",
-    "id": "veggy_pickled_jar_3l_glass_sealed_12",
+    "id": "vegetable_pickled_jar_3l_glass_sealed_12",
     "subtype": "collection",
     "//": "This group was created automatically and may contain errors.",
     "container-item": "jar_3l_glass_sealed",
-    "entries": [ { "item": "veggy_pickled", "container-item": "null", "count": 12 } ]
+    "entries": [ { "item": "vegetable_pickled", "container-item": "null", "count": 12 } ]
   },
   {
     "type": "item_group",

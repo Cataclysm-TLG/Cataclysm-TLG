@@ -101,7 +101,7 @@ static const material_id material_hflesh( "hflesh" );
 static const material_id material_iflesh( "iflesh" );
 static const material_id material_steel( "steel" );
 static const material_id material_stone( "stone" );
-static const material_id material_veggy( "veggy" );
+static const material_id material_vegetable( "vegetable" );
 
 static const skill_id skill_bashing( "bashing" );
 static const skill_id skill_cutting( "cutting" );
@@ -1530,7 +1530,7 @@ void sfx::do_projectile_hit( const Creature &target )
             material_flesh,
             material_hflesh,
             material_iflesh,
-            material_veggy,
+            material_vegetable,
             material_bone,
         };
         const bool is_fleshy = std::any_of( fleshy.begin(), fleshy.end(), [&mon]( const material_id & m ) {

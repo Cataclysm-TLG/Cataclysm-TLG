@@ -76,7 +76,7 @@
     "to_hit": -1,
     "color": "green",
     "symbol": ",",
-    "material": [ "veggy" ],
+    "material": [ "vegetable" ],
     "volume": "250 ml",
     "flags": [ "SPEAR", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "SHIVS" ],

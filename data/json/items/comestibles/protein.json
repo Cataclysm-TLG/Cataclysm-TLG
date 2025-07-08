@@ -71,7 +71,7 @@
     "color": "brown",
     "container": "wrapper",
     "calories": 260,
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 10 ], [ "veggy_allergen", 1 ], [ "fruit_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ], [ "fruit_allergen", 1 ] ]
   },
   {
     "id": "protein_shake",

@@ -31,7 +31,7 @@ extern const flag_id flag_ALLERGEN_JUNK;
 extern const flag_id flag_ALLERGEN_MEAT;
 extern const flag_id flag_ALLERGEN_MILK;
 extern const flag_id flag_ALLERGEN_NUT;
-extern const flag_id flag_ALLERGEN_VEGGY;
+extern const flag_id flag_ALLERGEN_vegetable;
 extern const flag_id flag_ALLERGEN_DRIED_VEGETABLE;
 extern const flag_id flag_ALLERGEN_WHEAT;
 extern const flag_id flag_ALLERGEN_BREAD;
