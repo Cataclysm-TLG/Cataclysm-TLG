@@ -140,8 +140,7 @@
       "sloc_horse_ranch",
       "sloc_lighthouse_ground",
       "sloc_lighthouse_small_ground",
-      "sloc_lodge_ground",
-      "sloc_light_industry_scen"
+      "sloc_lodge_ground"
     ],
     "start_name": "Safe Building",
     "flags": [ "LONE_START" ]
