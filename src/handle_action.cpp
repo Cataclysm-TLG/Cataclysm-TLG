@@ -1009,7 +1009,8 @@ static void haul_toggle()
 static bool is_smashable_corpse( const item &maybe_corpse )
 {
     return maybe_corpse.is_corpse() && maybe_corpse.damage() < maybe_corpse.max_damage() &&
-           ( maybe_corpse.can_revive() || ( maybe_corpse.has_var( "zombie_form" ) && maybe_corpse.has_flag( flag_FROZEN ) && !maybe_corpse.has_flag( flag_PULPED ) ) );
+           ( maybe_corpse.can_revive() || ( maybe_corpse.has_var( "zombie_form" ) &&
+                                            maybe_corpse.has_flag( flag_FROZEN ) && !maybe_corpse.has_flag( flag_PULPED ) ) );
 }
 
 static void smash()

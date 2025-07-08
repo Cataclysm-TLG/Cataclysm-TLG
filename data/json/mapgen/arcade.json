@@ -51,7 +51,15 @@
         "s": "t_sidewalk",
         "4": "t_gutter_downspout"
       },
-      "furniture": { "c": "f_counter", "F": "f_arcade_machine", "S": "f_sink", "B": "f_stool", "T": "f_locker", "x": "f_pinball_machine", "l": "f_vending_c" },
+      "furniture": {
+        "c": "f_counter",
+        "F": "f_arcade_machine",
+        "S": "f_sink",
+        "B": "f_stool",
+        "T": "f_locker",
+        "x": "f_pinball_machine",
+        "l": "f_vending_c"
+      },
       "toilets": { "%": {  } },
       "place_items": [
         { "item": "vending_drink", "x": 19, "y": 8, "chance": 75 },
