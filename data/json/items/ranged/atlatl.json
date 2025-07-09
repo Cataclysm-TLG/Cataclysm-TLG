@@ -53,7 +53,7 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 1.5, "armor_penetration": 2 },
     "dispersion": 180,
     "loudness": 0,
-    "critical_multiplier": 10,
+    "critical_multiplier": 2,
     "recovery_chance": 97,
     "melee_damage": { "stab": 10 }
   },
@@ -74,7 +74,7 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 1.25, "armor_penetration": 1.25 },
     "dispersion": 180,
     "loudness": 0,
-    "critical_multiplier": 10,
+    "critical_multiplier": 2,
     "recovery_chance": 96,
     "melee_damage": { "stab": 8 }
   },
@@ -95,7 +95,7 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 0.75 },
     "dispersion": 200,
     "loudness": 0,
-    "critical_multiplier": 8,
+    "critical_multiplier": 2,
     "recovery_chance": 83,
     "melee_damage": { "stab": 5 }
   }
