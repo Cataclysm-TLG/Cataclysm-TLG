@@ -26,10 +26,10 @@
     "ammo": [ "atlatl" ],
     "loudness": 8,
     "reload_noise_volume": 2,
-    "range": 12,
-    "ranged_damage": { "damage_type": "stab", "amount": 8 },
+    "range": 17,
+    "ranged_damage": { "damage_type": "stab", "amount": 15 },
     "//2": "Significantly worse accuracy than a bow. See 'Comparing Atlatls and Bows: Accuracy and Learning Curve' by John C Whittaker",
-    "dispersion": 1800,
+    "dispersion": 1700,
     "sight_dispersion": 3000,
     "clip_size": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "atlatl": 1 }, "open_container": true } ],
@@ -53,7 +53,6 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 1.5, "armor_penetration": 2 },
     "dispersion": 180,
     "loudness": 0,
-    "critical_multiplier": 2,
     "recovery_chance": 97,
     "melee_damage": { "stab": 10 }
   },
@@ -74,7 +73,6 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 1.25, "armor_penetration": 1.25 },
     "dispersion": 180,
     "loudness": 0,
-    "critical_multiplier": 2,
     "recovery_chance": 96,
     "melee_damage": { "stab": 8 }
   },
@@ -95,7 +93,6 @@
     "damage": { "damage_type": "stab", "constant_damage_multiplier": 0.75 },
     "dispersion": 200,
     "loudness": 0,
-    "critical_multiplier": 2,
     "recovery_chance": 83,
     "melee_damage": { "stab": 5 }
   }
