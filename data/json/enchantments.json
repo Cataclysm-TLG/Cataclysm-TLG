@@ -161,19 +161,47 @@
     "values": [ { "value": "REGEN_STAMINA", "add": -110 }, { "value": "MOVE_COST", "multiply": -0.25 } ]
   },
   {
-    "id": "ench_quadruped_movement_full",
+    "id": "ench_quadruped_movement_bipedal",
+    "//": "A movement penalty for if you're a full quadruped on two legs.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_RUN" },
+        { "or": [ { "u_has_move_mode": "walk" }, "u_can_drop_weapon" ] },
+        { "not": { "u_has_move_mode": "prone" } }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": 0.15 }, { "value": "CARRY_WEIGHT", "multiply": -0.10 } ]
+  },
+  {
+    "id": "ench_quadruped_movement_full_crouch",
     "//": "For quadrupeds with all four of their animal limbs.  We should avoid giving this to every animal mutant, as it helps keep lines distinct.",
     "type": "enchantment",
     "condition": {
       "and": [
         { "u_has_flag": "QUADRUPED_CROUCH" },
-        { "u_has_any_trait": [ "THRESH_RABBIT", "THRESH_BEAST", "THRESH_LUPINE", "THRESH_FELINE" ] },
         { "u_has_flag": "QUADRUPED_RUN" },
-        { "or": [ { "u_has_move_mode": "crouch" }, { "u_has_move_mode": "run" } ] },
+        { "or": [ { "u_has_move_mode": "crouch" } ] },
         { "not": "u_can_drop_weapon" }
       ]
     },
-    "values": [ { "value": "MOVE_COST", "multiply": -0.15 }, { "value": "CARRY_WEIGHT", "multiply": 0.35 } ]
+    "values": [ { "value": "MOVE_COST", "multiply": -0.45 }, { "value": "CARRY_WEIGHT", "multiply": 0.1 } ],
+    "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
+  },
+    {
+    "id": "ench_quadruped_movement_full_run",
+    "//": "For quadrupeds with all four of their animal limbs.  We should avoid giving this to every animal mutant, as it helps keep lines distinct.",
+    "type": "enchantment",
+    "condition": {
+      "and": [
+        { "u_has_flag": "QUADRUPED_CROUCH" },
+        { "u_has_flag": "QUADRUPED_RUN" },
+        { "u_has_move_mode": "run" },
+        { "not": "u_can_drop_weapon" }
+      ]
+    },
+    "values": [ { "value": "MOVE_COST", "multiply": -0.15 }, { "value": "CARRY_WEIGHT", "multiply": 0.1 } ],
+    "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
   },
   {
     "id": "ench_quadruped_movement_half",
@@ -182,13 +210,12 @@
     "condition": {
       "and": [
         { "u_has_flag": "QUADRUPED_CROUCH" },
-        { "u_has_any_trait": [ "THRESH_RABBIT", "THRESH_BEAST", "THRESH_LUPINE", "THRESH_FELINE" ] },
         { "not": { "u_has_flag": "QUADRUPED_RUN" } },
         { "u_has_move_mode": "crouch" },
         { "not": "u_can_drop_weapon" }
       ]
     },
-    "values": [ { "value": "MOVE_COST", "multiply": -0.5 } ]
+    "values": [ { "value": "MOVE_COST", "multiply": -0.3 } ]
   },
   {
     "type": "enchantment",

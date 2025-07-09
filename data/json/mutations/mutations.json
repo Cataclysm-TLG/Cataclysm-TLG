@@ -316,9 +316,10 @@
     "points": 2,
     "description": "You can move more quickly than most, resulting in a 15% speed bonus on sure footing.",
     "changes_to": [ "FLEET2" ],
-    "category": [ "SPIDER", "MOUSE", "RABBIT", "BIRD" ],
+    "cancels": [ "GASTROPOD_FOOT" ],
+    "category": [ "SPIDER", "MOUSE", "RABBIT", "BIRD", "FELINE" ],
     "types": [ "RUNNING" ],
-    "enchantments": [ { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.15 } ] } ]
+    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -4071,7 +4072,7 @@
     "enchantments": [
       {
         "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
-        "values": [ { "value": "MOVE_COST", "multiply": -0.58 }, { "value": "FOOTSTEP_NOISE", "multiply": 0 } ],
+        "values": [ { "value": "MOVE_COST", "multiply": -0.7 }, { "value": "FOOTSTEP_NOISE", "multiply": 0 } ],
         "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
       },
       {
@@ -4087,7 +4088,8 @@
         "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
-      { "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ] }
+      { "condition": { "not": { "u_has_move_mode": "prone" } },
+        "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ] }
     ]
   },
   {
@@ -4116,8 +4118,7 @@
     "description": "The heels of your feet have shifted up off the ground in a rather animalistic fashion, reducing your carry weight limit and preventing you from wearing shoes.  These hind feet are a bad match for human arms, but could pair well with matching forepaws.",
     "types": [ "FEET" ],
     "prereqs": [ "PADDED_FEET" ],
-    "category": [ "LUPINE", "FELINE", "BEAST", "RABBIT" ],
-    "changes_to": [ "RABBIT_FEET" ],
+    "category": [ "LUPINE", "FELINE", "BEAST", "URSINE" ],
     "flags": [ "QUADRUPED_RUN" ],
     "wet_protection": [ { "part": "foot_l", "neutral": 10 }, { "part": "foot_r", "neutral": 10 } ],
     "restricts_gear": [ "foot_l", "foot_r" ],
@@ -4129,7 +4130,6 @@
             "and": [
               { "or": [ { "u_has_move_mode": "run" }, { "u_has_move_mode": "crouch" } ] },
               { "not": "u_can_drop_weapon" },
-              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_FELINE", "THRESH_RABBIT" ] },
               { "u_has_flag": "QUADRUPED_CROUCH" }
             ]
           },
@@ -4138,28 +4138,7 @@
         }
       ]
     ],
-    "enchantments": [
-      {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "u_has_flag": "QUADRUPED_CROUCH" } ] },
-        "values": [ { "value": "MOVE_COST", "multiply": -0.5 }, { "value": "CARRY_WEIGHT", "multiply": -0.2 } ],
-        "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
-      },
-      {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_flag": "QUADRUPED_CROUCH" } ] },
-        "values": [ { "value": "MOVE_COST", "multiply": -0.5 }, { "value": "CARRY_WEIGHT", "multiply": -0.2 } ],
-        "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
-      },
-      {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "u_has_flag": "QUADRUPED_CROUCH" } ] },
-        "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
-      },
-      {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_flag": "QUADRUPED_CROUCH" } ] },
-        "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
-      },
-      { "values": [ { "value": "MOVE_COST", "multiply": 0.35 } ] },
-      { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] }
-    ]
+    "enchantments": [ "ench_quadruped_movement_bipedal", "ench_quadruped_movement_full_crouch", "ench_quadruped_movement_full_run" ]
   },
   {
     "type": "mutation",
@@ -5245,7 +5224,7 @@
     "leads_to": [ "SCUTTLE" ],
     "visibility": 8,
     "ugliness": 9,
-    "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r", "leg_stub_r", "leg_stub_l" ],
+    "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r" ],
     "enchantments": [ { "values": [ { "value": "FOOTSTEP_NOISE", "multiply": -0.1 } ] } ],
     "destroys_gear": true,
     "flags": [ "TOUGH_FEET" ]
@@ -5256,22 +5235,19 @@
     "name": { "str": "Gastropod Foot" },
     "points": 1,
     "mixed_effect": true,
-    "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You move about a fourth of your previous speed and can no longer wear pants or shoes, on the other hand you make significantly less noise.  In addition to being harder to knock down, you can move through sludge-covered surfaces easily.",
+    "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You are slower on flat ground, but the foot is surprisingly good for rough terrain, nearly silent, and immune to the effects of sludge.",
     "category": [ "GASTROPOD" ],
-    "types": [ "RUNNING", "LEGS", "FEET", "SOLES" ],
-    "prereqs": [ "SLIMY" ],
+    "types": [ "LEGS", "FEET", "SOLES" ],
+    "cancels": [ "FLEET", "FLEET2" ],
+    "prereqs": [ "SLIMY", "VISCOUS" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "leads_to": [ "GASTROPOD_BALANCE" ],
     "flags": [ "SLUDGE_IMMUNE" ],
     "visibility": 8,
     "ugliness": 9,
     "encumbrance_always": [ [ "leg_l", 10 ], [ "leg_r", 10 ], [ "foot_l", 10 ], [ "foot_r", 10 ] ],
-    "enchantments": [
-      {
-        "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.25 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
-      }
-    ],
-    "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r", "leg_stub_r", "leg_stub_l" ],
+    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ] } ],
+    "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r" ],
     "destroys_gear": true
   },
   {
@@ -6335,7 +6311,7 @@
     "description": "Most of your fingers have grown to tremendous length, becoming a broad pair of leathery wings.  This allows you to arrest a fall or glide from a ledge if you aren't too weighed down, but naturally impedes your fine motor skills.  They even keep you warm when you sleep.",
     "types": [ "ARMS", "HANDS" ],
     "flags": [ "WING_GLIDE", "WINGS_2", "ARM_WINGS" ],
-    "encumbrance_always": [ [ "arm_r", 20 ], [ "arm_l", 20 ], [ "hand_r", 40 ], [ "hand_l", 40 ] ],
+    "enchantments": [ "ench_wings_bird" ],
     "prereqs": [ "WEBBED" ],
     "category": [ "CHIROPTERAN" ],
     "restricts_gear": [ "arm_l", "arm_r", "hand_l", "hand_r" ],
@@ -7010,17 +6986,18 @@
         {
           "condition": {
             "and": [
-              { "u_has_move_mode": "crouch" },
-              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_RABBIT", "THRESH_FELINE" ] },
+              { "or": [ { "u_has_move_mode": "run" }, { "u_has_move_mode": "crouch" } ] },
               { "not": "u_can_drop_weapon" },
-              { "not": { "u_has_flag": "QUADRUPED_RUN" } }
+              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_FELINE", "THRESH_RABBIT" ] },
+              { "u_has_flag": "QUADRUPED_CROUCH" }
             ]
           },
-          "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
+          "msg_on": { "text": "You drop down on all fours." },
+          "msg_off": { "text": "You assume a less bestial posture." }
         }
       ]
     ],
-    "enchantments": [ "ench_quadruped_movement_half", { "ench_effects": [ { "effect": "quadruped_half", "intensity": 1 } ] } ],
+    "enchantments": [ "ench_quadruped_movement_half" ],
     "category": [ "LUPINE", "RAT", "FELINE", "BEAST", "URSINE" ]
   },
   {
@@ -7320,8 +7297,9 @@
     "description": "Your muscles are generally slow to move.  You move 10% slower.",
     "types": [ "RUNNING" ],
     "changes_to": [ "PONDEROUS2" ],
-    "category": [ "URSINE", "CATTLE", "PLANT" ],
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.1 } ] } ]
+    "category": [ "URSINE", "CATTLE", "PLANT", "BATRACHIAN", "GASTROPOD", "CRUSTACEAN" ],
+    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.1 } ] } ]
+   
   },
   {
     "type": "mutation",
@@ -7332,8 +7310,8 @@
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS1" ],
     "changes_to": [ "PONDEROUS3" ],
-    "category": [ "CATTLE", "PLANT" ],
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.2 } ] } ]
+    "category": [ "CATTLE", "PLANT", "GASTROPOD", "BATRACHIAN" ],
+    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.2 } ] } ]
   },
   {
     "type": "mutation",
@@ -7344,7 +7322,7 @@
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS2" ],
     "category": [ "PLANT" ],
-    "enchantments": [ { "values": [ { "value": "MOVE_COST", "multiply": 0.3 } ] } ]
+    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.3 } ] } ]
   },
   {
     "type": "mutation",
@@ -7455,7 +7433,6 @@
     "cancels": [ "LEG_TENTACLES", "HOOVES" ],
     "flags": [ "TOUGH_FEET" ],
     "category": [ "PLANT" ],
-    "restricts_gear": [ "leg_stub_r", "leg_stub_l" ],
     "encumbrance_covered": [ [ "foot_l", 10 ], [ "foot_r", 10 ] ]
   },
   {
@@ -7858,7 +7835,8 @@
         "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" } ] },
         "ench_effects": [ { "effect": "wall_crawl", "intensity": 1 } ]
       },
-      {
+      { 
+        "condition": { "not": { "u_has_move_mode": "prone" } },
         "values": [ { "value": "MOVE_COST", "multiply": 0.4 }, { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.5 } ]
       }
     ]
@@ -8023,7 +8001,7 @@
       { "part": "foot_l", "neutral": 6 },
       { "part": "foot_r", "neutral": 6 }
     ],
-    "restricts_gear": [ "foot_l", "foot_r", "leg_stub_r", "leg_stub_l" ],
+    "restricts_gear": [ "foot_l", "foot_r" ],
     "enchantments": [
       {
         "values": [
