@@ -8485,7 +8485,7 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         bp == body_part_hand_r || bp == body_part_arm_r ) {
         recoil_mul = 200;
     } else if( bp == bodypart_str_id::NULL_ID() ) {
-        add_msg_debug( debugmode::DF_CHAR_HEALTH, "apply_damage() picked a null body part." );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH, "dealt_damage_instance() picked a null body part." );
     }
 
     // TODO: Scale with damage in a way that makes sense for power armors, plate armor and naked skin.
