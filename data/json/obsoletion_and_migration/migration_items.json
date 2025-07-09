@@ -1004,6 +1004,11 @@
     "replace": "silver_earring"
   },
   {
+    "id": "diamond_silver_earring",
+    "type": "MIGRATION",
+    "replace": "silver_earring"
+  },
+  {
     "id": "emerald_silver_earring",
     "type": "MIGRATION",
     "replace": "silver_earring"
@@ -2492,5 +2497,10 @@
     "id": "veggy_pickled_fried",
     "type": "MIGRATION",
     "replace": "vegetable_pickled_fried"
+  },
+  {
+    "id": "cufflinks_intricate",
+    "type": "MIGRATION",
+    "replace": "tie_necktie"
   }
 ]
