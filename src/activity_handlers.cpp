@@ -2914,6 +2914,7 @@ void activity_handlers::travel_do_turn( player_activity *act, Character *you )
         if( you->omt_path.empty() ) {
             you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
             act->set_to_null();
+            ui::omap::force_quit();
             return;
         }
         const tripoint_abs_omt next_omt = you->omt_path.back();
@@ -2949,6 +2950,7 @@ void activity_handlers::travel_do_turn( player_activity *act, Character *you )
         }
     } else {
         you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
+        ui::omap::force_quit();
     }
     act->set_to_null();
 }

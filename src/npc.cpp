@@ -2741,9 +2741,7 @@ int npc::print_info( const catacurses::window &w, int line, int vLines, int colu
     mvwprintz( w, point( column, line ), bar.second, bar.first );
     const int bar_max_width = 5;
     const int bar_width = utf8_width( bar.first );
-    for( int i = 0; i < bar_max_width - bar_width; ++i ) {
-        mvwprintz( w, point( column + 4 - i, line ), c_white, "." );
-    }
+    mvwhline( w, point( column + 3, line ), c_white, '.', bar_max_width - bar_width );
     line += fold_and_print( w, point( column + bar_max_width + 1, line ),
                             iWidth - bar_max_width - 1, basic_symbol_color(), get_name() );
 
@@ -3644,7 +3642,7 @@ void npc::set_companion_mission( const tripoint_abs_omt &omt_pos, const std::str
 
 void npc::reset_companion_mission()
 {
-    comp_mission.position = tripoint_abs_omt( -999, -999, -999 );
+    comp_mission.position = overmap::invalid_tripoint;
     reset_miss_id( comp_mission.miss_id );
     comp_mission.role_id.clear();
     if( comp_mission.destination ) {

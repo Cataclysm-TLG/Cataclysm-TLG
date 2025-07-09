@@ -1493,7 +1493,7 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint & )
         p->set_mutation( trait_THRESH_MYCUS );
         g->invalidate_main_ui_adaptor();
         //~ The Mycus does not use the term (or encourage the concept of) "you".  The PC is a local/native organism, but is now the Mycus.
-        //~ It still understands the concept, but uninitelligent fungaloids and mind-bent symbiotes should not need it.
+        //~ It still understands the concept, but uninitelligent fungal zombies and mind-bent symbiotes should not need it.
         //~ We are the Mycus.
         popup( _( "we welcome into us.  we have endured long in this forbidding world." ) );
         p->add_msg_if_player( " " );
@@ -2115,10 +2115,10 @@ class exosuit_interact
                 current_ui->mark_resize();
                 current_ui->on_redraw( [this]( const ui_adaptor & ) {
                     draw_border( w_border, c_white, suit->tname(), c_light_green );
-                    for( int i = 1; i < height - 1; i++ ) {
-                        mvwputch( w_border, point( width_menu + 1, i ), c_white, LINE_XOXO );
-                    }
-                    mvwputch( w_border, point( width_menu + 1, height - 1 ), c_white, LINE_XXOX );
+                    wattron( w_border, c_white );
+                    mvwvline( w_border, point( width_menu + 1, 1 ), LINE_XOXO, height - 2 );
+                    mvwaddch( w_border, point( width_menu + 1, height - 1 ), LINE_XXOX );
+                    wattroff( w_border, c_white );
                     wnoutrefresh( w_border );
                     draw_menu();
                     draw_iteminfo();
@@ -7216,7 +7216,7 @@ std::optional<int> iuse::radiocontrol( Character *p, item *it, const tripoint & 
             p->remove_value( "remote_controlling" );
         } else {
             std::list<std::pair<tripoint_bub_ms, item *>> rc_pairs = here.get_rc_items();
-            tripoint_bub_ms rc_item_location = {999, 999, 999};
+            tripoint_bub_ms rc_item_location = overmap::invalid_tripoint_bub_ms;
             // TODO: grab the closest car or similar?
             for( auto &rc_pairs_rc_pair : rc_pairs ) {
                 if( rc_pairs_rc_pair.second->has_flag( flag_RADIOCAR ) &&
@@ -7224,7 +7224,7 @@ std::optional<int> iuse::radiocontrol( Character *p, item *it, const tripoint & 
                     rc_item_location = rc_pairs_rc_pair.first;
                 }
             }
-            if( rc_item_location.x() == 999 ) {
+            if( rc_item_location == overmap::invalid_tripoint_bub_ms ) {
                 p->add_msg_if_player( _( "No active RC cars on ground and in range." ) );
                 return 1;
             } else {

@@ -41,7 +41,6 @@ bool fungus_haze( monster *z );       // Broadly scatter aerobics
 bool fungus_big_blossom( monster *z ); // Aerobic & anaerobic, as needed
 bool fungus_inject( monster *z );     // Directly inject the spores
 bool fungus_bristle( monster *z );    // Fungal hedgerow rake & inject
-bool fungus_growth( monster *z );     // Sporeling -> fungal creature
 bool fungus_sprout( monster *z );     // Grow fungal walls
 bool fungus_fortify( monster *z );    // Grow fungal hedgerows
 bool fungal_trail( monster *z );

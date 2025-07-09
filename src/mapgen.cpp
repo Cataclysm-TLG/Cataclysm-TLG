@@ -121,9 +121,8 @@ static const itype_id itype_diesel( "diesel" );
 static const itype_id itype_gasoline( "gasoline" );
 static const itype_id itype_jp8( "jp8" );
 
-static const mongroup_id GROUP_BREATHER( "GROUP_BREATHER" );
-static const mongroup_id GROUP_BREATHER_HUB( "GROUP_BREATHER_HUB" );
-static const mongroup_id GROUP_FUNGI_FUNGALOID( "GROUP_FUNGI_FUNGALOID" );
+static const mongroup_id GROUP_FUNGI_FLOWER( "GROUP_FUNGI_FLOWER" );
+static const mongroup_id GROUP_FUNGI_ZOMBIE( "GROUP_FUNGI_ZOMBIE" );
 static const mongroup_id GROUP_LAB( "GROUP_LAB" );
 static const mongroup_id GROUP_LAB_CYBORG( "GROUP_LAB_CYBORG" );
 static const mongroup_id GROUP_LAB_SECURITY( "GROUP_LAB_SECURITY" );
@@ -6132,7 +6131,6 @@ void map::draw_lab( mapgendata &dat )
                         break;
                     }
                     std::vector<artifact_natural_property> valid_props = {
-                        ARTPROP_BREATHING,
                         ARTPROP_CRACKLING,
                         ARTPROP_WARM,
                         ARTPROP_SCALED,
@@ -6174,7 +6172,7 @@ void map::draw_lab( mapgendata &dat )
                     }
                     tripoint_bub_ms center( rng( 6, SEEX * 2 - 7 ), rng( 6, SEEY * 2 - 7 ), abs_sub.z() );
 
-                    // Make a portal surrounded by more dense fungal stuff and a fungaloid.
+                    // Make a portal surrounded by more dense fungal stuff.
                     draw_rough_circle( [this]( const point & p ) {
                         if( has_flag_ter( ter_furn_flag::TFLAG_GOES_DOWN, p ) ||
                             has_flag_ter( ter_furn_flag::TFLAG_GOES_UP, p ) ||
@@ -6195,7 +6193,7 @@ void map::draw_lab( mapgendata &dat )
                     ter_set( center.xy(), ter_t_fungus_floor_in );
                     furn_set( center.xy(), furn_str_id::NULL_ID() );
                     trap_set( center, tr_portal );
-                    place_spawns( GROUP_FUNGI_FUNGALOID, 1, center.xy() + point( -2, -2 ),
+                    place_spawns( GROUP_FUNGI_FLOWER, 1, center.xy() + point( -2, -2 ),
                                   center.xy() + point( 2, 2 ), center.z(), 1, true );
 
                     break;
@@ -7759,19 +7757,6 @@ void map::create_anomaly( const tripoint_bub_ms &cp, artifact_natural_property p
                 for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
                     if( furn( point_bub_ms( i, j ) ) == furn_f_rubble && one_in( 3 ) ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_shadow );
-                    }
-                }
-            }
-            break;
-
-        case ARTPROP_BREATHING:
-            for( int i = c.x() - 1; i <= c.x() + 1; i++ ) {
-                for( int j = c.y() - 1; j <= c.y() + 1; j++ ) {
-                    if( i == c.x() && j == c.y() ) {
-                        place_spawns( GROUP_BREATHER_HUB, 1, point_bub_ms( i, j ), point_bub_ms( i, j ), z, 1,
-                                      true );
-                    } else {
-                        place_spawns( GROUP_BREATHER, 1, point_bub_ms( i, j ), point_bub_ms( i, j ), z, 1, true );
                     }
                 }
             }

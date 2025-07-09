@@ -1615,7 +1615,8 @@ static void teleport_short()
 
 static void teleport_long()
 {
-    const tripoint_abs_omt where( ui::omap::choose_point( true ) );
+    const tripoint_abs_omt where( ui::omap::choose_point( _( "Choose a teleport destination." ),
+                                  true ) );
     if( where == overmap::invalid_tripoint ) {
         return;
     }
@@ -3408,7 +3409,8 @@ static void map_extra()
     mx_menu.query();
     int mx_choice = mx_menu.ret;
     if( mx_choice >= 0 && mx_choice < static_cast<int>( mx_str.size() ) ) {
-        const tripoint_abs_omt where_omt( ui::omap::choose_point( true ) );
+        const tripoint_abs_omt where_omt( ui::omap::choose_point(
+                                              _( "Select location to spawn map extra." ), true ) );
         if( where_omt != overmap::invalid_tripoint ) {
             smallmap mx_map;
             mx_map.load( where_omt, false );
@@ -3451,12 +3453,16 @@ static void show_sound()
         const point offset {
             player_character.view_offset.xy().raw() + point( POSX - player_character.posx(), POSY - player_character.posy() )
         };
+        wattron( g->w_terrain, c_yellow );
         for( const tripoint &sound : sounds_to_draw.first ) {
-            mvwputch( g->w_terrain, offset + sound.xy(), c_yellow, '?' );
+            mvwaddch( g->w_terrain, offset + sound.xy(), '?' );
         }
+        wattroff( g->w_terrain, c_yellow );
+        wattron( g->w_terrain, c_red );
         for( const tripoint &sound : sounds_to_draw.second ) {
-            mvwputch( g->w_terrain, offset + sound.xy(), c_red, '?' );
+            mvwaddch( g->w_terrain, offset + sound.xy(), '?' );
         }
+        wattroff( g->w_terrain, c_red );
     } );
     g->add_draw_callback( sound_cb );
 
