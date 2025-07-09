@@ -8360,7 +8360,7 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
     }
 
     if( hurt == bodypart_str_id::NULL_ID() ) {
-        debugmsg( "Wacky body part hurt!" );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH, "apply_damage() picked a null bodypart, redirecting damage to torso." );
         hurt = body_part_torso;
     }
 
@@ -8423,7 +8423,7 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         const damage_instance &d, const weakpoint_attack &attack )
 {
-    if( has_trait( trait_DEBUG_NODMG ) || has_effect( effect_incorporeal ) ) {
+    if( is_dead_state() || has_trait( trait_DEBUG_NODMG ) || has_effect( effect_incorporeal ) ) {
         return dealt_damage_instance();
     }
 
@@ -8485,7 +8485,7 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         bp == body_part_hand_r || bp == body_part_arm_r ) {
         recoil_mul = 200;
     } else if( bp == bodypart_str_id::NULL_ID() ) {
-        debugmsg( "Wacky body part hit!" );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH, "dealt_damage_instance() picked a null body part." );
     }
 
     // TODO: Scale with damage in a way that makes sense for power armors, plate armor and naked skin.
