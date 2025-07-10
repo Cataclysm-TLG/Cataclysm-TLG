@@ -2388,7 +2388,7 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         info.emplace_back( "BASE", string_format( _( "Contains: %s" ),
                            get_var( "contained_name" ) ) );
     }
-    if( count_by_charges() && !is_food() && !is_medication() &&
+    if( count_by_charges() && !is_food() && !is_medication() && type->stack_max != 1 &&
         parts->test( iteminfo_parts::BASE_AMOUNT ) ) {
         info.emplace_back( "BASE", _( "Amount: " ), "<num>", iteminfo::no_flags,
                            charges * batch );
@@ -6750,7 +6750,7 @@ std::string item::display_name( unsigned int quantity ) const
             max_amount = ammo_capacity( item_controller->find_template( ammo_default() )->ammo->type );
         }
         show_amt = !has_flag( flag_RELOAD_AND_SHOOT );
-    } else if( count_by_charges() && !has_infinite_charges() ) {
+    } else if( count_by_charges() && !has_infinite_charges() && type->stack_max != 1 ) {
         // A chargeable item
         amount = charges;
         const itype *adata = ammo_data();
