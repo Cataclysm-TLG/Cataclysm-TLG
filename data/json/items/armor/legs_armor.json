@@ -1017,7 +1017,7 @@
           { "type": "kevlar", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.6 }
         ],
-        "encumbrance": [ 10, 14 ],
+        "encumbrance": [ 16, 20 ],
         "coverage": 100,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_upper_l", "leg_lower_l", "leg_hip_r", "leg_upper_r", "leg_lower_r" ]
@@ -1088,7 +1088,7 @@
     "flags": [ "VARSIZE", "POCKETS", "ALLOWS_TAIL" ],
     "armor": [
       {
-        "encumbrance": [ 12, 16 ],
+        "encumbrance": [ 26, 28 ],
         "coverage": 100,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_upper_l", "leg_lower_l", "leg_hip_r", "leg_upper_r", "leg_lower_r" ],
@@ -1100,7 +1100,6 @@
         "layers": [ "OUTER", "NORMAL" ]
       },
       {
-        "encumbrance": [ 2, 2 ],
         "coverage": 100,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
