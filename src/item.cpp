@@ -1406,7 +1406,7 @@ int item::charges_per_weight( const units::mass &m, bool suppress_warning ) cons
 
 bool item::display_stacked_with( const item &rhs, bool check_components ) const
 {
-    return !count_by_charges() && stacks_with( rhs, check_components );
+    return ( !count_by_charges() || type->stack_max == 1 ) && stacks_with( rhs, check_components );
 }
 
 bool item::can_combine( const item &rhs ) const
@@ -1414,11 +1414,17 @@ bool item::can_combine( const item &rhs ) const
     if( !contents.empty() || !rhs.contents.empty() ) {
         return false;
     }
-    if( !count_by_charges() ) {
+    if( !count_by_charges() || type->stack_max == 1 ) {
         return false;
     }
     if( !stacks_with( rhs, true, true ) ) {
         return false;
+    }
+    if( type->stack_max > 0 ) {
+        const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
+        if( total > type->stack_max ) {
+            return {};
+        }
     }
     return true;
 }
@@ -1697,7 +1703,7 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     // This function is also used to test whether items counted by charges should be merged, for that
     // check the, the charges must be ignored. In all other cases (tools/guns), the charges are important.
     bits.set( tname::segments::CHARGES,
-              same_type && ( count_by_charges() || charges == rhs.charges ) );
+              same_type && ( ( count_by_charges() && type->stack_max != 1 ) || charges == rhs.charges ) );
     bits.set( tname::segments::FAVORITE_PRE, is_favorite == rhs.is_favorite );
     bits.set( tname::segments::FAVORITE_POST, is_favorite == rhs.is_favorite );
     bits.set( tname::segments::DURABILITY,
@@ -1707,7 +1713,6 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::FILTHY, is_filthy() == rhs.is_filthy() );
     bits.set( tname::segments::WETNESS, _stacks_wetness( *this, rhs, precise ) );
     bits.set( tname::segments::WEAPON_MODS, _stacks_weapon_mods( *this, rhs ) );
-
     if( combine_liquid && same_type && has_temperature() && made_of_from_type( phase_id::LIQUID ) ) {
         // we can combine liquids of same type and different temperatures
         bits.set( tname::segments::TAGS, equal_ignoring_elements( rhs.get_flags(), get_flags(),
@@ -1789,6 +1794,12 @@ bool item::merge_charges( const item &rhs )
 {
     if( !count_by_charges() || !stacks_with( rhs ) ) {
         return false;
+    }
+    if( type->stack_max > 0 ) {
+            const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
+            if( total > type->stack_max ) {
+                return {};
+            }
     }
     // Prevent overflow when either item has "near infinite" charges.
     if( charges >= INFINITE_CHARGES / 2 || rhs.charges >= INFINITE_CHARGES / 2 ) {
