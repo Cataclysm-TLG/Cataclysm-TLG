@@ -14,6 +14,7 @@
     "color": "white",
     "count": 1,
     "stack_size": 1,
+    "stack_max": 1,
     "ammo_type": "cannon",
     "range": 50,
     "damage": { "damage_type": "bullet", "amount": 352 },

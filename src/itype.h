@@ -1471,6 +1471,10 @@ struct itype {
         bool stackable_ = false;
 
     public:
+
+        /** If stackable, is there a maximum? 0 == infinity. */
+        int stack_max = 0;
+
         static constexpr int damage_scale = 1000; /** Damage scale compared to the old float damage value */
 
         itype() {
