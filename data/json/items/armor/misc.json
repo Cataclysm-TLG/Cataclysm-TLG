@@ -9,13 +9,13 @@
     "price": "25 USD",
     "price_postapoc": "10 cent",
     "to_hit": -3,
-    "material": [ "nylon" ],
+    "material": [ "vinyl" ],
     "symbol": "[",
     "color": "pink",
     "warmth": 20,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "SKINTIGHT" ],
     "armor": [ { "encumbrance": 5, "coverage": 60, "covers": [ "head" ] } ]
   },
   {
@@ -29,6 +29,7 @@
     "price_postapoc": "10 cent",
     "material": [ "rubber" ],
     "symbol": ".",
+    "armor": [ { "encumbrance": 5, "coverage": 90, "covers": [ "mouth" ], "specifically_covers": [ "mouth_nose" ] } ],
     "color": "red"
   },
   {
@@ -94,7 +95,8 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "color": "dark_gray",
-    "flags": [ "FANCY" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "FANCY", "BELTED" ]
   },
   {
     "id": "sleeping_bag_roll",
@@ -163,7 +165,8 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "color": "black",
-    "flags": [ "FANCY" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "FANCY", "BELTED" ]
   },
   {
     "id": "tie_clipon",
@@ -177,7 +180,8 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "color": "blue",
-    "flags": [ "FANCY" ]
+    "flags": [ "FANCY", "BELTED" ],
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ]
   },
   {
     "id": "tie_necktie",
@@ -191,7 +195,8 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "color": "green",
-    "flags": [ "FANCY" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "FANCY", "BELTED" ]
   },
   {
     "id": "vampire_fangs",
@@ -368,13 +373,13 @@
     "price": "25 USD",
     "price_postapoc": "10 cent",
     "to_hit": -3,
-    "material": [ "cotton" ],
+    "material": [ "vinyl" ],
     "symbol": "[",
     "color": "blue",
     "warmth": 10,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [ { "encumbrance": 5, "coverage": 60, "covers": [ "head" ] } ]
   },
   {
@@ -399,7 +404,8 @@
     "material": [ "steel" ],
     "symbol": "[",
     "color": "light_gray",
-    "flags": [ "NO_WEAR_EFFECT" ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED" ],
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
     "//": "dog tags are roughly 50mm x 28mm x 0.4mm, or 0.56 ml, but that's so small I needed to round up to 1 ml"
   }
 ]
