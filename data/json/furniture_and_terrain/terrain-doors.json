@@ -145,12 +145,7 @@
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
     },
-    "shoot": {
-      "reduce_damage": [ 5, 10 ],
-      "reduce_damage_laser": [ 0, 10 ],
-      "destroy_damage": [ 40, 80 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 40, 80 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",
@@ -183,12 +178,7 @@
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
     },
-    "shoot": {
-      "reduce_damage": [ 5, 10 ],
-      "reduce_damage_laser": [ 0, 10 ],
-      "destroy_damage": [ 40, 80 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 40, 80 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",

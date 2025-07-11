@@ -319,7 +319,12 @@
     "cancels": [ "GASTROPOD_FOOT" ],
     "category": [ "SPIDER", "MOUSE", "RABBIT", "BIRD", "FELINE" ],
     "types": [ "RUNNING" ],
-    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.15 } ] } ]
+    "enchantments": [
+      {
+        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.15 } ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -4088,8 +4093,10 @@
         "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
-      { "condition": { "not": { "u_has_move_mode": "prone" } },
-        "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ] }
+      {
+        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ]
+      }
     ]
   },
   {
@@ -4585,7 +4592,10 @@
     "prereqs": [ "FLEET" ],
     "types": [ "RUNNING" ],
     "category": [ "BIRD" ],
-    "enchantments": [ { "condition": { "or": [ { "u_has_move_mode": "walk" }, { "u_has_move_mode": "run" } ] } }, { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.3 } ] } ]
+    "enchantments": [
+      { "condition": { "or": [ { "u_has_move_mode": "walk" }, { "u_has_move_mode": "run" } ] } },
+      { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": -0.3 } ] }
+    ]
   },
   {
     "type": "mutation",
@@ -5246,7 +5256,12 @@
     "visibility": 8,
     "ugliness": 9,
     "encumbrance_always": [ [ "leg_l", 10 ], [ "leg_r", 10 ], [ "foot_l", 10 ], [ "foot_r", 10 ] ],
-    "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ] } ],
+    "enchantments": [
+      {
+        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.4 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.75 } ]
+      }
+    ],
     "restricts_gear": [ "leg_l", "leg_r", "foot_l", "foot_r" ],
     "destroys_gear": true
   },
@@ -7299,7 +7314,6 @@
     "changes_to": [ "PONDEROUS2" ],
     "category": [ "URSINE", "CATTLE", "PLANT", "BATRACHIAN", "GASTROPOD", "CRUSTACEAN" ],
     "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.1 } ] } ]
-   
   },
   {
     "type": "mutation",
@@ -7835,7 +7849,7 @@
         "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" } ] },
         "ench_effects": [ { "effect": "wall_crawl", "intensity": 1 } ]
       },
-      { 
+      {
         "condition": { "not": { "u_has_move_mode": "prone" } },
         "values": [ { "value": "MOVE_COST", "multiply": 0.4 }, { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.5 } ]
       }
