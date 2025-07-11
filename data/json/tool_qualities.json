@@ -467,7 +467,8 @@
     "id": "THREAD_TAP",
     "name": { "str": "thread tapping" }
   },
-  {"type": "tool_quality",
+  {
+    "type": "tool_quality",
     "id": "TORCH_FINE",
     "name": { "str": "Precise Heat Application" }
   }

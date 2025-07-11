@@ -527,6 +527,6 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_pottery" } ],
     "using": [ [ "earthenware_firing", 100 ] ],
-    "components": [ [ [ "any_water", 1, "LIST" ] ], [ [ "clay_lump", 4 ] ], [ [ "cu_pipe", 1], ["pipe", 1] ] ]
+    "components": [ [ [ "any_water", 1, "LIST" ] ], [ [ "clay_lump", 4 ] ], [ [ "cu_pipe", 1 ], [ "pipe", 1 ] ] ]
   }
 ]
