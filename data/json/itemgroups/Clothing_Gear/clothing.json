@@ -3829,6 +3829,9 @@
       { "item": "tie_necktie", "prob": 80 },
       { "item": "tieclip", "prob": 20 },
       { "item": "ring_signet", "prob": 1 },
+      { "item": "gold_cufflinks", "prob": 2 },
+      { "item": "collarpin", "prob": 2 },
+      { "item": "diamond_cufflinks", "prob": 1 },
       { "item": "tie_skinny", "prob": 20 }
     ]
   },

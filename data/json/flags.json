@@ -2529,5 +2529,20 @@
     "id": "CROSSBOW",
     "type": "json_flag",
     "//": "If this ranged weapon uses the archery skill, it will not drain stamina when aiming, nor will it teach archer's form."
+  },
+  {
+    "id": "NECKTIE_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is designed to attach to a necktie."
+  },
+  {
+    "id": "SHIRT_COLLAR_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is designed to fit in the collar of a button-up shirt."
+  },
+  {
+    "id": "SHIRT_CUFF_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is meant to fit in the cuffs of a dress shirt."
   }
 ]
