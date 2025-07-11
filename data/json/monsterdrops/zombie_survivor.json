@@ -242,12 +242,8 @@
       [ "spear_steel", 1 ],
       [ "spear_forked", 15 ],
       [ "spear_knife", 15 ],
-      [ "spear_pipe", 10 ],
-      [ "spear_spike", 15 ],
       [ "spear_stone", 15 ],
-      [ "spear_rebar", 10 ],
-      [ "spear_wood", 20 ],
-      [ "spear_homemade_halfpike", 15 ]
+      [ "spear_wood", 20 ]
     ]
   },
   {

@@ -6,8 +6,8 @@
     "subtype": "distribution",
     "entries": [
       { "item": "spear_knife_proper", "prob": 40 },
-      { "item": "spear_pipe", "prob": 40 },
-      { "item": "spear_homemade_halfpike", "prob": 20 },
+      { "item": "spear_wood", "prob": 40 },
+      { "item": "spear_copper", "prob": 20 },
       { "item": "makeshift_glaive", "prob": 20 }
     ]
   },

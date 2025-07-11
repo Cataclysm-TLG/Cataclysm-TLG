@@ -342,7 +342,7 @@
   {
     "type": "MIGRATION",
     "id": "aztec_spear_glass",
-    "replace": "spear_wood_simple"
+    "replace": "spear_wood"
   },
   {
     "type": "MIGRATION",
@@ -2502,5 +2502,50 @@
     "id": "cufflinks_intricate",
     "type": "MIGRATION",
     "replace": "tie_necktie"
+  },
+  {
+    "id": "spear_spike",
+    "type": "MIGRATION",
+    "replace": "spear_wood"
+  },
+  {
+    "id": "spear_wood_simple",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+    {
+    "id": "spear_pipe",
+    "type": "MIGRATION",
+    "replace": "spear_wood"
+  },
+  {
+    "id": "simple_spear_pipe",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "spear_steel_crude",
+    "type": "MIGRATION",
+    "replace": "spear_knife"
+  },
+  {
+    "id": "spear_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "sharp_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "pointed_rebar",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "spear_dory",
+    "type": "MIGRATION",
+    "replace": "spear_bronze"
   }
 ]
