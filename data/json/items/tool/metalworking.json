@@ -583,7 +583,7 @@
     "type": "TOOL",
     "name": {"str": "Blow Lamp" },
     "//":"the Earilest form of Blowtorch that was essentially a very short clay pitcher with a wick and a copper tube to blow through. was capable of melting tin and copper",
-    "description": "a Very Early version of a Blow torch, made with a Clay bowl that holds a wick as well as a Copper Tube to blow through. the precise flame is hot enough to weld copper and tin, as well as some precious metals making it ideal for Jewelry",
+    "description": "a Very Early version of a Blow torch, made with a Clay bowl that holds a wick as well as a Metal Tube to blow through. Altough it takes some practice the precise flame is hot enough to weld softer metals like copper and gold, making it suited for jewelry ",
     "weight": "225 g",
     "volume":"1 L",
     "price":"200 USD",
