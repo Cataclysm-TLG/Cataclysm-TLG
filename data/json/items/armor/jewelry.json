@@ -425,7 +425,7 @@
     "color": "yellow",
     "flags": [ "FANCY", "SHIRT_CUFF_ACCESSORY", "CANT_WEAR" ]
   },
-    {
+  {
     "id": "diamond_cufflinks",
     "type": "ARMOR",
     "name": { "str": "diamond cufflinks" },

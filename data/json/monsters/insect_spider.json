@@ -2239,7 +2239,7 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 5, "cut": 10, "bullet": 8, "electric": 1 }
+    "armor": { "bash": 4, "cut": 5, "bullet": 3, "electric": 2 }
   },
   {
     "id": "mon_ant_acid_small",
@@ -2316,7 +2316,7 @@
     "harvest": "arachnid_acid",
     "dissect": "dissect_insect_sample_single",
     "flags": [ "ACIDPROOF", "CLIMBS", "HEARS", "POISON", "SEES", "SMELLS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 6, "cut": 10, "bullet": 8, "electric": 2 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 3, "electric": 2 }
   },
   {
     "id": "mon_ant_acid_larva",
@@ -2373,19 +2373,19 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true },
     "flags": [ "ACIDPROOF", "CLIMBS", "HEARS", "QUEEN", "SEES", "SMELLS", "PATH_AVOID_DANGER", "BASHES", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8, "electric": 1 }
+    "armor": { "bash": 8, "cut": 12, "bullet": 4, "electric": 2 }
   },
   {
     "id": "mon_ant_acid_soldier",
     "type": "MONSTER",
-    "description": "A massive woolly brown ant that towers over the worker ants.  Along with her huge mandibles, a corrosive liquid seeps from the end of her bloated abdomen.",
+    "description": "A human-sized ant covered in bristly brown chitin.  A corrosive liquid seeps from the end of her bloated abdomen.",
     "default_faction": "acid_ant",
     "bodytype": "insect",
     "species": [ "INSECT" ],
     "diff": 2,
     "volume": "62500 ml",
     "weight": "81500 g",
-    "hp": 100,
+    "hp": 120,
     "speed": 100,
     "material": [ "iflesh" ],
     "aggression": 40,
@@ -2393,9 +2393,9 @@
     "aggro_character": false,
     "symbol": "a",
     "color": "brown",
-    "melee_skill": 7,
-    "melee_dice": 1,
-    "melee_dice_sides": 8,
+    "melee_skill": 5,
+    "melee_dice": 2,
+    "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
     "dodge": 2,
     "bleed_rate": 80,
@@ -2436,7 +2436,7 @@
       "PATH_AVOID_DANGER",
       "CORNERED_FIGHTER"
     ],
-    "armor": { "bash": 12, "cut": 14, "bullet": 11, "electric": 1 }
+    "armor": { "bash": 12, "cut": 14, "bullet": 6, "electric": 1 }
   },
   {
     "id": "mon_ant_acid_soldier_mega",
@@ -2530,34 +2530,34 @@
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT", "PLAYER_CLOSE" ],
     "fungalize_into": "mon_ant_fungus",
     "flags": [ "SMELLS", "QUEEN", "CLIMBS", "PATH_AVOID_DANGER", "BASHES", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8, "electric": 1 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 2, "electric": 1 }
   },
   {
     "id": "mon_ant_soldier",
     "type": "MONSTER",
     "name": { "str": "oversized soldier ant" },
-    "description": "A huge and hairy red ant almost twice the size of other giant ants.  Bulging pincers extend from her jaws.",
+    "description": "An overgrown red ant the size of a wolf.  Bulging pincers extend from her jaws.",
     "default_faction": "ant",
     "bodytype": "insect",
     "species": [ "INSECT" ],
     "volume": "62500 ml",
     "weight": "81500 g",
-    "hp": 80,
+    "hp": 110,
     "speed": 100,
     "material": [ "iflesh" ],
     "symbol": "a",
     "color": "red",
     "aggression": 30,
     "aggro_character": false,
-    "melee_skill": 7,
-    "melee_dice": 1,
-    "melee_dice_sides": 8,
+    "melee_skill": 5,
+    "melee_dice": 2,
+    "melee_dice_sides": 12,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
-    "grab_strength": 35,
+    "melee_damage": [ { "damage_type": "cut", "amount": 10 } ],
+    "grab_strength": 40,
     "stomach_size": 600,
     "special_attacks": [ { "id": "bite_grab" }, [ "EAT_FOOD", 30 ], [ "BROWSE", 90 ], [ "EAT_CARRION", 90 ] ],
-    "dodge": 2,
+    "dodge": 3,
     "bleed_rate": 80,
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_hymenoptera" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_hymenoptera" ],
@@ -2571,7 +2571,7 @@
     "fungalize_into": "mon_ant_fungus",
     "upgrades": { "age_grow": 42, "into": "mon_ant_soldier_mega" },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 10, "cut": 12, "bullet": 10, "electric": 2 }
+    "armor": { "bash": 10, "cut": 12, "bullet": 8, "electric": 4 }
   },
   {
     "id": "mon_ant_soldier_mega",
@@ -2579,15 +2579,20 @@
     "name": { "str": "super soldier ant" },
     "description": "A cow-sized, hairy red ant.  Bulging pincers extend from her jaws.  Given the relative strength of ants to their body size, you don't doubt that this one could shove cars around or rip through solid walls.",
     "copy-from": "mon_ant_soldier",
-    "proportional": { "hp": 5, "dodge": 0.5, "vision_day": 2 },
+    "hp": 240,
     "volume": "625 L",
     "weight": "815 kg",
     "morale": 30,
-    "melee_dice": 2,
+    "melee_skill": 5,
+    "melee_dice": 3,
+    "vision_day": 12,
+    "vision_night": 6,
+    "melee_dice_sides": 8,
+    "path_settings": { "max_dist": 20, "avoid_sharp": true, "avoid_dangerous_fields": true },
+    "melee_damage": [ { "damage_type": "cut", "amount": 10 } ],
     "bleed_rate": 60,
     "grab_strength": 75,
     "stomach_size": 800,
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [
       { "id": "smash", "throw_strength": 48, "cooldown": 30 },
       { "id": "leg_sweep" },
@@ -2613,7 +2618,7 @@
     ],
     "dissect": "dissect_insect_sample_large",
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 15, "cut": 24, "bullet": 15, "electric": 4 }
+    "armor": { "bash": 12, "cut": 14, "bullet": 9, "electric": 4 }
   },
   {
     "id": "mon_locust_small",
@@ -4045,7 +4050,7 @@
     "harvest": "arachnid",
     "dissect": "dissect_insect_sample_single",
     "flags": [ "CLIMBS", "HEARS", "POISON", "SEES", "SMELLS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 6, "cut": 10, "bullet": 8, "electric": 2, "acid": 3, "heat": 6 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 3, "electric": 2, "acid": 3, "heat": 6 }
   },
   {
     "id": "mon_ant_fire_queen",
@@ -4080,6 +4085,6 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true },
     "flags": [ "CLIMBS", "HEARS", "QUEEN", "SEES", "SMELLS", "PATH_AVOID_DANGER", "BASHES", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8, "electric": 1, "acid": 6, "heat": 12 }
+    "armor": { "bash": 8, "cut": 10, "bullet": 4, "electric": 1, "acid": 6, "heat": 12 }
   }
 ]

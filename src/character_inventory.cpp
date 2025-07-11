@@ -358,7 +358,7 @@ item_location Character::i_add( item it, int &copies_remaining,
             it.charges = copies_remaining;
             copies_remaining = 0;
             return i_add( it, true, avoid, original_inventory_item,
-                        allow_drop, allow_wield, ignore_pkt_settings );
+                          allow_drop, allow_wield, ignore_pkt_settings );
         }
 
         while( copies_remaining > max_stack ) {
@@ -367,7 +367,7 @@ item_location Character::i_add( item it, int &copies_remaining,
             copies_remaining -= max_stack;
 
             i_add( stack, true, avoid, original_inventory_item,
-                allow_drop, allow_wield, ignore_pkt_settings );
+                   allow_drop, allow_wield, ignore_pkt_settings );
         }
 
         // Add the last partial stack and return its result
@@ -375,7 +375,7 @@ item_location Character::i_add( item it, int &copies_remaining,
         final_stack.charges = copies_remaining;
         copies_remaining = 0;
         return i_add( final_stack, true, avoid, original_inventory_item,
-                    allow_drop, allow_wield, ignore_pkt_settings );
+                      allow_drop, allow_wield, ignore_pkt_settings );
     }
     invalidate_inventory_validity_cache();
     invalidate_leak_level_cache();
