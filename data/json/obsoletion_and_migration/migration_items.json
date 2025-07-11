@@ -342,7 +342,7 @@
   {
     "type": "MIGRATION",
     "id": "aztec_spear_glass",
-    "replace": "spear_wood_simple"
+    "replace": "spear_wood"
   },
   {
     "type": "MIGRATION",
