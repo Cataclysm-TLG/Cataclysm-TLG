@@ -234,6 +234,9 @@
     "id": "pawn_valuable",
     "items": [
       [ "sword_cane", 5 ],
+      [ "gold_cufflinks", 5 ],
+      [ "collarpin", 6 ],
+      [ "diamond_cufflinks", 2 ],
       [ "advanced_ecig", 5 ],
       [ "television", 10 ],
       [ "gold_small", 10 ],

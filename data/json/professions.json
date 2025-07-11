@@ -4027,7 +4027,7 @@
           { "item": "socks" },
           { "item": "dress_shoes" },
           { "item": "knit_scarf" },
-          { "item": "platinum_watch" },
+          { "item": "gold_watch" },
           { "item": "briefcase" },
           { "item": "money_strap_fifty" },
           { "item": "file", "count": [ 1, 4 ] },
@@ -5353,7 +5353,7 @@
         "entries": [
           { "item": "jeans" },
           { "item": "leather_belt" },
-          { "item": "dress_shirt" },
+          { "item": "sheriffshirt" },
           { "item": "jacket_leather" },
           { "item": "socks" },
           { "item": "cowboy_hat" },
@@ -6159,20 +6159,22 @@
           { "item": "dress_shoes" },
           { "item": "dress_shirt" },
           { "item": "knit_scarf" },
-          { "item": "platinum_watch" },
+          { "item": "tie_necktie" },
+          { "item": "collarpin" },
           { "item": "blazer" },
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "platinum_bracelet" } ] },
+      "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "gold_cufflinks" } ] },
       "female": {
         "entries": [
           { "item": "bra" },
           { "item": "panties" },
           { "item": "stockings" },
+          { "item": "gold_bracelet" },
           { "item": "garter_belt" },
           { "item": "skirt" },
-          { "item": "platinum_ear" }
+          { "item": "gold_earring" }
         ]
       }
     },
