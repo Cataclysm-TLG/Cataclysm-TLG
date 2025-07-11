@@ -69,6 +69,7 @@
 
 static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_jumping( "jumping" );
+static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_teleglow( "teleglow" );
 
 static const flag_id json_flag_FIT( "FIT" );
@@ -604,7 +605,14 @@ static void damage_targets( const spell &sp, Creature &caster,
         if( dodgeable ) {
             const float dodge_training = sp.dodge_training( caster );
             if( cr->dodge_check( spell_accuracy, dodge_training ) ) {
-                cr->add_msg_player_or_npc( "You dodge out of the way!", "%s dodges out of the way!" );
+                if( !cr->is_monster() ) {
+                    cr->add_msg_player_or_npc( "You dodge out of the way!", "%s dodges out of the way!" );
+                } else {
+                    if( !cr->has_effect( effect_invisibility ) ) {
+                        add_msg_if_player_sees( cr->pos(), m_bad, _( "%1$s dodges out of the way!" ),
+                                                cr->disp_name( false, true ) );
+                    }
+                }
                 cr->on_dodge( &caster, spell_accuracy, dodge_training );
                 continue;
             }
