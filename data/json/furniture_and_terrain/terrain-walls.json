@@ -2736,12 +2736,7 @@
       "ter_set": "t_floor",
       "items": [ { "item": "glass_shard", "charges": [ 15, 34 ] }, { "item": "wire", "prob": 20 } ]
     },
-    "shoot": {
-      "reduce_damage": [ 5, 10 ],
-      "reduce_damage_laser": [ 0, 10 ],
-      "destroy_damage": [ 40, 80 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 40, 80 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",

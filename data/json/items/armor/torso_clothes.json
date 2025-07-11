@@ -349,9 +349,7 @@
         "max_item_length": "85 mm",
         "moves": 100,
         "description": "Eyelets for a collar pin",
-        "flag_restriction": [
-          "SHIRT_COLLAR_ACCESSORY"
-        ]
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
       },
       {
         "pocket_type": "CONTAINER",
@@ -361,9 +359,7 @@
         "max_item_length": "85 mm",
         "moves": 100,
         "description": "Buttonholes for cufflinks",
-        "flag_restriction": [
-          "SHIRT_CUFF_ACCESSORY"
-        ]
+        "flag_restriction": [ "SHIRT_CUFF_ACCESSORY" ]
       }
     ],
     "warmth": 10,
@@ -885,9 +881,7 @@
         "max_item_length": "85 mm",
         "moves": 100,
         "description": "Eyelets for a collar pin",
-        "flag_restriction": [
-          "SHIRT_COLLAR_ACCESSORY"
-        ]
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
       }
     ],
     "warmth": 10,

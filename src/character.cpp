@@ -8360,7 +8360,8 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
     }
 
     if( hurt == bodypart_str_id::NULL_ID() ) {
-        add_msg_debug( debugmode::DF_CHAR_HEALTH, "apply_damage() picked a null bodypart, redirecting damage to torso." );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH,
+                       "apply_damage() picked a null bodypart, redirecting damage to torso." );
         hurt = body_part_torso;
     }
 

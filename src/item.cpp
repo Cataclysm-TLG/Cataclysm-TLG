@@ -1796,10 +1796,10 @@ bool item::merge_charges( const item &rhs )
         return false;
     }
     if( type->stack_max > 0 ) {
-            const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
-            if( total > type->stack_max ) {
-                return {};
-            }
+        const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
+        if( total > type->stack_max ) {
+            return {};
+        }
     }
     // Prevent overflow when either item has "near infinite" charges.
     if( charges >= INFINITE_CHARGES / 2 || rhs.charges >= INFINITE_CHARGES / 2 ) {
