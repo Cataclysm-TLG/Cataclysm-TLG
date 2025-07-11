@@ -87,12 +87,25 @@
     "id": "tie_skinny",
     "type": "ARMOR",
     "name": { "str": "skinny tie" },
-    "description": "A skinny black and white checkered necktie.",
+    "description": "A necktie much narrower than usual, popularized by mid-century rock musicians and an enduring symbol of subculture ever since, it can nonetheless still serve as a high-class accessory.",
     "weight": "12 g",
     "volume": "50 ml",
     "price": "7 USD 50 cent",
     "price_postapoc": "10 cent",
-    "material": [ "cotton" ],
+    "material": [ "nylon" ],
+    "pocket_data": [
+    {
+      "pocket_type": "CONTAINER",
+      "rigid": false,
+      "max_contains_weight": "20 g",
+      "max_contains_volume": "15 ml",
+      "max_item_length": "85 mm",
+      "moves": 100,
+      "flag_restriction": [
+        "NECKTIE_ACCESSORY"
+      ]
+    }
+    ],
     "symbol": "[",
     "color": "dark_gray",
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
@@ -177,10 +190,23 @@
     "volume": "20 ml",
     "price": "5 USD",
     "price_postapoc": "10 cent",
-    "material": [ "cotton" ],
+    "material": [ "nylon" ],
+    "pocket_data": [
+    {
+      "pocket_type": "CONTAINER",
+      "rigid": false,
+      "max_contains_weight": "20 g",
+      "max_contains_volume": "15 ml",
+      "max_item_length": "85 mm",
+      "moves": 100,
+      "flag_restriction": [
+        "NECKTIE_ACCESSORY"
+      ]
+    }
+  ],
     "symbol": "[",
     "color": "blue",
-    "flags": [ "FANCY", "BELTED" ],
+    "flags": [ "BELTED" ],
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ]
   },
   {
@@ -192,7 +218,20 @@
     "volume": "25 ml",
     "price": "10 USD",
     "price_postapoc": "10 cent",
-    "material": [ "cotton" ],
+    "material": [ "nylon" ],
+    "pocket_data": [
+    {
+      "pocket_type": "CONTAINER",
+      "rigid": false,
+      "max_contains_weight": "20 g",
+      "max_contains_volume": "15 ml",
+      "max_item_length": "85 mm",
+      "moves": 100,
+      "flag_restriction": [
+        "NECKTIE_ACCESSORY"
+      ]
+    }
+  ],
     "symbol": "[",
     "color": "green",
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
@@ -201,7 +240,7 @@
   {
     "id": "vampire_fangs",
     "type": "ARMOR",
-    "name": { "str_sp": "vampire fangs" },
+    "name": { "str_sp": "plastic vampire fangs" },
     "description": "A pair of white vampire fangs made of plastic.",
     "weight": "23 g",
     "volume": "250 ml",
@@ -213,8 +252,8 @@
     "looks_like": "mouthpiece",
     "color": "white",
     "material_thickness": 0.01,
-    "flags": [ "SKINTIGHT", "NO_WEAR_EFFECT" ],
-    "armor": [ { "encumbrance": 5, "coverage": 10, "covers": [ "mouth" ] } ]
+    "flags": [ "SKINTIGHT" ],
+    "armor": [ { "encumbrance": 10, "coverage": 10, "covers": [ "mouth" ] } ]
   },
   {
     "id": "veil_wedding",
@@ -404,7 +443,7 @@
     "material": [ "steel" ],
     "symbol": "[",
     "color": "light_gray",
-    "flags": [ "NO_WEAR_EFFECT", "BELTED" ],
+    "flags": [ "BELTED" ],
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
     "//": "dog tags are roughly 50mm x 28mm x 0.4mm, or 0.56 ml, but that's so small I needed to round up to 1 ml"
   }
