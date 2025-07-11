@@ -19,9 +19,18 @@
       "str_max": 400,
       "str_min_supported": 150,
       "items": [
-        { "item": "rock", "count": [ 5, 10 ] },
-        { "item": "scrap", "count": [ 5, 8 ] },
-        { "item": "rebar", "count": [ 0, 2 ] }
+        {
+          "item": "rock",
+          "count": [ 5, 10 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 5, 8 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 2 ]
+        }
       ]
     }
   },
@@ -46,9 +55,18 @@
       "str_max": 400,
       "str_min_supported": 150,
       "items": [
-        { "item": "rock", "count": [ 5, 10 ] },
-        { "item": "scrap", "count": [ 5, 8 ] },
-        { "item": "rebar", "count": [ 0, 2 ] }
+        {
+          "item": "rock",
+          "count": [ 5, 10 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 5, 8 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 2 ]
+        }
       ]
     }
   },
@@ -92,9 +110,18 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_thconc_y",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -118,9 +145,18 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_thconc_floor",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -145,9 +181,18 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_floor",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -162,7 +207,13 @@
     "coverage": 0,
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "INDOORS", "COLLAPSES", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
-    "bash": { "ter_set": "t_null", "str_min": 75, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "ter_set": "t_null",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -187,9 +238,18 @@
       "sound_vol": 10,
       "sound_fail_vol": 8,
       "ter_set": "t_dirtfloor",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -213,9 +273,18 @@
       "sound_vol": 10,
       "sound_fail_vol": 8,
       "ter_set": "t_metal_floor",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -240,9 +309,18 @@
       "sound_vol": 10,
       "sound_fail_vol": 8,
       "ter_set": "t_strconc_floor",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -267,9 +345,18 @@
       "sound_vol": 10,
       "sound_fail_vol": 8,
       "ter_set": "t_linoleum_gray",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -294,9 +381,18 @@
       "sound_vol": 10,
       "sound_fail_vol": 8,
       "ter_set": "t_linoleum_white",
-      "items": [ { "item": "glass_shard", "count": [ 8, 16 ] } ]
+      "items": [
+        {
+          "item": "glass_shard",
+          "count": [ 8, 16 ]
+        }
+      ]
     },
-    "shoot": { "reduce_damage": [ 0, 0 ], "reduce_damage_laser": [ 0, 0 ], "destroy_damage": [ 2, 8 ] }
+    "shoot": {
+      "reduce_damage": [ 0, 0 ],
+      "reduce_damage_laser": [ 0, 0 ],
+      "destroy_damage": [ 2, 8 ]
+    }
   },
   {
     "type": "terrain",
@@ -314,7 +410,16 @@
       "str_min": 100,
       "str_max": 400,
       "str_min_supported": 150,
-      "items": [ { "item": "scrap", "count": [ 5, 8 ] }, { "item": "rebar", "count": [ 0, 2 ] } ]
+      "items": [
+        {
+          "item": "scrap",
+          "count": [ 5, 8 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 2 ]
+        }
+      ]
     }
   },
   {
@@ -337,9 +442,18 @@
       "str_max": 400,
       "str_min_supported": 200,
       "items": [
-        { "item": "rock", "count": [ 10, 22 ] },
-        { "item": "scrap", "count": [ 10, 12 ] },
-        { "item": "rebar", "count": [ 0, 4 ] }
+        {
+          "item": "rock",
+          "count": [ 10, 22 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 10, 12 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 4 ]
+        }
       ]
     }
   },
@@ -366,9 +480,18 @@
       "str_max": 400,
       "str_min_supported": 200,
       "items": [
-        { "item": "rock", "count": [ 10, 22 ] },
-        { "item": "scrap", "count": [ 10, 12 ] },
-        { "item": "rebar", "count": [ 0, 4 ] }
+        {
+          "item": "rock",
+          "count": [ 10, 22 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 10, 12 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 4 ]
+        }
       ]
     }
   },
@@ -388,7 +511,16 @@
       "str_min": 100,
       "str_max": 400,
       "str_min_supported": 150,
-      "items": [ { "item": "scrap", "count": [ 10, 12 ] }, { "item": "rebar", "count": [ 0, 4 ] } ]
+      "items": [
+        {
+          "item": "scrap",
+          "count": [ 10, 12 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 4 ]
+        }
+      ]
     }
   },
   {
@@ -409,9 +541,18 @@
       "str_max": 400,
       "str_min_supported": 100,
       "items": [
-        { "item": "rock", "count": [ 5, 11 ] },
-        { "item": "scrap", "count": [ 10, 12 ] },
-        { "item": "rebar", "count": [ 0, 4 ] }
+        {
+          "item": "rock",
+          "count": [ 5, 11 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 10, 12 ]
+        },
+        {
+          "item": "rebar",
+          "count": [ 0, 4 ]
+        }
       ]
     }
   },
@@ -428,7 +569,13 @@
     "move_cost": 2,
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "INDOORS", "COLLAPSES", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
-    "bash": { "ter_set": "t_null", "str_min": 75, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "ter_set": "t_null",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -444,7 +591,13 @@
     "move_cost": 2,
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "INDOORS", "COLLAPSES", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
-    "bash": { "ter_set": "t_null", "str_min": 75, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "ter_set": "t_null",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -480,9 +633,18 @@
       "str_max": 500,
       "str_min_supported": 200,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
-        { "item": "scrap", "count": [ 9, 36 ] }
+        {
+          "item": "steel_lump",
+          "count": [ 1, 4 ]
+        },
+        {
+          "item": "steel_chunk",
+          "count": [ 3, 12 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 9, 36 ]
+        }
       ]
     }
   },
@@ -505,9 +667,18 @@
       "str_max": 500,
       "str_min_supported": 200,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
-        { "item": "scrap", "count": [ 9, 36 ] }
+        {
+          "item": "steel_lump",
+          "count": [ 1, 4 ]
+        },
+        {
+          "item": "steel_chunk",
+          "count": [ 3, 12 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 9, 36 ]
+        }
       ]
     }
   },
@@ -531,7 +702,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -554,9 +734,18 @@
       "str_max": 400,
       "str_min_supported": 100,
       "items": [
-        { "item": "log", "count": [ 0, 1 ] },
-        { "item": "stick", "count": [ 1, 4 ] },
-        { "item": "splinter", "count": [ 1, 4 ] }
+        {
+          "item": "log",
+          "count": [ 0, 1 ]
+        },
+        {
+          "item": "stick",
+          "count": [ 1, 4 ]
+        },
+        {
+          "item": "splinter",
+          "count": [ 1, 4 ]
+        }
       ]
     }
   },
@@ -578,7 +767,12 @@
       "sound": "SMASH!",
       "ter_set": "t_null",
       "str_min_supported": 100,
-      "items": [ { "item": "steel_chunk", "count": [ 5, 11 ] } ]
+      "items": [
+        {
+          "item": "steel_chunk",
+          "count": [ 5, 11 ]
+        }
+      ]
     }
   },
   {
@@ -601,7 +795,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -623,7 +826,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -647,7 +859,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "straw_pile", "count": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "straw_pile",
+          "count": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -670,7 +891,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -718,12 +948,33 @@
       "str_max": 15,
       "str_min_supported": 100,
       "items": [
-        { "item": "sheet_cotton", "count": [ 1, 2 ] },
-        { "item": "cotton_patchwork", "count": [ 2, 4 ] },
-        { "item": "nail", "charges": [ 1, 3 ] }
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 1, 3 ]
+        }
       ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "count": 1 }, { "item": "nail", "charges": [ 2, 5 ] } ], "ter_set": "t_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "count": 1
+        },
+        {
+          "item": "nail",
+          "charges": [ 2, 5 ]
+        }
+      ],
+      "ter_set": "t_floor"
+    }
   },
   {
     "type": "terrain",
@@ -738,7 +989,19 @@
     "roof": "t_flat_roof",
     "description": "Soft red carpet.  Can support a roof.",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "ter_set": "t_floor", "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ] }
+    "deconstruct": {
+      "ter_set": "t_floor",
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -751,7 +1014,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor"
+    }
   },
   {
     "type": "terrain",
@@ -764,7 +1039,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor"
+    }
   },
   {
     "type": "terrain",
@@ -777,7 +1064,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor"
+    }
   },
   {
     "type": "terrain",
@@ -799,13 +1098,31 @@
       "str_max": 15,
       "str_min_supported": 100,
       "items": [
-        { "item": "sheet_cotton", "count": [ 1, 2 ] },
-        { "item": "cotton_patchwork", "count": [ 2, 4 ] },
-        { "item": "nail", "charges": [ 1, 3 ] }
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 1, 3 ]
+        }
       ]
     },
     "deconstruct": {
-      "items": [ { "item": "r_carpet", "count": 1 }, { "item": "nail", "charges": [ 2, 5 ] } ],
+      "items": [
+        {
+          "item": "r_carpet",
+          "count": 1
+        },
+        {
+          "item": "nail",
+          "charges": [ 2, 5 ]
+        }
+      ],
       "ter_set": "t_floor_noroof"
     }
   },
@@ -823,7 +1140,19 @@
     "roof": "t_flat_roof",
     "description": "Soft red carpet on a wooden floor.  Can support a roof.",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "ter_set": "t_floor", "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ] }
+    "deconstruct": {
+      "ter_set": "t_floor",
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -837,7 +1166,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_noroof" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_noroof"
+    }
   },
   {
     "type": "terrain",
@@ -851,7 +1192,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_noroof" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_noroof"
+    }
   },
   {
     "type": "terrain",
@@ -865,7 +1218,19 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_noroof" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_noroof"
+    }
   },
   {
     "type": "terrain",
@@ -885,9 +1250,26 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
+      "items": [
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        }
+      ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_thconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -914,7 +1296,15 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_thconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -928,7 +1318,15 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_thconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -942,7 +1340,15 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_thconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -962,9 +1368,26 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
+      "items": [
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        }
+      ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_metal_floor"
+    }
   },
   {
     "type": "terrain",
@@ -978,7 +1401,15 @@
     "description": "Firm, low-pile, totally non-flammable carpet in a red color, with an insulation layer beneath on a metal floor.  Can support a roof.",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_metal_floor"
+    }
   },
   {
     "type": "terrain",
@@ -992,7 +1423,15 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_metal_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1006,7 +1445,15 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_metal_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1020,7 +1467,15 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 } ], "ter_set": "t_metal_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_metal_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1040,9 +1495,26 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
+      "items": [
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        }
+      ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_strconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1069,7 +1541,15 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_strconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1083,7 +1563,15 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_strconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1097,7 +1585,15 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_strconc_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1117,9 +1613,30 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
+      "items": [
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        }
+      ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_rock_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_rock_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1146,7 +1663,19 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_rock_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_rock_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1160,7 +1689,19 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_rock_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_rock_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1174,7 +1715,19 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_rock_floor" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_rock_floor"
+    }
   },
   {
     "type": "terrain",
@@ -1194,12 +1747,33 @@
       "str_max": 15,
       "str_min_supported": 100,
       "items": [
-        { "item": "sheet_cotton", "count": [ 1, 2 ] },
-        { "item": "cotton_patchwork", "count": [ 2, 4 ] },
-        { "item": "nail", "charges": [ 1, 3 ] }
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 1, 3 ]
+        }
       ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_primitive" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_primitive"
+    }
   },
   {
     "type": "terrain",
@@ -1226,7 +1800,19 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_primitive" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_primitive"
+    }
   },
   {
     "type": "terrain",
@@ -1240,7 +1826,19 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_primitive" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_primitive"
+    }
   },
   {
     "type": "terrain",
@@ -1254,7 +1852,19 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ], "ter_set": "t_floor_primitive" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        },
+        {
+          "item": "nail",
+          "charges": 5
+        }
+      ],
+      "ter_set": "t_floor_primitive"
+    }
   },
   {
     "type": "terrain",
@@ -1275,12 +1885,29 @@
       "str_max": 15,
       "str_min_supported": 100,
       "items": [
-        { "item": "sheet_cotton", "count": [ 1, 2 ] },
-        { "item": "cotton_patchwork", "count": [ 2, 4 ] },
-        { "item": "nail", "charges": [ 1, 3 ] }
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 1, 3 ]
+        }
       ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_linoleum_gray" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_gray"
+    }
   },
   {
     "type": "terrain",
@@ -1307,7 +1934,15 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 } ], "ter_set": "t_linoleum_gray" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_gray"
+    }
   },
   {
     "type": "terrain",
@@ -1321,7 +1956,15 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 } ], "ter_set": "t_linoleum_gray" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_gray"
+    }
   },
   {
     "type": "terrain",
@@ -1335,7 +1978,15 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 } ], "ter_set": "t_linoleum_gray" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_gray"
+    }
   },
   {
     "type": "terrain",
@@ -1355,9 +2006,26 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
-      "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
+      "items": [
+        {
+          "item": "sheet_cotton",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "cotton_patchwork",
+          "count": [ 2, 4 ]
+        }
+      ]
     },
-    "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "r_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_white"
+    }
   },
   {
     "type": "terrain",
@@ -1384,7 +2052,15 @@
     "looks_like": "t_carpet_yellow",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "y_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "y_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_white"
+    }
   },
   {
     "type": "terrain",
@@ -1398,7 +2074,15 @@
     "looks_like": "t_carpet_green",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "g_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "g_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_white"
+    }
   },
   {
     "type": "terrain",
@@ -1412,7 +2096,15 @@
     "looks_like": "t_carpet_purple",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
-    "deconstruct": { "items": [ { "item": "p_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
+    "deconstruct": {
+      "items": [
+        {
+          "item": "p_carpet",
+          "charges": 1
+        }
+      ],
+      "ter_set": "t_linoleum_white"
+    }
   },
   {
     "type": "terrain",
@@ -1433,7 +2125,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -1455,7 +2156,16 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     }
   },
   {
@@ -1476,7 +2186,16 @@
       "str_min_supported": 100,
       "ter_set": "t_null",
       "sound": "SMASH!",
-      "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
+      "items": [
+        {
+          "item": "splinter",
+          "count": [ 2, 8 ]
+        },
+        {
+          "item": "nail",
+          "charges": [ 5, 10 ]
+        }
+      ]
     },
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD" ]
   },
@@ -1498,20 +2217,47 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "scrap", "count": [ 4, 16 ] },
-        { "item": "steel_chunk", "count": [ 1, 6 ] },
-        { "item": "cobalt_60", "count": [ 1, 5 ] },
-        { "item": "lead", "charges": [ 12, 18 ] }
+        {
+          "item": "scrap",
+          "count": [ 4, 16 ]
+        },
+        {
+          "item": "steel_chunk",
+          "count": [ 1, 6 ]
+        },
+        {
+          "item": "cobalt_60",
+          "count": [ 1, 5 ]
+        },
+        {
+          "item": "lead",
+          "charges": [ 12, 18 ]
+        }
       ]
     },
     "deconstruct": {
       "ter_set": "t_pit",
       "items": [
-        { "item": "cable", "charges": [ 8, 16 ] },
-        { "item": "cobalt_60", "count": [ 2, 10 ] },
-        { "item": "scrap", "count": [ 8, 16 ] },
-        { "item": "sheet_metal", "count": [ 5, 10 ] },
-        { "item": "lead", "count": [ 12, 18 ] }
+        {
+          "item": "cable",
+          "charges": [ 8, 16 ]
+        },
+        {
+          "item": "cobalt_60",
+          "count": [ 2, 10 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 8, 16 ]
+        },
+        {
+          "item": "sheet_metal",
+          "count": [ 5, 10 ]
+        },
+        {
+          "item": "lead",
+          "count": [ 12, 18 ]
+        }
       ]
     }
   },
@@ -1533,7 +2279,16 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "pipe", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 1, 40 ] } ]
+      "items": [
+        {
+          "item": "pipe",
+          "count": [ 1, 2 ]
+        },
+        {
+          "item": "scrap",
+          "count": [ 1, 40 ]
+        }
+      ]
     }
   },
   {
@@ -1555,7 +2310,12 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
-      "items": [ { "item": "rock", "count": [ 2, 10 ] } ]
+      "items": [
+        {
+          "item": "rock",
+          "count": [ 2, 10 ]
+        }
+      ]
     }
   },
   {
@@ -1573,7 +2333,14 @@
     "looks_like": "t_dirt",
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD", "PLOWABLE", "DIGGABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_null",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -1590,7 +2357,14 @@
     "coverage": 0,
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "DIGGABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_null",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -1606,7 +2380,14 @@
     "roof": "t_rock_roof",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "DIGGABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_null",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -1622,7 +2403,14 @@
     "coverage": 0,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "SUPPORTS_ROOF", "INDOORS" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_null",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -1638,7 +2426,14 @@
     "coverage": 0,
     "roof": "t_rock_roof",
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "SUPPORTS_ROOF", "INDOORS" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_null",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -1661,7 +2456,12 @@
       "sound": "splosh!",
       "sound_fail": "splosh!",
       "ter_set": "t_water_dp",
-      "items": [ { "item": "clay_lump", "count": [ 6, 12 ] } ]
+      "items": [
+        {
+          "item": "clay_lump",
+          "count": [ 6, 12 ]
+        }
+      ]
     }
   },
   {
@@ -1768,5 +2568,85 @@
     "trap": "tr_ledge",
     "flags": [ "TRANSPARENT" ],
     "examine_action": "ledge"
-  }
+  },
+  {
+    "type": "terrain",
+    "id": "t_floor_slag_thin_in",
+    "name": "Thin Slag",
+    "description": "a thin layer of Solid Slag coats the concrete floor of the Steel Mill, thankfully it has cooled enough to make it walkable.",
+    "looks_like": "t_rock_floor",
+    "symbol": "-",
+    "color": "light_gray",
+    "move_cost": 2,
+    "coverage": 0,
+    "flags": [ "INDOORS", "TRANSPARENT", "MINEABLE" ],
+    "bash": {
+      "ter_set": "t_concrete",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true,
+      "items": [ { "item": "rock", "count": [ 4, 8 ]
+        }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_floor_slag_thin_out",
+    "name": "paper thin Slag",
+    "description": "a paper thin layer of Solid Slag coats the ground just outside the Steel Mill. thankfully it has cooled ",
+    "looks_like": "t_rock_floor",
+    "symbol": "-",
+    "color": "white",
+    "move_cost": 2,
+    "coverage": 0,
+    "flags": [ "TRANSPARENT" ]
+
+  },
+  {
+    "type": "terrain",
+    "id": "t_floor_slag_jagged",
+    "name": "Jagged Slag",
+    "description": "a Thick, Jagged layer of Solid Slag, due to the way it cooled it is hard to walk across safely",
+    "looks_like": "t_rock_floor",
+    "symbol": "^",
+    "color": "dark_gray",
+    "move_cost": 4,
+    "coverage": 0,
+    "flags": [ "INDOORS", "TRANSPARENT", "MINEABLE" ],
+    "bash": {
+      "ter_set": "t_concrete",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true,
+      "items": [
+        {
+          "item": "rock",
+          "count": [ 8, 12 ]
+        }
+      ]
+    }
+  },
+    {
+    "type": "terrain",
+    "id": "t_floor_slag_thick",
+    "name": "Thick Slag",
+    "description": "a Thick layer of Solid Slag, almost half a foot of Cold Slag",
+    "looks_like": "t_rock_floor",
+    "symbol": "^",
+    "color": "dark_gray",
+    "move_cost": 2,
+    "coverage": 0,
+    "flags": [ "INDOORS", "TRANSPARENT", "MINEABLE" ],
+    "bash": {
+      "ter_set": "t_concrete",
+      "str_min": 75,
+      "str_max": 400,
+      "str_min_supported": 100,
+      "bash_below": true,
+      "items": [ { "item": "rock", "count": [ 8, 12 ] } ] 
+            }
+     }
 ]
