@@ -2513,7 +2513,7 @@
     "type": "MIGRATION",
     "replace": "pointy_stick_long"
   },
-    {
+  {
     "id": "spear_pipe",
     "type": "MIGRATION",
     "replace": "spear_wood"
