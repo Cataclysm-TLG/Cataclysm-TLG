@@ -198,30 +198,30 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "3250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "30 cm",
-        "moves": 80
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "3250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "30 cm",
-        "moves": 80
+        "max_contains_volume": "450 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "800 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "16 cm",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
         "moves": 100
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "800 ml",
-        "max_contains_weight": "2 kg",
-        "max_item_length": "16 cm",
+        "max_contains_volume": "600 ml",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "165 mm",
         "moves": 100
       }
     ],
@@ -503,8 +503,8 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "800 ml",
-        "max_contains_weight": "1 kg",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "1200 g",
         "max_item_length": "13 cm",
         "moves": 100
       }
@@ -1040,29 +1040,29 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "19 cm",
-        "moves": 80
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "19 cm",
-        "moves": 80
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1080 ml",
-        "max_contains_weight": "4 kg",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
         "max_item_length": "165 mm",
         "moves": 100
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1080 ml",
-        "max_contains_weight": "4 kg",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
         "max_item_length": "165 mm",
         "moves": 100
       }
@@ -1112,29 +1112,29 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "19 cm",
-        "moves": 80
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "19 cm",
-        "moves": 80
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "18 cm",
+        "moves": 60
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1080 ml",
-        "max_contains_weight": "4 kg",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
         "max_item_length": "165 mm",
         "moves": 100
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1080 ml",
-        "max_contains_weight": "4 kg",
+        "max_contains_volume": "400 ml",
+        "max_contains_weight": "3 kg",
         "max_item_length": "165 mm",
         "moves": 100
       }
