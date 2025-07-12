@@ -242,7 +242,7 @@ static int skill_points_used( const Character &u )
     }
     int skills = 0;
     for( const Skill &sk : Skill::skills ) {
-        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 5, 7, 9, 12, 16, 20, 25 };
+        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 9, 12, 16, 20, 24, 28 };
         int skill_level = u.get_skill_level( sk.ident() );
         skills += costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
     }
@@ -3012,7 +3012,13 @@ void set_hobbies( tab_manager &tabs, avatar &u, pool_type pool )
  */
 static int skill_increment_cost( const Character &u, const skill_id &skill )
 {
-    return std::max( 1, ( static_cast<int>( u.get_skill_level( skill ) + 1 ) / 2 ) );
+    if( u.get_skill_level( skill ) < 3 ) {
+        return 1;
+    } else if( u.get_skill_level( skill ) < 6 ) {
+        return 3;
+    } else {
+        return 4;
+    }
 }
 
 static std::string assemble_skill_details( const avatar &u,
@@ -3296,7 +3302,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
         } else if( action == "RIGHT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            if( level < MAX_SKILL ) {
+            if( level < 8 ) {
                 u.mod_skill_level( skill_id, +1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
