@@ -2551,7 +2551,7 @@
     "name": [ "Shakes" ],
     "desc": [ "Your hands just won't stop shaking." ],
     "miss_messages": [ [ "You tremble.", 4 ] ],
-    "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -4 ] },
+    "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ] },
     "max_duration": 7200,
     "dur_add_perc": 30,
     "limb_score_mods": [
