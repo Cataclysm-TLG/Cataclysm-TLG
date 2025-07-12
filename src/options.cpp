@@ -1494,7 +1494,7 @@ void options_manager::add_options_general()
         get_option( "AUTO_PICKUP_WEIGHT_LIMIT" ).setPrerequisite( "AUTO_PICKUP" );
 
         add( "AUTO_PICKUP_VOLUME_LIMIT", page_id, to_translation( "Auto pickup volume limit" ),
-             to_translation( "Auto pickup items with volume less than or equal to [option] * 50 milliliters.  You must also set the light items option.  0 = disabled." ),
+             to_translation( "Auto pickup items with volume less than or equal to [option] * 50 ml.  You must also set the light items option.  0 = disabled." ),
              0, 100, 0
            );
 
@@ -1623,7 +1623,7 @@ void options_manager::add_options_general()
     add_empty_line();
 
     add( "TURN_DURATION", "general", to_translation( "Realtime turn progression" ),
-         to_translation( "If higher than 0, monsters will take periodic gameplay turns.  This value is the delay between each turn, in seconds.  Works best with Safe Mode disabled.  0 = disabled." ),
+         to_translation( "If higher than 0, monsters will take periodic gameplay turns.  This value is the delay between each turn, in seconds.  Works best with Safe Mode disabled.  0 = disabled.  If you can manage to successfully play for any length of time like this, please post it on Youtube or the Discord." ),
          0.0, 10.0, 0.0, 0.05
        );
 
@@ -1669,13 +1669,6 @@ void options_manager::add_options_general()
 
         get_option( "AUTO_NOTES_STAIRS" ).setPrerequisite( "AUTO_NOTES" );
 
-        add( "AUTO_NOTES_MAP_EXTRAS", page_id, to_translation( "Auto notes (map extras)" ),
-             to_translation( "If true, automatically sets notes on places that contain various map extras." ),
-             false
-           );
-
-        get_option( "AUTO_NOTES_MAP_EXTRAS" ).setPrerequisite( "AUTO_NOTES" );
-
         add( "AUTO_NOTES_DROPPED_FAVORITES", page_id, to_translation( "Auto notes (dropped favorites)" ),
              to_translation( "If true, automatically sets notes when player drops favorited items." ),
              false
@@ -1701,10 +1694,6 @@ void options_manager::add_options_general()
         "ask"
            );
 
-        add( "EVENT_SPAWNS", page_id, to_translation( "Special event spawns" ),
-             to_translation( "If not disabled, unique items and/or monsters can spawn during special events (Christmas, Halloween, etc.)" ),
-        { { "off", to_translation( "Disabled" ) }, { "items", to_translation( "Items" ) }, { "monsters", to_translation( "Monsters" ) }, { "both", to_translation( "Both" ) } },
-        "off" );
     } );
 
     add_empty_line();
@@ -1892,11 +1881,6 @@ void options_manager::add_options_interface()
 
         add( "AIM_AFTER_FIRING", page_id, to_translation( "Reaim after firing" ),
              to_translation( "If true, after firing automatically aim again if targets are available." ),
-             true
-           );
-        add( "UNLOAD_RAS_WEAPON", page_id,
-             to_translation( "Unload your bow etc after canceling shooting" ),
-             to_translation( "If true, weapons like bow and slingshot will be unloaded when quitting aim UI." ),
              true
            );
 
@@ -2720,11 +2704,6 @@ void options_manager::add_options_world_default()
              0.0, 50.0, 1.0, 0.1
            );
 
-        add( "ITEM_SPAWNRATE", page_id, to_translation( "Item spawn scaling factor" ),
-             to_translation( "A scaling factor that determines density of item spawns.  A higher number means more items." ),
-             0.01, 10.0, 1.0, 0.01
-           );
-
         add( "NPC_SPAWNTIME", page_id, to_translation( "Random NPC spawn time" ),
              to_translation( "Baseline average number of days between random NPC spawns.  Average duration goes up with the number of NPCs already spawned.  A higher number means fewer NPCs.  Set to 0 days to disable random NPCs." ),
              0.0, 100.0, 4.0, 0.01
@@ -2734,22 +2713,6 @@ void options_manager::add_options_world_default()
              to_translation( "Monster evolution slowdown" ),
              to_translation( "A scaling factor that determines the time between monster upgrades.  A higher number means slower evolution.  Set to 0.00 to turn off monster upgrades." ),
              0.0, 100, 4.0, 0.01
-           );
-    } );
-    add_empty_line();
-
-    add_option_group( "world_default", Group( "monster_props_opts",
-                      to_translation( "Monster Properties Options" ),
-                      to_translation( "Options regarding monster properties." ) ),
-    [&]( const std::string & page_id ) {
-        add( "MONSTER_SPEED", page_id, to_translation( "Monster speed" ),
-             to_translation( "Determines the movement rate of monsters.  A higher value increases monster speed and a lower reduces it.  Requires world reset." ),
-             1, 1000, 100, COPT_NO_HIDE, "%i%%"
-           );
-
-        add( "MONSTER_RESILIENCE", page_id, to_translation( "Monster resilience" ),
-             to_translation( "Determines how much damage monsters can take.  A higher value makes monsters more resilient and a lower makes them more flimsy.  Requires world reset." ),
-             1, 1000, 100, COPT_NO_HIDE, "%i%%"
            );
     } );
 
@@ -2765,18 +2728,9 @@ void options_manager::add_options_world_default()
     add_option_group( "world_default", Group( "spawn_time_opts", to_translation( "World Time Options" ),
                       to_translation( "Options regarding the passage of time in the world." ) ),
     [&]( const std::string & page_id ) {
-        add( "SEASON_LENGTH", page_id, to_translation( "Season length" ),
-             to_translation( "Season length, in days.  Warning: Very little other than the duration of seasons scales with this value, so adjusting it may cause nonsensical results." ),
-             14, 127, 91
-           );
-
-        add( "CONSTRUCTION_SCALING", page_id, to_translation( "Construction scaling" ),
-             to_translation( "Sets the time of construction in percents.  '50' is two times faster than default, '200' is two times longer.  '0' automatically scales construction time to match the world's season length." ),
-             0, 1000, 100
-           );
 
         add( "ETERNAL_SEASON", page_id, to_translation( "Eternal season" ),
-             to_translation( "If true, keep the initial season for ever." ),
+             to_translation( "If true, keep the initial season forever.  Warning: currently bugged and may not work properly." ),
              false
            );
 
@@ -2795,8 +2749,8 @@ void options_manager::add_options_world_default()
                       to_translation( "Miscellaneous options." ) ),
     [&]( const std::string & page_id ) {
         add( "WANDER_SPAWNS", page_id, to_translation( "Wandering hordes" ),
-             to_translation( "If true, emulates zombie hordes.  Zombies can group together into hordes, which can wander around cities and will sometimes move towards noise.  Note: the current implementation does not properly respect obstacles, so hordes can appear to walk through walls under some circumstances.  Must reset world directory after changing for it to take effect." ),
-             false
+             to_translation( "If true, emulates zombie hordes.  Zombies can group together into hordes, which can wander around cities and will sometimes move towards noise.  Note: This feature is still in development, but should be mostly bug-free." ),
+             true
            );
 
         add( "BLACK_ROAD", page_id, to_translation( "Surrounded start" ),
@@ -2807,31 +2761,6 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    add( "RAD_MUTATION", "world_default", to_translation( "Mutations by radiation" ),
-         to_translation( "If true, radiation causes the player to mutate." ),
-         true
-       );
-
-    add_empty_line();
-
-    add( "CHARACTER_POINT_POOLS", "world_default", to_translation( "Character point pools" ),
-         to_translation( "Methods allowed for character creation." ),
-    { { "any", to_translation( "Any" ) }, { "multi_pool", to_translation( "Multipool" ) }, { "one_pool", to_translation( "Single Pool" ) } },
-    "any"
-       );
-
-    add_empty_line();
-
-    add( "META_PROGRESS", "world_default", to_translation( "Meta Progression" ), to_translation(
-             "Will you need to complete certain achievements to enable certain scenarios "
-             "and professions?  Achievements of saved characters from any world will be "
-             "checked.  Disabling this will spoil factions and situations you may otherwise "
-             "stumble upon naturally while playing.  Some scenarios are frustrating for the "
-             "uninitiated, and some professions skip portions of the game's content.  If "
-             "new to the game, meta progression will help you be introduced to mechanics at "
-             "a reasonable pace." ),
-         false
-       );
 }
 
 void options_manager::add_options_debug()
@@ -2847,50 +2776,9 @@ void options_manager::add_options_debug()
 
     add_empty_line();
 
-    add_option_group( "debug", Group( "chargen_point_opts",
-                                      to_translation( "Character Generation Points Options" ),
-                                      to_translation( "Options regarding character generation points." ) ),
-    [&]( const std::string & page_id ) {
-        add( "INITIAL_STAT_POINTS", page_id, to_translation( "Initial stat points" ),
-             to_translation( "Initial points available to spend on stats on character generation." ),
-             0, 1000, 6
-           );
-
-        add( "INITIAL_TRAIT_POINTS", page_id, to_translation( "Initial trait points" ),
-             to_translation( "Initial points available to spend on traits on character generation." ),
-             0, 1000, 0
-           );
-
-        add( "INITIAL_SKILL_POINTS", page_id, to_translation( "Initial skill points" ),
-             to_translation( "Initial points available to spend on skills on character generation." ),
-             0, 1000, 2
-           );
-
-        add( "MAX_TRAIT_POINTS", page_id, to_translation( "Maximum trait points" ),
-             to_translation( "Maximum trait points available for character generation." ),
-             0, 1000, 12
-           );
-    } );
-
-    add_empty_line();
-
     add( "DEBUG_DIFFICULTIES", "debug", to_translation( "Show values for character creation" ),
          to_translation( "In character creation will show the underlying value that is used to determine difficulty." ),
          false
-       );
-
-    add_empty_line();
-
-    add( "SKILL_TRAINING_SPEED", "debug", to_translation( "Skill training speed" ),
-         to_translation( "Scales experience gained from practicing skills and reading books.  0.5 is half as fast as default, 2.0 is twice as fast, 0.0 disables skill training except for NPC training." ),
-         0.0, 100.0, 1.0, 0.1
-       );
-
-    add_empty_line();
-
-    add( "PROFICIENCY_TRAINING_SPEED", "debug", to_translation( "Proficiency training speed" ),
-         to_translation( "Scales experience gained from practicing proficiencies.  0.5 is half as fast as default, 2.0 is twice as fast, 0.0 disables proficiency training except for NPC training." ),
-         0.0, 100.0, 1.0, 0.1
        );
 
     add_empty_line();

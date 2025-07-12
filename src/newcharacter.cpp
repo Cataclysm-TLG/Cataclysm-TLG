@@ -17,7 +17,6 @@
 #include <utility>
 #include <vector>
 
-#include "achievement.h"
 #include "addiction.h"
 #include "bionics.h"
 #include "calendar_ui.h"
@@ -193,7 +192,7 @@ void tab_manager::set_up_tab_navigation( input_context &ctxt )
 
 static int stat_point_pool()
 {
-    return 4 * 8 + get_option<int>( "INITIAL_STAT_POINTS" );
+    return 4 * 8 + 7;
 }
 static int stat_points_used( const Character &u )
 {
@@ -208,7 +207,7 @@ static int stat_points_used( const Character &u )
 
 static int trait_point_pool()
 {
-    return get_option<int>( "INITIAL_TRAIT_POINTS" );
+    return 0;
 }
 static int trait_points_used( const Character &u )
 {
@@ -231,7 +230,7 @@ static int trait_points_used( const Character &u )
 
 static int skill_point_pool()
 {
-    return get_option<int>( "INITIAL_SKILL_POINTS" );
+    return 4;
 }
 static int skill_points_used( const Character &u )
 {
@@ -267,7 +266,7 @@ static int has_unspent_points( const Character &u )
 struct multi_pool {
     // The amount of unspent points in the pool without counting the borrowed points
     const int pure_stat_points, pure_trait_points, pure_skill_points;
-    // The amount of points awailable in a pool minus the points that are borrowed
+    // The amount of points available in a pool minus the points that are borrowed
     // by lower pools plus the points that can be borrowed from higher pools
     const int stat_points_left, trait_points_left, skill_points_left;
     explicit multi_pool( const Character &u ):
@@ -413,7 +412,7 @@ static matype_id choose_ma_style( const character_type type, const std::vector<m
 
 void Character::randomize( const bool random_scenario, bool play_now )
 {
-    const int max_trait_points = get_option<int>( "MAX_TRAIT_POINTS" );
+    const int max_trait_points = 12;
     // Reset everything to the defaults to have a clean state.
     if( is_avatar() ) {
         *this->as_avatar() = avatar();
@@ -435,7 +434,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
         std::vector<const scenario *> scenarios;
         for( const scenario &scen : scenario::get_all() ) {
             if( !scen.has_flag( flag_CHALLENGE ) && !scen.scen_is_blacklisted() &&
-                ( !scen.has_flag( flag_CITY_START ) || cities_enabled ) && scen.can_pick().success() ) {
+                ( !scen.has_flag( flag_CITY_START ) || cities_enabled ) ) {
                 scenarios.emplace_back( &scen );
             }
         }
@@ -477,7 +476,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
             continue;
         }
         // Scenario/profession traits do not cost any points, but they are counted toward
-        // the limit (MAX_TRAIT_POINTS)
+        // the limit
         if( mut_info.points >= 0 ) {
             num_gtraits += mut_info.points;
         } else {
@@ -578,14 +577,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
             case 7:
             case 8:
             case 9:
-                const skill_id aSkill = Skill::random_skill();
-                const int level = get_skill_level( aSkill );
-
-                if( level < p.skill_points_left && level < MAX_SKILL && loops > 10000 ) {
-                    // For balance reasons, increasing a skill from level 0 gives you 1 extra level for free
-                    set_skill_level( aSkill, ( level == 0 ? 2 : level + 1 ) );
-                }
-                break;
+            break;
         }
     }
 
@@ -751,12 +743,7 @@ bool avatar::create( character_type type, const std::string &tempname )
     };
     tab_manager tabs( character_tabs );
 
-    const std::string point_pool = get_option<std::string>( "CHARACTER_POINT_POOLS" );
     pool_type pool = pool_type::MULTI_POOL;
-    if( point_pool == "multi_pool" ) {
-        // if using multipool only set it to that
-        pool = pool_type::MULTI_POOL;
-    }
 
     switch( type ) {
         case character_type::CUSTOM:
@@ -1157,32 +1144,22 @@ void set_points( tab_manager &tabs, avatar &u, pool_type &pool )
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "CONFIRM" );
 
-    const std::string point_pool = get_option<std::string>( "CHARACTER_POINT_POOLS" );
-
     using point_limit_tuple = std::tuple<pool_type, std::string, std::string>;
     std::vector<point_limit_tuple> opts;
 
     const point_limit_tuple multi_pool = std::make_tuple( pool_type::MULTI_POOL,
-                                         _( "Multiple pools" ),
+                                         _( "Point buy" ),
                                          _( "Stats, traits and skills have separate point pools.\n"
-                                            "Stat points may be spent on traits and skills. Trait points may be spent on skills.\n"
-                                            "Scenarios and professions affect skill points.\n\n"
-                                            "A more complex method designed with balance in mind." ) );
-
-    const point_limit_tuple one_pool = std::make_tuple( pool_type::ONE_POOL, _( "Single pool" ),
-                                       _( "Stats, traits and skills share a single point pool.\n\n"
-                                          "The simplest method, lets you jump right in." ) );
+                                            "Unused stat points may be spent on traits and skills. Unused trait points may be spent on skills.\n"
+                                            "Traits granted by scenarios or professions don't cost trait points, but do count toward the maximum.\n\n"
+                                            "A balanced way to create a character." ) );
 
     const point_limit_tuple freeform = std::make_tuple( pool_type::FREEFORM, _( "Freeform" ),
-                                       _( "No point limits are enforced. Create a character with the intention of telling a story or challenging yourself." ) );
+                                       _( "No point limits are enforced.\n\n"
+                                          "Create a character with the intention of telling a story, making things easier, or challenging yourself." ) );
 
-    if( point_pool == "multi_pool" ) {
-        opts = { { multi_pool } };
-    } else if( point_pool == "one_pool" ) {
-        opts = { { one_pool } };
-    } else {
-        opts = { { multi_pool, one_pool, freeform } };
-    }
+
+    opts = { { multi_pool, freeform } };
 
     int highlighted = 0;
 
@@ -1637,7 +1614,7 @@ static const mutation_variant *variant_trait_selection_menu( const trait_id &cur
 
 void set_traits( tab_manager &tabs, avatar &u, pool_type pool )
 {
-    const int max_trait_points = get_option<int>( "MAX_TRAIT_POINTS" );
+    const int max_trait_points = 12;
     const bool screen_reader_mode = get_option<bool>( "SCREEN_READER_MODE" );
     std::string last_trait; // Used in screen_reader_mode to ensure full trait name is read
     // Track how many good / bad POINTS we have; cap both at MAX_TRAIT_POINTS
@@ -2174,14 +2151,6 @@ static struct {
             return true;
         }
 
-        if( !a->can_pick().success() && b->can_pick().success() ) {
-            return false;
-        }
-
-        if( a->can_pick().success() && !b->can_pick().success() ) {
-            return true;
-        }
-
         if( sort_by_points ) {
             return a->point_cost() < b->point_cost();
         } else {
@@ -2210,17 +2179,8 @@ static std::string assemble_profession_details( const avatar &u, const input_con
     assembled += string_format( g_switch_msg( u ), ctxt.get_desc( "CHANGE_GENDER" ),
                                 profession_name ) + "\n";
     assembled += string_format( dress_switch_msg(), ctxt.get_desc( "CHANGE_OUTFIT" ) ) + "\n";
-
-    if( sorted_profs[cur_id]->get_requirement().has_value() ) {
-        assembled += "\n" + colorize( _( "Profession requirements:" ), COL_HEADER ) + "\n";
-        assembled += string_format( _( "Complete \"%s\"\n" ),
-                                    sorted_profs[cur_id]->get_requirement().value()->name() );
-    }
     //Profession story
     assembled += "\n" + colorize( _( "Profession story:" ), COL_HEADER ) + "\n";
-    if( !sorted_profs[cur_id]->can_pick().success() ) {
-        assembled += colorize( sorted_profs[cur_id]->can_pick().str(), c_red ) + "\n";
-    }
     assembled += colorize( sorted_profs[cur_id]->description( u.male ), c_green ) + "\n";
 
     // Profession addictions
@@ -2499,7 +2459,6 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
         if( cur_id_is_valid ) {
             int netPointCost = sorted_profs[cur_id]->point_cost() - u.prof->point_cost();
             ret_val<void> can_afford = sorted_profs[cur_id]->can_afford( u, skill_points_left( u, pool ) );
-            ret_val<void> can_pick = sorted_profs[cur_id]->can_pick();
             int pointsForProf = sorted_profs[cur_id]->point_cost();
             bool negativeProf = pointsForProf < 0;
             if( negativeProf ) {
@@ -2536,14 +2495,12 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
             nc_color col;
             if( u.prof != &sorted_profs[i].obj() ) {
 
-                if( cur_id_is_valid && sorted_profs[i] == sorted_profs[cur_id] &&
-                    !sorted_profs[i]->can_pick().success() ) {
+                if( cur_id_is_valid && sorted_profs[i] == sorted_profs[cur_id] ) {
                     col = h_dark_gray;
                     if( i == cur_id ) {
                         cur_prof_notes = _( "unavailable" );
                     }
-                } else if( cur_id_is_valid && sorted_profs[i] != sorted_profs[cur_id] &&
-                           !sorted_profs[i]->can_pick().success() ) {
+                } else if( cur_id_is_valid && sorted_profs[i] != sorted_profs[cur_id] ) {
                     col = c_dark_gray;
                     if( i == cur_id ) {
                         cur_prof_notes = _( "unavailable" );
@@ -2616,13 +2573,6 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
                 cur_id = iStartPos + ( iContentHeight - 1 ) / 2;
             }
         } else if( action == "CONFIRM" ) {
-            ret_val<void> can_pick = sorted_profs[cur_id]->can_pick();
-
-            if( !can_pick.success() ) {
-                popup( can_pick.str() );
-                continue;
-            }
-
             // Selecting a profession will, under certain circumstances, change the detail text
             details_recalc = true;
 
@@ -3383,14 +3333,6 @@ static struct {
             }
         }
 
-        if( !a->can_pick().success() && b->can_pick().success() ) {
-            return false;
-        }
-
-        if( a->can_pick().success() && !b->can_pick().success() ) {
-            return true;
-        }
-
         if( !cities_enabled && a->has_flag( "CITY_START" ) != b->has_flag( "CITY_START" ) ) {
             return a->has_flag( "CITY_START" ) < b->has_flag( "CITY_START" );
         } else if( sort_by_points ) {
@@ -3428,23 +3370,13 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
                      ctxt.get_desc( "RESET_CALENDAR" ) ) + "\n";
     assembled += "\n" + colorize( _( "Scenario Story:" ), COL_HEADER ) + "\n";
     assembled += colorize( current_scenario->description( u.male ), c_green ) + "\n";
-    const std::optional<achievement_id> scenRequirement = current_scenario->get_requirement();
 
-    if( scenRequirement.has_value() ||
-        ( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) {
+    if( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
         assembled += "\n" + colorize( _( "Scenario Requirements:" ), COL_HEADER ) + "\n";
         if( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
             const std::string scenUnavailable =
                 _( "This scenario is not available in this world due to city size settings." );
             assembled += colorize( scenUnavailable, c_red ) + "\n";
-        }
-        if( scenRequirement.has_value() ) {
-            nc_color requirement_color = c_red;
-            if( current_scenario->can_pick().success() ) {
-                requirement_color = c_green;
-            }
-            assembled += colorize( string_format( _( "Complete \"%s\"" ), scenRequirement.value()->name() ),
-                                   requirement_color ) + "\n";
         }
     }
 
@@ -3579,7 +3511,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             ret_val<void> can_afford = sorted_scens[cur_id]->can_afford(
                                            *get_scenario(),
                                            skill_points_left( u, pool ) );
-            ret_val<void> can_pick = sorted_scens[cur_id]->can_pick();
 
             int pointsForScen = sorted_scens[cur_id]->point_cost();
             bool negativeScen = pointsForScen < 0;
@@ -3614,15 +3545,13 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             nc_color col;
             if( get_scenario() != sorted_scens[i] ) {
                 if( cur_id_is_valid && sorted_scens[i] == sorted_scens[cur_id] &&
-                    ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ||
-                      !sorted_scens[i]->can_pick().success() ) ) {
+                    ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) ) {
                     col = h_dark_gray;
                     if( i == cur_id ) {
                         current_scenario_notes = _( "unavailable" );
                     }
                 } else if( cur_id_is_valid && sorted_scens[i] != sorted_scens[cur_id] &&
-                           ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ||
-                             !sorted_scens[i]->can_pick().success() ) ) {
+                           ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) ) {
                     col = c_dark_gray;
                     if( i == cur_id ) {
                         current_scenario_notes = _( "unavailable" );
@@ -3703,14 +3632,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 cur_id = iStartPos + ( iContentHeight - 1 ) / 2;
             }
         } else if( action == "CONFIRM" ) {
-            // set arbitrarily high points and check if we have the achievment
-            ret_val<void> can_pick = sorted_scens[cur_id]->can_pick();
-
-            if( !can_pick.success() ) {
-                popup( can_pick.str() );
-                continue;
-            }
-
             if( sorted_scens[cur_id]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
                 continue;
             }

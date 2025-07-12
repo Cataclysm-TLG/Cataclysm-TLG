@@ -535,7 +535,7 @@ const profession *scenario::weighted_random_profession() const
 
     while( true ) {
         const string_id<profession> &candidate = random_entry_ref( choices );
-        if( candidate->can_pick().success() && x_in_y( 2, 2 + std::abs( candidate->point_cost() ) ) ) {
+        if( x_in_y( 2, 2 + std::abs( candidate->point_cost() ) ) ) {
             return &candidate.obj();
         }
     }
@@ -688,27 +688,6 @@ ret_val<void> scenario::can_afford( const scenario &current_scenario, const int 
     }
 
     return ret_val<void>::make_failure( _( "You don't have enough points" ) );
-}
-
-ret_val<void> scenario::can_pick() const
-{
-    // if meta progression is disabled then skip this
-    if( get_past_achievements().is_completed( achievement_achievement_arcade_mode ) ||
-        !get_option<bool>( "META_PROGRESS" ) ) {
-        return ret_val<void>::make_success();
-    }
-
-    if( _requirement ) {
-        const bool has_req = get_past_achievements().is_completed(
-                                 _requirement.value()->id );
-        if( !has_req ) {
-            return ret_val<void>::make_failure(
-                       _( "You must complete the achievement \"%s\" to unlock this scenario." ),
-                       _requirement.value()->name() );
-        }
-    }
-
-    return ret_val<void>::make_success();
 }
 
 bool scenario::has_map_extra() const

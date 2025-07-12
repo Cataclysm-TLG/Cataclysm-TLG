@@ -160,7 +160,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "bash": 6, "cut": 6, "bullet": 5, "electric": 1 }
   },
@@ -260,7 +261,8 @@
       "POISON",
       "NO_BREATHE",
       "REVIVES",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "electric": 1 }
   },
@@ -308,7 +310,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 2 }
   },
@@ -442,7 +445,7 @@
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "upgrades": { "half_life": 42, "into_group": "GROUP_ZOMBIE_HORSE_UPGRADE" },
     "fungalize_into": "mon_zombie_horse_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES", "GOODHEARING" ],
     "armor": { "bash": 5, "cut": 1, "electric": 2 }
   },
   {
@@ -706,7 +709,7 @@
     "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "KEENNOSE", "GOODHEARING" ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
@@ -738,7 +741,7 @@
     "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeindeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "KEENNOSE", "GOODHEARING" ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   }
 ]
