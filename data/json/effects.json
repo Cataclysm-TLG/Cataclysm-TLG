@@ -2555,10 +2555,10 @@
     "max_duration": 7200,
     "dur_add_perc": 30,
     "limb_score_mods": [
-      { "limb_score": "reaction", "modifier": 0.7 },
-      { "limb_score": "block", "modifier": 0.5 },
-      { "limb_score": "balance", "modifier": 0.75 },
-      { "limb_score": "footing", "modifier": 0.75 }
+      { "limb_score": "reaction", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.75 },
+      { "limb_score": "balance", "modifier": 0.8 },
+      { "limb_score": "footing", "modifier": 0.8 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
   },
