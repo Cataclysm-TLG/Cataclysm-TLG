@@ -199,5 +199,14 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "HOARDER",
+    "name": { "str": "Hoarder" },
+    "description": "Obsoleted mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
   }
 ]
