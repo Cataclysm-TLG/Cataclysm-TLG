@@ -242,7 +242,7 @@ static int skill_points_used( const Character &u )
     }
     int skills = 0;
     for( const Skill &sk : Skill::skills ) {
-        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 1, 2, 4, 6, 9, 12, 16, 20, 25 };
+        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 5, 7, 9, 12, 16, 20, 25 };
         int skill_level = u.get_skill_level( sk.ident() );
         skills += costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
     }
@@ -577,7 +577,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
             case 7:
             case 8:
             case 9:
-            break;
+                break;
         }
     }
 
@@ -1269,12 +1269,11 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Throwing range, accuracy, and damage"
-                       "\n- Reload speed for weapons using muscle power to reload"
-                       "\n- Pull strength of some mutations"
-                       "\n- Resistance for being pulled or grabbed by some monsters"
+                       "\n- Reload speed for bows and other muscle-powered weapons"
+                       "\n- Grappling and escaping grabs and pull attacks"
                        "\n- Speed and effectiveness of smashing corpses and terrain"
                        "\n- Speed and effectiveness of prying things open, chopping wood, and mining"
-                       "\n- Chance of escaping grabs and traps"
+                       "\n- Chance of breaking out of snares and bear traps"
                        "\n- Power produced by muscle-powered vehicles"
                        "\n- Most aspects of melee combat"
                        "\n- Resistance to many diseases and poisons"
@@ -1343,11 +1342,10 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                        "\n- Chance of success when installing bionics"
                        "\n- Chance of success when manipulating with gun modifications"
                        "\n- Chance to learn a recipe when crafting from a book"
-                       "\n- Chance of hacking computers and card readers"
-                       "\n- Chance of successful robot reprogramming"
-                       "\n- Chance of successful decrypting memory cards"
+                       "\n- Chance of hacking/programming computers, card readers, robots, etc."
                        "\n- Chance of bypassing vehicle security system"
                        "\n- Chance to get better results when disassembling items"
+                       "\n- Bash damage with whip-type weapons"
                        "\n- Chance of being paralyzed by fear attack" ),
                     c_green );
         }
@@ -1366,6 +1364,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
+                       "\n- Precision and reliability with ranged attacks"
                        "\n- Sight distance on game map and overmap"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing accuracy"
@@ -2687,11 +2686,11 @@ static std::string assemble_hobby_details( const avatar &u, const input_context 
                 continue;
             }
             std::string skill_degree;
-            if( level == 1 ) {
+            if( level < 3 ) {
                 skill_degree = pgettext( "set_profession_skill", "beginner" );
-            } else if( level == 2 ) {
-                skill_degree = pgettext( "set_profession_skill", "intermediate" );
             } else if( level == 3 ) {
+                skill_degree = pgettext( "set_profession_skill", "intermediate" );
+            } else if( level == 4 ) {
                 skill_degree = pgettext( "set_profession_skill", "competent" );
             } else {
                 skill_degree = pgettext( "set_profession_skill", "advanced" );
@@ -3010,12 +3009,10 @@ void set_hobbies( tab_manager &tabs, avatar &u, pool_type pool )
 /**
  * @return The skill points to consume when a skill is increased (by one level) from the
  * current level.
- *
- * @note: There is one exception: if the current level is 0, it can be boosted by 2 levels for 1 point.
  */
 static int skill_increment_cost( const Character &u, const skill_id &skill )
 {
-    return std::max( 1, ( static_cast<int>( u.get_skill_level( skill ) ) + 1 ) / 2 );
+    return std::max( 1, ( static_cast<int>( u.get_skill_level( skill ) + 1 ) / 2 ) );
 }
 
 static std::string assemble_skill_details( const avatar &u,
@@ -3182,14 +3179,11 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
 
         // Write the hint as to upgrade costs
         const int cost = skill_increment_cost( u, currentSkill->ident() );
-        const int level = u.get_skill_level( currentSkill->ident() );
         if( pool != pool_type::FREEFORM ) {
-            // in pool the first level of a skill gives 2
-            const int upgrade_levels = level == 0 ? 2 : 1;
             // We have two different strings to pluralize, so we have to use two translation calls.
             const std::string upgrade_levels_s = string_format(
                     //~ levels here are skill levels at character creation time
-                    n_gettext( "%d level", "%d levels", upgrade_levels ), upgrade_levels );
+                    n_gettext( "%d level", "%d levels", 1 ), 1 );
             const nc_color color = skill_points_left( u, pool ) >= cost ? COL_SKILL_USED : c_light_red;
             mvwprintz( w, point( remaining_points_length + 9, 3 ), color,
                        //~ Second string is e.g. "1 level" or "2 levels"
@@ -3295,9 +3289,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
             if( level > 0 ) {
-                // For balance reasons, increasing a skill from level 0 gives 1 extra level for free, but
-                // decreasing it from level 2 forfeits the free extra level (thus changes it to 0)
-                u.mod_skill_level( skill_id, level == 2 && pool != pool_type::FREEFORM ? -2 : -1 );
+                u.mod_skill_level( skill_id, -1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
             details_recalc = true;
@@ -3305,8 +3297,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
             if( level < MAX_SKILL ) {
-                // For balance reasons, increasing a skill from level 0 gives 1 extra level for free
-                u.mod_skill_level( skill_id, level == 0 && pool != pool_type::FREEFORM ? +2 : +1 );
+                u.mod_skill_level( skill_id, +1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
             details_recalc = true;

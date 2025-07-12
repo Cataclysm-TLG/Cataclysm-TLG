@@ -4427,7 +4427,7 @@ void item::book_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
     if( player_character.has_identified( typeId() ) ) {
         if( book.skill ) {
             const SkillLevel &skill = player_character.get_skill_level_object( book.skill );
-            if( skill.can_train() && parts->test( iteminfo_parts::BOOK_SKILLRANGE_MAX ) ) {
+            if( parts->test( iteminfo_parts::BOOK_SKILLRANGE_MAX ) ) {
                 const std::string skill_name = book.skill->name();
                 std::string fmt;
                 if( book.level != 0 ) {
@@ -6294,7 +6294,6 @@ nc_color item::color_in_inventory( const Character *const ch ) const
         const islot_book &tmp = *type->book;
         if( player_character.has_identified( typeId() ) ) {
             if( tmp.skill && // Book can improve skill: blue
-                player_character.get_skill_level_object( tmp.skill ).can_train() &&
                 player_character.get_knowledge_level( tmp.skill ) >= tmp.req &&
                 player_character.get_knowledge_level( tmp.skill ) < tmp.level
               ) { //NOLINT(bugprone-branch-clone)
@@ -6303,7 +6302,6 @@ nc_color item::color_in_inventory( const Character *const ch ) const
                        !player_character.martial_arts_data->has_martialart( martial_art_learned_from( *type ) ) ) {
                 ret = c_light_blue;
             } else if( tmp.skill && // Book can't improve skill right now, but maybe later: pink
-                       player_character.get_skill_level_object( tmp.skill ).can_train() &&
                        player_character.get_knowledge_level( tmp.skill ) < tmp.level ) {
                 ret = c_pink;
             } else if( !player_character.studied_all_recipes(

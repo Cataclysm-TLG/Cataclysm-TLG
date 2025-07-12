@@ -180,7 +180,6 @@ class SkillLevel
         void knowledge_train( int amount, int npc_knowledge = 0 );
         //bool rust( int rust_resist, float rust_multiplier = 1 );
         void practice();
-        bool can_train() const;
         void set_exercise( int value, bool raw = false );
 
         void readBook( int minimumGain, int maximumGain, int maximumLevel = -1 );

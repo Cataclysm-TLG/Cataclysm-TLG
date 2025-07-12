@@ -796,7 +796,7 @@ void game::setup()
     // invalidate calendar caches in case we were previously playing
     // a different world
     calendar::set_eternal_season( ::get_option<bool>( "ETERNAL_SEASON" ) );
-    calendar::set_season_length( ::get_option<int>( "SEASON_LENGTH" ) );
+    calendar::set_season_length( 91 );
 
     calendar::set_eternal_night( ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "night" );
     calendar::set_eternal_day( ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "day" );
@@ -3236,7 +3236,7 @@ bool game::load( const save_t &name )
                     // anything else, to ensure they pick up the correct value from the save's
                     // worldoptions
                     calendar::set_eternal_season( ::get_option<bool>( "ETERNAL_SEASON" ) );
-                    calendar::set_season_length( ::get_option<int>( "SEASON_LENGTH" ) );
+                    calendar::set_season_length( 91 );
 
                     calendar::set_eternal_night(
                         ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "night" );
@@ -13164,7 +13164,7 @@ void game::start_calendar()
     calendar::start_of_game = scen->start_of_game();
     calendar::turn = calendar::start_of_game;
     calendar::initial_season = static_cast<season_type>( ( to_days<int>( calendar::start_of_game -
-                               calendar::turn_zero ) / get_option<int>( "SEASON_LENGTH" ) ) % season_type::NUM_SEASONS );
+                               calendar::turn_zero ) / 91 ) % season_type::NUM_SEASONS );
 }
 
 overmap &game::get_cur_om() const

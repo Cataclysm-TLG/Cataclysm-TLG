@@ -124,7 +124,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_start_of_cataclysm = calendar::turn_zero +
                                       1_hours * _start_of_cataclysm_hour +
                                       1_days * ( _start_of_cataclysm_day - 1 ) +
-                                      1_days * get_option<int>( "SEASON_LENGTH" ) * _start_of_cataclysm_season +
+                                      91_days * _start_of_cataclysm_season +
                                       calendar::year_length() * ( _start_of_cataclysm_year - 1 )
                                       ;
 
@@ -142,7 +142,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_fall_of_civilization = calendar::turn_zero +
                                         1_hours * _fall_of_civilization_hour +
                                         1_days * ( _fall_of_civilization_day - 1 ) +
-                                        1_days * get_option<int>( "SEASON_LENGTH" ) * _fall_of_civilization_season +
+                                        91_days * _fall_of_civilization_season +
                                         calendar::year_length() * ( _fall_of_civilization_year - 1 )
                                         ;
 
@@ -160,7 +160,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_start_of_game = calendar::turn_zero +
                                  1_hours * _start_of_game_hour +
                                  1_days * ( _start_of_game_day - 1 ) +
-                                 1_days * get_option<int>( "SEASON_LENGTH" ) * _start_of_game_season +
+                                 91_days * _start_of_game_season +
                                  calendar::year_length() * ( _start_of_game_year - 1 )
                                  ;
 
@@ -586,8 +586,8 @@ void scenario::normalize_calendar() const
     if( hack->_default_start_of_game < hack->_default_start_of_cataclysm ) {
         hack->_default_start_of_game = hack->_default_fall_of_civilization;
     }
-    if( hack->_start_of_game < hack->_start_of_cataclysm ) {
-        hack->_start_of_game = hack->_start_of_cataclysm;
+    if( hack->_start_of_game < hack->_fall_of_civilization ) {
+        hack->_start_of_game = hack->_fall_of_civilization;
     }
     if( hack->_default_fall_of_civilization < hack->_default_start_of_cataclysm ) {
         hack->_default_fall_of_civilization = hack->_default_start_of_cataclysm;
