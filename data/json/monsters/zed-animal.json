@@ -709,7 +709,19 @@
     "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "KEENNOSE", "GOODHEARING" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "KEENNOSE",
+      "GOODHEARING"
+    ],
     "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
@@ -741,7 +753,19 @@
     "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeindeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "KEENNOSE", "GOODHEARING" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "KEENNOSE",
+      "GOODHEARING"
+    ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   }
 ]
