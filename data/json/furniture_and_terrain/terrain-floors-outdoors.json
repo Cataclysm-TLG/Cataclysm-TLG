@@ -769,7 +769,7 @@
     "id": "t_floor_slag_thin_out",
     "name": "paper thin Slag",
     "description": "a paper thin layer of Solid Slag coats the ground just outside the Steel Mill. thankfully it has cooled ",
-    "looks_like": "t_rock_floor",
+    "looks_like": "t_dirt_rocky",
     "symbol": "-",
     "color": "white",
     "move_cost": 2,
