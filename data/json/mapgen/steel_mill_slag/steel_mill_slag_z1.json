@@ -3,11 +3,11 @@
     "type": "mapgen",
     "method": "json",
     "om_terrain": [
-      [ "steel_mill_0_1", "steel_mill_0_2", "steel_mill_0_3", "steel_mill_0_4" ],
-      [ "steel_mill_1_1", "steel_mill_1_2", "steel_mill_1_3", "steel_mill_1_4" ],
-      [ "steel_mill_2_1", "steel_mill_2_2", "steel_mill_2_3", "steel_mill_2_4" ],
-      [ "steel_mill_3_1", "steel_mill_3_2", "steel_mill_3_3", "steel_mill_rail_1" ],
-      [ "steel_mill_4_1", "steel_mill_4_2", "steel_mill_4_3", "steel_mill_rail_2" ]
+      [ "steel_mill_slag_0_1", "steel_mill_slag_0_2", "steel_mill_slag_0_3", "steel_mill_slag_0_4" ],
+      [ "steel_mill_slag_1_1", "steel_mill_slag_1_2", "steel_mill_slag_1_3", "steel_mill_slag_1_4" ],
+      [ "steel_mill_slag_2_1", "steel_mill_slag_2_2", "steel_mill_slag_2_3", "steel_mill_slag_2_4" ],
+      [ "steel_mill_slag_3_1", "steel_mill_slag_3_2", "steel_mill_slag_3_3", "steel_mill_slag_rail_1" ],
+      [ "steel_mill_slag_4_1", "steel_mill_slag_4_2", "steel_mill_slag_4_3", "steel_mill_slag_rail_2" ]
     ],
     "object": {
       "fill_ter": "t_thconc_floor_no_roof",
