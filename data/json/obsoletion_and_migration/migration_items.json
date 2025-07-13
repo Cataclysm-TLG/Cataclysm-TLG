@@ -2547,5 +2547,10 @@
     "id": "spear_dory",
     "type": "MIGRATION",
     "replace": "spear_bronze"
+  },
+  {
+    "id": "yoghurt",
+    "type": "MIGRATION",
+    "replace": "yogurt"
   }
 ]

@@ -807,7 +807,7 @@
       [ "pie_meat", 28 ],
       [ "pie_vegetable", 15 ],
       [ "pie_maple", 7 ],
-      [ "yoghurt", 30 ],
+      [ "yogurt", 30 ],
       [ "soy_milk", 20 ]
     ]
   },
@@ -2045,7 +2045,7 @@
       [ "speedo", 20 ],
       [ "bikini_top", 5 ],
       [ "bikini_bottom", 5 ],
-      [ "yoghurt", 12 ],
+      [ "yogurt", 12 ],
       { "prob": 10, "group": "vitamins_bottle_plastic_pill_supplement_1_20" },
       { "prob": 10, "group": "bottle_otc_painkiller_1_20" },
       [ "fitness_band", 10 ]

@@ -399,7 +399,7 @@
     "book_learn": [ [ "dairy_book", 2 ] ],
     "qualities": [ { "id": "COOK", "level": 3 } ],
     "tools": [ [ [ "rock_quern", -1 ], [ "clay_quern", -1 ], [ "mortar_pestle", -1 ], [ "food_processor", 10 ] ] ],
-    "components": [ [ [ "yoghurt", 1 ] ], [ [ "sugar", 5 ], [ "artificial_sweetener", 5 ] ] ]
+    "components": [ [ [ "yogurt", 1 ] ], [ [ "sugar", 5 ], [ "artificial_sweetener", 5 ] ] ]
   },
   {
     "result": "icecream_sorbet",

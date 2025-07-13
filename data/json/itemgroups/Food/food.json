@@ -621,7 +621,7 @@
       { "group": "softdrinks_canned", "prob": 460 },
       { "item": "milk", "prob": 50 },
       { "item": "milk_choc", "prob": 25 },
-      { "item": "yoghurt", "prob": 40 },
+      { "item": "yogurt", "prob": 40 },
       { "item": "pudding", "prob": 50 },
       { "item": "V8", "prob": 15 },
       { "group": "sandwich_t_wrapper_2", "prob": 30 },

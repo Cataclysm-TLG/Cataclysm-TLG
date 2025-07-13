@@ -503,7 +503,7 @@
       { "item": "sandwich_pbj", "prob": 40 },
       { "item": "sandwich_pbm", "prob": 10 },
       { "prob": 45, "group": "sandwich_t_wrapper_2" },
-      { "item": "yoghurt", "prob": 40 }
+      { "item": "yogurt", "prob": 40 }
     ]
   },
   {
@@ -709,7 +709,7 @@
       { "item": "junk_burrito", "prob": 30 },
       { "item": "taco", "prob": 40 },
       { "item": "insta_salad", "prob": 60 },
-      { "item": "yoghurt", "prob": 50 },
+      { "item": "yogurt", "prob": 50 },
       { "item": "macaroni_cooked", "prob": 20 }
     ]
   },
@@ -883,7 +883,7 @@
       { "item": "buttermilk", "prob": 15 },
       { "prob": 60, "group": "cheese_bag_plastic" },
       { "item": "cottage_cheese", "prob": 30 },
-      { "item": "yoghurt", "prob": 40 },
+      { "item": "yogurt", "prob": 40 },
       { "item": "pudding", "prob": 30 },
       { "item": "icecream", "prob": 30 },
       { "item": "icecream_artificial", "prob": 15 },
@@ -946,7 +946,7 @@
       [ "milk", 20 ],
       { "prob": 35, "group": "butter_wrapper_8_64" },
       { "item": "ghee", "prob": 5, "charges": [ 1, 64 ], "container-item": "jar_glass_sealed", "sealed": false },
-      [ "yoghurt", 10 ],
+      [ "yogurt", 10 ],
       [ "pudding", 15 ],
       [ "apple", 10 ],
       [ "sandwich_t", 15 ],

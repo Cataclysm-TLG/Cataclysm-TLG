@@ -612,7 +612,7 @@
     "type": "profession_item_substitutions",
     "item": "pudding",
     "sub": [
-      { "present": [ "ANTIJUNK" ], "absent": [ "LACTOSE" ], "new": [ "yoghurt" ] },
+      { "present": [ "ANTIJUNK" ], "absent": [ "LACTOSE" ], "new": [ "yogurt" ] },
       { "present": [ "ANTIWHEAT" ], "absent": [ "ANTIJUNK" ], "new": [ "neccowafers" ] },
       { "present": [ "ANTIJUNK", "LACTOSE" ], "new": [ "boiled_egg" ] }
     ]
