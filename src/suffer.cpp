@@ -493,7 +493,8 @@ void suffer::while_awake( Character &you, const int current_stim )
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
         if( current_stim > 50 && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
             you.add_effect( effect_shakes, 30_minutes + 1_turns * current_stim );
-        } else if( ( you.get_hunger() > 80 || you.get_kcal_percent() < 1.0f ) && you.get_hunger() > 0 &&
+        } else if( ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
+                                                you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
             you.add_effect( effect_shakes, 40_minutes );
         }
@@ -1340,7 +1341,7 @@ void suffer::from_radiation( Character &you )
         // 200 rads = 100 / 10000 = 1 / 100
         // 1000 rads = 900 / 10000 = 9 / 100 = 10% !!!
         // 2000 rads = 2000 / 10000 = 1 / 5 = 20% !!!
-        if( get_option<bool>( "RAD_MUTATION" ) && rng( 100, 10000 ) < you.get_rad() ) {
+        if( rng( 100, 10000 ) < you.get_rad() ) {
             get_event_bus().send<event_type::character_radioactively_mutates>( you.getID() );
         }
         if( you.get_rad() > 50 && rng( 1, 3000 ) < you.get_rad() &&

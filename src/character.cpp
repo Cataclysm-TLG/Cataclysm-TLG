@@ -2979,9 +2979,9 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
 {
     SkillLevel &level = get_skill_level_object( id );
     const Skill &skill = id.obj();
-    if( !level.can_train() || in_sleep_state() ||
+    if( in_sleep_state() ||
         ( static_cast<int>( get_skill_level( id ) ) >= MAX_SKILL ) ) {
-        // Do not practice if: cannot train, asleep, or at effective skill cap
+        // Do not practice if asleep, or at effective skill cap
         // Leaving as a skill method rather than global for possible future skill cap setting
         return false;
     }
@@ -4043,7 +4043,7 @@ int Character::calc_focus_equilibrium( bool ignore_pain ) const
             const cata::value_ptr<islot_book> &bt = book->type->book;
             // apply a penalty when we're actually learning something
             const SkillLevel &skill_level = get_skill_level_object( bt->skill );
-            if( skill_level.can_train() && skill_level < bt->level ) {
+            if( skill_level < bt->level ) {
                 focus_equilibrium -= 50;
             }
         }

@@ -124,7 +124,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_start_of_cataclysm = calendar::turn_zero +
                                       1_hours * _start_of_cataclysm_hour +
                                       1_days * ( _start_of_cataclysm_day - 1 ) +
-                                      1_days * get_option<int>( "SEASON_LENGTH" ) * _start_of_cataclysm_season +
+                                      91_days * _start_of_cataclysm_season +
                                       calendar::year_length() * ( _start_of_cataclysm_year - 1 )
                                       ;
 
@@ -142,7 +142,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_fall_of_civilization = calendar::turn_zero +
                                         1_hours * _fall_of_civilization_hour +
                                         1_days * ( _fall_of_civilization_day - 1 ) +
-                                        1_days * get_option<int>( "SEASON_LENGTH" ) * _fall_of_civilization_season +
+                                        91_days * _fall_of_civilization_season +
                                         calendar::year_length() * ( _fall_of_civilization_year - 1 )
                                         ;
 
@@ -160,7 +160,7 @@ void scenario::load( const JsonObject &jo, const std::string_view )
         _default_start_of_game = calendar::turn_zero +
                                  1_hours * _start_of_game_hour +
                                  1_days * ( _start_of_game_day - 1 ) +
-                                 1_days * get_option<int>( "SEASON_LENGTH" ) * _start_of_game_season +
+                                 91_days * _start_of_game_season +
                                  calendar::year_length() * ( _start_of_game_year - 1 )
                                  ;
 
@@ -535,7 +535,7 @@ const profession *scenario::weighted_random_profession() const
 
     while( true ) {
         const string_id<profession> &candidate = random_entry_ref( choices );
-        if( candidate->can_pick().success() && x_in_y( 2, 2 + std::abs( candidate->point_cost() ) ) ) {
+        if( x_in_y( 2, 2 + std::abs( candidate->point_cost() ) ) ) {
             return &candidate.obj();
         }
     }
@@ -586,8 +586,8 @@ void scenario::normalize_calendar() const
     if( hack->_default_start_of_game < hack->_default_start_of_cataclysm ) {
         hack->_default_start_of_game = hack->_default_fall_of_civilization;
     }
-    if( hack->_start_of_game < hack->_start_of_cataclysm ) {
-        hack->_start_of_game = hack->_start_of_cataclysm;
+    if( hack->_start_of_game < hack->_fall_of_civilization ) {
+        hack->_start_of_game = hack->_fall_of_civilization;
     }
     if( hack->_default_fall_of_civilization < hack->_default_start_of_cataclysm ) {
         hack->_default_fall_of_civilization = hack->_default_start_of_cataclysm;
@@ -688,27 +688,6 @@ ret_val<void> scenario::can_afford( const scenario &current_scenario, const int 
     }
 
     return ret_val<void>::make_failure( _( "You don't have enough points" ) );
-}
-
-ret_val<void> scenario::can_pick() const
-{
-    // if meta progression is disabled then skip this
-    if( get_past_achievements().is_completed( achievement_achievement_arcade_mode ) ||
-        !get_option<bool>( "META_PROGRESS" ) ) {
-        return ret_val<void>::make_success();
-    }
-
-    if( _requirement ) {
-        const bool has_req = get_past_achievements().is_completed(
-                                 _requirement.value()->id );
-        if( !has_req ) {
-            return ret_val<void>::make_failure(
-                       _( "You must complete the achievement \"%s\" to unlock this scenario." ),
-                       _requirement.value()->name() );
-        }
-    }
-
-    return ret_val<void>::make_success();
 }
 
 bool scenario::has_map_extra() const

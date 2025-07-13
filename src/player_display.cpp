@@ -807,7 +807,6 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
             const SkillLevel &level = you.get_skill_level_object( aSkill->ident() );
             int exercise = level.knowledgeExperience();
             int level_num = level.knowledgeLevel();
-            const bool can_train = level.can_train();
             const bool training = level.isTraining();
             const bool skill_gap = level_num > level.level();
             const bool skill_small_gap = exercise > level.exercise();
@@ -822,8 +821,6 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
                 ui.set_cursor( w_skills, point( 1, y_pos ) );
                 if( locked ) {
                     cstatus = h_yellow;
-                } else if( !can_train ) {
-                    cstatus = h_white;
                 } else if( exercise >= 100 ) {
                     cstatus = training ? h_pink : h_magenta;
                 } else if( skill_gap || skill_small_gap ) {
@@ -836,8 +833,6 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
                     cstatus = c_yellow;
                 } else if( skill_gap || skill_small_gap ) {
                     cstatus = training ? c_light_cyan : c_cyan;
-                } else if( !can_train ) {
-                    cstatus = c_white;
                 } else {
                     cstatus = training ? c_light_blue : c_blue;
                 }

@@ -31,17 +31,13 @@ static const itype_id itype_foodperson_mask( "foodperson_mask" );
 static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
 
 static const morale_type morale_perm_fpmode_on( "morale_perm_fpmode_on" );
-static const morale_type morale_perm_hoarder( "morale_perm_hoarder" );
 static const morale_type morale_perm_noface( "morale_perm_noface" );
 static const morale_type morale_perm_nomad( "morale_perm_nomad" );
 
 static const trait_id trait_CENOBITE( "CENOBITE" );
-static const trait_id trait_HOARDER( "HOARDER" );
 static const trait_id trait_NOMAD( "NOMAD" );
 static const trait_id trait_NOMAD2( "NOMAD2" );
 static const trait_id trait_NOMAD3( "NOMAD3" );
-static const trait_id trait_PROF_FOODP( "PROF_FOODP" );
-static const trait_id trait_THRESH_SPECIES_RAVENFOLK( "THRESH_SPECIES_RAVENFOLK" );
 
 void Character::update_morale()
 {
@@ -49,35 +45,8 @@ void Character::update_morale()
     apply_persistent_morale();
 }
 
-void Character::hoarder_morale_penalty()
-{
-    // For hoarders holsters count as a flat -1 penalty for being empty, we also give them a 25% allowence on their pockets below 1000_ml
-    int pen = ( ( free_space() - holster_volume() ) - ( small_pocket_volume() / 4 ) ) / 125_ml;
-    pen += empty_holsters();
-    if( pen > 70 ) {
-        pen = 70;
-    }
-    if( pen <= 0 ) {
-        pen = 0;
-    }
-    if( has_effect( effect_took_xanax ) ) {
-        pen = pen / 7;
-    } else if( has_trait( trait_THRESH_SPECIES_RAVENFOLK ) ) {
-        pen = pen / 4;
-    } else if( has_effect( effect_took_prozac ) ) {
-        pen = pen / 2;
-    }
-    if( pen > 0 ) {
-        add_morale( morale_perm_hoarder, -pen, -pen, 1_minutes, 1_minutes, true );
-    }
-}
-
 void Character::apply_persistent_morale()
 {
-    // Hoarders get a morale penalty if they're not carrying a full inventory.
-    if( has_trait( trait_HOARDER ) ) {
-        hoarder_morale_penalty();
-    }
     // Nomads get a morale penalty if they stay near the same overmap tiles too long.
     if( has_trait( trait_NOMAD ) || has_trait( trait_NOMAD2 ) || has_trait( trait_NOMAD3 ) ) {
         const tripoint_abs_omt ompos = global_omt_location();
@@ -118,23 +87,6 @@ void Character::apply_persistent_morale()
         const int pen = std::ceil( lerp_clamped( 0, max_unhappiness, t ) );
         if( pen > 0 ) {
             add_morale( morale_perm_nomad, -pen, -pen, 1_minutes, 1_minutes, true );
-        }
-    }
-
-    if( has_trait( trait_PROF_FOODP ) ) {
-        // Losing your face is distressing
-        if( !( is_wearing( itype_foodperson_mask ) ||
-               is_wearing( itype_foodperson_mask_on ) ) ) {
-            add_morale( morale_perm_noface, -20, -20, 1_minutes, 1_minutes, true );
-        } else if( is_wearing( itype_foodperson_mask ) ||
-                   is_wearing( itype_foodperson_mask_on ) ) {
-            rem_morale( morale_perm_noface );
-        }
-
-        if( is_wearing( itype_foodperson_mask_on ) ) {
-            add_morale( morale_perm_fpmode_on, 10, 10, 1_minutes, 1_minutes, true );
-        } else {
-            rem_morale( morale_perm_fpmode_on );
         }
     }
 }

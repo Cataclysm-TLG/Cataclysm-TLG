@@ -2907,9 +2907,8 @@ class jmapgen_spawn_item : public jmapgen_piece
 
             const int c = chance.get();
 
-            // 100% chance = exactly 1 item, otherwise scale by item spawn rate.
-            const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-            int spawn_count = ( c == 100 ) ? 1 : roll_remainder( c * spawn_rate / 100.0f );
+            // 100% chance = exactly 1 item.
+            int spawn_count = ( c == 100 ) ? 1 : roll_remainder( c / 100.0f );
             for( int i = 0; i < spawn_count; i++ ) {
                 dat.m.spawn_item( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id,
                                   amount.get(),
@@ -3428,10 +3427,8 @@ class jmapgen_sealed_item : public jmapgen_piece_with_has_vehicle_collision
                     const std::string &context ) const override {
             const int c = chance.get();
 
-            // 100% chance = always generate, otherwise scale by item spawn rate.
-            // (except is capped at 1)
-            const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-            if( !x_in_y( ( c == 100 ) ? 1 : c * spawn_rate / 100.0f, 1 ) ) {
+            // 100% chance = always generate.
+            if( !x_in_y( ( c == 100 ) ? 1 : c / 100.0f, 1 ) ) {
                 return;
             }
 
@@ -4064,16 +4061,10 @@ void jmapgen_objects::load_objects<jmapgen_loot>(
 
         auto loot = make_shared_fast<jmapgen_loot>( jsi );
         // spawn rates < 1 are handled in item_group
-        const float rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f );
 
-        if( where.repeat.valmax != 1 ) {
-            // if loot can repeat scale according to rate
-            where.repeat.val = std::max( static_cast<int>( where.repeat.val * rate ), 1 );
-            where.repeat.valmax = std::max( static_cast<int>( where.repeat.valmax * rate ), 1 );
-
-        } else if( loot->chance != 100 ) {
+        if( loot->chance != 100 ) {
             // otherwise except where chance is 100% scale probability
-            loot->chance = std::max( std::min( static_cast<int>( loot->chance * rate ), 100 ), 1 );
+            loot->chance = std::max( std::min( static_cast<int>( loot->chance ), 100 ), 1 );
         }
 
         add( where, loot );
@@ -6730,8 +6721,7 @@ std::vector<item *> map::place_items(
     }
 
     // spawn rates < 1 are handled in item_group
-    const float spawn_rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f );
-    const int spawn_count = roll_remainder( chance * spawn_rate / 100.0f );
+    const int spawn_count = roll_remainder( chance / 100.0f );
     for( int i = 0; i < spawn_count; i++ ) {
         // Might contain one item or several that belong together like guns & their ammo
         int tries = 0;

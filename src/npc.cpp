@@ -2158,14 +2158,6 @@ void npc::shop_restock()
                 last_item = count > 10 && one_in( 100 );
             }
         }
-
-        // This removes some items according to item spawn scaling factor
-        const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-        if( spawn_rate < 1 ) {
-            ret.remove_if( [spawn_rate]( auto & ) {
-                return !( rng_float( 0, 1 ) < spawn_rate );
-            } );
-        }
     }
 
     add_fallback_zone( *this );
