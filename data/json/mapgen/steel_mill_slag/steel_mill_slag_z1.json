@@ -157,7 +157,7 @@
         { "monster": "GROUP_STEEL_MILL_SLAG", "x": [ 25, 46 ], "y": [ 97, 118 ], "chance": 4 },
         { "monster": "GROUP_STEEL_MILL_SLAG", "x": [ 49, 70 ], "y": [ 97, 118 ], "chance": 4 },
         { "monster": "GROUP_STEEL_MILL_SLAG", "x": [ 73, 94 ], "y": [ 97, 118 ], "chance": 4 }
-           ]
+      ]
     }
-  } 
+  }
 ]

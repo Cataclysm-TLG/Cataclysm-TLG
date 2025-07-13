@@ -143,10 +143,8 @@
     "bleed_rate": 10,
     "vision_day": 3,
     "vision_night": 3,
-// similar to the headless horror. it can sense someones presence near them thanks to the tendrils
     "harvest": "zombie_hulk",
     "special_attacks": [ { "id": "scratch_humanoid" }, { "id": "smash", "throw_strength": 96 } ],
-    // cant grab due top the slag covering its hands
     "fungalize_into": "mon_zombie_fungus",
     "flags": [
       "HEARS",
