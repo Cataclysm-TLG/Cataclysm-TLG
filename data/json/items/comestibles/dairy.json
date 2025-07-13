@@ -95,7 +95,7 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "yoghurt",
+    "id": "yogurt",
     "name": { "str_sp": "yogurt" },
     "weight": "257 g",
     "color": "magenta",
