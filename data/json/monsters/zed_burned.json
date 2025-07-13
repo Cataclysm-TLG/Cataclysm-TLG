@@ -115,7 +115,7 @@
     "copy-from": "mon_zombie_fiend",
     "harvest": "zombie_rust"
   },
- {
+  {
     "id": "mon_zombie_slag_golem",
     "type": "MONSTER",
     "name": { "str": "Slag Golem" },

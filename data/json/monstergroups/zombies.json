@@ -713,7 +713,7 @@
       { "monster": "mon_zombie_brainless", "weight": 25 }
     ]
   },
-{
+  {
     "type": "monstergroup",
     "name": "GROUP_STEEL_MILL_SLAG",
     "//": "Steel mill monster spawns.",
@@ -741,8 +741,8 @@
       { "monster": "mon_feral_human_tool", "weight": 1, "cost_multiplier": 5 },
       { "monster": "mon_zombie_runner", "weight": 10, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
       { "monster": "mon_zombie_brainless", "weight": 25 },
-      { "monster": "mon_zombie_slag_golem", "weight": 50, "starts": "60 days" } 
-]
+      { "monster": "mon_zombie_slag_golem", "weight": 50, "starts": "60 days" }
+    ]
   },
   {
     "name": "GROUP_MALL",
