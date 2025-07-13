@@ -4242,7 +4242,7 @@
     "id": "martial_artist_japanese",
     "name": "Butōka",
     "npc_background": "BG_survival_story_SPORTS",
-    "description": "Your sensei prepared you for a lot of things, but somehow the end of the world never came up in traning.",
+    "description": "Your sensei prepared you for a lot of things, but somehow the end of the world never came up in training.",
     "points": 3,
     "starting_styles_choices": [ "style_aikido", "style_karate", "style_ninjutsu", "style_judo" ],
     "proficiencies": [ "prof_unarmed_familiar", "prof_unarmed_pro" ],
