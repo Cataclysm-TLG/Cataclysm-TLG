@@ -970,6 +970,51 @@ bool mattack::shockstorm( monster *z )
     return true;
 }
 
+bool mattack::pull_metal_aoe( monster *z )
+{
+    static const std::set<material_id> affected_materials =
+    { material_iron, material_steel, material_lc_steel, material_mc_steel, material_hc_steel, material_ch_steel, material_qt_steel, material_budget_steel };
+    // Remember all items that will be affected, then affect them
+    // Don't "snowball" by affecting some items multiple times
+    std::vector<std::pair<item, tripoint_bub_ms>> affected;
+    const units::mass weight_cap = 70_kilogram;
+    map &here = get_map();
+    for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 10 ) ) {
+        if( p == z->pos_bub() || !here.has_items( p ) || here.has_flag( ter_furn_flag::TFLAG_SEALED, p ) ) {
+            continue;
+        }
+
+        map_stack stack = here.i_at( p );
+        for( auto it = stack.begin(); it != stack.end(); it++ ) {
+            if( it->weight() < weight_cap &&
+                it->made_of_any( affected_materials ) ) {
+                affected.emplace_back( *it, p );
+                stack.erase( it );
+                break;
+            }
+        }
+    }
+    if( !affected.empty() ) {
+        add_msg_if_player_sees( z->pos_bub(), _( "Items are jerked toward %s by an unseen force!" ), z->disp_name() );
+    }
+    for( const std::pair<item, tripoint_bub_ms> &pr : affected ) {
+        projectile proj;
+        proj.speed  = 50;
+        proj.impact = damage_instance();
+        // FIXME: Hardcoded damage type
+        proj.impact.add_damage( STATIC( damage_type_id( "bash" ) ), pr.first.weight() / 250_gram );
+        // make the projectile stop one tile short to prevent hitting the user
+        proj.range = trig_dist_z_adjust( pr.second.raw(), z->pos() ) - 1;
+        proj.proj_effects = {{ ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET }};
+
+        dealt_projectile_attack dealt = projectile_attack(
+                                            proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
+        here.add_item_or_charges( dealt.end_point, pr.first );
+    }
+    pull_metal_weapon( z );
+    return true;
+}
+
 bool mattack::pull_metal_weapon( monster *z )
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////

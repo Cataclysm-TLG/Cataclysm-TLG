@@ -184,6 +184,28 @@
       { "monster": "mon_zombie_grue", "weight": 250 }
     ]
   },
+    {
+    "name": "GROUP_MAGNETIC_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_zombie_magnetic", "weight": 600 },
+      { "monster": "mon_zombie_rust", "weight": 500 },
+      { "monster": "mon_zombie_magnetokinetic", "weight": 200 },
+      { "monster": "mon_zombie_static", "weight": 175 }
+    ]
+  },
+  {
+    "name": "GROUP_MAGNETOKINETIC_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_zombie_magnetokinetic", "weight": 600 },
+      { "monster": "mon_zombie_plated", "weight": 75 },
+      { "monster": "mon_zombie_urchin", "weight": 75 },
+      { "monster": "mon_zombie_brute_shocker", "weight": 30 },
+      { "monster": "mon_skeleton_electric", "weight": 30 },
+      { "monster": "mon_zombie_nullfield", "weight": 30 }
+    ]
+  },
   {
     "name": "GROUP_FERROUS_UPGRADE",
     "type": "monstergroup",
