@@ -368,7 +368,7 @@
     ],
     "copy-from": "generic_city_building_no_sidewalk",
     "vision_levels": "large_industrial_building",
-    "name": "steel mill [SLAG]",
+    "name": "steel mill",
     "sym": "S",
     "color": "dark_gray"
   },
