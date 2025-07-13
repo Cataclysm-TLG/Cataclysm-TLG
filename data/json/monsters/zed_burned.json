@@ -137,7 +137,7 @@
     "melee_skill": 5,
     "melee_dice": 4,
     "melee_dice_sides": 8,
-    "melee_damage": [ { "damage_type": "stab", "amount": 0 } ],
+    "melee_damage": [ { "damage_type": "bash", "amount": 4 } ],
     "weakpoint_sets": [ "wps_humanoid_body", "wps_humanoid_head_small" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_hulk" ],
     "bleed_rate": 10,
@@ -147,7 +147,9 @@
     "special_attacks": [ { "id": "scratch_humanoid" }, { "id": "smash", "throw_strength": 96 } ],
     "fungalize_into": "mon_zombie_fungus",
     "flags": [
+      "SEES",
       "HEARS",
+      "GOODHEARING",
       "SMELLS",
       "STUMBLES",
       "WARM",
@@ -159,7 +161,8 @@
       "REVIVES",
       "PUSH_MON",
       "PUSH_VEH",
-      "FILTHY"
+      "FILTHY",
+      "LOUDMOVES"
     ],
     "armor": { "bash": 12, "cut": 20, "acid": 10, "heat": 15, "bullet": 7, "electric": 15 }
   }
