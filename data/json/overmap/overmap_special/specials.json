@@ -5511,7 +5511,7 @@
     "//": "Inflated chance, effective rate ~55%",
     "flags": [ "CLASSIC", "OVERMAP_UNIQUE", "MAN_MADE" ]
   },
-   {
+  {
     "type": "overmap_special",
     "id": "steel mill slag",
     "overmaps": [
