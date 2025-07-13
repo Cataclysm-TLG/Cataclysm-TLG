@@ -1,7 +1,7 @@
 [
   {
     "type": "palette",
-    "id": "steel_mill_palette",
+    "id": "steel_mill_slag_palette",
     "terrain": {
       ".": "t_region_groundcover",
       "'": "t_railroad_rubble",
