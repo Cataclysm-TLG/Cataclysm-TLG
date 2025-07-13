@@ -130,7 +130,11 @@
     "vision_levels": "industrial_building",
     "sym": "L",
     "color": "i_green",
-    "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 1, 3 ], "chance": 10 },
+    "spawns": {
+      "group": "GROUP_WASP_FORAGER",
+      "population": [ 1, 3 ],
+      "chance": 10
+    },
     "extend": { "flags": [ "SOURCE_CONSTRUCTION", "SOURCE_FABRICATION" ] }
   },
   {
@@ -150,7 +154,11 @@
     "name": "lumbermill",
     "sym": "L",
     "color": "i_green",
-    "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 1, 3 ], "chance": 10 },
+    "spawns": {
+      "group": "GROUP_WASP_FORAGER",
+      "population": [ 1, 3 ],
+      "chance": 10
+    },
     "extend": { "flags": [ "SOURCE_CONSTRUCTION", "SOURCE_FABRICATION" ] }
   },
   {
@@ -303,6 +311,70 @@
   {
     "type": "overmap_terrain",
     "id": [
+      "steel_mill_slag_0_1",
+      "steel_mill_slag_0_1_2",
+      "steel_mill_slag_0_1_3",
+      "steel_mill_slag_0_2",
+      "steel_mill_slag_0_2_2",
+      "steel_mill_slag_0_2_3",
+      "steel_mill_slag_0_3",
+      "steel_mill_slag_0_3_2",
+      "steel_mill_slag_0_3_3",
+      "steel_mill_slag_0_4",
+      "steel_mill_slag_0_4_2",
+      "steel_mill_slag_0_4_3",
+      "steel_mill_slag_1_1",
+      "steel_mill_slag_1_1_2",
+      "steel_mill_slag_1_1_3",
+      "steel_mill_slag_1_2",
+      "steel_mill_slag_1_2_2",
+      "steel_mill_slag_1_2_3",
+      "steel_mill_slag_1_3",
+      "steel_mill_slag_1_3_2",
+      "steel_mill_slag_1_3_3",
+      "steel_mill_slag_1_4",
+      "steel_mill_slag_1_4_2",
+      "steel_mill_slag_1_4_3",
+      "steel_mill_slag_2_1",
+      "steel_mill_slag_2_1_2",
+      "steel_mill_slag_2_1_3",
+      "steel_mill_slag_2_2",
+      "steel_mill_slag_2_2_2",
+      "steel_mill_slag_2_2_3",
+      "steel_mill_slag_2_3",
+      "steel_mill_slag_2_3_2",
+      "steel_mill_slag_2_3_3",
+      "steel_mill_slag_2_4",
+      "steel_mill_slag_2_4_2",
+      "steel_mill_slag_2_4_3",
+      "steel_mill_slag_3_1",
+      "steel_mill_slag_3_1_2",
+      "steel_mill_slag_3_1_3",
+      "steel_mill_slag_3_2",
+      "steel_mill_slag_3_2_2",
+      "steel_mill_slag_3_2_3",
+      "steel_mill_slag_3_3",
+      "steel_mill_slag_3_3_2",
+      "steel_mill_slag_3_3_3",
+      "steel_mill_slag_4_1",
+      "steel_mill_slag_4_1_2",
+      "steel_mill_slag_4_1_3",
+      "steel_mill_slag_4_2",
+      "steel_mill_slag_4_2_2",
+      "steel_mill_slag_4_2_3",
+      "steel_mill_slag_4_3",
+      "steel_mill_slag_4_3_2",
+      "steel_mill_slag_4_3_3"
+    ],
+    "copy-from": "generic_city_building_no_sidewalk",
+    "vision_levels": "large_industrial_building",
+    "name": "steel mill [SLAG]",
+    "sym": "S",
+    "color": "dark_gray"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": [
       "steel_mill_rail_1",
       "steel_mill_rail_2",
       "steel_mill_rail_1_2",
@@ -431,7 +503,11 @@
     "name": "mine tunnels",
     "color": "dark_gray",
     "see_cost": "full_high",
-    "spawns": { "group": "GROUP_MINERS", "population": [ 1, 2 ], "chance": 100 },
+    "spawns": {
+      "group": "GROUP_MINERS",
+      "population": [ 1, 2 ],
+      "chance": 100
+    },
     "flags": [ "LINEAR" ]
   },
   {
