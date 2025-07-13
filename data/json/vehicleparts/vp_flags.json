@@ -28,7 +28,7 @@
   {
     "id": "BELTABLE",
     "type": "json_flag",
-    "info": "You can install a seatbelt or 5-point harness here to help keep you in your seat during a collision."
+    "info": "You can install a seat belt or 5-point harness here to help keep you in your seat during a collision."
   },
   {
     "id": "BOARD_INTERNAL",
@@ -118,7 +118,7 @@
   {
     "id": "NONBELTABLE",
     "type": "json_flag",
-    "info": "There's no place to attach a seatbelt, so you get thrown from the vehicle in a crash."
+    "info": "There's no place to attach a seat belt, so you get thrown from the vehicle in a crash."
   },
   {
     "id": "ROOF",
