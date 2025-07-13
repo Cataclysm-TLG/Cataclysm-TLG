@@ -1768,7 +1768,7 @@
     "points": -1,
     "description": "You make more noise while walking.  You're also more likely to set off traps.",
     "starting_trait": true,
-    "category": [ "CRUSTACEAN" ],
+    "category": [ "CRUSTACEAN", "CATTLE" ],
     "cancels": [ "LIGHTSTEP" ],
     "enchantments": [ { "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 0.7 } ] } ]
   },
@@ -1780,15 +1780,6 @@
     "description": "When very hungry or under the effects of stimulants, you may find your hands shaking uncontrollably, severely reducing your Dexterity.",
     "starting_trait": true,
     "category": [ "MEDICAL", "MOUSE", "RABBIT" ]
-  },
-  {
-    "type": "mutation",
-    "id": "HOARDER",
-    "name": { "str": "Hoarder" },
-    "points": -4,
-    "description": "You don't feel right unless you're carrying as much as you can.  You suffer morale penalties for carrying less than maximum volume (weight is ignored).  Xanax can help control this anxiety.",
-    "starting_trait": true,
-    "valid": false
   },
   {
     "type": "mutation",
@@ -4241,11 +4232,10 @@
     "type": "mutation",
     "id": "HOOVES",
     "name": { "str": "Hooves" },
-    "points": 0,
+    "points": 2,
     "visibility": 2,
     "ugliness": 2,
-    "mixed_effect": true,
-    "description": "Your feet have fused into hooves.  This allows you to perform a powerful kicking attack, provides natural armor, and removes the need to wear shoes; however, you cannot wear normal shoes.  Reduces wet effects.",
+    "description": "Your feet have fused into hooves.  This allows you to perform a powerful kicking attack, provides natural armor, and removes the need to wear shoes; however, you cannot wear normal shoes.",
     "types": [ "FEET", "SOLES" ],
     "category": [ "CATTLE", "CHIMERA" ],
     "enchantments": [ "ench_hooves" ],

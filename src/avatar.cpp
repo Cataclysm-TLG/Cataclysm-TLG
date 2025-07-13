@@ -760,7 +760,7 @@ void avatar::identify( const item &item )
     const skill_id &skill = reading->skill;
 
     add_msg( _( "You skim %s to find out what's in it." ), book.type_name() );
-    if( skill && get_skill_level_object( skill ).can_train() ) {
+    if( skill ) {
         add_msg( m_info, _( "Can bring your %s knowledge to %d." ),
                  skill.obj().name(), reading->level );
         if( reading->req != 0 ) {

@@ -146,11 +146,6 @@ class scenario
         bool has_flag( const std::string &flag ) const;
 
         /**
-         * Do you have the necessary achievement state
-         */
-        ret_val<void> can_pick() const;
-
-        /**
          * Do you have the points to afford swapping to this scenario
          */
         ret_val<void> can_afford( const scenario &current_scenario, int points ) const;

@@ -6307,7 +6307,6 @@ void vehicle::place_spawn_items()
         }
     }
 
-    const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
     for( const vehicle_item_spawn &spawn : type->item_spawns ) {
         int part = part_with_feature( spawn.pos, "CARGO", false );
         if( part < 0 ) {
@@ -6317,7 +6316,7 @@ void vehicle::place_spawn_items()
             const bool broken = vp.is_broken();
 
             std::vector<item> created;
-            const int spawn_count = roll_remainder( spawn.chance * std::max( spawn_rate, 1.0f ) / 100.0f );
+            const int spawn_count = roll_remainder( spawn.chance * 0.01f );
             for( int i = 0; i < spawn_count; ++i ) {
                 // if vehicle part is broken only 50% of items spawn and they will be variably damaged
                 if( broken && one_in( 2 ) ) {
@@ -6325,13 +6324,13 @@ void vehicle::place_spawn_items()
                 }
 
                 for( const itype_id &e : spawn.item_ids ) {
-                    if( rng_float( 0, 1 ) < spawn_rate ) {
+                    if( rng_float( 0, 1 ) < 1.0f ) {
                         item spawn( e );
                         created.emplace_back( spawn.in_its_container() );
                     }
                 }
                 for( const std::pair<itype_id, std::string> &e : spawn.variant_ids ) {
-                    if( rng_float( 0, 1 ) < spawn_rate ) {
+                    if( rng_float( 0, 1 ) < 1.0f ) {
                         item spawn( e.first );
                         item added = spawn.in_its_container();
                         added.set_itype_variant( e.second );

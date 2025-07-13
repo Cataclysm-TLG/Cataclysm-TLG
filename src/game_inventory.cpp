@@ -1403,11 +1403,9 @@ class read_inventory_preset: public pickup_inventory_preset
                 const islot_book &book = get_book( loc );
                 if( book.skill ) {
                     const SkillLevel &skill = you.get_skill_level_object( book.skill );
-                    if( skill.can_train() ) {
-                        //~ %1$s: book skill name, %2$d: book skill level, %3$d: player skill level
-                        return string_format( pgettext( "skill", "%1$s to %2$d (%3$d)" ), book.skill->name(), book.level,
-                                              skill.knowledgeLevel() );
-                    }
+                    //~ %1$s: book skill name, %2$d: book skill level, %3$d: player skill level
+                    return string_format( pgettext( "skill", "%1$s to %2$d (%3$d)" ), book.skill->name(), book.level,
+                                          skill.knowledgeLevel() );
                 }
                 return std::string();
             }, _( "TRAINS (CURRENT)" ), unknown );
@@ -1479,7 +1477,7 @@ class read_inventory_preset: public pickup_inventory_preset
                 }
 
                 const islot_book &book = get_book( e.any_item() );
-                if( book.skill && you.get_skill_level_object( book.skill ).can_train() ) {
+                if( book.skill ) {
                     return lcmatch( book.skill->name(), filter );
                 }
 

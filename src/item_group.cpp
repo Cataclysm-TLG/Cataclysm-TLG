@@ -278,12 +278,11 @@ std::size_t Single_item_creator::create( ItemList &list,
                       modifier_count.first, modifier_count.second );
         }
     }
-    float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
     for( ; cnt > 0; cnt-- ) {
         if( type == S_ITEM ) {
             item itm = create_single_without_container( birthday, rec );
             if( flags & spawn_flags::use_spawn_rate && !itm.has_flag( STATIC( flag_id( "MISSION_ITEM" ) ) ) &&
-                rng_float( 0, 1 ) > spawn_rate ) {
+                rng_float( 0, 1 ) > 1.0f ) {
                 continue;
             }
             if( !itm.is_null() ) {
@@ -962,12 +961,6 @@ int Item_spawn_data::get_probability( bool skip_event_check ) const
     // Use probability as normal
     if( skip_event_check || event == holiday::none ) {
         return probability;
-    }
-
-    // Item spawn is event-based, but option is disabled
-    std::string opt = get_option<std::string>( "EVENT_SPAWNS" );
-    if( opt != "items" && opt != "both" ) {
-        return 0;
     }
 
     // Use probability if the current holiday matches the item's spawn event
