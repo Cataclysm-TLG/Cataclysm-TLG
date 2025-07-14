@@ -659,14 +659,12 @@
   {
     "type": "vehicle_part",
     "id": "minifreezer",
-    "looks_like": "minifridge",
     "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
     "copy-from": "ap_minifreezer"
   },
   {
     "type": "vehicle_part",
     "id": "chest_minifreezer",
-    "looks_like": "minifridge",
     "delete": { "flags": [ "APPLIANCE", "CTRL_ELECTRONIC" ] },
     "copy-from": "ap_chest_minifreezer"
   },
