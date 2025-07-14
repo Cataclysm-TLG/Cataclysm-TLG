@@ -186,7 +186,7 @@
       { "monster": "mon_zombie_grue", "weight": 250 }
     ]
   },
-    {
+  {
     "name": "GROUP_ZOMBIE_MAGNETIC_UPGRADE",
     "type": "monstergroup",
     "monsters": [

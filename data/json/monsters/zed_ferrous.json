@@ -29,13 +29,30 @@
     "harvest": "zombie_humanoid",
     "fungalize_into": "mon_zombie_fungus",
     "grab_strength": 20,
-    "special_attacks": [ [ "PULL_METAL_WEAPON", 20 ], { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
+    "special_attacks": [
+      [ "PULL_METAL_WEAPON", 20 ],
+      { "id": "grab", "cooldown": 7 },
+      { "id": "scratch_humanoid" },
+      { "id": "bite_humanoid", "cooldown": 5 }
+    ],
     "death_drops": "mon_zombie_magnetic_death_drops",
     "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_MAGNETIC_UPGRADE" },
-    "flags": [ "SEES", "HEARS", "WARM", "GRABS", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "RANGED_ATTACKER" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "WARM",
+      "GRABS",
+      "BASHES",
+      "GROUP_BASH",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "RANGED_ATTACKER"
+    ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 3 }
   },
-    {
+  {
     "id": "mon_zombie_magnetokinetic",
     "type": "MONSTER",
     "name": { "str": "magnetokinetic zombie" },
@@ -65,10 +82,28 @@
     "harvest": "zombie_humanoid",
     "fungalize_into": "mon_zombie_fungus",
     "grab_strength": 20,
-    "special_attacks": [ [ "PULL_METAL_WEAPON", 26 ], [ "PULL_METAL_AOE", 30 ], { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
+    "special_attacks": [
+      [ "PULL_METAL_WEAPON", 26 ],
+      [ "PULL_METAL_AOE", 30 ],
+      { "id": "grab", "cooldown": 7 },
+      { "id": "scratch_humanoid" },
+      { "id": "bite_humanoid", "cooldown": 5 }
+    ],
     "death_drops": "mon_zombie_magnetic_death_drops",
     "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_MAGNETOKINETIC_UPGRADE" },
-    "flags": [ "SEES", "HEARS", "WARM", "GRABS", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "RANGED_ATTACKER" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "WARM",
+      "GRABS",
+      "BASHES",
+      "GROUP_BASH",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "RANGED_ATTACKER"
+    ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 3 }
   },
   {
