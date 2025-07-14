@@ -45,10 +45,20 @@
       { "group": "underwear", "damage": [ 1, 4 ] },
       { "group": "default_zombie_items_pockets", "prob": 80, "damage": [ 0, 2 ] },
       {
-        "distribution": [ { "group": "tools_workshop", "prob": 30 }, { "group": "tools_toolbox", "prob": 70 } ],
+        "distribution": [ { "group": "tools_workshop", "prob": 10 }, { "group": "tools_toolbox", "prob": 40 } ],
         "prob": 50
       },
-      { "group": "supplies_electronics", "count": [ 1, 3 ], "prob": 70 },
+      { "group": "supplies_electronics", "count": [ 1, 3 ], "prob": 60 },
+      { "item": "spike", "prob": 15 },
+      { "item": "spike", "prob": 15 },
+      { "item": "nuts_bolts", "prob": 15 },
+      { "item": "nuts_bolts", "prob": 15 },
+      { "item": "scrap", "prob": 15 },
+      { "item": "scrap", "prob": 15 },
+      { "item": "scrap", "prob": 15 },
+      { "item": "nail", "prob": 25 },
+      { "item": "nail", "prob": 25 },
+      { "item": "magnet", "prob": 1 },
       { "group": "wallets", "damage": [ 1, 4 ], "prob": 60 },
       { "item": "id_industrial", "prob": 5 }
     ]

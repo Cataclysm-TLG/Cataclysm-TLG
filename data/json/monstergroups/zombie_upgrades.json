@@ -18,6 +18,8 @@
       { "monster": "mon_zombie_necro", "weight": 15 },
       { "monster": "mon_zombie_necro_boomer", "weight": 12 },
       { "monster": "mon_boomer", "weight": 90 },
+      { "monster": "mon_zombie_magnetic", "weight": 5 },
+      { "monster": "mon_zombie_magnetokinetic", "weight": 5 },
       { "monster": "mon_zombie_brute", "weight": 40 },
       { "monster": "mon_zombie_master", "weight": 3 },
       { "monster": "mon_zombie_hollow", "weight": 5 },
@@ -185,7 +187,7 @@
     ]
   },
     {
-    "name": "GROUP_MAGNETIC_UPGRADE",
+    "name": "GROUP_ZOMBIE_MAGNETIC_UPGRADE",
     "type": "monstergroup",
     "monsters": [
       { "monster": "mon_zombie_magnetic", "weight": 600 },
@@ -195,7 +197,7 @@
     ]
   },
   {
-    "name": "GROUP_MAGNETOKINETIC_UPGRADE",
+    "name": "GROUP_ZOMBIE_MAGNETOKINETIC_UPGRADE",
     "type": "monstergroup",
     "monsters": [
       { "monster": "mon_zombie_magnetokinetic", "weight": 600 },

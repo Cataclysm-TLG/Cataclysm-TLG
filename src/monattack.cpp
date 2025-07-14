@@ -979,11 +979,10 @@ bool mattack::pull_metal_aoe( monster *z )
     std::vector<std::pair<item, tripoint_bub_ms>> affected;
     const units::mass weight_cap = 70_kilogram;
     map &here = get_map();
-    for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 10 ) ) {
+    for( const tripoint_bub_ms &p : here.points_in_radius( z->pos_bub(), 12 ) ) {
         if( p == z->pos_bub() || !here.has_items( p ) || here.has_flag( ter_furn_flag::TFLAG_SEALED, p ) ) {
             continue;
         }
-
         map_stack stack = here.i_at( p );
         for( auto it = stack.begin(); it != stack.end(); it++ ) {
             if( it->weight() < weight_cap &&
@@ -1011,6 +1010,7 @@ bool mattack::pull_metal_aoe( monster *z )
                                             proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
         here.add_item_or_charges( dealt.end_point, pr.first );
     }
+    // TODO: pull_metal_armor()
     pull_metal_weapon( z );
     return true;
 }
@@ -1080,8 +1080,11 @@ bool mattack::pull_metal_weapon( monster *z )
                     dealt_projectile_attack dealt = projectile_attack( proj, foe->pos_bub(), z->pos_bub(),
                                                     dispersion_sources{ 0 }, z );
                     get_map().add_item( dealt.end_point, pulled_weapon );
-                    target->add_msg_player_or_npc( m_type, _( "The %s is pulled away from your hands!" ),
-                                                   _( "The %s is pulled away from <npcname>'s hands!" ), pulled_weapon.tname() );
+                    if( target->is_avatar() ) {
+                        popup( _( "The %s is pulled out of your grasp!" ), pulled_weapon.tname() );
+                    } else {
+                        add_msg_if_player_sees( target->pos_bub(), _( "The %s is pulled away from <npcname>'s hands!" ), pulled_weapon.tname() );
+                    }
                     if( foe->has_activity( ACT_RELOAD ) ) {
                         foe->cancel_activity();
                     }

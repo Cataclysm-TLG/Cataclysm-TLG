@@ -2079,7 +2079,7 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         item weap = you->remove_weapon();
         here.add_item_or_charges( you->pos_bub(), weap );
         if( you->is_avatar() ) {
-            add_msg_if_npc( _( "<npcname> disarms you!" ) );
+            popup( _( "<npcname> disarms you!" ) );
         } else {
             add_msg_player_or_npc( _( "You disarm %s!" ),
                                    _( "<npcname> disarms %s!" ),
