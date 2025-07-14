@@ -97,7 +97,7 @@
       [ [ "bell_pepper", 2 ] ],
       [ [ "garlic_clove", 2 ], [ "rehydrated_garlic", 2 ] ],
       [ [ "seasoning_mild", 2, "LIST" ] ],
-      [ [ "yoghurt", 1 ] ]
+      [ [ "yogurt", 1 ] ]
     ],
     "charges": 4
   },
@@ -125,7 +125,7 @@
       [ [ "any_butter", 1, "LIST" ] ],
       [ [ "garlic_clove", 2 ], [ "rehydrated_garlic", 2 ] ],
       [ [ "flour_any", 20, "LIST" ] ],
-      [ [ "yoghurt", 1 ] ]
+      [ [ "yogurt", 1 ] ]
     ]
   },
   {
