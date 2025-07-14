@@ -343,7 +343,7 @@ input_context game::get_player_input( std::string &action )
             if( g->uquit == QUIT_EXIT ) {
                 break;
             }
-            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) ) {
+            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) && !weather.weather_id->weather_fog ) {
                 /*
                 Location to add rain drop animation bits! Since it refreshes w_terrain it can be added to the animation section easily
                 Get tile information from above's weather information:
@@ -351,24 +351,63 @@ input_context game::get_player_input( std::string &action )
                 WEATHER_FLURRIES | WEATHER_SNOW | WEATHER_SNOWSTORM = "weather_snowflake"
                 */
                 invalidate_main_ui_adaptor();
-
                 wPrint.vdrops.clear();
-
-                for( int i = 0; i < dropCount; i++ ) {
-                    const point iRand( rng( iStart.x, iEnd.x - 1 ), rng( iStart.y, iEnd.y - 1 ) );
-                    const point map( iRand + offset );
-
-                    const tripoint mapp( map, u.posz() );
-
+                const int width = iEnd.x - iStart.x;
+                const int height = iEnd.y - iStart.y;
+                const int grid_size = width * height;
+                std::vector<bool> used( grid_size, false );
+                auto get_index = [=]( int x, int y ) {
+                    return y * width + x;
+                };
+                int attempts = 0;
+                while( wPrint.vdrops.size() < dropCount && attempts < dropCount * 5 ) {
+                    const int local_x = rng( 0, width - 1 );
+                    const int local_y = rng( 0, height - 1 );
+                    const int index = get_index( local_x, local_y );
+                    if( used[index] ) {
+                        ++attempts;
+                        continue;
+                    }
+                    const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
+                    const point map_point = screen_point + offset;
+                    const tripoint mapp( map_point, u.posz() );
                     if( m.inbounds( mapp ) && m.is_outside( mapp ) &&
                         m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) ==
                         visibility_type::CLEAR &&
                         !creatures.creature_at( mapp, true ) ) {
                         // Suppress if a critter is there
-                        wPrint.vdrops.emplace_back( iRand.x, iRand.y );
+                        used[index] = true;
+                        wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
                     }
+                    ++attempts;
                 }
             }
+            // --- Static fog overlay for weather_fog ---
+            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) && weather.weather_id->weather_fog ) {
+                wPrint.vdrops.clear();
+
+                const int width = iEnd.x - iStart.x;
+                const int height = iEnd.y - iStart.y;
+
+                for( int local_y = 0; local_y < height; ++local_y ) {
+                    for( int local_x = 0; local_x < width; ++local_x ) {
+                        const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
+                        const point map_point = screen_point + offset;
+                        const tripoint mapp( map_point, u.posz() );
+
+                        if( m.inbounds( mapp ) &&
+                            m.is_outside( mapp ) &&
+                            m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) ==
+                            visibility_type::CLEAR ) {
+                            wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+                        }
+                    }
+                }
+
+                // Initialize the fog overlay tiles for drawing
+                tilecontext->init_draw_weather( wPrint, weather.weather_id->tiles_animation );
+            }
+
             // don't bother calculating SCT if we won't show it
             if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
                 invalidate_main_ui_adaptor();
