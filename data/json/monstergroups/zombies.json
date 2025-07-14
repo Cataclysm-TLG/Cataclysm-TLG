@@ -725,12 +725,12 @@
     "//": "Steel mill monster spawns.",
     "monsters": [
       { "monster": "mon_null", "weight": 486 },
-      { "group": "GROUP_CIVILIANS_STANDARD", "weight": 100, "cost_multiplier": 0 },
+      { "monster": "mon_zombie_magnetic", "weight": 150 },
       { "monster": "mon_zombie", "weight": 1, "cost_multiplier": 7, "pack_size": [ 5, 10 ] },
       { "monster": "mon_zombie", "weight": 1, "cost_multiplier": 13, "pack_size": [ 15, 20 ] },
       { "monster": "mon_zombie", "weight": 1, "cost_multiplier": 20, "pack_size": [ 25, 30 ] },
       { "monster": "mon_zombie", "weight": 50, "cost_multiplier": 2 },
-      { "group": "GROUP_FERROUS", "weight": 170, "cost_multiplier": 2 },
+      { "group": "GROUP_FERROUS", "weight": 170, "cost_multiplier": 1 },
       { "group": "GROUP_ZOMBIE_SCORCHED", "weight": 100, "cost_multiplier": 1, "pack_size": [ 2, 6 ] },
       { "monster": "mon_zombie_fat", "weight": 45, "cost_multiplier": 2 },
       { "monster": "mon_zombie_fat", "weight": 3, "cost_multiplier": 7, "pack_size": [ 3, 5 ] },
@@ -746,8 +746,7 @@
       { "monster": "mon_zombie_technician", "weight": 1, "cost_multiplier": 12 },
       { "monster": "mon_feral_human_tool", "weight": 1, "cost_multiplier": 5 },
       { "monster": "mon_zombie_runner", "weight": 10, "cost_multiplier": 5, "pack_size": [ 1, 4 ] },
-      { "monster": "mon_zombie_brainless", "weight": 25 },
-      { "monster": "mon_zombie_slag_golem", "weight": 50, "starts": "60 days" }
+      { "monster": "mon_zombie_brainless", "weight": 25 }
     ]
   },
   {

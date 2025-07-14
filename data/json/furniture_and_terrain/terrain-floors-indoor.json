@@ -1772,8 +1772,8 @@
   {
     "type": "terrain",
     "id": "t_floor_slag_thin_in",
-    "name": "Thin Slag",
-    "description": "a thin layer of Solid Slag coats the concrete floor of the Steel Mill, thankfully it has cooled enough to make it walkable.",
+    "name": "thin slag",
+    "description": "A thin layer of slag coats the floor in rippling waves.  It has cooled completely solid.",
     "looks_like": "t_dirt_rocky",
     "symbol": "-",
     "color": "light_gray",
@@ -1792,8 +1792,8 @@
   {
     "type": "terrain",
     "id": "t_floor_slag_jagged",
-    "name": "Jagged Slag",
-    "description": "a Thick, Jagged layer of Solid Slag, due to the way it cooled it is hard to walk across safely",
+    "name": "jagged slag",
+    "description": "A thick, jagged layer of slag, cooled into spiky projections.",
     "looks_like": "t_dirt_rocky",
     "symbol": "^",
     "color": "dark_gray",
@@ -1812,8 +1812,8 @@
   {
     "type": "terrain",
     "id": "t_floor_slag_thick",
-    "name": "Thick Slag",
-    "description": "a Thick layer of Solid Slag, almost half a foot of Cold Slag",
+    "name": "thick slag",
+    "description": "A thick layer of slag piled up and cooled here, knee high to a grown man.",
     "looks_like": "t_dirt_rocky",
     "symbol": "^",
     "color": "dark_gray",

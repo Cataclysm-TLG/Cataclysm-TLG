@@ -767,8 +767,8 @@
   {
     "type": "terrain",
     "id": "t_floor_slag_thin_out",
-    "name": "paper thin Slag",
-    "description": "a paper thin layer of Solid Slag coats the ground just outside the Steel Mill. thankfully it has cooled ",
+    "name": "paper thin slag",
+    "description": "A thin splatter of slag coats the ground here, having cooled completely into something like pitted stone.",
     "looks_like": "t_dirt_rocky",
     "symbol": "-",
     "color": "white",
