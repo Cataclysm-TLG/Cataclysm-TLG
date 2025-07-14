@@ -2721,7 +2721,6 @@ target_handler::trajectory target_ui::run()
 
     map &here = get_map();
     // Load settings
-    unload_RAS_weapon = get_option<bool>( "UNLOAD_RAS_WEAPON" );
     snap_to_target = get_option<bool>( "SNAP_TO_TARGET" );
     if( mode == TargetMode::Turrets ) {
         // Due to how cluttered the display would become, disable it by default
