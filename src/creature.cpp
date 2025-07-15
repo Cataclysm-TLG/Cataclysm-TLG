@@ -2384,6 +2384,9 @@ int Creature::get_eff_per() const
 
 float Creature::get_dodge() const
 {
+    if( rng( 0, 99 ) == 0 ) {
+    return 0.0f;
+    }
     return get_dodge_base() + get_dodge_bonus();
 }
 float Creature::get_hit() const

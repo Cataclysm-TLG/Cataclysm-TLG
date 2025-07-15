@@ -2126,13 +2126,15 @@ void Character::on_try_dodge()
         return;
     }
 
-    // Each attempt consumes an available dodge
     consume_dodge_attempts();
 
     const int base_burn_rate = get_option<int>( STATIC( "PLAYER_BASE_STAMINA_BURN_RATE" ) );
-    const float dodge_skill_modifier = ( 20.0f - get_skill_level( skill_dodge ) ) / 20.0f;
-    burn_energy_legs( - std::floor( static_cast<float>( base_burn_rate ) * 6.0f *
-                                    dodge_skill_modifier ) );
+    const float dodge = get_skill_level( skill_dodge );
+    const float dodge_skill_modifier = 1.0f - dodge * 0.03f;
+
+    int burn = std::floor( static_cast<float>( base_burn_rate ) * 6.0f * dodge_skill_modifier );
+    burn = std::max( burn, 60 );
+    burn_energy_legs( -burn );
     set_activity_level( EXPLOSIVE_EXERCISE );
 }
 
