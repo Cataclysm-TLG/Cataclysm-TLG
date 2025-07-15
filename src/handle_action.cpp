@@ -164,6 +164,8 @@ static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
 static const trait_id trait_WAYFARER( "WAYFARER" );
 
+static const weather_type_id weather_fog( "fog" );
+
 static const zone_type_id zone_type_CHOP_TREES( "CHOP_TREES" );
 static const zone_type_id zone_type_CONSTRUCTION_BLUEPRINT( "CONSTRUCTION_BLUEPRINT" );
 static const zone_type_id zone_type_DISASSEMBLE( "DISASSEMBLE" );
@@ -343,69 +345,76 @@ input_context game::get_player_input( std::string &action )
             if( g->uquit == QUIT_EXIT ) {
                 break;
             }
-            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) && !weather.weather_id->weather_fog ) {
-                /*
-                Location to add rain drop animation bits! Since it refreshes w_terrain it can be added to the animation section easily
-                Get tile information from above's weather information:
-                WEATHER_DRIZZLE | WEATHER_LIGHT_DRIZZLE | WEATHER_RAINY | WEATHER_RAINSTORM | WEATHER_THUNDER | WEATHER_LIGHTNING = "weather_rain_drop"
-                WEATHER_FLURRIES | WEATHER_SNOW | WEATHER_SNOWSTORM = "weather_snowflake"
-                */
+            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) ) {
                 invalidate_main_ui_adaptor();
                 wPrint.vdrops.clear();
-                const int width = iEnd.x - iStart.x;
-                const int height = iEnd.y - iStart.y;
-                const int grid_size = width * height;
-                std::vector<bool> used( grid_size, false );
-                auto get_index = [=]( int x, int y ) {
-                    return y * width + x;
-                };
-                int attempts = 0;
-                while( wPrint.vdrops.size() < dropCount && attempts < dropCount * 5 ) {
-                    const int local_x = rng( 0, width - 1 );
-                    const int local_y = rng( 0, height - 1 );
-                    const int index = get_index( local_x, local_y );
-                    if( used[index] ) {
-                        ++attempts;
-                        continue;
-                    }
-                    const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
-                    const point map_point = screen_point + offset;
-                    const tripoint mapp( map_point, u.posz() );
-                    if( m.inbounds( mapp ) && m.is_outside( mapp ) &&
-                        m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) ==
-                        visibility_type::CLEAR &&
-                        !creatures.creature_at( mapp, true ) ) {
-                        // Suppress if a critter is there
-                        used[index] = true;
-                        wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
-                    }
-                    ++attempts;
-                }
+                wPrint.colGlyph = weather.weather_id->weather_animation.color;
+                wPrint.cGlyph = weather.weather_id->weather_animation.symbol;
+                wPrint.static_overlay = weather.weather_id->weather_animation.static_overlay;
+                wPrint.wtype = weather.weather_id;
+
+                const int width = iEnd.x + 1 - iStart.x;
+                const int height = iEnd.y + 1 - iStart.y;
+
+if( wPrint.static_overlay ) {
+    // For fog: full coverage of visible outdoor tiles
+
+    // Cache size values to avoid repeated calculation
+    const int max_x = width + iStart.x;
+    const int max_y = height + iStart.y;
+
+    for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
+        for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
+            const point screen_point( local_x, local_y );
+            const point map_point = screen_point + offset;
+            const tripoint mapp( map_point, u.posz() );
+
+            if( !m.inbounds( mapp ) ) {
+                continue;  // Skip invalid coords early
             }
-            // --- Static fog overlay for weather_fog ---
-            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) && weather.weather_id->weather_fog ) {
-                wPrint.vdrops.clear();
 
-                const int width = iEnd.x - iStart.x;
-                const int height = iEnd.y - iStart.y;
+            // Cache visibility lookup results in local variables to avoid multiple map lookups
+            const auto &vis_cache_row = visibility_cache[mapp.x];
+            const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
 
-                for( int local_y = 0; local_y < height; ++local_y ) {
-                    for( int local_x = 0; local_x < width; ++local_x ) {
+            if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
+                continue;  // Only outdoors and clear visibility
+            }
+
+            wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+        }
+    }
+} else {
+                    // For rain: randomized drops, no duplicates
+                    const int grid_size = width * height;
+                    std::vector<bool> used( grid_size, false );
+                    auto get_index = [=]( int x, int y ) {
+                        return y * width + x;
+                    };
+                    int attempts = 0;
+                    while( static_cast<int>( wPrint.vdrops.size() ) < dropCount && attempts < dropCount * 5 ) {
+                        const int local_x = rng( 0, width - 1 );
+                        const int local_y = rng( 0, height - 1 );
+                        const int index = get_index( local_x, local_y );
+                        if( used[index] ) {
+                            ++attempts;
+                            continue;
+                        }
+
                         const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
                         const point map_point = screen_point + offset;
                         const tripoint mapp( map_point, u.posz() );
 
                         if( m.inbounds( mapp ) &&
                             m.is_outside( mapp ) &&
-                            m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) ==
-                            visibility_type::CLEAR ) {
+                            m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) == visibility_type::CLEAR &&
+                            !creatures.creature_at( mapp, true ) ) {
+                            used[index] = true;
                             wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
                         }
+                        ++attempts;
                     }
                 }
-
-                // Initialize the fog overlay tiles for drawing
-                tilecontext->init_draw_weather( wPrint, weather.weather_id->tiles_animation );
             }
 
             // don't bother calculating SCT if we won't show it

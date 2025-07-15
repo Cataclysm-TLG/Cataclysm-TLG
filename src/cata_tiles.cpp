@@ -4846,7 +4846,6 @@ void cata_tiles::draw_weather_frame()
         // TODO: Z-level awareness if weather ever happens on anything but z-level 0.
         point p( vdrop.first, vdrop.second );
         if( !is_isometric() ) {
-            // currently in ASCII screen coordinates
             const std::optional temp = tile_to_player( p );
             if( !temp.has_value() ) {
                 continue;

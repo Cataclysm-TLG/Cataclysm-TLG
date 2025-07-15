@@ -66,6 +66,7 @@ struct weather_animation_t {
     float factor = 0.0f;
     nc_color color = c_white;
     uint32_t symbol = NULL_UNICODE;
+    bool static_overlay = false;
     std::string get_symbol() const {
         return utf32_to_utf8( symbol );
     }
