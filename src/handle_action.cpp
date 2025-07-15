@@ -377,8 +377,10 @@ if( wPrint.static_overlay ) {
             const auto &vis_cache_row = visibility_cache[mapp.x];
             const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
 
-            if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
-                continue;  // Only outdoors and clear visibility
+            if( m.is_outside( u.pos() ) && vis != visibility_type::CLEAR ) {
+                continue;  // While outside, everything we can see looks foggy.
+            } else if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
+                continue;  // While inside, only draw fog outside where we can see.
             }
 
             wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
