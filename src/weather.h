@@ -106,7 +106,7 @@ struct weather_printable {
     uint32_t cGlyph;
     bool static_overlay;
     std::string get_symbol() const {
-    return utf32_to_utf8( cGlyph );
+        return utf32_to_utf8( cGlyph );
     }
 };
 

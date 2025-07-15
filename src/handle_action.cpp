@@ -356,41 +356,38 @@ input_context game::get_player_input( std::string &action )
                 const int width = iEnd.x + 1 - iStart.x;
                 const int height = iEnd.y + 1 - iStart.y;
 
-if( wPrint.static_overlay ) {
-    // For fog: full coverage of visible outdoor tiles
+                if( wPrint.static_overlay ) {
+                    const int max_x = width + iStart.x;
+                    const int max_y = height + iStart.y;
 
-    // Cache size values to avoid repeated calculation
-    const int max_x = width + iStart.x;
-    const int max_y = height + iStart.y;
+                    for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
+                        for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
+                            const point screen_point( local_x, local_y );
+                            const point map_point = screen_point + offset;
+                            const tripoint mapp( map_point, u.posz() );
 
-    for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
-        for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
-            const point screen_point( local_x, local_y );
-            const point map_point = screen_point + offset;
-            const tripoint mapp( map_point, u.posz() );
+                            if( !m.inbounds( mapp ) ) {
+                                continue;
+                            }
 
-            if( !m.inbounds( mapp ) ) {
-                continue;  // Skip invalid coords early
-            }
+                            // Cache visibility lookup results in local variables to avoid multiple map lookups
+                            const auto &vis_cache_row = visibility_cache[mapp.x];
+                            const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
 
-            // Cache visibility lookup results in local variables to avoid multiple map lookups
-            const auto &vis_cache_row = visibility_cache[mapp.x];
-            const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
+                            if( m.is_outside( u.pos() ) && vis != visibility_type::CLEAR ) {
+                                continue;  // While outside, everything we can see looks foggy.
+                            } else if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
+                                continue;  // While inside, only draw fog outside where we can see.
+                            }
 
-            if( m.is_outside( u.pos() ) && vis != visibility_type::CLEAR ) {
-                continue;  // While outside, everything we can see looks foggy.
-            } else if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
-                continue;  // While inside, only draw fog outside where we can see.
-            }
-
-            wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
-        }
-    }
-} else {
+                            wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+                        }
+                    }
+                } else {
                     // For rain: randomized drops, no duplicates
                     const int grid_size = width * height;
                     std::vector<bool> used( grid_size, false );
-                    auto get_index = [=]( int x, int y ) {
+                    auto get_index = [ = ]( int x, int y ) {
                         return y * width + x;
                     };
                     int attempts = 0;
