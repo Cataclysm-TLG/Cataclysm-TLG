@@ -2768,7 +2768,7 @@
     "points": 3,
     "proficiencies": [ "prof_bow_basic", "prof_gunsmithing_spring", "prof_knives_familiar" ],
     "skills": [
-      { "level": 4, "name": "rifle" },
+      { "level": 4, "name": "archery" },
       { "level": 4, "name": "gun" },
       { "level": 2, "name": "swimming" },
       { "level": 3, "name": "survival" }
