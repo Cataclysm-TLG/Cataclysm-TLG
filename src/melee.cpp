@@ -1297,13 +1297,13 @@ int Character::get_spell_resist() const
     return round( get_skill_level( skill_spellcraft ) );
 }
 
-float Character::get_dodge() const
+float Character::get_dodge( bool critfail ) const
 {
     if( !can_try_dodge().success() ) {
         return 0.0f;
     }
 
-    float ret = Creature::get_dodge();
+    float ret = Creature::get_dodge( critfail );
     add_msg_debug( debugmode::DF_MELEE, "Base dodge %.1f", ret );
 
     // Chop in half if we are unable to move

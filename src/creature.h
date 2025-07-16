@@ -746,7 +746,7 @@ class Creature : public viewer
 
         virtual int get_armor_type( const damage_type_id &dt, bodypart_id bp ) const = 0;
 
-        virtual float get_dodge() const;
+        virtual float get_dodge( bool critfail = true ) const;
         virtual float get_melee() const = 0;
         virtual float get_hit() const;
 

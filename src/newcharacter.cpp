@@ -1301,7 +1301,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 description_str += "\n";
             }
             description_str +=
-                string_format( _( "\nDodge skill: %.f" ), u.get_dodge() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
                 + string_format( _( "\nMove cost while swimming: %i" ), u.swim_speed() )
                 + _( "\n\nAffects:" )
                 + colorize(
@@ -1360,7 +1360,8 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                                 COL_STAT_PENALTY );
             }
             description_str +=
-                string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
+                + string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"

@@ -2592,13 +2592,13 @@ float monster::stability_roll() const
     return stability;
 }
 
-float monster::get_dodge() const
+float monster::get_dodge( bool critfail ) const
 {
     if( has_effect( effect_downed ) ) {
         return 0.0f;
     }
 
-    float ret = Creature::get_dodge();
+    float ret = Creature::get_dodge( critfail );
     if( has_effect( effect_lightsnare ) || has_effect( effect_heavysnare ) ||
         has_effect( effect_beartrap ) || has_effect( effect_tied ) ) {
         ret /= 2;

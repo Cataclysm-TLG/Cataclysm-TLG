@@ -875,7 +875,7 @@ class Character : public Creature, public visitable
         /** Returns the player's dodge_roll to be compared against an aggressor's hit_roll() */
         float dodge_roll() const override;
         /** Returns Creature::get_dodge() modified by any Character effects */
-        float get_dodge() const override;
+        float get_dodge( bool critfail = true ) const override;
         /** in this case spell resistance is just the spellcraft skill for characters. */
         int get_spell_resist() const override;
         /** Handles the uncanny dodge bionic and effects, returns true if the player successfully dodges */
