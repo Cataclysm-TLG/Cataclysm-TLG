@@ -2438,16 +2438,6 @@ int construction::print_time( const catacurses::window &w, const point &p, int w
     return fold_and_print( w, p, width, col, text );
 }
 
-float construction::time_scale() const
-{
-    //incorporate construction time scaling
-    if( get_option<int>( "CONSTRUCTION_SCALING" ) == 0 ) {
-        return calendar::season_ratio();
-    } else {
-        return get_option<int>( "CONSTRUCTION_SCALING" ) / 100.0;
-    }
-}
-
 int construction::adjusted_time() const
 {
     int final_time = time;
@@ -2464,8 +2454,6 @@ int construction::adjusted_time() const
     } else if( assistants == 1 ) {
         final_time *= 0.75f;
     }
-
-    final_time *= time_scale();
 
     return final_time;
 }
