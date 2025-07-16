@@ -1091,10 +1091,6 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
         // Damage the vehicle in the fire.
     }
     if( can_burn ) {
-        if( ter.has_flag( ter_furn_flag::TFLAG_SWIMMABLE ) ) {
-            // Flames die quickly on water.
-            cur.set_field_age( cur.get_field_age() + 4_minutes );
-        }
         if( one_in( 180 ) ) {
             // Uncontained fires have a habit of randomly burning out.
             // This is not from wind, but lack of oxygen, etc.
@@ -1104,9 +1100,10 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
                 cur.set_field_age( cur.get_field_age() + 18_minutes );
             }
         }
+        // Special case fire vs rain as it shouldn't wipe it out instantly like being in water does.
         if( !sheltered ) {
-            if( precipitation > 0 && one_in( 4 - precipitation ) ) {
-                cur.set_field_age( cur.get_field_age() + 1_minutes * precipitation );
+            if( precipitation > 0 && one_in( std::max( 1, ( cur.get_field_intensity() + 1) - precipitation ) ) ) {
+                cur.set_field_age( cur.get_field_age() + 5_minutes * precipitation );
             }
         }
         // Humidity automatically adjusts for inside/outside, so no need to check.
