@@ -27,7 +27,7 @@
     "vision_night": 3,
     "harvest": "arachnid",
     "fear_triggers": [ "HURT", "FIRE" ],
-    "flags": [ "SEES", "HEARS", "CLIMBS", "STUMBLES", "PATH_AVOID_FIRE", "NO_BREED", "SMALL_HIDER", "PATH_AVOID_DANGER" ]
+    "flags": [ "SEES", "HEARS", "CLIMBS", "STUMBLES", "PATH_AVOID_FIRE", "NO_BREED", "SMALL_HIDER", "PATH_AVOID_DANGER", "NO_TRAIN" ]
   },
   {
     "id": "mon_dark_wyrm",

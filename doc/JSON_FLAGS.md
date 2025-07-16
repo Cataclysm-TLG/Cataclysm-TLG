@@ -1139,6 +1139,7 @@ Used to describe monster characteristics and set their properties and abilities.
 - ```NO_BREED``` Creature doesn't reproduce even though it has reproduction data.  Useful when using `copy-from` to make child versions of adult creatures.
 - ```NO_FUNG_DMG``` This monster can't be damaged by fungal spores and can't be fungalized either.
 - ```NO_NECRO``` This monster can't be revived by necros.  It will still rise on its own.
+- ```NO_TRAIN``` This monster will not train melee skills or proficiencies.
 - ```NULL``` Source use only.
 - ```PACIFIST``` Monster will never do melee attacks.  Useful for having them use grab without attacking the player.
 - ```PARALYZEVENOM``` This monster can apply `paralyzepoison` effect for 10 minutes.

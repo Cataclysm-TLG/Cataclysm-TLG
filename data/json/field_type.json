@@ -1907,7 +1907,19 @@
     "intensity_levels": [
       { "name": "mechanical fluid splatter", "color": "light_gray" },
       { "name": "mechanical fluid stain" },
-      { "name": "puddle of mechanical fluid", "color": "dark_gray" }
+      {
+        "name": "puddle of mechanical fluid",
+        "color": "dark_gray",
+        "effects": [
+          {
+            "effect_id": "slippery_terrain",
+            "intensity": 1,
+            "min_duration": "1 second",
+            "immune_in_vehicle": true,
+            "is_environmental": false
+          }
+        ]
+      }
     ],
     "description_affix": "covered_in",
     "is_splattering": true,
