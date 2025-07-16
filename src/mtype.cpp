@@ -118,6 +118,7 @@ mon_flag_id mon_flag_ACIDPROOF,
             mon_flag_NO_BREED,
             mon_flag_NO_FUNG_DMG,
             mon_flag_NO_NECRO,
+            mon_flag_NO_TRAIN,
             mon_flag_PACIFIST,
             mon_flag_PARALYZEVENOM,
             mon_flag_PATH_AVOID_DANGER,
@@ -244,6 +245,7 @@ void set_mon_flag_ids()
     mon_flag_NO_BREED = mon_flag_id( "NO_BREED" );
     mon_flag_NO_FUNG_DMG = mon_flag_id( "NO_FUNG_DMG" );
     mon_flag_NO_NECRO = mon_flag_id( "NO_NECRO" );
+    mon_flag_NO_TRAIN = mon_flag_id( "NO_TRAIN" );
     mon_flag_PACIFIST = mon_flag_id( "PACIFIST" );
     mon_flag_PARALYZEVENOM = mon_flag_id( "PARALYZEVENOM" );
     mon_flag_PATH_AVOID_DANGER = mon_flag_id( "PATH_AVOID_DANGER" );

@@ -740,7 +740,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         }
 
         // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-        if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() ) {
+        if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() && !t.has_flag( mon_flag_NO_TRAIN ) ) {
             melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null,
                          reach_attacking );
         }
@@ -982,7 +982,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             melee::melee_stats.damage_amount += dam;
 
             // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-            if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() ) {
+            if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() && !t.has_flag( mon_flag_NO_TRAIN ) ) {
                 melee_train( *this, 5, std::min( 10, skill_training_cap ), cur_weap, vector_id, reach_attacking );
             }
 
@@ -1033,9 +1033,11 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                get_total_melee_stamina_cost() );
 
     // Train weapon proficiencies
-    for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
-        for( const proficiency_id &prof : cat->category_proficiencies() ) {
-            practice_proficiency( prof, 1_seconds );
+    if( !t.has_flag( mon_flag_NO_TRAIN ) ) {
+        for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
+            for( const proficiency_id &prof : cat->category_proficiencies() ) {
+                practice_proficiency( prof, 1_seconds );
+            }
         }
     }
 
