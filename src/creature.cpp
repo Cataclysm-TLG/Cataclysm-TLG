@@ -2382,9 +2382,9 @@ int Creature::get_eff_per() const
     return 0;
 }
 
-float Creature::get_dodge() const
+float Creature::get_dodge( bool critfail ) const
 {
-    if( rng( 0, 99 ) == 0 ) {
+    if( critfail && rng( 0, 99 ) == 0 ) {
         return 0.0f;
     }
     return get_dodge_base() + get_dodge_bonus();
