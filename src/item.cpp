@@ -8513,7 +8513,12 @@ bool item::is_estorage() const
 
 bool item::is_estorable() const
 {
-    return has_flag( flag_E_STORABLE ) || is_book();
+    return has_flag( flag_E_STORABLE ) || has_flag( flag_E_STORABLE_EXCLUSIVE ) || is_book();
+}
+
+bool item::is_estorable_exclusive() const
+{
+    return has_flag( flag_E_STORABLE_EXCLUSIVE );
 }
 
 bool item::is_browsed() const

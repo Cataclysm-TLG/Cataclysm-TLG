@@ -364,6 +364,7 @@ class item : public visitable
 
         bool is_estorage() const;
         bool is_estorable() const;
+        bool is_estorable_exclusive() const;
         bool is_browsed() const;
         void set_browsed( bool browsed );
         /** @return if item can be copied as an e-file */
