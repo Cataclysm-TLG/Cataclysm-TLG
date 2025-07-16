@@ -552,12 +552,19 @@ static void field_processor_upgrade_intensity( const tripoint &, field_entry &cu
     }
 }
 
-static void field_processor_underwater_dissipation( const tripoint &, field_entry &cur,
+static void field_processor_underwater_dissipation( const tripoint &p, field_entry &cur,
         field_proc_data &pd )
 {
-    // Dissipate faster in water
+    // Dissipate faster in water, including rain.
     if( pd.map_tile.get_ter_t().has_flag( ter_furn_flag::TFLAG_SWIMMABLE ) ) {
         cur.mod_field_age( pd.cur_fd_type->underwater_age_speedup );
+        // Fire + rain is special cased in fire's section.
+    } else if( pd.cur_fd_type->id != fd_fire ) {
+        weather_manager &weather = get_weather();
+        int precip = static_cast<int>( weather.weather_id->precip );
+        if( precip > 0 && pd.here.is_outside( p ) ) {
+            cur.mod_field_age( pd.cur_fd_type->underwater_age_speedup * precip / 3 );
+        }
     }
 }
 
@@ -1084,10 +1091,6 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
         // Damage the vehicle in the fire.
     }
     if( can_burn ) {
-        if( ter.has_flag( ter_furn_flag::TFLAG_SWIMMABLE ) ) {
-            // Flames die quickly on water.
-            cur.set_field_age( cur.get_field_age() + 4_minutes );
-        }
         if( one_in( 180 ) ) {
             // Uncontained fires have a habit of randomly burning out.
             // This is not from wind, but lack of oxygen, etc.
@@ -1097,11 +1100,11 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
                 cur.set_field_age( cur.get_field_age() + 18_minutes );
             }
         }
+        // Special case fire vs rain as it shouldn't wipe it out instantly like being in water does.
         if( !sheltered ) {
-            // Humidity is alway high whenever precip is, so it's OK that humidity seems to
-            // matter more than precipitation - they're additive.
-            if( precipitation > 0 && one_in( 15 - precipitation ) ) {
-                cur.set_field_age( cur.get_field_age() + 1_turns * precipitation );
+            if( precipitation > 0 &&
+                one_in( std::max( 1, ( cur.get_field_intensity() + 1 ) - precipitation ) ) ) {
+                cur.set_field_age( cur.get_field_age() + 5_minutes * precipitation );
             }
         }
         // Humidity automatically adjusts for inside/outside, so no need to check.
@@ -1914,11 +1917,11 @@ void map::monster_in_field( monster &z )
             map &here = get_map();
             here.cast_field_spell_on_monster( z.pos_bub(), z, cur );
         }
-        if( cur_field_type == fd_sap ) {
+        if( cur_field_type == fd_sap && !z.is_immune_field( fd_sap ) ) {
             z.mod_moves( -cur.get_field_intensity() * 5 );
             mod_field_intensity( z.pos_bub(), cur.get_field_type(), -1 );
         }
-        if( cur_field_type == fd_sludge ) {
+        if( cur_field_type == fd_sludge && !z.is_immune_field( fd_sludge ) ) {
             z.mod_moves( -cur.get_field_intensity() * 300 );
             cur.set_field_intensity( 0 );
         }
