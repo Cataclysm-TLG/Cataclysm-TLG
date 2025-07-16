@@ -1105,10 +1105,8 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
             }
         }
         if( !sheltered ) {
-            // Humidity is alway high whenever precip is, so it's OK that humidity seems to
-            // matter more than precipitation - they're additive.
-            if( precipitation > 0 && one_in( 5 - precipitation ) ) {
-                cur.set_field_age( cur.get_field_age() + 5_turns * precipitation );
+            if( precipitation > 0 && one_in( 4 - precipitation ) ) {
+                cur.set_field_age( cur.get_field_age() + 1_minutes * precipitation );
             }
         }
         // Humidity automatically adjusts for inside/outside, so no need to check.

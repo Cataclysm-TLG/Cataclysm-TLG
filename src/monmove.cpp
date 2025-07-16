@@ -2016,7 +2016,9 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
 
     // Acid trail monsters leave... a trail of acid
     if( has_flag( mon_flag_ACIDTRAIL ) ) {
-        here.add_field( pos_bub(), fd_acid, 3 );
+        if( x_in_y( 1, 3 ) ) {
+            here.add_field( pos_bub(), fd_acid, 3 );
+        }
     }
 
     // Not all acid trail monsters leave as much acid. Every time this monster takes a step, there is a 1/5 chance it will drop a puddle.
@@ -2036,8 +2038,8 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
     }
 
     if( has_flag( mon_flag_SMALLSLUDGETRAIL ) ) {
-        if( rng( 0, 4 ) < 3 ) {
-            here.add_field( pos_bub(), fd_sludge, rng( 1, 2 ) );
+        if( one_in( 2 ) ) {
+            here.add_field( pos_bub(), fd_sludge, 1 );
         }
     }
 
