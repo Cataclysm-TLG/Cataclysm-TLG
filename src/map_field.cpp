@@ -558,7 +558,7 @@ static void field_processor_underwater_dissipation( const tripoint &p, field_ent
     // Dissipate faster in water, including rain.
     if( pd.map_tile.get_ter_t().has_flag( ter_furn_flag::TFLAG_SWIMMABLE ) ) {
         cur.mod_field_age( pd.cur_fd_type->underwater_age_speedup );
-    // Fire + rain is special cased in fire's section.
+        // Fire + rain is special cased in fire's section.
     } else if( pd.cur_fd_type->id != fd_fire ) {
         weather_manager &weather = get_weather();
         int precip = static_cast<int>( weather.weather_id->precip );
@@ -1102,7 +1102,8 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
         }
         // Special case fire vs rain as it shouldn't wipe it out instantly like being in water does.
         if( !sheltered ) {
-            if( precipitation > 0 && one_in( std::max( 1, ( cur.get_field_intensity() + 1) - precipitation ) ) ) {
+            if( precipitation > 0 &&
+                one_in( std::max( 1, ( cur.get_field_intensity() + 1 ) - precipitation ) ) ) {
                 cur.set_field_age( cur.get_field_age() + 5_minutes * precipitation );
             }
         }

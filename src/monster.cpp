@@ -3526,7 +3526,8 @@ void monster::process_effects()
     if( has_effect( effect_slippery_terrain ) && !is_immune_effect( effect_downed ) && !flies() &&
         !digging() && !has_effect( effect_downed ) ) {
         map &here = get_map();
-        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) && !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
+            !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
             int intensity = get_effect_int( effect_slippery_terrain );
             intensity -= 1;
             // ROAD tiles are hard, flat surfaces, and easier to slip on.
