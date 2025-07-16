@@ -568,8 +568,8 @@
     "warmth": 5,
     "material_thickness": 0.1,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "covers": [ "torso" ], "coverage": 98, "encumbrance": [ 4 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 4 ] } ]
+    "armor": [ { "covers": [ "torso" ], "coverage": 98, "encumbrance": 4 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 4 } ]
   },
   {
     "id": "longshirt_costume",
