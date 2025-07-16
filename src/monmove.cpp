@@ -89,6 +89,7 @@ static const itype_id itype_pressurized_tank( "pressurized_tank" );
 static const material_id material_iflesh( "iflesh" );
 
 static const species_id species_FUNGUS( "FUNGUS" );
+static const species_id species_PLANT( "PLANT" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
 
 static const ter_str_id ter_t_lava( "t_lava" );
@@ -110,8 +111,11 @@ bool monster::is_immune_field( const field_type_id &fid ) const
     if( fid == fd_web ) {
         return has_flag( mon_flag_WEBWALK );
     }
-    if( fid == fd_sludge || fid == fd_sap ) {
-        return flies();
+    if( fid == fd_sap ) {
+        return( in_species( species_PLANT ) || flies() );
+    }
+    if( fid == fd_sludge ) {
+        return ( flies() || has_flag( mon_flag_SLUDGEPROOF ) );
     }
     const field_type &ft = fid.obj();
     if( ft.has_fume ) {
@@ -2032,8 +2036,8 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
     }
 
     if( has_flag( mon_flag_SMALLSLUDGETRAIL ) ) {
-        if( one_in( 2 ) ) {
-            here.add_field( pos_bub(), fd_sludge, 1 );
+        if( rng( 0, 4 ) < 3 ) {
+            here.add_field( pos_bub(), fd_sludge, rng( 1, 2 ) );
         }
     }
 

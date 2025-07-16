@@ -3521,6 +3521,30 @@ void monster::process_effects()
             hp = 0;
         }
     }
+
+    // Slip on bile, or not.
+    if( has_effect( effect_slippery_terrain ) && !is_immune_effect( effect_downed ) && !flies() &&
+        !digging() && !has_effect( effect_downed ) ) {
+        map &here = get_map();
+        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) && !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+            int intensity = get_effect_int( effect_slippery_terrain );
+            intensity -= 1;
+            // ROAD tiles are hard, flat surfaces, and easier to slip on.
+            if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos() ) ) {
+                intensity++;
+            }
+            if( has_flag( mon_flag_STUMBLES ) ) {
+                intensity++;
+            }
+            int slipchance = ( round( get_speed() / 50 ) - get_dodge() / 2 );
+            if( intensity + slipchance > dice( 1, 12 ) ) {
+                add_effect( effect_downed, rng( 1_turns, 2_turns ) );
+                add_msg_if_player_sees( pos(), m_info, _( "The %1s slips and falls!" ),
+                                        name() );
+            }
+        }
+    }
+
     if( has_effect( effect_cramped_space ) ) {
         bool cramped = false;
         // return is intentionally discarded, sets cramped if appropriate
