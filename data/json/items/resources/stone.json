@@ -15,6 +15,7 @@
     "longest_side": "8 cm",
     "damage": { "damage_type": "stab", "amount": 7 },
     "stack_max": 1,
+    "stack_size": 1,
     "range": 10,
     "dispersion": 14,
     "loudness": 0,

@@ -6204,7 +6204,7 @@ std::optional<vehicle_stack::iterator> vehicle::add_item( vehicle_part &vp, cons
             return std::nullopt;
         }
     }
-    bool charge = itm.count_by_charges();
+    bool charge = itm.count_by_charges() && itm.type->stack_max != 1;
     vehicle_stack istack = get_items( vp );
     const int to_move = istack.amount_can_fit( itm );
     if( to_move == 0 || ( charge && to_move < itm.charges ) ) {
