@@ -371,15 +371,13 @@ std::string wstr_to_utf8( const std::wstring &wstr )
     strip_trailing_nulls( str );
     return str;
 #else
-    try {
-        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        std::string str = converter.to_bytes( wstr );
-        strip_trailing_nulls( str );
-        return str;
-    } catch( const std::exception &e ) {
-        debugmsg( "Invalid wide string in wstr_to_utf8()" );
-        return "[INVALID WCHAR]";
+    // Naive conversion assuming wchar_t values are all within ASCII
+    std::string str;
+    str.reserve( wstr.size() );
+    for( wchar_t wc : wstr ) {
+        str.push_back( static_cast<char>(wc) );
     }
+    return str;
 #endif
 }
 
