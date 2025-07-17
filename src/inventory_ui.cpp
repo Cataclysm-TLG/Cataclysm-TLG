@@ -4016,7 +4016,8 @@ void inventory_haul_selector::apply_selection( std::vector<item_location> &items
     }
     for( std::pair<inventory_entry *, int> count : counts ) {
         // count_by_charges items will be moved all at once anyway, this is just to make it look a bit better
-        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() && count.first->locations[0]->type->stack_max != 1 ) {
+        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() &&
+            count.first->locations[0]->type->stack_max != 1 ) {
             set_chosen_count( *count.first, inventory_multiselector::max_chosen_count );
         } else {
             set_chosen_count( *count.first, count.second );
