@@ -2210,8 +2210,8 @@ void options_manager::add_options_graphics()
              true
            );
 
-        add( "ANIMATION_RAIN", page_id, to_translation( "Rain animation" ),
-             to_translation( "If true, will display weather animations." ),
+        add( "ANIMATION_RAIN", page_id, to_translation( "Weather effects" ),
+             to_translation( "If true, will display visual weather effects." ),
              true
            );
 
@@ -2247,12 +2247,13 @@ void options_manager::add_options_graphics()
 
         add( "BLINK_SPEED", page_id, to_translation( "Blinking effects speed" ),
              to_translation( "The speed of every blinking effects in ms." ),
-             100, 5000, 300
+             100, 5000, 800
            );
 
         add( "FORCE_REDRAW", page_id, to_translation( "Force redraw" ),
              to_translation( "If true, forces the game to redraw at least once per turn." ),
-             true
+             to_translation( "May cause visual flickering with certain weather effects if enabled." ),
+             false
            );
     } );
 
