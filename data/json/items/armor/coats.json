@@ -379,7 +379,7 @@
     "color": "brown",
     "material_thickness": 2,
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 22, 28 ] },
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 22, 28 ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 85,
@@ -2222,7 +2222,7 @@
     "color": "brown",
     "material_thickness": 2,
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 22, 28 ] },
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 22, 28 ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 85,
@@ -2337,7 +2337,7 @@
     "color": "brown",
     "material_thickness": 1,
     "armor": [
-      { "covers": [ "torso" ], "coverage": 100, "encumbrance": [ 18, 24 ] },
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 18, 24 ] },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 85,
