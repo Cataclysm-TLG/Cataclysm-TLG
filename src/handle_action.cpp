@@ -354,7 +354,7 @@ input_context game::get_player_input( std::string &action )
 
                 const int width = iEnd.x + 1 - iStart.x;
                 const int height = iEnd.y + 1 - iStart.y;
-                #if defined(TILES)
+#if defined(TILES)
                 if( wPrint.static_overlay && use_tiles ) {
                     const int max_x = width + iStart.x;
                     const int max_y = height + iStart.y;
@@ -383,7 +383,7 @@ input_context game::get_player_input( std::string &action )
                         }
                     }
                 } else {
-                #endif
+#endif
                     if( !wPrint.static_overlay ) {
                         // For rain: randomized drops, no duplicates
                         const int grid_size = width * height;
