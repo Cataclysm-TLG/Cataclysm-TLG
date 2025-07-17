@@ -453,13 +453,16 @@ void pixel_minimap::render( const tripoint &center )
 
 void pixel_minimap::render_cache( const tripoint &center )
 {
-    // TODO: fix point types
     const tripoint_abs_sm sm_center = get_map().get_abs_sub() + coords::project_to<coords::sm>
                                       ( tripoint_bub_ms( center ) ).raw();
+
     const tripoint_rel_sm sm_offset {
         total_tiles_count.x / SEEX / 2,
         total_tiles_count.y / SEEY / 2, 0
     };
+
+    const int sm_offset_x_limit = sm_offset.x() + 1;
+    const int sm_offset_y_limit = sm_offset.y() + 1;
 
     point ms_offset;
     tripoint_bub_sm quotient;
@@ -472,14 +475,20 @@ void pixel_minimap::render_cache( const tripoint &center )
 
     for( const auto &elem : cache ) {
         if( !elem.second.touched ) {
-            continue;   // What you gonna do with all that junk?
+            continue;
         }
 
         const tripoint rel_pos = elem.first - sm_center.raw();
 
-        if( std::abs( rel_pos.x ) > sm_offset.x() + 1 ||
-            std::abs( rel_pos.y ) > sm_offset.y() + 1 ||
-            rel_pos.z != 0 ) {
+        const int abs_x = std::abs( rel_pos.x );
+        if( abs_x > sm_offset_x_limit ) {
+            continue;
+        }
+        const int abs_y = std::abs( rel_pos.y );
+        if( abs_y > sm_offset_y_limit ) {
+            continue;
+        }
+        if( rel_pos.z != 0 ) {
             continue;
         }
 
@@ -497,7 +506,6 @@ void pixel_minimap::render_critters( const tripoint &center )
     //handles the enemy faction red highlights
     //this value should be divisible by 200
     const int indicator_length = settings.beacon_blink_interval * 200; //default is 2000 ms, 2 seconds
-
     int flicker = 100;
     int mixture = 0;
 
@@ -512,38 +520,52 @@ void pixel_minimap::render_critters( const tripoint &center )
     const map &m = get_map();
     const level_cache &access_cache = m.access_cache( center.z );
 
-    const point start( center.x - total_tiles_count.x / 2, center.y - total_tiles_count.y / 2 );
-    const point beacon_size = {
-        std::max<int>( projector->get_tile_size().x *settings.beacon_size / 2, 2 ),
-        std::max<int>( projector->get_tile_size().y *settings.beacon_size / 2, 2 )
-    };
+    const int radius = std::max( total_tiles_count.x, total_tiles_count.y );
+    const tripoint_abs_ms center_abs = m.getglobal( center );
+    const tripoint_bub_ms center_bub = m.bub_from_abs( center_abs );
 
-    creature_tracker &creatures = get_creature_tracker();
-    for( int y = 0; y < total_tiles_count.y; y++ ) {
-        for( int x = 0; x < total_tiles_count.x; x++ ) {
-            const tripoint_bub_ms p = start + tripoint_bub_ms( x, y, center.z );
-            if( !m.inbounds( p ) ) {
-                // p might be out-of-bounds when peeking at submap boundary. Example: center=(64,59,-5), start=(4,-1) -> p=(4,-1,-5)
-                continue;
-            }
-            const lit_level lighting = access_cache.visibility_cache[p.x()][p.y()];
+    const auto creatures_in_area = m.get_creatures_in_radius( center_bub, radius );
 
-            if( lighting == lit_level::DARK || lighting == lit_level::BLANK ) {
-                continue;
-            }
+    // Cache beacon size once, no need to recalc per critter
+    const int beacon_size_px = std::max<int>( projector->get_tile_size().x * settings.beacon_size / 2,
+                               2 );
 
-            Creature *critter = creatures.creature_at( p, true );
-
-            if( critter == nullptr || !get_player_view().sees( *critter ) ) {
-                continue;
-            }
-
-            const point critter_pos = projector->get_tile_pos( { x, y }, total_tiles_count );
-            const SDL_Rect critter_rect = SDL_Rect{ critter_pos.x, critter_pos.y, beacon_size.x, beacon_size.y };
-            const SDL_Color critter_color = get_critter_color( critter, flicker, mixture );
-
-            draw_beacon( critter_rect, critter_color );
+    for( Creature *critter_ptr : creatures_in_area ) {
+        if( critter_ptr == nullptr ) {
+            continue;
         }
+        Creature &critter = *critter_ptr;
+
+        const tripoint p = critter.pos();
+        if( !m.inbounds( p ) ) {
+            continue;
+        }
+
+        const lit_level lighting = access_cache.visibility_cache[p.x][p.y];
+        if( lighting == lit_level::DARK || lighting == lit_level::BLANK ) {
+            continue;
+        }
+
+        if( !get_player_view().sees( critter ) ) {
+            continue;
+        }
+
+        const tripoint rel = p - center;
+        const point rel_xy = rel.xy() + total_tiles_count / 2;
+
+        if( rel_xy.x < 0 || rel_xy.y < 0 ||
+            rel_xy.x >= total_tiles_count.x || rel_xy.y >= total_tiles_count.y ) {
+            continue;
+        }
+
+        const point critter_pos = projector->get_tile_pos( rel_xy, total_tiles_count );
+        const SDL_Rect critter_rect = {
+            critter_pos.x, critter_pos.y,
+            beacon_size_px,
+            beacon_size_px
+        };
+        const SDL_Color critter_color = get_critter_color( &critter, flicker, mixture );
+        draw_beacon( critter_rect, critter_color );
     }
 }
 

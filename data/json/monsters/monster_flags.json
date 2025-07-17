@@ -289,7 +289,7 @@
     "type": "monster_flag",
     "//": "Creature can't drown and is unharmed by gas, smoke, or poison"
   },
-    {
+  {
     "id": "NO_TRAIN",
     "type": "monster_flag",
     "//": "This monster will not grant any skill or proficiency training when attacked in melee."

@@ -2251,8 +2251,7 @@ void options_manager::add_options_graphics()
            );
 
         add( "FORCE_REDRAW", page_id, to_translation( "Force redraw" ),
-             to_translation( "If true, forces the game to redraw at least once per turn." ),
-             to_translation( "May cause visual flickering with certain weather effects if enabled." ),
+             to_translation( "If true, forces the game to redraw at least once per turn.  May cause issues with weather effects." ),
              false
            );
     } );
