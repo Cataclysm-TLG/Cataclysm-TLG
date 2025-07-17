@@ -9,11 +9,15 @@
 #include "wcwidth.h"
 
 #if defined(_WIN32)
-#if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU
-#include "platform_win.h"
+#   if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU
+#       include "platform_win.h"
+#   endif
+#   include "mmsystem.h"
+#else
+#   include <locale>
+#   include <codecvt>
 #endif
-#include "mmsystem.h"
-#endif
+
 
 //copied from SDL2_ttf code
 //except type changed from unsigned to uint32_t
@@ -346,13 +350,15 @@ std::wstring utf8_to_wstr( const std::string &str )
     strip_trailing_nulls( wstr );
     return wstr;
 #else
-    std::size_t sz = std::mbstowcs( nullptr, str.c_str(), 0 );
-    cata_assert( sz != static_cast<size_t>( -1 ) );
-    std::wstring wstr( sz + 1, '\0' );
-    [[maybe_unused]] const size_t converted = std::mbstowcs( wstr.data(), str.c_str(), sz );
-    cata_assert( converted == sz );
-    strip_trailing_nulls( wstr );
-    return wstr;
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        std::wstring wstr = converter.from_bytes( str );
+        strip_trailing_nulls( wstr );
+        return wstr;
+    } catch( const std::exception &e ) {
+        debugmsg( "Invalid UTF-8 in utf8_to_wstr(): \"%s\"", str );
+        return L"[INVALID UTF-8]";
+    }
 #endif
 }
 
@@ -365,13 +371,15 @@ std::string wstr_to_utf8( const std::wstring &wstr )
     strip_trailing_nulls( str );
     return str;
 #else
-    std::size_t sz = std::wcstombs( nullptr, wstr.c_str(), 0 );
-    cata_assert( sz != static_cast<size_t>( -1 ) );
-    std::string str( sz + 1, '\0' );
-    [[maybe_unused]] const size_t converted = std::wcstombs( str.data(), wstr.c_str(), sz );
-    cata_assert( converted == sz );
-    strip_trailing_nulls( str );
-    return str;
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        std::string str = converter.to_bytes( wstr );
+        strip_trailing_nulls( str );
+        return str;
+    } catch( const std::exception &e ) {
+        debugmsg( "Invalid wide string in wstr_to_utf8()" );
+        return "[INVALID WCHAR]";
+    }
 #endif
 }
 
