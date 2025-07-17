@@ -1249,7 +1249,7 @@ double Character::crit_chance( float roll_hit, float target_dodge, const item &w
 
     /** @EFFECT_BASHING increases critical chance with bashing weapons */
     /** @EFFECT_CUTTING increases critical chance with cutting weapons */
-    /** @EFFECT_STABBING increases critical chance with piercing weapons */
+    /** @EFFECT_STABBING increases critical chance with stabbing weapons */
     /** @EFFECT_UNARMED increases critical chance with unarmed weapons */
     float sk = get_skill_level( weap.melee_skill() );
     if( has_active_bionic( bio_cqb ) ) {
