@@ -1258,7 +1258,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + string_format( _( "\nCarry weight: %.1f %s" ), convert_weight( u.weight_capacity() ),
                                  weight_units() )
                 + string_format( _( "\nResistance to knock down effect when hit: %.1f" ), u.stability_roll() )
-                + string_format( _( "\nIntimidation skill: %i" ), u.intimidation() )
+                + string_format( _( "\nIntimidation: %i" ), u.intimidation() )
                 + string_format( _( "\nMaximum oxygen: %i" ), u.get_oxygen_max() )
                 + string_format( _( "\nShout volume: %i" ), u.get_shout_volume() )
                 + string_format( _( "\nLifting strength: %i" ), u.get_lift_str() )
@@ -1307,17 +1307,18 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + colorize(
                     _( "\n- Effectiveness of lockpicking"
                        "\n- Chance of avoiding or escaping grabs and traps"
+                       "\n- Attack speed and accuracy in melee combat"
+                       "\n- Small bonus to melee critical hit chance"
+                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Effectiveness of disarming traps"
                        "\n- Chance of success when manipulating with gun modifications"
                        "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Attack speed and chance of critical hits in melee combat"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing speed"
                        "\n- Aiming speed"
                        "\n- Speed and effectiveness of chopping wood with powered tools"
                        "\n- Chance to get better results when butchering corpses or cutting items"
                        "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Damage from falling" ),
                     c_green );
         }
@@ -1331,7 +1332,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
                               ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
-                + string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + colorize( string_format( _( "\nCrafting bonus: %2d%%" ), u.get_int() ),
                             COL_STAT_BONUS )
                 + _( "\n\nAffects:" )
@@ -1361,12 +1362,15 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
             }
             description_str +=
                 string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
-                + string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                + string_format( _( "\nNight vision bonus: %.1f" ), ( u.get_per() / 2.8 ) )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
                        "\n- Precision and reliability with ranged attacks"
-                       "\n- Sight distance on game map and overmap"
+                       "\n- Large bonus to melee critical hit chance"
+                       "\n- Reduces chance for stabbing weapons to get stuck"
+                       "\n- Sight distance on overmap"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing accuracy"
                        "\n- Disinfecting your own wounds and using first aid on others"
