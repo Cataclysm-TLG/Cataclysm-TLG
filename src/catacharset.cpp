@@ -361,6 +361,7 @@ std::wstring utf8_to_wstr( const std::string &str )
         return L"[INVALID UTF-8]";
     }
 #else
+    (void)str;  // Avoid unused parameter warning
     debugmsg( "utf8_to_wstr is not supported on this platform" );
     return L"[UNSUPPORTED]";
 #endif
@@ -388,6 +389,7 @@ std::string wstr_to_utf8( const std::wstring &wstr )
         return "[INVALID WCHAR]";
     }
 #else
+    (void)wstr;  // Avoid unused parameter warning
     debugmsg( "wstr_to_utf8 is not supported on this platform" );
     return "[UNSUPPORTED]";
 #endif
