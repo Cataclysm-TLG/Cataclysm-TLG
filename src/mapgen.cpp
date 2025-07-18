@@ -7085,7 +7085,6 @@ computer *map::add_computer( const tripoint_bub_ms &p, const std::string &name, 
     place_on_submap->set_computer( l, computer( name, security, p.raw() ) );
     return place_on_submap->get_computer( l );
 }
-
 /**
  * Rotates this map, and all of its contents, by the specified multiple of 90
  * degrees.
@@ -7122,30 +7121,8 @@ void map::rotate( int turns )
         // Translate bubble -> global -> current map.
         const point_bub_ms old( bub_from_abs( get_map().getglobal( np.pos_bub() ).xy() ) );
 
-        point old( np_rc.sub_pos );
-        if( np_rc.om_sub.x % 2 != 0 ) {
-            old.x += SEEX;
-        }
-        if( np_rc.om_sub.y % 2 != 0 ) {
-            old.y += SEEY;
-        }
-
-        const point new_pos = old.rotate( turns, { SEEX * 2, SEEY * 2 } );
-        if( setpos_safe ) {
-            const point local_sq = bub_from_abs( sq ).xy().raw();
-            // setpos can't be used during mapgen, but spawn_at_precise clips position
-            // to be between 0-11,0-11 and teleports NPCs when used inside of update_mapgen
-            // calls
-            const tripoint new_global_sq = sq - local_sq + new_pos;
-            np.setpos( get_map().bub_from_abs( new_global_sq ) );
-        } else {
-            // OK, this is ugly: we remove the NPC from the whole map
-            // Then we place it back from scratch
-            // It could be rewritten to utilize the fact that rotation shouldn't cross overmaps
-            shared_ptr_fast<npc> npc_ptr = overmap_buffer.remove_npc( np.getID() );
-            np.spawn_at_precise( tripoint_abs_ms( getabs( tripoint( new_pos, sq.z ) ) ) );
-            overmap_buffer.insert_npc( npc_ptr );
-        }
+        const point_bub_ms new_pos( old.raw().rotate( turns, {SEEX * 2, SEEY * 2} ) );
+        np.spawn_at_precise( getglobal( tripoint_bub_ms( new_pos, sq.z() ) ) );
     }
 
     clear_vehicle_level_caches();
@@ -7160,10 +7137,10 @@ void map::rotate( int turns )
     for( int z_level = bottom_level; z_level <= top_level; z_level++ ) {
         clear_vehicle_list( z_level );
 
-        submap *pz = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_zero, z_level } );
-        submap *pse = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south_east, z_level } );
-        submap *pe = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_east, z_level } );
-        submap *ps = get_submap_at_grid( tripoint_rel_sm{ point_rel_sm_south, z_level } );
+        submap *pz = get_submap_at_grid( { point_rel_sm_zero, z_level } );
+        submap *pse = get_submap_at_grid( { point_rel_sm_south_east, z_level } );
+        submap *pe = get_submap_at_grid( { point_rel_sm_east, z_level } );
+        submap *ps = get_submap_at_grid( { point_rel_sm_south, z_level } );
         if( pz == nullptr || pse == nullptr || pe == nullptr || ps == nullptr ) {
             debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", point_zero.x,
                       point_zero.y );
@@ -7233,9 +7210,9 @@ void map::rotate( int turns )
             if( queued_point_sm.y() % 2 != 0 ) {
                 old.y() += SEEY;
             }
-            const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
-            queued_points[queued_point.first] = getglobal( tripoint_bub_ms( new_pos,
-                                                queued_point.second.z() ) );
+            const point_bub_ms new_pos( old.raw().rotate( turns, {SEEX * 2, SEEY * 2} ) );
+            queued_points[queued_point.first] = tripoint_abs_ms( getabs( tripoint_bub_ms( new_pos,
+                                                queued_point.second.z() ) ) );
         }
     }
 }
