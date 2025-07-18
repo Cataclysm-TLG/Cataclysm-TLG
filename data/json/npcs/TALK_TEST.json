@@ -271,7 +271,7 @@
       {
         "text": "This is a days since Cataclysm 30 test response.",
         "topic": "TALK_DONE",
-        "condition": { "math": [ "time_since('cataclysm', 'unit':'days') >= 30" ] }
+        "condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 30" ] }
       },
       {
         "text": "This is a season summer test response.",
@@ -951,7 +951,7 @@
       {
         "text": "time_since_cataclysm in days > 3",
         "topic": "TALK_DONE",
-        "condition": { "math": [ "time_since('cataclysm', 'unit':'days') > 3" ] }
+        "condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') > 3" ] }
       },
       {
         "text": "This is a time since u_var test response for > 3_days.",

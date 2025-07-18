@@ -1215,6 +1215,8 @@ std::function<double( dialogue & )> time_eval( char /* scope */,
             ret = to_turns<double>( calendar::turn - calendar::turn_zero );
         } else if( val_str == "cataclysm" ) {
             ret = to_turns<double>( calendar::start_of_cataclysm - calendar::turn_zero );
+        } else if( val_str == "fall_of_civilization" ) {
+            ret = to_turns<double>( calendar::fall_of_civilization - calendar::turn_zero );
         } else {
             ret = to_turns<double>(
                       _read_from_string<time_duration>( val_str, time_duration::units ) );
@@ -1248,6 +1250,8 @@ std::function<double( dialogue & )> time_since_eval( char /* scope */,
         std::string const val_str = val.str( d );
         if( val_str == "cataclysm" ) {
             ret = to_turns<double>( calendar::turn - calendar::start_of_cataclysm );
+        } else if( val_str == "fall_of_civilization" ) {
+            ret = to_turns<double>( calendar::turn - calendar::fall_of_civilization );
         } else if( val_str == "midnight" ) {
             ret = to_turns<double>( time_past_midnight( calendar::turn ) );
         } else if( val_str == "noon" ) {

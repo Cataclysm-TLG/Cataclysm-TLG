@@ -21,7 +21,7 @@
       "run_eocs": [
         {
           "id": "EOC_ROBOFAC_HQ_SURFACE_SANDBAGS",
-          "condition": { "math": [ "time_since('cataclysm', 'unit':'days') >= 20" ] },
+          "condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 20" ] },
           "effect": [
             { "mapgen_update": "window_sandbags_meteorology1", "om_terrain": "robofachq_meteorology1" },
             { "mapgen_update": "window_sandbags_meteorology2", "om_terrain": "robofachq_meteorology2" },
@@ -31,7 +31,7 @@
         {
           "id": "EOC_ROBOFAC_HQ_PLACE_ANCILLA_FORTRESS",
           "condition": {
-            "and": [ { "math": [ "ancilla_fortress_placed", "!=", "1" ] }, { "math": [ "time_since('cataclysm', 'unit':'days') >= 45" ] } ]
+            "and": [ { "math": [ "ancilla_fortress_placed", "!=", "1" ] }, { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 45" ] } ]
           },
           "effect": [
             { "mapgen_update": "robofachq_ancilla_fortress_basic", "om_terrain": "robofachq_meteorology2" },
@@ -41,7 +41,7 @@
         {
           "id": "EOC_ROBOFAC_HQ_PLACE_ANCILLA_BAR",
           "condition": {
-            "and": [ { "math": [ "ancilla_bar_placed", "!=", "1" ] }, { "math": [ "time_since('cataclysm', 'unit':'days') >= 60" ] } ]
+            "and": [ { "math": [ "ancilla_bar_placed", "!=", "1" ] }, { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 60" ] } ]
           },
           "effect": [
             { "mapgen_update": "robofachq_ancilla_bar_basic", "om_terrain": "robofachq_subcc_a2" },
@@ -60,7 +60,7 @@
             "and": [
               { "math": [ "ancilla_bar_exists", "==", "1" ] },
               { "math": [ "ancilla_autodoc_placed", "!=", "1" ] },
-              { "math": [ "time_since('cataclysm', 'unit':'days') >= 80" ] }
+              { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 80" ] }
             ]
           },
           "effect": [

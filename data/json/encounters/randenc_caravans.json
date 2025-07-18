@@ -55,7 +55,7 @@
       {
         "set_condition": "random_enc_condition",
         "condition": {
-          "and": [ { "not": { "is_season": "winter" } }, "is_day", { "math": [ "time_since('cataclysm', 'unit':'days') < 45" ] } ]
+          "and": [ { "not": { "is_season": "winter" } }, "is_day", { "math": [ "time_since('fall_of_civilization', 'unit':'days') < 45" ] } ]
         }
       },
       {
