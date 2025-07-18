@@ -1104,7 +1104,7 @@ void field_processor_fd_fire( const tripoint &p, field_entry &cur, field_proc_da
         if( !sheltered ) {
             if( precipitation > 0 &&
                 one_in( std::max( 1, ( cur.get_field_intensity() + 1 ) - precipitation ) ) ) {
-                cur.set_field_age( cur.get_field_age() + 5_minutes * precipitation );
+                cur.set_field_age( cur.get_field_age() + 18_minutes * precipitation );
             }
         }
         // Humidity automatically adjusts for inside/outside, so no need to check.
@@ -1931,17 +1931,14 @@ void map::monster_in_field( monster &z )
                 return;
             }
             // TODO: Replace the section below with proper json values
-            if( z.made_of_any( Creature::cmat_flesh ) ) {
+            if( z.made_of( material_vegetable ) ) {
                 dam += 2;
             }
-            if( z.made_of( material_vegetable ) ) {
-                dam += 3;
-            }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
-                dam += 20;
+                dam += 15;
             }
             if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -20;
+                dam += -15;
             }
             if( z.flies() ) {
                 dam -= 15;
@@ -1951,7 +1948,7 @@ void map::monster_in_field( monster &z )
             if( cur.get_field_intensity() == 1 ) {
                 dam += rng( 0, 3 );
             } else if( cur.get_field_intensity() == 2 ) {
-                dam += rng( 1, 6 );
+                dam += rng( 0, 5 );
                 if( !z.flies() && !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
@@ -1960,7 +1957,7 @@ void map::monster_in_field( monster &z )
                     z.add_effect( effect_onfire, 1_turns * rng( dam / 2, dam * 2 ) );
                 }
             } else if( cur.get_field_intensity() == 3 ) {
-                dam += rng( 1, 12 );
+                dam += rng( 0, 7 );
                 if( !z.flies() && !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.4 );
@@ -1986,21 +1983,7 @@ void map::monster_in_field( monster &z )
             if( z.made_of_any( Creature::cmat_flesh ) && !z.has_flag( mon_flag_NO_BREATHE ) ) {
                 // Ferals can power through it, but even they have limits.
                 if( !z.has_effect( effect_stunned ) && ( !z.in_species( species_FERAL ) || one_in( 3 ) ) ) {
-                    z.add_effect( effect_stunned, cur.get_field_intensity() * rng( 1_turns, 5_turns ) );
-                    if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
-                        z.morale -= ( 2 * cur.get_field_intensity() );
-                    }
-                    if( z.type->has_anger_trigger( mon_trigger::HURT ) ) {
-                        z.anger += ( 2 * cur.get_field_intensity() );
-                    }
-                }
-                // Cyborg monsters ignore it because of the protective lenses CBM.
-                if( z.has_flag( mon_flag_SEES ) && z.made_of_any( Creature::cmat_flesh ) &&
-                    !z.in_species( species_INSECT ) &&
-                    !z.in_species( species_INSECT_FLYING ) && !z.in_species( species_CENTIPEDE ) &&
-                    !z.in_species( species_SPIDER ) && !z.in_species( species_CYBORG ) &&
-                    !z.has_effect( effect_blind ) ) {
-                    z.add_effect( effect_blind, cur.get_field_intensity() * rng( 1_turns, 5_turns ) );
+                    z.add_effect( effect_stunned, cur.get_field_intensity() * rng( 1_turns, 4_turns ) );
                     if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
                         z.morale -= ( 2 * cur.get_field_intensity() );
                     }
@@ -2009,8 +1992,22 @@ void map::monster_in_field( monster &z )
                     }
                 }
             }
-
+            // Cyborg monsters ignore it because of the protective lenses CBM.
+            if( z.has_flag( mon_flag_SEES ) && z.made_of_any( Creature::cmat_flesh ) &&
+                !z.in_species( species_INSECT ) &&
+                !z.in_species( species_INSECT_FLYING ) && !z.in_species( species_CENTIPEDE ) &&
+                !z.in_species( species_SPIDER ) && !z.in_species( species_CYBORG ) &&
+                !z.has_effect( effect_blind ) ) {
+                z.add_effect( effect_blind, cur.get_field_intensity() * rng( 1_turns, 4_turns ) );
+                if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
+                    z.morale -= ( 2 * cur.get_field_intensity() );
+                }
+                if( z.type->has_anger_trigger( mon_trigger::HURT ) ) {
+                    z.anger += ( 2 * cur.get_field_intensity() );
+                }
+            }
         }
+
         if( cur_field_type == fd_relax_gas ) {
             if( z.made_of_any( Creature::cmat_fleshnveg ) && !z.has_flag( mon_flag_NO_BREATHE ) ) {
                 z.add_effect( effect_stunned, rng( cur.get_field_intensity() * 1_turns,
@@ -2057,13 +2054,13 @@ void map::monster_in_field( monster &z )
                 return;
             }
             if( z.made_of( material_vegetable ) ) {
-                dam += 3;
+                dam += 2;
             }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
-                dam += 20;
+                dam += 15;
             }
             if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -5;
+                dam += -15;
             }
             dam += rng( 0, 8 );
             z.mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
@@ -2085,13 +2082,13 @@ void map::monster_in_field( monster &z )
                 return;
             }
             if( z.made_of( material_vegetable ) ) {
-                dam += 3;
+                dam += 2;
             }
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
-                dam += 20;
+                dam += 15;
             }
             if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -5;
+                dam += -15;
             }
 
             if( cur.get_field_intensity() == 1 ) {
