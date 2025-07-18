@@ -15,6 +15,7 @@
 #   include "mmsystem.h"
 #else
 #   include <locale>
+#   include <codecvt>
 #endif
 
 
@@ -326,14 +327,12 @@ std::string base64_decode( const std::string &str )
     return decoded_data;
 }
 
-#if defined(_WIN32)
 static void strip_trailing_nulls( std::wstring &str )
 {
     while( !str.empty() && str.back() == '\0' ) {
         str.pop_back();
     }
 }
-#endif
 
 static void strip_trailing_nulls( std::string &str )
 {
@@ -351,13 +350,15 @@ std::wstring utf8_to_wstr( const std::string &str )
     strip_trailing_nulls( wstr );
     return wstr;
 #else
-    // Simple ASCII-safe fallback for non-Windows platforms
-    std::wstring wstr;
-    wstr.reserve( str.size() );
-    for( unsigned char c : str ) {
-        wstr.push_back( static_cast<wchar_t>( c ) );
+    try {
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        std::wstring wstr = converter.from_bytes( str );
+        strip_trailing_nulls( wstr );
+        return wstr;
+    } catch( const std::exception &e ) {
+        debugmsg( "Invalid UTF-8 in utf8_to_wstr(): \"%s\"", str );
+        return L"[INVALID UTF-8]";
     }
-    return wstr;
 #endif
 }
 
@@ -370,15 +371,15 @@ std::string wstr_to_utf8( const std::wstring &wstr )
     strip_trailing_nulls( str );
     return str;
 #else
+    // Naive conversion assuming wchar_t values are all within ASCII
     std::string str;
     str.reserve( wstr.size() );
     for( wchar_t wc : wstr ) {
-        str.push_back( static_cast<char>( wc ) );
+        str.push_back( static_cast<char>(wc) );
     }
     return str;
 #endif
 }
-
 
 std::string wstr_to_native( const std::wstring &wstr )
 {
