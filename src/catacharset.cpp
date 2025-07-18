@@ -325,6 +325,7 @@ std::string base64_decode( const std::string &str )
     return decoded_data;
 }
 
+#if defined(_WIN32) || defined(__GLIBCXX__)
 static void strip_trailing_nulls( std::wstring &str )
 {
     while( !str.empty() && str.back() == '\0' ) {
@@ -338,6 +339,7 @@ static void strip_trailing_nulls( std::string &str )
         str.pop_back();
     }
 }
+#endif
 
 std::wstring utf8_to_wstr( const std::string &str )
 {
