@@ -70,7 +70,7 @@
     "revert_to_itype": "bot_gasbomb_hack",
     "starting_ammo": { "tear_gas_payload": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3, "acid": 10}
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_grenade_hack",

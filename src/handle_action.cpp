@@ -384,38 +384,38 @@ input_context game::get_player_input( std::string &action )
                     }
                 }
 #endif
-                    if( !wPrint.static_overlay ) {
-                        // For rain: randomized drops, no duplicates
-                        const int grid_size = width * height;
-                        std::vector<bool> used( grid_size, false );
-                        auto get_index = [ = ]( int x, int y ) {
-                            return y * width + x;
-                        };
-                        int attempts = 0;
-                        while( static_cast<int>( wPrint.vdrops.size() ) < dropCount && attempts < dropCount * 5 ) {
-                            const int local_x = rng( 0, width - 1 );
-                            const int local_y = rng( 0, height - 1 );
-                            const int index = get_index( local_x, local_y );
-                            if( used[index] ) {
-                                ++attempts;
-                                continue;
-                            }
-
-                            const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
-                            const point map_point = screen_point + offset;
-                            const tripoint mapp( map_point, u.posz() );
-
-                            if( m.inbounds( mapp ) &&
-                                m.is_outside( mapp ) &&
-                                m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) == visibility_type::CLEAR &&
-                                !creatures.creature_at( mapp, true ) ) {
-                                used[index] = true;
-                                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
-                            }
+                if( !wPrint.static_overlay ) {
+                    // For rain: randomized drops, no duplicates
+                    const int grid_size = width * height;
+                    std::vector<bool> used( grid_size, false );
+                    auto get_index = [ = ]( int x, int y ) {
+                        return y * width + x;
+                    };
+                    int attempts = 0;
+                    while( static_cast<int>( wPrint.vdrops.size() ) < dropCount && attempts < dropCount * 5 ) {
+                        const int local_x = rng( 0, width - 1 );
+                        const int local_y = rng( 0, height - 1 );
+                        const int index = get_index( local_x, local_y );
+                        if( used[index] ) {
                             ++attempts;
+                            continue;
                         }
+
+                        const point screen_point = point( local_x + iStart.x, local_y + iStart.y );
+                        const point map_point = screen_point + offset;
+                        const tripoint mapp( map_point, u.posz() );
+
+                        if( m.inbounds( mapp ) &&
+                            m.is_outside( mapp ) &&
+                            m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) == visibility_type::CLEAR &&
+                            !creatures.creature_at( mapp, true ) ) {
+                            used[index] = true;
+                            wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+                        }
+                        ++attempts;
                     }
                 }
+            }
             // don't bother calculating SCT if we won't show it
             if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
                 invalidate_main_ui_adaptor();

@@ -1484,7 +1484,7 @@
     "fungalize_into": "mon_spider_fungus",
     "upgrades": { "half_life": 32, "into": "mon_spider_trapdoor_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "VENOM", "GRABS", "CAN_DIG", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 7}
+    "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 7 }
   },
   {
     "id": "mon_spider_trapdoor_s",

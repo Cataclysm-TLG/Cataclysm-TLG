@@ -457,7 +457,7 @@ static std::vector<std::string> recipe_info(
                           _( "Impossible" ) );
 
     if( recp.has_flag( flag_NO_MORALE_OK ) && !guy.has_morale_to_craft() ) {
-    oss << string_format( _( "<color_light_blue>Low morale</color> will not prevent this craft.\n" ) );
+        oss << string_format( _( "<color_light_blue>Low morale</color> will not prevent this craft.\n" ) );
     }
 
     const inventory &crafting_inv = guy.crafting_inventory();
