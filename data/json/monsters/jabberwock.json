@@ -29,7 +29,7 @@
     "upgrades": { "half_life": 42, "into": "mon_flesh_golem" },
     "zombify_into": "mon_meat_cocoon_small",
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "ATTACKMON", "POISON" ],
-    "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 1 }
+    "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 1, "acid": 5 }
   },
   {
     "id": "mon_flesh_golem",
@@ -61,7 +61,7 @@
     "upgrades": { "half_life": 60, "into": "mon_jabberwock" },
     "zombify_into": "mon_meat_cocoon_med",
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "ATTACKMON", "POISON" ],
-    "armor": { "bash": 6, "cut": 4, "bullet": 3, "electric": 1 }
+    "armor": { "bash": 6, "cut": 4, "bullet": 3, "electric": 1, "acid": 5 }
   },
   {
     "id": "mon_jabberwock",
@@ -92,6 +92,6 @@
     "harvest": "jabberwock",
     "dissect": "dissect_mon_jabberwock",
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "DESTROYS", "ATTACKMON", "POISON", "NEVER_WANDER" ],
-    "armor": { "bash": 12, "cut": 8, "bullet": 6, "electric": 3 }
+    "armor": { "bash": 12, "cut": 8, "bullet": 6, "electric": 3, "acid": 5 }
   }
 ]

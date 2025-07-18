@@ -63,7 +63,7 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   },
   {
     "id": "yellow_maintenance_check",
@@ -124,7 +124,7 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   },
   {
     "id": "blue_maintenance_check",
@@ -184,7 +184,7 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   },
   {
     "id": "blue_maintenance_check2",
@@ -270,7 +270,7 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   },
   {
     "id": "green_researcher_check",
@@ -345,7 +345,7 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   },
   {
     "id": "black_security_check",
@@ -446,6 +446,6 @@
     "extend": { "flags": [ "COLDPROOF", "PRIORITIZE_TARGETS" ] },
     "death_drops": { "groups": [ [ "robots", 4 ], [ "eyebot", 1 ] ] },
     "death_function": { "corpse_type": "BROKEN" },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 15 }
   }
 ]

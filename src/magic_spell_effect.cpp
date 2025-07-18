@@ -67,7 +67,10 @@
 #include "vehicle.h"
 #include "vpart_position.h"
 
+static const damage_type_id damage_acid( "acid" );
+
 static const efftype_id effect_airborne( "airborne" );
+static const efftype_id effect_corroding( "corroding" );
 static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_teleglow( "teleglow" );
@@ -514,7 +517,7 @@ static void add_effect_to_target( const tripoint_bub_ms &target, const spell &sp
 {
     const int dur_moves = sp.duration( caster );
     const int effect_intensity = sp.effect_intensity( caster );
-    const time_duration dur_td = time_duration::from_moves( dur_moves );
+    time_duration dur_td = time_duration::from_moves( dur_moves );
     creature_tracker &creatures = get_creature_tracker();
     Creature *const critter = creatures.creature_at<Creature>( target );
     Character *const guy = creatures.creature_at<Character>( target );
@@ -560,6 +563,13 @@ static void add_effect_to_target( const tripoint_bub_ms &target, const spell &sp
     }
     // Either no parts were listed or this was a monster. Either way, just apply the effect to them generally.
     if( !bodypart_effected ) {
+        // A lazy way to deal with acid for now.
+        if( spell_effect == effect_corroding ) {
+            dur_td -= 1_seconds * critter->as_monster()->get_armor_type( damage_acid, bodypart_id( "torso" ) );
+            if( dur_td < 1_seconds ) {
+                return;
+            }
+        }
         critter->add_effect( spell_effect, dur_td );
     }
 }

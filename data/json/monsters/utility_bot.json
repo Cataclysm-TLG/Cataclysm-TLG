@@ -36,7 +36,7 @@
       "PATH_AVOID_DANGER",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 10, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 10, "cut": 10, "bullet": 8, "acid": 20 }
   },
   {
     "id": "mon_grocerybot_busted",
@@ -72,7 +72,7 @@
       "PAY_BOT",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 4, "cut": 5, "bullet": 4 }
+    "armor": { "bash": 4, "cut": 5, "bullet": 4, "acid": 15 }
   },
   {
     "id": "mon_hazmatbot",
@@ -110,7 +110,7 @@
       "PATH_AVOID_DANGER",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 10, "cut": 12, "bullet": 10 }
+    "armor": { "bash": 10, "cut": 12, "bullet": 10, "acid": 25 }
   },
   {
     "id": "mon_molebot",
@@ -147,7 +147,7 @@
       "PATH_AVOID_DANGER",
       "STUN_IMMUNE"
     ],
-    "armor": { "cut": 12, "bullet": 10 }
+    "armor": { "cut": 12, "bullet": 10, "acid": 15 }
   },
   {
     "//": "nurse_bot and nurse_bot_defective look very similar, part of the trick is figuring out which one is the good one.  So the sprites should probably look pretty similar to not give it away immediately",
@@ -186,7 +186,7 @@
       "PACIFIST",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 8, "cut": 10, "bullet": 8, "acid": 15 }
   },
   {
     "//": "nurse_bot and nurse_bot_defective look very similar, part of the trick is figuring out which one is the good one.  So the sprites should probably look pretty similar to not give it away immediately",
@@ -230,6 +230,6 @@
       "INTERIOR_AMMO",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 8, "cut": 10, "bullet": 8, "acid": 15 }
   }
 ]

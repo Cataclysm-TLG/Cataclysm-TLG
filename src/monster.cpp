@@ -2668,15 +2668,15 @@ float monster::fall_damage_mod() const
 
     switch( type->size ) {
         case creature_size::tiny:
-            return 0.2f;
+            return 0.25f;
         case creature_size::small:
-            return 0.6f;
-        case creature_size::medium:
             return 1.0f;
-        case creature_size::large:
-            return 1.4f;
-        case creature_size::huge:
+        case creature_size::medium:
             return 2.0f;
+        case creature_size::large:
+            return 2.5f;
+        case creature_size::huge:
+            return 4.0f;
         case creature_size::num_sizes:
             debugmsg( "ERROR: Invalid Creature size class." );
             return 0.0f;
@@ -2701,7 +2701,7 @@ int monster::impact( const int force, const tripoint &p )
     }
 
     const int bash_damage = std::max( 0.0f, force * mod - get_armor_type( damage_bash,
-                                      bodypart_id( "torso" ) ) );
+                                      bodypart_id( "torso" ) ) * 0.8f );
     apply_damage( nullptr, bodypart_id( "torso" ), bash_damage );
     total_dealt += force * mod;
 

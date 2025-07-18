@@ -30,7 +30,7 @@
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
     "flags": [ "SEES", "NOHEAD", "ELECTRONIC", "COLDPROOF", "BIOLOGICALPROOF", "IMMOBILE", "NO_BREATHE", "STUN_IMMUNE" ],
-    "armor": { "bash": 2, "cut": 5, "bullet": 2 }
+    "armor": { "bash": 2, "cut": 5, "bullet": 2, "acid": 10 }
   },
   {
     "id": "mon_robofac_camspy",
@@ -75,7 +75,7 @@
       "PACIFIST",
       "KEEP_DISTANCE"
     ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 8, "cut": 10, "bullet": 8, "acid": 10 }
   },
   {
     "id": "mon_robofac_skittergun",
@@ -135,6 +135,6 @@
       "PATH_AVOID_DANGER",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 12, "cut": 12, "bullet": 10, "electric": 5 }
+    "armor": { "bash": 12, "cut": 12, "bullet": 10, "electric": 5, "acid": 25 }
   }
 ]

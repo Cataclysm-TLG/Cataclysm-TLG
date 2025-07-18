@@ -263,7 +263,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "EAT_CARRION", 60 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "EATS", "CLIMBS", "STUMBLES", "CORNERED_FIGHTER", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 5, "cut": 7, "bullet": 6 }
+    "armor": { "bash": 5, "cut": 7, "acid": 5, "bullet": 6 }
   },
   {
     "id": "mon_plague_nymph",
@@ -322,7 +322,7 @@
     "anger_triggers": [ "FRIEND_ATTACKED", "PLAYER_WEAK" ],
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "EAT_CARRION", 60 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "EATS", "CLIMBS", "STUMBLES", "PATH_AVOID_DANGER", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 5, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 5, "cut": 10, "acid": 5, "bullet": 8 }
   },
   {
     "id": "mon_giant_cockroach",
@@ -361,7 +361,7 @@
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "EAT_CARRION", 60 ] ],
     "fear_triggers": [ "BRIGHT_LIGHT" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "EATS", "PATH_AVOID_DANGER", "SMALL_HIDER", "CORNERED_FIGHTER", "EATS" ],
-    "armor": { "bash": 5, "cut": 10, "bullet": 8 }
+    "armor": { "bash": 5, "cut": 10, "acid": 5, "bullet": 8 }
   },
   {
     "id": "mon_giant_cockroach_nymph",
@@ -446,7 +446,7 @@
     "upgrades": { "age_grow": 42, "into": "mon_bee_mega" },
     "fungalize_into": "mon_bee_fungus",
     "flags": [ "SEES", "SMELLS", "FLIES", "STUMBLES", "SWARMS", "GROUP_MORALE", "CANPLAY", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 4, "cut": 6, "bullet": 5 }
+    "armor": { "bash": 4, "cut": 6, "acid": 6, "bullet": 5 }
   },
   {
     "id": "mon_bee_mega",
@@ -464,7 +464,7 @@
     "fungalize_into": "mon_bee_mega_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 4, "cut": 6, "bullet": 5, "electric": 1 }
+    "armor": { "bash": 4, "cut": 6, "bullet": 5, "acid": 6, "electric": 1 }
   },
   {
     "id": "mon_centipede_small",
@@ -504,7 +504,7 @@
     "anger_triggers": [ "PLAYER_CLOSE" ],
     "fear_triggers": [ "HURT" ],
     "upgrades": { "age_grow": 30, "into_group": "GROUP_CENTIPEDE_ADULT" },
-    "armor": { "bash": 1, "cut": 3, "stab": 2, "bullet": 2 },
+    "armor": { "bash": 1, "cut": 3, "stab": 2, "acid": 4, "bullet": 2 },
     "delete": { "flags": [ "GRABS" ] }
   },
   {
@@ -558,7 +558,7 @@
     "dissect": "dissect_insect_sample_small",
     "upgrades": { "age_grow": 45, "into_group": "GROUP_CENTIPEDE_GIANT" },
     "flags": [ "CLIMBS", "SEES", "GRABS", "SMELLS", "KEENNOSE", "HEARS", "GOODHEARING", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 10, "cut": 25, "stab": 14, "bullet": 12 }
+    "armor": { "bash": 10, "cut": 25, "stab": 14, "acid": 6, "bullet": 12 }
   },
   {
     "id": "mon_centipede_larva",
@@ -652,7 +652,7 @@
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "upgrades": { "age_grow": 45, "into_group": "GROUP_CENTIPEDE_MOM" },
     "delete": { "flags": [ "KEENNOSE", "GOODHEARING" ] },
-    "armor": { "bash": 10, "cut": 25, "stab": 14, "bullet": 12, "electric": 1 }
+    "armor": { "bash": 10, "cut": 25, "stab": 14, "bullet": 12, "acid": 6, "electric": 1 }
   },
   {
     "id": "mon_centipede_mega",
@@ -714,7 +714,7 @@
     "harvest": "arachnid_centipede_mega",
     "dissect": "dissect_insect_sample_large",
     "flags": [ "SEES", "SMELLS", "KEENNOSE", "HEARS", "GOODHEARING", "PATH_AVOID_DANGER", "DESTROYS", "PUSH_MON", "PUSH_VEH" ],
-    "armor": { "bash": 25, "cut": 35, "stab": 15, "bullet": 45, "electric": 3 }
+    "armor": { "bash": 25, "cut": 35, "stab": 15, "bullet": 45, "acid": 12, "electric": 3 }
   },
   {
     "id": "mon_dragonfly_naiad",
@@ -817,7 +817,8 @@
     "anger_triggers": [ "PLAYER_WEAK", "STALK" ],
     "fear_triggers": [ "HURT", "FIRE" ],
     "upgrades": { "age_grow": 60, "into": "mon_dragonfly_mega" },
-    "flags": [ "SWARMS", "HEARS", "SEES", "FLIES", "GRABS", "PATH_AVOID_DANGER", "EATS" ]
+    "flags": [ "SWARMS", "HEARS", "SEES", "FLIES", "GRABS", "PATH_AVOID_DANGER", "EATS" ],
+    "armor": { "acid": 4 }
   },
   {
     "id": "mon_dragonfly_mega",
@@ -861,7 +862,7 @@
     "upgrades": { "half_life": 10, "into_group": "GROUP_EMPTY" },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "SWIMS", "BASHES", "PUSH_MON", "PUSH_VEH", "EATS", "PATH_AVOID_DANGER" ],
-    "armor": { "electric": 2 }
+    "armor": { "electric": 2, "acid": 6 }
   },
   {
     "id": "mon_firefly",
@@ -955,7 +956,8 @@
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "fear_triggers": [ "PLAYER_CLOSE", "HURT", "FIRE" ],
     "upgrades": { "age_grow": 42, "into": "mon_fly_mega" },
-    "flags": [ "SEES", "SMELLS", "FLIES", "STUMBLES", "HIT_AND_RUN", "CANPLAY", "PATH_AVOID_DANGER", "EATS" ]
+    "flags": [ "SEES", "SMELLS", "FLIES", "STUMBLES", "HIT_AND_RUN", "CANPLAY", "PATH_AVOID_DANGER", "EATS" ],
+    "armor": { "acid": 8 }
   },
   {
     "id": "mon_fly_larva",
@@ -1001,7 +1003,8 @@
       },
       [ "EAT_CARRION", 120 ]
     ],
-    "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH", "EATS" ] }
+    "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH", "EATS" ] },
+    "armor": { "acid": 10 }
   },
   {
     "id": "mon_mosquito_small",
@@ -1016,7 +1019,8 @@
     "dodge": 2,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "half_life": 20, "into": "mon_mosquito_giant" },
-    "extend": { "flags": [ "NO_BREED" ] }
+    "extend": { "flags": [ "NO_BREED" ] },
+    "armor": { "acid": 4 }
   },
   {
     "id": "mon_mosquito_giant",
@@ -1053,7 +1057,8 @@
     "fear_triggers": [ "HURT", "FIRE" ],
     "upgrades": { "half_life": 28, "into": "mon_mosquito_mega" },
     "special_attacks": [ { "id": "mosquito_bite_big" } ],
-    "flags": [ "SEES", "SMELLS", "STUMBLES", "FLIES", "HIT_AND_RUN", "PATH_AVOID_DANGER" ]
+    "flags": [ "SEES", "SMELLS", "STUMBLES", "FLIES", "HIT_AND_RUN", "PATH_AVOID_DANGER" ],
+    "armor": { "acid": 6 }
   },
   {
     "id": "mon_mosquito_larva",
@@ -1161,7 +1166,7 @@
     "fungalize_into": "mon_spider_fungus",
     "upgrades": { "half_life": 10, "into_group": "GROUP_SPIDER_CELLAR_GIANT" },
     "flags": [ "SEES", "SMELLS", "HEARS", "GRABS", "WEBWALK", "CLIMBS", "HARDTOSHOOT", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 1, "cut": 5, "acid": 3, "bullet": 2 }
+    "armor": { "bash": 1, "cut": 5, "acid": 7, "bullet": 2 }
   },
   {
     "id": "mon_spider_cellar_giant_s",
@@ -1294,7 +1299,7 @@
     "upgrades": { "half_life": 15, "into_group": "GROUP_EMPTY" },
     "extend": { "anger_triggers": [ "HOSTILE_SEEN" ], "flags": [ "BASHES" ] },
     "dissect": "dissect_spider_sample_large",
-    "armor": { "bullet": 2, "bash": 5, "cut": 7, "stab": 7, "acid": 5, "electric": 3 }
+    "armor": { "bullet": 2, "bash": 5, "cut": 7, "stab": 7, "acid": 7, "electric": 3 }
   },
   {
     "id": "mon_spider_cellar_leg",
@@ -1427,7 +1432,7 @@
     },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH", "FLAMMABLE" ] },
     "upgrades": { "half_life": 15, "into_group": "GROUP_EMPTY" },
-    "armor": { "cut": 3, "bullet": 2, "electric": 1 }
+    "armor": { "cut": 3, "bullet": 2, "electric": 1, "acid": 6 }
   },
   {
     "id": "mon_spider_trapdoor_small",
@@ -1479,7 +1484,7 @@
     "fungalize_into": "mon_spider_fungus",
     "upgrades": { "half_life": 32, "into": "mon_spider_trapdoor_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "VENOM", "GRABS", "CAN_DIG", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 4, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 7}
   },
   {
     "id": "mon_spider_trapdoor_s",
@@ -1570,7 +1575,7 @@
     "upgrades": { "half_life": 30, "into": "mon_spider_web_mega" },
     "trap_avoids": [ "tr_sinkhole" ],
     "flags": [ "SEES", "SMELLS", "HEARS", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 2, "cut": 6, "bullet": 5 }
+    "armor": { "bash": 2, "cut": 6, "bullet": 5, "acid": 7 }
   },
   {
     "id": "mon_spider_web_mega",
@@ -1588,7 +1593,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 5, "condition": { "not": { "u_has_effect": "maimed_leg" } } } ],
     "upgrades": { "half_life": 20, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 1 }
+    "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 1, "acid": 7 }
   },
   {
     "id": "mon_spider_web_s",
@@ -1661,7 +1666,7 @@
     "fungalize_into": "mon_spider_fungus",
     "upgrades": { "half_life": 24, "into": "mon_spider_widow_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "BADVENOM", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 2, "cut": 4, "bullet": 3 }
+    "armor": { "bash": 2, "cut": 4, "bullet": 3, "acid": 6 }
   },
   {
     "id": "mon_spider_widow_mega",
@@ -1753,7 +1758,7 @@
     "upgrades": { "half_life": 22, "into": "mon_spider_wolf_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "CLIMBS", "PATH_AVOID_DANGER" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 4, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 6 }
   },
   {
     "id": "mon_spider_wolf_giant_s",
@@ -1898,7 +1903,7 @@
       "SMALL_HIDER"
     ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 1, "cut": 6, "stab": 4 }
+    "armor": { "bash": 1, "cut": 6, "stab": 4, "acid": 6 }
   },
   {
     "id": "mon_wasp_small_guard",
@@ -1928,7 +1933,7 @@
     "upgrades": { "age_grow": 30, "into": "mon_wasp_mega" },
     "fungalize_into": "mon_wasp_queen_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "electric": 3 }
+    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "electric": 3, "acid": 8 }
   },
   {
     "id": "mon_wasp",
@@ -1989,7 +1994,7 @@
     "fear_triggers": [ "HURT", "FIRE" ],
     "fungalize_into": "mon_wasp_fungus",
     "flags": [ "SEES", "SMELLS", "HEARS", "FLIES", "SWARMS", "GROUP_MORALE", "CANPLAY", "HARDTOSHOOT", "PATH_AVOID_DANGER", "EATS" ],
-    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12 }
+    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "acid": 8 }
   },
   {
     "id": "mon_wasp_guard",
@@ -2005,7 +2010,7 @@
     "delete": { "fear_triggers": [ "HURT", "FIRE" ] },
     "fungalize_into": "mon_wasp_guard_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "electric": 2 }
+    "armor": { "bash": 5, "cut": 14, "stab": 12, "bullet": 12, "electric": 2, "acid": 8 }
   },
   {
     "id": "mon_wasp_mega",
@@ -2054,7 +2059,7 @@
     "fungalize_into": "mon_wasp_mega_fungus",
     "delete": { "flags": [ "HARDTOSHOOT", "FLIES" ] },
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 8, "cut": 30, "stab": 18, "bullet": 22, "electric": 4 }
+    "armor": { "bash": 8, "cut": 30, "stab": 18, "bullet": 22, "electric": 4, "acid": 8 }
   },
   {
     "id": "mon_dermatik_larva",
@@ -2112,7 +2117,7 @@
     "fear_triggers": [ "HURT", "FIRE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "flags": [ "SEES", "HEARS", "SMELLS", "FLIES", "PATH_AVOID_DANGER", "CANPLAY", "GRABS" ],
-    "armor": { "bash": 2, "cut": 5 }
+    "armor": { "bash": 2, "cut": 5, "acid": 4 }
   },
   {
     "id": "mon_dermatik_midwife",
@@ -2239,7 +2244,7 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 4, "cut": 5, "bullet": 3, "electric": 2 }
+    "armor": { "bash": 4, "cut": 5, "bullet": 3, "electric": 2, "acid": 4 }
   },
   {
     "id": "mon_ant_acid_small",
@@ -2529,7 +2534,7 @@
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT", "PLAYER_CLOSE" ],
     "fungalize_into": "mon_ant_fungus",
     "flags": [ "SMELLS", "QUEEN", "CLIMBS", "PATH_AVOID_DANGER", "BASHES", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 2, "electric": 1 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 2, "electric": 1, "acid": 8 }
   },
   {
     "id": "mon_ant_soldier",
@@ -2570,7 +2575,7 @@
     "fungalize_into": "mon_ant_fungus",
     "upgrades": { "age_grow": 42, "into": "mon_ant_soldier_mega" },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 10, "cut": 12, "bullet": 8, "electric": 4 }
+    "armor": { "bash": 10, "cut": 12, "bullet": 8, "electric": 4, "acid": 8 }
   },
   {
     "id": "mon_ant_soldier_mega",
@@ -2678,7 +2683,7 @@
       [ "GRAZE", 120 ]
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "STUMBLES", "PATH_AVOID_DANGER", "EATS" ],
-    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 1 }
+    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 1, "acid": 5 }
   },
   {
     "id": "mon_locust_mega",
@@ -2707,7 +2712,7 @@
       { "id": "smash", "throw_strength": 36, "cooldown": 30 }
     ],
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 3 }
+    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 3, "acid": 6 }
   },
   {
     "id": "mon_locust_nymph",
@@ -2789,7 +2794,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "biosignature": { "biosig_item": "honeydew", "biosig_timer": 600 },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "SWARMS", "SMALL_HIDER" ],
-    "armor": { "bash": 2, "cut": 5, "bullet": 3 }
+    "armor": { "bash": 2, "cut": 5, "bullet": 3, "acid": 2 }
   },
   {
     "id": "mon_mantis_small",
@@ -2805,7 +2810,7 @@
     "extend": { "flags": [ "NO_BREED" ] },
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "age_grow": 42, "into": "mon_mantis_giant" },
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 1 }
+    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 1, "acid": 2 }
   },
   {
     "id": "mon_mantis_giant",
@@ -2854,7 +2859,7 @@
     ],
     "upgrades": { "age_grow": 42, "into": "mon_mantis_mega" },
     "flags": [ "SEES", "HEARS", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 2 }
+    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 2, "acid": 4 }
   },
   {
     "id": "mon_mantis_nymph",
@@ -2920,7 +2925,7 @@
     ],
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 3 }
+    "armor": { "bash": 10, "cut": 16, "bullet": 13, "electric": 3, "acid": 10 }
   },
   {
     "id": "mon_mole_cricket",
@@ -2967,7 +2972,7 @@
     "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
     "fear_triggers": [ "FIRE" ],
     "flags": [ "SEES", "CAN_DIG", "BORES", "PUSH_VEH", "HEARS", "KEENNOSE", "PATH_AVOID_DANGER", "SMELLS" ],
-    "armor": { "bash": 15, "cut": 18, "bullet": 20, "electric": 2 }
+    "armor": { "bash": 15, "cut": 18, "bullet": 20, "electric": 2, "acid": 15 }
   },
   {
     "id": "mon_mole_cricket_nymph",
@@ -3027,7 +3032,7 @@
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER" ],
     "upgrades": { "half_life": 28, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 3, "cut": 10, "bullet": 15, "electric": 3 }
+    "armor": { "bash": 3, "cut": 10, "bullet": 15, "electric": 3, "acid": 12 }
   },
   {
     "id": "mon_lady_bug_giant",
@@ -3073,7 +3078,7 @@
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "PATH_AVOID_DANGER" ],
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_beetle" ],
-    "armor": { "bash": 7, "cut": 20, "bullet": 30, "electric": 3 }
+    "armor": { "bash": 7, "cut": 20, "bullet": 30, "electric": 3, "acid": 14 }
   },
   {
     "id": "mon_lady_bug_larva",
@@ -3096,7 +3101,7 @@
     "dissect": "dissect_insect_sample_single",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "age_grow": 30, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 1, "cut": 2, "stab": 2 }
+    "armor": { "bash": 1, "cut": 2, "stab": 2, "acid": 4 }
   },
   {
     "id": "mon_grasshopper_small",
@@ -3159,7 +3164,7 @@
       }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS" ],
-    "armor": { "bash": 5, "cut": 10 }
+    "armor": { "bash": 5, "cut": 10, "acid": 4 }
   },
   {
     "id": "mon_grasshopper_nymph",
@@ -3417,7 +3422,7 @@
     ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "flags": [ "SEES", "SMELLS", "IMMOBILE", "DIGS", "RANGED_ATTACKER", "ATTACK_LOWER" ],
-    "armor": { "bash": 4, "cut": 10, "bullet": 10 }
+    "armor": { "bash": 4, "cut": 10, "bullet": 10, "acid": 12 }
   },
   {
     "id": "mon_antlion_giant",
@@ -3504,7 +3509,7 @@
     "fear_triggers": [ "FIRE", "PLAYER_CLOSE" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "SMALL_HIDER" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 1, "cut": 3, "bullet": 2 }
+    "armor": { "bash": 1, "cut": 3, "bullet": 2, "acid": 2 }
   },
   {
     "id": "mon_strider_nymph",
@@ -3824,7 +3829,7 @@
     "special_attacks": [ [ "GRAZE", 100 ] ],
     "flags": [ "SEES", "HEARS", "KEENNOSE", "PATH_AVOID_DANGER", "SMELLS", "EATS" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 15, "cut": 18, "bullet": 20, "electric": 2 }
+    "armor": { "bash": 15, "cut": 18, "bullet": 20, "electric": 2, "acid": 2 }
   },
   {
     "id": "mon_woodlouse_manca",
@@ -3904,7 +3909,7 @@
     "fear_triggers": [ "FIRE" ],
     "flags": [ "SEES", "HEARS", "GOODHEARING", "SWIMS", "WATER_CAMOUFLAGE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 7, "cut": 9, "bullet": 10, "electric": 2 }
+    "armor": { "bash": 7, "cut": 9, "bullet": 10, "electric": 2, "acid": 2 }
   },
   {
     "id": "mon_water_scorpion",
@@ -3940,7 +3945,7 @@
     "fear_triggers": [ "HURT" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "AQUATIC" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 1, "cut": 3, "bullet": 2 }
+    "armor": { "bash": 1, "cut": 3, "bullet": 2, "acid": 2 }
   },
   {
     "id": "mon_water_scorpion_larva",
@@ -4047,7 +4052,7 @@
     "harvest": "arachnid",
     "dissect": "dissect_insect_sample_single",
     "flags": [ "CLIMBS", "HEARS", "POISON", "SEES", "SMELLS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 3, "electric": 2, "acid": 3, "heat": 6 }
+    "armor": { "bash": 6, "cut": 8, "bullet": 3, "electric": 2, "acid": 4, "heat": 6 }
   },
   {
     "id": "mon_ant_fire_queen",
@@ -4082,6 +4087,6 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true },
     "flags": [ "CLIMBS", "HEARS", "QUEEN", "SEES", "SMELLS", "PATH_AVOID_DANGER", "BASHES", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 8, "cut": 10, "bullet": 4, "electric": 1, "acid": 6, "heat": 12 }
+    "armor": { "bash": 8, "cut": 10, "bullet": 4, "electric": 1, "acid": 15, "heat": 12 }
   }
 ]
