@@ -10,6 +10,7 @@
     "difficulty": 4,
     "time": "12 m",
     "batch_time_factors": [ 80, 4 ],
+    "flags": [ "NO_MORALE_OK" ],
     "book_learn": [
       [ "textbook_survival", 4 ],
       [ "atomic_survival", 4 ],
@@ -122,7 +123,7 @@
     "skill_used": "cooking",
     "time": "1 m 30 s",
     "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [
       [ [ "coffee_substitute", 1 ] ],
       [ [ "milk_standard", 1, "LIST" ], [ "lf_milk_standard", 1, "LIST" ], [ "milk_powder", 1 ], [ "con_milk", 1 ] ]
@@ -138,7 +139,7 @@
     "skill_used": "cooking",
     "time": "1 m 30 s",
     "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [
       [ [ "coffee_substitute", 1 ] ],
       [ [ "sugar_standard_half", 1, "LIST" ] ],
@@ -154,7 +155,7 @@
     "skill_used": "cooking",
     "time": "1 m 30 s",
     "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [ [ [ "sugar_standard_half", 1, "LIST" ] ], [ [ "milk_standard", 1, "LIST" ], [ "lf_milk_standard", 1, "LIST" ] ] ]
   },
   {
@@ -166,7 +167,7 @@
     "skill_used": "cooking",
     "time": "6 m",
     "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [
       [ [ "protein_powder", 1 ] ],
       [ [ "sugar_standard_half", 1, "LIST" ] ],

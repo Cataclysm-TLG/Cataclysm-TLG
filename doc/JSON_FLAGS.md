@@ -1331,12 +1331,13 @@ See [Character](#character)
 - ```BLIND_HARD``` Possible to craft with little to no light, but difficult.
 - ```FULL_MAGAZINE``` Crafted or deconstructed items from this recipe will have fully-charged magazines.
 - ```NEED_FULL_MAGAZINE``` If this recipe requires magazines, it needs one that is full.
-- ```NO_RESIZE``` This clothes you crafted spawn unfitted
+- ```NO_RESIZE``` This clothes you crafted spawn unfitted.
+- ```NO_MORALE_OK``` Low morale can slow this craft up to 50%, but on its own won't prevent it outright.
 - ```SECRET``` Not automatically learned at character creation time based on high skill levels.
-- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes
-- ```NO_MANIP``` Manipulation score do not affect crafting this recipe
-- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe
-- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe
+- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes.
+- ```NO_MANIP``` Manipulation score do not affect crafting this recipe.
+- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe.
+- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe.
 
 
 ### Crafting recipes
