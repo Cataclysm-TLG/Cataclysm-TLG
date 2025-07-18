@@ -45,7 +45,7 @@
     "subcategory": "CSC_*_NESTED",
     "time": "12 s",
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_MORALE_OK" ],
     "result_mult": 3,
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ] ] ]
