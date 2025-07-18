@@ -1946,9 +1946,9 @@ void map::monster_in_field( monster &z )
             dam -= z.get_armor_type( damage_heat, bodypart_id( "torso" ) );
 
             if( cur.get_field_intensity() == 1 ) {
-                dam += rng( 0, 3 );
+                dam += rng( 0, 4 );
             } else if( cur.get_field_intensity() == 2 ) {
-                dam += rng( 0, 5 );
+                dam += rng( 0, 6 );
                 if( !z.flies() && !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
@@ -1957,7 +1957,7 @@ void map::monster_in_field( monster &z )
                     z.add_effect( effect_onfire, 1_turns * rng( dam / 2, dam * 2 ) );
                 }
             } else if( cur.get_field_intensity() == 3 ) {
-                dam += rng( 0, 7 );
+                dam += rng( 0, 8 );
                 if( !z.flies() && !z.in_species( species_ZOMBIE ) && !z.in_species( species_ROBOT ) &&
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.4 );
