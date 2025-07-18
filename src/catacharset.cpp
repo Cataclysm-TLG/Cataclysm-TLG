@@ -15,7 +15,6 @@
 #   include "mmsystem.h"
 #else
 #   include <locale>
-#   include <iconv.h>
 #endif
 
 //copied from SDL2_ttf code
@@ -340,59 +339,58 @@ static void strip_trailing_nulls( std::string &str )
     }
 }
 
-
 std::wstring utf8_to_wstr( const std::string &str )
 {
-    iconv_t cd = iconv_open("WCHAR_T", "UTF-8");
-    if (cd == (iconv_t)-1) {
-        debugmsg("iconv_open failed in utf8_to_wstr()");
-        return L"[ICONV INIT ERROR]";
-    }
-
-    size_t in_size = str.size();
-    size_t out_size = (in_size + 1) * sizeof(wchar_t);
-    std::wstring wstr(out_size / sizeof(wchar_t), L'\0');
-
-    char *in_buf = const_cast<char *>(str.data());
-    char *out_buf = reinterpret_cast<char *>(&wstr[0]);
-
-    size_t res = iconv(cd, &in_buf, &in_size, &out_buf, &out_size);
-    iconv_close(cd);
-
-    if (res == (size_t)-1) {
-        debugmsg("iconv conversion failed in utf8_to_wstr()");
-        return L"[ICONV CONVERSION ERROR]";
-    }
-
-    strip_trailing_nulls(wstr);
+#if defined(_WIN32)
+    int sz = MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, nullptr, 0 ) + 1;
+    std::wstring wstr( sz, '\0' );
+    MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, wstr.data(), sz );
+    strip_trailing_nulls( wstr );
     return wstr;
+#elif defined(__GLIBCXX__) // GCC's libstdc++, typically on Linux
+    try {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        std::wstring wstr = converter.from_bytes( str );
+#pragma GCC diagnostic pop
+        strip_trailing_nulls( wstr );
+        return wstr;
+    } catch( const std::exception &e ) {
+        debugmsg( "Invalid UTF-8 in utf8_to_wstr(): \"%s\"", str );
+        return L"[INVALID UTF-8]";
+    }
+#else
+    debugmsg( "utf8_to_wstr is not supported on this platform" );
+    return L"[UNSUPPORTED]";
+#endif
 }
 
 std::string wstr_to_utf8( const std::wstring &wstr )
 {
-    iconv_t cd = iconv_open("UTF-8", "WCHAR_T");
-    if (cd == (iconv_t)-1) {
-        debugmsg("iconv_open failed in wstr_to_utf8()");
-        return "[ICONV INIT ERROR]";
-    }
-
-    size_t in_size = wstr.size() * sizeof(wchar_t);
-    size_t out_size = in_size * 2 + 1;
-    std::string str(out_size, '\0');
-
-    char *in_buf = reinterpret_cast<char *>(const_cast<wchar_t *>(wstr.data()));
-    char *out_buf = &str[0];
-
-    size_t res = iconv(cd, &in_buf, &in_size, &out_buf, &out_size);
-    iconv_close(cd);
-
-    if (res == (size_t)-1) {
-        debugmsg("iconv conversion failed in wstr_to_utf8()");
-        return "[ICONV CONVERSION ERROR]";
-    }
-
-    strip_trailing_nulls(str);
+#if defined(_WIN32)
+    int sz = WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr );
+    std::string str( sz, '\0' );
+    WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, str.data(), sz, nullptr, nullptr );
+    strip_trailing_nulls( str );
     return str;
+#elif defined(__GLIBCXX__) // GCC's libstdc++, typically on Linux
+    try {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+        std::string str = converter.to_bytes( wstr );
+#pragma GCC diagnostic pop
+        strip_trailing_nulls( str );
+        return str;
+    } catch( const std::exception &e ) {
+        debugmsg( "Invalid wide string in wstr_to_utf8()" );
+        return "[INVALID WCHAR]";
+    }
+#else
+    debugmsg( "wstr_to_utf8 is not supported on this platform" );
+    return "[UNSUPPORTED]";
+#endif
 }
 
 std::string wstr_to_native( const std::wstring &wstr )
