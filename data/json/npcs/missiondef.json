@@ -581,8 +581,8 @@
         "om_terrain_match_type": "PREFIX",
         "reveal_radius": 1,
         "random": true,
-        "search_range": 240,
-        "min_distance": 5,
+        "search_range": 80,
+        "min_distance": 4,
         "z": 0
       },
       "update_mapgen": { "place_monster": [ { "monster": "mon_zombie", "x": 12, "y": 12, "target": true, "random_name": "female" } ] }
@@ -740,7 +740,7 @@
         "om_terrain": "house",
         "om_terrain_replace": "field",
         "om_terrain_match_type": "PREFIX",
-        "search_range": 120,
+        "search_range": 60,
         "random": true,
         "z": 0
       }
