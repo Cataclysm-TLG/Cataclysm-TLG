@@ -33,7 +33,7 @@
     "death_drops": "default_zombie_clothes",
     "fungalize_into": "mon_skeleton_fungus",
     "flags": [ "SEES", "HEARS", "GRABS", "BASHES", "GROUP_BASH", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
-    "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 24, "electric": 3, "heat": 1 }
+    "armor": { "cut": 15, "stab": 30, "acid": 5, "bullet": 24, "electric": 3, "heat": 1 }
   },
   {
     "//": "Skelly brute gaps the evolution between normal and the juggernaut.",
@@ -78,7 +78,7 @@
     "death_drops": "default_zombie_clothes",
     "fungalize_into": "mon_skeleton_brute_fungus",
     "flags": [ "SEES", "HEARS", "GRABS", "BASHES", "GROUP_BASH", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
-    "armor": { "bash": 12, "cut": 30, "acid": 1, "bullet": 30, "electric": 4, "heat": 2 }
+    "armor": { "bash": 12, "cut": 30, "acid": 5, "bullet": 30, "electric": 4, "heat": 2 }
   },
   {
     "id": "mon_skeleton_electric",
@@ -121,7 +121,7 @@
     "death_drops": "default_zombie_clothes",
     "fungalize_into": "mon_skeleton_fungus",
     "flags": [ "SEES", "HEARS", "GRABS", "BASHES", "GROUP_BASH", "ELECTRIC", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
-    "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 30, "heat": 2 }
+    "armor": { "cut": 15, "stab": 30, "acid": 5, "bullet": 30, "heat": 2 }
   },
   {
     "id": "mon_skeleton_hulk",
@@ -182,6 +182,6 @@
       "PUSH_VEH",
       "FILTHY"
     ],
-    "armor": { "bash": 20, "cut": 45, "bullet": 36, "electric": 8, "heat": 5 }
+    "armor": { "bash": 20, "cut": 45, "bullet": 36, "electric": 8, "heat": 5, "acid": 10 }
   }
 ]
