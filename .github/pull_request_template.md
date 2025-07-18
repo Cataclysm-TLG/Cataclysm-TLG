@@ -4,8 +4,8 @@
 
 <!-- Remove this text and explain what the purpose of your PR is.
 
-Mention if you have tested your changes. If you changed a map, make sure you used the mapmerge tool.
-If this is an Issue Correction, you can type "Fixes Issue #169420" to link the PR to the corresponding Issue number #169420.
+Mention if you have tested your changes.
+If this is an Issue Correction, you can type "Fixes #169420" to link the PR to the corresponding Issue number #169420.
 
 Remember: something that is self-evident to you might not be to others. Explain your rationale fully, even if you feel it goes without saying. -->
 
