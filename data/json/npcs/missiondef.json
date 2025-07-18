@@ -12,7 +12,7 @@
         "om_terrain": "haz_sar_b_4",
         "om_special": "Hazardous Waste Sarcophagus",
         "reveal_radius": 1,
-        "search_range": 240,
+        "search_range": 400,
         "min_distance": 60
       }
     },
@@ -320,7 +320,7 @@
         "om_terrain": "bank",
         "om_terrain_match_type": "PREFIX",
         "om_special": "bank",
-        "search_range": 120,
+        "search_range": 240,
         "random": true,
         "z": 0
       }
@@ -378,7 +378,7 @@
     "item": "software_blood_data",
     "start": {
       "effect": [ { "u_spawn_item": "vacutainer" }, { "u_spawn_item": "usb_drive" } ],
-      "assign_mission_target": { "om_terrain": "hospital_2", "om_special": "hospital", "reveal_radius": 3, "search_range": 120 }
+      "assign_mission_target": { "om_terrain": "hospital_2", "om_special": "hospital", "reveal_radius": 3, "search_range": 400 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "dialogue": {
@@ -403,7 +403,7 @@
     "value": 150000,
     "item": "etched_skull",
     "start": {
-      "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3, "search_range": 120 }
+      "assign_mission_target": { "om_terrain": "cabin_strange", "om_special": "Strange Cabin", "reveal_radius": 3, "search_range": 300 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "followup": "MISSION_INVESTIGATE_PRISON_VISIONARY",
@@ -428,7 +428,7 @@
     "value": 150000,
     "item": "visions_solitude",
     "start": {
-      "assign_mission_target": { "om_terrain": "prison_1_4", "om_special": "Prison", "reveal_radius": 3, "search_range": 180 },
+      "assign_mission_target": { "om_terrain": "prison_1_4", "om_special": "Prison", "reveal_radius": 3, "search_range": 240 },
       "update_mapgen": { "om_terrain": "prison_1_4", "place_item": [ { "item": "visions_solitude", "x": 15, "y": 22 } ] }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -511,7 +511,7 @@
       "assign_mission_target": {
         "om_terrain": "house",
         "om_terrain_match_type": "CONTAINS",
-        "search_range": 80,
+        "search_range": 300,
         "min_distance": 10,
         "random": true,
         "z": 0
@@ -546,7 +546,7 @@
         "om_terrain_replace": "forest",
         "reveal_radius": 1,
         "random": true,
-        "search_range": 60,
+        "search_range": 80,
         "min_distance": 5,
         "z": 0
       },
@@ -581,7 +581,7 @@
         "om_terrain_match_type": "PREFIX",
         "reveal_radius": 1,
         "random": true,
-        "search_range": 60,
+        "search_range": 240,
         "min_distance": 5,
         "z": 0
       },
@@ -680,7 +680,7 @@
       "assign_mission_target": {
         "om_terrain": "house",
         "om_terrain_match_type": "PREFIX",
-        "search_range": 80,
+        "search_range": 200,
         "min_distance": 5,
         "random": true,
         "z": 0
@@ -709,7 +709,7 @@
     "difficulty": 5,
     "value": 70000,
     "start": {
-      "assign_mission_target": { "om_terrain": "cabin", "om_special": "Cabin", "reveal_radius": 2, "search_range": 60 },
+      "assign_mission_target": { "om_terrain": "cabin", "om_special": "Cabin", "reveal_radius": 2, "search_range": 200 },
       "effect": "follow",
       "update_mapgen": { "place_npcs": [ { "class": "tracker_gunslinger", "x": 11, "y": 11, "target": true } ] }
     },
@@ -740,7 +740,7 @@
         "om_terrain": "house",
         "om_terrain_replace": "field",
         "om_terrain_match_type": "PREFIX",
-        "search_range": 43,
+        "search_range": 120,
         "random": true,
         "z": 0
       }
