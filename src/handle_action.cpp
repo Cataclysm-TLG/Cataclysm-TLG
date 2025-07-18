@@ -382,7 +382,7 @@ input_context game::get_player_input( std::string &action )
                             wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
                         }
                     }
-                } else {
+                }
 #endif
                     if( !wPrint.static_overlay ) {
                         // For rain: randomized drops, no duplicates
@@ -416,7 +416,6 @@ input_context game::get_player_input( std::string &action )
                         }
                     }
                 }
-            }
             // don't bother calculating SCT if we won't show it
             if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
                 invalidate_main_ui_adaptor();
