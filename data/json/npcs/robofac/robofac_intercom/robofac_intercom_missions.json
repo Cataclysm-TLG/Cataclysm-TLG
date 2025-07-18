@@ -283,7 +283,7 @@
     "difficulty": 5,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "road_ew", "om_terrain_match_type": "EXACT", "reveal_radius": 2, "random": true, "search_range": 80 },
+      "assign_mission_target": { "om_terrain": "road_ew", "om_terrain_match_type": "EXACT", "reveal_radius": 2, "random": true, "search_range": 200 },
       "update_mapgen": { "place_nested": [ { "chunks": [ "robofac_mi2_convoy_ambush_chunk" ], "x": 0, "y": 0 } ] }
     },
     "end": {
@@ -383,7 +383,7 @@
         "om_special": "office_tower_collapsed",
         "reveal_radius": 1,
         "random": true,
-        "search_range": 180,
+        "search_range": 800,
         "z": -1
       },
       "update_mapgen": [ { "place_nested": [ { "chunks": [ "robofac_mi3_photonics_chunk" ], "x": 10, "y": 22 } ] } ]
@@ -601,7 +601,7 @@
     "difficulty": 5,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 2, "random": true, "search_range": 70 },
+      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 2, "random": true, "search_range": 80 },
       "update_mapgen": {
         "rows": [
           "                        ",

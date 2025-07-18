@@ -314,7 +314,7 @@
     "difficulty": 1,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "slimepit_down", "om_special": "Slime Pit", "reveal_radius": 3, "search_range": 280 }
+      "assign_mission_target": { "om_terrain": "slimepit_down", "om_special": "Slime Pit", "reveal_radius": 3, "search_range": 400 }
     },
     "item": "slime_scrap",
     "count": 3,
@@ -383,7 +383,7 @@
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 3,
     "value": 0,
-    "start": { "assign_mission_target": { "om_terrain": "hive", "om_special": "Bee Hive", "reveal_radius": 3, "search_range": 280 } },
+    "start": { "assign_mission_target": { "om_terrain": "hive", "om_special": "Bee Hive", "reveal_radius": 3, "search_range": 400 } },
     "item": "bee_sting",
     "count": 1,
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -416,7 +416,7 @@
     "difficulty": 5,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 1, "random": false, "search_range": 20, "min_distance": 5, "z": 0 },
+      "assign_mission_target": { "om_terrain": "forest", "reveal_radius": 1, "random": false, "search_range": 40, "min_distance": 5, "z": 0 },
       "update_mapgen": { "place_monster": [ { "monster": "mon_zombie_screecher", "x": 11, "y": 11, "target": true } ] }
     },
     "end": {
@@ -449,7 +449,7 @@
     "difficulty": 4,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "field", "reveal_radius": 1, "random": true, "search_range": 60, "min_distance": 20 },
+      "assign_mission_target": { "om_terrain": "field", "reveal_radius": 1, "random": true, "search_range": 140, "min_distance": 20 },
       "update_mapgen": {
         "rows": [
           "     ..............     ",
@@ -532,7 +532,7 @@
     "value": 0,
     "item": "small_relic",
     "start": {
-      "assign_mission_target": { "om_terrain": "cathedral_1_SE", "om_special": "cathedral", "reveal_radius": 1, "random": false, "search_range": 100 }
+      "assign_mission_target": { "om_terrain": "cathedral_1_SE", "om_special": "cathedral", "reveal_radius": 1, "random": false, "search_range": 200 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "followup": "MISSION_GODCO_GREENWOOD_3",
@@ -553,19 +553,19 @@
     "id": "MISSION_GODCO_GREENWOOD_3",
     "type": "mission_definition",
     "name": { "str": "Bible Belt" },
-    "description": "Find twenty King James Bibles for Greenwood in exchange for <reward_count:icon> icons.",
+    "description": "Find ten King James Bibles for Greenwood in exchange for <reward_count:icon> icons.",
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 1,
     "value": 0,
     "item": "holybook_bible1",
-    "count": 20,
+    "count": 10,
     "start": {
-      "assign_mission_target": { "om_terrain": "s_bookstore", "om_special": "s_bookstore", "reveal_radius": 1, "random": false, "search_range": 100 }
+      "assign_mission_target": { "om_terrain": "s_bookstore", "om_special": "s_bookstore", "reveal_radius": 1, "random": false, "search_range": 200 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
     "dialogue": {
       "describe": "I need your help…",
-      "offer": "When we skipped town during <the_cataclysm>, most of us left our possessions behind.  We only have a few Bibles here for all of us, and they're starting to fall apart.  If you could get 20 more, in the King James version, I'd pay well for them.",
+      "offer": "When we skipped town during <the_cataclysm>, most of us left our possessions behind.  We only have a few Bibles here for all of us, and they're starting to fall apart.  If you could get ten more of the King James version, I'd pay well for them.",
       "accepted": "May God bless you.",
       "rejected": "It'd really help us…",
       "advice": "A book store should have enough, I'll mark one for you.",
@@ -1216,7 +1216,7 @@
     "difficulty": 13,
     "value": 0,
     "start": {
-      "assign_mission_target": { "om_terrain": "church", "om_special": "church", "reveal_radius": 1, "random": true, "search_range": 50 },
+      "assign_mission_target": { "om_terrain": "church", "om_special": "church", "reveal_radius": 1, "random": true, "search_range": 80 },
       "update_mapgen": {
         "place_npcs": [
           { "class": "bandit", "x": 15, "y": 8, "target": true },
