@@ -332,7 +332,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 5, "cut": 4, "bullet": 3, "heat": 5, "acid": 25, "electric": 8 }
+    "armor": { "bash": 5, "cut": 4, "bullet": 3, "heat": 3, "acid": 25, "electric": 8 }
   },
   {
     "id": "mon_zombie_rot",
