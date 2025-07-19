@@ -54,7 +54,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 270,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "fn1910mag" ] } ],
     "melee_damage": { "bash": 1 }
@@ -80,7 +79,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 270,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "rugerlcpmag" ] } ],
     "melee_damage": { "bash": 1 }
@@ -104,7 +102,6 @@
     "ammo": [ "380" ],
     "dispersion": 480,
     "durability": 7,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "min_cycle_recoil": 270,
     "pocket_data": [
@@ -136,7 +133,6 @@
     "ammo": [ "380" ],
     "dispersion": 480,
     "durability": 7,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "min_cycle_recoil": 225,
     "pocket_data": [ { "magazine_well": "74 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "taurus_spectrum_mag" ] } ],
@@ -179,12 +175,13 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "380": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
   {
     "id": "hpt3895",
+    "copy-from": "rifle_semi",
     "looks_like": "cx4",
     "type": "GUN",
     "name": { "str": ".380 ACP pistol-caliber carbine" },
@@ -209,7 +206,6 @@
     "color": "dark_gray",
     "range": 6,
     "ammo": [ "380" ],
-    "skill": "rifle",
     "dispersion": 180,
     "durability": 8,
     "blackpowder_tolerance": 30,
@@ -226,14 +222,6 @@
       [ "stock", 1 ],
       [ "stock accessory", 1 ],
       [ "underbarrel", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "pocket_data": [ { "magazine_well": "236 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hpt3895mag_10rd" ] } ],

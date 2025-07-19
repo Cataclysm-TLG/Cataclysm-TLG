@@ -22,7 +22,7 @@
     "min_cycle_recoil": 1350,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
   },
@@ -239,7 +239,7 @@
       [ "stock", 1 ]
     ],
     "melee_damage": { "bash": 12 },
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow."
   },
   {
@@ -455,7 +455,7 @@
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
     "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
   },
@@ -489,7 +489,7 @@
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "BURST", "3 rd.", 3 ] ],
     "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
   },
@@ -514,7 +514,7 @@
       }
     ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow."
   },
   {
@@ -930,7 +930,7 @@
       [ "stock accessory", 2 ],
       [ "underbarrel", 1 ]
     ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "pocket_data": [
       {
@@ -1073,7 +1073,7 @@
       [ "stock accessory", 2 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "NO_TURRET", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET", "EASY_CLEAN" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 10 }
   },
