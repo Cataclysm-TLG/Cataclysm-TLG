@@ -1,9 +1,9 @@
 [
   {
     "id": "browning_blr",
+    "Copy-from": "rifle_manual",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Browning BLR rifle" },
     "description": "A highly accurate lever-action hunting rifle chambered for the powerful .30-06 round.  Notable for using a detachable magazine instead of a traditional tube.",
     "weight": "3290 g",
@@ -17,7 +17,6 @@
     "symbol": "(",
     "color": "brown",
     "ammo": [ "3006" ],
-    "skill": "rifle",
     "dispersion": 90,
     "durability": 7,
     "blackpowder_tolerance": 24,
@@ -35,16 +34,15 @@
       [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "blrmag" ] } ],
     "melee_damage": { "bash": 12 }
   },
   {
     "id": "garand",
+    "Copy-from": "rifle_base",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "M1 Garand rifle" },
     "description": "A semi-automatic .30-06 battle rifle, developed to replace the M1903 Springfield.  It didn't completely supplant the older bolt-action until after World War II.",
     "ascii_picture": "m1_garand",
@@ -59,7 +57,6 @@
     "symbol": "(",
     "color": "brown",
     "ammo": [ "3006" ],
-    "skill": "rifle",
     "dispersion": 200,
     "durability": 8,
     "min_cycle_recoil": 3420,
@@ -77,14 +74,6 @@
       [ "stock mount", 1 ],
       [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "garandclip" ] } ],
     "melee_damage": { "bash": 12 }
@@ -124,7 +113,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "RELOAD_ONE", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "EASY_CLEAN", "NO_TURRET" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "3006": 5 }, "allowed_speedloaders": [ "3006_clip" ] }
     ],
@@ -132,9 +121,9 @@
   },
   {
     "id": "m1918",
+    "copy-from": "rifle_auto",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Browning Automatic Rifle" },
     "description": "Designed near the end of World War I, the BAR provided fire support for the US Army from World War II all the way to the Vietnam War.  Too much firepower to serve as a battle rifle, but not enough to be an ideal light machine gun, it still found a niche on the battlefield.",
     "ascii_picture": "1918_BAR",
@@ -149,7 +138,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "3006" ],
-    "skill": "rifle",
     "dispersion": 180,
     "durability": 8,
     "min_cycle_recoil": 3420,
@@ -169,7 +157,6 @@
       [ "stock accessory", 2 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent", "fault_fail_to_feed", "fault_double_feed" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1918mag", "m1918bigmag" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -196,7 +183,7 @@
     "blackpowder_tolerance": 24,
     "clip_size": 4,
     "barrel_volume": "750 ml",
-    "flags": [ "RELOAD_ONE", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "3006": 4 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -240,7 +227,7 @@
       [ "stock accessory", 2 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "3006": 4 } } ],
     "melee_damage": { "bash": 12 }
   }
