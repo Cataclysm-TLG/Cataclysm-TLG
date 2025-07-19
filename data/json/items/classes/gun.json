@@ -70,6 +70,7 @@
     "copy-from": "gun_base",
     "type": "GUN",
     "name": { "str": "base pistol" },
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "skill": "pistol",
     "sight_dispersion": 60,
     "//": "default handling for anything without a stock",
@@ -130,7 +131,7 @@
     "type": "GUN",
     "name": { "str": "revolver" },
     "//proportional": { "reload": 0.7 },
-    "extend": { "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ] },
     "//": "Revolvers exclude the muzzle location preventing installation of suppressors",
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
     "valid_mod_locations": [
@@ -149,7 +150,7 @@
     "type": "GUN",
     "name": { "str": "cap & ball revolver" },
     "reload": 150,
-    "extend": { "flags": [ "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
     "//": "Slower reloads, no unloading.  Base, unskilled person should take 1.5 seconds per chamber.  No underbarrel mods, that's where the ram goes.",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "grip", 1 ], [ "stock", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
@@ -159,6 +160,7 @@
     "copy-from": "gun_base",
     "type": "GUN",
     "name": { "str": "base rifle" },
+    "flags": [ "FIRE_TWOHAND" ],
     "skill": "rifle",
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -235,6 +237,7 @@
     "copy-from": "gun_base",
     "type": "GUN",
     "name": { "str": "base shotgun" },
+    "flags": [ "FIRE_TWOHAND" ],
     "skill": "shotgun",
     "ammo": [ "shot" ],
     "valid_mod_locations": [
@@ -286,6 +289,7 @@
     "copy-from": "gun_base",
     "type": "GUN",
     "name": { "str": "base SMG" },
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "skill": "smg"
   }
 ]
