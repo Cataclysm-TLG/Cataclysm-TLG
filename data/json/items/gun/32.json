@@ -2,8 +2,8 @@
   {
     "id": "sig_p230",
     "looks_like": "glock_17",
+    "copy-from": "pistol_backup",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "SIG P230 pistol" },
     "description": "The SIG Sauer P230 is a small, semi-automatic handgun chambered in .32 ACP.  Due to its small dimensions, it was often carried as a backup weapon.",
     "weight": "460 g",
@@ -17,7 +17,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "32" ],
-    "skill": "pistol",
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 135,
@@ -32,15 +31,6 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "sigp230mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -48,8 +38,8 @@
   {
     "id": "walther_ppk",
     "looks_like": "glock_17",
+    "copy-from": "pistol_backup",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str_sp": "Walther PPK pistol" },
     "description": "One of the most famous handguns of the 20th century.  Your name is not Bond, but you might find this little gun still useful.",
     "ascii_picture": "ppk",
@@ -64,7 +54,6 @@
     "symbol": "(",
     "color": "light_gray",
     "ammo": [ "32" ],
-    "skill": "pistol",
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 135,
@@ -79,15 +68,6 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ppkmag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -113,7 +93,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 135,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "41 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "kp32mag" ] } ],
     "melee_damage": { "bash": 1 }
@@ -155,7 +134,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "32": 1 } } ],
     "melee_damage": { "bash": 10 }
   }
