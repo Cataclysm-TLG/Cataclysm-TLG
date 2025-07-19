@@ -88,7 +88,7 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "flags": [ "NEVER_JAMS", "MISSION_ITEM" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "MISSION_ITEM" ],
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ak74mag", "rpk74mag", "casket74mag" ] } ],
     "melee_damage": { "bash": 11 }
