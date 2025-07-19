@@ -1558,8 +1558,14 @@ std::string widget::graph( int value ) const
     int quot;
     int rem;
 
+#ifdef _WIN32
     const std::wstring syms = utf8_to_wstr( _symbols );
     std::wstring ret;
+#else
+    const std::string syms = _symbols;
+    std::string ret;
+#endif
+
     if( _fill == "bucket" ) {
         quot = value / depth; // number of full cells/buckets
         rem = value % depth;  // partly full next cell, maybe
@@ -1668,14 +1674,24 @@ static std::string append_line( const std::string &line, bool first_row, int max
     // If the text is too long, start eating the free space next to the label.
     // This only works because labels are not colorized (no color tags).
     if( txt_w + lbl_w > max_width ) {
+#ifdef _WIN32
         std::wstring tmplbl = utf8_to_wstr( lbl );
-        for( int i = tmplbl.size() - 1; txt_w + lbl_w > max_width && i > 0 && tmplbl[i] == ' ' &&
-             tmplbl[i - 1] != ':'; i-- ) {
+        for( int i = static_cast<int>( tmplbl.size() ) - 1;
+             txt_w + lbl_w > max_width && i > 0 && tmplbl[i] == L' ' && tmplbl[i - 1] != L':'; i-- ) {
             tmplbl.pop_back();
             lbl_w--;
         }
         lbl = wstr_to_utf8( tmplbl );
+#else
+        // Fallback: strip trailing ASCII spaces before non-colon safely
+        for( int i = static_cast<int>( lbl.size() ) - 1;
+             txt_w + lbl_w > max_width && i > 0 && lbl[i] == ' ' && lbl[i - 1] != ':'; i-- ) {
+            lbl.pop_back();
+            lbl_w--;
+        }
+#endif
     }
+
 
     // Text padding
     if( !skip_pad && max_width - lbl_w > txt_w ) {

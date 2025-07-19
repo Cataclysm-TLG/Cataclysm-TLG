@@ -610,9 +610,16 @@ std::string obscure_message( const std::string &str, const std::function<char()>
     std::string gibberish_wide =
         //~ translators: place some random 2-width characters here in your language if possible, or leave it as is
         _( "に坂索トし荷測のンおク妙免イロコヤ梅棋厚れ表幌" );
+#ifdef _WIN32
     std::wstring w_gibberish_narrow = utf8_to_wstr( gibberish_narrow );
     std::wstring w_gibberish_wide = utf8_to_wstr( gibberish_wide );
     std::wstring w_str = utf8_to_wstr( str );
+#else
+    // On non-Windows systems, fallback to std::string or skip if unused.
+    std::string w_gibberish_narrow = gibberish_narrow;
+    std::string w_gibberish_wide = gibberish_wide;
+    std::string w_str = str;
+#endif
     // a trailing NULL terminator is necessary for utf8_width function
     // NOLINTNEXTLINE(modernize-avoid-c-arrays)
     char transformation[2] = { 0 };
