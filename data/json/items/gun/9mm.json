@@ -1,9 +1,9 @@
 [
   {
     "id": "calico",
+    "copy-from": "smg_base",
     "looks_like": "hk_mp5",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Calico automatic carbine" },
     "description": "The Calico automatic carbine is a submachine gun with a unique circular magazine that allows for high capacities and reduced recoil.",
     "variant_type": "gun",
@@ -26,7 +26,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "smg",
     "range": 6,
     "ranged_damage": { "damage_type": "bullet", "amount": 2 },
     "dispersion": 280,
@@ -45,22 +44,14 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "calicomag", "calicomag_100rd" ] } ],
     "melee_damage": { "bash": 9 }
   },
   {
     "id": "cx4",
+    "copy-from": "rifle_semi",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "9x19mm pistol-caliber carbine" },
     "description": "Designed to be a companion rifle with provided M9 handguns, this compact and light weight pistol-caliber carbine makes use of the same 9x19mm magazines.  Originally intended for use by law enforcement units, this style of small caliber, semi-automatic carbine failed to achieve the same level of popularity as regular and more potent rifles.  However, despite being inadequate for their original purpose, before the Cataclysm these modestly sized weapons still found a home in sport shooting and self-defense civilian roles.",
     "variant_type": "gun",
@@ -82,7 +73,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "rifle",
     "range": 6,
     "ranged_damage": { "damage_type": "bullet", "amount": 2 },
     "dispersion": 180,
@@ -101,14 +91,6 @@
       [ "stock", 1 ],
       [ "stock accessory", 1 ],
       [ "underbarrel", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [
       {
@@ -150,7 +132,6 @@
     "durability": 6,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 380,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -163,9 +144,9 @@
   },
   {
     "id": "hk_mp5",
+    "copy-from": "smg_base",
     "//": "Tileset whitelist for SMGs",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "H&K MP5A2 SMG" },
     "description": "The Heckler & Koch MP5 is one of the most widely-used submachine guns in the world, and has been adopted by special police forces and militaries alike.  Its high degree of accuracy and low recoil are universally praised.",
     "ascii_picture": "hk_mp5a2",
@@ -180,7 +161,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "smg",
     "ranged_damage": { "damage_type": "bullet", "amount": 1 },
     "range": 4,
     "dispersion": 240,
@@ -200,14 +180,6 @@
       [ "sling", 1 ],
       [ "stock", 1 ],
       [ "stock accessory", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [
       {
@@ -352,7 +324,6 @@
     "color": "dark_gray",
     "ammo": [ "9mm" ],
     "ranged_damage": { "damage_type": "bullet", "amount": -1 },
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "dispersion": 420,
     "durability": 8,
@@ -565,9 +536,9 @@
   },
   {
     "id": "ksub2000",
+    "copy-from": "rifle_semi",
     "looks_like": "hk_mp5",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Kel-Tec SUB-2000 carbine" },
     "description": "With its claim to fame being its ease of portability when compared to other conventional rifles and carbines, the Kel-Tec SUB-2000 is a uniquely-designed pistol caliber carbine sporting an integral folding mechanism and chambered for 9x19mm cartridges, making use of regular Glock compatible magazines.  With its mechanism engaged, the barrel assembly swings rearwards and causes the firearm to fold to half its regular length, packing up into a very compact package with ergonomics unfortunately having to take a backseat to allow for the weapon's extreme portability.  With a mainly polymer constructed receiver, the carbine is relatively light and incredibly transportable when fully folded.",
     "weight": "1930 g",
@@ -582,7 +553,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "rifle",
     "range": 6,
     "ranged_damage": { "damage_type": "bullet", "amount": 3 },
     "dispersion": 180,
@@ -599,14 +569,6 @@
       [ "sights", 1 ],
       [ "sling", 1 ],
       [ "stock", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [
       {
@@ -653,7 +615,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -679,7 +640,6 @@
     "price_postapoc": "25 USD",
     "to_hit": -2,
     "material": [ "plastic", "steel" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "symbol": "(",
     "color": "dark_gray",
@@ -736,7 +696,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9mm": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
@@ -782,9 +742,9 @@
   },
   {
     "id": "sten",
+    "copy-from": "smg_base",
     "looks_like": "hk_mp5",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "STEN Mk II SMG" },
     "description": "The standard issue 9mm submachine gun of the British military throughout most of the Second World War.  The STEN is aesthetically far from pretty.  Featuring an iconic side mounted magazine well and a design optimized for mass production using unskilled labor, the STEN was developed to make up for drastic supply shortages during the early days of the war.  Likely entering the US prior to the 1960s, either as a war time holdover or a museum purchase; you suppose that if you were to try and defend your nation, whatever the cost may be, and fight the undead 'on the beaches, fight on the landing grounds, fight in the fields and in the streets, fight in the hills; and never surrender', then it might be the time for the STEN to come back into frontline service.",
     "weight": "3200 g",
@@ -797,7 +757,6 @@
     "symbol": "[",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "smg",
     "ranged_damage": { "damage_type": "bullet", "amount": 1 },
     "range": 2,
     "dispersion": 360,
@@ -815,15 +774,14 @@
       [ "sights mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent", "fault_fail_to_feed", "fault_double_feed" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "stenmag", "survivor9mm_mag" ] } ],
     "melee_damage": { "bash": 10 }
   },
   {
     "id": "tec9",
+    "copy-from": "smg_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Intratec TEC-9 pistol" },
     "description": "The TEC-9 is a semi-automatic 'pistol' made of cheap polymers and machine stamped parts.  Its rise in popularity among criminals is largely due to its intimidating looks, low cost and relative ease of converting to fully automatic.",
     "weight": "1400 g",
@@ -837,7 +795,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "skill": "smg",
     "dispersion": 520,
     "durability": 6,
     "min_cycle_recoil": 450,
@@ -853,7 +810,6 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent", "fault_fail_to_feed", "fault_double_feed" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -885,7 +841,6 @@
     "durability": 9,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -973,7 +928,6 @@
     "durability": 6,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 380,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "//2": "Glock 17s cannot load magazines shorter than the standard 17rd magazine.",
     "pocket_data": [
@@ -1038,7 +992,6 @@
     "price_postapoc": "30 USD",
     "to_hit": -2,
     "material": [ "plastic", "steel" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "color": "dark_gray",
     "ammo": [ "9mm" ],
@@ -1076,7 +1029,6 @@
     "dispersion": 480,
     "durability": 6,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -1122,7 +1074,6 @@
     "material": [ "steel", "aluminum", "plastic" ],
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "dispersion": 480,
     "durability": 8,
@@ -1152,7 +1103,6 @@
     "material": [ "plastic", "steel" ],
     "color": "dark_gray",
     "ammo": [ "9mm" ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "dispersion": 480,
     "durability": 7,
@@ -1185,7 +1135,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       { "magazine_well": "191 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bhp9mag_13rd", "bhp9mag_15rd" ] }
@@ -1212,7 +1161,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "228 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p38mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -1236,7 +1184,6 @@
     "dispersion": 480,
     "durability": 9,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -1266,7 +1213,6 @@
     "ammo": [ "9mm" ],
     "dispersion": 480,
     "durability": 7,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "min_cycle_recoil": 450,
     "pocket_data": [
@@ -1298,7 +1244,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -1329,7 +1274,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 450,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "176 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ccpmag", "ccpmag_9rd" ] } ],
     "melee_damage": { "bash": 8 }
@@ -1369,14 +1313,6 @@
       [ "underbarrel mount", 1 ],
       [ "sling", 1 ],
       [ "stock", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [
       {
