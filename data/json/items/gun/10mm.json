@@ -22,7 +22,7 @@
     "//": "165mm + 32mm max OAL for 10mm. Revolvers just built different.",
     "price": "740 USD",
     "price_postapoc": "22 USD 50 cent",
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ],
     "to_hit": -2,
     "material": [ "steel", "wood" ],
     "symbol": "(",
