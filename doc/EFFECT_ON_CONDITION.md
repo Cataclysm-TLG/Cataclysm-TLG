@@ -2768,6 +2768,33 @@ Adds `hair_mohawk` trait with the `purple` variant to the character:
 { "u_add_trait": "hair_mohawk", "variant": "purple" }
 ```
 
+
+#### `u_lose_trait`, `npc_lose_trait`
+Character or NPC got trait or mutation removed, if it has one
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_lose_trait" / "npc_lose_trait" | **mandatory** | string or [variable object](#variable-object) | id of mutation to be removed; if character or NPC has no such mutation, nothing happens |
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster | Furniture | Item | Vehicle |
+| ------ | --------- | --------- | ---- | ------- | --- | ---- |
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ |
+
+##### Examples
+
+`CHITIN` mutation is removed from character:
+```jsonc
+{ "u_lose_trait": "CHITIN" }
+```
+
+mutation, stored in `mutation_id`  context value, is removed from character:
+```jsonc
+{ "u_lose_trait": { "context_val": "mutation_id" } }
+```
+
+
 #### `u_lose_effect`, `npc_lose_effect`
 Remove effect from character or NPC, if it has one
 
