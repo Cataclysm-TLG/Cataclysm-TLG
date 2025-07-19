@@ -144,9 +144,9 @@
   },
   {
     "id": "rifle_38",
+    "copy-from": "gun_base",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str_sp": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
     "ascii_picture": "ps_pipe_gun",
@@ -170,7 +170,7 @@
     "barrel_length": "600 mm",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "38": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
