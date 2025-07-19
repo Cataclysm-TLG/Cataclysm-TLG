@@ -2,8 +2,8 @@
   {
     "id": "american_180",
     "looks_like": "hk_mp5",
+    "copy-from": "smg_base",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": ".22 caliber submachine gun" },
     "description": "A dramatically uncommon automatic weapon, making use of high-capacity pan magazines and firing the low power .22 caliber cartridge: an unusual ammunition choice for a submachine gun.  With negligible recoil on account of its modest cartridge and a suppressively high rate of fire, a burst of .22 LR rounds from this little machine gun can be best likened with a swarm of hornets… an incredibly angry swarm of hornets.",
     "variant_type": "gun",
@@ -26,7 +26,6 @@
     "color": "light_gray",
     "range": 6,
     "ammo": [ "22" ],
-    "skill": "smg",
     "ranged_damage": { "damage_type": "bullet", "amount": 4 },
     "dispersion": 280,
     "durability": 6,
@@ -55,8 +54,8 @@
   {
     "id": "marlin_9a",
     "looks_like": "ar15",
+    "copy-from": "rifle_base",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "small game rifle" },
     "description": "A venerable .22 caliber lever-action rifle, with a 19-round tube magazine and a classic design that dates back over a century.  Generally used for the hunting of small game like rabbits, the strict taxonomic classification of zombies as 'small game' is debatable, but this decades-old weapon can still be counted upon to help manage the undead population.",
     "variant_type": "gun",
@@ -80,7 +79,6 @@
     "color": "brown",
     "range": 7,
     "ammo": [ "22" ],
-    "skill": "rifle",
     "ranged_damage": { "damage_type": "bullet", "amount": 5 },
     "dispersion": 90,
     "durability": 8,
@@ -100,7 +98,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -185,15 +183,15 @@
     "barrel_volume": "360 ml",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "22": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
   {
     "id": "ruger_1022",
     "looks_like": "ar15",
+    "copy-from": "rifle_base",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "varmint rifle" },
     "description": "A lightweight and modular pistol caliber hunting carbine, firing the low power .22 LR cartridge.  Before the Cataclysm, a mix of high customizability, cheap ammunition, and low recoil made this a very popular varmint rifle amongst civilian shooters.",
     "variant_type": "gun",
@@ -218,7 +216,6 @@
     "range": 6,
     "//range": "It is a blowback action, like most non-target, sporting rifles of this caliber.",
     "ammo": [ "22" ],
-    "skill": "rifle",
     "ranged_damage": { "damage_type": "bullet", "amount": 4 },
     "dispersion": 110,
     "durability": 8,
@@ -300,8 +297,8 @@
   {
     "id": "sig_mosquito",
     "looks_like": "glock_17",
+    "copy-from": "pistol_base",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "firefly training pistol" },
     "//": "Was the sig mosquito, has been renamed to the more common GSG firefly",
     "description": "A medium sized, .22 caliber semi-automatic pistol, for training with a pistol similar to more powerful pistols.  Built from aluminum and polymer components, the weapon is lightweight and concealable, but its chambering is not very powerful.",
@@ -325,7 +322,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "22" ],
-    "skill": "pistol",
     "ranged_damage": { "damage_type": "bullet", "amount": -1 },
     "dispersion": 480,
     "durability": 7,
@@ -341,15 +337,6 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "mosquitomag" ] } ],
     "melee_damage": { "bash": 9 }
@@ -383,7 +370,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 39,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -440,7 +426,6 @@
       [ "underbarrel mount", 1 ]
     ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent" ],
     "pocket_data": [ { "magazine_well": "27 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "j22mag" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -505,7 +490,6 @@
     "dispersion": 480,
     "durability": 6,
     "min_cycle_recoil": 100,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -560,7 +544,6 @@
     "dispersion": 400,
     "durability": 8,
     "min_cycle_recoil": 100,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       { "rigid": false, "magazine_well": "96 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ruger_mk4_mag" ] }
@@ -570,9 +553,9 @@
   {
     "id": "ruger_charger",
     "looks_like": "modular_ar_pistol",
+    "copy-from": "pistol_base",
     "type": "GUN",
     "//": "Stats are from https://ruger.com/products/22Charger/specSheets/4923.html",
-    "reload_noise_volume": 10,
     "name": { "str": "varmint pistol" },
     "description": "Essentially a varmint rifle with no stock and a shorter barrel, this gun loses out on a bit of energy with its shorter barrel and is a bit more uncomfortable to hold, but a fair bit lighter.  Includes a bipod.",
     "variant_type": "gun",
@@ -596,7 +579,6 @@
     "color": "brown",
     "range": 3,
     "ammo": [ "22" ],
-    "skill": "pistol",
     "ranged_damage": { "damage_type": "bullet", "amount": 1 },
     "dispersion": 140,
     "durability": 8,
@@ -613,14 +595,6 @@
       [ "stock mount", 1 ],
       [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "built_in_mods": [ "bipod" ],
     "pocket_data": [
@@ -647,9 +621,9 @@
   },
   {
     "id": "rossi_gallery",
+    "copy-from": "rifle_base",
     "looks_like": "ar15",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "pump action varmint rifle" },
     "description": "A lightweight, wood framed pump action rifle, holding 15 rounds of .22 with an 18 inch barrel.  While pump actions tend to be largely shotguns, they can be made in calibers such as .22 LR.",
     "variant_type": "gun",
@@ -672,7 +646,6 @@
     "color": "brown",
     "range": 7,
     "ammo": [ "22" ],
-    "skill": "rifle",
     "ranged_damage": { "damage_type": "bullet", "amount": 3 },
     "dispersion": 140,
     "durability": 8,
@@ -690,7 +663,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "22": 15 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -766,9 +739,9 @@
   },
   {
     "id": "rio_bravo",
+    "copy-from": "rifle_base",
     "looks_like": "marlin_9a",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "small game lever-action rifle" },
     "description": "A .22 Long Rifle lever-action rifle, which holds 15 rounds of ammo.  While quite useful against small game, its effectiveness isn't as great against the undead.",
     "variant_type": "gun",
@@ -793,7 +766,6 @@
     "color": "brown",
     "range": 5,
     "ammo": [ "22" ],
-    "skill": "rifle",
     "ranged_damage": { "damage_type": "bullet", "amount": 3 },
     "dispersion": 110,
     "durability": 8,
@@ -817,9 +789,9 @@
   },
   {
     "id": "henry_golden_boy",
+    "copy-from": "rifle_base",
     "looks_like": "marlin_9a",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "small game lever-action rifle" },
     "description": "A .22 Long Rifle lever-action rifle, which holds 16 rounds of ammo.  While quite useful against small game, its effectiveness isn't as great against the undead.",
     "variant_type": "gun",
@@ -844,7 +816,6 @@
     "color": "brown",
     "range": 6,
     "ammo": [ "22" ],
-    "skill": "rifle",
     "ranged_damage": { "damage_type": "bullet", "amount": 3 },
     "dispersion": 100,
     "durability": 8,
@@ -862,7 +833,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "22": 16 } } ],
     "melee_damage": { "bash": 12 }
   }
