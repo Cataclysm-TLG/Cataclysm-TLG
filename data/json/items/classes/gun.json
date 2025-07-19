@@ -260,7 +260,7 @@
     "type": "GUN",
     "name": { "str": "pump-action shotgun" },
     "reload_noise": "chuk chuk.",
-    "flags": [ "RELOAD_ONE", "PUMP_ACTION" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "PUMP_ACTION" ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
   },
   {
