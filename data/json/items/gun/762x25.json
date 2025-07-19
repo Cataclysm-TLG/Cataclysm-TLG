@@ -1,9 +1,9 @@
 [
   {
     "id": "ppsh",
+    "copy-from": "smg_base",
     "looks_like": "hk_mp5",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "PPSh-41 submachine gun" },
     "description": "The Soviet-made PPSh-41 is a mass-produced selective-fire submachine gun.  It has a relatively high rate of fire.",
     "variant_type": "gun",
@@ -25,7 +25,6 @@
     "symbol": "(",
     "color": "brown",
     "ammo": [ "762x25" ],
-    "skill": "smg",
     "range": 2,
     "ranged_damage": { "damage_type": "bullet", "amount": 2 },
     "dispersion": 120,
@@ -46,7 +45,6 @@
       [ "underbarrel", 1 ],
       [ "rail mount", 1 ]
     ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt", "fault_gun_chamber_spent" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ppshmag", "ppshdrum" ] } ],
     "melee_damage": { "bash": 10 }
   },
@@ -78,7 +76,6 @@
     "dispersion": 225,
     "durability": 7,
     "min_cycle_recoil": 270,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "tokarevmag" ] } ],
     "melee_damage": { "bash": 10 }
