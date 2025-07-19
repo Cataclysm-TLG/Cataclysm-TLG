@@ -21,16 +21,15 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 504,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "90two40mag" ] } ],
     "melee_damage": { "bash": 8 }
   },
   {
     "id": "glock_22",
+    "copy-from": "pistol_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str_sp": "Glock 22 pistol" },
     "description": "A .40 S&W variant of the popular Glock 17 pistol.  The standard-issue firearm of the FBI and of countless other law enforcement agencies worldwide.",
     "ascii_picture": "glock_17",
@@ -45,12 +44,10 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "40" ],
-    "skill": "pistol",
     "dispersion": 480,
     "durability": 6,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 425,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -62,14 +59,6 @@
       [ "sights", 1 ],
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
-    ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "250 ml", "item_restriction": [ "glock40mag", "glock40bigmag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -96,7 +85,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 504,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "250 ml", "item_restriction": [ "px4_40mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -137,15 +125,15 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "40": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
   {
     "id": "sig_40",
+    "copy-from": "pistol_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str_sp": "SIG Pro pistol" },
     "description": "Originally marketed as a lightweight and compact alternative to older SIG handguns, the Pro .40 is popular among European police forces.",
     "ascii_picture": "sig_pro_40",
@@ -160,7 +148,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "40" ],
-    "skill": "pistol",
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 504,
@@ -175,15 +162,6 @@
       [ "stock", 1 ],
       [ "underbarrel", 1 ]
     ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "250 ml", "item_restriction": [ "sig40mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -280,7 +258,6 @@
     "dispersion": 480,
     "durability": 8,
     "min_cycle_recoil": 504,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "185 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bhp40mag" ] } ],
     "melee_damage": { "bash": 8 }
@@ -304,7 +281,6 @@
     "dispersion": 480,
     "durability": 9,
     "min_cycle_recoil": 504,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [
       {
@@ -335,7 +311,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 504,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "312 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hptjcpmag" ] } ],
     "melee_damage": { "bash": 8 }
