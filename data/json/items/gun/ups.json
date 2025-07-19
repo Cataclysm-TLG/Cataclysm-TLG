@@ -38,7 +38,7 @@
       [ "underbarrel", 1 ]
     ],
     "ammo_effects": [ "LASER", "EMP" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 12 }
   },
@@ -67,7 +67,7 @@
     "reload": 0,
     "modes": [ [ "DEFAULT", "3 rd.", 3 ], [ "BURST", "5 rd.", 5 ], [ "AUTO", "high auto", 15 ] ],
     "ammo_effects": [ "LASER", "PLASMA_BUBBLE", "IGNITE" ],
-    "flags": [ "NO_UNLOAD", "NEVER_JAMS", "NO_UNWIELD", "NO_SALVAGE", "NO_REPAIR", "UNBREAKABLE_MELEE", "NON_FOULING", "USE_UPS" ],
+    "flags": [ "FIRE_TWOHAND", "NO_UNLOAD", "NEVER_JAMS", "NO_UNWIELD", "NO_SALVAGE", "NO_REPAIR", "UNBREAKABLE_MELEE", "NON_FOULING", "USE_UPS" ],
     "overheat_threshold": 200,
     "cooling_value": 2,
     "heat_per_shot": 6,
@@ -99,6 +99,7 @@
     "reload": 0,
     "ammo_effects": [ "LASER", "PLASMA_BUBBLE", "IGNITE" ],
     "flags": [
+      "FIRE_TWOHAND",
       "NO_UNLOAD",
       "NEVER_JAMS",
       "NO_UNWIELD",
@@ -155,7 +156,7 @@
       [ "underbarrel", 1 ]
     ],
     "ammo_effects": [ "LASER", "IGNITE" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 12 }
   },
@@ -177,7 +178,7 @@
     "to_hit": -2,
     "range": 40,
     "dispersion": 6,
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS" ],
     "valid_mod_locations": [
       [ "grip", 1 ],
       [ "rail", 1 ],
@@ -218,7 +219,7 @@
     "heat_per_shot": 6,
     "valid_mod_locations": [ [ "emitter", 1 ], [ "grip", 1 ], [ "lens", 1 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock", 1 ], [ "underbarrel", 1 ] ],
     "ammo_effects": [ "LASER", "INCENDIARY" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "ALLOWS_BODY_BLOCCK", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 5 }
   },
