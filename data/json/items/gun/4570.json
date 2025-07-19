@@ -32,7 +32,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "4570": 6 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -108,7 +108,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "4570": 1 } } ],
     "melee_damage": { "bash": 12 }
   }
