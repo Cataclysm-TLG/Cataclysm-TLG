@@ -1,7 +1,7 @@
 [
   {
     "id": "browning_blr",
-    "Copy-from": "rifle_manual",
+    "copy-from": "rifle_manual",
     "looks_like": "modular_ar15",
     "type": "GUN",
     "name": { "str": "Browning BLR rifle" },
@@ -40,7 +40,7 @@
   },
   {
     "id": "garand",
-    "Copy-from": "rifle_base",
+    "copy-from": "rifle_base",
     "looks_like": "modular_ar15",
     "type": "GUN",
     "name": { "str": "M1 Garand rifle" },
