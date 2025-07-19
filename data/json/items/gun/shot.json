@@ -25,7 +25,7 @@
     "reload": 80,
     "valid_mod_locations": [  ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "ALLOWS_BODY_BLOCK", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
     "melee_damage": { "bash": 6 }
   },
@@ -88,7 +88,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "clip_size": 6,
-    "extend": { "flags": [ "RELOAD_ONE", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "EASY_CLEAN" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 10 }
   },
@@ -368,7 +368,7 @@
     "relative": { "weight": "625 g", "volume": "360 ml", "price": "50 USD" },
     "barrel_volume": "720 ml",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
-    "extend": { "flags": [ "RELOAD_ONE" ] },
+    "extend": { "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 2 } } ]
   },
   {
@@ -393,7 +393,7 @@
     "barrel_volume": "360 ml",
     "barrel_length": "600 mm",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
-    "flags": [ "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -538,7 +538,7 @@
     "reload": 200,
     "barrel_volume": "360 ml",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
-    "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -610,7 +610,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "extend": { "flags": [ "RELOAD_ONE" ] },
+    "extend": { "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 2 } } ]
   },
   {
@@ -644,7 +644,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -689,7 +689,7 @@
       [ "stock", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 12 } } ],
     "melee_damage": { "bash": 8 }
   },
@@ -731,7 +731,7 @@
       [ "sights", 1 ],
       [ "sling", 1 ]
     ],
-    "flags": [ "RELOAD_ONE" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 15 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -814,7 +814,7 @@
       [ "sights mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 8 }
   },
@@ -857,7 +857,7 @@
       [ "underbarrel", 1 ]
     ],
     "default_mods": [ "sword_bayonet" ],
-    "flags": [ "RELOAD_ONE" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 11 }
   },
@@ -910,7 +910,7 @@
       [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NO_TURRET", "RELOAD_ONE" ],
+    "flags": [ "FIRE_TWOHAND", "NO_TURRET", "RELOAD_ONE" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 4 } } ]
   },
   {
@@ -969,7 +969,7 @@
     "reload": 600,
     "modes": [ [ "DEFAULT", "single", 1 ] ],
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
     "melee_damage": { "bash": 8 }
   },
