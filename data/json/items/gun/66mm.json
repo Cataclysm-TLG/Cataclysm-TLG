@@ -1,6 +1,7 @@
 [
   {
     "id": "m202_flash",
+    "copy-from": "launcher_base",
     "looks_like": "m79",
     "type": "GUN",
     "symbol": "(",
@@ -10,12 +11,10 @@
     "price": "29000 USD",
     "price_postapoc": "40 USD",
     "material": [ "steel" ],
-    "skill": "launcher",
     "ammo": [ "m235" ],
     "weight": "5220 g",
     "volume": "12120 ml",
     "longest_side": "693 mm",
-    "reload_noise_volume": 10,
     "to_hit": -3,
     "dispersion": 300,
     "durability": 7,
@@ -23,7 +22,7 @@
     "reload": 600,
     "loudness": 200,
     "valid_mod_locations": [ [ "grip", 1 ], [ "sling", 1 ] ],
-    "flags": [ "BACKBLAST", "NEVER_JAMS" ],
+    "flags": [ "FIRE_TWOHAND", "BACKBLAST", "NEVER_JAMS" ],
     "pocket_data": [ { "magazine_well": "500 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m74_clip" ] } ],
     "melee_damage": { "bash": 12 }
   }
