@@ -1,4 +1,3 @@
-#pragma once
 #include "catacharset.h"
 
 #include <algorithm>
