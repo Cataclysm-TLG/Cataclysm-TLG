@@ -5270,7 +5270,7 @@
           { "item": "tabi_dress" },
           { "item": "geta" },
           { "item": "bellywrap" },
-          { "group": "bokken_with_saya" }
+          { "item": "bokken" }
         ]
       },
       "female": { "entries": [ { "item": "chestwrap" } ] }
