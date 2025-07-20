@@ -442,8 +442,8 @@
     "material_thickness": 1,
     "pocket_data": [
       {
-        "magazine_well": "1250 ml",
-        "max_contains_volume": "2 L",
+        "magazine_well": "2400 ml",
+        "max_contains_volume": "2400 ml",
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
@@ -479,8 +479,8 @@
     "material_thickness": 1,
     "pocket_data": [
       {
-        "magazine_well": "1800 ml",
-        "max_contains_volume": "2 L",
+        "magazine_well": "2400 ml",
+        "max_contains_volume": "2400 ml",
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
