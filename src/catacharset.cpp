@@ -347,76 +347,82 @@ static void strip_trailing_nulls( std::string &str )
 }
 #endif
 
-inline std::wstring utf8_to_wstr(const std::string &utf8) {
+inline std::wstring utf8_to_wstr( const std::string &utf8 )
+{
 #if defined(_WIN32)
-    int sz = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
-    if (sz == 0) throw std::runtime_error("MultiByteToWideChar failed");
+    int sz = MultiByteToWideChar( CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0 );
+    if( sz == 0 ) {
+        throw std::runtime_error( "MultiByteToWideChar failed" );
+    }
 
-    std::wstring wstr(sz, L'\0');
-    MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, &wstr[0], sz);
-    strip_trailing_nulls(wstr);
+    std::wstring wstr( sz, L'\0' );
+    MultiByteToWideChar( CP_UTF8, 0, utf8.c_str(), -1, &wstr[0], sz );
+    strip_trailing_nulls( wstr );
     return wstr;
 
 #else
-    iconv_t cd = iconv_open("UTF-32LE", "UTF-8");
-    if (cd == (iconv_t)-1) {
-        throw std::runtime_error("iconv_open failed in utf8_to_wstr");
+    iconv_t cd = iconv_open( "UTF-32LE", "UTF-8" );
+    if( cd == ( iconv_t ) -1 ) {
+        throw std::runtime_error( "iconv_open failed in utf8_to_wstr" );
     }
 
     size_t in_size = utf8.size();
-    size_t out_size = (in_size + 1) * sizeof(wchar_t);
-    std::vector<char> outbuf(out_size);
+    size_t out_size = ( in_size + 1 ) * sizeof( wchar_t );
+    std::vector<char> outbuf( out_size );
 
-    char *inbuf = const_cast<char *>(utf8.data());
+    char *inbuf = const_cast<char *>( utf8.data() );
     char *outptr = outbuf.data();
     size_t in_bytes_left = in_size;
     size_t out_bytes_left = out_size;
 
-    size_t res = iconv(cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left);
-    iconv_close(cd);
+    size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
+    iconv_close( cd );
 
-    if (res == (size_t)-1) {
-        throw std::runtime_error(std::string("iconv failed in utf8_to_wstr: ") + strerror(errno));
+    if( res == ( size_t ) -1 ) {
+        throw std::runtime_error( std::string( "iconv failed in utf8_to_wstr: " ) + strerror( errno ) );
     }
 
-    return std::wstring(reinterpret_cast<wchar_t *>(outbuf.data()),
-                        (out_size - out_bytes_left) / sizeof(wchar_t));
+    return std::wstring( reinterpret_cast<wchar_t *>( outbuf.data() ),
+                         ( out_size - out_bytes_left ) / sizeof( wchar_t ) );
 #endif
 }
 
-inline std::string wstr_to_utf8(const std::wstring &wstr) {
+inline std::string wstr_to_utf8( const std::wstring &wstr )
+{
 #if defined(_WIN32)
-    int sz = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
-    if (sz == 0) throw std::runtime_error("WideCharToMultiByte failed");
+    int sz = WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr );
+    if( sz == 0 ) {
+        throw std::runtime_error( "WideCharToMultiByte failed" );
+    }
 
-    std::string str(sz, '\0');
-    WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &str[0], sz, nullptr, nullptr);
-    strip_trailing_nulls(str);
+    std::string str( sz, '\0' );
+    WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, &str[0], sz, nullptr, nullptr );
+    strip_trailing_nulls( str );
     return str;
 
 #else
-    iconv_t cd = iconv_open("UTF-8", "UTF-32LE");
-    if (cd == (iconv_t)-1) {
-        throw std::runtime_error("iconv_open failed in wstr_to_utf8");
+    iconv_t cd = iconv_open( "UTF-8", "UTF-32LE" );
+    if( cd == ( iconv_t ) -1 ) {
+        throw std::runtime_error( "iconv_open failed in wstr_to_utf8" );
     }
 
-    size_t in_size = wstr.size() * sizeof(wchar_t);
-    size_t out_size = (in_size + 1) * 2;
-    std::vector<char> outbuf(out_size);
+    size_t in_size = wstr.size() * sizeof( wchar_t );
+    size_t out_size = ( in_size + 1 ) * 2;
+    std::vector<char> outbuf( out_size );
 
-    char *inbuf = reinterpret_cast<char *>(const_cast<wchar_t *>(wstr.data()));
+    char *inbuf = reinterpret_cast<char *>( const_cast<wchar_t *>( wstr.data() ) );
     char *outptr = outbuf.data();
     size_t in_bytes_left = in_size;
     size_t out_bytes_left = out_size;
 
-    size_t res = iconv(cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left);
-    iconv_close(cd);
+    size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
+    iconv_close( cd );
 
-    if (res == (size_t)-1) {
-        throw std::runtime_error(std::string("iconv failed in wstr_to_utf8: ") + strerror(errno));
+    if( res == ( size_t ) -1 ) {
+        throw std::runtime_error( std::string( "iconv failed in wstr_to_utf8: " ) + strerror( errno ) );
     }
 
-    return std::string(outbuf.data(), out_size - out_bytes_left);
+    return std::string( outbuf.data(), out_size - out_bytes_left );
 #endif
 }
 
