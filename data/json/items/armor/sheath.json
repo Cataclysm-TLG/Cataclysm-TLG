@@ -484,8 +484,9 @@
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
-        "moves": 30,
-        "item_restriction": [ "bokken" ]
+        "rigid": true,
+        "moves": 30,        
+        "item_restriction": [ "bokken", "pipe", "cu_pipe", "wood_sword", "pointy_stick", "sharpened_pipe" ]  
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
@@ -517,12 +518,12 @@
     "pocket_data": [
       {
         "magazine_well": "1800 ml",
-        "max_contains_volume": "2 L",
+        "max_contains_volume": "2400 ml",
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
         "moves": 30,
-        "item_restriction": [ "bokken" ]
+        "item_restriction": [ "bokken", "pipe", "cu_pipe", "wood_sword", "pointy_stick", "sharpened_pipe" ]
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
