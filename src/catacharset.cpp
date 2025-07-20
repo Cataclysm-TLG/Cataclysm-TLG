@@ -1,8 +1,12 @@
+#pragma once
 #include "catacharset.h"
 
 #include <algorithm>
 #include <array>
 #include <cstdlib>
+#include <string>
+#include <stdexcept>
+#include <vector>
 
 #include "cata_assert.h"
 #include "output.h"
@@ -15,6 +19,8 @@
 #   include "mmsystem.h"
 #else
 #   include <locale>
+#   include <iconv.h>
+#   include <cstring>
 #endif
 
 //copied from SDL2_ttf code
@@ -341,59 +347,76 @@ static void strip_trailing_nulls( std::string &str )
 }
 #endif
 
-std::wstring utf8_to_wstr( const std::string &str )
-{
+inline std::wstring utf8_to_wstr(const std::string &utf8) {
 #if defined(_WIN32)
-    int sz = MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, nullptr, 0 ) + 1;
-    std::wstring wstr( sz, '\0' );
-    MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, wstr.data(), sz );
-    strip_trailing_nulls( wstr );
+    int sz = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
+    if (sz == 0) throw std::runtime_error("MultiByteToWideChar failed");
+
+    std::wstring wstr(sz, L'\0');
+    MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, &wstr[0], sz);
+    strip_trailing_nulls(wstr);
     return wstr;
-#elif defined(__GLIBCXX__) // GCC's libstdc++, typically on Linux
-    try {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        std::wstring wstr = converter.from_bytes( str );
-#pragma GCC diagnostic pop
-        strip_trailing_nulls( wstr );
-        return wstr;
-    } catch( const std::exception &e ) {
-        debugmsg( "Invalid UTF-8 in utf8_to_wstr(): \"%s\"", str );
-        return L"[INVALID UTF-8]";
-    }
+
 #else
-    ( void )str; // Avoid unused parameter warning
-    debugmsg( "utf8_to_wstr is not supported on this platform" );
-    return L"[UNSUPPORTED]";
+    iconv_t cd = iconv_open("UTF-32LE", "UTF-8");
+    if (cd == (iconv_t)-1) {
+        throw std::runtime_error("iconv_open failed in utf8_to_wstr");
+    }
+
+    size_t in_size = utf8.size();
+    size_t out_size = (in_size + 1) * sizeof(wchar_t);
+    std::vector<char> outbuf(out_size);
+
+    char *inbuf = const_cast<char *>(utf8.data());
+    char *outptr = outbuf.data();
+    size_t in_bytes_left = in_size;
+    size_t out_bytes_left = out_size;
+
+    size_t res = iconv(cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left);
+    iconv_close(cd);
+
+    if (res == (size_t)-1) {
+        throw std::runtime_error(std::string("iconv failed in utf8_to_wstr: ") + strerror(errno));
+    }
+
+    return std::wstring(reinterpret_cast<wchar_t *>(outbuf.data()),
+                        (out_size - out_bytes_left) / sizeof(wchar_t));
 #endif
 }
 
-std::string wstr_to_utf8( const std::wstring &wstr )
-{
+inline std::string wstr_to_utf8(const std::wstring &wstr) {
 #if defined(_WIN32)
-    int sz = WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr );
-    std::string str( sz, '\0' );
-    WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, str.data(), sz, nullptr, nullptr );
-    strip_trailing_nulls( str );
+    int sz = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    if (sz == 0) throw std::runtime_error("WideCharToMultiByte failed");
+
+    std::string str(sz, '\0');
+    WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &str[0], sz, nullptr, nullptr);
+    strip_trailing_nulls(str);
     return str;
-#elif defined(__GLIBCXX__) // GCC's libstdc++, typically on Linux
-    try {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-        std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-        std::string str = converter.to_bytes( wstr );
-#pragma GCC diagnostic pop
-        strip_trailing_nulls( str );
-        return str;
-    } catch( const std::exception &e ) {
-        debugmsg( "Invalid wide string in wstr_to_utf8()" );
-        return "[INVALID WCHAR]";
-    }
+
 #else
-    ( void )wstr; // Avoid unused parameter warning
-    debugmsg( "wstr_to_utf8 is not supported on this platform" );
-    return "[UNSUPPORTED]";
+    iconv_t cd = iconv_open("UTF-8", "UTF-32LE");
+    if (cd == (iconv_t)-1) {
+        throw std::runtime_error("iconv_open failed in wstr_to_utf8");
+    }
+
+    size_t in_size = wstr.size() * sizeof(wchar_t);
+    size_t out_size = (in_size + 1) * 2;
+    std::vector<char> outbuf(out_size);
+
+    char *inbuf = reinterpret_cast<char *>(const_cast<wchar_t *>(wstr.data()));
+    char *outptr = outbuf.data();
+    size_t in_bytes_left = in_size;
+    size_t out_bytes_left = out_size;
+
+    size_t res = iconv(cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left);
+    iconv_close(cd);
+
+    if (res == (size_t)-1) {
+        throw std::runtime_error(std::string("iconv failed in wstr_to_utf8: ") + strerror(errno));
+    }
+
+    return std::string(outbuf.data(), out_size - out_bytes_left);
 #endif
 }
 
