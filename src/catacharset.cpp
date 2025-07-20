@@ -346,7 +346,7 @@ static void strip_trailing_nulls( std::string &str )
 }
 #endif
 
-inline std::wstring utf8_to_wstr( const std::string &utf8 )
+std::wstring utf8_to_wstr( const std::string &utf8 )
 {
 #if defined(_WIN32)
     int sz = MultiByteToWideChar( CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0 );
@@ -386,7 +386,7 @@ inline std::wstring utf8_to_wstr( const std::string &utf8 )
 #endif
 }
 
-inline std::string wstr_to_utf8( const std::wstring &wstr )
+std::string wstr_to_utf8( const std::wstring &wstr )
 {
 #if defined(_WIN32)
     int sz = WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr );
