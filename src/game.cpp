@@ -3823,6 +3823,9 @@ shared_ptr_fast<ui_adaptor> game::create_or_get_main_ui_adaptor()
         main_ui_adaptor = ui = make_shared_fast<ui_adaptor>();
         ui->on_redraw( []( ui_adaptor & ui ) {
             g->draw( ui );
+            if( get_option<bool>( "ANIMATIONS" ) ) {
+                g->run_weather_animation();
+            }
         } );
         ui->on_screen_resize( [this]( ui_adaptor & ui ) {
             // remove some space for the sidebar, this is the maximal space
@@ -13335,6 +13338,138 @@ void game::shift_destination_preview( const point &delta )
     for( tripoint_bub_ms &p : destination_preview ) {
         p += delta;
     }
+}
+
+void game::run_weather_animation()
+{
+    if( !get_option<bool>( "ANIMATIONS" ) ) {
+        return;
+    }
+    m.update_visibility_cache( u.posz() );
+#if defined(TILES)
+    // Mark tiles draw caches dirty so they refresh properly.
+    tilecontext->set_draw_cache_dirty();
+#endif
+    // Invalidate main UI so weather animation draws fresh.
+    invalidate_main_ui_adaptor();
+    animate_weather();
+}
+
+void game::animate_weather()
+{
+    // Initialize points and offsets as in the original function:
+    const int TOTAL_VIEW = MAX_VIEW_DISTANCE * 2 + 1;
+    point iStart( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : 0,
+                  ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_HEIGHT - TOTAL_VIEW ) / 2 : 0 );
+    point iEnd( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? TERRAIN_WINDOW_WIDTH -
+                ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : TERRAIN_WINDOW_WIDTH,
+                ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? TERRAIN_WINDOW_HEIGHT - ( TERRAIN_WINDOW_HEIGHT -
+                        TOTAL_VIEW ) / 2 : TERRAIN_WINDOW_HEIGHT );
+
+    if( fullscreen ) {
+        iStart.x = 0;
+        iStart.y = 0;
+        iEnd.x = TERMX;
+        iEnd.y = TERMY;
+    }
+
+    point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
+                  -getmaxy( w_terrain ) / 2 + u.posy() ) );
+
+#if defined(TILES)
+    if( is_tileset_isometric() ) {
+        iStart.x = 0;
+        iStart.y = 0;
+        iEnd.x = MAPSIZE_X;
+        iEnd.y = MAPSIZE_Y;
+        offset.x = 0;
+        offset.y = 0;
+    }
+#endif // TILES
+
+    const weather_animation_t &weather_info = weather.weather_id->weather_animation;
+    if( weather_info.symbol == NULL_UNICODE ) {
+        // No weather animation, nothing to do
+        return;
+    }
+
+    const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
+
+    weather_printable wPrint;
+    wPrint.colGlyph = weather_info.color;
+    wPrint.cGlyph = weather_info.symbol;
+    wPrint.wtype = weather.weather_id;
+    wPrint.vdrops.clear();
+
+    creature_tracker &creatures = get_creature_tracker();
+
+    if( weather_info.static_overlay && use_tiles ) {
+        const int width = iEnd.x + 1 - iStart.x;
+        const int height = iEnd.y + 1 - iStart.y;
+        const int max_x = width + iStart.x;
+        const int max_y = height + iStart.y;
+
+        for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
+            for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
+                const point screen_point( local_x, local_y );
+                const point map_point = screen_point + offset;
+                const tripoint mapp( map_point, u.posz() );
+
+                if( !m.inbounds( mapp ) ) {
+                    continue;
+                }
+
+                const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
+                const visibility_variables &cache = m.get_visibility_variables_cache();
+
+                const auto &vis_cache_row = visibility_cache[mapp.x];
+                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
+
+                if( m.is_outside( u.pos() ) && vis != visibility_type::CLEAR ) {
+                    continue;  // Outside, foggy visible areas
+                } else if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
+                    continue;  // Inside, only draw fog outside where visible
+                }
+
+                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+            }
+        }
+    } else {
+        const int width = iEnd.x + 1 - iStart.x;
+        const int height = iEnd.y + 1 - iStart.y;
+        const int grid_size = width * height;
+
+        std::vector<bool> used( grid_size, false );
+        auto get_index = [ = ]( int x, int y ) {
+            return y * width + x;
+        };
+
+        int attempts = 0;
+        while( static_cast<int>( wPrint.vdrops.size() ) < dropCount && attempts < dropCount * 5 ) {
+            const int local_x = rng( 0, width - 1 );
+            const int local_y = rng( 0, height - 1 );
+            const int index = get_index( local_x, local_y );
+            if( used[index] ) {
+                ++attempts;
+                continue;
+            }
+
+            const point screen_point( local_x + iStart.x, local_y + iStart.y );
+            const point map_point = screen_point + offset;
+            const tripoint mapp( map_point, u.posz() );
+
+            if( m.inbounds( mapp ) &&
+                m.is_outside( mapp ) &&
+                m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x][mapp.y],
+                                  m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
+                !creatures.creature_at( mapp, true ) ) {
+                used[index] = true;
+                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+            }
+            ++attempts;
+        }
+    }
+    draw_weather( wPrint );
 }
 
 int game::slip_down_chance( climb_maneuver, climbing_aid_id aid_id,

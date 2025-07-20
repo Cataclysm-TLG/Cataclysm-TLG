@@ -1275,6 +1275,10 @@ class game
         // called on map shifting
         void shift_destination_preview( const point &delta );
 
+        // Wrapper for animate_weather() that checks options and sets it all up.
+        void run_weather_animation();
+        void animate_weather();
+
         /** Passed to climbing-related functions (slip_down) to
         *   indicate the climbing action being attempted.
         */
