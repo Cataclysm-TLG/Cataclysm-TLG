@@ -442,87 +442,13 @@
     "material_thickness": 1,
     "pocket_data": [
       {
-        "magazine_well": "1750 ml",
-        "max_contains_volume": "2400 ml",
+        "magazine_well": "1250 ml",
+        "max_contains_volume": "2 L",
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
         "moves": 30,
         "flag_restriction": [ "SHEATH_SWORD" ]
-      }
-    ],
-    "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
-    "armor": [
-      {
-        "encumbrance": [ 3, 4 ],
-        "coverage": 15,
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
-      }
-    ]
-  },
-  {
-    "id": "bokken_scabbard",
-    "type": "ARMOR",
-    "name": { "str": "bokken saya" },
-    "description": "A large, adjustable plastic sheath for holding a bokken.  Activate to sheathe/draw a weapon.",
-    "weight": "150 g",
-    "volume": "2600 ml",
-    "price": "60 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "plastic" ],
-    "symbol": "[",
-    "looks_like": "holster",
-    "color": "black",
-    "sided": true,
-    "material_thickness": 1,
-    "pocket_data": [
-      {
-        "magazine_well": "1750 ml",
-        "max_contains_volume": "2400 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "100 cm",
-        "holster": true,
-        "moves": 30,
-        "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ] 
-      }
-    ],
-    "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
-    "armor": [
-      {
-        "encumbrance": [ 3, 4 ],
-        "coverage": 15,
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
-      }
-    ]
-  },
-	{
-    "id": "bokken_scabbard_leather",
-    "type": "ARMOR",
-    "name": { "str": "leather bokken saya" },
-    "description": "A large, adjustable leather sheath for holding a bokken.  Activate to sheathe/draw a weapon.",
-    "weight": "150 g",
-    "volume": "2600 ml",
-    "price": "60 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "leather", "wood" ],
-    "symbol": "[",
-    "looks_like": "holster",
-    "color": "brown",
-    "sided": true,
-    "material_thickness": 1,
-    "pocket_data": [
-      {
-        "magazine_well": "1750 ml",
-        "max_contains_volume": "2400 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "100 cm",
-        "holster": true,
-        "moves": 30,
-        "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },

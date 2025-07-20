@@ -18,7 +18,7 @@
       { "item": "cane_toy", "variant": "cane_toy_sinister", "prob": 5 },
       { "item": "scythe_fake", "prob": 5 },
       { "item": "scythe_toy", "prob": 5 },
-      { "group": "bokken_with_saya", "prob": 1 },
+      { "item": "bokken", "prob": 1 },
       { "item": "katana_fake", "prob": 1 },
       { "item": "longsword_fake", "prob": 1 },
       { "item": "clownshoes", "prob": 15 },
