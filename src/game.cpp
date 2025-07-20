@@ -3823,9 +3823,6 @@ shared_ptr_fast<ui_adaptor> game::create_or_get_main_ui_adaptor()
         main_ui_adaptor = ui = make_shared_fast<ui_adaptor>();
         ui->on_redraw( []( ui_adaptor & ui ) {
             g->draw( ui );
-            if( get_option<bool>( "ANIMATIONS" ) ) {
-                g->run_weather_animation();
-            }
         } );
         ui->on_screen_resize( [this]( ui_adaptor & ui ) {
             // remove some space for the sidebar, this is the maximal space
@@ -4062,7 +4059,8 @@ void game::draw( ui_adaptor &ui )
     ter_view_p.z = ( u.pos() + u.view_offset ).z();
     m.build_map_cache( ter_view_p.z );
     m.update_visibility_cache( ter_view_p.z );
-
+    std::string action;
+    g->run_weather_animation();
     werase( w_terrain );
     void_blink_curses();
     draw_ter();
@@ -13352,7 +13350,9 @@ void game::run_weather_animation()
 #endif
     // Invalidate main UI so weather animation draws fresh.
     invalidate_main_ui_adaptor();
-    animate_weather();
+    if( weather.weather_id->weather_animation.symbol != NULL_UNICODE ) {
+        animate_weather();
+    }
 }
 
 void game::animate_weather()
@@ -13372,7 +13372,6 @@ void game::animate_weather()
         iEnd.x = TERMX;
         iEnd.y = TERMY;
     }
-
     point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
                   -getmaxy( w_terrain ) / 2 + u.posy() ) );
 
@@ -13421,16 +13420,16 @@ void game::animate_weather()
 
                 const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
                 const visibility_variables &cache = m.get_visibility_variables_cache();
-
                 const auto &vis_cache_row = visibility_cache[mapp.x];
                 const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
 
-                if( m.is_outside( u.pos() ) && vis != visibility_type::CLEAR ) {
-                    continue;  // Outside, foggy visible areas
-                } else if( !m.is_outside( mapp ) || vis != visibility_type::CLEAR ) {
-                    continue;  // Inside, only draw fog outside where visible
+                if( vis != visibility_type::CLEAR ) {
+                    continue; // Skip fully visible tiles — no fog needed
                 }
 
+                if( !m.is_outside( u.pos() ) && !m.is_outside( mapp ) ) {
+                    continue; // Player is inside and tile is inside — skip fog
+                }
                 wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
             }
         }

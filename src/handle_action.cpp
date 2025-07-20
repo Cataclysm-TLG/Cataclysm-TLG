@@ -284,6 +284,8 @@ input_context game::get_player_input( std::string &action )
         } );
         add_draw_callback( animation_cb );
 
+        ctxt.set_timeout( 125 );
+
         do {
             if( g->uquit == QUIT_EXIT ) {
                 break;
@@ -311,21 +313,19 @@ input_context game::get_player_input( std::string &action )
             }
 
             ui_manager::redraw_invalidated();
-        } while( handle_mouseview( ctxt, action ) && uquit != QUIT_WATCH
-                 && ( action != "TIMEOUT" || !current_turn.has_timeout_elapsed() ) );
+
+            if( handle_mouseview( ctxt, action ) ) {
+                run_weather_animation();
+            }
+
+        } while( action == "TIMEOUT" );
         ctxt.reset_timeout();
     } else {
-        ctxt.set_timeout( 125 );
-        while( handle_mouseview( ctxt, action ) ) {
-            if( action == "TIMEOUT" && current_turn.has_timeout_elapsed() ) {
-                break;
-            }
-        }
         ctxt.reset_timeout();
     }
-
     return ctxt;
 }
+
 
 
 static void rcdrive( const point &d )
