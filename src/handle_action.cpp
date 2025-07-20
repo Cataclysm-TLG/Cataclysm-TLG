@@ -283,6 +283,38 @@ input_context game::get_player_input( std::string &action )
             }
         } );
         add_draw_callback( animation_cb );
+        creature_tracker &creatures = get_creature_tracker();
+        if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
+            invalidate_main_ui_adaptor();
+
+            SCT.advanceAllSteps();
+
+            //Check for creatures on all drawing positions and offset if necessary
+            for( auto iter = SCT.vSCT.rbegin(); iter != SCT.vSCT.rend(); ++iter ) {
+                const direction oCurDir = iter->getDirection();
+                const int width = utf8_width( iter->getText() );
+                for( int i = 0; i < width; ++i ) {
+                    tripoint tmp( iter->getPosX() + i, iter->getPosY(), get_map().get_abs_sub().z() );
+                    const Creature *critter = creatures.creature_at( tmp, true );
+
+                    if( critter != nullptr && u.sees( *critter ) ) {
+                        i = -1;
+                        int iPos = iter->getStep() + iter->getStepOffset();
+                        for( auto iter2 = iter; iter2 != SCT.vSCT.rend(); ++iter2 ) {
+                            if( iter2->getDirection() == oCurDir &&
+                                iter2->getStep() + iter2->getStepOffset() <= iPos ) {
+                                if( iter2->getType() == "hp" ) {
+                                    iter2->advanceStepOffset();
+                                }
+
+                                iter2->advanceStepOffset();
+                                iPos = iter2->getStep() + iter2->getStepOffset();
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         ctxt.set_timeout( 125 );
 
@@ -316,6 +348,7 @@ input_context game::get_player_input( std::string &action )
 
             if( handle_mouseview( ctxt, action ) ) {
                 run_weather_animation();
+                SCT.advanceAllSteps();
             }
 
         } while( action == "TIMEOUT" );

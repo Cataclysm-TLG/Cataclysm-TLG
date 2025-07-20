@@ -4059,7 +4059,6 @@ void game::draw( ui_adaptor &ui )
     ter_view_p.z = ( u.pos() + u.view_offset ).z();
     m.build_map_cache( ter_view_p.z );
     m.update_visibility_cache( ter_view_p.z );
-    std::string action;
     g->run_weather_animation();
     werase( w_terrain );
     void_blink_curses();
@@ -13357,7 +13356,6 @@ void game::run_weather_animation()
 
 void game::animate_weather()
 {
-    // Initialize points and offsets as in the original function:
     const int TOTAL_VIEW = MAX_VIEW_DISTANCE * 2 + 1;
     point iStart( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : 0,
                   ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_HEIGHT - TOTAL_VIEW ) / 2 : 0 );
@@ -13423,53 +13421,73 @@ void game::animate_weather()
                 const auto &vis_cache_row = visibility_cache[mapp.x];
                 const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
 
+                // Don't display fog on indoor tiles when the player is indoors.
                 if( vis != visibility_type::CLEAR ) {
-                    continue; // Skip fully visible tiles — no fog needed
+                    continue;
                 }
-
                 if( !m.is_outside( u.pos() ) && !m.is_outside( mapp ) ) {
-                    continue; // Player is inside and tile is inside — skip fog
+                    continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
             }
         }
     } else {
-        const int width = iEnd.x + 1 - iStart.x;
-        const int height = iEnd.y + 1 - iStart.y;
-        const int grid_size = width * height;
+        // Ensure that rain doesn't animate faster than it's supposed to.
+        static std::chrono::steady_clock::time_point last_reroll = std::chrono::steady_clock::now();
+        static std::vector<std::pair<int, int>> cached_drops;
 
-        std::vector<bool> used( grid_size, false );
-        auto get_index = [ = ]( int x, int y ) {
-            return y * width + x;
-        };
 
-        int attempts = 0;
-        while( static_cast<int>( wPrint.vdrops.size() ) < dropCount && attempts < dropCount * 5 ) {
-            const int local_x = rng( 0, width - 1 );
-            const int local_y = rng( 0, height - 1 );
-            const int index = get_index( local_x, local_y );
-            if( used[index] ) {
+        const auto now = std::chrono::steady_clock::now();
+        if( now - last_reroll >= std::chrono::milliseconds( 125 ) ) {
+            last_reroll = now;
+            cached_drops.clear();
+
+            const int width = iEnd.x + 1 - iStart.x;
+            const int height = iEnd.y + 1 - iStart.y;
+            const int grid_size = width * height;
+
+            std::vector<bool> used( grid_size, false );
+            auto get_index = [ = ]( int x, int y ) {
+                return y * width + x;
+            };
+
+            int attempts = 0;
+            while( static_cast<int>( cached_drops.size() ) < dropCount && attempts < dropCount * 5 ) {
+                const int local_x = rng( 0, width - 1 );
+                const int local_y = rng( 0, height - 1 );
+                const int index = get_index( local_x, local_y );
+                if( used[index] ) {
+                    ++attempts;
+                    continue;
+                }
+
+                const point screen_point( local_x + iStart.x, local_y + iStart.y );
+                const point map_point = screen_point + offset;
+                const tripoint mapp( map_point, u.posz() );
+
+                if( m.inbounds( mapp ) &&
+                    m.is_outside( mapp ) &&
+                    m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x][mapp.y],
+                                      m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
+                    !creatures.creature_at( mapp, true ) ) {
+                    used[index] = true;
+                    cached_drops.emplace_back( screen_point.x, screen_point.y );
+                }
                 ++attempts;
-                continue;
             }
-
-            const point screen_point( local_x + iStart.x, local_y + iStart.y );
-            const point map_point = screen_point + offset;
-            const tripoint mapp( map_point, u.posz() );
-
-            if( m.inbounds( mapp ) &&
-                m.is_outside( mapp ) &&
-                m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x][mapp.y],
-                                  m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
-                !creatures.creature_at( mapp, true ) ) {
-                used[index] = true;
-                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
-            }
-            ++attempts;
         }
+
+        // Always use the last valid generated drops
+        wPrint.vdrops.clear();
+        for( const std::pair<int, int> &p : cached_drops ) {
+            wPrint.vdrops.emplace_back( p.first, p.second );
+        }
+
     }
+
     draw_weather( wPrint );
 }
+
 
 int game::slip_down_chance( climb_maneuver, climbing_aid_id aid_id,
                             bool show_chance_messages )
