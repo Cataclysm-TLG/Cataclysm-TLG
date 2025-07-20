@@ -377,7 +377,7 @@ inline std::wstring utf8_to_wstr( const std::string &utf8 )
     size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
     iconv_close( cd );
 
-    if( res == reinterpret_cast<size_t>( -1 ) ) {
+    if( res == static_cast<size_t>( -1 ) ) {
         throw std::runtime_error( std::string( "iconv failed in utf8_to_wstr: " ) + strerror( errno ) );
     }
 
@@ -417,7 +417,7 @@ inline std::string wstr_to_utf8( const std::wstring &wstr )
     size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
     iconv_close( cd );
 
-    if( res == reinterpret_cast<size_t>( -1 ) ) {
+    if( res == static_cast<size_t>( -1 ) ) {
         throw std::runtime_error( std::string( "iconv failed in wstr_to_utf8: " ) + strerror( errno ) );
     }
 
