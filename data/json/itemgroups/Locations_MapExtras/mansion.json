@@ -535,7 +535,8 @@
     "subtype": "distribution",
     "items": [
       { "group": "samurai_sword_set_fake", "prob": 7 },
-      [ "bokken_fake", 6 ],
+      [ "bokken", 4 ],
+      { "group": "bokken_with_saya", "prob": 2 },
       [ "nodachi_fake", 5 ],
       [ "naginata_fake", 5 ]
     ]
@@ -546,7 +547,8 @@
     "subtype": "distribution",
     "items": [
       { "group": "samurai_sword_set_inferior", "prob": 7 },
-      [ "bokken_inferior", 6 ],
+      [ "bokken", 4 ],
+      { "group": "bokken_with_saya", "prob": 2 },
       [ "nodachi_inferior", 5 ],
       [ "naginata_inferior", 5 ]
     ]
