@@ -485,7 +485,7 @@
         "max_item_length": "100 cm",
         "holster": true,
         "moves": 30,
-        "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ] 
+        "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
@@ -499,7 +499,7 @@
       }
     ]
   },
-	{
+  {
     "id": "bokken_scabbard_leather",
     "type": "ARMOR",
     "name": { "str": "leather bokken saya" },

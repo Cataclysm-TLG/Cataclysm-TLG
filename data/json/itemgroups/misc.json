@@ -293,10 +293,7 @@
     "type": "item_group",
     "subtype": "collection",
     "//": "A bokken and it's saya",
-    "items": [
-      { "item": "bokken_scabbard" },
-      { "item": "bokken" }
-    ]
+    "items": [ { "item": "bokken_scabbard" }, { "item": "bokken" } ]
   },
   {
     "id": "horse_gear",
