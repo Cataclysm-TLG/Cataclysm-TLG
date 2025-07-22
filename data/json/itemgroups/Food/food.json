@@ -998,7 +998,7 @@
       { "item": "egg_raven", "prob": 5 },
       { "item": "egg_robin", "prob": 5 },
       { "item": "egg_duck", "prob": 2 },
-      { "item": "egg_goose_canadian", "prob": 1 },
+      { "item": "egg_goose", "prob": 1 },
       { "item": "egg_coot", "prob": 1 },
       { "item": "egg_grebe", "prob": 1 },
       { "item": "egg_turkey", "prob": 1 },

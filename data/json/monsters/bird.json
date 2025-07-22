@@ -209,26 +209,6 @@
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "FLIES", "SWARMS", "SMALL_HIDER" ]
   },
   {
-    "id": "mon_goose_canadian",
-    "type": "MONSTER",
-    "copy-from": "mon_duck",
-    "name": { "str": "goose", "str_pl": "geese" },
-    "description": "A Canada goose; a common waterfowl that regrets leaving Canada.",
-    "volume": "5 L",
-    "weight": "3750 g",
-    "hp": 15,
-    "aggression": 0,
-    "morale": 15,
-    "aggro_character": false,
-    "dodge": 3,
-    "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
-    "anger_triggers": [ "PLAYER_CLOSE", "FRIEND_ATTACKED" ],
-    "fear_triggers": [ "FRIEND_DIED", "FIRE" ],
-    "reproduction": { "baby_egg": "egg_goose_canadian", "baby_count": 3, "baby_timer": 10 },
-    "baby_flags": [ "SPRING" ],
-    "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 4 }
-  },
-  {
     "id": "mon_turkey",
     "type": "MONSTER",
     "name": { "str": "turkey" },
@@ -419,12 +399,6 @@
     "upgrades": { "age_grow": 12, "into": "mon_duck" }
   },
   {
-    "id": "mon_goose_canadian_chick",
-    "type": "MONSTER",
-    "copy-from": "mon_duck_chick",
-    "upgrades": { "age_grow": 16, "into": "mon_goose_canadian" }
-  },
-  {
     "id": "mon_crow_mutant_small",
     "type": "MONSTER",
     "name": { "str": "oversized crow" },
@@ -547,14 +521,15 @@
     "volume": "5 L",
     "weight": "3750 g",
     "hp": 15,
-    "looks_like": "mon_goose_canadian",
+    "looks_like": "mon_goose",
     "aggression": 1,
     "morale": 15,
+    "aggro_character": false,
     "dodge": 3,
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bird" ],
     "weakpoint_sets": [ "wps_bird_body" ],
     "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
-    "fear_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "FIRE", "HURT" ],
+    "fear_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "FIRE", "HURT", "SOUND" ],
     "anger_triggers": [ "PLAYER_CLOSE" ],
     "reproduction": { "baby_egg": "egg_goose", "baby_count": 5, "baby_timer": 10 },
     "biosignature": { "biosig_item": "feces_bird", "biosig_timer": 4 },
