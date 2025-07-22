@@ -78,14 +78,14 @@
     "container-item": "police_belt",
     "on_overflow": "discard",
     "items": [
-      { "item": "heavy_flashlight", "prob": 90, "charges": [ 0, 300 ] },
-      { "item": "two_way_radio", "prob": 90, "charges": [ 0, 300 ] },
-      { "item": "tazer", "prob": 50 },
+      { "item": "heavy_flashlight", "damage": [ 0, 2 ], "prob": 90, "charges": [ 0, 300 ] },
+      { "item": "two_way_radio", "damage": [ 0, 2 ], "prob": 90, "charges": [ 0, 300 ] },
+      { "item": "tazer", "damage": [ 0, 2 ], "prob": 40 },
       { "item": "airhorn", "prob": 5 },
       { "item": "rope_30", "prob": 5 },
       { "item": "sm_extinguisher", "prob": 5 },
-      { "group": "cop_melee", "prob": 60 },
-      { "item": "teargas_sprayer", "prob": 40, "charges": [ 1, 10 ] }
+      { "group": "cop_melee", "damage": [ 0, 2 ], "prob": 60 },
+      { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 20, "charges": [ 1, 10 ] }
     ]
   },
   {
@@ -211,27 +211,27 @@
       },
       {
         "collection": [
-          { "item": "heavy_flashlight", "prob": 20, "charges": [ 0, 300 ] },
-          { "item": "airhorn", "prob": 5 },
-          { "item": "two_way_radio", "prob": 30 },
+          { "item": "heavy_flashlight", "damage": [ 0, 2 ], "prob": 20, "charges": [ 0, 300 ] },
+          { "item": "airhorn", "damage": [ 0, 1 ], "prob": 5 },
+          { "item": "two_way_radio", "damage": [ 0, 2 ], "prob": 30 },
           { "item": "whistle", "prob": 5 },
-          { "item": "flashbang", "prob": 10 },
-          { "item": "gasbomb", "prob": 10 },
+          { "item": "flashbang", "damage": [ 0, 1 ], "prob": 10 },
+          { "item": "gasbomb", "damage": [ 0, 1 ], "prob": 10 },
           { "item": "sm_extinguisher", "prob": 5 },
           { "item": "rope_30", "prob": 10 },
-          { "item": "teargas_sprayer", "prob": 30, "charges": [ 1, 10 ] }
+          { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 15, "charges": [ 1, 10 ] }
         ],
         "prob": 30
       },
       {
         "collection": [
-          { "item": "holster", "prob": 35 },
-          { "item": "chestpouch", "prob": 15 },
-          { "item": "ammo_satchel", "prob": 10 },
-          { "item": "bholster", "prob": 25 },
-          { "item": "bandolier_shotgun", "prob": 10 },
-          { "item": "legpouch_large", "prob": 25 },
-          { "item": "police_belt", "prob": 15 }
+          { "item": "holster", "damage": [ 0, 3 ], "prob": 35 },
+          { "item": "chestpouch", "damage": [ 0, 3 ], "prob": 15 },
+          { "item": "ammo_satchel", "damage": [ 0, 3 ], "prob": 10 },
+          { "item": "bholster", "damage": [ 0, 3 ], "prob": 25 },
+          { "item": "bandolier_shotgun", "damage": [ 0, 3 ], "prob": 10 },
+          { "item": "legpouch_large", "damage": [ 0, 3 ], "prob": 25 },
+          { "item": "police_belt", "damage": [ 0, 3 ], "prob": 15 }
         ],
         "prob": 25
       }
@@ -242,9 +242,9 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "gloves_fingerless", "prob": 15 },
-      { "item": "gloves_leather", "prob": 15 },
-      { "item": "gloves_tactical", "prob": 45 }
+      { "item": "gloves_fingerless", "damage": [ 0, 3 ], "prob": 15 },
+      { "item": "gloves_leather", "damage": [ 0, 3 ], "prob": 15 },
+      { "item": "gloves_tactical", "damage": [ 0, 3 ], "prob": 45 }
     ]
   },
   {
@@ -252,10 +252,10 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "mask_gas", "prob": 10 },
-      { "item": "helmet_riot", "prob": 20 },
-      { "item": "tac_helmet", "prob": 10 },
-      { "item": "tac_fullhelmet", "prob": 5 }
+      { "item": "mask_gas", "damage": [ 0, 3 ], "prob": 10 },
+      { "item": "helmet_riot", "damage": [ 0, 3 ], "prob": 20 },
+      { "item": "tac_helmet", "damage": [ 0, 3 ], "prob": 10 },
+      { "item": "tac_fullhelmet", "damage": [ 0, 3 ], "prob": 5 }
     ]
   },
   {
@@ -263,9 +263,9 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "pants_tactical", "prob": 70 },
-      { "item": "pants_cargo", "prob": 70 },
-      { "item": "pants_army", "prob": 30 }
+      { "item": "pants_tactical", "damage": [ 0, 3 ], "prob": 70 },
+      { "item": "pants_cargo", "damage": [ 0, 3 ], "prob": 70 },
+      { "item": "pants_army", "damage": [ 0, 3 ], "prob": 30 }
     ]
   },
   {

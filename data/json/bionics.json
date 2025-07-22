@@ -1571,12 +1571,12 @@
   {
     "id": "bio_taser",
     "type": "bionic",
-    "name": { "str": "Super Stun Gun" },
-    "description": "You have a powerful stun gun built into your hand.  Activate to zap an adjacent enemy.",
+    "name": { "str": "Implanted Stun Gun" },
+    "description": "You have a powerful stun gun built into your hand.  Activate to attempt to zap an adjacent enemy.",
     "occupied_bodyparts": [ [ "hand_r", 3 ] ],
     "flags": [ "BIONIC_NPC_USABLE" ],
-    "spell_on_activation": { "id": "bio_taser_spell" },
-    "activated_close_ui": true
+    "activated_close_ui": true,
+    "act_cost": "2500 J"
   },
   {
     "id": "bio_teleport",

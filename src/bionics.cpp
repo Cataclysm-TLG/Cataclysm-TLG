@@ -33,6 +33,7 @@
 #include "condition.h"
 #include "coordinates.h"
 #include "creature.h"
+#include "creature_tracker.h"
 #include "damage.h"
 #include "debug.h"
 #include "dialogue.h"
@@ -121,6 +122,7 @@ static const bionic_id bio_radscrubber( "bio_radscrubber" );
 static const bionic_id bio_remote( "bio_remote" );
 static const bionic_id bio_resonator( "bio_resonator" );
 static const bionic_id bio_shockwave( "bio_shockwave" );
+static const bionic_id bio_taser( "bio_taser" );
 static const bionic_id bio_teleport( "bio_teleport" );
 static const bionic_id bio_torsionratchet( "bio_torsionratchet" );
 static const bionic_id bio_water_extractor( "bio_water_extractor" );
@@ -128,13 +130,17 @@ static const bionic_id bio_water_extractor( "bio_water_extractor" );
 static const efftype_id effect_assisted( "assisted" );
 static const efftype_id effect_asthma( "asthma" );
 static const efftype_id effect_bleed( "bleed" );
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_heating_bionic( "heating_bionic" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_operating( "operating" );
 static const efftype_id effect_sleep( "sleep" );
 static const efftype_id effect_under_operation( "under_operation" );
+static const efftype_id effect_zapped( "zapped" );
 
 static const fault_id fault_bionic_salvaged( "fault_bionic_salvaged" );
+
+static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 
 static const itype_id itype_anesthetic( "anesthetic" );
 static const itype_id itype_radiocontrol( "radiocontrol" );
@@ -940,6 +946,85 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         } else {
             refund_power();
             add_msg_if_player( m_info, _( "There's nothing to light there." ) );
+            return false;
+        }
+        // Note: Function duplicated in iuse::tazer(), make sure they match!
+    } else if( bio.id == bio_taser ) {
+        if( is_armed() ) {
+            refund_power();
+            add_msg_if_player( m_info, _( "You need a free hand to use your implanted taser." ) );
+            return false;
+        }
+        const std::optional<tripoint_bub_ms> pnt = choose_adjacent_bub( _( "Shock where?" ) );
+        Creature *target = get_creature_tracker().creature_at( *pnt, true );
+        if( pnt && target != this && target ) {
+            npc *foe = dynamic_cast<npc *>( target );
+            if( foe != nullptr &&
+                !foe->is_enemy() &&
+                !query_yn( _( "Do you really want to shock %s?" ), target->disp_name() ) ) {
+                return false;
+            }
+            int target_size = target->enum_size();
+            const float hit_roll = this->hit_roll();
+            mod_moves( -100 );
+            const bool tazer_was_dodged = target->dodge_check( hit_roll );
+            const bool tazer_was_armored = hit_roll < target->get_armor_type( STATIC(
+                                               damage_type_id( "bash" ) ), bodypart_id( "torso" ) );
+            if( tazer_was_dodged ) {
+                add_msg_player_or_npc( _( "You attempt to shock %s, but miss." ),
+                                       _( "<npcname> attempts to shock %s, but misses." ),
+                                       target->disp_name() );
+            } else if( tazer_was_armored ) {
+                add_msg_player_or_npc( _( "You attempt to shock %s, but are blocked by armor." ),
+                                       _( "<npcname> attempts to shock %s, but is blocked by armor." ),
+                                       target->disp_name() );
+            } else if( target->is_elec_immune() ) {
+                add_msg_player_or_npc( _( "You attempt to shock %s, but nothing happens." ),
+                                       _( "<npcname> attempts to shock %s, but nothing happens." ),
+                                       target->disp_name() );
+            } else {
+                // Stun duration scales harshly inversely with big creatures
+                if( target_size == 1 ) {
+                    target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.5, 2.5 ) );
+                    target->add_effect( effect_zapped, 2_seconds );
+                } else if( target_size == 2 ) {
+                    target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.25, 2.0 ) );
+                    target->add_effect( effect_zapped, 2_seconds );
+                } else if( target_size == 4 ) {
+                    target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.95, 1.15 ) );
+                    target->add_effect( effect_zapped, 1_seconds );
+                } else if( target_size == 5 ) {
+                    target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.5, 0.8 ) );
+                } else {
+                    target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.1, 1.5 ) );
+                }
+                if( target_size < 5 && target->has_effect_with_flag( json_flag_GRAB_FILTER ) &&
+                    one_in( std::max( 1, target->enum_size() - 1 ) ) ) {
+                    for( const effect &eff : target->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
+                        const efftype_id effid = eff.get_id();
+                        target->remove_effect( effid );
+                    }
+                    // Remove orphan grabs by running try_remove_grab() with attacking set to true.
+                    try_remove_grab( true );
+                    add_msg_player_or_npc( m_good,
+                                           _( "You are released from %s grasp!" ),
+                                           _( "<npcname> is released from %s grasp!" ),
+                                           target->disp_name( true ) );
+                }
+                if( target_size < 4 && one_in( target_size ) ) {
+                    target->add_effect( effect_downed, 1_turns );
+                }
+                add_msg_player_or_npc( m_good,
+                                       _( "You shock %s!" ),
+                                       _( "<npcname> shocks %s!" ),
+                                       target->disp_name() );
+            }
+            if( foe != nullptr ) {
+                foe->on_attacked( *this );
+            }
+        } else {
+            refund_power();
+            add_msg_if_player( m_info, _( "There's nothing to shock there." ) );
             return false;
         }
     } else if( bio.id == bio_geiger ) {

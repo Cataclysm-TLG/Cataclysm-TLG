@@ -102,7 +102,7 @@
       { "group": "superglue", "prob": 5 },
       [ "plastichoboreel", 5 ],
       [ "survivormap", 5 ],
-      { "item": "teargas_sprayer", "prob": 25, "charges": [ 9, 10 ] }
+      { "item": "teargas_sprayer", "prob": 5, "charges": [ 9, 10 ] }
     ]
   },
   {
