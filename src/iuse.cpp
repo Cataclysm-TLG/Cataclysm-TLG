@@ -240,6 +240,9 @@ static const efftype_id effect_weak_antibiotic( "weak_antibiotic" );
 static const efftype_id effect_weak_antibiotic_visible( "weak_antibiotic_visible" );
 static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_weed_high( "weed_high" );
+static const efftype_id effect_zapped( "zapped" );
+
+static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 
 static const furn_str_id furn_f_translocator_buoy( "f_translocator_buoy" );
 
@@ -3671,13 +3674,16 @@ std::optional<int> iuse::portal( Character *p, item *it, const tripoint & )
     get_map().trap_set( t, tr_portal );
     return 1;
 }
-
+// Note: Function duplicated in Character::activate_bionic(), make sure they match!
 std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
 {
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     tripoint pnt = pos;
     if( pos == p->pos() ) {
         const std::optional<tripoint> pnt_ = choose_adjacent( _( "Shock where?" ) );
@@ -3704,11 +3710,11 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         !p->query_yn( _( "Do you really want to shock %s?" ), target->disp_name() ) ) {
         return std::nullopt;
     }
-
+    int target_size = target->enum_size();
     const float hit_roll = p->hit_roll();
-    p->mod_moves( -to_moves<int>( 1_seconds ) );
+    p->mod_moves( -100 );
 
-    const bool tazer_was_dodged = target->dodge_check( p->hit_roll() );
+    const bool tazer_was_dodged = target->dodge_check( hit_roll );
     const bool tazer_was_armored = hit_roll < target->get_armor_type( STATIC(
                                        damage_type_id( "bash" ) ), bodypart_id( "torso" ) );
     if( tazer_was_dodged ) {
@@ -3719,18 +3725,41 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         p->add_msg_player_or_npc( _( "You attempt to shock %s, but are blocked by armor." ),
                                   _( "<npcname> attempts to shock %s, but is blocked by armor." ),
                                   target->disp_name() );
+    } else if( target->is_elec_immune() ) {
+        p->add_msg_player_or_npc( _( "You attempt to shock %s, but nothing happens." ),
+                                  _( "<npcname> attempts to shock %s, but nothing happens." ),
+                                  target->disp_name() );
     } else {
         // Stun duration scales harshly inversely with big creatures
-        if( target->get_size() == creature_size::tiny ) {
+        if( target_size == 1 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.5, 2.5 ) );
-        } else if( target->get_size() == creature_size::small ) {
+            target->add_effect( effect_zapped, 2_seconds );
+        } else if( target_size == 2 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.25, 2.0 ) );
-        } else if( target->get_size() == creature_size::large ) {
+            target->add_effect( effect_zapped, 2_seconds );
+        } else if( target_size == 4 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.95, 1.15 ) );
-        } else if( target->get_size() == creature_size::huge ) {
+            target->add_effect( effect_zapped, 1_seconds );
+        } else if( target_size == 5 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.5, 0.8 ) );
         } else {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.1, 1.5 ) );
+        }
+        if( target_size < 5 && target->has_effect_with_flag( json_flag_GRAB_FILTER ) &&
+            one_in( std::max( 1, target_size - 1 ) ) ) {
+            for( const effect &eff : target->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
+                const efftype_id effid = eff.get_id();
+                target->remove_effect( effid );
+            }
+            // Remove orphan grabs by running try_remove_grab() with attacking set to true.
+            p->try_remove_grab( true );
+            p->add_msg_player_or_npc( m_good,
+                                      _( "You are released from %s grasp!" ),
+                                      _( "<npcname> is released from %s grasp!" ),
+                                      target->disp_name( true ) );
+        }
+        if( target_size < 4 && one_in( target_size ) ) {
+            target->add_effect( effect_downed, 1_turns );
         }
         p->add_msg_player_or_npc( m_good,
                                   _( "You shock %s!" ),
@@ -3742,16 +3771,16 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         foe->on_attacked( *p );
     }
 
-    return 1;
+    return 20;
 }
 
 std::optional<int> iuse::tazer2( Character *p, item *it, const tripoint &pos )
 {
-    if( it->ammo_remaining( p, true ) >= 2 ) {
+    if( it->ammo_remaining( p, true ) >= 20 ) {
         // Instead of having a ctrl+c+v of the function above, spawn a fake tazer and use it
         // Ugly, but less so than copied blocks
         item fake( "tazer", calendar::turn_zero );
-        fake.charges = 2;
+        fake.charges = 20;
         return tazer( p, &fake, pos );
     } else {
         p->add_msg_if_player( m_info, _( "Insufficient power" ) );

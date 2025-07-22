@@ -8395,8 +8395,10 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 
     if( !weapon.is_null() && !can_wield( weapon ).success() &&
         can_drop( weapon ).success() ) {
-        add_msg_if_player( _( "You are no longer able to wield your %s and drop it!" ),
-                           weapon.display_name() );
+        if( is_avatar() ) {
+            popup( _( "You are no longer able to wield your %s and drop it!" ),
+                   weapon.display_name() );
+        }
         put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { weapon } );
         i_rem( &weapon );
     }
