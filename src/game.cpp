@@ -10652,7 +10652,7 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     } else if( mcost == 0 ) {
         return false;
     }
-    bool diag = trigdist && u.posx() != dest_loc.x && u.posy() != dest_loc.y;
+    bool diag = u.posx() != dest_loc.x && u.posy() != dest_loc.y;
     const int previous_moves = u.get_moves();
     if( u.is_mounted() ) {
         auto *crit = u.mounted_creature.get();
@@ -12735,7 +12735,6 @@ void game::update_overmap_seen()
 {
     const tripoint_abs_omt ompos = u.global_omt_location();
     const int dist = u.overmap_modified_sight_range( light_level( u.posz() ) );
-    const int base_sight = u.overmap_sight_range( light_level( u.posz() ) );
     const int dist_squared = dist * dist;
     // We can always see where we're standing
     overmap_buffer.set_seen( ompos, om_vision_level::full );
@@ -12751,50 +12750,35 @@ void game::update_overmap_seen()
             continue;
         }
         // If circular distances are enabled, scale overmap distances by the diagonality of the sight line.
-        point_rel_omt abs_delta = delta.abs();
-        int max_delta = std::max( abs_delta.x(), abs_delta.y() );
+        point abs_delta = delta.raw().abs();
+        int max_delta = std::max( abs_delta.x, abs_delta.y );
         const float multiplier = trigdist ? std::sqrt( h_squared ) / max_delta : 1;
         const std::vector<tripoint_abs_omt> line = line_to( ompos, p );
         float sight_points = dist;
-        bool can_see = false;
-        for( auto it = line.begin(); it != line.end(); ++it ) {
+        for( auto it = line.begin();
+             it != line.end() && sight_points >= 0; ++it ) {
             const oter_id &ter = overmap_buffer.ter( *it );
-            const int see_cost = static_cast<int>( ter->get_see_cost() );
-
-            if( see_cost >= 5 ) {
-                break; // Solid wall blocks sight
-            }
-
-            sight_points -= see_cost * multiplier;
-            if( sight_points < 0 ) {
-                break;
-            }
-            if( *it == p ) {
-                can_see = true;
-                break;
-            }
+            sight_points -= static_cast<int>( ter->get_see_cost() ) * multiplier;
         }
         if( sight_points < 0 ) {
             continue;
         }
-        if( can_see ) {
-            const auto set_seen = []( const tripoint_abs_omt & p, om_vision_level level ) {
-                tripoint_abs_omt seen( p );
-                do {
-                    overmap_buffer.set_seen( seen, level );
-                    --seen.z();
-                } while( seen.z() >= 0 );
-            };
-            int tiles_from = rl_dist( p, ompos );
-            if( tiles_from < std::floor( base_sight / 2 ) ) {
-                set_seen( p, om_vision_level::full );
-            } else if( tiles_from < base_sight ) {
-                set_seen( p, om_vision_level::details );
-            } else if( tiles_from < base_sight * 2 ) {
-                set_seen( p, om_vision_level::outlines );
-            } else {
-                set_seen( p, om_vision_level::vague );
-            }
+        const auto set_seen = []( const tripoint_abs_omt & p, om_vision_level level ) {
+            tripoint_abs_omt seen( p );
+            do {
+                overmap_buffer.set_seen( seen, level );
+                --seen.z();
+            } while( seen.z() >= 0 );
+        };
+        int tiles_from = rl_dist( p, ompos );
+        if( tiles_from < std::floor( dist / 2 ) ) {
+            set_seen( p, om_vision_level::full );
+        } else if( tiles_from < dist ) {
+            set_seen( p, om_vision_level::details );
+        } else if( tiles_from < dist * 2 ) {
+            set_seen( p, om_vision_level::outlines );
+        } else {
+            set_seen( p, om_vision_level::vague );
         }
     }
 }
