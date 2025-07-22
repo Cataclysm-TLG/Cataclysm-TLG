@@ -1183,13 +1183,6 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "egg_goose",
-    "name": "goose egg",
-    "copy-from": "egg_goose",
-    "rot_spawn": "GROUP_EGG_GOOSE"
-  },
-  {
-    "type": "COMESTIBLE",
     "id": "egg_woodpecker",
     "name": "woodpecker egg",
     "spoils_in": "7 days",
