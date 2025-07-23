@@ -706,6 +706,8 @@
     "material": [ "flesh", "wheat", "mushroom" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 9,
     "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
@@ -858,6 +860,8 @@
     "material": [ "flesh", "vegetable", "bean", "tomato" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 5,
     "vitamins": [ [ "vitC", 7 ], [ "calcium", 7 ], [ "iron", 27 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -1000,6 +1004,8 @@
     "material": [ "flesh", "milk" ],
     "volume": "250 ml",
     "flags": [ "EATEN_HOT" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 6,
     "vitamins": [ [ "vitC", 14 ], [ "calcium", 7 ], [ "iron", 16 ], [ "meat_allergen", 1 ], [ "milk_allergen", 1 ] ]
   },
@@ -1021,6 +1027,8 @@
     "volume": "500 ml",
     "//": "One beans + one protein = 2 servings",
     "flags": [ "EATEN_HOT" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 4,
     "vitamins": [ [ "vitC", 10 ], [ "calcium", 6 ], [ "iron", 51 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
