@@ -7212,7 +7212,7 @@ void map::rotate( int turns )
                 old.y() += SEEY;
             }
             const point_bub_ms new_pos( old.raw().rotate( turns, {SEEX * 2, SEEY * 2} ) );
-            queued_points[queued_point.first] = tripoint_abs_ms( getabs( tripoint_bub_ms( new_pos,
+            queued_points[queued_point.first] = tripoint_abs_ms( getglobal( tripoint_bub_ms( new_pos,
                                                 queued_point.second.z() ) ) );
         }
     }
