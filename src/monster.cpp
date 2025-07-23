@@ -563,10 +563,16 @@ void monster::try_reproduce()
     if( !type->baby_timer ) {
         return;
     }
+    // Failsafe to prevent comically exponential monster growth.
+    if( g->num_creatures() > 100 ) {
+        return;
+    }
+    if( has_effect( effect_critter_underfed ) ) {
+        return;
+    }
 
-    if( !baby_timer && amount_eaten >= stomach_size ) {
+    if( !baby_timer ) {
         // Assume this is a freshly spawned monster (because baby_timer is not set yet), set the point when it reproduce to somewhere in the future.
-        // Monsters need to have eaten eat to start their pregnancy timer, but that's all.
         baby_timer.emplace( calendar::turn + *type->baby_timer );
     }
 
@@ -602,9 +608,6 @@ void monster::try_reproduce()
         }
 
         chance += 2;
-        if( has_flag( mon_flag_EATS ) && has_effect( effect_critter_underfed ) ) {
-            chance += 1; //Reduce the chances but don't prevent birth if the animal is not eating.
-        }
         if( season_match && female && one_in( chance ) ) {
             int spawn_cnt = rng( 1, type->baby_count );
             if( type->baby_monster ) {
