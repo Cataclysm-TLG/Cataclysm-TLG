@@ -615,7 +615,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "SPIT_SAP", mattack::spit_sap );
     add_hardcoded_attack( "TRIFFID_HEARTBEAT", mattack::triffid_heartbeat );
     add_hardcoded_attack( "FUNGUS", mattack::fungus );
-    add_hardcoded_attack( "FUNGUS_CORPORATE", mattack::fungus_corporate );
     add_hardcoded_attack( "FUNGUS_HAZE", mattack::fungus_haze );
     add_hardcoded_attack( "FUNGUS_BIG_BLOSSOM", mattack::fungus_big_blossom );
     add_hardcoded_attack( "FUNGUS_INJECT", mattack::fungus_inject );
