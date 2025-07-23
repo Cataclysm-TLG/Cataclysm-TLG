@@ -53,7 +53,7 @@
     "id": "mon_rat_thing",
     "type": "MONSTER",
     "name": { "str": "rat-thing" },
-    "looks_like": "mon_sewer_rat",
+    "looks_like": "mon_rat",
     "description": "A small brown rodent with long whiskers and beady eyes.  Its face is strangely human-like, as are its tiny hands.",
     "default_faction": "witches",
     "bodytype": "pig",
