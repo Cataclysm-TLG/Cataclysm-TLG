@@ -3958,12 +3958,10 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
         return false;
     }
     if( miss_id.id == Camp_Trapping || miss_id.id == Camp_Hunting ) {
-        const std::string msg = string_format( _( "returns from %s carrying supplies and has a bit "
-                                               "more experience…" ), task_description );
+        const std::string msg = string_format( _( "returns from %s." ), task_description );
         finish_return( *comp, true, msg, skill_group, 1 );
     } else {
-        const std::string msg = string_format( _( "returns from %s carrying supplies and has a bit "
-                                               "more experience…" ), task_description );
+        const std::string msg = string_format( _( "returns from %s." ), task_description );
         finish_return( *comp, false, msg, skill_group, 1 );
     }
 
