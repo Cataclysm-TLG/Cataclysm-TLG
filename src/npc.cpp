@@ -134,6 +134,7 @@ static const npc_class_id NC_NONE( "NC_NONE" );
 static const npc_class_id NC_NONE_HARDENED( "NC_NONE_HARDENED" );
 static const npc_class_id NC_TRADER( "NC_TRADER" );
 
+static const morale_type morale_faction_member_died( "morale_faction_member_died" );
 static const morale_type morale_killed_innocent( "morale_killed_innocent" );
 static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
 
@@ -164,6 +165,7 @@ static const trait_id trait_BEE( "BEE" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
 static const trait_id trait_NO_BASH( "NO_BASH" );
+static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PACIFIST( "PACIFIST" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
@@ -2957,6 +2959,32 @@ void npc::die( Creature *nkiller )
         prevent_death_reminder = false;
         if( !is_dead() ) {
             return;
+        }
+    }
+    if( !is_hallucination() ) {
+        Character &you = get_player_character();
+        if( is_player_ally() && you.sees( *this ) ) {
+            if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
+                if( you.has_flag( json_flag_SPIRITUAL ) ) {
+                    you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
+                } else {
+                    you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
+                }
+            }
+        }
+        for( const auto &entry : my_fac->members ) {
+            const character_id &cid = entry.first;
+            Character *member = g->critter_by_id<Character>( cid );
+            // TODO: Finding out after the fact.
+            if( member->sees( *this ) ) {
+                if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
+                    if( member->has_flag( json_flag_SPIRITUAL ) ) {
+                        member->add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
+                    } else {
+                        member->add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
+                    }
+                }
+            }
         }
     }
 
