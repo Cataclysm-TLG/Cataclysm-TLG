@@ -103,9 +103,13 @@ static const itype_id itype_fungal_seeds( "fungal_seeds" );
 static const itype_id itype_log( "log" );
 static const itype_id itype_marloss_seed( "marloss_seed" );
 
+static const json_character_flag json_flag_PSYCHOPATH( "PSYCHOPATH" );
+
 static const mongroup_id GROUP_CAMP_HUNTING( "GROUP_CAMP_HUNTING" );
 static const mongroup_id GROUP_CAMP_HUNTING_LARGE( "GROUP_CAMP_HUNTING_LARGE" );
 static const mongroup_id GROUP_CAMP_TRAPPING( "GROUP_CAMP_TRAPPING" );
+
+static const morale_type morale_follower_died( "morale_follower_died" );
 
 static const oter_str_id oter_dirt_road_3way_forest_east( "dirt_road_3way_forest_east" );
 static const oter_str_id oter_dirt_road_3way_forest_north( "dirt_road_3way_forest_north" );
@@ -175,6 +179,8 @@ static const ter_str_id ter_t_tree_young( "t_tree_young" );
 static const ter_str_id ter_t_trunk( "t_trunk" );
 
 static const trait_id trait_DEBUG_HS( "DEBUG_HS" );
+static const trait_id trait_NUMB( "NUMB" );
+static const trait_id trait_SPIRITUAL( "SPIRITUAL" );
 
 static const update_mapgen_id update_mapgen_faction_wall_level_E_1( "faction_wall_level_E_1" );
 //static const update_mapgen_id update_mapgen_faction_wall_level_N_1(
@@ -1052,20 +1058,21 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to set traps for small game.\n\n"
-                                  "Skill used: devices\n"
-                                  "Difficulty: N/A\n"
+                                  "Skills used: Devices, Survival\n"
+                                  "Stats used: Perception\n"
+                                  "Difficulty: Low\n"
                                   "Trapping Possibilities:\n"
                                   "> small and tiny animal corpses\n"
                                   "May produce less food than consumed!\n"
                                   "Risk: Low\n"
                                   "Intensity: Light\n"
-                                  "Time: 10 Hours, Repeated\n"
+                                  "Time: 14 Hours\n"
                                   "Positions: %d/2\n" ), npc_list.size() );
         mission_key.add_start( miss_id, name_display_of( miss_id ),
                                entry, npc_list.size() < 2 );
         if( !npc_list.empty() ) {
             entry = action_of( miss_id.id );
-            bool avail = update_time_fixed( entry, npc_list, 10_hours );
+            bool avail = update_time_fixed( entry, npc_list, 14_hours );
             mission_key.add_return( miss_id, dir_abbr + _( " Recover Trappers" ),
                                     entry, avail );
         }
@@ -1076,20 +1083,21 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         comp_list npc_list = get_mission_workers( miss_id );
         entry = string_format( _( "Notes:\n"
                                   "Send a companion to hunt large animals.\n\n"
-                                  "Skill used: marksmanship\n"
-                                  "Difficulty: N/A\n"
+                                  "Skills used: Marksmanship, Survival\n"
+                                  "Stats used: Perception\n"
+                                  "Difficulty: Medium\n"
                                   "Hunting Possibilities:\n"
                                   "> small, medium, or large animal corpses\n"
                                   "May produce less food than consumed!\n"
                                   "Risk: Medium\n"
                                   "Intensity: Moderate\n"
-                                  "Time: 14 Hours, Repeated\n"
+                                  "Time: 18 Hours\n"
                                   "Positions: %d/1\n" ), npc_list.size() );
         mission_key.add_start( miss_id, name_display_of( miss_id ),
                                entry, npc_list.empty() );
         if( !npc_list.empty() ) {
             entry = action_of( miss_id.id );
-            bool avail = update_time_fixed( entry, npc_list, 14_hours );
+            bool avail = update_time_fixed( entry, npc_list, 18_hours );
             mission_key.add_return( miss_id, dir_abbr + _( " Recover Hunter" ),
                                     entry, avail );
         }
@@ -3929,27 +3937,35 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
     } else if( miss_id.id == Camp_Trapping ) {
         task_description = _( "trapping small animals" );
         favor = 1;
-        danger = 15;
+        danger = 18;
         skill_group = "trapping";
-        skill = 2 * comp->get_skill_level( skill_traps ) + comp->per_cur;
-        checks_per_cycle = 3;
+        skill = ( comp->get_skill_level( skill_survival ) + comp->get_skill_level(
+                      skill_traps ) + comp->per_cur ) / 3.0;
+        checks_per_cycle = std::min( 1, static_cast<int>( skill / 3 ) );
     } else if( miss_id.id == Camp_Hunting ) {
         task_description = _( "hunting for meat" );
-        danger = 10;
+        danger = 15;
         favor = 0;
         skill_group = "hunting";
-        skill = 1.5 * comp->get_skill_level( skill_gun ) + comp->per_cur / 2.0;
+        skill = ( comp->get_skill_level( skill_survival ) + comp->get_skill_level(
+                      skill_gun ) + comp->per_cur ) / 3.0;
         threat = 12;
-        checks_per_cycle = 2;
+        checks_per_cycle = std::min( 1, static_cast<int>( skill / 3 ) );
     }
 
     time_duration mission_time = calendar::turn - comp->companion_mission_time;
     if( one_in( danger ) && !survive_random_encounter( *comp, task_description, favor, threat ) ) {
         return false;
     }
-    const std::string msg = string_format( _( "returns from %s carrying supplies and has a bit "
-                                           "more experience…" ), task_description );
-    finish_return( *comp, false, msg, skill_group, 1 );
+    if( miss_id.id == Camp_Trapping || miss_id.id == Camp_Hunting ) {
+        const std::string msg = string_format( _( "returns from %s carrying supplies and has a bit "
+                                               "more experience…" ), task_description );
+        finish_return( *comp, true, msg, skill_group, 1 );
+    } else {
+        const std::string msg = string_format( _( "returns from %s carrying supplies and has a bit "
+                                               "more experience…" ), task_description );
+        finish_return( *comp, false, msg, skill_group, 1 );
+    }
 
     item_group_id itemlist( "forest" );
     if( miss_id.id == Camp_Collect_Firewood ) {
@@ -3976,7 +3992,7 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
     }
     if( miss_id.id == Camp_Trapping ||
         miss_id.id == Camp_Hunting ) {
-        hunting_results( round( skill ), miss_id, checks_per_cycle * mission_time / min_time, 30 );
+        hunting_results( round( skill ), miss_id, 2, 15 );
     } else {
         search_results( round( skill ), itemlist, checks_per_cycle * mission_time / min_time, 15 );
     }
@@ -4359,7 +4375,18 @@ void basecamp::combat_mission_return( const mission_id &miss_id )
             if( outcome ) {
                 overmap_buffer.reveal( pt, 2 );
             } else if( comp->is_dead() ) {
+                Character &you = get_player_character();
+                // TODO: Camp morale.
                 popup( _( "%s didn't return from patrol…" ), comp->get_name() );
+                if( you.has_flag( json_flag_PSYCHOPATH ) ||  you.has_trait( trait_NUMB ) ) {
+                    popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
+                } else if( you.has_trait( trait_SPIRITUAL ) ) {
+                    popup( _( "(At least they're at peace now…)" ) );
+                    you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
+                } else {
+                    popup( _( "(Gone forever, just like that…)" ) );
+                    you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+                }
                 comp->place_corpse( pt );
                 overmap_buffer.add_note( pt, "DEAD NPC" );
                 overmap_buffer.remove_npc( comp->getID() );
@@ -4717,7 +4744,7 @@ void basecamp::make_corpse_from_group( const std::vector<MonsterGroupResult> &gr
         const mtype_id target = monster.name;
         item result = item::make_corpse( target, calendar::turn, "" );
         if( !result.is_null() ) {
-            int num_to_spawn = monster.pack_size;
+            int num_to_spawn = rng( 1, monster.pack_size );
             do {
                 place_results( result );
                 num_to_spawn--;
@@ -5931,16 +5958,16 @@ void apply_camp_ownership( map &here, const tripoint &camp_pos, int radius )
 // this entire system is stupid
 bool survive_random_encounter( npc &comp, std::string &situation, int favor, int threat )
 {
-    popup( _( "While %s, a silent specter approaches %s…" ), situation, comp.get_name() );
+    popup( _( "While %s, a skulking figure approaches %s…" ), situation, comp.get_name() );
     float skill_1 = comp.get_skill_level( skill_survival );
     float skill_2 = comp.get_skill_level( skill_speech );
     if( skill_1 + favor > rng( 0, 10 ) ) {
-        popup( _( "%s notices the antlered horror and slips away before it gets too close." ),
+        popup( _( "%s notices the giant spider and slips away before it gets too close." ),
                comp.get_name() );
         talk_function::companion_skill_trainer( comp, "gathering", 10_minutes, 10 - favor );
     } else if( skill_2 + favor > rng( 0, 10 ) ) {
         popup( _( "Another survivor approaches %s asking for directions." ), comp.get_name() );
-        popup( _( "Fearful that he may be an agent of some hostile faction, "
+        popup( _( "Fearful that they may be an agent of some hostile faction, "
                   "%s doesn't mention the camp." ), comp.get_name() );
         popup( _( "The two part on friendly terms and the survivor isn't seen again." ) );
         talk_function::companion_skill_trainer( comp, skill_recruiting, 10_minutes, 10 - favor );
@@ -5959,23 +5986,30 @@ bool survive_random_encounter( npc &comp, std::string &situation, int favor, int
                 popup( _( "Despite being caught off guard %s was able to run away until the "
                           "moose gave up pursuit." ), comp.get_name() );
             } else {
-                popup( _( "The jabberwock grabbed %s by the arm from behind and "
-                          "began to scream." ), comp.get_name() );
-                popup( _( "Terrified, %s spun around and delivered a massive kick "
-                          "to the creature's torso…" ), comp.get_name() );
-                popup( _( "Collapsing into a pile of gore, %s walked away unscathed…" ),
+                popup( _( "The zombie grabbed %s from behind." ), comp.get_name() );
+                popup( _( "Reacting quickly, %s broke away and struck back." ), comp.get_name() );
+                popup( _( "The zombie fell to the ground, %s walked away unscathed…" ),
                        comp.get_name() );
-                popup( _( "(Sounds like bullshit, you wonder what really happened.)" ) );
             }
             talk_function::companion_skill_trainer( comp, skill_combat, 10_minutes, 10 - favor );
         } else {
             if( one_in( 2 ) ) {
-                popup( _( "%s turned to find the hideous black eyes of a giant wasp "
-                          "staring back from only a few feet away…" ), comp.get_name() );
+                popup( _( "%s turned to find the gleaming eyes of a giant mantis "
+                          "staring back from only an arm's length away…" ), comp.get_name() );
                 popup( _( "The screams were terrifying, there was nothing anyone could do." ) );
             } else {
+                Character &you = get_player_character();
+                // TODO: Camp morale.
                 popup( _( "Pieces of %s were found strewn across a few bushes." ), comp.get_name() );
-                popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
+                if( you.has_flag( json_flag_PSYCHOPATH ) ||  you.has_trait( trait_NUMB ) ) {
+                    popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
+                } else if( you.has_trait( trait_SPIRITUAL ) ) {
+                    popup( _( "(Horrible, but at least they're at peace now…)" ) );
+                    you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
+                } else {
+                    popup( _( "(Gone forever, just like that…)" ) );
+                    you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+                }
             }
             overmap_buffer.remove_npc( comp.getID() );
             return false;

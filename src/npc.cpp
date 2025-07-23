@@ -134,6 +134,7 @@ static const npc_class_id NC_NONE( "NC_NONE" );
 static const npc_class_id NC_NONE_HARDENED( "NC_NONE_HARDENED" );
 static const npc_class_id NC_TRADER( "NC_TRADER" );
 
+static const morale_type morale_follower_died( "morale_follower_died" );
 static const morale_type morale_killed_innocent( "morale_killed_innocent" );
 static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
 
@@ -164,6 +165,7 @@ static const trait_id trait_BEE( "BEE" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
 static const trait_id trait_NO_BASH( "NO_BASH" );
+static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PACIFIST( "PACIFIST" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
@@ -2957,6 +2959,16 @@ void npc::die( Creature *nkiller )
         prevent_death_reminder = false;
         if( !is_dead() ) {
             return;
+        }
+    }
+    if( is_player_ally() && !is_hallucination() ) {
+        Character &you = get_player_character();
+        if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
+            if( you.has_flag( json_flag_SPIRITUAL ) ) {
+                you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
+            } else {
+                you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+            }
         }
     }
 
