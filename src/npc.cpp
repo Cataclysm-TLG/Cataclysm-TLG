@@ -134,7 +134,7 @@ static const npc_class_id NC_NONE( "NC_NONE" );
 static const npc_class_id NC_NONE_HARDENED( "NC_NONE_HARDENED" );
 static const npc_class_id NC_TRADER( "NC_TRADER" );
 
-static const morale_type morale_follower_died( "morale_follower_died" );
+static const morale_type morale_faction_member_died( "morale_faction_member_died" );
 static const morale_type morale_killed_innocent( "morale_killed_innocent" );
 static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
 
@@ -2961,13 +2961,29 @@ void npc::die( Creature *nkiller )
             return;
         }
     }
-    if( is_player_ally() && !is_hallucination() ) {
+    if( !is_hallucination() ) {
         Character &you = get_player_character();
-        if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
-            if( you.has_flag( json_flag_SPIRITUAL ) ) {
-                you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
-            } else {
-                you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+        if( is_player_ally() && you.sees( *this ) ) {
+            if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
+                if( you.has_flag( json_flag_SPIRITUAL ) ) {
+                    you.add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
+                } else {
+                    you.add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
+                }
+            }
+        }
+        for( const auto &entry : my_fac->members ) {
+            const character_id &cid = entry.first;
+            Character *member = g->critter_by_id<Character>( cid );
+            // TODO: Finding out after the fact.
+            if( member->sees( *this ) ) {
+                if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
+                    if( member->has_flag( json_flag_SPIRITUAL ) ) {
+                        member->add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
+                    } else {
+                        member->add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
+                    }
+                }
             }
         }
     }

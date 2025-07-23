@@ -109,7 +109,7 @@ static const mongroup_id GROUP_CAMP_HUNTING( "GROUP_CAMP_HUNTING" );
 static const mongroup_id GROUP_CAMP_HUNTING_LARGE( "GROUP_CAMP_HUNTING_LARGE" );
 static const mongroup_id GROUP_CAMP_TRAPPING( "GROUP_CAMP_TRAPPING" );
 
-static const morale_type morale_follower_died( "morale_follower_died" );
+static const morale_type morale_faction_member_died( "morale_faction_member_died" );
 
 static const oter_str_id oter_dirt_road_3way_forest_east( "dirt_road_3way_forest_east" );
 static const oter_str_id oter_dirt_road_3way_forest_north( "dirt_road_3way_forest_north" );
@@ -3992,9 +3992,11 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
     }
     if( miss_id.id == Camp_Trapping ||
         miss_id.id == Camp_Hunting ) {
-        hunting_results( round( skill ), miss_id, 2, 15 );
+        skill = std::min( 14, static_cast<int>( skill ) );
+        hunting_results( skill, miss_id, std::max( 1, static_cast<int>( skill / 3 ) ), 15 );
     } else {
-        search_results( round( skill ), itemlist, checks_per_cycle * mission_time / min_time, 15 );
+        skill = std::min( 14, static_cast<int>( skill ) );
+        search_results( skill, itemlist, checks_per_cycle * mission_time / min_time, 15 );
     }
 
     return true;
@@ -4382,10 +4384,10 @@ void basecamp::combat_mission_return( const mission_id &miss_id )
                     popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
                 } else if( you.has_trait( trait_SPIRITUAL ) ) {
                     popup( _( "(At least they're at peace now…)" ) );
-                    you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
+                    you.add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
                 } else {
                     popup( _( "(Gone forever, just like that…)" ) );
-                    you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+                    you.add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
                 }
                 comp->place_corpse( pt );
                 overmap_buffer.add_note( pt, "DEAD NPC" );
@@ -4742,7 +4744,8 @@ void basecamp::make_corpse_from_group( const std::vector<MonsterGroupResult> &gr
 {
     for( const MonsterGroupResult &monster : group ) {
         const mtype_id target = monster.name;
-        item result = item::make_corpse( target, calendar::turn, "" );
+        // TODO: Handle early recall, field dressing, cold weather preservation, etc.
+        item result = item::make_corpse( target, calendar::turn - ( rng( 0, 12 ) * 1_hours ), "" );
         if( !result.is_null() ) {
             int num_to_spawn = rng( 1, monster.pack_size );
             do {
@@ -6005,10 +6008,10 @@ bool survive_random_encounter( npc &comp, std::string &situation, int favor, int
                     popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
                 } else if( you.has_trait( trait_SPIRITUAL ) ) {
                     popup( _( "(Horrible, but at least they're at peace now…)" ) );
-                    you.add_morale( morale_follower_died, -15, -15, 18_hours, 2_days );
+                    you.add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
                 } else {
                     popup( _( "(Gone forever, just like that…)" ) );
-                    you.add_morale( morale_follower_died, -20, -20, 1_days, 3_days );
+                    you.add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
                 }
             }
             overmap_buffer.remove_npc( comp.getID() );

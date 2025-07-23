@@ -420,8 +420,8 @@
     "text": "Spent time alone"
   },
   {
-    "id": "morale_follower_died",
+    "id": "morale_faction_member_died",
     "type": "morale_type",
-    "text": "Follower died"
+    "text": "An ally died"
   }
 ]
