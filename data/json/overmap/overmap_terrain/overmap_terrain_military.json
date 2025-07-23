@@ -295,7 +295,7 @@
     "vision_levels": "isolated_building",
     "see_cost": "high",
     "extras": "build",
-    "flags": [ "RISK_EXTREME", "SOURCE_WEAPON", "SOURCE_AMMO", "PP_GENERATE_RIOT_DAMAGE" ]
+    "flags": [ "RISK_EXTREME", "SOURCE_WEAPON", "SOURCE_AMMO" ]
   },
   {
     "type": "overmap_terrain",
