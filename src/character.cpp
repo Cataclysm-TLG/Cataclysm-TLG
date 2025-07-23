@@ -1510,7 +1510,7 @@ int Character::overmap_modified_sight_range( float light_level ) const
     if( sight == 0 ) {
         return 0;
     }
-    
+
     return std::max( sight, 3 );
 }
 

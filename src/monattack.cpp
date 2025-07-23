@@ -1980,20 +1980,6 @@ bool mattack::fungus( monster *z )
     return true;
 }
 
-bool mattack::fungus_corporate( monster *z )
-{
-    if( x_in_y( 1, 20 ) ) {
-        sounds::sound( z->pos(), 10, sounds::sound_t::speech, _( "\"Buy SpOreos™ now!\"" ) );
-        if( get_player_view().sees( *z ) ) {
-            add_msg( m_warning, _( "Delicious snacks are released from the %s!" ), z->name() );
-            get_map().add_item( z->pos_bub(), item( "sporeos" ) );
-        } // only spawns SpOreos if the player is near; can't have the COMMONERS stealing our product from good customers
-        return true;
-    } else {
-        return fungus( z );
-    }
-}
-
 bool mattack::fungus_haze( monster *z )
 {
     //~ That spore sound again
