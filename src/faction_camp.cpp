@@ -4384,10 +4384,10 @@ void basecamp::combat_mission_return( const mission_id &miss_id )
                     popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
                 } else if( you.has_trait( trait_SPIRITUAL ) ) {
                     popup( _( "(At least they're at peace now…)" ) );
-                    you.add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
+                    you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
                 } else {
                     popup( _( "(Gone forever, just like that…)" ) );
-                    you.add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
+                    you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
                 }
                 comp->place_corpse( pt );
                 overmap_buffer.add_note( pt, "DEAD NPC" );

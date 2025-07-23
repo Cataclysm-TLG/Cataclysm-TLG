@@ -2966,9 +2966,9 @@ void npc::die( Creature *nkiller )
         if( is_player_ally() && you.sees( *this ) ) {
             if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
                 if( you.has_flag( json_flag_SPIRITUAL ) ) {
-                    you.add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
+                    you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
                 } else {
-                    you.add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
+                    you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
                 }
             }
         }
@@ -2979,9 +2979,9 @@ void npc::die( Creature *nkiller )
             if( member->sees( *this ) ) {
                 if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
                     if( member->has_flag( json_flag_SPIRITUAL ) ) {
-                        member->add_morale( morale_faction_member_died, -8, -15, 18_hours, 2_days );
+                        member->add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
                     } else {
-                        member->add_morale( morale_faction_member_died, -10, -20, 1_days, 3_days );
+                        member->add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
                     }
                 }
             }
