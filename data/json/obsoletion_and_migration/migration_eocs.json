@@ -1,0 +1,9 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "eoc_migrate_pessimistic",
+    "recurrence": [ "1 seconds", "1 seconds" ],
+    "condition": { "and": [ { "u_has_trait": "BADTEMPER" } ] },
+    "effect": [ { "u_add_trait": "PESSIMISTIC" }, { "u_lose_trait": "BADTEMPER" } ]
+  }
+]

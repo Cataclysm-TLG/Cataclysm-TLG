@@ -132,6 +132,8 @@ static const limb_score_id limb_score_breathing( "breathing" );
 static const morale_type morale_feeling_bad( "morale_feeling_bad" );
 static const morale_type morale_feeling_good( "morale_feeling_good" );
 static const morale_type morale_moodswing( "morale_moodswing" );
+static const morale_type morale_perm_pessimist( "morale_perm_pessimist" );
+static const morale_type morale_perm_optimist( "morale_perm_optimist" );
 static const morale_type morale_pyromania_nearfire( "morale_pyromania_nearfire" );
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
 static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire" );
@@ -164,7 +166,9 @@ static const trait_id trait_NO_LEFT_ARM( "NO_LEFT_ARM" );
 static const trait_id trait_NO_LEFT_LEG( "NO_LEFT_LEG" );
 static const trait_id trait_NO_RIGHT_ARM( "NO_RIGHT_ARM" );
 static const trait_id trait_NO_RIGHT_LEG( "NO_RIGHT_LEG" );
+static const trait_id trait_OPTIMISTIC( "OPTIMISTIC" );
 static const trait_id trait_PER_SLIME( "PER_SLIME" );
+static const trait_id trait_PESSIMISTIC( "PESSIMISTIC" );
 static const trait_id trait_PLANTSKIN( "PLANTSKIN" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 static const trait_id trait_RADIOACTIVE1( "RADIOACTIVE1" );
@@ -467,6 +471,22 @@ void suffer::while_awake( Character &you, const int current_stim )
         } else {
             you.add_effect( effect_downed, 2_turns, false, 0, true );
         }
+    }
+
+    if( you.has_trait( trait_OPTIMISTIC ) && !you.has_morale( morale_perm_optimist ) ) {
+        you.add_morale( morale_perm_optimist, 10, 10, 0_seconds );
+    }
+
+    if( !you.has_trait( trait_OPTIMISTIC ) && you.has_morale( morale_perm_optimist ) ) {
+        you.rem_morale( morale_perm_optimist );
+    }
+
+    if( you.has_trait( trait_PESSIMISTIC ) && !you.has_morale( morale_perm_pessimist ) ) {
+        you.add_morale( morale_perm_pessimist, -10, -10, 0_seconds );
+    }
+
+    if( !you.has_trait( trait_PESSIMISTIC ) && you.has_morale( morale_perm_pessimist ) ) {
+        you.rem_morale( morale_perm_pessimist );
     }
 
     if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) ) {

@@ -77,6 +77,9 @@ class player_morale
         class morale_point
         {
             public:
+                morale_type get_type() const {
+                    return type;
+                }
                 explicit morale_point(
                     const morale_type &type = morale_type::NULL_ID(),
                     const itype *item_type = nullptr,

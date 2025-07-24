@@ -208,5 +208,32 @@
     "points": 0,
     "valid": false,
     "player_display": false
+  },
+  {
+    "id": "morale_perm_badtemper",
+    "type": "morale_type",
+    "text": "Pessimist"
+  },
+  {
+    "type": "mutation",
+    "id": "BADTEMPER",
+    "name": { "str": "Bad temper" },
+    "description": "Renamed/re-IDed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "id": "mon_goose_canadian",
+    "type": "MONSTER",
+    "copy-from": "mon_goose",
+    "name": { "str": "goose", "str_pl": "geese" },
+    "looks_like": "mon_goose"
+  },
+  {
+    "id": "mon_goose_canadian_chick",
+    "type": "MONSTER",
+    "copy-from": "mon_goose_chick",
+    "looks_like": "mon_goose_chick"
   }
 ]
