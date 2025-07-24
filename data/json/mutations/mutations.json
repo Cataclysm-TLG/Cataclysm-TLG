@@ -1464,8 +1464,8 @@
   },
   {
     "type": "mutation",
-    "id": "BADTEMPER",
-    "name": { "str": "Bad Temper" },
+    "id": "PESSIMISTIC",
+    "name": { "str": "Pessimist" },
     "points": -2,
     "description": "Things just keep getting you down.  You tend to be unhappy, and it takes some doing to cheer you up.",
     "starting_trait": true,

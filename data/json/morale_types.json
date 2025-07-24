@@ -290,9 +290,9 @@
     "text": "Optimist"
   },
   {
-    "id": "morale_perm_badtemper",
+    "id": "morale_perm_pessimist",
     "type": "morale_type",
-    "text": "Bad Tempered"
+    "text": "Pessimist"
   },
   {
     "id": "morale_perm_numb",

@@ -147,7 +147,7 @@
     "type": "trait_group",
     "id": "trait_group_OPTIMISTIC",
     "subtype": "distribution",
-    "traits": [ { "trait": "OPTIMISTIC" }, { "trait": "BADTEMPER" } ]
+    "traits": [ { "trait": "OPTIMISTIC" }, { "trait": "PESSIMISTIC" } ]
   },
   {
     "type": "trait_group",
