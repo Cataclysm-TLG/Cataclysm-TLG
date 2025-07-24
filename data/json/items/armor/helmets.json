@@ -314,7 +314,7 @@
     "looks_like": "helmet_army",
     "color": "green",
     "warmth": 30,
-    "flags": [ "VARSIZE", "STURDY", "PADDED", "OUTER", "NORMAL" ],
+    "flags": [ "VARSIZE", "STURDY", "PADDED", "OUTER", "NORMAL", "CUSHION_FALL" ],
     "armor": [
       {
         "layers": [ "NORMAL" ],
@@ -638,7 +638,7 @@
     "color": "dark_gray",
     "warmth": 15,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "PADDED", "OUTER", "NORMAL" ],
+    "flags": [ "PADDED", "OUTER", "NORMAL", "CUSHION_FALL" ],
     "armor": [
       {
         "encumbrance": 21,
@@ -1208,7 +1208,7 @@
     "warmth": 30,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL" ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "CUSHION_FALL"  ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1282,7 +1282,7 @@
     "warmth": 30,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "NORMAL", "OUTER" ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "NORMAL", "OUTER", "CUSHION_FALL"  ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1330,7 +1330,7 @@
       }
     ],
     "warmth": 20,
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER" ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1541,7 +1541,7 @@
     "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 3,
-    "flags": [ "PADDED", "OUTER" ],
+    "flags": [ "PADDED", "OUTER", "CUSHION_FALL" ],
     "techniques": [ "WBLOCK_1" ],
     "armor": [
       {

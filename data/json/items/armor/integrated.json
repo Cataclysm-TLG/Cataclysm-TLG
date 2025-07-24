@@ -2309,7 +2309,7 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str_sp": "cranial reinforcement" },
-    "description": "Bolted to the bone, a set of interlocking subdermal plates protect the skull from trauma.",
+    "description": "Bolted to the bone, a set of interlocking subdermal plates protect the skull and cervical vertebrae from trauma.",
     "weight": "700 g",
     "volume": "150 ml",
     "price": "0 cent",
@@ -2324,13 +2324,14 @@
       "SOFT",
       "ALLOWS_NATURAL_ATTACKS",
       "TRANSPARENT",
-      "PERSONAL"
+      "PERSONAL",
+      "CUSHION_FALL"
     ],
     "armor": [
       {
-        "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1 } ],
+        "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1.5 } ],
         "covers": [ "head" ],
-        "specifically_covers": [ "head_crown", "head_forehead", "head_ear_l", "head_ear_r" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_nape", "head_ear_l", "head_ear_r" ],
         "coverage": 80,
         "encumbrance": 2
       }

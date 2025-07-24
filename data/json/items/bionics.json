@@ -108,7 +108,7 @@
     "type": "BIONIC_ITEM",
     "name": { "str": "Cranial Reinforcement CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A set of interlocking subdermal plates, slightly cushioned where they overlap, which bolt securely to the skull to provide a modicum of protection from trauma.",
+    "description": "A set of interlocking subdermal plates, slightly cushioned where they overlap, which bolt securely to the skull and cervical vertebrae to provide a modicum of protection from trauma.",
     "price": "3500 USD",
     "price_postapoc": "50 USD",
     "weight": "1000 g",
