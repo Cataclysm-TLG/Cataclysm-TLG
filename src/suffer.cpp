@@ -1048,7 +1048,7 @@ void suffer::from_sunburn( Character &you, bool severe )
             // Pockets can keep the sun off your hands if you don't wield a too large item
             // Hoods can keep the sun off your unencumbered head
             // Missing limbs can't get sunburned
-            // Collars can keep the sun off your unencumbered mouth
+            // Collars can keep the sun off your unencumbered face
             continue;
         }
 

@@ -117,7 +117,7 @@
   {
     "id": "COLLAR",
     "type": "json_flag",
-    "info": "This clothing will be pulled up to <info>keep your mouth warm</info> if it is unencumbered."
+    "info": "This clothing will be pulled up to <info>keep your face warm</info> if it is unencumbered."
   },
   {
     "id": "COLLAPSE_CONTENTS",
@@ -952,8 +952,7 @@
   {
     "id": "POWERARMOR_COMPATIBLE",
     "type": "json_flag",
-    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces.",
-    "info": "This item can be worn simultaneously with power armor."
+    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces."
   },
   {
     "id": "ZERO_WEIGHT",
@@ -1083,7 +1082,7 @@
   {
     "id": "VERBAL",
     "type": "json_flag",
-    "//": "The caster must speak in order to cast the spell.  More mouth encumbrance increases failure percent, and the caster speaks when casting."
+    "//": "The caster must speak in order to cast the spell.  More face encumbrance increases failure percent, and the caster speaks when casting."
   },
   {
     "id": "SOMATIC",
