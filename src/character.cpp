@@ -12863,8 +12863,7 @@ int Character::impact( const int force, const tripoint &p )
     float mod = 1.0f;
     int effective_force = force;
     int cut = 0;
-    // Percentage armor penetration - armor won't help much here
-    // TODO: Make cushioned items like bike helmets help more
+    // Percentage armor penetration - armor won't help much here unless it's cushioned.
     float armor_eff = 1.0f;
     // Shock Absorber CBM heavily reduces damage
     const bool shock_absorbers = has_active_bionic( bio_shock_absorber );
