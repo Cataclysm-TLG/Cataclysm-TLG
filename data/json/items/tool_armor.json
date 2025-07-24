@@ -1226,7 +1226,7 @@
       "need_charges": 1,
       "need_charges_msg": "\"Illumination disabled, low power.\""
     },
-    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "WATCH", "ALARMCLOCK" ]
+    "flags": [ "STURDY", "OUTER", "RAINPROOF", "PADDED", "WATCH", "ALARMCLOCK", "CUSHION_FALL" ]
   },
   {
     "id": "helmet_eod_on",

@@ -12863,8 +12863,7 @@ int Character::impact( const int force, const tripoint &p )
     float mod = 1.0f;
     int effective_force = force;
     int cut = 0;
-    // Percentage armor penetration - armor won't help much here
-    // TODO: Make cushioned items like bike helmets help more
+    // Percentage armor penetration - armor won't help much here unless it's cushioned.
     float armor_eff = 1.0f;
     // Shock Absorber CBM heavily reduces damage
     const bool shock_absorbers = has_active_bionic( bio_shock_absorber );
@@ -13008,20 +13007,49 @@ int Character::impact( const int force, const tripoint &p )
 
     int total_dealt = 0;
     if( mod * effective_force >= 5 ) {
-        for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            const int bash = effective_force * rng( 60, 100 ) / 100;
+        add_msg( _( "effective force = %s" ), effective_force );
+        int parts_affected_total = std::max( 1, effective_force / rng( 3, 30 ) );
+        int parts_affected = 0;
+        std::vector<bodypart_id> bps = get_all_body_parts( get_body_part_flags::only_main );
+        std::shuffle( bps.begin(), bps.end(), rng_get_engine() );
+        for( const bodypart_id &bp : bps ) {
+            if( parts_affected >= parts_affected_total ) {
+                continue;
+            }
+            const int bash = effective_force * rng( 60, 120 ) / 100;
             damage_instance di;
+
+            float cushion_bash_armor = 0.0f;
+            float total_bash_armor = worn.damage_resist( damage_bash, bp );
+            float armor_eff_bash = armor_eff;
+            // If the armor is cushioned, it applies its full armor value vs falls.
+            for( const item &armor : worn.worn )  {
+                if( armor.covers( bp ) && armor.has_flag( flag_CUSHION_FALL ) ) {
+                    cushion_bash_armor += armor.get_coverage( bp ) / 100.0f * armor.resist( damage_bash, false, bp );
+                }
+            }
+            // Ensure that we're only reducing the fall's armor penetration by the proportion
+            // of bash protection provided by the cushioned armor on that BP.
+            if( total_bash_armor > 0.0f && cushion_bash_armor > 0.0f ) {
+                float cushion_ratio = cushion_bash_armor / total_bash_armor;
+                armor_eff_bash = std::clamp( cushion_ratio - armor_eff, 0.0f, 1.0f );
+            }
+
             // FIXME: Hardcoded damage types
-            di.add_damage( damage_bash, bash, 0, armor_eff, mod );
-            // No good way to land on sharp stuff, so here modifier == 1.0f
+            if( armor_eff_bash != armor_eff ) {
+                di.add_damage( damage_bash, bash, 0, armor_eff_bash, mod );
+            } else {
+                di.add_damage( damage_bash, bash, 0, armor_eff, mod );
+            }
             di.add_damage( damage_cut, cut, 0, armor_eff, 1.0f );
             total_dealt += deal_damage( nullptr, bp, di ).total_damage();
+            parts_affected += 1;
         }
     }
 
     if( total_dealt > 0 && is_avatar() ) {
         // "You slam against the dirt" is fine
-        add_msg( m_bad, _( "You are slammed against %1$s for %2$d damage." ),
+        add_msg( m_bad, _( "You are slammed against %1$s for %2$d total damage." ),
                  target_name, total_dealt );
     } else if( is_avatar() && shock_absorbers ) {
         add_msg( m_bad, _( "You are slammed against %s!" ),
