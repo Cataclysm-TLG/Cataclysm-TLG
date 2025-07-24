@@ -2304,7 +2304,7 @@
     ],
     "melee_damage": { "bash": 11, "stab": 7 }
   },
-    {
+  {
     "id": "integrated_cranial_reinforcement_cbm",
     "type": "ARMOR",
     "category": "armor",
@@ -2317,16 +2317,7 @@
     "material": [ "titanium_alloy" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [
-      "INTEGRATED",
-      "UNBREAKABLE",
-      "PERSONAL",
-      "SOFT",
-      "ALLOWS_NATURAL_ATTACKS",
-      "TRANSPARENT",
-      "PERSONAL",
-      "CUSHION_FALL"
-    ],
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "SOFT", "ALLOWS_NATURAL_ATTACKS", "TRANSPARENT", "PERSONAL", "CUSHION_FALL" ],
     "armor": [
       {
         "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1.5 } ],

@@ -170,17 +170,7 @@
     "occupied_bodyparts": [ [ "head", 3 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "passive_pseudo_items": [ "integrated_cranial_reinforcement_cbm" ],
-    "mutation_conflicts": [
-      "HUGE",
-      "HUGE_OK",
-      "SMALL_OK",
-      "HORNS",
-      "HORNS_CURLED",
-      "HORNS_POINTED",
-      "ANTLERS",
-      "SMALL2",
-      "SMALL_OK"
-    ]
+    "mutation_conflicts": [ "HUGE", "HUGE_OK", "SMALL_OK", "HORNS", "HORNS_CURLED", "HORNS_POINTED", "ANTLERS", "SMALL2", "SMALL_OK" ]
   },
   {
     "id": "bio_armor_legs",

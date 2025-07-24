@@ -1208,7 +1208,7 @@
     "warmth": 30,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "CUSHION_FALL"  ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1282,7 +1282,7 @@
     "warmth": 30,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "NORMAL", "OUTER", "CUSHION_FALL"  ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "NORMAL", "OUTER", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
   {
