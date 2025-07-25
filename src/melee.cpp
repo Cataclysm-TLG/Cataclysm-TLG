@@ -127,6 +127,7 @@ static const json_character_flag json_flag_HARDTOHIT( "HARDTOHIT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_NULL( "NULL" );
+static const json_character_flag json_flag_PREVENT_TRAINING( "PREVENT_TRAINING" );
 static const json_character_flag json_flag_PSEUDOPOD_GRASP( "PSEUDOPOD_GRASP" );
 
 static const limb_score_id limb_score_balance( "balance" );
@@ -708,6 +709,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                  !t.is_hallucination() &&
                                  ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) && 
                                  !t.has_flag( mon_flag_NO_TRAIN ) &&
+                                 !t.has_effect_with_flag( json_flag_PREVENT_TRAINING ) &&
                                  t.times_combatted_player <= 50;
     Character &player_character = get_player_character();
     if( !hits ) {

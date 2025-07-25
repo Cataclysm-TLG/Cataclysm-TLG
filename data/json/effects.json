@@ -226,7 +226,8 @@
     "type": "effect_type",
     "id": "pacified",
     "name": [ "Pacified" ],
-    "desc": [ "AI tag used for pacified critters.  This is a bug if you have it." ]
+    "desc": [ "AI tag used for pacified critters.  This is a bug if you have it." ],
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -613,7 +614,7 @@
     "desc": [ "You can't move!" ],
     "rating": "bad",
     "show_in_info": true,
-    "flags": [ "EFFECT_IMPEDING" ]
+    "flags": [ "EFFECT_IMPEDING", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -704,7 +705,7 @@
       { "limb_score": "night_vis", "modifier": 0.0 },
       { "limb_score": "reaction", "modifier": 0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND" ]
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -719,7 +720,7 @@
       { "limb_score": "night_vis", "modifier": 0.0 },
       { "limb_score": "reaction", "modifier": 0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND" ]
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -3688,7 +3689,8 @@
     "id": "lying_down",
     "apply_message": "You lie down to go to sleep…",
     "rating": "neutral",
-    "max_duration": "50 m"
+    "max_duration": "50 m",
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -3696,12 +3698,14 @@
     "apply_message": "You fall asleep.",
     "remove_message": "You wake up.",
     "rating": "neutral",
-    "max_intensity": 24
+    "max_intensity": 24,
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
     "id": "narcosis",
-    "blood_analysis_description": "Narcosis"
+    "blood_analysis_description": "Narcosis",
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
