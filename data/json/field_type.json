@@ -844,7 +844,7 @@
     "has_fume": true,
     "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
     "priority": 8,
-    "half_life": "5 minutes",
+    "half_life": "1 minutes",
     "phase": "gas",
     "display_items": false,
     "display_field": true,

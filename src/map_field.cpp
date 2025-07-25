@@ -110,6 +110,8 @@ static const ter_str_id ter_t_pit( "t_pit" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 
 static const trait_id trait_ACIDPROOF( "ACIDPROOF" );
+static const trait_id trait_COMPOUND_EYES( "COMPOUND_EYES" );
+static const trait_id trait_EYESTALKS_RIGID( "EYESTALKS_RIGID" );
 static const trait_id trait_GASTROPOD_FOOT( "GASTROPOD_FOOT" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
 static const trait_id trait_M_SKIN2( "M_SKIN2" );
@@ -1673,6 +1675,7 @@ void map::player_in_field( Character &you )
             }
             // Prevent stacking ridiculous amounts of blindness.
             if( cur.get_field_intensity() > 1 && ( !inside || one_in( 3 ) ) &&
+                !you.has_trait( trait_COMPOUND_EYES ) && !you.has_trait( trait_EYESTALKS_RIGID ) &&
                 ( !you.has_effect( effect_blind ) || you.get_effect_dur( effect_blind ) < 30_seconds ) ) {
                 you.add_env_effect( effect_blind, bodypart_id( "eyes" ), 1, cur.get_field_intensity() * 2_seconds );
             }
@@ -1993,11 +1996,12 @@ void map::monster_in_field( monster &z )
                 }
             }
             // Cyborg monsters ignore it because of the protective lenses CBM.
+            // Zombies ignore pain but might still be blinded by inflammation and swelling.
             if( z.has_flag( mon_flag_SEES ) && z.made_of_any( Creature::cmat_flesh ) &&
                 !z.in_species( species_INSECT ) &&
                 !z.in_species( species_INSECT_FLYING ) && !z.in_species( species_CENTIPEDE ) &&
                 !z.in_species( species_SPIDER ) && !z.in_species( species_CYBORG ) &&
-                !z.has_effect( effect_blind ) ) {
+                !z.has_effect( effect_blind ) && ( !z.in_species( species_ZOMBIE ) || one_in( z.enum_size() ) ) ) {
                 z.add_effect( effect_blind, cur.get_field_intensity() * rng( 1_turns, 4_turns ) );
                 if( z.type->has_fear_trigger( mon_trigger::HURT ) ) {
                     z.morale -= ( 2 * cur.get_field_intensity() );
