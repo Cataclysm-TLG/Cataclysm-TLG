@@ -1945,6 +1945,10 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
@@ -1953,20 +1957,18 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
     }
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
 
-    p->mod_moves( -to_moves<int>( 2_seconds ) );
-
     map &here = get_map();
     // Reduce the strength of fire (if any) in the target tile.
     here.add_field( dest, fd_extinguisher, 3, 10_turns );
 
+    p->mod_moves( -to_moves<int>( 2_seconds ) );
     // Also spray monsters in that tile.
     if( monster *const mon_ptr = get_creature_tracker().creature_at<monster>( dest, true ) ) {
         monster &critter = *mon_ptr;
-        critter.mod_moves( -to_moves<int>( 2_seconds ) );
         bool blind = false;
         if( one_in( 2 ) && critter.has_flag( mon_flag_SEES ) ) {
             blind = true;
-            critter.add_effect( effect_blind, rng( 1_minutes, 2_minutes ) );
+            critter.add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
         }
         viewer &player_view = get_player_view();
         if( player_view.sees( critter ) ) {
@@ -2322,6 +2324,10 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint & )
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
@@ -2330,34 +2336,10 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint & )
     }
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
 
-    p->mod_moves( -to_moves<int>( 2_seconds ) );
-
     map &here = get_map();
     here.add_field( dest, fd_tear_gas, 2, 3_turns );
 
-    // Also spray monsters in that tile.
-    if( monster *const mon_ptr = get_creature_tracker().creature_at<monster>( dest, true ) ) {
-        monster &critter = *mon_ptr;
-        critter.mod_moves( -to_moves<int>( 2_seconds ) );
-        bool blind = false;
-        if( one_in( 2 ) && critter.has_flag( mon_flag_SEES ) ) {
-            blind = true;
-            critter.add_effect( effect_blind, rng( 1_minutes, 2_minutes ) );
-        }
-        // even if it's not blinded getting maced hurts a lot and stuns it
-        if( !critter.has_flag( mon_flag_NO_BREATHE ) ) {
-            critter.mod_moves( -to_moves<int>( 3_seconds ) );
-            p->add_msg_if_player( _( "The %s recoils in pain!" ), critter.name() );
-        }
-        viewer &player_view = get_player_view();
-        if( player_view.sees( critter ) ) {
-            p->add_msg_if_player( _( "The %s is sprayed!" ), critter.name() );
-            if( blind ) {
-                p->add_msg_if_player( _( "The %s looks blinded." ), critter.name() );
-            }
-        }
-    }
-
+    p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
 }
 
