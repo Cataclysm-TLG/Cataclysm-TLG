@@ -708,7 +708,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                  !t.is_hallucination() &&
                                  ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) && 
                                  !t.has_flag( mon_flag_NO_TRAIN ) &&
-                                 t.times_combatted_player <= 60;
+                                 t.times_combatted_player <= 50;
     Character &player_character = get_player_character();
     if( !hits ) {
         int stumble_pen = stumble( *this, cur_weapon );
