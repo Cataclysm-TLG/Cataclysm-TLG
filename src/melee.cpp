@@ -127,6 +127,7 @@ static const json_character_flag json_flag_HARDTOHIT( "HARDTOHIT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_NULL( "NULL" );
+static const json_character_flag json_flag_PREVENT_TRAINING( "PREVENT_TRAINING" );
 static const json_character_flag json_flag_PSEUDOPOD_GRASP( "PSEUDOPOD_GRASP" );
 
 static const limb_score_id limb_score_balance( "balance" );
@@ -702,6 +703,14 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
     const int skill_training_cap = t.is_monster() ? t.as_monster()->type->melee_training_cap :
                                    MAX_SKILL;
+    // Practice melee and relevant weapon skill (if any) except when using CQB bionic, if the creature is a hallucination, if the monster is 
+    // flagged to not train, if it's a weakened NPC, or if the creature has already trained someone an excessive number of times.
+    const bool can_train_melee = !has_active_bionic( bio_cqb ) &&
+                                 !t.is_hallucination() &&
+                                 ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) && 
+                                 !t.has_flag( mon_flag_NO_TRAIN ) &&
+                                 !t.has_effect_with_flag( json_flag_PREVENT_TRAINING ) &&
+                                 t.times_combatted_player <= 50;
     Character &player_character = get_player_character();
     if( !hits ) {
         int stumble_pen = stumble( *this, cur_weapon );
@@ -739,10 +748,9 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             }
         }
 
-        // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-        if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() && !t.has_flag( mon_flag_NO_TRAIN ) ) {
-            melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null,
-                         reach_attacking );
+        if( can_train_melee ) {
+            t.times_combatted_player++;
+            melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null, reach_attacking );
         }
 
         // Cap stumble penalty, heavy weapons are quite weak already
@@ -981,8 +989,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             int dam = dealt_dam.total_damage();
             melee::melee_stats.damage_amount += dam;
 
-            // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-            if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() && !t.has_flag( mon_flag_NO_TRAIN ) ) {
+            if( can_train_melee ) {
+                t.times_combatted_player++;
                 melee_train( *this, 5, std::min( 10, skill_training_cap ), cur_weap, vector_id, reach_attacking );
             }
 

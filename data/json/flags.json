@@ -2548,5 +2548,10 @@
     "id": "CUSHION_FALL",
     "type": "json_flag",
     "info": "This item may offer increased <info>protection from fall damage</info>."
+  },
+  {
+    "id": "PREVENT_TRAINING",
+    "type": "json_flag",
+    "//": "Effect flag that prevents earning EXP from fighting this creature."
   }
 ]
