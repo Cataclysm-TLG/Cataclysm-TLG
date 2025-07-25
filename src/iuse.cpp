@@ -308,7 +308,9 @@ static const itype_id itype_weather_reader( "weather_reader" );
 
 static const json_character_flag json_flag_ENHANCED_VISION( "ENHANCED_VISION" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
+static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
+static const json_character_flag json_flag_SUN_GLASSES( "SUN_GLASSES" );
 
 static const mongroup_id GROUP_FISH( "GROUP_FISH" );
 
@@ -352,6 +354,7 @@ static const skill_id skill_mechanics( "mechanics" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
 
+static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HALLUCINATION( "HALLUCINATION" );
 static const species_id species_INSECT( "INSECT" );
@@ -1939,7 +1942,6 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint 
     }
     return 0;
 }
-
 std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & )
 {
     if( !it->ammo_sufficient( p ) ) {
@@ -1958,31 +1960,32 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
 
     map &here = get_map();
-    // Reduce the strength of fire (if any) in the target tile.
+    // Also spray creatures in that tile.
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && ( !critter->has_effect( effect_onfire ) &&
+            here.get_field( dest, field_type_id( "fd_fire" ) ) == nullptr ) &&
+        ( !critter->is_avatar() && !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "Since they're not on fire, this will probably make %s angry.  Continue?" ),
+                       critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
     here.add_field( dest, fd_extinguisher, 3, 10_turns );
-
-    p->mod_moves( -to_moves<int>( 2_seconds ) );
-    // Also spray monsters in that tile.
-    if( monster *const mon_ptr = get_creature_tracker().creature_at<monster>( dest, true ) ) {
-        monster &critter = *mon_ptr;
+    if( critter && !critter->is_avatar() ) {
+        const float hit_roll = p->hit_roll();
         bool blind = false;
-        if( one_in( 2 ) && critter.has_flag( mon_flag_SEES ) ) {
+        if( ( !critter->is_monster() || critter->has_flag( mon_flag_SEES ) ) &&
+            !critter->dodge_check( hit_roll ) ) {
             blind = true;
-            critter.add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
+            critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
         }
         viewer &player_view = get_player_view();
-        if( player_view.sees( critter ) ) {
-            p->add_msg_if_player( _( "The %s is sprayed!" ), critter.name() );
+        if( player_view.sees( *critter ) ) {
             if( blind ) {
-                p->add_msg_if_player( _( "The %s looks blinded." ), critter.name() );
+                p->add_msg_if_player( _( "%s is blinded by the spray." ), critter->disp_name() );
             }
-        }
-        if( critter.made_of( phase_id::LIQUID ) ) {
-            if( player_view.sees( critter ) ) {
-                p->add_msg_if_player( _( "The %s is frozen!" ), critter.name() );
-            }
-            critter.apply_damage( p, bodypart_id( "torso" ), rng( 20, 60 ) );
-            critter.set_speed_base( critter.get_speed_base() / 2 );
         }
     }
 
@@ -1994,6 +1997,7 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
         here.mod_field_intensity( dest, fd_fire, std::min( 0 - rng( 0, 1 ) + rng( 0, 1 ), 0 ) );
     }
 
+    p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
 }
 
@@ -2330,15 +2334,22 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint & )
     }
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
+    map &here = get_map();
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
-    if( !dest_ ) {
+    if( !dest_ || dest_ == p->pos() ) {
         return std::nullopt;
     }
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
-
-    map &here = get_map();
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && !critter->is_avatar() &&
+        ( !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "This will probably make %s angry.  Continue?" ), critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
     here.add_field( dest, fd_tear_gas, 2, 3_turns );
-
     p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
 }
@@ -3728,7 +3739,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.1, 1.5 ) );
         }
         if( target_size < 5 && target->has_effect_with_flag( json_flag_GRAB_FILTER ) &&
-            one_in( std::max( 1, target_size - 1 ) ) ) {
+            one_in( std::max( 1, target_size - 2 ) ) ) {
             for( const effect &eff : target->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
                 const efftype_id effid = eff.get_id();
                 target->remove_effect( effid );
@@ -4923,11 +4934,47 @@ std::optional<int> iuse::mop( Character *p, item *, const tripoint & )
 
 std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint & )
 {
+    if( !p->is_wielding( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
     if( !dest_ ) {
         return std::nullopt;
     }
-    return handle_ground_graffiti( *p, it, _( "Spray what?" ), dest_.value() );
+    tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
+    // Blast 'em in the face.
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && !critter->is_avatar() &&
+        ( !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "This will probably make %s angry.  Continue?" ), critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
+    if( critter && !critter->is_avatar() ) {
+        const float hit_roll = p->hit_roll();
+        bool blind = false;
+        if( ( !critter->is_monster() || critter->has_flag( mon_flag_SEES ) ) &&
+            !critter->dodge_check( hit_roll ) ) {
+            blind = true;
+            if( critter->in_species( species_ROBOT ) ) {
+                critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
+            } else {
+                critter->add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
+            }
+        }
+        viewer &player_view = get_player_view();
+        if( player_view.sees( *critter ) ) {
+            if( blind ) {
+                p->add_msg_if_player( _( "%s is blinded by the spray." ), critter->disp_name() );
+            }
+        }
+        return 1;
+    } else {
+        return handle_ground_graffiti( *p, it, _( "Spray what?" ), dest_.value() );
+    }
 }
 
 std::optional<int> iuse::handle_ground_graffiti( Character &p, item *it, const std::string &prefix,
@@ -6790,14 +6837,17 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint & )
                     }
                     std::vector<std::string> blinded_names;
                     for( monster * const &monster_p : monster_vec ) {
-                        if( dist < 4 && one_in( dist + 2 ) && monster_p->has_flag( mon_flag_SEES ) ) {
-                            monster_p->add_effect( effect_blind, rng( 5_turns, 10_turns ) );
+                        if( dist < 4 && one_in( dist + 2 ) && monster_p->has_flag( mon_flag_SEES ) &&
+                            !monster_p->in_species( species_CYBORG ) ) {
+                            monster_p->add_effect( effect_blind, rng( 2_seconds, 4_seconds ) );
                             blinded_names.push_back( monster_p->name() );
                         }
                     }
                     for( Character * const &character_p : character_vec ) {
-                        if( dist < 4 && one_in( dist + 2 ) && !character_p->is_blind() ) {
-                            character_p->add_effect( effect_blind, rng( 5_turns, 10_turns ) );
+                        if( dist < 4 && one_in( dist + 2 ) && !character_p->is_blind() &&
+                            !character_p->has_flag( json_flag_GLARE_RESIST ) &&
+                            !character_p->worn_with_flag( flag_SUN_GLASSES ) ) {
+                            character_p->add_effect( effect_blind, rng( 2_seconds, 4_seconds ) );
                             blinded_names.push_back( character_p->get_name() );
                         }
                     }

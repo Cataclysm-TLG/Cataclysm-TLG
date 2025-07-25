@@ -703,11 +703,11 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
     const int skill_training_cap = t.is_monster() ? t.as_monster()->type->melee_training_cap :
                                    MAX_SKILL;
-    // Practice melee and relevant weapon skill (if any) except when using CQB bionic, if the creature is a hallucination, if the monster is 
+    // Practice melee and relevant weapon skill (if any) except when using CQB bionic, if the creature is a hallucination, if the monster is
     // flagged to not train, if it's a weakened NPC, or if the creature has already trained someone an excessive number of times.
     const bool can_train_melee = !has_active_bionic( bio_cqb ) &&
                                  !t.is_hallucination() &&
-                                 ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) && 
+                                 ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) &&
                                  !t.has_flag( mon_flag_NO_TRAIN ) &&
                                  !t.has_effect_with_flag( json_flag_PREVENT_TRAINING ) &&
                                  t.times_combatted_player <= 50;
@@ -750,7 +750,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         if( can_train_melee ) {
             t.times_combatted_player++;
-            melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null, reach_attacking );
+            melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null,
+                         reach_attacking );
         }
 
         // Cap stumble penalty, heavy weapons are quite weak already
