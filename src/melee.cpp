@@ -706,9 +706,9 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     // flagged to not train, if it's a weakened NPC, or if the creature has already trained someone an excessive number of times.
     const bool can_train_melee = !has_active_bionic( bio_cqb ) &&
                                  !t.is_hallucination() &&
-                                 ( !t.is_monster() && t.as_character()->is_prone() ) && 
+                                 ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) && 
                                  !t.has_flag( mon_flag_NO_TRAIN ) &&
-                                 t.times_combatted_player <= 50;
+                                 t.times_combatted_player <= 60;
     Character &player_character = get_player_character();
     if( !hits ) {
         int stumble_pen = stumble( *this, cur_weapon );

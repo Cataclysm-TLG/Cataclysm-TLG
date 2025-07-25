@@ -2170,7 +2170,7 @@ void Character::on_dodge( Creature *source, float difficulty, float training_lev
         difficulty = training_level;
     }
 
-    if( source && source->times_combatted_player <= 50 ) {
+    if( source && source->times_combatted_player <= 60 ) {
         source->times_combatted_player++;
         practice( skill_dodge, difficulty * 2, difficulty );
     }
