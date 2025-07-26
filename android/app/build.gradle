@@ -1,5 +1,4 @@
-import org.gradle.internal.os.OperatingSystem
-import java.util.Properties
+import org.gradle.internal.os.OperatingSystem;
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -39,170 +38,23 @@ if (localProperties.getProperty('j') != null) {
     njobs = localProperties.getProperty("j")
 }
 
-// Parse boolean properties safely
-def safeBooleanProperty = { key, defaultValue ->
-    if (localProperties.getProperty(key) != null) {
-        return localProperties.getProperty(key).toBoolean()
-    }
-    return defaultValue
-}
-
-def localize = safeBooleanProperty('localize', false)
-def abi_arm_32 = safeBooleanProperty('abi_arm_32', true)
-def abi_arm_64 = safeBooleanProperty('abi_arm_64', true)
-def abi_x86_32 = safeBooleanProperty('abi_x86_32', false)
-def abi_x86_64 = safeBooleanProperty('abi_x86_64', false)
-
-def deps = getProperty("deps")
-if (localProperties.getProperty('deps') != null) {
-    deps = localProperties.getProperty("deps")
-}
-
-def override_version = getProperty("override_version")
-if (localProperties.getProperty('override_version') != null) {
-    override_version = localProperties.getProperty("override_version")
-}
-
-def version_header_path = getProperty("version_header_path")
-if (localProperties.getProperty('version_header_path') != null) {
-    version_header_path = localProperties.getProperty("version_header_path")
-}
-
 def override_compileSdkVersion = localProperties.getProperty("compileSdkVersion")?.toInteger() ?: 33
 def override_ndkVersion = localProperties.getProperty("ndkVersion") ?: "25.2.9519653"
 def override_minSdkVersion = localProperties.getProperty("minSdkVersion")?.toInteger() ?: 21
 def override_targetSdkVersion = localProperties.getProperty("targetSdkVersion")?.toInteger() ?: 33
-def override_ndkBuildAppPlatform = localProperties.getProperty("ndkBuildAppPlatform") ?: "android-21"
 def override_versionCode = localProperties.getProperty("versionCode")?.toInteger() ?: 1
+def version_header_path = localProperties.getProperty("version_header_path") ?: './../src/version.h'
+def override_ndkBuildAppPlatform = localProperties.getProperty("ndkBuildAppPlatform") ?: "android-21"
+def override_version = localProperties.getProperty("override_version") ?: ""
 
 println("Using [              njobs]: $njobs")
-println("Using [           localize]: $localize")
-println("Using [               deps]: $deps")
-println("Using [   override_version]: $override_version")
-println("Using [version_header_path]: $version_header_path")
 println("Using [  compileSdkVersion]: $override_compileSdkVersion")
+println("Using [         ndkVersion]: $override_ndkVersion")
 println("Using [      minSdkVersion]: $override_minSdkVersion")
 println("Using [   targetSdkVersion]: $override_targetSdkVersion")
-println("Using [ndkBuildAppPlatform]: $override_ndkBuildAppPlatform")
-println("Using [         ndkVersion]: $override_ndkVersion")
 println("Using [        versionCode]: $override_versionCode")
-println("Using [         abi_arm_32]: $abi_arm_32")
-println("Using [         abi_arm_64]: $abi_arm_64")
-println("Using [         abi_x86_32]: $abi_x86_32")
-println("Using [         abi_x86_64]: $abi_x86_64")
+println("Using [version_header_path]: $version_header_path")
 
-if (!abi_arm_32 && !abi_arm_64 && !abi_x86_32 && !abi_x86_64) {
-    throw new GradleException("All supported ABI properties are set to false!")
-}
-if (!file(deps).exists()) {
-    throw new GradleException("Dependencies file does not exist:" + deps)
-}
-
-if (!override_version.isEmpty()) {
-    if (version_header_path.isEmpty()) {
-        throw new GradleException("`version_header_path` cannot be empty when `override_version` is not empty")
-    } else {
-        println("Overriding version number to $override_version using path $version_header_path")
-    }
-}
-
-def projectRoot = './../..'
-def assetsDir = 'src/main/assets'
-def assetsDirWindows = 'src/main/assetsWinHost'
-
-// Define unzipDeps task only if you actually need it. Commented out for CI clarity.
-// task unzipDeps(type: Copy) {
-//     println("Using dependencies file: $deps")
-//     def zipFile = new File("$deps")
-//     def outputDir = new File('.')
-//     from zipTree(zipFile)
-//     into outputDir
-// }
-
-task makeLocalization(type: Exec) {
-    def args = []
-    if (localize) {
-        println("Building with localization")
-        switch (OperatingSystem.current()) {
-            case OperatingSystem.LINUX:
-                args = ['make', 'localization', 'LANGUAGES=all']
-                break
-            case OperatingSystem.WINDOWS:
-                args = ['sh.exe', 'lang/compile_mo.sh']
-                break
-            default:
-                args = ['echo', 'Building without localization']
-                break
-        }
-    } else {
-        args = ['echo', 'Building without localization']
-        if (OperatingSystem.current() == OperatingSystem.WINDOWS) {
-            args = ['cmd.exe', '/k'] + args
-        }
-    }
-    workingDir projectRoot
-    commandLine args
-}
-
-task generateVersionHeader() {
-    // Generate version header only if override_version is empty
-    doLast {
-        if (override_version.isEmpty()) {
-            println("Generating version number to $version_header_path")
-            def output = new ByteArrayOutputStream()
-            exec {
-                workingDir projectRoot
-                commandLine 'git', 'describe', '--tags', '--always', '--dirty', '--match', '[0-9A-Z]*.[0-9A-Z]*'
-                standardOutput output
-            }
-            override_version = output.toString().trim().split()[0]
-        } else {
-            println("Overriding version number to $override_version")
-        }
-        def define = "// NOLINT(cata-header-guard)\n#define VERSION \"$override_version\"\n"
-        def versionHeader = new File("$version_header_path")
-        if (!versionHeader.exists() || versionHeader.text != define) {
-            versionHeader.text = define
-        }
-    }
-}
-
-task createWindowsJunctionLinks() {
-    onlyIf {
-        OperatingSystem.current() == OperatingSystem.WINDOWS
-    }
-    doLast {
-        def mkJunction = { to, from ->
-            def errOut = new ByteArrayOutputStream()
-            exec {
-                commandLine 'cmd', '/c', "mklink /J \"$to\" \"$from\""
-                errorOutput errOut
-                standardOutput new ByteArrayOutputStream()
-            }
-            def errString = errOut.toString()
-            if (!errString.isEmpty() && !errString.endsWith('already exists.\r\n')) {
-                errString = errString.substring(0, errString.size() - 2)
-                throw new GradleException("$errString")
-            }
-        }
-
-        println("Creating junctions for the assets")
-
-        mkdir assetsDirWindows
-        mkdir "$assetsDirWindows/lang"
-
-        def rootDir = projectRoot.replace('/', '\\')
-        def unixAssetsDir = assetsDir.replace('/', '\\')
-        def winAssetsDir = assetsDirWindows.replace('/', '\\')
-
-        mkJunction("$winAssetsDir\\android", "$unixAssetsDir\\android")
-        for (dir in ['data', 'gfx', 'lang\\mo']) {
-            mkJunction("$winAssetsDir\\$dir", "$rootDir\\$dir")
-        }
-    }
-}
-
-// Make preBuild depend on tasks that exist:
 preBuild.dependsOn makeLocalization
 preBuild.dependsOn generateVersionHeader
 preBuild.dependsOn createWindowsJunctionLinks
@@ -210,38 +62,19 @@ createWindowsJunctionLinks.dependsOn makeLocalization
 
 android {
     namespace "com.cataclysmtlg.cataclysmtlg"
-    compileSdk = override_compileSdkVersion
+    compileSdkVersion override_compileSdkVersion
     ndkVersion override_ndkVersion
 
     defaultConfig {
         minSdkVersion override_minSdkVersion
         targetSdkVersion override_targetSdkVersion
         versionCode Integer.valueOf(override_versionCode)
-
-        // Workaround: use default if version header is missing or empty
-        def versionNameValue = "0.0.0"
-        try {
-            def versionHeaderFile = file(version_header_path)
-            if (versionHeaderFile.exists()) {
-                def content = versionHeaderFile.text
-                def matcher = content =~ /VERSION\s+"(.+)"/
-                if (matcher.find()) {
-                    versionNameValue = matcher.group(1)
-                }
-            } else {
-                println("Warning: version header file not found at $version_header_path, using default version name 0.0.0")
-            }
-        } catch (Exception e) {
-            println("Warning: error reading version header: ${e.message}, using default version name 0.0.0")
-        }
-        versionName versionNameValue
-
+        versionName "unknown" // temporary dummy, will be overridden after evaluation
         if (buildAsApplication) {
             applicationId "com.cataclysmtlg.cataclysmtlg"
-            setProperty("archivesBaseName", "cataclysmtlg-" + versionNameValue)
+            setProperty("archivesBaseName", "cataclysmtlg-" + versionName)
         }
         resValue "string", "app_name", "Cataclysm TLG"
-
         splits {
             abi {
                 enable true
@@ -253,18 +86,15 @@ android {
                 universalApk false
             }
         }
-
         externalNativeBuild {
             ndkBuild {
                 arguments "APP_PLATFORM=$override_ndkBuildAppPlatform", "-j$njobs"
             }
         }
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     flavorDimensions "version"
-
     productFlavors {
         stable {
             dimension "version"
@@ -396,4 +226,15 @@ sourceSets {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+afterEvaluate {
+    def versionFile = file(version_header_path)
+    if (versionFile.exists()) {
+        android.defaultConfig.versionName = versionFile.text.split('\"')[1]
+        println("Set versionName from $version_header_path to ${android.defaultConfig.versionName}")
+    } else {
+        android.defaultConfig.versionName = "unknown"
+        println("Warning: version header file $version_header_path does not exist")
+    }
 }
