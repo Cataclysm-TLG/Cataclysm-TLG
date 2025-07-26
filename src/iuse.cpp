@@ -2397,13 +2397,8 @@ std::optional<int> iuse::pack_cbm( Character *p, item *it, const tripoint & )
         return 0;
     }
 
-    const int success = round( p->get_skill_level( skill_firstaid ) ) - rng( 0, 6 );
-    if( success > 0 ) {
-        p->add_msg_if_player( m_good, _( "You carefully prepare the CBM for sterilization." ) );
-        bionic.get_item()->unset_flag( flag_NO_PACKED );
-    } else {
-        p->add_msg_if_player( m_bad, _( "You fail to properly prepare the CBM." ) );
-    }
+    p->add_msg_if_player( m_good, _( "You carefully prepare the CBM for sterilization." ) );
+    bionic.get_item()->unset_flag( flag_NO_PACKED );
 
     std::vector<item_comp> comps;
     comps.emplace_back( it->typeId(), 1 );
