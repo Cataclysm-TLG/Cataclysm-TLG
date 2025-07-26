@@ -323,9 +323,9 @@ jobs:
           export NDK_VERSION="25.2.9519653" # Set to the required NDK version
           
           # Uncomment and configure these if you're using keystore properties files
-          echo "${{ secrets.KEYSTORE }}" > release.keystore.asc
+          "${{ secrets.KEYSTORE }}" > release.keystore.asc
           gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" --batch release.keystore.asc > app/release.keystore 
-          echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc   
+          "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc   
           gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" --batch keystore.properties.asc > keystore.properties
           
           export UPSTREAM_BUILD_NUMBER="$((11581 + ${{ github.run_number }}))"
