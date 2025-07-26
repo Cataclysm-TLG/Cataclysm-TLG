@@ -89,7 +89,7 @@
     "color": "white",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "description": "This bone meal can be used to craft fertilizer and some other things.",
+    "description": "An off-white powder made from grinding bones.",
     "price": "6 cent",
     "price_postapoc": "2 cent",
     "material": [ "powder" ],
