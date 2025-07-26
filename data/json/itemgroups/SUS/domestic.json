@@ -943,7 +943,7 @@
           {
             "item": "vitamins",
             "prob": 40,
-            "count": [ 1, 30 ],
+            "count": [ 1, 20 ],
             "container-item": "null",
             "entry-wrapper": "bottle_plastic_small"
           },
@@ -954,11 +954,11 @@
             "container-item": "null",
             "entry-wrapper": "bottle_plastic_small"
           },
-          { "item": "vitc_tablet", "prob": 7, "count": [ 1, 30 ], "entry-wrapper": "bottle_plastic_small" },
+          { "item": "vitc_tablet", "prob": 7, "count": [ 1, 20 ], "entry-wrapper": "bottle_plastic_small" },
           {
             "item": "calcium_tablet",
             "prob": 10,
-            "count": [ 1, 30 ],
+            "count": [ 1, 20 ],
             "container-item": "null",
             "entry-wrapper": "bottle_plastic_small"
           }
