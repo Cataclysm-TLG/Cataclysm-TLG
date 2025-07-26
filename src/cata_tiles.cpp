@@ -2594,8 +2594,8 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         }
     }
     point newoffset = offset;
-    newoffset.x += 16 * (1 - scale_x);
-    newoffset.y += 32 * (1 - scale_y);
+    newoffset.x += 16 * ( 1 - scale_x );
+    newoffset.y += 32 * ( 1 - scale_y );
     map &here = get_map();
     const std::string &found_id = res ? res->id() : id;
 
