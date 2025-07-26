@@ -43,7 +43,7 @@
       { "id": "bite_humanoid", "cooldown": 5 },
       { "id": "grab", "cooldown": 12 },
       { "id": "scratch_humanoid" },
-      { "type": "leap", "cooldown": 10, "max_range": 5 }
+      { "type": "leap", "cooldown": 10, "max_range": 5, "ignore_dest_danger": true }
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
@@ -111,7 +111,7 @@
       { "id": "bite_humanoid", "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_multiplier": 0.7 } ] },
       { "id": "grab", "cooldown": 12 },
       { "id": "scratch_humanoid" },
-      { "type": "leap", "cooldown": 2, "max_range": 8 }
+      { "type": "leap", "cooldown": 2, "max_range": 8, "ignore_dest_danger": true }
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_fiend",
