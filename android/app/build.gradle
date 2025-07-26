@@ -1,24 +1,7 @@
-import org.gradle.internal.os.OperatingSystem
+import org.gradle.internal.os.OperatingSystem;
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-// Stub tasks — replace with your real task implementations if you want
-task makeLocalization(type: Exec) {
-    doLast {
-        println("makeLocalization task stub — replace with real implementation")
-    }
-}
-task generateVersionHeader {
-    doLast {
-        println("generateVersionHeader task stub — replace with real implementation")
-    }
-}
-task createWindowsJunctionLinks {
-    doLast {
-        println("createWindowsJunctionLinks task stub — replace with real implementation")
-    }
 }
 
 def buildAsLibrary = project.hasProperty('BUILD_AS_LIBRARY')
@@ -63,6 +46,7 @@ def override_minSdkVersion = localProperties.getProperty("minSdkVersion")?.toInt
 def override_targetSdkVersion = localProperties.getProperty("targetSdkVersion")?.toInteger() ?: 33
 def override_versionCode = localProperties.getProperty("versionCode")?.toInteger() ?: 1
 
+// preBuild.dependsOn unzipDeps
 preBuild.dependsOn makeLocalization
 preBuild.dependsOn generateVersionHeader
 preBuild.dependsOn createWindowsJunctionLinks
