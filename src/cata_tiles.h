@@ -515,11 +515,11 @@ class cata_tiles
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
             bool apply_night_vision_goggles, int retract, int &height_3d, const point &offset,
-    float scale_x, float scale_y );
+            float scale_x, float scale_y );
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
                            lit_level ll, bool apply_night_vision_goggles, int retract, int &height_3d,
                            const point &offset,
-    float scale_x, float scale_y  );
+                           float scale_x, float scale_y );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,

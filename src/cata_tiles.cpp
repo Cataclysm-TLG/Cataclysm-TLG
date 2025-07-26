@@ -2932,13 +2932,13 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
                 break;
             }
             // NPC
-if( string_starts_with( found_id, "npc_" ) ) {
-    if( npc *const guy = creatures.creature_at<npc>( pos ) ) {
-        seed = guy->getID().get_value();
-    }
+            if( string_starts_with( found_id, "npc_" ) ) {
+                if( npc *const guy = creatures.creature_at<npc>( pos ) ) {
+                    seed = guy->getID().get_value();
+                }
 
             }
-        }
+    }
 
     // make sure we aren't going to rotate the tile if it shouldn't be rotated
     if( !display_tile.rotates && !( category == TILE_CATEGORY::NONE )
@@ -3001,11 +3001,11 @@ if( string_starts_with( found_id, "npc_" ) ) {
 
     //draw it!
     if( newoffset != offset ) {
-    draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
-                  nv_color_active, retract, height_3d, newoffset, scale_x, scale_y );
+        draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
+                      nv_color_active, retract, height_3d, newoffset, scale_x, scale_y );
     } else {
-    draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
-                  nv_color_active, retract, height_3d, offset, scale_x, scale_y );
+        draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
+                      nv_color_active, retract, height_3d, offset, scale_x, scale_y );
     }
 
     return true;
@@ -3014,7 +3014,8 @@ if( string_starts_with( found_id, "npc_" ) ) {
 bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-    bool apply_night_vision_goggles, int retract, int &height_3d, const point &offset, float scale_x, float scale_y )
+    bool apply_night_vision_goggles, int retract, int &height_3d, const point &offset, float scale_x,
+    float scale_y )
 {
     const std::vector<int> *picked = svlist.pick( loc_rand );
     if( !picked ) {
@@ -3089,8 +3090,10 @@ bool cata_tiles::draw_sprite_at(
                     tileset_ptr->get_tile_width() );
     destination.y = p.y + divide_round_down( ( tile_offset.y + offset.y - height_3d ) * tile_width,
                     tileset_ptr->get_tile_width() );
-destination.w = static_cast<int>( width * tile_width * tile.pixelscale / tileset_ptr->get_tile_width() * scale_x );
-destination.h = static_cast<int>( height * tile_height * tile.pixelscale / tileset_ptr->get_tile_height() * scale_y );
+    destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
+                                      tileset_ptr->get_tile_width() * scale_x );
+    destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
+                                      tileset_ptr->get_tile_height() * scale_y );
 
     if( rotate_sprite ) {
         if( rota == -1 ) {
@@ -4114,32 +4117,32 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         if( !you.sees( critter ) ) {
             if( you.sees_with_infrared( critter ) ||
                 you.sees_with_specials( critter ) ) {
-                            float scale_x = 1.0f;
-                            float scale_y = 1.0f;
-switch( critter.enum_size() ) {
+                const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
+
+                float scale_x = 1.0f;
+                float scale_y = 1.0f;
+                if( use_scaling ) {
+                    switch( critter.enum_size() ) {
                         case 1:
-                            scale_x = 0.4f;
-                            scale_y = 0.4f;
-                                                        add_msg( _( "tiny infra" ) );
+                            scale_x = 0.5f;
+                            scale_y = 0.5f;
                             break;
                         case 2:
                             scale_x = 0.6f;
                             scale_y = 0.6f;
-                                                        add_msg( _( "small infra" ) );
                             break;
                         case 4:
                             scale_x = 1.3f;
                             scale_y = 1.3f;
-                                                        add_msg( _( "large infra" ) );
                             break;
                         case 5:
-                            scale_x = 1.6f;
-                            scale_y = 1.6f;
-                            add_msg( _( "big infra boi detected" ) );
+                            scale_x = 1.5f;
+                            scale_y = 1.5f;
                             break;
                         default:
                             break;
-                        }
+                    }
+                }
                 return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string,
                                             p, 0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
             }
@@ -4188,28 +4191,32 @@ switch( critter.enum_size() ) {
         }
         const Character *pl = dynamic_cast<const Character *>( &critter );
         if( pl != nullptr ) {
-                            float scale_x = 1.0f;
-                            float scale_y = 1.0f;
-            switch( pl->enum_size() ) {
-                        case 1:
-                            scale_x = 0.4f;
-                            scale_y = 0.4f;
-                            break;
-                        case 2:
-                            scale_x = 0.6f;
-                            scale_y = 0.6f;
-                            break;
-                        case 4:
-                            scale_x = 1.3f;
-                            scale_y = 1.3f;
-                            break;
-                        case 5:
-                            scale_x = 1.6f;
-                            scale_y = 1.6f;
-                            break;
-                        default:
-                            break;
-                        }
+            const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
+
+            float scale_x = 1.0f;
+            float scale_y = 1.0f;
+            if( use_scaling ) {
+                switch( pl->enum_size() ) {
+                    case 1:
+                        scale_x = 0.5f;
+                        scale_y = 0.5f;
+                        break;
+                    case 2:
+                        scale_x = 0.6f;
+                        scale_y = 0.6f;
+                        break;
+                    case 4:
+                        scale_x = 1.3f;
+                        scale_y = 1.3f;
+                        break;
+                    case 5:
+                        scale_x = 1.5f;
+                        scale_y = 1.5f;
+                        break;
+                    default:
+                        break;
+                }
+            }
             draw_entity_with_overlays( *pl, p, ll, height_3d, scale_x, scale_y );
             result = true;
             if( pl->is_avatar() ) {
@@ -4230,32 +4237,31 @@ switch( critter.enum_size() ) {
         if( sees_with_infrared || you.sees_with_specials( *pcritter ) ) {
             // try drawing infrared creature if invisible and not overridden
             // return directly without drawing overlay
-                            float scale_x = 1.0f;
-                            float scale_y = 1.0f;
-                    switch( pcritter->enum_size() ) {
-                        case 1:
-                            scale_x = 0.4f;
-                            scale_y = 0.4f;
-                                                        add_msg( _( "tiny infra" ) );
-                            break;
-                        case 2:
-                            scale_x = 0.6f;
-                            scale_y = 0.6f;
-                                                        add_msg( _( "small infra" ) );
-                            break;
-                        case 4:
-                            scale_x = 1.3f;
-                            scale_y = 1.3f;
-                                                        add_msg( _( "large infra" ) );
-                            break;
-                        case 5:
-                            scale_x = 1.6f;
-                            scale_y = 1.6f;
-                            add_msg( _( "big infra boi detected" ) );
-                            break;
-                        default:
-                            break;
-                        }
+            const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
+            float scale_x = 1.0f;
+            float scale_y = 1.0f;
+            if( use_scaling ) {
+                switch( pcritter->enum_size() ) {
+                    case 1:
+                        scale_x = 0.5f;
+                        scale_y = 0.5f;
+                        break;
+                    case 2:
+                        scale_x = 0.6f;
+                        scale_y = 0.6f;
+                        break;
+                    case 4:
+                        scale_x = 1.3f;
+                        scale_y = 1.3f;
+                        break;
+                    case 5:
+                        scale_x = 1.5f;
+                        scale_y = 1.5f;
+                        break;
+                    default:
+                        break;
+                }
+            }
             return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string, p,
                                         0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
         } else {
@@ -4303,7 +4309,8 @@ bool cata_tiles::draw_critter_above( const tripoint &p, lit_level ll, int &heigh
 
     // Draw shadow
     if( draw_from_id_string( "shadow", TILE_CATEGORY::NONE, empty_string, p,
-                             0, 0, ll, false, height_3d, 1.0f, 1.0f ) && scan_p.z() - 1 > you.pos_bub().z() && you.sees( critter ) ) {
+                             0, 0, ll, false, height_3d, 1.0f, 1.0f ) && scan_p.z() - 1 > you.pos_bub().z() &&
+        you.sees( critter ) ) {
 
         bool is_player = false;
         bool sees_player = false;
