@@ -142,13 +142,13 @@ static const trait_id trait_NPC_CONSTRUCTION_LEV_2( "NPC_CONSTRUCTION_LEV_2" );
 static const trait_id trait_NPC_MISSION_LEV_1( "NPC_MISSION_LEV_1" );
 
 static const std::string var_DOCTOR_ANESTHETIC_SCAVENGERS_HELPED =
-    "mission_tacoma_ranch_doctor_anesthetic_scavengers_helped";
+    "npctalk_var_mission_tacoma_ranch_doctor_anesthetic_scavengers_helped";
 static const std::string var_PURCHASED_FIELD_1_FENCE =
-    "dialogue_tacoma_ranch_purchased_field_1_fence";
+    "npctalk_var_dialogue_tacoma_ranch_purchased_field_1_fence";
 static const std::string var_SCAVENGER_HOSPITAL_RAID =
-    "mission_tacoma_ranch_scavenger_hospital_raid";
+    "npctalk_var_mission_tacoma_ranch_scavenger_hospital_raid";
 static const std::string var_SCAVENGER_HOSPITAL_RAID_STARTED =
-    "mission_tacoma_ranch_scavenger_hospital_raid_started";
+    "npctalk_var_mission_tacoma_ranch_scavenger_hospital_raid_started";
 
 static const std::string role_id_faction_camp = "FACTION_CAMP";
 
