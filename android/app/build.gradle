@@ -40,13 +40,7 @@ if (localProperties.getProperty('j') != null) {
 
 // ... [all other property parsing and logging code up to projectRoot, assetsDir, tasks]
 
-def override_compileSdkVersion = localProperties.getProperty("compileSdkVersion")?.toInteger() ?: 33
-def override_ndkVersion = localProperties.getProperty("ndkVersion") ?: "25.2.9519653"
-def override_minSdkVersion = localProperties.getProperty("minSdkVersion")?.toInteger() ?: 21
-def override_targetSdkVersion = localProperties.getProperty("targetSdkVersion")?.toInteger() ?: 33
-def override_versionCode = localProperties.getProperty("versionCode")?.toInteger() ?: 1
-
-// preBuild.dependsOn unzipDeps
+preBuild.dependsOn unzipDeps
 preBuild.dependsOn makeLocalization
 preBuild.dependsOn generateVersionHeader
 preBuild.dependsOn createWindowsJunctionLinks
