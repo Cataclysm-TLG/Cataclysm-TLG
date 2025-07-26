@@ -2594,30 +2594,8 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         }
     }
     point newoffset = offset;
-    if( scale_x == 0.4f ) {
-        newoffset.x += scale_x * 26;
-    }
-    if( scale_y == 0.4f ) {
-        newoffset.y += scale_y * 46;
-    }
-    if( scale_x == 0.6f ) {
-        newoffset.x += scale_x * 12;
-    }
-    if( scale_y == 0.6f ) {
-        newoffset.y += scale_y * 20;
-    }
-    if( scale_x == 1.3f ) {
-        newoffset.x -= scale_x * 4;
-    }
-    if( scale_y == 1.3f ) {
-        newoffset.y -= scale_y * 8;
-    }
-    if( scale_x == 1.6f ) {
-        newoffset.x -= scale_x * 6;
-    }
-    if( scale_y == 1.6f ) {
-        newoffset.y -= 1 + scale_y * 12;
-    }
+    newoffset.x += 16 * (1 - scale_x);
+    newoffset.y += 32 * (1 - scale_y);
     map &here = get_map();
     const std::string &found_id = res ? res->id() : id;
 
@@ -4128,8 +4106,8 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
                             scale_y = 0.5f;
                             break;
                         case 2:
-                            scale_x = 0.6f;
-                            scale_y = 0.6f;
+                            scale_x = 0.75f;
+                            scale_y = 0.75f;
                             break;
                         case 4:
                             scale_x = 1.3f;
@@ -4202,8 +4180,8 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
                         scale_y = 0.5f;
                         break;
                     case 2:
-                        scale_x = 0.6f;
-                        scale_y = 0.6f;
+                        scale_x = 0.75f;
+                        scale_y = 0.75f;
                         break;
                     case 4:
                         scale_x = 1.3f;
@@ -4247,8 +4225,8 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
                         scale_y = 0.5f;
                         break;
                     case 2:
-                        scale_x = 0.6f;
-                        scale_y = 0.6f;
+                        scale_x = 0.75f;
+                        scale_y = 0.75f;
                         break;
                     case 4:
                         scale_x = 1.3f;
