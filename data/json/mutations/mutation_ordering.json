@@ -40,7 +40,7 @@
           "CHITIN_FUR",
           "CHITIN_FUR2",
           "CHITIN_FUR3",
-          "FEATHERS",
+          "DOWN",
           "FELINE_FUR",
           "FUR",
           "HIRSUTE",
@@ -77,6 +77,7 @@
           "BARK_2a",
           "BARK_2b",
           "BARK_2c",
+          "FEATHERS",
           "SHELL",
           "SHELL2",
           "SHELL3",
@@ -189,10 +190,11 @@
       },
       { "id": [ "BATEARS", "ELFA_EARS", "FELINE_EARS", "LUPINE_EARS", "RABBIT_EARS", "URSINE_EARS" ], "order": 5500 },
       { "id": [ "ANTENNAE", "ANTLERS", "HORNS_CURLED", "HORNS", "HORNS_POINTED" ], "order": 6000 },
-      { "id": [ "COMPOUND_EYES", "ELFAEYES", "FEL_EYE", "LIZ_EYE" ], "order": 6500 },
+      { "id": [ "COMPOUND_EYES", "ELFAEYES", "FEL_EYE", "LIZ_EYE", "BIRD_EYE" ], "order": 6500 },
       {
         "id": [
           "BEAK",
+          "DRILL_BEAK",
           "BEAK_HUM",
           "BEAK_PECK",
           "LYNX_FUR",
@@ -213,7 +215,8 @@
       { "id": [ "FANGS", "MANDIBLES", "SABER_TEETH" ], "order": 7500 },
       { "id": [ "FORKED_TONGUE", "active_bio_ads", "active_bio_ods" ], "order": 8000 },
       { "id": [ "PROF_FED", "PROF_PD_DET", "PROF_POLICE", "PROF_SWAT", "PHEROMONE_INSECT" ], "order": 8500 },
-      { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 }
+      { "id": [ "WINGS_BAT", "WINGS_BIRD" ], "order": 9000 },
+      { "id": [ "BEAK", "DRILL_BEAK", "BEAK_PECK" ], "order": 9500 }
     ]
   }
 ]
