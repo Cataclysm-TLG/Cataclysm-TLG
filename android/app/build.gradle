@@ -72,6 +72,7 @@ def override_compileSdkVersion = localProperties.getProperty("compileSdkVersion"
 def override_ndkVersion = localProperties.getProperty("ndkVersion") ?: "25.2.9519653"
 def override_minSdkVersion = localProperties.getProperty("minSdkVersion")?.toInteger() ?: 21
 def override_targetSdkVersion = localProperties.getProperty("targetSdkVersion")?.toInteger() ?: 33
+def override_ndkBuildAppPlatform = localProperties.getProperty("ndkBuildAppPlatform") ?: "android-21"
 def override_versionCode = localProperties.getProperty("versionCode")?.toInteger() ?: 1
 
 println("Using [              njobs]: $njobs")
@@ -82,6 +83,7 @@ println("Using [version_header_path]: $version_header_path")
 println("Using [  compileSdkVersion]: $override_compileSdkVersion")
 println("Using [      minSdkVersion]: $override_minSdkVersion")
 println("Using [   targetSdkVersion]: $override_targetSdkVersion")
+println("Using [ndkBuildAppPlatform]: $override_ndkBuildAppPlatform")
 println("Using [         ndkVersion]: $override_ndkVersion")
 println("Using [        versionCode]: $override_versionCode")
 println("Using [         abi_arm_32]: $abi_arm_32")
@@ -107,6 +109,15 @@ if (!override_version.isEmpty()) {
 def projectRoot = './../..'
 def assetsDir = 'src/main/assets'
 def assetsDirWindows = 'src/main/assetsWinHost'
+
+// Define unzipDeps task only if you actually need it. Commented out for CI clarity.
+// task unzipDeps(type: Copy) {
+//     println("Using dependencies file: $deps")
+//     def zipFile = new File("$deps")
+//     def outputDir = new File('.')
+//     from zipTree(zipFile)
+//     into outputDir
+// }
 
 task makeLocalization(type: Exec) {
     def args = []
@@ -134,6 +145,7 @@ task makeLocalization(type: Exec) {
 }
 
 task generateVersionHeader() {
+    // Generate version header only if override_version is empty
     doLast {
         if (override_version.isEmpty()) {
             println("Generating version number to $version_header_path")
@@ -190,6 +202,7 @@ task createWindowsJunctionLinks() {
     }
 }
 
+// Make preBuild depend on tasks that exist:
 preBuild.dependsOn makeLocalization
 preBuild.dependsOn generateVersionHeader
 preBuild.dependsOn createWindowsJunctionLinks
@@ -205,6 +218,7 @@ android {
         targetSdkVersion override_targetSdkVersion
         versionCode Integer.valueOf(override_versionCode)
 
+        // Workaround: use default if version header is missing or empty
         def versionNameValue = "0.0.0"
         try {
             def versionHeaderFile = file(version_header_path)
