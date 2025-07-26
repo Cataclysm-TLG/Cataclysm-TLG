@@ -21,6 +21,7 @@
 #include "messages.h"
 #include "monster.h"
 #include "mtype.h"
+#include "npc.h"
 #include "output.h"
 #include "pimpl.h"
 #include "point.h"
