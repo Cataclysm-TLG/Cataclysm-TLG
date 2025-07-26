@@ -320,17 +320,31 @@ jobs:
         working-directory: ./android
         run: |
           # Set environment variables for NDK compatibility
-          export NDK_VERSION="25.2.9519653" # Set to the required NDK version
-          
+          export NDK_VERSION="25.2.9519653"
+
+          # Ensure app/ directory exists
+          mkdir -p app
+
+          # Decrypt keystore and properties files
           echo "${{ secrets.KEYSTORE }}" > release.keystore.asc
-          gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" --batch release.keystore.asc > app/release.keystore 
-          echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc   
-          gpg -d --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" --batch keystore.properties.asc > keystore.properties
-          
+          gpg --quiet --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" -o app/release.keystore -d release.keystore.asc
+
+          echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties.asc
+          gpg --quiet --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.KEYSTORE_PASSWORD }}" -o keystore.properties -d keystore.properties.asc
+
+          # Debug output to ensure keystore was created
+          if [ ! -s app/release.keystore ]; then
+            echo "app/release.keystore is missing or empty!"
+            exit 1
+          fi
+          echo "release.keystore successfully written:"
+          ls -l app/release.keystore
+          file app/release.keystore
+
           export UPSTREAM_BUILD_NUMBER="$((11581 + ${{ github.run_number }}))"
           chmod +x gradlew
-          
-          # Build Android APK or AAB for different architectures
+
+          # Build APK or AAB depending on target
           if [ ${{ matrix.android }} = arm64 ]
           then
                ./gradlew -Pj=$((`nproc`+0)) -Pabi_arm_32=false assembleExperimentalRelease
