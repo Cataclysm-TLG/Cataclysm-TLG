@@ -968,7 +968,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             // light level is now used for choosing between grayscale filter and normal lit tiles.
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
-                                 omp.raw(), subtile, rotation, ll, false, height_3d );
+                                 omp.raw(), subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
                 draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp.raw(),
                                      0, 0, ll, false );
@@ -1108,12 +1108,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         if( guy_loc.z() == center_pos.z() && ( has_debug_vision ||
                                                overmap_buffer.seen_more_than( guy_loc, om_vision_level::details ) ) ) {
             draw_entity_with_overlays( *guy, global_omt_to_draw_position( guy_loc ), lit_level::LIT,
-                                       height_3d );
+                                       height_3d, 1.0f, 1.0f );
         }
     }
 
     draw_entity_with_overlays( get_player_character(), global_omt_to_draw_position( avatar_pos ),
-                               lit_level::LIT, height_3d );
+                               lit_level::LIT, height_3d, 1.0f, 1.0f );
     if( !fast_traveling ) {
         draw_from_id_string( "cursor", global_omt_to_draw_position( center_pos ), 0, 0, lit_level::LIT,
                              false );
