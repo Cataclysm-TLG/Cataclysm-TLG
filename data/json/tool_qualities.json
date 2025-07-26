@@ -470,6 +470,6 @@
   {
     "type": "tool_quality",
     "id": "TORCH_FINE",
-    "name": { "str": "Precise Heat Application" }
+    "name": { "str": "precise heat application" }
   }
 ]
