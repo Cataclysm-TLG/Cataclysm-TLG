@@ -2540,6 +2540,12 @@ void Character::process_turn()
         }
     }
 
+    // TODO: Maybe a unified function for terrain effects?
+    if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
+        !here.has_vehicle_floor( pos_bub() ) ) {
+        add_effect( effect_bouldering, 1_turns, true );
+    }
+
     for( const trait_id &mut : get_mutations() ) {
         mutation_reflex_trigger( mut );
     }
