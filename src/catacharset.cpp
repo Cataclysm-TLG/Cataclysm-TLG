@@ -349,61 +349,63 @@ static void strip_trailing_nulls( std::string &str )
 #endif
 #if defined(__ANDROID__)
 // Android-specific UTF-8 to UTF-32 conversion
-static std::wstring utf8_to_wstr_android(const std::string &utf8) {
+static std::wstring utf8_to_wstr_android( const std::string &utf8 )
+{
     std::wstring wstr;
-    wstr.reserve(utf8.size()); // worst case
-    
+    wstr.reserve( utf8.size() ); // worst case
+
     const char *ptr = utf8.data();
     int len = utf8.size();
-    while (len > 0) {
-        uint32_t ch = UTF8_getch(&ptr, &len);
-        if (ch == UNKNOWN_UNICODE) {
+    while( len > 0 ) {
+        uint32_t ch = UTF8_getch( &ptr, &len );
+        if( ch == UNKNOWN_UNICODE ) {
             continue;
         }
-        if (ch <= 0xFFFF) {
-            wstr.push_back(static_cast<wchar_t>(ch));
+        if( ch <= 0xFFFF ) {
+            wstr.push_back( static_cast<wchar_t>( ch ) );
         } else {
             // Handle surrogate pairs for UTF-16
             ch -= 0x10000;
-            wstr.push_back(static_cast<wchar_t>(0xD800 + (ch >> 10)));
-            wstr.push_back(static_cast<wchar_t>(0xDC00 + (ch & 0x3FF)));
+            wstr.push_back( static_cast<wchar_t>( 0xD800 + ( ch >> 10 ) ) );
+            wstr.push_back( static_cast<wchar_t>( 0xDC00 + ( ch & 0x3FF ) ) );
         }
     }
     return wstr;
 }
 
 // Android-specific UTF-32 to UTF-8 conversion
-static std::string wstr_to_utf8_android(const std::wstring &wstr) {
+static std::string wstr_to_utf8_android( const std::wstring &wstr )
+{
     std::string utf8;
-    utf8.reserve(wstr.size() * 4); // worst case
-    
-    for (size_t i = 0; i < wstr.size(); ) {
+    utf8.reserve( wstr.size() * 4 ); // worst case
+
+    for( size_t i = 0; i < wstr.size(); ) {
         uint32_t ch;
-        if (wstr[i] >= 0xD800 && wstr[i] <= 0xDBFF && i + 1 < wstr.size() && 
-            wstr[i+1] >= 0xDC00 && wstr[i+1] <= 0xDFFF) {
+        if( wstr[i] >= 0xD800 && wstr[i] <= 0xDBFF && i + 1 < wstr.size() &&
+            wstr[i + 1] >= 0xDC00 && wstr[i + 1] <= 0xDFFF ) {
             // Surrogate pair
-            ch = 0x10000 + ((wstr[i] - 0xD800) << 10) + (wstr[i+1] - 0xDC00);
+            ch = 0x10000 + ( ( wstr[i] - 0xD800 ) << 10 ) + ( wstr[i + 1] - 0xDC00 );
             i += 2;
         } else {
-            ch = static_cast<uint32_t>(wstr[i]);
+            ch = static_cast<uint32_t>( wstr[i] );
             i += 1;
         }
-        
+
         // Convert to UTF-8
-        if (ch <= 0x7F) {
-            utf8.push_back(static_cast<char>(ch));
-        } else if (ch <= 0x7FF) {
-            utf8.push_back(static_cast<char>(0xC0 | (ch >> 6)));
-            utf8.push_back(static_cast<char>(0x80 | (ch & 0x3F)));
-        } else if (ch <= 0xFFFF) {
-            utf8.push_back(static_cast<char>(0xE0 | (ch >> 12)));
-            utf8.push_back(static_cast<char>(0x80 | ((ch >> 6) & 0x3F)));
-            utf8.push_back(static_cast<char>(0x80 | (ch & 0x3F)));
+        if( ch <= 0x7F ) {
+            utf8.push_back( static_cast<char>( ch ) );
+        } else if( ch <= 0x7FF ) {
+            utf8.push_back( static_cast<char>( 0xC0 | ( ch >> 6 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
+        } else if( ch <= 0xFFFF ) {
+            utf8.push_back( static_cast<char>( 0xE0 | ( ch >> 12 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 6 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
         } else {
-            utf8.push_back(static_cast<char>(0xF0 | (ch >> 18)));
-            utf8.push_back(static_cast<char>(0x80 | ((ch >> 12) & 0x3F)));
-            utf8.push_back(static_cast<char>(0x80 | ((ch >> 6) & 0x3F)));
-            utf8.push_back(static_cast<char>(0x80 | (ch & 0x3F)));
+            utf8.push_back( static_cast<char>( 0xF0 | ( ch >> 18 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 12 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 6 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
         }
     }
     return utf8;
@@ -424,7 +426,7 @@ std::wstring utf8_to_wstr( const std::string &utf8 )
     return wstr;
 
 #elif defined(__ANDROID__)
-    return utf8_to_wstr_android(utf8);
+    return utf8_to_wstr_android( utf8 );
 
 #else
     iconv_t cd = iconv_open( "UTF-32LE", "UTF-8" );
@@ -467,7 +469,7 @@ std::string wstr_to_utf8( const std::wstring &wstr )
     return str;
 
 #elif defined(__ANDROID__)
-    return wstr_to_utf8_android(wstr);
+    return wstr_to_utf8_android( wstr );
 
 #else
     iconv_t cd = iconv_open( "UTF-8", "UTF-32LE" );

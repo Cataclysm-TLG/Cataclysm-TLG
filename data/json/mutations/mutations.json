@@ -7033,11 +7033,7 @@
       [
         {
           "condition": {
-            "and": [
-              { "u_has_move_mode": "crouch" },
-              { "not": "u_can_drop_weapon" },
-              { "not": { "u_has_flag": "QUADRUPED_RUN" } }
-            ]
+            "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "not": { "u_has_flag": "QUADRUPED_RUN" } } ]
           },
           "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
@@ -9162,7 +9158,12 @@
         }
       ]
     ],
-    "enchantments": [ "ench_quadruped_movement_bipedal", "ench_quadruped_movement_full_crouch", "ench_quadruped_movement_full_run", { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] } ]
+    "enchantments": [
+      "ench_quadruped_movement_bipedal",
+      "ench_quadruped_movement_full_crouch",
+      "ench_quadruped_movement_full_run",
+      { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] }
+    ]
   },
   {
     "type": "mutation",
@@ -9193,11 +9194,7 @@
       [
         {
           "condition": {
-            "and": [
-              { "u_has_move_mode": "crouch" },
-              { "not": "u_can_drop_weapon" },
-              { "not": { "u_has_flag": "QUADRUPED_RUN" } }
-            ]
+            "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "not": { "u_has_flag": "QUADRUPED_RUN" } } ]
           },
           "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
