@@ -2791,7 +2791,8 @@ void monster::process_turn()
     }
 
     if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
-        !here.has_vehicle_floor( pos_bub() ) && !flies() && !climbs() && !has_effect( effect_bouldering ) ) {
+        !here.has_vehicle_floor( pos_bub() ) && !flies() && !climbs() &&
+        !has_effect( effect_bouldering ) ) {
         add_effect( effect_bouldering, 1_turns, true );
     }
 
