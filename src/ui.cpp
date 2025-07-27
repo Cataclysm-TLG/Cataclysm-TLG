@@ -1032,7 +1032,7 @@ uilist::handle_mouse_result_t uilist::handle_mouse( const input_context &ctxt,
 void uilist::query( bool loop, int timeout, bool allow_unfiltered_hotkeys )
 {
 #if defined(__ANDROID__)
-    if( get_option<bool>( "ANDROID_NATIVE_UI" ) && !entries.empty() && !desired_bounds ) {
+    if( get_option<bool>( "ANDROID_NATIVE_UI" ) && !entries.empty() ) {
         if( !started ) {
             calc_data();
             started = true;
@@ -1087,7 +1087,7 @@ void uilist::query( bool loop, int timeout, bool allow_unfiltered_hotkeys )
         delete[] n_enabled;
         if( j_ret == -1 ) {
             ret = UILIST_CANCEL;
-        } else if( 0 <= j_ret && j_ret < entries.size() ) {
+        } else if( j_ret >= 0 && static_cast<size_t>(j_ret) < entries.size() ) {
             ret = entries[j_ret].retval;
         } else {
             ret = UILIST_ERROR;
