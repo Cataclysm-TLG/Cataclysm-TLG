@@ -327,6 +327,7 @@ static const json_character_flag json_flag_INFRARED( "INFRARED" );
 static const json_character_flag json_flag_INSECTBLOOD( "INSECTBLOOD" );
 static const json_character_flag json_flag_INVERTEBRATEBLOOD( "INVERTEBRATEBLOOD" );
 static const json_character_flag json_flag_INVISIBLE( "INVISIBLE" );
+static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_MYOPIC( "MYOPIC" );
 static const json_character_flag json_flag_MYOPIC_IN_LIGHT( "MYOPIC_IN_LIGHT" );
 static const json_character_flag json_flag_NIGHT_BLINDNESS( "NIGHT_BLINDNESS" );
@@ -2541,8 +2542,9 @@ void Character::process_turn()
     }
 
     // TODO: Maybe a unified function for terrain effects?
+    map &here = get_map();
     if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
-        !here.has_vehicle_floor( pos_bub() ) ) {
+        !here.has_vehicle_floor( pos_bub() ) && !has_effect( effect_bouldering ) ) {
         add_effect( effect_bouldering, 1_turns, true );
     }
 
@@ -8327,7 +8329,7 @@ void Character::on_hit( Creature *source, bodypart_id bp_hit,
     const optional_vpart_position veh_part = here.veh_at( pos_bub() );
     bool in_skater_vehicle = in_vehicle && veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", false );
 
-    if( ( worn_with_flag( flag_REQUIRES_BALANCE ) || in_skater_vehicle ) && !is_on_ground() )  {
+    if( ( worn_with_flag( flag_REQUIRES_BALANCE ) || in_skater_vehicle ) && !is_on_ground() && !has_effect_with_flag( json_flag_LEVITATION ) ) {
         int rolls = 4;
         if( worn_with_flag( flag_ROLLER_ONE ) && !in_skater_vehicle ) {
             rolls += 2;
