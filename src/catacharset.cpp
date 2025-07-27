@@ -16,8 +16,8 @@
 #       include "platform_win.h"
 #include <windows.h>
 #elif defined(__ANDROID__)
-#include <codecvt>
-#include <locale>
+#include <cstdlib>
+#include <clocale>
 #else
 #include <iconv.h>
 #include <errno.h>
@@ -362,17 +362,23 @@ std::wstring utf8_to_wstr( const std::string &utf8 )
     return ret;
 
 #elif defined(__ANDROID__)
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-    return conv.from_bytes( utf8 );
+    std::setlocale( LC_ALL, "en_US.UTF-8" );
+    size_t len = std::mbstowcs( nullptr, utf8.c_str(), 0 );
+    if( len == static_cast<size_t>( -1 ) ) {
+        return L"";
+    }
+    std::wstring wstr( len, L'\0' );
+    std::mbstowcs( &wstr[0], utf8.c_str(), len );
+    return wstr;
 
-#else // Linux, macOS
+#else // Linux / macOS
     iconv_t cd = iconv_open( "WCHAR_T", "UTF-8" );
     if( cd == reinterpret_cast<iconv_t>( -1 ) ) {
         return L"";
     }
 
     size_t inbytes = utf8.size();
-    size_t outbytes = inbytes * sizeof(wchar_t);
+    size_t outbytes = inbytes * sizeof( wchar_t );
     std::string out( outbytes, '\0' );
 
     char *inbuf = const_cast<char *>( utf8.data() );
@@ -403,16 +409,22 @@ std::string wstr_to_utf8( const std::wstring &wstr )
     return ret;
 
 #elif defined(__ANDROID__)
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-    return conv.to_bytes( wstr );
+    std::setlocale( LC_ALL, "en_US.UTF-8" );
+    size_t len = std::wcstombs( nullptr, wstr.c_str(), 0 );
+    if( len == static_cast<size_t>( -1 ) ) {
+        return "";
+    }
+    std::string str( len, '\0' );
+    std::wcstombs( &str[0], wstr.c_str(), len );
+    return str;
 
-#else // Linux, macOS
+#else // Linux / macOS
     iconv_t cd = iconv_open( "UTF-8", "WCHAR_T" );
     if( cd == reinterpret_cast<iconv_t>( -1 ) ) {
         return "";
     }
 
-    size_t inbytes = wstr.size() * sizeof(wchar_t);
+    size_t inbytes = wstr.size() * sizeof( wchar_t );
     size_t outbytes = inbytes * 2;
     std::string out( outbytes, '\0' );
 
