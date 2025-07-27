@@ -1947,7 +1947,7 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
-    if( !p->is_wielding( *it ) ) {
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
         p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
@@ -2328,7 +2328,7 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint & )
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
-    if( !p->is_wielding( *it ) ) {
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
         p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
@@ -2805,7 +2805,10 @@ std::optional<int> iuse::crowbar( Character *p, item *it, const tripoint &pos )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     map &here = get_map();
     const std::function<bool( const tripoint & )> f =
     [&here, p]( const tripoint & pnt ) {
@@ -3668,7 +3671,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
-    if( !p->is_wielding( *it ) ) {
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
         p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
@@ -3765,11 +3768,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
 std::optional<int> iuse::tazer2( Character *p, item *it, const tripoint &pos )
 {
     if( it->ammo_remaining( p, true ) >= 20 ) {
-        // Instead of having a ctrl+c+v of the function above, spawn a fake tazer and use it
-        // Ugly, but less so than copied blocks
-        item fake( "tazer", calendar::turn_zero );
-        fake.charges = 20;
-        return tazer( p, &fake, pos );
+        return tazer( p, it, pos );
     } else {
         p->add_msg_if_player( m_info, _( "Insufficient power" ) );
     }
@@ -4730,6 +4729,10 @@ std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint & )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
 
     const std::set<ter_str_id> allowed_ter_id {
         ter_t_trunk,
@@ -4768,6 +4771,10 @@ std::optional<int> iuse::oxytorch( Character *p, item *it, const tripoint & )
 {
     if( p->is_npc() ) {
         // Long action
+        return std::nullopt;
+    }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
     if( p->cant_do_mounted() ) {
@@ -4818,6 +4825,10 @@ std::optional<int> iuse::hacksaw( Character *p, item *it, const tripoint &it_pnt
                   it->typeId().str() );
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
@@ -4864,7 +4875,10 @@ std::optional<int> iuse::boltcutters( Character *p, item *it, const tripoint & )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     map &here = get_map();
     const std::function<bool( const tripoint & )> f =
     [&here, p]( const tripoint & pnt ) {
@@ -4943,7 +4957,7 @@ std::optional<int> iuse::mop( Character *p, item *, const tripoint & )
 
 std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint & )
 {
-    if( !p->is_wielding( *it ) ) {
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
         p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
