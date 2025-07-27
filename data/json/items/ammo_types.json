@@ -73,6 +73,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "mutagenic_sting",
+    "name": "yugg stinger",
+    "default": "mutagenic_sting_barb"
+  },
+  {
+    "type": "ammunition_type",
     "id": "BB",
     "name": "BBs",
     "default": "bb"
@@ -868,11 +874,5 @@
     "id": "airgun_pellet",
     "name": "airgun pellet",
     "default": "airgun_pellet_target"
-  },
-  {
-    "type": "ammunition_type",
-    "id": "gene_sting",
-    "name": "gene sting barb",
-    "default": "gene_sting_barb"
   }
 ]

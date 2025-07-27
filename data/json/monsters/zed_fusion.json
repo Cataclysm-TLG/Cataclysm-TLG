@@ -283,8 +283,10 @@
     "special_attacks": [
       {
         "type": "gun",
-        "cooldown": 2,
+        "cooldown": 10,
         "gun_type": "barb_launcher",
+        "ammo_type": "barb_paralysis",
+        "require_targeting_player": false,
         "ranges": [ [ 2, 12, "DEFAULT" ] ],
         "no_ammo_sound": "",
         "description": "The impaler launches a barb!"
