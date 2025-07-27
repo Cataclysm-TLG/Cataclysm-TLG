@@ -1906,13 +1906,14 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
         ) && here.is_divable( destination );
 
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
-        //Birds and other flying creatures flying over the deep water terrain
-        if( was_water && flies() ) {
+        // Birds and other flying creatures flying over the deep water terrain
+        Character &player_character == get_player_character();
+        if( was_water && flies() && sees( player_character ) && attitude_to( player_character ) == Attitude::HOSTILE ) {
             if( one_in( 4 ) ) {
                 add_msg_if_player_sees( *this, m_warning, _( "A %1$s flies over the %2$s!" ),
                                         name(), here.tername( pos_bub() ) );
             }
-        } else if( was_water && !will_be_water ) {
+        } else if( was_water && sees( player_character ) && !will_be_water && attitude_to( player_character ) == Attitude::HOSTILE ) {
             // Use more dramatic messages for swimming monsters
             add_msg_if_player_sees( *this, m_warning,
                                     //~ Message when a monster emerges from water
@@ -1920,7 +1921,7 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
                                     pgettext( "monster movement", "A %1$s %2$s from the %3$s!" ),
                                     name(), swims() ||
                                     has_flag( mon_flag_AQUATIC ) ? _( "leaps" ) : _( "emerges" ), here.tername( pos_bub() ) );
-        } else if( !was_water && will_be_water ) {
+        } else if( !was_water && sees( player_character ) && will_be_water && attitude_to( player_character ) == Attitude::HOSTILE ) {
             add_msg_if_player_sees( *this, m_warning, pgettext( "monster movement",
                                     //~ Message when a monster enters water
                                     //~ %1$s: monster name, %2$s: dives/sinks, %3$s: terrain name
