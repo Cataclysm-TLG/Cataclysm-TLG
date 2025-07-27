@@ -6993,7 +6993,6 @@
             "and": [
               { "or": [ { "u_has_move_mode": "run" }, { "u_has_move_mode": "crouch" } ] },
               { "not": "u_can_drop_weapon" },
-              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_FELINE", "THRESH_RABBIT" ] },
               { "u_has_flag": "QUADRUPED_CROUCH" }
             ]
           },
@@ -7036,7 +7035,6 @@
           "condition": {
             "and": [
               { "u_has_move_mode": "crouch" },
-              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_RABBIT", "THRESH_FELINE" ] },
               { "not": "u_can_drop_weapon" },
               { "not": { "u_has_flag": "QUADRUPED_RUN" } }
             ]
@@ -9149,7 +9147,22 @@
     "prereqs": [ "PADDED_FEET" ],
     "wet_protection": [ { "part": "foot_l", "neutral": 10 }, { "part": "foot_r", "neutral": 10 } ],
     "restricts_gear": [ "foot_l", "foot_r" ],
-    "enchantments": [ "ench_quadruped_movement_full", { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] } ]
+    "triggers": [
+      [
+        {
+          "condition": {
+            "and": [
+              { "or": [ { "u_has_move_mode": "run" }, { "u_has_move_mode": "crouch" } ] },
+              { "not": "u_can_drop_weapon" },
+              { "u_has_flag": "QUADRUPED_CROUCH" }
+            ]
+          },
+          "msg_on": { "text": "You drop down on all fours." },
+          "msg_off": { "text": "You assume a less bestial posture." }
+        }
+      ]
+    ],
+    "enchantments": [ "ench_quadruped_movement_bipedal", "ench_quadruped_movement_full_crouch", "ench_quadruped_movement_full_run", { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] } ]
   },
   {
     "type": "mutation",
@@ -9182,7 +9195,6 @@
           "condition": {
             "and": [
               { "u_has_move_mode": "crouch" },
-              { "u_has_any_trait": [ "THRESH_BEAST", "THRESH_LUPINE", "THRESH_RABBIT", "THRESH_FELINE" ] },
               { "not": "u_can_drop_weapon" },
               { "not": { "u_has_flag": "QUADRUPED_RUN" } }
             ]
