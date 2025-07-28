@@ -230,17 +230,28 @@
     "id": "chain",
     "category": "spare_parts",
     "name": { "str": "steel chain" },
-    "description": "A length of heavy steel chain. It's too short for climbing and hoisting, but it could be useful for crafts, or maybe as a weapon.",
+    "description": "About 180 cm of heavy steel chain. It's too short for climbing and hoisting and too heavy to use as a sling, but it might make a serviceable weapon.",
     "weight": "1400 g",
     "color": "dark_gray",
     "symbol": "/",
     "material": [ "steel" ],
     "techniques": [ "WRAP" ],
-    "flags": [ "DURABLE_MELEE" ],
+    "flags": [ "DURABLE_MELEE", "TIE_UP", "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "volume": "1 L",
     "to_hit": -2,
     "price": "22 USD",
     "price_postapoc": "50 cent",
+    "armor_data": {
+      "armor": [
+        {
+          "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 6.0 } ],
+          "encumbrance": 8,
+          "coverage": 10,
+          "covers": [ "torso" ],
+          "specifically_covers": [ "torso_hanging_back" ]
+        }
+      ]
+    },
     "melee_damage": { "bash": 19 }
   },
   {
