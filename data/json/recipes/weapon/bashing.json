@@ -141,7 +141,10 @@
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "DRILL", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
-    "components": [ [ [ "2x4", 1 ], [ "stick_long", 1 ] ], [ [ "rope_6", 1 ], [ "chain", 1 ], [ "rope_makeshift_6", 1 ] ] ]
+    "components": [
+      [ [ "2x4", 1 ], [ "stick_long", 1 ], [ "long_pole", 1 ] ],
+      [ [ "rope_6", 1 ], [ "chain", 1 ], [ "rope_makeshift_6", 1 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -154,7 +157,7 @@
     "difficulty": 7,
     "time": "7 h",
     "book_learn": [ [ "textbook_weapwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
+    "using": [ [ "blacksmithing_basic", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -164,7 +167,30 @@
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
     ],
     "tools": [ [ [ "swage", -1 ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ], [ [ "chain", 1 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "BRISK_EXERCISE",
+    "result": "1h_flail_steel",
+    "category": "CC_WEAPON",
+    "subcategory": "CSC_WEAPON_BASHING",
+    "skill_used": "fabrication",
+    "skills_required": [ [ "bashing", 2 ], [ "mechanics", 1 ] ],
+    "difficulty": 6,
+    "time": "6 h",
+    "book_learn": [ [ "textbook_weapwest", 5 ] ],
+    "using": [ [ "blacksmithing_basic", 12 ], [ "steel_standard", 2 ] ],
+    "qualities": [ { "id": "GRIND", "level": 2 } ],
+    "proficiencies": [
+      { "proficiency": "prof_metalworking" },
+      { "proficiency": "prof_blacksmithing" },
+      { "proficiency": "prof_toolsmithing" },
+      { "proficiency": "prof_carving", "skill_penalty": 0 },
+      { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
+    ],
+    "tools": [ [ [ "swage", -1 ] ] ],
+    "components": [ [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "chain", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -201,9 +227,9 @@
     "difficulty": 2,
     "time": "30 m",
     "autolearn": true,
-    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "using": [ [ "blacksmithing_simple", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
-    "components": [ [ [ "chain", 2 ] ], [ [ "steel_chunk", 1 ], [ "steel_lump", 1 ] ] ]
+    "components": [ [ [ "chain", 2 ] ], [ [ "scrap", 1 ], [ "steel_chunk", 1 ], [ "steel_lump", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -222,7 +248,7 @@
       { "id": "SAW_W", "level": 1 },
       { "id": "FILE", "level": 1 }
     ],
-    "proficiencies": [ { "proficiency": "prof_metalworking" } ],
+    "proficiencies": [ { "proficiency": "prof_carving" } ],
     "components": [ [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "rope_6", 1 ], [ "chain", 1 ], [ "rope_makeshift_6", 1 ] ] ]
   },
   {
@@ -243,7 +269,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -332,7 +358,7 @@
       { "proficiency": "prof_bladesmith" },
       { "proficiency": "prof_carving" }
     ],
-    "using": [ [ "blacksmithing_standard", 6 ], [ "steel_standard", 2 ] ],
+    "using": [ [ "blacksmithing_basic", 6 ], [ "steel_standard", 2 ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
     "qualities": [
       { "id": "CUT", "level": 2 },
@@ -506,7 +532,7 @@
     "time": "1 h",
     "autolearn": false,
     "book_learn": [ [ "recipe_melee", 2 ] ],
-    "using": [ [ "blacksmithing_standard", 4 ], [ "ppe_gas", 1 ] ],
+    "using": [ [ "blacksmithing_basic", 4 ], [ "ppe_gas", 1 ] ],
     "tools": [ [ [ "drift", -1 ] ] ],
     "components": [ [ [ "copper", 100 ] ], [ [ "chem_zinc_powder", 500 ] ] ]
   },
@@ -515,7 +541,7 @@
     "type": "recipe",
     "copy-from": "knuckle_brass",
     "time": "1 h",
-    "using": [ [ "blacksmithing_standard", 4 ], [ "ppe_gas", 1 ] ],
+    "using": [ [ "blacksmithing_basic", 4 ], [ "ppe_gas", 1 ] ],
     "tools": [ [ [ "drift", -1 ] ] ],
     "components": [ [ [ "copper", 150 ] ], [ [ "chem_zinc_powder", 600 ] ] ]
   },
@@ -524,7 +550,7 @@
     "type": "recipe",
     "copy-from": "knuckle_brass",
     "time": "1 h",
-    "using": [ [ "blacksmithing_standard", 4 ], [ "ppe_gas", 1 ] ],
+    "using": [ [ "blacksmithing_basic", 4 ], [ "ppe_gas", 1 ] ],
     "tools": [ [ [ "drift", -1 ] ] ],
     "components": [ [ [ "copper", 80 ] ], [ [ "chem_zinc_powder", 400 ] ] ]
   },
@@ -883,9 +909,7 @@
     "autolearn": true,
     "book_learn": [ [ "textbook_weapwest", 2 ], [ "recipe_melee", 3 ] ],
     "qualities": [ { "id": "DRILL", "level": 1 } ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "components": [ [ [ "q_staff", 1 ] ], [ [ "pipe_fittings", 2 ] ], [ [ "scrap", 4 ] ], [ [ "nuts_bolts", 8 ], [ "nail", 8 ] ] ]
   },
   {

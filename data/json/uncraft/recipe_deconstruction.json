@@ -6324,5 +6324,23 @@
     "time": "4 m",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "meat_tainted", 6 ] ], [ [ "bone_tainted", 3 ] ], [ [ "sinew", 2 ] ] ]
+  },
+  {
+    "result": "chain_30",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "80 s",
+    "tools": [ [ "boltcutters", [ "oxy_torch", 8 ] ] ],
+    "components": [ [ [ "chain", 5 ] ] ]
+  },
+  {
+    "result": "whip_chain",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "skill_used": "fabrication",
+    "time": "20 s",
+    "tools": [ [ "boltcutters", [ "oxy_torch", 8 ] ] ],
+    "components": [ [ [ "chain", 2 ] ] ]
   }
 ]
