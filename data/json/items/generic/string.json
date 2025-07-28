@@ -67,7 +67,7 @@
     "armor_data": {
       "armor": [
         {
-          "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 2.0 } ],
+          "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 2.0 } ],
           "encumbrance": 3,
           "coverage": 10,
           "covers": [ "torso" ],
@@ -102,7 +102,7 @@
     "armor_data": {
       "armor": [
         {
-          "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 6.0 } ],
+          "material": [ { "type": "nylon", "covered_by_mat": 100, "thickness": 6.0 } ],
           "encumbrance": 12,
           "coverage": 10,
           "covers": [ "torso" ]
@@ -111,6 +111,7 @@
     },
     "qualities": [ [ "ROPE", 2 ] ],
     "proportional": { "weight": 5, "volume": 5, "price": 5 },
+    "flags": [ "OVERSIZE" ],
     "pocket_data": [
       {
         "//": "Universal pocket, can store almost anything sans liquid and very small items, at the price of high move and encumbrance cost.",
@@ -223,5 +224,51 @@
     "symbol": ",",
     "color": "red",
     "flags": [ "NO_SALVAGE" ]
+  },
+  {
+    "type": "GENERIC",
+    "id": "chain",
+    "category": "spare_parts",
+    "name": { "str": "steel chain" },
+    "description": "A length of heavy steel chain. It's too short for climbing and hoisting, but it could be useful for crafts, or maybe as a weapon.",
+    "weight": "1400 g",
+    "color": "dark_gray",
+    "symbol": "/",
+    "material": [ "steel" ],
+    "techniques": [ "WRAP" ],
+    "flags": [ "DURABLE_MELEE" ],
+    "volume": "1 L",
+    "to_hit": -2,
+    "price": "22 USD",
+    "price_postapoc": "50 cent",
+    "melee_damage": { "bash": 19 }
+  },
+  {
+    "type": "GENERIC",
+    "id": "chain_30",
+    "category": "spare_parts",
+    "name": { "str": "long steel chain" },
+    "description": "Thirty feet (or about nine meters) of heavy steel chain.  It's tremendously inconvenient to lug around, but could be used like a long rope, or cut into more manageable lengths with the right tools.",
+    "armor_data": {
+      "armor": [
+        {
+          "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 8.0 } ],
+          "encumbrance": 62,
+          "coverage": 10,
+          "covers": [ "torso" ]
+        }
+      ]
+    },
+    "weight": "7000 g",
+    "color": "dark_gray",
+    "symbol": "/",
+    "material": [ "steel" ],
+    "qualities": [ [ "ROPE", 2 ] ],
+    "flags": [ "DURABLE_MELEE", "OVERSIZE" ],
+    "volume": "5 L",
+    "to_hit": -2,
+    "price": "110 USD",
+    "price_postapoc": "250 cent",
+    "melee_damage": { "bash": 19 }
   }
 ]

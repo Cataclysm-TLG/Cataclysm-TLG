@@ -357,7 +357,7 @@
       { "group": "gravelbag", "prob": 50 },
       {
         "collection": [
-          { "distribution": [ { "item": "rope_30", "prob": 70 }, { "item": "chain", "prob": 30 } ], "prob": 75 },
+          { "distribution": [ { "item": "rope_30", "prob": 70 }, { "item": "chain_30", "prob": 5 } ], "prob": 75 },
           { "item": "block_and_tackle", "prob": 100 }
         ],
         "prob": 15
@@ -624,7 +624,7 @@
       [ "v_airjack_item", 20 ],
       {
         "collection": [
-          { "distribution": [ { "item": "rope_30", "prob": 50 }, { "item": "chain", "prob": 50 } ], "prob": 85 },
+          { "distribution": [ { "item": "rope_30", "prob": 40 }, { "item": "chain_30", "prob": 60 } ], "prob": 85 },
           { "item": "block_and_tackle", "prob": 100 }
         ],
         "prob": 35

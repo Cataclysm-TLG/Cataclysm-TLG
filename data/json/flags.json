@@ -596,7 +596,7 @@
   {
     "id": "POLEARM",
     "type": "json_flag",
-    "info": "This weapon needs considerable space to wield and will have <bad>reduced damage and accuracy</bad> against adjacent targets."
+    "info": "This weapon needs considerable space to wield and has <bad>slightly reduced damage and accuracy</bad> against adjacent targets."
   },
   {
     "id": "WORN_WEAPON",
