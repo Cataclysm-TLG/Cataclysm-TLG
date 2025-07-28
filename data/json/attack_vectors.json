@@ -129,6 +129,14 @@
   },
   {
     "type": "attack_vector",
+    "id": "vector_talon",
+    "limbs": [ "foot_l", "foot_r" ],
+    "contact_area": [ "foot_toes_l", "foot_toes_r", "foot_heel_l", "foot_heel_r" ],
+    "limb_req": [ [ "leg", 2 ] ],
+    "natural_attack": true
+  },
+  {
+    "type": "attack_vector",
     "id": "vector_hoof_toe",
     "limbs": [ "hoof_l", "hoof_r" ],
     "contact_area": [ "hoof_toe_l", "hoof_toe_r" ],
