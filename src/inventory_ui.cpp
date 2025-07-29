@@ -2196,6 +2196,7 @@ void inventory_selector::add_nearby_items( int radius )
                 add_vehicle_items( pos );
                 continue;
             }
+            // Round up here to guard against bad range comparisons. clear_path() is stricter so it works out fine.
             int dist = static_cast<int>( std::ceil( trig_dist_z_adjust( center, pos ) ) );
             if( !here.clear_path( center, pos, dist, 1, 100 ) ) {
                 continue;
