@@ -345,8 +345,8 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
 
     set_draw_scale( 16 );
 
-    // Precalculate fog transparency
-    // On isometric tilesets, fog intensity scales with zlevel_height in tile_config.json
+    // Precalculate occlusion transparency
+    // On isometric tilesets, occlusion intensity scales with zlevel_height in tile_config.json
     fog_alpha = is_isometric() ? std::min( std::max( int( 255.0f - 255.0f * pow( 155.0f / 255.0f,
                                            zlevel_height / 100.0f ) ), 40 ), 150 ) : 100;
 }
@@ -793,7 +793,6 @@ void tileset_cache::loader::load_internal( const JsonObject &config,
         const cata_path &img_path, const bool pump_events )
 {
     if( config.has_array( "tiles-new" ) ) {
-        // new system, several entries
         // When loading multiple tileset images this defines where
         // the tiles from the most recently loaded image start from.
         for( const JsonObject tile_part_def : config.get_array( "tiles-new" ) ) {
@@ -2593,14 +2592,11 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
             tt = &res -> tile();
         }
     }
-    point newoffset = offset;
-    newoffset.x += 16 * ( 1 - scale_x );
-    newoffset.y += 32 * ( 1 - scale_y );
     map &here = get_map();
     const std::string &found_id = res ? res->id() : id;
 
     if( !tt ) {
-        // Use fog overlay as fallback for transparent terrain
+        // Use occlusion overlay as fallback for transparent terrain
         if( category == TILE_CATEGORY::TERRAIN && !here.dont_draw_lower_floor( tripoint_bub_ms( pos ) ) ) {
             draw_zlevel_overlay( pos, ll, height_3d );
 
@@ -2978,14 +2974,8 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
     }
 
     //draw it!
-    if( newoffset != offset ) {
-        draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
-                      nv_color_active, retract, height_3d, newoffset, scale_x, scale_y );
-    } else {
-        draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
-                      nv_color_active, retract, height_3d, offset, scale_x, scale_y );
-    }
-
+    draw_tile_at( display_tile, screen_pos, loc_rand, rota, ll,
+                  nv_color_active, retract, height_3d, offset, scale_x, scale_y );
     return true;
 }
 
@@ -3053,7 +3043,16 @@ bool cata_tiles::draw_sprite_at(
     int width = 0;
     int height = 0;
     std::tie( width, height ) = sprite_tex->dimension();
-
+    point draw_offset = point_zero;
+    // Overlays might not all be the same size. draw_offset adjusts the offsets according to image dimensions
+    // to keep all mutations, gear etc in proper relation to each other when characters are dynamically scaled.
+    if( scale_x != 0 ) {
+        // Rescaled tiles need to be horizontally centered.
+        draw_offset.x = round( ( width / 2 ) * ( 1 - scale_x ) );
+    }
+    if( scale_y != 0 ) {
+        draw_offset.y = height - ( height * scale_y );
+    }
     const point &tile_offset = retract <= 0
                                ? tile.offset
                                : ( retract >= 100
@@ -3064,9 +3063,10 @@ bool cata_tiles::draw_sprite_at(
     SDL_Rect destination;
 
     // Using divide_round_down because the offset might be negative.
-    destination.x = p.x + divide_round_down( ( tile_offset.x + offset.x ) * tile_width,
+    destination.x = p.x + divide_round_down( ( tile_offset.x + offset.x + draw_offset.x ) * tile_width,
                     tileset_ptr->get_tile_width() );
-    destination.y = p.y + divide_round_down( ( tile_offset.y + offset.y - height_3d ) * tile_width,
+    destination.y = p.y + divide_round_down( ( tile_offset.y + offset.y - height_3d + draw_offset.y ) *
+                    tile_width,
                     tileset_ptr->get_tile_width() );
     destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
                                       tileset_ptr->get_tile_width() * scale_x );
@@ -3345,7 +3345,7 @@ bool cata_tiles::draw_terrain( const tripoint &p, const lit_level ll, int &heigh
     // first memorize the actual terrain
     const ter_id &t = here.ter( p );
     const std::string &tname = t.id().str();
-    // Legacy mode does not draw fog sprites
+    // Legacy mode does not draw occlusion sprites
     if( fov_3d_z_range == 0 && tname == "t_open_air" ) {
         return false;
     }
@@ -4383,7 +4383,7 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint &pos, const lit_
 
 void cata_tiles::draw_zlevel_overlay( const tripoint &p, const lit_level ll, int &height_3d )
 {
-    // Draws zlevel fog using geometry renderer
+    // Draws zlevel occlusion using geometry renderer
     // Slower than sprites so only use as fallback when sprite missing
     const point screen = player_to_screen( p.xy() );
     SDL_Rect draw_rect;
@@ -4411,15 +4411,15 @@ void cata_tiles::draw_zlevel_overlay( const tripoint &p, const lit_level ll, int
         draw_rect.h = tile_height;
     }
 
-    // Overlay color is based on light level
+    // Overlay color is based on light level. "Fog" here refers to occlusion, not actual weather.
     SDL_Color fog_color = curses_color_to_SDL( c_black );
     if( ll == lit_level::BRIGHT_ONLY || ll == lit_level::BRIGHT || ll == lit_level::LIT ) {
         fog_color = curses_color_to_SDL( c_light_gray );
     } else if( ll == lit_level::LOW ) {
         fog_color = curses_color_to_SDL( c_dark_gray );
     }
-    // Setting for fog transparency
-    // On isometric tilesets, fog intensity scales with zlevel_height in tile_config.json
+    // Setting for occlusion transparency
+    // On isometric tilesets, occlusion intensity scales with zlevel_height in tile_config.json
     fog_color.a = fog_alpha;
 
     // Change blend mode for transparency to work
@@ -4474,7 +4474,7 @@ void cata_tiles::draw_entity_with_overlays( const Character &ch, const tripoint 
         }
     }
 
-    // next up, draw all the overlays
+    // Next up, draw all the overlays.
     std::vector<std::pair<std::string, std::string>> overlays = override_look_muts.empty() ?
             ch.get_overlay_ids() : ch.get_overlay_ids_when_override_look();
     for( const std::pair<std::string, std::string> &overlay : overlays ) {
