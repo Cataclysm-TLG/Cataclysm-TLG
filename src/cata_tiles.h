@@ -260,7 +260,6 @@ class tileset
         const std::unordered_set<std::string> &get_duplicate_ids() const {
             return duplicate_ids;
         }
-
         tile_type &create_tile_type( const std::string &id, tile_type &&new_tile_type );
         const tile_type *find_tile_type( const std::string &id ) const;
 
