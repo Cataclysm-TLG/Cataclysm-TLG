@@ -688,7 +688,7 @@ class talker: virtual public const_talker
         virtual void activate_mutation( const trait_id & ) {}
         virtual void deactivate_mutation( const trait_id & ) {}
         virtual void set_trait_purifiability( const trait_id &, const bool & ) {}
-        virtual void set_sleepiness( int ) {};
+        virtual void set_fatigue( int ) {};
         virtual void set_proficiency_practiced_time( const proficiency_id &, int ) {}
         virtual void train_proficiency_for( const proficiency_id &, int ) {}
         virtual void store_chosen_training( const skill_id &, const matype_id &,

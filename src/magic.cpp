@@ -877,14 +877,14 @@ int spell::accuracy( Creature &caster ) const
 
 double spell::min_leveled_dodge_training( const Creature &caster ) const
 {
-    dialogue d( get_talker_for( caster ), nullptr );
+    const_dialogue d( get_const_talker_for( caster ), nullptr );
     return type->min_dodge_training.evaluate( d ) + std::round( get_effective_level() *
             type->dodge_training_increment.evaluate( d ) );
 }
 
 float spell::dodge_training( Creature &caster ) const
 {
-    dialogue d( get_talker_for( caster ), nullptr );
+    const_dialogue d( get_const_talker_for( caster ), nullptr );
     const int leveled_dodge_training = min_leveled_dodge_training( caster );
     if( type->min_dodge_training.evaluate( d ) >= 0 ||
         type->max_dodge_training.evaluate( d ) >= type->min_dodge_training.evaluate( d ) ) {
@@ -898,14 +898,14 @@ float spell::dodge_training( Creature &caster ) const
 
 int spell::min_leveled_liquid_volume( const Creature &caster ) const
 {
-    dialogue d( get_talker_for( caster ), nullptr );
+    const_dialogue d( get_const_talker_for( caster ), nullptr );
     return type->min_liquid_volume.evaluate( d ) + std::round( get_effective_level() *
             type->liquid_volume_increment.evaluate( d ) );
 }
 
 int spell::liquid_volume( Creature &caster ) const
 {
-    dialogue d( get_talker_for( caster ), nullptr );
+    const_dialogue d( get_const_talker_for( caster ), nullptr );
     const int leveled_liquid_volume = min_leveled_liquid_volume( caster );
     if( type->min_liquid_volume.evaluate( d ) >= 0 ||
         type->max_liquid_volume.evaluate( d ) >= type->min_liquid_volume.evaluate( d ) ) {
@@ -2004,7 +2004,7 @@ vproto_id spell::summon_vehicle_id() const
 
 int spell::min_leveled_effect_intensity( const Creature &caster ) const
 {
-    dialogue d( get_talker_for( caster ), nullptr );
+    const_dialogue d( get_const_talker_for( caster ), nullptr );
     return type->min_effect_intensity.evaluate( d ) + std::round( get_effective_level() *
             type->effect_intensity_increment.evaluate( d ) );
 }

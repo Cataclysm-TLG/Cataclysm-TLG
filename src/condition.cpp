@@ -384,7 +384,7 @@ str_translation_or_var get_str_translation_or_var(
 tripoint_abs_ms get_tripoint_from_var( std::optional<var_info> var, const_dialogue const &d,
                                        bool is_npc )
 {
-    tripoint_abs_ms target_pos = get_map().getglobal( d.actor( is_npc )->pos() );
+    tripoint_abs_ms target_pos = get_map().getglobal( d.const_actor( is_npc )->pos() );
     if( var.has_value() ) {
         std::string value = read_var_value( var.value(), d );
         if( !value.empty() ) {
@@ -1655,15 +1655,15 @@ conditional_t::func f_is_underwater( bool is_npc )
 
 conditional_t::func f_is_on_land( bool is_npc )
 {
-    return [is_npc]( dialogue const & d ) {
-        return get_map().has_floor( d.actor( is_npc )->pos() );
+    return [is_npc]( const_dialogue const & d ) {
+        return get_map().has_floor( d.const_actor( is_npc )->pos() );
     };
 }
 
 conditional_t::func f_is_on_liquid( bool is_npc )
 {
-    return [is_npc]( dialogue const & d ) {
-        return !get_map().is_dry( d.actor( is_npc )->pos() );
+    return [is_npc]( const_dialogue const & d ) {
+        return !get_map().is_dry( d.const_actor( is_npc )->pos() );
     };
 }
 
@@ -2130,6 +2130,7 @@ template<class T>
 static std::function<T( const_dialogue const & )> get_get_str_( const JsonObject &jo,
         std::function<T( const std::string & )> ret_func )
 {
+    const std::string &mutator = jo.get_string( "mutator" );
     if( jo.get_string( "mutator" ) == "mon_faction" ) {
         str_or_var mtypeid = get_str_or_var( jo.get_member( "mtype_id" ), "mtype_id" );
         return [mtypeid, ret_func]( const_dialogue const & d ) {
@@ -2257,7 +2258,7 @@ std::unordered_map<std::string_view, int ( const_talker::* )() const> const f_ge
     { "dexterity_bonus", &const_talker::get_dex_bonus },
     { "dexterity", &const_talker::dex_cur },
     { "exp", &const_talker::get_kill_xp },
-    { "sleepiness", &const_talker::get_sleepiness },
+    { "fatigue", &const_talker::get_fatigue },
     { "fine_detail_vision_mod", &const_talker::get_fine_detail_vision_mod },
     { "focus", &const_talker::focus_cur },
     { "friendly", &const_talker::get_friendly },

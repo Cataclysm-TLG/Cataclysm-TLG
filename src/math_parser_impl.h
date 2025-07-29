@@ -172,6 +172,7 @@ constexpr double thingie::eval( const_dialogue const &d ) const
         {
             return v;
         },
+        // NOLINTNEXTLINE(cata-use-string_view)
         []( std::string const & v )
         {
             debugmsg( "Unexpected string operand %s", v );
@@ -187,17 +188,12 @@ constexpr double thingie::eval( const_dialogue const &d ) const
             debugmsg( "Unexpected array" );
             return 0.0;
         },
-        [&d]( auto const & v ) -> double {
-            if constexpr( has_eval<decltype( v )>::value )
-            {
-                return v.eval( d );
-            } else
-            {
-                debugmsg( "thingie::eval(): unhandled type: %s", typeid( v ).name() );
-                return 0.0;
-            }
-        }
-    }, data );
+        [&d]( auto const & v ) -> double
+        {
+            return v.eval( d );
+        },
+    },
+    data );
 }
 
 using op_t =
