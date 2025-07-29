@@ -8367,9 +8367,10 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // Ugly `if` for now
+    // TODO: Why is it even like this?
     if( f.z() == t.z() ) {
         if( ( range >= 0 &&
-              range < trig_dist( f.raw(), t.raw() ) ) ||
+              range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }
@@ -8392,7 +8393,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // Handle direct vertical neighbor (1 tile away, different Z)
-    if( trig_dist_z_adjust( f.raw(), t.raw() ) == 1 && f.z() != t.z() ) {
+    if( static_cast<int>( trig_dist( f.raw(), t.raw() ) ) < 2 && f.z() != t.z() ) {
         const bool going_up = t.z() > f.z();
         const tripoint_bub_ms &lower = going_up ? f : t;
         const tripoint_bub_ms &upper = going_up ? t : f;
@@ -8413,7 +8414,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // 3D path check
-    if( ( range >= 0 && range < trig_dist_z_adjust( f.raw(), t.raw() ) ) ||
+    if( ( range >= 0 && range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
         !inbounds( t ) ) {
         return false;
     }

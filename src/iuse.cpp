@@ -4631,16 +4631,18 @@ std::optional<int> iuse::lumber( Character *p, item *it, const tripoint & )
         return std::nullopt;
     }
     map &here = get_map();
-    // Check if player is standing on any lumber
-    for( item &i : here.i_at( p->pos_bub() ) ) {
-        if( i.typeId() == itype_log ) {
-            here.i_rem( p->pos_bub(), &i );
-            cut_log_into_planks( *p );
-            return 1;
+    // Check if player is standing on or adjacent to any lumber
+    for( tripoint_bub_ms lumberpos : here.points_in_radius( p->pos_bub(), 1 ) ) {
+        for( item &i : here.i_at( lumberpos ) ) {
+            if( i.typeId() == itype_log ) {
+                here.i_rem( lumberpos, &i );
+                cut_log_into_planks( *p );
+                return 1;
+            }
         }
     }
 
-    // If the player is not standing on a log, check inventory
+    // If there are no logs around, check our inventory.
     avatar *you = p->as_avatar();
     item_location loc;
     auto filter = []( const item & it ) {
@@ -4727,10 +4729,6 @@ std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint & )
         return std::nullopt;
     }
     if( p->cant_do_mounted() ) {
-        return std::nullopt;
-    }
-    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
-        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
 
