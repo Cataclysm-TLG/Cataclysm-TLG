@@ -3484,12 +3484,18 @@ units::volume Character::get_average_character_volume() const
     // Characters in different size categories have different proportions.
     // See also: get_base_character_volume(), size_category_height_limits
     const units::volume avg_character_volume = [this]() -> units::volume {
-        switch( enum_size() ) {
-            case 1: return 8500_ml;
-            case 2: return 23_liter;
-            case 4: return 136_liter;
-            case 5: return 244_liter;
-            default: return 75_liter;
+        switch( enum_size() )
+        {
+            case 1:
+                return 8500_ml;
+            case 2:
+                return 23_liter;
+            case 4:
+                return 136_liter;
+            case 5:
+                return 244_liter;
+            default:
+                return 75_liter;
         }
     }();
     return avg_character_volume;
@@ -3517,7 +3523,7 @@ units::volume Character::get_base_character_volume() const
             your_base_volume = units::from_liter( static_cast<double>( your_height ) / 2.32 );
             break;
     }
-    
+
     // TODO: This should be looking at body fat and muscle mass, tails, shells, etc.
     units::volume average_volume = get_average_character_volume();
     double volume_proport = units::to_liter( your_base_volume ) / units::to_liter( average_volume );
