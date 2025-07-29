@@ -156,19 +156,7 @@ void exit_handler( int s )
         signal( SIGABRT, SIG_DFL );
 #endif
 
-#if !defined(_WIN32)
-        if( s == 2 ) {
-            struct sigaction sigIntHandler;
-            sigIntHandler.sa_handler = SIG_DFL;
-            sigemptyset( &sigIntHandler.sa_mask );
-            sigIntHandler.sa_flags = 0;
-            sigaction( SIGINT, &sigIntHandler, nullptr );
-            kill( getpid(), s );
-        } else
-#endif
-        {
-            exit( exit_status );
-        }
+        exit( exit_status );
     }
     inp_mngr.set_timeout( old_timeout );
     ui_manager::redraw_invalidated();
