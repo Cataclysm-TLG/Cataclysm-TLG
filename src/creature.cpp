@@ -223,8 +223,8 @@ void Creature::setpos( const tripoint_bub_ms &p )
 static units::volume size_to_volume( creature_size size_class )
 {
     // TODO: size_to_volume and volume_to_size should be made into a single consistent function.
-    // TODO: This calculation is underestimating the size of a medium creature. They should be around 10500 ml.
-    // Large creatures should be bigger too. This would necessitate increasing vpart capacity and resizing
+    // TODO: Volume averages should be 8500, 23000, 75000, 136000, 244000
+    // TODO: This would necessitate increasing vpart capacity and resizing
     // almost every monster in the game.
     if( size_class == creature_size::tiny ) {
         return 15625_ml;

@@ -2289,9 +2289,10 @@ class Character : public Creature, public visitable
         std::vector<item *> inv_dump();
         std::vector<const item *> inv_dump() const;
 
+        units::volume get_average_character_volume() const;
         // TODO: Cache this like weight carried?
-        units::volume get_total_volume() const;
-        units::volume get_base_volume() const;
+        units::volume get_total_character_volume() const;
+        units::volume get_base_character_volume() const;
 
         units::mass weight_carried() const;
         units::volume volume_carried() const;
