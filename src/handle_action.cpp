@@ -315,13 +315,8 @@ input_context game::get_player_input( std::string &action )
                 }
             }
         }
-
         ctxt.set_timeout( 125 );
-
         do {
-            if( g->uquit == QUIT_EXIT ) {
-                break;
-            }
 
             if( uquit == QUIT_WATCH ) {
                 static_popup deathcam_msg_popup;
