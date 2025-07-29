@@ -661,6 +661,73 @@ check do you have 3 manuals in inventory
 { "u_has_item_category": "manuals", "count": 3 }
 ```
 
+
+
+### `u_has_items_sum`, `npc_has_items_sum`
+- type: array of pairs, pair is string or [variable object](##variable-object) and int or [variable object](##variable-object)
+- return true if alpha or beta talker has enough items from the list
+- `item` is an item that should be checked;
+- `amount` is amount of items that should be found
+- may be used in pair with `_consume_item_sum`
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+check do you have 10 blankets of any type in the list
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": "blanket", "amount": 10 },
+        { "item": "blanket_fur", "amount": 10 },
+        { "item": "electric_blanket", "amount": 10 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
+```
+
+Check do you have enough blankets to cover required amount (for example, it return true if you have 5 `blanket` and 10 `electric_blanket` (each contribute 50% to the desired amount))
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": "blanket", "amount": 10 },
+        { "item": "blanket_fur", "amount": 15 },
+        { "item": "electric_blanket", "amount": 20 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
+```
+
+Variables are also supported
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": { "global_val": "foo" }, "amount": { "math": "20 + 2" } },
+        { "item": "blanket_fur", "amount": 15 },
+        { "item": "electric_blanket", "amount": 20 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
+```
+
 ### `u_has_bionics`, `npc_has_bionics`
 - type: string or [variable object](##variable-object)
 - return true if alpha or beta talker has specific bionic; `ANY` can be used to return true if any bionic is presented
@@ -3536,9 +3603,9 @@ See examples for more info
 
 | Syntax | Optionality | Value  | Info |
 | ------ | ----------- | ------ | ---- | 
-| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](#variable-object) | runs the effect |
-| "item"  | **mandatory** | string or [variable object](#variable-object) | id of item that should be removed |
-| "amount"  | **mandatory** | int or [variable object](#variable-object) | amount of items or charges that should be removed |
+| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](##variable-object) | runs the effect |
+| "item"  | **mandatory** | string or [variable object](##variable-object) | id of item that should be removed |
+| "amount"  | **mandatory** | int or [variable object](##variable-object) | amount of items or charges that should be removed |
 
 ##### Valid talkers:
 
@@ -3563,7 +3630,7 @@ Consume 10 blankets. Effect allows to be consumed any item, so in this case play
     ]
   },
 ```
-Effect is order dependent, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
+Effect is order dependant, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
 
 
 Variable `amount` is also supported. In this case amount would be also treated as the weight;  In the next example, having 10 `blanket`, 10 `blanket_fur` and 10 `electric_blanket` would be treated as covering 100% of requirement, 10 `blanket` delivering 40%, 10 `blanket_fur` delivering another 40%, and 10 `electric_blanket` delivering the last 20%
