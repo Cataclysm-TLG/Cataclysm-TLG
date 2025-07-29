@@ -3475,49 +3475,52 @@ units::volume Character::get_total_character_volume() const
     item_location wep = get_wielded_item();
     units::volume wep_volume = wep ? wep->volume() : 0_ml;
     // Note: Does not measure volume of worn items that do not themselves contain anything
-    return get_base_volume() + volume_carried() + wep_volume;
+    return get_base_character_volume() + volume_carried() + wep_volume;
 }
 
 units::volume Character::get_average_character_volume() const
 {
     // Assuming 175cm and 75kg as the human average, we land on about 75 liters.
     // Characters in different size categories have different proportions.
-    // See also: get_base_volume(), size_category_height_limits
-    if( enum_size() == 1 ) {
-        units::volume avg_character_volume = 8500_milliliter;
-    } else if( enum_size() == 2 ) {
-        const units::volume avg_character_volume = 23_liter;
-    } else if( enum_size() == 4 ) {
-        const units::volume avg_character_volume = 136_liter;
-    } else if( enum_size() == 2 ) {
-        const units::volume avg_character_volume = 244_liter;
-    } else {
-        const units::volume avg_character_volume = 75_liter;
-    }
-    return avg_character_volume
+    // See also: get_base_character_volume(), size_category_height_limits
+    const units::volume avg_character_volume = [this]() -> units::volume {
+        switch( enum_size() ) {
+            case 1: return 8500_ml;
+            case 2: return 23_liter;
+            case 4: return 136_liter;
+            case 5: return 244_liter;
+            default: return 75_liter;
+        }
+    }();
+    return avg_character_volume;
 }
 
 units::volume Character::get_base_character_volume() const
 {
     const int your_height = height();
-    // See also: get_average_volume(), size_category_height_limits
-    if( enum_size() == 1 ) {
-        units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 8.24 );
-    } else if( enum_size() == 2 ) {
-        units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 5.3 );
-    } else if( enum_size() == 4 ) {
-        units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.67 );
-    } else if( enum_size() == 2 ) {
-        units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.15 );
-    } else {
-        units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 2.32 );
+    // See also: get_average_character_volume(), size_category_height_limits
+    units::volume your_base_volume;
+    switch( enum_size() ) {
+        case 1:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 8.24 );
+            break;
+        case 2:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 5.3 );
+            break;
+        case 4:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.67 );
+            break;
+        case 5:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.15 );
+            break;
+        default:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 2.32 );
+            break;
     }
     
     // TODO: This should be looking at body fat and muscle mass, tails, shells, etc.
-    units::volume your_base_volume = units::from_liter( static_cast<double>( your_height ) / 2.32 );
     units::volume average_volume = get_average_character_volume();
     double volume_proport = units::to_liter( your_base_volume ) / units::to_liter( average_volume );
-
     return std::pow( volume_proport, 3.0 ) * average_volume;
 }
 

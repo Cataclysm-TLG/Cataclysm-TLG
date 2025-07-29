@@ -1539,7 +1539,7 @@
     "vitamins": [ [ "vit_mme", 200 ] ],
     "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
-    "sleepiness_mod": -40
+    "fatigue_mod": -40
   },
   {
     "id": "poppysyrup",
