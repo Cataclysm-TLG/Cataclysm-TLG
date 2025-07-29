@@ -3083,10 +3083,6 @@ bool game::handle_action()
     // of location clicked.
     std::optional<tripoint_bub_ms> mouse_target;
 
-    if( uquit == QUIT_EXIT ) {
-        return false;
-    }
-
     if( uquit == QUIT_WATCH && action == "QUIT" ) {
         uquit = QUIT_DIED;
         return false;
