@@ -50,6 +50,7 @@ class monster;
 class nc_color;
 class npc;
 class talker;
+class const_talker;
 class translation;
 namespace catacurses
 {
@@ -1368,6 +1369,6 @@ class Creature : public viewer
         void print_proj_avoid_msg( Creature *source, viewer &player_view ) const;
 };
 std::unique_ptr<talker> get_talker_for( Creature &me );
-std::unique_ptr<talker> get_talker_for( const Creature &me );
+std::unique_ptr<const_talker> get_const_talker_for( const Creature &me );
 std::unique_ptr<talker> get_talker_for( Creature *me );
 #endif // CATA_SRC_CREATURE_H
