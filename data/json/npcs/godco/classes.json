@@ -55,7 +55,7 @@
     "type": "npc_class",
     "id": "NC_godco_chloe_taylor",
     "name": { "str": "Member" },
-    "job_description": "I am a member of the New England Church Community.",
+    "job_description": "I am a member of the New England Church Community, I'm also a child.",
     "common": false,
     "bonus_str": { "rng": [ -3, -2 ] },
     "bonus_dex": { "rng": [ 0, 2 ] },
@@ -68,6 +68,7 @@
       { "group": "NPC_starting_traits" },
       { "group": "Skin_Any" },
       { "trait": "NO_BASH" },
+      { "trait": "SMALL_NATURAL" },
       { "trait": "RETURN_TO_START_POS" }
     ],
     "skills": [
@@ -464,6 +465,7 @@
       { "group": "NPC_starting_traits" },
       { "group": "Hair_Brown" },
       { "trait": "NO_BASH" },
+      { "trait": "SMALL_NATURAL" },
       { "trait": "RETURN_TO_START_POS" }
     ],
     "skills": [
