@@ -315,13 +315,8 @@ input_context game::get_player_input( std::string &action )
                 }
             }
         }
-
         ctxt.set_timeout( 125 );
-
         do {
-            if( g->uquit == QUIT_EXIT ) {
-                break;
-            }
 
             if( uquit == QUIT_WATCH ) {
                 static_popup deathcam_msg_popup;
@@ -3082,10 +3077,6 @@ bool game::handle_action()
     // If performing an action with right mouse button, co-ordinates
     // of location clicked.
     std::optional<tripoint_bub_ms> mouse_target;
-
-    if( uquit == QUIT_EXIT ) {
-        return false;
-    }
 
     if( uquit == QUIT_WATCH && action == "QUIT" ) {
         uquit = QUIT_DIED;
