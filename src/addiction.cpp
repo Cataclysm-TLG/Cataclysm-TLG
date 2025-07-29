@@ -33,7 +33,7 @@ static const morale_type morale_craving_cocaine( "morale_craving_cocaine" );
 static const morale_type morale_craving_crack( "morale_craving_crack" );
 static const morale_type morale_craving_diazepam( "morale_craving_diazepam" );
 static const morale_type morale_craving_nicotine( "morale_craving_nicotine" );
-static const morale_type morale_craving_opiate( "morale_craving_opiate" );
+static const morale_type morale_craving_opioid( "morale_craving_opioid" );
 static const morale_type morale_craving_speed( "morale_craving_speed" );
 
 namespace
@@ -211,7 +211,7 @@ static bool diazepam_effect( Character &u, addiction &add )
     return alcohol_diazepam_add( u, in, false );
 }
 
-static bool opiate_effect( Character &u, addiction &add )
+static bool opioid_effect( Character &u, addiction &add )
 {
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
@@ -241,10 +241,10 @@ static bool opiate_effect( Character &u, addiction &add )
             last_dream = calendar::turn;
         }
         const std::string msg =
-            u.in_sleep_state() ? "addict_opiate_mild_asleep" : "addict_opiate_mild_awake";
+            u.in_sleep_state() ? "addict_opioid_mild_asleep" : "addict_opioid_mild_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opiate, -40, -10 * in );
+        u.add_morale( morale_craving_opioid, -40, -10 * in );
         u.add_effect( effect_shakes, 2_minutes + in * 30_seconds );
     } else if( one_in( 20 ) && dice( 2, 30 ) < in &&
                ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
@@ -252,10 +252,10 @@ static bool opiate_effect( Character &u, addiction &add )
             last_dream = calendar::turn;
         }
         const std::string msg =
-            u.in_sleep_state() ? "addict_opiate_strong_asleep" : "addict_opiate_strong_awake";
+            u.in_sleep_state() ? "addict_opioid_strong_asleep" : "addict_opioid_strong_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opiate, -30, -10 * in );
+        u.add_morale( morale_craving_opioid, -30, -10 * in );
     } else if( one_in( 50 ) && dice( 3, 50 ) < in ) {
         u.vomit();
     }
@@ -339,7 +339,7 @@ static const std::map<std::string, std::function<bool( Character &, addiction & 
     {"nicotine_effect",    ::nicotine_effect},
     {"alcohol_effect",     ::alcohol_effect},
     {"diazepam_effect",    ::diazepam_effect},
-    {"opiate_effect",      ::opiate_effect},
+    {"opioid_effect",      ::opioid_effect},
     {"amphetamine_effect", ::amphetamine_effect},
     {"cocaine_effect",     ::cocaine_effect},
     {"crack_effect",       ::crack_effect}
@@ -394,7 +394,7 @@ std::string add_type_legacy_conv( std::string const &v )
     } else if( v == "SLEEP" ) {
         return "sleeping pill";
     } else if( v == "PKILLER" ) {
-        return "opiate";
+        return "opioid";
     } else if( v == "SPEED" ) {
         return "amphetamine";
     } else if( v == "CIG" ) {

@@ -54,7 +54,7 @@
     "name": "Heroin Dependence",
     "description": "The last thing you remember was meeting God behind the local restaurant.  Then people started eating each other.  This doesn't feel like a fever dream.",
     "points": -3,
-    "addictions": [ { "intensity": 40, "type": "opiate" } ]
+    "addictions": [ { "intensity": 40, "type": "opioid" } ]
   },
   {
     "type": "profession",
@@ -88,9 +88,9 @@
     "subtype": "hobby",
     "id": "pillhead",
     "name": "Painkiller Dependence",
-    "description": "After a bad accident, you became hooked on the opiates prescribed to you for the pain.  With the pharmacies shut down and your dealers turned undead, satisfying those cravings just got a lot more difficult.",
+    "description": "After a bad accident, you became hooked on the opioids prescribed to you for the pain.  With the pharmacies shut down and your dealers turned undead, satisfying those cravings just got a lot more difficult.",
     "points": -2,
-    "addictions": [ { "intensity": 20, "type": "opiate" } ]
+    "addictions": [ { "intensity": 20, "type": "opioid" } ]
   },
   {
     "type": "profession",

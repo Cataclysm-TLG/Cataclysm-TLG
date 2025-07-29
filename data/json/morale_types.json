@@ -80,9 +80,9 @@
     "text": "Craving alcohol"
   },
   {
-    "id": "morale_craving_opiate",
+    "id": "morale_craving_opioid",
     "type": "morale_type",
-    "text": "Craving opiates"
+    "text": "Craving opioids"
   },
   {
     "id": "morale_craving_speed",

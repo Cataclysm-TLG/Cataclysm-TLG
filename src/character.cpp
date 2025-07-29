@@ -157,7 +157,7 @@ static const activity_id ACT_WAIT( "ACT_WAIT" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 static const activity_id ACT_WAIT_STAMINA( "ACT_WAIT_STAMINA" );
 
-static const addiction_id addiction_opiate( "opiate" );
+static const addiction_id addiction_opioid( "opioid" );
 static const addiction_id addiction_sleeping_pill( "sleeping pill" );
 
 static const ammotype ammo_battery( "battery" );
@@ -11230,7 +11230,7 @@ void Character::process_one_effect( effect &it, bool is_new )
     // Handle painkillers
     val = get_effect( "PKILL", reduced );
     if( val != 0 ) {
-        mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opiate ) );
+        mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opioid ) );
         if( is_new || it.activated( calendar::turn, "PKILL", val, reduced, mod ) ) {
             mod_painkiller( bound_mod_to_vals( get_painkiller(), val, it.get_max_val( "PKILL", reduced ), 0 ) );
         }

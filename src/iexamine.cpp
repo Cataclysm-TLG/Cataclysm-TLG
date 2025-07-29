@@ -2208,7 +2208,7 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
         you.add_effect( effect_pkill2, 7_minutes );
         // Please drink poppy nectar responsibly.
         if( one_in( 20 ) ) {
-            you.add_addiction( STATIC( addiction_id( "opiate" ) ), 1 );
+            you.add_addiction( STATIC( addiction_id( "opioid" ) ), 1 );
         }
     }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {
