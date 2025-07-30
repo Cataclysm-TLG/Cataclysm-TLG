@@ -63,7 +63,7 @@
       { "math": [ "u_glass_health_arm_r", "=", "u_hp('arm_r')" ] },
       { "math": [ "u_glass_health_leg_l", "=", "u_hp('leg_l')" ] },
       { "math": [ "u_glass_health_leg_r", "=", "u_hp('leg_r')" ] },
-      { "math": [ "u_glass_sleepiness", "=", "u_val('sleepiness')" ] },
+      { "math": [ "u_glass_fatigue", "=", "u_val('fatigue')" ] },
       {
         "u_location_variable": { "global_val": "vitrified_farm_ground" },
         "target_params": { "om_terrain": "unvitrified_farm_0", "search_range": 100, "min_distance": 0, "z": 0 },
