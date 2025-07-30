@@ -1,9 +1,9 @@
 [
   {
     "id": "modular_deagle",
+    "copy-from": "pistol_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str_sp": "Desert Eagle pistol" },
     "description": "An icon of popular culture more than a practical weapon, this massive pistol can shoot a variety of magnum handgun rounds depending on the conversion kit and magazine used.",
     "weight": "1407 g",
@@ -31,7 +31,6 @@
     "symbol": "(",
     "color": "light_gray",
     "ammo": [ "NULL" ],
-    "skill": "pistol",
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 1413,
@@ -39,14 +38,6 @@
     "//2": "NO_TURRET should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "stock", 1 ], [ "underbarrel mount", 1 ] ],
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -83,7 +74,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 10 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -116,7 +107,7 @@
     "barrel_length": "600 mm",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ] ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
-    "flags": [ "RELOAD_EJECT", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_EJECT", "EASY_CLEAN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 1 } } ],
     "melee_damage": { "bash": 10 }
   },
@@ -311,7 +302,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 8 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -355,7 +346,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 10 } } ],
     "melee_damage": { "bash": 12 }
   }

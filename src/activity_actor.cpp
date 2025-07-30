@@ -662,6 +662,7 @@ void autodrive_activity_actor::canceled( player_activity &act, Character &who )
     if( player_vehicle ) {
         player_vehicle->stop_autodriving( false );
     }
+    ui::omap::force_quit();
     act.set_to_null();
 }
 
@@ -669,6 +670,7 @@ void autodrive_activity_actor::finish( player_activity &act, Character &who )
 {
     who.add_msg_if_player( m_info, _( "You have reached your destination." ) );
     player_vehicle->stop_autodriving( false );
+    ui::omap::force_quit();
     act.set_to_null();
 }
 
@@ -2026,8 +2028,7 @@ bool read_activity_actor::player_read( avatar &you )
         }
 
         if( skill &&
-            learner->get_knowledge_level( skill ) < islotbook->level &&
-            learner->get_skill_level_object( skill ).can_train() ) {
+            learner->get_knowledge_level( skill ) < islotbook->level ) {
 
             SkillLevel &skill_level = learner->get_skill_level_object( skill );
             std::string skill_name = skill.obj().name();
@@ -2062,7 +2063,7 @@ bool read_activity_actor::player_read( avatar &you )
                 }
             }
 
-            if( ( skill_level == islotbook->level || !skill_level.can_train() ) ||
+            if( ( skill_level == islotbook->level ) ||
                 ( learner->has_trait( trait_SCHIZOPHRENIC ) && !learner->has_effect( effect_took_thorazine ) &&
                   one_in( 25 ) ) ) {
                 if( learner->is_avatar() ) {
@@ -2173,8 +2174,7 @@ bool read_activity_actor::npc_read( npc &learner )
     book->mark_chapter_as_read( learner );
 
     if( skill &&
-        learner.get_knowledge_level( skill ) < islotbook->level &&
-        learner.get_skill_level_object( skill ).can_train() ) {
+        learner.get_knowledge_level( skill ) < islotbook->level ) {
 
         SkillLevel &skill_level = learner.get_skill_level_object( skill );
         std::string skill_name = skill.obj().name();
@@ -2200,7 +2200,7 @@ bool read_activity_actor::npc_read( npc &learner )
         }
 
         if( display_messages &&
-            ( ( skill_level == islotbook->level || !skill_level.can_train() ) ||
+            ( ( skill_level == islotbook->level ) ||
               ( learner.has_trait( trait_SCHIZOPHRENIC ) && !learner.has_effect( effect_took_thorazine ) &&
                 one_in( 25 ) ) ) ) {
             add_msg( m_info, _( "%s can no longer learn from %s." ), learner.disp_name(),
@@ -2319,7 +2319,6 @@ std::string read_activity_actor::get_progress_message( const player_activity & )
 
     if( skill &&
         you.get_knowledge_level( skill ) < islotbook->level &&
-        you.get_skill_level_object( skill ).can_train() &&
         you.has_identified( book->typeId() ) ) {
         const SkillLevel &skill_level = you.get_skill_level_object( skill );
         //~ skill_name current_skill_level -> next_skill_level (% to next level)

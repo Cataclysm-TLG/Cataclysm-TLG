@@ -117,7 +117,7 @@
   {
     "id": "COLLAR",
     "type": "json_flag",
-    "info": "This clothing will be pulled up to <info>keep your mouth warm</info> if it is unencumbered."
+    "info": "This clothing will be pulled up to <info>keep your face warm</info> if it is unencumbered."
   },
   {
     "id": "COLLAPSE_CONTENTS",
@@ -596,7 +596,7 @@
   {
     "id": "POLEARM",
     "type": "json_flag",
-    "info": "This weapon needs considerable space to wield and will have <bad>reduced damage and accuracy</bad> against adjacent targets."
+    "info": "This weapon needs considerable space to wield and has <bad>slightly reduced damage and accuracy</bad> against adjacent targets."
   },
   {
     "id": "WORN_WEAPON",
@@ -952,8 +952,7 @@
   {
     "id": "POWERARMOR_COMPATIBLE",
     "type": "json_flag",
-    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces.",
-    "info": "This item can be worn simultaneously with power armor."
+    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces."
   },
   {
     "id": "ZERO_WEIGHT",
@@ -1083,7 +1082,7 @@
   {
     "id": "VERBAL",
     "type": "json_flag",
-    "//": "The caster must speak in order to cast the spell.  More mouth encumbrance increases failure percent, and the caster speaks when casting."
+    "//": "The caster must speak in order to cast the spell.  More face encumbrance increases failure percent, and the caster speaks when casting."
   },
   {
     "id": "SOMATIC",
@@ -1649,6 +1648,10 @@
   },
   {
     "id": "NO_TAKEOFF",
+    "type": "json_flag"
+  },
+  {
+    "id": "NO_TEMP",
     "type": "json_flag"
   },
   {
@@ -2529,5 +2532,30 @@
     "id": "CROSSBOW",
     "type": "json_flag",
     "//": "If this ranged weapon uses the archery skill, it will not drain stamina when aiming, nor will it teach archer's form."
+  },
+  {
+    "id": "NECKTIE_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is designed to attach to a necktie."
+  },
+  {
+    "id": "SHIRT_COLLAR_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is designed to fit in the collar of a button-up shirt."
+  },
+  {
+    "id": "SHIRT_CUFF_ACCESSORY",
+    "type": "json_flag",
+    "info": "This item is meant to fit in the cuffs of a dress shirt."
+  },
+  {
+    "id": "CUSHION_FALL",
+    "type": "json_flag",
+    "info": "This item may offer increased <info>protection from fall damage</info>."
+  },
+  {
+    "id": "PREVENT_TRAINING",
+    "type": "json_flag",
+    "//": "Effect flag that prevents earning EXP from fighting this creature."
   }
 ]

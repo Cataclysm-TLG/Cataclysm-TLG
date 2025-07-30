@@ -18,6 +18,7 @@
 #include "itype.h"
 #include "json.h"
 #include "mutation.h"
+#include "npc.h"
 #include "rng.h"
 #include "skill.h"
 #include "trait_group.h"
@@ -122,6 +123,11 @@ void npc_class::check_consistency()
     }
 }
 
+bool npc_class::is_common() const
+{
+    return common;
+}
+
 static distribution load_distribution( const JsonObject &jo )
 {
     if( jo.has_float( "constant" ) ) {
@@ -185,7 +191,7 @@ static distribution load_distribution( const JsonObject &jo, const std::string_v
 
 bool shopkeeper_item_group::can_sell( npc const &guy ) const
 {
-    dialogue temp( get_talker_for( get_avatar() ), get_talker_for( guy ) );
+    const_dialogue temp( get_const_talker_for( get_avatar() ), get_const_talker_for( guy ) );
     faction *const fac = guy.get_faction();
 
     return ( fac == nullptr || trust <= guy.get_faction()->trusts_u ) &&

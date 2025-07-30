@@ -317,9 +317,9 @@ int material_type::breathability_to_rating( breathability_rating breathability )
         case breathability_rating::GOOD:
             return 80;
         case breathability_rating::MOISTURE_WICKING:
-            return 110;
+            return 90;
         case breathability_rating::SECOND_SKIN:
-            return 140;
+            return 100;
         case breathability_rating::last:
             break;
     }

@@ -18,6 +18,7 @@
 #include "enums.h"
 #include "input_context.h"
 #include "item.h"
+#include "itype.h"
 #include "localized_comparator.h"
 #include "make_static.h"
 #include "morale_types.h"
@@ -34,7 +35,7 @@ static const efftype_id effect_took_prozac_bad( "took_prozac_bad" );
 
 static const morale_type morale_cold( "morale_cold" );
 static const morale_type morale_hot( "morale_hot" );
-static const morale_type morale_perm_badtemper( "morale_perm_badtemper" );
+static const morale_type morale_perm_pessimist( "morale_perm_pessimist" );
 static const morale_type morale_perm_constrained( "morale_perm_constrained" );
 static const morale_type morale_perm_debug( "morale_perm_debug" );
 static const morale_type morale_perm_fancy( "morale_perm_fancy" );
@@ -44,7 +45,6 @@ static const morale_type morale_perm_numb( "morale_perm_numb" );
 static const morale_type morale_perm_optimist( "morale_perm_optimist" );
 static const morale_type morale_perm_radiophile( "morale_perm_radiophile" );
 
-static const trait_id trait_BADTEMPER( "BADTEMPER" );
 static const trait_id trait_CENOBITE( "CENOBITE" );
 static const trait_id trait_CHLOROMORPH( "CHLOROMORPH" );
 static const trait_id trait_FLOWERS( "FLOWERS" );
@@ -53,7 +53,6 @@ static const trait_id trait_LEAVES3( "LEAVES3" );
 static const trait_id trait_MASOCHIST( "MASOCHIST" );
 static const trait_id trait_MASOCHIST_MED( "MASOCHIST_MED" );
 static const trait_id trait_NUMB( "NUMB" );
-static const trait_id trait_OPTIMISTIC( "OPTIMISTIC" );
 static const trait_id trait_RADIOPHILE( "RADIOPHILE" );
 static const trait_id trait_ROOTS1( "ROOTS1" );
 static const trait_id trait_ROOTS2( "ROOTS2" );
@@ -68,7 +67,7 @@ bool is_permanent_morale( const morale_type &id )
 {
     static const std::set<morale_type> permanent_morale = {{
             morale_perm_optimist,
-            morale_perm_badtemper,
+            morale_perm_pessimist,
             morale_perm_numb,
             morale_perm_fancy,
             morale_perm_masochist,
@@ -118,12 +117,6 @@ static int operator *= ( int &morale, const morale_mult &mult )
 // Commonly used morale multipliers
 namespace morale_mults
 {
-// Optimistic characters focus on the good things in life,
-// and downplay the bad things.
-static const morale_mult optimist( 1.2, 0.8 );
-// Again, those grouchy Bad-Tempered folks always focus on the negative.
-// They can't handle positive things as well.  They're No Fun.  D:
-static const morale_mult badtemper( 0.8, 1.2 );
 // Numb characters have trouble feeling anything
 static const morale_mult numb( 0.25, 0.25 );
 // Prozac reduces overall negative morale by 75%.
@@ -167,7 +160,19 @@ bool player_morale::morale_point::matches( const morale_type &_type, const itype
 
 bool player_morale::morale_point::matches( const morale_point &mp ) const
 {
-    return ( type == mp.type ) && ( item_type == mp.item_type );
+    if( type != mp.type ) {
+        return false;
+    }
+
+    if( item_type == mp.item_type ) {
+        return true;
+    }
+
+    if( item_type != nullptr && mp.item_type != nullptr ) {
+        return item_type->get_id() == mp.item_type->get_id();
+    }
+
+    return false; // one is null, one is not
 }
 
 void player_morale::morale_point::add( const int new_bonus, const int new_max_bonus,
@@ -266,13 +271,6 @@ player_morale::player_morale() :
     perceived_pain( 0 ),
     radiation( 0 )
 {
-    // Cannot use 'this' because the object is copyable
-    const auto set_optimist = []( player_morale * pm, int bonus ) {
-        pm->set_permanent( morale_perm_optimist, bonus, nullptr );
-    };
-    const auto set_badtemper = []( player_morale * pm, int bonus ) {
-        pm->set_permanent( morale_perm_badtemper, bonus, nullptr );
-    };
     const auto set_numb = []( player_morale * pm, int bonus ) {
         pm->set_permanent( morale_perm_numb, bonus, nullptr );
     };
@@ -289,20 +287,6 @@ player_morale::player_morale() :
         pm->update_radiophile_bonus();
     };
 
-    mutations[trait_OPTIMISTIC] =
-    mutation_data( [set_optimist]( player_morale * pm ) {
-        return set_optimist( pm, 9 );
-    },
-    [set_optimist]( player_morale * pm ) {
-        return set_optimist( pm, 0 );
-    } );
-    mutations[trait_BADTEMPER] =
-    mutation_data( [set_badtemper]( player_morale * pm ) {
-        return set_badtemper( pm, -9 );
-    },
-    [set_badtemper]( player_morale * pm ) {
-        return set_badtemper( pm, 0 );
-    } );
     mutations[trait_NUMB] =
     mutation_data( [set_numb]( player_morale * pm ) {
         return set_numb( pm, -1 );
@@ -409,12 +393,6 @@ morale_mult player_morale::get_temper_mult() const
 {
     morale_mult mult;
 
-    if( has( morale_perm_optimist ) ) {
-        mult *= morale_mults::optimist;
-    }
-    if( has( morale_perm_badtemper ) ) {
-        mult *= morale_mults::badtemper;
-    }
     if( has( morale_perm_numb ) ) {
         mult *= morale_mults::numb;
     }
@@ -498,7 +476,6 @@ int player_morale::get_level() const
         }
 
         level = std::sqrt( sum_of_positive_squares ) - std::sqrt( sum_of_negative_squares );
-
         if( took_prozac ) {
             level *= morale_mults::prozac;
             if( took_prozac_bad ) {
@@ -616,9 +593,11 @@ void player_morale::display( int focus_eq, int pain_penalty, int fatigue_penalty
             void draw( catacurses::window &w, const int posy ) const {
                 int width = getmaxx( w );
                 if( sep_line ) {
+                    wattron( w, BORDER_COLOR );
                     mvwhline( w, point( 0, posy ), LINE_XXXO, 1 );
                     mvwhline( w, point( 1, posy ), 0, width - 2 );
                     mvwhline( w, point( width - 1, posy ), LINE_XOXX, 1 );
+                    wattroff( w, BORDER_COLOR );
                 } else {
                     int text_width = width - left_padding - right_padding;
                     if( !right.empty() ) {
@@ -836,7 +815,8 @@ bool player_morale::consistent_with( const player_morale &morale ) const
 {
     const auto test_points = []( const player_morale & lhs, const player_morale & rhs ) {
         for( const player_morale::morale_point &lhp : lhs.points ) {
-            if( !lhp.is_permanent() ) {
+            if( !lhp.is_permanent() || lhp.get_type() == morale_perm_optimist ||
+                lhp.get_type() == morale_perm_pessimist ) {
                 continue;
             }
 
@@ -845,8 +825,12 @@ bool player_morale::consistent_with( const player_morale &morale ) const
                 return lhp.matches( rhp );
             } );
 
+            // These debug messages constantly fire even though they oughtn't to
+            // because of how morale is periodically recalculated.
+            // So they're commented out for now.
+
             if( iter == rhs.points.end() || lhp.get_net_bonus() != iter->get_net_bonus() ) {
-                debugmsg( "Morale \"%s\" is inconsistent.", lhp.get_name() );
+                //     debugmsg( "Morale \"%s\" is inconsistent.", lhp.get_name() );
                 return false;
             }
         }
@@ -855,19 +839,19 @@ bool player_morale::consistent_with( const player_morale &morale ) const
     };
 
     if( took_prozac != morale.took_prozac ) {
-        debugmsg( "player_morale::took_prozac is inconsistent." );
+        //     debugmsg( "player_morale::took_prozac is inconsistent." );
         return false;
     } else if( took_prozac_bad != morale.took_prozac_bad ) {
-        debugmsg( "player_morale::took_prozac (bad) is inconsistent." );
+        //     debugmsg( "player_morale::took_prozac (bad) is inconsistent." );
         return false;
     } else if( stylish != morale.stylish ) {
-        debugmsg( "player_morale::stylish is inconsistent." );
+        //     debugmsg( "player_morale::stylish is inconsistent." );
         return false;
     } else if( perceived_pain != morale.perceived_pain ) {
-        debugmsg( "player_morale::perceived_pain is inconsistent." );
+        //     debugmsg( "player_morale::perceived_pain is inconsistent." );
         return false;
     } else if( radiation != morale.radiation ) {
-        debugmsg( "player_morale::radiation is inconsistent." );
+        //     debugmsg( "player_morale::radiation is inconsistent." );
         return false;
     }
 

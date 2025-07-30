@@ -38,7 +38,7 @@
       [ "underbarrel", 1 ]
     ],
     "ammo_effects": [ "LASER", "EMP" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 12 }
   },
@@ -67,7 +67,17 @@
     "reload": 0,
     "modes": [ [ "DEFAULT", "3 rd.", 3 ], [ "BURST", "5 rd.", 5 ], [ "AUTO", "high auto", 15 ] ],
     "ammo_effects": [ "LASER", "PLASMA_BUBBLE", "IGNITE" ],
-    "flags": [ "NO_UNLOAD", "NEVER_JAMS", "NO_UNWIELD", "NO_SALVAGE", "NO_REPAIR", "UNBREAKABLE_MELEE", "NON_FOULING", "USE_UPS" ],
+    "flags": [
+      "FIRE_TWOHAND",
+      "NO_UNLOAD",
+      "NEVER_JAMS",
+      "NO_UNWIELD",
+      "NO_SALVAGE",
+      "NO_REPAIR",
+      "UNBREAKABLE_MELEE",
+      "NON_FOULING",
+      "USE_UPS"
+    ],
     "overheat_threshold": 200,
     "cooling_value": 2,
     "heat_per_shot": 6,
@@ -99,6 +109,7 @@
     "reload": 0,
     "ammo_effects": [ "LASER", "PLASMA_BUBBLE", "IGNITE" ],
     "flags": [
+      "FIRE_TWOHAND",
       "NO_UNLOAD",
       "NEVER_JAMS",
       "NO_UNWIELD",
@@ -155,7 +166,7 @@
       [ "underbarrel", 1 ]
     ],
     "ammo_effects": [ "LASER", "IGNITE" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 12 }
   },
@@ -164,13 +175,20 @@
     "type": "GUN",
     "copy-from": "laser_rifle",
     "name": { "str": "hm12 dazzle rifle" },
-    "description": "This prototype 'energy weapon' was apparently manufactured by Hub 01.  It somewhat resembles an oversize radar gun, mounted on a rectangular frame of white sheet metal.  It will temporarily stun robots, if you manage to hit their sensors with a clean shot.",
+    "description": "This bulky anti-drone gun molded from black polymer was once beloved on all sides of the Eastern European theatre.  It disrupts navigation and communcation systems by firing a powerful electromagnetic pulse and will temporarily stun robots, if you manage to hit their sensors with a clean shot.",
     "price_postapoc": "150 USD",
     "ranged_damage": { "damage_type": "pure", "amount": 1 },
     "energy_drain": "20 kJ",
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "ammo_effects": [ "LASER", "ROBOT_DAZZLE" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS" ],
+    "weight": "3550 g",
+    "volume": "3200 ml",
+    "longest_side": "1000 mm",
+    "price": "120000 USD",
+    "to_hit": -2,
+    "range": 40,
+    "dispersion": 6,
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS" ],
     "valid_mod_locations": [
       [ "grip", 1 ],
       [ "rail", 1 ],
@@ -211,7 +229,7 @@
     "heat_per_shot": 6,
     "valid_mod_locations": [ [ "emitter", 1 ], [ "grip", 1 ], [ "lens", 1 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock", 1 ], [ "underbarrel", 1 ] ],
     "ammo_effects": [ "LASER", "INCENDIARY" ],
-    "flags": [ "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
+    "flags": [ "ALLOWS_BODY_BLOCK", "NEVER_JAMS", "NO_UNLOAD", "NON_FOULING", "NEEDS_NO_LUBE", "USE_UPS", "OVERHEATS" ],
     "faults": [ "fault_overheat_melting", "fault_overheat_safety" ],
     "melee_damage": { "bash": 5 }
   },

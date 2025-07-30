@@ -547,7 +547,7 @@
     "type": "TOOL",
     "category": "weapons",
     "name": { "str": "xiphos", "str_pl": "xiphe" },
-    "description": "A bronze sword of ancient Greek origin, wielded as a sidearm to the dory spear.",
+    "description": "A bronze sword of ancient Greek origin.",
     "weight": "800 g",
     "volume": "2 L",
     "longest_side": "50 cm",

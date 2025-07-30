@@ -612,7 +612,7 @@
     "type": "profession_item_substitutions",
     "item": "pudding",
     "sub": [
-      { "present": [ "ANTIJUNK" ], "absent": [ "LACTOSE" ], "new": [ "yoghurt" ] },
+      { "present": [ "ANTIJUNK" ], "absent": [ "LACTOSE" ], "new": [ "yogurt" ] },
       { "present": [ "ANTIWHEAT" ], "absent": [ "ANTIJUNK" ], "new": [ "neccowafers" ] },
       { "present": [ "ANTIJUNK", "LACTOSE" ], "new": [ "boiled_egg" ] }
     ]
@@ -2299,7 +2299,7 @@
           { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
           { "item": "kevlar_harness", "container-item": "runner_bag" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2342,7 +2342,7 @@
           { "group": "charged_two_way_radio" },
           { "group": "holster_supp_usp9", "container-item": "XL_holster" },
           { "item": "legpouch_large", "contents-group": "army_mags_usp9" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2443,7 +2443,7 @@
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2535,7 +2535,7 @@
           { "item": "single_sling" },
           { "group": "swat_ballistic_vest_pristine" },
           { "group": "charged_two_way_radio" },
-          { "item": "sheriffshirt" },
+          { "item": "shirt_western" },
           { "group": "army_mags_mp5" },
           { "group": "army_mags_usp9" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
@@ -2592,7 +2592,7 @@
           { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
           { "item": "762_51", "charges": 20 },
           { "item": "M24", "ammo-item": "762_51", "charges": 5, "contents-item": "shoulder_strap" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2682,7 +2682,7 @@
           { "item": "gloves_leather", "custom-flags": [ "no_auto_equip" ] },
           { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2768,7 +2768,7 @@
     "points": 3,
     "proficiencies": [ "prof_bow_basic", "prof_gunsmithing_spring", "prof_knives_familiar" ],
     "skills": [
-      { "level": 4, "name": "rifle" },
+      { "level": 4, "name": "archery" },
       { "level": 4, "name": "gun" },
       { "level": 2, "name": "swimming" },
       { "level": 3, "name": "survival" }
@@ -3107,7 +3107,7 @@
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -3214,7 +3214,7 @@
           { "item": "roadmap" },
           { "item": "sm_extinguisher", "charges": 10 },
           { "item": "trailmap" },
-          { "item": "sheriffshirt" }
+          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -4027,7 +4027,7 @@
           { "item": "socks" },
           { "item": "dress_shoes" },
           { "item": "knit_scarf" },
-          { "item": "platinum_watch" },
+          { "item": "gold_watch" },
           { "item": "briefcase" },
           { "item": "money_strap_fifty" },
           { "item": "file", "count": [ 1, 4 ] },
@@ -4242,7 +4242,7 @@
     "id": "martial_artist_japanese",
     "name": "Butōka",
     "npc_background": "BG_survival_story_SPORTS",
-    "description": "Your sensei prepared you for a lot of things, but somehow the end of the world never came up in traning.",
+    "description": "Your sensei prepared you for a lot of things, but somehow the end of the world never came up in training.",
     "points": 3,
     "starting_styles_choices": [ "style_aikido", "style_karate", "style_ninjutsu", "style_judo" ],
     "proficiencies": [ "prof_unarmed_familiar", "prof_unarmed_pro" ],
@@ -5270,7 +5270,7 @@
           { "item": "tabi_dress" },
           { "item": "geta" },
           { "item": "bellywrap" },
-          { "item": "bokken" }
+          { "group": "bokken_with_saya" }
         ]
       },
       "female": { "entries": [ { "item": "chestwrap" } ] }
@@ -5353,7 +5353,7 @@
         "entries": [
           { "item": "jeans" },
           { "item": "leather_belt" },
-          { "item": "dress_shirt" },
+          { "item": "shirt_western" },
           { "item": "jacket_leather" },
           { "item": "socks" },
           { "item": "cowboy_hat" },
@@ -5799,7 +5799,7 @@
       "both": {
         "entries": [
           { "item": "leather_belt" },
-          { "item": "sheriffshirt" },
+          { "item": "shirt_western" },
           { "item": "longcoat_leather" },
           { "item": "socks" },
           { "item": "cowboy_hat" },
@@ -6159,20 +6159,22 @@
           { "item": "dress_shoes" },
           { "item": "dress_shirt" },
           { "item": "knit_scarf" },
-          { "item": "platinum_watch" },
+          { "item": "tie_necktie" },
+          { "item": "collarpin" },
           { "item": "blazer" },
           { "group": "charged_smart_phone" }
         ]
       },
-      "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "platinum_bracelet" } ] },
+      "male": { "entries": [ { "item": "briefs" }, { "item": "socks" }, { "item": "pants" }, { "item": "gold_cufflinks" } ] },
       "female": {
         "entries": [
           { "item": "bra" },
           { "item": "panties" },
           { "item": "stockings" },
+          { "item": "gold_bracelet" },
           { "item": "garter_belt" },
           { "item": "skirt" },
-          { "item": "platinum_ear" }
+          { "item": "gold_earring" }
         ]
       }
     },

@@ -460,7 +460,7 @@
     "description": "The scientists stopped their experiments on you abruptly, leaving you behind while they evacuated before lockdown.  Find a way to escape or starve to death.",
     "start_name": "Locked Lab",
     "professions": [ "unemployed", "mutant_patient", "mutant_volunteer", "broken_cyborg", "bionic_patient" ],
-    "allowed_locs": [ "sloc_lab_random", "sloc_lab_escape_cells", "sloc_lab_finale", "sloc_ice_lab_stairs", "sloc_ice_lab_finale" ],
+    "allowed_locs": [ "sloc_lab_random", "sloc_lab_escape_cells", "sloc_lab_finale" ],
     "traits": [
       "ELFAEYES",
       "MESOPIC",
@@ -492,6 +492,7 @@
       "UNSTABLE",
       "RADIOACTIVE1",
       "SLIMY",
+      "LIGHTFUR",
       "HERBIVORE",
       "CARNIVORE",
       "PONDEROUS1",
@@ -519,7 +520,7 @@
     "description": "You were deemed an essential employee and required to stay behind during the lab's evacuation.  Find a way to escape or starve to death.",
     "start_name": "Locked Lab",
     "professions": [ "labtech", "security", "medic" ],
-    "allowed_locs": [ "sloc_lab_random", "sloc_lab_escape_cells", "sloc_lab_finale", "sloc_ice_lab_stairs", "sloc_ice_lab_finale" ],
+    "allowed_locs": [ "sloc_lab_random", "sloc_lab_escape_cells", "sloc_lab_finale" ],
     "requirement": "achievement_reach_lab_finale",
     "flags": [ "CHALLENGE", "CITY_START", "LONE_START" ]
   },
@@ -710,6 +711,7 @@
       "PADDED_FEET",
       "RAP_TALONS",
       "HOOVES",
+      "LIGHTFUR",
       "CANINE_EARS",
       "FELINE_EARS",
       "TAIL_FLUFFY",
@@ -891,7 +893,7 @@
     "description": "You decided the open road would be a better prospect than the zombie-filled cities.  While en route to your destination, you were involved in a crash that totaled your vehicle.  Injured and alone, you'll need to think fast if you want to survive.",
     "allowed_locs": [ "sloc_road" ],
     "start_name": "Crash Site",
-    "map_extra": "mx_mayhem",
+    "map_extra": "mx_mayhem_crash_start",
     "flags": [ "CHALLENGE", "HELI_CRASH", "LONE_START" ]
   },
   {

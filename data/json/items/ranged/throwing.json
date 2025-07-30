@@ -10,6 +10,7 @@
     "price": "6 USD",
     "price_postapoc": "50 cent",
     "material": [ "cotton", "stone" ],
+    "stack_max": 1,
     "symbol": ";",
     "color": "blue",
     "to_hit": -1,

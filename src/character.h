@@ -875,7 +875,7 @@ class Character : public Creature, public visitable
         /** Returns the player's dodge_roll to be compared against an aggressor's hit_roll() */
         float dodge_roll() const override;
         /** Returns Creature::get_dodge() modified by any Character effects */
-        float get_dodge() const override;
+        float get_dodge( bool critfail = true ) const override;
         /** in this case spell resistance is just the spellcraft skill for characters. */
         int get_spell_resist() const override;
         /** Handles the uncanny dodge bionic and effects, returns true if the player successfully dodges */
@@ -1174,13 +1174,14 @@ class Character : public Creature, public visitable
         bool handle_melee_wear( item_location shield, float wear_multiplier = 1.0f );
         /** Returns a random technique/vector/contact area set from the  possible techs */
         std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> pick_technique(
-            Creature &t, const item_location &weap,
-            bool crit, bool dodge_counter, bool block_counter, const std::vector<matec_id> &blacklist = {} );
+            Creature const &t, const item_location &weap,
+            bool crit, bool dodge_counter, bool block_counter, const std::vector<matec_id> &blacklist = {} )
+        const;
         // Filter techniques per tech, return a tech/vector/sublimb set
         std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
-                evaluate_technique( const matec_id &tec_id, Creature &t, const item_location &weap,
+                evaluate_technique( const matec_id &tec_id, Creature const &t, const item_location &weap,
                                     std::vector<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>> &fallbacks,
-                                    bool crit = false, bool dodge_counter = false, bool block_counter = false );
+                                    bool crit = false, bool dodge_counter = false, bool block_counter = false ) const;
         void perform_technique( const ma_technique &technique, Creature &t, damage_instance &di,
                                 int &move_cost, item_location &cur_weapon );
 
@@ -1279,9 +1280,9 @@ class Character : public Creature, public visitable
         bool can_autolearn( const matype_id &ma_id ) const;
     private:
         /** Check if an area-of-effect technique has valid targets */
-        bool valid_aoe_technique( Creature &t, const ma_technique &technique );
-        bool valid_aoe_technique( Creature &t, const ma_technique &technique,
-                                  std::vector<Creature *> &targets );
+        bool valid_aoe_technique( Creature const &t, const ma_technique &technique ) const;
+        bool valid_aoe_technique( Creature const &t, const ma_technique &technique,
+                                  std::vector<Creature *> &targets ) const;
     public:
 
         /** This handles giving xp for a skill. Returns true on level-up. */
@@ -2288,6 +2289,12 @@ class Character : public Creature, public visitable
         // weapon + worn (for death, etc)
         std::vector<item *> inv_dump();
         std::vector<const item *> inv_dump() const;
+
+        units::volume get_average_character_volume() const;
+        // TODO: Cache this like weight carried?
+        units::volume get_total_character_volume() const;
+        units::volume get_base_character_volume() const;
+
         units::mass weight_carried() const;
         units::volume volume_carried() const;
 
@@ -2520,7 +2527,7 @@ class Character : public Creature, public visitable
         /** Returns a value used when attempting to intimidate NPC's */
         int intimidation() const;
 
-        void set_skills_from_hobbies();
+        void set_skills_from_hobbies( bool no_override = false );
 
         void set_bionics_from_hobbies();
 
@@ -2529,7 +2536,8 @@ class Character : public Creature, public visitable
         float get_proficiency_practice( const proficiency_id &prof ) const;
         time_duration get_proficiency_practiced_time( const proficiency_id &prof ) const;
         bool has_prof_prereqs( const proficiency_id &prof ) const;
-        void add_proficiency( const proficiency_id &prof, bool ignore_requirements = false );
+        void add_proficiency( const proficiency_id &prof, bool ignore_requirements = false,
+                              bool recursive = false );
         void lose_proficiency( const proficiency_id &prof, bool ignore_requirements = false );
         bool practice_proficiency( const proficiency_id &prof, const time_duration &amount,
                                    const std::optional<time_duration> &max = std::nullopt );
@@ -2787,7 +2795,7 @@ class Character : public Creature, public visitable
         // Items currently being hauled
         std::vector<item_location> haul_list;
 
-        tripoint_rel_ms view_offset;
+        mutable tripoint_rel_ms view_offset;
 
         player_activity stashed_outbounds_activity;
         player_activity stashed_outbounds_backlog;
@@ -3524,8 +3532,6 @@ class Character : public Creature, public visitable
         void update_morale();
         /** Ensures persistent morale effects are up-to-date */
         void apply_persistent_morale();
-        // the morale penalty for hoarders
-        void hoarder_morale_penalty();
         /** Used to apply morale modifications from food and medication **/
         void modify_morale( item &food, int nutr = 0 );
         // Modified by traits, &c
@@ -3851,6 +3857,8 @@ class Character : public Creature, public visitable
         void set_destination( const std::vector<tripoint_bub_ms> &route,
                               const player_activity &new_destination_activity = player_activity() );
         void clear_destination();
+        //clear_destination(), also closes overmap UI if still open
+        void abort_automove();
         bool has_distant_destination() const;
 
         // true if the player is auto moving, or if the player is going to finish

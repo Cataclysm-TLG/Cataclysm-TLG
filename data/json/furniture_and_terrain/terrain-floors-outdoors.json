@@ -306,7 +306,6 @@
   {
     "type": "terrain",
     "id": "t_zebra",
-    "alias": [ "t_zebra_h", "t_zebra_v" ],
     "name": "pedestrian crossing",
     "connect_groups": [ "PAVEMENT", "PAVEMENT_ZEBRA" ],
     "connects_to": "PAVEMENT_ZEBRA",
@@ -764,5 +763,17 @@
     "move_cost": 2,
     "coverage": 0,
     "flags": [ "TRANSPARENT", "FLAT" ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_floor_slag_thin_out",
+    "name": "paper thin slag",
+    "description": "A thin splatter of slag coats the ground here, having cooled completely into something like pitted stone.",
+    "looks_like": "t_dirt_rocky",
+    "symbol": "-",
+    "color": "white",
+    "move_cost": 2,
+    "coverage": 0,
+    "flags": [ "TRANSPARENT" ]
   }
 ]

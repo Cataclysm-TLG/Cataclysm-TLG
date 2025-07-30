@@ -68,7 +68,6 @@ static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
 static const efftype_id effect_amigara( "amigara" );
-static const efftype_id effect_glowing( "glowing" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -376,7 +375,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
             if( you.is_auto_moving() ) {
                 add_msg( m_warning, _( "Monster in the way.  Auto move canceled." ) );
                 add_msg( m_info, _( "Move into the monster to attack." ) );
-                you.clear_destination();
+                you.abort_automove();
                 return false;
             }
             if( !you.try_break_relax_gas( _( "Your willpower asserts itself, and so do you!" ),
@@ -420,7 +419,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
         if( you.is_auto_moving() ) {
             add_msg( _( "NPC in the way, Auto move canceled." ) );
             add_msg( m_info, _( "Move into the NPC to interact or attack." ) );
-            you.clear_destination();
+            you.abort_automove();
             return false;
         }
 
@@ -473,7 +472,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint &d )
     if( is_riding ) {
         if( !you.check_mount_will_move( dest_loc.raw() ) ) {
             if( you.is_auto_moving() ) {
-                you.clear_destination();
+                you.abort_automove();
             }
             you.mod_moves( -you.get_speed() * 0.2 );
             return false;
@@ -653,11 +652,6 @@ void avatar_action::swim( map &m, avatar &you, const tripoint &p )
             }
         }
     }
-    if( you.has_effect( effect_glowing ) ) {
-        add_msg( _( "The water washes off the glowing goo!" ) );
-        you.remove_effect( effect_glowing );
-    }
-
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();

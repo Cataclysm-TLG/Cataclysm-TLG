@@ -115,14 +115,14 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1 L",
+        "max_contains_volume": "750 ml",
         "max_contains_weight": "3 kg",
         "max_item_length": "28 cm",
         "moves": 80
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1 L",
+        "max_contains_volume": "750 ml",
         "max_contains_weight": "3 kg",
         "max_item_length": "28 cm",
         "moves": 80
@@ -179,24 +179,17 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "750 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "11 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "750 ml",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "11 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "350 ml",
+        "max_contains_volume": "300 ml",
         "max_contains_weight": "2 kg",
-        "max_item_length": "9 cm",
-        "moves": 100
+        "max_item_length": "11 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "300 ml",
+        "max_contains_weight": "2 kg",
+        "max_item_length": "11 cm",
+        "moves": 80
       }
     ],
     "warmth": 25,
@@ -244,14 +237,14 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
+        "max_contains_volume": "350 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "13 cm",
         "moves": 120
       },
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
+        "max_contains_volume": "350 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "13 cm",
         "moves": 120
@@ -303,25 +296,20 @@
     "color": "light_blue",
     "flags": [ "VARSIZE" ],
     "armor": [
-      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 4, 5 ] },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 4, 4 ] }
+      { "covers": [ "torso" ], "coverage": 95, "encumbrance": [ 16, 17 ] },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 95, "encumbrance": [ 16, 16 ] }
     ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "400 ml",
-        "max_contains_weight": "4 kg",
+        "max_contains_volume": "350 ml",
+        "max_contains_weight": "2 kg",
         "max_item_length": "10 cm",
         "moves": 75
       }
     ],
     "warmth": 20,
-    "material_thickness": 0.8,
-    "snippet_category": [
-      { "id": "denim_shirt1", "text": "A long sleeved button-down blue shirt made from denim." },
-      { "id": "denim_shirt2", "text": "A long sleeved button-down shirt made from denim, dyed black." },
-      { "id": "denim_shirt3", "text": "A long sleeved button-down cowboy wash shirt made from denim." }
-    ]
+    "material_thickness": 0.8
   },
   {
     "id": "dress_shirt",
@@ -343,10 +331,30 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "450 ml",
+        "max_contains_volume": "250 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "12 cm",
         "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "12 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Eyelets for a collar pin",
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "22 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Buttonholes for cufflinks",
+        "flag_restriction": [ "SHIRT_CUFF_ACCESSORY" ]
       }
     ],
     "warmth": 10,
@@ -547,8 +555,8 @@
   {
     "id": "longshirt",
     "type": "ARMOR",
-    "name": { "str": "long-sleeved shirt" },
-    "description": "A long-sleeved cotton shirt.",
+    "name": { "str": "long-sleeved t-shirt" },
+    "description": "A soft cotton shirt with long sleeves.",
     "weight": "146 g",
     "volume": "750 ml",
     "price": "20 USD",
@@ -560,7 +568,10 @@
     "warmth": 5,
     "material_thickness": 0.1,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "coverage": 98, "covers": [ "torso", "arm_l", "arm_r" ] } ]
+    "armor": [
+      { "covers": [ "torso" ], "coverage": 98, "encumbrance": 4 },
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 4 }
+    ]
   },
   {
     "id": "longshirt_costume",
@@ -590,15 +601,15 @@
     "to_hit": -5,
     "material": [ "leather" ],
     "symbol": "[",
-    "looks_like": "sheriffshirt",
+    "looks_like": "shirt_western",
     "color": "brown",
     "warmth": 2,
     "material_thickness": 0.5,
     "flags": [ "VARSIZE" ],
     "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 18 },
+      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 100, "encumbrance": 16 },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 95 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 18 }
+      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": 16 }
     ]
   },
   {
@@ -859,6 +870,16 @@
         "max_contains_weight": "1 kg",
         "max_item_length": "12 cm",
         "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": false,
+        "max_contains_weight": "12 g",
+        "max_contains_volume": "3 ml",
+        "max_item_length": "85 mm",
+        "moves": 100,
+        "description": "Eyelets for a collar pin",
+        "flag_restriction": [ "SHIRT_COLLAR_ACCESSORY" ]
       }
     ],
     "warmth": 10,

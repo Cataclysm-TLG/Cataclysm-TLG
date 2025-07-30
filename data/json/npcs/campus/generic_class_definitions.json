@@ -9,8 +9,8 @@
       { "item": "bat", "prob": 20 },
       { "item": "cudgel", "prob": 20 },
       { "item": "shortbow", "prob": 20 },
-      { "item": "spear_pipe", "prob": 20 },
-      { "item": "spear_homemade_halfpike", "prob": 20 },
+      { "item": "spear_steel", "prob": 20 },
+      { "item": "spear_wood", "prob": 20 },
       { "item": "makeshift_glaive", "prob": 20 }
     ]
   },

@@ -132,6 +132,8 @@ static const limb_score_id limb_score_breathing( "breathing" );
 static const morale_type morale_feeling_bad( "morale_feeling_bad" );
 static const morale_type morale_feeling_good( "morale_feeling_good" );
 static const morale_type morale_moodswing( "morale_moodswing" );
+static const morale_type morale_perm_pessimist( "morale_perm_pessimist" );
+static const morale_type morale_perm_optimist( "morale_perm_optimist" );
 static const morale_type morale_pyromania_nearfire( "morale_pyromania_nearfire" );
 static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
 static const morale_type morale_pyromania_startfire( "morale_pyromania_startfire" );
@@ -164,7 +166,9 @@ static const trait_id trait_NO_LEFT_ARM( "NO_LEFT_ARM" );
 static const trait_id trait_NO_LEFT_LEG( "NO_LEFT_LEG" );
 static const trait_id trait_NO_RIGHT_ARM( "NO_RIGHT_ARM" );
 static const trait_id trait_NO_RIGHT_LEG( "NO_RIGHT_LEG" );
+static const trait_id trait_OPTIMISTIC( "OPTIMISTIC" );
 static const trait_id trait_PER_SLIME( "PER_SLIME" );
+static const trait_id trait_PESSIMISTIC( "PESSIMISTIC" );
 static const trait_id trait_PLANTSKIN( "PLANTSKIN" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 static const trait_id trait_RADIOACTIVE1( "RADIOACTIVE1" );
@@ -469,6 +473,22 @@ void suffer::while_awake( Character &you, const int current_stim )
         }
     }
 
+    if( you.has_trait( trait_OPTIMISTIC ) && !you.has_morale( morale_perm_optimist ) ) {
+        you.add_morale( morale_perm_optimist, 10, 10, 0_seconds );
+    }
+
+    if( !you.has_trait( trait_OPTIMISTIC ) && you.has_morale( morale_perm_optimist ) ) {
+        you.rem_morale( morale_perm_optimist );
+    }
+
+    if( you.has_trait( trait_PESSIMISTIC ) && !you.has_morale( morale_perm_pessimist ) ) {
+        you.add_morale( morale_perm_pessimist, -10, -10, 0_seconds );
+    }
+
+    if( !you.has_trait( trait_PESSIMISTIC ) && you.has_morale( morale_perm_pessimist ) ) {
+        you.rem_morale( morale_perm_pessimist );
+    }
+
     if( you.has_flag( json_flag_NYCTOPHOBIA ) && !you.has_effect( effect_took_xanax ) ) {
         suffer::from_nyctophobia( you );
     }
@@ -493,7 +513,8 @@ void suffer::while_awake( Character &you, const int current_stim )
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
         if( current_stim > 50 && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
             you.add_effect( effect_shakes, 30_minutes + 1_turns * current_stim );
-        } else if( ( you.get_hunger() > 80 || you.get_kcal_percent() < 1.0f ) && you.get_hunger() > 0 &&
+        } else if( ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
+                                                you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
             you.add_effect( effect_shakes, 40_minutes );
         }
@@ -1027,7 +1048,7 @@ void suffer::from_sunburn( Character &you, bool severe )
             // Pockets can keep the sun off your hands if you don't wield a too large item
             // Hoods can keep the sun off your unencumbered head
             // Missing limbs can't get sunburned
-            // Collars can keep the sun off your unencumbered mouth
+            // Collars can keep the sun off your unencumbered face
             continue;
         }
 
@@ -1340,7 +1361,7 @@ void suffer::from_radiation( Character &you )
         // 200 rads = 100 / 10000 = 1 / 100
         // 1000 rads = 900 / 10000 = 9 / 100 = 10% !!!
         // 2000 rads = 2000 / 10000 = 1 / 5 = 20% !!!
-        if( get_option<bool>( "RAD_MUTATION" ) && rng( 100, 10000 ) < you.get_rad() ) {
+        if( rng( 100, 10000 ) < you.get_rad() ) {
             get_event_bus().send<event_type::character_radioactively_mutates>( you.getID() );
         }
         if( you.get_rad() > 50 && rng( 1, 3000 ) < you.get_rad() &&

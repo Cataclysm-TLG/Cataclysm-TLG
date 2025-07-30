@@ -334,14 +334,19 @@ static void draw_grid( const catacurses::window &w, const int list_width )
 {
     draw_border( w );
     mvwprintz( w, point( 2, 0 ), c_light_red, _( " Construction " ) );
+
+    wattron( w, c_light_gray );
+
     // draw internal lines
     mvwvline( w, point( list_width, 1 ), LINE_XOXO, getmaxy( w ) - 2 );
     mvwhline( w, point( 1, 2 ), LINE_OXOX, list_width );
     // draw intersections
-    mvwputch( w, point( list_width, 0 ), c_light_gray, LINE_OXXX );
-    mvwputch( w, point( list_width, getmaxy( w ) - 1 ), c_light_gray, LINE_XXOX );
-    mvwputch( w, point( 0, 2 ), c_light_gray, LINE_XXXO );
-    mvwputch( w, point( list_width, 2 ), c_light_gray, LINE_XOXX );
+    mvwaddch( w, point( list_width, 0 ), LINE_OXXX );
+    mvwaddch( w, point( list_width, getmaxy( w ) - 1 ), LINE_XXOX );
+    mvwaddch( w, point( 0, 2 ), LINE_XXXO );
+    mvwaddch( w, point( list_width, 2 ), LINE_XOXX );
+
+    wattroff( w, c_light_gray );
 
     wnoutrefresh( w );
 }
@@ -807,7 +812,7 @@ construction_id construction_menu( const bool blueprint )
         draw_grid( w_con, w_list_width + w_list_x0 );
 
         // Erase existing tab selection & list of constructions
-        mvwhline( w_con, point_south_east, ' ', w_list_width );
+        mvwhline( w_con, point_south_east, BORDER_COLOR, ' ', w_list_width );
         werase( w_list );
         // Print new tab listing
         // NOLINTNEXTLINE(cata-use-named-point-constants)
@@ -829,9 +834,7 @@ construction_id construction_menu( const bool blueprint )
         }
 
         // Clear out lines for tools & materials
-        for( int i = 1; i < w_height - 1; i++ ) {
-            mvwhline( w_con, point( pos_x, i ), ' ', available_window_width );
-        }
+        mvwrectf( w_con, point( pos_x, 1 ), BORDER_COLOR, ' ', available_window_width, w_height - 2 );
 
         // print the hotkeys regardless of if there are constructions
         for( size_t i = 0; i < notes.size(); ++i ) {
@@ -2435,16 +2438,6 @@ int construction::print_time( const catacurses::window &w, const point &p, int w
     return fold_and_print( w, p, width, col, text );
 }
 
-float construction::time_scale() const
-{
-    //incorporate construction time scaling
-    if( get_option<int>( "CONSTRUCTION_SCALING" ) == 0 ) {
-        return calendar::season_ratio();
-    } else {
-        return get_option<int>( "CONSTRUCTION_SCALING" ) / 100.0;
-    }
-}
-
 int construction::adjusted_time() const
 {
     int final_time = time;
@@ -2461,8 +2454,6 @@ int construction::adjusted_time() const
     } else if( assistants == 1 ) {
         final_time *= 0.75f;
     }
-
-    final_time *= time_scale();
 
     return final_time;
 }

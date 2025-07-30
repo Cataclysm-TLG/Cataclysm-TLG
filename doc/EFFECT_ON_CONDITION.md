@@ -83,8 +83,9 @@ For example, `{ "npc_has_effect": "Shadow_Reveal" }`, used by shadow lieutenant,
 | mutation: "deactivated_eocs"                     | character (Character)       | NONE                        |
 | mutation: "processed_eocs"                       | character (Character)       | NONE                        |
 | recipe: "result_eocs"                            | crafter (Character)         | NONE                        |
-| monster death: "death_function"                  | victim (Creature)           | NONE                        |
-| ammo_effect: "eoc"                               | shooter (Creature)          | victim (if exist, otherwise NONE) (Creature) | `proj_damage`, int, amount of damage projectile dealt. Detonation via SPECIAL_COOKOFF ammo effect return `proj_damage` as 1. Note that if projectile miss the target, EoC would be built without beta talker, so using EoC referencing `npc_` or `n_` would result in error. Use `has_beta` condition before manipulating with npc
+| monster weakpoint: "effect_on_conditions"        | attacker (Creature, if exists, otherwise NONE) | victim (Creature) | note that if weakpoint was hit without attacker, EoC would be built without alpha talker, so using EoC referencing `u_` would result in error. Use `has_alpha` condition before manipulating alpha talker
+| monster death: "death_function"                  | killer (Creature, if exists, otherwise NONE)| victim (Creature) | Note that if monster was killed without a killer (falling anvil, explosion of a bomb etc), EoC would be built without alpha talker, so using EoC referencing `u_` would result in error. Use `has_alpha` condition before manipulating alpha talker
+| ammo_effect: "eoc"                               | shooter (Creature)          | victim (if exist, otherwise NONE) (Creature) | `proj_damage`, int, amount of damage projectile dealt. Detonation via SPECIAL_COOKOFF ammo effect return `proj_damage` as 1. Note that if projectile miss the target, EoC would be built without beta talker, so using EoC referencing `npc_` or `n_` would result in error. Use `has_beta` condition before manipulating npc
 
 Some actions sent additional context variables, that can be used in EoC, in format:
 
@@ -548,8 +549,8 @@ checks this var exists
 ```
 
 ### `compare_string`
-- type: pair of strings or [variable objects](##variable-object)
-- Compare two strings, and return true if strings are equal
+- type: array of strings or [variable objects](#variable-object)
+- Compare all strings, and return true if at least two of them match
 
 #### Examples
 checks if `victim_type` is `mon_zombie_phase_shrike`
@@ -560,6 +561,42 @@ checks if `victim_type` is `mon_zombie_phase_shrike`
 checks is `victim_type` has `zombie` faction
 ```json
 { "compare_string": [ "zombie", { "mutator": "mon_faction", "mtype_id": { "context_val": "victim_type" } } ] }
+```
+
+Check if victim_type is any in the list
+```json
+"compare_string": [
+  { "context_val": "victim_type" },
+  "mon_hound_tindalos",
+  "mon_darkman",
+  "mon_zombie_phase_shrike",
+  "mon_swarm_structure",
+  "mon_better_half",
+  "mon_hallucinator",
+  "mon_archunk_strong",
+  "mon_void_spider",
+  "mon_XEDRA_officer",
+  "mon_eigenspectre_3",
+  "mon_eigenspectre_4",
+  "mon_living_vector"
+]
+```
+
+Check if `map_cache` contain value `has`, `lack` or `read`
+```json
+{ "compare_string": [ { "npc_val": "map_cache" }, "has", "lack", "read" ] }
+```
+
+### `compare_string_match_all`
+- type: array of strings or [variable objects](#variable-object)
+- Compare all strings, and return true if all of them match
+- For two strings the check is same as compare_string
+
+#### Examples
+
+Check if two variables are `yes`
+```json
+"compare_string": [ "yes", { "context_val": "some_context_should_be_yes" }, { "context_val": "some_another_context_also_should_be_yes" } ]
 ```
 
 ### `u_profession`
@@ -658,6 +695,73 @@ check do you have manual in inventory
 check do you have 3 manuals in inventory
 ```json
 { "u_has_item_category": "manuals", "count": 3 }
+```
+
+
+
+### `u_has_items_sum`, `npc_has_items_sum`
+- type: array of pairs, pair is string or [variable object](##variable-object) and int or [variable object](##variable-object)
+- return true if alpha or beta talker has enough items from the list
+- `item` is an item that should be checked;
+- `amount` is amount of items that should be found
+- may be used in pair with `_consume_item_sum`
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+check do you have 10 blankets of any type in the list
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": "blanket", "amount": 10 },
+        { "item": "blanket_fur", "amount": 10 },
+        { "item": "electric_blanket", "amount": 10 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
+```
+
+Check do you have enough blankets to cover required amount (for example, it return true if you have 5 `blanket` and 10 `electric_blanket` (each contribute 50% to the desired amount))
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": "blanket", "amount": 10 },
+        { "item": "blanket_fur", "amount": 15 },
+        { "item": "electric_blanket", "amount": 20 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
+```
+
+Variables are also supported
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST",
+    "condition": {
+      "u_has_items_sum": [
+        { "item": { "global_val": "foo" }, "amount": { "math": "20 + 2" } },
+        { "item": "blanket_fur", "amount": 15 },
+        { "item": "electric_blanket", "amount": 20 }
+      ]
+    },
+    "effect": [ { "u_message": "true" } ],
+    "false_effect": [ { "u_message": "false" } ]
+  },
 ```
 
 ### `u_has_bionics`, `npc_has_bionics`
@@ -905,6 +1009,41 @@ check do you wield something with `WHIP` flag
 check do you wield something with `LONG_SWORDS` weapon category
 ```json
 { "u_has_wielded_with_weapon_category": "LONG_SWORDS" }
+```
+
+### `u_has_wielded_with_skill`, `npc_has_wielded_with_skill`
+- type: string or [variable object](#variable-object)
+- return true if alpha or beta talker wield a gun or melee weapon with this skill
+- gun skills are delivered from `skill` field
+- melee weapon skill is delivered from the highest damage type item has
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+check do you wield a gun with `pistol` skill
+```json
+{ "u_has_wielded_with_skill": "pistol" } 
+```
+
+### `u_has_wielded_with_ammotype`, `npc_has_wielded_with_ammotype`
+- type: string or [variable object](#variable-object)
+- return true if alpha or beta talker wield an item that can have this ammo type
+- works with items that allow multiple ammo types
+
+#### Valid talkers:
+
+| Avatar | Character | NPC | Monster |  Furniture | Item |
+| ------ | --------- | --------- | ---- | ------- | --- | 
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ |
+
+#### Examples
+check do you wield a gun with `22` ammo type (.22 LR)
+```json
+{ "u_has_wielded_with_ammotype": "22" } 
 ```
 
 ### `u_can_see`, `npc_can_see`
@@ -1247,7 +1386,7 @@ Every event EOC passes context vars with each of their key value pairs that the 
 | activates_mininuke | Triggers when any character arms a mininuke | { "character", `character_id` } | character / NONE |
 | administers_mutagen |  | { "character", `character_id` },<br/> { "technique", `mutagen_technique` }, | character / NONE |
 | angers_amigara_horrors | Triggers when amigara horrors are spawned as part of a mine finale | NONE | avatar / NONE |
-| avatar_enters_omt |  | { "pos", `tripoint` },<br/> { "oter_id", `oter_id` }, | avatar / NONE |
+| avatar_enters_omt | Triggers when player crosses the overmap boundary, including when player spawns | { "pos", `tripoint` },<br/> { "oter_id", `oter_id` }, | avatar / NONE |
 | avatar_moves |  | { "mount", `mtype_id` },<br/> { "terrain", `ter_id` },<br/> { "movement_mode", `move_mode_id` },<br/> { "underwater", `bool` },<br/> { "z", `int` }, | avatar / NONE |
 | avatar_dies |  | NONE | avatar / NONE |
 | awakes_dark_wyrms | Triggers when `pedestal_wyrm` examine action is used | NONE | avatar / NONE |
@@ -1286,6 +1425,7 @@ Every event EOC passes context vars with each of their key value pairs that the 
 | character_falls_asleep | triggers in the moment character actually falls asleep; trigger includes cases where character sleep for a short time because of fatigue or drugn; duration of the sleep can be changed mid sleep because of hurt/noise/light/pain thresholds and another factors | { "character", `character_id` }, { "duration", `int_` (in seconds) } | character / NONE |
 | character_wields_item | | { "character", `character_id` },<br/> { "itype", `itype_id` }, | character / item to wield |
 | character_wears_item | | { "character", `character_id` },<br/> { "itype", `itype_id` }, | character / item to wear |
+| character_armor_destroyed | triggers when a worn armor is set to be destroyed from damage. The armor still exists but will be destroyed immediately after the EOCs finish running. | { "character", `character_id` },<br/> { "itype", `itype_id` }, | character / item to wear |
 | consumes_marloss_item | | { "character", `character_id` },<br/> { "itype", `itype_id` }, | character / NONE |
 | crosses_marloss_threshold | | { "character", `character_id` } | character / NONE |
 | crosses_mutation_threshold | | { "character", `character_id` },<br/> { "category", `mutation_category_id` }, | character / NONE |
@@ -3561,9 +3701,9 @@ See examples for more info
 
 | Syntax | Optionality | Value  | Info |
 | ------ | ----------- | ------ | ---- | 
-| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](#variable-object) | runs the effect |
-| "item"  | **mandatory** | string or [variable object](#variable-object) | id of item that should be removed |
-| "amount"  | **mandatory** | int or [variable object](#variable-object) | amount of items or charges that should be removed |
+| "u_unset_flag" / "npc_unset_flag" | **mandatory** | array of pairs, in pair is string or [variable object](##variable-object) | runs the effect |
+| "item"  | **mandatory** | string or [variable object](##variable-object) | id of item that should be removed |
+| "amount"  | **mandatory** | int or [variable object](##variable-object) | amount of items or charges that should be removed |
 
 ##### Valid talkers:
 
@@ -3588,7 +3728,7 @@ Consume 10 blankets. Effect allows to be consumed any item, so in this case play
     ]
   },
 ```
-Effect is order dependent, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
+Effect is order dependant, meaning first entry in json would be consumed first, then second and so on.  Having 5 `blanket`, 10 `blanket_fur` and 5 `electric_blanket` would result in 5 `blanket` and 5 `blanket_fur` being consumed
 
 
 Variable `amount` is also supported. In this case amount would be also treated as the weight;  In the next example, having 10 `blanket`, 10 `blanket_fur` and 10 `electric_blanket` would be treated as covering 100% of requirement, 10 `blanket` delivering 40%, 10 `blanket_fur` delivering another 40%, and 10 `electric_blanket` delivering the last 20%

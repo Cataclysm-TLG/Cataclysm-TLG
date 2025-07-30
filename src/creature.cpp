@@ -223,8 +223,8 @@ void Creature::setpos( const tripoint_bub_ms &p )
 static units::volume size_to_volume( creature_size size_class )
 {
     // TODO: size_to_volume and volume_to_size should be made into a single consistent function.
-    // TODO: This calculation is underestimating the size of a medium creature. They should be around 10500 ml.
-    // Large creatures should be bigger too. This would necessitate increasing vpart capacity and resizing
+    // TODO: Volume averages should be 8500, 23000, 75000, 136000, 244000
+    // TODO: This would necessitate increasing vpart capacity and resizing
     // almost every monster in the game.
     if( size_class == creature_size::tiny ) {
         return 15625_ml;
@@ -2382,8 +2382,11 @@ int Creature::get_eff_per() const
     return 0;
 }
 
-float Creature::get_dodge() const
+float Creature::get_dodge( bool critfail ) const
 {
+    if( critfail && rng( 0, 99 ) == 0 ) {
+        return 0.0f;
+    }
     return get_dodge_base() + get_dodge_bonus();
 }
 float Creature::get_hit() const
@@ -3572,22 +3575,23 @@ std::unique_ptr<talker> get_talker_for( Creature &me )
         return std::make_unique<talker_npc>( me.as_npc() );
     } else if( me.is_avatar() ) {
         return std::make_unique<talker_avatar>( me.as_avatar() );
-    } else {
-        debugmsg( "Invalid creature type %s.", me.get_name() );
-        return std::make_unique<talker>();
     }
+    debugmsg( "Invalid creature type %s.", me.get_name() );
+    return std::make_unique<talker>();
 }
 
-std::unique_ptr<talker> get_talker_for( const Creature &me )
+std::unique_ptr<const_talker> get_const_talker_for( const Creature &me )
 {
-    if( !me.is_monster() ) {
-        return std::make_unique<talker_character_const>( me.as_character() );
-    } else if( me.is_monster() ) {
+    if( me.is_monster() ) {
         return std::make_unique<talker_monster_const>( me.as_monster() );
-    } else {
-        debugmsg( "Invalid creature type %s.", me.get_name() );
-        return std::make_unique<talker>();
+    } else if( me.is_npc() ) {
+        return std::make_unique<talker_npc_const>( me.as_npc() );
+    } else if( me.is_avatar() ) {
+        return std::make_unique<talker_avatar_const>( me.as_avatar() );
     }
+
+    debugmsg( "Invalid creature type %s.", me.get_name() );
+    return std::make_unique<talker>();
 }
 
 std::unique_ptr<talker> get_talker_for( Creature *me )
@@ -3595,14 +3599,6 @@ std::unique_ptr<talker> get_talker_for( Creature *me )
     if( !me ) {
         debugmsg( "Null creature type." );
         return std::make_unique<talker>();
-    } else if( me->is_monster() ) {
-        return std::make_unique<talker_monster>( me->as_monster() );
-    } else if( me->is_npc() ) {
-        return std::make_unique<talker_npc>( me->as_npc() );
-    } else if( me->is_avatar() ) {
-        return std::make_unique<talker_avatar>( me->as_avatar() );
-    } else {
-        debugmsg( "Invalid creature type %s.", me->get_name() );
-        return std::make_unique<talker>();
     }
+    return get_talker_for( *me );
 }

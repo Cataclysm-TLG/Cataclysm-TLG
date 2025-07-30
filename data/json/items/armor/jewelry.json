@@ -22,7 +22,7 @@
       }
     ],
     "use_action": [ "MEDITATE" ],
-    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "bead_ear",
@@ -38,7 +38,7 @@
     "looks_like": "gold_ear",
     "color": "brown",
     "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
-    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "bead_necklace",
@@ -55,7 +55,7 @@
     "color": "brown",
     "use_action": [ "MEDITATE" ],
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
-    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT", "OVERSIZE" ]
   },
   {
     "id": "bracelet_friendship",
@@ -79,7 +79,7 @@
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ]
       }
     ],
-    "flags": [ "NO_WEAR_EFFECT", "PERSONAL", "UNRESTRICTED" ]
+    "flags": [ "NO_WEAR_EFFECT", "PERSONAL", "UNRESTRICTED", "OVERSIZE", "SOFT" ]
   },
   {
     "id": "bronze_medal",
@@ -95,7 +95,7 @@
     "looks_like": "copper_locket",
     "color": "brown",
     "armor": [ { "encumbrance": 0, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
-    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "OVERSIZE" ]
   },
   {
     "id": "cowrie_bracelet",
@@ -180,13 +180,14 @@
     "description": "A staple accessory for gentlemen.  Keeps your shirt collar in place and provides a more aesthetically pleasing arc to your necktie.",
     "weight": "10 g",
     "volume": "2 ml",
+    "longest_side": "80 mm",
     "price": "250 USD",
     "price_postapoc": "10 cent",
     "material": [ "silver" ],
     "symbol": "[",
     "looks_like": "tieclip",
     "color": "light_gray",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "flags": [ "FANCY", "SHIRT_COLLAR_ACCESSORY", "CANT_WEAR" ]
   },
   {
     "id": "copper_bracelet",
@@ -210,7 +211,7 @@
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ]
       }
     ],
-    "flags": [ "BELTED", "NO_WEAR_EFFECT", "OVERSIZE" ]
+    "flags": [ "BELTED", "NO_WEAR_EFFECT", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "copper_earring",
@@ -226,7 +227,7 @@
     "looks_like": "gold_earring",
     "color": "brown",
     "armor": [ { "encumbrance": 0, "coverage": 4, "covers": [ "head" ], "specifically_covers": [ "head_ear_l", "head_ear_r" ] } ],
-    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "SKINTIGHT", "UNRESTRICTED", "SOFT", "OVERSIZE" ]
   },
   {
     "id": "copper_hairpin",
@@ -255,7 +256,7 @@
     "looks_like": "silver_necklace",
     "color": "brown",
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
-    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT", "OVERSIZE" ]
   },
   {
     "id": "copper_ring",
@@ -303,7 +304,7 @@
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ]
       }
     ],
-    "flags": [ "FANCY", "BELTED", "NO_WEAR_EFFECT", "OVERSIZE" ]
+    "flags": [ "FANCY", "BELTED", "NO_WEAR_EFFECT", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "gold_dental_grill",
@@ -367,9 +368,10 @@
     "price": "100 USD",
     "price_postapoc": "25 cent",
     "material": [ "gold" ],
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
     "symbol": "[",
     "color": "yellow",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "service_medal",
@@ -383,7 +385,7 @@
     "material": [ { "type": "gold", "portion": 1 }, { "type": "bronze", "portion": 4 } ],
     "symbol": "[",
     "color": "brown",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "flags": [ "UNRESTRICTED", "SOFT", "NO_WEAR_EFFECT" ]
   },
   {
     "id": "gold_ring",
@@ -410,6 +412,34 @@
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
   },
   {
+    "id": "gold_cufflinks",
+    "type": "ARMOR",
+    "name": { "str": "gold cufflinks" },
+    "description": "A tasteful pair of gold buttons with toggles on the back.  These are meant to be worn in the buttonholes in the cuffs of a dress shirt.",
+    "weight": "20 g",
+    "volume": "2 ml",
+    "price": "600 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "gold" ],
+    "symbol": "[",
+    "color": "yellow",
+    "flags": [ "FANCY", "SHIRT_CUFF_ACCESSORY", "CANT_WEAR" ]
+  },
+  {
+    "id": "diamond_cufflinks",
+    "type": "ARMOR",
+    "name": { "str": "diamond cufflinks" },
+    "description": "Sparkling diamonds are set into gold buttons with toggles on the back.  These are meant to be worn in the buttonholes in the cuffs of a dress shirt.",
+    "weight": "20 g",
+    "volume": "2 ml",
+    "price": "1200 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "gold", "diamond" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "flags": [ "SUPER_FANCY", "SHIRT_CUFF_ACCESSORY", "CANT_WEAR" ]
+  },
+  {
     "id": "gold_watch",
     "type": "ARMOR",
     "name": { "str": "gold watch", "str_pl": "gold watches" },
@@ -430,7 +460,7 @@
     "id": "tieclip",
     "type": "ARMOR",
     "name": { "str": "tie clip" },
-    "description": "A fancy silver tie clip, a great match for a necktie.",
+    "description": "A shiny silver tie clip, a great match for a necktie.",
     "weight": "12 g",
     "volume": "5 ml",
     "price": "280 USD",
@@ -438,7 +468,7 @@
     "material": [ "silver" ],
     "symbol": "[",
     "color": "light_gray",
-    "flags": [ "FANCY", "NO_WEAR_EFFECT" ]
+    "flags": [ "FANCY", "NECKTIE_ACCESSORY" ]
   },
   {
     "id": "silver_watch",
@@ -1120,9 +1150,10 @@
     "price": "50 USD",
     "price_postapoc": "10 cent",
     "material": [ "silver" ],
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
     "symbol": "[",
     "color": "light_gray",
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "flags": [ "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "silver_ring",

@@ -226,7 +226,8 @@
     "type": "effect_type",
     "id": "pacified",
     "name": [ "Pacified" ],
-    "desc": [ "AI tag used for pacified critters.  This is a bug if you have it." ]
+    "desc": [ "AI tag used for pacified critters.  This is a bug if you have it." ],
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -613,7 +614,7 @@
     "desc": [ "You can't move!" ],
     "rating": "bad",
     "show_in_info": true,
-    "flags": [ "EFFECT_IMPEDING" ]
+    "flags": [ "EFFECT_IMPEDING", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -704,7 +705,7 @@
       { "limb_score": "night_vis", "modifier": 0.0 },
       { "limb_score": "reaction", "modifier": 0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND" ]
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -719,7 +720,7 @@
       { "limb_score": "night_vis", "modifier": 0.0 },
       { "limb_score": "reaction", "modifier": 0.2 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND" ]
+    "flags": [ "EFFECT_LIMB_SCORE_MOD", "BLIND", "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -2551,16 +2552,17 @@
     "name": [ "Shakes" ],
     "desc": [ "Your hands just won't stop shaking." ],
     "miss_messages": [ [ "You tremble.", 4 ] ],
-    "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -4 ] },
+    "base_mods": { "str_mod": [ -1 ], "dex_mod": [ -2 ] },
     "max_duration": 7200,
     "dur_add_perc": 30,
     "limb_score_mods": [
-      { "limb_score": "reaction", "modifier": 0.7 },
-      { "limb_score": "block", "modifier": 0.5 },
-      { "limb_score": "balance", "modifier": 0.75 },
-      { "limb_score": "footing", "modifier": 0.75 }
+      { "limb_score": "reaction", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.75 },
+      { "limb_score": "balance", "modifier": 0.8 },
+      { "limb_score": "footing", "modifier": 0.8 }
     ],
-    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ],
+    "enchantments": [ { "values": [ { "value": "DEXTERITY", "multiply": -0.25 } ] } ]
   },
   {
     "type": "effect_type",
@@ -3687,7 +3689,8 @@
     "id": "lying_down",
     "apply_message": "You lie down to go to sleep…",
     "rating": "neutral",
-    "max_duration": "50 m"
+    "max_duration": "50 m",
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -3695,12 +3698,14 @@
     "apply_message": "You fall asleep.",
     "remove_message": "You wake up.",
     "rating": "neutral",
-    "max_intensity": 24
+    "max_intensity": 24,
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
     "id": "narcosis",
-    "blood_analysis_description": "Narcosis"
+    "blood_analysis_description": "Narcosis",
+    "flags": [ "PREVENT_TRAINING" ]
   },
   {
     "type": "effect_type",
@@ -3971,6 +3976,29 @@
     "base_mods": { "h_mod_min": [ -1 ], "h_mod_chance": [ 1 ], "h_mod_chance_bot": [ 5 ], "h_mod_tick": [ 1800 ] },
     "max_intensity": 3,
     "scaling_mods": { "h_mod_min": [ -5 ] }
+  },
+  {
+    "type": "effect_type",
+    "id": "opioid_eff",
+    "//": "Gives Status warnings of danger levels only.  Significant chance that death occurs well before or after this scale suggests.  As Pkill is vitaminized move opioids to this scale for effects.",
+    "name": [
+      "Mild Opioid Euphoria",
+      "Moderate Opioid Euphoria",
+      "Significant Opioid Euphoria",
+      "Opioid Intoxication",
+      "Opioid Debilitation",
+      "Death"
+    ],
+    "desc": [
+      "Mild euphoric feelings from the opioids you've taken.",
+      "Moderate euphoria, likely sedative effects.",
+      "Significant euphoria, heavy sedative effects.",
+      "Some incapacitation, sedation, nausea, numbness.",
+      "Significant chance of death, incapable of many tasks, narcolepsy.",
+      "Terminal Dosage achieved."
+    ],
+    "blood_analysis_description": "Sample contains opioid based painkillers.",
+    "max_intensity": 6
   },
   {
     "type": "effect_type",

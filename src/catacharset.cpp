@@ -3,16 +3,25 @@
 #include <algorithm>
 #include <array>
 #include <cstdlib>
+#include <string>
+#include <stdexcept>
+#include <vector>
+#include <cstring>  // Moved up here since it's needed everywhere
 
 #include "cata_assert.h"
 #include "output.h"
 #include "wcwidth.h"
 
 #if defined(_WIN32)
-#if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU
-#include "platform_win.h"
-#endif
-#include "mmsystem.h"
+#   if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU
+#       include "platform_win.h"
+#   endif
+#   include "mmsystem.h"
+#else
+#   include <locale>
+#   if !defined(__ANDROID__)
+#       include <iconv.h>  // Only include iconv for non-Android platforms
+#   endif
 #endif
 
 //copied from SDL2_ttf code
@@ -323,6 +332,7 @@ std::string base64_decode( const std::string &str )
     return decoded_data;
 }
 
+#if defined(_WIN32)
 static void strip_trailing_nulls( std::wstring &str )
 {
     while( !str.empty() && str.back() == '\0' ) {
@@ -336,23 +346,112 @@ static void strip_trailing_nulls( std::string &str )
         str.pop_back();
     }
 }
+#endif
+#if defined(__ANDROID__)
+// Android-specific UTF-8 to UTF-32 conversion
+static std::wstring utf8_to_wstr_android( const std::string &utf8 )
+{
+    std::wstring wstr;
+    wstr.reserve( utf8.size() ); // worst case
 
-std::wstring utf8_to_wstr( const std::string &str )
+    const char *ptr = utf8.data();
+    int len = utf8.size();
+    while( len > 0 ) {
+        uint32_t ch = UTF8_getch( &ptr, &len );
+        if( ch == UNKNOWN_UNICODE ) {
+            continue;
+        }
+        if( ch <= 0xFFFF ) {
+            wstr.push_back( static_cast<wchar_t>( ch ) );
+        } else {
+            // Handle surrogate pairs for UTF-16
+            ch -= 0x10000;
+            wstr.push_back( static_cast<wchar_t>( 0xD800 + ( ch >> 10 ) ) );
+            wstr.push_back( static_cast<wchar_t>( 0xDC00 + ( ch & 0x3FF ) ) );
+        }
+    }
+    return wstr;
+}
+
+// Android-specific UTF-32 to UTF-8 conversion
+static std::string wstr_to_utf8_android( const std::wstring &wstr )
+{
+    std::string utf8;
+    utf8.reserve( wstr.size() * 4 ); // worst case
+
+    for( size_t i = 0; i < wstr.size(); ) {
+        uint32_t ch;
+        if( wstr[i] >= 0xD800 && wstr[i] <= 0xDBFF && i + 1 < wstr.size() &&
+            wstr[i + 1] >= 0xDC00 && wstr[i + 1] <= 0xDFFF ) {
+            // Surrogate pair
+            ch = 0x10000 + ( ( wstr[i] - 0xD800 ) << 10 ) + ( wstr[i + 1] - 0xDC00 );
+            i += 2;
+        } else {
+            ch = static_cast<uint32_t>( wstr[i] );
+            i += 1;
+        }
+
+        // Convert to UTF-8
+        if( ch <= 0x7F ) {
+            utf8.push_back( static_cast<char>( ch ) );
+        } else if( ch <= 0x7FF ) {
+            utf8.push_back( static_cast<char>( 0xC0 | ( ch >> 6 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
+        } else if( ch <= 0xFFFF ) {
+            utf8.push_back( static_cast<char>( 0xE0 | ( ch >> 12 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 6 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
+        } else {
+            utf8.push_back( static_cast<char>( 0xF0 | ( ch >> 18 ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 12 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ( ch >> 6 ) & 0x3F ) ) );
+            utf8.push_back( static_cast<char>( 0x80 | ( ch & 0x3F ) ) );
+        }
+    }
+    return utf8;
+}
+#endif
+
+std::wstring utf8_to_wstr( const std::string &utf8 )
 {
 #if defined(_WIN32)
-    int sz = MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, nullptr, 0 ) + 1;
-    std::wstring wstr( sz, '\0' );
-    MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, wstr.data(), sz );
+    int sz = MultiByteToWideChar( CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0 );
+    if( sz == 0 ) {
+        throw std::runtime_error( "MultiByteToWideChar failed" );
+    }
+
+    std::wstring wstr( sz, L'\0' );
+    MultiByteToWideChar( CP_UTF8, 0, utf8.c_str(), -1, &wstr[0], sz );
     strip_trailing_nulls( wstr );
     return wstr;
+
+#elif defined(__ANDROID__)
+    return utf8_to_wstr_android( utf8 );
+
 #else
-    std::size_t sz = std::mbstowcs( nullptr, str.c_str(), 0 );
-    cata_assert( sz != static_cast<size_t>( -1 ) );
-    std::wstring wstr( sz + 1, '\0' );
-    [[maybe_unused]] const size_t converted = std::mbstowcs( wstr.data(), str.c_str(), sz );
-    cata_assert( converted == sz );
-    strip_trailing_nulls( wstr );
-    return wstr;
+    iconv_t cd = iconv_open( "UTF-32LE", "UTF-8" );
+    if( cd == reinterpret_cast<iconv_t>( -1 ) ) {
+        throw std::runtime_error( "iconv_open failed in utf8_to_wstr" );
+    }
+
+    size_t in_size = utf8.size();
+    size_t out_size = ( in_size + 1 ) * sizeof( wchar_t );
+    std::vector<char> outbuf( out_size );
+
+    char *inbuf = const_cast<char *>( utf8.data() );
+    char *outptr = outbuf.data();
+    size_t in_bytes_left = in_size;
+    size_t out_bytes_left = out_size;
+
+    size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
+    iconv_close( cd );
+
+    if( res == static_cast<size_t>( -1 ) ) {
+        throw std::runtime_error( std::string( "iconv failed in utf8_to_wstr: " ) + strerror( errno ) );
+    }
+
+    return std::wstring( reinterpret_cast<wchar_t *>( outbuf.data() ),
+                         ( out_size - out_bytes_left ) / sizeof( wchar_t ) );
 #endif
 }
 
@@ -360,18 +459,41 @@ std::string wstr_to_utf8( const std::wstring &wstr )
 {
 #if defined(_WIN32)
     int sz = WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, nullptr, 0, nullptr, nullptr );
+    if( sz == 0 ) {
+        throw std::runtime_error( "WideCharToMultiByte failed" );
+    }
+
     std::string str( sz, '\0' );
-    WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, str.data(), sz, nullptr, nullptr );
+    WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), -1, &str[0], sz, nullptr, nullptr );
     strip_trailing_nulls( str );
     return str;
+
+#elif defined(__ANDROID__)
+    return wstr_to_utf8_android( wstr );
+
 #else
-    std::size_t sz = std::wcstombs( nullptr, wstr.c_str(), 0 );
-    cata_assert( sz != static_cast<size_t>( -1 ) );
-    std::string str( sz + 1, '\0' );
-    [[maybe_unused]] const size_t converted = std::wcstombs( str.data(), wstr.c_str(), sz );
-    cata_assert( converted == sz );
-    strip_trailing_nulls( str );
-    return str;
+    iconv_t cd = iconv_open( "UTF-8", "UTF-32LE" );
+    if( cd == reinterpret_cast<iconv_t>( -1 ) ) {
+        throw std::runtime_error( "iconv_open failed in wstr_to_utf8" );
+    }
+
+    size_t in_size = wstr.size() * sizeof( wchar_t );
+    size_t out_size = ( in_size + 1 ) * 2;
+    std::vector<char> outbuf( out_size );
+
+    char *inbuf = reinterpret_cast<char *>( const_cast<wchar_t *>( wstr.data() ) );
+    char *outptr = outbuf.data();
+    size_t in_bytes_left = in_size;
+    size_t out_bytes_left = out_size;
+
+    size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
+    iconv_close( cd );
+
+    if( res == static_cast<size_t>( -1 ) ) {
+        throw std::runtime_error( std::string( "iconv failed in wstr_to_utf8: " ) + strerror( errno ) );
+    }
+
+    return std::string( outbuf.data(), out_size - out_bytes_left );
 #endif
 }
 

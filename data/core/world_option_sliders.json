@@ -60,85 +60,64 @@
       {
         "level": 0,
         "name": "Cakewalk?",
-        "description": "Monsters are much easier to deal with, and plenty of items can be found.",
+        "description": "Monsters are much easier to deal with.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 90 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 75 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 0.8 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 8 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 1.5 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 8 }
         ]
       },
       {
         "level": 1,
         "name": "Be really nice to me",
-        "description": "Monsters are less tough; move, evolve and spawn slower; and items are a bit easier to come by.",
+        "description": "Monsters evolve and spawn slower.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 95 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 85 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 0.9 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 6 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 1.25 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 6 }
         ]
       },
       {
         "level": 2,
         "name": "Be nice to me",
-        "description": "Monsters are a bit slower, and evolve at a slower rate.",
+        "description": "Monsters evolve at a slower rate.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 95 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 90 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 5 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 1 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 5 }
         ]
       },
       {
         "level": 3,
         "name": "Cataclysm",
-        "description": "The default monster hunting and item collecting experience.",
+        "description": "The default monster hunting experience.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 100 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 100 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 1 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 }
         ]
       },
       {
         "level": 4,
         "name": "Hurt me",
-        "description": "Monsters are a bit tougher and faster, and spawn 50% more.",
+        "description": "Monsters spawn 50% more.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 105 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 120 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1.5 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 1 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 }
         ]
       },
       {
         "level": 5,
         "name": "Punish me",
-        "description": "Monsters are significantly tougher and faster, spawn more, and evolve faster.  Items are a bit rarer too.",
+        "description": "Monsters spawn more and evolve faster.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 110 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 150 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 2 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3.5 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 0.8 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3.5 }
         ]
       },
       {
         "level": 6,
         "name": "Punish me more!",
-        "description": "Monsters are much tougher, extremely fast, and spawn 3x more.  Items are half as likely to spawn.",
+        "description": "Monsters evolve quickly and spawn 3x more.",
         "options": [
-          { "option": "MONSTER_SPEED", "type": "int", "val": 120 },
-          { "option": "MONSTER_RESILIENCE", "type": "int", "val": 200 },
           { "option": "SPAWN_DENSITY", "type": "float", "val": 3 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3 },
-          { "option": "ITEM_SPAWNRATE", "type": "float", "val": 0.5 }
+          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3 }
         ]
       }
     ]

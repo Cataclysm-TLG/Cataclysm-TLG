@@ -982,7 +982,8 @@
       [ "kimono", 2 ],
       [ "mouthpiece", 15 ],
       [ "nunchaku", 4 ],
-      [ "bokken", 4 ],
+      [ "bokken", 3 ],
+      { "group": "bokken_with_saya", "prob": 1 },
       [ "rope_dart", 2 ],
       [ "jian", 1 ],
       [ "geta", 1 ],
@@ -3829,6 +3830,9 @@
       { "item": "tie_necktie", "prob": 80 },
       { "item": "tieclip", "prob": 20 },
       { "item": "ring_signet", "prob": 1 },
+      { "item": "gold_cufflinks", "prob": 2 },
+      { "item": "collarpin", "prob": 2 },
+      { "item": "diamond_cufflinks", "prob": 1 },
       { "item": "tie_skinny", "prob": 20 }
     ]
   },

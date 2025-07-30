@@ -1662,9 +1662,7 @@ void inventory_column::draw( const catacurses::window &win, const point &p,
                                      &entry );
 
         if( selected && visible_cells() > 1 ) {
-            for( int hx = x1; hx < hx_max; ++hx ) {
-                mvwputch( win, point( hx, yy ), h_white, ' ' );
-            }
+            mvwhline( win, point( x1, yy ), h_white, ' ', hx_max - x1 );
         }
 
         cata_assert( entry.denial.has_value() );
@@ -2198,9 +2196,8 @@ void inventory_selector::add_nearby_items( int radius )
                 add_vehicle_items( pos );
                 continue;
             }
-            int dist = ( radius <= 1 ) ?
-                       square_dist( center, pos ) :
-                       static_cast<int>( trig_dist_z_adjust( center, pos ) );
+            // Round up here to guard against bad range comparisons. clear_path() is stricter so it works out fine.
+            int dist = static_cast<int>( std::ceil( trig_dist_z_adjust( center, pos ) ) );
             if( !here.clear_path( center, pos, dist, 1, 100 ) ) {
                 continue;
             }
@@ -2542,7 +2539,7 @@ void inventory_selector::draw_header( const catacurses::window &w ) const
                     hint );
 
     int const bottom = border + get_header_height();
-    mvwhline( w, point( border, bottom ), LINE_OXOX, getmaxx( w ) - 2 * border );
+    mvwhline( w, point( border, bottom ), BORDER_COLOR, LINE_OXOX, getmaxx( w ) - 2 * border );
 
     if( display_stats ) {
         size_t y = border;
@@ -2812,8 +2809,10 @@ void inventory_selector::draw_frame( const catacurses::window &w ) const
     draw_border( w );
 
     const int y = border + get_header_height();
+    wattron( w, BORDER_COLOR );
     mvwhline( w, point( 0, y ), LINE_XXXO, 1 );
     mvwhline( w, point( getmaxx( w ) - border, y ), LINE_XOXX, 1 );
+    wattroff( w, BORDER_COLOR );
 }
 
 std::pair<std::string, nc_color> inventory_selector::get_footer( navigation_mode m ) const
@@ -2856,10 +2855,12 @@ void inventory_selector::draw_footer( const catacurses::window &w ) const
             const int y = getmaxy( w ) - border;
 
             mvwprintz( w, point( x1, y ), footer.second, footer.first );
-            mvwputch( w, point( x1 - 1, y ), c_light_gray, ' ' );
-            mvwputch( w, point( x2 + 1, y ), c_light_gray, ' ' );
-            mvwputch( w, point( x1 - 2, y ), c_light_gray, LINE_XOXX );
-            mvwputch( w, point( x2 + 2, y ), c_light_gray, LINE_XXXO );
+            wattron( w, c_light_gray );
+            mvwaddch( w, point( x1 - 1, y ), ' ' );
+            mvwaddch( w, point( x2 + 1, y ), ' ' );
+            mvwaddch( w, point( x1 - 2, y ), LINE_XOXX );
+            mvwaddch( w, point( x2 + 2, y ), LINE_XXXO );
+            wattroff( w, c_light_gray );
         }
     }
 }
@@ -3623,7 +3624,7 @@ void inventory_multiselector::set_chosen_count( inventory_entry &entry, size_t c
     } else {
         size_t size_before = to_use.size();
         entry.chosen_count = std::min( {count, max_chosen_count, entry.get_available_count() } );
-        if( it->count_by_charges() ) {
+        if( it->count_by_charges() && it->type->stack_max != 1 ) {
             auto iter = find_if( to_use.begin(),
             to_use.begin() + size_before, [&it]( const drop_location & drop ) {
                 return drop.first == it;
@@ -4014,7 +4015,8 @@ void inventory_haul_selector::apply_selection( std::vector<item_location> &items
     }
     for( std::pair<inventory_entry *, int> count : counts ) {
         // count_by_charges items will be moved all at once anyway, this is just to make it look a bit better
-        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() ) {
+        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() &&
+            count.first->locations[0]->type->stack_max != 1 ) {
             set_chosen_count( *count.first, inventory_multiselector::max_chosen_count );
         } else {
             set_chosen_count( *count.first, count.second );

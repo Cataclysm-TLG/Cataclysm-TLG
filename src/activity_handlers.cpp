@@ -1862,12 +1862,10 @@ void activity_handlers::pickaxe_finish( player_activity *act, Character *you )
                                 _( "<npcname> finishes digging." ) );
     here.destroy( pos, true );
     if( !act->targets.empty() ) {
-        item &it = *act->targets.front();
-        if( it.is_null() || it.charges <= 0 ) {
-            debugmsg( "pickaxe expired during mining" );
-            return;
+        item_location it = act->targets.front();
+        if( it ) {
+            you->consume_charges( *it, it->ammo_required() );
         }
-        you->consume_charges( it, it.ammo_required() );
     } else {
         debugmsg( "pickaxe activity targets empty" );
     }
@@ -2914,6 +2912,7 @@ void activity_handlers::travel_do_turn( player_activity *act, Character *you )
         if( you->omt_path.empty() ) {
             you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
             act->set_to_null();
+            ui::omap::force_quit();
             return;
         }
         const tripoint_abs_omt next_omt = you->omt_path.back();
@@ -2949,6 +2948,7 @@ void activity_handlers::travel_do_turn( player_activity *act, Character *you )
         }
     } else {
         you->add_msg_if_player( m_info, _( "You have reached your destination." ) );
+        ui::omap::force_quit();
     }
     act->set_to_null();
 }

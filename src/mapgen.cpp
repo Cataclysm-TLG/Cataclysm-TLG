@@ -121,9 +121,8 @@ static const itype_id itype_diesel( "diesel" );
 static const itype_id itype_gasoline( "gasoline" );
 static const itype_id itype_jp8( "jp8" );
 
-static const mongroup_id GROUP_BREATHER( "GROUP_BREATHER" );
-static const mongroup_id GROUP_BREATHER_HUB( "GROUP_BREATHER_HUB" );
-static const mongroup_id GROUP_FUNGI_FUNGALOID( "GROUP_FUNGI_FUNGALOID" );
+static const mongroup_id GROUP_FUNGI_FLOWER( "GROUP_FUNGI_FLOWER" );
+static const mongroup_id GROUP_FUNGI_ZOMBIE( "GROUP_FUNGI_ZOMBIE" );
 static const mongroup_id GROUP_LAB( "GROUP_LAB" );
 static const mongroup_id GROUP_LAB_CYBORG( "GROUP_LAB_CYBORG" );
 static const mongroup_id GROUP_LAB_SECURITY( "GROUP_LAB_SECURITY" );
@@ -2908,9 +2907,8 @@ class jmapgen_spawn_item : public jmapgen_piece
 
             const int c = chance.get();
 
-            // 100% chance = exactly 1 item, otherwise scale by item spawn rate.
-            const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-            int spawn_count = ( c == 100 ) ? 1 : roll_remainder( c * spawn_rate / 100.0f );
+            // 100% chance = exactly 1 item.
+            int spawn_count = ( c == 100 ) ? 1 : roll_remainder( c / 100.0f );
             for( int i = 0; i < spawn_count; i++ ) {
                 dat.m.spawn_item( tripoint_bub_ms( x.get(), y.get(), dat.zlevel() + z.get() ), chosen_id,
                                   amount.get(),
@@ -3429,10 +3427,8 @@ class jmapgen_sealed_item : public jmapgen_piece_with_has_vehicle_collision
                     const std::string &context ) const override {
             const int c = chance.get();
 
-            // 100% chance = always generate, otherwise scale by item spawn rate.
-            // (except is capped at 1)
-            const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-            if( !x_in_y( ( c == 100 ) ? 1 : c * spawn_rate / 100.0f, 1 ) ) {
+            // 100% chance = always generate.
+            if( !x_in_y( ( c == 100 ) ? 1 : c / 100.0f, 1 ) ) {
                 return;
             }
 
@@ -4065,16 +4061,10 @@ void jmapgen_objects::load_objects<jmapgen_loot>(
 
         auto loot = make_shared_fast<jmapgen_loot>( jsi );
         // spawn rates < 1 are handled in item_group
-        const float rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f );
 
-        if( where.repeat.valmax != 1 ) {
-            // if loot can repeat scale according to rate
-            where.repeat.val = std::max( static_cast<int>( where.repeat.val * rate ), 1 );
-            where.repeat.valmax = std::max( static_cast<int>( where.repeat.valmax * rate ), 1 );
-
-        } else if( loot->chance != 100 ) {
+        if( loot->chance != 100 ) {
             // otherwise except where chance is 100% scale probability
-            loot->chance = std::max( std::min( static_cast<int>( loot->chance * rate ), 100 ), 1 );
+            loot->chance = std::max( std::min( static_cast<int>( loot->chance ), 100 ), 1 );
         }
 
         add( where, loot );
@@ -6132,7 +6122,6 @@ void map::draw_lab( mapgendata &dat )
                         break;
                     }
                     std::vector<artifact_natural_property> valid_props = {
-                        ARTPROP_BREATHING,
                         ARTPROP_CRACKLING,
                         ARTPROP_WARM,
                         ARTPROP_SCALED,
@@ -6174,7 +6163,7 @@ void map::draw_lab( mapgendata &dat )
                     }
                     tripoint_bub_ms center( rng( 6, SEEX * 2 - 7 ), rng( 6, SEEY * 2 - 7 ), abs_sub.z() );
 
-                    // Make a portal surrounded by more dense fungal stuff and a fungaloid.
+                    // Make a portal surrounded by more dense fungal stuff.
                     draw_rough_circle( [this]( const point & p ) {
                         if( has_flag_ter( ter_furn_flag::TFLAG_GOES_DOWN, p ) ||
                             has_flag_ter( ter_furn_flag::TFLAG_GOES_UP, p ) ||
@@ -6195,7 +6184,7 @@ void map::draw_lab( mapgendata &dat )
                     ter_set( center.xy(), ter_t_fungus_floor_in );
                     furn_set( center.xy(), furn_str_id::NULL_ID() );
                     trap_set( center, tr_portal );
-                    place_spawns( GROUP_FUNGI_FUNGALOID, 1, center.xy() + point( -2, -2 ),
+                    place_spawns( GROUP_FUNGI_FLOWER, 1, center.xy() + point( -2, -2 ),
                                   center.xy() + point( 2, 2 ), center.z(), 1, true );
 
                     break;
@@ -6732,8 +6721,7 @@ std::vector<item *> map::place_items(
     }
 
     // spawn rates < 1 are handled in item_group
-    const float spawn_rate = std::max( get_option<float>( "ITEM_SPAWNRATE" ), 1.0f );
-    const int spawn_count = roll_remainder( chance * spawn_rate / 100.0f );
+    const int spawn_count = roll_remainder( chance / 100.0f );
     for( int i = 0; i < spawn_count; i++ ) {
         // Might contain one item or several that belong together like guns & their ammo
         int tries = 0;
@@ -7134,7 +7122,7 @@ void map::rotate( int turns )
         // Translate bubble -> global -> current map.
         const point_bub_ms old( bub_from_abs( get_map().getglobal( np.pos_bub() ).xy() ) );
 
-        const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
+        const point_bub_ms new_pos( old.raw().rotate( turns, {SEEX * 2, SEEY * 2} ) );
         np.spawn_at_precise( getglobal( tripoint_bub_ms( new_pos, sq.z() ) ) );
     }
 
@@ -7223,9 +7211,9 @@ void map::rotate( int turns )
             if( queued_point_sm.y() % 2 != 0 ) {
                 old.y() += SEEY;
             }
-            const point_bub_ms new_pos( old.rotate( turns, {SEEX * 2, SEEY * 2} ) );
-            queued_points[queued_point.first] = getglobal( tripoint_bub_ms( new_pos,
-                                                queued_point.second.z() ) );
+            const point_bub_ms new_pos( old.raw().rotate( turns, {SEEX * 2, SEEY * 2} ) );
+            queued_points[queued_point.first] = tripoint_abs_ms( getglobal( tripoint_bub_ms( new_pos,
+                                                queued_point.second.z() ) ) );
         }
     }
 }
@@ -7759,19 +7747,6 @@ void map::create_anomaly( const tripoint_bub_ms &cp, artifact_natural_property p
                 for( int j = c.y() - 5; j <= c.y() + 5; j++ ) {
                     if( furn( point_bub_ms( i, j ) ) == furn_f_rubble && one_in( 3 ) ) {
                         mtrap_set( this, tripoint_bub_ms( i, j, z ), tr_shadow );
-                    }
-                }
-            }
-            break;
-
-        case ARTPROP_BREATHING:
-            for( int i = c.x() - 1; i <= c.x() + 1; i++ ) {
-                for( int j = c.y() - 1; j <= c.y() + 1; j++ ) {
-                    if( i == c.x() && j == c.y() ) {
-                        place_spawns( GROUP_BREATHER_HUB, 1, point_bub_ms( i, j ), point_bub_ms( i, j ), z, 1,
-                                      true );
-                    } else {
-                        place_spawns( GROUP_BREATHER, 1, point_bub_ms( i, j ), point_bub_ms( i, j ), z, 1, true );
                     }
                 }
             }

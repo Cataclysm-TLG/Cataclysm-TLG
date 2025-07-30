@@ -240,6 +240,9 @@ static const efftype_id effect_weak_antibiotic( "weak_antibiotic" );
 static const efftype_id effect_weak_antibiotic_visible( "weak_antibiotic_visible" );
 static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_weed_high( "weed_high" );
+static const efftype_id effect_zapped( "zapped" );
+
+static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 
 static const furn_str_id furn_f_translocator_buoy( "f_translocator_buoy" );
 
@@ -305,7 +308,9 @@ static const itype_id itype_weather_reader( "weather_reader" );
 
 static const json_character_flag json_flag_ENHANCED_VISION( "ENHANCED_VISION" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
+static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
+static const json_character_flag json_flag_SUN_GLASSES( "SUN_GLASSES" );
 
 static const mongroup_id GROUP_FISH( "GROUP_FISH" );
 
@@ -349,6 +354,7 @@ static const skill_id skill_mechanics( "mechanics" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
 
+static const species_id species_CYBORG( "CYBORG" );
 static const species_id species_FUNGUS( "FUNGUS" );
 static const species_id species_HALLUCINATION( "HALLUCINATION" );
 static const species_id species_INSECT( "INSECT" );
@@ -1493,7 +1499,7 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint & )
         p->set_mutation( trait_THRESH_MYCUS );
         g->invalidate_main_ui_adaptor();
         //~ The Mycus does not use the term (or encourage the concept of) "you".  The PC is a local/native organism, but is now the Mycus.
-        //~ It still understands the concept, but uninitelligent fungaloids and mind-bent symbiotes should not need it.
+        //~ It still understands the concept, but uninitelligent fungal zombies and mind-bent symbiotes should not need it.
         //~ We are the Mycus.
         popup( _( "we welcome into us.  we have endured long in this forbidding world." ) );
         p->add_msg_if_player( " " );
@@ -1936,10 +1942,13 @@ std::optional<int> iuse::fish_trap_tick( Character *p, item *it, const tripoint 
     }
     return 0;
 }
-
 std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & )
 {
     if( !it->ammo_sufficient( p ) ) {
+        return std::nullopt;
+    }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
     // If anyone other than the player wants to use one of these,
@@ -1950,34 +1959,33 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
     }
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
 
-    p->mod_moves( -to_moves<int>( 2_seconds ) );
-
     map &here = get_map();
-    // Reduce the strength of fire (if any) in the target tile.
+    // Also spray creatures in that tile.
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && ( !critter->has_effect( effect_onfire ) &&
+            here.get_field( dest, field_type_id( "fd_fire" ) ) == nullptr ) &&
+        ( !critter->is_avatar() && !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "Since they're not on fire, this will probably make %s angry.  Continue?" ),
+                       critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
     here.add_field( dest, fd_extinguisher, 3, 10_turns );
-
-    // Also spray monsters in that tile.
-    if( monster *const mon_ptr = get_creature_tracker().creature_at<monster>( dest, true ) ) {
-        monster &critter = *mon_ptr;
-        critter.mod_moves( -to_moves<int>( 2_seconds ) );
+    if( critter && !critter->is_avatar() ) {
+        const float hit_roll = p->hit_roll();
         bool blind = false;
-        if( one_in( 2 ) && critter.has_flag( mon_flag_SEES ) ) {
+        if( ( !critter->is_monster() || critter->has_flag( mon_flag_SEES ) ) &&
+            !critter->dodge_check( hit_roll ) ) {
             blind = true;
-            critter.add_effect( effect_blind, rng( 1_minutes, 2_minutes ) );
+            critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
         }
         viewer &player_view = get_player_view();
-        if( player_view.sees( critter ) ) {
-            p->add_msg_if_player( _( "The %s is sprayed!" ), critter.name() );
+        if( player_view.sees( *critter ) ) {
             if( blind ) {
-                p->add_msg_if_player( _( "The %s looks blinded." ), critter.name() );
+                p->add_msg_if_player( _( "%s is blinded by the spray." ), critter->disp_name() );
             }
-        }
-        if( critter.made_of( phase_id::LIQUID ) ) {
-            if( player_view.sees( critter ) ) {
-                p->add_msg_if_player( _( "The %s is frozen!" ), critter.name() );
-            }
-            critter.apply_damage( p, bodypart_id( "torso" ), rng( 20, 60 ) );
-            critter.set_speed_base( critter.get_speed_base() / 2 );
         }
     }
 
@@ -1989,6 +1997,7 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint & 
         here.mod_field_intensity( dest, fd_fire, std::min( 0 - rng( 0, 1 ) + rng( 0, 1 ), 0 ) );
     }
 
+    p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
 }
 
@@ -2115,10 +2124,10 @@ class exosuit_interact
                 current_ui->mark_resize();
                 current_ui->on_redraw( [this]( const ui_adaptor & ) {
                     draw_border( w_border, c_white, suit->tname(), c_light_green );
-                    for( int i = 1; i < height - 1; i++ ) {
-                        mvwputch( w_border, point( width_menu + 1, i ), c_white, LINE_XOXO );
-                    }
-                    mvwputch( w_border, point( width_menu + 1, height - 1 ), c_white, LINE_XXOX );
+                    wattron( w_border, c_white );
+                    mvwvline( w_border, point( width_menu + 1, 1 ), LINE_XOXO, height - 2 );
+                    mvwaddch( w_border, point( width_menu + 1, height - 1 ), LINE_XXOX );
+                    wattroff( w_border, c_white );
                     wnoutrefresh( w_border );
                     draw_menu();
                     draw_iteminfo();
@@ -2319,42 +2328,29 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint & )
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
+    map &here = get_map();
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
-    if( !dest_ ) {
+    if( !dest_ || dest_ == p->pos() ) {
         return std::nullopt;
     }
     tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
-
-    p->mod_moves( -to_moves<int>( 2_seconds ) );
-
-    map &here = get_map();
-    here.add_field( dest, fd_tear_gas, 2, 3_turns );
-
-    // Also spray monsters in that tile.
-    if( monster *const mon_ptr = get_creature_tracker().creature_at<monster>( dest, true ) ) {
-        monster &critter = *mon_ptr;
-        critter.mod_moves( -to_moves<int>( 2_seconds ) );
-        bool blind = false;
-        if( one_in( 2 ) && critter.has_flag( mon_flag_SEES ) ) {
-            blind = true;
-            critter.add_effect( effect_blind, rng( 1_minutes, 2_minutes ) );
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && !critter->is_avatar() &&
+        ( !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "This will probably make %s angry.  Continue?" ), critter->disp_name() ) ) {
+            return std::nullopt;
         }
-        // even if it's not blinded getting maced hurts a lot and stuns it
-        if( !critter.has_flag( mon_flag_NO_BREATHE ) ) {
-            critter.mod_moves( -to_moves<int>( 3_seconds ) );
-            p->add_msg_if_player( _( "The %s recoils in pain!" ), critter.name() );
-        }
-        viewer &player_view = get_player_view();
-        if( player_view.sees( critter ) ) {
-            p->add_msg_if_player( _( "The %s is sprayed!" ), critter.name() );
-            if( blind ) {
-                p->add_msg_if_player( _( "The %s looks blinded." ), critter.name() );
-            }
-        }
+        critter->as_npc()->on_attacked( *p );
     }
-
+    here.add_field( dest, fd_tear_gas, 2, 3_turns );
+    p->mod_moves( -to_moves<int>( 1_seconds ) );
     return 1;
 }
 
@@ -2401,13 +2397,8 @@ std::optional<int> iuse::pack_cbm( Character *p, item *it, const tripoint & )
         return 0;
     }
 
-    const int success = round( p->get_skill_level( skill_firstaid ) ) - rng( 0, 6 );
-    if( success > 0 ) {
-        p->add_msg_if_player( m_good, _( "You carefully prepare the CBM for sterilization." ) );
-        bionic.get_item()->unset_flag( flag_NO_PACKED );
-    } else {
-        p->add_msg_if_player( m_bad, _( "You fail to properly prepare the CBM." ) );
-    }
+    p->add_msg_if_player( m_good, _( "You carefully prepare the CBM for sterilization." ) );
+    bionic.get_item()->unset_flag( flag_NO_PACKED );
 
     std::vector<item_comp> comps;
     comps.emplace_back( it->typeId(), 1 );
@@ -2814,7 +2805,10 @@ std::optional<int> iuse::crowbar( Character *p, item *it, const tripoint &pos )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     map &here = get_map();
     const std::function<bool( const tripoint & )> f =
     [&here, p]( const tripoint & pnt ) {
@@ -3671,13 +3665,16 @@ std::optional<int> iuse::portal( Character *p, item *it, const tripoint & )
     get_map().trap_set( t, tr_portal );
     return 1;
 }
-
+// Note: Function duplicated in Character::activate_bionic(), make sure they match!
 std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
 {
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     tripoint pnt = pos;
     if( pos == p->pos() ) {
         const std::optional<tripoint> pnt_ = choose_adjacent( _( "Shock where?" ) );
@@ -3704,11 +3701,11 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         !p->query_yn( _( "Do you really want to shock %s?" ), target->disp_name() ) ) {
         return std::nullopt;
     }
-
+    int target_size = target->enum_size();
     const float hit_roll = p->hit_roll();
-    p->mod_moves( -to_moves<int>( 1_seconds ) );
+    p->mod_moves( -100 );
 
-    const bool tazer_was_dodged = target->dodge_check( p->hit_roll() );
+    const bool tazer_was_dodged = target->dodge_check( hit_roll );
     const bool tazer_was_armored = hit_roll < target->get_armor_type( STATIC(
                                        damage_type_id( "bash" ) ), bodypart_id( "torso" ) );
     if( tazer_was_dodged ) {
@@ -3719,18 +3716,41 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         p->add_msg_player_or_npc( _( "You attempt to shock %s, but are blocked by armor." ),
                                   _( "<npcname> attempts to shock %s, but is blocked by armor." ),
                                   target->disp_name() );
+    } else if( target->is_elec_immune() ) {
+        p->add_msg_player_or_npc( _( "You attempt to shock %s, but nothing happens." ),
+                                  _( "<npcname> attempts to shock %s, but nothing happens." ),
+                                  target->disp_name() );
     } else {
         // Stun duration scales harshly inversely with big creatures
-        if( target->get_size() == creature_size::tiny ) {
+        if( target_size == 1 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.5, 2.5 ) );
-        } else if( target->get_size() == creature_size::small ) {
+            target->add_effect( effect_zapped, 2_seconds );
+        } else if( target_size == 2 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.25, 2.0 ) );
-        } else if( target->get_size() == creature_size::large ) {
+            target->add_effect( effect_zapped, 2_seconds );
+        } else if( target_size == 4 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.95, 1.15 ) );
-        } else if( target->get_size() == creature_size::huge ) {
+            target->add_effect( effect_zapped, 1_seconds );
+        } else if( target_size == 5 ) {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.5, 0.8 ) );
         } else {
             target->mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 1.1, 1.5 ) );
+        }
+        if( target_size < 5 && target->has_effect_with_flag( json_flag_GRAB_FILTER ) &&
+            one_in( std::max( 1, target_size - 2 ) ) ) {
+            for( const effect &eff : target->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
+                const efftype_id effid = eff.get_id();
+                target->remove_effect( effid );
+            }
+            // Remove orphan grabs by running try_remove_grab() with attacking set to true.
+            p->try_remove_grab( true );
+            p->add_msg_player_or_npc( m_good,
+                                      _( "You are released from %s grasp!" ),
+                                      _( "<npcname> is released from %s grasp!" ),
+                                      target->disp_name( true ) );
+        }
+        if( target_size < 4 && one_in( target_size ) ) {
+            target->add_effect( effect_downed, 1_turns );
         }
         p->add_msg_player_or_npc( m_good,
                                   _( "You shock %s!" ),
@@ -3742,17 +3762,13 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint &pos )
         foe->on_attacked( *p );
     }
 
-    return 1;
+    return 20;
 }
 
 std::optional<int> iuse::tazer2( Character *p, item *it, const tripoint &pos )
 {
-    if( it->ammo_remaining( p, true ) >= 2 ) {
-        // Instead of having a ctrl+c+v of the function above, spawn a fake tazer and use it
-        // Ugly, but less so than copied blocks
-        item fake( "tazer", calendar::turn_zero );
-        fake.charges = 2;
-        return tazer( p, &fake, pos );
+    if( it->ammo_remaining( p, true ) >= 20 ) {
+        return tazer( p, it, pos );
     } else {
         p->add_msg_if_player( m_info, _( "Insufficient power" ) );
     }
@@ -3872,12 +3888,35 @@ static std::string get_music_description()
 }
 
 void iuse::play_music( Character *p, const tripoint &source, const int volume,
-                       const int max_morale )
+                       const int max_morale, bool play_sounds )
 {
-    // TODO: what about other "player", e.g. when a NPC is listening or when the PC is listening,
-    // the other characters around should be able to profit as well.
-    const bool do_effects = p && p->can_hear( source, volume ) && !p->in_sleep_state();
     std::string sound = "music";
+
+    auto lambda_should_do_effects = [&source, &volume]( Character * p ) {
+        return p && p->can_hear( source, volume ) && !p->in_sleep_state();
+    };
+
+    auto lambda_add_music_effects = [&max_morale, &volume]( Character & guy ) {
+        guy.add_effect( effect_music, 1_turns );
+        guy.add_morale( morale_music, 1, max_morale, 5_minutes, 2_minutes, true );
+        // mp3 player reduces hearing
+        if( volume == 0 ) {
+            guy.add_effect( effect_earphones, 1_turns );
+        }
+    };
+
+    // check NPCs that can hear the source of the music
+    for( npc &guy : g->all_npcs() ) {
+        if( guy.is_active() && lambda_should_do_effects( &guy ) ) {
+            lambda_add_music_effects( guy );
+        }
+    }
+
+    // player is not a NPC so they need to check separately
+    Character &player_character = get_player_character();
+    if( lambda_should_do_effects( &player_character ) ) {
+        lambda_add_music_effects( player_character );
+    }
 
     if( calendar::once_every( time_duration::from_minutes(
                                   get_option<int>( "DESCRIBE_MUSIC_FREQUENCY" ) ) ) ) {
@@ -3886,23 +3925,14 @@ void iuse::play_music( Character *p, const tripoint &source, const int volume,
         if( !music.empty() ) {
             sound = music;
             // descriptions aren't printed for sounds at our position
-            if( do_effects && p->pos() == source ) {
+            if( lambda_should_do_effects( p ) && p->pos() == source ) {
                 p->add_msg_if_player( _( "You listen to %s" ), music );
             }
         }
     }
 
-    if( volume != 0 ) {
+    if( volume != 0 && play_sounds ) {
         sounds::ambient_sound( source, volume, sounds::sound_t::music, sound );
-    }
-
-    if( do_effects ) {
-        p->add_effect( effect_music, 1_turns );
-        p->add_morale( morale_music, 1, max_morale, 5_minutes, 2_minutes, true );
-        // mp3 player reduces hearing
-        if( volume == 0 ) {
-            p->add_effect( effect_earphones, 1_turns );
-        }
     }
 }
 
@@ -4601,16 +4631,18 @@ std::optional<int> iuse::lumber( Character *p, item *it, const tripoint & )
         return std::nullopt;
     }
     map &here = get_map();
-    // Check if player is standing on any lumber
-    for( item &i : here.i_at( p->pos_bub() ) ) {
-        if( i.typeId() == itype_log ) {
-            here.i_rem( p->pos_bub(), &i );
-            cut_log_into_planks( *p );
-            return 1;
+    // Check if player is standing on or adjacent to any lumber
+    for( tripoint_bub_ms lumberpos : here.points_in_radius( p->pos_bub(), 1 ) ) {
+        for( item &i : here.i_at( lumberpos ) ) {
+            if( i.typeId() == itype_log ) {
+                here.i_rem( lumberpos, &i );
+                cut_log_into_planks( *p );
+                return 1;
+            }
         }
     }
 
-    // If the player is not standing on a log, check inventory
+    // If there are no logs around, check our inventory.
     avatar *you = p->as_avatar();
     item_location loc;
     auto filter = []( const item & it ) {
@@ -4739,6 +4771,10 @@ std::optional<int> iuse::oxytorch( Character *p, item *it, const tripoint & )
         // Long action
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
@@ -4787,6 +4823,10 @@ std::optional<int> iuse::hacksaw( Character *p, item *it, const tripoint &it_pnt
                   it->typeId().str() );
         return std::nullopt;
     }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
@@ -4833,7 +4873,10 @@ std::optional<int> iuse::boltcutters( Character *p, item *it, const tripoint & )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     map &here = get_map();
     const std::function<bool( const tripoint & )> f =
     [&here, p]( const tripoint & pnt ) {
@@ -4912,11 +4955,47 @@ std::optional<int> iuse::mop( Character *p, item *, const tripoint & )
 
 std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint & )
 {
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
+    }
     const std::optional<tripoint> dest_ = choose_adjacent( _( "Spray where?" ) );
     if( !dest_ ) {
         return std::nullopt;
     }
-    return handle_ground_graffiti( *p, it, _( "Spray what?" ), dest_.value() );
+    tripoint_bub_ms dest = tripoint_bub_ms( *dest_ );
+    // Blast 'em in the face.
+    creature_tracker &creatures = get_creature_tracker();
+    Creature *critter = creatures.creature_at( dest );
+    if( critter && !critter->is_monster() && !critter->is_avatar() &&
+        ( !critter->as_npc()->is_enemy() ) ) {
+        if( !query_yn( _( "This will probably make %s angry.  Continue?" ), critter->disp_name() ) ) {
+            return std::nullopt;
+        }
+        critter->as_npc()->on_attacked( *p );
+    }
+    if( critter && !critter->is_avatar() ) {
+        const float hit_roll = p->hit_roll();
+        bool blind = false;
+        if( ( !critter->is_monster() || critter->has_flag( mon_flag_SEES ) ) &&
+            !critter->dodge_check( hit_roll ) ) {
+            blind = true;
+            if( critter->in_species( species_ROBOT ) ) {
+                critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
+            } else {
+                critter->add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
+            }
+        }
+        viewer &player_view = get_player_view();
+        if( player_view.sees( *critter ) ) {
+            if( blind ) {
+                p->add_msg_if_player( _( "%s is blinded by the spray." ), critter->disp_name() );
+            }
+        }
+        return 1;
+    } else {
+        return handle_ground_graffiti( *p, it, _( "Spray what?" ), dest_.value() );
+    }
 }
 
 std::optional<int> iuse::handle_ground_graffiti( Character &p, item *it, const std::string &prefix,
@@ -6779,14 +6858,17 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint & )
                     }
                     std::vector<std::string> blinded_names;
                     for( monster * const &monster_p : monster_vec ) {
-                        if( dist < 4 && one_in( dist + 2 ) && monster_p->has_flag( mon_flag_SEES ) ) {
-                            monster_p->add_effect( effect_blind, rng( 5_turns, 10_turns ) );
+                        if( dist < 4 && one_in( dist + 2 ) && monster_p->has_flag( mon_flag_SEES ) &&
+                            !monster_p->in_species( species_CYBORG ) ) {
+                            monster_p->add_effect( effect_blind, rng( 2_seconds, 4_seconds ) );
                             blinded_names.push_back( monster_p->name() );
                         }
                     }
                     for( Character * const &character_p : character_vec ) {
-                        if( dist < 4 && one_in( dist + 2 ) && !character_p->is_blind() ) {
-                            character_p->add_effect( effect_blind, rng( 5_turns, 10_turns ) );
+                        if( dist < 4 && one_in( dist + 2 ) && !character_p->is_blind() &&
+                            !character_p->has_flag( json_flag_GLARE_RESIST ) &&
+                            !character_p->worn_with_flag( flag_SUN_GLASSES ) ) {
+                            character_p->add_effect( effect_blind, rng( 2_seconds, 4_seconds ) );
                             blinded_names.push_back( character_p->get_name() );
                         }
                     }
@@ -7216,7 +7298,7 @@ std::optional<int> iuse::radiocontrol( Character *p, item *it, const tripoint & 
             p->remove_value( "remote_controlling" );
         } else {
             std::list<std::pair<tripoint_bub_ms, item *>> rc_pairs = here.get_rc_items();
-            tripoint_bub_ms rc_item_location = {999, 999, 999};
+            tripoint_bub_ms rc_item_location = overmap::invalid_tripoint_bub_ms;
             // TODO: grab the closest car or similar?
             for( auto &rc_pairs_rc_pair : rc_pairs ) {
                 if( rc_pairs_rc_pair.second->has_flag( flag_RADIOCAR ) &&
@@ -7224,7 +7306,7 @@ std::optional<int> iuse::radiocontrol( Character *p, item *it, const tripoint & 
                     rc_item_location = rc_pairs_rc_pair.first;
                 }
             }
-            if( rc_item_location.x() == 999 ) {
+            if( rc_item_location == overmap::invalid_tripoint_bub_ms ) {
                 p->add_msg_if_player( _( "No active RC cars on ground and in range." ) );
                 return 1;
             } else {

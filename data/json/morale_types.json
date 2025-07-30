@@ -80,9 +80,9 @@
     "text": "Craving alcohol"
   },
   {
-    "id": "morale_craving_opiate",
+    "id": "morale_craving_opioid",
     "type": "morale_type",
-    "text": "Craving opiates"
+    "text": "Craving opioids"
   },
   {
     "id": "morale_craving_speed",
@@ -275,19 +275,9 @@
     "text": "Tingly feeling"
   },
   {
-    "id": "morale_perm_noface",
-    "type": "morale_type",
-    "text": "You have no face!"
-  },
-  {
     "id": "morale_perm_fpmode_on",
     "type": "morale_type",
     "text": "You feel pumped!"
-  },
-  {
-    "id": "morale_perm_hoarder",
-    "type": "morale_type",
-    "text": "Hoarder"
   },
   {
     "id": "morale_perm_fancy",
@@ -300,9 +290,9 @@
     "text": "Optimist"
   },
   {
-    "id": "morale_perm_badtemper",
+    "id": "morale_perm_pessimist",
     "type": "morale_type",
-    "text": "Bad Tempered"
+    "text": "Pessimist"
   },
   {
     "id": "morale_perm_numb",
@@ -428,5 +418,10 @@
     "id": "morale_asocial",
     "type": "morale_type",
     "text": "Spent time alone"
+  },
+  {
+    "id": "morale_faction_member_died",
+    "type": "morale_type",
+    "text": "An ally died"
   }
 ]

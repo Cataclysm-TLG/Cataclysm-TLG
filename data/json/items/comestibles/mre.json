@@ -112,6 +112,8 @@
     "calories": 211,
     "description": "The beef stew entree from an MRE.",
     "material": [ "flesh", "vegetable" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 0,
     "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -123,6 +125,9 @@
     "calories": 280,
     "description": "The chili & macaroni entree from an MRE.",
     "material": [ "wheat", "vegetable" ],
+    "phase": "liquid",
+    "comestible_type": "DRINK",
+    "charges": 1,
     "fun": 1,
     "vitamins": [ [ "vegetable_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   },
@@ -198,6 +203,8 @@
     "calories": 214,
     "description": "The Mexican chicken stew entree from an MRE.",
     "material": [ "tomato", "vegetable", "flesh", "bean" ],
+    "phase": "liquid",
+    "charges": 1,
     "fun": 1,
     "vitamins": [ [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ]
   },

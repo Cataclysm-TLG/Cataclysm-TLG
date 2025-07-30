@@ -1,9 +1,9 @@
 [
   {
     "id": "bond_410",
+    "copy-from": "pistol_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "Bond Arms Derringer pistol" },
     "description": "The Bond Arms Derringer is a series of multi-barrel compact pistols.  Most commonly chambered for .45 Colt, with chambers long enough to accept .410 shotgun shells.",
     "weight": "566 g",
@@ -17,7 +17,6 @@
     "symbol": "(",
     "color": "brown",
     "ammo": [ "45colt", "410shot" ],
-    "skill": "pistol",
     "dispersion": 520,
     "durability": 6,
     "clip_size": 2,
@@ -58,7 +57,7 @@
     "clip_size": 14,
     "blackpowder_tolerance": 56,
     "reload_noise": "chik chik.",
-    "flags": [ "RELOAD_ONE" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],

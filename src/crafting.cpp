@@ -122,6 +122,7 @@ static const std::string flag_FULL_MAGAZINE( "FULL_MAGAZINE" );
 static const std::string flag_NO_BENCH( "NO_BENCH" );
 static const std::string flag_NO_ENCHANTMENT( "NO_ENCHANTMENT" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
+static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
 static const std::string flag_NO_RESIZE( "NO_RESIZE" );
 
 class basecamp;
@@ -336,13 +337,15 @@ float Character::crafting_speed_multiplier( const item &craft,
     }
 
     const recipe &rec = craft.get_making();
+    float morale_value = morale_crafting_speed_multiplier( rec );
 
     const float light_multi = lighting_craft_speed_multiplier( rec );
     const float bench_value = ( use_cached_workbench_multiplier ||
                                 cached_workbench_multiplier > 0.0f ) ? cached_workbench_multiplier :
                               workbench_crafting_speed_multiplier( craft, loc );
     const float bench_multi = rec.has_flag( flag_NO_BENCH ) ? 1.0f : bench_value;
-    const float morale_multi = morale_crafting_speed_multiplier( rec );
+    const float morale_multi = ( rec.has_flag( flag_NO_MORALE_OK ) && morale_value < 0.5 ) ? 0.5 :
+                               morale_value;
     const float mut_multi = rec.has_flag( flag_NO_ENCHANTMENT ) ? 1.0f : 1.0 +
                             enchantment_cache->get_value_multiply(
                                 enchant_vals::mod::CRAFTING_SPEED_MULTIPLIER );

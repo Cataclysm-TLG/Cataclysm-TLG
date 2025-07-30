@@ -242,7 +242,7 @@ static void put_into_vehicle( Character &c, item_drop_reason reason, const std::
         if( veh.add_item( vp, it ) ) {
             into_vehicle_count += it.count();
         } else {
-            if( it.count_by_charges() ) {
+            if( it.count_by_charges() && it.type->stack_max != 1 ) {
                 // Maybe we can add a few charges in the trunk and the rest on the ground.
                 const int charges_added = veh.add_charges( vp, it );
                 it.mod_charges( -charges_added );

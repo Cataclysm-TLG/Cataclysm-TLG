@@ -157,7 +157,7 @@ static const activity_id ACT_WAIT( "ACT_WAIT" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 static const activity_id ACT_WAIT_STAMINA( "ACT_WAIT_STAMINA" );
 
-static const addiction_id addiction_opiate( "opiate" );
+static const addiction_id addiction_opioid( "opioid" );
 static const addiction_id addiction_sleeping_pill( "sleeping pill" );
 
 static const ammotype ammo_battery( "battery" );
@@ -327,6 +327,7 @@ static const json_character_flag json_flag_INFRARED( "INFRARED" );
 static const json_character_flag json_flag_INSECTBLOOD( "INSECTBLOOD" );
 static const json_character_flag json_flag_INVERTEBRATEBLOOD( "INVERTEBRATEBLOOD" );
 static const json_character_flag json_flag_INVISIBLE( "INVISIBLE" );
+static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_MYOPIC( "MYOPIC" );
 static const json_character_flag json_flag_MYOPIC_IN_LIGHT( "MYOPIC_IN_LIGHT" );
 static const json_character_flag json_flag_NIGHT_BLINDNESS( "NIGHT_BLINDNESS" );
@@ -404,6 +405,7 @@ static const skill_id skill_melee( "melee" );
 static const skill_id skill_pistol( "pistol" );
 static const skill_id skill_speech( "speech" );
 static const skill_id skill_swimming( "swimming" );
+static const skill_id skill_survival( "survival" );
 static const skill_id skill_throw( "throw" );
 static const skill_id skill_unarmed( "unarmed" );
 
@@ -1447,7 +1449,7 @@ bool Character::overmap_los( const tripoint_abs_omt &omt, int sight_points ) con
 
 int Character::overmap_sight_range( float light_level ) const
 {
-    // How many map tiles I can given the light??
+    // How many map tiles can I see given the light?
     int sight = sight_range( light_level );
     // What are these doing???
     if( sight < SEEX ) {
@@ -1468,8 +1470,8 @@ int Character::overmap_sight_range( float light_level ) const
 
     // If sight got changed due OVERMAP_SIGHT, process the rest of the modifiers, otherwise skip them
     if( sight > 0 ) {
-        // The higher your perception, the farther you can see.
-        sight += static_cast<int>( get_per() / 2 );
+        // The higher your perception and survival, the farther you can see.
+        sight += static_cast<int>( get_per() / 2 + get_skill_level( skill_survival ) / 3 );
     }
 
     if( sight == 0 ) {
@@ -1493,7 +1495,16 @@ int Character::overmap_modified_sight_range( float light_level ) const
                            ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ||
                            get_map().veh_at( pos_bub() ).avail_part_with_feature( "ENHANCED_VISION" ).has_value();
 
-    if( has_optic ) {
+    const bool has_scoped_gun = cache_has_item_with( "is_gun", &item::is_gun, [&]( const item & gun ) {
+        for( const item *mod : gun.gunmods() ) {
+            if( mod->has_flag( flag_ZOOM ) ) {
+                return true;
+            }
+        }
+        return false;
+    } );
+
+    if( has_optic || has_scoped_gun ) {
         sight *= 2;
     }
 
@@ -2010,7 +2021,7 @@ void Character::forced_dismount()
         set_movement_mode( move_mode_walk );
         if( player_character.is_auto_moving() || player_character.has_destination() ||
             player_character.has_destination_activity() ) {
-            player_character.clear_destination();
+            player_character.abort_automove();
         }
         g->update_map( player_character );
     }
@@ -2126,13 +2137,15 @@ void Character::on_try_dodge()
         return;
     }
 
-    // Each attempt consumes an available dodge
     consume_dodge_attempts();
 
     const int base_burn_rate = get_option<int>( STATIC( "PLAYER_BASE_STAMINA_BURN_RATE" ) );
-    const float dodge_skill_modifier = ( 20.0f - get_skill_level( skill_dodge ) ) / 20.0f;
-    burn_energy_legs( - std::floor( static_cast<float>( base_burn_rate ) * 6.0f *
-                                    dodge_skill_modifier ) );
+    const float dodge = get_skill_level( skill_dodge );
+    const float dodge_skill_modifier = 1.0f - dodge * 0.03f;
+
+    int burn = std::floor( static_cast<float>( base_burn_rate ) * 6.0f * dodge_skill_modifier );
+    burn = std::max( burn, 60 );
+    burn_energy_legs( -burn );
     set_activity_level( EXPLOSIVE_EXERCISE );
 }
 
@@ -2151,7 +2164,6 @@ void Character::on_dodge( Creature *source, float difficulty, float training_lev
         recoil = std::min( MAX_RECOIL, recoil );
     }
 
-    // Even if we are not to train still call practice to prevent skill rust
     difficulty = std::max( difficulty, 0.0f );
 
     // If training_level is set, treat that as the difficulty instead
@@ -2159,7 +2171,10 @@ void Character::on_dodge( Creature *source, float difficulty, float training_lev
         difficulty = training_level;
     }
 
-    practice( skill_dodge, difficulty * 2, difficulty );
+    if( source && source->times_combatted_player <= 50 ) {
+        source->times_combatted_player++;
+        practice( skill_dodge, difficulty * 2, difficulty );
+    }
     martial_arts_data->ma_ondodge_effects( *this );
 
     // For adjacent attackers check for techniques usable upon successful dodge
@@ -2524,6 +2539,13 @@ void Character::process_turn()
                 add_msg_if_player( m_bad, _( "Your %s bionic comes back online." ), i.info().name );
             }
         }
+    }
+
+    // TODO: Maybe a unified function for terrain effects?
+    map &here = get_map();
+    if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
+        !here.has_vehicle_floor( pos_bub() ) && !has_effect( effect_bouldering ) ) {
+        add_effect( effect_bouldering, 1_turns, true );
     }
 
     for( const trait_id &mut : get_mutations() ) {
@@ -2896,7 +2918,7 @@ float Character::get_vision_threshold( float light_level ) const
     const float dimming_from_light = 1.0f + ( ( light_level - LIGHT_AMBIENT_MINIMAL ) /
                                      ( LIGHT_AMBIENT_LIT - LIGHT_AMBIENT_MINIMAL ) );
 
-    float range = get_per() / 3.0f;
+    float range = get_per() / 2.8f;
     if( vision_mode_cache[NIGHTVISION_3] || vision_mode_cache[FULL_ELFA_VISION] ||
         vision_mode_cache[CEPH_VISION] ) {
         range += 10;
@@ -2979,9 +3001,9 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
 {
     SkillLevel &level = get_skill_level_object( id );
     const Skill &skill = id.obj();
-    if( !level.can_train() || in_sleep_state() ||
+    if( in_sleep_state() ||
         ( static_cast<int>( get_skill_level( id ) ) >= MAX_SKILL ) ) {
-        // Do not practice if: cannot train, asleep, or at effective skill cap
+        // Do not practice if asleep, or at effective skill cap
         // Leaving as a skill method rather than global for possible future skill cap setting
         return false;
     }
@@ -3446,6 +3468,66 @@ void Character::on_move( const tripoint_abs_ms &old_pos )
     if( using_lifting_assist ) {
         invalidate_weight_carried_cache();
     }
+}
+
+units::volume Character::get_total_character_volume() const
+{
+    item_location wep = get_wielded_item();
+    units::volume wep_volume = wep ? wep->volume() : 0_ml;
+    // Note: Does not measure volume of worn items that do not themselves contain anything
+    return get_base_character_volume() + volume_carried() + wep_volume;
+}
+
+units::volume Character::get_average_character_volume() const
+{
+    // Assuming 175cm and 75kg as the human average, we land on about 75 liters.
+    // Characters in different size categories have different proportions.
+    // See also: get_base_character_volume(), size_category_height_limits
+    const units::volume avg_character_volume = [this]() -> units::volume {
+        switch( enum_size() )
+        {
+            case 1:
+                return 8500_ml;
+            case 2:
+                return 23_liter;
+            case 4:
+                return 136_liter;
+            case 5:
+                return 244_liter;
+            default:
+                return 75_liter;
+        }
+    }();
+    return avg_character_volume;
+}
+
+units::volume Character::get_base_character_volume() const
+{
+    const int your_height = height();
+    // See also: get_average_character_volume(), size_category_height_limits
+    units::volume your_base_volume;
+    switch( enum_size() ) {
+        case 1:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 8.24 );
+            break;
+        case 2:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 5.3 );
+            break;
+        case 4:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.67 );
+            break;
+        case 5:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 1.15 );
+            break;
+        default:
+            your_base_volume = units::from_liter( static_cast<double>( your_height ) / 2.32 );
+            break;
+    }
+
+    // TODO: This should be looking at body fat and muscle mass, tails, shells, etc.
+    units::volume average_volume = get_average_character_volume();
+    double volume_proport = units::to_liter( your_base_volume ) / units::to_liter( average_volume );
+    return std::pow( volume_proport, 3.0 ) * average_volume;
 }
 
 units::mass Character::weight_carried() const
@@ -4043,7 +4125,7 @@ int Character::calc_focus_equilibrium( bool ignore_pain ) const
             const cata::value_ptr<islot_book> &bt = book->type->book;
             // apply a penalty when we're actually learning something
             const SkillLevel &skill_level = get_skill_level_object( bt->skill );
-            if( skill_level.can_train() && skill_level < bt->level ) {
+            if( skill_level < bt->level ) {
                 focus_equilibrium -= 50;
             }
         }
@@ -8307,7 +8389,8 @@ void Character::on_hit( Creature *source, bodypart_id bp_hit,
     const optional_vpart_position veh_part = here.veh_at( pos_bub() );
     bool in_skater_vehicle = in_vehicle && veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", false );
 
-    if( ( worn_with_flag( flag_REQUIRES_BALANCE ) || in_skater_vehicle ) && !is_on_ground() )  {
+    if( ( worn_with_flag( flag_REQUIRES_BALANCE ) || in_skater_vehicle ) && !is_on_ground() &&
+        !has_effect_with_flag( json_flag_LEVITATION ) ) {
         int rolls = 4;
         if( worn_with_flag( flag_ROLLER_ONE ) && !in_skater_vehicle ) {
             rolls += 2;
@@ -8360,7 +8443,8 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
     }
 
     if( hurt == bodypart_str_id::NULL_ID() ) {
-        debugmsg( "Wacky body part hurt!" );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH,
+                       "apply_damage() picked a null bodypart, redirecting damage to torso." );
         hurt = body_part_torso;
     }
 
@@ -8392,8 +8476,10 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 
     if( !weapon.is_null() && !can_wield( weapon ).success() &&
         can_drop( weapon ).success() ) {
-        add_msg_if_player( _( "You are no longer able to wield your %s and drop it!" ),
-                           weapon.display_name() );
+        if( is_avatar() ) {
+            popup( _( "You are no longer able to wield your %s and drop it!" ),
+                   weapon.display_name() );
+        }
         put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { weapon } );
         i_rem( &weapon );
     }
@@ -8423,7 +8509,7 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         const damage_instance &d, const weakpoint_attack &attack )
 {
-    if( has_trait( trait_DEBUG_NODMG ) || has_effect( effect_incorporeal ) ) {
+    if( is_dead_state() || has_trait( trait_DEBUG_NODMG ) || has_effect( effect_incorporeal ) ) {
         return dealt_damage_instance();
     }
 
@@ -8485,7 +8571,7 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         bp == body_part_hand_r || bp == body_part_arm_r ) {
         recoil_mul = 200;
     } else if( bp == bodypart_str_id::NULL_ID() ) {
-        debugmsg( "Wacky body part hit!" );
+        add_msg_debug( debugmode::DF_CHAR_HEALTH, "dealt_damage_instance() picked a null body part." );
     }
 
     // TODO: Scale with damage in a way that makes sense for power armors, plate armor and naked skin.
@@ -11153,7 +11239,7 @@ void Character::process_one_effect( effect &it, bool is_new )
     // Handle painkillers
     val = get_effect( "PKILL", reduced );
     if( val != 0 ) {
-        mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opiate ) );
+        mod = it.get_addict_mod( "PKILL", addiction_level( addiction_opioid ) );
         if( is_new || it.activated( calendar::turn, "PKILL", val, reduced, mod ) ) {
             mod_painkiller( bound_mod_to_vals( get_painkiller(), val, it.get_max_val( "PKILL", reduced ), 0 ) );
         }
@@ -11338,7 +11424,8 @@ void Character::process_effects()
 
     map &here = get_map();
     if( has_effect( effect_slippery_terrain ) && !is_on_ground() &&
-        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) ) {
+        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
         int rolls = -1;
         bool u_see = get_player_view().sees( *this );
         // ROAD tiles are hard, flat surfaces, so they are extra slippery.
@@ -11714,6 +11801,14 @@ void Character::clear_destination()
     clear_destination_activity();
     destination_point = std::nullopt;
     next_expected_position = std::nullopt;
+}
+
+void Character::abort_automove()
+{
+    clear_destination();
+    if( g->overmap_data.fast_traveling && is_avatar() ) {
+        ui::omap::force_quit();
+    }
 }
 
 bool Character::has_distant_destination() const
@@ -12839,8 +12934,7 @@ int Character::impact( const int force, const tripoint &p )
     float mod = 1.0f;
     int effective_force = force;
     int cut = 0;
-    // Percentage armor penetration - armor won't help much here
-    // TODO: Make cushioned items like bike helmets help more
+    // Percentage armor penetration - armor won't help much here unless it's cushioned.
     float armor_eff = 1.0f;
     // Shock Absorber CBM heavily reduces damage
     const bool shock_absorbers = has_active_bionic( bio_shock_absorber );
@@ -12984,20 +13078,49 @@ int Character::impact( const int force, const tripoint &p )
 
     int total_dealt = 0;
     if( mod * effective_force >= 5 ) {
-        for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
-            const int bash = effective_force * rng( 60, 100 ) / 100;
+        add_msg( _( "effective force = %s" ), effective_force );
+        int parts_affected_total = std::max( 1, effective_force / rng( 3, 30 ) );
+        int parts_affected = 0;
+        std::vector<bodypart_id> bps = get_all_body_parts( get_body_part_flags::only_main );
+        std::shuffle( bps.begin(), bps.end(), rng_get_engine() );
+        for( const bodypart_id &bp : bps ) {
+            if( parts_affected >= parts_affected_total ) {
+                continue;
+            }
+            const int bash = effective_force * rng( 60, 120 ) / 100;
             damage_instance di;
+
+            float cushion_bash_armor = 0.0f;
+            float total_bash_armor = worn.damage_resist( damage_bash, bp );
+            float armor_eff_bash = armor_eff;
+            // If the armor is cushioned, it applies its full armor value vs falls.
+            for( const item &armor : worn.worn )  {
+                if( armor.covers( bp ) && armor.has_flag( flag_CUSHION_FALL ) ) {
+                    cushion_bash_armor += armor.get_coverage( bp ) / 100.0f * armor.resist( damage_bash, false, bp );
+                }
+            }
+            // Ensure that we're only reducing the fall's armor penetration by the proportion
+            // of bash protection provided by the cushioned armor on that BP.
+            if( total_bash_armor > 0.0f && cushion_bash_armor > 0.0f ) {
+                float cushion_ratio = cushion_bash_armor / total_bash_armor;
+                armor_eff_bash = std::clamp( cushion_ratio - armor_eff, 0.0f, 1.0f );
+            }
+
             // FIXME: Hardcoded damage types
-            di.add_damage( damage_bash, bash, 0, armor_eff, mod );
-            // No good way to land on sharp stuff, so here modifier == 1.0f
+            if( armor_eff_bash != armor_eff ) {
+                di.add_damage( damage_bash, bash, 0, armor_eff_bash, mod );
+            } else {
+                di.add_damage( damage_bash, bash, 0, armor_eff, mod );
+            }
             di.add_damage( damage_cut, cut, 0, armor_eff, 1.0f );
             total_dealt += deal_damage( nullptr, bp, di ).total_damage();
+            parts_affected += 1;
         }
     }
 
     if( total_dealt > 0 && is_avatar() ) {
         // "You slam against the dirt" is fine
-        add_msg( m_bad, _( "You are slammed against %1$s for %2$d damage." ),
+        add_msg( m_bad, _( "You are slammed against %1$s for %2$d total damage." ),
                  target_name, total_dealt );
     } else if( is_avatar() && shock_absorbers ) {
         add_msg( m_bad, _( "You are slammed against %s!" ),

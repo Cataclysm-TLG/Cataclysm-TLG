@@ -132,25 +132,20 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_reinforced_door_glass_o",
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "count": [ 15, 34 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
     },
-    "shoot": {
-      "reduce_damage": [ 15, 30 ],
-      "reduce_damage_laser": [ 0, 10 ],
-      "destroy_damage": [ 60, 160 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 40, 80 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",
@@ -170,25 +165,20 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "SUPPORTS_ROOF" ],
     "open": "t_reinforced_door_glass_lab_o",
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
-      "ter_set": "t_thconc_floor",
+      "ter_set": "t_mdoor_frame",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "count": [ 15, 34 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
     },
-    "shoot": {
-      "reduce_damage": [ 15, 30 ],
-      "reduce_damage_laser": [ 0, 10 ],
-      "destroy_damage": [ 60, 160 ],
-      "no_laser_destroy": true
-    }
+    "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 40, 80 ], "no_laser_destroy": true }
   },
   {
     "type": "terrain",
@@ -206,15 +196,15 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_reinforced_door_glass_c",
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "charges": [ 15, 34 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]
@@ -236,15 +226,15 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_reinforced_door_glass_lab_c",
     "bash": {
-      "str_min": 40,
-      "str_max": 210,
+      "str_min": 16,
+      "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_thconc_floor",
       "items": [
-        { "item": "glass_shard", "count": [ 42, 84 ] },
+        { "item": "glass_shard", "charges": [ 15, 34 ] },
         { "item": "wire", "prob": 20 },
         { "item": "scrap", "count": [ 3, 5 ] }
       ]

@@ -535,7 +535,8 @@
     "subtype": "distribution",
     "items": [
       { "group": "samurai_sword_set_fake", "prob": 7 },
-      [ "bokken_fake", 6 ],
+      [ "bokken", 4 ],
+      { "group": "bokken_with_saya", "prob": 2 },
       [ "nodachi_fake", 5 ],
       [ "naginata_fake", 5 ]
     ]
@@ -546,7 +547,8 @@
     "subtype": "distribution",
     "items": [
       { "group": "samurai_sword_set_inferior", "prob": 7 },
-      [ "bokken_inferior", 6 ],
+      [ "bokken", 4 ],
+      { "group": "bokken_with_saya", "prob": 2 },
       [ "nodachi_inferior", 5 ],
       [ "naginata_inferior", 5 ]
     ]
@@ -1023,7 +1025,7 @@
       { "item": "liq_bandage_spray", "prob": 1, "charges": [ 1, -1 ] },
       [ "heatpack", 10 ],
       [ "gum", 12 ],
-      [ "yoghurt", 12 ],
+      [ "yogurt", 12 ],
       { "prob": 10, "group": "vitamins_bottle_plastic_pill_supplement_1_20" },
       { "prob": 15, "group": "bottle_otc_painkiller_1_20" },
       { "group": "corpse_mansion", "prob": 1 },

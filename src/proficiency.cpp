@@ -139,11 +139,10 @@ const std::vector<proficiency_category> &proficiency_category::get_all()
 
 bool proficiency::can_learn() const
 {
-    if( _can_learn ) {
-        const double scaling = get_option<float>( "PROFICIENCY_TRAINING_SPEED" );
-        return scaling != 0.0;
-    } else {
+    if( !_can_learn ) {
         return false;
+    } else {
+        return true;
     }
 }
 
@@ -199,12 +198,7 @@ float proficiency::default_weakpoint_penalty() const
 
 time_duration proficiency::time_to_learn() const
 {
-    const double scaling = get_option<float>( "PROFICIENCY_TRAINING_SPEED" );
-    if( scaling != 1.0 && scaling != 0.0 ) {
-        return _time_to_learn / scaling;
-    } else {
-        return _time_to_learn;
-    }
+    return _time_to_learn;
 }
 
 std::set<proficiency_id> proficiency::required_proficiencies() const
@@ -365,11 +359,13 @@ void proficiency_set::set_time_practiced( const proficiency_id &practicing,
     current.practiced = amount;
 }
 
-void proficiency_set::learn( const proficiency_id &learned )
+void proficiency_set::learn( const proficiency_id &learned, bool recursive )
 {
     for( const proficiency_id &req : learned->required_proficiencies() ) {
-        if( !has_learned( req ) ) {
+        if( !has_learned( req ) && !recursive ) {
             return;
+        } else if( recursive ) {
+            learn( req, recursive );
         }
     }
     known.insert( learned );

@@ -1602,6 +1602,26 @@
     "components": [ [ [ "2x4", 2 ] ], [ [ "nail", 5 ], [ "bronze_nail", 5 ] ] ]
   },
   {
+    "result": "bokken_scabbard_leather",
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_STORAGE",
+    "skill_used": "tailor",
+    "difficulty": 5,
+    "skills_required": [ "melee", 1 ],
+    "time": "6 h",
+    "autolearn": true,
+    "using": [ [ "tailoring_leather_small", 12 ], [ "clasps", 1 ], [ "adhesive", 1 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_closures" },
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" }
+    ],
+    "qualities": [ { "id": "HAMMER", "level": 1 } ],
+    "components": [ [ [ "2x4", 2 ] ], [ [ "nail", 5 ], [ "bronze_nail", 5 ] ] ]
+  },
+  {
     "result": "nylon_scabbard",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",

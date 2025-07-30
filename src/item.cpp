@@ -1406,7 +1406,7 @@ int item::charges_per_weight( const units::mass &m, bool suppress_warning ) cons
 
 bool item::display_stacked_with( const item &rhs, bool check_components ) const
 {
-    return !count_by_charges() && stacks_with( rhs, check_components );
+    return ( !count_by_charges() || type->stack_max == 1 ) && stacks_with( rhs, check_components );
 }
 
 bool item::can_combine( const item &rhs ) const
@@ -1414,11 +1414,17 @@ bool item::can_combine( const item &rhs ) const
     if( !contents.empty() || !rhs.contents.empty() ) {
         return false;
     }
-    if( !count_by_charges() ) {
+    if( !count_by_charges() || type->stack_max == 1 ) {
         return false;
     }
     if( !stacks_with( rhs, true, true ) ) {
         return false;
+    }
+    if( type->stack_max > 0 ) {
+        const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
+        if( total > type->stack_max ) {
+            return {};
+        }
     }
     return true;
 }
@@ -1697,7 +1703,7 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     // This function is also used to test whether items counted by charges should be merged, for that
     // check the, the charges must be ignored. In all other cases (tools/guns), the charges are important.
     bits.set( tname::segments::CHARGES,
-              same_type && ( count_by_charges() || charges == rhs.charges ) );
+              same_type && ( ( count_by_charges() && type->stack_max != 1 ) || charges == rhs.charges ) );
     bits.set( tname::segments::FAVORITE_PRE, is_favorite == rhs.is_favorite );
     bits.set( tname::segments::FAVORITE_POST, is_favorite == rhs.is_favorite );
     bits.set( tname::segments::DURABILITY,
@@ -1707,7 +1713,6 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::FILTHY, is_filthy() == rhs.is_filthy() );
     bits.set( tname::segments::WETNESS, _stacks_wetness( *this, rhs, precise ) );
     bits.set( tname::segments::WEAPON_MODS, _stacks_weapon_mods( *this, rhs ) );
-
     if( combine_liquid && same_type && has_temperature() && made_of_from_type( phase_id::LIQUID ) ) {
         // we can combine liquids of same type and different temperatures
         bits.set( tname::segments::TAGS, equal_ignoring_elements( rhs.get_flags(), get_flags(),
@@ -1789,6 +1794,12 @@ bool item::merge_charges( const item &rhs )
 {
     if( !count_by_charges() || !stacks_with( rhs ) ) {
         return false;
+    }
+    if( type->stack_max > 0 ) {
+        const int total = ( count_by_charges() ? charges + rhs.charges : 2 );
+        if( total > type->stack_max ) {
+            return {};
+        }
     }
     // Prevent overflow when either item has "near infinite" charges.
     if( charges >= INFINITE_CHARGES / 2 || rhs.charges >= INFINITE_CHARGES / 2 ) {
@@ -2377,7 +2388,7 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         info.emplace_back( "BASE", string_format( _( "Contains: %s" ),
                            get_var( "contained_name" ) ) );
     }
-    if( count_by_charges() && !is_food() && !is_medication() &&
+    if( count_by_charges() && !is_food() && !is_medication() && type->stack_max != 1 &&
         parts->test( iteminfo_parts::BASE_AMOUNT ) ) {
         info.emplace_back( "BASE", _( "Amount: " ), "<num>", iteminfo::no_flags,
                            charges * batch );
@@ -4416,7 +4427,7 @@ void item::book_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
     if( player_character.has_identified( typeId() ) ) {
         if( book.skill ) {
             const SkillLevel &skill = player_character.get_skill_level_object( book.skill );
-            if( skill.can_train() && parts->test( iteminfo_parts::BOOK_SKILLRANGE_MAX ) ) {
+            if( parts->test( iteminfo_parts::BOOK_SKILLRANGE_MAX ) ) {
                 const std::string skill_name = book.skill->name();
                 std::string fmt;
                 if( book.level != 0 ) {
@@ -6283,7 +6294,6 @@ nc_color item::color_in_inventory( const Character *const ch ) const
         const islot_book &tmp = *type->book;
         if( player_character.has_identified( typeId() ) ) {
             if( tmp.skill && // Book can improve skill: blue
-                player_character.get_skill_level_object( tmp.skill ).can_train() &&
                 player_character.get_knowledge_level( tmp.skill ) >= tmp.req &&
                 player_character.get_knowledge_level( tmp.skill ) < tmp.level
               ) { //NOLINT(bugprone-branch-clone)
@@ -6292,7 +6302,6 @@ nc_color item::color_in_inventory( const Character *const ch ) const
                        !player_character.martial_arts_data->has_martialart( martial_art_learned_from( *type ) ) ) {
                 ret = c_light_blue;
             } else if( tmp.skill && // Book can't improve skill right now, but maybe later: pink
-                       player_character.get_skill_level_object( tmp.skill ).can_train() &&
                        player_character.get_knowledge_level( tmp.skill ) < tmp.level ) {
                 ret = c_pink;
             } else if( !player_character.studied_all_recipes(
@@ -6739,7 +6748,7 @@ std::string item::display_name( unsigned int quantity ) const
             max_amount = ammo_capacity( item_controller->find_template( ammo_default() )->ammo->type );
         }
         show_amt = !has_flag( flag_RELOAD_AND_SHOOT );
-    } else if( count_by_charges() && !has_infinite_charges() ) {
+    } else if( count_by_charges() && !has_infinite_charges() && type->stack_max != 1 ) {
         // A chargeable item
         amount = charges;
         const itype *adata = ammo_data();
@@ -9525,7 +9534,7 @@ bool item::is_food_container() const
 
 bool item::has_temperature() const
 {
-    return is_comestible() || is_corpse();
+    return ( is_comestible() && !has_flag( flag_NO_TEMP ) )  || is_corpse();
 }
 
 bool item::is_corpse() const

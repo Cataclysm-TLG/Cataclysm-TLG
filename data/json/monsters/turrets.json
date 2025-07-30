@@ -43,8 +43,8 @@
     "special_when_hit": [ "RETURN_FIRE", 100 ],
     "death_drops": {  },
     "death_function": { "corpse_type": "BROKEN" },
-    "flags": [ "SEES", "NOHEAD", "ELECTRONIC", "BIOLOGICALPROOF", "COLDPROOF", "IMMOBILE", "NO_BREATHE", "DROPS_AMMO" ],
-    "armor": { "bash": 10, "cut": 16, "bullet": 13, "stab": 16 }
+    "flags": [ "SEES", "NOHEAD", "ELECTRONIC", "BIOLOGICALPROOF", "COLDPROOF", "IMMOBILE", "NO_BREATHE", "DROPS_AMMO", "NO_TRAIN" ],
+    "armor": { "bash": 5, "cut": 16, "bullet": 13, "stab": 16 }
   },
   {
     "id": "mon_turret_searchlight",
@@ -56,7 +56,7 @@
     "diff": 2,
     "volume": "108500 ml",
     "weight": "120 kg",
-    "hp": 30,
+    "hp": 40,
     "speed": 100,
     "material": [ "steel" ],
     "symbol": "2",
@@ -74,8 +74,18 @@
       "message": "As the final light is destroyed, it erupts in a blinding flare!",
       "corpse_type": "NO_CORPSE"
     },
-    "flags": [ "SEES", "NOHEAD", "ELECTRONIC", "COLDPROOF", "BIOLOGICALPROOF", "IMMOBILE", "NO_BREATHE", "PRIORITIZE_TARGETS" ],
-    "armor": { "bash": 14, "cut": 16, "bullet": 13, "stab": 16 }
+    "flags": [
+      "SEES",
+      "NOHEAD",
+      "ELECTRONIC",
+      "COLDPROOF",
+      "BIOLOGICALPROOF",
+      "IMMOBILE",
+      "NO_BREATHE",
+      "PRIORITIZE_TARGETS",
+      "NO_TRAIN"
+    ],
+    "armor": { "bash": 3, "cut": 16, "bullet": 2, "stab": 16 }
   },
   {
     "id": "mon_turret_bmg",
@@ -133,9 +143,10 @@
       "NO_BREATHE",
       "DROPS_AMMO",
       "CONSOLE_DESPAWN",
-      "ID_CARD_DESPAWN"
+      "ID_CARD_DESPAWN",
+      "NO_TRAIN"
     ],
-    "armor": { "bash": 14, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
   },
   {
     "id": "mon_turret_rifle",
@@ -193,9 +204,10 @@
       "NO_BREATHE",
       "DROPS_AMMO",
       "ID_CARD_DESPAWN",
-      "CONSOLE_DESPAWN"
+      "CONSOLE_DESPAWN",
+      "NO_TRAIN"
     ],
-    "armor": { "bash": 14, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
   },
   {
     "id": "mon_crows_m240",
@@ -253,9 +265,10 @@
       "NO_BREATHE",
       "DROPS_AMMO",
       "ID_CARD_DESPAWN",
-      "CONSOLE_DESPAWN"
+      "CONSOLE_DESPAWN",
+      "NO_TRAIN"
     ],
-    "armor": { "bash": 14, "cut": 16, "bullet": 13, "stab": 16 }
+    "armor": { "bash": 4, "cut": 16, "bullet": 13, "stab": 16 }
   },
   {
     "id": "mon_turret_riot",
@@ -312,9 +325,10 @@
       "IMMOBILE",
       "NO_BREATHE",
       "DROPS_AMMO",
-      "ID_CARD_DESPAWN"
+      "ID_CARD_DESPAWN",
+      "NO_TRAIN"
     ],
-    "armor": { "bash": 4, "cut": 16, "bullet": 8, "stab": 16 }
+    "armor": { "bash": 3, "cut": 16, "bullet": 8, "stab": 16 }
   },
   {
     "id": "mon_turret_speaker",
@@ -340,42 +354,7 @@
     "special_attacks": [ [ "SPEAKER", 10 ] ],
     "death_function": { "corpse_type": "BROKEN" },
     "death_drops": { "groups": [ [ "turret_speaker", 1 ] ] },
-    "flags": [ "SEES", "NOHEAD", "BIOLOGICALPROOF", "ELECTRONIC", "IMMOBILE", "NO_BREATHE" ],
-    "armor": { "bash": 14, "cut": 16, "bullet": 14, "stab": 16 }
-  },
-  {
-    "id": "mon_turret_artisans",
-    "type": "MONSTER",
-    "name": { "str": "custom plated turret" },
-    "looks_like": "mon_turret",
-    "description": "A remote weapon system derived from the M153 CROWS II and enhanced with autonomous operation software.  This one is fitted with a M249 and reinforced with heavy plating.",
-    "default_faction": "isolated_artisans",
-    "copy-from": "mon_turret_rifle",
-    "starting_ammo": { "556": 100 },
-    "aggression": -10,
-    "aggro_character": false,
-    "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT" ],
-    "armor": { "bash": 20, "cut": 22, "bullet": 20, "stab": 22 },
-    "special_attacks": [
-      {
-        "type": "gun",
-        "cooldown": 1,
-        "move_cost": 150,
-        "gun_type": "m249",
-        "ammo_type": "556",
-        "fake_skills": [ [ "gun", 8 ], [ "rifle", 8 ] ],
-        "fake_dex": 12,
-        "ranges": [ [ 0, 36, "DEFAULT" ] ],
-        "require_targeting_npc": true,
-        "require_targeting_monster": true,
-        "target_moving_vehicles": false,
-        "laser_lock": false,
-        "targeting_cost": 200,
-        "targeting_timeout_extend": -10,
-        "targeting_sound": "\"Hostile detected.\"",
-        "targeting_volume": 50,
-        "no_ammo_sound": "a chk!"
-      }
-    ]
+    "flags": [ "SEES", "NOHEAD", "BIOLOGICALPROOF", "ELECTRONIC", "IMMOBILE", "NO_BREATHE", "NO_TRAIN" ],
+    "armor": { "bash": 3, "cut": 16, "bullet": 14, "stab": 16 }
   }
 ]

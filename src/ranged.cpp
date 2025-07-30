@@ -1083,6 +1083,8 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots, item &gun, it
 
         for( damage_unit &elem : proj.impact.damage_units ) {
             elem.amount = enchantment_cache->modify_value( enchant_vals::mod::RANGED_DAMAGE, elem.amount );
+            elem.res_pen = enchantment_cache->modify_value( enchant_vals::mod::RANGED_ARMOR_PENETRATION,
+                           elem.res_pen );
         }
 
         dispersion_sources dispersion = total_gun_dispersion( gun, recoil_total(), proj.shot_spread );
@@ -2721,7 +2723,6 @@ target_handler::trajectory target_ui::run()
 
     map &here = get_map();
     // Load settings
-    unload_RAS_weapon = get_option<bool>( "UNLOAD_RAS_WEAPON" );
     snap_to_target = get_option<bool>( "SNAP_TO_TARGET" );
     if( mode == TargetMode::Turrets ) {
         // Due to how cluttered the display would become, disable it by default
@@ -3891,11 +3892,7 @@ void target_ui::draw_ui_window()
     // Clear target window and make it non-transparent.
     int width = getmaxx( w_target );
     int height = getmaxy( w_target );
-    for( int y = 0; y < height; y++ ) {
-        for( int x = 0; x < width; x++ ) {
-            mvwputch( w_target, point( x, y ), c_white, ' ' );
-        }
-    }
+    mvwrectf( w_target, point_zero, c_white, ' ', width, height );
 
     draw_border( w_target );
     draw_window_title();

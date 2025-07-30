@@ -17,7 +17,6 @@
 #include <utility>
 #include <vector>
 
-#include "achievement.h"
 #include "addiction.h"
 #include "bionics.h"
 #include "calendar_ui.h"
@@ -150,11 +149,11 @@ void tab_manager::draw( const catacurses::window &w )
     window_pos = point( getbegx( w ), getbegy( w ) );
     draw_border_below_tabs( w );
 
-    for( int i = 1; i < TERMX - 1; i++ ) {
-        mvwputch( w, point( i, 5 ), BORDER_COLOR, LINE_OXOX );
-    }
-    mvwputch( w, point( 0, 5 ), BORDER_COLOR, LINE_XXXO ); // |-
-    mvwputch( w, point( TERMX - 1, 5 ), BORDER_COLOR, LINE_XOXX ); // -|
+    wattron( w, BORDER_COLOR );
+    mvwaddch( w, point( 0, 5 ), LINE_XXXO ); // |-
+    mvwhline( w, point( 1, 5 ), LINE_OXOX, TERMX - 2 ); // -
+    mvwaddch( w, point( TERMX - 1, 5 ), LINE_XOXX ); // -|
+    wattroff( w, BORDER_COLOR );
 }
 
 bool tab_manager::handle_input( const std::string &action, const input_context &ctxt )
@@ -193,7 +192,7 @@ void tab_manager::set_up_tab_navigation( input_context &ctxt )
 
 static int stat_point_pool()
 {
-    return 4 * 8 + get_option<int>( "INITIAL_STAT_POINTS" );
+    return 4 * 8 + 7;
 }
 static int stat_points_used( const Character &u )
 {
@@ -208,7 +207,7 @@ static int stat_points_used( const Character &u )
 
 static int trait_point_pool()
 {
-    return get_option<int>( "INITIAL_TRAIT_POINTS" );
+    return 0;
 }
 static int trait_points_used( const Character &u )
 {
@@ -231,7 +230,7 @@ static int trait_points_used( const Character &u )
 
 static int skill_point_pool()
 {
-    return get_option<int>( "INITIAL_SKILL_POINTS" );
+    return 4;
 }
 static int skill_points_used( const Character &u )
 {
@@ -243,7 +242,7 @@ static int skill_points_used( const Character &u )
     }
     int skills = 0;
     for( const Skill &sk : Skill::skills ) {
-        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 1, 2, 4, 6, 9, 12, 16, 20, 25 };
+        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 9, 12, 16, 20, 24, 28 };
         int skill_level = u.get_skill_level( sk.ident() );
         skills += costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
     }
@@ -267,7 +266,7 @@ static int has_unspent_points( const Character &u )
 struct multi_pool {
     // The amount of unspent points in the pool without counting the borrowed points
     const int pure_stat_points, pure_trait_points, pure_skill_points;
-    // The amount of points awailable in a pool minus the points that are borrowed
+    // The amount of points available in a pool minus the points that are borrowed
     // by lower pools plus the points that can be borrowed from higher pools
     const int stat_points_left, trait_points_left, skill_points_left;
     explicit multi_pool( const Character &u ):
@@ -413,7 +412,7 @@ static matype_id choose_ma_style( const character_type type, const std::vector<m
 
 void Character::randomize( const bool random_scenario, bool play_now )
 {
-    const int max_trait_points = get_option<int>( "MAX_TRAIT_POINTS" );
+    const int max_trait_points = 12;
     // Reset everything to the defaults to have a clean state.
     if( is_avatar() ) {
         *this->as_avatar() = avatar();
@@ -435,7 +434,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
         std::vector<const scenario *> scenarios;
         for( const scenario &scen : scenario::get_all() ) {
             if( !scen.has_flag( flag_CHALLENGE ) && !scen.scen_is_blacklisted() &&
-                ( !scen.has_flag( flag_CITY_START ) || cities_enabled ) && scen.can_pick().success() ) {
+                ( !scen.has_flag( flag_CITY_START ) || cities_enabled ) ) {
                 scenarios.emplace_back( &scen );
             }
         }
@@ -477,7 +476,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
             continue;
         }
         // Scenario/profession traits do not cost any points, but they are counted toward
-        // the limit (MAX_TRAIT_POINTS)
+        // the limit
         if( mut_info.points >= 0 ) {
             num_gtraits += mut_info.points;
         } else {
@@ -578,13 +577,6 @@ void Character::randomize( const bool random_scenario, bool play_now )
             case 7:
             case 8:
             case 9:
-                const skill_id aSkill = Skill::random_skill();
-                const int level = get_skill_level( aSkill );
-
-                if( level < p.skill_points_left && level < MAX_SKILL && loops > 10000 ) {
-                    // For balance reasons, increasing a skill from level 0 gives you 1 extra level for free
-                    set_skill_level( aSkill, ( level == 0 ? 2 : level + 1 ) );
-                }
                 break;
         }
     }
@@ -751,12 +743,7 @@ bool avatar::create( character_type type, const std::string &tempname )
     };
     tab_manager tabs( character_tabs );
 
-    const std::string point_pool = get_option<std::string>( "CHARACTER_POINT_POOLS" );
     pool_type pool = pool_type::MULTI_POOL;
-    if( point_pool == "multi_pool" ) {
-        // if using multipool only set it to that
-        pool = pool_type::MULTI_POOL;
-    }
 
     switch( type ) {
         case character_type::CUSTOM:
@@ -860,7 +847,7 @@ bool avatar::create( character_type type, const std::string &tempname )
     return true;
 }
 
-void Character::set_skills_from_hobbies()
+void Character::set_skills_from_hobbies( bool no_override )
 {
     // 2 for an average person
     float catchup_modifier = 1.0f + ( 2.0f * get_int() + get_per() ) / 24.0f;
@@ -869,6 +856,9 @@ void Character::set_skills_from_hobbies()
     // Grab skills from hobbies and train
     for( const profession *profession : hobbies ) {
         for( const profession::StartingSkill &e : profession->skills() ) {
+            if( no_override && get_skill_level( e.first ) != 0 ) {
+                continue;
+            }
             // Train our skill
             const int skill_xp_bonus = calculate_cumulative_experience( e.second );
             get_skill_level_object( e.first ).train( skill_xp_bonus, catchup_modifier,
@@ -1157,32 +1147,22 @@ void set_points( tab_manager &tabs, avatar &u, pool_type &pool )
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "CONFIRM" );
 
-    const std::string point_pool = get_option<std::string>( "CHARACTER_POINT_POOLS" );
-
     using point_limit_tuple = std::tuple<pool_type, std::string, std::string>;
     std::vector<point_limit_tuple> opts;
 
     const point_limit_tuple multi_pool = std::make_tuple( pool_type::MULTI_POOL,
-                                         _( "Multiple pools" ),
+                                         _( "Point buy" ),
                                          _( "Stats, traits and skills have separate point pools.\n"
-                                            "Stat points may be spent on traits and skills. Trait points may be spent on skills.\n"
-                                            "Scenarios and professions affect skill points.\n\n"
-                                            "A more complex method designed with balance in mind." ) );
-
-    const point_limit_tuple one_pool = std::make_tuple( pool_type::ONE_POOL, _( "Single pool" ),
-                                       _( "Stats, traits and skills share a single point pool.\n\n"
-                                          "The simplest method, lets you jump right in." ) );
+                                            "Unused stat points may be spent on traits and skills. Unused trait points may be spent on skills.\n"
+                                            "Traits granted by scenarios or professions don't cost trait points, but do count toward the maximum.\n\n"
+                                            "A balanced way to create a character." ) );
 
     const point_limit_tuple freeform = std::make_tuple( pool_type::FREEFORM, _( "Freeform" ),
-                                       _( "No point limits are enforced. Create a character with the intention of telling a story or challenging yourself." ) );
+                                       _( "No point limits are enforced.\n\n"
+                                          "Create a character with the intention of telling a story, making things easier, or challenging yourself." ) );
 
-    if( point_pool == "multi_pool" ) {
-        opts = { { multi_pool } };
-    } else if( point_pool == "one_pool" ) {
-        opts = { { one_pool } };
-    } else {
-        opts = { { multi_pool, one_pool, freeform } };
-    }
+
+    opts = { { multi_pool, freeform } };
 
     int highlighted = 0;
 
@@ -1281,7 +1261,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + string_format( _( "\nCarry weight: %.1f %s" ), convert_weight( u.weight_capacity() ),
                                  weight_units() )
                 + string_format( _( "\nResistance to knock down effect when hit: %.1f" ), u.stability_roll() )
-                + string_format( _( "\nIntimidation skill: %i" ), u.intimidation() )
+                + string_format( _( "\nIntimidation: %i" ), u.intimidation() )
                 + string_format( _( "\nMaximum oxygen: %i" ), u.get_oxygen_max() )
                 + string_format( _( "\nShout volume: %i" ), u.get_shout_volume() )
                 + string_format( _( "\nLifting strength: %i" ), u.get_lift_str() )
@@ -1292,12 +1272,11 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Throwing range, accuracy, and damage"
-                       "\n- Reload speed for weapons using muscle power to reload"
-                       "\n- Pull strength of some mutations"
-                       "\n- Resistance for being pulled or grabbed by some monsters"
+                       "\n- Reload speed for bows and other muscle-powered weapons"
+                       "\n- Grappling and escaping grabs and pull attacks"
                        "\n- Speed and effectiveness of smashing corpses and terrain"
                        "\n- Speed and effectiveness of prying things open, chopping wood, and mining"
-                       "\n- Chance of escaping grabs and traps"
+                       "\n- Chance of breaking out of snares and bear traps"
                        "\n- Power produced by muscle-powered vehicles"
                        "\n- Most aspects of melee combat"
                        "\n- Resistance to many diseases and poisons"
@@ -1325,23 +1304,24 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 description_str += "\n";
             }
             description_str +=
-                string_format( _( "\nDodge skill: %.f" ), u.get_dodge() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
                 + string_format( _( "\nMove cost while swimming: %i" ), u.swim_speed() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Effectiveness of lockpicking"
                        "\n- Chance of avoiding or escaping grabs and traps"
+                       "\n- Attack speed and accuracy in melee combat"
+                       "\n- Small bonus to melee critical hit chance"
+                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Effectiveness of disarming traps"
                        "\n- Chance of success when manipulating with gun modifications"
                        "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Attack speed and chance of critical hits in melee combat"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing speed"
                        "\n- Aiming speed"
                        "\n- Speed and effectiveness of chopping wood with powered tools"
                        "\n- Chance to get better results when butchering corpses or cutting items"
                        "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Damage from falling" ),
                     c_green );
         }
@@ -1355,7 +1335,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
                               ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
-                + string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + colorize( string_format( _( "\nCrafting bonus: %2d%%" ), u.get_int() ),
                             COL_STAT_BONUS )
                 + _( "\n\nAffects:" )
@@ -1366,11 +1346,10 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                        "\n- Chance of success when installing bionics"
                        "\n- Chance of success when manipulating with gun modifications"
                        "\n- Chance to learn a recipe when crafting from a book"
-                       "\n- Chance of hacking computers and card readers"
-                       "\n- Chance of successful robot reprogramming"
-                       "\n- Chance of successful decrypting memory cards"
+                       "\n- Chance of hacking/programming computers, card readers, robots, etc."
                        "\n- Chance of bypassing vehicle security system"
                        "\n- Chance to get better results when disassembling items"
+                       "\n- Bash damage with whip-type weapons"
                        "\n- Chance of being paralyzed by fear attack" ),
                     c_green );
         }
@@ -1385,11 +1364,16 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                                 COL_STAT_PENALTY );
             }
             description_str +=
-                string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
+                + string_format( _( "\nNight vision bonus: %.1f" ), ( u.get_per() / 2.8 ) )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
-                       "\n- Sight distance on game map and overmap"
+                       "\n- Precision and reliability with ranged attacks"
+                       "\n- Large bonus to melee critical hit chance"
+                       "\n- Reduces chance for stabbing weapons to get stuck"
+                       "\n- Sight distance on overmap"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing accuracy"
                        "\n- Disinfecting your own wounds and using first aid on others"
@@ -1637,7 +1621,7 @@ static const mutation_variant *variant_trait_selection_menu( const trait_id &cur
 
 void set_traits( tab_manager &tabs, avatar &u, pool_type pool )
 {
-    const int max_trait_points = get_option<int>( "MAX_TRAIT_POINTS" );
+    const int max_trait_points = 12;
     const bool screen_reader_mode = get_option<bool>( "SCREEN_READER_MODE" );
     std::string last_trait; // Used in screen_reader_mode to ensure full trait name is read
     // Track how many good / bad POINTS we have; cap both at MAX_TRAIT_POINTS
@@ -1801,9 +1785,11 @@ void set_traits( tab_manager &tabs, avatar &u, pool_type pool )
         werase( w );
 
         tabs.draw( w );
+        wattron( w, BORDER_COLOR );
         for( int i = 1; i < 3; ++i ) {
-            mvwputch( w, point( i * page_width, iHeaderHeight - 1 ), BORDER_COLOR, LINE_OXXX );  // '┬'
+            mvwaddch( w, point( i * page_width, iHeaderHeight - 1 ), LINE_OXXX );  // '┬'
         }
+        wattroff( w, BORDER_COLOR );
         draw_filter_and_sorting_indicators( w, ctxt, filterstring, traits_sorter );
         draw_points( w, pool, u );
         int full_string_length = 0;
@@ -2172,14 +2158,6 @@ static struct {
             return true;
         }
 
-        if( !a->can_pick().success() && b->can_pick().success() ) {
-            return false;
-        }
-
-        if( a->can_pick().success() && !b->can_pick().success() ) {
-            return true;
-        }
-
         if( sort_by_points ) {
             return a->point_cost() < b->point_cost();
         } else {
@@ -2208,17 +2186,8 @@ static std::string assemble_profession_details( const avatar &u, const input_con
     assembled += string_format( g_switch_msg( u ), ctxt.get_desc( "CHANGE_GENDER" ),
                                 profession_name ) + "\n";
     assembled += string_format( dress_switch_msg(), ctxt.get_desc( "CHANGE_OUTFIT" ) ) + "\n";
-
-    if( sorted_profs[cur_id]->get_requirement().has_value() ) {
-        assembled += "\n" + colorize( _( "Profession requirements:" ), COL_HEADER ) + "\n";
-        assembled += string_format( _( "Complete \"%s\"\n" ),
-                                    sorted_profs[cur_id]->get_requirement().value()->name() );
-    }
     //Profession story
     assembled += "\n" + colorize( _( "Profession story:" ), COL_HEADER ) + "\n";
-    if( !sorted_profs[cur_id]->can_pick().success() ) {
-        assembled += colorize( sorted_profs[cur_id]->can_pick().str(), c_red ) + "\n";
-    }
     assembled += colorize( sorted_profs[cur_id]->description( u.male ), c_green ) + "\n";
 
     // Profession addictions
@@ -2497,7 +2466,6 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
         if( cur_id_is_valid ) {
             int netPointCost = sorted_profs[cur_id]->point_cost() - u.prof->point_cost();
             ret_val<void> can_afford = sorted_profs[cur_id]->can_afford( u, skill_points_left( u, pool ) );
-            ret_val<void> can_pick = sorted_profs[cur_id]->can_pick();
             int pointsForProf = sorted_profs[cur_id]->point_cost();
             bool negativeProf = pointsForProf < 0;
             if( negativeProf ) {
@@ -2534,14 +2502,12 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
             nc_color col;
             if( u.prof != &sorted_profs[i].obj() ) {
 
-                if( cur_id_is_valid && sorted_profs[i] == sorted_profs[cur_id] &&
-                    !sorted_profs[i]->can_pick().success() ) {
+                if( cur_id_is_valid && sorted_profs[i] == sorted_profs[cur_id] ) {
                     col = h_dark_gray;
                     if( i == cur_id ) {
                         cur_prof_notes = _( "unavailable" );
                     }
-                } else if( cur_id_is_valid && sorted_profs[i] != sorted_profs[cur_id] &&
-                           !sorted_profs[i]->can_pick().success() ) {
+                } else if( cur_id_is_valid && sorted_profs[i] != sorted_profs[cur_id] ) {
                     col = c_dark_gray;
                     if( i == cur_id ) {
                         cur_prof_notes = _( "unavailable" );
@@ -2614,13 +2580,6 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
                 cur_id = iStartPos + ( iContentHeight - 1 ) / 2;
             }
         } else if( action == "CONFIRM" ) {
-            ret_val<void> can_pick = sorted_profs[cur_id]->can_pick();
-
-            if( !can_pick.success() ) {
-                popup( can_pick.str() );
-                continue;
-            }
-
             // Selecting a profession will, under certain circumstances, change the detail text
             details_recalc = true;
 
@@ -2735,11 +2694,11 @@ static std::string assemble_hobby_details( const avatar &u, const input_context 
                 continue;
             }
             std::string skill_degree;
-            if( level == 1 ) {
+            if( level < 3 ) {
                 skill_degree = pgettext( "set_profession_skill", "beginner" );
-            } else if( level == 2 ) {
-                skill_degree = pgettext( "set_profession_skill", "intermediate" );
             } else if( level == 3 ) {
+                skill_degree = pgettext( "set_profession_skill", "intermediate" );
+            } else if( level == 4 ) {
                 skill_degree = pgettext( "set_profession_skill", "competent" );
             } else {
                 skill_degree = pgettext( "set_profession_skill", "advanced" );
@@ -3058,12 +3017,16 @@ void set_hobbies( tab_manager &tabs, avatar &u, pool_type pool )
 /**
  * @return The skill points to consume when a skill is increased (by one level) from the
  * current level.
- *
- * @note: There is one exception: if the current level is 0, it can be boosted by 2 levels for 1 point.
  */
 static int skill_increment_cost( const Character &u, const skill_id &skill )
 {
-    return std::max( 1, ( static_cast<int>( u.get_skill_level( skill ) ) + 1 ) / 2 );
+    if( u.get_skill_level( skill ) < 3 ) {
+        return 1;
+    } else if( u.get_skill_level( skill ) < 6 ) {
+        return 3;
+    } else {
+        return 4;
+    }
 }
 
 static std::string assemble_skill_details( const avatar &u,
@@ -3230,14 +3193,11 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
 
         // Write the hint as to upgrade costs
         const int cost = skill_increment_cost( u, currentSkill->ident() );
-        const int level = u.get_skill_level( currentSkill->ident() );
         if( pool != pool_type::FREEFORM ) {
-            // in pool the first level of a skill gives 2
-            const int upgrade_levels = level == 0 ? 2 : 1;
             // We have two different strings to pluralize, so we have to use two translation calls.
             const std::string upgrade_levels_s = string_format(
                     //~ levels here are skill levels at character creation time
-                    n_gettext( "%d level", "%d levels", upgrade_levels ), upgrade_levels );
+                    n_gettext( "%d level", "%d levels", 1 ), 1 );
             const nc_color color = skill_points_left( u, pool ) >= cost ? COL_SKILL_USED : c_light_red;
             mvwprintz( w, point( remaining_points_length + 9, 3 ), color,
                        //~ Second string is e.g. "1 level" or "2 levels"
@@ -3343,18 +3303,15 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
             if( level > 0 ) {
-                // For balance reasons, increasing a skill from level 0 gives 1 extra level for free, but
-                // decreasing it from level 2 forfeits the free extra level (thus changes it to 0)
-                u.mod_skill_level( skill_id, level == 2 && pool != pool_type::FREEFORM ? -2 : -1 );
+                u.mod_skill_level( skill_id, -1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
             details_recalc = true;
         } else if( action == "RIGHT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            if( level < MAX_SKILL ) {
-                // For balance reasons, increasing a skill from level 0 gives 1 extra level for free
-                u.mod_skill_level( skill_id, level == 0 && pool != pool_type::FREEFORM ? +2 : +1 );
+            if( level < 8 ) {
+                u.mod_skill_level( skill_id, +1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
             details_recalc = true;
@@ -3379,14 +3336,6 @@ static struct {
             } else if( a == gen ) {
                 return true;
             }
-        }
-
-        if( !a->can_pick().success() && b->can_pick().success() ) {
-            return false;
-        }
-
-        if( a->can_pick().success() && !b->can_pick().success() ) {
-            return true;
         }
 
         if( !cities_enabled && a->has_flag( "CITY_START" ) != b->has_flag( "CITY_START" ) ) {
@@ -3426,23 +3375,13 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
                      ctxt.get_desc( "RESET_CALENDAR" ) ) + "\n";
     assembled += "\n" + colorize( _( "Scenario Story:" ), COL_HEADER ) + "\n";
     assembled += colorize( current_scenario->description( u.male ), c_green ) + "\n";
-    const std::optional<achievement_id> scenRequirement = current_scenario->get_requirement();
 
-    if( scenRequirement.has_value() ||
-        ( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) {
+    if( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
         assembled += "\n" + colorize( _( "Scenario Requirements:" ), COL_HEADER ) + "\n";
         if( current_scenario->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
             const std::string scenUnavailable =
                 _( "This scenario is not available in this world due to city size settings." );
             assembled += colorize( scenUnavailable, c_red ) + "\n";
-        }
-        if( scenRequirement.has_value() ) {
-            nc_color requirement_color = c_red;
-            if( current_scenario->can_pick().success() ) {
-                requirement_color = c_green;
-            }
-            assembled += colorize( string_format( _( "Complete \"%s\"" ), scenRequirement.value()->name() ),
-                                   requirement_color ) + "\n";
         }
     }
 
@@ -3577,7 +3516,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             ret_val<void> can_afford = sorted_scens[cur_id]->can_afford(
                                            *get_scenario(),
                                            skill_points_left( u, pool ) );
-            ret_val<void> can_pick = sorted_scens[cur_id]->can_pick();
 
             int pointsForScen = sorted_scens[cur_id]->point_cost();
             bool negativeScen = pointsForScen < 0;
@@ -3612,15 +3550,13 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             nc_color col;
             if( get_scenario() != sorted_scens[i] ) {
                 if( cur_id_is_valid && sorted_scens[i] == sorted_scens[cur_id] &&
-                    ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ||
-                      !sorted_scens[i]->can_pick().success() ) ) {
+                    ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) ) {
                     col = h_dark_gray;
                     if( i == cur_id ) {
                         current_scenario_notes = _( "unavailable" );
                     }
                 } else if( cur_id_is_valid && sorted_scens[i] != sorted_scens[cur_id] &&
-                           ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ||
-                             !sorted_scens[i]->can_pick().success() ) ) {
+                           ( ( sorted_scens[i]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) ) ) {
                     col = c_dark_gray;
                     if( i == cur_id ) {
                         current_scenario_notes = _( "unavailable" );
@@ -3701,14 +3637,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 cur_id = iStartPos + ( iContentHeight - 1 ) / 2;
             }
         } else if( action == "CONFIRM" ) {
-            // set arbitrarily high points and check if we have the achievment
-            ret_val<void> can_pick = sorted_scens[cur_id]->can_pick();
-
-            if( !can_pick.success() ) {
-                popup( can_pick.str() );
-                continue;
-            }
-
             if( sorted_scens[cur_id]->has_flag( "CITY_START" ) && !scenario_sorter.cities_enabled ) {
                 continue;
             }
@@ -4145,15 +4073,11 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
         draw_points( w, pool, you );
 
         //Draw the line between editable and non-editable stuff.
-        for( int i = 0; i < getmaxx( w ); ++i ) {
-            if( i == 0 ) {
-                mvwputch( w, point( i, 9 ), BORDER_COLOR, LINE_XXXO );
-            } else if( i == getmaxx( w ) - 1 ) {
-                wputch( w, BORDER_COLOR, LINE_XOXX );
-            } else {
-                wputch( w, BORDER_COLOR, LINE_OXOX );
-            }
-        }
+        wattron( w, BORDER_COLOR );
+        mvwaddch( w, point( 0,                9 ), LINE_XXXO ); // |-
+        mvwhline( w, point( 1,                9 ), LINE_OXOX, getmaxx( w ) - 2 ); // |
+        mvwaddch( w, point( getmaxx( w ) - 1, 9 ), LINE_XOXX );  // -|
+        wattroff( w, BORDER_COLOR );
         wnoutrefresh( w );
 
         werase( w_stats );
@@ -4308,9 +4232,11 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             if( prof_proficiencies.empty() ) {
                 mvwprintz( w_proficiencies, point_south, c_light_red, _( "None!" ) );
             } else {
+                wattron( w_proficiencies, c_light_gray );
                 for( const proficiency_id &prof : prof_proficiencies ) {
-                    wprintz( w_proficiencies, c_light_gray, "\n" + trim_by_length( prof->name(), 18 ) );
+                    wprintw( w_proficiencies, "\n" + trim_by_length( prof->name(), 18 ) );
                 }
+                wattroff( w_proficiencies, c_light_gray );
             }
             wnoutrefresh( w_proficiencies );
         }
@@ -4422,9 +4348,11 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             if( you.hobbies.empty() ) {
                 mvwprintz( w_hobbies, point_south, c_light_red, _( "None!" ) );
             } else {
+                wattron( w_hobbies, c_light_gray );
                 for( const profession *prof : you.hobbies ) {
-                    wprintz( w_hobbies, c_light_gray, "\n%s", prof->gender_appropriate_name( you.male ) );
+                    wprintw( w_hobbies, "\n%s", prof->gender_appropriate_name( you.male ) );
                 }
+                wattroff( w_hobbies, c_light_gray );
             }
             wnoutrefresh( w_hobbies );
         }

@@ -78,6 +78,7 @@
 #include "mongroup.h"
 #include "monster.h"
 #include "mtype.h"
+#include "npc.h"
 #include "output.h"
 #include "overmapbuffer.h"
 #include "pathfinding.h"
@@ -1857,7 +1858,9 @@ bool map::furn_set( const tripoint_bub_ms &p, const furn_id &new_furniture, cons
     if( !new_f.emissions.empty() ) {
         field_furn_locs.push_back( p );
     }
-    if( old_f.transparent != new_f.transparent ) {
+    if( old_f.transparent != new_f.transparent ||
+        old_f.has_flag( ter_furn_flag::TFLAG_TRANSLUCENT ) != new_f.has_flag(
+            ter_furn_flag::TFLAG_TRANSLUCENT ) ) {
         set_transparency_cache_dirty( p );
         set_seen_cache_dirty( p );
     }
@@ -2361,7 +2364,9 @@ bool map::ter_set( const tripoint_bub_ms &p, const ter_id &new_terrain, bool avo
     if( !new_t.emissions.empty() ) {
         field_ter_locs.push_back( p );
     }
-    if( old_t.transparent != new_t.transparent ) {
+    if( old_t.transparent != new_t.transparent ||
+        old_t.has_flag( ter_furn_flag::TFLAG_TRANSLUCENT ) != new_t.has_flag(
+            ter_furn_flag::TFLAG_TRANSLUCENT ) ) {
         set_transparency_cache_dirty( p );
         set_seen_cache_dirty( p );
     }
@@ -4774,7 +4779,7 @@ void map::batter( const tripoint_bub_ms &p, int power, int tries, const bool sil
 void map::crush( const tripoint_bub_ms &p )
 {
     creature_tracker &creatures = get_creature_tracker();
-    Character *crushed_player = creatures.creature_at<Character>( p );
+    Character *crushed_player = creatures.creature_at<Character>( this->getglobal( p ) );
 
     if( crushed_player != nullptr ) {
         bool player_inside = false;
@@ -8362,9 +8367,10 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // Ugly `if` for now
+    // TODO: Why is it even like this?
     if( f.z() == t.z() ) {
         if( ( range >= 0 &&
-              range < trig_dist( f.raw(), t.raw() ) ) ||
+              range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }
@@ -8387,7 +8393,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // Handle direct vertical neighbor (1 tile away, different Z)
-    if( trig_dist_z_adjust( f.raw(), t.raw() ) == 1 && f.z() != t.z() ) {
+    if( static_cast<int>( trig_dist( f.raw(), t.raw() ) ) < 2 && f.z() != t.z() ) {
         const bool going_up = t.z() > f.z();
         const tripoint_bub_ms &lower = going_up ? f : t;
         const tripoint_bub_ms &upper = going_up ? t : f;
@@ -8408,7 +8414,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // 3D path check
-    if( ( range >= 0 && range < trig_dist_z_adjust( f.raw(), t.raw() ) ) ||
+    if( ( range >= 0 && range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
         !inbounds( t ) ) {
         return false;
     }

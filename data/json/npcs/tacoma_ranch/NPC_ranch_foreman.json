@@ -255,11 +255,18 @@
     "id": "MISSION_RANCH_FOREMAN_2",
     "type": "mission_definition",
     "name": { "str": "Find 25 Blankets" },
-    "goal": "MGOAL_FIND_ITEM",
+    "goal": "MGOAL_CONDITION",
+    "goal_condition": {
+      "u_has_items_sum": [
+        { "item": "blanket", "amount": 25 },
+        { "item": "fur_blanket", "amount": 25 },
+        { "item": "down_blanket", "amount": 25 },
+        { "item": "blanket_weighted", "amount": 25 },
+        { "item": "electric_blanket", "amount": 25 }
+      ]
+    },
     "difficulty": 5,
     "value": 50000,
-    "item": "blanket",
-    "count": 25,
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
     "followup": "MISSION_RANCH_FOREMAN_3",
@@ -313,18 +320,29 @@
           ],
           "place_npcs": [ { "class": "ranch_construction_2", "x": 19, "y": 8 } ]
         }
+      ],
+      "effect": [
+        {
+          "u_consume_item_sum": [
+            { "item": "blanket", "amount": 25 },
+            { "item": "fur_blanket", "amount": 25 },
+            { "item": "down_blanket", "amount": 25 },
+            { "item": "blanket_weighted", "amount": 25 },
+            { "item": "electric_blanket", "amount": 25 }
+          ]
+        }
       ]
     }
   },
   {
     "id": "MISSION_RANCH_FOREMAN_3",
     "type": "mission_definition",
-    "name": { "str": "Gather 2500 Nails" },
+    "name": { "str": "Gather 1500 Nails" },
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 5,
     "value": 50000,
     "item": "nail",
-    "count": 2500,
+    "count": 1500,
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
     "followup": "MISSION_RANCH_FOREMAN_4",
@@ -389,7 +407,7 @@
     "followup": "MISSION_RANCH_FOREMAN_5",
     "dialogue": {
       "describe": "We need help…",
-      "offer": "I'm sure you've noticed the new workers that have started trickling in.  The Free Merchant counsel is demanding that we immediately begin projects to become self-sufficient due to limited supplies.  We are going to need to rapidly setup an agricultural industry before winter and starvation catches us unprepared and unsupported.  In order to get a half dozen shovels and a couple of bags of seeds, we are going to have to trade for it.  I've already got the deal lined up, but the only thing they are willing to trade it for is salt.  I negotiated them down from 50 lbs to 30… we were hoping you might have access to a source.",
+      "offer": "I'm sure you've noticed the new workers that have started trickling in.  The Free Merchant council is demanding that we immediately begin projects to become self-sufficient due to limited supplies.  We are going to need to rapidly setup an agricultural industry before winter and starvation catches us unprepared and unsupported.  In order to get a half dozen shovels and a couple of bags of seeds, we are going to have to trade for it.  I've already got the deal lined up, but the only thing they are willing to trade it for is salt.  I negotiated them down from 50 lbs to 30… we were hoping you might have access to a source.",
       "accepted": "Salt is key to preserving meat and other perishables… without any excess food it wouldn't do us much good now, but I imagine we'll need to send you out to get more in the future.",
       "rejected": "Come back when you get a chance.  We need skilled survivors.",
       "advice": "If you can find a source of salt water you should be able to boil it down.  Alternatively, you can go into the cities and search restaurants.",

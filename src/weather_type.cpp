@@ -136,6 +136,8 @@ void weather_type::load( const JsonObject &jo, const std::string_view )
         }
         mandatory( weather_animation_jo, was_loaded, "sym", weather_animation.symbol,
                    unicode_codepoint_from_symbol_reader );
+        // Defaults to false. If true, just covers the visible area instead of drawing random droplets.
+        optional( weather_animation_jo, was_loaded, "static_overlay", weather_animation.static_overlay );
     }
     optional( jo, was_loaded, "required_weathers", required_weathers );
     read_condition( jo, "condition", condition, true );

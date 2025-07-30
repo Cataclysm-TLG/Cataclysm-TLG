@@ -231,6 +231,10 @@ static int calc_bash_skill( const mtype &t )
     return ret;
 }
 
+// TODO: size_to_volume and volume_to_size should be made into a single consistent function.
+// TODO: Volume max should be tiny: 10679, small: 27358, medium: 90134, large: 150299
+// TODO: This would necessitate increasing vpart capacity and resizing almost every monster in the game.
+// See Character::get_average_character_volume() etc.
 static creature_size volume_to_size( const units::volume &vol )
 {
     if( vol <= 7500_ml ) {
@@ -337,10 +341,6 @@ void MonsterGenerator::finalize_mtypes()
         apply_species_attributes( mon );
         validate_species_ids( mon );
         mon.size = volume_to_size( mon.volume );
-
-        // adjust for worldgen difficulty parameters
-        mon.speed *= get_option<int>( "MONSTER_SPEED" )      / 100.0;
-        mon.hp    *= get_option<int>( "MONSTER_RESILIENCE" ) / 100.0;
 
         for( const monster_adjustment &adj : adjustments ) {
             adj.apply( mon );
@@ -608,6 +608,8 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "PULL_METAL_WEAPON", mattack::pull_metal_weapon );
     add_hardcoded_attack( "BOOMER", mattack::boomer );
     add_hardcoded_attack( "BOOMER_GLOW", mattack::boomer_glow );
+    add_hardcoded_attack( "PULL_METAL_WEAPON", mattack::pull_metal_weapon );
+    add_hardcoded_attack( "PULL_METAL_AOE", mattack::pull_metal_aoe );
     add_hardcoded_attack( "RESURRECT", mattack::resurrect );
     add_hardcoded_attack( "SMASH", mattack::smash );
     add_hardcoded_attack( "SCIENCE", mattack::science );
@@ -617,12 +619,10 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "SPIT_SAP", mattack::spit_sap );
     add_hardcoded_attack( "TRIFFID_HEARTBEAT", mattack::triffid_heartbeat );
     add_hardcoded_attack( "FUNGUS", mattack::fungus );
-    add_hardcoded_attack( "FUNGUS_CORPORATE", mattack::fungus_corporate );
     add_hardcoded_attack( "FUNGUS_HAZE", mattack::fungus_haze );
     add_hardcoded_attack( "FUNGUS_BIG_BLOSSOM", mattack::fungus_big_blossom );
     add_hardcoded_attack( "FUNGUS_INJECT", mattack::fungus_inject );
     add_hardcoded_attack( "FUNGUS_BRISTLE", mattack::fungus_bristle );
-    add_hardcoded_attack( "FUNGUS_GROWTH", mattack::fungus_growth );
     add_hardcoded_attack( "FUNGUS_SPROUT", mattack::fungus_sprout );
     add_hardcoded_attack( "FUNGUS_FORTIFY", mattack::fungus_fortify );
     add_hardcoded_attack( "FUNGAL_TRAIL", mattack::fungal_trail );

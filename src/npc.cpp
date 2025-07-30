@@ -134,6 +134,7 @@ static const npc_class_id NC_NONE( "NC_NONE" );
 static const npc_class_id NC_NONE_HARDENED( "NC_NONE_HARDENED" );
 static const npc_class_id NC_TRADER( "NC_TRADER" );
 
+static const morale_type morale_faction_member_died( "morale_faction_member_died" );
 static const morale_type morale_killed_innocent( "morale_killed_innocent" );
 static const morale_type morale_killer_has_killed( "morale_killer_has_killed" );
 
@@ -164,6 +165,7 @@ static const trait_id trait_BEE( "BEE" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
 static const trait_id trait_NO_BASH( "NO_BASH" );
+static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PACIFIST( "PACIFIST" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
@@ -626,16 +628,15 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
         myclass = type;
     }
 
-    const npc_class &the_class = myclass.obj();
-    str_max += the_class.roll_strength();
-    dex_max += the_class.roll_dexterity();
-    int_max += the_class.roll_intelligence();
-    per_max += the_class.roll_perception();
+    str_max += myclass->roll_strength();
+    dex_max += myclass->roll_dexterity();
+    int_max += myclass->roll_intelligence();
+    per_max += myclass->roll_perception();
 
-    personality.aggression += the_class.roll_aggression();
-    personality.bravery += the_class.roll_bravery();
-    personality.collector += the_class.roll_collector();
-    personality.altruism += the_class.roll_altruism();
+    personality.aggression += myclass->roll_aggression();
+    personality.bravery += myclass->roll_bravery();
+    personality.collector += myclass->roll_collector();
+    personality.altruism += myclass->roll_altruism();
 
     personality.aggression = std::clamp<int8_t>( personality.aggression,
                              NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
@@ -677,27 +678,34 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     generate_personality_traits();
 
     // Run mutation rounds
-    for( const auto &mr : type->mutation_rounds ) {
+    for( const auto &mr : myclass->mutation_rounds ) {
         int rounds = mr.second.roll();
         for( int i = 0; i < rounds; ++i ) {
             mutate_category( mr.first );
         }
     }
     // Add bionics
-    for( const auto &bl : type->bionic_list ) {
+    for( const auto &bl : myclass->bionic_list ) {
         int chance = bl.second;
         if( rng( 0, 100 ) <= chance ) {
             add_bionic( bl.first );
         }
     }
     // Add proficiencies
-    for( const proficiency_id &prof : type->_starting_proficiencies ) {
-        add_proficiency( prof );
+    for( const proficiency_id &prof : myclass->_starting_proficiencies ) {
+        add_proficiency( prof, false, true );
     }
+    if( myclass->is_common() ) {
+        add_default_background();
+        set_skills_from_hobbies( true ); // Only trains skills that are still at 0 at this point
+        set_proficiencies_from_hobbies();
+        set_bionics_from_hobbies(); // Just in case, for mods
+    }
+
     // Add martial arts
     learn_ma_styles_from_traits();
     // Add spells for magiclysm mod
-    for( std::pair<spell_id, int> spell_pair : type->_starting_spells ) {
+    for( std::pair<spell_id, int> spell_pair : myclass->_starting_spells ) {
         this->magic->learn_spell( spell_pair.first, *this, true );
         spell &sp = this->magic->get_spell( spell_pair.first );
         while( sp.get_level() < spell_pair.second && !sp.is_max_level( *this ) ) {
@@ -1815,7 +1823,7 @@ void npc::on_attacked( const Creature &attacker )
     }
 }
 
-int npc::assigned_missions_value()
+int npc::assigned_missions_value() const
 {
     int ret = 0;
     for( ::mission *m : chatbin.missions_assigned ) {
@@ -2157,14 +2165,6 @@ void npc::shop_restock()
                 count += 1;
                 last_item = count > 10 && one_in( 100 );
             }
-        }
-
-        // This removes some items according to item spawn scaling factor
-        const float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
-        if( spawn_rate < 1 ) {
-            ret.remove_if( [spawn_rate]( auto & ) {
-                return !( rng_float( 0, 1 ) < spawn_rate );
-            } );
         }
     }
 
@@ -2741,9 +2741,7 @@ int npc::print_info( const catacurses::window &w, int line, int vLines, int colu
     mvwprintz( w, point( column, line ), bar.second, bar.first );
     const int bar_max_width = 5;
     const int bar_width = utf8_width( bar.first );
-    for( int i = 0; i < bar_max_width - bar_width; ++i ) {
-        mvwprintz( w, point( column + 4 - i, line ), c_white, "." );
-    }
+    mvwhline( w, point( column + 3, line ), c_white, '.', bar_max_width - bar_width );
     line += fold_and_print( w, point( column + bar_max_width + 1, line ),
                             iWidth - bar_max_width - 1, basic_symbol_color(), get_name() );
 
@@ -2967,6 +2965,32 @@ void npc::die( Creature *nkiller )
         prevent_death_reminder = false;
         if( !is_dead() ) {
             return;
+        }
+    }
+    if( !is_hallucination() ) {
+        Character &you = get_player_character();
+        if( is_player_ally() && you.sees( *this ) ) {
+            if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
+                if( you.has_flag( json_flag_SPIRITUAL ) ) {
+                    you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
+                } else {
+                    you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
+                }
+            }
+        }
+        for( const auto &entry : my_fac->members ) {
+            const character_id &cid = entry.first;
+            Character *member = g->critter_by_id<Character>( cid );
+            // TODO: Finding out after the fact.
+            if( member->sees( *this ) ) {
+                if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
+                    if( member->has_flag( json_flag_SPIRITUAL ) ) {
+                        member->add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
+                    } else {
+                        member->add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
+                    }
+                }
+            }
         }
     }
 
@@ -3644,7 +3668,7 @@ void npc::set_companion_mission( const tripoint_abs_omt &omt_pos, const std::str
 
 void npc::reset_companion_mission()
 {
-    comp_mission.position = tripoint_abs_omt( -999, -999, -999 );
+    comp_mission.position = overmap::invalid_tripoint;
     reset_miss_id( comp_mission.miss_id );
     comp_mission.role_id.clear();
     if( comp_mission.destination ) {

@@ -1115,11 +1115,12 @@ void iexamine::vending( Character &you, const tripoint_bub_ms &examp )
         const int page_size = std::min( num_items, list_lines );
 
         werase( w );
-        wborder( w, LINE_XOXO, LINE_XOXO, LINE_OXOX, LINE_OXOX,
-                 LINE_OXXO, LINE_OOXX, LINE_XXOO, LINE_XOOX );
+        draw_border( w );
+        wattron( w, BORDER_COLOR );
         mvwhline( w, point( 1, first_item_offset - 1 ), LINE_OXOX, w_items_w - 2 );
         mvwaddch( w, point( 0, first_item_offset - 1 ), LINE_XXXO ); // |-
         mvwaddch( w, point( w_items_w - 1, first_item_offset - 1 ), LINE_XOXX ); // -|
+        wattroff( w, BORDER_COLOR );
 
         trim_and_print( w, point( 2, 1 ), w_items_w - 3, c_light_gray,
                         _( "Money left: %s" ), format_money( money ) );
@@ -2207,7 +2208,7 @@ void iexamine::flower_poppy( Character &you, const tripoint_bub_ms &examp )
         you.add_effect( effect_pkill2, 7_minutes );
         // Please drink poppy nectar responsibly.
         if( one_in( 20 ) ) {
-            you.add_addiction( STATIC( addiction_id( "opiate" ) ), 1 );
+            you.add_addiction( STATIC( addiction_id( "opioid" ) ), 1 );
         }
     }
     if( !query_yn( _( "Pick %s?" ), here.furnname( examp ) ) ) {

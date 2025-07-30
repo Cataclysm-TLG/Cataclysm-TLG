@@ -796,7 +796,7 @@ void game::setup()
     // invalidate calendar caches in case we were previously playing
     // a different world
     calendar::set_eternal_season( ::get_option<bool>( "ETERNAL_SEASON" ) );
-    calendar::set_season_length( ::get_option<int>( "SEASON_LENGTH" ) );
+    calendar::set_season_length( 91 );
 
     calendar::set_eternal_night( ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "night" );
     calendar::set_eternal_day( ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "day" );
@@ -1457,7 +1457,7 @@ static bool cancel_auto_move( Character &you, const std::string &text )
     g->invalidate_main_ui_adaptor();
     if( query_yn( _( "%s Cancel auto move?" ), text ) )  {
         add_msg( m_warning, _( "%s Auto move canceled." ), text );
-        you.clear_destination();
+        you.abort_automove();
         return true;
     }
     return false;
@@ -1607,7 +1607,7 @@ bool game::cancel_activity_query( const std::string &text )
             }
         }
         u.cancel_activity();
-        u.clear_destination();
+        u.abort_automove();
         u.resume_backlog_activity();
         return true;
     }
@@ -2757,27 +2757,8 @@ bool game::try_get_right_click_action( action_id &act, const tripoint_bub_ms &mo
     return true;
 }
 
-bool game::query_exit_to_OS()
-{
-    const int old_timeout = inp_mngr.get_timeout();
-    inp_mngr.reset_timeout();
-    uquit = QUIT_EXIT_PENDING; // change it before query so input_context doesn't get confused
-    if( query_yn( _( "Really Quit?  All unsaved changes will be lost." ) ) ) {
-        uquit = QUIT_EXIT;
-        throw exit_exception();
-    }
-    uquit = QUIT_NO;
-    inp_mngr.set_timeout( old_timeout );
-    ui_manager::redraw_invalidated();
-    catacurses::doupdate();
-    return false;
-}
-
 bool game::is_game_over()
 {
-    if( uquit == QUIT_EXIT ) {
-        return query_exit_to_OS();
-    }
     if( uquit == QUIT_DIED || uquit == QUIT_WATCH ) {
         Creature *player_killer = u.get_killer();
         if( player_killer && player_killer->as_character() ) {
@@ -3236,7 +3217,7 @@ bool game::load( const save_t &name )
                     // anything else, to ensure they pick up the correct value from the save's
                     // worldoptions
                     calendar::set_eternal_season( ::get_option<bool>( "ETERNAL_SEASON" ) );
-                    calendar::set_season_length( ::get_option<int>( "SEASON_LENGTH" ) );
+                    calendar::set_season_length( 91 );
 
                     calendar::set_eternal_night(
                         ::get_option<std::string>( "ETERNAL_TIME_OF_DAY" ) == "night" );
@@ -3777,11 +3758,13 @@ void game::disp_NPCs()
             mvwprintz( w, point( 0, i + 4 ), c_white, "%s: %s", npcs[i]->get_name(),
                        apos.to_string() );
         }
+        wattron( w, c_white );
         for( const monster &m : all_monsters() ) {
-            mvwprintz( w, point( 0, i + 4 ), c_white, "%s: %d, %d, %d", m.name(),
+            mvwprintw( w, point( 0, i + 4 ), "%s: %d, %d, %d", m.name(),
                        m.posx(), m.posy(), m.posz() );
             ++i;
         }
+        wattroff( w, c_white );
         wnoutrefresh( w );
     } );
 
@@ -3802,14 +3785,16 @@ void game::disp_NPCs()
 // A little helper to draw footstep glyphs.
 static void draw_footsteps( const catacurses::window &window, const tripoint &offset )
 {
+    wattron( window, c_yellow );
     for( const tripoint &footstep : sounds::get_footstep_markers() ) {
         char glyph = '?';
         if( footstep.z != offset.z ) { // Here z isn't an offset, but a coordinate
             glyph = footstep.z > offset.z ? '^' : 'v';
         }
 
-        mvwputch( window, footstep.xy() + offset.xy(), c_yellow, glyph );
+        mvwaddch( window, footstep.xy() + offset.xy(), glyph );
     }
+    wattroff( window, c_yellow );
 }
 
 shared_ptr_fast<ui_adaptor> game::create_or_get_main_ui_adaptor()
@@ -4055,7 +4040,7 @@ void game::draw( ui_adaptor &ui )
     ter_view_p.z = ( u.pos() + u.view_offset ).z();
     m.build_map_cache( ter_view_p.z );
     m.update_visibility_cache( ter_view_p.z );
-
+    g->run_weather_animation();
     werase( w_terrain );
     void_blink_curses();
     draw_ter();
@@ -4141,15 +4126,16 @@ void game::draw_panels( bool force_draw )
                     label = catacurses::newwin( h, 1,
                                                 point( sidebar_right ? TERMX - panel.get_width() - 1 : panel.get_width(), y ) );
                     werase( label );
+                    wattron( label, c_light_red );
                     if( h == 1 ) {
-                        mvwputch( label, point_zero, c_light_red, LINE_OXOX );
+                        mvwaddch( label, point_zero, LINE_OXOX );
                     } else {
-                        mvwputch( label, point_zero, c_light_red, LINE_OXXX );
-                        for( int i = 1; i < h - 1; i++ ) {
-                            mvwputch( label, point( 0, i ), c_light_red, LINE_XOXO );
-                        }
-                        mvwputch( label, point( 0, h - 1 ), c_light_red, sidebar_right ? LINE_XXOO : LINE_XOOX );
+                        mvwaddch( label, point_zero, LINE_OXXX );
+                        // NOLINTNEXTLINE(cata-use-named-point-constants)
+                        mvwvline( label, point( 0, 1 ), LINE_XOXO, h - 2 ) ;
+                        mvwaddch( label, point( 0, h - 1 ), sidebar_right ? LINE_XXOO : LINE_XOOX );
                     }
+                    wattroff( label, c_light_red );
                     wnoutrefresh( label );
                 }
                 y += h;
@@ -6461,9 +6447,11 @@ void game::print_terrain_info( const tripoint &lp, const catacurses::window &w_l
     std::string desc = string_format( m.ter( lp ).obj().description );
     std::vector<std::string> lines = foldstring( desc, max_width );
     int numlines = lines.size();
+    wattron( w_look, c_light_gray );
     for( int i = 0; i < numlines; i++ ) {
-        mvwprintz( w_look, point( column, line++ ), c_light_gray, lines[i] );
+        mvwprintw( w_look, point( column, line++ ), lines[i] );
     }
+    wattroff( w_look, c_light_gray );
 
     // Furniture, if any
     print_furniture_info( lp, w_look, column, line );
@@ -6495,9 +6483,11 @@ void game::print_terrain_info( const tripoint &lp, const catacurses::window &w_l
     // furnitures and terrains.
     lines = foldstring( m.features( lp ), max_width );
     numlines = lines.size();
+    wattron( w_look, c_light_gray );
     for( int i = 0; i < numlines; i++ ) {
-        mvwprintz( w_look, point( column, ++line ), c_light_gray, lines[i] );
+        mvwprintw( w_look, point( column, ++line ), lines[i] );
     }
+    wattroff( w_look, c_light_gray );
 
     // Move cost from terrain and furniture and vehicle parts.
     // Vehicle part information is printed in a different function.
@@ -6561,9 +6551,11 @@ void game::print_furniture_info( const tripoint &lp, const catacurses::window &w
     desc = string_format( f.obj().description );
     std::vector<std::string> lines = foldstring( desc, max_width );
     int numlines = lines.size();
+    wattron( w_look, c_light_gray );
     for( int i = 0; i < numlines; i++ ) {
-        mvwprintz( w_look, point( column, line++ ), c_light_gray, lines[i] );
+        mvwprintw( w_look, point( column, line++ ), lines[i] );
     }
+    wattroff( w_look, c_light_gray );
 
     // If this furniture has a crafting pseudo item, check for tool qualities and print them
     if( !f->crafting_pseudo_item.is_empty() ) {
@@ -6785,41 +6777,35 @@ static void zones_manager_draw_borders( const catacurses::window &w_border,
                                         const catacurses::window &w_info_border,
                                         const int iInfoHeight, const int width )
 {
-    for( int i = 1; i < TERMX; ++i ) {
-        if( i < width ) {
-            mvwputch( w_border, point( i, 0 ), c_light_gray, LINE_OXOX ); // -
-            mvwputch( w_border, point( i, TERMY - iInfoHeight - 1 ), c_light_gray,
-                      LINE_OXOX ); // -
-        }
+    wattron( w_border, c_light_gray );
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    mvwhline( w_border, point( 1,                       0 ), LINE_OXOX, width - 1 ); // -
+    mvwhline( w_border, point( 1, TERMY - iInfoHeight - 1 ), LINE_OXOX, width - 1 ); // -
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    mvwvline( w_border, point( 0,         1 ), LINE_XOXO, TERMY - iInfoHeight - 1 ); // |
+    mvwvline( w_border, point( width - 1, 1 ), LINE_XOXO, TERMY - iInfoHeight - 1 ); // |
 
-        if( i < TERMY - iInfoHeight ) {
-            mvwputch( w_border, point( 0, i ), c_light_gray, LINE_XOXO ); // |
-            mvwputch( w_border, point( width - 1, i ), c_light_gray, LINE_XOXO ); // |
-        }
-    }
+    mvwaddch( w_border, point_zero,            LINE_OXXO ); // |^
+    mvwaddch( w_border, point( width - 1, 0 ), LINE_OOXX ); // ^|
 
-    mvwputch( w_border, point_zero, c_light_gray, LINE_OXXO ); // |^
-    mvwputch( w_border, point( width - 1, 0 ), c_light_gray, LINE_OOXX ); // ^|
-
-    mvwputch( w_border, point( 0, TERMY - iInfoHeight - 1 ), c_light_gray,
-              LINE_XXXO ); // |-
-    mvwputch( w_border, point( width - 1, TERMY - iInfoHeight - 1 ), c_light_gray,
-              LINE_XOXX ); // -|
+    mvwaddch( w_border, point( 0,         TERMY - iInfoHeight - 1 ), LINE_XXXO ); // |-
+    mvwaddch( w_border, point( width - 1, TERMY - iInfoHeight - 1 ), LINE_XOXX ); // -|
+    wattroff( w_border, c_light_gray );
 
     mvwprintz( w_border, point( 2, 0 ), c_white, _( "Zones manager" ) );
+
     wnoutrefresh( w_border );
 
-    for( int j = 0; j < iInfoHeight - 1; ++j ) {
-        mvwputch( w_info_border, point( 0, j ), c_light_gray, LINE_XOXO );
-        mvwputch( w_info_border, point( width - 1, j ), c_light_gray, LINE_XOXO );
-    }
+    wattron( w_info_border, c_light_gray );
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    mvwvline( w_info_border, point( 0,               0 ), LINE_XOXO, iInfoHeight - 1 );
+    mvwvline( w_info_border, point( width - 1,       0 ), LINE_XOXO, iInfoHeight - 1 );
+    mvwhline( w_info_border, point( 0, iInfoHeight - 1 ), LINE_OXOX, width - 1 );
 
-    for( int j = 0; j < width - 1; ++j ) {
-        mvwputch( w_info_border, point( j, iInfoHeight - 1 ), c_light_gray, LINE_OXOX );
-    }
+    mvwaddch( w_info_border, point( 0,         iInfoHeight - 1 ), LINE_XXOO );
+    mvwaddch( w_info_border, point( width - 1, iInfoHeight - 1 ), LINE_XOOX );
+    wattroff( w_info_border, c_light_gray );
 
-    mvwputch( w_info_border, point( 0, iInfoHeight - 1 ), c_light_gray, LINE_XXOO );
-    mvwputch( w_info_border, point( width - 1, iInfoHeight - 1 ), c_light_gray, LINE_XOOX );
     wnoutrefresh( w_info_border );
 }
 
@@ -6951,11 +6937,13 @@ void game::zones_manager()
                 mvwprintz( w_zones_options, point( 1, 1 ), c_white, _( "Options" ) );
 
                 int y = 2;
+                wattron( w_zones_options, c_white );
                 for( const auto &desc : descriptions ) {
-                    mvwprintz( w_zones_options, point( 3, y ), c_white, desc.first );
-                    mvwprintz( w_zones_options, point( 20, y ), c_white, desc.second );
+                    mvwprintw( w_zones_options, point( 3, y ), desc.first );
+                    mvwprintw( w_zones_options, point( 20, y ), desc.second );
                     y++;
                 }
+                wattroff( w_zones_options, c_white );
             }
         }
 
@@ -8161,26 +8149,21 @@ bool game::take_screenshot() const
 void game::reset_item_list_state( const catacurses::window &window, int height, bool bRadiusSort )
 {
     const int width = getmaxx( window );
-    for( int i = 1; i < TERMX; i++ ) {
-        if( i < width ) {
-            mvwputch( window, point( i, 0 ), c_light_gray, LINE_OXOX ); // -
-            mvwputch( window, point( i, TERMY - height - 1 ), c_light_gray,
-                      LINE_OXOX ); // -
-        }
+    wattron( window, c_light_gray );
 
-        if( i < TERMY - height ) {
-            mvwputch( window, point( 0, i ), c_light_gray, LINE_XOXO ); // |
-            mvwputch( window, point( width - 1, i ), c_light_gray, LINE_XOXO ); // |
-        }
-    }
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    mvwhline( window, point( 1,                  0 ), LINE_OXOX, width - 1 ); // -
+    mvwhline( window, point( 1, TERMY - height - 1 ), LINE_OXOX, width - 1 ); // -
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    mvwvline( window, point( 0,         1 ), LINE_XOXO, TERMY - height - 1 ); // |
+    mvwvline( window, point( width - 1, 1 ), LINE_XOXO, TERMY - height - 1 ); // |
 
-    mvwputch( window, point_zero, c_light_gray, LINE_OXXO ); // |^
-    mvwputch( window, point( width - 1, 0 ), c_light_gray, LINE_OOXX ); // ^|
+    mvwaddch( window, point_zero, LINE_OXXO ); // |^
+    mvwaddch( window, point( width - 1, 0 ), LINE_OOXX ); // ^|
 
-    mvwputch( window, point( 0, TERMY - height - 1 ), c_light_gray,
-              LINE_XXXO ); // |-
-    mvwputch( window, point( width - 1, TERMY - height - 1 ), c_light_gray,
-              LINE_XOXX ); // -|
+    mvwaddch( window, point( 0, TERMY - height - 1 ), LINE_XXXO ); // |-
+    mvwaddch( window, point( width - 1, TERMY - height - 1 ), LINE_XOXX ); // -|
+    wattroff( window, c_light_gray );
 
     mvwprintz( window, point( 2, 0 ), c_light_green, "<Tab> " );
     wprintz( window, c_white, _( "Items" ) );
@@ -8948,9 +8931,11 @@ game::vmenu_ret game::list_monsters( const std::vector<Creature *> &monster_list
                     mvwprintz( w_monsters, point( width - 31, y ), color, sText );
                     const int bar_max_width = 5;
                     const int bar_width = utf8_width( sText );
+                    wattron( w_monsters, c_white );
                     for( int i = 0; i < bar_max_width - bar_width; ++i ) {
-                        mvwprintz( w_monsters, point( width - 27 - i, y ), c_white, "." );
+                        mvwprintw( w_monsters, point( width - 27 - i, y ), "." );
                     }
+                    wattron( w_monsters, c_white );
 
                     if( m != nullptr ) {
                         const auto att = m->get_attitude();
@@ -10648,7 +10633,7 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     } else if( mcost == 0 ) {
         return false;
     }
-    bool diag = trigdist && u.posx() != dest_loc.x && u.posy() != dest_loc.y;
+    bool diag = u.posx() != dest_loc.x && u.posy() != dest_loc.y;
     const int previous_moves = u.get_moves();
     if( u.is_mounted() ) {
         auto *crit = u.mounted_creature.get();
@@ -12731,7 +12716,6 @@ void game::update_overmap_seen()
 {
     const tripoint_abs_omt ompos = u.global_omt_location();
     const int dist = u.overmap_modified_sight_range( light_level( u.posz() ) );
-    const int base_sight = u.overmap_sight_range( light_level( u.posz() ) );
     const int dist_squared = dist * dist;
     // We can always see where we're standing
     overmap_buffer.set_seen( ompos, om_vision_level::full );
@@ -12747,50 +12731,35 @@ void game::update_overmap_seen()
             continue;
         }
         // If circular distances are enabled, scale overmap distances by the diagonality of the sight line.
-        point_rel_omt abs_delta = delta.abs();
-        int max_delta = std::max( abs_delta.x(), abs_delta.y() );
+        point abs_delta = delta.raw().abs();
+        int max_delta = std::max( abs_delta.x, abs_delta.y );
         const float multiplier = trigdist ? std::sqrt( h_squared ) / max_delta : 1;
         const std::vector<tripoint_abs_omt> line = line_to( ompos, p );
         float sight_points = dist;
-        bool can_see = false;
-        for( auto it = line.begin(); it != line.end(); ++it ) {
+        for( auto it = line.begin();
+             it != line.end() && sight_points >= 0; ++it ) {
             const oter_id &ter = overmap_buffer.ter( *it );
-            const int see_cost = static_cast<int>( ter->get_see_cost() );
-
-            if( see_cost >= 5 ) {
-                break; // Solid wall blocks sight
-            }
-
-            sight_points -= see_cost * multiplier;
-            if( sight_points < 0 ) {
-                break;
-            }
-            if( *it == p ) {
-                can_see = true;
-                break;
-            }
+            sight_points -= static_cast<int>( ter->get_see_cost() ) * multiplier;
         }
         if( sight_points < 0 ) {
             continue;
         }
-        if( can_see ) {
-            const auto set_seen = []( const tripoint_abs_omt & p, om_vision_level level ) {
-                tripoint_abs_omt seen( p );
-                do {
-                    overmap_buffer.set_seen( seen, level );
-                    --seen.z();
-                } while( seen.z() >= 0 );
-            };
-            int tiles_from = rl_dist( p, ompos );
-            if( tiles_from < std::floor( base_sight / 2 ) ) {
-                set_seen( p, om_vision_level::full );
-            } else if( tiles_from < base_sight ) {
-                set_seen( p, om_vision_level::details );
-            } else if( tiles_from < base_sight * 2 ) {
-                set_seen( p, om_vision_level::outlines );
-            } else {
-                set_seen( p, om_vision_level::vague );
-            }
+        const auto set_seen = []( const tripoint_abs_omt & p, om_vision_level level ) {
+            tripoint_abs_omt seen( p );
+            do {
+                overmap_buffer.set_seen( seen, level );
+                --seen.z();
+            } while( seen.z() >= 0 );
+        };
+        int tiles_from = rl_dist( p, ompos );
+        if( tiles_from < std::floor( dist / 2 ) ) {
+            set_seen( p, om_vision_level::full );
+        } else if( tiles_from < dist ) {
+            set_seen( p, om_vision_level::details );
+        } else if( tiles_from < dist * 2 ) {
+            set_seen( p, om_vision_level::outlines );
+        } else {
+            set_seen( p, om_vision_level::vague );
         }
     }
 }
@@ -13160,7 +13129,7 @@ void game::start_calendar()
     calendar::start_of_game = scen->start_of_game();
     calendar::turn = calendar::start_of_game;
     calendar::initial_season = static_cast<season_type>( ( to_days<int>( calendar::start_of_game -
-                               calendar::turn_zero ) / get_option<int>( "SEASON_LENGTH" ) ) % season_type::NUM_SEASONS );
+                               calendar::turn_zero ) / 91 ) % season_type::NUM_SEASONS );
 }
 
 overmap &game::get_cur_om() const
@@ -13332,6 +13301,158 @@ void game::shift_destination_preview( const point &delta )
         p += delta;
     }
 }
+
+void game::run_weather_animation()
+{
+    if( !get_option<bool>( "ANIMATIONS" ) ) {
+        return;
+    }
+    m.update_visibility_cache( u.posz() );
+#if defined(TILES)
+    // Mark tiles draw caches dirty so they refresh properly.
+    tilecontext->set_draw_cache_dirty();
+#endif
+    // Invalidate main UI so weather animation draws fresh.
+    invalidate_main_ui_adaptor();
+    if( weather.weather_id->weather_animation.symbol != NULL_UNICODE ) {
+        animate_weather();
+    }
+}
+
+void game::animate_weather()
+{
+    const int TOTAL_VIEW = MAX_VIEW_DISTANCE * 2 + 1;
+    point iStart( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : 0,
+                  ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_HEIGHT - TOTAL_VIEW ) / 2 : 0 );
+    point iEnd( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? TERRAIN_WINDOW_WIDTH -
+                ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : TERRAIN_WINDOW_WIDTH,
+                ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? TERRAIN_WINDOW_HEIGHT - ( TERRAIN_WINDOW_HEIGHT -
+                        TOTAL_VIEW ) / 2 : TERRAIN_WINDOW_HEIGHT );
+
+    if( fullscreen ) {
+        iStart.x = 0;
+        iStart.y = 0;
+        iEnd.x = TERMX;
+        iEnd.y = TERMY;
+    }
+    point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
+                  -getmaxy( w_terrain ) / 2 + u.posy() ) );
+
+#if defined(TILES)
+    if( is_tileset_isometric() ) {
+        iStart.x = 0;
+        iStart.y = 0;
+        iEnd.x = MAPSIZE_X;
+        iEnd.y = MAPSIZE_Y;
+        offset.x = 0;
+        offset.y = 0;
+    }
+#endif // TILES
+
+    const weather_animation_t &weather_info = weather.weather_id->weather_animation;
+    if( weather_info.symbol == NULL_UNICODE ) {
+        // No weather animation, nothing to do
+        return;
+    }
+
+    const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
+
+    weather_printable wPrint;
+    wPrint.colGlyph = weather_info.color;
+    wPrint.cGlyph = weather_info.symbol;
+    wPrint.wtype = weather.weather_id;
+    wPrint.vdrops.clear();
+
+    creature_tracker &creatures = get_creature_tracker();
+
+    if( weather_info.static_overlay && use_tiles ) {
+        const int width = iEnd.x + 1 - iStart.x;
+        const int height = iEnd.y + 1 - iStart.y;
+        const int max_x = width + iStart.x;
+        const int max_y = height + iStart.y;
+
+        for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
+            for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
+                const point screen_point( local_x, local_y );
+                const point map_point = screen_point + offset;
+                const tripoint mapp( map_point, u.posz() );
+
+                if( !m.inbounds( mapp ) ) {
+                    continue;
+                }
+
+                const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
+                const visibility_variables &cache = m.get_visibility_variables_cache();
+                const auto &vis_cache_row = visibility_cache[mapp.x];
+                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
+
+                // Don't display fog on indoor tiles when the player is indoors.
+                if( vis != visibility_type::CLEAR ) {
+                    continue;
+                }
+                if( !m.is_outside( u.pos() ) && !m.is_outside( mapp ) ) {
+                    continue;
+                }
+                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+            }
+        }
+    } else {
+        // Ensure that rain doesn't animate faster than it's supposed to.
+        static std::chrono::steady_clock::time_point last_reroll = std::chrono::steady_clock::now();
+        static std::vector<std::pair<int, int>> cached_drops;
+
+
+        const auto now = std::chrono::steady_clock::now();
+        if( now - last_reroll >= std::chrono::milliseconds( 125 ) ) {
+            last_reroll = now;
+            cached_drops.clear();
+
+            const int width = iEnd.x + 1 - iStart.x;
+            const int height = iEnd.y + 1 - iStart.y;
+            const int grid_size = width * height;
+
+            std::vector<bool> used( grid_size, false );
+            auto get_index = [ = ]( int x, int y ) {
+                return y * width + x;
+            };
+
+            int attempts = 0;
+            while( static_cast<int>( cached_drops.size() ) < dropCount && attempts < dropCount * 5 ) {
+                const int local_x = rng( 0, width - 1 );
+                const int local_y = rng( 0, height - 1 );
+                const int index = get_index( local_x, local_y );
+                if( used[index] ) {
+                    ++attempts;
+                    continue;
+                }
+
+                const point screen_point( local_x + iStart.x, local_y + iStart.y );
+                const point map_point = screen_point + offset;
+                const tripoint mapp( map_point, u.posz() );
+
+                if( m.inbounds( mapp ) &&
+                    m.is_outside( mapp ) &&
+                    m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x][mapp.y],
+                                      m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
+                    !creatures.creature_at( mapp, true ) ) {
+                    used[index] = true;
+                    cached_drops.emplace_back( screen_point.x, screen_point.y );
+                }
+                ++attempts;
+            }
+        }
+
+        // Always use the last valid generated drops
+        wPrint.vdrops.clear();
+        for( const std::pair<int, int> &p : cached_drops ) {
+            wPrint.vdrops.emplace_back( p.first, p.second );
+        }
+
+    }
+
+    draw_weather( wPrint );
+}
+
 
 int game::slip_down_chance( climb_maneuver, climbing_aid_id aid_id,
                             bool show_chance_messages )

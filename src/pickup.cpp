@@ -205,7 +205,7 @@ static bool pick_one_up( item_location &loc, int quantity, bool &got_water, bool
     }
 
     // Handle charges, quantity == 0 means move all
-    if( quantity != 0 && newit.count_by_charges() ) {
+    if( quantity != 0 && newit.count_by_charges() && newit.type->stack_max != 1 ) {
         if( newit.charges > quantity ) {
             newit.charges = quantity;
         }
@@ -435,7 +435,7 @@ void Pickup::autopickup( const tripoint &p )
     for( drop_location selected : selected_items ) {
         item *it = selected.first.get_item();
         target_items.push_back( selected.first );
-        quantities.push_back( it->count_by_charges() ? it->charges : 0 );
+        quantities.push_back( it->count_by_charges() && it->type->stack_max != 1 ? it->charges : 0 );
     }
     pickup_activity_actor actor( target_items, quantities, player.pos_bub(), true );
     player.assign_activity( actor );

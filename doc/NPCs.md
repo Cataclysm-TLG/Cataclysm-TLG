@@ -35,7 +35,6 @@ Format:
   "name": { "str": "Example NPC" },                                        // Mandatory, display name for this class.
   "job_description": "I'm helping you learn the game.",                    // Mandatory
   "common": false,                                                         // Optional, defaults true. Whether or not this class can appear via random generation. Randomly generated NPCs will have skills, proficiencies, and bionics applied to them as a default new player character would.
-  "common_spawn_weight": 1.5,                                              // Optional (float), default 1.0 . For classes with common, this is how often they spawn. Higher numbers spawn more often.
   "sells_belongings": false,                                               // Optional. See [Shopkeeper NPC configuration](#shopkeeper-npc-configuration)
   "bonus_str": { "rng": [ -4, 0 ] },                                       // Optional. Modifies stat by the given value. This example shows a random distribution between -4 and 0.
   "bonus_dex": 100,                                                        // Optional. This example always adds exactly 100 to the stat.
@@ -73,6 +72,7 @@ Format:
   ],
   "shopkeeper_blacklist": "test_blacklist",
   "restock_interval": "6 days",
+  "proficiencies": [ "prof_gunsmithing_basic", "prof_spotting" ],         // Optional. Note that prereqs do not need to be defined. NPCs of this class will learn this proficiency *and all pre-requesite proficiencies*.
   "traits": [ { "group": "BG_survival_story_EVACUEE" }, { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" } ]     // Optional
 }
 ```
@@ -1382,6 +1382,8 @@ _some functions support array arguments or kwargs, denoted with square brackets 
 | npc_fear()    |  ✅   |  ✅   | u, n  | Return NPC fear toward opposite talker. <br/><br/>Example:<br/> `{ "math": [ "n_npc_fear()", "<", "2" ] }`|
 | npc_trust()    |  ✅   |  ✅   | u, n  | Return NPC trust toward opposite talker. <br/><br/>Example:<br/> `{ "math": [ "n_npc_trust()", "=", "2" ] }`|
 | npc_value()    |  ✅   |  ✅   | u, n  | Return NPC value toward opposite talker. <br/><br/>Example:<br/> `{ "math": [ "n_npc_value()", "+=", "2" ] }`|
+| weight()    |  ✅   |  ❌   | u, n  | Return creature or item weight, in miligrams. <br/><br/>Example:<br/> `{ "math": [ "u_weight()", "<", "1000000" ] }`|
+| volume()    |  ✅   |  ❌   | u, n  | Return creature or item volume, in mililiters. <br/><br/>Example:<br/> `{ "math": [ "u_volume()", "<", "1000" ] }`|
 | vitamin(`s`/`v`)    |  ✅   |   ✅  | u, n  | Return or set the characters vitamin level.<br/>Argument is vitamin ID.<br/><br/>Example:<br/>`{ "math": [ "u_vitamin('mutagen')", "=", "0" ] }`|
 | warmth(`s`/`v`)    |  ✅   |   ❌  | u, n  | Return the characters warmth on a body part.<br/>Argument is bodypart ID.<br/><br/>Example:<br/> The value displayed in-game is calculated as follows.<br/> `"{ "math": [ "u_warmth_in_game", "=", "(u_warmth('torso') / 100) * 2 - 100"] }`|
 | vision_range()    |  ✅   |   ❌  | u, n  | Return the character's or monsters visual range, adjusted by their mutations, effects, and other issues.<br/><br/>Example:<br/> `"{ "math": [ "n_vision_range()", "<", "30"] }`|

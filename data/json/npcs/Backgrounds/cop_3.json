@@ -9,14 +9,14 @@
     "responses": [
       {
         "text": "What did you do when you found out about the Cataclysm?",
-        "condition": { "math": [ "time_since('cataclysm', 'unit':'days') < 90" ] },
+        "condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') < 90" ] },
         "effect": { "npc_add_effect": "BGSS_Cop_3_earlymeeting", "duration": "PERMANENT" },
         "//": "If you talk to this NPC any time before day 90, the game flags him as an NPC you met 'early' and never gives you the 'late' convo options",
         "topic": "BGSS_COP_3_STORY2"
       },
       {
         "text": "What did you do when you found out about the Cataclysm?",
-        "condition": { "math": [ "time_since('cataclysm', 'unit':'days') >= 90" ] },
+        "condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 90" ] },
         "topic": "BGSS_COP_3_STORY2"
       },
       { "text": "<done_conversation_section>", "topic": "TALK_FRIEND_CONVERSATION" },

@@ -68,6 +68,7 @@ static const std::string flag_AFFECTED_BY_PAIN( "AFFECTED_BY_PAIN" );
 static const std::string flag_BLIND_EASY( "BLIND_EASY" );
 static const std::string flag_BLIND_HARD( "BLIND_HARD" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
+static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
 
 enum TAB_MODE {
     NORMAL,
@@ -454,6 +455,10 @@ static std::vector<std::string> recipe_info(
                           recp.has_flag( flag_BLIND_EASY ) ? _( "Easy" ) :
                           recp.has_flag( flag_BLIND_HARD ) ? _( "Hard" ) :
                           _( "Impossible" ) );
+
+    if( recp.has_flag( flag_NO_MORALE_OK ) && !guy.has_morale_to_craft() ) {
+        oss << string_format( _( "<color_light_blue>Low morale</color> will not prevent this craft.\n" ) );
+    }
 
     const inventory &crafting_inv = guy.crafting_inventory();
     if( recp.result() ) {
@@ -1469,15 +1474,13 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
         }
 
         // Draw borders
-        for( int i = 1; i < width - 1; ++i ) { // -
-            mvwputch( w_data, point( i, dataHeight - 1 ), BORDER_COLOR, LINE_OXOX );
-        }
-        for( int i = 0; i < dataHeight - 1; ++i ) { // |
-            mvwputch( w_data, point( 0, i ), BORDER_COLOR, LINE_XOXO );
-            mvwputch( w_data, point( width - 1, i ), BORDER_COLOR, LINE_XOXO );
-        }
-        mvwputch( w_data, point( 0, dataHeight - 1 ), BORDER_COLOR, LINE_XXOO ); // |_
-        mvwputch( w_data, point( width - 1, dataHeight - 1 ), BORDER_COLOR, LINE_XOOX ); // _|
+        wattron( w_data, BORDER_COLOR );
+        mvwhline( w_data, point( 1, dataHeight - 1 ), LINE_OXOX, width - 2 );
+        mvwvline( w_data, point_zero, LINE_XOXO, dataHeight - 1 );
+        mvwvline( w_data, point( width - 1, 0 ), LINE_XOXO, dataHeight - 1 );
+        mvwaddch( w_data, point( 0, dataHeight - 1 ), LINE_XXOO ); // |_
+        mvwaddch( w_data, point( width - 1, dataHeight - 1 ), LINE_XOOX ); // _|
+        wattroff( w_data, BORDER_COLOR );
 
         const int max_recipe_name_width = 27;
         const int recmax = current.size();
@@ -2324,8 +2327,10 @@ static void draw_hidden_amount( const catacurses::window &w, int amount, int num
                      num_recipe ) );
     }
     //Finish border connection with the recipe tabs
+    wattron( w, BORDER_COLOR );
     mvwhline( w, point( 0, getmaxy( w ) - 1 ), LINE_OXOX, getmaxx( w ) - 1 );
-    mvwputch( w, point( getmaxx( w ) - 1, getmaxy( w ) - 1 ), BORDER_COLOR, LINE_OOXX ); // ^|
+    mvwaddch( w, point( getmaxx( w ) - 1, getmaxy( w ) - 1 ), LINE_OOXX ); // ^|
+    wattroff( w, BORDER_COLOR );
     wnoutrefresh( w );
 }
 
@@ -2411,8 +2416,10 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_tabs( const cata
             break;
         }
         case FILTERED: {
-            mvwhline( w, point( 0, getmaxy( w ) - 1 ), LINE_OXOX, getmaxx( w ) - 1 );  // ─
-            mvwputch( w, point( 0, getmaxy( w ) - 1 ), BORDER_COLOR, LINE_OXXO );  // ┌
+            wattron( w, BORDER_COLOR );
+            mvwhline( w, point( 0, getmaxy( w ) - 1 ), LINE_OXOX, getmaxx( w ) - 1 );
+            mvwaddch( w, point( 0, getmaxy( w ) - 1 ), LINE_OXXO ); // ┌
+            wattroff( w, BORDER_COLOR );
             std::string tab_name = _( "Searched" );
             if( filtered_unread ) {
                 tab_name += " ";  // space for green "+"
@@ -2424,8 +2431,10 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_tabs( const cata
             break;
         }
         case BATCH:
-            mvwhline( w, point( 0, getmaxy( w ) - 1 ), LINE_OXOX, getmaxx( w ) - 1 );  // ─
-            mvwputch( w, point( 0, getmaxy( w ) - 1 ), BORDER_COLOR, LINE_OXXO );  // ┌
+            wattron( w, BORDER_COLOR );
+            mvwhline( w, point( 0, getmaxy( w ) - 1 ), LINE_OXOX, getmaxx( w ) - 1 );
+            mvwaddch( w, point( 0, getmaxy( w ) - 1 ), LINE_OXXO ); // ┌
+            wattroff( w, BORDER_COLOR );
             draw_tab( w, 2, _( "Batch" ), true );
             break;
     }
@@ -2445,8 +2454,10 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_subtabs(
     std::map<size_t, inclusive_rectangle<point>> subtab_map;
     int width = getmaxx( w );
 
+    wattron( w, BORDER_COLOR );
     mvwvline( w, point_zero, LINE_XOXO, getmaxy( w ) );  // |
     mvwvline( w, point( width - 1, 0 ), LINE_XOXO, getmaxy( w ) );  // |
+    wattroff( w, BORDER_COLOR );
 
     switch( mode ) {
         case NORMAL: {
@@ -2493,10 +2504,10 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_subtabs(
         case FILTERED:
         case BATCH:
             werase( w );
-            for( int i = 0; i < 3; i++ ) {
-                mvwputch( w, point( 0, i ), BORDER_COLOR, LINE_XOXO ); // |
-                mvwputch( w, point( width - 1, i ), BORDER_COLOR, LINE_XOXO ); // |
-            }
+            wattron( w, BORDER_COLOR );
+            mvwvline( w, point_zero, LINE_XOXO, 3 ); // |
+            mvwvline( w, point( width - 1, 0 ), LINE_XOXO, 3 ); // |
+            wattroff( w, BORDER_COLOR );
             break;
     }
 

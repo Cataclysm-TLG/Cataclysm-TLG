@@ -128,11 +128,10 @@ const MonsterGroup &MonsterGroupManager::GetUpgradedMonsterGroup( const mongroup
 
 static bool is_spawn_valid(
     const MonsterGroupEntry &entry, const time_point &sunset, const time_point &sunrise,
-    const season_type season, const bool can_spawn_events )
+    const season_type season )
 {
     // If an event was specified for this entry, check if it matches the current holiday
-    if( entry.event != holiday::none && ( !can_spawn_events ||
-                                          entry.event != get_holiday_from_time() ) ) {
+    if( entry.event != holiday::none && ( entry.event != get_holiday_from_time() ) ) {
         return false;
     }
 
@@ -215,12 +214,10 @@ std::vector<MonsterGroupResult> MonsterGroupManager::GetResultFromGroup(
     const time_point sunset = ::sunset( calendar::turn );
     const time_point sunrise = ::sunrise( calendar::turn );
     const season_type season = season_of_year( calendar::turn );
-    std::string opt = get_option<std::string>( "EVENT_SPAWNS" );
-    const bool can_spawn_events = opt == "monsters" || opt == "both";
 
     // Step through spawn definitions from the monster group until one is found or
     for( const MonsterGroupEntry &entry : group.monsters ) {
-        if( !is_spawn_valid( entry, sunset, sunrise, season, can_spawn_events ) ) {
+        if( !is_spawn_valid( entry, sunset, sunrise, season ) ) {
             continue;
         }
 
@@ -237,11 +234,20 @@ std::vector<MonsterGroupResult> MonsterGroupManager::GetResultFromGroup(
             // Check for monsters within subgroup
             for( int i = 0; i < pack_size; i++ ) {
                 std::vector<MonsterGroupResult> tmp_grp =
-                    GetResultFromGroup( entry.group, quantity, mon_found, true );
+                    GetResultFromGroup( entry.group, quantity, &monster_found, true );
                 spawn_details.insert( spawn_details.end(), tmp_grp.begin(), tmp_grp.end() );
             }
-        } else if( use_pack_size ) {
-            for( int i = 0; i < pack_size; i++ ) {
+        } else {
+            if( use_pack_size ) {
+                for( int i = 0; i < pack_size; i++ ) {
+                    spawn_details.emplace_back( entry.name, pack_size, entry.data );
+                    // And if a quantity pointer with remaining value was passed, will modify the external
+                    // value as a side effect.  We will reduce it by the spawn rule's cost multiplier.
+                    if( quantity ) {
+                        *quantity -= std::max( 1, entry.cost_multiplier * pack_size );
+                    }
+                }
+            } else {
                 spawn_details.emplace_back( entry.name, pack_size, entry.data );
                 // And if a quantity pointer with remaining value was passed, will modify the external
                 // value as a side effect.  We will reduce it by the spawn rule's cost multiplier.
@@ -249,30 +255,23 @@ std::vector<MonsterGroupResult> MonsterGroupManager::GetResultFromGroup(
                     *quantity -= std::max( 1, entry.cost_multiplier * pack_size );
                 }
             }
-        } else {
-            spawn_details.emplace_back( entry.name, pack_size, entry.data );
-            // And if a quantity pointer with remaining value was passed, will modify the external
-            // value as a side effect.  We will reduce it by the spawn rule's cost multiplier.
-            if( quantity ) {
-                *quantity -= std::max( 1, entry.cost_multiplier * pack_size );
-            }
+            monster_found = true;
         }
-        monster_found = true;
         break;
     }
 
-    // Force quantity to decrement regardless of whether we found a monster.
-    if( quantity && !monster_found && !is_recursive ) {
-        ( *quantity )--;
-    }
     if( mon_found ) {
         ( *mon_found ) = monster_found;
     }
 
-    if( !is_recursive && spawn_details.empty() ) {
+    if( !is_recursive && !monster_found ) {
         spawn_details.emplace_back( group.defaultMonster, 1, spawn_data() );
         if( returned_default ) {
             ( *returned_default ) = true;
+        }
+        // Force quantity to decrement regardless of whether we found a monster.
+        if( quantity ) {
+            ( *quantity )--;
         }
     }
 
@@ -291,10 +290,7 @@ bool MonsterGroup::IsMonsterInGroup( const mtype_id &mtypeid ) const
 
 int MonsterGroup::event_adjusted_freq_total( holiday event ) const
 {
-    std::string opt = get_option<std::string>( "EVENT_SPAWNS" );
-    if( opt != "monsters" && opt != "both" ) {
-        return freq_total;
-    } else if( event == holiday::num_holiday ) {
+    if( event == holiday::num_holiday ) {
         event = get_holiday_from_time();
     }
 
@@ -326,12 +322,9 @@ std::vector<mtype_id> MonsterGroupManager::GetMonstersFromGroup( const mongroup_
 {
     const MonsterGroup &g = group.obj();
     std::vector<mtype_id> monsters;
-    std::string opt = get_option<std::string>( "EVENT_SPAWNS" );
-    const bool can_spawn_events = opt == "monsters" || opt == "both";
 
     for( const MonsterGroupEntry &elem : g.monsters ) {
-        if( elem.event != holiday::none && ( !can_spawn_events ||
-                                             elem.event != get_holiday_from_time() ) ) {
+        if( elem.event != holiday::none && ( elem.event != get_holiday_from_time() ) ) {
             continue;
         }
         if( elem.is_group() ) {
@@ -625,11 +618,8 @@ const mtype_id &MonsterGroupManager::GetRandomMonsterFromGroup( const mongroup_i
 {
     const MonsterGroup &group = group_name.obj();
     int spawn_chance = rng( 1, group.event_adjusted_freq_total() );
-    std::string opt = get_option<std::string>( "EVENT_SPAWNS" );
-    const bool can_spawn_events = opt == "monsters" || opt == "both";
     for( const MonsterGroupEntry &monster_type : group.monsters ) {
-        if( monster_type.event != holiday::none && ( !can_spawn_events ||
-                monster_type.event != get_holiday_from_time() ) ) {
+        if( monster_type.event != holiday::none && ( monster_type.event != get_holiday_from_time() ) ) {
             continue;
         }
         if( monster_type.frequency >= spawn_chance ) {

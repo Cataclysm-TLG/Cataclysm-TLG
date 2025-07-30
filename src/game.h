@@ -29,6 +29,7 @@
 #include "global_vars.h"
 #include "item_location.h"
 #include "memory_fast.h"
+#include "overmap_ui.h"
 #include "pimpl.h"
 #include "point.h"
 #include "type_id.h"
@@ -56,8 +57,6 @@ enum quit_status {
     QUIT_NOSAVED,   // Quit without saving
     QUIT_DIED,      // Actual death
     QUIT_WATCH,     // Died, and watching aftermath
-    QUIT_EXIT,      // Skip main menu and quit directly to OS
-    QUIT_EXIT_PENDING, // same as above, used temporarily so input_context doesn't get confused
 };
 
 enum safe_mode_type {
@@ -1029,8 +1028,6 @@ class game
         void bury_screen() const;// Bury a dead character (record their last words)
         void death_screen();     // Display our stats, "GAME OVER BOO HOO"
     public:
-        bool query_exit_to_OS();
-        class exit_exception: public std::exception {};
         /**
          * If there is a robot (that can be disabled), query the player
          * and try to disable it.
@@ -1149,6 +1146,9 @@ class game
         catacurses::window w_minimap; // NOLINT(cata-serialize)
         catacurses::window w_pixel_minimap; // NOLINT(cata-serialize)
         //only a pointer, can refer to w_messages_short or w_messages_long
+
+        //overmap UI singleton
+        overmap_ui::overmap_draw_data_t overmap_data; // NOLINT(cata-serialize)
 
         // View offset based on the driving speed (if any)
         // that has been added to u.view_offset,
@@ -1270,6 +1270,10 @@ class game
 
         // called on map shifting
         void shift_destination_preview( const point &delta );
+
+        // Wrapper for animate_weather() that checks options and sets it all up.
+        void run_weather_animation();
+        void animate_weather();
 
         /** Passed to climbing-related functions (slip_down) to
         *   indicate the climbing action being attempted.

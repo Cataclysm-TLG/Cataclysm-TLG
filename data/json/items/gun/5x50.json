@@ -1,9 +1,9 @@
 [
   {
     "id": "needlegun",
+    "copy-from": "smg_base",
     "looks_like": "hk_mp5",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "RM216 needle SMG" },
     "description": "This odd-looking prototype submachine fires 5x50mm saboted flechette rounds which offer excellent ballistic performance with less recoil and about half the weight of a traditional round.  It was developed by Rivtech for the US military shortly before the end of the world.",
     "weight": "1302 g",
@@ -16,7 +16,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "5x50" ],
-    "skill": "smg",
     "range": 10,
     "ranged_damage": { "damage_type": "bullet", "amount": 10 },
     "dispersion": 220,
@@ -43,9 +42,9 @@
   },
   {
     "id": "needlepistol",
+    "copy-from": "pistol_base",
     "looks_like": "glock_17",
     "type": "GUN",
-    "reload_noise_volume": 10,
     "name": { "str": "RM232 needle pistol" },
     "description": "This lightweight machine pistol fires 5x50mm saboted flechette rounds which offer excellent ballistic performance with less recoil and about half the weight of a traditional round. It was developed by Rivtech for the US military shortly before the end of the world.",
     "weight": "682 g",
@@ -58,7 +57,6 @@
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "5x50" ],
-    "skill": "pistol",
     "dispersion": 280,
     "durability": 9,
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "BURST", "2 rd.", 2 ], [ "AUTO", "auto", 4 ] ],

@@ -354,10 +354,12 @@ void auto_note_manager_gui::show()
     ui.on_redraw( [&]( const ui_adaptor & ) {
         // == Draw border
         draw_border( w_border, BORDER_COLOR, _( "Auto notes manager" ) );
-        mvwputch( w_border, point( 0, iHeaderHeight - 1 ), c_light_gray, LINE_XXXO );
-        mvwputch( w_border, point( 79, iHeaderHeight - 1 ), c_light_gray, LINE_XOXX );
-        mvwputch( w_border, point( 52, FULL_SCREEN_HEIGHT - 1 ), c_light_gray, LINE_XXOX );
-        mvwputch( w_border, point( 61, FULL_SCREEN_HEIGHT - 1 ), c_light_gray, LINE_XXOX );
+        wattron( w_border, c_light_gray );
+        mvwaddch( w_border, point( 0, iHeaderHeight - 1 ), LINE_XXXO );
+        mvwaddch( w_border, point( 79, iHeaderHeight - 1 ), LINE_XOXX );
+        mvwaddch( w_border, point( 52, FULL_SCREEN_HEIGHT - 1 ), LINE_XXOX );
+        mvwaddch( w_border, point( 61, FULL_SCREEN_HEIGHT - 1 ), LINE_XXOX );
+        wattroff( w_border, c_light_gray );
         wnoutrefresh( w_border );
 
         // == Draw header
@@ -367,14 +369,13 @@ void auto_note_manager_gui::show()
         shortcut_print( w_header, point( tmpx, 0 ), c_white, c_light_green, _( "<Enter> - Toggle" ) );
 
         // Draw horizontal line and corner pieces of the table
-        for( int x = 0; x < 78; x++ ) {
-            if( x == 51 || x == 60 ) {
-                mvwputch( w_header, point( x, iHeaderHeight - 2 ), c_light_gray, LINE_OXXX );
-                mvwputch( w_header, point( x, iHeaderHeight - 1 ), c_light_gray, LINE_XOXO );
-            } else {
-                mvwputch( w_header, point( x, iHeaderHeight - 2 ), c_light_gray, LINE_OXOX );
-            }
-        }
+        wattron( w_header, c_light_gray );
+        mvwhline( w_header, point( 0, iHeaderHeight - 2 ), LINE_OXOX, 78 );
+        mvwaddch( w_header, point( 51, iHeaderHeight - 2 ), LINE_OXXX );
+        mvwaddch( w_header, point( 51, iHeaderHeight - 1 ), LINE_XOXO );
+        mvwaddch( w_header, point( 60, iHeaderHeight - 2 ), LINE_OXXX );
+        mvwaddch( w_header, point( 60, iHeaderHeight - 1 ), LINE_XOXO );
+        wattroff( w_header, c_light_gray );
         tmpx = 17;
         tmpx += shortcut_print( w_header, point( tmpx, iHeaderHeight - 2 ),
                                 bCharacter ? hilite( c_white ) : c_white, c_light_green, _( "Character" ) ) + 2;
@@ -398,12 +399,10 @@ void auto_note_manager_gui::show()
 
         int currentX = 60;
         mvwprintz( w_header, point( currentX, 1 ), c_white,
-                   std::string( FULL_SCREEN_WIDTH - 2 - currentX, ' ' ) );
-
-        const bool enabled_auto_notes_ME = get_option<bool>( "AUTO_NOTES_MAP_EXTRAS" );
+                   std::string( FULL_SCREEN_WIDTH - 2 - currentX, ' ' ) );;
         currentX += shortcut_print( w_header, point( currentX, 1 ),
-                                    enabled_auto_notes_ME ? c_light_green : c_light_red, c_white,
-                                    enabled_auto_notes_ME ? _( "True" ) : _( "False" ) );
+                                    c_light_red, c_white,
+                                    _( "False" ) );
 
         currentX += shortcut_print( w_header, point( currentX, 1 ), c_white, c_light_green, "  " );
         shortcut_print( w_header, point( currentX, 1 ), c_white, c_light_green, _( "<S>witch " ) );
@@ -414,23 +413,16 @@ void auto_note_manager_gui::show()
                         _( "<Tab> to change pages." ) );
 
         // Clear table
-        for( int y = 0; y < iContentHeight; y++ ) {
-            for( int x = 0; x < 79; x++ ) {
-                // The middle beams needs special treatment
-                if( x == 51 || x == 60 ) {
-                    mvwputch( w, point( x, y ), c_light_gray, LINE_XOXO );
-                } else {
-                    mvwputch( w, point( x, y ), c_black, ' ' );
-                }
-            }
-        }
+        mvwrectf( w, point_zero, c_black, ' ', 79, iContentHeight );
+        mvwvline( w, point( 51, 0 ), c_light_gray, LINE_XOXO, iContentHeight );
+        mvwvline( w, point( 60, 0 ), c_light_gray, LINE_XOXO, iContentHeight );
         int cacheSize = bCharacter ? char_cacheSize : global_cacheSize;
         draw_scrollbar( w_border, currentLine, iContentHeight, cacheSize, point( 0, iHeaderHeight + 1 ) );
 
         if( bCharacter ? char_emptyMode : global_emptyMode ) {
             // NOLINTNEXTLINE(cata-use-named-point-constants)
-            mvwprintz( w, point( 1, 0 ), c_light_gray,
-                       _( "Discover more special encounters to populate this list" ) );
+            fold_and_print( w, point( 1, 0 ), 49, c_light_gray,
+                            _( "Discover more special encounters to populate this list" ) );
         } else {
             calcStartPos( startPosition, currentLine, iContentHeight,
                           ( bCharacter ? char_displayCache : global_displayCache ).size() );
@@ -442,8 +434,7 @@ void auto_note_manager_gui::show()
                                            global_mapExtraCache )[displayCacheEntry];
 
                 const nc_color lineColor = ( i == currentLine ) ? hilite( c_white ) : c_white;
-                const nc_color statusColor = enabled_auto_notes_ME ? ( cacheEntry.second ? c_green : c_red ) :
-                                             c_dark_gray;
+                const nc_color statusColor = ( cacheEntry.second ? c_green : c_red );
                 const std::string statusString = cacheEntry.second ? _( "yes" ) : _( "no" );
                 auto found_custom_symbol = ( bCharacter ? char_custom_symbol_cache :
                                              global_custom_symbol_cache ).find( displayCacheEntry );
@@ -488,10 +479,7 @@ void auto_note_manager_gui::show()
         const std::string action = ctxt.handle_input();
 
         // Actions that also work with no items to display
-        if( action == "SWITCH_AUTO_NOTE_OPTION" ) {
-            get_options().get_option( "AUTO_NOTES_MAP_EXTRAS" ).setNext();
-            get_options().save();
-        } else if( action == "QUIT" ) {
+        if( action == "QUIT" ) {
             break;
         } else if( action == "NEXT_TAB" ) {
             bCharacter = !bCharacter;

@@ -768,6 +768,7 @@
       { "item": "sheet_metal", "prob": 22 },
       { "item": "seat", "prob": 4 },
       { "item": "chain", "prob": 20 },
+      { "item": "chain_30", "prob": 5 },
       { "item": "power_supply", "prob": 16 },
       { "item": "antenna", "prob": 18 },
       { "item": "steel_chunk", "prob": 30 },

@@ -284,15 +284,10 @@ void SkillLevel::train( int amount, float catchup_modifier, float knowledge_modi
         knowledge_amount = 0;
     }
 
-    const double scaling = get_option<float>( "SKILL_TRAINING_SPEED" );
-    if( scaling > 0.0 ) {
-        catchup_amount *= scaling;
-        knowledge_amount *= scaling;
-    }
     _exercise += catchup_amount;
     if( _exercise < 0 ) {
-        debugmsg( "integer overflow in train() amount=%d catchup_modifier=%g knowledge_modifier=%g level_gap=%g catchup_amount=%g knowledge_amount=%g scaling=%g _exercise=%d",
-                  amount, catchup_modifier, knowledge_modifier, level_gap, catchup_amount, knowledge_amount, scaling,
+        debugmsg( "integer overflow in train() amount=%d catchup_modifier=%g knowledge_modifier=%g level_gap=%g catchup_amount=%g knowledge_amount=%g _exercise=%d",
+                  amount, catchup_modifier, knowledge_modifier, level_gap, catchup_amount, knowledge_amount,
                   _exercise );
         _exercise -= catchup_amount;
         return;
@@ -322,11 +317,6 @@ void SkillLevel::knowledge_train( int amount, int npc_knowledge )
     }
     float level_mult = 2.0f / ( level_gap + 1.0f );
     amount *= level_mult;
-
-    const double scaling = get_option<float>( "SKILL_TRAINING_SPEED" );
-    if( scaling > 0.0 ) {
-        amount = std::ceil( amount * scaling );
-    }
     _knowledgeExperience += amount;
 
     if( _knowledgeExperience >= 10000 * pow( unadjustedKnowledgeLevel() + 1, 2U ) ) {
@@ -348,11 +338,6 @@ void SkillLevel::readBook( int minimumGain, int maximumGain, int maximumLevel )
     }
 
     practice();
-}
-
-bool SkillLevel::can_train() const
-{
-    return get_option<float>( "SKILL_TRAINING_SPEED" ) > 0.0;
 }
 
 void SkillLevel::set_exercise( int value, bool raw )

@@ -234,6 +234,9 @@
     "id": "pawn_valuable",
     "items": [
       [ "sword_cane", 5 ],
+      [ "gold_cufflinks", 5 ],
+      [ "collarpin", 6 ],
+      [ "diamond_cufflinks", 2 ],
       [ "advanced_ecig", 5 ],
       [ "television", 10 ],
       [ "gold_small", 10 ],
@@ -563,7 +566,8 @@
       [ "platemail_visored_helm", 1 ],
       [ "platemail_great_helm", 1 ],
       [ "rep_compcrossbow", 1 ],
-      [ "bokken", 7 ],
+      [ "bokken", 4 ],
+      { "group": "bokken_with_saya", "prob": 3 },
       [ "broadsword_inferior", 20 ],
       [ "glaive", 1 ],
       [ "halberd", 1 ],
@@ -804,7 +808,7 @@
       [ "pie_meat", 28 ],
       [ "pie_vegetable", 15 ],
       [ "pie_maple", 7 ],
-      [ "yoghurt", 30 ],
+      [ "yogurt", 30 ],
       [ "soy_milk", 20 ]
     ]
   },
@@ -2042,7 +2046,7 @@
       [ "speedo", 20 ],
       [ "bikini_top", 5 ],
       [ "bikini_bottom", 5 ],
-      [ "yoghurt", 12 ],
+      [ "yogurt", 12 ],
       { "prob": 10, "group": "vitamins_bottle_plastic_pill_supplement_1_20" },
       { "prob": 10, "group": "bottle_otc_painkiller_1_20" },
       [ "fitness_band", 10 ]

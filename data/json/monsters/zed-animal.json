@@ -83,7 +83,6 @@
   },
   {
     "id": "mon_zombie_dog",
-    "alias": "mon_zombie_fast",
     "type": "MONSTER",
     "name": { "str": "zombie dog" },
     "description": "The deformed, animated corpse of a canine; a sinewy beast which can easily outpace its two-legged friends.",
@@ -161,7 +160,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "bash": 6, "cut": 6, "bullet": 5, "electric": 1 }
   },
@@ -261,7 +261,8 @@
       "POISON",
       "NO_BREATHE",
       "REVIVES",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "electric": 1 }
   },
@@ -309,7 +310,8 @@
       "NO_BREATHE",
       "REVIVES",
       "PUSH_MON",
-      "FILTHY"
+      "FILTHY",
+      "KEENNOSE"
     ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 2 }
   },
@@ -443,7 +445,7 @@
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "upgrades": { "half_life": 42, "into_group": "GROUP_ZOMBIE_HORSE_UPGRADE" },
     "fungalize_into": "mon_zombie_horse_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES" ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES", "GOODHEARING" ],
     "armor": { "bash": 5, "cut": 1, "electric": 2 }
   },
   {
@@ -564,17 +566,17 @@
     "default_faction": "zombie",
     "bodytype": "horse",
     "species": [ "ZOMBIE" ],
-    "volume": "680 L",
-    "weight": "680 kg",
-    "hp": 166,
-    "speed": 104,
+    "volume": "600388 ml",
+    "weight": "600388 g",
+    "hp": 190,
+    "speed": 110,
     "material": [ "flesh" ],
     "scents_tracked": [ "sc_human", "sc_fetid" ],
     "symbol": "C",
     "color": "green",
     "aggression": 100,
     "morale": 100,
-    "melee_skill": 6,
+    "melee_skill": 5,
     "melee_dice": 2,
     "melee_dice_sides": 10,
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
@@ -597,7 +599,7 @@
     "species": [ "ZOMBIE" ],
     "volume": "750 L",
     "weight": "750 kg",
-    "hp": 210,
+    "hp": 300,
     "speed": 120,
     "attack_cost": 120,
     "material": [ "flesh" ],
@@ -609,7 +611,7 @@
     "melee_skill": 6,
     "melee_dice": 4,
     "melee_dice_sides": 6,
-    "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
+    "melee_damage": [ { "damage_type": "cut", "amount": 9 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_day": 30,
     "vision_night": 3,
@@ -687,10 +689,10 @@
     "default_faction": "zombie",
     "bodytype": "horse",
     "species": [ "ZOMBIE" ],
-    "volume": "108500 ml",
-    "weight": "87 kg",
-    "hp": 100,
-    "speed": 200,
+    "volume": "70500 ml",
+    "weight": "80 kg",
+    "hp": 60,
+    "speed": 150,
     "attack_cost": 200,
     "material": [ "flesh" ],
     "scents_tracked": [ "sc_human", "sc_fetid" ],
@@ -698,16 +700,29 @@
     "color": "green",
     "aggression": 100,
     "morale": 100,
-    "melee_skill": 3,
+    "melee_skill": 2,
     "melee_dice": 3,
     "melee_dice_sides": 3,
-    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
+    "dodge": 1,
+    "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "vision_night": 15,
+    "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
-    "armor": { "bash": 1, "cut": 3, "electric": 1 }
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "KEENNOSE",
+      "GOODHEARING"
+    ],
+    "armor": { "bash": 1, "cut": 3, "bullet": 2, "electric": 1 }
   },
   {
     "id": "mon_zeindeer",
@@ -720,8 +735,8 @@
     "species": [ "ZOMBIE" ],
     "volume": "889 L",
     "weight": "240 kg",
-    "hp": 160,
-    "speed": 200,
+    "hp": 110,
+    "speed": 170,
     "attack_cost": 200,
     "material": [ "flesh" ],
     "scents_tracked": [ "sc_human", "sc_fetid" ],
@@ -732,12 +747,25 @@
     "melee_skill": 4,
     "melee_dice": 4,
     "melee_dice_sides": 4,
+    "dodge": 2,
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
-    "vision_night": 10,
+    "vision_night": 12,
     "harvest": "zombie_leather",
     "fungalize_into": "mon_zeindeer_fungus",
-    "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
-    "armor": { "bash": 5, "cut": 4, "electric": 1 }
+    "flags": [
+      "SEES",
+      "HEARS",
+      "SMELLS",
+      "STUMBLES",
+      "WARM",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "KEENNOSE",
+      "GOODHEARING"
+    ],
+    "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   }
 ]

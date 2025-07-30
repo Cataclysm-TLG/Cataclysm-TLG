@@ -1328,8 +1328,8 @@
   {
     "type": "terrain",
     "id": "t_tree_hemlock_harvested",
-    "name": "pine tree",
-    "description": "A towering coniferous tree that belongs to the 'Pinus' genus, with the New England species varying from 'P. strobus', 'P. resinosa' and 'P. rigida'.  Some of the branches and resin clumps have been stripped away and many of the pinecones aren't developed fully yet, but given a season, it could be harvestable again.",
+    "name": "hemlock tree",
+    "description": "This is an evergreen tree from the 'Tsuga' genus, superficially similar to a pine.  Some of the branches and resin clumps have been stripped away and many of the cones aren't developed fully yet, but given a season, it could be harvestable again.",
     "symbol": "4",
     "color": "brown",
     "roof": "t_treetop_evergreen",

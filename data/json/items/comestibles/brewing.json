@@ -796,7 +796,7 @@
     "fun": -12,
     "flags": [ "NUTRIENT_OVERRIDE" ],
     "use_action": {
-      "target": "yoghurt",
+      "target": "yogurt",
       "msg": "The milk has finished fermenting and turned into a slightly clumpy yogurt.",
       "moves": 50,
       "type": "delayed_transform",
