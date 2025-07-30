@@ -42,7 +42,7 @@
     "id": "MUTATING_GRADUAL_AVIAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
     "name": { "str": "Gradual Mutation - Avian" },
-    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more bovoid traits..",
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more bovoid traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_AVIAN" ] }
   },
   {

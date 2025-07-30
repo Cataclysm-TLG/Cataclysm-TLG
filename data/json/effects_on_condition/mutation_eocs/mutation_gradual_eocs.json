@@ -250,6 +250,11 @@
       { "math": [ "u_setup_mutating_gradual = 1" ] }
     ]
   },
+    {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_SETUP_MANUAL",
+    "effect": { "run_eocs": [ "EOC_MUTATING_GRADUAL_SETUP" ], "variables": { "trait": { "context_val": "trait" } } }
+  },
   {
     "type": "effect_on_condition",
     "id": "EOC_AM_BECOME_MUTANT",
@@ -280,6 +285,122 @@
     "//": "Open a dialogue window so the player can choose their mutation line.",
     "condition": { "u_has_trait": "MUTATING_GRADUAL_SELECTOR" },
     "recurrence": [ "0 seconds", "1 seconds" ],
-    "effect": [ { "open_dialogue": { "topic": "TALK_MUTATION_GRADUAL_START" } }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+    "effect": [ { "run_eoc_selector": [ "EOC_MUTATING_GRADUAL_ARANEAN", "EOC_MUTATING_GRADUAL_AVIAN", "EOC_MUTATING_GRADUAL_BATRACHIAN", "EOC_MUTATING_GRADUAL_BOVOID", "EOC_MUTATING_GRADUAL_CANINE", "EOC_MUTATING_GRADUAL_CEPHALOPOD", "EOC_MUTATING_GRADUAL_CHIROPTERAN", "EOC_MUTATING_GRADUAL_CRUSTACEAN", "EOC_MUTATING_GRADUAL_FELINE", "EOC_MUTATING_GRADUAL_INSECT", "EOC_MUTATING_GRADUAL_LAGOMORPH", "EOC_MUTATING_GRADUAL_PISCINE", "EOC_MUTATING_GRADUAL_PLANT", "EOC_MUTATING_GRADUAL_GASTROPOD", "EOC_MUTATING_GRADUAL_MURINE", "EOC_MUTATING_GRADUAL_RATTINE", "EOC_MUTATING_GRADUAL_REPTILIAN", "EOC_MUTATING_GRADUAL_TROGLOBITE", "EOC_MUTATING_GRADUAL_URSINE" ],
+                  "names": [ "Aranean", "Avian", "Batrachian", "Bovoid", "Canine", "Cephalopod", "Chiropteran", "Crustacean", "Feline", "Insect", "Lagomorph", "Piscine", "Plant", "Gastropod", "Murine", "Rattine", "Reptilian", "Troglobite", "Ursine" ],
+                  "keys": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i" ],
+                  "descriptions": [ "Something ancient lurks behind your eyes, a patient and deadly hunter.",
+                                    "Your heart hammers at the thrill of a foreign thought, the thrill of taking wing,",
+                                    "A will that is and isn't you wants to sink down into the mud.",
+                                    "You just need to find your herd, then it will all be OK.",
+                                    "You have the inexplicable urge to run for miles and miles…",
+                                    "Your mind expands, like it's bursting out of your skull, but is it really you?.",
+                                    "There's a shadow hanging over you, and it craves blood.",
+                                    "You dream of a pair of ragged claws, scuttling across the floors of silent seas…",
+                                    "Stay calm, stay alert, and wait for your time to strike.",
+                                    "It's crawling across your skin, buzzing in your ear, but you can't find the insect, no matter how hard you look.",
+                                    "Everything is out to get you.  You have to be faster.",
+                                    "It's calling you back to the water.  You won't be able to resist forever.",
+                                    "The world speeds up around you.  Can you endure?",
+                                    "Your legs are heavy, your sweat like slime…",
+                                    "A fear that isn't yours lives in your gut.  Keep moving!",
+                                    "No matter what it takes, what you become, you must survive.",
+                                    "Your skin itches.  Something grips you by the brain stem.  It's time.",
+                                    "The dull scavengers of earth wax crafty to vex it and swell monstrous to plague it.  Things have learnt to walk that ought to crawl.",
+                                    "Something is devouring you, and in turn you must devour." ] } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_ARANEAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_ARANEAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_AVIAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_AVIAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_BATRACHIAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_BATRACHIAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_BOVOID",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_BOVOID" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_CANINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_CANINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_CEPHALOPOD",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_CEPHALOPOD" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_CHIROPTERAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_CHIROPTERAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_CRUSTACEAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_CRUSTACEAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_FELINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_FELINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_INSECT",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_INSECT" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_LAGOMORPH",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_LAGOMORPH" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_PISCINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_PISCINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_PLANT",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_PLANT" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_GASTROPOD",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_GASTROPOD" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_MURINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_MURINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_RATTINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_RATTINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_REPTILIAN",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_REPTILIAN" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_TROGLOBITE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_TROGLOBITE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_URSINE",
+    "effect": [ { "u_add_trait": "MUTATING_GRADUAL_URSINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
   }
 ]
