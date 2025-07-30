@@ -1312,9 +1312,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_elfa",
-    "name": [ "Elf-A Mutation", "Elf-A Transformation", "Elf-A Metamorphosis" ],
+    "name": [ "Sylvan Mutation", "Sylvan Transformation", "Sylvan Metamorphosis" ],
     "desc": [
-      "You consumed Elf-A mutagen.",
+      "You consumed sylvan mutagen.",
       "You must look after this world, if no one else will.",
       "You see stars.  You see so many stars."
     ],
@@ -1364,9 +1364,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_fish",
-    "name": [ "Fish Mutation", "Fish Transformation", "Fish Metamorphosis" ],
+    "name": [ "Piscine Mutation", "Piscine Transformation", "Piscine Metamorphosis" ],
     "desc": [
-      "You consumed fish mutagen.",
+      "You consumed piscine mutagen.",
       "The waters call to you.  Leave this exposed wasteland.",
       "You feel clammy yet dry, absolutely parched no matter how much you drink."
     ],
@@ -1480,9 +1480,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_lupine",
-    "name": [ "Lupine Mutation", "Lupine Transformation", "Lupine Metamorphosis" ],
+    "name": [ "Canine Mutation", "Canine Transformation", "Canine Metamorphosis" ],
     "desc": [
-      "You consumed lupine mutagen.",
+      "You consumed canine mutagen.",
       "Where's your pack?  How will you survive without them?",
       "You pant, unable to stop pacing and full of hunger."
     ],
@@ -1708,10 +1708,10 @@
   },
   {
     "type": "effect_type",
-    "id": "mutagen_spider",
-    "name": [ "Spider Mutation", "Spider Transformation", "Spider Metamorphosis" ],
+    "id": "mutagen_aranean",
+    "name": [ "Aranean Mutation", "Aranean Transformation", "Aranean Metamorphosis" ],
     "desc": [
-      "You consumed spider mutagen.",
+      "You consumed aranean mutagen.",
       "An anchor line there and there, connect with capture threads…",
       "Perhaps you should curl up, just curl up and give in."
     ],

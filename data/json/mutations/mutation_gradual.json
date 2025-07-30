@@ -1,0 +1,195 @@
+[
+  {
+    "type": "mutation",
+    "abstract": "MUTATING_GRADUAL_ABSTRACT",
+    "name": "",
+    "description": "",
+    "points": 5,
+    "mixed_effect": true,
+    "time": 3600,
+    "processed_eocs": [ "EOC_AM_BECOME_MUTANT" ],
+    "cancels": [
+      "MUTATING_GRADUAL_BATRACHIAN",
+      "MUTATING_GRADUAL_AVIAN",
+      "MUTATING_GRADUAL_BOVOID",
+      "MUTATING_GRADUAL_CEPHALOPOD",
+      "MUTATING_GRADUAL_CHIROPTERAN",
+      "MUTATING_GRADUAL_CRUSTACEAN",
+      "MUTATING_GRADUAL_FELINE",
+      "MUTATING_GRADUAL_PISCINE",
+      "MUTATING_GRADUAL_LAGOMORPH",
+      "MUTATING_GRADUAL_GASTROPOD",
+      "MUTATING_GRADUAL_INSECT",
+      "MUTATING_GRADUAL_REPTILIAN",
+      "MUTATING_GRADUAL_CANINE",
+      "MUTATING_GRADUAL_MURINE",
+      "MUTATING_GRADUAL_PLANT",
+      "MUTATING_GRADUAL_RATTINE",
+      "MUTATING_GRADUAL_SLIME",
+      "MUTATING_GRADUAL_ARANEAN",
+      "MUTATING_GRADUAL_TROGLOBITE",
+      "MUTATING_GRADUAL_URSINE"
+    ]
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_ARANEAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Aranean Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more aranean traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_ARANEAN" ] }
+  },
+    {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_AVIAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Avian Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more avian traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_AVIAN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_BATRACHIAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Batrachian Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more batrachian traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_BATRACHIAN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_BOVOID",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Bovoid Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more bovoid traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_BOVOID" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_CANINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Canine Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more canine traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_CANINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_CEPHALOPOD",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Cephalopod Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more cephalopod traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_CEPHALOPOD" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_CHIROPTERAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Chiropteran Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more chiropteran traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_CHIROPTERAN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_CRUSTACEAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Crustacean Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more crustacean traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_CRUSTACEAN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_FELINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Feline Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more feline traits.",
+    "delete": { "cancels": [ "MUTAGEN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_GASTROPOD",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Gastropod Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more gastropod traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_GASTROPOD" ] }
+  },
+    {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_LAGOMORPH",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Lagomorph Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more lagomorph traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_PISCINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_PISCINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Piscine Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more piscine traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_PISCINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_INSECT",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Insect Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more insect traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_INSECT" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_REPTILIAN",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Reptilian Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more reptilian traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_REPTILIAN" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_MURINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Murine Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more murine traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_MURINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_PLANT",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Plant Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more plant traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_PLANT" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_RATTINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Rattine Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more rattine traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_RATTINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_TROGLOBITE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Troglobite Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more troglobite traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_TROGLOBITE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_URSINE",
+    "copy-from": "MUTATING_GRADUAL_ABSTRACT",
+    "name": { "str": "Ursine Evolution" },
+    "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more ursine traits.",
+    "delete": { "cancels": [ "MUTATING_GRADUAL_URSINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_SELECTOR",
+    "name": "Gradual Mutation",
+    "description": "Something is happening to you, it's turning you into a monster.  You will be prompted to choose a mutation line and will thereafter gradually gain its traits over time.",
+    "points": 5,
+    "valid": false,
+    "starting_trait": true
+  }
+]

@@ -141,7 +141,7 @@
       [ "mutagen_rabbit", -1 ],
       [ "mutagen_rat", -1 ],
       [ "mutagen_slime", -1 ],
-      [ "mutagen_spider", -1 ],
+      [ "mutagen_aranean", -1 ],
       [ "mutagen_troglobite", -1 ],
       [ "mutagen_ursine", -1 ]
     ]
@@ -326,7 +326,7 @@
     "id": "mutagen_lupine",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Lupine Mutagen" },
+    "name": { "str": "Canine Mutagen" },
     "excess": "mutagen_lupine",
     "min": 0,
     "max": 1600,
@@ -422,11 +422,11 @@
     "disease_excess": [ [ 100, 400 ], [ 401, 800 ], [ 801, 1600 ] ]
   },
   {
-    "id": "mutagen_spider",
+    "id": "mutagen_aranean",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Arenaean Mutagen" },
-    "excess": "mutagen_spider",
+    "name": { "str": "Aranaean Mutagen" },
+    "excess": "mutagen_aranean",
     "min": 0,
     "max": 1600,
     "rate": "20 m",

@@ -353,7 +353,7 @@
       "type": "consume_drug",
       "activation_message": "You inject the aranean infusion.",
       "tools_needed": { "syringe": -1 },
-      "vitamins": [ [ "mutagen_spider", 220, 320 ] ]
+      "vitamins": [ [ "mutagen_aranean", 220, 320 ] ]
     }
   },
   {
