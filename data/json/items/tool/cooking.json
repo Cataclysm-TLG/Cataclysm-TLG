@@ -102,9 +102,9 @@
               }
             }
           }
-        }
-      ]
-    },
+        ]
+      }
+    ],
     "flags": [ "SHEATH_SWORD", "NONCONDUCTIVE", "WATER_BREAK_ACTIVE" ],
     "pocket_data": [
       {
