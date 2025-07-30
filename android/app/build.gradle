@@ -282,7 +282,7 @@ android {
                     include "x86_64"
                 }
                 // Specifies that we want to also generate a universal APK that includes all ABIs.
-                universalApk true
+                universalApk false
             }
         }
 
