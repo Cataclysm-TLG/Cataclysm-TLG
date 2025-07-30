@@ -174,15 +174,7 @@
       "failure": "Sorry, I had to find someone else since you didn't come through."
     },
     "end": {
-      "effect": [
-        { "npc_location_variable": { "context_val": "search_locale" } },
-        {
-          "queue_eocs": "godco_place_warehouse_new",
-          "time_in_future": "336 hours",
-          "variables": { "search_locale": { "context_val": "search_locale" } }
-        },
-        { "u_spawn_item": "icon", "count": 137 }
-      ],
+      "effect": [ { "run_eocs": "godco_place_warehouse_new", "time_in_future": "336 hours" }, { "u_spawn_item": "icon", "count": 137 } ],
       "opinion": { "trust": 7, "value": 6, "anger": -3 }
     }
   },
@@ -306,11 +298,7 @@
       "effect": [
         { "npc_location_variable": { "context_val": "search_locale" } },
         { "math": [ "darryl_building_coop", "=", "1" ] },
-        {
-          "queue_eocs": "godco_place_coop_new",
-          "time_in_future": "168 hours",
-          "variables": { "search_locale": { "context_val": "search_locale" } }
-        },
+        { "run_eocs": "godco_place_coop_new", "time_in_future": "168 hours" },
         { "u_spawn_item": "icon", "count": 6 }
       ]
     }
@@ -934,15 +922,7 @@
     "difficulty": 5,
     "value": 0,
     "end": {
-      "effect": [
-        { "u_spawn_item": "icon", "count": 90 },
-        { "npc_location_variable": { "context_val": "search_locale" } },
-        {
-          "queue_eocs": "godco_place_herb_garden_new",
-          "time_in_future": "72 hours",
-          "variables": { "search_locale": { "context_val": "search_locale" } }
-        }
-      ],
+      "effect": [ { "u_spawn_item": "icon", "count": 90 }, { "run_eocs": "godco_place_herb_garden_new", "time_in_future": "72 hours" } ],
       "opinion": { "trust": 3, "value": 2 }
     },
     "origins": [ "ORIGIN_SECONDARY" ],
@@ -1204,12 +1184,7 @@
     "end": {
       "effect": [
         { "mapgen_update": "helena_planer", "om_terrain": "godco_8" },
-        { "npc_location_variable": { "context_val": "search_locale" } },
-        {
-          "queue_eocs": "godco_place_wall_new",
-          "time_in_future": "432 hours",
-          "variables": { "search_locale": { "context_val": "search_locale" } }
-        },
+        { "run_eocs": "godco_place_wall_new", "time_in_future": "432 hours" },
         { "u_spawn_item": "icon", "count": 40 }
       ]
     },

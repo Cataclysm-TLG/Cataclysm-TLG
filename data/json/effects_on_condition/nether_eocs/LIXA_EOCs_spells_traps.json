@@ -2030,7 +2030,7 @@
     "type": "effect_on_condition",
     "id": "EOC_LIXA_unfold_return",
     "effect": [
-      { "queue_eocs": "EOC_LIXA_unfold_spawn_goodbye_cards", "time_in_future": "0 seconds" },
+      { "run_eocs": "EOC_LIXA_unfold_spawn_goodbye_cards", "time_in_future": "0 seconds" },
       { "alter_timed_events": "LIXA_escape_key" },
       { "u_lose_effect": "LIXA_unfolded_eff" },
       { "mapgen_update": "turn_off_LIXA", "target_var": { "global_val": "LIXA_chamber_1" } },
@@ -2058,7 +2058,7 @@
       {
         "switch": { "math": [ "u_LIXA_unfold_level" ] },
         "cases": [
-          { "case": 0, "effect": { "queue_eocs": "EOC_LIXA_unfold_shift_0", "time_in_future": "2 seconds" } },
+          { "case": 0, "effect": { "run_eocs": "EOC_LIXA_unfold_shift_0", "time_in_future": "2 seconds" } },
           {
             "case": 1,
             "effect": {
@@ -2068,7 +2068,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_1", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_1", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
@@ -2083,7 +2083,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_2", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_2", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
@@ -2098,7 +2098,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_3", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_3", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
@@ -2113,7 +2113,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_4", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_4", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
@@ -2128,7 +2128,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_5", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_5", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
@@ -2143,7 +2143,7 @@
                   "effect": [
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_A" } },
                     { "mapgen_update": "cleanup_LIXA", "target_var": { "global_val": "LIXA_unfold_B" } },
-                    { "queue_eocs": "EOC_LIXA_unfold_shift_6", "time_in_future": "2 seconds" }
+                    { "run_eocs": "EOC_LIXA_unfold_shift_6", "time_in_future": "2 seconds" }
                   ]
                 }
               ]
