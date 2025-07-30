@@ -425,7 +425,7 @@
     "id": "mutagen_spider",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Arenaean Mutagen" },
+    "name": { "str": "Aranaean Mutagen" },
     "excess": "mutagen_spider",
     "min": 0,
     "max": 1600,
