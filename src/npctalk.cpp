@@ -5379,7 +5379,7 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
 
     dbl_or_var iterations = get_dbl_or_var( jo, "iterations", false, 1 );
     bool has_cond = false;
-    std::function<bool( dialogue & )> cond;
+    std::function<bool( const const_dialogue & )> cond;
     if( jo.has_object( "condition" ) ) {
         read_condition( jo, "condition", cond, true );
         has_cond = true;
