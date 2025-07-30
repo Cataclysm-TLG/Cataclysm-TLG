@@ -298,5 +298,8 @@ item_location make_mon_corpse( map *here, monster &z, int damageLvl )
     if( z.has_effect( effect_critter_underfed ) ) {
         corpse.set_flag( STATIC( flag_id( "UNDERFED" ) ) );
     }
+    if( z.times_combatted_player ) {
+        corpse.set_var( "times_combatted", z.times_combatted_player );
+    }
     return here->add_item_or_charges_ret_loc( z.pos_bub( *here ), corpse );
 }
