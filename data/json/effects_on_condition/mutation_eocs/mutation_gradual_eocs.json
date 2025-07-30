@@ -273,5 +273,13 @@
         "else": { "math": [ "u_recently_mutated_cooldown -= 1" ] }
       }
     ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_SELECTOR",
+    "//": "Open a dialogue window so the player can choose their mutation line.",
+    "condition": { "u_has_trait": "MUTATING_GRADUAL_SELECTOR" },
+    "recurrence": [ "0 seconds", "1 seconds" ],
+    "effect": [ { "open_dialogue": { "topic": "TALK_MUTATION_GRADUAL_START" } }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
   }
 ]

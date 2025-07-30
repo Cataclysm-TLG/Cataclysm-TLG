@@ -12,7 +12,6 @@
       "MUTATING_GRADUAL_AVIAN",
       "MUTATING_GRADUAL_BOVOID",
       "MUTATING_GRADUAL_CEPHALOPOD",
-      "MUTATING_GRADUAL_CHIMERA",
       "MUTATING_GRADUAL_CHIROPTERAN",
       "MUTATING_GRADUAL_CRUSTACEAN",
       "MUTATING_GRADUAL_FELINE",
@@ -181,5 +180,14 @@
     "name": { "str": "Gradual Mutation - Ursine" },
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more ursine traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_URSINE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MUTATING_GRADUAL_SELECTOR",
+    "name": "Gradual Mutation",
+    "description": "Something is happening to you, it's turning you into a monster.  You will be prompted to choose a mutation line and will thereafter gradually gain its traits over time.",
+    "points": 4,
+    "valid": false,
+    "starting_trait": true
   }
 ]
