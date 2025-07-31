@@ -849,7 +849,7 @@
     "description": "A selection of cooked mutant bug organs.  Looks awful, but if you give it a try, you'll find -- that it's worse than it looks.",
     "looks_like": "offal_cooked",
     "parasites": 0,
-    "delete": { "flags": [ "RAW", "NUTRIENT_OVERRIDE" ] }
+    "delete": { "flags": [ "RAW" ] }
   },
   {
     "id": "offal_pickled",
@@ -1092,8 +1092,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "copy-from": "lung_cooked",
     "name": { "str": "cooked piece of mutant lung", "str_pl": "cooked pieces of mutant lung" },
-    "snippet_category": "cooked_mutant_lung_desc",
-    "delete": { "flags": [ "RAW" ] }
+    "snippet_category": "cooked_mutant_lung_desc"
   },
   {
     "id": "heart",
@@ -1174,8 +1173,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "copy-from": "heart_cooked",
     "name": { "str": "cooked piece of mutant heart", "str_pl": "cooked pieces of mutant heart" },
-    "snippet_category": "cooked_mutant_heart_desc",
-    "delete": { "flags": [ "RAW" ] }
+    "snippet_category": "cooked_mutant_heart_desc"
   },
   {
     "id": "liver",
@@ -1343,8 +1341,7 @@
     "copy-from": "brain_cooked",
     "name": { "str": "cooked piece of mutant brain", "str_pl": "cooked pieces of mutant brain" },
     "snippet_category": "cooked_mutant_brain_desc",
-    "fun": -12,
-    "delete": { "flags": [ "RAW" ] }
+    "fun": -12
   },
   {
     "id": "kidney",
@@ -1403,8 +1400,7 @@
     "copy-from": "kidney_cooked",
     "name": { "str": "cooked piece of mutant kidney", "str_pl": "cooked pieces of mutant kidney" },
     "snippet_category": "cooked_mutant_kidney_desc",
-    "fun": -12,
-    "delete": { "flags": [ "RAW" ] }
+    "fun": -12
   },
   {
     "id": "sweetbread",
