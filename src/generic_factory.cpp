@@ -1,5 +1,11 @@
 #include "generic_factory.h"
 
+#include "catacharset.h"
+#include "game_constants.h"
+#include "output.h"
+#include "wcwidth.h"
+
+
 bool one_char_symbol_reader( const JsonObject &jo, std::string_view member_name, int &sym,
                              bool )
 {
@@ -56,4 +62,16 @@ float read_proportional_entry( const JsonObject &jo, std::string_view key )
         return scalar;
     }
     return 1.0f;
+}
+
+float activity_level_reader::get_next( const JsonValue &jv ) const
+{
+    if( !jv.test_string() ) {
+        jv.throw_error( "Invalid activity level" );
+    }
+    auto it = activity_levels_map.find( jv.get_string() );
+    if( it == activity_levels_map.end() ) {
+        jv.throw_error( "Invalid activity level" );
+    }
+    return it->second;
 }
