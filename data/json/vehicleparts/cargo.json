@@ -16,7 +16,7 @@
       "removal": { "skills": [ [ "fabrication", 2 ] ], "time": "5 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
       "repair": { "skills": [ [ "fabrication", 2 ] ], "time": "5 m", "using": [ [ "adhesive", 2 ] ] }
     },
-    "flags": [ "CARGO", "BOARDABLE", "COVERED", "CARGO_PASSABLE" ],
+    "flags": [ "CARGO", "BOARDABLE", "COVERED", "CARGO_PASSABLE", "NO_COVER" ],
     "breaks_into": "ig_vp_cloth",
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -36,7 +36,7 @@
       "removal": { "skills": [ [ "fabrication", 1 ] ], "time": "5 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "fabrication", 2 ], [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 5 ] ] }
     },
-    "flags": [ "CARGO", "BOARDABLE", "CARGO_PASSABLE", "FLAT_SURF" ],
+    "flags": [ "CARGO", "BOARDABLE", "CARGO_PASSABLE", "FLAT_SURF", "NO_COVER" ],
     "breaks_into": "ig_vp_sheet_metal",
     "variants": [ { "symbols": "T", "symbols_broken": "#" } ]
   },
@@ -63,7 +63,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ], [ "fabrication", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "flags": [ "CARGO", "OBSTACLE" ],
+    "flags": [ "CARGO", "OBSTACLE", "NO_COVER" ],
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -94,7 +94,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "CARGO_PASSABLE" ],
+    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "CARGO_PASSABLE", "NO_COVER" ],
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -118,7 +118,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ], [ "fabrication", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "flags": [ "CARGO", "OBSTACLE" ],
+    "flags": [ "CARGO", "OBSTACLE", "NO_COVER" ],
     "damage_reduction": { "all": 4 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -142,7 +142,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "150 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ], [ "fabrication", 1 ] ], "time": "2 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
-    "flags": [ "CARGO", "CARGO_PASSABLE" ],
+    "flags": [ "CARGO", "CARGO_PASSABLE", "NO_COVER" ],
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -173,7 +173,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "2 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
-    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "CARGO_PASSABLE" ],
+    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "CARGO_PASSABLE", "NO_COVER" ],
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   },
@@ -229,7 +229,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 4 ] ], "time": "6 m", "using": [ [ "repair_welding_standard", 5 ] ] }
     },
-    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "COVERED", "BOARDABLE", "HUGE_OK", "CARGO_PASSABLE" ],
+    "flags": [ "UNMOUNT_ON_DAMAGE", "CARGO", "PROTRUSION", "COVERED", "BOARDABLE", "HUGE_OK", "CARGO_PASSABLE", "NO_COVER" ],
     "damage_reduction": { "all": 26 },
     "variants": [ { "symbols": "=", "symbols_broken": "#" } ]
   },
@@ -254,7 +254,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "4 m", "using": [ [ "repair_welding_standard", 2 ] ] }
     },
-    "flags": [ "BIKE_RACK_VEH", "MULTISQUARE" ],
+    "flags": [ "BIKE_RACK_VEH", "MULTISQUARE", "NO_COVER" ],
     "damage_reduction": { "all": 10 },
     "variants": [ { "symbols": "=", "symbols_broken": "#" } ]
   },
@@ -273,7 +273,7 @@
       "install": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "vehicle_wrench_2", 1 ] ] }
     },
-    "flags": [ "UNMOUNT_ON_DAMAGE", "PROTRUSION", "CARGO_PASSABLE" ],
+    "flags": [ "UNMOUNT_ON_DAMAGE", "PROTRUSION", "CARGO_PASSABLE", "NO_COVER" ],
     "damage_reduction": { "all": 10 },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
   }

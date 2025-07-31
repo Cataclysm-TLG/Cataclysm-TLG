@@ -8160,27 +8160,34 @@ int map::concealment( const tripoint_bub_ms &p ) const
     if( obstacle_f->concealment > 0 ) {
         return obstacle_f->concealment;
     }
-    // Vehicle concealment values.
+
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
-        bool is_opaque = false;
         const vehicle &veh = vp->vehicle();
         const point rel = vp->mount();
+        bool all_no_cover = true;
+        bool is_opaque = false;
         for( int idx : veh.parts_at_relative( rel, true, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
             const vpart_info &vpi_here = vp_here.info();
+            if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
+                vpi_here.location != "roof" ) {
+                all_no_cover = false;
+            }
             if( vpi_here.has_flag( "OPAQUE" ) &&
                 ( !vpi_here.has_flag( "OPENABLE" ) || !vp_here.open ) ) {
                 is_opaque = true;
-                break;
+                break; // Early exit since something here is opaque and that's all that matters.
             }
         }
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
-        if( is_opaque ) {
+        if( all_no_cover ) {
+            return 0;
+        } else if( is_opaque ) {
             return 100;
-        } else if( !is_opaque && is_obstacle ) {
+        } else if( is_obstacle ) {
             return 60;
-        } else if( !is_opaque && !is_obstacle && !is_aisle ) {
+        } else if( !is_aisle ) {
             return 45;
         }
     }
@@ -8201,14 +8208,27 @@ int map::coverage( const tripoint_bub_ms &p ) const
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
-        if( is_obstacle ) {
-            return 100;
+        const vehicle &veh = vp->vehicle();
+        const point rel = vp->mount();
+        bool all_no_cover = true;
+        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+            const vehicle_part &vp_here = veh.part( idx );
+            const vpart_info &vpi_here = vp_here.info();
+            if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
+                vpi_here.location != "roof" ) {
+                all_no_cover = false;
+                break; // Early exit since at least one part provides cover.
+            }
+        }
+        if( all_no_cover ) {
+            return 0;
         } else if( is_obstacle ) {
             return 60;
         } else if( !is_aisle ) {
             return 45;
         }
     }
+
     return ter( p )->coverage;
 }
 

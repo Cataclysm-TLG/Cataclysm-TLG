@@ -28,6 +28,7 @@
     "energy_consumption": "2 kW",
     "damage_modifier": 80,
     "folded_volume": "750 ml",
+    "extend": { "flags": [ "NO_COVER" ] },
     "requirements": {
       "install": { "skills": [ [ "mechanics", 1 ] ], "time": "60 m", "using": [ [ "vehicle_screw", 1 ] ] },
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_screw", 1 ] ] },
@@ -51,6 +52,7 @@
     "energy_consumption": "8 kW",
     "damage_modifier": 80,
     "folded_volume": "6 L",
+    "extend": { "flags": [ "NO_COVER" ] },
     "requirements": {
       "install": { "skills": [ [ "mechanics", 1 ] ], "time": "60 m", "using": [ [ "vehicle_screw", 1 ] ] },
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_screw", 1 ] ] },

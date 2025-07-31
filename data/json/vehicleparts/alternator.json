@@ -7,7 +7,7 @@
     "broken_color": "red",
     "categories": [ "energy" ],
     "description": "An alternator.",
-    "flags": [ "ALTERNATOR" ],
+    "flags": [ "ALTERNATOR", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "#" } ]
   },
   {

@@ -18,7 +18,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
-    "flags": [ "AISLE_LIGHT", "ENABLED_DRAINS_EPOWER" ],
+    "flags": [ "AISLE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "*" } ]
   },
   {
@@ -39,7 +39,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 5 ] ] }
     },
-    "flags": [ "ATOMIC_LIGHT", "LEAK_DAM", "RADIOACTIVE" ],
+    "flags": [ "ATOMIC_LIGHT", "LEAK_DAM", "RADIOACTIVE", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "*" } ]
   },
   {
@@ -77,7 +77,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
-    "flags": [ "CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER" ],
+    "flags": [ "CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "-" } ]
   },
   {
@@ -89,7 +89,7 @@
     "description": "A very bright, directed light that illuminates a half-circular area outside the vehicle when turned on.  During installation, you can choose what direction to point the light.",
     "//": "8000 lm 100 W LED floodlight",
     "epower": "-55 W",
-    "flags": [ "HALF_CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER" ]
+    "flags": [ "HALF_CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ]
   },
   {
     "id": "headlight",
@@ -111,7 +111,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
-    "flags": [ "CONE_LIGHT", "ENABLED_DRAINS_EPOWER" ],
+    "flags": [ "CONE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "*" } ]
   },
   {
@@ -134,7 +134,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 3 ] ] }
     },
-    "flags": [ "CONE_LIGHT", "ENABLED_DRAINS_EPOWER" ],
+    "flags": [ "CONE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ],
     "variants": [ { "symbols": "*", "symbols_broken": "*" } ]
   },
   {
@@ -145,7 +145,7 @@
     "copy-from": "headlight",
     "description": "A bright light that illuminates a wide cone outside the vehicle when turned on.  During installation, you can choose what direction to point the light, so multiple headlights can illuminate the sides or rear, as well as the front.",
     "epower": "-150 W",
-    "flags": [ "WIDE_CONE_LIGHT", "ENABLED_DRAINS_EPOWER" ]
+    "flags": [ "WIDE_CONE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ]
   },
   {
     "id": "headlight_reinforced",
@@ -191,7 +191,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "200 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
-    "flags": [ "CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER" ],
+    "flags": [ "CIRCLE_LIGHT", "ENABLED_DRAINS_EPOWER", "NO_COVER" ],
     "damage_reduction": { "all": 6 },
     "variants": [ { "symbols": "*", "symbols_broken": "-" } ]
   },

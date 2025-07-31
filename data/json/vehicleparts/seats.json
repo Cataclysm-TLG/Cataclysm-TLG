@@ -140,7 +140,7 @@
     },
     "breaks_into": [ { "item": "leather", "prob": 50 }, { "item": "scrap", "count": [ 1, 2 ] } ],
     "size": "0 ml",
-    "extend": { "flags": [ "NONBELTABLE" ] },
+    "extend": { "flags": [ "NONBELTABLE", "NO_COVER" ] },
     "delete": { "flags": [ "BELTABLE", "CARGO" ] },
     "variants_bases": [  ],
     "variants": [
@@ -175,6 +175,7 @@
     "description": "A steel bench with ankle and wrist restraints built in.  It looks very uncomfortable.",
     "durability": 450,
     "item": "steel_plate",
+    "extend": { "flags": [ "NO_COVER" ] },
     "//": "more metal here so bigger weld cost - 20 cm weld per damage quadrant",
     "name": { "str": "steel bench" },
     "requirements": {

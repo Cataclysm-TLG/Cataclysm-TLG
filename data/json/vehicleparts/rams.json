@@ -245,7 +245,7 @@
       },
       "repair": { "skills": [ [ "mechanics", 6 ] ], "time": "15 m", "using": [ [ "repair_welding_standard", 6 ] ] }
     },
-    "extend": { "flags": [ "SHARP", "UNMOUNT_ON_DAMAGE" ] },
+    "extend": { "flags": [ "SHARP", "UNMOUNT_ON_DAMAGE", "NO_COVER" ] },
     "delete": { "flags": [ "OBSTACLE" ] },
     "damage_reduction": { "all": 40 },
     "variants": [ { "symbols": "*", "symbols_broken": "x" } ]
@@ -265,7 +265,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "using": [ [ "repair_welding_standard", 2 ] ] }
     },
-    "extend": { "flags": [ "SHARP" ] },
+    "extend": { "flags": [ "SHARP", "NO_COVER" ] },
     "delete": { "flags": [ "OBSTACLE" ] },
     "breaks_into": [ { "item": "steel_chunk", "prob": 50 } ]
   },
@@ -277,6 +277,7 @@
     "damage_modifier": 300,
     "durability": 250,
     "color": "white",
+    "extend": { "flags": [ "NO_COVER" ] },
     "broken_color": "white",
     "description": "A metal spike, welded to the vehicle, to increase injury when crashing into things.",
     "item": "spike",

@@ -3142,7 +3142,8 @@ talk_effect_fun_t::func f_add_trait( const JsonObject &jo, std::string_view memb
         const trait_id trait = trait_id( new_trait.evaluate( d ) );
         const mutation_variant *variant = trait->variant( new_variant.evaluate( d ) );
         d.actor( is_npc )->set_mutation( trait, variant );
-        get_event_bus().send<event_type::gains_mutation>( d.actor( is_npc )->get_character()->getID(), trait_id( new_trait.evaluate( d ) ) );
+        get_event_bus().send<event_type::gains_mutation>( d.actor( is_npc )->get_character()->getID(),
+                trait_id( new_trait.evaluate( d ) ) );
     };
 }
 
@@ -3170,7 +3171,8 @@ talk_effect_fun_t::func f_remove_trait( const JsonObject &jo, std::string_view m
     str_or_var old_trait = get_str_or_var( jo.get_member( member ), member, true );
     return [is_npc, old_trait]( dialogue const & d ) {
         d.actor( is_npc )->unset_mutation( trait_id( old_trait.evaluate( d ) ) );
-        get_event_bus().send<event_type::loses_mutation>( d.actor( is_npc )->get_character()->getID(), trait_id( old_trait.evaluate( d ) ) );
+        get_event_bus().send<event_type::loses_mutation>( d.actor( is_npc )->get_character()->getID(),
+                trait_id( old_trait.evaluate( d ) ) );
     };
 }
 
