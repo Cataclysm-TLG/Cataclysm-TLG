@@ -7,6 +7,7 @@
 
 #include "assign.h"
 #include "debug.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "json.h"
@@ -56,11 +57,7 @@ void move_mode::load( const JsonObject &jo, std::string_view/*src*/ )
     assign( jo, "panel_color", _panel_color );
     assign( jo, "symbol_color", _symbol_color );
 
-    std::string exert = jo.get_string( "exertion_level" );
-    if( !activity_levels_map.count( exert ) ) {
-        jo.throw_error_at( id.str(), "Invalid activity level for move mode " + id.str() );
-    }
-    _exertion_level = activity_levels_map.at( exert );
+    mandatory( jo, was_loaded, "exertion_level", _exertion_level, activity_level_reader{} );
 
     mandatory( jo, was_loaded, "change_good_none", change_messages_success[steed_type::NONE] );
     mandatory( jo, was_loaded, "change_good_animal", change_messages_success[steed_type::ANIMAL] );
