@@ -708,5 +708,18 @@
     "id": "WATER_ONLY",
     "info": "This part can only power a vehicle on water.",
     "type": "json_flag"
+  },
+  {
+    "id": "NO_COVER",
+    "info": "This part does not provide any coverage or concealment.",
+    "type": "json_flag"
+  },
+  {
+    "id": "MEDIUM_HIDE",
+    "type": "json_flag"
+  },
+  {
+    "id": "SMALL_HIDE",
+    "type": "json_flag"
   }
 ]

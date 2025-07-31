@@ -5,7 +5,7 @@
     "categories": [ "movement" ],
     "location": "on_roof",
     "color": "light_blue",
-    "flags": [ "ROTOR", "NO_INSTALL_PLAYER", "NO_REPAIR", "SMASH_REMOVE" ],
+    "flags": [ "ROTOR", "NO_INSTALL_PLAYER", "NO_REPAIR", "SMASH_REMOVE", "NO_COVER" ],
     "description": "A set of aerofoil helicopter rotors, when spun at high speed, they generate thrust via lift.",
     "variants": [ { "symbols": "X", "symbols_broken": "O" } ],
     "control_requirements": { "air": { "proficiencies": [ "prof_helicopter_pilot" ] } }

@@ -12,7 +12,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "using": "vehicle_weld_removal" },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
-    "flags": [ "MOUNTABLE", "INITIAL_PART" ],
+    "flags": [ "MOUNTABLE", "INITIAL_PART", "NO_COVER" ],
     "categories": [ "hull" ],
     "damage_reduction": { "all": 20 },
     "variants": [

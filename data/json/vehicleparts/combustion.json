@@ -170,6 +170,7 @@
     "power": "7370 W",
     "energy_consumption": "18425 W",
     "folded_volume": "12 L",
+    "extend": { "flags": [ "NO_COVER" ] },
     "breaks_into": [
       { "item": "steel_lump", "count": [ 1, 2 ] },
       { "item": "steel_chunk", "count": [ 1, 2 ] },
@@ -196,6 +197,7 @@
     "power": "21000 W",
     "energy_consumption": "49800 W",
     "folded_volume": "42 L",
+    "extend": { "flags": [ "NO_COVER" ] },
     "breaks_into": [
       { "item": "steel_lump", "count": [ 4, 8 ] },
       { "item": "steel_chunk", "count": [ 4, 8 ] },
@@ -222,6 +224,7 @@
     "power": "22000 W",
     "energy_consumption": "55000 W",
     "folded_volume": "42 L",
+    "extend": { "flags": [ "NO_COVER" ] },
     "breaks_into": [
       { "item": "steel_lump", "count": [ 4, 8 ] },
       { "item": "steel_chunk", "count": [ 4, 8 ] },
@@ -248,6 +251,7 @@
     "power": "3728 W",
     "energy_consumption": "9320 W",
     "folded_volume": "6 L",
+    "extend": { "flags": [ "NO_COVER" ] },
     "breaks_into": [
       { "item": "steel_lump", "count": [ 0, 1 ] },
       { "item": "steel_chunk", "count": [ 1, 2 ] },
@@ -493,6 +497,7 @@
     "item": "steam_triple_small",
     "durability": 200,
     "power": "93250 W",
+    "extend": { "flags": [ "NO_COVER" ] },
     "energy_consumption": "186500 W",
     "breaks_into": [
       { "item": "steel_lump", "count": [ 30, 60 ] },

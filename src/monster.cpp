@@ -1343,6 +1343,30 @@ int monster::eye_level() const
     }
 
     map &here = get_map();
+
+    if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
+        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
+        const vehicle &veh = vp->vehicle();
+        const point rel = vp->mount();
+        bool all_no_cover = true;
+        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+            const vehicle_part &vp_here = veh.part( idx );
+            const vpart_info &vpi_here = vp_here.info();
+            if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
+                vpi_here.location != "roof" ) {
+                all_no_cover = false;
+                break; // Early exit since at least one part provides cover.
+            }
+        }
+        if( all_no_cover ) {
+            eye_level += 0;
+        } else if( !is_aisle ) {
+            // Non-aisle non-obstacle parts typically give 45 cover. We get less than that as we're inside the vehicle, not atop it.
+            // Return here to ensure we aren't stacking vehicle and furniture bonuses.
+            return eye_level += 20;
+        }
+    }
+
     const furn_id viewer_furn = here.furn( pos_bub() );
     const furn_t &furn = viewer_furn.obj();
     if( !furn.id ) {

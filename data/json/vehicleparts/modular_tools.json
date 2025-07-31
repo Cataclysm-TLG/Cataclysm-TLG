@@ -9,6 +9,7 @@
     "price": "400 USD",
     "price_postapoc": "20 USD",
     "material": [ "steel" ],
+    "flags": [ "NO_COVER" ],
     "symbol": "&",
     "color": "light_cyan"
   },
@@ -97,7 +98,7 @@
     "damage_reduction": { "all": 30 },
     "durability": 80,
     "size": "50 L",
-    "flags": [ "CARGO", "OBSTACLE", "FLAT_SURF", "VEH_TOOLS" ],
+    "flags": [ "CARGO", "OBSTACLE", "FLAT_SURF", "VEH_TOOLS", "NO_COVER" ],
     "//": "allow tools common for both kitchen unit and workshop; unpowered or low-power and no fume hood required",
     "allowed_tools": [
       "aluminum_pan",

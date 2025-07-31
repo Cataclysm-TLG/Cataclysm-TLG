@@ -17,7 +17,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "100 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ] ] }
     },
-    "flags": [ "VISION", "PROTRUSION", "UNMOUNT_ON_DAMAGE" ],
+    "flags": [ "VISION", "PROTRUSION", "UNMOUNT_ON_DAMAGE", "NO_COVER" ],
     "breaks_into": [ { "item": "glass_shard", "charges": [ 0, 8 ] } ],
     "variants": [
       { "id": "left", "label": "Left", "symbols": "o", "symbols_broken": "*" },
@@ -42,7 +42,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "100 s", "using": [ [ "vehicle_screw", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "20 s", "using": [ [ "adhesive", 1 ] ] }
     },
-    "flags": [ "VISION" ],
+    "flags": [ "VISION", "NO_COVER" ],
     "breaks_into": [ { "item": "glass_shard", "charges": [ 0, 8 ] } ],
     "variants": [ { "symbols": "o", "symbols_broken": "*" } ]
   }

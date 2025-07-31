@@ -126,7 +126,7 @@
     "item": "binoculars",
     "location": "internal",
     "folded_volume": "500 ml",
-    "flags": [ "ENHANCED_VISION", "SIMPLE_PART" ],
+    "flags": [ "ENHANCED_VISION", "SIMPLE_PART", "NO_COVER" ],
     "requirements": {
       "install": { "skills": [ [ "mechanics", 1 ] ], "time": "6 m", "using": [ [ "vehicle_screw", 1 ], [ "adhesive", 2 ] ] },
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "3 m", "using": [ [ "vehicle_screw", 1 ] ] },

@@ -73,6 +73,7 @@
 #include "units.h"
 #include "value_ptr.h"
 #include "vehicle.h"
+#include "veh_type.h"
 #include "vpart_position.h"
 
 struct mutation_branch;
@@ -606,8 +607,8 @@ bool Creature::sees( const Creature &critter ) const
         return false;
     }
 
-    if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_HIDE_PLACE, critter.pos_bub() ) &&
-        critter.get_size() < creature_size::huge ) {
+    if( ( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_HIDE_PLACE, critter.pos_bub() ) ) &&
+               critter.get_size() < creature_size::large ) {
         return false;
     }
 

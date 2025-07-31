@@ -16,7 +16,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "20 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "10 m", "using": [ [ "adhesive", 2 ] ] }
     },
-    "flags": [ "WHEEL_MOUNT_LIGHT", "NEEDS_JACKING" ],
+    "flags": [ "WHEEL_MOUNT_LIGHT", "NEEDS_JACKING", "NO_COVER" ],
     "breaks_into": [ { "item": "2x4", "count": [ 2, 5 ] } ],
     "damage_reduction": { "all": 8 },
     "variants": [ { "symbols": "-", "symbols_broken": "X" } ]
@@ -45,7 +45,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "using": [ [ "vehicle_weld_removal", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "4 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
-    "flags": [ "WHEEL_MOUNT_LIGHT", "NEEDS_JACKING" ],
+    "flags": [ "WHEEL_MOUNT_LIGHT", "NEEDS_JACKING", "NO_COVER" ],
     "breaks_into": [ { "item": "scrap", "count": [ 0, 1 ] } ],
     "damage_reduction": { "all": 10 },
     "variants": [ { "symbols": "-", "symbols_broken": "X" } ]
@@ -81,7 +81,7 @@
       },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "6 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
-    "flags": [ "WHEEL_MOUNT_MEDIUM", "NEEDS_JACKING" ],
+    "flags": [ "WHEEL_MOUNT_MEDIUM", "NEEDS_JACKING", "NO_COVER" ],
     "breaks_into": [ { "item": "scrap", "count": [ 1, 4 ] }, { "item": "steel_chunk", "count": [ 2, 5 ] } ],
     "damage_reduction": { "all": 30 },
     "variants": [ { "symbols": "-", "symbols_broken": "X" } ]
@@ -117,7 +117,7 @@
       },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "8 m", "using": [ [ "repair_welding_standard", 4 ] ] }
     },
-    "flags": [ "WHEEL_MOUNT_HEAVY", "NEEDS_JACKING" ],
+    "flags": [ "WHEEL_MOUNT_HEAVY", "NEEDS_JACKING", "NO_COVER" ],
     "breaks_into": [ { "item": "scrap", "count": [ 1, 4 ] }, { "item": "steel_chunk", "count": [ 3, 7 ] } ],
     "damage_reduction": { "all": 40 },
     "variants": [ { "symbols": "-", "symbols_broken": "X" } ]
@@ -149,7 +149,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_fasten", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 2 ] ] }
     },
-    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "RAIL" ],
+    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "RAIL", "NO_COVER" ],
     "damage_reduction": { "all": 66 },
     "variants": [ { "symbols": "|", "symbols_broken": "x" } ]
   },
@@ -297,7 +297,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT", "NO_COVER" ],
     "damage_reduction": { "bash": 10 },
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
@@ -326,7 +326,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "5 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "NEEDS_WHEEL_MOUNT_LIGHT" ],
+    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "NEEDS_WHEEL_MOUNT_LIGHT", "NO_COVER" ],
     "damage_reduction": { "bash": 6 },
     "variants": [
       { "id": "front", "label": "Front", "symbols": "|\\-/|\\-/", "symbols_broken": "x" },
@@ -365,7 +365,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "adhesive", 5 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "NO_COVER" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
@@ -390,7 +390,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "adhesive", 6 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "NO_COVER" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
@@ -415,7 +415,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "1 m", "qualities": [ { "id": "WRENCH", "level": 2 } ] },
       "install": { "skills": [ [ "mechanics", 0 ] ], "time": "1 m", "qualities": [ { "id": "WRENCH", "level": 2 } ] }
     },
-    "flags": [ "WHEEL", "NEEDS_WHEEL_MOUNT_SKATEBOARD", "STABLE", "STEERABLE" ],
+    "flags": [ "WHEEL", "NEEDS_WHEEL_MOUNT_SKATEBOARD", "STABLE", "STEERABLE", "NO_COVER" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
@@ -431,7 +431,7 @@
     "unfolding_time": "0 seconds",
     "durability": 120,
     "description": "A pair of skateboard trucks, for attaching wheels to.",
-    "flags": [ "WHEEL_MOUNT_SKATEBOARD" ],
+    "flags": [ "WHEEL_MOUNT_SKATEBOARD", "NO_COVER" ],
     "requirements": {
       "removal": {
         "skills": [ [ "mechanics", 0 ] ],
@@ -474,7 +474,7 @@
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "NO_COVER" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
@@ -543,7 +543,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_1", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_WHEEL_MOUNT_LIGHT" ],
+    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_WHEEL_MOUNT_LIGHT", "NO_COVER" ],
     "variants_bases": [ { "id": "scooter", "label": "Scooter" } ],
     "variants": [
       { "id": "front", "label": "Front", "symbols": "o", "symbols_broken": "x" },
@@ -570,7 +570,7 @@
     "rolling_resistance": 10.0,
     "wheel_terrain_modifiers": { "FLAT": [ 0, 4 ], "ROAD": [ 0, 2 ] },
     "contact_area": 10,
-    "flags": [ "STABLE", "STEERABLE", "WHEEL", "NEEDS_JACKING" ],
+    "flags": [ "STABLE", "STEERABLE", "WHEEL", "NEEDS_JACKING", "NO_COVER" ],
     "damage_reduction": { "bash": 8 },
     "variants": [ { "symbols": "|", "symbols_broken": "x" } ]
   },
@@ -600,7 +600,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "5 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT", "NO_COVER" ],
     "damage_reduction": { "bash": 8 },
     "variants": [ { "symbols": "|", "symbols_broken": "x" } ]
   },
@@ -631,7 +631,7 @@
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] },
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "10 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
-    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT" ],
+    "flags": [ "WHEEL", "NEEDS_JACKING", "STABLE", "STEERABLE", "NEEDS_WHEEL_MOUNT_LIGHT", "NO_COVER" ],
     "damage_reduction": { "bash": 6 },
     "variants": [ { "symbols": "|", "symbols_broken": "x" } ]
   },
@@ -727,7 +727,7 @@
     "durability": 240,
     "description": "A set of two small wheel mounts from a concrete mixer.",
     "item": "wheel_mount_concrete_mix",
-    "flags": [ "WHEEL_MOUNT_CONCRETE_MIX", "NEEDS_JACKING", "NO_INSTALL_HIDDEN" ],
+    "flags": [ "WHEEL_MOUNT_CONCRETE_MIX", "NEEDS_JACKING", "NO_INSTALL_HIDDEN", "NO_COVER" ],
     "breaks_into": [ { "item": "scrap", "count": [ 1, 8 ] } ],
     "damage_reduction": { "all": 10 },
     "variants": [ { "symbols": "-", "symbols_broken": "X" } ]
@@ -750,7 +750,7 @@
     "wheel_offroad_rating": 0.3,
     "wheel_terrain_modifiers": { "FLAT": [ 0, 5 ], "ROAD": [ 0, 2 ] },
     "contact_area": 60,
-    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_WHEEL_MOUNT_CONCRETE_MIX", "NO_INSTALL_HIDDEN" ],
+    "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_WHEEL_MOUNT_CONCRETE_MIX", "NO_INSTALL_HIDDEN", "NO_COVER" ],
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   }
 ]

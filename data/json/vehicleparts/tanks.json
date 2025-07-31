@@ -22,7 +22,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "4 m", "using": [ [ "repair_welding_standard", 2 ] ] }
     },
-    "flags": [ "FLUIDTANK" ],
+    "flags": [ "FLUIDTANK", "NO_COVER" ],
     "damage_reduction": { "all": 26, "stab": 8 },
     "variants": [ { "symbols": "O", "symbols_broken": "#" } ]
   },
@@ -47,7 +47,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "10 m", "using": [ [ "soldering_standard", 5 ] ] }
     },
-    "flags": [ "FLUIDTANK" ],
+    "flags": [ "FLUIDTANK", "NO_COVER" ],
     "damage_reduction": { "all": 9, "stab": 0 },
     "variants": [ { "symbols": "O", "symbols_broken": "#" } ]
   },
@@ -77,7 +77,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "22 m", "qualities": [ { "id": "WRENCH", "level": 2 } ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "8 m", "using": [ [ "repair_welding_standard", 4 ] ] }
     },
-    "flags": [ "FLUIDTANK" ],
+    "flags": [ "FLUIDTANK", "NO_COVER" ],
     "damage_reduction": { "all": 28, "stab": 10 },
     "variants": [ { "symbols": "O", "symbols_broken": "#" } ]
   },
@@ -362,7 +362,7 @@
       "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "45 m", "qualities": [ { "id": "WRENCH", "level": 2 } ] },
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "4 m", "using": [ [ "repair_welding_standard", 2 ] ] }
     },
-    "flags": [ "GASTANK" ],
+    "flags": [ "GASTANK", "NO_COVER" ],
     "damage_reduction": { "all": 28, "stab": 12 },
     "variants": [ { "symbols": "O", "symbols_broken": "#" } ]
   },
