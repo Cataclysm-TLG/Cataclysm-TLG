@@ -563,10 +563,16 @@ void monster::try_reproduce()
     if( !type->baby_timer ) {
         return;
     }
+    // Failsafe to prevent comically exponential monster growth.
+    if( g->num_creatures() > 100 ) {
+        return;
+    }
+    if( has_effect( effect_critter_underfed ) ) {
+        return;
+    }
 
-    if( !baby_timer && amount_eaten >= stomach_size ) {
+    if( !baby_timer ) {
         // Assume this is a freshly spawned monster (because baby_timer is not set yet), set the point when it reproduce to somewhere in the future.
-        // Monsters need to have eaten eat to start their pregnancy timer, but that's all.
         baby_timer.emplace( calendar::turn + *type->baby_timer );
     }
 
@@ -602,9 +608,6 @@ void monster::try_reproduce()
         }
 
         chance += 2;
-        if( has_flag( mon_flag_EATS ) && has_effect( effect_critter_underfed ) ) {
-            chance += 1; //Reduce the chances but don't prevent birth if the animal is not eating.
-        }
         if( season_match && female && one_in( chance ) ) {
             int spawn_cnt = rng( 1, type->baby_count );
             if( type->baby_monster ) {
@@ -2592,13 +2595,13 @@ float monster::stability_roll() const
     return stability;
 }
 
-float monster::get_dodge() const
+float monster::get_dodge( bool critfail ) const
 {
     if( has_effect( effect_downed ) ) {
         return 0.0f;
     }
 
-    float ret = Creature::get_dodge();
+    float ret = Creature::get_dodge( critfail );
     if( has_effect( effect_lightsnare ) || has_effect( effect_heavysnare ) ||
         has_effect( effect_beartrap ) || has_effect( effect_tied ) ) {
         ret /= 2;
@@ -2668,15 +2671,15 @@ float monster::fall_damage_mod() const
 
     switch( type->size ) {
         case creature_size::tiny:
-            return 0.2f;
+            return 0.25f;
         case creature_size::small:
-            return 0.6f;
-        case creature_size::medium:
             return 1.0f;
-        case creature_size::large:
-            return 1.4f;
-        case creature_size::huge:
+        case creature_size::medium:
             return 2.0f;
+        case creature_size::large:
+            return 2.5f;
+        case creature_size::huge:
+            return 4.0f;
         case creature_size::num_sizes:
             debugmsg( "ERROR: Invalid Creature size class." );
             return 0.0f;
@@ -2701,7 +2704,7 @@ int monster::impact( const int force, const tripoint &p )
     }
 
     const int bash_damage = std::max( 0.0f, force * mod - get_armor_type( damage_bash,
-                                      bodypart_id( "torso" ) ) );
+                                      bodypart_id( "torso" ) ) * 0.8f );
     apply_damage( nullptr, bodypart_id( "torso" ), bash_damage );
     total_dealt += force * mod;
 
@@ -2785,6 +2788,12 @@ void monster::process_turn()
             }
             here.emit_field( pos_bub(), emid );
         }
+    }
+
+    if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
+        !here.has_vehicle_floor( pos_bub() ) && !flies() && !climbs() &&
+        !has_effect( effect_bouldering ) ) {
+        add_effect( effect_bouldering, 1_turns, true );
     }
 
     // Special attack cooldowns are updated here.
@@ -3521,6 +3530,31 @@ void monster::process_effects()
             hp = 0;
         }
     }
+
+    // Slip on bile, or not.
+    if( has_effect( effect_slippery_terrain ) && !is_immune_effect( effect_downed ) && !flies() &&
+        !digging() && !has_effect( effect_downed ) ) {
+        map &here = get_map();
+        if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
+            !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+            int intensity = get_effect_int( effect_slippery_terrain );
+            intensity -= 1;
+            // ROAD tiles are hard, flat surfaces, and easier to slip on.
+            if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos() ) ) {
+                intensity++;
+            }
+            if( has_flag( mon_flag_STUMBLES ) ) {
+                intensity++;
+            }
+            int slipchance = ( round( get_speed() / 50 ) - get_dodge() / 2 );
+            if( intensity + slipchance > dice( 1, 12 ) ) {
+                add_effect( effect_downed, rng( 1_turns, 2_turns ) );
+                add_msg_if_player_sees( pos(), m_info, _( "The %1s slips and falls!" ),
+                                        name() );
+            }
+        }
+    }
+
     if( has_effect( effect_cramped_space ) ) {
         bool cramped = false;
         // return is intentionally discarded, sets cramped if appropriate

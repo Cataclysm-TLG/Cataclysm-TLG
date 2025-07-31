@@ -20,7 +20,6 @@
     "dispersion": 480,
     "durability": 7,
     "min_cycle_recoil": 540,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p226mag_12rd_357sig" ] } ],
     "melee_damage": { "bash": 8 }
@@ -62,7 +61,6 @@
     "dispersion": 480,
     "durability": 6,
     "min_cycle_recoil": 540,
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p320mag_13rd_357sig" ] } ],
     "melee_damage": { "bash": 8 }

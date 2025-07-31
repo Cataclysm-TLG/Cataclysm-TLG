@@ -36,12 +36,12 @@
   },
   {
     "type": "addiction_type",
-    "id": "opiate",
-    "name": "Opiate Withdrawal",
-    "type_name": "opiates",
+    "id": "opioid",
+    "name": "Opioid Withdrawal",
+    "type_name": "opioids",
     "description": "Strength - 1;   Perception - 1;   Dexterity - 1;\nDepression and physical pain to some degree.  Frequent cravings.  Vomiting.",
-    "craving_morale": "morale_craving_opiate",
-    "builtin": "opiate_effect"
+    "craving_morale": "morale_craving_opioid",
+    "builtin": "opioid_effect"
   },
   {
     "type": "addiction_type",

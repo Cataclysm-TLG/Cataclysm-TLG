@@ -45,6 +45,7 @@
       [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "500": 7 } } ],
     "melee_damage": { "bash": 12 }
   },

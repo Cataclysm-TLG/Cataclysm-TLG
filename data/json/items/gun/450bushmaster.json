@@ -18,7 +18,7 @@
     "ammo": [ "450" ],
     "dispersion": 120,
     "durability": 8,
-    "flags": [ "NEVER_JAMS", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "EASY_CLEAN" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],

@@ -90,6 +90,7 @@ namespace io
             case enchant_vals::mod::PAIN_PENALTY_MOD_SPEED: return "PAIN_PENALTY_MOD_SPEED";
             case enchant_vals::mod::MELEE_DAMAGE: return "MELEE_DAMAGE";
             case enchant_vals::mod::RANGED_DAMAGE: return "RANGED_DAMAGE";
+			case enchant_vals::mod::RANGED_ARMOR_PENETRATION: return "RANGED_ARMOR_PENETRATION";
             case enchant_vals::mod::DODGE_CHANCE: return "DODGE_CHANCE";
             case enchant_vals::mod::BONUS_BLOCK: return "BONUS_BLOCK";
             case enchant_vals::mod::BONUS_DODGE: return "BONUS_DODGE";
@@ -199,6 +200,7 @@ namespace io
             case enchant_vals::mod::SWEAT_MULTIPLIER: return "SWEAT_MULTIPLIER";
             case enchant_vals::mod::STAMINA_REGEN_MOD: return "STAMINA_REGEN_MOD";
             case enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER: return "MOVEMENT_EXERTION_MODIFIER";
+            case enchant_vals::mod::WEAKPOINT_ACCURACY: return "WEAKPOINT_ACCURACY";
             case enchant_vals::mod::NUM_MOD: break;
         }
         cata_fatal( "Invalid enchant_vals::mod" );
@@ -290,7 +292,7 @@ bool enchantment::is_active( const Character &guy, const bool active ) const
     }
 
     if( active_conditions.second == condition::DIALOG_CONDITION ) {
-        dialogue d( get_talker_for( guy ), nullptr );
+        const_dialogue d( get_const_talker_for( guy ), nullptr );
         return dialog_condition( d );
     }
     return false;
@@ -679,7 +681,7 @@ void enchant_cache::force_add( const enchant_cache &rhs )
 
 void enchant_cache::force_add( const enchantment &rhs, const Character &guy )
 {
-    dialogue d( get_talker_for( guy ), nullptr );
+    const_dialogue d( get_const_talker_for( guy ), nullptr );
     for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
          rhs.values_add ) {
         values_add[pair_values.first] += pair_values.second.evaluate( d );
@@ -732,7 +734,7 @@ void enchant_cache::force_add( const enchantment &rhs, const Character &guy )
 
 void enchant_cache::force_add( const enchantment &rhs, const monster &mon )
 {
-    dialogue d( get_talker_for( mon ), nullptr );
+    const_dialogue d( get_const_talker_for( mon ), nullptr );
     for( const std::pair<const enchant_vals::mod, dbl_or_var> &pair_values :
          rhs.values_add ) {
         values_add[pair_values.first] += pair_values.second.evaluate( d );
@@ -866,7 +868,7 @@ double enchantment::get_value_add( const enchant_vals::mod value, const Characte
     if( found == values_add.cend() ) {
         return 0;
     }
-    dialogue d( get_talker_for( guy ), nullptr );
+    const_dialogue d( get_const_talker_for( guy ), nullptr );
     return found->second.evaluate( d );
 }
 
@@ -876,7 +878,7 @@ double enchantment::get_value_multiply( const enchant_vals::mod value, const Cha
     if( found == values_multiply.cend() ) {
         return 0;
     }
-    dialogue d( get_talker_for( guy ), nullptr );
+    const_dialogue d( get_const_talker_for( guy ), nullptr );
     return found->second.evaluate( d );
 }
 

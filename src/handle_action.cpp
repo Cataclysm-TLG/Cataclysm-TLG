@@ -246,208 +246,115 @@ input_context game::get_player_input( std::string &action )
     if( uquit == QUIT_WATCH ) {
         ctxt = input_context( "DEFAULTMODE", keyboard_mode::keycode );
         ctxt.set_iso( true );
-        // The list of allowed actions in death-cam mode in game::handle_action
-        // *INDENT-OFF*
         for( const action_id id : {
-            ACTION_TOGGLE_MAP_MEMORY,
-            ACTION_CENTER,
-            ACTION_SHIFT_N,
-            ACTION_SHIFT_NE,
-            ACTION_SHIFT_E,
-            ACTION_SHIFT_SE,
-            ACTION_SHIFT_S,
-            ACTION_SHIFT_SW,
-            ACTION_SHIFT_W,
-            ACTION_SHIFT_NW,
-            ACTION_LOOK,
-            ACTION_KEYBINDINGS,
-        } ) {
+                 ACTION_TOGGLE_MAP_MEMORY,
+                 ACTION_CENTER,
+                 ACTION_SHIFT_N,
+                 ACTION_SHIFT_NE,
+                 ACTION_SHIFT_E,
+                 ACTION_SHIFT_SE,
+                 ACTION_SHIFT_S,
+                 ACTION_SHIFT_SW,
+                 ACTION_SHIFT_W,
+                 ACTION_SHIFT_NW,
+                 ACTION_LOOK,
+                 ACTION_KEYBINDINGS,
+             } ) {
             ctxt.register_action( action_ident( id ) );
         }
-        // *INDENT-ON*
         ctxt.register_action( "QUIT", to_translation( "Accept your fate" ) );
     } else {
         ctxt = get_default_mode_input_context();
     }
 
     m.update_visibility_cache( u.posz() );
-    const visibility_variables &cache = m.get_visibility_variables_cache();
-    const level_cache &map_cache = m.get_cache_ref( u.posz() );
-    const auto &visibility_cache = map_cache.visibility_cache;
+
 #if defined(TILES)
-    // Mark cata_tiles draw caches as dirty
     tilecontext->set_draw_cache_dirty();
 #endif
 
     user_turn current_turn;
 
     if( get_option<bool>( "ANIMATIONS" ) ) {
-        const int TOTAL_VIEW = MAX_VIEW_DISTANCE * 2 + 1;
-        point iStart( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) / 2 : 0,
-                      ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? ( TERRAIN_WINDOW_HEIGHT - TOTAL_VIEW ) / 2 :
-                      0 );
-        point iEnd( ( TERRAIN_WINDOW_WIDTH > TOTAL_VIEW ) ? TERRAIN_WINDOW_WIDTH -
-                    ( TERRAIN_WINDOW_WIDTH - TOTAL_VIEW ) /
-                    2 :
-                    TERRAIN_WINDOW_WIDTH, ( TERRAIN_WINDOW_HEIGHT > TOTAL_VIEW ) ? TERRAIN_WINDOW_HEIGHT -
-                    ( TERRAIN_WINDOW_HEIGHT - TOTAL_VIEW ) /
-                    2 : TERRAIN_WINDOW_HEIGHT );
-
-        if( fullscreen ) {
-            iStart.x = 0;
-            iStart.y = 0;
-            iEnd.x = TERMX;
-            iEnd.y = TERMY;
-        }
-
-        //x% of the Viewport, only shown on visible areas
-        const weather_animation_t weather_info = weather.weather_id->weather_animation;
-        point offset( u.view_offset.xy().raw() + point( -getmaxx( w_terrain ) / 2 + u.posx(),
-                      -getmaxy( w_terrain ) / 2 + u.posy() ) );
-
-#if defined(TILES)
-        if( g->is_tileset_isometric() ) {
-            iStart.x = 0;
-            iStart.y = 0;
-            iEnd.x = MAPSIZE_X;
-            iEnd.y = MAPSIZE_Y;
-            offset.x = 0;
-            offset.y = 0;
-        }
-#endif //TILES
-
-        // TODO: Move the weather calculations out of here.
-        const bool bWeatherEffect = weather_info.symbol != NULL_UNICODE;
-        const int dropCount = static_cast<int>( iEnd.x * iEnd.y * weather_info.factor );
-
-        weather_printable wPrint;
-        wPrint.colGlyph = weather_info.color;
-        wPrint.cGlyph = weather_info.symbol;
-        wPrint.wtype = weather.weather_id;
-        wPrint.vdrops.clear();
-
-        ctxt.set_timeout( 125 );
-
         shared_ptr_fast<game::draw_callback_t> animation_cb =
         make_shared_fast<game::draw_callback_t>( [&]() {
-            draw_weather( wPrint );
-
             if( uquit != QUIT_WATCH ) {
                 draw_sct();
             }
         } );
         add_draw_callback( animation_cb );
-
         creature_tracker &creatures = get_creature_tracker();
-        do {
-            if( g->uquit == QUIT_EXIT ) {
-                break;
-            }
-            if( bWeatherEffect && get_option<bool>( "ANIMATION_RAIN" ) ) {
-                /*
-                Location to add rain drop animation bits! Since it refreshes w_terrain it can be added to the animation section easily
-                Get tile information from above's weather information:
-                WEATHER_DRIZZLE | WEATHER_LIGHT_DRIZZLE | WEATHER_RAINY | WEATHER_RAINSTORM | WEATHER_THUNDER | WEATHER_LIGHTNING = "weather_rain_drop"
-                WEATHER_FLURRIES | WEATHER_SNOW | WEATHER_SNOWSTORM = "weather_snowflake"
-                */
-                invalidate_main_ui_adaptor();
+        if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
+            invalidate_main_ui_adaptor();
 
-                wPrint.vdrops.clear();
+            SCT.advanceAllSteps();
 
-                for( int i = 0; i < dropCount; i++ ) {
-                    const point iRand( rng( iStart.x, iEnd.x - 1 ), rng( iStart.y, iEnd.y - 1 ) );
-                    const point map( iRand + offset );
+            //Check for creatures on all drawing positions and offset if necessary
+            for( auto iter = SCT.vSCT.rbegin(); iter != SCT.vSCT.rend(); ++iter ) {
+                const direction oCurDir = iter->getDirection();
+                const int width = utf8_width( iter->getText() );
+                for( int i = 0; i < width; ++i ) {
+                    tripoint tmp( iter->getPosX() + i, iter->getPosY(), get_map().get_abs_sub().z() );
+                    const Creature *critter = creatures.creature_at( tmp, true );
 
-                    const tripoint mapp( map, u.posz() );
-
-                    if( m.inbounds( mapp ) && m.is_outside( mapp ) &&
-                        m.get_visibility( visibility_cache[mapp.x][mapp.y], cache ) ==
-                        visibility_type::CLEAR &&
-                        !creatures.creature_at( mapp, true ) ) {
-                        // Suppress if a critter is there
-                        wPrint.vdrops.emplace_back( iRand.x, iRand.y );
-                    }
-                }
-            }
-            // don't bother calculating SCT if we won't show it
-            if( uquit != QUIT_WATCH && get_option<bool>( "ANIMATION_SCT" ) && !SCT.vSCT.empty() ) {
-                invalidate_main_ui_adaptor();
-
-                SCT.advanceAllSteps();
-
-                //Check for creatures on all drawing positions and offset if necessary
-                for( auto iter = SCT.vSCT.rbegin(); iter != SCT.vSCT.rend(); ++iter ) {
-                    const direction oCurDir = iter->getDirection();
-                    const int width = utf8_width( iter->getText() );
-                    for( int i = 0; i < width; ++i ) {
-                        tripoint tmp( iter->getPosX() + i, iter->getPosY(), get_map().get_abs_sub().z() );
-                        const Creature *critter = creatures.creature_at( tmp, true );
-
-                        if( critter != nullptr && u.sees( *critter ) ) {
-                            i = -1;
-                            int iPos = iter->getStep() + iter->getStepOffset();
-                            for( auto iter2 = iter; iter2 != SCT.vSCT.rend(); ++iter2 ) {
-                                if( iter2->getDirection() == oCurDir &&
-                                    iter2->getStep() + iter2->getStepOffset() <= iPos ) {
-                                    if( iter2->getType() == "hp" ) {
-                                        iter2->advanceStepOffset();
-                                    }
-
+                    if( critter != nullptr && u.sees( *critter ) ) {
+                        i = -1;
+                        int iPos = iter->getStep() + iter->getStepOffset();
+                        for( auto iter2 = iter; iter2 != SCT.vSCT.rend(); ++iter2 ) {
+                            if( iter2->getDirection() == oCurDir &&
+                                iter2->getStep() + iter2->getStepOffset() <= iPos ) {
+                                if( iter2->getType() == "hp" ) {
                                     iter2->advanceStepOffset();
-                                    iPos = iter2->getStep() + iter2->getStepOffset();
                                 }
+
+                                iter2->advanceStepOffset();
+                                iPos = iter2->getStep() + iter2->getStepOffset();
                             }
                         }
                     }
                 }
             }
+        }
+        ctxt.set_timeout( 125 );
+        do {
 
-            if( pixel_minimap_option ) {
-                // TODO: more granular control to only redraw pixel minimap
-                invalidate_main_ui_adaptor();
-            }
-
-            std::unique_ptr<static_popup> deathcam_msg_popup;
             if( uquit == QUIT_WATCH ) {
-                deathcam_msg_popup = std::make_unique<static_popup>();
-                deathcam_msg_popup
-                ->wait_message( c_red, _( "Press %s to accept your fate…" ), ctxt.get_desc( "QUIT" ) )
+                static_popup deathcam_msg_popup;
+                deathcam_msg_popup.wait_message( c_red, _( "Press %s to accept your fate…" ),
+                                                 ctxt.get_desc( "QUIT" ) )
                 .on_top( true );
             }
 
-            // Remove asynchronous animations after animation delay if no input
             if( current_turn.async_anim_timeout() ) {
                 g->void_async_anim_curses();
 #if defined(TILES)
                 tilecontext->void_async_anim();
 #else
-                // Curses does not redraw itself so do it here
                 g->invalidate_main_ui_adaptor();
 #endif
             }
 
             if( g->has_blink_curses() && current_turn.blink_timeout() ) {
-                // Toggle blink phase and redraw
                 g->blink_active_phase = !g->blink_active_phase;
                 g->invalidate_main_ui_adaptor();
             }
 
             ui_manager::redraw_invalidated();
-        } while( handle_mouseview( ctxt, action ) && uquit != QUIT_WATCH
-                 && ( action != "TIMEOUT" || !current_turn.has_timeout_elapsed() ) );
+
+            if( handle_mouseview( ctxt, action ) ) {
+                run_weather_animation();
+                SCT.advanceAllSteps();
+            }
+
+        } while( action == "TIMEOUT" );
         ctxt.reset_timeout();
     } else {
-        ctxt.set_timeout( 125 );
-        while( handle_mouseview( ctxt, action ) ) {
-            if( action == "TIMEOUT" && current_turn.has_timeout_elapsed() ) {
-                break;
-            }
-        }
         ctxt.reset_timeout();
     }
-
     return ctxt;
 }
+
+
 
 static void rcdrive( const point &d )
 {
@@ -3170,10 +3077,6 @@ bool game::handle_action()
     // If performing an action with right mouse button, co-ordinates
     // of location clicked.
     std::optional<tripoint_bub_ms> mouse_target;
-
-    if( uquit == QUIT_EXIT ) {
-        return false;
-    }
 
     if( uquit == QUIT_WATCH && action == "QUIT" ) {
         uquit = QUIT_DIED;

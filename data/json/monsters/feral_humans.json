@@ -101,7 +101,7 @@
       "weakpoint_sets": [ "wps_humanoid_body_armor" ],
       "families": [ "prof_wp_syn_armored" ]
     },
-    "armor": { "bash": 9, "cut": 14, "acid": 4, "bullet": 18 }
+    "armor": { "bash": 9, "cut": 14, "acid": 6, "bullet": 18 }
   },
   {
     "id": "mon_feral_human_crowbar",
@@ -514,7 +514,7 @@
     "death_drops": "mon_feral_prepper_death_drops",
     "zombify_into": "mon_zombie_survivor",
     "extend": { "weakpoint_sets": [ "wps_humanoid_light_armor" ], "families": [ "prof_wp_syn_armored" ] },
-    "armor": { "bash": 4, "cut": 4, "acid": 4, "bullet": 4 }
+    "armor": { "bash": 4, "cut": 4, "acid": 7, "bullet": 4 }
   },
   {
     "id": "mon_feral_survivalist",
@@ -547,7 +547,7 @@
       "families": [ "prof_wp_syn_armored" ]
     },
     "fear_triggers": [ "HURT" ],
-    "armor": { "bash": 4, "cut": 4, "acid": 4, "bullet": 4, "electric": 3 }
+    "armor": { "bash": 4, "cut": 4, "acid": 8, "bullet": 4, "electric": 3 }
   },
   {
     "id": "mon_feral_militia",
@@ -600,7 +600,7 @@
       "families": [ "prof_wp_syn_armored" ]
     },
     "fear_triggers": [ "HURT" ],
-    "armor": { "bash": 5, "cut": 7, "acid": 5, "bullet": 10, "electric": 4 }
+    "armor": { "bash": 5, "cut": 7, "acid": 8, "bullet": 10, "electric": 4 }
   },
   {
     "id": "mon_feral_soldier",
@@ -622,7 +622,7 @@
     ],
     "zombify_into": "mon_zombie_soldier",
     "extend": { "weakpoint_sets": [ "wps_humanoid_body_armor", "wps_humanoid_open_helmet" ], "families": [ "prof_wp_syn_armored" ] },
-    "armor": { "bash": 4, "cut": 9, "bullet": 7, "electric": 3 }
+    "armor": { "bash": 4, "cut": 9, "bullet": 7, "acid": 8, "electric": 3 }
   },
   {
     "id": "mon_feral_jackboot",
@@ -663,6 +663,7 @@
       [ "BROWSE", 100 ],
       [ "EAT_FOOD", 100 ]
     ],
+    "armor": { "bash": 4, "cut": 9, "bullet": 7, "acid": 7, "electric": 3 },
     "death_drops": "mon_feral_jackboot_death_drops"
   },
   {
@@ -683,7 +684,7 @@
       [ "EAT_FOOD", 100 ]
     ],
     "zombify_into": "mon_zombie_sailor",
-    "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 2 }
+    "armor": { "bash": 2, "cut": 2, "bullet": 2, "acid": 7, "electric": 2 }
   },
   {
     "id": "mon_feral_sailor_axe",
@@ -752,7 +753,7 @@
       "weakpoint_sets": [ "wps_humanoid_body_armor", "wps_humanoid_open_helmet" ],
       "families": [ "prof_wp_syn_armored" ]
     },
-    "armor": { "bash": 4, "cut": 6, "bullet": 10 }
+    "armor": { "bash": 4, "cut": 6, "acid": 8, "bullet": 10 }
   },
   {
     "id": "mon_feral_officer",
@@ -826,7 +827,7 @@
       "weakpoint_sets": [ "wps_humanoid_body_armor", "wps_humanoid_open_helmet" ],
       "families": [ "prof_wp_syn_armored" ]
     },
-    "armor": { "bash": 8, "cut": 12, "stab": 9, "bullet": 14, "electric": 2 }
+    "armor": { "bash": 8, "cut": 12, "stab": 9, "bullet": 14, "acid": 8, "electric": 2 }
   },
   {
     "id": "mon_feral_cop_fungal_infected",

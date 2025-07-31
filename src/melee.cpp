@@ -127,6 +127,7 @@ static const json_character_flag json_flag_HARDTOHIT( "HARDTOHIT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 static const json_character_flag json_flag_NULL( "NULL" );
+static const json_character_flag json_flag_PREVENT_TRAINING( "PREVENT_TRAINING" );
 static const json_character_flag json_flag_PSEUDOPOD_GRASP( "PSEUDOPOD_GRASP" );
 
 static const limb_score_id limb_score_balance( "balance" );
@@ -702,6 +703,14 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
     const int skill_training_cap = t.is_monster() ? t.as_monster()->type->melee_training_cap :
                                    MAX_SKILL;
+    // Practice melee and relevant weapon skill (if any) except when using CQB bionic, if the creature is a hallucination, if the monster is
+    // flagged to not train, if it's a weakened NPC, or if the creature has already trained someone an excessive number of times.
+    const bool can_train_melee = !has_active_bionic( bio_cqb ) &&
+                                 !t.is_hallucination() &&
+                                 ( t.is_monster() || ( !t.is_monster() && !t.as_character()->is_prone() ) ) &&
+                                 !t.has_flag( mon_flag_NO_TRAIN ) &&
+                                 !t.has_effect_with_flag( json_flag_PREVENT_TRAINING ) &&
+                                 t.times_combatted_player <= 50;
     Character &player_character = get_player_character();
     if( !hits ) {
         int stumble_pen = stumble( *this, cur_weapon );
@@ -739,8 +748,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             }
         }
 
-        // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-        if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() ) {
+        if( can_train_melee ) {
+            t.times_combatted_player++;
             melee_train( *this, 2, std::min( 5, skill_training_cap ), cur_weap, attack_vector_vector_null,
                          reach_attacking );
         }
@@ -981,8 +990,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             int dam = dealt_dam.total_damage();
             melee::melee_stats.damage_amount += dam;
 
-            // Practice melee and relevant weapon skill (if any) except when using CQB bionic
-            if( !has_active_bionic( bio_cqb ) && !t.is_hallucination() ) {
+            if( can_train_melee ) {
+                t.times_combatted_player++;
                 melee_train( *this, 5, std::min( 10, skill_training_cap ), cur_weap, vector_id, reach_attacking );
             }
 
@@ -1033,9 +1042,11 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                get_total_melee_stamina_cost() );
 
     // Train weapon proficiencies
-    for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
-        for( const proficiency_id &prof : cat->category_proficiencies() ) {
-            practice_proficiency( prof, 1_seconds );
+    if( !t.has_flag( mon_flag_NO_TRAIN ) ) {
+        for( const weapon_category_id &cat : wielded_weapon_categories( *this ) ) {
+            for( const proficiency_id &prof : cat->category_proficiencies() ) {
+                practice_proficiency( prof, 1_seconds );
+            }
         }
     }
 
@@ -1247,7 +1258,7 @@ double Character::crit_chance( float roll_hit, float target_dodge, const item &w
 
     /** @EFFECT_BASHING increases critical chance with bashing weapons */
     /** @EFFECT_CUTTING increases critical chance with cutting weapons */
-    /** @EFFECT_STABBING increases critical chance with piercing weapons */
+    /** @EFFECT_STABBING increases critical chance with stabbing weapons */
     /** @EFFECT_UNARMED increases critical chance with unarmed weapons */
     float sk = get_skill_level( weap.melee_skill() );
     if( has_active_bionic( bio_cqb ) ) {
@@ -1297,13 +1308,13 @@ int Character::get_spell_resist() const
     return round( get_skill_level( skill_spellcraft ) );
 }
 
-float Character::get_dodge() const
+float Character::get_dodge( bool critfail ) const
 {
     if( !can_try_dodge().success() ) {
         return 0.0f;
     }
 
-    float ret = Creature::get_dodge();
+    float ret = Creature::get_dodge( critfail );
     add_msg_debug( debugmode::DF_MELEE, "Base dodge %.1f", ret );
 
     // Chop in half if we are unable to move
@@ -1539,8 +1550,8 @@ void Character::roll_damage( const damage_type_id &dt, bool crit, damage_instanc
     }
 }
 std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> Character::pick_technique(
-    Creature &t, const item_location &weap, bool crit,
-    bool dodge_counter, bool block_counter, const std::vector<matec_id> &blacklist )
+    Creature const &t, const item_location &weap, bool crit,
+    bool dodge_counter, bool block_counter, const std::vector<matec_id> &blacklist ) const
 {
     const std::vector<matec_id> all = martial_arts_data->get_all_techniques( weap, *this );
 
@@ -1595,9 +1606,9 @@ std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> Character::pick_tech
     }
 }
 std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
-        Character::evaluate_technique( const matec_id &tec_id, Creature &t, const item_location &weap,
+        Character::evaluate_technique( const matec_id &tec_id, Creature const &t, const item_location &weap,
                                        std::vector<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>> &fallbacks,
-                                       bool crit, bool dodge_counter, bool block_counter )
+                                       bool crit, bool dodge_counter, bool block_counter ) const
 {
     // this could be more robust but for now it should work fine
     bool is_loaded = weap && weap->is_magazine_full();
@@ -1616,7 +1627,7 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
 
     // Ignore this technique if we fail the dialog conditions
     if( tec_id->has_condition ) {
-        dialogue d( get_talker_for( this ), get_talker_for( t ) );
+        const_dialogue d( get_const_talker_for( *this ), get_const_talker_for( t ) );
         if( !tec_id->condition( d ) ) {
             add_msg_debug( debugmode::DF_MELEE, "Conditionals failed, attack discarded" );
             return std::nullopt;
@@ -1743,14 +1754,14 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
     return std::nullopt;
 }
 
-bool Character::valid_aoe_technique( Creature &t, const ma_technique &technique )
+bool Character::valid_aoe_technique( Creature const &t, const ma_technique &technique ) const
 {
     std::vector<Creature *> dummy_targets;
     return valid_aoe_technique( t, technique, dummy_targets );
 }
 
-bool Character::valid_aoe_technique( Creature &t, const ma_technique &technique,
-                                     std::vector<Creature *> &targets )
+bool Character::valid_aoe_technique( Creature const &t, const ma_technique &technique,
+                                     std::vector<Creature *> &targets ) const
 {
     if( technique.aoe.empty() ) {
         return false;

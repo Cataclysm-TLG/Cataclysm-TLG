@@ -270,22 +270,22 @@
           },
           { "group": "bugout_bag", "damage": [ 1, 4 ], "prob": 1 }
         ],
-        "prob": 4
+        "prob": 3
       },
       { "group": "default_zombie_items_pockets", "prob": 10 },
       {
         "distribution": [
-          { "item": "teargas_sprayer", "prob": 10, "charges": [ 0, 8 ] },
+          { "item": "teargas_sprayer", "prob": 1, "charges": [ 0, 8 ] },
           {
             "collection": [ { "item": "holster", "damage": [ 0, 2 ] }, { "group": "guns_pistol_common_everyday_carry", "damage": [ 0, 2 ] } ],
             "prob": 1
           },
           {
             "collection": [ { "item": "holster", "damage": [ 0, 2 ] }, { "item": "tazer", "damage": [ 0, 2 ], "charges": [ 0, 100 ] } ],
-            "prob": 2
+            "prob": 1
           }
         ],
-        "prob": 2
+        "prob": 1
       }
     ]
   },

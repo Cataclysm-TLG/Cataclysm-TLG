@@ -18,7 +18,7 @@
     "durability": 7,
     "barrel_volume": "750 ml",
     "ammo": [ "410shot" ],
-    "flags": [ "NEVER_JAMS" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "saiga410mag_10rd", "saiga410mag_30rd" ] } ],
     "melee_damage": { "bash": 12 }
   },

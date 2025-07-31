@@ -1580,17 +1580,29 @@ std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>>
                        calc_vector.rbegin()->first->name, vec.c_str(), calc_vector.rbegin()->second, storage.size() );
     }
     if( !list.empty() ) {
+        // Preferentially select natural_attack vectors 75% of the time.
+        if( rng( 0, 2 ) > 0 ) {
+            for( const auto &vec : list ) {
+                for( const auto &iterate : storage ) {
+                    if( iterate.first == vec.obj && iterate.first->natural_attack &&
+                        !user.natural_attack_restricted_on( iterate.second ) ) {
+                        add_msg_debug( debugmode::DF_MELEE,
+                                       "Chose natural attack vector %s for technique %s", vec.obj.c_str(), tech.c_str() );
+                        return iterate;
+                    }
+                }
+            }
+        }
+
+        // Fallback to random pick. Random picks can include natural_attack vectors even if we failed the rng roll above.
         ret = *list.pick();
         add_msg_debug( debugmode::DF_MELEE, "Picked vector %s for technique %s", ret.c_str(),
                        tech.c_str() );
-        // Now find the contact data matching the winning vector
-        for( auto &iterate : storage ) {
+        for( const auto &iterate : storage ) {
             if( iterate.first == ret ) {
-                return_set = iterate;
-                break;
+                return iterate;
             }
         }
-        return return_set;
     }
     return std::nullopt;
 }

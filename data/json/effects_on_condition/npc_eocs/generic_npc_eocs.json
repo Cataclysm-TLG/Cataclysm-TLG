@@ -230,7 +230,7 @@
         { "math": [ "faction_like('hells_raiders')", "<", "-40" ] },
         { "math": [ "faction_like('hells_raiders')", ">", "-60" ] },
         { "math": [ "u_bandit_assassins_sent", "<=", "10" ] },
-        { "math": [ "time_since('cataclysm', 'unit':'days') >= 9" ] },
+        { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 9" ] },
         { "not": { "is_weather": "portal_storm" } },
         { "not": { "u_near_om_location": "godco_enter", "range": 8 } },
         { "not": { "u_near_om_location": "evac_center_18", "range": 4 } },
@@ -254,7 +254,7 @@
         { "math": [ "faction_like('hells_raiders')", "<", "-60" ] },
         { "math": [ "faction_like('hells_raiders')", ">", "-90" ] },
         { "math": [ "u_bandit_assassins_sent", "<=", "10" ] },
-        { "math": [ "time_since('cataclysm', 'unit':'days') >= 15" ] },
+        { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 15" ] },
         { "not": { "is_weather": "portal_storm" } },
         { "not": { "u_near_om_location": "godco_enter", "range": 8 } },
         { "not": { "u_near_om_location": "evac_center_18", "range": 4 } },
@@ -277,7 +277,7 @@
       "and": [
         { "math": [ "faction_like('hells_raiders')", "<", "-90" ] },
         { "math": [ "u_bandit_assassins_sent", "<=", "10" ] },
-        { "math": [ "time_since('cataclysm', 'unit':'days') >= 21" ] },
+        { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 21" ] },
         { "not": { "is_weather": "portal_storm" } },
         { "not": { "u_near_om_location": "godco_enter", "range": 8 } },
         { "not": { "u_near_om_location": "evac_center_18", "range": 4 } },
@@ -300,7 +300,7 @@
       "and": [
         { "math": [ "faction_like('old_guard')", "<", "-45" ] },
         { "math": [ "u_government_assassins_sent", "<=", "6" ] },
-        { "math": [ "time_since('cataclysm', 'unit':'days') >= 9" ] },
+        { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 9" ] },
         { "not": { "is_weather": "portal_storm" } },
         { "not": { "u_near_om_location": "godco_enter", "range": 8 } },
         { "not": { "u_near_om_location": "evac_center_18", "range": 4 } },
@@ -378,20 +378,28 @@
     "eoc_type": "EVENT",
     "required_event": "avatar_moves",
     "condition": "u_is_underwater",
+    "//": "I would assume that Mycus spores are a bit sticky to keep them from coming off, so this has a chance to be removed instead of a guarantee.",
     "effect": [
       {
-        "run_eocs": {
-          "id": "EOC_REMOVE_HARD_THINGS_CHECK",
-          "global": false,
-          "eoc_type": "EVENT",
-          "required_event": "avatar_moves",
-          "condition": { "x_in_y_chance": { "x": 1, "y": 10 } },
-          "//": "I would assume that Mycus spores are a bit sticky to keep them from coming off, so this has a chance to be removed instead of a garuntee.",
-          "effect": [ { "u_lose_effect": "spores" } ]
-        }
+        "if": { "and": [ { "u_has_effect": "spores" }, { "x_in_y_chance": { "x": 1, "y": 10 } } ] },
+        "then": [
+          { "u_message": "You scrub your body extensively, and spores are finally gone.", "type": "good" },
+          { "u_lose_effect": "spores" }
+        ]
       },
-      { "u_lose_effect": "boomered" },
-      { "u_lose_effect": "corroding" }
+      {
+        "if": { "u_has_effect": "boomered" },
+        "then": [ { "u_message": "The bile is washed away from your face.", "type": "good" }, { "u_lose_effect": "boomered" } ]
+      },
+
+      {
+        "if": { "u_has_effect": "glowing" },
+        "then": [ { "u_message": "The glowing goo is washed away.", "type": "good" }, { "u_lose_effect": "glowing" } ]
+      },
+      {
+        "if": { "u_has_effect": "corroding" },
+        "then": [ { "u_message": "The acid is washed away from your body.", "type": "good" }, { "u_lose_effect": "corroding" } ]
+      }
     ]
   }
 ]

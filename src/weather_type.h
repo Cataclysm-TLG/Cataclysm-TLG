@@ -19,7 +19,7 @@
 
 class JsonObject;
 template <typename E> struct enum_traits;
-struct dialogue;
+struct const_dialogue;
 template<typename T>
 class generic_factory;
 
@@ -66,6 +66,7 @@ struct weather_animation_t {
     float factor = 0.0f;
     nc_color color = c_white;
     uint32_t symbol = NULL_UNICODE;
+    bool static_overlay = false;
     std::string get_symbol() const {
         return utf32_to_utf8( symbol );
     }
@@ -110,7 +111,7 @@ struct weather_type {
         // if multiple weather conditions are true the higher priority wins
         int priority = 0;
         // when this weather should happen
-        std::function<bool( dialogue & )> condition;
+        std::function<bool( const_dialogue const & )> condition;
         std::vector<weather_type_id> required_weathers;
         time_duration duration_min = 0_turns;
         time_duration duration_max = 0_turns;

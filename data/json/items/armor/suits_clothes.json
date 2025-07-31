@@ -738,7 +738,7 @@
         "weight": 20
       },
       {
-        "id": "dino_costume",
+        "id": "dragon_costume",
         "name": { "str": "dragon mascot costume" },
         "description": "A full-body mascot-style costume in the form of an anthropomorphic dragon.  It is quite encumbering and very warm.",
         "color": "green",

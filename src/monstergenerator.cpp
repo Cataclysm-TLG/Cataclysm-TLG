@@ -231,6 +231,10 @@ static int calc_bash_skill( const mtype &t )
     return ret;
 }
 
+// TODO: size_to_volume and volume_to_size should be made into a single consistent function.
+// TODO: Volume max should be tiny: 10679, small: 27358, medium: 90134, large: 150299
+// TODO: This would necessitate increasing vpart capacity and resizing almost every monster in the game.
+// See Character::get_average_character_volume() etc.
 static creature_size volume_to_size( const units::volume &vol )
 {
     if( vol <= 7500_ml ) {
@@ -615,7 +619,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "SPIT_SAP", mattack::spit_sap );
     add_hardcoded_attack( "TRIFFID_HEARTBEAT", mattack::triffid_heartbeat );
     add_hardcoded_attack( "FUNGUS", mattack::fungus );
-    add_hardcoded_attack( "FUNGUS_CORPORATE", mattack::fungus_corporate );
     add_hardcoded_attack( "FUNGUS_HAZE", mattack::fungus_haze );
     add_hardcoded_attack( "FUNGUS_BIG_BLOSSOM", mattack::fungus_big_blossom );
     add_hardcoded_attack( "FUNGUS_INJECT", mattack::fungus_inject );

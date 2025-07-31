@@ -68,7 +68,6 @@ static const character_modifier_id
 character_modifier_melee_stamina_cost_mod( "melee_stamina_cost_mod" );
 
 static const efftype_id effect_amigara( "amigara" );
-static const efftype_id effect_glowing( "glowing" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_harnessed( "harnessed" );
@@ -653,11 +652,6 @@ void avatar_action::swim( map &m, avatar &you, const tripoint &p )
             }
         }
     }
-    if( you.has_effect( effect_glowing ) ) {
-        add_msg( _( "The water washes off the glowing goo!" ) );
-        you.remove_effect( effect_glowing );
-    }
-
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();

@@ -3245,16 +3245,10 @@ void overmap::set_seen( const tripoint_om_omt &p, om_vision_level val, bool forc
     if( !inbounds( p ) ) {
         return;
     }
-
     if( !force && seen( p ) >= val ) {
         return;
     }
-
     layer[p.z() + OVERMAP_DEPTH].visible[p.xy()] = val;
-
-    if( val > om_vision_level::details ) {
-        add_extra_note( p );
-    }
 }
 
 om_vision_level overmap::seen( const tripoint_om_omt &p ) const
@@ -3512,53 +3506,10 @@ void overmap::add_extra( const tripoint_om_omt &p, const map_extra_id &id )
 
     if( it == std::end( extras ) ) {
         extras.emplace_back( om_map_extra{ id, p.xy() } );
-        add_extra_note( p );
     } else if( !id.is_null() ) {
         it->id = id;
-        add_extra_note( p );
     } else {
         extras.erase( it );
-    }
-}
-
-void overmap::add_extra_note( const tripoint_om_omt &p )
-{
-    if( seen( p ) < om_vision_level::details ) {
-        return;
-    }
-
-    const std::vector<om_map_extra> &layer_extras = layer[p.z() + OVERMAP_DEPTH].extras;
-    auto extrait = std::find_if( layer_extras.begin(),
-    layer_extras.end(), [&p]( const om_map_extra & extra ) {
-        return extra.p == p.xy();
-    } );
-    if( extrait == layer_extras.end() ) {
-        return;
-    }
-    const map_extra_id &extra = extrait->id;
-
-    auto_notes::auto_note_settings &auto_note_settings = get_auto_notes_settings();
-
-    // The player has discovered a map extra of this type.
-    auto_note_settings.set_discovered( extra );
-
-    if( get_option<bool>( "AUTO_NOTES" ) && get_option<bool>( "AUTO_NOTES_MAP_EXTRAS" ) ) {
-        // Only place note if the user has not disabled it via the auto note manager
-        if( !auto_note_settings.has_auto_note_enabled( extra, true ) ) {
-            return;
-        }
-
-        const std::optional<auto_notes::custom_symbol> &symbol =
-            auto_note_settings.get_custom_symbol( extra );
-        const std::string note_symbol = symbol ? ( *symbol ).get_symbol_string() : extra->get_symbol();
-        const nc_color note_color = symbol ? ( *symbol ).get_color() : extra->color;
-        const std::string mx_note =
-            string_format( "%s:%s;<color_yellow>%s</color>: <color_white>%s</color>",
-                           note_symbol,
-                           get_note_string_from_color( note_color ),
-                           extra->name(),
-                           extra->description() );
-        add_note( p, mx_note );
     }
 }
 

@@ -68,6 +68,7 @@ static const std::string flag_AFFECTED_BY_PAIN( "AFFECTED_BY_PAIN" );
 static const std::string flag_BLIND_EASY( "BLIND_EASY" );
 static const std::string flag_BLIND_HARD( "BLIND_HARD" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
+static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
 
 enum TAB_MODE {
     NORMAL,
@@ -454,6 +455,10 @@ static std::vector<std::string> recipe_info(
                           recp.has_flag( flag_BLIND_EASY ) ? _( "Easy" ) :
                           recp.has_flag( flag_BLIND_HARD ) ? _( "Hard" ) :
                           _( "Impossible" ) );
+
+    if( recp.has_flag( flag_NO_MORALE_OK ) && !guy.has_morale_to_craft() ) {
+        oss << string_format( _( "<color_light_blue>Low morale</color> will not prevent this craft.\n" ) );
+    }
 
     const inventory &crafting_inv = guy.crafting_inventory();
     if( recp.result() ) {

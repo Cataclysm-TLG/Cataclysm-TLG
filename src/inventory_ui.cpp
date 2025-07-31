@@ -2196,9 +2196,8 @@ void inventory_selector::add_nearby_items( int radius )
                 add_vehicle_items( pos );
                 continue;
             }
-            int dist = ( radius <= 1 ) ?
-                       square_dist( center, pos ) :
-                       static_cast<int>( trig_dist_z_adjust( center, pos ) );
+            // Round up here to guard against bad range comparisons. clear_path() is stricter so it works out fine.
+            int dist = static_cast<int>( std::ceil( trig_dist_z_adjust( center, pos ) ) );
             if( !here.clear_path( center, pos, dist, 1, 100 ) ) {
                 continue;
             }
@@ -3625,7 +3624,7 @@ void inventory_multiselector::set_chosen_count( inventory_entry &entry, size_t c
     } else {
         size_t size_before = to_use.size();
         entry.chosen_count = std::min( {count, max_chosen_count, entry.get_available_count() } );
-        if( it->count_by_charges() ) {
+        if( it->count_by_charges() && it->type->stack_max != 1 ) {
             auto iter = find_if( to_use.begin(),
             to_use.begin() + size_before, [&it]( const drop_location & drop ) {
                 return drop.first == it;
@@ -4016,7 +4015,8 @@ void inventory_haul_selector::apply_selection( std::vector<item_location> &items
     }
     for( std::pair<inventory_entry *, int> count : counts ) {
         // count_by_charges items will be moved all at once anyway, this is just to make it look a bit better
-        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() ) {
+        if( count.first->locations.size() == 1 && count.first->locations[0]->count_by_charges() &&
+            count.first->locations[0]->type->stack_max != 1 ) {
             set_chosen_count( *count.first, inventory_multiselector::max_chosen_count );
         } else {
             set_chosen_count( *count.first, count.second );

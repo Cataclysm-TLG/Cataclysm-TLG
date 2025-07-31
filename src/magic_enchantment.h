@@ -69,6 +69,7 @@ enum class mod : int {
     BONUS_BLOCK,
     MELEE_DAMAGE,
     RANGED_DAMAGE,
+    RANGED_ARMOR_PENETRATION,
     ATTACK_NOISE,
     SHOUT_NOISE,
     FOOTSTEP_NOISE,
@@ -176,6 +177,7 @@ enum class mod : int {
     SWEAT_MULTIPLIER,
     STAMINA_REGEN_MOD,
     MOVEMENT_EXERTION_MODIFIER,
+    WEAKPOINT_ACCURACY,
     NUM_MOD
 };
 } // namespace enchant_vals
@@ -276,7 +278,7 @@ class enchantment
         std::map<time_duration, std::vector<fake_spell>> intermittent_activation;
 
         std::pair<has, condition> active_conditions;
-        std::function<bool( dialogue & )> dialog_condition; // NOLINT(cata-serialize)
+        std::function<bool( const_dialogue const & )> dialog_condition; // NOLINT(cata-serialize)
 
         void add_activation( const time_duration &dur, const fake_spell &fake );
 };

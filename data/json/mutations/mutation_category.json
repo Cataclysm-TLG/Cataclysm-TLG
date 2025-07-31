@@ -47,7 +47,7 @@
     "threshold_mut": "THRESH_SPIDER",
     "mutagen_message": "You feel insidious, and your vision fragments for a moment.",
     "memorial_message": "Found a place in the web of life.",
-    "vitamin": "mutagen_spider",
+    "vitamin": "mutagen_aranean",
     "base_removal_chance": 50,
     "base_removal_cost_mul": 2.0
   },

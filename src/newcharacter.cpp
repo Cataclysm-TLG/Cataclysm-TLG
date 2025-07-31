@@ -847,7 +847,7 @@ bool avatar::create( character_type type, const std::string &tempname )
     return true;
 }
 
-void Character::set_skills_from_hobbies()
+void Character::set_skills_from_hobbies( bool no_override )
 {
     // 2 for an average person
     float catchup_modifier = 1.0f + ( 2.0f * get_int() + get_per() ) / 24.0f;
@@ -856,6 +856,9 @@ void Character::set_skills_from_hobbies()
     // Grab skills from hobbies and train
     for( const profession *profession : hobbies ) {
         for( const profession::StartingSkill &e : profession->skills() ) {
+            if( no_override && get_skill_level( e.first ) != 0 ) {
+                continue;
+            }
             // Train our skill
             const int skill_xp_bonus = calculate_cumulative_experience( e.second );
             get_skill_level_object( e.first ).train( skill_xp_bonus, catchup_modifier,
@@ -1258,7 +1261,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + string_format( _( "\nCarry weight: %.1f %s" ), convert_weight( u.weight_capacity() ),
                                  weight_units() )
                 + string_format( _( "\nResistance to knock down effect when hit: %.1f" ), u.stability_roll() )
-                + string_format( _( "\nIntimidation skill: %i" ), u.intimidation() )
+                + string_format( _( "\nIntimidation: %i" ), u.intimidation() )
                 + string_format( _( "\nMaximum oxygen: %i" ), u.get_oxygen_max() )
                 + string_format( _( "\nShout volume: %i" ), u.get_shout_volume() )
                 + string_format( _( "\nLifting strength: %i" ), u.get_lift_str() )
@@ -1301,23 +1304,24 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 description_str += "\n";
             }
             description_str +=
-                string_format( _( "\nDodge skill: %.f" ), u.get_dodge() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
                 + string_format( _( "\nMove cost while swimming: %i" ), u.swim_speed() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Effectiveness of lockpicking"
                        "\n- Chance of avoiding or escaping grabs and traps"
+                       "\n- Attack speed and accuracy in melee combat"
+                       "\n- Small bonus to melee critical hit chance"
+                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Effectiveness of disarming traps"
                        "\n- Chance of success when manipulating with gun modifications"
                        "\n- Effectiveness of repairing and modifying clothes and armor"
-                       "\n- Attack speed and chance of critical hits in melee combat"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing speed"
                        "\n- Aiming speed"
                        "\n- Speed and effectiveness of chopping wood with powered tools"
                        "\n- Chance to get better results when butchering corpses or cutting items"
                        "\n- Chance of losing control of vehicle when driving"
-                       "\n- Chance of damaging melee weapon on attack"
                        "\n- Damage from falling" ),
                     c_green );
         }
@@ -1331,7 +1335,7 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                 + colorize( string_format( _( "\nRead times: %d%%" ), read_spd ),
                             ( read_spd == 100 ? COL_STAT_NEUTRAL :
                               ( read_spd < 100 ? COL_STAT_BONUS : COL_STAT_PENALTY ) ) )
-                + string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + colorize( string_format( _( "\nCrafting bonus: %2d%%" ), u.get_int() ),
                             COL_STAT_BONUS )
                 + _( "\n\nAffects:" )
@@ -1360,12 +1364,16 @@ static std::string assemble_stat_details( avatar &u, const unsigned char sel )
                                 COL_STAT_PENALTY );
             }
             description_str +=
-                string_format( _( "\nPersuade/lie skill: %i" ), u.persuade_skill() )
+                string_format( _( "\nDodge bonus: %.1f" ), u.get_dodge( false ) )
+                + string_format( _( "\nNight vision bonus: %.1f" ), ( u.get_per() / 2.8 ) )
+                + string_format( _( "\nPersuasion: %1s \nDeception: %2s" ), u.persuade_skill(), u.lie_skill() )
                 + _( "\n\nAffects:" )
                 + colorize(
                     _( "\n- Speed of 'catching up' practical experience to theoretical knowledge"
                        "\n- Precision and reliability with ranged attacks"
-                       "\n- Sight distance on game map and overmap"
+                       "\n- Large bonus to melee critical hit chance"
+                       "\n- Reduces chance for stabbing weapons to get stuck"
+                       "\n- Sight distance on overmap"
                        "\n- Effectiveness of stealing"
                        "\n- Throwing accuracy"
                        "\n- Disinfecting your own wounds and using first aid on others"

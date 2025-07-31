@@ -2210,8 +2210,8 @@ void options_manager::add_options_graphics()
              true
            );
 
-        add( "ANIMATION_RAIN", page_id, to_translation( "Rain animation" ),
-             to_translation( "If true, will display weather animations." ),
+        add( "ANIMATION_RAIN", page_id, to_translation( "Weather effects" ),
+             to_translation( "If true, will display visual weather effects." ),
              true
            );
 
@@ -2247,12 +2247,12 @@ void options_manager::add_options_graphics()
 
         add( "BLINK_SPEED", page_id, to_translation( "Blinking effects speed" ),
              to_translation( "The speed of every blinking effects in ms." ),
-             100, 5000, 300
+             100, 5000, 800
            );
 
         add( "FORCE_REDRAW", page_id, to_translation( "Force redraw" ),
-             to_translation( "If true, forces the game to redraw at least once per turn." ),
-             true
+             to_translation( "Forces the game to redraw at least once per turn.  May cause problems with weather effects if enabled." ),
+             false
            );
     } );
 
@@ -2266,7 +2266,6 @@ void options_manager::add_options_graphics()
              to_translation( "If true, shows an ASCII graphic on the title screen.  If false, shows a text-only title screen." ),
              true
            );
-
         add( "SEASONAL_TITLE", page_id, to_translation( "Use seasonal title screen" ),
              to_translation( "If true, the title screen will use the art appropriate for the season." ),
              true
@@ -2377,7 +2376,11 @@ void options_manager::add_options_graphics()
              to_translation( "If true, replaces some TTF rendered text with tiles." ),
              true, COPT_CURSES_HIDE
            );
-
+        add( "CREATURE_TILE_SCALING", page_id,
+             to_translation( "Creature tile scaling" ),
+             to_translation( "If true, scales characters and certain graphics (e.g. infrared creature indicators) by creature size." ),
+             true, COPT_CURSES_HIDE
+           );
         add( "TILES", page_id, to_translation( "Choose tileset" ),
              to_translation( "Choose the tileset you want to use." ),
              build_tilesets_list(), "MshockXottoplus", COPT_CURSES_HIDE
@@ -2399,6 +2402,7 @@ void options_manager::add_options_graphics()
            ); // populate the options dynamically
 
         get_option( "TILES" ).setPrerequisite( "USE_TILES" );
+        get_option( "CREATURE_TILE_SCALING" ).setPrerequisite( "USE_TILES" );
         get_option( "USE_DISTANT_TILES" ).setPrerequisite( "USE_TILES" );
         get_option( "DISTANT_TILES" ).setPrerequisite( "USE_DISTANT_TILES" );
         get_option( "SWAP_ZOOM" ).setPrerequisite( "USE_DISTANT_TILES" );
@@ -3821,7 +3825,8 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
                 || iter.first == "PIXEL_MINIMAP_SCALE_TO_FIT" ) {
                 pixel_minimap_changed = true;
 
-            } else if( iter.first == "TILES" || iter.first == "USE_TILES" || iter.first == "DISTANT_TILES" ||
+            } else if( iter.first == "TILES" || iter.first == "USE_TILES" ||
+                       iter.first == "CREATURE_TILE_SCALING" || iter.first == "DISTANT_TILES" ||
                        iter.first == "USE_DISTANT_TILES" || iter.first == "OVERMAP_TILES" ) {
                 used_tiles_changed = true;
 

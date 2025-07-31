@@ -994,7 +994,8 @@ bool mattack::pull_metal_aoe( monster *z )
         }
     }
     if( !affected.empty() ) {
-        add_msg_if_player_sees( z->pos_bub(), _( "Items are jerked toward %s by an unseen force!" ), z->disp_name() );
+        add_msg_if_player_sees( z->pos_bub(), _( "Items are jerked toward %s by an unseen force!" ),
+                                z->disp_name() );
     }
     for( const std::pair<item, tripoint_bub_ms> &pr : affected ) {
         projectile proj;
@@ -1083,7 +1084,8 @@ bool mattack::pull_metal_weapon( monster *z )
                     if( target->is_avatar() ) {
                         popup( _( "The %s is pulled out of your grasp!" ), pulled_weapon.tname() );
                     } else {
-                        add_msg_if_player_sees( target->pos_bub(), _( "The %s is pulled away from <npcname>'s hands!" ), pulled_weapon.tname() );
+                        add_msg_if_player_sees( target->pos_bub(), _( "The %s is pulled away from <npcname>'s hands!" ),
+                                                pulled_weapon.tname() );
                     }
                     if( foe->has_activity( ACT_RELOAD ) ) {
                         foe->cancel_activity();
@@ -1976,20 +1978,6 @@ bool mattack::fungus( monster *z )
     }
 
     return true;
-}
-
-bool mattack::fungus_corporate( monster *z )
-{
-    if( x_in_y( 1, 20 ) ) {
-        sounds::sound( z->pos(), 10, sounds::sound_t::speech, _( "\"Buy SpOreos™ now!\"" ) );
-        if( get_player_view().sees( *z ) ) {
-            add_msg( m_warning, _( "Delicious snacks are released from the %s!" ), z->name() );
-            get_map().add_item( z->pos_bub(), item( "sporeos" ) );
-        } // only spawns SpOreos if the player is near; can't have the COMMONERS stealing our product from good customers
-        return true;
-    } else {
-        return fungus( z );
-    }
 }
 
 bool mattack::fungus_haze( monster *z )

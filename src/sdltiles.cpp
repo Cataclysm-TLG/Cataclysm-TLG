@@ -968,7 +968,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             // light level is now used for choosing between grayscale filter and normal lit tiles.
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
-                                 omp.raw(), subtile, rotation, ll, false, height_3d );
+                                 omp.raw(), subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
                 draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp.raw(),
                                      0, 0, ll, false );
@@ -991,39 +991,41 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                                              omp.raw(), 0, 0, lit_level::LIT, false );
                     }
                 }
-                const int horde_size = overmap_buffer.get_horde_size( omp );
-                if( showhordes && los && horde_size >= HORDE_VISIBILITY_SIZE ) {
-                    // a little bit of hardcoded fallbacks for hordes
-                    if( find_tile_with_season( id ) ) {
-                        // NOLINTNEXTLINE(cata-translate-string-literal)
-                        draw_from_id_string( string_format( "overmap_horde_%d", horde_size < 10 ? horde_size : 10 ),
-                                             omp.raw(), 0, 0, lit_level::LIT, false );
-                    } else {
-                        switch( horde_size ) {
-                            case HORDE_VISIBILITY_SIZE:
-                                draw_from_id_string( "mon_zombie", omp.raw(), 0, 0, lit_level::LIT,
-                                                     false );
-                                break;
-                            case HORDE_VISIBILITY_SIZE + 1:
-                                draw_from_id_string( "mon_zombie_tough", omp.raw(), 0, 0,
-                                                     lit_level::LIT, false );
-                                break;
-                            case HORDE_VISIBILITY_SIZE + 2:
-                                draw_from_id_string( "mon_zombie_brute", omp.raw(), 0, 0,
-                                                     lit_level::LIT, false );
-                                break;
-                            case HORDE_VISIBILITY_SIZE + 3:
-                                draw_from_id_string( "mon_zombie_hulk", omp.raw(), 0, 0,
-                                                     lit_level::LIT, false );
-                                break;
-                            case HORDE_VISIBILITY_SIZE + 4:
-                                draw_from_id_string( "mon_zombie_necro", omp.raw(), 0, 0,
-                                                     lit_level::LIT, false );
-                                break;
-                            default:
-                                draw_from_id_string( "mon_zombie_master", omp.raw(), 0, 0,
-                                                     lit_level::LIT, false );
-                                break;
+                if( showhordes && los ) {
+                    const int horde_size = overmap_buffer.get_horde_size( omp );
+                    if( horde_size >= HORDE_VISIBILITY_SIZE ) {
+                        // a little bit of hardcoded fallbacks for hordes
+                        if( find_tile_with_season( id ) ) {
+                            // NOLINTNEXTLINE(cata-translate-string-literal)
+                            draw_from_id_string( string_format( "overmap_horde_%d", horde_size < 10 ? horde_size : 10 ),
+                                                 omp.raw(), 0, 0, lit_level::LIT, false );
+                        } else {
+                            switch( horde_size ) {
+                                case HORDE_VISIBILITY_SIZE:
+                                    draw_from_id_string( "mon_zombie", omp.raw(), 0, 0, lit_level::LIT,
+                                                         false );
+                                    break;
+                                case HORDE_VISIBILITY_SIZE + 1:
+                                    draw_from_id_string( "mon_zombie_tough", omp.raw(), 0, 0,
+                                                         lit_level::LIT, false );
+                                    break;
+                                case HORDE_VISIBILITY_SIZE + 2:
+                                    draw_from_id_string( "mon_zombie_brute", omp.raw(), 0, 0,
+                                                         lit_level::LIT, false );
+                                    break;
+                                case HORDE_VISIBILITY_SIZE + 3:
+                                    draw_from_id_string( "mon_zombie_hulk", omp.raw(), 0, 0,
+                                                         lit_level::LIT, false );
+                                    break;
+                                case HORDE_VISIBILITY_SIZE + 4:
+                                    draw_from_id_string( "mon_zombie_necro", omp.raw(), 0, 0,
+                                                         lit_level::LIT, false );
+                                    break;
+                                default:
+                                    draw_from_id_string( "mon_zombie_master", omp.raw(), 0, 0,
+                                                         lit_level::LIT, false );
+                                    break;
+                            }
                         }
                     }
                 }
@@ -1106,12 +1108,12 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         if( guy_loc.z() == center_pos.z() && ( has_debug_vision ||
                                                overmap_buffer.seen_more_than( guy_loc, om_vision_level::details ) ) ) {
             draw_entity_with_overlays( *guy, global_omt_to_draw_position( guy_loc ), lit_level::LIT,
-                                       height_3d );
+                                       height_3d, 1.0f, 1.0f );
         }
     }
 
     draw_entity_with_overlays( get_player_character(), global_omt_to_draw_position( avatar_pos ),
-                               lit_level::LIT, height_3d );
+                               lit_level::LIT, height_3d, 1.0f, 1.0f );
     if( !fast_traveling ) {
         draw_from_id_string( "cursor", global_omt_to_draw_position( center_pos ), 0, 0, lit_level::LIT,
                              false );
@@ -3697,9 +3699,8 @@ static void CheckMessages()
         try_sdl_update();
     }
     if( quit ) {
-        if( g->uquit != quit_status::QUIT_EXIT_PENDING ) {
-            g->uquit = quit_status::QUIT_EXIT;
-        }
+        catacurses::endwin();
+        exit( 0 );
     }
 }
 

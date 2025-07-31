@@ -2525,6 +2525,7 @@ void monster::load( const JsonObject &data )
     biosig_timer = time_point( data.get_int( "biosig_timer", -1 ) );
 
     data.read( "udder_timer", udder_timer );
+    data.read( "times_combatted_player", times_combatted_player );
 
     horde_attraction = static_cast<monster_horde_attraction>( data.get_int( "horde_attraction", 0 ) );
 
@@ -2611,6 +2612,7 @@ void monster::store( JsonOut &json ) const
     json.member( "biosignatures", biosignatures );
     json.member( "biosig_timer", biosig_timer );
     json.member( "udder_timer", udder_timer );
+    json.member( "times_combatted_player", times_combatted_player );
 
     if( horde_attraction > MHA_NULL && horde_attraction < NUM_MONSTER_HORDE_ATTRACTION ) {
         json.member( "horde_attraction", horde_attraction );
@@ -4101,7 +4103,7 @@ void addiction::deserialize( const JsonObject &jo )
                 type = STATIC( addiction_id( "sleeping pill" ) );
                 break;
             case add_type_legacy::PKILLER:
-                type = STATIC( addiction_id( "opiate" ) );
+                type = STATIC( addiction_id( "opioid" ) );
                 break;
             case add_type_legacy::SPEED:
                 type = STATIC( addiction_id( "amphetamine" ) );

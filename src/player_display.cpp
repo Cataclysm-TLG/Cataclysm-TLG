@@ -839,7 +839,8 @@ static void draw_skills_tab( ui_adaptor &ui, const catacurses::window &w_skills,
             }
             mvwprintz( w_skills, point( 1, y_pos ), cstatus, "%s:", aSkill->name() );
             if( aSkill->ident() == skill_dodge ) {
-                mvwprintz( w_skills, point( width - 11, y_pos ), cstatus, "%4.1f/%-2d(%2d%%)", you.get_dodge(),
+                mvwprintz( w_skills, point( width - 11, y_pos ), cstatus, "%4.1f/%-2d(%2d%%)",
+                           you.get_dodge( false ),
                            level_num, ( exercise < 0 ? 0 : exercise ) );
             } else {
                 mvwprintz( w_skills, point( width - 6, y_pos ), cstatus, "%-2d(%2d%%)", level_num,

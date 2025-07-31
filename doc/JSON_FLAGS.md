@@ -1139,6 +1139,7 @@ Used to describe monster characteristics and set their properties and abilities.
 - ```NO_BREED``` Creature doesn't reproduce even though it has reproduction data.  Useful when using `copy-from` to make child versions of adult creatures.
 - ```NO_FUNG_DMG``` This monster can't be damaged by fungal spores and can't be fungalized either.
 - ```NO_NECRO``` This monster can't be revived by necros.  It will still rise on its own.
+- ```NO_TRAIN``` This monster will not train melee skills or proficiencies.
 - ```NULL``` Source use only.
 - ```PACIFIST``` Monster will never do melee attacks.  Useful for having them use grab without attacking the player.
 - ```PARALYZEVENOM``` This monster can apply `paralyzepoison` effect for 10 minutes.
@@ -1330,12 +1331,13 @@ See [Character](#character)
 - ```BLIND_HARD``` Possible to craft with little to no light, but difficult.
 - ```FULL_MAGAZINE``` Crafted or deconstructed items from this recipe will have fully-charged magazines.
 - ```NEED_FULL_MAGAZINE``` If this recipe requires magazines, it needs one that is full.
-- ```NO_RESIZE``` This clothes you crafted spawn unfitted
+- ```NO_RESIZE``` This clothes you crafted spawn unfitted.
+- ```NO_MORALE_OK``` Low morale can slow this craft up to 50%, but on its own won't prevent it outright.
 - ```SECRET``` Not automatically learned at character creation time based on high skill levels.
-- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes
-- ```NO_MANIP``` Manipulation score do not affect crafting this recipe
-- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe
-- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe
+- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes.
+- ```NO_MANIP``` Manipulation score do not affect crafting this recipe.
+- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe.
+- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe.
 
 
 ### Crafting recipes

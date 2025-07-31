@@ -2303,5 +2303,30 @@
       }
     ],
     "melee_damage": { "bash": 11, "stab": 7 }
+  },
+  {
+    "id": "integrated_cranial_reinforcement_cbm",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "cranial reinforcement" },
+    "description": "Bolted to the bone, a set of interlocking subdermal plates protect the skull and cervical vertebrae from trauma.",
+    "weight": "700 g",
+    "volume": "150 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "titanium_alloy" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "SOFT", "ALLOWS_NATURAL_ATTACKS", "TRANSPARENT", "PERSONAL", "CUSHION_FALL" ],
+    "armor": [
+      {
+        "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1.5 } ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead", "head_nape", "head_ear_l", "head_ear_r" ],
+        "coverage": 80,
+        "encumbrance": 2
+      }
+    ],
+    "melee_damage": { "bash": 2 }
   }
 ]

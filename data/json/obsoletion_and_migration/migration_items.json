@@ -2552,5 +2552,15 @@
     "id": "yoghurt",
     "type": "MIGRATION",
     "replace": "yogurt"
+  },
+  {
+    "id": "spear_homemade_halfpike",
+    "type": "MIGRATION",
+    "replace": "pointy_stick_long"
+  },
+  {
+    "id": "egg_goose_canadian",
+    "type": "MIGRATION",
+    "replace": "egg_goose"
   }
 ]

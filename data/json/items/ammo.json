@@ -551,6 +551,7 @@
     "volume": "250 ml",
     "damage": { "damage_type": "bash", "amount": 7 },
     "stack_max": 1,
+    "stack_size": 1,
     "range": 10,
     "dispersion": 14,
     "loudness": 0,

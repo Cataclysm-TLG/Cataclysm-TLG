@@ -104,6 +104,7 @@ struct weather_printable {
     nc_color colGlyph;
     //!< Glyph to draw this animation frame.
     uint32_t cGlyph;
+    bool static_overlay;
     std::string get_symbol() const {
         return utf32_to_utf8( cGlyph );
     }

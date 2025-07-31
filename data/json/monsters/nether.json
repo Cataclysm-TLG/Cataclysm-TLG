@@ -1050,7 +1050,7 @@
     "description": "A huge, slimy worm-like creature.  Its pale, flattened head drips an oily mucus as it breaches the ground, searching for prey.  Its pinkish mouth opens and closes, revealing long fangs glistening with ropey strands of saliva, which leave smoldering stains wherever they drip.",
     "default_faction": "nether",
     "bodytype": "snake",
-    "species": [ "NETHER" ],
+    "species": [ "NETHER_BURROWING" ],
     "diff": 10,
     "volume": "875000 ml",
     "weight": "200 kg",
@@ -1067,11 +1067,37 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
     "dodge": 1,
     "bleed_rate": 50,
+    "starting_ammo": { "mutagenic_sting_barb": 8 },
     "families": [ "prof_wp_netherium_abomination" ],
     "weakpoint_sets": [ "wps_netherium_abomination" ],
-    "harvest": "meatslug",
-    "special_attacks": [ { "type": "spell", "spell_data": { "id": "spell_gene_sting", "min_level": 5 }, "cooldown": 160 } ],
-    "flags": [ "SEES", "SMELLS", "HEARS", "HAS_MIND", "BASHES", "DESTROYS", "POISON", "VENOM", "NO_BREATHE", "DIGS" ],
+    "harvest": "exempt",
+    "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
+    "special_attacks": [
+      {
+        "type": "gun",
+        "cooldown": 35,
+        "gun_type": "mutagenic_sting_gun",
+        "ammo_type": "mutagenic_sting_barb",
+        "require_targeting_player": false,
+        "ranges": [ [ 2, 18, "DEFAULT" ] ],
+        "description": "The yugg launches a viscous barb!",
+        "no_ammo_sound": ""
+      }
+    ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "GOODHEARING",
+      "HAS_MIND",
+      "BASHES",
+      "DESTROYS",
+      "POISON",
+      "VENOM",
+      "NO_BREATHE",
+      "DIGS",
+      "PUSH_VEH",
+      "RANGED_ATTACKER"
+    ],
     "armor": { "bash": 6, "electric": 3 }
   },
   {

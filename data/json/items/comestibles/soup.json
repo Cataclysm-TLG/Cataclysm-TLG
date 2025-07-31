@@ -289,7 +289,7 @@
     "color": "brown",
     "spoils_in": "5 days",
     "container": "can_medium",
-    "comestible_type": "DRINK",
+    "comestible_type": "FOOD",
     "symbol": "o",
     "quench": 2,
     "calories": 504,

@@ -582,9 +582,9 @@
   {
     "id": "clay_blowtorch",
     "type": "TOOL",
-    "name": { "str": "Blow Lamp" },
+    "name": { "str": "blow lamp" },
     "//": "the Earilest form of Blowtorch that was essentially a very short clay pitcher with a wick and a copper tube to blow through. was capable of melting tin and copper",
-    "description": "a Very Early version of a Blow torch, made with a Clay bowl that holds a wick as well as a Metal Tube to blow through. Altough it takes some practice the precise flame is hot enough to weld softer metals like copper and gold, making it suited for jewelry ",
+    "description": "A very early version of a blow torch. Made with a clay bowl that holds a wick and metal tube, it is used by blowing through it to create a precise flame hot enough to weld soft metals like copper and gold. Mainly used for jewelry.",
     "weight": "225 g",
     "volume": "1 L",
     "price": "200 USD",
@@ -604,8 +604,8 @@
   {
     "id": "fine_blowtorch",
     "type": "TOOL",
-    "name": { "str": "Jeweler's blowtorch" },
-    "description": "a small butane blow torch with a pipe to blow into. used by jeweler's too weld soft metals like gold and copper together.",
+    "name": { "str": "jeweler's blowtorch" },
+    "description": "A small butane blow torch with a pipe to blow into. Used by jewelers to weld soft metals like gold and copper together.",
     "weight": "350 g",
     "volume": " 500 ml",
     "price": "800 USD",

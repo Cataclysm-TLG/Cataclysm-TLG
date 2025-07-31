@@ -281,7 +281,7 @@ android {
                 if (abi_x86_64) {
                     include "x86_64"
                 }
-                // Specifies that we do not want to also generate a universal APK that includes all ABIs.
+                // Specifies that we want to also generate a universal APK that includes all ABIs.
                 universalApk false
             }
         }

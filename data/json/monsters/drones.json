@@ -28,7 +28,7 @@
     "revert_to_itype": "bot_EMP_hack",
     "starting_ammo": { "grenade_emp": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3 }
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_c4_hack",
@@ -42,7 +42,7 @@
     "revert_to_itype": "bot_c4_hack",
     "starting_ammo": { "c4_payload": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3 }
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_flashbang_hack",
@@ -56,7 +56,7 @@
     "revert_to_itype": "bot_flashbang_hack",
     "starting_ammo": { "flashbang": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3 }
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_gasbomb_hack",
@@ -70,7 +70,7 @@
     "revert_to_itype": "bot_gasbomb_hack",
     "starting_ammo": { "tear_gas_payload": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3 }
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_grenade_hack",
@@ -84,7 +84,7 @@
     "revert_to_itype": "bot_grenade_hack",
     "starting_ammo": { "grenade": 1 },
     "special_attacks": [ [ "KAMIKAZE", 0 ] ],
-    "armor": { "cut": 4, "bullet": 3 }
+    "armor": { "cut": 4, "bullet": 3, "acid": 10 }
   },
   {
     "id": "mon_manhack",
@@ -103,7 +103,7 @@
     "death_function": { "corpse_type": "BROKEN" },
     "extend": { "flags": [ "HIT_AND_RUN" ] },
     "delete": { "flags": [ "PACIFIST" ] },
-    "armor": { "bash": 2, "cut": 8, "bullet": 6 }
+    "armor": { "bash": 2, "cut": 8, "bullet": 6, "acid": 10 }
   },
   {
     "abstract": "balloon_sniper_drone",
@@ -163,7 +163,7 @@
       "HIT_AND_RUN",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 4, "cut": 3 }
+    "armor": { "bash": 4, "cut": 3, "acid": 6 }
   },
   {
     "id": "mon_tazer_hack",
@@ -177,6 +177,6 @@
     "revert_to_itype": "bot_tazer_hack",
     "death_function": { "corpse_type": "BROKEN" },
     "special_attacks": [ [ "TAZER", 5 ] ],
-    "armor": { "cut": 2, "bullet": 1 }
+    "armor": { "cut": 2, "bullet": 1, "acid": 10 }
   }
 ]

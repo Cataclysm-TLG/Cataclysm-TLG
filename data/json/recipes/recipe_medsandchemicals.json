@@ -76,7 +76,7 @@
     "time": "2 m",
     "autolearn": true,
     "reversible": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [ [ [ "rolling_paper", 1 ] ], [ [ "tobacco", 1 ], [ "cig_butt", 5 ], [ "cigar_butt", 5 ] ] ]
   },
   {
@@ -104,7 +104,7 @@
     "time": "2 m",
     "autolearn": true,
     "reversible": true,
-    "flags": [ "BLIND_HARD" ],
+    "flags": [ "BLIND_HARD", "NO_MORALE_OK" ],
     "components": [ [ [ "rolling_paper", 1 ] ], [ [ "weed", 1 ], [ "joint_roach", 5 ] ] ]
   },
   {

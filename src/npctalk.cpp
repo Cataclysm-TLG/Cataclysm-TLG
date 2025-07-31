@@ -185,7 +185,7 @@ struct item_search_data {
     bool wielded_only;
     bool held_only;
 
-    std::function<bool( dialogue & )> condition;
+    std::function<bool( const_dialogue const & )> condition;
     bool has_condition = false;
 
     explicit item_search_data( const JsonObject &jo ) {
@@ -256,7 +256,7 @@ struct item_search_data {
         held_only = jo.get_bool( "held_only", false );
     }
 
-    bool check( const Character *guy, const item_location &loc, const dialogue &d ) {
+    bool check( const Character *guy, const item_location &loc, const_dialogue const &d ) {
 
         bool match;
 
@@ -373,7 +373,7 @@ struct item_search_data {
         }
 
         if( has_condition ) {
-            dialogue dial( d.actor( false )->clone(), get_talker_for( loc ) );
+            const_dialogue dial( d.const_actor( false )->const_clone(), get_const_talker_for( loc ) );
             if( !condition( dial ) ) {
                 return false;
             }
@@ -1753,7 +1753,7 @@ talk_response &dialogue::add_response( const std::string &text, const std::strin
 {
     talk_response result = talk_response();
     result.truetext = no_translation( text );
-    result.truefalse_condition = []( const dialogue & ) {
+    result.truefalse_condition = []( const_dialogue const & ) {
         return true;
     };
     result.success.next_topic = talk_topic( r );
@@ -2045,13 +2045,13 @@ void dialogue::gen_responses( const talk_topic &the_topic )
     }
 }
 
-static int parse_mod( const dialogue &d, const std::string &attribute, const int factor )
+static int parse_mod( const_dialogue const &d, const std::string &attribute, const int factor )
 {
-    return d.actor( true )->parse_mod( attribute, factor ) + d.actor( false )->parse_mod( attribute,
-            factor );
+    return d.const_actor( true )->parse_mod( attribute, factor ) +
+           d.const_actor( false )->parse_mod( attribute, factor );
 }
 
-static int total_price( const talker &seller, const itype_id &item_type )
+static int total_price( const_talker const &seller, const itype_id &item_type )
 {
     int price = 0;
     item tmp( item_type );
@@ -2070,9 +2070,9 @@ static int total_price( const talker &seller, const itype_id &item_type )
     return price;
 }
 
-int talk_trial::calc_chance( dialogue &d ) const
+int talk_trial::calc_chance( const_dialogue const &d ) const
 {
-    if( d.actor( false )->has_trait( trait_DEBUG_MIND_CONTROL ) ) {
+    if( d.const_actor( false )->has_trait( trait_DEBUG_MIND_CONTROL ) ) {
         return 100;
     }
     int chance = difficulty;
@@ -2084,21 +2084,23 @@ int talk_trial::calc_chance( dialogue &d ) const
             chance = 100;
             break;
         case TALK_TRIAL_SKILL_CHECK:
-            chance = d.actor( false )->get_skill_level( skill_id( skill_required ) ) >= difficulty ? 100 : 0;
+            chance = d.const_actor( false )->get_skill_level( skill_id( skill_required ) ) >= difficulty ? 100 :
+                     0;
             break;
         case TALK_TRIAL_CONDITION:
             chance = condition( d ) ? 100 : 0;
             break;
         case TALK_TRIAL_LIE:
-            chance += d.actor( false )->trial_chance_mod( "lie" ) + d.actor( true )->trial_chance_mod( "lie" );
+            chance += d.const_actor( false )->trial_chance_mod( "lie" ) + d.const_actor(
+                          true )->trial_chance_mod( "lie" );
             break;
         case TALK_TRIAL_PERSUADE:
-            chance += d.actor( false )->trial_chance_mod( "persuade" ) +
-                      d.actor( true )->trial_chance_mod( "persuade" );
+            chance += d.const_actor( false )->trial_chance_mod( "persuade" ) +
+                      d.const_actor( true )->trial_chance_mod( "persuade" );
             break;
         case TALK_TRIAL_INTIMIDATE:
-            chance += d.actor( false )->trial_chance_mod( "intimidate" ) +
-                      d.actor( true )->trial_chance_mod( "intimidate" );
+            chance += d.const_actor( false )->trial_chance_mod( "intimidate" ) +
+                      d.const_actor( true )->trial_chance_mod( "intimidate" );
             break;
     }
     for( const auto &this_mod : modifiers ) {
@@ -2215,23 +2217,25 @@ int topic_category( const talk_topic &the_topic )
 void parse_tags( std::string &phrase, const Character &u, const Character &me,
                  const itype_id &item_type )
 {
-    dialogue d( get_talker_for( u ), get_talker_for( me ) );
+    const_dialogue d( get_const_talker_for( u ), get_const_talker_for( me ) );
     parse_tags( phrase, u, me, d, item_type );
 }
 
-void parse_tags( std::string &phrase, const Character &u, const Character &me, const dialogue &d,
+void parse_tags( std::string &phrase, const Character &u, const Character &me,
+                 const_dialogue const &d,
                  const itype_id &item_type )
 {
-    parse_tags( phrase, *get_talker_for( u ), *get_talker_for( me ), d, item_type );
+    parse_tags( phrase, *get_const_talker_for( u ), *get_const_talker_for( me ), d, item_type );
 }
 
-void parse_tags( std::string &phrase, const talker &u, const talker &me, const dialogue &d,
+void parse_tags( std::string &phrase, const_talker const &u, const_talker const &me,
+                 const_dialogue const &d,
                  const itype_id &item_type )
 {
     phrase = SNIPPET.expand( phrase );
 
-    const Character *u_chr = u.get_character();
-    const Character *me_chr = me.get_character();
+    const Character *u_chr = u.get_const_character();
+    const Character *me_chr = me.get_const_character();
     size_t fa;
     size_t fb;
     size_t fa_;
@@ -2452,51 +2456,51 @@ void dialogue::add_topic( const talk_topic &topic )
     }
 }
 
-void dialogue::set_value( const std::string &key, const std::string &value )
+void const_dialogue::set_value( const std::string &key, const std::string &value )
 {
     context[key] = value;
 }
 
-void dialogue::remove_value( const std::string &key )
+void const_dialogue::remove_value( const std::string &key )
 {
     context->erase( key );
 }
 
-std::string dialogue::get_value( const std::string &key ) const
+std::string const_dialogue::get_value( const std::string &key ) const
 {
     return maybe_get_value( key ).value_or( std::string{} );
 }
 
-std::optional<std::string> dialogue::maybe_get_value( const std::string &key ) const
+std::optional<std::string> const_dialogue::maybe_get_value( const std::string &key ) const
 {
     auto it = context->find( key );
     return it == context->end() ? std::nullopt : std::optional<std::string> { it->second };
 }
 
-void dialogue::set_conditional( const std::string &key,
-                                const std::function<bool( dialogue & )> &value )
+void const_dialogue::set_conditional( const std::string &key,
+                                      const std::function<bool( const_dialogue const & )> &value )
 {
     conditionals[key] = value;
 }
 
-bool dialogue::evaluate_conditional( const std::string &key, dialogue &d )
+bool const_dialogue::evaluate_conditional( const std::string &key, const_dialogue const &d ) const
 {
     auto it = conditionals->find( key );
     return ( it == conditionals->end() ) ? false : it->second( d );
 }
 
-const std::unordered_map<std::string, std::string> &dialogue::get_context() const
+const std::unordered_map<std::string, std::string> &const_dialogue::get_context() const
 {
     return context;
 }
 
-const std::unordered_map<std::string, std::function<bool( dialogue & )>>
-        &dialogue::get_conditionals() const
+const std::unordered_map<std::string, std::function<bool( const_dialogue const & )>>
+        &const_dialogue::get_conditionals() const
 {
     return conditionals;
 }
 
-void dialogue::amend_callstack( const std::string &value )
+void const_dialogue::amend_callstack( const std::string &value )
 {
     if( !callstack.empty() ) {
         callstack += " \\ " + value;
@@ -2505,12 +2509,22 @@ void dialogue::amend_callstack( const std::string &value )
     }
 }
 
-std::string dialogue::get_callstack() const
+std::string const_dialogue::get_callstack() const
 {
     if( !callstack.empty() ) {
         return "Callstack: " + callstack;
     }
     return "";
+}
+
+const_talker *const_dialogue::const_actor( bool is_beta ) const
+{
+    if( !has_beta && is_beta ) {
+        debugmsg( "Tried to use an invalid beta talker.  %s", get_callstack() );
+    } else if( !has_alpha && !is_beta ) {
+        debugmsg( "Tried to use an invalid alpha talker.  %s", get_callstack() );
+    }
+    return ( is_beta ? beta : alpha ).get();
 }
 
 talker *dialogue::actor( const bool is_beta ) const
@@ -2535,18 +2549,19 @@ talker *dialogue::actor( const bool is_beta ) const
     return ( is_beta ? beta : alpha ).get();
 }
 
-bool dialogue::has_actor( bool is_beta ) const
+bool const_dialogue::has_actor( bool is_beta ) const
 {
     return is_beta ? has_beta : has_alpha;
 }
 
-dialogue::dialogue( const dialogue &d ) : has_beta( d.has_beta ), has_alpha( d.has_alpha )
+const_dialogue::const_dialogue( const const_dialogue &d )
+    : has_beta( d.has_beta ), has_alpha( d.has_alpha )
 {
     if( has_alpha ) {
-        alpha = d.actor( false )->clone();
+        alpha = d.const_actor( false )->const_clone();
     }
     if( has_beta ) {
-        beta = d.actor( true )->clone();
+        beta = d.const_actor( true )->const_clone();
     }
     if( !has_alpha && !has_beta ) {
         debugmsg( "Constructed a dialogue with no actors!  %s", get_callstack() );
@@ -2560,40 +2575,34 @@ dialogue::dialogue( const dialogue &d ) : has_beta( d.has_beta ), has_alpha( d.h
     callstack = d.callstack;
 }
 
-dialogue::dialogue( std::unique_ptr<talker> alpha_in,
-                    std::unique_ptr<talker> beta_in ) : alpha( std::move( alpha_in ) ), beta( std::move( beta_in ) )
+dialogue::dialogue( const dialogue &d ) : const_dialogue( d )
 {
-    has_alpha = alpha != nullptr;
-    has_beta = beta != nullptr;
-    if( !has_alpha && !has_beta ) {
-        debugmsg( "Constructed a dialogue with no actors!  %s", get_callstack() );
+    if( has_alpha ) {
+        alpha = d.actor( false )->clone();
+    }
+    if( has_beta ) {
+        beta = d.actor( true )->clone();
     }
 }
 
-dialogue::dialogue( std::unique_ptr<talker> alpha_in,
-                    std::unique_ptr<talker> beta_in,
-                    const std::unordered_map<std::string, std::function<bool( dialogue & )>> &cond ) : alpha( std::move(
-                                    alpha_in ) ), beta( std::move( beta_in ) ), conditionals( cond )
+const_dialogue::const_dialogue( std::unique_ptr<const_talker> alpha_in,
+                                std::unique_ptr<const_talker> beta_in,
+                                const std::unordered_map<std::string, std::function<bool( const_dialogue const & )>> &cond,
+                                const std::unordered_map<std::string, std::string> &ctx )
+    : alpha( std::move( alpha_in ) ), beta( std::move( beta_in ) ), context( ctx ), conditionals( cond )
 {
-    has_alpha = alpha != nullptr;
-    has_beta = beta != nullptr;
-    if( !has_alpha && !has_beta ) {
-        debugmsg( "Constructed a dialogue with no actors!  %s", get_callstack() );
-    }
+    has_alpha = static_cast<bool>( alpha );
+    has_beta = static_cast<bool>( beta );
 }
 
-dialogue::dialogue( std::unique_ptr<talker> alpha_in,
-                    std::unique_ptr<talker> beta_in,
-                    const std::unordered_map<std::string, std::function<bool( dialogue & )>> &cond,
-                    const std::unordered_map<std::string, std::string> &ctx ) : alpha( std::move( alpha_in ) ),
-    beta( std::move( beta_in ) ), context( ctx ), conditionals( cond )
+dialogue::dialogue(
+    std::unique_ptr<talker> alpha_in, std::unique_ptr<talker> beta_in,
+    const std::unordered_map<std::string, std::function<bool( const_dialogue const & )>> &cond,
+    const std::unordered_map<std::string, std::string> &ctx )
+    : const_dialogue( alpha_in ? alpha_in->const_clone() : nullptr,
+                      beta_in ? beta_in->const_clone() : nullptr, cond, ctx ),
+      alpha( std::move( alpha_in ) ), beta( std::move( beta_in ) )
 {
-    has_alpha = alpha != nullptr;
-    has_beta = beta != nullptr;
-
-    if( !has_alpha && !has_beta ) {
-        debugmsg( "Constructed a dialogue with no actors!  %s", get_callstack() );
-    }
 }
 
 talk_data talk_response::create_option_line( dialogue &d, const input_event &hotkey,
@@ -2995,8 +3004,8 @@ static void run_item_eocs( const dialogue &d, bool is_npc, const std::vector<ite
         for( const effect_on_condition_id &eoc : eocs ) {
             // Check if item is outdated.
             if( loc.get_item() ) {
-                dialogue newDialog = dialogue( d.actor( is_npc )->clone(), get_talker_for( loc ),
-                                               d.get_conditionals(), d.get_context() );
+                dialogue newDialog( d.actor( is_npc )->clone(), get_talker_for( loc ),
+                                    d.get_conditionals(), d.get_context() );
                 eoc->activate( newDialog );
             }
         }
@@ -3129,12 +3138,11 @@ talk_effect_fun_t::func f_add_trait( const JsonObject &jo, std::string_view memb
     } else {
         new_variant.str_val = "";
     }
-
     return [is_npc, new_trait, new_variant]( dialogue const & d ) {
         const trait_id trait = trait_id( new_trait.evaluate( d ) );
         const mutation_variant *variant = trait->variant( new_variant.evaluate( d ) );
-
         d.actor( is_npc )->set_mutation( trait, variant );
+        get_event_bus().send<event_type::gains_mutation>( d.actor( is_npc )->get_character()->getID(), trait_id( new_trait.evaluate( d ) ) );
     };
 }
 
@@ -3162,6 +3170,7 @@ talk_effect_fun_t::func f_remove_trait( const JsonObject &jo, std::string_view m
     str_or_var old_trait = get_str_or_var( jo.get_member( member ), member, true );
     return [is_npc, old_trait]( dialogue const & d ) {
         d.actor( is_npc )->unset_mutation( trait_id( old_trait.evaluate( d ) ) );
+        get_event_bus().send<event_type::loses_mutation>( d.actor( is_npc )->get_character()->getID(), trait_id( old_trait.evaluate( d ) ) );
     };
 }
 
@@ -3575,6 +3584,78 @@ talk_effect_fun_t::func f_consume_item( const JsonObject &jo, std::string_view m
                 }
             }
             consume_item( *d.actor( false ), current_item_name, current_count, current_charges );
+        }
+    };
+}
+
+talk_effect_fun_t::func f_consume_item_sum( const JsonObject &jo, std::string_view member,
+        const std::string_view, bool is_npc )
+{
+    // Only after i implemented it, i realised it is a bad way to make it
+    // What it should be is an expansion of f_run_inv_eocs
+    // that allow to pick multiple ids and limit it to some amount of it
+
+    std::vector<std::pair<str_or_var, dbl_or_var>> item_and_amount;
+
+    for( const JsonObject jsobj : jo.get_array( member ) ) {
+        const str_or_var item = get_str_or_var( jsobj.get_member( "item" ), "item", true );
+        const dbl_or_var amount = get_dbl_or_var( jsobj, "amount", true, 1 );
+        item_and_amount.emplace_back( item, amount );
+    }
+
+    return [item_and_amount, is_npc]( dialogue & d ) {
+        add_msg_debug( debugmode::DF_TALKER, "using _consume_item_sum:" );
+
+        itype_id item_to_remove;
+        double percent = 0.0f;
+        double count_desired;
+        double count_present;
+        double charges_present;
+
+        for( const auto &pair : item_and_amount ) {
+            item_to_remove = itype_id( pair.first.evaluate( d ) );
+            count_desired = pair.second.evaluate( d );
+            count_present = d.actor( is_npc )->get_amount( item_to_remove );
+            charges_present = d.actor( is_npc )->charges_of( item_to_remove );
+            if( charges_present > count_present ) {
+                percent += charges_present / count_desired;
+                // if percent is equal or less than 1, it is safe to remove all charges_present
+                // otherwise loop to remove charges one by one
+                if( percent <= 1 ) {
+                    d.actor( is_npc )->use_charges( item_to_remove, charges_present, true );
+
+                    add_msg_debug( debugmode::DF_TALKER,
+                                   "removing item: %s, count_desired: %f, charges_present: %f, percent: %f, removing all",
+                                   item_to_remove.c_str(), count_desired, charges_present, percent );
+                } else {
+                    percent -= charges_present / count_desired;
+                    while( percent < 1.0f ) {
+                        percent += 1 / count_desired;
+                        d.actor( is_npc )->use_charges( item_to_remove, 1, true );
+                        add_msg_debug( debugmode::DF_TALKER,
+                                       "removing item: %s, count_desired: %f, charges_present: %f, percent: %f, removing one by one",
+                                       item_to_remove.c_str(), count_desired, charges_present, percent );
+                    }
+                }
+            } else {
+                percent += count_present / count_desired;
+                if( percent <= 1 ) {
+                    d.actor( is_npc )->use_amount( item_to_remove, count_present );
+                    add_msg_debug( debugmode::DF_TALKER,
+                                   "removing item: %s, count_desired: %f, count_present: %f, percent: %f, removing all",
+                                   item_to_remove.c_str(), count_desired, count_present, percent );
+                } else {
+                    percent -= count_present / count_desired;
+                    while( percent < 1.0f ) {
+                        percent += 1 / count_desired;
+                        d.actor( is_npc )->use_amount( item_to_remove, 1 );
+
+                        add_msg_debug( debugmode::DF_TALKER,
+                                       "removing item: %s, count_desired: %f, count_present: %f, percent: %f, removing one by one",
+                                       item_to_remove.c_str(), count_desired, count_present, percent );
+                    }
+                }
+            }
         }
     };
 }
@@ -4470,7 +4551,7 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
         if( global ) {
             target = &get_player_character();
         } else {
-            target = static_cast<talker const *>( d.actor( is_npc ) )->get_character();
+            target = d.actor( is_npc )->get_const_character();
         }
         if( !target || target->is_npc() ) {
             return;
@@ -4614,16 +4695,8 @@ talk_effect_fun_t::func f_open_dialogue( const JsonObject &jo, std::string_view 
         } else if( !actual_topic.empty() ) {
             get_avatar().talk_to( get_talker_for( std::vector<std::string> { actual_topic } ), false, false,
                                   true );
-        } else if( d.actor( true )->get_character() != nullptr ) {
-            get_avatar().talk_to( get_talker_for( d.actor( true )->get_character() ) );
-        } else if( d.actor( true )->get_creature() != nullptr ) {
-            get_avatar().talk_to( get_talker_for( d.actor( true )->get_creature() ) );
-        } else if( d.actor( true )->get_monster() != nullptr ) {
-            get_avatar().talk_to( get_talker_for( d.actor( true )->get_monster() ) );
-        } else if( d.actor( true )->get_item() != nullptr ) {
-            get_avatar().talk_to( get_talker_for( d.actor( true )->get_item() ) );
-        } else if( d.actor( true )->get_computer() != nullptr ) {
-            get_avatar().talk_to( get_talker_for( d.actor( true )->get_computer() ), false, true );
+        } else {
+            get_avatar().talk_to( d.actor( true )->clone() );
         }
         run_eoc_vector( true_eocs, d );
     };
@@ -4926,7 +4999,7 @@ talk_effect_fun_t::func f_set_condition( const JsonObject &jo, std::string_view 
     str_or_var value;
     value = get_str_or_var( jo.get_member( member ), member );
 
-    std::function<bool( dialogue & )> cond;
+    std::function<bool( const_dialogue const & )> cond;
     read_condition( jo, "condition", cond, false );
     return [value, cond]( dialogue & d ) {
         d.set_conditional( value.evaluate( d ), cond );
@@ -5104,7 +5177,7 @@ talk_effect_fun_t::func f_math( const JsonObject &jo, std::string_view member,
                                 const std::string_view )
 {
     eoc_math math;
-    math.from_json( jo, member, eoc_math::type_t::assign );
+    math.from_json( jo, member, math_type_t::assign );
     return [math = std::move( math )]( dialogue & d ) {
         return math.act( d );
     };
@@ -5221,76 +5294,75 @@ void process_eoc( const effect_on_condition_id &eoc, dialogue &d,
     }
 }
 
-void queue_eocs( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
-                 duration_or_var const &dov_time, bool random_time )
+void run_eoc_once( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
+                   const duration_or_var &dov_time, bool random_time )
 {
     time_duration time_in_future = dov_time.evaluate( d );
+
     for( const eoc_entry &entry : eocs ) {
         effect_on_condition_id eoc_id =
             entry.var ? effect_on_condition_id( entry.var->evaluate( d ) ) : entry.id;
-        if( random_time ) {
-            process_eoc( eoc_id, newDialog, dov_time.evaluate( d ) );
-        } else {
-            process_eoc( eoc_id, newDialog, time_in_future );
-        }
-    }
-}
-
-void run_eocs( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
-               std::optional<dbl_or_var> const &iterations,
-               std::optional<std::function<bool( dialogue & )>> const &cond )
-{
-    int i = 0;
-
-    // if it's a loop, we will use iterations_amount as limit to amount of loops allowed
-    // and bump it to 100 as default value
-    int iterations_amount = iterations ? iterations->evaluate( d ) : cond ? 100 : 1;
-    while( i < iterations_amount && ( !cond || ( *cond )( d ) ) ) {
-        for( const eoc_entry &entry : eocs ) {
-            effect_on_condition_id eoc_id =
-                entry.var ? effect_on_condition_id( entry.var->evaluate( d ) ) : entry.id;
+        if( time_in_future == 0_seconds ) {
             eoc_id->activate( newDialog );
+        } else {
+            if( random_time ) {
+                process_eoc( eoc_id, newDialog, dov_time.evaluate( d ) );
+            } else {
+                process_eoc( eoc_id, newDialog, time_in_future );
+            }
         }
-        ++i;
-    }
+    };
 }
 
-std::unique_ptr<talker> get_talker( dialogue const &d, std::optional<str_or_var> const &var,
-                                    bool is_loc, bool parent_beta )
+dialogue generate_new_dialogue( dialogue &d, bool has_alpha_var, bool has_beta_var,
+                                const str_or_var &alpha_var, const str_or_var &beta_var, bool is_alpha_loc, bool is_beta_loc,
+                                const std::vector<effect_on_condition_id> &false_eocs )
 {
-    if( !var ) {
-        if( d.has_actor( parent_beta ) ) {
-            return d.actor( parent_beta )->clone();
-        }
-        return {};
-    }
+    // to generate new dialogue from existing one, and possibly swap talkers
 
-    std::string str = var->evaluate( d );
+    dialogue newDialog( d );
 
-    if( str.empty() ) {
-        return {};
-    } else if( str == "u" && d.has_alpha ) {
-        return  d.actor( false )->clone();
-    } else if( str == "npc" && d.has_beta ) {
-        return d.actor( true )->clone();
-    } else if( str == "avatar" ) {
-        return get_talker_for( get_avatar() );
-    } else {
-        Creature *crit = nullptr;
-        if( is_loc ) {
-            tripoint_abs_ms pos = tripoint_abs_ms( tripoint::from_string( str ) );
-            crit = get_creature_tracker().creature_at( pos );
+    if( has_alpha_var || has_beta_var ) {
+        bool alpha_invalid = false; // whether alpha talker exists in the game
+        bool beta_invalid = false; // whether beta talker exists in the game
+        auto get_talker = [&d]( const str_or_var & var, bool is_loc, bool & invalid ) {
+            Creature *guy;
+            std::string str = var.evaluate( d );
+            if( is_loc ) {
+                tripoint_abs_ms pos = tripoint_abs_ms( tripoint::from_string( str ) );
+                guy = get_creature_tracker().creature_at( pos );
+                if( guy == nullptr ) {
+                    invalid = true;
+                }
+            } else if( str.empty() ) {
+                guy = nullptr;
+            } else if( str == "u" ) {
+                guy = d.has_alpha ? d.actor( false )->get_creature() : nullptr;
+            } else if( str == "npc" ) {
+                guy = d.has_beta ? d.actor( true )->get_creature() : nullptr;
+            } else if( str == "avatar" ) {
+                guy = &get_avatar();
+            } else {
+                guy = get_character_from_id( str, g.get() );
+                if( guy == nullptr ) {
+                    invalid = true;
+                }
+            }
+            return guy;
+        };
+
+        Creature *alpha_guy = get_talker( alpha_var, is_alpha_loc, alpha_invalid );
+        Creature *beta_guy = get_talker( beta_var, is_beta_loc, beta_invalid );
+        if( alpha_invalid || beta_invalid || ( alpha_guy == nullptr && beta_guy == nullptr ) ) {
+            run_eoc_vector( false_eocs, d );
         } else {
-            crit = get_character_from_id( str, g.get() );
+            newDialog = dialogue( ( alpha_guy == nullptr ) ? nullptr : get_talker_for( alpha_guy ),
+                                  ( beta_guy == nullptr ) ? nullptr : get_talker_for( beta_guy ),
+                                  d.get_conditionals(),
+                                  d.get_context() );
         }
-
-        if( crit != nullptr ) {
-            return get_talker_for( *crit );
-        }
-    }
-
-    debugmsg( R"(run_eocs error: no valid talker for "%s\n%s")", str, d.get_callstack() );
-    return {};
+    };
+    return newDialog;
 }
 
 talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view member,
@@ -5301,28 +5373,18 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
         jo.throw_error( "Invalid input for run_eocs" );
     }
 
-    std::optional<dbl_or_var> iterations;
-    if( jo.has_member( "iterations" ) ) {
-        iterations = get_dbl_or_var( jo, "iterations" );
-    }
-    std::optional<std::function<bool( dialogue & )>> cond;
+    dbl_or_var iterations = get_dbl_or_var( jo, "iterations", false, 1 );
+    bool has_cond = false;
+    std::function<bool( const const_dialogue & )> cond;
     if( jo.has_object( "condition" ) ) {
-        std::function<bool( dialogue & )> cond_;
-        read_condition( jo, "condition", cond_, false );
-        cond = { std::move( cond_ ) };
+        read_condition( jo, "condition", cond, true );
+        has_cond = true;
+    } else {
+        read_condition( jo, "condition", cond, true );
     }
 
-    std::optional<duration_or_var> dov_time;
-    bool random_time = false;
-    if( jo.has_member( "time_in_future" ) ) {
-        if( iterations || cond ) {
-            jo.throw_error_at(
-                "time_in_future",
-                R"("time_in_future" cannot be used with loops ("condition" or "iterations"). Use nested EOCs instead.)" );
-        }
-        dov_time = get_duration_or_var( jo, "time_in_future" );
-        random_time = jo.get_bool( "randomize_time_in_future", false );
-    }
+    duration_or_var dov_time = get_duration_or_var( jo, "time_in_future", false, 0_seconds );
+    bool random_time = jo.get_bool( "randomize_time_in_future", false );
 
     std::unordered_map<std::string, str_translation_or_var> context;
     if( jo.has_object( "variables" ) ) {
@@ -5332,48 +5394,69 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
         }
     }
 
-    std::optional<str_or_var> alpha_var;
-    std::optional<str_or_var> beta_var;
+    str_or_var alpha_var;
+    str_or_var beta_var;
     bool is_alpha_loc = false;
     bool is_beta_loc = false;
+    bool has_alpha_var = true;
+    bool has_beta_var = true;
 
     if( jo.has_member( "beta_loc" ) ) {
-        beta_var = get_str_or_var( jo.get_member( "beta_loc" ), "beta_loc" );
+        beta_var = get_str_or_var( jo.get_member( "beta_loc" ), "beta_loc", false, "npc" );
         is_beta_loc = true;
     } else if( jo.has_member( "beta_talker" ) ) {
-        beta_var = get_str_or_var( jo.get_member( "beta_talker" ), "beta_talker" );
+        beta_var = get_str_or_var( jo.get_member( "beta_talker" ), "beta_talker", false, "npc" );
+    } else {
+        beta_var.str_val = "npc";
+        has_beta_var = false;
     }
 
     if( jo.has_member( "alpha_loc" ) ) {
-        alpha_var = get_str_or_var( jo.get_member( "alpha_loc" ), "alpha_loc" );
+        alpha_var = get_str_or_var( jo.get_member( "alpha_loc" ), "alpha_loc", has_beta_var,
+                                    "u" ); // alpha_talker is mandatory if beta_talker exists
         is_alpha_loc = true;
     } else if( jo.has_member( "alpha_talker" ) ) {
-        alpha_var = get_str_or_var( jo.get_member( "alpha_talker" ), "alpha_talker" );
+        alpha_var = get_str_or_var( jo.get_member( "alpha_talker" ), "alpha_talker", false, "u" );
+    } else {
+        alpha_var.str_val = "u";
+        has_alpha_var = false;
     }
 
     std::vector<effect_on_condition_id> false_eocs = load_eoc_vector( jo, "false_eocs", src );
 
-    return [eocs, cond, iterations, dov_time, random_time, alpha_var, beta_var, is_alpha_loc,
-          is_beta_loc, false_eocs, context]( dialogue & d ) {
+    return [eocs, cond, has_cond, iterations, dov_time, random_time, alpha_var, beta_var, is_alpha_loc,
+          is_beta_loc, has_alpha_var, has_beta_var, false_eocs, context]( dialogue & d ) {
 
-        std::unique_ptr<talker> alpha = get_talker( d, alpha_var, is_alpha_loc, false );
-        std::unique_ptr<talker> beta = get_talker( d, beta_var, is_beta_loc, true );
-        if( !alpha && !beta ) {
-            run_eoc_vector( false_eocs, d );
-            return;
-        }
-
-        dialogue newDialog{ std::move( alpha ), std::move( beta ), d.get_conditionals(),
-                            d.get_context() };
+        dialogue newDialog = generate_new_dialogue( d, has_alpha_var, has_beta_var, alpha_var, beta_var,
+                             is_alpha_loc, is_beta_loc, false_eocs );
 
         for( const auto &val : context ) {
             newDialog.set_value( val.first, val.second.evaluate( d ) );
         }
 
-        if( dov_time ) {
-            queue_eocs( eocs, d, newDialog, *dov_time, random_time );
+        int i = 0;
+        int iterations_amount = iterations.evaluate( d );
+
+        // there was 'd.amend_callstack( "EOC: " + eoc->id.str() )' in f_run_eoc_until
+        // but because i don't know it's purpose nor it's effect, i'll left it here as comment
+
+        if( has_cond ) {
+            // if it's a loop, we will use iterations_amount as limit to amount of loops allowed
+            // and bump it to 100 as default value
+            iterations_amount = iterations_amount == 1 ? 100 : iterations_amount;
+
+            while( cond( d ) ) {
+                run_eoc_once( eocs, d, newDialog, dov_time, random_time );
+                ++i;
+                if( i >= iterations_amount ) {
+                    break;
+                }
+            }
         } else {
-            run_eocs( eocs, d, newDialog, iterations, cond );
+            while( i < iterations_amount ) {
+                run_eoc_once( eocs, d, newDialog, dov_time, random_time );
+                ++i;
+            }
         }
     };
 }
@@ -5721,7 +5804,7 @@ talk_effect_fun_t::func f_map_run_eocs( const JsonObject &jo, std::string_view m
     if( jo.has_member( "target_var" ) ) {
         target_var = read_var_info( jo.get_object( "target_var" ) );
     }
-    std::function<bool( dialogue & )> cond;
+    std::function<bool( const_dialogue const & )> cond;
     read_condition( jo, "condition", cond, true );
     dbl_or_var range = get_dbl_or_var( jo, "range", false, 1 );
 
@@ -5799,7 +5882,7 @@ talk_effect_fun_t::func f_weighted_list_eocs( const JsonObject &jo,
 talk_effect_fun_t::func f_if( const JsonObject &jo, std::string_view member,
                               const std::string_view src )
 {
-    std::function<bool( dialogue & )> cond;
+    std::function<bool( const_dialogue const & )> cond;
     talk_effect_t then_effect;
     talk_effect_t else_effect;
     read_condition( jo, std::string( member ), cond, false );
@@ -6767,6 +6850,7 @@ parsers = {
     { "u_unset_flag", "npc_unset_flag", jarg::member, &talk_effect_fun::f_unset_flag },
     { "u_activate", "npc_activate", jarg::member, &talk_effect_fun::f_activate },
     { "u_consume_item", "npc_consume_item", jarg::member, &talk_effect_fun::f_consume_item },
+    { "u_consume_item_sum", "npc_consume_item_sum", jarg::array, &talk_effect_fun::f_consume_item_sum },
     { "u_remove_item_with", "npc_remove_item_with", jarg::member, &talk_effect_fun::f_remove_item_with },
     { "u_bulk_trade_accept", "npc_bulk_trade_accept", jarg::member, &talk_effect_fun::f_bulk_trade_accept },
     { "u_deal_damage", "npc_deal_damage", jarg::member, &talk_effect_fun::f_deal_damage },
@@ -6811,11 +6895,7 @@ parsers = {
     { "remove_active_mission", jarg::member, &talk_effect_fun::f_remove_active_mission },
     { "offer_mission", jarg::array | jarg::string, &talk_effect_fun::f_offer_mission },
     { "run_eocs", jarg::member | jarg::array, &talk_effect_fun::f_run_eocs },
-    { "run_eoc_until", jarg::member, &talk_effect_fun::f_run_eocs },
-    { "run_eoc_with", jarg::member, &talk_effect_fun::f_run_eocs },
     { "run_eoc_selector", jarg::member, &talk_effect_fun::f_run_eoc_selector },
-    { "queue_eocs", jarg::member | jarg::array, &talk_effect_fun::f_run_eocs },
-    { "queue_eoc_with", jarg::member, &talk_effect_fun::f_run_eocs },
     { "weighted_list_eocs", jarg::array, &talk_effect_fun::f_weighted_list_eocs },
     { "if", jarg::member, &talk_effect_fun::f_if },
     { "switch", jarg::member, &talk_effect_fun::f_switch },
@@ -7060,7 +7140,7 @@ void talk_effect_t::load_effect( const JsonObject &jo, const std::string &member
 
 talk_response::talk_response()
 {
-    truefalse_condition = []( const dialogue & ) {
+    truefalse_condition = []( const_dialogue const & ) {
         return true;
     };
     mission_selected = nullptr;
@@ -7083,7 +7163,7 @@ talk_response::talk_response( const JsonObject &jo, const std::string_view src )
         truefalse_jo.read( "false", falsetext );
     } else {
         jo.read( "text", truetext );
-        truefalse_condition = []( const dialogue & ) {
+        truefalse_condition = []( const_dialogue const & ) {
             return true;
         };
     }
@@ -7410,7 +7490,7 @@ dynamic_line_t::dynamic_line_t( const JsonArray &ja )
 json_dynamic_line_effect::json_dynamic_line_effect( const JsonObject &jo,
         const std::string &id, const std::string_view src )
 {
-    std::function<bool( dialogue & )> tmp_condition;
+    std::function<bool( const_dialogue const & )> tmp_condition;
     read_condition( jo, "condition", tmp_condition, true );
     talk_effect_t tmp_effect = talk_effect_t( jo, "effect", src );
     // if the topic has a sentinel, it means implicitly add a check for the sentinel value

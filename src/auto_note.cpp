@@ -399,12 +399,10 @@ void auto_note_manager_gui::show()
 
         int currentX = 60;
         mvwprintz( w_header, point( currentX, 1 ), c_white,
-                   std::string( FULL_SCREEN_WIDTH - 2 - currentX, ' ' ) );
-
-        const bool enabled_auto_notes_ME = get_option<bool>( "AUTO_NOTES_MAP_EXTRAS" );
+                   std::string( FULL_SCREEN_WIDTH - 2 - currentX, ' ' ) );;
         currentX += shortcut_print( w_header, point( currentX, 1 ),
-                                    enabled_auto_notes_ME ? c_light_green : c_light_red, c_white,
-                                    enabled_auto_notes_ME ? _( "True" ) : _( "False" ) );
+                                    c_light_red, c_white,
+                                    _( "False" ) );
 
         currentX += shortcut_print( w_header, point( currentX, 1 ), c_white, c_light_green, "  " );
         shortcut_print( w_header, point( currentX, 1 ), c_white, c_light_green, _( "<S>witch " ) );
@@ -436,8 +434,7 @@ void auto_note_manager_gui::show()
                                            global_mapExtraCache )[displayCacheEntry];
 
                 const nc_color lineColor = ( i == currentLine ) ? hilite( c_white ) : c_white;
-                const nc_color statusColor = enabled_auto_notes_ME ? ( cacheEntry.second ? c_green : c_red ) :
-                                             c_dark_gray;
+                const nc_color statusColor = ( cacheEntry.second ? c_green : c_red );
                 const std::string statusString = cacheEntry.second ? _( "yes" ) : _( "no" );
                 auto found_custom_symbol = ( bCharacter ? char_custom_symbol_cache :
                                              global_custom_symbol_cache ).find( displayCacheEntry );
@@ -482,10 +479,7 @@ void auto_note_manager_gui::show()
         const std::string action = ctxt.handle_input();
 
         // Actions that also work with no items to display
-        if( action == "SWITCH_AUTO_NOTE_OPTION" ) {
-            get_options().get_option( "AUTO_NOTES_MAP_EXTRAS" ).setNext();
-            get_options().save();
-        } else if( action == "QUIT" ) {
+        if( action == "QUIT" ) {
             break;
         } else if( action == "NEXT_TAB" ) {
             bCharacter = !bCharacter;

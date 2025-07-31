@@ -99,7 +99,7 @@
     "category": "addict_nicotine_strong_asleep",
     "text": [
       "You need some nicotine.",
-      "You dream of sex with an old flame, but the realest part of the dream is the post coital cigarette.",
+      "You dream about smoking cigarettes one after another until the pack is empty.",
       "You wake with the imagined taste of smoke in your mouth; how long has it been since that was true?",
       "Standing on the edge of a building with a cigarette in your hand, a horde of zombies milling below.  You take one last long drag and flick the butt out over the zombies then step off the ledge.  Waking with a start you can almost taste the smoke and tar in your mouth.",
       "In your dream you brutally disanimate several zombies and then tear through their clothing looking for any unsmoked cigarettes"
@@ -107,17 +107,17 @@
   },
   {
     "type": "snippet",
-    "category": "addict_opiate_mild_awake",
+    "category": "addict_opioid_mild_awake",
     "text": [
       "Your hands start shaking… you need some painkillers.",
-      "If you don't find some opiates soon you might start engaging in reckless behavior, you think to yourself.",
-      "You daydream of crushing pills and snorting them through a rolled up dollar bill.  The drip in the back of your throat presaging a fun time.",
+      "If you don't find some opioids soon you might start engaging in reckless behavior, you think to yourself.",
+      "You daydream of crushing pills and snorting them through a rolled up dollar bill, the drip in the back of your throat presaging a fun time.",
       "If I can just find some oxies, everything will be fine."
     ]
   },
   {
     "type": "snippet",
-    "category": "addict_opiate_mild_asleep",
+    "category": "addict_opioid_mild_asleep",
     "text": [
       "Your hands start shaking… you need some painkillers.",
       "♪It is not a habit, it is cool, I feel alive, I feel♪",
@@ -126,17 +126,17 @@
   },
   {
     "type": "snippet",
-    "category": "addict_opiate_strong_awake",
+    "category": "addict_opioid_strong_awake",
     "text": [
       "You feel anxious.  You need your painkillers!",
-      "You need to find an unlooted pharmacy today before the lack of opiates kills you.",
+      "You need to find an unlooted pharmacy today before the lack of opioids kills you.",
       "The best thing about the apocalypse is that you've become your own prescriber.",
       "The doctor is in and the doctor says it's time for some morphine, stat!"
     ]
   },
   {
     "type": "snippet",
-    "category": "addict_opiate_strong_asleep",
+    "category": "addict_opioid_strong_asleep",
     "text": [
       "You feel anxious.  You need your painkillers!",
       "The same old dream: a bottle of oxycodone, a zipper bag, a hammer, a flat surface and a dollar bill.",

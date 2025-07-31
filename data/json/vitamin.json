@@ -84,6 +84,18 @@
     "disease_excess": [ [ 10, 216 ] ]
   },
   {
+    "id": "vit_mme",
+    "type": "vitamin",
+    "vit_type": "drug",
+    "name": { "str": "Morphine Milligram Equivalent (percentile)" },
+    "//": "1 vit_mme is equivalent to 1% of an MME.  Need to adjust excess and rate at minimum.",
+    "excess": "opioid_eff",
+    "min": 0,
+    "max": 40000,
+    "rate": "100 s",
+    "disease_excess": [ [ 500, 1500 ], [ 1501, 5000 ], [ 5001, 18000 ], [ 18001, 30000 ], [ 30001, 39998 ], [ 39999, 40000 ] ]
+  },
+  {
     "id": "mutant_toxin",
     "type": "vitamin",
     "vit_type": "toxin",
@@ -129,7 +141,7 @@
       [ "mutagen_rabbit", -1 ],
       [ "mutagen_rat", -1 ],
       [ "mutagen_slime", -1 ],
-      [ "mutagen_spider", -1 ],
+      [ "mutagen_aranean", -1 ],
       [ "mutagen_troglobite", -1 ],
       [ "mutagen_ursine", -1 ]
     ]
@@ -314,7 +326,7 @@
     "id": "mutagen_lupine",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Lupine Mutagen" },
+    "name": { "str": "Canine Mutagen" },
     "excess": "mutagen_lupine",
     "min": 0,
     "max": 1600,
@@ -410,11 +422,11 @@
     "disease_excess": [ [ 100, 400 ], [ 401, 800 ], [ 801, 1600 ] ]
   },
   {
-    "id": "mutagen_spider",
+    "id": "mutagen_aranean",
     "type": "vitamin",
     "vit_type": "counter",
-    "name": { "str": "Arenaean Mutagen" },
-    "excess": "mutagen_spider",
+    "name": { "str": "Aranaean Mutagen" },
+    "excess": "mutagen_aranean",
     "min": 0,
     "max": 1600,
     "rate": "20 m",
