@@ -13573,7 +13573,7 @@ ret_val<void> item::link_to( vehicle &veh, const point_rel_ms &mount, link_state
         link().source = bio_link ? link_state::bio_cable : link_state::no_link;
         link().target = link_type;
         link().t_veh = veh.get_safe_reference();
-        link().t_abs_pos = get_map().getglobal( link().t_veh->global_pos3() );
+        link().t_abs_pos = get_map().getglobal( link().t_veh->pos_bub() );
         link().t_mount = mount.raw();
         link().s_bub_pos = tripoint_min; // Forces the item to check the length during process_link.
 

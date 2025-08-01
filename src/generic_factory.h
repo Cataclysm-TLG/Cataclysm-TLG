@@ -161,22 +161,6 @@ class generic_factory
             return true;
         }
 
-        void remove_aliases( const string_id<T> &id ) {
-            int_id<T> i_id;
-            if( !find_id( id, i_id ) ) {
-                return;
-            }
-            auto iter = map.begin();
-            const auto end = map.end();
-            while( iter != end ) {
-                if( iter->second == i_id && iter->first != id ) {
-                    map.erase( iter++ );
-                } else {
-                    ++iter;
-                }
-            }
-        }
-
         const T dummy_obj;
 
     public:
@@ -186,14 +170,10 @@ class generic_factory
          * for example "vehicle type".
          * @param id_member_name The name of the JSON member that contains the id(s) of the
          * loaded object(s).
-         * @param alias_member_name Alternate names of the JSON member that contains the id(s) of the
-         * loaded object alias(es).
          */
-        explicit generic_factory( const std::string &type_name, const std::string &id_member_name = "id",
-                                  const std::string &alias_member_name = "alias" )
+        explicit generic_factory( const std::string &type_name, const std::string &id_member_name = "id" )
             : type_name( type_name ),
               id_member_name( id_member_name ),
-              alias_member_name( alias_member_name ),
               dummy_obj(),
               initialized( true ) {
         }
@@ -285,7 +265,6 @@ class generic_factory
          * @throws JsonError If loading fails for any reason (thrown by `T::load`).
          */
         void load( const JsonObject &jo, const std::string &src ) {
-            bool strict = src == "tlg";
 
             static const std::string abstract_member_name( "abstract" );
 
@@ -300,16 +279,6 @@ class generic_factory
                 def.load( jo, src );
                 insert( def );
 
-                if( jo.has_member( alias_member_name ) ) {
-                    std::set<string_id<T>> aliases;
-                    assign( jo, alias_member_name, aliases, strict );
-
-                    const int_id<T> ref = map[def.id];
-                    for( const auto &e : aliases ) {
-                        map[e] = ref;
-                    }
-                }
-
             } else if( jo.has_array( id_member_name ) ) {
                 for( JsonValue e : jo.get_array( id_member_name ) ) {
                     T def;
@@ -320,10 +289,6 @@ class generic_factory
                     mod_tracker::assign_src( def, src );
                     def.load( jo, src );
                     insert( def );
-                }
-                if( jo.has_member( alias_member_name ) ) {
-                    jo.throw_error( string_format( "can not specify '%s' when '%s' is array",
-                                                   alias_member_name, id_member_name ) );
                 }
 
             } else if( !jo.has_string( abstract_member_name ) ) {

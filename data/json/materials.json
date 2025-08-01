@@ -2441,6 +2441,7 @@
     "dmg_adj": [ "resonating", "cascading", "unraveling", "fractal" ],
     "bash_dmg_verb": "agitated",
     "cut_dmg_verb": "agitated",
+    "acid_dmg_verb": "agitated",
     "resist": { "bash": 0, "cut": 0, "acid": 0, "heat": 0, "bullet": 100 }
   },
   {
