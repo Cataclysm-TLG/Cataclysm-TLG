@@ -178,18 +178,18 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                                  critter.disp_name(), poor_soul->disp_name() );
                     }
                 }
-                //once collision this if block shouldn't run so everything here should only happen once
+                // Once collision this if block shouldn't run so everything here should only happen once.
                 collision = true;
-                //determine a random angle to throw the thing it teleported into, then fling it.
+                // Determine a random angle to throw the thing it teleported into, then fling it.
                 collision_angle = rng( 0, 360 );
                 g->fling_creature( poor_soul, units::from_degrees( collision_angle - 180 ), 40, false, true );
-                //spawn a mostly cosmetic explosion for flair.
+                // Spawn a mostly cosmetic explosion for flair.
                 explosion_handler::explosion( &critter, target.raw(), 10 );
-                //if it was grabbed, it isn't anymore.
+                // If it was grabbed, it isn't anymore.
                 for( const effect &grab : poor_soul->get_effects_with_flag( json_flag_GRAB ) ) {
                     poor_soul->remove_effect( grab.get_id() );
                 }
-                //apply a bunch of damage to it
+                // Apply a bunch of damage to it, similar to a tear in reality.
                 std::vector<bodypart_id> target_bdpts = poor_soul->get_all_body_parts(
                         get_body_part_flags::only_main );
                 for( const bodypart_id &bp_id : target_bdpts ) {
