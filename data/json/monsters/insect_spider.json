@@ -2244,7 +2244,7 @@
     "fungalize_into": "mon_ant_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 4, "cut": 5, "bullet": 3, "electric": 2, "acid": 4 }
+    "armor": { "bash": 3, "cut": 5, "bullet": 3, "electric": 2, "acid": 4 }
   },
   {
     "id": "mon_ant_acid_small",
@@ -2321,7 +2321,7 @@
     "harvest": "arachnid_acid",
     "dissect": "dissect_insect_sample_single",
     "flags": [ "ACIDPROOF", "CLIMBS", "HEARS", "POISON", "SEES", "SMELLS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 6, "cut": 8, "bullet": 3, "electric": 2 }
+    "armor": { "bash": 3, "cut": 7, "bullet": 2, "electric": 2 }
   },
   {
     "id": "mon_ant_acid_larva",
@@ -2441,7 +2441,7 @@
       "PATH_AVOID_DANGER",
       "CORNERED_FIGHTER"
     ],
-    "armor": { "bash": 12, "cut": 14, "bullet": 6, "electric": 1 }
+    "armor": { "bash": 8, "cut": 14, "bullet": 4, "electric": 1 }
   },
   {
     "id": "mon_ant_acid_soldier_mega",
@@ -2540,7 +2540,7 @@
     "id": "mon_ant_soldier",
     "type": "MONSTER",
     "name": { "str": "oversized soldier ant" },
-    "description": "An overgrown red ant the size of a wolf.  Bulging pincers extend from her jaws.",
+    "description": "An overgrown red ant the size of a deer.  Bulging pincers extend from her jaws.",
     "default_faction": "ant",
     "bodytype": "insect",
     "species": [ "INSECT" ],
@@ -2575,7 +2575,7 @@
     "fungalize_into": "mon_ant_fungus",
     "upgrades": { "age_grow": 42, "into": "mon_ant_soldier_mega" },
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "PATH_AVOID_DANGER", "EATS", "CORNERED_FIGHTER" ],
-    "armor": { "bash": 10, "cut": 12, "bullet": 8, "electric": 4, "acid": 8 }
+    "armor": { "bash": 7, "cut": 12, "bullet": 8, "electric": 4, "acid": 8 }
   },
   {
     "id": "mon_ant_soldier_mega",
