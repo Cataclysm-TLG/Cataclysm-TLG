@@ -80,7 +80,6 @@
       "terrain": {
         "~": "t_open_air",
         "=": "t_open_air_rooved",
-        "|": "t_wall_r",
         "-": "t_carpet_red",
         "H": "t_carpet_red",
         "E": "t_carpet_red",
@@ -391,7 +390,6 @@
         "h": "t_carpet_purple",
         "Y": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "|": "t_wall_r",
         "o": "t_window_enhanced"
       },
       "furniture": { "&": "f_bed" },
@@ -452,7 +450,6 @@
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "Y": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "|": "t_wall_r",
         "o": "t_window_enhanced"
       },
       "furniture": { "&": "f_armchair" },
@@ -554,7 +551,6 @@
       "terrain": {
         "~": "t_open_air",
         "=": "t_open_air_rooved",
-        "|": "t_wall_g",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
         "o": "t_window_enhanced",
@@ -785,7 +781,6 @@
         "-": "t_carpet_yellow",
         "&": "t_carpet_yellow",
         "?": "t_carpet_yellow",
-        "|": "t_wall_b",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
         ")": "t_glass_roof",
@@ -903,7 +898,6 @@
         "H": "t_carpet_green",
         "i": "t_carpet_green",
         "%": "t_railing",
-        "|": "t_wall_y",
         ")": "t_glass_roof",
         "_": "t_floor_waxed_y",
         ";": "t_floor_waxed",
@@ -1008,7 +1002,6 @@
         "=": "t_open_air_rooved",
         ",": { "param": "linoleum_color_bathroom", "fallback": "t_linoleum_gray" },
         "`": "t_shingle_flat_roof",
-        "|": "t_wall_b",
         "o": "t_window_enhanced"
       },
       "furniture": { "?": "f_dresser" },

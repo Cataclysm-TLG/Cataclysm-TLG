@@ -559,14 +559,14 @@ target_handler::trajectory target_handler::mode_turrets( avatar &you, vehicle &v
     int range_total = 0;
     for( vehicle_part *t : turrets ) {
         int range = veh.turret_query( *t ).range();
-        tripoint pos = veh.global_part_pos3( *t );
+        tripoint_bub_ms pos = veh.bub_part_pos( *t );
 
         int res = 0;
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos + point( range, 0 ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos + point( -range,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( range, 0 ) ) ) );
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( -range,
                                                0 ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos + point( 0, range ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos + point( 0,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( 0, range ) ) ) );
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( 0,
                                                -range ) ) ) );
         range_total = std::max( range_total, res );
     }
@@ -1043,7 +1043,7 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots, item &gun, it
     bool bipod = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub() ) || is_prone();
     if( !bipod ) {
         if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
-            bipod = vp->vehicle().has_part( pos(), "MOUNTABLE" );
+            bipod = vp->vehicle().has_part( pos_bub(), "MOUNTABLE" );
         }
     }
 

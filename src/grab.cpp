@@ -126,7 +126,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         str_req = max_str_req;
         //if vehicle has no wheels str_req make a noise. since it has no wheels assume it has the worst off roading possible (0.1)
         if( str_req <= str ) {
-            sounds::sound( grabbed_vehicle->global_pos3(), str_req * 2, sounds::sound_t::movement,
+            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
                            _( "a scraping noise." ), true, "misc", "scraping" );
         }
     }
@@ -134,6 +134,11 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     //final strength check and outcomes
     ///\ARM_STR determines ability to drag vehicles
     if( str_req <= str ) {
+        if( str_req == max_str_req ) {
+            //if vehicle has no wheels, make a noise.
+            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
+                           _( "a scraping noise." ), true, "misc", "scraping" );
+        }
         //calculate exertion factor and movement penalty
         ///\EFFECT_STR increases speed of dragging vehicles
         u.mod_moves( -to_moves<int>( 4_seconds )  * str_req / std::max( 1, str ) );
@@ -169,7 +174,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         grabbed_vehicle->turn( turn );
         grabbed_vehicle->face = tileray( grabbed_vehicle->turn_dir );
         grabbed_vehicle->precalc_mounts( 1, mdir.dir(), grabbed_vehicle->pivot_point() );
-        grabbed_vehicle->pos -= grabbed_vehicle->pivot_displacement();
+        grabbed_vehicle->pos -= grabbed_vehicle->pivot_displacement().raw();
 
         // Grabbed part has to stay at distance 1 to the player
         // and in roughly the same direction.
@@ -182,7 +187,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         const tripoint player_prev = u.pos();
         u.setpos( tripoint_zero );
         std::vector<veh_collision> colls;
-        const bool failed = grabbed_vehicle->collision( colls, actual_dir.raw(), true );
+        const bool failed = grabbed_vehicle->collision( colls, actual_dir, true );
         u.setpos( player_prev );
         if( !colls.empty() ) {
             blocker_name = colls.front().target_name;
@@ -227,7 +232,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     for( int p : wheel_indices ) {
         if( one_in( 2 ) ) {
             vehicle_part &vp_wheel = grabbed_vehicle->part( p );
-            tripoint wheel_p = grabbed_vehicle->global_part_pos3( vp_wheel );
+            tripoint_bub_ms wheel_p = grabbed_vehicle->bub_part_pos( vp_wheel );
             grabbed_vehicle->handle_trap( wheel_p, vp_wheel );
         }
     }

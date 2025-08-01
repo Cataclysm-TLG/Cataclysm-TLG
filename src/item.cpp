@@ -339,6 +339,12 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
         activate();
     }
 
+    if( has_flag( flag_ENERGY_SHIELD ) ) {
+        const islot_armor *sh = find_armor_data();
+        set_var( "npctalk_var_MAX_ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
+        set_var( "npctalk_var_ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
+    }
+
     if( has_flag( flag_COLLAPSE_CONTENTS ) ) {
         for( item_pocket *pocket : contents.get_all_standard_pockets() ) {
             pocket->settings.set_collapse( true );
@@ -8934,9 +8940,25 @@ int item::repairable_levels() const
            : damage() > degradation(); // partial level of damage can still be repaired
 }
 
-item::armor_status item::damage_armor_durability( damage_unit &du, const bodypart_id &bp,
+item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &premitigated,
+        const bodypart_id &bp,
         double enchant_multiplier )
 {
+    //Energy shields aren't damaged by attacks but do get their health variable reduced.  They are also only
+    //damaged by the damage types they actually protect against.
+    if( has_var( "npctalk_var_ENERGY_SHIELD_HP" ) && resist( du.type, false, bp ) > 0.0f ) {
+        double shield_hp = get_var( "npctalk_var_ENERGY_SHIELD_HP", 0.0 );
+        shield_hp -= premitigated.amount;
+        set_var( "npctalk_var_ENERGY_SHIELD_HP", shield_hp );
+        if( shield_hp > 0 ) {
+            return armor_status::UNDAMAGED;
+        } else {
+            //Shields deliberately ignore the enchantment multiplier, as the health mechanic wouldn't make sense otherwise.
+            mod_damage( itype::damage_scale * 6 );
+            return armor_status::DESTROYED;
+        }
+    }
+
     if( has_flag( flag_UNBREAKABLE ) || enchant_multiplier <= 0.0f ) {
         return armor_status::UNDAMAGED;
     }
@@ -8946,8 +8968,9 @@ item::armor_status item::damage_armor_durability( damage_unit &du, const bodypar
         // This is some weird type that doesn't damage armors
         return armor_status::UNDAMAGED;
     }
-    // Fragile items take damage if the block more than 15% of their armor value
-    if( has_flag( flag_FRAGILE ) && du.amount / armors_own_resist > ( 0.15f / enchant_multiplier ) ) {
+    // Fragile items take damage if they block more than 15% of their armor value, this uses the pre-mitigated damage.
+    if( has_flag( flag_FRAGILE ) &&
+        premitigated.amount / armors_own_resist > ( 0.15f / enchant_multiplier ) ) {
         return mod_damage( itype::damage_scale * enchant_multiplier ) ? armor_status::DESTROYED :
                armor_status::DAMAGED;
     }
@@ -13550,7 +13573,7 @@ ret_val<void> item::link_to( vehicle &veh, const point_rel_ms &mount, link_state
         link().source = bio_link ? link_state::bio_cable : link_state::no_link;
         link().target = link_type;
         link().t_veh = veh.get_safe_reference();
-        link().t_abs_pos = get_map().getglobal( link().t_veh->global_pos3() );
+        link().t_abs_pos = get_map().getglobal( link().t_veh->pos_bub() );
         link().t_mount = mount.raw();
         link().s_bub_pos = tripoint_min; // Forces the item to check the length during process_link.
 
@@ -13579,12 +13602,12 @@ ret_val<void> item::link_to( vehicle &veh, const point_rel_ms &mount, link_state
     }
 
     // Prepare target tripoints for the cable parts that'll be added to the selected/previous vehicles
-    const std::pair<tripoint, tripoint> prev_part_target = std::make_pair(
-                ( veh.global_square_location() + veh.coord_translate( mount ) ).raw(),
-                veh.global_square_location().raw() );
-    const std::pair<tripoint, tripoint> sel_part_target = std::make_pair(
-                ( link().t_abs_pos + prev_veh->coord_translate( link().t_mount ) ).raw(),
-                link().t_abs_pos.raw() );
+    const std::pair<tripoint_abs_ms, tripoint_abs_ms> prev_part_target = std::make_pair(
+                veh.global_square_location() + veh.coord_translate( mount ),
+                veh.global_square_location() );
+    const std::pair<tripoint_abs_ms, tripoint_abs_ms> sel_part_target = std::make_pair(
+                link().t_abs_pos + prev_veh->coord_translate( link().t_mount ),
+                link().t_abs_pos );
 
     for( const vpart_reference &vpr : prev_veh->get_any_parts( VPFLAG_POWER_TRANSFER ) ) {
         if( vpr.part().target.first == prev_part_target.first &&
