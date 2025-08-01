@@ -268,7 +268,6 @@ struct dialogue: public const_dialogue {
                   const std::unordered_map<std::string, std::function<bool( const_dialogue const & )>> &cond = {},
                   const std::unordered_map<std::string, std::string> &ctx = {} );
         talker *actor( bool is_beta ) const;
-        bool has_actor( bool is_beta ) const;
 
         std::string dynamic_line( const talk_topic &topic );
         void apply_speaker_effects( const talk_topic &the_topic );
