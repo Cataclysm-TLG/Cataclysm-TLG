@@ -45,6 +45,9 @@ trajectory mode_throw_creature( avatar &you, const Creature *thrown_creature, in
 /** Reach attacking */
 trajectory mode_reach( avatar &you, item_location weapon );
 
+/** Unarmed reach attacking */
+trajectory mode_unarmed_reach( avatar &you );
+
 /** Manually firing vehicle turret */
 trajectory mode_turret_manual( avatar &you, turret_data &turret );
 
