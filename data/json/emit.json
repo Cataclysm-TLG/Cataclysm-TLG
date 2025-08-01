@@ -167,10 +167,17 @@
   {
     "id": "emit_acid_drop",
     "type": "emit",
-    "//": "Small amount of strong acid - will need more to melt anything",
     "field": "fd_acid",
     "intensity": 3,
     "chance": 50
+  },
+  {
+    "id": "emit_fire_small",
+    "type": "emit",
+    "//": "Small chance to start little fires",
+    "field": "fd_fire",
+    "intensity": 1,
+    "chance": 3
   },
   {
     "id": "emit_shadow_field",

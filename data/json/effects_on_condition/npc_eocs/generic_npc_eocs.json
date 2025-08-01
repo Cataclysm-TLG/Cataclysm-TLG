@@ -391,7 +391,6 @@
         "if": { "u_has_effect": "boomered" },
         "then": [ { "u_message": "The bile is washed away from your face.", "type": "good" }, { "u_lose_effect": "boomered" } ]
       },
-
       {
         "if": { "u_has_effect": "glowing" },
         "then": [ { "u_message": "The glowing goo is washed away.", "type": "good" }, { "u_lose_effect": "glowing" } ]
