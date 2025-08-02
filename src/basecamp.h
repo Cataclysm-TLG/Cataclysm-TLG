@@ -268,6 +268,7 @@ class basecamp
         int camp_food_supply_days( float exertion_level ) const;
         /// Returns the total charges of food time_duration @ref work costs
         int time_to_food( time_duration work, float exertion_level = NO_EXERCISE ) const;
+        item make_fake_food( const nutrients &to_use ) const;
         /// Changes the faction respect for you by @ref change, returns respect
         int camp_discipline( int change = 0 ) const;
         /// Changes the faction opinion for you by @ref change, returns opinion
