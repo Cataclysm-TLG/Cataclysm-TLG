@@ -5582,10 +5582,20 @@ int basecamp::time_to_food( time_duration work, float exertion_level ) const
                                    + days * work_day_idle_hours * SLEEP_EXERCISE ) / 24;
 }
 
-static const npc &getAverageJoe()
+item basecamp::make_fake_food( const nutrients &to_use ) const
 {
-    static npc averageJoe;
-    return averageJoe;
+    // This is dumb, but effective.
+    std::string food_id = "camp_meal_small";
+    if( to_use.kcal() > 3000 ) {
+        food_id = "camp_meal_large";
+    } else if( to_use.kcal() > 1000 ) {
+        food_id = "camp_meal_medium";
+    }
+    item food_item( food_id );
+    // Set the default nutritional of the item.
+    // This doesn't persist through save/load, but that's ok, we will be eating it immediately.
+    food_item.get_comestible()->set_default_nutrition( to_use );
+    return food_item;
 }
 
 // mission support
@@ -5661,7 +5671,7 @@ bool basecamp::distribute_food( bool player_command )
         if( it.rotten() ) {
             return false;
         }
-        nutrients from_it = getAverageJoe().compute_effective_nutrients( it ) * it.count();
+        nutrients from_it = default_character_compute_effective_nutrients( it ) * it.count();
         // Do this multiplication separately to make sure we're using the *= operator with double argument..
         from_it *= rot_multip( it, container );
         // Can distribute COMESTIBLE type items with 0kcal, if they have vitamins and player selected option to do so

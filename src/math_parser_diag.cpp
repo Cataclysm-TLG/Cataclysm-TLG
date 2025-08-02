@@ -1605,8 +1605,7 @@ diag_eval_dbl_f calories_eval( char scope, std::vector<diag_value> const & /* pa
             }
             item_location const *it = d.const_actor( beta )->get_const_item();
             if( it && *it ) {
-                npc dummy;
-                return dummy.compute_effective_nutrients( *it->get_item() ).kcal();
+                return default_character_compute_effective_nutrients( *it->get_item() ).kcal();
             }
         }
         throw math::runtime_error( "For calories(), talker is not character nor item" );
