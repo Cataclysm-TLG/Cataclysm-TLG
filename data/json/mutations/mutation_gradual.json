@@ -38,7 +38,7 @@
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more aranean traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_ARANEAN" ] }
   },
-    {
+  {
     "type": "mutation",
     "id": "MUTATING_GRADUAL_AVIAN",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
@@ -110,7 +110,7 @@
     "description": "Not long ago, you began to change.  As time passes, you will gradually mutate more and more gastropod traits.",
     "delete": { "cancels": [ "MUTATING_GRADUAL_GASTROPOD" ] }
   },
-    {
+  {
     "type": "mutation",
     "id": "MUTATING_GRADUAL_LAGOMORPH",
     "copy-from": "MUTATING_GRADUAL_ABSTRACT",
