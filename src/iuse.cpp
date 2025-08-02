@@ -2805,10 +2805,6 @@ std::optional<int> iuse::crowbar( Character *p, item *it, const tripoint &pos )
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
-        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
-        return std::nullopt;
-    }
     map &here = get_map();
     const std::function<bool( const tripoint & )> f =
     [&here, p]( const tripoint & pnt ) {
@@ -2821,7 +2817,6 @@ std::optional<int> iuse::crowbar( Character *p, item *it, const tripoint &pos )
         }
         return false;
     };
-
     const std::optional<tripoint> pnt_ = ( pos != p->pos() ) ? pos : choose_adjacent_highlight(
             _( "Pry where?" ), _( "There is nothing to pry nearby." ), f, false );
     if( !pnt_ ) {
