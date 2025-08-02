@@ -1684,7 +1684,6 @@ void cata_tiles::draw( const point &dest, const tripoint &center, int width, int
                             if( has_draw_override( pos.raw() ) || has_memory_at( pos_global ) ||
                                 ( critter &&
                                   ( critter->has_flag( mon_flag_ALWAYS_VISIBLE )
-                                    || you.sees_with_infrared( *critter )
                                     || you.sees_with_specials( *critter ) ) ) ) {
                                 invisible[0] = true;
                             } else {
@@ -4048,8 +4047,7 @@ bool cata_tiles::draw_critter_at_below( const tripoint &p, const lit_level, int 
     // Check if the player can actually see the critter. We don't care if
     // it's via infrared or not, just whether or not they're seen. If not,
     // we can bail.
-    if( !you.sees( *critter ) &&
-        !( you.sees_with_infrared( *critter ) || you.sees_with_specials( *critter ) ) ) {
+    if( !you.sees( *critter ) && !you.sees_with_specials( *critter ) ) {
         return false;
     }
 
@@ -4093,36 +4091,9 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         const Creature &critter = *pcritter;
 
         if( !you.sees( critter ) ) {
-            if( you.sees_with_infrared( critter ) ||
-                you.sees_with_specials( critter ) ) {
-                const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
-
-                float scale_x = 1.0f;
-                float scale_y = 1.0f;
-                if( use_scaling ) {
-                    switch( critter.enum_size() ) {
-                        case 1:
-                            scale_x = 0.5f;
-                            scale_y = 0.5f;
-                            break;
-                        case 2:
-                            scale_x = 0.75f;
-                            scale_y = 0.75f;
-                            break;
-                        case 4:
-                            scale_x = 1.3f;
-                            scale_y = 1.3f;
-                            break;
-                        case 5:
-                            scale_x = 1.5f;
-                            scale_y = 1.5f;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string,
-                                            p, 0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
+            if( you.sees_with_specials( critter ) ) {
+                return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
+                                            TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             }
             return false;
         }
@@ -4211,37 +4182,12 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         }
         // scope_is_blocking is true if player is aiming and aim FOV limits obscure that position
         const bool scope_is_blocking = you.is_avatar() && you.as_avatar()->cant_see( p );
-        const bool sees_with_infrared = !scope_is_blocking && you.sees_with_infrared( *pcritter );
-        if( sees_with_infrared || you.sees_with_specials( *pcritter ) ) {
+        const bool sees_with_specials = !scope_is_blocking && you.sees_with_specials( *pcritter );
+        if( sees_with_specials ) {
             // try drawing infrared creature if invisible and not overridden
             // return directly without drawing overlay
-            const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
-            float scale_x = 1.0f;
-            float scale_y = 1.0f;
-            if( use_scaling ) {
-                switch( pcritter->enum_size() ) {
-                    case 1:
-                        scale_x = 0.5f;
-                        scale_y = 0.5f;
-                        break;
-                    case 2:
-                        scale_x = 0.75f;
-                        scale_y = 0.75f;
-                        break;
-                    case 4:
-                        scale_x = 1.3f;
-                        scale_y = 1.3f;
-                        break;
-                    case 5:
-                        scale_x = 1.5f;
-                        scale_y = 1.5f;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string, p,
-                                        0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
+            return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
+                                        TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
         } else {
             return false;
         }
