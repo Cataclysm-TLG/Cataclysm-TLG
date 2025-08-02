@@ -135,6 +135,11 @@ std::string get_ascii_tile_id( const uint32_t sym, const int FG, const int BG )
                         } );
 }
 
+auto simple_point_hash = []( const auto &p )
+{
+    return p.x + p.y * 65536;
+};
+
 pixel_minimap_mode pixel_minimap_mode_from_string( const std::string &mode )
 {
     if( mode == "solid" ) {
@@ -148,12 +153,6 @@ pixel_minimap_mode pixel_minimap_mode_from_string( const std::string &mode )
     debugmsg( "Unsupported pixel minimap mode \"" + mode + "\"." );
     return pixel_minimap_mode::solid;
 }
-
-// Generic function for hashing points. Untype them to use them.
-auto simple_point_hash = []( const point &p )
-{
-    return p.x + p.y * 65536;
-};
 
 } // namespace
 
@@ -1685,6 +1684,7 @@ void cata_tiles::draw( const point &dest, const tripoint &center, int width, int
                             if( has_draw_override( pos.raw() ) || has_memory_at( pos_global ) ||
                                 ( critter &&
                                   ( critter->has_flag( mon_flag_ALWAYS_VISIBLE )
+                                    || you.sees_with_infrared( *critter )
                                     || you.sees_with_specials( *critter ) ) ) ) {
                                 invisible[0] = true;
                             } else {
@@ -2835,7 +2835,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         case TILE_CATEGORY::FIELD:
         case TILE_CATEGORY::LIGHTING:
             // stationary map tiles, seed based on map coordinates
-            seed = simple_point_hash( here.getglobal( pos ).raw().xy() );
+            seed = simple_point_hash( here.getglobal( pos ).raw() );
             break;
         case TILE_CATEGORY::VEHICLE_PART:
             // vehicle parts, seed based on coordinates within the vehicle
@@ -2853,7 +2853,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
             } else {
                 const optional_vpart_position vp = here.veh_at( pos );
                 if( vp ) {
-                    seed = simple_point_hash( vp->mount_pos().raw() );
+                    seed = simple_point_hash( vp->mount() );
                 }
             }
         }
@@ -2867,7 +2867,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
             if( fid.is_valid() ) {
                 const furn_t &f = fid.obj();
                 if( !f.is_movable() ) {
-                    seed = simple_point_hash( here.getglobal( pos ).raw().xy() );
+                    seed = simple_point_hash( here.getglobal( pos ).raw() );
                 }
             }
         }
@@ -2876,14 +2876,14 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
         case TILE_CATEGORY::OVERMAP_TERRAIN:
         case TILE_CATEGORY::OVERMAP_VISION_LEVEL:
         case TILE_CATEGORY::MAP_EXTRA:
-            seed = simple_point_hash( pos.xy() );
+            seed = simple_point_hash( pos );
             break;
         case TILE_CATEGORY::NONE:
             // graffiti
             if( found_id == "graffiti" ) {
                 seed = std::hash<std::string> {}( here.graffiti_at( pos ) );
             } else if( string_starts_with( found_id, "graffiti" ) ) {
-                seed = simple_point_hash( here.getglobal( pos ).raw().xy() );
+                seed = simple_point_hash( here.getglobal( pos ).raw() );
             }
             break;
         case TILE_CATEGORY::ITEM:
@@ -3675,7 +3675,7 @@ bool cata_tiles::draw_field_or_item( const tripoint &p, const lit_level ll, int 
 
                     // get the sprite to draw
                     // roll is based on the maptile seed to keep visuals consistent
-                    int roll = simple_point_hash( p.xy() ) % layer_var.total_weight;
+                    int roll = simple_point_hash( p ) % layer_var.total_weight;
                     std::string sprite_to_draw;
                     for( const auto &sprite_list : layer_var.sprite ) {
                         roll = roll - sprite_list.second;
@@ -3944,7 +3944,7 @@ bool cata_tiles::draw_vpart( const tripoint &p, lit_level ll, int &height_3d,
     const optional_vpart_position ovp = here.veh_at( p );
     if( ovp && !invisible[0] ) {
         const vehicle &veh = ovp->vehicle();
-        const vpart_display vd = veh.get_display_of_tile( ovp->mount_pos() );
+        const vpart_display vd = veh.get_display_of_tile( ovp->mount() );
         if( !vd.id.is_null() ) {
             const int subtile = vd.is_open ? open_ : vd.is_broken ? broken : 0;
             const int rotation = angle_to_dir4( 270_degrees - veh.face.dir() );
@@ -4048,7 +4048,8 @@ bool cata_tiles::draw_critter_at_below( const tripoint &p, const lit_level, int 
     // Check if the player can actually see the critter. We don't care if
     // it's via infrared or not, just whether or not they're seen. If not,
     // we can bail.
-    if( !you.sees( *critter ) && !you.sees_with_specials( *critter ) ) {
+    if( !you.sees( *critter ) &&
+        !( you.sees_with_infrared( *critter ) || you.sees_with_specials( *critter ) ) ) {
         return false;
     }
 
@@ -4092,9 +4093,36 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         const Creature &critter = *pcritter;
 
         if( !you.sees( critter ) ) {
-            if( you.sees_with_specials( critter ) ) {
-                return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
-                                            TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            if( you.sees_with_infrared( critter ) ||
+                you.sees_with_specials( critter ) ) {
+                const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
+
+                float scale_x = 1.0f;
+                float scale_y = 1.0f;
+                if( use_scaling ) {
+                    switch( critter.enum_size() ) {
+                        case 1:
+                            scale_x = 0.5f;
+                            scale_y = 0.5f;
+                            break;
+                        case 2:
+                            scale_x = 0.75f;
+                            scale_y = 0.75f;
+                            break;
+                        case 4:
+                            scale_x = 1.3f;
+                            scale_y = 1.3f;
+                            break;
+                        case 5:
+                            scale_x = 1.5f;
+                            scale_y = 1.5f;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string,
+                                            p, 0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
             }
             return false;
         }
@@ -4183,12 +4211,37 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         }
         // scope_is_blocking is true if player is aiming and aim FOV limits obscure that position
         const bool scope_is_blocking = you.is_avatar() && you.as_avatar()->cant_see( p );
-        const bool sees_with_specials = !scope_is_blocking && you.sees_with_specials( *pcritter );
-        if( sees_with_specials ) {
+        const bool sees_with_infrared = !scope_is_blocking && you.sees_with_infrared( *pcritter );
+        if( sees_with_infrared || you.sees_with_specials( *pcritter ) ) {
             // try drawing infrared creature if invisible and not overridden
             // return directly without drawing overlay
-            return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
-                                        TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            const bool use_scaling = get_option<bool>( "CREATURE_TILE_SCALING" );
+            float scale_x = 1.0f;
+            float scale_y = 1.0f;
+            if( use_scaling ) {
+                switch( pcritter->enum_size() ) {
+                    case 1:
+                        scale_x = 0.5f;
+                        scale_y = 0.5f;
+                        break;
+                    case 2:
+                        scale_x = 0.75f;
+                        scale_y = 0.75f;
+                        break;
+                    case 4:
+                        scale_x = 1.3f;
+                        scale_y = 1.3f;
+                        break;
+                    case 5:
+                        scale_x = 1.5f;
+                        scale_y = 1.5f;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return draw_from_id_string( "infrared_creature", TILE_CATEGORY::NONE, empty_string, p,
+                                        0, 0, lit_level::LIT, false, height_3d, scale_x, scale_y );
         } else {
             return false;
         }

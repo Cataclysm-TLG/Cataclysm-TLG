@@ -7,7 +7,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "coords_fwd.h"
 #include "mapgen.h"
 #include "memory_fast.h"
 #include "rng.h"
@@ -72,7 +71,7 @@ struct VehicleLocation {
         return facings.pick();
     }
 
-    point_bub_ms pick_point() const;
+    point pick_point() const;
 
     jmapgen_int x;
     jmapgen_int y;

@@ -253,7 +253,6 @@ static const efftype_id effect_jetinjector( "jetinjector" );
 static const efftype_id effect_lack_sleep( "lack_sleep" );
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_masked_scent( "masked_scent" );
-static const efftype_id effect_mech_recon_vision( "mech_recon_vision" );
 static const efftype_id effect_melatonin( "melatonin" );
 static const efftype_id effect_mending( "mending" );
 static const efftype_id effect_meth( "meth" );
@@ -324,6 +323,7 @@ static const json_character_flag json_flag_HEATSINK( "HEATSINK" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_IMMUNE_HEARING_DAMAGE( "IMMUNE_HEARING_DAMAGE" );
 static const json_character_flag json_flag_INFECTION_IMMUNE( "INFECTION_IMMUNE" );
+static const json_character_flag json_flag_INFRARED( "INFRARED" );
 static const json_character_flag json_flag_INSECTBLOOD( "INSECTBLOOD" );
 static const json_character_flag json_flag_INVERTEBRATEBLOOD( "INVERTEBRATEBLOOD" );
 static const json_character_flag json_flag_INVISIBLE( "INVISIBLE" );
@@ -1411,7 +1411,7 @@ int Character::eye_level() const
     if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
-        const point_rel_ms rel = vp->mount_pos();
+        const point rel = vp->mount();
         bool all_no_cover = true;
         for( int idx : veh.parts_at_relative( rel, true, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
@@ -1857,7 +1857,6 @@ void Character::mount_creature( monster &z )
     // some rideable mechs have night-vision
     recalc_sight_limits();
     if( is_avatar() && z.has_flag( mon_flag_MECH_RECON_VISION ) ) {
-        add_effect( effect_mech_recon_vision, 1_turns, true );
         // mech night-vision counts as optics for overmap sight range.
         g->update_overmap_seen();
     }
@@ -1955,7 +1954,6 @@ bool Character::is_mounted() const
 void Character::forced_dismount()
 {
     remove_effect( effect_riding );
-    remove_effect( effect_mech_recon_vision );
     bool mech = false;
     if( mounted_creature ) {
         auto *mon = mounted_creature.get();
@@ -2070,7 +2068,6 @@ void Character::dismount()
         }
 
         remove_effect( effect_riding );
-        remove_effect( effect_mech_recon_vision );
         monster *critter = mounted_creature.get();
         critter->mounted_player_id = character_id();
         if( critter->has_flag( mon_flag_RIDEABLE_MECH ) && !critter->type->mech_weapon.is_empty() &&
@@ -2911,6 +2908,13 @@ void Character::recalc_sight_limits()
         vision_mode_cache.set( BIRD_EYE );
     }
 
+    // Not exactly a sight limit thing, but related enough
+    if( has_flag( json_flag_INFRARED ) || has_worn_module_with_flag( flag_IR_EFFECT ) ||
+        worn_with_flag( flag_IR_EFFECT ) || ( is_mounted() &&
+                mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ) {
+        vision_mode_cache.set( IR_VISION );
+    }
+
     if( has_flag( json_flag_SUPER_CLAIRVOYANCE ) ) {
         vision_mode_cache.set( VISION_CLAIRVOYANCE_SUPER );
     } else if( has_flag( json_flag_CLAIRVOYANCE_PLUS ) ) {
@@ -3420,7 +3424,7 @@ std::vector<item_location> Character::nearby( const
         } );
     }
 
-    for( const vehicle_cursor &cur : vehicle_selector( pos_bub(), radius ) ) {
+    for( const vehicle_cursor &cur : vehicle_selector( pos(), radius ) ) {
         cur.visit_items( [&]( const item * e, const item * parent ) {
             if( func( e, parent ) ) {
                 res.emplace_back( cur, const_cast<item *>( e ) );
@@ -3580,7 +3584,7 @@ units::mass Character::best_nearby_lifting_assist( const tripoint &world_pos ) c
     }
     int lift_quality = std::max( { this->max_quality( qual_LIFT ), mech_lift,
                                    map_selector( this->pos_bub(), PICKUP_RANGE ).max_quality( qual_LIFT ),
-                                   vehicle_selector( tripoint_bub_ms( world_pos ), 4, true, true ).max_quality( qual_LIFT )
+                                   vehicle_selector( world_pos, 4, true, true ).max_quality( qual_LIFT )
                                  } );
     return lifting_quality_to_mass( lift_quality );
 }
@@ -6351,10 +6355,6 @@ float Character::active_light() const
 
 bool Character::sees_with_specials( const Creature &critter ) const
 {
-    if( enchantment_cache->get_vision_distance( *this, critter ) ) {
-        return true;
-    }
-
     const double sight_range_electric = calculate_by_enchantment( 0.0,
                                         enchant_vals::mod::SIGHT_RANGE_ELECTRIC );
     const double motion_vision_range = calculate_by_enchantment( 0.0,
@@ -10806,7 +10806,7 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
     return g->get_creatures_if( [this, range, melee, &here]( const Creature & critter ) -> bool {
         //the call to map.sees is to make sure that even if we can see it through walls
         //via a mutation or cbm we only attack targets with a line of sight
-        bool can_see = ( ( sees( critter ) || sees_with_specials( critter ) ) && here.sees( pos_bub(), critter.pos_bub(), 100 ) );
+        bool can_see = ( ( sees( critter ) || sees_with_infrared( critter ) ) && here.sees( pos_bub(), critter.pos_bub(), 100 ) );
         if( can_see && melee )  //handles the case where we can see something with glass in the way for melee attacks
         {
             std::vector<tripoint_bub_ms> path = here.find_clear_path( pos_bub(), critter.pos_bub() );

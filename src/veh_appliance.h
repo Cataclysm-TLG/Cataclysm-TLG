@@ -2,8 +2,6 @@
 #ifndef CATA_SRC_VEH_APPLIANCE_H
 #define CATA_SRC_VEH_APPLIANCE_H
 
-#include "coordinates.h"
-#include "coordinate_constants.h"
 #include "input_context.h"
 #include "player_activity.h"
 
@@ -39,14 +37,14 @@ class veh_app_interact
          * @returns An activity to assign to the player (ACT_VEHICLE),
          * or a null activity if no further action is required.
         */
-        static player_activity run( vehicle &veh, const point_rel_ms &p = point_rel_ms_zero );
+        static player_activity run( vehicle &veh, const point &p = point_zero );
 
     private:
-        explicit veh_app_interact( vehicle &veh, const point_rel_ms &p );
+        explicit veh_app_interact( vehicle &veh, const point &p );
         ~veh_app_interact() = default;
 
         // The player's point of interaction on the appliance.
-        point_rel_ms a_point = point_rel_ms_zero;
+        point a_point = point_zero;
         // The vehicle representing the appliance.
         vehicle *veh;
         // An input context to contain registered actions from the APP_INTERACT category.

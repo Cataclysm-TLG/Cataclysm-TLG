@@ -757,7 +757,7 @@ static void grab()
                 return;
             }
             get_player_character().pause();
-            vp->vehicle().separate_from_grid( vp.value().mount_pos() );
+            vp->vehicle().separate_from_grid( vp.value().mount() );
             if( const optional_vpart_position &split_vp = here.veh_at( grabp ) ) {
                 veh_name = split_vp->vehicle().name;
             } else {

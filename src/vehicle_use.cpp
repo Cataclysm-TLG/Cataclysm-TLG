@@ -852,7 +852,7 @@ void vehicle::honk_horn() const
             honked = true;
         }
         //Get global position of horn
-        const tripoint_bub_ms horn_pos = vp.pos_bub();
+        const tripoint horn_pos = vp.pos();
         //Determine sound
         if( horn_type.bonus >= 110 ) {
             //~ Loud horn sound
@@ -928,8 +928,7 @@ void vehicle::beeper_sound() const
         }
 
         //~ Beeper sound
-        sounds::sound( vp.pos_bub(), vp.info().bonus, sounds::sound_t::alarm, _( "beep!" ), false,
-                       "vehicle",
+        sounds::sound( vp.pos(), vp.info().bonus, sounds::sound_t::alarm, _( "beep!" ), false, "vehicle",
                        "rear_beeper" );
     }
 }
@@ -938,7 +937,7 @@ void vehicle::play_music() const
 {
     Character &player_character = get_player_character();
     for( const vpart_reference &vp : get_enabled_parts( "STEREO" ) ) {
-        iuse::play_music( &player_character, vp.pos_bub().raw(), 15, 30 );
+        iuse::play_music( &player_character, vp.pos(), 15, 30 );
     }
 }
 
@@ -949,7 +948,7 @@ void vehicle::play_chimes() const
     }
 
     for( const vpart_reference &vp : get_enabled_parts( "CHIMES" ) ) {
-        sounds::sound( vp.pos_bub(), 40, sounds::sound_t::music,
+        sounds::sound( vp.pos(), 40, sounds::sound_t::music,
                        _( "a simple melody blaring from the loudspeakers." ), false, "vehicle", "chimes" );
     }
 }
@@ -1866,7 +1865,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint &p, bool with_
         .hotkey( "EXAMINE_VEHICLE" )
         .on_submit( [this, vp] {
             const vpart_position non_fake( *this, get_non_fake_part( vp.part_index() ) );
-            const point start_pos = non_fake.mount_pos().raw().rotate( 2 );
+            const point start_pos = non_fake.mount().rotate( 2 );
             g->exam_vehicle( *this, start_pos );
         } );
 
@@ -2085,7 +2084,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint &p, bool with_
         .skip_locked_check()
         .hotkey( "DISCONNECT_CABLES" )
         .on_submit( [this, vp] {
-            unlink_cables( vp.mount_pos(), get_player_character(), true, true, true );
+            unlink_cables( vp.mount(), get_player_character(), true, true, true );
             get_player_character().pause();
         } );
     }
@@ -2096,7 +2095,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint &p, bool with_
         .skip_locked_check()
         .hotkey( "DISCONNECT_CABLES" )
         .on_submit( [this, vp] {
-            unlink_cables( vp.mount_pos(), get_player_character(), true, true, false );
+            unlink_cables( vp.mount(), get_player_character(), true, true, false );
             get_player_character().pause();
         } );
     }
