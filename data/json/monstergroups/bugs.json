@@ -10,7 +10,7 @@
       { "monster": "mon_ant_small", "weight": 870, "cost_multiplier": 0 }
     ]
   },
-    {
+  {
     "type": "monstergroup",
     "name": "GROUP_ANT_FIRE_UPGRADE_1",
     "is_animal": true,

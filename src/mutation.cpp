@@ -637,7 +637,7 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
         return true;
     } );
 
-    for( std::pair<mtype_id, int> moncam : branch.moncams ) {
+    for( const std::pair<const mtype_id, int> &moncam : branch.moncams ) {
         add_moncam( moncam );
     }
 
@@ -671,7 +671,7 @@ void Character::mutation_loss_effect( const trait_id &mut )
         recalculate_bodyparts();
     }
 
-    for( std::pair<mtype_id, int> moncam : branch.moncams ) {
+    for( const std::pair<const mtype_id, int> &moncam : branch.moncams ) {
         remove_moncam( moncam.first );
     }
 

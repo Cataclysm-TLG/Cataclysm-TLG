@@ -4074,7 +4074,7 @@ int map::collapse_check( const tripoint_bub_ms &p ) const
     int num_supports = p.z() == OVERMAP_DEPTH ? 0 : -5;
     // if there's support below, things are less likely to collapse
     if( p.z() > -OVERMAP_DEPTH ) {
-        const tripoint_bub_ms &pbelow = tripoint_bub_ms( p.xy(), p.z() - 1 );
+        const tripoint_bub_ms &pbelow = p + tripoint_below;
         for( const tripoint_bub_ms &tbelow : points_in_radius( pbelow, 1 ) ) {
             if( has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, tbelow ) ) {
                 num_supports += 1;
@@ -4119,7 +4119,8 @@ void map::collapse_at( const tripoint_bub_ms &p, const bool silent, const bool w
                        const bool destroy_pos )
 {
     const bool supports = was_supporting || has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p );
-    const bool wall = was_supporting || has_flag( ter_furn_flag::TFLAG_WALL, p );
+    const bool wall_tree = was_supporting || has_flag( ter_furn_flag::TFLAG_WALL, p ) ||
+                           has_flag( ter_furn_flag::TFLAG_TREE, p );
     // don't bash again if the caller already bashed here
     if( destroy_pos ) {
         destroy( p, silent );
@@ -4132,34 +4133,19 @@ void map::collapse_at( const tripoint_bub_ms &p, const bool silent, const bool w
     if( supports && !still_supports ) {
         for( const tripoint_bub_ms &t : points_in_radius( p, 1 ) ) {
             // If z-levels are off, tz == t, so we end up skipping a lot of stuff to avoid bugs.
-            const tripoint_bub_ms &tz = tripoint_bub_ms( t.xy(), t.z() + 1 );
-            // if nothing above us had the chance of collapsing, move on
-            if( !one_in( collapse_check( tz ) ) ) {
-                continue;
-            }
-            // if a wall collapses, walls without support from below risk collapsing and
-            //propagate the collapse upwards
-            if( zlevels && wall && p == t && has_flag( ter_furn_flag::TFLAG_WALL, tz ) ) {
+            const tripoint_bub_ms &tz = t + tripoint_above;
+            const bool collapse_above = one_in( collapse_check( tz ) );
+
+            if( zlevels && wall_tree && collapse_above ) {
                 collapse_at( tz, silent );
-            }
-            // floors without support from below risk collapsing into open air and can propagate
-            // the collapse horizontally but not vertically
-            if( p != t && ( has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, t ) &&
-                            has_flag( ter_furn_flag::TFLAG_COLLAPSES, t ) ) ) {
-                collapse_at( t, silent );
-            }
-            // this tile used to support a roof, now it doesn't, which means there is only
-            // open air above us
-            if( zlevels ) {
-                // ensure that the layer below this one is not a wall, otherwise you have a ledge dropping onto
-                // a wall which doesn't make sense.
-                if( !has_flag( ter_furn_flag::TFLAG_WALL, t ) ) {
-                    furn_set( tz, furn_str_id::NULL_ID() );
-                    ter_set( tz, ter_t_open_air );
-                    Creature *critter = get_creature_tracker().creature_at( tz );
-                    if( critter != nullptr ) {
-                        creature_on_trap( *critter );
-                    }
+
+                // this tile used to support a roof, now it doesn't, which means there is only
+                // open air above us
+                furn_set( tz, furn_str_id::NULL_ID() );
+                ter_set( tz, ter_t_open_air );
+                Creature *critter = get_creature_tracker().creature_at( tz );
+                if( critter != nullptr ) {
+                    creature_on_trap( *critter );
                 }
             }
         }
@@ -6018,13 +6004,22 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
         int turns_elapsed = to_turns<int>( calendar::turn - recharge_part.last_charged );
         recharge_part.last_charged = calendar::turn;
 
-        if( !recharge_part.removed && recharge_part.enabled  && ( turns_elapsed > 0 ) ) {
+        if( !recharge_part.removed && recharge_part.enabled  && ( turns_elapsed > 0 ) &&
+            cur_veh.is_battery_available() ) {
+
             int dischargeable = turns_elapsed * recharge_part.info().bonus;
             // Convert to kilojoule
             dischargeable = ( dischargeable / 1000 ) + x_in_y( dischargeable % 1000, 1000 );
+
+            bool is_running = false;
+
             for( item &n : cur_veh.get_items( vp ) ) {
 
-                if( dischargeable <= 0 ) {
+                // "dischargeable" could be 0 even if the battery charger is actually running,
+                // because of the rounding when the power is below a kilojoule. Before breaking,
+                // I need to know if there is at least a non-full battery, for the purpose of
+                // displaying the correct power draw.
+                if( is_running && dischargeable <= 0 ) {
                     break;
                 }
 
@@ -6039,6 +6034,13 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
                                             n.energy_remaining( nullptr ) ) );
                 } else if( n.ammo_capacity( ammo_battery ) ) {
                     chargeable = n.ammo_capacity( ammo_battery ) - n.ammo_remaining();
+                }
+
+                if( !is_running && chargeable > 0 ) {
+                    is_running = true;
+                    if( dischargeable <= 0 ) {
+                        break;
+                    }
                 }
 
                 if( chargeable > 0 ) {
@@ -6066,6 +6068,12 @@ static void process_vehicle_items( vehicle &cur_veh, int part )
                 }
 
             }
+
+            if( is_running ) {
+                cur_veh.recharge_epower_this_turn -= units::from_watt( static_cast<std::int64_t>
+                                                     ( recharge_part.info().bonus ) );
+            }
+
         }
     }
 }
@@ -10392,17 +10400,18 @@ tripoint_abs_ms map::getglobal( const tripoint &p ) const
 
 tripoint_abs_ms map::getglobal( const tripoint_bub_ms &p ) const
 {
-    return project_to<coords::ms>( abs_sub.xy() ) + p.raw();
+    return tripoint_abs_ms{ p.x() + abs_ms.x(), p.y() + abs_ms.y(), p.z() };
 }
 
 tripoint_bub_ms map::bub_from_abs( const tripoint_abs_ms &p ) const
 {
-    return tripoint_bub_ms() + ( p - project_to<coords::ms>( abs_sub.xy() ) );
+    return tripoint_bub_ms { p.x() - abs_ms.x(), p.y() - abs_ms.y(), p.z()};
 }
 
 void map::set_abs_sub( const tripoint_abs_sm &p )
 {
     abs_sub = p;
+    abs_ms = point_abs_ms{ project_to<coords::ms>( abs_sub.xy() ) };
 }
 
 tripoint_abs_sm map::get_abs_sub() const
