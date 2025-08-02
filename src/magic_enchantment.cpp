@@ -646,6 +646,7 @@ void enchant_cache::serialize( JsonOut &jsout ) const
     }
     jsout.end_array();
 
+
     jsout.end_object();
 }
 
