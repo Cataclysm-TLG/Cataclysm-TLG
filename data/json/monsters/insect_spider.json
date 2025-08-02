@@ -3999,7 +3999,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "half_life": 20, "into_group": "GROUP_ANT_FIRE_UPGRADE_1" }
   },
-    {
+  {
     "id": "mon_ant_fire_unstable",
     "type": "MONSTER",
     "name": { "str": "unstable fire ant" },
@@ -4046,10 +4046,7 @@
     ],
     "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT", "PLAYER_CLOSE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "death_function": {
-      "message": "The %s explodes!'",
-      "effect": { "id": "death_conflagration", "hit_self": true }
-    },
+    "death_function": { "message": "The %s explodes!'", "effect": { "id": "death_conflagration", "hit_self": true } },
     "harvest": "arachnid",
     "dissect": "dissect_insect_sample_single",
     "flags": [ "CLIMBS", "HEARS", "POISON", "SEES", "SMELLS", "EATS", "CORNERED_FIGHTER" ],
