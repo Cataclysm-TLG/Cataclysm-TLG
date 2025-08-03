@@ -270,8 +270,7 @@
     "//": "Counter passive decay and then if haven't mutated recently roll a chance to gain mutagen, lower chance after threshold",
     "condition": { "math": [ "has_var(u_MUTATING_GRADUAL_vitamin)" ] },
     "effect": [
-      { "math": [ "u_vitamin(u_MUTATING_GRADUAL_vitamin) += 1" ] },
-      { "math": [ "u_vitamin('mutagen') += 1" ] },
+      { "math": [ "u_vitamin(u_MUTATING_GRADUAL_vitamin) += 3" ] },
       { "math": [ "u_val('thirst') += 1" ] },
       {
         "if": { "math": [ "u_recently_mutated_cooldown <= 0" ] },
@@ -279,7 +278,6 @@
           "if": { "math": [ "rng( 0, u_has_trait(u_MUTATING_GRADUAL_threshold) ? 30 : 5) < 1" ] },
           "then": [
             { "math": [ "u_vitamin(u_MUTATING_GRADUAL_vitamin) += 50" ] },
-            { "math": [ "u_vitamin('mutagen') += 50" ] },
             { "math": [ "u_MUTATING_GRADUAL_surplus += 50" ] },
             { "math": [ "u_val('thirst') += 50" ] }
           ]
