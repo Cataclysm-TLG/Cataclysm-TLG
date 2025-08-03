@@ -2184,10 +2184,30 @@
     "description": "Your vision has become particularly acute: you suspect you could pick out zombies much farther away.  Perception +4.",
     "variants": [
       { "id": "blue", "name": { "str": "Avian Eye Color: Blue" }, "description": "You have blue avian eyes.", "weight": 0 },
-      { "id": "brown", "name": { "str": "Avian Eye Color: Brown" }, "description": "You have brown avian eyes.", "weight": 1 },
-      { "id": "orange", "name": { "str": "Avian Eye Color: Orange" }, "description": "You have orange avian eyes.", "weight": 0 },
-      { "id": "red", "name": { "str": "Avian Eye Color: Red" }, "description": "You have red avian eyes.", "weight": 0 },
-      { "id": "yellow", "name": { "str": "Avian Eye Color: Yellow" }, "description": "You have yellow avian eyes.", "weight": 0 }
+      {
+        "id": "brown",
+        "name": { "str": "Avian Eye Color: Brown" },
+        "description": "You have brown avian eyes.",
+        "weight": 1
+      },
+      {
+        "id": "orange",
+        "name": { "str": "Avian Eye Color: Orange" },
+        "description": "You have orange avian eyes.",
+        "weight": 0
+      },
+      {
+        "id": "red",
+        "name": { "str": "Avian Eye Color: Red" },
+        "description": "You have red avian eyes.",
+        "weight": 0
+      },
+      {
+        "id": "yellow",
+        "name": { "str": "Avian Eye Color: Yellow" },
+        "description": "You have yellow avian eyes.",
+        "weight": 0
+      }
     ],
     "types": [ "EYES" ],
     "prereqs": [ "PER_UP_4" ],
@@ -2627,11 +2647,36 @@
     "bodytemp_modifiers": [ 50, 100 ],
     "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
     "variants": [
-      { "id": "white", "name": { "str": "White Feathers" }, "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.", "weight": 1 },
-      { "id": "brown", "name": { "str": "Brown Feathers" }, "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.", "weight": 0 },
-      { "id": "blue", "name": { "str": "Blue Feathers" }, "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.", "weight": 0 },
-      { "id": "black", "name": { "str": "Black Feathers" }, "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.", "weight": 0 },
-      { "id": "baldeagle", "name": { "str": "Bald Eagle Feathers" }, "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.", "weight": 0 }
+      {
+        "id": "white",
+        "name": { "str": "White Feathers" },
+        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "weight": 1
+      },
+      {
+        "id": "brown",
+        "name": { "str": "Brown Feathers" },
+        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "weight": 0
+      },
+      {
+        "id": "blue",
+        "name": { "str": "Blue Feathers" },
+        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "weight": 0
+      },
+      {
+        "id": "black",
+        "name": { "str": "Black Feathers" },
+        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "weight": 0
+      },
+      {
+        "id": "baldeagle",
+        "name": { "str": "Bald Eagle Feathers" },
+        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "weight": 0
+      }
     ],
     "types": [ "SKIN" ],
     "leads_to": [ "DOWN" ],
@@ -2967,9 +3012,7 @@
     "category": [ "CRUSTACEAN" ],
     "leads_to": [ "CRUSTACEAN_CLAW" ],
     "flags": [ "TOUGH_FEET" ],
-    "enchantments": [
-      { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -2 } ] }
-    ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -2 } ] } ],
     "integrated_armor": [ "integrated_carapace" ],
     "wet_protection": [
       { "part": "head", "ignored": 15 },
@@ -3217,19 +3260,7 @@
     "points": 2,
     "visibility": 8,
     "ugliness": 4,
-  "enchantments": [
-    {
-      "condition": {
-        "not": "u_has_weapon"
-      },
-      "melee_damage_bonus": [
-        {
-          "type": "stab",
-          "add": 3
-        }
-      ]
-    }
-  ],
+    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "melee_damage_bonus": [ { "type": "stab", "add": 3 } ] } ],
     "description": "Your skin is covered in small, woody thorns.  Whenever an unarmed opponent strikes a part of your body that is not covered by clothing, they will receive minor damage.  Your punches may also deal extra damage.",
     "prereqs": [ "BARK", "BARK2_a", "BARK2_b", "BARK2_c" ],
     "category": [ "PLANT" ]
@@ -3890,19 +3921,7 @@
     "points": 1,
     "visibility": 5,
     "ugliness": 4,
-  "enchantments": [
-    {
-      "condition": {
-        "not": "u_has_weapon"
-      },
-      "melee_damage_bonus": [
-        {
-          "type": "acid",
-          "add": 3
-        }
-      ]
-    }
-  ],
+    "enchantments": [ { "condition": { "not": "u_has_weapon" }, "melee_damage_bonus": [ { "type": "acid", "add": 3 } ] } ],
     "description": "The skin on your hands is now a mucous membrane that produces a thick, acrid slime.  Attacks using your hand will cause minor acid damage.  Slightly increases wet benefits.",
     "prereqs": [ "SLIMY" ],
     "category": [ "SLIME" ],
@@ -5139,11 +5158,36 @@
     "ugliness": 2,
     "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
     "variants": [
-      { "id": "white", "name": { "str": "White Bird Wings" }, "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.", "weight": 1 },
-      { "id": "brown", "name": { "str": "Brown Bird Wings" }, "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.", "weight": 0 },
-      { "id": "blue", "name": { "str": "Blue Bird Wings" }, "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.", "weight": 0 },
-      { "id": "black", "name": { "str": "Black Bird Wings" }, "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.", "weight": 0 },
-      { "id": "baldeagle", "name": { "str": "Bald Eagle Bird Wings" }, "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.", "weight": 0 }
+      {
+        "id": "white",
+        "name": { "str": "White Bird Wings" },
+        "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
+        "weight": 1
+      },
+      {
+        "id": "brown",
+        "name": { "str": "Brown Bird Wings" },
+        "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
+        "weight": 0
+      },
+      {
+        "id": "blue",
+        "name": { "str": "Blue Bird Wings" },
+        "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
+        "weight": 0
+      },
+      {
+        "id": "black",
+        "name": { "str": "Black Bird Wings" },
+        "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
+        "weight": 0
+      },
+      {
+        "id": "baldeagle",
+        "name": { "str": "Bald Eagle Bird Wings" },
+        "description": "Your arms have mostly transformed into a huge pair of feathered wings.  Though you retain a few fingers, your fine manipulation is greatly hampered.  On the other hand, you can glide from ledges and will take less damage if you fall, provided you're healthy and unburdened.",
+        "weight": 0
+      }
     ],
     "types": [ "ARMS", "HANDS" ],
     "enchantments": [ "ench_wings_bird" ],

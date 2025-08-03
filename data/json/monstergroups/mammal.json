@@ -239,5 +239,16 @@
       { "monster": "mon_rabbit_domestic", "weight": 2, "cost_multiplier": 0 },
       { "group": "GROUP_MUTANT_PET_DOGS", "weight": 1, "cost_multiplier": 0 }
     ]
+  },
+  {
+    "name": "GROUP_DOMESTIC_ANIMALS",
+    "type": "monstergroup",
+    "default": "mon_rat",
+    "monsters": [
+      { "group": "GROUP_ROACH", "weight": 25, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_rat", "weight": 15, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "monster": "mon_bat", "weight": 1, "cost_multiplier": 0, "pack_size": [ 1, 3 ] },
+      { "group": "GROUP_PETS", "weight": 3, "cost_multiplier": 0 }
+    ]
   }
 ]

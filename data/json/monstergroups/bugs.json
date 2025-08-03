@@ -133,6 +133,11 @@
   },
   {
     "type": "monstergroup",
+    "name": "GROUP_SPIDER_WIDOW",
+    "monsters": [ { "monster": "mon_spider_widow_small", "cost_multiplier": 0 } ]
+  },
+  {
+    "type": "monstergroup",
     "name": "GROUP_SPIDER_BASEMENT",
     "default": "mon_spider_cellar_small",
     "//": "`monster` ignores group-level pack size, so numbers are set in mapgen",
