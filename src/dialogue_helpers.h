@@ -101,9 +101,8 @@ struct eoc_math {
     std::shared_ptr<math_exp> exp;
 
     void from_json( const JsonObject &jo, std::string_view member, math_type_t type_ );
-
-    template<typename D>
-    double act( D &d ) const;
+    double act( dialogue &d ) const;
+    double act( const_dialogue const &d ) const;
 };
 
 struct dbl_or_var_part {

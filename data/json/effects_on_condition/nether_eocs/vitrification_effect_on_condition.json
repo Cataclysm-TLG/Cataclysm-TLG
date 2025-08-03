@@ -2,8 +2,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_quietfarm_nearby",
-    "eoc_type": "EVENT",
-    "required_event": "avatar_enters_omt",
+    "recurrence": "1 seconds",
     "condition": {
       "and": [
         { "or": [ { "u_near_om_location": "unvitrified_farm_0" }, { "u_near_om_location": "unvitrified_orchard" } ] },
@@ -29,8 +28,6 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_vitrified_farm_entry",
-    "eoc_type": "EVENT",
-    "required_event": "avatar_enters_omt",
     "condition": {
       "and": [
         { "or": [ { "u_at_om_location": "unvitrified_farm_0" }, { "u_at_om_location": "unvitrified_orchard" } ] },
@@ -47,6 +44,12 @@
         }
       ]
     },
+    "false_effect": [
+      {
+        "if": { "not": { "u_has_trait": "NOT_GLASS" } },
+        "then": { "run_eocs": [ "EOC_vitrified_farm_entry" ], "time_in_future": "1 seconds" }
+      }
+    ],
     "effect": [
       {
         "place_override": { "global_val": "place_name", "default_str": "Quiet Farmhouse" },
@@ -186,65 +189,107 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_vitrified_farm_explore",
+    "recurrence": "1 minutes",
     "condition": { "u_has_effect": "VITRIFYING" },
     "effect": [
-      { "run_eocs": "EOC_vitrified_farm_explore", "time_in_future": "1 minutes" },
       {
         "switch": { "math": [ "u_vitri_vitrified" ] },
         "cases": [
           {
             "case": 1,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_1", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 3, "max_bonus": 50 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_1",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_1", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 3, "max_bonus": 50 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 2,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_2", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 5, "max_bonus": 99 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_2",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_2", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 5, "max_bonus": 99 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 3,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_3", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 7, "max_bonus": 99 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_3",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_3", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 7, "max_bonus": 99 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 4,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_4", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 10, "max_bonus": 99 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_4",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_4", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 10, "max_bonus": 99 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 5,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_5", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 15, "max_bonus": 99 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_5",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_5", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 15, "max_bonus": 99 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 6,
-            "effect": [
-              { "u_message": "Vitrifaction_Ambient_6", "snippet": true, "type": "good" },
-              { "math": [ "u_vitri_glassed", "++" ] },
-              { "u_add_morale": "morale_vitri_placid", "bonus": 20, "max_bonus": 99 },
-              { "run_eocs": "EOC_queue_vitrified_int_drain" }
-            ]
+            "effect": {
+              "run_eocs": [
+                {
+                  "id": "EOC_vitrified_ambient_message_6",
+                  "effect": [
+                    { "u_message": "Vitrifaction_Ambient_6", "snippet": true, "type": "good" },
+                    { "math": [ "u_vitri_glassed", "++" ] },
+                    { "u_add_morale": "morale_vitri_placid", "bonus": 20, "max_bonus": 99 }
+                  ]
+                },
+                "EOC_queue_vitrified_int_drain"
+              ]
+            }
           },
           {
             "case": 7,
