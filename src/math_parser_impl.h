@@ -13,6 +13,7 @@
 
 #include "cata_utility.h"
 #include "condition.h"
+#include "debug.h"
 #include "dialogue.h"
 #include "dialogue_helpers.h"
 #include "math_parser_diag.h"
@@ -111,7 +112,8 @@ struct func_diag {
         if( fe ) {
             return fe( d );
         }
-        throw math::internal_error( "math called eval() on unexpected function that cannot evaluate" );
+        debugmsg( "Unexpected eval called on function that cannot evaluate" );
+        return 0;
     }
 
     void assign( dialogue &d, double val ) const {
@@ -119,7 +121,7 @@ struct func_diag {
             fa( d, val );
             return;
         }
-        throw math::internal_error( "math called assign() on unexpected function that cannot assign" );
+        debugmsg( "Unexpected assign called on function that cannot assign" );
     }
 
     eval_f fe;
@@ -209,7 +211,7 @@ constexpr double thingie::eval( const_dialogue const &d ) const
         },
         []( ass_oper const & /* v */ ) -> double
         {
-            throw math::runtime_error( "Cannot use assignment operators from eval context" );
+            debugmsg( "Cannot use assignment operators from eval context" );
             return 0.0;
         },
         [&d]( auto const & v ) -> double
@@ -219,7 +221,7 @@ constexpr double thingie::eval( const_dialogue const &d ) const
                 return v.eval( d );
             } else
             {
-                throw math::internal_error( "math called eval() on unexpected node without eval()" );
+                debugmsg( "math called eval() on unexpected node without eval()" );
                 return 0.0;
             }
         },
