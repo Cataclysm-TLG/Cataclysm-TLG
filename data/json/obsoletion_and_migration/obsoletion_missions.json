@@ -7,16 +7,11 @@
     "goal": "MGOAL_GO_TO",
     "difficulty": 0,
     "value": 0,
-    "//": "NPC will ask player to burn tagged house. Will follow player after accepting mission.",
-    "//2": "Change first topic to do proper checks. MGOAL_GO_TO to check if player stands on tagged tile.",
-    "//3": "At the end of the mission, will place fire on tagged tile and NPC will join player faction.",
-    "has_generic_rewards": false,
-    "start": { "effect": [ { "run_eocs": "MISSION_PYROMANIAC_CLEANUP" } ] }
+    "has_generic_rewards": false
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MISSION_PYROMANIAC_CLEANUP",
-    "recurrence": [ "2 seconds", "2 seconds" ],
     "global": true,
     "condition": { "u_has_mission": "MISSION_PYROMANIAC" },
     "effect": [ { "remove_active_mission": "MISSION_PYROMANIAC" } ]
@@ -29,13 +24,11 @@
     "description": "You have some time left until you can transfer control to your companions, provided you have <color_yellow>established a Basecamp</color> and <color_yellow>have at least 1 NPC companion</color>.",
     "difficulty": 0,
     "value": 0,
-    "invisible_on_complete": true,
-    "start": { "effect": [ { "run_eocs": "EOC_MISSION_CAMP_PEADERSHIP_CHANGE_CLEANUP" } ] }
+    "invisible_on_complete": true
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MISSION_CAMP_LEADERSHIP_CHANGE_CLEANUP",
-    "recurrence": [ "2 seconds", "2 seconds" ],
     "global": true,
     "condition": { "u_has_mission": "MISSION_CAMP_LEADERSHIP_CHANGE" },
     "effect": [ { "remove_active_mission": "MISSION_CAMP_LEADERSHIP_CHANGE" }, { "u_lose_var": "time_of_last_succession" } ],
