@@ -43,7 +43,6 @@
     "damage_reduction": { "all": 25 },
     "variants": [ { "symbols": "X", "symbols_broken": "*" } ]
   },
-  
   {
     "type": "vehicle_part",
     "id": "plating_wood",

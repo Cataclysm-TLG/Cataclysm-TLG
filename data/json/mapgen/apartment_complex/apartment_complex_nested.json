@@ -12,7 +12,7 @@
         "///o@@  |b+ hfh '''''#//",
         "///#¤  d||| hfh J5OF##//",
         "///##|+||       #####///",
-        "/////y     H   x#///////",
+        "/////y   ! H   x#///////",
         "/////    A H l x#///////",
         "/////E  Y  H   x#///////",
         "///##|+|||+|RRRR#///////",
@@ -34,7 +34,97 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "place_loot": [ { "item": "television", "x": 7, "y": 10, "chance": 100 }, { "item": "television", "x": 15, "y": 6, "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_a",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "///###################//",
+        "///#    |q|     1234'*//",
+        "///o    |b+     '''''#//",
+        "///#    |||     J5OF##//",
+        "///##|+||       #####///",
+        "/////           #///////",
+        "/////     !     #///////",
+        "/////           #///////",
+        "///##|+|||+|    #///////",
+        "///#    |t'######///////",
+        "///o    |S'#////////////",
+        "///#    |89#////////////",
+        "///##oo#####////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_a",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "///###################//",
+        "///# !  |q|     1234'*//",
+        "///o    |b+  !  '''''#//",
+        "///#    |||     J5OF##//",
+        "///##|+||       #####///",
+        "/////           #///////",
+        "///// !         #///////",
+        "/////        !  #///////",
+        "///##|+|||+|    #///////",
+        "///#    |t'######///////",
+        "///o    |S'#////////////",
+        "///#    |89#////////////",
+        "///##oo#####////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   },
   {
@@ -51,7 +141,7 @@
         "///#IE  ||| fff J5OF##//",
         "///##|+||bM hhh #####///",
         "/////Y  T       #///////",
-        "/////        ss #///////",
+        "/////     !  ss #///////",
         "/////  RRR E    #///////",
         "///##|+|||+|HHHH#///////",
         "///#y   |t'######///////",
@@ -71,6 +161,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 13, 14 ], "y": 6, "chance": 100 } ]
     }
@@ -89,7 +180,7 @@
         "///#E  ¤|||E    J5OF##//",
         "///##|+||Ly    Y#####///",
         "/////       HHHH#///////",
-        "///// hfh    ll #///////",
+        "///// hfh !  ll #///////",
         "/////y     T    #///////",
         "///##|+|||+|xssx#///////",
         "///#   T|t'######///////",
@@ -109,6 +200,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 13, 14 ], "y": 8, "chance": 100 } ]
     }
@@ -127,7 +219,7 @@
         "///#@@ ≠||| E   J5OF##//",
         "///##|+||II    E#####///",
         "/////y   h  hfh #///////",
-        "/////       hfh #///////",
+        "/////    !  hfh #///////",
         "/////y  RL  hfh #///////",
         "///##|+|||+|   Y#///////",
         "///#T   |t'######///////",
@@ -147,6 +239,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 1, "chance": 100 } ]
     }
@@ -164,7 +257,7 @@
         "///o @@ |U+     '''''#//",
         "///#T   |||  s  J5OF##//",
         "///##|+||LY    A#####///",
-        "/////       HHHl#///////",
+        "/////    !  HHHl#///////",
         "///// hfh      R#///////",
         "/////y     T l R#///////",
         "///##|+|||+| E R#///////",
@@ -185,6 +278,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 1, "chance": 100 } ]
     }
@@ -203,7 +297,7 @@
         "///#D  ≠|||L    J5OF##//",
         "///##|+||TY  hhh#####///",
         "/////  HHH   fff#///////",
-        "/////        hhh#///////",
+        "/////     !  hhh#///////",
         "/////P xxx A    #///////",
         "///##|+|||+|yVVy#///////",
         "///#D  N|t'######///////",
@@ -223,6 +317,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 8, "y": 7, "chance": 100 } ]
     }
@@ -240,7 +335,7 @@
         "///o@@ s|W+ hfh '''''#//",
         "///#¤   |||     J5OF##//",
         "///##|+||y     L#####///",
-        "/////P     s   H#///////",
+        "/////P   ! s   H#///////",
         "/////   h  s l H#///////",
         "/////Y III s   H#///////",
         "///##|+|||+|HHHl#///////",
@@ -261,6 +356,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 7, "y": 2, "chance": 100 }, { "item": "television", "x": 11, "y": 6, "chance": 100 } ]
     }
@@ -279,7 +375,7 @@
         "///#@@  ||| hfh J5OF##//",
         "///##|+||bL  h  #####///",
         "/////  RR      L#///////",
-        "/////       H  x#///////",
+        "/////     ! H  x#///////",
         "/////l  y   Hl x#///////",
         "///##|+|||+|H  x#///////",
         "///#   E|t'######///////",
@@ -299,6 +395,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 15, "y": 7, "chance": 100 } ]
     }
@@ -326,7 +423,7 @@
         "///////////#Ih P|R  ||||",
         "///////////#I  P|R  |tS8",
         "///////////#||+||   +''9",
-        "///////////#Y      |||||",
+        "///////////#Y    ! |||||",
         "///////////#  hfh  |A dD",
         "///////////o  hfh  +    ",
         "///////////o      T| @@ ",
@@ -337,6 +434,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 18, "y": 5, "chance": 100 } ]
     }
@@ -363,7 +461,7 @@
         "///////////# @@ |s  H|ZW",
         "///////////#    |x  ||||",
         "///////////#TE D|y  |tS8",
-        "///////////#||+||   +''9",
+        "///////////#||+|| ! +''9",
         "///////////#H   T  |||||",
         "///////////#H      |II @",
         "///////////o       + h @",
@@ -375,6 +473,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 17, "y": [ 10, 11 ], "chance": 100 } ]
     }
@@ -394,7 +493,7 @@
         "////////////////#####2'O",
         "////////////////#RRR ''5",
         "////////////////#    ''J",
-        "////////////////#T   173",
+        "////////////////#T ! 173",
         "////////////////#      A",
         "///////////######H   L  ",
         "///////////#@d I|H  x|+|",
@@ -413,6 +512,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 20, "y": [ 10, 11 ], "chance": 100 } ]
     }
@@ -443,7 +543,7 @@
         "///////////#T      |||||",
         "///////////#HHH   y| E ¤",
         "///////////o l     +  @@",
-        "///////////o    Y  |  @@",
+        "///////////o !  Y  |  @@",
         "///////////#sss#///#D  T",
         "///////////##o##///###o#",
         "////////////////////////",
@@ -451,6 +551,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 19, "chance": 100 } ]
     }
@@ -480,7 +581,7 @@
         "///////////#||+||   +''9",
         "///////////#T  E   |||||",
         "///////////#      P|¤@@ ",
-        "///////////o s     + @@ ",
+        "///////////o s   ! + @@ ",
         "///////////o    y y|   h",
         "///////////#HHH#///#dIII",
         "///////////##o##///###o#",
@@ -489,6 +590,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 17, "chance": 100 } ]
     }
@@ -518,7 +620,7 @@
         "///////////#||+||   +''9",
         "///////////#y      |||||",
         "///////////#s  H   |yxxb",
-        "///////////os  H   +    ",
+        "///////////os  H   + !  ",
         "///////////os  HY  | @@ ",
         "///////////#RyR#///#¤@@d",
         "///////////##o##///###o#",
@@ -527,6 +629,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 21, 22 ], "y": 16, "chance": 100 } ]
     }
@@ -556,7 +659,7 @@
         "///////////#||+||   +''9",
         "///////////#R  PP  |||||",
         "///////////#R      | ¤@d",
-        "///////////o       +  @ ",
+        "///////////o  !    +  @ ",
         "///////////o h  E y|  ≠ ",
         "///////////#III#///#D  y",
         "///////////##o##///###o#",
@@ -565,6 +668,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 15, "y": [ 11, 12 ], "chance": 100 } ]
     }
@@ -594,7 +698,7 @@
         "///////////#||+||   +''9",
         "///////////#l     T|||||",
         "///////////#H  s   |¤@@¤",
-        "///////////oH  s   + @@ ",
+        "///////////oH  s!  + @@ ",
         "///////////o      E|    ",
         "///////////#RCR#///#d ET",
         "///////////##o##///###o#",
@@ -603,8 +707,98 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 15, "y": [ 16, 17 ], "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_b",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "/////////////////////#*#",
+        "////////////////////##'F",
+        "////////////////#####7'O",
+        "////////////////#    ''5",
+        "////////////////#    ''J",
+        "////////////////#    123",
+        "////////////////#       ",
+        "///////////######       ",
+        "///////////#    |    |+|",
+        "///////////#    |    |ZW",
+        "///////////#    |   ||||",
+        "///////////#    |   |tS8",
+        "///////////#||+||   +''9",
+        "///////////#       |||||",
+        "///////////#       |    ",
+        "///////////o     ! +    ",
+        "///////////o       |    ",
+        "///////////#   #///#    ",
+        "///////////##o##///###o#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_b",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "/////////////////////#*#",
+        "////////////////////##'F",
+        "////////////////#####7'O",
+        "////////////////#    ''5",
+        "////////////////#    ''J",
+        "////////////////#    123",
+        "////////////////#       ",
+        "///////////######   !   ",
+        "///////////#    |    |+|",
+        "///////////#    |    |ZW",
+        "///////////#    |   ||||",
+        "///////////#    |   |tS8",
+        "///////////#||+||   +''9",
+        "///////////#       |||||",
+        "///////////#       |!   ",
+        "///////////o  !    +    ",
+        "///////////o       |    ",
+        "///////////#   #///#    ",
+        "///////////##o##///###o#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 10, 23 ], "y": [ 9, 20 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   },
   {
@@ -622,7 +816,7 @@
         "//#||+|||+||| HHH ##////",
         "//#L       T      #/////",
         "//*  h h        sE#/////",
-        "//# hfffh         #/////",
+        "//# hfffh !       #/////",
         "//#  h h     RRPRR#/////",
         "//#      Y||+|#####/////",
         "//#J'234|||8't#/////////",
@@ -641,6 +835,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 10, "y": 3, "chance": 100 }, { "item": "television", "x": 15, "y": 0, "chance": 100 } ]
     }
@@ -659,7 +854,7 @@
         "//#Ih  |   d|y    E##///",
         "//#||+|||+|||     ##////",
         "//#       RRR    T#/////",
-        "//*  hfh        sE#/////",
+        "//*  hfh    !   sE#/////",
         "//#  hfh          #/////",
         "//#  hfh   Y  yVVy#/////",
         "//#y     L||+|#####/////",
@@ -679,6 +874,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 1, "chance": 100 } ]
     }
@@ -697,7 +893,7 @@
         "//#T   |D   |    y ##///",
         "//#||+|||+||| HHHH##////",
         "//#y              #/////",
-        "//*   h        ll #/////",
+        "//*   h     !  ll #/////",
         "//#  hfh  R       #/////",
         "//#   h   Ry  xssx#/////",
         "//#L     Y||+|#####/////",
@@ -717,6 +913,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 15, 16 ], "y": 8, "chance": 100 } ]
     }
@@ -736,7 +933,7 @@
         "//#||+|||+|||     ##////",
         "//#    y   T   E x#/////",
         "//*          H   x#/////",
-        "//#L         H l x#/////",
+        "//#L    !    H l x#/////",
         "//#       RR H   x#/////",
         "//#   A RR||+|#####/////",
         "//#J'731|||8't#/////////",
@@ -755,6 +952,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 17, "y": [ 6, 7 ], "chance": 100 } ]
     }
@@ -773,7 +971,7 @@
         "//#d   |D   |l    y##///",
         "//#||+|||+|||     ##////",
         "//#   RRR  E      #/////",
-        "//*           hfh #/////",
+        "//*     !     hfh #/////",
         "//#L          hfh #/////",
         "//#       T      Y#/////",
         "//#  AA   ||+|#####/////",
@@ -793,6 +991,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [
         { "item": "television", "x": 6, "y": [ 1, 2 ], "chance": 100 },
@@ -814,7 +1013,7 @@
         "//#@@  |y  I| hhh Y##///",
         "//#||+|||+||| fff ##////",
         "//#y  xxx   C hhh #/////",
-        "//*        AC     #/////",
+        "//*      ! AC     #/////",
         "//#               #/////",
         "//#L   s      TRRR#/////",
         "//#   HHHl||+|#####/////",
@@ -834,8 +1033,98 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 7, "y": 5, "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_a",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "//#    |    |       #///",
+        "//#    |    |       o///",
+        "//#    |    |       #///",
+        "//#    |    |      ##///",
+        "//#||+|||+|||     ##////",
+        "//#               #/////",
+        "//*       !       #/////",
+        "//#               #/////",
+        "//#               #/////",
+        "//#       ||+|#####/////",
+        "//#J'327|||8't#/////////",
+        "//#5''''+q|S'|#/////////",
+        "//#J'1OF|z|8'9#/////////",
+        "//#|+|#########/////////",
+        "//#   #/////////////////",
+        "//#   #/////////////////",
+        "//#   #/////////////////",
+        "//#####/////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_a",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "//#    |    |       #///",
+        "//# !  |    |       o///",
+        "//#    |    |       #///",
+        "//#    |    |      ##///",
+        "//#||+|||+|||     ##////",
+        "//#               #/////",
+        "//*               #/////",
+        "//#               #/////",
+        "//#            !  #/////",
+        "//#       ||+|#####/////",
+        "//#J'327|||8't#/////////",
+        "//#5''''+q|S'|#/////////",
+        "//#J'1OF|z|8'9#/////////",
+        "//#|+|#########/////////",
+        "//#   #/////////////////",
+        "//# ! #/////////////////",
+        "//#   #/////////////////",
+        "//#####/////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 2, 18 ], "y": [ 0, 13 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   },
   {
@@ -861,7 +1150,7 @@
         "//////////////#I  ||+||#",
         "//////#########   |E  b#",
         "//////#U| Yxxxx   |T  R#",
-        "//////#6+        L|   R#",
+        "//////#6+    !   L|   R#",
         "//////#||14  h h  |d@@R#",
         "//#####F''3 hfff  |||||#",
         "//#vzz|O''2  fffh  |t|9#",
@@ -872,6 +1161,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 12, 13 ], "y": 14, "chance": 100 } ]
     }
@@ -898,7 +1188,7 @@
         "//////////////#      +d#",
         "//////////////#   ||+||#",
         "//////#########HH |y   #",
-        "//////#z|RRRR     |E @@#",
+        "//////#z|RRRR !   |E @@#",
         "//////#W+     h  y|  @@#",
         "//////#||21  fff  |D  T#",
         "//#####F''7 hfffh |||||#",
@@ -910,6 +1200,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 16, "y": 10, "chance": 100 } ]
     }
@@ -939,7 +1230,7 @@
         "//////#z|Y   bH  x|¤  D#",
         "//////#6+ A   H  x|@@  #",
         "//////#||31A  H  x|@@ d#",
-        "//#####F''2A      |||||#",
+        "//#####F''2A    ! |||||#",
         "//#PP |O''4  hfh   |t|9#",
         "//#Ih +''''  hfh   +'''#",
         "//#I y|J5J|L      y|858#",
@@ -948,6 +1239,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [
         { "item": "television", "x": [ 21, 22 ], "y": 8, "chance": 100 },
@@ -978,7 +1270,7 @@
         "//////////////#R  ||+||#",
         "//////#########y  |T  ≠#",
         "//////#U|y  xsx  s|h   #",
-        "//////#q+        s|  @ #",
+        "//////#q+     !  s|  @ #",
         "//////#||71 HHH   | ¤@d#",
         "//#####F''2 fff   |||||#",
         "//#zn4|O''3 hhh   Y|t|9#",
@@ -989,6 +1281,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": 14, "chance": 100 } ]
     }
@@ -1016,7 +1309,7 @@
         "//////////////#   ||+||#",
         "//////#########  y|   D#",
         "//////#Z|RRTRRx  H|d   #",
-        "//////#W+     x  H|@@ s#",
+        "//////#W+   ! x  H|@@ s#",
         "//////#||41  Ex  H|@@ s#",
         "//#####F''3A     Y|||||#",
         "//#zn6|O''2A  h    |t|9#",
@@ -1027,6 +1320,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [
         { "item": "television", "x": 22, "y": [ 15, 16 ], "chance": 100 },
@@ -1060,7 +1354,7 @@
         "//////#D+         | @@ #",
         "//////#||37 HHHH  |d@@¤#",
         "//#####F''1 H l   |||||#",
-        "//#z66|O''2       L|t|9#",
+        "//#z66|O''2  !    L|t|9#",
         "//#   +''''        +'''#",
         "//#4n4|J5J|yxxxx   |858#",
         "//###############*######",
@@ -1068,8 +1362,149 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 13, 14 ], "y": 20, "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_b",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "///////////////////###o#",
+        "//////////////////##   #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////#####|+||#",
+        "//////////////#        #",
+        "//////////////#        #",
+        "//////////////#   ||+||#",
+        "//////#########   |    #",
+        "//////#q|         |    #",
+        "//////#D+         |    #",
+        "//////#||      !  |    #",
+        "//#####F''1       |||||#",
+        "//#   |O''2        |t|9#",
+        "//#   +''''        +'''#",
+        "//#   |J5J|        |858#",
+        "//###############*######",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_b",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "///////////////////###o#",
+        "//////////////////##!  #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////#####|+||#",
+        "//////////////# !      #",
+        "//////////////#        #",
+        "//////////////#   ||+||#",
+        "//////#########   |    #",
+        "//////#q|         |    #",
+        "//////#D+         |    #",
+        "//////#||         |  ! #",
+        "//#####F''1    !  |||||#",
+        "//#   |O''2        |t|9#",
+        "//#!  +''''        +'''#",
+        "//#   |J5J|  !     |858#",
+        "//###############*######",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 3, 21 ], "y": [ 9, 23 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_b",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "///////////////////###o#",
+        "//////////////////##!  #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////////#    #",
+        "//////////////#####|+||#",
+        "//////////////# !      #",
+        "//////////////#        #",
+        "//////////////#   ||+||#",
+        "//////#########   |    #",
+        "//////#q|         |    #",
+        "//////#D+         |    #",
+        "//////#||         |  ! #",
+        "//#####F''1    !  |||||#",
+        "//#   |O''2        |t|9#",
+        "//#!  +''''        +'''#",
+        "//#   |J5J|  !     |858#",
+        "//###############*######",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 3, 21 ], "y": [ 9, 23 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 25, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 4 ], [ "spider_webs", 6 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 4 ], [ "spider_webs", 6 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   },
   {
@@ -1088,7 +1523,7 @@
         "#1'3A s|y   #///////////",
         "#F'4A  |   T#///////////",
         "#|'|   | |+|#///////////",
-        "#Y     + |dz#///////////",
+        "#Y  !  + |dz#///////////",
         "#  hh  |||||#///////////",
         "# hffh L|t|9#///////////",
         "# hffh  +'''#///////////",
@@ -1106,6 +1541,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 2, "y": 15, "chance": 100 }, { "item": "television", "x": 9, "y": 16, "chance": 100 } ]
     }
@@ -1167,7 +1603,7 @@
         "#2'3  L|¤   #///////////",
         "#F'4A  |   D#///////////",
         "#|'|   | |+|#///////////",
-        "#  T   + |dd#///////////",
+        "#  T ! + |dd#///////////",
         "#R     |||||#///////////",
         "#R hfh y|t|9#///////////",
         "#R hfh  +'''#///////////",
@@ -1185,6 +1621,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [
         { "item": "television", "x": 2, "y": 19, "chance": 100 },
@@ -1398,7 +1835,7 @@
         "#1'2E b|y   #///////////",
         "#F'7   |   T#///////////",
         "#|'|  L| |+|#///////////",
-        "#Y     + |Dd#///////////",
+        "#Y   ! + |Dd#///////////",
         "#x  Hs |||||#///////////",
         "#s   H  |t|9#///////////",
         "#s l H  +'''#///////////",
@@ -1416,6 +1853,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 1, "y": 11, "chance": 100 }, { "item": "television", "x": 11, "y": 19, "chance": 100 } ]
     }
@@ -1456,6 +1894,146 @@
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 3, 4 ], "y": 13, "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_a",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "######*######///////////",
+        "#J5J   |    #///////////",
+        "#O'4   |    #///////////",
+        "#1'2   |    #///////////",
+        "#F'3   |    #///////////",
+        "#|'|   | |+|#///////////",
+        "#      + |DD#///////////",
+        "#      |||||#///////////",
+        "#       |t|9#///////////",
+        "#   !   +'''#///////////",
+        "#       |8S8#///////////",
+        "#      |||||#///////////",
+        "#      + |PP#///////////",
+        "#      | |+|#///////////",
+        "#      |    #///////////",
+        "#      |    #///////////",
+        "#      |    #///////////",
+        "#  #///#    #///////////",
+        "##o#///##oo##///////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_a",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "######*######///////////",
+        "#J5J   |  ! #///////////",
+        "#O'4   |    #///////////",
+        "#1'2   |    #///////////",
+        "#F'3   |    #///////////",
+        "#|'|   | |+|#///////////",
+        "#!     + |DD#///////////",
+        "#      |||||#///////////",
+        "#       |t|9#///////////",
+        "#       +'''#///////////",
+        "#       |8S8#///////////",
+        "#      |||||#///////////",
+        "#      + |PP#///////////",
+        "#      | |+|#///////////",
+        "#      |  ! #///////////",
+        "#!     |    #///////////",
+        "#      |    #///////////",
+        "#  #///#    #///////////",
+        "##o#///##oo##///////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 12 ], "y": [ 2, 21 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_a",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "######*######///////////",
+        "#J5J   |  ! #///////////",
+        "#O'4   |    #///////////",
+        "#1'2   |    #///////////",
+        "#F'3   |    #///////////",
+        "#|'|   | |+|#///////////",
+        "#!     + |DD#///////////",
+        "#      |||||#///////////",
+        "#       |t|9#///////////",
+        "#       +'''#///////////",
+        "#       |8S8#///////////",
+        "#      |||||#///////////",
+        "#      + |PP#///////////",
+        "#      | |+|#///////////",
+        "#      |  ! #///////////",
+        "#!     |    #///////////",
+        "#      |    #///////////",
+        "#  #///#    #///////////",
+        "##o#///##oo##///////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 12 ], "y": [ 2, 21 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 25, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 3 ], [ "spider_webs", 6 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 3 ], [ "spider_webs", 6 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   },
   {
@@ -1644,7 +2222,7 @@
         "////////////#sE    + |bD",
         "////////////#H    x| |+|",
         "////////////#H l  x|   y",
-        "////////////#H    x|E   ",
+        "////////////#H !  x|E   ",
         "////////////#  E  y| @@ ",
         "////////////#PP#///#d@@¤",
         "////////////##o#///##oo#",
@@ -1653,6 +2231,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 18, "y": 16, "chance": 100 } ]
     }
@@ -1673,7 +2252,7 @@
         "////////////#2'4E W|    ",
         "////////////#F'3E Z| T y",
         "////////////#|'|   | |+|",
-        "////////////#Y     + |Dd",
+        "////////////#Y  !  + |Dd",
         "////////////#  hh  |||||",
         "////////////# hffh q|t|9",
         "////////////#  hh   +'''",
@@ -1691,6 +2270,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": [ 16, 17 ], "y": 13, "chance": 100 } ]
     }
@@ -1712,7 +2292,7 @@
         "////////////#F'4A L| b  ",
         "////////////#|'|   | |+|",
         "////////////#  Y   + |dD",
-        "////////////#      |||||",
+        "////////////#   !  |||||",
         "////////////# hfh  T|t|9",
         "////////////# hfh   +'''",
         "////////////# hfh   |8S8",
@@ -1729,6 +2309,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 13, "y": [ 16, 17 ], "chance": 100 } ]
     }
@@ -1848,6 +2429,95 @@
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "place_loot": [ { "item": "television", "x": 16, "y": 16, "chance": 100 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_b",
+    "weight": 100,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////#####*######",
+        "////////////#J5J   |    ",
+        "////////////#O'3   |    ",
+        "////////////#1'4   |    ",
+        "////////////#F'2   |    ",
+        "////////////#|'|   | |+|",
+        "////////////#      + |Uq",
+        "////////////#      |||||",
+        "////////////#       |t|9",
+        "////////////#  !    +'''",
+        "////////////#       |8S8",
+        "////////////#      |||||",
+        "////////////#      + |DD",
+        "////////////#      | |+|",
+        "////////////#      |    ",
+        "////////////#      |    ",
+        "////////////#      |    ",
+        "////////////#  #///#    ",
+        "////////////##o#///##oo#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_b",
+    "weight": 80,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////#####*######",
+        "////////////#J5J   |   !",
+        "////////////#O'3   |    ",
+        "////////////#1'4   |    ",
+        "////////////#F'2   |    ",
+        "////////////#|'|   | |+|",
+        "////////////#      + |Uq",
+        "////////////#!     |||||",
+        "////////////#       |t|9",
+        "////////////#       +'''",
+        "////////////#      !|8S8",
+        "////////////#      |||||",
+        "////////////#      + |DD",
+        "////////////#      | |+|",
+        "////////////#      |  ! ",
+        "////////////#      |    ",
+        "////////////#      |    ",
+        "////////////#  #///#    ",
+        "////////////##o#///##oo#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs_weak", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
     }
   }
 ]
