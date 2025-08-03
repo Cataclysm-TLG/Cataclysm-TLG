@@ -58,16 +58,16 @@ struct diag_value {
     bool is_array() const;
     bool is_empty() const;
 
-    // These functions can be used at parse time if the parameter needs
+    // these functions can be used at parse time if the parameter needs
     // to be of exactly this type with no conversion.
-    // These throw a math::syntax_error for type mismatches
+    // These throw so they should *NOT* be used at runtime.
     double dbl() const;
     std::string_view str() const;
     diag_array const &array() const;
     var_info var() const;
 
-    // Evaluate and possibly convert the parameter to this type.
-    // These throw a math::runtime_error for failed conversions
+    // evaluate and possibly convert the parameter to this type.
+    // These do not throw and they're meant to be used at runtime
     double dbl( const_dialogue const &d ) const;
     std::string str( const_dialogue const &d ) const;
     var_info var( const_dialogue const &/* d */ ) const;
