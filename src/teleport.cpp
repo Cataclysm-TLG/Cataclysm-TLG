@@ -189,7 +189,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                 for( const effect &grab : poor_soul->get_effects_with_flag( json_flag_GRAB ) ) {
                     poor_soul->remove_effect( grab.get_id() );
                 }
-                //apply a bunch of damage to it
+                // Apply a bunch of damage to it, similar to a tear in reality.
                 std::vector<bodypart_id> target_bdpts = poor_soul->get_all_body_parts(
                         get_body_part_flags::only_main );
                 for( const bodypart_id &bp_id : target_bdpts ) {
@@ -202,11 +202,11 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
         }
     }
     critter.move_to( abs_ms );
-    //there was a collision with a creature at some point, so handle that.
+    // There was a collision with a creature at some point, so handle that.
     if( collision ) {
-        //throw the thing that teleported in the opposite direction as the thing it teleported into.
+        // Throw the thing that teleported in the opposite direction as the thing it teleported into.
         g->fling_creature( &critter, units::from_degrees( collision_angle - 180 ), 40, false, true );
-        //do a bunch of damage to it too.
+        // Do a bunch of damage to it too.
         std::vector<bodypart_id> target_bdpts = critter.get_all_body_parts(
                 get_body_part_flags::only_main );
         for( const bodypart_id &bp_id : target_bdpts ) {
@@ -216,7 +216,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
         }
         critter.check_dead_state();
     }
-    //player and npc exclusive teleporting effects
+    // Player and npc exclusive teleporting effects
     if( p && add_teleglow ) {
         p->add_effect( effect_teleglow, 30_minutes );
     }
