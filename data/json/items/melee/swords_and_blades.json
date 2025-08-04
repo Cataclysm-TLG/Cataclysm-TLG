@@ -217,7 +217,7 @@
     "color": "light_gray",
     "techniques": [ "RAPID", "WBLOCK_1", "PRECISE" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -8 ] ],
-    "flags": [ "DURABLE_MELEE", "SHEATH_SWORD" ],
+    "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "FENCING_WEAPONRY" ],
     "category": "weapons",
     "melee_damage": { "bash": 6, "stab": 22 }
@@ -339,7 +339,7 @@
     "techniques": [ "WBLOCK_2" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
-    "weapon_category": [ "MEDIUM_SWORDS", "FENCING_WEAPONRY" ],
+    "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 5, "cut": 25 }
   },
   {
@@ -1144,7 +1144,7 @@
     "techniques": [ "WBLOCK_2" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
-    "weapon_category": [ "MEDIUM_SWORDS", "FENCING_WEAPONRY" ],
+    "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 6, "cut": 24 }
   },
   {
@@ -1184,7 +1184,7 @@
     "price_postapoc": "18 USD 75 cent",
     "material": [ { "type": "leather", "portion": 1.1 }, { "type": "steel", "portion": 112 } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "DURABLE_MELEE", "CONDUCTIVE", "SHEATH_SWORD" ],
+    "flags": [ "CONDUCTIVE", "SHEATH_SWORD" ],
     "techniques": [ "RAPID", "WBLOCK_2", "PRECISE" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
@@ -1707,7 +1707,7 @@
     "techniques": [ "WBLOCK_2", "BRUTAL" ],
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 6 ] ],
     "flags": [ "DURABLE_MELEE", "CONDUCTIVE", "SHEATH_SWORD" ],
-    "weapon_category": [ "MEDIUM_SWORDS", "FENCING_WEAPONRY" ],
+    "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 5, "cut": 30 }
   },
   {
