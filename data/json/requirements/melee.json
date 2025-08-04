@@ -157,8 +157,8 @@
   {
     "id": "real_thrusting_swords",
     "type": "requirement",
-    "//": "Any real, quality weapon designed to be used in a thrusting fashion.  Needs to be a sword, not a spear.  This includes fencing weaponry.",
-    "tools": [ [ [ "estoc", -1 ], [ "sword_cane", -1 ], [ "rapier", -1 ], [ "talwar", -1 ], [ "jian", -1 ], [ "broadsword", -1 ] ] ]
+    "//": "Any real, quality weapon designed to be used in a thrusting fashion.  Needs to be a sword, not a spear.  This includes but is not limited to fencing weaponry.",
+    "tools": [ [ [ "estoc", -1 ], [ "sword_cane", -1 ], [ "rapier", -1 ], [ "jian", -1 ], [ "broadsword", -1 ] ] ]
   },
   {
     "id": "basic_short_swords",

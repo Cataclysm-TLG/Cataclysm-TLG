@@ -111,7 +111,7 @@
   {
     "type": "weapon_category",
     "id": "FENCING_WEAPONRY",
-    "//": "One-handed straight swords built for thrusting or lightly curved agile sabers.  Cutting edge optional for the former.",
+    "//": "One-handed featherlight straight swords built specifically for the sport of fencing.",
     "name": "FENCING WEAPONRY",
     "proficiencies": [ "prof_fencing_weapons_familiar", "prof_fencing_weapons_pro", "prof_fencing_weapons_master" ]
   },
