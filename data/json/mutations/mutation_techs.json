@@ -1594,7 +1594,7 @@
     "melee_allowed": true,
     "messages": [ "You kick %s", "<npcname> kicks %s" ],
     "description": "A powerful kick with sharp talons",
-    "attack_vectors": [ "vector_foot_toes", "vector_foot_heel" ]
+    "attack_vectors": [ "vector_talon" ]
   },
   {
     "type": "technique",
