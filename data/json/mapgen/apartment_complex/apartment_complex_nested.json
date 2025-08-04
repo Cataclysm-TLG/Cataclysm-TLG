@@ -42,7 +42,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_a",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -73,14 +73,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_a",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -110,7 +110,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -124,6 +124,57 @@
           ]
         },
         "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_a",
+    "weight": 30,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "///###################//",
+        "///# !  |q|     1234'*//",
+        "///o    |b+  !  '''''#//",
+        "///#    |||     J5OF##//",
+        "///##|+||       #####///",
+        "/////           #///////",
+        "///// !         #///////",
+        "/////        !  #///////",
+        "///##|+|||+|    #///////",
+        "///#    |t'######///////",
+        "///o    |S'#////////////",
+        "///#    |89#////////////",
+        "///##oo#####////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 33, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] }
       }
     }
   },
@@ -716,7 +767,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_b",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -747,14 +798,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_b",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -784,7 +835,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 10, 23 ], "y": [ 9, 20 ], "repeat": [ 15, 20 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -798,6 +849,57 @@
           ]
         },
         "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_b",
+    "weight": 30,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "/////////////////////#*#",
+        "////////////////////##'F",
+        "////////////////#####7'O",
+        "////////////////#    ''5",
+        "////////////////#    ''J",
+        "////////////////#    123",
+        "////////////////#       ",
+        "///////////######   !   ",
+        "///////////#    |    |+|",
+        "///////////#    |    |ZW",
+        "///////////#    |   ||||",
+        "///////////#    |   |tS8",
+        "///////////#||+||   +''9",
+        "///////////#       |||||",
+        "///////////#       |!   ",
+        "///////////o  !    +    ",
+        "///////////o       |    ",
+        "///////////#   #///#    ",
+        "///////////##o##///###o#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 10, 23 ], "y": [ 9, 20 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 33, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] }
       }
     }
   },
@@ -1042,7 +1144,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_inner_a",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1073,14 +1175,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_inner_a",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1110,7 +1212,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 2, 18 ], "y": [ 0, 13 ], "repeat": [ 15, 20 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -1124,6 +1226,57 @@
           ]
         },
         "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_corner_inner_a",
+    "weight": 40,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "//#    |    |       #///",
+        "//# !  |    |       o///",
+        "//#    |    |       #///",
+        "//#    |    |      ##///",
+        "//#||+|||+|||     ##////",
+        "//#               #/////",
+        "//*               #/////",
+        "//#               #/////",
+        "//#            !  #/////",
+        "//#       ||+|#####/////",
+        "//#J'327|||8't#/////////",
+        "//#5''''+q|S'|#/////////",
+        "//#J'1OF|z|8'9#/////////",
+        "//#|+|#########/////////",
+        "//#   #/////////////////",
+        "//# ! #/////////////////",
+        "//#   #/////////////////",
+        "//#####/////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 2, 18 ], "y": [ 0, 13 ], "repeat": [ 15, 20 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 25, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] }
       }
     }
   },
@@ -1371,7 +1524,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_inner_b",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1402,14 +1555,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_inner_b",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1439,7 +1592,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 3, 21 ], "y": [ 9, 23 ], "repeat": [ 15, 20 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -1460,7 +1613,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_corner_inner_b",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1490,7 +1643,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 3, 21 ], "y": [ 9, 23 ], "repeat": [ 15, 20 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 25, "pack_size": [ 1, 2 ] } },
       "nested": {
@@ -1900,7 +2053,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_straight_a",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1931,14 +2084,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_straight_a",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -1968,7 +2121,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 0, 12 ], "y": [ 2, 21 ], "repeat": [ 10, 15 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 25, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -1989,7 +2142,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_straight_a",
-    "weight": 80,
+    "weight": 30,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -2019,7 +2172,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 0, 12 ], "y": [ 2, 21 ], "repeat": [ 10, 15 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 25, "pack_size": [ 1, 2 ] } },
       "nested": {
@@ -2435,7 +2588,7 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_straight_b",
-    "weight": 100,
+    "weight": 80,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -2466,14 +2619,14 @@
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
       "monster": { "!": { "group": "GROUP_DOMESTIC_ANIMALS", "chance": 5, "pack_size": [ 1, 3 ] } },
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ]
     }
   },
   {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "apt_complex_straight_b",
-    "weight": 80,
+    "weight": 40,
     "object": {
       "mapgensize": [ 24, 24 ],
       "rows": [
@@ -2503,7 +2656,7 @@
         "////////////////////////"
       ],
       "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
       "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
       "monster": { "!": { "group": "GROUP_SPIDER_BASEMENT", "chance": 33, "pack_size": [ 1, 3 ] } },
       "nested": {
@@ -2517,6 +2670,57 @@
           ]
         },
         "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] }
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "apt_complex_straight_b",
+    "weight": 30,
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "////////////////////////",
+        "////////////////////////",
+        "////////////#####*######",
+        "////////////#J5J   |   !",
+        "////////////#O'3   |    ",
+        "////////////#1'4   |    ",
+        "////////////#F'2   |    ",
+        "////////////#|'|   | |+|",
+        "////////////#      + |Uq",
+        "////////////#!     |||||",
+        "////////////#       |t|9",
+        "////////////#       +'''",
+        "////////////#      !|8S8",
+        "////////////#      |||||",
+        "////////////#      + |DD",
+        "////////////#      | |+|",
+        "////////////#      |  ! ",
+        "////////////#      |    ",
+        "////////////#      |    ",
+        "////////////#  #///#    ",
+        "////////////##o#///##oo#",
+        "////////////////////////",
+        "////////////////////////",
+        "////////////////////////"
+      ],
+      "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ],
+      "palettes": [ "standard_domestic_vacant_palette", "standard_domestic_lino_bathroom", "apt_complex" ],
+      "set": [ { "point": "bash", "x": [ 0, 10 ], "y": [ 0, 12 ], "repeat": [ 10, 15 ] } ],
+      "monster": { "!": { "group": "GROUP_SPIDER_WIDOW", "chance": 33, "pack_size": [ 1, 2 ] } },
+      "nested": {
+        " ": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs_weak", 1 ], [ "wasp_gibs", 1 ] ] },
+        "+": {
+          "chunks": [
+            [ "spider_webs_nostick", 1 ],
+            [ "spider_webs", 1 ],
+            [ "damaged_door_nested_no_junk", 3 ],
+            [ "destroyed_door_nested_no_junk", 3 ]
+          ]
+        },
+        "'": { "chunks": [ [ "spider_webs_nostick", 1 ], [ "spider_webs", 1 ], [ "wasp_gibs", 1 ] ] }
       }
     }
   }

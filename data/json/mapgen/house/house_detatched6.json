@@ -2,7 +2,7 @@
   {
     "id": "flags_pride_and_other",
     "type": "item_group",
-    "items": [ [ "pride_flag", 70 ], [ "american_flag", 20 ], [ "state_flag", 10 ] ]
+    "items": [ [ "pride_flag", 60 ], [ "american_flag", 30 ], [ "state_flag", 9 ], [ "protest_flag", 1 ] ]
   },
   {
     "type": "mapgen",
@@ -61,20 +61,20 @@
         { "item": "cannabis", "repeat": 1, "x": 18, "y": 15 }
       ],
       "place_items": [
-        { "chance": 75, "item": "misc_smoking", "x": 4, "y": 13 },
-        { "chance": 75, "item": "misc_smoking", "x": 2, "y": 10 },
-        { "chance": 65, "item": "tools_earthworking", "x": 19, "y": 16 },
-        { "chance": 65, "item": "tools_earthworking", "x": 17, "y": 12 },
-        { "chance": 35, "item": "tools_home", "x": 21, "y": 18 },
-        { "chance": 35, "item": "tools_home", "x": 21, "y": 16 },
-        { "chance": 50, "item": "stoner", "x": 4, "y": 11 },
-        { "chance": 50, "item": "stoner", "x": 5, "y": [ 10, 11 ] },
-        { "chance": 50, "item": "stoner", "x": 4, "y": 5 },
-        { "chance": 50, "item": "flags_pride_and_other", "x": 12, "y": 16 }
+        { "chance": 55, "item": "misc_smoking", "x": 4, "y": 13 },
+        { "chance": 55, "item": "misc_smoking", "x": 2, "y": 10 },
+        { "chance": 35, "item": "tools_earthworking", "x": 19, "y": 16 },
+        { "chance": 35, "item": "tools_earthworking", "x": 17, "y": 12 },
+        { "chance": 25, "item": "tools_home", "x": 21, "y": 18 },
+        { "chance": 25, "item": "tools_home", "x": 21, "y": 16 },
+        { "chance": 25, "item": "stoner", "x": 4, "y": 11 },
+        { "chance": 25, "item": "stoner", "x": 5, "y": [ 10, 11 ] },
+        { "chance": 25, "item": "stoner", "x": 4, "y": 5 },
+        { "chance": 35, "item": "flags_pride_and_other", "x": 12, "y": 16 }
       ],
       "sealed_item": {
-        "~": { "item": { "item": "seed_weed" }, "furniture": "f_planter_harvest" },
-        "&": { "item": { "item": "seed_weed" }, "furniture": "f_plant_harvest" }
+        "~": { "chance": 15, "item": { "item": "seed_weed" }, "furniture": "f_planter_seedling" },
+        "&": { "chance": 15, "item": { "item": "seed_weed" }, "furniture": "f_plant_seedling" }
       },
       "place_monster": [ { "group": "GROUP_DOGS", "x": [ 2, 13 ], "y": [ 10, 13 ], "chance": 50, "repeat": [ 1, 2 ] } ]
     }

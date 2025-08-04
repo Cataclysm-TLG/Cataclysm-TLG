@@ -171,7 +171,7 @@
       "vehicles": { "=": { "vehicle": "pickup_corpses", "chance": 10, "rotation": 270, "status": 1 } },
       "nested": { "=": { "chunks": [ [ "null", 70 ], [ "pile_bodybag_corpses", 30 ] ] } },
       "items": {
-        "b": { "item": "magazines", "chance": 50 },
+        "b": { "item": "magazines", "chance": 5 },
         "B": { "item": "hospital_bed", "chance": 80 },
         "f": { "item": "SUS_fridge_breakroom", "chance": 90 },
         "d": { "item": "office", "chance": 80 },

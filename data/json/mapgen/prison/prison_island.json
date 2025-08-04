@@ -517,25 +517,25 @@
         "D": "f_freezer"
       },
       "items": {
-        "9": { "item": "SUS_pantry", "chance": 95 },
-        "0": { "item": "teabag_box", "chance": 95, "repeat": [ 1, 20 ] },
-        "A": { "item": "groce_ingredient", "chance": 95, "repeat": [ 1, 20 ] },
-        "B": { "item": "groce_bread", "chance": 95, "repeat": [ 1, 20 ] },
-        "C": { "item": "groce_cereal", "chance": 95, "repeat": [ 1, 20 ] },
-        "D": { "item": "butcher_raw_meat", "chance": 95, "repeat": [ 1, 20 ] },
+        "9": { "item": "SUS_pantry", "chance": 75 },
+        "0": { "item": "teabag_box", "chance": 75, "repeat": [ 0, 20 ] },
+        "A": { "item": "groce_ingredient", "chance": 75, "repeat": [ 0, 20 ] },
+        "B": { "item": "groce_bread", "chance": 75, "repeat": [ 0, 20 ] },
+        "C": { "item": "groce_cereal", "chance": 75, "repeat": [ 0, 20 ] },
+        "D": { "item": "butcher_raw_meat", "chance": 75, "repeat": [ 0, 20 ] },
         "d": { "item": "magazines", "chance": 50 },
         "1": {
           "item": {
             "subtype": "distribution",
             "entries": [
-              { "item": "carrot", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "potato", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "onion", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "cabbage", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "corn", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "garlic", "prob": 95, "count": 10 },
-              { "item": "apple", "prob": 95, "count": [ 10, 20 ] },
-              { "item": "lemon", "prob": 95, "count": 10 }
+              { "item": "carrot", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "potato", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "onion", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "cabbage", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "corn", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "garlic", "prob": 75, "count": [ 0, 10 ] },
+              { "item": "apple", "prob": 75, "count": [ 0, 20 ] },
+              { "item": "lemon", "prob": 75, "count": [ 0, 10 ] }
             ]
           },
           "chance": 95

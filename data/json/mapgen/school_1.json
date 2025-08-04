@@ -532,18 +532,18 @@
     },
     "toilets": { "T": {  } },
     "items": {
-      "a": { "item": "fast_food", "chance": 95 },
+      "a": { "item": "fast_food", "chance": 35 },
       ".": { "item": "school", "chance": 1 },
       "d": { "item": "school", "chance": 50 },
       "D": { "item": "office", "chance": 40, "repeat": [ 1, 2 ] },
-      "e": [ { "item": "fridge", "chance": 65, "repeat": [ 1, 3 ] }, { "item": "fridgesnacks", "chance": 15 } ],
+      "e": [ { "item": "fridge", "chance": 35, "repeat": [ 0, 3 ] }, { "item": "fridgesnacks", "chance": 15 } ],
       "g": { "item": "cleaning", "chance": 80, "repeat": [ 1, 3 ] },
-      "k": { "item": "chem_school", "chance": 80, "repeat": [ 1, 4 ] },
+      "k": { "item": "chem_school", "chance": 80, "repeat": [ 0, 4 ] },
       "l": { "item": "school", "chance": 60 },
-      "o": { "item": "book_school", "chance": 100 },
+      "o": { "item": "book_school", "chance": 70, "repeat": [ 0, 4 ] },
       "r": [
-        { "item": "snacks", "chance": 10, "repeat": [ 1, 2 ] },
-        { "item": "cannedfood_commercial", "chance": 60, "repeat": [ 1, 3 ] }
+        { "item": "snacks", "chance": 10, "repeat": [ 0, 2 ] },
+        { "item": "cannedfood_commercial", "chance": 30, "repeat": [ 0, 3 ] }
       ],
       "p": { "item": "gym_school", "chance": 70, "repeat": [ 1, 5 ] },
       "R": { "item": "tools_plumbing", "chance": 55, "repeat": [ 1, 2 ] },
@@ -551,8 +551,8 @@
       "u": { "item": "child_items", "chance": 1 },
       "F": { "item": "file_room", "chance": 85, "repeat": [ 1, 4 ] },
       "U": [
-        { "item": "snacks", "chance": 10, "repeat": [ 1, 2 ] },
-        { "item": "cannedfood_commercial", "chance": 70, "repeat": [ 1, 3 ] },
+        { "item": "snacks", "chance": 10, "repeat": [ 0, 2 ] },
+        { "item": "cannedfood_commercial", "chance": 40, "repeat": [ 0, 3 ] },
         { "item": "dining", "chance": 5, "repeat": [ 1, 3 ] }
       ]
     },

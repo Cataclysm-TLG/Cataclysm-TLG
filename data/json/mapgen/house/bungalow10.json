@@ -52,7 +52,10 @@
       },
       "furniture": { "?": "f_locker", "$": "f_treadmill", "&": "f_chair" },
       "place_nested": [ { "chunks": [ "rolling_trash_can_1x1" ], "x": 7, "y": 1 } ],
-      "items": { ")": { "item": "hydro", "chance": 35 }, "?": { "item": "tools_earthworking", "chance": 30 } },
+      "items": {
+        ")": { "item": "tools_earthworking", "chance": 5 },
+        "?": { "item": "farming_seeds", "chance": 60, "repeat": [ 1, 3 ] }
+      },
       "place_loot": [ { "item": "television", "x": 6, "y": 16 } ]
     }
   },
