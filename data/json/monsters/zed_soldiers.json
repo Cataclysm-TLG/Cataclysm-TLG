@@ -106,7 +106,10 @@
     "bleed_rate": 0,
     "relative": { "hp": 20, "speed": 10, "melee_skill": 1, "dodge": 1, "vision_night": 15 },
     "delete": { "upgrades": { "half_life": 45, "into": "mon_zombie_soldier_blackops_2" } },
-    "extend": { "special_attacks": [ { "type": "leap", "cooldown": 10, "max_range": 3 } ], "flags": [ "KEENNOSE" ] }
+    "extend": {
+      "special_attacks": [ { "type": "leap", "cooldown": 10, "max_range": 3, "ignore_dest_danger": true } ],
+      "flags": [ "KEENNOSE" ]
+    }
   },
   {
     "id": "mon_zombie_soldier_acid_1",

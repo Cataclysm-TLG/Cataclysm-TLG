@@ -393,6 +393,7 @@
         "move_cost": 0,
         "max_range": 10,
         "min_consider_range": 2,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       }
     ],
@@ -452,6 +453,7 @@
         "move_cost": 0,
         "max_range": 10,
         "min_consider_range": 2,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       }
     ],
@@ -513,6 +515,7 @@
         "move_cost": 0,
         "max_range": 12,
         "min_consider_range": 2,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
       [ "SHRIEK_ALERT", 20 ],

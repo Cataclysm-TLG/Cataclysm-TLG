@@ -34,6 +34,8 @@
         "move_cost": 0,
         "max_range": 6,
         "min_consider_range": 2,
+        "ignore_dest_danger": true,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
       {
@@ -87,6 +89,8 @@
         "move_cost": 0,
         "max_range": 4,
         "min_consider_range": 2,
+        "ignore_dest_danger": true,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
       {
@@ -140,7 +144,7 @@
     "harvest": "exempt",
     "grab_strength": 15,
     "special_attacks": [
-      { "type": "leap", "cooldown": 10, "move_cost": 0, "max_range": 4, "min_consider_range": 2 },
+      { "type": "leap", "cooldown": 10, "move_cost": 0, "max_range": 4, "min_consider_range": 2, "ignore_dest_danger": true, "allow_no_target": true },
       { "id": "grab", "cooldown": 1 }
     ],
     "death_function": {
@@ -183,6 +187,8 @@
         "move_cost": 0,
         "max_range": 8,
         "min_consider_range": 2,
+        "ignore_dest_danger": true,
+        "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
       {
@@ -946,7 +952,7 @@
     "harvest": "zombie_humanoid",
     "special_attacks": [
       { "id": "scratch", "damage_max_instance": [ { "damage_type": "cut", "amount": 12 } ] },
-      { "type": "leap", "cooldown": 5, "max_range": 3 },
+      { "type": "leap", "cooldown": 5, "max_range": 4, "ignore_dest_danger": true, "allow_no_target": true },
       {
         "type": "bite",
         "cooldown": 10,
@@ -1292,7 +1298,15 @@
     "harvest": "zombie_humanoid",
     "path_settings": { "max_dist": 45 },
     "special_attacks": [
-      { "type": "leap", "cooldown": 10, "max_range": 5, "min_consider_range": 2, "max_consider_range": 4 },
+      {
+        "type": "leap",
+        "cooldown": 10,
+        "max_range": 5,
+        "min_consider_range": 2,
+        "max_consider_range": 4,
+        "ignore_dest_danger": true,
+        "allow_no_target": true
+      },
       {
         "type": "bite",
         "cooldown": 10,

@@ -147,14 +147,13 @@ bool leap_actor::call( monster &z ) const
                    target.to_string_writable() );
 
     std::multimap<int, tripoint_bub_ms> candidates;
-    for( const tripoint_bub_ms &candidate : here.points_in_radius( z.pos_bub(), max_range ) ) {
+    for( const tripoint_bub_ms &candidate : here.points_in_radius( z.pos_bub(), max_range, max_range / 2 ) ) {
         if( candidate == z.pos_bub() ) {
             add_msg_debug( debugmode::DF_MATTACK, "Monster at coordinates %s",
                            candidate.to_string_writable() );
             continue;
         }
-        float leap_dist = trigdist ? trig_dist( z.pos_bub(), candidate ) :
-                          square_dist( z.pos_bub(), candidate );
+        float leap_dist = trig_dist( z.pos_bub(), candidate );
         add_msg_debug( debugmode::DF_MATTACK,
                        "Candidate coordinates %s, distance %.1f, min range %.1f, max range %.1f",
                        candidate.to_string_writable(), leap_dist, min_range, max_range );
@@ -163,7 +162,7 @@ bool leap_actor::call( monster &z ) const
                            "Candidate outside of allowed range, discarded" );
             continue;
         }
-        int candidate_dist = rl_dist( candidate, target );
+        int candidate_dist = trig_dist( candidate, target );
         if( candidate_dist >= best_float && !( prefer_leap || random_leap ) ) {
             add_msg_debug( debugmode::DF_MATTACK,
                            "Candidate farther from target than optimal path, discarded" );
@@ -194,6 +193,9 @@ bool leap_actor::call( monster &z ) const
             continue;
         }
         if( !g->is_empty( dest ) ) {
+            continue;
+        }
+        if( !z.flies() && here.ter( dest )->has_flag( "EMPTY_SPACE" ) ) {
             continue;
         }
         bool blocked_path = false;
