@@ -339,7 +339,7 @@
     "subtype": "distribution",
     "items": [
       [ "null", 7 ],
-      { "group": "soa_decor", "prob": 3 },
+      { "group": "soa_decor", "prob": 6 },
       { "group": "soa_plate", "prob": 2 },
       { "group": "soa_mail", "prob": 1 },
       { "group": "soa_samurai", "prob": 1 }
@@ -352,9 +352,9 @@
     "items": [
       { "group": "soa_weapons_decor" },
       {
-        "distribution": [ { "item": "junk_platemail_suit", "prob": 100 }, { "item": "chainmail_junk_hauberk", "prob": 80 } ]
+        "distribution": [ { "item": "junk_platemail_suit", "prob": 100 }, { "item": "chainmail_junk_hauberk", "prob": 60 } ]
       },
-      { "item": "platemail_visored_helm", "prob": 100 }
+      { "item": "platemail_visored_helm", "prob": 80 }
     ]
   },
   {
@@ -362,8 +362,8 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      { "group": "soa_fake_weapon_decor", "prob": 3 },
-      { "group": "soa_poor_weapon_decor", "prob": 3 },
+      { "group": "soa_fake_weapon_decor", "prob": 9 },
+      { "group": "soa_poor_weapon_decor", "prob": 6 },
       { "group": "soa_real_weapon_decor", "prob": 3 }
     ]
   },
@@ -378,8 +378,8 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      { "group": "soa_fake_weapon_plate", "prob": 3 },
-      { "group": "soa_poor_weapon_plate", "prob": 3 },
+      { "group": "soa_fake_weapon_plate", "prob": 9 },
+      { "group": "soa_poor_weapon_plate", "prob": 6 },
       { "group": "soa_real_weapon_plate", "prob": 3 }
     ]
   },
@@ -394,8 +394,8 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      { "group": "soa_fake_weapon_mail", "prob": 3 },
-      { "group": "soa_poor_weapon_mail", "prob": 3 },
+      { "group": "soa_fake_weapon_mail", "prob": 9 },
+      { "group": "soa_poor_weapon_mail", "prob": 6 },
       { "group": "soa_real_weapon_mail", "prob": 3 }
     ]
   },
@@ -409,7 +409,7 @@
     "id": "soa_weapons_samurai",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ { "group": "soa_fake_weapon_samurai", "prob": 3 }, { "group": "soa_poor_weapon_samurai", "prob": 3 } ]
+    "items": [ { "group": "soa_fake_weapon_samurai", "prob": 6 }, { "group": "soa_poor_weapon_samurai", "prob": 3 } ]
   },
   {
     "id": "broadsword_fake+scabbard",
