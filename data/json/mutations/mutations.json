@@ -2249,7 +2249,7 @@
     "enchantments": [ "THERMAL_VISION_GOOD_PASSIVE" ],
     "types": [ "VISION" ],
     "prereqs": [ "LIZ_EYE" ],
-    "category": [ "LIZARD", "RAPTOR" ]
+    "category": [ "LIZARD" ]
   },
   {
     "type": "mutation",
@@ -4229,7 +4229,6 @@
     "points": 0,
     "visibility": 4,
     "ugliness": 2,
-    "mixed_effect": true,
     "description": "You have grown wickedly sharp talons on your feet.  Fortunately, they don't get in the way of your movement.  Unfortunately, they do prevent wearing footgear.",
     "types": [ "FEET" ],
     "category": [ "RAPTOR" ],
@@ -4240,8 +4239,27 @@
   },
   {
     "type": "mutation",
+    "id": "RAPTOR_LEAP",
+    "name": { "str": "Raptor Leap" },
+    "points": 0,
+    "visibility": 4,
+    "ugliness": 2,
+    "description": "Your powerful legs allow you to perform a long distance leap attack with your talons out in front, a great way to strike at prey or get away from something larger.",
+    "types": [ "LEGS" ],
+    "category": [ "RAPTOR" ],
+    "active": true,
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_RAPTOR_LEAP" ],
+    "prereqs": [ "TAIL_RAPTOR", "ARM_FEATHERS" ],
+    "prereqs2": [ "RAP_TALONS" ],
+    "threshreq": [ "THRESH_RAPTOR" ]
+  },
+  {
+    "type": "mutation",
     "id": "BIRD_LEGS",
-    "name": { "str": "Avian Legs" },
+    "name": { "str": "Avian Leap" },
     "points": 0,
     "visibility": 4,
     "ugliness": 2,
