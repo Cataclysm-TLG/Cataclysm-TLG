@@ -192,10 +192,7 @@
         "w": "t_null"
       },
       "furniture": { "&": "f_rack", "?": [ "f_indoor_plant", "f_indoor_plant_y" ] },
-      "items": {
-        "0": { "item": "hydro", "chance": 50 },
-        "&": [ { "item": "farming_seeds", "chance": 35 }, { "item": "farming_tools", "chance": 50 } ]
-      },
+      "items": { "&": [ { "item": "farming_seeds", "chance": 75, "repeat": [ 1, 5 ] }, { "item": "farming_tools", "chance": 50 } ] },
       "place_loot": [
         { "item": "television", "x": 19, "y": 10 },
         { "item": "straw_hat", "x": [ 4, 10 ], "y": 5 },

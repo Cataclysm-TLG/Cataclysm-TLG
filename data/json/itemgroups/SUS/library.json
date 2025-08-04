@@ -6,12 +6,12 @@
     "//2": "This group is for a set of tailoring manuals and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "mag_tailor", "count": [ 1, 10 ], "prob": 40 },
-      { "item": "manual_tailor", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "textbook_tailor", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "tailor_portfolio", "prob": 20 },
-      { "item": "tailor_japanese", "prob": 5 },
-      { "item": "scots_tailor", "prob": 5 }
+      { "item": "mag_tailor", "count": [ 0, 4 ], "prob": 15 },
+      { "item": "manual_tailor", "count": [ 0, 4 ], "prob": 15 },
+      { "item": "textbook_tailor", "count": [ 0, 4 ], "prob": 15 },
+      { "item": "tailor_portfolio", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "tailor_japanese", "count": [ 0, 1 ], "prob": 5 },
+      { "item": "scots_tailor", "count": [ 0, 1 ], "prob": 5 }
     ]
   },
   {
@@ -24,11 +24,11 @@
       { "item": "mag_tailor", "count": [ 0, 2 ], "prob": 20 },
       { "item": "manual_tailor", "count": [ 0, 2 ], "prob": 15 },
       { "item": "textbook_tailor", "count": [ 0, 2 ], "prob": 15 },
-      { "item": "tailor_portfolio", "prob": 4 },
-      { "item": "tailor_japanese", "prob": 2 },
-      { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
-      { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
-      { "item": "scots_tailor", "prob": 2 }
+      { "item": "tailor_portfolio", "count": [ 0, 1 ], "prob": 4 },
+      { "item": "tailor_japanese", "count": [ 0, 1 ], "prob": 2 },
+      { "item": "book_ruined", "count": [ 0, 6 ], "prob": 100 },
+      { "item": "book_pieces", "count": [ 0, 6 ], "prob": 100 },
+      { "item": "scots_tailor", "count": [ 0, 1 ], "prob": 2 }
     ]
   },
   {
@@ -38,13 +38,13 @@
     "//2": "This group is for a set of mechanical engineering textbooks and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "mag_mechanics", "count": [ 1, 10 ], "prob": 40 },
-      { "item": "manual_mechanics", "count": [ 1, 4 ], "prob": 35 },
-      { "item": "textbook_mechanics", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "book_icef", "count": [ 1, 3 ], "prob": 30 },
-      { "item": "welding_book", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "textbook_carpentry", "count": [ 1, 2 ], "prob": 25 },
-      { "item": "concrete_book", "count": [ 1, 2 ], "prob": 20 }
+      { "item": "mag_mechanics", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "manual_mechanics", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "textbook_mechanics", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "book_icef", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "welding_book", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "textbook_carpentry", "count": [ 0, 2 ], "prob": 12 },
+      { "item": "concrete_book", "count": [ 0, 2 ], "prob": 10 }
     ]
   },
   {
@@ -60,8 +60,8 @@
       { "item": "book_icef", "count": [ 0, 1 ], "prob": 10 },
       { "item": "welding_book", "count": [ 0, 3 ], "prob": 15 },
       { "item": "textbook_carpentry", "count": [ 0, 2 ], "prob": 20 },
-      { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
-      { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
+      { "item": "book_ruined", "count": [ 0, 8 ], "prob": 100 },
+      { "item": "book_pieces", "count": [ 0, 16 ], "prob": 100 },
       { "item": "concrete_book", "count": [ 0, 2 ], "prob": 5 }
     ]
   },
@@ -72,14 +72,14 @@
     "//2": "This group is for a set of crafts manuals and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "mag_fabrication", "count": [ 1, 10 ], "prob": 40 },
-      { "item": "manual_fabrication", "count": [ 1, 4 ], "prob": 35 },
-      { "item": "textbook_fabrication", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "bronze_mag", "count": [ 1, 2 ], "prob": 25 },
-      { "item": "mag_carpentry", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "glassblowing_book", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "theater_props", "count": [ 1, 2 ], "prob": 20 },
-      { "item": "jewelry_book", "count": [ 1, 3 ], "prob": 40 }
+      { "item": "mag_fabrication", "count": [ 0, 4 ], "prob": 20 },
+      { "item": "manual_fabrication", "count": [ 0, 2 ], "prob": 17 },
+      { "item": "textbook_fabrication", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "bronze_mag", "count": [ 0, 2 ], "prob": 17 },
+      { "item": "mag_carpentry", "count": [ 0, 3 ], "prob": 20 },
+      { "item": "glassblowing_book", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "theater_props", "count": [ 0, 2 ], "prob": 10 },
+      { "item": "jewelry_book", "count": [ 0, 3 ], "prob": 20 }
     ]
   },
   {
@@ -108,19 +108,19 @@
     "//2": "This group is for a set of manuals and references for historical manufacturing techniques.",
     "subtype": "collection",
     "entries": [
-      { "item": "jewelry_book", "count": [ 1, 2 ], "prob": 35 },
-      { "item": "textbook_armeast", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "textbook_armwest", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "textbook_armschina", "count": [ 1, 2 ], "prob": 25 },
-      { "item": "textbook_weapeast", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "textbook_weapwest", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "textbook_weparabic", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "textbook_mesoam", "count": [ 1, 2 ], "prob": 25 },
-      { "item": "bronze_book", "count": [ 1, 3 ], "prob": 25 },
-      { "item": "bronze_mag", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "recipe_arrows", "count": [ 1, 3 ], "prob": 30 },
-      { "item": "recipe_bows", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "ballista_book", "count": [ 1, 2 ], "prob": 20 }
+      { "item": "jewelry_book", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "textbook_armeast", "count": [ 0, 2 ], "prob": 10 },
+      { "item": "textbook_armwest", "count": [ 0, 3 ], "prob": 20 },
+      { "item": "textbook_armschina", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "textbook_weapeast", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "textbook_weapwest", "count": [ 0, 3 ], "prob": 20 },
+      { "item": "textbook_weparabic", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "textbook_mesoam", "count": [ 0, 2 ], "prob": 12 },
+      { "item": "bronze_book", "count": [ 0, 2 ], "prob": 12 },
+      { "item": "bronze_mag", "count": [ 0, 2 ], "prob": 8 },
+      { "item": "recipe_arrows", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "recipe_bows", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "ballista_book", "count": [ 0, 2 ], "prob": 10 }
     ]
   },
   {
@@ -130,20 +130,20 @@
     "//2": "This group is for a set of manuals and references for historical manufacturing techniques.",
     "subtype": "collection",
     "entries": [
-      { "item": "jewelry_book", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "textbook_armeast", "count": [ 0, 1 ], "prob": 10 },
-      { "item": "textbook_armwest", "count": [ 0, 1 ], "prob": 30 },
-      { "item": "textbook_armschina", "count": [ 0, 1 ], "prob": 25 },
-      { "item": "textbook_weapeast", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "textbook_weapwest", "count": [ 0, 2 ], "prob": 30 },
-      { "item": "textbook_weparabic", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "textbook_mesoam", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "bronze_book", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "bronze_mag", "count": [ 0, 1 ], "prob": 10 },
-      { "item": "recipe_arrows", "count": [ 0, 1 ], "prob": 30 },
+      { "item": "jewelry_book", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "textbook_armeast", "count": [ 0, 1 ], "prob": 8 },
+      { "item": "textbook_armwest", "count": [ 0, 1 ], "prob": 14 },
+      { "item": "textbook_armschina", "count": [ 0, 1 ], "prob": 8 },
+      { "item": "textbook_weapeast", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "textbook_weapwest", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "textbook_weparabic", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "textbook_mesoam", "count": [ 0, 1 ], "prob": 8 },
+      { "item": "bronze_book", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "bronze_mag", "count": [ 0, 1 ], "prob": 5 },
+      { "item": "recipe_arrows", "count": [ 0, 1 ], "prob": 15 },
       { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
       { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
-      { "item": "recipe_bows", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "recipe_bows", "count": [ 0, 2 ], "prob": 10 },
       { "item": "ballista_book", "count": [ 0, 1 ], "prob": 15 }
     ]
   },
@@ -154,17 +154,17 @@
     "//2": "This group is for a set of electronics textbooks and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "mag_electronics", "count": [ 1, 10 ], "prob": 40 },
-      { "item": "manual_electronics", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "textbook_electronics", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "advanced_electronics", "count": [ 1, 3 ], "prob": 30 },
-      { "item": "ic_reference_electronics", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "radio_book", "count": [ 1, 3 ], "prob": 35 },
+      { "item": "mag_electronics", "count": [ 0, 8 ], "prob": 20 },
+      { "item": "manual_electronics", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "textbook_electronics", "count": [ 0, 3 ], "prob": 20 },
+      { "item": "advanced_electronics", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "ic_reference_electronics", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "radio_book", "count": [ 0, 3 ], "prob": 17 },
       {
         "collection": [
-          { "item": "textbook_robots", "count": [ 1, 2 ], "prob": 35 },
-          { "item": "manual_computer", "count": [ 1, 3 ], "prob": 30 },
-          { "item": "computer_science", "count": [ 1, 3 ], "prob": 35 }
+          { "item": "textbook_robots", "count": [ 0, 2 ], "prob": 17 },
+          { "item": "manual_computer", "count": [ 0, 3 ], "prob": 15 },
+          { "item": "computer_science", "count": [ 0, 3 ], "prob": 17 }
         ],
         "prob": 30
       },
@@ -204,11 +204,11 @@
     "//2": "This group is for a set of computer science and programming textbooks and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "manual_computer", "count": [ 1, 4 ], "prob": 35 },
-      { "item": "hackerman_computer", "count": [ 1, 4 ], "prob": 25 },
-      { "item": "webbasics_computer", "count": [ 1, 4 ], "prob": 35 },
-      { "item": "textbook_computer", "count": [ 1, 4 ], "prob": 40 },
-      { "item": "computer_science", "count": [ 1, 4 ], "prob": 40 },
+      { "item": "manual_computer", "count": [ 0, 3 ], "prob": 18 },
+      { "item": "hackerman_computer", "count": [ 0, 2 ], "prob": 13 },
+      { "item": "webbasics_computer", "count": [ 0, 2 ], "prob": 18 },
+      { "item": "textbook_computer", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "computer_science", "count": [ 0, 2 ], "prob": 20 },
       { "item": "SICP", "prob": 35 }
     ]
   },
@@ -236,12 +236,12 @@
     "//2": "This group is for a set of chemistry textbooks and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "textbook_biodiesel", "count": [ 1, 2 ], "prob": 35 },
-      { "item": "textbook_gaswarfare", "count": [ 1, 2 ], "prob": 20 },
-      { "item": "textbook_chemistry", "count": [ 1, 4 ], "prob": 45 },
-      { "item": "textbook_extraction", "count": [ 1, 2 ], "prob": 30 },
-      { "item": "adv_chemistry", "count": [ 1, 4 ], "prob": 35 },
-      { "item": "basic_chemistry", "count": [ 1, 3 ], "prob": 35 }
+      { "item": "textbook_biodiesel", "count": [ 0, 2 ], "prob": 35 },
+      { "item": "textbook_gaswarfare", "count": [ 0, 2 ], "prob": 20 },
+      { "item": "textbook_chemistry", "count": [ 0, 3 ], "prob": 35 },
+      { "item": "textbook_extraction", "count": [ 0, 2 ], "prob": 30 },
+      { "item": "adv_chemistry", "count": [ 0, 3 ], "prob": 25 },
+      { "item": "basic_chemistry", "count": [ 0, 3 ], "prob": 25 }
     ]
   },
   {
@@ -268,17 +268,17 @@
     "//2": "This group is for a set of cooking manuals and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "mag_cooking", "count": [ 1, 10 ], "prob": 20 },
-      { "item": "cookbook", "count": [ 1, 4 ], "prob": 20 },
-      { "item": "cookbook_daintydishes", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "cookbook_foodfashions", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "cookbook_eatyrway", "prob": 16 },
-      { "item": "cookbook_liverforkids", "prob": 15 },
-      { "item": "cookbook_sushi", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "cookbook_italian", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "cookbook_mexican", "count": [ 1, 2 ], "prob": 15 },
-      { "item": "family_cookbook", "prob": 5 },
-      { "item": "scots_cookbook", "prob": 3 }
+      { "item": "mag_cooking", "count": [ 0, 10 ], "prob": 20 },
+      { "item": "cookbook", "count": [ 0, 4 ], "prob": 20 },
+      { "item": "cookbook_daintydishes", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "cookbook_foodfashions", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "cookbook_eatyrway", "count": [ 0, 1 ], "prob": 16 },
+      { "item": "cookbook_liverforkids", "count": [ 0, 1 ], "prob": 15 },
+      { "item": "cookbook_sushi", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "cookbook_italian", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "cookbook_mexican", "count": [ 0, 2 ], "prob": 15 },
+      { "item": "family_cookbook", "count": [ 0, 1 ], "prob": 5 },
+      { "item": "scots_cookbook", "count": [ 0, 1 ], "prob": 3 }
     ]
   },
   {
@@ -292,15 +292,15 @@
       { "item": "cookbook", "count": [ 0, 2 ], "prob": 8 },
       { "item": "cookbook_daintydishes", "count": [ 0, 1 ], "prob": 6 },
       { "item": "cookbook_foodfashions", "count": [ 0, 1 ], "prob": 6 },
-      { "item": "cookbook_eatyrway", "prob": 4 },
-      { "item": "cookbook_liverforkids", "prob": 8 },
+      { "item": "cookbook_eatyrway", "count": [ 0, 1 ], "prob": 4 },
+      { "item": "cookbook_liverforkids", "count": [ 0, 1 ], "prob": 8 },
       { "item": "cookbook_sushi", "count": [ 0, 1 ], "prob": 8 },
       { "item": "cookbook_italian", "count": [ 0, 1 ], "prob": 8 },
       { "item": "cookbook_mexican", "count": [ 0, 1 ], "prob": 8 },
-      { "item": "family_cookbook", "prob": 3 },
+      { "item": "family_cookbook", "count": [ 0, 1 ], "prob": 3 },
       { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
       { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
-      { "item": "scots_cookbook", "prob": 1 }
+      { "item": "scots_cookbook", "count": [ 0, 1 ], "prob": 1 }
     ]
   },
   {
@@ -310,12 +310,12 @@
     "//2": "This group is for a set of medical manuals and references.",
     "subtype": "collection",
     "entries": [
-      { "item": "manual_first_aid", "prob": 30 },
-      { "item": "manual_first_aid", "prob": 20 },
-      { "item": "textbook_firstaid", "prob": 35 },
-      { "item": "emergency_book", "prob": 35 },
-      { "item": "textbook_firstaid", "prob": 15 },
-      { "item": "emergency_book", "prob": 15 }
+      { "item": "manual_first_aid", "count": [ 0, 1 ], "prob": 15 },
+      { "item": "manual_first_aid", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "textbook_firstaid", "count": [ 0, 1 ], "prob": 18 },
+      { "item": "emergency_book", "count": [ 0, 1 ], "prob": 18 },
+      { "item": "textbook_firstaid", "count": [ 0, 1 ], "prob": 9 },
+      { "item": "emergency_book", "count": [ 0, 1 ], "prob": 9 }
     ]
   },
   {
@@ -339,14 +339,14 @@
     "//2": "This group is for a set of business theory textbooks.",
     "subtype": "collection",
     "entries": [
-      { "item": "manual_business", "prob": 20 },
-      { "item": "textbook_business", "prob": 20 },
-      { "item": "manual_speech", "prob": 20 },
-      { "item": "textbook_speech", "prob": 20 },
-      { "item": "manual_business", "prob": 20 },
-      { "item": "textbook_business", "prob": 20 },
-      { "item": "manual_speech", "prob": 20 },
-      { "item": "textbook_speech", "prob": 20 }
+      { "item": "manual_business", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "textbook_business", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "manual_speech", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "textbook_speech", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "manual_business", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "textbook_business", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "manual_speech", "count": [ 0, 1 ], "prob": 20 },
+      { "item": "textbook_speech", "count": [ 0, 1 ], "prob": 20 }
     ]
   },
   {
@@ -359,8 +359,8 @@
       { "item": "manual_business", "count": [ 0, 1 ], "prob": 10 },
       { "item": "textbook_business", "count": [ 0, 1 ], "prob": 10 },
       { "item": "manual_speech", "count": [ 0, 1 ], "prob": 20 },
-      { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
-      { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
+      { "item": "book_ruined", "count": [ 0, 8 ], "prob": 100 },
+      { "item": "book_pieces", "count": [ 0, 12 ], "prob": 100 },
       { "item": "textbook_speech", "count": [ 0, 1 ], "prob": 20 }
     ]
   },
@@ -393,8 +393,8 @@
       { "item": "atomic_survival", "count": [ 0, 2 ], "prob": 5 },
       { "item": "textbook_survival", "count": [ 0, 2 ], "prob": 15 },
       { "item": "survival_book", "count": [ 0, 1 ], "prob": 10 },
-      { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
-      { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 },
+      { "item": "book_ruined", "count": [ 0, 8 ], "prob": 100 },
+      { "item": "book_pieces", "count": [ 0, 12 ], "prob": 100 },
       { "item": "manual_swimming", "count": [ 0, 1 ], "prob": 5 }
     ]
   },
@@ -422,20 +422,20 @@
     "//2": "This group is for a set of novels.",
     "subtype": "collection",
     "entries": [
-      { "group": "SUS_book_fict", "count": [ 1, 3 ], "prob": 100 },
-      { "item": "novel_war", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_adventure", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_experimental", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_road", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_buddy", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_drama", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_mystery", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_fantasy", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_erotic", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_thriller", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_crime", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_horror", "count": [ 1, 3 ], "prob": 40 },
-      { "item": "novel_tragedy", "count": [ 1, 3 ], "prob": 40 }
+      { "group": "SUS_book_fict", "count": [ 0, 3 ], "prob": 25 },
+      { "item": "novel_war", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_adventure", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_experimental", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_road", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_buddy", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_drama", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_mystery", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_fantasy", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_erotic", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_thriller", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_crime", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_horror", "count": [ 0, 3 ], "prob": 15 },
+      { "item": "novel_tragedy", "count": [ 0, 3 ], "prob": 15 }
     ]
   },
   {
@@ -445,9 +445,9 @@
     "//2": "This group is for a set of novels.",
     "subtype": "collection",
     "entries": [
-      { "group": "SUS_fiction_bookcase", "count": [ 1, 10 ], "prob": 400 },
-      { "item": "book_ruined", "count": [ 0, 12 ], "prob": 100 },
-      { "item": "book_pieces", "count": [ 0, 26 ], "prob": 100 }
+      { "group": "SUS_fiction_bookcase", "count": [ 0, 6 ], "prob": 400 },
+      { "item": "book_ruined", "count": [ 0, 8 ], "prob": 100 },
+      { "item": "book_pieces", "count": [ 0, 12 ], "prob": 100 }
     ]
   },
   {
@@ -781,27 +781,27 @@
     "//2": "Returns a single special interest magazine.",
     "subtype": "distribution",
     "entries": [
-      { "item": "fun_survival", "prob": 10 },
-      { "item": "mag_survival", "prob": 10 },
-      { "item": "mag_dude", "prob": 10 },
-      { "item": "mag_traps", "prob": 10 },
-      { "item": "mag_rifle", "prob": 10 },
-      { "item": "mag_stabbing", "prob": 2 },
-      { "item": "mag_swimming", "prob": 10 },
-      { "item": "mag_beauty", "prob": 10 },
-      { "item": "mag_tailor", "prob": 10 },
-      { "item": "mag_computer", "prob": 10 },
-      { "item": "mag_electronics", "prob": 10 },
-      { "item": "mag_fabrication", "prob": 10 },
-      { "item": "mag_mechanics", "prob": 10 },
-      { "item": "mag_tailor", "prob": 6 },
-      { "item": "news_regional", "prob": 10 },
-      { "item": "mag_cooking", "prob": 10 },
-      { "item": "mag_cutting", "prob": 6 },
-      { "item": "mag_cars", "prob": 10 },
-      { "item": "mag_guns", "prob": 10 },
-      { "item": "mag_glam", "prob": 10 },
-      { "item": "mag_gaming", "prob": 10 }
+      { "item": "fun_survival", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_survival", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_dude", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_traps", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_rifle", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_stabbing", "count": [ 0, 1 ], "prob": 2 },
+      { "item": "mag_swimming", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_beauty", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_tailor", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_computer", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_electronics", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_fabrication", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_mechanics", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_tailor", "count": [ 0, 1 ], "prob": 6 },
+      { "item": "news_regional", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_cooking", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_cutting", "count": [ 0, 1 ], "prob": 6 },
+      { "item": "mag_cars", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_guns", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_glam", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "mag_gaming", "count": [ 0, 1 ], "prob": 10 }
     ]
   },
   {
@@ -825,15 +825,15 @@
     "//2": "Returns a book about homemaking.",
     "subtype": "distribution",
     "entries": [
-      { "item": "book_nonf_hard_homemk_anythingcan", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_grtrms", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_handshome", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_loverms", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_nyparti", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_outkitchn", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_plantshome", "prob": 10 },
-      { "item": "book_nonf_hard_homemk_wmencolor", "prob": 10 },
-      { "item": "book_nonf_hard_psych_thergar", "prob": 3 }
+      { "item": "book_nonf_hard_homemk_anythingcan", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_grtrms", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_handshome", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_loverms", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_nyparti", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_outkitchn", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_plantshome", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_homemk_wmencolor", "count": [ 0, 1 ], "prob": 10 },
+      { "item": "book_nonf_hard_psych_thergar", "count": [ 0, 1 ], "prob": 3 }
     ]
   },
   {
