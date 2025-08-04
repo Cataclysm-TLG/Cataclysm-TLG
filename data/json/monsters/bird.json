@@ -480,7 +480,7 @@
     "special_attacks": [
       [ "SHRIEK", 100 ],
       [ "LUNGE", 8 ],
-      { "type": "leap", "cooldown": 10, "max_range": 4, "ignore_dest_danger": true, "allow_no_target": true  },
+      { "type": "leap", "cooldown": 10, "max_range": 4, "ignore_dest_danger": true, "allow_no_target": true },
       [ "EAT_CARRION", 40 ],
       [ "EAT_FOOD", 120 ]
     ],
