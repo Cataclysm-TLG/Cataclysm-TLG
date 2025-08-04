@@ -349,7 +349,7 @@
     "conductive": true,
     "chip_resist": 11,
     "dmg_adj": [ "marked", "dented", "smashed", "shattered" ],
-    "repaired_with": "scrap",
+    "repaired_with": "steel_chunk",
     "bash_dmg_verb": "dented",
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
