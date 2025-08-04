@@ -228,8 +228,8 @@
     "items": {
       "a": { "item": "fireplace_fill", "chance": 30, "repeat": [ 2, 5 ] },
       "d": [
-        { "item": "SUS_dresser_mens", "chance": 30, "repeat": [ 1, 2 ] },
-        { "item": "SUS_dresser_womens", "chance": 30, "repeat": [ 1, 2 ] }
+        { "item": "SUS_dresser_mens", "chance": 45, "repeat": [ 1, 3 ] },
+        { "item": "SUS_dresser_womens", "chance": 45, "repeat": [ 1, 3 ] }
       ],
       "e": { "item": "pool_table", "chance": 20, "repeat": [ 1, 2 ] },
       "f": [
@@ -237,7 +237,7 @@
         { "item": "tea_dishes", "chance": 10, "repeat": [ 1, 2 ] },
         { "item": "baked_goods", "chance": 2 },
         { "item": "trash_domestic", "chance": 5, "repeat": [ 1, 2 ] },
-        { "item": "groce_condiment", "chance": 5, "repeat": [ 1, 2 ] },
+        { "item": "groce_condiment", "chance": 10, "repeat": [ 1, 2 ] },
         { "item": "dining", "chance": 10 }
       ],
       "k": { "item": "stash_wood", "chance": 30, "repeat": [ 2, 5 ] },
@@ -249,7 +249,7 @@
         { "item": "consumer_electronics", "chance": 5, "repeat": [ 1, 3 ] },
         { "item": "livingroom", "chance": 5, "repeat": [ 1, 3 ] }
       ],
-      "m": { "item": "SUS_fridge", "chance": 40 },
+      "m": { "item": "SUS_fridge", "chance": 50 },
       "n": { "item": "SUS_dishwasher", "chance": 35 },
       "p": { "item": "mail", "chance": 15, "repeat": [ 2, 5 ] },
       "q": [
@@ -312,12 +312,12 @@
       "3": [ { "item": "SUS_utensils", "chance": 50 }, { "item": "SUS_knife_drawer", "chance": 40 } ],
       "4": { "item": "SUS_junk_drawer", "chance": 90 },
       "5": { "item": "SUS_kitchen_sink", "chance": 100 },
-      "6": [ { "item": "SUS_pantry", "chance": 5 }, { "item": "cannedfood", "chance": 5, "repeat": [ 1, 2 ] } ],
+      "6": [ { "item": "SUS_pantry", "chance": 8 }, { "item": "cannedfood", "chance": 7, "repeat": [ 1, 2 ] } ],
       "7": [
-        { "item": "SUS_breakfast_cupboard", "chance": 5 },
+        { "item": "SUS_breakfast_cupboard", "chance": 8 },
         { "item": "SUS_coffee_cupboard", "chance": 10 },
         { "item": "trash_domestic", "chance": 10, "repeat": [ 1, 2 ] },
-        { "item": "SUS_spice_collection", "chance": 50 }
+        { "item": "SUS_spice_collection", "chance": 40 }
       ],
       "8": [
         { "item": "SUS_hair_drawer", "chance": 30 },
@@ -538,7 +538,7 @@
         { "item": "dishes_dining", "chance": 50, "repeat": [ 2, 3 ] },
         { "item": "tea_dishes", "chance": 20, "repeat": [ 1, 2 ] },
         { "item": "baked_goods", "chance": 3 },
-        { "item": "groce_condiment", "chance": 5, "repeat": [ 1, 2 ] },
+        { "item": "groce_condiment", "chance": 8, "repeat": [ 1, 2 ] },
         { "item": "dining", "chance": 15 },
         { "item": "novels", "chance": 10 }
       ],
