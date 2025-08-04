@@ -126,5 +126,21 @@
         }
       }
     ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_RAPTOR_LEAP",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": "1900",
+          "prep_time": "1",
+          "spell_to_cast": "spell_raptor_leap",
+          "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ]
   }
 ]

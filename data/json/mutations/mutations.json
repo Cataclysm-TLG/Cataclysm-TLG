@@ -4251,7 +4251,7 @@
     "kcal": true,
     "cost": 4,
     "activated_is_setup": false,
-    "activated_eocs": [ "EOC_AVIAN_LEAP" ],
+    "activated_eocs": [ "EOC_RAPTOR_LEAP" ],
     "prereqs": [ "TAIL_RAPTOR", "ARM_FEATHERS" ],
     "prereqs2": [ "RAP_TALONS" ],
     "threshreq": [ "THRESH_RAPTOR" ]
