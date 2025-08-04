@@ -612,7 +612,7 @@ bool Creature::sees( const Creature &critter ) const
     }
 
     if( ( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_HIDE_PLACE, critter.pos_bub() ) ) &&
-               critter.get_size() < creature_size::large ) {
+        critter.get_size() < creature_size::large ) {
         return false;
     }
 
