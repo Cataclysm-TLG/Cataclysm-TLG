@@ -196,16 +196,6 @@ struct talk_response {
     //flag to hold result of show_anyways (not read from JSON)
     bool ignore_conditionals = false;
 
-    //whether to display this response in normal gameplay even if condition is false
-    bool show_always = false;
-    //appended to response if condition fails or show_always/show_condition
-    std::string show_reason;
-    //show_always, but on show_condition being true
-    std::function<bool( dialogue & )> show_condition;
-
-    //flag to hold result of show_anyways (not read from JSON)
-    bool ignore_conditionals = false;
-
     mission *mission_selected = nullptr;
     skill_id skill = skill_id();
     matype_id style = matype_id();
