@@ -948,7 +948,8 @@
     "looks_like": "fencing_foil",
     "name": { "str": "sharpened foil" },
     "description": "What was once a mostly-harmless fencing foil has had its electrical plunger assembly removed and has been crudely sharpened to a point.  Though it still lacks a cutting edge, it is now somewhat more lethal, yet still familiar to the practiced fencer.",
-    "relative": { "weight": "-25 g", "melee_damage": { "stab": 2 } }
+    "weight": "425 g",
+    "melee_damage": { "bash": 1, "stab": 4 }
   },
   {
     "id": "shock_foil",
@@ -997,7 +998,8 @@
     "looks_like": "fencing_epee",
     "name": { "str": "sharpened épée" },
     "description": "What was once a mostly-harmless fencing épée has had its electrical plunger assembly removed and has been crudely sharpened to a point.  Though it still lacks a cutting edge, it is now considerably more lethal, yet still familiar to the practiced fencer.",
-    "relative": { "weight": "-35 g", "melee_damage": { "stab": 5 } }
+    "weight": "615 g",
+    "melee_damage": { "bash": 3, "stab": 12 }
   },
   {
     "id": "shock_epee",
@@ -1048,7 +1050,8 @@
     "looks_like": "fencing_sabre",
     "name": { "str": "sharpened saber" },
     "description": "What was once a mostly-harmless fencing saber has had its rounded tip snapped off and has been crudely sharpened to a point.  Though it still lacks a cutting edge, it is now considerably more lethal, yet still familiar to the practiced fencer.",
-    "relative": { "weight": "-10 g", "melee_damage": { "stab": 5 } }
+    "weight": "390 g",
+    "melee_damage": { "bash": 1, "stab": 11 }
   },
   {
     "id": "shock_sabre",
