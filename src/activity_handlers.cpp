@@ -521,9 +521,9 @@ static bool do_cannibalism_piss_people_off( Character &you )
 
     for( npc &guy : g->all_npcs() ) {
         if( guy.is_active() && guy.sees( you ) && !( guy.has_flag( json_flag_CANNIBAL ) ||
-           guy.has_flag( json_flag_PSYCHOPATH ) ||
-           guy.has_flag( json_flag_SAPIOVORE ) ||
-           guy.has_flag( json_flag_BLOODFEEDER ) ) ) {
+                guy.has_flag( json_flag_PSYCHOPATH ) ||
+                guy.has_flag( json_flag_SAPIOVORE ) ||
+                guy.has_flag( json_flag_BLOODFEEDER ) ) ) {
             guy.say( _( "<swear!>?  Are you butchering them?  That's not okay, <fuck_you>." ) );
             // massive opinion penalty
             guy.op_of_u.trust -= 5;
@@ -733,7 +733,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     // applies to only dissections, so that dissect_humans training makes a difference.
-     if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
+    if( is_human && action == butcher_type::DISSECT && !( you.has_flag( json_flag_CANNIBAL ) ||
             you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) ) ) {
         if( you.has_proficiency( proficiency_prof_dissect_humans ) ) {
             //you're either trained for this, densensitized, or both. doesn't bother you.

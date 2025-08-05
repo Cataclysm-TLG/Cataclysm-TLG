@@ -147,7 +147,8 @@ bool leap_actor::call( monster &z ) const
                    target.to_string_writable() );
 
     std::multimap<int, tripoint_bub_ms> candidates;
-    for( const tripoint_bub_ms &candidate : here.points_in_radius( z.pos_bub(), max_range, max_range / 2 ) ) {
+    for( const tripoint_bub_ms &candidate : here.points_in_radius( z.pos_bub(), max_range,
+            max_range / 2 ) ) {
         if( candidate == z.pos_bub() ) {
             add_msg_debug( debugmode::DF_MATTACK, "Monster at coordinates %s",
                            candidate.to_string_writable() );
