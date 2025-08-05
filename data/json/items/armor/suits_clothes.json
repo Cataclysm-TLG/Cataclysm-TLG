@@ -604,6 +604,13 @@
         "weight": 20
       },
       {
+        "id": "cat_fursuit",
+        "name": { "str": "cat mascot costume" },
+        "description": "A full-body mascot-style costume in the form of an anthropomorphic cat.  It is quite encumbering and very warm.",
+        "color": "brown",
+        "weight": 20
+      },
+      {
         "id": "lion_fursuit",
         "name": { "str": "tiger mascot costume" },
         "description": "A full-body mascot-style costume in the form of an anthropomorphic lion.  It is quite encumbering and very warm.",
