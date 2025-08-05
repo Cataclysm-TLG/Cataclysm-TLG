@@ -141,8 +141,8 @@
   {
     "id": "mon_feral_human_axe",
     "type": "MONSTER",
-    "name": { "str": "deranged axeman", "str_pl": "deranged axemen" },
-    "description": "They stumble along dragging a large bloodstained axe.  Their face is twisted into a sadistic grin, and they walk among the dead as though already one of them.",
+    "name": { "str": "feral axe murderer", "str_pl": "feral axe murderers" },
+    "description": "They stumble along, clutching an axe.  Their face is twisted into a sadistic grin, and they walk among the dead as though already one of them.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [ { "id": "feral_weapon_axe" }, [ "BROWSE", 100 ], [ "EAT_FOOD", 100 ] ],
     "death_drops": "feral_humans_death_drops_axe",
@@ -152,7 +152,7 @@
     "id": "mon_feral_human_tool",
     "type": "MONSTER",
     "name": "feral mechanic",
-    "description": "This wild human-like creature was probably a mechanic before the Cataclysm.  You can see it by his worker uniform, or by his blood-covered hammer in hand, or by his all-hating view.",
+    "description": "This maniac was probably a mechanic before the Cataclysm.  Now, they're reduced to a mad thing, still wearing the remains of a work uniform and clutching a hammer that is now nothing more than a weapon.",
     "copy-from": "mon_feral_human_pipe",
     "special_attacks": [
       {
@@ -519,11 +519,10 @@
   {
     "id": "mon_feral_survivalist",
     "type": "MONSTER",
-    "name": { "str": "crazed survivalist" },
-    "description": "Grasping a sharp bladed weapon, this feral prepper has an athletic physique, a sign that they trained extensively before turning feral.  They seem to retain a few scraps of intelligence, using tools and exhibiting at least some signs of self-preservation.",
+    "name": { "str": "feral survivor" },
+    "description": "If it weren't for the stooped posture and wild eyes, this person's gear and bladed weapon might mark them as another survivor of the Cataclysm.  Now they move among the dead like they're one of them, shaking like a rabid dog.",
     "copy-from": "mon_feral_human_pipe",
-    "hp": 90,
-    "//": "Due to the description I assumed a str 10 character instead of the standard str 8 as for the others",
+    "hp": 98,
     "speed": 110,
     "aggression": 75,
     "morale": 12,
@@ -552,8 +551,8 @@
   {
     "id": "mon_feral_militia",
     "type": "MONSTER",
-    "name": { "str": "mad militia" },
-    "description": "Wearing a tactical camo uniform with a Kevlar vest, this person seems to have been a militia member, now turned feral.  Their hands grip unto a semi-automatic rifle as their bloodshot eyes scan for threats; a flashlight strapped to their helmet illuminates their presence and surroundings.",
+    "name": { "str": "feral militia" },
+    "description": "Wearing a tactical getup with a Kevlar vest, this person seems to have been a militia member, now lost to madness.  They scan for threats with bloodshot eyes and a semi-automatic rifle, and a flashlight strapped to their helmet illuminates their surroundings.",
     "copy-from": "mon_feral_human_pipe",
     "diff": 15,
     "aggression": 75,
@@ -583,7 +582,7 @@
         },
         "require_targeting_player": false,
         "target_moving_vehicles": true,
-        "description": "The mad militiaman fires their rifle!"
+        "description": "The feral militiaman fires their rifle!"
       },
       { "id": "feral_weapon_feral_militia_gun" },
       { "id": "feral_unarmed" },
@@ -606,7 +605,7 @@
     "id": "mon_feral_soldier",
     "type": "MONSTER",
     "name": { "str": "feral soldier" },
-    "description": "Wearing a military uniform with an armored vest, this person seems to be a highly trained military professional, now turned feral.  Tense, dirty hands grip a combat knife as their bloodshot eyes scan for threats.",
+    "description": "What was once a service member has been lost to the madness that devoured the world.  Tense, dirty hands grip a combat knife as their bloodshot eyes scan for threats.",
     "copy-from": "mon_feral_human_pipe",
     "speed": 85,
     "aggression": 40,
@@ -628,7 +627,7 @@
     "id": "mon_feral_jackboot",
     "type": "MONSTER",
     "name": { "str": "feral biker" },
-    "description": "A rough-looking feral human, clad in black leather and wielding a pump-action shotgun.  It seems body-armor wasn't one of their priorities however.",
+    "description": "A rough-looking human, clad in black leather and wielding a pump-action shotgun.  It seems body-armor wasn't one of their priorities however.",
     "copy-from": "mon_feral_human_pipe",
     "aggression": 75,
     "melee_skill": 6,
