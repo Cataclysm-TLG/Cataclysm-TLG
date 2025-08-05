@@ -485,7 +485,7 @@
     "name": { "str": "Consumed human flesh" },
     "min": 0,
     "max": 10000,
-    "flags": [ "NO_DISPLAY" ],
+    "flags": [ "NO_DISPLAY", "NO_SELL" ],
     "rate": "1 h"
   },
   {

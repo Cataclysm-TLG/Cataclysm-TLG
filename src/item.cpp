@@ -228,6 +228,7 @@ static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
 
 // vitamin flags
 static const std::string flag_NO_DISPLAY( "NO_DISPLAY" );
+static const std::string flag_NO_SELL( "NO_SELL" );
 
 // fault flags
 static const std::string flag_BLACKPOWDER_FOULING_DAMAGE( "BLACKPOWDER_FOULING_DAMAGE" );
@@ -341,8 +342,8 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
 
     if( has_flag( flag_ENERGY_SHIELD ) ) {
         const islot_armor *sh = find_armor_data();
-        set_var( "npctalk_var_MAX_ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
-        set_var( "npctalk_var_ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
+        set_var( "MAX_ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
+        set_var( "ENERGY_SHIELD_HP", sh->max_energy_shield_hp );
     }
 
     if( has_flag( flag_COLLAPSE_CONTENTS ) ) {
@@ -6927,6 +6928,15 @@ int item::price_no_contents( bool practical, std::optional<int> price_override )
         price *= fault->price_mod();
     }
 
+    if( is_food() && get_comestible() ) {
+        const nutrients &nutrients_value = default_character_compute_effective_nutrients( *this );
+        for( const std::pair<const vitamin_id, int> &vit_pair : nutrients_value.vitamins() ) {
+            if( vit_pair.second > 0 && vit_pair.first->has_flag( flag_NO_SELL ) ) {
+                price = 0.0;
+            }
+        }
+    }
+
     return price;
 }
 
@@ -8943,10 +8953,10 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
 {
     //Energy shields aren't damaged by attacks but do get their health variable reduced.  They are also only
     //damaged by the damage types they actually protect against.
-    if( has_var( "npctalk_var_ENERGY_SHIELD_HP" ) && resist( du.type, false, bp ) > 0.0f ) {
-        double shield_hp = get_var( "npctalk_var_ENERGY_SHIELD_HP", 0.0 );
+    if( has_var( "ENERGY_SHIELD_HP" ) && resist( du.type, false, bp ) > 0.0f ) {
+        double shield_hp = get_var( "ENERGY_SHIELD_HP", 0.0 );
         shield_hp -= premitigated.amount;
-        set_var( "npctalk_var_ENERGY_SHIELD_HP", shield_hp );
+        set_var( "ENERGY_SHIELD_HP", shield_hp );
         if( shield_hp > 0 ) {
             return armor_status::UNDAMAGED;
         } else {
