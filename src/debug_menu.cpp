@@ -118,6 +118,7 @@
 #include "try_parse_integer.h"
 #include "type_id.h"
 #include "ui.h"
+#include "uistate.h"
 #include "ui_manager.h"
 #include "units.h"
 #include "units_utility.h"
@@ -2628,25 +2629,8 @@ static void character_edit_menu()
             popup( _( "Var list written to var_list.output" ) );
             break;
         }
-        case D_WRITE_EOCS: {
-            effect_on_conditions::write_eocs_to_file( you );
-            popup( _( "effect_on_condition list written to eocs.output" ) );
-            break;
-        }
         case D_EDIT_VARS: {
-            std::string key;
-            std::string value;
-            string_input_popup popup_key;
-            string_input_popup popup_val;
-            popup_key
-            .title( _( "Key" ) )
-            .width( 85 )
-            .edit( key );
-            popup_val
-            .title( _( "Value" ) )
-            .width( 85 )
-            .edit( value );
-            you.set_value( "npctalk_var_" + key, value );
+            edit_character_npctalk_vars( you );
             break;
         }
         case D_FACTION: {
@@ -3343,24 +3327,6 @@ static void damage_self()
             player_character.die( nullptr );
         }
     }
-}
-
-static void edit_global_vars()
-{
-    std::string key;
-    std::string value;
-    string_input_popup popup_key;
-    string_input_popup popup_val;
-    popup_key
-    .title( _( "Key" ) )
-    .width( 85 )
-    .edit( key );
-    popup_val
-    .title( _( "Value" ) )
-    .width( 85 )
-    .edit( value );
-    global_variables &globvars = get_globals();
-    globvars.set_global_value( "npctalk_var_" + key, value );
 }
 
 static void game_report()
@@ -4176,7 +4142,7 @@ void debug()
         }
         break;
         case debug_menu_index::EDIT_GLOBAL_VARS:
-            edit_global_vars();
+            edit_global_npctalk_vars();
             break;
 
         case debug_menu_index::SAVE_SCREENSHOT:
