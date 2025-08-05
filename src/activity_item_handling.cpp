@@ -1228,7 +1228,8 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                                       corpse.in_species( species_FERAL ) ) &&
                                       !corpse.in_species( species_ZOMBIE ) );
                 if( is_human && !!( you.has_flag( json_flag_CANNIBAL ) ||
-            you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) || you.has_flag( json_flag_BLOODFEEDER ) ) ) {
+                                    you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) ||
+                                    you.has_flag( json_flag_BLOODFEEDER ) ) ) {
                     return activity_reason_info::fail( do_activity_reason::REFUSES_THIS_WORK );
                 }
             }
