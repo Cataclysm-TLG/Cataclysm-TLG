@@ -96,7 +96,7 @@
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
       },
-      { "text": "I just wanted to look around.  <end_talking_bye>", "topic": "TALK_DONE" }
+      { "text": "I just wanted to look around.  See you.", "topic": "TALK_DONE" }
     ]
   },
   {
