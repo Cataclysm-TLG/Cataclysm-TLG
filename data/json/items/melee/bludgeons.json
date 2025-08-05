@@ -446,7 +446,7 @@
     "name": { "str": "wooden crutch", "str_pl": "wooden crutches" },
     "description": "A wooden rod with a brace designed to help support the body using the arm.  It could be combined with another like it, or used on its own.",
     "price": "25 USD",
-    "material": [ "aluminum" ],
+    "material": [ "wood" ],
     "techniques": [ "WBLOCK_1", "SWEEP" ],
     "flags": [ "FRAGILE_MELEE", "WALKING_AID" ],
     "weapon_category": [ "QUARTERSTAVES" ],
