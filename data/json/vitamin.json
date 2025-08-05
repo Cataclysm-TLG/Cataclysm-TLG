@@ -483,10 +483,9 @@
     "type": "vitamin",
     "vit_type": "counter",
     "name": { "str": "Consumed human flesh" },
-    "flags": [ "NO_SELL" ],
     "min": 0,
     "max": 10000,
-    "flags": [ "NO_DISPLAY" ],
+    "flags": [ "NO_DISPLAY", "NO_SELL" ],
     "rate": "1 h"
   },
   {

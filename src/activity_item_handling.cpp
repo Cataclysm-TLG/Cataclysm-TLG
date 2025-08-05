@@ -113,6 +113,11 @@ static const itype_id itype_log( "log" );
 static const itype_id itype_soldering_iron( "soldering_iron" );
 static const itype_id itype_welder( "welder" );
 
+static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
+static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
+static const json_character_flag json_flag_PSYCHOPATH( "PSYCHOPATH" );
+static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
+
 static const quality_id qual_AXE( "AXE" );
 static const quality_id qual_BUTCHER( "BUTCHER" );
 static const quality_id qual_DIG( "DIG" );
@@ -1222,7 +1227,8 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 const bool is_human = corpse.id == mtype_id::NULL_ID() || ( ( corpse.in_species( species_HUMAN ) ||
                                       corpse.in_species( species_FERAL ) ) &&
                                       !corpse.in_species( species_ZOMBIE ) );
-                if( is_human && !you.okay_with_eating_humans() ) {
+                if( is_human && !!( you.has_flag( json_flag_CANNIBAL ) ||
+            you.has_flag( json_flag_PSYCHOPATH ) || you.has_flag( json_flag_SAPIOVORE ) || you.has_flag( json_flag_BLOODFEEDER ) ) ) {
                     return activity_reason_info::fail( do_activity_reason::REFUSES_THIS_WORK );
                 }
             }
