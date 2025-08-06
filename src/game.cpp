@@ -7621,7 +7621,7 @@ look_around_result game::look_around(
     }
     ctxt.register_action( "MOUSE_MOVE" );
     ctxt.register_action( "CENTER" );
-
+    ctxt.register_action( "CENTER_ON_LOOK", to_translation( "Center camera on currently viewed tile" ) );
     ctxt.register_action( "debug_scent" );
     ctxt.register_action( "debug_scent_type" );
     ctxt.register_action( "debug_temp" );
@@ -7644,6 +7644,7 @@ look_around_result game::look_around(
     const visibility_variables &cache = m.get_visibility_variables_cache();
 
     bool blink = true;
+    bool center_on_look = false;
     look_around_result result;
 
     shared_ptr_fast<draw_callback_t> ter_indicator_cb;
@@ -7654,6 +7655,11 @@ look_around_result game::look_around(
             draw_border( w_info );
 
             center_print( w_info, 0, c_white, string_format( _( "< <color_green>Look around</color> >" ) ) );
+
+            // Show camera centering on currently viewed tile hint for ':'
+            std::string center_camera_text = string_format( _( "%s - %s" ),
+                ":", "Center camera on currently viewed tile" );
+            mvwprintz( w_info, point( 1, getmaxy( w_info ) - 3 ), c_light_green, center_camera_text );
 
             creature_tracker &creatures = get_creature_tracker();
             monster *const mon = creatures.creature_at<monster>( lp, true );
@@ -7836,6 +7842,10 @@ look_around_result game::look_around(
             center = u.pos();
             lp = u.pos_bub();
             u.view_offset.z() = 0;
+        } else if( action == "CENTER_ON_LOOK" ) {
+            center = lp.raw();
+            center_on_look = true;
+            action = "QUIT";
         } else if( action == "MOUSE_MOVE" || action == "TIMEOUT" ) {
             // This block is structured this way so that edge scroll can work
             // whether the mouse is moving at the edge or simply stationary
@@ -7887,7 +7897,11 @@ look_around_result game::look_around(
     }
 
     ctxt.reset_timeout();
-    u.view_offset = prev_offset;
+    if( center_on_look ) {
+        u.view_offset = tripoint_rel_ms( center - u.pos() );
+    } else {
+        u.view_offset = prev_offset;
+    }
     zone_cb = nullptr;
     is_looking = false;
 

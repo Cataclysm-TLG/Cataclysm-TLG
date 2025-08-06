@@ -3334,6 +3334,13 @@
   },
   {
     "type": "keybinding",
+    "id": "CENTER_ON_LOOK",
+    "name": "Center camera on currently viewed tile",
+    "category": "LOOK",
+    "bindings": [ { "input_method": "keyboard_any", "key": ":" } ]
+  },
+  {
+    "type": "keybinding",
     "id": "REASSIGN",
     "category": "BIONICS",
     "name": "Reassign inventory letter",
