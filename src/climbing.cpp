@@ -352,12 +352,12 @@ climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
         bool furn_ok = false;
         if( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
             here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, pos ) ) {
-            furn_ok = ( you.get_weight() / 10000_gram <= here.furn( pos ).obj().bash.str_min );
+            furn_ok = ( you.get_weight() / 10000_gram <= here.furn( pos ).obj().bash->str_min );
         }
         bool ter_ok = false;
         if( here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
             here.has_flag_ter( ter_furn_flag::TFLAG_LADDER, pos ) ) {
-            ter_ok = ( you.get_weight() / 10000_gram <= here.ter( pos ).obj().bash.str_min );
+            ter_ok = ( you.get_weight() / 10000_gram <= here.ter( pos ).obj().bash->str_min );
         }
         return ( furn_ok || ter_ok ) && here.has_flag( cond.flag, pos );
     };

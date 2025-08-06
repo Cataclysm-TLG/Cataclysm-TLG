@@ -827,7 +827,7 @@ void map_data_common_t::load( const JsonObject &jo, const std::string &src )
     optional( jo, was_loaded, "coverage", coverage );
     optional( jo, was_loaded, "curtain_transform", curtain_transform );
     optional( jo, was_loaded, "emissions", emissions );
-
+    optional( jo, was_loaded, "fall_damage_reduction", fall_damage_reduction, 0 );
     if( jo.has_string( "examine_action" ) ) {
         examine_actor = nullptr;
         examine_func = iexamine_functions_from_string( jo.get_string( "examine_action" ) );
@@ -923,7 +923,6 @@ void ter_t::load( const JsonObject &jo, const std::string &src )
     trap = tr_null;
 
     optional( jo, was_loaded, "allowed_template_ids", allowed_template_id );
-
     optional( jo, was_loaded, "open", open, ter_str_id::NULL_ID() );
     optional( jo, was_loaded, "close", close, ter_str_id::NULL_ID() );
     optional( jo, was_loaded, "transforms_into", transforms_into, ter_str_id::NULL_ID() );
@@ -1102,7 +1101,6 @@ void furn_t::load( const JsonObject &jo, const std::string &src )
 {
     map_data_common_t::load( jo, src );
     mandatory( jo, was_loaded, "move_cost_mod", movecost );
-    optional( jo, was_loaded, "fall_damage_reduction", fall_damage_reduction, 0 );
     int legacy_bonus_fire_warmth_feet = units::to_legacy_bodypart_temp_delta( bonus_fire_warmth_feet );
     optional( jo, was_loaded, "bonus_fire_warmth_feet", legacy_bonus_fire_warmth_feet, 300 );
     bonus_fire_warmth_feet = units::from_legacy_bodypart_temp_delta( legacy_bonus_fire_warmth_feet );

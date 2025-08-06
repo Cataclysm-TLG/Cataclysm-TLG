@@ -1574,9 +1574,9 @@ void iexamine::chainfence( Character &you, const tripoint_bub_ms &examp )
         }
         // Weight discounted 50% here vs ladders etc. as we're just climbing over, not up to another level.
     } else if( !( ( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&
-                    you.get_weight() / 15000_gram <= here.furn( examp ).obj().bash.str_min ) ||
+                    you.get_weight() / 15000_gram <= here.furn( examp ).obj().bash->str_min ) ||
                   ( here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, examp ) &&
-                    you.get_weight() / 15000_gram <= here.ter( examp ).obj().bash.str_min ) ) ) {
+                    you.get_weight() / 15000_gram <= here.ter( examp ).obj().bash->str_min ) ) ) {
         add_msg( m_bad, _( "You are too heavy to climb over." ) );
         return;
     } else if( you.has_trait( trait_ARACHNID_ARMS_OK ) &&

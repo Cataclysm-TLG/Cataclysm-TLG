@@ -4960,16 +4960,16 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
                 } else if( furn_hit ) {
                     shoot_furn_ter( furniture.obj() );
                     if( ( laser_passthrough == false && laser ) || !laser ) {
-                        int damdown = std::min( static_cast<int>( dam ), rng( furniture->bash.str_min,
-                                                furniture->bash.str_max ) );
+                        int damdown = std::min( static_cast<int>( dam ), rng( furniture->bash->str_min,
+                                                furniture->bash->str_max ) );
                         bash( p, modified_dam, false );
                         dam -= damdown;
                     }
                 } else if( ter_hit ) {
                     shoot_furn_ter( terrain.obj() );
                     if( ( laser_passthrough == false && laser ) || !laser ) {
-                        int damdown = std::min( static_cast<int>( dam ), rng( terrain->bash.str_min,
-                                                terrain->bash.str_max ) );
+                        int damdown = std::min( static_cast<int>( dam ), rng( terrain->bash->str_min,
+                                                terrain->bash->str_max ) );
                         dam -= damdown;
                         bash( p, modified_dam, false );
                     }
