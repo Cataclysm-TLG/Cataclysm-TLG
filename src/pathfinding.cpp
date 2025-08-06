@@ -300,9 +300,9 @@ int map::cost_to_pass( const tripoint_bub_ms &cur, const tripoint_bub_ms &p,
         Creature *climber = creatures.creature_at<Creature>( p );
         if( ( ( furniture.has_flag( ter_furn_flag::TFLAG_LADDER ) ||
                 furniture.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) ? climber->enum_size() * 2 >
-              furniture.bash.str_min : false ) && ( ( terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ||
+              furniture.bash->str_min : false ) && ( ( terrain.has_flag( ter_furn_flag::TFLAG_LADDER ) ||
                       terrain.has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) ? climber->enum_size() * 2 >
-                      terrain.bash.str_min : false ) ) {
+                      terrain.bash->str_min : false ) ) {
             return 0;
         }
         return climb_cost;
