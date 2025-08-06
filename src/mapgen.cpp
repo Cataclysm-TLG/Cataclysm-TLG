@@ -121,7 +121,7 @@ static const itype_id itype_diesel( "diesel" );
 static const itype_id itype_gasoline( "gasoline" );
 static const itype_id itype_jp8( "jp8" );
 
-static const mongroup_id GROUP_FUNGI_FLOWER( "GROUP_FUNGI_FLOWER" );
+static const mongroup_id GROUP_FUNGI_FLOWERS( "GROUP_FUNGI_FLOWERS" );
 static const mongroup_id GROUP_FUNGI_ZOMBIE( "GROUP_FUNGI_ZOMBIE" );
 static const mongroup_id GROUP_LAB( "GROUP_LAB" );
 static const mongroup_id GROUP_LAB_CYBORG( "GROUP_LAB_CYBORG" );
@@ -6184,7 +6184,7 @@ void map::draw_lab( mapgendata &dat )
                     ter_set( center.xy(), ter_t_fungus_floor_in );
                     furn_set( center.xy(), furn_str_id::NULL_ID() );
                     trap_set( center, tr_portal );
-                    place_spawns( GROUP_FUNGI_FLOWER, 1, center.xy() + point( -2, -2 ),
+                    place_spawns( GROUP_FUNGI_FLOWERS, 1, center.xy() + point( -2, -2 ),
                                   center.xy() + point( 2, 2 ), center.z(), 1, true );
 
                     break;
@@ -6325,7 +6325,6 @@ void map::draw_lab( mapgendata &dat )
                             spawn_item( point_bub_ms( SEEX, SEEY ), "recipe_atomic_battery" );
                             spawn_item( point_bub_ms( SEEX + 1, SEEY ), "plut_cell", rng( 8, 20 ) );
                         }  else { // loot_variant between 90 and 96.
-                            spawn_item( point_bub_ms( SEEX - 1, SEEY - 1 ), "rm13_armor" );
                             spawn_item( point_bub_ms( SEEX, SEEY - 1 ), "plut_cell" );
                             spawn_item( point_bub_ms( SEEX - 1, SEEY ), "plut_cell" );
                             spawn_item( point_bub_ms( SEEX, SEEY ), "recipe_caseless" );

@@ -1314,7 +1314,6 @@
     "symbol": "[",
     "color": "light_gray",
     "name": { "str": "phase immersion suit" },
-    "looks_like": "rm13_armor",
     "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles both plate armor and an astronaut's spacesuit.  Designed to protect its wearer during extradimensional excursions, it offers unparalleled environmental protection, both in this Earth and beyond.  Use it to turn it on.",
     "price": "1500 USD",
     "price_postapoc": "150 USD",
