@@ -101,8 +101,8 @@ void weather_type::load( const JsonObject &jo, std::string_view )
     mandatory( jo, was_loaded, "name", name );
     mandatory( jo, was_loaded, "id",  id );
 
-    assign( jo, "color", color );
-    assign( jo, "map_color", map_color );
+    optional( jo, was_loaded, "color", color, nc_color_reader{} );
+    optional( jo, was_loaded, "map_color", map_color, nc_color_reader{} );
 
     mandatory( jo, was_loaded, "sym", symbol, unicode_codepoint_from_symbol_reader );
 
@@ -127,19 +127,17 @@ void weather_type::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "debug_cause_eoc", debug_cause_eoc );
     optional( jo, was_loaded, "debug_leave_eoc", debug_leave_eoc );
 
-    if( jo.has_member( "weather_animation" ) ) {
-        JsonObject weather_animation_jo = jo.get_object( "weather_animation" );
-        mandatory( weather_animation_jo, was_loaded, "factor", weather_animation.factor );
-        if( !assign( weather_animation_jo, "color", weather_animation.color ) ) {
-            weather_animation_jo.throw_error( "missing mandatory member \"color\"" );
-        }
-        mandatory( weather_animation_jo, was_loaded, "sym", weather_animation.symbol,
-                   unicode_codepoint_from_symbol_reader );
-        // Defaults to false. If true, just covers the visible area instead of drawing random droplets.
-        optional( weather_animation_jo, was_loaded, "static_overlay", weather_animation.static_overlay );
-    }
+    optional( jo, was_loaded, "weather_animation", weather_animation );
     optional( jo, was_loaded, "required_weathers", required_weathers );
+    // FIXME: generic factory reader for condition
     read_condition( jo, "condition", condition, true );
+}
+
+void weather_animation_t::deserialize( const JsonObject &jo )
+{
+    mandatory( jo, false, "factor", factor );
+    mandatory( jo, false, "color", color, nc_color_reader{} );
+    mandatory( jo, false, "sym", symbol, unicode_codepoint_from_symbol_reader );
 }
 
 void weather_types::reset()

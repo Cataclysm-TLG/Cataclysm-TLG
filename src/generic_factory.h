@@ -19,6 +19,7 @@
 #include "cached_options.h"
 #include "catacharset.h"
 #include "calendar.h"
+#include "cata_assert.h"
 #include "cata_scope_helpers.h"
 #include "cata_type_traits.h"
 #include "debug.h"
@@ -1448,6 +1449,83 @@ public:
             }
             val.throw_error( "weighted_string_id_reader provided with invalid string_id" );
         }
+    }
+};
+
+template<typename K, typename V>
+class generic_map_reader : public generic_typed_reader<generic_map_reader<K, V>>
+{
+public:
+    static constexpr bool read_objects = true;
+
+    std::pair<K, V> get_next( const JsonValue &jv ) const {
+        const JsonMember *jm = dynamic_cast<const JsonMember *>( &jv );
+        if( jm == nullptr ) {
+            jv.throw_error( "not part of a JsonObject" );
+        }
+        K key( jm->name() );
+        V value;
+        jv.read( value, true );
+        return std::pair<K, V>( key, value );
+    }
+};
+
+// Support shorthand for a single value.
+template<typename T>
+class pair_reader : public generic_typed_reader<pair_reader<T>>
+{
+public:
+    std::pair<T, T> get_next( const JsonValue &jv ) const {
+        if( jv.test_float() ) {
+            T val;
+            jv.read( val, true );
+            return std::make_pair( val, val );
+        }
+        if( !jv.test_array() ) {
+            jv.throw_error( "bad pair" );
+        }
+        JsonArray ja = jv.get_array();
+        if( ja.size() != 2 ) {
+            ja.throw_error( "Must have 2 elements" );
+        }
+        T l;
+        T h;
+        ja[0].read( l, true );
+        ja[1].read( h, true );
+        return std::make_pair( l, h );
+    }
+};
+
+template<typename T1, typename T2>
+class named_pair_reader : public generic_typed_reader<named_pair_reader<T1, T2>>
+{
+public:
+    std::string_view key1;
+    std::string_view key2;
+    T2 default_value2;
+
+    named_pair_reader( std::string_view _key1, std::string_view _key2,
+                       T2 _default = T2() ) : key1( _key1 ), key2( _key2 ), default_value2( _default ) {
+        cata_assert( !key1.empty() );
+        cata_assert( !key2.empty() );
+        cata_assert( key1 != key2 );
+    }
+
+    std::pair<T1, T2> get_next( const JsonValue &jv ) const {
+        std::pair<T1, T2> ret;
+        if( jv.test_object() ) {
+            JsonObject jo = jv.get_object();
+            jo.read( key1, ret.first, true );
+            jo.read( key2, ret.second, true );
+            return ret;
+        }
+        // TODO: support pair format?
+        if( jv.test_array() ) {
+            jv.throw_error( "invalid format" );
+        }
+        jv.read( ret.first, true );
+        ret.second = default_value2;
+        return ret;
     }
 };
 
