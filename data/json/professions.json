@@ -354,7 +354,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "quiver_naturalist",
-    "entries": [ { "item": "arrow_wood", "count": 20 } ]
+    "entries": [ { "item": "arrow_wood", "count": 16 } ]
   },
   {
     "type": "item_group",

@@ -387,7 +387,7 @@
     "color": "brown",
     "sided": true,
     "material_thickness": 1,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 18, "bolt": 22 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 18, "bolt": 20 }, "moves": 20 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
@@ -414,7 +414,7 @@
     "color": "light_gray",
     "sided": true,
     "material_thickness": 0.5,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 18, "bolt": 22 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 18, "bolt": 20 }, "moves": 20 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_LARGE" ],
     "armor": [
       {
@@ -430,7 +430,7 @@
     "id": "quiver_birchbark",
     "type": "ARMOR",
     "name": { "str": "birchbark quiver" },
-    "description": "A quiver woven from strips of birch bark, worn at the waist, that can hold 15 arrows or 20 bolts.  Use insert to store arrows or bolts.",
+    "description": "A quiver woven from strips of birch bark, worn at the waist.  Use insert to store arrows or bolts.",
     "weight": "490 g",
     "volume": "500 ml",
     "price": "65 USD",
@@ -441,7 +441,7 @@
     "color": "light_gray",
     "sided": true,
     "material_thickness": 1,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 15, "bolt": 20 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 16, "bolt": 18 }, "moves": 20 } ],
     "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
@@ -468,7 +468,7 @@
     "color": "dark_gray",
     "sided": true,
     "material_thickness": 1.5,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 5, "bolt": 5 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 6, "bolt": 8 }, "moves": 20 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
@@ -494,7 +494,7 @@
     "looks_like": "quiver",
     "color": "brown",
     "material_thickness": 1,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 25, "bolt": 30, "atlatl": 8, "fishspear": 8 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 32, "bolt": 34, "atlatl": 8, "fishspear": 8 }, "moves": 25 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 3, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
     "melee_damage": { "bash": 4 }
@@ -513,7 +513,7 @@
     "looks_like": "quiver_birchbark",
     "color": "light_gray",
     "material_thickness": 1,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 20, "bolt": 25, "atlatl": 6, "fishspear": 6 }, "moves": 20 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 28, "bolt": 30, "atlatl": 6, "fishspear": 6 }, "moves": 20 } ],
     "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 14, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
     "melee_damage": { "bash": 4 }
@@ -533,7 +533,7 @@
     "color": "dark_gray",
     "sided": true,
     "material_thickness": 1.5,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 15, "bolt": 15 }, "moves": 30 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 18, "bolt": 20 }, "moves": 30 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 14, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
     "melee_damage": { "bash": 12 }
@@ -572,7 +572,7 @@
     "color": "light_blue",
     "sided": true,
     "material_thickness": 1,
-    "pocket_data": [ { "ammo_restriction": { "arrow": 8, "bolt": 10, "atlatl": 4, "fishspear": 4 }, "moves": 30 } ],
+    "pocket_data": [ { "ammo_restriction": { "arrow": 10, "bolt": 12, "atlatl": 4, "fishspear": 4 }, "moves": 30 } ],
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 6, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
