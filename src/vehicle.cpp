@@ -2877,7 +2877,7 @@ std::string optional_vpart_position::extended_description() const
     std::string desc = v.name;
 
     for( int idx : v.parts_at_relative( value().mount_pos(), true ) ) {
-        ret.emplace_back( v.part( idx ).name() );
+        desc += "\n" + v.part( idx ).name();
     }
 
     return desc;

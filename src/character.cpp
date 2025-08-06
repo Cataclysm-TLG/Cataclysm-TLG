@@ -1411,7 +1411,7 @@ int Character::eye_level() const
     if( const optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
-        const point rel = vp->mount();
+        const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
         for( int idx : veh.parts_at_relative( rel, true, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );

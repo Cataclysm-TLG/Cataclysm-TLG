@@ -8172,7 +8172,7 @@ int map::concealment( const tripoint_bub_ms &p ) const
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
         const vehicle &veh = vp->vehicle();
-        const point rel = vp->mount();
+        const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
         bool is_opaque = false;
         for( int idx : veh.parts_at_relative( rel, true, true ) ) {
@@ -8217,7 +8217,7 @@ int map::coverage( const tripoint_bub_ms &p ) const
         const bool is_obstacle = vp->obstacle_at_part().has_value();
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
-        const point rel = vp->mount();
+        const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
         for( int idx : veh.parts_at_relative( rel, true, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );

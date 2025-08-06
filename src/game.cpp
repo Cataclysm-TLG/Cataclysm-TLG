@@ -10552,7 +10552,6 @@ bool game::walk_move( const tripoint &dest_loc, const bool via_ramp, const bool 
     }
 
     // Now make sure we're actually holding something
-    const optional_vpart_position vp_grabbed = m.veh_at( u.pos_bub() + u.grab_point );
     if( grabbed && u.get_grab_type() == object_type::FURNITURE ) {
         // We only care about shifting, because it's the only one that can change our destination
         if( m.has_furn( u.pos_bub() + u.grab_point ) ) {
