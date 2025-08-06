@@ -13726,6 +13726,9 @@ void Character::pause()
                     false );
         }
     }
+    if( here.veh_at( pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) && !in_vehicle && !has_effect( effect_downed ) && !has_effect_with_flag( json_flag_GRAB ) && !in_sleep_state() ) {
+         here.board_vehicle( pos_bub(), this );
+    }
 
     // Try to put out clothing/hair fire
     if( has_effect( effect_onfire ) ) {

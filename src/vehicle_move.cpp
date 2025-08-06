@@ -74,6 +74,8 @@ static const ter_str_id ter_t_railroad_track_v_on_tie( "t_railroad_track_v_on_ti
 static const trait_id trait_DEFT( "DEFT" );
 static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 
+static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
+
 static const std::string part_location_structure( "structure" );
 
 // tile height in meters
@@ -833,6 +835,7 @@ veh_collision vehicle::part_collision( int part, const tripoint_bub_ms &p,
 {
     // Vertical collisions need to be handled differently
     // All collisions have to be either fully vertical or fully horizontal for now
+    // TODO: Investigate this for the teleport bug.
     const bool vert_coll = bash_floor || p.z() != sm_pos.z;
     Creature *critter = get_creature_tracker().creature_at( p, true );
     Character *ph = dynamic_cast<Character *>( critter );
@@ -850,11 +853,16 @@ veh_collision vehicle::part_collision( int part, const tripoint_bub_ms &p,
     // Disable vehicle/critter collisions when bashing floor
     // TODO: More elegant code
     const bool is_veh_collision = !bash_floor && ovp && &ovp->vehicle() != this;
-    const bool is_body_collision = !bash_floor && critter != nullptr;
+    bool is_body_collision = !bash_floor && critter != nullptr;
 
     veh_collision ret;
     ret.type = veh_coll_nothing;
     ret.part = part;
+
+    // Airborne critters aren't impacted by non-OBSTACLE parts.
+    if( !ovp.obstacle_at_part() && is_body_collision && ( critter->has_effect_with_flag( json_flag_LEVITATION ) || ( critter->is_monster() && critter->as_monster()->flies() ) ) ) {
+        is_body_collision = false;
+    }
 
     // Vehicle collisions are a special case. just return the collision.
     // The map takes care of the dynamic stuff.

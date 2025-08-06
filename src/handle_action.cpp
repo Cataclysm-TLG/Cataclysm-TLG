@@ -129,6 +129,7 @@ static const bionic_id bio_remote( "bio_remote" );
 static const damage_type_id damage_cut( "cut" );
 
 static const efftype_id effect_alarm_clock( "alarm_clock" );
+static const efftype_id effect_downed( "downed" );
 static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_incorporeal( "incorporeal" );
@@ -146,6 +147,7 @@ static const itype_id fuel_type_animal( "animal" );
 static const itype_id itype_radiocontrol( "radiocontrol" );
 
 static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
+static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_NO_PSIONICS( "NO_PSIONICS" );
 static const json_character_flag json_flag_NO_SPELLCASTING( "NO_SPELLCASTING" );
 static const json_character_flag json_flag_SUBTLE_SPELL( "SUBTLE_SPELL" );
@@ -2733,9 +2735,14 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_CONTROL_VEHICLE:
             if( player_character.is_mounted() ) {
                 player_character.dismount();
-            } else if( player_character.has_trait( trait_WAYFARER ) ) {
+            } 
+            else if( player_character.has_trait( trait_WAYFARER ) ) {
                 add_msg( m_info, _( "You refuse to take control of this vehicle." ) );
             } else {
+                map &here = get_map();
+                if( here.veh_at( player_character.pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) && !player_character.in_vehicle && !player_character.has_effect( effect_downed ) && !player_character.has_effect_with_flag( json_flag_GRAB ) ) {
+                    here.board_vehicle( player_character.pos_bub(), player_character.as_character() );
+                }
                 control_vehicle();
             }
             break;
