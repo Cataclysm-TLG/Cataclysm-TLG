@@ -335,7 +335,7 @@ std::string faction::food_supply_text()
         return pgettext( "Faction food", "Well-Stocked" );
     }
     if( val >= 6 ) {
-        return pgettext( "Faction food", "Scrapping By" );
+        return pgettext( "Faction food", "Scraping By" );
     }
     if( val >= 3 ) {
         return pgettext( "Faction food", "Malnourished" );
