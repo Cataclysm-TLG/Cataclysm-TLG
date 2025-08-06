@@ -726,12 +726,14 @@ void monster::spawn( const tripoint &p )
 {
     set_pos_only( p );
     unset_dest();
+    try_upgrade( false );
 }
 
 void monster::spawn( const tripoint_abs_ms &loc )
 {
     set_location( loc );
     unset_dest();
+    try_upgrade( false );
 }
 
 std::string monster::get_name() const
