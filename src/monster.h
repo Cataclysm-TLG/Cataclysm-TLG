@@ -603,8 +603,6 @@ class monster : public Creature
         /**
          * Retroactively update monster.
          * Call this after a preexisting monster has been placed on map.
-         * Don't call for monsters that have been freshly created, it may cause
-         * the monster to upgrade itself into another monster type.
          */
         void on_load();
 
