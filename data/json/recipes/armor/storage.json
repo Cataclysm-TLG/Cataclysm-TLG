@@ -1570,7 +1570,7 @@
     "components": [ [ [ "rope_natural", 1, "LIST" ] ], [ [ "duct_tape", 30 ] ], [ [ "pipe", 3 ] ] ]
   },
   {
-    "result": "quiver_simple_cloth",
+    "result": "quiver_denim",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1580,7 +1580,7 @@
     "skills_required": [ "survival", 1 ],
     "time": "45 m",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork_simple", 1 ], [ "strap_small", 2 ] ]
+    "using": [ [ "tailoring_denim_patchwork", 1 ], [ "strap_small", 2 ] ]
   },
   {
     "result": "ragpouch",
