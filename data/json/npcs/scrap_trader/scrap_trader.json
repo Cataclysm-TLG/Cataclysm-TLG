@@ -172,15 +172,15 @@
     "items": [
       { "item": "scrap_aluminum", "count": [ 100, 200 ] },
       { "item": "scrap_bronze", "count": [ 20, 50 ] },
-      { "item": "bismuth", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
-      { "item": "zinc_metal", "count": [ 0, 3 ], "container-item": "jar_glass_sealed", "charges": 100 },
-      { "item": "lead", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
+      { "item": "bismuth", "count": [ 0, 3 ] },
+      { "item": "zinc_metal", "count": [ 0, 3 ], "container-item": "jar_glass_sealed" },
+      { "item": "lead", "count": [ 0, 100 ] },
       { "item": "scrap_copper", "count": [ 100, 200 ] },
       { "item": "tin", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
       { "item": "magnesium", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
-      { "item": "silver_small", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
-      { "item": "gold_small", "count": [ 0, 3 ], "container-item": "bag_zipper", "charges": 100 },
-      { "item": "platinum_small", "count": [ 0, 3 ], "container-item": "jar_glass_sealed", "charges": 100 }
+      { "item": "silver_small", "count": [ 0, 5 ] },
+      { "item": "gold_small", "count": [ 0, 4 ] },
+      { "item": "platinum_small", "count": [ 0, 3 ] }
     ]
   },
   {

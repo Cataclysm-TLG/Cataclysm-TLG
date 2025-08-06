@@ -463,7 +463,7 @@
       [ "chem_saltpetre", 10 ],
       { "item": "red_phosphorous", "prob": 5, "charges": [ 100, -1 ] },
       { "item": "white_phosphorous", "prob": 5, "charges": [ 100, -1 ] },
-      { "item": "bismuth", "prob": 5, "charges": [ 1, -1 ] },
+      [ "bismuth", 5 ],
       { "item": "chem_benzene", "prob": 10, "charges": [ 1, -1 ] },
       { "item": "chem_toluene", "prob": 10, "charges": [ 1, -1 ] },
       { "item": "chem_antimony_trichloride", "prob": 2, "charges": [ 1, -1 ] },
