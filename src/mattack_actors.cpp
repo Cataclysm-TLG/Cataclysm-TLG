@@ -587,6 +587,16 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                            bp_id->name );
             // Add grabbed - permanent, removal handled in try_remove_grab on move/wait
             target->add_effect( grab_data.grab_effect, 1_days, bp_id, true, eff_grab_strength );
+            const optional_vpart_position vp = here.veh_at( target->pos_bub() );
+            vehicle *const veh = veh_pointer_or_null( vp );
+
+                // TODO: Skill/speed check to escape grab and drive away safely.
+
+                if( veh && foe->in_vehicle && !vp->part_with_feature( VPFLAG_SEATBELT, true ).has_value() ) {
+                    here.unboard_vehicle( target->pos_bub() );
+                    target->add_msg_if_player( m_bad, _( "You are yanked out of your seat!" ) );
+                    target->mod_moves( -to_moves<int>( 1_seconds ) );
+                }
         } else {
             // Monsters don't have limb scores, no need to target limbs
             target->add_effect( grab_data.grab_effect, 1_days, body_part_bp_null, true, eff_grab_strength );

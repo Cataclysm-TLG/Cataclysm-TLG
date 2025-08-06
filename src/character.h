@@ -2788,7 +2788,7 @@ class Character : public Creature, public visitable
         outfit worn;
         mutable bool nv_cached = false;
         mutable bool nv_result = false;
-        // Means player sit inside vehicle on the tile he is now
+        // Whether or not the character is in/on the vehicle on their tile
         bool in_vehicle = false;
 
         // Means player is hauling items along the ground

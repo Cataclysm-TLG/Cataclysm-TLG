@@ -13105,7 +13105,6 @@ int Character::impact( const int force, const tripoint &p )
 
     int total_dealt = 0;
     if( mod * effective_force >= 5 ) {
-        add_msg( _( "effective force = %s" ), effective_force );
         int parts_affected_total = std::max( 1, effective_force / rng( 3, 30 ) );
         int parts_affected = 0;
         std::vector<bodypart_id> bps = get_all_body_parts( get_body_part_flags::only_main );
