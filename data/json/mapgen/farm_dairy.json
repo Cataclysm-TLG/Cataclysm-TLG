@@ -34,6 +34,9 @@
       ],
       "palettes": [ "farm_dairy_palette" ],
       "monsters": { ".": { "monster": "GROUP_ZOMBIE_BOVINE", "chance": 2, "density": 0.0005 } },
+      "nested": {
+      "$": { "chunks": [ [ "1x1_bash", 2 ], [ "null", 98 ] ] }
+      },
       "place_monsters": [
         { "monster": "GROUP_COWS_DAIRY", "x": [ 1, 10 ], "y": [ 1, 9 ], "density": 0.1 },
         { "monster": "GROUP_COWS_DAIRY", "x": [ 25, 33 ], "y": [ 1, 11 ], "density": 0.1 },
