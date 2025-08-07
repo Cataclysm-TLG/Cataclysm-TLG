@@ -870,6 +870,7 @@
         "//1": "It's specifically not rigid because volume of candlestick and candle should be additive.",
         "max_contains_weight": "500 g",
         "max_contains_volume": "550 ml",
+        "max_item_length": "300 mm",
         "item_restriction": [ "candle", "candle_lit" ],
         "transparent": true
       }
@@ -3027,6 +3028,7 @@
     "volume": "15 ml",
     "category": "drugs",
     "emits": [ "emit_tobacco_trail" ],
+    "revert_to": "cigar_butt",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {
@@ -3074,6 +3076,7 @@
     "volume": "4 ml",
     "category": "drugs",
     "emits": [ "emit_tobacco_trail" ],
+    "revert_to": "cig_butt",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {
@@ -3121,6 +3124,7 @@
     "volume": "4 ml",
     "category": "drugs",
     "emits": [ "emit_joint_trail" ],
+    "revert_to": "joint_roach",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {

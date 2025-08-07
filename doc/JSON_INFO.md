@@ -4547,29 +4547,30 @@ The contents of use_action fields can either be a string indicating a built-in f
 
 ```C++
 "use_action": {
-    "type": "transform",  // The type of method, in this case one that transforms the item.
-    "target": "gasoline_lantern_on", // The item to transform to.
-    "variant_type": "condom_plain", // (Optional) Defaults to `<any>`. Specific variant type to set for the transformed item. Special string `<any>` will pick a random variant from all available variants, based on the variant's defined weight.
-    "active": true,       // Whether the item is active once transformed.
-    "ammo_scale": 0,    // For use when an item automatically transforms into another when its ammo drops to 0, or to allow guns to transform with 0 ammo.
-    "msg": "You turn the lamp on.", // Message to display when activated.
-    "need_fire": 1,                 // Whether fire is needed to activate.
-    "need_fire_msg": "You need a lighter!", // Message to display if there is no fire.
-    "need_charges": 1,                      // Number of charges the item needs to transform.
-    "need_charges_msg": "The lamp is empty.", // Message to display if there aren't enough charges.
-    "need_empty": true,                       // Whether the item must be empty to be transformed; false by default.
-    "need_worn": true,                        // Whether the item must be worn to be transformed; false by default.
-    "need_wielding": true,                    // Whether the item must be wielded to be transformed; false by default.
-    "qualities_needed": { "WRENCH_FINE": 1 }, // Tool qualities needed, e.g. "fine bolt turning 1".
-    "target_charges": 3, // Number of charges the transformed item has.
-    "rand_target_charges": [10, 15, 25], // Randomize the charges the transformed item has. This example has a 50% chance of rng(10, 15) charges and a 50% chance of rng(15, 25). (The endpoints are included.)
-    "ammo_qty": 3,              // If zero or positive set remaining ammo of transformed item to this.
-    "random_ammo_qty": [1, 5],  // If this has values, set remaining ammo of transformed item to one of them chosen at random.
-    "ammo_type": "tape",        // If both this and ammo_qty are specified then set transformed item to this specific ammo.
-    "container": "jar",  // Container holding the target item.
-    "sealed": true,      // Whether the transformed container is sealed; true by default.
-    "menu_text": "Lower visor"      // (Optional) Text displayed in the activation screen, defaults to "Turn on".
-    "moves" : 500         // Moves required to transform the item in excess of a normal action.
+  "type": "transform",                      // The type of method, in this case one that transforms the item
+  "target": "gasoline_lantern_on",          // The item to transform to
+  "target_group": "twisted_geometry",       // If used, target is a random item from itemgroup
+  "variant_type": "condom_plain",           // (optional) Defaults to `<any>`. Specific variant type to set for the transformed item. Special string `<any>` will pick a random variant from all available variants, based on the variant's defined weight
+  "active": true,                           // Whether the item is active once transformed
+  "ammo_scale": 0,                          // For use when an item automatically transforms into another when its ammo drops to 0, or to allow guns to transform with 0 ammo
+  "msg": "You turn the lamp on.",           // Message to display when activated
+  "need_fire": 1,                           // Whether fire is needed to activate
+  "need_fire_msg": "You need a lighter!",   // Message to display if there is no fire
+  "need_charges": 1,                        // Number of charges the item needs to transform
+  "need_charges_msg": "The lamp is empty.", // Message to display if there aren't enough charges
+  "need_empty": true,                       // Whether the item must be empty to be transformed; false by default
+  "need_worn": true,                        // Whether the item must be worn to be transformed; false by default
+  "need_wielding": true,                    // Whether the item must be wielded to be transformed; false by default
+  "qualities_needed": { "WRENCH_FINE": 1 }, // Tool qualities needed, e.g. "fine bolt turning 1"
+  "target_charges": 3,                      // Number of charges the transformed item has
+  "rand_target_charges": [ 10, 15, 25 ],    // Randomize the charges the transformed item has. This example has a 50% chance of rng(10, 15) charges and a 50% chance of rng(15, 25) (endpoints are included)
+  "ammo_qty": 3,                            // If zero or positive set remaining ammo of transformed item to this
+  "random_ammo_qty": [ 1, 5 ],              // If this has values, set remaining ammo of transformed item to one of them chosen at random
+  "ammo_type": "tape",                      // If both this and ammo_qty are specified then set transformed item to this specific ammo
+  "container": "jar",                       // Container holding the target item
+  "sealed": true,                           // Whether the transformed container is sealed; true by default
+  "menu_text": "Lower visor",               // (optional) Text displayed in the activation screen. Defaults to "Turn on"
+  "moves": 500                              // Moves required to transform the item in excess of a normal action
 },
 "use_action": {
     "type": "explosion", // An item that explodes when it runs out of charges.

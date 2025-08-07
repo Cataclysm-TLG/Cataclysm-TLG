@@ -310,6 +310,7 @@ static const json_character_flag json_flag_WEB_RAPPEL( "WEB_RAPPEL" );
 
 static const mod_id MOD_INFORMATION_Graphical_Overmap( "Graphical_Overmap" );
 static const mod_id MOD_INFORMATION_tlg( "tlg" );
+static const mod_id MOD_INFORMATION_sees_player_hitbutton( "sees_player_hitbutton" );
 
 static const mongroup_id GROUP_BLACK_ROAD( "GROUP_BLACK_ROAD" );
 
@@ -1274,6 +1275,29 @@ void game::load_npcs()
     }
 
     npcs_dirty = false;
+}
+
+void game::on_witness_theft( const item &target )
+{
+    Character &p = get_player_character();
+    std::vector<npc *> witnesses;
+    for( npc &elem : g->all_npcs() ) {
+        if( rl_dist( elem.pos(), p.pos() ) < MAX_VIEW_DISTANCE && elem.sees( p.pos_bub() ) &&
+            target.is_owned_by( elem ) ) {
+            witnesses.push_back( &elem );
+        }
+    }
+    for( npc *elem : witnesses ) {
+        elem->say( "<witnessed_thievery>", 7 );
+    }
+    if( !witnesses.empty() ) {
+        if( p.add_faction_warning( target.get_owner() ) ||
+            target.get_owner() == faction_id( "no_faction" ) ) {
+            for( npc *elem : witnesses ) {
+                elem->make_angry();
+            }
+        }
+    }
 }
 
 void game::unload_npcs()
@@ -3352,8 +3376,10 @@ void game::load_packs( const std::string &msg, const std::vector<mod_id> &packs,
         ui.proceed();
     }
 
-    std::unordered_set<mod_id> removed_mods {
-        MOD_INFORMATION_Graphical_Overmap
+    // Missing mods removed recently trigger a different message to make it clear they were removed on purpose.
+    const std::unordered_set<mod_id> removed_mods {
+        MOD_INFORMATION_Graphical_Overmap,
+        MOD_INFORMATION_sees_player_hitbutton
     };
     std::unordered_set<mod_id> mods_to_remove;
     for( const mod_id &e : missing ) {
@@ -14056,7 +14082,6 @@ void avatar_moves( const tripoint &old_abs_pos, const avatar &u, const map &m )
         const oter_id &past_ter = overmap_buffer.ter( old_abs_omt );
         get_event_bus().send<event_type::avatar_enters_omt>( new_abs_omt.raw(), cur_ter );
         // if the player has moved omt then might trigger an EOC for that OMT
-        effect_on_conditions::om_move();
         if( !past_ter->get_exit_EOC().is_null() ) {
             dialogue d( get_talker_for( get_avatar() ), nullptr );
             effect_on_condition_id eoc = cur_ter->get_exit_EOC();
