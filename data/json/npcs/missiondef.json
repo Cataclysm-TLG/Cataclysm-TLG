@@ -835,7 +835,7 @@
     },
     "dialogue": {
       "describe": "Medical services are a little sparse following <the_cataclysm>, but people have been surviving using their wits and the bounty of Mother Nature for a long time.  Care to learn a little?",
-      "offer": "Did you know that cattails are a source of a jelly that works as an antiseptic and analgesic?  Something like that is likely to be mighty helpful out here.  I want you to take this bag, head to the nearest swamp, collect 80 cattail stalks, and bring them back here.  In exchange, I'll show you how to harvest the jelly.",
+      "offer": "Did you know that cattails are a source of a jelly that works as an antiseptic and analgesic?  Something like that is likely to be mighty helpful out here.  I want you to take this bag, head to the nearest swamp, collect 20 cattail stalks, and bring them back here.  In exchange, I'll show you how to harvest the jelly.",
       "accepted": "Great!  This bag should be big enough to hold all of the stalks we'll need.  Don't forget to bring it back.",
       "rejected": "Your loss.",
       "advice": "The cattails grow in the fresh water in swamps.  You can't miss them.",
