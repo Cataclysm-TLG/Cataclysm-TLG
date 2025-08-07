@@ -3,5 +3,10 @@
     "type": "overmap_special_migration",
     "id": "Isherwood Farms",
     "new_id": "Isherwood Farm Mutable"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "solar_farm",
+    "new_id": "power_station_small"
   }
 ]
