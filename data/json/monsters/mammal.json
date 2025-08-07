@@ -843,7 +843,7 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "extend": { "special_attacks": [ [ "LUNGE", 5 ] ] },
-    "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_CLOSE" ],
+    "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_CLOSE", "SOUND" ],
     "petfood": {
       "food": [ "DOGFOOD" ],
       "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
@@ -2100,7 +2100,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "dodge": 4,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "harvest": "mammal_fur",
+    "harvest": "deer_with_skull",
     "dissect": "dissect_cattle_sample_single",
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
     "upgrades": { "age_grow": 500, "into": "mon_reindeer" },

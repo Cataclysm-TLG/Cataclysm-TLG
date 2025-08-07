@@ -199,7 +199,10 @@
     "container-item": "quiver",
     "on_overflow": "discard",
     "subtype": "distribution",
-    "entries": [ { "group": "archery_ammo", "prob": 80, "count": [ 1, 2 ] }, { "group": "crossbow_bolts", "prob": 20, "count": [ 1, 2 ] } ]
+    "entries": [
+      { "group": "archery_ammo", "prob": 80, "count": [ 1, 2 ] },
+      { "group": "crossbow_bolts", "prob": 20, "count": [ 1, 2 ] }
+    ]
   },
   {
     "type": "item_group",
@@ -207,7 +210,10 @@
     "container-item": "quiver_large",
     "on_overflow": "discard",
     "subtype": "distribution",
-    "entries": [ { "group": "archery_ammo", "prob": 80, "count": [ 2, 3 ] }, { "group": "crossbow_bolts", "prob": 20, "count": [ 2, 3 ] } ]
+    "entries": [
+      { "group": "archery_ammo", "prob": 80, "count": [ 2, 3 ] },
+      { "group": "crossbow_bolts", "prob": 20, "count": [ 2, 3 ] }
+    ]
   },
   {
     "type": "item_group",
@@ -215,7 +221,10 @@
     "container-item": "nylon_quiver",
     "on_overflow": "discard",
     "subtype": "distribution",
-    "entries": [ { "group": "archery_ammo", "prob": 80, "count": [ 1, 2 ] }, { "group": "crossbow_bolts", "prob": 20, "count": [ 1, 2 ] } ]
+    "entries": [
+      { "group": "archery_ammo", "prob": 80, "count": [ 1, 2 ] },
+      { "group": "crossbow_bolts", "prob": 20, "count": [ 1, 2 ] }
+    ]
   },
   {
     "type": "item_group",

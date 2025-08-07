@@ -1549,6 +1549,23 @@
     ]
   },
   {
+    "id": "zombie_antler",
+    "//": "Any zombie that might drop 0 to 2 antlers.",
+    "type": "harvest",
+    "message": "<zombie_animal_generic_harvest>",
+    "entries": [
+      { "drop": "meat_tainted", "type": "flesh", "mass_ratio": 0.25 },
+      { "drop": "fat_tainted", "type": "flesh", "mass_ratio": 0.08 },
+      { "drop": "tainted_innards", "type": "offal", "mass_ratio": 0.15 },
+      { "drop": "antler", "type": "bone", "base_num": [ 0, 2 ], "max": 2 },
+      { "drop": "blood_tainted", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "bone_tainted", "type": "bone", "mass_ratio": 0.1 },
+      { "drop": "tainted_marrow", "type": "bone", "mass_ratio": 0.005 },
+      { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
+      { "drop": "raw_tainted_leather", "type": "skin", "mass_ratio": 0.02 }
+    ]
+  },
+  {
     "id": "zombie_fur",
     "//": "any zombie that might drop fur. mostly animals.",
     "type": "harvest",
@@ -1937,6 +1954,21 @@
     ]
   },
   {
+    "id": "zombie_thorny_antler",
+    "//": "Mix of animal and plant. Also drops 0 to 2 antlers.",
+    "type": "harvest",
+    "entries": [
+      { "drop": "meat_tainted", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "fat_tainted", "type": "flesh", "mass_ratio": 0.05 },
+      { "drop": "antler", "type": "bone", "base_num": [ 0, 2 ], "max": 2 },
+      { "drop": "tainted_innards", "type": "offal", "mass_ratio": 0.08 },
+      { "drop": "bone_tainted", "type": "bone", "mass_ratio": 0.1 },
+      { "drop": "tainted_marrow", "type": "bone", "mass_ratio": 0.005 },
+      { "drop": "sinew", "type": "bone", "mass_ratio": 0.00035 },
+      { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.1 }
+    ]
+  },
+  {
     "id": "zombie_thorny",
     "//": "mix of animal and plant",
     "type": "harvest",
@@ -2139,6 +2171,24 @@
       { "drop": "demihuman_marrow", "type": "bone", "mass_ratio": 0.005 },
       { "drop": "sinew", "type": "bone", "mass_ratio": 0.001 },
       { "drop": "raw_demihumanleather", "type": "skin", "mass_ratio": 0.01 }
+    ]
+  },
+  {
+    "id": "mutant_human_antler",
+    "//": "Used for the ungulate mutant, but broadly appropriate for any formerly human mutant with fur and antlers.",
+    "type": "harvest",
+    "entries": [
+      { "drop": "skull_human", "type": "bone", "scale_num": [ 1, 1 ], "max": 1 },
+      { "drop": "mutant_human_flesh", "type": "flesh", "mass_ratio": 0.19 },
+      { "drop": "mutant_human_blood", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "mutant_human_heart", "type": "offal", "mass_ratio": 0.01 },
+      { "drop": "antler", "type": "bone", "base_num": [ 0, 2 ], "max": 2 },
+      { "drop": "hstomach", "scale_num": [ 1, 1 ], "max": 1, "type": "offal" },
+      { "drop": "mutant_human_fat", "type": "flesh", "mass_ratio": 0.1 },
+      { "drop": "bone_human", "type": "bone", "mass_ratio": 0.12 },
+      { "drop": "mutant_human_marrow", "type": "bone", "mass_ratio": 0.005 },
+      { "drop": "sinew", "type": "bone", "mass_ratio": 0.001 },
+      { "drop": "raw_hfur", "type": "skin", "mass_ratio": 0.02 }
     ]
   },
   {
