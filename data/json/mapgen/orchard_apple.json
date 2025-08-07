@@ -46,7 +46,8 @@
       "place_monsters": [
         { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 15 },
         { "monster": "GROUP_SAFE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 40 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 45 }
+        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 45 },
+        { "monster": "GROUP_FUNGI_FLOWERS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 }
       ],
       "place_vehicles": [
         { "vehicle": "suburban_home", "x": [ 3, 8 ], "y": 22, "chance": 45, "rotation": 180 },
@@ -146,9 +147,10 @@
       "palettes": [ "orchard_tree_apple" ],
       "place_monsters": [
         { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 60 },
-        { "monster": "GROUP_DOMESTIC", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 50 },
+        { "monster": "GROUP_DOMESTIC", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 },
         { "monster": "GROUP_SAFE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 25 }
+        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 25 },
+        { "monster": "GROUP_FUNGI_FLOWERS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 10 }
       ]
     }
   },

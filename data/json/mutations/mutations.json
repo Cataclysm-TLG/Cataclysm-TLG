@@ -6699,7 +6699,7 @@
     "enchantments": [
       {
         "values": [
-          { "value": "EXTRA_BASH", "multiply": 0.8 },
+          { "value": "EXTRA_BASH", "multiply": 1.0 },
           { "value": "MOVE_COST", "multiply": -0.15 },
           { "value": "ATTACK_SPEED", "multiply": -0.15 },
           { "value": "STAMINA_REGEN_MOD", "add": 0.1 },

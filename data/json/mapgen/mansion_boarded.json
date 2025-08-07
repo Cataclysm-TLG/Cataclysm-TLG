@@ -40,7 +40,7 @@
         "K": { "item": "crate_cleaning", "chance": 100 },
         "I": { "item": "table_foyer", "chance": 40 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 12, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 12, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -88,7 +88,7 @@
       },
       "furniture": { "&": "f_sofa" },
       "items": { " ": { "item": "clutter_mansion", "chance": 2 }, "c": { "item": "suit_of_armor", "chance": 100 } },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 17, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 17, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -141,7 +141,7 @@
         "x": { "item": "a_television", "chance": 100 },
         "c": { "item": "suit_of_armor", "chance": 100 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -285,7 +285,7 @@
         "s": { "item": "nightstand", "chance": 40 },
         "d": { "item": "dresser_stack", "chance": 100 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -405,7 +405,7 @@
         ",": { "item": "clutter_bathroom", "chance": 15 },
         "I": { "item": "vanity", "chance": 30 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 0, 11 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 11 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -459,7 +459,7 @@
         { "item": "stereo", "x": 4, "y": 4, "chance": 100 },
         { "item": "television", "x": 14, "y": 9, "chance": 100 }
       ],
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 0, 11 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 11 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -511,7 +511,7 @@
         "J": { "item": "table_sideboard", "chance": 35 },
         "x": { "item": "table_livingroom", "chance": 35 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 0, 23 ], "y": [ 0, 15 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 0, 23 ], "y": [ 0, 15 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -675,7 +675,7 @@
         "1": { "item": "wetbar_stack", "chance": 100 },
         "l": { "item": "snacks_fancy", "chance": 30 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 9, 23 ], "y": [ 17, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 9, 23 ], "y": [ 17, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -738,7 +738,7 @@
         "J": { "item": "wetbar_stack", "chance": 100 },
         "l": { "item": "table_livingroom", "chance": 30 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 6, 23 ], "y": [ 4, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 6, 23 ], "y": [ 4, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -798,7 +798,7 @@
         ",": { "item": "clutter_bathroom", "chance": 10 },
         "i": { "item": "wetbar_counter", "chance": 30 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 9, 23 ], "y": [ 9, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 9, 23 ], "y": [ 9, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -852,7 +852,7 @@
         "R": { "item": "mansion_bookcase", "chance": 100 },
         ")": { "item": "table_livingroom", "chance": 30 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 5, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 5, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -912,7 +912,7 @@
         "s": { "item": "snacks_fancy", "chance": 20 },
         "∞": { "item": "mansion_guns", "chance": 100 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 15, 23 ], "y": [ 9, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 15, 23 ], "y": [ 9, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -960,7 +960,7 @@
         "R": { "item": "mansion_bookcase", "chance": 100 },
         "s": { "item": "nightstand", "chance": 35 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 10, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 10, 23 ], "y": [ 6, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   },
   {
@@ -1011,7 +1011,7 @@
         ",": { "item": "softdrugs", "chance": 40 },
         "?": { "item": "dresser_servant", "chance": 45 }
       },
-      "place_monster": [ { "group": "GROUP_MANSION_ESCAPE", "x": [ 18, 23 ], "y": [ 8, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
+      "place_monster": [ { "group": "GROUP_MANSION", "x": [ 18, 23 ], "y": [ 8, 23 ], "chance": 65, "repeat": [ 3, 5 ] } ]
     }
   }
 ]
