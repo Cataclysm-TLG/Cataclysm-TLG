@@ -89,10 +89,10 @@
       "toilets": { "&": {  } },
       "vendingmachines": { "v": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
       "items": {
-        "&": { "item": "alcohol", "chance": 10 },
+        "&": { "item": "alcohol", "chance": 8 },
         "T": { "item": "snacks", "chance": 5 },
-        "X": { "item": "snacks", "chance": 30, "repeat": [ 6, 12 ] },
-        "g": { "item": "fridgesnacks", "chance": 70, "repeat": [ 6, 12 ] },
+        "X": { "item": "snacks", "chance": 30, "repeat": [ 1, 6 ] },
+        "g": { "item": "fridgesnacks", "chance": 70, "repeat": [ 1, 6 ] },
         "G": { "item": "trash", "chance": 20, "repeat": [ 2, 4 ] },
         "t": [
           { "item": "snacks", "chance": 3 },
@@ -122,11 +122,11 @@
         ],
         "l": [
           { "item": "softdrugs", "chance": 10 },
-          { "item": "bags", "chance": 20 },
-          { "item": "consumer_electronics", "chance": 5 },
-          { "item": "alcohol", "chance": 5 },
-          { "item": "manuals", "chance": 5 },
-          { "item": "textbooks", "chance": 5 }
+          { "item": "bags", "chance": 5 },
+          { "item": "consumer_electronics", "chance": 3 },
+          { "item": "alcohol", "chance": 3 },
+          { "item": "manuals", "chance": 1 },
+          { "item": "textbooks", "chance": 1 }
         ]
       },
       "item": { "N": { "item": "movie_poster", "chance": 100 } },
@@ -134,9 +134,9 @@
         { "chance": 35, "item": "misc_smoking", "x": 5, "y": 7 },
         { "chance": 45, "item": "toy_store", "x": 21, "y": 22 },
         { "chance": 45, "item": "toy_store", "x": 8, "y": 14 },
-        { "item": "cash_register_random", "x": 34, "y": 9, "chance": 100 },
-        { "item": "cash_register_random", "x": 36, "y": 9, "chance": 100 },
-        { "item": "cash_register_random", "x": 61, "y": [ 4, 9 ], "chance": 100 }
+        { "item": "cash_register_random", "x": 34, "y": 9, "chance": 80 },
+        { "item": "cash_register_random", "x": 36, "y": 9, "chance": 80 },
+        { "item": "cash_register_random", "x": 61, "y": [ 4, 9 ], "chance": 80 }
       ],
       "place_monsters": [
         { "density": 0.25, "monster": "GROUP_ZOMBIE", "x": 12, "y": 15 },
