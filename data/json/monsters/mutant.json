@@ -332,7 +332,7 @@
     "type": "MONSTER",
     "name": { "str": "shelled mutant" },
     "description": "An enormous mutant hidden beneath a gray segmented shell, crawling on a carpet of innumerable tentacles covered with suckers.  They hold three thicker, branching limbs high on their front end, each dotted with dozens of unblinking eyeballs.",
-    "copy-from": "mon_mutant_antler",
+    "copy-from": "mon_mutant_arthropod",
     "color": "dark_gray",
     "bodytype": "blob",
     "volume": "375 L",
