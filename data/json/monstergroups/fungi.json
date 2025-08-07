@@ -26,13 +26,23 @@
   },
   {
     "type": "monstergroup",
-    "name": "GROUP_FUNGI_FLOWERS",
+    "name": "GROUP_FUNGI_BLOSSOM",
     "monsters": [
       { "monster": "mon_fungal_blossom", "weight": 680, "cost_multiplier": 0 },
       { "monster": "mon_zombie_fungus", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_boomer_fungus", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_zombie_child_fungus", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_fungaloid_seeder", "weight": 0, "cost_multiplier": 0 }
+    ]
+  },
+    {
+    "type": "monstergroup",
+    "name": "GROUP_FUNGI_FLOWER",
+    "monsters": [
+      { "monster": "mon_fungal_blossom", "weight": 680, "cost_multiplier": 0 },
+      { "monster": "mon_zombie_fungus", "weight": 100, "cost_multiplier": 0 },
+      { "monster": "mon_boomer_fungus", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_zombie_child_fungus", "weight": 50, "cost_multiplier": 0 }
     ]
   },
   {
