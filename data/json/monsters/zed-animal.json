@@ -408,7 +408,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_day": 30,
     "vision_night": 5,
-    "harvest": "zombie_leather",
+    "harvest": "zombie_antler",
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "upgrades": { "half_life": 42, "into_group": "GROUP_ZOOSE_UPGRADE" },
     "fungalize_into": "mon_zoose_fungus",
@@ -707,7 +707,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_night": 12,
-    "harvest": "zombie_leather",
+    "harvest": "zombie_antler",
     "fungalize_into": "mon_zeer_fungus",
     "flags": [
       "SEES",
@@ -751,7 +751,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
     "vision_night": 12,
-    "harvest": "zombie_leather",
+    "harvest": "zombie_antler",
     "fungalize_into": "mon_zeindeer_fungus",
     "flags": [
       "SEES",

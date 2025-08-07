@@ -557,7 +557,7 @@
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 6, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
-    {
+  {
     "id": "quiver_denim",
     "type": "ARMOR",
     "name": { "str": "denim quiver" },

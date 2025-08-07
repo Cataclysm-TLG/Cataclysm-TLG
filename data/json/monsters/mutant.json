@@ -164,12 +164,11 @@
     "stomach_size": 1500,
     "path_settings": { "max_dist": 20, "avoid_sharp": true, "avoid_traps": true, "avoid_dangerous_fields": true },
     "families": [ "prof_intro_biology", "prof_physiology" ],
-    "harvest": "mutant_human",
+    "harvest": "mutant_human_antler",
     "dissect": "dissect_cattle_sample_large",
     "death_drops": "mon_mutant_experimental_death_drops",
     "anger_triggers": [ "HOSTILE_SEEN", "PLAYER_CLOSE", "FRIEND_ATTACKED" ],
     "fear_triggers": [ "HURT", "FIRE" ],
-    "zombify_into": "mon_meat_cocoon_med",
     "flags": [
       "SEES",
       "HEARS",
@@ -361,9 +360,8 @@
     "stomach_size": 1100,
     "harvest": "mutant_human",
     "dissect": "dissect_gastropod_sample_large",
-    "zombify_into": "mon_meat_cocoon_large",
     "delete": { "flags": [ "HIT_AND_RUN" ], "fear_triggers": [ "FIRE" ] },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NOHEAD", "STUN_IMMUNE", "PATH_AVOID_FIRE" ] },
-    "armor": { "bash": 22, "cut": 45, "stab": 30, "heat": 20, "bullet": 70, "electric": 6 }
+    "armor": { "bash": 22, "cut": 45, "stab": 30, "heat": 8, "bullet": 70, "electric": 6, "acid": 3 }
   }
 ]

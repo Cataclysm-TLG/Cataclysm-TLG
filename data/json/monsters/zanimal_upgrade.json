@@ -394,7 +394,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "bleed_rate": 20,
     "vision_night": 7,
-    "harvest": "zombie_thorny",
+    "harvest": "zombie_thorny_antler",
     "attack_effs": [ { "id": "paralyzepoison", "duration": 33 } ],
     "//grab": "Let's say the thorns make it half again as grabby",
     "grab_strength": 45,
