@@ -2473,6 +2473,27 @@
     "type": "mapgen",
     "method": "json",
     "//": "a nested map for lawns",
+    "nested_mapgen_id": "pond_6x6_murky",
+    "object": {
+      "mapgensize": [ 6, 6 ],
+      "rotation": [ 0, 3 ],
+      "rows": [
+        "    N ",
+        "  KK  ",
+        "KKKKK ",
+        "NKKK  ",
+        "  Kcc ",
+        "   cZ "
+      ],
+      "terrain": { "K": "t_water_murky" },
+      "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
+      "palettes": [ "house_w_nest_garden_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "//": "a nested map for lawns",
     "nested_mapgen_id": "pond_6x6_natural",
     "object": {
       "mapgensize": [ 6, 6 ],

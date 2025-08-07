@@ -241,12 +241,14 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
             }
         }
         // Let's not run fifty huge functions for 9 unused damage types every time anybody gets bapped by a zombie.
-        // if( elem.amount > 0.00f ) {
-        armor_enchantment_adjust( *this, elem );
-        worn.absorb_damage( *this, elem, bp, worn_remains, armor_destroyed );
-        passive_absorb_hit( bp, elem );
-        post_absorbed_damage_enchantment_adjust( *this, elem );
-        // }
+        if( elem.amount > 0.00f ) {
+            armor_enchantment_adjust( *this, elem );
+            worn.absorb_damage( *this, elem, bp, worn_remains, armor_destroyed );
+            passive_absorb_hit( bp, elem );
+            if( elem.amount > 0.00f ) {
+                post_absorbed_damage_enchantment_adjust( *this, elem );
+            }
+        }
         elem.amount = std::max( elem.amount, 0.0f );
     }
     map &here = get_map();

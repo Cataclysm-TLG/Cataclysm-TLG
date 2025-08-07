@@ -67,7 +67,8 @@
             [ "roof_6x6_garden_1", 15 ],
             [ "greenhouse_6x6_herbal", 20 ],
             [ "greenhouse_6x6_vegetable", 25 ],
-            [ "pond_6x6", 20 ],
+            [ "pond_6x6", 8 ],
+            [ "pond_6x6_murky", 12 ],
             [ "shed_6x6_junk", 25 ],
             [ "shed_6x6_bike", 20 ],
             [ "shed_6x6_woodworker", 20 ]

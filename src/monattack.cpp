@@ -1938,15 +1938,11 @@ bool mattack::fungus( monster *z )
     // It takes a while
     z->mod_moves( -to_moves<int>( 2_seconds ) );
 
-    //~ the sound of a fungus releasing spores
-    sounds::sound( z->pos(), 10, sounds::sound_t::combat, _( "Pouf!" ), false, "misc", "puff" );
-    add_msg_if_player_sees( *z, m_warning, _( "Spores are released from the %s!" ), z->name() );
-
     // Use less laggy methods of reproduction when there is a lot of mons around
     double spore_chance = 0.25;
     int radius = 1;
     if( g->num_creatures() > 25 ) {
-        // Number of creatures in the bubble and the resulting average number of spores per "Pouf!":
+        // Number of creatures in the bubble and the resulting average number of spores per puff":
         // 0-25: 2
         // 50  : 0.5
         // 75  : 0.22
@@ -1982,10 +1978,6 @@ bool mattack::fungus( monster *z )
 
 bool mattack::fungus_haze( monster *z )
 {
-    //~ That spore sound again
-    sounds::sound( z->pos(), 10, sounds::sound_t::combat, _( "Pouf!" ), true, "misc", "puff" );
-    add_msg_if_player_sees( *z, m_info, _( "The %s pulses, and fresh fungal material bursts forth." ),
-                            z->name() );
     z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
     map &here = get_map();
     for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 3 ) ) {
@@ -2028,11 +2020,6 @@ bool mattack::fungus_big_blossom( monster *z )
         return true;
     } else {
         // No fire detected, routine haze-emission
-        //~ That spore sound, much louder
-        sounds::sound( z->pos(), 15, sounds::sound_t::combat, _( "POUF." ), true, "misc", "puff" );
-        if( u_see ) {
-            add_msg( m_info, _( "The %s pulses, and fresh fungal material bursts forth!" ), z->name() );
-        }
         z->mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
         for( const tripoint_bub_ms &dest : here.points_in_radius( z->pos_bub(), 12 ) ) {
             here.add_field( dest, fd_fungal_haze, rng( 1, 2 ) );
@@ -2331,7 +2318,6 @@ bool mattack::plant( monster *z )
     const tripoint_bub_ms monster_position = z->pos_bub();
     // Spores taking seed
     fe.spread_fungus( monster_position );
-    add_msg_if_player_sees( *z, _( "The %s falls to the ground and bursts!" ), z->name() );
     z->set_hp( 0 );
     // Try fungifying once again
     fe.spread_fungus( monster_position );
