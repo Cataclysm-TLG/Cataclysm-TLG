@@ -242,10 +242,7 @@
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "FLAT" ],
     "connect_groups": "WATER",
-    "deconstruct": {
-      "ter_set": "t_water_sh",
-      "items": [ { "item": "scrap", "count": [ 3, 6 ] }, { "item": "sheet_metal", "count": 2 } ]
-    },
+    "deconstruct": { "ter_set": "t_water_sh", "items": [ { "item": "scrap", "count": [ 3, 6 ] }, { "item": "sheet_metal", "count": 2 } ] },
     "bash": {
       "str_min": 20,
       "str_max": 80,

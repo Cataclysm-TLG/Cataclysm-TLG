@@ -43,15 +43,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "solar_farm",
-    "vision_levels": "blends_till_outlines",
-    "name": "solar farm",
-    "sym": "#",
-    "color": "i_yellow",
-    "see_cost": "medium"
-  },
-  {
-    "type": "overmap_terrain",
     "id": "pwr_sub_s",
     "name": "small power substation",
     "sym": "H",
