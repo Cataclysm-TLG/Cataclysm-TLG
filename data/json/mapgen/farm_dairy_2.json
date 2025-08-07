@@ -194,7 +194,7 @@
         "M": { "field": "fd_blood", "intensity": 1, "age": 10 },
         "q": { "field": "fd_blood", "intensity": 1, "age": 10 }
       },
-      "vehicles": { "J": { "vehicle": "portable_generator", "rotation": 90, "chance": 100, "fuel": 40, "status": 1 } }
+      "vehicles": { "J": { "vehicle": "portable_generator", "rotation": 90, "chance": 80, "fuel": 40, "status": 1 } }
     }
   },
   {
