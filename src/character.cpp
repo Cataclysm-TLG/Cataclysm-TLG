@@ -11465,9 +11465,10 @@ void Character::process_effects()
 
 void Character::gravity_check()
 {
-    here.is_open_air( pos_bub() ) && !in_vehicle && !has_effect_with_flag( json_flag_GLIDING ) {
-        get_map().tr_at( pos_bub() ).trigger( pos(), *this );
-        get_map().update_visibility_cache( pos_bub().z() );
+    map &here = get_map();
+    if( here.is_open_air( pos_bub() ) && !in_vehicle && !has_effect_with_flag( json_flag_GLIDING ) ) {
+        here.try_fall( pos_bub(), this );
+        here.update_visibility_cache( pos_bub().z() );
     }
 }
 

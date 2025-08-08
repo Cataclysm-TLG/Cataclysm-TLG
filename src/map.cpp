@@ -133,6 +133,7 @@ static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
 static const efftype_id effect_gliding( "gliding" );
 static const efftype_id effect_incorporeal( "incorporeal" );
+static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
 static const efftype_id effect_slow_descent( "slow_descent" );
@@ -165,6 +166,8 @@ static const json_character_flag json_flag_FOOT( "LIMB_FOOT" );
 static const json_character_flag json_flag_HAND( "LIMB_HAND" );
 static const json_character_flag json_flag_LIMB_LOWER( "LIMB_LOWER" );
 static const json_character_flag json_flag_WALL_CLING( "WALL_CLING" );
+static const json_character_flag json_flag_WINGS_1( "WINGS_1" );
+static const json_character_flag json_flag_WINGS_2( "WINGS_2" );
 
 static const material_id material_glass( "glass" );
 
@@ -3197,7 +3200,7 @@ void map::drop_creature( const tripoint_bub_ms &p ) const
     if( mon_at_p ) {
         mon_at_p->gravity_check();
         // Handle character potentially standing on monster ("zed walking")
-        drop_creature( p + tripoint_rel_ms::above );
+        drop_creature( p + tripoint_above );
         return;
     }
     Character *char_at_p = get_creature_tracker().creature_at<Character>( p );
@@ -10757,7 +10760,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
 
     int height = 0;
     tripoint_bub_ms where( p );
-    tripoint_bub_ms below( where + tripoint_rel_ms::below );
+    tripoint_bub_ms below( where + tripoint_below );
     creature_tracker &creatures = get_creature_tracker();
     while( valid_move( where, below, false, true ) ) {
         where.z()--;
@@ -10810,11 +10813,11 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         if( c->has_effect( effect_strengthened_gravity ) ) {
             height += 1;
         }
-        c->impact( height * 10, where );
+        c->impact( height * 10, where.raw() );
         return true;
     }
 
-    item jetpack = you->item_worn_with_flag( STATIC( flag_id( "JETPACK" ) ) );
+    item jetpack = you->item_worn_with_flag( json_flag_JETPACK );
     // TODO: Typify this whole function
     tripoint_bub_ms p_bub = tripoint_bub_ms( p );
     if( you->has_flag( json_flag_WALL_CLING ) &&  get_map().is_clingable_wall_adjacent( p_bub ) ) {
@@ -10867,7 +10870,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         you->impact( height * 30, where.raw() );
     }
 
-    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {
+    if( has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {
         you->set_underwater( true );
         g->water_affect_items( *you );
         you->add_msg_player_or_npc( _( "You dive into water." ), _( "<npcname> dives into water." ) );

@@ -217,11 +217,29 @@ void Creature::setpos( const tripoint &p, bool check_gravity/* = true*/ )
 void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
     const tripoint_abs_ms old_loc = get_location();
-    set_pos_only( p );
+    set_pos_only( p.raw() );
     on_move( old_loc );
     if( check_gravity ) {
         gravity_check();
     }
+}
+
+static units::volume size_to_volume( creature_size size_class )
+{
+    // TODO: size_to_volume and volume_to_size should be made into a single consistent function.
+    // TODO: Volume averages should be 8500, 23000, 75000, 136000, 244000
+    // TODO: This would necessitate increasing vpart capacity and resizing
+    // almost every monster in the game.
+    if( size_class == creature_size::tiny ) {
+        return 15625_ml;
+    } else if( size_class == creature_size::small ) {
+        return 31250_ml;
+    } else if( size_class == creature_size::medium ) {
+        return 62500_ml;
+    } else if( size_class == creature_size::large ) {
+        return 125000_ml;
+    }
+    return 250000_ml;
 }
 
 int Creature::enum_size() const

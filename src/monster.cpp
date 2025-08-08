@@ -414,7 +414,7 @@ bool monster::can_upgrade() const
 void monster::gravity_check()
 {
     map &here = get_map();
-    if( here.is_open_air( pos_bub() ) && !flies() ) {
+    if( here.is_open_air( pos_bub() ) && !flies() && !here.has_vehicle_floor( pos_bub() ) ) {
         here.try_fall( pos_bub(), this );
     }
 }
