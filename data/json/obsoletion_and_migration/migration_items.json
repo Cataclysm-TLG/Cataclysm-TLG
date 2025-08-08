@@ -2562,5 +2562,20 @@
     "id": "egg_goose_canadian",
     "type": "MIGRATION",
     "replace": "egg_goose"
+  },
+  {
+    "id": "peanutbutter_imitation",
+    "type": "MIGRATION",
+    "replace": "peanutbutter"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_hole",
+    "to_ter": "t_open_air"
+  },
+  {
+    "type": "trap_migration",
+    "from_trap": "tr_ledge",
+    "to_trap": "tr_null"
   }
 ]
