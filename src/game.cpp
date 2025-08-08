@@ -10802,21 +10802,6 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             }
         }
     }
-    if( !u.is_mounted() && u.has_trait( trait_LEG_TENT_BRACE ) &&
-        u.is_barefoot() ) {
-        // DX and IN are long suits for Cephalopods,
-        // so this shouldn't cause too much hardship
-        // Presumed that if it's swimmable, they're
-        // swimming and won't stick
-        ///\EFFECT_DEX decreases chance of tentacles getting stuck to the ground
-
-        ///\EFFECT_INT decreases chance of tentacles getting stuck to the ground
-        if( !m.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, dest_loc ) &&
-            one_in( 80 + u.dex_cur + u.int_cur ) ) {
-            add_msg( _( "Your tentacles stick to the ground, but you pull them free." ) );
-            u.mod_fatigue( 1 );
-        }
-    }
 
     u.make_footstep_noise();
 
