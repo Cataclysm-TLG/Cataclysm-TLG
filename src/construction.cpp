@@ -1485,8 +1485,7 @@ bool construct::check_support_below( const tripoint_bub_ms &p )
     } ) != nullptr;
 
     map &here = get_map();
-    // These checks are based on check_empty_lite, but accept no floor and the traps associated
-    // with it, i.e. ledge, and various forms of pits.
+    // These checks are based on check_empty_lite, but accept no floor and various forms of pits.
     // - Check if there's nothing in the way. The "passable" check rejects tiles you can't
     //   pass through, but we want air and water to be OK as well (that's what we want to bridge).
     // - Apart from that, vehicles, items, creatures, and furniture also have to be absent.
