@@ -85,7 +85,7 @@
     "end": {
       "effect": [
         "stop_following",
-        { "math": [ "isherwood_barry_rescued", "=", "1" ] },
+        { "math": [ "isherwood_barry_rescued = 1" ] },
         { "u_add_var": "u_saved_barry_isherwood", "value": "yes" }
       ]
     },

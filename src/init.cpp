@@ -328,6 +328,7 @@ void DynamicDataLoader::initialize()
         requirement_data::load_requirement( jo, string_id<requirement_data>::NULL_ID(), true );
     } );
     add( "trap", &trap::load_trap );
+    add( "trap_migration", &trap_migrations::load );
 
     add( "AMMO", []( const JsonObject & jo, const std::string & src ) {
         item_controller->load_ammo( jo, src );
@@ -660,6 +661,7 @@ void DynamicDataLoader::unload_data()
     ter_furn_migrations::reset();
     ter_furn_transform::reset();
     trap::reset();
+    trap_migrations::reset();
     unload_talk_topics();
     VehicleGroup::reset();
     VehiclePlacement::reset();
@@ -855,6 +857,7 @@ void DynamicDataLoader::check_consistency( loading_ui &ui )
             { _( "Start locations" ), &start_locations::check_consistency },
             { _( "Ammunition types" ), &ammunition_type::check_consistency },
             { _( "Traps" ), &trap::check_consistency },
+            { _( "Trap migrations" ), &trap_migrations::check },
             { _( "Bionics" ), &bionic_data::check_bionic_consistency },
             { _( "Gates" ), &gates::check },
             { _( "NPC classes" ), &npc_class::check_consistency },
