@@ -892,18 +892,11 @@ void tileset_cache::loader::load_layers( const JsonObject &config )
             else if( item.has_array( "context" ) ) {
                 context = item.get_array( "context" ).next_value().get_string();
             }
-
-            if( item.has_string( "append_variants" ) ) {
-                append_suffix = item.get_string( "append_variants" );
-                if( append_suffix.empty() ) {
-                    config.throw_error( "append_variants cannot be empty string" );
-                }
-            }
             std::vector<layer_context_sprites> item_layers;
             std::vector<layer_context_sprites> field_layers;
             if( item.has_array( "item_variants" ) ) {
                 for( const JsonObject vars : item.get_array( "item_variants" ) ) {
-                    if( vars.has_member( "item" ) && vars.has_member( "layer" ) ) {
+                    if( vars.has_member( "item" ) && vars.has_array( "sprite" ) && vars.has_member( "layer" ) ) {
                         layer_context_sprites lcs;
                         lcs.id = vars.get_string( "item" );
 
@@ -916,20 +909,20 @@ void tileset_cache::loader::load_layers( const JsonObject &config )
                             offset.y = vars.get_int( "offset_y" );
                         }
                         lcs.offset = offset;
-                        lcs.append_suffix = append_suffix;
 
                         int total_weight = 0;
-                        if( vars.has_array( "sprite" ) ) {
-                            for( const JsonObject sprites : vars.get_array( "sprite" ) ) {
-                                std::string id = sprites.get_string( "id" );
-                                int weight = sprites.get_int( "weight", 1 );
-                                lcs.sprite.emplace( id, weight );
-                                total_weight += weight;
+                        for( const JsonObject sprites : vars.get_array( "sprite" ) ) {
+                            std::string id = sprites.get_string( "id" );
+                            int weight = sprites.get_int( "weight", 1 );
+                            lcs.sprite.emplace( id, weight );
+                            if( sprites.has_string( "append_variants" ) ) {
+                                lcs.append_variant = sprites.get_string( "append_variants" );
+                                if( lcs.append_variant.empty() ) {
+                                    config.throw_error( "append_variants cannot be empty string" );
+                                }
                             }
-                        } else {
-                            //default if unprovided = item name
-                            lcs.sprite.emplace( lcs.id, 1 );
-                            total_weight = 1;
+
+                            total_weight += weight;
                         }
                         lcs.total_weight = total_weight;
                         item_layers.push_back( lcs );
@@ -3724,6 +3717,9 @@ bool cata_tiles::draw_field_or_item( const tripoint &p, const lit_level ll, int 
 
                         if( i.has_itype_variant() ) {
                             variant = i.itype_variant().id;
+                            if( !layer_var.append_variant.empty() ) {
+                                variant += layer_var.append_variant;
+                            }
                         }
                         if( !layer_var.append_suffix.empty() ) {
                             variant += layer_var.append_suffix;
@@ -4092,9 +4088,13 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         const Creature &critter = *pcritter;
 
         if( !you.sees( critter ) ) {
-            if( you.sees_with_specials( critter ) ) {
-                return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
-                                            TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            const_dialogue d( get_const_talker_for( you ), get_const_talker_for( critter ) );
+            enchant_cache::special_vision sees_with_special = you.enchantment_cache->get_vision( d );
+            if( !sees_with_special.is_empty() ) {
+                const enchant_cache::special_vision_descriptions special_vis_desc =
+                    you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
+                return draw_from_id_string( special_vis_desc.id, TILE_CATEGORY::NONE, empty_string, p, 0, 0,
+                                            lit_level::LIT, false, height_3d, 1.0f, 1.0f );
             }
             return false;
         }
@@ -4181,20 +4181,26 @@ bool cata_tiles::draw_critter_at( const tripoint &p, lit_level ll, int &height_3
         if( pcritter == nullptr ) {
             return false;
         }
-        // scope_is_blocking is true if player is aiming and aim FOV limits obscure that position
-        const bool scope_is_blocking = you.is_avatar() && you.as_avatar()->cant_see( p );
-        const bool sees_with_specials = !scope_is_blocking && you.sees_with_specials( *pcritter );
-        if( sees_with_specials ) {
-            // try drawing infrared creature if invisible and not overridden
-            // return directly without drawing overlay
-            return draw_from_id_string( you.enchantment_cache->get_vision_tile( you, *pcritter ),
-                                        TILE_CATEGORY::NONE, empty_string, p, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+        const_dialogue d( get_const_talker_for( you ), get_const_talker_for( *pcritter ) );
+        const enchant_cache::special_vision sees_with_special = you.enchantment_cache->get_vision( d );
+        if( !sees_with_special.is_empty() ) {
+
+            const bool scope_is_blocking = you.is_avatar() && ( you.as_avatar()->cant_see( p ) ||
+                                           sees_with_special.ignores_aiming_cone );
+            if( !scope_is_blocking ) {
+                const enchant_cache::special_vision_descriptions special_vis_desc =
+                    you.enchantment_cache->get_vision_description_struct( sees_with_special, d );
+                return draw_from_id_string( special_vis_desc.id, TILE_CATEGORY::NONE, empty_string, p,
+                                            0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
-    if( result && !is_player ) {
+    if( result && !is_player && show_creature_overlay_icons ) {
         std::string draw_id = "overlay_" + Creature::attitude_raw_string( attitude );
         if( sees_player && !you.has_trait( trait_INATTENTIVE ) ) {
             draw_id += "_sees_player";
@@ -4545,12 +4551,12 @@ void cata_tiles::init_draw_sct()
     do_draw_sct = true;
 }
 void cata_tiles::init_draw_zones( const tripoint_bub_ms &_start, const tripoint_bub_ms &_end,
-                                  const tripoint &_offset )
+                                  const tripoint_rel_ms &_offset )
 {
     do_draw_zones = true;
     zone_start = _start;
     zone_end = _end;
-    zone_offset = _offset;
+    zone_offset = _offset.raw();
 }
 void cata_tiles::init_draw_async_anim( const tripoint_bub_ms &p, const std::string &tile_id )
 {

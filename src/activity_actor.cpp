@@ -34,7 +34,6 @@
 #include "character_id.h"
 #include "clzones.h"
 #include "contents_change_handler.h"
-#include "coordinate_constants.h"
 #include "coordinates.h"
 #include "craft_command.h"
 #include "crafting_gui.h"
@@ -862,10 +861,10 @@ static hack_result hack_attempt( Character &who, item_location &tool )
     int success = std::ceil( normal_roll( hack_level( who, tool ), hack_stddev ) );
     if( success < 0 ) {
         who.add_msg_if_player( _( "You cause a short circuit!" ) );
-        tool->ammo_consume( tool->ammo_required(), tool.position(), &who );
+        tool->ammo_consume( tool->ammo_required(), tool.pos_bub(), &who );
 
         if( success <= -5 ) {
-            tool->ammo_consume( ( tool->ammo_required() * 2 ), tool.position(), &who );
+            tool->ammo_consume( ( tool->ammo_required() * 2 ), tool.pos_bub(), &who );
         }
         return hack_result::FAIL;
     } else if( success < 6 ) {
@@ -1418,7 +1417,7 @@ void hacksaw_activity_actor::do_turn( player_activity &/*act*/, Character &who )
                 ammo_consumed *= iter->second;
             }
 
-            tool->ammo_consume( ammo_consumed, tool.position(), &who );
+            tool->ammo_consume( ammo_consumed, tool.pos_bub(), &who );
             sfx::play_activity_sound( "tool", "hacksaw", sfx::get_heard_volume( target ) );
             if( calendar::once_every( 1_minutes ) ) {
                 //~ Sound of a metal sawing tool at work!
@@ -1643,32 +1642,32 @@ void glide_activity_actor::do_turn( player_activity &act, Character &you )
 {
     tripoint_rel_ms heading;
     if( jump_direction == 0 ) {
-        heading = tripoint_rel_ms( tripoint_south );
+        heading = tripoint_rel_ms_south;
     }
     if( jump_direction == 1 ) {
-        heading = tripoint_rel_ms( tripoint_south_west );
+        heading = tripoint_rel_ms_south_west;
     }
     if( jump_direction == 2 ) {
-        heading = tripoint_rel_ms( tripoint_west );
+        heading = tripoint_rel_ms_west;
     }
     if( jump_direction == 3 ) {
-        heading = tripoint_rel_ms( tripoint_north_west );
+        heading = tripoint_rel_ms_north_west;
     }
     if( jump_direction == 4 ) {
-        heading = tripoint_rel_ms( tripoint_north );
+        heading = tripoint_rel_ms_north;
     }
     if( jump_direction == 5 ) {
-        heading = tripoint_rel_ms( tripoint_north_east );
+        heading = tripoint_rel_ms_north_east;
     }
     if( jump_direction == 6 ) {
-        heading = tripoint_rel_ms( tripoint_east );
+        heading = tripoint_rel_ms_east;
     }
     if( jump_direction == 7 ) {
-        heading = tripoint_rel_ms( tripoint_south_east );
+        heading = tripoint_rel_ms_south_east;
     }
     const tripoint_abs_ms newpos = you.get_location() + heading;
     const tripoint_bub_ms checknewpos = you.pos_bub() + heading;
-    if( get_map().tr_at( you.pos_bub() ) != tr_ledge || heading == tripoint_rel_ms( tripoint_zero ) ) {
+    if( get_map().tr_at( you.pos_bub() ) != tr_ledge || heading == tripoint_rel_ms_zero ) {
         you.add_msg_player_or_npc( m_good,
                                    _( "You come to a gentle landing." ),
                                    _( "<npcname> comes to a gentle landing." ) );
@@ -1737,28 +1736,28 @@ glide_activity_actor::glide_activity_actor( Character *you, int jump_direction, 
     // What's the purpose of assigning a variable that isn't used? Is some code AWOL?
     tripoint_rel_ms heading;
     if( jump_direction == 0 ) {
-        heading = tripoint_rel_ms( tripoint_south );
+        heading = tripoint_rel_ms_south;
     }
     if( jump_direction == 1 ) {
-        heading = tripoint_rel_ms( tripoint_south_west );
+        heading = tripoint_rel_ms_south_west;
     }
     if( jump_direction == 2 ) {
-        heading = tripoint_rel_ms( tripoint_west );
+        heading = tripoint_rel_ms_west;
     }
     if( jump_direction == 3 ) {
-        heading = tripoint_rel_ms( tripoint_north_west );
+        heading = tripoint_rel_ms_north_west;
     }
     if( jump_direction == 4 ) {
-        heading = tripoint_rel_ms( tripoint_north );
+        heading = tripoint_rel_ms_north;
     }
     if( jump_direction == 5 ) {
-        heading = tripoint_rel_ms( tripoint_north_east );
+        heading = tripoint_rel_ms_north_east;
     }
     if( jump_direction == 6 ) {
-        heading = tripoint_rel_ms( tripoint_east );
+        heading = tripoint_rel_ms_east;
     }
     if( jump_direction == 7 ) {
-        heading = tripoint_rel_ms( tripoint_south_west );
+        heading = tripoint_rel_ms_south_west;
     }
 }
 
@@ -2638,7 +2637,7 @@ void boltcutting_activity_actor::start( player_activity &act, Character &/*who*/
 void boltcutting_activity_actor::do_turn( player_activity &/*act*/, Character &who )
 {
     if( tool->ammo_sufficient( &who ) ) {
-        tool->ammo_consume( tool->ammo_required(), tool.position(), &who );
+        tool->ammo_consume( tool->ammo_required(), tool.pos_bub(), &who );
     } else {
         if( who.is_avatar() ) {
             who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool->tname() );
@@ -3216,7 +3215,7 @@ void open_gate_activity_actor::serialize( JsonOut &jsout ) const
 
 std::unique_ptr<activity_actor> open_gate_activity_actor::deserialize( JsonValue &jsin )
 {
-    open_gate_activity_actor actor( 0, tripoint_bub_ms( tripoint_zero ) );
+    open_gate_activity_actor actor( 0, tripoint_bub_ms_zero );
 
     JsonObject data = jsin.get_object();
 
@@ -4631,7 +4630,7 @@ void move_furniture_activity_actor::serialize( JsonOut &jsout ) const
 
 std::unique_ptr<activity_actor> move_furniture_activity_actor::deserialize( JsonValue &jsin )
 {
-    move_furniture_activity_actor actor = move_furniture_activity_actor( tripoint_zero, false );
+    move_furniture_activity_actor actor = move_furniture_activity_actor( tripoint_rel_ms_zero, false );
 
     JsonObject data = jsin.get_object();
 
@@ -5431,7 +5430,7 @@ void oxytorch_activity_actor::start( player_activity &act, Character &/*who*/ )
 void oxytorch_activity_actor::do_turn( player_activity &/*act*/, Character &who )
 {
     if( tool->ammo_sufficient( &who ) ) {
-        tool->ammo_consume( tool->ammo_required(), tool.position(), &who );
+        tool->ammo_consume( tool->ammo_required(), tool.pos_bub(), &who );
         sfx::play_activity_sound( "tool", "oxytorch", sfx::get_heard_volume( target ) );
         if( calendar::once_every( 2_turns ) ) {
             sounds::sound( target, 10, sounds::sound_t::destructive_activity, _( "hissssssssss!" ) );
@@ -5552,9 +5551,8 @@ void tent_placement_activity_actor::start( player_activity &act, Character & )
 void tent_placement_activity_actor::finish( player_activity &act, Character &p )
 {
     map &here = get_map();
-    const tripoint_bub_ms center = p.pos_bub() + tripoint( ( radius + 1 ) * target.x,
-                                   ( radius + 1 ) * target.y,
-                                   0 );
+    const tripoint_bub_ms center = p.pos_bub() + point( ( radius + 1 ) * target.x(),
+                                   ( radius + 1 ) * target.y() );
 
     // Make a square of floor surrounded by wall.
     for( const tripoint_bub_ms &dest : here.points_in_radius( center, radius ) ) {
@@ -5819,7 +5817,7 @@ void prying_activity_actor::do_turn( player_activity &/*act*/, Character &who )
         if( iter != tool->type->ammo_scale.end() ) {
             ammo_consumed *= iter->second;
         }
-        tool->ammo_consume( ammo_consumed, tool.position(), &who );
+        tool->ammo_consume( ammo_consumed, tool.pos_bub(), &who );
         if( prying_nails ) {
             sfx::play_activity_sound( "tool", "hammer", sfx::get_heard_volume( target ) );
         }
@@ -6553,7 +6551,7 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
         }
     }
 
-    here.cut_down_tree( tripoint_bub_ms( pos ), direction.xy().raw() );
+    here.cut_down_tree( pos, direction.xy().raw() );
 
     who.add_msg_if_player( m_good, _( "You finish chopping down a tree." ) );
     // sound of falling tree
@@ -6712,12 +6710,12 @@ void firstaid_activity_actor::finish( player_activity &act, Character &who )
         it.remove_item();
     } else if( used_tool->is_medication() ) {
         if( !it->count_by_charges() ||
-            it->use_charges( it->typeId(), charges_consumed, used, it.position() ) ) {
+            it->use_charges( it->typeId(), charges_consumed, used, it.pos_bub() ) ) {
             it.remove_item();
         }
     } else if( used_tool->is_tool() ) {
         if( used_tool->type->charges_to_use() ) {
-            it->activation_consume( charges_consumed, it.position(), &who );
+            it->activation_consume( charges_consumed, it.pos_bub(), &who );
         }
     }
 
@@ -7818,7 +7816,7 @@ void heat_activity_actor::finish( player_activity &act, Character &p )
             get_map().veh_at( h.vpt ).value().vehicle().discharge_battery( requirements.ammo *
                     h.heating_effect );
         } else {
-            h.loc->activation_consume( requirements.ammo, h.loc.position(), &p );
+            h.loc->activation_consume( requirements.ammo, h.loc.pos_bub(), &p );
         }
     }
     p.add_msg_if_player( m_good, _( "You heated your items." ) );

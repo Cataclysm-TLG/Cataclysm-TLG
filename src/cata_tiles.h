@@ -158,6 +158,8 @@ class layer_context_sprites
         int total_weight;
         //if set, appends to the sprite name for handling contexts
         std::string append_suffix;
+        //if set, appends to the "item+variant" name for item variant handling
+        std::string append_variant;
 };
 
 class tileset
@@ -637,7 +639,7 @@ class cata_tiles
         void void_sct();
 
         void init_draw_zones( const tripoint_bub_ms &start, const tripoint_bub_ms &end,
-                              const tripoint &offset );
+                              const tripoint_rel_ms &offset );
         void draw_zones_frame();
         void void_zones();
 

@@ -31,10 +31,10 @@
         "sssL***+**************#_",
         "sss####################_"
       ],
-      "palettes": [ "parametrized_carpets_palette", "parametrized_walls_palette" ],
-      "fill_ter": "t_linoleum_white",
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_carpets_palette", "parametrized_walls_palette" ],
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
       "terrain": {
-        " ": "t_linoleum_white",
+        " ": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "*": "t_thconc_floor",
         "+": "t_door_c",
         "A": "t_atm",
@@ -42,13 +42,13 @@
         "C": "t_thconc_floor",
         "I": "t_door_locked_interior",
         "L": "t_door_locked",
-        "S": "t_linoleum_gray",
-        "T": "t_linoleum_gray",
+        "S": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "T": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "W": "t_chainfence",
         "[": "t_door_glass_c",
         "]": "t_thconc_floor",
         "_": "t_region_groundcover_urban",
-        "l": "t_linoleum_gray",
+        "l": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "s": "t_concrete",
         "w": "t_chainfence",
         "4": "t_gutter_downspout"
@@ -155,22 +155,22 @@
         "sss#***+**************#_",
         "sss####################_"
       ],
-      "fill_ter": "t_linoleum_white",
-      "palettes": [ "parametrized_carpets_palette", "parametrized_walls_palette" ],
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_carpets_palette", "parametrized_walls_palette" ],
       "terrain": {
-        " ": "t_linoleum_white",
+        " ": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "*": "t_thconc_floor",
         "+": [ [ "t_door_b", 20 ], [ "t_door_frame", 10 ], [ "t_door_o", 70 ], [ "t_door_c", 5 ], [ "t_door_locked_interior", 3 ] ],
         "g": "t_wall_glass",
-        "A": "t_linoleum_white",
+        "A": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "C": "t_thconc_floor",
-        "S": "t_linoleum_gray",
-        "T": "t_linoleum_gray",
+        "S": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "T": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "W": "t_chainfence",
         "[": "t_door_glass_c",
         "]": "t_thconc_floor",
         "_": "t_region_groundcover_urban",
-        "l": "t_linoleum_gray",
+        "l": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "s": "t_concrete",
         "w": "t_chainfence",
         "4": "t_gutter_downspout"
@@ -325,10 +325,10 @@
         "sssL***+**************#_",
         "sss####################_"
       ],
-      "fill_ter": "t_linoleum_white",
-      "palettes": [ "parametrized_carpets_palette", "parametrized_walls_palette" ],
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_carpets_palette", "parametrized_walls_palette" ],
       "terrain": {
-        " ": "t_linoleum_white",
+        " ": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "*": "t_thconc_floor",
         "+": "t_door_boarded",
         "A": "t_atm",
@@ -336,13 +336,13 @@
         "C": "t_thconc_floor",
         "I": "t_door_boarded",
         "L": "t_door_boarded",
-        "S": "t_linoleum_gray",
-        "T": "t_linoleum_gray",
+        "S": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "T": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "W": "t_chainfence",
         "[": "t_door_glass_c",
         "]": "t_thconc_floor",
         "_": "t_region_groundcover_urban",
-        "l": "t_linoleum_gray",
+        "l": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "s": "t_concrete",
         "w": "t_chainfence",
         "4": "t_gutter_downspout",
@@ -451,7 +451,7 @@
     "om_terrain": [ "s_grocery_1" ],
     "weight": 100,
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "           ss           ",
         "           ss           ",
@@ -478,12 +478,12 @@
         "   4                    ",
         "                        "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover_urban",
         "s": "t_concrete",
         "+": "t_door_c",
-        ".": "t_linoleum_gray",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         ":": "t_window",
         "4": "t_gutter_downspout"
       },
@@ -530,7 +530,7 @@
     "om_terrain": [ "s_grocery_1" ],
     "weight": 100,
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "           ss           ",
         "           ss           ",
@@ -557,12 +557,12 @@
         "   4                    ",
         "                        "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover_urban",
         "s": "t_concrete",
         "+": [ [ "t_door_b", 20 ], [ "t_door_frame", 10 ], [ "t_door_o", 70 ], [ "t_door_c", 5 ], [ "t_door_locked_interior", 3 ] ],
-        ".": "t_linoleum_gray",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         ":": [ [ "t_window_frame", 70 ], [ "t_window_empty", 20 ], [ "t_window", 5 ] ],
         "4": "t_gutter_downspout"
       },
@@ -650,7 +650,7 @@
     "om_terrain": [ "s_grocery_1" ],
     "weight": 100,
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "           ss           ",
         "           ss           ",
@@ -677,12 +677,12 @@
         "   4                    ",
         "                        "
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover_urban",
         "s": "t_concrete",
         "+": "t_door_boarded",
-        ".": "t_linoleum_gray",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         ":": "t_window_boarded",
         "4": "t_gutter_downspout"
       },

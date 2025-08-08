@@ -231,24 +231,24 @@
         "#.........&~~&.........#",
         "##:::::::##++##:::::::##"
       ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_landscaping_palette" ],
+      "palettes": [ "parametrized_carpets_palette", "standard_domestic_palette", "standard_domestic_landscaping_palette" ],
       "terrain": {
         "&": "t_column",
-        "-": "t_carpet_green",
-        "?": "t_carpet_green",
-        "h": "t_carpet_green",
-        "r": "t_carpet_green",
-        "Y": "t_carpet_green",
-        "E": "t_carpet_green",
-        "l": "t_carpet_green",
+        "-": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "?": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "h": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "r": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "Y": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "E": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "l": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
         "~": "t_thconc_floor"
       },
       "furniture": { "?": "f_sofa" },
       "items": {
         " ": { "item": "clutter_mansion", "chance": 1 },
         ".": { "item": "clutter_yard", "chance": 1 },
-        "x": { "item": "medieval", "chance": 10 },
-        "l": { "item": "mansion_bookcase", "chance": 30 },
+        "x": { "item": "medieval", "chance": 15 },
+        "l": { "item": "mansion_bookcase", "chance": 80 },
         "q": { "item": "garden_shed", "chance": 20 }
       },
       "place_nested": [
@@ -314,16 +314,16 @@
         "#.........&~~&.........#",
         "##:::::::##++##:::::::##"
       ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_landscaping_palette" ],
+      "palettes": [ "parametrized_carpets_palette", "standard_domestic_palette", "standard_domestic_landscaping_palette" ],
       "terrain": {
         "&": "t_column",
-        "-": "t_carpet_green",
-        "?": "t_carpet_green",
-        "h": "t_carpet_green",
-        "r": "t_carpet_green",
-        "Y": "t_carpet_green",
-        "E": "t_carpet_green",
-        "l": "t_carpet_green",
+        "-": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "?": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "h": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "r": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "Y": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "E": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
+        "l": { "param": "carpet_color_type", "fallback": "t_carpet_green" },
         "~": "t_thconc_floor"
       },
       "furniture": { "?": "f_sofa" },
@@ -341,8 +341,7 @@
             [ "roof_6x6_garden_2", 30 ],
             [ "greenhouse_6x6_herbal", 50 ],
             [ "greenhouse_6x6_vegetable", 50 ],
-            [ "pond_6x6", 15 ],
-            [ "pond_6x6_murky", 25 ]
+            [ "pond_6x6", 40 ]
           ],
           "x": 3,
           "y": 15
@@ -353,8 +352,7 @@
             [ "roof_6x6_garden_2", 30 ],
             [ "greenhouse_6x6_herbal", 50 ],
             [ "greenhouse_6x6_vegetable", 50 ],
-            [ "pond_6x6", 15 ],
-            [ "pond_6x6_murky", 25 ]
+            [ "pond_6x6", 40 ]
           ],
           "x": 15,
           "y": 15
