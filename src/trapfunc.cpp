@@ -58,12 +58,8 @@ static const efftype_id effect_jumping( "jumping" );
 static const efftype_id effect_lightsnare( "lightsnare" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_slimed( "slimed" );
-static const efftype_id effect_slow_descent( "slow_descent" );
-static const efftype_id effect_strengthened_gravity( "strengthened_gravity" );
 static const efftype_id effect_tetanus( "tetanus" );
-static const efftype_id effect_weakened_gravity( "weakened_gravity" );
 
-static const flag_id json_flag_LEVITATION( "LEVITATION" );
 static const flag_id json_flag_PROXIMITY( "PROXIMITY" );
 static const flag_id json_flag_UNCONSUMED( "UNCONSUMED" );
 
@@ -1339,139 +1335,6 @@ bool trapfunc::sinkhole( const tripoint &p, Creature *c, item *i )
     return true;
 }
 
-bool trapfunc::ledge( const tripoint &p, Creature *c, item * )
-{
-    if( c == nullptr ) {
-        return false;
-    }
-    monster *m = dynamic_cast<monster *>( c );
-    if( m != nullptr && m->flies() ) {
-        return false;
-    }
-    if( c->has_effect_with_flag( json_flag_LEVITATION ) && !c->has_effect( effect_slow_descent ) ) {
-        return false;
-    }
-
-    map &here = get_map();
-
-    int height = 0;
-    tripoint_bub_ms where( p );
-    tripoint_bub_ms below( where + tripoint_below );
-    creature_tracker &creatures = get_creature_tracker();
-    while( here.valid_move( where, below, false, true ) ) {
-        where.z()--;
-        if( get_creature_tracker().creature_at( where ) != nullptr ) {
-            where.z()++;
-            break;
-        }
-
-        below.z()--;
-        height++;
-    }
-
-    if( height == 0 && c->is_avatar() ) {
-        // For now just special case player, NPCs don't "zedwalk"
-        Creature *critter = creatures.creature_at( below, true );
-        if( critter == nullptr || !critter->is_monster() ) {
-            return false;
-        }
-
-        std::vector<tripoint_bub_ms> valid;
-        for( const tripoint_bub_ms &pt : here.points_in_radius( below, 1 ) ) {
-            if( g->is_empty( pt ) ) {
-                valid.push_back( pt );
-            }
-        }
-
-        if( valid.empty() ) {
-            critter->setpos( c->pos() );
-            add_msg( m_bad, _( "You fall down under %s!" ), critter->disp_name() );
-        } else {
-            critter->setpos( random_entry( valid ) );
-        }
-
-        height++;
-        where.z()--;
-    } else if( height == 0 ) {
-        return false;
-    }
-
-    c->add_msg_if_npc( _( "<npcname> falls down a level!" ) );
-    Character *you = dynamic_cast<Character *>( c );
-    if( you == nullptr ) {
-        c->setpos( where );
-        if( c->has_effect( effect_weakened_gravity ) ) {
-            height = std::max( 0, height - 1 );
-        }
-        if( c->has_effect( effect_strengthened_gravity ) ) {
-            height += 1;
-        }
-        c->impact( height * 10, where.raw() );
-        return true;
-    }
-
-    item jetpack = you->item_worn_with_flag( STATIC( flag_id( "JETPACK" ) ) );
-    // TODO: Typify this whole function
-    tripoint_bub_ms p_bub = tripoint_bub_ms( p );
-    if( you->has_flag( json_flag_WALL_CLING ) &&  get_map().is_clingable_wall_adjacent( p_bub ) ) {
-        you->add_msg_player_or_npc( _( "You cling to the nearby wall." ),
-                                    _( "<npcname> clings to the wall." ) );
-        return false;
-    }
-
-    if( you->is_avatar() ) {
-        add_msg( m_bad, n_gettext( "You fall down %d story!", "You fall down %d stories!", height ),
-                 height );
-        g->vertical_move( -height, true );
-    } else {
-        you->setpos( where );
-    }
-    if( you->has_effect( effect_weakened_gravity ) ) {
-        height = std::max( 0, height - 1 );
-    }
-    if( you->has_effect( effect_strengthened_gravity ) ) {
-        height += 1;
-    }
-    if( you->has_effect( effect_jumping ) ) {
-        height = std::max( 0, ( height - std::max( 0, ( you->get_effect_int( effect_jumping ) - 1 ) ) ) );
-    }
-    if( you->can_fly() && you->has_flag( json_flag_WINGS_1 ) ) {
-        you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
-                                    _( "<npcname> spreads their wings to slow their fall." ) );
-        height = std::max( 0, height - 1 );
-    }
-    if( you->can_fly() && you->has_flag( json_flag_WINGS_2 ) ) {
-        you->add_msg_player_or_npc( _( "You spread your wings to slow your fall." ),
-                                    _( "<npcname> spreads their wings to slow their fall." ) );
-        height = std::max( 0, height - 2 );
-    }
-    if( you->has_active_bionic( bio_shock_absorber ) ) {
-        you->add_msg_if_player( m_info,
-                                _( "You hit the ground hard, but your grav chute handles the impact admirably!" ) );
-    } else if( !jetpack.is_null() ) {
-        if( jetpack.ammo_sufficient( you ) ) {
-            you->add_msg_player_or_npc( _( "You ignite your %s and use it to break the fall." ),
-                                        _( "<npcname> uses their %s to break the fall." ), jetpack.tname() );
-            jetpack.activation_consume( 1, you->pos_bub(), you );
-        } else {
-            you->add_msg_if_player( m_bad,
-                                    _( "You attempt to break the fall with your %s but it is out of fuel!" ), jetpack.tname() );
-            you->impact( height * 30, where.raw() );
-
-        }
-    } else {
-        you->impact( height * 30, where.raw() );
-    }
-
-    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {
-        you->set_underwater( true );
-        g->water_affect_items( *you );
-        you->add_msg_player_or_npc( _( "You dive into water." ), _( "<npcname> dives into water." ) );
-    }
-
-    return true;
-}
-
 bool trapfunc::glow( const tripoint &p, Creature *c, item * )
 {
     if( c == nullptr ) {
@@ -1728,7 +1591,6 @@ const trap_function &trap_function_from_string( const std::string &function_name
             { "pit_glass", trapfunc::pit_glass },
             { "lava", trapfunc::lava },
             { "portal", trapfunc::portal },
-            { "ledge", trapfunc::ledge },
             { "boobytrap", trapfunc::boobytrap },
             { "glow", trapfunc::glow },
             { "hum", trapfunc::hum },

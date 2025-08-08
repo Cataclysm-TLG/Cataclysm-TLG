@@ -509,8 +509,6 @@ static const trait_id trait_URSINE_EYE( "URSINE_EYE" );
 static const trait_id trait_VISCOUS( "VISCOUS" );
 static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
 
-static const trap_str_id tr_ledge( "tr_ledge" );
-
 static const vitamin_id vitamin_calcium( "calcium" );
 static const vitamin_id vitamin_iron( "iron" );
 
@@ -6383,7 +6381,7 @@ bool Character::pour_into( item_location &container, item &liquid, bool ignore_s
     }
 
     if( amount == 0 ) {
-        add_msg_if_player( _( "%1$s can't to expand to add any more %2$s." ), container->tname(),
+        add_msg_if_player( _( "The %1$s can't expand to fit any more %2$s." ), container->tname(),
                            liquid.tname() );
         return false;
     }
@@ -11467,9 +11465,10 @@ void Character::process_effects()
 
 void Character::gravity_check()
 {
-    if( get_map().tr_at( pos_bub() ) == tr_ledge && !has_effect_with_flag( json_flag_GLIDING ) ) {
-        get_map().tr_at( pos_bub() ).trigger( pos(), *this );
-        get_map().update_visibility_cache( pos_bub().z() );
+    map &here = get_map();
+    if( here.is_open_air( pos_bub() ) && !in_vehicle && !has_effect_with_flag( json_flag_GLIDING ) ) {
+        here.try_fall( pos_bub(), this );
+        here.update_visibility_cache( pos_bub().z() );
     }
 }
 

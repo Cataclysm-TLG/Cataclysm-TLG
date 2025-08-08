@@ -195,6 +195,7 @@
       [ "ceramic_shard", 15 ],
       { "item": "ceramic_mug", "prob": 2 },
       [ "stick", 95 ],
+      [ "stick_long", 20 ],
       [ "seed_flower", 5 ],
       [ "joint_roach", 5 ],
       [ "pipe", 20 ],

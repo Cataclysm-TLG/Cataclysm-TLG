@@ -209,16 +209,19 @@ tripoint_bub_ms Creature::pos_bub() const
     return get_map().bub_from_abs( location );
 }
 
-void Creature::setpos( const tripoint &p )
+void Creature::setpos( const tripoint &p, bool check_gravity/* = true*/ )
 {
-    const tripoint_abs_ms old_loc = get_location();
-    set_pos_only( p );
-    on_move( old_loc );
+    Creature::setpos( tripoint_bub_ms( p ), check_gravity );
 }
 
-void Creature::setpos( const tripoint_bub_ms &p )
+void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
-    Creature::setpos( p.raw() );
+    const tripoint_abs_ms old_loc = get_location();
+    set_pos_only( p.raw() );
+    on_move( old_loc );
+    if( check_gravity ) {
+        gravity_check();
+    }
 }
 
 static units::volume size_to_volume( creature_size size_class )
@@ -351,6 +354,10 @@ std::vector<std::string> Creature::get_grammatical_genders() const
 {
     // Returning empty list means we use the language-specified default
     return {};
+}
+
+void Creature::gravity_check()
+{
 }
 
 void Creature::normalize()

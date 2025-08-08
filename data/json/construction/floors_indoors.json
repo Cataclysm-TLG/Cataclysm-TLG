@@ -676,7 +676,7 @@
     "//": "Step 2: the full wall",
     "category": "CONSTRUCT",
     "required_skills": [ [ "fabrication", 6 ], [ "survival", 2 ] ],
-    "time": "180 m",
+    "time": "280 m",
     "qualities": [ [ { "id": "HAMMER", "level": 2 } ], [ { "id": "DIG", "level": 2 } ] ],
     "components": [
       [ [ "rock_large", 83 ] ],
@@ -693,7 +693,7 @@
     "//": "Step 1: half the wall",
     "category": "CONSTRUCT",
     "required_skills": [ [ "fabrication", 6 ], [ "survival", 2 ] ],
-    "time": "180 m",
+    "time": "280 m",
     "qualities": [ [ { "id": "HAMMER", "level": 2 } ], [ { "id": "DIG", "level": 2 } ] ],
     "components": [
       [ [ "rock_large", 83 ] ],
