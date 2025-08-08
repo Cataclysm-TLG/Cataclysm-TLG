@@ -10492,7 +10492,8 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
     }
     const trap &tr = m.tr_at( dest_loc );
     if( m.is_open_air( dest_loc ) ) {
-        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) && !u.has_effect( effect_jumping ) ) {
+        if( !veh_dest && !u.has_effect_with_flag( json_flag_LEVITATION ) &&
+            !u.has_effect( effect_jumping ) ) {
             harmful_stuff.emplace_back( "ledge" );
             if( harmful_stuff.size() == max ) {
                 return harmful_stuff;
