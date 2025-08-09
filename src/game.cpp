@@ -13876,7 +13876,7 @@ void game::climb_down_using( const tripoint_bub_ms &examp, climbing_aid_id aid_i
     map &here = get_map();
     Character &you = get_player_character();
     // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-    if( !you.move_effects( false, examp ) ) {
+    if( !you.move_effects( false, examp.raw() ) ) {
         // move_effects determined we could not move, waste all moves
         you.set_moves( 0 );
         return;
