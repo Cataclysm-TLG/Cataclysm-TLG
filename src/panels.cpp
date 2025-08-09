@@ -174,7 +174,7 @@ void overmap_ui::draw_overmap_chunk( const catacurses::window &w_minimap, const 
     const int sight_points = you.overmap_modified_sight_range( g->light_level( you.posz() ) );
 
     oter_display_options opts( global_omt, sight_points );
-    if( targ != overmap::invalid_tripoint ) {
+    if( !targ.is_invalid() ) {
         opts.mission_target = targ;
     }
     opts.hilite_pc = true;

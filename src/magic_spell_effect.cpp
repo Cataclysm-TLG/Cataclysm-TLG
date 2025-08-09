@@ -145,7 +145,7 @@ static void build_line( spell_detail::line_iterable line, const tripoint_bub_ms 
                         const point &delta, const point &delta_perp, bool ( *test )( const tripoint_bub_ms & ),
                         std::set<tripoint_bub_ms> &result )
 {
-    while( between_or_on( point_zero, delta, delta_perp, line.get() ) ) {
+    while( between_or_on( point::zero, delta, delta_perp, line.get() ) ) {
         if( !test( source + line.get() ) ) {
             break;
         }
@@ -310,7 +310,7 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
         const tripoint_bub_ms &source, const tripoint_bub_ms &target )
 {
     const point delta = ( target - source ).xy().raw();
-    const int dist = square_dist( point_zero, delta );
+    const int dist = square_dist( point::zero, delta );
     // Early out to prevent unnecessary calculations
     if( dist == 0 ) {
         return std::set<tripoint_bub_ms>();
@@ -329,18 +329,18 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
     int cw_len = params.aoe_radius - ccw_len;
 
     // is delta aligned with, cw, or ccw of primary axis
-    int delta_side = spell_detail::side_of( point_zero, axis_delta, delta );
+    int delta_side = spell_detail::side_of( point::zero, axis_delta, delta );
 
     bool ( *test )( const tripoint_bub_ms & ) = params.ignore_walls ? test_always_true : test_coverage;
 
     // Canonical path from source to target, offset to local space
-    std::vector<point> path_to_target = line_to( point_zero, delta );
+    std::vector<point> path_to_target = line_to( point::zero, delta );
     // Remove endpoint,
     path_to_target.pop_back();
     // and insert startpoint. Path is now prepared for wrapped iteration
-    path_to_target.insert( path_to_target.begin(), point_zero );
+    path_to_target.insert( path_to_target.begin(), point::zero );
 
-    spell_detail::line_iterable base_line( point_zero, delta, path_to_target );
+    spell_detail::line_iterable base_line( point::zero, delta, path_to_target );
 
     std::set<tripoint_bub_ms> result;
 
@@ -350,7 +350,7 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
     // Add cw and ccw legs
     if( delta_side == 0 ) { // delta is already axis aligned, only need straight lines
         // cw leg
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * cw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * cw_len ) ) {
             base_line.reset( p );
             if( !test( source + p ) ) {
                 break;
@@ -359,7 +359,7 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
         }
         // ccw leg
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * -ccw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
             if( !test( source + p ) ) {
                 break;
@@ -369,11 +369,11 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
         }
     } else if( delta_side == 1 ) { // delta is cw of primary axis
         // ccw leg is behind perp axis
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * -ccw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
 
             // forward until in
-            while( spell_detail::side_of( point_zero, delta_perp, base_line.get() ) == 1 ) {
+            while( spell_detail::side_of( point::zero, delta_perp, base_line.get() ) == 1 ) {
                 base_line.next();
             }
             if( !test( source + p ) ) {
@@ -382,11 +382,11 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
         }
         // cw leg is before perp axis
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * cw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * cw_len ) ) {
             base_line.reset( p );
 
             // move back
-            while( spell_detail::side_of( point_zero, delta_perp, base_line.get() ) != 1 ) {
+            while( spell_detail::side_of( point::zero, delta_perp, base_line.get() ) != 1 ) {
                 base_line.prev();
             }
             base_line.next();
@@ -397,11 +397,11 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
         }
     } else if( delta_side == -1 ) { // delta is ccw of primary axis
         // ccw leg is before perp axis
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * -ccw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
 
             // move back
-            while( spell_detail::side_of( point_zero, delta_perp, base_line.get() ) != 1 ) {
+            while( spell_detail::side_of( point::zero, delta_perp, base_line.get() ) != 1 ) {
                 base_line.prev();
             }
             base_line.next();
@@ -411,11 +411,11 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
         }
         // cw leg is behind perp axis
-        for( const point &p : line_to( point_zero, unit_cw_perp_axis * cw_len ) ) {
+        for( const point &p : line_to( point::zero, unit_cw_perp_axis * cw_len ) ) {
             base_line.reset( p );
 
             // forward until in
-            while( spell_detail::side_of( point_zero, delta_perp, base_line.get() ) == 1 ) {
+            while( spell_detail::side_of( point::zero, delta_perp, base_line.get() ) == 1 ) {
                 base_line.next();
             }
             if( !test( source + p ) ) {
