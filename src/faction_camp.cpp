@@ -4998,7 +4998,7 @@ void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes,
                     const std::string &message )
 {
     std::vector<tripoint_abs_omt> note_pts;
-    note_pts.reserve( range * 7 ); // actual multiplier varies from 5.33 to 8, mostly 6 to 7
+    note_pts.reserve( range * 8 ); // actual multiplier varies from 5.33 to 8
     for( const tripoint_abs_omt &pos : points_on_radius_circ( origin, range ) ) {
         note_pts.emplace_back( pos );
     }
