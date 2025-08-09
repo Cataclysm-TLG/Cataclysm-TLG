@@ -4102,7 +4102,7 @@ void game::draw( ui_adaptor &ui )
     ter_view_p.z() = ( u.pos_bub() + u.view_offset ).z();
     m.build_map_cache( ter_view_p.z() );
     m.update_visibility_cache( ter_view_p.z() );
-
+    g->run_weather_animation();
     werase( w_terrain );
     void_blink_curses();
     draw_ter();

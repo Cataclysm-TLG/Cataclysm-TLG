@@ -1269,7 +1269,8 @@ void spell_effect::directed_push( const spell &sp, Creature &caster, const tripo
     }
 }
 
-void spell_effect::spawn_ethereal_item( const spell &sp, Creature &caster, const tripoint_bub_ms &center )
+void spell_effect::spawn_ethereal_item( const spell &sp, Creature &caster,
+                                        const tripoint_bub_ms &center )
 {
     Character *character_at_target = get_creature_tracker().creature_at<Character>( center );
 

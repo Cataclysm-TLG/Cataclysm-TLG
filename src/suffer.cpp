@@ -806,7 +806,8 @@ void suffer::in_sunlight( Character &you, outfit &worn )
         }
         const float weather_factor = std::min( incident_sun_irradiance( get_weather().weather_id,
                                                calendar::turn ) / irradiance::moderate, 1.f );
-        const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature( position.raw() ) );
+        const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature(
+                                          position.raw() ) );
         int flux = ( player_local_temp - 32 ) / 5;
         // Efficiency rapidly falls off when it's too hot due to photosynthesis being an enzymatic process.
         // Some tropical plants can overcome this with specific adaptations, but that would probably be its own mutation.
