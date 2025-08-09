@@ -1970,7 +1970,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                 if( damage.amount >= 1.0f && damage_armor ) {
                     const std::string pre_damage_name = armor.tname();
                     bool destroy = false;
-                    item_armor_enchantment_adjust( guy, damage, armor );
+                    guy.adjust_taken_damage_by_enchantments( damage );
                     if( ignite && damage.amount >= 1.0f ) {
                         int fire_intensity = std::ceil( intensity * ( liquid_remaining / liquid_amount ) );
                         if( fire_intensity >= 1 ) {
