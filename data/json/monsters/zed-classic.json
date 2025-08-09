@@ -179,7 +179,20 @@
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_crawler_fungal",
     "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_CRAWLER_UPGRADE" },
-    "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GRABS", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "ATTACK_LOWER", "GEN_DORMANT" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "STUMBLES",
+      "WARM",
+      "BASHES",
+      "GRABS",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "FILTHY",
+      "ATTACK_LOWER",
+      "GEN_DORMANT"
+    ],
     "armor": { "electric": 1 }
   },
   {
@@ -366,7 +379,20 @@
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_rot_fungal",
     "upgrades": { "half_life": 43, "into": "mon_devourer" },
-    "flags": [ "SEES", "HEARS", "STUMBLES", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "PUSH_MON", "FILTHY", "GEN_DORMANT" ],
+    "flags": [
+      "SEES",
+      "HEARS",
+      "STUMBLES",
+      "WARM",
+      "BASHES",
+      "GROUP_BASH",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "PUSH_MON",
+      "FILTHY",
+      "GEN_DORMANT"
+    ],
     "armor": { "electric": 1 }
   },
   {
