@@ -1518,7 +1518,6 @@ bool _stacks_weapon_mods( item const &lhs, item const &rhs )
 
 bool _stacks_location_hint( item const &lhs, item const &rhs )
 {
-    const tripoint_abs_omt tripoint_abs_omt::max( tripoint::max );
     static const std::string omt_loc_var = "spawn_location_omt";
     const tripoint_abs_omt this_loc( lhs.get_var( omt_loc_var, tripoint_abs_omt::max ) );
     const tripoint_abs_omt that_loc( rhs.get_var( omt_loc_var, tripoint_abs_omt::max ) );
