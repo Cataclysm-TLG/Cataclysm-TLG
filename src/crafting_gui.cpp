@@ -988,6 +988,16 @@ static recipe_subset filter_recipes( const recipe_subset &available_recipes,
                                        recipe_subset::search_type::quality_result, progress_callback );
                     break;
 
+                case 'v':
+                    filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
+                                       recipe_subset::search_type::covers, progress_callback );
+                    break;
+
+                case 'e':
+                    filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
+                                       recipe_subset::search_type::layer, progress_callback );
+                    break;
+
                 case 'd':
                     filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
                                        recipe_subset::search_type::description_result, progress_callback );
@@ -1106,7 +1116,9 @@ static const std::vector<SearchPrefix> prefixes = {
     { 'r', to_translation( "buttermilk" ), to_translation( "recipe's (<color_cyan>by</color>)<color_cyan>products</color>; use * as wildcard" ) },
     { 'a', to_translation( "brisk" ), to_translation( "recipe's <color_cyan>activity level</color>" ) },
     { 'C', to_translation( "armor" ), to_translation( "<color_cyan>category</color> of the resulting item" ) },
-    { 'S', to_translation( "food_snack" ), to_translation( "<color_cyan>subcategory</color> of the resulting item" ) }
+    { 'S', to_translation( "food_snack" ), to_translation( "<color_cyan>subcategory</color> of the resulting item" ) },
+    { 'v', to_translation( "head" ), to_translation( "<color_cyan>body part</color> the result covers" ) },
+    { 'e', to_translation( "close to skin" ), to_translation( "<color_cyan>layer</color> the result covers" ) }
 };
 
 static const translation filter_help_start = to_translation(
