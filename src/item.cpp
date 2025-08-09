@@ -5468,6 +5468,27 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     }
 }
 
+std::vector<std::pair<const item *, int>> get_item_duplicate_counts(
+        const std::list<const item *> &items )
+{
+    std::vector<std::pair<item const *, int>> counted_items;
+    for( const item *contents_item : items ) {
+        bool found = false;
+        for( std::pair<const item *, int> &content : counted_items ) {
+            if( content.first->display_stacked_with( *contents_item ) ) {
+                content.second += 1;
+                found = true;
+            }
+        }
+        if( !found ) {
+            std::pair<const item *, int> new_content( contents_item, 1 );
+            counted_items.push_back( new_content );
+        }
+    }
+    return counted_items;
+}
+
+
 void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                           bool /*debug*/ ) const
 {
@@ -5493,8 +5514,14 @@ void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *par
         info.emplace_back( "DESCRIPTION", mod_str );
         info.emplace_back( "DESCRIPTION", mod->type->description.translated() );
     }
+
+    const std::list<const item *> all_contents = contents.all_items_top();
+    const std::vector<std::pair<item const *, int>> counted_contents = get_item_duplicate_counts(
+                all_contents );
     bool contents_header = false;
-    for( const item *contents_item : contents.all_items_top() ) {
+    for( const std::pair<const item *, int> &content_w_count : counted_contents ) {
+        const item *contents_item = content_w_count.first;
+        int count = content_w_count.second;
         if( !contents_header ) {
             insert_separation_line( info );
             info.emplace_back( "DESCRIPTION", _( "<bold>Contents of this item</bold>:" ) );
@@ -5508,12 +5535,16 @@ void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *par
 
         if( contents_item->made_of_from_type( phase_id::LIQUID ) ) {
             units::volume contents_volume = contents_item->volume() * batch;
-            info.emplace_back( "DESCRIPTION", colorize( contents_item->display_name(),
-                               contents_item->color_in_inventory() ) );
+            info.emplace_back( "DESCRIPTION",
+                               colorize( contents_item->display_name(), contents_item->color_in_inventory() ) );
             info.emplace_back( vol_to_info( "CONTAINER", description + space, contents_volume ) );
         } else {
-            info.emplace_back( "DESCRIPTION", colorize( contents_item->display_name(),
-                               contents_item->color_in_inventory() ) );
+            std::string name;
+            if( count > 1 ) {
+                name += std::to_string( count ) + " ";
+            }
+            name += colorize( contents_item->display_name( count ), contents_item->color_in_inventory() );
+            info.emplace_back( "DESCRIPTION", name );
             info.emplace_back( "DESCRIPTION", description.translated() );
         }
     }
@@ -12866,8 +12897,8 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
         units::temperature_delta temp_mod;
         // Toilets and vending machines will try to get the heat radiation and convection during mapgen and segfault.
         if( !g->new_game ) {
-            temp_mod = get_heat_radiation( pos.raw() );
-            temp_mod += get_convection_temperature( pos.raw() );
+            temp_mod = get_heat_radiation( pos );
+            temp_mod += get_convection_temperature( pos );
             temp_mod += here.get_temperature_mod( pos );
         } else {
             temp_mod = units::from_kelvin_delta( 0 );
@@ -13260,7 +13291,7 @@ bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms 
             here.trap_set( pos, trap_id( "tr_dormant_corpse" ) );
         } else if( trap_here->loadid != trap_id( "tr_dormant_corpse" ) ) {
             // if there is a trap, but it isn't the right one, we need to revive the zombie manually.
-            return g->revive_corpse( pos.raw(), *this, 3 );
+            return g->revive_corpse( pos, *this, 3 );
         }
         return false;
     }
@@ -13275,7 +13306,7 @@ bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms 
         return false;
     }
     if( rng( 0, volume() / units::legacy_volume_factor ) > burnt &&
-        g->revive_corpse( pos.raw(), *this ) ) {
+        g->revive_corpse( pos, *this ) ) {
         if( carrier == nullptr ) {
             if( corpse->in_species( species_ROBOT ) ) {
                 add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
