@@ -2240,7 +2240,7 @@ bool Character::uncanny_dodge()
     if( !( can_dodge_bio || can_dodge_mut || can_dodge_both ) ) {
         return false;
     }
-    tripoint adjacent = adjacent_tile();
+    tripoint_bub_ms adjacent = adjacent_tile();
 
     if( can_dodge_both ) {
         mod_power_level( -trigger_cost / 2 );
@@ -2261,8 +2261,8 @@ bool Character::uncanny_dodge()
     if( in_vehicle && veh_part ) {
         here.unboard_vehicle( pos_bub() );
     }
-    if( adjacent.x != posx() || adjacent.y != posy() ) {
-        set_pos_only( adjacent );
+    if( adjacent.x() != pos_bub().x() || adjacent.y() != pos_bub().y() ) {
+        set_pos_only( adjacent.raw() );
 
         //landed in a vehicle tile
         if( here.veh_at( pos_bub() ) ) {
