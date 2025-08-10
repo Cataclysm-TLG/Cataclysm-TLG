@@ -2634,10 +2634,10 @@
     "enchantments": [
       {
         "condition": "ALWAYS",
+        "incoming_damage_mod_post_absorbed": [ { "type": "bash", "multiply": 0.3 } ],
         "values": [
-          { "value": "EXTRA_BASH", "multiply": 0.4 },
           { "value": "MOVE_COST", "multiply": -0.1 },
-          { "value": "ATTACK_SPEED", "multiply": -0.1 },
+          { "value": "ATTACK_SPEED", "multiply": -0.05 },
           { "value": "CARRY_WEIGHT", "multiply": -0.1 }
         ]
       }
@@ -6698,12 +6698,12 @@
     "category": [ "BIRD", "SLIME", "ELFA" ],
     "enchantments": [
       {
+        "incoming_damage_mod_post_absorbed": [ { "type": "bash", "multiply": 0.6 } ],
         "values": [
-          { "value": "EXTRA_BASH", "multiply": 1.0 },
           { "value": "MOVE_COST", "multiply": -0.15 },
-          { "value": "ATTACK_SPEED", "multiply": -0.15 },
+          { "value": "ATTACK_SPEED", "multiply": -0.05 },
           { "value": "STAMINA_REGEN_MOD", "add": 0.1 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.25 }
+          { "value": "CARRY_WEIGHT", "multiply": -0.20 }
         ]
       }
     ]

@@ -33,7 +33,8 @@
       "farm_lot_wire_turn_v_open_north": "farmland_straight_north",
       "farm_lot_wire_turn_v_open_east": "farmland_straight_east",
       "farm_lot_wire_turn_v_open_south": "farmland_straight_south",
-      "farm_lot_wire_turn_v_open_west": "farmland_straight_west"
+      "farm_lot_wire_turn_v_open_west": "farmland_straight_west",
+      "megastore_parking": "omt_obsolete"
     }
   },
   {
