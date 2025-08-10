@@ -165,6 +165,7 @@
       "palettes": [ "house_w_foundation_palette", "parametrized_carpets_palette" ],
       "terrain": {
         "_": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
+        "^": "t_open_air",
         "H": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
         "s": "t_screened_porch_wall",
         "R": { "param": "carpet_color_type", "fallback": "t_carpet_red" },
