@@ -1335,7 +1335,7 @@ static void sleep()
     const map &here = get_map();
     const tripoint_bub_ms &p = player_character.pos_bub();
     const optional_vpart_position vp = here.veh_at( p );
-    const comfort_data::response &comfort = player_character.get_comfort_at( p.raw() );
+    const comfort_data::response &comfort = player_character.get_comfort_at( p );
     if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, p ) && !vp &&
         comfort.data->human_or_impossible() ) {
         add_msg( m_info, _( "You cannot sleep while swimming." ) );

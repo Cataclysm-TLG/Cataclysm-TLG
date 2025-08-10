@@ -275,7 +275,7 @@ standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
                             int sk_lvl, int s_str, int s_dex, int s_int, int s_per )
 {
     this->name = name;
-    set_pos_only( pos );
+    set_pos_only( pos.raw() );
     if( !getID().is_valid() ) {
         setID( g->assign_npc_id() );
     }
