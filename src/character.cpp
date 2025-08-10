@@ -13057,7 +13057,6 @@ int Character::impact( const int force, const tripoint &p )
 
     int total_dealt = 0;
     if( mod * effective_force >= 5 ) {
-        add_msg( _( "effective force = %s" ), effective_force );
         int parts_affected_total = std::max( 1, effective_force / rng( 3, 30 ) );
         int parts_affected = 0;
         std::vector<bodypart_id> bps = get_all_body_parts( get_body_part_flags::only_main );
@@ -13678,6 +13677,9 @@ void Character::pause()
             drench( 80, get_drenching_body_parts( false, false ),
                     false );
         }
+    }
+    if( here.veh_at( pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) && !in_vehicle && !has_effect( effect_downed ) && !has_effect_with_flag( json_flag_GRAB ) && !in_sleep_state() ) {
+         here.board_vehicle( pos_bub(), this );
     }
 
     // Try to put out clothing/hair fire
