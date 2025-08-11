@@ -98,7 +98,7 @@ jobs:
             # ~190MB in a clean build
             # ~30MB compressed
             # observed usage: 3.0GB -> 300MB
-            ccache_limit: 2G
+            ccache_limit: 5G
             ccache_key: linux-llvm-13
 
           - compiler: clang++

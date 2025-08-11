@@ -1477,11 +1477,8 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "NO_TEMP" ],
     "addiction_potential": 40,
     "addiction_type": "sleeping pill",
-    "use_action": {
-      "type": "effect_on_conditions",
-      "description": "Can be used to treat insomnia.",
-      "effect_on_conditions": [ "EOC_SLEEP" ]
-    }
+    "use_action": { "type": "consume_drug", "activation_message": "You take a %s." },
+    "fatigue_mod": -40
   },
   {
     "id": "poppy_pain",
@@ -1548,7 +1545,7 @@
     "stim": -3,
     "healthy": -1,
     "addiction_potential": 15,
-    "addiction_type": "sleeping pill",
+    "addiction_type": [ "sleeping pill", "opiate" ],
     "use_action": [ "FLUSLEEP" ]
   },
   {
