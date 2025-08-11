@@ -718,6 +718,7 @@
       "POISON",
       "NO_BREATHE",
       "REVIVES",
+      "BASHES",
       "FILTHY",
       "KEENNOSE",
       "GOODHEARING"
@@ -763,6 +764,7 @@
       "NO_BREATHE",
       "REVIVES",
       "FILTHY",
+      "BASHES",
       "KEENNOSE",
       "GOODHEARING"
     ],
