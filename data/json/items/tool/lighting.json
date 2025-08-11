@@ -966,8 +966,7 @@
         "msg": "Your smart lamp turned off.",
         "menu_text": "Turn off",
         "type": "transform"
-      },
-      { "type": "link_up", "cable_length": 3, "charge_rate": "6 W" }
+      }
     ],
     "flags": [
       "ALLOWS_REMOTE_USE",
