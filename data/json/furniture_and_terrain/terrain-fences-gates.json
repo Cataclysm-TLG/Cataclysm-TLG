@@ -1182,7 +1182,17 @@
     "color": "yellow",
     "move_cost": 3,
     "coverage": 5,
-    "flags": [ "FLAMMABLE", "TRANSPARENT", "NOITEM", "THIN_OBSTACLE", "MOUNTABLE", "SHORT", "AUTO_WALL_SYMBOL", "BURROWABLE", "PERMEABLE" ],
+    "flags": [
+      "FLAMMABLE",
+      "TRANSPARENT",
+      "NOITEM",
+      "THIN_OBSTACLE",
+      "MOUNTABLE",
+      "SHORT",
+      "AUTO_WALL_SYMBOL",
+      "BURROWABLE",
+      "PERMEABLE"
+    ],
     "connect_groups": "RAILING",
     "connects_to": "RAILING",
     "bash": {
@@ -1262,7 +1272,17 @@
     "move_cost": 3,
     "coverage": 38,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "THIN_OBSTACLE", "MOUNTABLE", "SHORT", "AUTO_WALL_SYMBOL", "MINEABLE", "BURROWABLE", "PERMEABLE" ],
+    "flags": [
+      "TRANSPARENT",
+      "NOITEM",
+      "THIN_OBSTACLE",
+      "MOUNTABLE",
+      "SHORT",
+      "AUTO_WALL_SYMBOL",
+      "MINEABLE",
+      "BURROWABLE",
+      "PERMEABLE"
+    ],
     "connect_groups": "RAILING",
     "connects_to": "RAILING",
     "bash": {

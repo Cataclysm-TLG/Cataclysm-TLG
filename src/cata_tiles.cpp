@@ -4252,7 +4252,8 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
 
     // Draw shadow
     if( draw_from_id_string( "shadow", TILE_CATEGORY::NONE, empty_string, p.raw(),
-                             0, 0, ll, false, height_3d, 1.0f, 1.0f ) && scan_p.z() - 1 > you.pos_bub().z() && you.sees( critter ) ) {
+                             0, 0, ll, false, height_3d, 1.0f, 1.0f ) && scan_p.z() - 1 > you.pos_bub().z() &&
+        you.sees( critter ) ) {
 
         bool is_player = false;
         bool sees_player = false;

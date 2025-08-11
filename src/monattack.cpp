@@ -722,7 +722,8 @@ bool mattack::howl( monster *z )
 
     // It takes a while
     z->mod_moves( -to_moves<int>( 2_seconds ) );
-    sounds::sound( z->pos_bub(), 35, sounds::sound_t::alert, _( "an ear-piercing howl!" ), false, "shout",
+    sounds::sound( z->pos_bub(), 35, sounds::sound_t::alert, _( "an ear-piercing howl!" ), false,
+                   "shout",
                    "howl" );
 
     // TODO: Make this use mon's faction when those are in
@@ -3041,9 +3042,11 @@ void mattack::rifle( monster *z, Creature *target )
 
     if( z->ammo[ammo_type] <= 0 ) {
         if( one_in( 3 ) ) {
-            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun", "empty" );
+            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun",
+                           "empty" );
         } else if( one_in( 4 ) ) {
-            sounds::sound( z->pos_bub(), 6, sounds::sound_t::combat,  _( "boop!" ), false, "fire_gun", "empty" );
+            sounds::sound( z->pos_bub(), 6, sounds::sound_t::combat,  _( "boop!" ), false, "fire_gun",
+                           "empty" );
         }
         return;
     }
@@ -3102,7 +3105,8 @@ void mattack::frag( monster *z, Creature *target ) // This is for the bots, not 
 
     if( z->ammo[ammo_type] <= 0 ) {
         if( one_in( 3 ) ) {
-            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun", "empty" );
+            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun",
+                           "empty" );
         } else if( one_in( 4 ) ) {
             sounds::sound( z->pos_bub(), 6, sounds::sound_t::combat, _( "boop!" ), false, "fire_gun", "empty" );
         }
@@ -3161,9 +3165,11 @@ void mattack::tankgun( monster *z, Creature *target )
 
     if( z->ammo[ammo_type] <= 0 ) {
         if( one_in( 3 ) ) {
-            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun", "empty" );
+            sounds::sound( z->pos_bub(), 2, sounds::sound_t::combat, _( "a chk!" ), false, "fire_gun",
+                           "empty" );
         } else if( one_in( 4 ) ) {
-            sounds::sound( z->pos_bub(), 6, sounds::sound_t::combat, _( "clank!" ), false, "fire_gun", "empty" );
+            sounds::sound( z->pos_bub(), 6, sounds::sound_t::combat, _( "clank!" ), false, "fire_gun",
+                           "empty" );
         }
         return;
     }
@@ -3985,7 +3991,8 @@ bool mattack::blow_whistle( monster *z )
         return false;
     }
     add_msg_if_player_sees( *z, m_warning, _( "The %1$s loudly blows their whistle!" ), z->name() );
-    sounds::sound( z->pos_bub(), 40, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc", "whistle" );
+    sounds::sound( z->pos_bub(), 40, sounds::sound_t::alarm, _( "FWEEEET!" ), false, "misc",
+                   "whistle" );
 
     return true;
 }

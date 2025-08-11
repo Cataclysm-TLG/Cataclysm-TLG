@@ -2847,7 +2847,8 @@ void monster::process_turn()
     if( has_flag( mon_flag_ELECTRIC_FIELD ) && !is_hallucination() ) {
         if( has_effect( effect_emp ) ) {
             if( calendar::once_every( 10_turns ) ) {
-                sounds::sound( pos_bub(), 5, sounds::sound_t::combat, _( "hummmmm." ), false, "humming", "electric" );
+                sounds::sound( pos_bub(), 5, sounds::sound_t::combat, _( "hummmmm." ), false, "humming",
+                               "electric" );
             }
         } else {
             weather_manager &weather = get_weather();
@@ -2881,7 +2882,8 @@ void monster::process_turn()
                 weather.lightning_active = false; // only one supercharge per strike
                 sounds::sound( pos_bub(), 300, sounds::sound_t::combat, _( "BOOOOOOOM!!!" ), false, "environment",
                                "thunder_near" );
-                sounds::sound( pos_bub(), 20, sounds::sound_t::combat, _( "vrrrRRRUUMMMMMMMM!" ), false, "explosion",
+                sounds::sound( pos_bub(), 20, sounds::sound_t::combat, _( "vrrrRRRUUMMMMMMMM!" ), false,
+                               "explosion",
                                "default" );
                 Character &player_character = get_player_character();
                 if( player_character.sees( pos_bub() ) ) {
@@ -3350,7 +3352,8 @@ void monster::process_one_effect( effect &it, bool is_new )
         }
     } else if( id == effect_fake_common_cold ) {
         if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
+            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
+                           "cough" );
         }
 
         avatar &you = get_avatar(); // No NPCs for now.
@@ -3360,7 +3363,8 @@ void monster::process_one_effect( effect &it, bool is_new )
     } else if( id == effect_fake_flu ) {
         // Need to define the two separately because it's theoretically (and realistically) possible to have both flu and cold at once, both for players and monsters.
         if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
+            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
+                           "cough" );
         }
 
         avatar &you = get_avatar(); // No NPCs for now.

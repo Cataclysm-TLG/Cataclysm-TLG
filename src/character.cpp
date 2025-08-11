@@ -1316,7 +1316,8 @@ ret_val<void> Character::can_try_dodge( bool ignore_dodges_left ) const
 {
     //If we're asleep or busy we can't dodge
     if( in_sleep_state() || has_effect( effect_narcosis ) ||
-        has_effect( effect_winded ) || has_effect( effect_fearparalyze ) || is_driving() || has_flag( json_flag_CANNOT_MOVE ) ) {
+        has_effect( effect_winded ) || has_effect( effect_fearparalyze ) || is_driving() ||
+        has_flag( json_flag_CANNOT_MOVE ) ) {
         add_msg_debug( debugmode::DF_MELEE, "Unable to dodge (sleeping, winded, immobilized, or driving)" );
         return ret_val<void>::make_failure();
     }
@@ -7755,7 +7756,8 @@ void Character::shout( std::string msg, bool order )
         add_msg_if_player( m_warning, _( "The sound of your voice is significantly muffled!" ) );
     }
 
-    sounds::sound( pos_bub(), noise, order ? sounds::sound_t::order : sounds::sound_t::alert, msg, false,
+    sounds::sound( pos_bub(), noise, order ? sounds::sound_t::order : sounds::sound_t::alert, msg,
+                   false,
                    "shout", shout );
 }
 
@@ -8616,7 +8618,8 @@ void Character::apply_damage( Creature *source, bodypart_id hurt, int dam,
 dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
         const damage_instance &d, const weakpoint_attack &attack )
 {
-    if( is_dead_state() || has_effect( effect_incorporeal ) || has_flag( json_flag_CANNOT_TAKE_DAMAGE) ) {
+    if( is_dead_state() || has_effect( effect_incorporeal ) ||
+        has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
         return dealt_damage_instance();
     }
 
