@@ -192,7 +192,7 @@ class monster : public Creature
         bool is_pet_follow() const;
         bool has_intelligence() const;
 
-        bool avoid_trap( const tripoint &pos, const trap &tr ) const override;
+        bool avoid_trap( const tripoint_bub_ms &pos, const trap &tr ) const override;
 
         void serialize( JsonOut &json ) const;
         void deserialize( const JsonObject &data );
@@ -257,7 +257,7 @@ class monster : public Creature
         // will change mon_plan::dist
         void anger_cub_threatened( monster_plan &mon_plan );
         void move(); // Actual movement
-        void footsteps( const tripoint &p ); // noise made by movement
+        void footsteps( const tripoint_bub_ms &p ); // noise made by movement
         void shove_vehicle( const tripoint_bub_ms &remote_destination,
                             const tripoint_bub_ms &nearby_destination ); // shove vehicles out of the way
 

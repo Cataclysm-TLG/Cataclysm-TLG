@@ -186,7 +186,7 @@ void mdefense::return_fire( monster &m, Creature *source, const dealt_projectile
 
     for( const std::pair<const std::string, mtype_special_attack> &attack : m.type->special_attacks ) {
         if( attack.second->id == "gun" ) {
-            sounds::sound( m.pos(), 50, sounds::sound_t::alert,
+            sounds::sound( m.pos_bub(), 50, sounds::sound_t::alert,
                            _( "Detected shots from unseen attacker, return fire mode engaged." ) );
             const gun_actor *gunactor = dynamic_cast<const gun_actor *>( attack.second.get() );
             if( gunactor->get_max_range() < distance_to_source ) {

@@ -171,8 +171,6 @@ static const itype_id itype_fake_milling_item( "fake_milling_item" );
 static const itype_id itype_fake_smoke_plume( "fake_smoke_plume" );
 static const itype_id itype_fertilizer( "fertilizer" );
 static const itype_id itype_fire( "fire" );
-static const itype_id itype_foodperson_mask( "foodperson_mask" );
-static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
 static const itype_id itype_fungal_seeds( "fungal_seeds" );
 static const itype_id itype_hickory_root( "hickory_root" );
 static const itype_id itype_id_science( "id_science" );
@@ -1433,55 +1431,6 @@ void iexamine::cardreader_robofac( Character &you, const tripoint_bub_ms &examp 
         intercom( you, examp );
     } else {
         add_msg( _( "You have never seen this card reader model before.  Hacking it seems impossible." ) );
-    }
-}
-
-void iexamine::cardreader_foodplace( Character &you, const tripoint_bub_ms &examp )
-{
-    bool open = false;
-    if( ( you.is_wearing( itype_foodperson_mask ) ||
-          you.is_wearing( itype_foodperson_mask_on ) ) &&
-        query_yn( _( "Press mask on the reader?" ) ) ) {
-        you.mod_moves( -100 );
-        map &here = get_map();
-        for( const tripoint_bub_ms &tmp : here.points_in_radius( tripoint_bub_ms( examp ), 3 ) ) {
-            if( here.ter( tmp ) == ter_t_door_metal_locked ) {
-                here.ter_set( tmp, ter_t_door_metal_c );
-                open = true;
-            }
-        }
-        if( open ) {
-            add_msg( _( "You press your face on the reader." ) );
-            add_msg( m_good, _( "The nearby doors are unlocked." ) );
-            sounds::sound( examp, 6, sounds::sound_t::electronic_speech,
-                           _( "\"Hello Foodperson.  Welcome home.\"" ), true, "speech", "welcome" );
-        } else {
-            add_msg( _( "The nearby doors are already unlocked." ) );
-            if( query_yn( _( "Lock doors?" ) ) ) {
-                for( const tripoint_bub_ms &tmp : here.points_in_radius( tripoint_bub_ms( examp ), 3 ) ) {
-                    const ter_id &t = here.ter( tmp );
-                    if( t == ter_t_door_metal_o || t == ter_t_door_metal_c ) {
-                        if( you.pos_bub() == tmp ) {
-                            you.add_msg_if_player( m_bad, _( "You are in the way of the door, move before trying again." ) );
-                        } else {
-                            here.ter_set( tmp, ter_t_door_metal_locked );
-                        }
-                    }
-                }
-            }
-        }
-    } else if( you.has_amount( itype_foodperson_mask, 1 ) ||
-               you.has_amount( itype_foodperson_mask_on, 1 ) ) {
-        sounds::sound( examp, 6, sounds::sound_t::electronic_speech,
-                       _( "\"FOODPERSON DETECTED.  Please make yourself presentable.\"" ), true,
-                       "speech", "welcome" );
-    } else {
-        sounds::sound( examp, 6, sounds::sound_t::electronic_speech,
-                       _( "\"Your face is inadequate.  Please go away.\"" ), true,
-                       "speech", "welcome" );
-        if( can_hack( you ) && query_yn( _( "Attempt to hack this card-reader?" ) ) ) {
-            try_start_hacking( you, tripoint_bub_ms( examp ) );
-        }
     }
 }
 
@@ -5305,7 +5254,7 @@ void iexamine::pay_gas( Character &you, const tripoint_bub_ms &examp )
             return;
         }
 
-        sounds::sound( you.pos(), 6, sounds::sound_t::activity, _( "Glug Glug Glug" ), true, "tool",
+        sounds::sound( you.pos_bub(), 6, sounds::sound_t::activity, _( "Glug Glug Glug" ), true, "tool",
                        "gaspump" );
 
         int cost = liters * pricePerUnit;
@@ -5335,7 +5284,7 @@ void iexamine::pay_gas( Character &you, const tripoint_bub_ms &examp )
             popup( _( "Unable to refund, no fuel in pump." ) );
             return;
         }
-        sounds::sound( you.pos(), 6, sounds::sound_t::activity, _( "Glug Glug Glug" ), true, "tool",
+        sounds::sound( you.pos_bub(), 6, sounds::sound_t::activity, _( "Glug Glug Glug" ), true, "tool",
                        "gaspump" );
 
         // getGasPricePerLiter( platinum_discount) min price to avoid exploit
@@ -7348,7 +7297,6 @@ iexamine_functions iexamine_functions_from_string( const std::string &function_n
             { "elevator", &iexamine::elevator },
             { "controls_gate", &iexamine::controls_gate },
             { "cardreader_robofac", &iexamine::cardreader_robofac },
-            { "cardreader_fp", &iexamine::cardreader_foodplace },
             { "intercom", &iexamine::intercom },
             { "rubble", &iexamine::rubble },
             { "chainfence", &iexamine::chainfence },

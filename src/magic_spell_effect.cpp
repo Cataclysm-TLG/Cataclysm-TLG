@@ -619,7 +619,7 @@ static void damage_targets( const spell &sp, Creature &caster,
                     cr->add_msg_player_or_npc( "You dodge out of the way!", "%s dodges out of the way!" );
                 } else {
                     if( !cr->has_effect( effect_invisibility ) ) {
-                        add_msg_if_player_sees( cr->pos(), m_bad, _( "%1$s dodges out of the way!" ),
+                        add_msg_if_player_sees( cr->pos_bub(), m_bad, _( "%1$s dodges out of the way!" ),
                                                 cr->disp_name( false, true ) );
                     }
                 }

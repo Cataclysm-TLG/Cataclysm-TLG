@@ -466,6 +466,8 @@ void sounds::process_sounds()
         const int vol = this_centroid.volume - weather_vol;
         const int raw_volume = this_centroid.volume + weather_vol;
         const tripoint source = tripoint( this_centroid.x, this_centroid.y, this_centroid.z );
+        const tripoint_abs_ms source_abs = get_map().getglobal( source );
+        const tripoint_bub_ms source_bub = get_map().bub_from_abs( source_abs );
         // --- Monster sound handling here ---
         // Alert all hordes
         int sig_power = get_signal_for_hordes( this_centroid );
@@ -479,7 +481,7 @@ void sounds::process_sounds()
         // Alert all monsters (that can hear) to the sound.
         for( monster &critter : g->all_monsters() ) {
             // TODO: Generalize this to Creature::hear_sound
-            const int dist = sound_distance( source, critter.pos_bub() );
+            const int dist = sound_distance( source_bub, critter.pos_bub() );
             if( vol * 2 > dist && critter.has_flag( mon_flag_HEARS ) && !critter.has_effect( effect_deaf ) ) {
                 // Exclude monsters that certainly won't hear the sound
                 critter.hear_sound( source, vol, dist, this_centroid.provocative );
@@ -499,7 +501,7 @@ void sounds::process_sounds()
         // Trigger sound-triggered traps and ensure they are still valid
         for( const trap *trapType : trap::get_sound_triggered_traps() ) {
             for( const tripoint_bub_ms &tp : get_map().trap_locations( trapType->id ) ) {
-                const int dist = sound_distance( source, tp );
+                const int dist = sound_distance( source_bub, tp );
                 const trap &tr = get_map().tr_at( tp );
                 // Exclude traps that certainly won't hear the sound
                 if( vol * 2 > dist ) {
@@ -951,7 +953,7 @@ void sfx::do_vehicle_engine_sfx()
     if( !is_channel_playing( ch ) ) {
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                     seas_str, indoors, night,
-                                    sfx::get_heard_volume( player_character.pos() ), ch, 1000 );
+                                    sfx::get_heard_volume( player_character.pos_bub() ), ch, 1000 );
         add_msg_debug( debugmode::DF_SOUND, "START %s %s", id_and_variant.first, id_and_variant.second );
     } else {
         add_msg_debug( debugmode::DF_SOUND, "PLAYING" );
@@ -996,11 +998,11 @@ void sfx::do_vehicle_engine_sfx()
 
     if( current_gear > previous_gear ) {
         play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
-                            get_heard_volume( player_character.pos() ), 0_degrees, 0.8, 0.8 );
+                            get_heard_volume( player_character.pos_bub() ), 0_degrees, 0.8, 0.8 );
         add_msg_debug( debugmode::DF_SOUND, "GEAR UP" );
     } else if( current_gear < previous_gear ) {
         play_variant_sound( "vehicle", "gear_shift", seas_str, indoors, night,
-                            get_heard_volume( player_character.pos() ), 0_degrees, 1.2, 1.2 );
+                            get_heard_volume( player_character.pos_bub() ), 0_degrees, 1.2, 1.2 );
         add_msg_debug( debugmode::DF_SOUND, "GEAR DOWN" );
     }
     double pitch = 1.0;
@@ -1144,8 +1146,8 @@ void sfx::do_ambient()
     }
     audio_muted = false;
     const bool is_deaf = player_character.is_deaf();
-    const int heard_volume = get_heard_volume( player_character.pos() );
-    const bool is_underground = player_character.pos().z < 0;
+    const int heard_volume = get_heard_volume( player_character.pos_bub() );
+    const bool is_underground = player_character.pos_bub().z() < 0;
     const bool is_sheltered = g->is_sheltered( player_character.pos_bub() );
     const bool night = is_night( calendar::turn );
     const bool weather_changed =
@@ -1550,7 +1552,7 @@ void sfx::do_player_death_hurt( const Character &target, bool death )
     const std::string seas_str = season_str( seas );
     const bool indoors = !is_creature_outside( get_player_character() );
     const bool night = is_night( calendar::turn );
-    int heard_volume = get_heard_volume( target.pos() );
+    int heard_volume = get_heard_volume( target.pos_bub() );
     const bool male = target.male;
     if( !male && !death ) {
         play_variant_sound( "deal_damage", "hurt_f", seas_str, indoors, night, heard_volume );
@@ -1898,7 +1900,7 @@ void sfx::do_obstacle( const std::string &obst )
         const std::string seas_str = season_str( seas );
         const bool indoors = !is_creature_outside( player_character );
         const bool night = is_night( calendar::turn );
-        int heard_volume = sfx::get_heard_volume( player_character.pos() );
+        int heard_volume = sfx::get_heard_volume( player_character.pos_bub() );
         if( sfx::has_variant_sound( "plmove", obst, seas_str, indoors, night ) ) {
             play_variant_sound( "plmove", obst, seas_str, indoors, night,
                                 heard_volume, 0_degrees, 0.8, 1.2 );

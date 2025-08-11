@@ -950,7 +950,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             if( !is_quiet() ) { // check martial arts silence
                 //sound generated later
                 int volume = enchantment_cache->modify_value( enchant_vals::mod::ATTACK_NOISE, 8 );
-                sounds::sound( pos(), volume, sounds::sound_t::combat, _( "whack!" ) );
+                sounds::sound( pos_bub(), volume, sounds::sound_t::combat, _( "whack!" ) );
             }
             std::string material = "flesh";
             if( t.is_monster() ) {
@@ -1952,7 +1952,7 @@ void Character::perform_technique( const ma_technique &technique, Creature &t,
         // if the weapon needs ammo we now expend it
         cur_weapon.get_item()->ammo_consume( 1, pos_bub(), this );
         // thing going off should be as loud as the ammo
-        sounds::sound( pos(), current_ammo->ammo->loudness, sounds::sound_t::combat, _( "Crack!" ), true );
+        sounds::sound( pos_bub(), current_ammo->ammo->loudness, sounds::sound_t::combat, _( "Crack!" ), true );
         const itype_id casing = *current_ammo->ammo->casing;
         if( cur_weapon.get_item()->has_flag( flag_RELOAD_EJECT ) ) {
             cur_weapon.get_item()->force_insert_item( item( casing ).set_flag( flag_CASING ),
@@ -2457,7 +2457,7 @@ std::string Character::melee_special_effects( Creature &t, damage_instance &d, i
                                    weap.tname() );
         }
 
-        sounds::sound( pos(), 16, sounds::sound_t::combat, "Crack!", true, "smash_success",
+        sounds::sound( pos_bub(), 16, sounds::sound_t::combat, "Crack!", true, "smash_success",
                        "smash_glass_contents" );
         // Dump its contents on the ground
         weap.spill_contents( pos_bub() );

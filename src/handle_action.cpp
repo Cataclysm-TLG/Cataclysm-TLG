@@ -1105,7 +1105,7 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
                 if( glass_portion && rng( 0, vol + 3 ) < vol ) {
                     add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
                     weapon->spill_contents( pos_bub() );
-                    sounds::sound( pos(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
+                    sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
                                    "glass" );
                     deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
                                  rng( 0,

@@ -194,7 +194,7 @@ bool trapfunc::beartrap( const tripoint_bub_ms &p, Creature *c, item * )
             if( c->has_effect( effect_ridden ) ) {
                 add_msg( m_warning, _( "Your %s is caught by a beartrap!" ), c->get_name() );
             } else {
-                add_msg_if_player_sees( c->pos(), _( "%s gets caught in a beartrap!" ), c->get_name() );
+                add_msg_if_player_sees( c->pos_bub(), _( "%s gets caught in a beartrap!" ), c->get_name() );
             }
         } else {
             c->add_msg_player_or_npc( m_bad,
@@ -694,7 +694,7 @@ bool trapfunc::snare_light( const tripoint_bub_ms &p, Creature *c, item * )
             if( c->has_effect( effect_ridden ) ) {
                 add_msg( m_warning, _( "Your %s is caught in a snare!" ), c->get_name() );
             } else {
-                add_msg_if_player_sees( c->pos(), _( "%s gets caught in a snare!" ), c->get_name() );
+                add_msg_if_player_sees( c->pos_bub(), _( "%s gets caught in a snare!" ), c->get_name() );
             }
         } else {
             c->add_msg_player_or_npc( m_bad, _( "A snare closes on your leg." ),
@@ -717,7 +717,7 @@ bool trapfunc::snare_heavy( const tripoint_bub_ms &p, Creature *c, item * )
         if( c->has_effect( effect_ridden ) ) {
             add_msg( m_warning, _( "Your %s is caught in a snare!" ), c->get_name() );
         } else {
-            add_msg_if_player_sees( c->pos(), _( "%s gets caught in a snare!" ), c->get_name() );
+            add_msg_if_player_sees( c->pos_bub(), _( "%s gets caught in a snare!" ), c->get_name() );
         }
     } else {
         //~ %s is bodypart name in accusative.

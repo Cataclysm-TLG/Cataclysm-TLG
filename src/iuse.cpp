@@ -5312,7 +5312,7 @@ std::optional<int> iuse::talking_doll( Character *p, item *it, const tripoint_bu
     p->add_msg_if_player( m_neutral, _( "You press a button on the doll to make it talk." ) );
     const SpeechBubble speech = get_speech( it->typeId().str() );
 
-    sounds::sound( p->pos(), speech.volume, sounds::sound_t::electronic_speech,
+    sounds::sound( p->pos_bub(), speech.volume, sounds::sound_t::electronic_speech,
                    speech.text.translated(), true, "speech", it->typeId().str() );
 
     return 1;
@@ -5359,7 +5359,7 @@ std::optional<int> gun_repair( Character *p, item *, item_location &loc )
         return std::nullopt;
     }
     const std::string startdurability = fix.durability_indicator( true );
-    sounds::sound( p->pos(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
+    sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
     p->practice( skill_mechanics, 10 );
     p->mod_moves( -to_moves<int>( 20_seconds ) );
 
@@ -5468,7 +5468,7 @@ std::optional<int> iuse::toolmod_attach( Character *p, item *it, const tripoint_
 std::optional<int> iuse::bell( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( it->typeId() == itype_cow_bell ) {
-        sounds::sound( p->pos(), 12, sounds::sound_t::music, _( "Clank!  Clank!" ), true, "misc",
+        sounds::sound( p->pos_bub(), 12, sounds::sound_t::music, _( "Clank!  Clank!" ), true, "misc",
                        "cow_bell" );
         if( !p->is_deaf() ) {
             auto cattle_level =
@@ -5480,7 +5480,7 @@ std::optional<int> iuse::bell( Character *p, item *it, const tripoint_bub_ms & )
             }
         }
     } else {
-        sounds::sound( p->pos(), 4, sounds::sound_t::music, _( "Ring!  Ring!" ), true, "misc", "bell" );
+        sounds::sound( p->pos_bub(), 4, sounds::sound_t::music, _( "Ring!  Ring!" ), true, "misc", "bell" );
     }
     return 1;
 }
@@ -6755,7 +6755,7 @@ std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms &
         trajectory.push_back( aim_point );
 
         p->mod_moves( -to_moves<int>( 1_seconds ) * 0.5 );
-        sounds::sound( p->pos(), 8, sounds::sound_t::activity, _( "Click." ), true, "tool",
+        sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, _( "Click." ), true, "tool",
                        "camera_shutter" );
 
         for( std::vector<tripoint_bub_ms>::iterator point_it = trajectory.begin();
@@ -7219,7 +7219,7 @@ static void sendRadioSignal( Character &p, const flag_id &signal )
     for( const tripoint_bub_ms &loc : here.points_in_radius( p.pos_bub(), 60 ) ) {
         for( item &it : here.i_at( loc ) ) {
             if( it.has_flag( flag_RADIO_ACTIVATION ) && it.has_flag( signal ) ) {
-                sounds::sound( p.pos(), 6, sounds::sound_t::alarm, _( "beep" ), true, "misc", "beep" );
+                sounds::sound( p.pos_bub(), 6, sounds::sound_t::alarm, _( "beep" ), true, "misc", "beep" );
                 if( it.has_flag( flag_RADIO_INVOKE_PROC ) ) {
                     // Invoke to transform a radio-modded explosive into its active form
                     // The item activation may have all kinds of requirements. Like requiring item to be wielded.
@@ -7240,7 +7240,7 @@ static void sendRadioSignal( Character &p, const flag_id &signal )
                 } );
 
                 if( itm != nullptr ) {
-                    sounds::sound( p.pos(), 6, sounds::sound_t::alarm, _( "beep" ), true, "misc", "beep" );
+                    sounds::sound( p.pos_bub(), 6, sounds::sound_t::alarm, _( "beep" ), true, "misc", "beep" );
                     // Invoke to transform a radio-modded explosive into its active form
                     if( itm->has_flag( flag_RADIO_INVOKE_PROC ) ) {
                         itm->type->invoke( &p, *itm, loc.raw() );

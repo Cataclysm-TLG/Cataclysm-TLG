@@ -68,7 +68,6 @@ void nanofab( Character &you, const tripoint_bub_ms &examp );
 void controls_gate( Character &you, const tripoint_bub_ms &examp );
 void cardreader( Character &you, const tripoint_bub_ms &examp );
 void cardreader_robofac( Character &you, const tripoint_bub_ms &examp );
-void cardreader_foodplace( Character &you, const tripoint_bub_ms &examp );
 void intercom( Character &you, const tripoint_bub_ms &examp );
 void cvdmachine( Character &you, const tripoint_bub_ms &examp );
 void change_appearance( Character &you, const tripoint_bub_ms &examp );

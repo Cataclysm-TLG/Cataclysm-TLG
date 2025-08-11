@@ -1206,7 +1206,7 @@ bool gun_actor::try_target( monster &z, Creature &target ) const
 
     if( not_targeted || not_laser_locked ) {
         if( targeting_volume > 0 && !targeting_sound.empty() ) {
-            sounds::sound( z.pos(), targeting_volume, sounds::sound_t::alarm,
+            sounds::sound( z.pos_bub(), targeting_volume, sounds::sound_t::alarm,
                            targeting_sound );
         }
         if( not_targeted ) {
@@ -1271,7 +1271,7 @@ bool gun_actor::shoot( monster &z, const tripoint_bub_ms &target, const gun_mode
 
     if( !gun.ammo_sufficient( nullptr ) ) {
         if( !no_ammo_sound.empty() ) {
-            sounds::sound( z.pos(), 10, sounds::sound_t::combat, no_ammo_sound );
+            sounds::sound( z.pos_bub(), 10, sounds::sound_t::combat, no_ammo_sound );
         }
         return false;
     }
