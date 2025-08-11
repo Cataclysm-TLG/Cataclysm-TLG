@@ -348,7 +348,7 @@ climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
 
     auto detect_ter_furn_flag = [&you, &here, &fall]( condition & cond ) {
         tripoint_bub_ms pos = fall.pos_furniture_or_floor();
-        cond.range = fall.pos_top().z - pos.z;
+        cond.range = fall.pos_top().z() - pos.z();
         bool furn_ok = false;
         if( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
             here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, pos ) ) {

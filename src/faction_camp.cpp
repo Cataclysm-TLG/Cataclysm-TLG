@@ -3198,8 +3198,8 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
 
         for( int i = -max_salt_water_pipe_distance; i <= max_salt_water_pipe_distance; i++ ) {
             for( int k = -max_salt_water_pipe_distance; k <= max_salt_water_pipe_distance; k++ ) {
-                tripoint_abs_omt tile = tripoint_abs_omt( omt_pos.x() + dir.x + connection_dir.x + i,
-                                        omt_pos.y() + dir.y + connection_dir.y + k, omt_pos.z() );
+                tripoint_abs_omt tile = tripoint_abs_omt( omt_pos.x() + dir.x() + connection_dir.x() + i,
+                                        omt_pos.y() + dir.y()+ connection_dir.y() + k, omt_pos.z() );
                 const oter_id &omt_ref = overmap_buffer.ter( tile );
                 bool match = false;
                 for( const std::string &pos_om : allowed_locations ) {
@@ -3216,8 +3216,8 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
                     path_map[max_salt_water_pipe_distance + i][max_salt_water_pipe_distance + k] = salt_pipe_illegal;
                 }
                 //  if this is an expansion tile, forbid it. Only allocated ones have their type changed.
-                if( i >= -dir.x - connection_dir.x - 1 && i <= -dir.x - connection_dir.x + 1 &&
-                    k >= -dir.y - connection_dir.y - 1 && k <= -dir.y - connection_dir.y + 1 ) {
+                if( i >= -dir.x() - connection_dir.x() - 1 && i <= -dir.x() - connection_dir.x() + 1 &&
+                    k >= -dir.y() - connection_dir.y() - 1 && k <= -dir.y() - connection_dir.y() + 1 ) {
                     path_map[max_salt_water_pipe_distance + i][max_salt_water_pipe_distance + k] = salt_pipe_illegal;
                 }
             }
@@ -3252,13 +3252,13 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
                     for( int k = -dist; k <= dist; k++ ) {
                         if( path_map[max_salt_water_pipe_distance + i][max_salt_water_pipe_distance + k] >
                             0.0 ) { // Tile has been assigned a distance and isn't a swamp
-                            point temp = check_salt_pipe_neighbors( path_map, { i, k } );
+                            point_rel_omt temp = check_salt_pipe_neighbors( path_map, { i, k } );
                             if( !temp.is_invalid() ) {
-                                if( path_map[max_salt_water_pipe_distance + temp.x][max_salt_water_pipe_distance + temp.y] >
+                                if( path_map[max_salt_water_pipe_distance + temp.x()][max_salt_water_pipe_distance + temp.y()] >
                                     destination_cost ) {
-                                    destination_cost = path_map[max_salt_water_pipe_distance + temp.x][max_salt_water_pipe_distance +
-                                                       temp.y];
-                                    destination = temp;
+                                    destination_cost = path_map[max_salt_water_pipe_distance + temp.x()][max_salt_water_pipe_distance +
+                                                       temp.y()];
+                                    destination = temp.raw();
                                     path_found = true;
                                 }
                             }
@@ -3286,7 +3286,7 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
                     destination.y];
 
         while( destination != point::zero ) {
-            pipe->segments.push_back( { tripoint_abs_omt( omt_pos.x() + dir.x + connection_dir.x + destination.x, omt_pos.y() + dir.y + connection_dir.y + destination.y, omt_pos.z() ), false, false } );
+            pipe->segments.push_back( { tripoint_abs_omt( omt_pos.x() + dir.x() + connection_dir.x() + destination.x, omt_pos.y() + dir.y() + connection_dir.y() + destination.y, omt_pos.z() ), false, false } );
             path_found = false;  //  Reuse of existing variable after its original usability has been passed.
             for( int i = -1; i <= 1; i++ ) {
                 for( int k = -1; k <= 1; k++ ) {
@@ -3317,7 +3317,7 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
             destination = candidate;
         }
 
-        pipe->segments.push_back( { tripoint_abs_omt( omt_pos.x() + dir.x + connection_dir.x, omt_pos.y() + dir.y + connection_dir.y, omt_pos.z() ), false, false } );
+        pipe->segments.push_back( { tripoint_abs_omt( omt_pos.x() + dir.x() + connection_dir.x(), omt_pos.y() + dir.y() + connection_dir.y(), omt_pos.z() ), false, false } );
     }
 
     if( common_salt_water_pipe_construction( miss_id, pipe, 0 ) ) {
