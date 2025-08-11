@@ -5646,8 +5646,8 @@ void effect_on_conditons_actor::load( const JsonObject &obj, const std::string &
 {
     obj.read( "description", description );
     obj.read( "menu_text", menu_text );
-    obj.read( "need_worn", need_worn );
-    obj.read( "need_wielding", need_wielding );
+    need_worn = obj.get_bool( "need_worn", false );
+    need_wielding = obj.get_bool( "need_wielding", false );
     for( JsonValue jv : obj.get_array( "effect_on_conditions" ) ) {
         eocs.emplace_back( effect_on_conditions::load_inline_eoc( jv, src ) );
     }
