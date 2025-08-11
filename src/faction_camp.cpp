@@ -3199,7 +3199,7 @@ void basecamp::start_salt_water_pipe( const mission_id &miss_id )
         for( int i = -max_salt_water_pipe_distance; i <= max_salt_water_pipe_distance; i++ ) {
             for( int k = -max_salt_water_pipe_distance; k <= max_salt_water_pipe_distance; k++ ) {
                 tripoint_abs_omt tile = tripoint_abs_omt( omt_pos.x() + dir.x() + connection_dir.x() + i,
-                                        omt_pos.y() + dir.y()+ connection_dir.y() + k, omt_pos.z() );
+                                        omt_pos.y() + dir.y() + connection_dir.y() + k, omt_pos.z() );
                 const oter_id &omt_ref = overmap_buffer.ter( tile );
                 bool match = false;
                 for( const std::string &pos_om : allowed_locations ) {

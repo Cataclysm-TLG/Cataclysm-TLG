@@ -963,7 +963,8 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
     int precipitation = static_cast<int>( weather.weather_id->precip );
     w_point weatherpoint = *weather.weather_precise;
     int humidity = get_local_humidity( weatherpoint.humidity, get_weather().weather_id );
-    int windpower = get_local_windpower( weather.windspeed, om_ter, get_map().getglobal( p ), winddirection,
+    int windpower = get_local_windpower( weather.windspeed, om_ter, get_map().getglobal( p ),
+                                         winddirection,
                                          sheltered );
     const ter_t &ter = map_tile.get_ter_t();
     const furn_t &frn = map_tile.get_furn_t();

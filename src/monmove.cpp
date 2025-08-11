@@ -873,26 +873,26 @@ void monster::move()
     // directly and instead iterate over the map from the monster type
     // (properties of monster types should never change).
     if( !has_flag( json_flag_CANNOT_ATTACK ) ) {
-    for( std::size_t i = 0; i < attacks_size; i++ ) {
-        const std::string &special_name = keys_copy[random[i]];
-        const auto local_iter = special_attacks.find( special_name );
-        if( local_iter == special_attacks.end() ) {
-            continue;
-        }
-        mon_special_attack &local_attack_data = local_iter->second;
-        if( !local_attack_data.enabled ) {
-            continue;
-        }
-        add_msg_debug( debugmode::DF_MATTACK, "%s attempting a special attack %s, cooldown %d", name(),
-                       special_name, local_attack_data.cooldown );
-
-        // Cooldowns are decremented in monster::process_turn
-        const mtype_special_attack &attack_ref = type->special_attacks.at( keys_copy[random[i]] );
-        if( local_attack_data.cooldown == 0 && !pacified && !is_hallucination() ) {
-            if( !attack_ref->call( *this ) ) {
-                add_msg_debug( debugmode::DF_MATTACK, "Attack failed" );
+        for( std::size_t i = 0; i < attacks_size; i++ ) {
+            const std::string &special_name = keys_copy[random[i]];
+            const auto local_iter = special_attacks.find( special_name );
+            if( local_iter == special_attacks.end() ) {
                 continue;
             }
+            mon_special_attack &local_attack_data = local_iter->second;
+            if( !local_attack_data.enabled ) {
+                continue;
+            }
+            add_msg_debug( debugmode::DF_MATTACK, "%s attempting a special attack %s, cooldown %d", name(),
+                           special_name, local_attack_data.cooldown );
+
+            // Cooldowns are decremented in monster::process_turn
+            const mtype_special_attack &attack_ref = type->special_attacks.at( keys_copy[random[i]] );
+            if( local_attack_data.cooldown == 0 && !pacified && !is_hallucination() ) {
+                if( !attack_ref->call( *this ) ) {
+                    add_msg_debug( debugmode::DF_MATTACK, "Attack failed" );
+                    continue;
+                }
 
                 // `special_attacks` might have changed at this point. Sadly `reset_special`
                 // doesn't check the attack name, so we need to do it here.
@@ -911,7 +911,8 @@ void monster::move()
     nursebot_operate( dragged_foe );
 
     // The monster can sometimes hang in air due to last fall being blocked
-    if( !flies() && here.is_open_air( pos_bub() ) && !here.has_vehicle_floor( pos_bub() ) && !has_flag( json_flag_CANNOT_MOVE ) ) {
+    if( !flies() && here.is_open_air( pos_bub() ) && !here.has_vehicle_floor( pos_bub() ) &&
+        !has_flag( json_flag_CANNOT_MOVE ) ) {
         gravity_check();
     }
     if( is_dead() ) {
@@ -927,7 +928,8 @@ void monster::move()
         return;
     }
 
-    if( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) || has_flag( json_flag_CANNOT_MOVE) ) {
+    if( has_flag( mon_flag_IMMOBILE ) || has_flag( mon_flag_RIDEABLE_MECH ) ||
+        has_flag( json_flag_CANNOT_MOVE ) ) {
         moves = 0;
         return;
     }
@@ -1708,7 +1710,8 @@ int monster::group_bash_skill( const tripoint &target )
 
     // pileup = more bash skill, but only help bashing mob directly in front of target
     const int max_helper_depth = 5;
-    const std::vector<tripoint_bub_ms> bzone = get_bashing_zone( tripoint_bub_ms( target ), pos_bub(), max_helper_depth );
+    const std::vector<tripoint_bub_ms> bzone = get_bashing_zone( tripoint_bub_ms( target ), pos_bub(),
+            max_helper_depth );
 
     creature_tracker &creatures = get_creature_tracker();
     for( const tripoint_bub_ms &candidate : bzone ) {
