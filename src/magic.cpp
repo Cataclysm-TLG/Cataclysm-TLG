@@ -2514,7 +2514,7 @@ std::vector<spell> Character::spells_known_of_class( const trait_id &spell_class
     return ret;
 }
 
-static void reflesh_favorite( uilist *menu, std::vector<spell *> known_spells )
+static void refresh_favorite( uilist *menu, std::vector<spell *> known_spells )
 {
     for( uilist_entry &entry : menu->entries ) {
         if( get_player_character().magic->is_favorite( known_spells[entry.retval]->id() ) ) {
@@ -2571,7 +2571,7 @@ class spellcasting_callback : public uilist_callback
                 scroll_pos += action == "SCROLL_DOWN_SPELL_MENU" ? 1 : -1;
             } else if( action == "SCROLL_FAVORITE" ) {
                 get_player_character().magic->toggle_favorite( known_spells[entnum]->id() );
-                reflesh_favorite( menu, known_spells );
+                refresh_favorite( menu, known_spells );
             }
             return false;
         }
@@ -2972,7 +2972,7 @@ int known_magic::get_invlet( const spell_id &sp, std::set<int> &used_invlets )
     return 0;
 }
 
-int known_magic::select_spell( Character &guy )
+spell &known_magic::select_spell( Character &guy )
 {
     // max width of spell names
     const int max_spell_name_length = get_spellname_max_width();
@@ -3043,13 +3043,17 @@ int known_magic::select_spell( Character &guy )
         spell_menu.addentry( static_cast<int>( i ), known_spells[i]->can_cast( guy ),
                              get_invlet( known_spells[i]->id(), used_invlets ), known_spells[i]->name() );
     }
-    reflesh_favorite( &spell_menu, known_spells );
+    refresh_favorite( &spell_menu, known_spells );
 
     spell_menu.query( true, -1, true );
 
     casting_ignore = static_cast<spellcasting_callback *>( spell_menu.callback )->casting_ignore;
-
-    return spell_menu.ret;
+    if( spell_menu.ret < 0 ) {
+        static spell null_spell_reference( spell_id::NULL_ID() );
+        return null_spell_reference;
+    }
+    spell *selected_spell = known_spells[spell_menu.ret];
+    return *selected_spell;
 }
 
 void known_magic::on_mutation_gain( const trait_id &mid, Character &guy )

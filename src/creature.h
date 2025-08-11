@@ -319,8 +319,6 @@ class Creature : public viewer
             return get_location().z();
         }
         virtual void gravity_check();
-        // TODO: Get rid of untyped overload
-        void setpos( const tripoint &p, bool check_gravity = true );
         void setpos( const tripoint_bub_ms &p, bool check_gravity = true );
 
         // Convert size to int. TODO: use this everywhere instead of enuming every time.

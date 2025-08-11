@@ -881,7 +881,7 @@ static void haul()
             break;
         case 2: {
             inventory_haul_selector selector( player_character );
-            selector.add_map_items( player_character.pos() );
+            selector.add_map_items( player_character.pos_bub() );
             selector.apply_selection( player_character.haul_list );
             selector.set_title( _( "Select items to haul" ) );
             selector.set_hint( _( "To select x items, type a number before selecting." ) );
@@ -1101,7 +1101,7 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
                 if( std::isnan( glass_fraction ) || glass_fraction > 1.f ) {
                     glass_fraction = 0.f;
                 }
-                const int vol = weapon->volume() * glass_fraction / units::legacy_volume_factor;
+                const int vol = weapon->volume() * glass_fraction / 250_ml;
                 if( glass_portion && rng( 0, vol + 3 ) < vol ) {
                     add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
                     weapon->spill_contents( pos_bub() );
@@ -1840,7 +1840,7 @@ static void open_movement_mode_menu()
     }
 }
 
-static void cast_spell()
+static void cast_spell( bool recast_spell = false )
 {
     Character &player_character = get_player_character();
     player_character.magic->clear_opens_spellbook_data();
@@ -1882,13 +1882,19 @@ static void cast_spell()
         }
     }
 
-    const int spell_index = player_character.magic->select_spell( player_character );
-    if( spell_index < 0 ) {
+    if( recast_spell && player_character.magic->last_spell.is_null() ) {
+        popup( _( "Cast a spell first" ) );
         return;
     }
 
-    spell &sp = *player_character.magic->get_spells()[spell_index];
-
+    spell &sp = recast_spell
+                ? player_character.magic->get_spell( player_character.magic->last_spell )
+                : player_character.magic->select_spell( player_character );
+    // if no spell was selected
+    if( sp.id().is_null() ) {
+        return;
+    }
+    player_character.magic->last_spell = sp.id();
     player_character.cast_spell( sp, false, std::nullopt );
 }
 
@@ -2634,6 +2640,10 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_CAST_SPELL:
             cast_spell();
+            break;
+
+        case ACTION_RECAST_SPELL:
+            cast_spell( true );
             break;
 
         case ACTION_FIRE_BURST: {

@@ -315,7 +315,7 @@ static npc make_fake_npc( monster *z, int str, int dex, int inte, int per )
     tmp.name = _( "The " ) + z->name();
     tmp.set_fake( true );
     tmp.recoil = 0;
-    tmp.setpos( z->pos() );
+    tmp.setpos( z->pos_bub() );
     tmp.str_cur = str;
     tmp.dex_cur = dex;
     tmp.int_cur = inte;
@@ -1227,7 +1227,7 @@ bool mattack::resurrect( monster *z )
         if( iter != sees_and_is_empty_cache.end() ) {
             return iter->second;
         }
-        sees_and_is_empty_cache[T] = here.sees( z->pos(), T, -1 ) && g->is_empty( T );
+        sees_and_is_empty_cache[T] = here.sees( z->pos_bub().raw(), T, -1 ) && g->is_empty( T );
         return sees_and_is_empty_cache[T];
     };
     for( item_location &location : here.get_active_items_in_radius( z->pos_bub(), range,
@@ -1412,14 +1412,14 @@ bool mattack::smash( monster *z )
  *                      second = the number of empty spaces found.
  */
 template <size_t N = 1>
-std::pair < std::array < tripoint, ( 2 * N + 1 ) * ( 2 * N + 1 ) >, size_t >
-find_empty_neighbors( const tripoint &origin )
+std::pair < std::array < tripoint_bub_ms, ( 2 * N + 1 ) * ( 2 * N + 1 ) >, size_t >
+find_empty_neighbors( const tripoint_bub_ms &origin )
 {
     constexpr int r = static_cast<int>( N );
 
-    std::pair < std::array < tripoint, ( 2 * N + 1 )*( 2 * N + 1 ) >, size_t > result;
+    std::pair < std::array < tripoint_bub_ms, ( 2 * N + 1 )*( 2 * N + 1 ) >, size_t > result;
 
-    for( const tripoint &tmp : get_map().points_in_radius( origin, r ) ) {
+    for( const tripoint_bub_ms &tmp : get_map().points_in_radius( origin, r ) ) {
         if( g->is_empty( tmp ) ) {
             result.first[result.second++] = tmp;
         }
@@ -1435,10 +1435,10 @@ find_empty_neighbors( const tripoint &origin )
  * @see find_empty_neighbors
  */
 template <size_t N = 1>
-std::pair < std::array < tripoint, ( 2 * N + 1 ) * ( 2 * N + 1 ) >, size_t >
+std::pair < std::array < tripoint_bub_ms, ( 2 * N + 1 ) * ( 2 * N + 1 ) >, size_t >
 find_empty_neighbors( const Creature &c )
 {
-    return find_empty_neighbors<N>( c.pos() );
+    return find_empty_neighbors<N>( c.pos_bub() );
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1598,8 +1598,8 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
             add_msg_if_player_sees( *z, m_warning, _( "A manhack flies out of one of the holes on the %s!" ),
                                     z->name() );
 
-            const tripoint where = empty_neighbors.first[get_random_index( empty_neighbor_count )];
-            if( monster *const manhack = g->place_critter_at( mon_manhack, tripoint_bub_ms( where ) ) ) {
+            const tripoint_bub_ms where = empty_neighbors.first[get_random_index( empty_neighbor_count )];
+            if( monster *const manhack = g->place_critter_at( mon_manhack, where ) ) {
                 manhack->make_ally( *z );
             }
         }
@@ -1613,7 +1613,7 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
             map &here = get_map();
             // fill empty tiles with acid
             for( size_t i = 0; i < empty_neighbor_count; ++i ) {
-                const tripoint &p = empty_neighbors.first[i];
+                const tripoint &p = empty_neighbors.first[i].raw();
                 here.add_field( p, fd_acid, att_acid_intensity );
             }
         }

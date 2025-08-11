@@ -101,7 +101,7 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
         return true;
     } );
 
-    const tripoint center{ 65, 65, 0 };
+    const tripoint_bub_ms center{ 65, 65, 0 };
     test_player.setpos( center );
     test_player.set_moves( 0 );
     // Give the player a head start.
@@ -119,12 +119,12 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
     for( int turn = 0; turn < 1000; ++turn ) {
         test_player.mod_moves( target_speed );
         while( test_player.get_moves() >= 0 ) {
-            test_player.setpos( test_player.pos() + direction_of_flight );
-            if( test_player.pos().x < SEEX * static_cast<int>( MAPSIZE / 2 ) ||
-                test_player.pos().y < SEEY * static_cast<int>( MAPSIZE / 2 ) ||
-                test_player.pos().x >= SEEX * ( 1 + static_cast<int>( MAPSIZE / 2 ) ) ||
-                test_player.pos().y >= SEEY * ( 1 + static_cast<int>( MAPSIZE / 2 ) ) ) {
-                tripoint offset = center - test_player.pos();
+            test_player.setpos( test_player.pos_bub() + direction_of_flight );
+            if( test_player.posx() < SEEX * static_cast<int>( MAPSIZE / 2 ) ||
+                test_player.posy() < SEEY * static_cast<int>( MAPSIZE / 2 ) ||
+                test_player.posx() >= SEEX * ( 1 + static_cast<int>( MAPSIZE / 2 ) ) ||
+                test_player.posy() >= SEEY * ( 1 + static_cast<int>( MAPSIZE / 2 ) ) ) {
+                tripoint_rel_ms offset = center - test_player.pos_bub();
                 test_player.setpos( center );
                 test_monster.setpos( test_monster.pos() + offset );
                 // Verify that only the player and one monster are present.
@@ -133,7 +133,7 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
             const int move_cost = get_map().combined_movecost(
                                       test_player.pos_bub(), test_player.pos_bub() + direction_of_flight, nullptr, 0 );
             tracker.push_back( {'p', move_cost, rl_dist( test_monster.pos_bub(), test_player.pos_bub() ),
-                                test_player.pos()
+                                test_player.pos_bub().raw()
                                } );
             test_player.mod_moves( -move_cost );
         }
@@ -144,8 +144,8 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
             const int moves_before = test_monster.get_moves();
             test_monster.move();
             tracker.push_back( {'m', moves_before - test_monster.get_moves(),
-                                rl_dist( test_monster.pos(), test_player.pos() ),
-                                test_monster.pos()
+                                rl_dist( test_monster.pos_bub(), test_player.pos_bub() ),
+                                test_monster.pos_bub().raw()
                                } );
             if( rl_dist( test_monster.pos(), test_player.pos() ) == 1 ) {
                 INFO( tracker );

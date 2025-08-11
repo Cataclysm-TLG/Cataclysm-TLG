@@ -422,7 +422,7 @@ bool trapfunc::tripwire( const tripoint_bub_ms &p, Creature *c, item * )
             }
             if( !valid.empty() ) {
                 player_character.setpos( random_entry( valid ) );
-                z->setpos( player_character.pos() );
+                z->setpos( player_character.pos_bub() );
             }
             player_character.mod_moves( -z->get_speed() * 1.5 );
             g->update_map( player_character );
