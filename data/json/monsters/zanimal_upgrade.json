@@ -31,7 +31,7 @@
     "special_attacks": [ { "id": "bite_grab", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_grab_required", "max_mul": 1.5 } ],
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 1 }
   },
   {
@@ -208,7 +208,7 @@
     "vision_night": 3,
     "harvest": "puppy_bones",
     "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 3 }
   },
   {
