@@ -387,7 +387,7 @@ class Creature : public viewer
          * @param tr is the trap that was triggered.
          * @param pos is the location of the trap (not necessarily of the creature) in the main map.
          */
-        virtual bool avoid_trap( const tripoint &pos, const trap &tr ) const = 0;
+        virtual bool avoid_trap( const tripoint_bub_ms &pos, const trap &tr ) const = 0;
 
         /** Gets the relevant eye_level() function from either monster or Character. */
         int eye_level() const;

@@ -405,7 +405,7 @@ ret_val<void> iuse_transform::can_use( const Character &p, const item &it,
 
     std::map<quality_id, int> unmet_reqs;
     inventory inv;
-    inv.form_from_map( p.pos(), 1, &p, true, true );
+    inv.form_from_map( p.pos_bub(), 1, &p, true, true );
     for( const auto &quality : qualities_needed ) {
         if( !p.has_quality( quality.first, quality.second ) &&
             !inv.has_quality( quality.first, quality.second ) ) {
@@ -2036,7 +2036,7 @@ std::optional<int> fireweapon_off_actor::use( Character *p, item &it,
     p->mod_moves( -moves );
     if( rng( 0, 10 ) - it.damage_level() > success_chance && !p->is_underwater() ) {
         if( noise > 0 ) {
-            sounds::sound( p->pos(), noise, sounds::sound_t::combat, success_message );
+            sounds::sound( p->pos_bub(), noise, sounds::sound_t::combat, success_message );
         } else {
             p->add_msg_if_player( "%s", success_message );
         }
@@ -2132,7 +2132,7 @@ std::optional<int> manualnoise_actor::use( Character *p, item &, const tripoint_
     // Uses the moves specified by iuse_actor's definition
     p->mod_moves( -moves );
     if( noise > 0 ) {
-        sounds::sound( p->pos(), noise, sounds::sound_t::activity,
+        sounds::sound( p->pos_bub(), noise, sounds::sound_t::activity,
                        noise_message.empty() ? _( "Hsss" ) : noise_message.translated(), true, noise_id, noise_variant );
     }
     p->add_msg_if_player( "%s", use_message );
@@ -2316,10 +2316,10 @@ std::optional<int> musical_instrument_actor::use( Character *p, item &it,
     }
 
     if( morale_effect >= 0 ) {
-        sounds::sound( p->pos(), volume, sounds::sound_t::music, desc, true, "musical_instrument",
+        sounds::sound( p->pos_bub(), volume, sounds::sound_t::music, desc, true, "musical_instrument",
                        it.typeId().str() );
     } else {
-        sounds::sound( p->pos(), volume, sounds::sound_t::music, desc, true, "musical_instrument_bad",
+        sounds::sound( p->pos_bub(), volume, sounds::sound_t::music, desc, true, "musical_instrument_bad",
                        it.typeId().str() );
     }
 
@@ -3925,7 +3925,7 @@ bool place_trap_actor::is_allowed( Character &p, const tripoint_bub_ms &pos,
                                  name );
         } else {
             p.add_msg_if_player( m_bad, _( "You trigger a %s!" ), existing_trap.name() );
-            existing_trap.trigger( pos.raw(), p );
+            existing_trap.trigger( pos, p );
         }
         return false;
     }

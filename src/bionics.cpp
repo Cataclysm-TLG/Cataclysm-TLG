@@ -716,7 +716,7 @@ void npc::check_or_use_weapon_cbm( const bionic_id &cbm_id )
             if( is_armed() ) {
                 stow_item( *weapon );
             }
-            add_msg_if_player_sees( pos(), m_info, _( "%s activates their %s." ),
+            add_msg_if_player_sees( pos_bub(), m_info, _( "%s activates their %s." ),
                                     disp_name(), bio.info().name );
 
             set_wielded_item( cbm_weapon );
@@ -903,7 +903,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
     } else if( bio.id == bio_resonator ) {
         add_msg_activate();
         //~Sound of a bionic sonic-resonator shaking the area
-        sounds::sound( pos(), 30, sounds::sound_t::combat, _( "VRRRRMP!" ), false, "bionic",
+        sounds::sound( pos_bub(), 30, sounds::sound_t::combat, _( "VRRRRMP!" ), false, "bionic",
                        static_cast<std::string>( bio_resonator ) );
         for( const tripoint_bub_ms &bashpoint : here.points_in_radius( pos_bub(), 1 ) ) {
             here.bash( bashpoint, 110 );
@@ -1153,7 +1153,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         const oter_id &cur_om_ter = overmap_buffer.ter( global_omt_location() );
         /* cache g->get_temperature( player location ) since it is used twice. No reason to recalc */
         weather_manager &weather = get_weather();
-        const units::temperature player_local_temp = weather.get_temperature( player_character.pos() );
+        const units::temperature player_local_temp = weather.get_temperature( player_character.pos_bub() );
         const int windpower = get_local_windpower( weather.windspeed + vehwindspeed,
                               cur_om_ter, get_location(), weather.winddirection, g->is_sheltered( pos_bub() ) );
         add_msg_if_player( m_info, _( "Temperature: %s." ), print_temperature( player_local_temp ) );

@@ -795,7 +795,7 @@ bool monster::is_aquatic_danger( const tripoint &at_pos ) const
 bool monster::die_if_drowning( const tripoint &at_pos, const int chance )
 {
     if( is_aquatic_danger( at_pos ) && one_in( chance ) ) {
-        add_msg_if_player_sees( at_pos, _( "The %s drowns!" ), name() );
+        add_msg_if_player_sees( pos_bub(), _( "The %s drowns!" ), name() );
         die( nullptr );
         return true;
     }
@@ -1345,7 +1345,7 @@ void monster::nursebot_operate( Character *dragged_foe )
             add_effect( effect_countdown, 2_turns );
             add_msg( m_bad, _( "The %s produces a syringe full of some translucent liquid." ), name() );
         } else if( creatures.creature_at( get_dest() ) != nullptr && has_effect( effect_dragging ) ) {
-            sounds::sound( pos(), 8, sounds::sound_t::electronic_speech,
+            sounds::sound( pos_bub(), 8, sounds::sound_t::electronic_speech,
                            string_format(
                                _( "a soft robotic voice say, \"Please step away from the Autodoc, this patient needs immediate care.\"" ) ) );
             // TODO: Make it able to push NPC/player
@@ -1387,7 +1387,7 @@ void monster::nursebot_operate( Character *dragged_foe )
 
 // footsteps will determine how loud a monster's normal movement is
 // and create a sound in the monsters location when they move
-void monster::footsteps( const tripoint &p )
+void monster::footsteps( const tripoint_bub_ms &p )
 {
     if( is_hallucination() ) {
         return;
@@ -1430,7 +1430,7 @@ void monster::footsteps( const tripoint &p )
     if( volume == 0 ) {
         return;
     }
-    int dist = rl_dist( p, get_player_character().pos() );
+    int dist = rl_dist( p.raw(), get_player_character().pos() );
     sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
 }
 
@@ -1944,7 +1944,7 @@ bool monster::move_to( const tripoint &p, bool force, bool step_on_critter,
     }
 
     setpos( destination );
-    footsteps( destination.raw() );
+    footsteps( destination );
     underwater = will_be_water;
     optional_vpart_position vp_dest = here.veh_at( destination );
     if( vp_dest ) {
@@ -2464,7 +2464,7 @@ void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
                 if( !this->has_effect( effect_invisibility ) ) {
                     monster_name = this->disp_name( false, true );
                 }
-                add_msg_if_player_sees( this->pos(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
+                add_msg_if_player_sees( this->pos_bub(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
                                         monster_name,
                                         veh.disp_name() );
                 int shove_moves = shove_veh_mass_moves_factor * veh_mass / 10_kilogram;

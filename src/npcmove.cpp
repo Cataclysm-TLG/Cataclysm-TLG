@@ -4107,22 +4107,24 @@ item *npc::evaluate_best_weapon() const
 
     //Now check through the NPC's inventory for melee weapons, guns, or holstered items
     visit_items( [this, can_use_gun, use_silent, &weap, &best_value, &best]( item * node, item * ) {
-        double weapon_value = 0.0;
-        bool using_same_type_bionic_weapon = is_using_bionic_weapon()
+        if( can_wield( *node ).success() ) {
+            double weapon_value = 0.0;
+            bool using_same_type_bionic_weapon = is_using_bionic_weapon()
                                              && node != &weap
                                              && node->type->get_id() == weap.type->get_id();
 
-        if( ( node->is_melee() || node->is_gun() ) && ( !node->has_flag( flag_INTEGRATED ) &&
+            if( ( node->is_melee() || node->is_gun() ) && ( !node->has_flag( flag_INTEGRATED ) &&
                 !is_worn( *node ) ) ) {
             weapon_value = evaluate_weapon( *node, can_use_gun, use_silent );
-            if( weapon_value > best_value && !using_same_type_bionic_weapon ) {
+                if( weapon_value > best_value && !using_same_type_bionic_weapon ) {
                 best = const_cast<item *>( node );
                 best_value = weapon_value;
-            }
+                }
             return VisitResponse::SKIP;
-        } else if( node->get_use( "holster" ) && !node->empty() ) {
-            // we just recur to the next farther down
-            return VisitResponse::NEXT;
+            } else if( node->get_use( "holster" ) && !node->empty() ) {
+                // We just recur to the next farther down,
+                return VisitResponse::NEXT;
+            }
         }
         return VisitResponse::SKIP;
     } );
@@ -4817,7 +4819,7 @@ void npc::reach_omt_destination()
             if( rl_dist( player_character.pos(), pos() ) > SEEX * 2 ) {
                 if( player_character.cache_has_item_with_flag( flag_TWO_WAY_RADIO, true ) &&
                     cache_has_item_with_flag( flag_TWO_WAY_RADIO, true ) ) {
-                    add_msg_if_player_sees( pos(), m_info, _( "From your two-way radio you hear %s reporting in, "
+                    add_msg_if_player_sees( pos_bub(), m_info, _( "From your two-way radio you hear %s reporting in, "
                                             "'I've arrived, boss!'" ), disp_name() );
                 }
             }
@@ -5389,8 +5391,8 @@ void npc::do_reload( const item_location &it )
 
     if( get_player_view().sees( *this ) ) {
         add_msg( _( "%1$s reloads their %2$s." ), get_name(), it->tname() );
-        sfx::play_variant_sound( "reload", it->typeId().str(), sfx::get_heard_volume( pos() ),
-                                 sfx::get_heard_angle( pos() ) );
+        sfx::play_variant_sound( "reload", it->typeId().str(), sfx::get_heard_volume( pos_bub() ),
+                                 sfx::get_heard_angle( pos_bub() ) );
     }
 
     // Otherwise the NPC may not equip the weapon until they see danger

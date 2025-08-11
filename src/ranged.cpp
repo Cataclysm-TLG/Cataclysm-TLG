@@ -2409,7 +2409,7 @@ static void cycle_action( item &weap, const itype_id &ammo, const tripoint &pos 
     tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&]( const tripoint & e ) {
         return !here.passable( e );
     } ), tiles.end() );
-    tripoint eject = tiles.empty() ? pos : random_entry( tiles );
+    tripoint_bub_ms eject{ tiles.empty() ? pos : random_entry( tiles ) };
 
     // for turrets try and drop casings or linkages directly to any CARGO part on the same tile
     const std::optional<vpart_reference> ovp_cargo = weap.has_flag( flag_VEHICLE )
@@ -2460,7 +2460,7 @@ void make_gun_sound_effect( const Character &p, bool burst, item *weapon )
 {
     const item::sound_data data = weapon->gun_noise( burst );
     if( data.volume > 0 ) {
-        sounds::sound( p.pos(), data.volume, sounds::sound_t::combat,
+        sounds::sound( p.pos_bub(), data.volume, sounds::sound_t::combat,
                        data.sound.empty() ? _( "Bang!" ) : data.sound );
     }
     tname::segment_bitset segs( tname::unprefixed_tname );

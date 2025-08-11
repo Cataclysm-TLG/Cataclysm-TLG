@@ -498,14 +498,14 @@ static void pldrive( point d )
 static void open()
 {
     avatar &player_character = get_avatar();
-    const std::optional<tripoint> openp_ = choose_adjacent_highlight( _( "Open where?" ),
-                                           pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
-                                           ACTION_OPEN, false );
+    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( _( "Open where?" ),
+            pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
+            ACTION_OPEN, false );
 
     if( !openp_ ) {
         return;
     }
-    const tripoint_bub_ms openp = tripoint_bub_ms( *openp_ );
+    const tripoint_bub_ms openp = *openp_;
     map &here = get_map();
 
     player_character.mod_moves( -to_moves<int>( 1_seconds ) );
@@ -583,7 +583,7 @@ static void open()
 
 static void close()
 {
-    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_highlight_bub_ms(
+    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_highlight(
                 _( "Close where?" ),
                 pgettext( "no door, gate, etc.", "There is nothing that can be closed nearby." ),
                 ACTION_CLOSE, false ) ) {
@@ -1105,7 +1105,7 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
                 if( glass_portion && rng( 0, vol + 3 ) < vol ) {
                     add_msg( m_bad, _( "Your %s shatters!" ), weapon->tname() );
                     weapon->spill_contents( pos_bub() );
-                    sounds::sound( pos(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
+                    sounds::sound( pos_bub(), 24, sounds::sound_t::combat, "CRACK!", true, "smash",
                                    "glass" );
                     deal_damage( nullptr, bodypart_id( "hand_r" ), damage_instance( damage_cut,
                                  rng( 0,

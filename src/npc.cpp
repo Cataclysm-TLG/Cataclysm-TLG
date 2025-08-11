@@ -1398,7 +1398,7 @@ void npc::do_npc_read( bool ebook )
 
     book = book.obtain( *npc_character );
     if( can_read( *book, fail_reasons ) ) {
-        add_msg_if_player_sees( pos(), _( "%s starts reading." ), disp_name() );
+        add_msg_if_player_sees( pos_bub(), _( "%s starts reading." ), disp_name() );
 
         // NPCs can't read to other NPCs yet
         const time_duration time_taken = time_to_read( *book, *this );
@@ -1917,11 +1917,11 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
 
     // Sound happens even if we can't hear it
     if( spriority == sounds::sound_t::order || spriority == sounds::sound_t::alert ) {
-        sounds::sound( pos(), get_shout_volume(), spriority, sound, false, "speech",
+        sounds::sound( pos_bub(), get_shout_volume(), spriority, sound, false, "speech",
                        male ? "NPC_m" : "NPC_f" );
     } else {
         // Always shouting when in danger or short time since being in danger
-        sounds::sound( pos(), danger_assessment() > NPC_DANGER_VERY_LOW ?
+        sounds::sound( pos_bub(), danger_assessment() > NPC_DANGER_VERY_LOW ?
                        get_shout_volume() : indoor_voice(),
                        sounds::sound_t::speech,
                        sound, false, "speech",

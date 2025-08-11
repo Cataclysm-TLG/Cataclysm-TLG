@@ -1187,7 +1187,7 @@ nc_color monster::color_with_effects() const
     return ret;
 }
 
-bool monster::avoid_trap( const tripoint & /* pos */, const trap &tr ) const
+bool monster::avoid_trap( const tripoint_bub_ms & /* pos */, const trap &tr ) const
 {
     // The trap position is not used, monsters are to stupid to remember traps. Actually, they do
     // not even see them.
@@ -2054,7 +2054,7 @@ bool monster::melee_attack( Creature &target, float accuracy )
         if( u_see_my_spot ) {
             if( target.is_avatar() ) {
                 sfx::play_variant_sound( "melee_attack", "monster_melee_hit",
-                                         sfx::get_heard_volume( target.pos() ) );
+                                         sfx::get_heard_volume( target.pos_bub() ) );
                 // don't make a pain yelp if our limb is a bionic
                 if( !dealt_dam.bp_hit->has_flag( json_flag_BIONIC_LIMB ) ) {
                     sfx::do_player_death_hurt( dynamic_cast<Character &>( target ), false );
@@ -2847,7 +2847,7 @@ void monster::process_turn()
     if( has_flag( mon_flag_ELECTRIC_FIELD ) && !is_hallucination() ) {
         if( has_effect( effect_emp ) ) {
             if( calendar::once_every( 10_turns ) ) {
-                sounds::sound( pos(), 5, sounds::sound_t::combat, _( "hummmmm." ), false, "humming", "electric" );
+                sounds::sound( pos_bub(), 5, sounds::sound_t::combat, _( "hummmmm." ), false, "humming", "electric" );
             }
         } else {
             weather_manager &weather = get_weather();
@@ -2856,7 +2856,7 @@ void monster::process_turn()
                 for( const item &item : items ) {
                     if( item.made_of( phase_id::LIQUID ) && item.flammable() ) { // start a fire!
                         here.add_field( zap, fd_fire, 2, 1_minutes );
-                        sounds::sound( pos(), 30, sounds::sound_t::combat,  _( "fwoosh!" ), false, "fire", "ignition" );
+                        sounds::sound( pos_bub(), 30, sounds::sound_t::combat,  _( "fwoosh!" ), false, "fire", "ignition" );
                         break;
                     }
                 }
@@ -2867,10 +2867,10 @@ void monster::process_turn()
                 if( t == ter_t_gas_pump || t == ter_t_gas_pump_a ) {
                     if( one_in( 4 ) ) {
                         explosion_handler::explosion( this, pos_bub(), 40, 0.8, true );
-                        add_msg_if_player_sees( zap.raw(), m_warning, _( "The %s explodes in a fiery inferno!" ),
+                        add_msg_if_player_sees( zap, m_warning, _( "The %s explodes in a fiery inferno!" ),
                                                 here.tername( zap ) );
                     } else {
-                        add_msg_if_player_sees( zap.raw(), m_warning, _( "Lightning from %1$s engulfs the %2$s!" ),
+                        add_msg_if_player_sees( zap, m_warning, _( "Lightning from %1$s engulfs the %2$s!" ),
                                                 name(), here.tername( zap ) );
                         here.add_field( zap, fd_fire, 1, 2_turns );
                     }
@@ -2879,9 +2879,9 @@ void monster::process_turn()
             if( weather.lightning_active && !has_effect( effect_supercharged ) &&
                 here.is_outside( pos_bub() ) ) {
                 weather.lightning_active = false; // only one supercharge per strike
-                sounds::sound( pos(), 300, sounds::sound_t::combat, _( "BOOOOOOOM!!!" ), false, "environment",
+                sounds::sound( pos_bub(), 300, sounds::sound_t::combat, _( "BOOOOOOOM!!!" ), false, "environment",
                                "thunder_near" );
-                sounds::sound( pos(), 20, sounds::sound_t::combat, _( "vrrrRRRUUMMMMMMMM!" ), false, "explosion",
+                sounds::sound( pos_bub(), 20, sounds::sound_t::combat, _( "vrrrRRRUUMMMMMMMM!" ), false, "explosion",
                                "default" );
                 Character &player_character = get_player_character();
                 if( player_character.sees( pos_bub() ) ) {
@@ -2891,7 +2891,7 @@ void monster::process_turn()
                 }
                 add_effect( effect_supercharged, 12_hours );
             } else if( has_effect( effect_supercharged ) && calendar::once_every( 5_turns ) ) {
-                sounds::sound( pos(), 20, sounds::sound_t::combat, _( "VMMMMMMMMM!" ), false, "humming",
+                sounds::sound( pos_bub(), 20, sounds::sound_t::combat, _( "VMMMMMMMMM!" ), false, "humming",
                                "electric" );
             }
         }
@@ -3350,7 +3350,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         }
     } else if( id == effect_fake_common_cold ) {
         if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
+            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
         }
 
         avatar &you = get_avatar(); // No NPCs for now.
@@ -3360,7 +3360,7 @@ void monster::process_one_effect( effect &it, bool is_new )
     } else if( id == effect_fake_flu ) {
         // Need to define the two separately because it's theoretically (and realistically) possible to have both flu and cold at once, both for players and monsters.
         if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
+            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc", "cough" );
         }
 
         avatar &you = get_avatar(); // No NPCs for now.
@@ -3559,7 +3559,7 @@ void monster::process_effects()
             int slipchance = ( round( get_speed() / 50 ) - get_dodge() / 2 );
             if( intensity + slipchance > dice( 1, 12 ) ) {
                 add_effect( effect_downed, rng( 1_turns, 2_turns ) );
-                add_msg_if_player_sees( pos(), m_info, _( "The %1s slips and falls!" ),
+                add_msg_if_player_sees( pos_bub(), m_info, _( "The %1s slips and falls!" ),
                                         name() );
             }
         }
@@ -3601,7 +3601,7 @@ bool monster::make_fungus()
     const std::string old_name = name();
     poly( type->fungalize_into );
 
-    add_msg_if_player_sees( pos(), m_info, _( "The spores transform %1$s into a %2$s!" ),
+    add_msg_if_player_sees( pos_bub(), m_info, _( "The spores transform %1$s into a %2$s!" ),
                             old_name, name() );
 
     return true;

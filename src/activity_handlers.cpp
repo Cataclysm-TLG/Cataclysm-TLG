@@ -1600,7 +1600,7 @@ void activity_handlers::fill_liquid_do_turn( player_activity *act, Character *yo
         liquid.charges = std::min( charges_per_second, liquid.charges );
         const int original_charges = liquid.charges;
         if( liquid.has_temperature() && units::to_joule_per_gram( liquid.specific_energy ) < 0 ) {
-            liquid.set_item_temperature( std::max( get_weather().get_temperature( you->pos() ),
+            liquid.set_item_temperature( std::max( get_weather().get_temperature( you->pos_bub() ),
                                                    temperatures::cold ) );
         }
 
@@ -3953,7 +3953,7 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
             }
 
             if( spell_being_cast.has_flag( spell_flag::VERBAL ) && !you->has_flag( json_flag_SILENT_SPELL ) ) {
-                sounds::sound( you->pos(), you->get_shout_volume() / 2, sounds::sound_t::speech,
+                sounds::sound( you->pos_bub(), you->get_shout_volume() / 2, sounds::sound_t::speech,
                                _( "cast a spell" ),
                                false );
             }

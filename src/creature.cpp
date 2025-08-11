@@ -1573,7 +1573,7 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
         c->move_to( tripoint_abs_ms( line_to( get_location().raw(), c->get_location().raw(), 0,
                                               0 ).front() ) );
         c->add_effect( effect_stunned, 1_seconds );
-        sounds::sound( c->pos(), 5, sounds::sound_t::combat, _( "Shhhk!" ) );
+        sounds::sound( c->pos_bub(), 5, sounds::sound_t::combat, _( "Shhhk!" ) );
     } else {
         add_msg_if_player( m_bad, _( "%s weight makes it difficult to pull towards you." ),
                            c->disp_name( true, true ) );

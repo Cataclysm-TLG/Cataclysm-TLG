@@ -327,7 +327,7 @@ static void detect_conditions_sub( climbing_aid::condition_list &list,
 }
 
 climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
-        const tripoint &examp )
+        const tripoint_bub_ms &examp )
 {
     condition_list list;
 
@@ -347,8 +347,8 @@ climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
     };
 
     auto detect_ter_furn_flag = [&you, &here, &fall]( condition & cond ) {
-        tripoint pos = fall.pos_furniture_or_floor();
-        cond.range = fall.pos_top().z - pos.z;
+        tripoint_bub_ms pos = fall.pos_furniture_or_floor();
+        cond.range = fall.pos_top().z() - pos.z();
         bool furn_ok = false;
         if( here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, pos ) ||
             here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, pos ) ) {
@@ -377,7 +377,7 @@ climbing_aid::condition_list climbing_aid::detect_conditions( Character &you,
     return list;
 }
 
-climbing_aid::fall_scan::fall_scan( const tripoint &examp )
+climbing_aid::fall_scan::fall_scan( const tripoint_bub_ms &examp )
 {
     map &here = get_map();
     creature_tracker &creatures = get_creature_tracker();
