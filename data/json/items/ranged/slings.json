@@ -44,12 +44,11 @@
     "volume": "250 ml",
     "price_postapoc": "50 cent",
     "to_hit": -2,
-    "ranged_damage": { "damage_type": "bullet", "amount": 3 },
+    "ranged_damage": { "damage_type": "bullet", "amount": 1 },
     "range": 1,
     "dispersion": 75,
     "durability": 6,
     "clip_size": 1,
-    "valid_mod_locations": [ [ "underbarrel mount", 1 ], [ "stock mount", 1 ] ],
     "reload": 50,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "pebble": 1 }, "open_container": true } ]
   },
@@ -117,7 +116,6 @@
     "dispersion": 45,
     "durability": 7,
     "clip_size": 1,
-    "valid_mod_locations": [ [ "underbarrel mount", 1 ] ],
     "reload": 50,
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "pebble": 1 }, "open_container": true } ]
   }
