@@ -151,7 +151,7 @@
       ]
     },
     "responses": [
-      { "text": "Thanks!  <done_conversation_section>", "topic": "TALK_FREE_MERCHANT_TEAMSTER_CHAT" },
+      { "text": "Thanks!", "topic": "TALK_FREE_MERCHANT_TEAMSTER_CHAT" },
       { "text": "Thanks!  I'll see you around.", "topic": "TALK_DONE" }
     ]
   },
