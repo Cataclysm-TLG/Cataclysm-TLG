@@ -604,7 +604,7 @@ double occupied_tile_fraction( creature_size target_size )
 {
     switch( target_size ) {
         case creature_size::tiny:
-            return 0.2;
+            return 0.25;
         case creature_size::small:
             return 0.35;
         case creature_size::medium:
@@ -612,12 +612,11 @@ double occupied_tile_fraction( creature_size target_size )
         case creature_size::large:
             return 0.65;
         case creature_size::huge:
-            return 0.8;
+            return 0.85;
         case creature_size::num_sizes:
-            debugmsg( "ERROR: Invalid Creature size class." );
             break;
     }
-
+    debugmsg( "ERROR: occupied_tile_fraction found invalid creature size." );
     return 0.5;
 }
 
@@ -638,20 +637,7 @@ double Creature::ranged_target_size() const
         }
     }
     if( has_flag( mon_flag_HARDTOSHOOT ) ) {
-        switch( get_size() ) {
-            case creature_size::tiny:
-            case creature_size::small:
-                return stance_factor * occupied_tile_fraction( creature_size::tiny );
-            case creature_size::medium:
-                return stance_factor * occupied_tile_fraction( creature_size::small );
-            case creature_size::large:
-                return stance_factor * occupied_tile_fraction( creature_size::medium );
-            case creature_size::huge:
-                return stance_factor * occupied_tile_fraction( creature_size::large );
-            case creature_size::num_sizes:
-                debugmsg( "ERROR: Invalid Creature size class." );
-                break;
-        }
+        stance_factor -= 0.25;
     }
     return std::clamp( ( stance_factor * occupied_tile_fraction( get_size() ) ), 0.1, 0.9 );
 }
