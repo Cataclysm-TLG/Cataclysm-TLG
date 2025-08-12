@@ -653,7 +653,7 @@ double Creature::ranged_target_size() const
                 break;
         }
     }
-    return stance_factor * occupied_tile_fraction( get_size() );
+    return std::clamp( ( stance_factor * occupied_tile_fraction( get_size() ) ), 0.1, 0.9 );
 }
 
 int range_with_even_chance_of_good_hit( int dispersion )
