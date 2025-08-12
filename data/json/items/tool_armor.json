@@ -1356,8 +1356,10 @@
     "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" } ] },
     "armor": [
       {
-        "material": [ 
-          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 }, { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "mouth", "eyes" ],
@@ -1413,7 +1415,16 @@
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_toes_l", "foot_toes_r", "foot_ankle_l", "foot_ankle_r", "foot_heel_l", "foot_heel_r" ],
+        "specifically_covers": [
+          "foot_arch_l",
+          "foot_arch_r",
+          "foot_toes_l",
+          "foot_toes_r",
+          "foot_ankle_l",
+          "foot_ankle_r",
+          "foot_heel_l",
+          "foot_heel_r"
+        ],
         "layers": [ "NORMAL", "OUTER", "BELTED" ],
         "volume_encumber_modifier": 0,
         "rigid_layer_only": true
