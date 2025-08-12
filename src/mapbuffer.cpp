@@ -233,14 +233,14 @@ void mapbuffer::save_quad(
     const cata_path &dirname, const cata_path &filename, const tripoint_abs_omt &om_addr,
     std::list<tripoint_abs_sm> &submaps_to_delete, bool delete_after_save )
 {
-    std::vector<point> offsets;
+    std::vector<point_rel_sm> offsets;
     std::vector<tripoint_abs_sm> submap_addrs;
     offsets.reserve( 4 );
     submap_addrs.reserve( 4 );
-    offsets.push_back( point::zero );
-    offsets.push_back( point::south );
-    offsets.push_back( point::east );
-    offsets.push_back( point::south_east );
+    offsets.push_back( point_rel_sm::zero );
+    offsets.push_back( point_rel_sm::south );
+    offsets.push_back( point_rel_sm::east );
+    offsets.push_back( point_rel_sm::south_east );
 
     bool all_uniform = true;
     bool reverted_to_uniform = false;
@@ -266,7 +266,7 @@ void mapbuffer::save_quad(
 
     for( point_rel_sm &offsets_offset : offsets ) {
         tripoint_abs_sm submap_addr = project_to<coords::sm>( om_addr );
-        submap_addr += offsets_offset;
+        submap_addr += offsets_offset.raw();
         submap_addrs.push_back( submap_addr );
         submap *sm = submaps[submap_addr].get();
         if( sm != nullptr ) {
