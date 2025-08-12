@@ -10666,9 +10666,9 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
     if( worn_with_flag( flag_ROLLER_INLINE ) ) {
         if( on_road ) {
             if( is_running() ) {
-                run_cost_effect_mul( 0.5f, _( "Inline Skates" ) );
+                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
             } else if( is_walking() ) {
-                run_cost_effect_mul( 0.85f, _( "Inline Skates" ) );
+                run_cost_effect_mul( 0.65f, _( "Inline Skates" ) );
             }
         } else {
             run_cost_effect_mul( 1.5f, _( "Inline Skates" ) );
@@ -10680,9 +10680,9 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
     if( worn_with_flag( flag_ROLLER_QUAD ) ) {
         if( on_road ) {
             if( is_running() ) {
-                run_cost_effect_mul( 0.7f, _( "Roller Skates" ) );
+                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
             } else if( is_walking() ) {
-                run_cost_effect_mul( 0.85f, _( "Roller Skates" ) );
+                run_cost_effect_mul( 0.75f, _( "Roller Skates" ) );
             }
         } else {
             run_cost_effect_mul( 1.3f, _( "Roller Skates" ) );
@@ -10694,9 +10694,9 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
     if( worn_with_flag( flag_ROLLER_ONE ) ) {
         if( on_road ) {
             if( is_running() ) {
-                run_cost_effect_mul( 0.85f, _( "Heelys" ) );
+                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
             } else if( is_walking() ) {
-                run_cost_effect_mul( 0.9f, _( "Heelys" ) );
+                run_cost_effect_mul( 0.8f, _( "Heelys" ) );
             }
         } else {
             run_cost_effect_mul( 1.1f, _( "Heelys" ) );
