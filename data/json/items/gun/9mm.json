@@ -246,7 +246,6 @@
     "volume": "2110 ml",
     "longest_side": "377 mm",
     "barrel_length": "116 mm",
-    "skill": "smg",
     "range": 1,
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "dispersion": 270,

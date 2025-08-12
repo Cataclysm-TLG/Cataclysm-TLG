@@ -110,6 +110,7 @@ static const efftype_id effect_leashed( "leashed" );
 static const efftype_id effect_lightsnare( "lightsnare" );
 static const efftype_id effect_maimed_arm( "maimed_arm" );
 static const efftype_id effect_monster_armor( "monster_armor" );
+static const efftype_id effect_monster_dodged( "monster_dodged" );
 static const efftype_id effect_monster_saddled( "monster_saddled" );
 static const efftype_id effect_natures_commune( "natures_commune" );
 static const efftype_id effect_nemesis_buff( "nemesis_buff" );
@@ -3547,7 +3548,7 @@ void monster::process_effects()
 
     // Slip on bile, or not.
     if( has_effect( effect_slippery_terrain ) && !is_immune_effect( effect_downed ) && !flies() &&
-        !digging() && !has_effect( effect_downed ) ) {
+        !digging() && !has_effect( effect_downed ) && !type->in_species( species_ROBOT ) ) {
         map &here = get_map();
         if( here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
             !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
@@ -3577,7 +3578,9 @@ void monster::process_effects()
             remove_effect( effect_cramped_space );
         }
     }
-
+    if( has_effect( effect_monster_dodged ) ) {
+        remove_effect( effect_monster_dodged );
+    }
     Creature::process_effects();
 }
 
@@ -3845,7 +3848,7 @@ float monster::speed_rating() const
 
 void monster::on_dodge( Creature *, float, float )
 {
-    // Currently does nothing, later should handle faction relations
+    add_effect( effect_monster_dodged, 1_seconds, false );
 }
 
 void monster::on_hit( Creature *source, bodypart_id,

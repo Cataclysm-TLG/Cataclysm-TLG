@@ -84,6 +84,46 @@
             "damage_required": [ 51, 100 ]
           }
         ]
+      },
+      {
+        "id": "armour_carapace",
+        "name": "the carapace",
+        "is_good": false,
+        "armor_mult": { "cut": 1.3, "stab": 1.15, "bullet": 1.2 },
+        "coverage_mult": { "bash": 2.0, "point": 0.3 },
+        "condition": { "not": { "npc_has_any_effect": [ "maimed_armor_migo" ] } },
+        "effects": [
+          {
+            "effect": "maimed_armor_migo",
+            "chance": 15,
+            "message": "The carapace is cracked!",
+            "damage_required": [ 0, 10 ],
+            "duration": [ 10, 1000 ]
+          },
+          {
+            "effect": "maimed_armor_migo",
+            "chance": 20,
+            "message": "The carapace is badly cracked!",
+            "damage_required": [ 11, 20 ],
+            "duration": [ 100, 10000 ]
+          },
+          {
+            "effect": "maimed_armor_migo",
+            "chance": 25,
+            "message": "The carapace is broken open!",
+            "damage_required": [ 21, 200 ],
+            "duration": [ 1000, 100000 ]
+          }
+        ],
+        "coverage": 5
+      },
+      {
+        "id": "armour_shattered",
+        "name": "a crack in the carapace",
+        "armor_mult": { "all": 0.25 },
+        "coverage_mult": { "ranged": 0.8 },
+        "coverage": 20,
+        "condition": { "npc_has_any_effect": [ "maimed_armor_migo" ] }
       }
     ]
   }

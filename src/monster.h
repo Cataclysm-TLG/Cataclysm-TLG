@@ -409,11 +409,11 @@ class monster : public Creature
         float get_hit_base() const override;
         float get_dodge_base() const override;
 
-        float  get_dodge( bool critfail = true ) const
+        float get_dodge( bool critfail = true ) const
         override;       // Natural dodge, or 0 if we're occupied
-        float  get_melee() const override; // For determining attack skill when awarding dodge practice.
-        float  hit_roll() const override;  // For the purposes of comparing to player::dodge_roll()
-        float  dodge_roll() const override;  // For the purposes of comparing to player::hit_roll()
+        float get_melee() const override; // For determining attack skill when awarding dodge practice.
+        float hit_roll() const override;  // For the purposes of comparing to player::dodge_roll()
+        float dodge_roll() const override;  
 
         bool can_attack_high() const override; // Can we attack upper limbs?
         int get_grab_strength() const; // intensity of grabbed effect
@@ -434,7 +434,7 @@ class monster : public Creature
         bool has_grab_break_tec() const override;
 
         float stability_roll() const override;
-        // We just dodged an attack from something
+        // We just dodged an attack from something. Penalize further dodge attempts for the rest of this second.
         void on_dodge( Creature *source, float difficulty, float training_level = 0.0 ) override;
         void on_try_dodge() override {}
         // Something hit us (possibly null source)
