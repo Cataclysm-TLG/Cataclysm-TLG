@@ -1796,9 +1796,7 @@ static bool try_travel_to_destination( avatar &player_character, const tripoint_
 {
     std::vector<tripoint_abs_omt> path = get_overmap_path_to( dest, driving );
     if( path.empty() ) {
-    debugmsg( "try_travel_to_destination: no path returned to dest %s ( driving = %d )",
-              dest.to_string(), driving );
-    return false;
+        return false;
     }
     bool dest_is_curs = curs == dest;
     bool path_changed = false;
