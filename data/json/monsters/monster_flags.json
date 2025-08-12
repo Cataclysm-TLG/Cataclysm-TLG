@@ -52,7 +52,7 @@
   {
     "id": "HARDTOSHOOT",
     "type": "monster_flag",
-    "//": "It's one size smaller for ranged attacks, no less than creature_size::tiny"
+    "//": "Counts as 25% smaller than it is when trying to shoot it, unless attack has ammmo_effect_WIDE"
   },
   {
     "id": "GRAB_IMMUNE",
