@@ -10723,7 +10723,8 @@ float item::gun_shot_spread_multiplier() const
     float ret = 1.0f;
     for( const item *mod : gunmods() ) {
         if( !mod || !mod->type || !mod->type->gunmod ) {
-        debugmsg( "gun_shot_spread_multiplier(): invalid gunmod detected on item %s", type ? typeId().c_str() : "unknown" );
+            debugmsg( "gun_shot_spread_multiplier(): invalid gunmod detected on item %s",
+                      type ? typeId().c_str() : "unknown" );
             continue;
         }
         ret += mod->type->gunmod->shot_spread_multiplier_modifier;
@@ -10738,7 +10739,8 @@ int item::gun_range( bool with_ammo ) const
     }
     // Defensive: ensure type->gun exists
     if( !type || !type->gun ) {
-        debugmsg( "gun_range(): item claimed is_gun() but type->gun is null for %s", type ? typeId().c_str() : "unknown" );
+        debugmsg( "gun_range(): item claimed is_gun() but type->gun is null for %s",
+                  type ? typeId().c_str() : "unknown" );
         return 0;
     }
 
@@ -10755,7 +10757,8 @@ int item::gun_range( bool with_ammo ) const
     if( with_ammo && has_ammo() ) {
         const itype *ammo_info = ammo_data();
         if( !ammo_info || !ammo_info->ammo ) {
-            debugmsg( "gun_range(): has_ammo() true but ammo_data()/ammo is null for %s", type ? typeId().c_str() : "unknown" );
+            debugmsg( "gun_range(): has_ammo() true but ammo_data()/ammo is null for %s",
+                      type ? typeId().c_str() : "unknown" );
         } else {
             ret += ammo_info->ammo->range;
             range_multiplier *= ammo_info->ammo->range_multiplier;

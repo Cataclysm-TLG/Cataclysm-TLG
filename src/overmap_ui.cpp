@@ -1832,7 +1832,7 @@ static bool try_travel_to_destination( avatar &player_character, const tripoint_
     }
     bool dest_is_curs = curs == dest;
     bool path_changed = false;
-    if( !path.empty() && !player_character.omt_path.empty() && 
+    if( !path.empty() && !player_character.omt_path.empty() &&
         path.front() == player_character.omt_path.front() && path != player_character.omt_path ) {
         // the player is trying to go to their existing destination but the path has changed
         path_changed = true;
