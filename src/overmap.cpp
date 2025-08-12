@@ -7572,14 +7572,18 @@ void overmap::open( overmap_special_batch &enabled_specials )
             return;
         }
     }
+    std::vector<const overmap *> pointers;
+    // Fetch south and north
+    for( int i = -1; i <= 1; i += 2 ) {
+        pointers.push_back( overmap_buffer.get_existing( loc + point( 0, i ) ) );
+    }
+    // Fetch east and west
+    for( int i = -1; i <= 1; i += 2 ) {
+        pointers.push_back( overmap_buffer.get_existing( loc + point( i, 0 ) ) );
+    }
 
     // pointers looks like (north, south, west, east)
-    std::vector<const overmap *> neighbors;
-    neighbors.reserve( four_adjacent_offsets.size() );
-    for( const point &adjacent : four_adjacent_offsets ) {
-        neighbors.emplace_back( overmap_buffer.get_existing( loc + adjacent ) );
-    }
-    generate( neighbors, enabled_specials );
+    generate( pointers[0], pointers[3], pointers[1], pointers[2], enabled_specials );
 }
 
 // Note: this may throw io errors from std::ofstream
