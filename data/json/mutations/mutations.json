@@ -913,11 +913,11 @@
     "id": "STRONGBACK",
     "name": { "str": "Strong Back" },
     "points": 2,
-    "description": "You are capable of carrying far more than someone with similar strength could.  Your maximum weight carried is increased by 35%.",
+    "description": "You are capable of carrying far more than someone with similar strength could.  Your maximum weight carried is increased by 15%.",
     "starting_trait": true,
-    "valid": false,
     "cancels": [ "BADBACK" ],
-    "enchantments": [ { "values": [ { "value": "CARRY_WEIGHT", "multiply": 0.35 } ] } ]
+    "category": [ "INSECT" ],
+    "enchantments": [ { "values": [ { "value": "CARRY_WEIGHT", "multiply": 0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -1440,11 +1440,11 @@
     "id": "BADBACK",
     "name": { "str": "Bad Back" },
     "points": -3,
-    "description": "You simply cannot carry as much as people with a similar strength could.  Your maximum weight carried is reduced by 20%.",
+    "description": "You simply cannot carry as much as people with a similar strength could.  Your maximum weight carried is reduced by 15%.",
     "starting_trait": true,
     "category": [ "BIRD", "ELFA" ],
     "cancels": [ "STRONGBACK" ],
-    "enchantments": [ { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -6703,7 +6703,7 @@
           { "value": "MOVE_COST", "multiply": -0.15 },
           { "value": "ATTACK_SPEED", "multiply": -0.05 },
           { "value": "STAMINA_REGEN_MOD", "add": 0.1 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.2 }
+          { "value": "CARRY_WEIGHT", "multiply": -0.125 }
         ]
       }
     ]
