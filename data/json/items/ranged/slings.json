@@ -111,7 +111,7 @@
     "volume": "500 ml",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -2,
-    "ranged_damage": { "damage_type": "bullet", "amount": 4 },
+    "ranged_damage": { "damage_type": "bullet", "amount": 2 },
     "range": 2,
     "dispersion": 45,
     "durability": 7,
