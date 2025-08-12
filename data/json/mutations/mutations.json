@@ -6703,7 +6703,7 @@
           { "value": "MOVE_COST", "multiply": -0.15 },
           { "value": "ATTACK_SPEED", "multiply": -0.05 },
           { "value": "STAMINA_REGEN_MOD", "add": 0.1 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.20 }
+          { "value": "CARRY_WEIGHT", "multiply": -0.2 }
         ]
       }
     ]
