@@ -108,6 +108,7 @@ static const efftype_id effect_foamcrete_slow( "foamcrete_slow" );
 static const efftype_id effect_invisibility( "invisibility" );
 static const efftype_id effect_knockdown( "knockdown" );
 static const efftype_id effect_lying_down( "lying_down" );
+static const efftype_id effect_monster_dodged( "monster_dodged" );
 static const efftype_id effect_no_sight( "no_sight" );
 static const efftype_id effect_npc_suspend( "npc_suspend" );
 static const efftype_id effect_onfire( "onfire" );
@@ -876,15 +877,15 @@ int Creature::size_melee_penalty() const
 {
     switch( get_size() ) {
         case creature_size::tiny:
-            return 30;
+            return rng( 10, 30 );
         case creature_size::small:
-            return 15;
+            return rng( 5, 15 );
         case creature_size::medium:
             return 0;
         case creature_size::large:
-            return -10;
+            return rng( -5, -15 );
         case creature_size::huge:
-            return -20;
+            return rng( -10, -30 );
         case creature_size::num_sizes:
             debugmsg( "ERROR: Creature has invalid size class." );
             return 0;
@@ -1664,7 +1665,6 @@ bool Creature::dodge_check( float hit_roll, bool force_try, float )
     if( uncanny_dodge() ) {
         return true;
     }
-
     const float dodge_ability = dodge_roll();
     // center is 5 - 0 / 2
     // stddev is 5 - 0 / 4
