@@ -1898,6 +1898,7 @@
       "GROUP_MORALE",
       "CANPLAY",
       "PATH_AVOID_DANGER",
+      "HIT_AND_RUN", 
       "HARDTOSHOOT",
       "EATS",
       "SMALL_HIDER"
@@ -1930,6 +1931,7 @@
     "dissect": "dissect_insect_sample_large",
     "stomach_size": 800,
     "reproduction": { "baby_egg": "egg_wasp", "baby_count": 2, "baby_timer": 5 },
+    "delete": { "flags": [ "HIT_AND_RUN" ] },
     "upgrades": { "age_grow": 30, "into": "mon_wasp_mega" },
     "fungalize_into": "mon_wasp_queen_fungus",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
