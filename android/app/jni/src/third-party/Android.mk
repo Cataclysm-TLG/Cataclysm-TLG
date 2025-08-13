@@ -4,7 +4,10 @@ include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) $(LOCAL_PATH)/..
 
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_EXPORT_C_INCLUDES := \
+    $(LOCAL_PATH) \
+    $(LOCAL_PATH)/flatbuffers/include \
+    $(LOCAL_PATH)/ghc/include
 
 LOCAL_MODULE := third-party
 
