@@ -1734,6 +1734,13 @@ void options_manager::add_options_general()
 
         get_option( "AMBIENT_SOUND_VOLUME" ).setPrerequisite( "SOUND_ENABLED" );
     } );
+
+    add_empty_line();
+
+    add( "WORLD_COMPRESSION2", "general", to_translation( "World data compression" ),
+         to_translation( "If true, new worlds store data in a compressed format." ),
+         true
+       );
 }
 
 void options_manager::add_options_interface()
