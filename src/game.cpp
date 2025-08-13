@@ -602,6 +602,16 @@ void game::load_data_from_dir( const cata_path &path, const std::string &src, lo
     DynamicDataLoader::get_instance().load_data_from_path( path, src, ui );
 }
 
+void game::load_mod_data_from_dir( const cata_path &path, const std::string &src, loading_ui &ui )
+{
+    DynamicDataLoader::get_instance().load_mod_data_from_path( path, src, ui );
+}
+void game::load_mod_interaction_data_from_dir( const cata_path &path, const std::string &src,
+        loading_ui &ui )
+{
+    DynamicDataLoader::get_instance().load_mod_interaction_files_from_path( path, src, ui );
+}
+
 #if !(defined(_WIN32) || defined(TILES))
 // in ncurses_def.cpp
 extern void check_encoding(); // NOLINT
@@ -3360,7 +3370,9 @@ void game::load_world_modfiles( loading_ui &ui )
     load_packs( _( "Loading files" ), mods, ui );
 
     // Load additional mods from that world-specific folder
-    load_data_from_dir( PATH_INFO::world_base_save_path() / "mods", "custom", ui );
+    load_mod_data_from_dir( PATH_INFO::world_base_save_path() / "mods", "custom", ui );
+    load_mod_interaction_data_from_dir( PATH_INFO::world_base_save_path() / "mods" /
+                                        "mod_interactions", "custom", ui );
 
     DynamicDataLoader::get_instance().finalize_loaded_data( ui );
 }
@@ -3387,11 +3399,13 @@ void game::load_packs( const std::string &msg, const std::vector<mod_id> &packs,
         if( mod.ident.str() == "test_data" ) {
             check_plural = check_plural_t::none;
         }
-        load_data_from_dir( mod.path, mod.ident.str(), ui );
-
-        ui.proceed();
+        load_mod_data_from_dir( mod.path, mod.ident.str(), ui );
     }
-
+    for( const auto &e : available ) {
+        const MOD_INFORMATION &mod = *e;
+        load_mod_interaction_data_from_dir( mod.path / "mod_interactions", mod.ident.str(), ui );
+    }
+    ui.proceed();
     // Missing mods removed recently trigger a different message to make it clear they were removed on purpose.
     const std::unordered_set<mod_id> removed_mods {
         MOD_INFORMATION_Graphical_Overmap,
