@@ -2701,6 +2701,11 @@ void options_manager::add_options_world_default()
     }, "reset"
        );
 
+    add( "WORLD_COMPRESSION", "world_default", to_translation( "World data compression" ),
+         to_translation( "If true, new worlds store data in a compressed format." ),
+         true
+       );
+
     add_empty_line();
 
     add_option_group( "world_default", Group( "game_world_opts", to_translation( "Game World Options" ),

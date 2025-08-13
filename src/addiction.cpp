@@ -72,6 +72,7 @@ const std::vector<add_type> &add_type::get_all()
     return add_type_factory.get_all();
 }
 
+// TODO: auuuughhhh
 static bool alcohol_diazepam_add( Character &u, int in, bool is_alcohol )
 {
     static time_point last_alc_dream = calendar::turn_zero;
