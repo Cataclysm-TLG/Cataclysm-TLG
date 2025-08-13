@@ -574,6 +574,7 @@ std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_
                 fun *= 1.1;
             }
         }
+        fun_max = 25;
     }
 
     // This cherry soda's just not the same...
