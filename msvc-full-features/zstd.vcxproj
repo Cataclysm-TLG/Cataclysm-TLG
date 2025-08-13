@@ -26,6 +26,7 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+
   <ItemGroup>
     <ClInclude Include="..\src\third-party\zstd\common\allocations.h" />
     <ClInclude Include="..\src\third-party\zstd\common\bits.h" />
@@ -64,37 +65,92 @@
     <ClInclude Include="..\src\third-party\zstd\decompress\zstd_decompress_internal.h" />
     <ClInclude Include="..\src\third-party\zstd\zstd.h" />
   </ItemGroup>
+
   <ItemGroup>
-    <ClCompile Include="..\src\third-party\zstd\common\debug.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\entropy_common.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\error_private.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\fse_decompress.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\pool.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\threading.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\xxhash.c" />
-    <ClCompile Include="..\src\third-party\zstd\common\zstd_common.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\fse_compress.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\hist.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\huf_compress.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstdmt_compress.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_literals.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_sequences.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_superblock.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_double_fast.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_fast.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_lazy.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_ldm.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_opt.c" />
-    <ClCompile Include="..\src\third-party\zstd\compress\zstd_preSplit.c" />
-    <ClCompile Include="..\src\third-party\zstd\decompress\huf_decompress.c" />
-    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_ddict.c" />
-    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_decompress.c" />
-    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_decompress_block.c" />
+    <ClCompile Include="..\src\third-party\zstd\common\debug.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\entropy_common.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\error_private.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\fse_decompress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\pool.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\threading.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\xxhash.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\common\zstd_common.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\fse_compress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\hist.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\huf_compress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstdmt_compress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_literals.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_sequences.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_compress_superblock.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_double_fast.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_fast.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_lazy.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_ldm.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_opt.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\compress\zstd_preSplit.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\decompress\huf_decompress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_ddict.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_decompress.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\src\third-party\zstd\decompress\zstd_decompress_block.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
+
   <ItemGroup>
     <None Include="..\src\third-party\zstd\decompress\huf_decompress_amd64.S" />
   </ItemGroup>
+
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -102,45 +158,56 @@
     <RootNamespace>flatbuffers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
   <PropertyGroup Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
+
   <Import Project="Cataclysm.Cpp.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
+
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="Cataclysm-common.props" />
   </ImportGroup>
+
   <PropertyGroup Label="UserMacros" />
+
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnabled>false</VcpkgEnabled>
   </PropertyGroup>
+
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_CONSOLE;ZSTD_DISABLE_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -153,6 +220,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -166,12 +234,13 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
+
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
