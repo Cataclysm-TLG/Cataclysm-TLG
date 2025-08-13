@@ -80,6 +80,8 @@
       "You are invisible for a very brief time.  Now's your chance to get to cover.  You're also incorporeal enough to not take fall damage, but hopefully that won't be relevant."
     ],
     "flags": [ "INVISIBLE", "FEATHER_FALL" ],
+    "max_intensity": 2,
+    "int_dur_factor": "10 s",
     "remove_message": "You fully materialize.  You're not invisible anymore!"
   }
 ]

@@ -201,6 +201,11 @@ class game
     protected:
         /** Loads dynamic data from the given directory. May throw. */
         void load_data_from_dir( const cata_path &path, const std::string &src, loading_ui &ui );
+        /** Loads dynamic data from the given directory. Excludes files from 'mod_interactions' sub-directory.  May throw. */
+        void load_mod_data_from_dir( const cata_path &path, const std::string &src, loading_ui &ui );
+        /** Loads dynamic data from the folder if it is part of a subdirectory that is named after a currently loaded mod_id.  May throw. */
+        void load_mod_interaction_data_from_dir( const cata_path &path, const std::string &src,
+                loading_ui &ui );
     public:
         void setup();
         /** Saving and loading functions. */

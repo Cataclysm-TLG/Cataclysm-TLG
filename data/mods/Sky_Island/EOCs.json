@@ -27,7 +27,7 @@
       {
         "u_add_effect": "warpcloak",
         "intensity": 1,
-        "duration": { "global_val": "var", "var_name": "invistime", "default": "3 s" }
+        "duration": { "global_val": "invistime", "default": "3 s" }
       },
       {
         "u_run_npc_eocs": [
@@ -117,7 +117,7 @@
       },
       {
         "u_spawn_item": "warptoken_material",
-        "count": { "global_val": "var", "var_name": "owed_material_tokens", "default": 50 }
+        "count": { "global_val": "owed_material_tokens", "default": 50 }
       }
     ]
   },
@@ -252,7 +252,7 @@
     "type": "effect_on_condition",
     "id": "EOC_homewardmote",
     "//": "This EOC is activated by eating a return pill, the homeward mote.  Identical to statue return but with no query to avoid wasting the pill.  Also destroys any motes you were carrying.",
-    "effect": [ { "run_eocs": [ "EOC_return_OM_teleport" ] } ]
+    "effect": [ { "run_eocs": [ "EOC_return_OM_teleport" ], "time_in_future": "1 s" } ]
   },
   {
     "type": "effect_on_condition",
@@ -352,7 +352,6 @@
       { "math": [ "u_calories() = max( u_calories(), 9000)" ] },
       { "math": [ "u_val('thirst') = min( u_val('thirst'), 800)" ] },
       { "math": [ "u_vitamin('redcells') = 0" ] },
-      { "math": [ "u_vitamin('bad_food') = 0" ] },
       { "math": [ "u_vitamin('blood') = 0" ] },
       { "math": [ "u_vitamin('instability') = 0" ] },
       { "math": [ "u_pain() = 0" ] },
@@ -775,7 +774,7 @@
               { "math": [ "owed_material_tokens = 50 * raidswon" ] },
               {
                 "u_spawn_item": "warptoken_material",
-                "count": { "global_val": "var", "var_name": "owed_material_tokens", "default": 50 }
+                "count": { "global_val": "owed_material_tokens", "default": 50 }
               },
               {
                 "u_message": "You have been retroactively awarded <global_val:owed_material_tokens> material tokens for your past successful expeditions.",

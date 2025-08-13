@@ -155,7 +155,7 @@
   {
     "id": "mutagenic_stab",
     "type": "damage_info_order",
-    "info_display": "detailed",
+    "info_display": "none",
     "verb": "stabbing",
     "bionic_info": { "order": 601, "show_type": true },
     "protection_info": { "order": 701, "show_type": false },
@@ -197,7 +197,7 @@
   {
     "id": "cold",
     "type": "damage_info_order",
-    "info_display": "detailed",
+    "info_display": "none",
     "verb": "freezing",
     "bionic_info": { "order": 800, "show_type": true },
     "protection_info": { "order": 500, "show_type": true },
@@ -218,7 +218,7 @@
   {
     "id": "biological",
     "type": "damage_info_order",
-    "info_display": "detailed",
+    "info_display": "none",
     "bionic_info": { "order": 900, "show_type": true },
     "protection_info": { "order": 600, "show_type": true },
     "pet_prot_info": { "order": 900, "show_type": false },
