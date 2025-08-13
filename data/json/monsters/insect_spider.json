@@ -1900,6 +1900,7 @@
       "PATH_AVOID_DANGER",
       "HARDTOSHOOT",
       "EATS",
+      "HIT_AND_RUN",
       "SMALL_HIDER"
     ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
