@@ -3689,6 +3689,12 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
         place_cities();
     }
+    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+        place_highway_interchanges( highway_paths );
+    }
+    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+        build_cities();
+    }
     if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILS" ) ) {
         place_forest_trails();
     }
