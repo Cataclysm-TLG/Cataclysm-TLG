@@ -104,12 +104,13 @@ WARNINGS = \
   -Wlogical-op \
   -Wmissing-declarations \
   -Wmissing-noreturn \
+  -Wpedantic \
+  -Wunused-macros
+CXX_WARNINGS = \
   -Wnon-virtual-dtor \
   -Wold-style-cast \
   -Woverloaded-virtual \
-  -Wpedantic \
   -Wsuggest-override \
-  -Wunused-macros \
   -Wzero-as-null-pointer-constant \
   -Wno-unknown-warning-option \
   -Wno-dangling-reference \
@@ -146,9 +147,9 @@ export CCACHE_COMMENTS=1
 # Explicitly let 'char' to be 'signed char' to fix #18776
 OTHERS += -fsigned-char
 
-VERSION = 1.0
+VERSION = 0.I
 
-TARGET_NAME = cataclysm-tlg
+TARGET_NAME = cataclysm
 TILES_TARGET_NAME = $(TARGET_NAME)-tiles
 ifeq ($(NATIVE), emscripten)
   TILES_TARGET_NAME = $(TARGET_NAME)-tiles.js
@@ -251,11 +252,16 @@ endif
 # Windows sets the OS environment variable so we can cheaply test for it.
 ifneq (,$(findstring Windows_NT,$(OS)))
   IS_WINDOWS_HOST = 1
+  ifeq ($(MSYS2),1)
+    OS = Msys
+  else ifeq ($(MAKE_HOST),x86_64-pc-cygwin)
+    OS = Cygwin
+  else # MAKE_HOST=x86_64-w64-mingw32
+  endif
 else
   IS_WINDOWS_HOST = 0
+  OS = $(shell uname -o)
 endif
-
-OS = $(shell uname -s)
 
 ifneq ($(findstring Darwin,$(OS)),)
   ifndef NATIVE
@@ -278,15 +284,6 @@ ifeq ($(MSYS2), 1)
 endif
 ifneq (,$(findstring mingw32,$(CROSS)))
   JSON_FORMATTER_BIN=tools/format/json_formatter.exe
-endif
-
-# Determine JSON formatter binary name
-ZZIP_BIN=zzip
-ifeq ($(MSYS2), 1)
-  ZZIP_BIN=zzip.exe
-endif
-ifneq (,$(findstring mingw32,$(CROSS)))
-  ZZIP_BIN=zzip.exe
 endif
 
 # Enable backtrace by default
@@ -394,11 +391,7 @@ AR  = $(CROSS)ar
 LDFLAGS += $(PROFILE)
 
 ifneq ($(SANITIZE),)
-  ifeq ($(SANITIZE), all)
-    SANITIZE_FLAGS := -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fno-omit-frame-pointer
-  else
-    SANITIZE_FLAGS := -fsanitize=$(SANITIZE) -fno-sanitize-recover=all -fno-omit-frame-pointer
-  endif
+  SANITIZE_FLAGS := -fsanitize=$(SANITIZE) -fno-sanitize-recover=all -fno-omit-frame-pointer
   CXXFLAGS += $(SANITIZE_FLAGS)
   LDFLAGS += $(SANITIZE_FLAGS)
 endif
@@ -492,10 +485,12 @@ else
   CXXFLAGS += $(OPTLEVEL)
 endif
 
-ifeq ($(shell sh -c 'uname -o 2>/dev/null || echo not'),Cygwin)
-  OTHERS += -std=gnu++17
+ifeq ($(OS),Cygwin)
+  CXX_STD = -std=gnu++17
+  C_STD = -std=gnu17
 else
-  OTHERS += -std=c++17
+  CXX_STD = -std=c++17
+  C_STD = -std=c17
 endif
 
 ifeq ($(CYGWIN),1)
@@ -546,7 +541,7 @@ W32BINDIST_CMD = cd $(BINDIST_DIR) && zip -r ../$(W32BINDIST) * && cd $(BUILD_DI
 # Check if called without a special build target
 ifeq ($(NATIVE),)
   ifeq ($(CROSS),)
-    ifeq ($(shell sh -c 'uname -o 2>/dev/null || echo not'),Cygwin)
+    ifeq ($(OS),Cygwin)
       DEFINES += -DCATA_NO_CPP11_STRING_CONVERSIONS
       TARGETSYSTEM=CYGWIN
     else
@@ -588,9 +583,8 @@ endif
 # OSX
 ifeq ($(NATIVE), osx)
   DEFINES += -DMACOSX
-  CXXFLAGS += -mmacosx-version-min=10.13
-  LDFLAGS += -mmacosx-version-min=10.13 -framework CoreFoundation -Wl,-headerpad_max_install_names
-  LDFLAGS += -liconv 
+  CXXFLAGS += -mmacosx-version-min=10.15
+  LDFLAGS += -mmacosx-version-min=10.15 -framework CoreFoundation -Wl,-headerpad_max_install_names
   ifeq ($(UNIVERSAL_BINARY), 1)
     CXXFLAGS += -arch x86_64 -arch arm64
     LDFLAGS += -arch x86_64 -arch arm64
@@ -730,33 +724,6 @@ endif
 
 PKG_CONFIG = $(CROSS)pkg-config
 
-ifeq ($(SOUND), 1)
-  ifneq ($(TILES),1)
-    $(error "SOUND=1 only works with TILES=1")
-  endif
-  ifeq ($(NATIVE),osx)
-    ifndef FRAMEWORK # libsdl build
-      ifeq ($(MACPORTS), 1)
-        LDFLAGS += -lSDL2_mixer -lvorbisfile -lvorbis -logg
-      else # homebrew
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
-        LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-        LDFLAGS += -lvorbisfile -lvorbis -logg
-      endif
-    endif
-  else # not osx
-    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
-    LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-    LDFLAGS += -lpthread
-  endif
-
-  ifeq ($(MSYS2),1)
-    LDFLAGS += -lmpg123 -lshlwapi -lvorbisfile -lvorbis -logg -lflac
-  endif
-
-  CXXFLAGS += -DSDL_SOUND
-endif
-
 ifeq ($(SDL), 1)
   TILES = 1
 endif
@@ -773,7 +740,7 @@ ifeq ($(TILES), 1)
 			ifeq ($(SOUND), 1)
 				OSX_INC += -I$(FRAMEWORKSDIR)/SDL2_mixer.framework/Headers
 			endif
-      LDFLAGS += -F$(FRAMEWORKSDIR) \
+      LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
 		 -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework Cocoa
 		 ifeq ($(SOUND), 1)
 		 	LDFLAGS += -framework SDL2_mixer
@@ -793,7 +760,9 @@ ifeq ($(TILES), 1)
     CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   else ifneq ($(NATIVE),emscripten)
-    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2 SDL2_image SDL2_ttf)
+    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
+    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf)
+    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
 
     ifeq ($(STATIC), 1)
       LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --static --libs)
@@ -802,10 +771,7 @@ ifeq ($(TILES), 1)
     endif
 
     LDFLAGS += -lSDL2_ttf -lSDL2_image
-
-    # We don't use SDL_main -- we have proper main()/WinMain()
-    CXXFLAGS := $(filter-out -Dmain=SDL_main,$(CXXFLAGS))
-    LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
+    LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   endif
 
   DEFINES += -DTILES
@@ -870,7 +836,38 @@ else
       endif # OSXCROSS
     endif # HAVE_NCURSES5CONFIG
   endif # HAVE_PKGCONFIG
+  ifeq ($(MSYS),1)
+    CXXFLAGS += -DNCURSES_INTERNALS
+  endif
 endif # TILES
+
+ifeq ($(SOUND), 1)
+  ifeq ($(NATIVE),osx)
+    ifndef FRAMEWORK # libsdl build
+      ifeq ($(MACPORTS), 1)
+        LDFLAGS += -lSDL2_mixer -lvorbisfile -lvorbis -logg
+      else # homebrew
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
+        LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
+        LDFLAGS += -lvorbisfile -lvorbis -logg
+      endif
+    endif
+  else # not osx
+    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
+    LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
+    LDFLAGS += -lpthread
+  endif
+
+  ifeq ($(MSYS2),1)
+    LDFLAGS += -lmpg123 -lshlwapi -lvorbisfile -lvorbis -logg -lflac
+  endif
+
+  CXXFLAGS += -DSDL_SOUND
+endif
+
+# We don't use SDL_main -- we have proper main()/WinMain()
+CXXFLAGS := $(filter-out -Dmain=SDL_main,$(CXXFLAGS))
+LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
 
 ifeq ($(BSD), 1)
   # BSDs have backtrace() and friends in a separate library
@@ -932,6 +929,10 @@ ifeq ($(MSYS2),1)
   CXXFLAGS += -DMSYS2
 endif
 
+CFLAGS := $(CXXFLAGS)
+CFLAGS += $(C_STD)
+CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS)
+
 # Enumerations of all the source files and headers.
 ifeq ($(HEADERPOPULARITY), 1)
   # Alternate source file enumeration sorted in order of how many times the matching header file is included in source files
@@ -948,7 +949,6 @@ TESTSRC := $(wildcard tests/*.cpp)
 TESTHDR := $(wildcard tests/*.h)
 JSON_FORMATTER_SOURCES := $(wildcard tools/format/*.cpp) src/wcwidth.cpp src/json.cpp
 JSON_FORMATTER_HEADERS := $(wildcard tools/format/*.h)
-ZZIP_SOURCES := tools/save/zzip_main.cpp
 CHKJSON_SOURCES := $(wildcard src/chkjson/*.cpp) src/wcwidth.cpp src/json.cpp
 CLANG_TIDY_PLUGIN_SOURCES := \
   $(wildcard tools/clang-tidy-plugin/*.cpp tools/clang-tidy-plugin/*/*.cpp)
@@ -964,15 +964,16 @@ ASTYLE_SOURCES := $(sort \
   $(TESTHDR) \
   $(JSON_FORMATTER_SOURCES) \
   $(JSON_FORMATTER_HEADERS) \
-  $(ZZIP_SOURCES) \
   $(CHKJSON_SOURCES) \
   $(CLANG_TIDY_PLUGIN_SOURCES) \
   $(CLANG_TIDY_PLUGIN_HEADERS))
 
 # Third party sources should not be astyle'd
 SOURCES += $(THIRD_PARTY_SOURCES)
+C_SOURCES += $(THIRD_PARTY_C_SOURCES)
 
 _OBJS = $(SOURCES:$(SRC_DIR)/%.cpp=%.o)
+_OBJS += $(C_SOURCES:$(SRC_DIR)/%.c=%.o)
 ifeq ($(TARGETSYSTEM),WINDOWS)
   RSRC = $(wildcard $(SRC_DIR)/*.rc)
   _OBJS += $(RSRC:$(SRC_DIR)/%.rc=%.o)
@@ -1080,11 +1081,20 @@ DIRS = $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(DIRS))
 
 $(ODIR)/%.inc: $(SRC_DIR)/%.cpp
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -H -E $< -o /dev/null 2> $@
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -Wno-error -H -E $< -o /dev/null 2> $@
+
+$(ODIR)/%.inc: $(SRC_DIR)/%.c
+	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -Wno-error -H -E $< -o /dev/null 2> $@
 
 .PHONY: includes
 includes: $(OBJS:.o=.inc)
 	+make -C tests includes
+
+$(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.cpp
+	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -w -MMD -MP -c $< -o $@
+
+$(ODIR)/third-party/%.o: $(SRC_DIR)/third-party/%.c
+	$(CXX) -x c $(CPPFLAGS) $(DEFINES) $(CFLAGS) -w -MMD -MP -c $< -o $@
 
 $(ODIR)/%.o: $(SRC_DIR)/%.cpp $(PCH_P)
 	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(PCHFLAGS) -c $< -o $@
@@ -1145,11 +1155,10 @@ DATA_PREFIX=$(DESTDIR)$(PREFIX)/share/cataclysm-tlg/
 BIN_PREFIX=$(DESTDIR)$(PREFIX)/bin
 LOCALE_DIR=$(DESTDIR)$(PREFIX)/share/locale
 SHARE_DIR=$(DESTDIR)$(PREFIX)/share
-install: version $(TARGET) $(ZZIP_BIN)
+install: version $(TARGET)
 	mkdir -p $(DATA_PREFIX)
 	mkdir -p $(BIN_PREFIX)
 	install --mode=755 $(TARGET) $(BIN_PREFIX)
-	install --mode=755 $(ZZIP_BIN) $(BIN_PREFIX)
 	cp -R --no-preserve=ownership data/core $(DATA_PREFIX)
 	cp -R --no-preserve=ownership data/font $(DATA_PREFIX)
 	cp -R --no-preserve=ownership data/json $(DATA_PREFIX)
@@ -1231,9 +1240,9 @@ build-data/osx/AppIcon.icns: build-data/osx/AppIcon.iconset
 	iconutil -c icns $<
 
 ifdef OSXCROSS
-app: appclean version $(APPTARGET) $(ZZIP_BIN)
+app: appclean version $(APPTARGET)
 else
-app: appclean version build-data/osx/AppIcon.icns $(APPTARGET) $(ZZIP_BIN)
+app: appclean version build-data/osx/AppIcon.icns $(APPTARGET)
 endif
 	mkdir -p $(APPTARGETDIR)/Contents
 	cp build-data/osx/Info.plist $(APPTARGETDIR)/Contents/
@@ -1241,7 +1250,6 @@ endif
 	cp build-data/osx/Cataclysm.sh $(APPTARGETDIR)/Contents/MacOS/
 	mkdir -p $(APPRESOURCESDIR)
 	cp $(APPTARGET) $(APPRESOURCESDIR)/
-	cp $(ZZIP_BIN) $(APPRESOURCESDIR)/
 	cp build-data/osx/AppIcon.icns $(APPRESOURCESDIR)/
 	mkdir -p $(APPDATADIR)
 	cp data/fontdata.json $(APPDATADIR)
@@ -1260,7 +1268,6 @@ ifdef LANGUAGES
 	mkdir -p $(APPRESOURCESDIR)/lang/mo/
 	cp -pR lang/mo/* $(APPRESOURCESDIR)/lang/mo/
 endif
-ifeq ($(TILES), 1)
 ifeq ($(SOUND), 1)
 	cp -R data/sound $(APPDATADIR)
 endif  # ifeq ($(SOUND), 1)
@@ -1273,7 +1280,6 @@ ifeq ($(SOUND), 1)
 	cp -R $(FRAMEWORKSDIR)/SDL2_mixer.framework $(APPRESOURCESDIR)/
 endif  # ifeq ($(SOUND), 1)
 endif  # ifdef FRAMEWORK
-endif  # ifdef TILES
 	dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/
 
 dmgdistclean:
@@ -1298,9 +1304,9 @@ endif
 
 endif  # ifeq ($(NATIVE), osx)
 
-$(BINDIST): distclean version $(TARGET) $(ZZIP_BIN) $(L10N) $(BINDIST_EXTRAS) $(BINDIST_LOCALE)
+$(BINDIST): distclean version $(TARGET) $(L10N) $(BINDIST_EXTRAS) $(BINDIST_LOCALE)
 	mkdir -p $(BINDIST_DIR)
-	cp -R $(TARGET) $(ZZIP_BIN) $(BINDIST_EXTRAS) $(BINDIST_DIR)
+	cp -R $(TARGET) $(BINDIST_EXTRAS) $(BINDIST_DIR)
 	$(foreach lib,$(INSTALL_EXTRAS), install --strip $(lib) $(BINDIST_DIR))
 ifdef LANGUAGES
 	cp -R --parents lang/mo $(BINDIST_DIR)
@@ -1378,12 +1384,6 @@ style-all-json-parallel: $(JSON_FORMATTER_BIN)
 $(JSON_FORMATTER_BIN): $(JSON_FORMATTER_SOURCES)
 	$(CXX) $(CXXFLAGS) -MMD -MP $(TOOL_CXXFLAGS) -Itools/format -Isrc -isystem src/third-party \
 	  $(JSON_FORMATTER_SOURCES) -o $(JSON_FORMATTER_BIN)
-
-$(BUILD_PREFIX)zstd.a: $(filter $(ODIR)/third-party/zstd/%.o,$(OBJS))
-	$(AR) rcs $(AR_FLAGS) $(BUILD_PREFIX)zstd.a $^
-
-$(ZZIP_BIN): $(ZZIP_SOURCES) $(BUILD_PREFIX)zstd.a
-	$(CXX) $(CPPFLAGS) $(DEFINES) $(CXXFLAGS) -MMD -MP $(ZZIP_SOURCES) $(BUILD_PREFIX)zstd.a -isystem src/third-party -o $(ZZIP_BIN)
 
 python-check:
 	flake8
