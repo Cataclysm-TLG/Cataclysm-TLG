@@ -6880,6 +6880,7 @@ talk_effect_fun_t::func f_teleport( const JsonObject &jo, std::string_view membe
                                              false, force, force_safe ) ) {
                 teleporter->add_msg_if_player( success_message.evaluate( d ) );
             } else {
+                add_msg ( _( "target pos is %s"), get_map().bub_from_abs( target_pos ).to_string() );
                 teleporter->add_msg_if_player( fail_message.evaluate( d ) );
             }
         }

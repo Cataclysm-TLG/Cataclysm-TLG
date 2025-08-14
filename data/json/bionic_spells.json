@@ -30,5 +30,27 @@
     "sound_id": "bionics",
     "sound_variant": "elec_crackle_low",
     "message": "You discharge energy from your Super Stun Gun."
-  }
+  },
+    {
+        "id": "debug_teleport",
+        "type": "SPELL",
+        "name": "Teleport Test",
+        "description": "Test spell for teleport",
+        "valid_targets": [ "self" ],
+        "effect": "effect_on_condition",
+        "effect_str": "DEBUG_TELEPORT_EOC",
+        "shape": "blast",
+        "flags": [ "SILENT", "NO_FAIL" ]
+    },
+    {
+        "id": "debug_get_location",
+        "type": "SPELL",
+        "name": "Get Location Test",
+        "description": "Test spell for getting location",
+        "valid_targets": [ "self" ],
+        "effect": "effect_on_condition",
+        "effect_str": "DEBUG_GET_LOCATION_EOC",
+        "shape": "blast",
+        "flags": [ "SILENT", "NO_FAIL" ]
+    }
 ]

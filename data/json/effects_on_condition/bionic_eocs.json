@@ -157,5 +157,23 @@
     "id": "EOC_BIO_SONAR_deactivated",
     "condition": { "u_has_effect": "subaquatic_sonar" },
     "effect": [ { "u_lose_effect": "subaquatic_sonar" } ]
-  }
+  },
+    {
+        "type": "effect_on_condition",
+        "id": "DEBUG_TELEPORT_EOC",
+        "effect": [
+            {
+                "u_teleport": { "u_val": "teleport_debug_location" },
+                "success_message": "Teleport worked",
+                "fail_message": "Teleport failed"
+            }
+        ]
+    },
+    {
+        "type": "effect_on_condition",
+        "id": "DEBUG_GET_LOCATION_EOC",
+        "effect": [
+            { "u_location_variable": { "u_val": "teleport_debug_location" } }
+        ]
+    }
 ]
