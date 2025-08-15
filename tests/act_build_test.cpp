@@ -135,7 +135,7 @@ void run_test_case( Character &u )
 
     SECTION( "1-step construction activity with pre_terrain and starting far away" ) {
         u.setpos( tripoint_bub_ms{ ACTIVITY_SEARCH_DISTANCE - 1, 0, 0} );
-        here.build_map_cache( u.pos().z );
+        here.build_map_cache( u.posz() );
         tripoint_bub_ms const tri_window( tripoint::south );
         construction const build =
             setup_testcase( u, "test_constr_door", tri_window, tripoint_bub_ms() );
@@ -229,7 +229,7 @@ void run_test_case( Character &u )
     SECTION( "visible but unreachable construction" ) {
         u.setpos( tripoint_bub_ms::zero );
         u.path_settings->bash_strength = 0;
-        here.build_map_cache( u.pos().z );
+        here.build_map_cache( u.posz() );
         tripoint_bub_ms const tri_window = { 0, 5, 0 };
         for( tripoint_bub_ms const &it : here.points_in_radius( tri_window, 1 ) ) {
             here.ter_set( it, ter_t_metal_grate_window );

@@ -112,7 +112,7 @@ std::unique_ptr<mattack_actor> leap_actor::clone() const
 
 bool leap_actor::call( monster &z ) const
 {
-    if( !z.has_dest() || !z.can_act() || !z.move_effects( false, z.get_dest().raw() ) ) {
+    if( !z.has_dest() || !z.can_act() || !z.move_effects( false, get_map().bub_from_abs( z.get_dest() ) ) ) {
         add_msg_debug( debugmode::DF_MATTACK, "Monster has no destination or can't act" );
         return false;
     }
@@ -170,12 +170,12 @@ bool leap_actor::call( monster &z ) const
                            "Candidate farther from target than optimal path, discarded" );
             continue;
         }
-        if( !ignore_dest_terrain && !z.will_move_to( candidate.raw() ) ) {
+        if( !ignore_dest_terrain && !z.will_move_to( candidate ) ) {
             add_msg_debug( debugmode::DF_MATTACK,
                            "Candidate place it can't enter, discarded" );
             continue;
         }
-        if( !ignore_dest_danger && !z.know_danger_at( candidate.raw() ) ) {
+        if( !ignore_dest_danger && !z.know_danger_at( candidate ) ) {
             add_msg_debug( debugmode::DF_MATTACK,
                            "Candidate with dangerous conditions, discarded" );
             continue;
@@ -631,7 +631,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
             if( z.can_move_to( target_square ) ) {
                 monster *zz = target->as_monster();
                 tripoint_bub_ms zpt = z.pos_bub();
-                z.move_to( target_square.raw(), false, false, grab_data.drag_movecost_mod );
+                z.move_to( target_square, false, false, grab_data.drag_movecost_mod );
                 if( !g->is_empty( zpt ) ) { //Cancel the grab if the space is occupied by something
                     return 0;
                 }
@@ -897,7 +897,7 @@ bool melee_actor::call( monster &z ) const
     }
     if( throw_strength > 0 && !( target->has_flag( mon_flag_IMMOBILE ) ||
                                  target->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) ) {
-        if( g->fling_creature( target, coord_to_angle( z.pos(), target->pos() ),
+        if( g->fling_creature( target, coord_to_angle( z.pos_bub(), target->pos_bub() ),
                                throw_strength ) ) {
             target->add_msg_player_or_npc( msg_type, throw_msg_u,
                                            get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? throw_msg_npc : translation(),

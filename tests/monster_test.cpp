@@ -126,7 +126,7 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
                 test_player.posy() >= SEEY * ( 1 + static_cast<int>( MAPSIZE / 2 ) ) ) {
                 tripoint_rel_ms offset = center - test_player.pos_bub();
                 test_player.setpos( center );
-                test_monster.setpos( test_monster.pos() + offset );
+                test_monster.setpos( test_monster.pos_bub() + offset );
                 // Verify that only the player and one monster are present.
                 REQUIRE( g->num_creatures() == 2 );
             }
@@ -147,11 +147,11 @@ static int can_catch_player( const std::string &monster_type, const tripoint &di
                                 rl_dist( test_monster.pos_bub(), test_player.pos_bub() ),
                                 test_monster.pos_bub().raw()
                                } );
-            if( rl_dist( test_monster.pos(), test_player.pos() ) == 1 ) {
+            if( rl_dist( test_monster.pos_bub(), test_player.pos_bub() ) == 1 ) {
                 INFO( tracker );
                 clear_map();
                 return turn;
-            } else if( rl_dist( test_monster.pos(), test_player.pos() ) > 20 ) {
+            } else if( rl_dist( test_monster.pos_bub(), test_player.pos_bub() ) > 20 ) {
                 INFO( tracker );
                 clear_map();
                 return -turn;

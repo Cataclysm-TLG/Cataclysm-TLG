@@ -1860,7 +1860,7 @@ void map::monster_in_field( monster &z )
             continue;
         }
         const field_type_id cur_field_type = cur.get_field_type();
-        if( ( z.flies() || veh_at( z.pos() ) ) && cur.get_field_type()->phase == phase_id::LIQUID ) {
+        if( ( z.flies() || veh_at( z.pos_bub() ) ) && cur.get_field_type()->phase == phase_id::LIQUID ) {
             continue;
         }
         if( cur_field_type->spell_data.id != spell_id::NULL_ID() ) {

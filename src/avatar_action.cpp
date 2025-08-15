@@ -369,7 +369,7 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         attacking = true;
     }
 
-    if( !you.move_effects( attacking, dest_loc.raw() ) ) {
+    if( !you.move_effects( attacking, dest_loc ) ) {
         // move_effects determined we could not move, waste all moves
         you.set_moves( 0 );
         return false;
@@ -901,7 +901,7 @@ bool avatar_action::eat_here( avatar &you )
         }
     }
     if( you.has_active_mutation( trait_GRAZER ) ) {
-        const ter_id &ter_underfoot = here.ter( you.pos() );
+        const ter_id &ter_underfoot = here.ter( you.pos_bub() );
         if( ter_underfoot == ter_t_grass_golf || ter_underfoot == ter_t_grass ) {
             add_msg( _( "This grass is too short to graze." ) );
             return true;

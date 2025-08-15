@@ -179,11 +179,12 @@ inline float trig_dist_z_adjust( const tripoint &loc1, const tripoint &loc2 )
                       ( ( loc1.y - loc2.y ) * ( loc1.y - loc2.y ) ) +
                       ( ( 2 * ( loc1.z - loc2.z ) ) * ( 2 * ( loc1.z - loc2.z ) ) ) );
 }
+float trig_dist_z_adjust( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 );
 inline float trig_dist_z_adjust( const point &loc1, const point &loc2 )
 {
     return trig_dist_z_adjust( tripoint( loc1, 0 ), tripoint( loc2, 0 ) );
 }
-
+float trig_dist_z_adjust( const point_bub_ms &loc1, const point_bub_ms &loc2 );
 
 // Roguelike distance; maximum of dX and dY
 inline int square_dist( const tripoint &loc1, const tripoint &loc2 )

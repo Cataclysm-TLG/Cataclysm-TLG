@@ -536,12 +536,12 @@ void pixel_minimap::render_critters( const tripoint &center )
         }
         Creature &critter = *critter_ptr;
 
-        const tripoint p = critter.pos();
+        const tripoint_bub_ms p = critter.pos_bub();
         if( !m.inbounds( p ) ) {
             continue;
         }
 
-        const lit_level lighting = access_cache.visibility_cache[p.x][p.y];
+        const lit_level lighting = access_cache.visibility_cache[p.x()][p.y()];
         if( lighting == lit_level::DARK || lighting == lit_level::BLANK ) {
             continue;
         }
@@ -550,7 +550,7 @@ void pixel_minimap::render_critters( const tripoint &center )
             continue;
         }
 
-        const tripoint rel = p - center;
+        const tripoint rel = p.raw() - center;
         const point rel_xy = rel.xy() + total_tiles_count / 2;
 
         if( rel_xy.x < 0 || rel_xy.y < 0 ||

@@ -36,7 +36,7 @@ enum class description_target : int {
     vehicle
 };
 
-static const Creature *seen_critter( const tripoint &p )
+static const Creature *seen_critter( const tripoint_bub_ms &p )
 {
     const Creature *critter = get_creature_tracker().creature_at( p, true );
     if( critter != nullptr && get_player_view().sees( *critter ) ) {
@@ -46,7 +46,7 @@ static const Creature *seen_critter( const tripoint &p )
     return nullptr;
 }
 
-void game::extended_description( const tripoint &p )
+void game::extended_description( const tripoint_bub_ms &p )
 {
     ui_adaptor ui;
     const int top = 3;

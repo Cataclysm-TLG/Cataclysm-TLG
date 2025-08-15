@@ -1578,7 +1578,7 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
         return std::nullopt;
     }
 
-    const std::optional<tripoint_bub_ms> pnt = choose_adjacent_bub( string_format(
+    const std::optional<tripoint_bub_ms> pnt = choose_adjacent( string_format(
                 _( "Tame which animal with %s?" ),
                 it->tname() ) );
     if( !pnt ) {
@@ -1830,7 +1830,7 @@ std::optional<int> iuse::fish_trap( Character *p, item *it, const tripoint_bub_m
         return std::nullopt;
     }
 
-    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_bub( _( "Put fish trap where?" ) );
+    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Put fish trap where?" ) );
     if( !pnt_ ) {
         return std::nullopt;
     }
@@ -1954,7 +1954,7 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint_bu
     }
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
-    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent_bub( _( "Spray where?" ) );
+    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent( _( "Spray where?" ) );
     if( !dest_ ) {
         return std::nullopt;
     }
@@ -2336,7 +2336,7 @@ std::optional<int> iuse::mace( Character *p, item *it, const tripoint_bub_ms & )
     // If anyone other than the player wants to use one of these,
     // they're going to need to figure out how to aim it.
     map &here = get_map();
-    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent_bub( _( "Spray where?" ) );
+    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent( _( "Spray where?" ) );
     if( !dest_ || dest_ == p->pos_bub() ) {
         return std::nullopt;
     }
@@ -2886,7 +2886,7 @@ std::optional<int> iuse::makemound( Character *p, item *it, const tripoint_bub_m
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_bub( _( "Till soil where?" ) );
+    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Till soil where?" ) );
     if( !pnt_ ) {
         return std::nullopt;
     }
@@ -3080,7 +3080,7 @@ static std::optional<int> dig_tool( Character *p, item *it, const tripoint_bub_m
 
     tripoint_bub_ms pnt( pos );
     if( pos == p->pos_bub() ) {
-        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_bub( prompt );
+        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( prompt );
         if( !pnt_ ) {
             return std::nullopt;
         }
@@ -3676,7 +3676,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint_bub_ms &p
     }
     tripoint_bub_ms pnt = pos;
     if( pos == p->pos_bub() ) {
-        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_bub( _( "Shock where?" ) );
+        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Shock where?" ) );
         if( !pnt_ ) {
             return std::nullopt;
         }
@@ -4418,7 +4418,7 @@ std::optional<int> iuse::vibe( Character *p, item *it, const tripoint_bub_ms & )
 
 std::optional<int> iuse::vortex( Character *p, item *it, const tripoint_bub_ms & )
 {
-    std::vector<point_bub_ms> spawn;
+    std::vector<point_rel_ms> spawn;
     spawn.reserve( 28 );
     for( int i = -3; i <= 3; i++ ) {
         spawn.emplace_back( -3, i );
@@ -4428,8 +4428,8 @@ std::optional<int> iuse::vortex( Character *p, item *it, const tripoint_bub_ms &
     }
 
     while( !spawn.empty() ) {
-        const tripoint_bub_ms offset( random_entry_removed( spawn ), 0 );
-        monster *const mon = g->place_critter_at( mon_vortex, offset + p->pos() );
+        const tripoint_rel_ms offset( random_entry_removed( spawn ), 0 );
+        monster *const mon = g->place_critter_at( mon_vortex, p->pos_bub() + offset );
         if( !mon ) {
             continue;
         }
@@ -4957,7 +4957,7 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
         p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
         return std::nullopt;
     }
-    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent_bub( _( "Spray where?" ) );
+    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent( _( "Spray where?" ) );
     if( !dest_ ) {
         return std::nullopt;
     }
@@ -5500,7 +5500,7 @@ bool iuse::robotcontrol_can_target( Character *p, const monster &m )
     return !m.is_dead()
            && m.type->in_species( species_ROBOT )
            && m.friendly == 0
-           && rl_dist( p->pos(), m.pos() ) <= 10;
+           && rl_dist( p->pos_bub(), m.pos_bub() ) <= 10;
 }
 
 std::optional<int> iuse::robotcontrol( Character *p, item *it, const tripoint_bub_ms & )
@@ -6118,7 +6118,7 @@ static std::string effects_description_for_creature( Creature *const creature, s
         }
         if( creature->has_effect( effect_riding ) ) {
             pose = _( "rides" );
-            monster *const mon = get_creature_tracker().creature_at<monster>( creature->pos(), false );
+            monster *const mon = get_creature_tracker().creature_at<monster>( creature->pos_bub(), false );
             figure_effects += pronoun_gender + string_format( _( " is riding %s.  " ),
                               colorize( mon->name(), c_light_blue ) );
         }
@@ -7088,7 +7088,7 @@ std::optional<int> iuse::afs_translocator( Character *p, item *it, const tripoin
         return std::nullopt;
     }
 
-    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent_bub( _( "Create buoy where?" ) );
+    const std::optional<tripoint_bub_ms> dest_ = choose_adjacent( _( "Create buoy where?" ) );
     if( !dest_ ) {
         return std::nullopt;
     }
@@ -8084,7 +8084,7 @@ std::optional<int> iuse::directional_hologram( Character *p, item *it, const tri
                               it->tname() );
         return std::nullopt;
     }
-    const std::optional<tripoint_bub_ms> posp = choose_adjacent_bub(
+    const std::optional<tripoint_bub_ms> posp = choose_adjacent(
                 _( "Choose hologram direction." ) );
     if( !posp ) {
         return std::nullopt;
@@ -8182,7 +8182,7 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             return std::nullopt;
         } else {
             const std::string query = string_format( _( "Place the %s where?" ), contained_name );
-            const std::optional<tripoint_bub_ms> pos_ = choose_adjacent_bub( query );
+            const std::optional<tripoint_bub_ms> pos_ = choose_adjacent( query );
             if( !pos_ ) {
                 return std::nullopt;
             }
@@ -9389,7 +9389,7 @@ std::optional<int> iuse::binder_manage_recipe( Character *p, item *binder,
 
 std::optional<int> iuse::voltmeter( Character *p, item *, const tripoint_bub_ms & )
 {
-    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_bub( _( "Check voltage where?" ) );
+    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent( _( "Check voltage where?" ) );
     if( !pnt_ ) {
         return std::nullopt;
     }

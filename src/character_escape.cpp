@@ -111,7 +111,7 @@ void Character::try_remove_bear_trap()
                 remove_effect( effect_beartrap );
                 add_msg( _( "The %s escapes the bear trap!" ), mon->get_name() );
 
-                here.spawn_item( mon->pos(), "beartrap" );
+                here.spawn_item( mon->pos_bub(), "beartrap" );
             } else {
                 add_msg_if_player( m_bad,
                                    _( "Your %s tries to free itself from the bear trap, but can't get loose!" ), mon->get_name() );
@@ -123,7 +123,7 @@ void Character::try_remove_bear_trap()
             add_msg_player_or_npc( m_good, _( "You free yourself from the bear trap!" ),
                                    _( "<npcname> frees themselves from the bear trap!" ) );
             map &here = get_map();
-            here.spawn_item( pos(), "beartrap" );
+            here.spawn_item( pos_bub(), "beartrap" );
         } else {
             add_msg_if_player( m_bad,
                                _( "You try to free yourself from the bear trap, but can't get loose!" ) );
@@ -140,7 +140,7 @@ void Character::try_remove_lightsnare()
             mon->remove_effect( effect_lightsnare );
             remove_effect( effect_lightsnare );
             add_msg( _( "The %s escapes the light snare!" ), mon->get_name() );
-            here.spawn_item( pos(), "light_snare_kit" );
+            here.spawn_item( pos_bub(), "light_snare_kit" );
         }
     } else {
         if( can_escape_trap( 12 ) ) {
@@ -148,7 +148,7 @@ void Character::try_remove_lightsnare()
             remove_effect( effect_lightsnare );
             add_msg_player_or_npc( m_good, _( "You free yourself from the light snare!" ),
                                    _( "<npcname> frees themselves from the light snare!" ) );
-            here.spawn_item( pos(), "light_snare_kit" );
+            here.spawn_item( pos_bub(), "light_snare_kit" );
         } else {
             add_msg_if_player( m_bad,
                                _( "You try to free yourself from the light snare, but can't get loose!" ) );
@@ -428,7 +428,7 @@ void Character::try_remove_impeding_effect()
     }
 }
 
-bool Character::move_effects( bool attacking, tripoint dest_loc )
+bool Character::move_effects( bool attacking, tripoint_bub_ms dest_loc )
 {
     if( has_effect( effect_downed ) && !attacking ) {
         try_remove_downed();
@@ -466,7 +466,7 @@ bool Character::move_effects( bool attacking, tripoint dest_loc )
     // than this will need to be reworked to only have success effects if /all/ checks succeed
     if( has_effect( effect_in_pit ) ) {
         map &here = get_map();
-        trap trap_here = here.tr_at( pos() );
+        trap trap_here = here.tr_at( pos_bub() );
         trap trap_there = here.tr_at( dest_loc );
         const ter_id target_ter = here.ter( dest_loc );
 

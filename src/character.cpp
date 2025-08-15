@@ -1317,7 +1317,7 @@ ret_val<void> Character::can_try_dodge( bool ignore_dodges_left ) const
     //If we're asleep or busy we can't dodge
     if( in_sleep_state() || has_effect( effect_narcosis ) ||
         has_effect( effect_winded ) || has_effect( effect_fearparalyze ) || is_driving() ||
-        has_flag( json_flag_CANNOT_MOVE ) ) {
+        has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
         add_msg_debug( debugmode::DF_MELEE, "Unable to dodge (sleeping, winded, immobilized, or driving)" );
         return ret_val<void>::make_failure();
     }
@@ -1766,7 +1766,7 @@ bool Character::check_outbounds_activity( const player_activity &act, bool check
         add_msg_debug( debugmode::DF_CHARACTER,
                        "npc %s at pos %s, activity target is not inbounds at %s therefore "
                        "activity was stashed",
-                       disp_name(), pos().to_string_writable(),
+                       disp_name(), pos_bub().to_string_writable(),
                        act.placement.to_string_writable() );
         return true;
     }
@@ -1914,8 +1914,8 @@ bool Character::check_mount_is_spooked()
             double chance = 1.0;
             Attitude att = critter.attitude_to( *this );
             // actually too close now - horse might spook.
-            if( att == Attitude::HOSTILE && sees( critter ) && rl_dist( pos(), critter.pos() ) <= 10 ) {
-                chance += 10 - rl_dist( pos(), critter.pos() );
+            if( att == Attitude::HOSTILE && sees( critter ) && rl_dist( pos_bub(), critter.pos_bub() ) <= 10 ) {
+                chance += 10 - rl_dist( pos_bub(), critter.pos_bub() );
                 if( critter.get_size() >= mount_size ) {
                     chance *= 2;
                 }
@@ -2067,7 +2067,7 @@ void Character::dismount()
         add_msg_debug( debugmode::DF_CHARACTER, "dismount called when not riding" );
         return;
     }
-    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_bub( _( "Dismount where?" ) ) ) {
+    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent( _( "Dismount where?" ) ) ) {
         if( !g->is_empty( *pnt ) ) {
             add_msg( m_warning, _( "You cannot dismount there!" ) );
             return;
@@ -2209,7 +2209,7 @@ void Character::on_dodge( Creature *source, float difficulty, float training_lev
     martial_arts_data->ma_ondodge_effects( *this );
 
     // For adjacent attackers check for techniques usable upon successful dodge
-    if( source && square_dist( pos(), source->pos() ) == 1 ) {
+    if( source && square_dist( pos_bub(), source->pos_bub() ) == 1 ) {
         matec_id tec = std::get<0>( pick_technique( *source, used_weapon(), false, true, false ) );
 
         if( tec != tec_none && !is_dead_state() ) {
@@ -2265,8 +2265,8 @@ bool Character::uncanny_dodge()
     if( in_vehicle && veh_part ) {
         here.unboard_vehicle( pos_bub() );
     }
-    if( adjacent.x() != pos_bub().x() || adjacent.y() != pos_bub().y() ) {
-        set_pos_only( adjacent.raw() );
+    if( adjacent.xy() != pos_bub().xy() ) {
+        set_pos_only( adjacent );
 
         //landed in a vehicle tile
         if( here.veh_at( pos_bub() ) ) {
@@ -2721,7 +2721,7 @@ void Character::process_turn()
     // Question: Why don't we check monsters here?
     if( grab_1.victim != nullptr && !grab_1.victim->is_monster() ) {
         bool remove = false;
-        if( square_dist( grab_1.victim->pos(), pos() ) != 1 ) {
+        if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
             remove = true;
         }
         if( has_effect( effect_incorporeal ) ) {
@@ -2755,7 +2755,7 @@ void Character::process_turn()
             remove = true;
         } else {
             // This is for if we moved away, dropping our grab, but the victim moved adjacent before our next turn.
-            if( square_dist( grab_1.victim->pos(), pos() ) != 1 ) {
+            if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
                 remove = true;
             }
             bool grabfound = false;
@@ -3219,7 +3219,7 @@ float Character::throwforce( Creature &victim ) const
         throwforce += 8;
     }
     map &here = get_map();
-    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, victim.pos() ) ) {
+    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, victim.pos_bub() ) ) {
         throwforce *= 0.25;
     }
     return throwforce;
@@ -3482,10 +3482,10 @@ void Character::on_move( const tripoint_abs_ms &old_pos )
     Creature::on_move( old_pos );
     // Ugly to compare a tripoint_bub_ms with a tripoint_abs_ms, but the 'z' component
     // is the same regardless of the x/y reference point.
-    if( this->pos_bub().z() != old_pos.z() ) {
+    if( this->posz() != old_pos.z() ) {
         // Make sure caches are rebuilt in a timely manner to ensure companions aren't
         // caught in the "dark" because the caches aren't updated on their next move.
-        get_map().build_map_cache( this->pos_bub().z() );
+        get_map().build_map_cache( this->posz() );
     }
     // In case we've moved out of range of lifting assist.
     if( using_lifting_assist ) {
@@ -6049,7 +6049,7 @@ nc_color Character::symbol_color() const
         return cyan_background( basic );
     }
 
-    const field &fields = get_map().field_at( pos() );
+    const field &fields = get_map().field_at( pos_bub() );
 
     // Priority: electricity, fire, acid, gases
     bool has_elec = false;
@@ -8657,7 +8657,7 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
     int cut_dam = dealt_dams.type_damage( damage_cut );
     if( source && has_flag( json_flag_ACIDBLOOD ) && !bp->has_flag( json_flag_BIONIC_LIMB ) &&
         !one_in( 3 ) &&
-        ( dam >= 4 || cut_dam > 0 ) && ( rl_dist( player_character.pos(), source->pos() ) <= 1 ) ) {
+        ( dam >= 4 || cut_dam > 0 ) && ( rl_dist( player_character.pos_bub(), source->pos_bub() ) <= 1 ) ) {
         if( is_avatar() ) {
             add_msg( m_good, _( "Your acidic blood splashes %s in mid-attack!" ),
                      source->disp_name() );
@@ -10857,14 +10857,14 @@ bool Character::sees_with_infrared( const Creature &critter ) const
 
 bool Character::is_visible_in_range( const Creature &critter, const int range ) const
 {
-    return sees( critter ) && rl_dist( pos(), critter.pos() ) <= range;
+    return sees( critter ) && rl_dist( pos_bub(), critter.pos_bub() ) <= range;
 }
 
 std::vector<Creature *> Character::get_visible_creatures( const int range ) const
 {
     return g->get_creatures_if( [this, range]( const Creature & critter ) -> bool {
-        return this != &critter && pos() != critter.pos() && // TODO: get rid of fake npcs (pos() check)
-        rl_dist( pos(), critter.pos() ) <= range && sees( critter );
+        return this != &critter && pos_bub() != critter.pos_bub() &&
+        rl_dist( pos_bub(), critter.pos_bub() ) <= range && sees( critter );
     } );
 }
 
@@ -10888,9 +10888,9 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
                 }
             }
         }
-        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( pos().z == critter.pos().z ) && ( std::round( trig_dist_z_adjust( pos(), critter.pos() ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos(), critter.pos() ) ) <= range );
+        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( posz() == critter.posz() ) && ( std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
         // TODO: get rid of fake npcs (pos() check)
-        bool valid_target = this != &critter && pos() != critter.pos() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
+        bool valid_target = this != &critter && pos_bub() != critter.pos_bub() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
         return valid_target && in_range && can_see;
     } );
 }
@@ -10903,7 +10903,7 @@ int Character::get_mutation_visibility_cap( const Character *observed ) const
     // 3 perception and 3 distance would see all mutations - cap 0
     // 3 perception and 15 distance - cap 5, some mutations visible
     // 3 perception and 20 distance would be barely able to discern huge antlers on a person - cap 10
-    const int dist = rl_dist( pos(), observed->pos() );
+    const int dist = rl_dist( pos_bub(), observed->pos_bub() );
     int visibility_cap;
     if( per_cur <= 1 ) {
         visibility_cap = INT_MAX;
@@ -10917,8 +10917,8 @@ std::vector<Creature *> Character::get_hostile_creatures( int range ) const
 {
     return g->get_creatures_if( [this, range]( const Creature & critter ) -> bool {
         // Fixes circular distance range for ranged attacks
-        float dist_to_creature = std::round( rl_dist_exact( pos(), critter.pos() ) );
-        return this != &critter && pos() != critter.pos() && // TODO: get rid of fake npcs (pos() check)
+        float dist_to_creature = std::round( rl_dist_exact( pos_bub(), critter.pos_bub() ) );
+        return this != &critter && pos_bub() != critter.pos_bub() &&
         dist_to_creature <= range && critter.attitude_to( *this ) == Creature::Attitude::HOSTILE
         && sees( critter );
     } );
@@ -11051,17 +11051,17 @@ void Character::echo_pulse()
 bool Character::knows_trap( const tripoint_bub_ms &pos ) const
 {
     const tripoint_abs_ms p = get_map().getglobal( pos );
-    return known_traps.count( p.raw() ) > 0;
+    return known_traps.count( p ) > 0;
 }
 
 void Character::add_known_trap( const tripoint_bub_ms &pos, const trap &t )
 {
     const tripoint_abs_ms p = get_map().getglobal( pos );
     if( t.is_null() ) {
-        known_traps.erase( p.raw() );
+        known_traps.erase( p );
     } else {
         // TODO: known_traps should map to a trap_str_id
-        known_traps[p.raw()] = t.id.str();
+        known_traps[p] = t.id.str();
     }
 }
 
@@ -11512,12 +11512,12 @@ void Character::process_effects()
 
     map &here = get_map();
     if( has_effect( effect_slippery_terrain ) && !is_on_ground() &&
-        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos() ) &&
-        !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+        here.has_flag( ter_furn_flag::TFLAG_FLAT, pos_bub() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
         int rolls = -1;
         bool u_see = get_player_view().sees( *this );
         // ROAD tiles are hard, flat surfaces, so they are extra slippery.
-        if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos() ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) ) {
             rolls += 2;
         }
         if( has_trait( trait_DEFT ) ) {
@@ -11555,7 +11555,7 @@ void Character::process_effects()
     }
     if( has_effect( effect_cramped_space ) ) {
         // return is intentionally discarded, sets cramped if appropriate
-        can_move_to_vehicle_tile( get_map().getglobal( pos() ), cramped );
+        can_move_to_vehicle_tile( get_map().getglobal( pos_bub() ), cramped );
         if( !cramped ) {
             remove_effect( effect_cramped_space );
         }
@@ -11576,7 +11576,7 @@ void Character::gravity_check()
 void Character::stagger_check()
 {
     map &here = get_map();
-    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos() ) ) {
+    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
         return;
     }
     float balance_factor = ( get_skill_level( skill_swimming ) / 2.0f + get_dex() / 2 + 3.0f *
@@ -11830,11 +11830,6 @@ npc_attitude Character::get_attitude() const
     return NPCATT_NULL;
 }
 
-bool Character::sees( const tripoint &t, bool, int ) const
-{
-    return sees( tripoint_bub_ms( t ) );
-}
-
 bool Character::sees( const tripoint_bub_ms &t, bool, int ) const
 {
     const int wanted_range = rl_dist( pos_bub(), t );
@@ -11852,7 +11847,7 @@ bool Character::sees( const Creature &critter ) const
 {
     // This handles only the player/npc specific stuff (monsters don't have traits or bionics).
     const int dist = rl_dist( pos_bub(), critter.pos_bub() );
-    if( std::abs( pos_bub().z() - critter.pos_bub().z() ) > fov_3d_z_range ) {
+    if( std::abs( posz() - critter.posz() ) > fov_3d_z_range ) {
         return false;
     }
     if( dist <= 3 && has_active_mutation( trait_ANTENNAE ) ) {
@@ -13001,7 +12996,7 @@ float Character::fall_damage_mod() const
 }
 
 // force is maximum damage to hp before scaling
-int Character::impact( const int force, const tripoint &p )
+int Character::impact( const int force, const tripoint_bub_ms &p )
 {
     // Falls over ~30m are fatal more often than not
     // But that would be quite a lot considering 21 z-levels in game
@@ -13022,7 +13017,7 @@ int Character::impact( const int force, const tripoint &p )
 
     // Being slammed against things rather than landing means we can't
     // control the impact as well
-    const bool slam = p != pos();
+    const bool slam = p != pos_bub();
     std::string target_name = "a swarm of bugs";
     Creature *critter = get_creature_tracker().creature_at( p );
     map &here = get_map();
@@ -13250,9 +13245,9 @@ bool Character::can_fly()
 }
 
 // FIXME: Relies on hardcoded bash damage type
-void Character::knock_back_to( const tripoint &to )
+void Character::knock_back_to( const tripoint_bub_ms &to )
 {
-    if( to == pos_bub().raw() ) {
+    if( to == pos_bub() ) {
         return;
     }
 
@@ -13264,7 +13259,7 @@ void Character::knock_back_to( const tripoint &to )
         add_effect( effect_stunned, 1_turns );
         /** @EFFECT_STR_MAX allows knocked back player to knock back, damage, stun some monsters */
         if( ( str_max - 6 ) / 4 > critter->type->size ) {
-            critter->knock_back_from( pos() ); // Chain reaction!
+            critter->knock_back_from( pos_bub() ); // Chain reaction!
             critter->apply_damage( this, bodypart_id( "torso" ), ( str_max - 6 ) / 4 );
             critter->add_effect( effect_stunned, 1_turns );
         } else if( ( str_max - 6 ) / 4 == critter->type->size ) {
@@ -13294,7 +13289,7 @@ void Character::knock_back_to( const tripoint &to )
     if( here.has_flag( ter_furn_flag::TFLAG_LIQUID, to ) &&
         here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, to ) ) {
         if( !is_npc() ) {
-            avatar_action::swim( here, get_avatar(), tripoint_bub_ms( to ) );
+            avatar_action::swim( here, get_avatar(), to );
         }
         // TODO: NPCs can't swim!
     } else if( here.impassable( to ) ) { // Wait, it's a wall
@@ -13802,7 +13797,7 @@ void Character::pause()
         }
 
         // Don't drop on the ground when the ground is on fire
-        if( total_left > 30_turns && !is_dangerous_fields( here.field_at( pos() ) ) ) {
+        if( total_left > 30_turns && !is_dangerous_fields( here.field_at( pos_bub() ) ) ) {
             add_effect( effect_downed, 2_turns, false, 0, true );
             add_msg_player_or_npc( m_warning,
                                    _( "You drop and roll on the ground, trying to smother the fire!" ),

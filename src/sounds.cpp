@@ -465,9 +465,7 @@ void sounds::process_sounds()
     for( const centroid &this_centroid : sound_clusters ) {
         const int vol = this_centroid.volume - weather_vol;
         const int raw_volume = this_centroid.volume + weather_vol;
-        const tripoint source = tripoint( this_centroid.x, this_centroid.y, this_centroid.z );
-        const tripoint_abs_ms source_abs = get_map().getglobal( source );
-        const tripoint_bub_ms source_bub = get_map().bub_from_abs( source_abs );
+        const tripoint_bub_ms source = tripoint_bub_ms( this_centroid.x, this_centroid.y, this_centroid.z );
         // --- Monster sound handling here ---
         // Alert all hordes
         int sig_power = get_signal_for_hordes( this_centroid );
@@ -475,13 +473,13 @@ void sounds::process_sounds()
 
             const point_abs_ms abs_ms = get_map().getglobal( source ).xy();
             const point_abs_sm abs_sm( coords::project_to<coords::sm>( abs_ms ) );
-            const tripoint_abs_sm target( abs_sm, source.z );
+            const tripoint_abs_sm target( abs_sm, source.z() );
             overmap_buffer.signal_hordes( target, sig_power );
         }
         // Alert all monsters (that can hear) to the sound.
         for( monster &critter : g->all_monsters() ) {
             // TODO: Generalize this to Creature::hear_sound
-            const int dist = sound_distance( source_bub, critter.pos_bub() );
+            const int dist = sound_distance( source, critter.pos_bub() );
             if( vol * 2 > dist && critter.has_flag( mon_flag_HEARS ) && !critter.has_effect( effect_deaf ) ) {
                 // Exclude monsters that certainly won't hear the sound
                 critter.hear_sound( source, vol, dist, this_centroid.provocative );
@@ -501,7 +499,7 @@ void sounds::process_sounds()
         // Trigger sound-triggered traps and ensure they are still valid
         for( const trap *trapType : trap::get_sound_triggered_traps() ) {
             for( const tripoint_bub_ms &tp : get_map().trap_locations( trapType->id ) ) {
-                const int dist = sound_distance( source_bub, tp );
+                const int dist = sound_distance( source, tp );
                 const trap &tr = get_map().tr_at( tp );
                 // Exclude traps that certainly won't hear the sound
                 if( vol * 2 > dist ) {
@@ -1147,7 +1145,7 @@ void sfx::do_ambient()
     audio_muted = false;
     const bool is_deaf = player_character.is_deaf();
     const int heard_volume = get_heard_volume( player_character.pos_bub() );
-    const bool is_underground = player_character.pos_bub().z() < 0;
+    const bool is_underground = player_character.posz() < 0;
     const bool is_sheltered = g->is_sheltered( player_character.pos_bub() );
     const bool night = is_night( calendar::turn );
     const bool weather_changed =

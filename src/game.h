@@ -497,8 +497,6 @@ class game
         Creature *get_creature_if( const std::function<bool( const Creature & )> &pred );
 
         /** Returns true if there is no player, NPC, or monster on the tile and move_cost > 0. */
-        // TODO: fix point types (remove the first overload)
-        bool is_empty( const tripoint &p );
         bool is_empty( const tripoint_bub_ms &p );
         /** Returns true if p is outdoors and it is sunny. */
         bool is_in_sunlight( const tripoint_bub_ms &p );
@@ -678,7 +676,7 @@ class game
         void draw_look_around_cursor( const tripoint_bub_ms &lp, const visibility_variables &cache );
 
         /** Long description of (visible) things at tile. */
-        void extended_description( const tripoint &p );
+        void extended_description( const tripoint_bub_ms &p );
 
         void draw_trail_to_square( const tripoint_rel_ms &t, bool bDrawX );
 

@@ -61,7 +61,7 @@ static void serialize_liquid_source( player_activity &act, const vehicle &veh, c
     act.str_values.push_back( serialize( liquid ) );
 }
 
-static void serialize_liquid_source( player_activity &act, const tripoint &pos, const item &liquid )
+static void serialize_liquid_source( player_activity &act, const tripoint_bub_ms &pos, const item &liquid )
 {
     const map_stack stack = get_map().i_at( pos );
     // Need to store the *index* of the item on the ground, but it may be a virtual item from
@@ -76,7 +76,7 @@ static void serialize_liquid_source( player_activity &act, const tripoint &pos, 
         act.values.push_back( static_cast<int>( liquid_source_type::MAP_ITEM ) );
         act.values.push_back( std::distance( stack.begin(), iter ) );
     }
-    act.coords.push_back( pos );
+    act.coords.push_back( pos.raw() );
     act.str_values.push_back( serialize( liquid ) );
 }
 
@@ -138,7 +138,7 @@ bool handle_all_liquids_from_container( item_location &container, int radius )
 
 // todo: remove in favor of the item_location version
 static bool get_liquid_target( item &liquid, const item *const source, const int radius,
-                               const tripoint *const source_pos,
+                               const tripoint_bub_ms *const source_pos,
                                const vehicle *const source_veh,
                                const monster *const source_mon,
                                liquid_dest_opt &target )
@@ -154,7 +154,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
     if( test_mode ) {
         switch( test_mode_spilling_action ) {
             case test_mode_spilling_action_t::spill_all:
-                target.pos = player_character.pos_bub().raw();
+                target.pos = player_character.pos_bub();
                 target.dest_opt = LD_GROUND;
                 return true;
             case test_mode_spilling_action_t::cancel_spill:
@@ -258,13 +258,13 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
         if( !iexamine::has_keg( target_pos ) ) {
             continue;
         }
-        if( source_pos != nullptr && *source_pos == target_pos.raw() ) {
+        if( source_pos != nullptr && *source_pos == target_pos ) {
             continue;
         }
         const std::string dir = direction_name( direction_from( player_character.pos_bub(), target_pos ) );
         menu.addentry( -1, true, MENU_AUTOASSIGN, _( "Pour into an adjacent keg (%s)" ), dir );
         actions.emplace_back( [ &, target_pos]() {
-            target.pos = target_pos.raw();
+            target.pos = target_pos;
             target.dest_opt = LD_KEG;
         } );
     }
@@ -280,7 +280,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
 
         const std::string liqstr = string_format( _( "Pour %s where?" ), liquid_name );
 
-        const std::optional<tripoint> target_pos_ = choose_adjacent( liqstr );
+        const std::optional<tripoint_bub_ms> target_pos_ = choose_adjacent( liqstr );
         if( !target_pos_ ) {
             return;
         }
@@ -322,17 +322,17 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
 static bool get_liquid_target( item_location &liquid, const item *const source, const int radius,
                                liquid_dest_opt &target )
 {
-    const tripoint *source_pos = nullptr;
+    const tripoint_bub_ms *source_pos = nullptr;
     const vehicle *source_veh = nullptr;
     const monster *source_mon = nullptr;
 
-    tripoint pos;
+    tripoint_bub_ms pos;
     switch( liquid.where() ) {
         case item_location::type::container:
             // intentionally empty
             break;
         case item_location::type::map:
-            pos = liquid.position();
+            pos = liquid.pos_bub();
             source_pos = &pos;
             break;
         case item_location::type::vehicle:
@@ -351,10 +351,10 @@ static bool handle_keg_or_ground_target( Character &player_character, item &liqu
         liquid_dest_opt &target, const std::function<bool()> &create_activity )
 {
     if( create_activity() ) {
-        serialize_liquid_target( player_character.activity, target.pos );
+        serialize_liquid_target( player_character.activity, target.pos.raw() );
     } else {
         if( target.dest_opt == LD_KEG ) {
-            iexamine::pour_into_keg( tripoint_bub_ms( target.pos ), liquid );
+            iexamine::pour_into_keg( target.pos, liquid );
         } else {
             get_map().add_item_or_charges( target.pos, liquid );
             liquid.charges = 0;
@@ -439,7 +439,7 @@ bool perform_liquid_transfer( item_location &liquid, liquid_dest_opt &target )
             return true;
         } else if( liquid.where() == item_location::type::map ) {
             player_character.assign_activity( ACT_FILL_LIQUID );
-            serialize_liquid_source( player_character.activity, liquid.position(), *liquid );
+            serialize_liquid_source( player_character.activity, liquid.pos_bub(), *liquid );
             return true;
         } else {
             return false;
@@ -466,7 +466,7 @@ bool perform_liquid_transfer( item_location &liquid, liquid_dest_opt &target )
 }
 
 // todo: Remove in favor of the item_location version.
-bool perform_liquid_transfer( item &liquid, const tripoint *const source_pos,
+bool perform_liquid_transfer( item &liquid, const tripoint_bub_ms *const source_pos,
                               const vehicle *const source_veh, const int part_num,
                               const monster *const /*source_mon*/, liquid_dest_opt &target )
 {
@@ -526,7 +526,7 @@ bool can_handle_liquid( const item &liquid )
 }
 
 bool handle_liquid( item &liquid, const item *const source, const int radius,
-                    const tripoint *const source_pos,
+                    const tripoint_bub_ms *const source_pos,
                     const vehicle *const source_veh, const int part_num,
                     const monster *const source_mon )
 {
