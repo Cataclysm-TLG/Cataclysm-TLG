@@ -559,7 +559,7 @@ TEST_CASE( "npc_can_target_player" )
 
     Character &player_character = get_player_character();
     npc &hostile = spawn_npc( player_character.pos_bub().xy() + point::south, "thug" );
-    REQUIRE( rl_dist( player_character.pos(), hostile.pos() ) <= 1 );
+    REQUIRE( rl_dist( player_character.pos_bub(), hostile.pos_bub() ) <= 1 );
     hostile.set_attitude( NPCATT_KILL );
     hostile.name = "Enemy NPC";
 

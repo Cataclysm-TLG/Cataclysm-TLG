@@ -122,7 +122,7 @@ void wishitem( Character *you = nullptr );
 // TODO: Get rid of untyped overload
 void wishitem( Character *you, const tripoint & );
 void wishitem( Character *you, const tripoint_bub_ms & );
-void wishmonster( const std::optional<tripoint> &p );
+void wishmonster( const std::optional<tripoint_bub_ms> &p );
 void wishmonstergroup( tripoint_abs_omt &loc );
 void wishmonstergroup_mon_selection( mongroup &group );
 void wishmutate( Character *you );

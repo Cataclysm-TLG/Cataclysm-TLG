@@ -2215,7 +2215,7 @@ drop_locations game_menus::inv::pickup( avatar &you,
         tmp = tripoint_bub_ms( target.value() );
     }
 
-    pickup_selector pick_s( you, preset, _( "ITEMS TO PICK UP" ), tmp->raw() );
+    pickup_selector pick_s( you, preset, _( "ITEMS TO PICK UP" ), tmp );
 
     // Add items from the selected tile, or from current and all surrounding tiles
     if( target ) {

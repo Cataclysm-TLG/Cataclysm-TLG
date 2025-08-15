@@ -563,13 +563,13 @@ target_handler::trajectory target_handler::mode_turrets( avatar &you, vehicle &v
         tripoint_bub_ms pos = veh.bub_part_pos( *t );
 
         int res = 0;
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( range,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos_bub(), pos + point( range,
                                                0 ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( -range,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos_bub(), pos + point( -range,
                                                0 ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( 0,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos_bub(), pos + point( 0,
                                                range ) ) ) );
-        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos(), pos.raw() + point( 0,
+        res = std::max( res, static_cast<int>( trig_dist_z_adjust( you.pos_bub(), pos + point( 0,
                                                -range ) ) ) );
         range_total = std::max( range_total, res );
     }
@@ -1284,7 +1284,7 @@ int throw_cost( const Character &c, const item &to_throw )
 static double calculate_aim_cap_without_target( const Character &you,
         const tripoint_bub_ms &target )
 {
-    const int range = trig_dist_z_adjust( you.pos(), target.raw() );
+    const int range = trig_dist_z_adjust( you.pos_bub(), target );
     // Get angle of triangle that spans the target square.
     const double angle = 2 * atan2( 0.5, range );
     // Convert from radians to arcmin.
@@ -1375,8 +1375,8 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
         // It's easier to dodge at close range (thrower needs to adjust more)
         // Dodge x10 at point blank, x5 at 1 dist, then flat
         float effective_dodge = critter->get_dodge() * std::max( 1,
-                                10 - 5 * static_cast<int>( trig_dist_z_adjust( pos(),
-                                        critter->pos() ) ) );
+                                10 - 5 * static_cast<int>( trig_dist_z_adjust( pos_bub(),
+                                        critter->pos_bub() ) ) );
         dispersion += throw_dispersion_per_dodge( true ) * effective_dodge;
     }
     // 1 perception per 1 eye encumbrance
@@ -1584,7 +1584,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     // throw from the the blind throw position instead.
     const tripoint_bub_ms throw_from = blind_throw_from_pos ? *blind_throw_from_pos : pos_bub();
 
-    float range = trig_dist_z_adjust( throw_from.raw(), target.raw() );
+    float range = trig_dist_z_adjust( throw_from, target );
     proj.range = range;
     float skill_lvl = get_skill_level( skill_throw );
     // Avoid awarding tons of xp for lucky throws against hard to hit targets
@@ -1778,7 +1778,7 @@ Target_attributes::Target_attributes( tripoint_bub_ms src, tripoint_bub_ms targe
 {
     Creature *target_critter = get_creature_tracker().creature_at( target );
     Creature *shooter = get_creature_tracker().creature_at( src );
-    range = trig_dist_z_adjust( src.raw(), target.raw() );
+    range = trig_dist_z_adjust( src, target );
     size = target_critter != nullptr ?
            target_critter->ranged_target_size() :
            get_map().ranged_target_size( target );
@@ -2202,7 +2202,7 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
     }
 
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, is_blind_throw ) );
-    const double range = trig_dist_z_adjust( you.pos(), target_pos.raw() );
+    const double range = trig_dist_z_adjust( you.pos_bub(), target_pos );
 
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
 
@@ -2235,7 +2235,7 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
 
 static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                     const catacurses::window &w,
-                                    int &text_y, input_context &ctxt, const tripoint &target_pos )
+                                    int &text_y, input_context &ctxt, const tripoint_bub_ms &target_pos )
 {
     Creature *target = get_creature_tracker().creature_at( target_pos, true );
     if( target != nullptr && !you.sees( *target ) ) {
@@ -2243,14 +2243,14 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     }
     item weapon = null_item_reference();
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, false ) );
-    double range = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
+    double range = trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos );
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
     float throwforce = 0.0f;
     if( you.grab_1.victim ) {
         throwforce = you.throwforce( *you.grab_1.victim );
     }
     range = throwforce / 10;
-    float distance = trig_dist_z_adjust( you.grab_1.victim->pos(), target_pos );
+    float distance = trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos );
     distance /= range;
     throwforce *= distance;
     static const std::vector<confidence_rating> throwforce_config_critter = {{
@@ -2264,8 +2264,7 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                   get_map().ambient_light_at( tripoint_bub_ms( target_pos ) ),
                                   you.sees( target_pos ) );
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
-            throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes,
-            tripoint_bub_ms( target_pos ),
+            throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes, target_pos,
             item_location() );
 
     text_y = print_throwforce( w, 3, throwforce );
@@ -2755,7 +2754,7 @@ target_handler::trajectory target_ui::run()
 
     avatar &player_character = get_avatar();
     on_out_of_scope cleanup( [&here, &player_character]() {
-        here.invalidate_map_cache( player_character.pos().z + player_character.view_offset.z() );
+        here.invalidate_map_cache( player_character.posz() + player_character.view_offset.z() );
     } );
 
     shared_ptr_fast<game::draw_callback_t> target_ui_cb = make_shared_fast<game::draw_callback_t>(
@@ -3121,13 +3120,13 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
                 set_view_offset( you->view_offset + edge_scroll );
             }
         }
-    } else if( const std::optional<tripoint> delta = ctxt.get_direction( action ) ) {
+    } else if( const std::optional<tripoint_rel_ms> delta = ctxt.get_direction_rel_ms( action ) ) {
         // Shift view/cursor with directional keys
-        shift_view_or_cursor( *delta );
+        shift_view_or_cursor( delta->raw() );
     } else if( action == "SELECT" &&
                ( mouse_pos = ctxt.get_coordinates( g->w_terrain, g->ter_view_p.raw().xy() ) ) ) {
         // Set pos by clicking with mouse
-        mouse_pos->z() = you->pos().z + you->view_offset.z();
+        mouse_pos->z() = you->posz() + you->view_offset.z();
         set_cursor_pos( tripoint_bub_ms( *mouse_pos ) );
     } else if( action == "LEVEL_UP" || action == "LEVEL_DOWN" ) {
         // Shift view/cursor up/down one z level
@@ -3311,7 +3310,7 @@ void target_ui::update_target_list()
     // Get targets in range and sort them by distance (targets[0] is the closest)
     targets = you->get_targetable_creatures( range, mode == TargetMode::Reach );
     std::sort( targets.begin(), targets.end(), [&]( const Creature * lhs, const Creature * rhs ) {
-        return trig_dist_z_adjust( lhs->pos(), you->pos() ) < trig_dist_z_adjust( rhs->pos(), you->pos() );
+        return trig_dist_z_adjust( lhs->pos_bub(), you->pos_bub() ) < trig_dist_z_adjust( rhs->pos_bub(), you->pos_bub() );
     } );
 }
 
@@ -3411,10 +3410,10 @@ int target_ui::dist_fn( const tripoint_bub_ms &p )
         }
     }
     if( src.z() == p.z() ) {
-        return static_cast<int>( z_adjust + std::round( trig_dist_z_adjust( src.raw(), p.raw() ) ) );
+        return static_cast<int>( z_adjust + std::round( trig_dist_z_adjust( src, p ) ) );
     } else {
         // Always round up so that the Z adjustment actually matters.
-        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src.raw(), p.raw() ) ) );
+        return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );
     }
 }
 
@@ -3951,7 +3950,7 @@ void target_ui::draw_ui_window()
             bool blind = mode == TargetMode::ThrowBlind;
             draw_throw_aim( *this, *you, w_target, text_y, ctxt, *relevant, dst, blind );
         } else if( mode == TargetMode::ThrowCreature ) {
-            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst.raw() );
+            draw_throwcreature_aim( *this, *you, w_target, text_y, ctxt, dst );
         }
 
     }

@@ -514,9 +514,10 @@ void map::add_vehicle_to_cache( vehicle *veh )
         }
         const tripoint_bub_ms p = veh->bub_part_pos( vpr.part() );
         level_cache &ch = get_cache( p.z() );
-        ch.set_veh_cached_parts( p.raw(), *veh, static_cast<int>( vpr.part_index() ) );
+        ch.set_veh_cached_parts( p, *veh, static_cast<int>( vpr.part_index() ) );
         if( inbounds( p ) ) {
-            ch.set_veh_exists_at( p.raw(), true );
+            ch.set_veh_exists_at( p, true );
+            set_transparency_cache_dirty( p );
         }
     }
 }
@@ -531,9 +532,9 @@ void map::clear_vehicle_point_from_cache( vehicle *veh, const tripoint_bub_ms &p
     level_cache *ch = get_cache_lazy( pt.z() );
     if( ch ) {
         if( inbounds( pt ) ) {
-            ch->set_veh_exists_at( pt.raw(), false );
+            ch->set_veh_exists_at( pt, false );
         }
-        ch->clear_veh_from_veh_cached_parts( pt.raw(), veh );
+        ch->clear_veh_from_veh_cached_parts( pt, veh );
     }
 }
 
@@ -1284,7 +1285,7 @@ bool map::deregister_vehicle_zone( zone_data &zone ) const
 
 std::set<tripoint_bub_ms> map::get_moving_vehicle_targets( const Creature &z, int max_range )
 {
-    const tripoint_bub_ms zpos( z.pos() );
+    const tripoint_bub_ms zpos( z.pos_bub() );
     std::set<tripoint_bub_ms> priority;
     std::set<tripoint_bub_ms> visible;
     for( wrapped_vehicle &v : get_vehicles() ) {
@@ -1380,12 +1381,12 @@ const vehicle *map::veh_at_internal( const tripoint_bub_ms &p, int &part_num ) c
 {
     // This function is called A LOT. Move as much out of here as possible.
     const level_cache &ch = get_cache( p.z() );
-    if( !ch.get_veh_in_active_range() || !ch.get_veh_exists_at( p.raw() ) ) {
+    if( !ch.get_veh_in_active_range() || !ch.get_veh_exists_at( p ) ) {
         part_num = -1;
         return nullptr; // Clear cache indicates no vehicle. This should optimize a great deal.
     }
 
-    std::pair<vehicle *, int> ret = ch.get_veh_cached_parts( p.raw() );
+    std::pair<vehicle *, int> ret = ch.get_veh_cached_parts( p );
     if( ret.first ) {
         part_num = ret.second;
         return ret.first;
@@ -5898,7 +5899,7 @@ void map::make_active( item_location &loc )
     item *target = loc.get_item();
 
     point_sm_ms l;
-    submap *const current_submap = get_submap_at( loc.position(), l.raw() );
+    submap *const current_submap = get_submap_at( loc.pos_bub().raw(), l.raw() );
     if( current_submap == nullptr ) {
         debugmsg( "Tried to make active at (%d,%d) but the submap is not loaded", l.x(), l.y() );
         return;
@@ -5907,8 +5908,8 @@ void map::make_active( item_location &loc )
     cata::colony<item>::iterator iter = item_stack.get_iterator_from_pointer( target );
 
     if( current_submap->active_items.add( *iter, l ) ) {
-        tripoint_abs_sm const smloc( abs_sub.x() + loc.position().x / SEEX,
-                                     abs_sub.y() + loc.position().y / SEEY, loc.position().z );
+        tripoint_abs_sm const smloc( abs_sub.x() + loc.pos_bub().x() / SEEX,
+                                     abs_sub.y() + loc.pos_bub().y() / SEEY, loc.pos_bub().z() );
         submaps_with_active_items_dirty.insert( smloc );
         if( this != &get_map() && get_map().inbounds( smloc ) ) {
             get_map().make_active( smloc );
@@ -6642,7 +6643,7 @@ std::list<item> map::use_charges( const std::vector<tripoint_bub_ms> &reachable_
 
     for( const tripoint_bub_ms &p : reachable_pts ) {
         if( accessible_items( p ) ) {
-            std::list<item> tmp = i_at( p ).use_charges( type, quantity, p.raw(), filter, in_tools );
+            std::list<item> tmp = i_at( p ).use_charges( type, quantity, p, filter, in_tools );
             ret.splice( ret.end(), tmp );
             if( quantity <= 0 ) {
                 return ret;
@@ -7388,7 +7389,7 @@ void map::update_visibility_cache( const int zlev )
         return;
     }
 
-    if( player_character.pos_bub().z() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
+    if( player_character.posz() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
         update_visibility_cache( zlev - 1 );
     }
     visibility_variables_cache.variables_set = true; // Not used yet
@@ -10184,15 +10185,15 @@ void map::build_obstacle_cache(
     }
     // Iterate over creatures and set them to block their squares relative to their size.
     for( Creature &critter : g->all_creatures() ) {
-        const tripoint loc = critter.pos();
-        if( loc.z != start.z() ) {
+        const tripoint_bub_ms loc = critter.pos_bub();
+        if( loc.z() != start.z() ) {
             continue;
         }
         // TODO: scale this with expected creature "thickness".
-        obstacle_cache[loc.x][loc.y].velocity = 1.2f;
+        obstacle_cache[loc.x()][loc.y()].velocity = 1.2f;
         // ranged_target_size is "proportion of square that is blocked", and density needs to be
         // "transmissivity of square", so we need the reciprocal.
-        obstacle_cache[loc.x][loc.y].density = 1.0 - critter.ranged_target_size();
+        obstacle_cache[loc.x()][loc.y()].density = 1.0 - critter.ranged_target_size();
     }
 }
 
@@ -10813,7 +10814,7 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         if( c->has_effect( effect_strengthened_gravity ) ) {
             height += 1;
         }
-        c->impact( height * 10, where.raw() );
+        c->impact( height * 10, where );
         return true;
     }
 
@@ -10863,11 +10864,11 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c ) const
         } else {
             you->add_msg_if_player( m_bad,
                                     _( "You attempt to break the fall with your %s but it is out of fuel!" ), jetpack.tname() );
-            you->impact( height * 30, where.raw() );
+            you->impact( height * 30, where );
 
         }
     } else {
-        you->impact( height * 30, where.raw() );
+        you->impact( height * 30, where );
     }
 
     if( has_flag( ter_furn_flag::TFLAG_DEEP_WATER, where ) ) {

@@ -275,7 +275,7 @@ standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
                             int sk_lvl, int s_str, int s_dex, int s_int, int s_per )
 {
     this->name = name;
-    set_pos_only( pos.raw() );
+    set_pos_only( tripoint_bub_ms( pos ) );
     if( !getID().is_valid() ) {
         setID( g->assign_npc_id() );
     }
@@ -2685,7 +2685,7 @@ bool npc::emergency( float danger ) const
 //Active npcs are the npcs near the player that are actively simulated.
 bool npc::is_active() const
 {
-    return get_creature_tracker().creature_at<npc>( pos() ) == this;
+    return get_creature_tracker().creature_at<npc>( pos_bub() ) == this;
 }
 
 int npc::follow_distance() const

@@ -756,7 +756,7 @@ void advanced_inventory::recalc_pane( side p )
 
         // If container is no longer adjacent or on the player's z-level, nullify it.
         if( std::abs( offset.x() ) > 1 || std::abs( offset.y() ) > 1 ||
-            player_character.pos_bub().z() != pane.container.pos_bub().z() ) {
+            player_character.posz() != pane.container.pos_bub().z() ) {
 
             pane.container = item_location::nowhere;
             pane.container_base_loc = NUM_AIM_LOCATIONS;
@@ -1639,6 +1639,10 @@ bool advanced_inventory::action_move_item( advanced_inv_listitem *sitem,
     if( !query_charges( destarea, *sitem, action, amount_to_move ) ) {
         return false;
     }
+    item it_copy = *sitem->items.front();
+    if( it_copy.count_by_charges() ) {
+        it_copy.charges = std::min( amount_to_move, sitem->items.front()->charges );
+    }
     if( spane.get_area() == AIM_CONTAINER &&
         spane.container.get_item()->has_flag( json_flag_NO_UNLOAD ) ) {
         popup_getkey( _( "Source container can't be unloaded." ) );
@@ -1649,9 +1653,9 @@ bool advanced_inventory::action_move_item( advanced_inv_listitem *sitem,
             popup_getkey( _( "Destination container can't be reloaded." ) );
             return false;
         }
-        ret_val<void> can_contain = dpane.container->can_contain( *sitem->items.front() );
+        ret_val<void> can_contain = dpane.container->can_contain( it_copy );
         if( can_contain.success() ) {
-            can_contain = dpane.container.parents_can_contain_recursive( &*sitem->items.front() );
+            can_contain = dpane.container.parents_can_contain_recursive( &it_copy );
         }
         if( !can_contain.success() ) {
             popup_getkey( can_contain.str().empty() ?
@@ -1702,7 +1706,7 @@ bool advanced_inventory::action_move_item( advanced_inv_listitem *sitem,
             player_character.takeoff( Character::worn_position_to_index( sitem->idx ) + 1 );
         } else {
             // important if item is worn
-            if( player_character.can_drop( *sitem->items.front() ).success() ) {
+            if( player_character.can_drop( it_copy ).success() ) {
                 if( destarea == AIM_CONTAINER ) {
                     do_return_entry();
                     start_activity( destarea, srcarea, sitem, amount_to_move, from_vehicle, to_vehicle );
@@ -1733,14 +1737,7 @@ bool advanced_inventory::action_move_item( advanced_inv_listitem *sitem,
         exit = true;
     } else {
         if( destarea == AIM_INVENTORY ) {
-            bool can_stash = false;
-            if( sitem->items.front()->count_by_charges() ) {
-                item dummy = *sitem->items.front();
-                dummy.charges = amount_to_move;
-                can_stash = player_character.can_stash( dummy );
-            } else {
-                can_stash = player_character.can_stash( *sitem->items.front() );
-            }
+            bool can_stash = player_character.can_stash( it_copy );
             if( !can_stash ) {
                 popup_getkey( _( "You have no space for the %s." ), sitem->items.front()->tname() );
                 return false;
@@ -2345,7 +2342,7 @@ void advanced_inventory::draw_minimap()
     }
 
     if( !invert_left || !invert_right ) {
-        player_character.draw( minimap, player_character.pos(), invert_left || invert_right );
+        player_character.draw( minimap, player_character.pos_bub(), invert_left || invert_right );
     }
 }
 

@@ -1478,7 +1478,7 @@ void iexamine::rubble( Character &you, const tripoint_bub_ms &examp )
 void iexamine::chainfence( Character &you, const tripoint_bub_ms &examp )
 {
     // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-    if( !you.move_effects( false, examp.raw() ) ) {
+    if( !you.move_effects( false, examp ) ) {
         you.mod_moves( -to_moves<int>( 1_seconds ) );
         return;
     }
@@ -1602,7 +1602,7 @@ void iexamine::deployed_furniture( Character &you, const tripoint_bub_ms &pos )
 
     const furn_t &fo = here.furn( pos ).obj();
     const std::string &name = fo.name();
-    if( you.pos_bub().z() != pos.z() ) {
+    if( you.posz() != pos.z() ) {
         drop_pos = you.pos_bub();
         if( !you.query_yn( _( "Pull up the %s?" ), name ) ) {
             return;
@@ -4272,7 +4272,7 @@ void iexamine::tree_maple( Character &you, const tripoint_bub_ms &examp )
     map &here = get_map();
     item_location spile_loc = g->inv_map_splice( [&here]( const item_location & it ) {
         return it->get_quality_nonrecursive( qual_TREE_TAP ) > 0 &&
-               !( here.ter( it.position() ) == ter_t_tree_maple_tapped );
+               !( here.ter( it.pos_bub() ) == ter_t_tree_maple_tapped );
     }, _( "Use which tapping tool?" ), PICKUP_RANGE, _( "You don't have a tapping tool at hand." ) );
 
     item *spile = spile_loc.get_item();
@@ -4591,7 +4591,7 @@ void iexamine::water_source( Character &, const tripoint_bub_ms &examp )
 {
     map &here = get_map();
     item water = here.liquid_from( examp );
-    liquid_handler::handle_liquid( water, nullptr, 0, &examp.raw() );
+    liquid_handler::handle_liquid( water, nullptr, 0, &examp );
 }
 
 void iexamine::finite_water_source( Character &, const tripoint_bub_ms &examp )
@@ -5376,7 +5376,7 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
     switch( cmenu.ret ) {
         case ledge_jump_across: {
             // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-            if( !you.move_effects( false, examp.raw() ) ) {
+            if( !you.move_effects( false, examp ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 return;
             }
@@ -5451,7 +5451,7 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
         }*/
         case ledge_glide: {
             // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-            if( !you.move_effects( false, examp.raw() ) ) {
+            if( !you.move_effects( false, examp ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 return;
             }
@@ -5493,7 +5493,7 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
             if( query_yn( _( "Climbing might be safer.  Really fall from the ledge?" ) ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
                 // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-                if( !you.move_effects( false, examp.raw() ) ) {
+                if( !you.move_effects( false, examp ) ) {
                     return;
                 }
                 // Step into open air, then fall...

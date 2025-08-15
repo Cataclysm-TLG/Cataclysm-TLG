@@ -1843,7 +1843,7 @@ class invoke_item_activity_actor : public activity_actor
 class pickup_menu_activity_actor : public activity_actor
 {
     public:
-        pickup_menu_activity_actor( std::optional<tripoint> where,
+        pickup_menu_activity_actor( std::optional<tripoint_bub_ms> where,
                                     std::vector<drop_location> selection ) : where( where ),
             selection( std::move( selection ) ) {};
         activity_id get_type() const override {
@@ -1862,7 +1862,7 @@ class pickup_menu_activity_actor : public activity_actor
         static std::unique_ptr<activity_actor> deserialize( JsonValue & );
 
     private:
-        std::optional<tripoint> where;
+        std::optional<tripoint_bub_ms> where;
         std::vector<drop_location> selection;
 };
 

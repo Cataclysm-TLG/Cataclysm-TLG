@@ -1719,9 +1719,9 @@ void glide_activity_actor::do_turn( player_activity &act, Character &you )
         moved_tiles = 0;
     }
     you.mod_moves( -you.get_speed() * 0.5 );
-    get_map().update_visibility_cache( you.pos_bub().z() );
-    get_map().update_visibility_cache( you.pos_bub().x() );
-    get_map().update_visibility_cache( you.pos_bub().y() );
+    get_map().update_visibility_cache( you.posz() );
+    get_map().update_visibility_cache( you.posx() );
+    get_map().update_visibility_cache( you.posy() );
     if( you.is_avatar() ) {
         g->update_map( you );
     }
@@ -4661,7 +4661,7 @@ static bool is_bulk_load( const item_location &lhs, const item_location &rhs )
                 break;
             case item_location::type::map:
             case item_location::type::vehicle:
-                return lhs.position() == rhs.position();
+                return lhs.pos_bub() == rhs.pos_bub();
                 break;
             default:
                 break;
@@ -6510,7 +6510,7 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
     if( !who.is_npc() &&
         ( who.backlog.empty() || who.backlog.front().id() != ACT_MULTIPLE_CHOP_TREES ) ) {
         while( true ) {
-            if( const std::optional<tripoint_rel_ms> dir = choose_direction_rel_ms(
+            if( const std::optional<tripoint_rel_ms> dir = choose_direction(
                         _( "Select a direction for the tree to fall in." ) ) ) {
                 direction = *dir;
                 break;
@@ -6784,7 +6784,6 @@ void forage_activity_actor::finish( player_activity &act, Character &who )
     bool next_to_bush = false;
     map &here = get_map();
     for( const tripoint_bub_ms &pnt : here.points_in_radius( who.pos_bub(), 1 ) ) {
-        // TODO: fix point types
         if( here.getglobal( pnt ) == act.placement ) {
             next_to_bush = true;
             break;
@@ -7303,7 +7302,6 @@ void unload_loot_activity_actor::do_turn( player_activity &act, Character &you )
         }
     }
     if( stage == DO ) {
-        // TODO: fix point types
         const tripoint_abs_ms src( placement );
         const tripoint_bub_ms src_loc = here.bub_from_abs( src );
 

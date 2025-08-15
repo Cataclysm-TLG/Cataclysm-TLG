@@ -989,7 +989,7 @@ static void spell_move( const spell &sp, const Creature &caster,
                 valid |= victim == &caster && can_target_self;
             }
             if( valid ) {
-                victim->knock_back_to( to.raw() );
+                victim->knock_back_to( to );
             }
         }
     }
@@ -2054,7 +2054,7 @@ void spell_effect::slime_split_on_death( const spell &sp, Creature &caster,
 
             shared_ptr_fast<monster> mon = make_shared_fast<monster>( slime_id );
             mon->ammo = mon->type->starting_ammo;
-            if( mon->will_move_to( dest.raw() ) && mon->know_danger_at( dest.raw() ) ) {
+            if( mon->will_move_to( dest ) && mon->know_danger_at( dest ) ) {
                 if( monster *const blob = g->place_critter_around( mon, dest, 0 ) ) {
                     sp.make_sound( dest, caster );
                     if( !permanent ) {
