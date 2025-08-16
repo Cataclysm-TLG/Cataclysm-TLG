@@ -1311,6 +1311,7 @@
     "id": "phase_immersion_suit",
     "type": "TOOL_ARMOR",
     "category": "clothing",
+    "looks_like": "rm13_armor",
     "symbol": "[",
     "color": "light_gray",
     "name": { "str": "phase immersion suit" },
