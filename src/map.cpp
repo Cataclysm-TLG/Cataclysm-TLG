@@ -6394,7 +6394,7 @@ bool map::has_items( const tripoint_bub_ms &p ) const
     return !current_submap->get_items( l ).empty();
 }
 
-bool map::is_dry( const tripoint &p )
+bool map::is_dry( const tripoint_bub_ms &p )
 {
     // TODO: Flooded vehicles, burning vehicles
     if( veh_at( p ) ) {

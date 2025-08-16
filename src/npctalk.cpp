@@ -4753,11 +4753,11 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
     return [snip_id, message, outdoor_only, sound, snippet, same_snippet, type_string, popup_msg,
                      popup_w_interrupt_query_msg, popup_flag, interrupt_type, global, store_in_lore, is_npc]
     ( dialogue const & d ) {
-        Character *target;
+        const Character *target;
         if( global ) {
             target = &get_player_character();
         } else {
-            target = d.actor( is_npc )->get_character();
+            target = d.actor( is_npc )->get_const_character();
         }
         if( !target || target->is_npc() ) {
             return;
@@ -4795,16 +4795,16 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
                 if( sid.empty() ) {
                     sid = SNIPPET.random_id_from_category( snip_id.evaluate( d ) ).c_str();
                     target_talker->set_value( snip_id.evaluate( d ) + "_snippet_id", sid );
-                    if( store_in_lore ) {
-                        target->as_avatar()->add_snippet( snippet_id( sid ) );
+                    if( store_in_lore && target->is_avatar() ) {
+                        get_avatar().add_snippet( snippet_id( sid ) );
                     }
                 }
                 translated_message = SNIPPET.expand( SNIPPET.get_snippet_by_id( snippet_id( sid ) ).value_or(
                         translation() ).translated() );
             } else {
-                if( store_in_lore ) {
+                if( store_in_lore && target->is_avatar() ) {
                     sid = SNIPPET.random_id_from_category( snip_id.evaluate( d ) ).c_str();
-                    target->as_avatar()->add_snippet( snippet_id( sid ) );
+                        get_avatar().add_snippet( snippet_id( sid ) );
                     translated_message = SNIPPET.expand( SNIPPET.get_snippet_by_id( snippet_id( sid ) ).value_or(
                             translation() ).translated() );
                 } else {

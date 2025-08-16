@@ -706,7 +706,7 @@ class Character : public Creature, public visitable
         int get_health_tally() const;
 
         /** Modifiers for health values exclusive to characters */
-        void mod_livestyle( int nhealthy );
+        void mod_lifestyle( int nhealthy );
         void mod_daily_health( int nhealthy_mod, int cap );
         void mod_health_tally( int mod );
 

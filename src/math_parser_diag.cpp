@@ -149,7 +149,7 @@ diag_assign_dbl_f health_ass( char scope, std::vector<diag_value> const & /* par
 {
     return [beta = is_beta( scope )]( dialogue const & d, double val ) {
         const int current_health = d.actor( beta )->get_health();
-        return d.actor( beta )->mod_livestyle( val - current_health );
+        return d.actor( beta )->mod_lifestyle( val - current_health );
     };
 }
 

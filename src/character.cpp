@@ -910,7 +910,7 @@ void Character::mod_stat( const std::string &stat, float modifier )
     } else if( stat == "int" ) {
         mod_int_bonus( modifier );
     } else if( stat == "healthy" ) {
-        mod_livestyle( modifier );
+        mod_lifestyle( modifier );
     } else if( stat == "hunger" ) {
         mod_hunger( modifier );
     } else {
@@ -4761,7 +4761,7 @@ void Character::set_lifestyle( int nhealthy )
 {
     lifestyle = nhealthy;
 }
-void Character::mod_livestyle( int nhealthy )
+void Character::mod_lifestyle( int nhealthy )
 {
     lifestyle += enchantment_cache->modify_value( enchant_vals::mod::HEALTHY_RATE, nhealthy );
     // Clamp lifestyle between [-200, 200]
@@ -5276,7 +5276,7 @@ void Character::update_health()
     if( calendar::once_every( 1_days ) ) {
         mod_health_tally( effective_daily_health );
         int mean_daily_health = get_health_tally() / 7;
-        mod_livestyle( mean_daily_health );
+        mod_lifestyle( mean_daily_health );
         mod_health_tally( -mean_daily_health );
         set_daily_health( 0 );
     }
@@ -11181,7 +11181,7 @@ void Character::process_one_effect( effect &it, bool is_new )
     if( val != 0 ) {
         mod = 1;
         if( is_new || it.activated( calendar::turn, "HEALTH", val, reduced, mod ) ) {
-            mod_livestyle( bound_mod_to_vals( get_lifestyle(), val,
+            mod_lifestyle( bound_mod_to_vals( get_lifestyle(), val,
                                               it.get_max_val( "HEALTH", reduced ), it.get_min_val( "HEALTH", reduced ) ) );
         }
     }
