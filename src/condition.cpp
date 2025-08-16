@@ -385,11 +385,10 @@ str_translation_or_var get_str_translation_or_var(
 tripoint_abs_ms get_tripoint_from_var( std::optional<var_info> var, const_dialogue const &d,
                                        bool is_npc )
 {
-    tripoint_abs_ms target_pos = get_map().getglobal( d.const_actor( is_npc )->pos_bub() );
     if( var.has_value() ) {
         std::string value = read_var_value( var.value(), d );
         if( !value.empty() ) {
-            target_pos = tripoint_abs_ms( tripoint::from_string( value ) );
+            return tripoint_abs_ms( tripoint::from_string( value ) );
         }
     }
     if( !d.has_actor( is_npc ) ) {
