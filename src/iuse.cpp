@@ -5222,7 +5222,7 @@ std::optional<int> iuse::adrenaline_injector( Character *p, item *it, const trip
     if( p->has_effect( effect_adrenaline ) ) {
         p->add_msg_if_player( m_bad, _( "Your heart spasms!" ) );
         // Note: not the mod, the health
-        p->mod_livestyle( -20 );
+        p->mod_lifestyle( -20 );
     }
 
     p->add_effect( effect_adrenaline, 20_minutes );
