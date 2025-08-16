@@ -6852,9 +6852,9 @@ talk_effect_fun_t::func f_closest_city( const JsonObject &jo, std::string_view m
 }
 
 talk_effect_fun_t::func f_teleport( const JsonObject &jo, std::string_view member,
-                                    const std::string_view, bool is_npc )
+                                    std::string_view, bool is_npc )
 {
-    std::optional<var_info> target_var = read_var_info( jo.get_object( member ) );
+    var_info target_var = read_var_info( jo.get_object( member ) );
     translation_or_var fail_message;
     if( jo.has_member( "fail_message" ) ) {
         fail_message = get_translation_or_var( jo.get_member( "fail_message" ), "fail_message",

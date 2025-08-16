@@ -57,6 +57,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                                   bool add_teleglow, bool display_message, bool force, bool force_safe )
 {
     if( critter.pos_bub() == target ) {
+        critter.add_msg_if_player( m_warning, _( "You feel a strange inward pressure, but nothing more." ) );
         return false;
     }
     Character *const p = critter.as_character();
@@ -73,7 +74,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                                         p->has_effect_with_flag( json_flag_DIMENSIONAL_ANCHOR ) ||
                                         p->has_effect_with_flag( json_flag_TELEPORT_LOCK ) ) ) {
         if( display_message ) {
-            p->add_msg_if_player( m_warning, _( "You feel a strange, inwards force." ) );
+            p->add_msg_if_player( m_warning, _( "You feel a strange inward pressure, but nothing more." ) );
         }
         return false;
     }
@@ -119,7 +120,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                 get_event_bus().send<event_type::teleports_into_wall>( p->getID(),
                         dest->obstacle_name( dest_target ) );
                 if( display_message ) {
-                    add_msg( m_bad, _( "You die after teleporting into a solid." ) );
+                    add_msg( m_bad, _( "Your body is torn apart as it is teleported into a solid obstacle." ) );
                 }
             }
             critter.check_dead_state();
@@ -160,6 +161,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                 } else if( !c_is_u && p != nullptr ) {
                     add_msg( m_bad, _( "%s flickers but remains exactly where they are." ), p->get_name() );
                 }
+                            add_msg( _( "failure: unsafe (force safe is on, !found_new_spot" ) );
                 return false;
             }
         }
