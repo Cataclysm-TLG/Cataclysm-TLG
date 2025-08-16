@@ -385,7 +385,7 @@ str_translation_or_var get_str_translation_or_var(
 tripoint_abs_ms get_tripoint_from_var( std::optional<var_info> var, const_dialogue const &d,
                                        bool is_npc )
 {
-    tripoint_abs_ms target_pos = get_map().getglobal( d.const_actor( is_npc )->pos() );
+    tripoint_abs_ms target_pos = get_map().getglobal( d.const_actor( is_npc )->pos_bub() );
     if( var.has_value() ) {
         std::string value = read_var_value( var.value(), d );
         if( !value.empty() ) {
@@ -1695,14 +1695,14 @@ conditional_t::func f_is_underwater( bool is_npc )
 conditional_t::func f_is_on_land( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
-        return get_map().has_floor( d.const_actor( is_npc )->pos() );
+        return get_map().has_floor( d.const_actor( is_npc )->pos_bub() );
     };
 }
 
 conditional_t::func f_is_on_liquid( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
-        return !get_map().is_dry( d.const_actor( is_npc )->pos() );
+        return !get_map().is_dry( d.const_actor( is_npc )->pos_bub() );
     };
 }
 

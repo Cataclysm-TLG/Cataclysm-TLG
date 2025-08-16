@@ -1102,7 +1102,7 @@ class map
 
         // Checks if a tile has no liquid on it. Fuel is skipped as it's flammable and our fuels are
         // almost all nonconductive.
-        bool is_dry( const tripoint &p );
+        bool is_dry( const tripoint_bub_ms &p );
 
         // Check if a tile with LIQUIDCONT flag only contains liquids
         bool only_liquid_in_liquidcont( const tripoint_bub_ms &p );
