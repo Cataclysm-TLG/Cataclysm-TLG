@@ -72,17 +72,51 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_ballistic_door_glass_o",
     "bash": {
-      "str_min": 200,
-      "str_max": 400,
+      "str_min": 25,
+      "str_max": 90,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "glass_shard", "count": [ 20, 44 ] } ]
     },
     "shoot": {
-      "reduce_damage": [ 30, 60 ],
+      "reduce_damage": [ 5, 20 ],
+      "reduce_damage_laser": [ 0, 10 ],
+      "destroy_damage": [ 80, 200 ],
+      "no_laser_destroy": true
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_ballistic_door_glass_lab_c",
+    "name": "closed ballistic glass door",
+    "description": "A ballistic glass door, consisting of layers of laminated glass.",
+    "symbol": "+",
+    "color": "light_cyan",
+    "move_cost": 0,
+    "coverage": 100,
+    "concealment": 0,
+    "looks_like": "t_reinforced_door_glass_c",
+    "roof": "t_flat_roof",
+    "connect_groups": "WALL",
+    "connects_to": "WALL",
+    "rotates_to": "INDOORFLOOR",
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "SUPPORTS_ROOF" ],
+    "open": "t_ballistic_door_glass_lab_o",
+    "bash": {
+      "str_min": 25,
+      "str_max": 90,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": 20,
+      "sound_fail_vol": 14,
+      "ter_set": "t_mdoor_frame",
+      "items": [ { "item": "glass_shard", "count": [ 20, 44 ] } ]
+    },
+    "shoot": {
+      "reduce_damage": [ 5, 20 ],
       "reduce_damage_laser": [ 0, 10 ],
       "destroy_damage": [ 80, 200 ],
       "no_laser_destroy": true
@@ -104,14 +138,40 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_ballistic_door_glass_c",
     "bash": {
-      "str_min": 200,
-      "str_max": 400,
+      "str_min": 25,
+      "str_max": 90,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "glass_shard", "count": [ 20, 44 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_ballistic_door_glass_lab_o",
+    "name": "open ballistic glass door",
+    "description": "A ballistic glass door, consisting of layers of laminated glass.  It's open.",
+    "symbol": "'",
+    "color": "light_cyan",
+    "move_cost": 2,
+    "looks_like": "t_reinforced_door_glass_o",
+    "coverage": 10,
+    "roof": "t_flat_roof",
+    "connect_groups": "WALL",
+    "connects_to": "WALL",
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
+    "close": "t_ballistic_door_glass_lab_c",
+    "bash": {
+      "str_min": 25,
+      "str_max": 90,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": 20,
+      "sound_fail_vol": 14,
+      "ter_set": "t_mdoor_frame",
+      "items": [ { "item": "glass_shard", "count": [ 20, 44 ] } ]
     }
   },
   {

@@ -177,6 +177,7 @@ static const ter_str_id ter_t_marloss( "t_marloss" );
 static const ter_str_id ter_t_radio_tower( "t_radio_tower" );
 static const ter_str_id ter_t_reinforced_door_glass_c( "t_reinforced_door_glass_c" );
 static const ter_str_id ter_t_reinforced_glass( "t_reinforced_glass" );
+static const ter_str_id ter_t_ballistic_glass( "t_ballistic_glass" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 static const ter_str_id ter_t_sewage( "t_sewage" );
 static const ter_str_id ter_t_stairs_down( "t_stairs_down" );
@@ -6355,7 +6356,7 @@ void map::draw_lab( mapgendata &dat )
                                     if( ( i - lw ) % 2 == 0 ) {
                                         ter_set( point( i, j ), ter_t_concrete_wall );
                                     } else {
-                                        ter_set( point( i, j ), ter_t_reinforced_glass );
+                                        ter_set( point( i, j ), ter_t_ballistic_glass );
                                     }
                                 } else if( ( i - lw ) % 2 == 0 || j == tw + 2 ) {
                                     ter_set( point( i, j ), ter_t_concrete_wall );

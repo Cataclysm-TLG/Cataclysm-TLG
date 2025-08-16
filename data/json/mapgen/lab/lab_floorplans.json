@@ -676,7 +676,13 @@
       ],
       "palettes": [ "lab_palette" ],
       "furniture": { "7": "f_console", "C": "f_centrifuge" },
-      "terrain": { "C": "t_floor_blue", "7": "t_floor_blue", ",": "t_floor_blue" },
+      "terrain": {
+        "g": "t_ballistic_glass",
+        "G": "t_ballistic_door_glass_lab_c",
+        "C": "t_floor_blue",
+        "7": "t_floor_blue",
+        ",": "t_floor_blue"
+      },
       "mapping": {
         "c": { "items": [ { "item": "office", "chance": 30 }, { "item": "tools_science", "chance": 15 } ] },
         "l": { "items": [ { "item": "science", "chance": 60 } ] },

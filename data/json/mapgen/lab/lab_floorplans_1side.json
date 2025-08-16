@@ -257,6 +257,7 @@
         "|---|-|----|----|-|----|"
       ],
       "palettes": [ "lab_palette" ],
+      "terrain": { "g": "t_ballistic_glass", "G": "t_ballistic_door_glass_lab_c" },
       "place_monster": [
         { "monster": "mon_zombie_shrieker", "x": [ 19, 22 ], "y": [ 20, 22 ] },
         { "monster": "mon_zombie_brute", "x": [ 12, 15 ], "y": [ 20, 22 ] },

@@ -405,7 +405,7 @@
         "ggGgg"
       ],
       "palettes": [ "lab_palette" ],
-      "terrain": { ",": "t_floor_blue" },
+      "terrain": { "g": "t_ballistic_glass", "G": "t_ballistic_door_glass_lab_c", ",": "t_floor_blue" },
       "place_monster": [
         {
           "monster": [ "mon_zombie_brute", "mon_zombie_screecher", "mon_zombie_hollow", "mon_zombie_master", "mon_zombie_necro" ],
@@ -431,7 +431,7 @@
         "ggggg"
       ],
       "palettes": [ "lab_palette" ],
-      "terrain": { ",": "t_floor_blue" },
+      "terrain": { "g": "t_ballistic_glass", "G": "t_ballistic_door_glass_lab_c", ",": "t_floor_blue" },
       "place_monster": [
         {
           "monster": [ "mon_zombie_pig", "mon_zombear", "mon_zoose", "mon_zolf", "mon_zombie_dog" ],
