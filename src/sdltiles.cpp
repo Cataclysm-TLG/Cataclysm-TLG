@@ -992,7 +992,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                     }
                 }
                 if( showhordes && los ) {
-                    const int horde_size = overmap_buffer.get_horde_size( omp );
+                    const int horde_size = std::min( 10, overmap_buffer.get_horde_size( omp ) );
                     if( horde_size >= HORDE_VISIBILITY_SIZE ) {
                         // a little bit of hardcoded fallbacks for hordes
                         if( find_tile_with_season( id ) ) {

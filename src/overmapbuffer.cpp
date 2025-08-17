@@ -451,14 +451,13 @@ int overmapbuffer::get_horde_size( const tripoint_abs_omt &p )
     int horde_size = 0;
     for( mongroup * const &m : overmap_buffer.monsters_at( p ) ) {
         if( m->horde ) {
+            // Monstergroups which have not yet spawned in will not display. This is fine.
+            // Map visibility being iffy means that we probably wouldn't be able to see such
+            // groups anyway, and unspawned groups all have a horde_size of 10 which looks
+            // weird when you get close and it's like 3 guys and the size 10 horde disappears
+            // from your map.
             if( !m->monsters.empty() ) {
                 horde_size += m->monsters.size();
-            } else {
-                // We don't know how large this will actually be, because
-                // population "1" can still result in a zombie pack.
-                // So we double the population as an estimate to make
-                // hordes more likely to be visible on the overmap.
-                horde_size += m->population * 2;
             }
         }
     }
