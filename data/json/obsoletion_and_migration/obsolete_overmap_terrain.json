@@ -34,12 +34,7 @@
       "farm_lot_wire_turn_v_open_east": "farmland_straight_east",
       "farm_lot_wire_turn_v_open_south": "farmland_straight_south",
       "farm_lot_wire_turn_v_open_west": "farmland_straight_west",
-      "megastore_parking": "omt_obsolete"
-    }
-  },
-  {
-    "type": "oter_id_migration",
-    "oter_ids": {
+      "megastore_parking": "omt_obsolete",
       "rock": "empty_rock",
       "slimepit_top": "slimepit_z0_north",
       "slimepit_bottom": "slimepit_z-1_north",

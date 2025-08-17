@@ -9,7 +9,7 @@
         "keys": [ "1", "2", "3", "4" ],
         "title": "Select Expedition Length",
         "descriptions": [
-          "A simple, brief expedition at the normal time limit.  Missions and exits will be close together.  A good chance to quickly gather supplies and experience.",
+          "A simple, brief expedition at the normal time limit.  Missions and exits will be close together.  A good chance to quickly gather supplies and experience.  NOTE: Due to code limitations, this may take several real-life minutes to initate for the first time during a run.",
           "A longer expedition that offers twice the time.  Missions and exits will be scattered over a wider area.  You will have more opportunity to dig deeper into surrounding points of interest, but also need more time to travel.  Missions offer extra warp shards as rewards.",
           "A very long expedition that triples the time limit.  Missions and exits will be very far away.  You will have time for extended activities, but a good deal of your time will be spent trying to reach objectives over potentially dangerous terrain.  Missions offer even more warp shards as rewards.",
           "Stay on the island for now."

@@ -637,13 +637,14 @@
     "id": "patient",
     "name": "Challenge - Abandoned",
     "points": -8,
-    "description": "Sickly and frail, you have spent most of your life in the patient's ward of various hospitals.  When your current one was evacuated, you were considered a lost cause and left behind.  You awaken to the sound of movement around the hospital.",
+    "description": "Accident or illness left you under intensive care.  When your hospital was overrun, you were considered a lost cause and left behind.  You awaken to the sound of movement around the hospital.",
     "allowed_locs": [ "sloc_hospital" ],
     "start_name": "Hospital",
     "forced_traits": [ "FLIMSY2" ],
     "forbidden_traits": [ "TOUGH", "DISRESISTANT" ],
     "professions": [ "unemployed", "patient", "veteran", "bionic_patient" ],
     "requirement": "achievement_reach_hospital",
+    "reveal_locale": false,
     "flags": [ "CHALLENGE", "CITY_START", "LONE_START" ]
   },
   {
