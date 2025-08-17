@@ -12273,7 +12273,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
         add_msg( m_info, _( "Halfway up, the way up becomes blocked off." ) );
         return;
     }
-    if( !u.move_effects( false, tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0, movez ) ) ) && !force ) {
+    if( !u.move_effects( false, tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0, movez ) ) ) &&
+        !force ) {
         // move_effects determined we could not move, waste all moves
         u.set_moves( 0 );
         return;
@@ -12290,7 +12291,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
     // > and < are used for diving underwater.
     if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, u.pos_bub() ) ) {
         swimming = true;
-        const ter_id &target_ter = here.ter( tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0, movez ) ) );
+        const ter_id &target_ter = here.ter( tripoint_bub_ms( u.pos_bub().raw() + tripoint( 0, 0,
+                                             movez ) ) );
 
         // If we're in a water tile that has both air above and deep enough water to submerge in...
         if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, u.pos_bub() ) &&

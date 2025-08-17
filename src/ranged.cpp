@@ -3310,7 +3310,8 @@ void target_ui::update_target_list()
     // Get targets in range and sort them by distance (targets[0] is the closest)
     targets = you->get_targetable_creatures( range, mode == TargetMode::Reach );
     std::sort( targets.begin(), targets.end(), [&]( const Creature * lhs, const Creature * rhs ) {
-        return trig_dist_z_adjust( lhs->pos_bub(), you->pos_bub() ) < trig_dist_z_adjust( rhs->pos_bub(), you->pos_bub() );
+        return trig_dist_z_adjust( lhs->pos_bub(), you->pos_bub() ) < trig_dist_z_adjust( rhs->pos_bub(),
+                you->pos_bub() );
     } );
 }
 

@@ -57,7 +57,8 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                                   bool add_teleglow, bool display_message, bool force, bool force_safe )
 {
     if( critter.pos_bub() == target ) {
-        critter.add_msg_if_player( m_warning, _( "You feel a strange inward pressure, but nothing more." ) );
+        critter.add_msg_if_player( m_warning,
+                                   _( "You feel a strange inward pressure, but nothing more." ) );
         return false;
     }
     Character *const p = critter.as_character();
@@ -161,7 +162,7 @@ bool teleport::teleport_to_point( Creature &critter, tripoint_bub_ms target, boo
                 } else if( !c_is_u && p != nullptr ) {
                     add_msg( m_bad, _( "%s flickers but remains exactly where they are." ), p->get_name() );
                 }
-                            add_msg( _( "failure: unsafe (force safe is on, !found_new_spot" ) );
+                add_msg( _( "failure: unsafe (force safe is on, !found_new_spot" ) );
                 return false;
             }
         }

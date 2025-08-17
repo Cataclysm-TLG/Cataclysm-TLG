@@ -250,7 +250,8 @@ static bool within_visual_range( monster *z, int max_range )
 static bool within_target_range( const monster *const z, const Creature *const target, int range )
 {
     return target != nullptr &&
-           ( z->is_adjacent( target, true ) || ( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) <= range ) ) &&
+           ( z->is_adjacent( target, true ) ||
+             ( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) <= range ) ) &&
            z->sees( *target );
 }
 
@@ -1228,7 +1229,8 @@ bool mattack::resurrect( monster *z )
         if( iter != sees_and_is_empty_cache.end() ) {
             return iter->second;
         }
-        sees_and_is_empty_cache[T] = here.sees( z->pos_bub().raw(), T, -1 ) && g->is_empty( tripoint_bub_ms( T ) );
+        sees_and_is_empty_cache[T] = here.sees( z->pos_bub().raw(), T, -1 ) &&
+                                     g->is_empty( tripoint_bub_ms( T ) );
         return sees_and_is_empty_cache[T];
     };
     for( item_location &location : here.get_active_items_in_radius( z->pos_bub(), range,
