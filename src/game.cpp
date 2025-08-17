@@ -12179,7 +12179,6 @@ void game::vertical_move( int movez, bool force, bool peeking )
         }
 
         const int cost = u.climbing_cost( u.pos_bub(), stairs );
-        add_msg_debug( debugmode::DF_GAME, "Climb cost %d", cost );
         const bool can_climb_here = cost > 0 ||
                                     u.has_flag( json_flag_CLIMB_NO_LADDER ) || wall_cling;
         if( !can_climb_here && !adjacent_climb ) {

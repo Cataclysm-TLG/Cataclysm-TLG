@@ -2822,7 +2822,6 @@ int map::climb_difficulty( const tripoint_bub_ms &p ) const
             // TODO: Penalize spiked parts?
             best_difficulty = std::min( best_difficulty, 7 );
         }
-
         if( best_difficulty > 5 && has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) {
             best_difficulty = 5;
         }
