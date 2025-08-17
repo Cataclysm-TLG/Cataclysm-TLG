@@ -55,6 +55,7 @@ static const efftype_id effect_snow_glare( "snow_glare" );
 static const flag_id json_flag_RAINPROOF( "RAINPROOF" );
 static const flag_id json_flag_RAIN_PROTECT( "RAIN_PROTECT" );
 static const flag_id json_flag_SUN_GLASSES( "SUN_GLASSES" );
+static const flag_id json_flag_SUN_SHADE( "SUN_SHADE" );
 
 static const itype_id itype_water( "water" );
 
@@ -101,6 +102,7 @@ void glare( const weather_type_id &w )
     if( g->is_sheltered( player_character.pos_bub() ) ||
         player_character.in_sleep_state() ||
         player_character.worn_with_flag( json_flag_SUN_GLASSES ) ||
+        player_character.worn_with_flag( json_flag_SUN_SHADE ) ||
         player_character.has_flag( json_flag_GLARE_RESIST ) ||
         player_character.is_blind() ) {
         return;

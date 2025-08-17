@@ -2577,5 +2577,10 @@
     "type": "trap_migration",
     "from_trap": "tr_ledge",
     "to_trap": "tr_null"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_sunglasses",
+    "replace": "bio_armor_eyes"
   }
 ]

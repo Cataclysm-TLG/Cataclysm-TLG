@@ -489,7 +489,7 @@
     "looks_like": "cowboy_hat",
     "color": "yellow",
     "warmth": 15,
-    "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL" ],
+    "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ],
     "armor": [
       {
         "material": [
@@ -533,7 +533,7 @@
     "material_thickness": 3,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "PADDED" ],
+    "flags": [ "PADDED", "SUN_SHADE", "OUTER", "NORMAL", "PADDED" ],
     "armor": [
       {
         "material": [
@@ -890,7 +890,7 @@
       }
     ],
     "warmth": 10,
-    "flags": [ "WATER_FRIENDLY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL" ]
+    "flags": [ "WATER_FRIENDLY", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ]
   },
   {
     "id": "helmet_galea",
@@ -1330,7 +1330,7 @@
       }
     ],
     "warmth": 20,
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "CUSHION_FALL" ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "OUTER", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -1341,7 +1341,7 @@
     "description": "A helmet designed to protect from falls and kicks involving horses.",
     "weight": "650 g",
     "volume": "1750 ml",
-    "delete": { "flags": [ "SUN_GLASSES" ] }
+    "delete": { "flags": [ "SUN_SHADE" ] }
   },
   {
     "id": "helmet_nasal",
@@ -1471,7 +1471,7 @@
     "material_thickness": 2,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "STURDY", "SUN_GLASSES", "RAINPROOF" ],
+    "flags": [ "STURDY", "SUN_SHADE", "RAINPROOF" ],
     "melee_damage": { "bash": 1 }
   },
   {

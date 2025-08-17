@@ -156,11 +156,13 @@
     "id": "bio_armor_eyes",
     "type": "bionic",
     "name": { "str": "Protective Lenses" },
-    "description": "Your eye sockets have been surgically sealed with highly protective mirrored lenses.",
+    "description": "Frames along your cheekbones and eyesockets can, at a moment's notice, deploy protective lenses which seal your eyes behind ultra-tough polymer lenses which provide protection from glare, bright flashes, physical attacks, and even environmental sources.",
     "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "mutation_conflicts": [ "COMPOUND_EYES", "EYESTALKS1", "EYESTALKS2", "EYESTALKS_RIGID" ],
     "social_modifiers": { "intimidate": 10 },
-    "passive_pseudo_items": [ "armor_bio_eyes" ]
+    "toggled_pseudo_items": [ "armor_bio_eyes" ],
+    "act_cost": "5 J",
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ]
   },
   {
     "id": "bio_armor_head",
@@ -404,7 +406,7 @@
     "id": "bio_blindfold",
     "type": "bionic",
     "name": { "str": "Optical Dampers" },
-    "description": "A pair of lenses surgically installed over your eyes that can be tinted to block out incoming light.",
+    "description": "An additional layer of tinting for the protective lenses CBM which is opaque enough to effectively blind the user when active.",
     "included": true,
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "BLIND" ]
@@ -736,7 +738,7 @@
     "id": "bio_eye_optic",
     "type": "bionic",
     "name": { "str": "Telescopic Eyes" },
-    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They function as integrated binoculars, letting you see much farther than before, and any vision problems you might have had are now gone.",
+    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They cure most vision problems and allow the user to treat any ranged weapon as if it had a scope.",
     "occupied_bodyparts": [ [ "eyes", 2 ] ],
     "flags": [ "ENHANCED_VISION" ],
     "cant_remove_reason": "The CBM has completely replaced %1$s eyes now.  Removing them would leave %2$s blind.",
@@ -1420,16 +1422,6 @@
     "occupied_bodyparts": [ [ "arm_r", 2 ], [ "arm_l", 2 ] ],
     "fake_weapon": "bio_scalpel",
     "flags": [ "BIONIC_TOGGLED", "BIONIC_WEAPON" ]
-  },
-  {
-    "id": "bio_sunglasses",
-    "type": "bionic",
-    "name": { "str": "Anti-Glare Compensators" },
-    "description": "Your eyes have quick-reacting transition lenses surgically installed over them.  They negate glare penalties, partially protect you from bright flashes, and protect your eyes when welding.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
-    "included_bionics": [ "bio_blindfold" ],
-    "flags": [ "BIONIC_NPC_USABLE", "GLARE_RESIST" ],
-    "passive_pseudo_items": [ "fake_goggles" ]
   },
   {
     "id": "bio_synlungs",

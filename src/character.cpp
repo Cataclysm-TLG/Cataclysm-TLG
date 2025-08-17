@@ -1089,7 +1089,7 @@ double Character::fastest_aiming_method_speed( const item &gun, double recoil,
     // aim with iron sight
     if( !gun.has_flag( flag_DISABLE_SIGHTS ) ) {
         const int iron_sight_FOV = 480;
-        int effective_iron_sight_dispersion = effective_dispersion( gun.type->gun->sight_dispersion );
+        int effective_iron_sight_dispersion = effective_dispersion( gun.type->gun->sight_dispersion, has_flag( json_flag_ENHANCED_VISION ) );
         double iron_sight_speed = modified_sight_speed( 0, effective_iron_sight_dispersion, recoil );
         if( effective_iron_sight_dispersion < recoil && iron_sight_speed > aim_speed_modifier &&
             recoil <= iron_sight_FOV ) {
@@ -1119,7 +1119,7 @@ double Character::fastest_aiming_method_speed( const item &gun, double recoil,
         if( e->has_flag( flag_LASER_SIGHT ) && !laser_light_available ) {
             continue;
         }
-        bool zoom = e->has_flag( flag_ZOOM );
+        bool zoom = e->has_flag( flag_ZOOM ) || has_flag( json_flag_ENHANCED_VISION );
         // zoom==true will access parallaxes[1], zoom==false will access parallaxes[0].
         int parallax = parallaxes[static_cast<int>( zoom )].has_value() ? parallaxes[static_cast<int>
                        ( zoom )].value() : get_character_parallax( zoom );
@@ -1151,7 +1151,7 @@ int Character::most_accurate_aiming_method_limit( const item &gun ) const
     int limit = point_shooting_limit( gun );
 
     if( !gun.has_flag( flag_DISABLE_SIGHTS ) ) {
-        int iron_sight_limit = effective_dispersion( gun.type->gun->sight_dispersion );
+        int iron_sight_limit = effective_dispersion( gun.type->gun->sight_dispersion, has_flag( json_flag_ENHANCED_VISION ) );
         if( limit > iron_sight_limit ) {
             limit = iron_sight_limit;
         }
@@ -1160,7 +1160,7 @@ int Character::most_accurate_aiming_method_limit( const item &gun ) const
     for( const item *e : gun.gunmods() ) {
         const islot_gunmod &mod = *e->type->gunmod;
         if( mod.field_of_view > 0 && mod.sight_dispersion >= 0 ) {
-            limit = std::min( limit, effective_dispersion( mod.sight_dispersion, e->has_flag( flag_ZOOM ) ) );
+            limit = std::min( limit, effective_dispersion( mod.sight_dispersion, ( has_flag( json_flag_ENHANCED_VISION ) || e->has_flag( flag_ZOOM ) ) ) );
         }
     }
 

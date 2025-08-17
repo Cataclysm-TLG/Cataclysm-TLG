@@ -330,6 +330,7 @@ const flag_id flag_STR_DRAW( "STR_DRAW" );
 const flag_id flag_STR_RELOAD( "STR_RELOAD" );
 const flag_id flag_STURDY( "STURDY" );
 const flag_id flag_SUN_GLASSES( "SUN_GLASSES" );
+const flag_id flag_SUN_SHADE( "SUN_SHADE" );
 const flag_id flag_SUPER_FANCY( "SUPER_FANCY" );
 const flag_id flag_SWIM_GOGGLES( "SWIM_GOGGLES" );
 const flag_id flag_TACK( "TACK" );
