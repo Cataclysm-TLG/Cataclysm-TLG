@@ -17,7 +17,7 @@
     "weight": "1600 g",
     "volume": "1250 ml",
     "to_hit": -1,
-    "range": 8,
+    "range": 7,
     "ranged_damage": { "damage_type": "bash", "amount": 1 },
     "dispersion": 350,
     "durability": 7,

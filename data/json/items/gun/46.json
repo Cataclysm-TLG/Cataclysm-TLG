@@ -16,7 +16,7 @@
     "material": [ "steel", "plastic" ],
     "symbol": "(",
     "color": "dark_gray",
-    "range": 2,
+    "range": 7,
     "ammo": [ "46" ],
     "dispersion": 260,
     "durability": 8,

@@ -204,7 +204,7 @@
     "symbol": "(",
     "material": [ "plastic", "steel", "zinc" ],
     "color": "dark_gray",
-    "range": 6,
+    "range": 9,
     "ammo": [ "380" ],
     "dispersion": 180,
     "durability": 8,

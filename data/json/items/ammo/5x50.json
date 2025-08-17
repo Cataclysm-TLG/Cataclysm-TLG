@@ -14,7 +14,7 @@
     "stack_size": 45,
     "ammo_type": "5x50",
     "casing": "5x50_hull",
-    "range": 60,
+    "range": 32,
     "damage": { "damage_type": "bullet", "amount": 26, "armor_penetration": 14 },
     "dispersion": 10,
     "recoil": 80,
@@ -33,7 +33,7 @@
     "price": "16 USD 88 cent",
     "price_postapoc": "24 USD",
     "loudness": 90,
-    "relative": { "range": -10, "damage": { "damage_type": "bullet", "amount": 27, "armor_penetration": 28 }, "dispersion": 9 },
+    "relative": { "range": -5, "damage": { "damage_type": "bullet", "amount": 27, "armor_penetration": 28 }, "dispersion": 9 },
     "proportional": { "recoil": 1.1 }
   },
   {
