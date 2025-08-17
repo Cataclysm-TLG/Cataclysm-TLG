@@ -2674,13 +2674,6 @@ input_context get_default_mode_input_context()
     ctxt.register_action( "open_color" );
     ctxt.register_action( "open_world_mods" );
     ctxt.register_action( "debug" );
-    ctxt.register_action( "debug_scent" );
-    ctxt.register_action( "debug_scent_type" );
-    ctxt.register_action( "debug_temp" );
-    ctxt.register_action( "debug_visibility" );
-    ctxt.register_action( "debug_lighting" );
-    ctxt.register_action( "debug_radiation" );
-    ctxt.register_action( "debug_hour_timer" );
     ctxt.register_action( "debug_mode" );
     ctxt.register_action( "zoom_out" );
     ctxt.register_action( "zoom_in" );

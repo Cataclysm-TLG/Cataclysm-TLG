@@ -2849,51 +2849,6 @@
   },
   {
     "type": "keybinding",
-    "id": "DEBUG_DIALOGUE_DL_CONDITIONAL",
-    "name": "Toggle debug dialogue dynamic_line conditionals",
-    "bindings": [
-      { "input_method": "keyboard_char", "key": "CTRL+C" },
-      { "input_method": "keyboard_code", "mod": [ "ctrl" ], "key": "c" }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DEBUG_DIALOGUE_RESP_CONDITIONAL",
-    "name": "Toggle debug dialogue response conditionals",
-    "bindings": [
-      { "input_method": "keyboard_char", "key": "CTRL+D" },
-      { "input_method": "keyboard_code", "mod": [ "ctrl" ], "key": "d" }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DEBUG_DIALOGUE_DL_EFFECT",
-    "name": "Toggle debug dialogue dynamic_line effects",
-    "bindings": [
-      { "input_method": "keyboard_char", "key": "CTRL+T" },
-      { "input_method": "keyboard_code", "mod": [ "ctrl" ], "key": "t" }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DEBUG_DIALOGUE_RESP_EFFECT",
-    "name": "Toggle debug dialogue response effects",
-    "bindings": [
-      { "input_method": "keyboard_char", "key": "CTRL+Y" },
-      { "input_method": "keyboard_code", "mod": [ "ctrl" ], "key": "y" }
-    ]
-  },
-  {
-    "type": "keybinding",
-    "id": "DEBUG_DIALOGUE_SHOW_ALL_RESPONSE",
-    "name": "Toggle debug dialogue show hidden responses ",
-    "bindings": [
-      { "input_method": "keyboard_char", "key": "CTRL+R" },
-      { "input_method": "keyboard_code", "mod": [ "ctrl" ], "key": "r" }
-    ]
-  },
-  {
-    "type": "keybinding",
     "id": "RESET",
     "category": "CALENDAR_UI",
     "name": "Reset time point to initial value",
@@ -2902,69 +2857,6 @@
       { "input_method": "keyboard_char", "key": "R" },
       { "input_method": "keyboard_code", "key": "r", "mod": [ "shift" ] }
     ]
-  },
-  {
-    "type": "keybinding",
-    "name": "View scent map",
-    "category": "DEFAULTMODE",
-    "id": "debug_scent"
-  },
-  {
-    "type": "keybinding",
-    "name": "View scent type",
-    "category": "DEFAULTMODE",
-    "id": "debug_scent_type"
-  },
-  {
-    "type": "keybinding",
-    "name": "View temperature map (using Map font)",
-    "category": "DEFAULTMODE",
-    "id": "debug_temp"
-  },
-  {
-    "type": "keybinding",
-    "name": "View visibility map",
-    "category": "DEFAULTMODE",
-    "id": "debug_visibility"
-  },
-  {
-    "type": "keybinding",
-    "name": "View lighting map",
-    "category": "DEFAULTMODE",
-    "id": "debug_lighting"
-  },
-  {
-    "type": "keybinding",
-    "name": "View radiation map",
-    "category": "DEFAULTMODE",
-    "id": "debug_radiation"
-  },
-  {
-    "type": "keybinding",
-    "name": "Toggle hour timer",
-    "category": "DEFAULTMODE",
-    "id": "debug_hour_timer"
-  },
-  {
-    "type": "keybinding",
-    "category": "DEBUG_SPELLS",
-    "id": "TOGGLE_ALL_SPELL",
-    "name": "Toggle all spells",
-    "bindings": [ { "input_method": "keyboard_any", "key": "t" } ]
-  },
-  {
-    "type": "keybinding",
-    "category": "DEBUG_SPELLS",
-    "id": "UNLEARN_SPELL",
-    "name": "Unlearn a spell",
-    "bindings": [ { "input_method": "keyboard_any", "key": "u" } ]
-  },
-  {
-    "type": "keybinding",
-    "category": "DEBUG_SPELLS",
-    "id": "SHOW_ONLY_LEARNED",
-    "name": "Show only learned",
-    "bindings": [ { "input_method": "keyboard_any", "key": "a" } ]
   },
   {
     "type": "keybinding",
