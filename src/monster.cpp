@@ -3849,7 +3849,7 @@ float monster::speed_rating() const
 void monster::on_dodge( Creature *, float, float )
 {
     if( one_in( 2 ) ) {
-    add_effect( effect_monster_dodged, 1_seconds, false );
+        add_effect( effect_monster_dodged, 1_seconds, false );
     }
 }
 

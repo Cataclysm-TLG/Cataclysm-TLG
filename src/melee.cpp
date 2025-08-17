@@ -878,8 +878,8 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
                                                   std::max( 1, get_arm_str() ) + stab_skill - ( weight_factor ) ) / 2.f );
                     if( x_in_y( chance_to_recover, 100 ) ) {
                         move_cost *= 1.15;
-                        add_msg_if_player( m_warning, 
-                            _( "You quickly pry your weapon free." ) );
+                        add_msg_if_player( m_warning,
+                                           _( "You quickly pry your weapon free." ) );
                     } else {
                         move_cost *= 1.3;
                         if( reach_attacking ) {

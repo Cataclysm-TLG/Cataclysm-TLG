@@ -61,7 +61,8 @@ static void serialize_liquid_source( player_activity &act, const vehicle &veh, c
     act.str_values.push_back( serialize( liquid ) );
 }
 
-static void serialize_liquid_source( player_activity &act, const tripoint_bub_ms &pos, const item &liquid )
+static void serialize_liquid_source( player_activity &act, const tripoint_bub_ms &pos,
+                                     const item &liquid )
 {
     const map_stack stack = get_map().i_at( pos );
     // Need to store the *index* of the item on the ground, but it may be a virtual item from

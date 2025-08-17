@@ -4804,7 +4804,7 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
             } else {
                 if( store_in_lore && target->is_avatar() ) {
                     sid = SNIPPET.random_id_from_category( snip_id.evaluate( d ) ).c_str();
-                        get_avatar().add_snippet( snippet_id( sid ) );
+                    get_avatar().add_snippet( snippet_id( sid ) );
                     translated_message = SNIPPET.expand( SNIPPET.get_snippet_by_id( snippet_id( sid ) ).value_or(
                             translation() ).translated() );
                 } else {
