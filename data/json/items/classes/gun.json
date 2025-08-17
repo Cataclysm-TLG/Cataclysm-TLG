@@ -73,6 +73,7 @@
     "flags": [ "ALLOWS_BODY_BLOCK" ],
     "skill": "pistol",
     "sight_dispersion": 60,
+    "range": 3,
     "//": "default handling for anything without a stock",
     "handling": 10,
     "valid_mod_locations": [
@@ -110,6 +111,7 @@
     "abstract": "pistol_backup",
     "copy-from": "pistol_base",
     "type": "GUN",
+    "range": 2,
     "name": { "str": "backup pistol" },
     "//": "diminutive backup pistols that lack underbarrel rails, sight dovetails and decent places to affix stocks.",
     "valid_mod_locations": [
@@ -150,6 +152,7 @@
     "type": "GUN",
     "name": { "str": "cap & ball revolver" },
     "reload": 150,
+    "range": 2,
     "extend": { "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
     "//": "Slower reloads, no unloading.  Base, unskilled person should take 1.5 seconds per chamber.  No underbarrel mods, that's where the ram goes.",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "grip", 1 ], [ "stock", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
@@ -161,6 +164,7 @@
     "type": "GUN",
     "name": { "str": "base rifle" },
     "flags": [ "FIRE_TWOHAND" ],
+    "range": 7,
     "skill": "rifle",
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -203,6 +207,7 @@
     "copy-from": "rifle_base",
     "type": "GUN",
     "name": { "str": "vintage semi rifle" },
+    "range": 6,
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -222,6 +227,7 @@
     "abstract": "rifle_semi",
     "copy-from": "rifle_base",
     "type": "GUN",
+    "range": 8,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "name": { "str": "semi-automatic rifle" }
   },
@@ -239,6 +245,7 @@
     "name": { "str": "base shotgun" },
     "flags": [ "FIRE_TWOHAND" ],
     "skill": "shotgun",
+    "range": 4,
     "ammo": [ "shot" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
@@ -288,6 +295,7 @@
     "abstract": "smg_base",
     "copy-from": "gun_base",
     "type": "GUN",
+    "range": 5,
     "name": { "str": "base SMG" },
     "flags": [ "ALLOWS_BODY_BLOCK" ],
     "skill": "smg"

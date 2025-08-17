@@ -18,7 +18,7 @@
     "stack_size": 50,
     "ammo_type": "9mm",
     "casing": "9mm_casing",
-    "range": 14,
+    "range": 15,
     "damage": { "damage_type": "bullet", "amount": 26 },
     "dispersion": 60,
     "recoil": 500,
