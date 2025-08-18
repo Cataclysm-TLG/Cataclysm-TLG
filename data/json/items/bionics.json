@@ -96,7 +96,7 @@
     "type": "BIONIC_ITEM",
     "name": { "str": "Protective Lenses CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A bionic package that seals the user's eye sockets with highly-protective mirrored lenses and re-routes their tear ducts to their mouth.  When the user cries, they must spit out or swallow their tears.",
+    "description": "A bionic package that seals the user's eye sockets with highly-protective mirrored lenses which can retract into their frames at will.",
     "price": "5500 USD",
     "price_postapoc": "35 USD",
     "weight": "500 g",
@@ -934,18 +934,6 @@
     "price": "2200 USD",
     "price_postapoc": "15 USD",
     "weight": "20 g",
-    "difficulty": 4
-  },
-  {
-    "id": "bio_sunglasses",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
-    "name": { "str": "Anti-Glare Compensators CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A set of quick-reacting transition lenses that are installed over the user's eyes.  They negate glare penalties, partially protect from bright flashes, and protect the eyes when welding.",
-    "price": "4500 USD",
-    "price_postapoc": "5 USD",
-    "weight": "1 g",
     "difficulty": 4
   },
   {

@@ -1,70 +1,5 @@
 [
   {
-    "id": "helmet_nomad",
-    "type": "ARMOR",
-    "name": { "str": "nomad cowl" },
-    "description": "A cowl with protection for the eyes from rain and sun, designed for long travels.  The design includes some clever shaping that allows it to offer a lot of coverage without interfering too much with vision and breathing.",
-    "weight": "470 g",
-    "volume": "2500 ml",
-    "price_postapoc": "2 USD 50 cent",
-    "to_hit": -3,
-    "material": [ "denim", "leather", "plastic" ],
-    "symbol": "[",
-    "looks_like": "balaclava",
-    "color": "white",
-    "armor": [
-      {
-        "material": [
-          { "type": "denim", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_crown", "head_nape", "head_ear_l", "head_ear_r", "head_forehead" ],
-        "coverage": 100,
-        "encumbrance": 20
-      },
-      {
-        "material": [ { "type": "denim", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_throat" ],
-        "coverage": 100,
-        "encumbrance": 0
-      },
-      {
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "eyes" ],
-        "coverage": 100,
-        "encumbrance": 5
-      },
-      {
-        "material": [ { "type": "denim", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "mouth" ],
-        "coverage": 100,
-        "encumbrance": 5
-      }
-    ],
-    "warmth": 15,
-    "material_thickness": 3,
-    "environmental_protection": 4,
-    "flags": [ "VARSIZE", "WATERPROOF", "SUN_GLASSES", "PADDED" ]
-  },
-  {
-    "id": "xl_helmet_nomad",
-    "type": "ARMOR",
-    "copy-from": "helmet_nomad",
-    "name": { "str": "nomad cowl" },
-    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "xs_helmet_nomad",
-    "type": "ARMOR",
-    "copy-from": "helmet_nomad",
-    "name": { "str": "nomad cowl" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
     "id": "hood_survivor",
     "type": "ARMOR",
     "category": "armor",
@@ -82,7 +17,7 @@
     "warmth": 15,
     "environmental_protection": 3,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "BELTED" ],
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
         "material": [
@@ -114,7 +49,7 @@
     "warmth": 20,
     "environmental_protection": 3,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "BELTED" ],
+    "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
         "material": [
@@ -146,7 +81,7 @@
     "color": "light_gray",
     "warmth": 75,
     "environmental_protection": 5,
-    "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "BELTED" ],
+    "flags": [ "VARSIZE", "WATERPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
         "material": [
@@ -245,45 +180,6 @@
     "type": "ARMOR",
     "copy-from": "hood_wsurvivor_nofur",
     "name": { "str": "faux fur winter survivor hood" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
-    "id": "helmet_scavenger",
-    "type": "ARMOR",
-    "name": { "str": "scavenger cowl" },
-    "description": "A sturdy protective cowl extending down to the neck, fitted with a respirator and eye protection.  For dangerous scavenging ventures.",
-    "weight": "695 g",
-    "volume": "2500 ml",
-    "price": "550 USD",
-    "price_postapoc": "35 USD",
-    "to_hit": -3,
-    "material": [ "kevlar_layered", "cotton" ],
-    "symbol": "[",
-    "looks_like": "mask_gas",
-    "color": "white",
-    "armor": [
-      { "covers": [ "head" ], "coverage": 100, "encumbrance_modifiers": [ "NONE" ] },
-      { "covers": [ "eyes", "mouth" ], "coverage": 100, "encumbrance": 5 }
-    ],
-    "warmth": 40,
-    "material_thickness": 3,
-    "environmental_protection": 7,
-    "flags": [ "VARSIZE", "STURDY", "WATERPROOF", "SUN_GLASSES" ]
-  },
-  {
-    "id": "xl_helmet_scavenger",
-    "type": "ARMOR",
-    "copy-from": "helmet_scavenger",
-    "name": { "str": "scavenger cowl" },
-    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "helmet_scavenger_xs",
-    "type": "ARMOR",
-    "copy-from": "helmet_scavenger",
-    "name": { "str": "scavenger cowl" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   }

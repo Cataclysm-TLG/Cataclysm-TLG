@@ -18,7 +18,7 @@
     ],
     "warmth": 10,
     "material_thickness": 1,
-    "flags": [ "BELTED" ]
+    "flags": [ "BELTED", "SUN_SHADE" ]
   },
   {
     "id": "hood_rain",
@@ -35,13 +35,13 @@
     "color": "yellow",
     "warmth": 8,
     "material_thickness": 0.3,
-    "flags": [ "RAINPROOF", "BELTED" ],
+    "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 100, "covers": [ "head" ] } ]
   },
   {
     "id": "nomex_hood",
     "type": "ARMOR",
-    "name": { "str": "flame-resistant hood" },
+    "name": { "str": "flame-resistant cowl" },
     "description": "A snug fitting garment that protects your head and neck, made from lightweight Nomex fire-resistant fabric.  Tough yet breathable, it is light and comfortable to wear under clothing.",
     "weight": "210 g",
     "volume": "500 ml",
@@ -73,7 +73,7 @@
     "color": "light_gray",
     "warmth": 10,
     "material_thickness": 0.1,
-    "flags": [ "RAINPROOF", "BELTED" ],
+    "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
     "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
   },
   {

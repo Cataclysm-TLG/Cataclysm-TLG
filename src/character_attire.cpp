@@ -81,6 +81,7 @@ static const sub_bodypart_str_id sub_body_part_foot_sole_r( "foot_sole_r" );
 
 static const trait_id trait_ANTENNAE( "ANTENNAE" );
 static const trait_id trait_ANTLERS( "ANTLERS" );
+static const trait_id trait_HORNS_CURLED( "HORNS_CURLED" );
 static const trait_id trait_HORNS_POINTED( "HORNS_POINTED" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
 static const trait_id trait_VEGAN( "VEGAN" );
@@ -173,7 +174,8 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
         }
         if( it.covers( body_part_head ) && !it.has_flag( flag_SEMITANGIBLE ) &&
             it.is_rigid() &&
-            ( has_trait( trait_HORNS_POINTED ) || has_trait( trait_ANTENNAE ) ||
+            ( has_trait( trait_HORNS_POINTED ) || has_trait( trait_HORNS_CURLED ) ||
+              has_trait( trait_ANTENNAE ) ||
               has_trait( trait_ANTLERS ) ) ) {
             return ret_val<void>::make_failure( _( "Cannot wear a helmet over %s." ),
                                                 ( has_trait( trait_HORNS_POINTED ) ? _( "horns" ) :

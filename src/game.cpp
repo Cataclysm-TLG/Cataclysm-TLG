@@ -7743,6 +7743,7 @@ look_around_result game::look_around(
     ctxt.register_action( "debug_lighting" );
     ctxt.register_action( "debug_radiation" );
     ctxt.register_action( "debug_hour_timer" );
+    ctxt.register_action( "PAUSE" );
     ctxt.register_action( "CONFIRM" );
     ctxt.register_action( "QUIT" );
     ctxt.register_action( "HELP_KEYBINDINGS" );

@@ -609,6 +609,12 @@
   },
   {
     "type": "effect_type",
+    "id": "SUN_GLASSES",
+    "limb_score_mods": [ { "limb_score": "night_vis", "modifier": 0.65 } ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+  {
+    "type": "effect_type",
     "id": "immobilization",
     "name": [ "Immobilized" ],
     "desc": [ "You can't move!" ],

@@ -1019,7 +1019,7 @@ void suffer::from_sunburn( Character &you, bool severe )
         if( bp == bodypart_id( "eyes" ) ) {
             // Sunglasses can keep the sun off the eyes.
             if( you.has_flag( json_flag_GLARE_RESIST )
-                || you.worn_with_flag( flag_SUN_GLASSES )
+                || you.worn_with_flag( flag_SUN_GLASSES ) || you.worn_with_flag( flag_SUN_SHADE )
                 || you.worn_with_flag( flag_BLIND ) ) {
                 continue;
             }

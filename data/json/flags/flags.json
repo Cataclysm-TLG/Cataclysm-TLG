@@ -875,8 +875,14 @@
   {
     "id": "SUN_GLASSES",
     "type": "json_flag",
+    "//": "Prevents glare when in sunlight.",
+    "info": "This clothing keeps the <info>glare</info> out of your eyes, but will hinder your night vision."
+  },
+  {
+    "id": "SUN_SHADE",
+    "type": "json_flag",
     "//": "Prevents glaring when in sunlight.",
-    "info": "This clothing keeps the <info>glare</info> out of your eyes."
+    "info": "This clothing keeps the <info>glare</info> out of your eyes without especially hindering your night vision."
   },
   {
     "id": "SUPER_FANCY",
@@ -1033,6 +1039,11 @@
     "id": "BIONIC_WEAPON",
     "type": "json_flag",
     "//": "This bionic is a weapon bionic and activating it will create (or destroy) bionic's fake_item in user's hands.  Prevents all other activation effects."
+  },
+  {
+    "id": "PARENT_REQUIRED",
+    "type": "json_flag",
+    "//": "Prevents the flagged bionic from being activated unless its parent bionic is active as well."
   },
   {
     "id": "BIONIC_ARMOR_INTERFACE",

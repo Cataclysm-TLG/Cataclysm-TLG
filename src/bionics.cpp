@@ -741,6 +741,18 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
         return false;
     }
 
+    if( bio.is_included() && bio.info().has_flag( flag_PARENT_REQUIRED ) ) {
+        auto parent = find_bionic_by_uid( bio.get_parent_uid() );
+        if( parent && !( *parent )->powered ) {
+            popup( _( "The %1s can't be activated without %2s." ), bio.info().name,
+                   find_bionic_by_uid( bio.get_parent_uid() ).value()->info().name );
+            return false;
+        } else if( !parent ) {
+            debugmsg( _( "Error: Parent bionic for %s not found." ), bio.info().name );
+            return false;
+        }
+    }
+
     // eff_only means only do the effect without messing with stats or displaying messages
     if( !eff_only ) {
         if( bio.powered ) {
@@ -802,6 +814,24 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
     avatar &player_character = get_avatar();
     map &here = get_map();
     // On activation effects go here
+
+    if( !bio.info().toggled_pseudo_items.empty() ) {
+        for( const itype_id &pseudo : bio.info().toggled_pseudo_items ) {
+            item tmparmor( pseudo );
+            if( tmparmor.has_flag( flag_INTEGRATED ) ) {
+                if( can_wear( tmparmor ).success() ) {
+                    wear_item( tmparmor, false );
+                } else {
+                    add_msg_if_player( m_info,
+                                       _( "Your %s is unable to engage due to other equipment being in the way." ), bio.info().id.str() );
+                    refund_power();
+                    bio.powered = false;
+                    return false;
+                }
+            }
+        }
+    }
+
     if( bio.info().has_flag( json_flag_BIONIC_GUN ) ) {
         if( !bio.has_weapon() ) {
             debugmsg( "tried to activate gun bionic \"%s\" without fake_weapon",
@@ -1321,6 +1351,16 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
 
     // Deactivation effects go here
 
+    for( bionic &child : *my_bionics ) {
+        if( std::find( bio.info().included_bionics.begin(),
+                       bio.info().included_bionics.end(),
+                       child.id ) != bio.info().included_bionics.end()
+            && child.powered
+            && child.info().has_flag( flag_PARENT_REQUIRED ) ) {
+            deactivate_bionic( child );
+        }
+    }
+
     for( const effect_on_condition_id &eoc : bio.id->deactivated_eocs ) {
         dialogue d( get_talker_for( *this ), nullptr );
         if( eoc->type == eoc_type::ACTIVATION ) {
@@ -1353,6 +1393,17 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
         } else if( !get_value( "remote_controlling" ).empty() &&
                    !has_active_item( itype_radiocontrol ) ) {
             set_value( "remote_controlling", "" );
+        }
+    }
+    // Handle toggled items outside the else if tree.
+    if( !bio.info().toggled_pseudo_items.empty() ) {
+        for( const itype_id &pseudo : bio.info().toggled_pseudo_items ) {
+            item tmparmor( pseudo );
+            if( tmparmor.has_flag( flag_INTEGRATED ) ) {
+                remove_worn_items_with( [&]( item & armor ) {
+                    return armor.typeId() == tmparmor.typeId();
+                } );
+            }
         }
     }
 

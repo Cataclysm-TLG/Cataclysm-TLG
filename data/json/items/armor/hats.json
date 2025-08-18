@@ -15,7 +15,7 @@
     "warmth": 8,
     "material_thickness": 0.3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -167,7 +167,7 @@
     "warmth": 7,
     "material_thickness": 0.3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -246,7 +246,7 @@
     "warmth": 5,
     "material_thickness": 0.3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -272,7 +272,7 @@
     "warmth": 5,
     "material_thickness": 0.3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -298,7 +298,7 @@
     "warmth": 5,
     "material_thickness": 0.3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -325,7 +325,7 @@
     "warmth": 5,
     "material_thickness": 0.1,
     "environmental_protection": 1,
-    "flags": [ "SUN_GLASSES" ],
+    "flags": [ "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -533,7 +533,7 @@
     "material_thickness": 4,
     "techniques": [ "WBLOCK_1" ],
     "environmental_protection": 1,
-    "flags": [ "RAINPROOF", "PADDED", "SUN_GLASSES" ],
+    "flags": [ "RAINPROOF", "PADDED", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -707,7 +707,7 @@
     "warmth": 15,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "OUTER", "SUN_GLASSES" ],
+    "flags": [ "OUTER", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "IMBALANCED" ],
@@ -821,7 +821,7 @@
     "warmth": 5,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -847,7 +847,7 @@
     "warmth": 6,
     "material_thickness": 0.1,
     "environmental_protection": 1,
-    "flags": [ "SUN_GLASSES" ],
+    "flags": [ "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -899,7 +899,7 @@
     "warmth": 2,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -951,7 +951,7 @@
     "warmth": 8,
     "material_thickness": 0.2,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUPER_FANCY", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUPER_FANCY", "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -977,7 +977,7 @@
     "warmth": 7,
     "material_thickness": 0.6,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "RAINPROOF", "WATER_FRIENDLY", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "RAINPROOF", "WATER_FRIENDLY", "SUN_SHADE" ],
     "armor": [
       { "encumbrance_modifiers": [ "NONE" ], "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] },
       {
@@ -1031,7 +1031,7 @@
     "warmth": 5,
     "material_thickness": 0.1,
     "environmental_protection": 1,
-    "flags": [ "SUN_GLASSES" ],
+    "flags": [ "SUN_SHADE" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],

@@ -392,7 +392,7 @@
     "material_thickness": 2,
     "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
-    "flags": [ "SUN_GLASSES", "FLASH_PROTECTION" ],
+    "flags": [ "SUN_SHADE", "FLASH_PROTECTION" ],
     "armor": [
       {
         "encumbrance": 25,
@@ -629,7 +629,7 @@
     "volume": "1750 ml",
     "warmth": 7,
     "environmental_protection": 1,
-    "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 0.5,
     "armor": [ { "encumbrance": 10, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
@@ -2631,7 +2631,7 @@
     "volume": "1250 ml",
     "warmth": 5,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 1,
     "armor": [ { "encumbrance": 10, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
@@ -3615,7 +3615,7 @@
     "warmth": 7,
     "environmental_protection": 1,
     "armor": [ { "covers": [ "head" ], "coverage": 80, "encumbrance": 10 } ],
-    "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 0.5
   }
 ]
