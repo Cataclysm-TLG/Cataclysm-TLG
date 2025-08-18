@@ -1697,7 +1697,7 @@ static void do_aim( Character &you, const item &relevant, const double min_recoi
         you.recoil = std::max( min_recoil, you.recoil - aim_amount );
 
         // Train archery proficiencies if we are doing archery
-        if( relevant.gun_skill() == skill_archery && !relevant.has_flag( json_flag_CROSSBOW ) ) {
+        if( relevant.gun_skill() == skill_archery && !relevant.has_flag( json_flag_CROSSBOW ) && !relevant.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) ) {
             practice_archery_proficiency( you, relevant );
 
             // Only drain stamina on initial draw
