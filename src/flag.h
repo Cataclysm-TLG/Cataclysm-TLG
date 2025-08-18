@@ -333,6 +333,7 @@ extern const flag_id flag_STR_DRAW;
 extern const flag_id flag_STR_RELOAD;
 extern const flag_id flag_STURDY;
 extern const flag_id flag_SUN_GLASSES;
+extern const flag_id flag_PARENT_REQUIRED;
 extern const flag_id flag_SUN_SHADE;
 extern const flag_id flag_SUPER_FANCY;
 extern const flag_id flag_SWIM_GOGGLES;

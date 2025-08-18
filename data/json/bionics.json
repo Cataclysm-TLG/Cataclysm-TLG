@@ -156,12 +156,13 @@
     "id": "bio_armor_eyes",
     "type": "bionic",
     "name": { "str": "Protective Lenses" },
-    "description": "Frames along your cheekbones and eyesockets can, at a moment's notice, deploy protective lenses which seal your eyes behind ultra-tough polymer lenses which provide protection from glare, bright flashes, physical attacks, and even environmental sources.",
+    "description": "Frames along your cheekbones and eyesockets can, at a moment's notice, deploy protective lenses which seal your eyes behind polarized ballistic glass, providing protection from glare, bright flashes, physical attacks, and even environmental sources.",
     "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "mutation_conflicts": [ "COMPOUND_EYES", "EYESTALKS1", "EYESTALKS2", "EYESTALKS_RIGID" ],
-    "social_modifiers": { "intimidate": 10 },
+    "social_modifiers": { "intimidate": 5 },
     "toggled_pseudo_items": [ "armor_bio_eyes" ],
-    "act_cost": "5 J",
+    "auto_deactivates": [ "bio_blindfold" ],
+    "included_bionics": [ "bio_blindfold" ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ]
   },
   {
@@ -405,10 +406,11 @@
   {
     "id": "bio_blindfold",
     "type": "bionic",
-    "name": { "str": "Optical Dampers" },
-    "description": "An additional layer of tinting for the protective lenses CBM which is opaque enough to effectively blind the user when active.",
+    "name": { "str": "Blackout Lenses" },
+    "description": "An additional layer of tinting for the protective lenses CBM which can make the lenses dark enough to effectively blind the user when active.",
     "included": true,
-    "flags": [ "BIONIC_TOGGLED" ],
+    "toggled_pseudo_items": [ "armor_bio_eyes" ],
+    "flags": [ "BIONIC_TOGGLED", "PARENT_REQUIRED" ],
     "active_flags": [ "BLIND" ]
   },
   {
@@ -1265,10 +1267,10 @@
     "id": "bio_razors",
     "type": "bionic",
     "name": { "str": "Fingertip Razors" },
-    "description": "You possess razor-sharp claws underneath your fingernails which you can use in combat when you are unarmed and your fingers are not covered.",
+    "description": "You possess razor-sharp claws underneath your nails which can be deployed by flexing your fingers.  While active, they can be used in combat as long as you are unarmed and your fingers are not covered.",
     "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
-    "passive_pseudo_items": [ "integrated_fingertip_razors" ],
-    "flags": [ "BIONIC_NPC_USABLE" ],
+    "toggled_pseudo_items": [ "integrated_fingertip_razors" ],
+    "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED" ],
     "mutation_conflicts": [ "BENDY3", "ARM_TENTACLES", "ARM_TENTACLES_4", "CLAWS_TENTACLE", "NAILS", "CLAWS", "CLAWS_RETRACT" ]
   },
   {
