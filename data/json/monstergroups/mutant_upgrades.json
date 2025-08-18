@@ -9,6 +9,11 @@
     "type": "monstergroup",
     "monsters": [ { "monster": "mon_centipede_giant", "weight": 85 }, { "monster": "mon_centipede_mom", "weight": 10 }, { "group": "GROUP_EMPTY", "weight": 5 } ]
   },
+    {
+    "name": "GROUP_BULLFROG_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [ { "monster": "mon_bullfrog", "weight": 25 }, { "monster": "mon_big_bullfrog", "weight": 75 } ]
+  },
   {
     "name": "GROUP_BIG_BULLFROG_UPGRADE",
     "type": "monstergroup",

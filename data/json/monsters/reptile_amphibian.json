@@ -352,7 +352,7 @@
     "special_attacks": [ { "type": "leap", "cooldown": 32, "max_range": 4, "allow_no_target": true } ],
     "fear_triggers": [ "PLAYER_CLOSE", "FIRE", "HURT", "FRIEND_ATTACKED", "SOUND" ],
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "SWIMS", "WATER_CAMOUFLAGE", "SMALL_HIDER", "SWARMS" ],
-    "upgrades": { "half_life": 40, "into": "mon_big_bullfrog" },
+    "upgrades": { "half_life": 20, "into": "GROUP_BULLFROG_UPGRADE" },
     "reproduction": { "baby_egg": "egg_bullfrog", "baby_count": 4, "baby_timer": 20 },
     "baby_flags": [ "SPRING", "SUMMER" ]
   },
