@@ -1662,7 +1662,7 @@
     "id": "integrated_fingertip_razors",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str_sp": "Fingertip Razors" },
+    "name": { "str_sp": "fingertip razors" },
     "description": "Small steel blades peek from beneath the fingernails, like a manicure from hell.",
     "weight": "80 g",
     "volume": "100 ml",
@@ -1682,7 +1682,8 @@
       "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
-      "NATURAL_WEAPON"
+      "NATURAL_WEAPON",
+      "CONDUCTIVE"
     ],
     "techniques": [ "TEC_CLAW" ],
     "armor": [
