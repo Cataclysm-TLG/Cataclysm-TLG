@@ -239,5 +239,32 @@
   {
     "id": "EOC_Nunez_Travel",
     "type": "effect_on_condition"
+  },
+  {
+    "type": "mutation",
+    "id": "NO_CBM_INSTALLATION",
+    "name": { "str": "Oversensitive System" },
+    "description": "Renamed/re-IDed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "WAYFARER",
+    "name": { "str": "Wayfarer" },
+    "description": "Removed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "BRAWLER",
+    "name": { "str": "Brawler" },
+    "description": "Removed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
   }
 ]
