@@ -7,9 +7,13 @@
   {
     "name": "GROUP_CENTIPEDE_ADULT",
     "type": "monstergroup",
-    "monsters": [ { "monster": "mon_centipede_giant", "weight": 85 }, { "monster": "mon_centipede_mom", "weight": 10 }, { "group": "GROUP_EMPTY", "weight": 5 } ]
+    "monsters": [
+      { "monster": "mon_centipede_giant", "weight": 85 },
+      { "monster": "mon_centipede_mom", "weight": 10 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
   },
-    {
+  {
     "name": "GROUP_BULLFROG_UPGRADE",
     "type": "monstergroup",
     "monsters": [ { "monster": "mon_bullfrog", "weight": 25 }, { "monster": "mon_big_bullfrog", "weight": 75 } ]
@@ -17,12 +21,20 @@
   {
     "name": "GROUP_BIG_BULLFROG_UPGRADE",
     "type": "monstergroup",
-    "monsters": [ { "monster": "mon_big_bullfrog", "weight": 20 }, { "monster": "mon_giant_frog", "weight": 75 }, { "group": "GROUP_EMPTY", "weight": 5 } ]
+    "monsters": [
+      { "monster": "mon_big_bullfrog", "weight": 20 },
+      { "monster": "mon_giant_frog", "weight": 75 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
   },
   {
     "name": "GROUP_GIANT_FROG_UPGRADE",
     "type": "monstergroup",
-    "monsters": [ { "monster": "mon_giant_frog", "weight": 40 }, { "monster": "mon_megafrog", "weight": 55 }, { "group": "GROUP_EMPTY", "weight": 5 } ]
+    "monsters": [
+      { "monster": "mon_giant_frog", "weight": 40 },
+      { "monster": "mon_megafrog", "weight": 55 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
   },
   {
     "name": "GROUP_CENTIPEDE_GIANT",
