@@ -417,9 +417,7 @@
       },
       {
         "text": "Unlock: Expedition Missions",
-        "condition": {
-          "and": [ { "not": { "u_has_mission": "SKYISLAND_UPGRADE_bonusmissions1" } }, { "math": [ "bonusmissions == 0" ] } ]
-        },
+        "condition": { "and": [ { "not": { "u_has_mission": "SKYISLAND_UPGRADE_bonusmissions1" } }, { "math": [ "bonusmissions == 0" ] } ] },
         "effect": [ { "assign_mission": "SKYISLAND_UPGRADE_bonusmissions1" } ],
         "topic": "SKYISLAND_UPGRADES_FEATURES"
       },
