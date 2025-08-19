@@ -194,6 +194,8 @@ static const matec_id RAPID( "RAPID" );
 
 static const material_id material_wool( "wool" );
 
+static const mod_id MOD_INFORMATION_tlg( "tlg" );
+
 static const mtype_id mon_human( "mon_human" );
 static const mtype_id mon_zombie_smoker( "mon_zombie_smoker" );
 static const mtype_id mon_zombie_soldier( "mon_zombie_soldier" );
@@ -2279,7 +2281,9 @@ static void insert_separation_line( std::vector<iteminfo> &info )
 void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                        bool /* debug */ ) const
 {
-    if( parts->test( iteminfo_parts::BASE_MOD_SRC ) ) {
+    if( parts->test( iteminfo_parts::BASE_MOD_SRC ) &&
+    !type->src.empty() &&
+    type->src.front().second != MOD_INFORMATION_tlg ) {
         info.emplace_back( "BASE", string_format( _( "Origin: %s" ), enumerate_as_string( type->src,
         []( const std::pair<itype_id, mod_id> &source ) {
             return string_format( "'%s'", source.second->name() );
