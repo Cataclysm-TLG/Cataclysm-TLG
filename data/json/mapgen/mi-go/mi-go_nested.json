@@ -68,7 +68,6 @@
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "mi-go_encampment1_room4",
-    "//": "Observation room with zombies",
     "object": {
       "mapgensize": [ 7, 7 ],
       "rotation": [ 0, 3 ],
@@ -82,18 +81,6 @@
         "......."
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "place_monster": [
-        {
-          "monster": [ "mon_zombie_brute", "mon_zombie_screecher", "mon_zombie_hollow", "mon_zombie", "mon_zombie_fungus" ],
-          "x": 1,
-          "y": 2
-        },
-        {
-          "monster": [ "mon_skeleton", "mon_zombear", "mon_zombie_child", "mon_zombie", "mon_zombie_runner" ],
-          "x": 4,
-          "y": 2
-        }
-      ],
       "palettes": [ "mi-go_palette" ]
     }
   },
@@ -366,8 +353,7 @@
         "|||||;"
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "palettes": [ "mi-go_palette" ],
-      "place_monsters": [ { "monster": "GROUP_ZOMBIE_BRUTE", "x": [ 1, 3 ], "y": [ 3, 4 ], "repeat": [ 1, 2 ] } ]
+      "palettes": [ "mi-go_palette" ]
     }
   },
   {
@@ -428,8 +414,7 @@
         "|||||v"
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
-      "palettes": [ "mi-go_palette" ],
-      "place_monsters": [ { "monster": "GROUP_ZOMBIE_BRUTE", "x": [ 1, 3 ], "y": [ 3, 4 ], "repeat": [ 1, 2 ] } ]
+      "palettes": [ "mi-go_palette" ]
     }
   },
   {
