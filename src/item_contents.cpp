@@ -101,10 +101,6 @@ void pocket_favorite_callback::refresh( uilist *menu )
                         c_light_gray, string_format( _( "Currently modifying %s" ),
                                 colorize( whitelist ? _( "whitelist" ) : _( "blacklist" ), c_light_blue ) ) );
 
-        selected_pocket->general_info( info, pocket_num, true );
-        starty += fold_and_print( menu->window, point( startx, starty ), width,
-                                  c_light_gray, format_item_info( info, {} ) ) + 1;
-
         info.clear();
         selected_pocket->favorite_info( info );
         starty += fold_and_print( menu->window, point( startx, starty ), width,
@@ -2621,7 +2617,7 @@ void item_contents::info( std::vector<iteminfo> &info, const iteminfo_query *par
             bool found = false;
             int idx = 0;
             for( const item_pocket &found_pocket : found_pockets ) {
-                if( found_pocket == pocket ) {
+                if( found_pocket == pocket && found_pocket.empty() ) {
                     found = true;
                     pocket_num[idx]++;
                     break;
@@ -2653,7 +2649,6 @@ void item_contents::info( std::vector<iteminfo> &info, const iteminfo_query *par
         units::volume capacity = total_container_capacity();
         units::mass weight = total_container_weight_capacity();
         if( ( found_pockets.size() > 1 || pocket_num[0] > 1 ) && capacity > 0_ml && weight > 0_gram ) {
-            insert_separation_line( info );
             info.emplace_back( "CONTAINER", _( "<bold>Total capacity</bold>:" ) );
             info.push_back( vol_to_info( "CONTAINER", _( "Volume: " ), capacity, 2, false ) );
             info.push_back( weight_to_info( "CONTAINER", _( "  Weight: " ), weight,
@@ -2691,11 +2686,12 @@ void item_contents::info( std::vector<iteminfo> &info, const iteminfo_query *par
             }
             pocket_number += pocket_num[idx];
             idx++;
-            pocket.general_info( info, idx, false );
+            if( describe_contents ) {
+                pocket.contents_info( info, idx, false );
+            } else {
+                pocket.general_info( info, idx, false );
+            }
         }
-    }
-    if( describe_contents ) {
-        info.insert( info.end(), contents_info.begin(), contents_info.end() );
     }
 }
 

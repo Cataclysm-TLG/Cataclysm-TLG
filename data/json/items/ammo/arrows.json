@@ -163,7 +163,7 @@
     "price_postapoc": "40 cent",
     "damage": { "damage_type": "stab", "amount": 15, "armor_penetration": 3 },
     "range": 4,
-    "recovery_chance": 65,
+    "recovery_chance": 70,
     "melee_damage": { "stab": 5 }
   },
   {

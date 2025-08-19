@@ -56,9 +56,10 @@
         "                        "
       ],
       "palettes": [ "parametrized_linoleum_palette" ],
-      "nested": { "!": { "chunks": [ [ "sugar_house_parking_lot", 100 ] ] },
-                  "¶": { "chunks": [ [ "sugar_house_rat", 33 ], [ "sugar_house_normal", 34 ], [ "sugar_house_roach", 33 ] ] }
-                }
+      "nested": {
+        "!": { "chunks": [ [ "sugar_house_parking_lot", 100 ] ] },
+        "¶": { "chunks": [ [ "sugar_house_rat", 33 ], [ "sugar_house_normal", 34 ], [ "sugar_house_roach", 33 ] ] }
+      }
     }
   },
   {

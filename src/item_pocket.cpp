@@ -943,13 +943,6 @@ void item_pocket::set_item_defaults()
     }
 }
 
-static void insert_separation_line( std::vector<iteminfo> &info )
-{
-    if( info.empty() || info.back().sName != "--" ) {
-        info.emplace_back( "DESCRIPTION", "--" );
-    }
-}
-
 void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
                                 bool disp_pocket_number ) const
 {
@@ -966,7 +959,6 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
         info.emplace_back( "DESCRIPTION", string_format( "<info>%s</info>",
                            get_name().translated() ) );
     }
-
     // NOLINTNEXTLINE(cata-translate-string-literal)
     const std::string cont_type_str = string_format( "{%d}CONTAINER", pocket_number );
     // NOLINTNEXTLINE(cata-translate-string-literal)
@@ -1041,7 +1033,7 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
                            data->max_item_volume.value().value() );
     }
 
-    info.emplace_back( base_type_str, _( "Base moves to remove item: " ),
+    info.emplace_back( base_type_str, _( "Base moves to retrieve item: " ),
                        "<num>", iteminfo::lower_is_better, data->moves );
 
     if( !data->material_restriction.empty() ) {
@@ -1156,7 +1148,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
     }
     const std::string space = "  ";
 
-    insert_separation_line( info );
     if( disp_pocket_number ) {
         if( sealable() ) {
             info.emplace_back( "DESCRIPTION", string_format( _( "<bold>%s pocket %d</bold>" ),
@@ -1170,6 +1161,195 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
                                pocket_number ) );
         }
     }
+
+    if( !get_description().empty() ) {
+        info.emplace_back( "DESCRIPTION", string_format( "<info>%s</info>",
+                           get_description().translated() ) );
+    } else if( name_as_description ) {
+        // fallback to the original items name as a description
+        info.emplace_back( "DESCRIPTION", string_format( "<info>%s</info>",
+                           get_name().translated() ) );
+    }
+    // NOLINTNEXTLINE(cata-translate-string-literal)
+    const std::string cont_type_str = string_format( "{%d}CONTAINER", pocket_number );
+    // NOLINTNEXTLINE(cata-translate-string-literal)
+    const std::string base_type_str = string_format( "{%d}BASE", pocket_number );
+
+    // Show volume/weight for normal containers, or ammo capacity if ammo_restriction is defined if its an ablative pocket don't display any info
+    if( is_ablative() ) {
+        // its an ablative pocket volume and weight maxes don't matter
+        info.emplace_back( "DESCRIPTION",
+                           _( "Holds a <info>single armored plate</info>." ) );
+    } else if( data->ammo_restriction.empty() ) {
+        info.push_back( vol_to_info( cont_type_str, _( "Volume: " ),
+                                     volume_capacity(), 2, false ) );
+        info.push_back( weight_to_info( cont_type_str, _( "  Weight: " ),
+                                        weight_capacity(), 2, false ) );
+        info.back().bNewLine = true;
+    } else {
+        std::vector<std::pair<std::string, int>> fmts;
+        for( const ammotype &at : ammo_types() ) {
+            int capacity = ammo_capacity( at );
+            fmts.emplace_back( string_format( n_gettext( "<num> round of %s",
+                                              "<num> rounds of %s", capacity ),
+                                              at->name() ),
+                               capacity );
+        }
+        std::sort( fmts.begin(), fmts.end(), localized_compare );
+        for( const std::pair<std::string, int> &fmt : fmts ) {
+            // NOLINTNEXTLINE(cata-translate-string-literal)
+            info.emplace_back( string_format( "{%d}MAGAZINE", pocket_number ), _( "Holds: " ), fmt.first,
+                               iteminfo::no_flags,
+                               fmt.second );
+        }
+    }
+
+    if( data->max_item_length != 0_mm && !is_ablative() ) {
+        info.back().bNewLine = true;
+        // if the item has no minimum length then keep it in the same units as max
+        if( data->min_item_length == 0_mm ) {
+            info.emplace_back( base_type_str, _( "Item length: " ),
+                               string_format( "<num> %s", length_units( data->max_item_length ) ),
+                               iteminfo::no_newline,
+                               0 );
+        } else {
+            info.emplace_back( base_type_str, _( "Item length: " ),
+                               string_format( "<num> %s", length_units( data->min_item_length ) ),
+                               iteminfo::no_newline,
+                               convert_length( data->min_item_length ), data->min_item_length.value() );
+        }
+        info.emplace_back( base_type_str, _( " to " ),
+                           string_format( "<num> %s", length_units( data->max_item_length ) ),
+                           iteminfo::no_flags,
+                           convert_length( data->max_item_length ), data->max_item_length.value() );
+    } else if( data->min_item_length > 0_mm && !is_ablative() ) {
+        info.back().bNewLine = true;
+        info.emplace_back( base_type_str, _( "Minimum item length: " ),
+                           string_format( "<num> %s", length_units( data->min_item_length ) ),
+                           iteminfo::no_flags,
+                           convert_length( data->min_item_length ), data->min_item_length.value() );
+    }
+
+    if( data->min_item_volume > 0_ml ) {
+        std::string fmt = string_format( "<num> %s", volume_units_abbr() );
+        info.emplace_back( base_type_str, _( "Minimum item volume: " ), fmt,
+                           iteminfo::lower_is_better | iteminfo::is_three_decimal,
+                           convert_volume( data->min_item_volume.value(), nullptr ), data->min_item_volume.value() );
+    }
+
+    if( data->max_item_volume ) {
+        std::string fmt = string_format( "<num> %s", volume_units_abbr() );
+        info.emplace_back( base_type_str, _( "Maximum item volume: " ), fmt,
+                           iteminfo::is_three_decimal, convert_volume( data->max_item_volume.value().value(), nullptr ),
+                           data->max_item_volume.value().value() );
+    }
+
+    info.emplace_back( base_type_str, _( "Base moves to retrieve item: " ),
+                       "<num>", iteminfo::lower_is_better, data->moves );
+
+    if( !data->material_restriction.empty() ) {
+        std::string materials;
+        bool first = true;
+        for( material_id mat : data->material_restriction ) {
+            if( first ) {
+                materials += mat.obj().name();
+                first = false;
+            } else {
+                materials += ", " + mat.obj().name();
+            }
+        }
+        info.emplace_back( "DESCRIPTION", string_format( _( "Allowed materials: %s" ), materials ) );
+    }
+
+    if( data->rigid ) {
+        info.emplace_back( "DESCRIPTION", _( "This pocket is <info>rigid</info>." ) );
+    }
+
+    if( data->holster ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This is a <info>holster</info>, it only holds <info>one item at a time</info>." ) );
+    }
+
+    if( data->extra_encumbrance > 0 ) {
+        info.emplace_back( "DESCRIPTION",
+                           string_format( _( "Causes %d <bad>additional encumbrance</bad> while in use." ),
+                                          data->extra_encumbrance ) ) ;
+    }
+
+    if( data->ripoff > 0 ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "Items may <bad>fall out</bad> if grabbed." ) );
+    }
+
+    if( data->activity_noise.chance > 0 ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "Items will <bad>make noise</bad> when you move." ) );
+    }
+
+    if( data->watertight ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket can <info>contain a liquid</info>." ) );
+    }
+    if( data->airtight ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket can <info>contain a gas</info>." ) );
+    }
+    if( will_spill() ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket will <bad>spill</bad> if placed into another item or worn." ) );
+    }
+    if( data->fire_protection ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket <info>protects its contents from fire</info>." ) );
+    }
+    if( spoil_multiplier() != 1.0f ) {
+        if( spoil_multiplier() != 0.0f ) {
+            info.emplace_back( "DESCRIPTION",
+                               string_format( _( "Contained items spoil at <neutral>%.0f%%</neutral> their original rate." ),
+                                              spoil_multiplier() * 100 ) );
+        } else {
+            info.emplace_back( "DESCRIPTION", _( "Contained items <info>won't spoil</info>." ) );
+        }
+    }
+    if( data->weight_multiplier != 1.0f ) {
+        info.emplace_back( "DESCRIPTION",
+                           string_format( _( "Items in this pocket weigh <neutral>%.0f%%</neutral> their original weight." ),
+                                          data->weight_multiplier * 100 ) );
+    }
+    if( data->volume_multiplier != 1.0f ) {
+        info.emplace_back( "DESCRIPTION",
+                           string_format(
+                               _( "This pocket expands at <neutral>%.0f%%</neutral> of the rate of volume of items inside." ),
+                               data->volume_multiplier * 100 ) );
+    }
+
+    // Display flags items need to be stored in this pocket
+    if( !data->get_flag_restrictions().empty() ) {
+        info.emplace_back( "DESCRIPTION", _( "<bold>Restrictions</bold>:" ) );
+        bool first = true;
+        for( const flag_id &e : data->get_flag_restrictions() ) {
+            const json_flag &f = *e;
+            if( !f.restriction().empty() ) {
+                if( first ) {
+                    info.emplace_back( "DESCRIPTION", string_format( "* %s", f.restriction() ) );
+                    first = false;
+                } else {
+                    info.emplace_back( "DESCRIPTION", string_format( _( "* <bold>or</bold> %s" ), f.restriction() ) );
+                }
+            }
+        }
+    }
+    if( !no_rigid.empty() ) {
+        std::vector<sub_bodypart_id> no_rigid_vec( no_rigid.begin(), no_rigid.end() );
+        std::set<translation, localized_comparator> to_print = body_part_type::consolidate( no_rigid_vec );
+        std::string bps = enumerate_as_string( to_print.begin(),
+        to_print.end(), []( const translation & t ) {
+            return t.translated();
+        } );
+        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Can't put hard armor on: %s</bold>:" ),
+                           bps ) );
+    }
+
     if( contents.empty() ) {
         info.emplace_back( "DESCRIPTION", _( "This pocket is empty." ) );
         return;
@@ -1178,8 +1358,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
         info.emplace_back( "DESCRIPTION", _( "This pocket is <info>sealed</info>." ) );
     }
 
-    // NOLINTNEXTLINE(cata-translate-string-literal)
-    const std::string cont_type_str = string_format( "{%d}CONTAINER", pocket_number );
     // NOLINTNEXTLINE(cata-translate-string-literal)
     const std::string arm_type_str = string_format( "{%d}ARMOR", pocket_number );
 

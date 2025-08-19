@@ -194,6 +194,8 @@ static const matec_id RAPID( "RAPID" );
 
 static const material_id material_wool( "wool" );
 
+static const mod_id MOD_INFORMATION_tlg( "tlg" );
+
 static const mtype_id mon_human( "mon_human" );
 static const mtype_id mon_zombie_smoker( "mon_zombie_smoker" );
 static const mtype_id mon_zombie_soldier( "mon_zombie_soldier" );
@@ -2279,7 +2281,9 @@ static void insert_separation_line( std::vector<iteminfo> &info )
 void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                        bool /* debug */ ) const
 {
-    if( parts->test( iteminfo_parts::BASE_MOD_SRC ) ) {
+    if( parts->test( iteminfo_parts::BASE_MOD_SRC ) &&
+    !type->src.empty() &&
+    type->src.front().second != MOD_INFORMATION_tlg ) {
         info.emplace_back( "BASE", string_format( _( "Origin: %s" ), enumerate_as_string( type->src,
         []( const std::pair<itype_id, mod_id> &source ) {
             return string_format( "'%s'", source.second->name() );
@@ -2908,7 +2912,7 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
             const int medium_dispersion = static_cast<int>( ammo.dispersion_considering_length( medium ) );
             const int large_dispersion = static_cast<int>( ammo.dispersion_considering_length( large ) );
             if( small_damage != medium_damage || medium_damage != large_damage ||
-                small_dispersion != medium_dispersion || medium_damage != large_dispersion ) {
+                small_dispersion != medium_dispersion || medium_dispersion != large_dispersion ) {
                 info.emplace_back( "AMMO", _( "Damage and dispersion by barrel length: " ) );
                 const std::string small_string = string_format( " <info>%d %s</info>: ",
                                                  convert_length( small ),
@@ -2957,17 +2961,19 @@ void item::ammo_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
         parts->test( iteminfo_parts::AMMO_FX_CANTMISSFIRE ) ) {
         fx.emplace_back( _( "This ammo <good>never misfires</good>." ) );
     }
-    if( parts->test( iteminfo_parts::AMMO_FX_RECOVER ) ) {
-        if( ammo.recovery_chance <= 75 ) {
-            fx.emplace_back( _( "Stands a <bad>very low</bad> chance of remaining intact once fired." ) );
-        } else if( ammo.recovery_chance <= 80 ) {
+    if( parts->test( iteminfo_parts::AMMO_FX_RECOVER ) && ammo.recovery_chance > 0 ) {
+        if( ammo.recovery_chance <= 40 ) {
             fx.emplace_back( _( "Stands a <bad>low</bad> chance of remaining intact once fired." ) );
-        } else if( ammo.recovery_chance <= 90 ) {
-            fx.emplace_back( _( "Stands a <bad>somewhat low</bad> chance of remaining intact once fired." ) );
-        } else if( ammo.recovery_chance <= 95 ) {
+        } else if( ammo.recovery_chance <= 60 ) {
+            fx.emplace_back( _( "Stands an <info>even</info> chance of remaining intact once fired." ) );
+        } else if( ammo.recovery_chance <= 75 ) {
+            fx.emplace_back( _( "Stands a <info>moderate</info> chance of remaining intact once fired." ) );
+        }   else if( ammo.recovery_chance <= 90 ) {
             fx.emplace_back( _( "Stands a <good>decent</good> chance of remaining intact once fired." ) );
-        } else {
+        } else if( ammo.recovery_chance <= 95 ) {
             fx.emplace_back( _( "Stands a <good>good</good> chance of remaining intact once fired." ) );
+        } else {
+            fx.emplace_back( _( "Stands a <good>very good</good> chance of remaining intact once fired." ) );
         }
     }
     if( ( ammo.ammo_effects.count( ammo_effect_INCENDIARY ) ||
@@ -5489,7 +5495,7 @@ std::vector<std::pair<const item *, int>> get_item_duplicate_counts(
 }
 
 
-void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
+void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int /*batch*/,
                           bool /*debug*/ ) const
 {
     if( ( toolmods().empty() && gunmods().empty() && contents.empty() ) ||
@@ -5513,40 +5519,6 @@ void item::contents_info( std::vector<iteminfo> &info, const iteminfo_query *par
         insert_separation_line( info );
         info.emplace_back( "DESCRIPTION", mod_str );
         info.emplace_back( "DESCRIPTION", mod->type->description.translated() );
-    }
-
-    const std::list<const item *> all_contents = contents.all_items_top();
-    const std::vector<std::pair<item const *, int>> counted_contents = get_item_duplicate_counts(
-                all_contents );
-    bool contents_header = false;
-    for( const std::pair<const item *, int> &content_w_count : counted_contents ) {
-        const item *contents_item = content_w_count.first;
-        int count = content_w_count.second;
-        if( !contents_header ) {
-            insert_separation_line( info );
-            info.emplace_back( "DESCRIPTION", _( "<bold>Contents of this item</bold>:" ) );
-            contents_header = true;
-        } else {
-            // Separate items with a blank line
-            info.emplace_back( "DESCRIPTION", space );
-        }
-
-        const translation &description = contents_item->type->description;
-
-        if( contents_item->made_of_from_type( phase_id::LIQUID ) ) {
-            units::volume contents_volume = contents_item->volume() * batch;
-            info.emplace_back( "DESCRIPTION",
-                               colorize( contents_item->display_name(), contents_item->color_in_inventory() ) );
-            info.emplace_back( vol_to_info( "CONTAINER", description + space, contents_volume ) );
-        } else {
-            std::string name;
-            if( count > 1 ) {
-                name += std::to_string( count ) + " ";
-            }
-            name += colorize( contents_item->display_name( count ), contents_item->color_in_inventory() );
-            info.emplace_back( "DESCRIPTION", name );
-            info.emplace_back( "DESCRIPTION", description.translated() );
-        }
     }
 }
 
@@ -5817,31 +5789,6 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         }
     }
 
-    // does the item fit in any holsters?
-    std::vector<const itype *> holsters = Item_factory::find( [this]( const itype & e ) {
-        if( !e.can_use( "holster" ) ) {
-            return false;
-        }
-        const holster_actor *ptr = dynamic_cast<const holster_actor *>
-                                   ( e.get_use( "holster" )->get_actor_ptr() );
-        const item holster_item( &e );
-        return ptr->can_holster( holster_item, *this ) && !item_is_blacklisted( holster_item.typeId() );
-    } );
-
-    if( !holsters.empty() && parts->test( iteminfo_parts::DESCRIPTION_HOLSTERS ) ) {
-        insert_separation_line( info );
-        std::vector<std::string> holsters_str;
-        holsters_str.reserve( holsters.size() );
-        for( const itype *e : holsters ) {
-            holsters_str.emplace_back( player_character.is_wearing( e->get_id() )
-                                       ? string_format( "<good>%s</good>", e->nname( 1 ) )
-                                       : e->nname( 1 ) );
-        }
-        info.emplace_back( "DESCRIPTION", _( "<bold>Can be stored in</bold>: " ) +
-                           enumerate_lcsorted_with_limit( holsters_str, 30 ) );
-        info.back().sName += ".";
-    }
-
     if( parts->test( iteminfo_parts::DESCRIPTION_ACTIVATABLE_TRANSFORMATION ) ) {
         insert_separation_line( info );
         for( const auto &u : type->use_methods ) {
@@ -5916,16 +5863,16 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
         if( item_recipes.empty() ) {
             info.emplace_back( "DESCRIPTION", _( "You know of nothing you could craft with it." ) );
         } else {
-            std::vector<std::string> crafts;
-            crafts.reserve( item_recipes.size() );
+            bool can_make = false;
             for( const recipe *r : item_recipes ) {
-                const bool can_make = can_craft_recipe( r, crafting_inv );
-                // Endarken recipes that can't be crafted with the survivor's inventory
-                const std::string name = r->result_name( /* decorated = */ true );
-                crafts.emplace_back( can_make ? name : string_format( "<dark>%s</dark>", name ) );
+                can_make = can_craft_recipe( r, crafting_inv );
             }
-            const std::string recipes = enumerate_lcsorted_with_limit( crafts, 15 );
-            info.emplace_back( " DESCRIPTION", string_format( _( "You could use it to craft: %s" ), recipes ) );
+            if( can_make ) {
+                info.emplace_back( " DESCRIPTION", string_format( _( "You could use it to craft something." ) ) );
+            } else {
+                info.emplace_back( " DESCRIPTION",
+                                   string_format( _( "You could use it for crafting, but you don't have everything you need." ) ) );
+            }
         }
     }
 
@@ -8789,13 +8736,7 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
                     resist += tmp_add;
                 }
             }
-            // Acid (being both enviro and physical, 'cause it's a liquid) cares about breathability rather than environmental protection.
-            // Gas/etc attacks still care about enviro.
             if( !dmg_type->physical ) {
-                // const int env = get_env_resist( resist_value );
-                // if( env < 10 ) {
-                //     resist *= env / 10.0f;
-                // }
                 // Average by portion of materials
                 resist /= total;
             }
@@ -9012,7 +8953,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
     }
     // Scale chance of article taking damage based on the number of parts it covers.
     // Large articles are able to take more punishment before being destroyed.
-    // TODO: Remove redundant BPs (ie webbed hands) from consideration here
+    // TODO: Make this not recount analagous parts.
     int num_parts_covered = get_covered_body_parts().count();
     // Acid spreads out to cover the surface of the item, ignoring this mitigation.
     if( !one_in( num_parts_covered ) && !du.type->env ) {
@@ -9058,14 +8999,15 @@ item::armor_status item::damage_armor_transforms( damage_unit &du, double enchan
     // We want armor's own resistance to this type, not the resistance it grants
     const float armors_own_resist = resist( du.type, true );
 
-    // To avoid dumb chip damage plates shouldn't ever transform if they take less than
-    // 20% of their protection in damage
-    if( du.amount / armors_own_resist < 0.2f ) {
+    // To avoid dumb chip damage, plates shouldn't ever transform if they take less than
+    // 30% of their protection in damage. ESAPI are drop-tested before use, so fists etc.
+    // should not frequently break them.
+    if( du.amount / armors_own_resist < 0.3f ) {
         return armor_status::UNDAMAGED;
     }
 
-    // plates are rated to survive 3 shots at the caliber they protect
-    // linearly scale off the scale value to find the chance it breaks
+    // {lates are rated to survive 3 shots at the caliber they protect.
+    // :inearly scale off the scale value to find the chance it breaks.
     float break_chance = 33.3f * ( du.amount / armors_own_resist ) * enchant_multiplier;
 
     float roll_to_break = rng_float( 0.0, 100.0 );

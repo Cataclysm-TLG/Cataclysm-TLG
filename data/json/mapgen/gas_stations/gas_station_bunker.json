@@ -174,7 +174,7 @@
         { "group": "cleaning_bulk", "chance": 60, "repeat": 2, "x": 10, "y": 35 },
         { "group": "office", "chance": 80, "repeat": 2, "x": [ 6, 7 ], "y": 36 },
         { "group": "office", "chance": 80, "repeat": 4, "x": 8, "y": 36 },
-        { "group": "pizza_display", "chance": 60, "repeat": [0, 2 ], "x": 7, "y": [ 25, 26 ] },
+        { "group": "pizza_display", "chance": 60, "repeat": [ 0, 2 ], "x": 7, "y": [ 25, 26 ] },
         { "group": "vending_food", "chance": 60, "x": 14, "y": 36 },
         { "group": "vending_food", "chance": 60, "x": 15, "y": 36 },
         { "group": "vending_food", "chance": 60, "x": 14, "y": 35 },
