@@ -262,24 +262,26 @@
         { "item": "log", "x": [ 7, 10 ], "y": [ 16, 17 ], "chance": 100, "repeat": [ 12, 26 ] },
         { "group": "cash_register_random", "x": 13, "y": 2 }
       ],
-        "nested": {
-      "|": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      "#": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      ".": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      " ": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      "+": { "chunks": [ [ "destroyed_door_nested", 50 ], [ "null", 50 ] ] },
-      "v": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "n": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "r": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "h": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "s": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "R": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] }
-    },
-      "place_monster": [ { "group": "GROUP_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 3, 8 ] },
-    { "group": "GROUP_PLAGUE_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 1, 2 ] } ]
+      "nested": {
+        "|": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        "#": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        ".": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        " ": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        "+": { "chunks": [ [ "destroyed_door_nested", 50 ], [ "null", 50 ] ] },
+        "v": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "n": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "r": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "h": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "s": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "R": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] }
+      },
+      "place_monster": [
+        { "group": "GROUP_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 3, 8 ] },
+        { "group": "GROUP_PLAGUE_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 1, 2 ] }
+      ]
     }
   },
-    {
+  {
     "type": "mapgen",
     "method": "json",
     "nested_mapgen_id": "sugar_house_rat",
@@ -385,21 +387,23 @@
         { "item": "log", "x": [ 7, 10 ], "y": [ 16, 17 ], "chance": 100, "repeat": [ 12, 26 ] },
         { "group": "cash_register_random", "x": 13, "y": 2 }
       ],
-        "nested": {
-      "|": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      "#": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      ".": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      " ": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
-      "+": { "chunks": [ [ "destroyed_door_nested", 50 ], [ "null", 50 ] ] },
-      "v": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "n": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "r": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "h": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "s": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
-      "R": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] }
-    },
-      "place_monster": [ { "group": "GROUP_RAT", "x": [ 0, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 3, 8 ] },
-    { "group": "GROUP_RATKIN_EVOLVED", "x": [ 0, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 1, 2 ] } ]
+      "nested": {
+        "|": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        "#": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        ".": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        " ": { "chunks": [ [ "bile_field", 1 ], [ "null", 99 ] ] },
+        "+": { "chunks": [ [ "destroyed_door_nested", 50 ], [ "null", 50 ] ] },
+        "v": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "n": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "r": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "h": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "s": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
+        "R": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] }
+      },
+      "place_monster": [
+        { "group": "GROUP_RAT", "x": [ 0, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 3, 8 ] },
+        { "group": "GROUP_RATKIN_EVOLVED", "x": [ 0, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 1, 2 ] }
+      ]
     }
   }
 ]
