@@ -961,7 +961,6 @@
     "starting_trait": false,
     "enchantments": [ { "values": [ { "value": "VOMIT_MUL", "multiply": 0.5 } ] } ],
     "//": "Create an effect on condition that reduces nausea quickly whenever it occurs by one intensity per vomit?",
-    "types": [ "CONSTITUTION" ],
     "category": [ "BATRACHIAN" ],
     "threshreq": [ "THRESH_BATRACHIAN" ]
   },
@@ -1347,6 +1346,7 @@
     "description": "Your wounds heal a little slower than most.  Your HP whilst asleep, as well as your broken limbs, heal at 75% of the regular rate.",
     "starting_trait": true,
     "types": [ "HEALING" ],
+    "category": [ "LIZARD" ],
     "enchantments": [ { "values": [ { "value": "MENDING_MODIFIER", "multiply": -0.25 }, { "value": "REGEN_HP", "multiply": -0.25 } ] } ]
   },
   {
@@ -2176,9 +2176,9 @@
     "id": "MESOPIC",
     "name": { "str": "Mesopic" },
     "points": -1,
-    "description": "You find it difficult to see very far in bright light.  On its own, this doesn't necessarily make you any better in the dark.",
+    "description": "You find it difficult to see very far in bright light.  On its own, this doesn't make you any better at seeing in the dark.",
     "cancels": [ "MYOPIC" ],
-    "category": [ "CHIROPTERAN", "TROGLOBITE", "URSINE" ],
+    "category": [ "CHIROPTERAN", "TROGLOBITE", "CATTLE" ],
     "flags": [ "MYOPIC_IN_LIGHT" ]
   },
   {
@@ -2252,7 +2252,7 @@
     "name": { "str": "Reptilian IR" },
     "points": 5,
     "description": "Your optic nerves and brain have mutated to catch up with your eyes, allowing you to see in the infrared spectrum.",
-    "enchantments": [ "THERMAL_VISION_GOOD_PASSIVE" ],
+    "enchantments": [ "THERMAL_VISION_REPTILIAN_IR" ],
     "types": [ "VISION" ],
     "prereqs": [ "LIZ_EYE" ],
     "category": [ "LIZARD" ]
@@ -2301,15 +2301,17 @@
     "type": "mutation",
     "id": "REGEN_LIZ",
     "name": { "str": "Reptilian Healing" },
-    "points": 5,
+    "points": 4,
     "purifiable": false,
-    "description": "Your broken limbs mend themselves without significant difficulty in addition to your already-quick healing.  You do not require splints for broken limbs.",
+    "description": "Your rate of healing speeds up dramatically so long as your body is kept at or above room temperature, allowing even broken limbs to recover in record time.",
     "cancels": [ "ROT1", "ROT2", "ROT3" ],
-    "prereqs": [ "FASTHEALER" ],
+    "prereqs": [ "SLOWHEALER" ],
+    "prereqs2": [ "COLDBLOOD2", "COLDBLOOD3", "COLDBLOOD4" ],
     "threshreq": [ "THRESH_LIZARD" ],
     "category": [ "LIZARD" ],
     "enchantments": [
       {
+        "condition": "u_body_temp > 290",
         "values": [
           { "value": "MENDING_MODIFIER", "multiply": 19 },
           { "value": "REGEN_HP", "multiply": 0.5 },
@@ -2365,7 +2367,7 @@
     "visibility": 1,
     "ugliness": 2,
     "description": "You have a set of clear lenses which lower over your eyes while underwater, allowing you to see as though you were wearing goggles.  Slightly decreases wet penalties.",
-    "category": [ "LIZARD", "FISH" ],
+    "category": [ "URSINE" ],
     "flags": [ "EYE_MEMBRANE" ],
     "wet_protection": [ { "part": "eyes", "neutral": 1 } ]
   },
@@ -2376,16 +2378,17 @@
     "points": 1,
     "visibility": 8,
     "ugliness": 4,
-    "description": "Your eyes bulge noticeably out of your face, and you are able to move them much more freely than before.  You can see movement and close objects clearly, but you have trouble picking up distant details in the light.  Instead of eyelids they are covered by a translucent, protective membrane that blocks irritants and water.  It allows you to sleep with your eyes open!  Activate to cause the approach of hostile creatures to wake you up.",
+    "description": "Your huge, bulging eyes are great at tracking movement even underwater, and you have a transparent third eyelid that allows you to sleep with your eyes open.",
     "prereqs": [ "EYEBULGE" ],
+    "prereqs2": [ "MESOPIC", "NIGHTVISION" ],
     "category": [ "BATRACHIAN" ],
-    "flags": [ "EYE_MEMBRANE", "SEESLEEP", "MYOPIC_IN_LIGHT" ],
-    "types": [ "EYES" ],
-    "cancels": [ "MEMBRANE", "MYOPIC", "MESOPIC" ],
+    "flags": [ "EYE_MEMBRANE", "SEESLEEP" ],
+    "types": [ "EYES", "VISION" ],
+    "cancels": [ "MEMBRANE", "MYOPIC", "MESOPIC", "HYPEROPIC" ],
+    "enchantments": [ "ench_eyes_frog" ],
     "threshreq": [ "THRESH_BATRACHIAN" ],
-    "wet_protection": [ { "part": "eyes", "neutral": 1 } ],
-    "armor": [ { "parts": "eyes", "cut": 3, "bash": 1 } ],
-    "active": true
+    "wet_protection": [ { "part": "eyes_frog", "neutral": 1 } ],
+    "armor": [ { "parts": "eyes_frog", "cut": 3, "bash": 1 } ]
   },
   {
     "type": "mutation",
@@ -4411,6 +4414,17 @@
     "active": true,
     "cost": 0
   },
+    {
+    "type": "mutation",
+    "id": "EATPOISON_WEAK",
+    "name": { "str": "Intestinal Fortitude" },
+    "points": 2,
+    "description": "While it is by no means pleasant, your body has adapted to handle the toxic contaminants in mutant meat a little better.  You can eat a bit more of the stuff before suffering ill effects.",
+    "types": [ "CONSTITUTION" ],
+    "prereqs": [ "CARNIVORE" ],
+    "vitamins_absorb_multi": [ [ "all", [ [ "mutant_toxin", 0.75 ] ] ] ],
+    "category": [ "SPIDER", "FELINE", "BEAST", "LIZARD" ]
+  },
   {
     "type": "mutation",
     "id": "EATPOISON",
@@ -4427,6 +4441,7 @@
       "THRESH_CHIMERA",
       "THRESH_RAPTOR",
       "THRESH_RAT",
+      "THRESH_SPIDER",
       "THRESH_MOUSE",
       "THRESH_BATRACHIAN",
       "THRESH_CRUSTACEAN"
@@ -5154,7 +5169,7 @@
     "social_modifiers": { "intimidate": 4 },
     "purifiable": false,
     "types": [ "PREDATION" ],
-    "prereqs": [ "CARNIVORE" ],
+    "prereqs": [ "CARNIVORE_FAKE" ],
     "prereqs2": [ "PRED3" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
@@ -6317,7 +6332,6 @@
     "ugliness": 4,
     "types": [ "EYES" ],
     "description": "Your eyes bulge out several inches from your skull.  This does not affect your vision in any way.",
-    "leads_to": [ "MEMBRANE" ],
     "changes_to": [ "COMPOUND_EYES", "EYESTALKS1", "FROG_EYES" ],
     "category": [ "BATRACHIAN", "INSECT", "GASTROPOD", "FISH", "CRUSTACEAN" ]
   },
@@ -7344,7 +7358,7 @@
     "description": "Your body's ability to digest fruits, vegetables, grains and nuts is severely hampered.  You've largely lost your taste for everything but meat, but your nutritional needs have largely adjusted to suit your new lifestyle.",
     "types": [ "DIET" ],
     "cancels": [ "VEGAN" ],
-    "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST", "LUPINE" ],
+    "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ],
     "vitamin_rates": [ [ "vitC", 900 ] ]
   },
   {
@@ -8459,12 +8473,11 @@
     "points": 2,
     "visibility": 3,
     "ugliness": 4,
-    "description": "Like a true fish, your eyes lack eyelids, and are instead covered by a translucent, protective membrane that blocks irritants and water, and provides minor armor.  It also allows you to sleep with your eyes open!  Activate to cause the approach of hostile creatures to wake you up.",
-    "category": [ "FISH" ],
-    "threshreq": [ "THRESH_FISH" ],
-    "armor": [ { "parts": "eyes", "cut": 3, "bash": 1 } ],
-    "flags": [ "EYE_MEMBRANE", "SEESLEEP" ],
-    "active": true
+    "description": "Your eyes lack lids and are instead protected by a translucent scale that shuts out irritants.  This will make it much easier to see underwater, and to spot danger approaching even while you rest.",
+    "category": [ "FISH", "LIZARD" ],
+    "threshreq": [ "THRESH_FISH", "THRESH_LIZARD" ],
+    "integrated_armor": [ "integrated_lidless_eyes" ],
+    "flags": [ "EYE_MEMBRANE", "SEESLEEP" ]
   },
   {
     "type": "mutation",
@@ -9343,8 +9356,8 @@
     "name": { "str": "Imitation Carnivore" },
     "points": 0,
     "description": "Fake mutation to allow post-threshold Ursine mutants access to mutations normally gated behind Carnivore.  This is not meant to be visible in-game.",
-    "category": [ "URSINE" ],
-    "threshreq": [ "THRESH_URSINE" ],
+    "category": [ "URSINE", "LUPINE" ],
+    "threshreq": [ "THRESH_URSINE", "THRESH_LUPINE" ],
     "player_display": false
   },
   {
