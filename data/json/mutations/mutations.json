@@ -2249,12 +2249,13 @@
   {
     "type": "mutation",
     "id": "LIZ_IR",
-    "name": { "str": "Reptilian IR" },
+    "name": { "str": "Thermal Vision" },
     "points": 5,
     "description": "Your optic nerves and brain have mutated to catch up with your eyes, allowing you to see in the infrared spectrum.",
     "enchantments": [ "THERMAL_VISION_REPTILIAN_IR" ],
     "types": [ "VISION" ],
     "prereqs": [ "LIZ_EYE" ],
+    "prereqs2": [ "CARNIVORE" ],
     "category": [ "LIZARD" ]
   },
   {
