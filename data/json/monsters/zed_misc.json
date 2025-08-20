@@ -418,7 +418,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_fiend",
     "upgrades": { "half_life": 42, "into_group": "GROUP_ZOMBIE_BRUTE" },
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
       "HEARS",
@@ -760,7 +760,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_GRAB" },
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
       "HEARS",
@@ -816,7 +816,7 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
       "HEARS",
@@ -907,7 +907,7 @@
     "grab_strength": 50,
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid" }, { "id": "smash", "throw_strength": 96 } ],
     "death_drops": "mon_zombie_hulk_death_drops",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
       "HEARS",
@@ -971,7 +971,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "upgrades": { "half_life": 42, "into": "mon_zombie_predator" },
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "path_settings": { "max_dist": 45 },
     "flags": [
       "SEES",
@@ -1475,7 +1475,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, [ "SHRIEK", 10 ] ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "upgrades": { "half_life": 26, "into": "mon_zombie_screecher" },
     "flags": [
       "SEES",
@@ -1688,7 +1688,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "mon_zombie_swimmer_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "upgrades": { "half_life": 30, "into": "mon_zombie_swimmer" },
     "categories": [ "CLASSIC" ],
     "flags": [
@@ -1738,7 +1738,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "mon_zombie_swimmer_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "upgrades": { "half_life": 42, "into": "mon_zombie_mancroc" },
     "flags": [
       "SEES",
@@ -1785,7 +1785,7 @@
     "vision_day": 15,
     "vision_night": 2,
     "harvest": "zombie_humanoid",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "mon_zombie_technician_death_drops",
@@ -1906,7 +1906,7 @@
     "harvest": "zombie_humanoid",
     "death_drops": { "subtype": "collection", "groups": [ [ "default_zombie_clothes", 100 ], [ "zombie_fursuits", 100 ] ] },
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "HEARS",
       "SMELLS",

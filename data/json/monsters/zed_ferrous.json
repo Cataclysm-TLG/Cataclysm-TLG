@@ -27,7 +27,7 @@
     "vision_day": 15,
     "vision_night": 2,
     "harvest": "zombie_humanoid",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "grab_strength": 20,
     "special_attacks": [
       [ "PULL_METAL_WEAPON", 20 ],
@@ -80,7 +80,7 @@
     "vision_day": 15,
     "vision_night": 2,
     "harvest": "zombie_humanoid",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "grab_strength": 20,
     "special_attacks": [
       [ "PULL_METAL_WEAPON", 26 ],

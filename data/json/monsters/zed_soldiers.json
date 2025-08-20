@@ -32,7 +32,7 @@
     "death_drops": "mon_zombie_soldier_death_drops",
     "upgrades": { "half_life": 42, "into_group": "GROUP_SOLDIER_UPGRADE" },
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [ "SEES", "HEARS", "WARM", "GRABS", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 12, "cut": 25, "bullet": 20, "electric": 3, "acid": 3, "heat": 3 }
   },
@@ -409,7 +409,7 @@
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 } ],
     "burn_into": "mon_zombie_scorched",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [ "SEES", "HEARS", "WARM", "GRABS", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "PUSH_MON", "FILTHY" ],
     "armor": { "bash": 12, "cut": 25, "bullet": 20, "electric": 3, "acid": 8, "heat": 3 }
   },
@@ -479,7 +479,7 @@
     "special_attacks": [ { "id": "bio_op_takedown", "cooldown": 20 } ],
     "special_when_hit": [ "ZAPBACK", 75 ],
     "death_drops": "mon_zombie_bio_op_death_drops",
-    "fungalize_into": "mon_zombie_fungus",
+    "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
       "HEARS",

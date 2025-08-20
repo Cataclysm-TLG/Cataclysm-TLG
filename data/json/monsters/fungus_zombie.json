@@ -1,6 +1,6 @@
 [
   {
-    "id": "mon_zombie_fungus",
+    "id": "mon_zombie_fungal",
     "type": "MONSTER",
     "name": { "str": "fungal zombie" },
     "description": "Once alive, then undead, now something else entirely.  Fungal tendrils sprout from its mouth, eyes, and other orifices, holding together a shambling mass of mold-covered flesh.",
@@ -110,7 +110,7 @@
     "type": "MONSTER",
     "id": "mon_skeleton_fungus",
     "name": { "str": "fungal skeletal zombie" },
-    "copy-from": "mon_zombie_fungus",
+    "copy-from": "mon_zombie_fungal",
     "looks_like": "mon_skeleton",
     "color": "white",
     "material": [ "bone" ],
