@@ -4164,7 +4164,6 @@ int Character::calc_focus_equilibrium( bool ignore_pain ) const
             eff_morale = eff_morale - perceived_pain;
         }
     }
-
     if( eff_morale < -99 ) {
         // At very low morale, focus is at it's minimum
         focus_equilibrium = 1;
@@ -7970,10 +7969,10 @@ weighted_int_list<mutation_category_id> Character::get_vitamin_weighted_categori
     return weighted_output;
 }
 
-int Character::vitamin_RDA( const vitamin_id &vitamin, int ammount ) const
+int Character::vitamin_RDA( const vitamin_id &vitamin, int amount ) const
 {
     const double multiplier = vitamin_rate( vitamin ) * 100 / 1_days;
-    return std::lround( ammount * multiplier );
+    return std::lround( amount * multiplier );
 }
 
 void Character::recalculate_bodyparts()

@@ -288,6 +288,18 @@ void Character::update_body( const time_point &from, const time_point &to )
         set_value( "sleep_health_mult", "1" );
     }
     if( calendar::once_every( 1_days ) ) {
+        if( sleep_deprivation >= SLEEP_DEPRIVATION_MINOR ) {
+            mod_daily_health( -1, -100 );
+        }
+        if( sleep_deprivation >= SLEEP_DEPRIVATION_SERIOUS ) {
+            mod_daily_health( -2, -200 );
+        }
+        if( sleep_deprivation >= SLEEP_DEPRIVATION_MAJOR ) {
+            mod_daily_health( -3, -200 );
+        }
+        if( sleep_deprivation >= SLEEP_DEPRIVATION_MASSIVE ) {
+            mod_daily_health( -4, -200 );
+        }
         reset_daily_sleep();
     }
     set_value( "was_sleeping", in_sleep_state() ? "true" : "false" );
@@ -298,7 +310,7 @@ void Character::update_body( const time_point &from, const time_point &to )
     if( calendar::once_every( 1_days ) ) {
         // not getting below half stamina even once in a whole day is not healthy
         if( get_value( "got_to_half_stam" ).empty() ) {
-            mod_daily_health( -4, -200 );
+            mod_daily_health( -5, -200 );
         } else {
             remove_value( "got_to_half_stam" );
         }
@@ -319,7 +331,18 @@ void Character::update_body( const time_point &from, const time_point &to )
             }
         }
         if( cardio_accumultor >= get_cardio_acc_base() ) {
-            mod_daily_health( 2, 200 );
+            mod_daily_health( 1, 200 );
+        }
+
+        if( !get_value( "got_to_low_morale" ).empty() ) {
+            mod_daily_health( -4, -100 );
+        } else {
+            remove_value( "got_to_low_morale" );
+        }
+        if( !get_value( "got_to_very_low_morale" ).empty() ) {
+            mod_daily_health( -6, -200 );
+        } else {
+            remove_value( "got_to_very_low_morale" );
         }
     }
 
@@ -352,10 +375,26 @@ void Character::update_body( const time_point &from, const time_point &to )
             if( ( RDA > 50 ) && ( rng( 1, 115 ) <= std::min( RDA, 100 ) ) ) {
                 mod_daily_health( 1, 200 );
             }
-
-            // Once we've checked daily intake we should reset it.
-            reset_daily_vitamin( v.first );
         }
+        // Hey so it turns out no amount of poison is healthy to ingest.
+        if( calendar::once_every( 24_hours ) && v.first->type() == vitamin_type::TOXIN ) {
+            const int &toxin_quantity = get_daily_vitamin( v.first, true );
+            const int toxin_RDA = vitamin_RDA( v.first, toxin_quantity );
+            // Three chances to lose lifestyle. Once if we had any...
+            if( ( toxin_RDA >= 1 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
+                mod_daily_health( -1, -100 );
+            }
+            // Once if we've had half of our limit... 
+            if( ( toxin_RDA >= 50 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
+                mod_daily_health( -2, -200 );
+            }
+            // And once if we've gotten near the point of actual symptoms.
+            if( ( toxin_RDA >= 90 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
+                mod_daily_health( -4, -200 );
+            }
+        }
+        // Once we've checked daily intake we should reset it.
+        reset_daily_vitamin( v.first );
     }
 
     const int thirty_mins = ticks_between( from, to, 30_minutes );
