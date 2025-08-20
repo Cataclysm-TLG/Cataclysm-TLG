@@ -2282,8 +2282,8 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                        bool /* debug */ ) const
 {
     if( parts->test( iteminfo_parts::BASE_MOD_SRC ) &&
-    !type->src.empty() &&
-    type->src.front().second != MOD_INFORMATION_tlg ) {
+        !type->src.empty() &&
+        type->src.front().second != MOD_INFORMATION_tlg ) {
         info.emplace_back( "BASE", string_format( _( "Origin: %s" ), enumerate_as_string( type->src,
         []( const std::pair<itype_id, mod_id> &source ) {
             return string_format( "'%s'", source.second->name() );

@@ -183,7 +183,7 @@
   {
     "type": "SPELL",
     "id": "hive_raptor_spawn",
-    "name": { "str": "Summon Raptor" },
+    "name": { "str": "Spawn Raptor" },
     "description": "Summons a zombie-spawn raptor without killing the zombie.",
     "flags": [ "HOSTILE_SUMMON", "RANDOM_DAMAGE", "PERMANENT", "NO_EXPLOSION_SFX" ],
     "valid_targets": [ "ground", "self" ],
@@ -194,6 +194,47 @@
     "shape": "blast",
     "effect": "summon",
     "effect_str": "mon_spawn_raptor"
+  },
+  {
+    "type": "SPELL",
+    "id": "hive_raptor_spawn_eoc",
+    "name": { "str": "Spawn Raptor EOC" },
+    "description": ".",
+    "flags": [ "HOSTILE_SUMMON", "NO_PROJECTILE", "RANDOM_TARGET", "NO_EXPLOSION_SFX" ],
+    "effect": "effect_on_condition",
+    "valid_targets": [ "self" ],
+    "base_casting_time": 10,
+    "min_range": 1,
+    "min_aoe": 3,
+    "shape": "blast",
+    "effect_str": "EOC_hive_raptor_spawn",
+    "extra_effects": [ { "id": "hive_raptor_spawn", "hit_self": true } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_hive_raptor_spawn",
+    "condition": { "one_in_chance": 40 },
+    "effect": [
+      { "u_cast_spell": { "id": "hive_hulk_explode" } },
+      { "message": "The <npc_name> is torn apart by the creature's violent escape!" }
+    ]
+  },
+  {
+    "id": "hive_hulk_explode",
+    "type": "SPELL",
+    "name": { "str": "Hive Hulk Suicide" },
+    "description": "Nothing to see here.",
+    "valid_targets": [ "self" ],
+    "flags": [ "NO_EXPLOSION_SFX" ],
+    "effect": "attack",
+    "shape": "blast",
+    "min_damage": 400,
+    "max_damage": 400,
+    "min_range": 4,
+    "max_range": 4,
+    "min_aoe": 1,
+    "max_aoe": 1,
+    "damage_type": "pure"
   },
   {
     "type": "SPELL",

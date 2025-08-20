@@ -1471,16 +1471,20 @@
     "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
-    "condition": { "not": { "and": [
-        { "u_has_trait": "PAWS_LARGE" },
-        {
-          "and": [
-            { "math": [ "u_val('size') >= n_val('size')" ] },
-            { "not": { "npc_has_effect": "downed" } },
-            { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } }
-          ]
-        }
-      ] } },
+    "condition": {
+      "not": {
+        "and": [
+          { "u_has_trait": "PAWS_LARGE" },
+          {
+            "and": [
+              { "math": [ "u_val('size') >= n_val('size')" ] },
+              { "not": { "npc_has_effect": "downed" } },
+              { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } }
+            ]
+          }
+        ]
+      }
+    },
     "attack_vectors": [ "vector_claw" ]
   },
   {
@@ -1640,9 +1644,7 @@
         }
       ]
     },
-    "tech_effects": [
-      { "id": "downed", "chance": 70, "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" }
-    ],
+    "tech_effects": [ { "id": "downed", "chance": 70, "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" } ],
     "flat_bonuses": [ { "stat": "damage", "type": "bash", "scale": 4 } ]
   }
 ]
