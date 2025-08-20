@@ -2352,7 +2352,7 @@
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "stimpack_ammo": 5 } } ],
     "ammo": "stimpack_ammo",
-      "armor": [
+    "armor": [
       {
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },

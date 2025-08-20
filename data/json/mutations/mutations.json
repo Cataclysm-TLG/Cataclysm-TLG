@@ -4414,7 +4414,7 @@
     "active": true,
     "cost": 0
   },
-    {
+  {
     "type": "mutation",
     "id": "EATPOISON_WEAK",
     "name": { "str": "Intestinal Fortitude" },
