@@ -2316,11 +2316,22 @@
     "description": "A modified RX12 jet injector which can be worn on the body.  A label on the side warns against using more than two doses per hour.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "ceramic", "superalloy" ],
-    "flags": [ "OVERSIZE" ],
+    "material": [ "plastic", "steel" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SKINTIGHT", "SOFT", "PADDED" ],
     "weight": "364 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "ampoule": 2 } } ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 1,
+        "encumbrance": 0
+      }
+    ],
     "charges_per_use": 1,
     "use_action": [ "JET_INJECTOR" ],
     "material_thickness": 3
@@ -2335,12 +2346,23 @@
     "description": "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's body.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "superalloy", "kevlar_rigid" ],
-    "flags": [ "OVERSIZE" ],
+    "material": [ "plastic", "steel" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SOFT", "PADDED" ],
     "weight": "212 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "stimpack_ammo": 5 } } ],
     "ammo": "stimpack_ammo",
+      "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 1,
+        "encumbrance": 0
+      }
+    ],
     "charges_per_use": 1,
     "use_action": [ "STIMPACK" ],
     "material_thickness": 3
