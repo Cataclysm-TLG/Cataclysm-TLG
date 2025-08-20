@@ -473,7 +473,7 @@ class cata_tiles
         find_tile_looks_like( const std::string &id, TILE_CATEGORY category, const std::string &variant,
                               int looks_like_jumps_limit = 10 ) const;
 
-        // this templated method is used only from it's own cpp file, so it's ok to declare it here
+        // This templated method is used only from its own cpp file, so it's ok to declare it here
         template<typename T>
         std::optional<tile_lookup_res>
         find_tile_looks_like_by_string_id( std::string_view id, TILE_CATEGORY category,

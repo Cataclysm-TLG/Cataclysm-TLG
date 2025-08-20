@@ -1697,7 +1697,7 @@ class item : public visitable
          * @param it the item being put in
          * @param nested whether or not the current call is nested (used recursively).
          * @param ignore_pkt_settings whether to ignore pocket autoinsert settings
-         * @param remaining_parent_volume the ammount of space in the parent pocket,
+         * @param remaining_parent_volume the amount of space in the parent pocket,
          * @param allow_nested whether nested pockets should be checked
          * needed to make sure we dont try to nest items which can't fit in the nested pockets
          */
