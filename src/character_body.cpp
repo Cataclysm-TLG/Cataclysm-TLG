@@ -335,12 +335,12 @@ void Character::update_body( const time_point &from, const time_point &to )
         }
 
         if( !get_value( "got_to_low_morale" ).empty() ) {
-            mod_daily_health( -4, -100 );
+            mod_daily_health( -1, -100 );
         } else {
             remove_value( "got_to_low_morale" );
         }
         if( !get_value( "got_to_very_low_morale" ).empty() ) {
-            mod_daily_health( -6, -200 );
+            mod_daily_health( -2, -200 );
         } else {
             remove_value( "got_to_very_low_morale" );
         }
@@ -390,7 +390,7 @@ void Character::update_body( const time_point &from, const time_point &to )
             }
             // And once if we've gotten near the point of actual symptoms.
             if( ( toxin_RDA >= 90 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
-                mod_daily_health( -4, -200 );
+                mod_daily_health( -2, -200 );
             }
         }
         // Once we've checked daily intake we should reset it.
