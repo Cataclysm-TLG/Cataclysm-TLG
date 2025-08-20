@@ -1469,9 +1469,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_lizard",
-    "name": [ "Lizard Mutation", "Lizard Transformation", "Lizard Metamorphosis" ],
+    "name": [ "Reptilian Mutation", "Reptilian Transformation", "Reptilian Metamorphosis" ],
     "desc": [
-      "You consumed lizard mutagen.",
+      "You consumed reptilian mutagen.",
       "Your skin feels dry and too small.  You'll have to molt soon.",
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
@@ -1489,14 +1489,15 @@
     },
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
-    "blood_analysis_description": "Lizard Mutagen"
+    "flags": [ "MUTAGEN_EFFECT" ],
+    "blood_analysis_description": "Reptilian Mutagen"
   },
   {
     "type": "effect_type",
     "id": "mutagen_lupine",
-    "name": [ "Canine Mutation", "Canine Transformation", "Canine Metamorphosis" ],
+    "name": [ "Lupine Mutation", "Lupine Transformation", "Lupine Metamorphosis" ],
     "desc": [
-      "You consumed canine mutagen.",
+      "You consumed lupine mutagen.",
       "Where's your pack?  How will you survive without them?",
       "You pant, unable to stop pacing and full of hunger."
     ],

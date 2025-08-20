@@ -146,6 +146,49 @@
   },
   {
     "type": "enchantment",
+    "id": "THERMAL_VISION_REPTILIAN_IR",
+    "special_vision": [
+      {
+        "condition": { "and": [ "u_see_npc_loc", "npc_is_warm" ] },
+        "distance": 14,
+        "precise": true,
+        "descriptions": [
+          {
+            "id": "infrared_creature_tiny",
+            "text_condition": { "math": [ "n_val('size') == 1" ] },
+            "symbol": ".",
+            "text": "You see a tiny figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_small",
+            "text_condition": { "math": [ "n_val('size') == 2" ] },
+            "symbol": ",",
+            "text": "You see a small figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_medium",
+            "text_condition": { "math": [ "n_val('size') == 3" ] },
+            "symbol": "o",
+            "text": "You see a medium figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_large",
+            "text_condition": { "math": [ "n_val('size') == 4" ] },
+            "symbol": "O",
+            "text": "You see a large figure radiating heat."
+          },
+          {
+            "id": "infrared_creature_huge",
+            "text_condition": { "math": [ "n_val('size') == 5" ] },
+            "symbol": "&",
+            "text": "You see a huge figure radiating heat."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "enchantment",
     "id": "ELECTRIC_VISION",
     "condition": "ALWAYS",
     "special_vision": [
@@ -288,6 +331,12 @@
       { "gain": "wing_bird_l" },
       { "gain": "wing_bird_r" }
     ]
+  },
+  {
+    "type": "enchantment",
+    "id": "ench_eyes_frog",
+    "condition": "ALWAYS",
+    "modified_bodyparts": [ { "lose": "eyes" }, { "gain": "eyes_frog" } ]
   },
   {
     "type": "enchantment",

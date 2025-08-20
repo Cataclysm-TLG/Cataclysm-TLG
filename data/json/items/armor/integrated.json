@@ -494,7 +494,6 @@
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "head" ],
         "coverage": 100,
-        "cover_vitals": 65,
         "encumbrance": 1,
         "specifically_covers": [ "head_throat" ]
       }
@@ -1546,9 +1545,36 @@
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 1,
-        "rigid_layer_only": true,
-        "cover_vitals": 90
+        "encumbrance": 5,
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "integrated_lidless_eyes",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "ocular scales" },
+    "description": "Transparent scales seal the corneas behind a firm but flexible lens.  It's enough to keep water and most irritants at bay, and it would be very difficult to sneak up on one who sleeps with their eyes open.",
+    "weight": "50 g",
+    "volume": "25 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": -2,
+    "material": [ "scales" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "warmth": 0,
+    "material_thickness": 0.2,
+    "environmental_protection": 10,
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "PADDED", "SWIM_GOGGLES", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 0,
+        "rigid_layer_only": true
       }
     ]
   },
@@ -1646,7 +1672,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 2 } ],
@@ -1685,7 +1711,7 @@
       "NATURAL_WEAPON",
       "CONDUCTIVE"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.4 } ],
@@ -1723,7 +1749,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 3 } ],

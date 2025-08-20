@@ -591,7 +591,6 @@
     "messages": [ "You maul %s", "<npcname> mauls %s" ],
     "unarmed_allowed": true,
     "basic": true,
-    "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_bite" ],
@@ -1469,9 +1468,19 @@
     "messages": [ "You claw %s", "<npcname> claws %s" ],
     "unarmed_allowed": true,
     "basic": true,
-    "weighting": -4,
+    "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
+    "condition": { "not": { "and": [
+        { "u_has_trait": "PAWS_LARGE" },
+        {
+          "and": [
+            { "math": [ "u_val('size') >= n_val('size')" ] },
+            { "not": { "npc_has_effect": "downed" } },
+            { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } }
+          ]
+        }
+      ] } },
     "attack_vectors": [ "vector_claw" ]
   },
   {
@@ -1607,5 +1616,33 @@
     "messages": [ "You gore %s", "<npcname> gores %s" ],
     "description": "Headbutt using a pair of horns or antlers",
     "attack_vectors": [ "vector_horns" ]
+  },
+  {
+    "type": "technique",
+    "id": "tec_paws_large_claw",
+    "name": "Bear Claw",
+    "melee_allowed": false,
+    "messages": [ "You claw %s", "<npcname> claws %s" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "reach_ok": false,
+    "crit_ok": true,
+    "attack_vectors": [ "vector_claw" ],
+    "condition": {
+      "and": [
+        { "u_has_trait": "PAWS_LARGE" },
+        {
+          "and": [
+            { "math": [ "u_val('size') >= n_val('size')" ] },
+            { "not": { "npc_has_effect": "downed" } },
+            { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } }
+          ]
+        }
+      ]
+    },
+    "tech_effects": [
+      { "id": "downed", "chance": 70, "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" }
+    ],
+    "flat_bonuses": [ { "stat": "damage", "type": "bash", "scale": 4 } ]
   }
 ]

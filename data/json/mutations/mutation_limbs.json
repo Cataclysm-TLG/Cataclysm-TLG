@@ -1,5 +1,62 @@
 [
   {
+    "id": "eyes_frog",
+    "type": "body_part",
+    "name": "eyes",
+    "accusative": { "ctxt": "bodypart_accusative", "str": "eyes" },
+    "heading": "eyes",
+    "heading_multiple": "eyes",
+    "encumbrance_text": "Ranged combat is hampered.",
+    "encumbrance_limit": 60,
+    "main_part": "head",
+    "opposite_part": "eyes_frog",
+    "hit_size": 0.55,
+    "hit_difficulty": 1.1,
+    "limb_type": "sensor",
+    "limb_scores": [ [ "vision", 1.0 ], [ "night_vis", 1.1 ], [ "reaction", 0.8 ] ],
+    "side": "both",
+    "stylish_bonus": 2,
+    "squeamish_penalty": 8,
+    "base_hp": 62,
+    "drench_capacity": 0,
+    "flags": [ "IGNORE_TEMP", "LIMB_UPPER" ],
+    "smash_message": "You headbutt the %s.",
+    "smash_efficiency": 0.25,
+    "bionic_slots": 4,
+    "sub_parts": [ "eyes_frog_left", "eyes_frog_right" ],
+    "effects_on_hit": [
+      {
+        "id": "blind",
+        "dmg_threshold": 3,
+        "dmg_scale_increment": 3,
+        "chance": 50,
+        "chance_dmg_scaling": 5,
+        "duration": 1,
+        "duration_dmg_scaling": 0.5
+      }
+    ]
+  },
+    {
+    "id": "eyes_frog_left",
+    "type": "sub_body_part",
+    "max_coverage": 50,
+    "parent": "eyes_frog",
+    "side": 1,
+    "opposite": "eyes_frog_right",
+    "name_multiple": "eyes",
+    "name": "left eye"
+  },
+  {
+    "id": "eyes_frog_right",
+    "type": "sub_body_part",
+    "max_coverage": 50,
+    "parent": "eyes_frog",
+    "side": 2,
+    "opposite": "eyes_frog_left",
+    "name_multiple": "eyes",
+    "name": "right eye"
+  },
+  {
     "id": "wing_bird_l",
     "type": "body_part",
     "name": "left wing",
