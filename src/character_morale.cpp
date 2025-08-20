@@ -101,6 +101,14 @@ void Character::add_morale( const morale_type &type, int bonus, int max_bonus,
                             bool capped, const itype *item_type )
 {
     morale->add( type, bonus, max_bonus, duration, decay_start, capped, item_type );
+    if( get_morale_level() <= -25 ) {
+        // These two values are used to ding your lifestyle score. Stress is bad for you!
+        set_value( "got_to_low_morale", "true" );
+    }
+    if( get_morale_level() <= -50 ) {
+        // These two values are used to ding your lifestyle score. Stress is bad for you!
+        set_value( "got_to_very_low_morale", "true" );
+    }
 }
 
 int Character::has_morale( const morale_type &type ) const

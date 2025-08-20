@@ -4105,8 +4105,8 @@ class Character : public Creature, public visitable
         std::map<vitamin_id, int> vitamin_levels;
         /** Current quantity for each vitamin today first value is expected second value is actual (digested) in vitamin units*/
         std::map<vitamin_id, std::pair<int, int>> daily_vitamins;
-        /** Returns the % of your RDA that ammount of vitamin represents */
-        int vitamin_RDA( const vitamin_id &vitamin, int ammount ) const;
+        /** Returns the % of your RDA that amount of vitamin represents */
+        int vitamin_RDA( const vitamin_id &vitamin, int amount ) const;
 
         pimpl<player_morale> morale;
         /** Processes human-specific effects of an effect. */
