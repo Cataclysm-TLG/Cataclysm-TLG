@@ -861,11 +861,31 @@ void avatar_action::mend( avatar &you, item_location loc )
 bool avatar_action::eat_here( avatar &you )
 {
     map &here = get_map();
-    if( ( you.has_active_mutation( trait_RUMINANT ) || you.has_active_mutation( trait_GRAZER ) ) &&
-        ( here.has_flag( ter_furn_flag::TFLAG_SHRUB, you.pos_bub() ) &&
-          !here.has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE, you.pos_bub() ) ) ) {
+
+    bool is_ruminant = you.has_active_mutation( trait_RUMINANT );
+    bool is_grazer = you.has_active_mutation( trait_GRAZER );
+
+    const ter_id &ter_underfoot = here.ter( you.pos_bub() );
+    const furn_id &furn_underfoot = here.furn( you.pos_bub() );
+
+    if( ( is_ruminant || is_grazer ) &&
+        ( furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_SHRUB ) &&
+          !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
-            add_msg( _( "You're too full to eat the leaves from the %s." ), here.ter( you.pos_bub() )->name() );
+            add_msg( _( "You're too full to eat the leaves from the %s." ), furn_underfoot->name() );
+            return true;
+        } else {
+            here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
+            item food( "underbrush", calendar::turn, 1 );
+            you.assign_activity( consume_activity_actor( food ) );
+            return true;
+        }
+    }
+    if( ( is_ruminant || is_grazer ) &&
+        ( ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_SHRUB ) &&
+          !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
+        if( you.has_effect( effect_hunger_engorged ) ) {
+            add_msg( _( "You're too full to eat the leaves from the %s." ), ter_underfoot->name() );
             return true;
         } else {
             here.ter_set( you.pos_bub(), ter_t_grass );
@@ -874,11 +894,11 @@ bool avatar_action::eat_here( avatar &you )
             return true;
         }
     }
-    if( ( you.has_active_mutation( trait_RUMINANT ) || you.has_active_mutation( trait_GRAZER ) ) &&
-        ( here.has_flag( ter_furn_flag::TFLAG_FLOWER, you.pos_bub() ) &&
-          !here.has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE, you.pos_bub() ) ) ) {
+    if( ( is_ruminant || is_grazer ) &&
+        ( furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_FLOWER ) &&
+          !furn_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZER_INEDIBLE ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
-            add_msg( _( "You're too full to eat the %s." ), here.ter( you.pos_bub() )->name() );
+            add_msg( _( "You're too full to eat the %s." ), furn_underfoot->name() );
             return true;
         } else {
             here.furn_set( you.pos_bub(), furn_str_id::NULL_ID() );
@@ -887,9 +907,9 @@ bool avatar_action::eat_here( avatar &you )
             return true;
         }
     }
-    if( you.has_active_mutation( trait_GRAZER ) &&
-        ( here.has_flag( ter_furn_flag::TFLAG_GRAZABLE, you.pos_bub() ) &&
-          !here.has_flag( ter_furn_flag::TFLAG_FUNGUS, you.pos_bub() ) ) ) {
+    if( is_grazer &&
+        ( ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_GRAZABLE ) &&
+          !ter_underfoot.obj().has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) ) {
         if( you.has_effect( effect_hunger_engorged ) ) {
             add_msg( _( "You're too full to graze." ) );
             return true;
@@ -900,8 +920,7 @@ bool avatar_action::eat_here( avatar &you )
             return true;
         }
     }
-    if( you.has_active_mutation( trait_GRAZER ) ) {
-        const ter_id &ter_underfoot = here.ter( you.pos_bub() );
+    if( is_grazer ) {
         if( ter_underfoot == ter_t_grass_golf || ter_underfoot == ter_t_grass ) {
             add_msg( _( "This grass is too short to graze." ) );
             return true;
