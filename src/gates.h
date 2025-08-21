@@ -16,6 +16,7 @@ namespace gates
 {
 
 void load( const JsonObject &jo, const std::string &src );
+void finalize();
 void check();
 void reset();
 
