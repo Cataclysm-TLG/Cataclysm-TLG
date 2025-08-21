@@ -367,13 +367,25 @@ void Character::update_body( const time_point &from, const time_point &to )
                 vitamin_mod( v.first, qty );
             }
         }
-        if( calendar::once_every( 24_hours ) && v.first->type() == vitamin_type::VITAMIN ) {
-            const int &vit_quantity = get_daily_vitamin( v.first, true );
-            const int RDA = vitamin_RDA( v.first, vit_quantity );
-            // With three vitamins tracked, this essentially gives us three chances for a bonus.
-            // We average at about 2.6 points of lifestyle/day max.
-            if( ( RDA > 50 ) && ( rng( 1, 115 ) <= std::min( RDA, 100 ) ) ) {
-                mod_daily_health( 1, 200 );
+        if( calendar::once_every( 24_hours ) ) {
+            if( v.first->type() == vitamin_type::VITAMIN ) {
+                const int &vit_quantity = get_daily_vitamin( v.first, true );
+                const int RDA = vitamin_RDA( v.first, vit_quantity );
+                // With three vitamins tracked, this essentially gives us three chances for a bonus.
+                // We average at about 2.6 points of lifestyle/day max.
+                if( ( RDA > 50 ) && ( rng( 1, 115 ) <= std::min( RDA, 100 ) ) ) {
+                    mod_daily_health( 1, 200 );
+                }
+            }
+            if( v.first->type() == vitamin_type::TOXIN ) {
+                const int &toxin_quantity = get_daily_vitamin( v.first, true );
+                const int toxin_RDA = vitamin_RDA( v.first, toxin_quantity );
+                // No amount of toxins are safe, but they're not always harmful either. Find the
+                // "RDA" for our character and roll a chance to get a penalty tied to how much we ate.
+                if( ( toxin_RDA > 0 ) && ( rng( 1, 115 ) <= std::min( toxin_RDA, 100 ) ) ) {
+                    int toxin_malus = static_cast<int>( std::ceil( toxin_RDA / 10.0 ) );
+                    mod_daily_health( std::max( -5, toxin_malus ), -200 );
+                }
             }
 
             // Once we've checked daily intake we should reset it.
