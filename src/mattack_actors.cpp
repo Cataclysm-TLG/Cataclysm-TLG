@@ -299,7 +299,7 @@ bool mon_spellcasting_actor::call( monster &mon ) const
     spell_instance.set_message( spell_data.trigger_message );
 
     // Bail out if the target is out of range.
-    if( !spell_data.self && rl_dist( mon.pos_bub(), target ) > spell_instance.range( mon ) ) {
+    if( !spell_data.self && static_cast<int>( std::round( trig_dist_z_adjust( mon.pos_bub(), target ) > spell_instance.range( mon ) ) ) ) {
         return false;
     }
 
@@ -1171,7 +1171,7 @@ bool gun_actor::call( monster &z ) const
         }
     }
 
-    const int dist = rl_dist( z.pos_bub(), aim_at );
+    const int dist = static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub(), aim_at ) ) );
     if( target ) {
         add_msg_debug( debugmode::DF_MATTACK, "Target %s at range %d", target->disp_name(), dist );
     } else {
