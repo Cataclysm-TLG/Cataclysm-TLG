@@ -188,9 +188,7 @@ void harvest_list::finalize()
 
 void harvest_list::finalize_all()
 {
-    for( const harvest_list &pr : get_all() ) {
-        const_cast<harvest_list &>( pr ).finalize();
-    }
+    harvest_list_factory.finalize();
 }
 
 void harvest_list::load( const JsonObject &obj, std::string_view )

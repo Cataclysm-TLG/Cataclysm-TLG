@@ -1,7 +1,7 @@
 #include "mapdata.h"
 
 #include <algorithm>
-#include <cstdlib>
+#include <exception>
 #include <iterator>
 #include <map>
 #include <memory>
@@ -10,26 +10,45 @@
 
 #include "avatar.h"
 #include "calendar.h"
+#include "character.h"
 #include "color.h"
 #include "debug.h"
 #include "enum_conversions.h"
+#include "flexbuffer_json.h"
+#include "flag.h"
 #include "generic_factory.h"
 #include "harvest.h"
 #include "iexamine.h"
 #include "iexamine_actors.h"
+#include "item.h"
 #include "item_group.h"
-#include "json.h"
+#include "iteminfo_query.h"
+#include "mod_manager.h"
 #include "output.h"
 #include "rng.h"
+#include "skill.h"
 #include "string_formatter.h"
 #include "translations.h"
 #include "trap.h"
 #include "type_id.h"
 
+
 static furn_id f_null;
+
+static const bash_damage_profile_id bash_damage_profile_default( "default" );
+
+static const flag_id json_flag_DIGGABLE( "DIGGABLE" );
+static const flag_id json_flag_EASY_DECONSTRUCT( "EASY_DECONSTRUCT" );
+static const flag_id json_flag_FLAT( "FLAT" );
+static const flag_id json_flag_PHASE_BACK( "PHASE_BACK" );
+static const flag_id json_flag_PLOWABLE( "PLOWABLE" );
+
 static const furn_str_id furn_f_null( "f_null" );
 
+
 static const item_group_id Item_spawn_data_EMPTY_GROUP( "EMPTY_GROUP" );
+
+static const skill_id skill_survival( "survival" );
 
 namespace
 {
