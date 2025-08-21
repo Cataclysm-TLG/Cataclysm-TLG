@@ -3014,7 +3014,7 @@
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER" ],
     "upgrades": { "half_life": 45, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 5, "cut": 10, "bullet": 15, "electric": 3, "acid": 12 }
+    "armor": { "bash": 5, "cut": 12, "bullet": 8, "electric": 3, "acid": 12 }
   },
   {
     "id": "mon_lady_bug_giant",
@@ -3068,7 +3068,7 @@
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_beetle" ],
     "upgrades": { "half_life": 28, "into_group": "GROUP_EMPTY" },
-    "armor": { "bash": 7, "cut": 22, "bullet": 10, "electric": 3, "acid": 14 }
+    "armor": { "bash": 7, "cut": 22, "bullet": 18, "electric": 3, "acid": 14 }
   },
   {
     "id": "mon_lady_bug_larva",
