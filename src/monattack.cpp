@@ -249,9 +249,14 @@ static bool within_visual_range( monster *z, int max_range )
 
 static bool within_target_range( const monster *const z, const Creature *const target, int range )
 {
+    if( z->is_adjacent( target, true ) ) {
+    add_msg ( _( "its true" ) );
+    } else {
+    add_msg ( _( "its false" ) );
+    }
     return target != nullptr &&
            ( z->is_adjacent( target, true ) ||
-             ( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) <= range ) ) &&
+             static_cast<int>( ( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) ) <= range ) ) &&
            z->sees( *target );
 }
 
@@ -1008,7 +1013,7 @@ bool mattack::pull_metal_aoe( monster *z )
         // FIXME: Hardcoded damage type
         proj.impact.add_damage( STATIC( damage_type_id( "bash" ) ), pr.first.weight() / 250_gram );
         // make the projectile stop one tile short to prevent hitting the user
-        proj.range = trig_dist_z_adjust( pr.second, z->pos_bub() ) - 1;
+        proj.range = static_cast<int>( std::round( trig_dist_z_adjust( pr.second, z->pos_bub() ) ) ) - 1;
         proj.proj_effects = {{ ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET }};
 
         dealt_projectile_attack dealt = projectile_attack(

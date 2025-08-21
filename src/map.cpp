@@ -8281,7 +8281,7 @@ std::vector<tripoint_bub_ms> map::find_clear_path( const tripoint_bub_ms &source
     const int max_start_offset = std::abs( ideal_start_offset ) * 2 + 1;
     for( int horizontal_offset = -1; horizontal_offset <= max_start_offset; ++horizontal_offset ) {
         int candidate_offset = horizontal_offset * ( start_sign == 0 ? 1 : start_sign );
-        if( sees( source, destination, trig_dist_z_adjust( source.raw(), destination.raw() ),
+        if( sees( source, destination, static_cast<int>( std::round( trig_dist_z_adjust( source, destination ) ) ),
                   candidate_offset, /*with_fields=*/true, /*allow_cached=*/false ) ) {
             return line_to( source, destination, candidate_offset, 0 );
         }
@@ -8415,12 +8415,10 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     if( std::abs( f.z() - t.z() ) > fov_3d_z_range ) {
         return false;
     }
-
     // Ugly `if` for now
     // TODO: Why is it even like this?
     if( f.z() == t.z() ) {
-        if( ( range >= 0 &&
-              range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
+        if( ( range < static_cast<int>(std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }
@@ -8464,14 +8462,13 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // 3D path check
-    if( ( range >= 0 && range < static_cast<int>( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ||
+    if( ( range < static_cast<int>(std::round( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ) ||
         !inbounds( t ) ) {
         return false;
     }
 
     bool is_clear = true;
     tripoint_bub_ms last_point = f;
-
     bresenham( f, t, 0, 0,
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint_bub_ms & new_point ) {
         if( new_point == t ) {
@@ -8523,11 +8520,9 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
                 return false;
             }
         }
-
         last_point = new_point;
         return true;
     } );
-
     return is_clear;
 }
 

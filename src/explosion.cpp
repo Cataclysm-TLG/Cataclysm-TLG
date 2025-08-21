@@ -490,7 +490,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
                 }
                 add_msg_debug( debugmode::DF_EXPLOSION, "Shrapnel hit %s at %d m/s at a distance of %d",
                                critter->disp_name(),
-                               frag.proj.speed, trig_dist_z_adjust( src.raw(), target.raw() ) );
+                               frag.proj.speed, static_cast<int>( std::round( trig_dist_z_adjust( src.raw(), target.raw() ) ) ) );
                 add_msg_debug( debugmode::DF_EXPLOSION, "Shrapnel dealt %d damage", frag.dealt_dam.total_damage() );
                 if( critter->is_dead_state() ) {
                     break;
@@ -606,7 +606,7 @@ void flashbang( const tripoint_bub_ms &p, bool player_immune )
 {
     draw_explosion( p, 8, c_white );
     Character &player_character = get_player_character();
-    int dist = trig_dist_z_adjust( player_character.pos_bub(), p );
+    int dist = static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(), p ) ) );
     map &here = get_map();
     if( dist <= 8 && !player_immune ) {
         if( !player_character.has_flag( STATIC( json_character_flag( "IMMUNE_HEARING_DAMAGE" ) ) ) ) {
@@ -635,7 +635,7 @@ void flashbang( const tripoint_bub_ms &p, bool player_immune )
             continue;
         }
         // TODO: can the following code be called for all types of creatures
-        dist = trig_dist_z_adjust( critter.pos_bub(), p );
+        dist = static_cast<int>( std::round( trig_dist_z_adjust( critter.pos_bub(), p ) ) );
         if( dist <= 8 ) {
             if( dist <= 4 ) {
                 critter.add_effect( effect_stunned, time_duration::from_turns( 10 - dist ) );
@@ -664,7 +664,7 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         if( critter.posz() != p.z() ) {
             continue;
         }
-        if( trig_dist_z_adjust( critter.pos_bub(), p ) <= radius ) {
+        if( static_cast<int>( std::round( trig_dist_z_adjust( critter.pos_bub(), p ) <= radius ) ) ) {
             add_msg( _( "%s is caught in the shockwave!" ), critter.name() );
             g->knockback( p, critter.pos_bub(), force, stun, dam_mult );
         }
@@ -674,13 +674,13 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         if( guy.posz() != p.z() ) {
             continue;
         }
-        if( trig_dist_z_adjust( guy.pos_bub(), p ) <= radius ) {
+        if( static_cast<int>( std::round( trig_dist_z_adjust( guy.pos_bub(), p ) ) ) <= radius ) {
             add_msg( _( "%s is caught in the shockwave!" ), guy.get_name() );
             g->knockback( p, guy.pos_bub(), force, stun, dam_mult );
         }
     }
     Character &player_character = get_player_character();
-    if( trig_dist_z_adjust( player_character.pos_bub(), p ) <= radius && !ignore_player &&
+    if( static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(), p ) ) ) <= radius && !ignore_player &&
         ( !player_character.has_trait( trait_LEG_TENT_BRACE ) ||
           !player_character.is_barefoot() ) ) {
         add_msg( m_bad, _( "You're caught in the shockwave!" ) );

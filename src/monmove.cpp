@@ -1429,7 +1429,7 @@ void monster::footsteps( const tripoint_bub_ms &p )
     if( volume == 0 ) {
         return;
     }
-    int dist = trig_dist_z_adjust( p, get_player_character().pos_bub() );
+    int dist = static_cast<int>( std::round( trig_dist_z_adjust( p, get_player_character().pos_bub() ) ) );
     sounds::add_footstep( p, volume, dist, this, type->get_footsteps() );
 }
 
