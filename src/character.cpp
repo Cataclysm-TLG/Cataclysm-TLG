@@ -10891,7 +10891,7 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
                 }
             }
         }
-        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( posz() == critter.posz() ) && ( static_cast<int>(std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
+        bool in_range = ( is_adjacent( &critter, true ) ) || ( ( posz() == critter.posz() ) && ( static_cast<int>( std::round( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) ) <= range ) ) || ( std::ceil( trig_dist_z_adjust( pos_bub(), critter.pos_bub() ) ) <= range );
         // TODO: get rid of fake npcs (pos() check)
         bool valid_target = this != &critter && pos_bub() != critter.pos_bub() && attitude_to( critter ) != Creature::Attitude::FRIENDLY;
         return valid_target && in_range && can_see;

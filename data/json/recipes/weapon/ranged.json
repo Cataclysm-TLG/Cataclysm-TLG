@@ -925,7 +925,7 @@
       { "id": "SAW_W", "level": 1 },
       { "id": "HAMMER", "level": 1 }
     ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -946,6 +946,52 @@
     "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
     "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "latchet_crossbow",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "skills_required": [ [ "mechanics", 4 ], [ "archery", 1 ] ],
+    "difficulty": 4,
+    "time": "20 h",
+    "reversible": true,
+    "decomp_learn": 3,
+    "proficiencies": [
+      { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
+      { "proficiency": "prof_carving", "time_multiplier": 1.5 },
+      { "proficiency": "prof_metalworking", "time_multiplier": 1.25 },
+      { "proficiency": "prof_blacksmithing", "time_multiplier": 1.25 }
+    ],
+    "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
+    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
+    "using": [ [ "blacksmithing_basic", 3 ], [ "steel_tiny", 3 ] ],
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "double_crossbow",
+    "category": "CC_*",
+    "subcategory": "CSC_*_NESTED",
+    "skill_used": "fabrication",
+    "skills_required": [ [ "mechanics", 2 ], [ "archery", 1 ] ],
+    "difficulty": 4,
+    "time": "20 h",
+    "reversible": true,
+    "decomp_learn": 3,
+    "proficiencies": [
+      { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
+      { "proficiency": "prof_carving", "time_multiplier": 1.5 },
+      { "proficiency": "prof_metalworking", "time_multiplier": 1.25 },
+      { "proficiency": "prof_blacksmithing", "time_multiplier": 1.25 }
+    ],
+    "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
+    "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
+    "using": [ [ "blacksmithing_basic", 3 ], [ "steel_tiny", 4 ] ],
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 6, "LIST" ] ] ]
   },
   {
     "type": "recipe",

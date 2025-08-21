@@ -393,7 +393,7 @@
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
-    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "skewer_bone", 1 ] ] ]
+    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "skewer_bone", 1 ], [ "antler_piece", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1650,6 +1650,7 @@
     "components": [
       [
         [ "bone_sturdy", 1, "LIST" ],
+        [ "antler_piece", 1 ],
         [ "stick", 1 ],
         [ "broom", 1 ],
         [ "pool_cue", 1 ],
@@ -1669,7 +1670,7 @@
     "time": "1 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "bone_sturdy", 1, "LIST" ] ] ]
+    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "antler", 1 ] ] ]
   },
   {
     "type": "recipe",

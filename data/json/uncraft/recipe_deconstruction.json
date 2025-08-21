@@ -16,6 +16,14 @@
     "components": [ [ [ "splinter", 1 ] ] ]
   },
   {
+    "result": "antler",
+    "type": "uncraft",
+    "activity_level": "LIGHT_EXERCISE",
+    "time": "120 s",
+    "qualities": [ { "id": "SAW_W", "level": 1 } ],
+    "components": [ [ [ "antler_piece", 10 ] ] ]
+  },
+  {
     "result": "bead_necklace",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",

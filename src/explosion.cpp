@@ -680,7 +680,8 @@ void shockwave( const tripoint_bub_ms &p, int radius, int force, int stun, int d
         }
     }
     Character &player_character = get_player_character();
-    if( static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(), p ) ) ) <= radius && !ignore_player &&
+    if( static_cast<int>( std::round( trig_dist_z_adjust( player_character.pos_bub(),
+                                      p ) ) ) <= radius && !ignore_player &&
         ( !player_character.has_trait( trait_LEG_TENT_BRACE ) ||
           !player_character.is_barefoot() ) ) {
         add_msg( m_bad, _( "You're caught in the shockwave!" ) );

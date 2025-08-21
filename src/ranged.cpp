@@ -563,14 +563,18 @@ target_handler::trajectory target_handler::mode_turrets( avatar &you, vehicle &v
         tripoint_bub_ms pos = veh.bub_part_pos( *t );
 
         int res = 0;
-        res = std::max( res, static_cast<int>(std::round( trig_dist_z_adjust( you.pos_bub(), pos + point( range,
-                                               0 ) ) ) ) );
-        res = std::max( res, static_cast<int>(std::round( trig_dist_z_adjust( you.pos_bub(), pos + point( -range,
-                                               0 ) ) ) ) );
-        res = std::max( res, static_cast<int>(std::round( trig_dist_z_adjust( you.pos_bub(), pos + point( 0,
-                                               range ) ) ) ) );
-        res = std::max( res, static_cast<int>(std::round( trig_dist_z_adjust( you.pos_bub(), pos + point( 0,
-                                               -range ) ) ) ) );
+        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
+                                               pos + point( range,
+                                                       0 ) ) ) ) );
+        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
+                                               pos + point( -range,
+                                                       0 ) ) ) ) );
+        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
+                                               pos + point( 0,
+                                                       range ) ) ) ) );
+        res = std::max( res, static_cast<int>( std::round( trig_dist_z_adjust( you.pos_bub(),
+                                               pos + point( 0,
+                                                       -range ) ) ) ) );
         range_total = std::max( range_total, res );
     }
 
@@ -1375,7 +1379,7 @@ int Character::throwing_dispersion( const item &to_throw, Creature *critter,
         // It's easier to dodge at close range (thrower needs to adjust more)
         // Dodge x10 at point blank, x5 at 1 dist, then flat
         float effective_dodge = critter->get_dodge() * std::max( 1,
-                                10 - 5 * static_cast<int>(std::round( trig_dist_z_adjust( pos_bub(),
+                                10 - 5 * static_cast<int>( std::round( trig_dist_z_adjust( pos_bub(),
                                         critter->pos_bub() ) ) ) );
         dispersion += throw_dispersion_per_dodge( true ) * effective_dodge;
     }
@@ -2203,7 +2207,8 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
     }
 
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, is_blind_throw ) );
-    const double range = static_cast<double>( std::round( trig_dist_z_adjust( you.pos_bub(), target_pos ) ) );
+    const double range = static_cast<double>( std::round( trig_dist_z_adjust( you.pos_bub(),
+                         target_pos ) ) );
 
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
 
@@ -2244,7 +2249,8 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     }
     item weapon = null_item_reference();
     const dispersion_sources dispersion( you.throwing_dispersion( weapon, target, false ) );
-    double range = static_cast<double>( std::round( trig_dist_z_adjust( you.grab_1.victim->pos_bub(), target_pos ) ) );
+    double range = static_cast<double>( std::round( trig_dist_z_adjust( you.grab_1.victim->pos_bub(),
+                                        target_pos ) ) );
     const double target_size = target != nullptr ? target->ranged_target_size() : 1.0f;
     float throwforce = 0.0f;
     if( you.grab_1.victim ) {
@@ -3311,8 +3317,9 @@ void target_ui::update_target_list()
     // Get targets in range and sort them by distance (targets[0] is the closest)
     targets = you->get_targetable_creatures( range, mode == TargetMode::Reach );
     std::sort( targets.begin(), targets.end(), [&]( const Creature * lhs, const Creature * rhs ) {
-        return static_cast<int>( std::round( trig_dist_z_adjust( lhs->pos_bub(), you->pos_bub() ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs->pos_bub(),
-                you->pos_bub() ) ) );
+        return static_cast<int>( std::round( trig_dist_z_adjust( lhs->pos_bub(),
+                                             you->pos_bub() ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs->pos_bub(),
+                                                     you->pos_bub() ) ) );
     } );
 }
 
@@ -3412,7 +3419,8 @@ int target_ui::dist_fn( const tripoint_bub_ms &p )
         }
     }
     if( src.z() == p.z() ) {
-        return static_cast<int>( z_adjust + static_cast<int>(std::round( trig_dist_z_adjust( src, p ) ) ) );
+        return static_cast<int>( z_adjust + static_cast<int>( std::round( trig_dist_z_adjust( src,
+                                 p ) ) ) );
     } else {
         // Always round up so that the Z adjustment actually matters.
         return static_cast<int>( z_adjust + std::ceil( trig_dist_z_adjust( src, p ) ) );

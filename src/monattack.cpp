@@ -250,9 +250,9 @@ static bool within_visual_range( monster *z, int max_range )
 static bool within_target_range( const monster *const z, const Creature *const target, int range )
 {
     if( z->is_adjacent( target, true ) ) {
-    add_msg ( _( "its true" ) );
+        add_msg( _( "its true" ) );
     } else {
-    add_msg ( _( "its false" ) );
+        add_msg( _( "its false" ) );
     }
     return target != nullptr &&
            ( z->is_adjacent( target, true ) ||

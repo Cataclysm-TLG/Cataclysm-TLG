@@ -8281,7 +8281,8 @@ std::vector<tripoint_bub_ms> map::find_clear_path( const tripoint_bub_ms &source
     const int max_start_offset = std::abs( ideal_start_offset ) * 2 + 1;
     for( int horizontal_offset = -1; horizontal_offset <= max_start_offset; ++horizontal_offset ) {
         int candidate_offset = horizontal_offset * ( start_sign == 0 ? 1 : start_sign );
-        if( sees( source, destination, static_cast<int>( std::round( trig_dist_z_adjust( source, destination ) ) ),
+        if( sees( source, destination, static_cast<int>( std::round( trig_dist_z_adjust( source,
+                  destination ) ) ),
                   candidate_offset, /*with_fields=*/true, /*allow_cached=*/false ) ) {
             return line_to( source, destination, candidate_offset, 0 );
         }
@@ -8418,7 +8419,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     // Ugly `if` for now
     // TODO: Why is it even like this?
     if( f.z() == t.z() ) {
-        if( ( range < static_cast<int>(std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
+        if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f, t ) ) ) ) ||
             !inbounds( t ) ) {
             return false; // Out of range!
         }
@@ -8462,7 +8463,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     }
 
     // 3D path check
-    if( ( range < static_cast<int>(std::round( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ) ||
+    if( ( range < static_cast<int>( std::round( trig_dist_z_adjust( f.raw(), t.raw() ) ) ) ) ||
         !inbounds( t ) ) {
         return false;
     }

@@ -299,7 +299,9 @@ bool mon_spellcasting_actor::call( monster &mon ) const
     spell_instance.set_message( spell_data.trigger_message );
 
     // Bail out if the target is out of range.
-    if( !spell_data.self && static_cast<int>( std::round( trig_dist_z_adjust( mon.pos_bub(), target ) > spell_instance.range( mon ) ) ) ) {
+    if( !spell_data.self &&
+        static_cast<int>( std::round( trig_dist_z_adjust( mon.pos_bub(),
+                                      target ) > spell_instance.range( mon ) ) ) ) {
         return false;
     }
 

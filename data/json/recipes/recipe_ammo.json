@@ -83,15 +83,14 @@
     "skill_used": "fabrication",
     "skills_required": [ "survival", 1 ],
     "difficulty": 3,
-    "charges": 10,
-    "time": "100 m",
+    "time": "10 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "pocket_survival", 1 ], [ "book_archery", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -104,8 +103,7 @@
     "skill_used": "fabrication",
     "skills_required": [ "survival", 2 ],
     "difficulty": 3,
-    "charges": 10,
-    "time": "190 m",
+    "time": "19 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "pocket_survival", 1 ], [ "book_archery", 2 ] ],
     "proficiencies": [
@@ -121,9 +119,9 @@
       { "id": "PUNCH", "level": 1 }
     ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
-      [ [ "rock_flaking_any", 5, "LIST" ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "rock_flaking_any", 1, "LIST" ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -136,16 +134,15 @@
     "skill_used": "fabrication",
     "skills_required": [ "survival", 2 ],
     "difficulty": 3,
-    "charges": 10,
-    "time": "140 m",
+    "time": "14 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "pocket_survival", 1 ], [ "book_archery", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 }, { "id": "FILE", "level": 1 } ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
-      [ [ "antler", 1 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "antler_piece", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -158,16 +155,15 @@
     "skill_used": "fabrication",
     "skills_required": [ "survival", 2 ],
     "difficulty": 3,
-    "charges": 10,
-    "time": "110 m",
+    "time": "11 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "pocket_survival", 1 ], [ "book_archery", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
-      [ [ "nm_teeth", 2 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "nm_teeth", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -179,13 +175,12 @@
     "subcategory": "CSC_AMMO_ARROWS",
     "skill_used": "fabrication",
     "difficulty": 1,
-    "charges": 10,
-    "time": "80 m",
+    "time": "8 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "book_archery", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "stick", 5 ] ] ]
+    "components": [ [ [ "stick", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -198,16 +193,17 @@
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
     "charges": 10,
-    "time": "190 m",
+    "time": "40 m",
+    "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "steel_tiny", 10, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "steel_tiny", 1, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -221,9 +217,9 @@
     "skills_required": [ [ "archery", 4 ], [ "survival", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "charges": 10,
-    "time": "200 m",
+    "time": "40 m",
     "autolearn": true,
+    "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
     "qualities": [
@@ -234,9 +230,9 @@
     ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
-      [ [ "adhesive", 5, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "steel_tiny", 10, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "steel_tiny", 1, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -249,14 +245,14 @@
     "skill_used": "fabrication",
     "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 3,
-    "charges": 2,
-    "time": "45 m",
+    "charges": 1,
+    "time": "22 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "stick", 5 ], [ "broom", 5 ], [ "2x4", 5 ], [ "mop", 5 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -269,15 +265,14 @@
     "skill_used": "fabrication",
     "skills_required": [ [ "survival", 1 ] ],
     "difficulty": 5,
-    "charges": 2,
     "time": "90 m",
     "book_learn": [ [ "textbook_mesoam", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_redsmithing" } ],
     "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
-      [ [ "bronze_tiny", 2, "LIST" ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "bronze_tiny", 1, "LIST" ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
@@ -331,17 +326,16 @@
     "skills_required": [ [ "survival", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "charges": 10,
-    "time": "30 m",
+    "time": "15 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
       [ [ "steel_tiny", 1, "LIST" ] ],
-      [ [ "stick", 3 ], [ "broom", 3 ], [ "2x4", 3 ], [ "mop", 3 ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -355,17 +349,17 @@
     "skills_required": [ [ "survival", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "charges": 10,
     "time": "30 m",
+    "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
       [ [ "steel_tiny", 1, "LIST" ] ],
-      [ [ "stick", 3 ], [ "broom", 3 ], [ "2x4", 3 ], [ "mop", 3 ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -378,13 +372,12 @@
     "skill_used": "fabrication",
     "skills_required": [ "survival", 2 ],
     "difficulty": 1,
-    "charges": 10,
-    "time": "15 m",
+    "time": "10 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "book_archery", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "stick", 3 ], [ "broom", 3 ], [ "2x4", 3 ], [ "mop", 3 ] ] ]
+    "components": [ [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -395,15 +388,14 @@
     "skill_used": "fabrication",
     "skills_required": [ [ "survival", 3 ] ],
     "difficulty": 3,
-    "charges": 10,
-    "time": "20 m",
+    "time": "14 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "tools": [ [ [ "fire", -1 ] ] ],
     "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 10, "LIST" ] ],
-      [ [ "stick", 3 ], [ "broom", 3 ], [ "2x4", 3 ], [ "mop", 3 ] ],
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
