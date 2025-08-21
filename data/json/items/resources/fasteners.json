@@ -46,7 +46,7 @@
     "copy-from": "button_steel",
     "type": "AMMO",
     "name": { "str": "bronze button" },
-    "description": "A bronze button, found on ancient clothing.",
+    "description": "A bronze clothing button.",
     "weight": "10 g",
     "price": "3 USD",
     "price_postapoc": "0 cent",
@@ -57,8 +57,24 @@
     "copy-from": "button_plastic",
     "type": "AMMO",
     "name": { "str": "wooden button" },
-    "description": "A crude wooden button, usually found on very old clothing.",
+    "description": "A clothing button carved from wood.  It has been sanded and treated to render its surface smooth and glossy.",
     "material": [ "wood" ]
+  },
+    {
+    "id": "button_bone",
+    "copy-from": "button_plastic",
+    "type": "AMMO",
+    "name": { "str": "bone button" },
+    "description": "A clothing button carved from bone.",
+    "material": [ "bone" ]
+  },
+  {
+    "id": "button_horn",
+    "copy-from": "button_plastic",
+    "type": "AMMO",
+    "name": { "str": "horn button" },
+    "description": "A clothing button carved from horn.",
+    "material": [ "keratin" ]
   },
   {
     "id": "snapfastener_steel",
