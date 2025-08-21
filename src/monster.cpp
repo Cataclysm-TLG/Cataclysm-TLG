@@ -1931,6 +1931,9 @@ void monster::make_bleed( const effect_source &source, time_duration duration, i
     }
 
     duration = ( duration * type->bleed_rate ) / 100;
+    if( duration < 1_seconds ) {
+       return;
+    }
     if( type->in_species( species_ROBOT ) ) {
         add_effect( source, effect_dripping_mechanical_fluid, duration, bodypart_str_id::NULL_ID() );
     } else {
@@ -2220,7 +2223,7 @@ void monster::deal_damage_handle_type( const effect_source &source, const damage
             return;
         }
     }
-    if( du.type == damage_bullet || du.type->edged ) {
+    if( ( du.type == damage_bullet || du.type->edged ) && adjusted_damage >= 1 ) {
         make_bleed( source, 1_minutes * rng( 0, adjusted_damage ) );
     }
 
