@@ -3,7 +3,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "quiver_bow_hunter",
-    "entries": [ { "item": "arrow_heavy_fire_hardened_fletched", "charges": 16 } ]
+    "entries": [ { "item": "arrow_heavy_fire_hardened_fletched", "charges": 12 } ]
   },
   {
     "type": "item_group",

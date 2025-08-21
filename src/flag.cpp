@@ -80,6 +80,7 @@ const flag_id flag_CONSUMABLE( "CONSUMABLE" );
 const flag_id flag_COOKED( "COOKED" );
 const flag_id flag_CORPSE( "CORPSE" );
 const flag_id flag_CORROSIVE( "CORROSIVE" );
+const flag_id flag_CROSSBOW( "CROSSBOW" );
 const flag_id flag_CRUTCHES( "CRUTCHES" );
 const flag_id flag_CUSHION_FALL( "CUSHION_FALL" );
 const flag_id flag_CUSTOM_EXPLOSION( "CUSTOM_EXPLOSION" );

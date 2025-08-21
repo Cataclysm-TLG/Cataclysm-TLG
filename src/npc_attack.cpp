@@ -197,7 +197,8 @@ npc_attack_rating npc_attack_spell::evaluate_tripoint(
         if( source.sees( *critter ) ) {
             damage = attack_spell.dps( source, *critter );
         }
-        const int distance_to_me = static_cast<int>(std::round( trig_dist_z_adjust( source.pos_bub(), potential_target ) ) );
+        const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( source.pos_bub(),
+                                   potential_target ) ) );
         const bool friendly_fire = att == Creature::Attitude::FRIENDLY &&
                                    !source.rules.has_flag( ally_rule::avoid_friendly_fire );
         int attitude_mult = 3;
@@ -243,8 +244,9 @@ void npc_attack_melee::use( npc &source, const tripoint_bub_ms &location ) const
         return;
     }
     // TODO: Move this to line.h
-    int target_distance = static_cast<int>( static_cast<int>(std::round( trig_dist_z_adjust( source.pos_bub(),
-                                            location ) ) ) );
+    int target_distance = static_cast<int>( static_cast<int>( std::round( trig_dist_z_adjust(
+            source.pos_bub(),
+            location ) ) ) );
     if( source.posz() != location.z() ) {
         // Always round up so that the Z adjustment actually matters.
         target_distance = static_cast<int>( std::ceil( trig_dist_z_adjust( source.pos_bub(),
@@ -568,7 +570,8 @@ npc_attack_rating npc_attack_gun::evaluate_tripoint(
     }
 
     const bool avoids_friendly_fire = source.rules.has_flag( ally_rule::avoid_friendly_fire );
-    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location, source.pos_bub() ) ) );
+    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location,
+                               source.pos_bub() ) ) );
 
     // Make attacks that involve moving to find clear LOS slightly less likely
     if( has_obstruction( source.pos_bub(), location, avoids_friendly_fire ) ) {
@@ -757,7 +760,8 @@ npc_attack_rating npc_attack_throw::evaluate(
         // Calculated for all targetable points, not just those with targets
         if( throw_now ) {
             // TODO: Take into account distance to allies too
-            const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( potential, source.pos_bub() ) ) );
+            const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( potential,
+                                       source.pos_bub() ) ) );
             int result = npc_attack_constants::base_throw_now + distance_to_me;
             if( !has_obstruction( source.pos_bub(), potential, avoids_friendly_fire ) ) {
                 // More likely to pick a target tile that isn't obstructed
@@ -838,7 +842,8 @@ npc_attack_rating npc_attack_throw::evaluate_tripoint(
     const float throw_mult = throw_cost( source, single_item ) * source.speed_rating() / 100.0f;
     const int damage = source.thrown_item_total_damage_raw( single_item );
     float dps = damage / throw_mult;
-    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location, source.pos_bub() ) ) );
+    const int distance_to_me = static_cast<int>( std::round( trig_dist_z_adjust( location,
+                               source.pos_bub() ) ) );
     float suitable_item_mult = -0.15f;
     if( distance_to_me > 1 ) {
         if( thrown_item.has_flag( flag_NPC_THROWN ) ) {

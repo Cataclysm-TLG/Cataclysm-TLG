@@ -69,6 +69,21 @@
   },
   {
     "type": "GENERIC",
+    "id": "antler_piece",
+    "symbol": "%",
+    "color": "white",
+    "name": { "str": "antler piece" },
+    "description": "A small section of antler that has been cut into more manageable pieces.",
+    "price": "0 cent",
+    "material": [ "keratin" ],
+    "techniques": [ "WBLOCK_1" ],
+    "weight": "140 g",
+    "volume": "80 ml",
+    "longest_side": "4 cm",
+    "to_hit": -2
+  },
+  {
+    "type": "GENERIC",
     "id": "fighter_sting",
     "name": { "str": "fungal fighter stinger" },
     "description": "A short dart from a fungal fighter.  Makes a poor melee weapon.",
