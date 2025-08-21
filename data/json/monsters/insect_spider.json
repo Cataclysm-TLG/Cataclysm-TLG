@@ -2642,7 +2642,7 @@
     "id": "mon_locust",
     "type": "MONSTER",
     "name": { "str": "giant locust" },
-    "description": "A yellow and brown mutated locust the size of a dog with big eyes and long, powerful legs.  You don't think it'll eat you, but it could cause massive damage to nearby plants.",
+    "description": "A yellow and brown mutated locust the size of a dog with big eyes and long, powerful legs and wings that never seem to stop twitching.  It seems intent on finding food above all else - any food.",
     "default_faction": "locust",
     "bodytype": "flying insect",
     "species": [ "INSECT_FLYING" ],
@@ -2653,12 +2653,12 @@
     "material": [ "iflesh" ],
     "symbol": "g",
     "color": "brown",
-    "aggression": -5,
-    "morale": 10,
+    "aggression": -2,
+    "morale": 15,
     "melee_skill": 3,
     "melee_dice": 1,
     "melee_dice_sides": 6,
-    "stomach_size": 500,
+    "stomach_size": 1000,
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "dodge": 2,
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_flying" ],
@@ -2670,9 +2670,9 @@
     "reproduction": { "baby_egg": "egg_locust", "baby_count": 5, "baby_timer": 10 },
     "baby_flags": [ "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_roach", "biosig_timer": 3 },
-    "anger_triggers": [ "FRIEND_ATTACKED" ],
+    "anger_triggers": [ "FRIEND_ATTACKED", "PLAYER_WEAK" ],
     "fear_triggers": [ "HURT", "FIRE" ],
-    "upgrades": { "age_grow": 42, "into": "mon_locust_mega" },
+    "upgrades": { "half_life": 35, "into_group": "GROUP_EMPTY" },
     "special_attacks": [
       {
         "type": "leap",
@@ -2681,41 +2681,12 @@
         "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
-      [ "EAT_CROP", 60 ],
-      [ "BROWSE", 60 ],
-      [ "GRAZE", 120 ]
+      [ "EAT_CROP", 20 ],
+      [ "BROWSE", 20 ],
+      [ "GRAZE", 40 ]
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "STUMBLES", "PATH_AVOID_DANGER", "EATS" ],
     "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 1, "acid": 5 }
-  },
-  {
-    "id": "mon_locust_mega",
-    "type": "MONSTER",
-    "name": { "str": "famine" },
-    "description": "A cow-sized yellow and brown mutated locust with huge, staring eyes and long, powerful legs.  The bane of the post-apocalyptic farmer.",
-    "copy-from": "mon_locust",
-    "proportional": { "hp": 20, "speed": 0.25, "morale": 4, "dodge": 0.5, "vision_day": 2 },
-    "volume": "625 L",
-    "weight": "815 kg",
-    "stomach_size": 18000,
-    "melee_dice": 2,
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "dissect": "dissect_insect_sample_large",
-    "special_attacks": [
-      {
-        "type": "leap",
-        "cooldown": 2,
-        "max_range": 4,
-        "allow_no_target": true,
-        "condition": { "not": { "u_has_effect": "maimed_leg" } }
-      },
-      [ "EAT_CROP", 30 ],
-      [ "BROWSE", 30 ],
-      [ "GRAZE", 90 ],
-      { "id": "smash", "throw_strength": 36, "cooldown": 30 }
-    ],
-    "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 3, "acid": 6 }
   },
   {
     "id": "mon_locust_nymph",
@@ -3002,9 +2973,9 @@
     "bodytype": "insect",
     "species": [ "INSECT" ],
     "volume": "50 L",
-    "weight": "90750 g",
-    "hp": 120,
-    "speed": 105,
+    "weight": "70750 g",
+    "hp": 140,
+    "speed": 95,
     "material": [ "iflesh" ],
     "symbol": "B",
     "color": "light_red",
@@ -3024,6 +2995,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "dissect": "dissect_insect_sample_single",
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
+    "fear_triggers": [ "FIRE" ],
     "special_attacks": [
       {
         "type": "bite",
@@ -3031,11 +3003,18 @@
         "accuracy": 4,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 7, "armor_penetration": 4 } ],
         "condition": { "not": { "u_has_effect": "maimed_mandible" } }
+      },
+      {
+        "type": "leap",
+        "cooldown": 20,
+        "max_range": 8,
+        "allow_no_target": true,
+        "condition": { "not": { "u_has_effect": "maimed_wing" } }
       }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER" ],
-    "upgrades": { "half_life": 28, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 3, "cut": 10, "bullet": 15, "electric": 3, "acid": 12 }
+    "upgrades": { "half_life": 45, "into": "mon_lady_bug_giant" },
+    "armor": { "bash": 5, "cut": 12, "bullet": 8, "electric": 3, "acid": 12 }
   },
   {
     "id": "mon_lady_bug_giant",
@@ -3045,10 +3024,10 @@
     "default_faction": "ladybug",
     "bodytype": "insect",
     "species": [ "INSECT" ],
-    "volume": "400 L",
-    "weight": "533 kg",
-    "hp": 350,
-    "speed": 110,
+    "volume": "200 L",
+    "weight": "280 kg",
+    "hp": 450,
+    "speed": 90,
     "material": [ "iflesh" ],
     "symbol": "B",
     "color": "red",
@@ -3067,7 +3046,7 @@
     "reproduction": { "baby_egg": "egg_lady_bug", "baby_count": 3, "baby_timer": 15 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
-    "fear_triggers": [ "HURT" ],
+    "fear_triggers": [ "HURT", "FIRE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [
       {
@@ -3076,12 +3055,20 @@
         "accuracy": 6,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_penetration": 8 } ],
         "condition": { "not": { "u_has_effect": "maimed_mandible" } }
+      },
+      {
+        "type": "leap",
+        "cooldown": 40,
+        "max_range": 8,
+        "allow_no_target": true,
+        "condition": { "not": { "u_has_effect": "maimed_wing" } }
       }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "PATH_AVOID_DANGER" ],
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_beetle" ],
-    "armor": { "bash": 7, "cut": 20, "bullet": 30, "electric": 3, "acid": 14 }
+    "upgrades": { "half_life": 28, "into_group": "GROUP_EMPTY" },
+    "armor": { "bash": 7, "cut": 22, "bullet": 18, "electric": 3, "acid": 14 }
   },
   {
     "id": "mon_lady_bug_larva",
@@ -3104,7 +3091,7 @@
     "dissect": "dissect_insect_sample_single",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "age_grow": 30, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 1, "cut": 2, "stab": 2, "acid": 4 }
+    "armor": { "bash": 2, "cut": 3, "stab": 3, "acid": 4 }
   },
   {
     "id": "mon_grasshopper_small",
