@@ -2899,8 +2899,13 @@ bool map::has_vehicle_floor( const tripoint &p ) const
     const tripoint_bub_ms p_bub( p );
     return has_vehicle_floor( p_bub );
 }
+
 bool map::has_vehicle_floor( const tripoint_bub_ms &p ) const
 {
+    const optional_vpart_position vp = veh_at( p );
+    if( !vp ) {
+        return false;
+    }
     return veh_at( p ).part_with_feature( "BOARDABLE", false ) ||
            veh_at( p ).part_with_feature( "OBSTACLE", false );
 }
