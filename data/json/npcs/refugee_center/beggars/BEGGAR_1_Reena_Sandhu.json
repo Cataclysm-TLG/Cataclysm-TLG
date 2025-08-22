@@ -161,7 +161,7 @@
     "speaker_effect": [ { "effect": { "u_bulk_donate": 1 } }, { "effect": { "run_eocs": [ "EOC_BEGGAR_TEST_IF_FOOD_CANNIBAL" ] } } ],
     "responses": [
       { "text": "What are you doing here?", "topic": "TALK_REFUGEE_BEGGAR_1_INTRO" },
-      { "text": "No problem.  <end_talking_leave>", "topic": "TALK_DONE" }
+      { "text": "No problem.  Bye.", "topic": "TALK_DONE" }
     ]
   },
   {
