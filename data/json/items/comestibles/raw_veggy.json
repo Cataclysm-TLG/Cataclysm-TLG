@@ -732,8 +732,8 @@
     "material": [ "vegetable" ],
     "volume": "2062 ml",
     "fun": -1,
-    "flags": [ "RAW", "INEDIBLE", "RAT", "MOUSE", "CATTLE" ],
-    "vitamins": [ [ "vitC", "102 mg" ], [ "iron", "9200 μg" ], [ "calcium", "237600 μg" ], [ "vegetable_allergen", 1 ] ],
+    "flags": [ "RAW", "INEDIBLE" ],
+    "vitamins": [ [ "vitC", "153 mg" ], [ "iron", "13800 μg" ], [ "calcium", "356400 μg" ], [ "vegetable_allergen", 1 ] ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -746,9 +746,9 @@
     "price": "64 cent",
     "calories": 73,
     "quench": 5,
-    "volume": "500 ml",
+    "//": "Some volume and weight are lost as pulp.",
+    "volume": "343 ml",
     "weight": "283 g",
-    "//": "Cutting it up makes it viable for rabbits, too.",
     "price_postapoc": "60 cent",
     "flags": [ "SMOKABLE", "RAW", "RAT", "MOUSE", "CATTLE", "RABBIT" ],
     "smoking_result": "dry_vegetable",
