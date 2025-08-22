@@ -60,7 +60,7 @@
     "description": "A clothing button carved from wood.  It has been sanded and treated to render its surface smooth and glossy.",
     "material": [ "wood" ]
   },
-    {
+  {
     "id": "button_bone",
     "copy-from": "button_plastic",
     "type": "AMMO",
