@@ -300,9 +300,9 @@
     ],
     "locations": [ "forest" ],
     "city_distance": [ 12, -1 ],
-    "occurrences": [ 30, 100 ],
+    "occurrences": [ 10, 100 ],
     "priority": 1,
-    "flags": [ "CLASSIC", "FARM", "OVERMAP_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
+    "flags": [ "CLASSIC", "FARM", "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
   },
   {
     "type": "overmap_special",

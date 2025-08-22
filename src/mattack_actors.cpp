@@ -394,9 +394,9 @@ void melee_actor::load_internal( const JsonObject &obj, const std::string & )
     optional( obj, was_loaded, "hit_dmg_npc", hit_dmg_npc,
               to_translation( "%1$s bites <npcname>'s %2$s!" ) );
     optional( obj, was_loaded, "throw_msg_u", throw_msg_u,
-              to_translation( "%s hits you with such a force that it sends you flying!" ) );
+              to_translation( "%s hits you with such force that you're sent flying!" ) );
     optional( obj, was_loaded, "throw_msg_npc", throw_msg_npc,
-              to_translation( "%s hits <npcname> with such a force that it sends them flying!" ) );
+              to_translation( "%s hits <npcname> with such force that they're sent flying!" ) );
 
     if( obj.has_member( "condition" ) ) {
         read_condition( obj, "condition", condition, false );
