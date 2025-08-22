@@ -39,7 +39,9 @@
       "slimepit_top": "slimepit_z0_north",
       "slimepit_bottom": "slimepit_z-1_north",
       "slimepit": "slimepit_z-2_north",
-      "slimepit_down": "slimepit_z0_north"
+      "slimepit_down": "slimepit_z0_north",
+      "cabin_lapin": "cabin_8",
+      "cabin_roof_lapin": "cabin_roof_8"
     }
   }
 ]
