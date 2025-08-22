@@ -39,7 +39,17 @@
       "slimepit_top": "slimepit_z0_north",
       "slimepit_bottom": "slimepit_z-1_north",
       "slimepit": "slimepit_z-2_north",
-      "slimepit_down": "slimepit_z0_north"
+      "slimepit_down": "slimepit_z0_north",
+      "cabin_lapin": "cabin_8",
+      "cabin_roof_lapin": "cabin_roof_8",
+      "cabin_lapin_north": "cabin_8_north",
+      "cabin_roof_lapin_north": "cabin_roof_8_north",
+      "cabin_lapin_east": "cabin_8_east",
+      "cabin_roof_lapin_east": "cabin_roof_8_east",
+      "cabin_lapin_south": "cabin_8_south",
+      "cabin_roof_lapin_south": "cabin_roof_8_south",
+      "cabin_lapin_west": "cabin_8_west",
+      "cabin_roof_lapin_west": "cabin_roof_8_west"
     }
   }
 ]

@@ -778,7 +778,7 @@
   },
   {
     "method": "json",
-    "om_terrain": "cabin_lapin",
+    "om_terrain": "cabin_8",
     "type": "mapgen",
     "weight": 150,
     "object": {
@@ -810,16 +810,13 @@
         "........................"
       ],
       "palettes": [ "cabin_palette" ],
-      "terrain": { ".": "t_region_groundcover", "_": "t_region_soil", "x": "t_floor" },
-      "furniture": { "x": "f_firefly_terrarium" },
-      "place_monster": [ { "monster": "mon_rabbit_domestic", "x": 8, "y": 21, "repeat": [ 3, 6 ] } ],
-      "place_npcs": [ { "class": "warrener", "x": 9, "y": 17 } ]
+      "terrain": { ".": "t_region_groundcover", "_": "t_region_soil", "x": "t_floor" }
     }
   },
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": "cabin_roof_lapin",
+    "om_terrain": "cabin_roof_8",
     "object": {
       "fill_ter": "t_tar_flat_roof",
       "rows": [
