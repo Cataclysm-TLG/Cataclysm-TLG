@@ -268,7 +268,7 @@
       "cabin_5",
       "cabin_6",
       "cabin_7",
-      "cabin_lapin",
+      "cabin_8",
       "bandit_cabin",
       "cabin_prepper"
     ],
@@ -292,7 +292,7 @@
       "cabin_roof_5",
       "cabin_roof_6",
       "cabin_roof_7",
-      "cabin_roof_lapin",
+      "cabin_roof_8",
       "bandit_cabin_roof"
     ],
     "vision_levels": "roof_or_air",

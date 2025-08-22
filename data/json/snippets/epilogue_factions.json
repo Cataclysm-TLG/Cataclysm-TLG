@@ -53,11 +53,11 @@
       },
       {
         "id": "epilogue_faction_robofac_0",
-        "text": "    Despite Melchior's enlightened leadership, shortages and crises plagued Hub-01 from the first day of the Cataclysm.  The researchers and administrators among the surviving staff lacked the practical skills to survive in the savage new world.  As Hub-01's systems collapsed from a lack of maintenance, the few survivors fled the building to be killed by the zombies and bandits."
+        "text": "    Shortages and crises plagued Hub-01 from the first day of the Cataclysm.  The researchers and administrators among the surviving staff lacked the practical skills to survive in the savage new world.  As Hub-01's systems collapsed from a lack of maintenance, the few survivors fled the building to be killed by the zombies and bandits."
       },
       {
         "id": "epilogue_faction_robofac_150",
-        "text": "       Melchior's enlightened leadership, combined with practical skills provided by mercenary survivors, allowed Hub-01 to flourish briefly.  It became a mecca for advanced technology, selling off devices and equipment that could no longer be reproduced.  Despite this, Hub-01 was never able to expand sufficiently to renew its own population, nor was it able to unite with any other prosperous community, nor could enough trustworthy mercenaries (or staff) be recruited to replace those who died in its defense.  Hub-01 fell into disrepair and ruin.  After the air processing facility was overtaken by mold, the remaining staff of Hub-01 fled the building and were killed by zombies and bandits.  Melchior's drones - possibly by design - were incapable of maintaining themselves without human hands, and stopped working a few months later.  Without regular maintenance, Melchior's own systems also fell to ruin, and less than a decade after the Cataclysm, humanity's first AI powered down and was forgotten."
+        "text": "       Hub-01 was never able to expand sufficiently to renew its own population, nor was it able to unite with any other prosperous community, nor could enough trustworthy mercenaries (or staff) be recruited to replace those who died in its defense.  Hub-01 fell into disrepair and ruin.  After the air processing facility was overtaken by mold, the remaining staff of Hub-01 fled the building and were killed by zombies and bandits.  Melchior's drones - possibly by design - were incapable of maintaining themselves without human hands, and stopped working a few months later.  Without regular maintenance, Melchior's own systems also fell to ruin, and less than a decade after the Cataclysm, humanity's first AI powered down and was forgotten."
       },
       {
         "id": "epilogue_faction_isherwoods_0",
@@ -66,14 +66,6 @@
       {
         "id": "epilogue_faction_isherwoods_150",
         "text": "    The generational land of the Isherwoods came to flourish following <the_cataclysm>, helping to feed nearby settlements.  Survivors flocked to learn botany, animal handling, and backwoods remedies, eventually forming a small community…"
-      },
-      {
-        "id": "epilogue_faction_lapin_0",
-        "text": "    Mr. Lapin continued his remote life in the wilderness, teaching whoever would visit.  The survivors who came slowly dwindled, until they stopped entirely.  Mr. Lapin was found dead several years later following a heart attack.  His body had decomposed to skeletal remains…"
-      },
-      {
-        "id": "epilogue_faction_lapin_150",
-        "text": "    The knowledge Mr. Lapin taught attracted a slew of individuals, who constructed makeshift housing to study with him.  As more people came, they formed a small community…"
       },
       {
         "id": "epilogue_faction_prisoners_0",

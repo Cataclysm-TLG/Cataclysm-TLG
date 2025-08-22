@@ -8,5 +8,10 @@
     "type": "overmap_special_migration",
     "id": "solar_farm",
     "new_id": "power_station_small"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Cabin_Lapin",
+    "new_id": "Cabin_8"
   }
 ]
