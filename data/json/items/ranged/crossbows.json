@@ -271,7 +271,7 @@
     "price_postapoc": "60 USD",
     "to_hit": -1,
     "loudness": 4,
-    "ranged_damage": { "damage_type": "stab", "amount": 9 },
+    "ranged_damage": { "damage_type": "stab", "amount": 10 },
     "range": 12,
     "dispersion": 400,
     "sight_dispersion": 90,
