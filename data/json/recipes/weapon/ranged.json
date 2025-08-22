@@ -925,7 +925,7 @@
       { "id": "SAW_W", "level": 1 },
       { "id": "HAMMER", "level": 1 }
     ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
+    "components": [ [ [ "2x4", 1 ] ], [ [ "2x4", 1 ], [ "stick", 1 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -945,7 +945,7 @@
     ],
     "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "2x4", 1 ] ], [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -967,8 +967,8 @@
     ],
     "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
-    "using": [ [ "blacksmithing_basic", 3 ], [ "steel_tiny", 3 ] ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
+    "using": [ [ "blacksmithing_basic", 3 ], [ "steel_tiny", 4 ] ],
+    "components": [ [ [ "2x4", 2 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "nuts_bolts", 8 ] ] ]
   },
   {
     "type": "recipe",
@@ -991,7 +991,7 @@
     "book_learn": [ [ "recipe_bows", 1 ], [ "manual_archery", 3 ], [ "book_archery", 2 ], [ "textbook_weapwest", 6 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
     "using": [ [ "blacksmithing_basic", 3 ], [ "steel_tiny", 4 ] ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "cordage_superior", 6, "LIST" ] ] ]
+    "components": [ [ [ "2x4", 2 ] ], [ [ "cordage_superior", 6, "LIST" ] ], [ [ "nuts_bolts", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -1329,8 +1329,11 @@
     "proficiencies": [
       { "proficiency": "prof_bowyery", "time_multiplier": 1.5, "skill_penalty": 0.15 },
       { "proficiency": "prof_gunsmithing_spring" },
-      { "proficiency": "prof_carving", "time_multiplier": 1.5 }
+      { "proficiency": "prof_carving", "time_multiplier": 1.25 },
+      { "proficiency": "prof_metalworking", "time_multiplier": 1.25 },
+      { "proficiency": "prof_blacksmithing", "time_multiplier": 1.25 }
     ],
+    "using": [ [ "blacksmithing_basic", 3 ] ],
     "components": [
       [ [ "2x4", 8 ], [ "stick", 16 ] ],
       [ [ "rope_superior_short", 2, "LIST" ] ],
@@ -1358,7 +1361,7 @@
     ],
     "book_learn": [ [ "textbook_armschina", 4 ] ],
     "qualities": [ { "id": "GRIND", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ],
-    "components": [ [ [ "2x4", 4 ], [ "stick", 4 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "2x4", 2 ] ], [ [ "2x4", 2 ], [ "stick", 2 ] ], [ [ "cordage_superior", 3, "LIST" ] ] ]
   },
   {
     "type": "recipe",
