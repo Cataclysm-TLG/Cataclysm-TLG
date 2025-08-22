@@ -306,7 +306,7 @@ void Character::update_body( const time_point &from, const time_point &to )
 
     activity_history.new_turn( in_sleep_state() );
 
-    // Cardio related health stuff
+    // Lifestyle and cardio stuff.
     if( calendar::once_every( 1_days ) ) {
         // not getting below half stamina even once in a whole day is not healthy
         if( get_value( "got_to_half_stam" ).empty() ) {
@@ -343,6 +343,10 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( -2, -200 );
         } else {
             remove_value( "got_to_very_low_morale" );
+        }
+
+        if( worn_with_flag( flag_FILTHY ) ) {
+            mod_daily_health( -1, -200 );
         }
     }
 
