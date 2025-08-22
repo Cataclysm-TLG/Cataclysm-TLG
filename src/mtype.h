@@ -27,6 +27,7 @@
 #include "weakpoint.h"
 
 class Creature;
+class JsonValue;
 class monster;
 struct dealt_projectile_attack;
 template <typename E> struct enum_traits;
