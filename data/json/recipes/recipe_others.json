@@ -756,7 +756,7 @@
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
     "difficulty": 3,
-    "time": "30 m",
+    "time": "120 m",
     "reversible": true,
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carpentry_basic" } ],

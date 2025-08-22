@@ -1675,8 +1675,8 @@
       },
       {
         "id": "sovcit_flag",
-        "name": { "str": "sovreign citizen flag" },
-        "description": "A large flag clearly inspired by the stars and stripes of the USA, but the red stripes are vertical, the blue's been swapped for white, and all the stars are blue instead.  This flag is one of the symbols of a loosely affiliated movement of people who believe that they are in one way or another exempt from compliance with the usual laws of the land.  Given the overall state of things, it is distinctly possible that they have had the last laugh.",
+        "name": { "str": "sovereign citizen flag" },
+        "description": "A large flag clearly inspired by the stars and stripes of the USA, but the red stripes are vertical, the blue's been swapped for white, and all the stars are blue instead.  This flag is one of the symbols of a loosely affiliated movement of people who believe that they are in one way or another exempt from compliance with the usual laws of the land.  Given the state of things, it is distinctly possible that they have had the last laugh.",
         "weight": 2
       },
       {
