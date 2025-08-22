@@ -1746,3 +1746,20 @@ void pet_food_data::deserialize( const JsonObject &data )
 {
     load( data );
 }
+
+static void check_for_delete( const JsonObject &jo, const std::string_view name,
+                              std::optional<int> &value )
+{
+    if( !jo.has_member( name ) ) {
+        return;
+    }
+    std::optional<int> scratch;
+    // because this is delete, was_loaded is always true
+    optional( jo, true, name, scratch );
+    if( value.has_value() && scratch.has_value() && *scratch == *value ) {
+        value = std::nullopt;
+        return;
+    }
+    debugmsg( "Delete value for '%s' (%d) does not match existing (%d)", name, scratch.value_or( -1 ),
+              value.value_or( -1 ) );
+}
