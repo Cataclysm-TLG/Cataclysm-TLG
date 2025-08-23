@@ -1738,7 +1738,6 @@
       "EXAMINE_FROM_ABOVE",
       "DIFFICULT_Z",
       "ALLOW_ON_OPEN_AIR",
-      "BASH_UNDEPLOY",
       "DEPLOYED_FURNITURE_ABOVE"
     ],
     "deployed_item": "grapnel",
@@ -1748,7 +1747,7 @@
       "str_max": 20,
       "sound": "smash!",
       "sound_fail": "whump.",
-      "items": [ { "item": "grip_hook", "count": 4 }, { "item": "rope_30", "count": 1 } ]
+      "items": [ { "item": "scrap", "charges": [ 1, 5 ] }, { "item": "rope_30", "count": 1 } ]
     }
   },
   {
@@ -1762,8 +1761,7 @@
     "move_cost_mod": 1,
     "required_str": -1,
     "coverage": 2,
-    "flags": [ "CLIMBABLE", "TRANSPARENT", "SEEN_FROM_ABOVE", "ALLOW_ON_OPEN_AIR", "DIFFICULT_Z", "BASH_UNDEPLOY",
-      "DEPLOYED_FURNITURE_ABOVE" ],
+    "flags": [ "CLIMBABLE", "TRANSPARENT", "SEEN_FROM_ABOVE", "ALLOW_ON_OPEN_AIR", "DIFFICULT_Z", "DEPLOYED_FURNITURE_ABOVE" ],
     "examine_action": "deployed_furniture",
     "deployed_item": "vine_30",
     "bash": {
@@ -1785,8 +1783,7 @@
     "move_cost_mod": 1,
     "required_str": -1,
     "coverage": 2,
-    "flags": [ "CLIMBABLE", "TRANSPARENT", "SEEN_FROM_ABOVE", "ALLOW_ON_OPEN_AIR", "DIFFICULT_Z", "BASH_UNDEPLOY",
-      "DEPLOYED_FURNITURE_ABOVE" ],
+    "flags": [ "CLIMBABLE", "TRANSPARENT", "SEEN_FROM_ABOVE", "ALLOW_ON_OPEN_AIR", "DIFFICULT_Z", "DEPLOYED_FURNITURE_ABOVE" ],
     "examine_action": "deployed_furniture",
     "deployed_item": "rope_30",
     "bash": {
@@ -1811,6 +1808,13 @@
     "examine_action": "deployed_furniture",
     "deployed_item": "rope_30",
     "deconstruct": { "items": [ { "item": "rope_30", "count": 1 } ] },
+    "bash": {
+      "str_min": 19,
+      "str_max": 20,
+      "sound": "rrrrip!",
+      "sound_fail": "twang.",
+      "items": [ { "item": "rope_30", "count": 1 } ]
+    },
     "crafting_pseudo_item": "fake_lift_light"
   },
   {
