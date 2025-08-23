@@ -1747,7 +1747,7 @@
       "str_max": 20,
       "sound": "smash!",
       "sound_fail": "whump.",
-      "items": [ { "item": "scrap", "charges": [ 1, 5 ] }, { "item": "rope_30", "count": 1 } ]
+      "items": [ { "item": "scrap", "count": [ 1, 4 ] }, { "item": "rope_30", "count": 1 } ]
     }
   },
   {
