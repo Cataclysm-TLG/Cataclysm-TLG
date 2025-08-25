@@ -1611,15 +1611,16 @@ void iexamine::deployed_furniture( Character &you, const tripoint_bub_ms &pos )
                                name );
     } else {
         if( here.has_flag_furn( ter_furn_flag::TFLAG_DEPLOYED_FURNITURE_ABOVE, pos ) ) {
-            you.add_msg_if_player( m_info, _( "The %s is anchored firmly above, you can't take it down from here." ),
-                                name );
+            you.add_msg_if_player( m_info,
+                                   _( "The %s is anchored firmly above, you can't take it down from here." ),
+                                   name );
             return;
         } else {
             if( !you.query_yn( _( "Take down the %s?" ), name ) ) {
                 return;
             }
             you.add_msg_if_player( m_info, _( "You take down the %s." ),
-                                name );
+                                   name );
         }
     }
 

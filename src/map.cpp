@@ -10286,8 +10286,10 @@ bool map::build_floor_cache( const int zlev )
                         terrain.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER ) ||
                         terrain.has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ||
                         terrain.has_flag( ter_furn_flag::TFLAG_TRANSPARENT_FLOOR ) ) {
+                        // If below SUPPORTS_ROOF then there is indeed a floor.
                         if( below_submap &&
-                            below_submap->get_furn( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUN_ROOF_ABOVE ) ) {
+                            ( below_submap->get_furn( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUN_ROOF_ABOVE ) ||
+                              below_submap->get_ter( sp ).obj().has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) ) {
                             continue;
                         }
                         const point p( sx + smx * SEEX, sy + smy * SEEY );
