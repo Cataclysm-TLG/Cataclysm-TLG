@@ -6672,7 +6672,7 @@ void map::draw_lab( mapgendata &dat )
                                 ter_set( p, fluid_type );
                                 furn_set( point_bub_ms( p ), furn_str_id::NULL_ID() );
                             }
-                        }, point_bub_ms( rng( 1, SEEX * 2 - 2 ), rng( 1, SEEY * 2 - 2 ) ), rng( 3, 6 ) );
+                        }, rng_map_point<point_bub_ms>( 1 ), rng( 3, 6 ) );
                     }
                     break;
                 }
@@ -6747,7 +6747,7 @@ void map::draw_lab( mapgendata &dat )
                             }
                         }
                     }
-                    tripoint_bub_ms center( rng( 6, SEEX * 2 - 7 ), rng( 6, SEEY * 2 - 7 ), abs_sub.z() );
+                    tripoint_bub_ms center = rng_map_point<tripoint_bub_ms>( 6, abs_sub.z() );
 
                     // Make a portal surrounded by more dense fungal stuff.
                     draw_rough_circle( [this]( const point_bub_ms & p ) {
