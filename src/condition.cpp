@@ -1405,11 +1405,12 @@ conditional_t::func f_is_furniture( bool is_npc )
 conditional_t::func f_player_see( bool is_npc )
 {
     return [is_npc]( const_dialogue const & d ) {
-        if( d.has_actor( is_npc ) ) {
-            const Creature *c = d.const_actor( is_npc )->get_const_creature();
+        const Creature *c = d.const_actor( is_npc )->get_const_creature();
+        if( c ) {
             return get_player_view().sees( *c );
+        } else {
+            return get_player_view().sees( d.const_actor( is_npc )->pos_bub() );
         }
-        return false;
     };
 }
 
