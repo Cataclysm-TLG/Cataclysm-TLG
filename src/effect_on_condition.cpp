@@ -215,10 +215,10 @@ void effect_on_conditions::load_existing_character( Character &you )
 }
 
 void effect_on_conditions::queue_effect_on_condition(
-        time_duration duration,
-        effect_on_condition_id eoc,
-        Character &you,
-        const std::unordered_map<std::string, std::string> &context )
+    time_duration duration,
+    effect_on_condition_id eoc,
+    Character &you,
+    const std::unordered_map<std::string, std::string> &context )
 {
     // Validate the EOC before dereferencing
     if( !eoc.is_valid() ) {

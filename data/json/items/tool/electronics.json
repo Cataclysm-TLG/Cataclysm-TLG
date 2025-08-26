@@ -304,12 +304,7 @@
     "volume": "4 ml",
     "longest_side": "5 cm",
     "pocket_data": [
-      {
-        "pocket_type": "SOFTWARE",
-        "max_contains_volume": "1 L",
-        "max_contains_weight": "1 kg",
-        "//": "obsolete; remove"
-      },
+      { "pocket_type": "SOFTWARE", "max_contains_volume": "1 L", "max_contains_weight": "1 kg", "//": "obsolete; remove" },
       {
         "pocket_type": "E_FILE_STORAGE",
         "rigid": true,
