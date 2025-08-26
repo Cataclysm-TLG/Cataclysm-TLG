@@ -260,14 +260,13 @@
       { "item": "portable_game", "prob": 20, "charges": 100 },
       [ "antenna", 25 ],
       { "group": "ammo_any_batteries_full", "prob": 50 },
-      { "item": "mp3", "prob": 40, "charges": 100 },
-      [ "usb_drive", 10 ],
+      { "item": "mp3", "prob": 30, "charges": 100 },
+      { "group": "new_phones", "prob": 90 },
+      { "group": "new_usb_drives", "prob": 10 },
+      { "group": "new_memory_cards", "prob": 10 },
       [ "manual_electronics", 20 ],
       [ "cable", 60 ],
-      { "item": "cell_phone", "prob": 60, "charges": 150 },
-      { "item": "smart_phone", "prob": 60, "charges": 120 },
       [ "wristwatch", 60 ],
-      [ "memory_card", 10 ],
       [ "fitness_band", 5 ]
     ]
   },
