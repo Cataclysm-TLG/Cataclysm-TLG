@@ -80,7 +80,10 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [
-      { "group": "book_manual_combat", "prob": 25 },
+      { "group": "book_military", "prob": 5 },
+      { "item": "textbook_anarch", "prob": 1 },
+      { "item": "book_lockpick", "prob": 1 },
+      { "group": "book_mag_combat", "prob": 15 },
       { "item": "software_hacking", "prob": 25 },
       { "item": "efile_lore", "prob": 70 },
       { "item": "efile_map", "prob": 5 },
