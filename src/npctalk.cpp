@@ -5501,6 +5501,11 @@ talk_effect_fun_t::func f_make_sound( const JsonObject &jo, std::string_view mem
 void process_eoc( const effect_on_condition_id &eoc, dialogue &d,
                   time_duration time_in_future )
 {
+    if( !eoc.is_valid() ) {
+        debugmsg( "process_eoc called with invalid EOC: %s", eoc.str().c_str() );
+        return;
+    }
+
     if( eoc->type == eoc_type::ACTIVATION ) {
         Character *alpha = d.has_alpha ? d.actor( false )->get_character() : nullptr;
         if( alpha ) {
@@ -5520,10 +5525,13 @@ void run_eoc_once( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue new
                    const duration_or_var &dov_time, bool random_time )
 {
     time_duration time_in_future = dov_time.evaluate( d );
-
     for( const eoc_entry &entry : eocs ) {
         effect_on_condition_id eoc_id =
             entry.var ? effect_on_condition_id( entry.var->evaluate( d ) ) : entry.id;
+        if( !eoc_id.is_valid() ) {
+            debugmsg( "run_eoc_once found invalid EOC ID: %s", eoc_id.str().c_str() );
+            continue;
+        }
         if( time_in_future == 0_seconds ) {
             eoc_id->activate( newDialog );
         } else {
@@ -5535,6 +5543,7 @@ void run_eoc_once( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue new
         }
     };
 }
+
 
 dialogue generate_new_dialogue( dialogue &d, bool has_alpha_var, bool has_beta_var,
                                 const str_or_var &alpha_var, const str_or_var &beta_var, bool is_alpha_loc, bool is_beta_loc,

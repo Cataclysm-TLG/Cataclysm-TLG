@@ -214,17 +214,28 @@ void effect_on_conditions::load_existing_character( Character &you )
     }
 }
 
-void effect_on_conditions::queue_effect_on_condition( time_duration duration,
-        effect_on_condition_id eoc, Character &you,
+void effect_on_conditions::queue_effect_on_condition(
+        time_duration duration,
+        effect_on_condition_id eoc,
+        Character &you,
         const std::unordered_map<std::string, std::string> &context )
 {
-    queued_eoc new_eoc = queued_eoc{ eoc, calendar::turn + duration, context };
+    // Validate the EOC before dereferencing
+    if( !eoc.is_valid() ) {
+        debugmsg( "queue_effect_on_condition called with invalid/dangling EOC: %s", eoc.str().c_str() );
+        return;
+    }
+
+    // Create the queued EOC
+    queued_eoc new_eoc{ eoc, calendar::turn + duration, context };
+
+    // Decide where to queue it
     if( eoc->global ) {
         g->queued_global_effect_on_conditions.push( new_eoc );
     } else if( eoc->type == eoc_type::ACTIVATION || eoc->type == eoc_type::RECURRING ) {
         you.queued_effect_on_conditions.push( new_eoc );
     } else {
-        debugmsg( "Invalid effect_on_condition and/or target.  EOC: %s", eoc->id.c_str() );
+        debugmsg( "Invalid effect_on_condition type for queuing: %s", eoc->id.c_str() );
     }
 }
 
