@@ -113,6 +113,9 @@ struct weakpoint_family {
 
     float modifier( const Character &attacker ) const;
     void load( const JsonValue &jsin );
+    void deserialize( const JsonValue &jsin ) {
+        load( jsin );
+    }
 };
 
 struct weakpoint_families {
@@ -129,6 +132,10 @@ struct weakpoint_families {
     void clear();
     void load( const JsonArray &ja );
     void remove( const JsonArray &ja );
+
+    void deserialize( const JsonValue &jv );
+    bool handle_extend( const JsonValue &jv );
+    bool handle_delete( const JsonValue &jv );
 };
 
 struct weakpoint {
