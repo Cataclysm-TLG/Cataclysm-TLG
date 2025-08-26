@@ -10,8 +10,11 @@
 #include <string>
 #include <utility>
 
+<<<<<<< HEAD
 #include "assign.h"
 #include "bodypart.h"
+=======
+>>>>>>> Remove uses of assign in monstergenerator.cpp
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_utility.h"
@@ -41,6 +44,8 @@
 #include "units.h"
 #include "weakpoint.h"
 #include "weighted_dbl_or_var_list.h"
+
+static const harvest_id harvest_list_human( "human" );
 
 static const material_id material_flesh( "flesh" );
 
@@ -946,7 +951,7 @@ void mtype::load( const JsonObject &jo, const std::string_view src )
               weighted_string_id_reader<efftype_id, int> { 1 } );
 
     optional( jo, was_loaded, "starting_ammo", starting_ammo );
-    assign( jo, "luminance", luminance, true );
+    optional( jo, was_loaded, "luminance", luminance, 0 );
     optional( jo, was_loaded, "revert_to_itype", revert_to_itype, itype_id() );
     optional( jo, was_loaded, "mech_weapon", mech_weapon, itype_id() );
     optional( jo, was_loaded, "mech_str_bonus", mech_str_bonus, 0 );
@@ -977,9 +982,8 @@ void mtype::load( const JsonObject &jo, const std::string_view src )
                                          "death_drops for mtype " + id.str() );
     }
 
-    assign( jo, "harvest", harvest );
-    // FIXME: assign doesn't trigger issues that optional does???
-    //optional( jo, was_loaded, "harvest", harvest, harvest_id::NULL_ID() );
+    // FIXME: there's code to check if harvest is null, which will never trigger as it defaults to human
+    optional( jo, was_loaded, "harvest", harvest, harvest_list_human );
 
     optional( jo, was_loaded, "dissect", dissect );
 
@@ -1261,12 +1265,10 @@ mtype_special_attack MonsterGenerator::create_actor( const JsonObject &obj,
 
 void mattack_actor::load( const JsonObject &jo, const std::string &src )
 {
-    // Legacy support
-    if( !jo.has_string( "id" ) ) {
-        id = jo.get_string( "type" );
+    if( jo.has_string( "id" ) ) {
+        mandatory( jo, false, "id", id );
     } else {
-        // Loading ids can't be strict at the moment, since it has to match the stored version
-        assign( jo, "id", id, false );
+        mandatory( jo, false, "type", id );
     }
 
     mandatory( jo, was_loaded, "cooldown", cooldown, dbl_or_var_reader{} );
