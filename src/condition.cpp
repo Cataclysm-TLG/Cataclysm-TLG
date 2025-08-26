@@ -848,9 +848,7 @@ conditional_t::func f_has_any_effect( const JsonObject &jo, std::string_view mem
     }
     dbl_or_var intensity = get_dbl_or_var( jo, "intensity", false, -1 );
     str_or_var bp;
-    if( jo.has_member( "bodypart" ) ) {
-        bp = get_str_or_var( jo.get_member( "bodypart" ), "bodypart", true );
-    }
+    optional( jo, false, "bodypart", bp );
 
     return [effects_to_check, intensity, bp, is_npc]( const_dialogue const & d ) {
         bodypart_id bid = bp.evaluate( d ).empty() ? get_bp_from_str( d.reason ) :
@@ -871,9 +869,7 @@ conditional_t::func f_has_effect( const JsonObject &jo, std::string_view member,
     str_or_var effect_id = get_str_or_var( jo.get_member( member ), member, true );
     dbl_or_var intensity = get_dbl_or_var( jo, "intensity", false, -1 );
     str_or_var bp;
-    if( jo.has_member( "bodypart" ) ) {
-        bp = get_str_or_var( jo.get_member( "bodypart" ), "bodypart", true );
-    }
+    optional( jo, false, "bodypart", bp );
 
     return [effect_id, intensity, bp, is_npc]( const_dialogue const & d ) {
         bodypart_id bid = bp.evaluate( d ).empty() ? get_bp_from_str( d.reason ) :
@@ -887,10 +883,8 @@ conditional_t::func f_need( const JsonObject &jo, std::string_view member, bool 
 {
     str_or_var need = get_str_or_var( jo.get_member( member ), member, true );
     dbl_or_var dov;
-    if( jo.has_int( "amount" ) ) {
-        dov.min.deserialize( jo.get_member( "amount" ) );
-    } else if( jo.has_object( "amount" ) ) {
-        dov = get_dbl_or_var( jo, "amount" );
+    if( jo.has_member( "amount" ) ) {
+        mandatory( jo, false, "amount", dov );
     } else if( jo.has_string( "level" ) ) {
         const std::string &level = jo.get_string( "level" );
         auto flevel = fatigue_level_strs.find( level );
@@ -1613,9 +1607,7 @@ conditional_t::func f_is_outside( bool is_npc )
 conditional_t::func f_tile_is_outside( const JsonObject &jo, std::string_view member )
 {
     std::optional<var_info> loc_var;
-    if( jo.has_object( member ) ) {
-        loc_var = read_var_info( jo.get_object( member ) );
-    }
+    optional( jo, false, member, loc_var );
 
     return [loc_var]( const_dialogue const & d ) {
         map &here = get_map();
