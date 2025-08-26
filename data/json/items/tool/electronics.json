@@ -550,7 +550,6 @@
     "price": "750 USD",
     "price_postapoc": "2 USD 50 cent",
     "ammo": [ "battery" ],
-    "charges_per_use": 1,
     "use_action": [
       "E_FILE_DEVICE",
       "EBOOKSAVE",

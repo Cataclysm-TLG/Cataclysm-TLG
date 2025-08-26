@@ -822,7 +822,7 @@ class efile_activity_actor : public activity_actor
             target_edevices( target_edevices ), selected_efiles( selected_efiles ),
             action_type( action_type ), combo_type( combo_type ) {};
 
-        const activity_id &get_type() const override {
+        activity_id get_type() const override {
             static const activity_id ACT_E_FILE( "ACT_E_FILE" );
             return ACT_E_FILE;
         }
