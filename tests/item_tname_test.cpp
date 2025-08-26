@@ -28,7 +28,15 @@ static const itype_id itype_bag_plastic( "bag_plastic" );
 static const itype_id itype_hammer( "hammer" );
 static const itype_id itype_purse( "purse" );
 static const itype_id itype_rock( "rock" );
+static const itype_id itype_salt( "salt" );
+static const itype_id itype_sauerkraut( "sauerkraut" );
+static const itype_id itype_sheet_cotton( "sheet_cotton" );
+static const itype_id itype_test_baseball( "test_baseball" );
+static const itype_id itype_test_load_bearing_vest( "test_load_bearing_vest" );
 static const itype_id itype_test_rock( "test_rock" );
+static const itype_id itype_wheel( "wheel" );
+static const itype_id itype_wheel_armor( "wheel_armor" );
+static const itype_id itype_wheel_wide( "wheel_wide" );
 
 static const skill_id skill_survival( "survival" );
 
@@ -791,19 +799,6 @@ TEST_CASE( "nested_items_tname", "[item][tname]" )
                    colorize( rock.get_category_shallow().name_noun( 2 ), c_magenta ) + " / 3 items" );
         }
     }
-
-    SECTION( "non-standard pocket: software" ) {
-        item usb_drive( "usb_drive" );
-        item medisoft( "software_medical" );
-        std::string const medisoft_nested_tname = colorize( medisoft.tname(),
-                medisoft.color_in_inventory() );
-        REQUIRE( usb_drive.is_software_storage() );
-        REQUIRE( medisoft.is_software() );
-        REQUIRE( medisoft_nested_tname == "<color_c_light_gray>MediSoft</color>" );
-        usb_drive.put_in( medisoft, pocket_type::SOFTWARE );
-        CHECK( usb_drive.tname( 1 ) == "USB drive " + nesting_sym + " " + medisoft_nested_tname );
-    }
-
     tname::segment_bitset type_only;
     type_only.set( tname::segments::TYPE );
     SECTION( "aggregated food stats" ) {

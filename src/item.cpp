@@ -162,6 +162,7 @@ static const item_category_id item_category_container( "container" );
 static const item_category_id item_category_drugs( "drugs" );
 static const item_category_id item_category_food( "food" );
 static const item_category_id item_category_maps( "maps" );
+static const item_category_id item_category_software( "software" );
 static const item_category_id item_category_spare_parts( "spare_parts" );
 static const item_category_id item_category_tools( "tools" );
 static const item_category_id item_category_weapons( "weapons" );
@@ -174,6 +175,8 @@ static const itype_id itype_brass_catcher( "brass_catcher" );
 static const itype_id itype_bullet_crossbow( "bullet_crossbow" );
 static const itype_id itype_cash_card( "cash_card" );
 static const itype_id itype_disassembly( "disassembly" );
+static const itype_id itype_efile_photos( "efile_photos" );
+static const itype_id itype_efile_recipes( "efile_recipes" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
 static const itype_id itype_null( "null" );
@@ -1294,10 +1297,6 @@ item item::in_container( const itype_id &cont, int qty, bool sealed,
         }
         container.add_automatic_whitelist();
         return container;
-    } else if( is_software() && container.is_software_storage() ) {
-        container.put_in( *this, pocket_type::SOFTWARE );
-        container.invlet = invlet;
-        return container;
     }
     return *this;
 }
@@ -1778,6 +1777,9 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     bits.set( tname::segments::LINK,
               link_length() == rhs.link_length() && max_link_length() == rhs.max_link_length() );
     bits.set( tname::segments::MODS, _stacks_mods( *this, rhs ) );
+    //checking browsed status is not necessary, equal vars are checked earlier
+    bits.set( tname::segments::EMEMORY,
+              occupied_ememory() == rhs.occupied_ememory() && total_ememory() == rhs.total_ememory() );
     bits.set( tname::segments::last_segment );
 
     // only check contents if everything else matches
@@ -2314,6 +2316,10 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                            string_format( "<num> %s", length_units( length() ) ),
                            iteminfo::lower_is_better,
                            convert_length( length() ), length().value() );
+    }
+    if( parts->test( iteminfo_parts::BASE_EMEMORY ) && ememory_size() > 0_KB ) {
+        info.emplace_back( "BASE", string_format( "%s %s", _( "Memory:" ),
+                           units::display( ememory_size() ) ) );
     }
     if( parts->test( iteminfo_parts::BASE_OWNER ) && !owner.is_null() ) {
         info.emplace_back( "BASE", string_format( _( "Owner: %s" ),
@@ -4721,6 +4727,21 @@ void item::tool_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
         info.emplace_back( "DESCRIPTION", feedback );
     }
 
+    std::string &eport = type->tool->e_port;
+    if( !eport.empty() ) {
+        std::string compat;
+        compat += _( "* This device has electronic port type: " + colorize( eport, c_light_green ) );
+        std::vector<std::string> &eport_banned = type->tool->e_ports_banned;
+        if( !eport_banned.empty() ) {
+            compat += _( "\n* This device does not support transfer to e-port types: " );
+            for( std::string &s : eport_banned ) {
+                compat += colorize( _( s ), c_yellow );
+            }
+        }
+        info.emplace_back( "DESCRIPTION", compat );
+    }
+
+    //TODO: REMOVE THIS
     // Display e-ink tablet copied recipes from SD cards
     const std::set<recipe_id> saved_recipes = get_saved_recipes();
     if( !saved_recipes.empty() ) {
@@ -4794,7 +4815,7 @@ void item::tool_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
     }
 
     // Display e-ink tablet ebook recipes
-    if( is_ebook_storage() && !is_broken_on_active() ) {
+    if( is_estorage() && !is_broken_on_active() ) {
         std::vector<std::string> known_recipe_list;
         std::vector<std::string> learnable_recipe_list;
         std::vector<std::string> unlearnable_recipe_list;
@@ -6825,7 +6846,6 @@ std::string item::display_name( unsigned int quantity ) const
                                    link_max_len - link_len, link_max_len, extensions ), cable_color ) );
         }
     }
-
     // HACK: This is a hack to prevent possible crashing when displaying maps as items during character creation
     if( is_map() && calendar::turn != calendar::turn_zero ) {
         tripoint_abs_omt map_pos_omt =
@@ -8485,22 +8505,153 @@ bool item::is_cash_card() const
     return typeId() == itype_cash_card;
 }
 
+bool item::is_estorage() const
+{
+    return contents.has_pocket_type( pocket_type::E_FILE_STORAGE );
+}
+
+bool item::is_estorable() const
+{
+    return has_flag( flag_E_STORABLE ) || is_book();
+}
+
+bool item::is_browsed() const
+{
+    return get_var( "browsed", "false" ) == "true";
+}
+
+void item::set_browsed( bool browsed )
+{
+    if( browsed ) {
+        set_var( "browsed", "true" );
+    } else {
+        set_var( "browsed", "false" );
+    }
+}
+
+bool item::is_ecopiable() const
+{
+    return has_flag( flag_E_COPIABLE ) || ( is_book() && get_chapters() == 0 );
+}
+
+bool item::efiles_all_browsed() const
+{
+    if( is_browsed() ) {
+        return true;
+    }
+    std::vector<const item *> all_efiles = efiles();
+    if( !all_efiles.empty() ) {
+        for( const item *i : all_efiles ) {
+            if( !i->is_browsed() ) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+units::ememory item::ememory_size() const
+{
+    units::ememory ememory_return = type->ememory_size;
+    if( typeId() == itype_efile_recipes ) {
+        ememory_return *= get_saved_recipes().size();
+    } else if( typeId() == itype_efile_photos ) {
+        ememory_return *= total_photos();
+    }
+    return ememory_return;
+}
+
+units::ememory item::occupied_ememory() const
+{
+    std::vector<const item *> all_efiles = efiles();
+    units::ememory total = 0_KB;
+    for( const item *i : all_efiles ) {
+        total += i->ememory_size();
+    }
+    return total;
+}
+
+units::ememory item::total_ememory() const
+{
+    std::vector<const item_pocket *> pockets = contents.get_pockets( []( item_pocket const & pocket ) {
+        return pocket.is_type( pocket_type::E_FILE_STORAGE );
+    } );
+    if( pockets.size() > 1 ) {
+        debugmsg( "no more than one E_FILE_STORAGE pocket is allowed" );
+    }
+    if( pockets.empty() ) {
+        return 0_KB;
+    }
+    return pockets.back()->get_pocket_data()->ememory_max;
+}
+
+units::ememory item::remaining_ememory() const
+{
+    return total_ememory() - occupied_ememory();
+}
+
+bool item::is_efile( const item_location &loc )
+{
+    return loc.parent_item() && loc.parent_item()->is_estorage();
+}
+
+item *item::get_recipe_catalog()
+{
+    const std::function<bool( const item &i )> filter = []( const item & i ) {
+        cata::value_ptr<memory_card_info> recipe_gen = i.typeId()->memory_card_data;
+        if( recipe_gen ) {
+            return true;
+        }
+        return false;
+    };
+    if( filter( *this ) ) {
+        return this;
+    }
+    return get_contents().get_item_with( filter );
+}
+
+const item *item::get_recipe_catalog() const
+{
+    const std::function<bool( const item &i )> filter = []( const item & i ) {
+        cata::value_ptr<memory_card_info> recipe_gen = i.typeId()->memory_card_data;
+        if( recipe_gen ) {
+            return true;
+        }
+        return false;
+    };
+    if( filter( *this ) ) {
+        return this;
+    }
+    return get_contents().get_item_with( filter );
+}
+
+item *item::get_photo_gallery()
+{
+    const std::function<bool( const item &i )> filter = []( const item & i ) {
+        return i.typeId() == itype_efile_photos;
+    };
+    return get_contents().get_item_with( filter );
+}
+
+const item *item::get_photo_gallery() const
+{
+    const std::function<bool( const item &i )> filter = []( const item & i ) {
+        return i.typeId() == itype_efile_photos;
+    };
+    return get_contents().get_item_with( filter );
+}
+
+int item::total_photos() const
+{
+    std::vector<item::extended_photo_def> extended_photos;
+    read_extended_photos( extended_photos, "CAMERA_EXTENDED_PHOTOS", true );
+    read_extended_photos( extended_photos, "CAMERA_MONSTER_PHOTOS", true );
+    return extended_photos.size();
+}
+
 bool item::is_software() const
 {
-    if( const std::optional<itype_id> &cont = type->default_container ) {
-        return item( *cont ).is_software_storage();
-    }
-    return false;
-}
-
-bool item::is_software_storage() const
-{
-    return contents.has_pocket_type( pocket_type::SOFTWARE );
-}
-
-bool item::is_ebook_storage() const
-{
-    return contents.has_pocket_type( pocket_type::EBOOK );
+    return type->category_force == item_category_software;
 }
 
 bool item::is_maybe_melee_weapon() const
@@ -10284,7 +10435,7 @@ book_proficiency_bonuses item::get_book_proficiency_bonuses() const
 {
     book_proficiency_bonuses ret;
 
-    if( is_ebook_storage() ) {
+    if( is_estorage() ) {
         for( const item *book : ebooks() ) {
             ret += book->get_book_proficiency_bonuses();
         }
@@ -10297,6 +10448,15 @@ book_proficiency_bonuses item::get_book_proficiency_bonuses() const
         ret.add( bonus );
     }
     return ret;
+}
+
+int item::pages_in_book( const itype &type )
+{
+    if( !type.book ) {
+        return 0;
+    }
+    // an A4 sheet weights roughly 5 grams
+    return std::max( 1, static_cast<int>( units::to_gram( type.weight ) / 5 ) );
 }
 
 int item::get_chapters() const
@@ -10332,6 +10492,12 @@ std::set<recipe_id> item::get_saved_recipes() const
     if( is_broken_on_active() ) {
         return {};
     }
+    if( is_estorage() && efile_activity_actor::edevice_has_use( this ) ) {
+        const item *recipe_catalog = get_recipe_catalog();
+        if( recipe_catalog != nullptr ) {
+            return recipe_catalog->get_saved_recipes();
+        }
+    }
     std::set<recipe_id> result;
     for( const std::string &rid_str : string_split( get_var( "EIPC_RECIPES" ), ',' ) ) {
         const recipe_id rid( rid_str );
@@ -10353,6 +10519,29 @@ void item::set_saved_recipes( const std::set<recipe_id> &recipes )
     set_var( "EIPC_RECIPES", string_join( recipes, "," ) );
 }
 
+void item::generate_recipes()
+{
+    const memory_card_info *mmd = type->memory_card_data ? &*type->memory_card_data : nullptr;
+    std::set<recipe_id> saved_recipes = get_saved_recipes();
+    if( mmd != nullptr ) {
+        std::set<recipe_id> candidates;
+        for( const auto& [rid, r] : recipe_dict ) {
+            if( r.never_learn || r.obsolete || mmd->recipes_categories.count( r.category ) == 0 ||
+                saved_recipes.count( rid ) ||
+                r.difficulty > mmd->recipes_level_max || r.difficulty < mmd->recipes_level_min ||
+                ( r.has_flag( "SECRET" ) && !mmd->secret_recipes ) ) {
+                continue;
+            }
+            candidates.emplace( rid );
+        }
+        const int recipe_num = rng( 1, mmd->recipes_amount );
+        for( int i = 0; i < recipe_num && !candidates.empty(); i++ ) {
+            const recipe_id rid = random_entry_removed( candidates );
+            saved_recipes.emplace( rid );
+        }
+        set_saved_recipes( saved_recipes );
+    }
+}
 std::vector<std::pair<const recipe *, int>> item::get_available_recipes(
             const Character &u ) const
 {
@@ -11389,6 +11578,16 @@ std::vector<const item *> item::softwares() const
 std::vector<const item *> item::ebooks() const
 {
     return contents.ebooks();
+}
+
+std::vector< item *> item::efiles()
+{
+    return contents.efiles();
+}
+
+std::vector<const item *> item::efiles() const
+{
+    return contents.efiles();
 }
 
 std::vector<const item *> item::cables() const
@@ -15156,8 +15355,7 @@ item const *item::this_or_single_content() const
 bool item::contents_only_one_type() const
 {
     std::list<const item *> const items = contents.all_items_top( []( item_pocket const & pkt ) {
-        return pkt.is_type( pocket_type::CONTAINER ) ||
-               pkt.is_type( pocket_type::SOFTWARE );
+        return pkt.is_type( pocket_type::CONTAINER );
     } );
     return items.size() == 1 ||
            ( items.size() > 1 &&
@@ -15203,10 +15401,14 @@ item::aggregate_t item::aggregated_contents( int depth, int maxdepth ) const
     aggregate_t *running_max{};
     aggregate_t *max_type{};
     auto const cont_and_soft = []( item_pocket const & pkt ) {
-        return pkt.is_type( pocket_type::CONTAINER ) || pkt.is_type( pocket_type::SOFTWARE );
+        return pkt.is_type( pocket_type::CONTAINER ) || pkt.is_type( pocket_type::E_FILE_STORAGE );
     };
 
+
     for( item_pocket const *pk : contents.get_pockets( cont_and_soft ) ) {
+        if( pk->is_type( pocket_type::E_FILE_STORAGE ) && ( is_broken() || !is_browsed() ) ) {
+            continue;
+        }
         for( item const *pkit : pk->all_items_top() ) {
             total++;
             item_category_id const cat = pkit->get_category_of_contents( depth, maxdepth ).get_id();
