@@ -394,7 +394,7 @@
     "eoc_type": "SCENARIO_SPECIFIC",
     "effect": [
       {
-        "u_message": "Welcome to Sky Islands.\n\nSpeak to the Heart of the Island to get your bearings, accept missions, manage upgrades, change your difficulty settings, and more.",
+        "u_message": "Welcome to Sky Island.\n\nSpeak to the Heart of the Island to get your bearings, accept missions, manage upgrades, change your difficulty settings, and more.",
         "popup": true
       },
       { "u_location_variable": { "global_val": "OM_HQ_origin" } },
