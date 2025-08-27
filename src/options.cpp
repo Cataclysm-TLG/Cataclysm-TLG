@@ -2811,7 +2811,7 @@ void options_manager::add_options_debug()
         to_translation( "Draw walls normal (Off), retracted/transparent (On), or automatically retracting/transparent near player (Auto)." ), {
             { 0, to_translation( "Off" ) }, { 1, to_translation( "On" ) },
             { 2, to_translation( "Auto" ) }
-        }, 2, 2
+        }, 0, 0
            );
 
         add( "PREVENT_OCCLUSION_TRANSP", page_id, to_translation( "Prevent occlusion via transparency" ),
