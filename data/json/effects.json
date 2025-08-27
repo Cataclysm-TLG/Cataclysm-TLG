@@ -2956,7 +2956,7 @@
       "fatigue_tick": [ 600 ],
       "fatigue_min": [ 1 ],
       "str_mod": [ -1, 0 ],
-      "cough_chance": [ 600, 0 ]
+      "cough_chance": [ 1200, 0 ]
     }
   },
   {
@@ -2985,7 +2985,7 @@
     "type": "effect_type",
     "id": "common_cold",
     "name": [ "Common Cold" ],
-    "desc": [ "You have contracted the 'Common Cold'.  Symptoms can be alleviated by medication (cough syrup)." ],
+    "desc": [ "You have contracted the 'Common Cold'.  Symptoms can be alleviated with cough syrup or other medication." ],
     "apply_memorial_log": "Caught a cold.",
     "remove_memorial_log": "Got over the cold.",
     "apply_message": "You feel a cold coming on…",
@@ -3002,7 +3002,7 @@
       "dex_mod": [ -1, 0 ],
       "per_mod": [ -1, 0 ],
       "int_mod": [ -2, -1 ],
-      "cough_chance": [ 300, 0 ]
+      "cough_chance": [ 900, 0 ]
     },
     "blood_analysis_description": "Viral Infection"
   },
@@ -3011,7 +3011,7 @@
     "id": "flu",
     "name": [ "Influenza" ],
     "desc": [
-      "You have contracted flu, or more technically speaking, the 'Influenza'.  Symptoms can be alleviated by medication (cough syrup)."
+      "You have contracted flu, or more technically speaking, the 'Influenza'.  Symptoms can be alleviated with cough syrup or other medication."
     ],
     "apply_memorial_log": "Caught the flu.",
     "remove_memorial_log": "Got over the flu.",
@@ -4884,6 +4884,25 @@
       "hurt_amount": [ 10 ],
       "hurt_min": [ 1 ],
       "hurt_chance": [ 1 ],
+      "stamina_min": [ -1500 ],
+      "stamina_max": [ -2000 ],
+      "stamina_chance": [ 1 ]
+    }
+  },
+    {
+    "type": "effect_type",
+    "id": "strangulation",
+    "name": [ "Strangulation" ],
+    "desc": [ "Compressive force is cutting off blood flow to the brain." ],
+    "apply_message": "You see stars!",
+    "rating": "bad",
+    "max_duration": "2 s",
+    "show_in_info": true,
+    "base_mods": {
+      "hurt_amount": [ 15 ],
+      "hurt_min": [ 1 ],
+      "hurt_chance": [ 1 ],
+      "speed_mod": [ -50 ],
       "stamina_min": [ -1500 ],
       "stamina_max": [ -2000 ],
       "stamina_chance": [ 1 ]

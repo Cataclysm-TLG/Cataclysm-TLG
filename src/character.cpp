@@ -5930,8 +5930,21 @@ void Character::get_sick( bool is_flu )
                                 count_queued_effects( "common_cold" );
 
         if( is_flu && !already_has_flu ) {
+            // Add a random chance for lifestyle to influence the duration of illness.
+            double bias = 1.0 - ( lifestyle / 400.0 );
+            // Clamp just in case lifestyle goes outside bounds
+            bias = rng( 1.0, std::clamp( bias, 0.5, 1.25 ) );
             // Total duration of symptoms
-            time_duration total_duration = rng( 3_days, 10_days );
+            time_duration total_duration = rng( 108_hours, 240_hours ) * bias;
+
+            // If we have disease resistant, reroll and take the more favorable result.
+            if( has_trait( trait_DISRESISTANT ) ) {
+                time_duration rerolled_duration = rng( 108_hours, 240_hours ) * bias;
+                if( rerolled_duration < total_duration ) {
+                    total_duration = rerolled_duration;
+                }
+            }
+
             // Time before first symptoms
             time_duration incubation_period = rng( 18_hours, 36_hours );
             // Time from first symptoms to full blown disease
@@ -5947,8 +5960,20 @@ void Character::get_sick( bool is_flu )
             queue_effect( "flushot", incubation_period + total_duration, immunity_duration );
 
         } else if( !already_has_cold ) {
+            // Add a random chance for lifestyle to influence the duration of illness.
+            double bias = 1.0 - ( lifestyle / 400.0 );
+            // Clamp just in case lifestyle goes outside bounds
+            bias = rng( 1.0, std::clamp( bias, 0.5, 1.25 ) );
             // Total duration of symptoms
-            time_duration total_duration = rng( 1_days, 14_days );
+            time_duration total_duration = rng( 36_hours, 336_hours ) * bias;
+
+            // If we have disease resistant, reroll and take the more favorable result.
+            if( has_trait( trait_DISRESISTANT ) ) {
+                time_duration rerolled_duration = rng( 36_hours, 336_hours ) * bias;
+                if( rerolled_duration < total_duration ) {
+                    total_duration = rerolled_duration;
+                }
+            }
             // Time before first symptoms
             time_duration incubation_period = rng( 18_hours, 36_hours );
             // Time from first symptoms to full blown disease

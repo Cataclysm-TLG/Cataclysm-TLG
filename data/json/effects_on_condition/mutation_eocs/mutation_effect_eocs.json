@@ -282,6 +282,7 @@
     "condition": {
       "and": [
         { "u_has_effect": "hay_fever" },
+        { "u_has_effect": "common_cold" },
         { "not": { "u_has_effect": "took_antihistamine" } },
         { "not": { "u_has_effect": "sleep" } },
         { "not": { "u_has_effect": "narcosis" } }
@@ -739,7 +740,6 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_insect_wings_shutoff",
-    "recurrence": [ "1 seconds", "1 seconds" ],
     "condition": { "and": [ { "math": [ "u_val('stamina')", "<", "3000" ] }, { "u_has_trait": "WINGS_INSECT_active" } ] },
     "effect": [
       { "u_activate_trait": "WINGS_INSECT_active" },
@@ -888,7 +888,6 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_social_reset_drugs",
-    "recurrence": [ "1 seconds", "1 seconds" ],
     "//": "Sedatives are effective at acutely treating social anxiety/autophobia.  Enjoy your benzo addiction, survivors.",
     "condition": {
       "and": [

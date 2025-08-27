@@ -208,7 +208,7 @@
   {
     "type": "effect_on_condition",
     "id": "grounded",
-    "recurrence": [ "1 seconds", "1 seconds" ],
+    "recurrence": [ "0 seconds", "1 seconds" ],
     "condition": {
       "and": [
         { "or": [ { "u_has_flag": "GROUNDING" }, { "u_has_worn_with_flag": "GROUNDING" } ] },
@@ -225,7 +225,7 @@
   {
     "type": "effect_on_condition",
     "id": "ungrounded",
-    "recurrence": [ "1 seconds", "1 seconds" ],
+    "recurrence": [ "0 seconds", "1 seconds" ],
     "condition": {
       "and": [
         { "u_has_effect": "grounded" },
@@ -249,14 +249,12 @@
     "type": "effect_on_condition",
     "id": "EOC_SUNGLASSES",
     "condition": { "and": [ { "u_has_worn_with_flag": "SUN_GLASSES" }, { "not": { "u_has_effect": "SUN_GLASSES" } } ] },
-    "recurrence": [ "0 seconds", "0 seconds" ],
     "effect": [ { "u_add_effect": "SUN_GLASSES", "duration": "PERMANENT", "intensity": 1 } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_SUNGLASSES_OFF",
     "condition": { "and": [ { "u_has_effect": "SUN_GLASSES" }, { "not": { "u_has_worn_with_flag": "SUN_GLASSES" } } ] },
-    "recurrence": [ "0 seconds", "0 seconds" ],
     "effect": [ { "u_lose_effect": "SUN_GLASSES" } ]
   }
 ]

@@ -3866,7 +3866,7 @@
     "id": "INFRESIST",
     "name": { "str": "Infection Resistant" },
     "points": 2,
-    "description": "Your immune system is particularly good at resisting infections.  You have an increased chance for bad wounds and infections to heal on their own, and only suffer reduced penalties from them.",
+    "description": "Your immune system is particularly good at resisting infections.  You have an increased chance for dirty wounds and infections to recover on their own, and suffer reduced penalties from them.",
     "starting_trait": true,
     "changes_to": [ "INFIMMUNE" ],
     "category": [ "TROGLOBITE", "RAT", "MEDICAL", "GASTROPOD", "CHIMERA", "SLIME" ]
