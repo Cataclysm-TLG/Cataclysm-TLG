@@ -704,14 +704,6 @@
   {
     "type": "mutation",
     "//": "This NPC can tell you about other NPCs.",
-    "id": "BOSS_Lapin_01",
-    "copy-from": "BOSS_No_Others_01",
-    "name": { "str": "Other Survivors Story" },
-    "description": "Lapin 01."
-  },
-  {
-    "type": "mutation",
-    "//": "This NPC can tell you about other NPCs.",
     "id": "BOSS_NC_FARMER_01",
     "copy-from": "BOSS_No_Others_01",
     "name": { "str": "Other Survivors Story" },

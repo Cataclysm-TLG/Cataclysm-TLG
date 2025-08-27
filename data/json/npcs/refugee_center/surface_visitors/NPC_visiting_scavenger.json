@@ -76,18 +76,6 @@
     },
     "responses": [
       {
-        "text": "Sure, show me where to find this guy.",
-        "topic": "TALK_RC_SURVIVOR_Tips2",
-        "condition": {
-          "and": [
-            { "math": [ "npc_randomize_dialogue_direction", "==", "1" ] },
-            { "not": { "u_has_var": "teamster_mission_directions", "value": "lapin" } }
-          ]
-        },
-        "effect": { "assign_mission": "directions_lapin" },
-        "switch": true
-      },
-      {
         "text": "I'm always open to meet new survivors.  Where are these acquaintances of yours?",
         "topic": "TALK_RC_SURVIVOR_Tips2",
         "condition": {
