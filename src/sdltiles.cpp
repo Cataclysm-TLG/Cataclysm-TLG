@@ -917,7 +917,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     const int sight_points = !has_debug_vision ?
                              you.overmap_modified_sight_range( g->light_level( you.posz() ) ) :
                              100;
-    const bool showhordes = uistate.overmap_show_hordes;
+    // Removed for being deceptive, may re-add after hordes are updated.
+    // const bool showhordes = uistate.overmap_show_hordes;
     const bool show_map_revealed = uistate.overmap_show_revealed_omts;
     std::unordered_set<tripoint_abs_omt> &revealed_highlights = get_avatar().map_revealed_omts;
     const bool viewing_weather = uistate.overmap_debug_weather || uistate.overmap_visible_weather;
@@ -934,9 +935,10 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             const tripoint_abs_omt omp = origin + point( col, row );
 
             const om_vision_level vision = overmap_buffer.seen( omp );
-            const bool los = overmap_buffer.seen_more_than( omp, om_vision_level::details ) &&
-                             ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
-                               you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
+            // const bool los = overmap_buffer.seen_more_than( omp, om_vision_level::details ) &&
+            //                  ( you.overmap_los( omp, sight_points ) || uistate.overmap_debug_mongroup ||
+            //                    you.has_trait( trait_DEBUG_CLAIRVOYANCE ) );
+
             // the full string from the ter_id including _north etc.
             std::string id;
             TILE_CATEGORY category = TILE_CATEGORY::OVERMAP_TERRAIN;
@@ -981,55 +983,58 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 }
             }
 
-            if( vision != om_vision_level::unseen ) {
-                if( draw_overlays && uistate.overmap_debug_mongroup ) {
-                    const std::vector<mongroup *> mgroups = overmap_buffer.monsters_at( omp );
-                    if( !mgroups.empty() ) {
-                        auto mgroup_iter = mgroups.begin();
-                        std::advance( mgroup_iter, rng( 0, mgroups.size() - 1 ) );
-                        draw_from_id_string( ( *mgroup_iter )->type->defaultMonster.str(),
-                                             omp.raw(), 0, 0, lit_level::LIT, false );
-                    }
-                }
-                if( showhordes && los ) {
-                    const int horde_size = std::min( 10, overmap_buffer.get_horde_size( omp ) );
-                    if( horde_size >= HORDE_VISIBILITY_SIZE ) {
-                        // a little bit of hardcoded fallbacks for hordes
-                        if( find_tile_with_season( id ) ) {
-                            // NOLINTNEXTLINE(cata-translate-string-literal)
-                            draw_from_id_string( string_format( "overmap_horde_%d", horde_size < 10 ? horde_size : 10 ),
-                                                 omp.raw(), 0, 0, lit_level::LIT, false );
-                        } else {
-                            switch( horde_size ) {
-                                case HORDE_VISIBILITY_SIZE:
-                                    draw_from_id_string( "mon_zombie", omp.raw(), 0, 0, lit_level::LIT,
-                                                         false );
-                                    break;
-                                case HORDE_VISIBILITY_SIZE + 1:
-                                    draw_from_id_string( "mon_zombie_tough", omp.raw(), 0, 0,
-                                                         lit_level::LIT, false );
-                                    break;
-                                case HORDE_VISIBILITY_SIZE + 2:
-                                    draw_from_id_string( "mon_zombie_brute", omp.raw(), 0, 0,
-                                                         lit_level::LIT, false );
-                                    break;
-                                case HORDE_VISIBILITY_SIZE + 3:
-                                    draw_from_id_string( "mon_zombie_hulk", omp.raw(), 0, 0,
-                                                         lit_level::LIT, false );
-                                    break;
-                                case HORDE_VISIBILITY_SIZE + 4:
-                                    draw_from_id_string( "mon_zombie_necro", omp.raw(), 0, 0,
-                                                         lit_level::LIT, false );
-                                    break;
-                                default:
-                                    draw_from_id_string( "mon_zombie_master", omp.raw(), 0, 0,
-                                                         lit_level::LIT, false );
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
+            // if( vision != om_vision_level::unseen ) {
+
+            //     // This stuff needs to go regardless.
+
+            //     // if( draw_overlays && uistate.overmap_debug_mongroup ) {
+            //     //     const std::vector<mongroup *> mgroups = overmap_buffer.monsters_at( omp );
+            //     //     if( !mgroups.empty() ) {
+            //     //         auto mgroup_iter = mgroups.begin();
+            //     //         std::advance( mgroup_iter, rng( 0, mgroups.size() - 1 ) );
+            //     //         draw_from_id_string( ( *mgroup_iter )->type->defaultMonster.str(),
+            //     //                              omp.raw(), 0, 0, lit_level::LIT, false );
+            //     //     }
+            //     }
+            //     if( showhordes && los ) {
+            //         const int horde_size = std::min( 10, overmap_buffer.get_horde_size( omp ) );
+            //         if( horde_size >= HORDE_VISIBILITY_SIZE ) {
+            //             // a little bit of hardcoded fallbacks for hordes
+            //             if( find_tile_with_season( id ) ) {
+            //                 // NOLINTNEXTLINE(cata-translate-string-literal)
+            //                 draw_from_id_string( string_format( "overmap_horde_%d", horde_size < 10 ? horde_size : 10 ),
+            //                                      omp.raw(), 0, 0, lit_level::LIT, false );
+            //             } else {
+            //                 switch( horde_size ) {
+            //                     case HORDE_VISIBILITY_SIZE:
+            //                         draw_from_id_string( "mon_zombie", omp.raw(), 0, 0, lit_level::LIT,
+            //                                              false );
+            //                         break;
+            //                     case HORDE_VISIBILITY_SIZE + 1:
+            //                         draw_from_id_string( "mon_zombie_tough", omp.raw(), 0, 0,
+            //                                              lit_level::LIT, false );
+            //                         break;
+            //                     case HORDE_VISIBILITY_SIZE + 2:
+            //                         draw_from_id_string( "mon_zombie_brute", omp.raw(), 0, 0,
+            //                                              lit_level::LIT, false );
+            //                         break;
+            //                     case HORDE_VISIBILITY_SIZE + 3:
+            //                         draw_from_id_string( "mon_zombie_hulk", omp.raw(), 0, 0,
+            //                                              lit_level::LIT, false );
+            //                         break;
+            //                     case HORDE_VISIBILITY_SIZE + 4:
+            //                         draw_from_id_string( "mon_zombie_necro", omp.raw(), 0, 0,
+            //                                              lit_level::LIT, false );
+            //                         break;
+            //                     default:
+            //                         draw_from_id_string( "mon_zombie_master", omp.raw(), 0, 0,
+            //                                              lit_level::LIT, false );
+            //                         break;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
