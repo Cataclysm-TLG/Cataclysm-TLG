@@ -11226,9 +11226,9 @@ void Character::process_one_effect( effect &it, bool is_new )
         if( is_new || it.activated( calendar::turn, "PERSPIRATION", val, reduced, mod ) ) {
             // multiplier to balance values around drench capacity of different body parts
             int mult = enchantment_cache->modify_value( enchant_vals::mod::SWEAT_MULTIPLIER,
-                       1 ) * get_part_drench_capacity( bp ) / 100;
+                       1 ) * get_part_drench_capacity( bp ) / 125;
             mod_part_wetness( bp, bound_mod_to_vals( get_part_wetness( bp ), val * mult,
-                              it.get_max_val( "PERSPIRATION", reduced ) * mult,
+                              ( it.get_max_val( "PERSPIRATION", reduced ) ) * mult,
                               it.get_min_val( "PERSPIRATION", reduced ) * mult ) );
         }
     }
