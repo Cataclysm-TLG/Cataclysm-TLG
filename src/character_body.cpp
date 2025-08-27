@@ -114,6 +114,8 @@ static const trait_id trait_DEBUG_LS( "DEBUG_LS" );
 static const trait_id trait_DEBUG_NOTEMP( "DEBUG_NOTEMP" );
 static const trait_id trait_FELINE_FUR( "FELINE_FUR" );
 static const trait_id trait_FUR( "FUR" );
+static const trait_id trait_INFRESIST( "INFRESIST" );
+static const trait_id trait_INFIMMUNE( "INFIMMUNE" );
 static const trait_id trait_LIGHTFUR( "LIGHTFUR" );
 static const trait_id trait_LUPINE_FUR( "LUPINE_FUR" );
 static const trait_id trait_M_DEPENDENT( "M_DEPENDENT" );
@@ -343,6 +345,23 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( -2, -200 );
         } else {
             remove_value( "got_to_very_low_morale" );
+        }
+
+        // Being badly injured is not healthy, though your immune system might be able to handle it.
+        bool wounded = false;
+        for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
+            if( get_part_hp_cur( bp ) < ( get_part_hp_cur( bp ) / 2 ) ) {
+                wounded = true;
+            }
+        }
+        if( wounded && !has_trait( trait_INFIMMUNE ) ) {
+            if( has_trait( trait_INFRESIST ) ) {
+                if( one_in( 2 ) ) {
+                    mod_daily_health( -1, -200 );
+                }
+            } else {
+                    mod_daily_health( -1, -200 );
+            }
         }
 
         if( worn_with_flag( flag_FILTHY ) ) {
