@@ -4889,7 +4889,7 @@
       "stamina_chance": [ 1 ]
     }
   },
-    {
+  {
     "type": "effect_type",
     "id": "strangulation",
     "name": [ "Strangulation" ],
@@ -4897,7 +4897,6 @@
     "apply_message": "You see stars!",
     "rating": "bad",
     "max_duration": "2 s",
-    "show_in_info": true,
     "base_mods": {
       "hurt_amount": [ 15 ],
       "hurt_min": [ 1 ],

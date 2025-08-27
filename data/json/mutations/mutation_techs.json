@@ -1580,7 +1580,7 @@
       ]
     },
     "condition_desc": "* Only works on a <info>mundane</info> target of <info>similar or smaller</info> size",
-    "tech_effects": [ { "id": "choking", "chance": 100, "duration": 200, "on_damage": false, "message": "%s struggles to breathe!" } ],
+    "tech_effects": [ { "id": "choking", "chance": 100, "duration": 200, "on_damage": false, "message": "%s struggles to breathe!" }, { "id": "strangulation", "chance": 30, "duration": 200, "on_damage": false } ],
     "attack_vectors": [ "vector_claw" ]
   },
   {
