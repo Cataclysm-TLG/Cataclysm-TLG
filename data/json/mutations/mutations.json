@@ -2002,8 +2002,9 @@
     "id": "HIRSUTE",
     "name": { "str": "Hirsute" },
     "points": 0,
-    "description": "Your body hair is growing in thicker than it used to.  It's almost like you're going through a second puberty or something.",
+    "description": "Your body hair is growing in thicker than it used to.  It's almost like you're going through a second puberty.",
     "types": [ "SKIN", "BODY_ARMOR", "ARMOR", "BODY_ARMOR_MOD" ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": 0.1 } ] } ],
     "changes_to": [ "LIGHTFUR" ],
     "category": [ "MOUSE", "BEAST", "CATTLE", "RAT", "FELINE", "LUPINE", "RABBIT", "URSINE", "CHIROPTERAN" ]
   },
@@ -2016,6 +2017,7 @@
     "ugliness": 2,
     "description": "Your skin keeps peeling in big flakes, like you're recovering from a bad sunburn.  Oddly, it doesn't hurt at all.",
     "types": [ "SKIN", "BODY_ARMOR", "ARMOR", "BODY_ARMOR_MOD" ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.1 } ] } ],
     "changes_to": [ "SPARSE_SCALES" ],
     "category": [ "LIZARD", "RAPTOR", "FISH" ]
   },
@@ -2031,6 +2033,7 @@
     "changes_to": [ "CHITIN" ],
     "category": [ "SPIDER", "INSECT", "CRUSTACEAN" ],
     "armor": [ { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "cut": -1 } ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.1 } ] } ],
     "wet_protection": [
       { "part": "head", "neutral": 3 },
       { "part": "leg_l", "neutral": 4 },
@@ -2527,6 +2530,7 @@
     "category": [ "RAPTOR", "LIZARD", "FISH" ],
     "prereqs": [ "SKIN_PEELING" ],
     "changes_to": [ "SCALES" ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.25 } ] } ],
     "wet_protection": [
       { "part": "head", "ignored": 2 },
       { "part": "leg_l", "ignored": 5 },
@@ -2554,6 +2558,7 @@
     "category": [ "RAPTOR", "LIZARD", "FISH" ],
     "prereqs": [ "SPARSE_SCALES" ],
     "changes_to": [ "THICK_SCALES", "SLEEK_SCALES" ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.60 } ] } ],
     "wet_protection": [
       { "part": "head", "ignored": 2 },
       { "part": "leg_l", "ignored": 5 },
@@ -2581,6 +2586,7 @@
     "types": [ "SKIN" ],
     "prereqs": [ "SCALES" ],
     "threshreq": [ "THRESH_LIZARD" ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -1.00 } ] } ],
     "category": [ "LIZARD" ],
     "wet_protection": [
       { "part": "head", "ignored": 5 },
@@ -2608,7 +2614,7 @@
     "types": [ "SKIN" ],
     "prereqs": [ "SCALES" ],
     "category": [ "FISH" ],
-    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.25 } ] } ],
+    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.25 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.15 }  ] } ],
     "threshreq": [ "THRESH_FISH" ],
     "wet_protection": [
       { "part": "head", "good": 7 },
@@ -2655,36 +2661,37 @@
     "visibility": 10,
     "ugliness": 3,
     "bodytemp_modifiers": [ 50, 100 ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.40 } ] } ],
     "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
     "variants": [
       {
         "id": "white",
         "name": { "str": "White Feathers" },
-        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "description": "White feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
         "weight": 1
       },
       {
         "id": "brown",
         "name": { "str": "Brown Feathers" },
-        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "description": "Brown feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
         "weight": 0
       },
       {
         "id": "blue",
         "name": { "str": "Blue Feathers" },
-        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "description": "Blue feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
         "weight": 0
       },
       {
         "id": "black",
         "name": { "str": "Black Feathers" },
-        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "description": "Black feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
         "weight": 0
       },
       {
         "id": "baldeagle",
         "name": { "str": "Bald Eagle Feathers" },
-        "description": "Iridescent feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
+        "description": "Brown and white feathers have grown to cover your entire body, providing a marginal protection against attacks and minor protection from cold.  They also provide a natural waterproofing.",
         "weight": 0
       }
     ],
@@ -2702,8 +2709,8 @@
     "visibility": 4,
     "ugliness": 1,
     "bodytemp_modifiers": [ 300, 800 ],
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.5 } ] } ],
-    "description": "You shan't need to migrate south with your layer of down.  It's even better with no apes around to kill you for it!",
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.5 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.10 } ] } ],
+    "description": "A fluffy undercoat of downy feathers keeps you extra warm.",
     "types": [ "SKIN" ],
     "prereqs": [ "FEATHERS" ],
     "threshreq": [ "THRESH_BIRD" ],
@@ -2716,7 +2723,7 @@
     "points": 1,
     "visibility": 6,
     "ugliness": 2,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.15 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.15 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.25 } ] } ],
     "description": "Light fur has grown to cover your entire body, providing marginal protection against attacks and slight protection from cold.",
     "category": [ "MOUSE", "BEAST", "RAT", "LUPINE", "URSINE", "FELINE", "RABBIT", "CATTLE", "CHIROPTERAN" ],
     "types": [ "SKIN" ],
@@ -2731,7 +2738,7 @@
     "points": 2,
     "visibility": 10,
     "ugliness": 3,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.4 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.4 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.50 } ] } ],
     "description": "Thick black fur has grown to cover your entire body, providing minor protection against attacks, and considerable protection from cold.",
     "types": [ "SKIN" ],
     "changes_to": [ "URSINE_FUR", "URSINE_FUR_SUMMER" ],
@@ -2746,7 +2753,7 @@
     "points": 4,
     "visibility": 10,
     "ugliness": 3,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.5 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.5 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.70 } ] } ],
     "description": "Your fur has grown out and thickened, providing great protection from attacks as well as considerable insulation.",
     "types": [ "SKIN" ],
     "prereqs": [ "FUR" ],
@@ -2761,7 +2768,7 @@
     "points": 4,
     "visibility": 10,
     "ugliness": 4,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.45 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.45 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.70 } ] } ],
     "description": "You've lost your fluffy undercoat for the summer.  This feels a lot better in the heat, but it's less protective and looks a little bedraggled.",
     "types": [ "SKIN" ],
     "prereqs": [ "FUR" ],
@@ -2774,7 +2781,7 @@
     "points": 2,
     "visibility": 10,
     "ugliness": 3,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.4 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.4 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.70 } ] } ],
     "description": "Dense gray fur has grown to cover your entire body, providing noticeable protection against attacks, and considerable protection from cold.",
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
@@ -2789,7 +2796,7 @@
     "points": 2,
     "visibility": 10,
     "ugliness": 3,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.35 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.35 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.70 } ] } ],
     "description": "Your entire body is covered in dense fur, but it's thinned out a bit for the summer, which may provide some relief from the heat at the cost of physical protection.",
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
@@ -2802,7 +2809,7 @@
     "points": 2,
     "visibility": 10,
     "ugliness": 3,
-    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.3 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.3 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.80 } ] } ],
     "description": "You've grown sleek fur, providing minor protection against attacks, and some protection from cold.",
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
@@ -2831,7 +2838,7 @@
     "visibility": 10,
     "ugliness": 6,
     "description": "Patches of fur, scale, and chitin mottle your skin like a rorschach test.",
-    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.05 }, { "value": "BODYTEMP_SLEEP", "add": 0.1 } ] } ],
+    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.05 }, { "value": "BODYTEMP_SLEEP", "add": 0.1 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.1 } ] } ],
     "wet_protection": [
       { "part": "head", "ignored": 2 },
       { "part": "leg_l", "ignored": 5 },
@@ -2858,7 +2865,7 @@
     "visibility": 10,
     "ugliness": 8,
     "description": "Your skin has mutated into an amalgamation of thickened fur, scales, and more.",
-    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.1 }, { "value": "BODYTEMP_SLEEP", "add": 0.2 } ] } ],
+    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.1 }, { "value": "BODYTEMP_SLEEP", "add": 0.2 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.2 } ] } ],
     "wet_protection": [
       { "part": "head", "ignored": 3 },
       { "part": "leg_l", "ignored": 8 },
@@ -2885,7 +2892,7 @@
     "visibility": 10,
     "ugliness": 12,
     "description": "Twisted growths of horn, bony scales, and chitinous plates sprout at random from your skin, which bristles with fur and feathers seemingly at random.",
-    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.15 }, { "value": "BODYTEMP_SLEEP", "add": 0.25 } ] } ],
+    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.15 }, { "value": "BODYTEMP_SLEEP", "add": 0.25 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.3 } ] } ],
     "wet_protection": [
       { "part": "head", "ignored": 3 },
       { "part": "leg_l", "ignored": 10 },
@@ -2928,7 +2935,8 @@
       { "part": "hand_l", "ignored": 1 },
       { "part": "hand_r", "ignored": 1 },
       { "part": "torso", "ignored": 10 }
-    ]
+    ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.33 } ] } ]
   },
   {
     "type": "mutation",
@@ -2953,7 +2961,8 @@
       { "part": "hand_l", "ignored": 1 },
       { "part": "hand_r", "ignored": 1 },
       { "part": "torso", "ignored": 10 }
-    ]
+    ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.30 } ] } ]
   },
   {
     "type": "mutation",
@@ -2980,7 +2989,8 @@
       { "part": "hand_l", "ignored": 2 },
       { "part": "hand_r", "ignored": 2 },
       { "part": "torso", "ignored": 18 }
-    ]
+    ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.33 } ] } ]
   },
   {
     "type": "mutation",
@@ -3007,7 +3017,8 @@
       { "part": "hand_l", "ignored": 2 },
       { "part": "hand_r", "ignored": 2 },
       { "part": "torso", "ignored": 18 }
-    ]
+    ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": -0.3 } ] } ]
   },
   {
     "type": "mutation",
@@ -3022,7 +3033,7 @@
     "category": [ "CRUSTACEAN" ],
     "leads_to": [ "CRUSTACEAN_CLAW" ],
     "flags": [ "TOUGH_FEET" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -2 } ] } ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -2 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.66 } ] } ],
     "integrated_armor": [ "integrated_carapace" ],
     "wet_protection": [
       { "part": "head", "ignored": 15 },
@@ -3063,7 +3074,7 @@
       { "part": "hand_r", "ignored": 6 },
       { "part": "torso", "ignored": 20 }
     ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": -1 }, { "value": "SWEAT_MULTIPLIER", "multiply": -0.60 } ] } ]
   },
   {
     "type": "mutation",
@@ -4158,7 +4169,7 @@
     "description": "The heels of your feet have shifted up off the ground in a rather animalistic fashion, reducing your carry weight limit and preventing you from wearing shoes.  These hind feet are a bad match for human arms, but could pair well with matching forepaws.",
     "types": [ "FEET" ],
     "prereqs": [ "PADDED_FEET" ],
-    "category": [ "LUPINE", "FELINE", "BEAST", "URSINE" ],
+    "category": [ "LUPINE", "FELINE", "BEAST" ],
     "flags": [ "QUADRUPED_RUN" ],
     "wet_protection": [ { "part": "foot_l", "neutral": 10 }, { "part": "foot_r", "neutral": 10 } ],
     "restricts_gear": [ "foot_l", "foot_r" ],
@@ -7115,7 +7126,7 @@
     "visibility": 4,
     "ugliness": 3,
     "mixed_effect": true,
-    "description": "Your paws are much larger now.  Manual dexterity is difficult: permanent hand encumbrance of 20, serious problems crafting, and no gloves, though they're not terrible for swimming.",
+    "description": "Your paws are much larger now.  They help you swim, and you can crawl around easily if you crouch with your hands free, but they're a real impediment to crafting and fine manipulation.",
     "craft_skill_bonus": [
       [ "electronics", -4 ],
       [ "tailor", -4 ],
@@ -7254,7 +7265,7 @@
     "points": 2,
     "visibility": 7,
     "ugliness": 6,
-    "description": "Your body is coated with a fine slime which makes uncovered skin harder to grab and protects from long-term effects of acid, though not short-term ones.  Greatly increases wet benefits.",
+    "description": "Your body is coated with a fine slime which makes uncovered skin harder to grab and helps protect you from acid.  Greatly increases wet benefits.",
     "types": [ "SECRETION" ],
     "leads_to": [ "SLIME_HANDS" ],
     "changes_to": [ "VISCOUS" ],
@@ -7270,7 +7281,8 @@
       { "part": "hand_l", "neutral": 2, "good": 3 },
       { "part": "hand_r", "neutral": 2, "good": 3 },
       { "part": "torso", "neutral": 14, "good": 26 }
-    ]
+    ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": 0.3 } ] } ]
   },
   {
     "type": "mutation",
@@ -7296,7 +7308,8 @@
       { "part": "hand_r", "neutral": 3, "good": 4 },
       { "part": "torso", "neutral": 15, "good": 27 }
     ],
-    "armor": [ { "part_types": [ "ALL" ], "acid": 2 } ]
+    "armor": [ { "part_types": [ "ALL" ], "acid": 2 } ],
+    "enchantments": [ { "values": [ { "value": "SWEAT_MULTIPLIER", "multiply": 0.4 } ] } ]
   },
   {
     "type": "mutation",
@@ -7396,7 +7409,7 @@
     "id": "PONDEROUS1",
     "name": { "str": "Ponderous" },
     "points": -3,
-    "description": "Your muscles are generally slow to move.  You move 10% slower.",
+    "description": "Your movement is slowed slightly.",
     "types": [ "RUNNING" ],
     "changes_to": [ "PONDEROUS2" ],
     "category": [ "URSINE", "CATTLE", "PLANT", "BATRACHIAN", "GASTROPOD", "CRUSTACEAN" ],
@@ -7407,11 +7420,11 @@
     "id": "PONDEROUS2",
     "name": { "str": "Very Ponderous" },
     "points": -5,
-    "description": "Your muscles are quite slow to move.  You move 20% slower.",
+    "description": "You move quite slowly.",
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS1" ],
-    "changes_to": [ "PONDEROUS3" ],
-    "category": [ "CATTLE", "PLANT", "GASTROPOD", "BATRACHIAN" ],
+    "changes_to": [ "PONDEROUS3", "CHARGER" ],
+    "category": [ "URSINE", "CATTLE", "PLANT", "GASTROPOD", "CRUSTACEAN" ],
     "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.2 } ] } ]
   },
   {
@@ -7419,11 +7432,23 @@
     "id": "PONDEROUS3",
     "name": { "str": "Extremely Ponderous" },
     "points": -6,
-    "description": "Your muscles are very slow to move.  You move 30% slower.",
+    "description": "You have a hard time getting anywhere in a hurry.",
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS2" ],
     "category": [ "PLANT" ],
     "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.3 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "CHARGER",
+    "name": { "str": "Charger" },
+    "points": 2,
+    "mixed_effect": true,
+    "description": "You walk slowly, but can run with surprising speed.",
+    "types": [ "RUNNING" ],
+    "prereqs": [ "PONDEROUS2" ],
+    "category": [ "URSINE", "CATTLE" ],
+    "enchantments": [ { "condition": { "u_has_move_mode": "run" }, "values": [ { "value": "MOVE_COST", "multiply": -0.02 } ] }, { "condition": { "and": [ { "not": { "u_has_move_mode": "prone" } }, { "not": { "u_has_move_mode": "run" } } ] }, "values": [ { "value": "MOVE_COST", "multiply": 0.20 } ] }  ]
   },
   {
     "type": "mutation",
@@ -9440,7 +9465,7 @@
     "description": "You fare better than most in warmer climates and are less bothered by hotter temperatures.  Note that while it will take more heat and exposure for you to suffer the effects of sunstroke, you aren't any better at dealing with the symptoms.",
     "starting_trait": true,
     "changes_to": [ "STRONGER_RESISTWARM" ],
-    "category": [ "FISH", "CEPHALOPOD", "GASTROPOD", "LIZARD", "BATRACHIAN", "PLANT" ],
+    "category": [ "FISH", "CEPHALOPOD", "GASTROPOD", "LIZARD", "BATRACHIAN", "PLANT", "FELINE" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CLIMATE_CONTROL_CHILL", "add": 10 } ] } ]
   },
   {
