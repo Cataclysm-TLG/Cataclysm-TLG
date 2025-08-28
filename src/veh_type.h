@@ -123,6 +123,8 @@ enum vpart_bitflags : int {
 };
 
 struct vpslot_engine {
+    bool was_loaded = false;
+
     float backfire_threshold = 0.0f;
     int backfire_freq = 1;
     int muscle_power_factor = 0;
@@ -131,6 +133,8 @@ struct vpslot_engine {
     int m2c = 100;
     std::vector<std::string> exclusions;
     std::vector<itype_id> fuel_opts;
+
+    void deserialize( const JsonObject &jo );
 };
 
 struct veh_ter_mod {
