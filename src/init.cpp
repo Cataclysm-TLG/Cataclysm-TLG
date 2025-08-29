@@ -331,7 +331,7 @@ void DynamicDataLoader::initialize()
     } );
 
     add( "vehicle_part",  &vehicles::parts::load );
-    add( "vehicle_part_category",  &vpart_category::load );
+    add( "vehicle_part_category",  &vpart_category::load_all );
     add( "vehicle_part_migration", &vpart_migration::load );
     add( "vehicle", &vehicles::load_prototype );
     add( "vehicle_group",  &VehicleGroup::load );
@@ -756,7 +756,7 @@ void DynamicDataLoader::finalize_loaded_data( loading_ui &ui )
                     requirement_data::finalize();
                 }
             },
-            { _( "Vehicle part categories" ), &vpart_category::finalize },
+            { _( "Vehicle part categories" ), &vpart_category::finalize_all },
             { _( "Vehicle parts" ), &vehicles::parts::finalize },
             { _( "Traps" ), &trap::finalize },
             { _( "Terrain" ), &set_ter_ids },
