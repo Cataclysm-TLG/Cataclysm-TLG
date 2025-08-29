@@ -19,6 +19,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include "activity_handlers.h"
 #include "ammo.h"
 #include "ascii_art.h"
 #include "avatar.h"
@@ -11996,9 +11997,16 @@ bool item::reload( Character &u, item_location ammo, int qty )
 
     qty = std::min( qty, limit );
 
-    casings_handle( [&u]( item & e ) {
-        return u.i_add_or_drop( e );
-    } );
+    if( has_flag( flag_RELOAD_EJECT ) ) {
+        casings_handle( [&u]( item & e ) {
+            put_into_vehicle_or_drop( u, item_drop_reason::tumbling, { e } );
+            return true;
+        } );
+    } else {
+        casings_handle( [&u]( item & e ) {
+            return u.i_add_or_drop( e );
+        } );
+    }
 
     if( is_magazine() ) {
         qty = std::min( qty, ammo->charges );
