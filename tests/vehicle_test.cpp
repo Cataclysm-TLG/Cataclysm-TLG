@@ -474,7 +474,7 @@ TEST_CASE( "power_cable_stretch_disconnect" )
 
         WHEN( "displacing first appliance to the left" ) {
             for( int i = 0;
-                 rl_dist( m.getglobal( app1.pos_bub() ), m.getglobal( app2.pos_bub() ) ) <= max_dist &&
+                 rl_dist( m.get_abs( app1.pos_bub() ), m.get_abs( app2.pos_bub() ) ) <= max_dist &&
                  i < max_displacement; i++ ) {
                 CHECK( app1.part_count() == 2 );
                 CHECK( app2.part_count() == 2 );
@@ -482,15 +482,15 @@ TEST_CASE( "power_cable_stretch_disconnect" )
                 app1.part_removal_cleanup();
                 app2.part_removal_cleanup();
             }
-            CAPTURE( m.getglobal( app1.pos_bub() ) );
-            CAPTURE( m.getglobal( app2.pos_bub() ) );
+            CAPTURE( m.get_abs( app1.pos_bub() ) );
+            CAPTURE( m.get_abs( app2.pos_bub() ) );
             CHECK( app1.part_count() == 1 );
             CHECK( app2.part_count() == 1 );
         }
 
         WHEN( "displacing second appliance to the right" ) {
             for( int i = 0;
-                 rl_dist( m.getglobal( app1.pos_bub() ), m.getglobal( app2.pos_bub() ) ) <= max_dist &&
+                 rl_dist( m.get_abs( app1.pos_bub() ), m.get_abs( app2.pos_bub() ) ) <= max_dist &&
                  i < max_displacement; i++ ) {
                 CHECK( app1.part_count() == 2 );
                 CHECK( app2.part_count() == 2 );
@@ -498,8 +498,8 @@ TEST_CASE( "power_cable_stretch_disconnect" )
                 app1.part_removal_cleanup();
                 app2.part_removal_cleanup();
             }
-            CAPTURE( m.getglobal( app1.pos_bub() ) );
-            CAPTURE( m.getglobal( app2.pos_bub() ) );
+            CAPTURE( m.get_abs( app1.pos_bub() ) );
+            CAPTURE( m.get_abs( app2.pos_bub() ) );
             CHECK( app1.part_count() == 1 );
             CHECK( app2.part_count() == 1 );
         }
@@ -517,7 +517,7 @@ TEST_CASE( "power_cable_stretch_disconnect" )
 
         WHEN( "displacing first appliance to the left" ) {
             for( int i = 0;
-                 rl_dist( m.getglobal( app1.pos_bub() ), m.getglobal( app2.pos_bub() ) ) <= max_dist &&
+                 rl_dist( m.get_abs( app1.pos_bub() ), m.get_abs( app2.pos_bub() ) ) <= max_dist &&
                  i < max_displacement; i++ ) {
                 CHECK( app1.part_count() == 2 );
                 CHECK( app2.part_count() == 2 );
@@ -525,15 +525,15 @@ TEST_CASE( "power_cable_stretch_disconnect" )
                 app1.part_removal_cleanup();
                 app2.part_removal_cleanup();
             }
-            CAPTURE( m.getglobal( app1.pos_bub() ) );
-            CAPTURE( m.getglobal( app2.pos_bub() ) );
+            CAPTURE( m.get_abs( app1.pos_bub() ) );
+            CAPTURE( m.get_abs( app2.pos_bub() ) );
             CHECK( app1.part_count() == 1 );
             CHECK( app2.part_count() == 1 );
         }
 
         WHEN( "displacing second appliance to the right" ) {
             for( int i = 0;
-                 rl_dist( m.getglobal( app1.pos_bub() ), m.getglobal( app2.pos_bub() ) ) <= max_dist &&
+                 rl_dist( m.get_abs( app1.pos_bub() ), m.get_abs( app2.pos_bub() ) ) <= max_dist &&
                  i < max_displacement; i++ ) {
                 CHECK( app1.part_count() == 2 );
                 CHECK( app2.part_count() == 2 );
@@ -541,8 +541,8 @@ TEST_CASE( "power_cable_stretch_disconnect" )
                 app1.part_removal_cleanup();
                 app2.part_removal_cleanup();
             }
-            CAPTURE( m.getglobal( app1.pos_bub() ) );
-            CAPTURE( m.getglobal( app2.pos_bub() ) );
+            CAPTURE( m.get_abs( app1.pos_bub() ) );
+            CAPTURE( m.get_abs( app2.pos_bub() ) );
             CHECK( app1.part_count() == 1 );
             CHECK( app2.part_count() == 1 );
         }

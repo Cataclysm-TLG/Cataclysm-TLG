@@ -50,7 +50,7 @@ void mapgen_ravine_edge( mapgendata &dat );
 // Temporary wrappers
 void mremove_trap( map *m, const tripoint_bub_ms &, trap_id type );
 void mtrap_set( map *m, const tripoint_bub_ms &, trap_id type, bool avoid_creatures = false );
-void mtrap_set( tinymap *m, const point &, trap_id type, bool avoid_creatures = false );
+void mtrap_set( tinymap *m, const point_omt_ms &, trap_id type, bool avoid_creatures = false );
 void madd_field( map *m, const point &, field_type_id type, int intensity );
 void mremove_fields( map *m, const tripoint_bub_ms & );
 

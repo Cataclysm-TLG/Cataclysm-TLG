@@ -46,23 +46,23 @@ class pixel_minimap
     private:
         struct submap_cache;
 
-        submap_cache &get_cache_at( const tripoint &abs_sm_pos );
+        submap_cache &get_cache_at( const tripoint_abs_sm &abs_sm_pos );
 
         void set_screen_rect( const SDL_Rect &screen_rect );
         void reset();
 
         void draw_beacon( const SDL_Rect &rect, const SDL_Color &color );
 
-        void process_cache( const tripoint &center );
+        void process_cache( const tripoint_bub_ms &center );
 
         void flush_cache_updates();
-        void update_cache_at( const tripoint &pos );
-        void prepare_cache_for_updates( const tripoint &center );
+        void update_cache_at( const tripoint_bub_sm &sm_pos );
+        void prepare_cache_for_updates( const tripoint_bub_ms &center );
         void clear_unused_cache();
 
-        void render( const tripoint &center );
-        void render_cache( const tripoint &center );
-        void render_critters( const tripoint &center );
+        void render( const tripoint_bub_ms &center );
+        void render_cache( const tripoint_bub_ms &center );
+        void render_critters( const tripoint_bub_ms &center );
 
         std::unique_ptr<pixel_minimap_projector> create_projector( const SDL_Rect &max_screen_rect ) const;
 
@@ -89,7 +89,7 @@ class pixel_minimap
         class shared_texture_pool;
         std::unique_ptr<shared_texture_pool> tex_pool;
 
-        std::map<tripoint, submap_cache> cache;
+        std::map<tripoint_abs_sm, submap_cache> cache;
 };
 
 #endif // CATA_SRC_PIXEL_MINIMAP_H

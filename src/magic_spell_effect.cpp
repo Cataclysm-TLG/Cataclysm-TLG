@@ -1873,11 +1873,11 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
     std::vector<tripoint_abs_ms> trajectory;
     trajectory.reserve( trajectory_local.size() );
     for( const tripoint_bub_ms &local_point : trajectory_local ) {
-        trajectory.push_back( here.getglobal( local_point ) );
+        trajectory.push_back( here.get_abs( local_point ) );
     }
     avatar *caster_you = caster.as_avatar();
     auto walk_point = trajectory.begin();
-    if( here.bub_from_abs( *walk_point ) == source ) {
+    if( here.get_bub( *walk_point ) == source ) {
         ++walk_point;
     }
     // save the amount of moves the caster has so we can restore them after the dash
@@ -1897,14 +1897,14 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
             if( jumping && ( walk_point + 1 ) == trajectory.end() ) {
                 caster.remove_effect( effect_airborne );
             }
-            if( creatures.creature_at( here.bub_from_abs( *walk_point ) ) ||
-                !g->walk_move( here.bub_from_abs( *walk_point ), false ) ) {
+            if( creatures.creature_at( here.get_bub( *walk_point ) ) ||
+                !g->walk_move( here.get_bub( *walk_point ), false ) ) {
                 if( walk_point != trajectory.begin() ) {
                     --walk_point;
                 }
                 break;
             } else if( walk_point != trajectory.begin() ) {
-                sp.create_field( here.bub_from_abs( *( walk_point - 1 ) ), caster );
+                sp.create_field( here.get_bub( *( walk_point - 1 ) ), caster );
                 g->draw_ter();
             }
         }
@@ -1918,7 +1918,7 @@ void spell_effect::dash( const spell &sp, Creature &caster, const tripoint_bub_m
     caster.set_moves( cur_moves );
     tripoint_bub_ms far_target;
     calc_ray_end( coord_to_angle( source, target ), sp.aoe( caster ),
-                  here.bub_from_abs( *walk_point ),
+                  here.get_bub( *walk_point ),
                   far_target );
 
     spell_effect::override_parameters params( sp, caster );
@@ -2013,7 +2013,7 @@ void spell_effect::effect_on_condition( const spell &sp, Creature &caster,
         }
         Creature *victim = creatures.creature_at<Creature>( potential_target );
         dialogue d( victim ? get_talker_for( victim ) : nullptr, get_talker_for( caster ) );
-        const tripoint_abs_ms target_abs = get_map().getglobal( potential_target );
+        const tripoint_abs_ms target_abs = get_map().get_abs( potential_target );
         write_var_value( var_type::context, "spell_location", &d,
                          target_abs.to_string() );
         d.amend_callstack( string_format( "Spell: %s Caster: %s", sp.id().c_str(), caster.disp_name() ) );

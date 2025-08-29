@@ -269,7 +269,7 @@ void map::spread_gas( field_entry &cur, const tripoint_bub_ms &p, int percent_sp
     const bool sheltered = g->is_sheltered( p );
     weather_manager &weather = get_weather();
     const int winddirection = weather.winddirection;
-    const int windpower = get_local_windpower( weather.windspeed, om_ter, getglobal( p ),
+    const int windpower = get_local_windpower( weather.windspeed, om_ter, get_abs( p ),
                           winddirection,
                           sheltered );
 
@@ -963,7 +963,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
     int precipitation = static_cast<int>( weather.weather_id->precip );
     w_point weatherpoint = *weather.weather_precise;
     int humidity = get_local_humidity( weatherpoint.humidity, get_weather().weather_id );
-    int windpower = get_local_windpower( weather.windspeed, om_ter, get_map().getglobal( p ),
+    int windpower = get_local_windpower( weather.windspeed, om_ter, get_map().get_abs( p ),
                                          winddirection,
                                          sheltered );
     const ter_t &ter = map_tile.get_ter_t();

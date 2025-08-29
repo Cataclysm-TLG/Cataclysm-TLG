@@ -1768,7 +1768,7 @@ float npc::vehicle_danger( int radius ) const
         const wrapped_vehicle &wrapped_veh = vehicles[i];
         if( wrapped_veh.v->is_moving() ) {
             const auto &points_to_check = wrapped_veh.v->immediate_path();
-            point_abs_ms p( get_map().getglobal( pos_bub() ).xy() );
+            point_abs_ms p( get_map().get_abs( pos_bub() ).xy() );
             if( points_to_check.find( p ) != points_to_check.end() ) {
                 danger = i;
             }
@@ -3540,7 +3540,7 @@ std::function<bool( const tripoint_bub_ms & )> npc::get_path_avoid() const
         if( sees_dangerous_field( tripoint_bub_ms( p ) ) ) {
             return true;
         }
-        if( !can_move_to_vehicle_tile( here.getglobal( p ) ) ) {
+        if( !can_move_to_vehicle_tile( here.get_abs( p ) ) ) {
             return true;
         }
         return false;

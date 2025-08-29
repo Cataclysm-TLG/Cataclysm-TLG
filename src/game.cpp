@@ -1209,7 +1209,7 @@ vehicle *game::place_vehicle_nearby(
             vehicle *veh = target_map.add_vehicle( id, tinymap_center, random_entry( angles ),
                                                    rng( 50, 80 ), 0, false );
             if( veh ) {
-                const tripoint_bub_ms abs_local = m.bub_from_abs( target_map.getglobal( tinymap_center ) );
+                const tripoint_bub_ms abs_local = m.get_bub( target_map.get_abs( tinymap_center ) );
                 tripoint_bub_sm quotient;
                 point_sm_ms remainder;
                 std::tie( quotient, remainder ) = coords::project_remain<coords::sm>( abs_local );
@@ -4468,15 +4468,15 @@ field_entry *game::is_in_dangerous_field()
     return nullptr;
 }
 
-std::unordered_set<tripoint> game::get_fishable_locations( int distance,
+std::unordered_set<tripoint_abs_ms> game::get_fishable_locations_abs( int distance,
         const tripoint_bub_ms &fish_pos )
 {
     const std::unordered_set<tripoint_bub_ms> temp = game::get_fishable_locations_bub( distance,
             fish_pos );
-    std::unordered_set<tripoint> result;
-
+    std::unordered_set<tripoint_abs_ms> result;
+    map &here = get_map();
     for( const tripoint_bub_ms pos : temp ) {
-        result.insert( pos.raw() );
+        result.insert( here.get_abs( pos ) );
     }
 
     return result;
@@ -4539,13 +4539,14 @@ std::unordered_set<tripoint_bub_ms> game::get_fishable_locations_bub( int distan
     return fishable_points;
 }
 
-std::vector<monster *> game::get_fishable_monsters( std::unordered_set<tripoint>
+std::vector<monster *> game::get_fishable_monsters( std::unordered_set<tripoint_abs_ms>
         &fishable_locations )
 {
+    const map &here = get_map();
     std::unordered_set<tripoint_bub_ms> temp;
 
-    for( const tripoint pos : fishable_locations ) {
-        temp.insert( tripoint_bub_ms( pos ) );
+    for( const tripoint_abs_ms pos : fishable_locations ) {
+        temp.insert( here.get_bub( pos ) );
     }
 
     return game::get_fishable_monsters( temp );
@@ -5162,6 +5163,24 @@ static bool can_place_monster( const monster &mon, const tripoint_bub_ms &p )
     return mon.will_move_to( p ) && mon.know_danger_at( p );
 }
 
+static bool can_place_monster( const monster &mon, map *here, const tripoint_bub_ms &p )
+{
+    const tripoint_abs_ms pos = here->get_abs( p );
+    creature_tracker &creatures = get_creature_tracker();
+    if( const monster *const critter = creatures.creature_at<monster>( pos ) ) {
+        // creature_tracker handles this. The hallucination monster will simply vanish
+        if( !critter->is_hallucination() ) {
+            return false;
+        }
+    }
+    // Although monsters can sometimes exist on the same place as a Character (e.g. ridden horse),
+    // it is usually wrong. So don't allow it.
+    if( creatures.creature_at<Character>( pos ) ) {
+        return false;
+    }
+    return mon.will_move_to( p ) && mon.know_danger_at( p );
+}
+
 static bool can_place_npc( const tripoint_bub_ms &p )
 {
     creature_tracker &creatures = get_creature_tracker();
@@ -5182,6 +5201,14 @@ static std::optional<tripoint_bub_ms> choose_where_to_place_monster( const monst
 {
     return random_point( range, [&]( const tripoint_bub_ms & p ) {
         return can_place_monster( mon, p );
+    } );
+}
+
+static std::optional<tripoint_bub_ms> choose_where_to_place_monster( const monster &mon, map *here,
+        const tripoint_range<tripoint_bub_ms> &range )
+{
+    return random_point( range, [&]( const tripoint_bub_ms & p ) {
+        return can_place_monster( mon, here, p );
     } );
 }
 
@@ -5261,6 +5288,28 @@ monster *game::place_critter_within( const shared_ptr_fast<monster> &mon,
     return nullptr;
 }
 
+monster *game::place_critter_at_or_within( const shared_ptr_fast<monster> &mon, map *here,
+        const tripoint_bub_ms &center, const tripoint_range<tripoint_bub_ms> &range )
+{
+    tripoint_range<tripoint_bub_ms> center_range = points_in_radius( center, 0 );
+
+    std::optional<tripoint_bub_ms> where = choose_where_to_place_monster( *mon, here, center_range );
+
+    if( !where ) {
+        where = choose_where_to_place_monster( *mon, here, range );
+    }
+
+    if( !where ) {
+        return nullptr;
+    }
+    mon->spawn( here->get_abs( where.value() ) );
+    if( critter_tracker->add( mon ) ) {
+        mon->gravity_check();
+        return mon.get();
+    }
+    return nullptr;
+}
+
 size_t game::num_creatures() const
 {
     // Plus one for the player.
@@ -5288,15 +5337,16 @@ bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, const mtype_i
                                     int max_radius, tripoint_bub_ms &point, bool outdoor_only, bool indoor_only, bool open_air_allowed )
 {
     tripoint_bub_ms target_point;
+    map &here = get_map();
     //find a legal outdoor place to spawn based on the specified radius,
     //we just try a bunch of random points and use the first one that works, it none do then no spawn
     for( int attempts = 0; attempts < 75; attempts++ ) {
         target_point = target + tripoint( rng( -max_radius, max_radius ),
                                           rng( -max_radius, max_radius ), 0 );
         if( can_place_monster( monster( mt->id ), target_point ) &&
-            ( open_air_allowed || get_map().has_floor_or_water( target_point ) ) &&
-            ( !outdoor_only || get_map().is_outside( target_point ) ) &&
-            ( !indoor_only || !get_map().is_outside( target_point ) ) &&
+            ( open_air_allowed || here.has_floor_or_water( target_point ) ) &&
+            ( !outdoor_only || here.is_outside( target_point ) ) &&
+            ( !indoor_only || !here.is_outside( target_point ) ) &&
             rl_dist( target_point, target ) >= min_radius ) {
             point = target_point;
             return true;
@@ -5343,7 +5393,7 @@ bool game::spawn_hallucination( const tripoint_bub_ms &p )
         shared_ptr_fast<npc> tmp = make_shared_fast<npc>();
         tmp->normalize();
         tmp->randomize( NC_HALLU );
-        tmp->spawn_at_precise( get_map().getglobal( p ) );
+        tmp->spawn_at_precise( get_map().get_abs( p ) );
         if( !get_creature_tracker().creature_at( p, true ) ) {
             overmap_buffer.insert_npc( tmp );
             load_npcs();
@@ -5405,7 +5455,7 @@ bool game::spawn_npc( const tripoint_bub_ms &p, const string_id<npc_template> &n
     shared_ptr_fast<npc> tmp = make_shared_fast<npc>();
     tmp->normalize();
     tmp->load_npc_template( npc_class );
-    tmp->spawn_at_precise( get_map().getglobal( p ) );
+    tmp->spawn_at_precise( get_map().get_abs( p ) );
     if( !get_creature_tracker().creature_at( p, true ) ) {
         overmap_buffer.insert_npc( tmp );
         for( const trait_id &new_trait : traits ) {
@@ -5507,7 +5557,16 @@ bool game::swap_critters( Creature &a, Creature &b )
 
 bool game::is_empty( const tripoint_bub_ms &p )
 {
-    return ( m.passable( p ) || m.has_flag( ter_furn_flag::TFLAG_LIQUID, p ) ) &&
+    map &here = get_map();
+
+    return ( here.passable( p ) || here.has_flag( ter_furn_flag::TFLAG_LIQUID, p ) ) &&
+           get_creature_tracker().creature_at( p ) == nullptr;
+}
+
+bool game::is_empty( map *here, const tripoint_abs_ms &p )
+{
+    const tripoint_bub_ms pos = here->get_bub( p );
+    return ( here->passable( pos ) || here->has_flag( ter_furn_flag::TFLAG_LIQUID, pos ) ) &&
            get_creature_tracker().creature_at( p ) == nullptr;
 }
 
@@ -5517,12 +5576,26 @@ bool game::is_in_sunlight( const tripoint_bub_ms &p )
            incident_sun_irradiance( get_weather().weather_id, calendar::turn ) > irradiance::minimal;
 }
 
+bool game::is_in_sunlight( map *here, const tripoint_bub_ms &p )
+{
+    return !is_sheltered( here, p ) &&
+           incident_sun_irradiance( current_weather( here->get_abs( p ), calendar::turn ),
+                                    calendar::turn ) > irradiance::minimal;
+}
+
 bool game::is_sheltered( const tripoint_bub_ms &p )
 {
-    const optional_vpart_position vp = m.veh_at( p );
+    map &here = get_map();
+
+    return game::is_sheltered( &here, p );
+}
+
+bool game::is_sheltered( map *here, const tripoint_bub_ms &p )
+{
+    const optional_vpart_position vp = here->veh_at( p );
     bool is_inside = vp && vp->is_inside();
 
-    return !m.is_outside( p ) ||
+    return !here->is_outside( p ) ||
            p.z() < 0 ||
            is_inside;
 }
@@ -5607,7 +5680,7 @@ void game::save_cyborg( item *cyborg, const tripoint_bub_ms &couch_pos, Characte
         shared_ptr_fast<npc> tmp = make_shared_fast<npc>();
         tmp->normalize();
         tmp->load_npc_template( npc_template_cyborg_rescued );
-        tmp->spawn_at_precise( get_map().getglobal( couch_pos ) );
+        tmp->spawn_at_precise( get_map().get_abs( couch_pos ) );
         overmap_buffer.insert_npc( tmp );
         tmp->hurtall( dmg_lvl * 10, nullptr );
         tmp->add_effect( effect_downed, rng( 1_turns, 4_turns ), false, 0, true );
@@ -5820,7 +5893,7 @@ void game::control_vehicle()
         // If we reached here, we gained control of a vehicle.
         // Clear the map memory for the area covered by the vehicle to eliminate ghost vehicles.
         for( const tripoint_bub_ms &target : veh->get_points() ) {
-            u.memorize_clear_decoration( m.getglobal( target ), "vp_" );
+            u.memorize_clear_decoration( m.get_abs( target ), "vp_" );
             m.memory_cache_dec_set_dirty( target, true );
         }
         veh->is_following = false;
@@ -6829,12 +6902,12 @@ void game::print_graffiti_info( const tripoint_bub_ms &lp, const catacurses::win
 
 bool game::check_zone( const zone_type_id &type, const tripoint_bub_ms &where ) const
 {
-    return zone_manager::get_manager().has( type, m.getglobal( where ) );
+    return zone_manager::get_manager().has( type, m.get_abs( where ) );
 }
 
 bool game::check_near_zone( const zone_type_id &type, const tripoint_bub_ms &where ) const
 {
-    return zone_manager::get_manager().has_near( type, m.getglobal( where ) );
+    return zone_manager::get_manager().has_near( type, m.get_abs( where ) );
 }
 
 bool game::is_zones_manager_open() const
@@ -7099,13 +7172,13 @@ void game::zones_manager()
                     true, true, false );
             if( second.position ) {
                 tripoint_abs_ms first_abs =
-                m.getglobal(
+                m.get_abs(
                     tripoint_bub_ms(
                         std::min( first.position->x(), second.position->x() ),
                         std::min( first.position->y(), second.position->y() ),
                         std::min( first.position->z(), second.position->z() ) ) );
                 tripoint_abs_ms second_abs =
-                m.getglobal(
+                m.get_abs(
                     tripoint_bub_ms(
                         std::max( first.position->x(), second.position->x() ),
                         std::max( first.position->y(), second.position->y() ),
@@ -7234,8 +7307,8 @@ void game::zones_manager()
         if( zone_cnt > 0 ) {
             blink = !blink;
             const zone_data &zone = zones[active_index].get();
-            zone_start = m.bub_from_abs( zone.get_start_point() );
-            zone_end = m.bub_from_abs( zone.get_end_point() );
+            zone_start = m.get_bub( zone.get_start_point() );
+            zone_end = m.get_bub( zone.get_end_point() );
             ctxt.set_timeout( get_option<int>( "BLINK_SPEED" ) );
         } else {
             blink = false;
@@ -7471,16 +7544,16 @@ void game::zones_manager()
                         static_popup message_pop;
                         message_pop.on_top( true );
                         message_pop.message( "%s", _( "Moving zone." ) );
-                        const tripoint_bub_ms zone_local_start_point = m.bub_from_abs( zone.get_start_point() );
-                        const tripoint_bub_ms zone_local_end_point = m.bub_from_abs( zone.get_end_point() );
+                        const tripoint_bub_ms zone_local_start_point = m.get_bub( zone.get_start_point() );
+                        const tripoint_bub_ms zone_local_end_point = m.get_bub( zone.get_end_point() );
                         // local position of the zone center, used to calculate the u.view_offset,
                         // could center the screen to the position it represents
-                        tripoint_bub_ms view_center = m.bub_from_abs( zone.get_center_point() );
+                        tripoint_bub_ms view_center = m.get_bub( zone.get_center_point() );
                         const look_around_result result_local = look_around( false, view_center,
                                                                 zone_local_start_point, false, false,
                                                                 false, true, zone_local_end_point );
                         if( result_local.position ) {
-                            const tripoint_abs_ms new_start_point = m.getglobal( *result_local.position );
+                            const tripoint_abs_ms new_start_point = m.get_abs( *result_local.position );
                             const tripoint_abs_ms new_end_point = zone.get_end_point() - zone.get_start_point() +
                                                                   new_start_point;
                             if( new_start_point == zone.get_start_point() ) {
@@ -7595,7 +7668,7 @@ void game::pre_print_all_tile_info( const tripoint_bub_ms &lp, const catacurses:
                                     const visibility_variables &cache )
 {
     // get global area info according to look_around caret position
-    tripoint_abs_omt omp( coords::project_to<coords::omt>( m.getglobal( lp ) ) );
+    tripoint_abs_omt omp( coords::project_to<coords::omt>( m.get_abs( lp ) ) );
     const oter_id &cur_ter_m = overmap_buffer.ter( omp );
     om_vision_level vision = overmap_buffer.seen( omp );
     // we only need the area name and then pass it to print_all_tile_info() function below
@@ -10590,7 +10663,6 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
 bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
                       const bool furniture_move )
 {
-
     if( m.has_flag_ter( ter_furn_flag::TFLAG_SMALL_PASSAGE, dest_loc ) ) {
         if( u.get_size() > creature_size::medium ) {
             add_msg( m_warning, _( "You can't fit there." ) );
@@ -10718,7 +10790,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     u.set_underwater( false );
 
     bool cramped = false;
-    if( vp_there && !u.can_move_to_vehicle_tile( get_map().getglobal( dest_loc ), cramped ) ) {
+    if( vp_there && !u.can_move_to_vehicle_tile( get_map().get_abs( dest_loc ), cramped ) ) {
         add_msg( m_warning, _( "There's not enough room for you to fit there." ) );
         return false;
     }
@@ -10866,7 +10938,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     }
 
     tripoint_bub_ms oldpos = u.pos_bub();
-    tripoint_abs_ms old_abs_pos = m.getglobal( oldpos );
+    tripoint_abs_ms old_abs_pos = m.get_abs( oldpos );
 
     bool moving = dest_loc != oldpos;
 
@@ -10874,7 +10946,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     point_rel_ms ms_shift = coords::project_to<coords::ms>( submap_shift );
     oldpos = oldpos - ms_shift.raw();
     if( u.grab_1.victim.get() ) {
-        tripoint_abs_ms old_abs_ms_pos = m.getglobal( oldpos );
+        tripoint_abs_ms old_abs_ms_pos = m.get_abs( oldpos );
         u.grab_1.victim.get()->move_to( old_abs_ms_pos );
     }
 
@@ -11190,7 +11262,7 @@ point_rel_sm game::place_player( const tripoint_bub_ms &dest_loc, bool quick )
                 std::set<tripoint_abs_ms> places;
                 for( const direction &elem : adjacentDir ) {
                     if( corpse_available( u.pos_bub() + displace_XY( elem ) ) ) {
-                        places.emplace( m.getglobal( u.pos_bub() + displace_XY( elem ) ) );
+                        places.emplace( m.get_abs( u.pos_bub() + displace_XY( elem ) ) );
                     }
                 }
                 if( !places.empty() ) {
@@ -11198,7 +11270,7 @@ point_rel_sm game::place_player( const tripoint_bub_ms &dest_loc, bool quick )
                 }
             } else {
                 if( corpse_available( u.pos_bub() ) ) {
-                    u.assign_activity( pulp_activity_actor( m.getglobal( u.pos_bub() ) ) );
+                    u.assign_activity( pulp_activity_actor( m.get_abs( u.pos_bub() ) ) );
                 }
             }
         }
@@ -12415,7 +12487,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     }
 
     const tripoint_bub_ms old_pos = u.pos_bub();
-    const tripoint_abs_ms old_abs_pos = here.getglobal( old_pos );
+    const tripoint_abs_ms old_abs_pos = here.get_abs( old_pos );
     point_rel_sm submap_shift;
     const bool z_level_changed = vertical_shift( z_after );
     if( !force ) {
@@ -12588,10 +12660,10 @@ std::optional<tripoint_bub_ms> game::find_stairs( const map &mp, int z_after,
     int best = INT_MAX;
     std::optional<tripoint_bub_ms> stairs;
     const int omtilesz = SEEX * 2 - 1;
-    const tripoint_abs_ms abs_omt_base( project_to<coords::ms>( project_to<coords::omt>( mp.getglobal(
+    const tripoint_abs_ms abs_omt_base( project_to<coords::ms>( project_to<coords::omt>( mp.get_abs(
                                             pos ) ) ) );
 
-    tripoint_bub_ms omtile_align_start( mp.bub_from_abs( tripoint_abs_ms( abs_omt_base.xy(),
+    tripoint_bub_ms omtile_align_start( mp.get_bub( tripoint_abs_ms( abs_omt_base.xy(),
                                         z_after ) ) );
     tripoint_bub_ms omtile_align_end( omtile_align_start + point( omtilesz, omtilesz ) );
 
@@ -14146,7 +14218,7 @@ namespace cata_event_dispatch
 void avatar_moves( const tripoint_abs_ms &old_abs_pos, const avatar &u, const map &m )
 {
     const tripoint_bub_ms new_pos = u.pos_bub();
-    const tripoint_abs_ms new_abs_pos = m.getglobal( new_pos );
+    const tripoint_abs_ms new_abs_pos = m.get_abs( new_pos );
     mtype_id mount_type;
     if( u.is_mounted() ) {
         mount_type = u.mounted_creature->type->id;

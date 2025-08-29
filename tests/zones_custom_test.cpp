@@ -13,18 +13,18 @@ TEST_CASE( "zones_custom", "[zones]" )
     WHEN( "overlapping custom zones" ) {
         clear_map();
         map &m = get_map();
-        tripoint_abs_ms const zone_loc = m.getglobal( tripoint_bub_ms{ 5, 5, 0 } );
+        tripoint_abs_ms const zone_loc = m.get_abs( tripoint_bub_ms{ 5, 5, 0 } );
         tripoint_abs_ms const zone_hammer_end = zone_loc + tripoint::north;
         tripoint_abs_ms const zone_bowsaw_end = zone_loc + tripoint::south;
         tripoint_abs_ms const zone_testgroup_end = zone_loc + tripoint::east;
         tripoint_abs_ms const zone_groupbatt_end = zone_loc + tripoint::west;
-        tripoint_abs_ms const where = m.getglobal( tripoint_bub_ms::zero );
-        item hammer( "hammer" );
-        item bow_saw( "bow_saw" );
-        item pants_fur( "test_pants_fur" );
-        item batt( "test_battery_disposable" );
-        item bag_plastic( "bag_plastic" );
-        item nested_batt( "test_battery_disposable" );
+        tripoint_abs_ms const where = m.get_abs( tripoint_bub_ms::zero );
+        item hammer( itype_hammer );
+        item bow_saw( itype_bow_saw );
+        item pants_fur( itype_test_pants_fur );
+        item batt( itype_test_battery_disposable );
+        item bag_plastic( itype_bag_plastic );
+        item nested_batt( itype_test_battery_disposable );
         int const num = GENERATE( 1, 2 );
         for( int i = 0; i < num; i++ ) {
             bag_plastic.put_in( nested_batt, pocket_type::CONTAINER );
@@ -41,7 +41,7 @@ TEST_CASE( "zones_custom", "[zones]" )
                            "test_event_item_spawn" );
         mapgen_place_zone( zone_loc, zone_groupbatt_end, zone_type_LOOT_ITEM_GROUP, your_fac, {},
                            "test_group_disp" );
-        tripoint_abs_ms const m_zone_loc = m.getglobal( tripoint_bub_ms{-5, -5, 0 } );
+        tripoint_abs_ms const m_zone_loc = m.get_abs( tripoint_bub_ms{-5, -5, 0 } );
         mapgen_place_zone( m_zone_loc, m_zone_loc, zone_type_LOOT_CUSTOM, your_fac, {},
                            "plastic bag" );
 
