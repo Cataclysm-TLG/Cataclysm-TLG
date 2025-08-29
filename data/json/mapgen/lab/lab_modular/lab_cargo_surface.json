@@ -112,7 +112,7 @@
         { "monster": "mon_skitterbot", "x": 43, "y": 1, "chance": 100 },
         { "monster": "mon_manhack", "x": 44, "y": 1, "chance": 100 }
       ],
-      "place_vehicles": [ { "vehicle": "golf_cart", "x": [ 8, 20 ], "y": [ 17, 18 ], "chance": 100, "rotation": 90 } ]
+      "place_vehicles": [ { "vehicle": "golf_cart", "x": [ 8, 20 ], "y": [ 17, 18 ], "chance": 80, "rotation": 90 } ]
     }
   },
   {
@@ -149,6 +149,7 @@
         "|;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;|||"
       ],
       "palettes": [ "lab_common_palette", "lab_maintenance_palette" ],
+      "place_furniture": [ { "furn": "f_diesel_generator", "x": 5, "y": [ 2, 8 ] } ],
       "place_nested": [
         { "chunks": [ [ "lab_cargo_5x5", 100 ] ], "x": 40, "y": 0 },
         { "chunks": [ [ "lab_cargo_5x5", 100 ] ], "x": 40, "y": 6 },
@@ -164,10 +165,9 @@
         { "monster": "mon_lab_security_drone_GM", "x": [ 2, 22 ], "y": [ 6, 22 ], "chance": 50 }
       ],
       "place_vehicles": [
-        { "vehicle": "golf_cart_4seat", "x": 2, "y": 6, "chance": 100, "rotation": 180 },
-        { "vehicle": "forklift_vehicles", "x": 8, "y": 3, "chance": 100, "rotation": 90 },
+        { "vehicle": "golf_cart_4seat", "x": 2, "y": 6, "chance": 90, "rotation": 180 },
+        { "vehicle": "forklift_vehicles", "x": 8, "y": 3, "chance": 90, "rotation": 90 },
         { "vehicle": "truck_trailer", "x": 5, "y": 14, "chance": 30, "rotation": 180 },
-        { "vehicle": "portable_generator", "x": 5, "y": [ 2, 8 ], "chance": 30, "rotation": 90 },
         { "vehicle": "handjack", "x": 1, "y": [ 2, 8 ], "chance": 30, "rotation": 90 },
         { "vehicle": "forklift_vehicles", "x": [ 31, 35 ], "y": [ 14, 21 ], "chance": 30, "rotation": 90 },
         { "vehicle": "handjack", "x": [ 40, 44 ], "y": [ 1, 4 ], "chance": 10, "rotation": 0 },
@@ -211,6 +211,7 @@
         ";QQJJ;;JJQQ;£;;;£;;;£|;;;;Z|;£;;;è;;;£;ն;;;;;|||"
       ],
       "palettes": [ "lab_common_palette", "lab_maintenance_palette" ],
+      "place_furniture": [ { "furn": "f_diesel_generator", "x": 5, "y": [ 18, 21 ] } ],
       "place_nested": [
         { "chunks": [ [ "lab_cargo_5x5", 100 ] ], "x": 40, "y": 0 },
         { "chunks": [ [ "lab_cargo_5x5", 100 ] ], "x": 40, "y": 6 },
@@ -227,7 +228,6 @@
       ],
       "place_vehicles": [
         { "vehicle": "truck_trailer", "x": 5, "y": 8, "chance": 30, "rotation": 180 },
-        { "vehicle": "portable_generator", "x": 5, "y": [ 18, 21 ], "chance": 30, "rotation": 90 },
         { "vehicle": "handjack", "x": 1, "y": [ 18, 21 ], "chance": 30, "rotation": 90 },
         { "vehicle": "cart_animal_compartment", "x": 4, "y": 19, "chance": 30, "rotation": 0 },
         { "vehicle": "forklift_vehicles", "x": 8, "y": 19, "chance": 30, "rotation": 0 },
