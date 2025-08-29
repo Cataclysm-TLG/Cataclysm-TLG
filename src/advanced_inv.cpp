@@ -1466,7 +1466,7 @@ void advanced_inventory::start_activity(
     const bool from_vehicle, const bool to_vehicle ) const
 {
 
-    const bool by_charges = sitem->items.front()->count_by_charges();
+    const bool by_charges = sitem->items.front()->count_by_charges() && sitem->items.front()->type->stack_max != 1;
 
     Character &player_character = get_player_character();
 
@@ -2177,7 +2177,7 @@ bool advanced_inventory::query_charges( aim_location destarea, const advanced_in
     // valid item is obviously required
     cata_assert( !sitem.items.empty() );
     const item &it = *sitem.items.front();
-    const bool by_charges = it.count_by_charges();
+    const bool by_charges = it.count_by_charges() && it.type->stack_max != 1;
     // default to move all, unless if being equipped
     const int input_amount = by_charges ? it.charges : action == "MOVE_SINGLE_ITEM" ? 1 : sitem.stacks;
     // there has to be something to begin with
