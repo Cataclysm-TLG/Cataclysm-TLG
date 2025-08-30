@@ -587,7 +587,7 @@ class item_location::impl::item_in_container : public item_location::impl
                 return -1;
             }
             int idx = 0;
-            for( const item *it : container->all_items_top() ) {
+            for( const item *it : container->all_items_container_top() ) {
                 if( target() == it ) {
                     return idx;
                 }
@@ -857,7 +857,7 @@ void item_location::deserialize( const JsonObject &obj )
             ptr.reset( new impl::item_on_map( map_cursor( parent.pos_bub() ), idx ) ); // drop on ground
             return;
         }
-        const std::list<item *> parent_contents = parent->all_items_top();
+        const std::list<item *> parent_contents = parent->all_items_container_top();
         if( idx > -1 && idx < static_cast<int>( parent_contents.size() ) ) {
             auto iter = parent_contents.begin();
             std::advance( iter, idx );
@@ -891,6 +891,11 @@ bool item_location::has_parent() const
         return !!ptr->parent_item();
     }
     return false;
+}
+
+bool item_location::is_efile() const
+{
+    return parent_item() && parent_item()->is_estorage();
 }
 
 ret_val<void> item_location::parents_can_contain_recursive( item *it ) const
