@@ -364,6 +364,7 @@ class item : public visitable
 
         bool is_estorage() const;
         bool is_estorable() const;
+        bool is_estorable_exclusive() const;
         bool is_browsed() const;
         void set_browsed( bool browsed );
         /** @return if item can be copied as an e-file */
@@ -378,8 +379,6 @@ class item : public visitable
         units::ememory occupied_ememory() const;
         /** @return remaining electronic memory on this e-device */
         units::ememory remaining_ememory() const;
-        /** Returns whether the given item location is inside an e-device) */
-        static bool is_efile( const item_location &loc );
         /** Returns the recipe catalog for this item if it exists, otherwise returns nullptr */
         item *get_recipe_catalog();
         const item *get_recipe_catalog() const;
@@ -2959,14 +2958,19 @@ class item : public visitable
         std::list<item> remove_items_with( const std::function<bool( const item & )> &filter,
                                            int count = INT_MAX ) override;
 
-        /** returns a list of pointers to all top-level items that are not mods */
+        /** returns a list of pointers to all top-level items in standard pockets */
         std::list<const item *> all_items_top() const;
-        /** returns a list of pointers to all top-level items that are not mods */
+        /** returns a list of pointers to all top-level items in standard pockets */
         std::list<item *> all_items_top();
-        /** returns a list of pointers to all top-level items */
+        /** returns a list of pointers to all top-level items in container-like pockets */
+        std::list<const item *> all_items_container_top() const;
+        /** returns a list of pointers to all top-level items in container-like pockets */
+        std::list<item *> all_items_container_top();
+        /** returns a list of pointers to all top-level items in pk_type pockets only */
         std::list<const item *> all_items_top( pocket_type pk_type ) const;
-        /** returns a list of pointers to all top-level items
-         *  if unloading is true it ignores items in pockets that are flagged to not unload
+        /**
+         * Return a list of pointers to all top-level items in pk_type pockets only
+         * If unloading is true ignore items in pockets flagged not to be unloaded.
          */
         std::list<item *> all_items_top( pocket_type pk_type, bool unloading = false );
 
@@ -2990,16 +2994,18 @@ class item : public visitable
         aggregate_t aggregated_contents( int depth = 0, int maxdepth = 2 ) const;
 
         /**
-         * returns a list of pointers to all items inside recursively
+         * returns a list of pointers to *all items in all pockets* inside recursively
          * includes mods.  used for item_location::unpack()
          */
         std::list<const item *> all_items_ptr() const;
+        std::list<item *> all_items_ptr();
         /** returns a list of pointers to all items inside recursively */
         std::list<const item *> all_items_ptr( pocket_type pk_type ) const;
         /** returns a list of pointers to all items inside recursively */
         std::list<item *> all_items_ptr( pocket_type pk_type );
 
-        /** returns a list of pointers to all visible or remembered top-level items */
+        /** returns a list of pointers to all visible or remembered
+        * top-level items in standard pockets */
         std::list<item *> all_known_contents();
         std::list<const item *> all_known_contents() const;
 

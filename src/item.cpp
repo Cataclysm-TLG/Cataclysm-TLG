@@ -1284,7 +1284,7 @@ item item::in_container( const itype_id &cont, int qty, bool sealed,
     if( !variant.empty() ) {
         container.set_itype_variant( variant );
     }
-    if( container.is_container() ) {
+    if( container.is_container() || container.is_estorage() ) {
         container.fill_with( *this, qty );
         container.invlet = invlet;
         if( sealed ) {
@@ -6546,6 +6546,14 @@ void item::update_inherited_flags()
             }
         }
     }
+
+    // ensure efiles in device can be used in darkness if edevice can be used in darkness
+    if( has_flag( flag_CAN_USE_IN_DARK ) ) {
+        for( item *file : efiles() ) {
+            file->set_flag( flag_CAN_USE_IN_DARK );
+        }
+    }
+
     update_prefix_suffix_flags();
 }
 
@@ -8513,7 +8521,12 @@ bool item::is_estorage() const
 
 bool item::is_estorable() const
 {
-    return has_flag( flag_E_STORABLE ) || is_book();
+    return has_flag( flag_E_STORABLE ) || has_flag( flag_E_STORABLE_EXCLUSIVE ) || is_book();
+}
+
+bool item::is_estorable_exclusive() const
+{
+    return has_flag( flag_E_STORABLE_EXCLUSIVE );
 }
 
 bool item::is_browsed() const
@@ -8589,11 +8602,6 @@ units::ememory item::total_ememory() const
 units::ememory item::remaining_ememory() const
 {
     return total_ememory() - occupied_ememory();
-}
-
-bool item::is_efile( const item_location &loc )
-{
-    return loc.parent_item() && loc.parent_item()->is_estorage();
 }
 
 item *item::get_recipe_catalog()
@@ -15343,6 +15351,16 @@ std::list<item *> item::all_items_top()
     return contents.all_items_top();
 }
 
+std::list<const item *> item::all_items_container_top() const
+{
+    return contents.all_items_container_top();
+}
+
+std::list<item *> item::all_items_container_top()
+{
+    return contents.all_items_container_top();
+}
+
 std::list<const item *> item::all_items_top( pocket_type pk_type ) const
 {
     return contents.all_items_top( pk_type );
@@ -15453,6 +15471,17 @@ std::list<const item *> item::all_items_ptr() const
     for( int i = static_cast<int>( pocket_type::CONTAINER );
          i < static_cast<int>( pocket_type::LAST ); i++ ) {
         std::list<const item *> inserted{ all_items_top_recursive( static_cast<pocket_type>( i ) ) };
+        all_items_internal.insert( all_items_internal.end(), inserted.begin(), inserted.end() );
+    }
+    return all_items_internal;
+}
+
+std::list<item *> item::all_items_ptr()
+{
+    std::list<item *> all_items_internal;
+    for( int i = static_cast<int>( pocket_type::CONTAINER );
+         i < static_cast<int>( pocket_type::LAST ); i++ ) {
+        std::list<item *> inserted{ all_items_top_recursive( static_cast<pocket_type>( i ) ) };
         all_items_internal.insert( all_items_internal.end(), inserted.begin(), inserted.end() );
     }
     return all_items_internal;
