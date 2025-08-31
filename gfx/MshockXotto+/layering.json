@@ -39,7 +39,8 @@
         { "item": "ash", "sprite": [{"id": "brazier_ashes", "weight": 2}], "layer": 80 }
       ],
       "field_variants": [
-        { "field": "fd_fire", "sprite": [{"id": "f_brazier_fire", "weight": 3}] }
+        { "field": "fd_fire", "sprite": [{"id": "f_brazier_fire", "weight": 3}] },
+        { "field": "fd_smoke", "sprite": [{ "id": "f_brazier_fire", "weight": 2 }] }
       ]
     }
   ]
