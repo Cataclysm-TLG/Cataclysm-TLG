@@ -42,3 +42,7 @@ Press the `?` key, followed by the `1` key to see the full list of key commands.
 #### How can I start a new world?
 
 **World** on the main menu will generate a fresh world for you. Select **Create World**.
+
+#### I am having trouble launching the game on Linux, what do I do?
+
+See [LINUX.md](doc/LINUX.md).
