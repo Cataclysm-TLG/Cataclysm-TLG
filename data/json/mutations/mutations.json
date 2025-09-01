@@ -921,17 +921,6 @@
   },
   {
     "type": "mutation",
-    "id": "FASTLEARNER",
-    "name": { "str": "Fast Learner" },
-    "points": 3,
-    "description": "You have a flexible mind, allowing you to learn skills much faster than others.  Note that this only applies to real-world experience, not to skill gain from other sources like books.",
-    "starting_trait": true,
-    "valid": false,
-    "cancels": [ "SLOWLEARNER" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "multiply": 0.15 } ] } ]
-  },
-  {
-    "type": "mutation",
     "id": "TABLEMANNERS",
     "name": { "str": "Rigid Table Manners" },
     "points": -1,
@@ -1251,10 +1240,10 @@
   {
     "type": "mutation",
     "id": "LIAR",
-    "name": { "str": "Skilled Liar" },
+    "name": { "str": "Liar" },
     "points": 1,
-    "description": "You have no qualms about bending the truth, and have practically no tells.  Telling lies and otherwise bluffing will be much easier for you.",
-    "cancels": [ "TRUTHTELLER" ],
+    "description": "Lying comes easy to you.  You always have a clever excuse handy, and when it comes to haggling, you know how to get a good deal.  It's usually an asset, but some people can see right through this.",
+    "cancels": [ "GUILELESS" ],
     "starting_trait": true,
     "social_modifiers": { "lie": 40 }
   },
@@ -1509,7 +1498,6 @@
     "description": "You are slow to grasp new ideas, and thus learn things more slowly than others.  Note that this only applies to real-world experience, not to skill gain from other sources like books.",
     "starting_trait": true,
     "valid": false,
-    "cancels": [ "FASTLEARNER" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "multiply": -0.15 } ] } ]
   },
   {
@@ -1854,13 +1842,13 @@
   },
   {
     "type": "mutation",
-    "id": "TRUTHTELLER",
-    "name": { "str": "Truth Teller" },
+    "id": "GUILELESS",
+    "name": { "str": "Guileless" },
     "points": -1,
-    "description": "When you try to tell a lie, you blush, stammer, and get all shifty-eyed.  Telling lies and otherwise bluffing will be much more difficult for you.",
+    "description": "You're a terrible liar and you have a difficult time haggling or intimidating people.  Some find you more trustworthy, though others might look down on your ineffectuality.",
     "starting_trait": true,
-    "cancels": [ "LIAR" ],
-    "social_modifiers": { "lie": -40 }
+    "cancels": [ "LIAR", "TERRIFYING" ],
+    "social_modifiers": { "lie": -40, "intimidate": -30 }
   },
   {
     "type": "mutation",
@@ -9553,7 +9541,7 @@
     "name": { "str": "Cephalopod Mind" },
     "points": 5,
     "description": "You've developed an uncanny patience for problem-solving, making it easier to stay focused on learning.",
-    "cancels": [ "TRUTHTELLER", "LIAR", "SLOWLEARNER", "FASTLEARNER" ],
+    "cancels": [ "GUILELESS", "LIAR", "SLOWLEARNER" ],
     "purifiable": false,
     "types": [ "HUMAN_EMPATHY" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "add": 17 } ] } ],

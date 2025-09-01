@@ -157,17 +157,21 @@ static const skill_id skill_pistol( "pistol" );
 static const skill_id skill_rifle( "rifle" );
 static const skill_id skill_shotgun( "shotgun" );
 static const skill_id skill_smg( "smg" );
+static const skill_id skill_speech( "speech" );
 static const skill_id skill_stabbing( "stabbing" );
 static const skill_id skill_throw( "throw" );
 static const skill_id skill_unarmed( "unarmed" );
 
 static const trait_id trait_BEE( "BEE" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
+static const trait_id trait_GUILELESS( "GUILELESS" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
+static const trait_id trait_LIAR( "LIAR" );
 static const trait_id trait_NO_BASH( "NO_BASH" );
 static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PACIFIST( "PACIFIST" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
+static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
 static const trait_id trait_TERRIFYING( "TERRIFYING" );
 
@@ -1588,6 +1592,9 @@ void npc::form_opinion( const Character &you )
             op_of_u.value += 2;
         }
     }
+    if( you.has_trait( trait_GUILELESS ) && ( has_flag( json_flag_PSYCHOPATH ) || personality.altruism < 0 ) ) {
+        op_of_u.value -= 2;
+    }
 
     if( op_of_u.fear < personality.bravery + 10 &&
         op_of_u.fear - personality.aggression > -10 && op_of_u.trust > -8 ) {
@@ -1612,6 +1619,7 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     npc_opinion npc_values = op_of_u;
 
     const item_location weapon = you.get_wielded_item();
+
     // FEAR
     if( !you.is_armed() ) {
         // Unarmed, but actually unarmed ("unarmed weapons" are not unarmed)
@@ -1649,10 +1657,16 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     }
 
     if( you.has_flag( json_flag_SAPIOVORE ) ) {
-        npc_values.fear += 10; // Sapiovores = Scary
-    }
-    if( you.has_trait( trait_TERRIFYING ) ) {
+        npc_values.fear += 8;
+    } else if( you.has_trait( trait_TERRIFYING ) ) {
         npc_values.fear += 6;
+    }
+    if( you.has_trait( trait_GUILELESS ) ) {
+        npc_values.fear -= 4;
+    }
+    // If you're sharp enough, it's easy to see past superficial charm.
+    if( you.has_trait( trait_PSYCHOPATH ) && ( ( get_per() + get_int() ) > 20 ) ) {
+        npc_values.fear += 3;
     }
 
     int u_ugly = 0;
@@ -1663,6 +1677,7 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
         if( bp->ugliness == 0 && bp->ugliness_mandatory == 0 ) {
             continue;
         }
+        // TODO: I don't think this actually works yet. Check.
         u_ugly += bp->ugliness_mandatory;
         u_ugly += bp->ugliness - ( bp->ugliness * worn.get_coverage( bp ) / 100 );
         u_ugly = enchantment_cache->modify_value( enchant_vals::mod::UGLINESS, u_ugly );
@@ -1683,6 +1698,15 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
         npc_values.trust -= 3;
     } else {
         npc_values.trust += 1;
+    }
+
+    // Savvy NPCs can spot a huckster.
+    if( you.has_trait( trait_LIAR ) && ( ( get_skill_level( skill_speech ) + get_per() + personality.aggression ) > 15 ) ) {
+        npc_values.trust -= 5;
+    }
+    // They can also tell when something's off.
+    if( you.has_trait( trait_PSYCHOPATH ) && ( ( get_per() + personality.aggression ) > 15 ) ) {
+        npc_values.trust -= 5;
     }
 
     if( weapon && weapon->is_gun() ) {
