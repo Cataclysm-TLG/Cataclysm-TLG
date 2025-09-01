@@ -1467,7 +1467,8 @@ void advanced_inventory::start_activity(
     const bool from_vehicle, const bool to_vehicle ) const
 {
 
-    const bool by_charges = sitem->items.front()->count_by_charges() && sitem->items.front()->type->stack_max != 1;
+    const bool by_charges = sitem->items.front()->count_by_charges() &&
+                            sitem->items.front()->type->stack_max != 1;
 
     Character &player_character = get_player_character();
 

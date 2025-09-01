@@ -665,7 +665,10 @@
   },
   {
     "type": "dream",
-    "messages": [ "You dream of tearing into your prey, and the sweet taste of raw flesh.", "You blissfully recall days spent lounging in the sun." ],
+    "messages": [
+      "You dream of tearing into your prey, and the sweet taste of raw flesh.",
+      "You blissfully recall days spent lounging in the sun."
+    ],
     "category": "LIZARD",
     "strength": 4
   },
