@@ -147,10 +147,10 @@ double npc_trading::net_price_adjustment( const Character &buyer, const Characte
     ///\EFFECT_BARTER increases bartering price changes, relative to NPC BARTER
     int seller_trait_bonus = 0;
     int buyer_trait_bonus = 0;
-    if( buyer.has_trait( trait_LIAR ) && ( ( seller.get_skill_level( skill_speech ) + seller.get_per() + seller.get_int() ) > 25 ) ) {
+    if( buyer.has_trait( trait_LIAR ) ) {
         buyer_trait_bonus += 3;
     }
-    if( seller.has_trait( trait_LIAR ) && ( ( buyer.get_skill_level( skill_speech ) + buyer.get_per() + buyer.get_int() ) > 25 ) ) {
+    if( seller.has_trait( trait_LIAR ) ) {
         seller_trait_bonus += 3;
     }
     if( buyer.has_trait( trait_GUILELESS ) ) {

@@ -1702,7 +1702,7 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
 
     // Savvy NPCs can spot a huckster.
     if( you.has_trait( trait_LIAR ) && ( ( get_skill_level( skill_speech ) + get_per() + personality.aggression ) > 15 ) ) {
-        npc_values.trust -= 5;
+        npc_values.trust -= 4;
     }
     // They can also tell when something's off.
     if( you.has_trait( trait_PSYCHOPATH ) && ( ( get_per() + personality.aggression ) > 15 ) ) {

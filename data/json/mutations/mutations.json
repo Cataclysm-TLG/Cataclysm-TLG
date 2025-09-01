@@ -1242,10 +1242,10 @@
     "id": "LIAR",
     "name": { "str": "Liar" },
     "points": 1,
-    "description": "Lying comes easy to you.  You always have a clever excuse handy, and when it comes to haggling, you know how to get a good deal.  It's usually an asset, but some people can see right through this.",
+    "description": "You're great at bending the truth, and when it comes to haggling, you know how to get a good deal.  It's usually an asset, but some people can see right through it, and it makes sincere attempts at persuasion more difficult.",
     "cancels": [ "GUILELESS" ],
     "starting_trait": true,
-    "social_modifiers": { "lie": 40 }
+    "social_modifiers": { "lie": 40, "persuade": -10 }
   },
   {
     "type": "mutation",
