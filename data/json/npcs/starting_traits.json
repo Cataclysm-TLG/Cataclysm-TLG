@@ -98,7 +98,7 @@
     "type": "trait_group",
     "id": "trait_group_FASTLEARNER",
     "subtype": "distribution",
-    "traits": [ { "trait": "FASTLEARNER" }, { "trait": "SLOWLEARNER" } ]
+    "traits": [ { "trait": "SLOWLEARNER" } ]
   },
   {
     "type": "trait_group",
