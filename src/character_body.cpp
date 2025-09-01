@@ -360,7 +360,7 @@ void Character::update_body( const time_point &from, const time_point &to )
                     mod_daily_health( -1, -200 );
                 }
             } else {
-                    mod_daily_health( -1, -200 );
+                mod_daily_health( -1, -200 );
             }
         }
 

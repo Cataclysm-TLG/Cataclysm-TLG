@@ -195,7 +195,7 @@
     "id": "trait_group_LIAR",
     "subtype": "distribution",
     "//": "NOTE: These traits should be used as conditionals to affect the difficulty of NPCs lying about the expertise they have.",
-    "traits": [ { "trait": "LIAR" }, { "trait": "TRUTHTELLER" } ]
+    "traits": [ { "trait": "LIAR" }, { "trait": "GUILELESS" } ]
   },
   {
     "type": "trait_group",

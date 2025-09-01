@@ -274,5 +274,25 @@
   {
     "type": "effect_on_condition",
     "id": "lose_asphyxiation"
+  },
+  {
+    "type": "mutation",
+    "id": "FASTLEARNER",
+    "name": { "str": "Fast Learner" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "TRUTHTELLER",
+    "name": { "str": "Truth Teller" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
   }
 ]
