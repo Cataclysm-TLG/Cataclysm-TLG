@@ -159,7 +159,8 @@ double npc_trading::net_price_adjustment( const Character &buyer, const Characte
     if( seller.has_trait( trait_GUILELESS ) ) {
         seller_trait_bonus += -4;
     }
-    int const int_diff = ( seller.int_cur + seller_trait_bonus ) - ( buyer.int_cur + buyer_trait_bonus );
+    int const int_diff = ( seller.int_cur + seller_trait_bonus ) - ( buyer.int_cur +
+                         buyer_trait_bonus );
     double const int_adj = 1 + 0.05 * std::min( 19, std::abs( int_diff ) );
     double const soc_adj = price_adjustment( round( seller.get_skill_level( skill_speech ) -
                            buyer.get_skill_level( skill_speech ) ) );

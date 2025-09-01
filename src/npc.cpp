@@ -1592,7 +1592,8 @@ void npc::form_opinion( const Character &you )
             op_of_u.value += 2;
         }
     }
-    if( you.has_trait( trait_GUILELESS ) && ( has_flag( json_flag_PSYCHOPATH ) || personality.altruism < 0 ) ) {
+    if( you.has_trait( trait_GUILELESS ) && ( has_flag( json_flag_PSYCHOPATH ) ||
+            personality.altruism < 0 ) ) {
         op_of_u.value -= 2;
     }
 
@@ -1701,7 +1702,8 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
     }
 
     // Savvy NPCs can spot a huckster.
-    if( you.has_trait( trait_LIAR ) && ( ( get_skill_level( skill_speech ) + get_per() + personality.aggression ) > 15 ) ) {
+    if( you.has_trait( trait_LIAR ) &&
+        ( ( get_skill_level( skill_speech ) + get_per() + personality.aggression ) > 15 ) ) {
         npc_values.trust -= 4;
     }
     // They can also tell when something's off.

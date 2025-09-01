@@ -2011,7 +2011,8 @@ void npc::evaluate_best_attack( const Creature *target )
             compare( std::make_shared<npc_attack_throw>( *it ), "(as THROWN) " );
         }
         if( !it->type->use_methods.empty() ) {
-            compare( std::make_shared<npc_attack_activate_item>( *it ), "(as ACTIVATED) " + it->display_name() );
+            compare( std::make_shared<npc_attack_activate_item>( *it ),
+                     "(as ACTIVATED) " + it->display_name() );
         }
         if( rules.has_flag( ally_rule::use_guns ) ) {
             for( const std::pair<const gun_mode_id, gun_mode> &mode : it->gun_all_modes() ) {

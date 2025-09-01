@@ -3552,7 +3552,10 @@
       ]
     },
     "condition_desc": "* Only works on a <info>mundane</info> target of <info>similar or smaller</info> size",
-    "tech_effects": [ { "id": "choking", "chance": 100, "duration": 200, "on_damage": false, "message": "%s struggles to breathe!" }, { "id": "strangulation", "chance": 50, "duration": 200, "on_damage": false } ],
+    "tech_effects": [
+      { "id": "choking", "chance": 100, "duration": 200, "on_damage": false, "message": "%s struggles to breathe!" },
+      { "id": "strangulation", "chance": 50, "duration": 200, "on_damage": false }
+    ],
     "mult_bonuses": [
       { "stat": "damage", "type": "bash", "scale": 0.2 },
       { "stat": "damage", "type": "cut", "scale": 0.2 },
