@@ -4101,6 +4101,7 @@ void debug()
             g->cleanup_dead();
         }
         break;
+
         case debug_menu_index::DISPLAY_HORDES:
             ui::omap::display_hordes();
             break;
