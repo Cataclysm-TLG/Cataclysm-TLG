@@ -484,7 +484,7 @@
     "id": "quiver_large",
     "type": "ARMOR",
     "name": { "str": "large quiver" },
-    "description": "A large leather quiver trimmed with metal, worn on the back, that can hold a large amount of arrows or crossbow bolts.  It's even lomg enough for atlatl or fishing spears.",
+    "description": "A large leather quiver trimmed with metal, worn on the back, that can hold a large amount of arrows or crossbow bolts.  It's even long enough for atlatl or fishing spears.",
     "weight": "920 g",
     "volume": "1500 ml",
     "price": "88 USD",
