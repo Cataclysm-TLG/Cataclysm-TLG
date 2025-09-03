@@ -567,8 +567,8 @@
     "description": "A small but powerful gas turbine engine, suitable for powering a small one or two-seat helicopter.",
     "durability": 400,
     "epower": "-10 W",
-    "power": "1006695 W",
-    "energy_consumption": "4026780 W",
+    "power": "450000 W",
+    "energy_consumption": "200000 W",
     "breaks_into": [
       { "item": "alloy_plate", "count": [ 1, 2 ] },
       { "item": "steel_lump", "count": [ 45, 58 ] },
@@ -595,7 +595,7 @@
     "durability": 400,
     "epower": "-10 W",
     "power": "1416830 W",
-    "energy_consumption": "5667320 W",
+    "energy_consumption": "3740431 W",
     "breaks_into": [
       { "item": "alloy_plate", "count": [ 2, 4 ] },
       { "item": "steel_lump", "count": [ 50, 65 ] },
