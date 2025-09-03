@@ -7104,17 +7104,17 @@ void map::rotate( int turns )
         // Then rotate them and recalculate vehicle positions.
         for( int j = 0; j < 2; ++j ) {
             for( int i = 0; i < 2; ++i ) {
-                point p( i, j );
-                submap *sm = get_submap_at_grid( tripoint_rel_sm( p.x, p.y, z_level ) );
+                point_rel_ms p( i, j );
+                submap *sm = get_submap_at_grid( tripoint_rel_sm( p.x(), p.y(), z_level ) );
                 if( sm == nullptr ) {
-                    debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", p.x, p.y );
+                    debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", p.x(), p.y() );
                     continue;
                 }
 
                 sm->rotate( turns );
 
                 for( auto &veh : sm->vehicles ) {
-                    veh->sm_pos = { rebase_bub( p ), z_level };
+                    veh->sm_pos = { rebase_bub( p ).x(), rebase_bub( p ).y(), z_level };
                 }
 
                 update_vehicle_list( sm, z_level );
