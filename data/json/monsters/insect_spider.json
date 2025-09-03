@@ -3361,6 +3361,7 @@
       {
         "id": "mandible",
         "name": "the mandibles",
+        "is_head": true,
         "difficulty": { "ranged": 5, "melee": 3 },
         "effects": [
           {
