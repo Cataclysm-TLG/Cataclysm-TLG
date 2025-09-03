@@ -163,6 +163,7 @@
 #include "past_achievements_info.h"
 #include "path_info.h"
 #include "pathfinding.h"
+#include "perf.h"
 #include "pickup.h"
 #include "player_activity.h"
 #include "popup.h"
@@ -3493,6 +3494,7 @@ void game::load_packs( const std::string &msg, const std::vector<mod_id> &packs,
             missing.push_back( e );
         }
     }
+    cata_timer::print_stats();
 
     ui.show();
     for( const auto &e : available ) {

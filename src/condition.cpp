@@ -2204,7 +2204,7 @@ void string_mutator<translation>::deserialize( JsonValue const &jsin )
         } );
         if( !ret_func ) {
             jo.allow_omitted_members();
-            jo.throw_error( "unrecognized string mutator in " + jo.str() );
+            throw JsonError( "invalid string mutator" );
         }
     }
 }
@@ -2223,7 +2223,7 @@ void string_mutator<std::string>::deserialize( JsonValue const &jsin )
         } );
         if( !ret_func ) {
             jo.allow_omitted_members();
-            jo.throw_error( "unrecognized string mutator in " + jo.str() );
+            throw JsonError( "invalid string mutator" );
         }
     }
 }
@@ -2417,7 +2417,7 @@ void deferred_math::_validate_type() const
 void eoc_math::from_json( const JsonObject &jo, std::string_view member, math_type_t type_ )
 {
     if( !jo.has_array( member ) ) {
-        jo.throw_error( "invalid math object" );
+        throw JsonError( "invalid math object" );
     }
     JsonArray const objects = jo.get_array( member );
     std::string combined;
