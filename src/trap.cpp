@@ -5,7 +5,6 @@
 #include <set>
 #include <vector>
 
-#include "assign.h"
 #include "bodypart.h"
 #include "character.h"
 #include "creature.h"

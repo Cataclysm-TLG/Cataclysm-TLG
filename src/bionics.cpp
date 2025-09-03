@@ -18,7 +18,6 @@
 #include "action.h"
 #include "activity_actor_definitions.h"
 #include "activity_type.h"
-#include "assign.h"
 #include "avatar.h"
 #include "avatar_action.h"
 #include "ballistics.h"

@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <set>
 
-#include "assign.h"
 #include "calendar.h"
 #include "condition.h"
 #include "debug.h"

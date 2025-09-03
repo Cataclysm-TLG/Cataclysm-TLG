@@ -5,7 +5,6 @@
 #include <iterator>
 #include <string>
 
-#include "assign.h"
 #include "debug.h"
 #include "generic_factory.h"
 #include "item.h"

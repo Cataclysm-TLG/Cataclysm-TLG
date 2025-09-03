@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <set>
 
-#include "assign.h"
 #include "condition.h"
 #include "debug.h"
 #include "generic_factory.h"

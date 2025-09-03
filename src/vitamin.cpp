@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <map>
 
-#include "assign.h"
 #include "calendar.h"
 #include "debug.h"
 #include "enum_conversions.h"

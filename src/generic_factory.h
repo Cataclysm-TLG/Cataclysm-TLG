@@ -16,7 +16,6 @@
 #include <utility>
 #include <vector>
 
-#include "assign.h"
 #include "cached_options.h"
 #include "catacharset.h"
 #include "calendar.h"

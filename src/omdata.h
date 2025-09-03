@@ -14,13 +14,13 @@
 #include <string>
 #include <vector>
 
-#include "assign.h"
 #include "catacharset.h"
 #include "color.h"
 #include "common_types.h"
 #include "coordinates.h"
 #include "cube_direction.h"
 #include "enum_bitset.h"
+#include "flat_set.h"
 #include "mapgen_parameter.h"
 #include "point.h"
 #include "translations.h"
