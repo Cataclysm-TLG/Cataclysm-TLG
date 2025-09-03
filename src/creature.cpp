@@ -3314,11 +3314,13 @@ void Creature::draw( const catacurses::window &w, const point_bub_ms &origin, bo
 void Creature::draw( const catacurses::window &w, const tripoint_bub_ms &origin,
                      bool inverted ) const
 {
+    const tripoint_bub_ms pos = pos_bub();
+
     if( is_draw_tiles_mode() ) {
         return;
     }
 
-    point draw( point( getmaxx( w ) / 2 + posx(), getmaxy( w ) / 2 + posy() ) - origin.xy().raw() );
+    point draw( point( getmaxx( w ) / 2 + pos.x(), getmaxy( w ) / 2 + pos.y() ) - origin.xy().raw() );
     if( inverted ) {
         mvwputch_inv( w, draw, basic_symbol_color(), symbol() );
     } else if( is_symbol_highlighted() ) {
@@ -3326,8 +3328,6 @@ void Creature::draw( const catacurses::window &w, const tripoint_bub_ms &origin,
     } else {
         mvwputch( w, draw, symbol_color(), symbol() );
     }
-
-    Creature::draw( w, origin, inverted );
 }
 
 bool Creature::is_symbol_highlighted() const
