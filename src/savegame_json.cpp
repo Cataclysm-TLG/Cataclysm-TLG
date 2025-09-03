@@ -191,7 +191,7 @@ static void serialize( const weak_ptr_fast<monster> &obj, JsonOut &jsout )
     if( const auto monster_ptr = obj.lock() ) {
         jsout.start_object();
 
-        jsout.member( "monster_at", monster_ptr->get_location() );
+        jsout.member( "monster_at", monster_ptr->pos_abs() );
         // TODO: if monsters/Creatures ever get unique ids,
         // create a differently named member, e.g.
         //     jsout.member("unique_id", monster_ptr->getID());
@@ -226,10 +226,10 @@ static void deserialize( weak_ptr_fast<monster> &obj, const JsonObject &data )
     //    }
 }
 
-static tripoint read_legacy_creature_pos( const JsonObject &data )
+static tripoint_bub_ms read_legacy_creature_pos( const JsonObject &data )
 {
-    tripoint pos;
-    if( !data.read( "posx", pos.x ) || !data.read( "posy", pos.y ) || !data.read( "posz", pos.z ) ) {
+    tripoint_bub_ms pos;
+    if( !data.read( "posx", pos.x() ) || !data.read( "posy", pos.y() ) || !data.read( "posz", pos.z() ) ) {
         debugmsg( R"(Bad Creature JSON: neither "location" nor "posx", "posy", "posz" found)" );
     }
     return pos;
@@ -2065,15 +2065,15 @@ void npc::load( const JsonObject &data )
     if( !data.has_member( "location" ) ) {
         point submap_coords;
         data.read( "submap_coords", submap_coords );
-        const tripoint pos = read_legacy_creature_pos( data );
-        set_location( tripoint_abs_ms( project_to<coords::ms>( point_abs_sm( submap_coords ) ),
-                                       0 ) + tripoint( pos.x % SEEX, pos.y % SEEY, pos.z ) );
-        std::optional<tripoint> opt;
+        const tripoint_bub_ms pos = read_legacy_creature_pos( data );
+        set_pos_abs_only( tripoint_abs_ms( project_to<coords::ms>( point_abs_sm( submap_coords ) ),
+                                           0 ) + tripoint( pos.x() % SEEX, pos.y() % SEEY, pos.z() ) );
+        std::optional<tripoint_bub_ms> opt;
         if( data.read( "last_player_seen_pos", opt ) && opt ) {
-            last_player_seen_pos = get_location() + *opt - pos;
+            last_player_seen_pos = pos_abs() + ( *opt - pos );
         }
         if( data.read( "pulp_location", opt ) && opt ) {
-            pulp_location = get_location() + *opt - pos;
+            pulp_location = pos_abs() + ( *opt - pos );
         }
         tripoint tmp;
         if( data.read( "guardx", tmp.x ) && data.read( "guardy", tmp.y ) && data.read( "guardz", tmp.z ) &&
@@ -2408,15 +2408,15 @@ void monster::load( const JsonObject &data, const tripoint_abs_sm &submap_loc )
         // When loading an older save in which the monster's absolute location is not serialized
         // and the monster is not in the current map, the submap location inferred by load()
         // will be wrong. Use the supplied argument to fix it.
-        const tripoint_abs_ms old_loc = get_location();
+        const tripoint_abs_ms old_loc = pos_abs();
         point_abs_sm wrong_submap;
         tripoint_sm_ms_ib local_pos;
-        std::tie( wrong_submap, local_pos ) = project_remain<coords::sm>( get_location() );
-        set_location( project_combine( submap_loc.xy(), local_pos ) );
+        std::tie( wrong_submap, local_pos ) = project_remain<coords::sm>( pos_abs() );
+        set_pos_abs_only( project_combine( submap_loc.xy(), local_pos ) );
         // adjust other relative coordinates that would be subject to the same error
-        wander_pos = wander_pos - old_loc + get_location();
+        wander_pos = wander_pos - old_loc + pos_abs();
         if( goal ) {
-            *goal = *goal - old_loc + get_location();
+            *goal = *goal - old_loc + pos_abs();
         }
     }
 }
@@ -2427,7 +2427,7 @@ void monster::load( const JsonObject &data )
 
     // TEMPORARY until 0.G
     if( !data.has_member( "location" ) ) {
-        set_location( tripoint_abs_ms( read_legacy_creature_pos( data ) ) );
+        set_pos_abs_only( get_map().get_abs( read_legacy_creature_pos( data ) ) );
         tripoint_bub_ms wand;
         data.read( "wandx", wand.x() );
         data.read( "wandy", wand.y() );
@@ -2436,7 +2436,7 @@ void monster::load( const JsonObject &data )
         tripoint destination;
         data.read( "destination", destination );
         if( destination != tripoint::zero ) {
-            goal = get_location() + destination;
+            goal = pos_abs() + destination;
         }
     }
 

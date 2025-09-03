@@ -1356,7 +1356,7 @@ void mattack::smash_specific( monster *z, Creature *target )
     if( z->has_flag( mon_flag_RIDEABLE_MECH ) ) {
         z->use_mech_power( 5_kJ );
     }
-    z->set_dest( target->get_location() );
+    z->set_dest( target->pos_abs() );
     smash( z );
 }
 
@@ -1775,7 +1775,7 @@ bool mattack::grow_vine( monster *z )
         if( monster *const vine = g->place_critter_around( mon_creeper_vine, z->pos_bub(), 1 ) ) {
             vine->make_ally( *z );
             // Store position of parent hub in vine goal point.
-            vine->set_dest( z->get_location() );
+            vine->set_dest( z->pos_abs() );
         }
     }
 
@@ -1832,7 +1832,7 @@ bool mattack::vine( monster *z )
         }
     }
     // Calculate distance from nearest hub
-    int dist_from_hub = rl_dist( z->get_location(), z->get_dest() );
+    int dist_from_hub = rl_dist( z->pos_abs(), z->get_dest() );
     if( dist_from_hub > 20 || vine_neighbors > 5 || one_in( 7 - vine_neighbors ) ||
         !one_in( dist_from_hub ) ) {
         return true;
@@ -2513,8 +2513,8 @@ bool mattack::callblobs( monster *z )
     // if we want to deal with NPCS and friendly monsters as well.
     // The strategy is to send about 1/3 of the available blobs after the player,
     // and keep the rest near the brain blob for protection.
-    const tripoint_abs_ms enemy = get_player_character().get_location();
-    const std::vector<tripoint_abs_ms> nearby_points = closest_points_first( z->get_location(), 3 );
+    const tripoint_abs_ms enemy = get_player_character().pos_abs();
+    const std::vector<tripoint_abs_ms> nearby_points = closest_points_first( z->pos_abs(), 3 );
     std::list<monster *> allies;
     for( monster &candidate : g->all_monsters() ) {
         if( candidate.type->in_species( species_SLIME ) && candidate.type->id != mon_blob_brain ) {
@@ -2748,7 +2748,7 @@ bool mattack::nurse_operate( monster *z )
             return false;
         }
         // Should designate target as the attack_target
-        z->set_dest( target->get_location() );
+        z->set_dest( target->pos_abs() );
 
         // Check if target is already grabbed by something else
         if( target->has_effect( effect_grabbed ) ) {
@@ -2953,7 +2953,7 @@ bool mattack::photograph( monster *z )
     }
 
     get_timed_events().add( timed_event_type::ROBOT_ATTACK, calendar::turn + rng( 15_turns, 30_turns ),
-                            0, player_character.get_location() );
+                            0, player_character.pos_abs() );
     z->add_effect( effect_source::empty(), effect_eyebot_assisted, 6_hours );
     z->add_effect( effect_source::empty(), effect_eyebot_depleted, 1_minutes, true, 0 );
 
@@ -4608,7 +4608,7 @@ bool mattack::bio_op_takedown( monster *z )
         return true;
     }
     // Yes, it has the CQC bionic.
-    bodypart_id hit( "bp_null" );
+    bodypart_id hit = bodypart_str_id::NULL_ID();
     if( one_in( 2 ) ) {
         hit = bodypart_id( "leg_l" );
     } else {
@@ -5337,7 +5337,7 @@ bool mattack::dsa_drone_scan( monster *z )
     if( summon_reinforcements ) {
         get_timed_events().add( timed_event_type::DSA_ALRP_SUMMON,
                                 calendar::turn + rng( 5_turns, 10_turns ),
-                                0, target->get_location() );
+                                0, target->pos_abs() );
     }
     return true;
 }

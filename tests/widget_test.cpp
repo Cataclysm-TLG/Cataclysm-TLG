@@ -931,7 +931,7 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
     avatar &ava = get_avatar();
     clear_map();
     clear_avatar();
-    const tripoint_abs_ms orig_pos = ava.get_location();
+    const tripoint_abs_ms orig_pos = ava.pos_abs();
 
     // 00:00
     time_point tp( calendar::turn_zero );
@@ -957,12 +957,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 02:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -986,12 +986,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_light_blue>c</color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 04:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1015,12 +1015,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_blue>,</color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 06:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1044,12 +1044,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 08:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1073,12 +1073,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 10:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1102,12 +1102,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_h_white> </color><color_h_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 12:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1131,12 +1131,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_h_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 14:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1160,12 +1160,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_h_white> </color><color_h_yellow>+</color><color_h_white> </color>"
            "<color_h_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 16:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1189,12 +1189,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_h_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color><color_h_brown>.</color><color_h_white> </color>"
            "<color_h_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 18:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1218,12 +1218,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color><color_h_white> </color><color_h_white> </color>"
            "<color_h_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 20:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1247,12 +1247,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 22:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1276,12 +1276,12 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 
     // 00:00
-    ava.set_location( orig_pos );
+    ava.set_pos_abs_only( orig_pos );
     tp += 2_hours;
     set_time( tp );
     sundial_w._width = 9;
@@ -1305,7 +1305,7 @@ TEST_CASE( "widgets_showing_Sun_and_Moon_position", "[widget]" )
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color><color_c_white> </color><color_c_white> </color>"
            "<color_c_white> </color>]" );
-    ava.set_location( { 0, 0, -1 } );
+    ava.set_pos_abs_only( { 0, 0, -1 } );
     CHECK( sundial_w.layout( ava ) ==
            R"(SUN: [??????????????????])" );
 }
@@ -1951,7 +1951,7 @@ TEST_CASE( "widgets_showing_weather_conditions", "[widget][weather]" )
 // Fill a 3x3 overmap area around the avatar with a given overmap terrain
 static void fill_overmap_area( const avatar &ava, const oter_id &oter )
 {
-    const tripoint_abs_omt &ava_pos = ava.global_omt_location();
+    const tripoint_abs_omt &ava_pos = ava.pos_abs_omt();
     for( int x = -1; x <= 1; ++x ) {
         for( int y = -1; y <= 1; ++y ) {
             const tripoint offset( x, y, 0 );
@@ -1967,7 +1967,7 @@ TEST_CASE( "multi-line_overmap_text_widget", "[widget][overmap]" )
     avatar &ava = get_avatar();
     mission msn;
     // Use mission target to invalidate the om cache
-    msn.set_target( ava.global_omt_location() + tripoint( 5, 0, 0 ) );
+    msn.set_target( ava.pos_abs_omt() + tripoint( 5, 0, 0 ) );
     clear_avatar();
     clear_map();
     ava.on_mission_assignment( msn );
@@ -1980,7 +1980,7 @@ TEST_CASE( "multi-line_overmap_text_widget", "[widget][overmap]" )
         const std::string h_brown_dot = "<color_h_brown>.</color>";
         fill_overmap_area( ava, oter_id( "field" ) );
         // Mission marker to the north of avatar position (y - 2)
-        msn.set_target( ava.global_omt_location() + tripoint( 0, -2, 0 ) );
+        msn.set_target( ava.pos_abs_omt() + tripoint( 0, -2, 0 ) );
         // (red star in top center of the map)
         const std::vector<std::string> field_3x3 = {
             brown_dot, red_star, brown_dot, "\n",
@@ -1995,7 +1995,7 @@ TEST_CASE( "multi-line_overmap_text_widget", "[widget][overmap]" )
         const std::string h_green_F = "<color_h_green>F</color>";
         fill_overmap_area( ava, oter_id( "forest" ) );
         // Mission marker to the east of avatar position (x + 2)
-        msn.set_target( ava.global_omt_location() + tripoint( 2, 0, 0 ) );
+        msn.set_target( ava.pos_abs_omt() + tripoint( 2, 0, 0 ) );
         // (red star on the right edge of the map)
         const std::vector<std::string> forest_3x3 = {
             green_F, green_F, green_F, "\n",
@@ -2011,7 +2011,7 @@ TEST_CASE( "multi-line_overmap_text_widget", "[widget][overmap]" )
         //const std::string blue_L_red = "<color_c_light_blue_red>L</color>";
         fill_overmap_area( ava, oter_id( "central_lab" ) );
         // Mission marker southwest of avatar position (x-2, y+2)
-        msn.set_target( ava.global_omt_location() + tripoint( -2, 2, 0 ) );
+        msn.set_target( ava.pos_abs_omt() + tripoint( -2, 2, 0 ) );
         // (red star on lower left corner of map)
         const std::vector<std::string> lab_3x3 = {
             blue_L, blue_L, blue_L, "\n",

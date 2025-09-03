@@ -132,8 +132,6 @@ static const ammotype ammo_bolt( "bolt" );
 static const ammotype ammo_money( "money" );
 static const ammotype ammo_plutonium( "plutonium" );
 
-static const attack_vector_id attack_vector_vector_null( "vector_null" );
-
 static const bionic_id bio_digestion( "bio_digestion" );
 
 static const bodygraph_id bodygraph_full_body_iteminfo( "full_body_iteminfo" );
@@ -5438,11 +5436,11 @@ void item::melee_combat_info( std::vector<iteminfo> &info, const iteminfo_query 
     if( ( player_character.get_skill_level( skill_melee ) >= 3 &&
           ( !dmg_types.empty() || type->m_to_hit > 0 ) ) || debug_mode ) {
         damage_instance non_crit;
-        player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug );
+        player_character.roll_all_damage( false, non_crit, true, *this, attack_vector_id::NULL_ID(),
+                                          sub_bodypart_str_id::NULL_ID() );
         damage_instance crit;
-        player_character.roll_all_damage( true, crit, true, *this, attack_vector_vector_null,
-                                          sub_body_part_sub_limb_debug );
+        player_character.roll_all_damage( true, crit, true, *this, attack_vector_id::NULL_ID(),
+                                          sub_bodypart_str_id::NULL_ID() );
         int attack_cost = player_character.attack_speed( *this );
         insert_separation_line( info );
         if( parts->test( iteminfo_parts::DESCRIPTION_MELEEDMG ) ) {
@@ -6858,7 +6856,7 @@ std::string item::display_name( unsigned int quantity ) const
     // HACK: This is a hack to prevent possible crashing when displaying maps as items during character creation
     if( is_map() && calendar::turn != calendar::turn_zero ) {
         tripoint_abs_omt map_pos_omt =
-            get_var( "reveal_map_center_omt", player_character.global_omt_location() );
+            get_var( "reveal_map_center_omt", player_character.pos_abs_omt() );
         tripoint_abs_sm map_pos =
             project_to<coords::sm>( map_pos_omt );
         const city *c = overmap_buffer.closest_city( map_pos ).city;

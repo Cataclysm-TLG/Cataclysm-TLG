@@ -939,7 +939,7 @@ void Character::activate_cached_mutation( const trait_id &mut )
                 adjacent_mutant_tree = true;
             }
         }
-        if( !overmap_buffer.ter( global_omt_location() ).obj().is_wooded() && !adjacent_mutant_tree ) {
+        if( !overmap_buffer.ter( pos_abs_omt() ).obj().is_wooded() && !adjacent_mutant_tree ) {
             add_msg_if_player( m_info, _( "You can only do that in a wooded area." ) );
             return;
         }

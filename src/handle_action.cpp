@@ -717,7 +717,7 @@ static void grab()
             if( rng( 0, 100 ) <= static_cast<int>( z->type->def_chance ) ) {
                 z->type->sp_defense( *z, you.as_character(), nullptr );
             }
-            z->add_effect( effect_grabbed, 1_days, body_part_bp_null, true, grab_strength );
+            z->add_effect( effect_grabbed, 1_days, bodypart_str_id::NULL_ID(), true, grab_strength );
             you.add_effect( effect_grabbing, 1_days, true, 1 );
             you.grab_1.set( victimptr, grab_strength );
         } else {
@@ -1062,9 +1062,8 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
     }
 
     if( !has_weapon() ) {
-        const bodypart_id bp_null( "bp_null" );
         std::pair<bodypart_id, int> best_part_to_smash = this->best_part_to_smash();
-        if( best_part_to_smash.first != bp_null && here.is_bashable( smashp ) ) {
+        if( best_part_to_smash.first != bodypart_str_id::NULL_ID() && here.is_bashable( smashp ) ) {
             std::string name_to_bash = _( "thing" );
             if( here.is_bashable_furn( smashp ) ) {
                 name_to_bash = here.furnname( smashp );

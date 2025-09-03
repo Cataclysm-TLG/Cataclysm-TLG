@@ -210,8 +210,8 @@ tripoint_bub_ms Creature::pos_bub() const
 
 void Creature::setpos( const tripoint_bub_ms &p, bool check_gravity/* = true*/ )
 {
-    const tripoint_abs_ms old_loc = get_location();
-    set_pos_only( p );
+    const tripoint_abs_ms old_loc = pos_abs();
+    set_pos_bub_only( p );
     on_move( old_loc );
     if( check_gravity ) {
         gravity_check();
@@ -327,17 +327,17 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc ) const
 
 void Creature::move_to( const tripoint_abs_ms &loc )
 {
-    const tripoint_abs_ms old_loc = get_location();
-    set_location( loc );
+    const tripoint_abs_ms old_loc = pos_abs();
+    set_pos_abs_only( loc );
     on_move( old_loc );
 }
 
-void Creature::set_pos_only( const tripoint_bub_ms &p )
+void Creature::set_pos_bub_only( const tripoint_bub_ms &p )
 {
     location = get_map().get_abs( p );
 }
 
-void Creature::set_location( const tripoint_abs_ms &loc )
+void Creature::set_pos_abs_only( const tripoint_abs_ms &loc )
 {
     location = loc;
 }
@@ -1556,7 +1556,7 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
         if( c->is_avatar() ) {
             add_msg( m_warning, _( "%1$s pulls you in with their %2$s!" ), disp_name( false, true ), name );
         }
-        c->move_to( tripoint_abs_ms( line_to( get_location().raw(), c->get_location().raw(), 0,
+        c->move_to( tripoint_abs_ms( line_to( pos_abs().raw(), c->pos_abs().raw(), 0,
                                               0 ).front() ) );
         c->add_effect( effect_stunned, 1_seconds );
         sounds::sound( c->pos_bub(), 5, sounds::sound_t::combat, _( "Shhhk!" ) );
@@ -2435,7 +2435,7 @@ void Creature::set_body()
 
 bool Creature::has_part( const bodypart_id &id, body_part_filter filter ) const
 {
-    return get_part_id( id, filter, true ) != body_part_bp_null;
+    return get_part_id( id, filter, true ) != bodypart_str_id::NULL_ID();
 }
 
 bodypart *Creature::get_part( const bodypart_id &id )
@@ -2510,7 +2510,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
         }
     }
     // try to find the next best thing
-    std::pair<bodypart_id, float> best = { body_part_bp_null, 0.0f };
+    std::pair<bodypart_id, float> best = { bodypart_str_id::NULL_ID().id(), 0.0f };
     if( filter >= body_part_filter::next_best ) {
         for( const std::pair<const bodypart_str_id, bodypart> &bp : body ) {
             for( const std::pair<const body_part_type::type, float> &mp : bp.first->limbtypes ) {
@@ -2523,7 +2523,7 @@ bodypart_id Creature::get_part_id( const bodypart_id &id,
             }
         }
     }
-    if( best.first == body_part_bp_null && !suppress_debugmsg ) {
+    if( best.first == bodypart_str_id::NULL_ID() && !suppress_debugmsg ) {
         debugmsg( "Could not find equivalent bodypart id %s in %s's body", id.id().c_str(), get_name() );
     }
 
@@ -3564,17 +3564,17 @@ void Creature::load_hit_range( const JsonObject &jo )
     }
 }
 
-tripoint_abs_ms Creature::get_location() const
+tripoint_abs_ms Creature::pos_abs() const
 {
     return location;
 }
 
-tripoint_abs_sm Creature::global_sm_location() const
+tripoint_abs_sm Creature::pos_abs_sm() const
 {
     return project_to<coords::sm>( location );
 }
 
-tripoint_abs_omt Creature::global_omt_location() const
+tripoint_abs_omt Creature::pos_abs_omt() const
 {
     return project_to<coords::omt>( location );
 }
