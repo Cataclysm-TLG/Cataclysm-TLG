@@ -415,7 +415,7 @@ void overmap_npc_move()
                 }
             }
             if( elem->omt_path.empty() ) {
-                elem->omt_path = overmap_buffer.get_travel_path( elem->global_omt_location(), elem->goal,
+                elem->omt_path = overmap_buffer.get_travel_path( elem->pos_abs_omt(), elem->goal,
                                  overmap_path_params::for_npc() );
                 if( elem->omt_path.empty() ) { // goal is unreachable, or already reached goal, reset it
                     elem->goal = npc::no_goal_point;

@@ -5337,7 +5337,7 @@ bool mattack::dsa_drone_scan( monster *z )
     if( summon_reinforcements ) {
         get_timed_events().add( timed_event_type::DSA_ALRP_SUMMON,
                                 calendar::turn + rng( 5_turns, 10_turns ),
-                                0, target->get_location() );
+                                0, target->pos_abs() );
     }
     return true;
 }

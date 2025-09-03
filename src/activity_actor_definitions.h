@@ -800,7 +800,7 @@ class efile_activity_actor : public activity_actor
             target_edevices( target_edevices ), selected_efiles( selected_efiles ),
             action_type( action_type ), combo_type( combo_type ) {};
 
-        activity_id get_type() const override {
+        const activity_id &get_type() const override {
             static const activity_id ACT_E_FILE( "ACT_E_FILE" );
             return ACT_E_FILE;
         }
@@ -2055,8 +2055,9 @@ class pickup_menu_activity_actor : public activity_actor
         pickup_menu_activity_actor( std::optional<tripoint_bub_ms> where,
                                     std::vector<drop_location> selection ) : where( where ),
             selection( std::move( selection ) ) {};
-        activity_id get_type() const override {
-            return activity_id( "ACT_PICKUP_MENU" );
+        const activity_id &get_type() const override {
+            static const activity_id ACT_PICKUP_MENU( "ACT_PICKUP_MENU" );
+            return ACT_PICKUP_MENU;
         }
 
         void start( player_activity &, Character & ) override {};
