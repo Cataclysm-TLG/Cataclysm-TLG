@@ -2436,7 +2436,7 @@
       "items": {
         "1": { "item": "archery", "chance": 65, "repeat": [ 0, 2 ] },
         "m": [
-          { "item": "archery_ammo", "chance": 75, "repeat": [ 3, 5 ] },
+          { "item": "arrows_and_bolts", "chance": 75, "repeat": [ 3, 5 ] },
           { "item": "archery_mods", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "n": [ { "item": "tools_hunting", "chance": 75, "repeat": 2 }, { "item": "hand_tools", "chance": 50, "repeat": 2 } ],
@@ -3250,7 +3250,7 @@
       "items": {
         "1": { "item": "SUS_hunting_archery", "chance": 35, "repeat": [ 0, 1 ] },
         "2": [
-          { "item": "archery_ammo", "chance": 50, "repeat": [ 0, 5 ] },
+          { "item": "arrows_and_bolts", "chance": 50, "repeat": [ 0, 5 ] },
           { "item": "archery_mods", "chance": 45, "repeat": [ 0, 2 ] }
         ],
         "n": { "item": "tools_hunting", "chance": 35, "repeat": [ 0, 2 ] },

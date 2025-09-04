@@ -589,7 +589,7 @@
           { "item": "shoestore_shoes", "chance": 100 }
         ],
         ";": [
-          { "item": "archery_ammo", "chance": 70, "repeat": [ 1, 2 ] },
+          { "item": "arrows_and_bolts", "chance": 70, "repeat": [ 1, 2 ] },
           { "item": "archery_mods", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "`": [
@@ -956,7 +956,7 @@
         "4": [ { "item": "wedding_dresses", "chance": 100, "repeat": 2 }, { "item": "dress_shoes", "chance": 100 } ],
         "3": { "item": "sports", "chance": 20, "repeat": [ 2, 4 ] },
         ";": [
-          { "item": "archery_ammo", "chance": 70, "repeat": [ 1, 2 ] },
+          { "item": "arrows_and_bolts", "chance": 70, "repeat": [ 1, 2 ] },
           { "item": "archery_mods", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "Δ": [
