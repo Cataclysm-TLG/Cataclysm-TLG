@@ -3081,11 +3081,6 @@ bool map::has_flag_ter( const std::string &flag, const tripoint_bub_ms &p ) cons
     return ter( p ).obj().has_flag( flag );
 }
 
-bool map::has_flag_furn( const std::string &flag, const tripoint &p ) const
-{
-    return furn( tripoint_bub_ms( p ) ).obj().has_flag( flag );
-}
-
 bool map::has_flag_furn( const std::string &flag, const tripoint_bub_ms &p ) const
 {
     return furn( p ).obj().has_flag( flag );
@@ -3116,11 +3111,6 @@ bool map::has_flag( const ter_furn_flag flag, const tripoint_bub_ms &p ) const
 bool map::has_flag_ter( const ter_furn_flag flag, const tripoint_bub_ms &p ) const
 {
     return ter( p ).obj().has_flag( flag );
-}
-
-bool map::has_flag_furn( const ter_furn_flag flag, const tripoint &p ) const
-{
-    return furn( tripoint_bub_ms( p ) ).obj().has_flag( flag );
 }
 
 bool map::has_flag_furn( const ter_furn_flag flag, const tripoint_bub_ms &p ) const
@@ -6463,7 +6453,7 @@ void map::trap_set( const tripoint_bub_ms &p, const trap_id &type )
         return;
     }
 
-    memory_cache_dec_set_dirty( p.raw(), true );
+    memory_cache_dec_set_dirty( p, true );
     avatar &player_character = get_avatar();
     if( player_character.sees( p ) ) {
         player_character.memorize_clear_decoration( get_abs( p ), "tr_" );
@@ -6495,7 +6485,7 @@ void map::remove_trap( const tripoint_bub_ms &p )
     trap_id tid = current_submap->get_trap( l );
     if( tid != tr_null ) {
         if( g != nullptr && this == &get_map() ) {
-            memory_cache_dec_set_dirty( p.raw(), true );
+            memory_cache_dec_set_dirty( p, true );
             avatar &player_character = get_avatar();
             if( player_character.sees( p ) ) {
                 player_character.memorize_clear_decoration( get_abs( p ), "tr_" );

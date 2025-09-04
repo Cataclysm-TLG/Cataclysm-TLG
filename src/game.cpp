@@ -8648,11 +8648,11 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
                         }
                         trim_and_print( w_items, point( 1, iNum - iStartPos ), width - 9, col, sText );
                         const int numw = iItemNum > 9 ? 2 : 1;
-                        const point p( iter->vIG[iThisPage].pos.xy() );
+                        const point_rel_ms p( iter->vIG[iThisPage].pos.xy() );
                         mvwprintz( w_items, point( width - 6 - numw, iNum - iStartPos ),
                                    iNum == iActive ? c_light_green : c_light_gray,
-                                   "%*d %s", numw, rl_dist( point::zero, p ),
-                                   direction_name_short( direction_from( point::zero, p ) ) );
+                                   "%*d %s", numw, rl_dist( point_rel_ms::zero, p ),
+                                   direction_name_short( direction_from( point_rel_ms::zero, p ) ) );
                         ++iter;
                     }
                 } else {
@@ -8713,7 +8713,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
 
     do {
         if( action == "COMPARE" && activeItem ) {
-            game_menus::inv::compare( u, active_pos );
+            game_menus::inv::compare( u, active_pos.raw() );
         } else if( action == "FILTER" ) {
             ui.invalidate_ui();
             string_input_popup()
@@ -13656,8 +13656,8 @@ void game::animate_weather()
 
         for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
             for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
-                const point screen_point( local_x, local_y );
-                const point map_point = screen_point + offset;
+                const point_bub_ms screen_point( local_x, local_y );
+                const point_bub_ms map_point = screen_point + offset;
                 const tripoint_bub_ms mapp( map_point, u.posz() );
 
                 if( !m.inbounds( mapp ) ) {
@@ -13676,7 +13676,7 @@ void game::animate_weather()
                 if( !m.is_outside( u.pos_bub() ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
-                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+                wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );
             }
         }
     } else {

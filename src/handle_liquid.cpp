@@ -288,7 +288,7 @@ static bool get_liquid_target( item &liquid, const item *const source, const int
         }
         target.pos = *target_pos_;
 
-        if( source_pos != nullptr && source_pos->raw() == target.pos ) {
+        if( source_pos != nullptr && *source_pos == target.pos ) {
             add_msg( m_info, _( "That's where you took it from!" ) );
             return;
         }

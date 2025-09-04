@@ -1293,7 +1293,7 @@ static bool mx_pond( map &m, const tripoint_abs_sm &abs_sub )
     return true;
 }
 
-static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
+static bool mx_clay_deposit( map &m, const tripoint_abs_sm &abs_sub )
 {
     // This map extra creates small clay deposits using a simple cellular automaton.
 
@@ -1323,7 +1323,7 @@ static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
         for( int i = 0; i < width; i++ ) {
             for( int j = 0; j < height; j++ ) {
                 if( current[i][j] == 1 ) {
-                    const tripoint_bub_ms location( i, j, abs_sub.z );
+                    const tripoint_bub_ms location( i, j, abs_sub.z() );
                     m.furn_set( location, furn_str_id::NULL_ID() );
                     m.ter_set( location, ter_t_clay );
                 }
@@ -1467,7 +1467,7 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
     }
 }
 
-static bool mx_point_burned_ground( map &m, const tripoint &abs_sub )
+static bool mx_point_burned_ground( map &m, const tripoint_abs_sm &abs_sub )
 {
     // This map extra creates patch of burned ground using a simple cellular automaton.
     // Lesser version of mx_burned_ground
@@ -1482,7 +1482,7 @@ static bool mx_point_burned_ground( map &m, const tripoint &abs_sub )
     for( int i = 0; i < width; i++ ) {
         for( int j = 0; j < height; j++ ) {
             if( current[i][j] == 1 ) {
-                const tripoint_abs_sm loc( i, j, abs_sub.z );
+                const tripoint_abs_sm loc( i, j, abs_sub.z() );
                 burned_ground_parser( m, loc );
             }
         }
@@ -1491,15 +1491,15 @@ static bool mx_point_burned_ground( map &m, const tripoint &abs_sub )
     return true;
 }
 
-static bool mx_burned_ground( map &m, const tripoint &abs_sub )
+static bool mx_burned_ground( map &m, const tripoint_abs_sm &abs_sub )
 {
     // This map extra simulates effects of extensive past fire event; it destroys most vegetation,
     // and flammable objects, swaps vehicles with wreckage, levels houses, scatters ash etc.
 
     for( int i = 0; i < SEEX * 2; i++ ) {
         for( int j = 0; j < SEEY * 2; j++ ) {
-            const tripoint loc( i, j, abs_sub.z );
-            burned_ground_parser( m, tripoint_abs_sm( loc ) );
+            const tripoint_abs_sm loc( i, j, abs_sub.z() );
+            burned_ground_parser( m, loc );
         }
     }
     VehicleList vehs = m.get_vehicles();
@@ -1522,7 +1522,7 @@ static bool mx_burned_ground( map &m, const tripoint &abs_sub )
     return true;
 }
 
-static bool mx_reed( map &m, const tripoint &abs_sub )
+static bool mx_reed( map &m, const tripoint_abs_sm &abs_sub )
 {
     // This map extra is for populating river banks, lake shores, etc. with
     // water vegetation
@@ -2097,7 +2097,7 @@ static bool mx_corpses( map &m, const tripoint_abs_sm &abs_sub )
     return true;
 }
 
-static bool mx_city_trap( map &/*m*/, const tripoint &abs_sub )
+static bool mx_city_trap( map &/*m*/, const tripoint_abs_sm &abs_sub )
 {
     //First, find a city
     // TODO: fix point types
@@ -2118,7 +2118,7 @@ static bool mx_city_trap( map &/*m*/, const tripoint &abs_sub )
     tinymap compmap;
     compmap.load( road_omt, false );
 
-    const tripoint_omt_ms trap_center = { SEEX + rng( -5, 5 ), SEEY + rng( -5, 5 ), abs_sub.z };
+    const tripoint_omt_ms trap_center = { SEEX + rng( -5, 5 ), SEEY + rng( -5, 5 ), abs_sub.z() };
     bool empty_3x3_square = false;
 
     //Then find an empty 3x3 pavement square (no other traps, furniture, or vehicles)
@@ -2145,7 +2145,7 @@ static bool mx_city_trap( map &/*m*/, const tripoint &abs_sub )
     return true;
 }
 
-static bool mx_fungal_zone( map &m, const tripoint &abs_sub )
+static bool mx_fungal_zone( map &m, const tripoint_abs_sm &abs_sub )
 {
     // Find suitable location for fungal spire to spawn (grass, dirt etc)
     const tripoint_bub_ms omt_center = { SEEX, SEEY, abs_sub.z()};
