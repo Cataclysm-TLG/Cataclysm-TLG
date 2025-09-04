@@ -649,7 +649,7 @@
     "starting_trait": true,
     "types": [ "HEALING" ],
     "changes_to": [ "FASTHEALER2", "REGEN_LIZ" ],
-    "category": [ "MEDICAL", "PLANT", "BATRACHIAN", "LIZARD", "SLIME", "TROGLOBITE", "CRUSTACEAN" ],
+    "category": [ "MEDICAL", "PLANT", "BATRACHIAN", "SLIME", "TROGLOBITE", "CRUSTACEAN" ],
     "enchantments": [
       {
         "values": [
