@@ -681,6 +681,7 @@ List of known flags, used in both `furniture` and `terrain`.  Some work for both
 - ```RAMP_UP``` The end of a ramp that leads up, walking into this moves you one z-level up.  Overrides `WALL`, while still displaying the tile as Impassable.
 - ```RAMP``` Can be used to move up a z-level.
 - ```REDUCE_SCENT``` Reduces scent diffusion (not total amount of scent in area); only works if also bashable.
+- ```REGION_PSEUDO``` Replaced by other terrain/furniture during mapgen; should not spawn.
 - ```ROAD``` Flat and hard enough to drive or skate (with rollerblades) on.
 - ```ROUGH``` May hurt the player's feet.
 - ```RUBBLE``` Furniture behaves like rubble: it can be cleared by the `CLEAR_RUBBLE` item action.  Can be applied to terrain, but it "clears up the nothing".
