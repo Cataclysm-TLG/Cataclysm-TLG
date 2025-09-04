@@ -389,7 +389,7 @@
   {
     "id": "mon_zombie_rot_fungal",
     "type": "MONSTER",
-    "name": { "str": "fungal rotter" },
+    "name": { "str": "decaying fungal zombie" },
     "description": "The rotten skin that flakes from the host's body seems to be covered in tiny blue dots; occasional popping and crackling sounds are heard, like cracking wood.  This corpse can't be discerned as human by the naked eye.",
     "default_faction": "fungus",
     "bodytype": "human",
@@ -574,7 +574,7 @@
   {
     "id": "mon_zombie_fungus_acidic",
     "type": "MONSTER",
-    "name": { "str": "day tripper" },
+    "name": { "str": "moldering zombie" },
     "description": "The air around this stumbling fungal coated corpse seems to constantly warp and shift; colors and shapes visibly distort, making it impossible to discern finer details of what's causing this anomaly.  Your nose clogs as the smell of damp carpet and mold assaults it, even from afar.",
     "default_faction": "fungus",
     "bodytype": "human",
@@ -630,7 +630,7 @@
   {
     "id": "mon_zombie_dog_fungus",
     "type": "MONSTER",
-    "name": { "str": "fungal dog" },
+    "name": { "str": "mold dog" },
     "description": "The deformed, animated, and again reanimated corpse of a what looked like the concept of a canine.  It has lost almost all of its dog-like features, except for its constant aggressive growling, and tendency to bite.  It shakes its fur like a wet dog, sending tiny spore clouds everywhere.",
     "default_faction": "fungus",
     "bodytype": "dog",
@@ -663,7 +663,7 @@
   {
     "id": "mon_zoose_fungus",
     "type": "MONSTER",
-    "name": { "str": "antlered fungal horror" },
+    "name": { "str": "fungal moose" },
     "description": "This formerly-majestic beast has lost any semblance of what a moose is, aside from its outgrown antlers, now covered in writhing fungal tendrils, seemingly trying to break into the cracking bone.  The animated corpse seems to be in a state of constant disrepair, held together by strange, sticky blue orbs.",
     "default_faction": "fungus",
     "bodytype": "horse",
@@ -727,8 +727,8 @@
   {
     "id": "mon_zombie_horse_fungus",
     "type": "MONSTER",
-    "name": { "str": " rotten fungal horse" },
-    "description": "This hulking horse-figure seems to re-learn galloping with every step, as large fungi cling and sprout off of its mane.  It travels towards anything moving, even though in the center of each eye lies multiple fungal blooms.",
+    "name": { "str": "blight horse" },
+    "description": "A carpet of shaggy mold covers this decaying horse, scattering a puff of spores with each staggering step.  It travels towards anything moving, even though in the center of each eye lies multiple fungal blooms.",
     "default_faction": "fungus",
     "bodytype": "horse",
     "species": [ "FUNGUS" ],
@@ -759,7 +759,7 @@
   {
     "id": "mon_zeer_fungus",
     "type": "MONSTER",
-    "name": { "str": "fungal wight" },
+    "name": { "str": "moldering deer" },
     "looks_like": "mon_deer",
     "description": "This deer's thick fur is spotted with blue orbs that seem to pop and ooze every few minutes, and its rotten skin seems unable to fall off, held together by thick fungal bedding underneath.",
     "default_faction": "fungus",
