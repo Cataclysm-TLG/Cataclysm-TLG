@@ -8357,25 +8357,28 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     const item_location weapon = you.get_wielded_item();
     int weap_cut = 0;
     int weap_stab = 0;
-    int weap_bash = 0;
+    int weap_bash = 1;
     int mess_radius = 1;
 
     if( weapon ) {
         // FIXME: Hardcoded damage types
+        // Bash specifically benefits from strength, which is counted again later regardless of damage type.
+        weap_bash = weapon->damage_melee( damage_bash ) + you.get_arm_str();
         weap_cut = weapon->damage_melee( damage_cut );
         weap_stab = weapon->damage_melee( damage_stab );
-        weap_bash = weapon->damage_melee( damage_bash );
         if( weapon->has_flag( flag_MESSY ) ) {
             mess_radius = 2;
         }
     }
 
-    // Stabbing weapons are a lot less effective at pulping
-    const int cut_power = std::max( weap_cut, weap_stab / 2 );
+    int total_power = std::min( 1, ( weap_bash + weap_cut + weap_stab ) );
 
-    ///\EFFECT_STR increases pulping power, with diminishing returns
-    float pulp_power = std::sqrt( ( you.get_arm_str() + weap_bash ) * ( cut_power + 1.0f ) );
-    float pulp_effort = you.str_cur + weap_bash;
+    int adjusted_bash = ( weap_bash ) / total_power;
+    // Cut is OK at this, stab is very bad.
+    int adjusted_cut = ( weap_cut / total_power ) / 2;
+    int adjusted_stab = ( weap_stab / total_power ) / 4;
+
+    float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
     // Multiplier to get the chance right + some bonus for survival skill
     pulp_power *= 25 + you.get_skill_level( skill_survival ) * 4;
@@ -8427,7 +8430,8 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 // Mix of Isaac Clarke stomps and swinging your weapon.
-                you.burn_energy_all( -pulp_effort );
+                you.burn_energy_all( -you.get_standard_stamina_cost() );
+
                 you.recoil = MAX_RECOIL;
 
                 if( one_in( 4 ) ) {
