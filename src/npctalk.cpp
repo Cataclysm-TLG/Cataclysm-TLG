@@ -3526,7 +3526,7 @@ void receive_item( itype_id &item_name, int count, std::string_view container_na
                    const dialogue &d, bool use_item_group, bool suppress_message,
                    const std::vector<std::string> &flags,
                    bool add_talker = true,
-                   const tripoint_abs_ms &p = tripoint_abs_ms(), bool force_equip = false )
+                   const tripoint_abs_ms &p = tripoint_abs_ms::zero, bool force_equip = false )
 {
     if( use_item_group ) {
         item_group::ItemList new_items;
@@ -4196,8 +4196,9 @@ talk_effect_fun_t::func f_location_variable( const JsonObject &jo, std::string_v
         target_pos = target_pos + tripoint( dov_x_adjust.evaluate( d ), dov_y_adjust.evaluate( d ), 0 );
 
         if( z_override ) {
-            target_pos = tripoint_abs_ms( target_pos.xy(),
-                                          dov_z_adjust.evaluate( d ) );
+            target_pos = { target_pos.xy(),
+                           dov_z_adjust.evaluate( d )
+                         };
         } else {
             target_pos = target_pos + tripoint( 0, 0,
                                                 dov_z_adjust.evaluate( d ) );
@@ -4234,7 +4235,7 @@ talk_effect_fun_t::func f_location_variable_adjust( const JsonObject &jo,
         }
 
         if( z_override ) {
-            target_pos = tripoint_abs_ms( target_pos.xy(), dov_z_adjust.evaluate( d ) );
+            target_pos = { target_pos.xy(), dov_z_adjust.evaluate( d ) };
         } else {
             target_pos = target_pos + tripoint( 0, 0, dov_z_adjust.evaluate( d ) );
         }
@@ -6133,7 +6134,7 @@ talk_effect_fun_t::func f_map_run_item_eocs( const JsonObject &jo, std::string_v
         for( const tripoint_bub_ms &pos : here.points_in_radius( center, max_radius ) ) {
             if( rl_dist( center, pos ) >= min_radius && here.inbounds( pos ) ) {
                 for( item &it : here.i_at( pos ) ) {
-                    items.emplace_back( map_cursor( tripoint_bub_ms( pos ) ), &it );
+                    items.emplace_back( map_cursor( pos ), &it );
                 }
             }
         }

@@ -8106,9 +8106,9 @@ static void add_item_recursive( std::vector<std::string> &item_order,
 
     if( std::find( item_order.begin(), item_order.end(), name ) == item_order.end() ) {
         item_order.push_back( name );
-        temp_items[name] = map_item_stack( it, relative_pos.raw() );
+        temp_items[name] = map_item_stack( it, relative_pos );
     } else {
-        temp_items[name].add_at_pos( it, relative_pos.raw() );
+        temp_items[name].add_at_pos( it, relative_pos );
     }
 
     for( const item *content : it->all_known_contents() ) {
@@ -8493,7 +8493,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
         }
     }
 
-    tripoint active_pos;
+    tripoint_rel_ms active_pos;
     map_item_stack *activeItem = nullptr;
 
     catacurses::window w_items;
@@ -8517,7 +8517,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
                                           point( offsetX, TERMY - iInfoHeight ) );
 
         if( activeItem ) {
-            centerlistview( active_pos, width );
+            centerlistview( active_pos.raw(), width );
         }
 
         ui.position( point( offsetX, 0 ), point( width, TERMY ) );
@@ -8648,11 +8648,11 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
                         }
                         trim_and_print( w_items, point( 1, iNum - iStartPos ), width - 9, col, sText );
                         const int numw = iItemNum > 9 ? 2 : 1;
-                        const point p( iter->vIG[iThisPage].pos.xy() );
+                        const point_rel_ms p( iter->vIG[iThisPage].pos.xy() );
                         mvwprintz( w_items, point( width - 6 - numw, iNum - iStartPos ),
                                    iNum == iActive ? c_light_green : c_light_gray,
-                                   "%*d %s", numw, rl_dist( point::zero, p ),
-                                   direction_name_short( direction_from( point::zero, p ) ) );
+                                   "%*d %s", numw, rl_dist( point_rel_ms::zero, p ),
+                                   direction_name_short( direction_from( point_rel_ms::zero, p ) ) );
                         ++iter;
                     }
                 } else {
@@ -8713,7 +8713,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
 
     do {
         if( action == "COMPARE" && activeItem ) {
-            game_menus::inv::compare( u, active_pos );
+            game_menus::inv::compare( u, active_pos.raw() );
         } else if( action == "FILTER" ) {
             ui.invalidate_ui();
             string_input_popup()
@@ -8916,7 +8916,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
             return game::vmenu_ret::CHANGE_TAB;
         }
 
-        active_pos = tripoint::zero;
+        active_pos = tripoint_rel_ms::zero;
         activeItem = nullptr;
 
         if( mSortCategory[iActive].empty() ) {
@@ -8933,7 +8933,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
         }
 
         if( activeItem ) {
-            centerlistview( active_pos, width );
+            centerlistview( active_pos.raw(), width );
             trail_start = u.pos_bub();
             trail_end = u.pos_bub() + active_pos;
             // Actually accessed from the terrain overlay callback `trail_cb` in the
@@ -13656,9 +13656,9 @@ void game::animate_weather()
 
         for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
             for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
-                const point screen_point( local_x, local_y );
-                const point map_point = screen_point + offset;
-                const tripoint mapp( map_point, u.posz() );
+                const point_bub_ms screen_point( local_x, local_y );
+                const point_bub_ms map_point = screen_point + offset;
+                const tripoint_bub_ms mapp( map_point, u.posz() );
 
                 if( !m.inbounds( mapp ) ) {
                     continue;
@@ -13666,17 +13666,17 @@ void game::animate_weather()
 
                 const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
                 const visibility_variables &cache = m.get_visibility_variables_cache();
-                const auto &vis_cache_row = visibility_cache[mapp.x];
-                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y], cache );
+                const auto &vis_cache_row = visibility_cache[mapp.x()];
+                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y()], cache );
 
                 // Don't display fog on indoor tiles when the player is indoors.
                 if( vis != visibility_type::CLEAR ) {
                     continue;
                 }
-                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( tripoint_bub_ms( mapp ) ) ) {
+                if( !m.is_outside( u.pos_bub() ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
-                wPrint.vdrops.emplace_back( screen_point.x, screen_point.y );
+                wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );
             }
         }
     } else {

@@ -19,6 +19,7 @@
 #include "character.h"
 #include "colony.h"
 #include "color.h"
+#include "coordinates.h"
 #include "debug.h"
 #include "enums.h"
 #include "game_inventory.h"

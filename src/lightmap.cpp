@@ -640,11 +640,6 @@ void map::add_light_source( const tripoint_bub_ms &p, float luminance )
 
 // Tile light/transparency: 3D
 
-lit_level map::light_at( const tripoint &p ) const
-{
-    return map::light_at( tripoint_bub_ms( p ) );
-}
-
 lit_level map::light_at( const tripoint_bub_ms &p ) const
 {
     if( !inbounds( p ) ) {
@@ -770,11 +765,6 @@ map::apparent_light_info map::apparent_light_helper( const level_cache &map_cach
         apparent_light = vis * map_cache.lm[p.x()][p.y()].max();
     }
     return { obstructed, abs_obstructed, apparent_light };
-}
-
-lit_level map::apparent_light_at( const tripoint &p, const visibility_variables &cache ) const
-{
-    return apparent_light_at( tripoint_bub_ms( p ), cache );
 }
 
 lit_level map::apparent_light_at( const tripoint_bub_ms &p,
@@ -1405,21 +1395,21 @@ void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, 
 
 void map::apply_light_ray(
     cata::mdarray<bool, point_bub_ms, LIGHTMAP_CACHE_X, LIGHTMAP_CACHE_Y> &lit,
-    const tripoint &s, const tripoint &e, float luminance )
+    const tripoint_bub_ms &s, const tripoint_bub_ms &e, float luminance )
 {
-    point a( std::abs( e.x - s.x ) * 2, std::abs( e.y - s.y ) * 2 );
-    point d( ( s.x < e.x ) ? 1 : -1, ( s.y < e.y ) ? 1 : -1 );
+    point a( std::abs( e.x() - s.x() ) * 2, std::abs( e.y() - s.y() ) * 2 );
+    point d( ( s.x() < e.x() ) ? 1 : -1, ( s.y() < e.y() ) ? 1 : -1 );
     point_bub_ms p( s.xy() );
 
     quadrant quad = quadrant_from_x_y( d.x, d.y );
 
     // TODO: Invert that z comparison when it's sane
-    if( s.z != e.z || ( s.x == e.x && s.y == e.y ) ) {
+    if( s.z() != e.z() || ( s.x() == e.x() && s.y() == e.y() ) ) {
         return;
     }
 
-    auto &lm = get_cache( s.z ).lm;
-    auto &transparency_cache = get_cache( s.z ).transparency_cache;
+    auto &lm = get_cache( s.z() ).lm;
+    auto &transparency_cache = get_cache( s.z() ).transparency_cache;
 
     float distance = 1.0f;
     float transparency = LIGHT_TRANSPARENCY_OPEN_AIR;
@@ -1458,7 +1448,7 @@ void map::apply_light_ray(
             }
 
             distance += scaling_factor;
-        } while( !( p.x() == e.x && p.y() == e.y ) );
+        } while( !( p.x() == e.x() && p.y() == e.y() ) );
     } else {
         int t = a.x - ( a.y / 2 );
         do {
@@ -1490,6 +1480,6 @@ void map::apply_light_ray(
             }
 
             distance += scaling_factor;
-        } while( !( p.x() == e.x && p.y() == e.y ) );
+        } while( !( p.x() == e.x() && p.y() == e.y() ) );
     }
 }

@@ -526,17 +526,17 @@ class cata_tiles
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,
                               char rotation_targets );
         // as get_tile_values, but for unconnected tiles, infer rotation from surrounding walls
-        void get_tile_values_with_ter( const tripoint &p, int t, const std::array<int, 4> &tn,
+        void get_tile_values_with_ter( const tripoint_bub_ms &p, int t, const std::array<int, 4> &tn,
                                        int &subtile, int &rotation,
                                        const std::bitset<NUM_TERCONN> &rotate_to_group );
         static void get_connect_values( const tripoint_bub_ms &p, int &subtile, int &rotation,
                                         const std::bitset<NUM_TERCONN> &connect_group,
                                         const std::bitset<NUM_TERCONN> &rotate_to_group,
                                         const std::map<tripoint_bub_ms, ter_id> &ter_override );
-        static void get_furn_connect_values( const tripoint &p, int &subtile, int &rotation,
+        static void get_furn_connect_values( const tripoint_bub_ms &p, int &subtile, int &rotation,
                                              const std::bitset<NUM_TERCONN> &connect_group,
                                              const std::bitset<NUM_TERCONN> &rotate_to_group,
-                                             const std::map<tripoint, furn_id> &furn_override );
+                                             const std::map<tripoint_bub_ms, furn_id> &furn_override );
         void get_terrain_orientation( const tripoint_bub_ms &p, int &rota, int &subtile,
                                       const std::map<tripoint_bub_ms, ter_id> &ter_override,
                                       const std::array<bool, 5> &invisible,

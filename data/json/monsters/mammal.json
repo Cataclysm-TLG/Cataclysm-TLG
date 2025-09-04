@@ -131,7 +131,6 @@
     "fear_triggers": [ "SOUND", "FIRE" ],
     "zombify_into": "mon_zombear",
     "harvest": "bear_with_skull",
-    "weakpoint_sets": [ "wps_animal_quadruped" ],
     "dissect": "dissect_ursine_sample_small",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "reproduction": { "baby_monster": "mon_bear_cub", "baby_count": 1, "baby_timer": 700 },
