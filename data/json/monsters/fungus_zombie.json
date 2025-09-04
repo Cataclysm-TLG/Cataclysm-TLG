@@ -574,8 +574,8 @@
   {
     "id": "mon_zombie_fungus_acidic",
     "type": "MONSTER",
-    "name": { "str": "moldering zombie" },
-    "description": "The air around this stumbling fungal coated corpse seems to constantly warp and shift; colors and shapes visibly distort, making it impossible to discern finer details of what's causing this anomaly.  Your nose clogs as the smell of damp carpet and mold assaults it, even from afar.",
+    "name": { "str": "spore host" },
+    "description": "The air around this stumbling corpse seems to constantly warp and shift; Colors and shapes visibly distort in its presence.  It's no spacial anomaly, just a trick of the light passing through the ultra-fine haze of spores surrounding it.",
     "default_faction": "fungus",
     "bodytype": "human",
     "species": [ "FUNGUS" ],
