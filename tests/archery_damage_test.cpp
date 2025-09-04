@@ -54,14 +54,13 @@ static void test_projectile_hitting_wall( const std::string &target_type, bool s
 }
 
 static void test_projectile_attack( const std::string &target_type, bool killable,
-                                    dealt_projectile_attack &attack, const std::string &weapon_type,
-                                    const bool headshot )
+                                    dealt_projectile_attack &attack, const std::string &weapon_type )
 {
     for( int i = 0; i < 10; ++i ) {
         monster target{ mtype_id( target_type ), tripoint_bub_ms::zero };
         //the missed_by field is modified by deal_projectile_attack() and must be reset
-        attack.missed_by = headshot ? accuracy_headshot * 0.75 : accuracy_critical;
-        target.deal_projectile_attack( nullptr, attack, attack.missed_by, false );
+        attack.missed_by = accuracy_critical * 0.75;
+        target.deal_projectile_attack( nullptr, attack, false );
         CAPTURE( target_type );
         CAPTURE( target.get_hp() );
         CAPTURE( target.get_hp_max() );
@@ -72,8 +71,7 @@ static void test_projectile_attack( const std::string &target_type, bool killabl
 }
 
 static void test_archery_balance( const std::string &weapon_type, const std::string &ammo_type,
-                                  const std::string &killable, const std::string &unkillable,
-                                  const bool headshot )
+                                  const std::string &killable, const std::string &unkillable )
 {
     item weapon( weapon_type );
     // The standard modern hunting arrow, make this a parameter if we extend to crossbows.
@@ -84,17 +82,15 @@ static void test_archery_balance( const std::string &weapon_type, const std::str
     test_projectile.impact = weapon.gun_damage();
     test_projectile.proj_effects = weapon.ammo_effects();
     test_projectile.critical_multiplier = weapon.ammo_data()->ammo->critical_multiplier;
-    std::map<Creature *, std::pair<int, int>> targets_hit;
 
     dealt_projectile_attack attack {
-        test_projectile, nullptr, dealt_damage_instance(), tripoint_bub_ms::zero, accuracy_critical * 0.75,
-        false, false, targets_hit
+        test_projectile, nullptr, dealt_damage_instance(), tripoint_bub_ms::zero, accuracy_critical * 0.75
     };
     if( !killable.empty() ) {
-        test_projectile_attack( killable, true, attack, weapon_type, headshot );
+        test_projectile_attack( killable, true, attack, weapon_type );
     }
     if( !unkillable.empty() ) {
-        test_projectile_attack( unkillable, false, attack, weapon_type, headshot );
+        test_projectile_attack( unkillable, false, attack, weapon_type );
     }
     test_projectile_hitting_wall( "t_wall", false, attack, weapon_type );
     // Use "can't kill anything" as an indication that it can't break a window either.
@@ -106,23 +102,17 @@ static void test_archery_balance( const std::string &weapon_type, const std::str
 TEST_CASE( "archery_damage_thresholds", "[balance],[archery]" )
 {
     // Selfbow can't kill a turkey
-    test_archery_balance( "selfbow", "arrow_wood_heavy", "", "test_mon_turkey", true );
-    test_archery_balance( "rep_crossbow", "bolt_makeshift", "", "test_mon_turkey", true );
+    test_archery_balance( "selfbow", "arrow_metal", "", "mon_turkey" );
+    test_archery_balance( "rep_crossbow", "bolt_steel", "", "mon_turkey" );
     // Shortbow can kill turkeys, but not deer
-    test_archery_balance( "shortbow", "arrow_metal", "test_mon_turkey", "test_mon_deer", true );
-    test_archery_balance( "hand_crossbow", "bolt_steel", "test_mon_turkey", "test_mon_deer", true );
-    // Fiberglass recurve can kill deer with an accurate hit, but not bear
-    test_archery_balance( "recurbow", "arrow_metal", "", "test_mon_deer", false );
-    test_archery_balance( "compositecrossbow", "bolt_steel", "", "test_mon_deer", false );
-    test_archery_balance( "recurbow", "arrow_metal", "test_mon_deer", "test_mon_bear", true );
-    test_archery_balance( "compositecrossbow", "bolt_steel", "test_mon_deer", "test_mon_bear", true );
+    test_archery_balance( "shortbow", "arrow_metal", "mon_turkey", "mon_deer" );
+    test_archery_balance( "hand_crossbow", "bolt_steel", "mon_turkey", "mon_deer" );
+    // Fiberglass recurve can kill deer, but not bear
+    test_archery_balance( "recurbow", "arrow_metal", "mon_deer", "mon_bear" );
+    test_archery_balance( "compositecrossbow", "bolt_steel", "mon_deer", "mon_bear" );
     // Medium setting compound bow can kill Bear
-    test_archery_balance( "compbow", "arrow_metal", "", "test_mon_bear", false );
-    test_archery_balance( "compbow", "arrow_metal", "test_mon_bear", "", true );
+    test_archery_balance( "compbow", "arrow_metal", "mon_bear", "" );
     // High setting modern compund bow can kill Moose
-    // Use a 3x damage weakpoint to keep the tests functional.
-    test_archery_balance( "compcrossbow", "bolt_steel", "", "test_mon_moose", false );
-    test_archery_balance( "compbow_high", "arrow_metal", "", "test_mon_moose", false );
-    test_archery_balance( "compcrossbow", "bolt_steel", "test_mon_moose", "", true );
-    test_archery_balance( "compbow_high", "arrow_metal", "test_mon_moose", "", true );
+    test_archery_balance( "compcrossbow", "bolt_steel", "mon_moose", "" );
+    test_archery_balance( "compbow_high", "arrow_metal", "mon_moose", "" );
 }

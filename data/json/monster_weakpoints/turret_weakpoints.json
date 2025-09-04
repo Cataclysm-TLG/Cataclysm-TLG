@@ -31,7 +31,6 @@
       {
         "id": "camera",
         "name": "the camera",
-        "is_head": true,
         "coverage": 5,
         "difficulty": { "broad": 6, "point": 7 },
         "effects": [
@@ -55,7 +54,6 @@
       {
         "id": "turret_gun",
         "name": "the weapon",
-        "is_head": true,
         "coverage": 20,
         "difficulty": { "melee": 4, "ranged": 5 },
         "armor_mult": { "bash": 0.5, "stab": 0.5, "cut": 0.75 },
@@ -92,7 +90,6 @@
       {
         "id": "camera",
         "name": "the camera",
-        "is_head": true,
         "coverage": 10,
         "difficulty": { "broad": 6, "point": 7 },
         "effects": [
@@ -116,7 +113,6 @@
       {
         "id": "spotlight",
         "name": "the spotlight",
-        "is_head": true,
         "coverage": 25,
         "difficulty": { "broad": 3, "point": 4 },
         "armor_mult": { "all": 0.5 }

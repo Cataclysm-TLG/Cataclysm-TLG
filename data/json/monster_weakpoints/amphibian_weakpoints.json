@@ -6,7 +6,6 @@
       {
         "id": "head",
         "name": "the head",
-        "is_head": true,
         "coverage": 10,
         "armor_mult": { "physical": 0.9 },
         "crit_mult": { "all": 1.1 },
@@ -38,7 +37,6 @@
       {
         "id": "eye",
         "name": "the eye",
-        "is_head": true,
         "coverage": 3,
         "coverage_mult": { "broad": 0.5 },
         "armor_mult": { "all": 0.2 },
@@ -58,7 +56,6 @@
       {
         "id": "mouth",
         "name": "the mouth",
-        "is_head": true,
         "coverage": 5,
         "armor_mult": { "all": 0.75 },
         "crit_mult": { "all": 1.25 },
@@ -90,7 +87,6 @@
       {
         "id": "mouth_grabbing",
         "name": "the mouth",
-        "is_head": true,
         "coverage": 10,
         "armor_mult": { "all": 0.9 },
         "crit_mult": { "all": 1.25 },
@@ -213,7 +209,6 @@
       {
         "id": "tongue_grabbing",
         "name": "the tongue",
-        "is_head": true,
         "coverage": 15,
         "coverage_mult": { "point": 0.75 },
         "crit_mult": { "all": 1.25 },
@@ -336,7 +331,6 @@
       {
         "id": "head",
         "name": "the head",
-        "is_head": true,
         "coverage": 10,
         "coverage_mult": { "point": 0.25 },
         "armor_mult": { "physical": 1.5 },
@@ -369,7 +363,6 @@
       {
         "id": "eye",
         "name": "the eye",
-        "is_head": true,
         "coverage": 2,
         "coverage_mult": { "broad": 0.5 },
         "armor_mult": { "all": 0.2 },
@@ -389,7 +382,6 @@
       {
         "id": "mouth",
         "name": "the mouth",
-        "is_head": true,
         "coverage": 5,
         "armor_mult": { "all": 1.75 },
         "crit_mult": { "all": 1.1 },
@@ -421,7 +413,6 @@
       {
         "id": "mouth_grabbing",
         "name": "the mouth",
-        "is_head": true,
         "coverage": 10,
         "armor_mult": { "all": 1.75 },
         "crit_mult": { "all": 1.1 },

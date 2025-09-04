@@ -107,7 +107,6 @@
       {
         "id": "head",
         "name": "the head",
-        "is_head": true,
         "damage_mult": { "all": 1.1 },
         "crit_mult": { "all": 1.1 },
         "armor_mult": { "physical": 0.75 },
@@ -127,7 +126,6 @@
       {
         "id": "eye",
         "name": "the eye",
-        "is_head": true,
         "armor_mult": { "physical": 0.4 },
         "crit_mult": { "all": 1.25 },
         "difficulty": { "ranged": 8, "melee": 6 },
@@ -145,7 +143,6 @@
       {
         "id": "mandible",
         "name": "the mandibles",
-        "is_head": true,
         "crit_mult": { "all": 1.25 },
         "difficulty": { "ranged": 5, "melee": 3 },
         "effects": [
@@ -216,7 +213,6 @@
       {
         "id": "mandible",
         "name": "the mandibles",
-        "is_head": true,
         "crit_mult": { "all": 1.25 },
         "difficulty": { "ranged": 5, "melee": 3 },
         "effects": [
@@ -440,7 +436,6 @@
       {
         "id": "eye",
         "name": "the eye",
-        "is_head": true,
         "armor_mult": { "physical": 0.4 },
         "crit_mult": { "all": 1.25 },
         "difficulty": { "ranged": 8, "melee": 6 },
@@ -458,7 +453,6 @@
       {
         "id": "mandible",
         "name": "the mandibles",
-        "is_head": true,
         "crit_mult": { "all": 1.25 },
         "difficulty": { "ranged": 5, "melee": 3 },
         "effects": [

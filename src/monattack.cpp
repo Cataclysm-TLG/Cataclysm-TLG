@@ -286,9 +286,8 @@ static bool sting_shoot( monster *z, Creature *target, damage_instance &dam, flo
     proj.impact.add( dam );
     proj.proj_effects.insert( ammo_effect_NO_OVERSHOOT );
 
-    dealt_projectile_attack atk;
-    projectile_attack( atk, proj, z->pos_bub(), target->pos_bub(),
-                       dispersion_sources{ 500 }, z );
+    dealt_projectile_attack atk = projectile_attack( proj, z->pos_bub(), target->pos_bub(),
+                                  dispersion_sources{ 500 }, z );
     if( atk.dealt_dam.total_damage() > 0 ) {
         target->add_msg_if_player( m_bad, _( "The %s shoots a dart into you!" ), z->name() );
         // whether this function returns true determines whether it applies a status effect like paralysis or mutation
@@ -793,11 +792,10 @@ bool mattack::acid( monster *z )
     proj.impact.add_damage( damage_acid, 5 );
     proj.range = 10;
     proj.proj_effects.insert( ammo_effect_NO_OVERSHOOT );
-    dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(),
-                       dispersion_sources{ 5400 }, z );
+    dealt_projectile_attack dealt = projectile_attack( proj, z->pos_bub(), target->pos_bub(),
+                                    dispersion_sources{ 5400 }, z );
     const tripoint_bub_ms &hitp = tripoint_bub_ms( dealt.end_point );
-    const Creature *hit_critter = dealt.last_hit_critter;
+    const Creature *hit_critter = dealt.hit_critter;
     if( hit_critter == nullptr && here.hit_with_acid( hitp ) ) {
         add_msg_if_player_sees( hitp,  _( "A glob of acid hits the %s!" ), here.tername( hitp ) );
         if( here.impassable( hitp ) ) {
@@ -909,8 +907,7 @@ bool mattack::acid_accurate( monster *z )
     proj.proj_effects.insert( ammo_effect_NO_DAMAGE_SCALING );
     proj.impact.add_damage( damage_acid, rng( 3, 5 ) );
     // Make it arbitrarily less accurate at close ranges
-    dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
+    projectile_attack( proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
 
     return true;
 }
@@ -1014,8 +1011,8 @@ bool mattack::pull_metal_aoe( monster *z )
         proj.range = static_cast<int>( std::round( trig_dist_z_adjust( pr.second, z->pos_bub() ) ) ) - 1;
         proj.proj_effects = {{ ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET }};
 
-        dealt_projectile_attack dealt;
-        projectile_attack( dealt, proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
+        dealt_projectile_attack dealt = projectile_attack(
+                                            proj, pr.second, z->pos_bub(), dispersion_sources{ 0 }, z );
         here.add_item_or_charges( dealt.end_point, pr.first );
     }
     // TODO: pull_metal_armor()
@@ -1085,9 +1082,8 @@ bool mattack::pull_metal_weapon( monster *z )
                     proj.range = rl_dist( foe->pos_bub(), z->pos_bub() ) - 1;
                     proj.proj_effects = { { ammo_effect_NO_ITEM_DAMAGE, ammo_effect_DRAW_AS_LINE, ammo_effect_NO_DAMAGE_SCALING, ammo_effect_JET } };
 
-                    dealt_projectile_attack dealt;
-                    projectile_attack( dealt, proj, foe->pos_bub(), z->pos_bub(),
-                                       dispersion_sources{ 0 }, z );
+                    dealt_projectile_attack dealt = projectile_attack( proj, foe->pos_bub(), z->pos_bub(),
+                                                    dispersion_sources{ 0 }, z );
                     get_map().add_item( dealt.end_point, pulled_weapon );
                     if( target->is_avatar() ) {
                         popup( _( "The %s is pulled out of your grasp!" ), pulled_weapon.tname() );
@@ -1871,8 +1867,7 @@ bool mattack::spit_sap( monster *z )
     proj.range = 12;
     proj.proj_effects.insert( ammo_effect_APPLY_SAP );
     proj.impact.add_damage( damage_acid, rng( 5, 10 ) );
-    dealt_projectile_attack atk;
-    projectile_attack( atk, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 150 }, z );
+    projectile_attack( proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 150 }, z );
 
     return true;
 }
