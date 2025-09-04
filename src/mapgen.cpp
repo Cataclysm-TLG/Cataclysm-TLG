@@ -6802,7 +6802,7 @@ vehicle *map::add_vehicle( const vproto_id &type, const tripoint_bub_ms &p, cons
     tripoint_bub_sm quotient;
     point_sm_ms remainder;
     std::tie( quotient, remainder ) = coords::project_remain<coords::sm>( p_ms );
-    veh->sm_pos = quotient;
+    veh->sm_pos = quotient.raw();
     veh->pos = remainder;
     veh->init_state( *this, veh_fuel, veh_status, force_status );
     veh->place_spawn_items();
@@ -6817,17 +6817,17 @@ vehicle *map::add_vehicle( const vproto_id &type, const tripoint_bub_ms &p, cons
     vehicle *placed_vehicle = placed_vehicle_up.get();
 
     if( placed_vehicle != nullptr ) {
-        submap *place_on_submap = get_submap_at_grid( rebase_rel( placed_vehicle->sm_pos ) );
+        submap *place_on_submap = get_submap_at_grid( tripoint_rel_sm( placed_vehicle->sm_pos ) );
         if( place_on_submap == nullptr ) {
-            debugmsg( "Tried to add vehicle at %s but the submap is not loaded",
-                      placed_vehicle->sm_pos.to_string() );
+            debugmsg( "Tried to add vehicle at (%d,%d,%d) but the submap is not loaded",
+                      placed_vehicle->sm_pos.x, placed_vehicle->sm_pos.y, placed_vehicle->sm_pos.z );
             return placed_vehicle;
         }
         place_on_submap->ensure_nonuniform();
         place_on_submap->vehicles.push_back( std::move( placed_vehicle_up ) );
         invalidate_max_populated_zlev( p.z() );
 
-        level_cache &ch = get_cache( placed_vehicle->sm_pos.z() );
+        level_cache &ch = get_cache( placed_vehicle->sm_pos.z );
         ch.vehicle_list.insert( placed_vehicle );
         add_vehicle_to_cache( placed_vehicle );
 
@@ -7104,17 +7104,17 @@ void map::rotate( int turns )
         // Then rotate them and recalculate vehicle positions.
         for( int j = 0; j < 2; ++j ) {
             for( int i = 0; i < 2; ++i ) {
-                point_rel_ms p( i, j );
-                submap *sm = get_submap_at_grid( tripoint_rel_sm( p.x(), p.y(), z_level ) );
+                point p( i, j );
+                submap *sm = get_submap_at_grid( tripoint_rel_sm( p.x, p.y, z_level ) );
                 if( sm == nullptr ) {
-                    debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", p.x(), p.y() );
+                    debugmsg( "Tried to rotate map at (%d,%d) but the submap is not loaded", p.x, p.y );
                     continue;
                 }
 
                 sm->rotate( turns );
 
                 for( auto &veh : sm->vehicles ) {
-                    veh->sm_pos = { rebase_bub( p ).x(), rebase_bub( p ).y(), z_level };
+                    veh->sm_pos = tripoint( p, z_level );
                 }
 
                 update_vehicle_list( sm, z_level );
