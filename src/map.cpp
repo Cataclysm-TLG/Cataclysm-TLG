@@ -10643,18 +10643,18 @@ void map::draw_square_ter( const weighted_int_list<ter_id> &f, const point_bub_m
 
 void map::draw_rough_circle_ter( const ter_id &type, const point_bub_ms &p, int rad )
 {
-    draw_rough_circle( [this, type]( const point & q ) {
+    draw_rough_circle( [this, type]( const point_bub_ms & q ) {
         this->ter_set( q, type );
-    }, p.raw(), rad );
+    }, p, rad );
 }
 
 void map::draw_rough_circle_furn( const furn_id &type, const point_bub_ms &p, int rad )
 {
-    draw_rough_circle( [this, type]( const point & q ) {
-        if( !is_open_air( tripoint_bub_ms( q.x, q.y, abs_sub.z() ) ) ) {
+    draw_rough_circle( [this, type]( const point_bub_ms & q ) {
+        if( !is_open_air( tripoint_bub_ms( q, abs_sub.z() ) ) ) {
             this->furn_set( q, type );
         }
-    }, p.raw(), rad );
+    }, p, rad );
 }
 
 void map::draw_circle_ter( const ter_id &type, const rl_vec2d &p, double rad )

@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 
+#include "coordinates.h"
 #include "line.h"
 #include "point.h"
 #include "rng.h"
@@ -32,12 +33,12 @@ void draw_square( const std::function<void( const point & )> &set, point p1, poi
     }
 }
 
-void draw_rough_circle( const std::function<void( const point & )> &set, const point &p, int rad )
+void draw_rough_circle( const std::function<void( const point_bub_ms & )> &set, const point_bub_ms &p, int rad )
 {
-    for( int i = p.x - rad; i <= p.x + rad; i++ ) {
-        for( int j = p.y - rad; j <= p.y + rad; j++ ) {
-            if( trig_dist( p, point( i, j ) ) + rng( 0, 3 ) <= rad ) {
-                set( point( i, j ) );
+    for( int i = p.x() - rad; i <= p.x() + rad; i++ ) {
+        for( int j = p.y() - rad; j <= p.y() + rad; j++ ) {
+            if( trig_dist( p, point_bub_ms( i, j ) ) + rng( 0, 3 ) <= rad ) {
+                set( { i, j } );
             }
         }
     }

@@ -1996,7 +1996,7 @@ class map
         // TODO: Get rid of untyped overload
         character_id place_npc( const point &p, const string_id<npc_template> &type );
         character_id place_npc( const point_bub_ms &p, const string_id<npc_template> &type );
-        void apply_faction_ownership( const point &p1, const point &p2, const faction_id &id );
+        void apply_faction_ownership( const point_bub_ms &p1, const point_bub_ms &p2, const faction_id &id );
         void add_spawn( const mtype_id &type, int count, const tripoint_bub_ms &p,
                         bool friendly = false, int faction_id = -1, int mission_id = -1,
                         const std::optional<std::string> &name = std::nullopt );
