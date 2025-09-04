@@ -1706,12 +1706,13 @@ int monster::group_bash_skill( const tripoint_bub_ms &target )
 
     // pileup = more bash skill, but only help bashing mob directly in front of target
     const int max_helper_depth = 5;
-    const std::vector<tripoint_bub_ms> bzone = get_bashing_zone( target, pos_bub(), max_helper_depth );
+    const std::vector<tripoint_bub_ms> bzone = get_bashing_zone( tripoint_bub_ms( target ), pos_bub(),
+            max_helper_depth );
 
     creature_tracker &creatures = get_creature_tracker();
     for( const tripoint_bub_ms &candidate : bzone ) {
         // Drawing this line backwards excludes the target and includes the candidate.
-        std::vector<tripoint_bub_ms> path_to_target = line_to( target, candidate, 0, 0 );
+        std::vector<tripoint_bub_ms> path_to_target = line_to( tripoint_bub_ms( target ), candidate, 0, 0 );
         bool connected = true;
         monster *mon = nullptr;
         for( const tripoint_bub_ms &in_path : path_to_target ) {
@@ -1734,7 +1735,7 @@ int monster::group_bash_skill( const tripoint_bub_ms &target )
         // If we made it here, the last monster checked was the candidate.
         monster &helpermon = *mon;
         // Contribution falls off rapidly with distance from target.
-        bashskill += helpermon.bash_skill() / rl_dist( candidate, target );
+        bashskill += helpermon.bash_skill() / rl_dist( candidate, tripoint_bub_ms( target ) );
     }
 
     return bashskill;
@@ -2124,13 +2125,13 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
     add_effect( effect_pushed, 1_turns );
 
     for( size_t i = 0; i < 6; i++ ) {
-        const point_rel_ms d( rng( -1, 1 ), rng( -1, 1 ) );
-        if( d.x() == 0 && d.y() == 0 ) {
+        const point d( rng( -1, 1 ), rng( -1, 1 ) );
+        if( d.x == 0 && d.y == 0 ) {
             continue;
         }
 
         // Pushing forward is easier than pushing aside
-        const int direction_penalty = std::abs( d.x() - dir.x() ) + std::abs( d.y() - dir.y() );
+        const int direction_penalty = std::abs( d.x - dir.x() ) + std::abs( d.y - dir.y() );
         if( direction_penalty > 2 ) {
             continue;
         }

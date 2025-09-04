@@ -74,32 +74,32 @@ static const vspawn_id VehicleSpawn_default_subway_deadend( "default_subway_dead
 
 class npc_template;
 
-tripoint_bub_ms rotate_point( const tripoint_bub_ms &p, int rotations )
+tripoint rotate_point( const tripoint &p, int rotations )
 {
-    if( p.x() < 0 || p.x() >= SEEX * 2 ||
-        p.y() < 0 || p.y() >= SEEY * 2 ) {
-        debugmsg( "Point out of range: %d,%d,%d", p.x(), p.y(), p.z() );
+    if( p.x < 0 || p.x >= SEEX * 2 ||
+        p.y < 0 || p.y >= SEEY * 2 ) {
+        debugmsg( "Point out of range: %d,%d,%d", p.x, p.y, p.z );
         // Mapgen is vulnerable, don't supply invalid points, debugmsg is enough
-        return tripoint_bub_ms( 0, 0, p.z() );
+        return tripoint( 0, 0, p.z );
     }
 
     rotations = rotations % 4;
 
-    tripoint_bub_ms ret = p;
+    tripoint ret = p;
     switch( rotations ) {
         case 0:
             break;
         case 1:
-            ret.x() = p.y();
-            ret.y() = SEEX * 2 - 1 - p.x();
+            ret.x = p.y;
+            ret.y = SEEX * 2 - 1 - p.x;
             break;
         case 2:
-            ret.x() = SEEX * 2 - 1 - p.x();
-            ret.y() = SEEY * 2 - 1 - p.y();
+            ret.x = SEEX * 2 - 1 - p.x;
+            ret.y = SEEY * 2 - 1 - p.y;
             break;
         case 3:
-            ret.x() = SEEY * 2 - 1 - p.y();
-            ret.y() = p.x();
+            ret.x = SEEY * 2 - 1 - p.y;
+            ret.y = p.x;
             break;
     }
 
@@ -334,7 +334,7 @@ void mapgen_subway( mapgendata &dat )
     switch( num_dirs ) {
         case 4:
             // 4-way intersection
-            mapf::formatted_set_simple( m, point_bub_ms::zero,
+            mapf::formatted_set_simple( m, point::zero,
                                         "..^/D^^/D^....^D/^^D/^..\n"
                                         ".^/DX^/DX......XD/^XD/^.\n"
                                         "^/D^X/D^X......X^D/X^D/^\n"
@@ -376,7 +376,7 @@ void mapgen_subway( mapgendata &dat )
             break;
         case 3:
             // tee
-            mapf::formatted_set_simple( m, point_bub_ms::zero,
+            mapf::formatted_set_simple( m, point::zero,
                                         "..^/D^^/D^...^/D^^/D^...\n"
                                         ".^/D^^/D^...^/D^^/D^....\n"
                                         "^/D^^/D^...^/D^^/D^.....\n"
@@ -423,7 +423,7 @@ void mapgen_subway( mapgendata &dat )
         case 2:
             // straight or diagonal
             if( diag ) { // diagonal subway get drawn differently from all other types
-                mapf::formatted_set_simple( m, point_bub_ms::zero,
+                mapf::formatted_set_simple( m, point::zero,
                                             "...^DD^^DD^...^DD^^DD^..\n"
                                             "....^DD^^DD^...^DD^^DD^.\n"
                                             ".....^DD^^DD^...^DD^^DD^\n"
@@ -459,7 +459,7 @@ void mapgen_subway( mapgendata &dat )
                                                     furn_str_id::NULL_ID(),
                                                     furn_str_id::NULL_ID() ) );
             } else { // normal subway drawing
-                mapf::formatted_set_simple( m, point_bub_ms::zero,
+                mapf::formatted_set_simple( m, point::zero,
                                             "...^X^^^X^....^X^^^X^...\n"
                                             "...-x---x-....-x---x-...\n"
                                             "...^X^^^X^....^X^^^X^...\n"
@@ -502,7 +502,7 @@ void mapgen_subway( mapgendata &dat )
             break;
         case 1:
             // dead end
-            mapf::formatted_set_simple( m, point_bub_ms::zero,
+            mapf::formatted_set_simple( m, point::zero,
                                         "...^X^^^X^..../D^^/D^...\n"
                                         "...-x---x-.../DX^/DX^...\n"
                                         "...^X^^^X^../D^X/D^X^...\n"
@@ -586,12 +586,12 @@ void mapgen_river_curved_not( mapgendata &dat )
         for( int y = 0; y < east_edge; y++ ) {
             int circle_edge = ( ( SEEX * 2 - x ) * ( SEEX * 2 - x ) ) + ( y * y );
             if( circle_edge <= 8 ) {
-                m->ter_set( point_bub_ms( x, y ), grass_or_dirt() );
+                m->ter_set( point( x, y ), grass_or_dirt() );
             }
             if( circle_edge == 9 && one_in( 25 ) ) {
-                m->ter_set( point_bub_ms( x, y ), clay_or_sand() );
+                m->ter_set( point( x, y ), clay_or_sand() );
             } else if( circle_edge <= 36 ) {
-                m->ter_set( point_bub_ms( x, y ), ter_t_water_moving_sh );
+                m->ter_set( point( x, y ), ter_t_water_moving_sh );
             }
         }
     }
@@ -621,12 +621,11 @@ void mapgen_river_straight( mapgendata &dat )
     for( int x = 0; x < SEEX * 2; x++ ) {
         int ground_edge = rng( 1, 3 );
         int shallow_edge = rng( 4, 6 );
-        line( m, grass_or_dirt(), point_bub_ms( x, 0 ), point_bub_ms( x, ground_edge ), dat.zlevel() );
+        line( m, grass_or_dirt(), point( x, 0 ), point( x, ground_edge ), dat.zlevel() );
         if( one_in( 25 ) ) {
-            m->ter_set( point_bub_ms( x, ++ground_edge ), clay_or_sand() );
+            m->ter_set( point( x, ++ground_edge ), clay_or_sand() );
         }
-        line( m, ter_t_water_moving_sh, point_bub_ms( x, ++ground_edge ), point_bub_ms( x, shallow_edge ),
-              dat.zlevel() );
+        line( m, ter_t_water_moving_sh, point( x, ++ground_edge ), point( x, shallow_edge ), dat.zlevel() );
     }
 
     // finally, unrotate the map back to its normal orientation, resulting in the new addition being rotated.
@@ -654,23 +653,20 @@ void mapgen_river_curved( mapgendata &dat )
     for( int x = 0; x < SEEX * 2; x++ ) {
         int ground_edge = rng( 1, 3 );
         int shallow_edge = rng( 4, 6 );
-        line( m, grass_or_dirt(), point_bub_ms( x, 0 ), point_bub_ms( x, ground_edge ), dat.zlevel() );
+        line( m, grass_or_dirt(), point( x, 0 ), point( x, ground_edge ), dat.zlevel() );
         if( one_in( 25 ) ) {
-            m->ter_set( point_bub_ms( x, ++ground_edge ), clay_or_sand() );
+            m->ter_set( point( x, ++ground_edge ), clay_or_sand() );
         }
-        line( m, ter_t_water_moving_sh, point_bub_ms( x, ++ground_edge ), point_bub_ms( x, shallow_edge ),
-              dat.zlevel() );
+        line( m, ter_t_water_moving_sh, point( x, ++ground_edge ), point( x, shallow_edge ), dat.zlevel() );
     }
     for( int y = 0; y < SEEY * 2; y++ ) {
         int ground_edge = rng( 19, 21 );
         int shallow_edge = rng( 16, 18 );
-        line( m, grass_or_dirt(), point_bub_ms( ground_edge, y ), point_bub_ms( SEEX * 2 - 1, y ),
-              dat.zlevel() );
+        line( m, grass_or_dirt(), point( ground_edge, y ), point( SEEX * 2 - 1, y ), dat.zlevel() );
         if( one_in( 25 ) ) {
-            m->ter_set( point_bub_ms( --ground_edge, y ), clay_or_sand() );
+            m->ter_set( point( --ground_edge, y ), clay_or_sand() );
         }
-        line( m, ter_t_water_moving_sh, point_bub_ms( shallow_edge, y ), point_bub_ms( --ground_edge, y ),
-              dat.zlevel() );
+        line( m, ter_t_water_moving_sh, point( shallow_edge, y ), point( --ground_edge, y ), dat.zlevel() );
     }
 
     // finally, unrotate the map back to its normal orientation, resulting in the new addition being rotated.
@@ -1098,7 +1094,7 @@ void mapgen_forest( mapgendata &dat )
     * @param p: The point to place the dependent feature, if one is selected.
     */
     const auto set_terrain_dependent_furniture =
-    [&self_biome, &m]( const ter_id & tid, const point_bub_ms & p ) {
+    [&self_biome, &m]( const ter_id & tid, const point & p ) {
         const auto terrain_dependent_furniture_it = self_biome.terrain_dependent_furniture.find(
                     tid );
         if( terrain_dependent_furniture_it == self_biome.terrain_dependent_furniture.end() ) {
@@ -1124,9 +1120,9 @@ void mapgen_forest( mapgendata &dat )
     for( int x = 0; x < SEEX * 2; x++ ) {
         for( int y = 0; y < SEEY * 2; y++ ) {
             const ter_furn_id feature = get_feathered_feature( point( x, y ) );
-            m->ter_set( point_bub_ms( x, y ), feature.ter );
-            m->furn_set( point_bub_ms( x, y ), feature.furn );
-            set_terrain_dependent_furniture( feature.ter, point_bub_ms( x, y ) );
+            m->ter_set( point( x, y ), feature.ter );
+            m->furn_set( point( x, y ), feature.furn );
+            set_terrain_dependent_furniture( feature.ter, point( x, y ) );
         }
     }
 
@@ -2128,8 +2124,7 @@ void mapgen_ravine_edge( mapgendata &dat )
 
         for( int x = 0; x < SEEX * 2; x++ ) {
             int ground_edge = 12 + rng( 1, 3 );
-            line( m, ter_str_id::NULL_ID(), point_bub_ms( x, ++ground_edge ), point_bub_ms( x, SEEY * 2 ),
-                  dat.zlevel() );
+            line( m, ter_str_id::NULL_ID(), point( x, ++ground_edge ), point( x, SEEY * 2 ), dat.zlevel() );
         }
 
         // Rotate the map back to its normal rotation, resulting in the new contents becoming rotated.
@@ -2155,8 +2150,7 @@ void mapgen_ravine_edge( mapgendata &dat )
 
         for( int x = 0; x < SEEX * 2; x++ ) {
             int ground_edge = 12 + rng( 1, 3 ) + x;
-            line( m, ter_str_id::NULL_ID(), point_bub_ms( x, ++ground_edge ), point_bub_ms( x, SEEY * 2 ),
-                  dat.zlevel() );
+            line( m, ter_str_id::NULL_ID(), point( x, ++ground_edge ), point( x, SEEY * 2 ), dat.zlevel() );
         }
 
         // Rotate the map back to its normal rotation, resulting in the new contents becoming rotated.
@@ -2182,8 +2176,7 @@ void mapgen_ravine_edge( mapgendata &dat )
 
         for( int x = 0; x < SEEX * 2; x++ ) {
             int ground_edge =  12  + rng( 1, 3 ) - x;
-            line( m, ter_str_id::NULL_ID(), point_bub_ms( x, --ground_edge ), point_bub_ms( x, SEEY * 2 - 1 ),
-                  dat.zlevel() );
+            line( m, ter_str_id::NULL_ID(), point( x, --ground_edge ), point( x, SEEY * 2 - 1 ), dat.zlevel() );
         }
         // Rotate the map back to its normal rotation, resulting in the new contents becoming rotated.
         m->rotate( rot );
@@ -2229,9 +2222,9 @@ void mtrap_set( tinymap *m, const point_omt_ms &p, trap_id type, bool avoid_crea
     m->trap_set( actual_location, type );
 }
 
-void madd_field( map *m, const point_bub_ms &p, field_type_id type, int intensity )
+void madd_field( map *m, const point &p, field_type_id type, int intensity )
 {
-    tripoint_bub_ms actual_location( p, m->get_abs_sub().z() );
+    tripoint_bub_ms actual_location( point_bub_ms( p ), m->get_abs_sub().z() );
     m->add_field( actual_location, type, intensity, 0_turns );
 }
 

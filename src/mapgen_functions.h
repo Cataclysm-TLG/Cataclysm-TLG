@@ -27,7 +27,7 @@ class JsonObject;
  * Calculates the coordinates of a rotated point.
  * Should match the `mapgen_*` rotation.
  */
-tripoint_bub_ms rotate_point( const tripoint_bub_ms &p, int rotations );
+tripoint rotate_point( const tripoint &p, int rotations );
 
 int terrain_type_to_nesw_array( oter_id terrain_type, std::array<bool, 4> &array );
 
@@ -51,7 +51,7 @@ void mapgen_ravine_edge( mapgendata &dat );
 void mremove_trap( map *m, const tripoint_bub_ms &, trap_id type );
 void mtrap_set( map *m, const tripoint_bub_ms &, trap_id type, bool avoid_creatures = false );
 void mtrap_set( tinymap *m, const point_omt_ms &, trap_id type, bool avoid_creatures = false );
-void madd_field( map *m, const point_bub_ms &, field_type_id type, int intensity );
+void madd_field( map *m, const point &, field_type_id type, int intensity );
 void mremove_fields( map *m, const tripoint_bub_ms & );
 
 mapgen_update_func add_mapgen_update_func( const JsonObject &jo, bool &defer );

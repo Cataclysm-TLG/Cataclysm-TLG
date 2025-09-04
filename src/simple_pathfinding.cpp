@@ -84,14 +84,13 @@ directed_path<point> greedy_path( const point &source, const point &dest, const 
                 const int n = map_index( p );
                 const om_direction::type dir = static_cast<om_direction::type>( dirs[n] );
                 res.nodes.emplace_back( p, dir );
-                p += om_direction::displace( dir ).raw(); // Abusing omt operations requires type stripping.
+                p += om_direction::displace( dir );
             }
             res.nodes.emplace_back( p );
             return res;
         }
         for( om_direction::type dir : om_direction::all ) {
-            const point p = mn.pos + om_direction::displace(
-                                dir ).raw(); // Abusing omt operations requires type stripping.
+            const point p = mn.pos + om_direction::displace( dir );
             const int n = map_index( p );
             // don't allow out of bounds or already traversed tiles
             if( !inbounds( p ) || closed[n] ) {

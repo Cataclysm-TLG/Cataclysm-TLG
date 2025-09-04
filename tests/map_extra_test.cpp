@@ -79,7 +79,7 @@ TEST_CASE( "mx_minefield_theoretical_spawn", "[map_extra][overmap]" )
 
         // TODO: fix point types
         map *mp = tm.cast_to_map();
-        const tripoint_abs_sm pos = tm.get_abs_sub();
+        const tripoint pos = tm.get_abs_sub().raw();
         return mx_func( *mp, pos );
     };
 
