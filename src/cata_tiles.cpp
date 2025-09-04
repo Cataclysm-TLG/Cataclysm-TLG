@@ -24,7 +24,6 @@
 #include "character_id.h"
 #include "clzones.h"
 #include "color.h"
-#include "coordinates.h"
 #include "creature_tracker.h"
 #include "cursesdef.h"
 #include "cursesport.h"
@@ -1520,7 +1519,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                             invisible[0] = true;
                         } else {
                             if( would_apply_vision_effects( offscreen_type ) ) {
-                                here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos, 0},
+                                here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos.raw(), 0},
                                         tile_render_info::vision_effect{ offscreen_type } );
                             }
                             break;
@@ -1689,7 +1688,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                                     || you.sees_with_specials( *critter ) ) ) ) {
                                 invisible[0] = true;
                             } else {
-                                here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos, 0},
+                                here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos.raw(), 0},
                                         tile_render_info::vision_effect{ vis_type } );
                                 break;
                             }
@@ -1700,7 +1699,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         invisible[1 + i] = apply_visible( np.raw(), ch2, here );
                     }
 
-                    here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos, 0},
+                    here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos.raw(), 0},
                             tile_render_info::sprite{ ll, invisible } );
                     // Stop building draw points below when floor reached
                     if( here.dont_draw_lower_floor( pos ) ) {
@@ -2853,7 +2852,7 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
                     seed = simple_point_hash( mount );
                 }
             } else {
-                const optional_vpart_position vp = here.veh_at( tripoint_bub_ms( pos ) );
+                const optional_vpart_position vp = here.veh_at( pos );
                 if( vp ) {
                     seed = simple_point_hash( vp->mount_pos().raw() );
                 }
@@ -3449,9 +3448,9 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
         const std::bitset<NUM_TERCONN> &rotate_group = f.obj().rotate_to_groups;
 
         if( connect_group.any() ) {
-            get_furn_connect_values( p, subtile, rotation, connect_group, rotate_group, {} );
+            get_furn_connect_values( p.raw(), subtile, rotation, connect_group, rotate_group, {} );
         } else {
-            get_tile_values_with_ter( p, f.to_i(), neighborhood, subtile, rotation, rotate_group );
+            get_tile_values_with_ter( p.raw(), f.to_i(), neighborhood, subtile, rotation, rotate_group );
         }
         const std::string &fname = f.id().str();
         if( !( you.get_grab_type() == object_type::FURNITURE
@@ -3490,11 +3489,11 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
             const std::bitset<NUM_TERCONN> &rotate_group = f.obj().rotate_to_groups;
 
             if( connect_group.any() ) {
-                get_furn_connect_values( p, subtile, rotation, connect_group, rotate_group, {} );
+                get_furn_connect_values( p.raw(), subtile, rotation, connect_group, rotate_group, {} );
             } else {
-                get_tile_values_with_ter( p, f.to_i(), neighborhood, subtile, rotation, rotate_group );
+                get_tile_values_with_ter( p.raw(), f.to_i(), neighborhood, subtile, rotation, rotate_group );
             }
-            get_tile_values_with_ter( p, f2.to_i(), neighborhood, subtile, rotation, 0 );
+            get_tile_values_with_ter( p.raw(), f2.to_i(), neighborhood, subtile, rotation, 0 );
             const std::string &fname = f2.id().str();
             // tile overrides are never memorized
             // tile overrides are always shown with full visibility
@@ -5340,9 +5339,9 @@ void cata_tiles::get_connect_values( const tripoint_bub_ms &p, int &subtile, int
     get_rotation_and_subtile( connections, rotation_targets, rotation, subtile );
 }
 
-void cata_tiles::get_furn_connect_values( const tripoint_bub_ms &p, int &subtile, int &rotation,
+void cata_tiles::get_furn_connect_values( const tripoint &p, int &subtile, int &rotation,
         const std::bitset<NUM_TERCONN> &connect_group, const std::bitset<NUM_TERCONN> &rotate_to_group,
-        const std::map<tripoint_bub_ms, furn_id> &furn_override )
+        const std::map<tripoint, furn_id> &furn_override )
 {
     uint8_t connections = get_map().get_known_connections_f( p, connect_group, furn_override );
     uint8_t rotation_targets = get_map().get_known_rotates_to_f( p, rotate_to_group, {}, {} );
@@ -5364,7 +5363,7 @@ void cata_tiles::get_tile_values( const int t, const std::array<int, 4> &tn, int
 }
 
 void cata_tiles::get_tile_values_with_ter(
-    const tripoint_bub_ms &p, const int t, const std::array<int, 4> &tn, int &subtile, int &rotation,
+    const tripoint &p, const int t, const std::array<int, 4> &tn, int &subtile, int &rotation,
     const std::bitset<NUM_TERCONN> &rotate_to_group )
 {
     map &here = get_map();
@@ -5387,7 +5386,7 @@ void cata_tiles::get_tile_values_with_ter(
         if( here.has_flag( ter_furn_flag::TFLAG_ALIGN_WORKBENCH, p ) ) {
             for( int i = 0; i < 4; ++i ) {
                 // align to furniture that has the workbench quality
-                const tripoint_bub_ms &pt = p + four_adjacent_offsets[i];
+                const tripoint &pt = p + four_adjacent_offsets[i];
                 if( here.has_furn( pt ) && here.furn( pt ).obj().workbench ) {
                     val += 1 << i;
                     use_furniture = true;
@@ -5397,7 +5396,7 @@ void cata_tiles::get_tile_values_with_ter(
         // if still unaligned, try aligning to walls
         if( val == 0 ) {
             for( int i = 0; i < 4; ++i ) {
-                const tripoint_bub_ms &pt = p + four_adjacent_offsets[i];
+                const tripoint &pt = p + four_adjacent_offsets[i];
                 if( here.has_flag( ter_furn_flag::TFLAG_WALL, pt ) ||
                     here.has_flag( ter_furn_flag::TFLAG_WINDOW, pt ) ||
                     here.has_flag( ter_furn_flag::TFLAG_DOOR, pt ) ) {

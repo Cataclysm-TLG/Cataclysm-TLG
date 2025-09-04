@@ -5,7 +5,6 @@
 #include <iosfwd>
 #include <vector>
 
-#include "coordinates.h"
 #include "point.h"
 
 class item;
@@ -16,13 +15,13 @@ class map_item_stack
         class item_group
         {
             public:
-                tripoint_rel_ms pos;
+                tripoint pos;
                 int count;
                 const item *it;
 
                 //only expected to be used for things like lists and vectors
                 item_group();
-                item_group( const tripoint_rel_ms &p, int arg_count, const item *itm );
+                item_group( const tripoint &p, int arg_count, const item *itm );
         };
     public:
         const item *example; //an example item for showing stats, etc.
@@ -31,13 +30,13 @@ class map_item_stack
 
         //only expected to be used for things like lists and vectors
         map_item_stack();
-        map_item_stack( const item *it, const tripoint_rel_ms &pos );
+        map_item_stack( const item *it, const tripoint &pos );
 
         // This adds to an existing item group if the last current
         // item group is the same position and otherwise creates and
         // adds to a new item group. Note that it does not search
         // through all older item groups for a match.
-        void add_at_pos( const item *it, const tripoint_rel_ms &pos );
+        void add_at_pos( const item *it, const tripoint &pos );
 
         static bool map_item_stack_sort( const map_item_stack &lhs, const map_item_stack &rhs );
 };

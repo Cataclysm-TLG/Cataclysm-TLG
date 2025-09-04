@@ -2033,6 +2033,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
     }
 
     if( stage == INIT ) {
+        // TODO: fix point types
         act.coord_set.clear();
         for( const tripoint_abs_ms &p :
              mgr.get_near( zone_type_LOOT_UNSORTED, abspos, ACTIVITY_SEARCH_DISTANCE, nullptr,
@@ -2055,6 +2056,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
 
         for( const tripoint_abs_ms &src : src_sorted ) {
             act.placement = src;
+            // TODO: fix point types
             act.coord_set.erase( src );
 
             const tripoint_bub_ms src_loc = here.get_bub( src );
@@ -3219,8 +3221,9 @@ static bool generic_multi_activity_do(
         you.assign_activity( ACT_FISH, to_moves<int>( 5_hours ), 0,
                              0, best_rod.tname() );
         you.activity.targets.emplace_back( you, &best_rod );
+        // TODO: fix point types
         you.activity.coord_set =
-            g->get_fishable_locations_abs( MAX_VIEW_DISTANCE, src_loc );
+            g->get_fishable_locations_abs( ACTIVITY_SEARCH_DISTANCE, src_loc );
         return false;
     } else if( reason == do_activity_reason::NEEDS_MINING ) {
         // if have enough batteries to continue etc.

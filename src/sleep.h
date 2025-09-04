@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "calendar.h"
-#include "coordinates.h"
 #include "enum_traits.h"
 #include "enums.h"
 #include "point.h"
@@ -55,7 +54,7 @@ struct comfort_data {
         /** If the truth value of the condition should be inverted **/
         bool invert = false;
 
-        bool is_condition_true( const Character &guy, const tripoint_bub_ms &p ) const;
+        bool is_condition_true( const Character &guy, const tripoint &p ) const;
         void deserialize( const JsonObject &jo );
     };
 
@@ -72,7 +71,7 @@ struct comfort_data {
         int comfort;
         /** The name of a used sleep aid, if one exists **/
         std::string sleep_aid;
-        tripoint_bub_ms last_position;
+        tripoint last_position;
         time_point last_time;
 
         void add_try_msgs( const Character &guy ) const;
@@ -96,16 +95,16 @@ struct comfort_data {
     /** The comfort data of an unmutated human **/
     static const comfort_data &human();
     /** The comfort of a location as provided by its furniture/traps/terrain **/
-    static int human_comfort_at( const tripoint_bub_ms &p );
+    static int human_comfort_at( const tripoint &p );
     /** If there is a sleep aid at a location. The sleep aid will be stored in `result` if it exists **/
-    static bool try_get_sleep_aid_at( const tripoint_bub_ms &p, item &result );
+    static bool try_get_sleep_aid_at( const tripoint &p, item &result );
     /** Deserializes an int or string to a comfort value (int) and stores it in `member` **/
     static void deserialize_comfort( const JsonObject &jo, bool was_loaded,
                                      const std::string &name, int &member );
 
     bool human_or_impossible() const;
-    bool are_conditions_true( const Character &guy, const tripoint_bub_ms &p ) const;
-    response get_comfort_at( const tripoint_bub_ms &p ) const;
+    bool are_conditions_true( const Character &guy, const tripoint &p ) const;
+    response get_comfort_at( const tripoint &p ) const;
 
     void deserialize( const JsonObject &jo );
     bool was_loaded = false;

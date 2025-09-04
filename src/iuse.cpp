@@ -905,7 +905,7 @@ std::optional<int> iuse::meth( Character *p, item *, const tripoint_bub_ms & )
         map &here = get_map();
         // breathe out some smoke
         for( int i = 0; i < 3; i++ ) {
-            point_rel_ms offset( rng( -2, 2 ), rng( -2, 2 ) );
+            point offset( rng( -2, 2 ), rng( -2, 2 ) );
             here.add_field( p->pos_bub() + offset, field_type_id( "fd_methsmoke" ), 2 );
         }
     } else {
@@ -8193,7 +8193,7 @@ heating_requirements heating_requirements_for_weight( const units::mass &frozen,
     return {volume, ammo, time};
 }
 
-static std::optional<std::pair<tripoint_bub_ms, itype_id>> appliance_heater_selector( Character *p )
+static std::optional<std::pair<tripoint, itype_id>> appliance_heater_selector( Character *p )
 {
     const std::optional<tripoint_bub_ms> pt = choose_adjacent_highlight( _( "Select an appliance." ),
             _( "There is no appliance nearby." ), ACTION_EXAMINE, false );
@@ -8228,7 +8228,7 @@ static std::optional<std::pair<tripoint_bub_ms, itype_id>> appliance_heater_sele
                     p->add_msg_if_player( m_info, _( "You haven't selected any heater." ) );
                     return std::nullopt;
                 } else {
-                    return std::make_pair( pt.value(), pseudo_tools[app_menu.ret] );
+                    return std::make_pair( pt.value().raw(), pseudo_tools[app_menu.ret] );
                 }
 
             }
@@ -8286,7 +8286,7 @@ heater find_heater( Character *p, item *it )
                                  1,
                                  _( "You don't have a proper heating tool.  Try selecting an appliance with a heater." ) );
         if( !loc ) {
-            std::optional<std::pair<tripoint_bub_ms, itype_id>> app = appliance_heater_selector( p );
+            std::optional<std::pair<tripoint, itype_id>> app = appliance_heater_selector( p );
             if( !app ) {
                 return {loc, true, -1, 0, vpt, pseudo_flag};
             } else {
@@ -8294,8 +8294,7 @@ heater find_heater( Character *p, item *it )
                 optional_vpart_position vp = get_map().veh_at( app.value().first );
                 available_heater = vp->vehicle().connected_battery_power_level().first;
                 heating_effect = app.value().second->charges_to_use();
-                map &here = get_map();
-                vpt = here.get_abs( app.value().first );
+                vpt = tripoint_abs_ms( app.value().first );
                 if( available_heater >= heating_effect ) {
                     return {loc, consume_flag, available_heater, heating_effect, vpt, pseudo_flag};
                 } else {

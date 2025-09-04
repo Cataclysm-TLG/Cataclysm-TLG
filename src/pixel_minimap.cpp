@@ -83,7 +83,7 @@ SDL_Texture_Ptr create_cache_texture( const SDL_Renderer_Ptr &renderer, int tile
                           tile_height );
 }
 
-SDL_Color get_map_color_at( const tripoint_bub_ms &p )
+SDL_Color get_map_color_at( const tripoint &p )
 {
     const map &here = get_map();
     if( const optional_vpart_position vp = here.veh_at( p ) ) {
@@ -228,10 +228,9 @@ void pixel_minimap::set_settings( const pixel_minimap_settings &settings )
 
 void pixel_minimap::prepare_cache_for_updates( const tripoint_bub_ms &center )
 {
-    const tripoint_abs_sm new_center_sm = get_map().get_abs_sub() + rebase_rel(
-            coords::project_to<coords::sm>
-            ( center ) );
-    const tripoint_rel_sm center_sm_diff = cached_center_sm - new_center_sm;
+    const tripoint_abs_sm new_center_sm = get_map().get_abs_sub() + coords::project_to<coords::sm>
+                                          ( tripoint_bub_ms( center ) ).raw();
+    const tripoint_rel_sm center_sm_diff = tripoint_abs_sm( cached_center_sm ) - new_center_sm;
 
     //invalidate the cache if the game shifted more than one submap in the last update, or if z-level changed.
     if( std::abs( center_sm_diff.x() ) > 1 ||
@@ -244,7 +243,7 @@ void pixel_minimap::prepare_cache_for_updates( const tripoint_bub_ms &center )
         }
     }
 
-    cached_center_sm = new_center_sm;
+    cached_center_sm = new_center_sm.raw();
 }
 
 //deletes the mapping of unused submap caches from the main map
@@ -314,8 +313,8 @@ void pixel_minimap::update_cache_at( const tripoint_bub_sm &sm_pos )
 
     for( int y = 0; y < SEEY; ++y ) {
         for( int x = 0; x < SEEX; ++x ) {
-            const tripoint_bub_ms p = ms_pos + tripoint{x, y, 0};
-            const lit_level lighting = access_cache.visibility_cache[p.x()][p.y()];
+            const tripoint p = ms_pos.raw() + tripoint{x, y, 0};
+            const lit_level lighting = access_cache.visibility_cache[p.x][p.y];
 
             SDL_Color color;
 
@@ -456,6 +455,7 @@ void pixel_minimap::render_cache( const tripoint_bub_ms &center )
     const tripoint_abs_sm sm_center = get_map().get_abs_sub() + rebase_rel(
                                           coords::project_to<coords::sm>
                                           ( center ) );
+
     const tripoint_rel_sm sm_offset {
         total_tiles_count.x / SEEX / 2,
         total_tiles_count.y / SEEY / 2, 0
@@ -464,15 +464,14 @@ void pixel_minimap::render_cache( const tripoint_bub_ms &center )
     const int sm_offset_x_limit = sm_offset.x() + 1;
     const int sm_offset_y_limit = sm_offset.y() + 1;
 
-    point_rel_ms ms_offset;
-
+    point ms_offset;
     tripoint_bub_sm quotient;
     point_sm_ms remainder;
-    std::tie( quotient, remainder ) = coords::project_remain<coords::sm>( center );
+    std::tie( quotient, remainder ) = coords::project_remain<coords::sm>( tripoint_bub_ms( center ) );
 
-    point_sm_ms ms_base_offset = point_sm_ms( ( total_tiles_count.x / 2 ) % SEEX,
-                                 ( total_tiles_count.y / 2 ) % SEEY );
-    ms_offset = ms_base_offset - remainder;
+    point ms_base_offset = point( ( total_tiles_count.x / 2 ) % SEEX,
+                                  ( total_tiles_count.y / 2 ) % SEEY );
+    ms_offset = ms_base_offset - remainder.raw();
 
     for( const auto &elem : cache ) {
         if( !elem.second.touched ) {
@@ -520,6 +519,7 @@ void pixel_minimap::render_critters( const tripoint_bub_ms &center )
         flicker = lerp_clamped( 25, 100, std::abs( s ) );
         mixture = lerp_clamped( 0, 100, std::max( s, 0.0f ) );
     }
+
     const level_cache &access_cache = m.access_cache( center.z() );
 
     const point_rel_ms start( center.x() - total_tiles_count.x / 2,
