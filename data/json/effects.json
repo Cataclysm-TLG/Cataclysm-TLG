@@ -280,12 +280,6 @@
   },
   {
     "type": "effect_type",
-    "id": "bounced",
-    "name": [ "Bounced" ],
-    "desc": [ "AI tag used for bouncing ammo targeting.  This is a bug if you have it." ]
-  },
-  {
-    "type": "effect_type",
     "id": "frenzy",
     "name": [ "Frenzied" ],
     "desc": [ "Monster effect used to buff allies.  This is a bug if you have it." ],
