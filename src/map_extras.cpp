@@ -269,7 +269,7 @@ static bool mx_null( map &, const tripoint & )
     return false;
 }
 
-static void dead_vegetation_parser( map &m, const tripoint &loc )
+static void dead_vegetation_parser( map &m, const tripoint_bub_ms &loc )
 {
     // furniture plants die to withered plants
     const furn_t &fid = m.furn( loc ).obj();
@@ -1016,25 +1016,26 @@ static bool mx_minefield( map &, const tripoint &abs_sub )
     return did_something;
 }
 
-static void place_fumarole( map &m, const point &p1, const point &p2, std::set<point> &ignited )
+static void place_fumarole( map &m, const point_bub_ms &p1, const point_bub_ms &p2,
+                            std::set<point_bub_ms> &ignited )
 {
     // Tracks points nearby for ignition after the lava is placed
-    //std::set<point> ignited;
+    //std::set<point_bub_ms> ignited;
 
-    std::vector<point_bub_ms> fumarole = line_to( point_bub_ms( p1 ), point_bub_ms( p2 ), 0 );
+    std::vector<point_bub_ms> fumarole = line_to( p1, p2, 0 );
     for( point_bub_ms &i : fumarole ) {
         m.ter_set( i, ter_t_lava );
 
         // Add all adjacent tiles (even on diagonals) for possible ignition
         // Since they're being added to a set, duplicates won't occur
-        ignited.insert( ( i + point::north_west ).raw() );
-        ignited.insert( ( i + point::north ).raw() );
-        ignited.insert( ( i + point::north_east ).raw() );
-        ignited.insert( ( i + point::west ).raw() );
-        ignited.insert( ( i + point::east ).raw() );
-        ignited.insert( ( i + point::south_west ).raw() );
-        ignited.insert( ( i + point::south ).raw() );
-        ignited.insert( ( i + point::south_east ).raw() );
+        ignited.insert( ( i + point::north_west ) );
+        ignited.insert( ( i + point::north ) );
+        ignited.insert( ( i + point::north_east ) );
+        ignited.insert( ( i + point::west ) );
+        ignited.insert( ( i + point::east ) );
+        ignited.insert( ( i + point::south_west ) );
+        ignited.insert( ( i + point::south ) );
+        ignited.insert( ( i + point::south_east ) );
 
         if( one_in( 6 ) ) {
             m.spawn_item( i + point::north_west, itype_chunk_sulfur );
@@ -1099,7 +1100,7 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
                 for( int j = p.y() - rad; j <= p.y() + rad; j++ ) {
                     if( trig_dist( p.raw(), point( i, j ) ) + rng( 0, 3 ) <= rad ) {
                         const tripoint_bub_ms loc( i, j, abs_sub.z );
-                        dead_vegetation_parser( m, loc.raw() );
+                        dead_vegetation_parser( m, loc );
                         m.adjust_radiation( loc.xy(), rng( 20, 40 ) );
                     }
                 }
@@ -1109,8 +1110,8 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
         //Lava seams originating from the portal
         case 5: {
             if( abs_sub.z <= 0 ) {
-                point p1( rng( 1,    SEEX     - 3 ), rng( 1,    SEEY     - 3 ) );
-                point p2( rng( SEEX, SEEX * 2 - 3 ), rng( SEEY, SEEY * 2 - 3 ) );
+                point_bub_ms p1( rng( 1,    SEEX     - 3 ), rng( 1,    SEEY     - 3 ) );
+                point_bub_ms p2( rng( SEEX, SEEX * 2 - 3 ), rng( SEEY, SEEY * 2 - 3 ) );
                 // Pick a random cardinal direction to also spawn lava in
                 // This will make the lava a single connected line, not just on diagonals
                 static const std::array<direction, 4> possibilities = { { direction::EAST, direction::WEST, direction::NORTH, direction::SOUTH } };
@@ -1141,12 +1142,12 @@ static bool mx_portal_in( map &m, const tripoint &abs_sub )
                 place_fumarole( m, p1 + extra, p2 + extra,
                                 ignited );
 
-                for( const point &i : ignited ) {
+                for( const point_bub_ms &i : ignited ) {
                     // Don't need to do anything to tiles that already have lava on them
                     if( m.ter( i ) != ter_t_lava ) {
                         // Spawn an intense but short-lived fire
                         // Any furniture or buildings will catch fire, otherwise it will burn out quickly
-                        m.add_field( tripoint_bub_ms( i.x, i.y, abs_sub.z ), fd_fire, 15, 1_minutes );
+                        m.add_field( tripoint_bub_ms( i.x(), i.y(), abs_sub.z ), fd_fire, 15, 1_minutes );
                     }
                 }
             }
@@ -1193,7 +1194,7 @@ static bool mx_grove( map &m, const tripoint &abs_sub )
 
     for( int i = 0; i < SEEX * 2; i++ ) {
         for( int j = 0; j < SEEY * 2; j++ ) {
-            const tripoint location( i, j, abs_sub.z );
+            const tripoint_bub_ms location( i, j, abs_sub.z );
             if( m.has_flag_ter( ter_furn_flag::TFLAG_SHRUB, location ) ||
                 m.has_flag_ter( ter_furn_flag::TFLAG_TREE, location ) ||
                 m.has_flag_ter( ter_furn_flag::TFLAG_YOUNG, location ) ) {
@@ -1228,7 +1229,7 @@ static bool mx_shrubbery( map &m, const tripoint &abs_sub )
 
     for( int i = 0; i < SEEX * 2; i++ ) {
         for( int j = 0; j < SEEY * 2; j++ ) {
-            const tripoint location( i, j, abs_sub.z );
+            const tripoint_bub_ms location( i, j, abs_sub.z );
             if( m.has_flag_ter( ter_furn_flag::TFLAG_SHRUB, location ) ||
                 m.has_flag_ter( ter_furn_flag::TFLAG_TREE, location ) ||
                 m.has_flag_ter( ter_furn_flag::TFLAG_YOUNG, location ) ) {
@@ -1260,7 +1261,7 @@ static bool mx_pond( map &m, const tripoint &abs_sub )
     for( int i = 0; i < width; i++ ) {
         for( int j = 0; j < height; j++ ) {
             if( current[i][j] == 1 ) {
-                const tripoint location( i, j, abs_sub.z );
+                const tripoint_bub_ms location( i, j, abs_sub.z );
                 m.furn_set( location, furn_str_id::NULL_ID() );
 
                 switch( lake_type ) {
@@ -1319,7 +1320,7 @@ static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
         for( int i = 0; i < width; i++ ) {
             for( int j = 0; j < height; j++ ) {
                 if( current[i][j] == 1 ) {
-                    const tripoint location( i, j, abs_sub.z );
+                    const tripoint_bub_ms location( i, j, abs_sub.z );
                     m.furn_set( location, furn_str_id::NULL_ID() );
                     m.ter_set( location, ter_t_clay );
                 }
@@ -1336,8 +1337,8 @@ static bool mx_clay_deposit( map &m, const tripoint &abs_sub )
 
 static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
 {
-    const furn_t &fid = m.furn( loc.raw() ).obj();
-    const ter_id &tid = m.ter( loc.raw() );
+    const furn_t &fid = m.furn( loc ).obj();
+    const ter_id &tid = m.ter( loc );
     const ter_t &tr = tid.obj();
 
     VehicleList vehs = m.get_vehicles();
@@ -1388,69 +1389,69 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
     const auto iter = dies_into.find( tid );
     if( iter != dies_into.end() ) {
         if( one_in( 6 ) ) {
-            m.ter_set( loc.raw(), ter_t_dirt );
-            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 50 ) );
+            m.ter_set( loc, ter_t_dirt );
+            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
         } else if( one_in( 10 ) ) {
             // do nothing, save some spots from fire
         } else {
-            m.ter_set( loc.raw(), iter->second );
+            m.ter_set( loc, iter->second );
         }
     }
 
     // fungus cannot be destroyed by map::destroy so ths method is employed
     if( fid.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
         if( one_in( 5 ) ) {
-            m.furn_set( loc.raw(), furn_f_ash );
+            m.furn_set( loc, furn_f_ash );
         }
     }
     if( tr.has_flag( ter_furn_flag::TFLAG_FUNGUS ) ) {
-        m.ter_set( loc.raw(), ter_t_dirt );
+        m.ter_set( loc, ter_t_dirt );
         if( one_in( 5 ) ) {
-            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 50 ) );
+            m.spawn_item( loc, itype_ash, 1, rng( 10, 50 ) );
         }
     }
     // destruction of trees is not absolute
     if( tr.has_flag( ter_furn_flag::TFLAG_TREE ) ) {
         if( one_in( 4 ) ) {
-            m.ter_set( loc.raw(), ter_t_trunk );
+            m.ter_set( loc, ter_t_trunk );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc.raw(), ter_t_stump );
+            m.ter_set( loc, ter_t_stump );
         } else if( one_in( 4 ) ) {
-            m.ter_set( loc.raw(), ter_t_tree_dead );
+            m.ter_set( loc, ter_t_tree_dead );
         } else {
-            m.ter_set( loc.raw(), ter_t_dirt );
+            m.ter_set( loc, ter_t_dirt );
             if( one_in( 4 ) ) {
-                m.furn_set( loc.raw(), furn_f_ash );
+                m.furn_set( loc, furn_f_ash );
             } else {
-                m.furn_set( loc.raw(), furn_id( "f_fireweed" ) );
+                m.furn_set( loc, furn_id( "f_fireweed" ) );
             }
-            m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 1000 ) );
+            m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
         }
         // everything else is destroyed, ash is added
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE ) ||
                ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) ) {
-        while( m.is_bashable( loc.raw() ) ) { // one is not enough
-            m.destroy( loc.raw(), true );
+        while( m.is_bashable( loc ) ) { // one is not enough
+            m.destroy( loc, true );
         }
         if( one_in( 5 ) && !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
             // This gives very little *wood* ash because the terrain is not flagged as flammable
-            m.spawn_item( loc.raw(), itype_ash, 1, rng( 1, 10 ) );
+            m.spawn_item( loc, itype_ash, 1, rng( 1, 10 ) );
         }
     } else if( ter_furn_has_flag( tr, fid, ter_furn_flag::TFLAG_FLAMMABLE_ASH ) ) {
-        while( m.is_bashable( loc.raw() ) ) {
-            m.destroy( loc.raw(), true );
+        while( m.is_bashable( loc ) ) {
+            m.destroy( loc, true );
         }
-        if( !m.is_open_air( loc.raw() ) ) {
-            m.furn_set( loc.raw(), furn_f_ash );
+        if( !m.is_open_air( loc ) ) {
+            m.furn_set( loc, furn_f_ash );
             if( !tr.has_flag( ter_furn_flag::TFLAG_LIQUID ) ) {
-                m.spawn_item( loc.raw(), itype_ash, 1, rng( 10, 1000 ) );
+                m.spawn_item( loc, itype_ash, 1, rng( 10, 1000 ) );
             }
         }
     }
 
     // burn-away flammable items
-    while( m.flammable_items_at( loc.raw() ) ) {
-        map_stack stack = m.i_at( loc.raw() );
+    while( m.flammable_items_at( loc ) ) {
+        map_stack stack = m.i_at( loc );
         for( auto it = stack.begin(); it != stack.end(); ) {
             if( it->flammable() ) {
                 m.create_burnproducts( tripoint_bub_ms( loc.raw() ), *it, it->weight() );

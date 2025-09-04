@@ -1094,7 +1094,7 @@ void mapgen_forest( mapgendata &dat )
     * @param p: The point to place the dependent feature, if one is selected.
     */
     const auto set_terrain_dependent_furniture =
-    [&self_biome, &m]( const ter_id & tid, const point & p ) {
+    [&self_biome, &m]( const ter_id & tid, const point_bub_ms & p ) {
         const auto terrain_dependent_furniture_it = self_biome.terrain_dependent_furniture.find(
                     tid );
         if( terrain_dependent_furniture_it == self_biome.terrain_dependent_furniture.end() ) {
