@@ -2431,7 +2431,7 @@ void options_manager::add_options_graphics()
 
         add( "OVERMAP_TILES", page_id, to_translation( "Choose overmap tileset" ),
              to_translation( "Choose the overmap tileset you want to use." ),
-             om_tilesets, "ChibiUltica", COPT_CURSES_HIDE
+             om_tilesets, "MshockXottoplus", COPT_CURSES_HIDE
            ); // populate the options dynamically
 
         get_option( "OVERMAP_TILES" ).setPrerequisite( "USE_OVERMAP_TILES" );
