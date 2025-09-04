@@ -8454,7 +8454,8 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 item weap = you.get_wielded_item() ? *you.get_wielded_item() : null_item_reference();
-                moves += ( ( you.attack_speed( weap) * 2 ) / you.exertion_adjusted_move_multiplier( act.exertion_level() ) );
+                moves += ( ( you.attack_speed( weap ) * 2 ) / you.exertion_adjusted_move_multiplier(
+                               act.exertion_level() ) );
                 if( moves >= you.get_moves() ) {
                     // Enough for this turn;
                     you.set_moves( you.get_moves() - moves );

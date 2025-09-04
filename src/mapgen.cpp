@@ -746,7 +746,8 @@ static void set_mapgen_defer( const JsonObject &jsi, const std::string &member,
  * load a single mapgen json structure; this can be inside an overmap_terrain, or on it's own.
  */
 std::shared_ptr<mapgen_function>
-load_mapgen_function( const JsonObject &jio, const std::string &id_base, const point_rel_omt &offset,
+load_mapgen_function( const JsonObject &jio, const std::string &id_base,
+                      const point_rel_omt &offset,
                       const point_rel_omt &total )
 {
     dbl_or_var weight = get_dbl_or_var( jio, "weight", false,  1000 );
@@ -858,7 +859,8 @@ void load_mapgen( const JsonObject &jo )
             }
             if( !mapgenid_list.empty() ) {
                 const std::string mapgenid = mapgenid_list[0];
-                const auto mgfunc = load_mapgen_function( jo, mapgenid, point_rel_omt::zero, point_rel_omt( 1, 1 ) );
+                const auto mgfunc = load_mapgen_function( jo, mapgenid, point_rel_omt::zero, point_rel_omt( 1,
+                                    1 ) );
                 if( mgfunc ) {
                     for( auto &i : mapgenid_list ) {
                         oter_mapgen.add( i, mgfunc );
@@ -867,7 +869,8 @@ void load_mapgen( const JsonObject &jo )
             }
         }
     } else if( jo.has_string( "om_terrain" ) ) {
-        load_and_add_mapgen_function( jo, jo.get_string( "om_terrain" ), point_rel_omt::zero, point_rel_omt( 1, 1 ) );
+        load_and_add_mapgen_function( jo, jo.get_string( "om_terrain" ), point_rel_omt::zero,
+                                      point_rel_omt( 1, 1 ) );
     } else if( jo.has_string( "nested_mapgen_id" ) ) {
         load_nested_mapgen( jo, nested_mapgen_id( jo.get_string( "nested_mapgen_id" ) ) );
     } else if( jo.has_string( "update_mapgen_id" ) ) {
@@ -5590,7 +5593,8 @@ void map::draw_lab( mapgendata &dat )
             ter_set( point_bub_ms( SEEX - 1, SEEY * 2 - 3 ), ter_t_stairs_down );
             ter_set( point_bub_ms( SEEX, SEEY * 2 - 3 ), ter_t_stairs_down );
             science_room( this, point_bub_ms( 2, 2 ), point_bub_ms( SEEX - 3, SEEY * 2 - 3 ), dat.zlevel(), 1 );
-            science_room( this, point_bub_ms( SEEX + 2, 2 ), point_bub_ms( SEEX * 2 - 3, SEEY * 2 - 3 ), dat.zlevel(), 3 );
+            science_room( this, point_bub_ms( SEEX + 2, 2 ), point_bub_ms( SEEX * 2 - 3, SEEY * 2 - 3 ),
+                          dat.zlevel(), 3 );
             science_room( this, point_bub_ms( SEEX + 2, 2 ), point_bub_ms( SEEX * 2 - 3, SEEY * 2 - 3 ),
                           dat.zlevel(), 3 );
 
@@ -6291,11 +6295,14 @@ void map::draw_lab( mapgendata &dat )
                         mtrap_set( this, tripoint_bub_ms( SEEX + 2, SEEY - 3, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX - 3, SEEY + 2, dat.zlevel() ), tr_dissector );
                         mtrap_set( this, tripoint_bub_ms( SEEX + 2, SEEY + 2, dat.zlevel() ), tr_dissector );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 1, SEEY + 1 ), point_bub_ms( SEEX - 2, SEEY + 1 ),
+                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX + 1, SEEY + 1 ), point_bub_ms( SEEX - 2,
+                                SEEY + 1 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY ), point_bub_ms( SEEX - 2, SEEY - 2 ),
+                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 2, SEEY ), point_bub_ms( SEEX - 2,
+                                SEEY - 2 ),
                               dat.zlevel() );
-                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX + 1, SEEY - 2 ),
+                        line( this, ter_t_reinforced_glass, point_bub_ms( SEEX - 1, SEEY - 2 ), point_bub_ms( SEEX + 1,
+                                SEEY - 2 ),
                               dat.zlevel() );
                         ter_set( point_bub_ms( SEEX + 1, SEEY - 1 ), ter_t_reinforced_glass );
                         ter_set( point_bub_ms( SEEX + 1, SEEY ), ter_t_reinforced_door_glass_c );
@@ -6620,7 +6627,8 @@ character_id map::place_npc( const point_bub_ms &p, const string_id<npc_template
     return temp->getID();
 }
 
-void map::apply_faction_ownership( const point_bub_ms &p1, const point_bub_ms &p2, const faction_id &id )
+void map::apply_faction_ownership( const point_bub_ms &p1, const point_bub_ms &p2,
+                                   const faction_id &id )
 {
     for( const tripoint_bub_ms &p : points_in_rectangle( tripoint_bub_ms( p1.x(), p1.y(), abs_sub.z() ),
             tripoint_bub_ms( p2.x(), p2.y(),
