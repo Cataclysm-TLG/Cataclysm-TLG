@@ -140,10 +140,9 @@ static float get_avg_bullet_dmg( const std::string &clothing_id )
         dude->setpos( dude_pos );
         dude->wear_item( cloth, false );
         dude->add_effect( effect_sleep, 1_hours );
-        dealt_projectile_attack atk;
-        projectile_attack( atk, proj, badguy_pos, dude_pos, dispersion_sources(),
-                           &*badguy );
-        dude->deal_projectile_attack( &*badguy, atk, atk.missed_by, false );
+        dealt_projectile_attack atk = projectile_attack( proj, badguy_pos, dude_pos, dispersion_sources(),
+                                      &*badguy );
+        dude->deal_projectile_attack( &*badguy, atk, false );
         if( atk.missed_by < 1.0 ) {
             num_hits++;
         }
@@ -190,12 +189,12 @@ TEST_CASE( "Ranged_coverage_vs_bullet", "[coverage] [ranged]" )
 {
     SECTION( "Full melee and ranged coverage vs. ranged attack" ) {
         const float dmg = get_avg_bullet_dmg( "test_hazmat_suit" );
-        check_near( "Average damage", dmg, 16.4f, 0.2f );
+        check_near( "Average damage", dmg, 15.4f, 0.2f );
     }
 
     SECTION( "No ranged coverage vs. ranged attack" ) {
         const float dmg = get_avg_bullet_dmg( "test_hazmat_suit_noranged" );
-        check_near( "Average damage", dmg, 18.4f, 0.2f );
+        check_near( "Average damage", dmg, 17.2f, 0.2f );
     }
 }
 

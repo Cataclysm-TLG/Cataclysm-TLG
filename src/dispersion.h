@@ -11,7 +11,8 @@ class dispersion_sources
         std::vector<double> normal_sources;
         std::vector<double> linear_sources;
         std::vector<double> multipliers;
-        double spread_sources = 0.0;
+        std::vector<double> spread_sources;
+        mutable double prev_roll = -1.0;
     public:
         explicit dispersion_sources( double normal_source = 0.0 ) {
             if( normal_source != 0.0 ) {
@@ -25,7 +26,7 @@ class dispersion_sources
             multipliers.push_back( new_multiplier );
         }
         void add_spread( double new_spread ) {
-            spread_sources = new_spread;
+            spread_sources.push_back( new_spread );
         }
         double roll() const;
         double max() const;

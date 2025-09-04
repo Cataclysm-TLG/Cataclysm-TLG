@@ -1953,13 +1953,11 @@ bool monster::block_hit( Creature *, bodypart_id &, damage_instance & )
 }
 
 const weakpoint *monster::absorb_hit( const weakpoint_attack &attack, const bodypart_id &,
-                                      damage_instance &dam, const weakpoint &wp )
+                                      damage_instance &dam )
 {
     resistances r = resistances( *this );
-    const weakpoint *wkpt = attack.accuracy == -1.0 ?
-                            type->weakpoints.select_weakpoint( attack ) :
-                            &wp;
-    wkpt->apply_to( r );
+    const weakpoint *wp = type->weakpoints.select_weakpoint( attack );
+    wp->apply_to( r );
     for( damage_unit &elem : dam.damage_units ) {
         adjust_taken_damage_by_enchantments( elem );
         add_msg_debug( debugmode::DF_MONSTER,
@@ -1967,16 +1965,16 @@ const weakpoint *monster::absorb_hit( const weakpoint_attack &attack, const body
                        elem.type.c_str(), elem.amount, elem.res_pen, elem.res_mult );
         add_msg_debug( debugmode::DF_MONSTER,
                        "Weakpoint: %s :: Armor Mult: %.1f :: Armor Penalty: %.1f :: Resist: %.1f",
-                       wkpt->id, wkpt->armor_mult.count( elem.type ) > 0 ? wkpt->armor_mult.at( elem.type ) : 0.f,
-                       wkpt->armor_penalty.count( elem.type ) > 0 ? wkpt->armor_penalty.at( elem.type ) : 0.f,
+                       wp->id, wp->armor_mult.count( elem.type ) > 0 ? wp->armor_mult.at( elem.type ) : 0.f,
+                       wp->armor_penalty.count( elem.type ) > 0 ? wp->armor_penalty.at( elem.type ) : 0.f,
                        r.get_effective_resist( elem ) );
         elem.amount -= std::min( r.get_effective_resist( elem ) +
                                  get_worn_armor_val( elem.type ), elem.amount );
         adjust_taken_damage_by_enchantments_post_absorbed( elem );
     }
 
-    wkpt->apply_to( dam, attack.is_crit );
-    return wkpt;
+    wp->apply_to( dam, attack.is_crit );
+    return wp;
 }
 
 bool monster::melee_attack( Creature &target )
@@ -2181,10 +2179,10 @@ bool monster::melee_attack( Creature &target, float accuracy )
 }
 
 void monster::deal_projectile_attack( Creature *source, dealt_projectile_attack &attack,
-                                      const double &missed_by, bool print_messages,
-                                      const weakpoint_attack &wp_attack )
+                                      bool print_messages, const weakpoint_attack &wp_attack )
 {
     const projectile &proj = attack.proj;
+    double &missed_by = attack.missed_by; // We can change this here
     const auto &effects = proj.proj_effects;
 
     // Whip has a chance to scare wildlife even if it misses
@@ -2197,9 +2195,14 @@ void monster::deal_projectile_attack( Creature *source, dealt_projectile_attack 
         return;
     }
 
-    Creature::deal_projectile_attack( source, attack, missed_by, print_messages, wp_attack );
+    // if it's a headshot with no head, make it not a headshot
+    if( missed_by < accuracy_headshot && has_flag( mon_flag_NOHEAD ) ) {
+        missed_by = accuracy_headshot;
+    }
 
-    if( !is_hallucination() && attack.last_hit_critter == this ) {
+    Creature::deal_projectile_attack( source, attack, print_messages, wp_attack );
+
+    if( !is_hallucination() && attack.hit_critter == this ) {
         // Maybe TODO: Get difficulty from projectile speed/size/missed_by
         on_hit( source, bodypart_id( "torso" ), INT_MIN, &attack );
     }

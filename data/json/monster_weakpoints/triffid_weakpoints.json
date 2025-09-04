@@ -34,9 +34,8 @@
         "coverage": 15
       },
       {
-        "id": "crown",
-        "name": "the crown",
-        "is_head": true,
+        "id": "flower",
+        "name": "the flower",
         "coverage": 5,
         "crit_mult": { "all": 1.1 },
         "armor_mult": { "physical": 0.75 },

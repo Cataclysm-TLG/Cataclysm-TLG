@@ -356,7 +356,7 @@ class monster : public Creature
                          int intensity = 1, bool permanent = false, bool force = false, bool defferred = false );
 
         const weakpoint *absorb_hit( const weakpoint_attack &attack, const bodypart_id &bp,
-                                     damage_instance &dam, const weakpoint &wp = weakpoint() ) override;
+                                     damage_instance &dam ) override;
         // The monster's skill in hitting a weakpoint
         float weakpoint_skill() const;
 
@@ -365,7 +365,7 @@ class monster : public Creature
         bool melee_attack( Creature &target, float accuracy );
         void melee_attack( Creature &p, bool ) = delete;
         void deal_projectile_attack( Creature *source, dealt_projectile_attack &attack,
-                                     const double &missed_by = 0, bool print_messages = true,
+                                     bool print_messages = true,
                                      const weakpoint_attack &wp_attack = weakpoint_attack() ) override;
         void deal_damage_handle_type( const effect_source &source, const damage_unit &du, bodypart_id bp,
                                       int &damage, int &pain ) override;
