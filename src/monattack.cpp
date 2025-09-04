@@ -910,7 +910,8 @@ bool mattack::acid_accurate( monster *z )
     proj.impact.add_damage( damage_acid, rng( 3, 5 ) );
     // Make it arbitrarily less accurate at close ranges
     dealt_projectile_attack dealt;
-    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range }, z );
+    projectile_attack( dealt, proj, z->pos_bub(), target->pos_bub(), dispersion_sources{ 8000.0 * range },
+                       z );
 
     return true;
 }

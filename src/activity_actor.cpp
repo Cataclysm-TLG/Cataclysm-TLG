@@ -8357,28 +8357,35 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     const item_location weapon = you.get_wielded_item();
     int weap_cut = 0;
     int weap_stab = 0;
-    int weap_bash = 0;
+    int weap_bash = 1;
     int mess_radius = 1;
 
     if( weapon ) {
         // FIXME: Hardcoded damage types
+        weap_bash = weapon->damage_melee( damage_bash );
         weap_cut = weapon->damage_melee( damage_cut );
         weap_stab = weapon->damage_melee( damage_stab );
-        weap_bash = weapon->damage_melee( damage_bash );
         if( weapon->has_flag( flag_MESSY ) ) {
             mess_radius = 2;
         }
     }
 
-    // Stabbing weapons are a lot less effective at pulping
-    const int cut_power = std::max( weap_cut, weap_stab / 2 );
+    // If you have a weapon, bash specifically benefits from strength, which is counted again later regardless of damage type.
+    if( weap_bash > 1 ) {
+        weap_bash += you.get_arm_str();
+    }
 
-    ///\EFFECT_STR increases pulping power, with diminishing returns
-    float pulp_power = std::sqrt( ( you.get_arm_str() + weap_bash ) * ( cut_power + 1.0f ) );
-    float pulp_effort = you.str_cur + weap_bash;
+    int total_power = std::min( 1, ( weap_bash + weap_cut + weap_stab ) );
 
-    // Multiplier to get the chance right + some bonus for survival skill
-    pulp_power *= 25 + you.get_skill_level( skill_survival ) * 4;
+    int adjusted_bash = ( weap_bash ) / total_power;
+    // Cut is OK at this, stab is very bad.
+    int adjusted_cut = ( weap_cut / total_power ) / 2;
+    int adjusted_stab = ( weap_stab / total_power ) / 4;
+
+    float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
+
+    // Multiplier to get the chance right + some bonus for survival skill.
+    pulp_power *= 20 + you.get_skill_level( skill_survival ) * 4;
 
     int moves = 0;
     for( auto pos_iter = placement.cbegin(); pos_iter != placement.end();/*left - out*/ ) {
@@ -8386,7 +8393,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         map_stack corpse_pile = here.i_at( pos );
         for( item &corpse : corpse_pile ) {
             if( !corpse.is_corpse() || !corpse.can_revive() ) {
-                // Don't smash non-rezing corpses
+                // Don't smash non-reviving corpses.
                 continue;
             }
 
@@ -8395,21 +8402,31 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                                      you.is_immune_field( fd_acid );
             if( corpse_mtype->bloodType().obj().has_acid && !corpse.has_flag( flag_BLED ) && ( !acid_immune &&
                     !pulp_acid ) ) {
-                //don't smash acid zombies when auto pulping unprotected
+                // Don't smash acid zombies when auto pulping unprotected.
                 continue;
             }
+
+            // Because of the square cube law, we need to sanity check pulp time vs size.
+            // This is an incredibly lazy way to do it, but it works well enough.
+            units::volume divisor = 275_ml;
+            if( corpse.volume() <= 108000_ml ) {
+                divisor = 35_ml;
+            } else if( corpse.volume() <= 483750_ml ) {
+                divisor = 150_ml;
+            }
+            double corpse_volume_factor = corpse.volume() / divisor;
+
             while( corpse.damage() < corpse.max_damage() ) {
-                // Increase damage as we keep smashing ensuring we eventually smash the target.
-                if( x_in_y( pulp_power, corpse.volume() / 250_ml ) ) {
+                // Increase damage as we keep smashing ensuring we do eventually smash the target.
+                if( x_in_y( pulp_power, corpse_volume_factor ) ) {
                     corpse.inc_damage();
                     if( corpse.damage() == corpse.max_damage() && !corpse.has_flag( flag_PULPED ) ) {
                         num_corpses++;
                     }
                 }
 
-                if( x_in_y( pulp_power, corpse.volume() / 250_ml ) ) {
-                    // Splatter some blood around
-                    // Splatter a bit more randomly, so that it looks cooler
+                if( x_in_y( pulp_power, corpse_volume_factor ) ) {
+                    // Splatter some blood around.
                     const int radius = mess_radius + x_in_y( pulp_power, 500 ) + x_in_y( pulp_power, 1000 );
                     const tripoint_bub_ms dest( pos + point( rng( -radius, radius ), rng( -radius, radius ) ) );
 
@@ -8427,21 +8444,18 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 // Mix of Isaac Clarke stomps and swinging your weapon.
-                you.burn_energy_all( -pulp_effort );
+                you.burn_energy_all( -you.get_standard_stamina_cost() );
+
                 you.recoil = MAX_RECOIL;
 
-                if( one_in( 4 ) ) {
+                if( one_in( 5 ) ) {
                     // Smashing may not be butchery, but it involves some zombie anatomy.
                     you.practice( skill_survival, 2, 2 );
                 }
 
-                float stamina_ratio = static_cast<float>( you.get_stamina() ) / you.get_stamina_max();
-                moves += to_moves<int>( 6_seconds ) / std::max( 0.25f,
-                         stamina_ratio ) * you.exertion_adjusted_move_multiplier( act.exertion_level() );
-                if( stamina_ratio < 0.33 || you.is_npc() ) {
-                    you.set_moves( std::min( 0, you.get_moves() - moves ) );
-                    return;
-                }
+                item weap = you.get_wielded_item() ? *you.get_wielded_item() : null_item_reference();
+                moves += ( ( you.attack_speed( weap ) * 2 ) / you.exertion_adjusted_move_multiplier(
+                               act.exertion_level() ) );
                 if( moves >= you.get_moves() ) {
                     // Enough for this turn;
                     you.set_moves( you.get_moves() - moves );
@@ -8450,11 +8464,11 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             }
             corpse.set_flag( flag_PULPED );
         }
-        //Upon reach here, we have cleared one maptile
+        // At this point, we have finished one tile.
         pos_iter = placement.erase( pos_iter );
     }
 
-    // If we reach this, all corpses have been pulped, finish the activity
+    // All corpses have been pulped, finish the activity
     act.moves_left = 0;
     if( num_corpses == 0 ) {
         you.add_msg_if_player( m_bad, _( "Your smashing was interrupted." ) );
