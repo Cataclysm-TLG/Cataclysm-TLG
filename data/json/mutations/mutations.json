@@ -648,7 +648,7 @@
     "description": "Your wounds and broken limbs heal quicker than usual.",
     "starting_trait": true,
     "types": [ "HEALING" ],
-    "changes_to": [ "FASTHEALER2", "REGEN_LIZ" ],
+    "changes_to": [ "FASTHEALER2" ],
     "category": [ "MEDICAL", "PLANT", "BATRACHIAN", "SLIME", "TROGLOBITE", "CRUSTACEAN" ],
     "enchantments": [
       {
@@ -1336,6 +1336,7 @@
     "starting_trait": true,
     "types": [ "HEALING" ],
     "category": [ "LIZARD" ],
+    "changes_to": [ "REGEN_LIZ" ],
     "enchantments": [ { "values": [ { "value": "MENDING_MODIFIER", "multiply": -0.25 }, { "value": "REGEN_HP", "multiply": -0.25 } ] } ]
   },
   {
