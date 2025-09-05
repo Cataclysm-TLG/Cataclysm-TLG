@@ -146,7 +146,7 @@
       { "item": "gun_crossbow", "prob": 40 }
     ]
   },
-    {
+  {
     "type": "item_group",
     "id": "arrows_and_bolts",
     "subtype": "distribution",
