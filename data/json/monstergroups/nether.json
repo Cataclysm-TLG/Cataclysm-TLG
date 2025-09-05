@@ -22,7 +22,6 @@
       { "monster": "mon_star_vampire", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_gelatin", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_flaming_eye", "weight": 100, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_blank", "weight": 100, "cost_multiplier": 0 }
     ]
   },
@@ -40,7 +39,6 @@
       { "monster": "mon_flaming_eye", "weight": 120, "cost_multiplier": 0 },
       { "monster": "mon_nuckalavee", "weight": 25, "cost_multiplier": 0 },
       { "monster": "mon_star_vampire", "weight": 15, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 210, "cost_multiplier": 0 },
       { "monster": "mon_gozu", "weight": 25, "cost_multiplier": 0 },
       { "monster": "mon_shoggoth", "weight": 5, "cost_multiplier": 0 }
     ]
@@ -48,12 +46,12 @@
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_CAPTURED",
-    "default": "mon_kreck",
+    "default": "mon_blank",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 250, "cost_multiplier": 0 },
+      { "monster": "mon_blank", "weight": 250, "cost_multiplier": 0 },
       { "monster": "mon_mi_go", "weight": 250, "cost_multiplier": 0 },
-      { "monster": "mon_mi_go_scout", "weight": 250, "cost_multiplier": 0, "starts": "15 days" },
-      { "monster": "mon_kreck", "weight": 250, "cost_multiplier": 0 }
+      { "monster": "mon_mi_go_scout", "weight": 250, "cost_multiplier": 0, "starts": "15 days" }
     ]
   },
   {
@@ -65,18 +63,16 @@
       { "monster": "mon_nether_unviable_chunk", "weight": 3, "cost_multiplier": 0, "pack_size": [ 2, 4 ] },
       { "monster": "mon_nether_unviable_root", "weight": 3, "cost_multiplier": 0, "pack_size": [ 2, 4 ] },
       { "monster": "mon_nether_unviable_butterfly", "weight": 2, "cost_multiplier": 0 },
-      { "monster": "mon_nether_unviable_glowstalk", "weight": 2, "cost_multiplier": 0 },
-      { "monster": "mon_nether_unviable_stomper", "weight": 1, "cost_multiplier": 1 }
+      { "monster": "mon_nether_unviable_glowstalk", "weight": 2, "cost_multiplier": 0 }
     ]
   },
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_PORTAL",
-    "default": "mon_kreck",
+    "default": "mon_blank",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 200, "cost_multiplier": 0 },
       { "monster": "mon_flaming_eye", "weight": 200, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 200, "cost_multiplier": 0 },
       { "monster": "mon_unseen_hunter", "weight": 100, "cost_multiplier": 0, "starts": "30 days" },
       { "monster": "mon_blank", "weight": 200, "cost_multiplier": 0 },
       { "group": "GROUP_NETHER_UNVIABLE", "weight": 500, "cost_multiplier": 0 }
@@ -99,10 +95,9 @@
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_CORPSE",
-    "default": "mon_kreck",
+    "default": "mon_blank",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 100, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 150, "cost_multiplier": 0 },
       { "monster": "mon_unseen_hunter", "weight": 75, "cost_multiplier": 0, "starts": "15 days" },
       { "monster": "mon_blank", "weight": 100, "cost_multiplier": 0 },
       { "monster": "mon_star_vampire", "weight": 50, "cost_multiplier": 0 },
@@ -115,10 +110,9 @@
   {
     "type": "monstergroup",
     "name": "GROUP_NETHER_CORPSE_PORTAL",
-    "default": "mon_kreck",
+    "default": "mon_blank",
     "monsters": [
       { "monster": "mon_gelatin", "weight": 70, "cost_multiplier": 0 },
-      { "monster": "mon_kreck", "weight": 180, "cost_multiplier": 0 },
       { "monster": "mon_unseen_hunter", "weight": 30, "cost_multiplier": 0, "starts": "15 days" },
       { "monster": "mon_blank", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_star_vampire", "weight": 20, "cost_multiplier": 0 },
