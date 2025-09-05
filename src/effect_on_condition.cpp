@@ -139,11 +139,14 @@ static time_duration next_recurrence( const effect_on_condition_id &eoc, dialogu
 void effect_on_conditions::load_new_character( Character &you )
 {
     bool is_avatar = you.is_avatar();
-    for( const effect_on_condition_id &eoc_id : get_scenario()->eoc() ) {
-        effect_on_condition eoc = eoc_id.obj();
-        if( eoc.type == eoc_type::SCENARIO_SPECIFIC && ( is_avatar || eoc.run_for_npcs ) ) {
-            queued_eoc new_eoc = queued_eoc{ eoc.id, calendar::turn_zero, {} };
-            you.queued_effect_on_conditions.push( new_eoc );
+    // NPCs do not have scenarios, so check for that.
+    if( get_scenario() ) {
+        for( const effect_on_condition_id &eoc_id : get_scenario()->eoc() ) {
+            effect_on_condition eoc = eoc_id.obj();
+            if( is_avatar || eoc.run_for_npcs ) {
+                queued_eoc new_eoc = queued_eoc{ eoc.id, calendar::turn_zero, {} };
+                you.queued_effect_on_conditions.push( new_eoc );
+            }
         }
     }
     for( const effect_on_condition &eoc : effect_on_conditions::get_all() ) {
