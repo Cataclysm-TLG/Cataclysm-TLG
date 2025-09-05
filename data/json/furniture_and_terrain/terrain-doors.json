@@ -3,7 +3,7 @@
     "type": "terrain",
     "id": "t_laminated_door_glass_c",
     "name": "closed laminated glass door",
-    "description": "A closed laminated glass door, composed of layers of glass and plastic held together by an interlayer.",
+    "description": "A closed door made of laminated safety glass.  It's a lot tougher than regular glass, and is designed to break into fragments that are nowhere near as sharp.",
     "symbol": "+",
     "color": "light_cyan",
     "move_cost": 0,
@@ -17,14 +17,14 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_laminated_door_glass_o",
     "bash": {
-      "str_min": 100,
-      "str_max": 180,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "tempered_glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
     },
     "shoot": { "reduce_damage": [ 2, 12 ], "reduce_damage_laser": [ 0, 7 ], "destroy_damage": [ 40, 120 ], "no_laser_destroy": true }
   },
@@ -32,7 +32,7 @@
     "type": "terrain",
     "id": "t_laminated_door_glass_o",
     "name": "open laminated glass door",
-    "description": "A laminated glass door, composed of layers of glass and plastic held together by an interlayer.  It's open.",
+    "description": "A door made of laminated safety glass.  It's a lot tougher than regular glass, and is designed to break into fragments that are nowhere near as sharp.  It's open.",
     "symbol": "'",
     "color": "light_cyan",
     "move_cost": 2,
@@ -44,14 +44,14 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_laminated_door_glass_c",
     "bash": {
-      "str_min": 100,
-      "str_max": 180,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "tempered_glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
     }
   },
   {
@@ -79,7 +79,7 @@
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "tempered_glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
     },
     "shoot": {
       "reduce_damage": [ 30, 60 ],
@@ -111,14 +111,14 @@
       "sound_vol": 20,
       "sound_fail_vol": 14,
       "ter_set": "t_mdoor_frame",
-      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
+      "items": [ { "item": "tempered_glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 5 ] } ]
     }
   },
   {
     "type": "terrain",
     "id": "t_reinforced_door_glass_c",
-    "name": "closed reinforced glass door",
-    "description": "A closed glass door reinforced with woven steel wires in a stylish, but practical pattern.",
+    "name": "closed wired glass door",
+    "description": "A closed glass door with a grid of embedded wire to help hold it together in case of damage.",
     "symbol": "+",
     "looks_like": "t_door_glass_c",
     "color": "light_cyan",
@@ -132,7 +132,7 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_reinforced_door_glass_o",
     "bash": {
-      "str_min": 16,
+      "str_min": 14,
       "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
@@ -150,8 +150,8 @@
   {
     "type": "terrain",
     "id": "t_reinforced_door_glass_lab_c",
-    "name": "closed reinforced glass door",
-    "description": "A closed glass door reinforced with woven steel wires in a stylish, but practical pattern.",
+    "name": "closed wired glass door",
+    "description": "A closed glass door with a grid of embedded wire to help hold it together in case of damage.",
     "symbol": "+",
     "looks_like": "t_reinforced_door_glass_c",
     "color": "light_cyan",
@@ -165,7 +165,7 @@
     "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "SUPPORTS_ROOF" ],
     "open": "t_reinforced_door_glass_lab_o",
     "bash": {
-      "str_min": 16,
+      "str_min": 14,
       "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
@@ -183,8 +183,8 @@
   {
     "type": "terrain",
     "id": "t_reinforced_door_glass_o",
-    "name": "open reinforced glass door",
-    "description": "A glass door reinforced with woven steel wires in a stylish, but practical pattern.  It's open.",
+    "name": "open wired glass door",
+    "description": "A glass door with a grid of embedded wire to help hold it together in case of damage.  It's open.",
     "symbol": "'",
     "looks_like": "t_door_glass_o",
     "color": "light_cyan",
@@ -196,7 +196,7 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_reinforced_door_glass_c",
     "bash": {
-      "str_min": 16,
+      "str_min": 14,
       "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
@@ -213,8 +213,8 @@
   {
     "type": "terrain",
     "id": "t_reinforced_door_glass_lab_o",
-    "name": "open reinforced glass door",
-    "description": "A glass door reinforced with woven steel wires in a stylish, but practical pattern.  It's open.",
+    "name": "open wired glass door",
+    "description": "A glass door with a grid of embedded wire to help hold it together in case of damage.  It's open",
     "symbol": "'",
     "looks_like": "t_reinforced_door_glass_o",
     "color": "light_cyan",
@@ -226,7 +226,7 @@
     "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
     "close": "t_reinforced_door_glass_lab_c",
     "bash": {
-      "str_min": 16,
+      "str_min": 14,
       "str_max": 50,
       "sound": "glass breaking!",
       "sound_fail": "whack!",
