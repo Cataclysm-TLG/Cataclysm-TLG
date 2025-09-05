@@ -255,8 +255,8 @@ bodypart_id anatomy::select_body_part( const Creature *you, int min_hit, int max
     }
 
     // Debug for seeing weights.
-    for( const weighted_object<double, bodypart_id> &pr : hit_weights ) {
-        add_msg_debug( debugmode::DF_ANATOMY_BP, "%s = %.3f", pr.obj.obj().name, pr.weight );
+    for( const std::pair<bodypart_id, double> &pr : hit_weights ) {
+        add_msg_debug( debugmode::DF_ANATOMY_BP, "%s = %.3f", pr.first.obj().name, pr.second );
     }
 
     const bodypart_id *ret = hit_weights.pick();
@@ -321,8 +321,8 @@ bodypart_id anatomy::select_blocking_part( const Creature *blocker, bool arm, bo
     }
 
     // Debug for seeing weights.
-    for( const weighted_object<double, bodypart_id> &pr : block_scores ) {
-        add_msg_debug( debugmode::DF_MELEE, "%s = %.3f", pr.obj.obj().name, pr.weight );
+    for( const std::pair<bodypart_id, double > &pr : block_scores ) {
+        add_msg_debug( debugmode::DF_MELEE, "%s = %.3f", pr.first.obj().name, pr.second );
     }
 
     const bodypart_id *ret = block_scores.pick();
