@@ -1557,20 +1557,25 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
         proj.set_custom_explosion( thrown_type->explosion );
     }
 
-    // Throw from the player's position, unless we're blind throwing, in which case
-    // throw from the the blind throw position instead.
+    // Throw from the player's position, unless we're blind throwing.
     const tripoint_bub_ms throw_from = blind_throw_from_pos ? *blind_throw_from_pos : pos_bub();
 
     float range = static_cast<int>( std::round( trig_dist_z_adjust( throw_from, target ) ) );
     proj.range = range;
     float skill_lvl = get_skill_level( skill_throw );
-    // Avoid awarding tons of xp for lucky throws against hard to hit targets
-    const float range_factor = std::min<float>( range, skill_lvl + 3 );
-    // We're aiming to get a damaging hit, not just an accurate one - reward proper weapons
-    const float damage_factor = 5.0f * std::sqrt( proj.impact.total_damage() / 5.0f );
-    // This should generally have values below ~20*sqrt(skill_lvl)
-    const float final_xp_mult = range_factor * damage_factor;
 
+    // XP is awarded based on difficulty of the throw relative to our skill
+    float range_factor = range - skill_lvl + 5;
+    if( critter ) {
+        range_factor += std::max( 0.f, critter->get_dodge() - get_skill_level( skill_throw ) );
+        range_factor += std::max( 0.0, 3.0 - critter->ranged_target_size() );
+    }
+
+    // Damaging hits award more XP. We then clamp everything.
+    const float damage_factor = std::clamp( proj.impact.total_damage() / 10.0f, 0.f, 3.f );
+    range_factor = std::clamp( range_factor, 0.f, 7.f );
+
+    const int final_xp_mult = static_cast<int>( std::round( range_factor + damage_factor ) );
     weakpoint_attack wp_attack;
     wp_attack.weapon = &to_throw;
     wp_attack.is_thrown = true;
@@ -1578,28 +1583,20 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     projectile_attack( dealt_attack, proj, throw_from, target, dispersion,
                        this, nullptr, wp_attack );
 
-    const double missed_by = dealt_attack.missed_by;
-
-    if( critter && dealt_attack.last_hit_critter != nullptr && dealt_attack.headshot &&
+    if( critter && dealt_attack.last_hit_critter != nullptr &&
         !critter->has_flag( mon_flag_IMMOBILE ) &&
         !critter->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
         practice( skill_throw, final_xp_mult, MAX_SKILL );
-        get_event_bus().send<event_type::character_gets_headshot>( getID() );
-    } else if( critter && dealt_attack.last_hit_critter != nullptr && missed_by > 0.0f &&
-               !critter->has_flag( mon_flag_IMMOBILE ) &&
-               !critter->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
-        practice( skill_throw, final_xp_mult / ( 1.0f + missed_by ), MAX_SKILL );
     } else {
         // Pure grindy practice - cap gain at lvl 2
-        practice( skill_throw, 5, 2 );
+        practice( skill_throw, rng( 1, 5 ), 2 );
     }
     // Reset last target pos
     last_target_pos = std::nullopt;
     recoil = MAX_RECOIL;
-    // MLB pitchers can throw around 100 times a day. We can be a bit more generous since
-    // we're not giving the player the ability to gently toss items instead.
-    const float str_ratio = static_cast<float>( weight / 3000.0_gram ) / str_cur;
-    set_activity_level( 12 * std::clamp( str_ratio, 0.5f, 1.0f ) );
+    // MLB pitchers can throw around 100 times a day.
+    const float str_ratio = static_cast<float>( weight / 100.0_gram ) / str_cur;
+    set_activity_level( 12.f * std::clamp( str_ratio, 0.5f, 1.0f ) );
     return dealt_attack;
 }
 
@@ -1648,10 +1645,10 @@ void practice_archery_proficiency( Character &p, const item &relevant )
 // Apply stamina cost to archery which decreases due to proficiency
 static void mod_stamina_archery( Character &you, const item &relevant )
 {
-    // Set activity level to 12 * str_ratio, with 10 being max (EXPLOSIVE_EXERCISE)
-    // This ratio should never be below 0 and above 1
+    // Set activity level to 12 * str_ratio, with 12 being max (EXPLOSIVE_EXERCISE)
+    // This ratio should never be below 0.5 or above 1.
     const float str_ratio = static_cast<float>( relevant.get_min_str() ) / you.str_cur;
-    you.set_activity_level( 12 * std::min( 1.0f, str_ratio ) );
+    you.set_activity_level( 12.f * std::clamp( str_ratio, 0.5f, 1.0f ) );
 
     // Calculate stamina drain based on archery, athletics skill, and effective bow strength ratio
     const float archery_skill = you.get_skill_level( skill_archery );
