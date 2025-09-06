@@ -541,7 +541,8 @@
     "symbol": "[",
     "color": "white",
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "wooden_hair_beads",

@@ -738,7 +738,7 @@
     "id": "MISSION_GODCO_CORRIE_MACHINE1",
     "type": "mission_definition",
     "name": { "str": "Renewable Energy" },
-    "description": "Find a solar panel for Corrie.",
+    "description": "Find a solar array or four solar panels for Corrie.",
     "goal": "MGOAL_CONDITION",
     "goal_condition": {
       "u_has_items_sum": [
@@ -755,11 +755,11 @@
     "has_generic_rewards": false,
     "dialogue": {
       "describe": "I have a plan…",
-      "offer": "Okay, great.  We're gonna create a charger and a generator all in one.  Here's the battle plan.  Zack could create the framework, you'll get me a solar panel, the rest I can craft or repurpose from the bus.  Helena's promised us a reward if this thing lives up to her standards.",
+      "offer": "Okay, great.  We're gonna create a charger and a generator all in one.  Here's the battle plan.  Zack could create the framework, you'll get me a solar array or four solar panels.  The rest I can craft or repurpose from the bus.  Helena's promised us a reward if this thing lives up to her standards.",
       "accepted": "With my brains and your brawn we'll make an excellent team.  A regular solar panel will do just fine.",
       "rejected": "No electricity for us then.",
-      "advice": "All you need is a good wrench and a solar car.",
-      "inquire": "Do you have the solar panel?",
+      "advice": "The best place to look is probably on rooftops.  You'll need a wrench, and maybe a stepladder to get up and down safely.",
+      "inquire": "Do you have the solar panels?",
       "success": "The great work is now complete.  Are you good with words, by the way?  I was thinking, maybe you should be the one to negotiate with Helena.  But whatever you do, don't accept their icons.  Our work is worth a lot more than their valueless currency.",
       "success_lie": "Thanks for trying…  I guess.",
       "failure": "No electricity for us then."
