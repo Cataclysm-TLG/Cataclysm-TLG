@@ -2592,5 +2592,10 @@
     "id": "active_backup_generator",
     "type": "MIGRATION",
     "replace": "diesel_generator"
+  },
+  {
+    "id": "workbench_with_recharger",
+    "type": "MIGRATION",
+    "replace": "workbench"
   }
 ]
