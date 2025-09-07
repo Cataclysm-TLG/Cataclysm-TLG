@@ -616,7 +616,7 @@
     "id": "mon_zombie_ears",
     "type": "MONSTER",
     "name": { "str": "listener zombie" },
-    "//": "Upgraded version of brainless.",
+    "//": "Upgraded version of headless.",
     "description": "This zombie's head was once obviously destroyed, but it looks like it's undergone some misbegotten regeneration since then.  Putrid flesh has pushed out of its neck-stump, forming a pseudo-head that looks like a melted candle.  Oversized ears hang from the sides, twitching at the slightest sound.",
     "default_faction": "zombie",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -645,7 +645,6 @@
     "//3": "Removed Bite as this creature does not have a 'mouth'.",
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 28, "into": "mon_zombie_skull" },
     "flags": [
       "HEARS",
       "GOODHEARING",
