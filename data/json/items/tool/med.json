@@ -154,7 +154,23 @@
     "symbol": ",",
     "color": "white",
     "flags": [ "SINGLE_USE", "TINDER" ],
-    "use_action": { "type": "heal", "bandages_power": 3, "bleed": 12, "move_cost": 850 }
+    "use_action": { "type": "heal", "bandages_power": 3, "bleed": 12, "move_cost": 550 }
+  },
+    {
+    "id": "medical_gauze_makeshift",
+    "type": "GENERIC",
+    "category": "drugs",
+    "name": { "str": "makeshift adhesive bandage" },
+    "description": "A palm-sized square of absorbent material with adhesive tape along the edges, designed for easy application.  It's neither professional nor sterile, but maybe this isn't the time to be choosy.",
+    "weight": "760 mg",
+    "volume": "4 ml",
+    "price": "3 USD 50 cent",
+    "price_postapoc": "2 USD",
+    "material": [ "cotton" ],
+    "symbol": ",",
+    "color": "white",
+    "flags": [ "SINGLE_USE", "TINDER" ],
+    "use_action": { "type": "heal", "bandages_power": 2, "bleed": 10, "move_cost": 550 }
   },
   {
     "id": "liq_bandage_spray",
