@@ -17,7 +17,7 @@
     "techniques": [ "WBLOCK_1", "BRUTAL", "SWEEP" ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "SHEATH_AXE", "NO_SALVAGE" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "GREAT_AXES" ],
-    "melee_damage": { "bash": 14, "cut": 28 }
+    "melee_damage": { "bash": 18, "cut": 22 }
   },
   {
     "id": "bow_saw",
@@ -300,7 +300,7 @@
     "type": "TOOL",
     "name": { "str": "copper hatchet" },
     "description": "A primitive axe made from a small wedge of copper affixed to a short haft.",
-    "weight": "379 g",
+    "weight": "459 g",
     "volume": "1000 ml",
     "longest_side": "35 cm",
     "price": "5 USD",
@@ -312,7 +312,7 @@
     "qualities": [ [ "CUT", 1 ], [ "AXE", 1 ], [ "BUTCHER", -44 ] ],
     "flags": [ "BELT_CLIP", "NONCONDUCTIVE", "SHEATH_AXE" ],
     "weapon_category": [ "HAND_AXES" ],
-    "melee_damage": { "bash": 7, "cut": 14 }
+    "melee_damage": { "bash": 8, "cut": 12 }
   },
   {
     "id": "bronze_axe",
@@ -333,7 +333,7 @@
     "techniques": [ "WBLOCK_1", "BRUTAL", "SWEEP" ],
     "flags": [ "NONCONDUCTIVE", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "GREAT_AXES" ],
-    "melee_damage": { "bash": 12, "cut": 24 }
+    "melee_damage": { "bash": 14, "cut": 18 }
   },
   {
     "type": "GENERIC",
@@ -354,7 +354,7 @@
     "weapon_category": [ "HAND_AXES" ],
     "category": "weapons",
     "qualities": [ [ "AXE", 2 ], [ "CUT", 1 ], [ "HAMMER", 2 ], [ "HAMMER_FINE", 1 ], [ "BUTCHER", 16 ] ],
-    "melee_damage": { "bash": 10, "cut": 20 }
+    "melee_damage": { "bash": 14, "cut": 16 }
   },
   {
     "id": "luthier_toolset",
@@ -568,7 +568,7 @@
     "description": "A chunk of steel with one edge hammered down to something resembling a cutting edge.  It works passably well, but really can't compare to a proper axe.",
     "material": [ "steel" ],
     "flags": [ "SHEATH_AXE" ],
-    "melee_damage": { "bash": 8, "cut": 12 }
+    "melee_damage": { "bash": 6, "cut": 10 }
   },
   {
     "id": "primitive_adze",

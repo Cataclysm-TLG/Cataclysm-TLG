@@ -16,7 +16,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 11 ] ],
     "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "KNIVES" ],
-    "melee_damage": { "bash": 2, "stab": 11 }
+    "melee_damage": { "stab": 9 }
   },
   {
     "id": "bronze_knife",
@@ -77,7 +77,7 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 3 ] ],
     "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "SHIVS" ],
-    "melee_damage": { "bash": 1, "stab": 8 }
+    "melee_damage": { "stab": 8 }
   },
   {
     "id": "pockknife",
