@@ -1001,7 +1001,9 @@
       "bandages_makeshift_with_tool",
       "bandages_makeshift_bleached",
       "bandages_makeshift_boiled",
-      "adhesive_bandages"
+      "adhesive_bandages",
+      "medical_gauze",
+      "medical_gauze_makeshift"
     ],
     "difficulty": 1
   },

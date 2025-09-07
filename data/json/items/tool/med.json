@@ -4,7 +4,7 @@
     "type": "GENERIC",
     "category": "drugs",
     "name": { "str": "adhesive bandage" },
-    "description": "A tiny bandage made of a piece of sterile cloth and sticky tape, usually used for quickly covering superficial wounds.",
+    "description": "A tiny square of gauze stuck to a strip of sticky tape, usually used for quickly covering superficial wounds.",
     "weight": "2 g",
     "volume": "2 ml",
     "price": "5 cent",
@@ -144,7 +144,7 @@
     "id": "medical_gauze",
     "type": "GENERIC",
     "category": "drugs",
-    "name": { "str": "adhesive gauze bandage" },
+    "name": { "str": "adhesive gauze patch" },
     "description": "A palm-sized square of sterile fabric with adhesive tape along the edges, designed for easy application.",
     "weight": "760 mg",
     "volume": "4 ml",
@@ -154,7 +154,23 @@
     "symbol": ",",
     "color": "white",
     "flags": [ "SINGLE_USE", "TINDER" ],
-    "use_action": { "type": "heal", "bandages_power": 3, "bleed": 12, "move_cost": 850 }
+    "use_action": { "type": "heal", "bandages_power": 3, "bleed": 12, "move_cost": 550 }
+  },
+    {
+    "id": "medical_gauze_makeshift",
+    "type": "GENERIC",
+    "category": "drugs",
+    "name": { "str": "makeshift gauze patch" },
+    "description": "A palm-sized square of absorbent material with adhesive tape along the edges, designed for easy application.  It's neither professional nor sterile, but maybe this isn't the time to be choosy.",
+    "weight": "760 mg",
+    "volume": "4 ml",
+    "price": "3 USD 50 cent",
+    "price_postapoc": "2 USD",
+    "material": [ "cotton" ],
+    "symbol": ",",
+    "color": "white",
+    "flags": [ "SINGLE_USE", "TINDER" ],
+    "use_action": { "type": "heal", "bandages_power": 1, "bleed": 8, "move_cost": 550 }
   },
   {
     "id": "liq_bandage_spray",
