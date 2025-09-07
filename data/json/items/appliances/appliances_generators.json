@@ -99,7 +99,7 @@
     "//": "Champion 201160",
     "looks_like": "f_active_backup_generator",
     "description": "This 12,000 watt gasoline generator should provide enough energy to power an entire home.",
-   "use_action": { "type": "deploy_appliance", "base": "12000_gasoline_generator" },
+    "use_action": { "type": "deploy_appliance", "base": "12000_gasoline_generator" },
     "weight": "150 kg",
     "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "clumsy" },
     "material": [ "steel" ],
