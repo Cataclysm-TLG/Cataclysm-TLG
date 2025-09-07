@@ -20,7 +20,7 @@
     "weapon_category": [ "HAND_AXES" ],
     "use_action": [ "CROWBAR" ],
     "qualities": [ [ "AXE", 2 ], [ "CUT", 1 ], [ "PRY", 2 ], [ "BUTCHER", 16 ] ],
-    "melee_damage": { "bash": 10, "cut": 20 }
+    "melee_damage": { "bash": 12, "cut": 18 }
   },
   {
     "id": "extinguisher",
@@ -54,8 +54,8 @@
     "id": "fire_ax",
     "type": "TOOL",
     "name": { "str": "fire axe" },
-    "description": "A large, two-handed pickhead axe normally used by firefighters.  It makes a powerful melee weapon, but is a bit slow to recover between swings.",
-    "weight": "3448 g",
+    "description": "A hefty two-handed axe normally used by firefighters.  It makes a powerful melee weapon, but is a bit slow to recover between swings.  Thanks to its prying head, it can also be used to force locked door and windows open.",
+    "weight": "3628 g",
     "volume": "2 L",
     "price": "200 USD",
     "longest_side": "90 cm",
@@ -79,14 +79,14 @@
         "holster": true
       }
     ],
-    "melee_damage": { "bash": 18, "cut": 37 }
+    "melee_damage": { "bash": 23, "cut": 27 }
   },
   {
     "id": "halligan",
     "type": "TOOL",
     "name": { "str": "Halligan bar" },
-    "description": "A heavy, multiple-use tool commonly carried by firefighters, law enforcement, and military rescue units.  Use it to open locked doors without destroying them or to lift manhole covers.  You could also wield it to bash some heads in.",
-    "weight": "4772 g",
+    "description": "A heavy, multiple-use tool commonly carried by firefighters, law enforcement, and military rescue units.  Use it to open locked doors or to lift manhole covers, or just bash enemies with the nasty-looking spike on one end.",
+    "weight": "4080 g",
     "volume": "550 ml",
     "longest_side": "76 cm",
     "price": "75 USD",
@@ -99,7 +99,9 @@
     "use_action": [ "CROWBAR" ],
     "weapon_category": [ "BLUDGEONS" ],
     "flags": [ "DURABLE_MELEE", "BELT_CLIP", "SHEATH_AXE" ],
-    "melee_damage": { "bash": 42, "stab": 5 }
+    "//": "It's a blunt instrument all over, but we're trying to hit with the spike. surface: line is a compromise between any and point.",
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "neutral" },
+    "melee_damage": { "bash": 38, "stab": 7 }
   },
   {
     "id": "sm_extinguisher",

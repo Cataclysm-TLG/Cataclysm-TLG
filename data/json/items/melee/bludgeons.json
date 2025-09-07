@@ -221,7 +221,7 @@
     "id": "battleaxe",
     "type": "TOOL",
     "name": { "str": "battle axe" },
-    "description": "A huge axe designed for warfare.  Though intended for use as a weapon, it can also be pressed into service as a rather clumsy woodcutting tool.",
+    "description": "An axe designed for medieval warfare, the head secured to the haft with langets.  Though formidable, it's lighter than the sort you'd use for felling trees, and would make an inferior tool for that purpose.",
     "weight": "2002 g",
     "volume": "2500 ml",
     "longest_side": "100 cm",

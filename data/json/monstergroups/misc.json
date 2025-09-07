@@ -107,9 +107,7 @@
   {
     "type": "monstergroup",
     "name": "GROUP_CHUD",
-    "monsters": [
-      { "monster": "mon_chud", "weight": 100, "cost_multiplier": 0 }
-    ]
+    "monsters": [ { "monster": "mon_chud", "weight": 100, "cost_multiplier": 0 } ]
   },
   {
     "type": "monstergroup",
