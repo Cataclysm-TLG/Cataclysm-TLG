@@ -1487,10 +1487,10 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
             entry = string_format( _( "Notes:\n"
                                       "Distribute food from the Basecamp: Food zone to your faction.  "
                                       "Distributed food will be banked and used to pay followers for "
-                                      "performing labor. Note that distributed food can't be recovered"
+                                      "performing labor.  Note that distributed food can't be recovered"
                                       ", and distributed perishables will still go bad over time.\n\n"
-                                      "We have approximately %d kcal in storage, or enough for about "
-                                      "%d hour(s) of moderate work for a healthy adult.\n"
+                                      "This faction has approximately %d kcal in storage, or enough "
+                                      "for about %d hour(s) of moderate work for a healthy adult.\n"
                                       "Lowest vitamin: %s\n"
                                       "Toxin levels: %s" ),
                                    fac()->food_supply.kcal(), ( camp_food_supply_days( MODERATE_EXERCISE ) * 24 ), vitamins.second,
