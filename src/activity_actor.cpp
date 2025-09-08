@@ -8369,7 +8369,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
             mess_radius = 2;
         }
     }
-    
+
     double total_power = std::max( 1, ( weap_bash + weap_cut + weap_stab ) );
 
     // If you have a weapon, bash specifically benefits from strength, which is counted again later regardless of damage type.
@@ -8383,8 +8383,8 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
     int adjusted_bash = static_cast<int>( std::round( weap_bash * ratio_bash ) );
     // Cut is OK at this, stab is very bad
-    int adjusted_cut  = static_cast<int>( std::round( (weap_cut * ratio_cut) / 1.25 ) );
-    int adjusted_stab = static_cast<int>( std::round( (weap_stab * ratio_stab) / 3.0 ) );
+    int adjusted_cut  = static_cast<int>( std::round( ( weap_cut * ratio_cut ) / 1.25 ) );
+    int adjusted_stab = static_cast<int>( std::round( ( weap_stab * ratio_stab ) / 3.0 ) );
 
     float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
