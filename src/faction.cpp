@@ -338,9 +338,9 @@ std::string faction::food_supply_text()
         return pgettext( "Faction food", "Scraping By" );
     }
     if( val >= 3 ) {
-        return pgettext( "Faction food", "Malnourished" );
+        return pgettext( "Faction food", "Very Low" );
     }
-    return pgettext( "Faction food", "Starving" );
+    return pgettext( "Faction food", "Depleted" );
 }
 
 nc_color faction::food_supply_color()
@@ -373,7 +373,7 @@ std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type 
         }
     }
     if( stored_vits.empty() ) {
-        return std::pair<nc_color, std::string>( !is_toxin ? c_red : c_green, _( "None present (NONE)" ) );
+        return std::pair<nc_color, std::string>( !is_toxin ? c_red : c_green, _( "None present." ) );
     }
     std::vector<std::pair<vitamin_id, double>> vitamins;
     // Iterate the map's content into a sortable container...
@@ -389,19 +389,19 @@ std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type 
     }
     // Sort to find the worst-case scenario, lowest relative_intake is first
     std::sort( vitamins.begin(), vitamins.end(), []( const auto & x, const auto & y ) {
-        return x.second > y.second;
+        return x.second < y.second;
     } );
     const double worst_intake = vitamins.at( 0 ).second;
     std::string vit_name = vitamins.at( 0 ).first.obj().name();
-    std::string msg = is_toxin ? _( "(TRACE)" ) : _( "(PLENTY)" );
+    std::string msg = is_toxin ? _( "(Safe)" ) : _( "(Plenty)" );
     if( worst_intake <= 0.3 ) {
-        msg = is_toxin ? _( "(POISON)" ) : _( "(LACK)" );
-        return std::pair<nc_color, std::string>( c_red, string_format( _( "%1$s %2$s" ), vit_name,
+        msg = is_toxin ? _( "(Warning)" ) : _( "(Lacking)" );
+        return std::pair<nc_color, std::string>( c_yellow, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
     if( worst_intake <= 1.0 ) {
-        msg = is_toxin ? _( "(DANGER)" ) : _( "(MEAGER)" );
-        return std::pair<nc_color, std::string>( c_yellow, string_format( _( "%1$s %2$s" ), vit_name,
+        msg = is_toxin ? _( "(Danger)" ) : _( "(Meager)" );
+        return std::pair<nc_color, std::string>( c_red, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
     return std::pair<nc_color, std::string>( c_green, string_format( _( "%1$s %2$s" ), vit_name,
@@ -576,14 +576,14 @@ void basecamp::faction_display( const catacurses::window &fac_w, const int width
     }
     mvwprintz( fac_w, point( width, ++y ), col, _( "Location: %s" ), camp_pos.to_string() );
     faction *yours = player_character.get_faction();
-    std::string food_text = string_format( _( "Food Supply: %s %d kilocalories" ),
+    std::string food_text = string_format( _( "Food Supply: %s (%d kcal)" ),
                                            yours->food_supply_text(), yours->food_supply.kcal() );
     nc_color food_col = yours->food_supply_color();
     mvwprintz( fac_w, point( width, ++y ), food_col, food_text );
     std::pair<nc_color, std::string> vitamins = yours->vitamin_stores( vitamin_type::VITAMIN );
-    mvwprintz( fac_w, point( width, ++y ), vitamins.first, _( "Worst vitamin:" ) + vitamins.second );
+    mvwprintz( fac_w, point( width, ++y ), vitamins.first, _( "Lowest vitamin: " ) + vitamins.second );
     std::pair<nc_color, std::string> toxins = yours->vitamin_stores( vitamin_type::TOXIN );
-    mvwprintz( fac_w, point( width, ++y ), toxins.first, _( "Worst toxin:" ) + toxins.second );
+    mvwprintz( fac_w, point( width, ++y ), toxins.first, _( "Toxin levels: " ) + toxins.second );
     std::string bldg = next_upgrade( base_camps::base_dir, 1 );
     std::string bldg_full = _( "Next Upgrade: " ) + bldg;
     mvwprintz( fac_w, point( width, ++y ), col, bldg_full );
@@ -750,10 +750,10 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
             can_see = _( "You do not have a radio" );
             see_color = c_light_red;
         } else if( !guy_has_radio && u_has_radio ) {
-            can_see = _( "Follower does not have a radio" );
+            can_see = _( "Your follower does not have a radio" );
             see_color = c_light_red;
         } else {
-            can_see = _( "Both you and follower need a radio" );
+            can_see = _( "Both you and your follower need a radio" );
             see_color = c_light_red;
         }
     } else {
@@ -763,7 +763,7 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
     }
     // TODO: NPCS on mission contactable same as traveling
     if( has_companion_mission() ) {
-        can_see = _( "Press enter to recall from their mission." );
+        can_see = _( "Press enter to recall from their mission" );
         see_color = c_light_red;
     }
     mvwprintz( fac_w, point( width, ++y ), see_color, "%s", can_see );
