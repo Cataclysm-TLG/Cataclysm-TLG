@@ -1490,10 +1490,10 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
                                       "performing labor. Note that distributed food can't be recovered"
                                       ", and distributed perishables will still go bad over time.\n\n"
                                       "We have approximately %d kcal in storage, or enough for about "
-                                      "%d day(s) of moderate work for a healthy adult.\n"
+                                      "%d hour(s) of moderate work for a healthy adult.\n"
                                       "Lowest vitamin: %s\n"
                                       "Toxin levels: %s" ),
-                                   fac()->food_supply.kcal(), camp_food_supply_days( MODERATE_EXERCISE ), vitamins.second,
+                                   fac()->food_supply.kcal(), ( camp_food_supply_days( MODERATE_EXERCISE ) * 24 ), vitamins.second,
                                    toxins.second );
             mission_key.add( { miss_id, false }, name_display_of( miss_id ),
                              entry );

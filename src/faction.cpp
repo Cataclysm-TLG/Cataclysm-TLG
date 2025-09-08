@@ -393,14 +393,14 @@ std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type 
     } );
     const double worst_intake = vitamins.at( 0 ).second;
     std::string vit_name = vitamins.at( 0 ).first.obj().name();
-    std::string msg = is_toxin ? _( "(SAFE)" ) : _( "(PLENTY)" );
+    std::string msg = is_toxin ? _( "(Safe)" ) : _( "(Plenty)" );
     if( worst_intake <= 0.3 ) {
-        msg = is_toxin ? _( "(WARNING)" ) : _( "(LACKING)" );
+        msg = is_toxin ? _( "(Warning)" ) : _( "(Lacking)" );
         return std::pair<nc_color, std::string>( c_yellow, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
     if( worst_intake <= 1.0 ) {
-        msg = is_toxin ? _( "(DANGER)" ) : _( "(MEAGER)" );
+        msg = is_toxin ? _( "(Danger)" ) : _( "(Meager)" );
         return std::pair<nc_color, std::string>( c_red, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
