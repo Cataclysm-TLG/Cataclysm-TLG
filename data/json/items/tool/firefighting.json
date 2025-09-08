@@ -54,7 +54,7 @@
     "id": "fire_ax",
     "type": "TOOL",
     "name": { "str": "fire axe" },
-    "description": "A hefty two-handed axe normally used by firefighters.  It makes a powerful melee weapon, but is a bit slow to recover between swings.  Thanks to its prying head, it can also be used to force locked door and windows open.",
+    "description": "A hefty two-handed axe normally used by firefighters.  It makes a powerful melee weapon, but is a bit slow to recover between swings.  Thanks to its prying head, it can also be used to force locked doors and windows open.",
     "weight": "3628 g",
     "volume": "2 L",
     "price": "200 USD",
