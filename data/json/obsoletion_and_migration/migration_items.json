@@ -2597,5 +2597,15 @@
     "id": "workbench_with_recharger",
     "type": "MIGRATION",
     "replace": "workbench"
+  },
+  {
+    "id": "violin_golden",
+    "type": "MIGRATION",
+    "replace": "violin"
+  },
+  {
+    "id": "krar_golden",
+    "type": "MIGRATION",
+    "replace": "krar"
   }
 ]
