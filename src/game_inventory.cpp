@@ -1689,6 +1689,7 @@ drop_locations game_menus::inv::edevice_select( Character &who, item_location &u
                                has_use_check &&
                                browsed_equal_check &&
                                compatible_check &&
+                               is_not_forbidden &&
                                no_files_check;
             if( preset_bool ) {
                 add_msg_debug( debugmode::DF_ACT_EBOOK, string_format( "found edevice %s", loc->display_name() ) );
