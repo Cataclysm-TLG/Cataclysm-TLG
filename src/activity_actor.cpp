@@ -8370,23 +8370,26 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         }
     }
 
+    double total_power = std::max( 1, ( weap_bash + weap_cut + weap_stab ) );
+
     // If you have a weapon, bash specifically benefits from strength, which is counted again later regardless of damage type.
     if( weap_bash > 1 ) {
         weap_bash += you.get_arm_str();
     }
 
-    int total_power = std::min( 1, ( weap_bash + weap_cut + weap_stab ) );
+    double ratio_bash = static_cast<double>( weap_bash ) / total_power;
+    double ratio_cut  = static_cast<double>( weap_cut ) / total_power;
+    double ratio_stab = static_cast<double>( weap_stab ) / total_power;
 
-    int adjusted_bash = ( weap_bash ) / total_power;
-    // Cut is OK at this, stab is very bad.
-    int adjusted_cut = ( weap_cut / total_power ) / 2;
-    int adjusted_stab = ( weap_stab / total_power ) / 4;
+    int adjusted_bash = static_cast<int>( std::round( weap_bash * ratio_bash ) );
+    // Cut is OK at this, stab is very bad
+    int adjusted_cut  = static_cast<int>( std::round( ( weap_cut * ratio_cut ) / 1.25 ) );
+    int adjusted_stab = static_cast<int>( std::round( ( weap_stab * ratio_stab ) / 3.0 ) );
 
     float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
     // Multiplier to get the chance right + some bonus for survival skill.
-    pulp_power *= 20 + you.get_skill_level( skill_survival ) * 4;
-
+    pulp_power *= 20 + you.get_skill_level( skill_survival ) * 5;
     int moves = 0;
     for( auto pos_iter = placement.cbegin(); pos_iter != placement.end();/*left - out*/ ) {
         const tripoint_bub_ms &pos = here.get_bub( *pos_iter );
@@ -8408,14 +8411,13 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
             // Because of the square cube law, we need to sanity check pulp time vs size.
             // This is an incredibly lazy way to do it, but it works well enough.
-            units::volume divisor = 275_ml;
+            units::volume divisor = 175_ml;
             if( corpse.volume() <= 108000_ml ) {
                 divisor = 35_ml;
             } else if( corpse.volume() <= 483750_ml ) {
-                divisor = 150_ml;
+                divisor = 125_ml;
             }
             double corpse_volume_factor = corpse.volume() / divisor;
-
             while( corpse.damage() < corpse.max_damage() ) {
                 // Increase damage as we keep smashing ensuring we do eventually smash the target.
                 if( x_in_y( pulp_power, corpse_volume_factor ) ) {
@@ -8457,7 +8459,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 moves += ( ( you.attack_speed( weap ) * 2 ) / you.exertion_adjusted_move_multiplier(
                                act.exertion_level() ) );
                 if( moves >= you.get_moves() ) {
-                    // Enough for this turn;
+                    // Enough for this turn.
                     you.set_moves( you.get_moves() - moves );
                     return;
                 }
