@@ -8160,6 +8160,10 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             // If the monster is friendly, then put it in the item
             // without checking if it rolled a success.
             if( f.friendly != 0 || one_in( chance ) ) {
+                if( p->grab_1.victim != nullptr && p->grab_1.victim.get()->is_monster() &&
+                    p->grab_1.victim.get()->as_monster() == &f ) {
+                    p->release_grapple();
+                }
                 p->add_msg_if_player( _( "You capture the %1$s in your %2$s." ),
                                       f.type->nname(), it->tname() );
                 p->invalidate_weight_carried_cache();
