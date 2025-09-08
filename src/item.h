@@ -363,6 +363,8 @@ class item : public visitable
         bool is_cash_card() const;
 
         bool is_estorage() const;
+        /** Above, along with checks for power, browsed, use action */
+        bool is_estorage_usable( const Character &who ) const;
         bool is_estorable() const;
         bool is_estorable_exclusive() const;
         bool is_browsed() const;
@@ -1939,8 +1941,9 @@ class item : public visitable
         void set_var( const std::string &name, long value );
         void set_var( const std::string &name, double value );
         double get_var( const std::string &name, double default_value ) const;
-        void set_var( const std::string &name, const tripoint_abs_omt &value );
-        tripoint_abs_omt get_var( const std::string &name, const tripoint_abs_omt &default_value ) const;
+        void set_var( const std::string &name, const tripoint_abs_ms &value );
+        tripoint_abs_ms get_var( const std::string &name, const tripoint_abs_ms &default_value ) const;
+        //TODO: Add cata_variant overload for value here and for get_var rather than using raw strings where appropriate?
         void set_var( const std::string &name, const std::string &value );
         std::string get_var( const std::string &name, const std::string &default_value ) const;
         /** Get the variable, if it does not exists, returns an empty string. */
