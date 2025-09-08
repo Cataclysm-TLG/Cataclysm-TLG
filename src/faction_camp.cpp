@@ -1481,24 +1481,20 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
     if( !by_radio ) {
         {
             const mission_id miss_id = { Camp_Distribute_Food, "", {}, base_dir };
+            std::pair<nc_color, std::string> vitamins = fac()->vitamin_stores( vitamin_type::VITAMIN );
+
+            std::pair<nc_color, std::string> toxins = fac()->vitamin_stores( vitamin_type::TOXIN );
             entry = string_format( _( "Notes:\n"
-                                      "Distribute food to your follower and fill your larders.  "
-                                      "Place the food you wish to distribute in the camp food zone.  "
-                                      "You must have a camp food zone, and a camp storage zone, "
-                                      "or you will be prompted to create them using the zone manager.\n"
-                                      "Effects:\n"
-                                      "> Increases your faction's food supply value which in "
-                                      "turn is used to pay laborers for their time\n\n"
-                                      "Must have enjoyability >= -6\n"
-                                      "Perishable food liquidated at penalty depending on "
-                                      "upgrades and rot time:\n"
-                                      "> Rotten: 0%%\n"
-                                      "> Rots in < 2 days: 60%%\n"
-                                      "> Rots in < 5 days: 80%%\n\n"
-                                      "Total faction food stock: %d kcal\nor %d / %d / %d day's rations\n"
-                                      "where the days is measured for Extra / Moderate / No exercise levels" ),
-                                   fac()->food_supply.kcal(), camp_food_supply_days( EXTRA_EXERCISE ),
-                                   camp_food_supply_days( MODERATE_EXERCISE ), camp_food_supply_days( NO_EXERCISE ) );
+                                      "Distribute food from the Basecamp: Food zone to your faction.  "
+                                      "Distributed food will be banked and used to pay followers for "
+                                      "performing labor. Note that distributed food can't be recovered"
+                                      ", and distributed perishables will still go bad over time.\n\n"
+                                      "We have approximately %d kcal in storage, or enough for about "
+                                      "%d day(s) of moderate work for a healthy adult.\n"
+                                      "Lowest vitamin: %s\n"
+                                      "Toxin levels: %s" ),
+                                   fac()->food_supply.kcal(), camp_food_supply_days( MODERATE_EXERCISE ), vitamins.second,
+                                   toxins.second );
             mission_key.add( { miss_id, false }, name_display_of( miss_id ),
                              entry );
         }
