@@ -970,16 +970,16 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             // light level is now used for choosing between grayscale filter and normal lit tiles.
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
-                                 omp.raw(), subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
+                                 omp, subtile, rotation, ll, false, height_3d, 1.0f, 1.0f );
             if( !mx.is_empty() && mx->autonote ) {
-                draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp.raw(),
-                                     0, 0, ll, false );
+                draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
+                                     0, 0, ll, false, height_3d, 1.0f, 1.0f );
             }
 
             if( draw_overlays && show_map_revealed ) {
                 auto it = revealed_highlights.find( omp );
                 if( it != revealed_highlights.end() ) {
-                    draw_from_id_string( "highlight", omp.raw(), 0, 0, lit_level::LIT, false );
+                    draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, lit_level::LIT, false );
                 }
             }
 
@@ -1039,19 +1039,19 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             if( ( uistate.place_terrain || uistate.place_special ) &&
                 overmap_ui::is_generated_omt( omp.xy() ) ) {
                 // Highlight areas that already have been generated
-                draw_from_id_string( "highlight", omp.raw(), 0, 0, lit_level::LIT, false );
+                draw_from_id_string( "highlight", tripoint_bub_ms( omp.raw() ), 0, 0, lit_level::LIT, false );
             }
 
             if( draw_overlays && overmap_buffer.has_vehicle( omp ) ) {
                 const std::string tile_id = overmap_buffer.get_vehicle_tile_id( omp );
                 if( find_tile_looks_like( tile_id, TILE_CATEGORY::OVERMAP_NOTE, "" ) ) {
                     draw_from_id_string( tile_id, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp.raw(), 0, 0, lit_level::LIT, false );
+                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else {
                     const std::string ter_sym = overmap_buffer.get_vehicle_ter_sym( omp );
                     std::string note_name = "note_" + ter_sym + "_cyan";
                     draw_from_id_string( note_name, TILE_CATEGORY::OVERMAP_NOTE,
-                                         "overmap_note", omp.raw(), 0, 0, lit_level::LIT, false );
+                                         "overmap_note", omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 }
             }
 
@@ -1065,10 +1065,10 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
                     std::string note_name = "note_" + ter_sym + "_" + string_from_color( ter_color );
                     draw_from_id_string( note_name, TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
-                                         omp.raw(), 0, 0, lit_level::LIT, false );
+                                         omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
                 } else if( overmap_buffer.is_marked_dangerous( omp ) ) {
                     draw_from_id_string( "note_X_red", TILE_CATEGORY::OVERMAP_NOTE, "overmap_note",
-                                         omp.raw(), 0, 0, lit_level::LIT, false );
+                                         omp, 0, 0, lit_level::LIT, false, height_3d, 1.0f, 1.0f );
 
                 }
             }
@@ -1082,7 +1082,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         int rotation;
         int subtile;
         terrain.get_rotation_and_subtile( rotation, subtile );
-        draw_from_id_string( id, global_omt_to_draw_position( center_pos ), subtile, rotation,
+        draw_from_id_string( id, tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), subtile,
+                             rotation,
                              lit_level::LOW, true );
     }
     if( uistate.place_special ) {
@@ -1097,7 +1098,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                 terrain.get_rotation_and_subtile( rotation, subtile );
 
                 draw_from_id_string( id, TILE_CATEGORY::OVERMAP_TERRAIN, "overmap_terrain",
-                                     global_omt_to_draw_position( center_pos + rp ), 0,
+                                     tripoint_bub_ms( global_omt_to_draw_position( center_pos + rp ) ), 0,
                                      rotation, lit_level::LOW, true );
             }
         }
@@ -1120,7 +1121,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                                tripoint_bub_ms( global_omt_to_draw_position( avatar_pos ) ),
                                lit_level::LIT, height_3d, 1.0f, 1.0f );
     if( !fast_traveling ) {
-        draw_from_id_string( "cursor", global_omt_to_draw_position( center_pos ), 0, 0, lit_level::LIT,
+        draw_from_id_string( "cursor", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0, 0,
+                             lit_level::LIT,
                              false );
     }
 
@@ -1128,7 +1130,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         // Draw path for auto-travel
         for( const tripoint_abs_omt &pos : you.omt_path ) {
             if( pos.z() == center_pos.z() ) {
-                draw_from_id_string( "highlight", global_omt_to_draw_position( pos ), 0, 0, lit_level::LIT,
+                draw_from_id_string( "highlight", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0,
+                                     0, lit_level::LIT,
                                      false );
             }
         }
@@ -1136,7 +1139,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         if( g->follower_path_to_show ) {
             for( const tripoint_abs_omt &pos : g->follower_path_to_show->omt_path ) {
                 if( pos.z() == center_pos.z() ) {
-                    draw_from_id_string( "highlight", global_omt_to_draw_position( pos ), 0, 0, lit_level::LIT,
+                    draw_from_id_string( "highlight", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0,
+                                         0, lit_level::LIT,
                                          false );
                 }
             }
@@ -1146,7 +1150,8 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         const std::optional<std::pair<tripoint_abs_omt, std::string>> mission_arrow =
                     get_mission_arrow( full_om_tile_area, center_pos );
         if( mission_arrow ) {
-            draw_from_id_string( mission_arrow->second, global_omt_to_draw_position( mission_arrow->first ), 0,
+            draw_from_id_string( mission_arrow->second,
+                                 tripoint_bub_ms( global_omt_to_draw_position( mission_arrow->first ) ), 0,
                                  0, lit_level::LIT, false );
         }
     }
@@ -1155,7 +1160,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
 
         const auto abs_sm_to_draw_label = [&]( const tripoint_abs_sm & city_pos, const int label_length ) {
             const point omt_pos = global_omt_to_draw_position( project_to<coords::omt>( city_pos ) ).xy();
-            const point draw_point = player_to_screen( omt_pos );
+            const point draw_point = player_to_screen( point_bub_ms( omt_pos ) );
             // center text on the tile
             return draw_point + point( ( tile_width - label_length * fontwidth ) / 2,
                                        ( tile_height - fontheight ) / 2 );
@@ -1254,7 +1259,7 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
         auto center_sm = project_to<coords::sm>( tripoint_abs_omt( center_pos.x() + 1,
                          center_pos.y(), center_pos.z() ) );
         const point omt_pos = global_omt_to_draw_position( project_to<coords::omt>( center_sm ) ).xy();
-        point draw_point = player_to_screen( omt_pos );
+        point draw_point = player_to_screen( point_bub_ms( omt_pos ) );
         draw_point += point( padding, padding );
 
         // Draw notes header. Very simple label at the moment
