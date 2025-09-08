@@ -482,34 +482,45 @@ class cata_tiles
         bool find_overlay_looks_like( bool male, const std::string &overlay, const std::string &variant,
                                       std::string &draw_id );
 
-        bool draw_from_id_string( const std::string &id, const tripoint &pos, int subtile, int rota,
+        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll,
                                   bool apply_night_vision_goggles );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll, bool apply_night_vision_goggles );
-        bool draw_from_id_string( const std::string &id, const tripoint &pos, int subtile, int rota,
+
+        // TODO: DDA removed this one, find out why. See DDA 78815
+        bool draw_from_id_string( const std::string &id, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll,
                                   bool apply_night_vision_goggles, int &height_3d );
+
+
+        // used by sdltiles for overmap drawing.
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                  const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
+                                  lit_level ll,
+                                  bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y );
+
+
+        bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
+                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll, bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
                                   const std::string &variant );
         bool draw_from_id_string( const std::string &id, TILE_CATEGORY category,
-                                  const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                  const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                   lit_level ll, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
                                   const std::string &variant, const point &offset );
-        bool draw_from_id_string_internal( const std::string &id, const tripoint &pos, int subtile,
+        bool draw_from_id_string_internal( const std::string &id, const tripoint_bub_ms &pos, int subtile,
                                            int rota,
                                            lit_level ll, int retract, bool apply_night_vision_goggles, int &height_3d );
         bool draw_from_id_string_internal( const std::string &id, TILE_CATEGORY category,
-                                           const std::string &subcategory, const tripoint &pos, int subtile, int rota,
+                                           const std::string &subcategory, const tripoint_bub_ms &pos, int subtile, int rota,
                                            lit_level ll, int retract, bool apply_night_vision_goggles, int &height_3d, int intensity_level,
                                            const std::string &variant, const point &offset, float scale_x, float scale_y );
         bool draw_sprite_at(
@@ -557,7 +568,7 @@ class cata_tiles
         /** Drawing Layers */
         bool would_apply_vision_effects( visibility_type visibility ) const;
         bool apply_vision_effects( const tripoint_bub_ms &pos, visibility_type visibility, int &height_3d );
-        void draw_square_below( const point &p, const nc_color &col, int sizefactor );
+        void draw_square_below( const point_bub_ms &p, const nc_color &col, int sizefactor );
         bool draw_terrain( const tripoint_bub_ms &p, lit_level ll, int &height_3d,
                            const std::array<bool, 5> &invisible, bool memorize_only );
         bool draw_terrain_below( const tripoint_bub_ms &p, lit_level ll, int &height_3d,
@@ -594,7 +605,7 @@ class cata_tiles
         void draw_entity_with_overlays( const Character &ch, const tripoint_bub_ms &p, lit_level ll,
                                         int &height_3d, float scale_x, float scale_y );
 
-        void draw_entity_with_overlays( const monster &mon, const tripoint &p, lit_level ll,
+        void draw_entity_with_overlays( const monster &mon, const tripoint_bub_ms &p, lit_level ll,
                                         int &height_3d );
 
         bool draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d );
@@ -673,7 +684,7 @@ class cata_tiles
         void void_item_override();
 
         void init_draw_vpart_override( const tripoint_bub_ms &p, const vpart_id &id, int part_mod,
-                                       const units::angle &veh_dir, bool hilite, const point &mount );
+                                       const units::angle &veh_dir, bool hilite, const point_rel_ms &mount );
         void void_vpart_override();
 
         void init_draw_below_override( const tripoint_bub_ms &p, bool draw );
@@ -723,8 +734,8 @@ class cata_tiles
         static std::optional<point_bub_ms> tile_to_player(
             const point &colrow, const point_bub_ms &o,
             const point &base_tile_cnt, bool iso );
-        point player_to_tile( const point &pos ) const;
-        point player_to_screen( const point &pos ) const;
+        point player_to_tile( const point_bub_ms &pos ) const;
+        point player_to_screen( const point_bub_ms &pos ) const;
         static point_bub_ms screen_to_player(
             const point &scr_pos, const point &tile_size,
             const point &win_size, const point_bub_ms &center,
@@ -823,7 +834,7 @@ class cata_tiles
 
         tripoint_bub_ms zone_start;
         tripoint_bub_ms zone_end;
-        tripoint zone_offset;
+        tripoint_rel_ms zone_offset;
 
         // offset values, in tile coordinates, not pixels
         point o;
