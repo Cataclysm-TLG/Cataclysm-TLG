@@ -18,8 +18,7 @@
     "damage": { "damage_type": "stab", "amount": 3 },
     "dispersion": 225,
     "recovery_chance": 87,
-    "melee_damage": { "stab": 2 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 2 }
   },
   {
     "type": "AMMO",
@@ -41,8 +40,7 @@
     "range": 2,
     "dispersion": 150,
     "recovery_chance": 90,
-    "melee_damage": { "stab": 2 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 2 }
   },
   {
     "type": "AMMO",
@@ -64,8 +62,7 @@
     "range": 4,
     "dispersion": 100,
     "recovery_chance": 90,
-    "melee_damage": { "stab": 4 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 4 }
   },
   {
     "type": "AMMO",
@@ -86,8 +83,7 @@
     "range": 4,
     "dispersion": 100,
     "recovery_chance": 90,
-    "melee_damage": { "stab": 4 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 4 }
   },
   {
     "type": "AMMO",
@@ -109,8 +105,7 @@
     "range": 5,
     "dispersion": 75,
     "recovery_chance": 96,
-    "melee_damage": { "stab": 4 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 4 }
   },
   {
     "type": "AMMO",
@@ -132,8 +127,7 @@
     "range": 5,
     "dispersion": 75,
     "recovery_chance": 96,
-    "melee_damage": { "stab": 4 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 4 }
   },
   {
     "type": "AMMO",
@@ -155,7 +149,6 @@
     "range": 4,
     "dispersion": 90,
     "recovery_chance": 96,
-    "melee_damage": { "stab": 4 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 4 }
   }
 ]

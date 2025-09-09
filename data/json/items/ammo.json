@@ -578,7 +578,7 @@
     "dispersion": 14,
     "loudness": 0,
     "recovery_chance": 90,
-    "effects": [ "NEVER_MISFIRES", "NON_FOULING", "SPEAR" ]
+    "effects": [ "NEVER_MISFIRES", "NON_FOULING" ]
   },
   {
     "type": "AMMO",
@@ -600,7 +600,7 @@
     "loudness": 0,
     "count": 40,
     "recovery_chance": 50,
-    "effects": [ "NEVER_MISFIRES", "SPEAR" ]
+    "effects": [ "NEVER_MISFIRES" ]
   },
   {
     "type": "AMMO",
@@ -622,7 +622,7 @@
     "loudness": 0,
     "count": 20,
     "recovery_chance": 10,
-    "effects": [ "NEVER_MISFIRES", "SPEAR" ]
+    "effects": [ "NEVER_MISFIRES" ]
   },
   {
     "type": "AMMO",
@@ -644,7 +644,7 @@
     "loudness": 0,
     "count": 50,
     "recovery_chance": 95,
-    "effects": [ "NEVER_MISFIRES", "NON_FOULING", "SPEAR" ]
+    "effects": [ "NEVER_MISFIRES", "NON_FOULING" ]
   },
   {
     "type": "AMMO",
@@ -665,7 +665,7 @@
     "count": 500,
     "stack_size": 200,
     "loudness": 9,
-    "effects": [ "NOGIB", "NEVER_MISFIRES", "NON_FOULING", "SPEAR" ]
+    "effects": [ "NOGIB", "NEVER_MISFIRES", "NON_FOULING" ]
   },
   {
     "type": "AMMO",

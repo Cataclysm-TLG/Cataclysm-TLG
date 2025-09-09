@@ -20,8 +20,7 @@
     "dispersion": 250,
     "loudness": 0,
     "recovery_chance": 80,
-    "melee_damage": { "stab": 2 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 2 }
   },
   {
     "type": "AMMO",
@@ -46,8 +45,7 @@
     "dispersion": 180,
     "loudness": 0,
     "recovery_chance": 80,
-    "melee_damage": { "stab": 3 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 3 }
   },
   {
     "type": "AMMO",
@@ -166,8 +164,7 @@
     "damage": { "damage_type": "stab", "amount": 15, "armor_penetration": 3 },
     "range": 4,
     "recovery_chance": 70,
-    "melee_damage": { "stab": 5 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 5 }
   },
   {
     "type": "AMMO",
@@ -183,8 +180,7 @@
     "damage": { "damage_type": "stab", "amount": 13, "armor_penetration": 6 },
     "range": 4,
     "recovery_chance": 70,
-    "melee_damage": { "stab": 5 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 5 }
   },
   {
     "type": "AMMO",
@@ -200,8 +196,7 @@
     "damage": { "damage_type": "stab", "amount": 14, "armor_penetration": 3 },
     "range": 4,
     "recovery_chance": 95,
-    "melee_damage": { "stab": 5 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 5 }
   },
   {
     "type": "AMMO",
@@ -234,8 +229,7 @@
       "menu_text": "Light arrow",
       "type": "transform"
     },
-    "melee_damage": { "stab": 3 },
-    "effects": [ "SPEAR" ]
+    "melee_damage": { "stab": 3 }
   },
   {
     "type": "AMMO",
@@ -247,7 +241,7 @@
     "color": "brown",
     "revert_to": "arrow_wood",
     "recovery_chance": 40,
-    "effects": [ "IGNITE", "SPEAR" ],
+    "effects": [ "IGNITE" ],
     "flags": [ "TRADER_AVOID" ]
   }
 ]
