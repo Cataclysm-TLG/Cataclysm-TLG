@@ -2580,7 +2580,6 @@ void Character::process_turn()
     }
 
     // TODO: Maybe a unified function for terrain effects?
-    map &here = get_map();
     if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub() ) &&
         !here.has_vehicle_floor( pos_bub() ) && !has_effect( effect_bouldering ) ) {
         add_effect( effect_bouldering, 1_turns, true );
@@ -11595,7 +11594,7 @@ void Character::process_effects()
 void Character::gravity_check()
 {
     map &here = get_map();
-    gravity_check( here );
+    gravity_check( &here );
 }
 
 void Character::gravity_check( map *here )

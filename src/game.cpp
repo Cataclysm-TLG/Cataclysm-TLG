@@ -5636,13 +5636,6 @@ bool game::is_empty( map *here, const tripoint_abs_ms &p )
            get_creature_tracker().creature_at( p ) == nullptr;
 }
 
-bool game::is_empty( map *here, const tripoint_abs_ms &p )
-{
-    const tripoint_bub_ms pos = here->get_bub( p );
-    return ( here->passable( pos ) || here->has_flag( ter_furn_flag::TFLAG_LIQUID, pos ) ) &&
-           get_creature_tracker().creature_at( p ) == nullptr;
-}
-
 bool game::is_in_sunlight( const tripoint_bub_ms &p )
 {
     return !is_sheltered( p ) &&

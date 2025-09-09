@@ -392,7 +392,7 @@ void monster::gravity_check()
 void monster::gravity_check( map *here )
 {
     const tripoint_bub_ms pos = here->get_bub( pos_abs() );
-    if( here->is_open_air( pos ) && !flies() && !here.has_vehicle_floor( pos_bub() ) ) {
+    if( here->is_open_air( pos ) && !flies() && !here->has_vehicle_floor( pos_bub() ) ) {
         here->try_fall( pos, this );
     }
 }
@@ -2475,7 +2475,7 @@ bool monster::move_effects( bool, tripoint_bub_ms dest_loc )
                 continue;
             }
             if( friendly == 0 ) {
-                on_hit( grabber, bodypart_id( "torso" ), INT_MIN );
+                on_hit( &here, grabber, bodypart_id( "torso" ), INT_MIN );
                 if( type->has_anger_trigger( mon_trigger::HURT ) ) {
                     anger += 5;
                     if( grabber != nullptr && !grabber->is_monster() && !grabber->is_fake() ) {
@@ -2942,7 +2942,7 @@ void monster::die( map *here, Creature *nkiller )
 
     if( has_effect_with_flag( json_flag_GRAB ) ) {
         // The monster on monster stuff is pretty hacky, but has worked out so far.
-        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
+        const tripoint_range<tripoint_bub_ms> &surrounding = here->points_in_radius( pos_bub(), 1, 0 );
         Creature *grabber = nullptr;
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
             // Is our grabber around?

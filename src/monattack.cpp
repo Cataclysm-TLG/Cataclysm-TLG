@@ -881,7 +881,7 @@ bool mattack::acid_barf( monster *z )
             body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
 
     return true;
 }
@@ -2100,7 +2100,7 @@ bool mattack::fungus_inject( monster *z )
                  body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
     player_character.check_dead_state( &here );
 
     return true;
@@ -2158,7 +2158,7 @@ bool mattack::fungus_bristle( monster *z )
                                    z->name(), body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
 
     return true;
 }
@@ -2316,7 +2316,7 @@ bool mattack::fungus_fortify( monster *z )
                  body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
     player_character.check_dead_state( &here );
     return true;
 }
@@ -3864,7 +3864,7 @@ bool mattack::flesh_golem( monster *z )
     //~ 1$s is bodypart name, 2$d is damage value.
     target->add_msg_if_player( m_bad, _( "Your %1$s is battered for %2$d damage!" ),
                                body_part_name( hit ), dam );
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
 
     return true;
 }
@@ -3996,7 +3996,7 @@ bool mattack::lunge( monster *z )
     if( one_in( 6 ) ) {
         target->add_effect( effect_downed, 3_turns );
     }
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
     target->check_dead_state( &here );
     return true;
 }
@@ -4686,7 +4686,7 @@ bool mattack::bio_op_takedown( monster *z )
         target->add_msg_if_player( m_bad, _( "and slams you for %d damage!" ), dam );
         foe->deal_damage( z, bodypart_id( "torso" ), damage_instance( damage_bash, dam ) );
     }
-    target->on_hit( &here, z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
     foe->check_dead_state( &here );
 
     return true;
@@ -5200,7 +5200,7 @@ bool mattack::stretch_attack( monster *z )
                                        z->name(),
                                        body_part_name_accusative( hit ) );
 
-        target->check_dead_state();
+        target->check_dead_state( &here );
     } else {
         target->add_msg_player_or_npc( _( "The %1$s arm hits your %2$s, but glances off your armor!" ),
                                        _( "The %1$s hits <npcname>'s %2$s, but glances off armor!" ),
@@ -5208,7 +5208,7 @@ bool mattack::stretch_attack( monster *z )
                                        body_part_name_accusative( hit ) );
     }
 
-    target->on_hit( z, hit,  z->type->melee_skill );
+    target->on_hit( &here, z, hit, z->type->melee_skill );
 
     return true;
 }
