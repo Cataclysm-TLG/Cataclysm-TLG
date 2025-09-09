@@ -3624,7 +3624,7 @@ tripoint_bub_ms vehicle::bub_part_pos( const vehicle_part &pt ) const
 void vehicle::set_submap_moved( const tripoint_sm_ms &p )
 {
     const point_abs_ms old_msp = pos_abs().xy();
-    sm_pos = p;
+    sm_pos = p.raw();
     if( !tracking_on ) {
         return;
     }
