@@ -1003,7 +1003,7 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots, item &gun, it
         return 0;
     }
     if( gun.has_flag( flag_CHOKE ) && !gun.ammo_effects().count( ammo_effect_SHOT ) ) {
-        add_msg_if_player( _( "A shotgun equipped with choke cannot fire slugs." ) );
+        add_msg_if_player( _( "A shotgun equipped with a choke cannot fire slugs." ) );
         return 0;
     }
     if( gun.ammo_required() > 0 && !gun.ammo_remaining() && !ammo ) {
@@ -1511,8 +1511,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     proj_effects.insert( ammo_effect_NO_ITEM_DAMAGE );
 
     if( thrown.active ) {
-        // Can't have Molotovs embed into monsters
-        // Monsters don't have inventory processing
+        // Can't have Molotovs embed into monsters as monsters don't have inventory processing
         proj_effects.insert( ammo_effect_NO_EMBED );
     }
 
@@ -2142,7 +2141,7 @@ static int print_aim( const target_ui &ui, Character &you, const catacurses::win
                       int line_number, input_context &ctxt, const item &weapon, const tripoint_bub_ms &pos,
                       item_location &load_loc )
 {
-    // This is absolute accuracy for the player.
+    // This is an accuracy estimate for the player.
     // TODO: push the calculations duplicated from Creature::deal_projectile_attack() and
     // Creature::projectile_attack() into shared methods.
     // Dodge doesn't affect gun attacks

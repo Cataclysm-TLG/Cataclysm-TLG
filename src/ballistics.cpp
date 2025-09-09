@@ -51,6 +51,7 @@ static const ammo_effect_str_id ammo_effect_NO_OVERSHOOT( "NO_OVERSHOOT" );
 static const ammo_effect_str_id ammo_effect_NO_PENETRATE_OBSTACLES( "NO_PENETRATE_OBSTACLES" );
 static const ammo_effect_str_id ammo_effect_NULL_SOURCE( "NULL_SOURCE" );
 static const ammo_effect_str_id ammo_effect_SHATTER_SELF( "SHATTER_SELF" );
+static const ammo_effect_str_id ammo_effect_SPEAR( "SPEAR" );
 static const ammo_effect_str_id ammo_effect_STREAM( "STREAM" );
 static const ammo_effect_str_id ammo_effect_STREAM_BIG( "STREAM_BIG" );
 static const ammo_effect_str_id ammo_effect_STREAM_TINY( "STREAM_TINY" );
@@ -281,6 +282,8 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
     const bool null_source = proj_effects.count( ammo_effect_NULL_SOURCE ) > 0;
     // Determines whether it can penetrate obstacles
     const bool is_bullet = proj_arg.speed >= 200 &&
+                           !proj_effects.count( ammo_effect_NO_PENETRATE_OBSTACLES );
+    const bool spear = proj_effects.count( ammo_effect_SPEAR ) &&
                            !proj_effects.count( ammo_effect_NO_PENETRATE_OBSTACLES );
 
     // If we were targeting a tile rather than a monster, don't overshoot
@@ -554,12 +557,17 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 // to cancel out of applying the other projectiles.
                 proj.count = 1;
             }
-
-            if( ( !has_momentum || !is_bullet ) && here.impassable( tp ) ) {
-                // Don't let flamethrowers go through walls
-                // TODO: Let them go through bars
-                traj_len = i;
-                break;
+            
+            // Gases, liquids, and narrow projectiles can go through bars, but not walls.
+            if( here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, tp ) && ( ( !stream && !spear && !is_bullet ) || !has_momentum ) ) {
+                    traj_len = i;
+                    break;
+            }
+            if( here.impassable( tp ) && !here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, tp ) ) {
+                if( ( !has_momentum || !is_bullet ) ) {
+                    traj_len = i;
+                    break;
+                }
             }
             prev_point = tp;
         }
