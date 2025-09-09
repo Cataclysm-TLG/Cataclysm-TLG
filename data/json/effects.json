@@ -3981,8 +3981,8 @@
     "name": [ "", "Concerning symptoms", "Unnerving symptoms" ],
     "desc": [
       "",
-      "Your muscles keep twitching strangely.",
-      "Your nervous system is malfunctioning, almost like it's being torn apart from the inside."
+      "You feel shaky and your muscles keep cramping up.",
+      "Your extremities feel numb, with occasional painful tingling and convulsions."
     ],
     "base_mods": { "h_mod_min": [ -1 ], "h_mod_chance": [ 1 ], "h_mod_chance_bot": [ 5 ], "h_mod_tick": [ 1800 ] },
     "max_intensity": 3,
