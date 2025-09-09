@@ -1723,7 +1723,8 @@ class item : public visitable
          * @param it the item being put in
          * @param nested whether or not the current call is nested (used recursively).
          * @param ignore_pkt_settings whether to ignore pocket autoinsert settings
-         * @param remaining_parent_volume the amount of space in the parent pocket,
+         * @param ignore_non_container_pocket ignore magazine pockets, such as weapon magazines
+         * @param remaining_parent_volume the ammount of space in the parent pocket,
          * @param allow_nested whether nested pockets should be checked
          * needed to make sure we dont try to nest items which can't fit in the nested pockets
          */
@@ -1731,14 +1732,14 @@ class item : public visitable
         ret_val<void> can_contain( const item &it, bool nested = false,
                                    bool ignore_rigidity = false,
                                    bool ignore_pkt_settings = true,
-                                   bool is_pick_up_inv = false,
+                                   bool ignore_non_container_pocket = false,
                                    const item_location &parent_it = item_location(),
                                    units::volume remaining_parent_volume = 10000000_ml,
                                    bool allow_nested = true ) const;
         ret_val<void> can_contain( const item &it, int &copies_remaining, bool nested = false,
                                    bool ignore_rigidity = false,
                                    bool ignore_pkt_settings = true,
-                                   bool is_pick_up_inv = false,
+                                   bool ignore_non_container_pocket = false,
                                    const item_location &parent_it = item_location(),
                                    units::volume remaining_parent_volume = 10000000_ml,
                                    bool allow_nested = true ) const;
@@ -1847,11 +1848,11 @@ class item : public visitable
         // spill items that don't fit in the container
         void overflow( const tripoint_bub_ms &pos, const item_location &loc = item_location::nowhere );
 
-        /** Checks if item is a holster and currently capable of storing obj
-         *  @param obj object that we want to holster
-         *  @param ignore only check item is compatible and ignore any existing contents
+        /**
+         * Check if item is a holster and currently capable of storing obj.
+         * @param obj object that we want to holster.
          */
-        bool can_holster( const item &obj, bool ignore = false ) const;
+        bool can_holster( const item &obj ) const;
 
         /**
          * Callback when a character starts wearing the item. The item is already in the worn
