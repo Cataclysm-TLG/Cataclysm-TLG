@@ -2607,5 +2607,10 @@
     "id": "krar_golden",
     "type": "MIGRATION",
     "replace": "krar"
+  },
+  {
+    "id": "egg_stag_beetle",
+    "type": "MIGRATION",
+    "replace": "egg_grasshopper"
   }
 ]
