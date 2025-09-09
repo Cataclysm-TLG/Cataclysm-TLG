@@ -555,11 +555,10 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 proj.count = 1;
             }
             
-            // Gases, liquids, and narrow projectiles can go through bars, but not walls.
-            if( here.impassable( tp ) && !has_momentum || !is_bullet ) {
+            // Gases, liquids, and tiny projectiles can go through bars, but not walls.
+            if( here.impassable( tp ) && ( !has_momentum || !is_bullet ) ) {
                     traj_len = i;
                     break;
-                }
             }
             prev_point = tp;
         }
