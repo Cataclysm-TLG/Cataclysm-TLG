@@ -1542,9 +1542,9 @@
   {
     "type": "terrain",
     "id": "t_reinforced_glass_shutter",
-    "name": "reinforced glass with closed shutters",
+    "name": "wired glass with closed shutters",
     "looks_like": "t_wall_metal",
-    "description": "A secondary layer of protection over reinforced glass, these metal shutters are typically used to ward off criminals or protect against damage from extreme weather.  Looks like it can only be opened from the inside.  Even with the installed shutters, it isn't feasible in supporting a roof.",
+    "description": "Metal shutters cover this wired glass barrier, blocking out the view and adding some sturdy protection.  They should be openable, but only from the inside.",
     "symbol": "#",
     "color": "light_gray",
     "move_cost": 0,
@@ -1579,9 +1579,9 @@
   {
     "type": "terrain",
     "id": "t_reinforced_glass_shutter_open",
-    "name": "reinforced glass with open shutters",
+    "name": "wired glass with open shutters",
     "looks_like": "t_reinforced_glass",
-    "description": "Hanging metal shutters that haven't been deployed, exposing the reinforced glass.  It appears as though the metal shutters can only be activated from the inside.",
+    "description": "Hanging metal shutters that haven't been deployed, exposing the wired glass.  It appears as though the metal shutters can only be closed from the inside.",
     "symbol": "#",
     "color": "light_cyan",
     "move_cost": 0,
