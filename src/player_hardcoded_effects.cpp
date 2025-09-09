@@ -923,14 +923,11 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
     }
     if( one_in( 900 / intense ) && !u.in_sleep_state() ) {
         // level 1 symptoms are cold limbs, pale skin, and weakness
-        switch( dice( 1, 9 ) ) {
+        switch( dice( 1, 8 ) ) {
             case 1:
-                u.add_msg_if_player( m_bad, _( "Your hands feel unusually cold." ) );
+                u.add_msg_if_player( m_bad, _( "Your extremities feel unusually cold." ) );
                 u.mod_part_temp_conv( bodypart_id( "hand_l" ), -4_C_delta );
                 u.mod_part_temp_conv( bodypart_id( "hand_r" ), -4_C_delta );
-                break;
-            case 2:
-                u.add_msg_if_player( m_bad, _( "Your feet feel unusually cold." ) );
                 u.mod_part_temp_conv( bodypart_id( "foot_l" ), -4_C_delta );
                 u.mod_part_temp_conv( bodypart_id( "foot_r" ), -4_C_delta );
                 break;
@@ -938,13 +935,13 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
                 u.add_msg_if_player( m_bad, _( "Your skin looks very pale." ) );
                 break;
             case 4:
-                u.add_msg_if_player( m_bad, _( "You feel weak.  Where has your strength gone?" ) );
+                u.add_msg_if_player( m_bad, _( "You feel weak." ) );
                 break;
             case 5:
-                u.add_msg_if_player( m_bad, _( "You feel feeble.  A gust of wind could make you stumble." ) );
+                u.add_msg_if_player( m_bad, _( "You really want to just sit and do nothing for a while." ) );
                 break;
             case 6:
-                u.add_msg_if_player( m_bad, _( "There is an overwhelming aura of tiredness inside of you." ) );
+                u.add_msg_if_player( m_bad, _( "You're having trouble catching your breath." ) );
                 u.mod_fatigue( intense * 3 );
                 break;
             case 7: // 7-9 empty for variability, as messages stack on higher intensity
@@ -957,24 +954,24 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
         if( intense > 1 ) {
             switch( dice( 1, 9 ) ) {
                 case 1:
-                    u.add_msg_if_player( m_bad, _( "Rest is what you want.  Rest is what you need." ) );
+                    u.add_msg_if_player( m_bad, _( "" ) );
                     break;
                 case 2:
-                    u.add_msg_if_player( m_bad, _( "You feel dizzy and can't coordinate the movement of your feet." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel dizzy!" ) );
                     u.add_effect( effect_stunned, rng( 1_minutes, 2_minutes ) );
                     break;
                 case 3:
-                    u.add_msg_if_player( m_bad, _( "Your muscles are quivering." ) );
+                    u.add_msg_if_player( m_bad, _( "Your weakness gives way to tremors." ) );
                     u.add_effect( effect_shakes, rng( 4_minutes, 8_minutes ) );
                     break;
                 case 4:
-                    u.add_msg_if_player( m_bad, _( "You crave for ice.  The dirt under your feet looks tasty too." ) );
+                    u.add_msg_if_player( m_bad, _( "You have the strangest craving for ice." ) );
                     break;
                 case 5:
-                    u.add_msg_if_player( m_bad, _( "Your whole mouth is sore, and your tongue is swollen." ) );
+                    u.add_msg_if_player( m_bad, _( "Your whole mouth feels sore, and your tongue is swollen." ) );
                     break;
                 case 6:
-                    u.add_msg_if_player( m_bad, _( "You feel lightheaded.  A migraine follows." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel lightheaded, and a headache pounds in your temples." ) );
                     u.mod_pain( intense * 9 );
                     break;
                 case 7: // 7-9 empty for variability, as messages stack on higher intensity
@@ -990,7 +987,7 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
                     u.add_msg_if_player( m_bad, _( "Your legs are restless.  The urge to move them is so strong." ) );
                     break;
                 case 2:
-                    u.add_msg_if_player( m_bad, _( "You feel like you could sleep on a rock." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel drained of life, you just want to lie down." ) );
                     u.mod_fatigue( intense * 3 );
                     break;
                 case 3:
@@ -1629,18 +1626,21 @@ void Character::hardcoded_effects( effect &it )
                                            _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
                     if( limb == "arm" ) {
                         mod_dex_bonus( -8 );
+                        release_grapple();
                         recoil = MAX_RECOIL;
                     } else if( limb == "hand" ) {
+                        release_grapple();
                         if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
                             if( dice( 4, 4 ) > get_dex() ) {
                                 cancel_activity();  //Prevent segfaults from activities trying to access missing item
                                 put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
                             } else {
-                                add_msg_if_player( m_neutral, _( "However, you manage to keep hold of your weapon." ) );
+                                add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
+                                                   get_wielded_item()->tname() );
                             }
                         }
-                    } else if( limb == "leg" ) {
-                        if( dice( 4, 4 ) > get_dex() && !is_on_ground() ) {
+                    } else if( limb == "leg" && !is_on_ground() ) {
+                        if( dice( 4, 4 ) > get_dex() ) {
                             schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
                         } else {
                             add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
@@ -1650,7 +1650,7 @@ void Character::hardcoded_effects( effect &it )
                 // Atonic seizure (a.k.a. drop seizure)
                 if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) ) {
                     add_msg_if_player( m_bad,
-                                       _( "You suddenly lose all muscle tone, and can't support your own weight!" ) );
+                                       _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
                     schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
                     if( !is_on_ground() ) {
                         schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
@@ -1664,7 +1664,6 @@ void Character::hardcoded_effects( effect &it )
                     add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
                     mod_pain( 12 );
                 }
-
                 break;
         }
     }
