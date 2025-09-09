@@ -445,6 +445,7 @@ static void shoot_monster( const std::string &gun_type, const std::vector<std::s
                            const std::function<bool ( const standard_npc &, const monster & )> &other_checks = nullptr,
                            const Approx &expected_other_checks = Approx( 0 ) )
 {
+    map &here = get_map();
     clear_map();
     statistics<int> damage;
     constexpr tripoint_bub_ms shooter_pos{ 60, 60, 0 };
@@ -467,10 +468,7 @@ static void shoot_monster( const std::string &gun_type, const std::vector<std::s
         if( damage.margin_of_error() < 0.05 && damage.n() > 500 ) {
             break;
         }
-        if( other_checks ) {
-            other_check_success += other_checks( *shooter, mon );
-        }
-        mon.die( nullptr );
+        mon.die( &here, nullptr );
     } while( damage.n() < 1000 ); // In fact, stable results can only be obtained when n reaches 10000
     const double avg = damage.avg();
     CAPTURE( gun_type );

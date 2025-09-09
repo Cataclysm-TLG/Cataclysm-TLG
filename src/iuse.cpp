@@ -749,7 +749,7 @@ std::optional<int> iuse::fungicide( Character *p, item *, const tripoint_bub_ms 
                                                 critter.name() );
                     }
                     if( !critter.make_fungus() ) {
-                        critter.die( p ); // counts as kill by player
+                        critter.die( &here, p ); // counts as kill by player
                     }
                 } else {
                     g->place_critter_at( mon_spore, dest );
@@ -1571,6 +1571,8 @@ std::optional<int> iuse::mycus( Character *p, item *, const tripoint_bub_ms & )
 
 std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+
     if( !it->is_comestible() ) {
         p->add_msg_if_player( _( "You doubt someone would want to eat %1$s." ), it->tname() );
         return std::nullopt;
@@ -1626,7 +1628,7 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
         if( halluc && one_in( 4 ) ) {
             p->add_msg_if_player( _( "You try to feed the %1$s some %2$s, but it vanishes!" ),
                                   mon->type->nname(), it->tname() );
-            mon->die( nullptr );
+            mon->die( &here, nullptr );
             return std::nullopt;
         }
 
@@ -4064,6 +4066,8 @@ std::optional<int> iuse::solarpack( Character *p, item *it, const tripoint_bub_m
 
 std::optional<int> iuse::solarpack_off( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+
     if( !p ) {
         debugmsg( "%s called action solarpack_off that requires character but no character is present",
                   it->typeId().str() );
@@ -4080,7 +4084,7 @@ std::optional<int> iuse::solarpack_off( Character *p, item *it, const tripoint_b
     // 3 = "_on"
     it->convert( itype_id( it->typeId().str().substr( 0,
                            it->typeId().str().size() - 3 ) ), p ).active = false;
-    p->process_items(); // Process carried items to disconnect any connected cables
+    p->process_items( &here ); // Process carried items to disconnect any connected cables
     return 0;
 }
 

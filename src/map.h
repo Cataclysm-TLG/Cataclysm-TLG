@@ -1672,7 +1672,7 @@ class map
         void drop_items( const tripoint_bub_ms &p );
         void drop_vehicle( const tripoint_bub_ms &p );
         void drop_fields( const tripoint_bub_ms &p );
-        void drop_creature( const tripoint_bub_ms &p ) const;
+        void drop_creature( const tripoint_bub_ms &p );
         /*@}*/
     public:
         /**

@@ -426,6 +426,8 @@ TEST_CASE( "shearing", "[activity][shearing][animals]" )
 
     SECTION( "shearing losing tool" ) {
         GIVEN( "an electric tool with shearing quality three" ) {
+            map &here = get_map();
+
             clear_avatar();
             clear_map();
             monster &mon = test_monster( true );
@@ -455,7 +457,7 @@ TEST_CASE( "shearing", "[activity][shearing][animals]" )
 
             WHEN( "tool runs out of charges mid activity" ) {
                 for( int i = 0; i < 10000; ++i ) {
-                    dummy.process_items();
+                    dummy.process_items( &here );
                 }
 
                 CHECK( dummy.get_wielded_item()->ammo_remaining() == 0 );
