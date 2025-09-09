@@ -4417,7 +4417,8 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
                                      you.pos_bub() ).part_with_feature( "MOUNTABLE",
                                              true ) );
         bool t_mountable = m.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, you.pos_bub() );
-        bool no_mount_needed = ( you.enum_size() == 5 && you.str_cur >= 16 ) || ( you.enum_size() == 4 && you.str_cur >= 30 );
+        bool no_mount_needed = ( you.enum_size() == 5 && you.str_cur >= 16 ) || ( you.enum_size() == 4 &&
+                               you.str_cur >= 30 );
         if( !t_mountable && !v_mountable && !no_mount_needed ) {
             messages.push_back( string_format(
                                     _( "You must stand near acceptable terrain or furniture to fire the %s.  A table, a mound of dirt, a broken window, etc." ),
