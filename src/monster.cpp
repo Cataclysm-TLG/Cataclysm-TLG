@@ -3912,7 +3912,7 @@ void monster::on_hit( map *here, Creature *source, bodypart_id,
     }
     if( source != nullptr ) {
         if( Character *attacker = source->as_character() ) {
-            type->families.practice_hit( *attacker );    
+            type->families.practice_hit( *attacker );
             enchantment_cache->cast_hit_me( *attacker, source );
         }
     }
