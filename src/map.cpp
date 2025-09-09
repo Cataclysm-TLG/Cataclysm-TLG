@@ -4624,14 +4624,23 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     } else {
         ter_hit = true;
     }
-    if( coverage < 100 ) {
-        if( dist <= 1 ) {
-            coverage = 0;
-        } else if( dist == 2 ) {
+    /** hit_items is true if we specifically targeted this tile and our ammo is a type that can
+    * damage items. Checking it here means we can intentionally shoot a piece of cover point blank
+    * and actually hit it if we want to do so for some reason.
+    */
+    if( coverage < 100  ) {
+        // Point blank shots should always hit inanimate targets.
+        if( dist <= 1 || square_dist( p, source ) == 1 ) {
+            if( hit_items ) {
+                coverage = 100;
+            } else {
+                coverage = 0;
+            }
+        } else if( dist == 2 && !hit_items ) {
             coverage *= 0.25;
-        } else if( dist == 3 ) {
+        } else if( dist == 3 && !hit_items ) {
             coverage *= 0.5;
-        } else if( dist == 4 ) {
+        } else if( dist == 4 && !hit_items ) {
             coverage *= 0.75;
         }
     }

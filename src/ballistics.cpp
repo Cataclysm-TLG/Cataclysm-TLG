@@ -554,12 +554,11 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 // to cancel out of applying the other projectiles.
                 proj.count = 1;
             }
-
-            if( ( !has_momentum || !is_bullet ) && here.impassable( tp ) ) {
-                // Don't let flamethrowers go through walls
-                // TODO: Let them go through bars
-                traj_len = i;
-                break;
+            
+            // Gases, liquids, and tiny projectiles can go through bars, but not walls.
+            if( here.impassable( tp ) && ( !has_momentum || !is_bullet ) ) {
+                    traj_len = i;
+                    break;
             }
             prev_point = tp;
         }
