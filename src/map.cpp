@@ -4628,7 +4628,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     * damage items. Checking it here means we can intentionally shoot a piece of cover point blank
     * and actually hit it if we want to do so for some reason.
     */
-    if( coverage < 100  ) {
+    if( coverage < 100 ) {
         // Point blank shots should always hit inanimate targets.
         if( dist <= 1 || square_dist( p, source ) == 1 ) {
             if( hit_items ) {
