@@ -2612,5 +2612,10 @@
     "id": "egg_stag_beetle",
     "type": "MIGRATION",
     "replace": "egg_grasshopper"
+  },
+  {
+    "id": "compact_ASRG_containment",
+    "type": "MIGRATION",
+    "replace": "egg_grasshopper"
   }
 ]
