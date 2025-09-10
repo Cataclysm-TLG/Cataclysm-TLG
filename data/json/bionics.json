@@ -592,12 +592,7 @@
     "description": "Your reaction time has been greatly enhanced with bionic nerve stimulators, giving you a +2 bonus to dexterity.",
     "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [
-      {
-        "condition": "ACTIVE",
-        "values": [ { "value": "DEXTERITY", "add": 2 } ]
-      }
-    ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] } ],
     "act_cost": "5 J",
     "react_cost": "5 J",
     "time": "1 s"
@@ -1008,12 +1003,7 @@
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
     "occupied_bodyparts": [ [ "head", 6 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [
-      {
-        "condition": "ACTIVE",
-        "values": [ { "value": "INTELLIGENCE", "add": 2 } ]
-      }
-    ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] } ],
     "act_cost": "5 J",
     "react_cost": "5 J",
     "time": "1 s"
@@ -1407,12 +1397,7 @@
       [ "foot_r", 2 ]
     ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [
-      {
-        "condition": "ACTIVE",
-        "values": [ { "value": "SPEED", "multiply": 0.1 } ]
-      }
-    ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "SPEED", "multiply": 0.1 } ] } ],
     "act_cost": "10 J",
     "react_cost": "10 J",
     "time": "1 s"
@@ -1441,12 +1426,7 @@
     "description": "Your muscular system has been surgically enhanced with myomer fibers, giving you a +2 bonus to strength.",
     "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [
-      {
-        "condition": "ACTIVE",
-        "values": [ { "value": "STRENGTH", "add": 2 } ]
-      }
-    ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] } ],
     "act_cost": "5 J",
     "react_cost": "5 J",
     "time": "1 s"
