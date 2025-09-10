@@ -376,7 +376,7 @@
       "X": "f_cardboard_box"
     },
     "item": { "N": { "item": "movie_poster", "chance": 100 } },
-    "vendingmachines": { "$": { "item_group": "vending_drink", "lootable": true }, "V": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "$": { "item_group": "vending_drink"  }, "V": { "item_group": "vending_food"  } },
     "toilets": { "T": {  } }
   }
 ]

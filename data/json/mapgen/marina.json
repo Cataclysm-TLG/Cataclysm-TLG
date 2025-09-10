@@ -164,8 +164,8 @@
       },
       "toilets": { "&": {  } },
       "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 13, "y": 59, "lootable": true },
-        { "item_group": "vending_drink", "x": 13, "y": 60, "lootable": true }
+        { "item_group": "vending_food", "x": 13, "y": 59  },
+        { "item_group": "vending_drink", "x": 13, "y": 60  }
       ],
       "items": {
         "f": { "item": "SUS_fridge", "chance": 80 },

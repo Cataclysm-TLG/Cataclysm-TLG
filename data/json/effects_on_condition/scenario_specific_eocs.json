@@ -120,23 +120,6 @@
   },
   {
     "type": "effect_on_condition",
-    "id": "scenario_assassin_convict",
-    "//": "Determines which prison the convict is in to figure out where the mark is.",
-    "recurrence": 1,
-    "condition": { "u_has_trait": "PROF_ASSASSIN_CONVICT" },
-    "deactivate_condition": { "not": { "u_has_trait": "PROF_ASSASSIN_CONVICT" } },
-    "effect": [
-      { "if": { "u_near_om_location": "prison_1_5" }, "then": { "assign_mission": "MISSION_ASSASSIN_CONVICT_PRISON" } },
-      {
-        "if": { "u_near_om_location": "prison_alcatraz_3" },
-        "then": { "assign_mission": "MISSION_ASSASSIN_CONVICT_PRISON_ISLAND1" },
-        "else": { "assign_mission": "MISSION_ASSASSIN_CONVICT_PRISON_ISLAND2" }
-      },
-      { "u_message": "Now… Where is your mark?", "type": "warning", "popup": true }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
     "id": "faction_camp_start",
     "effect": [ { "mapgen_update": "faction_start_add" } ]
   },

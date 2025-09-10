@@ -227,6 +227,16 @@ void Creature::setpos( map *here, const tripoint_bub_ms &p, bool check_gravity/*
     }
 }
 
+void Creature::setpos( const tripoint_abs_ms &p, bool check_gravity/* = true*/ )
+{
+    const tripoint_abs_ms old_loc = pos_abs();
+    set_pos_abs_only( p );
+    on_move( old_loc );
+    if( check_gravity ) {
+        gravity_check();
+    }
+}
+
 static units::volume size_to_volume( creature_size size_class )
 {
     // TODO: size_to_volume and volume_to_size should be made into a single consistent function.

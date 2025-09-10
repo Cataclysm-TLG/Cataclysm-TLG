@@ -70,6 +70,6 @@
       "x": { "item": "SUS_welding_gear", "chance": 30, "repeat": [ 1, 2 ] }
     },
     "toilets": { "t": {  } },
-    "vendingmachines": { "j": { "item_group": "vending_drink", "lootable": true }, "V": { "item_group": "vending_food", "lootable": true } }
+    "vendingmachines": { "j": { "item_group": "vending_drink"  }, "V": { "item_group": "vending_food"  } }
   }
 ]

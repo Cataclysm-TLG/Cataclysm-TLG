@@ -151,7 +151,7 @@
         ",,%,,,,[,,%,,,,,,,#########££###########################################"
       ],
       "palettes": [ "hospital" ],
-      "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "E": { "item_group": "vending_food", "lootable": true } },
+      "vendingmachines": { "D": { "item_group": "vending_drink"  }, "E": { "item_group": "vending_food"  } },
       "computers": {
         "6": {
           "name": "Centrifuge",

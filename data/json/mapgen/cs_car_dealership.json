@@ -61,7 +61,7 @@
         "T": "f_toilet",
         "s": "f_sofa"
       },
-      "vendingmachines": { "v": { "item_group": "vending_drink", "lootable": true }, "V": { "item_group": "vending_food", "lootable": true } },
+      "vendingmachines": { "v": { "item_group": "vending_drink"  }, "V": { "item_group": "vending_food"  } },
       "place_vehicles": [
         { "vehicle": "oa_vg_cd_vehicles", "x": 4, "y": 5, "rotation": 270, "chance": 70, "fuel": 0 },
         { "vehicle": "oa_vg_cd_vehicles", "x": 11, "y": 5, "rotation": 270, "chance": 70, "fuel": 0 },

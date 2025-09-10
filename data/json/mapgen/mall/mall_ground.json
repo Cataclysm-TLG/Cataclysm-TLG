@@ -141,8 +141,8 @@
       },
       "furniture": { "%": [ "f_indoor_plant", "f_indoor_plant_y" ], "*": "f_trashcan", "Á": "f_console_broken", "¤": "f_bulletin" },
       "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 99, "y": 6, "lootable": true },
-        { "item_group": "vending_drink", "x": 100, "y": 6, "lootable": true }
+        { "item_group": "vending_food", "x": 99, "y": 6  },
+        { "item_group": "vending_drink", "x": 100, "y": 6  }
       ],
       "items": {
         "d": [
@@ -555,8 +555,8 @@
         "!": { "param": "linoleum_color", "fallback": "t_linoleum_white" }
       },
       "place_vendingmachines": [
-        { "item_group": "vending_drink", "x": 74, "y": 17, "lootable": true },
-        { "item_group": "vending_food", "x": 74, "y": 18, "lootable": true }
+        { "item_group": "vending_drink", "x": 74, "y": 17  },
+        { "item_group": "vending_food", "x": 74, "y": 18  }
       ],
       "furniture": {
         "%": [ "f_indoor_plant", "f_indoor_plant_y" ],
@@ -1433,8 +1433,8 @@
         { "group": "cash_register_random", "x": 39, "y": [ 17, 19 ] }
       ],
       "place_vendingmachines": [
-        { "item_group": "vending_drink", "x": 4, "y": 12, "lootable": true },
-        { "item_group": "vending_food", "x": 4, "y": 13, "lootable": true }
+        { "item_group": "vending_drink", "x": 4, "y": 12  },
+        { "item_group": "vending_food", "x": 4, "y": 13  }
       ],
       "items": {
         "d": [

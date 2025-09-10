@@ -82,7 +82,7 @@
       "A": { "item": "homebooks", "chance": 40, "repeat": [ 1, 4 ] },
       ".": { "item": "office_mess", "chance": 1 }
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
     "monster": { "_": { "group": "GROUP_CIVILIAN", "chance": 1 }, ".": { "group": "GROUP_CIVILIAN", "chance": 1 } },
     "toilets": { "T": {  } },
     "vehicles": {

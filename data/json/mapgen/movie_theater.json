@@ -87,7 +87,7 @@
       "palettes": [ "movie_theater_palette.json" ],
       "terrain": { "C": "t_thconc_floor", "H": "t_thconc_floor", "y": "t_thconc_floor" },
       "toilets": { "&": {  } },
-      "vendingmachines": { "v": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+      "vendingmachines": { "v": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
       "items": {
         "&": { "item": "alcohol", "chance": 8 },
         "T": { "item": "snacks", "chance": 5 },
