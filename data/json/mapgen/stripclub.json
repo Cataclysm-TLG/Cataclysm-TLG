@@ -428,7 +428,7 @@
         ]
       },
       "place_loot": [ { "group": "cash_register_random", "x": [ 13, 16 ], "y": 18 } ],
-      "vendingmachines": { "V": { "item_group": "vending_food", "lootable": true }, "v": { "item_group": "vending_drink", "lootable": true } },
+      "vendingmachines": { "V": { "item_group": "vending_food"  }, "v": { "item_group": "vending_drink"  } },
       "place_monsters": [ { "monster": "GROUP_RESORT_DANCERS", "x": [ 1, 23 ], "y": [ 0, 22 ], "density": 0.5 } ],
       "toilets": { "e": {  } }
     }

@@ -557,7 +557,7 @@
       ]
     },
     "item": { "§": { "item": "american_flag" } },
-    "vendingmachines": { "8": { "item_group": "vending_drink", "lootable": true }, "9": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "8": { "item_group": "vending_drink"  }, "9": { "item_group": "vending_food"  } },
     "computers": {
       "6": {
         "name": "School Bell Software 1.1",

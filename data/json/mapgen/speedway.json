@@ -79,7 +79,7 @@
       "D": { "item": "trash", "chance": 80, "repeat": [ 4, 8 ] }
     },
     "toilets": { "T": {  } },
-    "vendingmachines": { "V": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "V": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
     "vehicles": {
       "v": { "vehicle": "cars_only", "chance": 10, "rotation": 90 },
       "^": { "vehicle": "cars_only", "chance": 10, "rotation": 270 },

@@ -73,6 +73,6 @@
       "m": [ { "item": "softdrugs", "chance": 40 }, { "item": "harddrugs", "chance": 40 } ]
     },
     "item": { "O": { "item": "2x4", "repeat": [ 2, 20 ] }, ",": { "item": "splinter", "chance": 10, "repeat": [ 1, 5 ] } },
-    "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } }
+    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } }
   }
 ]

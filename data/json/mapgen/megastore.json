@@ -64,7 +64,7 @@
       "U": "f_cupboard",
       ":": "f_shredder"
     },
-    "vendingmachines": { "$": { "lootable": true } },
+    "vendingmachines": { "$": { } },
     "toilets": { "&": {  } },
     "items": {
       "Á": { "item": "cash_register_random", "chance": 100 },

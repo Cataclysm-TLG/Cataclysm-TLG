@@ -105,9 +105,9 @@
       },
       "furniture": { "G": "f_home_furnace", "Y": "f_dumpster", "C": "f_bulletin" },
       "place_vendingmachines": [
-        { "item_group": "vending_drink", "lootable": true, "x": [ 14, 17 ], "y": 16 },
-        { "item_group": "vending_drink", "lootable": true, "x": 24, "y": 16 },
-        { "item_group": "vending_food", "lootable": true, "x": 24, "y": 18 }
+        { "item_group": "vending_drink" , "x": [ 14, 17 ], "y": 16 },
+        { "item_group": "vending_drink" , "x": 24, "y": 16 },
+        { "item_group": "vending_food" , "x": 24, "y": 18 }
       ]
     }
   },

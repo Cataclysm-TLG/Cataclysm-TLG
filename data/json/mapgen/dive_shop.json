@@ -57,7 +57,7 @@
       "B": "f_workbench",
       "3": "f_air_compressor"
     },
-    "vendingmachines": { "W": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "W": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
     "vehicles": { "v": { "vehicle": "parking_garage_short", "rotation": 90, "chance": 33 } },
     "toilets": { "t": {  } },
     "items": {

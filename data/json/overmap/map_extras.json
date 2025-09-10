@@ -165,7 +165,8 @@
     "min_max_zlevel": [ -5, 5 ],
     "sym": "P",
     "color": "magenta",
-    "autonote": false
+    "autonote": false,
+    "flags": [ "PORTAL" ]
   },
   {
     "id": "mx_portal_in",
@@ -176,7 +177,8 @@
     "min_max_zlevel": [ -5, 5 ],
     "sym": "P",
     "color": "magenta",
-    "autonote": false
+    "autonote": false,
+    "flags": [ "PORTAL" ]
   },
   {
     "id": "mx_lab_concourse_area",
@@ -199,7 +201,8 @@
     "min_max_zlevel": [ -1, -1 ],
     "sym": "S",
     "color": "yellow",
-    "autonote": false
+    "autonote": false,
+    "flags": [ "SPIDER" ]
   },
   {
     "id": "mx_house_wasp",
@@ -209,8 +212,9 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_house_wasp" },
     "min_max_zlevel": [ 0, 10 ],
     "sym": "W",
+    "color": "yellow",
     "autonote": false,
-    "color": "yellow"
+    "flags": [ "WASP" ]
   },
   {
     "id": "mx_bugout",
@@ -525,8 +529,9 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_nest_wasp" },
     "min_max_zlevel": [ 0, 9 ],
     "sym": "W",
+    "color": "yellow",
     "autonote": false,
-    "color": "yellow"
+    "flags": [ "WASP" ]
   },
   {
     "id": "mx_nest_dermatik",
@@ -536,8 +541,9 @@
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_nest_dermatik" },
     "min_max_zlevel": [ 0, 0 ],
     "sym": "D",
+    "color": "brown",
     "autonote": false,
-    "color": "brown"
+    "flags": [ "WASP" ]
   },
   {
     "id": "mx_prison_bus",
@@ -674,6 +680,7 @@
     "description": "An ordinary beehive.",
     "generator": { "generator_method": "update_mapgen", "generator_id": "mx_beehive_natural" },
     "autonote": false,
+    "flags": [ "BEE" ],
     "min_max_zlevel": [ 0, 0 ]
   },
   {

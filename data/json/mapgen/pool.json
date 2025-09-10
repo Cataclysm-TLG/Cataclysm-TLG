@@ -123,8 +123,8 @@
     "object": {
       "furniture": { "b": "f_bench", "&": "f_toilet", "S": "f_sink", "t": "f_trashcan", "{": "f_locker" },
       "vendingmachines": {
-        "v": { "item_group": "vending_food_items", "lootable": true },
-        "V": { "item_group": "vending_drink_items", "lootable": true }
+        "v": { "item_group": "vending_food_items"  },
+        "V": { "item_group": "vending_drink_items"  }
       },
       "place_items": [
         { "chance": 20, "repeat": 2, "item": "clothing_male", "x": 18, "y": 6 },

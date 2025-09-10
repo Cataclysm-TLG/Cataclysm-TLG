@@ -3940,8 +3940,7 @@
       "prof_knives_pro",
       "prof_unarmed_familiar",
       "prof_unarmed_pro",
-      "prof_shivs_familiar",
-      "prof_gross_anatomy"
+      "prof_shivs_familiar"
     ],
     "effect_on_conditions": [ "scenario_assassin_conv" ],
     "items": {
@@ -3951,7 +3950,7 @@
           { "item": "pants_costume", "variant": "pants_striped" },
           { "item": "sneakers" },
           { "item": "socks" },
-          { "item": "switchblade", "container-item": "gartersheath1" },
+          { "item": "knife_KABAR", "container-item": "gartersheath1" },
           { "item": "polaroid_photo", "container-item": "ankle_wallet_pouch" }
         ]
       },

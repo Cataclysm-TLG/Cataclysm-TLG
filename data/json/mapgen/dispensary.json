@@ -53,7 +53,7 @@
       "2": [ { "item": "withered", "chance": 75, "repeat": [ 1, 4 ] }, { "item": "seed_weed", "chance": 75, "repeat": [ 1, 4 ] } ]
     },
     "toilets": { "t": {  } },
-    "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } }
+    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } }
   },
   {
     "type": "mapgen",

@@ -32,7 +32,7 @@
         "........................"
       ],
       "palettes": [ "parametrized_linoleum_palette", "parametrized_carpets_palette", "parametrized_walls_palette" ],
-      "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+      "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
       "terrain": {
         "o": "t_window",
         "c": "t_door_c",

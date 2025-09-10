@@ -76,7 +76,7 @@
       },
       "vehicles": { "Á": { "vehicle": "parking_garage", "chance": 33, "rotation": 90 } },
       "toilets": { "T": {  } },
-      "vendingmachines": { "v": { "item_group": "vending_drink_items", "lootable": true } },
+      "vendingmachines": { "v": { "item_group": "vending_drink_items"  } },
       "item": {
         "W": { "item": "greeting_card", "chance": 60, "repeat": [ 10, 30 ] },
         "/": { "item": "american_flag", "chance": 100 }
