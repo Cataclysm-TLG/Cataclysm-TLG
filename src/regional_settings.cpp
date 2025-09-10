@@ -698,7 +698,7 @@ void load_region_settings( const JsonObject &jo )
         jo.throw_error( "\"weather\": { … } required for default" );
     } else {
         JsonObject wjo = jo.get_object( "weather" );
-        new_region.weather = weather_generator::load( wjo );
+        new_region.weather.load( wjo, "tlg" );
     }
 
     load_overmap_feature_flag_settings( jo, new_region.overmap_feature_flag, strict, false );
@@ -858,7 +858,7 @@ void apply_region_overlay( const JsonObject &jo, regional_settings &region )
     // TODO: Support overwriting only some values
     if( jo.has_object( "weather" ) ) {
         JsonObject wjo = jo.get_object( "weather" );
-        region.weather = weather_generator::load( wjo );
+        region.weather.load( wjo, "tlg" );
     }
 
     load_overmap_feature_flag_settings( jo, region.overmap_feature_flag, false, true );
