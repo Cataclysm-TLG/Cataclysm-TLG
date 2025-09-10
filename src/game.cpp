@@ -5687,6 +5687,9 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
         // Failed reanimation due to corpse being butchered
         return false;
     }
+
+    assing_revive_form( it, p );
+
     shared_ptr_fast<monster> newmon_ptr;
     if( it.has_var( "zombie_form" ) ) {
         // the monster was not a zombie but turns into one when its corpse is revived
@@ -5711,6 +5714,29 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
     }
 
     return place_critter_around( newmon_ptr, tripoint_bub_ms( p ), radius );
+}
+
+void game::assing_revive_form( item &it, tripoint_bub_ms p )
+{
+    const mtype *montype = it.get_mtype();
+    if( montype == nullptr ) {
+        return;
+    }
+    dialogue d( nullptr, nullptr );
+    write_var_value( var_type::context, "loc", &d, get_map().get_abs( p ).to_string() );
+    write_var_value( var_type::context, "corpse_damage", &d, it.damage() );
+    for( const revive_type &rev_type : montype->revive_types ) {
+        if( rev_type.condition( d ) ) {
+            if( !rev_type.revive_mon.is_null() ) {
+                it.set_var( "zombie_form", rev_type.revive_mon.str() );
+                return;
+            }
+            if( !rev_type.revive_monster_group.is_null() ) {
+                mtype_id mon = MonsterGroupManager::GetRandomMonsterFromGroup( rev_type.revive_monster_group );
+                it.set_var( "zombie_form", mon.str() );
+            }
+        }
+    }
 }
 
 void game::save_cyborg( item *cyborg, const tripoint_bub_ms &couch_pos, Character &installer )
@@ -5821,7 +5847,7 @@ void game::moving_vehicle_dismount( const tripoint_bub_ms &dest_loc )
         debugmsg( "Need somewhere to dismount towards." );
         return;
     }
-    tileray ray( dest_loc.raw().xy() + point( -u.posx(), -u.posy() ) );
+    tileray ray( dest_loc.xy() + point( -u.posx(), -u.posy() ) );
     // TODO:: make dir() const correct!
     const units::angle d = ray.dir();
     add_msg( _( "You dive from the %s." ), veh->name );
@@ -8546,7 +8572,16 @@ void game::list_items_monsters()
 
 static std::string list_items_filter_history_help()
 {
-    return colorize( _( "UP: history, CTRL-U: clear line, ESC: abort, ENTER: save" ), c_green );
+    input_context ctxt( "STRING_INPUT" );
+    std::vector<std::string> act_descs;
+    const auto add_action_desc = [&]( const std::string & act, const std::string & txt ) {
+        act_descs.emplace_back( ctxt.get_desc( act, txt, input_context::allow_all_keys ) );
+    };
+    add_action_desc( "HISTORY_UP", pgettext( "string input", "History" ) );
+    add_action_desc( "TEXT.CLEAR", pgettext( "string input", "Clear text" ) );
+    add_action_desc( "TEXT.QUIT", pgettext( "string input", "Abort" ) );
+    add_action_desc( "TEXT.CONFIRM", pgettext( "string input", "Save" ) );
+    return colorize( enumerate_as_string( act_descs, enumeration_conjunction::none ), c_green );
 }
 
 game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )

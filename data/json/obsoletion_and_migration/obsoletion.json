@@ -294,5 +294,14 @@
     "description": "Obsoleted trait.",
     "random_at_chargen": false,
     "valid": false
+  },
+  {
+    "id": "scenario_assassin_convict",
+    "type": "effect_on_condition"
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "PROF_ASSASSIN_CONVICT",
+    "remove": true
   }
 ]

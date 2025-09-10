@@ -282,6 +282,11 @@ struct mount_item_data {
     itype_id storage;
 };
 
+struct revive_type {
+    std::function<bool( const_dialogue const & )> condition;
+    mtype_id revive_mon = mtype_id::NULL_ID();
+    mongroup_id revive_monster_group = mongroup_id::NULL_ID();
+};
 struct mtype {
     private:
         friend class MonsterGenerator;
@@ -309,6 +314,8 @@ struct mtype {
         mtype_id upgrade_into;
         mongroup_id upgrade_group;
         mtype_id burn_into;
+
+        std::vector<revive_type> revive_types;
 
         mtype_id zombify_into; // mtype_id this monster zombifies into
         mtype_id fungalize_into; // mtype_id this monster fungalize into

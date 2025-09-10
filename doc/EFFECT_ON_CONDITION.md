@@ -38,7 +38,7 @@ An effect_on_condition is an object allowing the combination of dialog condition
 | `false_effect`        | effect     | The effect(s) caused if `condition` returns false upon activation.  See the "Dialogue Effects" section of [NPCs](NPCs.md) for the full syntax.
 | `global`              | bool       | If this is true, this recurring eoc will be run on the player and every npc from a global queue.  Deactivate conditions will work based on the avatar. If it is false the avatar and every character will have their own copy and their own deactivated list. Defaults to false.
 | `run_for_npcs`        | bool       | Can only be true if global is true. If false the EOC will only be run against the avatar. If true the eoc will be run against the avatar and all npcs.  Defaults to false.
-| `EOC_TYPE`            | string     | Can be one of `ACTIVATION`, `RECURRING`, `SCENARIO_SPECIFIC`, `AVATAR_DEATH`, `NPC_DEATH`, `PREVENT_DEATH`, `EVENT` (see details below). It defaults to `ACTIVATION` unless `recurrence` is provided in which case it defaults to `RECURRING`.
+| `EOC_TYPE`            | string     | Can be one of `ACTIVATION`, `RECURRING`, `AVATAR_DEATH`, `NPC_DEATH`, `PREVENT_DEATH`, `EVENT` (see details below). It defaults to `ACTIVATION` unless `recurrence` is provided in which case it defaults to `RECURRING`.
 
  ### EOC types
 
@@ -46,7 +46,6 @@ An effect_on_condition is an object allowing the combination of dialog condition
 
 * `ACTIVATION` - activated manually.
 * `RECURRING` - activated automatically on schedule (see `recurrence`)
-* `SCENARIO_SPECIFIC` - automatically invoked once on scenario start.
 * `AVATAR_DEATH` - automatically invoked whenever the current avatar dies (it will be run with the avatar as `u`), if after it the player is no longer dead they will not die, if there are multiple EOCs they all be run until the player is not dead.
 * `NPC_DEATH` - EOCs can only be assigned to run on the death of an npc, in which case u will be the dying npc and npc will be the killer. If after it npc is no longer dead they will not die, if there are multiple they all be run until npc is not dead.
 * `PREVENT_DEATH` - whenever the current avatar dies it will be run with the avatar as `u`, if after it the player is no longer dead they will not die, if there are multiple they all be run until the player is not dead.
@@ -2881,10 +2880,10 @@ Some effect would be applied on you or NPC
 
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
-| "u_add_effect" / "npc_add_effect" | **mandatory** | string or [variable object](##variable-object) | id of effect to give |
-| "duration" | optional | int, duration or [variable object](##variable-object) | 0 by default; length of the effect; both int (`"duration": 60`), and duration string (`"duration": "1 m"`) works; `PERMANENT` can be used to give a permanent effect | 
-| "target_part" | optional | string or [variable object](##variable-object) | default is "whole body"; if used, only specified body part would be used. `RANDOM` can be used to pick a random body part | 
-| "intensity" | optional | int, float or [variable object](##variable-object) | default 0; intensity of the effect | 
+| "u_add_effect" / "npc_add_effect" | **mandatory** | string or [variable object](#variable-object) | id of effect to give |
+| "duration" | **mandatory** | int, duration or [variable object](#variable-object) | length of the effect; both int (`"duration": 60`), and duration string (`"duration": "1 m"`) works; `PERMANENT` can be used to give a permanent effect | 
+| "target_part" | optional | string or [variable object](#variable-object) | default is "whole body"; if used, only specified body part would be used. `RANDOM` can be used to pick a random body part | 
+| "intensity" | optional | int, float or [variable object](#variable-object) | default 0; intensity of the effect | 
 | "force_bool" | optional | boolean | default false; if true, all immunities would be ignored | 
 
 ##### Valid talkers:
@@ -3028,8 +3027,8 @@ Remove effect from character or NPC, if it has one
 
 | Syntax | Optionality | Value  | Info |
 | --- | --- | --- | --- | 
-| "u_lose_effect" / "npc_lose_effect" | **mandatory** | string or [variable object](##variable-object) | id of effect to be removed; if character or NPC has no such effect, nothing happens |
-| "target_part" | optional | string or [variable object](##variable-object) | default is "whole body"; if used, only specified body part would be used. `RANDOM` can be used to pick a random body part | 
+| "u_lose_effect" / "npc_lose_effect" | **mandatory** | string, [variable object](#variable-object), or array of both | id of effect or effects to be removed; if character or NPC has no such effect, nothing happens |
+| "target_part" | optional | string or [variable object](#variable-object) | default is "whole body"; if used, only specified body part would be used. `ALL` can be used to remove effect from all bodyparts talker has | 
 
 ##### Valid talkers:
 
@@ -3048,9 +3047,19 @@ Removes `bleed` effect from player's head:
 { "u_lose_effect": "bleed", "target_part": "head" }
 ```
 
+Removes `bleed` effect from all bodyparts:
+```json
+{ "u_lose_effect": "bleed", "target_part": "ALL" }
+```
+
 Removes effect, stored in `effect_id` context value, from the player:
 ```json
 { "u_lose_effect": { "context_val": "effect_id" } }
+```
+
+Removes `infection`, `downed` and `winded` effects from player:
+```json
+{ "u_lose_effect": [ "infection", "downed", "winded" ] }
 ```
 
 

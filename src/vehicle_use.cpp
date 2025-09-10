@@ -291,7 +291,7 @@ void vehicle::build_electronics_menu( veh_menu &menu )
         .on_submit( [this] { control_doors(); } );
     }
 
-    if( camera_on || ( has_part( "CAMERA" ) && has_part( "CAMERA_CONTROL" ) ) ) {
+    if( camera_on || ( has_parts( {"CAMERA", "CAMERA_CONTROL"} ).all() ) ) {
         menu.add( camera_on
                   ? colorize( _( "Turn off camera system" ), c_pink )
                   : _( "Turn on camera system" ) )
@@ -906,9 +906,8 @@ void vehicle::reload_seeds( const tripoint_bub_ms &pos )
             }
             used_seed.front().set_age( 0_turns );
             //place seeds into the planter
-            // TODO: fix point types
             put_into_vehicle_or_drop( player_character, item_drop_reason::deliberate, used_seed,
-                                      tripoint_bub_ms( pos ) );
+                                      pos );
         }
     }
 }
@@ -1322,7 +1321,7 @@ void vehicle::open_or_close( const int part_index, const bool opening )
     map &here = get_map();
     here.set_transparency_cache_dirty( sm_pos.z );
     const tripoint_bub_ms part_location = mount_to_tripoint( parts[part_index].mount );
-    here.set_seen_cache_dirty( tripoint_bub_ms( part_location ) );
+    here.set_seen_cache_dirty( part_location );
     const int dist = rl_dist( get_player_character().pos_bub(), part_location );
     if( dist < 20 ) {
         sfx::play_variant_sound( opening ? "vehicle_open" : "vehicle_close",
@@ -1844,7 +1843,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint_bub_ms &p, boo
 
     const bool remote = g->remoteveh() == this;
     const bool has_electronic_controls = remote
-                                         ? has_part( "CTRL_ELECTRONIC" ) || has_part( "REMOTE_CONTROLS" )
+                                         ? has_parts( {"CTRL_ELECTRONIC", "REMOTE_CONTROL"} ).any()
                                          : has_part_here( "CTRL_ELECTRONIC" );
     const bool controls_here = has_part_here( "CONTROLS" );
     const bool player_is_driving = get_player_character().controlling_vehicle;
@@ -2164,7 +2163,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint_bub_ms &p, boo
         .enable( ammo_amount >= tool_item.typeId()->charges_to_use() )
         .hotkey( hk )
         .skip_locked_check( tool_ammo.is_null() || tool_ammo->ammo->type != ammo_battery )
-        .on_submit( [this, vppos, tool_type] { use_vehicle_tool( *this, tripoint_bub_ms( vppos ), tool_type ); } );
+        .on_submit( [this, vppos, tool_type] { use_vehicle_tool( *this, vppos, tool_type ); } );
     }
 
     const std::optional<vpart_reference> vp_autoclave = vp.avail_part_with_feature( "AUTOCLAVE" );
@@ -2217,7 +2216,7 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint_bub_ms &p, boo
         .skip_locked_check()
         .on_submit( [vppos] {
             add_msg( _( "You carefully peek through the curtains." ) );
-            g->peek( tripoint_bub_ms( vppos ) );
+            g->peek( vppos );
         } );
     }
 
@@ -2417,19 +2416,19 @@ void vehicle::build_interact_menu( veh_menu &menu, const tripoint_bub_ms &p, boo
             menu.add( string_format( _( "Lock %s" ), vp_lockable_door->part().name() ) )
             .hotkey( "LOCK_DOOR" )
             .on_submit( [p] {
-                doors::lock_door( get_map(), get_player_character(), tripoint_bub_ms( p ) );
+                doors::lock_door( get_map(), get_player_character(), p );
             } );
         } else if( player_inside && vp_lockable_door->part().locked ) {
             menu.add( string_format( _( "Unlock %s" ), vp_lockable_door->part().name() ) )
             .hotkey( "UNLOCK_DOOR" )
             .on_submit( [p] {
-                doors::unlock_door( get_map(), get_player_character(), tripoint_bub_ms( p ) );
+                doors::unlock_door( get_map(), get_player_character(), p );
             } );
         } else if( vp_lockable_door->part().locked ) {
             menu.add( string_format( _( "Check the lock on %s" ), vp_lockable_door->part().name() ) )
             .hotkey( "LOCKPICK" )
             .on_submit( [p] {
-                iexamine::locked_object( get_player_character(), tripoint_bub_ms( p ) );
+                iexamine::locked_object( get_player_character(), p );
             } );
         }
     }

@@ -82,8 +82,7 @@
       { "u_remove_item_with": "warphome" },
       { "math": [ "raidstotal", "++" ] },
       { "u_lose_trait": "awayfromhome" },
-      { "u_lose_effect": "warpsickness" },
-      { "u_lose_effect": "warpdisintegration" },
+      { "u_lose_effect": [ "warpsickness", "warpdisintegration" ] },
       {
         "run_eocs": [
           "EOC_clearmissions",
@@ -350,22 +349,29 @@
       { "math": [ "u_val('rad') = 0" ] },
       { "u_add_effect": "cureall", "duration": "1 s", "intensity": 1 },
       { "u_add_effect": "panacea", "duration": "30 s", "intensity": 1 },
-      { "u_lose_effect": "corroding" },
-      { "u_lose_effect": "onfire" },
-      { "u_lose_effect": "dazed" },
-      { "u_lose_effect": "stunned" },
-      { "u_lose_effect": "venom_blind" },
-      { "u_lose_effect": "formication" },
-      { "u_lose_effect": "blisters" },
-      { "u_lose_effect": "frostbite" },
-      { "u_lose_effect": "frostbite_recovery" },
-      { "u_lose_effect": "wet" },
-      { "u_lose_effect": "slimed" },
-      { "u_lose_effect": "migo_atmosphere" },
-      { "u_lose_effect": "fetid_goop" },
-      { "u_lose_effect": "sap" },
-      { "u_lose_effect": "nausea" },
-      { "u_lose_effect": "bleed" }
+      {
+        "u_lose_effect": [
+          "corroding",
+          "onfire",
+          "dazed",
+          "stunned",
+          "venom_blind",
+          "formication",
+          "blisters",
+          "frostbite",
+          "frostbite_recovery",
+          "wet",
+          "slimed",
+          "migo_atmosphere",
+          "fetid_goop",
+          "sap",
+          "nausea",
+          "bleed"
+        ]
+      },
+      {
+        "run_eocs": [ "EOC_FIX_MAGICLYSM_PROBLEMS", "EOC_FIX_MIND_OVER_MATTER_PROBLEMS", "EOC_FIX_XEDRA_EVOLVED_PROBLEMS" ]
+      }
     ]
   },
   {
@@ -391,7 +397,6 @@
     "type": "effect_on_condition",
     "id": "scenario_warp_begins",
     "//": "This EOC is triggered when the Warper scenario begins.  It initializes a few variables, and memorizes your spawn location for resurrection just in case you somehow die before using the warp obelisk.  Also learns your spell for emergencies.",
-    "eoc_type": "SCENARIO_SPECIFIC",
     "effect": [
       {
         "u_message": "Welcome to Sky Island.\n\nSpeak to the Heart of the Island to get your bearings, accept missions, manage upgrades, change your difficulty settings, and more.",

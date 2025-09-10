@@ -13,6 +13,7 @@
 #include "avatar.h"
 #include "calendar.h"
 #include "debug.h"
+#include "effect_on_condition.h"
 #include "flag.h"
 #include "generic_factory.h"
 #include "item.h"
@@ -257,6 +258,7 @@ void profession::load( const JsonObject &jo, const std::string_view )
               Trait_group_BG_survival_story_UNIVERSAL );
     optional( jo, was_loaded, "age_lower", age_lower, 16 );
     optional( jo, was_loaded, "age_upper", age_upper, 55 );
+    optional( jo, was_loaded, "starting_cash", _starting_cash );
 
     if( jo.has_string( "vehicle" ) ) {
         _starting_vehicle = vproto_id( jo.get_string( "vehicle" ) );
@@ -276,6 +278,12 @@ void profession::load( const JsonObject &jo, const std::string_view )
             int level = subobj.get_int( "level" );
             spell_id sp = spell_id( subobj.get_string( "id" ) );
             _starting_spells.emplace( sp, level );
+        }
+    }
+
+    if( jo.has_member( "effect_on_conditions" ) ) {
+        for( JsonValue jv : jo.get_array( "effect_on_conditions" ) ) {
+            effect_on_conditions.push_back( effect_on_conditions::load_inline_eoc( jv, "" ) );
         }
     }
 
@@ -513,6 +521,11 @@ signed int profession::point_cost() const
     return _point_cost;
 }
 
+std::optional<int> profession::starting_cash() const
+{
+    return _starting_cash;
+}
+
 static void clear_faults( item &it )
 {
     if( it.get_var( "dirt", 0 ) > 0 ) {
@@ -739,6 +752,11 @@ void profession::learn_spells( avatar &you ) const
             sp.gain_level( you );
         }
     }
+}
+
+std::vector<effect_on_condition_id> profession::get_eocs() const
+{
+    return effect_on_conditions;
 }
 
 // item_substitution stuff:

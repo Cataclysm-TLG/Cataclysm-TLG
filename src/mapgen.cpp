@@ -96,8 +96,11 @@ static const furn_str_id furn_f_sign( "f_sign" );
 static const furn_str_id furn_f_table( "f_table" );
 static const furn_str_id furn_f_toilet( "f_toilet" );
 static const furn_str_id furn_f_vending_c( "f_vending_c" );
-static const furn_str_id furn_f_vending_o( "f_vending_o" );
+static const furn_str_id furn_f_vending_c_networked( "f_vending_c_networked" );
+static const furn_str_id furn_f_vending_c_off( "f_vending_c_off" );
 static const furn_str_id furn_f_vending_reinforced( "f_vending_reinforced" );
+static const furn_str_id furn_f_vending_reinforced_networked( "f_vending_reinforced_networked" );
+static const furn_str_id furn_f_vending_reinforced_off( "f_vending_reinforced_off" );
 
 static const item_group_id Item_spawn_data_ammo_rare( "ammo_rare" );
 static const item_group_id Item_spawn_data_bed( "bed" );
@@ -839,6 +842,9 @@ static void load_update_mapgen( const JsonObject &jio, const update_mapgen_id &i
  */
 void load_mapgen( const JsonObject &jo )
 {
+    // NOLINTNEXTLINE(cata-use-named-point-constants)
+    static constexpr point_rel_omt point_one( 1, 1 );
+
     if( jo.has_array( "om_terrain" ) ) {
         JsonArray ja = jo.get_array( "om_terrain" );
         if( ja.test_array() ) {
@@ -859,8 +865,7 @@ void load_mapgen( const JsonObject &jo )
             }
             if( !mapgenid_list.empty() ) {
                 const std::string mapgenid = mapgenid_list[0];
-                const auto mgfunc = load_mapgen_function( jo, mapgenid, point_rel_omt::zero, point_rel_omt( 1,
-                                    1 ) );
+                const auto mgfunc = load_mapgen_function( jo, mapgenid, point_rel_omt::zero, point_one );
                 if( mgfunc ) {
                     for( auto &i : mapgenid_list ) {
                         oter_mapgen.add( i, mgfunc );
@@ -869,8 +874,7 @@ void load_mapgen( const JsonObject &jo )
             }
         }
     } else if( jo.has_string( "om_terrain" ) ) {
-        load_and_add_mapgen_function( jo, jo.get_string( "om_terrain" ), point_rel_omt::zero,
-                                      point_rel_omt( 1, 1 ) );
+        load_and_add_mapgen_function( jo, jo.get_string( "om_terrain" ), point_rel_omt::zero, point_one );
     } else if( jo.has_string( "nested_mapgen_id" ) ) {
         load_nested_mapgen( jo, nested_mapgen_id( jo.get_string( "nested_mapgen_id" ) ) );
     } else if( jo.has_string( "update_mapgen_id" ) ) {
@@ -2176,10 +2180,12 @@ class jmapgen_vending_machine : public jmapgen_piece_with_has_vehicle_collision
     public:
         bool reinforced;
         mapgen_value<item_group_id> group_id;
-        bool lootable;
+        bool powered;
+        bool networked;
         jmapgen_vending_machine( const JsonObject &jsi, const std::string_view/*context*/ ) :
             reinforced( jsi.get_bool( "reinforced", false ) )
-            , lootable( jsi.get_bool( "lootable", false ) ) {
+            , powered( jsi.get_bool( "powered", false ) )
+            , networked( jsi.get_bool( "networked", false ) ) {
             if( jsi.has_member( "item_group" ) ) {
                 group_id = mapgen_value<item_group_id>( jsi.get_member( "item_group" ) );
             } else {
@@ -2194,7 +2200,7 @@ class jmapgen_vending_machine : public jmapgen_piece_with_has_vehicle_collision
             if( chosen_id.is_null() ) {
                 return;
             }
-            dat.m.place_vending( r, chosen_id, reinforced, lootable );
+            dat.m.place_vending( r, chosen_id, reinforced, powered, networked );
         }
 
         void check( const std::string &oter_name, const mapgen_parameters &parameters,
@@ -6593,25 +6599,32 @@ void map::place_toilet( const tripoint_bub_ms &p, int charges )
 }
 
 void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bool reinforced,
-                         bool lootable )
+                         bool powered, bool networked )
 {
     if( reinforced ) {
         furn_set( p, furn_f_vending_reinforced );
         place_items( type, 100, p, p, false, calendar::start_of_cataclysm );
     } else {
-        // The chance to find a non-ransacked vending machine reduces greatly with every day after the Cataclysm,
-        // unless it's hidden somewhere far away from everyone's eyes (e.g. deep in the lab)
-        if( lootable &&
-            !one_in( std::max( to_days<int>( calendar::turn - calendar::start_of_cataclysm ), 0 ) + 4 ) ) {
-            furn_set( p, furn_f_vending_o );
-            for( const tripoint_bub_ms &loc : points_in_radius( p, 1 ) ) {
-                if( one_in( 4 ) ) {
-                    spawn_item( loc, "glass_shard", rng( 1, 25 ) );
+        if( reinforced ) {
+            if( powered ) {
+                if( networked ) {
+                    furn_set( p, furn_f_vending_reinforced_networked );
+                } else {
+                    furn_set( p, furn_f_vending_reinforced );
                 }
+            } else {
+                furn_set( p, furn_f_vending_reinforced_off );
             }
         } else {
-            furn_set( p, furn_f_vending_c );
-            place_items( type, 100, p, p, false, calendar::start_of_cataclysm );
+            if( powered ) {
+                if( networked ) {
+                    furn_set( p, furn_f_vending_c_networked );
+                } else {
+                    furn_set( p, furn_f_vending_c );
+                }
+            } else {
+                furn_set( p, furn_f_vending_c_off );
+            }
         }
     }
 }

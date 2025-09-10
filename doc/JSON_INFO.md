@@ -1963,7 +1963,8 @@ Professions are specified as JSON object with "type" member set to "profession":
     "id": "profession_example",                                // Unique ID for the profession
     "name": { "male": "Groom", "female": "Bride" },            // String, either a single gender neutral (i.e. "Survivor") or object with members "male" and "female"
     "description": "This is an example profession.",           // In-game description
-    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points.
+    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points. Has no effect as of 0.G
+    "starting_cash": 500000,                                   // (optional) Int value for the starting bank balance.
     "npc_background": "BG_survival_story_LAB",                 // (optional) BG_trait_group ID, provides list of background stories. (see BG_trait_groups.json)
     "addictions": [ { "intensity": 10, "type": "nicotine" } ], // (optional) Array of addictions. Requires "type" as the string ID of the addiction (see JSON_FLAGS.md) and "intensity"
     "skills": [ { "name": "archery", "level": 2 } ],           // (optional) Array of starting skills. Requires "name" as the string ID of the skill (see skills.json) and "level", which is a value added to the skill level after character creation
@@ -1994,6 +1995,7 @@ Professions are specified as JSON object with "type" member set to "profession":
     "CBMs": [ "bio_fuel_cell_blood" ],                         // (optional) Array of starting implanted CMBs
     "traits": [ "PROF_CHURL", "ILLITERATE" ],                  // (optional) Array of starting traits/mutations. For further information, see mutations.json and MUTATIONS.md. Note: "trait" is also supported, used for a single trait/mutation ID (legacy!)
     "requirement": "achievement_survive_28_days",              // (optional) String of an achievement ID required to unlock this profession
+    "effect_on_conditions": [ "scenario_assassin_conv" ],      // (optional) eoc id, inline eoc, or multiple of them, that would run when scenario starts
     "spells": [                                                // (optional) Array of starting spell IDs the character knows upon creation. For further information, see MAGIC.md
       { "id": "magic_missile", "level": 4 },
       { "id": "summon_undead", "level": 5 },
@@ -3961,6 +3963,7 @@ Books can be defined like this:
 "fun" : -2,           // Morale bonus/penalty for reading
 "skill" : "computer", // Skill raised
 "chapters" : 4,       // Number of chapters (for fun only books), each reading "consumes" a chapter. Books with no chapters left are less fun (because the content is already known to the character).
+"generic": false,     // This book counts chapters by item instance instead of by type (this book represents a generic variety of books, like "book of essays")
 "required_level" : 2,  // Minimum skill level required to learn
 "martial_art": "style_mma", // Martial art learned from this book; incompatible with `skill`
 "proficiencies": [    // Having this book mitigate lack of proficiency, required for crafting 
@@ -5088,7 +5091,7 @@ Examples from the actual definitions:
     "looks_like": "chair",
     "color": "white",
     "move_cost_mod": 2,
-    "keg_capacity": 240,
+    "keg_capacity": "60 L",
     "deployed_item": "plastic_sheet",
     "light_emitted": 5,
     "required_str": 18,
@@ -5150,7 +5153,7 @@ Same as for terrain, see below in the chapter "Common to furniture and terrain".
 
 #### `keg_capacity`
 
-(Optional) Determines capacity of some furnitures with liquid storage that have hardcoded interactions. Value is per 250mL (e.g. `"keg_capacity": 8,` = 2L)
+(Optional) Determines capacity of some furnitures with liquid storage that have hardcoded interactions.
 
 #### `deployed_item`
 
