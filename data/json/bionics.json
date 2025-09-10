@@ -591,7 +591,7 @@
     "name": { "str": "Wired Reflexes" },
     "description": "Your reaction time has been greatly enhanced with bionic nerve stimulators, giving you a +2 bonus to dexterity.",
     "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -599,7 +599,7 @@
       }
     ],
     "act_cost": "5 J",
-    "react_cost": "10 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -675,7 +675,7 @@
     "occupied_bodyparts": [ [ "head", 2 ] ],
     "//": "BATEARS is better than this bionic, even if you combine the bionic with any existing hearing mutation.",
     "mutation_conflicts": [ "BATEARS" ],
-    "flags": [ "BIONIC_TOGGLED", "IMMUNE_HEARING_DAMAGE" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "IMMUNE_HEARING_DAMAGE" ],
     "active_flags": [ "SAFECRACK_NO_TOOL" ],
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "HEARING_MULT", "multiply": 2.5 } ] } ],
     "act_cost": "3 J",
@@ -1007,7 +1007,7 @@
     "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence.",
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
     "occupied_bodyparts": [ [ "head", 6 ] ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -1015,7 +1015,7 @@
       }
     ],
     "act_cost": "5 J",
-    "react_cost": "20 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
@@ -1406,7 +1406,7 @@
       [ "foot_l", 2 ],
       [ "foot_r", 2 ]
     ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -1414,7 +1414,7 @@
       }
     ],
     "act_cost": "10 J",
-    "react_cost": "50 J",
+    "react_cost": "10 J",
     "time": "1 s"
   },
   {
@@ -1440,7 +1440,7 @@
     "name": { "str": "Muscle Augmentation" },
     "description": "Your muscular system has been surgically enhanced with myomer fibers, giving you a +2 bonus to strength.",
     "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -1448,7 +1448,7 @@
       }
     ],
     "act_cost": "5 J",
-    "react_cost": "25 J",
+    "react_cost": "5 J",
     "time": "1 s"
   },
   {
