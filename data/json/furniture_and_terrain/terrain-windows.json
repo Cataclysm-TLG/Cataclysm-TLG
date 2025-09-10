@@ -554,11 +554,13 @@
       "sound_vol": 16,
       "sound_fail_vol": 10,
       "ter_set": "t_window_frame",
-      "items": [         { "item": "glass_shard", "count": [ 9, 19 ] },
+      "items": [
+        { "item": "glass_shard", "count": [ 9, 19 ] },
         { "item": "glass_shard_large", "count": [ 0, 2 ] },
         { "item": "sheet", "count": 2 },
         { "item": "stick", "count": 1 },
-        { "item": "string_36", "count": 1 } ]
+        { "item": "string_36", "count": 1 }
+      ]
     },
     "shoot": {
       "bash_as_ter": [ "t_window_empty", 38 ],

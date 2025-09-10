@@ -6598,7 +6598,8 @@ void map::place_toilet( const tripoint_bub_ms &p, int charges )
     furn_set( p, furn_f_toilet );
 }
 
-void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bool reinforced, bool powered, bool networked )
+void map::place_vending( const tripoint_bub_ms &p, const item_group_id &type, bool reinforced,
+                         bool powered, bool networked )
 {
     if( reinforced ) {
         furn_set( p, furn_f_vending_reinforced );
