@@ -591,8 +591,16 @@
     "name": { "str": "Wired Reflexes" },
     "description": "Your reaction time has been greatly enhanced with bionic nerve stimulators, giving you a +2 bonus to dexterity.",
     "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
-    "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 2 } ] } ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "enchantments": [
+      {
+        "condition": "ACTIVE",
+        "values": [ { "value": "DEXTERITY", "add": 2 } ]
+      }
+    ],
+    "act_cost": "5 J",
+    "react_cost": "10 J",
+    "time": "1 s"
   },
   {
     "id": "bio_digestion",
@@ -670,6 +678,9 @@
     "flags": [ "BIONIC_TOGGLED", "IMMUNE_HEARING_DAMAGE" ],
     "active_flags": [ "SAFECRACK_NO_TOOL" ],
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "HEARING_MULT", "multiply": 2.5 } ] } ],
+    "act_cost": "3 J",
+    "react_cost": "3 J",
+    "time": "1 s",
     "auto_deactivates": [ "bio_earplugs" ],
     "included_bionics": [ "bio_earplugs" ],
     "activated_on_install": true
@@ -996,8 +1007,16 @@
     "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence.",
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
     "occupied_bodyparts": [ [ "head", 6 ] ],
-    "enchantments": [ { "values": [ { "value": "INTELLIGENCE", "add": 2 } ] } ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "enchantments": [
+      {
+        "condition": "ACTIVE",
+        "values": [ { "value": "INTELLIGENCE", "add": 2 } ]
+      }
+    ],
+    "act_cost": "5 J",
+    "react_cost": "20 J",
+    "time": "1 s"
   },
   {
     "id": "bio_itchy",
@@ -1387,8 +1406,16 @@
       [ "foot_l", 2 ],
       [ "foot_r", 2 ]
     ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": 0.1 } ] } ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "enchantments": [
+      {
+        "condition": "ACTIVE",
+        "values": [ { "value": "SPEED", "multiply": 0.1 } ]
+      }
+    ],
+    "act_cost": "10 J",
+    "react_cost": "50 J",
+    "time": "1 s"
   },
   {
     "id": "bio_stiff",
@@ -1413,8 +1440,16 @@
     "name": { "str": "Muscle Augmentation" },
     "description": "Your muscular system has been surgically enhanced with myomer fibers, giving you a +2 bonus to strength.",
     "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 } ] } ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "enchantments": [
+      {
+        "condition": "ACTIVE",
+        "values": [ { "value": "STRENGTH", "add": 2 } ]
+      }
+    ],
+    "act_cost": "5 J",
+    "react_cost": "25 J",
+    "time": "1 s"
   },
   {
     "id": "bio_surgical_razor",
@@ -1756,8 +1791,11 @@
     "name": { "str": "Recoil Compensators" },
     "description": "Reactive shock absorbers installed in your wrists and elbows which greatly reduce felt recoil.",
     "occupied_bodyparts": [ [ "arm_l", 4 ], [ "arm_r", 4 ], [ "hand_l", 2 ], [ "hand_r", 2 ] ],
-    "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "RECOIL_MODIFIER", "multiply": -0.35 } ] } ]
+    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "RECOIL_MODIFIER", "multiply": -0.35 } ] } ],
+    "act_cost": "20 J",
+    "react_cost": "20 J",
+    "time": "1 s"
   },
   {
     "id": "bio_sleep_shutdown",
