@@ -4047,7 +4047,9 @@ void inventory_haul_selector::apply_selection( std::vector<item_location> &items
     std::unordered_map<inventory_entry *, int> counts;
     for( item_location &item : items ) {
         inventory_entry *entry = find_entry_by_location( item );
-        if( counts.count( entry ) ) {
+        if( !entry ) {
+            continue;
+        } else if( counts.count( entry ) ) {
             counts.at( entry ) += 1;
         } else {
             counts.emplace( entry, 1 );
