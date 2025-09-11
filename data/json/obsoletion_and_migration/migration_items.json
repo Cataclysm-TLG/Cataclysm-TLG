@@ -2617,5 +2617,23 @@
     "id": "compact_ASRG_containment",
     "type": "MIGRATION",
     "replace": "egg_grasshopper"
+  },
+    {
+    "id": "surv_rocket_launcher",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+    {
+    "id": "spiked_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },    {
+    "id": "incendiary_hm_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },    {
+    "id": "explosive_hm_rocket",
+    "type": "MIGRATION",
+    "replace": "pipe"
   }
 ]

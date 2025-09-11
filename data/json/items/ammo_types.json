@@ -721,12 +721,6 @@
   },
   {
     "type": "ammunition_type",
-    "id": "homebrew_rocket",
-    "name": "homebrew rocket",
-    "default": "spiked_rocket"
-  },
-  {
-    "type": "ammunition_type",
     "id": "atgm",
     "name": "152mm anti-tank guided missile",
     "default": "atgm_heat"
