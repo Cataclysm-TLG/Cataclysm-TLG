@@ -146,11 +146,12 @@
       ],
       "palettes": [ "orchard_tree_apple" ],
       "place_monsters": [
-        { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 60 },
-        { "monster": "GROUP_DOMESTIC", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 },
-        { "monster": "GROUP_SAFE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 20 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 25 },
-        { "monster": "GROUP_FUNGI_FLOWERS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 10 }
+        { "monster": "GROUP_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 18 },
+        { "monster": "GROUP_FARM_PEST", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 18 },
+        { "monster": "GROUP_DOMESTIC", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 12 },
+        { "monster": "GROUP_SAFE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 12 },
+        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 8 },
+        { "monster": "GROUP_FUNGI_FLOWERS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 4 }
       ]
     }
   },

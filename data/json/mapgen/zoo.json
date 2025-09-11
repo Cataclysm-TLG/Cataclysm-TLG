@@ -318,7 +318,7 @@
       "place_monster": [
         { "monster": "mon_coyote", "x": 8, "y": 16 },
         { "monster": "mon_coyote", "x": 9, "y": 17 },
-        { "group": "GROUP_BEARS_ZOO", "x": [ 8, 12 ], "y": [ 21, 23 ], "repeat": [ 3, 5 ], "chance": 85 }
+        { "group": "GROUP_BEARS_ZOO", "x": [ 8, 12 ], "y": [ 21, 23 ], "repeat": [ 1, 3 ], "chance": 85 }
       ]
     }
   },
@@ -617,13 +617,13 @@
         { "chance": 15, "item": "waitingroom", "x": [ 15, 16 ], "y": 19 }
       ],
       "place_monster": [
-        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 3, 4 ], "chance": 85 },
+        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 2, 4 ], "chance": 85 },
         { "monster": "mon_coyote_wolf", "x": 19, "y": 8 },
         { "monster": "mon_coyote_wolf", "x": 21, "y": 9 },
         { "monster": "mon_coyote_wolf", "x": 18, "y": 10 },
         { "monster": "mon_otter", "x": 19, "y": 12 },
         { "monster": "mon_otter", "x": 17, "y": 13 },
-        { "group": "GROUP_MOOSE", "x": [ 7, 9 ], "y": [ 12, 15 ], "repeat": [ 2, 3 ], "chance": 85 },
+        { "group": "GROUP_MOOSE", "x": [ 7, 9 ], "y": [ 12, 15 ], "repeat": [ 1, 3 ], "chance": 85 },
         { "monster": "mon_otter", "x": 19, "y": 14 },
         { "monster": "mon_otter", "x": 19, "y": 15 }
       ],
@@ -727,7 +727,7 @@
         { "item": "scrap", "repeat": [ 1, 2 ], "x": [ 6, 8 ], "y": 17 }
       ],
       "place_monster": [
-        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 3, 4 ], "chance": 85 },
+        { "group": "GROUP_DEER", "x": [ 18, 20 ], "y": [ 2, 5 ], "repeat": [ 1, 3 ], "chance": 85 },
         { "monster": "mon_coyote_wolf", "x": 19, "y": 8 },
         { "monster": "mon_coyote_wolf", "x": 21, "y": 9 },
         { "monster": "mon_coyote_wolf", "x": 18, "y": 10 },
@@ -735,7 +735,7 @@
         { "monster": "mon_otter", "x": 17, "y": 13 },
         { "monster": "mon_otter", "x": 19, "y": 14 },
         { "monster": "mon_otter", "x": 19, "y": 15 },
-        { "group": "GROUP_MOOSE_ZOO", "x": [ 7, 9 ], "y": [ 12, 16 ], "repeat": [ 3, 4 ], "chance": 85 }
+        { "group": "GROUP_MOOSE_ZOO", "x": [ 7, 9 ], "y": [ 12, 16 ], "repeat": [ 1, 3 ], "chance": 85 }
       ],
       "place_toilets": [ { "x": 5, "y": 2 }, { "x": 7, "y": 2 }, { "x": 7, "y": 7 } ]
     }
@@ -1154,7 +1154,7 @@
         { "group": "GROUP_SHEEP", "x": 9, "y": 19 },
         { "group": "GROUP_SHEEP", "x": 12, "y": 19 },
         { "monster": "mon_rabbit", "x": 18, "y": 19 },
-        { "group": "GROUP_PIGS_ZOO", "x": [ 14, 20 ], "y": [ 10, 18 ], "repeat": [ 5, 8 ], "chance": 85 }
+        { "group": "GROUP_PIGS_ZOO", "x": [ 14, 20 ], "y": [ 10, 18 ], "repeat": [ 1, 5 ], "chance": 85 }
       ]
     }
   },

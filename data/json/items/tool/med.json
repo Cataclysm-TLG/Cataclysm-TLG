@@ -156,7 +156,7 @@
     "flags": [ "SINGLE_USE", "TINDER" ],
     "use_action": { "type": "heal", "bandages_power": 3, "bleed": 12, "move_cost": 550 }
   },
-    {
+  {
     "id": "medical_gauze_makeshift",
     "type": "GENERIC",
     "category": "drugs",
