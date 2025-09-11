@@ -52,7 +52,7 @@
     "type": "mapgen",
     "method": "json",
     "om_terrain": [ [ "hayfield_straight", "hayfield_turnL", "hayfield_end", "hayfield_turnR" ] ],
-    "weight": 500,
+    "weight": 100,
     "object": {
       "fill_ter": "t_region_groundcover",
       "rows": [
