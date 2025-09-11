@@ -59,6 +59,11 @@
       "place_signs": [
         { "signage": "<given_name>'s Tree Farm, call us at 555-8758!", "x": 4, "y": 1 },
         { "signage": "Christmas trees available early winter!", "x": 5, "y": 1 }
+      ],
+      "place_monsters": [
+        { "monster": "GROUP_PARK_SCENIC", "x": 12, "y": 14, "chance": 3 },
+        { "monster": "GROUP_FARM_PESTS", "x": [ 3, 20 ], "y": [ 16, 20 ], "chance": 3 },
+        { "monster": "GROUP_FUNGI_FLOWERS", "x": [ 1, 22 ], "y": [ 1, 22 ], "chance": 7 }
       ]
     }
   },

@@ -36,7 +36,7 @@
       "monsters": { ".": { "monster": "GROUP_ZOMBIE_BOVINE", "chance": 2, "density": 0.0007 } },
       "nested": { "$": { "chunks": [ [ "1x1_bash", 2 ], [ "null", 98 ] ] } },
       "place_monster": [
-        { "group": "GROUP_COWS_DAIRY", "x": [ 8, 9 ], "y": [ 21, 23 ], "repeat": [ 0, 2 ], "chance": 30 },
+        { "group": "GROUP_COWS", "x": [ 8, 9 ], "y": [ 21, 23 ], "repeat": [ 0, 2 ], "chance": 20 },
         { "group": "GROUP_FARM_PESTS", "x": [ 10, 18 ], "y": [ 1, 11 ], "repeat": [ 0, 2 ], "chance": 30 }
       ]
     }

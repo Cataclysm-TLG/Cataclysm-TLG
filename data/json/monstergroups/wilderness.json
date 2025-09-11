@@ -497,7 +497,7 @@
       { "monster": "mon_chipmunk", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_fox_red", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_rabbit", "weight": 90, "cost_multiplier": 0 },
-      { "monster": "mon_rabbit_domestic", "weight": 1, "cost_multiplier": 0 },
+      { "monster": "mon_rabbit_domestic", "weight": 2, "cost_multiplier": 0 },
       { "monster": "mon_squirrel", "weight": 90, "cost_multiplier": 0 },
       { "monster": "mon_skunk", "weight": 2, "cost_multiplier": 0 },
       { "monster": "mon_mantis_small", "weight": 5, "cost_multiplier": 10 },
