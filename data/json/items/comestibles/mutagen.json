@@ -724,7 +724,7 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You drink the aranean mutagen.",
-      "vitamins": [ [ "mutagen_spider", 120, 220 ], [ "mutagen", 90 ] ]
+      "vitamins": [ [ "mutagen_aranean", 120, 220 ], [ "mutagen", 90 ] ]
     }
   },
   {
