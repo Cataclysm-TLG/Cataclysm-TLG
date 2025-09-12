@@ -19,7 +19,6 @@ bool shriek_stun( monster *z );
 bool howl( monster *z );
 bool rattle( monster *z );
 bool acid( monster *z );
-bool acid_accurate( monster *z );
 bool acid_barf( monster *z );
 bool shockstorm( monster *z );
 bool pull_metal_aoe( monster *z );
