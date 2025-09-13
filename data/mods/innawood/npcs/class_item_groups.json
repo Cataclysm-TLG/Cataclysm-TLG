@@ -553,5 +553,257 @@
     "id": "NC_TRADER_storage",
     "subtype": "distribution",
     "entries": [ { "group": "npc_storage", "prob": 80 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_foot",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ], [ "leathersandals", 5 ], [ "footrags_leather", 15 ], [ "footrags_fur", 15 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_hand",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 70 ], [ "gloves_leather", 10 ], [ "gloves_wraps_leather", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_head",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 40 ], [ "straw_hat", 5 ], [ "grass_keffiyeh", 10 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_leg",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ], [ "pants_leather", 10 ], [ "skirt_leather", 10 ], [ "skirt_grass", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_mouth",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 80 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_sensor",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_torso",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 70 ], [ "shirt_straw", 30 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_bashing",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "cudgel", 1 ], [ "stick_long", 2 ], [ "rock", 5 ], [ "q_staff", 1 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_stabbing",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "pointy_stick", 5 ], [ "pointy_stick_long", 2 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_cutting",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "sharp_rock", 5 ], [ "bone_knife", 2 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_throw",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ { "item": "rock", "prob": 50 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_archery",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "selfbow", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_quiver",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "quiver_birchbark", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_pistol",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_pistol_improvised", "prob": 35 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_shotgun",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_shotgun_improvised", "prob": 22 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_smg",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_shotgun_improvised", "prob": 22 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_rifle",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_rifle_improvised", "prob": 100 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_storage",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ "npc_storage" ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_extra",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_foot",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ], [ "leathersandals", 5 ], [ "footrags_leather", 15 ], [ "footrags_fur", 15 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_hand",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 70 ], [ "gloves_leather", 10 ], [ "gloves_wraps_leather", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_head",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 40 ], [ "straw_hat", 5 ], [ "grass_keffiyeh", 10 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_leg",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ], [ "pants_leather", 10 ], [ "skirt_leather", 10 ], [ "skirt_grass", 20 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_mouth",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 80 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_sensor",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_torso",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 70 ], [ "shirt_straw", 30 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_bashing",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ { "item": "primitive_hammer", "prob": 20 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_stabbing",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "pointy_stick", 5 ], [ "pointy_stick_long", 2 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_cutting",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ { "item": "stone_chopper", "prob": 20 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_throw",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ { "item": "rock", "prob": 50 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_archery",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "selfbow", 50 ] ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_pistol",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_pistol_improvised", "prob": 35 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_shotgun",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_shotgun_improvised", "prob": 22 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_smg",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_shotgun_improvised", "prob": 22 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_rifle",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ { "group": "guns_rifle_improvised", "prob": 100 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_storage",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "groups": [ "npc_storage" ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_NONE_HARDENED_extra",
+    "subtype": "distribution",
+    "//": "Override for hardcoded reference in npc::starting_inv_passtime",
+    "items": [ [ "null", 20 ] ]
   }
 ]
