@@ -192,7 +192,6 @@
     "skills_required": [ [ "archery", 4 ], [ "survival", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "charges": 10,
     "time": "40 m",
     "batch_time_factors": [ 80, 2 ],
     "autolearn": true,
