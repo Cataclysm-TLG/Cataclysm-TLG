@@ -517,6 +517,41 @@
     "armor": { "bash": 4, "cut": 4, "acid": 7, "bullet": 4 }
   },
   {
+    "id": "mon_feral_warden_prison_island",
+    "type": "MONSTER",
+    "name": { "str": "feral warden" },
+    "description": "The warden of this prison is somehow still alive, but that doesn't mean they haven't turned.  They still regard these surroundings with cold authority, even wielding a rifle to back it up, but their staring bloodshot eyes and eerie silence mark them as one of the billions whose minds shattered under the unbearable weight of the Cataclysm.",
+    "copy-from": "mon_feral_militia",
+    "special_attacks": [
+      {
+        "type": "gun",
+        "cooldown": 5,
+        "move_cost": 150,
+        "gun_type": "feral_militia_gun",
+        "ammo_type": "223",
+        "fake_skills": [ [ "gun", 2 ], [ "rifle", 2 ] ],
+        "fake_dex": 8,
+        "fake_per": 10,
+        "ranges": [ [ 2, 35, "DEFAULT" ] ],
+        "condition": {
+          "and": [
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } }
+          ]
+        },
+        "require_targeting_player": false,
+        "target_moving_vehicles": true,
+        "description": "The feral warden fires their rifle!"
+      },
+      { "id": "feral_weapon_feral_militia_gun" },
+      { "id": "feral_unarmed" },
+      { "id": "feral_bite" },
+      [ "BROWSE", 100 ],
+      [ "EAT_FOOD", 100 ]
+    ]
+  },
+  {
     "id": "mon_feral_survivalist",
     "type": "MONSTER",
     "name": { "str": "feral survivor" },
