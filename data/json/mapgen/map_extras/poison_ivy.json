@@ -21,7 +21,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "terrain": {
-        " ": [ [ "t_tree_young", 20 ], [ "t_region_shrub_forest", 20 ], [ "t_stump", 1 ], [ "t_region_groundcover_forest", 1 ] ]
+        " ": [ [ "t_region_groundcover_forest", 1 ] ]
       },
       "//": "Most terrain above can not house furniture and will thus give its location away, so no furniture.",
       "place_furniture": [ { "furn": "f_null", "x": 0, "y": 0 } ],

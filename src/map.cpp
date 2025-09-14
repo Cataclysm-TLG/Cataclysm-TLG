@@ -2623,7 +2623,7 @@ double map::ranged_target_size( const tripoint_bub_ms &p ) const
     return 0.1;
 }
 
-int map::climb_difficulty( const tripoint_bub_ms &p ) const
+int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
 {
     if( p.z() > OVERMAP_HEIGHT || p.z() < -OVERMAP_DEPTH ) {
         debugmsg( "climb_difficulty on out of bounds point: %d, %d, %d", p.x(), p.y(), p.z() );
@@ -2632,6 +2632,7 @@ int map::climb_difficulty( const tripoint_bub_ms &p ) const
 
     int best_difficulty = INT_MAX;
     int blocks_movement = 0;
+    // TODO: Weight checks for ladders.
     if( has_flag( ter_furn_flag::TFLAG_LADDER, p ) ) {
         // Really easy, but you have to stand on the tile
         return 1;
@@ -2648,12 +2649,36 @@ int map::climb_difficulty( const tripoint_bub_ms &p ) const
             best_difficulty = std::min( best_difficulty, 10 );
             blocks_movement++;
         } else if( veh_at( pt ) ) {
-            // Vehicle tiles are quite good for climbing
-            // TODO: Penalize spiked parts?
+            // Vehicle tiles are quite good for climbing.
+            // TODO: Some definitely shouldn't be.
             best_difficulty = std::min( best_difficulty, 7 );
         }
-        if( best_difficulty > 5 && has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) {
-            best_difficulty = 5;
+        if( best_difficulty > 5 && ( has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) ) {
+            map &here = get_map();
+            bool furn_supports_weight = true;
+            bool ter_supports_weight = true;
+            if( !veh_at( pt ) ) {
+                if( you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) {
+                    you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
+                    ter_supports_weight = false;
+                }
+                // Specifically check for climbable furniture so that we don't get irrelevant messages about nonclimbable furniture.
+                if( here.has_furn( pt ) ) {
+                    const furn_id &climbing_furniture = furn( pt );
+                    // I don't think we need this null guard, but it can hardly hurt.
+                    if( climbing_furniture != furn_str_id::NULL_ID() ) {
+                        if( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) {
+                            if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
+                                you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
+                                furn_supports_weight = false;
+                            }
+                        }
+                    }
+                }
+                if( furn_supports_weight && ter_supports_weight ) {
+                    best_difficulty = 5;
+                }
+            }
         }
     }
 
@@ -9231,8 +9256,6 @@ void map::spawn_monsters_submap( const tripoint_rel_sm &gp, bool ignore_sight, b
     }
     const tripoint_bub_ms gp_ms = rebase_bub( coords::project_to<coords::ms>( gp ) );
 
-    creature_tracker &creatures = get_creature_tracker();
-
     // The list of spawns on the submap might be updated while we are iterating it.
     // For example, `monster::on_load` -> `monster::try_reproduce` calls `map::add_spawn`.
     // Therefore, this intentionally uses old-school indexed for-loop with re-check against `.size()` each step.
@@ -9280,29 +9303,9 @@ void map::spawn_monsters_submap( const tripoint_rel_sm &gp, bool ignore_sight, b
                 tmp.ammo = tmp.type->starting_ammo;
             }
 
-            const auto valid_location = [&]( const tripoint_bub_ms & p ) {
-                // Checking for creatures via g is only meaningful if this is the main game map.
-                // If it's some local map instance, the coordinates will most likely not even match.
-                return ( !g || &get_map() != this || !creatures.creature_at( p ) ) && tmp.can_move_to( p );
-            };
-
-            const auto place_it = [&]( const tripoint_bub_ms & p ) {
-                monster *const placed = g->place_critter_at( make_shared_fast<monster>( tmp ), p );
-                if( !i.data.patrol_points_rel_ms.empty() ) {
-                    placed->set_patrol_route( i.data.patrol_points_rel_ms );
-                }
-                if( placed ) {
-                    placed->on_load();
-                }
-            };
-
-            // First check out defined spawn location for a valid placement, and if that doesn't work
-            // then fall back to picking a random point that is a valid location.
-            if( valid_location( center ) ) {
-                place_it( center );
-            } else if( const std::optional<tripoint_bub_ms> pos = random_point( points, valid_location ) ) {
-                place_it( *pos );
-            }
+            // This can fail, but there isn't much we can do about it if it does. We could output some
+            // kind of info message, but, again, it's unlikely to result in anything that can be acted on.
+            g->place_critter_at_or_within( make_shared_fast<monster>( tmp ), this, center, points );
         }
     }
     current_submap->spawns.clear();
