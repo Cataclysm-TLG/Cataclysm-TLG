@@ -360,6 +360,8 @@ class game
         monster *place_critter_within( const mtype_id &id, const tripoint_range<tripoint_bub_ms> &range );
         monster *place_critter_within( const shared_ptr_fast<monster> &mon,
                                        const tripoint_range<tripoint_bub_ms> &range );
+        // Differs from the operations above in that it refers to a map that isn't necessarily the main one.
+        // Also, it places the critter at the center position if possible, and any available location with equal weight if not.
         monster *place_critter_at_or_within( const shared_ptr_fast<monster> &mon, map *here,
                                              const tripoint_bub_ms &center, const tripoint_range<tripoint_bub_ms> &range );
         /** @} */
