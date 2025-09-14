@@ -134,16 +134,7 @@
         "topic": "TALK_DONE",
         "switch": true,
         "condition": { "u_has_trait": "PSYCHOPATH" },
-        "effect": [
-          {
-            "u_add_morale": "morale_chat_uncaring",
-            "bonus": -10,
-            "max_bonus": -20,
-            "duration": "120 minutes",
-            "decay_start": "60 minutes"
-          },
-          { "npc_add_effect": "asked_to_socialize", "duration": 7000 }
-        ]
+        "effect": [ { "npc_add_effect": "asked_to_socialize", "duration": 7000 } ]
       }
     ]
   }
