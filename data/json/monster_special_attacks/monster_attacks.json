@@ -581,6 +581,22 @@
   {
     "type": "monster_attack",
     "attack_type": "melee",
+    "id": "bite_grab_required",
+    "//": "For monsters who need to grab(bite) and then thrash like crocodiles and sharks",
+    "cooldown": 5,
+    "move_cost": 100,
+    "condition": { "u_has_flag": "GRAB_FILTER" },
+    "damage_max_instance": [ { "damage_type": "cut", "amount": 8 } ],
+    "hit_dmg_u": "%1$s bites on your %2$s while holding you!",
+    "hit_dmg_npc": "%1$s bites down on <npcname> while holding them!",
+    "no_dmg_msg_u": "%1$s bites down on your %2$s, but fails to penetrate armor.",
+    "no_dmg_msg_npc": "%1$s bites down on <npcname>, but fails to penetrate armor.",
+    "dodgeable": false,
+    "blockable": false
+  },
+  {
+    "type": "monster_attack",
+    "attack_type": "melee",
     "id": "slam",
     "cooldown": 20,
     "move_cost": 180,
