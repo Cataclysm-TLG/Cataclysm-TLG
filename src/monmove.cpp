@@ -1605,7 +1605,7 @@ int monster::calc_climb_cost( const tripoint_bub_ms &f, const tripoint_bub_ms &t
 
     map &here = get_map();
     if( climbs() && !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR, t ) ) {
-        const int diff = here.climb_difficulty( f );
+        const int diff = here.climb_difficulty( f, *this );
         if( diff <= 10 ) {
             return 150;
         }

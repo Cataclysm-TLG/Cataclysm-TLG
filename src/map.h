@@ -1643,7 +1643,7 @@ class map
          * Checks 3x3 block centered on p for terrain to climb.
          * @return Difficulty of climbing check from point p.
          */
-        int climb_difficulty( const tripoint_bub_ms &p ) const;
+        int climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const;
 
         // Support (of weight, structures etc.)
     private:

@@ -2623,7 +2623,7 @@ double map::ranged_target_size( const tripoint_bub_ms &p ) const
     return 0.1;
 }
 
-int map::climb_difficulty( const tripoint_bub_ms &p ) const
+int map::climb_difficulty( const tripoint_bub_ms &p, const Creature &you ) const
 {
     if( p.z() > OVERMAP_HEIGHT || p.z() < -OVERMAP_DEPTH ) {
         debugmsg( "climb_difficulty on out of bounds point: %d, %d, %d", p.x(), p.y(), p.z() );
@@ -2632,6 +2632,7 @@ int map::climb_difficulty( const tripoint_bub_ms &p ) const
 
     int best_difficulty = INT_MAX;
     int blocks_movement = 0;
+    // TODO: Weight checks for ladders.
     if( has_flag( ter_furn_flag::TFLAG_LADDER, p ) ) {
         // Really easy, but you have to stand on the tile
         return 1;
@@ -2648,12 +2649,36 @@ int map::climb_difficulty( const tripoint_bub_ms &p ) const
             best_difficulty = std::min( best_difficulty, 10 );
             blocks_movement++;
         } else if( veh_at( pt ) ) {
-            // Vehicle tiles are quite good for climbing
-            // TODO: Penalize spiked parts?
+            // Vehicle tiles are quite good for climbing.
+            // TODO: Some definitely shouldn't be.
             best_difficulty = std::min( best_difficulty, 7 );
         }
-        if( best_difficulty > 5 && has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) {
-            best_difficulty = 5;
+        if( best_difficulty > 5 && ( has_flag( ter_furn_flag::TFLAG_CLIMBABLE, pt ) ) ) {
+            map &here = get_map();
+            bool furn_supports_weight = true;
+            bool ter_supports_weight = true;
+            if( !veh_at( pt ) ) {
+                if( you.get_weight() / 10000_gram > here.ter( pt ).obj().bash->str_min ) {
+                    you.add_msg_if_player( _( "The %s can't support your weight." ), here.ter( pt ).obj().name() );
+                    ter_supports_weight = false;
+                }
+                // Specifically check for climbable furniture so that we don't get irrelevant messages about nonclimbable furniture.
+                if( here.has_furn( pt ) ) {
+                    const furn_id &climbing_furniture = furn( pt );
+                    // I don't think we need this null guard, but it can hardly hurt.
+                    if( climbing_furniture != furn_str_id::NULL_ID() ) {
+                        if( climbing_furniture.obj().has_flag( ter_furn_flag::TFLAG_CLIMBABLE ) ) {
+                            if( you.get_weight() / 10000_gram > here.furn( pt ).obj().bash->str_min ) {
+                                you.add_msg_if_player( _( "The %s can't support your weight." ), here.furn( pt ).obj().name() );
+                                furn_supports_weight = false;
+                            }
+                        }
+                    }
+                }
+                if( furn_supports_weight && ter_supports_weight ) {
+                    best_difficulty = 5;
+                }
+            }
         }
     }
 
