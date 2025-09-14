@@ -13688,29 +13688,9 @@ int Character::climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms
         return 0;
     }
 
-    const int diff = here.climb_difficulty( from );
+    const int diff = here.climb_difficulty( from, *this );
 
     if( diff > 5 ) {
-        return 0;
-    }
-
-    bool furn_supports_weight = true;
-    bool ter_supports_weight = true;
-    // Check both furn and ter. Only one needs to be climbable for us.
-    if( ( here.has_flag_furn( ter_furn_flag::TFLAG_LADDER, from ) ||
-          here.has_flag_furn( ter_furn_flag::TFLAG_CLIMBABLE, from ) ) &&
-        get_weight() / 10000_gram > here.furn( from ).obj().bash->str_min ) {
-        add_msg_if_player( _( "The %s can't support your weight." ), here.furn( from ).obj().name() );
-        furn_supports_weight = false;
-    }
-    if( ( here.has_flag_ter( ter_furn_flag::TFLAG_LADDER, from ) ||
-          here.has_flag_ter( ter_furn_flag::TFLAG_CLIMBABLE, from ) ) &&
-        get_weight() / 10000_gram > here.ter( from ).obj().bash->str_min ) {
-        add_msg_if_player( _( "The %s can't support your weight." ), here.ter( from ).obj().name() );
-        ter_supports_weight = false;
-    }
-
-    if( !furn_supports_weight || !ter_supports_weight ) {
         return 0;
     }
 

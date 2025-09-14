@@ -116,7 +116,7 @@
       ],
       "place_monster": [
         { "monster": "mon_zombie_brute_shocker", "x": 65, "y": 36, "name": "The Foreman" },
-        { "monster": "mon_zombie_master", "x": 40, "y": 63, "name": "The Warden" },
+        { "monster": "mon_feral_warden_prison_island", "x": 40, "y": 63, "name": "The Warden" },
         { "monster": "mon_zombie_kevlar_2", "x": 77, "y": 48, "name": "The Chief" },
         { "monster": "mon_zombie_scientist", "x": 81, "y": 58, "name": "The Doctor" },
         { "monster": "mon_zombie_necro", "x": 75, "y": 28, "name": "The Priest" },
