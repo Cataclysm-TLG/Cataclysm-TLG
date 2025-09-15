@@ -958,7 +958,7 @@ static void smash()
     // Prompt to keep smashing only if the player targets the same spot 3 times.
     if( res.did_smash ) {
         if( smashp == last_smash ) {
-            repeat_count = std::min( 4, repeat_count + 1);
+            repeat_count = std::min( 4, repeat_count + 1 );
         } else {
             repeat_count = 1;
             last_smash = smashp;

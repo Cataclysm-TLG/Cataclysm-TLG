@@ -5735,19 +5735,26 @@ bool basecamp::distribute_food( bool player_command )
     }
 
     if( nutrients_to_add.kcal() <= 0 && nutrients_to_add.vitamins().empty() ) {
-        popup( _( "No suitable items are located at the drop points…" ) );
+        if( player_command ) {
+            popup( _( "No suitable items are located at the drop points…" ) );
+        }
         return false;
     }
 
     std::string popup_msg;
     if( nutrients_to_add.kcal() > 0 ) {
-        popup_msg = string_format( _( "You distribute %d kcal worth of food to your companions." ),
-                                   nutrients_to_add.kcal() );
+        if( player_command ) {
+            popup_msg = string_format( _( "You distribute %d kcal worth of food to your companions." ),
+                                       nutrients_to_add.kcal() );
+        }
     } else {
-        popup_msg = _( "You distribute vitamins and medicine to your companions." );
+        if( player_command ) {
+            popup_msg = _( "You distribute vitamins and medicine to your companions." );
+        }
     }
-
-    popup( popup_msg );
+    if( player_command ) {
+        popup( popup_msg );
+    }
     camp_food_supply( nutrients_to_add );
     return true;
 }
