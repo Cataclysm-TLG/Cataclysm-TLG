@@ -336,10 +336,10 @@
     "name": { "str": "scorched zombie horse" },
     "copy-from": "mon_zombie_horse",
     "description": "This undead horse has a charred hide as black as soot, the underside of which is littered with gashes and holes.  Pillars of choking smoke pour from the wounds, smothering everything that draws near.",
-    "diff": 4,
+    "diff": 6,
     "hp": 125,
     "color": "blue_white",
-    "dodge": 4,
+    "dodge": 3,
     "emit_fields": [ { "emit_id": "emit_smoke_stream", "delay": "1 s" } ],
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true }, "message": "The %s explodes!" },
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "POISON", "HARDTOSHOOT", "NO_BREATHE", "REVIVES" ]
