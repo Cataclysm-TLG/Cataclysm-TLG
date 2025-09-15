@@ -3225,6 +3225,14 @@ void game::load_master()
     } );
 }
 
+void game::load_dimension_data()
+{
+    const cata_path datafile = PATH_INFO::current_dimension_save_path() / SAVE_DIMENSION_DATA;
+    read_from_file_optional( datafile, [this, &datafile]( std::istream & is ) {
+        unserialize_dimension_data( datafile, is );
+    } );
+}
+
 bool game::load( const std::string &world )
 {
     world_generator->init();
@@ -3268,6 +3276,13 @@ bool game::load( const save_t &name )
                 {
                     // Now load up the master game data; factions (and more?)
                     load_master();
+                }
+            },
+            {
+                _( "Dimension data" ), [&]()
+                {
+                    // Load up dimension specific data (ie; weather, overmapstate)
+                    load_dimension_data();
                 }
             },
             {
@@ -3546,7 +3561,14 @@ bool game::save_factions_missions_npcs()
         serialize_master( fout );
     }, _( "factions data" ) );
 }
-
+//Saves per-dimension data like Weather and overmapbuffer state
+bool game::save_dimension_data()
+{
+    cata_path data_file = PATH_INFO::current_dimension_save_path() / SAVE_DIMENSION_DATA;
+    return write_to_file( data_file, [&]( std::ostream & fout ) {
+        serialize_dimension_data( fout );
+    }, _( "dimension data" ) );
+}
 bool game::save_maps()
 {
     map &here = get_map();
@@ -3722,6 +3744,7 @@ bool game::save()
         if( !save_player_data() ||
             !save_achievements() ||
             !save_factions_missions_npcs() ||
+            !save_dimension_data() ||
             !save_maps() ||
             !get_auto_pickup().save_character() ||
             !get_auto_notes_settings().save( true ) ||
@@ -12935,6 +12958,7 @@ bool game::travel_to_dimension( const std::string &new_prefix )
     map &here = get_map();
     avatar &player = get_avatar();
     unload_npcs();
+    save_dimension_data();
     for( monster &critter : all_monsters() ) {
         despawn_monster( critter );
     }
@@ -12956,13 +12980,12 @@ bool game::travel_to_dimension( const std::string &new_prefix )
     } else {
         dimension_prefix.clear();
     }
-
+    // Load in data specific to the dimension (like weather)
+    load_dimension_data();
     MAPBUFFER.clear();
     // FIXME hack to prevent crashes from temperature checks
     // This returns to false in 'on_turn()' so it should be fine?
     swapping_dimensions = true;
-    // In theory if we skipped the next two lines we'd have an exact copy of the overmap
-    // from the past dimension, only with differences noticeable in the local map.
     overmap_buffer.clear();
     // load/create new overmap
     overmap_buffer.get( point_abs_om{} );
@@ -12978,7 +13001,7 @@ bool game::travel_to_dimension( const std::string &new_prefix )
     here.spawn_monsters( true, true );
     update_overmap_seen();
     // Update weather now as it could be different on the new location
-    get_weather().nextweather = calendar::turn;
+    //get_weather().nextweather = calendar::turn;
     return true;
 }
 
