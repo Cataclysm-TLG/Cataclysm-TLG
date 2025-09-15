@@ -4994,6 +4994,12 @@ void Character::mod_fatigue( int nfatigue )
 
 void Character::mod_sleep_deprivation( int nsleep_deprivation )
 {
+    // Slow the accrual of sleep deprivation if we biologically need less sleep.
+    // No need to bother if it's the other way around.
+    needs_rates rates = calc_needs_rates();
+    if( rates.fatigue < 1.f ) {
+        nsleep_deprivation *= rates.fatigue;
+    }
     set_sleep_deprivation( sleep_deprivation + nsleep_deprivation );
 }
 
@@ -5631,6 +5637,13 @@ needs_rates Character::calc_needs_rates() const
         // Transpiration, the act of moving nutrients with evaporating water, can take a very heavy toll on your thirst when it's really hot.
         rates.thirst *= ( ( units::to_fahrenheit( get_weather().get_temperature(
                                 pos_bub() ) ) - 32.5f ) / 40.0f );
+    }
+
+    // Tired or injured bodies need more sleep.
+    if( hp_percentage() < 75 || weariness_level() >= 2 ) {
+        rates.fatigue *= 1.15f;
+    } else if( rates.fatigue < 1.f && ( hp_percentage() < 50 && weariness_level() >= 4 ) ) {
+        rates.fatigue *= 1.33f;
     }
 
     rates.hunger = enchantment_cache->modify_value( enchant_vals::mod::HUNGER, rates.hunger );

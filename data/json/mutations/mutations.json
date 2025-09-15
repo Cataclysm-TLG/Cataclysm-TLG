@@ -1404,7 +1404,7 @@
     "starting_trait": true,
     "types": [ "SLEEP" ],
     "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT", "FELINE", "RAT" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.333 }, { "value": "FATIGUE", "multiply": 0.333 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": 0.333 } ] } ]
   },
   {
     "type": "mutation",
@@ -2316,7 +2316,7 @@
     "changes_to": [ "WAKEFUL3" ],
     "threshreq": [ "THRESH_ALPHA", "THRESH_ELFA", "THRESH_BATRACHIAN" ],
     "category": [ "ALPHA", "ELFA", "BATRACHIAN" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": -0.25 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.25 }, { "value": "FATIGUE", "multiply": -0.25 } ] } ]
   },
   {
     "type": "mutation",
