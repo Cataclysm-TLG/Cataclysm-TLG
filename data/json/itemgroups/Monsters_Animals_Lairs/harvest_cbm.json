@@ -84,7 +84,7 @@
           { "item": "bio_tools", "prob": 15 },
           { "item": "bio_electrokit", "prob": 15 },
           { "item": "bio_magnet", "prob": 15 },
-          { "item": "bio_soporific", "prob": 20 },
+          { "item": "bio_sleep_shutdown", "prob": 20 },
           { "item": "bio_armor_eyes", "prob": 25 },
           { "item": "bio_syringe", "prob": 10 },
           { "item": "bio_tattoo_led", "prob": 40 },

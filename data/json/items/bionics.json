@@ -1136,18 +1136,6 @@
     "difficulty": 5
   },
   {
-    "id": "bio_soporific",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
-    "name": { "str": "Soporific Induction CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A microscopic electrode designed to gently stimulate a particular cluster of neurons in the hypothalamus, helping the user to fall asleep.",
-    "price": "3500 USD",
-    "price_postapoc": "5 USD",
-    "weight": "50 g",
-    "difficulty": 2
-  },
-  {
     "id": "bio_ankles",
     "copy-from": "bionic_general_faulty",
     "type": "BIONIC_ITEM",
@@ -1375,9 +1363,9 @@
   },
   {
     "id": "bio_sleep_shutdown",
-    "copy-from": "bionic_general_faulty",
+    "copy-from": "bionic_general_npc_usable",
     "type": "BIONIC_ITEM",
-    "name": { "str": "Sleep Mode Shutdown CBM" },
+    "name": { "str": "Sleep Mode CBM" },
     "description": "A CBM that completely shuts down all communication between the user's brain and the rest of their body when they fall asleep, preventing them from waking up under any circumstance until their natural sleep cycle completes.  An inability to trigger its effects manually makes it useless as an anesthesia substitute.",
     "weight": "100 g",
     "price_postapoc": "5 USD",
