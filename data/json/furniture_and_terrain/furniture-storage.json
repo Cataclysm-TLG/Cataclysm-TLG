@@ -341,7 +341,7 @@
     "close": "f_gunsafe_c",
     "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "MOUNTABLE" ],
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -368,7 +368,7 @@
     "open": "f_gunsafe_o",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -397,7 +397,7 @@
     "examine_action": "locked_object_pickable",
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -424,7 +424,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -452,7 +452,7 @@
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "examine_action": "gunsafe_el",
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -732,7 +732,7 @@
     "open": "f_safe_o",
     "examine_action": "open_safe",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -760,7 +760,7 @@
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "examine_action": "safe",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -787,7 +787,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "MOUNTABLE" ],
     "close": "f_safe_c",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -1314,8 +1314,8 @@
     "examine_action": "keg",
     "keg_capacity": "300 L",
     "bash": {
-      "str_min": 10,
-      "str_max": 20,
+      "str_min": 25,
+      "str_max": 100,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [ { "item": "scrap", "count": [ 8, 32 ] }, { "item": "water_faucet", "prob": 50 } ]
@@ -1338,8 +1338,8 @@
     "examine_action": "keg",
     "keg_capacity": "1500 L",
     "bash": {
-      "str_min": 16,
-      "str_max": 32,
+      "str_min": 30,
+      "str_max": 120,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [ { "item": "scrap", "count": [ 40, 160 ] }, { "item": "water_faucet", "prob": 50 } ]
@@ -1467,8 +1467,8 @@
       ]
     },
     "bash": {
-      "str_min": 8,
-      "str_max": 45,
+      "str_min": 40,
+      "str_max": 100,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
@@ -1498,8 +1498,8 @@
     "keg_capacity": "11250 ml",
     "deconstruct": { "items": [ { "item": "churn", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
-      "str_max": 50,
+      "str_min": 30,
+      "str_max": 75,
       "sound": "smash!",
       "sound_fail": "whump.",
       "items": [
@@ -1527,7 +1527,7 @@
     "max_volume": "1000 L",
     "flags": [ "CONTAINER", "SEALED", "BLOCKSDOOR", "MOUNTABLE" ],
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1561,7 +1561,7 @@
       "prying_data": { "difficulty": 4, "prying_level": 1, "noisy": true, "failure": "The lid is sealed more tightly than you thought." }
     },
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1588,7 +1588,7 @@
     "max_volume": "1000 L",
     "flags": [ "CONTAINER", "PLACE_ITEM", "NO_SIGHT", "HIDE_PLACE", "BLOCKSDOOR", "MOUNTABLE", "SMALL_HIDE" ],
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1617,8 +1617,8 @@
       "items": [ { "item": "wood_panel", "count": 5 }, { "item": "hinge", "count": 2 }, { "item": "nail", "charges": [ 6, 10 ] } ]
     },
     "bash": {
-      "str_min": 12,
-      "str_max": 40,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "smash!",
       "sound_fail": "wham!",
       "items": [ { "item": "2x4", "count": [ 1, 5 ] }, { "item": "hinge", "count": 2 }, { "item": "nail", "charges": [ 2, 10 ] } ]
@@ -1642,8 +1642,8 @@
     "max_volume": "68208 ml",
     "deconstruct": { "items": [ { "item": "foot_locker", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
-      "str_max": 40,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
@@ -1673,7 +1673,7 @@
     "max_volume": "67669 ml",
     "deconstruct": { "items": [ { "item": "foot_locker_aluminum", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
+      "str_min": 16,
       "str_max": 40,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
