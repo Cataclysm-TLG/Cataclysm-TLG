@@ -1383,8 +1383,6 @@ static void sleep()
             continue;
         }
 
-        // some bionics
-        // bio_alarm is useful for waking up during sleeping
         if( bio.info().has_flag( STATIC( json_character_flag( "BIONIC_SLEEP_FRIENDLY" ) ) ) ) {
             continue;
         }

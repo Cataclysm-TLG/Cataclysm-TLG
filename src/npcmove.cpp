@@ -106,7 +106,7 @@ static const bionic_id bio_painkiller( "bio_painkiller" );
 static const bionic_id bio_plutfilter( "bio_plutfilter" );
 static const bionic_id bio_radscrubber( "bio_radscrubber" );
 static const bionic_id bio_shock( "bio_shock" );
-static const bionic_id bio_soporific( "bio_soporific" );
+static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_bullet( "bullet" );
@@ -1649,7 +1649,7 @@ void npc::execute_action( npc_action action )
             if( best_spot == pos_bub() || path.empty() ) {
                 move_pause();
                 if( !has_effect( effect_lying_down ) ) {
-                    activate_bionic_by_id( bio_soporific );
+                    activate_bionic_by_id( bio_sleep_shutdown );
                     add_effect( effect_lying_down, 30_minutes, false, 1 );
                     if( !player_character.in_sleep_state() ) {
                         add_msg_if_player_sees( *this, _( "%s lies down to sleep." ), get_name() );
@@ -3402,7 +3402,7 @@ void npc::move_pause()
 {
     // make sure we're using the best weapon
     if( calendar::once_every( 1_hours ) ) {
-        deactivate_bionic_by_id( bio_soporific );
+        deactivate_bionic_by_id( bio_sleep_shutdown );
         for( const bionic_id &bio_id : health_cbms ) {
             activate_bionic_by_id( bio_id );
         }
