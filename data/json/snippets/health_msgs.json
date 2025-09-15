@@ -54,13 +54,12 @@
       "You feel cruddy.  Maybe you should consider eating a bit healthier.",
       "You get up with a bit of a scratch in your throat.",
       "You stretch, but your muscles don't seem to be doing so good today.",
-      "Your stomach gurgles.  It's probably nothing, but maybe you should look into eating something healthy.",
-      "You struggle to awareness.  Being awake seems somewhat harder to reach today.",
-      "You wake up feeling a bit off, as if something is not quite right.",
+      "You wake up congested and bleary-eyed.",
+      "It's harder to get up today.",
+      "You wake up feeling grouchy and foggy-headed.",
       "Your body feels sluggish, making every movement an effort.",
-      "You get up feeling like you didn't get enough rest, even if you slept for hours.",
       "There's a nagging discomfort in your body, making it hard to focus on anything else.",
-      "You feel a general sense of malaise, as if something is draining your energy."
+      "You feel a general sense of malaise."
     ]
   },
   {
@@ -68,13 +67,13 @@
     "category": "health_very_bad",
     "text": [
       "Getting out of bed only comes with great difficulty, and your muscles resist the movement.",
-      "Getting up seems like it should be easy, but all you want to do is go back to bed.",
-      "Tired hands rub at your eyes, the little aches of yesterday protesting your stretches.",
+      "Getting up seems like it should be easy, but all you want to do is lie there.",
+      "You feel like crap today.",
       "Alertness seems flighty today, and your body argues when you move towards it.",
       "You're up, but your body seems like it would rather stay in bed.",
-      "You wake up feeling drained, as if you haven't slept at all.",
+      "You wake up feeling logy and your stomach is sour.",
       "Every movement feels like a chore, your muscles aching with every step.",
-      "You feel a pervasive sense of exhaustion, making it hard to even think clearly.",
+      "Your eyes are crusty and your mouth is dry.  Another day of this shit.",
       "Your body feels heavy and uncooperative, resisting every effort to get up.",
       "You wake up with a sense of dread, knowing today will be a struggle."
     ]
@@ -83,16 +82,16 @@
     "type": "snippet",
     "category": "health_horrible",
     "text": [
-      "You get up feeling horrible, as if something was messing with your body.",
+      "A part of you wishes you hadn't woken up.  Your aching body immediately protests.",
       "You feel awful, and every ache from yesterday is still there.",
-      "Your eyes struggle to open, and your muscles ache like you didn't sleep at all.",
+      "you feel stiff and sore all over.",
       "Bleary-eyed and half-asleep, you consider why you are doing this to yourself.",
       "Awareness seems to only come with a battle… and your body seems to be on its side.",
       "You wake up feeling like you've been hit by a truck, every part of your body protesting.",
-      "A deep, bone-weary exhaustion fills you, making it hard to even lift your head.",
+      "You're so congested it's a wonder you didn't choke to death in your sleep.",
+      "Your stomach feels sour, a sensation you can almost taste on the back of your tongue.",
       "You feel a persistent ache in your body, as if you were fighting off a severe illness.",
-      "Every joint and muscle screams in protest as you try to get up.",
-      "You wake up feeling completely depleted, with no energy to face the day."
+      "Every joint and muscle screams in protest as you try to get up."
     ]
   },
   {

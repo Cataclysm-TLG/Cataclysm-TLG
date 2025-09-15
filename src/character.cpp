@@ -5632,6 +5632,13 @@ needs_rates Character::calc_needs_rates() const
                                 pos_bub() ) ) - 32.5f ) / 40.0f );
     }
 
+    // Tired or injured bodies need more sleep.
+    if( hp_percentage() < 75 || weariness_level() >= 2 ) {
+        rates.fatigue *= 1.15f;
+    } else if( rates.fatigue < 1.f && ( hp_percentage() < 50 && weariness_level() >= 4 ) ) {
+        rates.fatigue *= 1.33f;
+    }
+
     rates.hunger = enchantment_cache->modify_value( enchant_vals::mod::HUNGER, rates.hunger );
     rates.fatigue = enchantment_cache->modify_value( enchant_vals::mod::FATIGUE, rates.fatigue );
     rates.thirst = enchantment_cache->modify_value( enchant_vals::mod::THIRST, rates.thirst );
