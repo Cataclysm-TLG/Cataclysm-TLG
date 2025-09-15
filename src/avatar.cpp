@@ -1924,7 +1924,7 @@ void avatar::try_to_sleep( const time_duration &dur )
 
     add_msg_if_player( _( "You start trying to fall asleep." ) );
     if( has_active_bionic( bio_sleep_shutdown ) ) {
-        bio_sleep_shutdown_at_last_sleep_check = has_power();
+        bio_sleep_shutdown_powered_at_last_sleep_check = has_power();
         if( bio_sleep_shutdown_powered_at_last_sleep_check ) {
             add_msg_if_player( m_good, _( "Your sleep mode CBM starts working its magic." ) );
         } else {

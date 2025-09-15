@@ -11760,9 +11760,9 @@ bool Character::can_sleep()
 
     if( has_active_bionic( bio_sleep_shutdown ) ) {
         if( bio_sleep_shutdown_powered_at_last_sleep_check && !has_power() ) {
-            add_msg_if_player( m_bad, _( "Your sleep mode CBM runs out of power!" ) );
+            add_msg_if_player( m_bad, _( "Your Sleep Mode CBM runs out of power!" ) );
         } else if( !bio_sleep_shutdown_powered_at_last_sleep_check && has_power() ) {
-            add_msg_if_player( m_good, _( "Your sleep mode CBM starts back up." ) );
+            add_msg_if_player( m_good, _( "Your Sleep Mode CBM starts back up." ) );
         }
         bio_sleep_shutdown_powered_at_last_sleep_check = has_power();
     }

@@ -1775,6 +1775,7 @@
     "description": "A set of miniscule devices are embedded in your brain stem and hypothalamus.  When active, they allow the user to fall asleep almost instantly and at-will.  The downside, however, is that the user will remain asleep no matter what happens to their body until they complete their natural sleep cycle, unless a sleep alarm from a differet bionic device is triggered.",
     "occupied_bodyparts": [ [ "head", 1 ] ],
     "flags": [ "BIONIC_SHOCKPROOF", "BIONIC_TOGGLED" ],
+    "act_cost": "2 J",
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "SLEEPY", "add": 30 } ] } ]
   },
   {
