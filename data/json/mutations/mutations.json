@@ -1097,7 +1097,7 @@
     "types": [ "SLEEP" ],
     "starting_trait": true,
     "category": [ "ALPHA", "ELFA", "PLANT", "BATRACHIAN" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": -0.15 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.15 }, { "value": "FATIGUE", "multiply": -0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -1404,7 +1404,7 @@
     "starting_trait": true,
     "types": [ "SLEEP" ],
     "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT", "FELINE", "RAT" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.333 }, { "value": "FATIGUE", "multiply": 0.333 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": -0.333 }, { "value": "FATIGUE", "multiply": 0.333 } ] } ]
   },
   {
     "type": "mutation",
@@ -2316,7 +2316,7 @@
     "changes_to": [ "WAKEFUL3" ],
     "threshreq": [ "THRESH_ALPHA", "THRESH_ELFA", "THRESH_BATRACHIAN" ],
     "category": [ "ALPHA", "ELFA", "BATRACHIAN" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": -0.25 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.25 }, { "value": "FATIGUE", "multiply": -0.25 } ] } ]
   },
   {
     "type": "mutation",
@@ -5741,6 +5741,7 @@
         "values": [
           { "value": "MAX_HP", "add": -6 },
           { "value": "STRENGTH", "add": 4 },
+          { "value": "FATIGUE_REGEN", "multiply": -0.15 },
           { "value": "FATIGUE", "multiply": 0.15 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
           { "value": "CARRY_WEIGHT", "multiply": 0.1 }
@@ -6827,23 +6828,23 @@
     "id": "PERSISTENCE_HUNTER",
     "name": { "str": "Persistence Hunter" },
     "points": 2,
-    "description": "You can pursue prey for miles and miles at a variety of paces until they stop from exhaustion.",
+    "description": "You can pursue prey for quite a long time thanks to your increased stamina recovery and reduced need for sleep.",
     "types": [ "METABOLISM" ],
     "changes_to": [ "PERSISTENCE_HUNTER2" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.1 }, { "value": "FATIGUE", "multiply": -0.1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.1 }, { "value": "FATIGUE_REGEN", "multiply": 0.1 }, { "value": "FATIGUE", "multiply": -0.1 } ] } ]
   },
   {
     "type": "mutation",
     "id": "PERSISTENCE_HUNTER2",
     "name": { "str": "Extreme Persistence Hunter" },
     "points": 10,
-    "description": "You can pursue prey for days until they literally die from exhaustion.  It's too bad zombies don't fatigue either.",
+    "description": "You can pursue prey for days if you have to.  Your stamina recovers quickly and you can go a bit longer without sleep.",
     "types": [ "METABOLISM" ],
     "prereqs": [ "PERSISTENCE_HUNTER" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.2 }, { "value": "FATIGUE", "multiply": -0.2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.2 }, { "value": "FATIGUE_REGEN", "multiply": 0.2 }, { "value": "FATIGUE", "multiply": -0.2 } ] } ]
   },
   {
     "type": "mutation",
@@ -6862,19 +6863,18 @@
     "id": "MET_RAT",
     "name": { "str": "Rapid Metabolism" },
     "points": 0,
-    "description": "You require more resources than most, but heal more rapidly as well.  Provides weak regeneration even when not asleep.",
-    "types": [ "HEALING", "SLEEP", "METABOLISM" ],
+    "description": "You require more food than most, but you recover stamina and heal from qounds more quickly.",
+    "types": [ "HEALING", "METABOLISM" ],
     "prereqs": [ "HUNGER" ],
     "prereqs2": [ "SLEEPY" ],
     "category": [ "RAT", "MOUSE", "RABBIT" ],
     "enchantments": [
       {
         "values": [
-          { "value": "FATIGUE_REGEN", "multiply": 0.333 },
-          { "value": "FATIGUE", "multiply": 0.5 },
-          { "value": "METABOLISM", "multiply": 0.333 },
+          { "value": "METABOLISM", "multiply": 0.66 },
           { "value": "REGEN_HP", "multiply": 0.5 },
-          { "value": "REGEN_HP_AWAKE", "multiply": 0.133 }
+          { "value": "REGEN_HP_AWAKE", "multiply": 0.133 },
+          { "value": "STAMINA_REGEN_MOD", "add": 0.15 }
         ]
       }
     ]
@@ -6883,13 +6883,14 @@
     "type": "mutation",
     "id": "HUNGER2",
     "name": { "str": "Very Fast Metabolism" },
-    "points": -2,
+    "points": 0,
+    "mixed_effect": true,
     "description": "You need about twice as much food as the average human to maintain your expanded cardiovascular and respiratory systems.  On the plus side, it doesn't take you much time to recover from any strenuous activity.",
     "prereqs": [ "HUNGER" ],
     "changes_to": [ "HUNGER3" ],
     "types": [ "METABOLISM" ],
     "category": [ "BEAST", "SLIME", "RAPTOR", "CHIMERA" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.3 }, { "value": "METABOLISM", "multiply": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.18 }, { "value": "METABOLISM", "multiply": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -6969,7 +6970,7 @@
     "prereqs": [ "SLEEPY" ],
     "types": [ "SLEEP" ],
     "category": [ "FELINE" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": -1 }, { "value": "FATIGUE", "multiply": 1 } ] } ]
   },
   {
     "type": "mutation",
