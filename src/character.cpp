@@ -4994,12 +4994,6 @@ void Character::mod_fatigue( int nfatigue )
 
 void Character::mod_sleep_deprivation( int nsleep_deprivation )
 {
-    // Slow the accrual of sleep deprivation if we biologically need less sleep.
-    // No need to bother if it's the other way around.
-    needs_rates rates = calc_needs_rates();
-    if( rates.fatigue < 1.f ) {
-        nsleep_deprivation *= rates.fatigue;
-    }
     set_sleep_deprivation( sleep_deprivation + nsleep_deprivation );
 }
 
