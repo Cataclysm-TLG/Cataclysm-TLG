@@ -19,6 +19,7 @@
 #include "game_constants.h"
 #include "line.h"
 #include "map.h"
+#include "mapdata.h"
 #include "map_iterator.h"
 #include "map_scale_constants.h"
 #include "mapdata.h"
