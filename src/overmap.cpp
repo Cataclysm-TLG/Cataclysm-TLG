@@ -6636,7 +6636,7 @@ void overmap::open( overmap_special_batch &enabled_specials )
             }
         }
     } else {
-        const cata_path terfilename = PATH_INFO::current_dimension_save_path() / "overmaps" /
+        const cata_path terfilename = PATH_INFO::current_dimension_save_path() /
                                       overmapbuffer::terrain_filename(
                                           loc );
 
@@ -6698,7 +6698,7 @@ void overmap::save() const
             rename_file( tmp_path, zzip_path );
         }
     } else {
-        write_to_file( PATH_INFO::current_dimension_save_path() / "overmaps" /
+        write_to_file( PATH_INFO::current_dimension_save_path() /
                        overmapbuffer::terrain_filename(
                            loc ), [&](
         std::ostream & stream ) {
