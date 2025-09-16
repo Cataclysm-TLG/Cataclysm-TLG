@@ -71,7 +71,7 @@
         "&": "f_trashcan"
       },
       "toilets": { "T": {  } },
-      "vendingmachines": { "F": { "item_group": "vending_food"  } },
+      "vendingmachines": { "F": { "item_group": "vending_food" } },
       "items": {
         "=": { "item": "bowling_balls", "chance": 100, "repeat": [ 1, 3 ] },
         "t": { "item": "bowling_table", "chance": 33, "repeat": [ 1, 2 ] },

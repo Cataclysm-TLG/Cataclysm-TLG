@@ -4024,23 +4024,23 @@
     "points": 1,
     "visibility": 1,
     "description": "Your extremities have gained strength but lost fine motor skills.  -1 Dexterity +2 Strength.",
-    "changes_to": [ "GASTROPOD_EXTREMITY2" ],
     "category": [ "GASTROPOD" ],
     "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ] } ]
   },
   {
     "type": "mutation",
     "id": "GASTROPOD_EXTREMITY2",
-    "name": { "str": "Rasping Tongue" },
+    "name": { "str": "Barbed Tongue" },
     "visibility": 1,
+    "ugliness": 4,
     "points": 6,
-    "description": "You've developed an extremely long and mobile tongue capped with teeth.  You may use it to attack your enemies and pull them towards you.",
+    "description": "Your tongue can extend halfway to the ground.  It's lined with jagged little teeth, and its spearlike tip can stab with shocking force.",
+    "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
-    "changes_to": [ "GASTROPOD_EXTREMITY3" ],
-    "threshreq": [ "THRESH_GASTROPOD" ],
-    "category": [ "GASTROPOD" ],
-    "cancels": [ "FANGS", "MANDIBLES" ],
-    "active": true
+    "prereqs": [ "LONG_TONGUE"],
+    "changes_to": [ "GASTROPOD_EXTREMITY3"],
+    "integrated_armor": [ "integrated_barbed_tongue" ],
+    "category": [ "GASTROPOD" ]
   },
   {
     "type": "mutation",
@@ -4049,19 +4049,14 @@
     "visibility": 5,
     "ugliness": 5,
     "points": 8,
-    "description": "Your tongue has increased its length and mobility.  You may use it to pull your enemies towards you.",
+    "description": "Your tongue can extend much farther and faster, propelled by incredible hydrostatic pressue.  Activate this mutation to harpoon enemies and drag them into melee range.",
+    "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
+    "prereqs": [ "GASTROPOD_EXTREMITY2" ] ,
+    "integrated_armor": [ "integrated_barbed_tongue" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "category": [ "GASTROPOD" ],
-    "active": true,
-    "attacks": {
-      "attack_text_u": "You stab into %s with your harpoon tongue!",
-      "attack_text_npc": "%1$s stabs into %2$s with their harpoon tongue!",
-      "body_part": "mouth",
-      "chance": 25,
-      "base_damage": { "damage_type": "stab", "amount": 15 },
-      "strength_damage": { "damage_type": "stab", "amount": 3 }
-    }
+    "active": true
   },
   {
     "type": "mutation",
@@ -6322,11 +6317,11 @@
     "points": 0,
     "visibility": 1,
     "ugliness": 3,
-    "changes_to": [ "LONG_TONGUE2" ],
+    "changes_to": [ "LONG_TONGUE2", "GASTROPOD_EXTREMITY2" ],
     "description": "Your tongue has lengthened and often extends far beyond your mouth.  This makes you a little worse at talking to people.",
     "social_modifiers": { "lie": -5, "persuade": -5, "intimidate": -5 },
     "types": [ "TONGUE" ],
-    "category": [ "BATRACHIAN" ]
+    "category": [ "BATRACHIAN", "GASTROPOD" ]
   },
   {
     "type": "mutation",

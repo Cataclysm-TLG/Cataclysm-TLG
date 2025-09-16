@@ -1649,5 +1649,44 @@
     },
     "tech_effects": [ { "id": "downed", "chance": 70, "duration": 150, "on_damage": true, "message": "The attack knocks %s down!" } ],
     "flat_bonuses": [ { "stat": "damage", "type": "bash", "scale": 4 } ]
+  },
+  {
+    "type": "technique",
+    "id": "TONGUE_STAB",
+    "name": "Tongue Stab",
+    "melee_allowed": true,
+    "messages": [ "You stab %s with your barbed tongue", "<npcname>'s barbed tongue stabs %s" ],
+    "unarmed_allowed": true,
+    "basic": true,
+    "weighting": -4,
+    "reach_ok": false,
+    "crit_ok": true,
+    "attack_vectors": [ "vector_tongue" ],
+    "tech_effects": [
+      {
+        "id": "anticoagulant_draculin",
+        "chance": 90,
+        "duration": 3000,
+        "on_damage": true,
+        "message": "Saliva glistens across the wound!",
+        "req_flag": "DRACULIN_VENOM"
+      },
+      {
+        "id": "venom_player1",
+        "chance": 80,
+        "duration": 600,
+        "on_damage": true,
+        "message": "Venom gets into the wound!",
+        "req_flag": "VENOM1"
+      },
+      {
+        "id": "venom_player2",
+        "chance": 80,
+        "duration": 3000,
+        "on_damage": true,
+        "message": "Venom gets into the wound!",
+        "req_flag": "VENOM2"
+      }
+    ]
   }
 ]
