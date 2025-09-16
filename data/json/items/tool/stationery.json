@@ -52,7 +52,7 @@
   {
     "id": "scissors",
     "type": "TOOL",
-    "name": { "str": "pair of office scissors", "str_pl": "pairs of office scissors" },
+    "name": { "str": "office scissors", "str_pl": "pairs of office scissors" },
     "description": "A long pair of heavy-duty scissors.  You can use them to cut things such as fabric or plastic apart.",
     "ascii_picture": "scissors",
     "weight": "48 g",
@@ -73,7 +73,7 @@
   {
     "id": "scissors_child",
     "type": "TOOL",
-    "name": { "str": "pair of kiddie scissors", "str_pl": "pairs of kiddie scissors" },
+    "name": { "str": "kiddie scissors", "str_pl": "pairs of kiddie scissors" },
     "description": "A pair of short scissors designed with kids in mind.  You can use them to cut things such as fabric or plastic apart, although they are probably subpar compared to other alternatives.",
     "ascii_picture": "scissors",
     "weight": "50 g",
@@ -93,7 +93,7 @@
   {
     "id": "scissors_wavy",
     "type": "TOOL",
-    "name": { "str": "pair of wavy scissors", "str_pl": "pairs of wavy scissors" },
+    "name": { "str": "wavy scissors", "str_pl": "pairs of wavy scissors" },
     "description": "A pair of wavy artistic scissors.  You can theoretically use them to cut things but you should probably not get your hopes too high.",
     "ascii_picture": "scissors",
     "weight": "65 g",
