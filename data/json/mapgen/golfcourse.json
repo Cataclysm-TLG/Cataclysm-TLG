@@ -84,7 +84,7 @@
         "│4444444444444444444ww4444444&44444444444444444444444444444444444444444444444444444444444444444│",
         "││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││││"
       ],
-      "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+      "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 72, 95 ], "y": [ 24, 47 ], "repeat": [ 0, 4 ] } ],
       "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette", "parametrized_carpets_palette" ],
       "terrain": {

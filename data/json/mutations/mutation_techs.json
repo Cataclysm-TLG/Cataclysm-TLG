@@ -1658,7 +1658,7 @@
     "messages": [ "You stab %s with your barbed tongue", "<npcname>'s barbed tongue stabs %s" ],
     "unarmed_allowed": true,
     "basic": true,
-    "weighting": -4,
+    "weighting": -3,
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_tongue" ],

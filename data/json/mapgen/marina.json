@@ -163,10 +163,7 @@
         "T": "f_table"
       },
       "toilets": { "&": {  } },
-      "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 13, "y": 59  },
-        { "item_group": "vending_drink", "x": 13, "y": 60  }
-      ],
+      "place_vendingmachines": [ { "item_group": "vending_food", "x": 13, "y": 59 }, { "item_group": "vending_drink", "x": 13, "y": 60 } ],
       "items": {
         "f": { "item": "SUS_fridge", "chance": 80 },
         "e": { "item": "novels", "chance": 70, "repeat": [ 2, 4 ] },

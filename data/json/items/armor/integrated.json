@@ -742,7 +742,7 @@
     "id": "integrated_barbed_tongue",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str_sp": "folding fangs" },
+    "name": { "str_sp": "barbed tongue" },
     "description": "Though this tongue fits neatly within the mouth, it can extend to an astonishing length.  Sharp chitin barbs like a grotesque parody of a cat's tongue line the surface, and the barb at the tip looks more like a whaler's harpoon than something that belongs in a mouth.",
     "weight": "800 g",
     "volume": "1200 ml",

@@ -153,10 +153,23 @@
           "energy_amount": "600",
           "prep_time": "1",
           "spell_to_cast": "spell_whipping_tongue_pull",
-          "message_success": {
-            "i18n": true,
-            "str": "Your tongue launches out to snag your target."
-          },
+          "message_success": { "i18n": true, "str": "Your tongue launches out to snag your target." },
+          "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_HARPOON_TONGUE_STAB",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": "600",
+          "prep_time": "1",
+          "spell_to_cast": "spell_harpoon_tongue_stab",
+          "message_success": { "i18n": true, "str": "Your tongue launches out to spear your target." },
           "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
         }
       }

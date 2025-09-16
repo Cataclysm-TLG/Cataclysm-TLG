@@ -4056,7 +4056,11 @@
     "integrated_armor": [ "integrated_barbed_tongue" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "category": [ "GASTROPOD" ],
-    "active": true
+    "active": true,
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_HARPOON_TONGUE_STAB" ]
   },
   {
     "type": "mutation",
