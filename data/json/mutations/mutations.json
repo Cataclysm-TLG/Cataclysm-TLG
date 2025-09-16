@@ -6329,20 +6329,17 @@
     "name": { "str": "Whipping Tongue" },
     "visibility": 1,
     "points": 3,
-    "description": "You've developed an extremely long and mobile tongue.  It's not the best for talking, but you may use it to attack your enemies and pull them towards you.",
+    "ugliness": 3,
+    "description": "Your tongue can extend quite some distance and its tip is incredibly sticky.  It's not the best for talking, but you may use it to snare creatures and pull them towards you.",
     "social_modifiers": { "lie": -5, "persuade": -5, "intimidate": -5 },
     "types": [ "TONGUE" ],
     "threshreq": [ "THRESH_BATRACHIAN" ],
     "category": [ "BATRACHIAN" ],
     "active": true,
-    "attacks": {
-      "attack_text_u": "You swipe %s with your tongue!",
-      "attack_text_npc": "%1$s swipes %2$s with their tongue!",
-      "body_part": "mouth",
-      "chance": 15,
-      "base_damage": { "damage_type": "bash", "amount": 15 },
-      "strength_damage": { "damage_type": "bash", "amount": 2 }
-    }
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_WHIPPING_TONGUE_PULL" ]
   },
   {
     "type": "mutation",

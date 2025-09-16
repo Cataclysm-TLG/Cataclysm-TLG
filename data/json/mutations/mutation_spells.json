@@ -241,5 +241,17 @@
     ],
     "energy_source": "NONE",
     "damage_type": "biological"
+  },
+  {
+    "type": "SPELL",
+    "id": "spell_whipping_tongue_pull",
+    "name": "Whipping Tongue",
+    "description": "Your tongue launches out to snag your target.",
+    "valid_targets": [ "ally", "hostile" ],
+    "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX", "DODGEABLE" ],
+    "effect": "pull_target",
+    "shape": "blast",
+    "min_range": 5,
+    "max_range": 5
   }
 ]
