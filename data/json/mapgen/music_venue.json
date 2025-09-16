@@ -240,7 +240,7 @@
         "C": [ { "item": "jackets", "chance": 16 }, { "item": "hats_unisex", "chance": 12 } ],
         "Y": [ { "item": "jackets", "chance": 35, "repeat": [ 1, 4 ] }, { "item": "hats_unisex", "chance": 25, "repeat": [ 1, 2 ] } ]
       },
-      "vendingmachines": { "v": { "item_group": "vending_drink"  }, "V": { "item_group": "vending_food"  } },
+      "vendingmachines": { "v": { "item_group": "vending_drink" }, "V": { "item_group": "vending_food" } },
       "place_loot": [
         { "group": "cash_register_random", "x": [ 4, 5 ], "y": 18 },
         { "item": "amplifier_head", "x": 6, "y": 9 },

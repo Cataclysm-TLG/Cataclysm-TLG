@@ -44,7 +44,7 @@
       "gaspumps": { "G": { "fuel": "gasoline" }, "D": { "fuel": "diesel" } },
       "furniture": { "9": "f_aut_gas_console" },
       "signs": { "P": { "signage": "Danger!  Do not smoke!  Risk of explosion!" } },
-      "vendingmachines": { "1": { "item_group": "vending_drink"  }, "2": { "item_group": "vending_food"  } },
+      "vendingmachines": { "1": { "item_group": "vending_drink" }, "2": { "item_group": "vending_food" } },
       "place_liquids": [
         { "liquid": "gasoline", "x": 2, "y": 3, "repeat": [ 0, 800 ] },
         { "liquid": "diesel", "x": 4, "y": 3, "repeat": [ 0, 800 ] }
