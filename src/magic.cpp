@@ -988,9 +988,7 @@ std::optional<tripoint_bub_ms> spell::select_target( Creature *source )
                     target_is_valid = false;
                 }
                 if( !target_is_valid ) {
-                    if( query_yn( _( "Stop targeting?  Time spent will be lost." ) ) ) {
-                        return std::nullopt;
-                    }
+                    return std::nullopt;
                 }
             } while( !target_is_valid );
         } else if( source->is_npc() ) {
