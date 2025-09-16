@@ -6698,7 +6698,8 @@ void overmap::save() const
             rename_file( tmp_path, zzip_path );
         }
     } else {
-        write_to_file( PATH_INFO::current_dimension_save_path() / "overmaps" / overmapbuffer::terrain_filename(
+        write_to_file( PATH_INFO::current_dimension_save_path() / "overmaps" /
+                       overmapbuffer::terrain_filename(
                            loc ), [&](
         std::ostream & stream ) {
             serialize( stream );
