@@ -8749,6 +8749,16 @@
     "valid": false,
     "purifiable": false
   },
+    {
+    "type": "mutation",
+    "id": "MILITARY_BASE_SPAWN",
+    "name": { "str": "Active Duty" },
+    "points": 0,
+    "description": "Hidden trait for Overrun scenario that allows the military base to spawn.  You should not be able to see this.",
+    "player_display": false,
+    "valid": false,
+    "purifiable": false
+  },
   {
     "type": "mutation",
     "id": "NPC_RUM",
