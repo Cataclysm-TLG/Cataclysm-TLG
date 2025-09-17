@@ -3049,7 +3049,7 @@ void item::gun_info( const item *mod, std::vector<iteminfo> &info, const iteminf
 
     if( parts->test( iteminfo_parts::GUN_DAMAGE ) ) {
         insert_separation_line( info );
-        info.emplace_back( "GUN", colorize( _( "Ranged damage" ), c_bold ) + ": ", iteminfo::no_newline );
+        info.emplace_back( "GUN", _( "<bold>Ranged damage</bold>" ), "", iteminfo::no_newline );
     }
 
     if( mod->ammo_required() ) {
