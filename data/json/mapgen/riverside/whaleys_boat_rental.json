@@ -61,7 +61,7 @@
         { "chance": 45, "item": "swimmer_gloves", "repeat": [ 1, 4 ] }
       ]
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "toilets": { "t": {  } }
   },
   {
