@@ -356,7 +356,7 @@
         { "item": "mechanics", "chance": 20, "repeat": [ 1, 2 ] }
       ]
     },
-    "vendingmachines": { "8": { "item_group": "vending_drink"  }, "9": { "item_group": "vending_food"  } },
+    "vendingmachines": { "8": { "item_group": "vending_drink" }, "9": { "item_group": "vending_food" } },
     "vehicles": {
       "Á": { "vehicle": "parkinglotbasic", "chance": 33, "rotation": 270 },
       "É": { "vehicle": "parkinglotbasic", "chance": 33, "rotation": 90 }
