@@ -194,10 +194,7 @@
         "                             xx__________xx                             "
       ],
       "palettes": [ "p_resort_palette_main_floor" ],
-      "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 60, "y": 1  },
-        { "item_group": "vending_drink", "x": 60, "y": 2  }
-      ],
+      "place_vendingmachines": [ { "item_group": "vending_food", "x": 60, "y": 1 }, { "item_group": "vending_drink", "x": 60, "y": 2 } ],
       "items": {
         "L": [
           {
