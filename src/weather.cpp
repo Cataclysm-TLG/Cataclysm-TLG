@@ -229,7 +229,9 @@ void retroactively_fill_from_funnel( item &it, const trap &tr, const time_point 
 
     // Technically 0.0 division is OK, but it will be cleaner without it
     if( data.rain_amount > 0 ) {
-        const int rain = roll_remainder( 1.0 / tr.funnel_turns_per_charge( data.rain_amount ) );
+        const double turns = to_turns<double>( end - start );
+        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( data.rain_amount );
+        const int rain = roll_remainder( charges_per_turn * turns );
         it.add_rain_to_container( rain );
         // add_msg_debug( "Retroactively adding %d water from turn %d to %d", rain, startturn, endturn);
     }
@@ -266,6 +268,8 @@ void item::add_rain_to_container( int charges )
     }
 }
 
+// Surface_area_mm2 is roughly 282690 for a funnel (funnel_radius is currently 300 in traps.json)
+// Rain is 0.5 for drizzle, 1.5 for light, 2.0 for heavy.
 double funnel_charges_per_turn( const double surface_area_mm2, const double rain_depth_mm_per_hour )
 {
     // 1mm rain on 1m^2 == 1 liter water == 1000ml
@@ -283,11 +287,20 @@ double funnel_charges_per_turn( const double surface_area_mm2, const double rain
     static const double charge_ml = static_cast<double>( to_gram( water.weight() ) ) /
                                     water.charges;
 
+    // Drizzle 0.5 = 141345
+    // Light 1.5 = 424035
     const double vol_mm3_per_hour = surface_area_mm2 * rain_depth_mm_per_hour;
+
+    // Turns per hour is 3600 (turn = second)
+    // Drizzle = 39.26
+    // Light = 117.79
     const double vol_mm3_per_turn = vol_mm3_per_hour / to_turns<int>( 1_hours );
 
     const double ml_to_mm3 = 1000;
-    const double charges_per_turn = vol_mm3_per_turn / ( charge_ml * ml_to_mm3 );
+
+    // Drizzle = 0.00015704
+    // Light = 0.00047116
+    const float charges_per_turn = vol_mm3_per_turn / ( charge_ml * ml_to_mm3 );
 
     return charges_per_turn;
 }
@@ -319,29 +332,44 @@ double trap::funnel_turns_per_charge( double rain_depth_mm_per_hour ) const
  */
 static void fill_funnels( int rain_depth_mm_per_hour, const trap &tr )
 {
-    const double turns_per_charge = tr.funnel_turns_per_charge( rain_depth_mm_per_hour );
+    const double turns_per_charge_d = tr.funnel_turns_per_charge( rain_depth_mm_per_hour );
+
     map &here = get_map();
     // Give each funnel on the map a chance to collect the rain.
     const std::vector<tripoint_bub_ms> &funnel_locs = here.trap_locations( tr.loadid );
     for( const tripoint_bub_ms &loc : funnel_locs ) {
         units::volume maxcontains = 0_ml;
-        if( one_in( turns_per_charge ) ) {
-            // FIXME:
-            //add_msg("%d mm/h %d tps %.4f: fill",int(calendar::turn),rain_depth_mm_per_hour,turns_per_charge);
-            // This funnel has collected some rain! Put the rain in the largest
-            // container here which is either empty or contains some water
-            map_stack items = here.i_at( loc );
-            auto container = items.end();
-            for( auto candidate_container = items.begin(); candidate_container != items.end();
-                 ++candidate_container ) {
-                if( candidate_container->is_funnel_container( maxcontains ) ) {
-                    container = candidate_container;
-                }
+        map_stack items = here.i_at( loc );
+        auto container = items.end();
+        for( auto candidate_container = items.begin(); candidate_container != items.end();
+             ++candidate_container ) {
+            if( candidate_container->is_funnel_container( maxcontains ) ) {
+                container = candidate_container;
             }
+        }
 
-            if( container != items.end() ) {
-                container->add_rain_to_container( 1 );
+        if( container != items.end() && turns_per_charge_d > 0.0 ) {
+            int whole = static_cast<int>( std::floor( turns_per_charge_d ) );
+            double frac = turns_per_charge_d - whole;
+
+            // If turns_per_charge < 1, always fill (multiple charges per turn possible)
+            if( turns_per_charge_d < 1.0 ) {
+                int count = static_cast<int>( std::ceil( 1.0 / turns_per_charge_d ) );
+                for( int i = 0; i < count; i++ ) {
+                    container->add_rain_to_container( 1 );
+                }
                 container->set_age( 0_turns );
+            } else {
+                // Base chance: one charge every 'whole' turns
+                if( one_in( whole ) ) {
+                    container->add_rain_to_container( 1 );
+                    container->set_age( 0_turns );
+                }
+                // Fractional chance to add an *extra* charge
+                if( frac > 0.0 && x_in_y( frac, 1.0 ) ) {
+                    container->add_rain_to_container( 1 );
+                    container->set_age( 0_turns );
+                }
             }
         }
     }
@@ -390,7 +418,8 @@ void wet_character( Character &target, int amount )
     const int warmth_delay = warmth_bp[body_part_torso] * 0.8 +
                              warmth_bp[body_part_head] * 0.2;
     if( rng( 0, 100 - amount + warmth_delay ) > 10 ) {
-        // Thick clothing slows down (but doesn't cap) soaking
+        // Warm clothing slows down (but doesn't cap) soaking
+        // TODO: Shouldn't this be derived from thickness + a material parameter?
         return;
     }
 
