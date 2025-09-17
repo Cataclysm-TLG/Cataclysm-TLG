@@ -1646,7 +1646,7 @@
     "name": { "str": "waterbed skulker" },
     "description": "Pink and translucent, with all of its otherworldly organs visible through its skin, this meter-high conical creature creeps along the seabed with its stubby, furry legs.  It contracts some kind of retracted barbed filaments into an orifice at its rear as it aims it at potential prey.",
     "species": "MUTANT",
-    "hp": 100,
+    "hp": 50,
     "diff": 15,
     "weight": "38 kg",
     "volume": "40 L",
@@ -1667,7 +1667,7 @@
     "morale": 30,
     "bodytype": "snake",
     "harvest": "mutant_mollusk",
-    "flags": [ "AQUATIC", "SMELLS", "SEES", "HEARS", "GRABS", "SWIMS" ],
+    "flags": [ "AQUATIC", "SEES", "HEARS", "GRABS" ],
     "weakpoints": [
       {
         "name": "filaments",
