@@ -161,7 +161,7 @@ bool mapbuffer::submap_exists_approx( const tripoint_abs_sm &p )
                     return false;
                 }
                 std::shared_ptr<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
-                                                      ( PATH_INFO::current_dimension_save_path() / "maps.dict" ).get_unrelative_path() );
+                                                      ( PATH_INFO::world_base_save_path() / "maps.dict" ).get_unrelative_path() );
                 return z->has_file( std::filesystem::u8path( file_name ) );
             } else {
                 return file_exist( dirname / file_name );
@@ -255,7 +255,7 @@ void mapbuffer::save_quad(
     // total cost of saving the mapbuffer, in one test save I had.
     if( world_generator->active_world->has_compression_enabled() ) {
         z = zzip::load( zzip_name.get_unrelative_path(),
-                        ( PATH_INFO::current_dimension_save_path() / "maps.dict" ).get_unrelative_path() );
+                        ( PATH_INFO::world_base_save_path() / "maps.dict" ).get_unrelative_path() );
         if( !z ) {
             throw std::runtime_error( "Failed opening compressed save file " +
                                       zzip_name.get_unrelative_path().generic_u8string() );
@@ -380,7 +380,7 @@ submap *mapbuffer::unserialize_submaps( const tripoint_abs_sm &p )
                 return false;
             }
             std::shared_ptr<zzip> z = zzip::load( zzip_name.get_unrelative_path(),
-                                                  ( PATH_INFO::current_dimension_save_path() / "maps.dict" ).get_unrelative_path() );
+                                                  ( PATH_INFO::world_base_save_path() / "maps.dict" ).get_unrelative_path() );
             if( !z->has_file( file_name_path ) ) {
                 return false;
             }
