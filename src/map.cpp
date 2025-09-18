@@ -7884,7 +7884,7 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
     using PQ_type = std::priority_queue< pq_item, std::vector<pq_item>, pq_item_comp>;
 
     const int grid_dim = range * 2 + 1;
-    const int z_dim = range * 2 + 1;
+    const int z_dim = range + 1;
     const size_t grid_area = static_cast<size_t>( grid_dim ) * grid_dim * z_dim;
 
     std::vector<int> t_grid( grid_area, -1 );
@@ -7899,7 +7899,8 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
     for( const tripoint_bub_ms &p : points_in_radius( f, range ) ) {
         if( p.z() != f.z() ) continue;
         const int tp_cost = move_cost( p );
-        if( tp_cost < cost_min || tp_cost > cost_max || is_open_air( p ) ) continue;
+        // TODO: Move trap knowledge to a per-creature thing, add a method to this function to get whoever's considering taking these steps (if anyone).
+        if( tp_cost < cost_min || tp_cost > cost_max || is_open_air( p ) || get_map().dangerous_field_at( p ) || get_map().impassable_field_at ( p ) || get_map().can_see_trap_at( p, get_player_character() ) ) continue;
         tripoint_rel_ms rel = p - f + origin_offset;
         if( rel.x() < 0 || rel.x() >= grid_dim || rel.y() < 0 || rel.y() >= grid_dim ) continue;
         t_grid[grid_index( rel.x(), rel.y(), range )] = initial_visit_distance;
@@ -7907,7 +7908,6 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
 
     auto gen_neighbors = [&]( const pq_item &elem, std::vector<pq_item> &neighbors ) {
         neighbors.clear();
-        int new_cost = elem.dist + 1;
 
         int x = elem.ndx % grid_dim;
         int y = ( elem.ndx / grid_dim ) % grid_dim;
@@ -7919,19 +7919,29 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
         for( int dx = -1; dx <= 1; ++dx ) {
             for( int dy = -1; dy <= 1; ++dy ) {
                 if( dx == 0 && dy == 0 ) continue;
+
                 int nx = x + dx;
                 int ny = y + dy;
-                if( nx >= 0 && nx < grid_dim && ny >= 0 && ny < grid_dim ) {
-                    tripoint_bub_ms npos = f - origin_offset + tripoint( nx, ny, z );
-                    int cost = move_cost( npos );
-                    // Adjust for Euclidian distance if we're moving diagonally.
-                    if( x != dx && y != dy ) {
-                        cost = static_cast<int>( cost * 1.41 + 0.5 );
-                    }
-                    if( cost >= cost_min && cost <= cost_max && !is_open_air( npos ) ) {
-                        neighbors.push_back( { new_cost, grid_index( nx, ny, z ) } );
-                    }
+                if( nx < 0 || nx >= grid_dim || ny < 0 || ny >= grid_dim ) continue;
+
+                tripoint_bub_ms npos = f - origin_offset + tripoint( nx, ny, z );
+
+                // Euclidean distance from the *origin f*, not from current node
+                int dx_total = npos.x() - f.x();
+                int dy_total = npos.y() - f.y();
+                if( dx_total * dx_total + dy_total * dy_total > range * range ) {
+                    continue; // outside the circle
                 }
+
+                int base_cost = move_cost( npos );
+                if( base_cost < cost_min || base_cost > cost_max || is_open_air( npos ) ) continue;
+
+                // Apply diagonal multiplier for Euclidian distances.
+                if( dx != 0 && dy != 0 ) {
+                    base_cost = static_cast<int>( base_cost * 1.41 + 0.5 );
+                }
+
+                neighbors.push_back( { elem.dist + 1, grid_index( nx, ny, z ) } );
             }
         }
 
@@ -7940,7 +7950,7 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
                 tripoint_bub_ms npos = pos + tripoint( 0, 0, 1 );
                 int cost = move_cost( npos );
                 if( cost >= cost_min && cost <= cost_max && !is_open_air( npos ) )
-                    neighbors.push_back( { new_cost, grid_index( x, y, z + 1 ) } );
+                    neighbors.push_back( { elem.dist + 1, grid_index( x, y, z + 1 ) } );
             }
         }
         if( has_flag( ter_furn_flag::TFLAG_LADDER, pos ) || has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) ) {
@@ -7948,7 +7958,7 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
                 tripoint_bub_ms npos = pos + tripoint( 0, 0, -1 );
                 int cost = move_cost( npos );
                 if( cost >= cost_min && cost <= cost_max && !is_open_air( npos ) )
-                    neighbors.push_back( { new_cost, grid_index( x, y, z - 1 ) } );
+                    neighbors.push_back( { elem.dist + 1, grid_index( x, y, z - 1 ) } );
             }
         }
     };
@@ -7962,14 +7972,14 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
         const pq_item item = pq.top(); pq.pop();
         if( t_grid[item.ndx] == initial_visit_distance ) {
             t_grid[item.ndx] = item.dist;
-            if( item.dist + 1 < range ) {
+            if( item.dist + 1 <= range ) {
                 gen_neighbors( item, neighbor_elems );
                 for( const pq_item &n : neighbor_elems ) pq.push( n );
             }
         }
     }
 
-    // o_grid expansion lets us access any spots in reach as if we were using AIM in the target tile.
+    // o_grid means we can reach any tiles adjacent to ones we can reach, so we can get stuff off of shelves.
     std::vector<bool> o_grid( grid_area );
     int count = 0;
     for( int z = 0, ndx = 0; z < z_dim; ++z ) {
@@ -7986,7 +7996,7 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
                                     o_grid[center_index] = true;
                                     count++;
                                 }
-                                // Check Z +/- 1 at the center tile only.
+                                // Check Z +/- 1 at the center tile only, same as with the AIM menu.
                                 if( dx == 0 && dy == 0 ) {
                                     if( z - 1 >= 0 ) {
                                         tripoint_bub_ms curr = f - origin_offset + tripoint(nx, ny, z);
