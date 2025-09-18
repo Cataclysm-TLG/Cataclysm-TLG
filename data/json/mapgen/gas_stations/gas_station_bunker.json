@@ -404,7 +404,7 @@
         "P": "f_autodoc",
         "M": "f_autodoc_couch"
       },
-      "vendingmachines": { "Ú": { "item_group": "vending_drink"  }, "Ó": { "item_group": "vending_food"  } },
+      "vendingmachines": { "Ú": { "item_group": "vending_drink" }, "Ó": { "item_group": "vending_food" } },
       "toilets": { "n": {  } },
       "items": {
         ".": { "item": "office_mess", "chance": 2 },

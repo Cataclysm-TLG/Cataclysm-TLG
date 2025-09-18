@@ -1097,7 +1097,7 @@
     "types": [ "SLEEP" ],
     "starting_trait": true,
     "category": [ "ALPHA", "ELFA", "PLANT", "BATRACHIAN" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": -0.15 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.15 }, { "value": "FATIGUE", "multiply": -0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -1404,7 +1404,7 @@
     "starting_trait": true,
     "types": [ "SLEEP" ],
     "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT", "FELINE", "RAT" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.333 }, { "value": "FATIGUE", "multiply": 0.333 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": -0.333 }, { "value": "FATIGUE", "multiply": 0.333 } ] } ]
   },
   {
     "type": "mutation",
@@ -1744,7 +1744,7 @@
     "id": "JITTERY",
     "name": { "str": "Jittery" },
     "points": -3,
-    "description": "When very hungry or under the effects of stimulants, you may find your hands shaking uncontrollably, severely reducing your Dexterity.",
+    "description": "You tend to get a bad case of the shakes when you're hungry or under the effects of stimulants.",
     "starting_trait": true,
     "category": [ "MEDICAL", "MOUSE", "RABBIT" ]
   },
@@ -2316,7 +2316,7 @@
     "changes_to": [ "WAKEFUL3" ],
     "threshreq": [ "THRESH_ALPHA", "THRESH_ELFA", "THRESH_BATRACHIAN" ],
     "category": [ "ALPHA", "ELFA", "BATRACHIAN" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": -0.25 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": 0.25 }, { "value": "FATIGUE", "multiply": -0.25 } ] } ]
   },
   {
     "type": "mutation",
@@ -4024,23 +4024,23 @@
     "points": 1,
     "visibility": 1,
     "description": "Your extremities have gained strength but lost fine motor skills.  -1 Dexterity +2 Strength.",
-    "changes_to": [ "GASTROPOD_EXTREMITY2" ],
     "category": [ "GASTROPOD" ],
     "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ] } ]
   },
   {
     "type": "mutation",
     "id": "GASTROPOD_EXTREMITY2",
-    "name": { "str": "Rasping Tongue" },
+    "name": { "str": "Barbed Tongue" },
     "visibility": 1,
+    "ugliness": 4,
     "points": 6,
-    "description": "You've developed an extremely long and mobile tongue capped with teeth.  You may use it to attack your enemies and pull them towards you.",
+    "description": "Your tongue can extend halfway to the ground.  It's lined with jagged little teeth, and its spearlike tip can stab with shocking force.",
+    "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
-    "changes_to": [ "GASTROPOD_EXTREMITY3" ],
-    "threshreq": [ "THRESH_GASTROPOD" ],
-    "category": [ "GASTROPOD" ],
-    "cancels": [ "FANGS", "MANDIBLES" ],
-    "active": true
+    "prereqs": [ "LONG_TONGUE"],
+    "changes_to": [ "GASTROPOD_EXTREMITY3"],
+    "integrated_armor": [ "integrated_barbed_tongue" ],
+    "category": [ "GASTROPOD" ]
   },
   {
     "type": "mutation",
@@ -4049,19 +4049,18 @@
     "visibility": 5,
     "ugliness": 5,
     "points": 8,
-    "description": "Your tongue has increased its length and mobility.  You may use it to pull your enemies towards you.",
+    "description": "Your tongue can extend much farther and faster, propelled by incredible hydrostatic pressue.  Activate this mutation to harpoon enemies and drag them into melee range.",
+    "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
+    "prereqs": [ "GASTROPOD_EXTREMITY2" ] ,
+    "integrated_armor": [ "integrated_barbed_tongue" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "category": [ "GASTROPOD" ],
     "active": true,
-    "attacks": {
-      "attack_text_u": "You stab into %s with your harpoon tongue!",
-      "attack_text_npc": "%1$s stabs into %2$s with their harpoon tongue!",
-      "body_part": "mouth",
-      "chance": 25,
-      "base_damage": { "damage_type": "stab", "amount": 15 },
-      "strength_damage": { "damage_type": "stab", "amount": 3 }
-    }
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_HARPOON_TONGUE_STAB" ]
   },
   {
     "type": "mutation",
@@ -5741,6 +5740,7 @@
         "values": [
           { "value": "MAX_HP", "add": -6 },
           { "value": "STRENGTH", "add": 4 },
+          { "value": "FATIGUE_REGEN", "multiply": -0.15 },
           { "value": "FATIGUE", "multiply": 0.15 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
           { "value": "CARRY_WEIGHT", "multiply": 0.1 }
@@ -6321,11 +6321,11 @@
     "points": 0,
     "visibility": 1,
     "ugliness": 3,
-    "changes_to": [ "LONG_TONGUE2" ],
+    "changes_to": [ "LONG_TONGUE2", "GASTROPOD_EXTREMITY2" ],
     "description": "Your tongue has lengthened and often extends far beyond your mouth.  This makes you a little worse at talking to people.",
     "social_modifiers": { "lie": -5, "persuade": -5, "intimidate": -5 },
     "types": [ "TONGUE" ],
-    "category": [ "BATRACHIAN" ]
+    "category": [ "BATRACHIAN", "GASTROPOD" ]
   },
   {
     "type": "mutation",
@@ -6333,20 +6333,17 @@
     "name": { "str": "Whipping Tongue" },
     "visibility": 1,
     "points": 3,
-    "description": "You've developed an extremely long and mobile tongue.  It's not the best for talking, but you may use it to attack your enemies and pull them towards you.",
+    "ugliness": 3,
+    "description": "Your tongue can extend quite some distance and its tip is incredibly sticky.  It's not the best for talking, but you may use it to snare creatures and pull them towards you.",
     "social_modifiers": { "lie": -5, "persuade": -5, "intimidate": -5 },
     "types": [ "TONGUE" ],
     "threshreq": [ "THRESH_BATRACHIAN" ],
     "category": [ "BATRACHIAN" ],
     "active": true,
-    "attacks": {
-      "attack_text_u": "You swipe %s with your tongue!",
-      "attack_text_npc": "%1$s swipes %2$s with their tongue!",
-      "body_part": "mouth",
-      "chance": 15,
-      "base_damage": { "damage_type": "bash", "amount": 15 },
-      "strength_damage": { "damage_type": "bash", "amount": 2 }
-    }
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_WHIPPING_TONGUE_PULL" ]
   },
   {
     "type": "mutation",
@@ -6827,23 +6824,23 @@
     "id": "PERSISTENCE_HUNTER",
     "name": { "str": "Persistence Hunter" },
     "points": 2,
-    "description": "You can pursue prey for miles and miles at a variety of paces until they stop from exhaustion.",
+    "description": "You can pursue prey for quite a long time thanks to your increased stamina recovery and reduced need for sleep.",
     "types": [ "METABOLISM" ],
     "changes_to": [ "PERSISTENCE_HUNTER2" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.1 }, { "value": "FATIGUE", "multiply": -0.1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.1 }, { "value": "FATIGUE_REGEN", "multiply": 0.1 }, { "value": "FATIGUE", "multiply": -0.1 } ] } ]
   },
   {
     "type": "mutation",
     "id": "PERSISTENCE_HUNTER2",
     "name": { "str": "Extreme Persistence Hunter" },
     "points": 10,
-    "description": "You can pursue prey for days until they literally die from exhaustion.  It's too bad zombies don't fatigue either.",
+    "description": "You can pursue prey for days if you have to.  Your stamina recovers quickly and you can go a bit longer without sleep.",
     "types": [ "METABOLISM" ],
     "prereqs": [ "PERSISTENCE_HUNTER" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.2 }, { "value": "FATIGUE", "multiply": -0.2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.2 }, { "value": "FATIGUE_REGEN", "multiply": 0.2 }, { "value": "FATIGUE", "multiply": -0.2 } ] } ]
   },
   {
     "type": "mutation",
@@ -6862,19 +6859,18 @@
     "id": "MET_RAT",
     "name": { "str": "Rapid Metabolism" },
     "points": 0,
-    "description": "You require more resources than most, but heal more rapidly as well.  Provides weak regeneration even when not asleep.",
-    "types": [ "HEALING", "SLEEP", "METABOLISM" ],
+    "description": "You require more food than most, but you recover stamina and heal from qounds more quickly.",
+    "types": [ "HEALING", "METABOLISM" ],
     "prereqs": [ "HUNGER" ],
     "prereqs2": [ "SLEEPY" ],
     "category": [ "RAT", "MOUSE", "RABBIT" ],
     "enchantments": [
       {
         "values": [
-          { "value": "FATIGUE_REGEN", "multiply": 0.333 },
-          { "value": "FATIGUE", "multiply": 0.5 },
-          { "value": "METABOLISM", "multiply": 0.333 },
+          { "value": "METABOLISM", "multiply": 0.66 },
           { "value": "REGEN_HP", "multiply": 0.5 },
-          { "value": "REGEN_HP_AWAKE", "multiply": 0.133 }
+          { "value": "REGEN_HP_AWAKE", "multiply": 0.133 },
+          { "value": "STAMINA_REGEN_MOD", "add": 0.15 }
         ]
       }
     ]
@@ -6883,13 +6879,14 @@
     "type": "mutation",
     "id": "HUNGER2",
     "name": { "str": "Very Fast Metabolism" },
-    "points": -2,
+    "points": 0,
+    "mixed_effect": true,
     "description": "You need about twice as much food as the average human to maintain your expanded cardiovascular and respiratory systems.  On the plus side, it doesn't take you much time to recover from any strenuous activity.",
     "prereqs": [ "HUNGER" ],
     "changes_to": [ "HUNGER3" ],
     "types": [ "METABOLISM" ],
     "category": [ "BEAST", "SLIME", "RAPTOR", "CHIMERA" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.3 }, { "value": "METABOLISM", "multiply": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.18 }, { "value": "METABOLISM", "multiply": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -6969,7 +6966,7 @@
     "prereqs": [ "SLEEPY" ],
     "types": [ "SLEEP" ],
     "category": [ "FELINE" ],
-    "enchantments": [ { "values": [ { "value": "FATIGUE", "multiply": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "FATIGUE_REGEN", "multiply": -1 }, { "value": "FATIGUE", "multiply": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -8744,6 +8741,16 @@
     "name": { "str": "Carries Brandy" },
     "points": 0,
     "description": "This Bartender now carries brandy!",
+    "player_display": false,
+    "valid": false,
+    "purifiable": false
+  },
+    {
+    "type": "mutation",
+    "id": "MILITARY_BASE_SPAWN",
+    "name": { "str": "Active Duty" },
+    "points": 0,
+    "description": "Hidden trait for Overrun scenario that allows the military base to spawn.  You should not be able to see this.",
     "player_display": false,
     "valid": false,
     "purifiable": false

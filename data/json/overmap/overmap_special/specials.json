@@ -5952,7 +5952,10 @@
     "city_sizes": [ 4, -1 ],
     "priority": 1,
     "occurrences": [ 45, 100 ],
-    "//": "Inflated chance, in effect ~10%",
+    "eoc": {
+      "id": "EOC_MIL_BASE_GENERATE",
+      "condition": { "u_has_trait": "MILITARY_BASE_SPAWN" }
+    },
     "flags": [ "MILITARY", "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
   },
   {

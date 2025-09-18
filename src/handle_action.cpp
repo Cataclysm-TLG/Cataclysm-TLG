@@ -926,10 +926,13 @@ static bool is_smashable_corpse( const item &maybe_corpse )
 
 static void smash()
 {
-    const bool allow_floor_bash = debug_mode; // Should later become "true"
+    static tripoint_bub_ms last_smash;
+    static int repeat_count = 0;
+    const bool allow_floor_bash = debug_mode;
     const std::optional<tripoint_bub_ms> smashp_ = choose_adjacent( _( "Smash where?" ),
             allow_floor_bash );
     if( !smashp_ ) {
+        repeat_count = 0;
         return;
     }
     tripoint_bub_ms smashp = *smashp_;
@@ -945,12 +948,25 @@ static void smash()
     }
 
     if( !smashable_corpse_at_target && !g->warn_player_maybe_anger_local_faction( true ) ) {
-        return; // player declined to smash faction's stuff
+        repeat_count = 0;
+        return; // Player declined to smash faction's stuff.
     }
 
     avatar &player_character = get_avatar();
     avatar::smash_result res = player_character.smash( smashp );
-    if( res.did_smash && !res.success &&
+
+    // Prompt to keep smashing only if the player targets the same spot 3 times.
+    if( res.did_smash ) {
+        if( smashp == last_smash ) {
+            repeat_count = std::min( 4, repeat_count + 1 );
+        } else {
+            repeat_count = 1;
+            last_smash = smashp;
+        }
+    } else {
+        repeat_count = 0;
+    }
+    if( repeat_count == 3 && res.did_smash && !res.success &&
         res.resistance > 0 && res.skill >= res.resistance &&
         query_yn( _( "Keep smashing until destroyed?" ) ) ) {
         player_character.assign_activity( bash_activity_actor( smashp ) );
@@ -1367,8 +1383,6 @@ static void sleep()
             continue;
         }
 
-        // some bionics
-        // bio_alarm is useful for waking up during sleeping
         if( bio.info().has_flag( STATIC( json_character_flag( "BIONIC_SLEEP_FRIENDLY" ) ) ) ) {
             continue;
         }

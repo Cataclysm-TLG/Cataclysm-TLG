@@ -4039,7 +4039,7 @@ class Character : public Creature, public visitable
 
         trap_map known_traps;
         mutable std::map<std::string, double> cached_info;
-        bool bio_soporific_powered_at_last_sleep_check = false;
+        bool bio_sleep_shutdown_powered_at_last_sleep_check = false;
         /** last time we checked for sleep */
         time_point last_sleep_check = calendar::turn_zero;
         /** warnings from a faction about bad behavior */

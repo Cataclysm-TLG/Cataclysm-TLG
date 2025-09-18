@@ -36,7 +36,7 @@
     "id": "knitting_needles",
     "type": "GENERIC",
     "category": "tools",
-    "name": { "str": "pair of knitting needles", "str_pl": "pairs of knitting needles" },
+    "name": { "str": "knitting needles", "str_pl": "pairs of knitting needles" },
     "description": "A pair of stout wooden needles with round ends, used to turn thread and yarn into cloth.",
     "weight": "18 g",
     "volume": "40 ml",
@@ -328,7 +328,7 @@
   {
     "id": "kevlar_shears",
     "type": "TOOL",
-    "name": { "str": "pair of Kevlar shears", "str_pl": "pairs of Kevlar shears" },
+    "name": { "str": "Kevlar shears", "str_pl": "pairs of Kevlar shears" },
     "description": "A pair of heavy-duty shears suitable for cutting particularly tough materials, from polyaramid fabrics to tough plastics and thin metals.  The blades feature flat shearing edges and fine serrations.",
     "ascii_picture": "scissors",
     "weight": "113 g",

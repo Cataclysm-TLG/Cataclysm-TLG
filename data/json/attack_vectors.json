@@ -30,6 +30,13 @@
   },
   {
     "type": "attack_vector",
+    "id": "vector_tongue",
+    "limbs": [ "mouth" ],
+    "contact_area": [ "mouth_lips" ],
+    "natural_attack": true
+  },
+  {
+    "type": "attack_vector",
     "id": "vector_claw",
     "limbs": [ "hand_l", "hand_r" ],
     "contact_area": [ "hand_fingers_l", "hand_fingers_r" ],

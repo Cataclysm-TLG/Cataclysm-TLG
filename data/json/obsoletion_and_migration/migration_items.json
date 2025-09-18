@@ -2584,6 +2584,11 @@
     "replace": "bio_armor_eyes"
   },
   {
+    "type": "MIGRATION",
+    "id": "bio_soporific",
+    "replace": "bio_sleep_shutdown"
+  },
+  {
     "id": "generator_7500w",
     "type": "MIGRATION",
     "replace": "diesel_generator"

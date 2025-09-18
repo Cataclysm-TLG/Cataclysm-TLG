@@ -87,7 +87,6 @@
 
 static const bionic_id bio_cloak( "bio_cloak" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
-static const bionic_id bio_soporific( "bio_soporific" );
 
 static const efftype_id effect_alarm_clock( "alarm_clock" );
 static const efftype_id effect_boomered( "boomered" );
@@ -1924,12 +1923,12 @@ void avatar::try_to_sleep( const time_duration &dur )
     get_comfort_at( pos_bub() ).add_try_msgs( *this );
 
     add_msg_if_player( _( "You start trying to fall asleep." ) );
-    if( has_active_bionic( bio_soporific ) ) {
-        bio_soporific_powered_at_last_sleep_check = has_power();
-        if( bio_soporific_powered_at_last_sleep_check ) {
-            add_msg_if_player( m_good, _( "Your soporific inducer starts working its magic." ) );
+    if( has_active_bionic( bio_sleep_shutdown ) ) {
+        bio_sleep_shutdown_powered_at_last_sleep_check = has_power();
+        if( bio_sleep_shutdown_powered_at_last_sleep_check ) {
+            add_msg_if_player( m_good, _( "Your sleep mode CBM starts working its magic." ) );
         } else {
-            add_msg_if_player( m_bad, _( "Your soporific inducer doesn't have enough power to operate." ) );
+            add_msg_if_player( m_bad, _( "Your sleep mode CBM doesn't have enough power to operate." ) );
         }
     }
     assign_activity( try_sleep_activity_actor( dur ) );

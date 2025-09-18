@@ -3,7 +3,7 @@
     "id": "boots_survivor",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of survivor boots", "str_pl": "pairs of survivor boots" },
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
     "description": "A pair of custom-made boots constructed of thick Kevlar and a chemical resistant layer, featuring steel toes for extra protection.  Keeps your feet safe from the myriad dangers of the apocalypse.",
     "weight": "1330 g",
     "volume": "2500 ml",
@@ -56,21 +56,21 @@
     "type": "ARMOR",
     "copy-from": "boots_survivor",
     "proportional": { "weight": 1.4, "volume": 1.4 },
-    "name": { "str": "pair of survivor boots", "str_pl": "pairs of survivor boots" },
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
     "id": "boots_survivor_xs",
     "type": "ARMOR",
     "copy-from": "boots_survivor",
-    "name": { "str": "pair of survivor boots", "str_pl": "pairs of survivor boots" },
+    "name": { "str": "survivor boots", "str_pl": "pairs of survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "boots_wsurvivor_nofur",
     "type": "ARMOR",
-    "name": { "str": "pair of faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "description": "A pair of customized, Kevlar-armored chemical-resistant boots with steel toes.  Warm thanks to the faux-fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
     "copy-from": "boots_wsurvivor",
     "material": [ "leather_treated", "steel", "kevlar", "faux_fur" ],
@@ -116,7 +116,7 @@
     "id": "boots_wsurvivor_nofur_xl",
     "type": "ARMOR",
     "copy-from": "boots_wsurvivor_nofur",
-    "name": { "str": "pair of faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "proportional": { "weight": 1.3, "volume": 1.3 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -124,7 +124,7 @@
     "id": "boots_wsurvivor_nofur_xs",
     "type": "ARMOR",
     "copy-from": "boots_wsurvivor_nofur",
-    "name": { "str": "pair of faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
+    "name": { "str": "faux fur winter survivor boots", "str_pl": "pairs of faux fur winter survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -132,7 +132,7 @@
     "id": "boots_wsurvivor",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "description": "A pair of customized, Kevlar-armored boots with a chemical-resistant layer and steel toes.  Warm thanks to the real fur lining, and quite protective due to the thick materials, though perhaps a little hard to move in.",
     "weight": "1760 g",
     "volume": "3500 ml",
@@ -186,7 +186,7 @@
   {
     "id": "boots_wsurvivor_xl",
     "type": "ARMOR",
-    "name": { "str": "pair of winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "copy-from": "boots_wsurvivor",
     "proportional": { "weight": 1.3, "volume": 1.3 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -195,7 +195,7 @@
     "id": "boots_wsurvivor_xs",
     "type": "ARMOR",
     "copy-from": "boots_wsurvivor",
-    "name": { "str": "pair of winter survivor boots", "str_pl": "pairs of winter survivor boots" },
+    "name": { "str": "winter survivor boots", "str_pl": "pairs of winter survivor boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },

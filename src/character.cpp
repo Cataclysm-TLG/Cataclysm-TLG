@@ -171,7 +171,6 @@ static const bionic_id bio_ods( "bio_ods" );
 static const bionic_id bio_railgun( "bio_railgun" );
 static const bionic_id bio_shock_absorber( "bio_shock_absorber" );
 static const bionic_id bio_sleep_shutdown( "bio_sleep_shutdown" );
-static const bionic_id bio_soporific( "bio_soporific" );
 static const bionic_id bio_synlungs( "bio_synlungs" );
 static const bionic_id bio_targeting( "bio_targeting" );
 static const bionic_id bio_uncanny_dodge( "bio_uncanny_dodge" );
@@ -1615,7 +1614,7 @@ void Character::react_to_felt_pain( int intensity )
         !has_effect( effect_narcosis ) ) {
         int pain_thresh = rng( 3, 5 );
 
-        if( has_bionic( bio_sleep_shutdown ) ) {
+        if( has_active_bionic( bio_sleep_shutdown ) ) {
             pain_thresh += 999;
         } else if( has_trait( trait_HEAVYSLEEPER ) ) {
             pain_thresh += 2;
@@ -5633,6 +5632,13 @@ needs_rates Character::calc_needs_rates() const
                                 pos_bub() ) ) - 32.5f ) / 40.0f );
     }
 
+    // Tired or injured bodies need more sleep.
+    if( hp_percentage() < 75 || weariness_level() >= 2 ) {
+        rates.fatigue *= 1.15f;
+    } else if( rates.fatigue < 1.f && ( hp_percentage() < 50 && weariness_level() >= 4 ) ) {
+        rates.fatigue *= 1.33f;
+    }
+
     rates.hunger = enchantment_cache->modify_value( enchant_vals::mod::HUNGER, rates.hunger );
     rates.fatigue = enchantment_cache->modify_value( enchant_vals::mod::FATIGUE, rates.fatigue );
     rates.thirst = enchantment_cache->modify_value( enchant_vals::mod::THIRST, rates.thirst );
@@ -8863,7 +8869,7 @@ void Character::on_hurt( Creature *source, bool disturb /*= true*/ )
     }
 
     if( disturb ) {
-        if( has_effect( effect_sleep ) && !has_bionic( bio_sleep_shutdown ) ) {
+        if( has_effect( effect_sleep ) && !has_active_bionic( bio_sleep_shutdown ) ) {
             wake_up();
         }
         if( uistate.distraction_attack && !is_npc() && !has_effect( effect_narcosis ) ) {
@@ -9437,7 +9443,7 @@ void Character::fall_asleep()
 
     get_comfort_at( pos_bub() ).add_sleep_msgs( *this );
 
-    if( has_bionic( bio_sleep_shutdown ) ) {
+    if( has_active_bionic( bio_sleep_shutdown ) ) {
         add_msg_if_player( _( "Sleep Mode activated.  Disabling sensory response." ) );
     }
     if( has_active_mutation( trait_HIBERNATE ) &&
@@ -11752,13 +11758,13 @@ bool Character::can_sleep()
     sleepy += rng( -8, 8 );
     bool result = sleepy > 0;
 
-    if( has_active_bionic( bio_soporific ) ) {
-        if( bio_soporific_powered_at_last_sleep_check && !has_power() ) {
-            add_msg_if_player( m_bad, _( "Your soporific inducer runs out of power!" ) );
-        } else if( !bio_soporific_powered_at_last_sleep_check && has_power() ) {
-            add_msg_if_player( m_good, _( "Your soporific inducer starts back up." ) );
+    if( has_active_bionic( bio_sleep_shutdown ) ) {
+        if( bio_sleep_shutdown_powered_at_last_sleep_check && !has_power() ) {
+            add_msg_if_player( m_bad, _( "Your Sleep Mode CBM runs out of power!" ) );
+        } else if( !bio_sleep_shutdown_powered_at_last_sleep_check && has_power() ) {
+            add_msg_if_player( m_good, _( "Your Sleep Mode CBM starts back up." ) );
         }
-        bio_soporific_powered_at_last_sleep_check = has_power();
+        bio_sleep_shutdown_powered_at_last_sleep_check = has_power();
     }
 
     return result;

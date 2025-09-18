@@ -84,7 +84,7 @@
   {
     "id": "boltcutters",
     "type": "TOOL",
-    "name": { "str": "pair of bolt cutters", "str_pl": "pairs of bolt cutters" },
+    "name": { "str": "bolt cutters", "str_pl": "pairs of bolt cutters" },
     "description": "A large pair of bolt cutters.  You could use them to cut padlocks or heavy gauge wire.",
     "weight": "1560 g",
     "volume": "2750 ml",
@@ -373,7 +373,7 @@
   {
     "id": "tongs",
     "type": "TOOL",
-    "name": { "str": "pair of kitchen tongs", "str_pl": "pairs of kitchen tongs" },
+    "name": { "str": "kitchen tongs", "str_pl": "pairs of kitchen tongs" },
     "description": "A pair of long, metal tongs.  They are commonly used for cooking.",
     "weight": "167 g",
     "volume": "210 ml",
@@ -393,13 +393,13 @@
     "id": "metalworking_tongs_bronze",
     "type": "TOOL",
     "copy-from": "metalworking_tongs",
-    "name": { "str": "pair of flatjaw bronze tongs", "str_pl": "pairs of flatjaw bronze tongs" },
+    "name": { "str": "flatjaw bronze tongs", "str_pl": "pairs of flatjaw bronze tongs" },
     "material": [ "bronze" ]
   },
   {
     "id": "metalworking_tongs",
     "type": "TOOL",
-    "name": { "str": "pair of flatjaw tongs", "str_pl": "pairs of flatjaw tongs" },
+    "name": { "str": "flatjaw tongs", "str_pl": "pairs of flatjaw tongs" },
     "description": "A pair of flatjaw tongs.  They are commonly used for metalworking, fabrication, or forging recipes.",
     "weight": "730 g",
     "volume": "662 ml",

@@ -4,7 +4,7 @@
     "type": "ARMOR",
     "looks_like": "gloves_survivor",
     "category": "armor",
-    "name": { "str": "pair of fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
+    "name": { "str": "fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
     "description": "A pair of customized, Kevlar-armored leather gloves with the fingers cut off.  These strike a balance between comfort and protection.",
     "weight": "200 g",
     "volume": "700 ml",
@@ -55,7 +55,7 @@
   {
     "id": "gloves_survivor_fingerless_xl",
     "type": "ARMOR",
-    "name": { "str": "pair of fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
+    "name": { "str": "fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
     "copy-from": "gloves_survivor_fingerless",
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -64,7 +64,7 @@
     "id": "gloves_survivor_fingerless_xs",
     "type": "ARMOR",
     "copy-from": "gloves_survivor_fingerless",
-    "name": { "str": "pair of fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
+    "name": { "str": "fingerless survivor gloves", "str_pl": "pairs of fingerless survivor gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -72,7 +72,7 @@
     "id": "gloves_survivor",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of survivor gloves", "str_pl": "pairs of survivor gloves" },
+    "name": { "str": "survivor gloves", "str_pl": "pairs of survivor gloves" },
     "description": "A pair of hand-crafted gloves made from kevlar and leather, rubberized to offer protection from chemicals.",
     "weight": "230 g",
     "volume": "750 ml",
@@ -103,7 +103,7 @@
     "id": "gloves_survivor_xl",
     "type": "ARMOR",
     "copy-from": "gloves_survivor",
-    "name": { "str": "pair of survivor gloves", "str_pl": "pairs of survivor gloves" },
+    "name": { "str": "survivor gloves", "str_pl": "pairs of survivor gloves" },
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -111,7 +111,7 @@
     "id": "gloves_survivor_xs",
     "type": "ARMOR",
     "copy-from": "gloves_survivor",
-    "name": { "str": "pair of survivor gloves", "str_pl": "pairs of survivor gloves" },
+    "name": { "str": "survivor gloves", "str_pl": "pairs of survivor gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -119,7 +119,7 @@
     "id": "gloves_wsurvivor",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
+    "name": { "str": "winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
     "description": "A pair of hand-crafted gloves made from kevlar and leather, rubberized to offer protection from chemicals.  These are lined with real fur.",
     "weight": "300 g",
     "volume": "1250 ml",
@@ -151,7 +151,7 @@
   {
     "id": "gloves_wsurvivor_xl",
     "type": "ARMOR",
-    "name": { "str": "pair of winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
+    "name": { "str": "winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
     "copy-from": "gloves_wsurvivor",
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -160,7 +160,7 @@
     "id": "gloves_wsurvivor_xs",
     "type": "ARMOR",
     "copy-from": "gloves_wsurvivor",
-    "name": { "str": "pair of winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
+    "name": { "str": "winter survivor gloves", "str_pl": "pairs of winter survivor gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -168,7 +168,7 @@
     "id": "gloves_wsurvivor_nofur",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of faux fur winter survivor gloves", "str_pl": "pairs of faux fur winter survivor gloves" },
+    "name": { "str": "faux fur winter survivor gloves", "str_pl": "pairs of faux fur winter survivor gloves" },
     "description": "A pair of hand-crafted gloves armored with kevlar, rubberized to offer protection from chemicals.  These are lined with real fur.",
     "weight": "300 g",
     "volume": "1250 ml",
@@ -199,7 +199,7 @@
   {
     "id": "gloves_wsurvivor_nofur_xl",
     "type": "ARMOR",
-    "name": { "str": "pair of faux fur winter survivor gloves", "str_pl": "pairs of faux fur winter survivor gloves" },
+    "name": { "str": "faux fur winter survivor gloves", "str_pl": "pairs of faux fur winter survivor gloves" },
     "copy-from": "gloves_wsurvivor_nofur",
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -208,7 +208,7 @@
     "id": "gloves_wsurvivor_nofur_xs",
     "type": "ARMOR",
     "copy-from": "gloves_wsurvivor_nofur",
-    "name": { "str": "pair of XS faux fur winter survivor gloves", "str_pl": "pairs of XS faux fur winter survivor gloves" },
+    "name": { "str": "XS faux fur winter survivor gloves", "str_pl": "pairs of XS faux fur winter survivor gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -216,7 +216,7 @@
     "id": "gloves_fsurvivor",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of survivor fire gloves", "str_pl": "pairs of survivor fire gloves" },
+    "name": { "str": "survivor fire gloves", "str_pl": "pairs of survivor fire gloves" },
     "description": "A pair of customized, Kevlar-armored Nomex gloves, a post-apocalyptic update to the sort of thing firefighters wore before the Cataclysm.",
     "weight": "410 g",
     "volume": "1 L",
@@ -246,7 +246,7 @@
   {
     "id": "gloves_fsurvivor_xl",
     "type": "ARMOR",
-    "name": { "str": "pair of survivor fire gloves", "str_pl": "pairs of survivor fire gloves" },
+    "name": { "str": "survivor fire gloves", "str_pl": "pairs of survivor fire gloves" },
     "copy-from": "gloves_fsurvivor",
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -255,7 +255,7 @@
     "id": "gloves_fsurvivor_xs",
     "type": "ARMOR",
     "copy-from": "gloves_fsurvivor",
-    "name": { "str": "pair of XS survivor fire gloves", "str_pl": "pairs of XS survivor fire gloves" },
+    "name": { "str": "XS survivor fire gloves", "str_pl": "pairs of XS survivor fire gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   }

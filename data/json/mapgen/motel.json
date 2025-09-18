@@ -68,7 +68,7 @@
       "d": "f_deckchair",
       "t": "f_table"
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "vehicles": {
       "Á": { "vehicle": "parking_garage", "chance": 33, "rotation": 270 },
       "É": { "vehicle": "parking_garage", "chance": 33, "rotation": 90 }
@@ -735,7 +735,7 @@
       "$": { "furniture": "f_shower", "items": { "item": "shower", "chance": 33 } },
       "S": { "furniture": "f_sink", "items": { "item": "public_sink", "chance": 33 } }
     },
-    "vendingmachines": { "V": { "item_group": "vending_drink"  }, "v": { "item_group": "vending_food"  } },
+    "vendingmachines": { "V": { "item_group": "vending_drink" }, "v": { "item_group": "vending_food" } },
     "toilets": { "L": {  } }
   },
   {

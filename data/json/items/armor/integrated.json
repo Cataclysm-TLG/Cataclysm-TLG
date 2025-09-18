@@ -739,6 +739,42 @@
     "melee_damage": { "stab": 14 }
   },
   {
+    "id": "integrated_barbed_tongue",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "barbed tongue" },
+    "description": "Though this tongue fits neatly within the mouth, it can extend to an astonishing length.  Sharp chitin barbs like a grotesque parody of a cat's tongue line the surface, and the barb at the tip looks more like a whaler's harpoon than something that belongs in a mouth.",
+    "weight": "800 g",
+    "volume": "1200 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "sclerotin", "flesh" ],
+    "symbol": ";",
+    "color": "brown",
+    "warmth": 2,
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "TONGUE_STAB" ],
+    "armor": [
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "mouth" ],
+        "coverage": 10,
+        "encumbrance": 3
+      }
+    ],
+    "melee_damage": { "stab": 14 }
+  },
+  {
     "id": "integrated_chitin",
     "type": "ARMOR",
     "category": "armor",

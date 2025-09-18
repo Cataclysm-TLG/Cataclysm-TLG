@@ -20,9 +20,7 @@
     "nested_mapgen_id": "nested_poison_ivy_forest",
     "object": {
       "mapgensize": [ 1, 1 ],
-      "terrain": {
-        " ": [ [ "t_region_groundcover_forest", 1 ] ]
-      },
+      "terrain": { " ": [ [ "t_region_groundcover_forest", 1 ] ] },
       "//": "Most terrain above can not house furniture and will thus give its location away, so no furniture.",
       "place_furniture": [ { "furn": "f_null", "x": 0, "y": 0 } ],
       "place_traps": [ { "trap": "tr_poison_ivy", "x": 0, "y": 0 } ],

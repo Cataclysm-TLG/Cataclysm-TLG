@@ -365,7 +365,7 @@
   {
     "id": "scissors_medical",
     "type": "TOOL",
-    "name": { "str": "pair of medical scissors", "str_pl": "pairs of medical scissors" },
+    "name": { "str": "medical scissors", "str_pl": "pairs of medical scissors" },
     "description": "A pair of medical scissors, typically used by nurses or paramedics to cut bandages or fabric.",
     "ascii_picture": "scissors",
     "weight": "50 g",

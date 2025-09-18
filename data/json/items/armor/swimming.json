@@ -120,7 +120,7 @@
   {
     "id": "trunks",
     "type": "ARMOR",
-    "name": { "str": "pair of swimming trunks", "str_pl": "pairs of swimming trunks" },
+    "name": { "str": "swimming trunks", "str_pl": "pairs of swimming trunks" },
     "description": "A pair of swimming trunks, with netting.",
     "weight": "210 g",
     "volume": "750 ml",
@@ -141,7 +141,7 @@
   {
     "id": "wetsuit_booties",
     "type": "ARMOR",
-    "name": { "str": "pair of diving socks", "str_pl": "pairs of diving socks" },
+    "name": { "str": "diving socks", "str_pl": "pairs of diving socks" },
     "description": "A pair of 3 mm split-toe neoprene diving socks with thin rubber soles.",
     "weight": "130 g",
     "volume": "1 L",
@@ -190,7 +190,7 @@
     "id": "xl_wetsuit_booties",
     "type": "ARMOR",
     "copy-from": "wetsuit_booties",
-    "name": { "str": "pair of diving socks", "str_pl": "pairs of diving socks" },
+    "name": { "str": "diving socks", "str_pl": "pairs of diving socks" },
     "proportional": { "weight": 1.25, "volume": 1.25, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -198,7 +198,7 @@
     "id": "xs_wetsuit_booties",
     "type": "ARMOR",
     "copy-from": "wetsuit_booties",
-    "name": { "str": "pair of diving socks", "str_pl": "pairs of diving socks" },
+    "name": { "str": "diving socks", "str_pl": "pairs of diving socks" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.75 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -206,7 +206,7 @@
     "id": "wetsuit_booties_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_booties",
-    "name": { "str": "pair of diving boots", "str_pl": "pairs of diving boots" },
+    "name": { "str": "diving boots", "str_pl": "pairs of diving boots" },
     "description": "A pair of 5 mm thick neoprene diving boots with thick soles.",
     "//": "These will have an ablative armor slot for fins, as diving boots are designed to be worn with those.",
     "weight": "160 g",
@@ -262,7 +262,7 @@
     "id": "xl_wetsuit_booties_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_booties_thick",
-    "name": { "str": "pair of thick diving boots", "str_pl": "pairs of thick diving boots" },
+    "name": { "str": "thick diving boots", "str_pl": "pairs of thick diving boots" },
     "proportional": { "weight": 1.25, "volume": 1.25, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -270,14 +270,14 @@
     "id": "xs_wetsuit_booties_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_booties_thick",
-    "name": { "str": "pair of thick diving boots", "str_pl": "pairs of thick diving boots" },
+    "name": { "str": "thick diving boots", "str_pl": "pairs of thick diving boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.75 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "swim_fins",
     "type": "ARMOR",
-    "name": { "str": "pair of swim fins", "str_pl": "pairs of swim fins" },
+    "name": { "str": "swim fins", "str_pl": "pairs of swim fins" },
     "description": "A pair of rubber flippers worn on the feet, which improve swimming speed while greatly impeding the wearer's ability to walk.",
     "weight": "680 g",
     "volume": "1250 ml",
@@ -1224,7 +1224,7 @@
   {
     "id": "goggles_swim",
     "type": "ARMOR",
-    "name": { "str": "pair of swim goggles", "str_pl": "pairs of swim goggles" },
+    "name": { "str": "swim goggles", "str_pl": "pairs of swim goggles" },
     "description": "A small pair of goggles made for swimming.",
     "weight": "81 g",
     "volume": "250 ml",
@@ -1254,7 +1254,7 @@
   {
     "id": "wetsuit_gloves",
     "type": "ARMOR",
-    "name": { "str": "pair of diving gloves", "str_pl": "pairs of diving gloves" },
+    "name": { "str": "diving gloves", "str_pl": "pairs of diving gloves" },
     "description": "A pair of flexible neoprene-silicone rubber gloves, suitable for underwater use.",
     "weight": "80 g",
     "volume": "500 ml",
@@ -1284,7 +1284,7 @@
     "id": "xl_wetsuit_gloves",
     "type": "ARMOR",
     "copy-from": "wetsuit_gloves",
-    "name": { "str": "pair of diving gloves", "str_pl": "pairs of diving gloves" },
+    "name": { "str": "diving gloves", "str_pl": "pairs of diving gloves" },
     "proportional": { "weight": 1.25, "volume": 1.25, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -1292,7 +1292,7 @@
     "id": "xs_wetsuit_gloves",
     "type": "ARMOR",
     "copy-from": "wetsuit_gloves",
-    "name": { "str": "pair of diving gloves", "str_pl": "pairs of diving gloves" },
+    "name": { "str": "diving gloves", "str_pl": "pairs of diving gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.75 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -1300,7 +1300,7 @@
     "id": "wetsuit_gloves_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_gloves",
-    "name": { "str": "pair of thick diving gloves", "str_pl": "pairs of thick diving gloves" },
+    "name": { "str": "thick diving gloves", "str_pl": "pairs of thick diving gloves" },
     "description": "A pair of thick neoprene-silicone rubber gloves, suitable for underwater use.",
     "weight": "90 g",
     "warmth": 50,
@@ -1322,7 +1322,7 @@
     "id": "xl_wetsuit_gloves_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_gloves_thick",
-    "name": { "str": "pair of thick diving gloves", "str_pl": "pairs of thick diving gloves" },
+    "name": { "str": "thick diving gloves", "str_pl": "pairs of thick diving gloves" },
     "proportional": { "weight": 1.25, "volume": 1.25, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -1330,7 +1330,7 @@
     "id": "xs_wetsuit_gloves_thick",
     "type": "ARMOR",
     "copy-from": "wetsuit_gloves_thick",
-    "name": { "str": "pair of thick diving gloves", "str_pl": "pairs of thick diving gloves" },
+    "name": { "str": "thick diving gloves", "str_pl": "pairs of thick diving gloves" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.75 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
