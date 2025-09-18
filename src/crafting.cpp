@@ -108,6 +108,7 @@ static const quality_id qual_BOIL( "BOIL" );
 
 static const skill_id skill_electronics( "electronics" );
 static const skill_id skill_tailor( "tailor" );
+static const skill_id skill_traps( "traps" );
 
 static const trait_id trait_BURROW( "BURROW" );
 static const trait_id trait_BURROWLARGE( "BURROWLARGE" );
@@ -1113,7 +1114,7 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         float vision_penalty = 0.0f;
-        if( making.skill_used == skill_electronics ) {
+        if( making.skill_used == skill_electronics || skill_traps ) {
             vision_penalty = 2.0f;
         } else if( making.skill_used == skill_tailor ) {
             vision_penalty = 1.0f;
@@ -1149,7 +1150,7 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
     return weighted_skill_average + total_skill_modifiers;
 }
 
-Character::craft_roll_data Character::recipe_success_roll_data( const recipe &making ) const
+Character::craft_roll_data Character::recipe_success_roll_data( const recipe &making, bool final ) const
 {
     // We're going to use a sqrt( sum of squares ) method here to give diminishing returns for more low level helpers.
     float player_weighted_skill_average = get_recipe_weighted_skill_average( making );
@@ -1177,7 +1178,9 @@ Character::craft_roll_data Character::recipe_success_roll_data( const recipe &ma
             const float helper_skill_average = std::max( guy->get_recipe_weighted_skill_average( making ),
                                                0.0f );
             helpers_weighted_average += std::pow( helper_skill_average, 2 );
-            add_msg_if_player( m_info, _( "%s helps with crafting…" ), guy->name );
+            if( final ) {
+                add_msg_if_player( m_info, _( "%s helps with crafting." ), guy->name );
+            }
         }
     }
 
@@ -1244,7 +1247,7 @@ Character::craft_roll_data Character::recipe_success_roll_data( const recipe &ma
 
 Character::craft_roll_data Character::recipe_failure_roll_data( const recipe &making ) const
 {
-    craft_roll_data data = recipe_success_roll_data( making );
+    craft_roll_data data = recipe_success_roll_data( making, false );
     // Fund the numbers for the outcomes we want
     data.final_difficulty -= 1;
     data.final_difficulty *= 0.25;
@@ -1254,7 +1257,7 @@ Character::craft_roll_data Character::recipe_failure_roll_data( const recipe &ma
 
 float Character::crafting_success_roll( const recipe &making ) const
 {
-    craft_roll_data data = recipe_success_roll_data( making );
+    craft_roll_data data = recipe_success_roll_data( making, true );
     float craft_roll = std::max( normal_roll( data.center, data.stddev ), 0.0 );
 
     add_msg_debug( debugmode::DF_CHARACTER, "Crafting skill roll: %f, final difficulty %g", craft_roll,
@@ -1279,7 +1282,7 @@ float Character::recipe_success_chance( const recipe &making ) const
     // We calculate the failure chance of a recipe by performing a normal roll with a given
     // standard deviation and center, then subtracting a "final difficulty" score from that.
     // If that result is above 1, there is no chance of failure.
-    craft_roll_data data = recipe_success_roll_data( making );
+    craft_roll_data data = recipe_success_roll_data( making, false );
 
     return normal_roll_chance( data.center, data.stddev, 1.f + data.final_difficulty );
 }
@@ -1521,7 +1524,16 @@ void Character::complete_craft( item &craft, const std::optional<tripoint_bub_ms
             }
         } else {
             if( is_avatar() ) {
-                add_msg( _( "You craft %s using a reference." ), making.result_name() );
+                bool shown_how = false;
+                for( Character *helper : get_crafting_helpers() ) {
+                    if( !shown_how && helper->knows_recipe( &making ) ) {
+                        add_msg( m_info, _( "%1s walks you through making %2s since you don't already know how." ), helper->get_name(), making.result_name() );
+                        shown_how = true;
+                    }
+                }
+                if( !shown_how ) {
+                    add_msg( _( "You craft %s using a reference." ), making.result_name() );
+                }
             } else {
                 add_msg( _( "%1s crafts %2s using a reference." ), get_name(), making.result_name() );
             }

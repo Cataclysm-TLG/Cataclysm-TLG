@@ -3697,7 +3697,12 @@ class Character : public Creature, public visitable
         float get_recipe_weighted_skill_average( const recipe &making ) const;
         float recipe_success_chance( const recipe &making ) const;
         float item_destruction_chance( const recipe &making ) const;
-        craft_roll_data recipe_success_roll_data( const recipe &making ) const;
+        /**
+         * If final == true, then this function will print a message about NPCs helping with the task.
+         * This prevents us from spamming the message window when the player is simply browsing recipes,
+         * as this function is called multiple times.
+         */
+        craft_roll_data recipe_success_roll_data( const recipe &making, bool final = false ) const;
         craft_roll_data recipe_failure_roll_data( const recipe &making ) const;
         void complete_craft( item &craft, const std::optional<tripoint_bub_ms> &loc );
         /**
