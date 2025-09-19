@@ -937,7 +937,7 @@
       }
     ],
     "pocket_data": [
-      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 56 } },
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 120 } },
       {
         "forbidden": true,
         "//": "forbidden, so items still can spawn inside, but are not accessible by default.",
