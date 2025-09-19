@@ -666,7 +666,7 @@
       "effect": [ { "u_spawn_item": "icon", "count": 10 }, { "npc_add_var": "mission_meeting_gemma_got_supplements", "value": "yes" } ],
       "opinion": { "trust": 2, "value": 2 }
     },
-    "fail": { "opinion": { "anger": 2 } },
+    "fail": { "opinion": { "anger": 1 } },
     "origins": [ "ORIGIN_SECONDARY" ],
     "has_generic_rewards": false,
     "dialogue": {
