@@ -13,5 +13,10 @@
     "type": "overmap_special_migration",
     "id": "Cabin_Lapin",
     "new_id": "Cabin_8"
+  },
+    {
+    "type": "overmap_special_migration",
+    "id": "bandit_work_camp",
+    "new_id": "sand_pit"
   }
 ]
