@@ -7868,8 +7868,9 @@ std::vector<tripoint_bub_ms> map::find_clear_path( const tripoint_bub_ms &source
     return line_to( source, destination, ideal_start_offset, 0 );
 }
 
-std::vector<tripoint_bub_ms> map::reachable_flood_steps( const tripoint_bub_ms &f, int range,
-        const int cost_min, const int cost_max ) const
+std::vector<tripoint_bub_ms> map::reachable_flood_steps(
+    const tripoint_bub_ms &f, int range,
+    const int cost_min, const int cost_max ) const
 {
     struct pq_item {
         int dist;
@@ -7881,87 +7882,160 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps( const tripoint_bub_ms &
         }
     };
     using PQ_type = std::priority_queue< pq_item, std::vector<pq_item>, pq_item_comp>;
-
-    // temp buffer for grid
     const int grid_dim = range * 2 + 1;
-    const size_t grid_area = static_cast<size_t>( grid_dim ) * grid_dim;
-    // init to -1 as "not visited yet"
+    const int v_range = 4; // Half of range, since Z tiles count for 2.
+    const int z_dim = v_range * 2 + 1;
+    const size_t grid_area = static_cast<size_t>( grid_dim ) * grid_dim * z_dim;
     std::vector<int> t_grid( grid_area, -1 );
-    const tripoint_rel_ms origin_offset = { range, range, 0 };
-    const int initial_visit_distance = range * range; // Large unreachable value
-
-    // Fill positions that are visitable with initial_visit_distance
+    const tripoint_rel_ms origin_offset = { range, range, v_range };
+    const int initial_visit_distance = range * range;
+    auto grid_index = [grid_dim]( int x, int y, int z ) {
+        return x + y * grid_dim + z * grid_dim * grid_dim;
+    };
     for( const tripoint_bub_ms &p : points_in_radius( f, range ) ) {
-        const tripoint_bub_ms tp = { p.xy(), f.z()};
-        const int tp_cost = move_cost( tp );
-        // rejection conditions
-        if( tp_cost < cost_min || tp_cost > cost_max || is_open_air( tp ) ) {
-            continue;
+        for( int dz = -v_range; dz <= v_range; ++dz ) {
+            tripoint_bub_ms np = p + tripoint( 0, 0, dz );
+            const int tp_cost = move_cost( np );
+            if( tp_cost < cost_min || tp_cost > cost_max || is_open_air( np ) ||
+                get_map().dangerous_field_at( np ) || get_map().impassable_field_at( np ) ||
+                get_map().can_see_trap_at( np, get_player_character() ) ) {
+                continue;
+            }
+            tripoint_rel_ms rel = np - f + origin_offset;
+            if( rel.x() < 0 || rel.x() >= grid_dim || rel.y() < 0 || rel.y() >= grid_dim || rel.z() < 0 ||
+                rel.z() >= z_dim ) {
+                continue;
+            }
+            t_grid[grid_index( rel.x(), rel.y(), rel.z() )] = initial_visit_distance;
         }
-        // set initial cost for grid point
-        tripoint_rel_ms origin_relative = tp - f;
-        origin_relative += origin_offset;
-        int ndx = origin_relative.x() + origin_relative.y() * grid_dim;
-        t_grid[ndx] = initial_visit_distance;
     }
+    auto gen_neighbors = [&]( const pq_item & elem, std::vector<pq_item> &neighbors ) {
+        neighbors.clear();
+        int x = elem.ndx % grid_dim;
+        int y = ( elem.ndx / grid_dim ) % grid_dim;
+        int z = ( elem.ndx / ( grid_dim * grid_dim ) );
+        // Horizontal and diagonal neighbors.
+        // Horizontal 8 neighbors (same Z-level)
+        for( int dx = -1; dx <= 1; ++dx ) {
+            for( int dy = -1; dy <= 1; ++dy ) {
+                if( dx == 0 && dy == 0 ) {
+                    continue
+                };
 
-    auto gen_neighbors = []( const pq_item & elem, int grid_dim, std::array<pq_item, 8> &neighbors ) {
-        // Up to 8 neighbors
-        int new_cost = elem.dist + 1;
-        // *INDENT-OFF*
-        const std::array<int, 8> ox = {
-            -1, 0, 1,
-            -1,    1,
-            -1, 0, 1
-        };
-        const std::array<int, 8> oy = {
-            -1, -1, -1,
-            0,      0,
-            1,  1,  1
-        };
-        // *INDENT-ON*
+                int nx = x + dx;
+                int ny = y + dy;
+                if( nx < 0 || nx >= grid_dim || ny < 0 || ny >= grid_dim ) {
+                    continue
+                };
 
-        point e( elem.ndx % grid_dim, elem.ndx / grid_dim );
-        for( int i = 0; i < 8; ++i ) {
-            point n( e + point( ox[i], oy[i] ) );
+                tripoint_bub_ms npos = f - origin_offset + tripoint( nx, ny, z );
 
-            int ndx = n.x + n.y * grid_dim;
-            neighbors[i] = { new_cost, ndx };
+                // Enforce Euclidean distance from origin f.
+                int dx_total = npos.x() - f.x();
+                int dy_total = npos.y() - f.y();
+                if( dx_total * dx_total + dy_total * dy_total > range * range ) {
+                    continue; // Outside the allowed circle.
+                }
+                int base_cost = move_cost( npos );
+                if( base_cost < cost_min || base_cost > cost_max || is_open_air( npos ) ) {
+                    continue
+                };
+                // Only push neighbors reachable within range steps.
+                if( elem.dist + 1 <= range ) {
+                    neighbors.push_back( { elem.dist + 1, grid_index( nx, ny, z ) } );
+                }
+            }
+        }
+        // Vertical neighbors.
+        for( int dz : {
+                 -1, 1
+                 } ) {
+            int nz = z + dz;
+            if( nz < 0 || nz >= z_dim ) {
+                continue;
+            }
+            tripoint_bub_ms curr = f - origin_offset + tripoint( x, y, z );
+            tripoint_bub_ms next = f - origin_offset + tripoint( x, y, nz );
+            bool can_climb = ( dz == 1 && ( has_flag( ter_furn_flag::TFLAG_LADDER, curr ) ||
+                                            has_flag( ter_furn_flag::TFLAG_GOES_UP, curr ) ||
+                                            has_flag( ter_furn_flag::TFLAG_LADDER, next ) ||
+                                            has_flag( ter_furn_flag::TFLAG_GOES_DOWN, next ) ) ) ||
+                             ( dz == -1 && ( has_flag( ter_furn_flag::TFLAG_LADDER, curr ) ||
+                                             has_flag( ter_furn_flag::TFLAG_GOES_DOWN, curr ) ||
+                                             has_flag( ter_furn_flag::TFLAG_LADDER, next ) || has_flag( ter_furn_flag::TFLAG_GOES_UP, next ) ) );
+            if( !can_climb ) {
+                continue;
+            }
+            // Make Z levels count as two steps.
+            int new_dist = elem.dist + 2;
+            if( new_dist > range ) {
+                continue;
+            }
+            neighbors.push_back( { new_dist, grid_index( x, y, nz ) } );
         }
     };
-
     PQ_type pq( pq_item_comp{} );
-    pq_item first_item{ 0, range + range * grid_dim };
-    pq.push( first_item );
-    std::array<pq_item, 8> neighbor_elems;
-
+    pq.push( { 0, grid_index( range, range, v_range ) } );
+    std::vector<pq_item> neighbor_elems;
+    neighbor_elems.reserve( 10 );
     while( !pq.empty() ) {
         const pq_item item = pq.top();
         pq.pop();
-
-        if( t_grid[item.ndx] == initial_visit_distance ) {
+        // Only continue if this is a shorter path to this tile.
+        if( t_grid[item.ndx] == -1 || item.dist < t_grid[item.ndx] ) {
             t_grid[item.ndx] = item.dist;
-            if( item.dist + 1 < range ) {
-                gen_neighbors( item, grid_dim, neighbor_elems );
-                for( pq_item neighbor_elem : neighbor_elems ) {
-                    pq.push( neighbor_elem );
+            if( item.dist < range ) {
+                gen_neighbors( item, neighbor_elems );
+                for( const pq_item &n : neighbor_elems ) {
+                    pq.push( n );
                 }
             }
         }
     }
     std::vector<bool> o_grid( grid_area );
     int count = 0;
-    for( int y = 0, ndx = 0; y < grid_dim; ++y ) {
-        for( int x = 0; x < grid_dim; ++x, ++ndx ) {
-            if( t_grid[ndx] != -1 && t_grid[ndx] < initial_visit_distance ) {
-                // set self and neighbors to 1
-                for( int y2 = y - 1; y2 <= y + 1; ++y2 ) {
-                    for( int x2 = x - 1; x2 <= x + 1; ++x2 ) {
-                        if( x2 >= 0 && x2 < grid_dim && y2 >= 0 && y2 < grid_dim ) {
-                            const int index = x2 + ( y2 * grid_dim );
-                            if( !o_grid[ index ] ) {
-                                count++;
-                                o_grid[ index ] = true;
+    for( int z = 0, ndx = 0; z < z_dim; ++z ) {
+        for( int y = 0; y < grid_dim; ++y ) {
+            for( int x = 0; x < grid_dim; ++x, ++ndx ) {
+                if( t_grid[ndx] != -1 && t_grid[ndx] < initial_visit_distance ) {
+                    for( int dy = -1; dy <= 1; ++dy ) {
+                        for( int dx = -1; dx <= 1; ++dx ) {
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if( nx >= 0 && nx < grid_dim && ny >= 0 && ny < grid_dim ) {
+                                int center_index = grid_index( nx, ny, z );
+                                if( !o_grid[center_index] ) {
+                                    o_grid[center_index] = true;
+                                    count++;
+                                }
+                                if( z - 1 >= 0 ) {
+                                    tripoint_bub_ms curr = f - origin_offset + tripoint( nx, ny, z );
+                                    tripoint_bub_ms below = f - origin_offset + tripoint( nx, ny, z - 1 );
+                                    if( has_flag( ter_furn_flag::TFLAG_LADDER, curr ) ||
+                                        has_flag( ter_furn_flag::TFLAG_GOES_DOWN, curr ) ||
+                                        has_flag( ter_furn_flag::TFLAG_LADDER, below ) ||
+                                        has_flag( ter_furn_flag::TFLAG_GOES_UP, below ) ) {
+                                        int down_index = grid_index( nx, ny, z - 1 );
+                                        if( !o_grid[down_index] ) {
+                                            o_grid[down_index] = true;
+                                            count++;
+                                        }
+                                    }
+                                }
+                                if( z + 1 < z_dim ) {
+                                    tripoint_bub_ms curr = f - origin_offset + tripoint( nx, ny, z );
+                                    tripoint_bub_ms above = f - origin_offset + tripoint( nx, ny, z + 1 );
+                                    if( has_flag( ter_furn_flag::TFLAG_LADDER, curr ) ||
+                                        has_flag( ter_furn_flag::TFLAG_GOES_UP, curr ) ||
+                                        has_flag( ter_furn_flag::TFLAG_LADDER, above ) ||
+                                        has_flag( ter_furn_flag::TFLAG_GOES_DOWN, above ) ) {
+                                        int up_index = grid_index( nx, ny, z + 1 );
+                                        if( !o_grid[up_index] ) {
+                                            o_grid[up_index] = true;
+                                            count++;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -7970,20 +8044,19 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps( const tripoint_bub_ms &
         }
     }
 
-
     std::vector<tripoint_bub_ms> reachable_pts;
-    if( count != 0 ) {
-        reachable_pts.reserve( count );
-        // Now go over again to pull out all of the reachable points
-        for( int y = 0, ndx = 0; y < grid_dim; ++y ) {
-            for( int x = 0; x < grid_dim; ++x, ++ndx ) {
+    reachable_pts.reserve( count );
+    for( int z = 0; z < z_dim; ++z ) {
+        for( int y = 0; y < grid_dim; ++y ) {
+            for( int x = 0; x < grid_dim; ++x ) {
+                int ndx = grid_index( x, y, z );
                 if( o_grid[ndx] ) {
-                    tripoint_bub_ms t = f - origin_offset + tripoint{ x, y, 0 };
-                    reachable_pts.push_back( t );
+                    reachable_pts.push_back( f - origin_offset + tripoint( x, y, z ) );
                 }
             }
         }
     }
+
     return reachable_pts;
 }
 

@@ -500,7 +500,7 @@ void inventory::form_from_map( map *here, const tripoint_bub_ms &origin, int ran
         form_from_map( *here, reachable_pts, pl, assign_invlet );
     } else {
         std::vector<tripoint_bub_ms> reachable_pts;
-        // Fill reachable points with points_in_radius
+        // Fill reachable points with points_in_radius.
         tripoint_range<tripoint_bub_ms> in_radius = here->points_in_radius( origin, range );
         for( const tripoint_bub_ms &p : in_radius ) {
             reachable_pts.emplace_back( p );
