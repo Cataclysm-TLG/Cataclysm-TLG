@@ -1482,7 +1482,7 @@
     "id": "t_laminated_glass",
     "copy-from": "t_abstract_wall_glass",
     "name": "laminated glass wall",
-    "looks_like": "t_glass",
+    "looks_like": "t_reinforced_glass",
     "description": "A barrier made of laminated safety glass.  It's a lot tougher than regular glass, and is designed to break into fragments that are nowhere near as sharp.",
     "bash": {
       "str_min": 20,
