@@ -13830,9 +13830,9 @@ void Character::pause()
         } else if( total_removed > 0_turns ) {
             if( on_ground ) {
                 add_msg_player_or_npc( m_warning,
-                    _( "You roll on the ground, trying to smother the fire!" ),
-                    _( "<npcname> rolls on the ground!" )
-                );
+                                       _( "You roll on the ground, trying to smother the fire!" ),
+                                       _( "<npcname> rolls on the ground!" )
+                                     );
             } else {
                 add_msg_player_or_npc( m_warning,
                                        _( "You attempt to put out the fire on you!" ),

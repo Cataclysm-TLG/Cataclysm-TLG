@@ -1095,8 +1095,8 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         itype_id drop_id = itype_id::NULL_ID();
         const itype *drop = nullptr;
         if( entry.type->is_itype() ) {
-                drop_id = itype_id( entry.drop );
-                drop = item::find_type( drop_id );
+            drop_id = itype_id( entry.drop );
+            drop = item::find_type( drop_id );
         }
 
         /*

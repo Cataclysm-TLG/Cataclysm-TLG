@@ -86,7 +86,7 @@
         "g": "f_stool",
         "Y": "f_trashcan"
       },
-      "vendingmachines": { "M": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+      "vendingmachines": { "M": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "sealed_item": { "1": { "item": { "item": "seed_tobacco" }, "furniture": "f_planter_seedling" } },
       "toilets": { "&": {  } }
     },
@@ -232,7 +232,7 @@
         "g": "f_stool",
         "Y": "f_trashcan"
       },
-      "vendingmachines": { "M": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+      "vendingmachines": { "M": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "sealed_item": { "1": { "item": { "item": "seed_tobacco" }, "furniture": "f_planter_seedling" } },
       "toilets": { "&": {  } }
     },
