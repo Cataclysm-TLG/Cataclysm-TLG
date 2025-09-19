@@ -32,7 +32,7 @@
         ],
         "prob": 90
       },
-      { "item": "con_milk", "count": [ 0, 10 ], "prob": 25 },
+      { "item": "con_milk", "count": [ 0, 2 ], "prob": 25 },
       { "item": "instant_coffee", "count": [ 0, 5 ], "prob": 50 }
     ]
   },
@@ -79,7 +79,6 @@
       "t": "f_table",
       "P": "f_cupboard",
       "f": "f_rack_coat",
-      "u": "f_stool",
       "W": "f_woodstove",
       "l": "f_locker",
       "m": "f_machinery_old",
