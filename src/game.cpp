@@ -9628,6 +9628,7 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
     bool has_skin = false;
     bool has_organs = false;
     bool intact = false;
+    bool big_enough = false;
     std::string dissect_wp_hint; // dissection weakpoint proficiencies training hint
     int dissect_wp_hint_lines = 0; // track hint lines so menu width doesn't change
 
@@ -9653,6 +9654,14 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
                        corpses[index]->has_flag( flag_FIELD_DRESS_FAILED ) || corpses[index]->has_flag( flag_BLED ) ||
                        ( corpses[index]->has_flag( flag_PULPED ) ) || ( corpses[index]->has_flag( flag_GIBBED ) ) ) ) {
                     has_blood = true;
+                }
+                /*
+                * We harvest a min of 250ml blood at a time, so ensure the creature is big enough.
+                * Blood volume is around ~7% of body weight. Most animals are around 1g/ml, so it doesn't
+                * matter if we use volume or weight here. 7% of 4 liters gets us about 250ml of blood.
+                */
+                if( entry.type == harvest_drop_blood && corpses[index]->volume() > 4000_ml ) {
+                    big_enough = true;
                 }
                 if( !( corpses[index]->has_flag( flag_QUARTERED ) ||
                        corpses[index]->damage() >= corpses[index]->max_damage() ||
@@ -9690,13 +9699,11 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
         return false;
     };
     auto is_enabled = [&]( butcher_type bt ) {
-        // if( bt == butcher_type::DISMEMBER ) {
-        //     return true;
-        // } else if( !enough_light
         if( !enough_light
             || ( bt == butcher_type::FIELD_DRESS && !has_organs )
             || ( bt == butcher_type::SKIN && !has_skin )
             || ( bt == butcher_type::BLEED && !has_blood )
+            || ( bt == butcher_type::BLEED && !big_enough )
             || ( bt == butcher_type::DISSECT && !intact )
             || has_started_cruder_type( bt ) ) {
             return false;
@@ -9706,9 +9713,6 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
 
     const std::string cannot_see = colorize( _( "can't see!" ), c_red );
     auto time_or_disabledreason = [&]( butcher_type bt ) {
-        // if( bt == butcher_type::DISMEMBER ) {
-        //     return cut_time( bt );
-        // } else if( !enough_light ) {
         if( !enough_light ) {
             return cannot_see;
         } else if( bt == butcher_type::FIELD_DRESS && !has_organs ) {
@@ -9717,6 +9721,8 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
             return colorize( _( "has no skin" ), c_red );
         } else if( bt == butcher_type::BLEED && !has_blood ) {
             return colorize( _( "has no blood" ), c_red );
+        } else if( bt == butcher_type::BLEED && !big_enough ) {
+            return colorize( _( "too tiny" ), c_red );
         } else if( bt == butcher_type::DISSECT && !intact ) {
             return colorize( _( "too damaged" ), c_red );
         } else if( has_started_cruder_type( bt ) ) {

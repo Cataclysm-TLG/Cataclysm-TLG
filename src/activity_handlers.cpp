@@ -1081,13 +1081,13 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         const float max_num = entry.base_num.second + butchery * entry.scale_num.second;
 
         int roll = 0;
-        // mass_ratio will override the use of base_num, scale_num, and max
+        // Mass_ratio will override the use of base_num, scale_num, and max.
         if( entry.mass_ratio != 0.00f ) {
             roll = static_cast<int>( std::round( entry.mass_ratio * monster_weight ) );
             roll = corpse_damage_effect( roll, entry.type, corpse_item->damage_level() );
         } else {
             roll = std::min<int>( entry.max, std::round( rng_float( min_num, max_num ) ) );
-            // will not give less than min_num defined in the JSON
+            // Will not give less than min_num defined in the JSON.
             roll = std::max<int>( corpse_damage_effect( roll, entry.type, corpse_item->damage_level() ),
                                   entry.base_num.first );
         }
@@ -1099,7 +1099,16 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
             drop = item::find_type( drop_id );
         }
 
-        // Check if monster was gibbed, and handle accordingly
+        /*
+        * We harvest a min of 250ml blood at a time, so ensure the creature is big enough.
+        * Blood volume is around ~7% of body weight. Most animals are around 1g/ml, so it doesn't
+        * matter if we use volume or weight here. 7% of 4 liters gets us about 250ml of blood.
+        */
+        if( entry.type == harvest_drop_blood && corpse_item->volume() < 4000_ml ) {
+            roll = 0;
+        }
+
+        // Check if monster was gibbed, starving, or skinned and handle accordingly
         if( corpse_item->has_flag( flag_GIBBED ) && ( entry.type == harvest_drop_flesh ||
                 entry.type == harvest_drop_bone ) ) {
             roll /= 2;
@@ -1107,12 +1116,11 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         if( corpse_item->has_flag( flag_UNDERFED ) && ( entry.type == harvest_drop_flesh ) ) {
             roll /= 1.6;
         }
-
         if( corpse_item->has_flag( flag_SKINNED ) && entry.type == harvest_drop_skin ) {
             roll = 0;
         }
 
-        // QUICK BUTCHERY
+        // Quick butchery.
         if( action == butcher_type::QUICK ) {
             if( entry.type == harvest_drop_flesh ) {
                 roll /= 4;
@@ -1127,15 +1135,8 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 continue;
             }
         }
-        // // RIP AND TEAR
-        // if( action == butcher_type::DISMEMBER ) {
-        //     if( entry.type == harvest_drop_flesh ) {
-        //         roll /= 6;
-        //     } else {
-        //         continue;
-        //     }
-        // }
-        // field dressing ignores skin, flesh, and blood
+
+        // Field dressing ignores skin, flesh, and blood.
         if( action == butcher_type::FIELD_DRESS ) {
             if( entry.type == harvest_drop_bone ) {
                 roll = rng( 0, roll / 2 );
@@ -1214,11 +1215,6 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                                     entry.type->field_dress_msg( roll > 0 ) :
                                     action == butcher_type::QUICK ||
                                     action == butcher_type::FULL ? entry.type->butcher_msg( roll > 0 ) : translation();
-
-            // const translation msg = action == butcher_type::FIELD_DRESS ?
-            //                         entry.type->field_dress_msg( roll > 0 ) :
-            //                         action == butcher_type::QUICK || action == butcher_type::FULL ||
-            //                         action == butcher_type::DISMEMBER ? entry.type->butcher_msg( roll > 0 ) : translation();
 
             if( !msg.empty() ) {
                 you.add_msg_if_player( m_bad, msg.translated() );
