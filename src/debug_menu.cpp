@@ -295,14 +295,15 @@ struct OM_point { // NOLINT(cata-xy)
 std::istream &operator>>( std::istream &is, fake_tripoint &pos )
 {
     char c = 0;
-    is >> pos.x &&is.get( c ) &&c == '.' &&is >> pos.y &&is.get( c ) &&c == '.' &&is >> pos.z;
+    static_cast<void>( is >> pos.x && is.get( c ) && c == '.' && is >> pos.y && is.get( c ) &&
+                       c == '.' && is >> pos.z );
     return is;
 }
 
 std::istream &operator>>( std::istream &is, OM_point &pos )
 {
     char c = 0;
-    is >> pos.x &&is.get( c ) &&c == '.' &&is >> pos.y;
+    static_cast<void>( is >> pos.x && is.get( c ) && c == '.' && is >> pos.y );
     return is;
 }
 
@@ -529,9 +530,7 @@ static void monster_ammo_edit( monster &mon )
         const itype *display_type = item::find_type( new_ammo );
         if( query_int( value, _( "Set %s to how much ammo?  Currently: %d" ), display_type->nname( 1 ),
                        mon.ammo[new_ammo] ) )  {
-            if( value < 0 ) {
-                value = 0;
-            }
+            value = std::max( value, 0 );
             mon.ammo[new_ammo] = value;
         }
     }
