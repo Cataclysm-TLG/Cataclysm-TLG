@@ -559,11 +559,11 @@ void suffer::while_awake( Character &you, const int current_stim )
 
 void suffer::from_chemimbalance( Character &you )
 {
-    if( one_turn_in( 6_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You suddenly feel sharp pain for no reason." ) );
         you.mod_pain( 3 * rng( 1, 3 ) );
     }
-    if( one_turn_in( 6_hours ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         int pkilladd = 5 * rng( -1, 2 );
         if( pkilladd > 0 ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel numb." ) );
@@ -572,11 +572,11 @@ void suffer::from_chemimbalance( Character &you )
         }
         you.mod_painkiller( pkilladd );
     }
-    if( one_turn_in( 6_hours ) && !you.has_effect( effect_sleep ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && !you.has_effect( effect_sleep ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You feel dizzy for a moment." ) );
         you.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.1, 0.3 ) );
     }
-    if( one_turn_in( 6_hours )  && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
         int hungadd = 5 * rng( -1, 3 );
         if( hungadd > 0 ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel hungry." ) );
@@ -585,22 +585,22 @@ void suffer::from_chemimbalance( Character &you )
         }
         you.mod_hunger( hungadd );
     }
-    if( one_turn_in( 6_hours )  && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You suddenly feel thirsty." ) );
         you.mod_thirst( 5 * rng( 1, 3 ) );
     }
-    if( one_turn_in( 6_hours ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_good, _( "You feel fatigued all of a sudden." ) );
         you.mod_fatigue( 10 * rng( 2, 4 ) );
     }
-    if( one_turn_in( 8_hours ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 8_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_morale( morale_feeling_good, 20, 100 );
         } else {
             you.add_morale( morale_feeling_bad, -20, -100 );
         }
     }
-    if( one_turn_in( 6_hours ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel very cold." ) );
             you.set_all_parts_temp_cur( BODYTEMP_VERY_COLD );
@@ -609,7 +609,7 @@ void suffer::from_chemimbalance( Character &you )
             you.set_all_parts_temp_cur( BODYTEMP_COLD );
         }
     }
-    if( one_turn_in( 6_hours ) && rng( 0, 1) == 1 ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel very hot." ) );
             you.set_all_parts_temp_cur( BODYTEMP_VERY_HOT );

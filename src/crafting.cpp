@@ -1150,7 +1150,8 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
     return weighted_skill_average + total_skill_modifiers;
 }
 
-Character::craft_roll_data Character::recipe_success_roll_data( const recipe &making, bool final ) const
+Character::craft_roll_data Character::recipe_success_roll_data( const recipe &making,
+        bool final ) const
 {
     // We're going to use a sqrt( sum of squares ) method here to give diminishing returns for more low level helpers.
     float player_weighted_skill_average = get_recipe_weighted_skill_average( making );
@@ -1527,7 +1528,8 @@ void Character::complete_craft( item &craft, const std::optional<tripoint_bub_ms
                 bool shown_how = false;
                 for( Character *helper : get_crafting_helpers() ) {
                     if( !shown_how && helper->knows_recipe( &making ) ) {
-                        add_msg( m_info, _( "%1s walks you through making %2s since you don't already know how." ), helper->get_name(), making.result_name() );
+                        add_msg( m_info, _( "%1s walks you through making %2s since you don't already know how." ),
+                                 helper->get_name(), making.result_name() );
                         shown_how = true;
                     }
                 }
