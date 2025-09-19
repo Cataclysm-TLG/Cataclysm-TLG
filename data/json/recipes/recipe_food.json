@@ -2117,7 +2117,7 @@
       { "proficiency": "prof_frying" },
       { "proficiency": "prof_frying_bread" }
     ],
-    "components": [ [ [ "any_butter_or_oil", 1, "LIST" ] ], [ [ "raw_dandelion", 2 ] ], [ [ "batter", 1, "LIST" ] ] ]
+    "components": [ [ [ "any_butter_or_oil", 1, "LIST" ] ], [ [ "raw_dandelion", 4 ] ], [ [ "batter", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -2243,7 +2243,7 @@
       { "proficiency": "prof_frying_bread" }
     ],
     "components": [
-      [ [ "raw_dandelion", 1 ] ],
+      [ [ "raw_dandelion", 2 ] ],
       [ [ "raw_burdock", 1 ] ],
       [ [ "any_butter_or_oil", 1, "LIST" ] ],
       [ [ "batter", 1, "LIST" ] ]
