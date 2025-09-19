@@ -28,6 +28,7 @@
 #include "game.h"
 #include "game_constants.h"
 #include "horde_entity.h"
+#include "horde_map.h"
 #include "line.h"
 #include "map.h"
 #include "mapgendata.h"
