@@ -673,9 +673,9 @@
     "techniques": [ "WBLOCK_1", "RAPID" ],
     "qualities": [ [ "CUT", 1 ], [ "COOK", 1 ], [ "BUTCHER", 7 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "flags": [ "DURABLE_MELEE", "PUMP_RAIL_COMPATIBLE", "SHEATH_SWORD" ],
+    "flags": [ "DURABLE_MELEE", "PUMP_RAIL_COMPATIBLE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "bash": 4, "stab": 16 }
+    "melee_damage": { "bash": 4, "stab": 13 }
   },
   {
     "id": "tanto",
