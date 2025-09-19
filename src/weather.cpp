@@ -934,7 +934,7 @@ bool warm_enough_to_plant( const tripoint_abs_omt &pos, const itype_id &it )
     std::map<time_point, units::temperature> planting_times;
     // initialize the first...
     time_point check_date = calendar::turn;
-    planting_times[check_date] = get_weather().get_temperature( pos );
+    planting_times[check_date] = get_weather().get_area_temperature( pos );
     bool okay_to_plant = true;
     const int num_epochs = 3; // FIXME. Should be stored on the seed ptr and read from there!
     // and now iterate a copy of the weather into the future to see if they'll be plantable then as well.
@@ -1061,7 +1061,7 @@ units::temperature weather_manager::get_temperature( const tripoint_bub_ms &loca
     return temp;
 }
 
-units::temperature weather_manager::get_temperature( const tripoint_abs_omt &location ) const
+units::temperature weather_manager::get_area_temperature( const tripoint_abs_omt &location ) const
 {
     return location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 }
