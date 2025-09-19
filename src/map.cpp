@@ -7919,14 +7919,14 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
         for( int dx = -1; dx <= 1; ++dx ) {
             for( int dy = -1; dy <= 1; ++dy ) {
                 if( dx == 0 && dy == 0 ) {
-                    continue
-                };
+                    continue;
+                }
 
                 int nx = x + dx;
                 int ny = y + dy;
                 if( nx < 0 || nx >= grid_dim || ny < 0 || ny >= grid_dim ) {
-                    continue
-                };
+                    continue;
+                }
 
                 tripoint_bub_ms npos = f - origin_offset + tripoint( nx, ny, z );
 
@@ -7938,8 +7938,8 @@ std::vector<tripoint_bub_ms> map::reachable_flood_steps(
                 }
                 int base_cost = move_cost( npos );
                 if( base_cost < cost_min || base_cost > cost_max || is_open_air( npos ) ) {
-                    continue
-                };
+                    continue;
+                }
                 // Only push neighbors reachable within range steps.
                 if( elem.dist + 1 <= range ) {
                     neighbors.push_back( { elem.dist + 1, grid_index( nx, ny, z ) } );
