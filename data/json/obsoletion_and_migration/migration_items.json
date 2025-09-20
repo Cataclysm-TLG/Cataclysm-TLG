@@ -2623,22 +2623,44 @@
     "type": "MIGRATION",
     "replace": "egg_grasshopper"
   },
-    {
+  {
     "id": "surv_rocket_launcher",
     "type": "MIGRATION",
     "replace": "pipe"
   },
-    {
+  {
     "id": "spiked_rocket",
     "type": "MIGRATION",
     "replace": "pipe"
-  },    {
+  },
+  {
     "id": "incendiary_hm_rocket",
     "type": "MIGRATION",
     "replace": "pipe"
-  },    {
+  },
+  {
     "id": "explosive_hm_rocket",
     "type": "MIGRATION",
     "replace": "pipe"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "water_wheel",
+    "to": "solar_panel"
+  },
+    {
+    "type": "vehicle_part_migration",
+    "from": "xl_water_wheel",
+    "to": "solar_panel"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "wind_turbine",
+    "to": "solar_panel"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "xl_wind_turbine",
+    "to": "solar_panel"
   }
 ]
