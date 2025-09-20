@@ -663,7 +663,7 @@
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 2, 16 ] },
       { "item": "scrap", "count": [ 2, 16 ] },
-      { "item": "solar_cell", "count": [ 1, 16 ] }
+      { "item": "solar_cell", "count": [ 1, 16 ] },
       { "item": "tempered_glass_shard", "charges": [ 4, 36 ] },
       { "item": "plastic_chunk", "count": [ 1, 6 ] }
     ],
