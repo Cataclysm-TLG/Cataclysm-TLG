@@ -179,6 +179,7 @@ static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 static const trait_id trait_SLIMESPAWNER( "SLIMESPAWNER" );
 static const trait_id trait_SPIRITUAL( "SPIRITUAL" );
 static const trait_id trait_STIMBOOST( "STIMBOOST" );
+static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
 static const trait_id trait_TABLEMANNERS( "TABLEMANNERS" );
 static const trait_id trait_THRESH_BIRD( "THRESH_BIRD" );
 static const trait_id trait_THRESH_CATTLE( "THRESH_CATTLE" );
@@ -939,6 +940,14 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
                 _( "You cannot bring yourself to consume human flesh." ) );
     }
 
+    if( has_trait( trait_SQUEAMISH ) && food.has_flag( flag_HEMOVORE_FUN ) &&
+        !has_flag( json_flag_HEMOVORE ) && !has_trait( trait_CARNIVORE ) &&
+        !food.is_medication() && !has_effect( effect_hunger_near_starving ) &&
+        !has_effect( effect_hunger_starving ) && !has_effect( effect_hunger_famished ) ) {
+        return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
+                _( "No way, that's disgusting!" ) );
+    }
+
     const std::array<flag_id, 6> vegan_blacklist {{
             json_flag_ALLERGEN_MEAT, json_flag_ALLERGEN_EGG,
             json_flag_ALLERGEN_MILK, json_flag_ANIMAL_PRODUCT,
@@ -1343,7 +1352,8 @@ void Character::modify_morale( item &food, const int nutr )
         add_morale( morale_food_good, fun.first, fun.second, morale_time, morale_time / 2, false,
                     food.type );
     }
-
+    // We might get sick at the end of this function if the food is too gross.
+    int nausea_chance = fun.first * -1;
     // Morale bonus for eating unspoiled food with chair/table nearby
     // Does not apply to non-ingested consumables like bandages or drugs,
     // nor to drinks.
@@ -1401,18 +1411,23 @@ void Character::modify_morale( item &food, const int nutr )
             add_morale( morale_cannibal, -10, -25, 4_hours, 30_minutes );
         } else if( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) {
             add_msg_if_player(
-                _( "Despite your cravings, you still can't help feeling weird about drinking somebody's blood." ) );
+                _( "Despite your cravings, you can't help feeling weird about drinking somebody's blood." ) );
             add_morale( morale_cannibal, -10, -30, 4_hours, 30_minutes );
         } else if( spiritual && !psycho ) {
             add_msg_if_player( m_bad,
-                               _( "This is probably going to count against you if there's still an afterlife." ) );
+                               _( "This goes against everything you believe in." ) );
             add_morale( morale_cannibal, -60, -400, 4_days, 16_hours );
+            nausea_chance += 12;
         } else if( numb || psycho ) {
             add_msg_if_player( m_bad, _( "You find this meal distasteful, but you'll get over it." ) );
             add_morale( morale_cannibal, -20, -50, 16_hours, 4_hours );
+            if( has_trait( trait_SQUEAMISH ) ) {
+                nausea_chance += 5;
+            }
         } else {
             add_msg_if_player( m_bad, _( "You feel horrible for eating a person." ) );
             add_morale( morale_cannibal, -50, -300, 3_days, 12_hours );
+            nausea_chance += 10;
         }
     }
 
@@ -1421,6 +1436,7 @@ void Character::modify_morale( item &food, const int nutr )
     // Cooked flesh is unaffected, because people with these traits *prefer* it raw. Fat is unaffected.
     // Organs are still usually negative due to fun values as low as -35.
     // The PREDATOR_FUN flag shouldn't be on human flesh, to not interfere with sapiovores/cannibalism.
+    // Squeamish should only apply for non-carnivores.
     if( food.has_flag( flag_PREDATOR_FUN ) ) {
         const bool carnivore = has_trait( trait_CARNIVORE );
         const bool culler = has_flag( json_flag_PRED1 );
@@ -1442,6 +1458,8 @@ void Character::modify_morale( item &food, const int nutr )
             add_morale( morale_meatarian, 5, 0, 2_hours, 1_hours );
             add_msg_if_player( m_bad,
                                _( "This doesn't taste very good, but meat is meat." ) );
+        } else if( has_trait( trait_SQUEAMISH ) ) {
+            nausea_chance += 5;
         }
     }
 
@@ -1461,7 +1479,7 @@ void Character::modify_morale( item &food, const int nutr )
                 if( !one_in( 100 ) ) {
                     add_msg_if_player( m_good, _( "When life's got you down, there's always sugar." ) );
                 } else {
-                    add_msg_if_player( m_good, _( "They may do what they must… you've already won." ) );
+                    add_msg_if_player( m_good, _( "Snack attack!" ) );
                 }
                 add_morale( morale_sweettooth, 10, 50, 2_hours, 1_hours );
             }
@@ -1490,6 +1508,22 @@ void Character::modify_morale( item &food, const int nutr )
             add_msg_if_player( m_good, _( "You feast upon the sweet honey." ) );
         }
         add_morale( morale_honey, honey_fun, 100, 4_hours, 3_hours );
+    }
+    if( fun.first <= -5 ) {
+        int nausea_chance = fun.first * -1;
+        if( has_trait( trait_PICKYEATER ) ) {
+            nausea_chance += 5;
+        }
+        if( get_str_base() > 10 ) {
+            nausea_chance -= ( std::min( get_str(), get_str_base() ) / 2 );
+        }
+    }
+    if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
+        nausea_chance = static_cast<int>( nausea_chance * rng( 1.25, 0.5 ) );
+        // 15 minutes is the max duration, and the effect's intensity automatically scales with duration.
+        add_effect( effect_nausea, ( 1 / ( std::min( 100, nausea_chance ) * .15 ) ) * 15_minutes );
+        add_msg_player_or_npc( _( "You're not sure you're going to be able to keep that down." ),
+                               _( "<npcname> looks about ready to puke." ) );
     }
 }
 

@@ -1070,8 +1070,8 @@
   {
     "type": "effect_type",
     "id": "nausea",
-    "name": [ "Slightly Nauseous", "Mildly Nauseous", "Nauseous", "Very Nauseous", "Extremely Nauseous" ],
-    "desc": [ "You are nauseous and may lead to vomiting." ],
+    "name": [ "Slightly Nauseated", "Mildly Nauseated", "Nauseated", "Very Nauseated", "Extremely Nauseated" ],
+    "desc": [ "Your stomach is upset, you might throw up." ],
     "remove_message": "You no longer feel nauseous.",
     "rating": "bad",
     "int_dur_factor": "3 m",
