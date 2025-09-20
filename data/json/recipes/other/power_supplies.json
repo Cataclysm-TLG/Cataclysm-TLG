@@ -19,7 +19,7 @@
       { "proficiency": "prof_welding" }
     ],
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "solar_panel", 1 ] ], [ [ "reinforced_glass_pane", 1 ] ], [ [ "scrap", 1 ] ] ]
+    "components": [ [ [ "solar_panel", 1 ] ], [ [ "wire", 10 ] ], [ [ "scrap", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -41,7 +41,7 @@
       { "proficiency": "prof_welding" }
     ],
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "solar_panel_v2", 1 ] ], [ [ "reinforced_glass_pane", 1 ] ], [ [ "scrap", 1 ] ] ]
+    "components": [ [ [ "solar_panel_v2", 1 ] ], [ [ "wire", 10 ] ], [ [ "scrap", 4 ] ] ]
   },
   {
     "type": "recipe",
