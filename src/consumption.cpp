@@ -941,7 +941,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     }
 
     if( has_trait( trait_SQUEAMISH ) && food.has_flag( flag_HEMOVORE_FUN ) &&
-        !has_flag( json_flag_HEMOVORE ) &&
+        !has_flag( json_flag_HEMOVORE ) && !has_trait( trait_CARNIVORE ) &&
         !food.is_medication() && !has_effect( effect_hunger_near_starving ) &&
         !has_effect( effect_hunger_starving ) && !has_effect( effect_hunger_famished ) ) {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
