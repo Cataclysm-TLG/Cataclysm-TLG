@@ -914,7 +914,7 @@
     "looks_like": "vest_leather",
     "color": "light_red",
     "warmth": 0,
-    "flags": [ "STURDY" ],
+    "flags": [ "STURDY", "NORMAL" ],
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a looser fit.",
@@ -977,6 +977,7 @@
       "target": "chainmail_vest",
       "menu_text": "Loosen"
     },
+    "delete": { "flags": [ "NORMAL" ] },
     "extend": { "flags": [ "OUTER" ] }
   },
   {
