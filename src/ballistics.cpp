@@ -544,7 +544,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                     multishot = true;
                     proj.multishot = true;
                 }
-                here->shoot( tp, source, proj, !no_item_damage && tp == target, aim.dispersion );
+                here.shoot( tp, source, proj, !no_item_damage && tp == target, aim.dispersion );
                 has_momentum = multishot ?
                                proj.shot_impact.total_damage() >= 1.0f :
                                proj.impact.total_damage() >= 1.0f;
@@ -556,7 +556,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             }
 
             // Gases, liquids, and tiny projectiles can go through bars, but not walls.
-            if( here->impassable( tp ) && ( !has_momentum || !is_bullet ) ) {
+            if( here.impassable( tp ) && ( !has_momentum || !is_bullet ) ) {
                 traj_len = i;
                 break;
             }
