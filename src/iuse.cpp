@@ -1095,13 +1095,13 @@ std::optional<int> iuse::oxygen_bottle( Character *p, item *it, const tripoint_b
 
 std::optional<int> iuse::blech( Character *p, item *it, const tripoint_bub_ms & )
 {
-    // TODO: Add more effects?
+    // TODO: Move this to consumption.cpp
     if( it->made_of( phase_id::LIQUID ) ) {
-        if( !p->query_yn( _( "This looks unhealthy, sure you want to drink it?" ) ) ) {
+        if( !p->query_yn( _( "This seems like a bad idea, are you sure you want to drink it?" ) ) ) {
             return std::nullopt;
         }
-    } else { //Assume that if a blech consumable isn't a drink, it will be eaten.
-        if( !p->query_yn( _( "This looks unhealthy, sure you want to eat it?" ) ) ) {
+    } else { // Assume that if a blech consumable isn't a drink, it will be eaten.
+        if( !p->query_yn( _( "This seems like a bad idea, are you sure you want to eat it?" ) ) ) {
             return std::nullopt;
         }
     }
@@ -1109,11 +1109,11 @@ std::optional<int> iuse::blech( Character *p, item *it, const tripoint_bub_ms & 
     if( it->has_flag( flag_ACID ) && ( p->has_trait( trait_ACIDPROOF ) ||
                                        p->has_trait( trait_ACIDBLOOD ) ) ) {
         p->add_msg_if_player( m_bad, _( "Blech, that tastes gross!" ) );
-        //reverse the harmful values of drinking this acid.
+        // Reverse the harmful values of drinking this acid.
         double multiplier = -1;
         p->stomach.mod_nutr( -p->nutrition_for( *it ) * multiplier );
         p->mod_thirst( -it->get_comestible()->quench * multiplier );
-        p->stomach.mod_quench( 20 ); //acidproof people can drink acids like diluted water.
+        p->stomach.mod_quench( 20 ); // Acidproof people can drink acids like diluted water.
         p->mod_daily_health( it->get_comestible()->healthy * multiplier,
                              it->get_comestible()->healthy * multiplier );
         p->add_morale( morale_food_bad, it->get_comestible_fun() * multiplier, 60, 1_hours, 30_minutes,
@@ -1126,7 +1126,7 @@ std::optional<int> iuse::blech( Character *p, item *it, const tripoint_bub_ms & 
         p->vomit();
     } else {
         p->add_msg_if_player( m_bad, _( "Blech, you don't feel you can stomach much of that." ) );
-        p->add_effect( effect_nausea, 3_minutes );
+        p->add_effect( effect_nausea, 2_minutes * rng( 1, 6 ) );
     }
     return 1;
 }

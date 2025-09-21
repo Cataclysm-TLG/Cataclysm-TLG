@@ -1486,6 +1486,8 @@
     "price_postapoc": "2 USD",
     "//": "*May* have been commercially traded.",
     "material": [ "flesh" ],
+    "use_action": [ "BLECH" ],
+    "flags": [ "NO_AUTO_CONSUME" ],
     "volume": "62 ml",
     "vitamins": [ [ "meat_allergen", 1 ] ],
     "fun": -18
