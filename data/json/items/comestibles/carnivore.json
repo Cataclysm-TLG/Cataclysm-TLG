@@ -1442,6 +1442,7 @@
     "container": "bag_iv",
     "comestible_type": "DRINK",
     "looks_like": "hblood",
+    "spoils_in": "1 day",
     "calories": 210,
     "fun": -15,
     "symbol": "~",
