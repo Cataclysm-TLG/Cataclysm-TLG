@@ -10818,7 +10818,7 @@ void Character::place_corpse( map *here )
         }
     }
 
-    here->add_item_or_charges( pos_bub( here ), body );
+    here->add_item_or_charges( here->get_bub( pos_abs() ), body );
 }
 
 void Character::place_corpse( const tripoint_abs_omt &om_target )
@@ -11607,7 +11607,7 @@ void Character::gravity_check()
 
 void Character::gravity_check( map *here )
 {
-    const tripoint_bub_ms pos = pos_bub( here );
+    const tripoint_bub_ms pos = here->get_bub( pos_abs() );
     if( here->is_open_air( pos ) && !in_vehicle && !has_effect_with_flag( json_flag_GLIDING ) &&
         here->try_fall( pos, this ) ) {
         here->update_visibility_cache( pos.z() );
@@ -13401,8 +13401,8 @@ void Character::leak_items()
 
 void Character::process_items( map *here )
 {
-    if( weapon.process( *here, this, pos_bub( here ) ) ) {
-        weapon.spill_contents( here,  pos_bub( here ) );
+    if( weapon.process( *here, this, here->get_bub( pos_abs() ) ) ) {
+        weapon.spill_contents( here,  here->get_bub( pos_abs() ) );
         remove_weapon();
     }
 
@@ -13411,8 +13411,8 @@ void Character::process_items( map *here )
         if( !it ) {
             continue;
         }
-        if( it->process( *here, this, pos_bub( here ) ) ) {
-            it->spill_contents( here, pos_bub( here ) );
+        if( it->process( *here, this, here->get_bub( pos_abs() ) ) ) {
+            it->spill_contents( here, here->get_bub( pos_abs() ) );
             removed_items.push_back( it );
         }
     }
