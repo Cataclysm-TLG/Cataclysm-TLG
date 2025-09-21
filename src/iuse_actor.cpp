@@ -813,6 +813,9 @@ void consume_drug_iuse::info( const item &, std::vector<iteminfo> &dump ) const
 
 std::optional<int> consume_drug_iuse::use( Character *p, item &it, const tripoint_bub_ms & ) const
 {
+    if( it.is_craft() ) {
+        return 0;
+    }
     auto need_these = tools_needed;
 
     // Check prerequisites first.
