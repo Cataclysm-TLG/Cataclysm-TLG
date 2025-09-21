@@ -185,7 +185,7 @@
     "components": [
       [ [ "bandages_birchbark", 3 ] ],
       [ [ "chem_glycerol", 4 ], [ "lard", 1 ] ],
-      [ [ "garlic_clove", 6 ], [ "garlic", 1 ] ]
+      [ [ "garlic_clove", 6 ], [ "garlic", 1 ], [ "wild_garlic", 6 ] ]
     ]
   },
   {
