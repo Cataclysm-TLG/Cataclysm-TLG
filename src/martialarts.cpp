@@ -2103,14 +2103,6 @@ std::string ma_technique::get_description() const
 
     dump += string_format( _( condition_desc ) ) + "\n";
 
-    if( weighting > 1 ) {
-        dump += string_format( _( "* <info>Greater chance</info> to activate: <stat>+%s%%</stat>" ),
-                               ( 100 * ( weighting - 1 ) ) ) + "\n";
-    } else if( weighting < -1 ) {
-        dump += string_format( _( "* <info>Lower chance</info> to activate: <stat>1/%s</stat>" ),
-                               std::abs( weighting ) ) + "\n";
-    }
-
     if( crit_ok ) {
         dump += _( "* Can activate on a <info>normal</info> or a <info>crit</info> hit" ) +
                 std::string( "\n" );
@@ -2143,7 +2135,7 @@ std::string ma_technique::get_description() const
     }
 
     if( miss_recovery ) {
-        dump += _( "* Reduces the time of a <info>miss</info> by <info>half</info>" ) +
+        dump += _( "* Makes a <info>miss</info> take only <info>half</info> the time" ) +
                 std::string( "\n" );
     }
 
