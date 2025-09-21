@@ -262,6 +262,8 @@
         { "item": "fur_blanket", "amount": 25 },
         { "item": "down_blanket", "amount": 25 },
         { "item": "blanket_weighted", "amount": 25 },
+        { "item": "quilt", "amount": 25 },
+        { "item": "quilt_patchwork", "amount": 25 },
         { "item": "electric_blanket", "amount": 25 }
       ]
     },
@@ -327,6 +329,8 @@
             { "item": "blanket", "amount": 25 },
             { "item": "fur_blanket", "amount": 25 },
             { "item": "down_blanket", "amount": 25 },
+            { "item": "quilt", "amount": 25 },
+            { "item": "quilt_patchwork", "amount": 25 },
             { "item": "blanket_weighted", "amount": 25 },
             { "item": "electric_blanket", "amount": 25 }
           ]
