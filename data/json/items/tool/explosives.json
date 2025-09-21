@@ -790,7 +790,8 @@
     "symbol": "*",
     "color": "light_gray",
     "tick_action": [ "MOLOTOV_LIT" ],
-    "flags": [ "LIGHT_15", "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH" ],
+    "light": 15,
+    "flags": [ "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH" ],
     "melee_damage": { "bash": 5 }
   },
   {

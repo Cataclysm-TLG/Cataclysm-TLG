@@ -19,7 +19,8 @@
       "menu_text": "Close cover",
       "type": "transform"
     },
-    "flags": [ "LIGHT_10", "LEAK_DAM", "RADIOACTIVE", "DURABLE_MELEE", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
+    "light": 10,
+    "flags": [ "LEAK_DAM", "RADIOACTIVE", "DURABLE_MELEE", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 4 }
   },
   {
@@ -92,7 +93,8 @@
         "type": "transform"
       }
     ],
-    "extend": { "flags": [ "LIGHT_8", "WATER_EXTINGUISH", "TRADER_AVOID", "WIND_EXTINGUISH", "FIRESTARTER" ] }
+    "light": 8,
+    "extend": { "flags": [ "WATER_EXTINGUISH", "TRADER_AVOID", "WIND_EXTINGUISH", "FIRESTARTER" ] }
   },
   {
     "id": "electric_lantern",
@@ -143,7 +145,8 @@
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "20 W" }
     ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "RADIO_INVOKE_PROC", "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
+    "light": 15,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "RADIO_INVOKE_PROC", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "flashlight",
@@ -196,7 +199,8 @@
       "target": "flashlight",
       "ammo_scale": 0
     },
-    "flags": [ "LIGHT_300", "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "WATER_BREAK", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
+    "light": 300,
+    "flags": [ "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "WATER_BREAK", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
   },
   {
     "id": "diving_flashlight",
@@ -249,7 +253,8 @@
       "target": "diving_flashlight",
       "ammo_scale": 0
     },
-    "flags": [ "LIGHT_170", "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
+    "light": 170,
+    "flags": [ "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
   },
   {
     "id": "gasoline_lantern",
@@ -299,7 +304,8 @@
       },
       { "type": "firestarter", "moves": 100 }
     ],
-    "flags": [ "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
+    "light": 15,
+    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
   },
   {
     "id": "glowstick",
@@ -360,7 +366,8 @@
     "turns_per_charge": 30,
     "revert_to": "glowstick_dead",
     "revert_msg": "The glowstick fades out.",
-    "flags": [ "LIGHT_8", "TRADER_AVOID", "SLEEP_IGNORE", "NO_UNLOAD", "NO_RELOAD" ]
+    "light": 8,
+    "flags": [ "TRADER_AVOID", "SLEEP_IGNORE", "NO_UNLOAD", "NO_RELOAD" ]
   },
   {
     "id": "handflare",
@@ -398,7 +405,8 @@
     "revert_to": "handflare_dead",
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
-    "flags": [ "FIRE", "LIGHT_240", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
+    "light": 240,
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
   },
   {
     "id": "sigflare_lit",
@@ -412,7 +420,8 @@
     "revert_to": "handflare_dead",
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
-    "flags": [ "FIRE", "LIGHT_720", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
+    "light": 720,
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD" ]
   },
   {
     "id": "heavy_flashlight",
@@ -475,7 +484,8 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "flags": [ "LIGHT_500", "CHARGEDIM" ]
+    "light": 500,
+    "flags": [ "CHARGEDIM" ]
   },
   {
     "id": "lightstrip",
@@ -488,7 +498,8 @@
     "power_draw": "5 W",
     "revert_to": "lightstrip_inactive",
     "revert_msg": "The LED strip fades away.",
-    "flags": [ "LIGHT_200", "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
+    "light": 200,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
     "use_action": [
       {
         "target": "lightstrip_inactive",
@@ -568,7 +579,8 @@
       },
       { "type": "firestarter", "moves": 100 }
     ],
-    "flags": [ "LIGHT_10", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "FIRESTARTER" ]
+    "light": 10,
+    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "FIRESTARTER" ]
   },
   {
     "id": "oil_lamp_clay",
@@ -619,7 +631,8 @@
       },
       { "type": "firestarter", "moves": 100 }
     ],
-    "flags": [ "LIGHT_10", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "WIND_EXTINGUISH", "FIRESTARTER" ]
+    "light": 10,
+    "flags": [ "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE", "WATER_EXTINGUISH", "WIND_EXTINGUISH", "FIRESTARTER" ]
   },
   {
     "id": "oxylamp",
@@ -658,7 +671,8 @@
       { "ammo_scale": 0, "menu_text": "Turn off", "type": "transform", "msg": "The %s is extinguished", "target": "oxylamp" },
       { "type": "firestarter", "moves": 100 }
     ],
-    "flags": [ "LIGHT_30", "FIRESTARTER", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE" ]
+    "light": 30,
+    "flags": [ "FIRESTARTER", "TRADER_AVOID", "FIRE", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "reading_light",
@@ -703,7 +717,8 @@
       "menu_text": "Turn off",
       "type": "transform"
     },
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "LIGHT_15", "CHARGEDIM" ]
+    "light": 15,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "CHARGEDIM" ]
   },
   {
     "id": "smart_lamp",
@@ -754,6 +769,7 @@
     "description": "A smart lamp which can be deactivated remotely.  Currently it is turned on.",
     "power_draw": "1321 mW",
     "revert_to": "smart_lamp",
+    "light": 240,
     "use_action": [
       {
         "ammo_scale": 0,
@@ -770,7 +786,6 @@
       "RADIO_ACTIVATION",
       "RADIO_INVOKE_PROC",
       "RADIOSIGNAL_2",
-      "LIGHT_240",
       "CHARGEDIM",
       "TRADER_AVOID"
     ]
@@ -836,7 +851,8 @@
       }
     ],
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "FIRE", "LIGHT_60", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH", "BURNOUT", "TINDER" ],
+    "light": 60,
+    "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH", "BURNOUT", "TINDER" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -886,6 +902,7 @@
       },
       { "type": "firestarter", "moves": 100 }
     ],
-    "flags": [ "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
+    "light": 15,
+    "flags": [ "TRADER_AVOID", "ALLOWS_REMOTE_USE", "FIRESTARTER", "FIRE" ]
   }
 ]

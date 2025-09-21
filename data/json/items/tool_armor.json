@@ -1001,6 +1001,7 @@
     "flags": [ "LIGHT_300", "CHARGEDIM", "OVERSIZE", "BELTED", "PADDED", "ALLOWS_NATURAL_ATTACKS", "TRADER_AVOID" ],
     "power_draw": "750 mW",
     "charges_per_use": 0,
+    "light": 300,
     "revert_to": "wearable_light",
     "use_action": {
       "ammo_scale": 0,
@@ -1022,9 +1023,9 @@
     "description": "A very dim lamp powered by the magic of nuclear decay.  It's a bit bulkier than your average headlamp, but can be worn like one just the same.  Use it to close the cover and hide the light.",
     "price": "40 USD",
     "price_postapoc": "15 USD",
+    "light": 10,
     "material": [ "plastic", "aluminum" ],
     "flags": [
-      "LIGHT_10",
       "LEAK_DAM",
       "RADIOACTIVE",
       "ALLOWS_REMOTE_USE",
@@ -1224,7 +1225,8 @@
     "subtypes": [ "ARMOR", "TOOL" ],
     "copy-from": "helmet_eod",
     "name": { "str": "EOD helmet (on)", "str_pl": "EOD helmets (on)" },
-    "extend": { "flags": [ "LIGHT_350", "CHARGEDIM", "TRADER_AVOID", "TWO_WAY_RADIO" ] },
+    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID", "TWO_WAY_RADIO" ] },
+    "light": 350,
     "power_draw": "1 W",
     "revert_to": "helmet_eod",
     "use_action": { "type": "transform", "menu_text": "Turn off headlamps", "msg": "\"Disabling illumination.\"", "target": "helmet_eod" }

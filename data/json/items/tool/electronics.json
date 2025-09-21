@@ -193,7 +193,9 @@
       },
       { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" }
     ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "LIGHT_8", "CHARGEDIM", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC" ]
+    "faults": [ { "fault_group": "electronic_general" } ],
+    "light": 8,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "CHARGEDIM", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC" ]
   },
   {
     "id": "directional_antenna",
@@ -299,8 +301,8 @@
       { "type": "link_up", "cable_length": 4, "charge_rate": "10 W" }
     ],
     "tick_action": [ "EPIC_MUSIC" ],
-    "//": "LIGHT_10 is the bare minimum for reading without penalties",
-    "flags": [ "LIGHT_10", "TRADER_AVOID", "WATCH", "WATER_BREAK", "ELECTRONIC", "TRADER_AVOID" ]
+    "light": 10,
+    "flags": [ "TRADER_AVOID", "WATCH", "WATER_BREAK", "ELECTRONIC", "TRADER_AVOID" ]
   },
   {
     "id": "usb_drive",
@@ -649,7 +651,8 @@
       { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
     ],
     "tick_action": [ "EPIC_MUSIC" ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "LIGHT_10", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ]
+    "light": 10,
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "mp3",
@@ -899,7 +902,8 @@
       },
       { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" }
     ],
-    "extend": { "flags": [ "LIGHT_20", "CHARGEDIM", "TRADER_AVOID" ] }
+    "light": 20,
+    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID" ] }
   },
   {
     "id": "smart_phone_locked",
@@ -960,7 +964,8 @@
       },
       { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" }
     ],
-    "extend": { "flags": [ "LIGHT_20", "CHARGEDIM", "TRADER_AVOID" ] }
+    "light": 20,
+    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID" ] }
   },
   {
     "id": "UPS_off",
