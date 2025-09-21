@@ -1,18 +1,5 @@
 [
   {
-    "result": "tunic_rag",
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_SUIT",
-    "skill_used": "tailor",
-    "time": "6 m",
-    "reversible": true,
-    "autolearn": true,
-    "using": [ [ "cordage", 1 ] ],
-    "components": [ [ [ "sheet", 1 ] ] ]
-  },
-  {
     "result": "coat_straw",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",

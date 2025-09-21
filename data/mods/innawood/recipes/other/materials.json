@@ -42,6 +42,9 @@
     "autolearn": true,
     "batch_time_factors": [ 75, 3 ],
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
+    "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
+    "//": "The recipe does not require a tool, but something is needed to override the base recipe's tool.",
+    "//1": "A crucible is used to make the requisite cement, so it seems like the best candidate to use.",
     "components": [ [ [ "material_cement", 50 ] ], [ [ "material_sand", 150 ] ], [ [ "water", 5 ], [ "water_clean", 5 ] ] ]
   },
   {
