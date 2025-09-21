@@ -589,6 +589,8 @@ enum npc_chat_menu {
     NPC_CHAT_ORDERS,
     NPC_CHAT_NO_GUNS,
     NPC_CHAT_PULP,
+    NPC_CHAT_AVOID_DOORS,
+    NPC_CHAT_CLOSE_DOORS,
     NPC_CHAT_FOLLOW_CLOSE,
     NPC_CHAT_MOVE_FREELY,
     NPC_CHAT_SLEEP,
@@ -818,6 +820,10 @@ static void npc_temp_orders_menu( const std::vector<npc *> &npc_list )
                         _( "Use whatever weapon you normally would" ) : _( "Don't use ranged weapons for a while" ) );
         nmenu.addentry( NPC_CHAT_PULP, true, 'p', guy->rules.has_override_enable( ally_rule::allow_pulp ) ?
                         _( "Pulp zombies if you like" ) : _( "Hold off on pulping zombies for a while" ) );
+        nmenu.addentry( NPC_CHAT_AVOID_DOORS, true, 'w', guy->rules.has_override_enable( ally_rule::avoid_doors ) ?
+                        _( "Open doors to get where you're going" ) : _( "Don't walk through closed doors" ) );
+        nmenu.addentry( NPC_CHAT_CLOSE_DOORS, true, 'a', guy->rules.has_override_enable( ally_rule::close_doors ) ?
+                        _( "Close the doors" ) : _( "Leave doors open" ) );
         nmenu.addentry( NPC_CHAT_FOLLOW_CLOSE, true, 'c',
                         guy->rules.has_override_enable( ally_rule::follow_close ) &&
                         guy->rules.has_override( ally_rule::follow_close ) ?
@@ -841,6 +847,12 @@ static void npc_temp_orders_menu( const std::vector<npc *> &npc_list )
                 break;
             case NPC_CHAT_PULP:
                 npc_batch_override_toggle( npc_list, ally_rule::allow_pulp, false );
+                break;
+            case NPC_CHAT_AVOID_DOORS:
+                npc_batch_override_toggle( npc_list, ally_rule::avoid_doors, true );
+                break;
+            case NPC_CHAT_CLOSE_DOORS:
+                npc_batch_override_toggle( npc_list, ally_rule::close_doors, false );
                 break;
             case NPC_CHAT_FOLLOW_CLOSE:
                 npc_batch_override_toggle( npc_list, ally_rule::follow_close, true );
