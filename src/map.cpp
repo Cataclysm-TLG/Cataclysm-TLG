@@ -205,6 +205,7 @@ static const ter_str_id ter_t_rock_floor_no_roof( "t_rock_floor_no_roof" );
 static const ter_str_id ter_t_rock_green( "t_rock_green" );
 static const ter_str_id ter_t_rock_red( "t_rock_red" );
 static const ter_str_id ter_t_rootcellar( "t_rootcellar" );
+static const ter_str_id ter_t_soil( "t_soil" );
 static const ter_str_id ter_t_stump( "t_stump" );
 static const ter_str_id ter_t_tree_birch( "t_tree_birch" );
 static const ter_str_id ter_t_tree_birch_harvested( "t_tree_birch_harvested" );
