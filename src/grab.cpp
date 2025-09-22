@@ -18,7 +18,8 @@
 
 bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 {
-    const optional_vpart_position grabbed_vehicle_vp = m.veh_at( u.pos_bub() + u.grab_point );
+    map &here = get_map();
+    const optional_vpart_position grabbed_vehicle_vp = m.veh_at( u.pos_bub( &here ) + u.grab_point );
     if( !grabbed_vehicle_vp ) {
         add_msg( m_info, _( "No vehicle at grabbed point." ) );
         u.grab( object_type::NONE );
@@ -36,7 +37,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         u.grab( object_type::NONE );
         return false;
     }
-    const vehicle *veh_under_player = veh_pointer_or_null( m.veh_at( u.pos_bub() ) );
+    const vehicle *veh_under_player = veh_pointer_or_null( m.veh_at( u.pos_bub( &here ) ) );
     if( grabbed_vehicle == veh_under_player ) {
         u.grab_point = - dp;
         return false;
@@ -86,7 +87,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     if( grabbed_vehicle->valid_wheel_config() ) {
         str_req = max_str_req / 10;
         //determine movecost for terrain touching wheels
-        const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub();
+        const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub( &here );
         for( int p : wheel_indices ) {
             const tripoint_bub_ms wheel_pos = vehpos + grabbed_vehicle->part( p ).precalc[0];
             const int mapcost = m.move_cost( wheel_pos, grabbed_vehicle );
@@ -99,7 +100,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         } else {
             str_req = max_str_req / 10;
             //determine movecost for terrain touching wheels
-            const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub();
+            const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub( &here );
             for( int p : wheel_indices ) {
                 const tripoint_bub_ms wheel_pos = vehpos + grabbed_vehicle->part( p ).precalc[0];
                 const int mapcost = m.move_cost( wheel_pos, grabbed_vehicle );
@@ -135,7 +136,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     if( str_req <= str ) {
         if( str_req == max_str_req ) {
             //if vehicle has no wheels, make a noise.
-            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
+            sounds::sound( grabbed_vehicle->pos_bub( &here ), str_req * 2, sounds::sound_t::movement,
                            _( "a scraping noise." ), true, "misc", "scraping" );
         }
         //calculate exertion factor and movement penalty
@@ -177,13 +178,13 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 
         // Grabbed part has to stay at distance 1 to the player
         // and in roughly the same direction.
-        const tripoint_bub_ms new_part_pos = grabbed_vehicle->pos_bub() +
+        const tripoint_bub_ms new_part_pos = grabbed_vehicle->pos_bub( &here ) +
                                              grabbed_vehicle->part( grabbed_part ).precalc[ 1 ];
-        const tripoint_bub_ms expected_pos = u.pos_bub() + dp + from;
+        const tripoint_bub_ms expected_pos = u.pos_bub( &here ) + dp + from;
         const tripoint_rel_ms actual_dir = tripoint_rel_ms( ( expected_pos - new_part_pos ).xy(), 0 );
 
         // Set player location to illegal value so it can't collide with vehicle.
-        const tripoint_bub_ms player_prev = u.pos_bub();
+        const tripoint_bub_ms player_prev = u.pos_bub( &here );
         u.setpos( tripoint_bub_ms::zero, false );
         std::vector<veh_collision> colls;
         const bool failed = grabbed_vehicle->collision( colls, actual_dir, true );
@@ -225,7 +226,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
             add_msg( _( "You let go of the %1$s as it starts to fall." ), grabbed_vehicle->disp_name() );
             u.grab( object_type::NONE );
             u.grab_point = tripoint_rel_ms::zero;
-            m.set_seen_cache_dirty( grabbed_vehicle->pos_bub() );
+            m.set_seen_cache_dirty( grabbed_vehicle->pos_bub( &here ) );
             return true;
         }
     } else {
@@ -236,7 +237,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     for( int p : wheel_indices ) {
         if( one_in( 2 ) ) {
             vehicle_part &vp_wheel = grabbed_vehicle->part( p );
-            tripoint_bub_ms wheel_p = grabbed_vehicle->bub_part_pos( vp_wheel );
+            tripoint_bub_ms wheel_p = grabbed_vehicle->bub_part_pos( &here, vp_wheel );
             grabbed_vehicle->handle_trap( wheel_p, vp_wheel );
         }
     }
