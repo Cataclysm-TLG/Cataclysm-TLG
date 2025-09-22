@@ -300,7 +300,7 @@ input_context game::get_player_input( std::string &action )
                     tripoint_bub_ms tmp( iter->getPosX() + i, iter->getPosY(), get_map().get_abs_sub().z() );
                     const Creature *critter = creatures.creature_at( tmp, true );
 
-                    if( critter != nullptr && u.sees( *critter ) ) {
+                    if( critter != nullptr && u.sees( here, *critter ) ) {
                         i = -1;
                         int iPos = iter->getStep() + iter->getStepOffset();
                         for( auto iter2 = iter; iter2 != SCT.vSCT.rend(); ++iter2 ) {

@@ -2504,6 +2504,7 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
         p->add_msg_if_player( m_info, _( "Purifying %i water using %i %s" ), charges_of_water, to_consume,
                               purifier->tname( to_consume ) );;
         // Pull from surrounding map first because it will update to_consume
+        map &here = get_map();
         get_map().use_amount( p->pos_bub( here ), PICKUP_RANGE, itype_pur_tablets, to_consume );
         // Then pull from inventory
         if( to_consume > 0 ) {
@@ -4996,7 +4997,8 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
             }
         }
         viewer &player_view = get_player_view();
-        if( player_view.sees( *critter ) ) {
+        map &here = get_map();
+        if( player_view.sees( here, *critter ) ) {
             if( blind ) {
                 p->add_msg_if_player( _( "%s is blinded by the spray." ), critter->disp_name() );
             }

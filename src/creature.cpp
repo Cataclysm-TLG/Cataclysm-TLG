@@ -261,6 +261,7 @@ int Creature::enum_size() const
 
 bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramped ) const
 {
+    map &here = get_map();
     const optional_vpart_position vp_there = here.veh_at( loc );
     if( !vp_there ) {
         cramped = false;
@@ -596,7 +597,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE );
         has_night_invisibility = critter.has_flag( mon_flag_NIGHT_INVISIBILITY );
     }
-    bool is_underwater = critter.is_likely_underwater();
+    bool is_underwater = critter.is_likely_underwater( here );
     bool is_invisible = critter.has_effect( effect_invisibility );
 
     // Check if creature is digging and the tile is diggable
@@ -651,7 +652,8 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     if( different_levels ) {
         ledge_concealment = ( here.ledge_concealment( pos_bub( here ), critter.pos_bub( here ) ) );
     }
-    const int concealment = std::max( here.obstacle_concealment( pos_bub( here ), critter.pos_bub( here ) ),
+    const int concealment = std::max( here.obstacle_concealment( pos_bub( here ),
+                                      critter.pos_bub( here ) ),
                                       ledge_concealment );
     if( ch != nullptr ) {
         if( concealment > eye_level() ) {
@@ -805,8 +807,9 @@ Creature *Creature::auto_find_hostile_target( int range, int &boo_hoo, int area 
                 } while( continueFlag );
 
                 tripoint_bub_ms oldPos = pos_bub( here );
-                setpos( here, path_to_target.back() ); // Temporary moving targeting npc on vehicle boundary position
-                bool seesFromVehBound = sees( herem *m ); // And look from there
+                setpos( here,
+                        path_to_target.back() ); // Temporary moving targeting npc on vehicle boundary position
+                bool seesFromVehBound = sees( here, *m ); // And look from there
                 setpos( here, oldPos );
                 if( !seesFromVehBound ) {
                     continue;

@@ -2001,7 +2001,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                         }
                     }
                     if( destroy ) {
-                        if( get_player_view().sees( guy ) ) {
+                        map &here = get_map();
+                        if( get_player_view().sees( here, guy ) ) {
                             SCT.add( point( guy.posx(), guy.posy() ), direction::NORTH, remove_color_tags( pre_damage_name ),
                                      m_neutral, _( "destroyed" ), m_info );
                         }

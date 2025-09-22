@@ -2008,7 +2008,7 @@ void npc::evaluate_best_attack( const Creature *target )
 
     // punching things is always available
     compare( std::make_shared<npc_attack_melee>( null_item_reference() ), "barehanded" );
-    visit_items( [&compare, this]( item * it, item * ) {
+    visit_items( [&compare, this, &here ]( item * it, item * ) {
         // you can theoretically melee with anything.
         if( !it->has_flag( flag_INTEGRATED ) && !is_worn( *it ) ) {
             compare( std::make_shared<npc_attack_melee>( *it ), "(as MELEE) " + it->display_name() );
@@ -2027,7 +2027,7 @@ void npc::evaluate_best_attack( const Creature *target )
                        !can_use( *mode.second.target ) ||
                        ( rules.has_flag( ally_rule::use_silent ) && is_player_ally() &&
                          !mode.second->is_silent() ) ) ) {
-                    if( it->shots_remaining( this ) > 0 || can_reload_current() ) {
+                    if( it->shots_remaining( here, this ) > 0 || can_reload_current() ) {
                         compare( std::make_shared<npc_attack_gun>( *it, mode.second ), "(as FIRED) " + it->display_name() );
                     } else {
                         compare( std::make_shared<npc_attack_melee>( *it ), "(as THROWN) " + it->display_name() );
@@ -2755,7 +2755,7 @@ bool npc::wont_hit_friend( const tripoint_bub_ms &tar, const item &it, bool thro
 
     for( const auto &fr : ai_cache.friends ) {
         const shared_ptr_fast<Creature> ally_p = fr.lock();
-        if( !ally_p || !sees( *ally_p ) ) {
+        if( !ally_p || !sees( here, *ally_p ) ) {
             continue;
         }
         const Creature &ally = *ally_p;
@@ -4084,6 +4084,7 @@ double npc::evaluate_weapon( item &maybe_weapon, bool can_use_gun, bool use_sile
     // This is relatively reasonable, as players can issue commands to NPCs when we do not want them to use ranged weapons.
     // Conversely, we cannot directly issue commands when we want NPCs to prioritize ranged weapons.
     // Note that the scoring method here is different from the 'weapon_value' used elsewhere.
+    map &here = get_map();
     double val_gun = allowed ? gun_value( maybe_weapon, maybe_weapon.shots_remaining( here,
                                           this ) ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,

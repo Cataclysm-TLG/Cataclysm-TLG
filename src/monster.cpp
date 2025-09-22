@@ -3427,8 +3427,6 @@ void monster::process_one_effect( effect &it, bool is_new )
 
 void monster::process_effects()
 {
-    map &here = get_map();
-
     // Monster only effects
     for( auto &elem : *effects ) {
         for( auto &_effect_it : elem.second ) {

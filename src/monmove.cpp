@@ -1678,7 +1678,6 @@ bool monster::bash_at( const tripoint_bub_ms &p )
         return false;
     }
 
-    map &here = get_map();
     if( !( here.is_bashable_furn( p ) || here.veh_at( p ).obstacle_at_part() || too_cramped ) ) {
         // if the only thing here is road or flat, rarely bash it
         bool flat_ground = here.has_flag( ter_furn_flag::TFLAG_ROAD, p ) ||
@@ -1929,13 +1928,13 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
         // Birds and other flying creatures flying over the deep water terrain
         Character &player_character = get_player_character();
-        if( was_water && flies() && sees( player_character ) &&
+        if( was_water && flies() && sees( here, player_character ) &&
             attitude_to( player_character ) == Attitude::HOSTILE ) {
             if( one_in( 4 ) ) {
                 add_msg_if_player_sees( *this, m_warning, _( "A %1$s flies over the %2$s!" ),
                                         name(), here.tername( pos_bub() ) );
             }
-        } else if( was_water && sees( player_character ) && !will_be_water &&
+        } else if( was_water && sees( here, player_character ) && !will_be_water &&
                    attitude_to( player_character ) == Attitude::HOSTILE ) {
             // Use more dramatic messages for swimming monsters
             add_msg_if_player_sees( *this, m_warning,
@@ -1944,7 +1943,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
                                     pgettext( "monster movement", "A %1$s %2$s from the %3$s!" ),
                                     name(), swims() ||
                                     has_flag( mon_flag_AQUATIC ) ? _( "leaps" ) : _( "emerges" ), here.tername( pos_bub() ) );
-        } else if( !was_water && sees( player_character ) && will_be_water &&
+        } else if( !was_water && sees( here, player_character ) && will_be_water &&
                    attitude_to( player_character ) == Attitude::HOSTILE ) {
             add_msg_if_player_sees( *this, m_warning, pgettext( "monster movement",
                                     //~ Message when a monster enters water

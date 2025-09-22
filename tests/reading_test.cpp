@@ -514,29 +514,29 @@ TEST_CASE( "reading_a_book_with_an_ebook_reader", "[reading][book][ereader]" )
             test_ebook_is_reading( dummy, ereader, booklc );
         }
 
-            REQUIRE( ereader->ammo_remaining( ) == 100 );
+        REQUIRE( ereader->ammo_remaining( ) == 100 );
 
-    dummy.activity.start_or_resume( dummy, false );
-    REQUIRE( dummy.activity.id() == ACT_READ );
+        dummy.activity.start_or_resume( dummy, false );
+        REQUIRE( dummy.activity.id() == ACT_READ );
 
-            CHECK( ereader->ammo_remaining( ) == 99 );
+        CHECK( ereader->ammo_remaining( ) == 99 );
 
-    dummy.activity.do_turn( dummy );
+        dummy.activity.do_turn( dummy );
 
-    CHECK( dummy.activity.id() == ACT_READ );
+        CHECK( dummy.activity.id() == ACT_READ );
 
-            AND_THEN( "ereader has spent a charge while reading" ) {
-                CHECK( ereader->ammo_remaining( ) == 98 );
+        AND_THEN( "ereader has spent a charge while reading" ) {
+            CHECK( ereader->ammo_remaining( ) == 98 );
 
-                AND_THEN( "ereader runs out of battery" ) {
-                    ereader->ammo_consume( ereader->ammo_remaining( ), dummy.pos_bub(), &dummy );
-                    dummy.activity.do_turn( dummy );
+            AND_THEN( "ereader runs out of battery" ) {
+                ereader->ammo_consume( ereader->ammo_remaining( ), dummy.pos_bub(), &dummy );
+                dummy.activity.do_turn( dummy );
 
-            THEN( "reading stops" ) {
-                CHECK( dummy.activity.id() != ACT_READ );
+                THEN( "reading stops" ) {
+                    CHECK( dummy.activity.id() != ACT_READ );
+                }
             }
         }
     }
-}
 }
 }

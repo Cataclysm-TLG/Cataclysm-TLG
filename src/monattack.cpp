@@ -323,7 +323,8 @@ static npc make_fake_npc( monster *z, int str, int dex, int inte, int per )
     tmp.name = _( "The " ) + z->name();
     tmp.set_fake( true );
     tmp.recoil = 0;
-    tmp.setpos( z->pos_bub() );
+    map &here = get_map();
+    tmp.setpos( here, z->pos_bub() );
     tmp.str_cur = str;
     tmp.dex_cur = dex;
     tmp.int_cur = inte;
@@ -727,9 +728,10 @@ bool mattack::shriek_stun( monster *z )
 bool mattack::howl( monster *z )
 {
     Creature *target = z->attack_target();
+    map &here = get_map();
     if( target == nullptr ||
         rl_dist( z->pos_bub(), target->pos_bub() ) > 4 ||
-        !z->sees( *target ) ) {
+        !z->sees( here, *target ) ) {
         return false;
     }
 
@@ -1510,9 +1512,9 @@ bool mattack::science( monster *const z ) // I said SCIENCE again!
     if( dist > max_distance ) {
         return false;
     }
-
+    map &here = get_map();
     // can't attack what you can't see
-    if( !z->sees( *target ) ) {
+    if( !z->sees( here, *target ) ) {
         return false;
     }
 
@@ -2691,6 +2693,7 @@ bool mattack::nurse_operate( monster *z )
         return false;
     }
     Character &player_character = get_player_character();
+    map &here = get_map();
     const bool u_see = player_character.sees( here, *z );
 
     if( u_see && one_in( 100 ) ) {
@@ -5170,16 +5173,16 @@ bool mattack::stretch_attack( monster *z )
     }
 
     int distance = rl_dist( z->pos_bub(), target->pos_bub() );
+    map &here = get_map();
     // Hack, only allow attacking above or below if the target is adjacent.
     if( z->posz() != target->posz() ) {
         distance += 2;
     }
-    if( distance < 2 || distance > 3 || !z->sees( *target ) ) {
+    if( distance < 2 || distance > 3 || !z->sees( here, *target ) ) {
         return false;
     }
 
     z->mod_moves( -to_moves<int>( 1_seconds ) );
-    map &here = get_map();
     for( tripoint_bub_ms &pnt : here.find_clear_path( z->pos_bub(), target->pos_bub() ) ) {
         if( here.impassable( pnt ) ) {
             target->add_msg_player_or_npc( _( "The %1$s thrusts its arm at you, but bounces off the %2$s." ),
@@ -5313,11 +5316,12 @@ bool mattack::dsa_drone_scan( monster *z )
     // Select a target: the avatar or a nearby NPC.  Must be visible and within scan range
     Character *target = &get_player_character();
     Character &you = get_player_character();
-    bool avatar_in_range = z->posz() == target->posz() && z->sees( target->pos_bub() ) &&
+    map &here = get_map();
+    bool avatar_in_range = z->posz() == target->posz() && z->sees( here, target->pos_bub() ) &&
                            rl_dist( z->pos_bub(), target->pos_bub() ) <= scan_range;
     const std::vector<npc *> available = g->get_npcs_if( [&]( const npc & guy ) {
         // TODO: Get rid of the z-level check when z-level vision gets "better"
-        return z->posz() == guy.posz() && z->sees( guy.pos_bub() ) &&
+        return z->posz() == guy.posz() && z->sees( here, guy.pos_bub() ) &&
                rl_dist( z->pos_bub(), guy.pos_bub() ) <= scan_range;
     } );
     if( !avatar_in_range && available.empty() ) {
@@ -5367,7 +5371,7 @@ bool mattack::dsa_drone_scan( monster *z )
     }
     target->set_value( weapons_str, string_format( "%d", weapons_count ) );
 
-    if( you.sees( z->pos_bub() ) ) {
+    if( you.sees( here, z->pos_bub() ) ) {
         target->add_msg_player_or_npc( _( "The %s shines its light at you." ),
                                        _( "The %s shines its light at <npcname>." ),
                                        z->name() );

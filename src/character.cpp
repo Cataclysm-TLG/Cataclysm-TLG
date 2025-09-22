@@ -11574,12 +11574,11 @@ void Character::process_effects()
         }
     }
 
-    map &here = get_map();
     if( has_effect( effect_slippery_terrain ) && !is_on_ground() &&
         here.has_flag( ter_furn_flag::TFLAG_FLAT, pos_bub() ) &&
         !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
         int rolls = -1;
-        bool u_see = get_player_view().sees( *this );
+        bool u_see = get_player_view().sees( here, *this );
         // ROAD tiles are hard, flat surfaces, so they are extra slippery.
         if( here.has_flag( ter_furn_flag::TFLAG_ROAD, pos_bub() ) ) {
             rolls += 2;

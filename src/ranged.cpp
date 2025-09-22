@@ -2225,7 +2225,8 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                     int &text_y, input_context &ctxt, const tripoint_bub_ms &target_pos )
 {
     Creature *target = get_creature_tracker().creature_at( target_pos, true );
-    if( target != nullptr && !you.sees( *target ) ) {
+    map &here = get_map();
+    if( target != nullptr && !you.sees( here, *target ) ) {
         target = nullptr;
     }
     item weapon = null_item_reference();
@@ -2250,7 +2251,7 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     const target_ui::TargetMode throwing_target_mode = target_ui::TargetMode::ThrowCreature;
     Target_attributes attributes( range, target_size,
                                   get_map().ambient_light_at( tripoint_bub_ms( target_pos ) ),
-                                  you.sees( target_pos ) );
+                                  you.sees( here, target_pos ) );
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
             throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes, target_pos,
             item_location() );
@@ -3318,7 +3319,6 @@ tripoint_bub_ms target_ui::choose_initial_target()
     }
 
     // Try closest practice target
-    map &here = get_map();
     const std::vector<tripoint_bub_ms> nearby = closest_points_first( src, range );
     const auto target_spot = std::find_if( nearby.begin(), nearby.end(),
     [this, &here]( const tripoint_bub_ms & pt ) {

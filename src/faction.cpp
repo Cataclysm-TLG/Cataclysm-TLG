@@ -30,7 +30,6 @@
 #include "line.h"
 #include "localized_comparator.h"
 #include "map.h"
-#include "map_scale_constants.h"
 #include "memory_fast.h"
 #include "mission_companion.h"
 #include "mtype.h"

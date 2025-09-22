@@ -120,7 +120,8 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
             str_req = std::min( str_req, max_str_req );
         }
         //finally, adjust by the off-road coefficient (always 1.0 on a road, as low as 0.1 off road.)
-        str_req /= grabbed_vehicle->k_traction( here, get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
+        str_req /= grabbed_vehicle->k_traction( here,
+                                                get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
         // If it would be easier not to use the wheels, don't use the wheels.
         str_req = std::min( str_req, max_str_req );
     } else {
@@ -181,7 +182,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         // and in roughly the same direction.
         const tripoint_bub_ms new_part_pos = grabbed_vehicle->pos_bub( here ) +
                                              grabbed_vehicle->part( grabbed_part ).precalc[ 1 ];
-        const tripoint_bub_ms expected_pos = u.pos_bub( &here ) + dp + from;
+        const tripoint_bub_ms expected_pos = u.pos_bub( here ) + dp + from;
         const tripoint_rel_ms actual_dir = tripoint_rel_ms( ( expected_pos - new_part_pos ).xy(), 0 );
 
         // Set player location to illegal value so it can't collide with vehicle.

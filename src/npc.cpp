@@ -1183,9 +1183,9 @@ void npc::place_on_map( map *here )
         return;
     }
 
-    for( const tripoint_abs_ms &p : closest_points_first( pos_abs( here ), SEEX + 1 ) ) {
+    for( const tripoint_abs_ms &p : closest_points_first( pos_abs(), SEEX + 1 ) ) {
         if( g->is_empty( here, p ) ) {
-            setpos( here, here->get_bub( p ) );
+            setpos( p );
             return;
         }
     }
@@ -3013,7 +3013,7 @@ void npc::die( map *here, Creature *nkiller )
     }
     if( !is_hallucination() ) {
         Character &you = get_player_character();
-        if( is_player_ally() && you.sees( *this ) ) {
+        if( is_player_ally() && you.sees( *here, pos_bub() ) ) {
             if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
                 if( you.has_flag( json_flag_SPIRITUAL ) ) {
                     you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
@@ -3026,7 +3026,7 @@ void npc::die( map *here, Creature *nkiller )
             const character_id &cid = entry.first;
             Character *member = g->critter_by_id<Character>( cid );
             // TODO: Finding out after the fact.
-            if( member->sees( *this ) ) {
+            if( member->sees( *here, pos_bub() ) ) {
                 if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
                     if( member->has_flag( json_flag_SPIRITUAL ) ) {
                         member->add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
