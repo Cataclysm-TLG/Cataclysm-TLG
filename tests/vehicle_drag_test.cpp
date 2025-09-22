@@ -47,9 +47,10 @@ static void clear_game_drag( const ter_id &terrain )
 
 static vehicle *setup_drag_test( const vproto_id &veh_id )
 {
+    map &here = get_map();
     clear_vehicles();
     const tripoint_bub_ms map_starting_point( 60, 60, 0 );
-    vehicle *veh_ptr = get_map().add_vehicle( veh_id, map_starting_point, -90_degrees, 0, 0 );
+    vehicle *veh_ptr = here.add_vehicle( veh_id, map_starting_point, -90_degrees, 0, 0 );
 
     REQUIRE( veh_ptr != nullptr );
     if( veh_ptr == nullptr ) {
@@ -66,7 +67,7 @@ static vehicle *setup_drag_test( const vproto_id &veh_id )
     const auto doors = veh_ptr->get_avail_parts( "OPENABLE" );
     for( const vpart_reference &vp :  doors ) {
         const size_t door = vp.part_index();
-        veh_ptr->close( door );
+        veh_ptr->close( here, door );
     }
 
     veh_ptr->refresh_insides();
@@ -93,8 +94,8 @@ static bool test_drag(
     }
 
     const double c_air = veh_ptr->coeff_air_drag();
-    const double c_rolling = veh_ptr->coeff_rolling_drag();
-    const double c_water = veh_ptr->coeff_water_drag();
+    const double c_rolling = veh_ptr->coeff_rolling_drag( here );
+    const double c_water = veh_ptr->coeff_water_drag( here );
     const int safe_v = veh_ptr->safe_ground_velocity( here, false );
     const int max_v = veh_ptr->max_ground_velocity( here, false );
 

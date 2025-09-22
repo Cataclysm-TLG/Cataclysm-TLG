@@ -812,9 +812,9 @@ void editmap::update_view_with_help( const std::string &txt, const std::string &
     if( critter != nullptr ) {
         off = critter->print_info( w_info, off, 5, 1 );
     } else if( vp ) {
-        mvwprintw( w_info, point( 1, off ), _( "There is a %s there.  Parts:" ), vp->vehicle().name );
-        off++;
-        vp->vehicle().print_part_list( w_info, off, getmaxy( w_info ) - 1, width, vp->part_index() );
+        mvwprintw( w_info, point( 1, off++ ), _( "There is a %s there.  Parts:" ),
+                   vp->vehicle().name ); // 13
+        vp->vehicle().print_part_list( here, w_info, off, getmaxy( w_info ) - 1, width, vp->part_index() );
         off += 6;
     }
     map_stack target_stack = here.i_at( target );

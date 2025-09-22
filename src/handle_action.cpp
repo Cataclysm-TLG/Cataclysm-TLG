@@ -440,7 +440,7 @@ static void pldrive( const tripoint_rel_ms &p )
         const bool has_animal_controls = veh->part_with_feature( vp.mount, "CONTROL_ANIMAL", true ) >= 0;
         const bool has_controls = veh->part_with_feature( vp.mount, "CONTROLS", true ) >= 0;
         const bool has_animal = veh->has_engine_type( fuel_type_animal, false ) &&
-                                veh->get_harnessed_animal();
+                                veh->get_harnessed_animal( here );
         if( !has_controls && !has_animal_controls ) {
             add_msg( m_info, _( "You can't drive the vehicle from here.  You need controls!" ) );
             player_character.controlling_vehicle = false;
@@ -467,13 +467,13 @@ static void pldrive( const tripoint_rel_ms &p )
         }
     }
     if( p.z() == -1 ) {
-        if( veh->check_heli_descend( player_character ) ) {
+        if( veh->check_heli_descend( here, player_character ) ) {
             player_character.add_msg_if_player( m_info, _( "You steer the vehicle into a descent." ) );
         } else {
             return;
         }
     } else if( p.z() == 1 ) {
-        if( veh->check_heli_ascend( player_character ) ) {
+        if( veh->check_heli_ascend( here,  player_character ) ) {
             player_character.add_msg_if_player( m_info, _( "You steer the vehicle into an ascent." ) );
         } else {
             return;
@@ -485,7 +485,7 @@ static void pldrive( const tripoint_rel_ms &p )
             return;
         }
     }
-    veh->pldrive( get_avatar(), p.x(), p.y(), p.z() );
+    veh->pldrive( here, get_avatar(), p.x(), p.y(), p.z() );
 }
 
 static void pldrive( point_rel_ms d )
@@ -524,7 +524,7 @@ static void open()
             const std::string part_name = veh->part( openable ).name();
             bool outside = !player_veh || player_veh != veh;
             if( !outside ) {
-                veh->open( openable );
+                veh->open( here, openable );
                 //~ %1$s - vehicle name, %2$s - part name
                 player_character.add_msg_if_player( _( "You open the %1$s's %2$s." ), veh->name, part_name );
             } else {
@@ -537,7 +537,7 @@ static void open()
                     add_msg( m_info, _( "That %s can only be opened from the inside." ), part_name );
                     player_character.mod_moves( to_moves<int>( 1_seconds ) );
                 } else {
-                    veh->open_all_at( openable );
+                    veh->open_all_at( here, openable );
                     //~ %1$s - vehicle name, %2$s - part name
                     player_character.add_msg_if_player( _( "You open the %1$s's %2$s." ), veh->name, part_name );
                 }
@@ -1200,10 +1200,10 @@ static void wait()
                 veh.is_falling ||           // *not* vertical_velocity, which is only used for collisions
                 veh.velocity ||             // is moving
                 ( veh.cruise_velocity && (  // would move if it could
-                      ( veh.is_watercraft() && veh.can_float() ) || // is viable watercraft floating on water
+                      ( veh.is_watercraft() && veh.can_float( here ) ) || // is viable watercraft floating on water
                       veh.sufficient_wheel_config() // is viable land vehicle on ground or fording shallow water
                   ) ) ||
-                ( veh.is_in_water( true ) && !veh.can_float() ) // is sinking in deep water
+                ( veh.is_in_water( true ) && !veh.can_float( here ) ) // is sinking in deep water
             ) ) {
             popup( _( "You can't pass time while controlling a moving vehicle." ) );
             return;
@@ -2500,7 +2500,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_SMASH:
             if( has_vehicle_control( player_character ) ) {
-                handbrake();
+                handbrake( here );
             } else {
                 smash();
             }

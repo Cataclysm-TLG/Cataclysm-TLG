@@ -27,11 +27,11 @@ void check_vehicle_still_works( vehicle &veh )
     veh.engine_on = true;
     veh.velocity = 1000;
     veh.cruise_velocity = veh.velocity;
-    tripoint_bub_ms const startp = veh.pos_bub( &here );
+    tripoint_bub_ms const startp = veh.pos_bub( here );
     here.vehmove();
-    REQUIRE( veh.pos_bub( &here ) != startp );
+    REQUIRE( veh.pos_bub( here ) != startp );
 
-    here.displace_vehicle( veh, startp - veh.pos_bub( &here ) );
+    here.displace_vehicle( veh, startp - veh.pos_bub( here ) );
 }
 
 vehicle *add_test_vehicle( map &m, tripoint_bub_ms loc )
@@ -99,7 +99,7 @@ TEST_CASE( "mapgen_remove_vehicles" )
     veh->set_owner( get_avatar() );
     REQUIRE( here.get_vehicles().size() == 1 );
     here.board_vehicle( start_loc, &get_avatar() );
-    veh->start_engines( &get_avatar(), true );
+    veh->start_engines( here, &get_avatar(), true );
 
     tripoint_bub_ms const test_loc = get_avatar().pos_bub();
     check_vehicle_still_works( *veh );

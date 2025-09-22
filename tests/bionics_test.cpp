@@ -10,6 +10,8 @@
 #include "cata_catch.h"
 #include "game.h"
 #include "item.h"
+#include "item_location.h"
+#include "map.h"
 #include "map_helpers.h"
 #include "npc.h"
 #include "options_helpers.h"
@@ -363,6 +365,7 @@ TEST_CASE( "included_bionics", "[bionics]" )
 
 TEST_CASE( "fueled_bionics", "[bionics] [item]" )
 {
+    map &here = get_map();
     avatar &dummy = get_avatar();
     clear_avatar();
 
@@ -417,7 +420,7 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
         item_location bat_compartment = dummy.top_items_loc().front();
 
         // There should be no fuel available, can't turn bionic on and no power is produced
-        REQUIRE( bat_compartment->ammo_remaining() == 0 );
+        REQUIRE( bat_compartment->ammo_remaining( here ) == 0 );
         CHECK( dummy.get_bionic_fuels( bio.id ).empty() );
         CHECK( dummy.get_cable_ups().empty() );
         CHECK( dummy.get_cable_solar().empty() );
@@ -430,7 +433,7 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
         item battery = item( "light_battery_cell" );
         CHECK( bat_compartment->can_reload_with( battery, true ) );
         bat_compartment->put_in( battery, pocket_type::MAGAZINE_WELL );
-        REQUIRE( bat_compartment->ammo_remaining() == 0 );
+        REQUIRE( bat_compartment->ammo_remaining( here ) == 0 );
         CHECK( dummy.get_bionic_fuels( bio.id ).empty() );
         CHECK( dummy.get_cable_ups().empty() );
         CHECK( dummy.get_cable_solar().empty() );
@@ -441,16 +444,16 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
 
         // Add fuel. Now it turns on and generates power.
         bat_compartment->magazine_current()->ammo_set( battery.ammo_default(), 2 );
-        REQUIRE( bat_compartment->ammo_remaining() == 2 );
+        REQUIRE( bat_compartment->ammo_remaining( here ) == 2 );
         CHECK( dummy.activate_bionic( bio ) );
         CHECK_FALSE( dummy.get_bionic_fuels( bio.id ).empty() );
         dummy.suffer();
         CHECK( units::to_joule( dummy.get_power_level() ) == 1000 );
-        CHECK( bat_compartment->ammo_remaining() == 1 );
+        CHECK( bat_compartment->ammo_remaining( here ) == 1 );
 
         dummy.suffer();
         CHECK( units::to_joule( dummy.get_power_level() ) == 2000 );
-        CHECK( bat_compartment->ammo_remaining() == 0 );
+        CHECK( bat_compartment->ammo_remaining( here ) == 0 );
 
         // Run out of ammo
         dummy.suffer();
@@ -478,7 +481,7 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
         ups->set_var( "cable", "plugged_in" );
         cable->active = true;
 
-        REQUIRE( ups->ammo_remaining() == 0 );
+        REQUIRE( ups->ammo_remaining( here ) == 0 );
         CHECK( dummy.get_bionic_fuels( bio.id ).empty() );
         CHECK( dummy.get_cable_ups().empty() );
         CHECK( dummy.get_cable_solar().empty() );
@@ -490,7 +493,7 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
         // Put empty battery into ups. Still does not work.
         item ups_mag( ups->magazine_default() );
         ups->put_in( ups_mag, pocket_type::MAGAZINE_WELL );
-        REQUIRE( ups->ammo_remaining() == 0 );
+        REQUIRE( ups->ammo_remaining( here ) == 0 );
         CHECK( dummy.get_bionic_fuels( bio.id ).empty() );
         CHECK_FALSE( dummy.activate_bionic( bio ) );
         dummy.suffer();
@@ -498,15 +501,15 @@ TEST_CASE( "fueled_bionics", "[bionics] [item]" )
 
         // Fill the battery. Works now.
         ups->magazine_current()->ammo_set( ups_mag.ammo_default(), 2 );
-        REQUIRE( ups->ammo_remaining() == 2 );
+        REQUIRE( ups->ammo_remaining( here ) == 2 );
         CHECK( dummy.activate_bionic( bio ) );
         CHECK_FALSE( dummy.get_cable_ups().empty() );
         dummy.suffer();
         CHECK( units::to_joule( dummy.get_power_level() ) == 1000 );
-        CHECK( ups->ammo_remaining() == 1 );
+        CHECK( ups->ammo_remaining( here ) == 1 );
 
         dummy.suffer();
-        CHECK( ups->ammo_remaining() == 0 );
+        CHECK( ups->ammo_remaining( here ) == 0 );
         CHECK( units::to_joule( dummy.get_power_level() ) == 2000 );
 
         // Run out of fuel

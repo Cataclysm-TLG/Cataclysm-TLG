@@ -17,9 +17,8 @@
     "volume": "50 ml",
     "fun": -8,
     "flags": [ "FREEZERBURN", "RAW" ],
-    "rot_spawn": "GROUP_EGG_BIRD_WILD",
-    "vitamins": [ [ "iron", "900 μg" ], [ "calcium", "28 mg" ], [ "egg_allergen", 1 ] ],
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_BIRD_WILD", "chance": 50 },
+    "vitamins": [ [ "iron", "900 μg" ], [ "calcium", "28 mg" ], [ "egg_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -27,8 +26,7 @@
     "name": { "str": "chicken egg" },
     "spoils_in": "11 days",
     "copy-from": "egg_bird",
-    "rot_spawn": "GROUP_EGG_CHICKEN",
-    "rot_spawn_chance": 70
+    "rot_spawn": { "group": "GROUP_EGG_BIRD_CHICKEN", "chance": 70 }
   },
   {
     "type": "COMESTIBLE",
@@ -37,14 +35,14 @@
     "looks_like": "egg_bird",
     "name": { "str": "unfertilized bird egg" },
     "description": "A nutritious egg laid by a bird.  This one is unfertilized and probably from a farm.",
-    "rot_spawn_chance": 0
+    "rot_spawn": { "group": "GROUP_EGG_BIRD_WILD", "chance": 0 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_grouse",
     "name": { "str": "grouse egg" },
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_GROUSE"
+    "rot_spawn": { "group": "GROUP_EGG_GROUSE", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -53,7 +51,7 @@
     "spoils_in": "9 days",
     "copy-from": "egg_chicken",
     "proportional": { "volume": 0.3, "weight": 0.3, "calories": 0.3 },
-    "rot_spawn": "GROUP_EGG_PIGEON"
+    "rot_spawn": { "group": "GROUP_EGG_PIGEON", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -62,7 +60,7 @@
     "spoils_in": "9 days",
     "copy-from": "egg_chicken",
     "proportional": { "volume": 0.34, "weight": 0.34, "calories": 0.34 },
-    "rot_spawn": "GROUP_EGG_CROW"
+    "rot_spawn": { "group": "GROUP_EGG_CROW", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -70,7 +68,7 @@
     "name": { "str": "raven egg" },
     "spoils_in": "11 days",
     "copy-from": "egg_crow",
-    "rot_spawn": "GROUP_EGG_RAVEN"
+    "rot_spawn": { "group": "GROUP_EGG_RAVEN", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -79,7 +77,7 @@
     "spoils_in": "9 days",
     "copy-from": "egg_chicken",
     "proportional": { "volume": 0.18, "weight": 0.18, "calories": 0.18 },
-    "rot_spawn": "GROUP_EGG_BLUEJAY"
+    "rot_spawn": { "group": "GROUP_EGG_BLUEJAY", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -88,7 +86,7 @@
     "spoils_in": "7 days",
     "copy-from": "egg_chicken",
     "proportional": { "volume": 0.09, "weight": 0.09, "calories": 0.09 },
-    "rot_spawn": "GROUP_EGG_CARDINAL"
+    "rot_spawn": { "group": "GROUP_EGG_CARDINAL", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -99,7 +97,7 @@
     "description": "A nutritious egg laid by a robin.  The shell is colored a distinctive light blue.",
     "color": "light_blue",
     "proportional": { "volume": 0.15, "weight": 0.15, "calories": 0.15 },
-    "rot_spawn": "GROUP_EGG_ROBIN"
+    "rot_spawn": { "group": "GROUP_EGG_ROBIN", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -108,7 +106,7 @@
     "spoils_in": "7 days",
     "copy-from": "egg_chicken",
     "proportional": { "volume": 0.06, "weight": 0.06, "calories": 0.06 },
-    "rot_spawn": "GROUP_EGG_SPARROW"
+    "rot_spawn": { "group": "GROUP_EGG_SPARROW", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -120,7 +118,7 @@
     "volume": "83 ml",
     "weight": "70 g",
     "vitamins": [ [ "calcium", 5 ], [ "iron", 15 ] ],
-    "rot_spawn": "GROUP_EGG_DUCK"
+    "rot_spawn": { "group": "GROUP_EGG_DUCK", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -132,7 +130,7 @@
     "volume": "130 ml",
     "weight": "143 g",
     "vitamins": [ [ "calcium", 9 ], [ "iron", 29 ] ],
-    "rot_spawn": "GROUP_EGG_goose"
+    "rot_spawn": { "group": "GROUP_EGG_GOOSE", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -144,7 +142,7 @@
     "weight": "79 g",
     "calories": 135,
     "vitamins": [ [ "calcium", 8 ], [ "iron", 18 ] ],
-    "rot_spawn": "GROUP_EGG_TURKEY"
+    "rot_spawn": { "group": "GROUP_EGG_TURKEY", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -152,7 +150,7 @@
     "name": { "str": "pheasant egg" },
     "spoils_in": "14 days",
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_PHEASANT"
+    "rot_spawn": { "group": "GROUP_EGG_PHEASANT", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -205,8 +203,7 @@
     "material": [ "egg" ],
     "proportional": { "weight": 4, "calories": 4, "volume": 4 },
     "vitamins": [ [ "calcium", 28 ], [ "iron", 72 ], [ "mutant_toxin", 100 ], [ "egg_allergen", 1 ] ],
-    "rot_spawn": "GROUP_EGG_ANT",
-    "rot_spawn_chance": 100
+    "rot_spawn": { "group": "GROUP_EGG_ANT", "chance": 80 }
   },
   {
     "type": "COMESTIBLE",
@@ -214,7 +211,7 @@
     "name": { "str": "acid ant egg" },
     "copy-from": "ant_egg",
     "description": "A large, heavy acid ant egg, the size of a softball.  Extremely nutritious, but incredibly gross.",
-    "rot_spawn": "GROUP_EGG_ANT_ACID"
+    "rot_spawn": { "group": "GROUP_EGG_ANT_ACID", "chance": 70 }
   },
   {
     "type": "COMESTIBLE",
@@ -222,7 +219,7 @@
     "name": { "str": "fire ant egg" },
     "copy-from": "ant_egg",
     "description": "A large, heavy fire ant egg, the size of a softball.  Extremely nutritious, but incredibly gross.",
-    "rot_spawn": "GROUP_EGG_ANT_FIRE"
+    "rot_spawn": { "group": "GROUP_EGG_ANT_FIRE", "chance": 70 }
   },
   {
     "type": "COMESTIBLE",
@@ -231,8 +228,7 @@
     "description": "A fist-sized egg from a giant roach.  Incredibly gross.",
     "copy-from": "egg_insect",
     "color": "white",
-    "rot_spawn": "GROUP_EGG_ROACH",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_ROACH", "chance": 60 }
   },
   {
     "type": "COMESTIBLE",
@@ -241,7 +237,7 @@
     "description": "A fist-sized egg from a plague vector.  Incredibly gross.",
     "copy-from": "egg_roach",
     "vitamins": [ [ "mutant_toxin", 50 ] ],
-    "rot_spawn": "GROUP_EGG_ROACH_PLAGUE"
+    "rot_spawn": { "group": "GROUP_EGG_ROACH_PLAGUE", "chance": 60 }
   },
   {
     "type": "COMESTIBLE",
@@ -250,8 +246,7 @@
     "description": "A fist-sized egg from a locust.",
     "copy-from": "egg_insect",
     "color": "green",
-    "rot_spawn": "GROUP_EGG_LOCUST",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_LOCUST", "chance": 80 }
   },
   {
     "type": "COMESTIBLE",
@@ -260,8 +255,7 @@
     "description": "The still-wet egg of a mutated dragonfly.  Serves as a disgusting substitute for the real thing, just don't let it hatch in the water.",
     "copy-from": "egg_insect",
     "color": "light_green",
-    "rot_spawn": "GROUP_EGG_DRAGONFLY",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_DRAGONFLY", "chance": 70 }
   },
   {
     "type": "COMESTIBLE",
@@ -270,8 +264,7 @@
     "description": "The fist-sized egg of a mutant firefly.  Glows faintly in the dark.",
     "copy-from": "egg_insect",
     "color": "yellow",
-    "rot_spawn": "GROUP_EGG_FIREFLY",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_FIREFLY", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -282,8 +275,7 @@
     "color": "light_green",
     "proportional": { "weight": 2, "calories": 2, "volume": 2 },
     "vitamins": [ [ "calcium", 14 ], [ "iron", 36 ], [ "mutant_toxin", 50 ] ],
-    "rot_spawn": "GROUP_EGG_CENTIPEDE",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_CENTIPEDE", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -293,8 +285,7 @@
     "copy-from": "egg_insect",
     "color": "white",
     "spoils_in": "2 days",
-    "rot_spawn": "GROUP_EGG_WASP",
-    "rot_spawn_chance": 100
+    "rot_spawn": { "group": "GROUP_EGG_WASP", "chance": 80 }
   },
   {
     "type": "COMESTIBLE",
@@ -305,8 +296,7 @@
     "color": "yellow",
     "proportional": { "weight": 2, "calories": 2, "volume": 2 },
     "vitamins": [ [ "calcium", 14 ], [ "iron", 36 ], [ "mutant_toxin", 50 ] ],
-    "rot_spawn": "GROUP_EGG_ANTLION",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_ANTLION", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -314,8 +304,7 @@
     "name": { "str": "water strider egg" },
     "description": "A large, sticky, and wet water strider egg.  You should probably put it back in the water.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_STRIDER",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_STRIDER", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -324,8 +313,7 @@
     "description": "A long, white, pill-shaped grasshopper egg.  Inside you can see two twitching legs.",
     "copy-from": "egg_insect",
     "color": "light_green",
-    "rot_spawn": "GROUP_EGG_GRASSHOPPER",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_GRASSHOPPER", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -334,8 +322,7 @@
     "description": "A ladybug egg.  It looks like a huge yellow rice grain.  You can see a translucent, hungry larva inside.",
     "copy-from": "egg_insect",
     "color": "light_red",
-    "rot_spawn": "GROUP_EGG_LADY_BUG",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_LADY_BUG", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -344,8 +331,7 @@
     "description": "A mole cricket egg covered in bits of sand and dirt.  It's brown with a few black dots on it.",
     "copy-from": "egg_insect",
     "color": "brown",
-    "rot_spawn": "GROUP_EGG_MOLE_CRICKET",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_MOLE_CRICKET", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -357,8 +343,7 @@
     "spoils_in": "10 days",
     "proportional": { "weight": 5, "calories": 5, "volume": 5 },
     "vitamins": [ [ "calcium", 35 ], [ "iron", 90 ], [ "mutant_toxin", 125 ] ],
-    "rot_spawn": "GROUP_EGG_MANTIS",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_MANTIS", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -366,8 +351,7 @@
     "name": "fly egg",
     "description": "The egg of a fly.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_FLY",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_FLY", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -375,8 +359,7 @@
     "name": "mosquito egg",
     "description": "The egg of a mosquito.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_MOSQUITO",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_MOSQUITO", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -384,8 +367,7 @@
     "name": "cellar spider egg",
     "description": "The egg of a cellar spider.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_CELLAR",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_CELLAR", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -393,8 +375,7 @@
     "name": "jumping spider egg",
     "description": "The egg of a jumping spider.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_JUMPING",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_JUMPING", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -402,8 +383,7 @@
     "name": "trapdoor spider egg",
     "description": "The egg of a trapdoor spider.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_TRAPDOOR",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_TRAPDOOR", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -411,8 +391,7 @@
     "name": "web spider egg",
     "description": "The egg of a web spider.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_WEB",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_WEB", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -420,8 +399,7 @@
     "name": "black widow egg",
     "description": "The egg of a black widow.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_WIDOW",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_WIDOW", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -429,8 +407,7 @@
     "name": "wolf spider egg",
     "description": "The egg of a wolf spider.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SPIDER_WOLF",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SPIDER_WOLF", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -441,8 +418,7 @@
     "spoils_in": "10 days",
     "proportional": { "weight": 5, "calories": 5, "volume": 5 },
     "vitamins": [ [ "calcium", 35 ], [ "iron", 90 ], [ "mutant_toxin", 125 ] ],
-    "rot_spawn": "GROUP_EGG_WORM",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_WORM", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -450,8 +426,7 @@
     "name": "slug egg",
     "description": "The egg of a slug.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SLUG",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SLUG", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -459,8 +434,7 @@
     "name": "snail egg",
     "description": "The egg of a snail.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_SNAIL",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_SNAIL", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -507,308 +481,308 @@
     "id": "egg_brown_trout",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BROWN_TROUT"
+    "rot_spawn": { "group": "GROUP_EGG_BROWN_TROUT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_brook_trout",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BROOK_TROUT"
+    "rot_spawn": { "group": "GROUP_EGG_BROOK_TROUT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_lake_trout",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_LAKE_TROUT"
+    "rot_spawn": { "group": "GROUP_EGG_LAKE_TROUT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_rainbow_trout",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_RAINBOW_TROUT"
+    "rot_spawn": { "group": "GROUP_EGG_RAINBOW_TROUT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_salmon",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_SALMON"
+    "rot_spawn": { "group": "GROUP_EGG_SALMON", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_cod",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_COD"
+    "rot_spawn": { "group": "GROUP_EGG_COD", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_haddock",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_HADDOCK"
+    "rot_spawn": { "group": "GROUP_EGG_HADDOCK", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bluefin_tuna",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BLUEFIN_TUNA"
+    "rot_spawn": { "group": "GROUP_EGG_BLUEFIN_TUNA", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_halibut",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_HALIBUT"
+    "rot_spawn": { "group": "GROUP_EGG_HALIBUT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pollock",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_POLLOCK"
+    "rot_spawn": { "group": "GROUP_EGG_POLLOCK", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_flounder",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_FLOUNDER"
+    "rot_spawn": { "group": "GROUP_EGG_FLOUNDER", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_mackerel",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_MACKEREL"
+    "rot_spawn": { "group": "GROUP_EGG_MACKEREL", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bluefish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BLUEFISH"
+    "rot_spawn": { "group": "GROUP_EGG_BLUEFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_blackfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BLACKFISH"
+    "rot_spawn": { "group": "GROUP_EGG_BLACKFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_porgy",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PORGY"
+    "rot_spawn": { "group": "GROUP_EGG_PORGY", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_kokanee_salmon",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_KOKANEE_SALMON"
+    "rot_spawn": { "group": "GROUP_EGG_KOKANEE_SALMON", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_whitefish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WHITEFISH"
+    "rot_spawn": { "group": "GROUP_EGG_WHITEFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_whitefish_round",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WHITEFISH_ROUND"
+    "rot_spawn": { "group": "GROUP_EGG_WHITEFISH_ROUND", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_lbass",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_LBASS"
+    "rot_spawn": { "group": "GROUP_EGG_LBASS", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_sbass",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_SBASS"
+    "rot_spawn": { "group": "GROUP_EGG_SBASS", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pbass",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PBASS"
+    "rot_spawn": { "group": "GROUP_EGG_PBASS", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_perch",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PERCH"
+    "rot_spawn": { "group": "GROUP_EGG_PERCH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_walleye",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WALLEYE"
+    "rot_spawn": { "group": "GROUP_EGG_WALLEYE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_sunfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_SUNFISH"
+    "rot_spawn": { "group": "GROUP_EGG_SUNFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pumpkinseed",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PUMPKINSEED"
+    "rot_spawn": { "group": "GROUP_EGG_PUMPKINSEED", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bluegill",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BLUEGILL"
+    "rot_spawn": { "group": "GROUP_EGG_BLUEGILL", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_redbreast",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_REDBREAST"
+    "rot_spawn": { "group": "GROUP_EGG_REDBREAST", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_green_sunfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_GREEN_SUNFISH"
+    "rot_spawn": { "group": "GROUP_EGG_GREEN_SUNFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_rock_bass",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_ROCK_BASS"
+    "rot_spawn": { "group": "GROUP_EGG_ROCK_BASS", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_calico_bass",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_CALICO_BASS"
+    "rot_spawn": { "group": "GROUP_EGG_CALICO_BASS", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_warmouth",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WARMOUTH"
+    "rot_spawn": { "group": "GROUP_EGG_WARMOUTH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bullhead",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BULLHEAD"
+    "rot_spawn": { "group": "GROUP_EGG_BULLHEAD", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bullhead_yellow",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BULLHEAD_YELLOW"
+    "rot_spawn": { "group": "GROUP_EGG_BULLHEAD_YELLOW", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_channel_catfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_CHANNEL_CATFISH"
+    "rot_spawn": { "group": "GROUP_EGG_CHANNEL_CATFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_white_catfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WHITE_CATFISH"
+    "rot_spawn": { "group": "GROUP_EGG_WHITE_CATFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pike",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PIKE"
+    "rot_spawn": { "group": "GROUP_EGG_PIKE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pickerel",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PICKEREL"
+    "rot_spawn": { "group": "GROUP_EGG_PICKEREL", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_pickerel_american",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_PICKEREL_AMERICAN"
+    "rot_spawn": { "group": "GROUP_EGG_PICKEREL_AMERICAN", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_muskellunge",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_MUSKELLUNGE"
+    "rot_spawn": { "group": "GROUP_EGG_MUSKELLUNGE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_white_sucker",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_WHITE_SUCKER"
+    "rot_spawn": { "group": "GROUP_EGG_WHITE_SUCKER", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_carp",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_CARP"
+    "rot_spawn": { "group": "GROUP_EGG_CARP", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_grass_carp",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_GRASS_CARP"
+    "rot_spawn": { "group": "GROUP_EGG_GRASS_CARP", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_goldfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_GOLDFISH"
+    "rot_spawn": { "group": "GROUP_EGG_GOLDFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_bowfin",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BOWFIN"
+    "rot_spawn": { "group": "GROUP_EGG_BOWFIN", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
@@ -817,35 +791,35 @@
     "copy-from": "egg_fish",
     "use_action": [ "POISON" ],
     "//": "Gar eggs are poisonous - this is not an oversight. This is also why these are omitted from the cooking requirement group.",
-    "rot_spawn": "GROUP_EGG_GAR_LONGNOSE"
+    "rot_spawn": { "group": "GROUP_EGG_GAR_LONGNOSE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_burbot",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_BURBOT"
+    "rot_spawn": { "group": "GROUP_EGG_BURBOT", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_sturgeon_lake",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_STURGEON_LAKE"
+    "rot_spawn": { "group": "GROUP_EGG_STURGEON_LAKE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_sturgeon_shortnose",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_STURGEON_SHORTNOSE"
+    "rot_spawn": { "group": "GROUP_EGG_STURGEON_SHORTNOSE", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
     "id": "egg_fallfish",
     "name": { "str_sp": "roe" },
     "copy-from": "egg_fish",
-    "rot_spawn": "GROUP_EGG_FALLFISH"
+    "rot_spawn": { "group": "GROUP_EGG_FALLFISH", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
@@ -872,7 +846,7 @@
     "id": "egg_mutant_salmon",
     "name": { "str_sp": "mutant fish roe" },
     "copy-from": "egg_fish_mutant",
-    "rot_spawn": "GROUP_EGG_MUTANT_SALMON"
+    "rot_spawn": { "group": "GROUP_EGG_MUTANT_SALMON", "chance": 10 }
   },
   {
     "type": "COMESTIBLE",
@@ -910,8 +884,7 @@
     "price_postapoc": "25 cent",
     "flags": [  ],
     "fun": -2,
-    "rot_spawn": "GROUP_NULL",
-    "rot_spawn_chance": 0
+    "rot_spawn": { "group": "GROUP_NULL", "chance": 0 }
   },
   {
     "type": "COMESTIBLE",
@@ -928,8 +901,7 @@
     "volume": "125 ml",
     "flags": [ "EATEN_HOT", "FREEZERBURN" ],
     "fun": 3,
-    "rot_spawn": "GROUP_NULL",
-    "rot_spawn_chance": 0,
+    "rot_spawn": { "group": "GROUP_NULL", "chance": 0 },
     "vitamins": [ [ "egg_allergen", 1 ] ]
   },
   {
@@ -954,8 +926,7 @@
     "material": [ "egg" ],
     "fun": 2,
     "flags": [ "FREEZERBURN" ],
-    "rot_spawn": "GROUP_NULL",
-    "rot_spawn_chance": 0,
+    "rot_spawn": { "group": "GROUP_NULL", "chance": 0 },
     "vitamins": [ [ "egg_allergen", 1 ] ]
   },
   {
@@ -1174,7 +1145,7 @@
     "name": "woodpecker egg",
     "spoils_in": "7 days",
     "copy-from": "egg_crow",
-    "rot_spawn": "GROUP_EGG_WOODPECKER"
+    "rot_spawn": { "group": "GROUP_EGG_WOODPECKER", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1182,7 +1153,7 @@
     "name": "coot egg",
     "spoils_in": "12 days",
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_COOT"
+    "rot_spawn": { "group": "GROUP_EGG_COOT", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1190,7 +1161,7 @@
     "name": "cormorant egg",
     "spoils_in": "13 days",
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_CORMORANT"
+    "rot_spawn": { "group": "GROUP_EGG_CORMORANT", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1198,7 +1169,7 @@
     "name": "moorhen egg",
     "spoils_in": "10 days",
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_MOORHEN"
+    "rot_spawn": { "group": "GROUP_EGG_MOORHEN", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1206,7 +1177,7 @@
     "name": "grebe egg",
     "spoils_in": "12 days",
     "copy-from": "egg_chicken",
-    "rot_spawn": "GROUP_EGG_GREBE"
+    "rot_spawn": { "group": "GROUP_EGG_GREBE", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1214,8 +1185,7 @@
     "name": "water beetle egg",
     "description": "The egg of a water beetle, usually found near aquatic grass.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_WATER_BEETLE",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_WATER_BEETLE", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1223,8 +1193,7 @@
     "name": "water scorpion egg",
     "copy-from": "egg_insect",
     "description": "The egg of a water scorpion, usually found near aquatic grass.",
-    "rot_spawn": "GROUP_EGG_WATER_BUG",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_WATER_BUG", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1232,8 +1201,7 @@
     "name": "butterfly egg",
     "description": "The egg of a butterfly.  They are usually found clustered on leaves.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_BUTTERFLY",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_BUTTERFLY", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1241,8 +1209,7 @@
     "name": "moth egg",
     "description": "The egg of a moth.  They are usually found clustered on leaves.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_MOTH",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_MOTH", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1250,8 +1217,7 @@
     "name": "cicada egg",
     "description": "The egg of a cicada.  They are usually found near trees.",
     "copy-from": "egg_insect",
-    "rot_spawn": "GROUP_EGG_CICADA",
-    "rot_spawn_chance": 50
+    "rot_spawn": { "group": "GROUP_EGG_CICADA", "chance": 50 }
   },
   {
     "type": "COMESTIBLE",
@@ -1281,7 +1247,7 @@
     "price_postapoc": "50 cent",
     "fun": -16,
     "vitamins": [ [ "iron", 4 ] ],
-    "rot_spawn": "GROUP_EGG_FROG"
+    "rot_spawn": { "group": "GROUP_EGG_FROG", "chance": 20 }
   },
   {
     "type": "COMESTIBLE",
@@ -1298,6 +1264,6 @@
     "price_postapoc": "1 USD",
     "fun": -30,
     "vitamins": [ [ "iron", 29 ], [ "toxin", 38 ] ],
-    "rot_spawn": "GROUP_EGG_MUTANT_FROG"
+    "rot_spawn": { "group": "GROUP_EGG_MUTANT_FROG", "chance": 20 }
   }
 ]

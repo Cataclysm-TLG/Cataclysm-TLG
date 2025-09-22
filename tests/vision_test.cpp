@@ -785,6 +785,7 @@ TEST_CASE( "vision_moncam_otherz", "[shadowcasting][vision][moncam]" )
 
 TEST_CASE( "vision_vehicle_mirrors", "[shadowcasting][vision][vehicle]" )
 {
+    map &here = get_map();
     clear_vehicles();
     bool const blindfold = GENERATE( true, false );
     vision_test_case t {
@@ -821,9 +822,9 @@ TEST_CASE( "vision_vehicle_mirrors", "[shadowcasting][vision][vehicle]" )
     tile_predicate spawn_veh = [&]( map_test_case::tile tile ) {
         std::optional<units::angle> dir = testcase_veh_dir( {7, 2}, t, tile );
         if( dir ) {
-            vehicle *v = get_map().add_vehicle( vehicle_prototype_meth_lab, tile.p, *dir, 0, 0 );
+            vehicle *v = here.add_vehicle( vehicle_prototype_meth_lab, tile.p, *dir, 0, 0 );
             for( const vpart_reference &vp : v->get_avail_parts( "OPENABLE" ) ) {
-                v->close( vp.part_index() );
+                v->close( here, vp.part_index() );
             }
         }
         return true;
@@ -935,7 +936,7 @@ TEST_CASE( "vision_vehicle_camera_skew", "[shadowcasting][vision][vehicle][vehic
             v->remove_part( *horns.front() );
         }
         if( fiddle > 1 ) {
-            REQUIRE( v->install_part( point_rel_ms::zero, vpart_inboard_mirror ) != -1 );
+            REQUIRE( v->install_part( here, point_rel_ms::zero, vpart_inboard_mirror ) != -1 );
         }
         if( fiddle > 0 ) {
             here.add_vehicle_to_cache( v );
@@ -1123,7 +1124,7 @@ TEST_CASE( "vision_inside_meth_lab", "[shadowcasting][vision][moncam]" )
         }
         // open door at `door` location
         for( const vehicle_part *vp : v->get_parts_at( &here, *door, "OPENABLE", part_status_flag::any ) ) {
-            v -> open( v->index_of_part( vp ) );
+            v -> open( here, v->index_of_part( vp ) );
         }
     };
 
@@ -1147,7 +1148,7 @@ TEST_CASE( "vision_inside_meth_lab", "[shadowcasting][vision][moncam]" )
         if( dir ) {
             v = here.add_vehicle( vehicle_prototype_meth_lab, tile.p, *dir, 0, 0 );
             for( const vpart_reference &vp : v->get_avail_parts( "OPENABLE" ) ) {
-                v -> close( vp.part_index() );
+                v -> close( here, vp.part_index() );
             }
             open_door();
         }
