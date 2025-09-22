@@ -14357,7 +14357,6 @@ bool item::process_wet( Character *carrier, const tripoint_bub_ms & /*pos*/ )
 bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
 {
     // If insufficient available charges, shut down the tool.
-    map &here = get_map();
     if( ( type->tool->turns_per_charge > 0 || type->tool->power_draw > 0_W ) &&
         ammo_remaining( carrier ) == 0 ) {
         if( carrier && has_flag( flag_USE_UPS ) ) {
