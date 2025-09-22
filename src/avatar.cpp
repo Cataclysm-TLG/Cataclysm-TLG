@@ -669,7 +669,8 @@ bool avatar::read( item_location &book, item_location ereader )
         add_msg( m_info, _( "%s read with you for fun." ), them );
     }
 
-    if( !book->has_flag( flag_CAN_USE_IN_DARK ) && std::min( fine_detail_vision_mod(), reader->fine_detail_vision_mod() ) > 1.0 ) {
+    if( !book->has_flag( flag_CAN_USE_IN_DARK ) &&
+        std::min( fine_detail_vision_mod(), reader->fine_detail_vision_mod() ) > 1.0 ) {
         add_msg( m_warning,
                  _( "It's difficult for %s to see fine details right now.  Reading will take longer than usual." ),
                  reader->disp_name() );

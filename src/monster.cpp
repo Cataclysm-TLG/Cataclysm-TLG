@@ -3369,7 +3369,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         if( one_in( 400 ) ) {
             if( one_in( 20 ) ) {
                 sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
-                            "cough" );
+                               "cough" );
             }
             map &here = get_map();
             creature_tracker &creatures = get_creature_tracker();
@@ -3385,7 +3385,7 @@ void monster::process_one_effect( effect &it, bool is_new )
         if( one_in( 300 ) ) {
             if( one_in( 20 ) ) {
                 sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
-                            "cough" );
+                               "cough" );
             }
             map &here = get_map();
             creature_tracker &creatures = get_creature_tracker();
