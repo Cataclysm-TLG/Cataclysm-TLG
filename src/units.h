@@ -380,6 +380,14 @@ inline constexpr value_type to_joule_per_gram( const
 }
 
 template<typename value_type>
+inline constexpr quantity<units::temperature::value_type, temperature_in_kelvin_tag>
+from_millikelvin(
+    const value_type v )
+{
+    return quantity<value_type, temperature_in_kelvin_tag>( v / 1000.0, temperature_in_kelvin_tag{} );
+}
+
+template<typename value_type>
 inline constexpr quantity<units::temperature::value_type, temperature_in_kelvin_tag> from_kelvin(
     const value_type v )
 {
@@ -387,10 +395,25 @@ inline constexpr quantity<units::temperature::value_type, temperature_in_kelvin_
 }
 
 template<typename value_type>
+inline constexpr value_type to_millikelvin( const
+        quantity<value_type, temperature_in_kelvin_tag> &v )
+{
+    return v.value() * 1000;
+}
+
+template<typename value_type>
 inline constexpr value_type to_kelvin( const
                                        quantity<value_type, temperature_in_kelvin_tag> &v )
 {
     return v.value();
+}
+
+template<typename value_type>
+inline constexpr quantity<units::temperature::value_type, temperature_in_kelvin_tag>
+from_millicelsius(
+    const value_type v )
+{
+    return from_kelvin( ( v / 1000.0 ) + 273.150f );
 }
 
 template<typename value_type>
@@ -406,6 +429,13 @@ from_fahrenheit(
     const value_type v )
 {
     return from_kelvin( ( v + 459.67f ) / 1.8f );
+}
+
+template<typename value_type>
+inline constexpr value_type to_millicelsius( const
+        quantity<value_type, temperature_in_kelvin_tag> &v )
+{
+    return ( v - from_kelvin( 273.150f ) ).value() * 1000;
 }
 
 template<typename value_type>
@@ -439,6 +469,15 @@ inline constexpr int to_legacy_bodypart_temp( const
 
 template<typename value_type>
 inline constexpr quantity<units::temperature_delta::value_type, temperature_delta_in_kelvin_tag>
+from_millikelvin_delta(
+    const value_type v )
+{
+    return quantity<value_type, temperature_delta_in_kelvin_tag>( v / 1000.0,
+            temperature_delta_in_kelvin_tag{} );
+}
+
+template<typename value_type>
+inline constexpr quantity<units::temperature_delta::value_type, temperature_delta_in_kelvin_tag>
 from_kelvin_delta(
     const value_type v )
 {
@@ -446,10 +485,25 @@ from_kelvin_delta(
 }
 
 template<typename value_type>
+inline constexpr value_type to_millikelvin_delta( const
+        quantity<value_type, temperature_delta_in_kelvin_tag> &v )
+{
+    return v.value() * 1000;
+}
+
+template<typename value_type>
 inline constexpr value_type to_kelvin_delta( const
         quantity<value_type, temperature_delta_in_kelvin_tag> &v )
 {
     return v.value();
+}
+
+template<typename value_type>
+inline constexpr quantity<units::temperature_delta::value_type, temperature_delta_in_kelvin_tag>
+from_millicelsius_delta(
+    const value_type v )
+{
+    return from_millikelvin_delta( v );
 }
 
 template<typename value_type>
@@ -466,6 +520,13 @@ from_fahrenheit_delta(
     const value_type v )
 {
     return from_kelvin_delta( v / 1.8f );
+}
+
+template<typename value_type>
+inline constexpr value_type to_millicelsius_delta( const
+        quantity<value_type, temperature_delta_in_kelvin_tag> &v )
+{
+    return v.value() * 1000;
 }
 
 template<typename value_type>
@@ -874,9 +935,19 @@ inline constexpr units::temperature operator""_C( const unsigned long long v )
     return units::from_celsius( v );
 }
 
+inline constexpr units::temperature_delta operator""_K_delta( const unsigned long long v )
+{
+    return units::from_kelvin_delta( v );
+}
+
 inline constexpr units::temperature_delta operator""_C_delta( const unsigned long long v )
 {
     return units::from_celsius_delta( v );
+}
+
+inline constexpr units::temperature operator""_mK( const long double v )
+{
+    return units::from_millikelvin( v );
 }
 
 inline constexpr units::quantity<double, units::temperature_in_kelvin_tag> operator""_K(
@@ -885,14 +956,29 @@ inline constexpr units::quantity<double, units::temperature_in_kelvin_tag> opera
     return units::from_kelvin( v );
 }
 
+inline constexpr units::temperature operator""_mC( const long double v )
+{
+    return units::from_millicelsius( v );
+}
+
 inline constexpr units::temperature operator""_C( const long double v )
 {
     return units::from_celsius( v );
 }
 
+inline constexpr units::temperature_delta operator""_mC_delta( const long double v )
+{
+    return units::from_millicelsius_delta( v );
+}
+
 inline constexpr units::temperature_delta operator""_C_delta( const long double v )
 {
     return units::from_celsius_delta( v );
+}
+
+inline constexpr units::temperature_delta operator""_mK_delta( const long double v )
+{
+    return units::from_millikelvin_delta( v );
 }
 
 inline constexpr units::energy operator""_mJ( const unsigned long long v )
@@ -1156,8 +1242,15 @@ const std::vector<std::pair<std::string, angle>> angle_units = { {
         { "rad", 1_radians },
     }
 };
+// AFAIK unused, and it's probably not wise to use them...
+// If you need to serialize/deserialize, because of the offset, temperature_delta_units is more appropriate.
 const std::vector<std::pair<std::string, temperature>> temperature_units = { {
         { "K", 1_K }
+    }
+};
+const std::vector<std::pair<std::string, temperature_delta>> temperature_delta_units = { {
+        { "mC", 1.0_mC_delta },
+        { "C", 1_C_delta }
     }
 };
 const std::vector<std::pair<std::string, ememory>> ememory_units = { {
