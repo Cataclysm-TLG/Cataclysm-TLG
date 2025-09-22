@@ -8627,7 +8627,6 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
             if( veh->part_count() > 0 ) {
                 // Always fix submap coordinates for easier Z-level-related operations
                 veh->sm_pos = { grid, z};
-                iter++;
                 if( main_inbounds ) {
                     _main_requires_cleanup = true;
                 }
