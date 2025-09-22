@@ -1351,13 +1351,14 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
         // Important that this loop excludes fake parts, because those can be
         // outside map bounds
         for( const vpart_reference &vp : vehicle.v->get_all_parts() ) {
-            tripoint_bub_ms t = vp.pos_bub();
+            map &here = get_map();
+            tripoint_bub_ms t = vp.pos_bub( &here );
             if( m.inbounds( t ) ) {
                 points.push_back( t );
             } else {
                 tripoint_abs_omt pos = project_to<coords::omt>( loc );
                 oter_id terrain_type = overmap_buffer.ter( pos );
-                tripoint_bub_ms veh_origin = vehicle.v->pos_bub();
+                tripoint_bub_ms veh_origin = vehicle.v->pos_bub( &here );
                 debugmsg( "burned_ground_parser: Vehicle %s (origin %s; rotation (%f,%f)) has "
                           "out of bounds part at %s in terrain_type %s\n",
                           vehicle.v->name, veh_origin.to_string(),

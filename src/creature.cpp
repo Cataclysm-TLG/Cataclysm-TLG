@@ -298,7 +298,7 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc, bool &cramp
     }
     if( capacity > 0_ml ) {
         // First, we'll try to squeeze in. Open-topped vehicle parts have more room to step over cargo.
-        if( !veh.enclosed_at( here.get_bub( loc ) ) ) {
+        if( !veh.enclosed_at( loc ) ) {
             free_cargo *= 1.2;
         }
         const creature_size size = get_size();
