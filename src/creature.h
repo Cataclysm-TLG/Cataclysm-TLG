@@ -321,6 +321,7 @@ class Creature : public viewer
         virtual void gravity_check( map *here );
         void setpos( const tripoint_bub_ms &p, bool check_gravity = true );
         void setpos( map *here, const tripoint_bub_ms &p, bool check_gravity = true );
+        void setpos( const tripoint_abs_ms &p, bool check_gravity = true );
 
         // Convert size to int. TODO: use this everywhere instead of enuming every time.
         int enum_size() const;

@@ -1505,10 +1505,7 @@ static bool mx_burned_ground( map &m, const tripoint_abs_sm &abs_sub )
     std::vector<tripoint_bub_ms> points;
     for( wrapped_vehicle vehicle : vehs ) {
         vehicles.push_back( vehicle.v );
-        std::set<tripoint_bub_ms> occupied;
-        for( const tripoint_abs_ms &pt : vehicle.v->get_points() ) {
-            occupied.insert( m.get_bub( pt ) );
-        }
+std::set<tripoint_bub_ms> occupied = vehicle.v->get_points();
         for( const tripoint_bub_ms &t : occupied ) {
             points.push_back( t );
         }
