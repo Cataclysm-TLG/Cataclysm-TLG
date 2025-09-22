@@ -2766,7 +2766,7 @@ std::string cast_spell_actor::get_name() const
 
 std::optional<int> cast_spell_actor::use( Character *p, item &it, const tripoint_bub_ms & ) const
 {
-    return cast_spell_actor::use( p, it, &get_map(), pos );
+    return cast_spell_actor::use( p, it, &get_map(), p->pos_bub() );
 }
 
 std::optional<int> cast_spell_actor::use( Character *p, item &it, map * /*here*/,
@@ -2782,6 +2782,13 @@ std::optional<int> cast_spell_actor::use( Character *p, item &it, map * /*here*/
     }
 
     spell casting = spell( spell_id( item_spell ) );
+
+    // Spell is being cast from a non-held item
+    if( p == nullptr ) {
+        // TODO: Pass map when cast_all_effects is map aware.
+        casting.cast_all_effects( *p, pos );
+        return 0;
+    }
 
     player_activity cast_spell( ACT_SPELLCASTING, casting.casting_time( *p ) );
     // [0] this is used as a spell level override for items casting spells
@@ -2954,7 +2961,7 @@ std::optional<int> holster_actor::use( Character *you, item &it, map *here,
 
         // iuse_actor really needs to work with item_location
         item_location item_loc = form_loc( *you, here, p, it );
-        game_menus::inv::insert_items( *you->as_avatar(), item_loc );
+        game_menus::inv::insert_items( get_avatar(), item_loc );
     }
 
     return 0;

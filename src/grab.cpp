@@ -126,7 +126,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         str_req = max_str_req;
         //if vehicle has no wheels str_req make a noise. since it has no wheels assume it has the worst off roading possible (0.1)
         if( str_req <= str ) {
-            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
+            sounds::sound( grabbed_vehicle->pos_bub( &here ), str_req * 2, sounds::sound_t::movement,
                            _( "a scraping noise." ), true, "misc", "scraping" );
         }
     }
