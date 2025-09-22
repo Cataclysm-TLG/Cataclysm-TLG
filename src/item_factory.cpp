@@ -37,6 +37,7 @@
 #include "item.h"
 #include "item_contents.h"
 #include "item_group.h"
+#include "itype.h"
 #include "iuse_actor.h"
 #include "material.h"
 #include "options.h"
@@ -3349,74 +3350,6 @@ void Item_factory::load_ememory_size( const JsonObject &jo, itype &def )
  */
 class vitamins_reader : public generic_typed_reader<vitamins_reader>
 {
-<<<<<<< HEAD
-    bool strict = src == "tlg";
-
-    JsonObject relative = jo.get_object( "relative" );
-    JsonObject proportional = jo.get_object( "proportional" );
-    relative.allow_omitted_members();
-    proportional.allow_omitted_members();
-
-    // !slot.comesttype.empty() for was_loaded - we don't have a proper was_loaded, but
-    // if it's been loaded before, this should have a value. If it's not, we'll catch it later.
-    mandatory( jo, !slot.comesttype.empty(), "comestible_type", slot.comesttype );
-    assign( jo, "tool", slot.tool, strict );
-    assign( jo, "charges", slot.def_charges, strict, 1 );
-    assign( jo, "quench", slot.quench, strict );
-    assign( jo, "fun", slot.fun, strict );
-    assign( jo, "stim", slot.stim, strict );
-    assign( jo, "fatigue_mod", slot.fatigue_mod, strict );
-    assign( jo, "healthy", slot.healthy, strict );
-    assign( jo, "parasites", slot.parasites, strict, 0 );
-    assign( jo, "freezing_point", slot.freeze_point, strict );
-    assign( jo, "spoils_in", slot.spoils, strict, 1_hours );
-    assign( jo, "cooks_like", slot.cooks_like, strict );
-    assign( jo, "smoking_result", slot.smoking_result, strict );
-    assign( jo, "petfood", slot.petfood, strict );
-
-    for( const JsonObject jsobj : jo.get_array( "contamination" ) ) {
-        slot.contamination.emplace( diseasetype_id( jsobj.get_string( "disease" ) ),
-                                    static_cast<float>( jsobj.get_float( "probability" ) ) );
-    }
-
-    if( jo.has_member( "primary_material" ) ) {
-        material_id mat( jo.get_string( "primary_material" ) );
-        // Overwrite the materials (set by copy-from)
-        slot.materials.clear();
-        slot.materials.emplace( mat, 1 );
-    } else if( jo.has_member( "material" ) ) {
-        // Overwrite the materials (set by copy-from)
-        slot.materials.clear();
-
-        if( jo.has_array( "material" ) && jo.get_array( "material" ).test_object() ) {
-            for( JsonObject m : jo.get_array( "material" ) ) {
-                const material_id mat_id( m.get_string( "type" ) );
-                int portion = m.get_int( "portion", 1 );
-                slot.materials.emplace( mat_id, portion );
-            }
-        } else {
-            for( const std::string &m : jo.get_tags( "material" ) ) {
-                slot.materials.emplace( m, 1 );
-            }
-        }
-    }
-
-    assign( jo, "monotony_penalty", slot.monotony_penalty, strict );
-    assign( jo, "addiction_potential", slot.default_addict_potential, strict );
-    if( jo.has_member( "addiction_type" ) ) {
-        slot.addictions.clear();
-        if( jo.has_string( "addiction_type" ) ) {
-            slot.addictions.emplace( addiction_id( jo.get_string( "addiction_type" ) ),
-                                     slot.default_addict_potential );
-        } else { //"addiction_type" is an array
-            for( JsonValue jval : jo.get_array( "addiction_type" ) ) {
-                if( jval.test_string() ) {
-                    slot.addictions.emplace( addiction_id( jval.get_string() ), slot.default_addict_potential );
-                } else { //nested object with addiction + potential
-                    JsonObject jobj = jval.get_object();
-                    slot.addictions.emplace( addiction_id( jobj.get_string( "addiction" ) ),
-                                             jobj.get_int( "potential" ) );
-=======
     public:
         std::pair<vitamin_id, std::variant<int, vitamin_units::mass>> get_next(
         const JsonValue &val ) const {
@@ -3432,7 +3365,6 @@ class vitamins_reader : public generic_typed_reader<vitamins_reader>
                     }
                 } else {
                     arr.throw_error( "vitamins reader read array without exactly two entries" );
->>>>>>> condense islot_comestible
                 }
             }
             val.throw_error( "vitamins reader read non-array" );
@@ -3450,7 +3382,7 @@ void islot_comestible::load( const JsonObject &jo )
     optional( jo, was_loaded, "quench", quench );
     optional( jo, was_loaded, "fun", fun );
     optional( jo, was_loaded, "stim", stim );
-    optional( jo, was_loaded, "sleepiness_mod", sleepiness_mod );
+    optional( jo, was_loaded, "fatigue_mod", fatigue_mod );
     optional( jo, was_loaded, "healthy", healthy );
     optional( jo, was_loaded, "parasites", parasites );
     optional( jo, was_loaded, "freezing_point", freeze_point );
