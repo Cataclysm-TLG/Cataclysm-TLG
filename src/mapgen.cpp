@@ -215,14 +215,184 @@ static constexpr int MON_RADIUS = 3;
 static void science_room( map *m, const point_bub_ms &p1, const point_bub_ms &p2, int z,
                           int rotate );
 
-static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
+enum class blood_trail_direction : int {
+    first = 1,
+    NORTH = 1,
+    SOUTH = 2,
+    EAST = 3,
+    WEST = 4,
+    last = 4
+};
+
+static tripoint_bub_ms get_point_from_direction( int direction,
+        const tripoint_bub_ms &current_tile )
 {
-    if( p.z() < 0 ) {
-        // for the moment make sure we don't apply this to labs or other places
-        debugmsg( "Riot damage mapgen generator called on underground structure.  This is likely a bug." );
+    switch( static_cast<blood_trail_direction>( direction ) ) {
+        case blood_trail_direction::NORTH:
+            return tripoint_bub_ms( current_tile.x(), current_tile.y() - 1, current_tile.z() );
+        case blood_trail_direction::SOUTH:
+            return tripoint_bub_ms( current_tile.x(), current_tile.y() + 1, current_tile.z() );
+        case blood_trail_direction::WEST:
+            return tripoint_bub_ms( current_tile.x() - 1, current_tile.y(), current_tile.z() );
+        case blood_trail_direction::EAST:
+            return tripoint_bub_ms( current_tile.x() + 1, current_tile.y(), current_tile.z() );
+    }
+    // This shouldn't happen unless the function is used incorrectly
+    debugmsg( "Attempted to get point from invalid direction.  %d", direction );
+    return current_tile;
+}
+
+static bool tile_can_have_blood( map &md, const tripoint_bub_ms &current_tile,
+                                 bool wall_streak, int days_since_fall_of_civ )
+{
+    // Wall streaks stick to walls, like blood was splattered against the surface
+    // Floor streaks avoid obstacles to look more like a person left the streak behind (Not walking through walls, closed doors, windows, or furniture)
+    if( wall_streak ) {
+        return md.has_flag_ter( ter_furn_flag::TFLAG_WALL, current_tile ) &&
+               !md.has_flag_ter( ter_furn_flag::TFLAG_NATURAL_UNDERGROUND, current_tile );
+    } else {
+        if( !md.has_flag_ter( ter_furn_flag::TFLAG_INDOORS, current_tile ) &&
+            x_in_y( days_since_fall_of_civ, 30 ) ) {
+            // Placement of blood outdoors scales down over the course of 30 days until no further blood is placed.
+            return false;
+        }
+
+        return !md.has_flag_ter( ter_furn_flag::TFLAG_WALL, current_tile ) &&
+               !md.has_flag_ter( ter_furn_flag::TFLAG_WINDOW, current_tile ) &&
+               !md.has_flag_ter( ter_furn_flag::TFLAG_DOOR, current_tile ) &&
+               !md.has_furn( current_tile );
+    }
+
+}
+
+static void place_blood_on_adjacent( map &md, const tripoint_bub_ms &current_tile, int chance,
+                                     int days_since_catacylsm )
+{
+    for( int i = static_cast<int>( blood_trail_direction::first );
+         i <= static_cast<int>( blood_trail_direction::last ); i++ ) {
+        tripoint_bub_ms adjacent_tile = get_point_from_direction( i, current_tile );
+
+        if( !tile_can_have_blood( md, adjacent_tile, false, days_since_catacylsm ) ) {
+            continue;
+        }
+        if( rng( 1, 100 ) < chance ) {
+            md.add_field( adjacent_tile, field_fd_blood );
+        }
+    }
+}
+
+static void place_blood_streaks( map &md, const tripoint_bub_ms &current_tile,
+                                 int days_since_fall_of_civ )
+{
+    int streak_length = rng( 3, 12 );
+    int streak_direction = rng( static_cast<int>( blood_trail_direction::first ),
+                                static_cast<int>( blood_trail_direction::last ) );
+
+    bool wall_streak = md.has_flag_ter_or_furn( ter_furn_flag::TFLAG_WALL, current_tile );
+
+    if( !tile_can_have_blood( md, current_tile, wall_streak, days_since_fall_of_civ ) ) {
+        // Quick check the tile is valid.
         return;
     }
+
+    md.add_field( current_tile, field_fd_blood );
+    tripoint_bub_ms last_tile = current_tile;
+
+    for( int i = 0; i < streak_length; i++ ) {
+        tripoint_bub_ms destination_tile = get_point_from_direction( streak_direction, last_tile );
+
+        if( !tile_can_have_blood( md, destination_tile, wall_streak, days_since_fall_of_civ ) ) {
+            // We hit a non-valid tile. Try to find a new direction otherwise just terminate the streak.
+            bool terminate_streak = true;
+
+            for( int ii = static_cast<int>( blood_trail_direction::first );
+                 ii <= static_cast<int>( blood_trail_direction::last );
+                 ii++ ) {
+                if( ii == streak_direction ) {
+                    // We don't want to check the direction we came from. No turning around!
+                    continue;
+                }
+                tripoint_bub_ms adjacent_tile = get_point_from_direction( ii, last_tile );
+
+                if( tile_can_have_blood( md, adjacent_tile, wall_streak, days_since_fall_of_civ ) ) {
+                    streak_direction = ii;
+                    destination_tile = adjacent_tile;
+                    terminate_streak = false;
+                    break;
+                }
+            }
+
+            if( terminate_streak ) {
+                break;
+            }
+        }
+
+        if( rng( 1, 100 ) < 5 + i * 3 ) {
+            // Sometimes a streak should skip a tile, the chance increases with each step
+            last_tile = destination_tile;
+            continue;
+        }
+
+        if( rng( 1, 100 ) < 10 + i * 5 ) {
+            // Sometimes a streak should end early, the chance increases with each step.
+            // This is just a hack to further weight the distribution in favor of short streaks over long ones.
+            break;
+        }
+
+        md.add_field( destination_tile, field_fd_blood );
+        last_tile = destination_tile;
+
+
+        if( ( rng( 1, 100 ) < 30 + i * 3 ) && !wall_streak ) {
+            // Floor streaks can meander and the probability of meandering increases with each step
+            // Long straight streaks aren't visually interesting. So sometimes a streak will curve by meandering to the side.
+            int new_direction = 0;
+            if( streak_direction == static_cast<int>( blood_trail_direction::NORTH ) ||
+                streak_direction == static_cast<int>( blood_trail_direction::SOUTH ) ) {
+                new_direction = one_in( 2 ) ? static_cast<int>( blood_trail_direction::EAST ) : static_cast<int>(
+                                    blood_trail_direction::WEST );
+            } else {
+                new_direction = one_in( 2 ) ? static_cast<int>( blood_trail_direction::NORTH ) : static_cast<int>(
+                                    blood_trail_direction::SOUTH );
+            }
+
+            tripoint_bub_ms adjacent_tile = get_point_from_direction( new_direction, last_tile );
+            if( tile_can_have_blood( md, adjacent_tile, wall_streak, days_since_fall_of_civ ) ) {
+                md.add_field( adjacent_tile, field_fd_blood );
+                last_tile = adjacent_tile;
+            }
+        }
+    }
+}
+
+static void place_bool_pools( map &md, const tripoint_bub_ms &current_tile,
+                              int days_since_fall_of_civ )
+{
+    if( !tile_can_have_blood( md, current_tile, false, days_since_fall_of_civ ) ) {
+        // Quick check the first tile is valid for placement
+        return;
+    }
+
+    md.add_field( current_tile, field_fd_blood );
+    place_blood_on_adjacent( md, current_tile, 60, days_since_fall_of_civ );
+
+    for( int i = static_cast<int>( blood_trail_direction::first );
+         i <= static_cast<int>( blood_trail_direction::last ); i++ ) {
+        tripoint_bub_ms adjacent_tile = get_point_from_direction( i, current_tile );
+        if( !tile_can_have_blood( md, adjacent_tile, false, days_since_fall_of_civ ) ) {
+            continue;
+        }
+        place_blood_on_adjacent( md, adjacent_tile, 30, days_since_fall_of_civ );
+    }
+}
+
+static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
+{
     std::list<tripoint_bub_ms> all_points_in_map;
+
+
+    int days_since_fall_of_civ = to_days<int>( calendar::turn - calendar::fall_of_civilization );
+
     // Placeholder / FIXME
     // This assumes that we're only dealing with regular 24x24 OMTs. That is likely not the case.
     for( int i = 0; i < SEEX * 2; i++ ) {
@@ -234,8 +404,13 @@ static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
     for( size_t i = 0; i < all_points_in_map.size(); i++ ) {
         // Pick a tile at random!
         tripoint_bub_ms current_tile = random_entry( all_points_in_map );
+
         // Do nothing at random!;
         if( x_in_y( 10, 100 ) ) {
+            continue;
+        }
+        // Skip naturally occuring underground wall tiles
+        if( md.has_flag_ter( ter_furn_flag::TFLAG_NATURAL_UNDERGROUND, current_tile ) ) {
             continue;
         }
         // Bash stuff at random!
@@ -270,11 +445,33 @@ static void GENERATOR_riot_damage( map &md, const tripoint_abs_omt &p )
             }
         }
         // Set some fields at random!
-        if( x_in_y( 3, 100 ) ) {
-            md.add_field( current_tile, field_fd_blood );
+        if( x_in_y( 15, 1000 ) ) {
+            int behavior_roll = rng( 1, 100 );
+
+            if( behavior_roll <= 20 ) {
+                if( tile_can_have_blood( md, current_tile, md.has_flag_ter( ter_furn_flag::TFLAG_WALL,
+                                         current_tile ), days_since_fall_of_civ ) ) {
+                    md.add_field( current_tile, field_fd_blood );
+                }
+            } else if( behavior_roll <= 60 ) {
+                place_blood_streaks( md, current_tile, days_since_fall_of_civ );
+            } else {
+                place_bool_pools( md, current_tile, days_since_fall_of_civ );
+            }
         }
-        if( x_in_y( 1, 2000 ) ) {
-            md.add_field( current_tile, field_fd_fire );
+
+        // Randomly spawn fires, with the chance decreasing from 1 in 2000 to 1 in 10,000 over the
+        // course of 14 days
+        if( x_in_y( 1,  std::min( 2000 + 571 * days_since_fall_of_civ, 10000 ) ) ) {
+            if( md.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FLAMMABLE, current_tile ) ||
+                md.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FLAMMABLE_ASH, current_tile ) ||
+                md.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FLAMMABLE_HARD, current_tile ) ||
+                days_since_fall_of_civ < 3 ) {
+                // Only place fire on flammable surfaces unless the cataclysm started very recently
+                // Note that most floors are FLAMMABLE_HARD, this is fine. This check is primarily geared
+                // at preventing fire in the middle of roads or parking lots.
+                md.add_field( current_tile, field_fd_fire );
+            }
         }
     }
 }
@@ -448,9 +645,14 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
         }
 
         // Apply post-process generators
-        if( ( any_missing || !save_results ) && overmap_buffer.ter( {p.x(), p.y(), gridz} )->has_flag(
-                oter_flags::pp_generate_riot_damage ) ) {
-            GENERATOR_riot_damage( *this, { p.x(), p.y(), gridz } );
+        const tripoint_abs_omt omt_point = { p.x(), p.y(), gridz };
+        oter_id omt = overmap_buffer.ter( omt_point );
+        if( any_missing || !save_results ) {
+            if( omt->has_flag(
+                    oter_flags::pp_generate_riot_damage ) || ( omt->has_flag( oter_flags::road ) &&
+                            overmap_buffer.is_in_city( omt_point ) ) ) {
+                GENERATOR_riot_damage( *this, omt_point );
+            }
         }
     }
 
@@ -6827,7 +7029,7 @@ std::vector<item *> map::place_items(
                 !e->magazine_current() ) {
                 e->put_in( item( e->magazine_default(), e->birthday() ), pocket_type::MAGAZINE_WELL );
             }
-            if( rng( 0, 99 ) < ammo && e->ammo_default() && e->ammo_remaining( *this ) == 0 ) {
+            if( rng( 0, 99 ) < ammo && e->ammo_default() && e->ammo_remaining( ) == 0 ) {
                 e->ammo_set( e->ammo_default() );
             }
         }

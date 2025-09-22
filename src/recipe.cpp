@@ -21,7 +21,6 @@
 #include "effect_on_condition.h"
 #include "flag.h"
 #include "flexbuffer_json.h"
-#include "game.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "inventory.h"
@@ -29,7 +28,6 @@
 #include "item_group.h"
 #include "itype.h"
 #include "json.h"
-#include "map.h"
 #include "mapgen.h"
 #include "mapgen_functions.h"
 #include "npc.h"
@@ -1266,8 +1264,6 @@ bool recipe::will_be_blacklisted() const
 std::function<bool( const item & )> recipe::get_component_filter(
     const recipe_filter_flags flags ) const
 {
-    map &here = get_map();
-
     const item result( result_ );
 
     // Disallow crafting of non-perishables with rotten components
@@ -1307,12 +1303,12 @@ std::function<bool( const item & )> recipe::get_component_filter(
     // This is primarily used to require a fully charged battery, but works for any magazine.
     std::function<bool( const item & )> magazine_filter = return_true<item>;
     if( has_flag( "NEED_FULL_MAGAZINE" ) ) {
-        magazine_filter = [&here]( const item & component ) {
-            if( component.ammo_remaining( here ) == 0 ) {
+        magazine_filter = []( const item & component ) {
+            if( component.ammo_remaining( ) == 0 ) {
                 return false;
             }
             return !component.is_magazine() ||
-                   ( component.ammo_remaining( here ) >= component.ammo_capacity(
+                   ( component.ammo_remaining( ) >= component.ammo_capacity(
                          component.ammo_data()->ammo->type ) );
         };
     }

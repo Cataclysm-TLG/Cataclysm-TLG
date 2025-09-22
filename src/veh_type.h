@@ -26,8 +26,7 @@
 #include "units.h"
 
 class JsonObject;
-class Character;
-class map;
+class JsonOut;
 class vehicle;
 
 template <typename T> class generic_factory;
@@ -511,7 +510,7 @@ struct vehicle_prototype {
         shared_ptr_fast<vehicle> blueprint;
 
         void load( const JsonObject &jo, std::string_view src );
-        static void save_vehicle_as_prototype( const map &here, const vehicle &veh, JsonOut &json );
+        static void save_vehicle_as_prototype( const vehicle &veh, JsonOut &json );
     private:
         bool was_loaded = false; // used by generic_factory
         std::vector<std::pair<vproto_id, mod_id>> src;
