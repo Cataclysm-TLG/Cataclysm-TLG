@@ -2967,7 +2967,7 @@ void monster::die( map *here, Creature *nkiller )
     }
     if( has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         // Need to filter out which limb we were grabbing before death
-        for( const tripoint_bub_ms &player_pos : here->points_in_radius( pos_bub( here ), 1,
+        for( const tripoint_bub_ms &player_pos : here->points_in_radius( here->get_bub( pos_abs() ), 1,
                 0 ) ) {
             Creature *you = creatures.creature_at( here->get_abs( player_pos ) );
             if( !you || !you->has_effect_with_flag( json_flag_GRAB ) ) {
@@ -3104,14 +3104,14 @@ void monster::die( map *here, Creature *nkiller )
             if( corpse ) {
                 corpse->force_insert_item( it, pocket_type::CONTAINER );
             } else {
-                here->add_item_or_charges( pos_bub( here ), it );
+                here->add_item_or_charges( here->get_bub( pos_abs() ), it );
             }
         }
         for( const item &it : dissectable_inv ) {
             if( corpse ) {
                 corpse->put_in( it, pocket_type::CORPSE );
             } else {
-                here->add_item( pos_bub( here ), it );
+                here->add_item( here->get_bub( pos_abs() ), it );
             }
         }
     }
@@ -3233,7 +3233,7 @@ void monster::drop_items_on_death( map *here, item *corpse )
     // for non corpses this is much simpler
     if( !corpse ) {
         for( item &it : new_items ) {
-            here->add_item_or_charges( pos_bub( here ), it );
+            here->add_item_or_charges( here->get_bub( pos_abs() ), it );
         }
         return;
     }
@@ -3366,25 +3366,35 @@ void monster::process_one_effect( effect &it, bool is_new )
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), 1 );
         }
     } else if( id == effect_fake_common_cold ) {
-        if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
-                           "cough" );
-        }
-
-        avatar &you = get_avatar(); // No NPCs for now.
-        if( rl_dist( pos_bub(), you.pos_bub() ) <= 1 ) {
-            you.get_sick( false );
+        if( one_in( 400 ) ) {
+            if( one_in( 20 ) ) {
+                sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
+                            "cough" );
+            }
+            map &here = get_map();
+            creature_tracker &creatures = get_creature_tracker();
+            for( const tripoint_bub_ms &p : here.points_in_radius( pos_bub(), 4 ) ) {
+                Character *guy = creatures.creature_at<Character>( p );
+                if( guy && here.clear_path( pos_bub(), guy->pos_bub(), 4, 1, 100 ) ) {
+                    guy->get_sick( false );
+                }
+            }
         }
     } else if( id == effect_fake_flu ) {
-        // Need to define the two separately because it's theoretically (and realistically) possible to have both flu and cold at once, both for players and monsters.
-        if( calendar::once_every( time_duration::from_seconds( rng( 30, 3000 ) ) ) && one_in( 4 ) ) {
-            sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
-                           "cough" );
-        }
-
-        avatar &you = get_avatar(); // No NPCs for now.
-        if( rl_dist( pos_bub(), you.pos_bub() ) <= 1 ) {
-            you.get_sick( true );
+        // Need to define the two separately because it's possible to have both flu and cold at once, both for players and monsters.
+        if( one_in( 300 ) ) {
+            if( one_in( 20 ) ) {
+                sounds::sound( pos_bub(), 4, sounds::sound_t::speech, _( "a hacking cough." ), false, "misc",
+                            "cough" );
+            }
+            map &here = get_map();
+            creature_tracker &creatures = get_creature_tracker();
+            for( const tripoint_bub_ms &p : here.points_in_radius( pos_bub(), 5 ) ) {
+                Character *guy = creatures.creature_at<Character>( p );
+                if( guy && here.clear_path( pos_bub(), guy->pos_bub(), 5, 1, 100 ) ) {
+                    guy->get_sick( true );
+                }
+            }
         }
     }
 
@@ -3892,7 +3902,7 @@ void monster::on_hit( map *here, Creature *source, bodypart_id,
                 continue;
             }
 
-            if( here->sees( critter.pos_bub( here ), pos_bub( here ), light ) ) {
+            if( here->sees( here->get_bub( critter.pos_abs() ), here->get_bub( pos_abs() ), light ) ) {
                 // Anger trumps fear trumps ennui
                 if( critter.type->has_anger_trigger( mon_trigger::FRIEND_ATTACKED ) ) {
                     critter.anger += 15;

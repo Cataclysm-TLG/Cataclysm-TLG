@@ -198,10 +198,9 @@
     "looks_like": "t_door_c",
     "color": "brown",
     "broken_color": "brown",
-    "damage_modifier": 75,
-    "durability": 160,
+    "durability": 90,
     "size": "0 ml",
-    "item": "frame_wood",
+    "item": "wood_door",
     "requirements": {
       "install": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "using": [ [ "vehicle_nail_install", 1 ] ] },
       "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "15 m", "using": [ [ "vehicle_nail_removal", 1 ] ] },
@@ -210,7 +209,7 @@
     "breaks_into": [ { "item": "splinter", "count": [ 7, 9 ] } ],
     "extend": { "flags": [ "SIMPLE_PART" ] },
     "delete": { "flags": [ "CARGO", "CARGO_PASSABLE" ] },
-    "damage_reduction": { "all": 8 }
+    "damage_reduction": { "all": 4 }
   },
   {
     "type": "vehicle_part",
@@ -221,7 +220,7 @@
     "description": "A door.  Solid construction means you can't see through it when closed.",
     "extend": { "flags": [ "OPAQUE" ] },
     "delete": { "flags": [ "WINDOW" ] },
-    "damage_reduction": { "all": 12 }
+    "damage_reduction": { "all": 5 }
   },
   {
     "type": "vehicle_part",
