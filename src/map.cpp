@@ -8630,11 +8630,9 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
             if( veh->part_count() > 0 ) {
                 // Always fix submap coordinates for easier Z-level-related operations
                 veh->sm_pos = abs_sub.xy() + tripoint_rel_sm{ rebase_rel( grid ), z};
-                iter++;
                 if( main_inbounds ) {
                     _main_requires_cleanup = true;
                 }
-
                 if( update_vehicles ) {
                     level_cache &map_cache = get_cache( z );
                     if( map_cache.vehicle_list.find( veh ) == map_cache.vehicle_list.end() ) {
@@ -8644,7 +8642,6 @@ void map::loadn( const point_bub_sm &grid, bool update_vehicles )
                         }
                     }
                 }
-
                 ++iter;
             } else {
                 if( veh->tracking_on ) {

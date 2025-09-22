@@ -1115,7 +1115,7 @@ units::power vehicle::part_vpower_w( const vehicle_part &vp, const bool at_full_
     if( vpi.has_flag( VPFLAG_ENGINE ) ) {
         if( vpi.has_flag( "WATER_ONLY" ) ) {
             map &here = get_map();
-            if( !here.has_flag_ter( ter_furn_flag::TFLAG_SWIMMABLE, bub_part_pos( vp_index ) ) ) {
+            if( !here.has_flag_ter( ter_furn_flag::TFLAG_SWIMMABLE, bub_part_pos( &here, vp_index ) ) ) {
                 return 0_W;
             }
         }
