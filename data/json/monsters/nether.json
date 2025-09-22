@@ -29,7 +29,7 @@
     "special_attacks": [ { "type": "spell", "spell_data": { "id": "fear_paralyze" }, "monster_message": "" } ],
     "death_function": { "effect": { "id": "death_amigara" } },
     "dissect": "dissect_human_sample_single",
-    "flags": [ "SMELLS", "HEARS", "SEES", "STUMBLES", "HARDTOSHOOT" ],
+    "flags": [ "SMELLS", "HEARS", "SEES", "STUMBLES", "WARM", "HARDTOSHOOT" ],
     "armor": { "electric": 1 }
   },
   {
@@ -624,7 +624,7 @@
     "harvest": "exempt",
     "special_attacks": [ { "id": "tentacle" } ],
     "death_function": { "effect": { "id": "death_thing", "hit_self": true }, "corpse_type": "NO_CORPSE", "message": "The %s emerges!" },
-    "flags": [ "SEES", "SMELLS", "HEARS", "BASHES" ],
+    "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "BASHES" ],
     "armor": { "electric": 1 }
   },
   {
@@ -973,7 +973,7 @@
     "harvest": "mutant_human",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "weakpoint_sets": [ "wps_humanoid_body" ],
-    "flags": [ "SEES", "HEARS", "GOODHEARING", "POISON", "HUMAN", "CLIMBS" ]
+    "flags": [ "SEES", "HEARS", "GOODHEARING", "POISON", "WARM", "HUMAN", "CLIMBS" ]
   },
   {
     "id": "mon_yugg",
@@ -1421,7 +1421,7 @@
     "harvest": "fish_small",
     "looks_like": "mon_fish_brown_trout",
     "fear_triggers": [ "FIRE" ],
-    "flags": [ "HEARS", "WARM", "SWIMS", "AQUATIC", "NO_BREATHE", "WATER_CAMOUFLAGE", "ARTHROPOD_BLOOD", "GOODHEARING", "ANIMAL" ]
+    "flags": [ "HEARS", "SWIMS", "AQUATIC", "NO_BREATHE", "WATER_CAMOUFLAGE", "ARTHROPOD_BLOOD", "GOODHEARING", "ANIMAL" ]
   },
   {
     "id": "mon_nuckalavee",
@@ -1457,6 +1457,7 @@
       "SMELLS",
       "HEARS",
       "HAS_MIND",
+      "WARM",
       "BASHES",
       "GROUP_BASH",
       "SWIMS",
