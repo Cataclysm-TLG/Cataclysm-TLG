@@ -2461,7 +2461,7 @@ class item : public visitable
          * Quantity of shots in the gun. Looks at both ammo and available energy.
          * @param carrier is used for UPS and bionic power
          */
-        int shots_remaining( const Character *carrier ) const;
+        int shots_remaining( const map &here, const Character *carrier ) const;
 
         /**
          * Energy available from battery/UPS/bionics

@@ -996,10 +996,10 @@ int Character::fire_gun( const tripoint_bub_ms &target, int shots )
         debugmsg( "%s doesn't have a gun to fire", get_name() );
         return 0;
     }
-    return fire_gun( &here, target, shots, *gun, item_location() );
+    return fire_gun( here, target, shots, *gun, item_location() );
 }
 
-int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, item &gun,
+int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, item &gun,
                          item_location ammo )
 {
     if( !gun.is_gun() ) {
@@ -1022,7 +1022,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
 
     // cap our maximum burst size by ammo and energy
     if( !gun.has_flag( flag_VEHICLE ) && !ammo ) {
-        shots = std::min( shots, gun.shots_remaining( this ) );
+        shots = std::min( shots, gun.shots_remaining( here, this ) );
     } else if( gun.ammo_required() ) {
         // This checks ammo only. Vehicle turret energy drain is handled elsewhere.
         const int ammo_left = ammo ? ammo.get_item()->count() : gun.ammo_remaining( );
@@ -1035,10 +1035,10 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
     }
 
     // usage of any attached bipod is dependent upon terrain or on being prone
-    bool bipod = here->has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub( here ) ) ||
+    bool bipod = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_MOUNTABLE, pos_bub( here ) ) ||
                  is_prone();
     if( !bipod ) {
-        if( const optional_vpart_position vp = here->veh_at( pos_abs( ) ) ) {
+        if( const optional_vpart_position vp = here.veh_at( pos_abs( ) ) ) {
             bipod = vp->vehicle().has_part( pos_abs( ), "MOUNTABLE" );
         }
     }
@@ -1078,7 +1078,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
         }
 
         // If this is a vehicle mounted turret, which vehicle is it mounted on?
-        const vehicle *in_veh = has_effect( effect_on_roof ) ? veh_pointer_or_null( here->veh_at(
+        const vehicle *in_veh = has_effect( effect_on_roof ) ? veh_pointer_or_null( here.veh_at(
                                     pos_bub( here ) ) ) : nullptr;
 
         // Add gunshot noise
@@ -1101,7 +1101,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
         dispersion.add_range( dispersion_variance() );
 
         dealt_projectile_attack shot;
-        projectile_attack( shot, proj, here, pos_bub( here ), aim, dispersion, this, in_veh, wp_attack );
+        projectile_attack( shot, proj, &here, pos_bub( here ), aim, dispersion, this, in_veh, wp_attack );
         if( !shot.targets_hit.empty() ) {
             hits++;
         }
@@ -1156,7 +1156,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
         }
 
         const int required = gun.ammo_required();
-        if( gun.ammo_consume( required, here, pos_bub( here ), this ) != required ) {
+        if( gun.ammo_consume( required, &here, pos_bub( here ), this ) != required ) {
             debugmsg( "Unexpected shortage of ammo whilst firing %s", gun.tname() );
             break;
         }
@@ -1164,7 +1164,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
         // Vehicle turrets drain vehicle battery and do not care about this
         if( !gun.has_flag( flag_VEHICLE ) ) {
             const units::energy energ_req = gun.get_gun_energy_drain();
-            const units::energy drained = gun.energy_consume( energ_req, here, pos_bub( here ), this );
+            const units::energy drained = gun.energy_consume( energ_req, &here, pos_bub( here ), this );
             if( drained < energ_req ) {
                 debugmsg( "Unexpected shortage of energy whilst firing %s. Required: %i J, drained: %i J",
                           gun.tname(), units::to_joule( energ_req ), units::to_joule( drained ) );
@@ -1173,7 +1173,7 @@ int Character::fire_gun( map *here, const tripoint_bub_ms &target, int shots, it
         }
 
         if( !current_ammo.is_null() ) {
-            cycle_action( gun, current_ammo, here, pos_bub( here ) );
+            cycle_action( gun, current_ammo, &here, pos_bub( here ) );
         }
 
         if( gun_skill == skill_launcher ) {
@@ -1276,6 +1276,8 @@ static double calculate_aim_cap_without_target( const Character &you,
 // Handle capping aim level when the player cannot see the target tile or there is nothing to aim at.
 double calculate_aim_cap( const Character &you, const tripoint_bub_ms &target )
 {
+    const map &here = get_map();
+
     const Creature *victim = get_creature_tracker().creature_at( target, true );
     // nothing here, nothing to aim
     if( victim == nullptr ) {
@@ -1286,7 +1288,7 @@ double calculate_aim_cap( const Character &you, const tripoint_bub_ms &target )
     enchant_cache::special_vision sees_with_special = you.enchantment_cache->get_vision( d );
 
     // you do not see it, but your sense it in other ways
-    if( !you.sees( *victim ) && !sees_with_special.is_empty() ) {
+    if( !you.sees( here,  *victim ) && !sees_with_special.is_empty() ) {
         if( sees_with_special.precise ) {
             // your senses are precise enough to aim it with no issues
             return 0.0;
@@ -1754,15 +1756,17 @@ static double target_size_in_moa( int range, double size )
 
 Target_attributes::Target_attributes( tripoint_bub_ms src, tripoint_bub_ms target )
 {
+    const map &here = get_map();
+
     Creature *target_critter = get_creature_tracker().creature_at( target );
     Creature *shooter = get_creature_tracker().creature_at( src );
     range = static_cast<int>( std::round( trig_dist_z_adjust( src, target ) ) );
     size = target_critter != nullptr ?
            target_critter->ranged_target_size() :
-           get_map().ranged_target_size( target );
+           here.ranged_target_size( target );
     size_in_moa = target_size_in_moa( range, size ) ;
-    light = get_map().ambient_light_at( target );
-    visible = shooter->sees( target );
+    light = here.ambient_light_at( target );
+    visible = shooter->sees( here, target );
 
 }
 Target_attributes::Target_attributes( int rng, double target_size, float light_target,
@@ -2137,8 +2141,10 @@ static int print_throwforce( const catacurses::window &w, int line_number, float
 // Whether player character knows creature's position and can roughly track it with the aim cursor
 static bool pl_sees( const Creature &cr )
 {
+    const map &here = get_map();
+
     Character &u = get_player_character();
-    return u.sees( cr ) || u.sees_with_specials( cr );
+    return u.sees( here,  cr ) || u.sees_with_specials( cr );
 }
 
 static int print_aim( const target_ui &ui, Character &you, const catacurses::window &w,
@@ -2174,8 +2180,10 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
                             int &text_y, input_context &ctxt, const item &weapon, const tripoint_bub_ms &target_pos,
                             bool is_blind_throw )
 {
+    const map &here = get_map();
+
     Creature *target = get_creature_tracker().creature_at( target_pos, true );
-    if( target != nullptr && !you.sees( *target ) ) {
+    if( target != nullptr && !you.sees( here, *target ) ) {
         target = nullptr;
     }
 
@@ -2202,8 +2210,8 @@ static void draw_throw_aim( const target_ui &ui, const Character &you, const cat
             target_ui::TargetMode::ThrowBlind :
             target_ui::TargetMode::Throw;
     Target_attributes attributes( range, target_size,
-                                  get_map().ambient_light_at( target_pos ),
-                                  you.sees( target_pos ) );
+                                  here.ambient_light_at( target_pos ),
+                                  you.sees( here, target_pos ) );
 
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
             throwing_target_mode, ctxt, weapon, dispersion, confidence_config, attributes, target_pos,
@@ -2217,7 +2225,8 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
                                     int &text_y, input_context &ctxt, const tripoint_bub_ms &target_pos )
 {
     Creature *target = get_creature_tracker().creature_at( target_pos, true );
-    if( target != nullptr && !you.sees( *target ) ) {
+    map &here = get_map();
+    if( target != nullptr && !you.sees( here, *target ) ) {
         target = nullptr;
     }
     item weapon = null_item_reference();
@@ -2242,7 +2251,7 @@ static void draw_throwcreature_aim( const target_ui &ui, const Character &you,
     const target_ui::TargetMode throwing_target_mode = target_ui::TargetMode::ThrowCreature;
     Target_attributes attributes( range, target_size,
                                   get_map().ambient_light_at( tripoint_bub_ms( target_pos ) ),
-                                  you.sees( target_pos ) );
+                                  you.sees( here, target_pos ) );
     const std::vector<aim_type_prediction> aim_chances = calculate_ranged_chances( ui, you,
             throwing_target_mode, ctxt, weapon, dispersion, throwforce_config_critter, attributes, target_pos,
             item_location() );
@@ -3296,6 +3305,8 @@ void target_ui::update_target_list()
 
 tripoint_bub_ms target_ui::choose_initial_target()
 {
+    map &here = get_map();
+
     // Try previously targeted creature
     shared_ptr_fast<Creature> cr = you->last_target.lock();
     if( cr && pl_sees( *cr ) && dist_fn( cr->pos_bub() ) <= range ) {
@@ -3308,11 +3319,10 @@ tripoint_bub_ms target_ui::choose_initial_target()
     }
 
     // Try closest practice target
-    map &here = get_map();
     const std::vector<tripoint_bub_ms> nearby = closest_points_first( src, range );
     const auto target_spot = std::find_if( nearby.begin(), nearby.end(),
     [this, &here]( const tripoint_bub_ms & pt ) {
-        return here.tr_at( pt ).id == tr_practice_target && this->you->sees( pt );
+        return here.tr_at( pt ).id == tr_practice_target && this->you->sees( here, pt );
     } );
     if( target_spot != nearby.end() ) {
         return *target_spot;
@@ -3465,6 +3475,8 @@ bool target_ui::prompt_friendlies_in_lof()
 
 std::vector<weak_ptr_fast<Creature>> target_ui::list_friendlies_in_lof()
 {
+    const map &here = get_map();
+
     std::vector<weak_ptr_fast<Creature>> ret;
     if( mode == TargetMode::Turrets || mode == TargetMode::Spell ) {
         debugmsg( "Not implemented" );
@@ -3474,7 +3486,7 @@ std::vector<weak_ptr_fast<Creature>> target_ui::list_friendlies_in_lof()
     for( const tripoint_bub_ms &p : traj ) {
         if( p != dst && p != src ) {
             Creature *cr = creatures.creature_at( p, true );
-            if( cr && you->sees( *cr ) ) {
+            if( cr && you->sees( here, *cr ) ) {
                 Creature::Attitude a = cr->attitude_to( *this->you );
                 if(
                     ( cr->is_npc() && a != Creature::Attitude::HOSTILE ) ||
@@ -4272,9 +4284,11 @@ void target_ui::panel_spell_info( int &text_y )
 
 void target_ui::panel_target_info( int &text_y, bool fill_with_blank_if_no_target )
 {
+    const map &here = get_map();
+
     int max_lines = 6;
     if( dst_critter ) {
-        if( you->sees( *dst_critter ) ) {
+        if( you->sees( here, *dst_critter ) ) {
             // FIXME: print_info doesn't really care about line limit
             //        and can always occupy up to 4 of them (or even more?).
             //        To make things consistent, we ask it for 2 lines

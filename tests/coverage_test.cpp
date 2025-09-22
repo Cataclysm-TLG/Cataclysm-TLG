@@ -49,6 +49,8 @@ static void check_not_near( const std::string &subject, float actual, const floa
 
 static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk = false )
 {
+    map &here = get_map();
+
     monster zed( mon_manhack, mon_pos );
     standard_npc dude( "TestCharacter", dude_pos, {}, 0, 8, 8, 8, 8 );
     item cloth( clothing_id );
@@ -59,7 +61,7 @@ static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( dude, true );
-        dude.setpos( dude_pos );
+        dude.setpos( here, dude_pos );
         dude.wear_item( cloth, false );
         dude.add_effect( effect_sleep, 1_hours );
         if( zed.melee_attack( dude, 10000.0f ) ) {
@@ -85,6 +87,8 @@ static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk
 
 static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
 {
+    map &here = get_map();
+
     monster zed( mon_manhack, mon_pos );
     standard_npc dude( "TestCharacter", dude_pos, {}, 0, 8, 8, 8, 8 );
     if( infect_risk ) {
@@ -94,7 +98,7 @@ static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( dude, true );
-        dude.setpos( dude_pos );
+        dude.setpos( here, dude_pos );
         dude.wear_item( cloth, false );
         dude.add_effect( effect_sleep, 1_hours );
         if( zed.melee_attack( dude, 10000.0f ) ) {
@@ -120,6 +124,7 @@ static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
 
 static float get_avg_bullet_dmg( const std::string &clothing_id )
 {
+    map &here = get_map();
     clear_map();
     std::unique_ptr<standard_npc> badguy = std::make_unique<standard_npc>( "TestBaddie",
                                            badguy_pos, std::vector<std::string>(), 0, 8, 8, 8, 8 );
@@ -137,13 +142,13 @@ static float get_avg_bullet_dmg( const std::string &clothing_id )
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( *dude, true );
-        dude->setpos( dude_pos );
+        dude->setpos( here, dude_pos );
         dude->wear_item( cloth, false );
         dude->add_effect( effect_sleep, 1_hours );
         dealt_projectile_attack atk;
         projectile_attack( atk, proj, badguy_pos, dude_pos, dispersion_sources(),
                            &*badguy );
-        dude->deal_projectile_attack( &get_map(),  & *badguy, atk, atk.missed_by, false );
+        dude->deal_projectile_attack( &here,  & *badguy, atk, atk.missed_by, false );
         if( atk.missed_by < 1.0 ) {
             num_hits++;
         }
