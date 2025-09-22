@@ -1352,7 +1352,7 @@ static void burned_ground_parser( map &m, const tripoint_abs_sm &loc )
         // outside map bounds
         for( const vpart_reference &vp : vehicle.v->get_all_parts() ) {
             map &here = get_map();
-            tripoint_bub_ms t = vp.pos_bub( &here );
+            tripoint_bub_ms t = vp.pos_bub( here );
             if( m.inbounds( t ) ) {
                 points.push_back( t );
             } else {

@@ -3769,6 +3769,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint_bub_ms &p
 
 std::optional<int> iuse::tazer2( Character *p, item *it, const tripoint_bub_ms &pos )
 {
+    map &here = get_map();
     if( it->ammo_remaining( here, p, true ) >= 20 ) {
         return tazer( p, it, pos );
     } else {
