@@ -1509,8 +1509,7 @@ void Character::modify_morale( item &food, const int nutr )
         }
         add_morale( morale_honey, honey_fun, 100, 4_hours, 3_hours );
     }
-    if( fun.first <= -5 ) {
-        int nausea_chance = fun.first * -1;
+    if( nausea_chance > 5 ) {
         if( has_trait( trait_PICKYEATER ) ) {
             nausea_chance += 5;
         }

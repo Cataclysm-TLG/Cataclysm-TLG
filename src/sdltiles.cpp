@@ -2950,33 +2950,32 @@ static void CheckMessages()
                                 }
                             }
                         }
-
                         if( dx != 0 || dy != 0 ) {
                             // Check for actions that work on nearby tiles
                             //if( can_interact_at( ACTION_OPEN, pos ) ) {
                             // don't bother with open since user can just walk into target
                             //}
-                            if( can_interact_at( ACTION_CLOSE, bub_pos ) ) {
+                            if( can_interact_at( here, ACTION_CLOSE, bub_pos ) ) {
                                 actions.insert( ACTION_CLOSE );
                             }
-                            if( can_interact_at( ACTION_EXAMINE, bub_pos ) ) {
+                            if( can_interact_at( here, ACTION_EXAMINE, bub_pos ) ) {
                                 actions.insert( ACTION_EXAMINE );
                             }
                         } else {
                             // Check for actions that work on own tile only
-                            if( can_interact_at( ACTION_BUTCHER, bub_pos ) ) {
+                            if( can_interact_at( here, ACTION_BUTCHER, bub_pos ) ) {
                                 actions.insert( ACTION_BUTCHER );
                             } else {
                                 actions_remove.insert( ACTION_BUTCHER );
                             }
 
-                            if( can_interact_at( ACTION_MOVE_UP, bub_pos ) ) {
+                            if( can_interact_at( here, ACTION_MOVE_UP, bub_pos ) ) {
                                 actions.insert( ACTION_MOVE_UP );
                             } else {
                                 actions_remove.insert( ACTION_MOVE_UP );
                             }
 
-                            if( can_interact_at( ACTION_MOVE_DOWN, bub_pos ) ) {
+                            if( can_interact_at( here, ACTION_MOVE_DOWN, bub_pos ) ) {
                                 actions.insert( ACTION_MOVE_DOWN );
                             } else {
                                 actions_remove.insert( ACTION_MOVE_DOWN );
@@ -2984,7 +2983,7 @@ static void CheckMessages()
                         }
 
                         // Check for actions that work on nearby tiles and own tile
-                        if( can_interact_at( ACTION_PICKUP, tripoint_bub_ms( pos ) ) ) {
+                        if( can_interact_at( here, ACTION_PICKUP, tripoint_bub_ms( pos ) ) ) {
                             actions.insert( ACTION_PICKUP );
                         }
                     }
