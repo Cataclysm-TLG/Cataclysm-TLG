@@ -82,6 +82,7 @@
       "{": { "item": "trash", "chance": 100, "repeat": [ 0, 5 ] },
       "s": { "item": "public_sink", "chance": 40, "repeat": [ 0, 2 ] },
       "F": { "item": "SUS_fridge_breakroom", "chance": 10 },
+      "T": { "item": "SUS_toilet", "chance": 50 },
       "c": { "item": "office_supplies", "chance": 20, "repeat": [ 1, 4 ] }
     },
     "toilets": { "T": {  } },
@@ -123,6 +124,7 @@
       ":": { "item": "traveler", "chance": 80, "repeat": [ 3, 5 ] },
       "d": { "item": "book_motel", "chance": 100 },
       "Q": { "item": "SUS_fridge_bachelor", "chance": 15 },
+      "T": { "item": "SUS_toilet", "chance": 50 },
       "s": { "item": "public_sink", "chance": 40, "repeat": [ 0, 2 ] }
     },
     "item": { "x": { "item": "television", "chance": 100 } }

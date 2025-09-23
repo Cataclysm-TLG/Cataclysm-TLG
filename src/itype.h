@@ -19,6 +19,7 @@
 #include "damage.h"
 #include "enums.h" // point
 #include "explosion.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "item_pocket.h"
 #include "iuse.h" // use_function
@@ -32,8 +33,7 @@
 #include "value_ptr.h"
 
 class Item_factory;
-class JsonObject;
-class item;
+class Trait_group;
 class map;
 struct tripoint;
 template <typename E> struct enum_traits;
@@ -51,6 +51,7 @@ class gun_modifier_data
         std::set<std::string> flags_;
 
     public:
+        gun_modifier_data() = default;
         gun_modifier_data( const translation &n, const int q, const std::set<std::string> &f ) : name_( n ),
             qty_( q ), flags_( f ) { }
         const translation &name() const {
@@ -66,6 +67,7 @@ class gun_modifier_data
         const std::set<std::string> &flags() const {
             return flags_;
         }
+        void deserialize( const JsonObject &jo );
 };
 
 class gunmod_location
@@ -91,8 +93,8 @@ class gunmod_location
             return _id < rhs._id;
         }
 
-        void deserialize( std::string &&id ) {
-            _id = std::move( id );
+        void deserialize( const JsonValue &jo ) {
+            _id = jo.get_string();
         }
 };
 
@@ -727,6 +729,9 @@ struct itype_variant_data {
 
 // TODO: this shares a lot with the ammo item type, merge into a separate slot type?
 struct islot_gun : common_ranged_data {
+    bool was_loaded = false;
+    void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo );
     /**
      * What skill this gun uses.
      */

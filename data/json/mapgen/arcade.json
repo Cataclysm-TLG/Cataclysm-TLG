@@ -60,6 +60,7 @@
         "x": "f_pinball_machine",
         "l": "f_vending_c"
       },
+      "items": { "%": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "%": {  } },
       "place_items": [
         { "item": "vending_drink", "x": 19, "y": 8, "chance": 75 },

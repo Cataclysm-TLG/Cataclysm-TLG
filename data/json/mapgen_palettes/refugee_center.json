@@ -59,6 +59,7 @@
       "}": "f_rubble",
       "~": "f_shower"
     },
+    "items": { "t": { "item": "SUS_toilet", "chance": 50 } },
     "toilets": { "t": {  } }
   },
   {

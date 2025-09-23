@@ -107,7 +107,7 @@
       "t": { "item": "toilet_paper", "chance": 66, "repeat": [ 1, 3 ] },
       "j": [ { "item": "toothbrush_plain", "chance": 100 }, { "item": "soap", "chance": 75, "charges": [ 1, 10 ] } ]
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "computers": {
       "x": {
         "name": "PolCom OS v1.47 - Supply Room Access",

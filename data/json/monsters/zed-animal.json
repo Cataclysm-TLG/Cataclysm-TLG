@@ -39,18 +39,7 @@
       { "id": "bite_grab_required" }
     ],
     "harvest": "zombie_leather",
-    "flags": [
-      "SEES",
-      "HEARS",
-      "SMELLS",
-      "SWIMS",
-      "AQUATIC",
-      "POISON",
-      "NO_BREATHE",
-      "REVIVES",
-      "FILTHY",
-      "WATER_CAMOUFLAGE"
-    ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "AQUATIC", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "WATER_CAMOUFLAGE" ],
     "armor": { "bash": 6, "cut": 2, "bullet": 2 }
   },
   {
@@ -93,18 +82,7 @@
       { "id": "bite_grab_required" }
     ],
     "harvest": "zombie_leather",
-    "flags": [
-      "SEES",
-      "HEARS",
-      "SMELLS",
-      "SWIMS",
-      "AQUATIC",
-      "POISON",
-      "NO_BREATHE",
-      "REVIVES",
-      "FILTHY",
-      "WATER_CAMOUFLAGE"
-    ],
+    "flags": [ "SEES", "HEARS", "SMELLS", "SWIMS", "AQUATIC", "POISON", "NO_BREATHE", "REVIVES", "FILTHY", "WATER_CAMOUFLAGE" ],
     "armor": { "bash": 8, "cut": 2, "bullet": 2 }
   },
   {
@@ -317,7 +295,9 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "grab_strength": 25,
     "special_attacks": [
-      [ "EAT_FOOD", 20 ], { "type": "bite", "cooldown": 15, "infection_chance": 44 }, [ "BROWSE", 40 ],
+      [ "EAT_FOOD", 20 ],
+      { "type": "bite", "cooldown": 15, "infection_chance": 44 },
+      [ "BROWSE", 40 ],
       {
         "id": "bite_grab",
         "move_cost": 150,
@@ -517,7 +497,8 @@
     "harvest": "zombie_fur",
     "grab_strength": 45,
     "special_attacks": [
-      [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 },
+      [ "scratch", 10 ],
+      { "type": "leap", "cooldown": 5, "max_range": 5 },
       {
         "id": "bite_grab",
         "move_cost": 150,

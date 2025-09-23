@@ -32,7 +32,7 @@
         "........................"
       ],
       "palettes": [ "parametrized_linoleum_palette", "parametrized_carpets_palette", "parametrized_walls_palette" ],
-      "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+      "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "terrain": {
         "o": "t_window",
         "c": "t_door_c",
@@ -62,6 +62,7 @@
         "r": "f_sink",
         "s": "f_locker"
       },
+      "items": { "q": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "q": {  } },
       "place_vehicles": [
         { "vehicle": "car", "x": 9, "y": 2, "chance": 35, "rotation": 270 },

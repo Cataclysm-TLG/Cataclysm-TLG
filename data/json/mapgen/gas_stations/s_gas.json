@@ -128,7 +128,11 @@
       "gaspumps": { "g": { "fuel": "gasoline" }, "d": { "fuel": "diesel" } },
       "place_furniture": [ { "furn": "f_gas_tank", "x": 5, "y": 10 }, { "furn": "f_diesel_tank", "x": 18, "y": 10 } ],
       "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
-      "items": { "l": { "item": "SUS_janitors_closet", "chance": 70 }, "&": { "item": "trash_cart", "chance": 50 } },
+      "items": {
+        "T": { "item": "SUS_toilet", "chance": 50 },
+        "l": { "item": "SUS_janitors_closet", "chance": 70 },
+        "&": { "item": "trash_cart", "chance": 50 }
+      },
       "place_loot": [
         { "group": "cash_register_random", "x": [ 9, 13 ], "y": 18, "chance": 100 },
         { "group": "fridgesnacks", "x": 21, "y": [ 13, 17 ], "chance": 80, "repeat": [ 1, 8 ] },

@@ -57,6 +57,7 @@
         "%": "t_door_c",
         "(": { "param": "linoleum_color", "fallback": "t_linoleum_white" }
       },
+      "items": { "U": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "U": {  } },
       "furniture": {
         "h": "f_chair",
@@ -251,6 +252,7 @@
         "4": "t_gutter_downspout",
         "%": "t_door_c"
       },
+      "items": { "U": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "U": {  } },
       "furniture": {
         "h": "f_chair",

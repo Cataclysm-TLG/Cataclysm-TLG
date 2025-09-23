@@ -4037,8 +4037,8 @@
     "description": "Your tongue can extend halfway to the ground.  It's lined with jagged little teeth, and its spearlike tip can stab with shocking force.",
     "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
-    "prereqs": [ "LONG_TONGUE"],
-    "changes_to": [ "GASTROPOD_EXTREMITY3"],
+    "prereqs": [ "LONG_TONGUE" ],
+    "changes_to": [ "GASTROPOD_EXTREMITY3" ],
     "integrated_armor": [ "integrated_barbed_tongue" ],
     "category": [ "GASTROPOD" ]
   },
@@ -4052,7 +4052,7 @@
     "description": "Your tongue can extend much farther and faster, propelled by incredible hydrostatic pressue.  Activate this mutation to harpoon enemies and drag them into melee range.",
     "social_modifiers": { "lie": -5, "persuade": -5 },
     "types": [ "TONGUE" ],
-    "prereqs": [ "GASTROPOD_EXTREMITY2" ] ,
+    "prereqs": [ "GASTROPOD_EXTREMITY2" ],
     "integrated_armor": [ "integrated_barbed_tongue" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
     "category": [ "GASTROPOD" ],
@@ -6828,7 +6828,15 @@
     "types": [ "METABOLISM" ],
     "changes_to": [ "PERSISTENCE_HUNTER2" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.1 }, { "value": "FATIGUE_REGEN", "multiply": 0.1 }, { "value": "FATIGUE", "multiply": -0.1 } ] } ]
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STAMINA_REGEN_MOD", "add": 0.1 },
+          { "value": "FATIGUE_REGEN", "multiply": 0.1 },
+          { "value": "FATIGUE", "multiply": -0.1 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -6840,7 +6848,15 @@
     "prereqs": [ "PERSISTENCE_HUNTER" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
-    "enchantments": [ { "values": [ { "value": "STAMINA_REGEN_MOD", "add": 0.2 }, { "value": "FATIGUE_REGEN", "multiply": 0.2 }, { "value": "FATIGUE", "multiply": -0.2 } ] } ]
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STAMINA_REGEN_MOD", "add": 0.2 },
+          { "value": "FATIGUE_REGEN", "multiply": 0.2 },
+          { "value": "FATIGUE", "multiply": -0.2 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -8745,7 +8761,7 @@
     "valid": false,
     "purifiable": false
   },
-    {
+  {
     "type": "mutation",
     "id": "MILITARY_BASE_SPAWN",
     "name": { "str": "Active Duty" },
