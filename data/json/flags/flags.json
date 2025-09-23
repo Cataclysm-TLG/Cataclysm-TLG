@@ -2662,5 +2662,20 @@
     "id": "NATURAL_UNDERGROUND",
     "type": "json_flag",
     "//": "Wall tiles with this flag occur naturally underground and are not manmade."
+  },
+  {
+    "id": "BLIND_READ_SLOW",
+    "type": "json_flag",
+    "//": "This character can always read as though visiblity is at least poor."
+  },
+  {
+    "id": "BLIND_READ_FAST",
+    "type": "json_flag",
+    "//": "This character can read as though visibility is perfect."
+  },
+  {
+    "id": "BLIND_CRAFT",
+    "type": "json_flag",
+    "//": "This character can perform most manual labor as though visibility is perfect."
   }
 ]

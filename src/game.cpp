@@ -298,6 +298,9 @@ static const itype_id itype_swim_fins( "swim_fins" );
 static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 
+static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
+static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
+static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
 static const json_character_flag json_flag_CLIMB_NO_LADDER( "CLIMB_NO_LADDER" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_GRAB_FILTER( "GRAB_FILTER" );
@@ -5178,16 +5181,18 @@ void game::use_computer( const tripoint_bub_ms &p )
         add_msg( m_info, _( "You can not read a computer screen!" ) );
         return;
     }
-    if( u.is_blind() ) {
-        // we don't have screen readers in game
-        add_msg( m_info, _( "You can not see a computer screen!" ) );
-        return;
-    }
-    if( u.has_flag( json_flag_HYPEROPIC ) && !u.worn_with_flag( flag_FIX_FARSIGHT ) &&
-        !u.has_effect( effect_contacts ) && !u.has_effect( effect_transition_contacts ) &&
-        !u.has_flag( STATIC( json_character_flag( "ENHANCED_VISION" ) ) ) ) {
-        add_msg( m_info, _( "You'll need to put on reading glasses before you can see the screen." ) );
-        return;
+    if( !u.has_flag( json_flag_BLIND_READ_SLOW ) && !u.has_flag( json_flag_BLIND_READ_FAST ) ) {
+        if( u.is_blind() ) {
+            // we don't have screen readers in game
+            add_msg( m_info, _( "You can not see a computer screen!" ) );
+            return;
+        }
+        if( u.has_flag( json_flag_HYPEROPIC ) && !u.worn_with_flag( flag_FIX_FARSIGHT ) &&
+            !u.has_effect( effect_contacts ) && !u.has_effect( effect_transition_contacts ) &&
+            !u.has_flag( STATIC( json_character_flag( "ENHANCED_VISION" ) ) ) ) {
+            add_msg( m_info, _( "You'll need to put on reading glasses before you can see the screen." ) );
+            return;
+        }
     }
 
     computer *used = m.computer_at( p );
@@ -9690,7 +9695,7 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
         }
         return result.empty() ? "" : ( " " + colorize( result, c_dark_gray ) );
     };
-    const bool enough_light = player_character.fine_detail_vision_mod() <= 4;
+    const bool enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
 
     const int factor = player_character.max_quality( qual_BUTCHER, PICKUP_RANGE );
     const std::string msgFactor = factor > INT_MIN

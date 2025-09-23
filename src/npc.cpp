@@ -117,6 +117,8 @@ static const item_group_id Item_spawn_data_survivor_bashing( "survivor_bashing" 
 static const item_group_id Item_spawn_data_survivor_cutting( "survivor_cutting" );
 static const item_group_id Item_spawn_data_survivor_stabbing( "survivor_stabbing" );
 
+static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
+static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
 static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
 static const json_character_flag json_flag_PSYCHOPATH( "PSYCHOPATH" );
 static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
@@ -1361,7 +1363,16 @@ time_duration npc::time_to_read( const item &book, const Character &reader ) con
     int reading_speed = try_understand ? std::max( reader.read_speed(), read_speed() ) : read_speed();
 
     time_duration retval = type->time * reading_speed / 100;
-    retval *= std::min( fine_detail_vision_mod(), reader.fine_detail_vision_mod() );
+    float reading_vision = reader.fine_detail_vision_mod();
+    // BLIND_READ flags are for things like ESP where the reader is not using their eyes to see.
+    if( reader.has_flag( json_flag_BLIND_READ_SLOW ) ) {
+        reading_vision = std::min( reading_vision, 3.0f );
+    }
+    if( reader.has_flag( json_flag_BLIND_READ_FAST ) ) {
+        reading_vision = std::min( reading_vision, 1.0f );
+    }
+    retval *= std::min( fine_detail_vision_mod(), reading_vision );
+    
 
     if( type->intel > reader.get_int() && !reader.has_trait( trait_PROF_DICEMASTER ) ) {
         retval += type->time * ( time_duration::from_seconds( type->intel - reader.get_int() ) /
