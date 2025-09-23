@@ -2617,12 +2617,12 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_READ:
-            // Shell-users are presumed to have the book just at an opening and read it that way
+            // Mutants in shells are presumed to hold the book near the opening.
             read();
             break;
 
         case ACTION_WIELD:
-            wield();
+            player_character.wield( game_menus::inv::wield( player_character ) );
             break;
 
         case ACTION_PICK_STYLE:

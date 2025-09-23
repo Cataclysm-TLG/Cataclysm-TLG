@@ -1993,8 +1993,9 @@ std::optional<int> iuse::extinguisher( Character *p, item *it, const tripoint_bu
 
     // Slightly reduce the strength of fire immediately behind the target tile.
     if( here.passable( dest ) ) {
-        dest.x() += ( dest.x() - p->posx() );
-        dest.y() += ( dest.y() - p->posy() );
+        const tripoint_bub_ms p_pos = p->pos_bub( here );
+        dest.x() += ( dest.x() - p_pos.x() );
+        dest.y() += ( dest.y() - p_pos.y() );
 
         here.mod_field_intensity( dest, fd_fire, std::min( 0 - rng( 0, 1 ) + rng( 0, 1 ), 0 ) );
     }
@@ -2532,15 +2533,17 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
 
 std::optional<int> iuse::water_tablets( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
 
-    item_location obj = g->inv_map_splice( []( const item_location & e ) {
+    item_location obj = g->inv_map_splice( [&here]( const item_location & e ) {
         return ( !e->empty() && e->has_item_with( []( const item & it ) {
             return it.typeId() == itype_water;
         } ) ) || ( e->typeId() == itype_water &&
-                   get_map().has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, e.pos_bub() ) );
+                   here.has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, e.pos_bub( here ) ) );
     }, _( "Purify what?" ), 1, _( "You don't have water to purify." ) );
 
     if( !obj ) {
@@ -3313,14 +3316,17 @@ std::optional<int> iuse::teleport( Character *p, item *it, const tripoint_bub_ms
 
 std::optional<int> iuse::can_goo( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+
     it->convert( itype_canister_empty );
     int tries = 0;
+    const tripoint_bub_ms p_pos = p->pos_bub( here );
     tripoint_bub_ms goop;
-    goop.z() = p->posz();
-    map &here = get_map();
+    goop.z() = p_pos.z();
+
     do {
-        goop.x() = p->posx() + rng( -2, 2 );
-        goop.y() = p->posy() + rng( -2, 2 );
+        goop.x() = p_pos.x() + rng( -2, 2 );
+        goop.y() = p_pos.y() + rng( -2, 2 );
         tries++;
     } while( here.impassable( goop ) && tries < 10 );
     if( tries == 10 ) {
@@ -3345,8 +3351,8 @@ std::optional<int> iuse::can_goo( Character *p, item *it, const tripoint_bub_ms 
         tries = 0;
         bool found = false;
         do {
-            goop.x() = p->posx() + rng( -2, 2 );
-            goop.y() = p->posy() + rng( -2, 2 );
+            goop.x() = p_pos.x() + rng( -2, 2 );
+            goop.y() = p_pos.y() + rng( -2, 2 );
             tries++;
             found = here.passable( goop ) && here.tr_at( goop ).is_null();
         } while( !found && tries < 10 );
@@ -3658,13 +3664,16 @@ std::optional<int> iuse::mininuke( Character *p, item *it, const tripoint_bub_ms
 
 std::optional<int> iuse::portal( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+    const tripoint_bub_ms pos = p->pos_bub( here );
+
     if( !it->ammo_sufficient( p ) ) {
         return std::nullopt;
     }
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-    tripoint_bub_ms t( p->posx() + rng( -2, 2 ), p->posy() + rng( -2, 2 ), p->posz() );
+    tripoint_bub_ms t( pos.x() + rng( -2, 2 ), pos.y() + rng( -2, 2 ), pos.z() );
     get_map().trap_set( t, tr_portal );
     return 1;
 }
@@ -4531,6 +4540,9 @@ std::optional<int> iuse::call_of_tindalos( Character *p, item *, const tripoint_
 
 std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_ms & )
 {
+    map &here = get_map();
+    const tripoint_bub_ms pos = p->pos_bub( here );
+
     if( p->is_npc() ) {
         return std::nullopt;    // No NPCs for now!
     }
@@ -4547,7 +4559,7 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     bool acid_blood = false;
     bool vampire = false;
     units::temperature blood_temp = units::from_kelvin( -1.0f ); //kelvins
-    for( item &map_it : get_map().i_at( point_bub_ms( p->posx(), p->posy() ) ) ) {
+    for( item &map_it : here.i_at( pos.xy() ) ) {
         if( map_it.is_corpse() &&
             query_yn( _( "Draw blood from %s?" ),
                       colorize( map_it.tname(), map_it.color_in_inventory() ) ) ) {
@@ -5060,11 +5072,13 @@ std::optional<int> iuse::handle_ground_graffiti( Character &p, item *it, const s
  */
 static bool heat_item( Character &p )
 {
-    item_location loc = g->inv_map_splice( []( const item_location & itm ) {
+    map &here = get_map();
+
+    item_location loc = g->inv_map_splice( [&here]( const item_location & itm ) {
         return itm->has_temperature() && !itm->has_own_flag( flag_HOT ) &&
                ( !itm->made_of_from_type( phase_id::LIQUID ) ||
                  itm.where() == item_location::type::container ||
-                 get_map().has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, itm.pos_bub() ) );
+                 here.has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, itm.pos_bub( here ) ) );
     }, _( "Heat up what?" ), 1, _( "You don't have any appropriate food to heat up." ) );
 
     item *heat = loc.get_item();
@@ -8358,6 +8372,8 @@ heater find_heater( Character *p, item *it )
 
 static bool heat_items( Character *p, item *it, bool liquid_items, bool solid_items )
 {
+    map &here = get_map();
+
     p->inv->restack( *p );
     heater h = find_heater( p, it );
     if( h.available_heater == -1 ) {
@@ -8372,11 +8388,11 @@ static bool heat_items( Character *p, item *it, bool liquid_items, bool solid_it
     units::mass frozen_weight = 0_gram;
     units::mass not_frozen_weight = 0_gram;
     if( multiple == false ) {
-        item_location loc = g->inv_map_splice( []( const item_location & itm ) {
+        item_location loc = g->inv_map_splice( [&here]( const item_location & itm ) {
             return itm->has_temperature() && !itm->has_own_flag( flag_HOT ) &&
                    ( !itm->made_of_from_type( phase_id::LIQUID ) ||
                      itm.where() == item_location::type::container ||
-                     get_map().has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, itm.pos_bub() ) );
+                     here.has_flag_furn( ter_furn_flag::TFLAG_LIQUIDCONT, itm.pos_bub( here ) ) );
         }, _( "Heat up what?" ), 1, _( "You don't have any appropriate food to heat up." ) );
         if( !loc ) {
             return false;

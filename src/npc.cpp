@@ -1182,15 +1182,15 @@ void npc::place_on_map( map *here )
     if( g->is_empty( here, pos_abs() ) || is_mounted() ) {
         return;
     }
-
-    for( const tripoint_abs_ms &p : closest_points_first( pos_abs(), SEEX + 1 ) ) {
-        if( g->is_empty( here, p ) ) {
-            setpos( p );
+    const tripoint_bub_ms pos = pos_bub( *here );
+    for( const tripoint_bub_ms &p : closest_points_first( pos, 1, SEEX + 1 ) ) {
+        if( g->is_empty( p ) ) {
+            setpos( *here, p );
             return;
         }
     }
 
-    debugmsg( "Failed to place NPC in a valid location near (%d,%d,%d)", posx(), posy(), posz() );
+    debugmsg( "Failed to place NPC in a valid location near %s", pos.to_string() );
 }
 
 std::pair<skill_id, int> npc::best_combat_skill( combat_skills subset, bool randomize ) const
@@ -1519,49 +1519,24 @@ void npc::stow_item( item &it )
 
 bool npc::wield( item &it )
 {
-    const map &here = get_map();
-
-    // sanity check: exit early if we're trying to wield the current weapon
-    // needed for ranged_balance_test
-    if( is_wielding( it ) ) {
-        return true;
+    if( !Character::wield( it ) ) {
+        return false;
     }
+    add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
+                            get_wielded_item()->tname() );
 
-    item to_wield;
-    if( has_item( it ) ) {
-        to_wield = remove_item( it );
-    } else {
-        to_wield = it;
-    }
-    invalidate_leak_level_cache();
-    invalidate_inventory_validity_cache();
-    cached_info.erase( "weapon_value" );
-    item_location weapon = get_wielded_item();
-    if( has_wield_conflicts( to_wield ) ) {
-        stow_item( *weapon );
-        weapon = get_wielded_item();
-    }
+    invalidate_range_cache();
+    return true;
+}
 
-    if( to_wield.is_null() ) {
-        set_wielded_item( item() );
-        get_event_bus().send<event_type::character_wields_item>( getID(), item().typeId() );
-        return true;
+bool npc::wield( item_location loc, bool remove_old )
+{
+    if( !Character::wield( std::move( loc ), remove_old ) ) {
+        return false;
     }
+    add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
+                            get_wielded_item()->tname() );
 
-    mod_moves( -to_wield.on_wield_cost( *this ) );
-    if( weapon && to_wield.can_combine( *weapon ) ) {
-        weapon->combine( to_wield );
-    } else {
-        set_wielded_item( to_wield );
-    }
-
-    weapon = get_wielded_item();
-    cata::event e = cata::event::make<event_type::character_wields_item>( getID(), weapon->typeId() );
-    get_event_bus().send_with_talker( this, &weapon, e );
-
-    if( get_player_view().sees( here, pos_bub( here ) ) ) {
-        add_msg_if_npc( m_info, _( "<npcname> wields a %s." ),  weapon->tname() );
-    }
     invalidate_range_cache();
     return true;
 }
@@ -1793,9 +1768,10 @@ void npc::mutiny()
 float npc::vehicle_danger( int radius ) const
 {
     map &here = get_map();
+    const tripoint_bub_ms pos = pos_bub( here );
 
-    const tripoint_bub_ms from( posx() - radius, posy() - radius, posz() );
-    const tripoint_bub_ms to( posx() + radius, posy() + radius, posz() );
+    const tripoint_bub_ms from( pos.x() - radius, pos.y() - radius, pos.z() );
+    const tripoint_bub_ms to( pos.x() + radius, pos.y() + radius, pos.z() );
     VehicleList vehicles = here.get_vehicles( from, to );
 
     int danger = -1;
@@ -1805,7 +1781,7 @@ float npc::vehicle_danger( int radius ) const
         const wrapped_vehicle &wrapped_veh = vehicles[i];
         if( wrapped_veh.v->is_moving() ) {
             const auto &points_to_check = wrapped_veh.v->immediate_path( &here );
-            point_abs_ms p( here.get_abs( pos_bub() ).xy() );
+            point_abs_ms p( pos_abs().xy() );
             if( points_to_check.find( p ) != points_to_check.end() ) {
                 danger = i;
             }

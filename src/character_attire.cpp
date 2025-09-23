@@ -14,6 +14,7 @@
 #include "calendar.h"
 #include "cata_utility.h"
 #include "character.h"
+#include "coordinates.h"
 #include "creature.h"
 #include "damage.h"
 #include "debug.h"
@@ -47,7 +48,6 @@
 #include "output.h"
 #include "pimpl.h"
 #include "pocket_type.h"
-#include "point.h"
 #include "relic.h"
 #include "rng.h"
 #include "string_formatter.h"
@@ -1863,7 +1863,7 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
 
         if( destroy ) {
             if( get_player_view().sees( here, guy ) ) {
-                SCT.add( point( guy.posx(), guy.posy() ), direction::NORTH, remove_color_tags( pre_damage_name ),
+                SCT.add( guy.pos_bub( here ).xy().raw(), direction::NORTH, remove_color_tags( pre_damage_name ),
                          m_neutral, _( "destroyed" ), m_info );
             }
             destroyed_armor_msg( guy, pre_damage_name );
@@ -2003,7 +2003,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     if( destroy ) {
                         map &here = get_map();
                         if( get_player_view().sees( here, guy ) ) {
-                            SCT.add( point( guy.posx(), guy.posy() ), direction::NORTH, remove_color_tags( pre_damage_name ),
+                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH, remove_color_tags( pre_damage_name ),
                                      m_neutral, _( "destroyed" ), m_info );
                         }
                         destroyed_armor_msg( guy, pre_damage_name );
@@ -2044,7 +2044,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
         guy.deal_damage( &caster, bp, damage_instance( damage.type, damage.amount ) );
     }
     if( sp.damage( caster ) < 0 ) {
-        sp.heal( guy.pos_bub(), caster );
+        map &here = get_map();
+        sp.heal( guy.pos_bub( here ), caster );
         add_msg_if_player_sees( guy, m_good, _( "%s wounds are closing up!" ),
                                 guy.disp_name( true ) );
     }
@@ -2214,8 +2215,10 @@ void outfit::best_pocket( Character &guy, const item &it, const item *avoid,
 
 void outfit::overflow( Character &guy )
 {
+    map &here = get_map();
+
     for( item_location &clothing : top_items_loc( guy ) ) {
-        clothing.overflow();
+        clothing.overflow( here );
     }
 }
 

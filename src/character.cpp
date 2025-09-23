@@ -8681,21 +8681,25 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
     //block reduction should be by applied this point
     int dam = dealt_dams.total_damage();
 
+    const tripoint_bub_ms pos = pos_bub( here );
+
     // TODO: Pre or post blit hit tile onto "this"'s location here
-    if( dam > 0 && get_player_view().sees( here, pos_bub( here ) ) ) {
+    if( dam > 0 && get_player_view().sees( here, pos ) ) {
         g->draw_hit_player( *this, dam );
 
         if( is_avatar() && source ) {
+            const tripoint_bub_ms source_pos = source->pos_bub( here );
+
             //monster hits player melee
-            SCT.add( point( posx(), posy() ),
-                     direction_from( point::zero, point( posx() - source->posx(), posy() - source->posy() ) ),
+            SCT.add( pos.xy().raw(),
+                     direction_from( point::zero, point( pos.x() - source_pos.x(), pos.y() - source_pos.y() ) ),
                      get_hp_bar( dam, get_hp_max( bp ) ).first, m_bad, body_part_name( bp ), m_neutral );
         }
     }
 
     // And slimespawners too
     if( has_trait( trait_SLIMESPAWNER ) && ( dam >= 10 ) && one_in( 20 - dam ) ) {
-        if( monster *const slime = g->place_critter_around( mon_player_blob, pos_bub( here ), 1 ) ) {
+        if( monster *const slime = g->place_critter_around( mon_player_blob, pos, 1 ) ) {
             slime->friendly = -1;
             add_msg_if_player( m_warning, _( "A mass of slime is torn from you, and moves on its own!" ) );
         }
@@ -10540,6 +10544,8 @@ ret_val<crush_tool_type> Character::can_crush_frozen_liquid( item_location const
 
 bool Character::crush_frozen_liquid( item_location loc )
 {
+    map &here = get_map();
+
     ret_val<crush_tool_type> can_crush = can_crush_frozen_liquid( loc );
     bool done_crush = false;
     if( can_crush.success() ) {
@@ -10557,7 +10563,7 @@ bool Character::crush_frozen_liquid( item_location loc )
                                        hammering_item.tname() );
                     // FIXME: Hardcoded damage type
                     const int smashskill = get_arm_str() + hammering_item.damage_melee( damage_bash );
-                    get_map().bash( loc.pos_bub(), smashskill );
+                    here.bash( loc.pos_bub( here ), smashskill );
                 }
             } else {
                 done_crush = false;
@@ -11690,8 +11696,7 @@ void Character::stagger()
             }
         }
     }
-
-    const tripoint_bub_ms below( posx(), posy(), posz() - 1 );
+    const tripoint_bub_ms below = pos_bub( here ) + tripoint::below;
     if( here.valid_move( pos_bub(), below, false, true ) ) {
         if( here.ter( below )->has_flag( "EMPTY_SPACE" ) && one_in( 4 ) ) {
             preferred_stumbles.push_back( below );
@@ -13535,6 +13540,108 @@ void Character::search_surroundings()
     }
 }
 
+bool Character::wield( item &it, std::optional<int> obtain_cost )
+{
+    invalidate_inventory_validity_cache();
+    invalidate_leak_level_cache();
+
+    if( has_wield_conflicts( it ) ) {
+        const bool is_unwielding = is_wielding( it );
+        const auto ret = can_unwield( it );
+
+        if( !ret.success() ) {
+            add_msg_if_player( m_info, "%s", ret.c_str() );
+            return false;
+        }
+
+        if( !unwield() ) {
+            return false;
+        }
+
+        if( is_unwielding ) {
+            if( !martial_arts_data->selected_is_none() ) {
+                martial_arts_data->martialart_use_message( *this );
+            }
+            return true;
+        }
+    }
+
+    item_location wielded = get_wielded_item();
+    if( wielded && wielded->has_item( it ) ) {
+        add_msg_if_player( m_info,
+                           _( "You must put the %1s away before trying to take the %2s out of it." ), wielded.get_item()->tname(), it.tname() );
+        return false;
+    }
+
+    if( !can_wield( it ).success() ) {
+        return false;
+    }
+
+    bool combine_stacks = wielded && it.can_combine( *wielded );
+    cached_info.erase( "weapon_value" );
+
+    // Wielding from inventory is relatively slow and does not improve with increasing weapon skill.
+    // Worn items (including guns with shoulder straps) are faster but still slower
+    // than a skilled player with a holster.
+    // There is an additional penalty when wielding items from the inventory whilst currently grabbed.
+
+    bool worn = is_worn( it );
+
+    // Ideally the cost should be calculated from wield(item_location), but as backup try it here.
+    const int mv = obtain_cost.value_or( item_handling_cost( it, true,
+                                         INVENTORY_HANDLING_PENALTY / ( worn ? 2 : 1 ) ) );
+
+    if( worn ) {
+        it.on_takeoff( *this );
+    }
+
+    add_msg_debug( debugmode::DF_AVATAR, "wielding took %d moves", mv );
+    mod_moves( -mv );
+
+    bool had_item = has_item( it );
+    if( combine_stacks ) {
+        wielded->combine( it );
+    } else {
+        set_wielded_item( it );
+    }
+
+    if( had_item ) {
+        i_rem( &it );
+    }
+
+    // set_wielded_item invalidates the weapon item_location, so get it again
+    wielded = get_wielded_item();
+    last_item = wielded->typeId();
+    recoil = MAX_RECOIL;
+
+    wielded->on_wield( *this );
+
+    cata::event e = cata::event::make<event_type::character_wields_item>( getID(), last_item );
+    get_event_bus().send_with_talker( this, &wielded, e );
+
+    inv->update_invlet( *wielded );
+    inv->update_cache_with_item( *wielded );
+
+    return true;
+}
+
+bool Character::wield( item_location loc, bool remove_old )
+{
+    if( !loc ) {
+        add_msg_if_player( _( "No item." ) );
+        return false;
+    }
+
+    if( !wield( *loc, loc.obtain_cost( *this ) ) ) {
+        return false;
+    }
+
+    if( remove_old && loc ) {
+        loc.remove_item();
+    }
+    return true;
+}
+
 bool Character::wield_contents( item &container, item *internal_item, bool penalties,
                                 int base_cost )
 {
@@ -13643,6 +13750,8 @@ void Character::use( int inventory_position )
 
 void Character::use( item_location loc, int pre_obtain_moves, std::string const &method )
 {
+    map &here = get_map();
+
     if( has_effect( effect_incorporeal ) ) {
         add_msg_if_player( m_bad, _( "You can't use anything while incorporeal." ) );
         return;
@@ -13667,10 +13776,10 @@ void Character::use( item_location loc, int pre_obtain_moves, std::string const 
             set_moves( pre_obtain_moves );
             return;
         }
-        invoke_item( &used, method, loc.pos_bub(), pre_obtain_moves );
+        invoke_item( &used, method, loc.pos_bub( here ), pre_obtain_moves );
 
     } else if( used.type->can_use( "PETFOOD" ) ) { // NOLINT(bugprone-branch-clone)
-        invoke_item( &used, method, loc.pos_bub(), pre_obtain_moves );
+        invoke_item( &used, method, loc.pos_bub( here ), pre_obtain_moves );
 
     } else if( !used.is_craft() && ( used.is_medication() || ( !used.type->has_use() &&
                                      used.is_food() ) ) ) {
@@ -13703,7 +13812,7 @@ void Character::use( item_location loc, int pre_obtain_moves, std::string const 
             }
         }
     } else if( used.type->has_use() ) {
-        invoke_item( &used, method, loc.pos_bub(), pre_obtain_moves );
+        invoke_item( &used, method, loc.pos_bub( here ), pre_obtain_moves );
     } else if( used.has_flag( flag_SPLINT ) ) {
         ret_val<void> need_splint = can_wear( *loc );
         if( need_splint.success() ) {
@@ -13713,7 +13822,7 @@ void Character::use( item_location loc, int pre_obtain_moves, std::string const 
             add_msg( m_info, need_splint.str() );
         }
     } else if( used.is_relic() ) {
-        invoke_item( &used, method, loc.pos_bub(), pre_obtain_moves );
+        invoke_item( &used, method, loc.pos_bub( here ), pre_obtain_moves );
     } else {
         if( !is_armed() ) {
             add_msg( m_info, _( "You are not wielding anything you could use." ) );

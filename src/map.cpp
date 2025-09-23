@@ -1554,18 +1554,18 @@ bool map::displace_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const bool 
             Creature *psg = r.psg;
             const tripoint_bub_ms part_pos = veh.bub_part_pos( *this, prt );
             if( psg == nullptr ) {
-                debugmsg( "Empty passenger for part #%d at %d,%d,%d player at %d,%d,%d?",
-                          prt, part_pos.x(), part_pos.y(), part_pos.z(),
-                          player_character.posx(), player_character.posy(), player_character.posz() );
+                debugmsg( "Empty passenger for part #%d at %s player at %s?",
+                          prt, part_pos.to_string_writable(),
+                          player_character.pos_bub( *this ).to_string_writable() );
                 veh.part( prt ).remove_flag( vp_flag::passenger_flag );
                 r.moved = true;
                 continue;
             }
 
             if( psg->pos_bub() != part_pos ) {
-                add_msg_debug( debugmode::DF_MAP, "Part/passenger position mismatch: part #%d at %d,%d,%d "
-                               "passenger at %d,%d,%d", prt, part_pos.x(), part_pos.y(), part_pos.z(),
-                               psg->posx(), psg->posy(), psg->posz() );
+                add_msg_debug( debugmode::DF_MAP, "Part/passenger position mismatch: part #%d at %s "
+                               "passenger at %s", prt, part_pos.to_string_writable(),
+                               psg->pos_bub( *this ).to_string_writable() );
             }
             const vehicle_part &veh_part = veh.part( prt );
 
@@ -5574,7 +5574,7 @@ void map::make_active( item_location &loc )
     item *target = loc.get_item();
 
     point_sm_ms l;
-    submap *const current_submap = get_submap_at( loc.pos_bub(), l );
+    submap *const current_submap = get_submap_at( loc.pos_bub( *this ), l );
     if( current_submap == nullptr ) {
         debugmsg( "Tried to make active at (%d,%d) but the submap is not loaded", l.x(), l.y() );
         return;
@@ -5583,8 +5583,8 @@ void map::make_active( item_location &loc )
     cata::colony<item>::iterator iter = item_stack.get_iterator_from_pointer( target );
 
     if( current_submap->active_items.add( *iter, l ) ) {
-        tripoint_abs_sm const smloc( abs_sub.x() + loc.pos_bub().x() / SEEX,
-                                     abs_sub.y() + loc.pos_bub().y() / SEEY, loc.pos_bub().z() );
+        tripoint_abs_sm const smloc( abs_sub.x() + loc.pos_bub( *this ).x() / SEEX,
+                                     abs_sub.y() + loc.pos_bub( *this ).y() / SEEY, loc.pos_abs().z() );
         submaps_with_active_items_dirty.insert( smloc );
         if( this != &get_map() && get_map().inbounds( smloc ) ) {
             get_map().make_active( smloc );
@@ -5607,7 +5607,7 @@ void map::update_lum( item_location &loc, bool add )
     }
 
     point_sm_ms l;
-    submap *const current_submap = get_submap_at( loc.pos_bub(), l );
+    submap *const current_submap = get_submap_at( loc.pos_bub( *this ), l );
     if( current_submap == nullptr ) {
         debugmsg( "Tried to update lum at (%d,%d) but the submap is not loaded", l.x(), l.y() );
         return;
@@ -6987,19 +6987,21 @@ void map::update_submaps_with_active_items()
 void map::update_visibility_cache( const int zlev )
 {
     Character &player_character = get_player_character();
+    const tripoint_bub_ms pos = player_character.pos_bub( *this );
+
     if( !visibility_variables_cache.visibility_cache_dirty &&
-        player_character.pos_bub() == visibility_variables_cache.last_pos ) {
+        pos == visibility_variables_cache.last_pos ) {
         return;
     }
 
-    if( player_character.posz() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
+    if( pos.z() - zlev < fov_3d_z_range && zlev > -OVERMAP_DEPTH ) {
         update_visibility_cache( zlev - 1 );
     }
     visibility_variables_cache.variables_set = true; // Not used yet
     visibility_variables_cache.g_light_level = static_cast<int>( g->light_level( zlev ) );
     visibility_variables_cache.vision_threshold = player_character.get_vision_threshold(
                 get_cache_ref(
-                    player_character.posz() ).lm[player_character.posx()][player_character.posy()].max() );
+                    pos.z() ).lm[pos.x()][pos.y()].max() );
 
     visibility_variables_cache.u_clairvoyance = player_character.clairvoyance();
     visibility_variables_cache.u_sight_impaired = player_character.sight_impaired();
@@ -7043,7 +7045,7 @@ void map::update_visibility_cache( const int zlev )
     }
 #endif
 
-    visibility_variables_cache.last_pos = player_character.pos_bub();
+    visibility_variables_cache.last_pos = pos;
     visibility_variables_cache.visibility_cache_dirty = false;
 }
 
@@ -9029,7 +9031,7 @@ void map::actualize( const tripoint_rel_sm &grid )
         // spill out items too large, MIGRATION pockets etc from vehicle parts
         for( const vpart_reference &vp : veh->get_all_parts() ) {
             const item &base_const = vp.part().get_base();
-            const_cast<item &>( base_const ).overflow( vp.pos_bub( *this ) );
+            const_cast<item &>( base_const ).overflow( *this, vp.pos_bub( *this ) );
         }
         veh->refresh( );
     }

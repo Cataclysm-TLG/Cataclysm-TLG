@@ -2271,7 +2271,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             REQUIRE( jug_w_water->all_items_top().size() == 1 );
             REQUIRE( jug_w_water->all_items_top().front()->charges == 15 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = jug_w_water.pos_bub();
+            liquid_target.pos = jug_w_water.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = suit;
             u.set_moves( 100 );
@@ -2299,7 +2299,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             REQUIRE( jug_w_water->all_items_top().size() == 1 );
             REQUIRE( jug_w_water->all_items_top().front()->charges == 15 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = jug_w_water.pos_bub();
+            liquid_target.pos = jug_w_water.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = suit;
             u.set_moves( 100 );
@@ -2325,7 +2325,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             REQUIRE( jug_w_water->all_items_top().size() == 1 );
             REQUIRE( jug_w_water->all_items_top().front()->charges == 2 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = jug_w_water.pos_bub();
+            liquid_target.pos = jug_w_water.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = suit;
             u.set_moves( 100 );
@@ -2349,7 +2349,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             REQUIRE( jug_w_water->all_items_top().size() == 1 );
             REQUIRE( jug_w_water->all_items_top().front()->charges == 2 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = jug_w_water.pos_bub();
+            liquid_target.pos = jug_w_water.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = suit;
             u.set_moves( 100 );
@@ -2377,7 +2377,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             suit->fill_with( water );
             REQUIRE( suit->all_items_top().size() == 2 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = suit.pos_bub();
+            liquid_target.pos = suit.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = jug_w_water;
             for( item *&it : suit->all_items_top() ) {
@@ -2402,7 +2402,7 @@ TEST_CASE( "multipocket_liquid_transfer_test", "[pocket][item][liquid]" )
             REQUIRE( suit->all_items_top().size() == 2 );
             REQUIRE( jug_w_water->only_item().charges == 8 );
             struct liquid_dest_opt liquid_target;
-            liquid_target.pos = suit.pos_bub();
+            liquid_target.pos = suit.pos_bub( m );
             liquid_target.dest_opt = LD_ITEM;
             liquid_target.item_loc = jug_w_water;
             for( item *&it : suit->all_items_top() ) {
@@ -2764,6 +2764,8 @@ void check_whitelist( item const &it, bool should, itype_id const &id )
 
 TEST_CASE( "auto_whitelist", "[item][pocket][item_spawn]" )
 {
+    map &here = get_map();
+
     clear_avatar();
     clear_map();
     tripoint_abs_omt const this_omt =
@@ -2804,8 +2806,8 @@ TEST_CASE( "auto_whitelist", "[item][pocket][item_spawn]" )
 
     SECTION( "container emptied by processing" ) {
         itype_id const id = spawned_w_modifier->get_contents().first_item().typeId();
-        get_map().i_clear( spawned_w_custom_container.pos_bub() );
-        get_map().i_clear( spawned_in_def_container.pos_bub() );
+        get_map().i_clear( spawned_w_custom_container.pos_bub( here ) );
+        get_map().i_clear( spawned_in_def_container.pos_bub( here ) );
         restore_on_out_of_scope restore_temp(
             get_weather().forced_temperature );
         get_weather().forced_temperature = units::from_celsius( 21 );

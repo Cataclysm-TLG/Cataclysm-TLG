@@ -1966,7 +1966,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
              cut.get_item()->tname() );
 
     const item_location::type cut_type = cut.where();
-    const tripoint_bub_ms pos = cut.pos_bub();
+    const tripoint_bub_ms pos = cut.pos_bub( here );
     const bool filthy = cut.get_item()->is_filthy();
 
     // Clean up before removing the item.
@@ -3442,7 +3442,7 @@ static bool damage_item( Character &pl, item_location &fix )
                 if( it->has_flag( flag_NO_DROP ) ) {
                     continue;
                 }
-                put_into_vehicle_or_drop( pl, item_drop_reason::tumbling, { *it }, &here, fix.pos_bub() );
+                put_into_vehicle_or_drop( pl, item_drop_reason::tumbling, { *it }, &here, fix.pos_bub( here ) );
             }
             fix.remove_item();
         }
@@ -4230,6 +4230,8 @@ std::optional<int> place_trap_actor::use( Character *p, item &it, map *here,
         return std::nullopt;
     }
 
+    const tripoint_bub_ms p_pos = p->pos_bub( *here );
+
     const bool could_bury = !bury_question.empty();
     if( !allow_underwater && p->cant_do_underwater() ) {
         return std::nullopt;
@@ -4253,8 +4255,8 @@ std::optional<int> place_trap_actor::use( Character *p, item &it, map *here,
                                   outer_layer_trap.obj().get_trap_radius() + 1;
     if( unburied_data.trap.obj().get_trap_radius() > 0 ) {
         // Math correction for multi-tile traps
-        pos.x() = ( pos.x() - p->posx() ) * distance_to_trap_center + p->posx();
-        pos.y() = ( pos.y() - p->posy() ) * distance_to_trap_center + p->posy();
+        pos.x() = ( pos.x() - p_pos.x() ) * distance_to_trap_center + p_pos.x();
+        pos.y() = ( pos.y() - p_pos.y() ) * distance_to_trap_center + p_pos.y();
         for( const tripoint_bub_ms &t : here->points_in_radius( pos,
                 outer_layer_trap.obj().get_trap_radius(),
                 0 ) ) {

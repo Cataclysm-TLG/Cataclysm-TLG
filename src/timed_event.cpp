@@ -103,6 +103,8 @@ void timed_event::actualize()
 {
     avatar &player_character = get_avatar();
     map &here = get_map();
+    const tripoint_bub_ms pos = player_character.pos_bub( here );
+
     switch( type ) {
         case timed_event_type::HELP:
             debugmsg( "Currently disabled while NPC and monster factions are being rewritten." );
@@ -125,7 +127,7 @@ void timed_event::actualize()
 
             // You could drop the flag, you know.
             if( player_character.has_amount( itype_petrified_eye, 1 ) ) {
-                sounds::sound( player_character.pos_bub(), 60, sounds::sound_t::alert, _( "a tortured scream!" ),
+                sounds::sound( pos, MAX_VIEW_DISTANCE, sounds::sound_t::alert, _( "a tortured scream!" ),
                                false,
                                "shout",
                                "scream_tortured" );
@@ -153,7 +155,7 @@ void timed_event::actualize()
             }
             for( int i = 0; fault_point && i < num_horrors; i++ ) {
                 for( int tries = 0; tries < 10; ++tries ) {
-                    tripoint_bub_ms monp = player_character.pos_bub();
+                    tripoint_bub_ms monp = pos;
                     if( horizontal ) {
                         monp.x() = rng( fault_point->x(), fault_point->x() + 2 * SEEX - 8 );
                         for( int n = -1; n <= 1; n++ ) {

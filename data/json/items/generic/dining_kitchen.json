@@ -123,6 +123,7 @@
     "category": "other",
     "id": "ceramic_plate",
     "volume": "125 ml",
+    "longest_side": "26 cm",
     "name": { "str": "ceramic plate" },
     "symbol": ",",
     "description": "A ceramic dinner plate, unremarkable in every way.",
@@ -137,6 +138,7 @@
     "description": "A perfectly ordinary ceramic soup bowl.",
     "copy-from": "base_ceramic_dish",
     "volume": "625 ml",
+    "longest_side": "13 cm",
     "pocket_data": [
       {
         "max_contains_volume": "500 ml",
@@ -408,6 +410,7 @@
     "type": "GENERIC",
     "category": "other",
     "id": "tin_plate",
+    "longest_side": "26 cm",
     "name": { "str": "tin plate" },
     "symbol": ",",
     "description": "A tin dinner plate, lightweight and clanky.",
@@ -445,6 +448,7 @@
     "description": "A small pewter serving bowl without a lid.  Holds 250 mL of liquid.",
     "copy-from": "base_tin_dish",
     "symbol": "u",
+    "longest_side": "11 cm",
     "pocket_data": [
       {
         "max_contains_volume": "250 ml",
@@ -461,6 +465,7 @@
     "type": "GENERIC",
     "category": "other",
     "id": "glass_plate",
+    "longest_side": "26 cm",
     "name": { "str": "glass plate" },
     "symbol": ",",
     "description": "A glass dinner plate, for people who don't have clumsy children.",
@@ -477,6 +482,7 @@
     "description": "A tall drinking glass.",
     "copy-from": "base_glass_dish",
     "volume": "620 ml",
+    "longest_side": "16 cm",
     "pocket_data": [
       {
         "max_contains_volume": "500 ml",
@@ -523,6 +529,7 @@
     "description": "A glass bowl for soup or dessert.",
     "copy-from": "base_glass_dish",
     "volume": "620 ml",
+    "longest_side": "13 cm",
     "pocket_data": [
       {
         "max_contains_volume": "500 ml",
@@ -539,6 +546,7 @@
     "type": "GENERIC",
     "category": "other",
     "id": "plastic_plate",
+    "longest_side": "26 cm",
     "name": { "str": "plastic plate" },
     "symbol": ",",
     "description": "A durable plastic plate, the sort you might use as patio dishware.",
