@@ -174,7 +174,7 @@
       },
       "items": {
         "R": { "item": "bunker_basement_books", "chance": 60 },
-        "Y": { "item": "SUS_trash_trashcan", "chance": 50 },
+        "Y": { "item": "trash_domestic", "chance": 50 },
         "!": { "item": "bunker_basement_clothing", "chance": 50 },
         "s": { "item": "dining", "chance": 45 },
         "q": [
