@@ -83,7 +83,7 @@
       "T": { "item": "SUS_toilet", "chance": 50 },
       ".": { "item": "office_mess", "chance": 1 }
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "monster": { "_": { "group": "GROUP_CIVILIAN", "chance": 1 }, ".": { "group": "GROUP_CIVILIAN", "chance": 1 } },
     "toilets": { "T": {  } },
     "vehicles": {

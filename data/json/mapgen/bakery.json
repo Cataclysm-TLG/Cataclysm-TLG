@@ -80,9 +80,7 @@
         "{": "f_heavy_duty_fridge"
       },
       "toilets": { "T": {  } },
-      "items": {
-        "T": { "item": "SUS_toilet", "chance": 70 }
-      },
+      "items": { "T": { "item": "SUS_toilet", "chance": 70 } },
       "place_items": [
         { "item": "groce_ingredient", "x": 3, "y": 16, "chance": 40 },
         { "item": "groce_ingredient", "x": 2, "y": 15, "chance": 40 },

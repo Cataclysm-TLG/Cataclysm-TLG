@@ -2648,7 +2648,7 @@
     "from": "water_wheel",
     "to": "solar_panel"
   },
-    {
+  {
     "type": "vehicle_part_migration",
     "from": "xl_water_wheel",
     "to": "solar_panel"

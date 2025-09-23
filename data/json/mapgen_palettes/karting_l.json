@@ -71,6 +71,6 @@
       "t": { "item": "SUS_toilet", "chance": 50 }
     },
     "toilets": { "t": {  } },
-    "vendingmachines": { "j": { "item_group": "vending_drink"  }, "V": { "item_group": "vending_food"  } }
+    "vendingmachines": { "j": { "item_group": "vending_drink" }, "V": { "item_group": "vending_food" } }
   }
 ]

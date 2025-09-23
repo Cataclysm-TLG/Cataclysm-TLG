@@ -89,7 +89,7 @@
       "t": { "item": "SUS_toilet", "chance": 30 }
     },
     "liquids": { "g": { "liquid": "water_clean", "amount": [ 0, 100 ] } },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "toilets": { "t": {  } },
     "nested": {
       "(": {

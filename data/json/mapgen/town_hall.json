@@ -81,7 +81,7 @@
       "[": { "item": "american_flag" },
       "I": [ { "item": "subwaymap", "chance": 2 }, { "item": "sewermap", "chance": 2 } ]
     },
-    "vendingmachines": { "4": { "item_group": "vending_drink"  }, "5": { "item_group": "vending_food"  } },
+    "vendingmachines": { "4": { "item_group": "vending_drink" }, "5": { "item_group": "vending_food" } },
     "monster": { " ": { "group": "GROUP_CIVILIAN", "chance": 1 } }
   },
   {

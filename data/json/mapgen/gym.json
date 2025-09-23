@@ -195,7 +195,11 @@
         { "group": "GROUP_MAPGEN_POOL", "x": [ 12, 19 ], "y": [ 18, 21 ], "chance": 75, "repeat": [ 2, 5 ] }
       ],
       "toilets": { "T": {  } },
-      "items": { "O": { "item": "gym", "chance": 80 }, "T": { "item": "SUS_toilet", "chance": 50 }, "H": { "item": "vending_drink", "chance": 75, "repeat": [ 4, 8 ] } },
+      "items": {
+        "O": { "item": "gym", "chance": 80 },
+        "T": { "item": "SUS_toilet", "chance": 50 },
+        "H": { "item": "vending_drink", "chance": 75, "repeat": [ 4, 8 ] }
+      },
       "place_loot": [ { "group": "cash_register_random", "x": [ 17, 19 ], "y": 2 } ]
     }
   },

@@ -313,6 +313,6 @@
       "n": { "vehicle": "hospital_bed", "chance": 100, "status": 1 },
       "Θ": { "vehicle": "hospital_bed", "chance": 100, "rotation": 270, "status": 1 }
     },
-    "vendingmachines": { "J": { "item_group": "vending_drink"  }, "K": { "item_group": "vending_food"  } }
+    "vendingmachines": { "J": { "item_group": "vending_drink" }, "K": { "item_group": "vending_food" } }
   }
 ]

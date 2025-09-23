@@ -76,7 +76,7 @@
       "O": [ { "item": "SUS_pantry", "chance": 33 }, { "item": "cannedfood", "chance": 80, "repeat": [ 1, 2 ] } ],
       "T": { "item": "SUS_toilet", "chance": 50 }
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "toilets": { "T": {  } }
   }
 ]

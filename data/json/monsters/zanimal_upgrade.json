@@ -51,7 +51,7 @@
       "melee_skill": 2,
       "melee_dice": 1,
       "melee_dice_sides": 5,
-      "melee_damage": 2,
+      "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
       "melee_cut": 2,
       "vision_night": 1,
       "armor": { "bash": 6, "cut": 4, "bullet": 4, "electric": 1 }
@@ -234,13 +234,7 @@
     "grab_strength": 35,
     "special_attacks": [
       { "id": "scratch", "cooldown": 10, "min_mul": 1, "max_mul": 1.8 },
-      {
-        "id": "bite_grab",
-        "move_cost": 150,
-        "cooldown": 5,
-        "min_mul": 1.0,
-        "max_mul": 1.8
-      },
+      { "id": "bite_grab", "move_cost": 150, "cooldown": 5, "min_mul": 1.0, "max_mul": 1.8 },
       { "id": "drag_followup" },
       { "id": "scratch_grab_required" },
       { "id": "bite_grab_required" }
@@ -266,7 +260,9 @@
     "harvest": "zombie_animal_acid",
     "grab_strength": 45,
     "special_attacks": [
-      [ "ACID_BARF", 10 ], [ "ACID_BARF", 10 ], [ "scratch", 10 ],
+      [ "ACID_BARF", 10 ],
+      [ "ACID_BARF", 10 ],
+      [ "scratch", 10 ],
       {
         "id": "bite_grab",
         "move_cost": 150,

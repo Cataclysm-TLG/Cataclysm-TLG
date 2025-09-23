@@ -138,7 +138,9 @@
     "baby_flags": [ "SPRING" ],
     "grab_strength": 25,
     "special_attacks": [
-      [ "EAT_FOOD", 20 ], { "type": "bite", "cooldown": 15, "infection_chance": 44 }, [ "BROWSE", 40 ],
+      [ "EAT_FOOD", 20 ],
+      { "type": "bite", "cooldown": 15, "infection_chance": 44 },
+      [ "BROWSE", 40 ],
       {
         "id": "bite_grab",
         "move_cost": 150,
@@ -520,7 +522,8 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "grab_strength": 45,
     "special_attacks": [
-      [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 },
+      [ "scratch", 10 ],
+      { "type": "leap", "cooldown": 5, "max_range": 5 },
       {
         "id": "bite_grab",
         "move_cost": 188,

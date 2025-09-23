@@ -15,19 +15,7 @@
     "type": "MONSTER_FACTION",
     "name": "attack_player_only",
     "//": "Should be friendly to everything, this faction only attacks and is attacked by the player/NPCs",
-    "friendly": [
-      "slime",
-      "zombie",
-      "animal",
-      "mutant",
-      "insect",
-      "bot",
-      "nether",
-      "spider",
-      "small_animal",
-      "plant",
-      "triffid"
-    ],
+    "friendly": [ "slime", "zombie", "animal", "mutant", "insect", "bot", "nether", "spider", "small_animal", "plant", "triffid" ],
     "by_mood": [ "attack_player_only" ],
     "hate": [ "player", "human" ]
   },

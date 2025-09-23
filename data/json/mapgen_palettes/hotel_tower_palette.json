@@ -64,7 +64,7 @@
       "4": "t_gutter_downspout",
       "P": "t_sewage_pump"
     },
-    "vendingmachines": { "U": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "U": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "toilets": { "&": {  } },
     "items": {
       "B": { "item": "bed", "chance": 30, "repeat": [ 1, 2 ] },

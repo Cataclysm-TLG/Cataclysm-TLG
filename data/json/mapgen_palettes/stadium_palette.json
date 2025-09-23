@@ -81,7 +81,7 @@
       "*": { "param": "bush", "fallback": "t_shrub" },
       "^": "t_elevator"
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink"  }, "F": { "item_group": "vending_food"  } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "furniture": {
       "z": "f_water_heater_family",
       "b": "f_metal_bench",
