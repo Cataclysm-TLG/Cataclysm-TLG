@@ -170,7 +170,7 @@
   {
     "id": "charcoal_bag_part",
     "type": "item_group",
-    "container-item": "bag_paper_charcoal",
+    "container-item": "bag_paper_powder_bulk",
     "items": [ { "item": "charcoal", "charges": [ 200, 5000 ] } ]
   },
   {
