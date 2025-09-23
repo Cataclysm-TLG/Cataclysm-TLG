@@ -2003,7 +2003,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     if( destroy ) {
                         map &here = get_map();
                         if( get_player_view().sees( here, guy ) ) {
-                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH, remove_color_tags( pre_damage_name ),
+                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH,
+                                     remove_color_tags( pre_damage_name ),
                                      m_neutral, _( "destroyed" ), m_info );
                         }
                         destroyed_armor_msg( guy, pre_damage_name );
@@ -2530,7 +2531,8 @@ void outfit::add_stash( Character &guy, const item &newit, int &remaining_charge
         if( carried_item && !carried_item->has_pocket_type( pocket_type::MAGAZINE ) &&
             carried_item->can_contain_partial( newit ).success() ) {
             int used_charges = carried_item->fill_with( newit, remaining_charges, /*unseal_pockets=*/false,
-                               /*allow_sealed=*/false, /*ignore_settings=*/false, /*into_bottom*/false, &guy );
+                               /*allow_sealed=*/false, /*ignore_settings=*/false, /*into_bottom*/false, /*allow_nested*/true,
+                               &guy );
             remaining_charges -= used_charges;
         }
         // Crawl Next : worn items

@@ -981,7 +981,8 @@ void bookbinder_copy_activity_actor::start( player_activity &act, Character & )
 
 void bookbinder_copy_activity_actor::do_turn( player_activity &, Character &p )
 {
-    if( p.fine_detail_vision_mod() > 4.0f && !p.has_flag( json_flag_BLIND_READ_SLOW ) && !p.has_flag( json_flag_BLIND_READ_FAST ) ) {
+    if( p.fine_detail_vision_mod() > 4.0f && !p.has_flag( json_flag_BLIND_READ_SLOW ) &&
+        !p.has_flag( json_flag_BLIND_READ_FAST ) ) {
         p.cancel_activity();
         p.add_msg_if_player( m_info, _( "It's too dark to write!" ) );
         return;
@@ -1710,7 +1711,8 @@ void read_activity_actor::do_turn( player_activity &act, Character &who )
                  book_type::martial_art : book_type::normal;
     }
 
-    if( who.fine_detail_vision_mod() > 4 && !book->has_flag( flag_CAN_USE_IN_DARK ) && !who.has_flag( json_flag_BLIND_READ_SLOW ) && !who.has_flag( json_flag_BLIND_READ_FAST ) ) {
+    if( who.fine_detail_vision_mod() > 4 && !book->has_flag( flag_CAN_USE_IN_DARK ) &&
+        !who.has_flag( json_flag_BLIND_READ_SLOW ) && !who.has_flag( json_flag_BLIND_READ_FAST ) ) {
         // It got too dark during the process of reading, bail out.
         act.set_to_null();
         who.add_msg_if_player( m_bad, _( "It's too dark to read!" ) );
@@ -5124,7 +5126,7 @@ void insert_item_activity_actor::start( player_activity &act, Character &who )
 }
 
 static ret_val<void> try_insert( item_location &holster, drop_location &holstered_item,
-                                 int *charges_added, Character *carrier )
+                                 int *charges_added, Character *carrier, bool allow_fill_charge_item_nested )
 {
     item &it = *holstered_item.first;
     ret_val<void> ret = ret_val<void>::make_failure( _( "item can't be stored there" ) );
@@ -5188,7 +5190,8 @@ static ret_val<void> try_insert( item_location &holster, drop_location &holstere
     }
     int charges_to_insert = std::min( holstered_item.second, max_parent_charges.value() );
     *charges_added = holster->fill_with( it, charges_to_insert, /*unseal_pockets=*/true,
-                                         /*allow_sealed=*/true, /*ignore_settings*/true, /*into_bottom*/true, carrier );
+                                         /*allow_sealed=*/true, /*ignore_settings*/true, /*into_bottom*/true, /*allow_nested*/allow_fill_charge_item_nested,
+                                         carrier );
     if( *charges_added <= 0 ) {
         return ret_val<void>::make_failure( _( "item can't be stored there" ) );
     }
@@ -5213,7 +5216,7 @@ void insert_item_activity_actor::finish( player_activity &act, Character &who )
         ret_val<void> ret = ret_val<void>::make_failure( _( "item can't be stored there" ) );
 
         if( !it.count_by_charges() ) {
-            ret = try_insert( holster, holstered_item, nullptr, carrier );
+            ret = try_insert( holster, holstered_item, nullptr, carrier, false );
 
             if( ret.success() ) {
                 //~ %1$s: item to put in the container, %2$s: container to put item in
@@ -5225,7 +5228,8 @@ void insert_item_activity_actor::finish( player_activity &act, Character &who )
             }
         } else {
             int charges_added = 0;
-            ret = try_insert( holster, holstered_item, &charges_added, carrier );
+            ret = try_insert( holster, holstered_item, &charges_added, carrier,
+                              allow_fill_count_by_charge_item_nested );
 
             if( ret.success() ) {
                 item copy( it );
@@ -5294,6 +5298,7 @@ void insert_item_activity_actor::serialize( JsonOut &jsout ) const
     jsout.member( "handler", handler );
     jsout.member( "all_pockets_rigid", all_pockets_rigid );
     jsout.member( "reopen_menu", reopen_menu );
+    jsout.member( "allow_fill_charge_item_nested", allow_fill_count_by_charge_item_nested );
 
     jsout.end_object();
 }
@@ -5309,6 +5314,7 @@ std::unique_ptr<activity_actor> insert_item_activity_actor::deserialize( JsonVal
     data.read( "handler", actor.handler );
     data.read( "all_pockets_rigid", actor.all_pockets_rigid );
     data.read( "reopen_menu", actor.reopen_menu );
+    data.read( "allow_fill_charge_item_nested", actor.allow_fill_count_by_charge_item_nested );
 
     return actor.clone();
 }
@@ -6796,7 +6802,7 @@ void pickup_menu_activity_actor::do_turn( player_activity &, Character &who )
     std::optional<tripoint_bub_ms> p( where );
     std::vector<drop_location> s( selection );
     who.cancel_activity();
-    who.pick_up( game_menus::inv::pickup( *who.as_avatar(), p, s ) );
+    who.pick_up( game_menus::inv::pickup( p, s ) );
 }
 
 void pickup_menu_activity_actor::serialize( JsonOut &jsout ) const

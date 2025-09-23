@@ -979,7 +979,7 @@
           { "item": "jeans" },
           { "item": "socks" },
           { "item": "boots_steel" },
-          { "item": "duct_tape" },
+          { "group": "duct_tape_roll" },
           { "item": "screwdriver" },
           { "item": "wristwatch" },
           { "item": "mag_cars" },
@@ -3935,13 +3935,7 @@
       { "level": 3, "name": "unarmed" },
       { "level": 3, "name": "dodge" }
     ],
-    "proficiencies": [
-      "prof_knives_familiar",
-      "prof_knives_pro",
-      "prof_unarmed_familiar",
-      "prof_unarmed_pro",
-      "prof_shivs_familiar"
-    ],
+    "proficiencies": [ "prof_knives_familiar", "prof_knives_pro", "prof_unarmed_familiar", "prof_unarmed_pro", "prof_shivs_familiar" ],
     "effect_on_conditions": [ "scenario_assassin_conv" ],
     "items": {
       "both": {
@@ -6225,7 +6219,15 @@
     "name": "Bionic Patient",
     "description": "When the diagnosis came back positive, you signed up for a series of experimental bionic surgeries that saved your life.  Now you're healthier than you ever were before, thanks to a suite of bionic systems powered by your own metabolic functions.  Make the most of your second chance at life.",
     "points": 5,
-    "CBMs": [ "bio_leukocyte", "bio_blood_anal", "bio_blood_filter", "bio_nanobots", "bio_metabolics", "bio_power_storage_mkII", "bio_sleep_shutdown" ],
+    "CBMs": [
+      "bio_leukocyte",
+      "bio_blood_anal",
+      "bio_blood_filter",
+      "bio_nanobots",
+      "bio_metabolics",
+      "bio_power_storage_mkII",
+      "bio_sleep_shutdown"
+    ],
     "items": {
       "both": {
         "entries": [

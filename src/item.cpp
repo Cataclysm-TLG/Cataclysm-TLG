@@ -7015,7 +7015,10 @@ units::mass item::weight( bool include_contents, bool integral ) const
 
     }
 
-    ret *= ret_mul;
+    // prevent units::mass::max() * 1.0, which results in -units::mass::max()
+    if( ret_mul != 1 ) {
+        ret *= ret_mul;
+    }
 
     // if it has additional pockets include the mass of those
     if( contents.has_additional_pockets() ) {
@@ -10405,10 +10408,10 @@ ret_val<void> item::can_contain_partial_directly( const item &it ) const
 
 std::pair<item_location, item_pocket *> item::best_pocket( const item &it, item_location &this_loc,
         const item *avoid, const bool allow_sealed, const bool ignore_settings,
-        const bool nested, bool ignore_rigidity )
+        const bool nested, bool ignore_rigidity, bool allow_nested )
 {
     return contents.best_pocket( it, this_loc, avoid, allow_sealed, ignore_settings,
-                                 nested, ignore_rigidity );
+                                 nested, ignore_rigidity, allow_nested );
 }
 
 bool item::spill_contents( Character &c )
@@ -12624,6 +12627,7 @@ int item::fill_with( const item &contained, const int amount,
                      const bool allow_sealed,
                      const bool ignore_settings,
                      const bool into_bottom,
+                     const bool allow_nested,
                      Character *carrier )
 {
     if( amount <= 0 ) {
@@ -12646,7 +12650,7 @@ int item::fill_with( const item &contained, const int amount,
                 contained_item.charges = 1;
             }
             pocket = best_pocket( contained_item, loc, /*avoid=*/nullptr, allow_sealed,
-                                  ignore_settings ).second;
+                                  ignore_settings, false, false, allow_nested ).second;
         }
         if( pocket == nullptr ) {
             break;
@@ -15678,15 +15682,10 @@ void disp_mod_by_barrel::deserialize( const JsonObject &jo )
     mandatory( jo, false, "dispersion", dispersion_modifier );
 }
 
-void rot_spawn_data::load( const JsonObject &jo )
+void rot_spawn_data::deserialize( const JsonObject &jo )
 {
     optional( jo, false, "monster", rot_spawn_monster, mtype_id::NULL_ID() );
     optional( jo, false, "group", rot_spawn_group, mongroup_id::NULL_ID() );
     optional( jo, false, "chance", rot_spawn_chance );
     optional( jo, false, "amount", rot_spawn_monster_amount, {1, 1} );
-}
-
-void rot_spawn_data::deserialize( const JsonObject &jo )
-{
-    load( jo );
 }

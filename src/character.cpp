@@ -3255,7 +3255,7 @@ units::energy Character::get_max_power_level() const
 {
     units::energy val = enchantment_cache->modify_value( enchant_vals::mod::BIONIC_POWER,
                         max_power_level_cached + max_power_level_modifier );
-    return clamp( val, 0_kJ, units::energy_max );
+    return clamp( val, 0_kJ, units::energy::max() );
 }
 
 void Character::set_power_level( const units::energy &npower )
@@ -3265,13 +3265,13 @@ void Character::set_power_level( const units::energy &npower )
 
 void Character::set_max_power_level_modifier( const units::energy &capacity )
 {
-    max_power_level_modifier = clamp( capacity, units::energy_min, units::energy_max );
+    max_power_level_modifier = clamp( capacity, units::energy::min(), units::energy::max() );
 }
 
 void Character::set_max_power_level( const units::energy &capacity )
 {
-    max_power_level_modifier = clamp( capacity - max_power_level_cached, units::energy_min,
-                                      units::energy_max );
+    max_power_level_modifier = clamp( capacity - max_power_level_cached, units::energy::min(),
+                                      units::energy::max() );
 }
 
 void Character::mod_power_level( const units::energy &npower )
@@ -3288,8 +3288,8 @@ void Character::mod_power_level( const units::energy &npower )
 
 void Character::mod_max_power_level_modifier( const units::energy &npower )
 {
-    max_power_level_modifier = clamp( max_power_level_modifier + npower, units::energy_min,
-                                      units::energy_max );
+    max_power_level_modifier = clamp( max_power_level_modifier + npower, units::energy::min(),
+                                      units::energy::max() );
 }
 
 bool Character::is_max_power() const
@@ -13583,7 +13583,8 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
     item_location wielded = get_wielded_item();
     if( wielded && wielded->has_item( it ) ) {
         add_msg_if_player( m_info,
-                           _( "You must put the %1s away before trying to take the %2s out of it." ), wielded.get_item()->tname(), it.tname() );
+                           _( "You must put the %1s away before trying to take the %2s out of it." ),
+                           wielded.get_item()->tname(), it.tname() );
         return false;
     }
 

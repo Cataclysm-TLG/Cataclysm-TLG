@@ -657,7 +657,8 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             enough_morale = player_character.has_morale_to_craft();
             valid_target = !can_mount.empty();
             //tool checks processed later
-            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+            enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                           player_character.has_flag( json_flag_BLIND_CRAFT );
             has_tools = true;
             break;
 
@@ -667,7 +668,8 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             valid_target = !need_repair.empty() && cpart >= 0;
             // checked later
             has_tools = true;
-            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+            enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                           player_character.has_flag( json_flag_BLIND_CRAFT );
             break;
 
         case 'm': {
@@ -681,7 +683,8 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
                     return pt.part().is_available() && !pt.part().faults().empty();
                 }
             } );
-            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+            enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                           player_character.has_flag( json_flag_BLIND_CRAFT );
             // checked later
             has_tools = true;
         }
@@ -703,7 +706,8 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             // Tool and skill checks processed later.
             has_tools = true;
             has_skill = true;
-            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+            enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                           player_character.has_flag( json_flag_BLIND_CRAFT );
             break;
 
         case 's':

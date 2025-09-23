@@ -2371,7 +2371,7 @@ int game::inventory_item_menu( item_location locThisItem,
                     if( !locThisItem.get_item()->is_container() ) {
                         avatar_action::eat( u, locThisItem );
                     } else {
-                        avatar_action::eat_or_use( u, game_menus::inv::consume( u, locThisItem ) );
+                        avatar_action::eat_or_use( u, game_menus::inv::consume( locThisItem ) );
                     }
                     break;
                 case 'W': {
@@ -2455,16 +2455,16 @@ int game::inventory_item_menu( item_location locThisItem,
                 }
                 case 'i':
                     if( oThisItem.is_container() ) {
-                        game_menus::inv::insert_items( u, locThisItem );
+                        game_menus::inv::insert_items( locThisItem );
                     }
                     break;
                 case 'o':
                     if( oThisItem.is_container() && oThisItem.num_item_stacks() > 0 ) {
-                        game_menus::inv::common( locThisItem, u );
+                        game_menus::inv::common( locThisItem );
                     }
                     break;
                 case '=':
-                    game_menus::inv::reassign_letter( u, oThisItem );
+                    game_menus::inv::reassign_letter( oThisItem );
                     break;
                 case KEY_PPAGE:
                     iScrollPos -= iScrollHeight;
@@ -4452,6 +4452,7 @@ float game::natural_light_level( const int zlev ) const
 
     // Sunlight/moonlight related stuff
     ret = sun_moon_light_at( calendar::turn );
+    ret *= get_weather().weather_id->light_multiplier;
     ret += get_weather().weather_id->light_modifier;
 
     // Artifact light level changes here. Even though some of these only have an effect
@@ -6510,13 +6511,13 @@ void game::pickup()
         return;
     }
     // Pick up items only from the selected tile
-    u.pick_up( game_menus::inv::pickup( u, *where_ ) );
+    u.pick_up( game_menus::inv::pickup( *where_ ) );
 }
 
 void game::pickup_all()
 {
     // Pick up items from current and all adjacent tiles
-    u.pick_up( game_menus::inv::pickup( u ) );
+    u.pick_up( game_menus::inv::pickup() );
 }
 
 void game::pickup( const tripoint_bub_ms &p )
@@ -6528,7 +6529,7 @@ void game::pickup( const tripoint_bub_ms &p )
     add_draw_callback( hilite_cb );
 
     // Pick up items only from the selected tile
-    u.pick_up( game_menus::inv::pickup( u, p ) );
+    u.pick_up( game_menus::inv::pickup( p ) );
 }
 
 //Shift player by one tile, look_around(), then restore previous position.
@@ -8915,7 +8916,7 @@ game::vmenu_ret game::list_items( const std::vector<map_item_stack> &item_list )
 
     do {
         if( action == "COMPARE" && activeItem ) {
-            game_menus::inv::compare( u, active_pos.raw() );
+            game_menus::inv::compare( active_pos.raw() );
         } else if( action == "FILTER" ) {
             ui.invalidate_ui();
             string_input_popup()
@@ -9537,13 +9538,13 @@ void game::insert_item()
         return;
     }
 
-    game_menus::inv::insert_items( u, item_loc );
+    game_menus::inv::insert_items( item_loc );
 }
 
 void game::unload_container()
 {
     if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent( _( "Unload where?" ) ) ) {
-        u.drop( game_menus::inv::unload_container( u ), *pnt );
+        u.drop( game_menus::inv::unload_container(), *pnt );
     }
 }
 
@@ -9709,7 +9710,8 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
         }
         return result.empty() ? "" : ( " " + colorize( result, c_dark_gray ) );
     };
-    const bool enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+    const bool enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                              player_character.has_flag( json_flag_BLIND_CRAFT );
 
     const int factor = player_character.max_quality( qual_BUTCHER, PICKUP_RANGE );
     const std::string msgFactor = factor > INT_MIN

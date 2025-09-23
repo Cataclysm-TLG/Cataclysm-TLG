@@ -266,7 +266,7 @@ void tutorial_game::per_turn()
         add_message( tut_lesson::LESSON_PICKUP );
     }
 
-    const trap &tr = here.tr_at( pos);
+    const trap &tr = here.tr_at( pos );
     if( tr == tr_tutorial_1 ) {
         add_message( tut_lesson::LESSON_LOOK );
     } else if( tr == tr_tutorial_2 ) {
