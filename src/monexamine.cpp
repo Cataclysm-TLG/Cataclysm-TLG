@@ -177,7 +177,8 @@ void push( monster &z )
         return;
     }
     map &here = get_map();
-    point delta( z.posx( here ) - player_character.posx( here ), z.posy( here ) - player_character.posy( here ) );
+    point delta( z.posx( here ) - player_character.posx( here ),
+                 z.posy( here ) - player_character.posy( here ) );
     if( z.move_to( tripoint_bub_ms( z.posx( here ) + delta.x, z.posy( here ) + delta.y, z.posz() ) ) ) {
         add_msg( _( "You pushed the %s." ), pet_name );
     } else {

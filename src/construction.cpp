@@ -1119,7 +1119,8 @@ bool player_can_build( Character &you, const read_only_visitable &inv, const con
 
 bool player_can_see_to_build( Character &you, const construction_group_str_id &group )
 {
-    if( you.fine_detail_vision_mod() < 4 || you.has_trait( trait_DEBUG_HS ) || you.has_flag( json_flag_BLIND_CRAFT ) ) {
+    if( you.fine_detail_vision_mod() < 4 || you.has_trait( trait_DEBUG_HS ) ||
+        you.has_flag( json_flag_BLIND_CRAFT ) ) {
         return true;
     }
     std::vector<construction *> cons = constructions_by_group( group );

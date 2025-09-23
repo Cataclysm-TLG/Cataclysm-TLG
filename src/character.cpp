@@ -13583,7 +13583,8 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
     item_location wielded = get_wielded_item();
     if( wielded && wielded->has_item( it ) ) {
         add_msg_if_player( m_info,
-                           _( "You must put the %1s away before trying to take the %2s out of it." ), wielded.get_item()->tname(), it.tname() );
+                           _( "You must put the %1s away before trying to take the %2s out of it." ),
+                           wielded.get_item()->tname(), it.tname() );
         return false;
     }
 

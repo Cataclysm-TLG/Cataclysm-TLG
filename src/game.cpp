@@ -9710,7 +9710,8 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
         }
         return result.empty() ? "" : ( " " + colorize( result, c_dark_gray ) );
     };
-    const bool enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
+    const bool enough_light = player_character.fine_detail_vision_mod() <= 4 ||
+                              player_character.has_flag( json_flag_BLIND_CRAFT );
 
     const int factor = player_character.max_quality( qual_BUTCHER, PICKUP_RANGE );
     const std::string msgFactor = factor > INT_MIN

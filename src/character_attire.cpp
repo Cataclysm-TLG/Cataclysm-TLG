@@ -2003,7 +2003,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     if( destroy ) {
                         map &here = get_map();
                         if( get_player_view().sees( here, guy ) ) {
-                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH, remove_color_tags( pre_damage_name ),
+                            SCT.add( point( guy.posx( here ), guy.posy( here ) ), direction::NORTH,
+                                     remove_color_tags( pre_damage_name ),
                                      m_neutral, _( "destroyed" ), m_info );
                         }
                         destroyed_armor_msg( guy, pre_damage_name );
