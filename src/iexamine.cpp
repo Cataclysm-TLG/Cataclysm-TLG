@@ -2903,7 +2903,6 @@ void iexamine::kiln_empty( Character &you, const tripoint_bub_ms &examp )
 
     // Burn stuff that should get charred, leave out the rest
     you.use_charges( itype_fire, 1 );
-    int char_charges = kiln_prep_internal( you, examp );
     here.i_clear( examp );
     here.furn_set( examp, next_kiln_type );
     item result( itype_unfinished_charcoal, calendar::turn );
