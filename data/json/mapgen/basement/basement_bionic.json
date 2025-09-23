@@ -6,7 +6,7 @@
     "object": {
       "fill_ter": "t_thconc_floor",
       "rows": [
-"                        ",
+        "                        ",
         "           ############ ",
         "           #...jjj....# ",
         "           #..........# ",
@@ -28,13 +28,12 @@
         " #.....#+##++#...#t..S# ",
         " #.....#.w#..#...+...C# ",
         " #.}...#.â#.<#...#.CC9# ",
-        " ###################### "
+        " ###################### ",
+        "                        "
       ],
       "palettes": [ "domestic_general_and_variant_palette", "standard_domestic_basement_palette" ],
       "terrain": { "~": "t_water_pool" },
-      "furniture": { "}": "f_pinball_machine",
-        "?": "f_autodoc",
-        "/": "f_autodoc_couch" },
+      "furniture": { "}": "f_pinball_machine", "?": "f_autodoc", "/": "f_autodoc_couch" },
       "place_loot": [
         { "group": "alcohol", "x": [ 14, 15 ], "y": 12, "chance": 96, "repeat": [ 1, 2 ] },
         { "group": "fridgesnacks", "x": [ 14, 15 ], "y": 12, "chance": 80, "repeat": [ 1, 2 ] },

@@ -763,7 +763,7 @@
     "damage_reduction": { "all": 8 },
     "variants": [ { "symbols": "T", "symbols_broken": "X" } ]
   },
-   {
+  {
     "type": "vehicle_part",
     "id": "ap_xl_wind_turbine",
     "name": { "str": "large wind turbine" },
@@ -802,7 +802,7 @@
     "damage_reduction": { "all": 9 },
     "variants": [ { "symbols": "Y", "symbols_broken": "X" } ]
   },
-    {
+  {
     "type": "vehicle_part",
     "id": "ap_water_wheel",
     "name": { "str": "water wheel" },

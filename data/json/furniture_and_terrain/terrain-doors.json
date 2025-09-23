@@ -256,13 +256,7 @@
     "rotates_to": "INDOORFLOOR",
     "flags": [ "FLAMMABLE_ASH", "DOOR", "NOITEM", "BARRICADABLE_DOOR", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_door_o",
-    "deconstruct": {
-      "ter_set": "t_door_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
-    },
+    "deconstruct": { "ter_set": "t_door_frame", "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ] },
     "bash": {
       "str_min": 8,
       "str_max": 80,
@@ -410,10 +404,7 @@
     "open": "t_door_lab_o",
     "deconstruct": {
       "ter_set": "t_door_lab_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
+      "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ]
     },
     "bash": {
       "str_min": 8,
@@ -445,10 +436,7 @@
     "open": "t_door_white_o",
     "deconstruct": {
       "ter_set": "t_door_white_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
+      "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ]
     },
     "bash": {
       "str_min": 8,
@@ -480,10 +468,7 @@
     "open": "t_door_gray_o",
     "deconstruct": {
       "ter_set": "t_door_gray_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
+      "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ]
     },
     "bash": {
       "str_min": 8,
@@ -515,10 +500,7 @@
     "open": "t_door_red_o",
     "deconstruct": {
       "ter_set": "t_door_red_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
+      "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ]
     },
     "bash": {
       "str_min": 8,
@@ -550,10 +532,7 @@
     "open": "t_door_green_o",
     "deconstruct": {
       "ter_set": "t_door_green_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
+      "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ]
     },
     "bash": {
       "str_min": 8,
@@ -1385,13 +1364,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "flags": [ "FLAMMABLE_ASH", "TRANSPARENT", "FLAT", "BARRICADABLE_DOOR", "ROAD", "SUPPORTS_ROOF" ],
-    "deconstruct": {
-      "ter_set": "t_door_frame",
-      "items": [
-        { "item": "wood_door", "count": 1 },
-        { "item": "nuts_bolts", "charges": 4 }
-      ]
-    },
+    "deconstruct": { "ter_set": "t_door_frame", "items": [ { "item": "wood_door", "count": 1 }, { "item": "nuts_bolts", "charges": 4 } ] },
     "close": "t_door_c",
     "bash": {
       "str_min": 5,
