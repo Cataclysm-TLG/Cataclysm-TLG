@@ -57,9 +57,9 @@
     "{": [ "f_vending_o", "f_vending_c" ]
   },
   "vendingmachines": {
-    "U": { "item_group": "vending_drink"  },
-    "V": { "item_group": "vending_food"  },
-    "W": { "item_group": "vending_drink"  },
-    "Á": { "item_group": "vending_food"  }
+    "U": { "item_group": "vending_drink" },
+    "V": { "item_group": "vending_food" },
+    "W": { "item_group": "vending_drink" },
+    "Á": { "item_group": "vending_food" }
   }
 }

@@ -89,7 +89,7 @@
       "toilets": { "&": {  } },
       "vendingmachines": { "v": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "items": {
-        "&": { "item": "alcohol", "chance": 8 },
+        "&": [ { "item": "alcohol", "chance": 8 }, { "item": "SUS_toilet", "chance": 50 } ],
         "T": { "item": "snacks", "chance": 5 },
         "X": { "item": "snacks", "chance": 30, "repeat": [ 1, 6 ] },
         "g": { "item": "fridgesnacks", "chance": 70, "repeat": [ 1, 6 ] },

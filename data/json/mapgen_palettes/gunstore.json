@@ -239,7 +239,8 @@
         "item": { "subtype": "collection", "//": "items on store desks", "entries": [ { "group": "office_mess" } ] },
         "repeat": 3,
         "chance": 20
-      }
+      },
+      "&": { "item": "SUS_toilet", "chance": 50 }
     }
   }
 ]
