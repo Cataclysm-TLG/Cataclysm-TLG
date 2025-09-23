@@ -20,6 +20,7 @@
 #include "enum_traits.h"
 #include "effect_on_condition.h"
 #include "flag.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "inventory.h"
@@ -27,6 +28,7 @@
 #include "item_group.h"
 #include "itype.h"
 #include "json.h"
+#include "mapgen.h"
 #include "mapgen_functions.h"
 #include "npc.h"
 #include "output.h"
@@ -1302,11 +1304,12 @@ std::function<bool( const item & )> recipe::get_component_filter(
     std::function<bool( const item & )> magazine_filter = return_true<item>;
     if( has_flag( "NEED_FULL_MAGAZINE" ) ) {
         magazine_filter = []( const item & component ) {
-            if( component.ammo_remaining() == 0 ) {
+            if( component.ammo_remaining( ) == 0 ) {
                 return false;
             }
             return !component.is_magazine() ||
-                   ( component.ammo_remaining() >= component.ammo_capacity( component.ammo_data()->ammo->type ) );
+                   ( component.ammo_remaining( ) >= component.ammo_capacity(
+                         component.ammo_data()->ammo->type ) );
         };
     }
 

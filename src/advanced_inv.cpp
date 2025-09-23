@@ -294,6 +294,7 @@ void advanced_inventory::init()
 
 void advanced_inventory::print_items( side p, bool active )
 {
+    map &here = get_map();
     advanced_inventory_pane &pane = panes[p];
     const auto &items = pane.items;
     const catacurses::window &window = pane.window;
@@ -366,7 +367,7 @@ void advanced_inventory::print_items( side p, bool active )
             } else if( pane.in_vehicle() ) {
                 maxvolume = s.get_vehicle_stack().max_volume();
             } else {
-                maxvolume = get_map().max_volume( s.pos );
+                maxvolume = here.max_volume( s.pos );
             }
             formatted_head = string_format( "%3.1f %s  %s/%s %s",
                                             convert_weight( pane.in_vehicle() ? s.weight_veh : s.weight ),
@@ -478,7 +479,7 @@ void advanced_inventory::print_items( side p, bool active )
             // TODO: transition to the item_location system used for the normal inventory
             unsigned int charges_total = 0;
             for( const item_location &item : sitem.items ) {
-                charges_total += item->ammo_remaining();
+                charges_total += item->ammo_remaining( );
             }
             if( stolen ) {
                 item_name = string_format( "%s %s", stolen_string, it.display_money( sitem.items.size(),
@@ -918,11 +919,14 @@ bool advanced_inventory::fill_lists_with_pane_items( Character &player_character
             continue;
         }
         for( const item_location &it : listit.items ) {
+
+            // do not move liquids or gases
+            if( ( it->made_of_from_type( phase_id::LIQUID ) && !it->is_frozen_liquid() ) ||
+                it->made_of_from_type( phase_id::GAS ) ) {
+                continue;
+            }
             if( dpane.get_area() == AIM_INVENTORY ) {
-                if( ( it->made_of_from_type( phase_id::LIQUID ) && !it->is_frozen_liquid() ) ||
-                    it->made_of_from_type( phase_id::GAS ) ) {
-                    continue;
-                }
+
                 if( !player_character.can_stash_partial( *it ) ) {
                     continue;
                 }

@@ -132,7 +132,9 @@ dealt_damage_instance talker_character_const::deal_damage( Creature *source, bod
 
 void talker_character::set_pos( tripoint_bub_ms new_pos )
 {
-    me_chr->setpos( new_pos );
+    map &here = get_map();
+
+    me_chr->setpos( here, new_pos );
 }
 
 void talker_character::set_str_max( int value )
@@ -173,6 +175,11 @@ void talker_character::set_int_bonus( int value )
 void talker_character::set_per_bonus( int value )
 {
     me_chr->mod_per_bonus( value );
+}
+
+void talker_character::set_cash( int value )
+{
+    me_chr->cash = value;
 }
 
 int talker_character_const::get_str_max() const
@@ -730,7 +737,9 @@ void talker_character::set_thirst( int value )
 
 bool talker_character_const::is_in_control_of( const vehicle &veh ) const
 {
-    return veh.player_in_control( *me_chr_const );
+    map &here = get_map();
+
+    return veh.player_in_control( here, *me_chr_const );
 }
 
 void talker_character::shout( const std::string &speech, bool order )
@@ -869,7 +878,9 @@ bool talker_character_const::can_see() const
 
 bool talker_character_const::can_see_location( const tripoint_bub_ms &pos ) const
 {
-    return me_chr_const->sees( pos );
+    const map &here = get_map();
+
+    return me_chr_const->sees( here, pos );
 }
 
 void talker_character::set_fatigue( int amount )

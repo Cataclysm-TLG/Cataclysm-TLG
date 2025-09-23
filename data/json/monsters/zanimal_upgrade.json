@@ -31,7 +31,7 @@
     "special_attacks": [ { "id": "bite_grab", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_grab_required", "max_mul": 1.5 } ],
     "death_drops": "mon_dog_death_drops",
     "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 1 }
   },
   {
@@ -209,7 +209,7 @@
     "vision_night": 3,
     "harvest": "puppy_bones",
     "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY", "BASHES" ],
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 3 }
   },
   {
@@ -245,7 +245,7 @@
       { "id": "scratch_grab_required" },
       { "id": "bite_grab_required" }
     ],
-    "flags": [ "SEES", "HEARS", "GRABS", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "GRABS", "REVIVES", "WARM", "NO_BREATHE", "POISON", "FILTHY" ],
     "armor": { "bash": 2, "cut": 17, "stab": 30, "acid": 3, "bullet": 32, "electric": 3 }
   },
   {
@@ -328,7 +328,7 @@
     "harvest": "zombie_animal",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
     "regenerates": 9,
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "NO_BREATHE", "REVIVES" ]
   },
   {
     "id": "mon_zombie_horse_black",
@@ -342,7 +342,7 @@
     "dodge": 3,
     "emit_fields": [ { "emit_id": "emit_smoke_stream", "delay": "1 s" } ],
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true }, "message": "The %s explodes!" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "POISON", "HARDTOSHOOT", "NO_BREATHE", "REVIVES" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "WARM", "POISON", "HARDTOSHOOT", "NO_BREATHE", "REVIVES" ]
   },
   {
     "id": "mon_zombie_horse_pale",
@@ -359,7 +359,7 @@
     "families": [ "prof_intro_biology", "prof_wp_zombie", "prof_wp_skeleton" ],
     "harvest": "puppy_bones",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
-    "flags": [ "SEES", "HEARS", "BASHES", "GROUP_BASH", "HARDTOSHOOT", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "BASHES", "GROUP_BASH", "WARM", "HARDTOSHOOT", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
     "armor": { "bash": 5, "electric": 2, "cut": 16, "stab": 30, "acid": 2, "bullet": 24 }
   },
   {
@@ -427,6 +427,7 @@
       "SMELLS",
       "STUMBLES",
       "BASHES",
+      "WARM",
       "GROUP_BASH",
       "POISON",
       "NO_BREATHE",

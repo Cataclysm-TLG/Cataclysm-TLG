@@ -26,7 +26,7 @@
 #include "units.h"
 
 class JsonObject;
-class Character;
+class JsonOut;
 class vehicle;
 
 template <typename T> class generic_factory;

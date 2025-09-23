@@ -114,7 +114,8 @@ class map_stack : public item_stack
     public:
         map_stack( cata::colony<item> *newstack, tripoint_bub_ms newloc, map *neworigin ) :
             item_stack( newstack ), location( newloc ), myorigin( neworigin ) {}
-        void insert( const item &newitem ) override;
+        void insert( map &, const item &newitem ) override;
+        void insert( const item &newitem );
         iterator erase( const_iterator it ) override;
         int count_limit() const override {
             return MAX_ITEM_IN_SQUARE;
@@ -593,7 +594,7 @@ class map
 
         bool is_open_air( const tripoint_bub_ms &p ) const;
 
-        bool try_fall( const tripoint_bub_ms &p, Creature *c ) const;
+        bool try_fall( const tripoint_bub_ms &p, Creature *c );
 
         /**
         * Similar behavior to `move_cost()`, but ignores vehicles.
@@ -820,7 +821,7 @@ class map
         // Returns the wheel area of the vehicle multiplied by traction of the surface
         // When ignore_movement_modifiers is set to true, it returns the area of the wheels touching the ground
         // TODO: Remove the ugly sinking vehicle hack
-        float vehicle_wheel_traction( const vehicle &veh, bool ignore_movement_modifiers = false ) const;
+        float vehicle_wheel_traction( const vehicle &veh, bool ignore_movement_modifiers = false );
 
         // Executes vehicle-vehicle collision based on vehicle::collision results
         // Returns impulse of the executed collision
@@ -2273,8 +2274,6 @@ template<int SIZE, int MULTIPLIER>
 void shift_bitset_cache( std::bitset<SIZE *SIZE> &cache, const point_rel_sm &s );
 
 bool ter_furn_has_flag( const ter_t &ter, const furn_t &furn, ter_furn_flag flag );
-// Returns the terrain to apply if the terrain is uniform, and t_null otherwise.
-ter_str_id uniform_terrain( const oter_id &oter );
 bool generate_uniform( const tripoint_abs_sm &p, const ter_str_id &ter );
 bool generate_uniform_omt( const tripoint_abs_sm &p, const oter_id &terrain_type );
 

@@ -278,8 +278,10 @@ standard_npc::standard_npc( const std::string &name, const tripoint_bub_ms &pos,
                             const std::vector<std::string> &clothing,
                             int sk_lvl, int s_str, int s_dex, int s_int, int s_per )
 {
+    map &here = get_map();
+
     this->name = name;
-    set_pos_bub_only( pos );
+    set_pos_bub_only( here, pos );
     if( !getID().is_valid() ) {
         setID( g->assign_npc_id() );
     }
@@ -703,6 +705,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
         add_default_background();
         set_skills_from_hobbies( true ); // Only trains skills that are still at 0 at this point
         set_proficiencies_from_hobbies();
+        set_recipes_from_hobbies();
         set_bionics_from_hobbies(); // Just in case, for mods
     }
 
@@ -1182,7 +1185,7 @@ void npc::place_on_map( map *here )
 
     for( const tripoint_abs_ms &p : closest_points_first( pos_abs(), SEEX + 1 ) ) {
         if( g->is_empty( here, p ) ) {
-            setpos( here, here->get_bub( p ) );
+            setpos( p );
             return;
         }
     }
@@ -1481,6 +1484,8 @@ bool npc::wear_if_wanted( const item &it, std::string &reason )
 
 void npc::stow_item( item &it )
 {
+    map &here = get_map();
+
     bool stow_bionic_weapon = is_using_bionic_weapon()
                               && get_wielded_item().get_item() == &it;
     if( stow_bionic_weapon ) {
@@ -1488,7 +1493,7 @@ void npc::stow_item( item &it )
         return;
     }
 
-    bool avatar_sees = get_player_view().sees( pos_bub() );
+    bool avatar_sees = get_player_view().sees( here, pos_bub( here ) );
     if( wear_item( it, false ) ) {
         // Wearing the item was successful, remove weapon and post message.
         if( avatar_sees ) {
@@ -1508,12 +1513,14 @@ void npc::stow_item( item &it )
         if( avatar_sees ) {
             add_msg_if_npc( m_info, _( "<npcname> drops the %s." ), it.tname() );
         }
-        get_map().add_item_or_charges( pos_bub(), remove_item( it ) );
+        here.add_item_or_charges( pos_bub( here ), remove_item( it ) );
     }
 }
 
 bool npc::wield( item &it )
 {
+    const map &here = get_map();
+
     // sanity check: exit early if we're trying to wield the current weapon
     // needed for ranged_balance_test
     if( is_wielding( it ) ) {
@@ -1552,7 +1559,7 @@ bool npc::wield( item &it )
     cata::event e = cata::event::make<event_type::character_wields_item>( getID(), weapon->typeId() );
     get_event_bus().send_with_talker( this, &weapon, e );
 
-    if( get_player_view().sees( pos_bub() ) ) {
+    if( get_player_view().sees( here, pos_bub( here ) ) ) {
         add_msg_if_npc( m_info, _( "<npcname> wields a %s." ),  weapon->tname() );
     }
     invalidate_range_cache();
@@ -1749,10 +1756,12 @@ npc_opinion npc::get_opinion_values( const Character &you ) const
 
 void npc::mutiny()
 {
+    const map &here = get_map();
+
     if( !my_fac || !is_player_ally() ) {
         return;
     }
-    const bool seen = get_player_view().sees( pos_bub() );
+    const bool seen = get_player_view().sees( here, pos_bub( here ) );
     if( seen ) {
         add_msg( m_bad, _( "%s is tired of your incompetent leadership and abuse!" ), disp_name() );
     }
@@ -1783,9 +1792,11 @@ void npc::mutiny()
 
 float npc::vehicle_danger( int radius ) const
 {
+    map &here = get_map();
+
     const tripoint_bub_ms from( posx() - radius, posy() - radius, posz() );
     const tripoint_bub_ms to( posx() + radius, posy() + radius, posz() );
-    VehicleList vehicles = get_map().get_vehicles( from, to );
+    VehicleList vehicles = here.get_vehicles( from, to );
 
     int danger = -1;
 
@@ -1793,8 +1804,8 @@ float npc::vehicle_danger( int radius ) const
     for( size_t i = 0; i < vehicles.size(); ++i ) {
         const wrapped_vehicle &wrapped_veh = vehicles[i];
         if( wrapped_veh.v->is_moving() ) {
-            const auto &points_to_check = wrapped_veh.v->immediate_path();
-            point_abs_ms p( get_map().get_abs( pos_bub() ).xy() );
+            const auto &points_to_check = wrapped_veh.v->immediate_path( &here );
+            point_abs_ms p( here.get_abs( pos_bub() ).xy() );
             if( points_to_check.find( p ) != points_to_check.end() ) {
                 danger = i;
             }
@@ -1959,16 +1970,18 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
 
 int npc::indoor_voice() const
 {
+    const map &here = get_map();
+
     const int max_volume = get_shout_volume();
     const int min_volume = 1;
     // Actual hearing distance is incredibly dependent on ambient noise and our noise propagation model is... rather binary
     // But we'll assume people normally want to project their voice about 6 meters away.
     int wanted_volume = 6;
     Character &player = get_player_character();
-    const int distance_to_player = rl_dist( pos_bub(), player.pos_bub() );
+    const int distance_to_player = rl_dist( pos_abs(), player.pos_abs() );
     if( is_following() || is_ally( player ) ) {
         wanted_volume = distance_to_player;
-    } else if( is_enemy() && sees( player.pos_bub() ) ) {
+    } else if( is_enemy() && sees( here, player.pos_bub( here ) ) ) {
         // Battle cry! Bandits have no concept of indoor voice, even when not threatened.
         wanted_volume = max_volume;
     }
@@ -2644,6 +2657,8 @@ Creature::Attitude npc::attitude_to( const Creature &other ) const
 
 void npc::npc_dismount()
 {
+    map &here = get_map();
+
     if( !mounted_creature || !has_effect( effect_riding ) ) {
         add_msg_debug( debugmode::DF_NPC,
                        "NPC %s tried to dismount, but they have no mount, or they are not riding",
@@ -2651,7 +2666,7 @@ void npc::npc_dismount()
         return;
     }
     std::optional<tripoint_bub_ms> pnt;
-    for( const tripoint_bub_ms &elem : get_map().points_in_radius( pos_bub(), 1 ) ) {
+    for( const tripoint_bub_ms &elem : here.points_in_radius( pos_bub( here ), 1 ) ) {
         if( g->is_empty( elem ) ) {
             pnt = elem;
             break;
@@ -2669,7 +2684,7 @@ void npc::npc_dismount()
     mounted_creature->remove_effect( effect_ridden );
     mounted_creature->add_effect( effect_controlled, 5_turns );
     mounted_creature = nullptr;
-    setpos( *pnt );
+    setpos( here, *pnt );
     mod_moves( -get_speed() );
 }
 
@@ -2732,7 +2747,7 @@ int npc::follow_distance() const
         return 2;
     }
     // If NPC doesn't see player, change follow distance to 2
-    if( !sees( player_character ) ) {
+    if( !sees( here,  player_character ) ) {
         return 2;
     }
     return 4;
@@ -2756,6 +2771,8 @@ nc_color npc::basic_symbol_color() const
 
 int npc::print_info( const catacurses::window &w, int line, int vLines, int column ) const
 {
+    const map &here = get_map();
+
     const int last_line = line + vLines;
     const int iWidth = getmaxx( w ) - 1 - column;
     // First line of w is the border; the next 4 are terrain info, and after that
@@ -2781,10 +2798,10 @@ int npc::print_info( const catacurses::window &w, int line, int vLines, int colu
     wprintz( w, symbol_color(), " %s", npc_attitude_name( get_attitude() ) );
 
     // Awareness indicator on the third line.
-    std::string senses_str = sees( player_character ) ? _( "Aware of your presence" ) :
+    std::string senses_str = sees( here, player_character ) ? _( "Aware of your presence" ) :
                              _( "Unaware of you" );
     line += fold_and_print( w, point( column, line ), iWidth,
-                            sees( player_character ) ? c_yellow : c_green,
+                            sees( here, player_character ) ? c_yellow : c_green,
                             senses_str );
 
     // Print what item the NPC is holding if any on the fourth line.
@@ -2996,7 +3013,7 @@ void npc::die( map *here, Creature *nkiller )
     }
     if( !is_hallucination() ) {
         Character &you = get_player_character();
-        if( is_player_ally() && you.sees( *this ) ) {
+        if( is_player_ally() && you.sees( *here, pos_bub() ) ) {
             if( !you.has_flag( json_flag_PSYCHOPATH ) && !you.has_trait( trait_NUMB ) ) {
                 if( you.has_flag( json_flag_SPIRITUAL ) ) {
                     you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
@@ -3009,7 +3026,7 @@ void npc::die( map *here, Creature *nkiller )
             const character_id &cid = entry.first;
             Character *member = g->critter_by_id<Character>( cid );
             // TODO: Finding out after the fact.
-            if( member->sees( *this ) ) {
+            if( member->sees( *here, pos_bub() ) ) {
                 if( !member->has_flag( json_flag_PSYCHOPATH ) && !member->has_trait( trait_NUMB ) ) {
                     if( member->has_flag( json_flag_SPIRITUAL ) ) {
                         member->add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
@@ -3061,7 +3078,7 @@ void npc::die( map *here, Creature *nkiller )
     // Need to unboard from vehicle before dying, otherwise
     // the vehicle code cannot find us
     if( in_vehicle ) {
-        here->unboard_vehicle( pos_bub( here ), true );
+        here->unboard_vehicle( pos_bub( *here ), true );
     }
     if( is_mounted() ) {
         monster *critter = mounted_creature.get();
@@ -3264,7 +3281,9 @@ void npc::add_msg_player_or_npc( const game_message_params &params,
                                  const std::string &/*player_msg*/,
                                  const std::string &npc_msg ) const
 {
-    if( get_player_view().sees( *this ) ) {
+    const map &here = get_map();
+
+    if( get_player_view().sees( here, *this ) ) {
         add_msg( params, replace_with_npc_name( npc_msg ) );
     }
 }
@@ -3365,14 +3384,14 @@ void npc::on_load( map *here )
 
     // for spawned npcs
     gravity_check( here );
-    if( here->has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub( here ) ) &&
-        !here->has_vehicle_floor( pos_bub( here ) ) ) {
+    if( here->has_flag( ter_furn_flag::TFLAG_UNSTABLE, pos_bub( *here ) ) &&
+        !here->has_vehicle_floor( pos_bub( *here ) ) ) {
         add_effect( effect_bouldering, 1_turns,  true );
     } else if( has_effect( effect_bouldering ) ) {
         remove_effect( effect_bouldering );
     }
     if( here->veh_at( pos_abs() ).part_with_feature( VPFLAG_BOARDABLE, true ) && !in_vehicle ) {
-        here->board_vehicle( pos_bub( here ), this );
+        here->board_vehicle( pos_bub( *here ), this );
     }
     if( has_effect( effect_riding ) && !mounted_creature ) {
         if( const monster *const mon = get_creature_tracker().creature_at<monster>( pos_abs() ) ) {
@@ -3606,7 +3625,7 @@ std::string npc::extended_description() const
     } else if( attitude == NPCATT_FLEE || attitude == NPCATT_FLEE_TEMP ) {
         ss += _( "Is trying to flee from you." );
     } else if( is_player_ally() ) {
-        ss += _( "Is your friend." );
+        ss += _( "Is your ally." );
     } else if( is_following() ) {
         ss += _( "Is following you." );
     } else if( is_leader() ) {
@@ -3615,12 +3634,6 @@ std::string npc::extended_description() const
         ss += _( "Will try to kill you or flee from you if you reveal yourself." );
     } else {
         ss += _( "Is neutral." );
-    }
-
-    if( hit_by_player ) {
-        ss += "--\n";
-        ss += _( "Is still innocent and killing them will be considered murder." );
-        // TODO: "But you don't care because you're an edgy psycho"
     }
 
     return replace_colors( ss );
@@ -3775,6 +3788,8 @@ npc_attitude npc::get_attitude() const
 
 void npc::set_attitude( npc_attitude new_attitude )
 {
+    const map &here = get_map();
+
     if( new_attitude == attitude ) {
         return;
     }
@@ -3790,7 +3805,7 @@ void npc::set_attitude( npc_attitude new_attitude )
                    get_name(), npc_attitude_id( attitude ), npc_attitude_id( new_attitude ) );
     attitude_group new_group = get_attitude_group( new_attitude );
     attitude_group old_group = get_attitude_group( attitude );
-    if( new_group != old_group && !is_fake() && get_player_view().sees( *this ) ) {
+    if( new_group != old_group && !is_fake() && get_player_view().sees( here, *this ) ) {
         switch( new_group ) {
             case attitude_group::hostile:
                 add_msg_if_npc( m_bad, _( "<npcname> gets angry!" ) );

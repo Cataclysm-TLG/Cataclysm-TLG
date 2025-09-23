@@ -1177,7 +1177,7 @@ TEST_CASE( "best_pocket_in_item_contents", "[pocket][item][best]" )
         // Empty magazine
         item glockmag( "test_glockmag", calendar::turn, 0 );
         REQUIRE( glockmag.has_pocket_type( pocket_type::MAGAZINE ) );
-        REQUIRE( glockmag.ammo_remaining() == 0 );
+        REQUIRE( glockmag.ammo_remaining( ) == 0 );
         // A single 9mm bullet
         item glockammo( "test_9mm_ammo", calendar::turn, 1 );
         REQUIRE( glockammo.is_ammo() );

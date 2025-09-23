@@ -327,6 +327,8 @@ static void check_npc_movement( const tripoint_bub_ms &origin )
 
 static npc *make_companion( const tripoint_bub_ms &npc_pos )
 {
+    map &here = get_map();
+
     shared_ptr_fast<npc> guy = make_shared_fast<npc>();
     guy->normalize();
     guy->randomize();
@@ -336,7 +338,7 @@ static npc *make_companion( const tripoint_bub_ms &npc_pos )
     guy->companion_mission_role_id.clear();
     guy->guard_pos = std::nullopt;
     clear_character( *guy );
-    guy->setpos( npc_pos );
+    guy->setpos( here, npc_pos );
     talk_function::follow( *guy );
 
     return get_creature_tracker().creature_at<npc>( npc_pos );
@@ -470,8 +472,8 @@ TEST_CASE( "npc-movement" )
             if( type == 'V' || type == 'W' || type == 'M' ) {
                 vehicle *veh = here.add_vehicle( vehicle_prototype_none, p, 270_degrees, 0, 0 );
                 REQUIRE( veh != nullptr );
-                veh->install_part( point_rel_ms::zero, vpart_frame );
-                veh->install_part( point_rel_ms::zero, vpart_seat );
+                veh->install_part( here, point_rel_ms::zero, vpart_frame );
+                veh->install_part( here, point_rel_ms::zero, vpart_seat );
                 here.add_vehicle_to_cache( veh );
             }
             // spawn npcs

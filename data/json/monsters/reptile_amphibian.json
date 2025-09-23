@@ -285,7 +285,7 @@
     "harvest": "mutant_animal_large_noskin",
     "dissect": "dissect_lizard_sample_single",
     "path_settings": { "max_dist": 5 },
-    "flags": [ "SEES", "SMELLS", "WARM", "VENOM", "SWIMS", "SWARMS" ]
+    "flags": [ "SEES", "SMELLS", "VENOM", "SWIMS", "SWARMS" ]
   },
   {
     "id": "mon_tadpole",

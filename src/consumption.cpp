@@ -1509,8 +1509,7 @@ void Character::modify_morale( item &food, const int nutr )
         }
         add_morale( morale_honey, honey_fun, 100, 4_hours, 3_hours );
     }
-    if( fun.first <= -5 ) {
-        int nausea_chance = fun.first * -1;
+    if( nausea_chance > 5 ) {
         if( has_trait( trait_PICKYEATER ) ) {
             nausea_chance += 5;
         }
@@ -1519,7 +1518,7 @@ void Character::modify_morale( item &food, const int nutr )
         }
     }
     if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
-        nausea_chance = static_cast<int>( nausea_chance * rng( 1.25, 0.5 ) );
+        nausea_chance = static_cast<int>( nausea_chance * rng_float( 1.25, 0.5 ) );
         // 15 minutes is the max duration, and the effect's intensity automatically scales with duration.
         add_effect( effect_nausea, ( 1 / ( std::min( 100, nausea_chance ) * .15 ) ) * 15_minutes );
         add_msg_player_or_npc( _( "You're not sure you're going to be able to keep that down." ),

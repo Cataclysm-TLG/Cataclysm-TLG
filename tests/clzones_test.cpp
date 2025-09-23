@@ -90,13 +90,13 @@ TEST_CASE( "zone_unloading_ammo_belts", "[zones][items][ammo_belt][activities][u
 
     item ammo_belt = item( itype_belt223, calendar::turn );
     ammo_belt.ammo_set( ammo_belt.ammo_default() );
-    int belt_ammo_count_before_unload = ammo_belt.ammo_remaining();
+    int belt_ammo_count_before_unload = ammo_belt.ammo_remaining( );
 
     REQUIRE( belt_ammo_count_before_unload > 0 );
 
     WHEN( "unloading ammo belts using UNLOAD_ALL " ) {
         if( in_vehicle ) {
-            vp->vehicle().add_item( vp->part(), ammo_belt );
+            vp->vehicle().add_item( here, vp->part(), ammo_belt );
         } else {
             here.add_item_or_charges( tripoint_bub_ms( tripoint::east ), ammo_belt );
         }

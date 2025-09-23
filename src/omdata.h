@@ -200,6 +200,7 @@ enum class oter_flags : int {
     ocean_shore,
     ravine,
     ravine_edge,
+    pp_generate_riot_damage,
     generic_loot,
     risk_extreme,
     risk_high,
@@ -334,6 +335,7 @@ struct oter_type_t {
         // Spawns are added to the submaps *once* upon mapgen of the submaps
         overmap_static_spawns static_spawns;
         bool was_loaded = false;
+        std::optional<ter_str_id> uniform_terrain;
 
         oter_vision_id vision_levels;
 
@@ -531,6 +533,14 @@ struct oter_t {
 
         bool is_ravine_edge() const {
             return type->has_flag( oter_flags::ravine_edge );
+        }
+
+        bool has_uniform_terrain() const {
+            return !!type->uniform_terrain;
+        }
+
+        std::optional<ter_str_id> get_uniform_terrain() const {
+            return type->uniform_terrain;
         }
 
     private:

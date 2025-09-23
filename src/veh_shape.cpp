@@ -11,30 +11,31 @@
 #include "veh_utils.h"
 #include "ui_manager.h"
 
-veh_shape::veh_shape( vehicle &vehicle ): veh( vehicle ) { }
+veh_shape::veh_shape( map &here, vehicle &vehicle ): veh( vehicle ), here( here ) { }
 
 player_activity veh_shape::start( const tripoint_bub_ms &pos )
 {
+    map &temp = here; // Work around to get 'here' to be accepted into the lambda list
     avatar &you = get_avatar();
-    on_out_of_scope cleanup( []() {
-        get_map().invalidate_map_cache( get_avatar().view_offset.z() );
+    on_out_of_scope cleanup( [&temp]() {
+        temp.invalidate_map_cache( get_avatar().view_offset.z() );
     } );
     restore_on_out_of_scope view_offset_prev( you.view_offset );
 
     cursor_allowed.clear();
     for( const vpart_reference &part : veh.get_all_parts() ) {
-        cursor_allowed.insert( part.pos_bub() );
+        cursor_allowed.insert( part.pos_bub( here ) );
     }
 
     if( !set_cursor_pos( pos ) ) {
         debugmsg( "failed to set cursor at given part" );
-        set_cursor_pos( veh.bub_part_pos( 0 ) );
+        set_cursor_pos( veh.bub_part_pos( here, 0 ) );
     }
 
     const auto target_ui_cb = make_shared_fast<game::draw_callback_t>(
     [&]() {
         const avatar &you = get_avatar();
-        g->draw_cursor_unobscuring( you.pos_bub() + you.view_offset );
+        g->draw_cursor_unobscuring( you.pos_bub( here ) + you.view_offset );
     } );
     g->add_draw_callback( target_ui_cb );
     ui_adaptor ui;
@@ -87,7 +88,7 @@ std::vector<vpart_reference> veh_shape::parts_under_cursor() const
     // TODO: tons of methods getting parts from vehicle but all of them seem inadequate?
     for( int part_idx = 0; part_idx < veh.part_count_real(); part_idx++ ) {
         const vehicle_part &p = veh.part( part_idx );
-        if( veh.bub_part_pos( p ) == get_cursor_pos() && !p.is_fake ) {
+        if( veh.bub_part_pos( here, p ) == get_cursor_pos() && !p.is_fake ) {
             res.emplace_back( veh, part_idx );
         }
     }
@@ -143,7 +144,7 @@ void veh_shape::change_part_shape( vpart_reference vpr ) const
             .keep_menu_open()
             .skip_locked_check()
             .skip_theft_check()
-            .location( veh.bub_part_pos( part ).raw() )
+            .location( veh.bub_part_pos( here, part ).raw() )
             .select( part.variant == vvid )
             .desc( _( "Confirm to save or exit to revert" ) )
             .symbol( vv.get_symbol_curses( 0_degrees, false ) )
@@ -198,7 +199,7 @@ bool veh_shape::set_cursor_pos( const tripoint_bub_ms &new_pos )
     }
 
     if( z != cursor_pos.z() ) {
-        get_map().invalidate_map_cache( z );
+        here.invalidate_map_cache( z );
     }
     cursor_pos = target_pos;
     you.view_offset = cursor_pos - you.pos_bub();

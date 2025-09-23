@@ -2557,6 +2557,7 @@ class Character : public Creature, public visitable
         int get_proficiency_bonus( const std::string &category, proficiency_bonus_type prof_bonus ) const;
         void add_default_background();
         void set_proficiencies_from_hobbies();
+        void set_recipes_from_hobbies();
 
         // tests only!
         void set_proficiency_practice( const proficiency_id &id, const time_duration &amount );
@@ -2779,7 +2780,8 @@ class Character : public Creature, public visitable
         void pause(); // '.' command; pauses & resets recoil
 
         /** Check player strong enough to lift an object unaided by equipment (jacks, levers etc) */
-        template <typename T> bool can_lift( const T &obj ) const;
+        bool can_lift( item &obj ) const;
+        bool can_lift( vehicle &veh, map &here ) const;
         // --------------- Values ---------------
         std::string name; // Pre-cataclysm name, invariable
         // In-game name which you give to npcs or whoever asks, variable
@@ -3237,7 +3239,7 @@ class Character : public Creature, public visitable
          *  @param gun item to fire (which does not necessary have to be in the players possession)
          *  @return number of shots actually fired
          */
-        int fire_gun( map *here, const tripoint_bub_ms &target, int shots, item &gun,
+        int fire_gun( map &here, const tripoint_bub_ms &target, int shots, item &gun,
                       item_location ammo = item_location() );
         /** Execute a throw */
         dealt_projectile_attack throw_item( const tripoint_bub_ms &target, const item &to_throw,
@@ -3851,9 +3853,10 @@ class Character : public Creature, public visitable
         void add_known_trap( const tripoint_bub_ms &pos, const trap &t );
 
         // see Creature::sees
-        bool sees( const tripoint_bub_ms &t, bool is_avatar = false, int range_mod = 0 ) const override;
+        bool sees( const map &here, const tripoint_bub_ms &t, bool is_avatar = false,
+                   int range_mod = 0 ) const override;
         // see Creature::sees
-        bool sees( const Creature &critter ) const override;
+        bool sees( const map &here, const Creature &critter ) const override;
         Attitude attitude_to( const Creature &other ) const override;
         virtual npc_attitude get_attitude() const;
 
@@ -4272,7 +4275,4 @@ struct enum_traits<character_stat> {
 };
 /// Get translated name of a stat
 std::string get_stat_name( character_stat Stat );
-
-extern template bool Character::can_lift<item>( const item &obj ) const;
-extern template bool Character::can_lift<vehicle>( const vehicle &obj ) const;
 #endif // CATA_SRC_CHARACTER_H

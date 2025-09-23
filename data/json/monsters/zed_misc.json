@@ -59,7 +59,6 @@
       "KEENNOSE",
       "STUMBLES",
       "GRABS",
-      "WARM",
       "BASHES",
       "GROUP_BASH",
       "NO_BREATHE",
@@ -160,7 +159,7 @@
       "effect": { "id": "death_acid", "hit_self": true, "min_level": 3 },
       "corpse_type": "NO_CORPSE"
     },
-    "flags": [ "SEES", "HEARS", "SMELLS", "KEENNOSE", "STUMBLES", "WARM", "POISON", "GRABS", "NO_BREATHE" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "KEENNOSE", "STUMBLES", "POISON", "GRABS", "NO_BREATHE" ]
   },
   {
     "id": "mon_zombullfrog",
@@ -1811,6 +1810,7 @@
       "STUMBLES",
       "GRABS",
       "BASHES",
+      "WARM",
       "GROUP_BASH",
       "POISON",
       "NO_BREATHE",

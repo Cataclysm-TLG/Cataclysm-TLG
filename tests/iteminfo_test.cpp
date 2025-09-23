@@ -2444,7 +2444,7 @@ TEST_CASE( "list_of_item_qualities", "[iteminfo][quality]" )
         int bat_charges = drill.type->charges_to_use();
         battery.ammo_set( battery.ammo_default(), bat_charges );
         drill.put_in( battery, pocket_type::MAGAZINE_WELL );
-        REQUIRE( drill.ammo_remaining() == bat_charges );
+        REQUIRE( drill.ammo_remaining( ) == bat_charges );
 
         CHECK( item_info_str( drill, qualities ) ==
                "--\n"
@@ -2500,7 +2500,7 @@ TEST_CASE( "tool_info", "[iteminfo][tool]" )
 
         item matches( "test_matches" );
         matches.ammo_set( itype_match );
-        REQUIRE( matches.ammo_remaining() > 0 );
+        REQUIRE( matches.ammo_remaining( ) > 0 );
 
         CHECK( item_info_str( matches, charges ) ==
                "--\n"
@@ -2512,7 +2512,7 @@ TEST_CASE( "tool_info", "[iteminfo][tool]" )
 
         item candle( "candle" );
         candle.ammo_set( itype_candle_wax );
-        REQUIRE( candle.ammo_remaining() > 0 );
+        REQUIRE( candle.ammo_remaining( ) > 0 );
 
         CHECK( item_info_str( candle, burnout ) ==
                "--\n"

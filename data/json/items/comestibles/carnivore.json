@@ -291,6 +291,7 @@
     "volume": "250 ml",
     "material": "blood",
     "comestible_type": "DRINK",
+    "spoils_in": "1 day",
     "looks_like": "blood",
     "calories": 210,
     "parasites": 64,
@@ -435,6 +436,7 @@
     "symbol": "~",
     "charges": 1,
     "phase": "liquid",
+    "spoils_in": "1 day",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ] ],
     "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
   },
@@ -483,6 +485,7 @@
     "symbol": "~",
     "charges": 1,
     "phase": "liquid",
+    "spoils_in": "1 day",
     "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ], [ "human_flesh_vitamin", 1 ] ],
     "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
   },
@@ -756,7 +759,8 @@
     "proportional": { "parasites": 0.5 },
     "price_postapoc": "25 cent",
     "delete": { "flags": [ "SMOKABLE" ] },
-    "relative": { "vitamins": [ [ "iron", 4 ] ], "fun": -5 }
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 16 ], [ "meat_allergen", 1 ] ],
+    "relative": { "fun": -5 }
   },
   {
     "id": "offal_cooked",
@@ -1623,7 +1627,7 @@
     "type": "COMESTIBLE",
     "copy-from": "meat_tainted",
     "name": { "str_sp": "tainted blood" },
-    "description": "Blood that's obviously unhealthy.  You could drink it, but it will poison you.",
+    "description": "Foul blood that's rapidly getting worse.  Separated from its owner, it seems intent on congealing into a disgusting jelly as fast as possible.  You could drink it, but it will poison you.",
     "weight": "262 g",
     "volume": "250 ml",
     "comestible_type": "DRINK",
@@ -1633,6 +1637,7 @@
     "material": "blood",
     "charges": 1,
     "phase": "liquid",
+    "spoils_in": "12 hours",
     "delete": { "flags": [ "SMOKABLE" ] }
   },
   {
@@ -1867,7 +1872,7 @@
     "material": [ "flesh" ],
     "volume": "500 ml",
     "fun": -25,
-    "vitamins": [ [ "mutagen_beast", 220, 320 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
     "flags": [ "PREDATOR_FUN" ]
   },
   {
@@ -1886,7 +1891,7 @@
     "material": [ "flesh" ],
     "volume": "1 L",
     "fun": -25,
-    "vitamins": [ [ "mutagen_beast", 220, 320 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
     "flags": [ "PREDATOR_FUN" ]
   },
   {
@@ -1983,6 +1988,7 @@
     "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
     "charges": 1,
     "phase": "liquid",
+    "spoils_in": "1 day",
     "delete": { "flags": [ "SMOKABLE" ] }
   },
   {

@@ -176,7 +176,7 @@ item_action_map item_action_generator::map_actions_to_items( Character &you,
                     continue; // Other item consumes less charges
                 }
 
-                if( found->second->ammo_remaining() > actual_item->ammo_remaining() ) {
+                if( found->second->ammo_remaining( ) > actual_item->ammo_remaining( ) ) {
                     better = true; // Items with less charges preferred
                 }
             }
@@ -383,6 +383,12 @@ std::string use_function::get_type() const
 }
 
 ret_val<void> iuse_actor::can_use( const Character &, const item &, const tripoint_bub_ms & ) const
+{
+    return ret_val<void>::make_success();
+}
+
+ret_val<void> iuse_actor::can_use( const Character &, const item &, map *,
+                                   const tripoint_bub_ms & ) const
 {
     return ret_val<void>::make_success();
 }

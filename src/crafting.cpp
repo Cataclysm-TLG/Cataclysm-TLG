@@ -507,10 +507,10 @@ bool Character::check_eligible_containers_for_crafting( const recipe &rec, int b
 
         // also check if we're currently in a vehicle that has the necessary storage
         if( charges_to_store > 0 ) {
-            if( optional_vpart_position vp = here.veh_at( pos_bub() ) ) {
+            if( optional_vpart_position vp = here.veh_at( pos_bub( here ) ) ) {
                 const itype_id &ftype = prod.typeId();
-                int fuel_cap = vp->vehicle().fuel_capacity( ftype );
-                int fuel_amnt = vp->vehicle().fuel_left( ftype );
+                int fuel_cap = vp->vehicle().fuel_capacity( here, ftype );
+                int fuel_amnt = vp->vehicle().fuel_left( here, ftype );
 
                 if( fuel_cap >= 0 ) {
                     int fuel_space_left = fuel_cap - fuel_amnt;
@@ -648,7 +648,7 @@ const inventory &Character::crafting_inventory( map *here, const tripoint_bub_ms
 {
     tripoint_bub_ms inv_pos = src_pos;
     if( src_pos == tripoint_bub_ms::zero ) {
-        inv_pos = pos_bub( here );
+        inv_pos = pos_bub( *here );
     }
     if( crafting_cache.valid
         && moves == crafting_cache.moves
@@ -794,7 +794,7 @@ static item_location set_item_map_or_vehicle( const Character &p, const tripoint
     map &here = get_map();
     if( const std::optional<vpart_reference> vp = here.veh_at( loc ).cargo() ) {
         vehicle &veh = vp->vehicle();
-        if( const std::optional<vehicle_stack::iterator> it = veh.add_item( vp->part(), newit ) ) {
+        if( const std::optional<vehicle_stack::iterator> it = veh.add_item( here, vp->part(), newit ) ) {
             p.add_msg_player_or_npc(
                 //~ %1$s: name of item being placed, %2$s: vehicle part name
                 pgettext( "item, furniture", "You put the %1$s on the %2$s." ),
@@ -2819,6 +2819,8 @@ void Character::complete_disassemble( item_location target )
 
 void Character::complete_disassemble( item_location &target, const recipe &dis )
 {
+    map &here = get_map();
+
     // Get the proper recipe - the one for disassembly, not assembly
     const requirement_data dis_requirements = dis.disassembly_requirements();
     const tripoint_bub_ms loc = target.pos_bub();
@@ -3004,7 +3006,7 @@ void Character::complete_disassemble( item_location &target, const recipe &dis )
     }
 
     // Drop all recovered components
-    put_into_vehicle_or_drop( *this, item_drop_reason::deliberate, drop_items, loc );
+    put_into_vehicle_or_drop( *this, item_drop_reason::deliberate, drop_items, &here, loc );
 
     if( !dis.learn_by_disassembly.empty() && !knows_recipe( &dis ) ) {
         if( can_decomp_learn( dis ) ) {

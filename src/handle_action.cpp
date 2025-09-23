@@ -243,6 +243,8 @@ class user_turn
 
 input_context game::get_player_input( std::string &action )
 {
+    const map &here = get_map();
+
     input_context ctxt;
     if( uquit == QUIT_WATCH ) {
         ctxt = input_context( "DEFAULTMODE", keyboard_mode::keycode );
@@ -298,7 +300,7 @@ input_context game::get_player_input( std::string &action )
                     tripoint_bub_ms tmp( iter->getPosX() + i, iter->getPosY(), get_map().get_abs_sub().z() );
                     const Creature *critter = creatures.creature_at( tmp, true );
 
-                    if( critter != nullptr && u.sees( *critter ) ) {
+                    if( critter != nullptr && u.sees( here, *critter ) ) {
                         i = -1;
                         int iPos = iter->getStep() + iter->getStepOffset();
                         for( auto iter2 = iter; iter2 != SCT.vSCT.rend(); ++iter2 ) {
@@ -440,7 +442,7 @@ static void pldrive( const tripoint_rel_ms &p )
         const bool has_animal_controls = veh->part_with_feature( vp.mount, "CONTROL_ANIMAL", true ) >= 0;
         const bool has_controls = veh->part_with_feature( vp.mount, "CONTROLS", true ) >= 0;
         const bool has_animal = veh->has_engine_type( fuel_type_animal, false ) &&
-                                veh->get_harnessed_animal();
+                                veh->get_harnessed_animal( here );
         if( !has_controls && !has_animal_controls ) {
             add_msg( m_info, _( "You can't drive the vehicle from here.  You need controls!" ) );
             player_character.controlling_vehicle = false;
@@ -467,13 +469,13 @@ static void pldrive( const tripoint_rel_ms &p )
         }
     }
     if( p.z() == -1 ) {
-        if( veh->check_heli_descend( player_character ) ) {
+        if( veh->check_heli_descend( here, player_character ) ) {
             player_character.add_msg_if_player( m_info, _( "You steer the vehicle into a descent." ) );
         } else {
             return;
         }
     } else if( p.z() == 1 ) {
-        if( veh->check_heli_ascend( player_character ) ) {
+        if( veh->check_heli_ascend( here,  player_character ) ) {
             player_character.add_msg_if_player( m_info, _( "You steer the vehicle into an ascent." ) );
         } else {
             return;
@@ -485,7 +487,7 @@ static void pldrive( const tripoint_rel_ms &p )
             return;
         }
     }
-    veh->pldrive( get_avatar(), p.x(), p.y(), p.z() );
+    veh->pldrive( here, get_avatar(), p.x(), p.y(), p.z() );
 }
 
 static void pldrive( point_rel_ms d )
@@ -495,8 +497,10 @@ static void pldrive( point_rel_ms d )
 
 static void open()
 {
+    map &here = get_map();
+
     avatar &player_character = get_avatar();
-    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( _( "Open where?" ),
+    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( here, _( "Open where?" ),
             pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
             ACTION_OPEN, false );
 
@@ -504,7 +508,6 @@ static void open()
         return;
     }
     const tripoint_bub_ms openp = *openp_;
-    map &here = get_map();
 
     player_character.mod_moves( -to_moves<int>( 1_seconds ) );
 
@@ -524,7 +527,7 @@ static void open()
             const std::string part_name = veh->part( openable ).name();
             bool outside = !player_veh || player_veh != veh;
             if( !outside ) {
-                veh->open( openable );
+                veh->open( here, openable );
                 //~ %1$s - vehicle name, %2$s - part name
                 player_character.add_msg_if_player( _( "You open the %1$s's %2$s." ), veh->name, part_name );
             } else {
@@ -537,7 +540,7 @@ static void open()
                     add_msg( m_info, _( "That %s can only be opened from the inside." ), part_name );
                     player_character.mod_moves( to_moves<int>( 1_seconds ) );
                 } else {
-                    veh->open_all_at( openable );
+                    veh->open_all_at( here, openable );
                     //~ %1$s - vehicle name, %2$s - part name
                     player_character.add_msg_if_player( _( "You open the %1$s's %2$s." ), veh->name, part_name );
                 }
@@ -581,8 +584,10 @@ static void open()
 
 static void close()
 {
+    map &here = get_map();
+
     if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_highlight(
-                _( "Close where?" ),
+                here, _( "Close where?" ),
                 pgettext( "no door, gate, etc.", "There is nothing that can be closed nearby." ),
                 ACTION_CLOSE, false ) ) {
         doors::close_door( get_map(), get_player_character(), *pnt );
@@ -762,7 +767,7 @@ static void grab()
                 return;
             }
             get_player_character().pause();
-            vp->vehicle().separate_from_grid( vp.value().mount_pos() );
+            vp->vehicle().separate_from_grid( &here, vp.value().mount_pos() );
             if( const optional_vpart_position &split_vp = here.veh_at( grabp ) ) {
                 veh_name = split_vp->vehicle().name;
             } else {
@@ -1195,15 +1200,15 @@ static void wait()
 
     if( player_character.controlling_vehicle ) {
         const vehicle &veh = here.veh_at( player_character.pos_bub() )->vehicle();
-        if( !veh.can_use_rails() && (   // control optional if on rails
+        if( !veh.can_use_rails( here ) && ( // control optional if on rails
                 veh.is_flying_in_air() ||   // control required: fuel is consumed even at hover
                 veh.is_falling ||           // *not* vertical_velocity, which is only used for collisions
                 veh.velocity ||             // is moving
                 ( veh.cruise_velocity && (  // would move if it could
-                      ( veh.is_watercraft() && veh.can_float() ) || // is viable watercraft floating on water
+                      ( veh.is_watercraft() && veh.can_float( here ) ) || // is viable watercraft floating on water
                       veh.sufficient_wheel_config() // is viable land vehicle on ground or fording shallow water
                   ) ) ||
-                ( veh.is_in_water( true ) && !veh.can_float() ) // is sinking in deep water
+                ( veh.is_in_water( true ) && !veh.can_float( here ) ) // is sinking in deep water
             ) ) {
             popup( _( "You can't pass time while controlling a moving vehicle." ) );
             return;
@@ -1797,8 +1802,8 @@ static void fire()
         return;
     }
     // try firing turrets
-    if( const optional_vpart_position ovp = here.veh_at( you.pos_bub() ) ) {
-        if( turret_data turret_here = ovp->vehicle().turret_query( you.pos_bub() ) ) {
+    if( const optional_vpart_position ovp = here.veh_at( you.pos_abs() ) ) {
+        if( turret_data turret_here = ovp->vehicle().turret_query( you.pos_abs() ) ) {
             if( avatar_action::fire_turret_manual( you, here, turret_here ) ) {
                 return;
             }
@@ -2146,11 +2151,13 @@ static void handle_debug_mode()
 
 static bool has_vehicle_control( avatar &player_character )
 {
+    map &here = get_map();
+
     if( player_character.is_dead_state() ) {
         return false;
     }
-    const optional_vpart_position vp = get_map().veh_at( player_character.pos_bub() );
-    if( vp && vp->vehicle().player_in_control( player_character ) ) {
+    const optional_vpart_position vp = here.veh_at( player_character.pos_bub() );
+    if( vp && vp->vehicle().player_in_control( here, player_character ) ) {
         return true;
     }
     return g->remoteveh() != nullptr;
@@ -2391,7 +2398,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
                 if( get_option<bool>( "AUTO_FEATURES" ) && get_option<bool>( "AUTO_MOPPING" ) &&
                     weapon && weapon->has_flag( json_flag_MOP ) ) {
-                    map &here = get_map();
                     const bool is_blind = player_character.is_blind();
                     for( const tripoint_bub_ms &point : here.points_in_radius( player_character.pos_bub(), 1 ) ) {
                         bool did_mop = false;
@@ -2423,8 +2429,8 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             }
 
             if( has_vehicle_control( player_character ) ) {
-                const optional_vpart_position vp = get_map().veh_at( player_character.pos_bub() );
-                if( vp->vehicle().is_rotorcraft() ) {
+                const optional_vpart_position vp = here.veh_at( player_character.pos_bub() );
+                if( vp->vehicle().is_rotorcraft( here ) ) {
                     pldrive( tripoint_rel_ms::below );
                     break;
                 }
@@ -2473,8 +2479,8 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             if( !player_character.in_vehicle ) {
                 vertical_move( 1, false );
             } else if( has_vehicle_control( player_character ) ) {
-                const optional_vpart_position vp = get_map().veh_at( player_character.pos_bub() );
-                if( vp->vehicle().is_rotorcraft() ) {
+                const optional_vpart_position vp = here.veh_at( player_character.pos_bub() );
+                if( vp->vehicle().is_rotorcraft( here ) ) {
                     pldrive( tripoint_rel_ms::above );
                 }
             }
@@ -2499,7 +2505,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_SMASH:
             if( has_vehicle_control( player_character ) ) {
-                handbrake();
+                handbrake( here );
             } else {
                 smash();
             }
@@ -3117,6 +3123,8 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
 bool game::handle_action()
 {
+    map &here = get_map();
+
     std::string action;
     input_context ctxt;
     action_id act = ACTION_NULL;
@@ -3189,7 +3197,7 @@ bool game::handle_action()
             // No auto-move actions have or can be set at this point.
             player_character.clear_destination();
             destination_preview.clear();
-            act = handle_action_menu();
+            act = handle_action_menu( here );
             if( act == ACTION_NULL ) {
                 return false;
             }
@@ -3236,7 +3244,7 @@ bool game::handle_action()
             if( !mouse_pos ) {
                 return false;
             }
-            if( !player_character.sees( *mouse_pos ) ) {
+            if( !player_character.sees( here, *mouse_pos ) ) {
                 // Not clicked in visible terrain
                 return false;
             }
