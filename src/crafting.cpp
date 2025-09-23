@@ -98,6 +98,7 @@ static const furn_str_id furn_f_ground_crafting_spot( "f_ground_crafting_spot" )
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_plut_cell( "plut_cell" );
 
+static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 
 static const limb_score_id limb_score_manip( "manip" );
@@ -171,6 +172,10 @@ float Character::lighting_craft_speed_multiplier( const recipe &rec,
 {
     // negative is bright, 0 is just bright enough, positive is dark, +7.0f is pitch black
     float darkness = fine_detail_vision_mod( p ) - 4.0f;
+    // BLIND_CRAFT flags are for things like ESP where the reader is not using their eyes to see.
+    if( has_flag( json_flag_BLIND_CRAFT ) ) {
+        darkness = std::min( darkness, 0.0f );
+    }
     if( darkness <= 0.0f ) {
         return 1.0f; // it's bright, go for it
     }

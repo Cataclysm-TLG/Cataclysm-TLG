@@ -308,6 +308,8 @@ static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
 static const json_character_flag json_flag_ALWAYS_HEAL( "ALWAYS_HEAL" );
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 static const json_character_flag json_flag_BLIND( "BLIND" );
+static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
+static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
 static const json_character_flag json_flag_CANNOT_CHANGE_TEMPERATURE( "CANNOT_CHANGE_TEMPERATURE" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
@@ -12626,18 +12628,21 @@ read_condition_result Character::check_read_condition( const item &book ) const
         if( book_requires_intelligence && has_trait( trait_ILLITERATE ) ) {
             result |= read_condition_result::ILLITERATE;
         }
-        if( has_flag( json_flag_HYPEROPIC ) &&
-            !worn_with_flag( STATIC( flag_id( "FIX_FARSIGHT" ) ) ) &&
-            !has_effect( effect_contacts ) &&
-            !has_effect( effect_transition_contacts ) &&
-            !has_flag( STATIC( json_character_flag( "ENHANCED_VISION" ) ) ) ) {
-            result |= read_condition_result::NEED_GLASSES;
-        }
-        if( fine_detail_vision_mod() > 4 && !book.has_flag( flag_CAN_USE_IN_DARK ) ) {
-            result |= read_condition_result::TOO_DARK;
-        }
-        if( is_blind() ) {
-            result |= read_condition_result::BLIND;
+        // Check if we have ESP before checking for blindness, light, and glasses.
+        if( !has_flag( json_flag_BLIND_READ_SLOW ) && !has_flag( json_flag_BLIND_READ_FAST ) ) {
+            if( has_flag( json_flag_HYPEROPIC ) &&
+                !worn_with_flag( STATIC( flag_id( "FIX_FARSIGHT" ) ) ) &&
+                !has_effect( effect_contacts ) &&
+                !has_effect( effect_transition_contacts ) &&
+                !has_flag( STATIC( json_character_flag( "ENHANCED_VISION" ) ) ) ) {
+                result |= read_condition_result::NEED_GLASSES;
+            }
+            if( fine_detail_vision_mod() > 4 && !book.has_flag( flag_CAN_USE_IN_DARK ) ) {
+                result |= read_condition_result::TOO_DARK;
+            }
+            if( is_blind() ) {
+                result |= read_condition_result::BLIND;
+            }
         }
     }
     return result;
@@ -12765,8 +12770,17 @@ time_duration Character::time_to_read( const item &book, const Character &reader
     }
 
     time_duration retval = type->time * reading_speed / 100;
+    float reading_vision = reader.fine_detail_vision_mod();
+    // BLIND_READ flags are for things like ESP where the reader is not using their eyes to see.
+    if( reader.has_flag( json_flag_BLIND_READ_SLOW ) ) {
+        reading_vision = std::min( reading_vision, 3.0f );
+    }
+    if( reader.has_flag( json_flag_BLIND_READ_FAST ) ) {
+        reading_vision = std::min( reading_vision, 1.0f );
+    }
+    // The learner can't use their ESP in this case.
     if( !book.has_flag( flag_CAN_USE_IN_DARK ) ) {
-        retval *= std::min( fine_detail_vision_mod(), reader.fine_detail_vision_mod() );
+        retval *= std::min( fine_detail_vision_mod(), reading_vision );
     }
 
     const int effective_int = std::min( { get_int(), reader.get_int(), learner ? learner->get_int() : INT_MAX } );
@@ -12774,7 +12788,7 @@ time_duration Character::time_to_read( const item &book, const Character &reader
         retval += type->time * ( time_duration::from_seconds( type->intel - effective_int ) / 1_minutes );
     }
     if( !has_identified( book.typeId() ) ) {
-        //skimming
+        // Skimming.
         retval /= 10;
     }
     return retval;

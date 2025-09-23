@@ -234,6 +234,8 @@ static const itype_id itype_stick_long( "stick_long" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
 
+static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
+static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
 static const json_character_flag json_flag_SAFECRACK_NO_TOOL( "SAFECRACK_NO_TOOL" );
 
 static const morale_type morale_book( "morale_book" );
@@ -979,7 +981,7 @@ void bookbinder_copy_activity_actor::start( player_activity &act, Character & )
 
 void bookbinder_copy_activity_actor::do_turn( player_activity &, Character &p )
 {
-    if( p.fine_detail_vision_mod() > 4.0f ) {
+    if( p.fine_detail_vision_mod() > 4.0f && !p.has_flag( json_flag_BLIND_READ_SLOW ) && !p.has_flag( json_flag_BLIND_READ_FAST ) ) {
         p.cancel_activity();
         p.add_msg_if_player( m_info, _( "It's too dark to write!" ) );
         return;
@@ -1708,7 +1710,7 @@ void read_activity_actor::do_turn( player_activity &act, Character &who )
                  book_type::martial_art : book_type::normal;
     }
 
-    if( who.fine_detail_vision_mod() > 4 && !book->has_flag( flag_CAN_USE_IN_DARK ) ) {
+    if( who.fine_detail_vision_mod() > 4 && !book->has_flag( flag_CAN_USE_IN_DARK ) && !who.has_flag( json_flag_BLIND_READ_SLOW ) && !who.has_flag( json_flag_BLIND_READ_FAST ) ) {
         // It got too dark during the process of reading, bail out.
         act.set_to_null();
         who.add_msg_if_player( m_bad, _( "It's too dark to read!" ) );

@@ -85,6 +85,8 @@ static const itype_id fuel_type_battery( "battery" );
 static const itype_id itype_battery( "battery" );
 static const itype_id itype_plut_cell( "plut_cell" );
 
+static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
+
 static const proficiency_id proficiency_prof_aircraft_mechanic( "prof_aircraft_mechanic" );
 
 static const quality_id qual_HOSE( "HOSE" );
@@ -655,7 +657,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             enough_morale = player_character.has_morale_to_craft();
             valid_target = !can_mount.empty();
             //tool checks processed later
-            enough_light = player_character.fine_detail_vision_mod() <= 4;
+            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
             has_tools = true;
             break;
 
@@ -665,7 +667,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             valid_target = !need_repair.empty() && cpart >= 0;
             // checked later
             has_tools = true;
-            enough_light = player_character.fine_detail_vision_mod() <= 4;
+            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
             break;
 
         case 'm': {
@@ -679,7 +681,7 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
                     return pt.part().is_available() && !pt.part().faults().empty();
                 }
             } );
-            enough_light = player_character.fine_detail_vision_mod() <= 4;
+            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
             // checked later
             has_tools = true;
         }
@@ -693,19 +695,19 @@ task_reason veh_interact::cant_do( const map &here,  char mode )
             break;
 
         case 'o':
-            // remove mode
+            // Remove mode.
             enough_morale = player_character.has_morale_to_craft();
             valid_target = cpart >= 0;
             part_free = parts_here.size() > 1 ||
                         ( cpart >= 0 && veh->can_unmount( veh->part( cpart ) ).success() );
-            //tool and skill checks processed later
+            // Tool and skill checks processed later.
             has_tools = true;
             has_skill = true;
-            enough_light = player_character.fine_detail_vision_mod() <= 4;
+            enough_light = player_character.fine_detail_vision_mod() <= 4 || player_character.has_flag( json_flag_BLIND_CRAFT );
             break;
 
         case 's':
-            // siphon mode
+            // Siphon mode.
             valid_target = false;
             for( const vpart_reference &vp : veh->get_any_parts( VPFLAG_FLUIDTANK ) ) {
                 if( vp.part().base.has_item_with( []( const item & it ) {
