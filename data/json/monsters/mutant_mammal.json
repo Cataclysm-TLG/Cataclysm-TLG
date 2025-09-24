@@ -28,14 +28,27 @@
     "vision_night": 10,
     "path_settings": { "max_dist": 10 },
     "stomach_size": 4000,
+    "grab_strength": 45,
     "special_attacks": [
+      [ "EAT_FOOD", 60 ],
       {
         "type": "bite",
         "cooldown": 10,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 12, "armor_penetration": 8 } ]
       },
-      [ "EAT_FOOD", 60 ],
-      [ "BROWSE", 60 ]
+      [ "BROWSE", 60 ],
+      {
+        "id": "bite_grab",
+        "move_cost": 150,
+        "cooldown": 3,
+        "accuracy": 5,
+        "infection_chance": 2,
+        "min_mul": 1.0,
+        "max_mul": 2.0
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
     ],
     "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
     "fear_triggers": [ "SOUND" ],
@@ -248,13 +261,26 @@
     "dissect": "dissect_lupine_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "path_settings": { "max_dist": 10 },
+    "grab_strength": 55,
     "special_attacks": [
+      [ "EAT_FOOD", 60 ],
       {
         "type": "bite",
         "cooldown": 5,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_penetration": 10 } ]
       },
-      [ "EAT_FOOD", 60 ]
+      {
+        "id": "bite_grab",
+        "move_cost": 150,
+        "cooldown": 3,
+        "accuracy": 5,
+        "infection_chance": 2,
+        "min_mul": 1.0,
+        "max_mul": 2.0
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
     ],
     "anger_triggers": [ "STALK", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "zombify_into": "mon_meat_cocoon_large",
