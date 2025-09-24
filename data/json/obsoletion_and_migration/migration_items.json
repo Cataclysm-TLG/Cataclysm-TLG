@@ -2668,22 +2668,22 @@
     "type": "MIGRATION",
     "replace": "strudel"
   },
-    {
+  {
     "id": "homemade_toasterpastry2",
     "type": "MIGRATION",
     "replace": "strudel"
   },
-    {
+  {
     "id": "toasterpastryfrozen",
     "type": "MIGRATION",
     "replace": "strudel"
   },
-    {
+  {
     "id": "toasterpastry",
     "type": "MIGRATION",
     "replace": "strudel"
   },
-    {
+  {
     "id": "toastem2",
     "type": "MIGRATION",
     "replace": "toastem"
