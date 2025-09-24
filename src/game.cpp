@@ -5704,8 +5704,8 @@ bool game::swap_critters( Creature &a, Creature &b )
         }
     }
 
-    if( other_npc && m.veh_at( other_npc_pos ).part_with_feature( VPFLAG_BOARDABLE, true ) ) {
-        m.board_vehicle( other_npc_pos, other_npc );
+    if( other_npc && m.veh_at( other_npc->pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) ) {
+        m.board_vehicle( other_npc->pos_bub(), other_npc );
     }
     return true;
 }
