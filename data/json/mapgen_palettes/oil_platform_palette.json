@@ -255,7 +255,7 @@
       "±": [
         { "item": "groce_frozen", "chance": 80, "repeat": [ 1, 5 ] },
         { "item": "groce_meat", "chance": 80, "repeat": [ 0, 8 ] },
-        { "item": "toasterpastryfrozen_box_snack_2", "chance": 80, "repeat": [ 1, 3 ] }
+        { "item": "strudel_box_snack_2", "chance": 80, "repeat": [ 1, 3 ] }
       ],
       "ç": [
         { "item": "kitchen_nonfood", "chance": 80, "repeat": [ 0, 5 ] },

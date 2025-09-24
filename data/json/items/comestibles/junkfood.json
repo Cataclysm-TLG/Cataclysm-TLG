@@ -10,88 +10,35 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "quench": -8,
-    "calories": 200,
-    "description": "A dry toaster pastry coated with solid frosting.  This one is strawberry flavored, what luck!",
+    "calories": 185,
+    "description": "A shelf-stable toaster pastry with icing on top and a sweet fruit filling in the middle.",
     "price": "50 cent",
     "price_postapoc": "125 cent",
-    "material": [ "wheat", "junk" ],
+    "material": [ "wheat", "junk", "fruit" ],
     "volume": "125 ml",
     "flags": [ "EATEN_HOT" ],
-    "vitamins": [ [ "iron", 10 ], [ "wheat_allergen", 1 ], [ "junk_allergen", 1 ] ],
-    "fun": 20
+    "vitamins": [ [ "iron", 10 ], [ "wheat_allergen", 1 ], [ "fruit_allergen", 1 ], [ "junk_allergen", 1 ] ],
+    "fun": 8
   },
   {
     "type": "COMESTIBLE",
-    "id": "toastem2",
-    "name": { "str": "toast-em" },
-    "copy-from": "toastem",
-    "description": "A dry toaster pastry coated with solid frosting.  This one is blueberry flavored!",
-    "fun": 15
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "toastem3",
-    "name": { "str": "toast-em" },
-    "copy-from": "toastem",
-    "description": "A dry toaster pasty, usually coated with solid frosting.  Sadly, this one is not.",
-    "fun": 10
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "toastem4",
-    "name": { "str": "homemade toast-em" },
-    "copy-from": "toastem",
-    "description": "A homemade toaster pastry, filled with fruit but lacking icing.",
-    "fun": 10
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "toasterpastryfrozen",
-    "name": { "str": "toaster pastry (uncooked)", "str_pl": "toaster pastries (uncooked)" },
+    "id": "strudel",
+    "name": { "str": "strudel" },
     "weight": "52 g",
     "color": "red",
     "spoils_in": "2 days 12 hours",
-    "//": "Semi-arbitrary spoilage of 60 hours, as the cooked product.",
     "container": "box_snack",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "calories": 200,
-    "description": "A delicious fruit-filled pastry that you can cook in your toaster.  It even comes with frosting!  Cook it to make it tastier.",
+    "calories": 120,
+    "description": "A flaky fruit-filled pastry.",
     "price": "2 USD",
     "price_postapoc": "62 cent",
-    "material": [ "wheat", "junk" ],
+    "material": [ "wheat", "junk", "fruit" ],
     "volume": "125 ml",
     "flags": [ "EATEN_HOT" ],
-    "fun": 5,
-    "vitamins": [ [ "iron", 10 ], [ "wheat_allergen", 1 ], [ "junk_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "toasterpastry",
-    "name": { "str": "toaster pastry", "str_pl": "toaster pastries" },
-    "copy-from": "toasterpastryfrozen",
-    "quench": 4,
-    "description": "A delicious fruit-filled pastry that you've cooked.  It even comes with frosting!",
-    "fun": 20
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "homemade_toasterpastry",
-    "name": { "str": "toaster pastry", "str_pl": "toaster pastries" },
-    "copy-from": "toasterpastryfrozen",
-    "quench": 4,
-    "description": "A delicious homemade fruit-filled pastry that you've cooked.",
-    "fun": 20
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "homemade_toasterpastry2",
-    "name": { "str": "toaster pastry with buttercream", "str_pl": "toaster pastries with buttercream" },
-    "copy-from": "toasterpastryfrozen",
-    "quench": 6,
-    "calories": 730,
-    "description": "A delicious homemade fruit-filled pastry that you've cooked.  It even comes with buttercream!",
-    "fun": 30
+    "fun": 16,
+    "vitamins": [ [ "iron", 10 ], [ "wheat_allergen", 1 ], [ "fruit_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -111,23 +58,6 @@
     "flags": [ "EDIBLE_FROZEN" ],
     "fun": 6,
     "vitamins": [ [ "junk_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "chips2",
-    "name": { "str_sp": "potato chips" },
-    "copy-from": "chips",
-    "description": "A handful of plain, salted potato chips.",
-    "fun": 3
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "chips3",
-    "name": { "str_sp": "potato chips" },
-    "copy-from": "chips",
-    "description": "Oh man, you love these chips!  Score!",
-    "//": "Favorite flavor varies.",
-    "fun": 12
   },
   {
     "type": "COMESTIBLE",
@@ -752,7 +682,7 @@
     "symbol": "%",
     "quench": -2,
     "calories": 149,
-    "description": "Betcha can't eat just one.",
+    "description": "Fried potato crisps loaded with salt, fat, and carbohydrates.",
     "price": "60 cent",
     "price_postapoc": "66 cent",
     "material": [ "junk" ],
