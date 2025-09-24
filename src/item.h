@@ -564,6 +564,11 @@ class item : public visitable
         void final_info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch,
                          bool debug ) const;
 
+        // Build the crafting list for the item actions menu.
+        std::string crafting_applications() const;
+        // Used in the above and elsewhere.
+        bool can_craft_recipe( const recipe *r, const inventory &crafting_inv ) const;
+
         /**
          * @return human readable, translated string.
          */

@@ -213,7 +213,6 @@
 static const activity_id ACT_BLEED( "ACT_BLEED" );
 static const activity_id ACT_BUTCHER( "ACT_BUTCHER" );
 static const activity_id ACT_BUTCHER_FULL( "ACT_BUTCHER_FULL" );
-// static const activity_id ACT_DISMEMBER( "ACT_DISMEMBER" );
 static const activity_id ACT_DISSECT( "ACT_DISSECT" );
 static const activity_id ACT_FIELD_DRESS( "ACT_FIELD_DRESS" );
 static const activity_id ACT_QUARTER( "ACT_QUARTER" );
@@ -2031,6 +2030,28 @@ static hint_rating rate_action_view_recipe( avatar &you, const item &it )
     return hint_rating::iffy;
 }
 
+static hint_rating rate_action_crafting_applications( avatar &you, const item &it )
+{
+    const recipe_subset &available_recipe_subset = you.get_group_available_recipes();
+    const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component( it.typeId() );
+    const inventory &crafting_inventory = you.crafting_inventory();
+    if( item_recipes.empty() ) {
+        return hint_rating::cant;
+    } else {
+        bool can_make = false;
+        for( const recipe *r : item_recipes ) {
+            item item( r->result() );
+            can_make = item.can_craft_recipe( r, crafting_inventory );
+            // We have a recipe and the components, thumbs up and bail out.
+            if( can_make ) {
+                return hint_rating::good;
+            }
+        }
+        // We have recipes, but didn't find anything we can make right now.
+        return hint_rating::iffy;
+    }
+}
+
 static hint_rating rate_action_eat( const avatar &you, const item &it )
 {
     if( it.is_container() ) {
@@ -2269,6 +2290,7 @@ int game::inventory_item_menu( item_location locThisItem,
                 }
 
                 addentry( 'V', pgettext( "action", "view recipe" ), rate_action_view_recipe( u, oThisItem ) );
+                addentry( 'C', pgettext( "action", "crafting" ), rate_action_crafting_applications( u, oThisItem ) );
                 addentry( '>', pgettext( "action", "hide contents" ), rate_action_collapse( oThisItem ) );
                 addentry( '<', pgettext( "action", "show contents" ), rate_action_expand( oThisItem ) );
                 addentry( '=', pgettext( "action", "reassign" ), hint_rating::good );
@@ -2451,6 +2473,17 @@ int game::inventory_item_menu( item_location locThisItem,
                     }
                     player_activity recipe_act = player_activity( ACT_VIEW_RECIPE, 0, is_recipe, 0, this_itype );
                     u.assign_activity( recipe_act );
+                    break;
+                }
+                case 'C': {
+                    const recipe_subset &available_recipe_subset = u.get_group_available_recipes();
+                    const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component( oThisItem.typeId() );
+                    if( item_recipes.empty() ) {
+                        popup( _( "You know of nothing you could craft with it." ) );
+                    } else {
+                        const std::string recipes = oThisItem.crafting_applications();
+                        popup( _( "You could use it to craft:\n%s" ), recipes );
+                    }
                     break;
                 }
                 case 'i':
