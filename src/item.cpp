@@ -5651,7 +5651,7 @@ void item::properties_info( std::vector<iteminfo> &info, const iteminfo_query *p
 static std::unordered_map<const recipe *, bool> can_craft_recipe_cache;
 static time_point cache_valid_turn;
 
-static bool can_craft_recipe( const recipe *r, const inventory &crafting_inv )
+bool item::can_craft_recipe( const recipe *r, const inventory &crafting_inv ) const
 {
     if( cache_valid_turn != calendar::turn ) {
         cache_valid_turn = calendar::turn;
@@ -5865,32 +5865,6 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                            iteminfo::is_decimal,
                            static_cast<double>( price_postapoc ) / 100 );
     }
-
-    // Recipes using this item as an ingredient
-    if( parts->test( iteminfo_parts::DESCRIPTION_APPLICABLE_RECIPES ) ) {
-        // with the inventory display allowing you to select items, showing the things you could make with contained items could be confusing.
-        const itype_id &tid = typeId();
-        const inventory &crafting_inv = player_character.crafting_inventory();
-        const recipe_subset &available_recipe_subset = player_character.get_group_available_recipes();
-        const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component( tid );
-
-        insert_separation_line( info );
-        if( item_recipes.empty() ) {
-            info.emplace_back( "DESCRIPTION", _( "You know of nothing you could craft with it." ) );
-        } else {
-            bool can_make = false;
-            for( const recipe *r : item_recipes ) {
-                can_make = can_craft_recipe( r, crafting_inv );
-            }
-            if( can_make ) {
-                info.emplace_back( " DESCRIPTION", string_format( _( "You could use it to craft something." ) ) );
-            } else {
-                info.emplace_back( " DESCRIPTION",
-                                   string_format( _( "You could use it for crafting, but you don't have everything you need." ) ) );
-            }
-        }
-    }
-
     if( is_armor() ) {
         const ret_val<void> can_wear = player_character.can_wear( *this, true );
         if( !can_wear.success() ) {
@@ -5899,7 +5873,6 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
             info.emplace_back( "DESCRIPTION", string_format( "<bad>%s</bad>", can_wear.str() ) );
         }
     }
-
     // Vehicle parts or appliances using this item as a component
     if( parts->test( iteminfo_parts::DESCRIPTION_VEHICLE_PARTS ) ) {
         const itype_id tid = typeId();
@@ -5977,6 +5950,56 @@ void item::ascii_art_info( std::vector<iteminfo> &info, const iteminfo_query * /
         }
     }
 }
+
+std::string item::crafting_applications() const {
+    Character &you = get_player_character();
+    const inventory &crafting_inv = you.crafting_inventory();
+    const recipe_subset &available_recipe_subset = you.get_group_available_recipes();
+    const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component( typeId() );
+    if( item_recipes.empty() ) {
+        popup( _( "You know of nothing you could craft with it." ) );
+        return _( "Nothing" );
+    } else {
+        std::vector<std::pair<bool, std::string>> crafts;
+        crafts.reserve( item_recipes.size() );
+
+        for( const recipe *r : item_recipes ) {
+            const bool can_make = can_craft_recipe( r, crafting_inv );
+            const std::string name = r->result_name( /* decorated = */ true );
+            std::string display = can_make ? name :
+                                  string_format( "<color_light_gray>%s</color>", name );
+            crafts.emplace_back( can_make, std::move( display ) );
+        }
+        // Put craftables first, preserve order within groups
+        std::stable_sort( crafts.begin(), crafts.end(), []( const auto &a, const auto &b ) {
+            return a.first > b.first;
+        } );
+        std::vector<std::string> display;
+        display.reserve( crafts.size() );
+        for( const auto &p : crafts ) {
+            display.push_back( p.second );
+        }
+        // Manually enumerate with limit
+        constexpr size_t limit = 50;
+        std::string result;
+        const size_t count = std::min( display.size(), limit );
+        for( size_t i = 0; i < count; i++ ) {
+            if( i > 0 ) {
+                if( i == count - 1 ) {
+                    result += _( " and " );
+                } else {
+                    result += _( ", " );
+                }
+            }
+            result += display[i];
+        }
+        if( display.size() > limit ) {
+            result += string_format( _( " and %d more" ), display.size() - limit );
+        }
+        return result;
+    }
+}
+
 
 std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts, int batch ) const
 {
