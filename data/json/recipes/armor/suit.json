@@ -963,14 +963,16 @@
     "type": "recipe",
     "copy-from": "wetsuit",
     "time": "8 h",
-    "using": [ [ "tailoring_neoprene_sheet", 25 ], [ "tailoring_nylon_sheet", 40 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 25 ], [ "tailoring_nylon_sheet", 40 ], [ "fastener_small", 6 ] ],
+    "components": [ [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "xl_wetsuit",
     "type": "recipe",
     "copy-from": "wetsuit",
     "time": "15 h",
-    "using": [ [ "tailoring_neoprene_sheet", 45 ], [ "tailoring_nylon_sheet", 75 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 45 ], [ "tailoring_nylon_sheet", 75 ], [ "fastener_small", 6 ] ],
+    "components": [ [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "wetsuit_thick",
@@ -986,14 +988,16 @@
     "type": "recipe",
     "copy-from": "wetsuit_thick",
     "time": "16 h",
-    "using": [ [ "tailoring_neoprene_sheet", 42 ], [ "tailoring_spandex_sheet", 85 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 42 ], [ "tailoring_nylon_sheet", 85 ], [ "fastener_small", 6 ] ],
+    "components": [ [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "xl_wetsuit_thick",
     "type": "recipe",
     "copy-from": "wetsuit_thick",
     "time": "30 h",
-    "using": [ [ "tailoring_neoprene_sheet", 75 ], [ "tailoring_spandex_sheet", 160 ], [ "fastener_small", 6 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 75 ], [ "tailoring_nylon_sheet", 160 ], [ "fastener_small", 6 ] ],
+    "components": [ [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "wetsuit_spring",

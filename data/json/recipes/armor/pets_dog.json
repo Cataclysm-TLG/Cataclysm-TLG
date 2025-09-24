@@ -10,6 +10,7 @@
     "time": "3 h 30 m",
     "using": [ [ "cordage", 1 ], [ "clasps", 3 ] ],
     "components": [ [ [ "acidchitin_piece", 12 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_chitinworking" },
@@ -99,6 +100,7 @@
     "time": "6 h",
     "reversible": true,
     "using": [ [ "sewing_standard", 15 ], [ "clasps", 3 ] ],
+    "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "bone", 13 ], [ "bone_human", 13 ] ], [ [ "vest_leather", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },

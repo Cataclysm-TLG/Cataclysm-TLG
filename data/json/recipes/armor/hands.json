@@ -60,6 +60,7 @@
     "copy-from": "gauntlets_acidchitin",
     "time": "9 h",
     "using": [ [ "armor_acidchitin", 6 ], [ "strap_small", 1 ], [ "clasps", 1 ] ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
     "components": [ [ [ "cordage_superior", 2, "LIST" ] ] ]
   },
   {
@@ -832,14 +833,16 @@
     "type": "recipe",
     "copy-from": "wetsuit_gloves",
     "time": "9 h",
-    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 8 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 8 ] ],
+    "components": [ [ [ "rubber_cement", 2 ] ] ]
   },
   {
     "result": "xs_wetsuit_gloves",
     "type": "recipe",
     "copy-from": "wetsuit_gloves",
     "time": "5 h",
-    "using": [ [ "tailoring_neoprene_sheet", 3 ], [ "tailoring_nylon_sheet", 4 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 3 ], [ "tailoring_nylon_sheet", 4 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
   },
   {
     "result": "wetsuit_gloves_thick",
@@ -847,21 +850,24 @@
     "copy-from": "wetsuit_gloves",
     "difficulty": 5,
     "time": "9 h",
-    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 10 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "tailoring_nylon_sheet", 10 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
   },
   {
     "result": "xl_wetsuit_gloves_thick",
     "type": "recipe",
     "copy-from": "wetsuit_gloves_thick",
     "time": "14 h",
-    "using": [ [ "tailoring_neoprene_sheet", 8 ], [ "tailoring_nylon_sheet", 15 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 8 ], [ "tailoring_nylon_sheet", 15 ] ],
+    "components": [ [ [ "rubber_cement", 2 ] ] ]
   },
   {
     "result": "xs_wetsuit_gloves_thick",
     "type": "recipe",
     "copy-from": "wetsuit_gloves_thick",
     "time": "7 h",
-    "using": [ [ "tailoring_neoprene_sheet", 5 ], [ "tailoring_nylon_sheet", 8 ] ]
+    "using": [ [ "tailoring_neoprene_sheet", 5 ], [ "tailoring_nylon_sheet", 8 ] ],
+    "components": [ [ [ "rubber_cement", 1 ] ] ]
   },
   {
     "result": "chainmail_gloves",
