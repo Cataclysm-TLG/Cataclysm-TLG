@@ -2662,5 +2662,50 @@
     "type": "vehicle_part_migration",
     "from": "xl_wind_turbine",
     "to": "solar_panel"
+  },
+  {
+    "id": "homemade_toasterpastry",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "homemade_toasterpastry2",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toasterpastryfrozen",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toasterpastry",
+    "type": "MIGRATION",
+    "replace": "strudel"
+  },
+  {
+    "id": "toastem2",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "toastem3",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "toastem4",
+    "type": "MIGRATION",
+    "replace": "toastem"
+  },
+  {
+    "id": "chips2",
+    "type": "MIGRATION",
+    "replace": "chips"
+  },
+  {
+    "id": "chips3",
+    "type": "MIGRATION",
+    "replace": "chips"
   }
 ]
