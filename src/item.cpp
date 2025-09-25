@@ -141,6 +141,7 @@ static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_bullet( "bullet" );
 static const damage_type_id damage_cut( "cut" );
 static const damage_type_id damage_heat( "heat" );
+static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_cig( "cig" );
@@ -901,6 +902,7 @@ float item::damage_adjusted_melee_weapon_damage( float value ) const
     if( type->count_by_charges() ) {
         return value; // count by charges items don't have partial damage
     }
+
     return value * ( 1.0f - 0.1f * std::max( 0, damage_level() - 1 ) );
 }
 
@@ -7357,10 +7359,23 @@ int item::damage_melee( const damage_type_id &dt ) const
     if( type->melee.count( dt ) > 0 ) {
         res = type->melee.at( dt );
     }
+
+
     res = damage_adjusted_melee_weapon_damage( res );
+
 
     // apply type specific flags
     // FIXME: Hardcoded damage types
+        if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+            if( dt == damage_bash ) {
+                res *= 0.66;
+            }
+            if( dt == damage_cut || dt == damage_stab ) {
+                res *= 0.33;
+            }
+        }
+
+
     if( dt == damage_bash && has_flag( flag_REDUCED_BASHING ) ) {
         res *= 0.5;
     }

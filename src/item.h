@@ -2279,14 +2279,6 @@ class item : public visitable
          */
         layer_level get_highest_layer( const sub_bodypart_id &sbp ) const;
 
-        enum class cover_type {
-            COVER_DEFAULT,
-            COVER_MELEE,
-            COVER_RANGED,
-            COVER_VITALS
-        };
-        static cover_type get_cover_type( const damage_type_id &type );
-
         /*
          * Returns the average coverage of each piece of data this item
          */

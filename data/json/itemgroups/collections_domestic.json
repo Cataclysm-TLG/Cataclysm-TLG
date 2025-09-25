@@ -293,6 +293,15 @@
   },
   {
     "type": "item_group",
+    "id": "shitty_sword",
+    "subtype": "collection",
+    "entries": [
+
+              { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 99 }
+    ]
+  },
+  {
+    "type": "item_group",
     "id": "memorial",
     "subtype": "collection",
     "entries": [

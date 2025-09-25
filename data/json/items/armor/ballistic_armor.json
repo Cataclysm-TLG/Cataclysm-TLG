@@ -1040,8 +1040,6 @@
         ],
         "encumbrance": 3,
         "coverage": 80,
-        "cover_ranged": 95,
-        "cover_vitals": 100,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r" ],
         "volume_encumber_modifier": 0,

@@ -165,7 +165,7 @@
     "id": "DURABLE_MELEE",
     "type": "json_flag",
     "info": "As a weapon, this item is <good>well-made</good> and will <info>withstand the punishment of combat</info>.",
-    "conflicts": [ "FRAGILE_MELEE" ]
+    "conflicts": [ "FRAGILE_MELEE", "REPLICA_EQUIPMENT" ]
   },
   {
     "id": "EASY_CLEAN",
@@ -462,7 +462,7 @@
     "id": "FRAGILE",
     "type": "json_flag",
     "info": "This gear is <bad>fragile</bad> and <info>won't protect you for long</info>.",
-    "conflicts": [ "STURDY" ]
+    "conflicts": [ "STURDY", "REPLICA_EQUIPMENT" ]
   },
   {
     "id": "FRAGILE_MELEE",
@@ -2682,5 +2682,11 @@
     "id": "BLIND_CRAFT",
     "type": "json_flag",
     "//": "This character can perform most manual labor as though visibility is perfect."
+  },
+  {
+    "id": "REPLICA_EQUIPMENT",
+    "type": "json_flag",
+    "info": "This item is only a <bad>shoddy replica</bad>, and lacks the <info>quality and durability</info> of the real thing.",
+    "conflicts": [ "STURDY", "DURABLE_MELEE" ]
   }
 ]

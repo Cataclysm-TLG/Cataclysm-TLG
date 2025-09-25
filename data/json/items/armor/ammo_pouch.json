@@ -1303,7 +1303,6 @@
         ],
         "encumbrance": 6,
         "coverage": 98,
-        "cover_vitals": 70,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
       },
@@ -1315,7 +1314,6 @@
         "//": "encumbrance handled above",
         "encumbrance": 0,
         "coverage": 92,
-        "cover_vitals": 60,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ]
       }
