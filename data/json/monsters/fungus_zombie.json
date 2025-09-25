@@ -725,21 +725,9 @@
     "vision_night": 3,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "grab_strength": 45,
     "special_attacks": [
       [ "scratch", 10 ],
       { "type": "leap", "cooldown": 5, "max_range": 5 },
-      {
-        "id": "bite_grab",
-        "move_cost": 188,
-        "cooldown": 2,
-        "accuracy": 5,
-        "infection_chance": 2,
-        "min_mul": 1.0,
-        "max_mul": 2.0
-      },
-      { "id": "drag_followup" },
-      { "id": "scratch_grab_required" },
       [ "FUNGUS", 190 ]
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "FILTHY" ],
