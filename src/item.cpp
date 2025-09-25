@@ -5953,7 +5953,8 @@ void item::ascii_art_info( std::vector<iteminfo> &info, const iteminfo_query * /
     }
 }
 
-std::string item::crafting_applications() const {
+std::string item::crafting_applications() const
+{
     Character &you = get_player_character();
     const inventory &crafting_inv = you.crafting_inventory();
     const recipe_subset &available_recipe_subset = you.get_group_available_recipes();
@@ -5973,7 +5974,7 @@ std::string item::crafting_applications() const {
             crafts.emplace_back( can_make, std::move( display ) );
         }
         // Put craftables first, preserve order within groups
-        std::stable_sort( crafts.begin(), crafts.end(), []( const auto &a, const auto &b ) {
+        std::stable_sort( crafts.begin(), crafts.end(), []( const auto & a, const auto & b ) {
             return a.first > b.first;
         } );
         std::vector<std::string> display;
@@ -7366,14 +7367,14 @@ int item::damage_melee( const damage_type_id &dt ) const
 
     // apply type specific flags
     // FIXME: Hardcoded damage types
-        if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
-            if( dt == damage_bash ) {
-                res *= 0.66;
-            }
-            if( dt == damage_cut || dt == damage_stab ) {
-                res *= 0.33;
-            }
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        if( dt == damage_bash ) {
+            res *= 0.66;
         }
+        if( dt == damage_cut || dt == damage_stab ) {
+            res *= 0.33;
+        }
+    }
 
 
     if( dt == damage_bash && has_flag( flag_REDUCED_BASHING ) ) {

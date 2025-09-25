@@ -1,0 +1,217 @@
+[
+  {
+    "id": "suit_of_armor",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ [ "null", 7 ], { "group": "soa_medieval", "prob": 8 }, { "group": "soa_samurai", "prob": 1 } ]
+  },
+  {
+    "id": "soa_medieval",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [
+      { "group": "western_medieval_weapon" },
+      {
+        "distribution": [ { "item": "junk_platemail_suit", "prob": 40 }, { "item": "chainmail_junk_hauberk", "prob": 60 } ]
+      },
+      { "item": "platemail_visored_helm", "prob": 80 }
+    ]
+  },
+  {
+    "id": "soa_samurai",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "group": "samurai_weapon" }, [ "armor_samurai", 80 ], [ "helmet_kabuto", 80 ] ]
+  },
+  {
+    "id": "western_sword_with_scabbard",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "group": "western_sword_fake_with_scabbard", "prob": 98 },
+      { "group": "western_sword_real_with_scabbard", "prob": 2 }
+    ]
+  },
+  {
+    "id": "western_sword_real_with_scabbard",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "group": "western_sword_real", "prob": 100 }, [ "scabbard", 100 ] ]
+  },
+  {
+    "id": "western_sword_fake_with_scabbard",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "group": "western_sword_fake", "prob": 100 }, [ "scabbard", 100 ] ]
+  },
+  {
+    "id": "western_medieval_weapon",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ { "group": "western_medieval_weapon_fake", "prob": 98 }, { "group": "western_medieval_weapon_real", "prob": 2 } ]
+  },
+  {
+    "id": "western_medieval_weapon_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "pike", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 5 },
+      { "item": "spear_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "halberd", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "glaive", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
+      { "item": "javelin_iron", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "scythe_war", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "poleaxe", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "2h_flail_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "1h_flail_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "mace", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
+      { "item": "morningstar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "battleaxe", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "lucerne_hammer", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "mace_bronze", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "item": "spear_bronze", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "group": "western_sword_fake", "prob": 80 }
+    ]
+  },
+  {
+    "id": "western_medieval_weapon_real",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "pike", "prob": 5 },
+      { "item": "spear_steel", "prob": 30 },
+      { "item": "halberd", "prob": 30 },
+      { "item": "glaive", "prob": 25 },
+      { "item": "javelin_iron", "prob": 20 },
+      { "item": "scythe_war", "prob": 15 },
+      { "item": "poleaxe", "prob": 20 },
+      { "item": "2h_flail_steel", "prob": 20 },
+      { "item": "1h_flail_steel", "prob": 30 },
+      { "item": "mace", "prob": 25 },
+      { "item": "morningstar", "prob": 30 },
+      { "item": "battleaxe", "prob": 30 },
+      { "item": "lucerne_hammer", "prob": 15 },
+      { "item": "mace_bronze", "prob": 3 },
+      { "item": "spear_bronze", "prob": 3 },
+      { "group": "western_sword_real", "prob": 80 }
+    ]
+  },
+  {
+    "id": "western_sword_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "broadsword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "longsword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
+      { "item": "cavalry_sabre", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "scimitar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "estoc", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "arming_sword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
+      { "item": "zweihander", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "rapier", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
+      { "item": "cutlass", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
+      { "item": "kriegsmesser", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "falx", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "kilij", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+      { "item": "talwar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+      { "item": "sword_xiphos", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
+      { "item": "khopesh", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 }
+    ]
+  },
+  {
+    "id": "western_sword_real",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "broadsword", "prob": 30 },
+      { "item": "longsword", "prob": 25 },
+      { "item": "cavalry_sabre", "prob": 30 },
+      { "item": "scimitar", "prob": 30 },
+      { "item": "estoc", "prob": 15 },
+      { "item": "arming_sword", "prob": 30 },
+      { "item": "zweihander", "prob": 20 },
+      { "item": "rapier", "prob": 25 },
+      { "item": "cutlass", "prob": 25 },
+      { "item": "kriegsmesser", "prob": 20 },
+      { "item": "falx", "prob": 15 },
+      { "item": "kilij", "prob": 10 },
+      { "item": "talwar", "prob": 10 },
+      { "item": "sword_xiphos", "prob": 3 },
+      { "item": "khopesh", "prob": 3 }
+    ]
+  },
+  {
+    "id": "samurai_weapon",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ { "group": "samurai_weapon_fake", "prob": 98 }, { "group": "samurai_weapon_real", "prob": 2 } ]
+  },
+  {
+    "id": "samurai_weapon_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "group": "bokken_with_saya", "prob": 10 },
+      { "group": "samurai_sword_fake", "prob": 60 },
+      { "group": "tanto_fake_with_sheath", "prob": 30 },
+      { "item": "kanabo_wood", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "spear_steel", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+      { "item": "longbow", "prob": 10 },
+      { "item": "naginata", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 }
+    ]
+  },
+  {
+    "id": "samurai_weapon_real",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "group": "bokken_with_saya", "prob": 10 },
+      { "group": "samurai_sword_real", "prob": 60 },
+      { "group": "tanto_real_with_sheath", "prob": 30 },
+      { "item": "kanabo_wood", "prob": 20 },
+      { "item": "spear_steel", "prob": 20 },
+      { "item": "woodgreatbow", "prob": 10 },
+      { "item": "naginata", "prob": 30 }
+    ]
+  },
+  {
+    "id": "samurai_sword_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 48 },
+      { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 47 },
+      { "item": "nodachi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 5 }
+    ]
+  },
+  {
+    "id": "samurai_sword_real",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [ { "item": "katana", "prob": 48 }, { "item": "wakizashi", "prob": 47 }, { "item": "nodachi", "prob": 5 } ]
+  },
+  {
+    "id": "samurai_sword_fake_with_scabbard",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "group": "samurai_sword_fake", "prob": 100 }, [ "scabbard", 100 ] ]
+  },
+  {
+    "id": "samurai_sword_real_with_scabbard",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "group": "samurai_sword_real", "prob": 100 }, [ "scabbard", 100 ] ]
+  },
+  {
+    "id": "tanto_fake_with_sheath",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "item": "tanto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 100 }, [ "sheath", 100 ] ]
+  },
+  {
+    "id": "tanto_real_with_sheath",
+    "type": "item_group",
+    "subtype": "collection",
+    "items": [ { "item": "tanto", "prob": 100 }, [ "sheath", 100 ] ]
+  }
+]

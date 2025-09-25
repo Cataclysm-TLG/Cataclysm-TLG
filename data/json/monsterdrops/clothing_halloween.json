@@ -1284,11 +1284,7 @@
             ]
           },
           {
-            "collection": [
-              { "item": "cutlass_fake", "container-item": "scabbard", "prob": 80, "damage": [ 1, 4 ] },
-              { "item": "cutlass_inferior", "container-item": "scabbard", "prob": 19, "damage": [ 1, 4 ] },
-              { "item": "cutlass", "container-item": "scabbard", "prob": 1, "damage": [ 1, 4 ] }
-            ],
+            "collection": [ { "item": "cutlass", "container-item": "scabbard", "prob": 10, "damage": [ 1, 4 ] } ],
             "prob": 20
           },
           {

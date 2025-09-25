@@ -2290,7 +2290,8 @@ int game::inventory_item_menu( item_location locThisItem,
                 }
 
                 addentry( 'V', pgettext( "action", "view recipe" ), rate_action_view_recipe( u, oThisItem ) );
-                addentry( 'C', pgettext( "action", "crafting" ), rate_action_crafting_applications( u, oThisItem ) );
+                addentry( 'C', pgettext( "action", "crafting" ), rate_action_crafting_applications( u,
+                          oThisItem ) );
                 addentry( '>', pgettext( "action", "hide contents" ), rate_action_collapse( oThisItem ) );
                 addentry( '<', pgettext( "action", "show contents" ), rate_action_expand( oThisItem ) );
                 addentry( '=', pgettext( "action", "reassign" ), hint_rating::good );
@@ -2477,7 +2478,8 @@ int game::inventory_item_menu( item_location locThisItem,
                 }
                 case 'C': {
                     const recipe_subset &available_recipe_subset = u.get_group_available_recipes();
-                    const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component( oThisItem.typeId() );
+                    const std::set<const recipe *> &item_recipes = available_recipe_subset.of_component(
+                                oThisItem.typeId() );
                     if( item_recipes.empty() ) {
                         popup( _( "You know of nothing you could craft with it." ) );
                     } else {
