@@ -141,6 +141,7 @@ static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_bullet( "bullet" );
 static const damage_type_id damage_cut( "cut" );
 static const damage_type_id damage_heat( "heat" );
+static const damage_type_id damage_stab( "stab" );
 
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_cig( "cig" );
@@ -901,6 +902,7 @@ float item::damage_adjusted_melee_weapon_damage( float value ) const
     if( type->count_by_charges() ) {
         return value; // count by charges items don't have partial damage
     }
+
     return value * ( 1.0f - 0.1f * std::max( 0, damage_level() - 1 ) );
 }
 
@@ -5951,7 +5953,8 @@ void item::ascii_art_info( std::vector<iteminfo> &info, const iteminfo_query * /
     }
 }
 
-std::string item::crafting_applications() const {
+std::string item::crafting_applications() const
+{
     Character &you = get_player_character();
     const inventory &crafting_inv = you.crafting_inventory();
     const recipe_subset &available_recipe_subset = you.get_group_available_recipes();
@@ -5971,7 +5974,7 @@ std::string item::crafting_applications() const {
             crafts.emplace_back( can_make, std::move( display ) );
         }
         // Put craftables first, preserve order within groups
-        std::stable_sort( crafts.begin(), crafts.end(), []( const auto &a, const auto &b ) {
+        std::stable_sort( crafts.begin(), crafts.end(), []( const auto & a, const auto & b ) {
             return a.first > b.first;
         } );
         std::vector<std::string> display;
@@ -7357,10 +7360,23 @@ int item::damage_melee( const damage_type_id &dt ) const
     if( type->melee.count( dt ) > 0 ) {
         res = type->melee.at( dt );
     }
+
+
     res = damage_adjusted_melee_weapon_damage( res );
+
 
     // apply type specific flags
     // FIXME: Hardcoded damage types
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        if( dt == damage_bash ) {
+            res *= 0.66;
+        }
+        if( dt == damage_cut || dt == damage_stab ) {
+            res *= 0.33;
+        }
+    }
+
+
     if( dt == damage_bash && has_flag( flag_REDUCED_BASHING ) ) {
         res *= 0.5;
     }

@@ -37,7 +37,7 @@
       "terrain": { " ": "t_soil", ".": "t_thconc_floor", "]": "t_sewage_pipe", ")": "t_sewage_pump" },
       "furniture": {
         "?": [
-          [ "f_generator_broken", 35 ],
+          [ "f_generator_broken", 45 ],
           [ "f_portable_generator", 10 ],
           [ "f_diesel_generator", 5 ],
           [ "f_12000_gasoline_generator", 5 ]

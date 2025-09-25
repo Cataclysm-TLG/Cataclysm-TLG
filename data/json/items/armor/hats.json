@@ -444,7 +444,6 @@
       {
         "encumbrance_modifiers": [ "NONE" ],
         "coverage": 100,
-        "cover_vitals": 90,
         "covers": [ "head" ],
         "specifically_covers": [ "head_crown", "head_forehead" ]
       }
@@ -538,7 +537,6 @@
       {
         "encumbrance_modifiers": [ "NONE" ],
         "coverage": 100,
-        "cover_vitals": 90,
         "covers": [ "head" ],
         "specifically_covers": [ "head_crown", "head_forehead" ]
       }

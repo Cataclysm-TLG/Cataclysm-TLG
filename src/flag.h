@@ -305,6 +305,7 @@ extern const flag_id flag_RELOAD_AND_SHOOT;
 extern const flag_id flag_RELOAD_EJECT;
 extern const flag_id flag_RELOAD_ONE;
 extern const flag_id flag_REMOVED_STOCK;
+extern const flag_id flag_REPLICA_EQUIPMENT;
 extern const flag_id flag_REQUIRES_BALANCE;
 extern const flag_id flag_REQUIRES_TINDER;
 extern const flag_id flag_RESTRICT_HANDS;
@@ -477,7 +478,6 @@ class json_flag
 
         /** true, if flags were loaded */
         static bool is_ready();
-
         static const std::vector<json_flag> &get_all();
 
     private:

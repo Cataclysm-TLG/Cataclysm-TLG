@@ -246,11 +246,6 @@ void Item_factory::finalize_pre( itype &obj )
         }
     }
 
-    if( obj.has_flag( flag_STAB ) ) {
-        debugmsg( "The \"STAB\" flag used on %s is obsolete, add a \"stab\" value in the \"melee_damage\" object instead.",
-                  obj.id.c_str() );
-    }
-
     // add usage methods (with default values) based upon qualities
     // if a method was already set the specific values remain unchanged
     for( const auto &q : obj.qualities ) {
@@ -819,6 +814,7 @@ void Item_factory::finalize_post( itype &obj )
             }
         }
     }
+
 }
 
 void Item_factory::finalize_post_armor( itype &obj )
@@ -987,10 +983,6 @@ void Item_factory::finalize_post_armor( itype &obj )
                         float it_scale = it.max_coverage( bp ) / 100.0;
 
                         it.coverage += sub_armor.coverage * scale;
-                        it.cover_melee += sub_armor.cover_melee * scale;
-                        it.cover_ranged += sub_armor.cover_ranged * scale;
-                        it.cover_vitals += sub_armor.cover_vitals;
-
                         // these values need to be averaged based on proportion covered
                         it.avg_thickness = ( sub_armor.avg_thickness * scale + it.avg_thickness * it_scale ) /
                                            ( scale + it_scale );
@@ -1070,8 +1062,6 @@ void Item_factory::finalize_post_armor( itype &obj )
                     float scale = new_limb.max_coverage( bp ) / 100.0;
 
                     new_limb.coverage = new_limb.coverage * scale;
-                    new_limb.cover_melee = new_limb.cover_melee * scale;
-                    new_limb.cover_ranged = new_limb.cover_ranged * scale;
 
                     // need to scale each material coverage the same way since they will after this be
                     // scaled back up at the end of the amalgamation
@@ -2055,9 +2045,6 @@ void Item_factory::check_definitions() const
                         }
                     }
                 }
-                if( portion.coverage == 0 && ( portion.cover_melee > 0 || portion.cover_ranged > 0 ) ) {
-                    msg += "base \"coverage\" value not specified in armor portion despite using \"cover_melee\"/\"cover_ranged\"\n";
-                }
             }
 
             // do tests for the sub bp armor data arrays
@@ -2070,9 +2057,6 @@ void Item_factory::check_definitions() const
                                    bp.str() );
                     }
                     observed_sub_bps.push_back( bp );
-                }
-                if( portion.coverage == 0 && ( portion.cover_melee > 0 || portion.cover_ranged > 0 ) ) {
-                    msg += "base \"coverage\" value not specified in armor portion despite using \"cover_melee\"/\"cover_ranged\"\n";
                 }
             }
 
@@ -2096,16 +2080,14 @@ void Item_factory::check_definitions() const
 
             // check that no item has more coverage on any location than the max coverage (100)
             for( const armor_portion_data &portion : type->armor->sub_data ) {
-                if( 100 < portion.coverage || 100 < portion.cover_melee ||
-                    100 < portion.cover_ranged ) {
+                if( 100 < portion.coverage ) {
                     msg += string_format( "coverage exceeds the maximum amount for the sub locations coverage can't exceed 100, item coverage: %d\n",
                                           portion.coverage );
                 }
             }
             // check that no item has more coverage on any location than the max coverage (100)
             for( const armor_portion_data &portion : type->armor->data ) {
-                if( 100 < portion.coverage || 100 < portion.cover_melee ||
-                    100 < portion.cover_ranged ) {
+                if( 100 < portion.coverage ) {
                     msg += string_format( "coverage exceeds the maximum amount for the locations coverage can't exceed 100, item coverage: %d\n",
                                           portion.coverage );
                 }
@@ -3009,10 +2991,6 @@ void armor_portion_data::deserialize( const JsonObject &jo )
         breathability = material_type::breathability_to_rating( temp_enum );
     }
     optional( jo, false, "specifically_covers", sub_coverage );
-
-    optional( jo, false, "cover_melee", cover_melee, coverage );
-    optional( jo, false, "cover_ranged", cover_ranged, coverage );
-    optional( jo, false, "cover_vitals", cover_vitals, 0 );
 
     optional( jo, false, "rigid_layer_only", rigid_layer_only, false );
 

@@ -349,9 +349,6 @@ bool armor_portion_data::should_consolidate( const armor_portion_data &l,
            l.max_encumber == r.max_encumber &&
            l.volume_encumber_modifier == r.volume_encumber_modifier &&
            l.coverage == r.coverage &&
-           l.cover_melee == r.cover_melee &&
-           l.cover_ranged == r.cover_ranged &&
-           l.cover_vitals == r.cover_vitals &&
            l.env_resist == r.env_resist &&
            l.breathability == r.breathability &&
            l.rigid == r.rigid &&

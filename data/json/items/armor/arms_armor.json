@@ -23,9 +23,6 @@
         "covers": [ "arm_l", "arm_r" ],
         "encumbrance": 16,
         "coverage": 80,
-        "cover_melee": 80,
-        "cover_ranged": 80,
-        "cover_vitals": 0,
         "specifically_covers": [ "arm_lower_r", "arm_lower_l" ],
         "rigid_layer_only": true
       }
