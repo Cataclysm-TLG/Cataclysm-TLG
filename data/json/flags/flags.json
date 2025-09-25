@@ -2686,7 +2686,8 @@
   {
     "id": "REPLICA_EQUIPMENT",
     "type": "json_flag",
-    "info": "This item is only a <bad>shoddy replica</bad>, and lacks the <info>quality and durability</info> of the real thing.",
-    "conflicts": [ "STURDY", "DURABLE_MELEE" ]
+    "info": "This item is only a <info>shoddy replica</info>, and is <bad>far less effective</bad> than the real thing.",
+    "conflicts": [ "STURDY", "DURABLE_MELEE" ],
+    "item_prefix": "replica "
   }
 ]
