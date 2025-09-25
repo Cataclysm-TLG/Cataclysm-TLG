@@ -653,9 +653,15 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
             if( any_missing || !save_results ) {
                 const tripoint_abs_omt omt_point = { p.x(), p.y(), gridz };
                 oter_id omt = overmap_buffer.ter( omt_point );
+            /*
+            * DDA applies the riot damage quite broadly. We don't want to apply any at all,
+            * but when we do, it should be by flag and not just willy-nilly.
+            */
+                // if( omt->has_flag(
+                //         oter_flags::pp_generate_riot_damage ) || ( omt->has_flag( oter_flags::road ) &&
+                //                 overmap_buffer.is_in_city( omt_point ) ) ) {
                 if( omt->has_flag(
-                        oter_flags::pp_generate_riot_damage ) || ( omt->has_flag( oter_flags::road ) &&
-                                overmap_buffer.is_in_city( omt_point ) ) ) {
+                        oter_flags::pp_generate_riot_damage ) ) {
                     GENERATOR_riot_damage( *this, omt_point );
                 }
             }
