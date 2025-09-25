@@ -725,11 +725,7 @@
     "vision_night": 3,
     "bleed_rate": 0,
     "harvest": "zombie_animal_mushroom",
-    "special_attacks": [
-      [ "scratch", 10 ],
-      { "type": "leap", "cooldown": 5, "max_range": 5 },
-      [ "FUNGUS", 190 ]
-    ],
+    "special_attacks": [ [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 }, [ "FUNGUS", 190 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "WARM", "BASHES", "POISON", "NO_BREATHE", "FILTHY" ],
     "armor": { "bash": 1, "electric": 2 }
   },
