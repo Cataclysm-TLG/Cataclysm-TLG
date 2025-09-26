@@ -1107,7 +1107,8 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         weakpoint_attack wp_attack;
         wp_attack.weapon = &gun;
         projectile proj = make_gun_projectile( gun );
-
+    itype_id projectile_use_ammo_id = gun.has_ammo_data() ? gun.ammo_data()->get_id() :
+                                          itype_id::NULL_ID();
         for( damage_unit &elem : proj.impact.damage_units ) {
             elem.amount = enchantment_cache->modify_value( enchant_vals::mod::RANGED_DAMAGE, elem.amount );
             elem.res_pen = enchantment_cache->modify_value( enchant_vals::mod::RANGED_ARMOR_PENETRATION,
@@ -1631,7 +1632,6 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
             get_event_bus().send_with_talker( this, c, e );
         }
     }
-    const double missed_by = dealt_attack.missed_by;
 
     if( critter && dealt_attack.last_hit_critter != nullptr && dealt_attack.headshot &&
         !critter->has_flag( mon_flag_IMMOBILE ) &&

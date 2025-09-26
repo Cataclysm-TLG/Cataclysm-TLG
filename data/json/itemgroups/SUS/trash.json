@@ -30,7 +30,6 @@
       { "item": "can_drink", "prob": 10 },
       { "item": "can_food", "prob": 10 },
       { "item": "box_small", "prob": 10 },
-      { "group": "pillbox_any_empty", "prob": 1, "count": [ 1, 2 ] },
       { "item": "bag_canvas_small", "prob": 2 },
       { "item": "box_cigarette", "prob": 10 },
       { "item": "bag_paper_powder", "prob": 5 },
@@ -87,7 +86,6 @@
       { "item": "can_drink", "prob": 30 },
       { "item": "can_food", "prob": 30 },
       { "item": "box_small", "prob": 30 },
-      { "group": "pillbox_any_empty", "prob": 10, "count": [ 1, 3 ] },
       { "item": "bag_canvas_small", "prob": 10 },
       { "item": "box_cigarette", "prob": 10 },
       { "item": "ifak_pouch", "prob": 15 },
@@ -95,7 +93,7 @@
       { "item": "bottle_glass_seasoning", "prob": 5 },
       { "//": "Loose items" },
       { "item": "bubblewrap", "prob": 15 },
-      { "item": "lc_wire", "prob": 10, "count": [ 1, 4 ] },
+      { "item": "wire", "prob": 10, "count": [ 1, 4 ] },
       { "item": "string_6", "prob": 20, "count": [ 1, 5 ] },
       { "item": "string_36", "prob": 10, "count": [ 1, 3 ] },
       { "item": "scorecard", "prob": 20 },
@@ -107,7 +105,6 @@
       { "group": "tinware", "prob": 5 },
       { "item": "plastic_sheet", "prob": 10, "count": [ 1, 4 ] },
       { "item": "plastic_sheet_small", "prob": 15, "count": [ 3, 8 ] },
-      { "item": "fp_loyalty_card", "prob": 15 },
       { "item": "mask_dust", "prob": 2 },
       { "item": "coin_nickel", "prob": 1 },
       { "item": "coin_quarter", "prob": 1 },
@@ -196,8 +193,7 @@
       { "item": "family_photo", "prob": 2 },
       { "item": "eraser", "prob": 5 },
       { "item": "cotton_ball", "prob": 10, "count": [ 3, 7 ], "custom-flags": [ "FILTHY" ] },
-      { "group": "used_toy_box", "prob": 8 },
-      { "group": "superglue_bottles", "prob": 8, "count": [ 1, 3 ] }
+      { "group": "used_toy_box", "prob": 8 }
     ]
   },
   {
@@ -245,8 +241,7 @@
       { "item": "book_ruined", "prob": 5 },
       { "item": "candle", "prob": 10, "count": [ 1, 2 ], "charges": [ 0, 8 ] },
       { "item": "cotton_ball", "prob": 5, "count": [ 3, 7 ], "custom-flags": [ "FILTHY" ] },
-      { "group": "used_toy_box", "prob": 8 },
-      { "group": "superglue_bottles", "prob": 8 }
+      { "group": "used_toy_box", "prob": 8 }
     ]
   },
   {
@@ -292,7 +287,6 @@
       { "item": "straw_pile", "prob": 10 },
       { "item": "tanbark", "prob": 5 },
       { "item": "rock_large", "prob": 10 },
-      { "item": "field_stone", "prob": 5 },
       { "item": "pine_bough", "prob": 5 },
       { "item": "splinter", "prob": 10, "count": [ 1, 5 ] },
       { "item": "hickory_root", "prob": 5 },
