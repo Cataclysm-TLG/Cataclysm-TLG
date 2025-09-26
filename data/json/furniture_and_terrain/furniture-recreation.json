@@ -419,7 +419,7 @@
       "items": [
         { "item": "chain", "count": [ 0, 1 ] },
         { "item": "leather", "count": [ 16, 32 ] },
-        { "item": "tanned_hide", "count": [ 0, 4 ] },
+        { "item": "sheet_leather", "count": [ 0, 4 ] },
         { "item": "material_sand", "charges": 4000 },
         { "item": "sheet_cotton", "count": [ 4, 8 ] },
         { "item": "cotton_patchwork", "count": [ 2, 4 ] }

@@ -278,7 +278,7 @@
     "id": "fabric_leather_hide",
     "type": "requirement",
     "//": "Materials used for crafting leather clothing.",
-    "components": [ [ [ "leather", 8 ], [ "sheet_leather_patchwork", 1 ], [ "tanned_hide", 1 ] ] ]
+    "components": [ [ [ "leather", 8 ], [ "sheet_leather_patchwork", 1 ], [ "sheet_leather", 1 ] ] ]
   },
   {
     "id": "fabric_leather_fur_hide",
@@ -288,7 +288,7 @@
       [
         [ "leather", 8 ],
         [ "fur", 8 ],
-        [ "tanned_hide", 1 ],
+        [ "sheet_leather", 1 ],
         [ "tanned_pelt", 1 ],
         [ "sheet_leather_patchwork", 1 ],
         [ "sheet_fur_patchwork", 1 ]

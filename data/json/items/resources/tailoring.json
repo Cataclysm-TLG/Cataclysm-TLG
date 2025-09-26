@@ -266,20 +266,6 @@
   },
   {
     "type": "GENERIC",
-    "id": "tanned_hide",
-    "symbol": ",",
-    "color": "brown",
-    "name": { "str": "tanned hide" },
-    "description": "A sheet of leather made from carefully tanned animal hide.  Can be cut up or used as is.",
-    "price": "50 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "leather" ],
-    "weight": "296 g",
-    "volume": "186 ml",
-    "category": "spare_parts"
-  },
-  {
-    "type": "GENERIC",
     "id": "sheet_leather",
     "name": { "str": "leather sheet" },
     "description": "A sheet of leather.  Can be cut up or used as is.",
