@@ -1701,7 +1701,7 @@ void map::player_in_field( Character &you )
                 if( rng( 0, 2 ) < cur.get_field_intensity() && you.is_avatar() ) {
                     add_msg( m_bad, _( "You're violently teleported!" ) );
                     you.hurtall( cur.get_field_intensity(), nullptr );
-                    teleport::teleport( you );
+                    teleport::teleport_creature( you );
                 }
             }
         }
@@ -2025,7 +2025,7 @@ void map::monster_in_field( monster &z )
         if( cur_field_type == fd_fatigue ) {
             if( rng( 0, 2 ) < cur.get_field_intensity() ) {
                 dam += cur.get_field_intensity();
-                teleport::teleport( z );
+                teleport::teleport_creature( z );
             }
         }
         if( cur_field_type == fd_incendiary ) {
