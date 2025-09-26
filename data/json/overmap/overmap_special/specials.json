@@ -3513,6 +3513,22 @@
   },
   {
     "type": "overmap_special",
+    "id": "church_rural 1",
+    "overmaps": [
+      { "point": [ 1, 0, 0 ], "overmap": "rural_church_parking_massacre_north" },
+      { "point": [ 2, 0, 0 ], "overmap": "rural_church_massacre_north" },
+      { "point": [ 2, 0, -1 ], "overmap": "rural_church_basement_north" },
+      { "point": [ 2, 0, 1 ], "overmap": "rural_church_steeple_north" },
+      { "point": [ 2, 0, 2 ], "overmap": "rural_church_steeple_roof_north" }
+    ],
+    "connections": [ { "point": [ 0, 0, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 0, 0 ] } ],
+    "locations": [ "forest", "field" ],
+    "city_distance": [ 8, 50 ],
+    "occurrences": [ 10, 100 ],
+    "flags": [ "CLASSIC", "MAN_MADE", "OVERMAP_UNIQUE" ]
+  },
+  {
+    "type": "overmap_special",
     "id": "Moonshine Still",
     "overmaps": [
       { "point": [ 0, 0, 0 ], "overmap": "moonshine_still_north" },

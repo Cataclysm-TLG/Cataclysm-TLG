@@ -27,7 +27,7 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "rural_church", "rural_church_parking" ],
+    "id": [ "rural_church_parking_massacre", "rural_church_massacre", "rural_church_parking", "rural_church" ],
     "vision_levels": "isolated_building",
     "name": "rural church",
     "sym": "C",
