@@ -1297,7 +1297,7 @@
     "type": "item_group",
     "id": "GODCO_russell_sell",
     "subtype": "collection",
-    "entries": [ { "item": "tanned_hide", "count": [ 10, 12 ] }, { "item": "tanned_pelt", "count": [ 8, 10 ] } ]
+    "entries": [ { "item": "sheet_leather", "count": [ 10, 12 ] }, { "item": "tanned_pelt", "count": [ 8, 10 ] } ]
   },
   {
     "type": "item_group",

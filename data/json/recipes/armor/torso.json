@@ -315,7 +315,7 @@
     "time": "20 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "tanned_hide", 1 ], [ "sheet_leather_patchwork", 1 ] ] ],
+    "components": [ [ [ "sheet_leather", 1 ], [ "sheet_leather_patchwork", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

@@ -49,7 +49,7 @@
       [ [ "link_sheet", 5 ] ],
       [ [ "chain_link", 131 ] ],
       [ [ "wire", 1 ] ],
-      [ [ "fur", 8 ], [ "tanned_pelt", 1 ], [ "leather", 8 ], [ "tanned_hide", 1 ] ]
+      [ [ "fur", 8 ], [ "tanned_pelt", 1 ], [ "leather", 8 ], [ "sheet_leather", 1 ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_chain_armour" },

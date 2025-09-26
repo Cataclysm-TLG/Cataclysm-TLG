@@ -2172,7 +2172,7 @@
     "//": "Thread is odd so we're just kind of giving you some whole pieces of thread, when it shouldn't be near that, but we need a source."
   },
   {
-    "result": "tanned_hide",
+    "result": "sheet_leather",
     "type": "uncraft",
     "time": "2 m",
     "activity_level": "LIGHT_EXERCISE",
@@ -4954,7 +4954,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "30 m",
-    "components": [ [ [ "leather", 16 ] ], [ [ "tanned_hide", 8 ] ] ],
+    "components": [ [ [ "leather", 16 ] ], [ [ "sheet_leather", 8 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -5020,14 +5020,6 @@
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "faux_fur", 8 ] ] ]
-  },
-  {
-    "result": "sheet_leather",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "30 s",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 8 ] ] ]
   },
   {
     "result": "sheet_felt",

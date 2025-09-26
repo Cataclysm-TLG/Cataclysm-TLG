@@ -228,7 +228,6 @@
       [ "leather", 10 ],
       [ "fur", 7 ],
       [ "sheet_leather", 20 ],
-      [ "tanned_hide", 20 ],
       [ "tanned_pelt", 20 ]
     ]
   },

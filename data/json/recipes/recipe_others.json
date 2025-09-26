@@ -499,7 +499,7 @@
     ],
     "components": [
       [ [ "stick", 10 ], [ "2x4", 5 ] ],
-      [ [ "leather", 64 ], [ "sheet_leather_patchwork", 8 ], [ "tanned_hide", 8 ] ],
+      [ [ "leather", 64 ], [ "sheet_leather_patchwork", 8 ], [ "sheet_leather", 8 ] ],
       [ [ "filament", 40, "LIST" ] ]
     ]
   },
@@ -523,7 +523,7 @@
     ],
     "components": [
       [ [ "stick", 10 ] ],
-      [ [ "sheet_leather_patchwork", 24 ], [ "sheet_leather", 24 ], [ "tanned_hide", 24 ] ],
+      [ [ "sheet_leather_patchwork", 24 ], [ "sheet_leather", 24 ] ],
       [ [ "filament", 500, "LIST" ] ]
     ]
   },
@@ -547,7 +547,7 @@
     ],
     "components": [
       [ [ "stick", 3 ], [ "2x4", 2 ] ],
-      [ [ "leather", 4 ], [ "tanned_hide", 1 ] ],
+      [ [ "leather", 4 ], [ "sheet_leather", 1 ] ],
       [ [ "damaged_shelter_kit", 1 ] ],
       [ [ "filament", 5, "LIST" ] ]
     ]
@@ -572,7 +572,7 @@
     ],
     "components": [
       [ [ "stick", 6 ] ],
-      [ [ "leather", 16 ], [ "sheet_leather", 4 ], [ "sheet_leather_patchwork", 4 ], [ "tanned_hide", 4 ] ],
+      [ [ "leather", 16 ], [ "sheet_leather_patchwork", 4 ], [ "sheet_leather", 4 ] ],
       [ [ "large_damaged_shelter_kit", 1 ] ],
       [ [ "filament", 100, "LIST" ] ]
     ]
@@ -1912,7 +1912,7 @@
     "autolearn": true,
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "components": [ [ [ "sheet_leather_patchwork", 1 ], [ "tanned_hide", 1 ], [ "sheet_fur_patchwork", 1 ], [ "tanned_pelt", 1 ] ] ]
+    "components": [ [ [ "sheet_leather_patchwork", 1 ], [ "sheet_leather", 1 ], [ "sheet_fur_patchwork", 1 ], [ "tanned_pelt", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -2144,7 +2144,7 @@
     "book_learn": [ [ "scots_tailor", 3 ], [ "scots_cookbook", 7 ] ],
     "using": [ [ "sewing_standard", 20 ] ],
     "components": [
-      [ [ "large_stomach_sealed", 1 ], [ "tanned_hide", 2 ], [ "leather", 16 ], [ "tanned_pelt", 2 ], [ "fur", 16 ] ],
+      [ [ "large_stomach_sealed", 1 ], [ "sheet_leather", 2 ], [ "leather", 16 ], [ "tanned_pelt", 2 ], [ "fur", 16 ] ],
       [ [ "stick", 1 ], [ "2x4", 1 ] ],
       [ [ "cotton_patchwork", 3 ] ],
       [ [ "adhesive", 1, "LIST" ], [ "medical_tape", 50 ] ]
@@ -2900,7 +2900,7 @@
     "components": [
       [ [ "2x4", 2 ] ],
       [ [ "nails", 12, "LIST" ] ],
-      [ [ "sheet_leather_patchwork", 2 ], [ "tanned_hide", 2 ], [ "sheet_fur_patchwork", 2 ], [ "tanned_pelt", 2 ] ]
+      [ [ "sheet_leather_patchwork", 2 ], [ "sheet_leather", 2 ], [ "sheet_fur_patchwork", 2 ], [ "tanned_pelt", 2 ] ]
     ]
   },
   {

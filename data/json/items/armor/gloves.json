@@ -952,7 +952,7 @@
   {
     "id": "long_glove_white",
     "type": "ARMOR",
-    "name": { "str": "pair opera gloves", "str_pl": "pairs of opera gloves" },
+    "name": { "str": "opera gloves", "str_pl": "pairs of opera gloves" },
     "description": "Thin gloves which extend up past the elbows.",
     "weight": "300 g",
     "volume": "360 ml",

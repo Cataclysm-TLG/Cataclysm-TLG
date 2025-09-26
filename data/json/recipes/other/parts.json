@@ -789,7 +789,7 @@
     "components": [
       [ [ "pipe", 4 ] ],
       [ [ "spring", 2 ] ],
-      [ [ "leather", 12 ], [ "fur", 12 ], [ "tanned_hide", 3 ], [ "tanned_pelt", 3 ] ],
+      [ [ "leather", 12 ], [ "fur", 12 ], [ "sheet_leather", 3 ], [ "tanned_pelt", 3 ] ],
       [ [ "pipe_fittings", 4 ] ],
       [ [ "nylon", 8 ] ]
     ]
@@ -837,7 +837,7 @@
     "components": [
       [ [ "pipe", 4 ] ],
       [ [ "spring", 2 ] ],
-      [ [ "leather", 12 ], [ "fur", 12 ], [ "tanned_hide", 3 ], [ "tanned_pelt", 3 ] ],
+      [ [ "leather", 12 ], [ "fur", 12 ], [ "sheet_leather", 3 ], [ "tanned_pelt", 3 ] ],
       [ [ "pipe_fittings", 4 ] ],
       [ [ "nylon", 8 ] ]
     ]

@@ -615,7 +615,7 @@
         [ "sheet_cotton", 1 ],
         [ "sheet_fur_patchwork", 1 ],
         [ "tanned_pelt", 1 ],
-        [ "tanned_hide", 1 ],
+        [ "sheet_leather", 1 ],
         [ "sheet_leather_patchwork", 6 ]
       ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "pointy_stick", 1 ], [ "mop", 1 ] ]
