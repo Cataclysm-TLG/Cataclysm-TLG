@@ -215,7 +215,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.5,
-    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "flags": [ "VARSIZE", "SKINTIGHT", "RAINPROOF" ],
     "armor": [
       {
         "coverage": 75,
@@ -1011,7 +1011,7 @@
     ],
     "warmth": 25,
     "material_thickness": 0.75,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": [ 15, 17 ],
@@ -1079,7 +1079,7 @@
     "warmth": 70,
     "material_thickness": 1,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER" ],
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": [ 6, 10 ],
@@ -1526,7 +1526,7 @@
     "color": "brown",
     "warmth": 10,
     "material_thickness": 0.6,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": 8,

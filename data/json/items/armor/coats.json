@@ -1093,7 +1093,7 @@
     "warmth": 25,
     "material_thickness": 1.0,
     "environmental_protection": 2,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER" ]
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ]
   },
   {
     "id": "jacket_leather_xs",
@@ -1285,7 +1285,7 @@
     "id": "jacket_light",
     "type": "ARMOR",
     "name": { "str": "light jacket" },
-    "description": "A thin cotton jacket with a hood.  Good for brisk weather.",
+    "description": "A thin cotton jacket with a hood.  It's good for brisk weather, not so much for rain.",
     "weight": "227 g",
     "volume": "2250 ml",
     "price": "45 USD",
@@ -1376,7 +1376,7 @@
     "symbol": "[",
     "warmth": 15,
     "material_thickness": 0.5,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER" ],
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ],
     "armor": [
       { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 90, "encumbrance": [ 14, 18 ] },
       { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 90 },
@@ -1656,7 +1656,7 @@
     "warmth": 30,
     "material_thickness": 1.5,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER", "STURDY" ]
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "STURDY", "RAINPROOF" ]
   },
   {
     "id": "peacoat",
@@ -1709,7 +1709,7 @@
     ],
     "warmth": 50,
     "material_thickness": 1.0,
-    "flags": [ "VARSIZE", "POCKETS", "COLLAR", "OUTER" ]
+    "flags": [ "VARSIZE", "POCKETS", "COLLAR", "OUTER", "RAINPROOF" ]
   },
   {
     "id": "robe",
@@ -2707,7 +2707,7 @@
     ],
     "warmth": 50,
     "material_thickness": 1,
-    "flags": [ "VARSIZE", "POCKETS", "HOOD", "OUTER" ]
+    "flags": [ "VARSIZE", "POCKETS", "HOOD", "OUTER", "RAINPROOF" ]
   },
   {
     "id": "plaguedoctor_robe",
