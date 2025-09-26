@@ -3346,23 +3346,23 @@ void target_ui::update_target_list()
         targets.clear();
         return;
     }
-
+    map &here = get_map();
     // Get targets in range and sort them by distance (targets[0] is the closest)
     if( targeting_Mode == LegalTargets::Both || targeting_Mode == LegalTargets::Vehicles ) {
         for( vehicle *target : you->get_visible_vehicles( range ) ) {
-            targets.push_back( target->pos_bub( get_map() ) );
+            targets.push_back( target->pos_bub( here ) );
         }
     }
     if( targeting_Mode == LegalTargets::Both || targeting_Mode == LegalTargets::Creatures ) {
         for( Creature *target : you->get_targetable_creatures( range, mode == TargetMode::Reach ) ) {
-            targets.push_back( target->pos_bub() );
+            targets.push_back( target->pos_bub( here ) );
         }
     }
     std::sort( targets.begin(), targets.end(), [&]( const tripoint_bub_ms lhs,
     const tripoint_bub_ms rhs ) {
-        return static_cast<int>( std::round( trig_dist_z_adjust( lhs->pos_bub(),
-                                                     you->pos_bub() ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs->pos_bub(),
-                                                     you->pos_bub() ) ) );
+        return static_cast<int>( std::round( trig_dist_z_adjust( lhs,
+                                                     you->pos_bub( here ) ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs,
+                                                     you->pos_bub( here ) ) ) );
     } );
 }
 
