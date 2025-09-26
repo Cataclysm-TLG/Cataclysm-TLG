@@ -1107,7 +1107,8 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         weakpoint_attack wp_attack;
         wp_attack.weapon = &gun;
         projectile proj = make_gun_projectile( gun );
-
+    itype_id projectile_use_ammo_id = gun.has_ammo_data() ? gun.ammo_data()->get_id() :
+                                          itype_id::NULL_ID();
         for( damage_unit &elem : proj.impact.damage_units ) {
             elem.amount = enchantment_cache->modify_value( enchant_vals::mod::RANGED_DAMAGE, elem.amount );
             elem.res_pen = enchantment_cache->modify_value( enchant_vals::mod::RANGED_ARMOR_PENETRATION,
@@ -1127,10 +1128,14 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         for( std::pair<Creature *const, std::pair<int, int>> &hit_entry : shot.targets_hit ) {
             if( monster *const m = hit_entry.first->as_monster() ) {
                 cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(), gun_id,
+                                projectile_use_ammo_id,
+                                false,
                                 m->type->id );
                 get_event_bus().send_with_talker( this, m, e );
             } else if( Character *const c = hit_entry.first->as_character() ) {
                 cata::event e = cata::event::make<event_type::character_ranged_attacks_character>( getID(), gun_id,
+                                projectile_use_ammo_id,
+                                false,
                                 c->getID(), c->get_name() );
                 get_event_bus().send_with_talker( this, c, e );
             }
@@ -1600,14 +1605,35 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
     range_factor = std::clamp( range_factor, 0.f, 7.f );
 
     const int final_xp_mult = static_cast<int>( std::round( range_factor + damage_factor ) );
+    itype_id to_throw_id = to_throw.type->get_id();
     weakpoint_attack wp_attack;
     wp_attack.weapon = &to_throw;
     wp_attack.is_thrown = true;
     dealt_projectile_attack dealt_attack;
     projectile_attack( dealt_attack, proj, throw_from, target, dispersion,
                        this, nullptr, wp_attack );
+    for( std::pair<Creature *const, std::pair<int, int>> &hit_entry : dealt_attack.targets_hit ) {
+        if( hit_entry.second.first == 0 ) {
+            continue;
+        }
+        if( monster *const m = hit_entry.first->as_monster() ) {
+            cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(),
+                            itype_id::NULL_ID(),
+                            to_throw_id,
+                            true,
+                            m->type->id );
+            get_event_bus().send_with_talker( this, m, e );
+        } else if( Character *const c = hit_entry.first->as_character() ) {
+            cata::event e = cata::event::make<event_type::character_ranged_attacks_character>( getID(),
+                            itype_id::NULL_ID(),
+                            to_throw_id,
+                            true,
+                            c->getID(), c->get_name() );
+            get_event_bus().send_with_talker( this, c, e );
+        }
+    }
 
-    if( critter && dealt_attack.last_hit_critter != nullptr &&
+    if( critter && dealt_attack.last_hit_critter != nullptr && dealt_attack.headshot &&
         !critter->has_flag( mon_flag_IMMOBILE ) &&
         !critter->has_effect_with_flag( json_flag_CANNOT_MOVE ) ) {
         practice( skill_throw, final_xp_mult, MAX_SKILL );

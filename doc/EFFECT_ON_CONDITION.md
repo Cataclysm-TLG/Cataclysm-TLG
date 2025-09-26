@@ -1667,8 +1667,8 @@ Every event EOC passes context vars with each of their key value pairs that the 
 | character_melee_attacks_character |  | { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "hits", `bool` },<br/> { "victim", `character_id` },<br/> { "victim_name", `string` }, | character (attacker) / character (victim) |
 | character_melee_attacks_monster | | { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "hits", `bool` },<br/> { "victim_type", `mtype_id` },| character / monster |
 | character_radioactively_mutates | triggered when a character mutates due to being irradiated | { "character", `character_id` }, | character / NONE |
-| character_ranged_attacks_character | |  { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "victim", `character_id` },<br/> { "victim_name", `string` }, | character (attacker) / character (victim) |
-| character_ranged_attacks_monster | | { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "victim_type", `mtype_id` }, | character / monster |
+| character_ranged_attacks_character | |  { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "ammo", `itype_id` },<br/> { "is_throw", `bool` },<br/> { "victim", `character_id` },<br/> { "victim_name", `string` }, | character (attacker) / character (victim) |
+| character_ranged_attacks_monster | | { "attacker", `character_id` },<br/> { "weapon", `itype_id` },<br/> { "ammo", `itype_id` },<br/> { "is_throw", `bool` },<br/>  { "victim_type", `mtype_id` }, | character / monster |
 | character_smashes_tile | | { "character", `character_id` },<br/> { "terrain", `ter_str_id` },  { "furniture", `furn_str_id` }, | character / NONE |
 | character_starts_activity | Triggered when character starts or resumes activity | { "character", `character_id` },<br/> { "activity", `activity_id` },<br/> { "resume", `bool` } | character / NONE |
 | character_takes_damage | triggers when character gets any damage from any creature | { "character", `character_id` },<br/> { "damage", `int` },<br/> { "bodypart", `bodypart_id` },<br/> { "pain", `int` }, | character / attacker if exists, otherwise NONE(character or monster) | use `has_beta` conditon before interacting with beta talker
@@ -4199,6 +4199,34 @@ You cast a `this_spell_can_target_only_robots` spell; if it success, `EOC_ROBOT_
 ```
 
 
+#### `u_level_spell_class`, `npc_level_spell_class`
+
+Modifies the levels of all known spells of a given class.
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "u_level_spell_class" / "npc_level_spell_class" | **mandatory** | `trait_id` | The `spell_class` that will be affected, can specifiy `"all"` instead of a class to affect all spells known by a character. |
+| "levels" | optional | int | Default value of `1` if unspecified.  The levels that will be added or removed from the affected class | 
+| "random" | optional | boolean | Dafault value of `false`.  If true, only a single spell of the specified class will be affected. |
+
+##### Valid talkers:
+
+| Avatar | Character | NPC | Monster | Furniture | Item | Vehicle |
+| ------ | --------- | --------- | ---- | ------- | --- | ---- |
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ |
+
+##### Examples
+
+The avatar levels up all spells of the MAGUS class by 5 levels, and a single spell of any classes by 30 levels
+```json
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEST_ARCHMAGUSIFY",
+    "global": true,
+    "effect": [ { "u_level_spell_class": "MAGUS", "levels": 5 }, { "u_level_spell_class": "all", "levels": 30, "random": true } ]
+  }
+```
+
 #### `u_assign_activity`, `npc_assign_activity`
 
 NPC or character will start an activity
@@ -4553,8 +4581,14 @@ You pick `first` and `center` locations and store it, then mirror them to create
 ```
 
 #### `u_die`, `npc_die`
-You or an NPC will instantly die.
+Alpha or beta talker will instantly die.
 If the target is an item, it will be deleted.
+
+| Syntax | Optionality | Value  | Info |
+| --- | --- | --- | --- | 
+| "remove_corpse" | optional | bool | default false; if true, the corpse and all inside of it won't be spawned on death | 
+| "supress_message" | optional | bool | default false; if true, death would omit death message | 
+| "remove_from_creature_tracker" | optional | bool | default false; if true, and talker is monster, the monster instead removed from creature tracker, resulting not only in monster disappearing without message and corpse, but also bypasses any death effect they could fire before their death | 
 
 ##### Valid talkers:
 
@@ -4564,7 +4598,7 @@ If the target is an item, it will be deleted.
 
 ##### Examples
 
-You and NPC both die
+Alpha and beta both die
 ```json
 {
   "type": "effect_on_condition",
@@ -4573,33 +4607,14 @@ You and NPC both die
 }
 ```
 
-Removes a corpse around you (corpses are handled as items)
-
+beta talker dies without a message and without a corpse
 ```json
   {
-    "id": "EOC_CORPSE_REMOVAL",
     "type": "effect_on_condition",
-    "effect": [
-      { "message": "Select target", "u_query_tile": "around", "target_var": { "context_val": "delete_this_corpse" } },
-      {
-        "if": { "math": [ "has_var(_delete_this_corpse)" ] },
-        "then": [
-          {
-            "u_map_run_item_eocs": "all",
-            "search_data": [ { "id": "corpse" } ],
-            "loc": { "context_val": "delete_this_corpse" },
-            "min_radius": 0,
-            "max_radius": 0,
-            "true_eocs": [ { "id": "EOC_CORPSE_REMOVAL_SUCCESS", "effect": [ "npc_die", { "u_message": "*poof*", "type": "good" } ] } ],
-            "false_eocs": [ { "id": "EOC_CORPSE_REMOVAL_FAIL", "effect": [ { "u_message": "There is no corpse there.", "type": "bad" } ] } ]
-          }
-        ],
-        "else": [ { "u_message": "Canceled" } ]
-      }
-    ]
-  }
+    "id": "ded_no_corpse",
+    "effect": [ { "npc_die": { "remove_corpse": true, "supress_message": true } } ]
+  },
 ```
-
 
 #### `u_prevent_death`, `npc_prevent_death`
 You or NPC will be prevented from death. Intended for use in EoCs has `NPC_DEATH` or `EVENT(character_dies)` type (Take care that u will be the dying npc in these events).

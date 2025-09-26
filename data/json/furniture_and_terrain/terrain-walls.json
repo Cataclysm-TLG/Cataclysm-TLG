@@ -1479,6 +1479,21 @@
   },
   {
     "type": "terrain",
+    "id": "t_wall_glass_lab",
+    "copy-from": "t_wall_glass",
+    "bash": {
+      "str_min": 4,
+      "str_max": 12,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": 16,
+      "sound_fail_vol": 10,
+      "ter_set": "t_strconc_floor",
+      "items": [ { "item": "glass_shard", "count": [ 42, 84 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
     "id": "t_laminated_glass",
     "copy-from": "t_abstract_wall_glass",
     "name": "laminated glass wall",
@@ -1538,6 +1553,21 @@
       "items": [ { "item": "glass_shard", "charges": [ 15, 34 ] }, { "item": "wire", "prob": 20 } ]
     },
     "shoot": { "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 0, 10 ], "destroy_damage": [ 4, 25 ], "no_laser_destroy": true }
+  },
+  {
+    "type": "terrain",
+    "id": "t_reinforced_glass_lab",
+    "copy-from": "t_reinforced_glass",
+    "bash": {
+      "str_min": 40,
+      "str_max": 210,
+      "sound": "glass breaking!",
+      "sound_fail": "whack!",
+      "sound_vol": 20,
+      "sound_fail_vol": 14,
+      "ter_set": "t_strconc_floor",
+      "items": [ { "item": "glass_shard", "charges": [ 15, 34 ] }, { "item": "wire", "prob": 20 } ]
+    }
   },
   {
     "type": "terrain",

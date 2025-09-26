@@ -1530,11 +1530,22 @@ void npc::stow_item( item &it )
 
 bool npc::wield( item &it )
 {
+    // dont unwield if you already wield the item
+    if( is_wielding( it ) ) {
+        return true;
+    }
+    // instead of unwield(), call stow_item, allowing to wear it and check it is not inside wielded itm
+    if( has_wield_conflicts( it ) && !get_wielded_item()->has_item( it ) ) {
+        stow_item( *get_wielded_item() );
+    }
     if( !Character::wield( it ) ) {
         return false;
     }
-    add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
-                            get_wielded_item()->tname() );
+    if( get_wielded_item() ) {
+        add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
+                                get_wielded_item()->tname() );
+    }
+
 
     invalidate_range_cache();
     return true;
@@ -3094,12 +3105,14 @@ void npc::die( map *here, Creature *nkiller )
     dead = true;
     Character::die( here, nkiller );
 
-    if( is_hallucination() || lifespan_end ) {
-        add_msg_if_player_sees( *this, _( "%s disappears." ), get_name().c_str() );
-        return;
-    }
+    if( !quiet_death ) {
+        if( is_hallucination() || lifespan_end ) {
+            add_msg_if_player_sees( *this, _( "%s disappears." ), get_name().c_str() );
+            return;
+        }
 
-    add_msg_if_player_sees( *this, _( "%s dies!" ), get_name() );
+        add_msg_if_player_sees( *this, _( "%s dies!" ), get_name() );
+    }
 
     if( killer && !killer->is_monster() ) {
         Character &player_character = get_player_character();
@@ -3140,7 +3153,10 @@ void npc::die( map *here, Creature *nkiller )
             }
         }
     }
-    place_corpse( here );
+
+    if( spawn_corpse ) {
+        place_corpse( here );
+    }
 }
 
 void npc::prevent_death()
@@ -3396,8 +3412,11 @@ void npc::on_load( map *here )
     shop_restock();
 }
 
-bool npc::query_yn( const std::string &/*msg*/ ) const
+bool npc::query_yn( const std::string &msg ) const
 {
+    add_msg_debug( debugmode::DF_NPC,
+                   "%s declines this query_yn because they are a npc (automatic, always declines).\n %s",
+                   disp_name(), msg );
     // NPCs don't like queries - most of them are in the form of "Do you want to get hurt?".
     return false;
 }
