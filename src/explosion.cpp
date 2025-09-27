@@ -548,8 +548,10 @@ void explosion( const Creature *source, map *here, const tripoint_bub_ms &p,
 void _make_explosion( map *m, const Creature *source, const tripoint_bub_ms &p,
                       const explosion_data &ex )
 {
-    if( get_map().inbounds( m->get_abs( p ) ) ) {
-        tripoint_bub_ms bubble_pos = get_map().get_bub( m->get_abs( p ) );
+    map &bubble_map = reality_bubble();
+
+    if( bubble_map.inbounds( m->get_abs( p ) ) ) {
+        tripoint_bub_ms bubble_pos = bubble_map.get_bub( m->get_abs( p ) );
         int noise = ex.power * ( ex.fire ? 2 : 10 );
         noise = ( noise > ex.max_noise ) ? ex.max_noise : noise;
 
