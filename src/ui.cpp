@@ -29,7 +29,11 @@
 #endif
 
 #if defined(TILES)
+#if defined(USE_VCPKG)
+#include <SDL2/SDL_mouse.h>
+#else
 #include <SDL_mouse.h>
+#endif
 #endif
 
 catacurses::window new_centered_win( int nlines, int ncols )

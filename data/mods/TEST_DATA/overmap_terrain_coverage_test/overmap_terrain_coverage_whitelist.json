@@ -58,7 +58,14 @@
       "unvitrified_farm_1",
       "unvitrified_farm_2",
       "unvitrified_farm_neg_1",
-      "unvitrified_orchard"
+      "unvitrified_orchard",
+      "pottery_cottage",
+      "pottery_cottage_2nd",
+      "pottery_cottage_roof",
+      "pottery_cottage_field_2nd",
+      "pottery_cottage_field_roof",
+      "pottery_cottage_field",
+      "pottery_cottage_basement"
     ]
   }
 ]

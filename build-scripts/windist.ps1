@@ -6,6 +6,7 @@ mkdir bindist
 cp cataclysm-tlg-tiles.exe bindist/cataclysm-tiles.exe
  cp cataclysm-tlg-tiles.stripped.pdb bindist/cataclysm-tiles.pdb
 cp tools/format/json_formatter.exe bindist/json_formatter.exe
+cp zzip.exe bindist/zzip.exe
 
 mkdir bindist/lang
 cp -r lang/mo bindist/lang

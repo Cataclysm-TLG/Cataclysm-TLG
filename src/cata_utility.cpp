@@ -36,6 +36,8 @@
 #include "translations.h"
 #include "unicode.h"
 #include "zlib.h"
+#include "zzip.h"
+#include "zzip_stack.h"
 
 static double pow10( unsigned int n )
 {
@@ -288,7 +290,7 @@ float multi_lerp( const std::vector<std::pair<float, float>> &points, float x )
 void write_to_file( const std::string &path, const std::function<void( std::ostream & )> &writer )
 {
     // Any of the below may throw. ofstream_wrapper will clean up the temporary path on its own.
-    ofstream_wrapper fout( fs::u8path( path ), std::ios::binary );
+    ofstream_wrapper fout( std::filesystem::u8path( path ), std::ios::binary );
     writer( fout.stream() );
     fout.close();
 }
@@ -345,7 +347,8 @@ bool write_to_file( const cata_path &path, const std::function<void( std::ostrea
     }
 }
 
-ofstream_wrapper::ofstream_wrapper( const fs::path &path, const std::ios::openmode mode )
+ofstream_wrapper::ofstream_wrapper( const std::filesystem::path &path,
+                                    const std::ios::openmode mode )
     : path( path )
 
 {
@@ -449,7 +452,8 @@ bool read_from_file( const cata_path &path, const std::function<void( std::istre
     return read_from_file( path.get_unrelative_path(), reader );
 }
 
-bool read_from_file( const fs::path &path, const std::function<void( std::istream & )> &reader )
+bool read_from_file( const std::filesystem::path &path,
+                     const std::function<void( std::istream & )> &reader )
 {
     std::unique_ptr<std::istream> finp = read_maybe_compressed_file( path );
     if( !finp ) {
@@ -466,15 +470,15 @@ bool read_from_file( const fs::path &path, const std::function<void( std::istrea
 
 bool read_from_file( const std::string &path, const std::function<void( std::istream & )> &reader )
 {
-    return read_from_file( fs::u8path( path ), reader );
+    return read_from_file( std::filesystem::u8path( path ), reader );
 }
 
 std::unique_ptr<std::istream> read_maybe_compressed_file( const std::string &path )
 {
-    return read_maybe_compressed_file( fs::u8path( path ) );
+    return read_maybe_compressed_file( std::filesystem::u8path( path ) );
 }
 
-std::unique_ptr<std::istream> read_maybe_compressed_file( const fs::path &path )
+std::unique_ptr<std::istream> read_maybe_compressed_file( const std::filesystem::path &path )
 {
     try {
         std::ifstream fin( path, std::ios::binary );
@@ -514,10 +518,10 @@ std::unique_ptr<std::istream> read_maybe_compressed_file( const cata_path &path 
 
 std::optional<std::string> read_whole_file( const std::string &path )
 {
-    return read_whole_file( fs::u8path( path ) );
+    return read_whole_file( std::filesystem::u8path( path ) );
 }
 
-std::optional<std::string> read_whole_file( const fs::path &path )
+std::optional<std::string> read_whole_file( const std::filesystem::path &path )
 {
     std::string outstring;
     try {
@@ -582,7 +586,7 @@ bool read_from_file_optional( const std::string &path,
     return file_exist( path ) && read_from_file( path, reader );
 }
 
-bool read_from_file_optional( const fs::path &path,
+bool read_from_file_optional( const std::filesystem::path &path,
                               const std::function<void( std::istream & )> &reader )
 {
     // Note: slight race condition here, but we'll ignore it. Worst case: the file
@@ -601,6 +605,44 @@ bool read_from_file_optional_json( const cata_path &path,
                                    const std::function<void( const JsonValue & )> &reader )
 {
     return file_exist( path.get_unrelative_path() ) && read_from_file_json( path, reader );
+}
+
+bool read_from_zzip_optional( const zzip &z,
+                              const std::filesystem::path &file,
+                              const std::function<void( std::string_view )> &reader )
+{
+    if( !z.has_file( file ) ) {
+        return false;
+    }
+    try {
+        std::vector<std::byte> file_data = z.get_file( file );
+        std::string_view sv{ reinterpret_cast<const char *>( file_data.data() ), file_data.size() };
+        reader( sv );
+        return true;
+    } catch( const std::exception &err ) {
+        debugmsg( _( "Failed to read from \"%1$s\": %2$s" ), file.generic_u8string().c_str(),
+                  err.what() );
+        return false;
+    }
+}
+
+bool read_from_zzip_optional( const std::shared_ptr<zzip_stack> &z,
+                              const std::filesystem::path &file,
+                              const std::function<void( std::string_view )> &reader )
+{
+    if( !z || !z->has_file( file ) ) {
+        return false;
+    }
+    try {
+        std::vector<std::byte> file_data = z->get_file( file );
+        std::string_view sv{ reinterpret_cast<const char *>( file_data.data() ), file_data.size() };
+        reader( sv );
+        return true;
+    } catch( const std::exception &err ) {
+        debugmsg( _( "Failed to read from \"%1$s\": %2$s" ), file.generic_u8string().c_str(),
+                  err.what() );
+        return false;
+    }
 }
 
 std::string obscure_message( const std::string &str, const std::function<char()> &f )
