@@ -10728,7 +10728,6 @@ bool game::prompt_dangerous_tile( const tripoint_bub_ms &dest_loc,
         u.has_effect( effect_jumping ) || u.has_effect( effect_airborne ) ) {
         return true;
     }
-    const trap &tr = here.tr_at( dest_loc );
     if( harmful_stuff == nullptr ) {
         auto dangerous_tile = get_dangerous_tile( dest_loc );
         harmful_stuff = &dangerous_tile;
@@ -10738,6 +10737,7 @@ bool game::prompt_dangerous_tile( const tripoint_bub_ms &dest_loc,
         !query_yn( _( "Really step into %s?" ), enumerate_as_string( *harmful_stuff ) ) ) {
         return false;
     }
+    map &here = get_map();
     if( !harmful_stuff->empty() && u.is_mounted() && here.is_open_air( dest_loc ) ) {
         add_msg( m_warning, _( "Your %s refuses to move over that ledge!" ),
                  u.mounted_creature->get_name() );
