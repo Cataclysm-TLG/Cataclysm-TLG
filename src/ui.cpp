@@ -16,6 +16,7 @@
 #include "game.h"
 #include "input.h"
 #include "memory_fast.h"
+#include "options.h"
 #include "output.h"
 #include "sdltiles.h"
 #include "string_input_popup.h"
@@ -26,10 +27,6 @@
 #include <jni.h>
 #include <SDL_keyboard.h>
 
-#endif
-
-#if defined(TILES)
-#include <SDL_mouse.h>
 #endif
 
 catacurses::window new_centered_win( int nlines, int ncols )
