@@ -22,6 +22,7 @@
 #include "colony.h"
 #include "coordinates.h"
 #include "creature_tracker.h"
+#include "current_map.h"
 #include "debug.h"
 #include "enum_conversions.h"
 #include "enums.h"
@@ -501,6 +502,9 @@ static bool mx_minefield( map &, const tripoint_abs_sm &abs_sub )
     }
 
     tinymap m;
+    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+    swap_map swap( *m.cast_to_map() );
+
     if( bridge_at_north && road_at_south ) {
         // Remove vehicles. They don't make sense here, and may cause collision crashes.
         m.load( abs_omt + point::south, true );

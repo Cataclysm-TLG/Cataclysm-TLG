@@ -35,6 +35,7 @@
 #include "construction.h"
 #include "coordinates.h"
 #include "creature_tracker.h"
+#include "current_map.h"
 #include "cursesdef.h"
 #include "debug.h"
 #include "disease.h"
@@ -10894,6 +10895,8 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
 {
     tinymap bay;
     bay.load( om_target, false );
+    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+    swap_map swap( *bay.cast_to_map() );
     point_omt_ms fin( rng( 1, SEEX * 2 - 2 ), rng( 1, SEEX * 2 - 2 ) );
     // This makes no sense at all. It may find a random tile without furniture, but
     // if the first try to find one fails, it will go through all tiles of the map

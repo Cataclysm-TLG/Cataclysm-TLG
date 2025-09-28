@@ -74,6 +74,7 @@
 #include "coordinates.h"
 #include "creature_tracker.h"
 #include "cuboid_rectangle.h"
+#include "current_map.h"
 #include "cursesport.h" // IWYU pragma: keep
 #include "damage.h"
 #include "debug.h"
@@ -450,6 +451,7 @@ game::game() :
     scent_ptr( *this ),
     achievements_tracker_ptr( *stats_tracker_ptr, achievement_attained, achievement_failed, true ),
     m( *map_ptr ),
+    current_map( *current_map_ptr ),
     u( *u_ptr ),
     scent( *scent_ptr ),
     timed_events( *timed_event_manager_ptr ),
@@ -462,6 +464,7 @@ game::game() :
     tileset_zoom( DEFAULT_TILESET_ZOOM ),
     last_mouse_edge_scroll( std::chrono::steady_clock::now() )
 {
+    current_map.set( &m );
     first_redraw_since_waiting_started = true;
     reset_light_level();
     events().subscribe( &*stats_tracker_ptr );
@@ -1208,6 +1211,8 @@ vehicle *game::place_vehicle_nearby(
             // try place vehicle there.
             tinymap target_map;
             target_map.load( goal, false );
+            // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
+            swap_map swap( *target_map.cast_to_map() );
             const tripoint_omt_ms tinymap_center( SEEX, SEEY, goal.z() );
             static constexpr std::array<units::angle, 4> angles = {{
                     0_degrees, 90_degrees, 180_degrees, 270_degrees
@@ -14537,7 +14542,7 @@ avatar &get_avatar()
 
 map &get_map()
 {
-    return g->m;
+    return g->current_map.get_map();
 }
 
 map &reality_bubble()
