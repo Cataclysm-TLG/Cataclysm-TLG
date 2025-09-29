@@ -178,7 +178,7 @@
     "type": "vehicle_part",
     "id": "veh_tools_workshop",
     "copy-from": "veh_tools_part_abstract",
-    "description": "A table rig with drawers and fixtures for storing tools, wiring for high power electric connectors and valves for for fuel tank connections.",
+    "description": "A table rig with drawers and fixtures for storing tools, wiring for high power electric connectors and valves for fuel tank connections.",
     "looks_like": "welding_rig",
     "item": "veh_tools_workshop",
     "//": "allow tools here that require high power draw but no fume hood",

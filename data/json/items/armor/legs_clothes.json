@@ -392,7 +392,7 @@
     "id": "kilt_utility",
     "type": "ARMOR",
     "name": { "str": "utility kilt" },
-    "description": "Common among American nerds and rivetheads, the utility kilt is a durabable canvas kilt with a large front pocket.",
+    "description": "Common among American nerds and rivetheads, the utility kilt is a durable canvas kilt with a large front pocket.",
     "weight": "500 g",
     "volume": "1500 ml",
     "price": "35 USD",
