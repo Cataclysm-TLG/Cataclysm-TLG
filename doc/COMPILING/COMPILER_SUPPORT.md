@@ -6,7 +6,7 @@
 | [clang](https://clang.llvm.org)                      |                          10.0 |
 | [MinGW-w64](https://www.mingw-w64.org)               |         10.0.0 <br/> GCC 11.2 |
 | [Visual Studio](https://visualstudio.microsoft.com/) | [2019](COMPILING-VS-VCPKG.md) |
-| [XCode](https://developer.apple.com/xcode)           | 10.1 <br/> [macOS 10.13](https://en.wikipedia.org/wiki/MacOS_High_Sierra) |
+| [XCode](https://developer.apple.com/xcode)           | [11.4](https://developer.apple.com/documentation/xcode-release-notes/xcode-11_4-release-notes) <br/> [macOS 10.15](https://en.wikipedia.org/wiki/MacOS_Catalina) |
 
 ## Mingw and Mingw-w64
 
@@ -46,15 +46,16 @@ At the time of writing:
   which uses [gcc
   12.0](https://fedora.pkgs.org/36/fedora-x86_64/gcc-12.0.1-0.16.fc36.x86_64.rpm.html).
 * MSYS [offers gcc 12.2](https://packages.msys2.org/base).
-* macOS 10.13+ has 96.0% [market
+* macOS 10.15+ (macOS Catalina) has 96.0% [market
   share](https://gs.statcounter.com/os-version-market-share/macos/desktop/worldwide)
-  and that corresponds to [XCode 10.1](https://xcodereleases.com/).
+  and that corresponds to [XCode 11.4](https://xcodereleases.com/).
 
 In practice, compiler support is often determined by what is covered in our
 automated testing.
 
 At time of writing, the oldest relevant compiler is XCode 10.1, the latest
 supported on macOS 10.13, which is based on LLVM 6.
+[^2]: [macOS releases past 10.15 series can not be estimated faithfully](https://bugs.webkit.org/show_bug.cgi?id=216593)
 
 With gcc 9.3, clang 10, and XCode 10.1 we can get all the C++17 language
 features and [most but not all of the C++17 library
