@@ -40,16 +40,12 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "bayonet lug", 1 ],
-      [ "brass catcher", 1 ],
-      [ "grip mount", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
       [ "rail mount", 1 ],
-      [ "sights", 1 ],
+      [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "stock mount", 1 ],
-      [ "stock accessory", 2 ],
-      [ "underbarrel", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [
@@ -96,16 +92,12 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "bayonet lug", 1 ],
-      [ "brass catcher", 1 ],
-      [ "grip mount", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
       [ "rail mount", 1 ],
-      [ "sights", 1 ],
+      [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "stock mount", 1 ],
-      [ "stock accessory", 2 ],
-      [ "underbarrel mount", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
     "pocket_data": [

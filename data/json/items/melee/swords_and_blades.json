@@ -658,7 +658,6 @@
         "m320_mod_mod",
         "m320_mod",
         "M6_shotgun",
-        "makeshift_bayonet",
         "m26_mass",
         "m26_mass_mod",
         "pipe_launcher40mm",
@@ -674,7 +673,7 @@
     "qualities": [ [ "CUT", 1 ], [ "COOK", 1 ], [ "BUTCHER", 7 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "flags": [ "DURABLE_MELEE", "PUMP_RAIL_COMPATIBLE", "SHEATH_KNIFE" ],
-    "weapon_category": [ "SHORT_SWORDS" ],
+    "weapon_category": [ "KNIVES" ],
     "melee_damage": { "bash": 4, "stab": 13 }
   },
   {
@@ -1625,7 +1624,6 @@
         "m320_mod_mod",
         "m320_mod",
         "M6_shotgun",
-        "makeshift_bayonet",
         "m26_mass",
         "m26_mass_mod",
         "pipe_launcher40mm",
@@ -1673,7 +1671,6 @@
         "m320_mod_mod",
         "m320_mod",
         "M6_shotgun",
-        "makeshift_bayonet",
         "m26_mass",
         "m26_mass_mod",
         "pipe_launcher40mm",

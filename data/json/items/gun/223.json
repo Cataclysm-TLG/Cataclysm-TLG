@@ -21,8 +21,16 @@
     "durability": 7,
     "min_cycle_recoil": 1350,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
-    "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
-    "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "bore", 1 ],
+      [ "loading port", 1 ],
+      [ "mechanism", 2 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ]
+    ],
+    "flags": [ "NO_TURRET", "FIRE_TWOHAND" ],
     "//3": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
   },
@@ -47,7 +55,7 @@
     "dispersion": 150,
     "durability": 7,
     "min_cycle_recoil": 1350,
-    "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
     "pocket_data": [
@@ -230,12 +238,12 @@
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
     "valid_mod_locations": [
+      [ "barrel", 1 ],
       [ "bore", 1 ],
-      [ "bayonet lug", 1 ],
-      [ "grip", 1 ],
+      [ "loading port", 1 ],
       [ "mechanism", 2 ],
       [ "sling", 1 ],
-      [ "stock accessory", 2 ],
+      [ "stock accessory", 1 ],
       [ "stock", 1 ]
     ],
     "melee_damage": { "bash": 12 },
@@ -268,17 +276,15 @@
     "default_mods": [ "high_end_folding_stock" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
-      [ "rail", 2 ],
+      [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "underbarrel", 1 ],
-      [ "stock accessory", 2 ],
-      [ "stock", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ],
+      [ "underbarrel", 1 ]
     ],
     "pocket_data": [
       {
@@ -338,6 +344,16 @@
     "min_cycle_recoil": 1350,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail", 1 ],
+      [ "sights", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
+    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "g36mag_30rd", "g36mag_100rd" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -368,16 +384,14 @@
     "built_in_mods": [ "bipod" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
     ],
     "pocket_data": [
       {
@@ -454,7 +468,15 @@
     "min_cycle_recoil": 1350,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
-    "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "bore", 1 ],
+      [ "loading port", 1 ],
+      [ "mechanism", 2 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ]
+    ],
     "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
@@ -488,7 +510,15 @@
     "durability": 7,
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "BURST", "3 rd.", 3 ] ],
-    "valid_mod_locations": [ [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "bore", 1 ],
+      [ "loading port", 1 ],
+      [ "mechanism", 2 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ]
+    ],
     "flags": [ "FIRE_TWOHAND", "NO_TURRET" ],
     "//2": "This should be removed once vehicle turrets are capable of mounting guns with mods attached. As it stands, trying to mount this style of weapon would require the player to remove the conversion kit, thus rendering it unusable anyhow.",
     "melee_damage": { "bash": 12 }
@@ -676,15 +706,11 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "bore", 1 ],
-      [ "brass catcher", 1 ],
+      [ "loading port", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
-      [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "grip mount", 1 ],
-      [ "rail mount", 1 ],
-      [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ]
     ],
     "pocket_data": [
       {
@@ -724,6 +750,16 @@
     "min_cycle_recoil": 1350,
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "built_in_mods": [ "folding_stock" ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
+      [ "sights", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -784,15 +820,14 @@
     "built_in_mods": [ "grip" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
-      [ "rail", 1 ],
-      [ "sights", 1 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "underbarrel", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
     ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "augmag_30rd", "augmag_10rd", "augmag_42rd", "augmag_100rd" ] }
@@ -830,17 +865,14 @@
     "min_cycle_recoil": 1350,
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
-      [ "rail", 2 ],
-      [ "sights mount", 1 ],
+      [ "rail", 1 ],
+      [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ],
-      [ "underbarrel", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "zpap85mag" ] } ],
     "melee_damage": { "bash": 12 }
@@ -995,17 +1027,15 @@
     "default_mods": [ "folding_stock", "muzzle_brake" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "underbarrel", 1 ],
-      [ "stock accessory", 2 ],
-      [ "stock", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel", 1 ]
     ],
     "pocket_data": [
       {
@@ -1065,7 +1095,6 @@
     "built_in_mods": [ "adjustable_stock" ],
     "valid_mod_locations": [
       [ "bore", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "rail", 2 ],
       [ "sights", 1 ],
@@ -1110,16 +1139,14 @@
     "min_cycle_recoil": 1350,
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bore", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
-      [ "rail mount", 2 ],
+      [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "underbarrel", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "stock accessory", 1 ],
+      [ "underbarrel", 1 ]
     ],
     "pocket_data": [
       {

@@ -28,6 +28,7 @@
     "color": "dark_gray",
     "ammo": [ "10mm", "40" ],
     "dispersion": 320,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 6,
@@ -73,6 +74,7 @@
     "durability": 8,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 570,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "magazine_well": "99 ml",
@@ -114,6 +116,7 @@
     "durability": 8,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 570,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [ { "magazine_well": "103 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "glock_20mag", "tdi_10mm_mag" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -168,6 +171,18 @@
     "skill": "rifle",
     "built_in_mods": [ "folding_stock" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "muzzle", 1 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "62 ml", "item_restriction": [ "mp5_10_mag" ] } ]
   },
   {
@@ -197,6 +212,7 @@
     "color": "light_gray",
     "ammo": [ "10mm" ],
     "dispersion": 480,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "built_in_mods": [ "match_trigger" ],
     "durability": 6,
     "min_cycle_recoil": 570,
@@ -234,6 +250,7 @@
     "durability": 7,
     "min_cycle_recoil": 675,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [ { "magazine_well": "84 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "witness_mag_10" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -267,6 +284,7 @@
     "durability": 7,
     "min_cycle_recoil": 675,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p220_10_mag" ] } ],
     "melee_damage": { "bash": 8 }
   },
@@ -301,6 +319,7 @@
     "min_cycle_recoil": 675,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "81 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "xd_10_mag" ] } ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -333,6 +352,7 @@
     "min_cycle_recoil": 675,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "muzzle", 1 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "magazine_well": "103 ml", "item_restriction": [ "glock_20mag", "tdi_10mm_mag" ] } ]
   },
   {
@@ -367,6 +387,7 @@
     "min_cycle_recoil": 570,
     "blackpowder_tolerance": 48,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "muzzle", 1 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [ { "magazine_well": "60 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "2011_17_mag", "2011_22_mag" ] } ],
     "melee_damage": { "bash": 12 }
   }

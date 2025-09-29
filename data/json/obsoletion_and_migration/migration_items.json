@@ -2712,5 +2712,10 @@
     "id": "leather_hide",
     "type": "MIGRATION",
     "replace": "sheet_leather"
+  },
+  {
+    "id": "muzzle_brake_mod",
+    "type": "MIGRATION",
+    "replace": "muzzle_brake"
   }
 ]
