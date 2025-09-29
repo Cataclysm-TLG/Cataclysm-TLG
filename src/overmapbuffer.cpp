@@ -245,6 +245,7 @@ void overmapbuffer::clear()
     placed_unique_specials.clear();
     unique_special_count.clear();
     overmap_count = 0;
+    major_river_count = 0;
     last_requested_overmap = nullptr;
 }
 
