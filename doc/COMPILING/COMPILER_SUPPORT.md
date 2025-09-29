@@ -47,17 +47,15 @@ At the time of writing:
   12.0](https://fedora.pkgs.org/36/fedora-x86_64/gcc-12.0.1-0.16.fc36.x86_64.rpm.html).
 * MSYS [offers gcc 12.2](https://packages.msys2.org/base).
 * macOS 10.15+ (macOS Catalina) has 96.0% [market
-  share](https://gs.statcounter.com/os-version-market-share/macos/desktop/worldwide)
+  share](https://gs.statcounter.com/os-version-market-share/macos/desktop/worldwide)[^1]
   and that corresponds to [XCode 11.4](https://xcodereleases.com/).
+
+[^1]: [macOS releases past 10.15 series can not be estimated faithfully](https://bugs.webkit.org/show_bug.cgi?id=216593)
 
 In practice, compiler support is often determined by what is covered in our
 automated testing.
 
-At time of writing, the oldest relevant compiler is XCode 10.1, the latest
-supported on macOS 10.13, which is based on LLVM 6.
-[^2]: [macOS releases past 10.15 series can not be estimated faithfully](https://bugs.webkit.org/show_bug.cgi?id=216593)
-
-With gcc 9.3, clang 10, and XCode 10.1 we can get all the C++17 language
+With the supported compilers we can get all the C++17 language
 features and [most but not all of the C++17 library
 features](https://en.cppreference.com/w/cpp/compiler_support/17).  The
 following C++17 features are not supported widely enough for us to use:
