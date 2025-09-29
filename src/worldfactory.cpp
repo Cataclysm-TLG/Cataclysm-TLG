@@ -147,7 +147,7 @@ WORLD *worldfactory::make_new_world( const std::vector<mod_id> &mods )
 
 WORLD *worldfactory::make_new_world( const std::string &name, const std::vector<mod_id> &mods )
 {
-    if( !is_lexically_valid( fs::u8path( name ) ) ) {
+    if( !is_lexically_valid( std::filesystem::u8path( name ) ) ) {
         return nullptr;
     }
     std::unique_ptr<WORLD> retworld = std::make_unique<WORLD>( name );
@@ -2146,10 +2146,10 @@ static bool isForbidden( const cata_path &candidate )
 void worldfactory::delete_world( const std::string &worldname, const bool delete_folder )
 {
     cata_path worldpath = get_world( worldname )->folder_path();
-    std::set<fs::path> directory_paths;
+    std::set<std::filesystem::path> directory_paths;
 
     if( delete_folder ) {
-        fs::remove_all( worldpath.get_unrelative_path() );
+        std::filesystem::remove_all( worldpath.get_unrelative_path() );
         remove_world( worldname );
         return;
     }
@@ -2163,8 +2163,8 @@ void worldfactory::delete_world( const std::string &worldname, const bool delete
     file_paths.erase( end, file_paths.end() );
 
     for( auto &file_path : file_paths ) {
-        fs::path folder_path = file_path.get_unrelative_path().parent_path();
-        while( folder_path.filename() != worldname ) {
+        std::filesystem::path folder_path = file_path.get_unrelative_path().parent_path();
+        while( folder_path.filename() != std::filesystem::u8path( worldname ) ) {
             directory_paths.insert( folder_path );
             folder_path = folder_path.parent_path();
         }
