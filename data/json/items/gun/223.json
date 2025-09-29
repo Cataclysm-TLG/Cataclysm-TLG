@@ -55,7 +55,15 @@
     "dispersion": 150,
     "durability": 7,
     "min_cycle_recoil": 1350,
-    "valid_mod_locations": [ [ "barrel", 1 ], [ "bore", 1 ], [ "grip", 1 ], [ "mechanism", 2 ], [ "sling", 1 ], [ "stock accessory", 2 ], [ "stock", 1 ] ],
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "bore", 1 ],
+      [ "grip", 1 ],
+      [ "mechanism", 2 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 2 ],
+      [ "stock", 1 ]
+    ],
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
     "pocket_data": [

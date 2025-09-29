@@ -206,6 +206,7 @@
 #include "weather.h"
 #include "weather_type.h"
 #include "worldfactory.h"
+#include "zzip.h"
 
 #if defined(TILES)
 #include "sdl_utils.h"
@@ -3319,12 +3320,20 @@ bool game::load( const save_t &name )
 
                     u = avatar();
                     u.set_save_id( name.decoded_name() );
-                    if( !read_from_file(
-                            save_file_path,
-                    [this, &save_file_path]( std::istream & is ) {
-                    unserialize( is, save_file_path );
-                    } ) ) {
-                        abort = true;
+
+                    if( world_generator->active_world->has_compression_enabled() ) {
+                        std::optional<zzip> z = zzip::load( ( save_file_path + ".zzip" ).get_unrelative_path() );
+                        abort = !z.has_value() ||
+                        !read_from_zzip_optional( z.value(), save_file_path.get_unrelative_path().filename(),
+                        [this]( std::string_view sv ) {
+                            unserialize( std::string{ sv } );
+                        } );
+                    } else {
+                        abort = !read_from_file(
+                                    save_file_path,
+                        [this, &save_file_path]( std::istream & is ) {
+                            unserialize( is, save_file_path );
+                        } );
                     }
                 }
             },
@@ -3601,9 +3610,26 @@ bool game::save_player_data()
 {
     const cata_path playerfile = PATH_INFO::player_base_save_path();
 
-    const bool saved_data = write_to_file( playerfile + SAVE_EXTENSION, [&]( std::ostream & fout ) {
-        serialize( fout );
-    }, _( "player data" ) );
+    bool saved_data;
+    if( world_generator->active_world->has_compression_enabled() ) {
+        std::stringstream save;
+        serialize_json( save );
+        std::filesystem::path save_path = ( playerfile + SAVE_EXTENSION +
+                                            ".zzip" ).get_unrelative_path();
+        std::filesystem::path tmp_path = save_path;
+        tmp_path.concat( ".tmp" ); // NOLINT(cata-u8-path)
+        std::optional<zzip> z = zzip::load( save_path );
+        saved_data = z->add_file( ( playerfile + SAVE_EXTENSION ).get_unrelative_path().filename(),
+                                  save.str() );
+        if( saved_data && z->compact_to( tmp_path, 2.0 ) ) {
+            z.reset();
+            saved_data = rename_file( tmp_path, save_path );
+        }
+    } else {
+        saved_data = write_to_file( playerfile + SAVE_EXTENSION, [&]( std::ostream & fout ) {
+            serialize_json( fout );
+        }, _( "player data" ) );
+    }
     const bool saved_map_memory = u.save_map_memory();
     const bool saved_log = write_to_file( playerfile + SAVE_EXTENSION_LOG, [&](
     std::ostream & fout ) {

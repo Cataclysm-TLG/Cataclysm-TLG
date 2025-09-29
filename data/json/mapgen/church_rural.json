@@ -101,8 +101,10 @@
         { "item": "223_casing", "x": 38, "y": 16, "chance": 100, "repeat": [ 3, 16 ] },
         { "item": "223_casing", "x": 35, "y": 17, "chance": 100, "repeat": [ 6, 30 ] }
       ],
-      "monsters": { "#": { "monster": "GROUP_VANILLA_DORMANT", "chance": 10, "density": 0.02 },
-                    ".": { "monster": "GROUP_VANILLA_DORMANT", "chance": 2, "density": 0.01 } },
+      "monsters": {
+        "#": { "monster": "GROUP_VANILLA_DORMANT", "chance": 10, "density": 0.02 },
+        ".": { "monster": "GROUP_VANILLA_DORMANT", "chance": 2, "density": 0.01 }
+      },
       "nested": {
         "+": { "chunks": [ [ "destroyed_door_nested", 50 ], [ "null", 50 ] ] },
         ".": { "chunks": [ [ "null", 90 ], [ "blood_field", 2 ] ] },

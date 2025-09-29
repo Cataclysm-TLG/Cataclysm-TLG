@@ -1107,7 +1107,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
         weakpoint_attack wp_attack;
         wp_attack.weapon = &gun;
         projectile proj = make_gun_projectile( gun );
-    itype_id projectile_use_ammo_id = gun.has_ammo_data() ? gun.ammo_data()->get_id() :
+        itype_id projectile_use_ammo_id = gun.has_ammo_data() ? gun.ammo_data()->get_id() :
                                           itype_id::NULL_ID();
         for( damage_unit &elem : proj.impact.damage_units ) {
             elem.amount = enchantment_cache->modify_value( enchant_vals::mod::RANGED_DAMAGE, elem.amount );
@@ -3387,7 +3387,7 @@ void target_ui::update_target_list()
     std::sort( targets.begin(), targets.end(), [&]( const tripoint_bub_ms lhs,
     const tripoint_bub_ms rhs ) {
         return static_cast<int>( std::round( trig_dist_z_adjust( lhs,
-                                                     you->pos_bub( here ) ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs,
+                                             you->pos_bub( here ) ) ) ) < static_cast<int>( std::round( trig_dist_z_adjust( rhs,
                                                      you->pos_bub( here ) ) ) );
     } );
 }
