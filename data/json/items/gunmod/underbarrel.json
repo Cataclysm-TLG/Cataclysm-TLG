@@ -730,5 +730,62 @@
       "moves": 150
     },
     "flags": [ "BIPOD", "SLOW_WIELD", "ZERO_WEIGHT" ]
+  },
+  {
+    "id": "flashlight_mod",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "GUNMOD" ],
+    "name": { "str": "weapon light" },
+    "description": "A slim, lightweight flashlight designed to attach to the underside of a firearm.  Its size makes it less efficient than a handheld model.",
+    "weight": "68 g",
+    "volume": "150 ml",
+    "longest_side": "63 mm",
+    "price": "350 USD",
+    "price_postapoc": "4 USD",
+    "install_time": "4 m",
+    "material": [ "aluminum", "plastic" ],
+    "symbol": ":",
+    "color": "brown",
+    "location": "underbarrel",
+    "mod_targets": [ "pistol", "shotgun", "smg", "rifle", "crossbow", "launcher" ],
+    "min_skills": [ [ "weapon", 1 ] ],
+    "charges_per_use": 1,
+    "is_visible_when_installed": true,
+    "use_action": {
+      "type": "transform",
+      "msg": "You turn the weapon light on.",
+      "target": "flashlight_mod_on",
+      "active": true,
+      "need_charges": 1,
+      "need_charges_msg": "The weapon light's batteries are dead."
+    },
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [ "BATTERY_LIGHT" ],
+        "default_magazine": "light_battery_cell"
+      }
+    ],
+    "tool_ammo": [ "battery" ]
+  },
+  {
+    "id": "flashlight_mod_on",
+    "copy-from": "flashlight_mod",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "GUNMOD" ],
+    "name": { "str": "weapon light (on)", "str_pl": "weapon lights (on)" },
+    "//": "about 1.5 h of work off a single battery",
+    "power_draw": "2700 mW",
+    "revert_to": "flashlight_mod",
+    "use_action": {
+      "menu_text": "Turn off",
+      "type": "transform",
+      "msg": "You turn the weapon light off.",
+      "target": "flashlight_mod",
+      "ammo_scale": 0
+    },
+    "light": 160,
+    "extend": { "flags": [ "CHARGEDIM", "TRADER_AVOID" ] }
   }
 ]
