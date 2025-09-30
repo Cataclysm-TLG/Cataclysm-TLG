@@ -23,8 +23,8 @@
 #include "overmap_connection.h"
 #include "overmapbuffer.h"
 #include "point.h"
-#include "rng.h"
 #include "regional_settings.h"
+#include "rng.h"
 #include "simple_pathfinding.h"
 #include "type_id.h"
 
@@ -211,10 +211,31 @@ void overmap::place_building( const tripoint_om_omt &p, om_direction::type dir, 
     }
 }
 
+void overmap::build_cities()
+{
+
+    const overmap_connection_id &overmap_connection_intra_city_road =
+        settings->overmap_connection.intra_city_road_connection;
+    const overmap_connection &local_road( *overmap_connection_intra_city_road );
+
+    for( const city &c : cities ) {
+        const om_direction::type start_dir = om_direction::random();
+        om_direction::type cur_dir = start_dir;
+
+        // Track placed CITY_UNIQUE buildings
+        std::unordered_set<overmap_special_id> placed_unique_buildings;
+        // place streets in all cardinal directions from central intersection
+        do {
+            build_city_street( local_road, c.pos, c.size, cur_dir, c, placed_unique_buildings );
+        } while( ( cur_dir = om_direction::turn_right( cur_dir ) ) != start_dir );
+    }
+    flood_fill_city_tiles();
+}
+
 overmap_special_id overmap::pick_random_building_to_place( int town_dist, int town_size,
         const std::unordered_set<overmap_special_id> &placed_unique_buildings ) const
 {
-    const city_settings &city_spec = settings->city_spec;
+    const region_settings_city &city_spec = settings->get_settings_city();
     int shop_radius = city_spec.shop_radius;
     int park_radius = city_spec.park_radius;
 
@@ -234,11 +255,11 @@ overmap_special_id overmap::pick_random_building_to_place( int town_dist, int to
     }
     auto building_type_to_pick = [&]() {
         if( shop_normal > town_dist ) {
-            return std::mem_fn( &city_settings::pick_shop );
+            return std::mem_fn( &region_settings_city::pick_shop );
         } else if( park_normal > town_dist ) {
-            return std::mem_fn( &city_settings::pick_park );
+            return std::mem_fn( &region_settings_city::pick_park );
         } else {
-            return std::mem_fn( &city_settings::pick_house );
+            return std::mem_fn( &region_settings_city::pick_house );
         }
     };
     auto pick_building = building_type_to_pick();
@@ -260,6 +281,7 @@ overmap_special_id overmap::pick_random_building_to_place( int town_dist, int to
 pf::directed_path<point_om_omt> overmap::lay_out_street( const overmap_connection &connection,
         const point_om_omt &source, om_direction::type dir, size_t len )
 {
+    const int &highway_width = settings->get_settings_highway().width_of_segments;
     auto valid_placement = [this]( const overmap_connection & connection, const tripoint_om_omt pos,
     om_direction::type dir ) {
         if( !inbounds( pos, 1 ) ) {
@@ -311,7 +333,6 @@ pf::directed_path<point_om_omt> overmap::lay_out_street( const overmap_connectio
                 if( are_parallel( dir, ter_id.obj().get_dir() ) ) {
                     break;
                 }
-                const int &highway_width = settings->overmap_highway.width_of_segments;
                 const tripoint_om_omt pos_after_highway = pos + om_direction::displace( dir, highway_width );
                 // Ensure we can pass fully through
                 if( !valid_placement( connection, pos_after_highway, dir ) ) {

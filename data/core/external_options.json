@@ -190,6 +190,13 @@
   },
   {
     "type": "EXTERNAL_OPTION",
+    "name": "OVERMAP_PLACE_HIGHWAYS",
+    "//": "Allows to place fixed distance highways during overmap generation.",
+    "stype": "bool",
+    "value": true
+  },
+  {
+    "type": "EXTERNAL_OPTION",
     "name": "OVERMAP_PLACE_RAILROADS",
     "//": "Allows to place procgen railroads during overmap generation.",
     "stype": "bool",
