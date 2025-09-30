@@ -21,11 +21,9 @@
 #include "basecamp.h"
 #include "calendar.h"
 #include "enum_conversions.h"
-<<<<<<< HEAD
 #ifdef TILES
 #include "cata_tiles.h"
 #endif // TILES
-=======
 #include "horde_entity.h"
 #include "input_enums.h"
 #include "mapdata.h"
@@ -35,7 +33,6 @@
 #include "mtype.h"
 #include "simple_pathfinding.h"
 #include "translation.h"
->>>>>>> WIP Move horde debug functions to target monster_map
 #include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "catacharset.h"
