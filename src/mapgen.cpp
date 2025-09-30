@@ -3326,7 +3326,8 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
             }
             tripoint_bub_ms p( x.get(), y.get(), dat.zlevel() + z.get() );
 
-            const ter_id &terrain_here = dat.m.ter( p );
+            //  TODO: Restore this if the warning message is ever restored.
+            //  const ter_id &terrain_here = dat.m.ter( p );
             const ter_t &chosen_ter = *chosen_id;
             const bool is_wall = chosen_ter.has_flag( ter_furn_flag::TFLAG_WALL );
             const bool place_item = chosen_ter.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM );
@@ -3431,31 +3432,32 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
                 dat.m.i_clear( p );
             }
 
-            if( chosen_id != terrain_here ) {
-                std::string error;
-                trap_str_id trap_here = dat.m.tr_at( p ).id;
-                if( act_furn != apply_action::act_ignore && dat.m.furn( p ) != furn_str_id::NULL_ID() ) {
-                    // NOLINTNEXTLINE(cata-translate-string-literal)
-                    error = string_format( "furniture was %s", dat.m.furn( p ).id().str() );
-                } else if( act_trap != apply_action::act_ignore && !trap_here.is_null() &&
-                           trap_here.id() != terrain_here->trap ) {
-                    // NOLINTNEXTLINE(cata-translate-string-literal)
-                    error = string_format( "trap %s existed", trap_here.str() );
-                } else if( act_item != apply_action::act_ignore && !dat.m.i_at( p ).empty() ) {
-                    // NOLINTNEXTLINE(cata-translate-string-literal)
-                    error = string_format( "item %s existed",
-                                           dat.m.i_at( p ).begin()->typeId().str() );
-                }
-                if( !error.empty() ) {
-                    debugmsg( "In %s on %s, setting terrain to %s (from %s) at %s when %s.  "
-                              "Resolve this either by removing the terrain from this mapgen, "
-                              "adding suitable removal commands to the mapgen, or by adding an "
-                              "appropriate clearing flag to the innermost layered mapgen.  "
-                              "Consult the \"mapgen flags\" section in MAPGEN.md for options.",
-                              context, dat.terrain_type().id().str(), chosen_id.id().str(),
-                              terrain_here.id().str(), p.to_string(), error );
-                }
-            }
+            // TODO: Make this less annoying and restore it?
+            // if( chosen_id != terrain_here ) {
+            //     std::string error;
+            //     trap_str_id trap_here = dat.m.tr_at( p ).id;
+            //     if( act_furn != apply_action::act_ignore && dat.m.furn( p ) != furn_str_id::NULL_ID() ) {
+            //         // NOLINTNEXTLINE(cata-translate-string-literal)
+            //         error = string_format( "furniture was %s", dat.m.furn( p ).id().str() );
+            //     } else if( act_trap != apply_action::act_ignore && !trap_here.is_null() &&
+            //                trap_here.id() != terrain_here->trap ) {
+            //         // NOLINTNEXTLINE(cata-translate-string-literal)
+            //         error = string_format( "trap %s existed", trap_here.str() );
+            //     } else if( act_item != apply_action::act_ignore && !dat.m.i_at( p ).empty() ) {
+            //         // NOLINTNEXTLINE(cata-translate-string-literal)
+            //         error = string_format( "item %s existed",
+            //                                dat.m.i_at( p ).begin()->typeId().str() );
+            //     }
+            //     if( !error.empty() ) {
+            //         debugmsg( "In %s on %s, setting terrain to %s (from %s) at %s when %s.  "
+            //                   "Resolve this either by removing the terrain from this mapgen, "
+            //                   "adding suitable removal commands to the mapgen, or by adding an "
+            //                   "appropriate clearing flag to the innermost layered mapgen.  "
+            //                   "Consult the \"mapgen flags\" section in MAPGEN.md for options.",
+            //                   context, dat.terrain_type().id().str(), chosen_id.id().str(),
+            //                   terrain_here.id().str(), p.to_string(), error );
+            //     }
+            // }
             dat.m.ter_set( p, chosen_id );
         }
 
