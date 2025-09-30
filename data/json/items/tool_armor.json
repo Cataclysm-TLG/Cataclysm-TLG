@@ -493,6 +493,7 @@
     "sided": true,
     "price": "100 USD",
     "price_postapoc": "1 USD 50 cent",
+    "etransfer_rate": "20 MB",
     "material": [ { "type": "plastic", "portion": 75 }, { "type": "aluminum", "portion": 25 } ],
     "flags": [
       "WATCH",
@@ -512,7 +513,17 @@
     "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "MP3", "CALORIES_INTAKE_TRACKER", "FITNESS_CHECK" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 80 } } ],
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 80 } },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0,
+        "ememory_max": "256 GB"
+      }
+    ],
     "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
   },
   {
@@ -1118,6 +1129,7 @@
     "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA" ],
+    "etransfer_rate": "20 MB",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -1137,7 +1149,7 @@
     "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ] } ],
     "material_thickness": 1,
     "environmental_protection": 1,
-    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC" ]
+    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC", "SKINTIGHT" ]
   },
   {
     "id": "ar_glasses_advanced",
@@ -1156,6 +1168,7 @@
     "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "PORTABLE_GAME", "EBOOKSAVE", "E_FILE_DEVICE" ],
+    "etransfer_rate": "30 MB",
     "tick_action": [ "EPIC_MUSIC" ],
     "pocket_data": [
       {
@@ -1187,7 +1200,8 @@
       "WATER_BREAK",
       "PADDED",
       "ELECTRONIC",
-      "CAN_USE_IN_DARK"
+      "CAN_USE_IN_DARK",
+      "SKINTIGHT"
     ]
   },
   {
