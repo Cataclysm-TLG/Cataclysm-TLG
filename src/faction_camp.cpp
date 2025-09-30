@@ -1361,8 +1361,9 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
             // FIXME/HACK: Always checks buckwheat seeds!
             mission_key.add_start( miss_id,
                                    name_display_of( miss_id ), entry,
-                                   plots > 0 && warm_enough_to_plant( omt_pos + dir, itype_seed_buckwheat ) );
-        } else {
+                                   plots > 0 && warm_enough_to_plant( omt_pos + dir, itype_seed_buckwheat ).success() );
+        }
+        if( !npc_list.empty() ) {
             entry = action_of( miss_id.id );
             bool avail = update_time_left( entry, npc_list );
             mission_key.add_return( miss_id,
