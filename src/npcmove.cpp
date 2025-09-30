@@ -3973,7 +3973,7 @@ bool npc::find_corpse_to_pulp()
     int range = 6;
     // This does not strictly follow the follow_close rules but it's probably good enough if the player wants the NPC pulping.
     if( rules.has_flag( ally_rule::follow_close ) ) {
-        int follow_distance();
+        range = follow_distance();
     }
     const item *corpse = nullptr;
     if( pulp_location && square_dist( pos_abs(), *pulp_location ) <= range ) {
