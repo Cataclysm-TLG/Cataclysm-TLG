@@ -3932,10 +3932,6 @@ bool npc::find_corpse_to_pulp()
             player_character.in_vehicle || is_hallucination() ) {
             return false;
         }
-        if( rl_dist( pos_bub(), player_character.pos_bub() ) >= mem_combat.engagement_distance ) {
-            // don't start to pulp corpses if you're already far from the player.
-            return false;
-        }
     }
 
     // Pathing with overdraw can get expensive, limit it
@@ -3973,9 +3969,12 @@ bool npc::find_corpse_to_pulp()
 
         return nullptr;
     };
-
-    const int range = mem_combat.engagement_distance;
-
+    // TODO: I'm not sure whether this should be farther.
+    int range = 6;
+    // This does not strictly follow the follow_close rules but it's probably good enough if the player wants the NPC pulping.
+    if( rules.has_flag( ally_rule::follow_close ) ) {
+        int follow_distance();
+    }
     const item *corpse = nullptr;
     if( pulp_location && square_dist( pos_abs(), *pulp_location ) <= range ) {
         corpse = check_tile( here.get_bub( *pulp_location ) );
@@ -4003,7 +4002,7 @@ bool npc::find_corpse_to_pulp()
         }
     }
 
-    if( corpse != nullptr && corpse != old_target && is_walking_with() ) {
+    if( corpse != nullptr && corpse != old_target && is_walking_with() && rules.has_flag( ally_rule::allow_complain ) ) {
         std::string talktag = chat_snippets().snip_pulp_zombie.translated();
         parse_tags( talktag, get_player_character(), *this );
         say( string_format( talktag, corpse->tname() ) );
