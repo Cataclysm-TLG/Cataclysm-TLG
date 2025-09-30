@@ -60,7 +60,7 @@
     "type": "trap",
     "id": "tr_dormant_corpse",
     "name": "dormant zombie corpse",
-    "//": "This zombie 'corpse' looks eerily like it could get up and start walking at any moment.",
+    "//": "This corpse looks like it could get up and start walking at any moment.",
     "color": "light_green",
     "symbol": "Z",
     "visibility": 8,
