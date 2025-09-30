@@ -3326,7 +3326,8 @@ class jmapgen_terrain : public jmapgen_piece_with_has_vehicle_collision
             }
             tripoint_bub_ms p( x.get(), y.get(), dat.zlevel() + z.get() );
 
-            const ter_id &terrain_here = dat.m.ter( p );
+            //  TODO: Restore this if the warning message is ever restored.
+            //  const ter_id &terrain_here = dat.m.ter( p );
             const ter_t &chosen_ter = *chosen_id;
             const bool is_wall = chosen_ter.has_flag( ter_furn_flag::TFLAG_WALL );
             const bool place_item = chosen_ter.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM );
