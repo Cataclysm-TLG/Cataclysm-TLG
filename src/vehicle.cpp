@@ -7756,7 +7756,12 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
         leak_fuel( here, vp );
 
         for( const item &e : vp.items ) {
-            here.add_item_or_charges( vppos, e );
+            if( !e.is_null() && e.typeId().is_valid() ) {
+                here.add_item_or_charges( vppos, e );
+            } else {
+                debugmsg( "damage_direct() skipping invalid item: %s",
+                        e.is_null() ? "(null)" : e.typeId().c_str() );
+            }
         }
         vp.items.clear();
 

@@ -10412,7 +10412,8 @@ bool map::try_fall( const tripoint_bub_ms &p, Creature *c )
     item jetpack = you->item_worn_with_flag( json_flag_JETPACK );
     // TODO: Typify this whole function
     tripoint_bub_ms p_bub = tripoint_bub_ms( p );
-    if( you->has_flag( json_flag_WALL_CLING ) &&  get_map().is_clingable_wall_adjacent( p_bub ) ) {
+    const map &here = *this;
+    if( you->has_flag( json_flag_WALL_CLING ) &&  here.is_clingable_wall_adjacent( p_bub ) ) {
         you->add_msg_player_or_npc( _( "You cling to the nearby wall." ),
                                     _( "<npcname> clings to the wall." ) );
         return false;
@@ -10845,7 +10846,7 @@ void map::update_pathfinding_cache( const tripoint_bub_ms &p ) const
     const ter_t &terrain = tile.get_ter_t();
     const furn_t &furniture = tile.get_furn_t();
     const field &field = tile.get_field();
-    const map &here = get_map();
+    const map &here = *this;
     int part;
     const vehicle *veh = veh_at_internal( p, part );
 
