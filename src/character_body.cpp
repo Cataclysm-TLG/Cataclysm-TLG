@@ -337,12 +337,12 @@ void Character::update_body( const time_point &from, const time_point &to )
             mod_daily_health( 1, 200 );
         }
 
-        if( !get_value( "got_to_low_morale" ).empty() ) {
+        if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
         } else {
             remove_value( "got_to_low_morale" );
         }
-        if( !get_value( "got_to_very_low_morale" ).empty() ) {
+        if( !get_value( "got_to_very_low_morale" ).is_empty() ) {
             mod_daily_health( -2, -200 );
         } else {
             remove_value( "got_to_very_low_morale" );

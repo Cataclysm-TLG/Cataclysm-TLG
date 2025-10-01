@@ -3697,6 +3697,7 @@ talk_effect_fun_t f_spawn_item( const JsonObject &jo, std::string_view member,
         } else {
             target_location = d.actor( false )->pos_abs();
         }
+        itype_id iname = itype_id( item_name.evaluate( d ) );
         std::vector<std::string> flags_str;
         flags_str.reserve( flags.size() );
         for( const str_or_var &flat_sov : flags ) {
@@ -4554,7 +4555,6 @@ talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::
     return [output_var, target_var, message, failure_message, allow_vertical, allow_autoselect, cond,
                 false_eocs, is_npc]( dialogue & d ) {
         map &here = get_map();
-
         tripoint_bub_ms target_pos;
         if( target_var.has_value() ) {
             tripoint_abs_ms abs_ms = read_var_value( *target_var, d ).tripoint();
@@ -4565,11 +4565,11 @@ talk_effect_fun_t::func f_choose_adjacent_highlight( const JsonObject &jo, std::
 
         const std::function<bool( const tripoint_bub_ms & )> f = [cond, &d](
         const tripoint_bub_ms & pnt ) {
-            write_var_value( var_type::context, "loc", &d, here.get_abs( pnt ) );
+            write_var_value( var_type::context, "loc", &d, get_map().get_abs( pnt ) );
             return cond( d );
         };
 
-        std::optional<tripoint_bub_ms> picked_coord = choose_adjacent_highlight( get_map(), target_pos,
+        std::optional<tripoint_bub_ms> picked_coord = choose_adjacent_highlight( here, target_pos,
                 message.evaluate( d ), failure_message.evaluate( d ), f, allow_vertical, allow_autoselect );
 
         if( picked_coord.has_value() ) {
@@ -5771,7 +5771,7 @@ talk_effect_fun_t::func f_activate( const JsonObject &jo, std::string_view membe
                 if( target_var.has_value() ) {
                     tripoint_abs_ms target_pos = read_var_value( *target_var, d ).tripoint();
                     if( get_map().inbounds( target_pos ) ) {
-                        guy->invoke_item( it->get_item(), method_str, here.get_bub( target_pos ) );
+                        guy->invoke_item( it->get_item(), method_str, get_map().get_bub( target_pos ) );
                         return;
                     }
                 }
@@ -5917,27 +5917,38 @@ void process_eoc( const effect_on_condition_id &eoc, dialogue &d,
     }
 }
 
-void run_eoc_once( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
-                   const duration_or_var &dov_time, bool random_time )
+void queue_eocs( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
+                 duration_or_var const &dov_time, bool random_time )
 {
     time_duration time_in_future = dov_time.evaluate( d );
     for( const eoc_entry &entry : eocs ) {
         effect_on_condition_id eoc_id =
             entry.var ? effect_on_condition_id( entry.var->evaluate( d ) ) : entry.id;
-        if( !eoc_id.is_valid() ) {
-            debugmsg( "run_eoc_once found invalid EOC ID: %s", eoc_id.str().c_str() );
-            continue;
-        }
-        if( time_in_future == 0_seconds ) {
-            eoc_id->activate( newDialog );
+        if( random_time ) {
+            process_eoc( eoc_id, newDialog, dov_time.evaluate( d ) );
         } else {
-            if( random_time ) {
-                process_eoc( eoc_id, newDialog, dov_time.evaluate( d ) );
-            } else {
-                process_eoc( eoc_id, newDialog, time_in_future );
-            }
+            process_eoc( eoc_id, newDialog, time_in_future );
         }
-    };
+    }
+}
+
+void run_eocs( const std::vector<eoc_entry> &eocs, dialogue &d, dialogue newDialog,
+               std::optional<dbl_or_var> const &iterations,
+               std::optional<std::function<bool( dialogue & )>> const &cond )
+{
+    int i = 0;
+
+    // if it's a loop, we will use iterations_amount as limit to amount of loops allowed
+    // and bump it to 100 as default value
+    int iterations_amount = iterations ? iterations->evaluate( d ) : cond ? 100 : 1;
+    while( i < iterations_amount && ( !cond || ( *cond )( d ) ) ) {
+        for( const eoc_entry &entry : eocs ) {
+            effect_on_condition_id eoc_id =
+                entry.var ? effect_on_condition_id( entry.var->evaluate( d ) ) : entry.id;
+            eoc_id->activate( newDialog );
+        }
+        ++i;
+    }
 }
 
 std::unique_ptr<talker> get_talker( dialogue const &d, std::optional<str_or_var> const &var,
@@ -5987,18 +5998,28 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
         jo.throw_error( "Invalid input for run_eocs" );
     }
 
-    dbl_or_var iterations = get_dbl_or_var( jo, "iterations", false, 1 );
-    bool has_cond = false;
-    std::function<bool( const const_dialogue & )> cond;
+    std::optional<dbl_or_var> iterations;
+    if( jo.has_member( "iterations" ) ) {
+        iterations = get_dbl_or_var( jo, "iterations" );
+    }
+    std::optional<std::function<bool( const_dialogue const & )>> cond;
     if( jo.has_object( "condition" ) ) {
-        read_condition( jo, "condition", cond, true );
-        has_cond = true;
-    } else {
-        read_condition( jo, "condition", cond, true );
+        std::function<bool( const_dialogue const & )> cond_;
+        read_condition( jo, "condition", cond_, false );
+        cond = { std::move( cond_ ) };
     }
 
-    duration_or_var dov_time = get_duration_or_var( jo, "time_in_future", false, 0_seconds );
-    bool random_time = jo.get_bool( "randomize_time_in_future", false );
+    std::optional<duration_or_var> dov_time;
+    bool random_time = false;
+    if( jo.has_member( "time_in_future" ) ) {
+        if( iterations || cond ) {
+            jo.throw_error_at(
+                "time_in_future",
+                R"("time_in_future" cannot be used with loops ("condition" or "iterations"). Use nested EOCs instead.)" );
+        }
+        dov_time = get_duration_or_var( jo, "time_in_future" );
+        random_time = jo.get_bool( "randomize_time_in_future", false );
+    }
 
     std::unordered_map<std::string, str_translation_or_var> context;
     if( jo.has_object( "variables" ) ) {
@@ -6016,19 +6037,13 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
     if( jo.has_member( "beta_loc" ) ) {
         beta_loc = read_var_info( jo.get_object( "beta_loc" ) );
     } else if( jo.has_member( "beta_talker" ) ) {
-        beta_var = get_str_or_var( jo.get_member( "beta_talker" ), "beta_talker", false, "npc" );
-    } else {
-        beta_var.str_val = "npc";
-        has_beta_var = false;
+        beta_var = get_str_or_var( jo.get_member( "beta_talker" ), "beta_talker" );
     }
 
     if( jo.has_member( "alpha_loc" ) ) {
         alpha_loc = read_var_info( jo.get_object( "alpha_loc" ) );
     } else if( jo.has_member( "alpha_talker" ) ) {
-        alpha_var = get_str_or_var( jo.get_member( "alpha_talker" ), "alpha_talker", false, "u" );
-    } else {
-        alpha_var.str_val = "u";
-        has_alpha_var = false;
+        alpha_var = get_str_or_var( jo.get_member( "alpha_talker" ), "alpha_talker" );
     }
 
     std::vector<effect_on_condition_id> false_eocs = load_eoc_vector( jo, "false_eocs", src );
@@ -6043,37 +6058,18 @@ talk_effect_fun_t::func f_run_eocs( const JsonObject &jo, std::string_view membe
             return;
         }
 
-        dialogue newDialog = generate_new_dialogue( d, has_alpha_var, has_beta_var, alpha_var, beta_var,
-                             is_alpha_loc, is_beta_loc, false_eocs );
+        dialogue newDialog{ std::move( alpha ), std::move( beta ), d.get_conditionals(),
+                            d.get_context() };
 
         for( const auto &val : context ) {
             // FXIXME: typed variables
             newDialog.set_value( val.first, diag_value::legacy_value{ val.second.evaluate( d, true ) } );
         }
 
-        int i = 0;
-        int iterations_amount = iterations.evaluate( d );
-
-        // there was 'd.amend_callstack( "EOC: " + eoc->id.str() )' in f_run_eoc_until
-        // but because i don't know it's purpose nor it's effect, i'll left it here as comment
-
-        if( has_cond ) {
-            // if it's a loop, we will use iterations_amount as limit to amount of loops allowed
-            // and bump it to 100 as default value
-            iterations_amount = iterations_amount == 1 ? 100 : iterations_amount;
-
-            while( cond( d ) ) {
-                run_eoc_once( eocs, d, newDialog, dov_time, random_time );
-                ++i;
-                if( i >= iterations_amount ) {
-                    break;
-                }
-            }
+        if( dov_time ) {
+            queue_eocs( eocs, d, newDialog, *dov_time, random_time );
         } else {
-            while( i < iterations_amount ) {
-                run_eoc_once( eocs, d, newDialog, dov_time, random_time );
-                ++i;
-            }
+            run_eocs( eocs, d, newDialog, iterations, cond );
         }
     };
 }

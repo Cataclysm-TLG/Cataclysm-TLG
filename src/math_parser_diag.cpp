@@ -13,6 +13,7 @@
 #include "magic.h"
 #include "map.h"
 #include "math_parser_diag_value.h"
+#include "math_parser_type.h"
 #include "mongroup.h"
 #include "mtype.h"
 #include "npc.h"

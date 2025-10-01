@@ -666,7 +666,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "RIOTBOT", mattack::riotbot );
     add_hardcoded_attack( "STRETCH_ATTACK", mattack::stretch_attack );
     add_hardcoded_attack( "DOOT", mattack::doot );
-    add_hardcoded_attack( "DSA_DRONE_SCAN", mattack::dsa_drone_scan );
     add_hardcoded_attack( "ZOMBIE_FUSE", mattack::zombie_fuse );
 }
 

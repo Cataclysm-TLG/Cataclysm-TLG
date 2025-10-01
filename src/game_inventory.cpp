@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "activity_type.h"
+#include "activity_actor.h"
 #include "activity_actor_definitions.h"
 #include "avatar.h"
 #include "bionics.h"

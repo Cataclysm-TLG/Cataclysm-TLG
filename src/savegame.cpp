@@ -292,15 +292,12 @@ void game::unserialize_impl( const JsonObject &data )
         data.read( "player", u );
         data.read( "inactive_global_effect_on_condition_vector",
                    inactive_global_effect_on_condition_vector );
-        //load queued_eocs
-        for( JsonObject elem : data.get_array( "queued_global_effect_on_conditions" ) ) {
-            queued_eoc temp;
-            temp.time = time_point( elem.get_int( "time" ) );
-            temp.eoc = effect_on_condition_id( elem.get_string( "eoc" ) );
-            elem.read( "context", temp.context );
-            queued_global_effect_on_conditions.push( temp );
-        }
-        temp.context = context;
+    //load queued_eocs
+    for( JsonObject elem : data.get_array( "queued_global_effect_on_conditions" ) ) {
+        queued_eoc temp;
+        temp.time = time_point( elem.get_int( "time" ) );
+        temp.eoc = effect_on_condition_id( elem.get_string( "eoc" ) );
+        elem.read( "context", temp.context );
         queued_global_effect_on_conditions.push( temp );
     }
     global_variables_instance.unserialize( data );

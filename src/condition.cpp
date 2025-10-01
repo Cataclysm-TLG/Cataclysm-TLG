@@ -1057,7 +1057,7 @@ conditional_t::func f_near_om_location( const JsonObject &jo, std::string_view m
 conditional_t::func f_has_var( const JsonObject &jo, std::string_view member, bool is_npc )
 {
     dbl_or_var empty;
-    const std::string var_name = get_talk_varname( jo, member, false, empty );
+    const std::string var_name = get_talk_varname( jo, member );
     const std::string &value = jo.has_member( "value" ) ? jo.get_string( "value" ) : std::string();
     if( !jo.has_member( "value" ) ) {
         jo.throw_error( R"(Missing field: "value")" );
