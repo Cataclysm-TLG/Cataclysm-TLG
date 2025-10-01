@@ -86,7 +86,6 @@
     "clip_size": 19,
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bayonet lug", 1 ],
       [ "brass catcher", 1 ],
       [ "mechanism", 2 ],
       [ "rail mount", 1 ],
