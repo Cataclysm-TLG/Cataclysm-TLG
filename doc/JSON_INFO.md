@@ -1680,8 +1680,8 @@ Fault fixes are methods to fix faults, the fixes can optionally add other faults
   "faults_removed": [ "fault_gun_dirt", "fault_gun_blackpowder" ], // faults removed when fix is applied
   "faults_added": [ "fault_gun_unlubricated" ], // faults added when fix is applied
   "skills": { "mechanics": 1 }, // skills required to apply fix
-  "set_variables": { "dirt": "0" }, // sets the variables on the item when fix is applied
-  "adjust_variables_multiply": { "dirt": ".8" }, // adjusts the variables on the item when fix is applied using MULTIPLICATION
+  "set_variables": { "dirt": 0, "pos": { "tripoint": [ 0, 1, 0 ] }, "name": { "str": "blorg" } }, // sets the variables on the item when fix is applied
+  "adjust_variables_multiply": { "dirt": 0.8 }, // adjusts the variables on the item when fix is applied using MULTIPLICATION
   "requirements": [ [ "gun_cleaning", 1 ] ], // requirements array, see below
   "mod_damage": 1000, // damage to modify on item when fix is applied, can be negative to repair
   "mod_degradation": 50, // degradation to modify on item when fix is applied, can be negative to reduce degradation
@@ -5581,6 +5581,12 @@ PAVEMENT_MARKING     MULCHFLOOR
 RAIL                 METALFLOOR
 COUNTER              WOODFLOOR
 CANVAS_WALL          INDOORFLOOR
+MUD                  PAVEMENT_ZEBRA
+DIRTMOUND            CLAYMOUND
+SANDMOUND            SANDGLASS
+SANDPILE             BRICKFLOOR
+MARBLEFLOOR          BEACH_FORMATIONS
+GRAVELPILE           LIXATUBE
 ```
 
 `WALL` is implied by the flags `WALL` and `CONNECT_WITH_WALL`.

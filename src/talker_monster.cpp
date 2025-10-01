@@ -1,10 +1,13 @@
 #include "talker_monster.h"
 
+#include <vector>
+
 #include "character.h"
 #include "effect.h"
 #include "item.h"
 #include "magic.h"
 #include "map.h"
+#include "math_parser_diag_value.h"
 #include "messages.h"
 #include "monster.h"
 #include "mtype.h"
@@ -96,8 +99,7 @@ void talker_monster::mod_pain( int amount )
     me_mon->mod_pain( amount );
 }
 
-std::optional<std::string> talker_monster_const::maybe_get_value( const std::string &var_name )
-const
+diag_value const *talker_monster_const::maybe_get_value( const std::string &var_name ) const
 {
     return me_mon_const->maybe_get_value( var_name );
 }
@@ -123,7 +125,7 @@ bool talker_monster_const::bodytype( const bodytype_id &bt ) const
     return me_mon_const->type->bodytype == bt;
 }
 
-void talker_monster::set_value( const std::string &var_name, const std::string &value )
+void talker_monster::set_value( const std::string &var_name, diag_value const &value )
 {
     me_mon->set_value( var_name, value );
 }

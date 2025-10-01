@@ -90,7 +90,6 @@ bool grenadier( monster *z );
 bool grenadier_elite( monster *z );
 bool doot( monster *z );
 bool zombie_fuse( monster *z );
-bool dsa_drone_scan( monster *z );
 bool blow_whistle( monster *z );
 bool graze( monster *z );
 

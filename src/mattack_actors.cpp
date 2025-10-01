@@ -12,6 +12,10 @@
 #include "character.h"
 #include "creature.h"
 #include "creature_tracker.h"
+#include "debug.h"
+#include "dialogue.h"
+#include "dialogue_helpers.h"
+#include "effect.h"
 #include "effect_on_condition.h"
 #include "enums.h"
 #include "game.h"
@@ -545,7 +549,11 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
 
                 if( foe->is_avatar() && ( pt.x() < HALF_MAPSIZE_X || pt.y() < HALF_MAPSIZE_Y ||
                                           pt.x() >= HALF_MAPSIZE_X + SEEX || pt.y() >= HALF_MAPSIZE_Y + SEEY ) ) {
+                    const tripoint_abs_ms pt_abs = here.get_abs(
+                                                       pt ); // Could have used the result from update_map to shift the value instead.
                     g->update_map( pt.x(), pt.y() );
+                    // update_map invalidates bubble positions on a shift. Refetch invalidated positions.
+                    pt = here.get_bub( pt_abs );
                     monster_pos = z.pos_bub( here );
                     target_pos = target->pos_bub( here );
                 }
@@ -628,7 +636,7 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
             std::set<tripoint_bub_ms>::iterator intersect_iter = intersect.begin();
             std::advance( intersect_iter, rng( 0, intersect.size() - 1 ) );
             tripoint_bub_ms target_square = random_entry<std::set<tripoint_bub_ms>>( intersect );
-            if( z.can_move_to( target_square ) ) {
+            if( !intersect.empty() && z.can_move_to( target_square ) ) {
                 monster *zz = target->as_monster();
                 tripoint_bub_ms zpt = monster_pos;
                 z.move_to( target_square, false, false, grab_data.drag_movecost_mod );
@@ -640,6 +648,10 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                                              zpt.y() < HALF_MAPSIZE_Y ||
                                              zpt.x() >= HALF_MAPSIZE_X + SEEX || zpt.y() >= HALF_MAPSIZE_Y + SEEY ) ) {
                     g->update_map( zpt.x(), zpt.y() );
+                    // update_map invalidates bubble positions on a shift. Refetch invalidated positions.
+                    monster_pos = z.pos_bub();
+                    target_pos = target->pos_bub( here );
+                    zpt = target_pos;
                 }
                 if( foe != nullptr ) {
                     if( foe->in_vehicle ) {

@@ -271,7 +271,7 @@ static Creature *sting_get_target( monster *z, float range = 5.0f )
 
     // Can't see/reach target, no attack
     if( !z->sees( here,  *target ) ||
-        !get_map().clear_path( z->pos_bub(), target->pos_bub(), range, 1, 100 ) ) {
+        !here.clear_path( z->pos_bub(), target->pos_bub(), range, 1, 100 ) ) {
         return nullptr;
     }
 
@@ -851,7 +851,7 @@ bool mattack::acid_barf( monster *z )
 
     z->mod_moves( -to_moves<int>( 1_seconds ) * 0.8 );
     // Make sure it happens before uncanny dodge
-    get_map().add_field( target->pos_bub(), fd_acid, 1 );
+    here.add_field( target->pos_bub(), fd_acid, 1 );
 
     bodypart_id hit = target->get_random_body_part();
     damage_instance dam_inst = damage_instance( damage_acid, rng( 5, 12 ) );
@@ -4936,7 +4936,7 @@ bool mattack::kamikaze( monster *z )
             item i_explodes( act_bomb_type, calendar::turn );
             i_explodes.active = true;
             i_explodes.countdown_point = calendar::turn_zero;
-            i_explodes.process( get_map(), nullptr, z->pos_bub() );
+            i_explodes.process( here, nullptr, z->pos_bub() );
             return false;
         }
         return false;
@@ -5321,90 +5321,5 @@ bool mattack::speaker( monster *z )
 {
     sounds::sound( z->pos_bub(), MAX_VIEW_DISTANCE, sounds::sound_t::order,
                    SNIPPET.random_from_category( "speaker_warning" ).value_or( translation() ) );
-    return true;
-}
-
-bool mattack::dsa_drone_scan( monster *z )
-{
-    z->mod_moves( -to_moves<int>( 1_seconds ) );
-    constexpr int scan_range = 30;
-    // Select a target: the avatar or a nearby NPC.  Must be visible and within scan range
-    Character *target = &get_player_character();
-    Character &you = get_player_character();
-    map &here = get_map();
-    bool avatar_in_range = z->posz() == target->posz() && z->sees( here, target->pos_bub() ) &&
-                           rl_dist( z->pos_bub(), target->pos_bub() ) <= scan_range;
-    const std::vector<npc *> available = g->get_npcs_if( [&]( const npc & guy ) {
-        // TODO: Get rid of the z-level check when z-level vision gets "better"
-        return z->posz() == guy.posz() && z->sees( here, guy.pos_bub() ) &&
-               rl_dist( z->pos_bub(), guy.pos_bub() ) <= scan_range;
-    } );
-    if( !avatar_in_range && available.empty() ) {
-        return true;
-    }
-    if( !available.empty() ) {
-        if( !avatar_in_range || x_in_y( available.size(), available.size() + 1 ) ) {
-            target = random_entry( available );
-        }
-    }
-    const std::string timestamp_str = "dsa_drone_scan_timestamp";
-    const std::string weapons_str = "dsa_drone_scan_weapons_count";
-
-    // only check for weapons once every 10 seconds by timestap variable
-    int weapons_count = 0;
-    bool summon_reinforcements = false;
-    if( !target->get_value( weapons_str ).empty() ) {
-        weapons_count = std::stoi( target->get_value( weapons_str ) );
-    }
-
-    if( !target->get_value( timestamp_str ).empty() ) {
-        time_point last_check( std::stoi( target->get_value( timestamp_str ) ) );
-        if( ( last_check + 10_seconds ) > calendar::turn ) {
-            return true;
-        }
-        // reset the weapons count if it has been more than an hour
-        if( ( last_check + 1_hours ) < calendar::turn ) {
-            weapons_count = 0;
-        }
-    }
-    target->set_value( timestamp_str, string_format( "%d", to_turn<int>( calendar::turn ) ) );
-    if( weapons_count < 3 ) {
-        const item_location weapon = target->get_wielded_item();
-        if( weapon && weapon->is_gun() ) {
-            const gun_type_type &guntype = weapon->gun_type();
-            if( guntype == gun_type_type( "rifle" ) ||
-                guntype == gun_type_type( "shotgun" ) ||
-                guntype == gun_type_type( "launcher" ) ) {
-                weapons_count += 2;
-            } else {
-                weapons_count += 1;
-            }
-        } else {
-            weapons_count += target->worn.worn_guns();
-        }
-        summon_reinforcements = weapons_count >= 3;
-    }
-    target->set_value( weapons_str, string_format( "%d", weapons_count ) );
-
-    if( you.sees( here, z->pos_bub() ) ) {
-        target->add_msg_player_or_npc( _( "The %s shines its light at you." ),
-                                       _( "The %s shines its light at <npcname>." ),
-                                       z->name() );
-    }
-    std::string warning_signal = _( "a dull beep" );
-    if( weapons_count == 1 ) {
-        warning_signal = _( "an ominous hum" );
-    } else if( weapons_count == 2 ) {
-        warning_signal = _( "a threatening whirr" );
-    } else if( weapons_count >= 3 ) {
-        warning_signal = _( "a high-pitched shriek" );
-    }
-    warning_signal = string_format( _( "%s from the %s." ), warning_signal, z->name() );
-    sounds::sound( z->pos_bub(), 15 + 10 * weapons_count, sounds::sound_t::alarm, warning_signal );
-    if( summon_reinforcements ) {
-        get_timed_events().add( timed_event_type::DSA_ALRP_SUMMON,
-                                calendar::turn + rng( 5_turns, 10_turns ),
-                                0, target->pos_abs() );
-    }
     return true;
 }

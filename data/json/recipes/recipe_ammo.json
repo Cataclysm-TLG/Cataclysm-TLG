@@ -598,10 +598,7 @@
     "time": "20 m",
     "batch_time_factors": [ 80, 5 ],
     "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "book_learn": {
-      "textbook_gaswarfare": { "skill_level": 2 },
-      "textbook_anarch": { "skill_level": 2 }
-    },
+    "book_learn": { "textbook_gaswarfare": { "skill_level": 2 }, "textbook_anarch": { "skill_level": 2 } },
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_organic_chemistry" } ],
     "components": [ [ [ "gasoline", 100 ] ], [ [ "plastic_chunk", 1 ] ] ]
   },

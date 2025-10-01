@@ -11,6 +11,7 @@
 #include <stack>
 #include <string>
 #include <tuple>
+#include <unordered_map>
 
 #include "anatomy.h"
 #include "body_part_set.h"
@@ -597,7 +598,8 @@ bool Creature::sees( const map &here, const Creature &critter ) const
 
     if( critter.is_monster() ) {
         has_camouflage = critter.has_flag( mon_flag_CAMOUFLAGE );
-        has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE ) || ( critter.get_size() < creature_size::large && critter.has_flag( mon_flag_NO_BREATHE ) );
+        has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE ) ||
+                               ( critter.get_size() < creature_size::large && critter.has_flag( mon_flag_NO_BREATHE ) );
         has_night_invisibility = critter.has_flag( mon_flag_NIGHT_INVISIBILITY );
     }
     bool is_underwater = critter.is_likely_underwater( here );
@@ -2253,9 +2255,9 @@ bool Creature::has_trait( const trait_id &/*flag*/ ) const
 }
 
 // Methods for setting/getting misc key/value pairs.
-void Creature::set_value( const std::string &key, const std::string &value )
+void Creature::set_value( const std::string &key, diag_value value )
 {
-    values[ key ] = value;
+    values[ key ] = std::move( value );
 }
 
 void Creature::remove_value( const std::string &key )
@@ -2263,15 +2265,14 @@ void Creature::remove_value( const std::string &key )
     values.erase( key );
 }
 
-std::string Creature::get_value( const std::string &key ) const
+diag_value const &Creature::get_value( const std::string &key ) const
 {
-    return maybe_get_value( key ).value_or( std::string{} );
+    return global_variables::_common_get_value( key, values );
 }
 
-std::optional<std::string> Creature::maybe_get_value( const std::string &key ) const
+diag_value const *Creature::maybe_get_value( const std::string &key ) const
 {
-    auto it = values.find( key );
-    return it == values.end() ? std::nullopt : std::optional<std::string> { it->second };
+    return global_variables::_common_maybe_get_value( key, values );
 }
 
 void Creature::clear_values()
@@ -3400,7 +3401,7 @@ bool Creature::is_symbol_highlighted() const
     return false;
 }
 
-std::unordered_map<std::string, std::string> &Creature::get_values()
+global_variables::impl_t &Creature::get_values()
 {
     return values;
 }

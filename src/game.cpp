@@ -875,8 +875,7 @@ void game::load_map( const tripoint_abs_sm &pos_sm,
     here.load( pos_sm, true, pump_events );
 }
 
-void game::legacy_migrate_npctalk_var_prefix( std::unordered_map<std::string, std::string>
-        map_of_vars )
+void game::legacy_migrate_npctalk_var_prefix( global_variables::impl_t &map_of_vars )
 {
     // migrate existing variables with npctalk_var prefix to no prefix (npctalk_var_foo to just foo)
     // remove after 0.J
@@ -2829,13 +2828,13 @@ vehicle *game::remoteveh()
         return remoteveh_cache;
     }
     remoteveh_cache_time = calendar::turn;
-    std::stringstream remote_veh_string( u.get_value( "remote_controlling_vehicle" ) );
-    if( remote_veh_string.str().empty() ||
+    diag_value const *remote_controlling_vehicle = u.maybe_get_value( "remote_controlling_vehicle" );
+    if( !remote_controlling_vehicle ||
         ( !u.has_active_bionic( bio_remote ) && !u.has_active_item( itype_remotevehcontrol ) ) ) {
         remoteveh_cache = nullptr;
     } else {
-        tripoint_bub_ms vp;
-        remote_veh_string >> vp.x() >> vp.y() >> vp.z();
+        // FIXME: migrate to abs
+        tripoint_bub_ms vp( remote_controlling_vehicle->tripoint().raw() );
         vehicle *veh = veh_pointer_or_null( here.veh_at( vp ) );
         if( veh && veh->fuel_left( here, itype_battery ) > 0 ) {
             remoteveh_cache = veh;
@@ -2863,10 +2862,8 @@ void game::setremoteveh( vehicle *veh )
         return;
     }
 
-    std::stringstream remote_veh_string;
-    const tripoint_bub_ms vehpos = veh->pos_bub( here );
-    remote_veh_string << vehpos.x() << ' ' << vehpos.y() << ' ' << vehpos.z();
-    u.set_value( "remote_controlling_vehicle", remote_veh_string.str() );
+    // FIXME: migrate to abs
+    u.set_value( "remote_controlling_vehicle", tripoint_abs_ms{ veh->pos_bub( here ).raw() } );
 }
 
 bool game::try_get_left_click_action( action_id &act, const tripoint_bub_ms &mouse_target )
@@ -5540,8 +5537,8 @@ bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, const mtype_i
                                     int min_radius,
                                     int max_radius, tripoint_bub_ms &point, bool outdoor_only, bool indoor_only, bool open_air_allowed )
 {
-    tripoint_bub_ms target_point;
     map &here = get_map();
+    tripoint_bub_ms target_point;
     //find a legal outdoor place to spawn based on the specified radius,
     //we just try a bunch of random points and use the first one that works, it none do then no spawn
     for( int attempts = 0; attempts < 75; attempts++ ) {
@@ -5562,6 +5559,8 @@ bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, const mtype_i
 bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, int min_radius,
                                     int max_radius, tripoint_bub_ms &point, bool outdoor_only, bool indoor_only, bool open_air_allowed )
 {
+    map &here = get_map();
+
     tripoint_bub_ms target_point;
     //find a legal outdoor place to spawn based on the specified radius,
     //we just try a bunch of random points and use the first one that works, it none do then no spawn
@@ -5569,9 +5568,9 @@ bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, int min_radiu
         target_point = target + tripoint( rng( -max_radius, max_radius ),
                                           rng( -max_radius, max_radius ), 0 );
         if( can_place_npc( target_point ) &&
-            ( open_air_allowed || get_map().has_floor_or_water( target_point ) ) &&
-            ( !outdoor_only || get_map().is_outside( target_point ) ) &&
-            ( !indoor_only || !get_map().is_outside( target_point ) ) &&
+            ( open_air_allowed || here.has_floor_or_water( target_point ) ) &&
+            ( !outdoor_only || here.is_outside( target_point ) ) &&
+            ( !indoor_only || !here.is_outside( target_point ) ) &&
             rl_dist( target_point, target ) >= min_radius ) {
             point = target_point;
             return true;
@@ -5588,8 +5587,10 @@ bool game::find_nearby_spawn_point( const tripoint_bub_ms &target, int min_radiu
  */
 bool game::spawn_hallucination( const tripoint_bub_ms &p )
 {
+    map &here = get_map();
+
     //Don't spawn hallucinations on open air
-    if( get_map().has_flag( ter_furn_flag::TFLAG_NO_FLOOR, p ) ) {
+    if( here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR, p ) ) {
         return false;
     }
 
@@ -5597,7 +5598,7 @@ bool game::spawn_hallucination( const tripoint_bub_ms &p )
         shared_ptr_fast<npc> tmp = make_shared_fast<npc>();
         tmp->normalize();
         tmp->randomize( NC_HALLU );
-        tmp->spawn_at_precise( get_map().get_abs( p ) );
+        tmp->spawn_at_precise( here.get_abs( p ) );
         if( !get_creature_tracker().creature_at( p, true ) ) {
             overmap_buffer.insert_npc( tmp );
             load_npcs();
@@ -5870,7 +5871,7 @@ void game::assing_revive_form( item &it, tripoint_bub_ms p )
         return;
     }
     dialogue d( nullptr, nullptr );
-    write_var_value( var_type::context, "loc", &d, get_map().get_abs( p ).to_string() );
+    write_var_value( var_type::context, "loc", &d, get_map().get_abs( p ) );
     write_var_value( var_type::context, "corpse_damage", &d, it.damage() );
     for( const revive_type &rev_type : montype->revive_types ) {
         if( rev_type.condition( d ) ) {
@@ -5921,7 +5922,7 @@ void game::save_cyborg( item *cyborg, const tripoint_bub_ms &couch_pos, Characte
         shared_ptr_fast<npc> tmp = make_shared_fast<npc>();
         tmp->normalize();
         tmp->load_npc_template( npc_template_cyborg_rescued );
-        tmp->spawn_at_precise( get_map().get_abs( couch_pos ) );
+        tmp->spawn_at_precise( here.get_abs( couch_pos ) );
         overmap_buffer.insert_npc( tmp );
         tmp->hurtall( dmg_lvl * 10, nullptr );
         tmp->add_effect( effect_downed, rng( 1_turns, 4_turns ), false, 0, true );
@@ -12745,12 +12746,16 @@ void game::vertical_move( int movez, bool force, bool peeking )
         return;
     }
 
-    const tripoint_bub_ms old_pos = pos;
+    tripoint_bub_ms old_pos = pos;
     const tripoint_abs_ms old_abs_pos = here.get_abs( old_pos );
-    point_rel_sm submap_shift;
     const bool z_level_changed = vertical_shift( z_after );
     if( !force ) {
-        submap_shift = update_map( stairs.x(), stairs.y(), z_level_changed );
+        const point_rel_sm submap_shift = update_map( stairs.x(), stairs.y(), z_level_changed );
+        // Adjust all bubble coordinates used according to the submap shift.
+        const point_rel_ms ms_shift = coords::project_to<coords::ms>( submap_shift );
+        pos = pos - ms_shift;
+        old_pos = old_pos - ms_shift;
+        stairs = stairs - ms_shift;
     }
 
     // if an NPC or monster is on the stairs when player ascends/descends
@@ -12829,9 +12834,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
     }
 
     if( u.is_hauling() ) {
-        const tripoint_bub_ms adjusted_pos = old_pos - coords::project_to<coords::ms>( point_rel_sm(
-                submap_shift ) ).raw();
-        start_hauling( adjusted_pos );
+        start_hauling( old_pos );
     }
 
     here.invalidate_map_cache( here.get_abs_sub().z() );
@@ -12929,16 +12932,16 @@ std::optional<tripoint_bub_ms> game::find_stairs( const map &mp, int z_after,
                                         z_after ) ) );
     tripoint_bub_ms omtile_align_end( omtile_align_start + point( omtilesz, omtilesz ) );
 
-    if( !get_map().is_open_air( u.pos_bub() ) ) {
+    if( !mp.is_open_air( u.pos_bub( mp ) ) ) {
         for( const tripoint_bub_ms &dest : mp.points_in_rectangle( omtile_align_start,
                 omtile_align_end ) ) {
-            if( rl_dist( u.pos_bub(), dest ) <= best &&
+            if( rl_dist( u.pos_bub( mp ), dest ) <= best &&
                 ( ( going_down_1 && mp.has_flag( ter_furn_flag::TFLAG_GOES_UP, dest ) ) ||
                   ( going_up_1 && ( mp.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, dest ) ||
                                     mp.ter( dest ) == ter_t_manhole_cover ) ) ||
                   ( ( movez == 2 || movez == -2 ) && mp.ter( dest ) == ter_t_elevator ) ) ) {
                 stairs.emplace( dest );
-                best = rl_dist( u.pos_bub(), dest );
+                best = rl_dist( u.pos_bub( mp ), dest );
             }
         }
     }
@@ -12950,7 +12953,7 @@ std::optional<tripoint_bub_ms> game::find_or_make_stairs( map &mp, const int z_a
         bool &rope_ladder,
         bool peeking, const tripoint_bub_ms &pos )
 {
-    const bool is_avatar = u.pos_bub() == pos;
+    const bool is_avatar = u.pos_bub( mp ) == pos;
     const int movez = z_after - pos.z();
 
     // Try to find the stairs.
@@ -13009,7 +13012,7 @@ std::optional<tripoint_bub_ms> game::find_or_make_stairs( map &mp, const int z_a
         return stairs;
     }
 
-    if( u.has_effect( effect_gliding ) && get_map().is_open_air( u.pos_bub() ) ) {
+    if( u.has_effect( effect_gliding ) && mp.is_open_air( u.pos_bub( mp ) ) ) {
         return stairs;
     }
 

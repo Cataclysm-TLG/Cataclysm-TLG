@@ -6,6 +6,7 @@
 #include <list>
 #include <utility>
 
+#include "activity_actor.h"
 #include "activity_actor_definitions.h"
 #include "inventory_ui.h"
 #include "item.h"
@@ -14,9 +15,9 @@
 
 class Character;
 struct tripoint;
-
 class repair_item_actor;
 class salvage_actor;
+enum efile_action : int;
 
 using item_filter = std::function<bool( const item & )>;
 using item_location_filter = std::function<bool ( const item_location & )>;

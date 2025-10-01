@@ -666,7 +666,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "RIOTBOT", mattack::riotbot );
     add_hardcoded_attack( "STRETCH_ATTACK", mattack::stretch_attack );
     add_hardcoded_attack( "DOOT", mattack::doot );
-    add_hardcoded_attack( "DSA_DRONE_SCAN", mattack::dsa_drone_scan );
     add_hardcoded_attack( "ZOMBIE_FUSE", mattack::zombie_fuse );
 }
 
@@ -1497,12 +1496,10 @@ void mtype::add_special_attack( const JsonArray &inner, const std::string_view )
     }
     mtype_special_attack new_attack = mtype_special_attack( iter->second );
     if( inner.has_array( 1 ) ) {
-        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner.get_array( 1 )[0],
-                                         "special attack cooldown", 0.0 );
-        new_attack.actor->cooldown.max = get_dbl_or_var_part( inner.get_array( 1 )[1],
-                                         "special attack cooldown", 0.0 );
+        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner.get_array( 1 )[0] );
+        new_attack.actor->cooldown.max = get_dbl_or_var_part( inner.get_array( 1 )[1] );
     } else {
-        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner[1], "special attack cooldown", 0.0 );
+        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner[1] );
     }
     special_attacks.emplace( name, new_attack );
     special_attacks_names.push_back( name );

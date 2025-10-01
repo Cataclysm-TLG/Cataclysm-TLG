@@ -267,12 +267,12 @@ bool avatar::should_show_map_memory() const
 
 bool avatar::save_map_memory()
 {
-    return player_map_memory->save( get_map().get_abs( pos_bub() ) );
+    return player_map_memory->save( pos_abs() );
 }
 
 void avatar::load_map_memory()
 {
-    player_map_memory->load( get_map().get_abs( pos_bub() ) );
+    player_map_memory->load( pos_abs() );
 }
 
 void avatar::prepare_map_memory_region( const tripoint_abs_ms &p1, const tripoint_abs_ms &p2 )
@@ -1291,6 +1291,8 @@ void avatar::rebuild_aim_cache() const
 
 void avatar::set_movement_mode( const move_mode_id &new_mode )
 {
+    map &here = get_map();
+
     if( can_switch_to( new_mode ) ) {
         bool instant = true;
         if( is_hauling() && new_mode->stop_hauling() ) {
@@ -1314,8 +1316,8 @@ void avatar::set_movement_mode( const move_mode_id &new_mode )
         recalculate_enchantment_cache();
         // crouching affects visibility
         //TODO: Replace with dirtying vision_transparency_cache
-        get_map().set_transparency_cache_dirty( pos_bub() );
-        get_map().set_seen_cache_dirty( posz() );
+        here.set_transparency_cache_dirty( pos_bub() );
+        here.set_seen_cache_dirty( posz() );
         recoil = MAX_RECOIL;
         // TODO: Variable costs from traits, mutations, whether we were prone or crouching, limb scores.
         if( !instant ) {

@@ -37,6 +37,7 @@
 #include "damage.h"
 #include "debug.h"
 #include "dialogue.h"
+#include "dialogue_helpers.h"
 #include "dispersion.h"
 #include "effect.h"
 #include "effect_on_condition.h"
@@ -50,7 +51,6 @@
 #include "flexbuffer_json.h"
 #include "game.h"
 #include "generic_factory.h"
-#include "global_vars.h"
 #include "handle_liquid.h"
 #include "init.h"
 #include "inventory.h"
@@ -1093,7 +1093,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
                         if( liquid_handler::consume_liquid( water ) ) {
                             add_msg_activate();
                             extracted = true;
-                            it.set_var( "remaining_water", static_cast<int>( water.charges ) );
+                            it.set_var( "remaining_water", water.charges );
                         }
                         break;
                     }
@@ -1219,7 +1219,7 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
             mod_power_level( units::from_kilojoule( static_cast<std::int64_t>( -power_use ) ) );
             bio.powered = ctr.active;
         } else {
-            bio.powered = g->remoteveh() != nullptr || !get_value( "remote_controlling" ).empty();
+            bio.powered = g->remoteveh() != nullptr || maybe_get_value( "remote_controlling" );
         }
     } else if( bio.info().is_remote_fueled ) {
         std::vector<item *> cables = cache_get_items_with( flag_CABLE_SPOOL );
@@ -1392,9 +1392,9 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
     } else if( bio.id == bio_remote ) {
         if( g->remoteveh() != nullptr && !has_active_item( itype_remotevehcontrol ) ) {
             g->setremoteveh( nullptr );
-        } else if( !get_value( "remote_controlling" ).empty() &&
+        } else if( maybe_get_value( "remote_controlling" ) &&
                    !has_active_item( itype_radiocontrol ) ) {
-            set_value( "remote_controlling", "" );
+            remove_value( "remote_controlling" );
         }
     }
     // Handle toggled items outside the else if tree.
@@ -1764,7 +1764,7 @@ void Character::process_bionic( bionic &bio )
 
     // Bionic effects on every turn they are active go here.
     if( bio.id == bio_remote ) {
-        if( g->remoteveh() == nullptr && get_value( "remote_controlling" ).empty() ) {
+        if( g->remoteveh() == nullptr && !maybe_get_value( "remote_controlling" ) ) {
             bio.powered = false;
             add_msg_if_player( m_warning, _( "Your %s has lost connection and is turning off." ),
                                bio.info().name );
@@ -2355,7 +2355,7 @@ void Character::perform_uninstall( const bionic &bio, int difficulty, int succes
 bool Character::uninstall_bionic( const bionic &bio, monster &installer, Character &patient,
                                   float adjusted_skill )
 {
-    const map &here = get_map();
+    map &here = get_map();
 
     viewer &player_view = get_player_view();
     if( installer.ammo[itype_anesthetic] <= 0 ) {
@@ -2416,7 +2416,7 @@ bool Character::uninstall_bionic( const bionic &bio, monster &installer, Charact
         cbm.set_flag( flag_NO_STERILE );
         cbm.set_flag( flag_NO_PACKED );
         cbm.faults.emplace( fault_bionic_salvaged );
-        get_map().add_item( patient.pos_bub(), cbm );
+        here.add_item( patient.pos_bub(), cbm );
     } else {
         bionics_uninstall_failure( installer, patient, difficulty, success, adjusted_skill );
     }

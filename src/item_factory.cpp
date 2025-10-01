@@ -40,6 +40,8 @@
 #include "itype.h"
 #include "iuse_actor.h"
 #include "material.h"
+#include "math_parser_diag_value.h"
+#include "mod_tracker.h"
 #include "options.h"
 #include "pocket_type.h"
 #include "proficiency.h"

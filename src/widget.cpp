@@ -5,7 +5,9 @@
 #include "condition.h"
 #include "display.h"
 #include "generic_factory.h"
-#include "json.h"
+#include "magic.h"
+#include "magic_enchantment.h"
+#include "npc.h"
 #include "output.h"
 #include "overmapbuffer.h"
 #include "npctalk.h"
@@ -392,7 +394,7 @@ nc_color widget_clause::get_color_for_id( const std::string &clause_id, const wi
 void widget_custom_var::deserialize( const JsonObject &jo )
 {
     if( jo.has_member( "value" ) ) {
-        value = get_dbl_or_var_part( jo.get_member( "value" ), "value" );
+        value = get_dbl_or_var_part( jo.get_member( "value" ) );
     } else {
         jo.throw_error( "missing mandatory member \"value\"" );
     }
@@ -401,20 +403,20 @@ void widget_custom_var::deserialize( const JsonObject &jo )
         JsonArray range = jo.get_array( "range" );
         switch( range.size() ) {
             case 2:
-                min = get_dbl_or_var_part( range.next_value(), "range" );
+                min = get_dbl_or_var_part( range.next_value() );
                 norm = std::make_pair( dbl_or_var_part( INT_MIN ), dbl_or_var_part( INT_MAX ) );
-                max = get_dbl_or_var_part( range.next_value(), "range" );
+                max = get_dbl_or_var_part( range.next_value() );
                 break;
             case 3:
-                min = get_dbl_or_var_part( range.next_value(), "range" );
-                norm.first = norm.second = get_dbl_or_var_part( range.next_value(), "range" );
-                max = get_dbl_or_var_part( range.next_value(), "range" );
+                min = get_dbl_or_var_part( range.next_value() );
+                norm.first = norm.second = get_dbl_or_var_part( range.next_value() );
+                max = get_dbl_or_var_part( range.next_value() );
                 break;
             case 4:
-                min = get_dbl_or_var_part( range.next_value(), "range" );
-                norm.first = get_dbl_or_var_part( range.next_value(), "range" );
-                norm.second = get_dbl_or_var_part( range.next_value(), "range" );
-                max = get_dbl_or_var_part( range.next_value(), "range" );
+                min = get_dbl_or_var_part( range.next_value() );
+                norm.first = get_dbl_or_var_part( range.next_value() );
+                norm.second = get_dbl_or_var_part( range.next_value() );
+                max = get_dbl_or_var_part( range.next_value() );
                 break;
             default:
                 jo.throw_error( "invalid number of elements in \"range\", must have 2~4" );
