@@ -597,7 +597,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
 
     if( critter.is_monster() ) {
         has_camouflage = critter.has_flag( mon_flag_CAMOUFLAGE );
-        has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE );
+        has_water_camouflage = critter.has_flag( mon_flag_WATER_CAMOUFLAGE ) || ( critter.get_size() < creature_size::large && critter.has_flag( mon_flag_NO_BREATHE ) );
         has_night_invisibility = critter.has_flag( mon_flag_NIGHT_INVISIBILITY );
     }
     bool is_underwater = critter.is_likely_underwater( here );
