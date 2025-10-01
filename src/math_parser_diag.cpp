@@ -509,12 +509,12 @@ void spellcasting_adjustment_ass( double val, dialogue &d, char scope,
                 if( spellIt->get_src() == target_mod_id
                     && ( whitelist.str( d ).empty() || spellIt->has_flag( whitelist.str( d ) ) )
                     && ( blacklist.str( d ).empty() || !spellIt->has_flag( blacklist.str( d ) ) )
-                    ) {
+                  ) {
                     spellIt->set_temp_adjustment( spellcasting_property.str( d ), val );
                 }
             }
             break;
-            }
+        }
         case scope_all:
             for( spell *spellIt : d.actor( is_beta( scope ) )->get_character()->magic->get_spells() ) {
                 if( ( whitelist.str( d ).empty() || spellIt->has_flag( whitelist.str( d ) ) ) &&

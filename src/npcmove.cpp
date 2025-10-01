@@ -4002,7 +4002,8 @@ bool npc::find_corpse_to_pulp()
         }
     }
 
-    if( corpse != nullptr && corpse != old_target && is_walking_with() && rules.has_flag( ally_rule::allow_complain ) ) {
+    if( corpse != nullptr && corpse != old_target && is_walking_with() &&
+        rules.has_flag( ally_rule::allow_complain ) ) {
         std::string talktag = chat_snippets().snip_pulp_zombie.translated();
         parse_tags( talktag, get_player_character(), *this );
         say( string_format( talktag, corpse->tname() ) );

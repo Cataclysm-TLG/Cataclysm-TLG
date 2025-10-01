@@ -270,28 +270,28 @@ void game::unserialize_impl( const JsonObject &data )
         safe_mode = SAFE_MODE_ON;
     }
 
-        std::string linebuff;
-        std::string linebuf;
-        if( data.read( "grscent", linebuf ) && data.read( "typescent", linebuff ) ) {
-            scent.deserialize( linebuf );
-            scent.deserialize( linebuff, true );
-        } else {
-            scent.reset();
-        }
-        data.read( "active_monsters", *critter_tracker );
+    std::string linebuff;
+    std::string linebuf;
+    if( data.read( "grscent", linebuf ) && data.read( "typescent", linebuff ) ) {
+        scent.deserialize( linebuf );
+        scent.deserialize( linebuff, true );
+    } else {
+        scent.reset();
+    }
+    data.read( "active_monsters", *critter_tracker );
 
-        data.has_null( "stair_monsters" ); // TEMPORARY until 0.G
-        data.has_null( "monstairz" ); // TEMPORARY until 0.G
+    data.has_null( "stair_monsters" ); // TEMPORARY until 0.G
+    data.has_null( "monstairz" ); // TEMPORARY until 0.G
 
-        data.read( "driving_view_offset", driving_view_offset );
-        data.read( "turnssincelastmon", turnssincelastmon );
-        data.read( "bVMonsterLookFire", bVMonsterLookFire );
+    data.read( "driving_view_offset", driving_view_offset );
+    data.read( "turnssincelastmon", turnssincelastmon );
+    data.read( "bVMonsterLookFire", bVMonsterLookFire );
 
-        data.read( "kill_tracker", *kill_tracker_ptr );
+    data.read( "kill_tracker", *kill_tracker_ptr );
 
-        data.read( "player", u );
-        data.read( "inactive_global_effect_on_condition_vector",
-                   inactive_global_effect_on_condition_vector );
+    data.read( "player", u );
+    data.read( "inactive_global_effect_on_condition_vector",
+               inactive_global_effect_on_condition_vector );
     //load queued_eocs
     for( JsonObject elem : data.get_array( "queued_global_effect_on_conditions" ) ) {
         queued_eoc temp;

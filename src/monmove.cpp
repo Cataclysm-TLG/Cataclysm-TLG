@@ -1053,7 +1053,7 @@ void monster::move()
                 ( path.empty() || rl_dist( pos_bub(), path.front() ) >= 2 || path.back() != local_dest ) ) {
                 // We need a new path
                 if( can_pathfind() ) {
-                    path = here.route( pos, local_dest, pf_settings, get_path_avoid() );
+                    path = here.route( pos_bub(), local_dest, pf_settings, get_path_avoid() );
                     if( path.empty() ) {
                         increment_pathfinding_cd();
                     }

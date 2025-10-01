@@ -7760,7 +7760,7 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
                 here.add_item_or_charges( vppos, e );
             } else {
                 debugmsg( "damage_direct() skipping invalid item: %s",
-                        e.is_null() ? "(null)" : e.typeId().c_str() );
+                          e.is_null() ? "(null)" : e.typeId().c_str() );
             }
         }
         vp.items.clear();
