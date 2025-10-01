@@ -92,14 +92,12 @@
       "m203_mod",
       "m320_mod",
       "m320_mod_mod",
-      "m6_shotgun",
       "masterkey",
       "masterkey_mod",
       "m26_mass",
       "m26_mass_mod",
       "u_shotgun",
-      "u_shotgun_mod",
-      "robofac_handguard"
+      "u_shotgun_mod"
     ],
     "min_skills": [ [ "gun", 2 ] ]
   }
