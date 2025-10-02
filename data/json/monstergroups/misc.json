@@ -240,8 +240,20 @@
       { "monster": "mon_llama", "weight": 10, "cost_multiplier": 25, "pack_size": [ 1, 4 ] },
       { "monster": "mon_zombie_pig", "weight": 10, "cost_multiplier": 25, "starts": "12 days", "pack_size": [ 1, 5 ] },
       { "monster": "mon_zombie_pig", "weight": 10, "cost_multiplier": 25, "starts": "28 days", "pack_size": [ 1, 5 ] },
-      { "monster": "mon_zombie_pig", "weight": 10, "cost_multiplier": 25, "starts": "112 days", "pack_size": [ 1, 5 ] },
-      { "monster": "mon_zombie_pig", "weight": 10, "cost_multiplier": 25, "starts": "360 days", "pack_size": [ 1, 5 ] },
+      {
+        "monster": "mon_zombie_pig",
+        "weight": 10,
+        "cost_multiplier": 25,
+        "starts": "112 days",
+        "pack_size": [ 1, 5 ]
+      },
+      {
+        "monster": "mon_zombie_pig",
+        "weight": 10,
+        "cost_multiplier": 25,
+        "starts": "360 days",
+        "pack_size": [ 1, 5 ]
+      },
       { "monster": "mon_giant_cockroach", "weight": 10, "pack_size": [ 1, 3 ] },
       { "monster": "mon_pregnant_giant_cockroach", "weight": 1, "cost_multiplier": 3 },
       { "monster": "mon_giant_cockroach_nymph", "weight": 5 },

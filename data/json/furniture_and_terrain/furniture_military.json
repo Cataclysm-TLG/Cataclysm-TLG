@@ -48,7 +48,10 @@
             { "if": { "math": [ "distance('u', _target) <= 400 " ] }, "then": { "u_spawn_item": "60mm_propellant" } },
             { "if": { "math": [ "distance('u', _target) <= 1340" ] }, "then": { "u_spawn_item": "60mm_propellant" } },
             { "if": { "math": [ "distance('u', _target) <= 2150" ] }, "then": { "u_spawn_item": "60mm_propellant" } },
-            { "if": { "math": [ "distance('u', _target) <= 2890" ] }, "then": [ { "u_spawn_item": "60mm_propellant" }, { "u_message": "There is some 60mm propellant left over.", "popup": false } ] }
+            {
+              "if": { "math": [ "distance('u', _target) <= 2890" ] },
+              "then": [ { "u_spawn_item": "60mm_propellant" }, { "u_message": "There is some 60mm propellant left over.", "popup": false } ]
+            }
           ]
         }
       ]
