@@ -2059,23 +2059,23 @@
         "monster": "mon_bullfrog",
         "weight": 30,
         "cost_multiplier": 2,
-        "ends": 24,
+        "ends": "1 days",
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
       {
         "monster": "mon_bullfrog",
         "weight": 35,
         "cost_multiplier": 2,
-        "starts": 24,
-        "ends": 95,
+        "starts": "1 days",
+        "ends": "4 days",
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
       {
         "monster": "mon_bullfrog",
         "weight": 40,
         "cost_multiplier": 2,
-        "starts": 95,
-        "ends": 180,
+        "starts": "4 days",
+        "ends": "4 days",
         "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
       },
       {
