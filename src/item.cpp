@@ -7718,9 +7718,9 @@ void item::randomize_rot()
         set_rot( loot_adjust );
     } else if( is_corpse() ) {
         time_duration birthday_adjust = ( calendar::fall_of_civilization - calendar::start_of_cataclysm ) *
-                                    rng_float( 0.0, 0.5 );
-        time_point birthday = calendar::turn - birthday_adjust;
-            set_birthday( birthday );
+                                    rng_float( 0.0, 0.15 );
+        time_point birthday = calendar::fall_of_civilization - birthday_adjust;
+        set_birthday( birthday );
     }
     for( item_pocket *pocket : contents.get_all_contained_pockets() ) {
         if( pocket->spoil_multiplier() > 0.0f ) {
