@@ -7714,7 +7714,7 @@ void item::randomize_rot()
 {
     if( is_comestible() && get_comestible()->spoils > 0_turns ) {
         time_duration loot_adjust = ( calendar::fall_of_civilization - calendar::start_of_cataclysm ) *
-                                    rng_float( 0.2, 1.2 );
+                                    rng_float( 0.1, 1.2 );
         set_rot( loot_adjust );
     } else if( is_corpse() ) {
         time_duration birthday_adjust = ( calendar::fall_of_civilization - calendar::start_of_cataclysm ) *
