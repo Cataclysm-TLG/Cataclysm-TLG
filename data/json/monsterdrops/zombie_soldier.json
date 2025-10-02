@@ -45,16 +45,16 @@
             "dirt": [ 0, 6000 ]
           }
         ],
-        "prob": 10
+        "prob": 3
       },
-      { "group": "infantry_common_gear" },
-      { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 15 },
-      { "group": "military_patrol_food", "prob": 30 },
-      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 15 },
+      { "group": "infantry_common_gear", "prob": 60 },
+      { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 6 },
+      { "group": "military_patrol_food", "prob": 10 },
+      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 5 },
       { "group": "wallets", "prob": 10 },
-      { "group": "pocket_cigar", "prob": 2 },
-      { "group": "misc_smoking_legal", "prob": 10 },
-      { "item": "dog_tag", "prob": 40 }
+      { "group": "pocket_cigar", "prob": 1 },
+      { "group": "misc_smoking_legal", "prob": 5 },
+      { "item": "dog_tag", "prob": 30 }
     ]
   },
   {
@@ -118,23 +118,23 @@
             "dirt": [ 0, 6000 ]
           }
         ],
-        "prob": 10
+        "prob": 3
       },
-      { "group": "clothing_soldier_heavy_set", "damage": [ 0, 2 ] },
-      { "group": "infantry_common_gear" },
+      { "group": "clothing_soldier_heavy_set", "damage": [ 0, 4 ] },
+      { "group": "infantry_common_gear", "prob": 15 },
       {
         "distribution": [
           { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 40 },
           { "item": "40x46mm_m433", "charges": [ 0, 3 ], "prob": 20 }
         ],
-        "prob": 20
+        "prob": 10
       },
-      { "group": "military_patrol_food", "prob": 30 },
-      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 15 },
+      { "group": "military_patrol_food", "prob": 10 },
+      { "distribution": [ { "group": "infantry_officer_gear" }, { "group": "infantry_medical_gear" } ], "prob": 5 },
       { "group": "wallets", "prob": 10 },
-      { "group": "pocket_cigar", "prob": 2 },
-      { "group": "misc_smoking_legal", "prob": 10 },
-      { "item": "dog_tag", "prob": 40 }
+      { "group": "pocket_cigar", "prob": 1 },
+      { "group": "misc_smoking_legal", "prob": 5 },
+      { "item": "dog_tag", "prob": 30 }
     ]
   },
   {
@@ -142,9 +142,9 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "group": "mon_zombie_heavy_soldier_death_drops", "prob": 80 },
-      { "group": "mon_zombie_soldier_death_drops", "prob": 10 },
-      { "group": "mon_zombie_cop_death_drops", "prob": 10 }
+      { "group": "mon_zombie_heavy_soldier_death_drops", "prob": 50 },
+      { "group": "mon_zombie_soldier_death_drops", "prob": 30 },
+      { "group": "mon_zombie_cop_death_drops", "prob": 20 }
     ]
   },
   {
@@ -191,24 +191,24 @@
             "dirt": [ 0, 6000 ]
           }
         ],
-        "prob": 10
+        "prob": 3
       },
-      { "group": "infantry_common_gear" },
+      { "group": "infantry_common_gear", "prob": 15 },
       {
         "distribution": [
           { "group": "military_standard_grenades", "count": [ 0, 3 ], "prob": 40 },
           { "item": "40x46mm_m433", "charges": [ 0, 3 ], "prob": 20 }
         ],
-        "prob": 20
+        "prob": 10
       },
-      { "group": "military_patrol_food", "prob": 30 },
+      { "group": "military_patrol_food", "prob": 10 },
       {
         "collection": [ { "group": "infantry_officer_gear", "prob": 90 }, { "group": "infantry_medical_gear", "prob": 15 } ]
       },
       { "group": "wallets", "prob": 10 },
-      { "group": "pocket_cigar", "prob": 2 },
-      { "group": "misc_smoking_legal", "prob": 10 },
-      { "item": "dog_tag", "prob": 40 }
+      { "group": "pocket_cigar", "prob": 1 },
+      { "group": "misc_smoking_legal", "prob": 5 },
+      { "item": "dog_tag", "prob": 30 }
     ]
   }
 ]

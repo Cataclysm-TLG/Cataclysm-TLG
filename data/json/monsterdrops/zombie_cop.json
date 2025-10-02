@@ -6,11 +6,11 @@
     "magazine": 100,
     "ammo": 40,
     "entries": [
-      { "group": "cop_armor", "prob": 70, "damage": [ 0, 4 ] },
+      { "group": "cop_armor", "prob": 40, "damage": [ 0, 4 ] },
       { "group": "cop_other_clothes", "prob": 70, "damage": [ 0, 4 ] },
       { "group": "cop_gear", "prob": 70, "damage": [ 0, 4 ] },
       { "group": "cop_gloves", "prob": 30, "damage": [ 1, 4 ] },
-      { "group": "cop_helmet", "prob": 20, "damage": [ 1, 4 ] },
+      { "group": "cop_helmet", "prob": 10, "damage": [ 1, 4 ] },
       { "group": "cop_pants", "damage": [ 1, 4 ] },
       { "group": "cop_shoes", "damage": [ 1, 4 ] },
       { "group": "cop_torso", "damage": [ 1, 4 ] },
@@ -35,12 +35,12 @@
     "type": "item_group",
     "id": "cop_armor",
     "items": [
-      [ "armor_riot", 65 ],
-      [ "armor_riot_arm", 5 ],
-      [ "armor_riot_leg", 5 ],
+      [ "armor_riot", 45 ],
+      [ "armor_riot_arm", 10 ],
+      [ "armor_riot_leg", 10 ],
       [ "armor_riot_torso", 10 ],
-      [ "kevlar", 90 ],
-      [ "soft_3a_vest", 90 ],
+      [ "kevlar", 70 ],
+      [ "soft_3a_vest", 70 ],
       [ "stab_vest", 20 ]
     ]
   },
@@ -53,10 +53,10 @@
     "entries": [
       {
         "collection": [
-          { "item": "tacvest", "damage": [ 1, 4 ] },
+          { "item": "tacvest", "damage": [ 1, 4 ], "prob": 20 },
           {
             "distribution": [ { "group": "longguns_cop_in_field", "prob": 10 }, { "group": "longguns_cop_in_field_no_gun", "prob": 90 } ],
-            "prob": 50
+            "prob": 30
           },
           { "group": "cop_holster_field", "damage": [ 1, 4 ], "prob": 90 }
         ],
@@ -67,7 +67,7 @@
           { "group": "longguns_cop", "prob": 10, "damage": [ 0, 3 ], "dirt": [ 1500, 7050 ] },
           { "group": "cop_holster", "damage": [ 0, 3 ], "dirt": [ 1500, 7050 ], "prob": 90 }
         ],
-        "prob": 90
+        "prob": 80
       }
     ]
   },
@@ -78,14 +78,14 @@
     "container-item": "police_belt",
     "on_overflow": "discard",
     "items": [
-      { "item": "heavy_flashlight", "damage": [ 0, 2 ], "prob": 90, "charges": [ 0, 300 ] },
-      { "item": "two_way_radio", "damage": [ 0, 2 ], "prob": 90, "charges": [ 0, 300 ] },
-      { "item": "tazer", "damage": [ 0, 2 ], "prob": 40 },
+      { "item": "heavy_flashlight", "damage": [ 0, 2 ], "prob": 50, "charges": [ 0, 300 ] },
+      { "item": "two_way_radio", "damage": [ 0, 2 ], "prob": 70, "charges": [ 0, 300 ] },
+      { "item": "tazer", "damage": [ 0, 2 ], "prob": 30 },
       { "item": "airhorn", "prob": 5 },
       { "item": "rope_30", "prob": 5 },
       { "item": "sm_extinguisher", "prob": 5 },
-      { "group": "cop_melee", "damage": [ 0, 2 ], "prob": 60 },
-      { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 20, "charges": [ 1, 10 ] }
+      { "group": "cop_melee", "damage": [ 0, 2 ], "prob": 50 },
+      { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 10, "charges": [ 0, 10 ] }
     ]
   },
   {
@@ -181,14 +181,14 @@
     "magazine": 100,
     "ammo": 40,
     "entries": [
-      { "group": "swat_zombie_gear", "prob": 100, "damage": [ 0, 2 ] },
+      { "group": "swat_zombie_gear", "prob": 80, "damage": [ 0, 2 ] },
       { "group": "swat_gloves", "prob": 30, "damage": [ 0, 4 ] },
       { "group": "swat_helmet", "prob": 20, "damage": [ 0, 4 ] },
       { "group": "swat_pants", "damage": [ 0, 4 ] },
       { "group": "swat_shoes", "damage": [ 0, 4 ] },
       { "group": "swat_torso", "damage": [ 0, 4 ] },
       { "group": "swat_weapons", "prob": 25 },
-      { "group": "cop_holster", "prob": 70 },
+      { "group": "cop_holster", "prob": 60 },
       { "group": "underwear", "damage": [ 0, 4 ] },
       { "group": "clothing_glasses", "prob": 5 },
       { "group": "clothing_watch", "prob": 10 },
@@ -204,8 +204,8 @@
       {
         "distribution": [
           { "group": "adhesive_bandages_box_used", "prob": 30 },
-          { "item": "bandages", "prob": 30, "count": [ 1, 3 ] },
-          { "group": "full_1st_aid", "prob": 20 }
+          { "item": "bandages", "prob": 20, "count": [ 1, 3 ] },
+          { "group": "full_1st_aid", "prob": 5 }
         ],
         "prob": 25
       },
@@ -219,7 +219,7 @@
           { "item": "gasbomb", "damage": [ 0, 1 ], "prob": 10 },
           { "item": "sm_extinguisher", "prob": 5 },
           { "item": "rope_30", "prob": 10 },
-          { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 15, "charges": [ 1, 10 ] }
+          { "item": "teargas_sprayer", "damage": [ 0, 2 ], "prob": 15, "charges": [ 0, 10 ] }
         ],
         "prob": 30
       },
