@@ -2,18 +2,9 @@
   {
     "id": "60mm_shell_m720a1",
     "type": "AMMO",
-    "name": { "str": "high-explosive mortar shell" },
-    "description": "High-explosive mortar cartridge, designed to be used against troops, light vehicles, light bunkers or similar targets.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "60mm_shell_m720",
-        "name": { "str": "M720A1 60 mm mortar shell (HE)", "str_pl": "M720A1 60 mm mortar shells (HE)" },
-        "description": "High-explosive mortar cartridge, designed to be used against troops, light vehicles, light bunkers or similar targets."
-      }
-    ],
+    "name": { "str": "M720A1 60mm mortar shell", "str_pl": "M720A1 60mm mortar shells" },
+    "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.",
     "weight": "1700 g",
-    "//": "190 g of comp-b, so explosion power should be 250; let's pretend case mass is third of the rest of the weight, so 500 g",
     "volume": "680 ml",
     "longest_side": "376 mm",
     "price": "400 USD",
@@ -31,19 +22,11 @@
     "id": "60mm_shell_m768",
     "copy-from": "60mm_shell_m720a1",
     "type": "AMMO",
-    "name": { "str": "high-explosive mortar shell" },
-    "description": "High-explosive mortar cartridge, designed to be used against troops, light vehicles, light bunkers or similar targets.  This one is more modern version, both more safe and more powerful.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "60mm_shell_m768",
-        "name": { "str": "M768 60 mm mortar shell (HE)", "str_pl": "M768 60 mm mortar shells (HE)" },
-        "description": "High-explosive mortar cartridge, designed to be used against troops, light vehicles, light bunkers or similar targets.  This one is more modern version, more safe and more powerful, but uses more simple impact fuze."
-      }
-    ],
+    "name": { "str": "M768 60mm mortar shell", "str_pl": "M768 60mm mortar shells" },
+    "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.  The M768 is a modern update to the older, less effective M720A1.",
     "weight": "1655 g",
-    "//": "358 g of pax-21, which is replacement for comp b - weaker (~1.0 tnt equivalent), but safer, so explosion power should be 358; let's pretend case mass is third of the rest of the weight, so 430 g",
     "price": "600 USD",
+    "price_postapoc": "12 USD",
     "extend": { "effects": [ "EXPLOSIVE_60mmHE2" ] },
     "delete": { "effects": [ "EXPLOSIVE_60mmHE" ] }
   }

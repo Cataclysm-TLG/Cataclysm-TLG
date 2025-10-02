@@ -3,13 +3,13 @@
     "type": "furniture",
     "id": "f_m224_mortar",
     "name": "M224 mortar",
-    "description": "Deployed and ready to be used 60 mm mortar.  You are lucky you don't need to scavenge actual firing tables, as they are clipped tightly to the mortar itself.  However you can use it only for indirect fire, with a substantial precision loss.",
+    "description": "A 60mm mortar tube deployed and ready for use, provided you're skilled enough with launchers to understand the firing tables.",
     "symbol": "#",
     "color": "dark_gray",
     "move_cost_mod": 2,
     "coverage": 15,
+    "concealment": 0,
     "required_str": 10,
-    "flags": [ "SHORT", "FLAT_SURF" ],
     "bash": { "str_min": 1, "str_max": 1, "items": [ { "item": "mortar_m224", "count": 1 } ] },
     "deconstruct": { "items": [ { "item": "mortar_m224", "count": 1 } ] },
     "//range": [
@@ -42,11 +42,13 @@
           "id": "EOC_60MM_SHOT",
           "effect": [
             { "u_add_effect": "aimed_60mm", "duration": "3 minutes" },
+            { "u_message": "You fire the M224 mortar.", "popup": false },
+            { "u_make_sound": "thump!", "volume": 60, "type": "combat" },
             { "math": [ "u_skill_exp('launcher', 'format': 'percentage')++" ] },
             { "if": { "math": [ "distance('u', _target) <= 400 " ] }, "then": { "u_spawn_item": "60mm_propellant" } },
             { "if": { "math": [ "distance('u', _target) <= 1340" ] }, "then": { "u_spawn_item": "60mm_propellant" } },
             { "if": { "math": [ "distance('u', _target) <= 2150" ] }, "then": { "u_spawn_item": "60mm_propellant" } },
-            { "if": { "math": [ "distance('u', _target) <= 2890" ] }, "then": { "u_spawn_item": "60mm_propellant" } }
+            { "if": { "math": [ "distance('u', _target) <= 2890" ] }, "then": [ { "u_spawn_item": "60mm_propellant" }, { "u_message": "There is some 60mm propellant left over.", "popup": false } ] }
           ]
         }
       ]

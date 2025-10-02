@@ -1424,10 +1424,9 @@
   {
     "id": "60mm_propellant",
     "type": "GENERIC",
-    "name": { "str": "60 mm mortar propellant charge" },
-    "description": "Small explosive in a form of donut without a piece, this thing is designed to be attached on the mortar shell tail, to increase the projectile velocity and, therefore, it's range.  Since the projectile it was connected to was already shot, you can only cut it for it's content.",
+    "name": { "str": "60mm mortar propellant charge" },
+    "description": "A plastic ring housing a propellant charge to help a mortar shell fly farther.  It's been detached from its cartridge and is now otherwise useless, but could be salvaged for the explosive material within.",
     "weight": "50 g",
-    "//": "8 g of some unknown to me explosive material, let's assume comp b for simplicity",
     "volume": "70 ml",
     "longest_side": "45 mm",
     "price": "14 USD",
