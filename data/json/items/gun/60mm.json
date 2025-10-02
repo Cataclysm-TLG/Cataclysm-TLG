@@ -2,8 +2,8 @@
   {
     "type": "GENERIC",
     "id": "mortar_m224",
-    "name": { "str_sp": "60mm M224 mortar" },
-    "description": "The Lightweight Company Mortar System is a portable mortar that can be carried and used by a single person.  There are a set of firing tables attached to it, but it will likely take some expertise with launchers to understannd them.",
+    "name": { "str_sp": "M224 mortar" },
+    "description": "The Lightweight Company Mortar System is a portable mortar that can be carried and used by a single person, provided they have access to 60mm mortar shells.  There are a set of firing tables attached to it, but it will likely take some expertise with launchers to understand them.",
     "use_action": { "type": "deploy_furn", "furn_type": "f_m224_mortar" },
     "category": "other",
     "material": [ "steel" ],
