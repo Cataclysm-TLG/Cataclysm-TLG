@@ -205,11 +205,29 @@
       { "monster": "mon_dog_big", "weight": 18, "cost_multiplier": 0 },
       { "monster": "mon_dog_big_trained", "weight": 1, "cost_multiplier": 0 },
       { "monster": "mon_dog_big_baby", "weight": 2, "cost_multiplier": 0, "ends": "42 days" },
-      { "monster": "mon_dog_big_baby", "weight": 2, "cost_multiplier": 0, "starts": "42 days", "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "monster": "mon_dog_big_baby",
+        "weight": 2,
+        "cost_multiplier": 0,
+        "starts": "42 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
       { "monster": "mon_dog_baby", "weight": 2, "cost_multiplier": 0, "ends": "42 days" },
-      { "monster": "mon_dog_baby", "weight": 2, "cost_multiplier": 0, "starts": "42 days", "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "monster": "mon_dog_baby",
+        "weight": 2,
+        "cost_multiplier": 0,
+        "starts": "42 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
       { "monster": "mon_dog_little_baby", "weight": 1, "cost_multiplier": 0, "ends": "42 days" },
-      { "monster": "mon_dog_little_baby", "weight": 1, "cost_multiplier": 0, "starts": "42 days", "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "monster": "mon_dog_little_baby",
+        "weight": 1,
+        "cost_multiplier": 0,
+        "starts": "42 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
       { "group": "GROUP_MUTANT_PET_DOGS", "weight": 2, "cost_multiplier": 0, "starts": "30 days" }
     ]
   },
@@ -231,7 +249,13 @@
     "monsters": [
       { "monster": "mon_cat", "weight": 200, "cost_multiplier": 0 },
       { "monster": "mon_cat_kitten", "weight": 10, "cost_multiplier": 0, "ends": "42 days" },
-      { "monster": "mon_cat_kitten", "weight": 10, "cost_multiplier": 0, "starts": "42 days", "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
+      {
+        "monster": "mon_cat_kitten",
+        "weight": 10,
+        "cost_multiplier": 0,
+        "starts": "42 days",
+        "conditions": [ "SPRING", "SUMMER", "AUTUMN" ]
+      },
       { "monster": "mon_cat_void", "weight": 1, "cost_multiplier": 0, "starts": "30 days" },
       { "monster": "mon_cat_liquid", "weight": 1, "cost_multiplier": 0, "starts": "30 days" },
       { "monster": "mon_cat_mutant_prism", "weight": 1, "cost_multiplier": 0, "starts": "30 days" }
