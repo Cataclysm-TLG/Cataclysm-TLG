@@ -967,14 +967,14 @@
     "reproduction": { "baby_monster": "mon_fry_crayfish", "baby_count": 3, "baby_timer": 17 },
     "baby_flags": [ "AUTUMN" ],
     "fear_triggers": [ "PLAYER_CLOSE", "SOUND" ],
-    "upgrades": { "half_life": 60, "into": "mon_crayfish_small" },
+    "upgrades": { "half_life": 42, "into": "mon_crayfish_small" },
     "flags": [ "FISHABLE", "SEES", "SMELLS", "SWIMS", "AQUATIC", "WATER_CAMOUFLAGE", "ARTHROPOD_BLOOD" ]
   },
   {
     "id": "mon_fry_crayfish",
     "type": "MONSTER",
     "copy-from": "mon_fry",
-    "upgrades": { "age_grow": 40, "into": "mon_fish_crayfish" },
+    "upgrades": { "half_life": 56, "into": "mon_fish_crayfish" },
     "name": { "str": "crustacean larva", "str_pl": "crustacean larvae" },
     "description": "A minuscule half-translucent crustacean larva.  Impossible to identify which species it belongs to.",
     "bodytype": "crab"
@@ -1016,7 +1016,7 @@
     "volume": "30 L",
     "weight": "40 kg",
     "dissect": "dissect_crustacean_small",
-    "upgrades": { "half_life": 96, "into": "mon_giant_crayfish" },
+    "upgrades": { "half_life": 28, "into": "mon_giant_crayfish" },
     "extend": { "flags": [ "NO_BREED", "SMALL_HIDER", "WATER_CAMOUFLAGE" ] }
   },
   {
@@ -1051,7 +1051,7 @@
     "baby_flags": [ "AUTUMN" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "fear_triggers": [ "FIRE" ],
-    "upgrades": { "half_life": 168, "into": "mon_crayfish_mega" },
+    "upgrades": { "half_life": 42, "into": "mon_crayfish_mega" },
     "flags": [ "SMELLS", "HEARS", "SEES", "SWIMS", "GRABS", "ARTHROPOD_BLOOD" ],
     "armor": { "cut": 8, "bullet": 6 }
   },
@@ -1073,7 +1073,6 @@
     ],
     "vision_day": 84,
     "dissect": "dissect_crustacean_large",
-    "upgrades": { "half_life": 60, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] }
   },
   {
@@ -1191,7 +1190,7 @@
     "dissect": "dissect_fish_sample_small",
     "reproduction": { "baby_egg": "egg_mutant_salmon", "baby_count": 3, "baby_timer": 30 },
     "baby_flags": [ "AUTUMN" ],
-    "upgrades": { "half_life": 120, "into": "mon_mutant_salmon_huge" },
+    "upgrades": { "age_grow": 30, "into": "mon_mutant_salmon_huge" },
     "anger_triggers": [ "HURT" ],
     "flags": [ "SEES", "HEARS", "SWIMS", "AQUATIC" ]
   },
@@ -1223,7 +1222,7 @@
     "dissect": "dissect_fish_sample_large",
     "reproduction": { "baby_egg": "egg_mutant_salmon", "baby_count": 3, "baby_timer": 30 },
     "baby_flags": [ "AUTUMN" ],
-    "upgrades": { "half_life": 168, "into": "mon_mutant_salmon_mega" },
+    "upgrades": { "age_grow": 42, "into": "mon_mutant_salmon_mega" },
     "anger_triggers": [ "HURT", "PLAYER_CLOSE" ],
     "flags": [ "SEES", "HEARS", "SWIMS", "AQUATIC" ]
   },
