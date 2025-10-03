@@ -621,7 +621,7 @@ class monster : public Creature
         /** Normal upgrades **/
         int next_upgrade_time();
         bool upgrades = false;
-        int upgrade_time = 0;
+        int upgrade_time = -1;
         bool reproduces = false;
         std::optional<time_point> baby_timer;
         bool biosignatures = false;
