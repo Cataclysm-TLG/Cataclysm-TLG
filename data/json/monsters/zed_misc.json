@@ -168,7 +168,7 @@
     "description": "The wound covered skin of this large bullfrog appears to be peeling in places.  Its vacant stare passes by anything that isn't food, and it will leap to devour anything it can.",
     "copy-from": "mon_proxy_frog_zombie",
     "attack_cost": 50,
-    "upgrades": { "half_life": 128, "into_group": "GROUP_ZOMBULL_FROG_UPGRADE" }
+    "upgrades": { "half_life": 34, "into_group": "GROUP_ZOMBULL_FROG_UPGRADE" }
   },
   {
     "id": "mon_frog_dad",
@@ -314,7 +314,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 96, "into_group": "GROUP_ZOMBIE_BRAINLESS_UPGRADE" },
+    "upgrades": { "half_life": 24, "into_group": "GROUP_ZOMBIE_BRAINLESS_UPGRADE" },
     "flags": [
       "STUMBLES",
       "WARM",
@@ -415,7 +415,7 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_fiend",
-    "upgrades": { "half_life": 168, "into_group": "GROUP_ZOMBIE_BRUTE" },
+    "upgrades": { "half_life": 42, "into_group": "GROUP_ZOMBIE_BRUTE" },
     "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
@@ -756,7 +756,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "bite_humanoid", "cooldown": 5 }, { "id": "scratch_humanoid" } ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 120, "into_group": "GROUP_ZOMBIE_GRAB" },
+    "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_GRAB" },
     "fungalize_into": "mon_zombie_fungal",
     "flags": [
       "SEES",
@@ -967,7 +967,7 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 168, "into": "mon_zombie_predator" },
+    "upgrades": { "half_life": 42, "into": "mon_zombie_predator" },
     "fungalize_into": "mon_zombie_fungal",
     "path_settings": { "max_dist": 45 },
     "flags": [
@@ -1214,7 +1214,7 @@
     ],
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 140, "into": "mon_zombie_hunter" },
+    "upgrades": { "half_life": 35, "into": "mon_zombie_hunter" },
     "fungalize_into": "mon_zombie_runner_fungal",
     "flags": [ "SEES", "HEARS", "GRABS", "WARM", "BASHES", "POISON", "NO_BREATHE", "REVIVES", "PUSH_MON", "FILTHY" ],
     "armor": { "electric": 1 }
@@ -1419,7 +1419,7 @@
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "default_zombie_death_drops",
-    "upgrades": { "half_life": 96, "into_group": "GROUP_ZOMBIE_SHADY_UPGRADES" },
+    "upgrades": { "half_life": 28, "into_group": "GROUP_ZOMBIE_SHADY_UPGRADES" },
     "burn_into": "mon_zombie_scorched",
     "flags": [
       "SEES",
@@ -1473,7 +1473,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
-    "upgrades": { "half_life": 104, "into": "mon_zombie_screecher" },
+    "upgrades": { "half_life": 26, "into": "mon_zombie_screecher" },
     "flags": [
       "SEES",
       "HEARS",
@@ -1524,7 +1524,7 @@
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid", "cooldown": 15 }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true, "min_level": 4 }, "message": "The %s explodes!" },
     "fungalize_into": "mon_zombie_smoker_fungus",
-    "upgrades": { "half_life": 120, "into": "mon_smoker_brute" },
+    "upgrades": { "half_life": 30, "into": "mon_smoker_brute" },
     "flags": [
       "SEES",
       "HEARS",
@@ -1631,7 +1631,7 @@
     "death_drops": "mon_zombie_swimmer_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
-    "upgrades": { "half_life": 120, "into": "mon_zombie_swimmer" },
+    "upgrades": { "half_life": 30, "into": "mon_zombie_swimmer" },
     "categories": [ "CLASSIC" ],
     "flags": [
       "SEES",
@@ -1681,7 +1681,7 @@
     "death_drops": "mon_zombie_swimmer_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
-    "upgrades": { "half_life": 168, "into": "mon_zombie_mancroc" },
+    "upgrades": { "half_life": 42, "into": "mon_zombie_mancroc" },
     "flags": [
       "SEES",
       "HEARS",
@@ -1731,7 +1731,7 @@
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
     "death_drops": "mon_zombie_technician_death_drops",
-    "upgrades": { "half_life": 120, "into_group": "GROUP_ZOMBIE_UPGRADE" },
+    "upgrades": { "half_life": 30, "into_group": "GROUP_ZOMBIE_UPGRADE" },
     "flags": [ "SEES", "HEARS", "WARM", "GRABS", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 3 }
   },
@@ -1766,7 +1766,7 @@
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 20 } ],
     "death_drops": "mon_zombie_miner_death_drops",
-    "upgrades": { "half_life": 140, "into_group": "GROUP_ZOMBIE_MINER_UPGRADE" },
+    "upgrades": { "half_life": 35, "into_group": "GROUP_ZOMBIE_MINER_UPGRADE" },
     "flags": [ "SEES", "HEARS", "GRABS", "WARM", "BASHES", "GROUP_BASH", "POISON", "NO_BREATHE", "REVIVES", "FILTHY" ],
     "armor": { "bash": 2, "cut": 2, "bullet": 2, "electric": 1 }
   },

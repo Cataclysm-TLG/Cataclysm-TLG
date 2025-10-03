@@ -68,7 +68,7 @@
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab" }, { "id": "scratch_humanoid", "cooldown": 10 } ],
     "death_drops": "mon_zombie_labsecurity_death_drops",
-    "upgrades": { "half_life": 140, "into_group": "GROUP_SOLDIER_UPGRADE" },
+    "upgrades": { "half_life": 35, "into_group": "GROUP_SOLDIER_UPGRADE" },
     "burn_into": "mon_zombie_scorched",
     "flags": [
       "SEES",
@@ -121,7 +121,7 @@
     "vision_night": 3,
     "luminance": 8,
     "harvest": "zombie_humanoid",
-    "upgrades": { "half_life": 168, "into": "mon_zombie_phase_shrike" },
+    "upgrades": { "half_life": 42, "into": "mon_zombie_phase_shrike" },
     "grab_strength": 20,
     "special_attacks": [
       { "id": "grab" },

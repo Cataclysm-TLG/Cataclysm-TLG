@@ -46,7 +46,7 @@
     "death_drops": "default_zombie_death_drops",
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true, "min_level": 1 } },
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 120, "into": "mon_zombie_spitter" },
+    "upgrades": { "half_life": 30, "into": "mon_zombie_spitter" },
     "fungalize_into": "mon_zombie_fungus_acidic",
     "flags": [
       "SEES",
@@ -171,7 +171,7 @@
     "death_drops": "default_zombie_death_drops",
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true, "min_level": 1 } },
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 168, "into": "mon_zombie_corrosive" },
+    "upgrades": { "half_life": 42, "into": "mon_zombie_corrosive" },
     "fungalize_into": "mon_zombie_fungus_acidic",
     "flags": [
       "SEES",
@@ -241,7 +241,7 @@
     "death_drops": "default_zombie_death_drops",
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true, "min_level": 1 } },
     "burn_into": "mon_zombie_scorched",
-    "upgrades": { "half_life": 120, "into": "mon_zombie_acidic" },
+    "upgrades": { "half_life": 30, "into": "mon_zombie_acidic" },
     "flags": [
       "SEES",
       "HEARS",
@@ -308,7 +308,7 @@
     ],
     "death_drops": "mon_dog_death_drops",
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true, "min_level": 1 } },
-    "upgrades": { "half_life": 120, "into": "mon_zombie_dog_brute_acidic" },
+    "upgrades": { "half_life": 30, "into": "mon_zombie_dog_brute_acidic" },
     "flags": [
       "SEES",
       "HEARS",
