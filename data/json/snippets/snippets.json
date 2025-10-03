@@ -649,7 +649,7 @@
       { "id": "catholic", "text": "CATHOLIC", "weight": 23 },
       { "id": "christian", "text": "CHRISTIAN", "weight": 11 },
       { "id": "mormon", "text": "MORMON", "weight": 2 },
-      { "id": "jew", "text": "JEW", "weight": 2 },
+      { "id": "jew", "text": "JEWISH", "weight": 2 },
       { "id": "atheist", "text": "ATHEIST", "weight": 21 },
       { "id": "norelpref", "text": "NORELPREF", "weight": 7 }
     ]

@@ -6117,7 +6117,7 @@
     "npc_background": "BG_survival_story_TOURIST",
     "description": "You always had to have the latest and best gadgets and gizmos, so is it any wonder that you upgraded your flesh along with your smart phone?",
     "points": 5,
-    "CBMs": [ "bio_flashlight", "bio_tools", "bio_ups", "bio_watch", "bio_batteries", "bio_power_storage_mkII" ],
+    "CBMs": [ "bio_flashlight", "bio_tools", "bio_ups", "bio_watch", "bio_cable", "bio_power_storage" ],
     "skills": [ { "level": 4, "name": "electronics" }, { "level": 2, "name": "fabrication" } ],
     "items": {
       "both": {
@@ -6149,7 +6149,7 @@
       "bio_adrenaline",
       "bio_night_vision",
       "bio_face_mask",
-      "bio_metabolics",
+      "bio_torsionratchet",
       "bio_power_storage_mkII"
     ],
     "skills": [ { "level": 3, "name": "dodge" } ],
@@ -6224,8 +6224,8 @@
       "bio_blood_anal",
       "bio_blood_filter",
       "bio_nanobots",
-      "bio_metabolics",
-      "bio_power_storage_mkII",
+      "bio_cable",
+      "bio_power_storage",
       "bio_sleep_shutdown"
     ],
     "items": {
@@ -6382,7 +6382,7 @@
       "bio_face_mask",
       "bio_alarm",
       "bio_night_vision",
-      "bio_batteries",
+      "bio_metabolics",
       "bio_power_storage_mkII"
     ],
     "skills": [ { "level": 2, "name": "speech" } ],
@@ -6452,7 +6452,7 @@
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have a… RC car?",
     "points": 1,
-    "CBMs": [ "bio_batteries", "bio_power_storage", "bio_remote" ],
+    "CBMs": [ "bio_cable", "bio_power_storage", "bio_remote" ],
     "skills": [ { "level": 2, "name": "computer" } ],
     "items": {
       "both": {
@@ -6476,7 +6476,7 @@
     "name": { "male": "Razor Boy", "female": "Razor Girl" },
     "description": "Through a series of painful and expensive surgeries, you became a walking bionic weapon, your services as a mercenary available to the highest bidder.",
     "points": 5,
-    "CBMs": [ "bio_razors", "bio_armor_eyes", "bio_dex_enhancer", "bio_ears", "bio_carbon" ],
+    "CBMs": [ "bio_razors", "bio_armor_eyes", "bio_dex_enhancer", "bio_ears", "bio_carbon", "bio_metabolics", "bio_power_storage_mkII" ],
     "skills": [ { "level": 2, "name": "melee" }, { "level": 2, "name": "unarmed" }, { "level": 2, "name": "dodge" } ],
     "proficiencies": [ "prof_unarmed_familiar", "prof_claws_familiar", "prof_bionics_familiar" ],
     "items": {
