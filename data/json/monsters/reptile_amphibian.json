@@ -323,7 +323,7 @@
     "vision_night": 30,
     "fear_triggers": [ "PLAYER_CLOSE", "FIRE", "HURT", "FRIEND_ATTACKED", "SOUND" ],
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "SWIMS", "AQUATIC", "WATER_CAMOUFLAGE" ],
-    "upgrades": { "half_life": 10, "into": "mon_big_bullfrog" }
+    "upgrades": { "half_life": 20, "into": "mon_big_bullfrog" }
   },
   {
     "id": "mon_bullfrog",
@@ -352,7 +352,7 @@
     "special_attacks": [ { "type": "leap", "cooldown": 32, "max_range": 4, "allow_no_target": true } ],
     "fear_triggers": [ "PLAYER_CLOSE", "FIRE", "HURT", "FRIEND_ATTACKED", "SOUND" ],
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "SWIMS", "WATER_CAMOUFLAGE", "SMALL_HIDER", "SWARMS" ],
-    "upgrades": { "half_life": 70, "into_group": "GROUP_BULLFROG_UPGRADE" },
+    "upgrades": { "half_life": 90, "into_group": "GROUP_BULLFROG_UPGRADE" },
     "reproduction": { "baby_egg": "egg_bullfrog", "baby_count": 4, "baby_timer": 20 },
     "baby_flags": [ "SPRING", "SUMMER" ]
   },
@@ -399,7 +399,7 @@
     ],
     "fear_triggers": [ "FRIEND_DIED", "FIRE", "SOUND" ],
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "PLAYER_CLOSE", "MATING_SEASON" ],
-    "upgrades": { "half_life": 70, "into_group": "GROUP_BIG_BULLFROG_UPGRADE" },
+    "upgrades": { "half_life": 90, "into_group": "GROUP_BIG_BULLFROG_UPGRADE" },
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "SWIMS", "WATER_CAMOUFLAGE", "CLIMBS" ],
     "reproduction": { "baby_egg": "egg_bullfrog", "baby_count": 4, "baby_timer": 20 },
     "baby_flags": [ "SPRING", "SUMMER" ]
@@ -461,7 +461,7 @@
     "fear_triggers": [ "FIRE" ],
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "PLAYER_CLOSE", "MATING_SEASON" ],
     "baby_flags": [ "SPRING", "SUMMER" ],
-    "upgrades": { "half_life": 70, "into_group": "GROUP_GIANT_FROG_UPGRADE" },
+    "upgrades": { "half_life": 90, "into_group": "GROUP_GIANT_FROG_UPGRADE" },
     "zombify_into": "mon_zombullfrog",
     "reproduction": { "baby_egg": "egg_mutant_frog", "baby_count": 4, "baby_timer": 20 },
     "flags": [ "FISHABLE", "SEES", "SMELLS", "HEARS", "GRABS", "SWIMS", "WATER_CAMOUFLAGE", "CLIMBS", "BASHES" ]
