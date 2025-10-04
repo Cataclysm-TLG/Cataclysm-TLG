@@ -4,7 +4,7 @@
     "subtype": "collection",
     "id": "map_extra_science",
     "//": "Nested group to damage the container-item",
-    "entries": [ { "group": "map_extra_science_corpse", "prob": 100, "damage": [ 3, 4 ] } ]
+    "entries": [ { "group": "map_extra_science_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -52,7 +52,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_camping",
-    "entries": [ { "group": "map_extra_college_camping_corpse", "prob": 100, "damage": [ 3, 4 ] } ]
+    "entries": [ { "group": "map_extra_college_camping_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -78,7 +78,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_sports",
-    "entries": [ { "group": "map_extra_college_sports_corpse", "prob": 100, "damage": [ 3, 4 ] } ]
+    "entries": [ { "group": "map_extra_college_sports_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -103,7 +103,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_college_lake",
-    "entries": [ { "group": "map_extra_college_lake_corpse", "prob": 100, "damage": [ 3, 4 ] } ]
+    "entries": [ { "group": "map_extra_college_lake_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
   },
   {
     "type": "item_group",
@@ -163,7 +163,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "map_extra_police",
-    "entries": [ { "group": "map_extra_police_corpse", "prob": 100, "damage": 4 } ]
+    "entries": [ { "group": "map_extra_police_corpse", "prob": 100, "damage": [ 0, 1 ] } ]
   },
   {
     "type": "item_group",

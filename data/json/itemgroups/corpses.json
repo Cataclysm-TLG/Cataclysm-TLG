@@ -4,9 +4,8 @@
     "type": "item_group",
     "subtype": "collection",
     "entries": [
-      { "item": "bone_human", "count": [ 5, 8 ], "prob": 100 },
-      { "item": "human_flesh", "count": [ 5, 8 ], "prob": 100 },
-      { "item": "hstomach", "prob": 50 }
+      { "item": "bone_human", "count": [ 1, 8 ], "prob": 100 },
+      { "item": "human_flesh", "count": [ 1, 8 ], "prob": 100 }
     ]
   },
   {
