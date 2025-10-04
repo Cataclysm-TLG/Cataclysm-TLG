@@ -1146,7 +1146,7 @@
         "ememory_max": "256 GB"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ] } ],
+    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ], "rigid_layer_only": true } ],
     "material_thickness": 1,
     "environmental_protection": 1,
     "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC", "SKINTIGHT" ]
@@ -1186,7 +1186,7 @@
         "ememory_max": "1 TB"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "eyes" ] } ],
+    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
     "material_thickness": 1,
     "environmental_protection": 1,
     "flags": [
