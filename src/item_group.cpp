@@ -562,7 +562,10 @@ void Item_modifier::modify( item &new_item, const std::string &context ) const
 
     new_item.set_damage( rng( damage.first, damage.second ) );
     new_item.rand_degradation();
-    // no need for dirt if it's a bow
+    if( new_item.is_corpse() && new_item.damage() == new_item.max_damage() ) {
+        new_item.set_flag( flag_PULPED );
+    }
+    // No need for dirt if it's a bow.
     if( new_item.is_gun() && !new_item.has_flag( flag_PRIMITIVE_RANGED_WEAPON ) &&
         !new_item.has_flag( flag_NON_FOULING ) ) {
         int random_dirt = rng( dirt.first, dirt.second );
