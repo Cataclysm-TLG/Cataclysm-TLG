@@ -4019,7 +4019,13 @@ bool npc::can_do_pulp()
     if( !pulp_location ) {
         return false;
     }
-
+    if( is_player_ally() ) {
+        Character &player_character = get_player_character();
+        if( !rules.has_flag( ally_rule::allow_pulp ) ||
+            player_character.in_vehicle || is_hallucination() ) {
+            return false;
+        }
+    }
     if( rl_dist( *pulp_location, pos_abs() ) > 1 || pulp_location->z() != posz() ) {
         return false;
     }
