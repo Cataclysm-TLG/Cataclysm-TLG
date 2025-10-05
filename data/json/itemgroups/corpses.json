@@ -3,10 +3,7 @@
     "id": "remains_human_generic",
     "type": "item_group",
     "subtype": "collection",
-    "entries": [
-      { "item": "bone_human", "count": [ 1, 8 ], "prob": 100 },
-      { "item": "human_flesh", "count": [ 1, 8 ], "prob": 100 }
-    ]
+    "entries": [ { "item": "bone_human", "count": [ 1, 8 ], "prob": 100 }, { "item": "human_flesh", "count": [ 1, 8 ], "prob": 100 } ]
   },
   {
     "id": "remains_pilot",

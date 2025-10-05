@@ -1449,23 +1449,26 @@ int outfit::amount_worn( const itype_id &clothing ) const
 bool outfit::takeoff( item_location loc, std::list<item> *res, Character &guy )
 {
     item &it = *loc;
-
     const auto ret = guy.can_takeoff( it );
     if( !ret.success() ) {
         add_msg( m_info, "%s", ret.c_str() );
         return false;
     }
-
     auto iter = std::find_if( worn.begin(), worn.end(), [&it]( const item & wit ) {
         return &it == &wit;
     } );
-
     it.on_takeoff( guy );
-    cata::event e = cata::event::make<event_type::character_takeoff_item>( guy.getID(),
-                    it.typeId() );
-    get_event_bus().send_with_talker( &guy, &loc, e );
     item takeoff_copy( it );
     worn.erase( iter );
+    /*
+    * This event originally ran before worn.erase and didn't use the copy, but that was causing EOC
+    * problems as if you did character_takeoff_item and then checked to see if they had worn_with_flag,
+    * they would still technically be wearing the flagged item they took off.
+    */
+    cata::event e = cata::event::make<event_type::character_takeoff_item>( guy.getID(),
+                    takeoff_copy.typeId() );
+    get_event_bus().send_with_talker( &guy, &loc, e );
+
     if( res == nullptr ) {
         guy.i_add( takeoff_copy, true, &it, &it, true, !guy.has_weapon() );
     } else {
