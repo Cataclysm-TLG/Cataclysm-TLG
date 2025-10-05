@@ -17,7 +17,7 @@
     "time": "1 h",
     "tools": [ [ [ "chemistry_set", 50 ] ] ],
     "components": [ [ [ "blood_acid", 1 ], [ "blood_acid_insect", 1 ], [ "blood_acid_plant", 1 ], [ "blood_acid_underground", 1 ] ] ],
-    "autolearn": [ [ "chemistry", 5 ] ]
+    "book_learn": [ [ "textbook_chemistry", 5 ], [ "adv_chemistry", 5 ], [ "recipe_labchem", 5 ] ]
   },
   {
     "id": "research_biochemistry_chemistry_set_basic",
@@ -37,6 +37,6 @@
     "time": "1 h",
     "tools": [ [ [ "chemistry_set_basic", -1 ] ], [ [ "surface_heat", 60, "LIST" ] ] ],
     "components": [ [ [ "blood_acid", 1 ], [ "blood_acid_insect", 1 ], [ "blood_acid_plant", 1 ], [ "blood_acid_underground", 1 ] ] ],
-    "autolearn": [ [ "chemistry", 5 ] ]
+    "book_learn": [ [ "textbook_chemistry", 6 ], [ "adv_chemistry", 6 ], [ "recipe_labchem", 6 ] ]
   }
 ]
