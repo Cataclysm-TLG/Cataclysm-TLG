@@ -2717,5 +2717,15 @@
     "id": "muzzle_brake_mod",
     "type": "MIGRATION",
     "replace": "muzzle_brake"
+  },
+  {
+    "id": "stone_pouch",
+    "type": "MIGRATION",
+    "replace": "grenade_pouch"
+  },
+  {
+    "id": "leather_stone_pouch",
+    "type": "MIGRATION",
+    "replace": "grenade_pouch"
   }
 ]
