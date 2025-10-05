@@ -248,12 +248,24 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_SUNGLASSES",
+    "eoc_type": "EVENT",
+    "required_event": "character_wears_item",
     "condition": { "and": [ { "u_has_worn_with_flag": "SUN_GLASSES" }, { "not": { "u_has_effect": "SUN_GLASSES" } } ] },
     "effect": [ { "u_add_effect": "SUN_GLASSES", "duration": "PERMANENT", "intensity": 1 } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_SUNGLASSES_OFF",
+    "eoc_type": "EVENT",
+    "required_event": "character_takeoff_item",
+    "condition": { "and": [ { "u_has_effect": "SUN_GLASSES" }, { "not": { "u_has_worn_with_flag": "SUN_GLASSES" } } ] },
+    "effect": [ { "u_lose_effect": "SUN_GLASSES" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_SUNGLASSES_BROKE",
+    "eoc_type": "EVENT",
+    "required_event": "character_armor_destroyed",
     "condition": { "and": [ { "u_has_effect": "SUN_GLASSES" }, { "not": { "u_has_worn_with_flag": "SUN_GLASSES" } } ] },
     "effect": [ { "u_lose_effect": "SUN_GLASSES" } ]
   }
