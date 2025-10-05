@@ -303,9 +303,8 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [
       [ [ "scrap_bronze", 4 ] ],
       [ [ "stick_long", 1 ] ],
@@ -328,9 +327,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
+    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", 1 ] ],
     "components": [ [ [ "scrap_bronze", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
@@ -408,13 +405,12 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_PIERCING",
     "skill_used": "fabrication",
-    "difficulty": 1,
+    "difficulty": 3,
     "time": "25 m",
     "reversible": true,
-    "autolearn": true,
-    "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
+    "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
+    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", 1 ] ],
     "components": [
       [
         [ "cotton_patchwork", 1 ],
@@ -437,9 +433,8 @@
     "time": "6 h 30 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ], [ [ "casting_mold", -1 ] ] ],
     "components": [
       [ [ "cordage_short", 2, "LIST" ] ],
       [ [ "scrap_bronze", 2 ] ],
@@ -472,7 +467,7 @@
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "5 h",
-    "autolearn": true,
+    "book_learn": [ [ "textbook_weapwest", 4 ] ],
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -538,9 +533,8 @@
     "difficulty": 3,
     "time": "1 h",
     "reversible": true,
-    "autolearn": true,
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
+    "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -593,9 +587,8 @@
     "difficulty": 3,
     "time": "30 m",
     "reversible": true,
-    "autolearn": true,
-    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
+    "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
