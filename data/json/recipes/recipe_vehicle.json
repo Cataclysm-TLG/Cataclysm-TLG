@@ -416,10 +416,13 @@
       [ [ "sheet_metal", 10 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 3 ] ],
+      [ [ "hose", 1 ] ],               
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_micro", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "plastic_chunk", 10 ] ]
+      [ [ "plastic_chunk", 8 ] ]
     ]
   },
   {
@@ -487,8 +490,11 @@
       [ [ "sheet_metal", 10 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 3 ] ],
+      [ [ "hose", 1 ] ],               
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_micro", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 8 ] ]
     ]
@@ -547,6 +553,8 @@
       [ [ "sheet_metal", 2 ] ],
       [ [ "condensor_coil", 2 ] ],
       [ [ "evaporator_coil", 2 ] ],
+      [ [ "compressor", 1 ] ],
+      [ [ "hose", 1 ] ],          
       [ [ "thermostat", 1 ] ],
       [ [ "motor_tiny", 2 ] ],
       [ [ "refrigerant_tank", 1 ] ],
@@ -1276,6 +1284,9 @@
       [ [ "metal_tank", 1 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 3 ] ],
+      [ [ "hose", 1 ] ],                
       [ [ "thermostat", 1 ] ],
       [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
@@ -1299,6 +1310,9 @@
       [ [ "30gal_drum", 1 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 3 ] ],
+      [ [ "hose", 1 ] ],                
       [ [ "thermostat", 1 ] ],
       [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
