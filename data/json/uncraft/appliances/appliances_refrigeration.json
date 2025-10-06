@@ -11,21 +11,17 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "sheet_metal_small", 25 ] ],
-      [ [ "steel_chunk", 5 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 294 ] ],
-      [ [ "chunk_rubber", 3 ] ],
-      [ [ "material_aluminium_ingot", 12 ] ],
-      [ [ "glass", 5 ] ],
-      [ [ "cable", 42 ] ],
+      [ [ "sheet_metal", 13 ] ],
+      [ [ "condensor_coil", 1 ] ],
+      [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],      
+      [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 11 ] ]
     ]
   },
   {
@@ -40,20 +36,16 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 7 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "sheet_metal", 1 ] ],
-      [ [ "sheet_metal_small", 16 ] ],
-      [ [ "steel_chunk", 4 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 128 ] ],
-      [ [ "chunk_rubber", 1 ] ],
-      [ [ "material_aluminium_ingot", 5 ] ],
-      [ [ "glass", 2 ] ],
-      [ [ "cable", 18 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 2 ] ],
+      [ [ "hose", 1 ] ],            
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 5 ] ]
     ]
   },
   {
@@ -68,22 +60,18 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "sheet_metal_small", 14 ] ],
-      [ [ "steel_chunk", 3 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 406 ] ],
-      [ [ "chunk_rubber", 4 ] ],
-      [ [ "material_aluminium_ingot", 16 ] ],
-      [ [ "glass", 7 ] ],
-      [ [ "cable", 58 ] ],
+      [ [ "sheet_metal", 11 ] ],
+      [ [ "glass_shard_large", 3 ] ],
+      [ [ "condensor_coil", 1 ] ],
+      [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],      
+      [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "tempered_glass_sheet", 1 ] ]
+      [ [ "plastic_chunk", 11 ] ]
     ]
   },
   {
@@ -98,22 +86,18 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 3 ] ],
-      [ [ "evaporator_coil", 3 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 8 ] ],
-      [ [ "sheet_metal_small", 15 ] ],
-      [ [ "steel_chunk", 3 ] ],
-      [ [ "pipe_fittings", 3 ] ],
-      [ [ "plastic_chunk", 874 ] ],
-      [ [ "chunk_rubber", 7 ] ],
-      [ [ "material_aluminium_ingot", 34 ] ],
-      [ [ "glass", 14 ] ],
-      [ [ "cable", 124 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ],
-      [ [ "tempered_glass_sheet", 2 ] ]
+      [ [ "sheet_metal", 22 ] ],
+      [ [ "glass_shard_large", 6 ] ],
+      [ [ "condensor_coil", 2 ] ],
+      [ [ "evaporator_coil", 2 ] ],
+      [ [ "compressor", 2 ] ],      
+      [ [ "cable", 4 ] ],
+      [ [ "hose", 2 ] ],
+      [ [ "pipe_fittings", 12 ] ],
+      [ [ "thermostat", 2 ] ],
+      [ [ "motor_tiny", 2 ] ],
+      [ [ "refrigerant_tank", 2 ] ],
+      [ [ "plastic_chunk", 22 ] ]
     ]
   },
   {
@@ -128,21 +112,17 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 3 ] ],
-      [ [ "evaporator_coil", 3 ] ],
+      [ [ "sheet_metal", 20 ] ],
+      [ [ "condensor_coil", 2 ] ],
+      [ [ "evaporator_coil", 2 ] ],
       [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 11 ] ],
-      [ [ "sheet_metal_small", 65 ] ],
-      [ [ "steel_chunk", 13 ] ],
-      [ [ "pipe_fittings", 3 ] ],
-      [ [ "plastic_chunk", 858 ] ],
-      [ [ "chunk_rubber", 7 ] ],
-      [ [ "material_aluminium_ingot", 33 ] ],
-      [ [ "glass", 14 ] ],
-      [ [ "cable", 122 ] ],
+      [ [ "cable", 4 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 18 ] ]
     ]
   },
   {
@@ -157,22 +137,18 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 18 ] ],
+      [ [ "glass_shard_large", 5 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 5 ] ],
-      [ [ "sheet_metal_small", 25 ] ],
-      [ [ "steel_chunk", 5 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 531 ] ],
-      [ [ "chunk_rubber", 5 ] ],
-      [ [ "material_aluminium_ingot", 21 ] ],
-      [ [ "glass", 9 ] ],
-      [ [ "cable", 75 ] ],
+      [ [ "compressor", 1 ] ],      
+      [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "tempered_glass_sheet", 1 ] ]
+      [ [ "plastic_chunk", 26 ] ]
     ]
   },
   {
@@ -187,21 +163,17 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "sheet_metal_small", 25 ] ],
-      [ [ "steel_chunk", 5 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 294 ] ],
-      [ [ "chunk_rubber", 3 ] ],
-      [ [ "material_aluminium_ingot", 12 ] ],
-      [ [ "glass", 5 ] ],
-      [ [ "cable", 42 ] ],
+      [ [ "sheet_metal", 8 ] ],
+      [ [ "condensor_coil", 1 ] ],
+      [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],         
+      [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "pipe_fittings", 3 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 7 ] ]
     ]
   },
   {
@@ -216,20 +188,16 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 7 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "sheet_metal", 1 ] ],
-      [ [ "sheet_metal_small", 21 ] ],
-      [ [ "steel_chunk", 5 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 140 ] ],
-      [ [ "chunk_rubber", 2 ] ],
-      [ [ "material_aluminium_ingot", 6 ] ],
-      [ [ "glass", 3 ] ],
-      [ [ "cable", 20 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 2 ] ],
+      [ [ "hose", 1 ] ],            
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 5 ] ]
     ]
   },
   {
@@ -244,20 +212,16 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 10 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "sheet_metal", 1 ] ],
-      [ [ "sheet_metal_small", 13 ] ],
-      [ [ "steel_chunk", 3 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 120 ] ],
-      [ [ "chunk_rubber", 1 ] ],
-      [ [ "material_aluminium_ingot", 5 ] ],
-      [ [ "glass", 2 ] ],
-      [ [ "cable", 17 ] ],
-      [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "compressor", 1 ] ],
+      [ [ "cable", 2 ] ],
+      [ [ "hose", 1 ] ],            
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 8 ] ]
     ]
   },
   {
@@ -272,21 +236,17 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 13 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "sheet_metal_small", 29 ] ],
-      [ [ "steel_chunk", 6 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 260 ] ],
-      [ [ "chunk_rubber", 2 ] ],
-      [ [ "material_aluminium_ingot", 10 ] ],
-      [ [ "glass", 4 ] ],
-      [ [ "cable", 37 ] ],
+      [ [ "compressor", 1 ] ],         
+      [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 11 ] ]
     ]
   },
   {
@@ -301,21 +261,17 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 20 ] ],
       [ [ "condensor_coil", 2 ] ],
       [ [ "evaporator_coil", 2 ] ],
       [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 11 ] ],
-      [ [ "sheet_metal_small", 99 ] ],
-      [ [ "steel_chunk", 20 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 895 ] ],
-      [ [ "chunk_rubber", 7 ] ],
-      [ [ "material_aluminium_ingot", 35 ] ],
-      [ [ "glass", 14 ] ],
-      [ [ "cable", 127 ] ],
+      [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
-      [ [ "refrigerant_tank", 1 ] ]
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
+      [ [ "refrigerant_tank", 1 ] ],
+      [ [ "plastic_chunk", 18 ] ]
     ]
   },
   {
@@ -330,22 +286,18 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
-      [ [ "condensor_coil", 2 ] ],
-      [ [ "evaporator_coil", 2 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 3 ] ],
-      [ [ "sheet_metal_small", 3 ] ],
-      [ [ "steel_chunk", 1 ] ],
-      [ [ "pipe_fittings", 2 ] ],
-      [ [ "plastic_chunk", 416 ] ],
-      [ [ "chunk_rubber", 4 ] ],
-      [ [ "material_aluminium_ingot", 16 ] ],
-      [ [ "glass", 7 ] ],
-      [ [ "cable", 59 ] ],
+      [ [ "sheet_metal", 16 ] ],
+      [ [ "glass_shard_large", 4 ] ],
+      [ [ "condensor_coil", 1 ] ],
+      [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],      
+      [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "tempered_glass_sheet", 1 ] ]
+      [ [ "plastic_chunk", 15 ] ]
     ]
   },
   {
@@ -360,22 +312,18 @@
       { "id": "SCREW", "level": 1 }
     ],
     "components": [
+      [ [ "sheet_metal", 19 ] ],
+      [ [ "glass_shard_large", 4 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
-      [ [ "compressor", 1 ] ],
-      [ [ "sheet_metal", 2 ] ],
-      [ [ "sheet_metal_small", 7 ] ],
-      [ [ "steel_chunk", 2 ] ],
-      [ [ "pipe_fittings", 1 ] ],
-      [ [ "plastic_chunk", 315 ] ],
-      [ [ "chunk_rubber", 3 ] ],
-      [ [ "material_aluminium_ingot", 13 ] ],
-      [ [ "glass", 5 ] ],
-      [ [ "cable", 45 ] ],
+      [ [ "compressor", 1 ] ],      
+      [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "cu_pipe", 1 ] ],
+      [ [ "pipe_fittings", 6 ] ],
+      [ [ "thermostat", 1 ] ],
+      [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "tempered_glass_sheet", 1 ] ]
+      [ [ "plastic_chunk", 16 ] ]
     ]
   }
 ]

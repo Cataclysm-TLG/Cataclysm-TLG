@@ -22,6 +22,7 @@
       [ [ "sheet_metal", 20 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],
       [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
@@ -51,10 +52,11 @@
       { "id": "WRENCH", "level": 1 }
     ],
     "components": [
-      [ [ "sheet_metal", 15 ] ],
+      [ [ "sheet_metal", 16 ] ],
       [ [ "glass_sheet", 1 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],      
       [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
@@ -84,16 +86,17 @@
       { "id": "WRENCH", "level": 1 }
     ],
     "components": [
-      [ [ "sheet_metal", 20 ] ],
+      [ [ "sheet_metal", 12 ] ],
       [ [ "condensor_coil", 1 ] ],
       [ [ "evaporator_coil", 1 ] ],
+      [ [ "compressor", 1 ] ],      
       [ [ "cable", 3 ] ],
       [ [ "hose", 1 ] ],
-      [ [ "pipe_fittings", 6 ] ],
+      [ [ "pipe_fittings", 3 ] ],
       [ [ "thermostat", 1 ] ],
       [ [ "motor_tiny", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
-      [ [ "plastic_chunk", 20 ] ]
+      [ [ "plastic_chunk", 10 ] ]
     ]
   },
   {
