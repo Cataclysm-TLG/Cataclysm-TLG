@@ -109,7 +109,7 @@
   {
     "type": "item_group",
     "id": "NC_OPS_stabbing",
-    "items": [ [ "spear_knife", 50 ], [ "spear_steel", 10 ], [ "spear_forked", 10 ], [ "spear_rebar", 5 ] ]
+    "items": [ [ "spear_knife", 5 ], [ "spear_steel", 5 ], [ "spear_wood", 15 ], [ "spear_forked", 10 ] ]
   },
   {
     "type": "item_group",
