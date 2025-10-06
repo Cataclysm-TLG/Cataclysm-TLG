@@ -281,7 +281,8 @@ overmap_special_id overmap::pick_random_building_to_place( int town_dist, int to
 pf::directed_path<point_om_omt> overmap::lay_out_street( const overmap_connection &connection,
         const point_om_omt &source, om_direction::type dir, size_t len )
 {
-    const int &highway_width = settings->get_settings_highway().width_of_segments;
+    const int &highway_width = settings->overmap_highway ?
+                               settings->get_settings_highway().width_of_segments : 0;
     auto valid_placement = [this]( const overmap_connection & connection, const tripoint_om_omt pos,
     om_direction::type dir ) {
         if( !inbounds( pos, 1 ) ) {

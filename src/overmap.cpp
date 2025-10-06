@@ -3799,41 +3799,41 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     if( get_option<bool>( "OVERMAP_POPULATE_OUTSIDE_CONNECTIONS_FROM_NEIGHBORS" ) ) {
         populate_connections_out_from_neighbors( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         place_rivers( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_LAKES" ) ) {
+    if( settings->overmap_lake ) {
         place_lakes( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
+    if( settings->overmap_ocean ) {
         place_oceans( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FORESTS" ) ) {
+    if( settings->overmap_forest ) {
         place_forests();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_SWAMPS" ) ) {
+    if( settings->overmap_forest && get_option<bool>( "OVERMAP_PLACE_SWAMPS" ) ) {
         place_swamps();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RAVINES" ) ) {
+    if( settings->overmap_ravine ) {
         place_ravines();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         // Polish rivers now so highways get the correct predecessors rather than river_center
         polish_river( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         highway_paths = place_highways( neighbor_overmaps );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+    if( settings->city_spec ) {
         place_cities();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         place_highway_interchanges( highway_paths );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_CITIES" ) ) {
+    if( settings->city_spec ) {
         build_cities();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILS" ) ) {
+    if( settings->forest_trail ) {
         place_forest_trails();
     }
     if( get_option<bool>( "OVERMAP_PLACE_RAILROADS_BEFORE_ROADS" ) ) {
@@ -3854,13 +3854,13 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     if( get_option<bool>( "OVERMAP_PLACE_SPECIALS" ) ) {
         place_specials( enabled_specials );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_HIGHWAYS" ) ) {
+    if( settings->overmap_highway ) {
         finalize_highways( highway_paths );
     }
-    if( get_option<bool>( "OVERMAP_PLACE_FOREST_TRAILHEADS" ) ) {
+    if( settings->forest_trail ) {
         place_forest_trailheads();
     }
-    if( get_option<bool>( "OVERMAP_PLACE_RIVERS" ) ) {
+    if( settings->overmap_river ) {
         polish_river( neighbor_overmaps ); // Polish again for placed specials
     }
 
@@ -5348,6 +5348,11 @@ std::vector<tripoint_om_omt> overmap::get_border( const point_rel_om &direction,
 
 void overmap::calculate_forestosity()
 {
+    if( !settings->overmap_forest ) {
+        forest_size_adjust = 0;
+        forestosity = 0;
+        return;
+    }
     const region_settings_forest &settings_forest = settings->get_settings_forest();
     float northern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_NORTH" );
     float eastern_forest_increase = get_option<float>( "OVERMAP_FOREST_INCREASE_EAST" );
@@ -6645,7 +6650,31 @@ void overmap::place_mongroups()
         }
     }
 
-    if( get_option<bool>( "OVERMAP_PLACE_OCEANS" ) ) {
+    if( settings->overmap_river || settings->overmap_lake ) {
+        // Figure out where rivers and lakes are, and place appropriate critters
+        for( int x = 3; x < OMAPX - 3; x += 7 ) {
+            for( int y = 3; y < OMAPY - 3; y += 7 ) {
+                int river_count = 0;
+                for( int sx = x - 3; sx <= x + 3; sx++ ) {
+                    for( int sy = y - 3; sy <= y + 3; sy++ ) {
+                        if( is_lake_or_river( ter( { sx, sy, 0 } ) ) ) {
+                            river_count++;
+                        }
+                    }
+                }
+                if( river_count >= 25 && is_lake_or_river( ter( { x, y, 0 } ) ) ) {
+                    tripoint_om_omt p( x, y, 0 );
+                    float norm_factor = std::abs( GROUP_RIVER->freq_total / 1000.0f );
+                    unsigned int pop =
+                        std::round( norm_factor * rng( river_count * 8, river_count * 25 ) );
+                    spawn_mon_group(
+                        mongroup( GROUP_RIVER, project_combine( pos(), project_to<coords::sm>( p ) ),
+                                  pop ), 3 );
+                }
+            }
+        }
+    }
+    if( settings->overmap_ocean ) {
         // Now place ocean mongroup. Weights may need to be altered.
         const region_settings_ocean &settings_ocean = settings->get_settings_ocean();
         const om_noise::om_noise_layer_ocean f( global_base_point(), g->get_seed() );
