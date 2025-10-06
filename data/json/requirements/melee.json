@@ -458,7 +458,6 @@
         [ "spear_wood", -1 ],
         [ "spear_shaft_sharpened", -1 ],
         [ "spear_knife", -1 ],
-        [ "spear_knife_superior", -1 ],
         [ "spear_forked", -1 ],
         [ "pike_wood", -1 ],
         [ "pike_fake", -1 ],
@@ -474,7 +473,6 @@
     "//": "Any weapon that features a long pole with a pointed tip at the end.  Reserved for quality weapons.",
     "tools": [
       [
-        [ "spear_knife_proper", -1 ],
         [ "spear_steel", -1 ],
         [ "spear_copper", -1 ],
         [ "qiang", -1 ],
