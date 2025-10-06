@@ -19,7 +19,6 @@
       { "group": "trait_group_WAKEFUL", "prob": 10 },
       { "group": "trait_group_LIGHTSTEP", "prob": 10 },
       { "group": "trait_group_OPTIMISTIC", "prob": 10 },
-      { "group": "trait_group_PACKMULE", "prob": 10 },
       { "group": "trait_group_PARKOUR", "prob": 10 },
       { "group": "trait_group_PRETTY", "prob": 10 },
       { "group": "trait_group_PSYCHOPATH", "prob": 10 },
@@ -38,7 +37,6 @@
       { "trait": "ADRENALINE", "prob": 10 },
       { "trait": "INFRESIST", "prob": 15 },
       { "trait": "MASOCHIST", "prob": 10 },
-      { "trait": "NIGHTVISION", "prob": 10 },
       { "trait": "OUTDOORSMAN", "prob": 10 },
       { "trait": "POISRESIST", "prob": 10 },
       { "trait": "ROBUST", "prob": 10 },
@@ -55,7 +53,6 @@
       { "trait": "GLASSJAW", "prob": 10 },
       { "trait": "ANTIFRUIT", "prob": 10 },
       { "trait": "MEATARIAN", "prob": 5 },
-      { "trait": "HOARDER", "prob": 10 },
       { "trait": "JITTERY", "prob": 10 },
       { "trait": "LACTOSE", "prob": 10 },
       { "trait": "VEGETARIAN", "prob": 15 },
@@ -148,12 +145,6 @@
     "id": "trait_group_OPTIMISTIC",
     "subtype": "distribution",
     "traits": [ { "trait": "OPTIMISTIC" }, { "trait": "PESSIMISTIC" } ]
-  },
-  {
-    "type": "trait_group",
-    "id": "trait_group_PACKMULE",
-    "subtype": "distribution",
-    "traits": [ { "trait": "PACKMULE" }, { "trait": "DISORGANIZED" } ]
   },
   {
     "type": "trait_group",
