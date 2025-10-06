@@ -285,6 +285,16 @@
     "random_at_chargen": false,
     "valid": false
   },
+    {
+    "type": "mutation",
+    "id": "PACKMULE",
+    "name": { "str": "Pack Mule" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
   {
     "type": "mutation",
     "id": "TRUTHTELLER",
