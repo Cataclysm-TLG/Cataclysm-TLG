@@ -17,6 +17,7 @@
 #include "debug.h"
 #include "enums.h"
 #include "mapdata.h"
+#include "map_scale_constants.h"
 #include "memory_fast.h"
 #include "type_id.h"
 #include "weighted_list.h"

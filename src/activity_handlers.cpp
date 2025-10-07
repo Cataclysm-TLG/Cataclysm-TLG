@@ -3991,6 +3991,16 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
             // pay the cost.  Allows ternaries based on having an effect or trait to calculate cost correctly
             int cost = spell_being_cast.energy_cost( *you );
 
+            if( !act->targets.empty() ) {
+                item *it = act->targets.front().get_item();
+                if( it != nullptr && it->has_flag( flag_SINGLE_USE ) ) {
+                    you->i_rem( it );
+                    act->targets.erase( act->targets.end() - 1 );
+                } else if( it && !it->has_flag( flag_USE_PLAYER_ENERGY ) ) {
+                    you->consume_charges( *it, it->type->charges_to_use() );
+                }
+            }
+
             spell_being_cast.cast_all_effects( *you, *target );
 
             if( act->get_value( 2 ) != 0 ) {
