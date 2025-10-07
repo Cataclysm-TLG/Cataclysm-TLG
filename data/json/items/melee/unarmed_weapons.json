@@ -399,7 +399,7 @@
     "volume": "300 ml",
     "price": "11 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": { "grip": "weapon", "length": "hand", "surface": "line", "balance": "neutral" },
+    "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "neutral" },
     "material": [ "steel" ],
     "symbol": "[",
     "color": "light_gray",
