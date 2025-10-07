@@ -255,7 +255,7 @@
     "using": [ [ "forging_standard", 10 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "5l_lead", 2 ], [ "1l_lead", 10 ], [ "lead", 22690 ] ] ]
+    "components": [ [ [ "5l_lead", 2 ], [ "1l_lead", 10 ], [ "lead", 10000 ] ] ]
   },
   {
     "result": "5l_lead",
@@ -270,7 +270,7 @@
     "using": [ [ "forging_standard", 5 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "1l_lead", 5 ], [ "lead", 11345 ] ] ]
+    "components": [ [ [ "1l_lead", 5 ], [ "lead", 5000 ] ] ]
   },
   {
     "result": "1l_lead",
@@ -285,7 +285,7 @@
     "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "lead", 2269 ] ] ]
+    "components": [ [ [ "lead", 1000 ] ] ]
   },
   {
     "result": "10l_bronze",
