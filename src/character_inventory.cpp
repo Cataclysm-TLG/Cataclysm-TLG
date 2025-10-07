@@ -724,10 +724,10 @@ void outfit::holster_opts( std::vector<dispose_option> &opts, item_location obj,
         if( e.get_contents().has_additional_pockets() && e.can_contain( *obj ).success() ) {
             opts.emplace_back( dispose_option{
                 string_format( _( "Store in %s" ), e.tname() ), true, e.invlet,
-                guy.item_store_cost( *obj, e, false, e.insert_cost( *obj ) ),
+                guy.item_store_cost( *obj, e, true, e.insert_cost( *obj ) ),
                 [&guy, &e, obj] {
                     item &it = *item_location( obj );
-                    guy.store( e, it, false, e.insert_cost( it ), pocket_type::CONTAINER, true );
+                    guy.store( e, it, true, e.insert_cost( it ), pocket_type::CONTAINER, true );
                     return !guy.has_item( it );
                 }
             } );
@@ -739,10 +739,10 @@ void outfit::holster_opts( std::vector<dispose_option> &opts, item_location obj,
                 }
                 opts.emplace_back( dispose_option{
                     string_format( "  >%s", it->tname() ), true, it->invlet,
-                    guy.item_store_cost( *obj, *it, false, it->insert_cost( *obj ) ),
+                    guy.item_store_cost( *obj, *it, true, it->insert_cost( *obj ) ),
                     [&guy, it, con, obj] {
                         item &i = *item_location( obj );
-                        guy.store( con, i, false, it->insert_cost( i ) );
+                        guy.store( con, i, true, it->insert_cost( i ) );
                         return !guy.has_item( i );
                     }
                 } );
@@ -752,7 +752,7 @@ void outfit::holster_opts( std::vector<dispose_option> &opts, item_location obj,
                                        ( e.type->get_use( "holster" )->get_actor_ptr() );
             opts.emplace_back( dispose_option{
                 string_format( _( "Store in %s" ), e.tname() ), true, e.invlet,
-                guy.item_store_cost( *obj, e, false, e.insert_cost( *obj ) ),
+                guy.item_store_cost( *obj, e, true, e.insert_cost( *obj ) ),
                 [&guy, ptr, &e, obj] {
                     // *obj by itself attempts to use the const version of the operator (in gcc9),
                     // so construct a new item_location which allows using the non-const version

@@ -13625,7 +13625,7 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
 
         if( !is_unwielding && wielded->has_item( it ) ) {
             add_msg_if_player( m_info,
-                               _( "You need to put the bag away before trying to wield something from it." ) );
+                               _( "You need to put the container away before trying to wield something from it." ) );
             return false;
         }
 
@@ -13654,16 +13654,14 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
     // There is an additional penalty when wielding items from the inventory whilst currently grabbed.
 
     bool worn = is_worn( it );
-
     // Ideally the cost should be calculated from wield(item_location), but as backup try it here.
     const int mv = obtain_cost.value_or( item_handling_cost( it, true,
                                          INVENTORY_HANDLING_PENALTY / ( worn ? 2 : 1 ) ) );
-
     if( worn ) {
         it.on_takeoff( *this );
     }
 
-    add_msg_debug( debugmode::DF_AVATAR, "wielding took %d moves", mv );
+    add_msg_debug( debugmode::DF_AVATAR, "Wielding took %d moves.", mv );
     mod_moves( -mv );
 
     item to_wield;
@@ -13721,65 +13719,6 @@ bool Character::wield( item_location loc, bool remove_old )
     return true;
 }
 
-bool Character::wield_contents( item &container, item *internal_item, bool penalties,
-                                int base_cost )
-{
-    // if index not specified and container has multiple items then ask the player to choose one
-    if( internal_item == nullptr ) {
-        debugmsg( "No valid target for wield contents." );
-        return false;
-    }
-
-    if( !container.has_item( *internal_item ) ) {
-        debugmsg( "Tried to wield non-existent item from container (Character::wield_contents)" );
-        return false;
-    }
-
-    const ret_val<void> ret = can_wield( *internal_item );
-    if( !ret.success() ) {
-        add_msg_if_player( m_info, "%s", ret.c_str() );
-        return false;
-    }
-
-    int mv = 0;
-
-    if( has_wield_conflicts( *internal_item ) ) {
-        if( !unwield() ) {
-            return false;
-        }
-        inv->unsort();
-    }
-
-    // for holsters, we should not include the cost of wielding the holster itself
-    // The cost of wielding the holster was already added earlier in avatar_action::use_item.
-    // As we couldn't make sure back then what action was going to be used, we remove the cost now.
-    item_location il = item_location( *this, &container );
-    mv -= il.obtain_cost( *this );
-    mv += item_retrieve_cost( *internal_item, container, penalties, base_cost );
-
-    if( internal_item->stacks_with( weapon, true ) ) {
-        weapon.combine( *internal_item );
-    } else {
-        weapon = std::move( *internal_item );
-    }
-    container.remove_item( *internal_item );
-    container.on_contents_changed();
-
-    inv->update_invlet( weapon );
-    inv->update_cache_with_item( weapon );
-    last_item = weapon.typeId();
-
-    mod_moves( -mv );
-
-    weapon.on_wield( *this );
-
-    item_location loc( *this, &weapon );
-    cata::event e = cata::event::make<event_type::character_wields_item>( getID(), weapon.typeId() );
-    get_event_bus().send_with_talker( this, &loc, e );
-
-    return true;
-}
-
 void Character::store( item &container, item &put, bool penalties, int base_cost,
                        pocket_type pk_type, bool check_best_pkt )
 {
@@ -13807,8 +13746,8 @@ void Character::store( item_pocket *pocket, item &put, bool penalties, int base_
     if( !!pkt_best && pocket->better_pocket( *pkt_best, put, true ) ) {
         pocket = pkt_best;
     }
-    mod_moves( -std::max( item_store_cost( put, null_item_reference(), penalties, base_cost ),
-                          pocket->obtain_cost( put ) ) );
+
+    mod_moves( -item_handling_cost( put, penalties, base_cost ) );
     ret_val<item *> result = pocket->insert_item( i_rem( &put ) );
     result.value()->on_pickup( *this );
     calc_encumbrance();

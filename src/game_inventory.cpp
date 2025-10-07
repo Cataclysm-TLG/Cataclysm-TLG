@@ -1147,7 +1147,9 @@ class activatable_inventory_preset : public pickup_inventory_preset
             if( it.is_medication() && !you.can_use_heal_item( it ) && !it.is_craft() ) {
                 return _( "Your biology is not compatible with that item." );
             }
-
+            if( it.is_holster() && !you.is_worn( it ) ) {
+                return _( "You would need to be wearing that." );
+            }
             if( it.is_broken() ) {
                 return string_format( _( "Your %s was broken and won't turn on." ), it.tname() );
             }
