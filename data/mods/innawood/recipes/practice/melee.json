@@ -56,7 +56,7 @@
     "book_learn": [ [ "mag_stabbing", 0 ], [ "manual_stabbing", 0 ] ],
     "//": "Only training weapons or light and easy to use weapons.",
     "tools": [
-      [ "spear_wood", "spear_knife_superior", "spear_stone", "spear_spike", "fencing_foil", "fencing_epee", "fencing_sabre" ],
+      [ "spear_wood", "spear_stone", "spear_spike", "fencing_foil", "fencing_epee", "fencing_sabre" ],
       [ "pseudo_training_dummy_light", "pseudo_training_dummy_heavy" ]
     ],
     "//1": "Some components to mark the striking points for the session.",
