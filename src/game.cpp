@@ -4607,7 +4607,14 @@ Creature *game::is_hostile_very_close( bool dangerous )
 Creature *game::is_hostile_within( int distance, bool dangerous )
 {
     for( Creature *&critter : u.get_visible_creatures( distance ) ) {
-        if( u.attitude_to( *critter ) == Creature::Attitude::HOSTILE ) {
+        bool potential_danger = false;
+        if( critter->is_monster() ) {
+            const monster *mon = critter->as_monster();
+            if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY && ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
+                potential_danger = true;
+            }
+        }
+        if( u.attitude_to( *critter ) == Creature::Attitude::HOSTILE || potential_danger ) {
             if( dangerous ) {
                 if( critter->is_ranged_attacker() ) {
                     return critter;
@@ -11542,14 +11549,6 @@ point_rel_sm game::place_player( const tripoint_bub_ms &dest_loc, bool quick )
     } else if( !u.has_effect_with_flag( json_flag_LEVITATION ) ) {
         here.creature_on_trap( u );
     }
-    // Drench the player if swimmable
-    if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, u.pos_bub() ) &&
-        !u.has_effect_with_flag( json_flag_LEVITATION ) &&
-        !m.has_flag_furn( "BRIDGE", u.pos_bub() ) &&
-        !( u.is_mounted() || ( u.in_vehicle && vp1->vehicle().can_float( here ) ) ) ) {
-        u.drench( 80, u.get_drenching_body_parts( false, false ),
-                  false );
-    }
 
     // List items here
     if( !quick && !here.has_flag( ter_furn_flag::TFLAG_SEALED, u.pos_bub() ) ) {
@@ -11640,7 +11639,7 @@ point_rel_sm game::place_player( const tripoint_bub_ms &dest_loc, bool quick )
         }
     } else if( vp1.part_with_feature( "CONTROLS", true ) && u.in_vehicle &&
                u.is_mounted() ) {
-        add_msg( _( "There are vehicle controls here but you cannot reach them whilst mounted." ) );
+        add_msg( _( "There are vehicle controls here, but you cannot reach them while mounted." ) );
     }
     return submap_shift;
 }
@@ -12562,7 +12561,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
     }
 
     if( !force && movez == -1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) &&
-        !u.is_underwater() && !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER, pos ) &&
+        ( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos ) && !u.is_underwater() ) &&
+        !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER, pos ) &&
         !u.has_effect( effect_gliding ) ) {
         tripoint_bub_ms dest_phase = pos;
         dest_phase.z() -= 1;

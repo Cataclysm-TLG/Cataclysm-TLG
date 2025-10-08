@@ -69,7 +69,7 @@
         "volume_encumber_modifier": 0.3
       }
     ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_LARGE" ],
+    "flags": [ "BELTED", "OVERSIZE", "PALS_LARGE" ],
     "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -99,7 +99,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Stash ammo", "holster_msg": "You stash your %s." },
-    "flags": [ "WATER_FRIENDLY", "BELTED", "PALS_LARGE" ],
+    "flags": [ "BELTED", "PALS_LARGE" ],
     "armor": [ { "encumbrance": 1, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
   },
   {
@@ -271,7 +271,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Stash javelins", "holster_msg": "You stash your %s." },
-    "flags": [ "WATER_FRIENDLY", "OVERSIZE", "BELTED" ],
+    "flags": [ "OVERSIZE", "BELTED" ],
     "armor": [ { "encumbrance": 5, "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -401,7 +401,7 @@
     "sided": true,
     "material_thickness": 0.5,
     "pocket_data": [ { "ammo_restriction": { "arrow": 12, "bolt": 16 }, "moves": 20 } ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_LARGE" ],
+    "flags": [ "BELTED", "OVERSIZE", "PALS_LARGE" ],
     "armor": [
       {
         "encumbrance": 2,
@@ -481,7 +481,7 @@
     "color": "brown",
     "material_thickness": 1,
     "pocket_data": [ { "ammo_restriction": { "arrow": 24, "bolt": 32, "atlatl": 8, "fishspear": 8 }, "moves": 30 } ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "OVERSIZE" ],
     "armor": [ { "encumbrance": 3, "coverage": 30, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
     "melee_damage": { "bash": 4 }
   },
@@ -540,7 +540,7 @@
     "sided": true,
     "material_thickness": 1,
     "pocket_data": [ { "ammo_restriction": { "arrow": 12, "bolt": 16, "atlatl": 4, "fishspear": 4 }, "moves": 40 } ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "OVERSIZE" ],
     "armor": [ { "encumbrance": 6, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -559,7 +559,7 @@
     "sided": true,
     "material_thickness": 1,
     "pocket_data": [ { "ammo_restriction": { "arrow": 12, "bolt": 16, "atlatl": 4, "fishspear": 4 }, "moves": 30 } ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "OVERSIZE" ],
     "armor": [ { "encumbrance": 6, "coverage": 20, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {

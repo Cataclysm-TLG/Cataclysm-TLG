@@ -3545,6 +3545,8 @@ void Character::on_move( const tripoint_abs_ms &old_pos )
     if( using_lifting_assist ) {
         invalidate_weight_carried_cache();
     }
+    // Check if we're in water and see if we need to do something about it.
+    water_immersion();
 }
 
 units::volume Character::get_total_character_volume() const
@@ -13945,27 +13947,73 @@ bodypart_id Character::most_staunchable_bp( int &max_staunch )
     return bp_id;
 }
 
+void Character::water_immersion()
+{
+    // Effects of being partially/fully underwater.
+    map &here = get_map();
+    if( underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ||
+        here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ||
+        here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) ) {
+        if( !in_vehicle && !here.has_flag_furn( "BRIDGE", pos_bub() ) &&
+            ( !has_effect_with_flag( json_flag_LEVITATION ) && !underwater ) ) {
+            int drench_amount = 0;
+            body_part_set drenched_parts;
+            if( underwater || is_prone() ) {
+                // TODO: gain "swimming" proficiency but not "athletics" skill.
+                drench_amount = 100;
+                drenched_parts = get_drenching_body_parts();
+            } else if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
+                // TODO: gain "swimming" proficiency but not "athletics" skill.
+                // Same as above, except no head/eyes/mouth.
+                drench_amount = 100;
+                drenched_parts = get_drenching_body_parts( false );
+            } else {
+                // Too small to stay dry.
+                if( get_size() == creature_size::tiny ) {
+                    drench_amount = 100;
+                    drenched_parts = get_drenching_body_parts( false );
+                } else {
+                    drench_amount = 80;
+                    drenched_parts = get_drenching_body_parts( false, false, true );
+                }
+            }
+            if( drench_amount > 0 ) {
+                std::vector<bodypart_id> drenched_vec;
+                for( bodypart_id bp : drenched_parts ) {
+                    drenched_vec.push_back( bp );
+                }
+                // Initialize exposure map
+                std::map<bodypart_id, float> exposure;
+                for( bodypart_id bp : drenched_vec ) {
+                    exposure[bp] = 1.0f;
+                }
+                // Apply clothing exposure
+                worn.bodypart_wet_protection( true, exposure, drenched_vec );
+                // Group body parts by reduced wetness
+                std::map<int, body_part_set> wet_groups;
+                for( const bodypart_id &bp : drenched_vec ) {
+                    int reduced_amount = static_cast<int>( drench_amount * exposure[bp] );
+                    if( reduced_amount < 1 ) {
+                        continue;
+                    }
+                    wet_groups[reduced_amount].set( bp.id() );
+                }
+                // Apply drench once per group
+                for( const auto &pair : wet_groups ) {
+                    drench( pair.first, pair.second, false );
+                }
+            }
+        }
+    }
+}
+
 void Character::pause()
 {
     set_moves( 0 );
     recoil = MAX_RECOIL;
     map &here = get_map();
-
-    // effects of being partially/fully underwater
-    if( !in_vehicle && !here.has_flag_furn( "BRIDGE", pos_bub( ) ) ) {
-        if( underwater ) {
-            // TODO: gain "swimming" proficiency but not "athletics" skill
-            drench( 100, get_drenching_body_parts(), false );
-        } else if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
-            // TODO: gain "swimming" proficiency but not "athletics" skill
-            // Same as above, except no head/eyes/mouth
-            drench( 100, get_drenching_body_parts( false ), false );
-        } else if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ) {
-            drench( 80, get_drenching_body_parts( false, false ),
-                    false );
-        }
-    }
-
+    // Check if we're in water and see if we need to do something about it.
+    water_immersion();
     // Try to put out clothing/hair fire
     if( has_effect( effect_onfire ) ) {
         time_duration total_removed = 0_turns;

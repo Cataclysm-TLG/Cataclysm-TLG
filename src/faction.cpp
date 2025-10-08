@@ -33,6 +33,7 @@
 #include "memory_fast.h"
 #include "mission_companion.h"
 #include "mtype.h"
+#include "monfaction.h"
 #include "npc.h"
 #include "output.h"
 #include "overmapbuffer.h"

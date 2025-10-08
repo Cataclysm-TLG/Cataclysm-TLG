@@ -2447,6 +2447,28 @@ void outfit::bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
     }
 }
 
+void outfit::bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
+                                      const std::vector<bodypart_id> &all_body_parts ) const
+{
+    for( const item &it : worn ) {
+        // What body parts does this item cover?
+        body_part_set covered = it.get_covered_body_parts();
+        for( const bodypart_id &bp : all_body_parts ) {
+            float part_exposure = 1.0f;
+            if( !covered.test( bp.id() ) ) {
+                continue;
+            }
+            // How much exposure does this item leave on this part? (1.0 == naked)
+            if( ( !immersion && it.has_flag( flag_RAINPROOF ) ) || it.has_flag( flag_WATERPROOF ) ) {
+                part_exposure = ( 100 - it.get_coverage( bp ) ) / 100.0f;
+            }
+            // Coverage multiplies, so two layers with 50% coverage will together give 75%
+            bp_exposure[bp] *= part_exposure;
+        }
+
+    }
+}
+
 void outfit::pickup_stash( const item &newit, int &remaining_charges, bool ignore_pkt_settings )
 {
     for( item &i : worn ) {

@@ -179,8 +179,15 @@ class outfit
         std::string get_liquid_descriptor( int liquid_remaining = 0 );
 
         int get_coverage( bodypart_id bp ) const;
+        // How much of this part is visible and exposed to sunlight?
         void bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
                                 const std::vector<bodypart_id> &all_body_parts ) const;
+        /**
+         * How much of this part is exposed to wetness? This is used for weather and swimming, but not splash
+         * attacks as those need to iterate through the entire outfit item by item.
+         */
+        void bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
+                                      const std::vector<bodypart_id> &all_body_parts ) const;
         void prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
                                    const std::set<sub_bodypart_id> &sub_parts, const Character &person ) const;
         // concatenates to @overlay_ids

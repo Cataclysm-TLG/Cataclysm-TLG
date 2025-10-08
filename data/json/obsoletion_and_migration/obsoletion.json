@@ -285,7 +285,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "PACKMULE",
     "name": { "str": "Pack Mule" },
