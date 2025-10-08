@@ -2859,8 +2859,7 @@ bool holster_actor::store( Character &you, item &holster, item &obj ) const
     you.add_msg_if_player( holster_msg.empty() ? _( "You holster your %s" ) : holster_msg.translated(),
                            obj.tname(), holster.tname() );
 
-    // holsters ignore penalty effects (e.g. GRABBED) when determining number of moves to consume
-    you.as_character()->store( holster, obj, false, holster.obtain_cost( obj ),
+    you.as_character()->store( holster, obj, true, holster.insert_cost( obj ),
                                pocket_type::CONTAINER, true );
     return true;
 }
@@ -2907,75 +2906,62 @@ std::optional<int> holster_actor::use( Character *you, item &it, map *here,
                                        const tripoint_bub_ms &p ) const
 {
     if( you->is_wielding( it ) ) {
-        you->add_msg_if_player( _( "You need to unwield your %s before using it." ), it.tname() );
+        you->add_msg_if_player( _( "You can't use your %s while holding it." ), it.tname() );
         return std::nullopt;
     }
+    // Failsafe. This shouldn't be possible, but it'll dupe the item if someone somehow does this.
+    if( !you->is_worn( it ) ) {
+        you->add_msg_if_player( _( "You need to wear the %s before using it." ), it.tname() );
+        return std::nullopt;
+    }
+    std::list<item *> all_items = it.all_items_top( pocket_type::CONTAINER );
 
-    int pos = 0;
+    // Automatically ask to holster if there's nothing inside.
+    if( all_items.empty() ) {
+        std::string prompt = holster_prompt.empty() ? _( "Holster item" ) : holster_prompt.translated();
+        if( you->as_avatar() == nullptr ) {
+            return std::nullopt;
+        }
+        item_location item_loc = form_loc( *you, here, p, it );
+        if( item_loc.get_item()->has_flag( flag_NO_UNWIELD ) ) {
+            std::optional<bionic *> bio_opt = you->find_bionic_by_uid( you->get_weapon_bionic_uid() );
+            if( !bio_opt || !you->deactivate_bionic( **bio_opt ) ) {
+                you->add_msg_if_player( m_bad, _( "You can't put the %s away like that." ),
+                                        item_loc.get_item()->tname() );
+                return std::nullopt;
+            }
+        }
+        // This doesn't show a cost on the sidebar, but I have confirmed it does charge you.
+        game_menus::inv::insert_items( item_loc );
+        return 1;
+    }
+
     std::vector<std::string> opts;
-
-    std::string prompt = holster_prompt.empty() ? _( "Holster item" ) : holster_prompt.translated();
-    opts.push_back( prompt );
-    pos = -1;
-    std::list<item *> all_items = it.all_items_top(
-                                      pocket_type::CONTAINER );
     std::transform( all_items.begin(), all_items.end(), std::back_inserter( opts ),
     []( const item * elem ) {
         return string_format( _( "Draw %s" ), elem->display_name() );
     } );
 
     item *internal_item = nullptr;
-    if( opts.size() > 1 ) {
+
+    // Automatically draw if there's an item inside.
+    if( opts.size() == 1 ) {
+        internal_item = all_items.front();
+        // It's not currently possible for a holster to have multiple items, but we can leave this here for now.
+    } else {
         int ret = uilist( string_format( _( "Use %s" ), it.tname() ), opts );
         if( ret < 0 ) {
-            pos = -2;
-        } else {
-            pos += ret;
-            if( opts.size() != it.num_item_stacks() ) {
-                ret--;
-            }
-            auto iter = std::next( all_items.begin(), ret );
-            internal_item = *iter;
-        }
-    } else {
-        if( !all_items.empty() ) {
-            internal_item = all_items.front();
-        }
-    }
-
-    if( pos < -1 ) {
-        you->add_msg_if_player( _( "Never mind." ) );
-        return std::nullopt;
-    }
-
-    if( pos >= 0 ) {
-        item_location weapon =  you->get_wielded_item();
-        if( weapon && weapon.get_item()->has_flag( flag_NO_UNWIELD ) ) {
-            std::optional<bionic *> bio_opt = you->find_bionic_by_uid( you->get_weapon_bionic_uid() );
-            if( !bio_opt || !you->deactivate_bionic( **bio_opt ) ) {
-                you->add_msg_if_player( m_bad, _( "You can't unwield your %s." ), weapon.get_item()->tname() );
-                return std::nullopt;
-            }
-        }
-        // worn holsters ignore penalty effects (e.g. GRABBED) when determining number of moves to consume
-        if( you->is_worn( it ) ) {
-            you->wield_contents( it, internal_item, false, it.obtain_cost( *internal_item ) );
-        } else {
-            you->wield_contents( it, internal_item );
-        }
-
-    } else {
-        if( you->as_avatar() == nullptr ) {
+            you->add_msg_if_player( _( "Never mind." ) );
             return std::nullopt;
         }
-
-        // iuse_actor really needs to work with item_location
-        item_location item_loc = form_loc( *you, here, p, it );
-        game_menus::inv::insert_items( item_loc );
+        internal_item = *std::next( all_items.begin(), ret );
     }
-
-    return 0;
+    // Draw the chosen item.
+    item_location item_loc = form_loc( *you, here, p, *internal_item );
+    you->wield( *item_loc, item_loc.obtain_cost( *you ) );
+    return 1;
 }
+
 
 void holster_actor::info( const item &, std::vector<iteminfo> &dump ) const
 {

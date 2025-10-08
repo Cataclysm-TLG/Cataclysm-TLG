@@ -7,7 +7,7 @@
     "difficulty": 5,
     "time": "1 s",
     "qualities": [ { "id": "PULL", "level": 1 } ],
-    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 11 ] ], [ [ "lead", 11 ] ] ]
+    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 11 ] ], [ [ "lead", 3 ] ] ]
   },
   {
     "result": "shot_beanbag",
@@ -27,7 +27,7 @@
     "difficulty": 5,
     "time": "1 s",
     "qualities": [ { "id": "PULL", "level": 1 } ],
-    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 15 ] ], [ [ "lead", 10 ] ] ]
+    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 15 ] ], [ [ "lead", 2 ] ] ]
   },
   {
     "result": "shot_dragon",
@@ -50,9 +50,9 @@
     "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 8 ] ], [ [ "combatnail", 10 ] ] ]
   },
   {
+    "result": "shot_he",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "shot_he",
     "skill_used": "gun",
     "difficulty": 5,
     "time": "50 s",
@@ -68,6 +68,6 @@
     "difficulty": 5,
     "time": "1 s",
     "qualities": [ { "id": "PULL", "level": 1 } ],
-    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 17 ] ], [ [ "lead", 10 ] ] ]
+    "components": [ [ [ "shot_hull", 1 ] ], [ [ "shotgun_primer", 1 ] ], [ [ "gunpowder_shotgun", 17 ] ], [ [ "lead", 3 ] ] ]
   }
 ]

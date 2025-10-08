@@ -754,13 +754,14 @@ class item_location::impl::item_in_container : public item_location::impl
             primary_cost = ch.enchantment_cache->modify_value( enchant_vals::mod::OBTAIN_COST_MULTIPLIER,
                            primary_cost );
             int parent_obtain_cost = container.obtain_cost( ch, qty );
-            if( container->get_use( "holster" ) ) {
+            // TODO: Can't we just check the pocket and not get_use?
+            if( parent_pocket()->is_holster() ) {
                 if( ch.is_worn( *container ) ) {
-                    primary_cost = ch.item_retrieve_cost( *target(), *container, false, container_mv );
+                    primary_cost = ch.item_retrieve_cost( *target(), *container, true, container_mv );
                 } else {
                     primary_cost = ch.item_retrieve_cost( *target(), *container );
                 }
-                // for holsters, we should not include the cost of wielding the holster itself
+                // For holsters, we should not include the cost of wielding the holster itself.
                 parent_obtain_cost = 0;
             } else if( container.where() != item_location::type::container ) {
                 // Worn items don't need to be retrieved, just accessed.

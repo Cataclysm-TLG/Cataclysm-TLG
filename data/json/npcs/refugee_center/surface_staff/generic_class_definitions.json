@@ -5,7 +5,7 @@
     "//": "Initially the free mechant guards indoors stick to melee weapons, as most of these folks aren't trained to use guns.",
     "subtype": "distribution",
     "entries": [
-      { "item": "spear_knife_proper", "prob": 40 },
+      { "item": "spear_knife", "prob": 10 },
       { "item": "spear_wood", "prob": 40 },
       { "item": "spear_copper", "prob": 20 },
       { "item": "makeshift_glaive", "prob": 20 }

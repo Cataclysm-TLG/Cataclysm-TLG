@@ -5,11 +5,11 @@
     "//": "The campus guards stick to melee weapons, as guns are banned on campus.",
     "subtype": "distribution",
     "entries": [
-      { "item": "spear_knife_proper", "prob": 20 },
+      { "item": "spear_knife", "prob": 10 },
       { "item": "bat", "prob": 20 },
       { "item": "cudgel", "prob": 20 },
       { "item": "shortbow", "prob": 20 },
-      { "item": "spear_steel", "prob": 20 },
+      { "item": "spear_steel", "prob": 5 },
       { "item": "spear_wood", "prob": 20 },
       { "item": "makeshift_glaive", "prob": 20 }
     ]

@@ -136,7 +136,8 @@
       [ "crowbar", 25 ],
       [ "machete", 25 ],
       [ "ax", 25 ],
-      [ "spear_knife", 30 ]
+      [ "spear_wood", 10 ],
+      [ "spear_knife", 5 ]
     ]
   },
   {

@@ -140,30 +140,6 @@
     "ablative_info": { "order": 600, "show_type": false }
   },
   {
-    "id": "mutagenic_stab",
-    "type": "damage_type",
-    "physical": true,
-    "edged": true,
-    "melee_only": true,
-    "magic_color": "light_green",
-    "name": "mutagenic stab",
-    "skill": "stabbing",
-    "derived_from": [ "stab", 1 ],
-    "immune_flags": { "character": [ "STAB_IMMUNE" ] },
-    "ondamage_eocs": [ "EOC_random_mutate" ]
-  },
-  {
-    "id": "mutagenic_stab",
-    "type": "damage_info_order",
-    "info_display": "none",
-    "verb": "stabbing",
-    "bionic_info": { "order": 601, "show_type": true },
-    "protection_info": { "order": 701, "show_type": false },
-    "pet_prot_info": { "order": 701, "show_type": false },
-    "melee_combat_info": { "order": 601, "show_type": false },
-    "ablative_info": { "order": 601, "show_type": false }
-  },
-  {
     "//": "e.g. fire, plasma",
     "id": "heat",
     "type": "damage_type",

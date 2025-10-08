@@ -1831,30 +1831,6 @@ void avatar::add_pain_msg( int val, const bodypart_id &bp ) const
     }
 }
 
-bool avatar::wield_contents( item &container, item *internal_item, bool penalties, int base_cost )
-{
-    // if index not specified and container has multiple items then ask the player to choose one
-    if( internal_item == nullptr ) {
-        std::vector<std::string> opts;
-        std::list<item *> container_contents = container.all_items_top();
-        std::transform( container_contents.begin(), container_contents.end(),
-        std::back_inserter( opts ), []( const item * elem ) {
-            return elem->display_name();
-        } );
-        if( opts.size() > 1 ) {
-            int pos = uilist( _( "Wield what?" ), opts );
-            if( pos < 0 ) {
-                return false;
-            }
-            internal_item = *std::next( container_contents.begin(), pos );
-        } else {
-            internal_item = container_contents.front();
-        }
-    }
-
-    return Character::wield_contents( container, internal_item, penalties, base_cost );
-}
-
 void avatar::try_to_sleep( const time_duration &dur )
 {
     get_comfort_at( pos_bub() ).add_try_msgs( *this );

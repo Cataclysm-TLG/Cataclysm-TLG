@@ -7,7 +7,7 @@
     "qualities": [ { "id": "PULL", "level": 1 } ],
     "components": [
       [ [ "copper", 3 ] ],
-      [ [ "lead", 5 ] ],
+      [ [ "lead", 3 ] ],
       [ [ "338lapua_casing", 1 ] ],
       [ [ "lgrifle_primer", 1 ] ],
       [ [ "gunpowder_large_rifle", 58 ] ]

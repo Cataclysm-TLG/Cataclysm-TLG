@@ -899,17 +899,6 @@
   },
   {
     "type": "mutation",
-    "id": "PACKMULE",
-    "name": { "str": "Packmule" },
-    "points": 1,
-    "description": "You pack things very efficiently!  You can retrieve things from containers 10% faster.",
-    "enchantments": [ { "values": [ { "value": "OBTAIN_COST_MULTIPLIER", "multiply": -0.1 } ] } ],
-    "starting_trait": true,
-    "valid": false,
-    "cancels": [ "DISORGANIZED" ]
-  },
-  {
-    "type": "mutation",
     "id": "STRONGBACK",
     "name": { "str": "Strong Back" },
     "points": 2,
