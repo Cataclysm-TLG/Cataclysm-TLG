@@ -3944,7 +3944,7 @@
           { "item": "pants_costume", "variant": "pants_striped" },
           { "item": "sneakers" },
           { "item": "socks" },
-          { "item": "knife_KABAR", "container-item": "gartersheath1" },
+          { "item": "knife_KABAR", "container-item": "gartersheath" },
           { "item": "polaroid_photo", "container-item": "ankle_wallet_pouch" }
         ]
       },

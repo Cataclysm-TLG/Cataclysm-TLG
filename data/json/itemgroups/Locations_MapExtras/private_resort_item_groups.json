@@ -122,7 +122,7 @@
       { "item": "dress_shoes", "prob": 80 },
       { "item": "tie_skinny", "prob": 50 },
       { "item": "dress_shirt", "prob": 95 },
-      { "item": "knife_rm42", "container-item": "gartersheath1", "prob": 1 }
+      { "item": "knife_rm42", "container-item": "gartersheath", "prob": 1 }
     ]
   },
   {
@@ -137,7 +137,7 @@
       },
       { "group": "private_resort_maid_dress", "prob": 100 },
       { "item": "maid_hat", "prob": 66 },
-      { "item": "knife_rm42", "container-item": "gartersheath1", "prob": 15 }
+      { "item": "knife_rm42", "container-item": "gartersheath", "prob": 1 }
     ]
   },
   {

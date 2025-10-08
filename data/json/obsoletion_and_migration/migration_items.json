@@ -2737,5 +2737,25 @@
     "id": "leather_stone_pouch",
     "type": "MIGRATION",
     "replace": "grenade_pouch"
+  },
+  {
+    "id": "gartersheath1",
+    "type": "MIGRATION",
+    "replace": "gartersheath"
+  },
+  {
+    "id": "gartersheath2",
+    "type": "MIGRATION",
+    "replace": "gartersheath"
+  },
+  {
+    "id": "nomad_rig",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "nomad_rig_on",
+    "type": "MIGRATION",
+    "replace": "chestrig"
   }
 ]

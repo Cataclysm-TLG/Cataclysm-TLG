@@ -15,7 +15,7 @@
     "material_thickness": 1,
     "pocket_data": [
       {
-        "moves": 30,
+        "moves": 75,
         "max_contains_volume": "3250 ml",
         "max_contains_weight": "5 kg",
         "max_item_length": "100 cm",
@@ -48,7 +48,7 @@
         "max_contains_volume": "3 L",
         "max_contains_weight": "4 kg",
         "max_item_length": "130 cm",
-        "moves": 30,
+        "moves": 100,
         "holster": true,
         "flag_restriction": [ "SHEATH_SWORD" ],
         "volume_encumber_modifier": 0.25
@@ -58,7 +58,7 @@
         "max_contains_volume": "2000 ml",
         "max_contains_weight": "1750 g",
         "max_item_length": "70 cm",
-        "moves": 60,
+        "moves": 75,
         "description": "Clipped directly to side of the belt.",
         "flag_restriction": [ "BELT_CLIP" ],
         "transparent": true
@@ -68,7 +68,7 @@
         "max_contains_volume": "2000 ml",
         "max_contains_weight": "1750 g",
         "max_item_length": "70 cm",
-        "moves": 60,
+        "moves": 75,
         "description": "Clipped directly to side of the belt.",
         "flag_restriction": [ "BELT_CLIP" ],
         "transparent": true
@@ -78,7 +78,7 @@
         "max_contains_volume": "2000 ml",
         "max_contains_weight": "1750 g",
         "max_item_length": "70 cm",
-        "moves": 60,
+        "moves": 75,
         "description": "Clipped directly to side of the belt.",
         "flag_restriction": [ "BELT_CLIP" ],
         "transparent": true
@@ -128,7 +128,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -137,7 +137,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -146,7 +146,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -155,7 +155,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -164,7 +164,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -173,7 +173,7 @@
         "magazine_well": "50 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 50,
         "max_contains_volume": "100 ml",
         "max_contains_weight": "500 g",
         "max_item_length": "35 cm"
@@ -192,10 +192,10 @@
     ]
   },
   {
-    "id": "gartersheath1",
+    "id": "gartersheath",
     "type": "ARMOR",
     "name": { "str": "garter sheath" },
-    "description": "A small concealed garter knife sheath worn on the thigh.  Commonly used by assassins under a skirt or dress.  Activate to sheathe/draw a weapon.",
+    "description": "A small knife sheath meant to be worn under clothing, trading speed for concealability.  Activate to sheathe/draw a weapon.",
     "weight": "160 g",
     "volume": "500 ml",
     "price": "52 USD",
@@ -211,66 +211,19 @@
         "magazine_well": "200 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 75,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "30 cm"
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
+    "flags": [ "SKINTIGHT", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 5,
         "encumbrance": 4,
-        "volume_encumber_modifier": 0.3,
-        "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
-      }
-    ]
-  },
-  {
-    "id": "gartersheath2",
-    "type": "ARMOR",
-    "name": { "str": "garter double sheath" },
-    "description": "A small concealed garter double knife sheath worn on the thigh.  Commonly used by overly cautious assassins under a skirt or dress.  Activate to sheathe/draw a weapon.",
-    "weight": "320 g",
-    "volume": "1000 ml",
-    "price": "52 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "material": [ "nylon", "plastic" ],
-    "symbol": "[",
-    "looks_like": "sheath",
-    "color": "dark_gray",
-    "sided": true,
-    "material_thickness": 1,
-    "pocket_data": [
-      {
-        "magazine_well": "200 ml",
-        "holster": true,
-        "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "30 cm"
-      },
-      {
-        "magazine_well": "200 ml",
-        "holster": true,
-        "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "30 cm"
-      }
-    ],
-    "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
-    "armor": [
-      {
-        "covers": [ "leg_l", "leg_r" ],
-        "coverage": 10,
-        "encumbrance": 6,
         "volume_encumber_modifier": 0.3,
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
       }
@@ -297,7 +250,7 @@
         "magazine_well": "200 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 30,
+        "moves": 150,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "30 cm"
@@ -337,7 +290,7 @@
         "magazine_well": "200 ml",
         "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE" ],
-        "moves": 35,
+        "moves": 150,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "30 cm"
@@ -377,7 +330,7 @@
         "max_contains_weight": "5 kg",
         "max_item_length": "180 cm",
         "holster": true,
-        "moves": 60,
+        "moves": 200,
         "flag_restriction": [ "SHEATH_SWORD" ]
       }
     ],
@@ -407,7 +360,7 @@
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
-        "moves": 30,
+        "moves": 100,
         "flag_restriction": [ "SHEATH_SWORD" ]
       }
     ],
@@ -444,7 +397,7 @@
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
-        "moves": 30,
+        "moves": 100,
         "flag_restriction": [ "SHEATH_SWORD" ]
       }
     ],
@@ -481,7 +434,7 @@
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
-        "moves": 30,
+        "moves": 120,
         "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
       }
     ],
@@ -518,7 +471,7 @@
         "max_contains_weight": "4 kg",
         "max_item_length": "100 cm",
         "holster": true,
-        "moves": 30,
+        "moves": 120,
         "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
       }
     ],
@@ -537,7 +490,7 @@
     "id": "sheath",
     "type": "ARMOR",
     "name": { "str": "sheath", "str_pl": "sheathes" },
-    "description": "A leather sheath for holding knives and other small blades.  It is easy to use without much practice.  Activate to sheathe/draw a weapon.",
+    "description": "A leather sheath for holding knives and other small blades.  Activate to sheathe/draw a weapon.",
     "weight": "200 g",
     "volume": "500 ml",
     "price": "35 USD",
@@ -555,7 +508,7 @@
         "max_contains_volume": "750 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "70 cm",
-        "moves": 20,
+        "moves": 50,
         "flag_restriction": [ "SHEATH_KNIFE" ]
       }
     ],
@@ -574,7 +527,7 @@
     "id": "sheath_birchbark",
     "type": "ARMOR",
     "name": { "str": "birchbark sheath", "str_pl": "birchbark sheathes" },
-    "description": "A handcrafted sheath made from birch bark, for holding knives and other small blades, with a strap attached.  Activate to sheathe/draw a weapon.",
+    "description": "A handcrafted knife sheath made from birch bark with a strap attached.  Activate to sheathe/draw a weapon.",
     "weight": "250 g",
     "volume": "500 ml",
     "price": "15 USD",
@@ -592,7 +545,7 @@
         "max_contains_volume": "750 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "70 cm",
-        "moves": 25,
+        "moves": 50,
         "flag_restriction": [ "SHEATH_KNIFE" ]
       }
     ],
@@ -625,7 +578,7 @@
     "pocket_data": [
       {
         "holster": true,
-        "moves": 30,
+        "moves": 150,
         "flag_restriction": [ "SHEATH_SPEAR" ],
         "max_contains_volume": "4000 ml",
         "max_contains_weight": "7 kg",
@@ -633,7 +586,7 @@
         "volume_encumber_modifier": 0.5
       }
     ],
-    "use_action": { "type": "holster", "holster_prompt": "Holster spear", "holster_msg": "You holster your %s." },
+    "use_action": { "type": "holster", "holster_prompt": "Strap spear", "holster_msg": "You strap on your %s." },
     "flags": [ "BELTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY" ],
     "armor": [ { "encumbrance": 1, "coverage": 10, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   }

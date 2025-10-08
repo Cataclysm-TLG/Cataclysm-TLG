@@ -61,9 +61,8 @@
       { "item": "plastic_mandible_guard", "prob": 5 },
       { "item": "leg_sheath6", "prob": 20 },
       { "item": "throwing_knife", "count": [ 1, 6 ], "entry-wrapper": "leg_sheath6", "prob": 1 },
-      { "item": "punch_dagger", "container-item": "gartersheath1", "prob": 1 },
-      { "item": "gartersheath1", "prob": 25 },
-      { "item": "gartersheath2", "prob": 10 },
+      { "item": "punch_dagger", "container-item": "gartersheath", "prob": 1 },
+      { "item": "gartersheath", "prob": 25 },
       { "item": "eyepatch_leather", "prob": 20 },
       { "item": "hakama", "prob": 1 }
     ]

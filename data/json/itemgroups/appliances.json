@@ -44,7 +44,7 @@
     "items": [
       { "item": "condensor_coil", "count": [ 0, 1 ] },
       { "item": "evaporator_coil", "count": [ 0, 1 ] },
-      { "item": "compressor", "count": [ 0, 1 ] },      
+      { "item": "compressor", "count": [ 0, 1 ] },
       { "item": "sheet_metal", "count": [ 0, 2 ] },
       { "item": "steel_chunk", "count": [ 0, 1 ] },
       { "item": "plastic_chunk", "count": [ 0, 2 ] },
@@ -148,7 +148,7 @@
     "items": [
       { "item": "condensor_coil", "count": [ 0, 1 ] },
       { "item": "evaporator_coil", "count": [ 0, 1 ] },
-      { "item": "compressor", "count": [ 0, 1 ] },      
+      { "item": "compressor", "count": [ 0, 1 ] },
       { "item": "sheet_metal", "count": [ 0, 2 ] },
       { "item": "steel_chunk", "count": [ 0, 2 ] },
       { "item": "plastic_chunk", "count": [ 0, 2 ] },
@@ -164,7 +164,7 @@
     "items": [
       { "item": "condensor_coil", "count": [ 0, 1 ] },
       { "item": "evaporator_coil", "count": [ 0, 1 ] },
-      { "item": "compressor", "count": [ 0, 1 ] },         
+      { "item": "compressor", "count": [ 0, 1 ] },
       { "item": "sheet_metal", "count": [ 0, 3 ] },
       { "item": "steel_chunk", "count": [ 0, 2 ] },
       { "item": "pipe_fittings", "count": [ 0, 1 ] },
