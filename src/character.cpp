@@ -13947,11 +13947,15 @@ bodypart_id Character::most_staunchable_bp( int &max_staunch )
     return bp_id;
 }
 
-void Character::water_immersion() {
+void Character::water_immersion()
+{
     // Effects of being partially/fully underwater.
     map &here = get_map();
-    if( underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) || here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) ) {
-        if( !in_vehicle && !here.has_flag_furn( "BRIDGE", pos_bub() ) && ( !has_effect_with_flag( json_flag_LEVITATION ) && !underwater ) ) {
+    if( underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ||
+        here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ||
+        here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) ) {
+        if( !in_vehicle && !here.has_flag_furn( "BRIDGE", pos_bub() ) &&
+            ( !has_effect_with_flag( json_flag_LEVITATION ) && !underwater ) ) {
             int drench_amount = 0;
             body_part_set drenched_parts;
             if( underwater || is_prone() ) {

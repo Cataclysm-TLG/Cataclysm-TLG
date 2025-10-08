@@ -219,6 +219,9 @@ void Creature::setpos( map &here, const tripoint_bub_ms &p, bool check_gravity/*
     on_move( old_loc );
     if( check_gravity ) {
         gravity_check( &here );
+        if( !is_monster() ) { 
+            as_character()->water_immersion();
+        }
     }
 }
 
@@ -229,6 +232,9 @@ void Creature::setpos( const tripoint_abs_ms &p, bool check_gravity/* = true*/ )
     on_move( old_loc );
     if( check_gravity ) {
         gravity_check();
+        if( !is_monster() ) { 
+            as_character()->water_immersion();
+        }
     }
 }
 

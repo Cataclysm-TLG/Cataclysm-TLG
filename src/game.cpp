@@ -4607,7 +4607,14 @@ Creature *game::is_hostile_very_close( bool dangerous )
 Creature *game::is_hostile_within( int distance, bool dangerous )
 {
     for( Creature *&critter : u.get_visible_creatures( distance ) ) {
-        if( u.attitude_to( *critter ) == Creature::Attitude::HOSTILE ) {
+        bool potential_danger = false;
+        if( critter->is_monster() ) {
+            const monster *mon = critter->as_monster();
+            if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY && ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
+                potential_danger = true;
+            }
+        }
+        if( u.attitude_to( *critter ) == Creature::Attitude::HOSTILE || potential_danger ) {
             if( dangerous ) {
                 if( critter->is_ranged_attacker() ) {
                     return critter;
@@ -12553,8 +12560,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
         }
     }
 
-    if( !force && movez == -1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) && 
-      ( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos ) && !u.is_underwater() ) &&
+    if( !force && movez == -1 && !here.has_flag( ter_furn_flag::TFLAG_GOES_DOWN, pos ) &&
+        ( !here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos ) && !u.is_underwater() ) &&
         !here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR_WATER, pos ) &&
         !u.has_effect( effect_gliding ) ) {
         tripoint_bub_ms dest_phase = pos;

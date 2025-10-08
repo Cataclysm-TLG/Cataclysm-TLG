@@ -2448,7 +2448,7 @@ void outfit::bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
 }
 
 void outfit::bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
-                                const std::vector<bodypart_id> &all_body_parts ) const
+                                      const std::vector<bodypart_id> &all_body_parts ) const
 {
     for( const item &it : worn ) {
         // What body parts does this item cover?
@@ -2465,7 +2465,7 @@ void outfit::bodypart_wet_protection( bool immersion, std::map<bodypart_id, floa
             // Coverage multiplies, so two layers with 50% coverage will together give 75%
             bp_exposure[bp] *= part_exposure;
         }
-        
+
     }
 }
 

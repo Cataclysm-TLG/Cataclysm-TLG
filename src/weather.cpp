@@ -403,7 +403,8 @@ static void fill_water_collectors( int mmPerHour )
 void wet_character( Character &target, int amount )
 {
     item_location weapon = target.get_wielded_item();
-    if( amount <= 0 || ( !target.is_prone() && weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
+    if( amount <= 0 || ( !target.is_prone() && weapon &&
+                         weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
         return;
     }
 
@@ -412,7 +413,8 @@ void wet_character( Character &target, int amount )
     }
 
     body_part_set drenched_parts = target.get_drenching_body_parts( true, true, false );
-    if( target.is_prone() || target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
+    if( target.is_prone() ||
+        target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
         drenched_parts = target.get_drenching_body_parts();
     }
     // If it's raining or snowing, your feet will also get wet.
