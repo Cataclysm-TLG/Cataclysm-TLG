@@ -662,15 +662,6 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     if( !you.is_mounted() ) {
         you.burn_move_stamina( movecost );
     }
-
-    body_part_set flags;
-    if( !you.is_underwater() ) {
-        flags = you.get_drenching_body_parts( false, true, true );
-    } else {
-        flags = you.get_drenching_body_parts();
-    }
-
-    you.drench( 100, flags, false );
 }
 
 static float rate_critter( const Creature &c )

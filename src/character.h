@@ -2779,7 +2779,10 @@ class Character : public Creature, public visitable
         bodypart_id most_staunchable_bp();
         bodypart_id most_staunchable_bp( int &max );
 
-        void pause(); // '.' command; pauses & resets recoil
+        void pause(); // '.' command; pauses & resets recoil.
+        
+        /** Check if we're in a water tile and handle wetness effects.  Should be run when waiting or moving. */
+        void water_immersion();
 
         /** Check player strong enough to lift an object unaided by equipment (jacks, levers etc) */
         bool can_lift( item &obj ) const;

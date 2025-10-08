@@ -56,6 +56,7 @@ static const flag_id json_flag_RAINPROOF( "RAINPROOF" );
 static const flag_id json_flag_RAIN_PROTECT( "RAIN_PROTECT" );
 static const flag_id json_flag_SUN_GLASSES( "SUN_GLASSES" );
 static const flag_id json_flag_SUN_SHADE( "SUN_SHADE" );
+static const flag_id json_flag_WATERPROOF( "WATERPROOF" );
 
 static const itype_id itype_water( "water" );
 
@@ -392,47 +393,66 @@ static void fill_water_collectors( int mmPerHour )
  * Main routine for wet effects caused by weather.
  * Drenching the player is applied after checks against worn and held items.
  *
- * The warmth of armor is considered when determining how much drench happens per tick.
- *
  * Note that this is not the only place where drenching can happen.
  * For example, moving or swimming into water tiles will also cause drenching.
  * @see fill_water_collectors
  * @see map::decay_fields_and_scent
  * @see player::drench
  */
+
 void wet_character( Character &target, int amount )
 {
     item_location weapon = target.get_wielded_item();
-    if( amount <= 0 || target.has_trait( trait_FEATHERS ) ||
-        ( weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ||
-        ( !one_in( 50 ) && target.worn_with_flag( json_flag_RAINPROOF ) ) ) {
+    if( amount <= 0 || ( !target.is_prone() && weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
         return;
     }
-    // Coarse correction to get us back to previously intended soaking rate.
+
     if( !calendar::once_every( 6_seconds ) ) {
         return;
     }
-    std::map<bodypart_id, std::vector<const item *>> clothing_map;
-    for( const bodypart_id &bp : target.get_all_body_parts() ) {
-        clothing_map.emplace( bp, std::vector<const item *>() );
-    }
-    std::map<bodypart_id, int> warmth_bp = target.worn.warmth( target );
-    const int warmth_delay = warmth_bp[body_part_torso] * 0.8 +
-                             warmth_bp[body_part_head] * 0.2;
-    if( rng( 0, 100 - amount + warmth_delay ) > 10 ) {
-        // Warm clothing slows down (but doesn't cap) soaking
-        // TODO: Shouldn't this be derived from thickness + a material parameter?
-        return;
-    }
 
-    // Start drenching the upper half of the body
     body_part_set drenched_parts = target.get_drenching_body_parts( true, true, false );
-    // When the head is 50% saturated begin drenching the legs as well
-    if( target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
+    if( target.is_prone() || target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
         drenched_parts = target.get_drenching_body_parts();
     }
+    // If it's raining or snowing, your feet will also get wet.
+    std::vector<bodypart_id> ground_parts = target.get_ground_contact_bodyparts( false );
+    for( const bodypart_id &bp : ground_parts ) {
+        drenched_parts.set( bp.id() );
+    }
 
-    target.drench( amount, drenched_parts, false );
+    // Start by assuming full exposure, then scale down via clothing.
+    std::map<bodypart_id, float> exposure;
+    for( const bodypart_id &bp : target.get_all_body_parts() ) {
+        exposure[bp] = 1.0f;
+    }
+    target.worn.bodypart_wet_protection( false, exposure, target.get_all_body_parts() );
+
+    // Group body parts with the same drench amount for slightly fewer drench() calls.
+    std::map<int, body_part_set> wet_groups;
+    for( const bodypart_id &bp : target.get_all_body_parts() ) {
+        if( !drenched_parts.test( bp.id() ) ) {
+            continue;
+        }
+        const float exposure_factor = exposure[bp];
+        if( exposure_factor <= 0.0f ) {
+            continue;
+        }
+        int reduced_amount = static_cast<int>( amount * exposure_factor );
+        if( reduced_amount < 1 ) {
+            continue;
+        }
+
+        // Prevent tiny amounts from quickly adding up
+        if( rng( 0, amount ) < reduced_amount ) {
+            continue;
+        }
+        wet_groups[reduced_amount].set( bp.id() );
+    }
+    // Apply drench once per group
+    for( const auto &pair : wet_groups ) {
+        target.drench( pair.first, pair.second, false );
+    }
 }
 
 void weather_sound( const translation &sound_message, const std::string &sound_effect )

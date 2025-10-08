@@ -1404,7 +1404,7 @@
     "color": "light_gray",
     "sided": true,
     "material_thickness": 2,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
+    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS" ],
     "armor": [ { "encumbrance": 45, "coverage": 10, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ],
     "melee_damage": { "bash": 16 }
   },

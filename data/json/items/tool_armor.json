@@ -15,7 +15,7 @@
     "sided": true,
     "warmth": 8,
     "material_thickness": 1,
-    "flags": [ "WATER_FRIENDLY", "OUTER", "SPLINT" ],
+    "flags": [ "OUTER", "SPLINT" ],
     "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r" ] } ]
   },
   {
@@ -30,7 +30,7 @@
     "price": "250 USD",
     "price_postapoc": "50 cent",
     "material": [ "wood", "cotton" ],
-    "flags": [ "OVERSIZE", "PREFIX_XL", "WATER_FRIENDLY", "OUTER", "SPLINT" ]
+    "flags": [ "OVERSIZE", "PREFIX_XL", "OUTER", "SPLINT" ]
   },
   {
     "id": "arm_xs_splint",
@@ -43,7 +43,7 @@
     "volume": "500 ml",
     "price": "150 USD",
     "price_postapoc": "50 cent",
-    "flags": [ "UNDERSIZE", "WATER_FRIENDLY", "OUTER", "SPLINT", "PREFIX_XS" ]
+    "flags": [ "UNDERSIZE", "OUTER", "SPLINT", "PREFIX_XS" ]
   },
   {
     "id": "tourniquet_upper",
@@ -274,7 +274,7 @@
     "color": "green",
     "warmth": 10,
     "material_thickness": 3,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED" ],
     "use_action": { "type": "unpack", "group": "gobag_contents", "filthy_volume_threshold": "10 L" },
     "armor": [
       {
@@ -310,7 +310,7 @@
     "sided": true,
     "warmth": 5,
     "material_thickness": 1,
-    "flags": [ "WATER_FRIENDLY", "OUTER", "SPLINT", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "SPLINT", "ALLOWS_TAIL" ],
     "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "leg_l", "leg_r" ] } ]
   },
   {

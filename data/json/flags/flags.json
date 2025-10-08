@@ -938,13 +938,13 @@
     "id": "WATERPROOF",
     "type": "json_flag",
     "//": "Prevents the covered body-part(s) from getting wet in any circumstance.",
-    "info": "This clothing <info>won't let water through</info>.  Even if you jump into a river."
+    "info": "This clothing <info>won't let water through</info> under any circumstance."
   },
   {
     "id": "WATER_FRIENDLY",
     "type": "json_flag",
-    "//": "Prevents the item from making the body part count as unfriendly to water and thus causing negative morale from being wet.",
-    "info": "This clothing <good>performs well</good> even when <info>soaking wet</info>.  This can feel good."
+    "//": "Negates morale penalties from wetness if it's the only thing worn there.",
+    "info": "This item is <good>just as comfortable</good> when <info>soaking wet</info>."
   },
   {
     "id": "ITEM_BROKEN",
@@ -2689,5 +2689,10 @@
     "info": "This item is only a <info>shoddy replica</info>, and is <bad>far less effective</bad> than the real thing.",
     "conflicts": [ "STURDY", "DURABLE_MELEE" ],
     "item_prefix": "replica "
+  },
+  {
+    "id": "NO_DRENCH",
+    "type": "json_flag",
+    "//": "This character can't get wet."
   }
 ]

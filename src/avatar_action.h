@@ -34,7 +34,10 @@ void eat_or_use( avatar &you, item_location loc );
 // Standard movement; handles attacks, traps, &c. Returns false if auto move
 // should be canceled
 bool move( avatar &you, map &m, const tripoint_rel_ms &d );
-/** Handles swimming by the player. Called by avatar_action::move(). */
+
+/** Handles swimming by the player. Called by avatar_action::move().
+ * Wetness effects are handled in Character::water_immersion() which
+ * is not called here. */
 void swim( map &m, avatar &you, const tripoint_bub_ms &p );
 
 void autoattack( avatar &you, map &m );

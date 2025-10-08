@@ -123,6 +123,7 @@ static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
+static const json_character_flag json_flag_NO_DRENCH( "NO_DRENCH" );
 static const json_character_flag json_flag_NYCTOPHOBIA( "NYCTOPHOBIA" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
 static const json_character_flag json_flag_RAD_DETECT( "RAD_DETECT" );
@@ -146,7 +147,6 @@ static const trait_id trait_CHAOTIC( "CHAOTIC" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
 static const trait_id trait_CHEMIMBALANCE( "CHEMIMBALANCE" );
 static const trait_id trait_CHLOROMORPH( "CHLOROMORPH" );
-static const trait_id trait_DEBUG_NOTEMP( "DEBUG_NOTEMP" );
 static const trait_id trait_FRESHWATEROSMOSIS( "FRESHWATEROSMOSIS" );
 static const trait_id trait_HAS_NEMESIS( "HAS_NEMESIS" );
 static const trait_id trait_JAUNDICE( "JAUNDICE" );
@@ -1982,6 +1982,55 @@ bool Character::irradiate( float rads, bool bypass )
     return false;
 }
 
+void Character::drench( int saturation, const body_part_set &flags, bool ignore_waterproof )
+{
+    if( has_flag( json_flag_NO_DRENCH ) ) {
+        return;
+    }
+
+    // Make the body wet
+    for( const bodypart_id &bp : get_all_body_parts() ) {
+        // Different body parts have different size, they can only store so much water
+        int bp_wetness_max = 0;
+        if( flags.test( bp.id() ) ) {
+            bp_wetness_max = get_part_drench_capacity( bp );
+        }
+        const int curr_wetness = get_part_wetness( bp );
+        if( bp_wetness_max == 0 || curr_wetness >= bp_wetness_max ) {
+            continue;
+        }
+
+        // Different sources will only make the bodypart wet to a limit
+        int source_wet_max = saturation * bp_wetness_max / 100;
+        int wetness_increment = ignore_waterproof ? 100 : bp->drench_increment;
+        // Respect maximums
+        const int wetness_max = std::min( source_wet_max, bp_wetness_max );
+
+        if( curr_wetness < wetness_max ) {
+            set_part_wetness( bp, std::min( wetness_max, curr_wetness + wetness_increment * 100 ) );
+        }
+    }
+    const int torso_wetness = get_part_wetness( bodypart_id( "torso" ) );
+    if( torso_wetness >= get_part_drench_capacity( bodypart_id( "torso" ) ) / 2.0 &&
+        has_effect( effect_masked_scent ) &&
+        !maybe_get_value( "waterproof_scent" ) ) {
+        add_msg_if_player( m_info, _( "The water washes away the scent." ) );
+        restore_scent();
+    }
+
+    if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) > 0 ) {
+        add_msg_if_player( m_bad, _( "You feel the water burning your skin." ) );
+    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 &&
+               one_in( 300 ) ) {
+        add_msg_if_player( m_good, _( "The water is making you feel better." ) );
+    }
+
+    // Remove onfire effect
+    if( saturation > 10 || x_in_y( saturation, 10 ) ) {
+        remove_effect( effect_onfire );
+    }
+}
+
 void Character::mend( int rate_multiplier )
 {
     // Wearing splints can slowly mend a broken limb back to 1 hp.
@@ -2086,62 +2135,6 @@ void Character::mend( int rate_multiplier )
             add_msg_if_player( m_good, _( "Your %s has started to mend!" ),
                                body_part_name( bp ) );
         }
-    }
-}
-
-void Character::drench( int saturation, const body_part_set &flags, bool ignore_waterproof )
-{
-    bool in_shell = has_active_mutation( trait_SHELL2 ) ||
-                    has_active_mutation( trait_SHELL3 );
-    if( saturation < 1 ) {
-        return;
-    }
-
-    // OK, water gets in your AEP suit or whatever.  It wasn't built to keep you dry.
-    if( has_trait( trait_DEBUG_NOTEMP ) || in_shell ||
-        ( !ignore_waterproof && is_waterproof( flags ) ) ) {
-        return;
-    }
-
-    // Make the body wet
-    for( const bodypart_id &bp : get_all_body_parts() ) {
-        // Different body parts have different size, they can only store so much water
-        int bp_wetness_max = 0;
-        if( flags.test( bp.id() ) ) {
-            bp_wetness_max = get_part_drench_capacity( bp );
-        }
-
-        if( bp_wetness_max == 0 ) {
-            continue;
-        }
-        // Different sources will only make the bodypart wet to a limit
-        int source_wet_max = saturation * bp_wetness_max / 100;
-        int wetness_increment = ignore_waterproof ? 100 : bp->drench_increment;
-        // Respect maximums
-        const int wetness_max = std::min( source_wet_max, bp_wetness_max );
-        const int curr_wetness = get_part_wetness( bp );
-        if( curr_wetness < wetness_max ) {
-            set_part_wetness( bp, std::min( wetness_max, curr_wetness + wetness_increment * 100 ) );
-        }
-    }
-    const int torso_wetness = get_part_wetness( bodypart_id( "torso" ) );
-    if( torso_wetness >= get_part_drench_capacity( bodypart_id( "torso" ) ) / 2.0 &&
-        has_effect( effect_masked_scent ) &&
-        !maybe_get_value( "waterproof_scent" ) ) {
-        add_msg_if_player( m_info, _( "The water washes away the scent." ) );
-        restore_scent();
-    }
-
-    if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) > 0 ) {
-        add_msg_if_player( m_bad, _( "You feel the water burning your skin." ) );
-    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 &&
-               one_in( 300 ) ) {
-        add_msg_if_player( m_good, _( "The water is making you feel better." ) );
-    }
-
-    // Remove onfire effect
-    if( saturation > 10 || x_in_y( saturation, 10 ) ) {
-        remove_effect( effect_onfire );
     }
 }
 
