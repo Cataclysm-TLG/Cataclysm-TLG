@@ -291,12 +291,12 @@
     "description": "A dense and tasty fried bread treat.",
     "price": "45 cent",
     "price_postapoc": "50 cent",
-    "material": [ "wheat", "junk" ],
-    "primary_material": "wheat",
+    "material": [ "vegetable", "junk" ],
+    "primary_material": "vegetable",
     "volume": "41 ml",
     "flags": [ "EATEN_HOT" ],
     "fun": 2,
-    "vitamins": [ [ "calcium", 4 ], [ "iron", 7 ], [ "wheat_allergen", 1 ], [ "junk_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 7 ], [ "vegetable_allergen", 1 ], [ "junk_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
