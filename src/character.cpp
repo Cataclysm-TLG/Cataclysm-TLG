@@ -2253,6 +2253,27 @@ void Character::on_dodge( Creature *source, float difficulty, float training_lev
     }
 }
 
+void Character::on_fail_dodge( Creature *source, float difficulty, float training_level )
+{
+    // Make sure we're not practicing dodge in situation where we can't dodge
+    // We can ignore dodges_left because it was already checked in get_dodge()
+    if( !can_try_dodge( true ).success() ) {
+        return;
+    }
+
+    difficulty = std::max( difficulty - 2, 0.0f );
+
+    // If training_level is set, treat that as the difficulty instead
+    if( training_level != 0.0f ) {
+        difficulty = training_level;
+    }
+
+    if( source && source->times_combatted_player <= 50 ) {
+        source->times_combatted_player++;
+        practice( skill_dodge, rng( 1, difficulty ), difficulty );
+    }
+}
+
 float Character::get_melee() const
 {
     return get_skill_level( skill_melee );

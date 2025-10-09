@@ -533,9 +533,14 @@ class Creature : public viewer
 
         /**
          * This creature just dodged an attack - possibly special/ranged attack - from source.
-         * Players should train dodge, monsters may use some special defenses.
+         * Characters should train dodge, monsters may use some special defenses.
          */
         virtual void on_dodge( Creature *source, float difficulty, float training_level = 0.0f ) = 0;
+        /**
+         * This creature just failed to dodge an attack - possibly special/ranged attack - from source.
+         * Characters should have a chance to train a small amount of dodge, monsters do nothing for now.
+         */
+        virtual void on_fail_dodge( Creature *source, float difficulty, float training_level = 0.0f ) = 0;
         /**
          * Invoked when the creature attempts to dodge, regardless of success or failure.
          */

@@ -983,6 +983,9 @@ int Creature::deal_melee_attack( Creature *source, int hitroll )
     // If attacker missed call targets on_dodge event
     if( dodge > 0.0 && hit_spread <= 0 && source != nullptr && !source->is_hallucination() ) {
         on_dodge( source, source->get_melee() );
+    } else if( !is_monster() && dodge > 0.0 && source != nullptr && !source->is_hallucination() &&
+               one_in( 4 ) ) {
+        on_fail_dodge( source, source->get_melee() );
     }
     add_msg_debug( debugmode::DF_CREATURE, "Final hitspread %d",
                    hit_spread );
@@ -1734,8 +1737,6 @@ bool Creature::dodge_check( float hit_roll, bool force_try, float )
         float attack_roll = hit_roll + rng_normal( 0, 5 );
         return dodge_ability > attack_roll;
     }
-    add_msg_if_player( m_warning,
-                       _( "You don't think you could dodge this attack, and decide to conserve stamina." ) );
 
     return false;
 }
