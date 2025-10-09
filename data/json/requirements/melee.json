@@ -51,8 +51,6 @@
         [ "makeshift_halberd", -1 ],
         [ "makeshift_glaive", -1 ],
         [ "makeshift_scythe_war", -1 ],
-        [ "battleaxe_fake", -1 ],
-        [ "battleaxe_inferior", -1 ],
         [ "street_sign", -1 ],
         [ "ax_sheets_bolted", -1 ],
         [ "hockey_stick", -1 ],
@@ -93,10 +91,6 @@
         [ "makeshift_knife", -1 ],
         [ "bone_knife", -1 ],
         [ "primitive_knife", -1 ],
-        [ "kris_fake", -1 ],
-        [ "tanto_fake", -1 ],
-        [ "tanto_inferior", -1 ],
-        [ "kirpan_cheap", -1 ],
         [ "enfield_bayonet", -1 ],
         [ "knife_butcher", -1 ],
         [ "knife_chef", -1 ],
@@ -136,8 +130,6 @@
     "tools": [
       [
         [ "sword_metal_fencing", -1 ],
-        [ "estoc_fake", -1 ],
-        [ "estoc_inferior", -1 ],
         [ "fencing_foil", -1 ],
         [ "fencing_foil_sharpened", -1 ],
         [ "shock_foil", -1 ],
@@ -147,9 +139,6 @@
         [ "fencing_sabre", -1 ],
         [ "fencing_sabre_sharpened", -1 ],
         [ "shock_sabre", -1 ],
-        [ "rapier_fake", -1 ],
-        [ "broadsword_fake", -1 ],
-        [ "broadsword_inferior", -1 ],
         [ "sharpened_pipe", -1 ]
       ]
     ]
@@ -187,19 +176,13 @@
     "//": "Any basic thing that can be used like a medium sword.",
     "tools": [
       [
-        [ "cavalry_sabre_fake", -1 ],
-        [ "jian_fake", -1 ],
-        [ "jian_inferior", -1 ],
-        [ "scimitar_fake", -1 ],
-        [ "scimitar_inferior", -1 ],
-        [ "arming_sword_fake", -1 ],
-        [ "arming_sword_inferior", -1 ],
-        [ "wakizashi_inferior", -1 ],
-        [ "wakizashi_fake", -1 ],
-        [ "broadsword_inferior", -1 ],
-        [ "broadsword_fake", -1 ],
-        [ "cutlass_fake", -1 ],
-        [ "cutlass_inferior", -1 ],
+        [ "cavalry_sabre", -1 ],
+        [ "jian", -1 ],
+        [ "scimitar", -1 ],
+        [ "arming_sword", -1 ],
+        [ "wakizashi", -1 ],
+        [ "broadsword", -1 ],
+        [ "cutlass", -1 ],
         [ "sword_wood", -1 ],
         [ "sword_nail", -1 ],
         [ "sword_crude", -1 ],
@@ -237,16 +220,12 @@
       [
         [ "sword_wood", -1 ],
         [ "bokken", -1 ],
-        [ "bokken_fake", -1 ],
-        [ "bokken_inferior", -1 ],
         [ "sword_nail", -1 ],
         [ "sword_crude", -1 ],
         [ "sword_sheets_welded", -1 ],
         [ "sword_metal", -1 ],
-        [ "longsword_inferior", -1 ],
-        [ "longsword_fake", -1 ],
-        [ "katana_inferior", -1 ],
-        [ "katana_fake", -1 ]
+        [ "longsword", -1 ],
+        [ "katana", -1 ]
       ]
     ]
   },
@@ -266,10 +245,8 @@
         [ "sword_crude_large", -1 ],
         [ "sword_sheets_welded_large", -1 ],
         [ "sword_metal_large", -1 ],
-        [ "zweihander_inferior", -1 ],
-        [ "zweihander_fake", -1 ],
-        [ "nodachi_inferior", -1 ],
-        [ "nodachi_fake", -1 ]
+        [ "zweihander", -1 ],
+        [ "nodachi", -1 ]
       ]
     ]
   },
@@ -349,12 +326,11 @@
     "//": "Any basic thing you can use as a mace.",
     "tools": [
       [
-        [ "mace_inferior", -1 ],
-        [ "mace_fake", -1 ],
-        [ "morningstar_fake", -1 ],
-        [ "morningstar_inferior", -1 ],
+        [ "mace", -1 ],
+        [ "morningstar", -1 ],
         [ "hammer", -1 ],
         [ "hammer_sledge_engineer", -1 ],
+        [ "warhammer", -1 ],
         [ "nailboard", -1 ]
       ]
     ]
@@ -416,15 +392,11 @@
     "tools": [
       [
         [ "makeshift_halberd", -1 ],
-        [ "halberd_fake", -1 ],
+        [ "halberd", -1 ],
         [ "makeshift_glaive", -1 ],
-        [ "pointed_rebar", -1 ],
-        [ "sharp_rebar", -1 ],
-        [ "naginata_fake", -1 ],
-        [ "naginata_inferior", -1 ],
-        [ "makeshift_scythe_war", -1 ],
+        [ "naginata", -1 ],
+        [ "scythe_war", -1 ],
         [ "hockey_stick", -1 ],
-        [ "lucerne_hammerfake", -1 ],
         [ "pike_pole", -1 ],
         [ "EOD_hotstick", -1 ]
       ]
@@ -460,8 +432,7 @@
         [ "spear_knife", -1 ],
         [ "spear_forked", -1 ],
         [ "pike_wood", -1 ],
-        [ "pike_fake", -1 ],
-        [ "pike_inferior", -1 ],
+        [ "pike", -1 ],
         [ "spear_stone", -1 ],
         [ "spear_stone_simple", -1 ]
       ]

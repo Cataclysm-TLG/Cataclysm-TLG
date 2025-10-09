@@ -309,17 +309,6 @@
     "melee_damage": { "bash": 5, "cut": 23 }
   },
   {
-    "id": "cavalry_sabre_fake",
-    "copy-from": "cavalry_sabre",
-    "type": "TOOL",
-    "name": { "str": "cavalry saber" },
-    "description": "A dull, cheaply-made replica of a curved sword associated with cavalry from the Early Modern period onwards.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.8, "cut": 0.077 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
-  },
-  {
     "id": "jian",
     "type": "TOOL",
     "category": "weapons",
@@ -343,33 +332,10 @@
     "melee_damage": { "bash": 5, "cut": 25 }
   },
   {
-    "id": "jian_inferior",
-    "looks_like": "jian",
-    "copy-from": "jian",
-    "type": "TOOL",
-    "name": { "str_sp": "jian" },
-    "description": "An ancient Chinese doubled-edged straight sword.  The sword is quite worn, and bent at an odd angle.",
-    "proportional": { "melee_damage": { "bash": 3.9, "cut": 0.25 }, "price_postapoc": 0.1, "price": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "replace_materials": { "steel": "budget_steel" }
-  },
-  {
-    "id": "jian_fake",
-    "looks_like": "jian",
-    "copy-from": "jian",
-    "type": "GENERIC",
-    "name": { "str_sp": "jian" },
-    "description": "A dull, cheaply-made replica of an ancient Chinese doubled-edged straight sword, with an ornate guard.",
-    "proportional": { "melee_damage": { "bash": 1.9, "cut": 0.07 }, "price_postapoc": 0.05, "price": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "replace_materials": { "steel": "aluminum" }
-  },
-  {
     "id": "scimitar",
     "type": "TOOL",
     "category": "weapons",
-    "name": { "str": "shamshir" },
+    "name": { "str": "scimitar" },
     "description": "A curved sword associated with various Middle Eastern and Central Asian countries.  Designed for slashing, and quite deadly against unarmored targets.",
     "weight": "1223 g",
     "volume": "2 L",
@@ -387,27 +353,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 5, "cut": 26 }
-  },
-  {
-    "id": "scimitar_inferior",
-    "copy-from": "scimitar",
-    "type": "TOOL",
-    "name": { "str": "shamshir" },
-    "description": "A curved sword associated with various Middle Eastern and Central Asian countries.  This one seems oddly dull and worn.",
-    "proportional": { "melee_damage": { "bash": 3.9, "cut": 0.25 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "replace_materials": { "steel": "budget_steel" }
-  },
-  {
-    "id": "scimitar_fake",
-    "copy-from": "scimitar",
-    "type": "GENERIC",
-    "name": { "str": "shamshir" },
-    "description": "A dull, cheaply-made replica of a curved sword associated with various Middle Eastern and Central Asian countries.",
-    "proportional": { "melee_damage": { "bash": 1.9, "cut": 0.07 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" }
   },
   {
     "id": "estoc",
@@ -433,29 +378,6 @@
     "melee_damage": { "bash": 11, "stab": 32 }
   },
   {
-    "id": "estoc_inferior",
-    "copy-from": "estoc",
-    "type": "GENERIC",
-    "name": { "str": "estoc" },
-    "description": "A thin thrusting sword, a sort of predecessor to the rapier.  It requires a larger baldric or scabbard compared to smaller swords.  It seems a bit too bendy.",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "good" },
-    "proportional": { "melee_damage": { "bash": 2.6, "stab": 0.25 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "replace_materials": { "steel": "budget_steel" }
-  },
-  {
-    "id": "estoc_fake",
-    "copy-from": "estoc",
-    "type": "GENERIC",
-    "name": { "str": "estoc" },
-    "description": "A dull, cheaply-made replica of a thin thrusting sword predating the rapier.  It requires a larger baldric or scabbard compared to smaller swords.",
-    "proportional": { "melee_damage": { "bash": 1.2, "stab": 0.08 }, "price": 0.05, "price_postapoc": 0.05 },
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "neutral" },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" }
-  },
-  {
     "id": "longsword",
     "type": "TOOL",
     "category": "weapons",
@@ -476,27 +398,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "LONG_SWORDS", "LONG_THRUSTING_SWORDS" ],
     "melee_damage": { "bash": 9, "cut": 31 }
-  },
-  {
-    "id": "longsword_inferior",
-    "copy-from": "longsword",
-    "type": "TOOL",
-    "name": { "str": "longsword" },
-    "description": "A classic medieval sword, in between the lighter arming sword and later two-handed swords in size.  You feel like the pommel could just snap off if you used it.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 2.4, "cut": 0.25 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "longsword_fake",
-    "copy-from": "longsword",
-    "type": "TOOL",
-    "name": { "str": "longsword" },
-    "description": "A dull, cheaply-made replica of the classic medieval longsword.  It requires a larger baldric or scabbard compared to smaller swords.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.2, "cut": 0.08 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "id": "arming_sword",
@@ -520,27 +421,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 6, "cut": 26 }
-  },
-  {
-    "id": "arming_sword_inferior",
-    "copy-from": "arming_sword",
-    "type": "TOOL",
-    "name": { "str": "arming sword" },
-    "description": "A classic medieval sword, just the right size to use one-handed.  This one doesn't seem to have been made right.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 2, "cut": 0.86 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "arming_sword_fake",
-    "copy-from": "arming_sword",
-    "type": "GENERIC",
-    "name": { "str": "arming sword" },
-    "description": "A dull, cheaply-made replica of a classic medieval sword, just the right size to use one-handed.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 2.3, "cut": 0.07 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "id": "sword_xiphos",
@@ -697,27 +577,6 @@
     "melee_damage": { "bash": 2, "stab": 14 }
   },
   {
-    "id": "tanto_inferior",
-    "copy-from": "tanto",
-    "type": "TOOL",
-    "name": { "str_sp": "tanto" },
-    "description": "Long Japanese knives like this more-modern remake were the samurai's backup weapon, before the advent of the larger wakizashi.  This one doesn't feel well-balanced.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 6.5, "stab": 0.15 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "tanto_fake",
-    "copy-from": "tanto",
-    "type": "TOOL",
-    "name": { "str_sp": "tanto" },
-    "description": "A dull, cheaply-made replica of a long Japanese knife, typically used as a samurai's backup weapon.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 3, "stab": 0.047 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
-  },
-  {
     "id": "wakizashi",
     "type": "TOOL",
     "category": "weapons",
@@ -739,27 +598,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 12 ] ],
     "weapon_category": [ "MEDIUM_SWORDS", "NINJUTSU_WEAPONS" ],
     "melee_damage": { "bash": 3, "cut": 20 }
-  },
-  {
-    "id": "wakizashi_inferior",
-    "copy-from": "wakizashi",
-    "type": "TOOL",
-    "name": { "str_sp": "wakizashi" },
-    "description": "A comparatively common Japanese short sword.  There's something not quite right about this one.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 8.5, "cut": 0.23 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "wakizashi_fake",
-    "copy-from": "wakizashi",
-    "type": "TOOL",
-    "name": { "str_sp": "wakizashi" },
-    "description": "A dull, cheap replica of the more common wakizashi.  Smaller and lighter than a katana, but still effective in combat.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 4, "cut": 0.066 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "type": "GENERIC",
@@ -801,27 +639,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -31 ] ],
     "weapon_category": [ "LONG_THRUSTING_SWORDS", "GREAT_SWORDS" ],
     "melee_damage": { "bash": 10, "cut": 31 }
-  },
-  {
-    "id": "zweihander_inferior",
-    "copy-from": "zweihander",
-    "type": "TOOL",
-    "name": { "str": "zweihänder" },
-    "description": "A huge two-handed sword from Germany.  You're not quite sure it's supposed to be this bendy.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 2.35, "cut": 0.26 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "zweihander_fake",
-    "copy-from": "zweihander",
-    "type": "GENERIC",
-    "name": { "str": "zweihänder" },
-    "description": "A dull, cheaply-made replica of a huge two-handed sword from Germany.  Even blunted, it still packs a wallop.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.3, "cut": 0.169 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "id": "karambit",
@@ -897,27 +714,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 9 ] ],
     "weapon_category": [ "GREAT_SWORDS" ],
     "melee_damage": { "bash": 6, "cut": 40 }
-  },
-  {
-    "id": "nodachi_inferior",
-    "copy-from": "nodachi",
-    "type": "GENERIC",
-    "name": { "str_sp": "nodachi" },
-    "description": "A huge, curved, two-handed sword from Japan.  It is surprisingly light for its size, but also much bendier than a sword should be.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 4.6, "cut": 0.25 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "nodachi_fake",
-    "copy-from": "nodachi",
-    "type": "GENERIC",
-    "name": { "str_sp": "nodachi" },
-    "description": "A dull, cheaply-made replica of a huge, curved, two-handed sword from Japan.  It is surprisingly light for its size.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 2.3, "cut": 0.068 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "id": "fencing_foil",
@@ -1149,27 +945,6 @@
     "melee_damage": { "bash": 6, "cut": 24 }
   },
   {
-    "id": "broadsword_inferior",
-    "copy-from": "broadsword",
-    "type": "TOOL",
-    "name": { "str": "broadsword" },
-    "description": "An Early Modern sword that saw use in the 16th, 17th, and 18th centuries.  This sword appears to be made very poorly, but it should still stand up to a few swings.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 3.3, "cut": 0.3 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "broadsword_fake",
-    "copy-from": "broadsword",
-    "type": "TOOL",
-    "name": { "str": "broadsword" },
-    "description": "A dull, cheaply-made replica of an Early Modern sword that saw use in the 16th, 17th, and 18th centuries.  Called 'broad' to contrast with the slimmer rapiers.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.66, "cut": 0.11 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
-  },
-  {
     "id": "rapier",
     "type": "TOOL",
     "category": "weapons",
@@ -1228,27 +1003,6 @@
     "melee_damage": { "bash": 5, "cut": 28 }
   },
   {
-    "id": "katana_inferior",
-    "copy-from": "katana",
-    "type": "TOOL",
-    "name": { "str_sp": "katana" },
-    "description": "A rare sword from Japan.  While it's got the right edge and weight, the pommel feels like it'll just snap off, and the blade seems pretty worn.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 3.4, "cut": 0.25 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "katana_fake",
-    "copy-from": "katana",
-    "type": "TOOL",
-    "name": { "str_sp": "katana" },
-    "description": "A dull, cheaply-made replica of a rare sword from Japan.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.8, "cut": 0.064 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
-  },
-  {
     "id": "butterfly_swords",
     "type": "TOOL",
     "symbol": "/",
@@ -1291,27 +1045,6 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
     "melee_damage": { "bash": 5, "cut": 24 }
-  },
-  {
-    "id": "cutlass_inferior",
-    "copy-from": "cutlass",
-    "type": "TOOL",
-    "name": { "str": "cutlass", "str_pl": "cutlasses" },
-    "description": "A broad saber known for its use by sailors and pirates.  This sword appears to be made very poorly, but it should still stand up to a few swings.",
-    "replace_materials": { "steel": "budget_steel" },
-    "proportional": { "melee_damage": { "bash": 3.6, "cut": 0.27 }, "price": 0.1, "price_postapoc": 0.1 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] }
-  },
-  {
-    "id": "cutlass_fake",
-    "copy-from": "cutlass",
-    "type": "TOOL",
-    "name": { "str": "cutlass", "str_pl": "cutlasses" },
-    "description": "A dull, cheaply-made replica of a broad saber known for its use by sailors and pirates.",
-    "replace_materials": { "steel": "aluminum", "leather": "nylon" },
-    "proportional": { "melee_damage": { "bash": 1.8, "cut": 0.076 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
   },
   {
     "id": "kriegsmesser",

@@ -2757,5 +2757,110 @@
     "id": "nomad_rig_on",
     "type": "MIGRATION",
     "replace": "chestrig"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "katana_inferior",
+    "replace": "katana"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "katana_fake",
+    "replace": "katana"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_inferior",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_fake",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "naginata_inferior",
+    "replace": "naginata"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "naginata_inferior",
+    "replace": "naginata"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pike_inferior",
+    "replace": "pike"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pike_fake",
+    "replace": "pike"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanto_inferior",
+    "replace": "tanto"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanto_fake",
+    "replace": "tanto"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jian_inferior",
+    "replace": "jian"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "jian_fake",
+    "replace": "jian"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar_inferior",
+    "replace": "scimitar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar_fake",
+    "replace": "scimitar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_inferior",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wakizashi_fake",
+    "replace": "wakizashi"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lucern_hammerfake",
+    "replace": "lucerne_hammer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kirpan_cheap",
+    "replace": "kirpan"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mace_fake",
+    "replace": "mace"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rapier_fake",
+    "replace": "rapier"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "battleaxe_fake",
+    "replace": "battleaxe"
   }
 ]

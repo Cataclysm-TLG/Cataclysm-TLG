@@ -209,25 +209,25 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_fancy_death_drops_rapier_fake",
-    "entries": [ { "item": "rapier_fake", "prob": 100, "damage": [ 0, 2 ] }, { "group": "default_fancy_clothes", "prob": 100 } ]
+    "entries": [ { "item": "rapier", "prob": 100, "damage": [ 0, 4 ], "custom-flags": [ "REPLICA_EQUIPMENT" ] }, { "group": "default_fancy_clothes", "prob": 100 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_fancy_death_drops_crossbow",
-    "entries": [ { "item": "rep_crossbow", "prob": 100, "damage": [ 1, 3 ] }, { "group": "default_fancy_clothes", "prob": 100 } ]
+    "entries": [ { "item": "rep_crossbow", "prob": 100, "damage": [ 0, 4 ] }, { "group": "default_fancy_clothes", "prob": 100 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_armored_death_drops_mace",
-    "entries": [ { "item": "mace_fake", "prob": 100, "damage": [ 2, 4 ] }, { "group": "default_armored_clothes", "prob": 100 } ]
+    "entries": [ { "item": "mace", "prob": 100, "damage": [ 0, 4 ], "custom-flags": [ "REPLICA_EQUIPMENT" ] }, { "group": "default_armored_clothes", "prob": 100 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "feral_armored_death_drops_battleaxe",
-    "entries": [ { "item": "battleaxe_fake", "prob": 100, "damage": [ 2, 4 ] }, { "group": "default_armored_clothes", "prob": 100 } ]
+    "entries": [ { "item": "battleaxe", "prob": 100, "damage": [ 0, 4 ], "custom-flags": [ "REPLICA_EQUIPMENT" ] }, { "group": "default_armored_clothes", "prob": 100 } ]
   },
   {
     "type": "item_group",

@@ -640,17 +640,6 @@
     "melee_damage": { "cut": 13 }
   },
   {
-    "id": "kris_fake",
-    "copy-from": "kris",
-    "type": "TOOL",
-    "name": { "str": "kris", "str_pl": "krises" },
-    "description": "A dull, cheap replica of a wavy-bladed dagger from Southeast Asia.",
-    "replace_materials": { "steel": "aluminum" },
-    "proportional": { "melee_damage": { "stab": 0.083 }, "price": 0.05, "price_postapoc": 0.05 },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] }
-  },
-  {
     "id": "kukri",
     "type": "TOOL",
     "category": "weapons",
