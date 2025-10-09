@@ -985,7 +985,7 @@ int Creature::deal_melee_attack( Creature *source, int hitroll )
         on_dodge( source, source->get_melee() );
     } else if( !is_monster() && dodge > 0.0 && source != nullptr && !source->is_hallucination() &&
                one_in( 4 ) ) {
-        on_fail_dodge( source, source->get_melee() );
+        on_fail_dodge( source, source->get_melee() - 2 );
     }
     add_msg_debug( debugmode::DF_CREATURE, "Final hitspread %d",
                    hit_spread );
