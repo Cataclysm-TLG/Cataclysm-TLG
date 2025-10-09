@@ -165,6 +165,13 @@ class outfit
         int worn_guns() const;
         int clatter_sound() const;
         bool adjust_worn( npc &guy );
+        /**
+         * How much of this part is exposed to wetness? This is used for weather and swimming, but not splash
+         * attacks as those need to iterate through the entire outfit item by item.
+         */
+        void bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
+                                      const std::vector<bodypart_id> &all_body_parts ) const;
+        // Mostly handles drying off after getting wet, so it can't be the same func as bodypart_wet_protection
         float clothing_wetness_mult( const bodypart_id &bp ) const;
         void damage_mitigate( const bodypart_id &bp, damage_unit &dam ) const;
         float damage_resist( const damage_type_id &dt, const bodypart_id &bp, bool to_self = false ) const;
@@ -182,12 +189,6 @@ class outfit
         // How much of this part is visible and exposed to sunlight?
         void bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
                                 const std::vector<bodypart_id> &all_body_parts ) const;
-        /**
-         * How much of this part is exposed to wetness? This is used for weather and swimming, but not splash
-         * attacks as those need to iterate through the entire outfit item by item.
-         */
-        void bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
-                                      const std::vector<bodypart_id> &all_body_parts ) const;
         void prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
                                    const std::set<sub_bodypart_id> &sub_parts, const Character &person ) const;
         // concatenates to @overlay_ids

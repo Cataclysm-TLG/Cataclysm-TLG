@@ -4610,7 +4610,9 @@ Creature *game::is_hostile_within( int distance, bool dangerous )
         bool potential_danger = false;
         if( critter->is_monster() ) {
             const monster *mon = critter->as_monster();
-            if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY && ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
+            if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY &&
+                ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                  mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
                 potential_danger = true;
             }
         }
