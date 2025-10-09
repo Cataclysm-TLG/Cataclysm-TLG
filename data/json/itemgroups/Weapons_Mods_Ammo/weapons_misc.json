@@ -38,9 +38,8 @@
       [ "tonfa_wood", 10 ],
       [ "shocktonfa_off", 5 ],
       [ "tanto", 7 ],
-      [ "wakizashi_inferior", 3 ],
-      [ "nodachi_inferior", 1 ],
-      [ "katana_inferior", 2 ],
+      { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
+      { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
       [ "survnote", 1 ],
       [ "karambit", 1 ]
     ]

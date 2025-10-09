@@ -1301,7 +1301,6 @@
       [ "pom_poms", 5 ],
       { "item": "cane_toy", "variant": "cane_toy_wizard", "prob": 2 },
       { "item": "cane_toy", "variant": "cane_toy_sinister", "prob": 2 },
-      [ "scythe_fake", 2 ],
       [ "scythe_toy", 2 ],
       [ "bodysuit_lycra", 5 ]
     ]

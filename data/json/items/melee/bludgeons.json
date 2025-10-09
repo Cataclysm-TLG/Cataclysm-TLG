@@ -239,34 +239,6 @@
     "melee_damage": { "bash": 19, "cut": 34 }
   },
   {
-    "id": "battleaxe_fake",
-    "copy-from": "battleaxe",
-    "type": "GENERIC",
-    "name": { "str": "battle axe" },
-    "description": "A dull, cheaply-made replica of a huge axe designed for warfare.",
-    "proportional": { "melee_damage": { "cut": 0.1 } },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "material": [ "aluminum", "wood" ],
-    "weight": "2068 g",
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "uneven" },
-    "price": "10 USD 50 cent",
-    "price_postapoc": "5 USD"
-  },
-  {
-    "id": "battleaxe_inferior",
-    "copy-from": "battleaxe",
-    "type": "TOOL",
-    "name": { "str": "battle axe" },
-    "description": "A huge axe designed for warfare.  Or it would be, but the axe heads aren't seated properly at all.",
-    "proportional": { "melee_damage": { "bash": 2, "cut": 0.25 } },
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "uneven" },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "material": [ "budget_steel", "wood" ],
-    "price": "400 USD",
-    "price_postapoc": "20 USD"
-  },
-  {
     "id": "blackjack",
     "type": "GENERIC",
     "symbol": "/",
@@ -768,33 +740,6 @@
     "melee_damage": { "bash": 33 }
   },
   {
-    "id": "mace_fake",
-    "copy-from": "mace",
-    "type": "GENERIC",
-    "name": { "str": "mace" },
-    "description": "A light, cheaply-made replica of a medieval weapon that would normally consist of a wood handle with a heavy metal head.",
-    "proportional": { "melee_damage": { "bash": 0.38 } },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "material": [ "wood", "aluminum" ],
-    "weight": "750 g",
-    "price": "100 USD",
-    "price_postapoc": "5 USD"
-  },
-  {
-    "id": "mace_inferior",
-    "copy-from": "mace",
-    "type": "GENERIC",
-    "name": { "str": "mace" },
-    "description": "A medieval weapon consisting of a wood handle with a heavy metal head.  The head feels a bit loose.",
-    "proportional": { "melee_damage": { "bash": 0.55 } },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "material": [ "budget_steel", "wood" ],
-    "weight": "1000 g",
-    "price": "100 USD",
-    "price_postapoc": "10 USD"
-  },
-  {
     "type": "GENERIC",
     "id": "staff_pipe",
     "name": { "str": "pipe staff" },
@@ -875,35 +820,6 @@
     "qualities": [ [ "HAMMER", 1 ] ],
     "category": "weapons",
     "melee_damage": { "bash": 38, "stab": 8 }
-  },
-  {
-    "id": "morningstar_fake",
-    "copy-from": "morningstar",
-    "type": "GENERIC",
-    "name": { "str": "morningstar" },
-    "description": "A light, cheaply-made replica of a medieval weapon that would normally consist of a wood handle with a heavy, spiked metal ball on the end.",
-    "proportional": { "melee_damage": { "bash": 0.35, "stab": 0.1 } },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "extend": { "flags": [ "FRAGILE_MELEE" ] },
-    "material": [ "aluminum", "wood" ],
-    "weight": "700 g",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
-    "price": "120 USD",
-    "price_postapoc": "5 USD"
-  },
-  {
-    "id": "morningstar_inferior",
-    "copy-from": "morningstar",
-    "type": "GENERIC",
-    "name": { "str": "morningstar" },
-    "description": "A medieval weapon consisting of a wood handle with a heavy, spiked metal ball on the end.  The weight feels off on this one, and the spikes are blunted.",
-    "proportional": { "melee_damage": { "bash": 0.7, "stab": 0.1 } },
-    "delete": { "flags": [ "DURABLE_MELEE" ] },
-    "material": [ "budget_steel", "wood" ],
-    "weight": "1000 g",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
-    "price": "120 USD",
-    "price_postapoc": "10 USD"
   },
   {
     "type": "GENERIC",
