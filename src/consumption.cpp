@@ -928,7 +928,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     if( !has_flag( json_flag_SAPIOVORE ) &&
         !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
         !has_flag( json_flag_PSYCHOPATH ) &&
-        !( food.has_flag( json_flag_HEMOVORE_FUN ) && has_flag( json_flag_HEMOVORE ) ) &&
+        !( food.has_flag( flag_HEMOVORE_FUN ) && has_flag( json_flag_HEMOVORE ) ) &&
         food.has_vitamin( vitamin_human_flesh_vitamin ) &&
         !food.is_medication() &&
         !has_effect( effect_hunger_near_starving ) &&
