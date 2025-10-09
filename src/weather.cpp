@@ -402,22 +402,20 @@ static void fill_water_collectors( int mmPerHour )
 
 void wet_character( Character &target, int amount )
 {
+    // This function was originally designed to run every 6 seconds, so maintian that rate.
+    if( amount <= 0 || !calendar::once_every( 6_seconds ) ) {
+        return;
+    }
     item_location weapon = target.get_wielded_item();
-    if( amount <= 0 || ( !target.is_prone() && weapon &&
-                         weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
+    if( ( !target.is_prone() && weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
         return;
     }
-
-    if( !calendar::once_every( 6_seconds ) ) {
-        return;
-    }
-
     body_part_set drenched_parts = target.get_drenching_body_parts( true, true, false );
     if( target.is_prone() ||
         target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
         drenched_parts = target.get_drenching_body_parts();
     }
-    // If it's raining or snowing, your feet will also get wet.
+    // If it's raining or snowing, our feet will also get wet.
     std::vector<bodypart_id> ground_parts = target.get_ground_contact_bodyparts( false );
     for( const bodypart_id &bp : ground_parts ) {
         drenched_parts.set( bp.id() );

@@ -2459,13 +2459,21 @@ void outfit::bodypart_wet_protection( bool immersion, std::map<bodypart_id, floa
                 continue;
             }
             // How much exposure does this item leave on this part? (1.0 == naked)
+            // If it's WATERPROOF, we don't need to check breathability. For RAINPROOF, only check if we're underwater.
             if( ( !immersion && it.has_flag( flag_RAINPROOF ) ) || it.has_flag( flag_WATERPROOF ) ) {
                 part_exposure = ( 100 - it.get_coverage( bp ) ) / 100.0f;
+            } else {
+                // If we don't have either flag, just check breathability and coverage.
+                if( !immersion ) {
+                    part_exposure = clothing_wetness_mult( bp );
+                } else {
+                    // Without flags, water will still always get in if we're immersed.
+                    part_exposure = std::min( 1.0f, ( clothing_wetness_mult( bp ) * 1.15f ) );
+                }
             }
             // Coverage multiplies, so two layers with 50% coverage will together give 75%
             bp_exposure[bp] *= part_exposure;
         }
-
     }
 }
 
