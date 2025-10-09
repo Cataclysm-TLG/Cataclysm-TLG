@@ -74,8 +74,6 @@
 
 static const anatomy_id anatomy_human_anatomy( "human_anatomy" );
 
-static const attack_vector_id vector_punch( "vector_punch" );
-
 static const bionic_id bio_cqb( "bio_cqb" );
 static const bionic_id bio_heat_absorb( "bio_heat_absorb" );
 static const bionic_id bio_shock( "bio_shock" );
