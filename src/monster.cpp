@@ -3883,6 +3883,10 @@ void monster::on_dodge( Creature *, float, float )
     }
 }
 
+void monster::on_fail_dodge( Creature *, float, float )
+{
+}
+
 void monster::on_hit( map *here, Creature *source, bodypart_id,
                       float, dealt_projectile_attack const *const proj )
 {

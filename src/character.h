@@ -871,6 +871,8 @@ class Character : public Creature, public visitable
 
         /** Called after the player has successfully dodged an attack */
         void on_dodge( Creature *source, float difficulty, float training_level = 0.0f ) override;
+        /** Called after the player has tried but failed to dodge an attack. Mostly just trains a bit. */
+        void on_fail_dodge( Creature *source, float difficulty, float training_level = 0.0f ) override;
         /** Called after the player has tryed to dodge an attack */
         void on_try_dodge() override;
 
