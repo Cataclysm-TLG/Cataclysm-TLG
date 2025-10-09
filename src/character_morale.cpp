@@ -24,14 +24,7 @@
 class item;
 struct itype;
 
-static const efftype_id effect_took_prozac( "took_prozac" );
-static const efftype_id effect_took_xanax( "took_xanax" );
-
-static const itype_id itype_foodperson_mask( "foodperson_mask" );
-static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
-
 static const morale_type morale_perm_fpmode_on( "morale_perm_fpmode_on" );
-static const morale_type morale_perm_noface( "morale_perm_noface" );
 static const morale_type morale_perm_nomad( "morale_perm_nomad" );
 
 static const trait_id trait_CENOBITE( "CENOBITE" );

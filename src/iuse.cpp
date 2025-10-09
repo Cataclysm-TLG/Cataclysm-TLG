@@ -387,7 +387,9 @@ static const trait_id trait_MARLOSS_AVOID( "MARLOSS_AVOID" );
 static const trait_id trait_MARLOSS_BLUE( "MARLOSS_BLUE" );
 static const trait_id trait_MARLOSS_YELLOW( "MARLOSS_YELLOW" );
 static const trait_id trait_M_DEPENDENT( "M_DEPENDENT" );
+static const trait_id trait_PESSIMIST( "PESSIMIST" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
+static const trait_id trait_SEASONAL_AFFECTIVE( "SEASONAL_AFFECTIVE" );
 static const trait_id trait_SPIRITUAL( "SPIRITUAL" );
 static const trait_id trait_THRESH_MARLOSS( "THRESH_MARLOSS" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
@@ -1016,11 +1018,12 @@ std::optional<int> iuse::prozac( Character *p, item *, const tripoint_bub_ms & )
 {
     if( !p->has_effect( effect_took_prozac ) ) {
         p->add_effect( effect_took_prozac, 12_hours );
-    } else {
-        p->mod_stim( 3 );
     }
-    if( one_in( 50 ) ) { // adverse reaction, same duration as prozac effect.
-        p->add_msg_if_player( m_warning, _( "You suddenly feel hollow inside." ) );
+    // Antidepressants can backfire, but are more effective in people with endogenous depression.
+    const bool sad_or_pessimist = ( p->has_trait( trait_SEASONAL_AFFECTIVE ) && ( season_of_year( calendar::turn ) == season_type::AUTUMN || season_of_year( calendar::turn ) == season_type::WINTER ) )
+      || p->has_trait( trait_PESSIMIST );
+    if( one_in( sad_or_pessimist ? 50 : 25 ) ) {
+        p->add_msg_if_player( m_warning, _( "A sense of dull ennui washes over you." ) );
         p->add_effect( effect_took_prozac_bad, p->get_effect_dur( effect_took_prozac ) );
     }
     p->add_effect( effect_took_prozac_visible, rng( 9_hours, 15_hours ) );

@@ -14009,9 +14009,10 @@ void game::animate_weather()
                 const point map_point = screen_point + offset;
                 const tripoint map_point_tripoint( map_point, u.posz() );
                 const tripoint_bub_ms mapp = tripoint_bub_ms( map_point_tripoint );
+                const bool roof_not_blocking = weather_info.static_overlay || here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR, mapp + tripoint::above );
 
                 if( m.inbounds( mapp ) &&
-                    m.is_outside( mapp ) &&
+                    m.is_outside( mapp ) && roof_not_blocking &&
                     m.get_visibility( m.get_cache_ref( u.posz() ).visibility_cache[mapp.x()][mapp.y()],
                                       m.get_visibility_variables_cache() ) == visibility_type::CLEAR &&
                     !creatures.creature_at( mapp, true ) ) {
