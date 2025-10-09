@@ -925,15 +925,20 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
                 _( "The thought of eating that makes you feel sick." ) );
     }
 
-    if( !has_flag( json_flag_SAPIOVORE ) && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
-        !has_flag( json_flag_PSYCHOPATH ) && ( !food.has_flag( flag_HEMOVORE_FUN ) ||
-                ( !has_flag( json_flag_HEMOVORE ) ) ) &&
-        food.has_vitamin( vitamin_human_flesh_vitamin ) && !food.is_medication() &&
+    if( !has_flag( json_flag_SAPIOVORE ) &&
+        !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
+        !has_flag( json_flag_PSYCHOPATH ) &&
+        !( food.has_flag( flag_HEMOVORE_FUN ) && has_flag( json_flag_HEMOVORE ) ) &&
+        food.has_vitamin( vitamin_human_flesh_vitamin ) &&
+        !food.is_medication() &&
         !has_effect( effect_hunger_near_starving ) &&
-        !has_effect( effect_hunger_starving ) && !has_effect( effect_hunger_famished ) ) {
+        !has_effect( effect_hunger_starving ) &&
+        !has_effect( effect_hunger_famished ) )
+    {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
                 _( "You cannot bring yourself to consume human flesh." ) );
     }
+
 
     if( has_trait( trait_SQUEAMISH ) && food.has_flag( flag_HEMOVORE_FUN ) &&
         !has_flag( json_flag_HEMOVORE ) && !has_trait( trait_CARNIVORE ) &&
@@ -1010,7 +1015,7 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
     const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin );
     if( ( food_is_human_flesh && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
           !has_flag( json_flag_PSYCHOPATH ) && !has_flag( json_flag_SAPIOVORE ) ) &&
-        ( !food.has_flag( flag_HEMOVORE_FUN ) || ( !has_flag( json_flag_BLOODFEEDER ) ) ) ) {
+        ( !food.has_flag( flag_HEMOVORE_FUN ) && ( !has_flag( json_flag_BLOODFEEDER ) ) ) ) {
         add_consequence( _( "The thought of eating human flesh makes you feel sick." ), CANNIBALISM );
     }
 
