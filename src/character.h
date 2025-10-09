@@ -2775,7 +2775,7 @@ class Character : public Creature, public visitable
          * 0 means climbing is not possible.
          * Return value can depend on the orientation of the terrain.
          */
-        int climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+        int climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const override;
 
         /** Which body part has the most staunchable bleeding, and what is the max improvement */
         bodypart_id most_staunchable_bp();

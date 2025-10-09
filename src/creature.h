@@ -331,7 +331,7 @@ class Creature : public viewer
         bool can_move_to_vehicle_tile( const tripoint_abs_ms &loc ) const;
         /** Moves the creature to the given location and calls the on_move() handler. */
         void move_to( const tripoint_abs_ms &loc );
-
+        virtual int climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
         /** Recreates the Creature from scratch. */
         virtual void normalize();
         /** Processes effects and bonuses and allocates move points based on speed. */

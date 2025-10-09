@@ -1262,6 +1262,12 @@ bool monster::can_climb() const
     return climbs() || flies();
 }
 
+int monster::climbing_cost( const tripoint_bub_ms &, const tripoint_bub_ms & ) const
+{
+    debugmsg( "ERROR: monster ran empty overload climbing_cost()." );
+    return 0;
+}
+
 bool monster::digging() const
 {
     return digs() || ( can_dig() && underwater );
