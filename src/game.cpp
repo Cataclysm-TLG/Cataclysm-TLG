@@ -12054,17 +12054,22 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
         if( dst_item_ok && src_item_ok ) {
             // Assume contents of both cells are legal, so we can just swap contents.
             std::list<item> temp;
-            map_stack ms = here.i_at( fpos );
-            std::move( ms.begin(), ms.end(),
-                       std::back_inserter( temp ) );
+            map_stack src_ms = here.i_at( fpos );
+            map_stack dst_ms = here.i_at( fdest );
+            
+            // Move source items to temp.
+            std::move( src_ms.begin(), src_ms.end(), std::back_inserter( temp ) );
             here.i_clear( fpos );
-            for( auto item_iter = ms.begin();
-                 item_iter != ms.end(); ++item_iter ) {
-                ms.insert( *item_iter );
+            
+            // Move destination items to source.
+            for( item &dst_item : dst_ms ) {
+                here.add_item( fpos, dst_item );
             }
             here.i_clear( fdest );
-            for( item &cur_item : temp ) {
-                ms.insert( cur_item );
+            
+            // Move source items (from temp) to destination.
+            for( item &src_item : temp ) {
+                here.add_item( fdest, src_item );
             }
         } else {
             add_msg( _( "Stuff spills from the %s!" ), furntype.name() );
