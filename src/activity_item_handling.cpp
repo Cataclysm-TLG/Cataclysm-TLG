@@ -2477,26 +2477,42 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
 
             for( const tripoint_abs_ms &dest : dest_set ) {
                 const tripoint_bub_ms dest_loc = here.get_bub( dest );
+                
+                // Check if destination is reachable from current position.
+                bool dest_reachable = false;
+                if( square_dist( src_loc, dest_loc ) <= 1 ) {
+                    // Destination is adjacent to current position.
+                    dest_reachable = true;
+                } else {
+                    // Check if there's a valid path to the destination.
+                    std::vector<tripoint_bub_ms> dest_route = here.route( 
+                        you, pathfinding_target::adjacent( dest_loc ) );
+                    dest_reachable = !dest_route.empty();
+                }
+                
+                if( !dest_reachable ) {
+                    continue; // Skip unreachable destinations.
+                }
                 units::volume free_space;
 
-                //Check destination for cargo part
+                // Check destination for cargo part.
                 if( const std::optional<vpart_reference> ovp = here.veh_at( dest_loc ).cargo() ) {
                     free_space = ovp->items().free_volume();
                 } else {
                     free_space = here.free_volume( dest_loc );
                 }
 
-                // skip tiles with inaccessible furniture, like filled charcoal kiln
+                // Skip tiles with inaccessible furniture, like filled charcoal kiln.
                 if( !here.can_put_items_ter_furn( dest_loc ) ||
                     static_cast<int>( here.i_at( dest_loc ).size() ) >= MAX_ITEM_IN_SQUARE ) {
                     continue;
                 }
 
-                // check free space at destination
+                // Check free space at destination.
                 if( free_space >= thisitem.volume() ) {
                     move_item( you, thisitem, thisitem.count(), src_loc, dest_loc, vpr_src );
 
-                    // moved item away from source so decrement
+                    // Moved item away from source so decrement.
                     if( num_processed > 0 ) {
                         --num_processed;
                     }
@@ -2508,7 +2524,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
             }
         }
 
-        //this location is sorted
+        // This location is sorted.
         stage = THINK;
         return;
     }
