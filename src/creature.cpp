@@ -345,6 +345,12 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc ) const
     return can_move_to_vehicle_tile( loc, dummy );
 }
 
+int Creature::climbing_cost( const tripoint_bub_ms &, const tripoint_bub_ms & ) const
+{    
+    debugmsg( "ERROR: creature ran empty overload climbing_cost()." );
+    return 0;
+}
+
 void Creature::move_to( const tripoint_abs_ms &loc )
 {
     const tripoint_abs_ms old_loc = pos_abs();

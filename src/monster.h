@@ -173,6 +173,8 @@ class monster : public Creature
         bool can_hear() const;     // MF_HEARS and no MF_DEAF
         bool can_submerge() const; // MF_AQUATIC or swims() or MF_NO_BREATH, and not MF_ELECTRONIC
         bool can_drown() const;    // MF_AQUATIC or swims() or MF_NO_BREATHE or flies()
+        // Unused, but that ought to change someday.
+        int climbing_cost( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const override;
         bool can_climb() const;         // climbs() or flies()
         bool digging() const override;  // digs() or can_dig() and diggable terrain
         bool can_dig() const;
