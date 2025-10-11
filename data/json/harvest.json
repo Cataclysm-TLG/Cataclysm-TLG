@@ -2222,7 +2222,6 @@
     "message": "<fungaloid_harvest>",
     "entries": [
       { "drop": "vegetable_tainted", "type": "flesh", "mass_ratio": 0.5 },
-      { "drop": "plant_sac", "type": "offal", "mass_ratio": 0.2 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.1 }
     ]
   },
@@ -2231,9 +2230,7 @@
     "type": "harvest",
     "message": "You laboriously hack and dig through the remains of the fungal mass.",
     "entries": [
-      { "drop": "vegetable", "base_num": [ 6, 10 ], "scale_num": [ 0.6, 0.8 ], "max": 20, "type": "flesh" },
       { "drop": "vegetable_tainted", "base_num": [ 16, 25 ], "scale_num": [ 0.6, 0.8 ], "max": 50, "type": "flesh" },
-      { "drop": "plant_sac", "base_num": [ 3, 6 ], "scale_num": [ 0.7, 0.9 ], "max": 10, "type": "offal" },
       { "drop": "stick_fiber", "base_num": [ 4, 8 ], "scale_num": [ 0.5, 0.7 ], "max": 10, "type": "bone" }
     ]
   },
@@ -2244,8 +2241,8 @@
     "//": "todo: add biollante item",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2254,8 +2251,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2264,8 +2261,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.4 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "stick", "type": "bone", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.0075 }
     ]
@@ -2278,8 +2275,8 @@
     "entries": [
       { "drop": "blood_acid_plant", "type": "blood", "mass_ratio": 0.1 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.5 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 }
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 }
     ]
   },
   {
@@ -2288,8 +2285,8 @@
     "message": "<triffid_harvest>",
     "entries": [
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.4 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "stick", "type": "bone", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.0075 },
       { "drop": "triffid_fungicide", "type": "offal", "mass_ratio": 0.0075 }
@@ -2302,8 +2299,8 @@
     "entries": [
       { "drop": "log", "type": "bone", "mass_ratio": 0.35 },
       { "drop": "stick_fiber", "type": "bone", "mass_ratio": 0.15 },
-      { "drop": "vegetable", "type": "flesh", "mass_ratio": 0.2 },
-      { "drop": "vegetable", "type": "offal", "mass_ratio": 0.05 },
+      { "drop": "triffid_meat", "type": "flesh", "mass_ratio": 0.2 },
+      { "drop": "triffid_meat", "type": "offal", "mass_ratio": 0.05 },
       { "drop": "venom_paralytic", "type": "offal", "mass_ratio": 0.02 }
     ]
   },

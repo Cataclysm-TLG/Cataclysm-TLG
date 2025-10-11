@@ -19,7 +19,6 @@
       { "id": "tinder", "description": " Craft: Tinder" },
       { "id": "meat_cooked", "description": " Cook: Meat, Cooked" },
       { "id": "fish_cooked", "description": " Cook: Fish, Cooked" },
-      { "id": "vegetable_cooked", "description": " Cook: vegetable, Cooked" },
       { "id": "boiled_egg", "description": " Cook: Egg, Boiled" },
       { "id": "starch", "description": " Cook: Starch" },
       { "id": "starch_from_fibrous_stuff", "description": " Cook: Cattail Starch" },

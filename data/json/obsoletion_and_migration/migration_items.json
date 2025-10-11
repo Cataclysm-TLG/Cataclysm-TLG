@@ -2391,7 +2391,12 @@
   {
     "id": "veggy",
     "type": "MIGRATION",
-    "replace": "vegetable"
+    "replace": "triffid_meat"
+  },
+    {
+    "id": "vegetable",
+    "type": "MIGRATION",
+    "replace": "triffid_meat"
   },
   {
     "id": "soup_veggy",
@@ -2436,7 +2441,17 @@
   {
     "id": "veggy_cooked",
     "type": "MIGRATION",
-    "replace": "vegetable_cooked"
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "vegetable_cooked",
+    "type": "MIGRATION",
+    "replace": "vegetable_wild_cooked"
+  },
+  {
+    "id": "plant_sac",
+    "type": "MIGRATION",
+    "replace": "vegetable_tainted"
   },
   {
     "id": "samosa_veggy",

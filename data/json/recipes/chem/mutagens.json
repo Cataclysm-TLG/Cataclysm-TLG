@@ -99,7 +99,7 @@
     "components": [
       [ [ "mutagen", 1 ] ],
       [ [ "plant_sample", 1 ] ],
-      [ [ "vegetable", 3 ], [ "biollante_bud", 1 ], [ "datura_seed", 16 ] ],
+      [ [ "triffid_meat", 3 ], [ "biollante_bud", 1 ], [ "datura_seed", 16 ] ],
       [ [ "fungicide", 200 ], [ "plant_sample", 1 ] ]
     ],
     "flags": [ "SECRET" ]
