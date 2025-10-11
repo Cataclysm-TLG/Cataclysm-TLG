@@ -4020,10 +4020,7 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
         itype &used_itype;
         explicit melee_accuracy_reader( itype &used_itype ) : used_itype( used_itype ) {};
         int get_next( const JsonValue &val ) const {
-            // Reset to false so inherited legacy to_hit s aren't flagged
-            used_itype.using_legacy_to_hit = false;
             if( val.test_int() ) {
-                used_itype.using_legacy_to_hit = true;
                 return val.get_int();
             } else if( val.test_object() ) {
                 melee_accuracy temp;
@@ -4041,7 +4038,6 @@ class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
                 if( !relative.has_member( name ) ) {
                     return false;
                 }
-                used_itype.using_legacy_to_hit = false; //inherited to-hit is false
                 member += relative.get_int( name );
                 return true;
             }
@@ -4154,7 +4150,6 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     optional( jo, def.was_loaded, "melee_damage", def.melee );
     optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
     optional( jo, def.was_loaded, "explosion", def.explosion );
-    def.using_legacy_to_hit = false; //required for inherited but undefined "to_hit" field
     optional( jo, def.was_loaded, "to_hit", def.m_to_hit, melee_accuracy_reader{ def }, -2 );
     float degrade_mult = 1.0f;
     optional( jo, false, "degradation_multiplier", degrade_mult, 1.0f );
@@ -4380,6 +4375,16 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "pocket_data", def.pockets );
 
     mod_tracker::assign_src( def, src );
+
+        // snippet_category should be loaded after def.id is determined
+    if( jo.has_array( "snippet_category" ) ) {
+        // auto-create a category that is unlikely to already be used and put the
+        // snippets in it.
+        def.snippet_category = "auto:" + def.id.str();
+        SNIPPET.add_snippets_from_json( def.snippet_category, jo.get_array( "snippet_category" ), src );
+    } else {
+        def.snippet_category = jo.get_string( "snippet_category", "" );
+    }
 
     optional( jo, def.was_loaded, "expand_snippets", def.expand_snippets, false );
 

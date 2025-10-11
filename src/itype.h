@@ -1470,8 +1470,6 @@ struct itype {
         units::money price_post = -1_cent;
 
         int m_to_hit = -2;  // To-hit bonus for melee combat; -5 to 5 is reasonable
-        // itype specifies a legacy raw int to_hit, for use with for item_new_to_hit_enforcement TEST_CASE
-        bool using_legacy_to_hit = false;
 
         unsigned light_emission = 0;   // Exactly the same as item_tags LIGHT_*, this is for lightmap.
 
