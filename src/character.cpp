@@ -2943,10 +2943,10 @@ void Character::recalc_sight_limits()
         sight_max = 2;
     } else if( has_trait( trait_PER_SLIME ) ) {
         sight_max = 8;
-    } else if( ( has_flag( json_flag_MYOPIC ) || ( in_light &&
-                 has_flag( json_flag_MYOPIC_IN_LIGHT ) ) ) &&
+    } else if( ( has_flag( json_flag_MYOPIC ) &&
                !worn_with_flag( flag_FIX_NEARSIGHT ) && !has_effect( effect_contacts ) &&
-               !has_effect( effect_transition_contacts ) ) {
+               !has_effect( effect_transition_contacts ) ) || ( ( in_light &&
+                 has_flag( json_flag_MYOPIC_IN_LIGHT ) ) ) ) {
         sight_max = 12;
     } else if( has_effect( effect_darkness ) ) {
         vision_mode_cache.set( DARKNESS );
@@ -2960,29 +2960,26 @@ void Character::recalc_sight_limits()
     if( has_nv_goggles() ) {
         vision_mode_cache.set( NV_GOGGLES );
     }
-    if( has_active_mutation( trait_NIGHTVISION3 ) ||
+    if( has_trait( trait_NIGHTVISION3 ) ||
         ( is_mounted() && mounted_creature->has_flag( mon_flag_MECH_RECON_VISION ) ) ) {
         vision_mode_cache.set( NIGHTVISION_3 );
     }
-    if( has_active_mutation( trait_ELFA_FNV ) ) {
+    if( has_trait( trait_ELFA_FNV ) ) {
         vision_mode_cache.set( FULL_ELFA_VISION );
     }
-    if( has_active_mutation( trait_CEPH_VISION ) ) {
+    if( has_trait( trait_CEPH_VISION ) ) {
         vision_mode_cache.set( CEPH_VISION );
     }
-    if( has_active_mutation( trait_ELFA_NV ) ) {
+    if( has_trait( trait_ELFA_NV ) ) {
         vision_mode_cache.set( ELFA_VISION );
     }
-    if( has_active_mutation( trait_NIGHTVISION2 ) ) {
+    if( has_trait( trait_NIGHTVISION2 ) ) {
         vision_mode_cache.set( NIGHTVISION_2 );
     }
-    if( has_active_mutation( trait_FEL_NV ) ) {
+    if( has_trait( trait_FEL_NV ) ) {
         vision_mode_cache.set( FELINE_VISION );
     }
-    if( has_active_mutation( trait_URSINE_EYE ) ) {
-        vision_mode_cache.set( URSINE_VISION );
-    }
-    if( has_active_mutation( trait_NIGHTVISION ) ) {
+    if( has_trait( trait_NIGHTVISION ) ) {
         vision_mode_cache.set( NIGHTVISION_1 );
     }
     if( has_trait( trait_BIRD_EYE ) ) {
