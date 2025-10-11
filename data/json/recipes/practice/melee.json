@@ -10,10 +10,9 @@
     "skill_used": "cutting",
     "skills_required": [ [ "melee", 1 ] ],
     "time": "1 h",
-    "practice_data": { "min_difficulty": 2, "max_difficulty": 3, "skill_limit": 4 },
-    "autolearn": [ [ "cutting", 4 ] ],
-    "book_learn": [ [ "mag_cutting", 2 ], [ "manual_cutting", 2 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "cutting", 2 ] ],
+    "book_learn": [ [ "mag_cutting", 1 ], [ "manual_cutting", 1 ] ],
     "//": "Only real and powerful cutting weapons.",
     "tools": [
       [
@@ -45,10 +44,9 @@
     "skill_used": "bashing",
     "skills_required": [ [ "melee", 1 ] ],
     "time": "1 h",
-    "practice_data": { "min_difficulty": 2, "max_difficulty": 3, "skill_limit": 4 },
-    "autolearn": [ [ "bashing", 4 ] ],
-    "book_learn": [ [ "mag_bashing", 2 ], [ "manual_bashing", 2 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
+    "autolearn": [ [ "bashing", 2 ] ],
+    "book_learn": [ [ "mag_bashing", 1 ], [ "manual_bashing", 1 ] ],
     "//": "Only large, top-heavy bashing weapons or axes.",
     "tools": [
       [
@@ -74,13 +72,10 @@
     "description": "Practice unarmed combat against a punching bag or a training dummy.",
     "skill_used": "unarmed",
     "time": "1 h",
+    "skills_required": [[ "melee", 1 ]],
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
-    "autolearn": [ [ "unarmed", 3 ] ],
+    "autolearn": [ [ "unarmed", 2 ] ],
     "book_learn": [ [ "mag_unarmed", 1 ], [ "manual_brawl", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_unarmed_familiar", "required": true },
-      { "proficiency": "prof_unarmed_pro", "time_multiplier": 2, "skill_penalty": 0 }
-    ],
     "tools": [ [ "pseudo_training_dummy_light", "pseudo_punching_bag" ] ]
   }
 ]
