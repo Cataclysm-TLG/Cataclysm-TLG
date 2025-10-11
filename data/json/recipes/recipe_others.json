@@ -2568,7 +2568,7 @@
     "difficulty": 4,
     "time": "6 h",
     "autolearn": true,
-    "using": [ [ "forging_standard", 45 ], [ "metal_casting_large", 1 ], [ "metal_casting_large_improvised", 1 ] ],
+    "using": [ [ "forging_standard", 45 ], [ "metal_casting_large", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [ [ [ "scrap_bronze", 90 ] ] ]
