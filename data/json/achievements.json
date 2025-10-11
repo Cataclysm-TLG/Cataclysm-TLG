@@ -334,8 +334,7 @@
         "is": "<=",
         "target": 0,
         "visible": "when_achievement_completed"
-      },
-      { "event_statistic": "num_gains_mutation", "is": "<=", "target": 0, "visible": "when_achievement_completed" }
+      }
     ]
   },
   {
@@ -589,7 +588,7 @@
   {
     "id": "achievement_mutation_threshold_beast",
     "type": "achievement",
-    "name": "The nature of the me",
+    "name": "A veritable hunt unending",
     "requirements": [
       {
         "event_statistic": "avatar_last_crosses_mutation_threshold",
@@ -687,13 +686,13 @@
   {
     "id": "achievement_mutation_threshold_lizard",
     "type": "achievement",
-    "name": "Yer a lizard, Harry",
+    "name": "Snake people, or \"sneople...\"",
     "requirements": [
       {
         "event_statistic": "avatar_last_crosses_mutation_threshold",
         "is": "==",
         "target": [ "mutation_category_id", "LIZARD" ],
-        "description": "crossed lizard mutation threshold",
+        "description": "crossed reptilian mutation threshold",
         "visible": "when_achievement_completed"
       }
     ]
@@ -743,7 +742,7 @@
   {
     "id": "achievement_mutation_threshold_alpha",
     "type": "achievement",
-    "name": "Thus spake zombiethustra",
+    "name": "More human than human",
     "requirements": [
       {
         "event_statistic": "avatar_last_crosses_mutation_threshold",
@@ -820,6 +819,20 @@
         "is": "==",
         "target": [ "mutation_category_id", "MOUSE" ],
         "description": "crossed mouse mutation threshold",
+        "visible": "when_achievement_completed"
+      }
+    ]
+  },
+  {
+    "id": "achievement_mutation_threshold_chiropteran",
+    "type": "achievement",
+    "name": "I am the night",
+    "requirements": [
+      {
+        "event_statistic": "avatar_last_crosses_mutation_threshold",
+        "is": "==",
+        "target": [ "mutation_category_id", "CHIROPTERAN" ],
+        "description": "crossed chiropteran mutation threshold",
         "visible": "when_achievement_completed"
       }
     ]
