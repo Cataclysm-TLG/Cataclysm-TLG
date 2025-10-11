@@ -1244,12 +1244,13 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                     obj.faults.emplace( flt );
                 }
 
-                // TODO: smarter NPC liquid handling
                 // If we're not bleeding the animal we don't care about the blood being wasted
-                if( you.is_npc() || action != butcher_type::BLEED ) {
+                if( action != butcher_type::BLEED ) {
                     drop_on_map( you, item_drop_reason::deliberate, { obj }, &here, you.pos_bub( here ) );
-                } else {
+                } else if( you.is_avatar() ) {
                     liquid_handler::handle_all_liquid( obj, 1 );
+                } else {
+                    liquid_handler::handle_npc_liquid( obj, you );
                 }
             } else if( drop->count_by_charges() ) {
                 std::vector<item> objs = create_charge_items( drop, roll, entry, corpse_item, you );

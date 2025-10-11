@@ -70,6 +70,7 @@
 #include "requirements.h"
 #include "ret_val.h"
 #include "rng.h"
+#include "skill.h"
 #include "string_formatter.h"
 #include "string_input_popup.h"
 #include "talker.h"
@@ -755,7 +756,11 @@ static item_location set_item_inventory( Character &p, item &newit )
 {
     item_location ret_val = item_location::nowhere;
     if( newit.made_of( phase_id::LIQUID ) ) {
-        liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+        if( p.is_avatar() ) {
+            liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+        } else {
+            liquid_handler::handle_npc_liquid( newit, p );
+        }
     } else {
         p.inv->assign_empty_invlet( newit, p );
         // We might not have space for the item
@@ -1027,7 +1032,11 @@ bool Character::craft_skill_gain( const item &craft, const int &num_practice_tic
             }
         }
     }
-    return practice( making.skill_used, num_practice_ticks, skill_cap, true );
+
+    SkillLevel &level = get_skill_level_object( making.skill_used );
+    const int old_level = level.level();  // Real level, not XP-based theoretical
+    practice( making.skill_used, num_practice_ticks, skill_cap, true );
+    return level.level() > old_level;
 }
 
 bool Character::craft_proficiency_gain( const item &craft, const time_duration &time )
@@ -1036,6 +1045,7 @@ bool Character::craft_proficiency_gain( const item &craft, const time_duration &
         debugmsg( "craft_proficiency_gain() called on non-craft %s", craft.tname() );
         return false;
     }
+
     const recipe &making = craft.get_making();
 
     struct learn_subject {
@@ -1047,7 +1057,8 @@ bool Character::craft_proficiency_gain( const item &craft, const time_duration &
     std::vector<Character *> all_crafters = get_crafting_helpers();
     all_crafters.push_back( this );
 
-    bool player_gained_prof = false;
+    bool this_character_gained = false;
+
     for( Character *p : all_crafters ) {
         std::vector<learn_subject> subjects;
         for( const recipe_proficiency &prof : making.proficiencies ) {
@@ -1064,30 +1075,35 @@ bool Character::craft_proficiency_gain( const item &craft, const time_duration &
         }
 
         if( subjects.empty() ) {
-            player_gained_prof = false;
             continue;
         }
+
         const time_duration learn_time = time / subjects.size();
 
-        bool gained_prof = false;
         for( const learn_subject &subject : subjects ) {
             int helper_bonus = 1;
             for( const Character *other : all_crafters ) {
                 if( p != other && other->has_proficiency( subject.proficiency ) ) {
-                    // Other characters who know the proficiency help you learn faster
                     helper_bonus = 2;
                 }
             }
-            gained_prof |= p->practice_proficiency( subject.proficiency,
-                                                    subject.time_multiplier * learn_time * helper_bonus,
-                                                    subject.max_experience );
+
+            bool gained = p->practice_proficiency(
+                              subject.proficiency,
+                              subject.time_multiplier * learn_time * helper_bonus,
+                              subject.max_experience
+                          );
+
+            if( p == this ) {
+                this_character_gained |= gained;
+            }
         }
-        // This depends on the player being the last element in the iteration
-        player_gained_prof = gained_prof;
     }
 
-    return player_gained_prof;
+    return this_character_gained;
 }
+
+
 
 float Character::get_recipe_weighted_skill_average( const recipe &making ) const
 {
@@ -1487,7 +1503,11 @@ static void spawn_items( Character &guy, std::vector<item> &results,
 
         newit.set_owner( guy.get_faction()->id );
         if( newit.made_of( phase_id::LIQUID ) ) {
-            liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+            if( guy.is_avatar() ) {
+                liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+            } else {
+                liquid_handler::handle_npc_liquid( newit, guy );
+            }
         } else if( !loc && allow_wield && !guy.has_wield_conflicts( newit ) &&
                    guy.can_wield( newit ).success() ) {
             wield_craft( guy, newit );
@@ -2976,9 +2996,12 @@ void Character::complete_disassemble( item_location &target, const recipe &dis )
                 act_item = removed.value();
             }
 
-            //NPCs are too dumb to be able to handle liquid (for now)
-            if( act_item.made_of( phase_id::LIQUID ) && !is_npc() ) {
-                liquid_handler::handle_all_liquid( act_item, PICKUP_RANGE );
+            if( act_item.made_of( phase_id::LIQUID ) ) {
+                if( is_avatar() ) {
+                    liquid_handler::handle_all_liquid( act_item, PICKUP_RANGE );
+                } else {
+                    liquid_handler::handle_npc_liquid( act_item, *this );
+                }
             } else {
                 drop_items.push_back( act_item );
             }
@@ -3045,8 +3068,12 @@ void remove_ammo( std::list<item> &dis_items, Character &p )
 
 void drop_or_handle( const item &newit, Character &p )
 {
-    if( newit.made_of( phase_id::LIQUID ) && p.is_avatar() ) { // TODO: what about NPCs?
-        liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+    if( newit.made_of( phase_id::LIQUID ) ) {
+        if( p.is_avatar() ) {
+            liquid_handler::handle_all_liquid( newit, PICKUP_RANGE );
+        } else {
+            liquid_handler::handle_npc_liquid( newit, p );
+        }
     } else {
         item tmp( newit );
         p.i_add_or_drop( tmp );

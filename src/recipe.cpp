@@ -1323,22 +1323,8 @@ std::function<bool( const item & )> recipe::get_component_filter(
     };
 }
 
-bool recipe::npc_can_craft( std::string &reason ) const
+bool recipe::npc_can_craft( std::string & ) const
 {
-    if( is_practice() ) {
-        reason = _( "Ordering NPC to practice is not implemented yet." );
-        return false;
-    }
-    if( result()->phase != phase_id::SOLID ) {
-        reason = _( "Ordering NPC to craft non-solid item is not implemented yet." );
-        return false;
-    }
-    for( const auto& [bp, _] : get_byproducts() ) {
-        if( bp->phase != phase_id::SOLID ) {
-            reason = _( "Ordering NPC to craft non-solid item is not implemented yet." );
-            return false;
-        }
-    }
     return true;
 }
 
