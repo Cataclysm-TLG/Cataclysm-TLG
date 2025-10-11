@@ -1376,14 +1376,12 @@
     "material_thickness": 3,
     "flags": [
       "RAD_PROOF",
-      "PORTAL_PROOF",
       "STURDY",
       "WATERPROOF",
       "HYGROMETER",
       "THERMOMETER",
       "RAINPROOF",
-      "WATCH",
-      "ALARMCLOCK",
+      "GROUNDING",
       "SWIM_GOGGLES",
       "SUN_GLASSES",
       "NO_REPAIR",
@@ -1391,8 +1389,7 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE"
+      "COMBAT_TOGGLEABLE"
     ],
     "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" } ] },
     "armor": [
@@ -1538,8 +1535,7 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE"
+      "COMBAT_TOGGLEABLE"
     ]
   },
   {

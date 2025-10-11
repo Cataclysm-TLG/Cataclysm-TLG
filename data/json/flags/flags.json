@@ -2035,6 +2035,7 @@
   },
   {
     "id": "UNBREAKABLE_MELEE",
+    "//": "This item cannot be damaged if used to make attacks or to block (as with a weapon).",
     "type": "json_flag"
   },
   {
