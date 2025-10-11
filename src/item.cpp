@@ -7274,8 +7274,8 @@ int item::damage_melee( const damage_type_id &dt ) const
 
     // effectiveness is reduced by 10% per damage level
     int res = 0;
-    if( type->melee.count( dt ) > 0 ) {
-        res = type->melee.at( dt );
+    if( type->melee.damage_map.count( dt ) > 0 ) {
+        res = type->melee.damage_map.at( dt );
     }
 
 
@@ -7714,7 +7714,7 @@ void item::randomize_rot()
 {
     if( is_comestible() && get_comestible()->spoils > 0_turns ) {
         time_duration birthday_adjust = ( calendar::fall_of_civilization - calendar::start_of_cataclysm ) *
-                                    rng_float( 0.1, 1.2 );
+                                        rng_float( 0.1, 1.2 );
         time_point birthday = calendar::fall_of_civilization - birthday_adjust;
         set_birthday( birthday );
     } else if( is_corpse() ) {

@@ -933,8 +933,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
         !food.is_medication() &&
         !has_effect( effect_hunger_near_starving ) &&
         !has_effect( effect_hunger_starving ) &&
-        !has_effect( effect_hunger_famished ) )
-    {
+        !has_effect( effect_hunger_famished ) ) {
         return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
                 _( "You cannot bring yourself to consume human flesh." ) );
     }

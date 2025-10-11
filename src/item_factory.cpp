@@ -27,7 +27,6 @@
 #include "effect_on_condition.h"
 #include "enum_conversions.h"
 #include "enums.h"
-#include "explosion.h"
 #include "flag.h"
 #include "flat_set.h"
 #include "game_constants.h"
@@ -136,6 +135,30 @@ static DynamicDataLoader::deferred_json deferred;
 
 std::unique_ptr<Item_factory> item_controller = std::make_unique<Item_factory>();
 
+static void migrate_mag_from_pockets( itype &def )
+{
+    for( const pocket_data &pocket : def.pockets ) {
+        if( pocket.type == pocket_type::MAGAZINE_WELL ) {
+            if( def.gun ) {
+                for( const ammotype &atype : def.gun->ammo ) {
+                    def.magazine_default.emplace( atype, pocket.default_magazine );
+                }
+            }
+            if( def.magazine ) {
+                for( const ammotype &atype : def.magazine->type ) {
+                    def.magazine_default.emplace( atype, pocket.default_magazine );
+                }
+            }
+            if( def.tool ) {
+                for( const ammotype &atype : def.tool->ammo_id ) {
+                    def.magazine_default.emplace( atype, pocket.default_magazine );
+                }
+            }
+        }
+    }
+}
+
+
 /** @relates string_id */
 template<>
 const itype &string_id<itype>::obj() const
@@ -215,6 +238,26 @@ static bool is_physical( const itype &type )
 
 void Item_factory::finalize_pre( itype &obj )
 {
+    check_and_create_magazine_pockets( obj );
+    add_special_pockets( obj );
+
+    //migrate magazines
+    if( obj.magazines.empty() ) {
+        migrate_mag_from_pockets( obj );
+    }
+
+    //set default magazine capacity
+    if( obj.magazine && obj.magazine->capacity == 0 ) {
+        int largest = 0;
+        for( pocket_data &pocket : obj.pockets ) {
+            for( const ammotype &atype : obj.magazine->type ) {
+                int current = pocket.ammo_restriction[atype];
+                largest = largest < current ? current : largest;
+            }
+        }
+        obj.magazine->capacity = largest;
+    }
+
     // Add relic data by ID we defered
     if( obj.relic_data ) {
         obj.relic_data->finalize();
@@ -224,28 +267,9 @@ void Item_factory::finalize_pre( itype &obj )
         obj.item_tags.insert( flag_NO_REPAIR );
     }
 
-    finalize_damage_map( obj.melee );
-    if( !obj.melee_proportional.empty() ) {
-        finalize_damage_map( obj.melee_proportional, false, 1.f );
-        for( std::pair<const damage_type_id, float> &dt : obj.melee ) {
-            const auto iter = obj.melee_proportional.find( dt.first );
-            if( iter != obj.melee_proportional.end() ) {
-                dt.second *= iter->second;
-                // For maintaining legacy behaviour (when melee damage used ints)
-                dt.second = std::floor( dt.second );
-            }
-        }
-    }
-    if( !obj.melee_relative.empty() ) {
-        finalize_damage_map( obj.melee_relative, false, 0.f );
-        for( std::pair<const damage_type_id, float> &dt : obj.melee ) {
-            const auto iter = obj.melee_relative.find( dt.first );
-            if( iter != obj.melee_relative.end() ) {
-                dt.second += iter->second;
-                // For maintaining legacy behaviour (when melee damage used ints)
-                dt.second = std::floor( dt.second );
-            }
-        }
+    if( obj.thrown_damage.empty() ) {
+        obj.thrown_damage.add_damage( damage_bash,
+                                      obj.melee.damage_map[damage_bash] + obj.weight / 1.0_kilogram );
     }
 
     // add usage methods (with default values) based upon qualities
@@ -688,6 +712,13 @@ void Item_factory::finalize_pre( itype &obj )
 
     if( obj.drop_action.get_actor_ptr() != nullptr ) {
         obj.drop_action.get_actor_ptr()->finalize( obj.id );
+    }
+
+    if( obj.book ) {
+        if( obj.ememory_size == 0_KB ) {
+            //PDF size varies wildly depending on page:image ratio
+            obj.ememory_size = 20_KB * item::pages_in_book( obj );
+        }
     }
 
     if( obj.can_use( "MA_MANUAL" ) && obj.book && obj.book->martial_art.is_null() &&
@@ -2123,7 +2154,7 @@ void Item_factory::check_definitions() const
             }
         }
 
-        for( const std::pair<const damage_type_id, float> &dt : type->melee ) {
+        for( const std::pair<const damage_type_id, float> &dt : type->melee.damage_map ) {
             if( !dt.first.is_valid() ) {
                 msg += string_format( "Invalid melee damage type \"%s\".\n", dt.first.c_str() );
             }
@@ -3298,18 +3329,6 @@ void Item_factory::load_book( const JsonObject &jo, const std::string &src )
     }
 }
 
-void Item_factory::load_ememory_size( const JsonObject &jo, itype &def )
-{
-    if( def.book ) {
-        if( def.ememory_size == 0_KB ) {
-            //PDF size varies wildly depending on page:image ratio
-            def.ememory_size = 20_KB * item::pages_in_book( def );
-            return;
-        }
-    }
-    assign( jo, "ememory_size", def.ememory_size );
-}
-
 /**
  * Loads vitamin JSON for generic_factory
  * Format must be an array of array-pairs: [[a,b],[c,d]]
@@ -3906,12 +3925,7 @@ std::string enum_to_string<link_state>( link_state data )
     }
     cata_fatal( "Invalid link_state" );
 }
-// *INDENT-ON*
-} // namespace io
 
-namespace io
-{
-// *INDENT-OFF*
 template<>
 std::string enum_to_string<grip_val>( grip_val val )
 {
@@ -3962,8 +3976,11 @@ std::string enum_to_string<balance_val>( balance_val val )
     }
     cata_fatal( "Invalid balance val" );
 }
+// *INDENT-ON*
+} // namespace io
 
-struct acc_data {
+//a collection of int values that are summed to determine melee to_hit
+struct melee_accuracy {
     grip_val grip = grip_val::WEAPON;
     length_val length = length_val::HAND;
     surface_val surface = surface_val::ANY;
@@ -3983,16 +4000,10 @@ struct acc_data {
         return acc_offset + static_cast<int>( grip ) + static_cast<int>( length ) +
                static_cast<int>( surface ) + static_cast<int>( balance );
     }
-    void deserialize(const JsonObject& jo);
-    void load( const JsonObject &jo );
+    void deserialize( const JsonObject &jo );
 };
 
-void acc_data::deserialize( const JsonObject& jo )
-{
-    load( jo );
-}
-
-void acc_data::load( const JsonObject &jo )
+void melee_accuracy::deserialize( const JsonObject &jo )
 {
     bool was_loaded = false;
     optional( jo, was_loaded, "grip", grip, grip_val::WEAPON );
@@ -4000,31 +4011,39 @@ void acc_data::load( const JsonObject &jo )
     optional( jo, was_loaded, "surface", surface, surface_val::ANY );
     optional( jo, was_loaded, "balance", balance, balance_val::NEUTRAL );
 }
-// *INDENT-ON*
-} // namespace io
 
-static void migrate_mag_from_pockets( itype &def )
+
+//TO-DO: remove when legacy int-only JSON is removed
+class melee_accuracy_reader : public generic_typed_reader<melee_accuracy_reader>
 {
-    for( const pocket_data &pocket : def.pockets ) {
-        if( pocket.type == pocket_type::MAGAZINE_WELL ) {
-            if( def.gun ) {
-                for( const ammotype &atype : def.gun->ammo ) {
-                    def.magazine_default.emplace( atype, pocket.default_magazine );
-                }
+    public:
+        itype &used_itype;
+        explicit melee_accuracy_reader( itype &used_itype ) : used_itype( used_itype ) {};
+        int get_next( const JsonValue &val ) const {
+            if( val.test_int() ) {
+                return val.get_int();
+            } else if( val.test_object() ) {
+                melee_accuracy temp;
+                temp.deserialize( val.get_object() );
+                return temp.sum_values();
             }
-            if( def.magazine ) {
-                for( const ammotype &atype : def.magazine->type ) {
-                    def.magazine_default.emplace( atype, pocket.default_magazine );
-                }
-            }
-            if( def.tool ) {
-                for( const ammotype &atype : def.tool->ammo_id ) {
-                    def.magazine_default.emplace( atype, pocket.default_magazine );
-                }
-            }
+            val.throw_error( "melee_accuracy_reader element must be object or int" );
+            return 0;
         }
-    }
-}
+        bool do_relative( const JsonObject &jo, const std::string_view name, int &member ) const {
+            if( jo.has_object( "relative" ) ) {
+                JsonObject relative = jo.get_object( "relative" );
+                relative.allow_omitted_members();
+                // This needs to happen here, otherwise we get unvisited members
+                if( !relative.has_member( name ) ) {
+                    return false;
+                }
+                member += relative.get_int( name );
+                return true;
+            }
+            return false;
+        }
+};
 
 static void replace_materials( const JsonObject &jo, itype &def )
 {
@@ -4104,33 +4123,6 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "stack_max", def.stack_max );
     assign( jo, "integral_volume", def.integral_volume );
     assign( jo, "integral_longest_side", def.integral_longest_side, false, 0_mm );
-    if( jo.has_object( "melee_damage" ) ) {
-        def.melee = load_damage_map( jo.get_object( "melee_damage" ) );
-    }
-    def.melee_proportional.clear();
-    if( jo.has_object( "proportional" ) ) {
-        JsonObject jprop = jo.get_object( "proportional" );
-        jprop.allow_omitted_members();
-        if( jprop.has_object( "melee_damage" ) ) {
-            def.melee_proportional = load_damage_map( jprop.get_object( "melee_damage" ) );
-        }
-    }
-    def.melee_relative.clear();
-    if( jo.has_object( "relative" ) ) {
-        JsonObject jrel = jo.get_object( "relative" );
-        jrel.allow_omitted_members();
-        if( jrel.has_object( "melee_damage" ) ) {
-            def.melee_relative = load_damage_map( jrel.get_object( "melee_damage" ) );
-        }
-    }
-    if( jo.has_int( "to_hit" ) ) {
-        assign( jo, "to_hit", def.m_to_hit, strict );
-    } else if( jo.has_object( "to_hit" ) ) {
-        io::acc_data temp;
-        bool was_loaded = false;
-        mandatory( jo, was_loaded, "to_hit", temp );
-        def.m_to_hit = temp.sum_values();
-    }
     optional( jo, false, "variant_type", def.variant_kind, itype_variant_kind::generic );
     optional( jo, false, "variants", def.variants );
     assign( jo, "container", def.default_container );
@@ -4147,16 +4139,7 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     optional( jo, false, "fall_damage_reduction", def.fall_damage_reduction, 0 );
     assign( jo, "ascii_picture", def.picture_id );
     assign( jo, "repairs_with", def.repairs_with );
-    load_ememory_size( jo, def );
-
-    if( jo.has_member( "thrown_damage" ) ) {
-        optional( jo, false, "thrown_damage", def.thrown_damage );
-    } else {
-        // TODO: Move to finalization
-        def.thrown_damage.clear();
-        def.thrown_damage.add_damage( damage_bash,
-                                      def.melee[damage_bash] + def.weight / 1.0_kilogram );
-    }
+    assign( jo, "ememory_size", def.ememory_size );
 
     if( jo.has_member( "repairs_like" ) ) {
         jo.read( "repairs_like", def.repairs_like );
@@ -4164,6 +4147,10 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
 
     optional( jo, true, "weapon_category", def.weapon_category, auto_flags_reader<weapon_category_id> {} );
 
+    optional( jo, def.was_loaded, "melee_damage", def.melee );
+    optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
+    optional( jo, def.was_loaded, "explosion", def.explosion );
+    optional( jo, def.was_loaded, "to_hit", def.m_to_hit, melee_accuracy_reader{ def }, -2 );
     float degrade_mult = 1.0f;
     optional( jo, false, "degradation_multiplier", degrade_mult, 1.0f );
     // TODO: remove condition once degradation is ready to be applied to all items
@@ -4253,10 +4240,6 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
         def.min_skills[ sk ] = cur.get_int( 1 );
     }
 
-    if( jo.has_member( "explosion" ) ) {
-        JsonObject je = jo.get_object( "explosion" );
-        def.explosion = load_explosion_data( je );
-    }
 
     if( jo.has_member( "memory_card" ) ) {
         def.memory_card_data = cata::make_value<memory_card_info>();
@@ -4390,24 +4373,8 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     }
 
     assign( jo, "pocket_data", def.pockets );
-    check_and_create_magazine_pockets( def );
-    add_special_pockets( def );
 
     mod_tracker::assign_src( def, src );
-
-    if( def.magazines.empty() ) {
-        migrate_mag_from_pockets( def );
-    }
-    if( def.magazine && def.magazine->capacity == 0 ) {
-        int largest = 0;
-        for( pocket_data &pocket : def.pockets ) {
-            for( const ammotype &atype : def.magazine->type ) {
-                int current = pocket.ammo_restriction[atype];
-                largest = largest < current ? current : largest;
-            }
-        }
-        def.magazine->capacity = largest;
-    }
 
     // snippet_category should be loaded after def.id is determined
     if( jo.has_array( "snippet_category" ) ) {
@@ -5265,7 +5232,7 @@ item_category_id calc_category( const itype &obj )
         return item_category_bionics;
     }
 
-    bool weap = std::any_of( obj.melee.begin(), obj.melee.end(),
+    bool weap = std::any_of( obj.melee.damage_map.begin(), obj.melee.damage_map.end(),
     []( const std::pair<const damage_type_id, float> &qty ) {
         return qty.second > MELEE_STAT;
     } );

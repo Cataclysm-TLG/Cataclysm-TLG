@@ -346,7 +346,7 @@ bool Creature::can_move_to_vehicle_tile( const tripoint_abs_ms &loc ) const
 }
 
 int Creature::climbing_cost( const tripoint_bub_ms &, const tripoint_bub_ms & ) const
-{    
+{
     debugmsg( "ERROR: creature ran empty overload climbing_cost()." );
     return 0;
 }

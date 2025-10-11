@@ -1020,8 +1020,10 @@ std::optional<int> iuse::prozac( Character *p, item *, const tripoint_bub_ms & )
         p->add_effect( effect_took_prozac, 12_hours );
     }
     // Antidepressants can backfire, but are more effective in people with endogenous depression.
-    const bool sad_or_pessimist = ( p->has_trait( trait_SEASONAL_AFFECTIVE ) && ( season_of_year( calendar::turn ) == season_type::AUTUMN || season_of_year( calendar::turn ) == season_type::WINTER ) )
-      || p->has_trait( trait_PESSIMIST );
+    const bool sad_or_pessimist = ( p->has_trait( trait_SEASONAL_AFFECTIVE ) &&
+                                    ( season_of_year( calendar::turn ) == season_type::AUTUMN ||
+                                      season_of_year( calendar::turn ) == season_type::WINTER ) )
+                                  || p->has_trait( trait_PESSIMIST );
     if( one_in( sad_or_pessimist ? 50 : 25 ) ) {
         p->add_msg_if_player( m_warning, _( "A sense of dull ennui washes over you." ) );
         p->add_effect( effect_took_prozac_bad, p->get_effect_dur( effect_took_prozac ) );

@@ -12056,17 +12056,17 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
             std::list<item> temp;
             map_stack src_ms = here.i_at( fpos );
             map_stack dst_ms = here.i_at( fdest );
-            
+
             // Move source items to temp.
             std::move( src_ms.begin(), src_ms.end(), std::back_inserter( temp ) );
             here.i_clear( fpos );
-            
+
             // Move destination items to source.
             for( item &dst_item : dst_ms ) {
                 here.add_item( fpos, dst_item );
             }
             here.i_clear( fdest );
-            
+
             // Move source items (from temp) to destination.
             for( item &src_item : temp ) {
                 here.add_item( fdest, src_item );
@@ -14014,7 +14014,8 @@ void game::animate_weather()
                 const point map_point = screen_point + offset;
                 const tripoint map_point_tripoint( map_point, u.posz() );
                 const tripoint_bub_ms mapp = tripoint_bub_ms( map_point_tripoint );
-                const bool roof_not_blocking = weather_info.static_overlay || here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR, mapp + tripoint::above );
+                const bool roof_not_blocking = weather_info.static_overlay ||
+                                               here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR, mapp + tripoint::above );
 
                 if( m.inbounds( mapp ) &&
                     m.is_outside( mapp ) && roof_not_blocking &&
