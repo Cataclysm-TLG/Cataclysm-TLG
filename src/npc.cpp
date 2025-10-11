@@ -1542,7 +1542,8 @@ bool npc::wield( item &it )
         return false;
     }
     if( get_wielded_item() ) {
-        add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
+        // add_msg_if_player_sees does no internal npc name replacement
+        add_msg_if_player_sees( *this, m_info, replace_with_npc_name( _( "<npcname> wields a %s." ) ),
                                 get_wielded_item()->tname() );
     }
 
@@ -1556,8 +1557,11 @@ bool npc::wield( item_location loc, bool remove_old )
     if( !Character::wield( std::move( loc ), remove_old ) ) {
         return false;
     }
-    add_msg_if_player_sees( *this, m_info, _( "<npcname> wields a %s." ),
-                            get_wielded_item()->tname() );
+    if( get_wielded_item() ) {
+        // add_msg_if_player_sees does no internal npc name replacement
+        add_msg_if_player_sees( *this, m_info, replace_with_npc_name( _( "<npcname> wields a %s." ) ),
+                                get_wielded_item()->tname() );
+    }
 
     invalidate_range_cache();
     return true;
