@@ -475,7 +475,7 @@
     "material": [ "steel", "wood" ],
     "symbol": "/",
     "color": "light_gray",
-    "techniques": [ "WIDE", "BRUTAL" ],
+    "techniques": [ "WIDE", "SWEEP" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -22 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "POLEARM", "SHEATH_SPEAR", "REACH_ATTACK", "ALWAYS_TWOHAND", "WALKING_AID" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS" ],

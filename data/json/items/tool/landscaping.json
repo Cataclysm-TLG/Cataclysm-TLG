@@ -144,7 +144,7 @@
     "material": [ "steel", "wood" ],
     "symbol": "/",
     "color": "light_gray",
-    "techniques": [ "WIDE", "BRUTAL" ],
+    "techniques": [ "WIDE", "SWEEP" ],
     "qualities": [ [ "CUT", 1 ], [ "GRASS_CUT", 2 ], [ "BUTCHER", -22 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE" ],
     "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS" ],
