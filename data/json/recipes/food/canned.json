@@ -1040,7 +1040,6 @@
       [ [ "salt", 10 ], [ "saline", 10 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
       [
-        [ "vegetable", 2 ],
         [ "vegetable_wild", 2 ],
         [ "mushroom", 2 ],
         [ "tomato", 2 ],
@@ -1083,7 +1082,6 @@
       [ [ "salt", 60 ], [ "saline", 60 ] ],
       [ [ "jar_3l_glass_sealed", 1 ] ],
       [
-        [ "vegetable", 12 ],
         [ "vegetable_wild", 12 ],
         [ "mushroom", 12 ],
         [ "tomato", 12 ],

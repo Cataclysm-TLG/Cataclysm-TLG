@@ -1328,8 +1328,7 @@
         [ "dandelion_cooked", 1 ],
         [ "burdock_cooked", 1 ],
         [ "bamboo_cooked", 1 ],
-        [ "vegetable_wild_cooked", 1 ],
-        [ "vegetable_cooked", 1 ]
+        [ "vegetable_wild_cooked", 1 ]
       ],
       [ [ "soysauce", 1 ], [ "horseradish", 1 ], [ "salt", 1 ], [ "seasoning_salt", 1 ] ]
     ]
@@ -1357,7 +1356,6 @@
         [ "celery", 3 ],
         [ "tofu", 1 ],
         [ "vegetable_wild", 3 ],
-        [ "vegetable", 3 ],
         [ "rehydrated_vegetable", 3 ],
         [ "rehydrated_corn_kernels", 3 ],
         [ "corn_kernels", 3 ]
@@ -1370,8 +1368,7 @@
         [ "burdock_cooked", 2 ],
         [ "bamboo_cooked", 2 ],
         [ "wild_garlic", 2 ],
-        [ "vegetable_wild_cooked", 2 ],
-        [ "vegetable_cooked", 2 ]
+        [ "vegetable_wild_cooked", 2 ]
       ],
       [ [ "soysauce", 1 ], [ "horseradish", 1 ], [ "salt", 1 ], [ "seasoning_salt", 1 ] ]
     ]
@@ -1435,7 +1432,7 @@
       ],
       [ [ "cooking_oil", 1 ] ],
       [ [ "sugar_standard_half", 1, "LIST" ] ],
-      [ [ "broccoli", 2 ], [ "vegetable_wild_cooked", 2 ], [ "vegetable_cooked", 2 ] ],
+      [ [ "broccoli", 2 ], [ "vegetable_wild_cooked", 2 ] ],
       [ [ "soysauce", 1 ] ]
     ],
     "charges": 4
@@ -1486,8 +1483,7 @@
         [ "dandelion_cooked", 1 ],
         [ "burdock_cooked", 1 ],
         [ "bamboo_cooked", 1 ],
-        [ "vegetable_wild_cooked", 1 ],
-        [ "vegetable_cooked", 1 ]
+        [ "vegetable_wild_cooked", 1 ]
       ],
       [ [ "soysauce", 1 ], [ "horseradish", 1 ], [ "salt", 1 ], [ "seasoning_salt", 1 ] ]
     ]
@@ -1514,8 +1510,7 @@
         [ "dandelion_cooked", 2 ],
         [ "burdock_cooked", 2 ],
         [ "bamboo_cooked", 2 ],
-        [ "vegetable_wild_cooked", 2 ],
-        [ "vegetable_cooked", 2 ]
+        [ "vegetable_wild_cooked", 2 ]
       ],
       [ [ "soysauce", 1 ], [ "horseradish", 1 ], [ "salt", 1 ], [ "seasoning_salt", 1 ] ]
     ],
@@ -1546,7 +1541,6 @@
         [ "carrot_wild", 3 ],
         [ "celery", 3 ],
         [ "vegetable_wild", 3 ],
-        [ "vegetable", 3 ],
         [ "wild_garlic", 3 ],
         [ "rehydrated_vegetable", 3 ],
         [ "rehydrated_corn_kernels", 3 ],
@@ -1916,23 +1910,6 @@
     "//": "cats can eat raw meat, but should cook this just to be safe. 20u for meat (red meat will be undercooked, not a big deal)",
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_knife_skills" } ],
     "components": [ [ [ "meat_nofish", 2, "LIST" ], [ "fish", 2 ], [ "lobster", 2 ] ], [ [ "water", 1 ], [ "water_clean", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "vegetable_cooked",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_VEGGI",
-    "skill_used": "cooking",
-    "time": "4 m",
-    "batch_time_factors": [ 80, 4 ],
-    "autolearn": true,
-    "charges": 1,
-    "qualities": [ { "id": "COOK", "level": 1 } ],
-    "tools": [ [ [ "surface_heat", 2, "LIST" ] ] ],
-    "//": "2u to cook a vegetable weighing 100u, these clock in at 119g",
-    "proficiencies": [ { "proficiency": "prof_food_prep" } ],
-    "components": [ [ [ "vegetable", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -5911,7 +5888,6 @@
     "//": "4u for beans/vegetable, 4u for meat, 1u for tomato",
     "components": [
       [
-        [ "vegetable", 2 ],
         [ "vegetable_wild", 2 ],
         [ "vegetable_salted", 2 ],
         [ "rehydrated_vegetable", 2 ],
@@ -5958,7 +5934,6 @@
     "//": "4u for beans/vegetable, 1u for tomato",
     "components": [
       [
-        [ "vegetable", 2 ],
         [ "vegetable_wild", 2 ],
         [ "vegetable_salted", 2 ],
         [ "rehydrated_vegetable", 2 ],
@@ -6005,7 +5980,6 @@
     "//": "4u for beans/vegetable, 4u for meat, 1u for tomato, 1u for pepper, 4u for beans again",
     "components": [
       [
-        [ "vegetable", 2 ],
         [ "vegetable_wild", 2 ],
         [ "vegetable_salted", 2 ],
         [ "rehydrated_vegetable", 2 ],
@@ -6775,7 +6749,6 @@
       [ [ "bread_sandwich", 2, "LIST" ] ],
       [ [ "cheese_standard", 2, "LIST" ] ],
       [
-        [ "vegetable_cooked", 1 ],
         [ "vegetable_wild_cooked", 1 ],
         [ "vegetable_salted", 1 ],
         [ "celery", 1 ],
@@ -7356,7 +7329,7 @@
       [ [ "water_clean", 1 ] ],
       [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "vegetable", 2 ], [ "lettuce", 2 ], [ "vegetable_wild", 2 ], [ "cabbage", 2 ] ]
+      [ [ "lettuce", 2 ], [ "vegetable_wild", 2 ], [ "cabbage", 2 ] ]
     ]
   },
   {
@@ -7800,7 +7773,6 @@
       [ [ "bread_sandwich", 2, "LIST" ] ],
       [ [ "cheese_standard", 1, "LIST" ] ],
       [
-        [ "vegetable_cooked", 1 ],
         [ "vegetable_wild_cooked", 1 ],
         [ "vegetable_salted", 1 ],
         [ "celery", 1 ],
@@ -7858,7 +7830,6 @@
     "components": [
       [ [ "bread_sandwich", 2, "LIST" ] ],
       [
-        [ "vegetable_cooked", 1 ],
         [ "vegetable_wild_cooked", 1 ],
         [ "vegetable_salted", 1 ],
         [ "celery", 1 ],

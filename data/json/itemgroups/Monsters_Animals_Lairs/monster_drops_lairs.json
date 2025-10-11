@@ -5,7 +5,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "vegetable", "prob": 30 },
+      { "item": "triffid_meat", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
       { "item": "vegetable_tainted", "prob": 35 },
       { "item": "royal_jelly", "prob": 8 },
@@ -22,7 +22,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "vegetable", "prob": 30 },
+      { "item": "triffid_meat", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
       { "item": "vegetable_tainted", "prob": 35 },
       { "item": "apple", "prob": 70 },
