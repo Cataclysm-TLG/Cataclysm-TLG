@@ -72,7 +72,7 @@
     "description": "Practice unarmed combat against a punching bag or a training dummy.",
     "skill_used": "unarmed",
     "time": "1 h",
-    "skills_required": [[ "melee", 1 ]],
+    "skills_required": [ [ "melee", 1 ] ],
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "unarmed", 2 ] ],
     "book_learn": [ [ "mag_unarmed", 1 ], [ "manual_brawl", 1 ] ],
