@@ -763,9 +763,7 @@
       "SPIDER",
       "URSINE",
       "TROGLOBITE"
-    ],
-    "active": true,
-    "starts_active": true
+    ]
   },
   {
     "type": "mutation",
@@ -2025,9 +2023,7 @@
     "types": [ "VISION" ],
     "prereqs": [ "NIGHTVISION" ],
     "changes_to": [ "NIGHTVISION3" ],
-    "category": [ "FISH", "BEAST", "INSECT", "RAT", "CHIMERA", "LUPINE", "MOUSE", "TROGLOBITE", "SPIDER" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "FISH", "BEAST", "INSECT", "RAT", "CHIMERA", "LUPINE", "MOUSE", "TROGLOBITE", "SPIDER" ]
   },
   {
     "type": "mutation",
@@ -2038,9 +2034,7 @@
     "prereqs": [ "NIGHTVISION2" ],
     "leads_to": [ "INFRARED" ],
     "types": [ "VISION" ],
-    "category": [ "FISH", "TROGLOBITE", "SPIDER", "INSECT" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "FISH", "TROGLOBITE", "SPIDER", "INSECT" ]
   },
   {
     "type": "mutation",
@@ -2049,7 +2043,7 @@
     "points": 1,
     "visibility": 8,
     "ugliness": 5,
-    "description": "Your eyes still bulge, yet your pupils look different somehow.  Water doesn't seem to cause any trouble at all, though.",
+    "description": "Your pupils have widened into horizontal squiggles.  Water doesn't seem to cause any trouble at all, though.",
     "types": [ "EYES" ],
     "leads_to": [ "CEPH_VISION" ],
     "flags": [ "EYE_MEMBRANE" ],
@@ -2075,9 +2069,7 @@
     "description": "Your brain has caught up with your eyes.  You can see much better in the dark, but sunlight seems much brighter now.  Activate to toggle NV-visible areas on or off.",
     "types": [ "VISION" ],
     "prereqs": [ "CEPH_EYES" ],
-    "category": [ "CEPHALOPOD" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "CEPHALOPOD" ]
   },
   {
     "type": "mutation",

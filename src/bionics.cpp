@@ -1403,6 +1403,9 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
             item tmparmor( pseudo );
             if( tmparmor.has_flag( flag_INTEGRATED ) ) {
                 remove_worn_items_with( [&]( item & armor ) {
+                    cata::event e = cata::event::make<event_type::character_takeoff_item>( getID(), pseudo );
+                    item_location loc( *this, &tmparmor );
+                    get_event_bus().send_with_talker( this, &loc, e );
                     return armor.typeId() == tmparmor.typeId();
                 } );
             }

@@ -409,7 +409,6 @@
     "name": { "str": "Blackout Lenses" },
     "description": "An additional layer of tinting for the protective lenses CBM which can make the lenses dark enough to effectively blind the user when active.",
     "included": true,
-    "toggled_pseudo_items": [ "armor_bio_eyes" ],
     "flags": [ "BIONIC_TOGGLED", "PARENT_REQUIRED" ],
     "active_flags": [ "BLIND" ]
   },
