@@ -7403,7 +7403,7 @@
     "mixed_effect": true,
     "description": "Your craving for blood borders on obsession.  You need the stuff too much to care about whether it came from a human, and your body can filter out most of the toxins in mutant blood.",
     "types": [ "DIET" ],
-    "flags": [ "BLOODFEEDER" ],
+    "flags": [ "BLOODFEEDER", "HEMOVORE" ],
     "cancels": [ "VEGAN" ],
     "prereqs": [ "HEMOVORE" ],
     "vitamins_absorb_multi": [ [ "blood", [ [ "mutant_toxin", 0.25 ] ] ], [ "flesh", [ [ "mutant_toxin", 0.75 ] ] ] ],
