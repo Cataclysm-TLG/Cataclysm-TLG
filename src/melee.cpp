@@ -670,7 +670,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     }
 
     const int skill_training_cap = t.is_monster() ? t.as_monster()->type->melee_training_cap :
-                            std::max( t.get_melee(), t.get_dodge() );
+                                   std::max( t.get_melee(), t.get_dodge() );
     // Practice melee and relevant weapon skill (if any) except when using CQB bionic, if the creature is a hallucination, if the monster is
     // flagged to not train, if it's a weakened NPC, or if the creature has already trained someone an excessive number of times.
     const bool can_train_melee = !has_active_bionic( bio_cqb ) &&
@@ -722,7 +722,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         if( !reach_attacking && can_train_melee && one_in( 4 ) ) {
             t.times_combatted_player++;
             const int skill_training_cap = t.is_monster() ? t.as_monster()->type->melee_training_cap :
-                                   std::max( t.get_melee(), t.get_dodge() );
+                                           std::max( t.get_melee(), t.get_dodge() );
             practice( skill_melee, rng( 1, 5 ), std::min( 8, skill_training_cap - 2 ) );
         }
 

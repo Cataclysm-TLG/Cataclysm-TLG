@@ -4376,7 +4376,7 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
 
     mod_tracker::assign_src( def, src );
 
-        // snippet_category should be loaded after def.id is determined
+    // snippet_category should be loaded after def.id is determined
     if( jo.has_array( "snippet_category" ) ) {
         // auto-create a category that is unlikely to already be used and put the
         // snippets in it.

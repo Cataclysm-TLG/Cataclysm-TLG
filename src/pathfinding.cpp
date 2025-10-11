@@ -297,7 +297,8 @@ int map::cost_to_pass( const tripoint_bub_ms &cur, const tripoint_bub_ms &p,
 
     // If it's a door and we can open it from the tile we're on, cool.
     if( allow_open_doors && ( terrain.open || furniture.open ) &&
-        ( ( !terrain.has_flag( ter_furn_flag::TFLAG_LOCKED ) && !terrain.has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE ) &&
+        ( ( !terrain.has_flag( ter_furn_flag::TFLAG_LOCKED ) &&
+            !terrain.has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE ) &&
             !furniture.has_flag( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE ) ) ||
           !is_outside( cur ) ) ) {
         // Only try to open INSIDE doors from the inside

@@ -2477,7 +2477,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
 
             for( const tripoint_abs_ms &dest : dest_set ) {
                 const tripoint_bub_ms dest_loc = here.get_bub( dest );
-                
+
                 // Check if destination is reachable from current position.
                 bool dest_reachable = false;
                 if( square_dist( src_loc, dest_loc ) <= 1 ) {
@@ -2485,11 +2485,11 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
                     dest_reachable = true;
                 } else {
                     // Check if there's a valid path to the destination.
-                    std::vector<tripoint_bub_ms> dest_route = here.route( 
-                        you, pathfinding_target::adjacent( dest_loc ) );
+                    std::vector<tripoint_bub_ms> dest_route = here.route(
+                                you, pathfinding_target::adjacent( dest_loc ) );
                     dest_reachable = !dest_route.empty();
                 }
-                
+
                 if( !dest_reachable ) {
                     continue; // Skip unreachable destinations.
                 }
