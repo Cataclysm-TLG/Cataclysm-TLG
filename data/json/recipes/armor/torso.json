@@ -2047,7 +2047,8 @@
     "using": [ [ "tailoring_cotton", 8 ] ]
   },
   {
-    "result": "maid_dress_short",
+    "result": "dress_costume_skimpy",
+    "variant": "maid_dress",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
