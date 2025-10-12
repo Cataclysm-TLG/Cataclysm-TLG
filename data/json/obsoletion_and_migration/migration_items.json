@@ -2393,7 +2393,7 @@
     "type": "MIGRATION",
     "replace": "triffid_meat"
   },
-    {
+  {
     "id": "vegetable",
     "type": "MIGRATION",
     "replace": "triffid_meat"

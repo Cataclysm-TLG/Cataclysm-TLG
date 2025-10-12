@@ -2766,7 +2766,7 @@ void Character::process_turn()
         auto it = overmap_time.begin();
         while( it != overmap_time.end() ) {
             if( it->first == ompos.xy() ) {
-                it++;
+                ++it;
                 continue;
             }
             // Find the amount of time passed since the player touched any of the overmap tile's submaps.
@@ -2787,7 +2787,7 @@ void Character::process_turn()
                     it->second = updated_value;
                 }
             }
-            it++;
+            ++it;
         }
     }
 
@@ -12054,8 +12054,9 @@ bool Character::has_destination() const
 
 bool Character::has_destination_activity() const
 {
-    return !get_destination_activity().is_null() && destination_point &&
-           pos_bub() == get_map().get_bub( *destination_point );
+    const bool has_reached_destination = destination_point &&
+                                         ( pos_abs() == *destination_point || auto_move_route.empty() );
+    return !get_destination_activity().is_null() && has_reached_destination;
 }
 
 void Character::start_destination_activity()
