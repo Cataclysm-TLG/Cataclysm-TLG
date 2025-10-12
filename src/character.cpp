@@ -6873,7 +6873,7 @@ void Character::mod_base_height( int mod )
 
 std::string Character::height_string() const
 {
-    const bool metric = get_option<std::string>( "DISTANCE_UNITS" ) == "metric";
+    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
 
     if( metric ) {
         std::string metric_string = _( "%d cm" );

@@ -232,6 +232,7 @@ static int skill_point_pool()
 {
     return 4;
 }
+
 static int skill_points_used( const Character &u )
 {
     int scenario = get_scenario()->point_cost();
@@ -242,9 +243,26 @@ static int skill_points_used( const Character &u )
     }
     int skills = 0;
     for( const Skill &sk : Skill::skills ) {
+        int prof_skill_adjust = 0;
+        for( auto &prof_skill : u.prof->skills() ) {
+            if( prof_skill.first == sk.ident() ) {
+                prof_skill_adjust += prof_skill.second;
+                break;
+            }
+        }
+        
         static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 9, 12, 16, 20, 24, 28 };
         int skill_level = u.get_skill_level( sk.ident() );
-        skills += costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
+        
+        // Calculate cost as if we purchased from the adjusted base level, but don't include the adjustment itself.
+        int base_level_with_prof_bonus = prof_skill_adjust;
+        int purchased_levels = skill_level - base_level_with_prof_bonus;
+        
+        if (purchased_levels > 0) {
+            int total_cost_up_to_current = costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
+            int cost_up_to_prof_bonus = costs.at( std::min<int>( base_level_with_prof_bonus, costs.size() - 1 ) );
+            skills += (total_cost_up_to_current - cost_up_to_prof_bonus);
+        }
     }
     return scenario + profession_points + hobbies + skills;
 }
@@ -3298,11 +3316,24 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
     } );
 
     do {
+        for( const Skill &sk : Skill::skills ) {
+            int prof_skill_level = 0;
+            for( auto &prof_skill : u.prof->skills() ) {
+                if( prof_skill.first == sk.ident() ) {
+                    prof_skill_level = prof_skill.second;
+                    break;
+                }
+            }
+            // If we have a profession bonus but no purchased levels, set purchased level to match
+            if( prof_skill_level > 0 && u.get_skill_level( sk.ident() ) == 0 ) {
+                u.set_skill_level( sk.ident(), prof_skill_level );
+                u.set_knowledge_level( sk.ident(), prof_skill_level );
+            }
+        }
         ui_manager::redraw();
         const std::string action = ctxt.handle_input();
         const int pos_for_curr_description = cur_pos;
         int scrollbar_pos = cur_offset;
-
         if( tabs.handle_input( action, ctxt ) ) {
             break; // Tab has changed or user has quit the screen
         } else if( details.handle_navigation( action, ctxt ) ) {
@@ -3324,7 +3355,14 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
         } else if( action == "LEFT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            if( level > 0 ) {
+            int prof_skill_level = 0;
+            for( auto &prof_skill : u.prof->skills() ) {
+                if( prof_skill.first == skill_id ) {
+                    prof_skill_level += prof_skill.second;
+                    break;
+                }
+            }
+            if( level > prof_skill_level ) {
                 u.mod_skill_level( skill_id, -1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
@@ -3332,7 +3370,15 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
         } else if( action == "RIGHT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            if( level < 8 ) {
+            int prof_skill_level = 0;
+            for( auto &prof_skill : u.prof->skills() ) {
+                if( prof_skill.first == skill_id ) {
+                    prof_skill_level += prof_skill.second;
+                    break;
+                }
+            }
+            int effective_level = level + prof_skill_level;
+            if( effective_level < 8 ) {
                 u.mod_skill_level( skill_id, +1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
