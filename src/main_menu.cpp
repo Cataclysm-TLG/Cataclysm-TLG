@@ -495,7 +495,6 @@ void main_menu::init_strings()
     vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "Sh<o|O>w World Mods" ) );
     vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "Copy World Sett<i|I>ngs" ) );
     vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "Character to Tem<p|P>late" ) );
-    vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "Toggle World <C|c>ompression" ) );
     vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "<D|d>elete World" ) );
     vWorldSubItems.emplace_back( pgettext( "Main Menu|World", "<R|r>eset World" ) );
 
@@ -1174,13 +1173,10 @@ void main_menu::world_tab( const std::string &worldname )
                 load_char_templates();
             }
             break;
-        case 3: // Toggle save compression
-            if( world_generator->get_world( worldname )->has_compression_enabled() ) {
-                if( query_yn( _( "Disable save compression?" ) ) ) {
-                    world_generator->get_world( worldname )->set_compression_enabled( false );
-                }
-            } else {
-                if( query_yn( _( "Enable save compression?" ) ) ) {
+        case 3: // Legacy file with an uncompressed save, or one that the player has uncompressed for some reason.
+            if( !world_generator->get_world( worldname )->has_compression_enabled() ) {
+                if( query_yn(
+                        _( "This save does not have compression enabled.  Save compression is now mandatory, enable it?" ) ) ) {
                     world_generator->get_world( worldname )->set_compression_enabled( true );
                 }
             }

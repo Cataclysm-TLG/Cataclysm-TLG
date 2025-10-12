@@ -929,7 +929,7 @@ std::pair<std::string, nc_color> display::vehicle_cruise_text_color( const Chara
     if( veh ) {
         int target = static_cast<int>( convert_velocity( veh->cruise_velocity, VU_VEHICLE ) );
         int current = static_cast<int>( convert_velocity( veh->velocity, VU_VEHICLE ) );
-        const std::string units = get_option<std::string> ( "USE_METRIC_SPEEDS" );
+        const std::string units = get_option<std::string>( "UNIT_SYSTEM" ) == "metric" ? "km/h" : "mph";
         vel_text = string_format( "%d < %d %s", target, current, units );
 
         const float strain = veh->strain( here );

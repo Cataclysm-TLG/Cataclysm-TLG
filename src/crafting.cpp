@@ -2687,7 +2687,7 @@ bool Character::disassemble( item_location target, bool interactive, bool disass
         }
     }
     // last chance to back out
-    if( interactive && get_option<bool>( "QUERY_DISASSEMBLE" ) && obj.typeId() != itype_disassembly ) {
+    if( interactive && obj.typeId() != itype_disassembly ) {
         std::string list;
         const auto components = obj.get_uncraft_components();
         for( const item_comp &component : components ) {

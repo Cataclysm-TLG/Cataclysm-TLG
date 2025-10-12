@@ -493,7 +493,7 @@ void vehicle::print_speed_gauge( map &here, const catacurses::window &win, const
                  static_cast<int>( std::log10( static_cast<double>( std::abs( value ) ) ) ) + 1 :
                  static_cast<int>( std::log10( static_cast<double>( std::abs( value ) ) ) ) + 2 );
     };
-    const std::string type = get_option<std::string> ( "USE_METRIC_SPEEDS" );
+    const std::string type = get_option<std::string>( "UNIT_SYSTEM" ) == "metric" ? "km/h" : "mph";
     int t_offset = ndigits( t_speed );
     int c_offset = ndigits( c_speed );
 

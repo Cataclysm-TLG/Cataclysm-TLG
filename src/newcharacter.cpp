@@ -48,7 +48,6 @@
 #include "overmap_ui.h"
 #include "path_info.h"
 #include "pimpl.h"
-#include "player_difficulty.h"
 #include "profession.h"
 #include "profession_group.h"
 #include "proficiency.h"

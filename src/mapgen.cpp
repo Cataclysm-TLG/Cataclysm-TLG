@@ -557,7 +557,7 @@ static void GENERATOR_pre_burn( map &md,
 
     // between start and end day we linearly interpolate.
     double lerp_scalar = static_cast<double>(
-                             static_cast<double>( days_since_fall_of_civ- burnt_vars.scaling_days_start ) /
+                             static_cast<double>( days_since_fall_of_civ - burnt_vars.scaling_days_start ) /
                              static_cast<double>( burnt_vars.scaling_days_end - burnt_vars.scaling_days_start ) );
     burnt_vars.percent_chance = lerp( burnt_vars.min_intensity, burnt_vars.max_intensity, lerp_scalar );
     // static values outside that range. Note we do not use std::clamp because the chance is *0* until the start day is reached
@@ -832,7 +832,7 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
                 if( omt->has_flag( oter_flags::pp_generate_riot_damage ) && !omt->has_flag( oter_flags::road ) ) {
                     GENERATOR_riot_damage( *this, omt_point, false );
                 }
-                
+
                 // This is commented out for now as riot damage isn't ready for general use.
 
                 // else if( omt->has_flag( oter_flags::road ) && overmap_buffer.is_in_city( omt_point ) ) {
