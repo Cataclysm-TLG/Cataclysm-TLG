@@ -2720,16 +2720,7 @@ void item::magazine_info( std::vector<iteminfo> &info, const iteminfo_query *par
 
         for( const itype_id &gun_type_id : islot_magazine::compatible_guns[this->typeId()] ) {
             const itype &gun_type = gun_type_id.obj();
-            if( get_option<bool>( "SHOW_GUN_VARIANTS" ) ) {
-                if( gun_type.variants.empty() ) {
-                    compatible_guns.insert( gun_type.nname( 1 ) );
-                }
-                for( const itype_variant_data &variant_type : gun_type.variants ) {
-                    compatible_guns.insert( variant_type.alt_name.translated() );
-                }
-            } else {
-                compatible_guns.insert( gun_type.nname( 1 ) );
-            }
+            compatible_guns.insert( gun_type.nname( 1 ) );
         }
 
         if( !compatible_guns.empty() ) {
@@ -9494,8 +9485,6 @@ bool item::has_itype_variant( bool check_option ) const
     }
 
     switch( type->variant_kind ) {
-        case itype_variant_kind::gun:
-            return get_option<bool>( "SHOW_GUN_VARIANTS" );
         case itype_variant_kind::drug:
             return get_option<bool>( "SHOW_DRUG_VARIANTS" );
         default:

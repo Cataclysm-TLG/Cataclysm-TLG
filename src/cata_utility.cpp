@@ -211,11 +211,8 @@ int bound_mod_to_vals( int val, int mod, int max, int min )
 
 const char *velocity_units( const units_type vel_units )
 {
-    if( get_option<std::string>( "USE_METRIC_SPEEDS" ) == "mph" ) {
+    if( get_option<std::string>( "UNIT_SYSTEM" ) == "imperial" ) {
         return _( "mph" );
-    } else if( get_option<std::string>( "USE_METRIC_SPEEDS" ) == "t/t" ) {
-        //~ vehicle speed tiles per turn
-        return _( "t/t" );
     } else {
         switch( vel_units ) {
             case VU_VEHICLE:

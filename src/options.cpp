@@ -1747,10 +1747,6 @@ void options_manager::add_options_general()
 
     add_empty_line();
 
-    add( "WORLD_COMPRESSION2", "general", to_translation( "World data compression" ),
-         to_translation( "If true, new worlds store data in a compressed format." ),
-         true
-       );
 }
 
 void options_manager::add_options_interface()
@@ -1769,33 +1765,19 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "measurement_unit", to_translation( "Measurement Units" ),
                                           to_translation( "Options regarding measurement units." ) ),
     [&]( const std::string & page_id ) {
+        add( "UNIT_SYSTEM", page_id, to_translation( "Unit System" ),
+             to_translation( "Switch between metric and imperial units for speed, weight, volume, and distance." ),
+        {
+            { "imperial", to_translation( "Imperial (mph, lbs, quarts)" ) },
+            { "metric", to_translation( "Metric (km/h, kg, liters)" ) }
+        },
+        ( SystemLocale::UseMetricSystem().value_or( false ) ? "metric" : "imperial" ) );
+
         add( "USE_CELSIUS", page_id, to_translation( "Temperature units" ),
              to_translation( "Switch between Fahrenheit, Celsius, and Kelvin." ),
         { { "fahrenheit", to_translation( "Fahrenheit" ) }, { "celsius", to_translation( "Celsius" ) }, { "kelvin", to_translation( "Kelvin" ) } },
         "fahrenheit"
            );
-
-        add( "USE_METRIC_SPEEDS", page_id, to_translation( "Speed units" ),
-             to_translation( "Switch between mph, km/h, and tiles/turn." ),
-        { { "mph", to_translation( "mph" ) }, { "km/h", to_translation( "km/h" ) }, { "t/t", to_translation( "tiles/turn" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "km/h" : "mph" )
-           );
-
-        add( "USE_METRIC_WEIGHTS", page_id, to_translation( "Mass units" ),
-             to_translation( "Switch between lbs and kg." ),
-        { { "lbs", to_translation( "lbs" ) }, { "kg", to_translation( "kg" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "kg" : "lbs" )
-           );
-
-        add( "VOLUME_UNITS", page_id, to_translation( "Volume units" ),
-             to_translation( "Switch between the cups (c), liters (L), and quarts (qt)." ),
-        { { "c", to_translation( "Cup" ) }, { "l", to_translation( "Liter" ) }, { "qt", to_translation( "Quart" ) } },
-        "l"
-           );
-        add( "DISTANCE_UNITS", page_id, to_translation( "Distance units" ),
-             to_translation( "Switch between metric and imperial distance units." ),
-        { { "metric", to_translation( "Metric" ) }, { "imperial", to_translation( "Imperial" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "metric" : "imperial" ) );
 
         add( "24_HOUR", page_id, to_translation( "Time format" ),
              to_translation( "12h: AM/PM, e.g. 7:31 AM - Military: 24h Military, e.g. 0731 - 24h: Normal 24h, e.g. 7:31" ),
@@ -1848,9 +1830,6 @@ void options_manager::add_options_interface()
         add( "SHOW_DRUG_VARIANTS", page_id, to_translation( "Show drug brand names" ),
              to_translation( "If true, show brand names for drugs, instead of generic functional names - 'Adderall', instead of 'prescription stimulant'." ),
              false );
-        add( "SHOW_GUN_VARIANTS", page_id, to_translation( "Show gun brand names" ),
-             to_translation( "If true, show brand names for guns, instead of generic functional names - 'm4a1' or 'h&k416a5' instead of 'NATO assault rifle'." ),
-             true );
         add( "AMMO_IN_NAMES", page_id, to_translation( "Add ammo to weapon/magazine names" ),
              to_translation( "If true, the default ammo is added to weapon and magazine names.  For example \"Mosin-Nagant M44 (4/5)\" becomes \"Mosin-Nagant M44 (4/5 7.62x54mm)\"." ),
              true
@@ -1901,24 +1880,9 @@ void options_manager::add_options_interface()
              true
            );
 
-        add( "QUERY_DISASSEMBLE", page_id, to_translation( "Query on item disassembly" ),
-             to_translation( "If true, will query before disassembling items." ),
-             true
-           );
-
-        add( "QUERY_DECONSTRUCT", page_id, to_translation( "Query on terrain/furniture deconstruction" ),
-             to_translation( "If true, will query before deconstructing terrain/furniture." ),
-             true
-           );
-
         add( "QUERY_KEYBIND_REMOVAL", page_id, to_translation( "Query on keybinding removal" ),
              to_translation( "If true, will query before removing a keybinding from a hotkey." ),
              true
-           );
-
-        add( "CLOSE_ADV_INV", page_id, to_translation( "Close advanced inventory on move all" ),
-             to_translation( "If true, will close the advanced inventory when the move all items command is used." ),
-             false
            );
 
         add( "OPEN_DEFAULT_ADV_INV", page_id,
@@ -2809,24 +2773,6 @@ void options_manager::add_options_debug()
 
     add_empty_line();
 
-    add( "DEBUG_DIFFICULTIES", "debug", to_translation( "Show values for character creation" ),
-         to_translation( "In character creation will show the underlying value that is used to determine difficulty." ),
-         false
-       );
-
-    add_empty_line();
-
-    add( "FOV_3D_Z_RANGE", "debug", to_translation( "Vertical range of 3D field of vision" ),
-         to_translation(
-             "How many levels up and down the 3D field of vision reaches.  (This many levels up, this many levels down.)  "
-             "3D vision of the full height of the world can slow the game down a lot.  Seeing fewer Z-levels is faster.  "
-             "Setting this to 0 disables vertical vision.  In tiles mode this also affects how many levels up and down are "
-             "drawn on screen, and setting this to 0 displays only one level below with colored blocks instead." ),
-         0, OVERMAP_LAYERS, 4
-       );
-
-    add_empty_line();
-
     add_option_group( "debug", Group( "occlusion_opts", to_translation( "Occlusion Options" ),
                                       to_translation( "Options regarding occlusion." ) ),
     [&]( const std::string & page_id ) {
@@ -2834,7 +2780,7 @@ void options_manager::add_options_debug()
         to_translation( "Draw walls normal (Off), retracted/transparent (On), or automatically retracting/transparent near player (Auto)." ), {
             { 0, to_translation( "Off" ) }, { 1, to_translation( "On" ) },
             { 2, to_translation( "Auto" ) }
-        }, 2, 2
+        }, 0, 2
            );
 
         add( "PREVENT_OCCLUSION_TRANSP", page_id, to_translation( "Prevent occlusion via transparency" ),
@@ -4029,7 +3975,6 @@ void options_manager::update_options_cache()
     log_from_top = ::get_option<std::string>( "LOG_FLOW" ) == "new_top";
     message_ttl = ::get_option<int>( "MESSAGE_TTL" );
     message_cooldown = ::get_option<int>( "MESSAGE_COOLDOWN" );
-    fov_3d_z_range = ::get_option<int>( "FOV_3D_Z_RANGE" );
     keycode_mode = ::get_option<std::string>( "SDL_KEYBOARD_MODE" ) == "keycode";
     cata::options::mouse.enabled = ::get_option<bool>( "ENABLE_MOUSE" );
     cata::options::mouse.hidekb = ::get_option<std::string>( "HIDE_CURSOR" ) == "hidekb";

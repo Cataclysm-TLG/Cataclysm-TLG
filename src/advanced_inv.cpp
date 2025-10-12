@@ -1896,11 +1896,6 @@ void advanced_inventory::process_action( const std::string &input_action )
     } else if( action == "MOVE_ALL_ITEMS" ) {
         exit = move_all_items();
         recalc = true;
-        if( exit ) {
-            if( get_option<bool>( "CLOSE_ADV_INV" ) ) {
-                move_all_items_and_waiting_to_quit = true;
-            }
-        }
     } else if( action == "SORT" ) {
         if( show_sort_menu( spane ) ) {
             recalc = true;

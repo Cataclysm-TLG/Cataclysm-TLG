@@ -2036,8 +2036,7 @@ void construct::do_turn_deconstruct( const tripoint_bub_ms &p, Character &who )
 {
     map &here = get_map();
     // Only run once at the start of construction
-    if( here.partial_con_at( p )->counter == 0 && who.is_avatar() &&
-        get_option<bool>( "QUERY_DECONSTRUCT" ) ) {
+    if( here.partial_con_at( p )->counter == 0 && who.is_avatar() ) {
         bool cancel_construction = false;
 
         auto deconstruct_items = []( const item_group_id & drop_group ) {

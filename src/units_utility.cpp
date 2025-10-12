@@ -90,15 +90,15 @@ int angle_to_dir8( const units::angle direction )
 
 const char *weight_units()
 {
-    return get_option<std::string>( "USE_METRIC_WEIGHTS" ) == "lbs" ? _( "lbs" ) : _( "kg" );
+    return get_option<std::string>( "UNIT_SYSTEM" ) == "imperial" ? _( "imperial" ) : _( "metric" );
 }
 
 const char *volume_units_abbr()
 {
-    const std::string vol_units = get_option<std::string>( "VOLUME_UNITS" );
-    if( vol_units == "c" ) {
+    const std::string vol_units = get_option<std::string>( "UNIT_SYSTEM" );
+    if( vol_units == "imperial" ) {
         return pgettext( "Volume unit", "c" );
-    } else if( vol_units == "l" ) {
+    } else if( vol_units == "metric" ) {
         return pgettext( "Volume unit", "L" );
     } else {
         return pgettext( "Volume unit", "qt" );
@@ -107,10 +107,10 @@ const char *volume_units_abbr()
 
 const char *volume_units_long()
 {
-    const std::string vol_units = get_option<std::string>( "VOLUME_UNITS" );
-    if( vol_units == "c" ) {
+    const std::string vol_units = get_option<std::string>( "UNIT_SYSTEM" );
+    if( vol_units == "imperial" ) {
         return _( "cup" );
-    } else if( vol_units == "l" ) {
+    } else if( vol_units == "metric" ) {
         return _( "liter" );
     } else {
         return _( "quart" );
@@ -119,11 +119,11 @@ const char *volume_units_long()
 
 double convert_velocity( int velocity, const units_type vel_units )
 {
-    const std::string type = get_option<std::string>( "USE_METRIC_SPEEDS" );
+    const std::string type = get_option<std::string>( "UNIT_SYSTEM" );
     // internal units to mph conversion
     double ret = static_cast<double>( velocity ) / 100;
 
-    if( type == "km/h" ) {
+    if( type == "metric" ) {
         switch( vel_units ) {
             case VU_VEHICLE:
                 // mph to km/h conversion
@@ -143,7 +143,7 @@ double convert_velocity( int velocity, const units_type vel_units )
 double convert_weight( const units::mass &weight )
 {
     double ret = to_gram( weight );
-    if( get_option<std::string>( "USE_METRIC_WEIGHTS" ) == "kg" ) {
+    if( get_option<std::string>( "UNIT_SYSTEM" ) == "kg" ) {
         ret /= 1000;
     } else {
         ret /= 453.6;
@@ -155,7 +155,7 @@ double convert_length_cm_in( const units::length &length )
 {
 
     double ret = to_millimeter( length );
-    const bool metric = get_option<std::string>( "DISTANCE_UNITS" ) == "metric";
+    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
     if( metric ) {
         ret /= 10;
     } else {
@@ -169,7 +169,7 @@ double convert_length_cm_in( const units::length &length )
 int convert_length( const units::length &length )
 {
     int ret = to_millimeter( length );
-    const bool metric = get_option<std::string>( "DISTANCE_UNITS" ) == "metric";
+    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
     if( metric ) {
         if( ret % 1000000 == 0 ) {
             // kilometers
@@ -199,7 +199,7 @@ int convert_length( const units::length &length )
 std::string length_units( const units::length &length )
 {
     int length_mm = to_millimeter( length );
-    const bool metric = get_option<std::string>( "DISTANCE_UNITS" ) == "metric";
+    const bool metric = get_option<std::string>( "UNIT_SYSTEM" ) == "metric";
     if( metric ) {
         if( length_mm % 1000000 == 0 ) {
             //~ kilometers
@@ -281,7 +281,7 @@ double convert_volume( int volume, int *out_scale )
 {
     double ret = volume;
     int scale = 0;
-    const std::string vol_units = get_option<std::string>( "VOLUME_UNITS" );
+    const std::string vol_units = get_option<std::string>( "UNIT_SYSTEM" );
     if( vol_units == "c" ) {
         ret *= 0.004;
         scale = 1;
