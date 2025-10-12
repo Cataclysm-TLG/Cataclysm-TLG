@@ -1031,6 +1031,14 @@ bool main_menu::load_game( std::string const &worldname, save_t const &savegame 
     world_generator->save_last_world_info();
     world_generator->set_active_world( world );
 
+    if( !world_generator->get_world( worldname )->has_compression_enabled() ) {
+        if( query_yn(
+                _( "This save does not have compression enabled.  Save compression is now mandatory, enable it?" ) ) ) {
+            world_generator->get_world( worldname )->set_compression_enabled( true );
+        }
+        return false;
+    }
+
     try {
         g->setup();
     } catch( const std::exception &err ) {
@@ -1173,20 +1181,12 @@ void main_menu::world_tab( const std::string &worldname )
                 load_char_templates();
             }
             break;
-        case 3: // Legacy file with an uncompressed save, or one that the player has uncompressed for some reason.
-            if( !world_generator->get_world( worldname )->has_compression_enabled() ) {
-                if( query_yn(
-                        _( "This save does not have compression enabled.  Save compression is now mandatory, enable it?" ) ) ) {
-                    world_generator->get_world( worldname )->set_compression_enabled( true );
-                }
-            }
-            break;
-        case 4: // Delete World
+        case 3: // Delete World
             if( query_yn( _( "Delete the world and all saves within?" ) ) ) {
                 clear_world( true );
             }
             break;
-        case 5: // Reset World
+        case 4: // Reset World
             if( query_yn( _( "Remove all saves and regenerate world?" ) ) ) {
                 clear_world( false );
             }
