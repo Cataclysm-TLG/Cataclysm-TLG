@@ -3316,6 +3316,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
     } );
 
     do {
+        // If we have a profession bonus but no purchased levels, set our starting point to match.
         for( const Skill &sk : Skill::skills ) {
             int prof_skill_level = 0;
             for( auto &prof_skill : u.prof->skills() ) {
@@ -3324,7 +3325,6 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
                     break;
                 }
             }
-            // If we have a profession bonus but no purchased levels, set purchased level to match
             if( prof_skill_level > 0 && u.get_skill_level( sk.ident() ) == 0 ) {
                 u.set_skill_level( sk.ident(), prof_skill_level );
                 u.set_knowledge_level( sk.ident(), prof_skill_level );
