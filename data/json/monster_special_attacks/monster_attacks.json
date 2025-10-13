@@ -278,7 +278,7 @@
     "id": "impale",
     "cooldown": 25,
     "move_cost": 150,
-    "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_penetration": 8, "armor_multiplier": 0.5 } ],
+    "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_penetration": 8 } ],
     "hitsize_min": 4,
     "hit_dmg_u": "%1$s impales your %2$s!",
     "hit_dmg_npc": "%1$s impales <npcname>!",
