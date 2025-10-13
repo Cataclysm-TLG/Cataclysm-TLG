@@ -1792,7 +1792,8 @@
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 75 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 75 ] ] },
+    "vitamins": [ [ "calcium", 75 ] ]
   },
   {
     "id": "bonemeal_tablet",
@@ -1812,7 +1813,7 @@
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 24 ] ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 24 ] ]
   },
   {
     "id": "flavored_bonemeal_tablet",
@@ -1832,7 +1833,7 @@
     "looks_like": "calcium_tablet",
     "flags": [ "NO_TEMP" ],
     "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 23 ] ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "calcium", 23 ] ]
   },
   {
     "id": "vitc_tablet",
@@ -1848,7 +1849,8 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "NO_TEMP" ],
     "symbol": "!",
     "color": "magenta",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "vitC", 556 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "vitC", 556 ] ] },
+    "vitamins": [ [ "vitC", 556 ] ]
   },
   {
     "id": "gummy_vitamins",
@@ -1925,7 +1927,8 @@
       "activation_message": "You inject some iron.",
       "tools_needed": { "syringe": -1 },
       "vitamins": [ [ "iron", 100 ] ]
-    }
+    },
+    "vitamins": [ [ "iron", 100 ] ]
   },
   {
     "id": "weed",
@@ -2052,7 +2055,8 @@
       "activation_message": "You take an antacid tablet.",
       "effects": [ { "id": "tummy_tablet", "duration": 6400 } ],
       "vitamins": [ [ "calcium", 25 ] ]
-    }
+    },
+    "vitamins": [ [ "calcium", 25 ] ]
   },
   {
     "id": "panacea",
