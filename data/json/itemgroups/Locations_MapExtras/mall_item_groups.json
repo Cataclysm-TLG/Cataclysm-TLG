@@ -82,7 +82,6 @@
       [ "pom_poms", 40 ],
       [ "backpack", 40 ],
       [ "backpack_denim", 5 ],
-      { "item": "backpack_giant", "prob": 1 },
       [ "pockknife", 5 ],
       [ "wristwatch", 20 ],
       [ "teleumbrella", 5 ],

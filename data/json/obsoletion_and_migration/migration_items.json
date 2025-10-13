@@ -2877,5 +2877,15 @@
     "type": "MIGRATION",
     "id": "battleaxe_fake",
     "replace": "battleaxe"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "backpack_hunting",
+    "replace": "backpack_hiking"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "backpack_giant",
+    "replace": "bigback"
   }
 ]
