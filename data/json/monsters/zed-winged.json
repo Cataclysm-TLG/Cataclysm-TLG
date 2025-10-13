@@ -159,7 +159,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_flying" ],
     "vision_night": 5,
     "harvest": "zombie_animal",
-    "special_attacks": [ { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.8 } ] } ],
+    "special_attacks": [ { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.85 } ] } ],
     "upgrades": { "half_life": 168, "into_group": "GROUP_ZOMBIE_RAPTOR_UPGRADES" },
     "fungalize_into": "mon_fungal_raptor",
     "flags": [
@@ -228,7 +228,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_electromagnetics" ],
     "special_attacks": [
       [ "SHOCKSTORM", 25 ],
-      { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.8 } ] }
+      { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.85 } ] }
     ],
     "special_when_hit": [ "ZAPBACK", 100 ],
     "upgrades": { "half_life": 4, "into": "mon_spawn_raptor_unstable" },
