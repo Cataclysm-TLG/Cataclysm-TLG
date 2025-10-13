@@ -243,25 +243,26 @@ static int skill_points_used( const Character &u )
     }
     int skills = 0;
     for( const Skill &sk : Skill::skills ) {
-        int prof_skill_adjust = 0;
+        int prof_skills = 0;
         for( auto &prof_skill : u.prof->skills() ) {
             if( prof_skill.first == sk.ident() ) {
-                prof_skill_adjust += prof_skill.second;
+                prof_skills += prof_skill.second;
                 break;
             }
         }
-        
-        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 9, 12, 16, 20, 24, 28 };
+        for( const profession *hobby : u.hobbies ) {
+            for( auto &hobby_skill : hobby->skills() ) {
+                if( hobby_skill.first == sk.ident() ) {
+                    prof_skills += hobby_skill.second;
+                    break;
+                }
+            }
+        }
+        static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 10, 14, 18, 22, 26, 30 };
         int skill_level = u.get_skill_level( sk.ident() );
-        
-        // Calculate cost as if we purchased from the adjusted base level, but don't include the adjustment itself.
-        int base_level_with_prof_bonus = prof_skill_adjust;
-        int purchased_levels = skill_level - base_level_with_prof_bonus;
-        
-        if (purchased_levels > 0) {
-            int total_cost_up_to_current = costs.at( std::min<int>( skill_level, costs.size() - 1 ) );
-            int cost_up_to_prof_bonus = costs.at( std::min<int>( base_level_with_prof_bonus, costs.size() - 1 ) );
-            skills += (total_cost_up_to_current - cost_up_to_prof_bonus);
+        skills += costs.at( std::min<int>( skill_level + prof_skills, ( costs.size() - 1 ) ) );
+        if( prof_skills > 0 ) {
+            skills -= costs.at( std::min<int>( prof_skills, ( costs.size() - 1 ) ) );
         }
     }
     return scenario + profession_points + hobbies + skills;
@@ -2733,17 +2734,7 @@ static std::string assemble_hobby_details( const avatar &u, const input_context 
                 debugmsg( "Unexpected skill level for %s: %d", skill.ident().str(), level );
                 continue;
             }
-            std::string skill_degree;
-            if( level < 3 ) {
-                skill_degree = pgettext( "set_profession_skill", "beginner" );
-            } else if( level == 3 ) {
-                skill_degree = pgettext( "set_profession_skill", "intermediate" );
-            } else if( level == 4 ) {
-                skill_degree = pgettext( "set_profession_skill", "competent" );
-            } else {
-                skill_degree = pgettext( "set_profession_skill", "advanced" );
-            }
-            assembled += string_format( "%s (%s)", skill.name(), skill_degree ) + "\n";
+            assembled += string_format( "%s (%s)", skill.name(), level ) + "\n";
         }
     }
 
@@ -3060,24 +3051,46 @@ void set_hobbies( tab_manager &tabs, avatar &u, pool_type pool )
  */
 static int skill_increment_cost( const Character &u, const skill_id &skill )
 {
-    if( u.get_skill_level( skill ) < 3 ) {
+    int skill_total = u.get_skill_level( skill );
+    for( auto &prof_skill : u.prof->skills() ) {
+        if( prof_skill.first == skill->ident() ) {
+            skill_total += prof_skill.second;
+            break;
+        }
+    }
+    for( const profession *hobby : u.hobbies ) {
+        for( auto &hobby_skill : hobby->skills() ) {
+            if( hobby_skill.first == skill->ident() ) {
+                skill_total += hobby_skill.second;
+                break;
+            }
+        }
+    }
+    if( skill_total < 3 ) {
         return 1;
-    } else if( u.get_skill_level( skill ) < 6 ) {
+    } else if( skill_total < 6 ) {
         return 3;
     } else {
         return 4;
     }
 }
 
-static std::string assemble_skill_details( const avatar &u,
-        const std::map<skill_id, int> &prof_skills, const Skill *currentSkill )
+static std::string assemble_skill_details( const avatar &u, const Skill *currentSkill )
 {
     std::string assembled;
     // We want recipes from profession skills displayed, but
     // without boosting the skills. Copy the skills, and boost the copy
     SkillLevelMap with_prof_skills = u.get_all_skills();
-    for( const auto &sk : prof_skills ) {
-        with_prof_skills.mod_skill_level( sk.first, sk.second );
+
+    // Add profession + hobby skill bonuses to the copy
+    for( const auto &prof_skill : u.prof->skills() ) {
+        with_prof_skills.mod_skill_level( prof_skill.first, prof_skill.second );
+    }
+
+    for( const profession *hobby : u.hobbies ) {
+        for( const auto &hobby_skill : hobby->skills() ) {
+            with_prof_skills.mod_skill_level( hobby_skill.first, hobby_skill.second );
+        }
     }
 
     std::map<std::string, std::vector<std::pair<std::string, int> > > recipes;
@@ -3092,7 +3105,11 @@ static std::string assemble_skill_details( const avatar &u,
         bool would_autolearn_recipe =
             recipe_dict.all_autolearn().count( &r ) &&
             with_prof_skills.meets_skill_requirements( r.autolearn_requirements );
-
+        // Fallback: if profession skills meet it but base skills didn’t, treat it as autolearned.
+        if( !would_autolearn_recipe && !u.meets_skill_requirements( r.autolearn_requirements ) &&
+            with_prof_skills.meets_skill_requirements( r.autolearn_requirements ) ) {
+            would_autolearn_recipe = true;
+        }
         if( !would_autolearn_recipe && !r.never_learn &&
             ( r.skill_used == currentSkill->ident() || skill > 0 ) &&
             with_prof_skills.has_recipe_requirements( r ) ) {
@@ -3100,7 +3117,6 @@ static std::string assemble_skill_details( const avatar &u,
             recipes[r.skill_used->name()].emplace_back( r.result_name( /*decorated=*/true ),
                     ( skill > 0 ) ? skill : r.difficulty );
         }
-        // TODO: Find out why kevlar gambeson hood disppears when going from tailoring 7->8
     }
 
     for( auto &elem : recipes ) {
@@ -3251,10 +3267,16 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
             const int y = i - cur_offset;
             const Skill *thisSkill = skill_list[i].skill;
             int prof_skill_level = 0;
-            if( !skill_list[i].is_header ) {
-                for( auto &prof_skill : u.prof->skills() ) {
-                    if( prof_skill.first == thisSkill->ident() ) {
-                        prof_skill_level += prof_skill.second;
+            for( auto &prof_skill : u.prof->skills() ) {
+                if( prof_skill.first == thisSkill->ident() ) {
+                    prof_skill_level += prof_skill.second;
+                    break;
+                }
+            }
+            for( const profession *hobby : u.hobbies ) {
+                for( auto &hobby_skill : hobby->skills() ) {
+                    if( hobby_skill.first == thisSkill->ident() ) {
+                        prof_skill_level += hobby_skill.second;
                         break;
                     }
                 }
@@ -3269,7 +3291,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
                 skill_text = colorize( thisSkill->name(),
                                        ( i == cur_pos ? hilite( COL_SKILL_USED ) : COL_SKILL_USED ) );
                 if( prof_skill_level > 0 ) {
-                    skill_text.append( colorize( string_format( " ( %d + %d )", prof_skill_level,
+                    skill_text.append( colorize( string_format( " ( %d )", prof_skill_level +
                                                  static_cast<int>( u.get_skill_level( thisSkill->ident() ) ) ),
                                                  ( i == cur_pos ? hilite( COL_SKILL_USED ) : COL_SKILL_USED ) ) );
                 } else {
@@ -3294,9 +3316,9 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
             if( screen_reader_mode ) {
                 description = currentSkill->display_category()->display_string() + " - ";
                 description.append( cur_skill_text + "\n" );
-                description.append( assemble_skill_details( u, prof_skills, currentSkill ) );
+                description.append( assemble_skill_details( u, currentSkill ) );
             } else {
-                description = assemble_skill_details( u, prof_skills, currentSkill );
+                description = assemble_skill_details( u, currentSkill );
             }
             details.set_text( description );
             details_recalc = false;
@@ -3316,20 +3338,6 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
     } );
 
     do {
-        // If we have a profession bonus but no purchased levels, set our starting point to match.
-        for( const Skill &sk : Skill::skills ) {
-            int prof_skill_level = 0;
-            for( auto &prof_skill : u.prof->skills() ) {
-                if( prof_skill.first == sk.ident() ) {
-                    prof_skill_level = prof_skill.second;
-                    break;
-                }
-            }
-            if( prof_skill_level > 0 && u.get_skill_level( sk.ident() ) == 0 ) {
-                u.set_skill_level( sk.ident(), prof_skill_level );
-                u.set_knowledge_level( sk.ident(), prof_skill_level );
-            }
-        }
         ui_manager::redraw();
         const std::string action = ctxt.handle_input();
         const int pos_for_curr_description = cur_pos;
@@ -3355,14 +3363,7 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
         } else if( action == "LEFT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            int prof_skill_level = 0;
-            for( auto &prof_skill : u.prof->skills() ) {
-                if( prof_skill.first == skill_id ) {
-                    prof_skill_level += prof_skill.second;
-                    break;
-                }
-            }
-            if( level > prof_skill_level ) {
+            if( level > 0 ) {
                 u.mod_skill_level( skill_id, -1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
@@ -3370,15 +3371,22 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
         } else if( action == "RIGHT" ) {
             const skill_id &skill_id = currentSkill->ident();
             const int level = u.get_skill_level( skill_id );
-            int prof_skill_level = 0;
+            int prof_skill_adjust = 0;
             for( auto &prof_skill : u.prof->skills() ) {
                 if( prof_skill.first == skill_id ) {
-                    prof_skill_level += prof_skill.second;
+                    prof_skill_adjust += prof_skill.second;
                     break;
                 }
             }
-            int effective_level = level + prof_skill_level;
-            if( effective_level < 8 ) {
+            for( const profession *hobby : u.hobbies ) {
+                for( auto &hobby_skill : hobby->skills() ) {
+                    if( hobby_skill.first == skill_id ) {
+                        prof_skill_adjust += hobby_skill.second;
+                        break;
+                    }
+                }
+            }
+            if( level + prof_skill_adjust < 8 ) {
                 u.mod_skill_level( skill_id, +1 );
                 u.set_knowledge_level( skill_id, static_cast<int>( u.get_skill_level( skill_id ) ) );
             }
@@ -4216,32 +4224,21 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
                 }
 
                 // Handle skills from hobbies
-                int leftover_exp = 0;
-                int exp_to_level = 10000 * ( level + 1 ) * ( level + 1 );
                 for( const profession *profession : you.hobbies ) {
                     profession::StartingSkillList hobby_skills = profession->skills();
                     profession::StartingSkillList::iterator i = hobby_skills.begin();
                     while( i != hobby_skills.end() ) {
                         if( i->first == elem->ident() ) {
-                            int skill_exp_bonus = leftover_exp + calculate_cumulative_experience( i->second );
-                            // Calculate Level up to find final level and remaining exp
-                            while( skill_exp_bonus >= exp_to_level ) {
-                                level++;
-                                skill_exp_bonus -= exp_to_level;
-                                exp_to_level = 10000 * ( level + 1 ) * ( level + 1 );
-                            }
-                            leftover_exp = skill_exp_bonus;
-                            break;
+                            level += i->second;
                         }
                         ++i;
                     }
                 }
 
                 if( level > 0 ) {
-                    const int exp_percent = 100 * leftover_exp / exp_to_level;
                     mvwprintz( w_skills, point( 0, line ), c_light_gray,
                                elem->name() + ":" );
-                    right_print( w_skills, line, 1, c_light_gray, string_format( "%d(%2d%%)", level, exp_percent ) );
+                    right_print( w_skills, line, 1, c_light_gray, string_format( "%d", level ) );
                     line++;
                     has_skills = true;
                 }
