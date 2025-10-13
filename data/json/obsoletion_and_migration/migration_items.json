@@ -2391,12 +2391,12 @@
   {
     "id": "veggy",
     "type": "MIGRATION",
-    "replace": "triffid_meat"
+    "replace": "leaves"
   },
   {
     "id": "vegetable",
     "type": "MIGRATION",
-    "replace": "triffid_meat"
+    "replace": "leaves"
   },
   {
     "id": "soup_veggy",
