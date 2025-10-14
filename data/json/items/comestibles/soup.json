@@ -58,7 +58,6 @@
     "name": { "str_sp": "bone broth" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "demihuman %s" } }
     ],
     "weight": "253 g",
     "color": "yellow",
@@ -67,8 +66,8 @@
     "comestible_type": "DRINK",
     "symbol": "~",
     "quench": 30,
-    "calories": 41,
-    "description": "A tasty and nutritious broth made from bones, with added vinegar to extract more calcium.",
+    "calories": 5,
+    "description": "A broth made from boiling bones, with vinegar added to extract more calcium.",
     "price": "3 USD 50 cent",
     "price_postapoc": "25 cent",
     "material": [ "bone" ],
@@ -77,7 +76,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE", "NO_SALVAGE" ],
-    "fun": 10,
+    "fun": 2,
     "vitamins": [ [ "calcium", 7 ], [ "iron", "200 μg" ], [ "meat_allergen", 1 ] ]
   },
   {
