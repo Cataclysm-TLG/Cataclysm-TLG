@@ -326,7 +326,7 @@
         ],
         "encumbrance": 45,
         "coverage": 90,
-        "covers": [ "torso", "arm_l", "arm_r" ]
+        "covers": [ "torso", "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ]
       },
       {
         "material": [
