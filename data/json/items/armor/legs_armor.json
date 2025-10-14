@@ -44,7 +44,7 @@
     "symbol": "[",
     "looks_like": "leg_warmers",
     "color": "red",
-    "warmth": 10,
+    "warmth": 35,
     "material_thickness": 4,
     "environmental_protection": 1,
     "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
@@ -52,10 +52,10 @@
       {
         "material": [
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 38,
+        "encumbrance": 16,
         "coverage": 90,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_upper_r", "leg_upper_l" ]
       }
@@ -77,7 +77,7 @@
     "symbol": "[",
     "looks_like": "leg_warmers",
     "color": "red",
-    "warmth": 10,
+    "warmth": 35,
     "material_thickness": 4,
     "environmental_protection": 1,
     "flags": [ "OUTER", "NO_REPAIR", "ALLOWS_TAIL" ],
@@ -85,10 +85,10 @@
       {
         "material": [
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 3,
+        "encumbrance": 8,
         "coverage": 90,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
       }

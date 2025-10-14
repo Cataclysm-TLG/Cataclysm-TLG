@@ -409,7 +409,7 @@
     "specific_heat_liquid": 4.186,
     "specific_heat_solid": 2.108,
     "latent_heat": 333,
-    "chip_resist": 14,
+    "chip_resist": 8,
     "wind_resist": 90,
     "dmg_adj": [ "scratched", "cut", "cracked", "shattered" ],
     "bash_dmg_verb": "cracked",
@@ -423,7 +423,7 @@
       { "fuel": 0.35, "smoke": 5, "burn": 0.015, "volume_per_turn": "200 ml" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 2.5, "cut": 4, "acid": 6, "heat": 2.5, "bullet": 1.4 },
+    "resist": { "bash": 2.5, "cut": 4, "acid": 2, "heat": 0, "bullet": 1.4 },
     "repair_difficulty": 5
   },
   {
@@ -447,7 +447,7 @@
       { "fuel": 0.35, "smoke": 5, "burn": 0.05, "volume_per_turn": "200 ml" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1, "cut": 6, "acid": 20, "heat": 4, "bullet": 1.2 },
+    "resist": { "bash": 1, "cut": 6, "acid": 20, "heat": 2, "bullet": 1.2 },
     "repair_difficulty": 5
   },
   {
@@ -464,14 +464,14 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "chipped",
     "acid_dmg_verb": "burned",
-    "chip_resist": 10,
+    "chip_resist": 8,
     "burn_data": [
       { "fuel": 0, "smoke": 0, "burn": 0.0001 },
       { "fuel": 0.2, "smoke": 3, "burn": 0.005, "volume_per_turn": "200 ml" },
       { "fuel": 0.35, "smoke": 5, "burn": 0.015, "volume_per_turn": "200 ml" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.4, "cut": 3, "acid": 4, "heat": 2, "bullet": 0.9 }
+    "resist": { "bash": 1.4, "cut": 3, "acid": 2, "heat": 0, "bullet": 0.9 }
   },
   {
     "type": "material",
@@ -480,7 +480,7 @@
     "density": 1.8,
     "copy-from": "chitin_light",
     "chip_resist": 18,
-    "resist": { "bash": 4, "cut": 6, "acid": 8, "heat": 2, "bullet": 1.8 }
+    "resist": { "bash": 4, "cut": 6, "acid": 2, "heat": 0, "bullet": 1.8 }
   },
   {
     "type": "material",
@@ -490,7 +490,7 @@
     "copy-from": "chitin_light",
     "chip_resist": 22,
     "breathability": "IMPERMEABLE",
-    "resist": { "bash": 5.2, "cut": 7, "acid": 9, "heat": 2, "bullet": 2.1 }
+    "resist": { "bash": 5.2, "cut": 7, "acid": 3, "heat": 0, "bullet": 2.1 }
   },
   {
     "type": "material",
@@ -852,7 +852,7 @@
       { "fuel": 1, "smoke": 1, "burn": 0.06 }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.5, "cut": 2, "acid": 0.5, "heat": 1, "bullet": 1 },
+    "resist": { "bash": 1.5, "cut": 1.8, "acid": 0.5, "heat": 1, "bullet": 1 },
     "repair_difficulty": 3
   },
   {
@@ -1376,7 +1376,7 @@
       { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.5, "cut": 2.5, "acid": 4, "heat": 2, "bullet": 2 },
+    "resist": { "bash": 1.5, "cut": 2, "acid": 4, "heat": 2, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
@@ -1403,7 +1403,7 @@
       { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.2, "cut": 2.5, "acid": 8, "heat": 2.2, "bullet": 2 },
+    "resist": { "bash": 1.2, "cut": 2, "acid": 8, "heat": 2.2, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
@@ -1416,7 +1416,7 @@
     "specific_heat_solid": 1.5,
     "latent_heat": 273,
     "soft": false,
-    "chip_resist": 11,
+    "chip_resist": 9,
     "repaired_with": "leather",
     "salvaged_into": "leather",
     "dmg_adj": [ "scratched", "cut", "shredded", "tattered" ],
@@ -1455,7 +1455,7 @@
       { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 2, "cut": 2, "acid": 6, "heat": 1, "bullet": 1 }
+    "resist": { "bash": 2, "cut": 2, "acid": 1, "heat": 0, "bullet": 1 }
   },
   {
     "type": "material",
@@ -2150,7 +2150,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 1.75, "cut": 5, "acid": 7, "heat": 3, "bullet": 4.5 },
+    "resist": { "bash": 1.75, "cut": 7.5, "acid": 7, "heat": 3, "bullet": 4.5 },
     "repair_difficulty": 2
   },
   {
@@ -2577,9 +2577,9 @@
   },
   {
     "type": "material",
-    "//": "The dense part of carpet pilling, technically made from synthetic fabric but not sewn into flat sheets.  Only a separate material to lower ballistic resistance.",
+    "//": "The dense part of carpet pile, technically made from synthetic fabric left in loose tifts.  Only a separate material to lower ballistic resistance.",
     "id": "carpet_pilling",
-    "name": "Carpet Pilling",
+    "name": "Carpet Pile",
     "copy-from": "nylon",
     "//1": "Carpet, on the other hand, burns pretty well.",
     "burn_data": [
@@ -2587,7 +2587,7 @@
       { "fuel": 2, "smoke": 1, "burn": 0.04 },
       { "fuel": 3, "smoke": 1, "burn": 0.06 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 6, "heat": 2, "bullet": 1 }
+    "resist": { "bash": 1.0, "cut": 0.4, "acid": 6, "heat": 2, "bullet": 1 }
   },
   {
     "type": "material",
