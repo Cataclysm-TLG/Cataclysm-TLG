@@ -5043,7 +5043,7 @@ int Character::get_instant_thirst() const
 
 void Character::mod_thirst( int nthirst )
 {
-    if( has_flag( json_flag_NO_THIRST ) || !needs_food() ) {
+    if( has_flag( json_flag_NO_THIRST ) || !needs_food() || !is_avatar() ) {
         return;
     }
     set_thirst( std::max( -100, thirst + nthirst ) );
@@ -5535,9 +5535,9 @@ void Character::update_needs( int rate_multiplier )
                 mod_sleep_deprivation( fatigue_roll * 5 );
             }
 
-            if( !needs_food() && get_fatigue() > fatigue_levels::TIRED ) {
-                set_fatigue( fatigue_levels::TIRED );
+            if( ( !is_avatar() || !needs_food() ) && get_fatigue() > fatigue_levels::TIRED ) {
                 set_sleep_deprivation( 0 );
+                set_fatigue( fatigue_levels::TIRED );
             }
         }
     } else if( asleep ) {
@@ -5862,7 +5862,7 @@ void Character::check_needs_extremes()
     }
 
     // Check if we're dying of thirst
-    if( needs_food() && get_thirst() >= 600 && ( stomach.get_water() == 0_ml ||
+    if( ( needs_food() && is_avatar() ) && get_thirst() >= 600 && ( stomach.get_water() == 0_ml ||
             guts.get_water() == 0_ml ) ) {
         if( get_thirst() >= 1200 ) {
             add_msg_if_player( m_bad, _( "You have died of dehydration." ) );
