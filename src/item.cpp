@@ -9092,13 +9092,14 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
         }
     } else {
         // We fully blocked the attack, but our armor has a chance to take chip damage.
-        // Chip damage is only for attacks from solid objects.
-        if( premitigated.type->env || !premitigated.type->physical ) {
+        // Chip damage is only for attacks from solid objects which had > 1 base damage.
+        if( premitigated.type->env || !premitigated.type->physical || premitigated.amount < 2 ) {
             return armor_status::UNDAMAGED;
         }
         int chip_res = chip_resistance( false, bp );
-        // .05% of the damage we blocked, capped at 2.5% if the attack did 50 damage of a single type.
-        float base_chance = std::min( .025f, ( premitigated.amount * 0.0005f ) );
+        // The base chance is 0.5% of the damage blocked, capped at 25% if there was 50 damage of a single type.
+        // This seems high but it will be heavily mitigated below.
+        float base_chance = std::min( 0.25f, ( premitigated.amount * 0.005f ) );
         /*
         * Divide chip_res by 1/3. chip_res is used by both weapons and armor and was previously balanced for weapons.
         * The only alternative to dividing here would be to refactor resistance for all mats and redo the existing
