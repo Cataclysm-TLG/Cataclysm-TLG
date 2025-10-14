@@ -2,12 +2,6 @@
   {
     "type": "item_group",
     "subtype": "collection",
-    "id": "holster_supp_MEU",
-    "entries": [ { "item": "m1911", "variant": "m1911_MEU", "ammo-item": "45_acp", "charges": 7, "contents-item": [ "suppressor" ] } ]
-  },
-  {
-    "type": "item_group",
-    "subtype": "collection",
     "id": "holster_supp_usp9",
     "entries": [ { "item": "usp_9mm", "ammo-item": "9mmfmj", "charges": 15, "contents-item": [ "suppressor_compact" ] } ]
   },
@@ -5914,10 +5908,10 @@
           { "item": "gloves_liner" },
           { "item": "polaroid_photo" },
           { "item": "suppressor" },
-          { "item": "tele_sight_pistol" },
+          { "item": "rail_laser_sight" },
           { "group": "charged_cell_phone" },
-          { "item": "glock_29", "ammo-item": "10mm_fmj", "charges": 15 },
-          { "item": "glock_20mag", "ammo-item": "10mm_fmj", "charges": 15, "container-item": "bbholster" }
+          { "item": "sig_p230", "ammo-item": "32_acp_jhp", "charges": 8 },
+          { "item": "sigp230mag", "ammo-item": "32_acp_jhp", "charges": 8, "container-item": "bbholster" }
         ]
       },
       "male": {
