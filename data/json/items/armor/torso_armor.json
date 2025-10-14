@@ -107,35 +107,36 @@
     "looks_like": "tunic_rag",
     "color": "red",
     "longest_side": "60 cm",
-    "warmth": 15,
+    "warmth": 35,
     "material_thickness": 4,
+    "environmental_protection": 1,
     "flags": [ "OUTER", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
-        "encumbrance": 38,
+        "encumbrance": 24,
         "coverage": 85,
         "covers": [ "torso" ]
       },
       {
         "material": [
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
-        "encumbrance": 10,
+        "encumbrance": 8,
         "coverage": 85,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ]
       },
       {
         "material": [
           { "type": "carpet_pilling", "covered_by_mat": 100, "thickness": 3.0 },
-          { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "plastic", "covered_by_mat": 60, "thickness": 0.3 }
         ],
-        "encumbrance": 10,
+        "encumbrance": 8,
         "coverage": 85,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
@@ -180,7 +181,7 @@
         "encumbrance": 4,
         "coverage": 90,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
         "rigid_layer_only": true
       }
     ],
@@ -638,7 +639,7 @@
         "encumbrance": 3,
         "coverage": 100,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
         "material": [
           { "type": "thermo_resin", "covered_by_mat": 80, "thickness": 2.0 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 8.0 }
@@ -701,7 +702,7 @@
     "warmth": 5,
     "material_thickness": 3,
     "flags": [ "SKINTIGHT" ],
-    "armor": [ { "coverage": 65, "covers": [ "torso" ], "rigid_layer_only": true, "encumbrance": 6 } ]
+    "armor": [ { "coverage": 65, "covers": [ "torso" ], "rigid_layer_only": true, "encumbrance": 6 }, { "coverage": 85, "covers": [ "arm_r" ], "specifically_covers": [ "arm_shoulder_r", "wing_bird_shoulder_r" ], "rigid_layer_only": true, "encumbrance": 4 } ]
   },
   {
     "id": "vest_leather_mod",
@@ -905,14 +906,14 @@
     "description": "Armor made of countless links of steel wire woven into the shape of a vest.  It's flexible enough to fit under outerwear, and can be adjusted for a looser fit.",
     "weight": "6894 g",
     "volume": "1 L",
-    "longest_side": "10 cm",
+    "longest_side": "15 cm",
     "price": "100 USD",
     "price_postapoc": "20 USD",
     "to_hit": -1,
     "material": [ "steel_chain" ],
     "symbol": "[",
     "looks_like": "vest_leather",
-    "color": "light_red",
+    "color": "light_gray",
     "warmth": 0,
     "flags": [ "STURDY", "NORMAL" ],
     "use_action": {

@@ -90,7 +90,7 @@ int angle_to_dir8( const units::angle direction )
 
 const char *weight_units()
 {
-    return get_option<std::string>( "UNIT_SYSTEM" ) == "imperial" ? _( "imperial" ) : _( "metric" );
+    return get_option<std::string>( "UNIT_SYSTEM" ) == "imperial" ? _( "pounds" ) : _( "kg" );
 }
 
 const char *volume_units_abbr()
@@ -143,7 +143,7 @@ double convert_velocity( int velocity, const units_type vel_units )
 double convert_weight( const units::mass &weight )
 {
     double ret = to_gram( weight );
-    if( get_option<std::string>( "UNIT_SYSTEM" ) == "kg" ) {
+    if( get_option<std::string>( "UNIT_SYSTEM" ) == "metric" ) {
         ret /= 1000;
     } else {
         ret /= 453.6;
@@ -282,10 +282,10 @@ double convert_volume( int volume, int *out_scale )
     double ret = volume;
     int scale = 0;
     const std::string vol_units = get_option<std::string>( "UNIT_SYSTEM" );
-    if( vol_units == "c" ) {
+    if( vol_units == "imperial" ) {
         ret *= 0.004;
         scale = 1;
-    } else if( vol_units == "l" ) {
+    } else if( vol_units == "metric" ) {
         ret *= 0.001;
         scale = 2;
     } else {
