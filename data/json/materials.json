@@ -1376,7 +1376,7 @@
       { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 1.5, "cut": 2, "acid": 4, "heat": 2, "bullet": 2 },
+    "resist": { "bash": 1.5, "cut": 2, "acid": 3, "heat": 2, "bullet": 2 },
     "repair_difficulty": 3
   },
   {
