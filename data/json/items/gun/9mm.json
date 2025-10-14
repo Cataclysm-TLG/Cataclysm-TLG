@@ -798,7 +798,7 @@
     "ammo": [ "9mm" ],
     "ranged_damage": { "damage_type": "bullet", "amount": -1 },
     "dispersion": 400,
-    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
+    "valid_mod_locations": [ [ "muzzle", 1 ], [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "durability": 9,
     "blackpowder_tolerance": 48,
     "min_cycle_recoil": 450,
