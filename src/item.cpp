@@ -8954,21 +8954,17 @@ int item::chip_resistance( bool worst, const bodypart_id &bp ) const
             return res;
         }
     }
-
     const int total = type->mat_portion_total == 0 ? 1 : type->mat_portion_total;
     for( const std::pair<const material_id, int> &mat : made_of() ) {
         const int val = ( mat.first->chip_resist() * mat.second ) / total;
         res = worst ? std::min( res, val ) : std::max( res, val );
     }
-
     if( res == INT_MAX || res == INT_MIN ) {
         return 2;
     }
-
     if( res <= 0 ) {
         return 0;
     }
-
     return res;
 }
 
@@ -9075,10 +9071,9 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
     if( !one_in( num_parts_covered ) && !du.type->env ) {
         return armor_status::UNDAMAGED;
     }
-    // Don't damage armor as much when bypassed by armor piercing
-    // AP attacks usually concentrate force in a small area
+    // Don't damage armor as much when bypassed by armor piercing, both for balance and because most of these
+    // are things like IMPALE which is stabbing a tiny area.
     const float post_mitigated_dmg = du.amount;
-    // more gradual damage chance calc
     if( post_mitigated_dmg > armors_own_resist ) {
         // Figure out chance of damage relative to the damage we took.
         float damaged_chance = ( 0.11 * ( post_mitigated_dmg / ( armors_own_resist + 2 ) ) + 0.1 ) *
@@ -9096,12 +9091,36 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
             return armor_status::UNDAMAGED;
         }
     } else {
-        // Fixed 0.5% chance of chip dmg, even if the armor blocked everything. Sturdy items and power armors never take chip damage.
-        if( has_flag( flag_STURDY ) || !one_in( 200 ) ) {
+        // We fully blocked the attack, but our armor has a chance to take chip damage.
+        // Chip damage is only for attacks from solid objects which had > 1 base damage.
+        if( premitigated.type->env || !premitigated.type->physical || premitigated.amount < 2 ) {
+            return armor_status::UNDAMAGED;
+        }
+        int chip_res = chip_resistance( false, bp );
+        // The base chance is 0.5% of the damage blocked, capped at 25% if there was 50 damage of a single type.
+        // This seems high but it will be heavily mitigated below.
+        float base_chance = std::min( 0.25f, ( premitigated.amount * 0.005f ) );
+        /*
+        * Divide chip_res by 1/3. chip_res is used by both weapons and armor and was previously balanced for weapons.
+        * The only alternative to dividing here would be to refactor resistance for all mats and redo the existing
+        * weapon function. The weapon stuff works fine at the moment, so no thanks.
+        */
+        float adjusted_chance = base_chance / ( ( chip_res / 3.0f ) + 1.0f );
+        if( has_flag( flag_STURDY ) ) {
+            adjusted_chance *= 0.5f;
+        }
+        // Soft items are protected from bash damage in much the same way the PLASTIC flag protects monsters.
+        if( premitigated.type == damage_bash && is_soft() ) {
+            adjusted_chance *= 0.66;
+        }
+        // Roll for chip damage.
+        if( rng_float( 0.0f, 1.0f ) <= adjusted_chance ) {
+            return mod_damage( itype::damage_scale * enchant_multiplier ) ? armor_status::DESTROYED :
+                   armor_status::DAMAGED;
+        } else {
             return armor_status::UNDAMAGED;
         }
     }
-
     return mod_damage( itype::damage_scale * enchant_multiplier ) ? armor_status::DESTROYED :
            armor_status::DAMAGED;
 }
