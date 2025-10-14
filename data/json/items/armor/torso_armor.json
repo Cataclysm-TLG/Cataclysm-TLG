@@ -702,7 +702,16 @@
     "warmth": 5,
     "material_thickness": 3,
     "flags": [ "SKINTIGHT" ],
-    "armor": [ { "coverage": 65, "covers": [ "torso" ], "rigid_layer_only": true, "encumbrance": 6 }, { "coverage": 85, "covers": [ "arm_r" ], "specifically_covers": [ "arm_shoulder_r", "wing_bird_shoulder_r" ], "rigid_layer_only": true, "encumbrance": 4 } ]
+    "armor": [
+      { "coverage": 65, "covers": [ "torso" ], "rigid_layer_only": true, "encumbrance": 6 },
+      {
+        "coverage": 85,
+        "covers": [ "arm_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "wing_bird_shoulder_r" ],
+        "rigid_layer_only": true,
+        "encumbrance": 4
+      }
+    ]
   },
   {
     "id": "vest_leather_mod",
