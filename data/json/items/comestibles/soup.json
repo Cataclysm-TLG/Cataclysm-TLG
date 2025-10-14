@@ -6,7 +6,7 @@
     "name": { "str_sp": "vegetable broth" },
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -20,7 +20,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT" ],
-    "fun": 1,
+    "fun": 2,
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
@@ -29,12 +29,11 @@
     "looks_like": "water",
     "name": { "str_sp": "meat broth" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "demihuman %s" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } }
     ],
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -48,7 +47,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT" ],
-    "fun": 1,
+    "fun": 2,
     "vitamins": [ [ "vitC", "1 mg" ], [ "iron", "1 mg" ], [ "calcium", "19 mg" ], [ "meat_allergen", 1 ] ]
   },
   {
@@ -57,18 +56,17 @@
     "looks_like": "broth",
     "name": { "str_sp": "bone broth" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "demihuman %s" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } }
     ],
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
     "quench": 30,
-    "calories": 41,
-    "description": "A tasty and nutritious broth made from bones, with added vinegar to extract more calcium.",
+    "calories": 5,
+    "description": "A broth made from boiling bones, with vinegar added to extract more calcium.",
     "price": "3 USD 50 cent",
     "price_postapoc": "25 cent",
     "material": [ "bone" ],
@@ -77,7 +75,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE", "NO_SALVAGE" ],
-    "fun": 10,
+    "fun": 2,
     "vitamins": [ [ "calcium", 7 ], [ "iron", "200 μg" ], [ "meat_allergen", 1 ] ]
   },
   {
@@ -102,7 +100,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 4 ], [ "calcium", 1 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 1
+    "fun": 3
   },
   {
     "type": "COMESTIBLE",
@@ -126,7 +124,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 4 ], [ "calcium", 1 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 2
+    "fun": 4
   },
   {
     "type": "COMESTIBLE",
@@ -155,7 +153,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 36 ], [ "calcium", 3 ], [ "iron", 13 ], [ "meat_allergen", 1 ] ],
-    "fun": 1
+    "fun": 4
   },
   {
     "type": "COMESTIBLE",
@@ -228,7 +226,7 @@
     "charges": 1,
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 30 ], [ "calcium", 5 ], [ "iron", 28 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 8
+    "fun": 6
   },
   {
     "type": "COMESTIBLE",
@@ -253,7 +251,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 9 ], [ "iron", 3 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 1
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
@@ -278,7 +276,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 9 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ], [ "egg_allergen", 1 ] ],
-    "fun": 1
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
