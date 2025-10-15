@@ -278,6 +278,7 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
             }
         }
     }
+
     if( !params.ignore_walls ) {
         map &here = get_map();
         for( const tripoint_bub_ms &ep : end_points ) {

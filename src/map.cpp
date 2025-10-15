@@ -7839,6 +7839,7 @@ int map::coverage( const tripoint_bub_ms &p ) const
         return obstacle_f->coverage;
     }
     if( const optional_vpart_position vp = veh_at( p ) ) {
+        const bool is_quarterpanel = vp->part_with_feature( VPFLAG_HALF_BOARD, true ).has_value();
         const bool is_obstacle = vp->obstacle_at_part().has_value();
         const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
         const vehicle &veh = vp->vehicle();
@@ -7855,8 +7856,12 @@ int map::coverage( const tripoint_bub_ms &p ) const
         }
         if( all_no_cover ) {
             return 0;
-        } else if( is_obstacle ) {
+            // TODO: Quarterpanels are currently obstacles, but they shouldn't be. If we fix that, we'll
+            // need to check more rigorously for whether our bomb is inside the car.
+        } else if( is_quarterpanel ) {
             return 60;
+        } else if( is_obstacle ) {
+            return 100;
         } else if( !is_aisle ) {
             return 45;
         }
@@ -9774,26 +9779,48 @@ void map::build_obstacle_cache(
         for( int smy = min_submap.y(); smy <= max_submap.y(); ++smy ) {
             const submap *cur_submap = get_submap_at_grid( tripoint_rel_sm{ smx, smy, start.z()} );
             if( cur_submap == nullptr ) {
-                debugmsg( "Tried to build obstacle cache at (%d,%d,%d) but the submap is not loaded", smx, smy,
-                          start.z() );
+                debugmsg( "Tried to build obstacle cache at (%d,%d,%d) but the submap is not loaded",
+                          smx, smy, start.z() );
                 continue;
             }
 
-            // TODO: Init indices to prevent iterating over unused submap sections.
             for( int sx = 0; sx < SEEX; ++sx ) {
                 for( int sy = 0; sy < SEEY; ++sy ) {
                     const point_sm_ms sp( sx, sy );
-                    int ter_move = cur_submap->get_ter( sp ).obj().movecost;
-                    int furn_move = cur_submap->get_furn( sp ).obj().movecost;
+                    // Get terrain and furniture once per tile
+                    const ter_id ter_here = cur_submap->get_ter( sp );
+                    const ter_t &ter_obj = ter_here.obj();
+                    const furn_id furn_here = cur_submap->get_furn( sp );
+                    int furniture_coverage = 0;
+                    int furn_attenuation = 0;
+                    int coverage = 0;
+                    int attenuation = 0;
+                    if( furn_here ) {
+                        const furn_t &furn_obj = furn_here.obj();
+                        furniture_coverage = furn_obj.coverage;
+                        if( furniture_coverage > 0 ) {
+                            furn_attenuation = rng( furn_obj.bash->str_min, furn_obj.bash->str_max );
+                        }
+                    }
+                    coverage = ter_obj.coverage;
+                    if( ter_obj.bash ) {
+                        attenuation = rng( ter_obj.bash->str_min, ter_obj.bash->str_max );
+                    }
+                    int total_coverage = std::min( 100, furniture_coverage + coverage );
+
+                    if( total_coverage > 0 ) {
+                        attenuation = ( furn_attenuation * furniture_coverage + attenuation * coverage ) / total_coverage;
+                        attenuation = std::clamp( attenuation, 1, 100 );
+                    }
+
                     const point p2( sx + smx * SEEX, sy + smy * SEEY );
-                    if( ter_move == 0 || furn_move < 0 || ter_move + furn_move == 0 ) {
-                        obstacle_cache[p2.x][p2.y].velocity = 1000.0f;
-                        obstacle_cache[p2.x][p2.y].density = 0.0f;
+
+                    if( coverage > 0 ) {
+                        obstacle_cache[p2.x][p2.y].velocity = std::min( obstacle_cache[p2.x][p2.y].velocity,
+                                                              std::clamp( ( 1.0f - attenuation / 100.0f ) * 1.2f, 0.0f, 1.2f ) );
+                        obstacle_cache[p2.x][p2.y].density =  std::min( obstacle_cache[p2.x][p2.y].density,
+                                                              ( 1.0f - ( coverage / 100.0f ) ) * ( 1.0f - ( furniture_coverage / 100.0f ) ) );
                     } else {
-                        // Magic number warning, this is the density of air at sea level at
-                        // some nominal temp and humidity.
-                        // TODO: figure out if our temp/altitude/humidity variation is
-                        // sufficient to bother setting this differently.
                         obstacle_cache[p2.x][p2.y].velocity = 1.2f;
                         obstacle_cache[p2.x][p2.y].density = 1.0f;
                     }
@@ -9801,10 +9828,12 @@ void map::build_obstacle_cache(
             }
         }
     }
+
+
     VehicleList vehs = get_vehicles( start, end );
     const inclusive_cuboid<tripoint_bub_ms> bounds( start, end );
-    // Cache all the vehicle stuff in one loop
     for( wrapped_vehicle &v : vehs ) {
+        int vehicle_coverage = 0;
         for( const vpart_reference &vp : v.v->get_all_parts() ) {
             tripoint_bub_ms p { v.pos + vp.part().precalc[0].raw()};
             if( p.z() != start.z() ) {
@@ -9813,12 +9842,39 @@ void map::build_obstacle_cache(
             if( !bounds.contains( p ) ) {
                 continue;
             }
-
-            if( vp.obstacle_at_part() ) {
-                obstacle_cache[p.x()][p.y()].velocity = 1000.0f;
-                obstacle_cache[p.x()][p.y()].density = 0.0f;
+            if( const optional_vpart_position vp = veh_at( p ) ) {
+                const bool is_quarterpanel = vp->part_with_feature( VPFLAG_HALF_BOARD, true ).has_value();
+                const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
+                const bool is_obstacle = vp->obstacle_at_part().has_value();
+                const vehicle &veh = vp->vehicle();
+                const point_rel_ms rel = vp->mount_pos();
+                bool all_no_cover = true;
+                for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+                    const vehicle_part &vp_here = veh.part( idx );
+                    const vpart_info &vpi_here = vp_here.info();
+                    if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
+                        vpi_here.location != "roof" ) {
+                        all_no_cover = false;
+                        break; // Early exit since at least one part provides cover.
+                    }
+                }
+                if( all_no_cover ) {
+                    vehicle_coverage = 0;
+                } else if( is_quarterpanel ) {
+                    vehicle_coverage = 60;
+                } else if( is_obstacle ) {
+                    vehicle_coverage = 100;
+                } else if( !is_aisle ) {
+                    vehicle_coverage = 45;
+                }
+                // TODO: Vehicle HP/armor could get involved here or something.
+                obstacle_cache[p.x()][p.y()].velocity = std::min( obstacle_cache[p.x()][p.y()].velocity,
+                                                        ( 1.0f - ( vehicle_coverage / 100.0f ) ) * 1.2f );
+                obstacle_cache[p.x()][p.y()].density = std::min( obstacle_cache[p.x()][p.y()].density,
+                                                       1.0f - ( vehicle_coverage / 100.0f ) );
             }
         }
+
     }
     // Iterate over creatures and set them to block their squares relative to their size.
     for( Creature &critter : g->all_creatures() ) {
@@ -9826,11 +9882,13 @@ void map::build_obstacle_cache(
         if( loc.z() != start.z() || !inbounds( loc ) ) {
             continue;
         }
-        // TODO: scale this with expected creature "thickness".
-        obstacle_cache[loc.x()][loc.y()].velocity = 1.2f;
+        // TODO: Use creature's HP and armor, check for relevant flags.
+        obstacle_cache[loc.x()][loc.y()].velocity = std::min( obstacle_cache[loc.x()][loc.y()].velocity,
+                1.2f );
         // ranged_target_size is "proportion of square that is blocked", and density needs to be
         // "transmissivity of square", so we need the reciprocal.
-        obstacle_cache[loc.x()][loc.y()].density = 1.0 - critter.ranged_target_size();
+        obstacle_cache[loc.x()][loc.y()].density = std::min( obstacle_cache[loc.x()][loc.y()].density,
+                1.0f - static_cast<float>( critter.ranged_target_size() ) );
     }
 }
 

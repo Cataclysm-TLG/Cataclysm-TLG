@@ -471,46 +471,83 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
             cloud.velocity <= MIN_EFFECTIVE_VELOCITY ) {
             continue;
         }
+        float passing_fraction = 0.0f;
+        float blocked_fraction = 1.0f;
+        float blocked_velocity = cloud.velocity;
         distrib.emplace_back( target );
+
         int damage = ballistic_damage( cloud.velocity, fragment_mass );
+        // Scale damage for obstacles using obstacle_cache
+        float coverage = 1.0f -
+                         obstacle_cache[target.x()][target.y()].density;  // Fraction of the tile blocked. 1.0f = all, 0.0f = none.
+        float attenuation =
+            obstacle_cache[target.x()][target.y()].velocity; // Fraction of velocity retained for blocked fragments.
+
+        if( coverage > 0.0f ) {
+            int partial_damage = static_cast<int>( damage * coverage );
+            if( optional_vpart_position vp = m->veh_at( target ) ) {
+                vp->vehicle().damage( m[0], vp->part_index(), partial_damage );
+            } else {
+                m->bash( target, partial_damage, true );
+            }
+            passing_fraction = 1.0f - coverage;
+            blocked_fraction = coverage;
+            // Velocity for the blocked fragments
+            blocked_velocity = cloud.velocity * attenuation;
+        }
         const tripoint_abs_ms abs_target = m->get_abs( target );
         Creature *critter = creatures.creature_at( abs_target );
+
         if( damage > 0 && critter && !critter->is_dead_state() ) {
             std::poisson_distribution<> d( cloud.density );
             int hits = d( rng_get_engine() );
             double size_1 = rng_float( critter->ranged_target_size() + 1.0, 5.0 );
-            double size_2 = rng_float( critter->ranged_target_size(), std::min( 5.0,
-                                       critter->ranged_target_size() + 1.0 ) );
+            double size_2 = rng_float( critter->ranged_target_size(),
+                                       std::min( 5.0, critter->ranged_target_size() + 1.0 ) );
             hits = rng( ( -hits / size_1 ), ( hits * size_2 ) );
+            hits = std::max( 0, hits );
             dealt_projectile_attack frag;
             frag.proj = proj;
             frag.shrapnel = true;
             frag.proj.speed = cloud.velocity;
             frag.proj.impact = damage_instance( damage_bullet, damage );
+
             for( int i = 0; i < hits; ++i ) {
                 frag.missed_by = rng_float( 0.05, 1.0 / critter->ranged_target_size() );
                 critter->deal_projectile_attack( m, mutable_source, frag, frag.missed_by, false );
-                add_msg_debug( debugmode::DF_EXPLOSION, "Shrapnel hit %s at %d m/s at a distance of %d",
+
+                add_msg_debug( debugmode::DF_EXPLOSION,
+                               "Shrapnel hit %s at %d m/s at a distance of %d",
                                critter->disp_name(),
-                               frag.proj.speed, static_cast<int>( std::round( trig_dist_z_adjust( src.raw(), target.raw() ) ) ) );
-                add_msg_debug( debugmode::DF_EXPLOSION, "Shrapnel dealt %d damage", frag.dealt_dam.total_damage() );
+                               frag.proj.speed,
+                               static_cast<int>( std::round(
+                                                     trig_dist_z_adjust( src, target ) ) ) );
+                add_msg_debug( debugmode::DF_EXPLOSION,
+                               "Shrapnel dealt %d damage", frag.dealt_dam.total_damage() );
+
                 if( critter->is_dead_state() ) {
                     break;
                 }
             }
+
             auto it = frag.targets_hit[critter];
-            if( reality_bubble().inbounds(
-                    abs_target ) ) { // Only report on critters in the reality bubble. Should probably be only for visible critters...
-                multi_projectile_hit_message( critter, it.first, it.second, n_gettext( "bomb fragment",
-                                              "bomb fragments", it.first ) );
+            if( reality_bubble().inbounds( abs_target ) ) {
+                multi_projectile_hit_message( critter, it.first, it.second,
+                                              n_gettext( "bomb fragment", "bomb fragments", it.first ) );
             }
         }
-        if( m->impassable( target ) ) {
-            if( optional_vpart_position vp = m->veh_at( target ) ) {
-                vp->vehicle().damage( m[0], vp->part_index(), damage / 10 );
-            } else {
-                m->bash( target, damage / 100, true );
-            }
+        // Resolve effects of cover on the cloud after everything else so that creatures aren't protected by cover they're standing on.
+        if( coverage > 0.0f ) {
+            passing_fraction = 1.0f - coverage;
+            blocked_fraction = coverage;
+            float velocity_proportion = obstacle_cache[target.x()][target.y()].velocity / 1.2f;
+            // Reduce velocity and density for blocked fragments.
+            blocked_velocity = cloud.velocity * velocity_proportion;
+            // New cloud velocity = weighted combination of passing + blocked fragments.
+            cloud.velocity = cloud.velocity * passing_fraction + blocked_velocity * blocked_fraction;
+            // Reduce cloud density relative to coverage and attenuation.
+            cloud.density = cloud.density * passing_fraction + cloud.density * blocked_fraction *
+                            velocity_proportion;
         }
     }
 

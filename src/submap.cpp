@@ -424,7 +424,6 @@ void submap::merge_submaps( submap *copy_from, bool copy_from_is_overlay )
                     this->m->trp[x][y] == tr_null ) ) {
                 this->m->trp[x][y] = copy_from->m->trp[x][y];
             }
-
             if( copy_from->m->rad[x][y] > 0 && ( copy_from_is_overlay || this->m->rad[x][y] == 0 ) ) {
                 this->m->rad[x][y] = copy_from->m->rad[x][y];
             }
