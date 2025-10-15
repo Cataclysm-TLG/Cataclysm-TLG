@@ -2543,6 +2543,9 @@ class tinymap : private map
         int get_radiation( const tripoint_omt_ms &p ) const {
             return map::get_radiation( rebase_bub( p ) );
         }
+        int get_coverage( const tripoint_omt_ms &p ) const {
+            return map::coverage( rebase_bub( p ) );
+        }
         bool has_graffiti_at( const tripoint_omt_ms &p ) const {
             return map::has_graffiti_at( rebase_bub( p ) );
         }

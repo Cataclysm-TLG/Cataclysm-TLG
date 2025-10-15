@@ -23,6 +23,8 @@
 #include "field.h"
 #include "game_constants.h"
 #include "item.h"
+#include "map_scale_constants.h"
+#include "mapdata.h"
 #include "mapgen.h"
 #include "mdarray.h"
 #include "point.h"
@@ -141,6 +143,17 @@ class submap
                 return uniform_ter;
             }
             return m->ter[p.x()][p.y()];
+        }
+
+        int compute_coverage( const point_sm_ms &p ) const {
+            int coverage = 0;
+            const auto &f = m ? m->frn[p.x()][p.y()] : furn_str_id::NULL_ID();
+            const auto &t = m ? m->ter[p.x()][p.y()] : uniform_ter;
+            if( f != furn_str_id::NULL_ID() && f->coverage > 0 ) {
+                coverage += f->coverage;
+            }
+            coverage += t->coverage;
+            return coverage;
         }
 
         void set_ter( const point_sm_ms &p, ter_id terr ) {
