@@ -83,7 +83,7 @@
     "color": "red",
     "coverage": 0,
     "concealment": 50,
-    "move_cost_mod": 2,
+    "move_cost_mod": 0,
     "required_str": -1,
     "flags": [
       "PLANT",
@@ -109,7 +109,7 @@
     "color": "light_green",
     "coverage": 0,
     "concealment": 35,
-    "move_cost_mod": 1,
+    "move_cost_mod": 0,
     "required_str": -1,
     "flags": [
       "PLANT",

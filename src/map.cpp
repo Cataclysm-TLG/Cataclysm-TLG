@@ -1273,6 +1273,10 @@ std::set<tripoint_bub_ms> map::get_moving_vehicle_targets( const Creature &z, in
         if( !v.v->is_moving() ) {
             continue;
         }
+        if( v.v->get_driver( *this ) != nullptr &&
+            z.attitude_to( *v.v->get_driver( *this ) ) != Creature::Attitude::HOSTILE ) {
+            continue;
+        }
         if( std::abs( v.pos.z() - zpos.z() ) > fov_3d_z_range ) {
             continue;
         }
@@ -9218,7 +9222,7 @@ void map::spawn_monsters_submap_group( const tripoint_rel_sm &gp, mongroup &grou
         ignore_sight = true;
     }
 
-    static const auto allow_on_terrain = [&]( const tripoint_bub_ms & p ) {
+    const auto allow_on_terrain = [&]( const tripoint_bub_ms & p ) {
         // TODO: flying creatures should be allowed to spawn without a floor,
         // but the new creature is created *after* determining the terrain, so
         // we can't check for it here.
