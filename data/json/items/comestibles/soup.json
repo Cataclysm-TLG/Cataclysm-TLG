@@ -28,9 +28,7 @@
     "id": "broth_meat",
     "looks_like": "water",
     "name": { "str_sp": "meat broth" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } }
-    ],
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } } ],
     "weight": "253 g",
     "color": "yellow",
     "spoils_in": "3 days 12 hours",
@@ -55,9 +53,7 @@
     "id": "broth_bone",
     "looks_like": "broth",
     "name": { "str_sp": "bone broth" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } }
-    ],
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } } ],
     "weight": "253 g",
     "color": "yellow",
     "spoils_in": "3 days 12 hours",
