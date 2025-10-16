@@ -397,18 +397,26 @@ class veh_menu_cb : public uilist_callback
             }
             last = menu->selected;
             avatar &player_character = get_avatar();
+
             if( menu->selected < 0 || menu->selected >= static_cast<int>( points.size() ) ) {
                 player_character.view_offset = tripoint_rel_ms::zero;
             } else {
                 const tripoint &center = points[menu->selected];
                 player_character.view_offset = tripoint_rel_ms( center - player_character.pos_bub().raw() );
-                // Remove next line if/when it's wanted/safe to shift view to other zlevels
+                // Prevent view from jumping across z-levels.
                 player_character.view_offset.z() = 0;
             }
+
             g->invalidate_main_ui_adaptor();
-            if( on_select ) {
-                on_select();
-                map &here = get_map(); // TODO: Handle getting the correct map.
+
+            // Copy callback locally to protect against self-destruction.
+            const auto cb = on_select;
+            if( cb ) {
+                cb();  // May destroy menu or this callback object.
+            }
+            // Only invalidate map cache if the global game pointer still exists.
+            if( g != nullptr ) {
+                map &here = get_map();
                 here.invalidate_map_cache( here.get_abs_sub().z() );
             }
         }
@@ -445,8 +453,11 @@ bool veh_menu::query()
     veh_menu_cb cb( locations );
 
     cb.on_select = [this, &menu]() {
-        if( items[menu.selected]._on_select ) {
-            items[menu.selected]._on_select();
+        if( menu.selected >= 0 && menu.selected < static_cast<int>( items.size() ) ) {
+            const auto &it = items[menu.selected];
+            if( it._on_select ) {
+                it._on_select();
+            }
         }
     };
 
