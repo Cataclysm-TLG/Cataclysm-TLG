@@ -255,16 +255,8 @@
       "msg": "You roll up the sleeping bag, preparing it for transport."
     },
     "armor": [
-      {
-        "encumbrance": 80,
-        "coverage": 100,
-        "covers": [ "torso", "leg_l", "leg_r", "foot_l", "foot_r" ]
-      },
-      {
-        "encumbrance": 60,
-        "coverage": 80,
-        "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ]
-      }
+      { "encumbrance": 80, "coverage": 100, "covers": [ "torso", "leg_l", "leg_r", "foot_l", "foot_r" ] },
+      { "encumbrance": 60, "coverage": 80, "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] }
     ]
   },
   {
@@ -285,16 +277,8 @@
     "environmental_protection": 1,
     "flags": [ "OVERSIZE", "BELTED", "SOFT", "COLLAR", "POCKETS", "HOOD" ],
     "armor": [
-      {
-        "encumbrance": 80,
-        "coverage": 100,
-        "covers": [ "torso", "leg_l", "leg_r", "foot_l", "foot_r" ]
-      },
-      {
-        "encumbrance": 60,
-        "coverage": 80,
-        "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ]
-      }
+      { "encumbrance": 80, "coverage": 100, "covers": [ "torso", "leg_l", "leg_r", "foot_l", "foot_r" ] },
+      { "encumbrance": 60, "coverage": 80, "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ] }
     ]
   },
   {
