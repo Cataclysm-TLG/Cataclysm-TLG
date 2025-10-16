@@ -162,11 +162,13 @@ static const quality_id qual_CUT( "CUT" );
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_unarmed( "unarmed" );
 
-static const trait_id trait_BRAWLER( "BRAWLER" );
+static const trait_id trait_CLAWS_TENTACLE( "CLAWS_TENTACLE" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
+static const trait_id trait_PAWS_LARGE( "PAWS_LARGE" );
 static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHELL3( "SHELL3" );
+static const trait_id trait_THRESH_FISH( "THRESH_FISH" );
 static const trait_id trait_WAYFARER( "WAYFARER" );
 
 static const zone_type_id zone_type_CHOP_TREES( "CHOP_TREES" );
@@ -697,7 +699,7 @@ static void grab()
                        !creatures.creature_at( grabp )->as_npc()->enough_working_legs();
             // You can grab your pets.
         } else if( creatures.creature_at( grabp )->is_monster() ) {
-            tolerate = !creatures.creature_at( grabp )->as_monster()->is_pet();
+            tolerate = creatures.creature_at( grabp )->as_monster()->is_pet();
         }
 
         if( creatures.creature_at( grabp )->is_npc() && !tolerate ) {
@@ -715,13 +717,28 @@ static void grab()
             // TODO: Force this to use unarmed skill for one-handed or multilimb grabs. Will need to
             // write an optional member into hit_roll to name a weapon skill.
             // TODO TWO: Grabbing with whip-type weapons? Definitely no one should tolerate that.
+            float accuracy_penalty = 0.0f;
+            bool hand_fishing = ( z && z->has_flag( mon_flag_AQUATIC ) );
+            if( hand_fishing ) {
+                bool hand_fisher = you.has_trait( trait_PAWS_LARGE ) || you.has_trait( trait_CLAWS_TENTACLE ) ||
+                                   ( you.has_trait( trait_THRESH_FISH ) &&
+                                     ( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, you.pos_bub() ) ||
+                                       here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.pos_bub() ) ) );
+                if( !hand_fisher ) {
+                    if( one_in( 5 ) ) {
+                        you.add_msg_if_player( m_warning, _( "Grabbing onto %s is particularly difficult" ),
+                                               z->disp_name() );
+                    }
+                    accuracy_penalty = -8.0f;
+                }
+            }
             int hitspread = creatures.creature_at( grabp )->deal_melee_attack( you.as_character(),
-                            you.as_character()->hit_roll() );
+                            you.as_character()->hit_roll() + accuracy_penalty );
             if( hitspread < 0 && !tolerate ) {
                 add_msg( m_warning, _( "You reach for %s, but fail to make contact!" ), z->disp_name() );
                 return;
             }
-            add_msg( m_good, _( "You grab the %s." ), z->name() );
+            add_msg( m_good, _( "You grab %s." ), z->disp_name() );
             if( rng( 0, 100 ) <= static_cast<int>( z->type->def_chance ) ) {
                 z->type->sp_defense( *z, you.as_character(), nullptr );
             }
@@ -1805,10 +1822,6 @@ static void fire()
         static_cast<int>( you.calculate_by_enchantment( 1,
                           enchant_vals::mod::MELEE_RANGE_MODIFIER ) ) > 1 ) {
         reach_attack( you );
-        return;
-    }
-    if( you.has_trait( trait_BRAWLER ) ) {
-        add_msg( m_bad, _( "You refuse to use ranged weapons." ) );
         return;
     }
     // try firing gun

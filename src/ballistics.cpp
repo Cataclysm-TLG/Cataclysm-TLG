@@ -26,6 +26,7 @@
 #include "mapdata.h"
 #include "messages.h"
 #include "monster.h"
+#include "mtype.h"
 #include "npc.h"
 #include "options.h"
 #include "point.h"
@@ -238,7 +239,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
 {
     const bool do_animation = get_option<bool>( "ANIMATION_PROJECTILES" );
 
-    double range = rl_dist( source, target_arg );
+    double range = std::round( trig_dist_z_adjust( source, target_arg ) );
 
     creature_tracker &creatures = get_creature_tracker();
     Creature *target_critter = creatures.creature_at( target_arg );
@@ -615,7 +616,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 return false;
             }
             // search for creatures in radius 4 around impact site
-            if( rl_dist( z.pos_bub( *here ), tp ) <= 4 &&
+            if( static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub( *here ), tp ) ) ) <= 4 &&
                 here->sees( z.pos_bub( *here ), tp, -1 ) ) {
                 // don't hit targets that have already been hit
                 for( auto it : attack.targets_hit ) {
@@ -635,6 +636,27 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             if( here == &reality_bubble() ) {
                 sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
                                          sfx::get_heard_volume( z.pos_bub() ), sfx::get_heard_angle( z.pos_bub() ) );
+            }
+        }
+    }
+    for( Creature *critter : here->get_creatures_in_radius( tp, 5 ) ) {
+        if( critter->sees( *here, tp ) ) {
+            if( critter->is_monster() ) {
+                monster &mon = *critter->as_monster();
+                if( mon.type->has_anger_trigger( mon_trigger::HURT ) ||
+                    mon.type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                    mon.type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ) {
+                    mon.anger += 10;
+                    if( origin && origin->is_avatar() ) {
+                        mon.aggro_character = true;
+                    }
+                } else if( mon.type->has_fear_trigger( mon_trigger::HURT ) ) {
+                    mon.morale -= 10;
+                }
+                if( mon.type->has_fear_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                    mon.type->has_fear_trigger( mon_trigger::HOSTILE_SEEN ) ) {
+                    mon.morale -= 10;
+                }
             }
         }
     }
