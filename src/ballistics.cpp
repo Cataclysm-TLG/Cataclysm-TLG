@@ -643,7 +643,6 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         if( critter->sees( *here, tp ) ) {
             if( critter->is_monster() ) {
                 monster &mon = *critter->as_monster();
-                add_msg( _( "%s saw and is reacting" ), mon.name() );
                 if( mon.type->has_anger_trigger( mon_trigger::HURT ) || mon.type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon.type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ) {
                     mon.anger += 10;
                     if( origin && origin->is_avatar() ) {
