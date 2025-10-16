@@ -644,7 +644,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
     }
 
     if( action == butcher_type::QUARTER ) {
-        if( corpse.size == creature_size::tiny ) {
+        if( corpse.size < creature_size::medium ) {
             you.add_msg_if_player( m_bad, _( "This corpse is too small to quarter without damaging." ),
                                    corpse.nname() );
             act.targets.pop_back();
@@ -848,17 +848,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             time_to_cut *= 2;
             break;
         case butcher_type::QUARTER:
-            time_to_cut /= 4;
-            if( time_to_cut < 1200 ) {
-                time_to_cut = 1200;
-            }
             break;
-        // case butcher_type::DISMEMBER:
-        //     time_to_cut /= 10;
-        //     if( time_to_cut < 600 ) {
-        //         time_to_cut = 600;
-        //     }
-        //     break;
         case butcher_type::DISSECT:
             time_to_cut *= 6;
             break;
