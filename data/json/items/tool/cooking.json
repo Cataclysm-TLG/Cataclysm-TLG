@@ -104,7 +104,8 @@
             }
           }
         ]
-      }
+      },
+      { "type": "link_up", "cable_length": 2, "charge_rate": "120 W" }
     ],
     "flags": [ "SHEATH_SWORD", "NONCONDUCTIVE", "WATER_BREAK_ACTIVE" ],
     "pocket_data": [
