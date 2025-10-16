@@ -598,7 +598,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         }
 
         drop_or_embed_projectile( here, attack );
-    
+
         int dealt_damage = attack.dealt_dam.total_damage();
         apply_ammo_effects( null_source ? nullptr : origin, tp, proj.proj_effects, dealt_damage );
         const explosion_data &expl = proj.get_custom_explosion();
@@ -643,7 +643,9 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         if( critter->sees( *here, tp ) ) {
             if( critter->is_monster() ) {
                 monster &mon = *critter->as_monster();
-                if( mon.type->has_anger_trigger( mon_trigger::HURT ) || mon.type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon.type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ) {
+                if( mon.type->has_anger_trigger( mon_trigger::HURT ) ||
+                    mon.type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                    mon.type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ) {
                     mon.anger += 10;
                     if( origin && origin->is_avatar() ) {
                         mon.aggro_character = true;
@@ -651,9 +653,10 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 } else if( mon.type->has_fear_trigger( mon_trigger::HURT ) ) {
                     mon.morale -= 10;
                 }
-                if( mon.type->has_fear_trigger( mon_trigger::HOSTILE_CLOSE ) || mon.type->has_fear_trigger( mon_trigger::HOSTILE_SEEN ) ) {
+                if( mon.type->has_fear_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                    mon.type->has_fear_trigger( mon_trigger::HOSTILE_SEEN ) ) {
                     mon.morale -= 10;
-                }                        
+                }
             }
         }
     }

@@ -720,10 +720,14 @@ static void grab()
             float accuracy_penalty = 0.0f;
             bool hand_fishing = ( z && z->has_flag( mon_flag_AQUATIC ) );
             if( hand_fishing ) {
-                bool hand_fisher = you.has_trait( trait_PAWS_LARGE ) || you.has_trait( trait_CLAWS_TENTACLE ) || ( you.has_trait( trait_THRESH_FISH ) && ( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, you.pos_bub() ) || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.pos_bub() ) ) );
+                bool hand_fisher = you.has_trait( trait_PAWS_LARGE ) || you.has_trait( trait_CLAWS_TENTACLE ) ||
+                                   ( you.has_trait( trait_THRESH_FISH ) &&
+                                     ( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, you.pos_bub() ) ||
+                                       here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.pos_bub() ) ) );
                 if( !hand_fisher ) {
                     if( one_in( 5 ) ) {
-                        you.add_msg_if_player( m_warning, _( "Grabbing onto %s is particularly difficult"), z->disp_name() );
+                        you.add_msg_if_player( m_warning, _( "Grabbing onto %s is particularly difficult" ),
+                                               z->disp_name() );
                     }
                     accuracy_penalty = -8.0f;
                 }

@@ -3228,8 +3228,10 @@ void npc::avoid_friendly_fire()
     candidates.erase( candidates.begin() );
     std::sort( candidates.begin(), candidates.end(),
     [&tar, &center]( const tripoint_bub_ms & l, const tripoint_bub_ms & r ) {
-        return ( static_cast<int>( std::round( trig_dist_z_adjust( l, tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( l, center ) ) ) ) <
-               ( static_cast<int>( std::round( trig_dist_z_adjust( r, tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( r, center ) ) ) );
+        return ( static_cast<int>( std::round( trig_dist_z_adjust( l,
+                                               tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( l, center ) ) ) ) <
+               ( static_cast<int>( std::round( trig_dist_z_adjust( r,
+                                               tar ) ) ) - static_cast<int>( std::round( trig_dist_z_adjust( r, center ) ) ) );
     } );
 
     for( const tripoint_bub_ms &pt : candidates ) {
