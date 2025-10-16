@@ -4422,7 +4422,7 @@
   {
     "type": "mutation",
     "id": "EATPOISON_WEAK",
-    "name": { "str": "Intestinal Fortitude" },
+    "name": { "str": "Obligate Digestion" },
     "points": 2,
     "description": "While it is by no means pleasant, your body has adapted to handle the toxic contaminants in mutant meat a little better.  You can eat a bit more of the stuff before suffering ill effects.",
     "types": [ "CONSTITUTION" ],
