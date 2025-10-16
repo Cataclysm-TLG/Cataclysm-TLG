@@ -68,7 +68,6 @@
       { "monster": "mon_dog_zombie_brute", "weight": 25 },
       { "monster": "mon_zombie_dog_acidic", "weight": 15 },
       { "monster": "mon_zombie_swat", "weight": 20 },
-      { "monster": "mon_zombie_skull", "weight": 10 },
       { "monster": "mon_zpig_brute", "weight": 5 },
       { "monster": "mon_zombie_biter", "weight": 15 },
       { "monster": "mon_zombie_soldier", "weight": 50 },
