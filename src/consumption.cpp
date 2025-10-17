@@ -1014,22 +1014,23 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
     const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin );
     if( ( food_is_human_flesh && !has_flag( STATIC( json_character_flag( "CANNIBAL" ) ) ) &&
           !has_flag( json_flag_PSYCHOPATH ) && !has_flag( json_flag_SAPIOVORE ) ) &&
-        ( !food.has_flag( flag_HEMOVORE_FUN ) && ( !has_flag( json_flag_BLOODFEEDER ) ) ) ) {
+        !( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) ) {
         add_consequence( _( "The thought of eating human flesh makes you feel sick." ), CANNIBALISM );
     }
 
-    if( food.get_comestible()->parasites > 0 && !food.has_flag( flag_NO_PARASITES ) &&
-        !has_flag( json_flag_PARAIMMUNE ) && ( !food.has_flag( flag_HEMOVORE_FUN ) ||
-                ( !has_flag( json_flag_HEMOVORE ) && !has_flag( json_flag_BLOODFEEDER ) ) ) ) {
+    if( food.get_comestible()->parasites > 0 &&
+        !food.has_flag( flag_NO_PARASITES ) &&
+        !has_flag( json_flag_PARAIMMUNE ) &&
+        !( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) ) {
         add_consequence( string_format( _( "Consuming this %s probably isn't very healthy." ),
                                         food.tname() ),
-                         PARASITES );
+                        PARASITES );
     }
 
     const bool edible = comest->comesttype == comesttype_FOOD || food.has_flag( flag_USE_EAT_VERB );
 
     if( edible && has_effect( effect_nausea ) ) {
-        add_consequence( _( "You still feel nauseous and will probably puke it all up again." ), NAUSEA );
+        add_consequence( _( "You still feel nauseated and will probably puke it all up again." ), NAUSEA );
     }
 
     if( ( allergy_type( food ) != morale_type::NULL_ID() ) || ( carnivore &&
@@ -1039,10 +1040,7 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
     }
 
     if( saprophage && edible && !food.rotten() && !food.has_flag( flag_FERTILIZER ) ) {
-        // Note: We're allowing all non-solid "food". This includes drugs
-        // Hard-coding fertilizer for now - should be a separate flag later
-        //~ No, we don't eat "rotten" food. We eat properly aged food, like a normal person.
-        //~ Semantic difference, but greatly facilitates people being proud of their character.
+        // Note: We're allowing all non-solid "food". This includes drugs.
         add_consequence( _( "Your stomach won't be happy (not rotten enough)." ), ALLERGY_WEAK );
     }
 
