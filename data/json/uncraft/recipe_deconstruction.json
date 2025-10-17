@@ -5945,14 +5945,6 @@
     "components": [ [ [ "human_meat_scrap", 10 ] ] ]
   },
   {
-    "result": "demihuman_flesh",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "20 s",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "demihuman_meat_scrap", 10 ] ] ]
-  },
-  {
     "result": "mutant_meat",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
@@ -5966,7 +5958,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "cotton_patchwork", 4 ] ], [ [ "zipper_short_plastic", 1 ] ] ]
+    "components": [ [ [ "nylon", 2 ] ], [ [ "zipper_short_plastic", 1 ] ] ]
   },
   {
     "result": "scissors_medical",
