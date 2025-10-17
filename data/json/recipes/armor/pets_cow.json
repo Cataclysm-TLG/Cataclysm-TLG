@@ -137,7 +137,7 @@
     "difficulty": 4,
     "time": "7 h 45 m",
     "using": [ [ "sewing_standard", 90 ], [ "clasps", 5 ] ],
-    "components": [ [ [ "bone", 46 ], [ "bone_human", 46 ], [ "bone_demihuman", 46 ] ], [ [ "boiled_leather_armor_suit", 3 ] ] ],
+    "components": [ [ [ "bone", 46 ], [ "bone_human", 46 ] ], [ [ "boiled_leather_armor_suit", 3 ] ] ],
     "extend": { "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_carving" } ] }
   },
   {

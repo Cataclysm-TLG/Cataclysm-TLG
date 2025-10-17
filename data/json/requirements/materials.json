@@ -44,20 +44,20 @@
   {
     "id": "antler",
     "type": "requirement",
-    "//": "Will I ever add more antler types? Who knows.",
+    "//": "A whole entire antler.",
     "components": [ [ [ "antler", 1 ] ] ]
   },
   {
     "id": "bone_edible",
     "type": "requirement",
     "//": "Any kind of non-poisonous bones, human or not.",
-    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ], [ "bone_demihuman", 1 ] ] ]
+    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ] ] ]
   },
   {
     "id": "bone_sturdy",
     "type": "requirement",
     "//": "Any kind of bones, human or not.  Tainted bones are too brittle and won't work for this purpose.",
-    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ], [ "bone_demihuman", 1 ] ] ]
+    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ] ] ]
   },
   {
     "id": "bone_any",

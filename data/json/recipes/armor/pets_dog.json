@@ -99,7 +99,7 @@
     "time": "6 h",
     "reversible": true,
     "using": [ [ "sewing_standard", 15 ], [ "clasps", 3 ] ],
-    "components": [ [ [ "bone", 13 ], [ "bone_human", 13 ], [ "bone_demihuman", 13 ] ], [ [ "vest_leather", 1 ] ] ],
+    "components": [ [ [ "bone", 13 ], [ "bone_human", 13 ] ], [ [ "vest_leather", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_closures" },

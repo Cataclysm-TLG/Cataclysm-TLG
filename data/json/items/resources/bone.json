@@ -84,14 +84,6 @@
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "type": "GENERIC",
-    "id": "bone_demihuman",
-    "copy-from": "bone",
-    "name": { "str": "demihuman bone" },
-    "description": "A bone from a demihuman being.  Could be used to make some stuff, if you're feeling sufficiently ghoulish.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "type": "COMESTIBLE",
     "id": "meal_bone",
     "name": { "str_sp": "bone meal" },
