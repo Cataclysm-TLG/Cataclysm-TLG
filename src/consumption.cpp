@@ -1024,7 +1024,7 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
         !( has_flag( json_flag_HEMOVORE ) && food.has_flag( flag_HEMOVORE_FUN ) ) ) {
         add_consequence( string_format( _( "Consuming this %s probably isn't very healthy." ),
                                         food.tname() ),
-                        PARASITES );
+                         PARASITES );
     }
 
     const bool edible = comest->comesttype == comesttype_FOOD || food.has_flag( flag_USE_EAT_VERB );
