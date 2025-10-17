@@ -123,7 +123,6 @@ static const json_character_flag json_flag_PRED4( "PRED4" );
 static const json_character_flag json_flag_PSYCHOPATH( "PSYCHOPATH" );
 static const json_character_flag json_flag_SAPIOVORE( "SAPIOVORE" );
 static const json_character_flag json_flag_SPIRITUAL( "SPIRITUAL" );
-static const json_character_flag json_flag_STRICT_HUMANITARIAN( "STRICT_HUMANITARIAN" );
 
 static const material_id material_alcohol( "alcohol" );
 static const material_id material_all( "all" );
@@ -1383,9 +1382,7 @@ void Character::modify_morale( item &food, const int nutr )
         }
     }
 
-    const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin ) ||
-                                     ( food.has_flag( flag_STRICT_HUMANITARIANISM ) &&
-                                       !has_flag( json_flag_STRICT_HUMANITARIAN ) );
+    const bool food_is_human_flesh = food.has_vitamin( vitamin_human_flesh_vitamin );
     if( food_is_human_flesh ) {
         // Sapiovores don't recognize humans as the same species, and are totally fine with it.
         // For everyone else, there are two factors: One is that it's gross, the other is that it's immoral.

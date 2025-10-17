@@ -332,7 +332,6 @@ const flag_id flag_SPEEDLOADER_CLIP( "SPEEDLOADER_CLIP" );
 const flag_id flag_SPLINT( "SPLINT" );
 const flag_id flag_STAB( "STAB" );
 const flag_id flag_STAB_IMMUNE( "STAB_IMMUNE" );
-const flag_id flag_STRICT_HUMANITARIANISM( "STRICT_HUMANITARIANISM" );
 const flag_id flag_STR_DRAW( "STR_DRAW" );
 const flag_id flag_STR_RELOAD( "STR_RELOAD" );
 const flag_id flag_STURDY( "STURDY" );

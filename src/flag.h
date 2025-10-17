@@ -335,7 +335,6 @@ extern const flag_id flag_SPEEDLOADER_CLIP;
 extern const flag_id flag_SPLINT;
 extern const flag_id flag_STAB;
 extern const flag_id flag_STAB_IMMUNE;
-extern const flag_id flag_STRICT_HUMANITARIANISM;
 extern const flag_id flag_STR_DRAW;
 extern const flag_id flag_STR_RELOAD;
 extern const flag_id flag_STURDY;
