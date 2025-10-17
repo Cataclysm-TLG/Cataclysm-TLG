@@ -55,7 +55,6 @@
     "harvest": "cerbearus_with_skulls",
     "dissect": "dissect_ursine_sample_small",
     "families": [ "prof_intro_biology", "prof_physiology" ],
-    "zombify_into": "mon_meat_cocoon_med",
     "flags": [
       "SEES",
       "HEARS",
@@ -100,7 +99,6 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "fear_triggers": [ "SOUND" ],
-    "zombify_into": "mon_meat_cocoon_small",
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ],
     "armor": { "cut": 4 }
   },
@@ -133,7 +131,6 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
     "fear_triggers": [ "SOUND" ],
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "SWIMS", "WARM" ]
   },
   {
@@ -177,7 +174,6 @@
     "path_settings": { "max_dist": 7 },
     "anger_triggers": [ "FRIEND_ATTACKED", "PLAYER_WEAK" ],
     "fear_triggers": [ "SOUND" ],
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "GROUP_MORALE", "EATS" ],
     "armor": { "bash": 1 }
   },
@@ -212,7 +208,6 @@
     "harvest": "mutant_mammal_fur",
     "dissect": "dissect_lupine_sample_single",
     "families": [ "prof_intro_biology", "prof_physiology" ],
-    "zombify_into": "mon_meat_cocoon_tiny",
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "EAT_CARRION", 60 ] ],
     "flags": [
       "SEES",
@@ -283,7 +278,6 @@
       { "id": "bite_grab_required" }
     ],
     "anger_triggers": [ "STALK", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_WEAK", "PLAYER_CLOSE" ],
-    "zombify_into": "mon_meat_cocoon_large",
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "KEENNOSE", "EATS" ],
     "armor": { "bash": 8, "cut": 10, "electric": 1 }
   },
@@ -317,7 +311,6 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "path_settings": { "max_dist": 10 },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
-    "zombify_into": "mon_meat_cocoon_small",
     "reproduction": { "baby_monster": "mon_deer_mutant_spider_fawn", "baby_count": 1, "baby_timer": 330 },
     "//": " 201 days gestation period. The fawn will stay with its mother for approximately one year, suckling for three to four months.",
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
@@ -356,7 +349,6 @@
     "path_settings": { "max_dist": 10 },
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "upgrades": { "age_grow": 330, "into": "mon_deer_mutant_spider" },
-    "zombify_into": "mon_meat_cocoon_small",
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "STUMBLES" ]
   },
   {
@@ -401,7 +393,6 @@
       "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
       "pet": "The %s happily wags its tail while you pat its head."
     },
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [
       "ANIMAL",
       "DOGFOOD",
@@ -424,7 +415,7 @@
     "id": "mon_dog_mutant_loper",
     "type": "MONSTER",
     "name": { "str": "Loper" },
-    "description": "This dog has undergone visible mutation.  While its body is larger than normal, its legs are noticeably elongated, muscular and covered in long cord-like fur.  It easily stands as tall as you and watches your every move closely with reflective eyes.",
+    "description": "This dog has undergone visible mutation.  While its body is larger than normal, its legs are noticeably elongated, muscular and covered in long cord-like fur.  It easily stands as tall as a man and watches its surroundings with reflective eyes.",
     "default_faction": "dog",
     "bodytype": "dog",
     "categories": [ "WILDLIFE" ],
@@ -462,12 +453,6 @@
       { "type": "leap", "cooldown": 35, "move_cost": 100, "max_range": 3, "min_consider_range": 2 }
     ],
     "stomach_size": 400,
-    "petfood": {
-      "food": [ "DOGFOOD" ],
-      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
-      "pet": "The %s happily wags its tail while you pat their head."
-    },
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [
       "ANIMAL",
       "DOGFOOD",
@@ -508,6 +493,11 @@
     "dodge": 1,
     "vision_night": 4,
     "stomach_size": 150,
+    "petfood": {
+      "food": [ "DOGFOOD" ],
+      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
+      "pet": "The %s happily wags its tail while you pat their head."
+    },
     "harvest": "dog_small_with_skull_mutant",
     "upgrades": { "age_grow": 42, "into": "mon_dog_mutant_loper" },
     "extend": { "flags": [ "NO_BREED" ] }
@@ -516,7 +506,7 @@
     "id": "mon_dog_mutant_mauler",
     "type": "MONSTER",
     "name": { "str": "Mauler" },
-    "description": "This stocky dog has undergone visible mutation.  Its jaw has widened and features more teeth than any dog should ever have.  While its toothy grin is unnerving, its tail wags as energetically as ever.",
+    "description": "This stocky dog has undergone visible mutation.  Its jaw has widened and features more teeth than any canine should ever have.",
     "default_faction": "dog",
     "bodytype": "dog",
     "categories": [ "WILDLIFE" ],
@@ -560,12 +550,6 @@
       { "id": "grab" }
     ],
     "stomach_size": 500,
-    "petfood": {
-      "food": [ "DOGFOOD" ],
-      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
-      "pet": "The %s happily wags its tail while you pat their head."
-    },
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [
       "ANIMAL",
       "DOGFOOD",
@@ -604,6 +588,11 @@
     "stomach_size": 200,
     "dodge": 1,
     "vision_night": 4,
+    "petfood": {
+      "food": [ "DOGFOOD" ],
+      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
+      "pet": "The %s happily wags its tail while you pat their head."
+    },
     "harvest": "dog_small_with_skull_mutant",
     "upgrades": { "age_grow": 42, "into": "mon_dog_mutant_mauler" },
     "extend": { "flags": [ "NO_BREED" ] }
@@ -655,12 +644,6 @@
       { "id": "grab" }
     ],
     "stomach_size": 400,
-    "petfood": {
-      "food": [ "DOGFOOD" ],
-      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
-      "pet": "The %s happily wags its tail while you pat their head."
-    },
-    "zombify_into": "mon_meat_cocoon_tiny",
     "flags": [
       "ANIMAL",
       "DOGFOOD",
@@ -700,6 +683,11 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 1 } ],
     "dodge": 1,
     "vision_night": 4,
+    "petfood": {
+      "food": [ "DOGFOOD" ],
+      "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
+      "pet": "The %s happily wags its tail while you pat their head."
+    },
     "harvest": "dog_small_with_skull_mutant",
     "upgrades": { "age_grow": 42, "into": "mon_dog_mutant_thrasher" },
     "extend": { "flags": [ "NO_BREED" ] }

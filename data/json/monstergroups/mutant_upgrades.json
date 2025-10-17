@@ -74,5 +74,49 @@
     "type": "monstergroup",
     "default": "mon_big_rat",
     "monsters": [ { "monster": "mon_big_rat", "weight": 320 }, { "monster": "mon_tunnel_rat", "weight": 180 } ]
+  },
+  {
+    "name": "GROUP_DOG_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_BIG_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_big", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_loper", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_TRAINED_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_trained", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_BIG_TRAINED_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_big_trained", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_loper", "weight": 3, "cost_multiplier": 0 }
+    ]
   }
 ]

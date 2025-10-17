@@ -82,7 +82,6 @@
     "upgrades": { "half_life": 144, "into_group": "GROUP_MUTANT_EVOLVED" },
     "regenerates": 1,
     "regen_morale": true,
-    "zombify_into": "mon_meat_cocoon_small",
     "flags": [ "SEES", "HEARS", "SMELLS", "HAS_MIND", "CAN_OPEN_DOORS", "WARM", "BASHES", "EATS" ],
     "armor": { "bash": 5, "cut": 5, "bullet": 4, "electric": 1 }
   },
@@ -127,7 +126,6 @@
     ],
     "death_drops": "mon_mutant_evolved_death_drops",
     "regenerates": 3,
-    "zombify_into": "mon_meat_cocoon_large",
     "extend": {
       "flags": [ "SMELLS", "KEENNOSE", "PUSH_MON", "PUSH_VEH", "CAN_OPEN_DOORS" ],
       "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK", "HURT" ]
