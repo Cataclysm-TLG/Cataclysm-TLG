@@ -1212,16 +1212,6 @@
     "info": "This food is <info>raw</info>, and will be <good>more nutritious</good> if cooked."
   },
   {
-    "id": "CANNIBALISM",
-    "type": "json_flag",
-    "//": "Obsoleted!"
-  },
-  {
-    "id": "STRICT_HUMANITARIANISM",
-    "type": "json_flag",
-    "craft_inherit": true
-  },
-  {
     "id": "ALLERGEN_BREAD",
     "type": "json_flag"
   },
