@@ -82,9 +82,8 @@
     "monsters": [
       { "monster": "mon_dog", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
-      { "monster": "mon_dog_incorporeal", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_dog_telekenetic", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_dog_antimemetic", "weight": 1, "cost_multiplier": 0 }
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
     ]
   },
   {
@@ -105,9 +104,8 @@
     "monsters": [
       { "monster": "mon_dog_trained", "weight": 50, "cost_multiplier": 0 },
       { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
-      { "monster": "mon_dog_incorporeal", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_dog_telekenetic", "weight": 1, "cost_multiplier": 0 },
-      { "monster": "mon_dog_antimemetic", "weight": 1, "cost_multiplier": 0 }
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
     ]
   },
   {
