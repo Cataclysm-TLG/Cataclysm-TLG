@@ -1265,7 +1265,7 @@
     "price": "50 cent",
     "price_postapoc": "1 USD",
     "fun": -30,
-    "vitamins": [ [ "iron", 29 ], [ "toxin", 38 ] ],
+    "vitamins": [ [ "iron", 29 ], [ "mutant_toxin", 38 ] ],
     "rot_spawn": { "group": "GROUP_EGG_MUTANT_FROG", "chance": 20 }
   }
 ]
