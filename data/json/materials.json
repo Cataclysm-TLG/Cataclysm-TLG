@@ -3395,24 +3395,5 @@
     "id": "mi-go_blood",
     "name": "Mi-go Ichor",
     "copy-from": "water"
-  },
-  {
-    "type": "material",
-    "id": "mi-go_bone",
-    "name": "Mi-go Bone",
-    "density": 2.0,
-    "specific_heat_liquid": 1.2,
-    "specific_heat_solid": 1.2,
-    "latent_heat": 200,
-    "rotting": true,
-    "chip_resist": 12,
-    "wind_resist": 90,
-    "repaired_with": "bone_mi-go",
-    "dmg_adj": [ "scratched", "cut", "cracked", "shattered" ],
-    "bash_dmg_verb": "cracked",
-    "cut_dmg_verb": "chipped",
-    "acid_dmg_verb": "burned",
-    "resist": { "bash": 3, "cut": 4, "acid": 10, "heat": 2, "bullet": 2 },
-    "repair_difficulty": 7
   }
 ]

@@ -2887,5 +2887,130 @@
     "type": "MIGRATION",
     "id": "backpack_giant",
     "replace": "bigback"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "methed_alcohol",
+    "replace": "denat_alcohol"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_demihuman",
+    "replace": "bone"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_cracklins",
+    "replace": "cracklins"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_meat_scrap",
+    "replace": "meat_scrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lung",
+    "replace": "lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_bug_lungs",
+    "replace": "mutant_lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_heart",
+    "replace": "heart"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_liver",
+    "replace": "liver"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_marrow",
+    "replace": "human_marrow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_brain",
+    "replace": "human_brain"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_kidney",
+    "replace": "human_kidney"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lung",
+    "replace": "human_lung"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "raw_demihumanleather",
+    "replace": "sheet_leather"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_fat",
+    "replace": "fat"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_tallow",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_lard",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_flesh",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_blood",
+    "replace": "blood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_cooked",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_stomach_boiled",
+    "replace": "stomach_boiled"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_demihuman_stomach_boiled",
+    "replace": "small_stomach_boiled"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_stomach",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_demihuman_stomach",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "demihuman_fat",
+    "replace": "lard"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_mi-go",
+    "replace": "meat_mi-go"
   }
 ]
