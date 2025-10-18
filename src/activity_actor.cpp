@@ -7486,8 +7486,8 @@ void longsalvage_activity_actor::start( player_activity &act, Character & )
 {
     act.index = index;
 
-    //todo: refactor the actor to process items in ::do_turn, then remove setting the moves to 0
-    //this currently still can't get interrupted before you get attacked
+    // todo: refactor the actor to process items in ::do_turn, then remove setting the moves to 0
+    // this currently still can't get interrupted before you get attacked
     act.moves_left = 0;
 }
 

@@ -624,7 +624,7 @@ Character::Character() :
 
     move_mode = move_mode_walk;
     next_expected_position = std::nullopt;
-    invalidate_crafting_inventory();
+    invalidate_inventory();
 
     set_power_level( 0_kJ );
     cash = 0;
@@ -3509,8 +3509,7 @@ std::vector<item_location> Character::nearby( const
 
 std::list<item> Character::remove_worn_items_with( const std::function<bool( item & )> &filter )
 {
-    invalidate_inventory_validity_cache();
-    invalidate_leak_level_cache();
+    invalidate_inventory();
     return worn.remove_worn_items_with( filter, *this );
 }
 
@@ -3537,7 +3536,7 @@ item Character::remove_weapon()
     weapon = item();
     get_event_bus().send<event_type::character_wields_item>( getID(), weapon.typeId() );
     cached_info.erase( "weapon_value" );
-    invalidate_weight_carried_cache();
+    invalidate_inventory();
     return tmp;
 }
 
@@ -3854,6 +3853,14 @@ ret_val<void> Character::can_unwield( const item &it ) const
     }
 
     return ret_val<void>::make_success();
+}
+
+void Character::invalidate_inventory()
+{
+    invalidate_inventory_validity_cache();
+    invalidate_weight_carried_cache();
+    invalidate_leak_level_cache();
+    invalidate_crafting_inventory();
 }
 
 void Character::invalidate_inventory_validity_cache()
@@ -6509,7 +6516,7 @@ bool Character::pour_into( item_location &container, item &liquid, bool ignore_s
         add_msg_if_player( _( "There's some left over!" ) );
     }
 
-    get_avatar().invalidate_weight_carried_cache();
+    get_avatar().invalidate_inventory();
 
     return true;
 }
@@ -10429,19 +10436,15 @@ void Character::on_worn_item_soiled( const item &it )
     }
 }
 
-
 void Character::on_item_wear( const item &it )
 {
-    invalidate_inventory_validity_cache();
-    invalidate_leak_level_cache();
+    invalidate_inventory();
     morale->on_item_wear( it );
 }
 
 void Character::on_item_takeoff( const item &it )
 {
-    invalidate_inventory_validity_cache();
-    invalidate_weight_carried_cache();
-    invalidate_leak_level_cache();
+    invalidate_inventory();
     morale->on_item_takeoff( it );
 }
 
@@ -10458,7 +10461,7 @@ void Character::on_item_acquire( const item &it )
         return VisitResponse::NEXT;
     } );
 
-    invalidate_weight_carried_cache();
+    invalidate_inventory();
 
     if( update_overmap_seen ) {
         g->update_overmap_seen();
@@ -12318,7 +12321,7 @@ bool Character::unload( item_location &loc, bool bypass_activity,
         return this->i_add_or_drop( e );
     } );
 
-    invalidate_weight_carried_cache();
+    invalidate_inventory();
 
     if( target->is_magazine() ) {
         if( bypass_activity ) {
@@ -13718,6 +13721,7 @@ bool Character::wield( item &it, std::optional<int> obtain_cost )
         last_item = to_wield.typeId();
         get_event_bus().send<event_type::character_wields_item>( getID(), item().typeId() );
     }
+    invalidate_inventory();
     return true;
 }
 

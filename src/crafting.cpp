@@ -711,6 +711,7 @@ void Character::invalidate_crafting_inventory()
 {
     crafting_cache.valid = false;
     crafting_cache.crafting_inventory->clear();
+    invalidate_weight_carried_cache();
 }
 
 void Character::make_craft( const recipe_id &id_to_make, int batch_size,
