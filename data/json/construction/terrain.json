@@ -276,7 +276,7 @@
     "activity_level": "EXTRA_EXERCISE",
     "do_turn_special": "do_turn_shovel"
   },
-    {
+  {
     "type": "construction",
     "id": "constr_pit_shallow_rocky_soil",
     "skill": "survival",

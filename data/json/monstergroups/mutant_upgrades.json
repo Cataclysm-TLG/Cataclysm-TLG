@@ -2,9 +2,7 @@
   {
     "name": "GROUP_SNAIL_FROM_ITEM",
     "type": "monstergroup",
-    "monsters": [
-      { "monster": "mon_snail_forest", "weight": 100 }
-    ]
+    "monsters": [ { "monster": "mon_snail_forest", "weight": 100 } ]
   },
   {
     "type": "monstergroup",
