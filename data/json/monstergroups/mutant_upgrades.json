@@ -1,5 +1,12 @@
 [
   {
+    "name": "GROUP_SNAIL_FROM_ITEM",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_snail_forest", "weight": 100 }
+    ]
+  },
+  {
     "type": "monstergroup",
     "name": "GROUP_CROW_MUTANT",
     "monsters": [ { "monster": "mon_crow_mutant_small", "weight": 650 }, { "monster": "mon_crow_mutant", "weight": 350 } ]
