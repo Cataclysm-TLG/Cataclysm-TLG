@@ -6856,7 +6856,7 @@
     "id": "MET_RAT",
     "name": { "str": "Rapid Metabolism" },
     "points": 0,
-    "description": "You require more food than most, but you recover stamina and heal from qounds more quickly.",
+    "description": "You require more food than most, but you recover stamina and heal from wounds more quickly.",
     "types": [ "HEALING", "METABOLISM" ],
     "prereqs": [ "HUNGER" ],
     "prereqs2": [ "SLEEPY" ],
