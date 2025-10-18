@@ -1822,7 +1822,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_TENTACLE_RAKE_NATURAL" ],
+    "techniques": [ "TEC_CLAW", "TEC_TENTACLE_RAKE_NATURAL" ],
     "armor": [
       {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 3 } ],

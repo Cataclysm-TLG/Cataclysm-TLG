@@ -1495,7 +1495,6 @@
     "messages": [ "Your tentacles rake %s", "<npcname>'s tentacles rake %s" ],
     "unarmed_allowed": true,
     "basic": true,
-    "weighting": -2,
     "reach_ok": false,
     "crit_ok": true,
     "attack_vectors": [ "vector_claw" ],
