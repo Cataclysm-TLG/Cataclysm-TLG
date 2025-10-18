@@ -157,11 +157,27 @@
       { "item": "material_gravel", "count": [ 4000, 4500 ] }
     ]
   },
+    {
+    "id": "digging_rocky_soil_50L",
+    "type": "item_group",
+    "subtype": "collection",
+    "//": "Intended to comprise about 50L of material from digging in rocky soil.",
+    "items": [
+      { "item": "material_soil", "count": [ 3, 5 ] },
+      { "item": "rock", "count": [ 15, 40 ] },
+      { "item": "rock_flaking", "count": [ 1, 4 ], "prob": 10 },
+      { "item": "flint", "prob": 5 },
+      { "item": "material_limestone", "prob": 5 },
+      { "item": "rock_large", "count": [ 5, 10 ] },
+      { "item": "pebble", "count": [ 10, 30 ] },
+      { "item": "material_gravel", "count": [ 200, 400 ] }
+    ]
+  },
   {
     "id": "digging_soil_loam_50L",
     "type": "item_group",
     "subtype": "collection",
-    "//": "~50L of loamy soil, sand, clay, and rocks from digging in generic dirt",
+    "//": "~50L of loamy soil, sand, clay, and rocks from digging in generic dirt.",
     "items": [
       { "item": "material_soil", "count": [ 8, 12 ] },
       { "item": "material_sand", "charges": [ 1, 10 ], "prob": 5 },
