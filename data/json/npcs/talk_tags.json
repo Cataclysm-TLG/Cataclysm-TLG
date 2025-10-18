@@ -2194,6 +2194,16 @@
   },
   {
     "type": "snippet",
+    "category": "<ally_rule_heal_others_true_text>",
+    "text": "<mypronoun> will use medical supplies on allies."
+  },
+  {
+    "type": "snippet",
+    "category": "<ally_rule_heal_others_false_text>",
+    "text": "<mypronoun> will not use medical supplies on others."
+  },
+  {
+    "type": "snippet",
     "category": "<ally_rule_allow_pulp_true_text>",
     "text": "<mypronoun> will smash nearby zombie corpses."
   },
@@ -2271,11 +2281,6 @@
     "type": "snippet",
     "category": "<ally_rule_avoid_locks_false_text>",
     "text": "<mypronoun> will unlock doors to open them."
-  },
-  {
-    "type": "snippet",
-    "category": "<ally_rule_hold_the_line_false_text>",
-    "text": "<mypronoun> will move freely to attack enemies."
   },
   {
     "type": "snippet",

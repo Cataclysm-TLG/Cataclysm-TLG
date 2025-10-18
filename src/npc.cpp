@@ -2359,30 +2359,31 @@ healing_options npc::has_healing_options( healing_options try_to_fix )
     healing_options can_fix;
     can_fix.clear_all();
     healing_options *fix_p = &can_fix;
-
-    visit_items( [&fix_p, try_to_fix]( item * node, item * ) {
+    float danger = danger_assessment();
+    visit_items( [&fix_p, try_to_fix, danger]( item * node, item * ) {
         const use_function *use = node->type->get_use( "heal" );
         if( use == nullptr ) {
             return VisitResponse::NEXT;
         }
-
         const heal_actor &actor = dynamic_cast<const heal_actor &>( *use->get_actor_ptr() );
-        if( try_to_fix.bandage && !fix_p->bandage && actor.bandages_power > 0.0f ) {
-            fix_p->bandage = true;
+        // Healing takes time, so do it only if we are out of danger.
+        if( danger < 0.01f ) {
+            if( try_to_fix.bandage && !fix_p->bandage && actor.bandages_power > 0.0f ) {
+                fix_p->bandage = true;
+            }
+            if( try_to_fix.disinfect && !fix_p->disinfect && actor.disinfectant_power > 0.0f ) {
+                fix_p->disinfect = true;
+            }
+            if( try_to_fix.bleed && !fix_p->bleed && actor.bleed > 0 ) {
+                fix_p->bleed = true;
+            }
+            if( try_to_fix.bite && !fix_p->bite && actor.bite > 0 ) {
+                fix_p->bite = true;
+            }
+            if( try_to_fix.infect && !fix_p->infect && actor.infect > 0 ) {
+                fix_p->infect = true;
+            }
         }
-        if( try_to_fix.disinfect && !fix_p->disinfect && actor.disinfectant_power > 0.0f ) {
-            fix_p->disinfect = true;
-        }
-        if( try_to_fix.bleed && !fix_p->bleed && actor.bleed > 0 ) {
-            fix_p->bleed = true;
-        }
-        if( try_to_fix.bite && !fix_p->bite && actor.bite > 0 ) {
-            fix_p->bite = true;
-        }
-        if( try_to_fix.infect && !fix_p->infect && actor.infect > 0 ) {
-            fix_p->infect = true;
-        }
-        // if we've found items for everything we're looking for, we're done
         if( ( !try_to_fix.bandage || fix_p->bandage ) &&
             ( !try_to_fix.disinfect || fix_p->disinfect ) &&
             ( !try_to_fix.bleed || fix_p->bleed ) &&
@@ -2390,7 +2391,6 @@ healing_options npc::has_healing_options( healing_options try_to_fix )
             ( !try_to_fix.infect || fix_p->infect ) ) {
             return VisitResponse::ABORT;
         }
-
         return VisitResponse::NEXT;
     } );
     return can_fix;
