@@ -8047,6 +8047,7 @@
     "prereqs": [ "ARM_TENTACLES", "ARM_TENTACLES_4" ],
     "threshreq": [ "THRESH_CEPHALOPOD" ],
     "category": [ "CEPHALOPOD" ],
+    "integrated_armor": [ "integrated_sucker_hooks" ],
     "enchantments": [ { "values": [ { "value": "DEXTERITY", "add": 1 } ] } ]
   },
   {
