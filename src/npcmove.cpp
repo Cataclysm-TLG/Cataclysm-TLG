@@ -2458,7 +2458,8 @@ npc_action npc::address_needs( float danger )
         } else {
             deactivate_bionic_by_id( bio_nanobots );
         }
-        if( static_cast<int>( get_skill_level( skill_firstaid ) ) > 0 ) {
+        // The danger check here is redundant, but serves as an early exit to save some cycles.
+        if( rules.has_flag( ally_rule::heal_others ) && danger < 0.01 ) {
             if( is_player_ally() ) {
                 healing_options try_to_fix_other = patient_assessment( player_character );
                 if( try_to_fix_other.any_true() ) {

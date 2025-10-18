@@ -326,11 +326,12 @@ enum class ally_rule : int {
     close_doors = 512,
     follow_close = 1024,
     avoid_doors = 2048,
-    ignore_noise = 4096,
-    forbid_engage = 8192,
-    follow_distance_2 = 16384,
-    lock_doors = 32768,
-    avoid_locks = 65536
+    heal_others = 4096,
+    ignore_noise = 8192,
+    forbid_engage = 16384,
+    follow_distance_2 = 32768,
+    lock_doors = 65536,
+    avoid_locks = 131072
 };
 
 struct ally_rule_data {
@@ -394,6 +395,13 @@ const std::unordered_map<std::string, ally_rule_data> ally_rule_strs = { {
                 ally_rule::allow_complain,
                 "<ally_rule_allow_complain_true_text>",
                 "<ally_rule_allow_complain_false_text>"
+            }
+        },
+        {
+            "heal_others", {
+                ally_rule::heal_others,
+                "<ally_rule_heal_others_true_text>",
+                "<ally_rule_heal_others_false_text>"
             }
         },
         {
