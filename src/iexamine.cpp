@@ -4817,7 +4817,7 @@ static void reload_furniture( Character &you, const tripoint_bub_ms &examp, bool
 
     add_msg( _( "You reload the %s." ), here.furnname( examp ) );
 
-    you.invalidate_crafting_inventory();
+    you.invalidate_inventory();
 }
 
 void iexamine::reload_furniture( Character &you, const tripoint_bub_ms &examp )
@@ -5083,7 +5083,6 @@ bool iexamine::toPumpFuel( const tripoint_bub_ms &src, const tripoint_bub_ms &ds
             if( item_it->charges < 1 ) {
                 items.erase( item_it );
             }
-
             return true;
         }
     }
@@ -5830,7 +5829,7 @@ void iexamine::autodoc( Character &you, const tripoint_bub_ms &examp )
                     for( const auto &e : req_anesth.get_tools() ) {
                         you.consume_tools( e );
                     }
-                    you.invalidate_crafting_inventory();
+                    you.invalidate_inventory();
                 }
                 installer.mod_moves( -to_moves<int>( 1_minutes ) );
 
@@ -6569,6 +6568,7 @@ static void smoker_load_food( Character &you, const tripoint_bub_ms &examp,
             original->charges -= copy.charges;
         }
     }
+    you.invalidate_inventory();
 }
 
 static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
@@ -6706,7 +6706,7 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
         add_msg( m_info, _( "You carefully place %1$d %2$s in the mill." ), m.count(),
                  m.tname( m.count() ) );
     }
-    you.invalidate_crafting_inventory();
+    you.invalidate_inventory();
 }
 
 void iexamine::on_smoke_out( const tripoint_bub_ms &examp, const time_point &start_time )

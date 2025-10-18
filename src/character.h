@@ -2446,7 +2446,7 @@ class Character : public Creature, public visitable
         void clear_inventory_search_cache();
 
         void drop_invalid_inventory();
-        // this cache is for checking if items in the character's inventory can't actually fit into other items they are inside of
+        // this cache is for checking if items in the character's inventory can't actually fit into other items they are inside of.
         void invalidate_inventory_validity_cache();
 
         void invalidate_weight_carried_cache();
@@ -3587,6 +3587,11 @@ class Character : public Creature, public visitable
                                              const tripoint_bub_ms &src_pos = tripoint_bub_ms::zero,
                                              int radius = PICKUP_RANGE, bool clear_path = true ) const;
         void invalidate_crafting_inventory();
+
+        /** Simply runs all the cache-invalidating functions at once to make sure the character's
+         * weight and crafting cache and stuff are all updated. Use whenever a function updates
+         * what a character is carrying or wearing. */
+        void invalidate_inventory();
 
         /** Some of the worst code I have ever written. Gins up a modifier to
          * fine_detail_vision_mod() which lets people with night vision mutations

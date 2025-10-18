@@ -705,7 +705,7 @@ void Character::drop_invalid_inventory()
         }
     }
     if( dropped_liquid ) {
-        add_msg_if_player( m_bad, _( "Liquid from your inventory has leaked onto the ground." ) );
+        add_msg_if_player( m_bad, _( "Liquid you were carrying has been spilled." ) );
     }
 
     item_location weap = get_wielded_item();

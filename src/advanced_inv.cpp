@@ -1247,7 +1247,7 @@ bool advanced_inventory::move_all_items()
                                              relative_destination );
         player_character.assign_activity( act );
     }
-
+    player_character.invalidate_inventory();
     return true;
 }
 
