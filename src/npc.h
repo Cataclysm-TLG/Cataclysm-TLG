@@ -326,12 +326,11 @@ enum class ally_rule : int {
     close_doors = 512,
     follow_close = 1024,
     avoid_doors = 2048,
-    hold_the_line = 4096,
-    ignore_noise = 8192,
-    forbid_engage = 16384,
-    follow_distance_2 = 32768,
-    lock_doors = 65536,
-    avoid_locks = 131072
+    ignore_noise = 4096,
+    forbid_engage = 8192,
+    follow_distance_2 = 16384,
+    lock_doors = 32768,
+    avoid_locks = 65536
 };
 
 struct ally_rule_data {
@@ -437,13 +436,6 @@ const std::unordered_map<std::string, ally_rule_data> ally_rule_strs = { {
                 ally_rule::avoid_locks,
                 "<ally_rule_avoid_locks_true_text>",
                 "<ally_rule_avoid_locks_false_text>"
-            }
-        },
-        {
-            "hold_the_line", {
-                ally_rule::hold_the_line,
-                "<ally_rule_hold_the_line_true_text>",
-                "<ally_rule_hold_the_line_false_text>"
             }
         },
         {

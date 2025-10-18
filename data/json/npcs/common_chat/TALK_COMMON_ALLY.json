@@ -434,15 +434,6 @@
         "topic": "TALK_COMBAT_COMMANDS",
         "effect": { "toggle_npc_rule": "avoid_friendly_fire" }
       },
-      {
-        "truefalsetext": {
-          "condition": { "npc_rule": "hold_the_line" },
-          "true": "Move wherever you need to go to fight an enemy.",
-          "false": "Hold the line: don't move onto obstacles adjacent to me."
-        },
-        "topic": "TALK_COMBAT_COMMANDS",
-        "effect": { "toggle_npc_rule": "hold_the_line" }
-      },
       { "text": "Never mind.", "topic": "TALK_NONE" }
     ]
   },
