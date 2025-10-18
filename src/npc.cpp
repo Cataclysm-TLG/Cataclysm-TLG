@@ -3588,11 +3588,6 @@ std::function<bool( const tripoint_bub_ms & )> npc::get_path_avoid() const
         if( here.is_open_air( p ) ) {
             return true;
         }
-        if( rules.has_flag( ally_rule::hold_the_line ) &&
-            ( here.close_door( p, true, true ) ||
-              here.move_cost( p ) > 2 ) ) {
-            return true;
-        }
         if( sees_dangerous_field( p ) ) {
             return true;
         }
@@ -3875,7 +3870,6 @@ npc_follower_rules::npc_follower_rules()
     set_flag( ally_rule::close_doors );
     set_flag( ally_rule::follow_close );
     clear_flag( ally_rule::avoid_doors );
-    clear_flag( ally_rule::hold_the_line );
     set_flag( ally_rule::ignore_noise );
     clear_flag( ally_rule::forbid_engage );
     clear_flag( ally_rule::follow_distance_2 );
@@ -3973,12 +3967,10 @@ void npc_follower_rules::set_danger_overrides()
     override_enable = ally_rule::DEFAULT;
     set_override( ally_rule::follow_close );
     set_override( ally_rule::avoid_doors );
-    set_override( ally_rule::hold_the_line );
     enable_override( ally_rule::follow_close );
     enable_override( ally_rule::allow_sleep );
     enable_override( ally_rule::close_doors );
     enable_override( ally_rule::avoid_doors );
-    enable_override( ally_rule::hold_the_line );
 }
 
 void npc_follower_rules::clear_overrides()

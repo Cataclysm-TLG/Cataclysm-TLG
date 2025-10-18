@@ -828,7 +828,7 @@ static void npc_temp_orders_menu( const std::vector<npc *> &npc_list )
         nmenu.addentry( NPC_CHAT_NO_GUNS, true, 'g', guy->rules.has_override_enable( ally_rule::use_guns ) ?
                         _( "Use whatever weapon you normally would" ) : _( "Don't use ranged weapons for a while" ) );
         nmenu.addentry( NPC_CHAT_PULP, true, 'p', guy->rules.has_override_enable( ally_rule::allow_pulp ) ?
-                        _( "Pulp zombies if you like" ) : _( "Hold off on pulping zombies for a while" ) );
+                        _( "Pulp zombies if you like" ) : _( "Hold off on pulping corpses for a while" ) );
         nmenu.addentry( NPC_CHAT_AVOID_DOORS, true, 'w',
                         guy->rules.has_override_enable( ally_rule::avoid_doors ) ?
                         _( "Open doors to get where you're going" ) : _( "Don't walk through closed doors" ) );
