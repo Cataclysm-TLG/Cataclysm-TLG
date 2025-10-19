@@ -207,7 +207,7 @@
       "str_max": 40,
       "sound": "crunch!",
       "sound_fail": "whump.",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "rope_makeshift_6", "count": [ 3, 4 ] },
         { "item": "2x4", "count": [ 1, 4 ] },
@@ -239,7 +239,7 @@
       "str_max": 40,
       "sound": "crunch!",
       "sound_fail": "whump.",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "rope_makeshift_6", "count": [ 3, 4 ] },
         { "item": "2x4", "count": [ 1, 4 ] },

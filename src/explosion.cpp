@@ -222,12 +222,37 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
         closed.insert( pt );
 
-        const float force = power * std::pow( distance_factor, distance );
+        float force = power * std::pow( distance_factor, distance );
         if( force <= 1.0f ) {
             continue;
         }
-
-        if( m->impassable( pt ) && pt != p ) {
+        if( m->coverage( pt ) > 0 && pt != p ) {
+            const ter_id ter_here = m->ter( pt );
+            const ter_t &ter_obj = ter_here.obj();
+            const furn_id furn_here = m->furn( pt );
+            int furniture_coverage = 0;
+            int furn_attenuation = 0;
+            int coverage = 0;
+            int attenuation = 0;
+            if( furn_here ) {
+                const furn_t &furn_obj = furn_here.obj();
+                furniture_coverage = furn_obj.coverage;
+                if( furniture_coverage > 0 ) {
+                    furn_attenuation = rng( furn_obj.bash->str_min, furn_obj.bash->str_max );
+                }
+            }
+            coverage = ter_obj.coverage;
+            if( ter_obj.bash ) {
+                attenuation = rng( ter_obj.bash->str_min, ter_obj.bash->str_max );
+            }
+            int total_coverage = std::min( 100, furniture_coverage + coverage );
+            if( total_coverage > 0 ) {
+                attenuation = ( furn_attenuation * furniture_coverage + attenuation * coverage ) / total_coverage;
+                attenuation = std::clamp( attenuation, 0, 100 );
+            }
+            force *= 1 - attenuation / 100;
+        }
+        if( ( m->impassable( pt ) && pt != p ) || force == 0 ) {
             // Don't propagate further
             continue;
         }
@@ -251,7 +276,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
             }
 
             if( bashed.count( dest ) == 0 ) {
-                bashed.insert( dest );
                 // Up to 200% bonus for shaped charge
                 // But not if the explosion is fiery, then only half the force and no bonus
                 const float bash_force = !fire ?
@@ -259,14 +283,14 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                                          force / 2;
                 if( z_offset[i] == 0 ) {
                     // Horizontal - no floor bashing
-                    m->bash( dest, bash_force, true, false, false, nullptr, false );
+                    m->bash( dest, bash_force, true, false, false, nullptr );
                 } else if( z_offset[i] > 0 ) {
                     // Should actually bash through the floor first, but that's not really possible yet
-                    m->bash( dest, bash_force, true, false, true, nullptr, false );
+                    m->bash( dest, bash_force, true, false, true, nullptr );
                 } else if( !m->valid_move( pt, dest, false, true ) ) {
                     // Only bash through floor if it doesn't exist
                     // Bash the current tile's floor, not the one's below
-                    m->bash( pt, bash_force, true, false, true, nullptr, false );
+                    m->bash( pt, bash_force, true, false, true, nullptr );
                 }
             }
 
@@ -283,17 +307,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
             if( dist_map.count( dest ) == 0 || dist_map[dest] > next_dist ) {
                 open.emplace( next_dist, dest );
                 dist_map[dest] = next_dist;
-            }
-        }
-    }
-
-    for( const tripoint_bub_ms &pos : bashed ) {
-        const tripoint_bub_ms below = pos + tripoint::below;
-        const ter_t ter_below = m->ter( below ).obj();
-
-        if( m->ter( pos ).id() == ter_t_open_air ) {
-            if( ter_below.has_flag( "NATURAL_UNDERGROUND" ) ) {
-                m->ter_set( pos, ter_below.roof );
             }
         }
     }

@@ -1187,8 +1187,7 @@ class map
          */
         bash_params bash( const tripoint_bub_ms &p, int str, bool silent = false,
                           bool destroy = false, bool bash_floor = false,
-                          const vehicle *bashing_vehicle = nullptr,
-                          bool repair_missing_ground = true );
+                          const vehicle *bashing_vehicle = nullptr );
 
         // Effects of attacks/items
         bool hit_with_acid( const tripoint_bub_ms &p );
@@ -2106,8 +2105,7 @@ class map
 
         // Internal methods used to bash just the selected features
         // Information on what to bash/what was bashed is read from/written to the bash_params struct
-        void bash_ter_furn( const tripoint_bub_ms &p, bash_params &params,
-                            bool repair_missing_ground = true );
+        void bash_ter_furn( const tripoint_bub_ms &p, bash_params &params );
         void bash_items( const tripoint_bub_ms &p, bash_params &params );
         void bash_vehicle( const tripoint_bub_ms &p, bash_params &params );
         void bash_field( const tripoint_bub_ms &p, bash_params &params );

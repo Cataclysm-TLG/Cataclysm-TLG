@@ -4050,7 +4050,9 @@ ter_str_id map::get_roof( const tripoint_bub_ms &p, const bool allow_air ) const
     // This function should not be called from the 2D mode
     // Just use t_dirt instead
     cata_assert( zlevels );
-
+    if( allow_air ) {
+        return ter_t_open_air;
+    }
     if( p.z() <= -OVERMAP_DEPTH ) {
         // Could be magma/"void" instead
         return ter_t_rock_floor;
@@ -4061,8 +4063,10 @@ ter_str_id map::get_roof( const tripoint_bub_ms &p, const bool allow_air ) const
     if( !roof ) {
         // No roof
         // Not acceptable if the tile is not passable
-        if( !allow_air ) {
+        if( !allow_air && p.z() > -1 ) {
             return ter_t_dirt;
+        } else {
+            return ter_t_rock_floor;
         }
 
         return ter_t_open_air;
@@ -4099,7 +4103,7 @@ static bool furn_is_supported( const map &m, const tripoint_bub_ms &p )
     return false;
 }
 
-void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params, bool repair_missing_ground )
+void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
 {
     int sound_volume = 0;
     std::string soundfxid;
@@ -4113,13 +4117,6 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params, bool rep
     map_furn_bash_info furn_bash;
 
     tripoint_bub_ms below = p + tripoint_rel_ms::below;
-    ter_str_id below_tile_roof = ter_t_dirt;
-    bool roof_of_below_tile = false;
-
-    if( zlevels ) {
-        below_tile_roof = get_roof( below, false );
-        roof_of_below_tile = ( terid.id.id() == below_tile_roof.id() );
-    }
 
     bool success = false;
 
@@ -4140,13 +4137,6 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params, bool rep
         if( !params.destroy ) { // NOLINT(bugprone-branch-clone)
             smash_ter = false;
             bash.reset();
-        } else if( !ter_bash.ter_set && zlevels ) {
-            // HACK: A hack for destroy && !bash_floor
-            // We have to check what would we create and cancel if it is what we have now
-            if( roof_of_below_tile ) {
-                smash_ter = false;
-                bash.reset();
-            }
         } else if( !ter_bash.ter_set && ter( p ) == ter_t_dirt ) {
             // As above, except for no-z-levels case
             smash_ter = false;
@@ -4352,33 +4342,26 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params, bool rep
         // If this terrain is being bashed from above and this terrain
         // has a valid post-destroy bashed-from-above terrain, set it
         ter_set( p, ter_bash.ter_set_bashed_from_above );
-    } else if( ter_bash.ter_set && !roof_of_below_tile ) {
+    } else if( ter_bash.ter_set ) {
         // If the terrain has a valid post-destroy terrain, set it
         ter_set( p, ter_bash.ter_set );
-    } else {
         const ter_t &ter_below = ter( below ).obj();
-        if( bash->bash_below && ter_below.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) {
+        if( p.z() > -9 && bash->bash_below && ter_below.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) {
             // When bashing the tile below, don't allow bashing the floor
             bash_params params_below = params; // Make a copy
             params_below.bashing_from_above = true;
-            //the roof tile will be destroyed, so the below tile should also be destroyed
+            // The roof tile will be destroyed, so the below tile should also be destroyed
             params_below.destroy = true;
             bash_ter_furn( below, params_below );
         }
 
-        set_to_air = roof_of_below_tile; //do not add the roof for the tile below if it was already removed
         furn_set( p, furn_str_id::NULL_ID() );
-        if( repair_missing_ground && ter_below.has_flag( "NATURAL_UNDERGROUND" ) ) {
-            ter_set( p, ter_below.roof );
-        } else {
-            ter_set( p, ter_t_open_air );
-        }
     }
 
-    if( !tent ) {
+    if( ( success || params.destroy ) && !tent ) {
         spawn_items( p, item_group::items_from( bash->drop_group, calendar::turn ) );
     }
-    //regenerates roofs for tiles that should be walkable from above
+    // Regenerates roofs for tiles that should be walkable from above.
     if( zlevels && smash_ter && !set_to_air && ter( p )->has_flag( "EMPTY_SPACE" ) &&
         ter( below )->has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) {
         const ter_str_id roof = get_roof( below, params.bash_floor && ter( below ).obj().movecost != 0 );
@@ -4404,7 +4387,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params, bool rep
 
 bash_params map::bash( const tripoint_bub_ms &p, const int str,
                        bool silent, bool destroy, bool bash_floor,
-                       const vehicle *bashing_vehicle, bool repair_missing_ground )
+                       const vehicle *bashing_vehicle )
 {
     bash_params bsh{
         str, silent, destroy, bash_floor, static_cast<float>( rng_float( 0, 1.0f ) ), false, false, false, false
@@ -4415,7 +4398,7 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     bool bashed_sealed = false;
     if( has_flag( ter_furn_flag::TFLAG_SEALED, p ) ) {
-        bash_ter_furn( p, bsh, repair_missing_ground );
+        bash_ter_furn( p, bsh );
         bashed_sealed = true;
     }
 
@@ -4433,7 +4416,7 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     // If we still didn't bash anything solid (a vehicle) or a tile with SEALED flag, bash ter/furn
     if( !bsh.bashed_solid && !bashed_sealed ) {
-        bash_ter_furn( p, bsh, repair_missing_ground );
+        bash_ter_furn( p, bsh );
     }
 
     return bsh;
@@ -9810,7 +9793,7 @@ void map::build_obstacle_cache(
 
                     if( total_coverage > 0 ) {
                         attenuation = ( furn_attenuation * furniture_coverage + attenuation * coverage ) / total_coverage;
-                        attenuation = std::clamp( attenuation, 1, 100 );
+                        attenuation = std::clamp( attenuation, 0, 100 );
                     }
 
                     const point p2( sx + smx * SEEX, sy + smy * SEEY );
