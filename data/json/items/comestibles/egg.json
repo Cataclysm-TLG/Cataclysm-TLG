@@ -26,7 +26,7 @@
     "name": { "str": "chicken egg" },
     "spoils_in": "11 days",
     "copy-from": "egg_bird",
-    "rot_spawn": { "group": "GROUP_EGG_BIRD_CHICKEN", "chance": 70 }
+    "rot_spawn": { "group": "GROUP_EGG_CHICKEN", "chance": 70 }
   },
   {
     "type": "COMESTIBLE",

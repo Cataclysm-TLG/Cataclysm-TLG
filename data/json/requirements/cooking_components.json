@@ -558,6 +558,7 @@
         [ "human_cooked", 1 ],
         [ "mutant_human_cooked", 1 ],
         [ "meat_pickled", 1 ],
+        [ "meat_fried", 1 ],
         [ "meat_smoked", 1 ],
         [ "meat_salted", 1 ],
         [ "dry_meat", 1 ],
@@ -574,7 +575,10 @@
         [ "sausage_cooked", 1 ],
         [ "sausage_wasteland", 1 ],
         [ "bratwurst_sausage", 1 ],
-        [ "meat_fried", 1 ]
+        [ "hotdogs_campfire", 1 ],
+        [ "hotdogs_cooked", 1 ],
+        [ "homemade_hotdogs", 1 ],
+        [ "hotdogs_newyork", 1 ]
       ]
     ]
   },
