@@ -226,7 +226,7 @@
       "str_max": 70,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "2x4", "count": [ 0, 5 ] },
         { "item": "wood_panel", "count": [ 0, 1 ] },
@@ -253,7 +253,7 @@
       "str_max": 70,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "2x4", "count": [ 0, 5 ] },
         { "item": "wood_panel", "count": [ 0, 1 ] },

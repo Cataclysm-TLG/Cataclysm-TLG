@@ -3102,7 +3102,7 @@
     "color": "brown",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100 }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3115,7 +3115,7 @@
     "move_cost": 2,
     "fall_damage_reduction": 1,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3127,7 +3127,7 @@
     "move_cost": 2,
     "transforms_into": "t_grass_shorn",
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "GRAZABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3139,7 +3139,7 @@
     "color": "white",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3153,7 +3153,7 @@
     "color": "green",
     "move_cost": 3,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE", "GRAZABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3169,7 +3169,7 @@
     "coverage": 50,
     "concealment": 50,
     "flags": [ "TRANSPARENT", "DIGGABLE", "PLOWABLE", "SMALL_HIDE", "GRAZABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3181,7 +3181,7 @@
     "color": "brown",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": { "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3194,7 +3194,7 @@
     "move_cost": 2,
     "transforms_into": "t_grass",
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "HARVESTED" ],
-    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": { "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3206,7 +3206,7 @@
     "color": "light_green",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": { "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3218,7 +3218,7 @@
     "color": "white",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": { "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -3252,7 +3252,7 @@
     "color": "green",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 2, "str_max": 6 }
   },
   {
     "type": "terrain",
@@ -3264,7 +3264,7 @@
     "color": "green",
     "move_cost": 5,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 10, "str_max": 20 }
   },
   {
     "type": "terrain",
@@ -3278,7 +3278,7 @@
     "coverage": 50,
     "concealment": 50,
     "flags": [ "TRANSPARENT", "DIGGABLE", "PLOWABLE", "SMALL_HIDE", "SMALL_HIDE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 30 }
   },
   {
     "type": "terrain",
@@ -3290,7 +3290,7 @@
     "color": "brown",
     "move_cost": 10,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE" ],
-    "bash": { "ter_set": "t_null", "str_min": 50, "str_max": 400, "str_min_supported": 100, "bash_below": true }
+    "bash": { "ter_set": "t_dirt", "str_min": 10, "str_max": 30 }
   },
   {
     "type": "terrain",

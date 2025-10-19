@@ -136,7 +136,7 @@
     "coverage": 40,
     "concealment": 40,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH" ],
-    "bash": { "str_min": 4, "str_max": 60, "sound": "crunch.", "sound_fail": "poof!", "ter_set": "t_null" }
+    "bash": { "str_min": 4, "str_max": 60, "sound": "crunch.", "sound_fail": "poof!", "ter_set": "t_open_air" }
   },
   {
     "type": "terrain",
@@ -206,7 +206,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 2, 5 ] } ]
     }
   },
@@ -228,7 +228,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 2, 5 ] } ]
     }
   }

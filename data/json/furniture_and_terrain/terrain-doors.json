@@ -850,7 +850,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -876,7 +876,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -902,7 +902,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -928,7 +928,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -1179,7 +1179,7 @@
       "sound_fail": "whack!",
       "sound_vol": 16,
       "sound_fail_vol": 10,
-      "ter_set": "t_null",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
@@ -1204,7 +1204,7 @@
       "sound_fail": "whack!",
       "sound_vol": 16,
       "sound_fail_vol": 10,
-      "ter_set": "t_null",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "glass_shard", "count": [ 42, 84 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
@@ -2004,7 +2004,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -2030,7 +2030,7 @@
       "str_max": 25,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_thconc_floor",
       "items": [
         { "item": "2x4", "count": [ 3, 6 ] },
         { "item": "splinter", "count": [ 3, 6 ] },
@@ -2056,7 +2056,7 @@
       "str_max": 75,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_null",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "spike", "count": [ 2, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
@@ -2099,7 +2099,7 @@
       "str_max": 75,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_null",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "spike", "count": [ 2, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
