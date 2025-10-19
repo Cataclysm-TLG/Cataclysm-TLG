@@ -9,6 +9,8 @@
     "time": 3600,
     "processed_eocs": [ "EOC_AM_BECOME_MUTANT" ],
     "random_at_chargen": false,
+    "starting_trait": false,
+    "valid": false,
     "cancels": [
       "MUTATING_GRADUAL_BATRACHIAN",
       "MUTATING_GRADUAL_AVIAN",
