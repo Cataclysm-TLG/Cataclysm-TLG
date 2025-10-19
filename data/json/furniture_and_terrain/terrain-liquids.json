@@ -415,7 +415,7 @@
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "MINEABLE" ],
     "bash": {
       "sound": "thump",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "str_min": 200,
       "str_max": 500,
       "str_min_supported": 200,

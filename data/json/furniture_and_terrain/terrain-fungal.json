@@ -27,7 +27,7 @@
     "bash": {
       "sound": "smash",
       "//": "muffled because fungus",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "str_min": 20,
       "str_max": 400,
       "str_min_supported": 50
@@ -44,7 +44,7 @@
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "FUNGUS" ],
-    "bash": { "sound": "smash", "ter_set": "t_null", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
+    "bash": { "sound": "smash", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
     "type": "terrain",
@@ -56,7 +56,7 @@
     "color": "light_gray",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "SUPPORTS_ROOF", "FLAT", "FUNGUS" ],
-    "bash": { "sound": "smash", "ter_set": "t_null", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
+    "bash": { "sound": "smash", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
     "type": "terrain",
@@ -68,7 +68,7 @@
     "color": "light_gray",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "FLAT", "FUNGUS" ],
-    "bash": { "sound": "SMASH!", "ter_set": "t_null", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
+    "bash": { "sound": "SMASH!", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
     "type": "terrain",

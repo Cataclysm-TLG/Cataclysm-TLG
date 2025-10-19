@@ -126,7 +126,7 @@
       "str_max": 210,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": "wall_bash_results"
     }
   },
@@ -135,8 +135,7 @@
     "abstract": "t_wall_color",
     "copy-from": "t_wall",
     "name": { "str": "abstract colored wall", "//~": "NO_I18N" },
-    "description": "An abstract for t_wall color variants.  If you see this in-game, it's a bug.",
-    "extend": { "flags": [ "CHIP" ] }
+    "description": "An abstract for t_wall color variants.  If you see this in-game, it's a bug."
   },
   {
     "type": "terrain",
@@ -157,7 +156,7 @@
       "str_max": 70,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "2x4", "count": [ 0, 5 ] },
         { "item": "wood_panel", "count": [ 0, 1 ] },
@@ -187,7 +186,7 @@
       "str_max": 20,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": "wall_bash_results"
     }
   },
@@ -821,7 +820,7 @@
       "str_max": 100,
       "sound": "crash!",
       "sound_fail": "bash!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 5, 8 ] }, { "item": "brick", "count": [ 1, 3 ] } ]
     }
   },
@@ -836,7 +835,7 @@
       "str_max": 250,
       "sound": "crash!",
       "sound_fail": "bash!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 8, 15 ] }, { "item": "brick", "count": [ 2, 6 ] } ]
     }
   },
@@ -852,7 +851,7 @@
       "str_max": 300,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 8, 18 ] } ]
     }
   },
@@ -868,7 +867,7 @@
       "str_max": 300,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 8, 18 ] } ]
     }
   },
@@ -891,7 +890,7 @@
       "str_max": 200,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 3, 8 ] } ]
     }
   },
@@ -930,7 +929,7 @@
       "str_max": 90,
       "sound": "crash!",
       "sound_fail": "bash!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "material_soil", "count": [ 4, 10 ] }, { "item": "adobe_brick", "count": [ 1, 3 ] } ]
     }
   },
@@ -946,7 +945,7 @@
       "str_max": 120,
       "sound": "crash!",
       "sound_fail": "bash!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "material_soil", "count": [ 8, 20 ] }, { "item": "adobe_brick", "count": [ 2, 6 ] } ]
     }
   },
@@ -984,7 +983,7 @@
       "str_max": 600,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "steel_lump", "count": [ 1, 4 ] },
         { "item": "steel_chunk", "count": [ 3, 12 ] },
@@ -1004,7 +1003,7 @@
       "str_max": 210,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
     }
   },
@@ -1175,7 +1174,7 @@
       "str_max": 110,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "2x4", "count": [ 2, 5 ] },
         { "item": "wood_panel", "count": [ 0, 2 ] },
@@ -1203,7 +1202,7 @@
       "str_max": 20,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "ash", "count": [ 200, 500 ] }, { "item": "scrap", "count": [ 2, 5 ] } ]
     },
     "shoot": { "chance_to_hit": 25, "reduce_damage": [ 5, 10 ], "reduce_damage_laser": [ 10, 30 ], "destroy_damage": [ 5, 20 ] }
@@ -1227,7 +1226,7 @@
       "str_max": 120,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 10, 20 ] } ]
     }
   },
@@ -1283,7 +1282,7 @@
       "str_max": 150,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 10, 20 ] } ]
     },
     "shoot": { "chance_to_hit": 25, "reduce_damage": [ 20, 50 ], "reduce_damage_laser": [ 10, 40 ], "destroy_damage": [ 40, 120 ] }
@@ -1307,7 +1306,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 10, 30 ] } ]
     }
   },
@@ -1343,7 +1342,7 @@
     "bash": {
       "str_min": 4,
       "str_max": 110,
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "sound": "crash!",
       "sound_fail": "whump!",
       "items": [ { "item": "2x4", "count": [ 0, 3 ] }, { "item": "splinter", "count": [ 3, 6 ] } ]
@@ -1367,7 +1366,7 @@
     "bash": {
       "str_min": 8,
       "str_max": 75,
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "sound": "crunch!",
       "sound_fail": "whump!",
       "items": [ { "item": "2x4", "count": [ 1, 3 ] }, { "item": "splinter", "count": 6 } ]
@@ -1700,7 +1699,7 @@
       "sound_fail": "whack!",
       "sound_vol": 16,
       "sound_fail_vol": 10,
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [
         { "item": "glass_shard", "charges": [ 20, 44 ] },
         { "item": "glass_shard_large", "count": [ 0, 3 ] },
@@ -1817,7 +1816,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 2, 5 ] } ]
     }
   },
@@ -1850,7 +1849,7 @@
     "copy-from": "t_abstract_wall_earthen",
     "name": "solid earth",
     "description": "A wall of solid earth.",
-    "extend": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "extend": { "flags": [ "NATURAL_UNDERGROUND", "SUPPORTS_ROOF" ] },
     "delete": { "flags": [ "AUTO_WALL_SYMBOL" ] },
     "roof": "t_dirt",
     "bash": {
@@ -1870,12 +1869,12 @@
     "name": "solid rock",
     "description": "A wall of solid rock, could be full of all kinds of interesting things.  Best grab your pickaxe or equivalent digging implement, and strike the earth!",
     "color": "white",
-    "extend": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "extend": { "flags": [ "NATURAL_UNDERGROUND", "SUPPORTS_ROOF" ] },
     "delete": { "flags": [ "AUTO_WALL_SYMBOL" ] },
     "roof": "t_rock_floor_no_roof",
     "bash": {
-      "str_min": 100,
-      "str_max": 400,
+      "str_min": 125,
+      "str_max": 450,
       "sound": "crash!",
       "sound_fail": "whump!",
       "ter_set": "t_rock_floor",
@@ -1957,7 +1956,7 @@
       "str_max": 200,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 1, 3 ] }, { "item": "rebar", "count": [ 0, 2 ] } ]
     }
   },
@@ -2107,7 +2106,7 @@
       "str_max": 200,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 8, 18 ] }, { "item": "pebble", "count": [ 20, 38 ] } ]
     }
   },
@@ -2130,7 +2129,7 @@
       "str_max": 120,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "rock", "count": [ 3, 8 ] }, { "item": "pebble", "count": [ 20, 38 ] } ]
     }
   },

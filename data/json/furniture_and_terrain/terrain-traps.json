@@ -8,7 +8,14 @@
     "color": "yellow",
     "move_cost": 8,
     "flags": [ "TRANSPARENT", "DIGGABLE", "DIGGABLE_CAN_DEEPEN" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -22,7 +29,14 @@
     "move_cost": 10,
     "trap": "tr_pit",
     "flags": [ "TRANSPARENT" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit"
   },
   {
@@ -34,7 +48,14 @@
     "color": "green",
     "move_cost": 5,
     "flags": [ "TRANSPARENT", "DIGGABLE", "PIT_FILLABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "//": "left diggable to clean out corpses-KA101"
   },
   {
@@ -48,7 +69,14 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "ROAD" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit_covered"
   },
   {
@@ -63,7 +91,14 @@
     "move_cost": 10,
     "trap": "tr_spike_pit",
     "flags": [ "TRANSPARENT", "PIT_FILLABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit"
   },
   {
@@ -77,7 +112,14 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "ROAD" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit_covered"
   },
   {
@@ -92,7 +134,14 @@
     "move_cost": 10,
     "trap": "tr_glass_pit",
     "flags": [ "TRANSPARENT", "PIT_FILLABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit"
   },
   {
@@ -106,7 +155,14 @@
     "connects_to": "PIT_DEEP",
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "ROAD" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 100, "bash_below": true },
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 40,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    },
     "examine_action": "pit_covered"
   },
   {
@@ -137,7 +193,14 @@
         }
       ]
     },
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -149,7 +212,14 @@
     "looks_like": "t_den_large",
     "move_cost": 3,
     "flags": [ "TRANSPARENT", "DIGGABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
@@ -161,7 +231,14 @@
     "looks_like": "t_pit_shallow",
     "move_cost": 6,
     "flags": [ "TRANSPARENT", "DIGGABLE" ],
-    "bash": { "sound": "thump", "ter_set": "t_null", "str_min": 50, "str_max": 100, "str_min_supported": 100, "bash_below": true }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_open_air",
+      "str_min": 50,
+      "str_max": 100,
+      "str_min_supported": 100,
+      "bash_below": true
+    }
   },
   {
     "type": "terrain",
