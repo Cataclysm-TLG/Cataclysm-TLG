@@ -256,7 +256,7 @@ static int sound_distance( const tripoint_bub_ms &source, const tripoint_bub_ms 
     const int lower_z = std::min( source.z(), sink.z() );
     const int upper_z = std::max( source.z(), sink.z() );
     const int vertical_displacement = upper_z - lower_z;
-    int vertical_attenuation = vertical_displacement;
+    int vertical_attenuation = vertical_displacement * 2;
     if( lower_z < 0 && vertical_displacement > 0 ) {
         // Apply a moderate bonus attenuation (5x) for the first level of vertical displacement.
         vertical_attenuation += 4;
@@ -266,7 +266,7 @@ static int sound_distance( const tripoint_bub_ms &source, const tripoint_bub_ms 
     }
     // Regardless of underground effects, scale the vertical distance by 5x.
     vertical_attenuation *= 5;
-    return rl_dist( source.xy(), sink.xy() ) + vertical_attenuation;
+    return static_cast<int>( std::round( trig_dist_z_adjust( source.xy(), sink.xy() ) ) ) + vertical_attenuation;
 }
 
 static std::string season_str( const season_type &season )
@@ -681,7 +681,7 @@ void sounds::process_sound_markers( Character *you )
 
         // skip some sounds to avoid message spam
         const bool from_player = pos == you->pos_bub() || ( sound.category == sound_t::movement &&
-                                 distance_to_sound <= 1 );
+                                 distance_to_sound < 2 );
         if( describe_sound( sound.category, from_player ) ) {
             game_message_type severity = m_info;
             if( sound.category == sound_t::combat || sound.category == sound_t::alarm ) {
