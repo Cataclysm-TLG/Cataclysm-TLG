@@ -304,22 +304,26 @@
     "price": "36 USD",
     "price_postapoc": "7 USD 50 cent",
     "description": "A canister grenade filled with fungicidal solution.  Use this item to pull the pin and start the fuse, turning it into an active fungicidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to fungal life forms.",
-    "use_action": {
-      "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
-      "type": "transform",
-      "target_timer": "50 seconds",
-      "target": "fungicidalbomb_act"
-    }
+    "use_action": { "need_wielding": true, "type": "transform", "target_timer": "50 seconds", "target": "fungicidalbomb_act" }
   },
   {
     "id": "fungicidalbomb_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed fungicidal gas canister" },
     "description": "This fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_fungicidal_stream" ]
+    "emits": [ "emit_fungicidal_stream" ],
+    "countdown_interval": "50 seconds",
+    "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "fungicidalbomb_makeshift",
@@ -340,11 +344,22 @@
   },
   {
     "id": "fungicidalbomb_makeshift_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed makeshift fungicidal gas canister" },
     "description": "This makeshift fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_small_fungicidal_stream" ]
+    "emits": [ "emit_small_fungicidal_stream" ],
+    "countdown_interval": "50 seconds",
+    "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "gasbomb_makeshift",
@@ -560,10 +575,16 @@
   },
   {
     "id": "gasbomb_act",
-    "copy-from": "gasbomb",
     "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
     "name": { "str": "armed tear gas grenade" },
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
     "price_postapoc": "0 cent",
     "description": "This tear gas grenade has had its pin removed and is (or will shortly be) expelling highly noxious gas.",
     "emits": [ "emit_tear_gas_stream" ],
@@ -579,22 +600,26 @@
     "price": "36 USD",
     "price_postapoc": "7 USD 50 cent",
     "description": "A canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse, turning it into an active insecticidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to insect life forms.",
-    "use_action": {
-      "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
-      "type": "transform",
-      "target_timer": "50 seconds",
-      "target": "insecticidalbomb_act"
-    }
+    "use_action": { "need_wielding": true, "type": "transform", "target_timer": "100 seconds", "target": "insecticidalbomb_act" }
   },
   {
     "id": "insecticidalbomb_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed insecticidal gas canister" },
     "description": "This insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_insecticidal_stream" ]
+    "emits": [ "emit_insecticidal_stream" ],
+    "countdown_interval": "50 seconds",
+    "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "insecticidalbomb_makeshift",
@@ -606,8 +631,6 @@
     "description": "A makeshift canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse, turning it into an active insecticidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to insect life forms.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
       "type": "transform",
       "target_timer": "100 seconds",
       "target": "insecticidalbomb_makeshift_act"
@@ -615,11 +638,22 @@
   },
   {
     "id": "insecticidalbomb_makeshift_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed makeshift insecticidal gas grenade" },
     "description": "This makeshift insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_small_insecticidal_stream" ]
+    "emits": [ "emit_small_insecticidal_stream" ],
+    "countdown_interval": "50 seconds",
+    "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "LAW_Packed",
@@ -821,14 +855,7 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "green",
-    "use_action": {
-      "need_wielding": true,
-      "target": "tool_rocket_candy_act",
-      "msg": "You light the rocket candy on fire.  Throw it!",
-      "target_timer": "2 seconds",
-      "menu_text": "Light candy",
-      "type": "transform"
-    },
+    "use_action": { "need_wielding": true, "type": "transform", "target_timer": "2 seconds", "target": "tool_rocket_candy_act" },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ],
     "melee_damage": { "bash": 1 }
   },

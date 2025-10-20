@@ -71,7 +71,7 @@
     "recovery_chance": 93,
     "melee_damage": { "bash": 1 }
   },
-    {
+  {
     "id": "steel_atlatl_spear",
     "type": "AMMO",
     "name": { "str": "steel tipped atlatl spear" },
@@ -83,7 +83,7 @@
     "longest_side": "90 cm",
     "symbol": "/",
     "color": "green",
-    "material": [ { "type": "steel", "portion": 15 }, { "type": "wood", "portion": 85 }],
+    "material": [ { "type": "steel", "portion": 15 }, { "type": "wood", "portion": 85 } ],
     "stack_max": 1,
     "stack_size": 1,
     "ammo_type": "atlatl",
