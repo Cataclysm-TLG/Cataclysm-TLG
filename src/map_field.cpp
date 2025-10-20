@@ -1499,13 +1499,20 @@ void map::player_in_field( Character &you )
         // Do things based on what fields we are currently in.
         const field_type_id ft = cur.get_field_type();
 
-        // Cast spells. Skip if the field is liquid and we're not touching the ground (safer if enclosed), or if we're inside and it's a gas.
-        if( ft->spell_data.id != spell_id::NULL_ID() &&
-            !( ( ( ft.obj().phase == phase_id::LIQUID ) && ( ( !inside && ( !you.in_vehicle || one_in( 2 ) ) ) )
-               ) || ( inside && ft.obj().phase == phase_id::GAS ) ) ) {
-            map &here = get_map();
-            here.cast_field_spell( you.pos_bub(), you, cur );
-            you.check_dead_state( &here );
+        // Cast spells. Skip if we're inside an enclosed vehicle. Liquid fields can sometimes hit passengers on non-enclosed vehicles.
+        if( ft->spell_data.id != spell_id::NULL_ID() ) {
+            if( inside ) {
+                return;
+            }
+            bool solid_exposed = ( ft.obj().phase == phase_id::SOLID || ft.obj().phase == phase_id::PNULL ) &&  ( !you.in_vehicle );
+            bool liquid_exposed = ( ft.obj().phase == phase_id::LIQUID ) &&  ( !you.in_vehicle || !one_in( 2 ) );
+            bool gas_exposed = ( ft.obj().phase == phase_id::GAS || ft.obj().phase == phase_id::PLASMA );
+
+            if( solid_exposed || liquid_exposed || gas_exposed ) {
+                map &here = get_map();
+                here.cast_field_spell( you.pos_bub(), you, cur );
+                you.check_dead_state( &here );
+            }
         }
 
         if( ft == fd_sap ) {

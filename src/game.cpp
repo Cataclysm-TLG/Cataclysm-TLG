@@ -4639,12 +4639,19 @@ Creature *game::is_hostile_within( int distance, bool dangerous )
 field_entry *game::is_in_dangerous_field()
 {
     map &here = get_map();
+    bool inside = false;
+    if( const optional_vpart_position vp = here.veh_at( u.pos_abs() ) ) {
+        inside = vp->is_inside();
+    }
     for( std::pair<const field_type_id, field_entry> &field : here.field_at( u.pos_bub() ) ) {
+        if( field.second.spell_data.id != spell_id::NULL_ID() ) {
+            return &field.second;
+        }
+        bool not_safe = false;
         if( u.is_dangerous_field( field.second ) ) {
-            if( u.in_vehicle ) {
-                bool not_safe = false;
+            if( u.in_vehicle || inside ) {
                 for( const field_effect &fe : field.second.field_effects() ) {
-                    not_safe |= !fe.immune_inside_vehicle;
+                    not_safe |= !( ( u.in_vehicle && fe.immune_in_vehicle ) || ( inside && fe.immune_inside_vehicle ) );
                 }
                 if( !not_safe ) {
                     continue;
@@ -4653,7 +4660,6 @@ field_entry *game::is_in_dangerous_field()
             return &field.second;
         }
     }
-
     return nullptr;
 }
 
