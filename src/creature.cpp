@@ -673,12 +673,12 @@ bool Creature::sees( const map &here, const Creature &critter ) const
                                       critter.pos_bub( here ) ),
                                       ledge_concealment );
     if( ch != nullptr ) {
-        if( concealment > eye_level() ) {
+        if( concealment > critter.eye_level() ) {
             return false;
         }
         return visible( ch );
     } else {
-        if( concealment > eye_level() ) {
+        if( concealment > critter.eye_level() ) {
             return false;
         }
     }

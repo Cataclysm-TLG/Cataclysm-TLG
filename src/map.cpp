@@ -7698,26 +7698,67 @@ int map::obstacle_concealment( const tripoint_bub_ms &loc1, const tripoint_bub_m
 {
     const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    tripoint_bub_ms obstaclepos;
-    bresenham( loc2, loc1, offset, 0, [&obstaclepos]( const tripoint_bub_ms & new_point ) {
-        // Only adjacent tile between viewer and enemy is checked for concealment.
-        obstaclepos = new_point;
-        return false;
+    int found_concealment = 0;
+    // Trace from viewer to target, the same direction as map::sees().
+    bresenham( loc1, loc2, offset, 0, [&]( const tripoint_bub_ms & new_point ) {
+        // Skip the viewer's starting position.
+        if( new_point == loc1 ) {
+            return true;
+        }
+        // Stop before checking the target tile.
+        if( new_point == loc2 ) {
+            return false;
+        }
+        // Check if this tile is adjacent to the target and not adjacent to the viewer.
+        // So the target can hide behind a bush because we're not close enough to see over it.
+        if( square_dist( new_point, loc2 ) == 1 && square_dist( new_point, loc1 ) > 1 ) {
+            found_concealment = concealment( new_point );
+        }
+        if( found_concealment > 0 ) {
+            // False = finish.
+            return false;
+        } else {
+            // Keep checking.
+            return true;
+        }
     } );
-    return concealment( obstaclepos );
+    return found_concealment;
 }
 
+/*
+* This just duplicates obstacle_concealment and is only used for IR vision. The idea is that
+* IR can see through a bush or a curtain, but not glass. See sees_with_infrared for more.
+* Currently unused as I haven't re-applied it after the special vision backport.
+*/
 int map::obstacle_coverage( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const
 {
     const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    tripoint_bub_ms obstaclepos;
-    bresenham( loc2, loc1, offset, 0, [&obstaclepos]( const tripoint_bub_ms & new_point ) {
-        // Only adjacent tile between viewer and enemy is checked for cover.
-        obstaclepos = new_point;
-        return false;
+    int found_coverage = 0;
+    // Trace from viewer to target, the same direction as map::sees().
+    bresenham( loc1, loc2, offset, 0, [&]( const tripoint_bub_ms & new_point ) {
+        // Skip the viewer's starting position.
+        if( new_point == loc1 ) {
+            return true;
+        }
+        // Stop before checking the target tile.
+        if( new_point == loc2 ) {
+            return false;
+        }
+        // Check if this tile is adjacent to the target and not adjacent to the viewer.
+        // So the target can hide behind a bush because we're not close enough to see over it.
+        if( square_dist( new_point, loc2 ) == 1 && square_dist( new_point, loc1 ) > 1 ) {
+            found_coverage = coverage( new_point );
+        }
+        if( found_coverage > 0 ) {
+            // False = finish.
+            return false;
+        } else {
+            // Keep checking.
+            return true;
+        }
     } );
-    return coverage( obstaclepos );
+    return found_coverage;
 }
 
 int map::ledge_concealment( const Creature &viewer, const tripoint_bub_ms &target_p ) const
