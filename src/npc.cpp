@@ -9,8 +9,9 @@
 #include <memory>
 #include <ostream>
 
-#include "activity_type.h"
 #include "activity_actor_definitions.h"
+#include "activity_handlers.h"
+#include "activity_type.h"
 #include "auto_pickup.h"
 #include "basecamp.h"
 #include "bodypart.h"
@@ -1100,6 +1101,7 @@ void npc::revert_after_activity()
     current_activity_id = activity_id::NULL_ID();
     clear_destination();
     backlog.clear();
+    activity_handlers::clean_may_activity_occupancy_items_var( *this );
 }
 
 npc_mission npc::get_previous_mission() const
@@ -2986,6 +2988,7 @@ void npc::reboot()
     ai_cache.searched_tiles.clear();
     activity = player_activity();
     clear_destination();
+    activity_handlers::clean_may_activity_occupancy_items_var( *this );
     add_effect( effect_npc_suspend, 24_hours, true, 1 );
 }
 
