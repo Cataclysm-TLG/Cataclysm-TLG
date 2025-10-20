@@ -148,7 +148,7 @@
     "weakpoint_sets": [ "wps_humanoid_body", "wps_bone_armor", "wps_humanoid_head_small" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_skeleton", "prof_wp_hulk" ],
     "bleed_rate": 0,
-    "vision_day": 50,
+    "vision_day": 45,
     "vision_night": 4,
     "harvest": "big_mr_bones",
     "grab_strength": 50,
