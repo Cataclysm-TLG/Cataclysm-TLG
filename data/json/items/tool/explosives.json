@@ -53,7 +53,6 @@
     "material": [ "rdx" ],
     "symbol": ";",
     "color": "light_gray",
-    "use_action": { "type": "message", "message": "You've already set the %s's timer, you might want to get away from it." },
     "countdown_action": { "type": "explosion", "explosion": { "power": 2800 } },
     "countdown_interval": "6 seconds",
     "flags": [ "NPC_THROW_NOW" ]
@@ -81,7 +80,7 @@
       "target_timer": "20 seconds",
       "active": true,
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ],
@@ -95,7 +94,6 @@
     "copy-from": "dynamite",
     "symbol": "*",
     "color": "red",
-    "use_action": { "type": "message", "message": "You've already lit the %s, try throwing it instead.", "name": "Light fuse" },
     "flags": [ "TRADER_AVOID", "BOMB" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 938 } }
   },
@@ -121,7 +119,7 @@
       "msg": "You light the dynamite.",
       "target_timer": "20 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ],
@@ -135,7 +133,6 @@
     "copy-from": "dynamite_bomb",
     "symbol": "*",
     "color": "red",
-    "use_action": { "type": "message", "message": "You've already lit the %s, try throwing it instead.", "name": "Pull pin" },
     "flags": [ "TRADER_AVOID", "BOMB" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 938, "shrapnel": { "casing_mass": 1597, "fragment_mass": 0.5 } } }
   },
@@ -158,9 +155,9 @@
     "use_action": {
       "need_wielding": true,
       "target": "EMPbomb_act",
-      "msg": "You activate the EMP bomb.",
+      "msg": "You arm the EMP bomb.",
       "target_timer": "50 seconds",
-      "menu_text": "Activate bomb",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "WATER_BREAK" ],
@@ -182,7 +179,6 @@
     "explode_in_fire": true,
     "explosion": { "power": 600, "shrapnel": { "casing_mass": 3214, "fragment_mass": 0.5 } },
     "color": "light_gray",
-    "use_action": { "type": "message", "message": "You've already activated the %s, try throwing it instead.", "name": "Activate bomb" },
     "countdown_action": {
       "type": "explosion",
       "draw_explosion_radius": 10,
@@ -278,7 +274,7 @@
       "target": "flashbang_act",
       "msg": "You pull the pin on the flashbang.",
       "target_timer": "5 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ],
@@ -292,7 +288,6 @@
     "description": "This flashbang is active, and will soon detonate with intense light and sound, blinding, deafening, and disorienting anyone nearby.  It may be a good idea to throw it!",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "do_flashbang": true },
     "flags": [ "TRADER_AVOID" ]
   },
@@ -306,8 +301,7 @@
     "description": "A canister grenade filled with fungicidal solution.  Use this item to pull the pin and start the fuse, turning it into an active fungicidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to fungal life forms.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
+      "msg": "You pull the pin on the %s.",
       "type": "transform",
       "target_timer": "50 seconds",
       "target": "fungicidalbomb_act"
@@ -315,11 +309,21 @@
   },
   {
     "id": "fungicidalbomb_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed fungicidal gas canister" },
     "description": "This fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_fungicidal_stream" ]
+    "emits": [ "emit_fungicidal_stream" ],
+    "revert_to": "canister_empty",
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "fungicidalbomb_makeshift",
@@ -331,8 +335,8 @@
     "description": "A makeshift canister grenade filled with fungicidal solution.  Use this item to pull the pin and start the fuse, turning it into an active fungicidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to fungal life forms.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
+      "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
       "type": "transform",
       "target_timer": "50 seconds",
       "target": "fungicidalbomb_makeshift_act"
@@ -340,17 +344,27 @@
   },
   {
     "id": "fungicidalbomb_makeshift_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed makeshift fungicidal gas canister" },
     "description": "This makeshift fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_small_fungicidal_stream" ]
+    "emits": [ "emit_small_fungicidal_stream" ],
+    "revert_to": "canister_empty",
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "gasbomb_makeshift",
     "copy-from": "gasbomb",
     "type": "GENERIC",
-    "name": { "str": "makeshift gas canister" },
+    "name": { "str": "makeshift gas grenade" },
     "description": "A crude gas bomb made using household chemicals.  Use this item to arm it.  In three seconds it will begin to expel a highly toxic gas for a short time.  This gas poisons those exposed to it, in addition to obscuring vision and scent.",
     "weight": "1264 g",
     "volume": "270 ml",
@@ -358,10 +372,10 @@
     "price_postapoc": "2 USD 50 cent",
     "use_action": {
       "need_wielding": true,
-      "target": "gasbomb_makeshift_act",
-      "msg": "You arm the makeshift gas canister.",
-      "target_timer": "10 seconds",
       "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
+      "target": "gasbomb_makeshift_act",
+      "target_timer": "10 seconds",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ]
@@ -370,7 +384,7 @@
     "id": "gasbomb_makeshift_act",
     "type": "TOOL",
     "category": "weapons",
-    "name": { "str": "active makeshift gas canister" },
+    "name": { "str": "active makeshift gas grenade" },
     "description": "This homemade canister of poison gas has been unsealed, and is (or will shortly be) expelling highly toxic gas.  You should consider getting rid of it soon.",
     "weight": "1264 g",
     "volume": "270 ml",
@@ -380,15 +394,7 @@
     "material": [ "steel" ],
     "symbol": "*",
     "color": "dark_gray",
-    "use_action": { "type": "message", "message": "You've already armed the %s, try throwing it instead.", "name": "Pull pin" },
     "revert_to": "canister_empty",
-    "countdown_action": {
-      "type": "explosion",
-      "fields_type": "fd_toxic_gas",
-      "fields_radius": 2,
-      "fields_min_intensity": 1,
-      "fields_max_intensity": 3
-    },
     "flags": [ "TRADER_AVOID", "DANGEROUS" ],
     "melee_damage": { "bash": 6 }
   },
@@ -409,9 +415,9 @@
     "use_action": {
       "need_wielding": true,
       "target": "grenade_act",
-      "msg": "You pull the pin on the grenade.",
+      "msg": "You pull the pin on the %s.",
       "target_timer": "5 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ],
@@ -431,7 +437,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "green",
-    "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 240, "shrapnel": { "casing_mass": 217, "fragment_mass": 0.02 } } },
     "countdown_interval": "5 seconds",
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ],
@@ -458,7 +463,7 @@
       "target": "grenade_emp_act",
       "msg": "You pull the pin on the %s.",
       "target_timer": "3 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "WATER_BREAK" ],
@@ -478,7 +483,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "cyan",
-    "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": {
       "type": "explosion",
       "fields_type": "fd_electricity",
@@ -507,9 +511,9 @@
     "use_action": {
       "need_wielding": true,
       "target": "grenade_inc_act",
-      "msg": "You pull the pin on the grenade.",
+      "msg": "You pull the pin on the %s.",
       "target_timer": "5 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ACT_IN_FIRE", "GRENADE" ],
@@ -550,8 +554,8 @@
     "description": "A canister grenade filled with noxious irritant.  Use this item to pull the pin and start the fuse, turning it into an active tear gas grenade.  In five seconds it will begin to expel a highly toxic gas for some time.  This gas damages and slows those who enter it, as well as obscuring vision and scent.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
+      "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
       "type": "transform",
       "target_timer": "50 seconds",
       "target": "gasbomb_act"
@@ -560,15 +564,20 @@
   },
   {
     "id": "gasbomb_act",
-    "copy-from": "gasbomb",
     "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
     "name": { "str": "armed tear gas grenade" },
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
     "price_postapoc": "0 cent",
     "description": "This tear gas grenade has had its pin removed and is (or will shortly be) expelling highly noxious gas.",
     "emits": [ "emit_tear_gas_stream" ],
-    "countdown_interval": "50 seconds",
-    "countdown_action": { "type": "transform", "target": "canister_empty" },
+    "revert_to": "canister_empty",
     "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
@@ -581,20 +590,30 @@
     "description": "A canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse, turning it into an active insecticidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to insect life forms.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
+      "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
       "type": "transform",
-      "target_timer": "50 seconds",
+      "target_timer": "100 seconds",
       "target": "insecticidalbomb_act"
     }
   },
   {
     "id": "insecticidalbomb_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed insecticidal gas canister" },
     "description": "This insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_insecticidal_stream" ]
+    "emits": [ "emit_insecticidal_stream" ],
+    "revert_to": "canister_empty",
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "insecticidalbomb_makeshift",
@@ -606,8 +625,8 @@
     "description": "A makeshift canister grenade filled with insecticidal solution.  Use this item to pull the pin and start the fuse, turning it into an active insecticidal grenade.  In five seconds it will begin to expel a volatile gas that is highly toxic to insect life forms.",
     "use_action": {
       "need_wielding": true,
-      "menu_text": "Pull pin",
-      "msg": "You pull the pin.",
+      "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
       "type": "transform",
       "target_timer": "100 seconds",
       "target": "insecticidalbomb_makeshift_act"
@@ -615,11 +634,21 @@
   },
   {
     "id": "insecticidalbomb_makeshift_act",
-    "copy-from": "gasbomb_act",
+    "looks_like": "smokebomb_act",
     "type": "GENERIC",
+    "category": "weapons",
+    "weight": "1058 g",
+    "volume": "270 ml",
+    "material": [ "steel" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "price": "0 USD",
+    "price_postapoc": "0 cent",
     "name": { "str": "armed makeshift insecticidal gas grenade" },
     "description": "This makeshift insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
-    "emits": [ "emit_small_insecticidal_stream" ]
+    "emits": [ "emit_small_insecticidal_stream" ],
+    "revert_to": "canister_empty",
+    "flags": [ "TRADER_AVOID", "DANGEROUS" ]
   },
   {
     "id": "LAW_Packed",
@@ -683,7 +712,6 @@
     "description": "The nuclear bomb looks no different from the outside, yet you know that the device is armed and counting down.  You should probably get far, far away from it.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "use_action": { "type": "message", "message": "You've already set the %s's timer, you might want to get away from it." },
     "countdown_action": {
       "type": "explosion",
       "fields_type": "fd_nuke_gas",
@@ -716,7 +744,7 @@
       "active": true,
       "moves": 75,
       "need_fire": 1,
-      "menu_text": "Light rag",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "NPC_ACTIVATE", "NO_REPAIR" ],
@@ -761,7 +789,7 @@
       "target": "scrambler_act",
       "msg": "You pull the pin on the %s.",
       "target_timer": "3 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ],
@@ -781,7 +809,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "yellow",
-    "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "draw_explosion_radius": 4, "draw_explosion_color": "cyan", "scrambler_blast_radius": 4 },
     "flags": [ "TRADER_AVOID" ],
     "melee_damage": { "bash": 5 }
@@ -795,7 +822,14 @@
     "price": "18 USD",
     "price_postapoc": "0 cent",
     "weight": "569 g",
-    "use_action": { "need_wielding": true, "type": "transform", "target_timer": "100 seconds", "target": "smokebomb_act" }
+    "use_action": {
+      "need_wielding": true,
+      "menu_text": "Arm",
+      "msg": "You pull the pin on the %s.",
+      "type": "transform",
+      "target_timer": "100 seconds",
+      "target": "smokebomb_act"
+    }
   },
   {
     "id": "smokebomb_act",
@@ -823,11 +857,11 @@
     "color": "green",
     "use_action": {
       "need_wielding": true,
-      "target": "tool_rocket_candy_act",
-      "msg": "You light the rocket candy on fire.  Throw it!",
+      "menu_text": "Ignite",
+      "msg": "You light the %s.",
+      "type": "transform",
       "target_timer": "2 seconds",
-      "menu_text": "Light candy",
-      "type": "transform"
+      "target": "tool_rocket_candy_act"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ],
     "melee_damage": { "bash": 1 }
@@ -846,7 +880,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "green",
-    "use_action": { "type": "message", "message": "You've already lit the fuse - get rid of it immediately!", "name": "Pull pin" },
     "countdown_action": {
       "type": "explosion",
       "fields_type": "fd_smoke",
@@ -876,10 +909,10 @@
     "use_action": {
       "need_wielding": true,
       "target": "military_explosive_small_grenade_act",
-      "msg": "You light the fuse on the improvised grenade.  Throw it before it blows up in your face!",
+      "msg": "You light the fuse on the improvised grenade.",
       "target_timer": "5 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
@@ -891,7 +924,6 @@
     "name": { "str": "active military explosive small homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "use_action": { "type": "message", "message": "You've already lit the %s's fuse, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 460, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
@@ -913,10 +945,10 @@
     "use_action": {
       "need_wielding": true,
       "target": "military_explosive_grenade_act",
-      "msg": "You light the fuse on the improvised grenade.  Throw it before it blows up in your face!",
+      "msg": "You light the fuse on the improvised grenade.",
       "target_timer": "5 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
@@ -928,7 +960,6 @@
     "name": { "str": "active military explosive homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "use_action": { "type": "message", "message": "You've already lit the %s's fuse, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 920, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
@@ -954,7 +985,7 @@
       "target": "military_explosive_pipebomb_act",
       "msg": "You pull the pin on the pipebomb.",
       "target_timer": "5 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ],
@@ -969,7 +1000,6 @@
     "description": "This pipebomb's pin is pulled, and it will explode any second now.  Throw it immediately!",
     "price": "0 cent",
     "color": "light_gray",
-    "use_action": { "type": "message", "message": "You've already pulled the %s's pin, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 920, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
@@ -992,7 +1022,7 @@
       "target": "military_explosive_bomb_act",
       "msg": "You pull the pin on the small bootleg fragmentation device.  Get rid of it quickly!",
       "target_timer": "20 seconds",
-      "menu_text": "Pull pin",
+      "menu_text": "Arm",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ]
@@ -1006,7 +1036,6 @@
     "description": "A homemade explosive device, consisting of a large plastic jug filled with military explosives and scrap metal.  Its fuse has been lit, its final countdown starting.",
     "price": "0 cent",
     "color": "light_red",
-    "use_action": { "type": "message", "message": "You've already pulled the pin - run!", "name": "Pull pin" },
     "countdown_action": {
       "type": "explosion",
       "explosion": { "power": 6970, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } }
@@ -1031,9 +1060,9 @@
     "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "use_action": {
       "target": "military_explosive_half_barrel_bomb_act",
-      "msg": "You activate the fuze on the barrel bomb.  Clear the area!",
+      "msg": "You light the fuse on the barrel bomb.",
       "target_timer": "100 seconds",
-      "menu_text": "Activate fuze",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ],
@@ -1053,7 +1082,6 @@
     "material": [ "steel" ],
     "symbol": "(",
     "color": "light_red",
-    "use_action": { "type": "message", "message": "You've already activated the bomb - clear the area immediately!", "name": "Pull pin" },
     "explode_in_fire": true,
     "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
@@ -1077,9 +1105,9 @@
     "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } },
     "use_action": {
       "target": "military_explosive_full_barrel_bomb_act",
-      "msg": "You activate the fuze on the barrel bomb.  Clear the area!",
+      "msg": "You light the fuse on the barrel bomb.",
       "target_timer": "100 seconds",
-      "menu_text": "Activate fuze",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ],
@@ -1098,7 +1126,6 @@
     "material": [ "steel" ],
     "symbol": "(",
     "color": "light_red",
-    "use_action": { "type": "message", "message": "You've already activated the bomb - clear the area immediately!", "name": "Pull pin" },
     "explode_in_fire": true,
     "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
@@ -1123,10 +1150,10 @@
     "use_action": {
       "need_wielding": true,
       "target": "small_homemade_grenade_act",
-      "msg": "You light the fuse on the improvised grenade.  Throw it before it blows up in your face!",
+      "msg": "You light the fuse on the improvised grenade.",
       "target_timer": "5 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
@@ -1138,7 +1165,6 @@
     "name": { "str": "active small homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "use_action": { "type": "message", "message": "You've already lit the %s's fuse, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 150, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
@@ -1158,10 +1184,10 @@
     "use_action": {
       "need_wielding": true,
       "target": "homemade_grenade_act",
-      "msg": "You light the fuse on the improvised grenade.  Throw it before it blows up in your face!",
+      "msg": "You light the fuse on the improvised grenade.",
       "target_timer": "5 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
@@ -1173,7 +1199,6 @@
     "name": { "str": "active homemade grenade" },
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
-    "use_action": { "type": "message", "message": "You've already lit the %s's fuse, try throwing it instead.", "name": "Pull pin" },
     "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
     "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS" ]
   },
@@ -1201,7 +1226,7 @@
       "msg": "You light the fuse on the pipe bomb.",
       "target_timer": "6 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ],
@@ -1222,7 +1247,6 @@
     "material": [ "steel" ],
     "symbol": "*",
     "color": "light_gray",
-    "use_action": { "type": "message", "message": "You've already lit the %s, try throwing it instead.", "name": "Pull pin" },
     "explode_in_fire": true,
     "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
@@ -1249,7 +1273,7 @@
       "target": "homemade_bomb_act",
       "msg": "You light the fuse on the small improvised fragmentation device.  Get rid of it quickly!",
       "target_timer": "20 seconds",
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ]
@@ -1267,7 +1291,6 @@
     "material": [ "steel", "plastic" ],
     "symbol": "*",
     "color": "light_red",
-    "use_action": { "type": "message", "message": "You've already lit the fuse - run!", "name": "Pull pin" },
     "explode_in_fire": true,
     "explosion": { "power": 2320, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } },
     "countdown_action": {
@@ -1296,7 +1319,7 @@
       "msg": "You light the %s.",
       "target_timer": "20 seconds",
       "need_fire": 1,
-      "menu_text": "Light fuse",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ],
@@ -1316,7 +1339,6 @@
     "material": [ "plastic", "powder" ],
     "symbol": "*",
     "color": "red",
-    "use_action": { "type": "message", "message": "You've already lit the %s, try throwing it instead.", "name": "Light fuse" },
     "explode_in_fire": true,
     "explosion": { "power": 2590 },
     "countdown_action": { "type": "explosion", "explosion": { "power": 2590 } },
@@ -1340,9 +1362,9 @@
     "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "use_action": {
       "target": "half_barrel_bomb_act",
-      "msg": "You activate the fuze on the barrel bomb.  Clear the area!",
+      "msg": "You light the fuse on the barrel bomb.  Clear the area!",
       "target_timer": "100 seconds",
-      "menu_text": "Activate fuze",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ],
@@ -1361,11 +1383,6 @@
     "material": [ "steel" ],
     "symbol": "(",
     "color": "light_red",
-    "use_action": {
-      "type": "message",
-      "message": "You've already activated the bomb - clear the area immediately!",
-      "name": "Activate fuze"
-    },
     "explode_in_fire": true,
     "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
@@ -1389,9 +1406,9 @@
     "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } },
     "use_action": {
       "target": "full_barrel_bomb_act",
-      "msg": "You activate the fuze on the barrel bomb.  Clear the area!",
+      "msg": "You light the fuse on the barrel bomb.  Clear the area!",
       "target_timer": "100 seconds",
-      "menu_text": "Activate fuze",
+      "menu_text": "Ignite",
       "type": "transform"
     },
     "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ],
@@ -1410,11 +1427,6 @@
     "material": [ "steel" ],
     "symbol": "(",
     "color": "light_red",
-    "use_action": {
-      "type": "message",
-      "message": "You've already activated the bomb - clear the area immediately!",
-      "name": "Activate fuze"
-    },
     "explode_in_fire": true,
     "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } } },
