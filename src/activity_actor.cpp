@@ -1670,6 +1670,13 @@ static bool cancel_if_book_invalid(
         act.set_to_null();
         return true;
     }
+    if( book->is_estorage() && !book->ammo_sufficient( &who ) ) {
+        who.add_msg_player_or_npc(
+            _( "You can't read an unpowered ebook." ),
+            _( "<npcname> can't read an unpowered ebook." ) );
+        act.set_to_null();
+        return true;
+    }
     return false;
 }
 
@@ -1690,6 +1697,7 @@ void read_activity_actor::start( player_activity &act, Character &who )
 
     add_msg_debug( debugmode::DF_ACT_READ, "reading time = %s",
                    to_string_writable( time_duration::from_moves( moves_total ) ) );
+
 
     // starting the activity should cost a charge to boot up the ebook app
     if( using_ereader ) {
@@ -3063,6 +3071,8 @@ void efile_activity_actor::do_turn( player_activity &act, Character &who )
                 add_msg_if_player_sees(
                     who, m_warning, string_format( _( "The %s ran out of batteries!" ),
                                                    edevice->display_name() ) );
+                                                   
+                who.cancel_activity();
                 return false;
             }
             edevice->ammo_consume( edevice->ammo_required(), here, edevice.pos_bub( here ), &who );
