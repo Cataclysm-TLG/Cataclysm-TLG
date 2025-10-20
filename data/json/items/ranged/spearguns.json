@@ -20,7 +20,6 @@
     "range": 6,
     "dispersion": 150,
     "loudness": 0,
-    "count": 4,
     "recovery_chance": 80,
     "melee_damage": { "bash": 1 }
   },
@@ -45,7 +44,6 @@
     "range": 10,
     "dispersion": 90,
     "loudness": 0,
-    "count": 4,
     "recovery_chance": 66,
     "melee_damage": { "bash": 1 }
   },
@@ -58,7 +56,7 @@
     "symbol": "=",
     "color": "light_gray",
     "description": "An underwater fishing spear made from metal.  It's light, but doesn't have much range.",
-    "material": [ "iron" ],
+    "material": [ "steel", "wood" ],
     "flags": [ "SHEATH_SPEAR" ],
     "volume": "250 ml",
     "weight": "28 g",
@@ -70,7 +68,6 @@
     "range": 6,
     "dispersion": 120,
     "loudness": 0,
-    "count": 4,
     "recovery_chance": 93,
     "melee_damage": { "bash": 1 }
   },
