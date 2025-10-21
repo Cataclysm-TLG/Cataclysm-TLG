@@ -32,7 +32,7 @@
     "vitamins": [ [ "calcium", "25588 mg" ], [ "meat_allergen", 1 ] ],
     "melee_damage": { "bash": 3 },
     "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "uneven" },
-    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ],
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP", "DAMAGE_VEHICLE_WHEELS" ],
     "into": "meal_bone",
     "recipe": "meal_bone_mill_1_4"
   },
@@ -57,7 +57,7 @@
     "melee_damage": { "bash": 15 },
     "calories": 110,
     "vitamins": [ [ "calcium", "1561750 mg" ], [ "meat_allergen", 1 ] ],
-    "flags": [ "RAW", "INEDIBLE", "NO_TEMP" ]
+    "flags": [ "RAW", "INEDIBLE", "NO_TEMP", "DAMAGE_VEHICLE_WHEELS" ]
   },
   {
     "type": "ITEM",
@@ -136,7 +136,7 @@
     "description": "A thin skewer carved from bone.  Sadly, it won't make squirrel on a stick taste better.",
     "category": "other",
     "material": [ "bone" ],
-    "flags": [ "NO_SALVAGE", "TRADER_AVOID" ],
+    "flags": [ "NO_SALVAGE", "TRADER_AVOID", "DAMAGE_VEHICLE_WHEELS" ],
     "weight": "10 g",
     "volume": "25 ml",
     "qualities": [ [ "COOK", 1 ] ],
@@ -149,7 +149,7 @@
     "abstract": "skull_abstract",
     "name": { "str": "abstract skull" },
     "description": "This is a dummy item.  If you see it something went wrong.",
-    "flags": [ "TRADER_AVOID" ],
+    "flags": [ "TRADER_AVOID", "DAMAGE_VEHICLE_WHEELS" ],
     "category": "spare_parts",
     "weight": "1 kg",
     "volume": "1400 ml",
@@ -173,6 +173,7 @@
     "description": "The stained skull of what was once a human being.  It is rotted and noticeably warped from its lively form.  Carrying this around probably isn't going to win you any friends.",
     "copy-from": "skull_abstract",
     "looks_like": "skull_human",
+    "delete": { "flags": [ "DAMAGE_VEHICLE_WHEELS" ] },
     "snippet_category": "skull_human_tainted_desc"
   },
   {

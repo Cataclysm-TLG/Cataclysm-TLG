@@ -10,6 +10,7 @@
     "category": "other",
     "description": "A pile of broken glass.  The pieces are sharp, but too small to use for cutting as they are. They must be prepared before they can be scattered on the ground.",
     "material": [ "glass" ],
+    "flags": [ "DAMAGE_VEHICLE_WHEELS" ],
     "weight": "75 g",
     "volume": "30 ml"
   },
@@ -43,7 +44,7 @@
     "material": [ "glass" ],
     "weight": "75 g",
     "volume": "30 ml",
-    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK" ],
+    "flags": [ "HURT_WHEN_WIELDED", "TRADER_AVOID", "SINGLE_USE", "FRAGILE_MELEE", "ALLOWS_BODY_BLOCK", "DAMAGE_VEHICLE_WHEELS" ],
     "to_hit": -1,
     "melee_damage": { "cut": 6 },
     "weapon_category": [ "SHIVS" ]
@@ -63,7 +64,7 @@
     "volume": "2655 ml",
     "longest_side": "122 cm",
     "to_hit": -5,
-    "flags": [ "SINGLE_USE", "FRAGILE_MELEE" ],
+    "flags": [ "SINGLE_USE", "FRAGILE_MELEE", "DAMAGE_VEHICLE_WHEELS" ],
     "melee_damage": { "bash": 4 }
   },
   {
