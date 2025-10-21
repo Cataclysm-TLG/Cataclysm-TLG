@@ -54,7 +54,6 @@
     "recipes": [
       { "id": "casting_mold", "description": " Craft: Casting Mold (for metal)" },
       { "id": "copper_knife", "description": " Craft: Knife, Copper" },
-      { "id": "sword_crude", "description": " Craft: Sword, Crude" },
       { "id": "pot_copper", "description": " Craft: Pot, Copper" },
       { "id": "chisel", "description": " Craft: Metalworking Chisel" },
       { "id": "hammer", "description": " Craft: Hammer" },

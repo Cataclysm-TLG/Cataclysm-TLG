@@ -129,7 +129,6 @@
     "//": "Any weapon that you could thrust with and stab someone.",
     "tools": [
       [
-        [ "sword_metal_fencing", -1 ],
         [ "fencing_foil", -1 ],
         [ "fencing_foil_sharpened", -1 ],
         [ "shock_foil", -1 ],
@@ -184,8 +183,6 @@
         [ "broadsword", -1 ],
         [ "cutlass", -1 ],
         [ "sword_wood", -1 ],
-        [ "sword_nail", -1 ],
-        [ "sword_crude", -1 ],
         [ "sword_sheets_welded", -1 ],
         [ "sword_metal", -1 ]
       ]
@@ -220,8 +217,6 @@
       [
         [ "sword_wood", -1 ],
         [ "bokken", -1 ],
-        [ "sword_nail", -1 ],
-        [ "sword_crude", -1 ],
         [ "sword_sheets_welded", -1 ],
         [ "sword_metal", -1 ],
         [ "longsword", -1 ],
@@ -242,7 +237,6 @@
     "tools": [
       [
         [ "sword_wood_large", -1 ],
-        [ "sword_crude_large", -1 ],
         [ "sword_sheets_welded_large", -1 ],
         [ "sword_metal_large", -1 ],
         [ "zweihander", -1 ],

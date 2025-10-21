@@ -3027,5 +3027,10 @@
     "type": "MIGRATION",
     "id": "sword_crude_large",
     "replace": "sword_metal_large"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_nail",
+    "replace": "sword_wood"
   }
 ]
