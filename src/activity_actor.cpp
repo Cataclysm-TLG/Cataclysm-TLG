@@ -3071,7 +3071,7 @@ void efile_activity_actor::do_turn( player_activity &act, Character &who )
                 add_msg_if_player_sees(
                     who, m_warning, string_format( _( "The %s ran out of batteries!" ),
                                                    edevice->display_name() ) );
-                                                   
+
                 who.cancel_activity();
                 return false;
             }

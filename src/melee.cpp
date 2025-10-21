@@ -1404,9 +1404,11 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
     /** @ARM_STR increases bashing damage, whips and flails use intelligence too */
     static const std::set<weapon_category_id> category_whips{ weapon_category_WHIPS };
     static const std::set<weapon_category_id> category_flails{ weapon_category_FLAILS };
-    bool whip = !unarmed && ( std::any_of( category_whips.begin(), category_whips.end(), [&]( const weapon_category_id & cat ) {
+    bool whip = !unarmed &&
+    ( std::any_of( category_whips.begin(), category_whips.end(), [&]( const weapon_category_id & cat ) {
         return weap.typeId()->weapon_category.count( cat );
-    } ) || std::any_of( category_flails.begin(), category_flails.end(), [&]( const weapon_category_id & cat ) {
+    } ) || std::any_of( category_flails.begin(),
+    category_flails.end(), [&]( const weapon_category_id & cat ) {
         return weap.typeId()->weapon_category.count( cat );
     } ) );
 

@@ -1504,8 +1504,9 @@ void map::player_in_field( Character &you )
             if( inside ) {
                 return;
             }
-            bool solid_exposed = ( ft.obj().phase == phase_id::SOLID || ft.obj().phase == phase_id::PNULL ) &&  ( !you.in_vehicle );
-            bool liquid_exposed = ( ft.obj().phase == phase_id::LIQUID ) &&  ( !you.in_vehicle || !one_in( 2 ) );
+            bool solid_exposed = ( ft.obj().phase == phase_id::SOLID || ft.obj().phase == phase_id::PNULL ) &&
+                                 ( !you.in_vehicle );
+            bool liquid_exposed = ( ft.obj().phase == phase_id::LIQUID ) && ( !you.in_vehicle || !one_in( 2 ) );
             bool gas_exposed = ( ft.obj().phase == phase_id::GAS || ft.obj().phase == phase_id::PLASMA );
 
             if( solid_exposed || liquid_exposed || gas_exposed ) {
