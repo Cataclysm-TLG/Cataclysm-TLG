@@ -535,7 +535,7 @@
     "flags": [ "NONCONDUCTIVE", "ALWAYS_TWOHAND", "WALKING_AID" ],
     "weapon_category": [ "GREAT_HAMMERS" ],
     "techniques": [ "WBLOCK_1", "BRUTAL", "WIDE", "SWEEP" ],
-    "volume": "1250 ml",
+    "volume": "1650 ml",
     "longest_side": "80 cm",
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "uneven" },
     "price": "120 USD",

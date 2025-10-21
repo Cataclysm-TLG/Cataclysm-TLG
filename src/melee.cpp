@@ -2799,7 +2799,7 @@ int Character::attack_speed( const item &weap ) const
     int strbonus = 0;
     /** @EFFECT_STR can increase attack speed for very heavy items. */
     if( weap.weight() > 1000_gram && str_cur >= 12 ) {
-        strbonus = std::min( static_cast<int>( weap.weight().value() ) / 1000000, ( str_cur - 10 ) / 2 );
+        strbonus = std::min( static_cast<int>( weap.weight().value() ) / 500000, ( str_cur - 10 ) / 2 );
     }
     const int ma_move_cost = mabuff_attack_cost_penalty();
     const float stamina_ratio = static_cast<float>( get_stamina() ) / static_cast<float>
