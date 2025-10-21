@@ -1554,7 +1554,7 @@
     "color": "pink",
     "bodytype": "insect",
     "harvest": "arachnid_beetle",
-    "special_attacks": [ { "type": "bite_humanoid", "attack_upper": false } ],
+    "special_attacks": [ { "type": "bite", "cooldown": 5, "attack_upper": false } ],
     "flags": [ "SEES", "HEARS" ]
   },
   {
