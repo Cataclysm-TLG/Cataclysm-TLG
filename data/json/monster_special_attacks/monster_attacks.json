@@ -60,7 +60,7 @@
     "type": "monster_attack",
     "attack_type": "melee",
     "id": "grab",
-    "cooldown": 10,
+    "cooldown": 6,
     "move_cost": 100,
     "hitsize_min": 1,
     "damage_max_instance": [ { "damage_type": "bash", "amount": 0 } ],
