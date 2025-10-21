@@ -159,7 +159,7 @@
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie", "prof_wp_flying" ],
     "vision_night": 5,
     "harvest": "zombie_animal",
-    "special_attacks": [ { "id": "impale", "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.85 } ] } ],
+    "special_attacks": [ { "id": "impale", "cooldown": 0, "damage_max_instance": [ { "damage_type": "stab", "amount": 14, "armor_multiplier": 0.85 } ] } ],
     "upgrades": { "half_life": 168, "into_group": "GROUP_ZOMBIE_RAPTOR_UPGRADES" },
     "fungalize_into": "mon_fungal_raptor",
     "flags": [
@@ -202,6 +202,7 @@
     "special_attacks": [
       {
         "type": "spell",
+        "cooldown": 0,
         "spell_data": { "id": "boomer_claymore_initial", "min_level": 0 },
         "monster_message": "An unstable flesh-raptor explodes!"
       }

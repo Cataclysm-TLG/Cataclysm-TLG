@@ -3871,6 +3871,7 @@
     "special_attacks": [
       {
         "type": "spell",
+        "cooldown": 0,
         "spell_data": { "id": "ant_fire_unstable_initial", "min_level": 0 },
         "monster_message": "%s's abdomen suddenly contracts."
       },
