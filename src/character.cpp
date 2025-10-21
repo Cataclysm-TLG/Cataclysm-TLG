@@ -3507,7 +3507,8 @@ std::vector<item_location> Character::nearby( const
     return res;
 }
 
-std::list<item> Character::remove_worn_items_with( const std::function<bool( item & )> &filter, bool unload )
+std::list<item> Character::remove_worn_items_with( const std::function<bool( item & )> &filter,
+        bool unload )
 {
     invalidate_inventory();
     return worn.remove_worn_items_with( filter, *this, unload );

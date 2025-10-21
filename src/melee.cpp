@@ -161,6 +161,7 @@ static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 static const trait_id trait_VINES2( "VINES2" );
 static const trait_id trait_VINES3( "VINES3" );
 
+static const weapon_category_id weapon_category_FLAILS( "FLAILS" );
 static const weapon_category_id weapon_category_UNARMED( "UNARMED" );
 static const weapon_category_id weapon_category_WHIPS( "WHIPS" );
 
@@ -1400,14 +1401,16 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
             arpen += contact->parent->unarmed_arpen( dt );
         }
     }
-    /** @ARM_STR increases bashing damage, whips use intelligence too */
+    /** @ARM_STR increases bashing damage, whips and flails use intelligence too */
     static const std::set<weapon_category_id> category_whips{ weapon_category_WHIPS };
-    bool whip = !unarmed && std::any_of(
-                    category_whips.begin(), category_whips.end(),
-    [&]( const weapon_category_id & cat ) {
+    static const std::set<weapon_category_id> category_flails{ weapon_category_FLAILS };
+    bool whip = !unarmed &&
+    ( std::any_of( category_whips.begin(), category_whips.end(), [&]( const weapon_category_id & cat ) {
         return weap.typeId()->weapon_category.count( cat );
-    }
-                );
+    } ) || std::any_of( category_flails.begin(),
+    category_flails.end(), [&]( const weapon_category_id & cat ) {
+        return weap.typeId()->weapon_category.count( cat );
+    } ) );
 
     float stat_bonus = u.bonus_damage( !average, whip );
     stat_bonus += u.mabuff_damage_bonus( dt );
@@ -2791,10 +2794,15 @@ int Character::attack_speed( const item &weap ) const
     const int base_move_cost = weap.attack_time( *this ) / 2;
     const float melee_skill = has_active_bionic( bionic_id( bio_cqb ) ) ? BIO_CQB_LEVEL :
                               get_skill_level( skill_melee );
-    /** @EFFECT_MELEE increases melee attack speed */
+    /** @EFFECT_MELEE increases melee attack speed. */
     const int skill_cost = static_cast<int>( ( base_move_cost * ( 15 - melee_skill ) / 15 ) );
-    /** @EFFECT_DEX increases attack speed */
+    /** @EFFECT_DEX increases attack speed. */
     const int dexbonus = dex_cur / 2;
+    int strbonus = 0;
+    /** @EFFECT_STR can increase attack speed for very heavy items. */
+    if( weap.weight() > 1000_gram && str_cur >= 12 ) {
+        strbonus = std::min( static_cast<int>( weap.weight().value() ) / 500000, ( str_cur - 10 ) / 2 );
+    }
     const int ma_move_cost = mabuff_attack_cost_penalty();
     const float stamina_ratio = static_cast<float>( get_stamina() ) / static_cast<float>
                                 ( get_stamina_max() );
@@ -2808,6 +2816,7 @@ int Character::attack_speed( const item &weap ) const
     move_cost *= stamina_penalty;
     move_cost += skill_cost;
     move_cost -= dexbonus;
+    move_cost -= strbonus;
 
     move_cost = calculate_by_enchantment( move_cost, enchant_vals::mod::ATTACK_SPEED, true );
     // Martial arts last. Flat has to be after mult, because comments say so.

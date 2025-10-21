@@ -23,13 +23,13 @@ void activity_tracker::try_reduce_weariness( int bmr )
     const float recovery_mult = get_option<float>( "WEARY_RECOVERY_MULT" );
     // As sleepiness_mod approaches zero, low_activity_ticks and reduction approach infinity which in turn make tracker approach - infinity before being capped at 0.
     // Skip the math and just automatically set tracker to 0.
-        if( average_activity() < LIGHT_EXERCISE ) {
-            // cata_assert( sleepiness_mod > 0.0f );
-            low_activity_ticks += std::min( 1.0f,
-                                            ( ( LIGHT_EXERCISE - average_activity() ) / ( LIGHT_EXERCISE - NO_EXERCISE ) ) );
-            // Recover (by default) twice as fast while sleeping
-            if( average_activity() < NO_EXERCISE ) {
-                low_activity_ticks += ( NO_EXERCISE - average_activity() ) / ( NO_EXERCISE - SLEEP_EXERCISE );
+    if( average_activity() < LIGHT_EXERCISE ) {
+        // cata_assert( sleepiness_mod > 0.0f );
+        low_activity_ticks += std::min( 1.0f,
+                                        ( ( LIGHT_EXERCISE - average_activity() ) / ( LIGHT_EXERCISE - NO_EXERCISE ) ) );
+        // Recover (by default) twice as fast while sleeping
+        if( average_activity() < NO_EXERCISE ) {
+            low_activity_ticks += ( NO_EXERCISE - average_activity() ) / ( NO_EXERCISE - SLEEP_EXERCISE );
         }
 
         const int bmr_cal = bmr * 1000;
