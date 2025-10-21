@@ -3012,5 +3012,20 @@
     "type": "MIGRATION",
     "id": "bone_mi-go",
     "replace": "meat_mi-go"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bone_mi-go",
+    "replace": "meat_mi-go"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_crude",
+    "replace": "sword_metal"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sword_crude_large",
+    "replace": "sword_metal_large"
   }
 ]
