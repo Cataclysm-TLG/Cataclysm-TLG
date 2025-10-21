@@ -198,7 +198,7 @@ class outfit
         // creates a list of items dependent upon @it
         void add_dependent_item( std::list<item *> &dependent );
         std::list<item> remove_worn_items_with( const std::function<bool( item & )> &filter,
-                                                Character &guy );
+                                                Character &guy, bool unload );
         bool takeoff( item_location loc, std::list<item> *res, Character &guy );
         std::list<item> use_amount(
             const itype_id &it, int quantity, std::list<item> &used,
