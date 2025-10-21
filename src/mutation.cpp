@@ -624,7 +624,7 @@ void Character::mutation_effect( const trait_id &mut, const bool worn_destroyed_
             here.add_item_or_charges( pos_bub(), armor );
         }
         return true;
-    } );
+    }, false );
 
     for( const std::pair<const mtype_id, int> &moncam : branch.moncams ) {
         add_moncam( moncam );
@@ -656,7 +656,7 @@ void Character::mutation_loss_effect( const trait_id &mut )
     for( const itype_id &popped_armor : branch.integrated_armor ) {
         remove_worn_items_with( [&]( item & armor ) {
             return armor.typeId() == popped_armor;
-        } );
+        }, true );
     }
 
     if( !branch.enchantments.empty() ) {

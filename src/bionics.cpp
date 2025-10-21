@@ -1407,7 +1407,7 @@ bool Character::deactivate_bionic( bionic &bio, bool eff_only )
                     item_location loc( *this, &tmparmor );
                     get_event_bus().send_with_talker( this, &loc, e );
                     return armor.typeId() == tmparmor.typeId();
-                } );
+                }, true );
             }
         }
     }
@@ -3008,7 +3008,7 @@ void Character::remove_bionic( const bionic &bio )
     for( const itype_id &popped_armor : bio.id->passive_pseudo_items ) {
         remove_worn_items_with( [&]( item & armor ) {
             return armor.typeId() == popped_armor;
-        } );
+        }, true );
     }
 
     const bool has_enchantments = !bio.id->enchantments.empty();
