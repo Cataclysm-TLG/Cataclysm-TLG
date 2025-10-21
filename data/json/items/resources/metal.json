@@ -14,7 +14,8 @@
     "qualities": [ [ "HAMMER", 1 ] ],
     "techniques": [ "WBLOCK_1", "PRECISE" ],
     "weapon_category": [ "BLUDGEONS" ],
-    "volume": "370 ml",
+    "//": "Volume calculated as a solid cylinder because the code is generally asking for the general size of the thing, not its displacement.",
+    "volume": "2407 ml",
     "price": "38 USD",
     "price_postapoc": "10 cent",
     "melee_damage": { "bash": 16 }
