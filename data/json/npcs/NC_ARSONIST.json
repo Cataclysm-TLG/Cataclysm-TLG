@@ -146,7 +146,10 @@
       { "item": "knife_butcher", "prob": 20 },
       { "item": "hatchet", "prob": 20 },
       { "item": "ax", "prob": 20 },
+      { "item": "brush_axe", "prob": 20 },
+      { "item": "makeshift_glaive", "prob": 20 },
       { "item": "machete", "prob": 20 },
+      { "item": "makeshift_machete", "prob": 20 },
       { "item": "knife_combat", "prob": 20 },
       { "item": "katana", "prob": 20 }
     ]
@@ -159,8 +162,7 @@
       { "item": "spear_knife", "prob": 10 },
       { "item": "sharpened_pipe", "prob": 10 },
       { "item": "spear_wood", "prob": 20 },
-      { "item": "spear_steel", "prob": 5 },
-      { "item": "spear_forked", "prob": 10 }
+      { "item": "spear_steel", "prob": 5 }
     ]
   },
   {

@@ -2798,12 +2798,10 @@ int Character::attack_speed( const item &weap ) const
     const int skill_cost = static_cast<int>( ( base_move_cost * ( 15 - melee_skill ) / 15 ) );
     /** @EFFECT_DEX increases attack speed. */
     const int dexbonus = dex_cur / 2;
-    int strbonus = 0;
     /** @EFFECT_STR can increase attack speed for heavy items. */
-    if( str_cur > 10 ) {
-        strbonus = std::min( static_cast<int>( weap.weight().value() ) / 500000, ( str_cur - 10 ) );
-        strbonus = std::max( 0, strbonus );
-    }
+    int strbonus = std::min( static_cast<int>( weap.weight( true, false ).value() ) / 500000,
+                             ( str_cur - 10 ) );
+    strbonus = std::max( -9, strbonus );
     const int ma_move_cost = mabuff_attack_cost_penalty();
     const float stamina_ratio = static_cast<float>( get_stamina() ) / static_cast<float>
                                 ( get_stamina_max() );

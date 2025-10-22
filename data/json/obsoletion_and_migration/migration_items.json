@@ -3037,5 +3037,15 @@
     "type": "MIGRATION",
     "id": "lajatang",
     "replace": "halberd"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spear_forked",
+    "replace": "spear_wood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "makeshift_halberd",
+    "replace": "makeshift_glaive"
   }
 ]
