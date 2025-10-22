@@ -615,10 +615,10 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             if( &z == origin ) {
                 return false;
             }
-            // search for creatures in radius 4 around impact site
+            // Search for creatures in radius 4 around impact site.
             if( static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub( *here ), tp ) ) ) <= 4 &&
-                here->sees( z.pos_bub( *here ), tp, -1 ) ) {
-                // don't hit targets that have already been hit
+                here->clear_path( z.pos_bub( *here ), tp, 4, 1, 100 ) && ( z.pos_bub( *here ) != tp ) ) {
+                // Don't hit targets that have already been hit
                 for( auto it : attack.targets_hit ) {
                     if( &z == it.first ) {
                         return false;
@@ -630,7 +630,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         } );
         if( mon_ptr ) {
             Creature &z = *mon_ptr;
-            add_msg( _( "The attack bounced to %s!" ), z.get_name() );
+            add_msg( _( "The attack bounced to %s!" ), z.disp_name() );
             projectile_attack( attack, proj, here, tp, z.pos_bub(), dispersion, origin, in_veh );
             // TODO: Refine to handle overlapping maps
             if( here == &reality_bubble() ) {
