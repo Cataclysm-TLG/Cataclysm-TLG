@@ -7256,9 +7256,17 @@ int item::lift_strength() const
 
 int item::attack_time( const Character &you ) const
 {
-    int ret = 65 + ( volume() / 62.5_ml + weight() / 60_gram ) / count();
-    ret = calculate_by_enchantment_wield( you, ret, enchant_vals::mod::ITEM_ATTACK_SPEED,
-                                          true );
+    float length_factor = ( ( length().value() / 10.f ) * 1.25f ) / static_cast<float>( you.height() );
+    length_factor = std::clamp( length_factor, 0.66f, 1.33f );
+    if( type->m_to_hit > 0 && length_factor > 1.f ) {
+        float excess = length_factor - 1.f;
+        // 20% reduction in length_factor for each point of to-hit, representing a well-balanced weapon being faster.
+        float reduction_factor = std::min( 4.f, static_cast<float>( type->m_to_hit ) ) / 5.f;
+        length_factor = 1.f + ( excess * ( 1.f - reduction_factor ) );
+    }
+
+    int ret = 65 + ( ( weight() / 30_gram ) * length_factor ) / count();
+    ret = calculate_by_enchantment_wield( you, ret, enchant_vals::mod::ITEM_ATTACK_SPEED, true );
     return ret;
 }
 
