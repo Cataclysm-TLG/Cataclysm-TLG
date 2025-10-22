@@ -1422,7 +1422,7 @@
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "titanium_alloy", "covered_by_mat": 80, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 }
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1435,7 +1435,7 @@
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "titanium_alloy", "covered_by_mat": 50, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 }
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance": 5,
         "coverage": 100,
@@ -1448,7 +1448,7 @@
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "titanium_alloy", "covered_by_mat": 60, "thickness": 2.0 },
-          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 }
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1470,7 +1470,8 @@
       {
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
-          { "type": "rubber", "covered_by_mat": 80, "thickness": 3.0 }
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1484,7 +1485,7 @@
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "titanium_alloy", "covered_by_mat": 75, "thickness": 1.0 },
-          { "type": "soft_rubber", "covered_by_mat": 80, "thickness": 0.2 }
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance": 10,
         "coverage": 100,
