@@ -249,11 +249,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
-      [ [ "stick_long", 1 ] ],
-      [ [ "fletching", 1, "LIST" ] ]
-    ]
+    "components": [ [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ], [ [ "stick_long", 1 ] ], [ [ "fletching", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",

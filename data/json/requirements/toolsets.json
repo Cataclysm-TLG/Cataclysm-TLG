@@ -135,7 +135,7 @@
     "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
     "tools": [ [ [ "metal_casting_small_improvised", -1, "LIST" ], [ "metal_casting_small_proper", -1, "LIST" ] ] ]
   },
-    {
+  {
     "id": "metal_casting",
     "type": "requirement",
     "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
@@ -186,7 +186,7 @@
     "//": "A large box to contain sand for use as a mold, or a prefab clay mold.",
     "tools": [ [ [ "metal_casting_large_improvised", -1, "LIST" ], [ "metal_casting_large_proper", -1, "LIST" ] ] ]
   },
-    {
+  {
     "id": "metal_casting_long_proper",
     "type": "requirement",
     "//": "A long box to contain sand for use as a mold, or a prefab clay mold.",
