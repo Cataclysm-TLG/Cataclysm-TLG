@@ -26,6 +26,7 @@
 #include "regional_settings.h"
 #include "rng.h"
 #include "simple_pathfinding.h"
+#include "text_snippets.h"
 #include "type_id.h"
 
 static const oter_str_id oter_road_nesw( "road_nesw" );
@@ -136,7 +137,7 @@ void overmap::place_cities()
         placement_attempts++;
 
         tripoint_om_omt p;
-        city tmp;
+        city tmp( SNIPPET.expand( settings->get_settings_city().name_snippet ) );
         tmp.pos_om = pos();
         if( use_random_cities ) {
             // randomly make some cities smaller or larger
