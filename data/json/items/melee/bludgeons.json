@@ -4,8 +4,8 @@
     "id": "kanabo_wood",
     "name": { "str_sp": "kanabō" },
     "description": "A two-handed war club used in feudal Japan by samurai against armored opponents, it's made from hardwood studded with metal.",
-    "weight": "1800 g",
-    "longest_side": "140 cm",
+    "weight": "2600 g",
+    "longest_side": "150 cm",
     "to_hit": { "grip": "weapon", "length": "long", "surface": "any", "balance": "neutral" },
     "color": "brown",
     "looks_like": "bat",
@@ -18,7 +18,7 @@
     "volume": "2700 ml",
     "price": "500 USD",
     "price_postapoc": "20 USD",
-    "melee_damage": { "bash": 39 }
+    "melee_damage": { "bash": 34 }
   },
   {
     "type": "GENERIC",
@@ -28,7 +28,7 @@
     "weight": "1100 g",
     "volume": "1350 ml",
     "longest_side": "86 cm",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "price_postapoc": "7 USD 50 cent",
     "color": "brown",
     "symbol": "/",
@@ -36,7 +36,7 @@
     "techniques": [ "WBLOCK_1", "BRUTAL" ],
     "flags": [ "DURABLE_MELEE", "BELT_CLIP", "NONCONDUCTIVE", "WALKING_AID" ],
     "price": "160 USD",
-    "melee_damage": { "bash": 22 },
+    "melee_damage": { "bash": 19 },
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
@@ -56,7 +56,7 @@
     "flags": [ "DURABLE_MELEE", "BELT_CLIP" ],
     "volume": "1200 ml",
     "price": "160 USD",
-    "melee_damage": { "bash": 23 },
+    "melee_damage": { "bash": 20 },
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
@@ -150,13 +150,13 @@
     "ascii_picture": "bokken",
     "techniques": [ "WBLOCK_2" ],
     "flags": [ "DURABLE_MELEE" ],
-    "weight": "600 g",
-    "volume": "1000 ml",
-    "longest_side": "96 cm",
+    "weight": "750 g",
+    "volume": "750 ml",
+    "longest_side": "101 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "category": "weapons",
     "weapon_category": [ "LONG_SWORDS", "BLUDGEONS" ],
-    "melee_damage": { "bash": 16 }
+    "melee_damage": { "bash": 17 }
   },
   {
     "type": "GENERIC",
@@ -193,7 +193,7 @@
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "BELT_CLIP" ],
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "price": "200 USD",
-    "melee_damage": { "bash": 22, "stab": 2 },
+    "melee_damage": { "bash": 19, "stab": 2 },
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
@@ -350,7 +350,7 @@
     "category": "weapons",
     "id": "cudgel",
     "name": { "str": "cudgel" },
-    "description": "Mankind's oldest weapon: a length of wood tapered slightly to maximize weight at the business end.  In other words, a club.",
+    "description": "Mankind's oldest weapon: a length of wood tapered slightly to maximize weight at the business end -- in other words, a club.  This one is quite short, prioritizing speed over power.",
     "weight": "900 g",
     "price_postapoc": "25 cent",
     "color": "brown",
@@ -362,14 +362,14 @@
     "longest_side": "65 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "neutral" },
     "price": "1 USD",
-    "melee_damage": { "bash": 16 }
+    "melee_damage": { "bash": 17 }
   },
   {
     "type": "GENERIC",
     "category": "weapons",
     "id": "cudgel_spiked",
     "name": { "str": "spiked cudgel" },
-    "description": "A length of wood with nails driven through the business end to create a menacing, if inelegant, weapon.",
+    "description": "A short bit of wood with nails driven through the business end to create a menacing, if inelegant, weapon.",
     "weight": "908 g",
     "price_postapoc": "25 cent",
     "color": "brown",
@@ -535,10 +535,10 @@
     "weight": "1150 g",
     "volume": "1600 ml",
     "longest_side": "180 cm",
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "any", "balance": "good" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "good" },
     "category": "weapons",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 25 }
+    "melee_damage": { "bash": 19 }
   },
   {
     "type": "GENERIC",
@@ -558,7 +558,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "neutral" },
     "price": "160 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 21, "stab": 17 }
+    "melee_damage": { "bash": 21, "stab": 16 }
   },
   {
     "id": "lucerne_hammer",
@@ -580,7 +580,7 @@
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "category": "weapons",
-    "melee_damage": { "bash": 42, "stab": 33 }
+    "melee_damage": { "bash": 32, "stab": 28 }
   },
   {
     "type": "GENERIC",
@@ -602,16 +602,16 @@
     "price_postapoc": "60 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
     "category": "weapons",
-    "melee_damage": { "bash": 30 }
+    "melee_damage": { "bash": 28 }
   },
   {
     "type": "GENERIC",
     "id": "staff_pipe",
     "name": { "str": "pipe staff" },
     "description": "Two steel pipes fitted end-to-end in a clumsy facsimile of a quarterstaff.",
-    "weight": "1450 g",
-    "longest_side": "160 cm",
-    "volume": "4814 ml",
+    "weight": "2905 g",
+    "longest_side": "152 cm",
+    "volume": "4817 ml",
     "color": "dark_gray",
     "symbol": "/",
     "looks_like": "q_staff",
@@ -622,7 +622,7 @@
     "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "clumsy" },
     "price": "75 USD",
     "price_postapoc": "4 USD",
-    "melee_damage": { "bash": 26 }
+    "melee_damage": { "bash": 20 }
   },
   {
     "type": "GENERIC",
@@ -643,7 +643,7 @@
     "price": "110 USD",
     "price_postapoc": "20 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 30 }
+    "melee_damage": { "bash": 28 }
   },
   {
     "type": "GENERIC",
@@ -669,7 +669,7 @@
     "id": "morningstar",
     "name": { "str": "morningstar" },
     "description": "A medieval weapon consisting of a wood handle with a spiked metal ball on the end.  It is bigger and heavier than a typical mace, and its spikes can deal serious damage to soft targets.",
-    "weight": "2250 g",
+    "weight": "2350 g",
     "color": "dark_gray",
     "symbol": "/",
     "material": [ { "type": "wood", "portion": 8 }, { "type": "steel", "portion": 2 } ],
@@ -684,7 +684,7 @@
     "price_postapoc": "80 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
     "category": "weapons",
-    "melee_damage": { "bash": 38, "stab": 8 }
+    "melee_damage": { "bash": 36, "stab": 7 }
   },
   {
     "type": "GENERIC",
@@ -702,27 +702,26 @@
     "flags": [ "BELT_CLIP", "NONCONDUCTIVE", "WALKING_AID" ],
     "price": "160 USD",
     "price_postapoc": "17 USD 50 cent",
-    "melee_damage": { "bash": 22, "stab": 6 },
+    "melee_damage": { "bash": 18, "stab": 4 },
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
     "type": "GENERIC",
     "id": "nailboard",
-    "name": { "str": "nailboard" },
-    "description": "A plank of wood with several nails through one end; essentially a simple mace.  It's hard to hold onto, but capable of doing some damage.",
-    "weight": "1305 g",
+    "name": { "str": "nail board" },
+    "description": "A hefty plank of wood.  The nails driven through one end look nasty enough, but it remains a very awkward weapon.",
+    "weight": "2004 g",
+    "volume": "4004 ml",
     "color": "brown",
     "symbol": "/",
     "material": [ { "type": "wood", "portion": 9 }, { "type": "steel", "portion": 1 } ],
     "techniques": [ "WBLOCK_1" ],
     "weapon_category": [ "BLUDGEONS" ],
-    "volume": "2200 ml",
-    "longest_side": "65 cm",
-    "to_hit": { "grip": "bad", "length": "short", "surface": "line", "balance": "uneven" },
-    "flags": [  ],
+    "longest_side": "120 cm",
+    "to_hit": { "grip": "none", "length": "short", "surface": "line", "balance": "clumsy" },
     "price": "1 USD",
     "price_postapoc": "50 cent",
-    "melee_damage": { "bash": 12, "stab": 3 }
+    "melee_damage": { "bash": 15, "stab": 3 }
   },
   {
     "type": "GENERIC",
@@ -738,11 +737,11 @@
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_2" ],
     "weapon_category": [ "QUARTERSTAVES" ],
-    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "uneven" },
     "price": "15 USD",
     "price_postapoc": "50 cent",
     "flags": [ "FRAGILE_MELEE", "SHEATH_SPEAR", "WALKING_AID" ],
-    "melee_damage": { "bash": 8 },
+    "melee_damage": { "bash": 9 },
     "//2": "Based on https://www.amazon.com/dp/B08183YH7Q"
   },
   {
@@ -781,9 +780,9 @@
     "volume": "1500 ml",
     "longest_side": "183 cm",
     "category": "weapons",
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "any", "balance": "good" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "good" },
     "price_postapoc": "1 USD",
-    "melee_damage": { "bash": 19 }
+    "melee_damage": { "bash": 18 }
   },
   {
     "type": "GENERIC",
@@ -900,7 +899,7 @@
     "longest_side": "180 cm",
     "price": "80 USD",
     "price_postapoc": "20 USD",
-    "to_hit": { "grip": "weapon", "length": "long", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "neutral" },
     "material": [ { "type": "plastic", "portion": 1 }, { "type": "steel", "portion": 1 }, { "type": "wood", "portion": 8 } ],
     "symbol": "/",
     "color": "brown",
@@ -919,7 +918,7 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "melee_damage": { "bash": 24 }
+    "melee_damage": { "bash": 19 }
   },
   {
     "id": "shocktonfa_off",

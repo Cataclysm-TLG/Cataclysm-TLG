@@ -7258,7 +7258,7 @@ int item::attack_time( const Character &you ) const
 {
     float length_factor = ( ( length().value() / 10.f ) * 1.25f ) / std::max( 1.f,
                           static_cast<float>( you.height() ) );
-    length_factor = std::clamp( length_factor, 0.75f, 1.25f );
+    length_factor = std::clamp( length_factor, 0.9f, 1.25f );
     if( type->m_to_hit > 0 && length_factor > 1.f ) {
         float excess = length_factor - 1.f;
         // 20% reduction in length_factor for each point of to-hit, representing a well-balanced weapon being faster.
