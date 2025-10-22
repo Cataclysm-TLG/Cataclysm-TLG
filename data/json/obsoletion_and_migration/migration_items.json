@@ -3032,5 +3032,10 @@
     "type": "MIGRATION",
     "id": "sword_nail",
     "replace": "sword_wood"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lajatang",
+    "replace": "halberd"
   }
 ]

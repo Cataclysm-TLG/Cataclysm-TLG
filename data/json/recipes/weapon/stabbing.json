@@ -1,27 +1,5 @@
 [
   {
-    "result": "fencing_epee_sharpened",
-    "id_suffix": "from_scratch",
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
-    "skill_used": "fabrication",
-    "difficulty": 7,
-    "time": "6 h",
-    "book_learn": [ [ "textbook_weapwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 3 ], [ "steel_tiny", 3 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_bladesmith" },
-      { "proficiency": "prof_carving", "time_multiplier": 1.2, "learning_time_multiplier": 0.2, "skill_penalty": 0 }
-    ],
-    "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
-  },
-  {
     "result": "karambit",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
@@ -39,50 +17,6 @@
     "using": [ [ "blacksmithing_standard", 2 ], [ "steel_tiny", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
-  },
-  {
-    "result": "fencing_foil_sharpened",
-    "id_suffix": "from_scratch",
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
-    "skill_used": "fabrication",
-    "difficulty": 7,
-    "time": "6 h",
-    "book_learn": [ [ "textbook_weapwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 2 ], [ "steel_tiny", 2 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_bladesmith" },
-      { "proficiency": "prof_carving", "time_multiplier": 1.2, "learning_time_multiplier": 0.2, "skill_penalty": 0 }
-    ],
-    "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
-  },
-  {
-    "result": "fencing_sabre_sharpened",
-    "id_suffix": "from_scratch",
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "category": "CC_WEAPON",
-    "subcategory": "CSC_WEAPON_PIERCING",
-    "skill_used": "fabrication",
-    "difficulty": 7,
-    "time": "6 h",
-    "book_learn": [ [ "textbook_weapwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 1 ], [ "steel_tiny", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_bladesmith" },
-      { "proficiency": "prof_carving", "time_multiplier": 1.2, "learning_time_multiplier": 0.2, "skill_penalty": 0 }
-    ],
-    "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "sheet_metal_small", 1 ] ] ]
   },
   {
     "result": "kirpan",
@@ -175,7 +109,7 @@
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "4 h",
-    "autolearn": true,
+    "book_learn": [ [ "textbook_weapwest", 3 ], [ "textbook_weapeast", 3 ] ],
     "using": [ [ "blacksmithing_basic", 4 ], [ "steel_standard", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -300,7 +234,6 @@
     "difficulty": 4,
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "autolearn": true,
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -339,7 +272,7 @@
     "skill_used": "fabrication",
     "difficulty": 6,
     "time": "3 h",
-    "autolearn": true,
+    "book_learn": [ [ "textbook_weapwest", 5 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -410,7 +343,7 @@
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "6 h 30 m",
-    "autolearn": true,
+    "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
     "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
@@ -616,7 +549,7 @@
     "skills_required": [ "throw", 2 ],
     "difficulty": 2,
     "time": "1 h",
-    "autolearn": true,
+    "book_learn": [ [ "textbook_weapwest", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -713,7 +646,6 @@
     "skill_used": "fabrication",
     "difficulty": 8,
     "time": "7 h 40 m",
-    "autolearn": true,
     "book_learn": [ [ "manual_knives", 5 ], [ "recipe_melee", 5 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -740,7 +672,6 @@
     "skill_used": "fabrication",
     "difficulty": 4,
     "time": "1 h 30 m",
-    "autolearn": true,
     "book_learn": [ [ "manual_knives", 3 ], [ "recipe_melee", 2 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },

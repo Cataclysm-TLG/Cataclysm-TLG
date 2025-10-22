@@ -254,7 +254,7 @@
     "id": "basic_axes",
     "type": "requirement",
     "//": "Any given thing you can use like an axe, basic stuff.",
-    "tools": [ [ [ "ax_sheets_welded", -1 ], [ "ax_sheets_bolted", -1 ], [ "primitive_axe", -1 ] ] ]
+    "tools": [ [ [ "ax_sheets_welded", -1 ], [ "primitive_axe", -1 ] ] ]
   },
   {
     "id": "real_axes",
@@ -404,7 +404,6 @@
       [
         [ "glaive", -1 ],
         [ "halberd", -1 ],
-        [ "lajatang", -1 ],
         [ "naginata", -1 ],
         [ "scythe_war", -1 ],
         [ "poleaxe", -1 ],
