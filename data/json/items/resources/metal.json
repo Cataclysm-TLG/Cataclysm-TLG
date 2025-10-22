@@ -7,6 +7,7 @@
     "category": "spare_parts",
     "weight": "1450 g",
     "longest_side": "76 cm",
+    "volume": "2407 ml",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "color": "dark_gray",
     "symbol": "/",
@@ -15,7 +16,6 @@
     "techniques": [ "WBLOCK_1", "PRECISE" ],
     "weapon_category": [ "BLUDGEONS" ],
     "//": "Volume calculated as a solid cylinder because the code is generally asking for the general size of the thing, not its displacement.",
-    "volume": "2407 ml",
     "price": "38 USD",
     "price_postapoc": "10 cent",
     "melee_damage": { "bash": 16 }
