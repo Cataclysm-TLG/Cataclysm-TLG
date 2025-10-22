@@ -191,7 +191,7 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
         adjust_taken_damage_by_enchantments( elem );
 
         // Early exit if we're not taking damage.
-        if( elem.amount > 0.0 ) {
+        if( elem.amount >= 1.0 ) {
             worn.absorb_damage( *this, elem, bp, worn_remains, armor_destroyed );
             passive_absorb_hit( bp, elem );
             adjust_taken_damage_by_enchantments_post_absorbed( elem );
