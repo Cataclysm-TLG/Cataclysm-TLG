@@ -48,7 +48,6 @@
     "tools": [
       [
         [ "makeshift_scythe_war", -1 ],
-        [ "makeshift_halberd", -1 ],
         [ "makeshift_glaive", -1 ],
         [ "makeshift_scythe_war", -1 ],
         [ "street_sign", -1 ],
@@ -56,7 +55,6 @@
         [ "hockey_stick", -1 ],
         [ "crowbar", -1 ],
         [ "claw_bar", -1 ],
-        [ "lucerne_hammerfake", -1 ],
         [ "fire_ax", -1 ],
         [ "pike_pole", -1 ],
         [ "EOD_hotstick", -1 ],
@@ -385,11 +383,13 @@
     "//": "Any basic weapon you can use as a cutting polearm.",
     "tools": [
       [
-        [ "makeshift_halberd", -1 ],
         [ "halberd", -1 ],
         [ "makeshift_glaive", -1 ],
+        [ "ji", -1 ],
         [ "naginata", -1 ],
         [ "scythe_war", -1 ],
+        [ "brush_axe", -1 ],
+        [ "bronze_brush_axe", -1 ],
         [ "hockey_stick", -1 ],
         [ "pike_pole", -1 ],
         [ "EOD_hotstick", -1 ]
@@ -406,6 +406,8 @@
         [ "halberd", -1 ],
         [ "naginata", -1 ],
         [ "scythe_war", -1 ],
+        [ "brush_axe", -1 ],
+        [ "bronze_brush_axe", -1 ],
         [ "poleaxe", -1 ],
         [ "lucerne_hammer", -1 ],
         [ "ji", -1 ]
@@ -423,7 +425,6 @@
         [ "spear_wood", -1 ],
         [ "spear_shaft_sharpened", -1 ],
         [ "spear_knife", -1 ],
-        [ "spear_forked", -1 ],
         [ "pike_wood", -1 ],
         [ "pike", -1 ],
         [ "spear_stone", -1 ],

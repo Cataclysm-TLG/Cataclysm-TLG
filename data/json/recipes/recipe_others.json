@@ -814,7 +814,7 @@
     "time": "10 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "nail", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "nail", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "bucket", 1 ] ] ]
   },
   {
@@ -828,7 +828,7 @@
     "time": "15 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "55gal_drum", 1 ] ] ]
   },
   {
@@ -842,7 +842,7 @@
     "time": "15 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "30gal_drum", 1 ] ] ]
   },
   {
