@@ -743,9 +743,8 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "redsmithing_standard", 3 ], [ "metal_casting", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "scrap_bronze", 3 ] ] ]
   },
   {

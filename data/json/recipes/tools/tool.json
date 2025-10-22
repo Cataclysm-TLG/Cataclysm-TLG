@@ -293,9 +293,8 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [ [ [ "scrap_bronze", 5 ] ] ]
   },
   {
@@ -879,7 +878,7 @@
     "reversible": true,
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
     "components": [ [ [ "copper_scrap_equivalent", 2, "LIST" ] ] ]
   },
   {
@@ -1148,7 +1147,7 @@
       { "proficiency": "prof_toolsmithing" }
     ],
     "using": [ [ "forging_scrap", 2 ] ],
-    "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 }, { "id": "CHISEL", "level": 3 } ],
+    "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
     "components": [ [ [ "scrap", 2 ] ] ]
@@ -1169,7 +1168,7 @@
       { "proficiency": "prof_toolsmithing" }
     ],
     "using": [ [ "forging_scrap", 2 ] ],
-    "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 }, { "id": "CHISEL", "level": 2 } ],
+    "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
     "components": [ [ [ "scrap_bronze", 2 ] ] ]
