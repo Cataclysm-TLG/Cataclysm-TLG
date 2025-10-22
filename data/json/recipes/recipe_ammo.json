@@ -251,7 +251,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
-      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "stick_long", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -267,12 +267,12 @@
     "time": "90 m",
     "book_learn": [ [ "textbook_mesoam", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
       [ [ "bronze_tiny", 1, "LIST" ] ],
-      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "stick_long", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -294,7 +294,7 @@
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
       [ [ "steel_tiny", 2, "LIST" ] ],
-      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "stick_long", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
   },
@@ -438,7 +438,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "bee_sting", 1 ], [ "mop", 1 ] ], [ [ "scrap", 4 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "scrap", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -452,7 +452,7 @@
     "time": "10 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "steel_chunk", 3 ], [ "scrap", 8 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "steel_chunk", 1 ], [ "scrap", 2 ] ] ]
   },
   {
     "type": "recipe",

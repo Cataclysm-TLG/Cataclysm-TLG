@@ -1453,7 +1453,7 @@
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
       [ [ "leather", 1 ], [ "fur", 1 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
-      [ [ "stick", 1 ], [ "2x4", 1 ] ],
+      [ [ "stick_long", 1 ] ],
       [ [ "fletching", 2, "LIST" ] ]
     ]
   },
@@ -1474,14 +1474,13 @@
       { "proficiency": "prof_fletching" },
       { "proficiency": "prof_carving" }
     ],
-    "using": [ [ "bronzesmithing_tools", 3 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
       [ [ "leather", 1 ], [ "fur", 1 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
       [ [ "scrap_bronze", 2 ] ],
-      [ [ "stick", 1 ], [ "2x4", 1 ] ],
+      [ [ "stick_long", 1 ] ],
       [ [ "fletching", 2, "LIST" ] ]
     ]
   },

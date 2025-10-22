@@ -216,7 +216,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", 1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "scrap_bronze", 4 ] ],
@@ -239,7 +239,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
     "components": [ [ [ "scrap_bronze", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
@@ -322,7 +322,7 @@
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
     "components": [
       [
         [ "cotton_patchwork", 1 ],
@@ -345,7 +345,7 @@
     "time": "6 h 30 m",
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "cordage_short", 2, "LIST" ] ],
@@ -446,7 +446,7 @@
     "time": "1 h",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -500,7 +500,7 @@
     "time": "30 m",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", 1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
