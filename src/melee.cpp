@@ -1362,17 +1362,17 @@ float Character::bonus_damage( bool random, bool whip ) const
 {
     // Whips rely on timing, thus intelligence.
     if( whip ) {
+        int stat_average = static_cast<int>( std::round( ( get_arm_str() + get_int() ) / 2.f ) );
         if( random ) {
-            return rng_float( ( get_arm_str() + get_int() ) / 2.0f, ( get_arm_str() + get_int() ) / 2.0f );
+            return rng_float( stat_average / 2.0f, stat_average );
         }
-        return ( get_arm_str() + get_int() ) * 0.375f;
+        return stat_average * 0.75;
     }
 
     /** @ARM_STR increases bashing damage */
     if( random ) {
         return rng_float( get_arm_str() / 2.0f, get_arm_str() );
     }
-
     return get_arm_str() * 0.75f;
 }
 
@@ -1417,10 +1417,13 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
 
     /** @EFFECT_STR increases bashing damage */
     float weap_dam = weap.damage_melee( dt ) + stat_bonus;
-    /** @EFFECT_BASHING caps bash damage with bashing weapons */
+    /*
+     * @EFFECT_BASHING caps bash damage with bashing weapons.
+     * @EFFECT_UNARMED caps bash damage with unarmed weapons.
+    */
     float bash_cap = 2 * u.get_arm_str() + 2 * skill;
     if( whip ) {
-        bash_cap = u.get_int() + u.get_arm_str() + 2 * skill;
+        bash_cap = ( u.get_int() + u.get_arm_str() ) + 2 * skill;
     }
 
     // FIXME: Hardcoded damage type effects (bash)
@@ -1428,8 +1431,6 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
         return; // No negative damage!
     } else if( dt == damage_bash ) {
         float melee_bonus = u.get_skill_level( skill_melee );
-
-        /** @EFFECT_UNARMED caps bash damage with unarmed weapons */
         if( u.is_melee_bash_damage_cap_bonus() ) {
             bash_cap += melee_bonus;
         }
@@ -1461,9 +1462,14 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
             // scale the post-armor damage down halfway between damage and cap
             dmg_mul *= ( 1.0f + ( bash_cap / weap_dam ) ) / 2.0f;
         }
-
-        /** @ARM_STR boosts low cap on bashing damage */
-        const float low_cap = std::min( 1.0f, u.get_arm_str() / 20.0f );
+        float low_cap = 1.f;
+        if( whip ) {
+            /** The average of intelligence and strength boost low cap on bashing damage */
+            low_cap = std::min( 1.0f, ( ( u.get_int() + u.get_arm_str() ) / 2 ) / 20.0f );
+        } else {
+            /** @ARM_STR boosts low cap on bashing damage */
+            low_cap = std::min( 1.0f, u.get_arm_str() / 20.0f );
+        }
         const float bash_min = low_cap * weap_dam;
         weap_dam = average ? ( bash_min + weap_dam ) * 0.5f : rng_float( bash_min, weap_dam );
         dmg += weap_dam;
