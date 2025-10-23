@@ -1462,13 +1462,13 @@ static void roll_melee_damage_internal( const Character &u, const damage_type_id
             // scale the post-armor damage down halfway between damage and cap
             dmg_mul *= ( 1.0f + ( bash_cap / weap_dam ) ) / 2.0f;
         }
-
+        float low_cap = 1.f;
         if( whip ) {
             /** The average of intelligence and strength boost low cap on bashing damage */
-            const float low_cap = std::min( 1.0f, ( ( u.get_int() + u.get_arm_str() ) / 2 ) / 20.0f );
+            low_cap = std::min( 1.0f, ( ( u.get_int() + u.get_arm_str() ) / 2 ) / 20.0f );
         } else {
             /** @ARM_STR boosts low cap on bashing damage */
-            const float low_cap = std::min( 1.0f, u.get_arm_str() / 20.0f );
+            low_cap = std::min( 1.0f, u.get_arm_str() / 20.0f );
         }
         const float bash_min = low_cap * weap_dam;
         weap_dam = average ? ( bash_min + weap_dam ) * 0.5f : rng_float( bash_min, weap_dam );
