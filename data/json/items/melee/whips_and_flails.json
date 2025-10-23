@@ -82,7 +82,7 @@
     "type": "GENERIC",
     "category": "weapons",
     "name": { "str": "war flail" },
-    "description": "A stout pole with a large mace head attached to the end with a chain, a purpose-made combat version of the peasant flail.  It specializes in threshing people in metal armor, rather than grain.",
+    "description": "A stout pole with a spiked mace head attached to the end with a chain, a purpose-made combat version of the peasant flail.  It specializes in threshing people in metal armor, rather than grain.",
     "weight": "3250 g",
     "longest_side": "160 cm",
     "volume": "2250 ml",
@@ -95,7 +95,7 @@
     "techniques": [ "WBLOCK_1", "BRUTAL" ],
     "flags": [ "DURABLE_MELEE", "REACH_ATTACK", "NONCONDUCTIVE", "SHEATH_SPEAR", "ALWAYS_TWOHAND", "POLEARM" ],
     "weapon_category": [ "FLAILS" ],
-    "melee_damage": { "bash": 50 }
+    "melee_damage": { "bash": 52, "stab": 7 }
   },
   {
     "id": "1h_flail_steel",
