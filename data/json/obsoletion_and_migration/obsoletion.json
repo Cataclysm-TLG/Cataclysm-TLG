@@ -305,6 +305,26 @@
     "random_at_chargen": false,
     "valid": false
   },
+    {
+    "type": "mutation",
+    "id": "BEAK_HUM",
+    "name": { "str": "Hummingbird Beak" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "SLOWRUNNER",
+    "name": { "str": "Slow Footed" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
   {
     "id": "scenario_assassin_convict",
     "type": "effect_on_condition"

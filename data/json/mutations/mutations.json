@@ -597,7 +597,7 @@
     "id": "QUICK",
     "name": { "str": "Quick" },
     "points": 3,
-    "description": "You're just generally quick!  You get a 10% bonus to action points.",
+    "description": "Your movement and reaction speed are heightened.  You move and act 10% faster.",
     "category": [ "FISH", "BIRD", "INSECT", "TROGLOBITE", "CHIMERA", "RAPTOR", "MOUSE", "RABBIT", "CHIROPTERAN" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": 0.1 } ] } ]
   },
@@ -1740,7 +1740,7 @@
     "id": "SAVANT",
     "name": { "str": "Savant" },
     "points": -4,
-    "description": "You tend to specialize in one skill and be poor at all others.  You advance at half speed in all skills except your best one.  Note that combining this with Fast Learner will come out to a slower rate of learning for all skills.",
+    "description": "You tend to specialize in one skill and be poor at all others.  You advance at half speed in all skills except your best one.  If multiple skills are equal, the topmost one on the skill list will be selected.",
     "starting_trait": true,
     "valid": false
   },
@@ -1752,8 +1752,8 @@
     "description": "You don't like thinking about violence.  Your combat skills advance much slower than usual, and you feel more guilt about killing.",
     "starting_trait": true,
     "social_modifiers": { "intimidate": -10 },
-    "valid": false,
-    "types": [ "HUMAN_EMPATHY", "PREDATION" ]
+    "types": [ "HUMAN_EMPATHY", "PREDATION" ],
+    "category": [ "ELFA" ]
   },
   {
     "type": "mutation",
@@ -1763,16 +1763,6 @@
     "description": "Your morale will shift up and down at random, often dramatically.",
     "starting_trait": true,
     "category": [ "MEDICAL", "ELFA" ]
-  },
-  {
-    "type": "mutation",
-    "id": "SLOWRUNNER",
-    "name": { "str": "Slow Footed" },
-    "points": -3,
-    "description": "You can't move as fast as most, resulting in a 15% speed penalty on flat ground.",
-    "starting_trait": true,
-    "types": [ "RUNNING" ],
-    "enchantments": [ { "values": [ { "value": "MOVECOST_FLATGROUND_MOD", "multiply": 0.15 } ] } ]
   },
   {
     "type": "mutation",
@@ -4374,7 +4364,7 @@
     "points": -5,
     "description": "You seem to get full faster now, and food goes through you more rapidly as well.",
     "purifiable": false,
-    "prereqs": [ "BEAK", "DRILL_BEAK", "BEAK_HUM" ],
+    "prereqs": [ "BEAK", "DRILL_BEAK" ],
     "enchantments": [ { "values": [ { "value": "KCAL", "multiply": -0.4 }, { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.1 } ] } ],
     "prereqs2": [ "LIGHTEATER" ],
     "threshreq": [ "THRESH_BIRD" ],
@@ -4389,7 +4379,7 @@
     "description": "We have streamlined our nutritional requirements.  We rely on the Mycus for sustenance, as it relies on us.  We may locate sources of sustenance in close proximity to Mycus core towers, and in forested areas that the Mycus has grown into.",
     "purifiable": false,
     "threshreq": [ "THRESH_MYCUS" ],
-    "cancels": [ "GOURMAND", "BEAK", "DRILL_BEAK", "BEAK_HUM" ],
+    "cancels": [ "GOURMAND", "BEAK", "DRILL_BEAK" ],
     "category": [ "MYCUS" ]
   },
   {
@@ -6574,8 +6564,6 @@
     "types": [ "MUZZLE" ],
     "changes_to": [
       "BEAK",
-      "BEAK_HUM",
-      "DRILL_BEAK",
       "PROBOSCIS",
       "MINOTAUR",
       "MUZZLE_RAPTOR",
@@ -7174,7 +7162,7 @@
     "description": "You have a strong, sharp beak, perfect for cracking open nuts or shellfish.  You'll sometimes use it to bite in combat, especially while grappling.",
     "types": [ "TEETH" ],
     "cancels": [ "MUZZLE", "MUZZLE_RAT", "MUZZLE_BEAR" ],
-    "changes_to": [ "BEAK_HUM", "DRILL_BEAK" ],
+    "changes_to": [ "DRILL_BEAK" ],
     "category": [ "BIRD", "CEPHALOPOD" ],
     "wet_protection": [ { "part": "mouth", "ignored": 1 } ],
     "restricts_gear": [ "mouth" ],
@@ -7197,25 +7185,6 @@
     "wet_protection": [ { "part": "mouth", "ignored": 2 } ],
     "restricts_gear": [ "mouth" ],
     "integrated_armor": [ "integrated_drill_beak" ]
-  },
-  {
-    "type": "mutation",
-    "id": "BEAK_HUM",
-    "name": { "str": "Hummingbird Beak" },
-    "points": 0,
-    "visibility": 10,
-    "ugliness": 5,
-    "enchantments": [ { "values": [ { "value": "CONSUME_TIME_MOD", "multiply": 0.8 } ] } ],
-    "description": "Though your beak's not suitable for pecking, those flowers out there are a good source of energy.  Examine them to feed.",
-    "purifiable": false,
-    "types": [ "TEETH" ],
-    "cancels": [ "MOUTH_TENTACLES" ],
-    "prereqs": [ "BEAK" ],
-    "threshreq": [ "THRESH_BIRD" ],
-    "category": [ "BIRD" ],
-    "wet_protection": [ { "part": "mouth", "ignored": 2 } ],
-    "active": true,
-    "restricts_gear": [ "mouth" ]
   },
   {
     "type": "mutation",
@@ -7414,20 +7383,21 @@
   {
     "type": "mutation",
     "id": "PONDEROUS1",
-    "name": { "str": "Ponderous" },
-    "points": -3,
-    "description": "Your movement is slowed slightly.",
+    "name": { "str": "Slow Footed" },
+    "points": -1,
+    "description": "You move a little slower than most.  This affects only your movement, not your actions.",
     "types": [ "RUNNING" ],
     "changes_to": [ "PONDEROUS2" ],
     "category": [ "URSINE", "CATTLE", "PLANT", "BATRACHIAN", "GASTROPOD", "CRUSTACEAN" ],
+    "starting_trait": true,
     "enchantments": [ { "condition": { "not": { "u_has_move_mode": "prone" } }, "values": [ { "value": "MOVE_COST", "multiply": 0.1 } ] } ]
   },
   {
     "type": "mutation",
     "id": "PONDEROUS2",
-    "name": { "str": "Very Ponderous" },
-    "points": -5,
-    "description": "You move quite slowly.",
+    "name": { "str": "Sluggish" },
+    "points": -3,
+    "description": "You move quite slowly.  This affects only your movement, not your actions.",
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS1" ],
     "changes_to": [ "PONDEROUS3", "CHARGER" ],
@@ -7437,9 +7407,9 @@
   {
     "type": "mutation",
     "id": "PONDEROUS3",
-    "name": { "str": "Extremely Ponderous" },
-    "points": -6,
-    "description": "You have a hard time getting anywhere in a hurry.",
+    "name": { "str": "Ponderous" },
+    "points": -4,
+    "description": "You have a hard time getting anywhere in a hurry.  This affects only your movement, not your actions.",
     "types": [ "RUNNING" ],
     "prereqs": [ "PONDEROUS2" ],
     "category": [ "PLANT" ],
