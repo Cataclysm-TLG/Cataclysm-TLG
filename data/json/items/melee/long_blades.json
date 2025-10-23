@@ -81,7 +81,7 @@
     "id": "sword_metal",
     "symbol": "!",
     "color": "light_gray",
-    "name": { "str": "crude broadsword" },
+    "name": { "str": "crude sword" },
     "description": "A hand-forged approximation of a medieval weapon.  It's certainly sharp enough to get the job done, but the simplistic design is clearly inferior to the real thing.",
     "looks_like": "broadsword",
     "material": [ "steel" ],
@@ -94,7 +94,7 @@
     "weapon_category": [ "MEDIUM_SWORDS" ],
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 2 ] ],
     "techniques": [ "WBLOCK_2" ],
-    "melee_damage": { "bash": 5, "cut": 20 }
+    "melee_damage": { "bash": 6, "cut": 20 }
   },
   {
     "type": "GENERIC",
@@ -116,7 +116,7 @@
     "weapon_category": [ "GREAT_SWORDS" ],
     "category": "weapons",
     "//": "CLANG",
-    "melee_damage": { "bash": 20, "cut": 28 }
+    "melee_damage": { "bash": 18, "cut": 26 }
   },
   {
     "id": "makeshift_machete",
@@ -137,7 +137,7 @@
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "cut": 16 }
+    "melee_damage": { "bash": 3, "cut": 17 }
   },
   {
     "id": "machete",
@@ -159,7 +159,7 @@
     "qualities": [ [ "CUT", 2 ], [ "GRASS_CUT", 1 ], [ "BUTCHER", 15 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "SHEATH_SWORD" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "cut": 21 }
+    "melee_damage": { "bash": 4, "cut": 21 }
   },
   {
     "id": "machete_gimmick",
@@ -178,7 +178,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 8 ], [ "SAW_W", 1 ], [ "DIG", 1 ], [ "PRY", 1 ], [ "GRASS_CUT", 1 ] ],
     "flags": [ "SHEATH_SWORD", "FRAGILE_MELEE" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "cut": 11 }
+    "melee_damage": { "bash": 2, "cut": 14 }
   },
   {
     "id": "cavalry_sabre",
@@ -201,7 +201,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 7 ] ],
     "flags": [ "SHEATH_SWORD", "CONDUCTIVE", "DURABLE_MELEE" ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 23 }
+    "melee_damage": { "bash": 5, "cut": 25 }
   },
   {
     "id": "jian",
@@ -224,7 +224,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 25 }
+    "melee_damage": { "bash": 3, "cut": 24 }
   },
   {
     "id": "scimitar",
@@ -247,7 +247,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 26 }
+    "melee_damage": { "bash": 5, "cut": 27 }
   },
   {
     "id": "estoc",
@@ -270,7 +270,7 @@
     "weapon_category": [ "LONG_THRUSTING_SWORDS" ],
     "to_hit": { "grip": "weapon", "length": "long", "surface": "point", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
-    "melee_damage": { "bash": 10, "stab": 30 }
+    "melee_damage": { "bash": 10, "stab": 31 }
   },
   {
     "id": "longsword",
@@ -292,7 +292,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "LONG_SWORDS", "LONG_THRUSTING_SWORDS" ],
-    "melee_damage": { "bash": 9, "cut": 31 }
+    "melee_damage": { "bash": 9, "cut": 32 }
   },
   {
     "id": "arming_sword",
@@ -315,7 +315,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 7 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 6, "cut": 26 }
+    "melee_damage": { "bash": 6, "cut": 27 }
   },
   {
     "id": "sword_xiphos",
@@ -336,7 +336,7 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "bash": 6, "cut": 28 }
+    "melee_damage": { "bash": 6, "cut": 25 }
   },
   {
     "id": "khopesh",
@@ -378,7 +378,7 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 8, "cut": 24 }
+    "melee_damage": { "bash": 8, "cut": 22 }
   },
   {
     "id": "sword_bronze",
@@ -400,7 +400,7 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 2 ] ],
     "flags": [ "SHEATH_SWORD" ],
     "weapon_category": [ "SHORT_SWORDS" ],
-    "melee_damage": { "bash": 6, "cut": 21 }
+    "melee_damage": { "bash": 6, "cut": 20 }
   },
   {
     "id": "sword_bayonet",
@@ -448,7 +448,7 @@
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "flags": [ "DURABLE_MELEE", "PUMP_RAIL_COMPATIBLE", "SHEATH_KNIFE" ],
     "weapon_category": [ "SHORT_SWORDS", "FENCING_WEAPONRY" ],
-    "melee_damage": { "bash": 4, "stab": 13 }
+    "melee_damage": { "bash": 4, "stab": 15 }
   },
   {
     "id": "tanto",
@@ -469,7 +469,7 @@
     "qualities": [ [ "CUT", 1 ], [ "CUT_FINE", 1 ], [ "BUTCHER", 18 ] ],
     "flags": [ "DURABLE_MELEE", "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "KNIVES", "NINJUTSU_WEAPONS" ],
-    "melee_damage": { "bash": 2, "stab": 14 }
+    "melee_damage": { "stab": 14 }
   },
   {
     "id": "wakizashi",
@@ -492,7 +492,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 12 ] ],
     "weapon_category": [ "MEDIUM_SWORDS", "NINJUTSU_WEAPONS" ],
-    "melee_damage": { "bash": 3, "cut": 20 }
+    "melee_damage": { "bash": 2, "cut": 21 }
   },
   {
     "type": "GENERIC",
@@ -533,13 +533,13 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -31 ] ],
     "weapon_category": [ "LONG_THRUSTING_SWORDS", "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 10, "cut": 31 }
+    "melee_damage": { "bash": 10, "cut": 33 }
   },
   {
     "id": "karambit",
     "type": "TOOL",
     "name": { "str": "karambit" },
-    "description": "A traditional Indonesian small knife.  This one is sharp and could be an effective weapon.",
+    "description": "A traditional Indonesian knife.  The blade is very short, but its curved design is perfect for precision attacks.",
     "looks_like": "kirpan",
     "weight": "142 g",
     "volume": "95 ml",
@@ -547,13 +547,14 @@
     "price": "64 USD",
     "price_postapoc": "50 cent",
     "to_hit": { "grip": "weapon", "length": "hand", "surface": "point", "balance": "good" },
+    "techniques": [ "PRECISE" ],
     "material": [ "steel" ],
     "symbol": "/",
     "color": "dark_gray",
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "flags": [ "SHEATH_KNIFE", "ALLOWS_BODY_BLOCK" ],
     "weapon_category": [ "KNIVES" ],
-    "melee_damage": { "stab": 10 }
+    "melee_damage": { "stab": 12 }
   },
   {
     "id": "kirpan",
@@ -597,7 +598,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 9 ] ],
     "weapon_category": [ "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 6, "cut": 40 }
+    "melee_damage": { "bash": 4, "cut": 50 }
   },
   {
     "id": "fencing_foil",
@@ -873,7 +874,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "weapon_category": [ "LONG_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 28 }
+    "melee_damage": { "bash": 3, "cut": 34 }
   },
   {
     "id": "butterfly_swords",
@@ -917,7 +918,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", 8 ] ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 24 }
+    "melee_damage": { "bash": 8, "cut": 23 }
   },
   {
     "id": "kriegsmesser",
@@ -940,7 +941,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "good" },
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -6 ] ],
     "weapon_category": [ "GREAT_SWORDS" ],
-    "melee_damage": { "bash": 14, "cut": 30 }
+    "melee_damage": { "bash": 7, "cut": 38 }
   },
   {
     "id": "falx",
@@ -1289,7 +1290,7 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 6 ] ],
     "flags": [ "DURABLE_MELEE", "CONDUCTIVE", "SHEATH_SWORD" ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 30 }
+    "melee_damage": { "bash": 5, "cut": 31 }
   },
   {
     "id": "kilij",
@@ -1312,6 +1313,6 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 6 ] ],
     "flags": [ "DURABLE_MELEE", "CONDUCTIVE", "SHEATH_SWORD" ],
     "weapon_category": [ "MEDIUM_SWORDS" ],
-    "melee_damage": { "bash": 5, "cut": 46 }
+    "melee_damage": { "bash": 11, "cut": 31 }
   }
 ]

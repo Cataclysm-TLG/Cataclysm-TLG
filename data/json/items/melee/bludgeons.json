@@ -25,8 +25,8 @@
     "id": "bat",
     "name": { "str": "baseball bat" },
     "description": "A sturdy wooden cudgel once essential to the great American pastime.",
-    "weight": "1100 g",
-    "volume": "1350 ml",
+    "weight": "940 g",
+    "volume": "1343 ml",
     "longest_side": "86 cm",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "price_postapoc": "7 USD 50 cent",
@@ -43,9 +43,10 @@
     "type": "GENERIC",
     "id": "bat_metal",
     "name": { "str": "aluminum bat" },
-    "description": "An aluminum version of the tapered club used to play baseball.  It's lighter, stronger, and more durable than the wooden variety.",
-    "weight": "800 g",
+    "description": "An aluminum version of the tapered club used to play baseball.  It's lighter, stronger, and hits harder than the wooden variety.",
+    "weight": "780 g",
     "longest_side": "83 cm",
+    "volume": "1343 ml",
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
     "color": "light_gray",
     "symbol": "/",
@@ -53,10 +54,9 @@
     "material": [ "aluminum" ],
     "techniques": [ "WBLOCK_1", "BRUTAL" ],
     "qualities": [ [ "HAMMER", 1 ] ],
-    "flags": [ "DURABLE_MELEE", "BELT_CLIP" ],
-    "volume": "1200 ml",
+    "flags": [ "DURABLE_MELEE", "BELT_CLIP", "WALKING_AID" ],
     "price": "160 USD",
-    "melee_damage": { "bash": 20 },
+    "melee_damage": { "bash": 21 },
     "weapon_category": [ "BLUDGEONS" ]
   },
   {
@@ -83,9 +83,9 @@
     "category": "weapons",
     "name": { "str": "expandable baton (collapsed)", "str_pl": "expandable batons (collapsed)" },
     "description": "A telescoping baton.  Right now, it's collapsed for easy storage.  Activate to expand.",
-    "weight": "626 g",
-    "volume": "140 ml",
-    "longest_side": "22 cm",
+    "weight": "380 g",
+    "volume": "50 ml",
+    "longest_side": "23 cm",
     "color": "dark_gray",
     "price_postapoc": "7 USD 50 cent",
     "symbol": "/",
@@ -102,9 +102,9 @@
     "category": "weapons",
     "name": { "str": "expandable baton (extended)", "str_pl": "expandable batons (extended)" },
     "description": "A telescoping baton that's extended and ready to bust some heads.  Activate to collapse.",
-    "weight": "626 g",
-    "volume": "280 ml",
-    "longest_side": "60 cm",
+    "weight": "380 g",
+    "volume": "108 ml",
+    "longest_side": "53 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "price_postapoc": "7 USD 50 cent",
     "color": "dark_gray",
@@ -115,7 +115,7 @@
     "weapon_category": [ "BATONS" ],
     "use_action": { "menu_text": "Collapse", "type": "transform", "target": "baton", "msg": "You collapse your baton." },
     "price": "229 USD",
-    "melee_damage": { "bash": 11 }
+    "melee_damage": { "bash": 14 }
   },
   {
     "id": "blackjack",
@@ -156,7 +156,7 @@
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "category": "weapons",
     "weapon_category": [ "LONG_SWORDS", "BLUDGEONS" ],
-    "melee_damage": { "bash": 17 }
+    "melee_damage": { "bash": 18 }
   },
   {
     "type": "GENERIC",
@@ -169,21 +169,20 @@
     "symbol": "/",
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "DURABLE_MELEE" ],
     "weapon_category": [ "BATONS" ],
     "volume": "800 ml",
     "longest_side": "40 cm",
     "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "uneven" },
     "price": "10 USD",
-    "melee_damage": { "bash": 11 }
+    "melee_damage": { "bash": 15 }
   },
   {
     "type": "GENERIC",
     "id": "bwirebat",
     "name": { "str": "barbed wire bat" },
     "description": "A baseball bat wrapped with barbed wire, giving it a little extra oomph without compromising its durability.",
-    "weight": "1103 g",
-    "volume": "1354 ml",
+    "weight": "942 g",
+    "volume": "1346 ml",
     "longest_side": "86 cm",
     "price_postapoc": "12 USD 50 cent",
     "color": "brown",
@@ -213,7 +212,7 @@
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "good" },
     "price": "160 USD",
     "price_postapoc": "1 USD",
-    "melee_damage": { "bash": 10 }
+    "melee_damage": { "bash": 12 }
   },
   {
     "type": "GENERIC",
@@ -351,15 +350,15 @@
     "id": "cudgel",
     "name": { "str": "cudgel" },
     "description": "Mankind's oldest weapon: a length of wood tapered slightly to maximize weight at the business end -- in other words, a club.  This one is quite short, prioritizing speed over power.",
-    "weight": "900 g",
+    "weight": "700 g",
+    "volume": "820 ml",
+    "longest_side": "65 cm",
     "price_postapoc": "25 cent",
     "color": "brown",
     "symbol": "/",
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_1", "PRECISE" ],
     "weapon_category": [ "BLUDGEONS" ],
-    "volume": "800 ml",
-    "longest_side": "65 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "neutral" },
     "price": "1 USD",
     "melee_damage": { "bash": 17 }
@@ -370,15 +369,15 @@
     "id": "cudgel_spiked",
     "name": { "str": "spiked cudgel" },
     "description": "A short bit of wood with nails driven through the business end to create a menacing, if inelegant, weapon.",
-    "weight": "908 g",
+    "weight": "706 g",
+    "volume": "825 ml",
+    "longest_side": "65 cm",
     "price_postapoc": "25 cent",
     "color": "brown",
     "symbol": "/",
     "material": [ { "type": "wood", "portion": 9 }, { "type": "steel", "portion": 1 } ],
     "techniques": [ "WBLOCK_1", "PRECISE" ],
     "weapon_category": [ "BLUDGEONS" ],
-    "volume": "850 ml",
-    "longest_side": "65 cm",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "neutral" },
     "price": "1 USD",
     "melee_damage": { "bash": 16, "stab": 4 }
@@ -398,9 +397,9 @@
     "weight": "300 g",
     "volume": "350 L",
     "longest_side": "110 cm",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "neutral" },
     "flags": [ "SHEATH_GOLF", "FRAGILE_MELEE" ],
-    "melee_damage": { "bash": 16 }
+    "melee_damage": { "bash": 20 }
   },
   {
     "type": "GENERIC",
@@ -420,7 +419,7 @@
     "price": "120 USD",
     "price_postapoc": "5 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 60 }
+    "melee_damage": { "bash": 65 }
   },
   {
     "type": "GENERIC",
@@ -440,7 +439,7 @@
     "price": "60 USD",
     "price_postapoc": "2 USD 50 cent",
     "qualities": [ [ "HAMMER", 2 ] ],
-    "melee_damage": { "bash": 25 }
+    "melee_damage": { "bash": 28 }
   },
   {
     "type": "GENERIC",
@@ -459,7 +458,7 @@
     "volume": "1250 ml",
     "longest_side": "150 cm",
     "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "good" },
-    "melee_damage": { "bash": 13 }
+    "melee_damage": { "bash": 14 }
   },
   {
     "type": "GENERIC",
@@ -580,7 +579,7 @@
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "category": "weapons",
-    "melee_damage": { "bash": 32, "stab": 28 }
+    "melee_damage": { "bash": 33, "stab": 28 }
   },
   {
     "type": "GENERIC",
@@ -602,7 +601,7 @@
     "price_postapoc": "60 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
     "category": "weapons",
-    "melee_damage": { "bash": 28 }
+    "melee_damage": { "bash": 30 }
   },
   {
     "type": "GENERIC",
@@ -622,7 +621,7 @@
     "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "clumsy" },
     "price": "75 USD",
     "price_postapoc": "4 USD",
-    "melee_damage": { "bash": 20 }
+    "melee_damage": { "bash": 21 }
   },
   {
     "type": "GENERIC",
@@ -643,7 +642,7 @@
     "price": "110 USD",
     "price_postapoc": "20 USD",
     "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 28 }
+    "melee_damage": { "bash": 30 }
   },
   {
     "type": "GENERIC",
@@ -690,13 +689,13 @@
     "type": "GENERIC",
     "id": "nailbat",
     "name": { "str": "nail bat" },
-    "description": "A baseball bat with several nails driven through it.  This might help it open some bleeding wounds, but at some cost to durability.",
+    "description": "A baseball bat with several nails driven through it.  The spikes look dangerous, but they're sure to make it less durable.",
     "color": "brown",
     "symbol": "/",
     "material": [ { "type": "wood", "portion": 9 }, { "type": "steel", "portion": 1 } ],
     "techniques": [ "WBLOCK_1", "BRUTAL" ],
-    "weight": "1150 g",
-    "volume": "1400 ml",
+    "weight": "946 g",
+    "volume": "1350 ml",
     "longest_side": "86 cm",
     "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "neutral" },
     "flags": [ "BELT_CLIP", "NONCONDUCTIVE", "WALKING_AID" ],
@@ -820,10 +819,10 @@
     "weight": "910 g",
     "volume": "1500 ml",
     "longest_side": "90 cm",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "uneven" },
     "price_postapoc": "12 USD 50 cent",
     "category": "weapons",
-    "melee_damage": { "bash": 21 }
+    "melee_damage": { "bash": 23 }
   },
   {
     "id": "shillelagh_weighted",
@@ -841,10 +840,10 @@
     "weight": "1135 g",
     "volume": "1500 ml",
     "longest_side": "90 cm",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "uneven" },
     "price_postapoc": "17 USD 50 cent",
     "category": "weapons",
-    "melee_damage": { "bash": 25 }
+    "melee_damage": { "bash": 27 }
   },
   {
     "id": "club_war",
@@ -865,7 +864,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "uneven" },
     "price_postapoc": "12 USD 50 cent",
     "category": "weapons",
-    "melee_damage": { "bash": 38 }
+    "melee_damage": { "bash": 39 }
   },
   {
     "id": "club_war_stone",
@@ -886,7 +885,7 @@
     "to_hit": { "grip": "weapon", "length": "long", "surface": "line", "balance": "clumsy" },
     "price_postapoc": "12 USD 50 cent",
     "category": "weapons",
-    "melee_damage": { "bash": 44 }
+    "melee_damage": { "bash": 46 }
   },
   {
     "id": "shock_staff",
@@ -981,7 +980,7 @@
     "volume": "2 L",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "price": "195 USD",
-    "melee_damage": { "bash": 14 }
+    "melee_damage": { "bash": 15 }
   },
   {
     "type": "GENERIC",
@@ -995,11 +994,11 @@
     "symbol": "/",
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_2", "RAPID", "PRECISE" ],
-    "flags": [ "BELT_CLIP" ],
+    "flags": [ "BELT_CLIP", "DURABLE_MELEE" ],
     "weapon_category": [ "BATONS", "KARATE_WEAPONS", "KUNG_FU_WEAPONS" ],
     "volume": "2 L",
     "to_hit": { "grip": "weapon", "length": "short", "surface": "any", "balance": "good" },
     "price": "195 USD",
-    "melee_damage": { "bash": 14 }
+    "melee_damage": { "bash": 15 }
   }
 ]
