@@ -17,7 +17,7 @@
       "ter_set": "t_open_air",
       "str_min": 100,
       "str_max": 400,
-      "str_min_supported": 150,
+      "str_min_supported": 150, "bash_below": true,
       "items": [
         { "item": "rock", "count": [ 5, 10 ] },
         { "item": "scrap", "count": [ 5, 8 ] },
@@ -44,6 +44,7 @@
       "ter_set": "t_open_air",
       "str_min": 100,
       "str_max": 400,
+      "bash_below": true,
       "str_min_supported": 150,
       "items": [
         { "item": "rock", "count": [ 5, 10 ] },
@@ -314,6 +315,7 @@
       "str_min": 100,
       "str_max": 400,
       "str_min_supported": 150,
+      "bash_below": true,
       "items": [ { "item": "scrap", "count": [ 5, 8 ] }, { "item": "rebar", "count": [ 0, 2 ] } ]
     }
   },
@@ -336,6 +338,7 @@
       "str_min": 150,
       "str_max": 400,
       "str_min_supported": 200,
+      "bash_below": true,
       "items": [
         { "item": "rock", "count": [ 10, 22 ] },
         { "item": "scrap", "count": [ 10, 12 ] },
@@ -365,6 +368,7 @@
       "str_min": 150,
       "str_max": 400,
       "str_min_supported": 200,
+      "bash_below": true,
       "items": [
         { "item": "rock", "count": [ 10, 22 ] },
         { "item": "scrap", "count": [ 10, 12 ] },
@@ -388,6 +392,7 @@
       "str_min": 100,
       "str_max": 400,
       "str_min_supported": 150,
+      "bash_below": true,
       "items": [ { "item": "scrap", "count": [ 10, 12 ] }, { "item": "rebar", "count": [ 0, 4 ] } ]
     }
   },
@@ -408,6 +413,7 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "rock", "count": [ 5, 11 ] },
         { "item": "scrap", "count": [ 10, 12 ] },
@@ -479,6 +485,7 @@
       "str_min": 200,
       "str_max": 500,
       "str_min_supported": 200,
+      "bash_below": true,
       "items": [
         { "item": "steel_lump", "count": [ 1, 4 ] },
         { "item": "steel_chunk", "count": [ 3, 12 ] },
@@ -504,6 +511,7 @@
       "str_min": 200,
       "str_max": 500,
       "str_min_supported": 200,
+      "bash_below": true,
       "items": [
         { "item": "steel_lump", "count": [ 1, 4 ] },
         { "item": "steel_chunk", "count": [ 3, 12 ] },
@@ -531,6 +539,7 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
     }
   },
@@ -553,6 +562,7 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "log", "count": [ 0, 1 ] },
         { "item": "stick", "count": [ 1, 4 ] },
@@ -578,6 +588,7 @@
       "sound": "SMASH!",
       "ter_set": "t_open_air",
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "steel_chunk", "count": [ 5, 11 ] } ]
     }
   },
@@ -601,6 +612,7 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
     }
   },
@@ -624,6 +636,7 @@
       "str_max": 6,
       "sound_vol": 8,
       "sound_fail_vol": 8,
+      "bash_below": true,
       "items": [ { "item": "material_soil", "count": [ 1, 2 ] } ]
     }
   },
@@ -649,6 +662,7 @@
       "str_max": 15,
       "sound_vol": 8,
       "sound_fail_vol": 8,
+      "bash_below": true,
       "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "straw_pile", "count": [ 5, 10 ] } ]
     }
   },
@@ -719,6 +733,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "sheet_cotton", "count": [ 1, 2 ] },
         { "item": "cotton_patchwork", "count": [ 2, 4 ] },
@@ -800,6 +815,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "sheet_cotton", "count": [ 1, 2 ] },
         { "item": "cotton_patchwork", "count": [ 2, 4 ] },
@@ -887,6 +903,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_thconc_floor" }
@@ -1042,6 +1059,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_strconc_floor" }
@@ -1195,6 +1213,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "sheet_cotton", "count": [ 1, 2 ] },
         { "item": "cotton_patchwork", "count": [ 2, 4 ] },
@@ -1276,6 +1295,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [
         { "item": "sheet_cotton", "count": [ 1, 2 ] },
         { "item": "cotton_patchwork", "count": [ 2, 4 ] },
@@ -1357,6 +1377,7 @@
       "str_min": 5,
       "str_max": 15,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "sheet_cotton", "count": [ 1, 2 ] }, { "item": "cotton_patchwork", "count": [ 2, 4 ] } ]
     },
     "deconstruct": { "items": [ { "item": "r_carpet", "charges": 1 } ], "ter_set": "t_linoleum_white" }
@@ -1457,6 +1478,7 @@
       "str_min": 50,
       "str_max": 400,
       "str_min_supported": 100,
+      "bash_below": true,
       "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
     }
   },
@@ -1478,6 +1500,7 @@
       "str_min_supported": 100,
       "ter_set": "t_open_air",
       "sound": "SMASH!",
+      "bash_below": true,
       "items": [ { "item": "splinter", "count": [ 2, 8 ] }, { "item": "nail", "charges": [ 5, 10 ] } ]
     },
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD" ]
@@ -1535,6 +1558,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_dirt",
+      "bash_below": true,
       "items": [ { "item": "pipe", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 1, 40 ] } ]
     }
   },
