@@ -30,11 +30,8 @@
     "traits": [
       { "trait": "GLASSJAW" },
       { "trait": "ADDICTIVE" },
-      { "trait": "SLOWHEALER" },
-      { "trait": "SLOWRUNNER" },
       { "trait": "CHEMIMBALANCE" },
       { "trait": "HEAVYSLEEPER" },
-      { "trait": "FLIMSY2" },
       { "trait": "SCHIZOPHRENIC" },
       { "trait": "SLOWLEARNER" },
       { "trait": "PACIFIST" },
