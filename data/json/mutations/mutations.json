@@ -667,11 +667,10 @@
     "points": 2,
     "description": "Your metabolism is a little slower, and you require less food than most.",
     "starting_trait": true,
-    "cancels": [ "MET_RAT" ],
+    "cancels": [ "MET_RAT", "GOURMAND" ],
     "types": [ "METABOLISM" ],
-    "changes_to": [ "GIZZARD" ],
-    "category": [ "FISH", "BIRD", "TROGLOBITE", "CHIROPTERAN", "GASTROPOD", "CEPHALOPOD", "RAPTOR" ],
-    "enchantments": [ { "values": [ { "value": "METABOLISM", "multiply": -0.333 } ] } ]
+    "category": [ "FISH", "BIRD", "ELFA", "TROGLOBITE", "CHIROPTERAN", "GASTROPOD", "CEPHALOPOD", "RAPTOR" ],
+    "enchantments": [ { "values": [ { "value": "METABOLISM", "multiply": -0.15 }, { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.1 } ] } ]
   },
   {
     "type": "mutation",
@@ -977,7 +976,7 @@
     "points": 2,
     "description": "You eat faster, and can eat and drink more in a single sitting.  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
     "category": [ "MOUSE", "LUPINE", "RAT" ],
-    "cancels": [ "PICKYEATER" ],
+    "cancels": [ "PICKYEATER", "LIGHTEATER" ],
     "starting_trait": true,
     "active": true,
     "enchantments": [
