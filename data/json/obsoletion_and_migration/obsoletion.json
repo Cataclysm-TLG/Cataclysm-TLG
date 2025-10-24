@@ -326,6 +326,36 @@
     "valid": false
   },
   {
+    "type": "mutation",
+    "id": "DIRTSLEEPER",
+    "name": { "str": "Earth Sleeper" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+    {
+    "type": "mutation",
+    "id": "WATERSLEEPER",
+    "name": { "str": "Aquatic Sleeper" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "GIZZARD",
+    "name": { "str": "Gizzard" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
     "id": "scenario_assassin_convict",
     "type": "effect_on_condition"
   },
