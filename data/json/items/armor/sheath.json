@@ -432,7 +432,7 @@
         "magazine_well": "1750 ml",
         "max_contains_volume": "2400 ml",
         "max_contains_weight": "4 kg",
-        "max_item_length": "100 cm",
+        "max_item_length": "102 cm",
         "holster": true,
         "moves": 120,
         "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
@@ -469,7 +469,7 @@
         "magazine_well": "1750 ml",
         "max_contains_volume": "2400 ml",
         "max_contains_weight": "4 kg",
-        "max_item_length": "100 cm",
+        "max_item_length": "102 cm",
         "holster": true,
         "moves": 120,
         "item_restriction": [ "bokken", "pipe", "cu_pipe", "sword_wood", "pointy_stick", "sharpened_pipe" ]
