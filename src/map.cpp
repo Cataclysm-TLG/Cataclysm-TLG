@@ -1786,10 +1786,13 @@ bool map::furn_set( const tripoint_bub_ms &p, const furn_id &new_furniture, cons
         !new_f.has_flag( ter_furn_flag::TFLAG_ALLOW_ON_OPEN_AIR ) &&
         !new_f.has_flag( ter_furn_flag::TFLAG_FLOATS_IN_AIR ) &&
         new_target_furniture != furn_str_id::NULL_ID() ) {
-        const ter_id &current_ter = current_submap->get_ter( l );
-        debugmsg( "Setting furniture %s at %s where terrain is %s (which is_open_air)\n"
-                  "If this is intentional, set the ALLOW_ON_OPEN_AIR flag on the furniture",
-                  new_target_furniture.id().str(), p.to_string(), current_ter.id().str() );
+    
+        // Silenced these stupid error messages.
+
+        // const ter_id &current_ter = current_submap->get_ter( l );
+        // debugmsg( "Setting furniture %s at %s where terrain is %s (which is_open_air)\n"
+        //           "If this is intentional, set the ALLOW_ON_OPEN_AIR flag on the furniture",
+        //           new_target_furniture.id().str(), p.to_string(), current_ter.id().str() );
         result = false;
     }
 
@@ -2247,15 +2250,17 @@ bool map::ter_set( const tripoint_bub_ms &p, const ter_id &new_terrain, bool avo
     const ter_t &old_t = old_id.obj();
     const ter_t &new_t = new_terrain.obj();
 
-    if( current_submap->is_open_air( l ) ) {
-        const furn_id &current_furn = current_submap->get_furn( l );
-        if( current_furn != furn_str_id::NULL_ID() &&
-            !current_furn->has_flag( ter_furn_flag::TFLAG_ALLOW_ON_OPEN_AIR ) ) {
-            debugmsg( "Setting terrain %s at %s where furniture is %s.  Terrain is_open_air\n"
-                      "If this is intentional, set the ALLOW_ON_OPEN_AIR flag on the furniture",
-                      new_terrain.id().str(), p.to_string(), current_furn.id().str() );
-        }
-    }
+    // Silenced these stupid error messages.
+
+    // if( current_submap->is_open_air( l ) ) {
+    //     const furn_id &current_furn = current_submap->get_furn( l );
+    //     if( current_furn != furn_str_id::NULL_ID() &&
+    //         !current_furn->has_flag( ter_furn_flag::TFLAG_ALLOW_ON_OPEN_AIR ) ) {
+    //         debugmsg( "Setting terrain %s at %s where furniture is %s.  Terrain is_open_air\n"
+    //                   "If this is intentional, set the ALLOW_ON_OPEN_AIR flag on the furniture",
+    //                   new_terrain.id().str(), p.to_string(), current_furn.id().str() );
+    //     }
+    // }
 
     if( new_t.trap != tr_null ) {
         traplocs[new_t.trap.to_i()].push_back( p );
