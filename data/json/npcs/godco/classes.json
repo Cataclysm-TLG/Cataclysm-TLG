@@ -295,7 +295,7 @@
     "weapon_override": "GODCO_tom_wield",
     "traits": [
       { "trait": "FASTREADER" },
-      { "trait": "SLOWRUNNER" },
+      { "trait": "PONDEROUS" },
       { "group": "NPC_starting_traits" },
       { "group": "Appearance_demographics" },
       { "trait": "NO_BASH" },
@@ -433,7 +433,7 @@
     "weapon_override": "GODCO_theresa_wield",
     "proficiencies": [ "prof_knitting", "prof_knitting_speed" ],
     "traits": [
-      { "trait": "SLOWRUNNER" },
+      { "trait": "PONDEROUS" },
       { "trait": "BADHEARING" },
       { "trait": "BADKNEES" },
       { "trait": "FLIMSY" },
