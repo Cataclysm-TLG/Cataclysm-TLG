@@ -63,7 +63,7 @@
     "weapon_override": "EMPTY_GROUP",
     "traits": [
       { "trait": "SLOWHEALER2" },
-      { "trait": "PONDEROUS" },
+      { "trait": "PONDEROUS1" },
       { "trait": "HEAVYSLEEPER" },
       { "trait": "FLIMSY2" },
       { "trait": "PACIFIST" },

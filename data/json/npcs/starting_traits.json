@@ -48,7 +48,7 @@
       { "trait": "ASTHMA", "prob": 10 },
       { "trait": "CHEMIMBALANCE", "prob": 10 },
       { "trait": "HEAVYSLEEPER", "prob": 10 },
-      { "trait": "PONDEROUS", "prob": 10 },
+      { "trait": "PONDEROUS1", "prob": 10 },
       { "trait": "HYPEROPIC", "prob": 10 },
       { "trait": "GLASSJAW", "prob": 10 },
       { "trait": "ANTIFRUIT", "prob": 10 },
