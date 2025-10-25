@@ -56,6 +56,7 @@ namespace io
     {
         switch ( data ) {
             case enchant_vals::mod::ARTIFACT_RESONANCE: return "ARTIFACT_RESONANCE";
+            case enchant_vals::mod::BASE_STRENGTH: return "BASE_STRENGTH";
             case enchant_vals::mod::STRENGTH: return "STRENGTH";
             case enchant_vals::mod::DEXTERITY: return "DEXTERITY";
             case enchant_vals::mod::PERCEPTION: return "PERCEPTION";
@@ -1363,6 +1364,9 @@ body_part_set enchantment::modify_bodyparts( const body_part_set &unmodified ) c
 void enchant_cache::activate_passive( Character &guy ) const
 {
     // since it's a modifier, need to remove original value from the math
+    guy.mod_str_bonus( modify_value( enchant_vals::mod::BASE_STRENGTH,
+                                     guy.get_str_base() ) - guy.get_str_base() );
+
     guy.mod_str_bonus( modify_value( enchant_vals::mod::STRENGTH,
                                      guy.get_str_base() ) - guy.get_str_base() );
 

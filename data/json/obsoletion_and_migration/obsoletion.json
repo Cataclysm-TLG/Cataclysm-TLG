@@ -356,6 +356,26 @@
     "valid": false
   },
   {
+    "type": "mutation",
+    "id": "TOUGH2",
+    "name": { "str": "Durable" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "TOUGH3",
+    "name": { "str": "Unbreakable" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
     "id": "scenario_assassin_convict",
     "type": "effect_on_condition"
   },

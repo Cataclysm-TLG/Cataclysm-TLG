@@ -32,6 +32,7 @@ enum class mod : int {
     //tracker for artifact carrying penalties
     ARTIFACT_RESONANCE,
     // effects for the Character
+    BASE_STRENGTH,
     STRENGTH,
     DEXTERITY,
     PERCEPTION,

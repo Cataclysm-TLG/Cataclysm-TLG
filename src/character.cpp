@@ -4303,12 +4303,11 @@ void Character::reset_stats()
         update_mental_focus();
     }
 
-    /** @EFFECT_STR_MAX above 15 decreases Dodge bonus by 1 (NEGATIVE) */
-    if( str_max >= 16 ) {
+    if( get_str_base() >= 16 ) {
         mod_dodge_bonus( -1 );   // Penalty if we're buff
     }
-    /** @EFFECT_STR_MAX below 6 increases Dodge bonus by 1 */
-    else if( str_max <= 5 ) {
+
+    else if( get_str_base() <= 5 ) {
         mod_dodge_bonus( 1 );   // Bonus if we're scrawny
     }
 
@@ -4321,7 +4320,7 @@ void Character::reset_stats()
     // player::suffer(), etc.
 
     // repopulate the stat fields
-    str_cur = str_max + get_str_bonus();
+    str_cur = get_str_base() + get_str_bonus();
     dex_cur = dex_max + get_dex_bonus();
     per_cur = per_max + get_per_bonus();
     int_cur = int_max + get_int_bonus();
@@ -4676,7 +4675,7 @@ int Character::get_int() const
 
 int Character::get_str_base() const
 {
-    return str_max;
+    return str_max + enchantment_cache->get_value_add( enchant_vals::mod::BASE_STRENGTH );
 }
 int Character::get_dex_base() const
 {
@@ -4782,7 +4781,7 @@ int Character::get_health_tally() const
 void Character::set_str_bonus( int nstr )
 {
     str_bonus = nstr;
-    str_cur = std::max( 0, str_max + str_bonus );
+    str_cur = std::max( 0, get_str_base() + str_bonus );
 }
 void Character::set_dex_bonus( int ndex )
 {
@@ -4802,7 +4801,7 @@ void Character::set_int_bonus( int nint )
 void Character::mod_str_bonus( int nstr )
 {
     str_bonus += nstr;
-    str_cur = std::max( 0, str_max + str_bonus );
+    str_cur = std::max( 0, get_str_base() + str_bonus );
 }
 void Character::mod_dex_bonus( int ndex )
 {
@@ -6748,7 +6747,7 @@ float Character::get_bmi_lean() const
     //strength BMIs decrease to zero as you starve (muscle atrophy)
     if( get_bmi_fat() < character_weight_category::normal ) {
         const int str_penalty = std::floor( ( 1.0f - ( get_bmi_fat() /
-                                              character_weight_category::normal ) ) * str_max );
+                                              character_weight_category::normal ) ) * get_str_base() );
         return 12.0f + get_str_base() - str_penalty;
     }
     return 12.0f + get_str_base();
@@ -13433,13 +13432,14 @@ void Character::knock_back_to( const tripoint_bub_ms &to )
         deal_damage( critter, bodypart_id( "torso" ), damage_instance( damage_bash,
                      static_cast<float>( critter->type->size ) ) );
         add_effect( effect_stunned, 1_turns );
-        /** @EFFECT_STR_MAX allows knocked back player to knock back, damage, stun some monsters */
-        if( ( str_max - 6 ) / 4 > critter->type->size ) {
+        /** @EFFECT_STR allows knocked back player to knock back, damage, stun some monsters */
+        int bulk = get_str() + enum_size();
+        if( ( bulk - 10 ) / 4 > critter->type->size ) {
             critter->knock_back_from( pos_bub() ); // Chain reaction!
-            critter->apply_damage( this, bodypart_id( "torso" ), ( str_max - 6 ) / 4 );
+            critter->apply_damage( this, bodypart_id( "torso" ), ( bulk - 10 ) / 4 );
             critter->add_effect( effect_stunned, 1_turns );
-        } else if( ( str_max - 6 ) / 4 == critter->type->size ) {
-            critter->apply_damage( this, bodypart_id( "torso" ), ( str_max - 6 ) / 4 );
+        } else if( ( bulk - 10 ) / 4 == critter->type->size ) {
+            critter->apply_damage( this, bodypart_id( "torso" ), ( bulk - 10 ) / 4 );
             critter->add_effect( effect_stunned, 1_turns );
         }
         critter->check_dead_state( &here );

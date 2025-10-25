@@ -22,7 +22,7 @@
     "//": "Needs his own unique background.",
     "traits": [
       { "group": "BG_survival_story_POLICE" },
-      [ "TOUGH2", 100 ],
+      [ "TOUGH", 100 ],
       [ "PAINRESIST", 100 ],
       [ "GOODCARDIO", 100 ],
       { "group": "Appearance_demographics" }

@@ -460,7 +460,7 @@
       ]
     ],
     "transform": { "target": "JEKYLL", "msg_transform": "The anger subsides.", "active": false, "moves": 10 },
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 3 }, { "value": "INTELLIGENCE", "add": -8 } ] } ],
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 3 }, { "value": "INTELLIGENCE", "add": -8 } ] } ],
     "ugliness": 8,
     "visibility": 8,
     "social_modifiers": { "intimidate": 4 }
@@ -804,7 +804,7 @@
         "values": [
           { "value": "MOVE_COST", "multiply": 0.02 },
           { "value": "MOVECOST_SWIM_MOD", "multiply": 0.3 },
-          { "value": "MAX_HP", "add": 14 }
+          { "value": "MAX_HP", "add": 12 }
         ]
       }
     ]
@@ -823,7 +823,7 @@
         "values": [
           { "value": "MOVE_COST", "multiply": 0.04 },
           { "value": "MOVECOST_SWIM_MOD", "multiply": 0.7 },
-          { "value": "MAX_HP", "add": 21 }
+          { "value": "MAX_HP", "add": 18 }
         ]
       }
     ]
@@ -836,33 +836,9 @@
     "description": "It takes a lot to bring you down!  You get a 20% bonus to all hit points.",
     "starting_trait": true,
     "valid": false,
-    "changes_to": [ "TOUGH2" ],
     "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3" ],
     "social_modifiers": { "intimidate": 2 },
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.2 } ] } ]
-  },
-  {
-    "type": "mutation",
-    "id": "TOUGH2",
-    "name": { "str": "Durable" },
-    "points": 3,
-    "description": "You can shrug off almost anything!  You get a 30% bonus to all hit points.",
-    "valid": false,
-    "prereqs": [ "TOUGH" ],
-    "changes_to": [ "TOUGH3" ],
-    "social_modifiers": { "intimidate": 3 },
-    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.3 } ] } ]
-  },
-  {
-    "type": "mutation",
-    "id": "TOUGH3",
-    "name": { "str": "Unbreakable" },
-    "points": 4,
-    "description": "Nothing can break you!  You get a 40% bonus to all hit points.",
-    "valid": false,
-    "prereqs": [ "TOUGH2" ],
-    "social_modifiers": { "intimidate": 4 },
-    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.4 } ] } ]
   },
   {
     "type": "mutation",
@@ -1110,9 +1086,9 @@
   {
     "type": "mutation",
     "id": "ROBUST",
-    "name": { "str": "Robust Genetics" },
+    "name": { "str": "Highly Mutable" },
     "points": 3,
-    "description": "Your genome has rapidly adapted to the Cataclysm and can handle the strain of mutation better.  Taking different kinds of mutagen won't result in more defective mutations than normal.",
+    "description": "Your biology is a little more permissive about how it's put together.  Taking different kinds of mutagen won't result in more defective mutations than normal.",
     "starting_trait": true,
     "flags": [ "ROBUST_GENETIC" ],
     "cancels": [ "CHAOTIC_BAD", "RESTRICTED" ],
@@ -1121,9 +1097,9 @@
   {
     "type": "mutation",
     "id": "RESTRICTED",
-    "name": { "str": "Restricted Genetics" },
+    "name": { "str": "Purity of Form" },
     "points": 3,
-    "description": "Your genome has become an impregnable fortress to lesser genetic deviations.  You are no longer able to mutate traits that are outside of the Alpha category.  Any that you previously developed are safe, for now.",
+    "description": "You are no longer able to mutate traits that are outside of the Alpha category.  Any that you previously developed are safe, for now.",
     "allowed_category": [ "ALPHA", "HUMAN" ],
     "cancels": [ "CHAOTIC_BAD", "ROBUST" ],
     "category": [ "ALPHA" ]
@@ -1836,7 +1812,7 @@
     "id": "ALBINO",
     "name": { "str": "Albino" },
     "points": -1,
-    "description": "You lack skin pigmentation due to a genetic problem.  You sunburn extremely easily, and typically use an umbrella and sunglasses when going out in the sun.",
+    "description": "Your body lacks the ability to produce melanin.  You sunburn extremely easily, and typically use an umbrella and sunglasses when going out in the sun.",
     "starting_trait": true,
     "changes_to": [ "SUNBURN" ],
     "category": [ "TROGLOBITE", "MOUSE", "RABBIT" ],
@@ -1854,7 +1830,7 @@
     "types": [ "DURABILITY" ],
     "category": [ "MOUSE", "ELFA", "RABBIT", "CHIROPTERAN" ],
     "changes_to": [ "FLIMSY2" ],
-    "cancels": [ "TOUGH", "TOUGH2", "TOUGH3" ],
+    "cancels": [ "TOUGH" ],
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": -0.25 } ] } ]
   },
   {
@@ -1869,7 +1845,7 @@
     "types": [ "DURABILITY" ],
     "prereqs": [ "FLIMSY" ],
     "changes_to": [ "FLIMSY3" ],
-    "cancels": [ "TOUGH", "TOUGH2", "TOUGH3" ],
+    "cancels": [ "TOUGH" ],
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": -0.5 } ] } ]
   },
   {
@@ -1883,16 +1859,16 @@
     "social_modifiers": { "intimidate": -4 },
     "types": [ "DURABILITY" ],
     "prereqs": [ "FLIMSY2" ],
-    "cancels": [ "TOUGH", "TOUGH2", "TOUGH3" ],
+    "cancels": [ "TOUGH" ],
     "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": -0.75 } ] } ]
   },
   {
     "type": "mutation",
     "id": "CHAOTIC_BAD",
-    "name": { "str": "Genetic Downward Spiral" },
+    "name": { "str": "Mutagenic Downward Spiral" },
     "points": -8,
     "purifiable": false,
-    "description": "The events of the Cataclysm have damaged your DNA beyond repair.  You mutate frequently, all mutations you receive (from any source) are negative.",
+    "description": "A chain reaction in your system has run catastrophically out of control.  You mutate frequently, all mutations you receive (from any source) are negative.",
     "starting_trait": true,
     "cancels": [ "ROBUST", "RESTRICTED" ],
     "valid": false
@@ -3941,7 +3917,7 @@
     "category": [ "SLIME" ],
     "enchantments": [
       {
-        "values": [ { "value": "MAX_HP", "add": 3 }, { "value": "STRENGTH", "add": -2 }, { "value": "DEXTERITY", "add": 3 } ]
+        "values": [ { "value": "BASE_STRENGTH", "add": -2 }, { "value": "DEXTERITY", "add": 3 } ]
       }
     ]
   },
@@ -3963,7 +3939,7 @@
     "flags": [ "PSEUDOPOD_GRASP" ],
     "enchantments": [
       {
-        "values": [ { "value": "MAX_HP", "add": 6 }, { "value": "STRENGTH", "add": -4 }, { "value": "DEXTERITY", "add": 4 } ]
+        "values": [ { "value": "BASE_STRENGTH", "add": -4 }, { "value": "DEXTERITY", "add": 4 } ]
       }
     ]
   },
@@ -3975,7 +3951,7 @@
     "visibility": 1,
     "description": "Your extremities have gained strength but lost fine motor skills.  -1 Dexterity +2 Strength.",
     "category": [ "GASTROPOD" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -1 } ] } ]
   },
   {
     "type": "mutation",
@@ -4309,7 +4285,7 @@
     "//": "Trading X for Y usually means reducing X to gain Y, so I switched the order.",
     "threshreq": [ "THRESH_TROGLOBITE" ],
     "category": [ "TROGLOBITE" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 2 }, { "value": "DEXTERITY", "add": -2 } ] } ]
   },
   {
     "type": "mutation",
@@ -4828,7 +4804,7 @@
     "id": "MUT_TOUGH",
     "name": { "str": "Resilient" },
     "points": 2,
-    "description": "You can survive injuries that would incapacitate humans: you get a 20% bonus to all hit points.  Stacks with Tough, etc.",
+    "description": "You can survive injuries that would incapacitate humans.  You get a 20% bonus to all hit points.",
     "social_modifiers": { "intimidate": 2 },
     "types": [ "DURABILITY" ],
     "prereqs": [ "LARGE_OK", "HUGE_OK", "STR_UP_3", "STR_UP_4" ],
@@ -4842,28 +4818,28 @@
     "id": "MUT_TOUGH2",
     "name": { "str": "Solidly Built" },
     "points": 3,
-    "description": "Not much scares you.  You get a 30% bonus to all hit points.  Stacks with Tough, etc.",
+    "description": "Your body is incredibly durable.  You get a 25% bonus to all hit points.",
     "social_modifiers": { "intimidate": 3 },
     "types": [ "DURABILITY" ],
     "prereqs": [ "MUT_TOUGH" ],
     "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_CRUSTACEAN" ],
     "changes_to": [ "MUT_TOUGH3" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "CRUSTACEAN" ],
-    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.3 } ] } ]
+    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.25 } ] } ]
   },
   {
     "type": "mutation",
     "id": "MUT_TOUGH3",
     "name": { "str": "TAAANK" },
     "points": 4,
-    "description": "You can simply take the punishment from lesser beings and keep going.  You get a 40% bonus to all hit points.  Stacks with Tough, etc.",
+    "description": "You can simply take the punishment from lesser beings and keep going.  You get a 35% bonus to all hit points.",
     "social_modifiers": { "intimidate": 4 },
     "types": [ "DURABILITY" ],
     "prereqs": [ "MUT_TOUGH2" ],
     "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE" ],
     "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "category": [ "URSINE", "CATTLE" ],
-    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.4 } ] } ]
+    "enchantments": [ { "values": [ { "value": "MAX_HP", "multiply": 0.35 } ] } ]
   },
   {
     "type": "mutation",
@@ -5624,9 +5600,8 @@
     "enchantments": [
       {
         "values": [
-          { "value": "STRENGTH", "add": 2 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.5 },
-          { "value": "CARRY_WEIGHT", "multiply": 0.05 }
+          { "value": "BASE_STRENGTH", "add": 2 },
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.2 }
         ]
       }
     ]
@@ -5648,9 +5623,8 @@
     "enchantments": [
       {
         "values": [
-          { "value": "STRENGTH", "add": 2 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.5 },
-          { "value": "CARRY_WEIGHT", "multiply": 0.05 }
+          { "value": "BASE_STRENGTH", "add": 2 },
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.5 }
         ]
       }
     ]
@@ -5675,11 +5649,10 @@
       {
         "values": [
           { "value": "MAX_HP", "add": -6 },
-          { "value": "STRENGTH", "add": 4 },
+          { "value": "BASE_STRENGTH", "add": 4 },
           { "value": "FATIGUE_REGEN", "multiply": -0.15 },
           { "value": "FATIGUE", "multiply": 0.15 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
-          { "value": "CARRY_WEIGHT", "multiply": 0.1 }
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 0.75 }
         ]
       }
     ],
@@ -5704,9 +5677,8 @@
     "enchantments": [
       {
         "values": [
-          { "value": "STRENGTH", "add": 4 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 },
-          { "value": "CARRY_WEIGHT", "multiply": 0.1 }
+          { "value": "BASE_STRENGTH", "add": 4 },
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": 1 }
         ]
       }
     ],
@@ -5735,7 +5707,7 @@
       "URSINE",
       "CRUSTACEAN"
     ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 1 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 1 } ] } ]
   },
   {
     "type": "mutation",
@@ -5747,7 +5719,7 @@
     "prereqs": [ "STR_UP" ],
     "changes_to": [ "STR_UP_3", "STR_ALPHA" ],
     "category": [ "LIZARD", "CATTLE", "PLANT", "ALPHA", "CHIMERA", "LUPINE", "TROGLOBITE", "BEAST", "URSINE", "CRUSTACEAN" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 2 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 2 } ] } ]
   },
   {
     "type": "mutation",
@@ -5769,7 +5741,7 @@
       "THRESH_CATTLE",
       "THRESH_CRUSTACEAN"
     ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 4 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 4 } ] } ]
   },
   {
     "type": "mutation",
@@ -5783,7 +5755,7 @@
     "prereqs": [ "STR_UP_3" ],
     "threshreq": [ "THRESH_BEAST", "THRESH_URSINE", "THRESH_CRUSTACEAN" ],
     "category": [ "BEAST", "URSINE", "CRUSTACEAN" ],
-    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 7 } ] } ]
+    "enchantments": [ { "values": [ { "value": "BASE_STRENGTH", "add": 7 } ] } ]
   },
   {
     "type": "mutation",
@@ -6110,6 +6082,7 @@
       {
         "values": [
           { "value": "MAX_HP", "multiply": -0.15 },
+          { "value": "BASE_STRENGTH", "add": -1 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.5 },
           { "value": "CARRY_WEIGHT", "multiply": -0.25 }
         ]
@@ -6134,9 +6107,10 @@
       {
         "values": [
           { "value": "DODGE_CHANCE", "add": 1 },
-          { "value": "MAX_HP", "multiply": -0.15 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.5 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.25 }
+          { "value": "MAX_HP", "multiply": -0.12 },
+          { "value": "BASE_STRENGTH", "add": -1 },
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.45 },
+          { "value": "CARRY_WEIGHT", "multiply": -0.2 }
         ]
       }
     ]
@@ -6159,10 +6133,11 @@
       {
         "values": [
           { "value": "DODGE_CHANCE", "add": 1 },
+          { "value": "BASE_STRENGTH", "add": -2 },
           { "value": "MAX_HP", "multiply": -0.3 },
-          { "value": "FOOTSTEP_NOISE", "multiply": -1 },
-          { "value": "CARRY_WEIGHT", "multiply": -0.5 },
-          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.75 }
+          { "value": "FOOTSTEP_NOISE", "multiply": -0.8 },
+          { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.75 },
+          { "value": "CARRY_WEIGHT", "multiply": -0.5 }
         ]
       }
     ]
@@ -6185,6 +6160,7 @@
       {
         "values": [
           { "value": "DODGE_CHANCE", "add": 2 },
+          { "value": "BASE_STRENGTH", "add": -2 },
           { "value": "MAX_HP", "multiply": -0.25 },
           { "value": "FOOTSTEP_NOISE", "multiply": -1 },
           { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.7 },
@@ -6209,7 +6185,8 @@
         "values": [
           { "value": "SPEED", "multiply": 0.15 },
           { "value": "MOVE_COST", "multiply": -0.25 },
-          { "value": "STEALTH_MODIFIER", "add": 40 }
+          { "value": "STEALTH_MODIFIER", "add": 40 },
+          { "value": "CARRY_WEIGHT", "multiply": 0.1 }
         ]
       }
     ]
@@ -7137,7 +7114,7 @@
     "type": "mutation",
     "id": "DRILL_BEAK",
     "name": { "str": "Drill Beak" },
-    "points": 0,
+    "points": 3,
     "visibility": 10,
     "ugliness": 5,
     "description": "Your sharp, pointed beak can peck holes in solid wood.  You'll sometimes use this against your enemies, especially while grappling.",
@@ -7154,17 +7131,17 @@
   {
     "type": "mutation",
     "id": "UNSTABLE",
-    "name": { "str": "Genetically Unstable" },
+    "name": { "str": "Spontaneous Mutation" },
     "points": -2,
     "mixed_effect": true,
-    "description": "Your DNA has been damaged in a way that causes you to continually develop more mutations.",
+    "description": "Something is running wild in your system, triggering spontaneous mutations at random.",
     "changes_to": [ "CHAOTIC" ],
     "category": [ "SLIME", "MEDICAL", "CHIMERA" ]
   },
   {
     "type": "mutation",
     "id": "CHAOTIC",
-    "name": { "str": "Genetic Chaos" },
+    "name": { "str": "Mutagenic Chaos" },
     "points": -4,
     "purifiable": false,
     "description": "Your body alters itself rapidly, and without your intervention or conscious control.",
@@ -9352,7 +9329,7 @@
     "id": "TOUGH_MEDICAL",
     "name": { "str": "Resilient Physiology" },
     "points": 2,
-    "description": "Your body is well-adapted to resist trauma.  20% bonus to all hit points.  Stacks with Tough, etc.",
+    "description": "Your body is well-adapted to resist trauma.  20% bonus to all hit points.",
     "types": [ "DURABILITY" ],
     "changes_to": [ "TOUGH2_MEDICAL" ],
     "category": [ "MEDICAL" ],
@@ -9365,7 +9342,7 @@
     "id": "TOUGH2_MEDICAL",
     "name": { "str": "Solid Physiology" },
     "points": 3,
-    "description": "Your body is extremely well-adapted to resist trauma.  30% bonus to all hit points.  Stacks with Tough, etc.",
+    "description": "Your body is extremely well-adapted to resist trauma.  30% bonus to all hit points.",
     "types": [ "DURABILITY" ],
     "prereqs": [ "TOUGH_MEDICAL" ],
     "category": [ "MEDICAL" ],
