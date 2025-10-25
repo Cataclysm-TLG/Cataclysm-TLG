@@ -7372,7 +7372,7 @@
   {
     "type": "mutation",
     "id": "PONDEROUS3",
-    "name": { "str": "PONDEROUS1" },
+    "name": { "str": "Ponderous" },
     "points": -4,
     "description": "You have a hard time getting anywhere in a hurry.  This affects only your movement, not your actions.",
     "types": [ "RUNNING" ],
