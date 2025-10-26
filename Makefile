@@ -171,11 +171,6 @@ SRC_DIR = src
 LOCALIZE = 1
 ASTYLE_BINARY = astyle
 
-# Disable stale game data warning by default
-ifndef WARN_STALE_DATA
-    WARN_STALE_DATA = 0
-endif
-
 # Enable debug by default
 ifndef RELEASE
   RELEASE = 0
@@ -339,10 +334,6 @@ endif
 
 ifeq ($(STRING_ID_DEBUG), 1)
 	DEFINES += -DCATA_STRING_ID_DEBUGGING
-endif
-
-ifeq ($(WARN_STALE_DATA), 0)
-    DEFINES += -DNO_STALE_DATA_WARN
 endif
 
 # This sets CXX and so must be up here
