@@ -549,7 +549,7 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return false;
     }
 
-    const int target_range = rl_dist( pos_abs( ), critter.pos_abs( ) );
+    const int target_range = rl_dist( pos_abs(), critter.pos_abs() );
     if( target_range > MAX_VIEW_DISTANCE ) {
         return false;
     }
@@ -582,11 +582,13 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         return ch == nullptr || !ch->is_invisible();
     };
 
-    // Can always see adjacent monsters on the same level.
-    // We also bypass lighting for vertically adjacent monsters, but still check for floors.
-    if( target_range <= 1 ) {
-        return ( posz() == critter.posz() || here.sees( pos, critter_pos, 1 ) ) &&
-               visible( ch );
+    // Can always see adjacent monsters on the same level, or vertically adjacent if there's LoS.
+    if( target_range < 2 && posz() == critter.posz() ) {
+        return true;
+    }
+    if( target_range == 2 && pos_bub().xy() == critter.pos_bub().xy() &&
+        here.sees( pos, critter_pos, 2 ) ) {
+        return true;
     }
 
     // If we cannot see without any of the penalties below, bail now.
@@ -669,9 +671,8 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     if( different_levels ) {
         ledge_concealment = ( here.ledge_concealment( pos_bub( here ), critter.pos_bub( here ) ) );
     }
-    const int concealment = std::max( here.obstacle_concealment( pos_bub( here ),
-                                      critter.pos_bub( here ) ),
-                                      ledge_concealment );
+    visibility_result vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range );
+    const int concealment = std::max( vis.concealment, ledge_concealment );
     if( ch != nullptr ) {
         if( concealment > critter.eye_level() ) {
             return false;
