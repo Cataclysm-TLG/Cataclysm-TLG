@@ -4033,8 +4033,8 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             w_addictions = catacurses::newwin( 1, ncol3, point( beginx3, 8 ) );
             w_stats = catacurses::newwin( 6, 20, point( 2, 10 ) );
             w_traits = catacurses::newwin( TERMY - 11, ncol2, point( beginx2, 10 ) );
-            w_calendar = catacurses::newwin( 4, ncol3, point( beginx3, 10 ) );
-            w_bionics = catacurses::newwin( TERMY - 16, ncol3, point( beginx3, 15 ) );
+            w_calendar = catacurses::newwin( 6, ncol3, point( beginx3, 10 ) );
+            w_bionics = catacurses::newwin( TERMY - 16, ncol3, point( beginx3, 17 ) );
             w_proficiencies = catacurses::newwin( TERMY - 21, 19, point( 2, 16 ) );
             // Extra - 11 to avoid overlap with long text in w_guide.
             w_hobbies = catacurses::newwin( TERMY - 11 - 11, ncol4, point( beginx4, 10 ) );
@@ -4057,7 +4057,7 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             w_stats = catacurses::newwin( 6, ncol_small, point( 2, 10 ) );
             w_scenario = catacurses::newwin( 1, ncol_small, point( begin_sncol, 10 ) );
             w_profession = catacurses::newwin( 1, ncol_small, point( begin_sncol, 11 ) );
-            w_calendar = catacurses::newwin( 4, ncol_small, point( begin_sncol, 13 ) );
+            w_calendar = catacurses::newwin( 6, ncol_small, point( begin_sncol, 13 ) );
             w_vehicle = catacurses::newwin( 2, ncol_small, point( begin_sncol, 18 ) );
             w_addictions = catacurses::newwin( 2, ncol_small, point( begin_sncol, 20 ) );
             w_traits = catacurses::window();
@@ -4403,9 +4403,11 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
         wprintz( w_calendar, COL_HEADER, _( "Fall of civilization:" ) );
         wprintz( w_calendar, c_light_gray, "\n" );
         wprintz( w_calendar, c_light_gray, to_string( get_scenario()->fall_of_civilization() ) );
+        wprintz( w_calendar, c_light_gray, "\n" );
         wprintz( w_calendar, COL_HEADER, _( "Start of game:" ) );
         wprintz( w_calendar, c_light_gray, "\n" );
         wprintz( w_calendar, c_light_gray, to_string( get_scenario()->start_of_game() ) );
+        wprintz( w_calendar, c_light_gray, "\n" );
         wnoutrefresh( w_calendar );
 
         if( isWide ) {
