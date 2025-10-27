@@ -395,7 +395,7 @@
     "techniques": [ "WBLOCK_1" ],
     "weapon_category": [ "HAMMERS" ],
     "weight": "300 g",
-    "volume": "350 L",
+    "volume": "500 ml",
     "longest_side": "110 cm",
     "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "neutral" },
     "flags": [ "SHEATH_GOLF", "FRAGILE_MELEE" ],
