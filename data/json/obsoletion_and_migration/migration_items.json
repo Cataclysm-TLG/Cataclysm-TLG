@@ -3752,5 +3752,10 @@
     "type": "MIGRATION",
     "id": "ammo_box_army_10_50bmg",
     "replace": "ammo_box_big"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sewage",
+    "replace": "water_sewage"
   }
 ]
