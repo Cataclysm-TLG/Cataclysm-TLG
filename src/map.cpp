@@ -7555,17 +7555,17 @@ void map::draw_from_above( const catacurses::window &w, const tripoint_bub_ms &p
 
 // Wrapper for sees_full. Helps prevent redundant calls.
 bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int range,
-                bool with_fields ) const
+                bool with_fields, bool allow_cached ) const
 {
-    return sees_full( F, T, range, with_fields ).visible;
+    return sees_full( F, T, range, with_fields, allow_cached ).visible;
 }
 
 visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T,
                                   const int range,
-                                  bool with_fields ) const
+                                  bool with_fields, bool allow_cached ) const
 {
     int dummy = 0;
-    return sees_full( F, T, range, dummy, with_fields );
+    return sees_full( F, T, range, dummy, with_fields, allow_cached );
 }
 
 // TODO: Change this to a hash function on the map implementation. This will also allow us to
@@ -7598,7 +7598,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                                   int &bresenham_slope, bool with_fields, bool allow_cached ) const
 {
     visibility_result result;
-    bool ( map::*f_transparent )( const tripoint_bub_ms & p ) const =
+    bool ( map:: * f_transparent )( const tripoint_bub_ms & p ) const =
         with_fields ? &map::is_transparent : &map::is_transparent_wo_fields;
     lru_cache_t &skew_cache = with_fields ? skew_vision_cache : skew_vision_wo_fields_cache;
 
@@ -7607,9 +7607,8 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
         ( range >= 0 && range < rl_dist( F, T ) ) ||
         !inbounds( T ) ) {
         bresenham_slope = 0;
-        return result;
+        return result; // Out of range. Visible is already false, no further checks needed.
     }
-
     const point key = sees_cache_key( F, T );
     if( allow_cached ) {
         char cached = skew_cache.get( key, -1 );
@@ -7618,43 +7617,44 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             return result;
         }
     }
-
     bool visible = true;
     int found_concealment = 0;
 
     const point a( std::abs( F.x() - T.x() ) * 2, std::abs( F.y() - T.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
 
-    // 2D Bresenham.
-    if( F.z() == T.z() ) {
-        bresenham( F.xy(), T.xy(), offset,
-        [this, f_transparent, &visible, &T, &F, &found_concealment]( const point_bub_ms & new_point ) {
-            // Skip starting position, stop before checking target tile.
-            if( new_point.x() == F.x() && new_point.y() == F.y() ) {
-                return true;
-            }
-            if( new_point.x() == T.x() && new_point.y() == T.y() ) {
-                return false;
-            }
-
-            tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
-            // Concealment check only for tiles adjacent to target.
-            if( square_dist( tp, T ) == 1 && square_dist( tp, F ) > 0 ) {
-                found_concealment = concealment( tp );
-                if( found_concealment > 0 ) {
-                    return false;
-                }
-            }
-
-            // Transparency check.
-            if( !( this->*f_transparent )( tp ) ) {
-                visible = false;
-                return false;
-            }
-
+// 2D Bresenham
+if( F.z() == T.z() ) {
+    bresenham( F.xy(), T.xy(), offset,
+    [this, f_transparent, &visible, &T, &F, &found_concealment]( const point_bub_ms & new_point ) {
+        // Skip starting position, stop before checking target tile.
+        if( new_point.x() == F.x() && new_point.y() == F.y() ) {
             return true;
-        } );
-    // 3D Bresenham.
+        }
+        if( new_point.x() == T.x() && new_point.y() == T.y() ) {
+            return false;
+        }
+        tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
+        // Concealment check only for tiles adjacent to target.
+        if( square_dist( tp, T ) == 1 && square_dist( tp, F ) > 0 ) {
+            int current_concealment = concealment( tp );
+            // Initialize found_concealment to a high value on first encounter
+            if( found_concealment == 0 ) {
+                found_concealment = current_concealment;
+            } else {
+                found_concealment = std::min( found_concealment, current_concealment );
+            }
+            add_msg( _( "concealment set to %s"), found_concealment );
+        }
+        // Transparency check - but DON'T stop early for concealment calculation
+        if( !( this->*f_transparent )( tp ) ) {
+            visible = false;
+            // Continue anyway to find the lowest concealment
+            return true;  // Changed from false to true
+        }
+        return true;
+    } );
+        // 3D Bresenham
     } else {
         tripoint_bub_ms last_point = F;
         bresenham( F, T, offset, 0,
@@ -7664,17 +7664,18 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             if( new_point == F ) {
                 return true;
             }
-            if( new_point == T ) {
+            // Exit before checking the last square only if it's not a vertical transition.
+            if( new_point == T && last_point.z() == T.z() ) {
                 return false;
             }
             // Concealment check only for tiles adjacent to target.
-            if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 0 ) {
+            if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 0 && ( F.z() <= T.z() &&
+                    F.xy() != T.xy() ) ) {
                 found_concealment = concealment( new_point );
                 if( found_concealment > 0 ) {
                     return false;
                 }
             }
-
             if( new_point.z() == last_point.z() ) {
                 if( !( this->*f_transparent )( new_point ) ) {
                     visible = false;
@@ -7690,15 +7691,13 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                     return false;
                 }
             }
-
             last_point = new_point;
             return true;
         } );
     }
-
     skew_cache.insert( 100000, key, visible ? 1 : 0 );
-
     result.visible = visible;
+    add_msg( _( "reached end of function, found_concealment is %s" ), found_concealment );
     result.concealment = found_concealment;
     return result;
 }

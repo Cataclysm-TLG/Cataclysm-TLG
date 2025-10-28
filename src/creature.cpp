@@ -671,19 +671,21 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     if( different_levels ) {
         ledge_concealment = ( here.ledge_concealment( pos_bub( here ), critter.pos_bub( here ) ) );
     }
-    visibility_result vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range );
+    visibility_result vis = here.sees_full( pos_bub( here ), critter.pos_bub( here ), target_range, true, false );
     const int concealment = std::max( vis.concealment, ledge_concealment );
     if( ch != nullptr ) {
-        if( concealment > critter.eye_level() ) {
+        add_msg( _( "concealment is %s" ), concealment );
+        if( concealment > eye_level() ) {
             return false;
+        } else {
+            return visible( ch );
         }
-        return visible( ch );
     } else {
-        if( concealment > critter.eye_level() ) {
+        if( concealment > eye_level() ) {
             return false;
         }
-    }
     return true;
+    }
 }
 
 int Creature::eye_level() const

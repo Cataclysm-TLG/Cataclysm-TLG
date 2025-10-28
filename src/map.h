@@ -647,9 +647,9 @@ class map
         * Returns whether `F` sees `T` with a view range of `range`.
         */
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
-                   bool with_fields = true ) const;
+                   bool with_fields = true, bool allow_cached = true ) const;
         visibility_result sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
-                                     bool with_fields = true ) const;
+                                     bool with_fields = true, bool allow_cached = true ) const;
         // Same but for IR, checking for solid obstructions etc
         bool has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int range,
                                    int eye_level ) const;
