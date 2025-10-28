@@ -443,21 +443,21 @@
     "volume": "5500 ml",
     "//1": "This is ~85% of the package volume from the amazon listing, with the assumption that the player would be squishing it harder to condense the volume.",
     "price": "30 USD",
-    "price_postapoc": "10 cent",
+    "price_postapoc": "0 cent",
     "to_hit": { "grip": "none", "length": "hand", "surface": "any", "balance": "clumsy" },
-    "material": [ "plastic" ],
+    "material": [ "vinyl" ],
     "symbol": ")",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "100 L",
-        "max_contains_weight": "100 kg",
+        "max_contains_volume": "96 L",
+        "max_contains_weight": "120 kg",
         "max_item_length": "200 cm",
         "moves": 400
       }
     ],
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE" ],
+    "flags": [ "NO_SALVAGE", "TRADER_AVOID" ],
     "//2": "Based on https://www.amazon.com/dp/B0BYPB5DMW"
   },
   {
