@@ -7618,7 +7618,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
         }
     }
     bool visible = true;
-    int found_concealment = 0;
+    int found_concealment = -1;
 
     const point a( std::abs( F.x() - T.x() ) * 2, std::abs( F.y() - T.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
@@ -7638,19 +7638,18 @@ if( F.z() == T.z() ) {
         // Concealment check only for tiles adjacent to target.
         if( square_dist( tp, T ) == 1 && square_dist( tp, F ) > 0 ) {
             int current_concealment = concealment( tp );
-            // Initialize found_concealment to a high value on first encounter
-            if( found_concealment == 0 ) {
-                found_concealment = current_concealment;
-            } else {
-                found_concealment = std::min( found_concealment, current_concealment );
+            
+            if( current_concealment == 0 ) {
+                found_concealment = 0;
+                return false; // Early exit.
             }
-            add_msg( _( "concealment set to %s"), found_concealment );
+            if( found_concealment == -1 || current_concealment < found_concealment ) {
+                found_concealment = current_concealment;
+                add_msg( _( "updated lowest concealment to %d" ), found_concealment );
+            }
         }
-        // Transparency check - but DON'T stop early for concealment calculation
         if( !( this->*f_transparent )( tp ) ) {
             visible = false;
-            // Continue anyway to find the lowest concealment
-            return true;  // Changed from false to true
         }
         return true;
     } );
@@ -7658,8 +7657,8 @@ if( F.z() == T.z() ) {
     } else {
         tripoint_bub_ms last_point = F;
         bresenham( F, T, offset, 0,
-                   [this, f_transparent, &visible, &T, &F, &last_point,
-              &found_concealment]( const tripoint_bub_ms & new_point ) {
+                [this, f_transparent, &visible, &T, &F, &last_point,
+            &found_concealment]( const tripoint_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
             if( new_point == F ) {
                 return true;
@@ -7671,24 +7670,29 @@ if( F.z() == T.z() ) {
             // Concealment check only for tiles adjacent to target.
             if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 0 && ( F.z() <= T.z() &&
                     F.xy() != T.xy() ) ) {
-                found_concealment = concealment( new_point );
-                if( found_concealment > 0 ) {
-                    return false;
+                int current_concealment = concealment( new_point );
+                
+                if( current_concealment == 0 ) {
+                    found_concealment = 0;
+                    return false; // Early exit
+                }
+                
+                if( found_concealment == -1 || current_concealment < found_concealment ) {
+                    found_concealment = current_concealment;
                 }
             }
+            
             if( new_point.z() == last_point.z() ) {
                 if( !( this->*f_transparent )( new_point ) ) {
                     visible = false;
-                    return false;
                 }
             } else {
                 const int max_z = std::max( new_point.z(), last_point.z() );
                 if( ( has_floor_or_support( { point_bub_ms( new_point.xy() ), max_z } ) ||
-                      !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
+                    !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
                     ( has_floor_or_support( { point_bub_ms( last_point.xy() ), max_z } ) ||
-                      !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
+                    !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
                     visible = false;
-                    return false;
                 }
             }
             last_point = new_point;
@@ -7697,6 +7701,9 @@ if( F.z() == T.z() ) {
     }
     skew_cache.insert( 100000, key, visible ? 1 : 0 );
     result.visible = visible;
+    if( found_concealment == -1 ) {
+        found_concealment = 0;
+    }
     add_msg( _( "reached end of function, found_concealment is %s" ), found_concealment );
     result.concealment = found_concealment;
     return result;

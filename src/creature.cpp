@@ -675,13 +675,13 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     const int concealment = std::max( vis.concealment, ledge_concealment );
     if( ch != nullptr ) {
         add_msg( _( "concealment is %s" ), concealment );
-        if( concealment > eye_level() ) {
+        if( concealment > critter.eye_level() ) {
             return false;
         } else {
             return visible( ch );
         }
     } else {
-        if( concealment > eye_level() ) {
+        if( concealment > critter.eye_level() ) {
             return false;
         }
     return true;
