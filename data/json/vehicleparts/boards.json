@@ -163,9 +163,9 @@
     "name": { "str": "stow board" },
     "item": "sheet_metal",
     "color": "white",
-    "durability": 80,
-    "description": "A metal wall with a storage locker.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
-    "size": "62500 ml",
+    "durability": 90,
+    "description": "A metal wall with some small storage compartments built into it.  Keeps zombies outside the vehicle and prevents people from seeing through it.",
+    "size": "30000 ml",
     "//": "1 m square sheet, assume 200 cm weld, 50 cm weld per damage quadrant to repair",
     "requirements": {
       "install": {
