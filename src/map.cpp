@@ -7619,46 +7619,54 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     }
     bool visible = true;
     int found_concealment = -1;
+    int lowest_concealment = -1;
 
     const point a( std::abs( F.x() - T.x() ) * 2, std::abs( F.y() - T.y() ) * 2 );
     int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
 
-// 2D Bresenham
-if( F.z() == T.z() ) {
-    bresenham( F.xy(), T.xy(), offset,
-    [this, f_transparent, &visible, &T, &F, &found_concealment]( const point_bub_ms & new_point ) {
-        // Skip starting position, stop before checking target tile.
-        if( new_point.x() == F.x() && new_point.y() == F.y() ) {
+    // 2D Bresenham
+    if( F.z() == T.z() ) {
+        bresenham( F.xy(), T.xy(), offset,
+                   [this, f_transparent, &visible, &T, &F, &found_concealment,
+              &lowest_concealment]( const point_bub_ms & new_point ) {
+            // Skip starting position, stop before checking target tile.
+            if( new_point.x() == F.x() && new_point.y() == F.y() ) {
+                return true;
+            }
+            if( new_point.x() == T.x() && new_point.y() == T.y() ) {
+                return false;
+            }
+            tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
+            point_bub_ms T_point( T.x(), T.y() );
+            point_bub_ms F_point( F.x(), F.y() );
+            // Concealment check only for tiles adjacent to target.
+            if( square_dist( new_point, T_point ) == 1 && square_dist( new_point, F_point ) > 1 ) {
+                found_concealment = concealment( tp );
+                if( found_concealment == 0 || found_concealment == 100 ) {
+                    lowest_concealment = 0;
+                    return false;
+                }
+                if( lowest_concealment < 0 ) {
+                    lowest_concealment = found_concealment;
+                    return true;
+                } else {
+                    if( found_concealment < lowest_concealment ) {
+                        lowest_concealment = found_concealment;
+                    }
+                    return true;
+                }
+            }
+            if( !( this->*f_transparent )( tp ) ) {
+                visible = false;
+            }
             return true;
-        }
-        if( new_point.x() == T.x() && new_point.y() == T.y() ) {
-            return false;
-        }
-        tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
-        // Concealment check only for tiles adjacent to target.
-        if( square_dist( tp, T ) == 1 && square_dist( tp, F ) > 0 ) {
-            int current_concealment = concealment( tp );
-            
-            if( current_concealment == 0 ) {
-                found_concealment = 0;
-                return false; // Early exit.
-            }
-            if( found_concealment == -1 || current_concealment < found_concealment ) {
-                found_concealment = current_concealment;
-                add_msg( _( "updated lowest concealment to %d" ), found_concealment );
-            }
-        }
-        if( !( this->*f_transparent )( tp ) ) {
-            visible = false;
-        }
-        return true;
-    } );
+        } );
         // 3D Bresenham
     } else {
         tripoint_bub_ms last_point = F;
         bresenham( F, T, offset, 0,
-                [this, f_transparent, &visible, &T, &F, &last_point,
-            &found_concealment]( const tripoint_bub_ms & new_point ) {
+                   [this, f_transparent, &visible, &T, &F, &last_point,
+              &found_concealment, &lowest_concealment]( const tripoint_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
             if( new_point == F ) {
                 return true;
@@ -7668,20 +7676,23 @@ if( F.z() == T.z() ) {
                 return false;
             }
             // Concealment check only for tiles adjacent to target.
-            if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 0 && ( F.z() <= T.z() &&
-                    F.xy() != T.xy() ) ) {
-                int current_concealment = concealment( new_point );
-                
-                if( current_concealment == 0 ) {
-                    found_concealment = 0;
-                    return false; // Early exit
+            if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 1 ) {
+                found_concealment = concealment( new_point );
+                if( found_concealment == 0 || found_concealment == 100 ) {
+                    lowest_concealment = 0;
+                    return false;
                 }
-                
-                if( found_concealment == -1 || current_concealment < found_concealment ) {
-                    found_concealment = current_concealment;
+                if( lowest_concealment < 0 ) {
+                    lowest_concealment = found_concealment;
+                    return true;
+                } else {
+                    if( found_concealment < lowest_concealment ) {
+                        lowest_concealment = found_concealment;
+                    }
+                    return true;
                 }
             }
-            
+
             if( new_point.z() == last_point.z() ) {
                 if( !( this->*f_transparent )( new_point ) ) {
                     visible = false;
@@ -7689,9 +7700,9 @@ if( F.z() == T.z() ) {
             } else {
                 const int max_z = std::max( new_point.z(), last_point.z() );
                 if( ( has_floor_or_support( { point_bub_ms( new_point.xy() ), max_z } ) ||
-                    !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
+                      !( this->*f_transparent )( { point_bub_ms( new_point.xy() ), last_point.z()} ) ) &&
                     ( has_floor_or_support( { point_bub_ms( last_point.xy() ), max_z } ) ||
-                    !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
+                      !( this->*f_transparent )( { point_bub_ms( last_point.xy() ), new_point.z()} ) ) ) {
                     visible = false;
                 }
             }
@@ -7701,11 +7712,10 @@ if( F.z() == T.z() ) {
     }
     skew_cache.insert( 100000, key, visible ? 1 : 0 );
     result.visible = visible;
-    if( found_concealment == -1 ) {
-        found_concealment = 0;
+    if( lowest_concealment == -1 ) {
+        lowest_concealment = 0;
     }
-    add_msg( _( "reached end of function, found_concealment is %s" ), found_concealment );
-    result.concealment = found_concealment;
+    result.concealment = lowest_concealment;
     return result;
 }
 
@@ -7755,73 +7765,6 @@ bool map::has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_
     } );
 
     return visible;
-}
-
-int map::obstacle_concealment( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const
-{
-    const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
-    int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    int found_concealment = 0;
-    // Trace from viewer to target, the same direction as map::sees().
-    bresenham( loc1, loc2, offset, 0, [&]( const tripoint_bub_ms & new_point ) {
-        // Skip the viewer's starting position.
-        if( new_point == loc1 ) {
-            return true;
-        }
-        // Stop before checking the target tile.
-        if( new_point == loc2 ) {
-            return false;
-        }
-        // Check if this tile is adjacent to the target and not adjacent to the viewer.
-        // So the target can hide behind a bush because we're not close enough to see over it.
-        if( square_dist( new_point, loc2 ) == 1 && square_dist( new_point, loc1 ) > 1 ) {
-            found_concealment = concealment( new_point );
-        }
-        if( found_concealment > 0 ) {
-            // False = finish.
-            return false;
-        } else {
-            // Keep checking.
-            return true;
-        }
-    } );
-    return found_concealment;
-}
-
-/*
-* This just duplicates obstacle_concealment and is only used for IR vision. The idea is that
-* IR can see through a bush or a curtain, but not glass. See sees_with_infrared for more.
-* Currently unused as I haven't re-applied it after the special vision backport.
-*/
-int map::obstacle_coverage( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const
-{
-    const point a( std::abs( loc1.x() - loc2.x() ) * 2, std::abs( loc1.y() - loc2.y() ) * 2 );
-    int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
-    int found_coverage = 0;
-    // Trace from viewer to target, the same direction as map::sees().
-    bresenham( loc1, loc2, offset, 0, [&]( const tripoint_bub_ms & new_point ) {
-        // Skip the viewer's starting position.
-        if( new_point == loc1 ) {
-            return true;
-        }
-        // Stop before checking the target tile.
-        if( new_point == loc2 ) {
-            return false;
-        }
-        // Check if this tile is adjacent to the target and not adjacent to the viewer.
-        // So the target can hide behind a bush because we're not close enough to see over it.
-        if( square_dist( new_point, loc2 ) == 1 && square_dist( new_point, loc1 ) > 1 ) {
-            found_coverage = coverage( new_point );
-        }
-        if( found_coverage > 0 ) {
-            // False = finish.
-            return false;
-        } else {
-            // Keep checking.
-            return true;
-        }
-    } );
-    return found_coverage;
 }
 
 int map::ledge_concealment( const Creature &viewer, const tripoint_bub_ms &target_p ) const

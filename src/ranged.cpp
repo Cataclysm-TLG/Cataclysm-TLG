@@ -2189,7 +2189,7 @@ static bool pl_sees( const Creature &cr )
     const map &here = get_map();
 
     Character &u = get_player_character();
-    return u.sees( here,  cr ) || u.sees_with_specials( cr );
+    return u.sees( here, cr ) || u.sees_with_specials( cr );
 }
 
 // Whether player character knows vehicle's position and can roughly track it with the aim cursor
@@ -2198,7 +2198,7 @@ static bool pl_sees( const optional_vpart_position &ovp )
     const map &here = get_map();
 
     Character &u = get_player_character();
-    return u.sees( here,  ovp.value().pos_bub( here ) );
+    return u.sees( here, ovp.value().pos_bub( here ) );
 }
 
 static int print_aim( const target_ui &ui, Character &you, const catacurses::window &w,
