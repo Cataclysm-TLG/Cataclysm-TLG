@@ -7628,7 +7628,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     if( F.z() == T.z() ) {
         bresenham( F.xy(), T.xy(), offset,
                    [this, f_transparent, &visible, &T, &F, &found_concealment,
-              &lowest_concealment]( const point_bub_ms & new_point ) {
+              &lowest_concealment, &allow_cached]( const point_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
             if( new_point.x() == F.x() && new_point.y() == F.y() ) {
                 return true;
@@ -7640,20 +7640,22 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             point_bub_ms T_point( T.x(), T.y() );
             point_bub_ms F_point( F.x(), F.y() );
             // Concealment check only for tiles adjacent to target.
-            if( square_dist( new_point, T_point ) == 1 && square_dist( new_point, F_point ) > 1 ) {
-                found_concealment = concealment( tp );
-                if( found_concealment == 0 || found_concealment == 100 ) {
-                    lowest_concealment = 0;
-                    return false;
-                }
-                if( lowest_concealment < 0 ) {
-                    lowest_concealment = found_concealment;
-                    return true;
-                } else {
-                    if( found_concealment < lowest_concealment ) {
-                        lowest_concealment = found_concealment;
+            if( !allow_cached ) {
+                if( square_dist( new_point, T_point ) == 1 && square_dist( new_point, F_point ) > 1 ) {
+                    found_concealment = concealment( tp );
+                    if( found_concealment == 0 || found_concealment == 100 ) {
+                        lowest_concealment = 0;
+                        return false;
                     }
-                    return true;
+                    if( lowest_concealment < 0 ) {
+                        lowest_concealment = found_concealment;
+                        return true;
+                    } else {
+                        if( found_concealment < lowest_concealment ) {
+                            lowest_concealment = found_concealment;
+                        }
+                        return true;
+                    }
                 }
             }
             if( !( this->*f_transparent )( tp ) ) {
@@ -7666,7 +7668,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
         tripoint_bub_ms last_point = F;
         bresenham( F, T, offset, 0,
                    [this, f_transparent, &visible, &T, &F, &last_point,
-              &found_concealment, &lowest_concealment]( const tripoint_bub_ms & new_point ) {
+              &found_concealment, &lowest_concealment, &allow_cached]( const tripoint_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
             if( new_point == F ) {
                 return true;
@@ -7676,20 +7678,22 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                 return false;
             }
             // Concealment check only for tiles adjacent to target.
-            if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 1 ) {
-                found_concealment = concealment( new_point );
-                if( found_concealment == 0 || found_concealment == 100 ) {
-                    lowest_concealment = 0;
-                    return false;
-                }
-                if( lowest_concealment < 0 ) {
-                    lowest_concealment = found_concealment;
-                    return true;
-                } else {
-                    if( found_concealment < lowest_concealment ) {
-                        lowest_concealment = found_concealment;
+            if( !allow_cached ) {
+                if( square_dist( new_point, T ) == 1 && square_dist( new_point, F ) > 1 ) {
+                    found_concealment = concealment( new_point );
+                    if( found_concealment == 0 || found_concealment == 100 ) {
+                        lowest_concealment = 0;
+                        return false;
                     }
-                    return true;
+                    if( lowest_concealment < 0 ) {
+                        lowest_concealment = found_concealment;
+                        return true;
+                    } else {
+                        if( found_concealment < lowest_concealment ) {
+                            lowest_concealment = found_concealment;
+                        }
+                        return true;
+                    }
                 }
             }
 
@@ -7712,6 +7716,9 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     }
     skew_cache.insert( 100000, key, visible ? 1 : 0 );
     result.visible = visible;
+    if( found_concealment == -1 ) {
+        found_concealment = 0;
+    }
     if( lowest_concealment == -1 ) {
         lowest_concealment = 0;
     }
