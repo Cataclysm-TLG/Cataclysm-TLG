@@ -339,6 +339,12 @@ struct tile_render_info {
         : com( com ), var( var ) {}
 };
 
+// For sees_full(). Gets us concealment and coverage values that share the same slope as LoS.
+struct visibility_result {
+    bool visible = false;
+    int concealment = 0;
+};
+
 /**
  * Manage and cache data about a part of the map.
  *
@@ -641,7 +647,9 @@ class map
         * Returns whether `F` sees `T` with a view range of `range`.
         */
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
-                   bool with_fields = true ) const;
+                   bool with_fields = true, bool allow_cached = true ) const;
+        visibility_result sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
+                                     bool with_fields = true, bool allow_cached = true ) const;
         // Same but for IR, checking for solid obstructions etc
         bool has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int range,
                                    int eye_level ) const;
@@ -658,6 +666,9 @@ class map
         **/
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range, int &bresenham_slope,
                    bool with_fields = true, bool allow_cached = true ) const;
+        visibility_result sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
+                                     int &bresenham_slope,
+                                     bool with_fields = true, bool allow_cached = true ) const;
         point sees_cache_key( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
     public:
         /**
@@ -665,10 +676,6 @@ class map
         * First tile from the target is an obstacle, which has the concealment value.
         * If there's no obstacle adjacent to the target - no concealment.
         */
-        int obstacle_concealment( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const;
-
-        // Currently only used for IR vision as map::shoot() handles most of this already.
-        int obstacle_coverage( const tripoint_bub_ms &loc1, const tripoint_bub_ms &loc2 ) const;
 
         int ledge_concealment( const Creature &viewer, const tripoint_bub_ms &target_p ) const;
         int ledge_concealment( const tripoint_bub_ms &viewer_p, const tripoint_bub_ms &target_p ) const;

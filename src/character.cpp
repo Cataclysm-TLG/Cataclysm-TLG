@@ -10956,36 +10956,6 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
     bay.add_item_or_charges( fin, body );
 }
 
-bool Character::sees_with_infrared( const Creature &critter ) const
-{
-    if( !vision_mode_cache[IR_VISION] || !critter.is_warm() ) {
-        return false;
-    }
-
-    const map &here = get_map();
-    const tripoint_bub_ms viewer_bub = pos_bub();
-    const tripoint_bub_ms target_bub = critter.pos_bub();
-
-    //TODO: IR_range should be determined by tech or mutations, not just per.
-    const int IR_range = 1 + ( 60 * get_per() / 20 );
-    const int target_eye = critter.is_monster()
-                           ? critter.as_monster()->eye_level()
-                           : critter.as_character()->eye_level();
-
-    if( !here.has_line_of_sight_IR( viewer_bub, target_bub, IR_range, std::min( eye_level(),
-                                    target_eye ) ) ) {
-        return false;
-    }
-
-    if( here.obstacle_coverage( viewer_bub, target_bub ) >= target_eye ) {
-        return false;
-    }
-    if( here.obstacle_coverage( target_bub, viewer_bub ) >= eye_level() ) {
-        return false;
-    }
-
-    return true;
-}
 
 bool Character::is_visible_in_range( const Creature &critter, const int range ) const
 {
