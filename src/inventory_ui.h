@@ -23,12 +23,12 @@
 #include "item_category.h"
 #include "item.h"
 #include "item_location.h"
-#include "itype.h"
 #include "memory_fast.h"
 #include "pocket_type.h"
 #include "pimpl.h"
 #include "translations.h"
 #include "units_fwd.h"
+#include "units.h"
 
 class basecamp;
 class Character;
@@ -236,12 +236,8 @@ class inventory_selector_preset
         virtual ~inventory_selector_preset() = default;
 
         /** Does this entry satisfy the basic preset conditions? */
-        virtual bool is_shown( const item_location &loc ) const {
-            if( loc->is_gunmod() && !loc->type->gunmod->is_visible_when_installed ) {
-                return false;
-            }
-            return true;
-        }
+        virtual bool is_shown( const item_location &loc ) const;
+
 
         /**
          * The reason why this entry cannot be selected.
