@@ -373,8 +373,8 @@ static std::string mission_ui_activity_of( const mission_id &miss_id )
         case Camp_Determine_Leadership:
             return _( "Switch to follower" );
 
-        case Camp_Have_Meal:
-            return _( "Have a meal" );
+        // case Camp_Have_Meal:
+        //     return _( "Have a meal" );
 
         case Camp_Hide_Mission:
             return _( "Hide mission(s)" );
@@ -1514,16 +1514,16 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
             mission_key.add( { miss_id, false }, name_display_of( miss_id ),
                              entry );
         }
-        {
-            const mission_id miss_id = { Camp_Have_Meal, "", {}, base_dir };
-            entry = string_format( _( "Notes:\n"
-                                      "Eat some food from the larder.\n"
-                                      "Nutritional value depends on food stored in the larder.\n"
-                                      "Difficulty: N/A\n"
-                                      "Risk: None\n" ) );
-            mission_key.add( { miss_id, false }, name_display_of( miss_id ),
-                             entry );
-        }
+        // {
+        //     const mission_id miss_id = { Camp_Have_Meal, "", {}, base_dir };
+        //     entry = string_format( _( "Notes:\n"
+        //                               "Eat some food from the larder.\n"
+        //                               "Nutritional value depends on food stored in the larder.\n"
+        //                               "Difficulty: N/A\n"
+        //                               "Risk: None\n" ) );
+        //     mission_key.add( { miss_id, false }, name_display_of( miss_id ),
+        //                      entry );
+        // }
         {
             validate_assignees();
             const mission_id miss_id = { Camp_Assign_Jobs, "", {}, base_dir };
@@ -1588,36 +1588,36 @@ void basecamp::get_available_missions( mission_data &mission_key, map &here )
     }
 }
 
-void basecamp::player_eats_meal()
-{
-    uilist smenu;
-    smenu.text = _( "Have a meal?" );
-    int i = 1;
-    smenu.addentry( i++, true, '1', _( "Snack" ) );
-    smenu.addentry( i++, true, '2', _( "Meal" ) );
-    smenu.addentry( i++, true, '3', _( "Just stuff your face.  You're hungry!" ) );
-    smenu.query();
-    if( smenu.ret_act != "CONFIRM" ) {
-        popup( _( "You decide not to have anything after all." ) );
-        return;
-    }
-    int kcal_to_eat = smenu.ret * 750 - 250; // 500, 1250, 2000 kcal
-    Character &you = get_player_character();
-    const int &food_available = fac()->food_supply.kcal();
-    if( you.stomach.contains() >= ( you.stomach.capacity( you ) / 2 ) ) {
-        popup( _( "You're way too full to eat a full meal right now." ) );
-        return;
-    }
-    if( food_available <= 0 ) {
-        popup( _( "You check storage for some food, but there is nothing but dust and cobwebs…" ) );
-        return;
-    } else if( food_available <= kcal_to_eat ) {
-        add_msg( _( "There's only one meal left.  Guess that's dinner!" ) );
-        kcal_to_eat = food_available;
-    }
-    nutrients dinner = camp_food_supply( -kcal_to_eat );
-    feed_workers( you, dinner, true );
-}
+// void basecamp::player_eats_meal()
+// {
+//     uilist smenu;
+//     smenu.text = _( "Have a meal?" );
+//     int i = 1;
+//     smenu.addentry( i++, true, '1', _( "Snack" ) );
+//     smenu.addentry( i++, true, '2', _( "Meal" ) );
+//     smenu.addentry( i++, true, '3', _( "Just stuff your face.  You're hungry!" ) );
+//     smenu.query();
+//     if( smenu.ret_act != "CONFIRM" ) {
+//         popup( _( "You decide not to have anything after all." ) );
+//         return;
+//     }
+//     int kcal_to_eat = smenu.ret * 750 - 250; // 500, 1250, 2000 kcal
+//     Character &you = get_player_character();
+//     const int &food_available = fac()->food_supply.kcal();
+//     if( you.stomach.contains() >= ( you.stomach.capacity( you ) / 2 ) ) {
+//         popup( _( "You're way too full to eat a full meal right now." ) );
+//         return;
+//     }
+//     if( food_available <= 0 ) {
+//         popup( _( "You check storage for some food, but there is nothing but dust and cobwebs…" ) );
+//         return;
+//     } else if( food_available <= kcal_to_eat ) {
+//         add_msg( _( "There's only one meal left.  Guess that's dinner!" ) );
+//         kcal_to_eat = food_available;
+//     }
+//     nutrients dinner = camp_food_supply( -kcal_to_eat );
+//     feed_workers( you, dinner, true );
+// }
 
 bool basecamp::handle_mission( const ui_mission_id &miss_id )
 {
@@ -1637,9 +1637,9 @@ bool basecamp::handle_mission( const ui_mission_id &miss_id )
             player_character.control_npc_menu( false );
             break;
 
-        case Camp_Have_Meal:
-            player_eats_meal();
-            break;
+        // case Camp_Have_Meal:
+        //     player_eats_meal();
+        //     break;
 
         case Camp_Hide_Mission:
             handle_hide_mission( miss_id.id.dir.value() );
@@ -5797,7 +5797,7 @@ std::string basecamp::name_display_of( const mission_id &miss_id )
         //  Faction camp tasks
         case Camp_Distribute_Food:
         case Camp_Determine_Leadership:
-        case Camp_Have_Meal:
+        // case Camp_Have_Meal:
         case Camp_Hide_Mission:
         case Camp_Reveal_Mission:
         case Camp_Assign_Jobs:
