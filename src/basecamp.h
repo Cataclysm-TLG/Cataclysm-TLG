@@ -257,7 +257,7 @@ class basecamp
                            bool is_player_meal = false );
         /// Helper, forwards to above
         void feed_workers( Character &worker, nutrients food, bool is_player_meal = false );
-        void player_eats_meal();
+        // void player_eats_meal();
         /// Takes all the food from the camp_food zone and increases the faction
         /// food_supply
         bool distribute_food( bool player_command = true );
