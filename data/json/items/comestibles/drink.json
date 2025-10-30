@@ -1739,7 +1739,9 @@
     "container": "bottle_plastic",
     "sealed": false,
     "quench": 50,
-    "flags": [ "EATEN_COLD" ],
+    "countdown_interval": "40 minutes",
+    "revert_to": "water_clean",
+    "flags": [ "EATEN_COLD", "SPAWN_ACTIVE" ],
     "use_action": {
       "target": "water_clean",
       "msg": "After using the tablets and carefully decanting out the resulting clean water, it's ready to drink",
