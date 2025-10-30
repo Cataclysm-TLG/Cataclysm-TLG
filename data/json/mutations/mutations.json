@@ -8608,14 +8608,6 @@
   },
   {
     "type": "mutation",
-    "id": "PROF_SKATER",
-    "name": { "str": "Skater" },
-    "points": 1,
-    "description": "You are skilled in maneuvering on skates.  You suffer lower penalties to dodging and are less likely to fall down if hit in melee combat while you're wearing rollerskates or rollerblades.",
-    "valid": false
-  },
-  {
-    "type": "mutation",
     "id": "MARTIAL_ARTS",
     "name": { "str": "Martial Artist" },
     "points": 0,

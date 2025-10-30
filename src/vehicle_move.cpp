@@ -59,6 +59,7 @@ static const itype_id fuel_type_muscle( "muscle" );
 
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
 static const proficiency_id proficiency_prof_driver( "prof_driver" );
+static const proficiency_id proficiency_prof_skating( "prof_skating" );
 
 static const skill_id skill_driving( "driving" );
 
@@ -74,7 +75,6 @@ static const ter_str_id ter_t_railroad_track_v( "t_railroad_track_v" );
 static const ter_str_id ter_t_railroad_track_v_on_tie( "t_railroad_track_v_on_tie" );
 
 static const trait_id trait_DEFT( "DEFT" );
-static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 
 static const std::string part_location_structure( "structure" );
 
@@ -2226,9 +2226,9 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
             move_resist = psg->str_cur * 150 + 500;
             if( veh.part( ps ).info().has_flag( "SEAT_REQUIRES_BALANCE" ) ) {
                 // Much harder to resist being thrown on a skateboard-like vehicle.
-                // Penalty mitigated by Deft and Skater.
+                // Penalty mitigated by Deft and skating proficiency.
                 int resist_penalty = 500;
-                if( psg->has_trait( trait_PROF_SKATER ) ) {
+                if( psg->has_proficiency( proficiency_prof_skating ) ) {
                     resist_penalty -= 150;
                 }
                 if( psg->has_trait( trait_DEFT ) ) {

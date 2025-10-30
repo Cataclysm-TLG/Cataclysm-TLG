@@ -459,5 +459,22 @@
       "install_time": "5 m"
     },
     "extend": { "flags": [ "PUMP_RAIL_COMPATIBLE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_SKATER",
+    "name": { "str": "Skater" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "athlete",
+    "name": "Athlete",
+    "description": "Obsoleted hobby.",
+    "points": 0
   }
 ]

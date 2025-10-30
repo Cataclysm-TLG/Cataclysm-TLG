@@ -121,11 +121,9 @@ static const itype_id itype_water_purifier( "water_purifier" );
 static const json_character_flag json_flag_MUSCLE_VEH_BOOST( "MUSCLE_VEH_BOOST" );
 
 static const proficiency_id proficiency_prof_aircraft_mechanic( "prof_aircraft_mechanic" );
-static const proficiency_id proficiency_prof_athlete_basic( "prof_athlete_basic" );
-static const proficiency_id proficiency_prof_athlete_expert( "prof_athlete_expert" );
-static const proficiency_id proficiency_prof_athlete_master( "prof_athlete_master" );
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
 static const proficiency_id proficiency_prof_driver( "prof_driver" );
+static const proficiency_id proficiency_prof_skating( "prof_skating" );
 
 static const skill_id skill_driving( "driving" );
 static const skill_id skill_swimming( "swimming" );
@@ -5138,7 +5136,10 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         add_msg_debug( debugmode::DF_VEHICLE, "Burn: %d", -( base_burn + mod ) );
 
         // character is actively powering a muscle engine, so train cycling proficiency
-        practice_athletic_proficiency( *driver );
+    const optional_vpart_position veh_part = here.veh_at( driver->pos_abs() );
+        if( veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", true ) ) {
+            driver->practice_proficiency( proficiency_prof_skating, 1_seconds );
+        }
     }
 }
 
@@ -5149,33 +5150,6 @@ void practice_pilot_proficiencies( Character &p, bool &boating )
     }
     if( !p.has_proficiency( proficiency_prof_boat_pilot ) && boating ) {
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
-    }
-}
-
-void practice_athletic_proficiency( Character &p )
-{
-    // Perform athletics practice
-    p.practice( skill_swimming, 1 );
-
-    // We are already a master athlete, practice has no effect
-    if( p.has_proficiency( proficiency_prof_athlete_master ) ) {
-        return;
-    }
-
-    // We have no athletic experience
-    if( !p.has_proficiency( proficiency_prof_athlete_basic ) ) {
-        p.practice_proficiency( proficiency_prof_athlete_basic, 1_seconds );
-        return;
-    }
-    // We know athletics, but aren't an expert yet
-    else if( !p.has_proficiency( proficiency_prof_athlete_expert ) ) {
-        p.practice_proficiency( proficiency_prof_athlete_expert, 1_seconds );
-        return;
-    }
-    // We're an expert, so lets practice to become a master athlete
-    else {
-        p.practice_proficiency( proficiency_prof_athlete_master, 1_seconds );
-        return;
     }
 }
 
