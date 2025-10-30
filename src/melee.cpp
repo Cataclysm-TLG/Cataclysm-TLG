@@ -147,6 +147,8 @@ static const material_id material_steel( "steel" );
 
 static const move_mode_id move_mode_prone( "prone" );
 
+static const proficiency_id proficiency_prof_skating( "prof_skating" );
+
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_spellcraft( "spellcraft" );
 static const skill_id skill_stabbing( "stabbing" );
@@ -157,7 +159,6 @@ static const trait_id trait_DEBUG_NIGHTVISION( "DEBUG_NIGHTVISION" );
 static const trait_id trait_DEFT( "DEFT" );
 static const trait_id trait_POISONOUS( "POISONOUS" );
 static const trait_id trait_POISONOUS2( "POISONOUS2" );
-static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 static const trait_id trait_VINES2( "VINES2" );
 static const trait_id trait_VINES3( "VINES3" );
 
@@ -1301,7 +1302,7 @@ float Character::get_dodge( bool critfail ) const
     if( worn_with_flag( flag_ROLLER_INLINE ) ||
         worn_with_flag( flag_ROLLER_QUAD ) ||
         worn_with_flag( flag_ROLLER_ONE ) ) {
-        ret *= has_trait( trait_PROF_SKATER ) ? 0.8 : 0.25;
+        ret *= has_proficiency( proficiency_prof_skating ) ? 0.8 : 0.25;
         add_msg_debug( debugmode::DF_MELEE, "Dodge after skate penalty %.1f", ret );
     }
 

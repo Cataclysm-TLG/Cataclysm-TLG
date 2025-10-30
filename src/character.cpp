@@ -392,6 +392,7 @@ static const move_mode_id move_mode_walk( "walk" );
 static const mtype_id mon_player_blob( "mon_player_blob" );
 
 static const proficiency_id proficiency_prof_parkour( "prof_parkour" );
+static const proficiency_id proficiency_prof_skating( "prof_skating" );
 static const proficiency_id proficiency_prof_spotting( "prof_spotting" );
 static const proficiency_id proficiency_prof_traps( "prof_traps" );
 static const proficiency_id proficiency_prof_trapsetting( "prof_trapsetting" );
@@ -491,7 +492,6 @@ static const trait_id trait_PARAIMMUNE( "PARAIMMUNE" );
 static const trait_id trait_PER_SLIME( "PER_SLIME" );
 static const trait_id trait_PER_SLIME_OK( "PER_SLIME_OK" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
-static const trait_id trait_PROF_SKATER( "PROF_SKATER" );
 static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
 static const trait_id trait_QUILLS( "QUILLS" );
 static const trait_id trait_ROOTS2( "ROOTS2" );
@@ -8619,7 +8619,7 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
         if( worn_with_flag( flag_ROLLER_ONE ) && !in_skater_vehicle ) {
             rolls += 2;
         }
-        if( has_trait( trait_PROF_SKATER ) ) {
+        if( has_proficiency( proficiency_prof_skating ) ) {
             rolls--;
         }
         if( has_trait( trait_DEFT ) ) {
@@ -8642,6 +8642,8 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
             }
             // This kind of downing is not subject to immunity.
             add_effect( effect_downed, 2_turns, false, 0, true );
+        } else {
+            practice_proficiency( proficiency_prof_skating, 1_seconds );
         }
     }
     if( has_effect( effect_bouldering ) && ( rng( 0, 100 ) <= 10 ) ) {
@@ -11647,7 +11649,7 @@ void Character::process_effects()
         }
         if( ( is_running() && !has_effect( effect_quadruped_full ) ) ||
             ( ( worn_with_flag( flag_ROLLER_ONE ) || worn_with_flag( flag_ROLLER_INLINE ) ||
-                worn_with_flag( flag_ROLLER_QUAD ) ) && !has_trait( trait_PROF_SKATER ) ) ) {
+                worn_with_flag( flag_ROLLER_QUAD ) ) && !has_proficiency( proficiency_prof_skating ) ) ) {
             rolls++;
         }
         // Slimy people are used to everything being slippery.

@@ -230,7 +230,7 @@ static int trait_points_used( const Character &u )
 
 static int skill_point_pool()
 {
-    return 4;
+    return 6;
 }
 
 static int skill_points_used( const Character &u )
@@ -248,14 +248,6 @@ static int skill_points_used( const Character &u )
             if( prof_skill.first == sk.ident() ) {
                 prof_skills += prof_skill.second;
                 break;
-            }
-        }
-        for( const profession *hobby : u.hobbies ) {
-            for( auto &hobby_skill : hobby->skills() ) {
-                if( hobby_skill.first == sk.ident() ) {
-                    prof_skills += hobby_skill.second;
-                    break;
-                }
             }
         }
         static std::array < int, 1 + MAX_SKILL > costs = { 0, 1, 2, 3, 6, 10, 14, 18, 22, 26, 30 };
@@ -3058,14 +3050,6 @@ static int skill_increment_cost( const Character &u, const skill_id &skill )
             break;
         }
     }
-    for( const profession *hobby : u.hobbies ) {
-        for( auto &hobby_skill : hobby->skills() ) {
-            if( hobby_skill.first == skill->ident() ) {
-                skill_total += hobby_skill.second;
-                break;
-            }
-        }
-    }
     if( skill_total < 3 ) {
         return 1;
     } else if( skill_total < 6 ) {
@@ -3085,12 +3069,6 @@ static std::string assemble_skill_details( const avatar &u, const Skill *current
     // Add profession + hobby skill bonuses to the copy
     for( const auto &prof_skill : u.prof->skills() ) {
         with_prof_skills.mod_skill_level( prof_skill.first, prof_skill.second );
-    }
-
-    for( const profession *hobby : u.hobbies ) {
-        for( const auto &hobby_skill : hobby->skills() ) {
-            with_prof_skills.mod_skill_level( hobby_skill.first, hobby_skill.second );
-        }
     }
 
     std::map<std::string, std::vector<std::pair<std::string, int> > > recipes;
@@ -3273,14 +3251,6 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
                     break;
                 }
             }
-            for( const profession *hobby : u.hobbies ) {
-                for( auto &hobby_skill : hobby->skills() ) {
-                    if( hobby_skill.first == thisSkill->ident() ) {
-                        prof_skill_level += hobby_skill.second;
-                        break;
-                    }
-                }
-            }
             const point opt_pos( 1, y );
             std::string skill_text;
             if( skill_list[i].is_header ) {
@@ -3376,14 +3346,6 @@ void set_skills( tab_manager &tabs, avatar &u, pool_type pool )
                 if( prof_skill.first == skill_id ) {
                     prof_skill_adjust += prof_skill.second;
                     break;
-                }
-            }
-            for( const profession *hobby : u.hobbies ) {
-                for( auto &hobby_skill : hobby->skills() ) {
-                    if( hobby_skill.first == skill_id ) {
-                        prof_skill_adjust += hobby_skill.second;
-                        break;
-                    }
                 }
             }
             if( level + prof_skill_adjust < 8 ) {
@@ -4218,18 +4180,6 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
                         if( i->first == elem->ident() ) {
                             level += i->second;
                             break;
-                        }
-                        ++i;
-                    }
-                }
-
-                // Handle skills from hobbies
-                for( const profession *profession : you.hobbies ) {
-                    profession::StartingSkillList hobby_skills = profession->skills();
-                    profession::StartingSkillList::iterator i = hobby_skills.begin();
-                    while( i != hobby_skills.end() ) {
-                        if( i->first == elem->ident() ) {
-                            level += i->second;
                         }
                         ++i;
                     }
