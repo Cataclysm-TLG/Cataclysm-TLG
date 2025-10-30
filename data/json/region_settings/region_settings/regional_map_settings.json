@@ -908,6 +908,7 @@
       [ "mx_mass_grave", 5 ],
       [ "mx_portal", 3 ],
       [ "mx_portal_in", 3 ],
+      [ "mx_mass_grave_jabberwock", 2 ],
       [ "mx_jabberwock", 1 ],
       [ "mx_helicopter", 1 ],
       [ "mx_beehive_natural", 30 ]
@@ -962,6 +963,7 @@
       [ "mx_crater", 150 ],
       [ "mx_nest_wasp", 50 ],
       [ "mx_mass_grave", 50 ],
+      [ "mx_mass_grave_jabberwock", 1 ],
       [ "mx_grave", 50 ],
       [ "mx_Trapdoor_spider_den", 50 ],
       [ "mx_collegekids", 30 ],
@@ -1121,6 +1123,7 @@
       [ "mx_casings", 200 ],
       [ "mx_nest_wasp", 50 ],
       [ "mx_mass_grave", 50 ],
+      [ "mx_mass_grave_jabberwock", 2 ],
       [ "mx_grave", 50 ],
       [ "mx_supplydrop", 2 ],
       [ "mx_Trapdoor_spider_den", 40 ],

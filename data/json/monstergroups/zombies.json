@@ -1101,8 +1101,19 @@
     ]
   },
   {
-    "name": "GROUP_FOOTBALL",
     "type": "monstergroup",
+    "name": "GROUP_MASS_GRAVE_JABBERWOCK",
+    "//": "The things that appeared at a jabberwock mass grave.",
+    "monsters": [
+      { "monster": "mon_fleshy_shambler", "weight": 250, "cost_multiplier": 0 },
+      { "monster": "mon_fleshy_shambler", "weight": 25, "pack_size": [ 2, 4 ] },
+      { "monster": "mon_flesh_golem", "weight": 35, "cost_multiplier": 2, "starts": "17 days" },
+      { "monster": "mon_jabberwock", "weight": 4, "cost_multiplier": 3, "starts": "90 days" }
+    ]
+  },
+  {
+    "type": "monstergroup",
+    "name": "GROUP_FOOTBALL",
     "monsters": [
       { "monster": "mon_null", "weight": 300 },
       { "monster": "mon_zombie_tough", "weight": 150, "pack_size": [ 1, 2 ] },
