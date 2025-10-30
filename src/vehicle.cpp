@@ -5049,6 +5049,7 @@ units::energy vehicle::drain_energy( const itype_id &ftype, units::energy wanted
 void vehicle::consume_fuel( map &here, int load, bool idling )
 {
     double st = strain( here );
+    bool skating;
     for( const auto &fuel_pr : fuel_usage() ) {
         const itype_id &ft = fuel_pr.first;
         if( idling && ft == fuel_type_battery ) {
@@ -5082,9 +5083,14 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         driver = &get_player_character();
     }
 
+    const optional_vpart_position veh_part = here.veh_at( driver->pos_abs() );
+    if( veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", true ) ) {
+        skating = true;
+    }
+
     // if engine is under load, player is actively piloting a vehicle, so train appropriate vehicle proficiency
     if( load > 0 ) {
-        practice_pilot_proficiencies( *driver, in_deep_water );
+        practice_pilot_proficiencies( *driver, in_deep_water, skating );
     }
 
     if( load > 0 && fuel_left( here, fuel_type_muscle ) > 0 &&
@@ -5134,21 +5140,18 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         add_msg_debug( debugmode::DF_VEHICLE, "Load: %d", load );
         add_msg_debug( debugmode::DF_VEHICLE, "Mod: %d", mod );
         add_msg_debug( debugmode::DF_VEHICLE, "Burn: %d", -( base_burn + mod ) );
-
-        // character is actively powering a muscle engine, so train cycling proficiency
-    const optional_vpart_position veh_part = here.veh_at( driver->pos_abs() );
-        if( veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", true ) ) {
-            driver->practice_proficiency( proficiency_prof_skating, 1_seconds );
-        }
     }
 }
 
-void practice_pilot_proficiencies( Character &p, bool &boating )
+void practice_pilot_proficiencies( Character &p, bool &boating, bool &skating )
 {
-    if( !p.has_proficiency( proficiency_prof_driver ) && !boating ) {
+    if( !p.has_proficiency( proficiency_prof_skating) && skating ) {
+        p.practice_proficiency( proficiency_prof_skating, 1_seconds );
+    }
+    if( !p.has_proficiency( proficiency_prof_driver ) && !boating && !skating ) {
         p.practice_proficiency( proficiency_prof_driver, 1_seconds );
     }
-    if( !p.has_proficiency( proficiency_prof_boat_pilot ) && boating ) {
+    if( !p.has_proficiency( proficiency_prof_boat_pilot ) && boating && !skating ) {
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
     }
 }

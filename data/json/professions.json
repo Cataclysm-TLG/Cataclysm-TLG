@@ -1066,7 +1066,7 @@
       { "level": 4, "name": "throw" },
       { "level": 4, "name": "swimming" }
     ],
-    "proficiencies": [ "prof_athlete_basic", "prof_bludgeons_familiar", "prof_bludgeons_pro" ],
+    "proficiencies": [ "prof_bludgeons_familiar", "prof_bludgeons_pro" ],
     "items": {
       "both": {
         "entries": [
@@ -1095,7 +1095,6 @@
     "description": "Your first major game was abruptly cancelled when zombies stormed the court.  Quick feet and good reflexes meant you were among the lucky few to escape the stadium alive.",
     "points": 3,
     "skills": [ { "level": 5, "name": "dodge" }, { "level": 5, "name": "throw" }, { "level": 4, "name": "swimming" } ],
-    "proficiencies": [ "prof_athlete_basic" ],
     "items": {
       "both": {
         "entries": [
@@ -1128,7 +1127,7 @@
       { "level": 4, "name": "dodge" },
       { "level": 4, "name": "swimming" }
     ],
-    "proficiencies": [ "prof_athlete_basic", "prof_unarmed_familiar" ],
+    "proficiencies": [ "prof_unarmed_familiar" ],
     "items": {
       "both": {
         "entries": [
@@ -1157,7 +1156,7 @@
     "description": "You were a promising cyclist with a bright career in front of you before this all happened.  Perhaps you'll never get to participate in the grand tours now, but as the saying goes, life is like riding a bicycle: you've got to keep moving.",
     "npc_background": "BG_survival_story_SPORTS",
     "points": 4,
-    "proficiencies": [ "prof_athlete_basic", "prof_athlete_expert", "prof_driver" ],
+    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 5, "name": "driving" }, { "level": 3, "name": "dodge" } ],
     "items": {
       "both": {
@@ -4768,12 +4767,11 @@
     "type": "profession",
     "id": "skaterkid",
     "name": { "male": "Skater Boy (Rollerblades)", "female": "Skater Girl (Rollerblades)" },
-    "description": "You love to skate!  You've probably spent more time on a pair of blades than off.  Things have gotten pretty bad, but at least the grown-ups aren't telling you where you can't roll.",
+    "description": "You love to skate!  You've probably spent more time on a pair of blades than off.  Things have gotten pretty bad, but at least the cops aren't telling you where you can't roll.",
     "npc_background": "BG_survival_story_TEENAGER_TOUGH",
     "points": 1,
     "skills": [ { "level": 4, "name": "dodge" }, { "level": 3, "name": "driving" }, { "level": 2, "name": "swimming" } ],
-    "traits": [ "PROF_SKATER" ],
-    "proficiencies": [ "prof_athlete_basic" ],
+    "proficiencies": [ "prof_skating" ],
     "items": {
       "both": {
         "entries": [
@@ -4801,12 +4799,11 @@
     "type": "profession",
     "id": "skaterkid_board",
     "name": { "male": "Skater Boy (Skateboard)", "female": "Skater Girl (Skateboard)" },
-    "description": "You love to skate!  You've probably spent more time on a skateboard than off.  Things have gotten pretty bad, but at least the grown-ups aren't telling you where you can't roll.",
+    "description": "You love to skate!  You've probably spent more time on a skateboard than off.  Things have gotten pretty bad, but at least the cops aren't telling you where you can't roll.",
     "npc_background": "BG_survival_story_TEENAGER_TOUGH",
     "points": 1,
-    "proficiencies": [ "prof_driver", "prof_athlete_basic" ],
+    "proficiencies": [ "prof_driver", "prof_skating" ],
     "skills": [ { "level": 4, "name": "dodge" }, { "level": 3, "name": "driving" }, { "level": 2, "name": "swimming" } ],
-    "traits": [ "PROF_SKATER" ],
     "items": {
       "both": {
         "entries": [
@@ -4921,7 +4918,6 @@
     "npc_background": "BG_survival_story_SPORTS",
     "points": 2,
     "skills": [ { "level": 5, "name": "dodge" }, { "level": 4, "name": "throw" }, { "level": 3, "name": "swimming" } ],
-    "proficiencies": [ "prof_athlete_basic" ],
     "items": {
       "both": {
         "entries": [
@@ -5159,7 +5155,7 @@
     "description": "You've practiced parkour for many years, and made the world your playground.  It wouldn't be a lie to say that running is your life.  Which is good, because now that the end has come, you're running FOR your life.",
     "npc_background": "BG_survival_story_SPORTS",
     "points": 3,
-    "proficiencies": [ "prof_parkour", "prof_athlete_basic" ],
+    "proficiencies": [ "prof_parkour" ],
     "skills": [ { "level": 6, "name": "dodge" }, { "level": 4, "name": "swimming" } ],
     "items": {
       "both": {
@@ -6031,7 +6027,7 @@
     "description": "For as long as you can remember, you have lived a double life: a normal driver by the day and a heist driver in the night.  Now there are no cops and no law, but even after the Cataclysm, you drive.",
     "npc_background": "BG_survival_story_CRIMINAL",
     "points": 4,
-    "proficiencies": [ "prof_driver", "prof_basic_engines", "prof_athlete_basic" ],
+    "proficiencies": [ "prof_driver", "prof_basic_engines" ],
     "skills": [ { "level": 6, "name": "driving" }, { "level": 4, "name": "mechanics" }, { "level": 1, "name": "melee" } ],
     "vehicle": "car_coupe_muscle",
     "items": {
@@ -6060,7 +6056,6 @@
     "proficiencies": [
       "prof_elec_circuits",
       "prof_intro_chemistry",
-      "prof_athlete_expert",
       "prof_gun_cleaning",
       "prof_spotting",
       "prof_traps",

@@ -6,46 +6,7 @@
     "name": "Boating License",
     "description": "You've trained in how to pilot marine craft, as well as general boating and swimming safety.",
     "points": 0,
-    "skills": [ { "level": 2, "name": "driving" }, { "level": 1, "name": "swimming" } ],
     "proficiencies": [ "prof_boat_pilot" ]
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "driving_license",
-    "name": "Driving License",
-    "description": "You got your driving license and know how to drive a car, change the oil and tires, and other basics.",
-    "points": 0,
-    "skills": [ { "level": 2, "name": "driving" }, { "level": 1, "name": "mechanics" } ],
-    "proficiencies": [ "prof_driver" ]
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "simple_home_cooking",
-    "name": "Simple Home Cooking",
-    "description": "You've been living on your own long enough that you know how to cook basic dishes and feed yourself.",
-    "points": 0,
-    "skills": [ { "level": 1, "name": "cooking" } ],
-    "proficiencies": [ "prof_food_prep" ]
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "basic_education",
-    "name": "Basic Education",
-    "description": "You have received the equivalent of a K-12 education and know the basics of science and computer literacy.",
-    "points": 0,
-    "skills": [ { "level": 1, "name": "chemistry" }, { "level": 1, "name": "electronics" }, { "level": 1, "name": "computer" } ]
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "everyday_skills",
-    "name": "Everyday Skills",
-    "description": "You've managed to survive modern life in a first world country.  Through your ordeals you've learned how to treat scrapes and bruises, and how to assemble basic furniture.",
-    "points": 0,
-    "skills": [ { "level": 1, "name": "fabrication" }, { "level": 1, "name": "firstaid" } ]
   },
   {
     "type": "profession",
