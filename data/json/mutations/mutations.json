@@ -7946,7 +7946,7 @@
     "points": 0,
     "visibility": 4,
     "ugliness": 4,
-    "description": "Your arms have transformed into four tentacles, giving you +1 Dexterity and the ability to attack while prone at a greatly reduced penalty, however they're not as useful as hands for fine manipulation, resulting in a permanent +30 encumbrance.",
+    "description": "Your arms have transformed into four tentacles, giving you +1 Dexterity and the ability to attack while prone at a greatly reduced penalty, however they're not as useful as hands for fine manipulation, resulting in a permanent +20 encumbrance.",
     "encumbrance_always": [ [ "hand_l", 20 ], [ "hand_r", 20 ] ],
     "restricts_gear": [ "hand_l", "hand_r" ],
     "types": [ "ARMS", "HANDS", "CLAWS" ],
