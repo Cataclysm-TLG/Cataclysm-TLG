@@ -47,11 +47,5 @@
     "name": "LONGITUDE",
     "stype": "float",
     "value": -113.49
-  },
-  {
-    "type": "EXTERNAL_OPTION",
-    "name": "DEFAULT_REGION",
-    "stype": "string_input",
-    "value": "default_classiczombies"
   }
 ]
