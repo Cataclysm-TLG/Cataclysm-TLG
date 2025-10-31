@@ -5049,7 +5049,7 @@ units::energy vehicle::drain_energy( const itype_id &ftype, units::energy wanted
 void vehicle::consume_fuel( map &here, int load, bool idling )
 {
     double st = strain( here );
-    bool skating;
+    bool skating = false;
     for( const auto &fuel_pr : fuel_usage() ) {
         const itype_id &ft = fuel_pr.first;
         if( idling && ft == fuel_type_battery ) {
@@ -5143,16 +5143,14 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
     }
 }
 
-void practice_pilot_proficiencies( Character &p, bool &boating, bool &skating )
+void practice_pilot_proficiencies( Character &p, bool boating, bool skating )
 {
-    if( !p.has_proficiency( proficiency_prof_skating) && skating ) {
+    if( skating && !boating && !p.has_proficiency( proficiency_prof_skating ) ) {
         p.practice_proficiency( proficiency_prof_skating, 1_seconds );
-    }
-    if( !p.has_proficiency( proficiency_prof_driver ) && !boating && !skating ) {
-        p.practice_proficiency( proficiency_prof_driver, 1_seconds );
-    }
-    if( !p.has_proficiency( proficiency_prof_boat_pilot ) && boating && !skating ) {
+    } else if( boating && !skating && !p.has_proficiency( proficiency_prof_boat_pilot ) ) {
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
+    } else if( !boating && !skating && !p.has_proficiency( proficiency_prof_driver ) ) {
+        p.practice_proficiency( proficiency_prof_driver, 1_seconds );
     }
 }
 
