@@ -3052,7 +3052,7 @@ static int skill_increment_cost( const Character &u, const skill_id &skill )
     }
     if( skill_total < 3 ) {
         return 1;
-    } else if( skill_total < 6 ) {
+    } else if( skill_total < 4 ) {
         return 3;
     } else {
         return 4;
