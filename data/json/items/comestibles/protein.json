@@ -24,7 +24,7 @@
     "calories": 100,
     "quench": 40,
     "fun": -1,
-    "vitamins": [ [ "calcium", "73 mg" ] ],
+    "vitamins": [ ],
     "flags": [ "EATEN_COLD" ]
   },
   {
@@ -33,10 +33,10 @@
     "comestible_type": "FOOD",
     "name": { "str_sp": "protein powder" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent green powder" } },
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "people %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
-    "description": "Raw, refined protein.  While quite nutritious, it is impossible to enjoy in its pure form, try adding water.",
+    "description": "A powder consisting chiefly of dried protein.  Eating it in its current state would be an unpleasant experience, to say the least.",
     "//": "1 g of protein powder is 0.959 ml, 1 serving is 28g and 27ml",
     "weight": "28 g",
     "volume": "27 ml",
@@ -48,7 +48,9 @@
     "color": "white",
     "container": "bottle_plastic_small",
     "calories": 100,
+    "quench": -10,
     "freezing_point": -274,
+    "fun": -4,
     "vitamins": [  ]
   },
   {
