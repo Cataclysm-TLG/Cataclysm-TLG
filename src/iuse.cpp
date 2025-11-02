@@ -300,7 +300,7 @@ static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 static const itype_id itype_water( "water" );
 static const itype_id itype_water_clean( "water_clean" );
-static const itype_id itype_water_purifying( "water_purifying" );
+static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
 
@@ -2532,7 +2532,8 @@ std::optional<int> iuse::purify_water( Character *p, item *purifier, item_locati
     p->mod_moves( -req_moves );
 
     for( item *water : liquids ) {
-        water->convert( itype_water_purifying, p ).poison = 0;
+        water->convert( itype_water_purifying_active, p ).poison = 0;
+        water->convert( itype_water_purifying_active, p ).active = 1;
         water->set_birthday( calendar::turn );
     }
     // We've already consumed the tablets, so don't try to consume them again

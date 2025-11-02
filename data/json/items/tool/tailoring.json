@@ -267,7 +267,7 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "id": "tanning_hide",
+    "id": "tanning_hide_active",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "category": "spare_parts",
@@ -282,21 +282,11 @@
     "symbol": ",",
     "color": "brown",
     "countdown_interval": "8 hours",
-    "revert_to": "tanned_hide",
-    "//1": "Remove the use_action below when all items spawned without the auto activation changes (2025-11-30) are no longer supported",
-    "use_action": {
-      "target": "leather_sheet",
-      "msg": "You carefully unfold the tanning leather hide and shake it clean.",
-      "moves": 150,
-      "type": "delayed_transform",
-      "transform_age": 28800,
-      "not_ready_msg": "The tanning leather hide isn't done yet.",
-      "//": "8 hours"
-    },
+    "revert_to": "leather_sheet",
     "flags": [ "NO_SALVAGE", "SPAWN_ACTIVE" ]
   },
   {
-    "id": "tanning_pelt",
+    "id": "tanning_pelt_active",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "category": "spare_parts",
@@ -310,16 +300,9 @@
     "material": [ "fur", "flesh" ],
     "symbol": ",",
     "color": "brown",
-    "use_action": {
-      "target": "fur_sheet",
-      "msg": "You carefully unfold the tanning fur pelt and shake it clean.",
-      "moves": 150,
-      "type": "delayed_transform",
-      "transform_age": 28800,
-      "not_ready_msg": "The tanning fur pelt isn't done yet.",
-      "//": "2 days"
-    },
-    "flags": [ "NO_SALVAGE" ]
+    "countdown_interval": "8 hours",
+    "revert_to": "fur_sheet",
+    "flags": [ "NO_SALVAGE", "SPAWN_ACTIVE" ]
   },
   {
     "id": "kevlar_shears",

@@ -1720,7 +1720,7 @@
     "fun": 2
   },
   {
-    "id": "water_purifying",
+    "id": "water_purifying_active",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE", "AMMO" ],
     "comestible_type": "DRINK",
@@ -1742,14 +1742,6 @@
     "countdown_interval": "40 minutes",
     "revert_to": "water_clean",
     "flags": [ "EATEN_COLD", "SPAWN_ACTIVE" ],
-    "use_action": {
-      "target": "water_clean",
-      "msg": "After using the tablets and carefully decanting out the resulting clean water, it's ready to drink",
-      "moves": 100,
-      "type": "delayed_transform",
-      "transform_age": 2400,
-      "not_ready_msg": "The chlorine released by the tablets is still working.  You still need to wait a bit before you can drink it."
-    },
     "ammo_type": "water"
   }
 ]

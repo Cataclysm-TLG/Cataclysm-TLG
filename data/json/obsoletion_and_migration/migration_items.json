@@ -3757,5 +3757,20 @@
     "type": "MIGRATION",
     "id": "sewage",
     "replace": "water_sewage"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_hide_active",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanning_pelt_active",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "water_purifying",
+    "replace": "water_clean"
   }
 ]
