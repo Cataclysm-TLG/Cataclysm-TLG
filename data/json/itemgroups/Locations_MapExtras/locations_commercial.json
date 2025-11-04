@@ -291,6 +291,7 @@
       { "item": "wakizashi", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       [ "balisong", 6 ],
       [ "walking_stick", 1 ],
+      [ "fire_poker", 1 ],
       { "item": "katana", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 5 },
       { "item": "zweihander", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 2 },
       { "item": "battleaxe", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 4 },

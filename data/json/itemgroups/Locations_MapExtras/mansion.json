@@ -951,7 +951,7 @@
     "id": "fireplace_fill",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "stick", 60 ], [ "log", 40 ], [ "splinter", 20 ] ]
+    "items": [ [ "stick", 60 ], [ "log", 40 ], [ "splinter", 20 ], [ "fire_poker", 2 ] ]
   },
   {
     "id": "table_livingroom",
