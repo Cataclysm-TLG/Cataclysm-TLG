@@ -134,6 +134,7 @@
       { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
+    "byproducts": [ [ "stick", 1 ] ],
     "components": [ [ [ "spear_steel", 1 ] ] ]
   },
     {
@@ -150,6 +151,7 @@
       { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
+    "byproducts": [ [ "stick", 1 ] ],
     "components": [ [ [ "spear_bronze", 1 ] ] ]
   },
   {
