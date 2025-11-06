@@ -892,7 +892,7 @@
     "symbol": "/",
     "color": "dark_gray",
     "use_action": [ "PICKAXE" ],
-    "techniques": [ "WBLOCK_1" ],
+    "techniques": [ "WBLOCK_1", "BRUTAL", "SWEEP" ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "DIG_TOOL", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY" ],
     "melee_damage": { "bash": 30, "stab": 17 }
@@ -912,8 +912,8 @@
     "symbol": "/",
     "color": "yellow",
     "use_action": [ "PICKAXE" ],
-    "techniques": [ "WBLOCK_1" ],
-    "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "DIG_TOOL", "SHEATH_AXE" ],
+    "techniques": [ "WBLOCK_1", "BRUTAL", "SWEEP" ],
+    "flags": [ "NONCONDUCTIVE", "DIG_TOOL", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY" ],
     "melee_damage": { "bash": 30, "stab": 12 }
   },

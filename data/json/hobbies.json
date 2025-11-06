@@ -251,8 +251,8 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "car_fan",
-    "name": "Motorsports",
-    "description": "You're a big fan of cars and other things that go vroom, whether it's fixing them or driving them.",
+    "name": "Driving",
+    "description": "You're comfortable handing pretty much anything with wheels.",
     "points": 1,
     "proficiencies": [ "prof_driver" ]
   },
