@@ -1805,9 +1805,14 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
         }
         add_msg( _( "The %s is disassembled." ), f.name() );
         item &item_here = here.i_at( p ).size() != 1 ? null_item_reference() : here.i_at( p ).only_item();
-        const std::vector<item *> drop = here.spawn_items( p,
-                                         item_group::items_from( f.deconstruct->drop_group, calendar::turn ) );
-        if( f.deconstruct->skill.has_value() ) {
+        std::vector<item *> drop;
+        if( !f.base_item.is_null() ) {
+            here.spawn_item( p, f.base_item );
+        } else {
+            drop = here.spawn_items( p, item_group::items_from( f.deconstruct->drop_group, calendar::turn ) );
+        }
+
+        if( f.deconstruct && f.deconstruct->skill.has_value() ) {
             deconstruction_practice_skill( f.deconstruct->skill.value() );
         }
         // if furniture has liquid in it and deconstructs into watertight containers then fill them
@@ -2117,17 +2122,13 @@ void construct::do_turn_deconstruct( const tripoint_bub_ms &p, Character &who )
         std::string tname;
         if( here.has_furn( p ) ) {
             const furn_t &f = here.furn( p ).obj();
-            if( f.deconstruct ) {
-                map_furn_deconstruct_info deconstruct = f.deconstruct.value();
-                tname = f.name();
-                deconstruct_query( deconstruct, tname );
+            if( f.deconstruct && !f.base_item.is_null() ) {
+                deconstruct_query( f.deconstruct->potential_deconstruct_items( f ) );
             }
         } else {
             const ter_t &t = here.ter( p ).obj();
-            if( t.deconstruct ) {
-                map_ter_deconstruct_info deconstruct = t.deconstruct.value();
-                tname = t.name();
-                deconstruct_query( deconstruct, tname );
+            if( t.deconstruct && !t.base_item.is_null() ) {
+                deconstruct_query( t.deconstruct->potential_deconstruct_items( t ) );
             }
         }
         if( cancel_construction ) {
