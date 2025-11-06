@@ -468,45 +468,5 @@
     "player_display": false,
     "description": "Obsoleted trait.",
     "random_at_chargen": false
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "athlete",
-    "name": "Athlete",
-    "description": "Obsoleted hobby.",
-    "points": 0
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "driving_license",
-    "name": "Driver's License",
-    "description": "Obsoleted hobby.",
-    "points": 0
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "simple_home_cooking",
-    "name": "Simple Home Cooking",
-    "description": "Obsoleted hobby.",
-    "points": 0
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "basic_education",
-    "name": "Basic Education",
-    "description": "Obsoleted hobby.",
-    "points": 0
-  },
-  {
-    "type": "profession",
-    "subtype": "hobby",
-    "id": "everyday_skills",
-    "name": "Everyday Skills",
-    "description": "Obsoleted hobby.",
-    "points": 0
   }
 ]
