@@ -705,18 +705,18 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
     }
 
     const tripoint_bub_ms pos = pos_bub( here );
-    
+
     // Check for adjacent high-concealment tiles that would block vision.
     if( rl_dist( pos, t ) > 2 ) {
         // Get the direction to the target.
         const int dx = t.x() - pos.x();
         const int dy = t.y() - pos.y();
-        
-        const int adj_x = pos.x() + (dx > 0 ? 1 : (dx < 0 ? -1 : 0));
-        const int adj_y = pos.y() + (dy > 0 ? 1 : (dy < 0 ? -1 : 0));
+
+        const int adj_x = pos.x() + ( dx > 0 ? 1 : ( dx < 0 ? -1 : 0 ) );
+        const int adj_y = pos.y() + ( dy > 0 ? 1 : ( dy < 0 ? -1 : 0 ) );
         const tripoint_bub_ms adjacent( adj_x, adj_y, pos.z() );
-        
-        if( adjacent != pos && here.inbounds( adjacent ) && 
+
+        if( adjacent != pos && here.inbounds( adjacent ) &&
             eye_level() < here.concealment( adjacent ) ) {
             return false;
         }
@@ -728,7 +728,7 @@ bool Creature::sees( const map &here, const tripoint_bub_ms &t, bool is_avatar,
     const int range_max = std::max( range_day, range_night );
     const int range_min = std::min( range_cur, range_max );
     const int wanted_range = rl_dist( pos, t );
-    
+
     if( wanted_range <= range_min ||
         ( wanted_range <= range_max &&
           here.ambient_light_at( t ) > here.get_cache_ref( t.z() ).natural_light_level_cache ) ) {

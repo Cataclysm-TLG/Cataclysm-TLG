@@ -72,7 +72,6 @@
 static const std::string flag_CHALLENGE( "CHALLENGE" );
 static const std::string flag_CITY_START( "CITY_START" );
 static const std::string flag_SECRET( "SECRET" );
-static const std::string flag_SKIP_DEFAULT_BACKGROUND( "SKIP_DEFAULT_BACKGROUND" );
 
 static const flag_id json_flag_auto_wield( "auto_wield" );
 static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
@@ -80,9 +79,6 @@ static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 
 static const matype_id style_none( "style_none" );
-
-static const profession_group_id
-profession_group_adult_basic_background( "adult_basic_background" );
 
 static const trait_id trait_SMELLY( "SMELLY" );
 static const trait_id trait_WEAKSCENT( "WEAKSCENT" );
@@ -785,12 +781,6 @@ bool avatar::create( character_type type, const std::string &tempname )
             }
             tabs.position.last();
             break;
-    }
-
-    // Don't apply the default backgrounds on a template
-    if( type != character_type::TEMPLATE &&
-        !get_scenario()->has_flag( flag_SKIP_DEFAULT_BACKGROUND ) ) {
-        add_default_background();
     }
 
     auto nameExists = [&]( const std::string & name ) {
@@ -2613,6 +2603,18 @@ void set_profession( tab_manager &tabs, avatar &u, pool_type pool )
                 cur_id = iStartPos + ( iContentHeight - 1 ) / 2;
             }
         } else if( action == "CONFIRM" ) {
+            u.random_start_location = true;
+            u.str_max = 8;
+            u.dex_max = 8;
+            u.int_max = 8;
+            u.per_max = 8;
+
+            u.hobbies.clear();
+            u.clear_mutations();
+            u.recalc_hp();
+            u.empty_skills();
+            u.add_traits();
+
             // Selecting a profession will, under certain circumstances, change the detail text
             details_recalc = true;
 
@@ -4924,17 +4926,6 @@ void avatar::character_to_template( const std::string &name )
     save_template( name, pool_type::TRANSFER );
 }
 
-void Character::add_default_background()
-{
-    for( const profession_group &prof_grp : profession_group::get_all() ) {
-        if( prof_grp.get_id() == profession_group_adult_basic_background ) {
-            for( const profession_id &hobb : prof_grp.get_professions() ) {
-                hobbies.insert( &hobb.obj() );
-            }
-        }
-    }
-}
-
 void avatar::save_template( const std::string &name, pool_type pool )
 {
     write_to_file( PATH_INFO::templatedir() + name + ".template", [&]( std::ostream & fout ) {
@@ -5029,7 +5020,6 @@ void reset_scenario( avatar &u, const scenario *scen )
     u.prof = &default_prof.obj();
 
     u.hobbies.clear();
-    u.add_default_background();
     u.clear_mutations();
     u.recalc_hp();
     u.empty_skills();
