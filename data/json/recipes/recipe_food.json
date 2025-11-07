@@ -277,7 +277,7 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "raw_curing_fatty_meat",
+    "result": "raw_curing_fatty_meat_active",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_MEAT",
     "skill_used": "cooking",
