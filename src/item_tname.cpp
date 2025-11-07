@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "avatar.h"
+#include "calendar.h"
 #include "cata_utility.h"
 #include "color.h"
 #include "coordinates.h"
