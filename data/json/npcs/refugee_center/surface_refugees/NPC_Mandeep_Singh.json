@@ -49,7 +49,7 @@
       { "item": "pants" },
       { "item": "turban" },
       { "item": "sneakers" },
-      { "item": "kirpan", "container-item": "sheath", "prob": 4 }
+      { "item": "kirpan", "container-item": "sheath" }
     ]
   },
   {
