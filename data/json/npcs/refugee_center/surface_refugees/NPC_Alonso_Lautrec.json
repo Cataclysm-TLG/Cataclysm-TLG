@@ -24,8 +24,6 @@
     "bonus_int": { "rng": [ -2, 2 ] },
     "bonus_per": { "rng": [ -2, 2 ] },
     "worn_override": "REFUGEE_Alonso_worn",
-    "carry_override": "REFUGEE_Alonso_carried",
-    "weapon_override": "REFUGEE_Alonso_wield",
     "traits": [
       { "trait": "PRETTY" },
       { "group": "Appearance_demographics" },
@@ -49,18 +47,6 @@
       { "item": "fancy_sunglasses" },
       { "item": "dress_shoes" }
     ]
-  },
-  {
-    "type": "item_group",
-    "id": "REFUGEE_Alonso_carried",
-    "subtype": "collection",
-    "entries": [ { "item": "mag_porn" }, { "item": "vibrator" }, { "item": "condom" } ]
-  },
-  {
-    "type": "item_group",
-    "id": "REFUGEE_Alonso_wield",
-    "subtype": "collection",
-    "entries": [ { "item": "cudgel" } ]
   },
   {
     "type": "effect_type",
