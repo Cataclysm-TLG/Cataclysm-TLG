@@ -17,7 +17,8 @@
       "ter_set": "t_open_air",
       "str_min": 100,
       "str_max": 400,
-      "str_min_supported": 150, "bash_below": true,
+      "str_min_supported": 150,
+      "bash_below": true,
       "items": [
         { "item": "rock", "count": [ 5, 10 ] },
         { "item": "scrap", "count": [ 5, 8 ] },
