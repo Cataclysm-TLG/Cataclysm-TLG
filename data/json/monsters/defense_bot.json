@@ -287,8 +287,8 @@
     "bodytype": "human",
     "species": [ "ROBOT" ],
     "diff": 100,
-    "hp": 50,
-    "speed": 140,
+    "hp": 90,
+    "speed": 125,
     "material": [ "steel" ],
     "symbol": "@",
     "color": "red",
@@ -297,8 +297,9 @@
     "melee_skill": 6,
     "melee_dice": 3,
     "melee_dice_sides": 8,
-    "melee_damage": [ { "damage_type": "cut", "amount": 10 } ],
+    "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "vision_night": 5,
+    "dodge": 2,
     "path_settings": { "max_dist": 5, "avoid_traps": true, "avoid_sharp": true },
     "special_attacks": [ { "id": "smash", "throw_strength": 72 }, [ "BIO_OP_TAKEDOWN", 20 ] ],
     "death_drops": "mon_robofac_prototype_drops",
@@ -316,7 +317,7 @@
       "LOUDMOVES",
       "STUN_IMMUNE"
     ],
-    "armor": { "bash": 15, "cut": 50, "bullet": 40, "acid": 15 }
+    "armor": { "bash": 8, "cut": 12, "bullet": 20, "acid": 6, "heat": 5 }
   },
   {
     "id": "mon_dispatch",
