@@ -123,6 +123,7 @@ static const json_character_flag json_flag_MUSCLE_VEH_BOOST( "MUSCLE_VEH_BOOST" 
 static const proficiency_id proficiency_prof_aircraft_mechanic( "prof_aircraft_mechanic" );
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
 static const proficiency_id proficiency_prof_driver( "prof_driver" );
+static const proficiency_id proficiency_prof_helicopter_pilot( "prof_helicopter_pilot" );
 static const proficiency_id proficiency_prof_skating( "prof_skating" );
 
 static const skill_id skill_driving( "driving" );
@@ -5088,9 +5089,37 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
         skating = true;
     }
 
-    // if engine is under load, player is actively piloting a vehicle, so train appropriate vehicle proficiency
+    // If engine is under load, driver is actively piloting a vehicle, so train appropriate vehicle proficiency.
     if( load > 0 ) {
-        practice_pilot_proficiencies( *driver, in_deep_water, skating );
+        if( is_rotorcraft( here ) ) {
+            for( int boarded : boarded_parts() ) {
+                Character *passenger = get_passenger( boarded );
+                if( !passenger || passenger->has_proficiency( proficiency_prof_helicopter_pilot ) ) {
+                    continue;
+                }
+                // There's no way to pilot a helicopter without this proficiency, but if a CBM or something ever allows it...
+                if( passenger == driver ) {
+                    driver->practice_proficiency( proficiency_prof_helicopter_pilot, 1_seconds );
+                }
+                // Passengers can learn 20% as fast through observing the driver.
+                else if( one_in( 5 ) ) {
+                    passenger->practice_proficiency( proficiency_prof_helicopter_pilot, 1_seconds );
+                }
+            }
+        } else {
+            for( int boarded : boarded_parts() ) {
+                Character *passenger = get_passenger( boarded );
+                if( passenger != nullptr ) {
+                    if( passenger == driver ) {
+                        practice_pilot_proficiencies( *driver, in_deep_water, skating );
+                    }
+                    // Passengers can learn 20% as fast through observing the driver.
+                    else if( one_in( 5 ) ) {
+                        practice_pilot_proficiencies( *passenger, in_deep_water, skating );
+                    }
+                }
+            }
+        }
     }
 
     if( load > 0 && fuel_left( here, fuel_type_muscle ) > 0 &&
@@ -5151,7 +5180,7 @@ void practice_pilot_proficiencies( Character &p, bool boating, bool skating )
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
     } else if( !boating && !skating && !p.has_proficiency( proficiency_prof_driver ) ) {
         p.practice_proficiency( proficiency_prof_driver, 1_seconds );
-    }
+    }    
 }
 
 std::vector<vehicle_part *> vehicle::lights()
