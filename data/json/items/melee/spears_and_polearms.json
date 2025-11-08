@@ -71,17 +71,16 @@
     "name": { "str": "pointy stick" },
     "description": "A simple wooden pole with one end sharpened to a point.",
     "material": [ "wood" ],
-    "volume": "1250 ml",
-    "longest_side": "80 cm",
-    "weight": "900 g",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "point", "balance": "neutral" },
-    "weapon_category": [ "FENCING_WEAPONRY" ],
+    "volume": "850 ml",
+    "longest_side": "90 cm",
+    "weight": "650 g",
+    "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "neutral" },
+    "weapon_category": [ "SPEARS" ],
     "price_postapoc": "10 cent",
-    "flags": [ "SPEAR" ],
     "techniques": [ "WBLOCK_1" ],
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "melee_damage": { "bash": 5, "stab": 9 }
+    "melee_damage": { "bash": 4, "stab": 9 }
   },
   {
     "type": "GENERIC",
@@ -98,11 +97,11 @@
     "volume": "1700 ml",
     "longest_side": "180 cm",
     "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "neutral" },
-    "flags": [ "SPEAR", "REACH_ATTACK", "NPC_THROWN", "SHEATH_SPEAR", "POLEARM", "WALKING_AID" ],
+    "flags": [ "SPEAR", "REACH_ATTACK", "SHEATH_SPEAR", "POLEARM", "WALKING_AID" ],
     "weapon_category": [ "SPEARS" ],
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "melee_damage": { "bash": 5, "stab": 9 }
+    "melee_damage": { "bash": 5, "stab": 13 }
   },
   {
     "type": "GENERIC",
@@ -119,33 +118,33 @@
     "longest_side": "180 cm",
     "to_hit": { "grip": "solid", "length": "long", "surface": "point", "balance": "neutral" },
     "flags": [ "SPEAR", "REACH_ATTACK", "NPC_THROWN", "SHEATH_SPEAR", "POLEARM", "WALKING_AID" ],
-    "weapon_category": [ "POLEARMS", "SPEARS" ],
+    "weapon_category": [ "SPEARS" ],
     "price": "4 USD",
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "melee_damage": { "bash": 4, "stab": 17 }
+    "melee_damage": { "bash": 5, "stab": 15 }
   },
   {
     "type": "GENERIC",
     "id": "spear_shaft_sharpened",
     "name": { "str": "sharpened spear shaft" },
     "description": "You've gone through the effort of making a proper spear shaft, but instead of attaching something sharp to the end you just whittled a point into the wood.  The peak of pointy stick technology.",
-    "weight": "1000 g",
+    "weight": "1350 g",
     "price_postapoc": "50 cent",
     "color": "brown",
     "symbol": "/",
     "looks_like": "spear_wood",
     "material": [ "wood" ],
     "techniques": [ "WBLOCK_1" ],
-    "volume": "1250 ml",
+    "volume": "1700 ml",
     "longest_side": "180 cm",
     "to_hit": { "grip": "weapon", "length": "long", "surface": "point", "balance": "neutral" },
-    "flags": [ "SPEAR", "REACH_ATTACK", "NPC_THROWN", "SHEATH_SPEAR", "POLEARM", "WALKING_AID" ],
-    "weapon_category": [ "POLEARMS", "SPEARS" ],
+    "flags": [ "SPEAR", "REACH_ATTACK", "SHEATH_SPEAR", "POLEARM", "WALKING_AID" ],
+    "weapon_category": [ "SPEARS" ],
     "price": "40 USD",
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
-    "melee_damage": { "bash": 4, "stab": 18 }
+    "melee_damage": { "bash": 4, "stab": 17 }
   },
   {
     "id": "makeshift_scythe_war",
