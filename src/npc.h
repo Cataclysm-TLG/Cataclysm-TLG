@@ -868,6 +868,7 @@ class npc : public Character
         npc_opinion get_opinion_values( const Character &you ) const;
         std::string pick_talk_topic( const Character &u );
         std::string const &get_specified_talk_topic( std::string const &topic_id );
+        float generate_weight_percent();
         float character_danger( const Character &u ) const;
         float vehicle_danger( int radius ) const;
         void pretend_fire( npc *source, int shots, item &gun ); // fake ranged attack for hallucination

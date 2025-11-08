@@ -574,6 +574,18 @@ void npc::load_npc_template( const string_id<npc_template> &ident )
     death_eocs = tguy.death_eocs;
 }
 
+float npc::generate_weight_percent() {
+    float sample1 = rng_float(0.0f, 1.0f);
+    float sample2 = rng_float(0.0f, 1.0f);
+    float sample3 = rng_float(0.0f, 1.0f);
+
+    float avg = (sample1 + sample2 + sample3) / 3.0f;
+    float weight_percent = 0.5f + avg * 0.7f;
+
+    return weight_percent;
+}
+
+
 npc::~npc() = default;
 
 void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
@@ -665,11 +677,19 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     catchup_skills();
     set_body();
     recalc_hp();
+    // NPC weight should be between 0.5 (underweight but not emaciated) to 1.2 (slightly overweight).
+    // If we want starving or obese NPCs, that should be handled post-hoc via professions or something.
     int days_since_cata = to_days<int>( calendar::turn - calendar::fall_of_civilization );
-    double time_influence = days_since_cata >= 180 ? 3.0 : 6.0 - 3.0 * days_since_cata / 180.0;
-    double weight_percent = std::clamp<double>( chi_squared_roll( time_influence ) / 5.0,
-                            0.4, 4.0 );
+    float base_weight = generate_weight_percent();
+
+    // Calculate a bias factor [0.0 .. 1.0], 0 at day 0, 1 at day 180+
+    float bias = std::min(days_since_cata, 180) / 180.0f;
+    // Bias the weight down towards 0.5 linearly based on days_since_cata.
+    float weight_percent = base_weight * (1.0f - bias) + 0.5f * bias;
+    // Clamp again to be safe.
+    weight_percent = std::clamp(weight_percent, 0.5f, 1.2f);
     set_stored_kcal( weight_percent * get_healthy_kcal() );
+
     starting_weapon( myclass );
     starting_clothes( *this, myclass, male );
     starting_inv( *this, myclass );
