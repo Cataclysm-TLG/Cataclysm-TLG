@@ -290,8 +290,6 @@ activity_handlers::do_turn_functions = {
     { ACT_FISH, fish_do_turn },
     { ACT_REPAIR_ITEM, repair_item_do_turn },
     { ACT_TRAVELLING, travel_do_turn },
-    // DISMEMBER is disabled until we tie it to a proficiency where the character knows how to stop a zombie reviving with less work.
-    // { ACT_DISMEMBER, butcher_do_turn },
     { ACT_TIDY_UP, tidy_up_do_turn },
     { ACT_TIDY_UP, tidy_up_do_turn },
     { ACT_JACKHAMMER, jackhammer_do_turn },
@@ -311,7 +309,6 @@ activity_handlers::do_turn_functions = {
     { ACT_FIELD_DRESS, butcher_do_turn },
     { ACT_SKIN, butcher_do_turn },
     { ACT_QUARTER, butcher_do_turn },
-    // { ACT_DISMEMBER, butcher_do_turn },
     { ACT_DISSECT, butcher_do_turn },
 };
 
@@ -323,7 +320,6 @@ activity_handlers::finish_functions = {
     { ACT_FIELD_DRESS, butcher_finish },
     { ACT_SKIN, butcher_finish },
     { ACT_QUARTER, butcher_finish },
-    // { ACT_DISMEMBER, butcher_finish },
     { ACT_DISSECT, butcher_finish },
     { ACT_FISH, fish_finish },
     { ACT_PICKAXE, pickaxe_finish },
@@ -365,7 +361,6 @@ std::string enum_to_string<butcher_type>( butcher_type data )
 {
     switch( data ) {
     case butcher_type::BLEED: return "BLEED";
-    // case butcher_type::DISMEMBER: return "DISMEMBER";
     case butcher_type::DISSECT: return "DISSECT";
     case butcher_type::FIELD_DRESS: return "FIELD_DRESS";
     case butcher_type::FULL: return "FULL";
@@ -467,8 +462,6 @@ static butcher_type get_butcher_type( player_activity *act )
         action = butcher_type::BLEED;
     } else if( act->id() == ACT_SKIN ) {
         action = butcher_type::SKIN;
-        // } else if( act->id() == ACT_DISMEMBER ) {
-        //    action = butcher_type::DISMEMBER;
     }
     return action;
 }
@@ -1325,10 +1318,21 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
 
     if( action == butcher_type::DISSECT ) {
         you.practice( skill_firstaid, std::max( 0, practice ), mt.size + std::min( tool_quality, 3 ) + 2 );
-        mt.families.practice_dissect( you );
+        mt.families.practice_dissect( you, static_cast<int>( corpse_item->get_mtype()->size ) );
+        const std::vector<Character *> helpers = you.get_crafting_helpers();
+        // Helpers learn slightly less than the main dissector.
+        for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
+            mt.families.practice_dissect( *helpers[i], std::max( 1,
+                                          static_cast<int>( corpse_item->get_mtype()->size ) - 1 ) );
+        }
     } else {
         you.practice( skill_survival, std::max( 0, practice ), std::max( mt.size - creature_size::medium,
                       0 ) + 5 );
+        const std::vector<Character *> helpers = you.get_crafting_helpers();
+        for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
+            helpers[i]->practice( skill_survival, std::max( 0, practice ),
+                                  std::max( mt.size - creature_size::medium, 0 ) + 2 );
+        }
     }
 
     // after this point, if there was a liquid handling from the harvest,
@@ -1498,15 +1502,6 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                 act->targets.pop_back();
             }
             break;
-        // case butcher_type::DISMEMBER:
-        //     add_msg( m_good, SNIPPET.random_from_category( "harvest_drop_default_dismember" ).value_or(
-        //                  translation() ).translated() );
-        //     // Remove the target from the map
-        //     target.remove_item();
-        //     if( !act->targets.empty() ) {
-        //         act->targets.pop_back();
-        //     }
-        //     break;
         case butcher_type::DISSECT:
             add_msg( m_good, SNIPPET.random_from_category( "harvest_drop_default_dissect_success" ).value_or(
                          translation() ).translated() );
@@ -3092,11 +3087,6 @@ void activity_handlers::repair_item_do_turn( player_activity *act, Character *yo
         act->moves_left = 0;
     }
 }
-
-// void activity_handlers::dismember_do_turn( player_activity * /*act*/, Character *you )
-// {
-//     you->burn_energy_arms( -20 );
-// }
 
 void activity_handlers::wait_finish( player_activity *act, Character *you )
 {

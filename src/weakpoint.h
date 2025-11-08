@@ -117,7 +117,7 @@ struct weakpoint_families {
     bool practice( Character &learner, const time_duration &amount ) const;
     bool practice_hit( Character &learner ) const;
     bool practice_kill( Character &learner ) const;
-    bool practice_dissect( Character &learner ) const;
+    bool practice_dissect( Character &learner, int size ) const;
     float modifier( const Character &attacker ) const;
 
     void clear();

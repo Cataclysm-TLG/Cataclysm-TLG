@@ -149,12 +149,12 @@ bool weakpoint_families::practice_kill( Character &learner ) const
     return practice( learner, time_duration::from_minutes( 1 ) );
 }
 
-bool weakpoint_families::practice_dissect( Character &learner ) const
+bool weakpoint_families::practice_dissect( Character &learner, int size ) const
 {
-    // Proficiency experience is capped at 1000 seconds (~16 minutes), so we split it into two
-    // instances. This should be refactored when butchering becomes an `activity_actor`.
-    bool p1 = practice( learner, time_duration::from_minutes( 15 ) );
-    bool p2 = practice( learner, time_duration::from_minutes( 15 ) );
+    // Since activity_handlers can't properly pass over the time spent on dissection, and since that
+    // time is variable due to helpers, tools, etc., we simply base practice amount off of creature size.
+    bool p1 = practice( learner, time_duration::from_minutes( ( size * 5 ) ) );
+    bool p2 = practice( learner, time_duration::from_minutes( ( size * 5 ) ) );
     bool learned = p1 || p2;
     if( learned ) {
         learner.add_msg_if_player(
