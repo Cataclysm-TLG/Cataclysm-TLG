@@ -7748,6 +7748,7 @@
     "description": "You hiss when speaking.  Persuading people will be more difficult, but lying to or threatening them will be easier.",
     "types": [ "VOICE_TONE" ],
     "category": [ "LIZARD", "RAPTOR" ],
+    "enchantments": [ { "values": [ { "value": "SHOUT_NOISE", "add": -2 } ] } ],
     "social_modifiers": { "persuade": -20, "lie": 10, "intimidate": 10 }
   },
   {
@@ -7759,6 +7760,7 @@
     "description": "Your voice sounds like a bird trying to imitate a human.  It makes it harder to lie, threaten, or convince anyone of anything.",
     "types": [ "VOICE_TONE" ],
     "category": [ "BIRD" ],
+    "enchantments": [ { "values": [ { "value": "SHOUT_NOISE", "add": 4 } ] } ],
     "social_modifiers": { "persuade": -10, "lie": -10, "intimidate": -10 }
   },
   {

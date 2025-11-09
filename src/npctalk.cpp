@@ -106,6 +106,8 @@ static const activity_id ACT_SOCIALIZE( "ACT_SOCIALIZE" );
 static const activity_id ACT_TRAIN( "ACT_TRAIN" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 
+static const bionic_id bio_voice( "bio_voice" );
+
 static const efftype_id effect_asked_to_train( "asked_to_train" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_riding( "riding" );
@@ -120,9 +122,15 @@ static const skill_id skill_firstaid( "firstaid" );
 
 static const skill_id skill_speech( "speech" );
 
+static const trait_id trait_CROAK( "CROAK" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
+static const trait_id trait_GROWL( "GROWL" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
+static const trait_id trait_HISS( "HISS" );
+static const trait_id trait_SCREECH( "SCREECH" );
+static const trait_id trait_SHOUT2( "SHOUT2" );
+static const trait_id trait_SHOUT3( "SHOUT3" );
+static const trait_id trait_SNARL( "SNARL" );
 
 static const zone_type_id zone_type_NPC_INVESTIGATE_ONLY( "NPC_INVESTIGATE_ONLY" );
 static const zone_type_id zone_type_NPC_NO_INVESTIGATE( "NPC_NO_INVESTIGATE" );
@@ -1120,6 +1128,15 @@ void game::chat()
     if( nmenu.ret < 0 ) {
         return;
     }
+    std::string shout_sound = _( "yell" );
+    if( player_character.has_trait( trait_HISS ) ) shout_sound = _( "hiss" );
+    else if( player_character.has_trait( trait_GROWL ) ) shout_sound = _( "growl" );
+    else if( player_character.has_trait( trait_SNARL ) ) shout_sound = _( "snarl" );
+    else if( player_character.has_trait( trait_SHOUT2 ) ) shout_sound = _( "scream" );
+    else if( player_character.has_trait( trait_CROAK ) )  shout_sound = _( "croak" );
+    else if( player_character.has_trait( trait_SCREECH ) ) shout_sound = _( "screech" );
+    else if( player_character.has_trait( trait_SHOUT3 ) )  shout_sound = _( "howl" );
+    else if( player_character.has_bionic( bio_voice ) )  shout_sound = _( "drone" );
 
     switch( nmenu.ret ) {
         case NPC_CHAT_TALK: {
@@ -1135,9 +1152,9 @@ void game::chat()
             message = _( "loudly." );
             break;
         case NPC_CHAT_SENTENCE: {
-            std::string popupdesc = _( "Enter a sentence to yell" );
+            std::string popupdesc = ( _( "Enter a sentence to %s" ), shout_sound );
             string_input_popup popup;
-            popup.title( _( "Yell a sentence" ) )
+            popup.title _( "Yell a sentence" )
             .width( 64 )
             .description( popupdesc )
             .identifier( "sentence" )
@@ -1423,8 +1440,8 @@ void game::chat()
         message = string_format( _( "\"%s\"" ), yell_msg );
     }
     if( !message.empty() ) {
-        add_msg( _( "You yell %s" ), message );
-        u.shout( string_format( _( "%s yelling %s" ), u.disp_name(), message ), is_order );
+        add_msg( _( "You %s %s" ), shout_sound, message );
+        u.shout( string_format( _( "%s %sing %s" ), u.disp_name(), shout_sound, message ), is_order );
     }
     if( !emote_msg.empty() ) {
         add_msg( emote_msg );
@@ -1636,19 +1653,6 @@ std::string dialogue::dynamic_line( const talk_topic &the_topic )
         return string_format(
                    _( "&You are mute and can't talk.  When you don't respond, %s becomes angry!" ),
                    actor( true )->disp_name() );
-    } else if( topic == "TALK_CHURL" ) {
-        return string_format(
-                   _( "&Thou art but a lowley churl and ye know not this newe tongue.  %s seems unable to understand what you're saying." ),
-                   actor( true )->disp_name() );
-
-    } else if( topic == "TALK_CHURL_ANGRY" ) {
-        return string_format(
-                   _( "&Thou art but a lowley churl and ye know not this newe tongue.  Unable to understand your dialect, %s becomes angry!" ),
-                   actor( true )->disp_name() );
-    } else if( topic == "TALK_CHURL_TRADE" ) {
-        return string_format(
-                   _( "&Thou art but a lowley churl wyth litel understonding of this newe langage, yet %s can understand you and seems willing to trade!" ),
-                   actor( true )->disp_name() );
     }
     avatar &player_character = get_avatar();
     if( topic == "TALK_SEDATED" ) {
@@ -1727,13 +1731,22 @@ std::string dialogue::dynamic_line( const talk_topic &the_topic )
         return actor( true )->get_job_description();
     } else if( topic == "TALK_SHOUT" ) {
         actor( false )->shout();
+        std::string shout_sound = _( "yell" );
+        if( actor( false )->has_trait( trait_HISS ) ) shout_sound = _( "hiss" );
+        else if( actor( false )->has_trait( trait_GROWL ) ) shout_sound = _( "growl" );
+        else if( actor( false )->has_trait( trait_SNARL ) ) shout_sound = _( "snarl" );
+        else if( actor( false )->has_trait( trait_SHOUT2 ) ) shout_sound = _( "scream" );
+        else if( actor( false )->has_trait( trait_CROAK ) )  shout_sound = _( "croak" );
+        else if( actor( false )->has_trait( trait_SCREECH ) ) shout_sound = _( "screech" );
+        else if( actor( false )->has_trait( trait_SHOUT3 ) )  shout_sound = _( "howl" );
+        else if( actor( false )->has_bionic( bio_voice ) )  shout_sound = _( "drone" );
         if( actor( false )->is_deaf() ) {
-            return _( "&You yell, but can't hear yourself." );
+            return string_format( _( "&You %s, but can't hear yourself." ), shout_sound );
         } else {
             if( actor( false )->is_mute() ) {
-                return _( "&You yell, but can't form words." );
+                return string_format( _( "&You %s, but can't form words." ), shout_sound );
             } else {
-                return _( "&You yell." );
+                return string_format( _( "&You %s." ), shout_sound );
             }
         }
     } else if( topic == "TALK_SIZE_UP" ) {
@@ -2057,14 +2070,6 @@ void dialogue::gen_responses( const talk_topic &the_topic )
     if( actor( false )->has_trait( trait_DEBUG_MIND_CONTROL ) && !actor( true )->is_player_ally() ) {
         add_response( _( "OBEY ME!" ), "TALK_MIND_CONTROL" );
         add_response_done( _( "Bye." ) );
-    }
-
-    if( player_character.has_trait( trait_PROF_CHURL ) && ( actor( true )->get_npc_trust() >= 0 ) &&
-        ( actor( true )->get_npc_anger() <= 0 ) && ( actor( true )->int_cur() >= 9 ) &&
-        !( the_topic.id == "TALK_CHURL_FRIENDLY" ) ) {
-        add_response( _( "Ho there, otherwyrldly devyl!  Have yow ware for to chaffare?" ),
-                      "TALK_CHURL_FRIENDLY" );
-        add_response_done( _( "Farewell!" ) );
     }
 
     if( responses.empty() ) {

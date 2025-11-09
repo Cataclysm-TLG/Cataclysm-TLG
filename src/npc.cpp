@@ -84,6 +84,8 @@
 #include "vpart_position.h"
 #include "vpart_range.h"
 
+static const bionic_id bio_voice( "bio_voice" );
+
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_controlled( "controlled" );
 static const efftype_id effect_drunk( "drunk" );
@@ -166,15 +168,22 @@ static const skill_id skill_throw( "throw" );
 static const skill_id skill_unarmed( "unarmed" );
 
 static const trait_id trait_BEE( "BEE" );
+static const trait_id trait_CROAK( "CROAK" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
+static const trait_id trait_GROWL( "GROWL" );
 static const trait_id trait_GUILELESS( "GUILELESS" );
 static const trait_id trait_HALLUCINATION( "HALLUCINATION" );
+static const trait_id trait_HISS( "HISS" );
 static const trait_id trait_LIAR( "LIAR" );
 static const trait_id trait_NO_BASH( "NO_BASH" );
 static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PACIFIST( "PACIFIST" );
 static const trait_id trait_PROF_DICEMASTER( "PROF_DICEMASTER" );
 static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
+static const trait_id trait_SCREECH( "SCREECH" );
+static const trait_id trait_SHOUT2( "SHOUT2" );
+static const trait_id trait_SHOUT3( "SHOUT3" );
+static const trait_id trait_SNARL( "SNARL" );
 static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
 static const trait_id trait_TERRIFYING( "TERRIFYING" );
 
@@ -1961,6 +1970,16 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
         return;
     }
 
+    std::string speak_sound = _( "saying" );
+    if( has_trait( trait_HISS ) ) speak_sound = _( "hissing" );
+    else if( has_trait( trait_GROWL ) ) speak_sound = _( "growling" );
+    else if( has_trait( trait_SNARL ) ) speak_sound = _( "snarling" );
+    else if( has_trait( trait_SHOUT2 ) ) speak_sound = _( "screaming" );
+    else if( has_trait( trait_CROAK ) )  speak_sound = _( "croaking" );
+    else if( has_trait( trait_SCREECH ) ) speak_sound = _( "screeching" );
+    else if( has_trait( trait_SHOUT3 ) )  speak_sound = _( "howling" );
+    else if( has_bionic( bio_voice ) )  speak_sound = _( "droning" );
+
     if( player_character.is_deaf() && !player_character.is_blind() ) {
         add_msg_if_player_sees( *this, m_warning, _( "%1$s says something but you can't hear it!" ),
                                 get_name() );
@@ -1971,11 +1990,11 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
     }
     // Hallucinations don't make noise when they speak
     if( is_hallucination() ) {
-        add_msg( _( "%1$s saying \"%2$s\"" ), get_name(), formatted_line );
+        add_msg( _( "%1$s %2$s, \"%3$s\"" ), get_name(), speak_sound, formatted_line );
         return;
     }
 
-    std::string sound = string_format( _( "%1$s saying \"%2$s\"" ), get_name(), formatted_line );
+    std::string sound = string_format( _( "%1$s %2$s, \"%3$s\"" ), get_name(), speak_sound, formatted_line );
 
     // Sound happens even if we can't hear it
     if( spriority == sounds::sound_t::order || spriority == sounds::sound_t::alert ) {
