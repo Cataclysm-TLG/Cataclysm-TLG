@@ -388,7 +388,7 @@
       "items": [ { "item": "black_glass_shard", "count": [ 40, 80 ] } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.7, "mass": 2000, "volume": "75 L" }
+    "workbench": { "multiplier": 1.0, "mass": 2000, "volume": "75 L" }
   },
   {
     "type": "furniture",
