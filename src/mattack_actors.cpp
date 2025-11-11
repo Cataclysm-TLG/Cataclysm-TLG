@@ -616,10 +616,10 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
                     }
                     if( rng( 0, vehicle_velocity ) + driver_ability < rng( 0, eff_grab_strength ) ) {
                         add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s beat driver ability %2s at %3s mph.", eff_grab_strength, driver_ability, vehicle_velocity );
-                        here.unboard_vehicle( target->pos_bub(), true );
+                        here.unboard_vehicle( target->pos_bub(), false );
                         foe->add_msg_if_player( m_bad, _( "You are yanked out of your seat!" ) );
-                        foe->add_effect( effect_downed, 1_seconds );
                         foe->add_effect( effect_airborne, 1_seconds );
+                        foe->add_effect( effect_downed, 3_seconds );
                         foe->mod_moves( -to_moves<int>( 1_seconds ) );
                     } else {
                         add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s lost to driver ability %2s at %3s mph.", eff_grab_strength, driver_ability, vehicle_velocity );
