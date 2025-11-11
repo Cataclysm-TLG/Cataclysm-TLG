@@ -46,6 +46,7 @@
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
 
+static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_pet( "pet" );
@@ -2209,6 +2210,9 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
         Creature *rider = r.psg;
         if( rider == nullptr ) {
             debugmsg( "throw passenger: empty passenger at part %d", ps );
+            continue;
+        }
+        if( rider->has_effect( effect_airborne ) ) {
             continue;
         }
 
