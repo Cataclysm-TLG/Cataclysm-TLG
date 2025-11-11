@@ -1,5 +1,5 @@
-#include <iosfwd>
-#include <list>
+#include <functional>
+#include <initializer_list>
 #include <memory>
 #include <string>
 #include <vector>
@@ -9,6 +9,9 @@
 #include "calendar.h"
 #include "cata_catch.h"
 #include "character.h"
+#include "character_attire.h"
+#include "coordinates.h"
+#include "flag.h"
 #include "item.h"
 #include "itype.h"
 #include "map_helpers.h"
@@ -482,50 +485,58 @@ TEST_CASE( "reading_a_book_with_an_ebook_reader", "[reading][book][ereader]" )
     avatar &dummy = get_avatar();
     clear_avatar();
 
-    WHEN( "reading a book" ) {
+    WHEN( "having a book in the inventory" ) {
 
-        dummy.worn.wear_item( dummy, item( "backpack" ), false, false );
-        dummy.i_add( item( "atomic_lamp" ) );
-        REQUIRE( dummy.fine_detail_vision_mod() == 1 );
+        dummy.worn.wear_item( dummy, item( itype_backpack ), false, false );
+        item_location ereader = dummy.i_add( item( itype_test_ebook_reader ) );
 
-        item_location ereader = dummy.i_add( item( "test_ebook_reader" ) );
+        item book( itype_test_textbook_fabrication );
+        ereader->put_in( book, pocket_type::E_FILE_STORAGE );
+        REQUIRE( ereader->has_flag( flag_CAN_USE_IN_DARK ) );
 
-        item book{"test_textbook_fabrication"};
-        ereader->put_in( book, pocket_type::EBOOK );
+        item *ebook = ereader->get_item_with( [&]( const item & it ) {
+            return it.typeId() == book.typeId();
+        } );
+        REQUIRE_FALSE( ebook->is_null() );
+
+        // CAN_USE_IN_DARK should get inherited from the ereader.
+        REQUIRE( ebook->has_flag( flag_CAN_USE_IN_DARK ) );
 
         item battery( "test_battery_disposable" );
         battery.ammo_set( battery.ammo_default(), 100 );
         ereader->put_in( battery, pocket_type::MAGAZINE_WELL );
+        item_location booklc{dummy, ebook};
+        REQUIRE( booklc );
 
-        THEN( "player can read the book" ) {
+        WHEN( "it is bright outside" ) {
+            dummy.i_add( item( itype_atomic_lamp ) );
+            REQUIRE( dummy.fine_detail_vision_mod() == 1 );
+            test_ebook_is_reading( dummy, ereader, booklc );
+        }
 
-            item_location booklc{dummy, &book};
-            read_activity_actor actor( dummy.time_to_read( *booklc, dummy ), booklc, ereader, true );
-            dummy.activity = player_activity( actor );
+        REQUIRE( ereader->ammo_remaining( ) == 100 );
 
-            REQUIRE( ereader->ammo_remaining() == 100 );
+        dummy.activity.start_or_resume( dummy, false );
+        REQUIRE( dummy.activity.id() == ACT_READ );
 
-            dummy.activity.start_or_resume( dummy, false );
-            REQUIRE( dummy.activity.id() == ACT_READ );
+        CHECK( ereader->ammo_remaining( ) == 99 );
 
-            CHECK( ereader->ammo_remaining() == 99 );
+        dummy.activity.do_turn( dummy );
 
-            dummy.activity.do_turn( dummy );
+        CHECK( dummy.activity.id() == ACT_READ );
 
-            CHECK( dummy.activity.id() == ACT_READ );
+        AND_THEN( "ereader has spent a charge while reading" ) {
+            CHECK( ereader->ammo_remaining( ) == 98 );
 
-            AND_THEN( "ereader has spent a charge while reading" ) {
-                CHECK( ereader->ammo_remaining() == 98 );
+            AND_THEN( "ereader runs out of battery" ) {
+                ereader->ammo_consume( ereader->ammo_remaining( ), dummy.pos_bub(), &dummy );
+                dummy.activity.do_turn( dummy );
 
-                AND_THEN( "ereader runs out of battery" ) {
-                    ereader->ammo_consume( ereader->ammo_remaining(), dummy.pos(), &dummy );
-                    dummy.activity.do_turn( dummy );
-
-                    THEN( "reading stops" ) {
-                        CHECK( dummy.activity.id() != ACT_READ );
-                    }
+                THEN( "reading stops" ) {
+                    CHECK( dummy.activity.id() != ACT_READ );
                 }
             }
         }
     }
+}
 }

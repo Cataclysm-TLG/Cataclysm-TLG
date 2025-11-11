@@ -34,6 +34,8 @@ static const recipe_id recipe_vegetable_wild_cooked( "vegetable_wild_cooked" );
 
 static const trait_id trait_GOURMAND( "GOURMAND" );
 
+static const trait_id trait_GOURMAND( "GOURMAND" );
+
 static const vitamin_id vitamin_mutagen( "mutagen" );
 static const vitamin_id vitamin_mutagen_alpha( "mutagen_alpha" );
 static const vitamin_id vitamin_mutagen_batrachian( "mutagen_batrachian" );

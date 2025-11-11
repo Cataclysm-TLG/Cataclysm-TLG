@@ -81,11 +81,11 @@ TEST_CASE( "visitable_remove", "[visitable]" )
 
     // move player randomly until we find a suitable position
     constexpr int num_trials = 100;
-    for( int i = 0; i < num_trials && !suitable( p.pos_bub(), 1 ); ++i ) {
+    for( int i = 0; i < num_trials && !suitable( p.pos_bub( here ), 1 ); ++i ) {
         CHECK( !p.in_vehicle );
-        p.setpos( random_entry( closest_points_first( p.pos_bub(), 1 ) ) );
+        p.setpos( here, random_entry( closest_points_first( p.pos_bub( here ), 1 ) ) );
     }
-    REQUIRE( suitable( p.pos_bub(), 1 ) );
+    REQUIRE( suitable( p.pos_bub( here ), 1 ) );
 
     item temp_liquid( liquid_id );
     item obj = temp_liquid.in_container( temp_liquid.type->default_container.value_or( itype_null ) );
@@ -327,7 +327,7 @@ TEST_CASE( "visitable_remove", "[visitable]" )
         REQUIRE( our + adj == count );
 
         map_selector sel( p.pos_bub(), 1 );
-        map_cursor cur( p.get_location() );
+        map_cursor cur( p.pos_abs() );
 
         REQUIRE( count_items( sel, container_id ) == count );
         REQUIRE( count_items( sel, liquid_id ) == count );
@@ -441,10 +441,10 @@ TEST_CASE( "visitable_remove", "[visitable]" )
         // Empty the vehicle of any cargo.
         v->get_items( vp->part() ).clear();
         for( int i = 0; i != count; ++i ) {
-            v->add_item( vp->part(), obj );
+            v->add_item( here,  vp->part(), obj );
         }
 
-        vehicle_selector sel( p.pos_bub(), 1 );
+        vehicle_selector sel( here,  p.pos_bub( here ), 1 );
 
         REQUIRE( count_items( sel, container_id ) == count );
         REQUIRE( count_items( sel, liquid_id ) == count );

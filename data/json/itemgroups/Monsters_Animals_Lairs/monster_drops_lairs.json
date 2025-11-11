@@ -5,7 +5,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "vegetable", "prob": 30 },
+      { "item": "triffid_meat", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
       { "item": "vegetable_tainted", "prob": 35 },
       { "item": "royal_jelly", "prob": 8 },
@@ -22,7 +22,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "meat", "prob": 50 },
-      { "item": "vegetable", "prob": 30 },
+      { "item": "triffid_meat", "prob": 30 },
       { "item": "meat_tainted", "prob": 60 },
       { "item": "vegetable_tainted", "prob": 35 },
       { "item": "apple", "prob": 70 },
@@ -198,7 +198,6 @@
       { "item": "acidchitin_piece", "prob": 30 },
       { "item": "endochitin", "prob": 70 },
       { "item": "mutant_bug_hydrogen_sacs", "prob": 30 },
-      { "item": "mutant_bug_lungs", "prob": 10, "count": 4 },
       { "item": "mutant_bug_organs", "prob": 10 },
       { "item": "sinew", "prob": 10 },
       { "item": "bee_sting", "prob": 10 }
@@ -238,19 +237,16 @@
   {
     "type": "item_group",
     "id": "human_parts",
-    "//": "(demi)human remains",
+    "//": "human remains",
     "subtype": "distribution",
     "entries": [
       { "item": "skull_human", "prob": 20 },
       { "item": "bone_human", "prob": 80 },
       { "item": "raw_hleather", "prob": 30 },
-      { "item": "raw_demihumanleather", "prob": 5 },
       { "item": "raw_hfur", "prob": 1 },
       { "item": "sinew", "prob": 5 },
       { "item": "hstomach", "prob": 5 },
-      { "item": "demihuman_stomach", "prob": 1 },
-      { "item": "hstomach_large", "prob": 5 },
-      { "item": "demihuman_stomach_large", "prob": 1 }
+      { "item": "hstomach_large", "prob": 5 }
     ]
   },
   {
@@ -297,9 +293,10 @@
       { "item": "transponder", "prob": 5 },
       { "item": "receiver", "prob": 10 },
       { "item": "antenna", "prob": 18 },
-      { "item": "laptop", "prob": 20, "charges": [ 0, 500 ] },
-      { "item": "eink_tablet_pc", "prob": 8, "charges": [ 0, 500 ] },
-      { "item": "memory_card_unread", "prob": 16 },
+      { "group": "civilian_laptops", "prob": 20 },
+      { "group": "civilian_eink_tablet_pcs", "prob": 8 },
+      { "group": "civilian_memory_cards", "prob": 5 },
+      { "group": "civilian_usb_drives", "prob": 15 },
       { "item": "camera", "prob": 3, "charges": [ 0, 150 ] },
       { "item": "camera", "container-item": "camera_bag", "prob": 2, "charges": [ 0, 150 ] },
       { "item": "camera_pro", "prob": 1, "charges": [ 0, 150 ] },
@@ -318,7 +315,6 @@
       { "item": "mp3", "prob": 18, "charges": [ 0, 100 ] },
       { "item": "solar_cell", "prob": 5 },
       { "item": "flyer", "prob": 10 },
-      { "item": "usb_drive", "prob": 5 },
       { "item": "lsd", "prob": 1, "count": [ 1, 5 ] },
       { "item": "gum", "prob": 20, "count": [ 1, 10 ] },
       { "item": "caff_gum", "prob": 8, "count": [ 1, 10 ] },

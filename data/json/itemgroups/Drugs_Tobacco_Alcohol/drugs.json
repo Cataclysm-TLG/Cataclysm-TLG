@@ -108,28 +108,28 @@
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "adhesive_bandages", "prob": 100, "count": 20 } ]
+    "items": [ { "item": "adhesive_bandages", "prob": 100, "count": 10 } ]
   },
   {
     "id": "adhesive_bandages_box_used",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "adhesive_bandages", "prob": 100, "count": [ 1, 20 ] } ]
+    "items": [ { "item": "adhesive_bandages", "prob": 100, "count": [ 1, 10 ] } ]
   },
   {
     "id": "alcohol_wipes_box_full",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "alcohol_wipes", "prob": 100, "count": 40 } ]
+    "items": [ { "item": "alcohol_wipes", "prob": 100, "count": 10 } ]
   },
   {
     "id": "alcohol_wipes_box_used",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "alcohol_wipes", "prob": 100, "count": [ 1, 40 ] } ]
+    "items": [ { "item": "alcohol_wipes", "prob": 100, "count": [ 1, 10 ] } ]
   },
   {
     "id": "cotton_ball_bag_full",
@@ -150,28 +150,28 @@
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "tampon", "prob": 100, "container-item": "null", "count": 24 } ]
+    "items": [ { "item": "tampon", "prob": 100, "container-item": "null", "count": 18 } ]
   },
   {
     "id": "tampon_box_used",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "tampon", "prob": 100, "container-item": "null", "count": [ 1, 24 ] } ]
+    "items": [ { "item": "tampon", "prob": 100, "container-item": "null", "count": [ 1, 18 ] } ]
   },
   {
     "id": "menstrual_pad_box_full",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "menstrual_pad", "prob": 100, "count": 24 } ]
+    "items": [ { "item": "menstrual_pad", "prob": 100, "count": 18 } ]
   },
   {
     "id": "menstrual_pad_box_used",
     "type": "item_group",
     "subtype": "collection",
     "container-item": "box_small",
-    "items": [ { "item": "menstrual_pad", "prob": 100, "count": [ 1, 24 ] } ]
+    "items": [ { "item": "menstrual_pad", "prob": 100, "count": [ 1, 18 ] } ]
   },
   {
     "id": "drugs_analgesic",
@@ -211,7 +211,7 @@
       [ "disinfectant", 30 ],
       [ "eyedrops", 10 ],
       [ "medical_gauze", 20 ],
-      [ "medical_tape", 20 ],
+      { "group": "medical_tape_roll_part", "prob": 20 },
       [ "pepto", 20 ],
       [ "tums", 20 ],
       [ "saline", 10 ],
@@ -229,8 +229,7 @@
       [ "jar_3l_glass_sealed", 15 ],
       [ "hygrometer", 3 ],
       [ "chem_nitric_acid", 15 ],
-      [ "denat_alcohol", 60 ],
-      [ "methed_alcohol", 40 ],
+      [ "denat_alcohol", 100 ],
       [ "thermometer", 50 ],
       [ "flu_shot", 50 ],
       [ "disinfectant", 35 ]

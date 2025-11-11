@@ -274,7 +274,7 @@ int Character::max_quality( const quality_id &qual ) const
     }
 
     if( qual == qual_BUTCHER ) {
-        for( const trait_id &mut : get_mutations() ) {
+        for( const trait_id &mut : get_functioning_mutations() ) {
             res = std::max( res, mut->butchering_quality );
         }
     }
@@ -288,7 +288,7 @@ int Character::max_quality( const quality_id &qual, int radius ) const
 
     if( radius > 0 ) {
         res = std::max( res,
-                        crafting_inventory( tripoint_zero, radius, true )
+                        crafting_inventory( tripoint_bub_ms::zero, radius, true )
                         .max_quality( qual ) );
     }
 
@@ -499,16 +499,16 @@ static VisitResponse visit_items_internal( map *here,
 VisitResponse map_cursor::visit_items(
     const std::function<VisitResponse( item *, item * )> &func ) const
 {
-    if( get_map().inbounds( pos() ) ) {
-        return visit_items_internal( &get_map(), pos(), func );
+    if( get_map().inbounds( pos_bub() ) ) {
+        return visit_items_internal( &get_map(), pos_bub(), func );
     } else {
         tinymap here; // Tinymap is sufficient. Only looking at single location, so no Z level need.
         // pos returns the pos_bub location of the target relative to the reality bubble
         // even though the location isn't actually inside of it. Thus, we're loading a map
         // around that location to do our work.
-        tripoint_abs_ms abs_pos = get_map().getglobal( pos() );
+        const tripoint_abs_ms abs_pos = pos_abs();
         here.load( project_to<coords::omt>( abs_pos ), false );
-        tripoint_omt_ms p = here.omt_from_abs( abs_pos );
+        tripoint_omt_ms p = here.get_omt( abs_pos );
         return visit_items_internal( here.cast_to_map(), rebase_bub( p ), func );
     }
 }
@@ -709,14 +709,14 @@ std::list<item> map_cursor::remove_items_with( const
     }
 
     map &here = get_map();
-    if( !here.inbounds( pos() ) ) {
+    if( !here.inbounds( pos_bub() ) ) {
         debugmsg( "cannot remove items from map: cursor out-of-bounds" );
         return res;
     }
 
     // fetch the appropriate item stack
     point_sm_ms offset;
-    submap *sub = here.get_submap_at( pos(), offset );
+    submap *sub = here.get_submap_at( pos_bub(), offset );
     cata::colony<item> &stack = sub->get_items( offset );
 
     for( auto iter = stack.begin(); iter != stack.end(); ) {
@@ -819,6 +819,8 @@ static int charges_of_internal( const T &self, const M &main, const itype_id &id
                                 const std::function<bool( const item & )> &filter,
                                 const std::function<void( int )> &visitor, bool in_tools )
 {
+    map &here = get_map();
+
     int qty = 0;
 
     bool found_tool_with_UPS = false;
@@ -832,7 +834,7 @@ static int charges_of_internal( const T &self, const M &main, const itype_id &id
                 if( e->count_by_charges() ) {
                     qty = sum_no_wrap( qty, e->charges );
                 } else {
-                    qty = sum_no_wrap( qty, e->ammo_remaining( nullptr, true ) );
+                    qty = sum_no_wrap( qty, e->ammo_remaining_linked( here, nullptr ) );
                 }
                 if( e->has_flag( STATIC( flag_id( "USE_UPS" ) ) ) ) {
                     found_tool_with_UPS = true;
@@ -840,7 +842,7 @@ static int charges_of_internal( const T &self, const M &main, const itype_id &id
                     found_bionic_tool = true;
                 }
             } else if( id == itype_UPS && e->has_flag( flag_IS_UPS ) ) {
-                qty = sum_no_wrap( qty, e->ammo_remaining( nullptr, true ) );
+                qty = sum_no_wrap( qty, e->ammo_remaining_linked( here, nullptr ) );
             }
         }
         if( qty >= limit ) {

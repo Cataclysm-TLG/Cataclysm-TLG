@@ -369,20 +369,6 @@
   },
   {
     "type": "snippet",
-    "category": "mutant_bug_lung_desc",
-    "text": [
-      {
-        "id": "mutant_bug_lung_1",
-        "text": "You're pretty sure this is lung tissue.  It looks like a lung from a larger mammal, like a dog, but instead of a few distinct lobes, it has dozens of lobes arranged in sheets.  Strange spindles and gnarled tumescences dot the surface."
-      },
-      {
-        "id": "mutant_bug_lung_2",
-        "text": "You're pretty sure this is lung tissue.  It has a vaguely wing-like shape, with a series of nodules around what would be the trailing edge of the 'wing'.  A cluster of quills in each corner of the organ held it to the bug's carapace like clasps."
-      }
-    ]
-  },
-  {
-    "type": "snippet",
     "category": "chitin_desc",
     "text": [
       {
@@ -429,32 +415,32 @@
     "type": "snippet",
     "category": "<bug_harvest_general_deeper>",
     "text": [
-      "Spaced evenly across the entire body you find small sacs of eggs in various stages of growth",
-      "Its intestines grew into a labyrinthine tangle, like so many worms devouring each other",
-      "Inside, half-formed organs press against spongy meat that doesn't look anything like raw arthropod meat from normal creatures",
-      "Beneath, you find a collection of hooked spines that seem to have been clasping it on somehow",
-      "Inside is a complex, still-squirming mess of strange appendages and organs that bear only a passing resemblance to any natural creature",
-      "Beneath the chitin, the meat is covered in thick, bristly hair hiding a chaotic bramble of half-formed, mutated organs",
-      "Inside is a tangled mess of organs and tissues that do not appear entirely natural",
-      "Inside the creature you find lungs, hearts, and intestines more like a mammal than a giant bug",
-      "Despite the apparent death of the whole, some organs still pump, beat, and churn on undisturbed"
+      "This carcass is riddled with what look like immature clusters of eggs.  Whether these are parasites or part of the animal's reproductive system is unclear.",
+      "Its intestines grew into a labyrinthine tangle, like so many worms devouring each other.",
+      "Some of the innards look a bit like tomalley, more of a paste than a distinct organ.",
+      "Chitinous ridges of hooked spines along struts and sheets of the same material give support the creature's interior and hold it all together.",
+      "Flaps of soft tissue folded over each other like pages of a book line the creature's underside, almost resembling gills.",
+      "Beneath the chitin, the meat is covered in thick, bristly hair hiding a chaotic bramble of half-formed, mutated organs.",
+      "Inside is a tangled mess of organs and tissues that do not appear healthy or natural.  It's hard to make sense of it, but the knots of leather-hard dessicated tissue among its organs suggest disease.",
+      "This specimen looks much worse on the inside than out: malformed legs, mouthparts, and eyes compete for space with its organs like parasitic octuplets.",
+      "Rudimentary vessels branch out from the creature's heart, spiraling through the muscle in chaotic, twisted patterns."
     ]
   },
   {
     "type": "snippet",
     "category": "<bug_harvest_general_descriptive>",
     "text": [
-      "The meat inside gives off a horrifying stench, and seems to be covered in thin damp hair, like a newborn animal gone horribly wrong",
-      "Small bundles of fiber break loose as you work, splitting open to reveal twisted, half-formed copies of the creature itself",
-      "It is difficult to work as the spongey tissue tears apart under your tools",
-      "Despite its outward appearance, both the organs and the endolymph of this creature are pristinely white",
-      "Some of your cuts meet nerves, and the already stiff corpse shudders with movement each time",
-      "You follow what you think are superfluous veins into the deep, finding a gorged, tick-like creature at their convergence",
-      "Every cut reveals an organ you can't quite recognize, and you start to wonder what your insides look like by now",
-      "You are dizzied by the rainbow coloration of the creature's muscles, clashing with the bloody mess in its guts",
-      "As you cut into its flesh you are disturbed by its sickly-sweet smell, like fermenting fruit",
-      "There are fist-sized globs of nervous tissue dotted about its insides, sending the corpse into a spasm every time you touch one",
-      "The muscles grow stiff, and begin leaking a dark gray liquid that pools around your feet"
+      "The meat inside gives off a horrifying stench and seems to be covered in thin damp hair, like a newborn animal gone horribly wrong.",
+      "Small bundles of fiber break loose as you work, splitting open to reveal twisted, half-formed copies of the creature itself.",
+      "It is difficult to work as the slimy tissue tears apart like wet paper under your blade.",
+      "The creature's endolymph is a thick yellow-green with bits of brownish sediment suspended within.",
+      "Some of your cuts meet nerves, and the already stiff corpse shudders with movement each time.",
+      "You follow what you think are superfluous veins into the deep, finding a gorged, tick-like creature at their convergence.",
+      "Every cut reveals an organ you can't quite recognize, and you start to wonder what your insides look like by now.",
+      "You are dizzied by the rainbow coloration of the creature's muscles, clashing with the bloody mess in its guts.",
+      "As you cut into its flesh you are disturbed by its sickly-sweet smell, like fermenting fruit.",
+      "There are fist-sized globs of nervous tissue dotted about its insides, sending the corpse into a spasm every time you touch one.",
+      "The muscles grow stiff, and begin leaking a dark gray liquid that pools around your feet."
     ]
   },
   {

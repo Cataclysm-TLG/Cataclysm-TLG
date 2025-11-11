@@ -89,7 +89,7 @@
       "!": { "item": "steel_mill_mill", "chance": 45 },
       "1": { "item": "steel_mill_foundry", "chance": 65 },
       "l": { "item": "clothing_work_set", "chance": 15 },
-      "H": { "item": "homebooks", "chance": 30 },
+      "S": { "item": "homebooks", "chance": 30 },
       "7": { "item": "office_paper", "chance": 30 }
     },
     "toilets": { "t": {  } },

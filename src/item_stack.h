@@ -37,7 +37,7 @@ class item_stack
 
         size_t size() const;
         bool empty() const;
-        virtual void insert( const item &newitem ) = 0;
+        virtual void insert( map &here, const item &newitem ) = 0;
         virtual iterator erase( const_iterator it ) = 0;
         virtual void clear();
         // Will cause a debugmsg if there is not exactly one item at the location
@@ -85,7 +85,7 @@ class item_stack
         * @param filter Must return true for use to occur.
         * @return Duplicates of each item that provided consumed charges
         */
-        std::list<item> use_charges( const itype_id &type, int &quantity, const tripoint &pos,
+        std::list<item> use_charges( const itype_id &type, int &quantity, const tripoint_bub_ms &pos,
                                      const std::function<bool( const item & )> &filter, bool in_tools = false );
 };
 

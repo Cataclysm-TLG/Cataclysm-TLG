@@ -16,6 +16,7 @@
 #include "game.h"
 #include "input.h"
 #include "memory_fast.h"
+#include "options.h"
 #include "output.h"
 #include "sdltiles.h"
 #include "string_input_popup.h"
@@ -26,7 +27,6 @@
 #include <jni.h>
 #include <SDL_keyboard.h>
 
-#include "options.h"
 #endif
 
 catacurses::window new_centered_win( int nlines, int ncols )
@@ -1351,25 +1351,25 @@ int uimenu::query()
 }
 
 struct pointmenu_cb::impl_t {
-    const std::vector< tripoint > &points;
+    const std::vector< tripoint_bub_ms > &points;
     int last; // to suppress redrawing
     tripoint_rel_ms last_view; // to reposition the view after selecting
     shared_ptr_fast<game::draw_callback_t> terrain_draw_cb;
 
-    explicit impl_t( const std::vector<tripoint> &pts );
+    explicit impl_t( const std::vector<tripoint_bub_ms> &pts );
     ~impl_t();
 
     void select( uilist *menu );
 };
 
-pointmenu_cb::impl_t::impl_t( const std::vector<tripoint> &pts ) : points( pts )
+pointmenu_cb::impl_t::impl_t( const std::vector<tripoint_bub_ms> &pts ) : points( pts )
 {
     last = INT_MIN;
     avatar &player_character = get_avatar();
     last_view = player_character.view_offset;
     terrain_draw_cb = make_shared_fast<game::draw_callback_t>( [this, &player_character]() {
         if( last >= 0 && static_cast<size_t>( last ) < points.size() ) {
-            g->draw_trail_to_square( player_character.view_offset.raw(), true );
+            g->draw_trail_to_square( player_character.view_offset, true );
         }
     } );
     g->add_draw_callback( terrain_draw_cb );
@@ -1388,17 +1388,18 @@ void pointmenu_cb::impl_t::select( uilist *const menu )
     last = menu->selected;
     avatar &player_character = get_avatar();
     if( menu->selected < 0 || menu->selected >= static_cast<int>( points.size() ) ) {
-        player_character.view_offset = tripoint_rel_ms_zero;
+        player_character.view_offset = tripoint_rel_ms::zero;
     } else {
-        const tripoint &center = points[menu->selected];
-        player_character.view_offset = tripoint_rel_ms( center - player_character.pos() );
+        const tripoint_bub_ms &center = points[menu->selected];
+        player_character.view_offset = center - player_character.pos_bub();
         // TODO: Remove this line when it's safe
         player_character.view_offset.z() = 0;
     }
     g->invalidate_main_ui_adaptor();
 }
 
-pointmenu_cb::pointmenu_cb( const std::vector<tripoint> &pts ) : impl( pts )
+
+pointmenu_cb::pointmenu_cb( const std::vector<tripoint_bub_ms> &pts ) : impl( pts )
 {
 }
 

@@ -1,12 +1,6 @@
 [
   {
     "type": "attack_vector",
-    "id": "vector_null",
-    "//": "Fallback weapon vector, unarmed attacks always go through techs",
-    "weapon": true
-  },
-  {
-    "type": "attack_vector",
     "id": "test_test",
     "limbs": [ "debug_tail" ],
     "encumbrance_limit": 33,
@@ -30,6 +24,13 @@
   {
     "type": "attack_vector",
     "id": "vector_bite",
+    "limbs": [ "mouth" ],
+    "contact_area": [ "mouth_lips" ],
+    "natural_attack": true
+  },
+  {
+    "type": "attack_vector",
+    "id": "vector_tongue",
     "limbs": [ "mouth" ],
     "contact_area": [ "mouth_lips" ],
     "natural_attack": true

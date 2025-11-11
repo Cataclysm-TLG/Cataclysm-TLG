@@ -362,16 +362,6 @@
             }
           ]
         },
-        {
-          "concatenate": [
-            { "npc_override": "hold_the_line", "yes": "  OVERRIDE: ", "no": "  " },
-            {
-              "npc_rule": "hold_the_line",
-              "yes": "<ally_rule_hold_the_line_true_text>",
-              "no": "<ally_rule_hold_the_line_false_text>"
-            }
-          ]
-        },
         "  What should <mypronoun> do?"
       ]
     },
@@ -433,15 +423,6 @@
         },
         "topic": "TALK_COMBAT_COMMANDS",
         "effect": { "toggle_npc_rule": "avoid_friendly_fire" }
-      },
-      {
-        "truefalsetext": {
-          "condition": { "npc_rule": "hold_the_line" },
-          "true": "Move wherever you need to go to fight an enemy.",
-          "false": "Hold the line: don't move onto obstacles adjacent to me."
-        },
-        "topic": "TALK_COMBAT_COMMANDS",
-        "effect": { "toggle_npc_rule": "hold_the_line" }
       },
       { "text": "Never mind.", "topic": "TALK_NONE" }
     ]
@@ -765,6 +746,16 @@
         },
         {
           "concatenate": [
+            { "npc_override": "heal_others", "yes": "  OVERRIDE: ", "no": "  " },
+            {
+              "npc_rule": "heal_others",
+              "yes": "<ally_rule_heal_others_true_text>",
+              "no": "<ally_rule_heal_others_false_text>"
+            }
+          ]
+        },
+        {
+          "concatenate": [
             { "npc_override": "allow_pulp", "yes": "  OVERRIDE: ", "no": "  " },
             {
               "npc_rule": "allow_pulp",
@@ -861,6 +852,15 @@
         "truefalsetext": { "condition": { "npc_rule": "allow_complain" }, "true": "Stay quiet.", "false": "Tell me when you need something." },
         "topic": "TALK_MISC_RULES",
         "effect": { "toggle_npc_rule": "allow_complain" }
+      },
+      {
+        "truefalsetext": {
+          "condition": { "npc_rule": "heal_others" },
+          "true": "Save your medical supplies for yourself.",
+          "false": "Use your medical supplies to heal others."
+        },
+        "topic": "TALK_MISC_RULES",
+        "effect": { "toggle_npc_rule": "heal_others" }
       },
       {
         "truefalsetext": { "condition": { "npc_rule": "allow_pulp" }, "true": "Leave corpses alone.", "false": "Smash zombie corpses." },

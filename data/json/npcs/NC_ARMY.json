@@ -125,10 +125,10 @@
     "id": "NC_ARMY_stabbing",
     "subtype": "distribution",
     "entries": [
-      { "item": "spear_knife", "prob": 50 },
+      { "item": "spear_knife", "prob": 10 },
+      { "item": "sharpened_pipe", "prob": 10 },
       { "item": "spear_steel", "prob": 10 },
-      { "item": "spear_forked", "prob": 10 },
-      { "item": "spear_rebar", "prob": 5 }
+      { "item": "spear_wood", "prob": 15 }
     ]
   },
   {

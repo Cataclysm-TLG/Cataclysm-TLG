@@ -447,14 +447,14 @@ void test_scenario::run()
             std::optional<vpart_reference> vp =
                 here.veh_at( guy.pos_bub() ).part_with_feature( vpart_bitflags::VPFLAG_CARGO, true );
             REQUIRE( vp.has_value() );
-            std::optional<vehicle_stack::iterator> added = veh->add_item( vp->part(), it );
+            std::optional<vehicle_stack::iterator> added = veh->add_item( here, vp->part(), it );
             REQUIRE( added.has_value() );
             it_loc = item_location( vehicle_cursor( vp->vehicle(), vp->part_index() ), & **added );
             break;
         }
         case container_location::ground: {
             item &added = here.add_item( guy.pos_bub(), it );
-            it_loc = item_location( map_cursor( guy.get_location() ), &added );
+            it_loc = item_location( map_cursor( guy.pos_abs() ), &added );
             break;
         }
         default: {
@@ -469,7 +469,7 @@ void test_scenario::run()
     }
 
     std::string player_action_str;
-    restore_on_out_of_scope<test_mode_spilling_action_t> restore_test_mode_spilling(
+    restore_on_out_of_scope restore_test_mode_spilling(
         test_mode_spilling_action );
     switch( cur_player_action ) {
         case player_action::spill_all: {
@@ -862,7 +862,7 @@ void test_scenario::run()
         REQUIRE( !it_loc );
     }
     INFO( "checking ground items" );
-    match( map_cursor( guy.get_location() ), here.i_at( guy.pos_bub() ), ground );
+    match( map_cursor( guy.pos_abs() ), here.i_at( guy.pos_bub() ), ground );
     INFO( "checking vehicle items" );
     std::optional<vpart_reference> vp = here.veh_at( guy.pos_bub() )
                                         .part_with_feature( vpart_bitflags::VPFLAG_CARGO, true );

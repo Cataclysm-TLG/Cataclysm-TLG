@@ -87,12 +87,12 @@
       "palettes": [ "movie_theater_palette.json" ],
       "terrain": { "C": "t_thconc_floor", "H": "t_thconc_floor", "y": "t_thconc_floor" },
       "toilets": { "&": {  } },
-      "vendingmachines": { "v": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+      "vendingmachines": { "v": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
       "items": {
-        "&": { "item": "alcohol", "chance": 10 },
+        "&": [ { "item": "alcohol", "chance": 8 }, { "item": "SUS_toilet", "chance": 50 } ],
         "T": { "item": "snacks", "chance": 5 },
-        "X": { "item": "snacks", "chance": 30, "repeat": [ 6, 12 ] },
-        "g": { "item": "fridgesnacks", "chance": 70, "repeat": [ 6, 12 ] },
+        "X": { "item": "snacks", "chance": 30, "repeat": [ 1, 6 ] },
+        "g": { "item": "fridgesnacks", "chance": 70, "repeat": [ 1, 6 ] },
         "G": { "item": "trash", "chance": 20, "repeat": [ 2, 4 ] },
         "t": [
           { "item": "snacks", "chance": 3 },
@@ -122,11 +122,11 @@
         ],
         "l": [
           { "item": "softdrugs", "chance": 10 },
-          { "item": "bags", "chance": 20 },
-          { "item": "consumer_electronics", "chance": 5 },
-          { "item": "alcohol", "chance": 5 },
-          { "item": "manuals", "chance": 5 },
-          { "item": "textbooks", "chance": 5 }
+          { "item": "bags", "chance": 5 },
+          { "item": "consumer_electronics", "chance": 3 },
+          { "item": "alcohol", "chance": 3 },
+          { "item": "manuals", "chance": 1 },
+          { "item": "textbooks", "chance": 1 }
         ]
       },
       "item": { "N": { "item": "movie_poster", "chance": 100 } },
@@ -134,9 +134,9 @@
         { "chance": 35, "item": "misc_smoking", "x": 5, "y": 7 },
         { "chance": 45, "item": "toy_store", "x": 21, "y": 22 },
         { "chance": 45, "item": "toy_store", "x": 8, "y": 14 },
-        { "item": "cash_register_random", "x": 34, "y": 9, "chance": 100 },
-        { "item": "cash_register_random", "x": 36, "y": 9, "chance": 100 },
-        { "item": "cash_register_random", "x": 61, "y": [ 4, 9 ], "chance": 100 }
+        { "item": "cash_register_random", "x": 34, "y": 9, "chance": 80 },
+        { "item": "cash_register_random", "x": 36, "y": 9, "chance": 80 },
+        { "item": "cash_register_random", "x": 61, "y": [ 4, 9 ], "chance": 80 }
       ],
       "place_monsters": [
         { "density": 0.25, "monster": "GROUP_ZOMBIE", "x": 12, "y": 15 },
@@ -189,9 +189,9 @@
         "-...........................................%...........AAAAA.AAAAA.%..-",
         "-...........................................%...ЯЯ..................%..-",
         "-...........................................%...ЯЯ...################..-",
-        "-...........................................%........#6666______#pHH#..-",
-        "-...........................................%........+__________#_HH#..-",
-        "-...........................................%........#6666______+__p#..-",
+        "-...........................................%........#WWWW______#p_H#..-",
+        "-...........................................%........+__________#___#..-",
+        "-...........................................%........#WWWW______+__p#..-",
         "-...........................................%........#__________#####..-",
         "-...........................................%........#__________#__v#..-",
         "-...........................................D........#__________##+##..-",
@@ -244,7 +244,7 @@
         "------------------------------------------------------------------------"
       ],
       "palettes": [ "roof_palette", "parametrized_walls_palette" ],
-      "liquids": { "6": { "liquid": "water_clean", "amount": [ 0, 100 ] }, "Я": { "liquid": "water_clean", "amount": [ 100, 1000 ] } },
+      "liquids": { "Я": { "liquid": "water_clean", "amount": [ 100, 1000 ] } },
       "terrain": {
         "_": "t_thconc_floor",
         "+": "t_door_metal_c",
@@ -257,7 +257,10 @@
         "X": "t_flat_roof",
         "=": "t_flat_roof"
       },
-      "furniture": { "H": "f_generator_broken", "6": "f_water_heater", "p": "f_machinery_old" },
+      "furniture": {
+        "H": [ [ "f_generator_broken", 25 ], [ "f_diesel_generator", 5 ], [ "f_12000_gasoline_generator", 5 ] ],
+        "p": "f_machinery_old"
+      },
       "items": { "C": { "item": "snacks", "chance": 30, "repeat": [ 6, 12 ] } }
     }
   },

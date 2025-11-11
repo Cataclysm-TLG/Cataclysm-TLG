@@ -241,7 +241,15 @@
     "name": "crossbows",
     "description": "Recipes related to constructing crossbows to shoot bolts with.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "bullet_crossbow", "huge_crossbow", "hand_crossbow", "rep_crossbow", "crossbow" ],
+    "nested_category_data": [
+      "bullet_crossbow",
+      "huge_crossbow",
+      "double_crossbow",
+      "latchet_crossbow",
+      "hand_crossbow",
+      "rep_crossbow",
+      "crossbow"
+    ],
     "difficulty": 3
   },
   {
@@ -832,7 +840,7 @@
     "type": "nested_category",
     "activity_level": "MODERATE_EXERCISE",
     "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_HANDS",
+    "subcategory": "CSC_ARMOR_FEET",
     "name": "platemail sollerets",
     "description": "Recipes related to constructing steel plate armor for the feet.",
     "skill_used": "fabrication",
@@ -993,7 +1001,9 @@
       "bandages_makeshift_with_tool",
       "bandages_makeshift_bleached",
       "bandages_makeshift_boiled",
-      "adhesive_bandages"
+      "adhesive_bandages",
+      "medical_gauze",
+      "medical_gauze_makeshift"
     ],
     "difficulty": 1
   },
@@ -2022,7 +2032,7 @@
     "name": "modified attachments",
     "description": "Recipes related to modifying weapon accessories to attach to a wider variety of guns and crossbows.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "bipod_mod", "grip_mod", "muzzle_brake_mod", "nested_modified_gunmods_weapons", "nested_modified_gunmods_sights" ]
+    "nested_category_data": [ "bipod_mod", "grip_mod", "nested_modified_gunmods_weapons", "nested_modified_gunmods_sights" ]
   },
   {
     "id": "nested_modified_gunmods_weapons",
@@ -2854,13 +2864,12 @@
       "pointy_stick",
       "pointy_stick_long",
       "spear_bronze",
+      "spear_short_bronze",
       "spear_copper",
       "spear_knife",
-      "spear_knife_proper",
-      "spear_knife_superior",
-      "spear_knife_superior_from simple version",
       "spear_shaft_sharpened",
       "spear_steel",
+      "spear_short_steel",
       "spear_stone",
       "spear_stone_simple",
       "spear_wood",

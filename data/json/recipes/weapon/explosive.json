@@ -11,13 +11,7 @@
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
     "components": [
       [ [ "jar_glass_sealed", 1 ], [ "clay_canister", 2 ], [ "flask_glass", 2 ] ],
-      [
-        [ "any_strong_acid", 2, "LIST" ],
-        [ "blood_acid", 2 ],
-        [ "blood_acid_underground", 2 ],
-        [ "blood_acid_plant", 2 ],
-        [ "blood_acid_insect", 2 ]
-      ],
+      [ [ "any_strong_acid", 2, "LIST" ] ],
       [ [ "cordage_short", 1, "LIST" ] ]
     ]
   },
@@ -47,7 +41,7 @@
       [ [ "paper", 5 ], [ "rolling_paper", 32 ] ],
       [ [ "chem_sulphuric_acid", 2 ] ],
       [ [ "chem_nitric_acid", 1 ] ],
-      [ [ "ammonia_liquid", 1 ], [ "chem_ethanol", 250 ], [ "denat_alcohol", 250 ], [ "methed_alcohol", 250 ] ],
+      [ [ "ammonia_liquid", 1 ], [ "chem_ethanol", 250 ], [ "denat_alcohol", 250 ] ],
       [ [ "chem_glycerol", 2 ] ]
     ]
   },

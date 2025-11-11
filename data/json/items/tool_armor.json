@@ -15,7 +15,7 @@
     "sided": true,
     "warmth": 8,
     "material_thickness": 1,
-    "flags": [ "WATER_FRIENDLY", "OUTER", "SPLINT" ],
+    "flags": [ "OUTER", "SPLINT" ],
     "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "arm_l", "arm_r" ] } ]
   },
   {
@@ -30,7 +30,7 @@
     "price": "250 USD",
     "price_postapoc": "50 cent",
     "material": [ "wood", "cotton" ],
-    "flags": [ "OVERSIZE", "PREFIX_XL", "WATER_FRIENDLY", "OUTER", "SPLINT" ]
+    "flags": [ "OVERSIZE", "PREFIX_XL", "OUTER", "SPLINT" ]
   },
   {
     "id": "arm_xs_splint",
@@ -43,7 +43,7 @@
     "volume": "500 ml",
     "price": "150 USD",
     "price_postapoc": "50 cent",
-    "flags": [ "UNDERSIZE", "WATER_FRIENDLY", "OUTER", "SPLINT", "PREFIX_XS" ]
+    "flags": [ "UNDERSIZE", "OUTER", "SPLINT", "PREFIX_XS" ]
   },
   {
     "id": "tourniquet_upper",
@@ -245,7 +245,7 @@
   {
     "id": "ear_plugs",
     "type": "ARMOR",
-    "name": { "str": "pair of ear plugs", "str_pl": "pairs of ear plugs" },
+    "name": { "str": "ear plugs", "str_pl": "pairs of ear plugs" },
     "description": "Industrial-grade ear plugs.  They fit inside the ears.",
     "weight": "10 g",
     "volume": "10 ml",
@@ -274,7 +274,7 @@
     "color": "green",
     "warmth": 10,
     "material_thickness": 3,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED" ],
     "use_action": { "type": "unpack", "group": "gobag_contents", "filthy_volume_threshold": "10 L" },
     "armor": [
       {
@@ -310,7 +310,7 @@
     "sided": true,
     "warmth": 5,
     "material_thickness": 1,
-    "flags": [ "WATER_FRIENDLY", "OUTER", "SPLINT", "ALLOWS_TAIL" ],
+    "flags": [ "OUTER", "SPLINT", "ALLOWS_TAIL" ],
     "armor": [ { "encumbrance": 70, "coverage": 75, "covers": [ "leg_l", "leg_r" ] } ]
   },
   {
@@ -392,7 +392,7 @@
     "material_thickness": 2,
     "environmental_protection": 1,
     "qualities": [ [ "GLARE", 1 ] ],
-    "flags": [ "SUN_GLASSES", "FLASH_PROTECTION" ],
+    "flags": [ "SUN_SHADE", "FLASH_PROTECTION" ],
     "armor": [
       {
         "encumbrance": 25,
@@ -493,6 +493,7 @@
     "sided": true,
     "price": "100 USD",
     "price_postapoc": "1 USD 50 cent",
+    "etransfer_rate": "20 MB",
     "material": [ { "type": "plastic", "portion": 75 }, { "type": "aluminum", "portion": 25 } ],
     "flags": [
       "WATCH",
@@ -505,14 +506,24 @@
       "NO_UNLOAD",
       "NO_RELOAD",
       "WATER_BREAK",
-      "CALORIES_INTAKE",
+      "CALORIE_BURN",
       "ELECTRONIC"
     ],
     "symbol": "[",
     "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA", "MP3", "CALORIES_INTAKE_TRACKER", "FITNESS_CHECK" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 80 } } ],
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 80 } },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0,
+        "ememory_max": "256 GB"
+      }
+    ],
     "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
   },
   {
@@ -529,7 +540,7 @@
     "price": "50 USD",
     "price_postapoc": "1 USD",
     "material": [ "plastic" ],
-    "flags": [ "WATCH", "WATER_FRIENDLY", "BELTED", "FRAGILE", "ALLOWS_NATURAL_ATTACKS", "OVERSIZE" ],
+    "flags": [ "WATCH", "CALORIE_BURN", "WATER_FRIENDLY", "BELTED", "FRAGILE", "ALLOWS_NATURAL_ATTACKS", "OVERSIZE" ],
     "symbol": "[",
     "use_action": [ "FITNESS_CHECK" ],
     "armor": [ { "coverage": 100, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ]
@@ -629,7 +640,7 @@
     "volume": "1750 ml",
     "warmth": 7,
     "environmental_protection": 1,
-    "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 0.5,
     "armor": [ { "encumbrance": 10, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
@@ -639,7 +650,7 @@
     "category": "clothing",
     "symbol": "[",
     "color": "light_gray",
-    "name": { "str": "pair of thermal electric socks", "str_pl": "pairs of thermal electric socks" },
+    "name": { "str": "thermal electric socks", "str_pl": "pairs of thermal electric socks" },
     "description": "A pair of socks with internal battery-powered heating elements.  Use it to turn it on.",
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "price": "50 USD",
@@ -673,7 +684,7 @@
     "id": "thermal_socks_on",
     "copy-from": "thermal_socks",
     "type": "TOOL_ARMOR",
-    "name": { "str": "pair of thermal electric socks (on)", "str_pl": "pairs of thermal electric socks (on)" },
+    "name": { "str": "thermal electric socks (on)", "str_pl": "pairs of thermal electric socks (on)" },
     "description": "A pair of socks with internal battery-powered heating elements.  They are currently on, and continually draining batteries.  Use it to turn them off.",
     "flags": [ "VARSIZE", "SKINTIGHT", "TRADER_AVOID" ],
     "power_draw": "7500 mW",
@@ -747,7 +758,7 @@
     "category": "clothing",
     "symbol": "[",
     "color": "light_gray",
-    "name": { "str": "pair of thermal electric gloves", "str_pl": "pairs of thermal electric gloves" },
+    "name": { "str": "thermal electric gloves", "str_pl": "pairs of thermal electric gloves" },
     "description": "A pair of gloves with internal battery-powered heating elements.  Use it to turn it on.",
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "price": "50 USD",
@@ -781,7 +792,7 @@
     "id": "thermal_gloves_on",
     "copy-from": "thermal_gloves",
     "type": "TOOL_ARMOR",
-    "name": { "str": "pair of thermal electric gloves (on)", "str_pl": "pairs of thermal electric gloves (on)" },
+    "name": { "str": "thermal electric gloves (on)", "str_pl": "pairs of thermal electric gloves (on)" },
     "description": "A pair of gloves with internal battery-powered heating elements.  They are currently on, and continually draining batteries.  Use it to turn them off.",
     "flags": [ "VARSIZE", "SKINTIGHT", "TRADER_AVOID" ],
     "power_draw": "7500 mW",
@@ -855,7 +866,7 @@
     "category": "tools",
     "symbol": ";",
     "color": "dark_gray",
-    "name": { "str": "pair of binoculars", "str_pl": "pairs of binoculars" },
+    "name": { "str": "binoculars", "str_pl": "pairs of binoculars" },
     "description": "A pair of optics with a neck strap attached.  Useful for seeing long distances.  Wearing this item or carrying it in your inventory will double the distance around you that is mapped during your travels.  You could also use them to focus the sunlight.",
     "price": "34 USD",
     "price_postapoc": "5 USD",
@@ -909,18 +920,18 @@
   },
   {
     "id": "wearable_camera",
+    "copy-from": "abstract_camera",
     "type": "TOOL_ARMOR",
     "category": "clothing",
     "symbol": "[",
     "color": "blue",
     "name": { "str": "wearable camera" },
-    "description": "A point-and-shoot digital camera with a digital viewfinder, a backup 'iron-sight', and flash.  You can look at your photos on the digital screen, or transfer them with a memory card.  Takes conventional batteries.  This one can be worn over your neck.",
+    "description": "A point-and-shoot digital camera with a digital viewfinder, a backup 'iron-sight', and flash.  You can look at your photos on the digital screen, or transfer them with any standard electronic device. This one can be worn over your neck.",
     "price": "200 USD",
     "price_postapoc": "50 cent",
-    "material": [ "plastic", "steel" ],
     "flags": [ "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
-    "weight": "520 g",
-    "volume": "500 ml",
+    "weight": "943 g",
+    "volume": "256 ml",
     "charges_per_use": 5,
     "ammo": "battery",
     "use_action": [ "CAMERA" ],
@@ -930,6 +941,14 @@
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
         "default_magazine": "light_plus_battery_cell"
+      },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0.0,
+        "ememory_max": "32 GB"
       }
     ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
@@ -937,18 +956,18 @@
   },
   {
     "id": "wearable_camera_pro",
+    "copy-from": "abstract_camera",
     "type": "TOOL_ARMOR",
     "category": "clothing",
     "symbol": "[",
     "color": "blue",
     "name": { "str": "wearable professional camera" },
-    "description": "A 35 mm digital SLR (single-lens reflex) camera with optical and digital viewfinders, a zoom lens with auto-focus and stabilizer, and flash.  You can view your photos on it or transfer them with a memory card; it runs on conventional batteries.  Before the Cataclysm, you could have taken professional-grade photos using this.  This one can be worn over your neck",
+    "description": "A 35 mm digital SLR (single-lens reflex) camera with optical and digital viewfinders, a zoom lens with auto-focus and stabilizer, and flash.  You can look at your photos on the digital screen or transfer them with any standard electronic device.  Before the Cataclysm, you could have taken professional-grade photos using this. This one can be worn over your neck",
     "price": "8000 USD",
     "price_postapoc": "1 USD",
-    "material": [ "plastic", "steel" ],
     "flags": [ "CAMERA_PRO", "ALWAYS_TWOHAND", "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
-    "weight": "520 g",
-    "volume": "500 ml",
+    "weight": "2304 g",
+    "volume": "1256 ml",
     "charges_per_use": 5,
     "ammo": "battery",
     "use_action": [ "CAMERA" ],
@@ -958,6 +977,14 @@
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
         "default_magazine": "light_plus_battery_cell"
+      },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0.0,
+        "ememory_max": "64 GB"
       }
     ],
     "armor": [ { "encumbrance": 2, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
@@ -1089,7 +1116,7 @@
     "id": "ar_glasses_basic",
     "type": "TOOL_ARMOR",
     "category": "clothing",
-    "name": { "str": "pair of basic AR glasses", "str_pl": "pairs of basic AR glasses" },
+    "name": { "str": "basic AR glasses", "str_pl": "pairs of basic AR glasses" },
     "description": "A pair of compact augmented reality glasses with some basic functionality.  There is a camera on the rim, and it has an alarm clock feature.",
     "weight": "65 g",
     "volume": "720 ml",
@@ -1102,25 +1129,34 @@
     "ammo": "battery",
     "charges_per_use": 1,
     "use_action": [ "CAMERA" ],
+    "etransfer_rate": "20 MB",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
         "default_magazine": "light_plus_battery_cell"
+      },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0,
+        "ememory_max": "256 GB"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ] } ],
+    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "eyes" ], "rigid_layer_only": true } ],
     "material_thickness": 1,
     "environmental_protection": 1,
-    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC" ]
+    "flags": [ "WATCH", "ALARMCLOCK", "FRAGILE", "WATER_BREAK", "PADDED", "ELECTRONIC", "SKINTIGHT" ]
   },
   {
     "id": "ar_glasses_advanced",
     "type": "TOOL_ARMOR",
     "category": "clothing",
-    "name": { "str": "pair of advanced AR glasses", "str_pl": "pairs of advanced AR glasses" },
-    "description": "An expensive model of augmented reality glasses, with adaptive light correction and some gadgets, designed to be compatible with corrective glasses.  An augmented reality overlay allows the user to zoom their view, and it displays handy information about local topology.",
+    "name": { "str": "advanced AR glasses", "str_pl": "pairs of advanced AR glasses" },
+    "description": "An expensive model of augmented reality glasses designed with adaptive light correction and some gadgets.  An augmented reality overlay allows the user to zoom their view and display handy information about local topology.",
     "weight": "170 g",
     "volume": "750 ml",
     "price": "3000 USD",
@@ -1131,7 +1167,8 @@
     "color": "light_gray",
     "ammo": "battery",
     "charges_per_use": 1,
-    "use_action": [ "CAMERA", "PORTABLE_GAME", "EINKTABLETPC", "ELECTRICSTORAGE", "EBOOKSAVE", "EBOOKREAD" ],
+    "use_action": [ "CAMERA", "PORTABLE_GAME", "EBOOKSAVE", "E_FILE_DEVICE" ],
+    "etransfer_rate": "30 MB",
     "tick_action": [ "EPIC_MUSIC" ],
     "pocket_data": [
       {
@@ -1141,14 +1178,15 @@
         "default_magazine": "light_plus_battery_cell"
       },
       {
-        "pocket_type": "EBOOK",
+        "pocket_type": "E_FILE_STORAGE",
         "rigid": true,
         "max_contains_volume": "1 ml",
         "max_contains_weight": "1 g",
-        "weight_multiplier": 0
+        "weight_multiplier": 0,
+        "ememory_max": "1 TB"
       }
     ],
-    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "eyes" ] } ],
+    "armor": [ { "encumbrance": 5, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ],
     "material_thickness": 1,
     "environmental_protection": 1,
     "flags": [
@@ -1157,11 +1195,13 @@
       "ALARMCLOCK",
       "OUTER",
       "FRAGILE",
-      "SUN_GLASSES",
+      "SUN_SHADE",
       "THERMOMETER",
       "WATER_BREAK",
       "PADDED",
-      "ELECTRONIC"
+      "ELECTRONIC",
+      "CAN_USE_IN_DARK",
+      "SKINTIGHT"
     ]
   },
   {
@@ -1311,13 +1351,14 @@
     "id": "phase_immersion_suit",
     "type": "TOOL_ARMOR",
     "category": "clothing",
+    "looks_like": "rm13_armor",
     "symbol": "[",
     "color": "light_gray",
     "name": { "str": "phase immersion suit" },
-    "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles both plate armor and an astronaut's spacesuit.  Designed to protect its wearer during extradimensional excursions, it offers unparalleled environmental protection, both in this Earth and beyond.  Use it to turn it on.",
+    "description": "Covered in interlocking plates of reflective metal, this advanced suit resembles an astronaut's space suit.  Use it to turn it on.",
     "price": "1500 USD",
     "price_postapoc": "150 USD",
-    "material": [ "carbide", "steel", "lvl4ballisticglass", "superalloy" ],
+    "material": [ "titanium_alloy", "lvl4ballisticglass", "soft_rubber", "nomex", "rubber" ],
     "weight": "9500 g",
     "volume": "4500 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 7000 } } ],
@@ -1335,14 +1376,12 @@
     "material_thickness": 3,
     "flags": [
       "RAD_PROOF",
-      "PORTAL_PROOF",
       "STURDY",
       "WATERPROOF",
       "HYGROMETER",
       "THERMOMETER",
       "RAINPROOF",
-      "WATCH",
-      "ALARMCLOCK",
+      "GROUNDING",
       "SWIM_GOGGLES",
       "SUN_GLASSES",
       "NO_REPAIR",
@@ -1350,13 +1389,15 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE"
+      "COMBAT_TOGGLEABLE"
     ],
     "relic_data": { "passive_effects": [ { "id": "ench_climate_control_all" } ] },
     "armor": [
       {
-        "material": [ { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "mouth", "eyes" ],
@@ -1366,11 +1407,10 @@
       },
       {
         "material": [
-          { "type": "carbide", "covered_by_mat": 60, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 30, "thickness": 1.0 },
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "titanium_alloy", "covered_by_mat": 30, "thickness": 1.0 },
           { "type": "lvl4ballisticglass", "covered_by_mat": 100, "thickness": 1.0 }
         ],
-        "//": "no weight is directly on your head",
         "encumbrance": 0,
         "coverage": 100,
         "covers": [ "head" ],
@@ -1380,10 +1420,9 @@
       },
       {
         "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 80, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 40, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 40, "thickness": 1.0 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "titanium_alloy", "covered_by_mat": 80, "thickness": 1.0 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "encumbrance": 10,
         "coverage": 100,
@@ -1394,10 +1433,10 @@
       },
       {
         "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 60, "thickness": 1.0 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "titanium_alloy", "covered_by_mat": 50, "thickness": 1.0 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
-        "//": "hands are lighter armored",
         "encumbrance": 5,
         "coverage": 100,
         "covers": [ "hand_l", "hand_r" ],
@@ -1407,25 +1446,47 @@
       },
       {
         "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 80, "thickness": 3.0 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "titanium_alloy", "covered_by_mat": 60, "thickness": 2.0 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
-        "//": "feet are heavier armored",
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_arch_l",
+          "foot_arch_r",
+          "foot_toes_l",
+          "foot_toes_r",
+          "foot_ankle_l",
+          "foot_ankle_r",
+          "foot_heel_l",
+          "foot_heel_r"
+        ],
+        "layers": [ "NORMAL", "OUTER", "BELTED" ],
+        "volume_encumber_modifier": 0,
+        "rigid_layer_only": true
+      },
+      {
+        "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 }
+        ],
+        "encumbrance": 10,
+        "coverage": 100,
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [ "foot_sole_l", "foot_sole_r" ],
         "layers": [ "NORMAL", "OUTER" ],
         "volume_encumber_modifier": 0,
         "rigid_layer_only": true
       },
       {
         "material": [
-          { "type": "carbide", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 75, "thickness": 0.5 },
-          { "type": "superalloy", "covered_by_mat": 40, "thickness": 0.5 },
-          { "type": "superalloy", "covered_by_mat": 40, "thickness": 0.5 }
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "titanium_alloy", "covered_by_mat": 75, "thickness": 1.0 },
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.2 }
         ],
-        "//": "limbs are lighter armored than torso but still strongly armored",
         "encumbrance": 10,
         "coverage": 100,
         "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
@@ -1464,7 +1525,7 @@
       "ALARMCLOCK",
       "SWIM_GOGGLES",
       "SUN_GLASSES",
-      "ELECTRIC_IMMUNE",
+      "GROUNDING",
       "PARTIAL_DEAF",
       "GAS_PROOF",
       "TRADER_AVOID",
@@ -1475,8 +1536,7 @@
       "PADDED",
       "USE_UPS",
       "NO_UNLOAD",
-      "COMBAT_TOGGLEABLE",
-      "UNBREAKABLE_MELEE"
+      "COMBAT_TOGGLEABLE"
     ]
   },
   {
@@ -2182,7 +2242,7 @@
     "category": "clothing",
     "symbol": "[",
     "color": "dark_gray",
-    "name": { "str": "pair of light amp goggles", "str_pl": "pairs of light amp goggles" },
+    "name": { "str": "light amp goggles", "str_pl": "pairs of light amp goggles" },
     "description": "A pair of battery-powered goggles that use a infrared LED in conjunction with a IR camera, allowing you to see in the dark.  Use it to turn them on.",
     "flags": [ "FRAGILE", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "price": "300 USD",
@@ -2219,7 +2279,7 @@
     "id": "goggles_nv_on",
     "copy-from": "goggles_nv",
     "type": "TOOL_ARMOR",
-    "name": { "str_pl": "pairs of light amp goggles (on)", "str": "pair of light amp goggles (on)" },
+    "name": { "str_pl": "pairs of light amp goggles (on)", "str": "light amp goggles (on)" },
     "description": "A pair of battery-powered goggles that use a infrared LED in conjunction with a IR camera, allowing you to see in the dark.  It is turned on, and continually draining batteries.  Use it to turn them off.",
     "material": [ "plastic", "steel" ],
     "extend": { "flags": [ "TRADER_AVOID", "NVG_GREEN" ] },
@@ -2236,7 +2296,7 @@
     "category": "clothing",
     "symbol": "[",
     "color": "dark_gray",
-    "name": { "str": "pair of infrared goggles", "str_pl": "pairs of infrared goggles" },
+    "name": { "str": "infrared goggles", "str_pl": "pairs of infrared goggles" },
     "description": "A pair of battery-powered goggles that grant infrared vision, allowing you to see warm-blooded creatures in the dark.  Use it to turn them on.",
     "flags": [ "FRAGILE", "OUTER", "ELECTRONIC" ],
     "price": "920 USD",
@@ -2273,7 +2333,7 @@
     "id": "goggles_ir_on",
     "copy-from": "goggles_ir",
     "type": "TOOL_ARMOR",
-    "name": { "str": "pair of infrared goggles (on)", "str_pl": "pairs of infrared goggles (on)" },
+    "name": { "str": "infrared goggles (on)", "str_pl": "pairs of infrared goggles (on)" },
     "description": "A pair of battery-powered goggles that grant infrared vision, allowing you to see warm-blooded creatures in the dark.  Use it to turn them off.",
     "material": [ "plastic", "steel" ],
     "flags": [ "FRAGILE", "TRADER_AVOID", "OUTER", "ELECTRONIC" ],
@@ -2293,11 +2353,22 @@
     "description": "A modified RX12 jet injector which can be worn on the body.  A label on the side warns against using more than two doses per hour.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "ceramic", "superalloy" ],
-    "flags": [ "OVERSIZE" ],
+    "material": [ "plastic", "steel" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SKINTIGHT", "SOFT", "PADDED" ],
     "weight": "364 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "ampoule": 2 } } ],
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 1,
+        "encumbrance": 0
+      }
+    ],
     "charges_per_use": 1,
     "use_action": [ "JET_INJECTOR" ],
     "material_thickness": 3
@@ -2312,12 +2383,23 @@
     "description": "A Rivtech RX11 stimulant delivery system, a jet autoinjector system worn on the user's body.  A simple press of its activator injects powerful chemical stimulants into the bloodstream without using a needle.",
     "price": "400 USD",
     "price_postapoc": "10 USD",
-    "material": [ "superalloy", "kevlar_rigid" ],
-    "flags": [ "OVERSIZE" ],
+    "material": [ "plastic", "steel" ],
+    "flags": [ "OVERSIZE", "UNRESTRICTED", "SOFT", "PADDED" ],
     "weight": "212 g",
     "volume": "750 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "stimpack_ammo": 5 } } ],
     "ammo": "stimpack_ammo",
+    "armor": [
+      {
+        "material": [
+          { "type": "plastic", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "steel", "covered_by_mat": 20, "thickness": 0.1 }
+        ],
+        "covers": [ "torso" ],
+        "coverage": 1,
+        "encumbrance": 0
+      }
+    ],
     "charges_per_use": 1,
     "use_action": [ "STIMPACK" ],
     "material_thickness": 3
@@ -2608,7 +2690,7 @@
     "volume": "1250 ml",
     "warmth": 5,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 1,
     "armor": [ { "encumbrance": 10, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_crown" ] } ]
   },
@@ -3402,7 +3484,7 @@
   {
     "id": "attached_ear_plugs_on",
     "type": "ARMOR",
-    "name": { "str": "pair of attached ear plugs (in)", "str_pl": "pairs of attached ear plugs (in)" },
+    "name": { "str": "attached ear plugs (in)", "str_pl": "pairs of attached ear plugs (in)" },
     "description": "A pair of industrial-grade ear plugs attached together by some string.  They are inside your ears, activate them to take them out.",
     "copy-from": "ear_plugs",
     "use_action": {
@@ -3416,7 +3498,7 @@
   {
     "id": "attached_ear_plugs_off",
     "type": "ARMOR",
-    "name": { "str": "pair of attached ear plugs (out)", "str_pl": "pairs of attached ear plugs (out)" },
+    "name": { "str": "attached ear plugs (out)", "str_pl": "pairs of attached ear plugs (out)" },
     "description": "A pair of industrial-grade ear plugs, they are attached together by some string.  They hang around your neck, use them to plug them in.",
     "copy-from": "attached_ear_plugs_on",
     "use_action": {
@@ -3431,7 +3513,7 @@
   {
     "id": "makeshift_ear_plugs_on",
     "type": "ARMOR",
-    "name": { "str": "pair of makeshift ear plugs (in)", "str_pl": "pairs of makeshift ear plugs (in)" },
+    "name": { "str": "makeshift ear plugs (in)", "str_pl": "pairs of makeshift ear plugs (in)" },
     "description": "A pair of makeshift ear plugs made from lumps of wax on the ends of a piece of string.  They are inside your ears, activate them to take them out.",
     "copy-from": "ear_plugs",
     "material": [ "beeswax", "cotton" ],
@@ -3446,7 +3528,7 @@
   {
     "id": "makeshift_ear_plugs_off",
     "type": "ARMOR",
-    "name": { "str": "pair of makeshift ear plugs (out)", "str_pl": "pairs of makeshift ear plugs (out)" },
+    "name": { "str": "makeshift ear plugs (out)", "str_pl": "pairs of makeshift ear plugs (out)" },
     "description": "A pair of makeshift ear plugs made from lumps of wax on the ends of a piece of string.  They hang around your neck, use them to plug them in.",
     "copy-from": "ear_plugs",
     "material": [ "beeswax", "cotton" ],
@@ -3592,7 +3674,7 @@
     "warmth": 7,
     "environmental_protection": 1,
     "armor": [ { "covers": [ "head" ], "coverage": 80, "encumbrance": 10 } ],
-    "flags": [ "FANCY", "VARSIZE", "SUN_GLASSES" ],
+    "flags": [ "FANCY", "VARSIZE", "SUN_SHADE" ],
     "material_thickness": 0.5
   }
 ]

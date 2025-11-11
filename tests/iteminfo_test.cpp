@@ -46,13 +46,13 @@ static const recipe_id recipe_pur_tablets( "pur_tablets" );
 
 static const skill_id skill_survival( "survival" );
 
+static const sub_bodypart_str_id sub_body_part_eyes_right( "eyes_right" );
+
 static const trait_id trait_ANTIFRUIT( "ANTIFRUIT" );
 static const trait_id trait_CANNIBAL( "CANNIBAL" );
 static const trait_id trait_WOOLALLERGY( "WOOLALLERGY" );
 
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
-
-static const sub_bodypart_str_id sub_body_part_eyes_right( "eyes_right" );
 
 // ITEM INFO
 // =========
@@ -1324,18 +1324,6 @@ static void test_string( const std::string &info, const std::string &tested, siz
     last_pos = pos;
 }
 
-// Check that a string is provided in some iteminfo
-// By providing last_pos, order can also be checked
-static void test_string( const std::string &info, const std::string &tested, size_t &last_pos )
-{
-    INFO( string_format( "Checking for \"%s\" in:", tested ) );
-    INFO( info );
-    size_t pos = info.find( tested );
-    CHECK( pos != std::string::npos );
-    CHECK( pos >= last_pos );
-    last_pos = pos;
-}
-
 // Armor protction is based on materials, thickness, and/or environmental protection rating.
 // For armor defined in JSON:
 //
@@ -2081,13 +2069,13 @@ TEST_CASE( "nutrients_in_food", "[iteminfo][food]" )
                "--\n"
                "Nutrition will <color_cyan>vary with chosen ingredients</color>.\n"
                "<color_c_white>Calories (kcal)</color>:"
-               " <color_c_yellow>56</color>-<color_c_yellow>532</color>"
+               " <color_c_yellow>53</color>-<color_c_yellow>470</color>"
                "  Quench: <color_c_yellow>0</color>\n" );
         // Values end up rounded slightly
         CHECK( item_info_str( ice_cream, { iteminfo_parts::FOOD_VITAMINS } ) ==
                "--\n"
                "Nutrition will <color_cyan>vary with chosen ingredients</color>.\n"
-               "Vitamins (RDA): 63-354 mg Calcium (6-35%), 0-23 mg Iron (0-128%),"
+               "Vitamins (RDA): 63-323 mg Calcium (6-32%), 0-20 mg Iron (0-109%),"
                " and 0-45 mg Vitamin C (0-50%)\n" );
     }
 }
@@ -2456,7 +2444,7 @@ TEST_CASE( "list_of_item_qualities", "[iteminfo][quality]" )
         int bat_charges = drill.type->charges_to_use();
         battery.ammo_set( battery.ammo_default(), bat_charges );
         drill.put_in( battery, pocket_type::MAGAZINE_WELL );
-        REQUIRE( drill.ammo_remaining() == bat_charges );
+        REQUIRE( drill.ammo_remaining( ) == bat_charges );
 
         CHECK( item_info_str( drill, qualities ) ==
                "--\n"
@@ -2512,7 +2500,7 @@ TEST_CASE( "tool_info", "[iteminfo][tool]" )
 
         item matches( "test_matches" );
         matches.ammo_set( itype_match );
-        REQUIRE( matches.ammo_remaining() > 0 );
+        REQUIRE( matches.ammo_remaining( ) > 0 );
 
         CHECK( item_info_str( matches, charges ) ==
                "--\n"
@@ -2524,7 +2512,7 @@ TEST_CASE( "tool_info", "[iteminfo][tool]" )
 
         item candle( "candle" );
         candle.ammo_set( itype_candle_wax );
-        REQUIRE( candle.ammo_remaining() > 0 );
+        REQUIRE( candle.ammo_remaining( ) > 0 );
 
         CHECK( item_info_str( candle, burnout ) ==
                "--\n"

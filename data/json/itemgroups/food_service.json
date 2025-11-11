@@ -268,7 +268,8 @@
       { "prob": 7, "group": "heroin_bag_zipper_1_4" },
       { "item": "mag_porn", "prob": 35 },
       { "item": "hairpin", "prob": 5 },
-      { "item": "purse", "prob": 15 }
+      { "item": "purse", "prob": 15 },
+      { "group": "SUS_toilet", "prob": 80 }
     ]
   },
   {
@@ -278,7 +279,7 @@
     "entries": [
       { "item": "wrapper", "prob": 50 },
       { "item": "wrapper_foil", "prob": 5 },
-      { "item": "wrapper_foil_roll", "prob": 25 },
+      { "item": "wrapper_foil", "prob": 25, "count": [ 1, 10 ], "entry-wrapper": "wrapper_foil_roll" },
       { "item": "bottle_glass", "prob": 70 },
       { "item": "can_drink", "prob": 60 },
       { "item": "flyer", "prob": 30 },
@@ -354,8 +355,6 @@
       [ "cup_plastic", 40 ],
       { "item": "portable_game", "prob": 10, "charges": [ 0, 100 ] },
       [ "chips", 15 ],
-      [ "chips2", 3 ],
-      [ "chips3", 3 ],
       [ "news_regional", 12 ],
       [ "flyer", 7 ]
     ]
@@ -396,7 +395,7 @@
       [ "cup_plastic", 40 ],
       [ "wrapper", 34 ],
       [ "wrapper_foil", 3 ],
-      { "item": "wrapper_foil_roll", "prob": 5 },
+      { "item": "wrapper_foil", "prob": 5, "count": [ 1, 10 ], "entry-wrapper": "wrapper_foil_roll" },
       [ "bag_plastic", 20 ],
       [ "bottle_glass", 30 ],
       [ "can_drink", 30 ],
@@ -416,8 +415,7 @@
       { "item": "ceramic_cup", "prob": 15 },
       { "item": "ceramic_plate", "prob": 15 },
       { "prob": 25, "group": "chips_bag_plastic_3" },
-      { "prob": 25, "group": "chips2_bag_plastic_3" },
-      { "prob": 25, "group": "chips3_bag_plastic_3" },
+      { "prob": 25, "group": "chips_bag_plastic_3" },
       { "prob": 50, "group": "choco_coffee_beans_bag_plastic_5" },
       { "prob": 50, "group": "coffee_raw_bag_plastic_20" },
       { "item": "coffee_syrup", "prob": 15 },
@@ -446,7 +444,7 @@
       { "prob": 15, "group": "tea_raw_bag_plastic_33" },
       { "prob": 10, "group": "tea_green_raw_bag_plastic_33" },
       { "item": "wrapper", "prob": 75 },
-      { "item": "wrapper_foil", "prob": 5, "count": [ 5, 40 ], "container-item": "wrapper_foil_roll" },
+      { "item": "wrapper_foil", "prob": 5, "count": [ 5, 40 ], "entry-wrapper": "wrapper_foil_roll" },
       { "group": "teabag_box", "prob": 10 }
     ]
   },
@@ -544,7 +542,7 @@
     "entries": [
       { "item": "wrapper", "prob": 17 },
       { "item": "wrapper_foil", "prob": 1 },
-      { "item": "wrapper_foil_roll", "prob": 25 },
+      { "item": "wrapper_foil", "prob": 5, "count": [ 1, 10 ], "entry-wrapper": "wrapper_foil_roll" },
       { "item": "bag_plastic", "prob": 15 },
       { "item": "bottle_glass", "prob": 10 },
       { "item": "can_drink", "prob": 10 },
@@ -565,7 +563,8 @@
       { "prob": 45, "group": "bottle_otc_painkiller_1_20" },
       { "item": "mag_news", "prob": 30 },
       { "item": "purse", "prob": 10 },
-      { "item": "hairpin", "prob": 25 }
+      { "item": "hairpin", "prob": 25 },
+      { "group": "SUS_toilet", "prob": 40 }
     ]
   },
   {
@@ -620,7 +619,7 @@
       { "item": "cup_plastic", "prob": 50 },
       { "item": "wrapper", "prob": 50 },
       { "item": "wrapper_foil", "prob": 5 },
-      { "item": "wrapper_foil_roll", "prob": 25 },
+      { "item": "wrapper_foil", "prob": 25, "count": [ 1, 10 ], "entry-wrapper": "wrapper_foil_roll" },
       { "item": "bag_plastic", "prob": 50 },
       { "item": "cotton_patchwork", "prob": 50 },
       { "item": "syringe", "prob": 5 },
@@ -1954,22 +1953,6 @@
     "subtype": "collection",
     "container-item": "bag_canvas",
     "entries": [ { "item": "onion", "container-item": "null", "count": [ 1, 25 ] } ]
-  },
-  {
-    "type": "item_group",
-    "id": "chips2_bag_plastic_3",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bag_plastic_small",
-    "entries": [ { "item": "chips2", "container-item": "null", "count": 3 } ]
-  },
-  {
-    "type": "item_group",
-    "id": "chips3_bag_plastic_3",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "bag_plastic_small",
-    "entries": [ { "item": "chips3", "container-item": "null", "count": 3 } ]
   },
   {
     "type": "item_group",

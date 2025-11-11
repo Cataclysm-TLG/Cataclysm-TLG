@@ -13,7 +13,7 @@
     "price": "800 USD",
     "price_postapoc": "60 USD",
     "to_hit": -2,
-    "range": 6,
+    "range": 8,
     "dispersion": 300,
     "durability": 8,
     "modes": [ [ "DEFAULT", "Jet", 1 ], [ "AUTO", "Gout", 4 ] ],

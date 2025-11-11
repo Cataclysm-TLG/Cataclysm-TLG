@@ -16,6 +16,7 @@
 class character_id;
 class faction;
 class item;
+class map;
 
 class time_duration;
 class vehicle;
@@ -55,12 +56,12 @@ class talker_character_const: virtual public const_talker
         character_id getID() const override;
         bool is_male() const override;
         std::vector<std::string> get_grammatical_genders() const override;
-        int posx() const override;
-        int posy() const override;
+        int posx( const map &here ) const override;
+        int posy( const map &here ) const override;
         int posz() const override;
-        tripoint pos() const override;
-        tripoint_abs_ms global_pos() const override;
-        tripoint_abs_omt global_omt_location() const override;
+        tripoint_bub_ms pos_bub( const map &here ) const override;
+        tripoint_abs_ms pos_abs() const override;
+        tripoint_abs_omt pos_abs_omt() const override;
         int get_cur_hp( const bodypart_id &bp ) const override;
         int get_hp_max( const bodypart_id &bp ) const override;
         units::temperature get_cur_part_temp( const bodypart_id &bp ) const override;
@@ -71,6 +72,7 @@ class talker_character_const: virtual public const_talker
         int int_cur() const override;
         int per_cur() const override;
         int attack_speed() const override;
+        int get_speed() const override;
         dealt_damage_instance deal_damage( Creature *source, bodypart_id bp,
                                            const damage_instance &dam ) const override;
         int pain_cur() const override;
@@ -121,7 +123,7 @@ class talker_character_const: virtual public const_talker
         effect get_effect( const efftype_id &effect_id, const bodypart_id &bp ) const override;
         bool is_deaf() const override;
         bool is_mute() const override;
-        std::optional<std::string> maybe_get_value( const std::string &var_name ) const override;
+        diag_value const *maybe_get_value( const std::string &var_name ) const override;
 
         // stats, skills, traits, bionics, magic, and proficiencies
         std::vector<skill_id> skills_teacheable() const override;
@@ -188,7 +190,7 @@ class talker_character_const: virtual public const_talker
         bool is_warm() const override;
 
         bool can_see() const override;
-        bool can_see_location( const tripoint &pos ) const override;
+        bool can_see_location( const tripoint_bub_ms &pos ) const override;
         int morale_cur() const override;
         int focus_cur() const override;
         int get_rad() const override;
@@ -244,7 +246,8 @@ class talker_character: virtual public talker
             return me_chr;
         }
 
-        void set_pos( tripoint new_pos ) override;
+        void set_pos( tripoint_bub_ms new_pos ) override;
+        void set_pos( tripoint_abs_ms new_pos ) override;
 
         // stats, skills, traits, bionics, and magic
         void set_str_max( int value ) override;
@@ -255,6 +258,7 @@ class talker_character: virtual public talker
         void set_dex_bonus( int value ) override;
         void set_int_bonus( int value ) override;
         void set_per_bonus( int value ) override;
+        void set_cash( int value ) override;
         void set_power_cur( units::energy value ) override;
         void set_mana_cur( int value ) override;
         void set_spell_level( const spell_id &, int ) override;
@@ -262,7 +266,8 @@ class talker_character: virtual public talker
         void set_proficiency_practiced_time( const proficiency_id &prof, int turns ) override;
         void train_proficiency_for( const proficiency_id &prof, int turns ) override;
         void mutate( const int &highest_cat_chance, const bool &use_vitamins ) override;
-        void mutate_category( const mutation_category_id &mut_cat, const bool &use_vitamins ) override;
+        void mutate_category( const mutation_category_id &mut_cat, const bool &use_vitamins,
+                              const bool &true_random ) override;
         void mutate_towards( const trait_id &trait, const mutation_category_id &mut_cat,
                              const bool &use_vitamins ) override;
         void set_trait_purifiability( const trait_id &trait, const bool &purifiable ) override;
@@ -278,7 +283,7 @@ class talker_character: virtual public talker
                          const std::string &bp, bool permanent, bool force, int intensity
                        ) override;
         void remove_effect( const efftype_id &old_effect, const std::string &bp ) override;
-        void set_value( const std::string &var_name, const std::string &value ) override;
+        void set_value( const std::string &var_name, diag_value const &value ) override;
         void remove_value( const std::string &var_name ) override;
 
         // inventory, buying, and selling
@@ -300,7 +305,7 @@ class talker_character: virtual public talker
         void mod_pain( int amount ) override;
         void set_pain( int amount ) override;
         void mod_daily_health( int, int ) override;
-        void mod_livestyle( int ) override;
+        void mod_lifestyle( int ) override;
         void set_fac_relation( const Character *guy, npc_factions::relationship rule,
                                bool should_set_value ) override;
         void add_morale( const morale_type &new_morale, int bonus, int max_bonus, time_duration duration,
@@ -320,7 +325,7 @@ class talker_character: virtual public talker
         void remove_bionic( const bionic_id &old_bionic ) override;
         void set_all_parts_hp_cur( int ) override;
         void set_part_hp_cur( const bodypart_id &id, int set ) override;
-        void die() override;
+        void die( map *here ) override;
         void attack_target( Creature &t, bool allow_special, const matec_id &force_technique,
                             bool allow_unarmed, int forced_movecost ) override;
         void learn_martial_art( const matype_id &id ) override;

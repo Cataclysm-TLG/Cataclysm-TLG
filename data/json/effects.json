@@ -20,7 +20,7 @@
     "type": "effect_type",
     "id": "npc_suspend",
     "name": [ "Suspended NPC" ],
-    "desc": [ "AI tag for when an NPC needs to be rebooted after an infinite loop." ]
+    "desc": [ "Error: This NPC had to have their AI suspended due to an infinite loop." ]
   },
   {
     "type": "effect_type",
@@ -100,106 +100,90 @@
   {
     "type": "effect_type",
     "id": "asked_to_lead",
-    "name": [ "Asked to Lead" ],
-    "desc": [ "AI tag for asking to lead NPCs.  This is a bug if you have it." ]
+    "//": "AI tag for asking to lead NPCs.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "asked_to_follow",
-    "name": [ "Asked to Follow" ],
-    "desc": [ "AI tag for asking to NPCs to follow you.  This is a bug if you have it." ]
+    "//": "AI tag for asking to NPCs to follow you.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "asked_to_train",
-    "name": [ "Recently trained" ],
+    "name": [ "Recently Trained" ],
     "desc": [ "You recently finished a training session and need a mental break before teaching again." ]
   },
   {
     "type": "effect_type",
     "id": "asked_to_socialize",
-    "name": [ "Asked to Socialize" ],
-    "desc": [ "AI tag: for having recently asked an NPC to socialize.  This is a bug if you have it." ]
+    "//": "AI tag: for having recently asked an NPC to socialize.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "asked_to_hint",
-    "name": [ "Asked to Hint" ],
-    "desc": [ "AI tag: for having recently asked an NPC to give a hint.  This is a bug if you have it." ]
+    "//": "AI tag: for having recently asked an NPC to give a hint.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "asked_personal_info",
-    "name": [ "Asked Info" ],
-    "desc": [ "AI tag for asking to NPCs for personal information.  This is a bug if you have it." ]
+    "//": "AI tag for asking to NPCs for personal information.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "asked_for_item",
-    "name": [ "Asked for Item" ],
-    "desc": [ "AI tag for asking NPCs for items.  This is a bug if you have it." ]
+    "//": "AI tag for asking NPCs for items.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "currently_busy",
-    "name": [ "Currently Busy" ],
-    "desc": [ "AI cooldown tag for items or services.  This is a bug if you have it." ]
+    "//": "AI cooldown tag for items or services.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "gave_quest_item",
-    "name": [ "Already Gave Quest Item" ],
-    "desc": [ "AI tag to prevent you from getting multiple quest items.  This is a bug if you have it." ]
+    "//": "AI tag to prevent you from getting multiple quest items.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "catch_up",
-    "name": [ "Catch Up" ],
-    "desc": [ "AI tag for telling NPCs to catch up.  This is a bug if you have it." ],
+    "//": "AI tag for telling NPCs to catch up.  This is a bug if you have it.",
     "int_add_val": 1,
     "max_intensity": 15
   },
   {
     "type": "effect_type",
     "id": "allow_sleep",
-    "name": [ "Allow to Sleep" ],
-    "desc": [ "AI tag for telling NPCs to sleep.  This is a bug if you have it." ]
+    "//": "AI tag for telling NPCs to sleep.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "npc_said",
-    "name": [ "Said Something Recently" ],
-    "desc": [ "AI tag to control NPC verbosity.  This is a bug if you have it." ]
+    "//": "AI tag to control NPC verbosity.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "socialized_recently",
-    "name": [ "Socialized Recently" ],
-    "desc": [ "AI tag for asking to NPCs to socialize.  This is a bug if you have it." ]
+    "//": "AI tag for asking to NPCs to socialize.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "npc_run_away",
-    "name": [ "Running Away" ],
-    "desc": [ "AI tag to enable NPCs to flee.  This is a bug if you have it." ]
+    "//": "AI tag to enable NPCs to flee.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "npc_flee_player",
-    "name": [ "Running Away" ],
-    "desc": [ "AI tag to enable NPCs to flee the player.  This is a bug if you have it." ]
+    "//": "AI tag to enable NPCs to flee the player.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "npc_fire_bad",
-    "name": [ "Avoiding a Fire" ],
-    "desc": [ "AI tag to enable NPCs to escape uncontrolled fires.  This is a bug if you have it." ]
+    "//": "AI tag to enable NPCs to escape uncontrolled fires.  This is a bug if you have it."
   },
   {
     "type": "effect_type",
     "id": "npc_player_still_looking",
-    "name": [ "Waiting till You Find Something" ],
-    "desc": [
+    "//": [
       "AI tag to prevent NPCs from following the player while the player is finding an additional copy of an item.  This is a bug if you have it."
     ]
   },
@@ -277,12 +261,6 @@
     "id": "targeted",
     "name": [ "Turret Is Targeted" ],
     "desc": [ "AI tag used for turret targeting sounds.  This is a bug if you have it." ]
-  },
-  {
-    "type": "effect_type",
-    "id": "bounced",
-    "name": [ "Bounced" ],
-    "desc": [ "AI tag used for bouncing ammo targeting.  This is a bug if you have it." ]
   },
   {
     "type": "effect_type",
@@ -605,6 +583,12 @@
       { "limb_score": "vision", "modifier": 0.5, "resist_modifier": 1.0 },
       { "limb_score": "night_vis", "modifier": 0.1, "resist_modifier": 1.0 }
     ],
+    "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
+  },
+  {
+    "type": "effect_type",
+    "id": "SUN_GLASSES",
+    "limb_score_mods": [ { "limb_score": "night_vis", "modifier": 0.65 } ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD" ]
   },
   {
@@ -1070,8 +1054,8 @@
   {
     "type": "effect_type",
     "id": "nausea",
-    "name": [ "Slightly Nauseous", "Mildly Nauseous", "Nauseous", "Very Nauseous", "Extremely Nauseous" ],
-    "desc": [ "You are nauseous and may lead to vomiting." ],
+    "name": [ "Slightly Nauseated", "Mildly Nauseated", "Nauseated", "Very Nauseated", "Extremely Nauseated" ],
+    "desc": [ "Your stomach is upset, you might throw up." ],
     "remove_message": "You no longer feel nauseous.",
     "rating": "bad",
     "int_dur_factor": "3 m",
@@ -1463,9 +1447,9 @@
   {
     "type": "effect_type",
     "id": "mutagen_lizard",
-    "name": [ "Lizard Mutation", "Lizard Transformation", "Lizard Metamorphosis" ],
+    "name": [ "Reptilian Mutation", "Reptilian Transformation", "Reptilian Metamorphosis" ],
     "desc": [
-      "You consumed lizard mutagen.",
+      "You consumed reptilian mutagen.",
       "Your skin feels dry and too small.  You'll have to molt soon.",
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
@@ -1483,14 +1467,15 @@
     },
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
-    "blood_analysis_description": "Lizard Mutagen"
+    "flags": [ "MUTAGEN_EFFECT" ],
+    "blood_analysis_description": "Reptilian Mutagen"
   },
   {
     "type": "effect_type",
     "id": "mutagen_lupine",
-    "name": [ "Canine Mutation", "Canine Transformation", "Canine Metamorphosis" ],
+    "name": [ "Lupine Mutation", "Lupine Transformation", "Lupine Metamorphosis" ],
     "desc": [
-      "You consumed canine mutagen.",
+      "You consumed lupine mutagen.",
       "Where's your pack?  How will you survive without them?",
       "You pant, unable to stop pacing and full of hunger."
     ],
@@ -2777,7 +2762,7 @@
       "//": "thirst is ml / 5 someone doing exercise in the sun burns between 500mL to 1000mL extra an hour as sweat so 1.5 thirst a minute split between 10 body parts",
       "thirst_min": [ 1 ],
       "thirst_tick": [ 60 ],
-      "thirst_chance": [ 6 ],
+      "thirst_chance": [ 12 ],
       "perspiration_min": [ 2 ],
       "perspiration_tick": [ 60 ],
       "perspiration_chance": [ 1 ],
@@ -2790,7 +2775,7 @@
     },
     "scaling_mods": {
       "thirst_min": [ 1 ],
-      "perspiration_min": [ 5 ],
+      "perspiration_min": [ 4 ],
       "perspiration_tick": [ -15 ],
       "pain_max_val": [ 10 ],
       "hurt_chance": [ 200 ],
@@ -2942,13 +2927,14 @@
     "apply_message": "You feel a sickness coming on…",
     "rating": "bad",
     "resist_effects": [ "took_flumed" ],
+    "immune_flags": [ "NO_DISEASE" ],
     "base_mods": {
       "thirst_tick": [ 3600 ],
       "thirst_min": [ 1 ],
       "fatigue_tick": [ 600 ],
       "fatigue_min": [ 1 ],
       "str_mod": [ -1, 0 ],
-      "cough_chance": [ 600, 0 ]
+      "cough_chance": [ 1200, 0 ]
     }
   },
   {
@@ -2963,6 +2949,7 @@
     "apply_message": "You feel a sickness coming on…",
     "rating": "bad",
     "resist_effects": [ "took_flumed" ],
+    "immune_flags": [ "NO_DISEASE" ],
     "base_mods": {
       "thirst_tick": [ 3600 ],
       "thirst_min": [ 1 ],
@@ -2976,7 +2963,7 @@
     "type": "effect_type",
     "id": "common_cold",
     "name": [ "Common Cold" ],
-    "desc": [ "You have contracted the 'Common Cold'.  Symptoms can be alleviated by medication (cough syrup)." ],
+    "desc": [ "You have contracted the 'Common Cold'.  Symptoms can be alleviated with cough syrup or other medication." ],
     "apply_memorial_log": "Caught a cold.",
     "remove_memorial_log": "Got over the cold.",
     "apply_message": "You feel a cold coming on…",
@@ -2993,7 +2980,7 @@
       "dex_mod": [ -1, 0 ],
       "per_mod": [ -1, 0 ],
       "int_mod": [ -2, -1 ],
-      "cough_chance": [ 300, 0 ]
+      "cough_chance": [ 900, 0 ]
     },
     "blood_analysis_description": "Viral Infection"
   },
@@ -3002,7 +2989,7 @@
     "id": "flu",
     "name": [ "Influenza" ],
     "desc": [
-      "You have contracted flu, or more technically speaking, the 'Influenza'.  Symptoms can be alleviated by medication (cough syrup)."
+      "You have contracted flu, or more technically speaking, the 'Influenza'.  Symptoms can be alleviated with cough syrup or other medication."
     ],
     "apply_memorial_log": "Caught the flu.",
     "remove_memorial_log": "Got over the flu.",
@@ -3978,8 +3965,8 @@
     "name": [ "", "Concerning symptoms", "Unnerving symptoms" ],
     "desc": [
       "",
-      "Your muscles keep twitching strangely.",
-      "Your nervous system is malfunctioning, almost like it's being torn apart from the inside."
+      "You feel shaky and your muscles keep cramping up.",
+      "Your extremities feel numb, with occasional painful tingling and convulsions."
     ],
     "base_mods": { "h_mod_min": [ -1 ], "h_mod_chance": [ 1 ], "h_mod_chance_bot": [ 5 ], "h_mod_tick": [ 1800 ] },
     "max_intensity": 3,
@@ -4399,8 +4386,13 @@
   {
     "type": "effect_type",
     "id": "grown_of_fuse",
-    "name": [ "Grown of Fusion" ],
-    "desc": [ "AI effect to increase stats after fusing with another critter.  1 stack means one absorbed max_hp." ],
+    "name": [ { "str": "Grown of Fusion", "//~": "NO_I18N" } ],
+    "desc": [
+      {
+        "str": "AI effect to increase stats after fusing with another critter.  1 stack means one absorbed max_hp.",
+        "//~": "NO_I18N"
+      }
+    ],
     "//": "stats modified by the zombie_fuse special attack.",
     "//1": "scaling:",
     "//2": "/50 HP: +0,5 melee_skill, +0,5 dodge_skill (unexpected movement), +5 Speed (bigger steps&more to attack with), +4 bash",
@@ -4690,11 +4682,7 @@
     "rating": "bad",
     "show_intensity": false,
     "enchantments": [
-      {
-        "values": [
-          { "value": "CARRY_WEIGHT", "add": { "global_val": "var", "var_name": "portal_dungeon_carry_strength", "default": -1 } }
-        ]
-      }
+      { "values": [ { "value": "CARRY_WEIGHT", "add": { "global_val": "portal_dungeon_carry_strength", "default": -1 } } ] }
     ]
   },
   {
@@ -4706,11 +4694,7 @@
     "remove_message": "Reality reasserts itself and your time returns to normal.",
     "rating": "bad",
     "show_intensity": false,
-    "enchantments": [
-      {
-        "values": [ { "value": "SPEED", "add": { "global_val": "var", "var_name": "portal_dungeon_slow_strength", "default": -1 } } ]
-      }
-    ]
+    "enchantments": [ { "values": [ { "value": "SPEED", "add": { "global_val": "portal_dungeon_slow_strength", "default": -1 } } ] } ]
   },
   {
     "type": "effect_type",
@@ -4764,50 +4748,23 @@
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "LUMINATION", "add": 10 } ] } ]
   },
   {
-    "id": "photophobia",
-    "type": "effect_type",
-    "max_duration": "5 s",
-    "name": [ "photophobia" ],
-    "base_mods": { "speed_mod": [ -100 ] },
-    "desc": [ "It burns!  Thankfully, this can't ever happen to you.  This is a bug if you have it." ],
-    "rating": "bad",
-    "show_intensity": false,
-    "show_in_info": true,
-    "//": "Enchantments don't actually work for monsters! If you find that shadow is suddenly very killable, they probably got hooked up!",
-    "enchantments": [
-      {
-        "condition": "ALWAYS",
-        "values": [
-          { "value": "SPEED", "multiply": 0.5 },
-          { "value": "ARMOR_BASH", "add": 15 },
-          { "value": "ARMOR_STAB", "add": 15 },
-          { "value": "ARMOR_CUT", "add": 15 },
-          { "value": "ARMOR_HEAT", "add": 15 },
-          { "value": "ARMOR_COLD", "add": 15 },
-          { "value": "ARMOR_ELEC", "add": 15 },
-          { "value": "ARMOR_ACID", "add": 15 },
-          { "value": "ARMOR_BULLET", "add": 50 }
-        ]
-      }
-    ]
-  },
-  {
     "id": "nemesis_buff",
     "type": "effect_type",
     "max_duration": "1000 s",
-    "name": [ "SWOLE" ],
-    "desc": [ "If you see this description it is a bug." ],
+    "name": [ { "str": "SWOLE", "//~": "NO_I18N" } ],
+    "desc": [ { "str": "If you see this description it is a bug.", "//~": "NO_I18N" } ],
     "rating": "bad",
     "show_intensity": false,
     "enchantments": [
       {
         "condition": "ALWAYS",
-        "values": [
-          { "value": "SPEED", "multiply": { "math": [ "Nemesis_iteration * 0.01" ] } },
-          { "value": "ARMOR_BASH", "add": { "math": [ "Nemesis_iteration * -1" ] } },
-          { "value": "ARMOR_STAB", "add": { "math": [ "Nemesis_iteration * -1" ] } },
-          { "value": "ARMOR_CUT", "add": { "math": [ "Nemesis_iteration * -1" ] } }
-        ]
+        "incoming_damage_mod": [
+          { "type": "bash", "add": { "math": [ "Nemesis_iteration * -1" ] } },
+          { "type": "stab", "add": { "math": [ "Nemesis_iteration * -1" ] } },
+          { "type": "cut", "add": { "math": [ "Nemesis_iteration * -1" ] } },
+          { "type": "bullet", "add": { "math": [ "Nemesis_iteration * -1" ] } }
+        ],
+        "values": [ { "value": "SPEED", "multiply": { "math": [ "Nemesis_iteration * 0.01" ] } } ]
       }
     ]
   },
@@ -4905,6 +4862,24 @@
       "hurt_amount": [ 10 ],
       "hurt_min": [ 1 ],
       "hurt_chance": [ 1 ],
+      "stamina_min": [ -1500 ],
+      "stamina_max": [ -2000 ],
+      "stamina_chance": [ 1 ]
+    }
+  },
+  {
+    "type": "effect_type",
+    "id": "strangulation",
+    "name": [ "Strangulation" ],
+    "desc": [ "Compressive force is cutting off blood flow to the brain." ],
+    "apply_message": "You see stars!",
+    "rating": "bad",
+    "max_duration": "2 s",
+    "base_mods": {
+      "hurt_amount": [ 15 ],
+      "hurt_min": [ 1 ],
+      "hurt_chance": [ 1 ],
+      "speed_mod": [ -50 ],
       "stamina_min": [ -1500 ],
       "stamina_max": [ -2000 ],
       "stamina_chance": [ 1 ]
@@ -5136,5 +5111,31 @@
     "desc": [ "You are especially adept at climbing and can scale most vertical surfaces with ease." ],
     "flags": [ "WALL_CLING" ],
     "rating": "good"
+  },
+  {
+    "type": "effect_type",
+    "id": "monster_dodged",
+    "name": [ "Dodged" ],
+    "desc": [ "Monster effect used to penalize subsequent dodges.  This is a bug if you have it." ],
+    "max_intensity": 2,
+    "int_add_val": 1,
+    "max_duration": "1 s",
+    "base_mods": { "dodge_mod": [ -1 ] },
+    "scaling_mods": { "dodge_mod": [ -1.0 ] }
+  },
+  {
+    "type": "effect_type",
+    "id": "maimed_armor_migo",
+    "name": [ "Cracked Carapace" ],
+    "show_in_info": true,
+    "max_duration": "100000 s",
+    "desc": [ "Monster effect used to enable a weakpoint.  This is a bug if you have it." ]
+  },
+  {
+    "type": "effect_type",
+    "id": "aimed_60mm",
+    "max_duration": "3 m",
+    "name": [ "" ],
+    "desc": [ "" ]
   }
 ]

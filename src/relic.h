@@ -216,9 +216,11 @@ class relic
         // passive enchantments to add by id in finalize once we can guarantee that they have loaded
         std::vector<enchantment_id> passive_enchant_ids; // NOLINT(cata-serialize)
     public:
+        ~relic();
+
         std::string name() const;
         // returns number of charges that should be consumed
-        int activate( Creature &caster, const tripoint &target );
+        int activate( Creature &caster, const tripoint_bub_ms &target );
         int charges() const;
         int charges_per_use() const;
         int max_charges() const;
@@ -227,7 +229,7 @@ class relic
         // has a recharge type (which needs to be actively processed)
         bool has_recharge() const;
 
-        void try_recharge( item &parent, Character *carrier, const tripoint &pos );
+        void try_recharge( item &parent, Character *carrier, const tripoint_bub_ms &pos );
 
         bool can_recharge( item &parent, Character *carrier ) const;
 
@@ -236,6 +238,7 @@ class relic
         void finalize();
 
         void serialize( JsonOut &jsout ) const;
+        bool was_loaded = false;
         void deserialize( const JsonObject &jobj );
 
         void add_passive_effect( const enchant_cache &ench );

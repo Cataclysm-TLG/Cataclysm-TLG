@@ -85,13 +85,13 @@
     "id": "mon_graboid",
     "type": "MONSTER",
     "name": { "str": "graboid" },
-    "description": "A monstrous worm with a tripartite mouth that opens to reveal hundreds of writhing tongues with razor sharp edges.  It keeps most of its enormous body hidden underground.",
+    "description": "A monstrous worm with a mouth full of bladed tongues.  It keeps most of its enormous body hidden underground.",
     "default_faction": "worm",
     "bodytype": "snake",
     "species": [ "WORM" ],
-    "volume": "875000 ml",
-    "weight": "200 kg",
-    "hp": 210,
+    "volume": "375000 ml",
+    "weight": "400 kg",
+    "hp": 310,
     "speed": 180,
     "material": [ "flesh" ],
     "symbol": "W",
@@ -125,8 +125,8 @@
     "default_faction": "worm",
     "bodytype": "snake",
     "species": [ "WORM" ],
-    "volume": "45 L",
-    "weight": "60 kg",
+    "volume": "28 L",
+    "weight": "28 kg",
     "hp": 20,
     "speed": 80,
     "material": [ "flesh" ],
@@ -153,8 +153,8 @@
     "default_faction": "worm",
     "bodytype": "snake",
     "species": [ "WORM" ],
-    "volume": "108500 ml",
-    "weight": "120 kg",
+    "volume": "60000 ml",
+    "weight": "60 kg",
     "hp": 50,
     "speed": 80,
     "material": [ "flesh" ],
@@ -177,7 +177,7 @@
       "effect": { "id": "death_halfworm", "hit_self": true },
       "corpse_type": "NO_CORPSE"
     },
-    "upgrades": { "half_life": 60, "into": "mon_graboid" },
+    "upgrades": { "half_life": 240, "into": "mon_graboid" },
     "flags": [ "DIGS", "HEARS", "GOODHEARING", "ATTACK_LOWER" ],
     "armor": { "bash": 2 }
   },
@@ -185,13 +185,13 @@
     "id": "mon_worm_small",
     "type": "MONSTER",
     "name": { "str": "large worm" },
-    "description": "A disturbingly large mutated earthworm.  It possesses a fanged mouth and a slender body twice as tall as a man.  It has no eyes, but seems keenly interested in sound.",
+    "description": "A disturbingly large mutated earthworm.  It possesses a fanged mouth and a slender body as tall as a man.  It has no eyes, but seems keenly interested in sound.",
     "copy-from": "mon_halfworm",
     "looks_like": "mon_worm",
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "40000 ml",
+    "weight": "40 kg",
     "dissect": "dissect_troglobite_sample_single",
-    "upgrades": { "half_life": 42, "into": "mon_worm" },
+    "upgrades": { "half_life": 168, "into": "mon_worm" },
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug" ],
     "delete": {
       "reproduction": { "baby_egg": "egg_worm", "baby_count": 3, "baby_timer": 15 },
@@ -417,9 +417,9 @@
     "bodytype": "flying insect",
     "species": [ "INSECT_FLYING" ],
     "diff": 2,
-    "volume": "30 L",
-    "weight": "40750 g",
-    "hp": 30,
+    "volume": "35 L",
+    "weight": "32000 g",
+    "hp": 38,
     "speed": 140,
     "material": [ "iflesh" ],
     "symbol": "a",
@@ -455,8 +455,8 @@
     "description": "An enormous mutant bee with black and white markings and a long stinger spelling doom.",
     "copy-from": "mon_bee",
     "proportional": { "hp": 20, "speed": 0.25, "vision_day": 2 },
-    "volume": "625 L",
-    "weight": "815 kg",
+    "volume": "225 L",
+    "weight": "115 kg",
     "melee_dice": 3,
     "dodge": 2,
     "dissect": "dissect_insect_sample_small",
@@ -665,8 +665,8 @@
     "bodytype": "insect",
     "material": [ "iflesh" ],
     "species": [ "CENTIPEDE" ],
-    "volume": "950 L",
-    "weight": "1000 kg",
+    "volume": "550 L",
+    "weight": "400 kg",
     "hp": 850,
     "speed": 110,
     "attack_cost": 110,
@@ -825,8 +825,8 @@
     "type": "MONSTER",
     "name": { "str_sp": "fused dragonflies" },
     "description": "What appears to be a single, enormous insect with a swollen abdomen is actually the unholy union of two dragonflies in the act of mating, bodies still locked into the telltale heart shape.  The remains of their wings and abdomens form an egg sac they sluggishly pull between them, periodically dropping a handful of glistening eggs.",
-    "volume": "600 L",
-    "weight": "800 kg",
+    "volume": "330 L",
+    "weight": "330 kg",
     "default_faction": "dragonfly",
     "bodytype": "insect",
     "species": [ "INSECT" ],
@@ -859,7 +859,7 @@
     "stomach_size": 1000,
     "anger_triggers": [ "PLAYER_WEAK", "STALK" ],
     "reproduction": { "baby_egg": "egg_dragonfly", "baby_count": 3, "baby_timer": 1 },
-    "upgrades": { "half_life": 10, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 40, "into_group": "GROUP_EMPTY" },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "flags": [ "SEES", "HEARS", "SMELLS", "STUMBLES", "SWIMS", "BASHES", "PUSH_MON", "PUSH_VEH", "EATS", "PATH_AVOID_DANGER" ],
     "armor": { "electric": 2, "acid": 6 }
@@ -1018,7 +1018,7 @@
     "melee_skill": 3,
     "dodge": 2,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "half_life": 20, "into": "mon_mosquito_giant" },
+    "upgrades": { "half_life": 80, "into": "mon_mosquito_giant" },
     "extend": { "flags": [ "NO_BREED" ] },
     "armor": { "acid": 4 }
   },
@@ -1055,7 +1055,7 @@
     "reproduction": { "baby_egg": "egg_mosquito", "baby_count": 3, "baby_timer": 15 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "fear_triggers": [ "HURT", "FIRE" ],
-    "upgrades": { "half_life": 28, "into": "mon_mosquito_mega" },
+    "upgrades": { "half_life": 102, "into": "mon_mosquito_mega" },
     "special_attacks": [ { "id": "mosquito_bite_big" } ],
     "flags": [ "SEES", "SMELLS", "STUMBLES", "FLIES", "HIT_AND_RUN", "PATH_AVOID_DANGER" ],
     "armor": { "acid": 6 }
@@ -1110,7 +1110,7 @@
     "vision_night": 8,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "dissect": "dissect_spider_sample_single",
-    "upgrades": { "half_life": 8, "into_group": "GROUP_SPIDER_CELLAR" },
+    "upgrades": { "half_life": 32, "into_group": "GROUP_SPIDER_CELLAR" },
     "delete": {
       "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK", "HOSTILE_SEEN" ],
       "flags": [ "GRABS" ],
@@ -1164,7 +1164,7 @@
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
     "path_settings": { "max_dist": 18, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "fungalize_into": "mon_spider_fungus",
-    "upgrades": { "half_life": 10, "into_group": "GROUP_SPIDER_CELLAR_GIANT" },
+    "upgrades": { "half_life": 40, "into_group": "GROUP_SPIDER_CELLAR_GIANT" },
     "flags": [ "SEES", "SMELLS", "HEARS", "GRABS", "WEBWALK", "CLIMBS", "HARDTOSHOOT", "PATH_AVOID_DANGER" ],
     "armor": { "bash": 1, "cut": 5, "acid": 7, "bullet": 2 }
   },
@@ -1296,7 +1296,7 @@
       }
     ],
     "bleed_rate": 60,
-    "upgrades": { "half_life": 15, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 60, "into_group": "GROUP_EMPTY" },
     "extend": { "anger_triggers": [ "HOSTILE_SEEN" ], "flags": [ "BASHES" ] },
     "dissect": "dissect_spider_sample_large",
     "armor": { "bullet": 2, "bash": 5, "cut": 7, "stab": 7, "acid": 7, "electric": 3 }
@@ -1431,7 +1431,7 @@
       "message": "The %s explodes!"
     },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH", "FLAMMABLE" ] },
-    "upgrades": { "half_life": 15, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 60, "into_group": "GROUP_EMPTY" },
     "armor": { "cut": 3, "bullet": 2, "electric": 1, "acid": 6 }
   },
   {
@@ -1444,7 +1444,7 @@
     "volume": "30 L",
     "weight": "40 kg",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "half_life": 15, "into": "mon_spider_trapdoor_giant" },
+    "upgrades": { "half_life": 60, "into": "mon_spider_trapdoor_giant" },
     "extend": { "flags": [ "NO_BREED" ] }
   },
   {
@@ -1482,7 +1482,7 @@
     "reproduction": { "baby_egg": "egg_spider_trapdoor", "baby_count": 3, "baby_timer": 15 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "fungalize_into": "mon_spider_fungus",
-    "upgrades": { "half_life": 32, "into": "mon_spider_trapdoor_mega" },
+    "upgrades": { "half_life": 128, "into": "mon_spider_trapdoor_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "VENOM", "GRABS", "CAN_DIG", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
     "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 7 }
   },
@@ -1572,7 +1572,7 @@
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "fungalize_into": "mon_spider_fungus",
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
-    "upgrades": { "half_life": 30, "into": "mon_spider_web_mega" },
+    "upgrades": { "half_life": 120, "into": "mon_spider_web_mega" },
     "trap_avoids": [ "tr_sinkhole" ],
     "flags": [ "SEES", "SMELLS", "HEARS", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
     "armor": { "bash": 2, "cut": 6, "bullet": 5, "acid": 7 }
@@ -1591,7 +1591,7 @@
     "grab_strength": 75,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [ { "id": "grab", "cooldown": 5, "condition": { "not": { "u_has_effect": "maimed_leg" } } } ],
-    "upgrades": { "half_life": 20, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 80, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
     "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 1, "acid": 7 }
   },
@@ -1626,7 +1626,7 @@
     "volume": "15 L",
     "weight": "20 kg",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "half_life": 20, "into": "mon_spider_widow_giant" },
+    "upgrades": { "half_life": 80, "into": "mon_spider_widow_giant" },
     "extend": { "flags": [ "NO_BREED" ] }
   },
   {
@@ -1664,7 +1664,7 @@
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "fungalize_into": "mon_spider_fungus",
-    "upgrades": { "half_life": 24, "into": "mon_spider_widow_mega" },
+    "upgrades": { "half_life": 96, "into": "mon_spider_widow_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "BADVENOM", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
     "armor": { "bash": 2, "cut": 4, "bullet": 3, "acid": 6 }
   },
@@ -1682,7 +1682,7 @@
     "grab_strength": 75,
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [ { "id": "grab", "cooldown": 5, "condition": { "not": { "u_has_effect": "maimed_leg" } } } ],
-    "upgrades": { "half_life": 20, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 80, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] }
   },
   {
@@ -1715,7 +1715,7 @@
     "proportional": { "hp": 0.5, "speed": 1.1, "morale": 0.67, "melee_dice_sides": 0.67 },
     "volume": "30 L",
     "weight": "40 kg",
-    "upgrades": { "half_life": 20, "into": "mon_spider_wolf_giant" },
+    "upgrades": { "half_life": 80, "into": "mon_spider_wolf_giant" },
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "extend": { "flags": [ "NO_BREED" ] }
   },
@@ -1755,7 +1755,7 @@
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "HURT", "PLAYER_CLOSE" ],
     "fungalize_into": "mon_spider_fungus",
-    "upgrades": { "half_life": 22, "into": "mon_spider_wolf_mega" },
+    "upgrades": { "half_life": 90, "into": "mon_spider_wolf_mega" },
     "flags": [ "SEES", "SMELLS", "HEARS", "CLIMBS", "PATH_AVOID_DANGER" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "armor": { "bash": 4, "cut": 8, "bullet": 6, "acid": 6 }
@@ -1792,7 +1792,7 @@
     "dissect": "dissect_spider_sample_large",
     "special_attacks": [ [ "HOWL", 10 ] ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "half_life": 20, "into_group": "GROUP_EMPTY" },
+    "upgrades": { "half_life": 80, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] }
   },
   {
@@ -1900,6 +1900,7 @@
       "PATH_AVOID_DANGER",
       "HARDTOSHOOT",
       "EATS",
+      "HIT_AND_RUN",
       "SMALL_HIDER"
     ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
@@ -2641,7 +2642,7 @@
     "id": "mon_locust",
     "type": "MONSTER",
     "name": { "str": "giant locust" },
-    "description": "A yellow and brown mutated locust the size of a dog with big eyes and long, powerful legs.  You don't think it'll eat you, but it could cause massive damage to nearby plants.",
+    "description": "A yellow and brown mutated locust the size of a dog with big eyes and long, powerful legs and wings that never seem to stop twitching.  It seems intent on finding food above all else - any food.",
     "default_faction": "locust",
     "bodytype": "flying insect",
     "species": [ "INSECT_FLYING" ],
@@ -2652,12 +2653,12 @@
     "material": [ "iflesh" ],
     "symbol": "g",
     "color": "brown",
-    "aggression": -5,
-    "morale": 10,
+    "aggression": -2,
+    "morale": 15,
     "melee_skill": 3,
     "melee_dice": 1,
     "melee_dice_sides": 6,
-    "stomach_size": 500,
+    "stomach_size": 1000,
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "dodge": 2,
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_flying" ],
@@ -2669,9 +2670,9 @@
     "reproduction": { "baby_egg": "egg_locust", "baby_count": 5, "baby_timer": 10 },
     "baby_flags": [ "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_roach", "biosig_timer": 3 },
-    "anger_triggers": [ "FRIEND_ATTACKED" ],
+    "anger_triggers": [ "FRIEND_ATTACKED", "PLAYER_WEAK" ],
     "fear_triggers": [ "HURT", "FIRE" ],
-    "upgrades": { "age_grow": 42, "into": "mon_locust_mega" },
+    "upgrades": { "half_life": 40, "into_group": "GROUP_EMPTY" },
     "special_attacks": [
       {
         "type": "leap",
@@ -2680,41 +2681,12 @@
         "allow_no_target": true,
         "condition": { "not": { "u_has_effect": "maimed_leg" } }
       },
-      [ "EAT_CROP", 60 ],
-      [ "BROWSE", 60 ],
-      [ "GRAZE", 120 ]
+      [ "EAT_CROP", 20 ],
+      [ "BROWSE", 20 ],
+      [ "GRAZE", 40 ]
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "CLIMBS", "STUMBLES", "PATH_AVOID_DANGER", "EATS" ],
     "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 1, "acid": 5 }
-  },
-  {
-    "id": "mon_locust_mega",
-    "type": "MONSTER",
-    "name": { "str": "famine" },
-    "description": "A cow-sized yellow and brown mutated locust with huge, staring eyes and long, powerful legs.  The bane of the post-apocalyptic farmer.",
-    "copy-from": "mon_locust",
-    "proportional": { "hp": 20, "speed": 0.25, "morale": 4, "dodge": 0.5, "vision_day": 2 },
-    "volume": "625 L",
-    "weight": "815 kg",
-    "stomach_size": 18000,
-    "melee_dice": 2,
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "dissect": "dissect_insect_sample_large",
-    "special_attacks": [
-      {
-        "type": "leap",
-        "cooldown": 2,
-        "max_range": 4,
-        "allow_no_target": true,
-        "condition": { "not": { "u_has_effect": "maimed_leg" } }
-      },
-      [ "EAT_CROP", 30 ],
-      [ "BROWSE", 30 ],
-      [ "GRAZE", 90 ],
-      { "id": "smash", "throw_strength": 36, "cooldown": 30 }
-    ],
-    "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 3, "cut": 4, "bullet": 3, "electric": 3, "acid": 6 }
   },
   {
     "id": "mon_locust_nymph",
@@ -3001,9 +2973,9 @@
     "bodytype": "insect",
     "species": [ "INSECT" ],
     "volume": "50 L",
-    "weight": "90750 g",
-    "hp": 120,
-    "speed": 105,
+    "weight": "70750 g",
+    "hp": 140,
+    "speed": 95,
     "material": [ "iflesh" ],
     "symbol": "B",
     "color": "light_red",
@@ -3023,6 +2995,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "dissect": "dissect_insect_sample_single",
     "anger_triggers": [ "PLAYER_CLOSE", "HURT" ],
+    "fear_triggers": [ "FIRE" ],
     "special_attacks": [
       {
         "type": "bite",
@@ -3030,11 +3003,18 @@
         "accuracy": 4,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 7, "armor_penetration": 4 } ],
         "condition": { "not": { "u_has_effect": "maimed_mandible" } }
+      },
+      {
+        "type": "leap",
+        "cooldown": 20,
+        "max_range": 8,
+        "allow_no_target": true,
+        "condition": { "not": { "u_has_effect": "maimed_wing" } }
       }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PATH_AVOID_DANGER" ],
-    "upgrades": { "half_life": 28, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 3, "cut": 10, "bullet": 15, "electric": 3, "acid": 12 }
+    "upgrades": { "half_life": 190, "into": "mon_lady_bug_giant" },
+    "armor": { "bash": 5, "cut": 12, "bullet": 8, "electric": 3, "acid": 12 }
   },
   {
     "id": "mon_lady_bug_giant",
@@ -3044,10 +3024,10 @@
     "default_faction": "ladybug",
     "bodytype": "insect",
     "species": [ "INSECT" ],
-    "volume": "400 L",
-    "weight": "533 kg",
-    "hp": 350,
-    "speed": 110,
+    "volume": "200 L",
+    "weight": "280 kg",
+    "hp": 450,
+    "speed": 90,
     "material": [ "iflesh" ],
     "symbol": "B",
     "color": "red",
@@ -3066,7 +3046,7 @@
     "reproduction": { "baby_egg": "egg_lady_bug", "baby_count": 3, "baby_timer": 15 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK" ],
-    "fear_triggers": [ "HURT" ],
+    "fear_triggers": [ "HURT", "FIRE" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "special_attacks": [
       {
@@ -3075,12 +3055,20 @@
         "accuracy": 6,
         "damage_max_instance": [ { "damage_type": "stab", "amount": 15, "armor_penetration": 8 } ],
         "condition": { "not": { "u_has_effect": "maimed_mandible" } }
+      },
+      {
+        "type": "leap",
+        "cooldown": 40,
+        "max_range": 8,
+        "allow_no_target": true,
+        "condition": { "not": { "u_has_effect": "maimed_wing" } }
       }
     ],
     "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "PATH_AVOID_DANGER" ],
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
     "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_beetle" ],
-    "armor": { "bash": 7, "cut": 20, "bullet": 30, "electric": 3, "acid": 14 }
+    "upgrades": { "half_life": 35, "into_group": "GROUP_EMPTY" },
+    "armor": { "bash": 7, "cut": 22, "bullet": 18, "electric": 3, "acid": 14 }
   },
   {
     "id": "mon_lady_bug_larva",
@@ -3103,7 +3091,7 @@
     "dissect": "dissect_insect_sample_single",
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "age_grow": 30, "into": "mon_lady_bug_giant" },
-    "armor": { "bash": 1, "cut": 2, "stab": 2, "acid": 4 }
+    "armor": { "bash": 2, "cut": 3, "stab": 3, "acid": 4 }
   },
   {
     "id": "mon_grasshopper_small",
@@ -3192,164 +3180,9 @@
     ]
   },
   {
-    "id": "mon_stag_beetle_larva",
-    "type": "MONSTER",
-    "name": { "str": "giant stag beetle larva", "str_pl": "giant stag beetle larvae" },
-    "description": "Something about this cow-sized larva is pitiable, despite its immense size and sickening cream color.",
-    "default_faction": "stag_beetle_larva",
-    "bodytype": "snake",
-    "species": [ "INSECT" ],
-    "volume": "200 L",
-    "weight": "300 kg",
-    "hp": 120,
-    "speed": 25,
-    "material": [ "iflesh" ],
-    "symbol": "S",
-    "color": "white",
-    "aggression": -99,
-    "morale": -10,
-    "stomach_size": 4000,
-    "weakpoint_sets": [ "wps_arthropod" ],
-    "special_attacks": [ [ "EAT_CROP", 30 ], [ "GRAZE", 130 ], [ "EAT_FOOD", 30 ] ],
-    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug" ],
-    "harvest": "arachnid",
-    "dissect": "dissect_subterranean_insect_large",
-    "//": "when taming becomes more involved, this should be slowly tameable with honeydew, allowing for a tamed stag beetle through almost a year of effort",
-    "fear_triggers": [ "FIRE", "HURT" ],
-    "upgrades": { "age_grow": 288, "into": "mon_stag_beetle_small" },
-    "flags": [ "PATH_AVOID_FIRE", "PET_WONT_FOLLOW", "EATS" ],
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 5, "cut": 6, "acid": 6, "bullet": 3 }
-  },
-  {
-    "id": "mon_stag_beetle_small",
-    "type": "MONSTER",
-    "name": { "str": "giant stag beetle" },
-    "description": "It was called a giant even before the Cataclysm, but now this mutant beetle is the size of a small horse.  It looks ready to molt again, even though parts of the shell are still soft.",
-    "copy-from": "mon_stag_beetle_giant",
-    "proportional": { "hp": 0.5, "morale": 0.5, "melee_dice_sides": 0.67 },
-    "volume": "200 L",
-    "weight": "300 kg",
-    "diff": 1,
-    "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
-    "special_attacks": [
-      {
-        "id": "stag_smash",
-        "throw_strength": 40,
-        "damage_max_instance": [ { "damage_type": "bash", "amount": 20, "armor_multiplier": 0.5 } ]
-      }
-    ],
-    "dissect": "dissect_insect_sample_small",
-    "upgrades": { "age_grow": 60, "into": "mon_stag_beetle_giant" },
-    "extend": { "flags": [ "NO_BREED" ] },
-    "delete": { "flags": [ "DESTROYS", "PUSH_VEH" ] },
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "bash": 24, "cut": 32, "acid": 8, "heat": 2, "bullet": 20 }
-  },
-  {
-    "id": "mon_stag_beetle_giant",
-    "type": "MONSTER",
-    "name": { "str": "massive stag beetle" },
-    "description": "This enormous stag beetle has reached mutated maturity, but continues to grow.  Thankfully, that growth is exposing vulnerable cracks of flesh in the strained chitin.",
-    "default_faction": "stag_beetle",
-    "bodytype": "insect",
-    "species": [ "INSECT" ],
-    "volume": "400 L",
-    "weight": "600 kg",
-    "diff": 2,
-    "hp": 350,
-    "speed": 80,
-    "material": [ "iflesh" ],
-    "symbol": "S",
-    "color": "brown",
-    "aggression": 5,
-    "morale": 30,
-    "aggro_character": false,
-    "melee_skill": 5,
-    "melee_dice": 6,
-    "melee_dice_sides": 6,
-    "stomach_size": 4000,
-    "melee_damage": [ { "damage_type": "cut", "amount": 9 } ],
-    "dodge": 1,
-    "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
-    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug", "prof_wp_beetle" ],
-    "weakpoints": [
-      { "name": "a soft section of chitin", "armor_mult": { "physical": 0.33 }, "coverage": 20 },
-      { "name": "a crack in the chitin", "armor_mult": { "physical": 0 }, "coverage": 5 }
-    ],
-    "mountable_weight_ratio": 6,
-    "vision_day": 14,
-    "vision_night": 12,
-    "harvest": "arachnid_beetle",
-    "dissect": "dissect_insect_sample_large",
-    "anger_triggers": [ "FRIEND_ATTACKED", "FRIEND_DIED", "HURT" ],
-    "fear_triggers": [ "FIRE" ],
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "special_attacks": [
-      {
-        "id": "stag_smash",
-        "throw_strength": 60,
-        "hit_dmg_u": "%1$s rams you in the %2$s!",
-        "hit_dmg_npc": "%1$s rams <npcname> in the %2$s!",
-        "no_dmg_msg_u": "%1$s rams your %2$s, but you hold steady!",
-        "no_dmg_msg_npc": "%1$s rams <npcname>'s %2$s, but they hold steady!",
-        "miss_msg_u": "%s flicks its horns at you, but you dodge!",
-        "miss_msg_npc": "%s flicks its horns at <npcname>, but they dodge!"
-      },
-      [ "EAT_CROP", 30 ],
-      [ "EAT_FOOD", 30 ],
-      [ "BROWSE", 60 ]
-    ],
-    "upgrades": { "age_grow": 60, "into": "mon_stag_beetle_mega" },
-    "reproduction": { "baby_egg": "egg_stag_beetle", "baby_count": 1, "baby_timer": 32 },
-    "baby_flags": [ "SPRING", "SUMMER", "AUTUMN", "WINTER" ],
-    "flags": [
-      "SEES",
-      "HEARS",
-      "GOODHEARING",
-      "BASHES",
-      "DESTROYS",
-      "PATH_AVOID_DANGER",
-      "PUSH_MON",
-      "PUSH_VEH",
-      "PET_WONT_FOLLOW",
-      "PET_MOUNTABLE",
-      "EATS"
-    ],
-    "armor": { "bash": 60, "cut": 72, "acid": 18, "heat": 8, "bullet": 50 }
-  },
-  {
-    "id": "mon_stag_beetle_mega",
-    "type": "MONSTER",
-    "name": { "str": "titan stag beetle" },
-    "description": "This stag beetle rivals an armored personnel carrier in size, bearing horns that could fell a tree and chitin thick enough to ignore most bullets.  Its bulky shell looks nigh-impenetrable, and the cracks have sealed with a foul paste.",
-    "copy-from": "mon_stag_beetle_giant",
-    "proportional": { "hp": 4, "speed": 0.75, "morale": 3, "melee_dice_sides": 2 },
-    "volume": "950 L",
-    "stomach_size": 8000,
-    "weight": "1000 kg",
-    "diff": 4,
-    "special_attacks": [
-      {
-        "id": "stag_smash",
-        "throw_strength": 120,
-        "damage_max_instance": [ { "damage_type": "bash", "amount": 45, "armor_multiplier": 0.5 } ]
-      }
-    ],
-    "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_beetle" ],
-    "families": [ "prof_wp_basic_bug", "prof_wp_beetle" ],
-    "weakpoints": [ { "name": "a foul scar in the chitin", "armor_mult": { "physical": 0.33 }, "coverage": 20 } ],
-    "harvest": "arachnid_beetle_mega",
-    "dissect": "dissect_insect_sample_huge",
-    "reproduction": { "baby_egg": "egg_stag_beetle", "baby_count": 1, "baby_timer": 364 },
-    "upgrades": false,
-    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "armor": { "acid": 18, "heat": 8, "bash": 86, "cut": 100, "bullet": 75 }
-  },
-  {
     "id": "mon_antlion_larva",
     "type": "MONSTER",
-    "name": { "str": "giant antlion larva", "str_pl": "giant antlion larvae" },
+    "name": { "str": "giant antlion", "str_pl": "giant antlion" },
     "description": "This huge grub has powerful mandibles and a hungry look.  It hides in the dirt and awaits its prey.",
     "default_faction": "antlion_grub",
     "bodytype": "insect",
@@ -3373,6 +3206,7 @@
       {
         "id": "mandible",
         "name": "the mandibles",
+        "is_head": true,
         "difficulty": { "ranged": 5, "melee": 3 },
         "effects": [
           {
@@ -3429,8 +3263,8 @@
   {
     "id": "mon_antlion_giant",
     "type": "MONSTER",
-    "name": { "str": "giant adult antlion" },
-    "description": "A ferocious mutant flying antlion as big as a cat, darting through the air with a cluster of fangs for a mouth.  Despite its dangerous looks, it doesn't seem interested in you.",
+    "name": { "str": "giant lacewing" },
+    "description": "This mutant bug superficially resembles a dragonfly the size of a human child, but its smaller eyes and the rearward tilt of its wings give it away as the adult form of an antlion.",
     "default_faction": "antlion_adult",
     "bodytype": "flying insect",
     "species": [ "INSECT_FLYING" ],
@@ -3456,7 +3290,7 @@
     "dissect": "dissect_insect_sample_single",
     "reproduction": { "baby_egg": "egg_antlion", "baby_count": 1, "baby_timer": 15 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
-    "anger_triggers": [ "HURT" ],
+    "anger_triggers": [ "HURT", "PLAYER_WEAK" ],
     "fear_triggers": [ "PLAYER_CLOSE", "FIRE" ],
     "flags": [ "SEES", "SMELLS", "FLIES", "HEARS", "HIT_AND_RUN", "PATH_AVOID_DANGER", "PATH_AVOID_FIRE" ],
     "armor": { "cut": 4 }
@@ -3886,8 +3720,8 @@
     "bodytype": "insect",
     "species": [ "INSECT" ],
     "default_faction": "beetle_diving",
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "30000 ml",
+    "weight": "25000 g",
     "hp": 90,
     "speed": 50,
     "material": [ "iflesh" ],
@@ -3997,7 +3831,7 @@
       [ "EAT_CARRION", 90 ]
     ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
-    "upgrades": { "half_life": 20, "into_group": "GROUP_ANT_FIRE_UPGRADE_1" }
+    "upgrades": { "half_life": 80, "into_group": "GROUP_ANT_FIRE_UPGRADE_1" }
   },
   {
     "id": "mon_ant_fire_unstable",
@@ -4037,6 +3871,7 @@
     "special_attacks": [
       {
         "type": "spell",
+        "cooldown": 0,
         "spell_data": { "id": "ant_fire_unstable_initial", "min_level": 0 },
         "monster_message": "%s's abdomen suddenly contracts."
       },

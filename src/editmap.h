@@ -12,6 +12,7 @@
 #include "color.h"
 #include "coordinates.h"
 #include "cursesdef.h"
+#include "memory_fast.h"
 #include "point.h"
 #include "type_id.h"
 
@@ -109,6 +110,8 @@ class editmap
         const int infoHeight = 20;
 
         point tmax;
+
+        bool run_post_process = true;
 
         void draw_main_ui_overlay();
         void do_ui_invalidation();

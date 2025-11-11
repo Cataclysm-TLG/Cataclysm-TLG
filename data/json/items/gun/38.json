@@ -22,11 +22,11 @@
     "skill": "pistol",
     "ranged_damage": { "damage_type": "bullet", "amount": -1 },
     "dispersion": 620,
+    "valid_mod_locations": [ [ "stock mount", 1 ] ],
     "durability": 3,
     "blackpowder_tolerance": 60,
     "clip_size": 2,
     "reload": 200,
-    "valid_mod_locations": [  ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
     "flags": [ "ALLOWS_BODY_BLOCK", "RELOAD_ONE", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "38": 2 } } ],
@@ -48,7 +48,7 @@
     "to_hit": -1,
     "material": [ "steel", "wood" ],
     "ammo": [ "357mag", "38" ],
-    "range": 3,
+    "range": 4,
     "dispersion": 520,
     "durability": 6,
     "blackpowder_tolerance": 96,
@@ -88,6 +88,7 @@
     "dispersion": 480,
     "durability": 8,
     "blackpowder_tolerance": 56,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "clip_size": 6,
     "pocket_data": [
       {
@@ -197,15 +198,7 @@
     "durability": 10,
     "blackpowder_tolerance": 56,
     "clip_size": 5,
-    "valid_mod_locations": [
-      [ "barrel", 1 ],
-      [ "grip", 1 ],
-      [ "mechanism", 2 ],
-      [ "rail mount", 1 ],
-      [ "sights mount", 1 ],
-      [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
-    ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -241,15 +234,7 @@
     "durability": 10,
     "blackpowder_tolerance": 48,
     "clip_size": 6,
-    "valid_mod_locations": [
-      [ "barrel", 1 ],
-      [ "grip", 1 ],
-      [ "mechanism", 2 ],
-      [ "rail mount", 1 ],
-      [ "sights", 1 ],
-      [ "stocks mount", 1 ],
-      [ "underbarrel mount", 1 ]
-    ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -332,15 +317,7 @@
     "durability": 10,
     "blackpowder_tolerance": 56,
     "clip_size": 7,
-    "valid_mod_locations": [
-      [ "barrel", 1 ],
-      [ "grip", 1 ],
-      [ "mechanism", 2 ],
-      [ "rail", 1 ],
-      [ "sights", 1 ],
-      [ "stock", 1 ],
-      [ "underbarrel", 1 ]
-    ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -379,15 +356,7 @@
     "handling": 11,
     "durability": 10,
     "blackpowder_tolerance": 56,
-    "valid_mod_locations": [
-      [ "barrel", 1 ],
-      [ "grip", 1 ],
-      [ "mechanism", 2 ],
-      [ "rail mount", 1 ],
-      [ "sights mount", 1 ],
-      [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
-    ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "ammo": [ "357mag", "38" ],
     "clip_size": 6,
     "pocket_data": [
@@ -441,15 +410,7 @@
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 6,
-    "valid_mod_locations": [
-      [ "barrel", 1 ],
-      [ "grip", 1 ],
-      [ "mechanism", 2 ],
-      [ "rail mount", 1 ],
-      [ "sights mount", 1 ],
-      [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
-    ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -485,19 +446,19 @@
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "wood" ],
     "color": "dark_gray",
-    "range": 7,
+    "range": 11,
     "ammo": [ "357mag", "38" ],
     "dispersion": 140,
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 10,
     "valid_mod_locations": [
-      [ "grip", 1 ],
+      [ "barrel", 1 ],
       [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
       [ "stock mount", 1 ],
-      [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
@@ -529,19 +490,19 @@
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "wood" ],
     "color": "dark_gray",
-    "range": 7,
+    "range": 11,
     "ammo": [ "357mag", "38" ],
     "dispersion": 140,
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 10,
     "valid_mod_locations": [
-      [ "grip", 1 ],
+      [ "barrel", 1 ],
       [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
       [ "stock mount", 1 ],
-      [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
@@ -573,19 +534,19 @@
     "to_hit": { "grip": "none", "length": "hand", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "wood" ],
     "color": "dark_gray",
-    "range": 5,
+    "range": 8,
     "ammo": [ "357mag", "38" ],
     "dispersion": 140,
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 8,
     "valid_mod_locations": [
-      [ "grip", 1 ],
+      [ "barrel", 1 ],
       [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
       [ "stock mount", 1 ],
-      [ "rail mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],

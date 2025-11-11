@@ -4,7 +4,7 @@
     "id": "t_triffid_bark_wall",
     "name": "solid bark wall",
     "description": "A solid wall of bark, enclosing the trunk of a massive tree.  It will probably burn quite well.",
-    "symbol": "LINE_OXOX",
+    "symbol": "#",
     "color": "brown",
     "move_cost": 0,
     "coverage": 100,
@@ -27,7 +27,7 @@
     "id": "t_bark_wall_chipped",
     "name": "chipped bark wall",
     "description": "A solid wall of bark enclosing the trunk of a massive tree.  Some of it has been broken away.",
-    "symbol": "LINE_OXOX",
+    "symbol": "#",
     "color": "brown",
     "move_cost": 0,
     "coverage": 100,
@@ -69,7 +69,7 @@
     "id": "t_triffid_wood_wall",
     "name": "solid wood wall",
     "description": "A solid wall of naturally grown wood.  Likely very flammable.",
-    "symbol": "LINE_OXOX",
+    "symbol": "#",
     "color": "brown",
     "move_cost": 0,
     "coverage": 100,
@@ -136,7 +136,7 @@
     "coverage": 40,
     "concealment": 40,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH" ],
-    "bash": { "str_min": 4, "str_max": 60, "sound": "crunch.", "sound_fail": "poof!", "ter_set": "t_null" }
+    "bash": { "str_min": 4, "str_max": 60, "sound": "crunch.", "sound_fail": "poof!", "ter_set": "t_open_air" }
   },
   {
     "type": "terrain",
@@ -206,7 +206,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 2, 5 ] } ]
     }
   },
@@ -228,7 +228,7 @@
       "str_max": 150,
       "sound": "crunch!",
       "sound_fail": "whump!",
-      "ter_set": "t_null",
+      "ter_set": "t_open_air",
       "items": [ { "item": "splinter", "count": [ 2, 5 ] } ]
     }
   }

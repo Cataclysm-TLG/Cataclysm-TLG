@@ -4,7 +4,7 @@
     "method": "json",
     "om_terrain": [ "s_butcher" ],
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "bbbbbbbbbbbbbbbbbbbbbbbb",
         "bbbbbbbbbbbbbbbbbbbbbbbb",
@@ -31,10 +31,10 @@
         "                        ",
         "                        "
       ],
-      "palettes": [ "commercial", "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "commercial", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover_urban",
-        ".": "t_linoleum_gray",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "b": "t_sidewalk",
         "d": "t_wall_glass",
         "e": "t_door_c",
@@ -188,7 +188,7 @@
     "method": "json",
     "om_terrain": [ "s_butcher_1" ],
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "bbbbbbbbbbbbbbbbbbbbbbbb",
         "bbbbbbbbbbbbbbbbbbbbbbbb",
@@ -215,10 +215,10 @@
         "                        ",
         "                        "
       ],
-      "palettes": [ "commercial", "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "commercial", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover",
-        ".": "t_linoleum_gray",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         ",": "t_floor",
         "l": "t_floor",
         "c": "t_floor",
@@ -247,6 +247,7 @@
         "p": "f_metal_butcher_rack",
         "S": "f_sink"
       },
+      "items": { "t": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "t": {  } },
       "place_loot": [
         { "group": "butcher_meat", "chance": 60, "x": [ 4, 5 ], "y": 3, "repeat": [ 1, 3 ] },
@@ -382,7 +383,7 @@
     "method": "json",
     "om_terrain": [ "s_butcher_2" ],
     "object": {
-      "fill_ter": "t_linoleum_white",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
       "rows": [
         "bbbbbbbbbbbbbbbbbbbbbbbb",
         "bbbbbbbbbbbbbbbbbbbbbbbb",
@@ -409,10 +410,10 @@
         "                        ",
         "                        "
       ],
-      "palettes": [ "commercial", "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "commercial", "parametrized_walls_palette" ],
       "terrain": {
         " ": "t_region_groundcover",
-        ".": "t_linoleum_white",
+        ".": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "l": "t_floor",
         "c": "t_floor",
         "s": "t_floor",
@@ -448,7 +449,8 @@
       "items": {
         "F": { "item": "butcher_raw_meat", "chance": 70, "repeat": [ 0, 3 ] },
         "k": { "item": "butcher_meat", "chance": 70, "repeat": [ 0, 3 ] },
-        "i": { "item": "butcher_raw_meat", "chance": 70, "repeat": [ 0, 3 ] }
+        "i": { "item": "butcher_raw_meat", "chance": 70, "repeat": [ 0, 3 ] },
+        "t": { "item": "SUS_toilet", "chance": 50 }
       },
       "place_loot": [
         { "group": "trash", "chance": 80, "x": 11, "y": 16 },

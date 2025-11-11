@@ -70,8 +70,8 @@
         "  -..............-      ",
         "  ----------------      "
       ],
-      "palettes": [ "roof_palette" ],
-      "terrain": { "#": "t_wall_w", "+": "t_door_metal_pickable", "_": "t_thconc_floor" },
+      "palettes": [ "roof_palette", "parametrized_walls_palette" ],
+      "terrain": { "+": "t_door_metal_pickable", "_": "t_thconc_floor" },
       "place_nested": [
         {
           "chunks": [
@@ -234,7 +234,7 @@
         ",,,,,,,,,,,,,,,,,,,,,,,,"
       ],
       "palettes": [ "gun_store_palette" ],
-      "vendingmachines": { "V": { "item_group": "vending_ammo", "lootable": false } },
+      "vendingmachines": { "V": { "item_group": "vending_ammo" } },
       "terrain": { ";": "t_sidewalk" },
       "place_loot": [
         { "group": "cash_register_random", "x": [ 4, 6 ], "y": 5 },
@@ -274,8 +274,8 @@
         "                        ",
         "                        "
       ],
-      "palettes": [ "roof_palette" ],
-      "terrain": { "#": "t_wall_w", "+": "t_door_metal_pickable", "_": "t_thconc_floor" },
+      "palettes": [ "roof_palette", "parametrized_walls_palette" ],
+      "terrain": { "+": "t_door_metal_pickable", "_": "t_thconc_floor" },
       "place_nested": [
         {
           "chunks": [
@@ -374,7 +374,7 @@
       ],
       "palettes": [ "gun_store_palette" ],
       "terrain": { ";": "t_sidewalk" },
-      "vendingmachines": { "V": { "item_group": "vending_ammo", "lootable": true } },
+      "vendingmachines": { "V": { "item_group": "vending_ammo" } },
       "nested": {
         "#": { "chunks": [ [ "general_graffiti", 15 ], [ "null", 75 ] ] },
         "m": { "chunks": [ [ "destroyed_furniture", 40 ], [ "null", 80 ] ] },

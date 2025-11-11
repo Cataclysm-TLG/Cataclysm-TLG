@@ -96,7 +96,7 @@
     "type": "BIONIC_ITEM",
     "name": { "str": "Protective Lenses CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A bionic package that seals the user's eye sockets with highly-protective mirrored lenses and re-routes their tear ducts to their mouth.  When the user cries, they must spit out or swallow their tears.",
+    "description": "A bionic package that seals the user's eye sockets with highly-protective mirrored lenses which can retract into their frames at will.",
     "price": "5500 USD",
     "price_postapoc": "35 USD",
     "weight": "500 g",
@@ -937,18 +937,6 @@
     "difficulty": 4
   },
   {
-    "id": "bio_sunglasses",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
-    "name": { "str": "Anti-Glare Compensators CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A set of quick-reacting transition lenses that are installed over the user's eyes.  They negate glare penalties, partially protect from bright flashes, and protect the eyes when welding.",
-    "price": "4500 USD",
-    "price_postapoc": "5 USD",
-    "weight": "1 g",
-    "difficulty": 4
-  },
-  {
     "id": "bio_synlungs",
     "copy-from": "bionic_general",
     "type": "BIONIC_ITEM",
@@ -1146,18 +1134,6 @@
     "price_postapoc": "10 USD",
     "weight": "100 g",
     "difficulty": 5
-  },
-  {
-    "id": "bio_soporific",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "BIONIC_ITEM",
-    "name": { "str": "Soporific Induction CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A microscopic electrode designed to gently stimulate a particular cluster of neurons in the hypothalamus, helping the user to fall asleep.",
-    "price": "3500 USD",
-    "price_postapoc": "5 USD",
-    "weight": "50 g",
-    "difficulty": 2
   },
   {
     "id": "bio_ankles",
@@ -1387,9 +1363,10 @@
   },
   {
     "id": "bio_sleep_shutdown",
-    "copy-from": "bionic_general_faulty",
+    "copy-from": "bionic_general_npc_usable",
     "type": "BIONIC_ITEM",
-    "name": { "str": "Sleep Mode Shutdown CBM" },
+    "name": { "str": "Sleep Mode CBM" },
+    "looks_like": "bio_int_enhancer",
     "description": "A CBM that completely shuts down all communication between the user's brain and the rest of their body when they fall asleep, preventing them from waking up under any circumstance until their natural sleep cycle completes.  An inability to trigger its effects manually makes it useless as an anesthesia substitute.",
     "weight": "100 g",
     "price_postapoc": "5 USD",

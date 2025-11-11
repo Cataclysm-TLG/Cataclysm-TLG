@@ -91,7 +91,7 @@ vehicle_part *most_repairable_part( vehicle &veh, Character &who )
     return vp_most_damaged != nullptr ? vp_most_damaged : vp_broken;
 }
 
-bool repair_part( vehicle &veh, vehicle_part &pt, Character &who )
+bool repair_part( map &here, vehicle &veh, vehicle_part &pt, Character &who )
 {
     const vpart_info &vp = pt.info();
 
@@ -99,12 +99,12 @@ bool repair_part( vehicle &veh, vehicle_part &pt, Character &who )
                                   ? vp.install_requirements()
                                   : vp.repair_requirements() * pt.get_base().repairable_levels();
 
-    const inventory &inv = who.crafting_inventory( who.pos(), PICKUP_RANGE, !who.is_npc() );
+    const inventory &inv = who.crafting_inventory( who.pos_bub(), PICKUP_RANGE, !who.is_npc() );
     inventory map_inv;
     // allow NPCs to use welding rigs they can't see ( on the other side of a vehicle )
     // as they have the handicap of not being able to use the veh interaction menu
     // or able to drag a welding cart etc.
-    map_inv.form_from_map( who.pos(), PICKUP_RANGE, &who, false, !who.is_npc() );
+    map_inv.form_from_map( who.pos_bub(), PICKUP_RANGE, &who, false, !who.is_npc() );
     if( !reqs.can_make_with_inventory( inv, is_crafting_component ) ) {
         who.add_msg_if_player( m_info, _( "You don't meet the requirements to repair the %s." ),
                                pt.name() );
@@ -140,15 +140,15 @@ bool repair_part( vehicle &veh, vehicle_part &pt, Character &who )
         const point_rel_ms mount = pt.mount;
         const units::angle direction = pt.direction;
         const std::string variant = pt.variant;
-        get_map().spawn_items( who.pos_bub(), pt.pieces_for_broken_part() );
+        here.spawn_items( who.pos_bub( here ), pt.pieces_for_broken_part() );
         veh.remove_part( pt );
-        const int partnum = veh.install_part( mount, vpid, std::move( base ) );
+        const int partnum = veh.install_part( here, mount, vpid, std::move( base ) );
         if( partnum >= 0 ) {
             vehicle_part &vp = veh.part( partnum );
             vp.direction = direction;
             vp.variant = variant;
         }
-        veh.part_removal_cleanup();
+        veh.part_removal_cleanup( here );
         who.add_msg_if_player( m_good, _( "You replace the %1$s's %2$s. (was %3$s)" ),
                                veh.name, partname, startdurability );
     } else {
@@ -373,7 +373,7 @@ class veh_menu_cb : public uilist_callback
             last_view = player_character.view_offset;
             terrain_draw_cb = make_shared_fast<game::draw_callback_t>( [this, &player_character]() {
                 if( draw_trail && last >= 0 && static_cast<size_t>( last ) < points.size() ) {
-                    g->draw_trail_to_square( player_character.view_offset.raw(), true );
+                    g->draw_trail_to_square( player_character.view_offset, true );
                 }
             } );
             g->add_draw_callback( terrain_draw_cb );
@@ -397,25 +397,35 @@ class veh_menu_cb : public uilist_callback
             }
             last = menu->selected;
             avatar &player_character = get_avatar();
+
             if( menu->selected < 0 || menu->selected >= static_cast<int>( points.size() ) ) {
-                player_character.view_offset = tripoint_rel_ms_zero;
+                player_character.view_offset = tripoint_rel_ms::zero;
             } else {
                 const tripoint &center = points[menu->selected];
-                player_character.view_offset = tripoint_rel_ms( center - player_character.pos() );
-                // Remove next line if/when it's wanted/safe to shift view to other zlevels
+                player_character.view_offset = tripoint_rel_ms( center - player_character.pos_bub().raw() );
+                // Prevent view from jumping across z-levels.
                 player_character.view_offset.z() = 0;
             }
+
             g->invalidate_main_ui_adaptor();
-            if( on_select ) {
-                on_select();
-                map &m = get_map();
-                m.invalidate_map_cache( m.get_abs_sub().z() );
+
+            // Copy callback locally to protect against self-destruction.
+            const auto cb = on_select;
+            if( cb ) {
+                cb();  // May destroy menu or this callback object.
+            }
+            // Only invalidate map cache if the global game pointer still exists.
+            if( g != nullptr ) {
+                map &here = get_map();
+                here.invalidate_map_cache( here.get_abs_sub().z() );
             }
         }
 };
 
 bool veh_menu::query()
 {
+    map &here = get_map(); // TODO: Handle getting the correct map.
+
     if( items.empty() ) {
         debugmsg( "veh_menu::query() called with empty items" );
         return false;
@@ -443,8 +453,11 @@ bool veh_menu::query()
     veh_menu_cb cb( locations );
 
     cb.on_select = [this, &menu]() {
-        if( items[menu.selected]._on_select ) {
-            items[menu.selected]._on_select();
+        if( menu.selected >= 0 && menu.selected < static_cast<int>( items.size() ) ) {
+            const auto &it = items[menu.selected];
+            if( it._on_select ) {
+                it._on_select();
+            }
         }
     };
 
@@ -484,10 +497,9 @@ bool veh_menu::query()
 
     chosen._on_submit();
 
-    veh.refresh();
-    map &m = get_map();
-    m.invalidate_visibility_cache();
-    m.invalidate_map_cache( m.get_abs_sub().z() );
+    veh.refresh( );
+    here.invalidate_visibility_cache();
+    here.invalidate_map_cache( here.get_abs_sub().z() );
 
     return chosen._keep_menu_open;
 }

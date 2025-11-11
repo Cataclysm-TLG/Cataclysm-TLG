@@ -20,6 +20,7 @@
 #include "enum_traits.h"
 #include "effect_on_condition.h"
 #include "flag.h"
+#include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "generic_factory.h"
 #include "inventory.h"
@@ -27,6 +28,7 @@
 #include "item_group.h"
 #include "itype.h"
 #include "json.h"
+#include "mapgen.h"
 #include "mapgen_functions.h"
 #include "npc.h"
 #include "output.h"
@@ -1219,17 +1221,21 @@ std::string recipe::result_name( const bool decorated ) const
 {
     std::string name;
     if( !name_.empty() ) {
+        // if the recipe has an explicit name (such as for proficiency training) - use that
         name = name_.translated();
-    } else if( !variant().empty() ) {
-        auto iter_var = std::find_if( result_->variants.begin(), result_->variants.end(),
-        [this]( const itype_variant_data & itvar ) {
-            return itvar.id == variant();
-        } );
-        if( iter_var != result_->variants.end() ) {
-            name = iter_var->alt_name.translated();
-        }
     } else {
-        name = item::tname( result_, 1, tname::item_name );
+        // Names are tricky, so we have to create a temporary fake result item to get one.
+        // As of 2025-01-01 there's no better way around this.
+        item temp_item( result_ );
+        // Use generic item name by default.
+        tname::segment_bitset segs = tname::base_item_name;
+        if( !variant().empty() ) {
+            // ..but if the recipe calls for a specific varaint - then use that variant.
+            // Note that `temp_item` is likely to already have a random variant set at the time of creation.
+            temp_item.set_itype_variant( variant() );
+            segs = tname::item_identity_name;
+        }
+        name = temp_item.tname( 1, segs );
     }
     if( decorated &&
         uistate.favorite_recipes.find( this->ident() ) != uistate.favorite_recipes.end() ) {
@@ -1298,11 +1304,12 @@ std::function<bool( const item & )> recipe::get_component_filter(
     std::function<bool( const item & )> magazine_filter = return_true<item>;
     if( has_flag( "NEED_FULL_MAGAZINE" ) ) {
         magazine_filter = []( const item & component ) {
-            if( component.ammo_remaining() == 0 ) {
+            if( component.ammo_remaining( ) == 0 ) {
                 return false;
             }
             return !component.is_magazine() ||
-                   ( component.ammo_remaining() >= component.ammo_capacity( component.ammo_data()->ammo->type ) );
+                   ( component.ammo_remaining( ) >= component.ammo_capacity(
+                         component.ammo_data()->ammo->type ) );
         };
     }
 
@@ -1316,22 +1323,8 @@ std::function<bool( const item & )> recipe::get_component_filter(
     };
 }
 
-bool recipe::npc_can_craft( std::string &reason ) const
+bool recipe::npc_can_craft( std::string & ) const
 {
-    if( is_practice() ) {
-        reason = _( "Ordering NPC to practice is not implemented yet." );
-        return false;
-    }
-    if( result()->phase != phase_id::SOLID ) {
-        reason = _( "Ordering NPC to craft non-solid item is not implemented yet." );
-        return false;
-    }
-    for( const auto& [bp, _] : get_byproducts() ) {
-        if( bp->phase != phase_id::SOLID ) {
-            reason = _( "Ordering NPC to craft non-solid item is not implemented yet." );
-            return false;
-        }
-    }
     return true;
 }
 

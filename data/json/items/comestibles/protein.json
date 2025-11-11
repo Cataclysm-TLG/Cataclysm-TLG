@@ -6,7 +6,6 @@
     "name": { "str_sp": "protein drink" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent green drink" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "sapient green drink" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
     "description": "A thin slurry of refined protein mixed with water.  While quite nutritious, it is not particularly tasty.",
@@ -25,7 +24,7 @@
     "calories": 100,
     "quench": 40,
     "fun": -1,
-    "vitamins": [ [ "calcium", "73 mg" ] ],
+    "vitamins": [ ],
     "flags": [ "EATEN_COLD" ]
   },
   {
@@ -34,11 +33,10 @@
     "comestible_type": "FOOD",
     "name": { "str_sp": "protein powder" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent green powder" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "sapient green powder" } },
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "people %s" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
-    "description": "Raw, refined protein.  While quite nutritious, it is impossible to enjoy in its pure form, try adding water.",
+    "description": "A powder consisting chiefly of dried protein.  Eating it in its current state would be an unpleasant experience, to say the least.",
     "//": "1 g of protein powder is 0.959 ml, 1 serving is 28g and 27ml",
     "weight": "28 g",
     "volume": "27 ml",
@@ -50,7 +48,9 @@
     "color": "white",
     "container": "bottle_plastic_small",
     "calories": 100,
+    "quench": -10,
     "freezing_point": -274,
+    "fun": -4,
     "vitamins": [  ]
   },
   {
@@ -80,7 +80,6 @@
     "name": { "str_sp": "protein shake" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent green shake" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "sapient green shake" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
     "description": "A thick and tasty beverage made from pure refined protein and nutritious fruit.",
@@ -90,8 +89,7 @@
     "volume": "500 ml",
     "charges": 2,
     "quench": 20,
-    "relative": { "vitamins": [ [ "vitC", "20 mg" ] ] },
-    "vitamins": [ [ "fruit_allergen", 1 ] ]
+    "extend": { "vitamins": [ [ "vitC", "20 mg" ], [ "fruit_allergen", 1 ] ] }
   },
   {
     "id": "protein_shake_fortified",
@@ -100,11 +98,10 @@
     "name": { "str_sp": "fortified protein shake" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "fortified soylent green shake" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "fortified sapient green shake" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
     "description": "A thick and tasty beverage made from pure refined protein and nutritious fruit.  It has been supplemented with extra vitamins and minerals.",
-    "relative": { "vitamins": [ [ "calcium", "52 mg" ], [ "iron", "940 μg" ], [ "vitC", "5 mg" ] ] }
+    "vitamins": [ [ "calcium", "175 mg" ], [ "iron", "940 μg" ], [ "vitC", "20 mg" ] ]
   },
   {
     "id": "milk_fortified",
@@ -113,7 +110,6 @@
     "name": { "str_sp": "fortified milk" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent milk" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "sapient-enhanced milk" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "freaky %s" } }
     ],
     "description": "Milk enriched with protein powder, it's extra healthy and doesn't taste too bad.",
@@ -142,7 +138,6 @@
     "name": { "str_sp": "protein smoothie" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "soylent smoothie" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "sapient green smoothie" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "perturbing %s" } }
     ],
     "description": "A thick and tasty smoothie made from pure refined protein and nutritious fruit mixed into milk.",
@@ -151,8 +146,6 @@
     "fun": 5,
     "volume": "500 ml",
     "charges": 2,
-    "quench": 18,
-    "relative": { "vitamins": [ [ "vitC", 20 ] ] },
-    "vitamins": [ [ "fruit_allergen", 1 ], [ "milk_allergen", 1 ] ]
+    "quench": 18
   }
 ]

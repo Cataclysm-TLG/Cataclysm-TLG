@@ -41,6 +41,11 @@
   },
   {
     "type": "construction_group",
+    "id": "place_arc_furnace",
+    "name": "Place Arc Furnace"
+  },
+  {
+    "type": "construction_group",
     "id": "build_armchair",
     "name": "Place an armchair"
   },
@@ -746,6 +751,11 @@
   },
   {
     "type": "construction_group",
+    "id": "build_stone_fireplace",
+    "name": "Build Stone Fireplace"
+  },
+  {
+    "type": "construction_group",
     "id": "build_stone_wall",
     "name": "Build Stone Wall"
   },
@@ -1412,6 +1422,16 @@
   },
   {
     "type": "construction_group",
+    "id": "place_motorbike_battery",
+    "name": "Place Motorbike Battery"
+  },
+  {
+    "type": "construction_group",
+    "id": "place_motorbike_small_battery",
+    "name": "Place Small Motorbike Battery"
+  },
+  {
+    "type": "construction_group",
     "id": "place_washing_machine",
     "name": "Place Washing Machine"
   },
@@ -1769,11 +1789,6 @@
     "type": "construction_group",
     "id": "build_clay_oven",
     "name": "Build Clay Oven"
-  },
-  {
-    "type": "construction_group",
-    "id": "place_active_backup_generator",
-    "name": "Place backup generator"
   },
   {
     "type": "construction_group",

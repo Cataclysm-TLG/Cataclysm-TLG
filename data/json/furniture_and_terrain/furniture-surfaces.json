@@ -195,7 +195,7 @@
       "items": [ { "item": "leather_tarp", "count": 1 } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 500000, "volume": "500 L" }
+    "workbench": { "multiplier": 1.05, "mass": 500000, "volume": "500 L" }
   },
   {
     "type": "furniture",
@@ -219,7 +219,7 @@
       "items": [ { "item": "plastic_sheet", "count": 1 } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 500000, "volume": "500 L" }
+    "workbench": { "multiplier": 1.05, "mass": 500000, "volume": "500 L" }
   },
   {
     "type": "furniture",
@@ -244,7 +244,7 @@
       "items": [ { "item": "tarp", "count": 1 } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 500000, "volume": "500 L" }
+    "workbench": { "multiplier": 1.05, "mass": 500000, "volume": "500 L" }
   },
   {
     "type": "furniture",
@@ -269,7 +269,7 @@
       "items": [ { "item": "gum_blanket", "count": 1 } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 500000, "volume": "500 L" }
+    "workbench": { "multiplier": 1.05, "mass": 500000, "volume": "500 L" }
   },
   {
     "type": "furniture",
@@ -293,7 +293,7 @@
       "items": [ { "item": "fiber_mat", "count": 1 } ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 500000, "volume": "500 L" }
+    "workbench": { "multiplier": 1.05, "mass": 500000, "volume": "500 L" }
   },
   {
     "type": "furniture",
@@ -415,7 +415,7 @@
       ]
     },
     "examine_action": "workbench",
-    "workbench": { "multiplier": 0.85, "mass": 200000, "volume": "75 L" }
+    "workbench": { "multiplier": 1.05, "mass": 200000, "volume": "75 L" }
   },
   {
     "type": "furniture",

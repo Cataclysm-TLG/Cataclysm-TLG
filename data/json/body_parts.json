@@ -330,7 +330,8 @@
         "duration": 1,
         "duration_dmg_scaling": 0.5
       }
-    ]
+    ],
+    "similar_bodyparts": [ "eyes_frog" ]
   },
   {
     "id": "mouth",
@@ -611,7 +612,7 @@
     "heading_multiple": "legs",
     "hp_bar_ui_text": "L LEG",
     "encumbrance_text": "Running and swimming are slowed.",
-    "encumbrance_threshold": 6,
+    "encumbrance_threshold": 8,
     "main_part": "leg_l",
     "connected_to": "torso",
     "opposite_part": "leg_r",
@@ -705,7 +706,7 @@
     "heading_multiple": "legs",
     "hp_bar_ui_text": "R LEG",
     "encumbrance_text": "Running and swimming are slowed.",
-    "encumbrance_threshold": 6,
+    "encumbrance_threshold": 8,
     "main_part": "leg_r",
     "connected_to": "torso",
     "opposite_part": "leg_l",
@@ -903,7 +904,7 @@
     "parent": "bp_null",
     "side": 0,
     "opposite": "sub_limb_debug",
-    "name": "debug limb should never be seen"
+    "name": { "str": "debug limb should never be seen", "//~": "NO_I18N" }
   },
   {
     "id": "sub_limb_debug_tail",
@@ -911,7 +912,7 @@
     "parent": "debug_tail",
     "side": 0,
     "opposite": "sub_limb_debug_tail",
-    "name": "debug limb for debug tail"
+    "name": { "str": "debug limb for debug tail", "//~": "NO_I18N" }
   },
   {
     "id": "torso_upper",
@@ -1259,7 +1260,8 @@
     "side": 1,
     "opposite": "eyes_right",
     "name_multiple": "eyes",
-    "name": "left eye"
+    "name": "left eye",
+    "similar_bodyparts": [ "eyes_frog_left" ]
   },
   {
     "id": "eyes_right",
@@ -1269,7 +1271,8 @@
     "side": 2,
     "opposite": "eyes_left",
     "name_multiple": "eyes",
-    "name": "right eye"
+    "name": "right eye",
+    "similar_bodyparts": [ "eyes_frog_right" ]
   },
   {
     "id": "mouth_lips",

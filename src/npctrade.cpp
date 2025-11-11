@@ -27,6 +27,9 @@
 static const flag_id json_flag_NO_UNWIELD( "NO_UNWIELD" );
 static const skill_id skill_speech( "speech" );
 
+static const trait_id trait_GUILELESS( "GUILELESS" );
+static const trait_id trait_LIAR( "LIAR" );
+
 std::list<item> npc_trading::transfer_items( trade_selector::select_t &stuff, Character &giver,
         Character &receiver, std::list<item_location *> &from_map, bool use_escrow )
 {
@@ -142,7 +145,22 @@ double npc_trading::net_price_adjustment( const Character &buyer, const Characte
     ///\EFFECT_INT slightly increases bartering price changes, relative to NPC INT
 
     ///\EFFECT_BARTER increases bartering price changes, relative to NPC BARTER
-    int const int_diff = seller.int_cur - buyer.int_cur;
+    int seller_trait_bonus = 0;
+    int buyer_trait_bonus = 0;
+    if( buyer.has_trait( trait_LIAR ) ) {
+        buyer_trait_bonus += 3;
+    }
+    if( seller.has_trait( trait_LIAR ) ) {
+        seller_trait_bonus += 3;
+    }
+    if( buyer.has_trait( trait_GUILELESS ) ) {
+        buyer_trait_bonus += -4;
+    }
+    if( seller.has_trait( trait_GUILELESS ) ) {
+        seller_trait_bonus += -4;
+    }
+    int const int_diff = ( seller.int_cur + seller_trait_bonus ) - ( buyer.int_cur +
+                         buyer_trait_bonus );
     double const int_adj = 1 + 0.05 * std::min( 19, std::abs( int_diff ) );
     double const soc_adj = price_adjustment( round( seller.get_skill_level( skill_speech ) -
                            buyer.get_skill_level( skill_speech ) ) );
@@ -358,7 +376,7 @@ bool npc_trading::npc_can_fit_items( npc const &np, trade_selector::select_t con
                 break;
             }
         }
-        if( !item_stored && !np.can_wear( *it.first, false ).success() ) {
+        if( !item_stored ) {
             return false;
         }
     }

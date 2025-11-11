@@ -37,6 +37,7 @@ static const move_mode_id move_mode_walk( "walk" );
 static const ter_str_id ter_t_grass( "t_grass" );
 static const ter_str_id ter_t_pavement( "t_pavement" );
 
+static const trait_id trait_200_MOVE_COST_REDUCTION( "200_MOVE_COST_REDUCTION" );
 static const trait_id trait_HOOVES( "HOOVES" );
 static const trait_id trait_LEG_TENTACLES( "LEG_TENTACLES" );
 static const trait_id trait_TOUGH_FEET( "TOUGH_FEET" );
@@ -176,6 +177,14 @@ TEST_CASE( "mutations_may_affect_movement_cost", "[move_cost][mutation]" )
         }
     }
 
+    GIVEN( "infinite movecost reduction from enchantments" ) {
+        ava.toggle_trait( trait_200_MOVE_COST_REDUCTION );
+        THEN( "there is still a minimum cost" ) {
+            ava.clear_worn();
+            CHECK( ava.run_cost( 100 ) > 0 );
+        }
+    }
+
     GIVEN( "LEG_TENTACLES" ) {
         ava.toggle_trait( trait_LEG_TENTACLES );
         THEN( "barefoot penalty does not apply, but movement is slower" ) {
@@ -216,7 +225,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 100 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -100 );
             }
         }
@@ -225,7 +234,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 200 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -200 );
             }
         }
@@ -234,7 +243,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 600 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -600 );
             }
         }
@@ -251,7 +260,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 100 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -100 );
             }
         }
@@ -260,7 +269,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 200 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -200 );
             }
         }
@@ -269,7 +278,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 660 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -660 );
             }
         }
@@ -285,7 +294,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 154 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -154 );
             }
         }
@@ -294,7 +303,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 309 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -309 );
             }
         }
@@ -303,7 +312,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 932 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -932 );
             }
         }
@@ -321,7 +330,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 100 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -100 );
             }
         }
@@ -330,7 +339,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 200 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -200 );
             }
         }
@@ -339,8 +348,8 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 803 );
-                avatar_action::move( u, get_map(), point_south );
-                CHECK( u.get_moves() == -802 );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
+                CHECK( u.get_moves() == -803 );
             }
         }
     }
@@ -357,7 +366,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 100 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -100 );
             }
         }
@@ -366,7 +375,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 200 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -200 );
             }
         }
@@ -375,7 +384,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 818 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -818 );
             }
         }
@@ -392,7 +401,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 154 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -154 );
             }
         }
@@ -401,7 +410,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "no crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 309 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -309 );
             }
         }
@@ -410,8 +419,8 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 1246 );
-                avatar_action::move( u, get_map(), point_south );
-                CHECK( u.get_moves() == -1245 );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
+                CHECK( u.get_moves() == -1246 );
             }
         }
     }
@@ -430,7 +439,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 1000 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -1000 );
             }
         }
@@ -450,7 +459,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 1179 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -1179 );
             }
         }
@@ -469,7 +478,7 @@ TEST_CASE( "Crawl_score_effects_on_movement_cost", "[move_cost]" )
             REQUIRE( u.get_moves() == 0 );
             THEN( "apply crawling modifier" ) {
                 CHECK( u.run_cost( 100 ) == 1561 );
-                avatar_action::move( u, get_map(), point_south );
+                avatar_action::move( u, get_map(), tripoint_rel_ms::south );
                 CHECK( u.get_moves() == -1561 );
             }
         }

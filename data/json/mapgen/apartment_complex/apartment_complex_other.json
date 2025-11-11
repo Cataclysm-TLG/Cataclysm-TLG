@@ -56,7 +56,7 @@
       ]
     ],
     "object": {
-      "fill_ter": "t_linoleum_gray",
+      "fill_ter": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
       "rows": [
         "ŦŦŦŦŦŦŦŦŦŦ^^^^ŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦ^^^^ŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦ^^^^ŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦŦ^^^^ŦŦŦŦŦŦŦŦŦŦ",
         "----------^^^^--------------------^^^^--------------------^^^^--------------------^^^^----------",
@@ -83,7 +83,7 @@
         "'''''''''''~~''''''''''''''''''''''''''''''''''''''''''''C''''''''''''''''''''''''''''''''''''''",
         "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       ],
-      "palettes": [ "standard_domestic_palette", "apt_complex_ground" ],
+      "palettes": [ "parametrized_linoleum_palette", "standard_domestic_palette", "apt_complex_ground" ],
       "terrain": {
         "^": "t_sidewalk",
         "[": "t_chainfence",
@@ -101,13 +101,13 @@
         "K": "t_thconc_floor",
         "Æ": "t_thconc_floor",
         "≠": "t_thconc_floor",
-        " ": "t_linoleum_white"
+        " ": { "param": "linoleum_color", "fallback": "t_linoleum_white" }
       },
       "furniture": { "G": "f_home_furnace", "Y": "f_dumpster", "C": "f_bulletin" },
       "place_vendingmachines": [
-        { "item_group": "vending_drink", "lootable": true, "x": [ 14, 17 ], "y": 16 },
-        { "item_group": "vending_drink", "lootable": true, "x": 24, "y": 16 },
-        { "item_group": "vending_food", "lootable": true, "x": 24, "y": 18 }
+        { "item_group": "vending_drink", "x": [ 14, 17 ], "y": 16 },
+        { "item_group": "vending_drink", "x": 24, "y": 16 },
+        { "item_group": "vending_food", "x": 24, "y": 18 }
       ]
     }
   },

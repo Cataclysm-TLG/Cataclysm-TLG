@@ -267,7 +267,7 @@ tripoint editmap::pos2screen( const tripoint_bub_ms &p )
  */
 bool editmap::eget_direction( tripoint_rel_ms &p, const std::string &action ) const
 {
-    p = tripoint_rel_ms( tripoint_zero );
+    p = tripoint_rel_ms::zero;
     if( action == "CENTER" ) {
         p = get_player_character().pos_bub() - target;
     } else if( action == "LEFT_WIDE" ) {
@@ -347,7 +347,7 @@ shared_ptr_fast<ui_adaptor> editmap::create_or_get_ui_adaptor()
 std::optional<tripoint_bub_ms> editmap::edit()
 {
     avatar &player_character = get_avatar();
-    restore_on_out_of_scope<tripoint_rel_ms> view_offset_prev( player_character.view_offset );
+    restore_on_out_of_scope view_offset_prev( player_character.view_offset );
     target = player_character.pos_bub() + player_character.view_offset;
     input_context ctxt( "EDITMAP" );
     ctxt.set_iso( true );
@@ -380,8 +380,8 @@ std::optional<tripoint_bub_ms> editmap::edit()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
 
     creature_tracker &creatures = get_creature_tracker();
     do {
@@ -467,7 +467,7 @@ void editmap::uber_draw_ter( const catacurses::window &w, map *m )
         bool draw_veh=true;
     */
 
-    bool game_map = m == &get_map() || w == g->w_terrain;
+    bool game_map = m == &reality_bubble() || w == g->w_terrain;
     const int msize = MAPSIZE_X;
     if( refresh_mplans ) {
         hilights["mplan"].points.clear();
@@ -487,8 +487,8 @@ void editmap::uber_draw_ter( const catacurses::window &w, map *m )
                 if( refresh_mplans ) {
                     monster *mon = dynamic_cast<monster *>( critter );
                     if( mon != nullptr && mon->has_dest() ) {
-                        for( auto &location : line_to( mon->get_location(), mon->get_dest() ) ) {
-                            hilights["mplan"].points[m->bub_from_abs( location )] = 1;
+                        for( auto &location : line_to( mon->pos_abs(), mon->get_dest() ) ) {
+                            hilights["mplan"].points[m->get_bub( location )] = 1;
                         }
                     }
                 }
@@ -535,8 +535,8 @@ void editmap::draw_main_ui_overlay()
         if( editshape == editmap_rect || editshape == editmap_rect_filled || p[0] == p[1] ) {
             if( p[0] == p[1] ) {
                 // ensure more than one cursor is drawn to differ from resizing mode
-                p[0] += point_north_west;
-                p[1] += point_south_east;
+                p[0] += point::north_west;
+                p[1] += point::south_east;
             }
             for( const point_bub_ms &pi : p ) {
                 for( const point_bub_ms &pj : p ) {
@@ -610,7 +610,7 @@ void editmap::draw_main_ui_overlay()
 
     // draw arrows if altblink is set (ie, [m]oving a large selection
     if( blink && altblink ) {
-        const point mp = tmax / 2 + point_south_east;
+        const point mp = tmax / 2 + point::south_east;
         wattron( g->w_terrain, c_yellow );
         mvwaddch( g->w_terrain, point( 1, mp.y ), '<' );
         mvwaddch( g->w_terrain, point( tmax.x - 1, mp.y ), '>' );
@@ -659,9 +659,9 @@ void editmap::draw_main_ui_overlay()
                         }
                         const units::angle veh_dir = ovp->vehicle().face.dir();
                         g->draw_vpart_override( map_p, vpart_id( vd.id ), part_mod, veh_dir, vd.has_cargo,
-                                                ovp->mount_pos().raw() );
+                                                ovp->mount_pos() );
                     } else {
-                        g->draw_vpart_override( map_p, vpart_id::NULL_ID(), 0, 0_degrees, false, point_zero );
+                        g->draw_vpart_override( map_p, vpart_id::NULL_ID(), 0, 0_degrees, false, point_rel_ms::zero );
                     }
                     g->draw_below_override( tripoint_bub_ms( map_p ),
                                             tmpmap.ter( tmp_p ).obj().has_flag( ter_furn_flag::TFLAG_NO_FLOOR ) );
@@ -752,7 +752,7 @@ void editmap::update_view_with_help( const std::string &txt, const std::string &
     const level_cache &map_cache = here.get_cache( target.z() );
 
     Character &player_character = get_player_character();
-    const std::string u_see_msg = player_character.sees( target ) ? _( "yes" ) : _( "no" );
+    const std::string u_see_msg = player_character.sees( here, target ) ? _( "yes" ) : _( "no" );
     mvwprintw( w_info, point( 1, off++ ), _( "dist: %d u_see: %s veh: %s scent: %d" ),
                rl_dist( player_character.pos_bub(), target ), u_see_msg, veh_msg, get_scent().get( target ) );
     mvwprintw( w_info, point( 1, off++ ), _( "sight_range: %d, noon_sight_range: %d," ),
@@ -812,8 +812,8 @@ void editmap::update_view_with_help( const std::string &txt, const std::string &
     if( critter != nullptr ) {
         off = critter->print_info( w_info, off, 5, 1 );
     } else if( vp ) {
-        mvwprintw( w_info, point( 1, off ), _( "There is a %s there.  Parts:" ), vp->vehicle().name );
-        off++;
+        mvwprintw( w_info, point( 1, off++ ), _( "There is a %s there.  Parts:" ),
+                   vp->vehicle().name ); // 13
         vp->vehicle().print_part_list( w_info, off, getmaxy( w_info ) - 1, width, vp->part_index() );
         off += 6;
     }
@@ -1131,8 +1131,8 @@ void editmap::edit_feature()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
 
     blink = true;
     bool quit = false;
@@ -1249,8 +1249,8 @@ void editmap::edit_fld()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
     map &here = get_map();
 
     blink = true;
@@ -1426,8 +1426,8 @@ void editmap::edit_itm()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
 
     shared_ptr_fast<ui_adaptor> ilmenu_ui = ilmenu.create_or_get_ui_adaptor();
 
@@ -1719,8 +1719,8 @@ int editmap::select_shape( shapetype shape, int mode )
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
 
     do {
         if( moveall ) {
@@ -1766,8 +1766,8 @@ int editmap::select_shape( shapetype shape, int mode )
                 on_out_of_scope invalidate_current_ui_2( [this]() {
                     do_ui_invalidation();
                 } );
-                restore_on_out_of_scope<std::string> info_txt_prev_2( info_txt_curr );
-                restore_on_out_of_scope<std::string> info_title_prev_2( info_title_curr );
+                restore_on_out_of_scope info_txt_prev_2( info_txt_curr );
+                restore_on_out_of_scope info_title_prev_2( info_title_curr );
 
                 do {
                     info_txt_curr.clear();
@@ -1851,7 +1851,7 @@ void editmap::mapgen_preview( const real_coords &tc, uilist &gmenu )
     const oter_id orig_oters = omt_ref;
     overmap_buffer.ter_set( omt_pos, oter_id( gmenu.ret ) );
     smallmap tmpmap;
-    tmpmap.generate( omt_pos, calendar::turn, false );
+    tmpmap.generate( omt_pos, calendar::turn, false, run_post_process );
 
     gmenu.border_color = c_light_gray;
     gmenu.hilight_color = c_black_white;
@@ -1868,6 +1868,9 @@ void editmap::mapgen_preview( const real_coords &tc, uilist &gmenu )
     gpmenu.addentry( pgettext( "map generator", "Rotate" ) );
     gpmenu.addentry( pgettext( "map generator", "Apply" ) );
     gpmenu.addentry( pgettext( "map generator", "Change Overmap (Doesn't Apply)" ) );
+    std::string on_or_off = run_post_process ? _( "ON" ) : _( "OFF" );
+    gpmenu.addentry( pgettext( "map generator",
+                               string_format( "Toggle post-process generators (Currently %s)", on_or_off ).c_str() ) );
 
     gpmenu.input_category = "MAPGEN_PREVIEW";
     gpmenu.additional_actions = {
@@ -1882,9 +1885,9 @@ void editmap::mapgen_preview( const real_coords &tc, uilist &gmenu )
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<tinymap *> tinymap_ptr_prev( tmpmap_ptr );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope tinymap_ptr_prev( tmpmap_ptr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
     map &here = get_map();
 
     int lastsel = gmenu.selected;
@@ -1953,7 +1956,7 @@ void editmap::mapgen_preview( const real_coords &tc, uilist &gmenu )
                         std::swap( *destsm, *srcsm );
 
                         for( auto &veh : destsm->vehicles ) {
-                            veh->sm_pos = dest_pos.raw();
+                            veh->sm_pos = here.get_abs_sub().xy() + dest_pos;
                         }
 
                         if( !destsm->spawns.empty() ) {                             // trigger spawnpoints
@@ -1982,20 +1985,14 @@ void editmap::mapgen_preview( const real_coords &tc, uilist &gmenu )
             popup( _( "Changed oter_id from '%s' (%s) to '%s' (%s)" ),
                    orig_oters->get_name( om_vision_level::full ), orig_oters.id().str(),
                    omt_ref->get_name( om_vision_level::full ), omt_ref.id().str() );
-        } else if( gpmenu.ret == UILIST_ADDITIONAL ) {
-            if( gpmenu.ret_act == "LEFT" ) {
-                gmenu.scrollby( -1 );
-                gmenu.create_or_get_ui_adaptor()->invalidate_ui();
-            } else if( gpmenu.ret_act == "RIGHT" ) {
-                gmenu.scrollby( 1 );
-                gmenu.create_or_get_ui_adaptor()->invalidate_ui();
-            }
+        } else if( gpmenu.ret == 4 ) {
+            run_post_process = !run_post_process;
         }
         showpreview = gpmenu.ret == UILIST_TIMEOUT ? !showpreview : true;
-    } while( gpmenu.ret != 2 && gpmenu.ret != 3 && gpmenu.ret != UILIST_CANCEL );
+    } while( gpmenu.ret != 2 && gpmenu.ret != 3 && gpmenu.ret != 4 && gpmenu.ret != UILIST_CANCEL );
 
-    if( gpmenu.ret != 2 &&  // we didn't apply, so restore the original om_ter
-        gpmenu.ret != 3 ) { // chose to change oter_id but not apply mapgen
+    // we didn't apply, so restore the original om_ter
+    if( gpmenu.ret != 2 && gpmenu.ret != 3  && gpmenu.ret != 4 ) {
         overmap_buffer.ter_set( omt_pos, orig_oters );
     }
     gmenu.border_color = c_magenta;
@@ -2090,8 +2087,8 @@ void editmap::mapgen_retarget()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
 
     blink = true;
     do {
@@ -2103,11 +2100,13 @@ void editmap::mapgen_retarget()
 
         ui_manager::redraw();
         action = ctxt.handle_input( get_option<int>( "BLINK_SPEED" ) );
-        if( const std::optional<tripoint> vec = ctxt.get_direction( action ) ) {
-            point_rel_ms vec_ms = coords::project_to<coords::ms>( point_rel_omt( vec->xy() ) );
+        if( const std::optional<tripoint_rel_omt> vec = ctxt.get_direction_rel_omt( action ) ) {
+            point_rel_ms vec_ms = coords::project_to<coords::ms>( vec->xy() );
             tripoint_bub_ms ptarget = target + vec_ms;
-            if( get_map().inbounds( ptarget ) &&
-                get_map().inbounds( ptarget + point( SEEX, SEEY ) ) ) {
+            map &here = get_map();
+
+            if( here.inbounds( ptarget ) &&
+                here.inbounds( ptarget + point( SEEX, SEEY ) ) ) {
                 target = ptarget;
 
                 target_list.clear();
@@ -2144,6 +2143,7 @@ void editmap::edit_mapgen()
     gmenu.input_category = "EDIT_MAPGEN";
     gmenu.additional_actions = {
         { "EDITMAP_MOVE", translation() },
+        { "EDITMAP_TOGGLE_POST_PROCESS_GENERATORS", translation() },
         { "HELP_KEYBINDINGS", translation() } // to refresh the view after exiting from keybindings
     };
     gmenu.allow_additional = true;
@@ -2163,18 +2163,18 @@ void editmap::edit_mapgen()
     on_out_of_scope invalidate_current_ui( [this]() {
         do_ui_invalidation();
     } );
-    restore_on_out_of_scope<std::string> info_txt_prev( info_txt_curr );
-    restore_on_out_of_scope<std::string> info_title_prev( info_title_curr );
+    restore_on_out_of_scope info_txt_prev( info_txt_curr );
+    restore_on_out_of_scope info_title_prev( info_title_curr );
     map &here = get_map();
 
     do {
-        tc.fromabs( here.getglobal( { target.xy(), here.abs_sub.z() } ).xy().raw() );
-        point_bub_ms omt_lpos = here.bub_from_abs( point_abs_ms( tc.begin_om_pos() ) );
+        tc.fromabs( here.get_abs( { target.xy(), here.abs_sub.z() } ).xy().raw() );
+        point_bub_ms omt_lpos = here.get_bub( point_abs_ms( tc.begin_om_pos() ) );
         tripoint_bub_ms om_ltarget = omt_lpos + tripoint( -1 + SEEX, -1 + SEEY, target.z() );
 
         if( target.x() != om_ltarget.x() || target.y() != om_ltarget.y() ) {
             target = om_ltarget;
-            tc.fromabs( here.getglobal( { target.xy(), here.abs_sub.z() } ).xy().raw() );
+            tc.fromabs( here.get_abs( { target.xy(), here.abs_sub.z() } ).xy().raw() );
         }
         target_list.clear();
         for( int x = target.x() - SEEX + 1; x < target.x() + SEEX + 1; x++ ) {
@@ -2191,8 +2191,8 @@ void editmap::edit_mapgen()
         input_context ctxt( gmenu.input_category, keyboard_mode::keycode );
         info_txt_curr = string_format( pgettext( "keybinding descriptions", "%s, %s, %s" ),
                                        ctxt.describe_key_and_name( "EDITMAP_MOVE" ),
-                                       ctxt.describe_key_and_name( "CONFIRM" ),
-                                       ctxt.describe_key_and_name( "QUIT" ) );
+                                       ctxt.describe_key_and_name( "EDITMAP_TOGGLE_POST_PROCESS_GENERATORS" ),
+                                       ctxt.describe_key_and_name( "CONFIRM" ) );
         info_title_curr = pgettext( "map generator", "Mapgen stamp" );
         do_ui_invalidation();
 
@@ -2206,6 +2206,8 @@ void editmap::edit_mapgen()
         } else if( gmenu.ret == UILIST_ADDITIONAL ) {
             if( gmenu.ret_act == "EDITMAP_MOVE" ) {
                 mapgen_retarget();
+            } else if( gmenu.ret_act == "EDITMAP_TOGGLE_POST_PROCESS_GENERATORS" ) {
+                run_post_process = !run_post_process;
             }
         }
     } while( gmenu.ret != UILIST_CANCEL );

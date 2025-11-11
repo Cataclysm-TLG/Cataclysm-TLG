@@ -123,6 +123,7 @@ static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
+static const json_character_flag json_flag_NO_DRENCH( "NO_DRENCH" );
 static const json_character_flag json_flag_NYCTOPHOBIA( "NYCTOPHOBIA" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
 static const json_character_flag json_flag_RAD_DETECT( "RAD_DETECT" );
@@ -146,7 +147,6 @@ static const trait_id trait_CHAOTIC( "CHAOTIC" );
 static const trait_id trait_CHAOTIC_BAD( "CHAOTIC_BAD" );
 static const trait_id trait_CHEMIMBALANCE( "CHEMIMBALANCE" );
 static const trait_id trait_CHLOROMORPH( "CHLOROMORPH" );
-static const trait_id trait_DEBUG_NOTEMP( "DEBUG_NOTEMP" );
 static const trait_id trait_FRESHWATEROSMOSIS( "FRESHWATEROSMOSIS" );
 static const trait_id trait_HAS_NEMESIS( "HAS_NEMESIS" );
 static const trait_id trait_JAUNDICE( "JAUNDICE" );
@@ -512,11 +512,13 @@ void suffer::while_awake( Character &you, const int current_stim )
 
     if( you.has_trait( trait_JITTERY ) && !you.has_effect( effect_shakes ) ) {
         if( current_stim > 50 && one_in( to_turns<int>( 30_minutes ) - ( current_stim * 6 ) ) ) {
-            you.add_effect( effect_shakes, 30_minutes + 1_turns * current_stim );
+            time_duration dur = 1_minutes * rng( 1, 30 );
+            you.add_effect( effect_shakes, dur + 1_turns * current_stim );
         } else if( ( you.get_hunger() > 80 || ( you.get_kcal_percent() < 0.9f &&
                                                 you.get_hunger() > ( 80 - ( 100 - you.get_kcal_percent() * 100 ) ) ) )  &&
                    one_in( to_turns<int>( 50_minutes ) - ( you.get_hunger() * 6 ) ) ) {
-            you.add_effect( effect_shakes, 40_minutes );
+            time_duration dur = 1_minutes * rng( 1, 30 );
+            you.add_effect( effect_shakes, dur );
         }
     }
 
@@ -557,11 +559,11 @@ void suffer::while_awake( Character &you, const int current_stim )
 
 void suffer::from_chemimbalance( Character &you )
 {
-    if( one_turn_in( 6_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) ) {
+    if( one_turn_in( 6_hours ) && !you.has_flag( json_flag_PAIN_IMMUNE ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You suddenly feel sharp pain for no reason." ) );
         you.mod_pain( 3 * rng( 1, 3 ) );
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         int pkilladd = 5 * rng( -1, 2 );
         if( pkilladd > 0 ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel numb." ) );
@@ -570,11 +572,11 @@ void suffer::from_chemimbalance( Character &you )
         }
         you.mod_painkiller( pkilladd );
     }
-    if( one_turn_in( 6_hours ) && !you.has_effect( effect_sleep ) ) {
+    if( one_turn_in( 6_hours ) && !you.has_effect( effect_sleep ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You feel dizzy for a moment." ) );
         you.mod_moves( -to_moves<int>( 1_seconds ) * rng_float( 0.1, 0.3 ) );
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
         int hungadd = 5 * rng( -1, 3 );
         if( hungadd > 0 ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel hungry." ) );
@@ -583,22 +585,22 @@ void suffer::from_chemimbalance( Character &you )
         }
         you.mod_hunger( hungadd );
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours )  && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_bad, _( "You suddenly feel thirsty." ) );
         you.mod_thirst( 5 * rng( 1, 3 ) );
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         you.add_msg_if_player( m_good, _( "You feel fatigued all of a sudden." ) );
         you.mod_fatigue( 10 * rng( 2, 4 ) );
     }
-    if( one_turn_in( 8_hours ) ) {
+    if( one_turn_in( 8_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_morale( morale_feeling_good, 20, 100 );
         } else {
             you.add_morale( morale_feeling_bad, -20, -100 );
         }
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel very cold." ) );
             you.set_all_parts_temp_cur( BODYTEMP_VERY_COLD );
@@ -607,7 +609,7 @@ void suffer::from_chemimbalance( Character &you )
             you.set_all_parts_temp_cur( BODYTEMP_COLD );
         }
     }
-    if( one_turn_in( 6_hours ) ) {
+    if( one_turn_in( 6_hours ) && rng( 0, 1 ) == 1 ) {
         if( one_in( 3 ) ) {
             you.add_msg_if_player( m_bad, _( "You suddenly feel very hot." ) );
             you.set_all_parts_temp_cur( BODYTEMP_VERY_HOT );
@@ -646,7 +648,7 @@ void suffer::from_asthma( Character &you, const int current_stim )
     map &here = get_map();
     if( you.in_sleep_state() && !you.has_effect( effect_narcosis ) ) {
         inventory map_inv;
-        map_inv.form_from_map( you.pos(), 2, &you );
+        map_inv.form_from_map( you.pos_bub(), 2, &you );
         // check if an inhaler is somewhere near
         bool nearby_use = auto_use || oxygenator || map_inv.has_charges( itype_inhaler, 1 ) ||
                           map_inv.has_charges( itype_oxygen_tank, 1 ) ||
@@ -730,7 +732,7 @@ void suffer::from_asthma( Character &you, const int current_stim )
 
 void suffer::in_sunlight( Character &you, outfit &worn )
 {
-    const tripoint position = you.pos();
+    const tripoint_bub_ms position = you.pos_bub();
 
     if( !g->is_in_sunlight( position ) ) {
         return;
@@ -806,7 +808,8 @@ void suffer::in_sunlight( Character &you, outfit &worn )
         }
         const float weather_factor = std::min( incident_sun_irradiance( get_weather().weather_id,
                                                calendar::turn ) / irradiance::moderate, 1.f );
-        const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature( position ) );
+        const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature(
+                                          position ) );
         int flux = ( player_local_temp - 32 ) / 5;
         // Efficiency rapidly falls off when it's too hot due to photosynthesis being an enzymatic process.
         // Some tropical plants can overcome this with specific adaptations, but that would probably be its own mutation.
@@ -1018,7 +1021,7 @@ void suffer::from_sunburn( Character &you, bool severe )
         if( bp == bodypart_id( "eyes" ) ) {
             // Sunglasses can keep the sun off the eyes.
             if( you.has_flag( json_flag_GLARE_RESIST )
-                || you.worn_with_flag( flag_SUN_GLASSES )
+                || you.worn_with_flag( flag_SUN_GLASSES ) || you.worn_with_flag( flag_SUN_SHADE )
                 || you.worn_with_flag( flag_BLIND ) ) {
                 continue;
             }
@@ -1786,7 +1789,7 @@ void suffer::from_artifact_resonance( Character &you, int amt )
             } else if( rng_outcome == 2 ) {
                 you.add_msg_player_or_npc( m_bad, _( "The air folds and distorts around you." ),
                                            _( "The air folds and distorts around <npcname>." ) );
-                teleport::teleport( you );
+                teleport::teleport_creature( you );
             } else if( rng_outcome == 3 ) {
                 you.add_msg_player_or_npc( m_bad, _( "You're bombarded with radioactive energy!" ),
                                            _( "<npcname> is bombarded with radioactive energy!" ) );
@@ -1799,12 +1802,13 @@ void suffer::from_artifact_resonance( Character &you, int amt )
             if( rng_outcome == 1  && !you.in_vehicle ) {
                 you.add_msg_player_or_npc( m_bad, _( "You suddenly shift slightly." ),
                                            _( "<npcname> suddenly shifts slightly." ) );
-                teleport::teleport( you, 1, 1, true, false );
+                teleport::teleport_creature( you, 1, 1, true, false );
             } else if( rng_outcome == 2 ) {
                 you.add_msg_player_or_npc( m_bad,
                                            _( "You hear a painfully loud grinding noise from your location." ),
                                            _( "A painfully loud grinding noise suddenly blares from the location of <npcname>." ) );
-                sounds::sound( you.pos(), 5000, sounds::sound_t::movement, _( "A horribly loud grinding sound!" ),
+                sounds::sound( you.pos_bub(), 5000, sounds::sound_t::movement,
+                               _( "A horribly loud grinding sound!" ),
                                true, "misc", "scraping" );
             } else if( rng_outcome == 3 ) {
                 you.add_msg_player_or_npc( m_bad,
@@ -1845,7 +1849,7 @@ void Character::suffer()
         process_bionic( bio );
     }
 
-    for( const trait_id &mut_id : get_mutations() ) {
+    for( const trait_id &mut_id : get_functioning_mutations() ) {
         if( calendar::once_every( 1_seconds ) &&
             enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER,
                                              0 ) != 0 ) {
@@ -1978,6 +1982,55 @@ bool Character::irradiate( float rads, bool bypass )
     return false;
 }
 
+void Character::drench( int saturation, const body_part_set &flags, bool ignore_waterproof )
+{
+    if( has_flag( json_flag_NO_DRENCH ) ) {
+        return;
+    }
+
+    // Make the body wet
+    for( const bodypart_id &bp : get_all_body_parts() ) {
+        // Different body parts have different size, they can only store so much water
+        int bp_wetness_max = 0;
+        if( flags.test( bp.id() ) ) {
+            bp_wetness_max = get_part_drench_capacity( bp );
+        }
+        const int curr_wetness = get_part_wetness( bp );
+        if( bp_wetness_max == 0 || curr_wetness >= bp_wetness_max ) {
+            continue;
+        }
+
+        // Different sources will only make the bodypart wet to a limit
+        int source_wet_max = saturation * bp_wetness_max / 100;
+        int wetness_increment = ignore_waterproof ? 100 : bp->drench_increment;
+        // Respect maximums
+        const int wetness_max = std::min( source_wet_max, bp_wetness_max );
+
+        if( curr_wetness < wetness_max ) {
+            set_part_wetness( bp, std::min( wetness_max, curr_wetness + wetness_increment * 100 ) );
+        }
+    }
+    const int torso_wetness = get_part_wetness( bodypart_id( "torso" ) );
+    if( torso_wetness >= get_part_drench_capacity( bodypart_id( "torso" ) ) / 2.0 &&
+        has_effect( effect_masked_scent ) &&
+        !maybe_get_value( "waterproof_scent" ) ) {
+        add_msg_if_player( m_info, _( "The water washes away the scent." ) );
+        restore_scent();
+    }
+
+    if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) > 0 ) {
+        add_msg_if_player( m_bad, _( "You feel the water burning your skin." ) );
+    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 &&
+               one_in( 300 ) ) {
+        add_msg_if_player( m_good, _( "The water is making you feel better." ) );
+    }
+
+    // Remove onfire effect
+    if( saturation > 10 || x_in_y( saturation, 10 ) ) {
+        remove_effect( effect_onfire );
+    }
+}
+
 void Character::mend( int rate_multiplier )
 {
     // Wearing splints can slowly mend a broken limb back to 1 hp.
@@ -2082,62 +2135,6 @@ void Character::mend( int rate_multiplier )
             add_msg_if_player( m_good, _( "Your %s has started to mend!" ),
                                body_part_name( bp ) );
         }
-    }
-}
-
-void Character::drench( int saturation, const body_part_set &flags, bool ignore_waterproof )
-{
-    bool in_shell = has_active_mutation( trait_SHELL2 ) ||
-                    has_active_mutation( trait_SHELL3 );
-    if( saturation < 1 ) {
-        return;
-    }
-
-    // OK, water gets in your AEP suit or whatever.  It wasn't built to keep you dry.
-    if( has_trait( trait_DEBUG_NOTEMP ) || in_shell ||
-        ( !ignore_waterproof && is_waterproof( flags ) ) ) {
-        return;
-    }
-
-    // Make the body wet
-    for( const bodypart_id &bp : get_all_body_parts() ) {
-        // Different body parts have different size, they can only store so much water
-        int bp_wetness_max = 0;
-        if( flags.test( bp.id() ) ) {
-            bp_wetness_max = get_part_drench_capacity( bp );
-        }
-
-        if( bp_wetness_max == 0 ) {
-            continue;
-        }
-        // Different sources will only make the bodypart wet to a limit
-        int source_wet_max = saturation * bp_wetness_max / 100;
-        int wetness_increment = ignore_waterproof ? 100 : bp->drench_increment;
-        // Respect maximums
-        const int wetness_max = std::min( source_wet_max, bp_wetness_max );
-        const int curr_wetness = get_part_wetness( bp );
-        if( curr_wetness < wetness_max ) {
-            set_part_wetness( bp, std::min( wetness_max, curr_wetness + wetness_increment * 100 ) );
-        }
-    }
-    const int torso_wetness = get_part_wetness( bodypart_id( "torso" ) );
-    if( torso_wetness >= get_part_drench_capacity( bodypart_id( "torso" ) ) / 2.0 &&
-        has_effect( effect_masked_scent ) &&
-        get_value( "waterproof_scent" ).empty() ) {
-        add_msg_if_player( m_info, _( "The water washes away the scent." ) );
-        restore_scent();
-    }
-
-    if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) > 0 ) {
-        add_msg_if_player( m_bad, _( "You feel the water burning your skin." ) );
-    } else if( enchantment_cache->modify_value( enchant_vals::mod::WEAKNESS_TO_WATER, 0 ) < 0 &&
-               one_in( 300 ) ) {
-        add_msg_if_player( m_good, _( "The water is making you feel better." ) );
-    }
-
-    // Remove onfire effect
-    if( saturation > 10 || x_in_y( saturation, 10 ) ) {
-        remove_effect( effect_onfire );
     }
 }
 

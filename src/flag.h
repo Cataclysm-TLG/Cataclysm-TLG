@@ -69,6 +69,7 @@ extern const flag_id flag_CAMERA_PRO;
 extern const flag_id flag_CANNIBAL;
 extern const flag_id flag_CANT_HEAL_EVERYONE;
 extern const flag_id flag_CANT_WEAR;
+extern const flag_id flag_CAN_USE_IN_DARK;
 extern const flag_id flag_CARNIVORE_OK;
 extern const flag_id flag_CASING;
 extern const flag_id flag_CATTLE;
@@ -89,6 +90,7 @@ extern const flag_id flag_COOKED;
 extern const flag_id flag_CORROSIVE;
 extern const flag_id flag_CORPSE;
 extern const flag_id flag_CRUTCHES;
+extern const flag_id flag_CROSSBOW;
 extern const flag_id flag_CUSHION_FALL;
 extern const flag_id flag_CUSTOM_EXPLOSION;
 extern const flag_id flag_CUT_HARVEST;
@@ -105,14 +107,18 @@ extern const flag_id flag_DROP_ACTION_ONLY_IF_LIQUID;
 extern const flag_id flag_DURABLE_MELEE;
 extern const flag_id flag_EATEN_COLD;
 extern const flag_id flag_EATEN_HOT;
+extern const flag_id flag_E_COPIABLE;
 extern const flag_id flag_EDIBLE_FROZEN;
 extern const flag_id flag_EFFECT_IMPEDING;
 extern const flag_id flag_EFFECT_LIMB_DISABLE_CONDITIONAL_FLAGS;
 extern const flag_id flag_EFFECT_LIMB_SCORE_MOD;
 extern const flag_id flag_EFFECT_LIMB_SCORE_MOD_LOCAL;
+extern const flag_id flag_E_FILE_COLLECTION;
 extern const flag_id flag_ELECTRIC_IMMUNE;
 extern const flag_id flag_ELECTRONIC;
 extern const flag_id flag_ENERGY_SHIELD;
+extern const flag_id flag_E_STORABLE;
+extern const flag_id flag_E_STORABLE_EXCLUSIVE;
 extern const flag_id flag_ETHEREAL_ITEM;
 extern const flag_id flag_EXO_ARM_PLATE;
 extern const flag_id flag_EXO_BOOT_PLATE;
@@ -299,6 +305,7 @@ extern const flag_id flag_RELOAD_AND_SHOOT;
 extern const flag_id flag_RELOAD_EJECT;
 extern const flag_id flag_RELOAD_ONE;
 extern const flag_id flag_REMOVED_STOCK;
+extern const flag_id flag_REPLICA_EQUIPMENT;
 extern const flag_id flag_REQUIRES_BALANCE;
 extern const flag_id flag_REQUIRES_TINDER;
 extern const flag_id flag_RESTRICT_HANDS;
@@ -328,11 +335,12 @@ extern const flag_id flag_SPEEDLOADER_CLIP;
 extern const flag_id flag_SPLINT;
 extern const flag_id flag_STAB;
 extern const flag_id flag_STAB_IMMUNE;
-extern const flag_id flag_STRICT_HUMANITARIANISM;
 extern const flag_id flag_STR_DRAW;
 extern const flag_id flag_STR_RELOAD;
 extern const flag_id flag_STURDY;
 extern const flag_id flag_SUN_GLASSES;
+extern const flag_id flag_PARENT_REQUIRED;
+extern const flag_id flag_SUN_SHADE;
 extern const flag_id flag_SUPER_FANCY;
 extern const flag_id flag_SWIM_GOGGLES;
 extern const flag_id flag_TACK;
@@ -469,7 +477,6 @@ class json_flag
 
         /** true, if flags were loaded */
         static bool is_ready();
-
         static const std::vector<json_flag> &get_all();
 
     private:

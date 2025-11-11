@@ -23,7 +23,7 @@
     "to_hit": -1,
     "material": [ "steel", "wood" ],
     "color": "dark_gray",
-    "range": 7,
+    "range": 11,
     "//range": "Given that .700 NX enjoys MUCH better range at 42 tiles, maybe give this a bit more range at some point, too?",
     "ammo": [ "500" ],
     "ranged_damage": { "damage_type": "bullet", "amount": 2 },
@@ -80,7 +80,7 @@
     "durability": 8,
     "blackpowder_tolerance": 56,
     "clip_size": 5,
-    "valid_mod_locations": [ [ "grip", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ], [ "underbarrel mount", 1 ] ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",

@@ -104,7 +104,7 @@ class outfit
         // will someone get shocked by zapback
         bool hands_conductive() const;
         bool can_pickVolume( const item &it, bool ignore_pkt_settings = true,
-                             bool is_pick_up_inv = false ) const;
+                             bool ignore_non_container_pocket = false ) const;
         side is_wearing_shoes( const bodypart_id &bp ) const;
         bool is_barefoot() const;
         item item_worn_with_flag( const flag_id &f, const bodypart_id &bp ) const;
@@ -165,6 +165,13 @@ class outfit
         int worn_guns() const;
         int clatter_sound() const;
         bool adjust_worn( npc &guy );
+        /**
+         * How much of this part is exposed to wetness? This is used for weather and swimming, but not splash
+         * attacks as those need to iterate through the entire outfit item by item.
+         */
+        void bodypart_wet_protection( bool immersion, std::map<bodypart_id, float> &bp_exposure,
+                                      const std::vector<bodypart_id> &all_body_parts ) const;
+        // Mostly handles drying off after getting wet, so it can't be the same func as bodypart_wet_protection
         float clothing_wetness_mult( const bodypart_id &bp ) const;
         void damage_mitigate( const bodypart_id &bp, damage_unit &dam ) const;
         float damage_resist( const damage_type_id &dt, const bodypart_id &bp, bool to_self = false ) const;
@@ -179,6 +186,7 @@ class outfit
         std::string get_liquid_descriptor( int liquid_remaining = 0 );
 
         int get_coverage( bodypart_id bp ) const;
+        // How much of this part is visible and exposed to sunlight?
         void bodypart_exposure( std::map<bodypart_id, float> &bp_exposure,
                                 const std::vector<bodypart_id> &all_body_parts ) const;
         void prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
@@ -190,7 +198,7 @@ class outfit
         // creates a list of items dependent upon @it
         void add_dependent_item( std::list<item *> &dependent );
         std::list<item> remove_worn_items_with( const std::function<bool( item & )> &filter,
-                                                Character &guy );
+                                                Character &guy, bool unload );
         bool takeoff( item_location loc, std::list<item> *res, Character &guy );
         std::list<item> use_amount(
             const itype_id &it, int quantity, std::list<item> &used,
@@ -270,7 +278,6 @@ class outfit
 };
 
 units::mass get_selected_stack_weight( const item *i, const std::map<const item *, int> &without );
-void post_absorbed_damage_enchantment_adjust( Character &guy, damage_unit &du );
 void destroyed_armor_msg( Character &who, const std::string &pre_damage_name );
 
 #endif // CATA_SRC_CHARACTER_ATTIRE_H

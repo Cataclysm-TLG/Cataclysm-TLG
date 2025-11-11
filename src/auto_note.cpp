@@ -31,7 +31,7 @@ namespace auto_notes
 {
 cata_path auto_note_settings::build_save_path() const
 {
-    return PATH_INFO::player_base_save_path_path() + ".ano.json";
+    return PATH_INFO::player_base_save_path() + ".ano.json";
 }
 
 void auto_note_settings::clear()
@@ -42,7 +42,8 @@ void auto_note_settings::clear()
 
 bool auto_note_settings::save( bool bCharacter )
 {
-    if( bCharacter && !file_exist( PATH_INFO::player_base_save_path() + ".sav" ) ) {
+    if( bCharacter && ( !file_exist( PATH_INFO::player_base_save_path() + ".sav" ) &&
+                        !file_exist( PATH_INFO::player_base_save_path() + ".sav.zzip" ) ) ) {
         return true;
     }
     cata_path sGlobalFile = PATH_INFO::autonote();
@@ -314,7 +315,7 @@ void auto_note_manager_gui::show()
                                        iOffset );
 
         w_header = catacurses::newwin( iHeaderHeight, FULL_SCREEN_WIDTH - 2,
-                                       iOffset + point_south_east );
+                                       iOffset + point::south_east );
 
         w = catacurses::newwin( iContentHeight, FULL_SCREEN_WIDTH - 2,
                                 iOffset + point( 1, iHeaderHeight + 1 ) );
@@ -413,7 +414,7 @@ void auto_note_manager_gui::show()
                         _( "<Tab> to change pages." ) );
 
         // Clear table
-        mvwrectf( w, point_zero, c_black, ' ', 79, iContentHeight );
+        mvwrectf( w, point::zero, c_black, ' ', 79, iContentHeight );
         mvwvline( w, point( 51, 0 ), c_light_gray, LINE_XOXO, iContentHeight );
         mvwvline( w, point( 60, 0 ), c_light_gray, LINE_XOXO, iContentHeight );
         int cacheSize = bCharacter ? char_cacheSize : global_cacheSize;

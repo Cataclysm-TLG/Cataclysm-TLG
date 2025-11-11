@@ -26,7 +26,6 @@
 #include "npc.h"
 #include "output.h"
 #include "pimpl.h"
-#include "point.h"
 #include "rng.h"
 #include "subbodypart.h"
 #include "translation.h"
@@ -54,7 +53,7 @@ bool Character::can_interface_armor() const
 resistances Character::mutation_armor( bodypart_id bp ) const
 {
     resistances res;
-    for( const trait_id &iter : get_mutations() ) {
+    for( const trait_id &iter : get_functioning_mutations() ) {
         res += iter->damage_resistance( bp );
     }
 
@@ -122,34 +121,7 @@ int Character::get_env_resist( bodypart_id bp ) const
 
 // adjusts damage unit depending on type by enchantments.
 // the ITEM_ enchantments only affect the damage resistance for that one item, while the others affect all of them
-static void armor_enchantment_adjust( Character &guy, damage_unit &du )
-{
-    //If we're not dealing any damage of the given type, don't even bother.
-    if( du.amount < 0.1f ) {
-        return;
-    }
-    // FIXME: hardcoded damage types -> enchantments
-    if( du.type == STATIC( damage_type_id( "acid" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_ACID );
-    } else if( du.type == STATIC( damage_type_id( "bash" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_BASH );
-    } else if( du.type == STATIC( damage_type_id( "biological" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_BIO );
-    } else if( du.type == STATIC( damage_type_id( "cold" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_COLD );
-    } else if( du.type == STATIC( damage_type_id( "cut" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_CUT );
-    } else if( du.type == STATIC( damage_type_id( "electric" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_ELEC );
-    } else if( du.type == STATIC( damage_type_id( "heat" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_HEAT );
-    } else if( du.type == STATIC( damage_type_id( "stab" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_STAB );
-    } else if( du.type == STATIC( damage_type_id( "bullet" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::ARMOR_BULLET );
-    }
-    du.amount = std::max( 0.0f, du.amount );
-}
+
 
 void destroyed_armor_msg( Character &who, const std::string &pre_damage_name )
 {
@@ -165,33 +137,8 @@ void destroyed_armor_msg( Character &who, const std::string &pre_damage_name )
                                pre_damage_name );
 }
 
-void post_absorbed_damage_enchantment_adjust( Character &guy, damage_unit &du )
-{
-    // FIXME: hardcoded damage types -> enchantments
-    if( du.type == STATIC( damage_type_id( "acid" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_ACID );
-    } else if( du.type == STATIC( damage_type_id( "bash" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_BASH );
-    } else if( du.type == STATIC( damage_type_id( "biological" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_BIO );
-    } else if( du.type == STATIC( damage_type_id( "cold" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_COLD );
-    } else if( du.type == STATIC( damage_type_id( "cut" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_CUT );
-    } else if( du.type == STATIC( damage_type_id( "electric" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_ELEC );
-    } else if( du.type == STATIC( damage_type_id( "heat" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_HEAT );
-    } else if( du.type == STATIC( damage_type_id( "stab" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_STAB );
-    } else if( du.type == STATIC( damage_type_id( "bullet" ) ) ) {
-        du.amount = guy.calculate_by_enchantment( du.amount, enchant_vals::mod::EXTRA_BULLET );
-    }
-    du.amount = std::max( 0.0f, du.amount );
-}
-
 const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart_id &bp,
-                                        damage_instance &dam )
+                                        damage_instance &dam, const weakpoint & )
 {
     std::list<item> worn_remains;
     bool armor_destroyed = false;
@@ -240,13 +187,15 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
                 elem.amount = 0;
             }
         }
-        // Let's not run fifty huge functions for 9 unused damage types every time anybody gets bapped by a zombie.
-        // if( elem.amount > 0.00f ) {
-        armor_enchantment_adjust( *this, elem );
-        worn.absorb_damage( *this, elem, bp, worn_remains, armor_destroyed );
-        passive_absorb_hit( bp, elem );
-        post_absorbed_damage_enchantment_adjust( *this, elem );
-        // }
+
+        adjust_taken_damage_by_enchantments( elem );
+
+        // Early exit if we're not taking damage.
+        if( elem.amount >= 1.0 ) {
+            worn.absorb_damage( *this, elem, bp, worn_remains, armor_destroyed );
+            passive_absorb_hit( bp, elem );
+            adjust_taken_damage_by_enchantments_post_absorbed( elem );
+        }
         elem.amount = std::max( elem.amount, 0.0f );
     }
     map &here = get_map();
@@ -269,7 +218,7 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // if this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
     if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
-                pos(), nullptr ) ) {
+                pos_bub(), nullptr ) ) {
         armor.deactivate( nullptr, false );
         add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
     }
@@ -305,7 +254,7 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // If this armor has the flag, try to deduct that much energy from it. If that takes it to 0 energy, turn it off before it absorbs damage.
     if( armor.has_flag( flag_USE_POWER_WHEN_HIT ) &&
         units::from_kilojoule( du.amount ) > armor.energy_consume( units::from_kilojoule( du.amount ),
-                pos(), nullptr ) ) {
+                pos_bub(), nullptr ) ) {
         armor.deactivate( nullptr, false );
         add_msg_if_player( _( "Your %s doesn't have enough power and shuts down!" ), armor.tname() );
     }
@@ -332,7 +281,7 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
 bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_bodypart_id &bp,
                                        int roll )
 {
-
+    const map &here = get_map();
     for( item_pocket *const pocket : armor.get_all_ablative_pockets() ) {
         // if the pocket is ablative and not empty we should use its values
         if( !pocket->empty() ) {
@@ -374,7 +323,8 @@ bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_b
                     add_msg_if_player( m_bad, format_string, pre_damage_name, damage_verb );
 
                     if( is_avatar() ) {
-                        SCT.add( point( posx(), posy() ), direction::NORTH, remove_color_tags( pre_damage_name ), m_neutral,
+                        SCT.add( pos_bub( here ).xy().raw(), direction::NORTH, remove_color_tags( pre_damage_name ),
+                                 m_neutral,
                                  damage_verb,
                                  m_info );
                     }
@@ -399,8 +349,8 @@ bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_b
                 if( damaged == item::armor_status::DESTROYED ) {
                     //the plate is damaged like normal armor but also ends up destroyed
                     describe_damage( du, ablative_armor );
-                    if( get_player_view().sees( *this ) ) {
-                        SCT.add( point( posx(), posy() ), direction::NORTH, remove_color_tags( ablative_armor.tname() ),
+                    if( get_player_view().sees( here, *this ) ) {
+                        SCT.add( pos_bub( here ).xy().raw(), direction::NORTH, remove_color_tags( ablative_armor.tname() ),
                                  m_neutral, _( "destroyed" ), m_info );
                     }
                     destroyed_armor_msg( *this, ablative_armor.tname() );
@@ -423,6 +373,8 @@ bool Character::ablative_armor_absorb( damage_unit &du, item &armor, const sub_b
 
 void Character::describe_damage( damage_unit &du, item &armor ) const
 {
+    const map &here = get_map();
+
     const material_type &material = armor.get_random_material();
     // FIXME: Hardcoded damage types
     std::string damage_verb;
@@ -447,7 +399,8 @@ void Character::describe_damage( damage_unit &du, item &armor ) const
     add_msg_if_player( m_bad, format_string, pre_damage_name, damage_verb );
     //item is damaged
     if( is_avatar() ) {
-        SCT.add( point( posx(), posy() ), direction::NORTH, remove_color_tags( pre_damage_name ), m_neutral,
+        SCT.add( pos_bub( here ).xy().raw(), direction::NORTH, remove_color_tags( pre_damage_name ),
+                 m_neutral,
                  damage_verb,
                  m_info );
     }

@@ -30,6 +30,17 @@
     "sight_dispersion": 250,
     "durability": 8,
     "min_cycle_recoil": 2700,
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "barrel_volume": "500 ml",
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "falmag", "falbigmag", "fal_makeshiftmag" ] } ],
@@ -72,7 +83,19 @@
     "durability": 9,
     "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "g3mag", "g3bigmag", "g3_makeshiftmag" ] } ],
-    "melee_damage": { "bash": 12 }
+    "melee_damage": { "bash": 12 },
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "muzzle", 1 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
+    ]
   },
   {
     "id": "m134",
@@ -98,7 +121,6 @@
     "blackpowder_tolerance": 96,
     "energy_drain": "1 kJ",
     "reload": 400,
-    "valid_mod_locations": [ [ "brass catcher", 1 ], [ "sling", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
     "modes": [ [ "DEFAULT", "low auto", 50 ], [ "AUTO", "high auto", 100 ] ],
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
     "flags": [ "NEVER_JAMS", "MOUNTED_GUN", "USE_UPS" ],
@@ -123,16 +145,14 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ],
       [ "underbarrel", 1 ]
-    ]
+    ],
+    "built_in_mods": [ "high_end_folding_stock" ]
   },
   {
     "id": "m1a",
@@ -168,11 +188,10 @@
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
+      [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "grip mount", 1 ],
-      [ "rail mount", 1 ],
+      [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
@@ -207,14 +226,13 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "belt308" ] } ],
     "melee_damage": { "bash": 13 }
@@ -246,14 +264,12 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
-      [ "rail", 1 ],
-      [ "sights", 1 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ]
+      [ "stock accessory", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "belt308" ] } ],
     "melee_damage": { "bash": 15 }
@@ -287,6 +303,16 @@
     "dispersion": 90,
     "durability": 9,
     "blackpowder_tolerance": 24,
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "clip_size": 3,
     "barrel_volume": "750 ml",
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET" ],
@@ -307,6 +333,17 @@
     "barrel_length": "406 mm",
     "ammo": [ "308" ],
     "min_cycle_recoil": 2700,
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "muzzle", 1 ],
+      [ "rail", 1 ],
+      [ "sights", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "underbarrel", 1 ]
+    ],
     "default_mods": [ "high_end_folding_stock" ],
     "pocket_data": [
       {
@@ -341,14 +378,12 @@
     "clip_size": 5,
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "brass catcher", 1 ],
-      [ "muzzle", 1 ],
-      [ "sling", 1 ],
-      [ "stock mount", 1 ],
       [ "mechanism", 2 ],
-      [ "sights", 1 ],
-      [ "grip mount", 1 ],
       [ "rail mount", 1 ],
+      [ "sights", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
       [ "underbarrel", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET" ],
@@ -376,6 +411,17 @@
     "dispersion": 180,
     "durability": 8,
     "min_cycle_recoil": 2700,
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "muzzle", 1 ],
+      [ "rail", 1 ],
+      [ "sights", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "underbarrel", 1 ]
+    ],
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
     "default_mods": [ "adjustable_stock" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "hk417mag_20rd", "hk417mag_10rd", "hk417_makeshiftmag" ] } ],
@@ -437,14 +483,12 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
       [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "papm77mag", "papm77mag_10rd" ] } ],
@@ -471,6 +515,17 @@
     "dispersion": 150,
     "durability": 7,
     "min_cycle_recoil": 2700,
+    "valid_mod_locations": [
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
+      [ "sling", 1 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel mount", 1 ]
+    ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -510,12 +565,14 @@
     "durability": 7,
     "min_cycle_recoil": 2700,
     "valid_mod_locations": [
-      [ "grip", 1 ],
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
-      [ "rail mount", 2 ],
+      [ "rail mount", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
+      [ "stock accessory", 1 ],
       [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "falmag", "falbigmag", "fal_makeshiftmag" ] } ],

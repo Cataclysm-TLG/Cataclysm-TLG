@@ -603,7 +603,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "HOWL", mattack::howl );
     add_hardcoded_attack( "ACID", mattack::acid );
     add_hardcoded_attack( "ACID_BARF", mattack::acid_barf );
-    add_hardcoded_attack( "ACID_ACCURATE", mattack::acid_accurate );
     add_hardcoded_attack( "SHOCKSTORM", mattack::shockstorm );
     add_hardcoded_attack( "PULL_METAL_WEAPON", mattack::pull_metal_weapon );
     add_hardcoded_attack( "BOOMER", mattack::boomer );
@@ -667,7 +666,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "RIOTBOT", mattack::riotbot );
     add_hardcoded_attack( "STRETCH_ATTACK", mattack::stretch_attack );
     add_hardcoded_attack( "DOOT", mattack::doot );
-    add_hardcoded_attack( "DSA_DRONE_SCAN", mattack::dsa_drone_scan );
     add_hardcoded_attack( "ZOMBIE_FUSE", mattack::zombie_fuse );
 }
 
@@ -702,7 +700,7 @@ mon_effect_data::mon_effect_data() :
     chance( 100.0f ),
     permanent( false ),
     affect_hit_bp( false ),
-    bp( body_part_bp_null ),
+    bp( bodypart_str_id::NULL_ID() ),
     duration( 1, 1 ),
     intensity( 0, 0 ) {}
 
@@ -712,7 +710,7 @@ void mon_effect_data::load( const JsonObject &jo )
     optional( jo, false, "chance", chance, 100.f );
     optional( jo, false, "permanent", permanent, false );
     optional( jo, false, "affect_hit_bp", affect_hit_bp, false );
-    optional( jo, false, "bp", bp, body_part_bp_null );
+    optional( jo, false, "bp", bp, bodypart_str_id::NULL_ID() );
     optional( jo, false, "message", message );
     // Support shorthand for a single value.
     if( jo.has_int( "duration" ) ) {
@@ -996,6 +994,19 @@ void mtype::load( const JsonObject &jo, const std::string &src )
         optional( jo_mount_items, was_loaded, "storage", mount_items.storage, itype_id() );
     }
 
+    if( jo.has_array( "revive_forms" ) ) {
+        revive_type foo;
+        for( JsonObject jo_form : jo.get_array( "revive_forms" ) ) {
+            read_condition( jo_form, "condition", foo.condition, true );
+            if( jo_form.has_string( "monster" ) ) {
+                mandatory( jo_form, was_loaded, "monster", foo.revive_mon );
+            } else {
+                mandatory( jo_form, was_loaded, "monster_group", foo.revive_monster_group );
+            }
+            revive_types.push_back( foo );
+        }
+    }
+
     optional( jo, was_loaded, "zombify_into", zombify_into, string_id_reader<::mtype> {},
               mtype_id() );
 
@@ -1013,51 +1024,7 @@ void mtype::load( const JsonObject &jo, const std::string &src )
         }
     }
 
-    // TODO: make this work with `was_loaded`
-    if( jo.has_array( "melee_damage" ) ) {
-        melee_damage = load_damage_instance( jo.get_array( "melee_damage" ) );
-    } else if( jo.has_object( "melee_damage" ) ) {
-        melee_damage = load_damage_instance( jo.get_object( "melee_damage" ) );
-    } else if( jo.has_object( "relative" ) ) {
-        std::optional<damage_instance> tmp_dmg;
-        JsonObject rel = jo.get_object( "relative" );
-        rel.allow_omitted_members();
-        if( rel.has_array( "melee_damage" ) ) {
-            tmp_dmg = load_damage_instance( rel.get_array( "melee_damage" ) );
-        } else if( rel.has_object( "melee_damage" ) ) {
-            tmp_dmg = load_damage_instance( rel.get_object( "melee_damage" ) );
-        } else if( rel.has_int( "melee_damage" ) ) {
-            const int rel_amt = rel.get_int( "melee_damage" );
-            for( damage_unit &du : melee_damage ) {
-                du.amount += rel_amt;
-            }
-        }
-        if( !!tmp_dmg ) {
-            melee_damage.add( tmp_dmg.value() );
-        }
-    } else if( jo.has_object( "proportional" ) ) {
-        std::optional<damage_instance> tmp_dmg;
-        JsonObject prop = jo.get_object( "proportional" );
-        prop.allow_omitted_members();
-        if( prop.has_array( "melee_damage" ) ) {
-            tmp_dmg = load_damage_instance( prop.get_array( "melee_damage" ) );
-        } else if( prop.has_object( "melee_damage" ) ) {
-            tmp_dmg = load_damage_instance( prop.get_object( "melee_damage" ) );
-        } else if( prop.has_float( "melee_damage" ) ) {
-            melee_damage.mult_damage( prop.get_float( "melee_damage" ), true );
-        }
-        if( !!tmp_dmg ) {
-            for( const damage_unit &du : tmp_dmg.value() ) {
-                auto iter = std::find_if( melee_damage.begin(),
-                melee_damage.end(), [&du]( const damage_unit & mdu ) {
-                    return mdu.type == du.type;
-                } );
-                if( iter != melee_damage.end() ) {
-                    iter->amount *= du.amount;
-                }
-            }
-        }
-    }
+    optional( jo, was_loaded, "melee_damage", melee_damage );
 
     if( jo.has_array( "scents_tracked" ) ) {
         for( const std::string line : jo.get_array( "scents_tracked" ) ) {
@@ -1476,7 +1443,7 @@ void mattack_actor::load( const JsonObject &jo, const std::string &src )
         assign( jo, "id", id, false );
     }
 
-    cooldown = get_dbl_or_var( jo, "cooldown", false, 0.0 );
+    mandatory( jo, was_loaded, "cooldown", cooldown, dbl_or_var_reader{} );
 
     load_internal( jo, src );
     // Set was_loaded manually because we don't have generic_factory to do it for us
@@ -1529,12 +1496,10 @@ void mtype::add_special_attack( const JsonArray &inner, const std::string_view )
     }
     mtype_special_attack new_attack = mtype_special_attack( iter->second );
     if( inner.has_array( 1 ) ) {
-        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner.get_array( 1 )[0],
-                                         "special attack cooldown", 0.0 );
-        new_attack.actor->cooldown.max = get_dbl_or_var_part( inner.get_array( 1 )[1],
-                                         "special attack cooldown", 0.0 );
+        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner.get_array( 1 )[0] );
+        new_attack.actor->cooldown.max = get_dbl_or_var_part( inner.get_array( 1 )[1] );
     } else {
-        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner[1], "special attack cooldown", 0.0 );
+        new_attack.actor->cooldown.min = get_dbl_or_var_part( inner[1] );
     }
     special_attacks.emplace( name, new_attack );
     special_attacks_names.push_back( name );

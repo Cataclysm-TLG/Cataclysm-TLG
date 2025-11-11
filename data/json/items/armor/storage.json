@@ -121,6 +121,7 @@
         "max_contains_weight": "2 kg",
         "max_item_length": "70 cm",
         "moves": 40,
+        "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE", "SHEATH_SWORD" ]
       },
       {
@@ -129,6 +130,7 @@
         "max_contains_weight": "2 kg",
         "max_item_length": "70 cm",
         "moves": 40,
+        "holster": true,
         "flag_restriction": [ "SHEATH_KNIFE", "SHEATH_SWORD" ]
       },
       {
@@ -203,193 +205,6 @@
     "flags": [ "BELTED", "WATERPROOF", "ONLY_ONE", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 10, 40 ], "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
-    ]
-  },
-  {
-    "id": "backpack_hunting",
-    "type": "ARMOR",
-    "name": { "str": "hunting backpack" },
-    "description": "A large hunting backpack with plenty of storage space and additional external space possible for large camping items or game bags.",
-    "weight": "2767 g",
-    "volume": "18000 ml",
-    "price": "600 USD",
-    "price_postapoc": "10 USD",
-    "material": [ "nylon" ],
-    "symbol": "[",
-    "looks_like": "backpack",
-    "color": "brown",
-    "warmth": 10,
-    "material_thickness": 2,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "72 L",
-        "max_contains_weight": "50 kg",
-        "max_item_length": "80 cm",
-        "moves": 450
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "8 L",
-        "max_contains_weight": "5 kg",
-        "max_item_length": "33 cm",
-        "moves": 200
-      },
-      {
-        "//": "water bottle pocket",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "510 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "24 cm",
-        "min_item_length": "18 cm",
-        "moves": 80,
-        "description": "Small pocket for a water bottle",
-        "ripoff": 2
-      },
-      {
-        "//": "water bottle pocket",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "510 ml",
-        "max_contains_weight": "1 kg",
-        "max_item_length": "24 cm",
-        "min_item_length": "18 cm",
-        "moves": 80,
-        "description": "Small pocket for a water bottle",
-        "ripoff": 2
-      },
-      {
-        "//": "hydration pouch storage",
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "3250 ml",
-        "max_contains_weight": "4 kg",
-        "max_item_length": "30 cm",
-        "moves": 500,
-        "description": "Pouch sized for a hydration pack."
-      },
-      {
-        "//": "carabiner pocket",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "5 L",
-        "max_contains_weight": "6 kg",
-        "max_item_length": "120 cm",
-        "min_item_length": "20 cm",
-        "moves": 150,
-        "extra_encumbrance": 3,
-        "ripoff": 2,
-        "description": "Attached with a carabiner or strap.",
-        "activity_noise": { "volume": 8, "chance": 10 },
-        "transparent": true
-      },
-      {
-        "//": "carabiner pocket",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "5 L",
-        "max_contains_weight": "6 kg",
-        "max_item_length": "120 cm",
-        "min_item_length": "20 cm",
-        "moves": 150,
-        "extra_encumbrance": 3,
-        "ripoff": 2,
-        "description": "Attached with a carabiner or strap.",
-        "activity_noise": { "volume": 8, "chance": 10 },
-        "transparent": true
-      },
-      {
-        "//": "dedicated tool loops. either a daisy chain, hooking to compression straps, or ice axe loop",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "4 L",
-        "max_contains_weight": "6 kg",
-        "max_item_length": "100 cm",
-        "min_item_length": "40 cm",
-        "moves": 300,
-        "extra_encumbrance": 1,
-        "description": "Secured under compression straps or with a tool loop.",
-        "ripoff": 5,
-        "transparent": true
-      },
-      {
-        "//": "dedicated tool loops. either a daisy chain, hooking to compression straps, or ice axe loop",
-        "pocket_type": "CONTAINER",
-        "holster": true,
-        "max_contains_volume": "4 L",
-        "max_contains_weight": "6 kg",
-        "max_item_length": "100 cm",
-        "min_item_length": "40 cm",
-        "moves": 300,
-        "extra_encumbrance": 1,
-        "description": "Secured under compression straps or with a tool loop.",
-        "ripoff": 5,
-        "transparent": true
-      },
-      {
-        "//": "has the ability to loosen the pack, causing a lot of encumbrance but allowing for storage of very large items between the pack and the frame",
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "40 L",
-        "max_contains_weight": "30 kg",
-        "max_item_length": "100 cm",
-        "min_item_length": "40 cm",
-        "moves": 1000,
-        "extra_encumbrance": 15,
-        "description": "The pack has been slid away from the frame leaving room to store large items."
-      }
-    ],
-    "use_action": [ { "type": "attach_molle", "size": 4 }, { "type": "detach_molle" } ],
-    "flags": [ "BELTED", "WATERPROOF", "ONLY_ONE" ],
-    "armor": [
-      {
-        "encumbrance": 10,
-        "volume_encumber_modifier": 0.2,
-        "coverage": 100,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_hanging_back", "torso_waist" ]
-      }
-    ]
-  },
-  {
-    "id": "backpack_giant",
-    "type": "ARMOR",
-    "name": { "str": "giant novelty backpack" },
-    "description": "A huge fabric backpack made mostly as a joke before the Cataclysm.  Now, it's still rather silly, but it can store a lot of stuff.",
-    "weight": "1200 g",
-    "volume": "9186 ml",
-    "price": "45 USD",
-    "price_postapoc": "7 USD 50 cent",
-    "material": [ "nylon" ],
-    "symbol": "[",
-    "looks_like": "backpack",
-    "color": "green",
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "80 L",
-        "max_contains_weight": "40 kg",
-        "max_item_length": "96 cm",
-        "magazine_well": "8750 ml",
-        "moves": 300
-      }
-    ],
-    "warmth": 5,
-    "material_thickness": 2,
-    "flags": [ "BELTED" ],
-    "armor": [
-      {
-        "encumbrance": 20,
-        "volume_encumber_modifier": 0.22,
-        "coverage": 100,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_hanging_back" ]
-      },
-      {
-        "encumbrance": [ 10, 10 ],
-        "coverage": 60,
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
-      }
     ]
   },
   {
@@ -603,7 +418,7 @@
         "pocket_type": "CONTAINER",
         "rigid": true,
         "max_contains_volume": "50 L",
-        "max_contains_weight": "50 kg",
+        "max_contains_weight": "12 kg",
         "max_item_length": "80 cm",
         "moves": 300
       }
@@ -1441,7 +1256,7 @@
   {
     "id": "legrig_wetsuit",
     "type": "ARMOR",
-    "name": { "str": "pair of diving pouches", "str_pl": "pairs of diving pouches" },
+    "name": { "str": "diving pouches", "str_pl": "pairs of diving pouches" },
     "description": "A set of pouches that can be worn on the thighs using buckled neoprene rig.  This variety is favored by the divers.",
     "//": "Based on skeletonized version of these https://fourthelement.com/product/technical-shorts/ with added lower buckles like here https://www.divegarage.com/neoprene-tech-shorts.html",
     "weight": "305 g",
@@ -3276,7 +3091,7 @@
         "max_contains_volume": "50 L",
         "max_contains_weight": "80 kg",
         "min_item_length": "60 cm",
-        "max_item_length": "250 cm",
+        "max_item_length": "260 cm",
         "moves": 1000,
         "ripoff": 5,
         "activity_noise": { "volume": 9, "chance": 15 },
@@ -3397,7 +3212,7 @@
         "max_contains_weight": "150 kg",
         "moves": 300,
         "min_item_volume": "1 L",
-        "max_item_length": "180 cm"
+        "max_item_length": "260 cm"
       }
     ],
     "warmth": 5,

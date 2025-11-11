@@ -101,7 +101,7 @@
       },
       "furniture": {
         "w": "f_console_broken",
-        "k": "f_compact_ASRG_containment",
+        "k": "f_generator_broken",
         "r": "f_rack",
         "j": "f_locker",
         "@": "f_bed",

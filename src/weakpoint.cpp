@@ -149,12 +149,12 @@ bool weakpoint_families::practice_kill( Character &learner ) const
     return practice( learner, time_duration::from_minutes( 1 ) );
 }
 
-bool weakpoint_families::practice_dissect( Character &learner ) const
+bool weakpoint_families::practice_dissect( Character &learner, int size ) const
 {
-    // Proficiency experience is capped at 1000 seconds (~16 minutes), so we split it into two
-    // instances. This should be refactored when butchering becomes an `activity_actor`.
-    bool p1 = practice( learner, time_duration::from_minutes( 15 ) );
-    bool p2 = practice( learner, time_duration::from_minutes( 15 ) );
+    // Since activity_handlers can't properly pass over the time spent on dissection, and since that
+    // time is variable due to helpers, tools, etc., we simply base practice amount off of creature size.
+    bool p1 = practice( learner, time_duration::from_minutes( ( size * 5 ) ) );
+    bool p2 = practice( learner, time_duration::from_minutes( ( size * 5 ) ) );
     bool learned = p1 || p2;
     if( learned ) {
         learner.add_msg_if_player(
@@ -417,6 +417,9 @@ void weakpoint::load( const JsonObject &jo )
     if( jo.has_bool( "is_good" ) ) {
         assign( jo, "is_good", is_good );
     }
+    if( is_good && jo.has_bool( "is_head" ) ) {
+        assign( jo, "is_head", is_head );
+    }
     if( jo.has_object( "armor_mult" ) ) {
         armor_mult = load_damage_map( jo.get_object( "armor_mult" ) );
     }
@@ -506,9 +509,13 @@ void weakpoint::apply_to( damage_instance &damage, bool is_crit ) const
         if( is_crit ) {
             if( crit_mult.count( elem.type ) > 0 ) {
                 elem.damage_multiplier *= crit_mult.at( elem.type );
+                add_msg_debug( debugmode::DF_MONSTER, "%s crit_mult %f",
+                               elem.type.str(), crit_mult.at( elem.type ) );
             }
         } else if( damage_mult.count( elem.type ) > 0 ) {
             elem.damage_multiplier *= damage_mult.at( elem.type );
+            add_msg_debug( debugmode::DF_MONSTER, "%s damage_mult %f",
+                           elem.type.str(), damage_mult.at( elem.type ) );
         }
     }
 }
@@ -535,16 +542,24 @@ float weakpoint::hit_chance( const weakpoint_attack &attack ) const
 
     // Retrieve multipliers.
     float constant_mult = coverage_mult.of( attack );
-    // Probability of a sample from a normal distribution centered on `skill` with `SD = 2`
-    // exceeding the difficulty.
-    float diff = attack.wp_skill - difficulty.of( attack );
-    float difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * sqrt( 2.0f ) ) ) );
+    float diff;
+    float difficulty_mult;
     float final_coverage;
-
-    if( attack.source && attack.source->as_character() && is_good ) {
-        final_coverage = attack.source->as_character()->enchantment_cache->modify_value(
-                             enchant_vals::mod::WEAKPOINT_ACCURACY, coverage );
+    if( is_good ) {
+        // Probability of a sample from a normal distribution centered on `skill` with `SD = 2`
+        // exceeding the difficulty.
+        diff = attack.wp_skill - difficulty.of( attack );
+        difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * sqrt( 2.0f ) ) ) );
+        if( attack.source && attack.source->as_character() ) {
+            final_coverage = attack.source->as_character()->enchantment_cache->modify_value(
+                                 enchant_vals::mod::WEAKPOINT_ACCURACY, coverage );
+        } else {
+            final_coverage = coverage;
+        }
     } else {
+        // Use erfc if the wp does not benefit the attacker.
+        diff = attack.wp_skill - std::max( difficulty.of( attack ) + 10.0f, 10.0f );
+        difficulty_mult = std::max( 0.5f * erfc( diff / ( 2.0f * sqrt( 2.0f ) ) ), 0.1f );
         final_coverage = coverage;
     }
 
@@ -568,10 +583,10 @@ static float reweigh( float base, float rolls )
 const weakpoint *weakpoints::select_weakpoint( const weakpoint_attack &attack ) const
 {
     add_msg_debug( debugmode::DF_MONSTER,
-                   "Weakpoint Selection: Source: %s, Weapon %s, Skill %.3f",
+                   "Weakpoint Selection: Source: %s, Weapon %s, Skill %.3f, Accuracy %.3f",
                    attack.source == nullptr ? "nullptr" : attack.source->get_name(),
                    attack.weapon == nullptr ? "nullptr" : attack.weapon->type_name(),
-                   attack.wp_skill );
+                   attack.wp_skill, attack.accuracy );
     float rolls = std::max( 1.0f, 1.0f + attack.wp_skill / 2.5f );
     // The base probability of hitting a more preferable weak point.
     float base = 0.0f;
@@ -579,12 +594,19 @@ const weakpoint *weakpoints::select_weakpoint( const weakpoint_attack &attack ) 
     float reweighed = 0.0f;
     float idx = rng_float( 0.0f, 100.0f );
     for( const weakpoint &weakpoint : weakpoint_list ) {
-        float new_base = base + weakpoint.hit_chance( attack );
+        float raw_chance = weakpoint.hit_chance( attack );
+        if( raw_chance == 0.0f ) {
+            add_msg_debug( debugmode::DF_MONSTER,
+                           "Weakpoint Selection: weakpoint %s, conditions not match",
+                           weakpoint.id );
+            continue;
+        }
+        float new_base = base + raw_chance;
         float new_reweighed = 100.0f * reweigh( new_base / 100.0f, rolls );
         float hit_chance = new_reweighed - reweighed;
         add_msg_debug( debugmode::DF_MONSTER,
-                       "Weakpoint Selection: weakpoint %s, hit_chance %.4f",
-                       weakpoint.id, hit_chance );
+                       "Weakpoint Selection: weakpoint %s, raw_chance %.4f, hit_chance %.4f",
+                       weakpoint.id, raw_chance, hit_chance );
         if( idx < hit_chance ) {
             return &weakpoint;
         }

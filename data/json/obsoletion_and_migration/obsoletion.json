@@ -235,5 +235,238 @@
     "type": "MONSTER",
     "copy-from": "mon_goose_chick",
     "looks_like": "mon_goose_chick"
+  },
+  {
+    "id": "EOC_Nunez_Travel",
+    "type": "effect_on_condition"
+  },
+  {
+    "type": "mutation",
+    "id": "NO_CBM_INSTALLATION",
+    "name": { "str": "Oversensitive System" },
+    "description": "Renamed/re-IDed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "WAYFARER",
+    "name": { "str": "Wayfarer" },
+    "description": "Removed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
+    "id": "BRAWLER",
+    "name": { "str": "Brawler" },
+    "description": "Removed mutation.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "asphyxiation_to_hypoxia"
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "lose_asphyxiation"
+  },
+  {
+    "type": "mutation",
+    "id": "FASTLEARNER",
+    "name": { "str": "Fast Learner" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "PACKMULE",
+    "name": { "str": "Pack Mule" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "TRUTHTELLER",
+    "name": { "str": "Truth Teller" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+    {
+    "type": "mutation",
+    "id": "BEAK_HUM",
+    "name": { "str": "Hummingbird Beak" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "SLOWRUNNER",
+    "name": { "str": "Slow Footed" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "DIRTSLEEPER",
+    "name": { "str": "Earth Sleeper" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+    {
+    "type": "mutation",
+    "id": "WATERSLEEPER",
+    "name": { "str": "Aquatic Sleeper" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
+    "id": "GIZZARD",
+    "name": { "str": "Gizzard" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "id": "scenario_assassin_convict",
+    "type": "effect_on_condition"
+  },
+  {
+    "type": "TRAIT_MIGRATION",
+    "id": "PROF_ASSASSIN_CONVICT",
+    "remove": true
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_arc_furnace",
+    "to_furn": "f_arcfurnace_empty"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "military_outpost_cross",
+    "new_id": "military_outpost",
+    "//": "Migrated in 0.I"
+  },
+  {
+    "type": "oter_id_migration",
+    "//": "migrated in 0.I",
+    "oter_ids": {
+      "outpost_cross_north": "outpost_north",
+      "outpost_cross_south": "outpost_south",
+      "outpost_cross_east": "outpost_east",
+      "outpost_cross_west": "outpost_west"
+    }
+  },
+  {
+    "type": "oter_id_migration",
+    "//": "migrated in 0.I",
+    "oter_ids": {
+      "outpost_cross_roof_north": "outpost_roof_north",
+      "outpost_cross_roof_south": "outpost_roof_south",
+      "outpost_cross_roof_east": "outpost_roof_east",
+      "outpost_cross_roof_west": "outpost_roof_west"
+    }
+  },
+  {
+    "id": "waterproof_gunmod",
+    "type": "GUNMOD",
+    "name": { "str": "firearm waterproofing" },
+    "description": "A set of seals and gaskets that will allow a firearm to operate reliably while submerged in water.",
+    "weight": "220 g",
+    "volume": "250 ml",
+    "integral_volume": "0 ml",
+    "price": "500 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "material": [ "plastic" ],
+    "symbol": ":",
+    "color": "dark_gray",
+    "location": "mechanism",
+    "mod_targets": [ "smg", "rifle", "pistol", "shotgun", "launcher" ],
+    "install_time": "10 m",
+    "min_skills": [ [ "weapon", 2 ] ],
+    "flags": [ "WATERPROOF_GUN" ]
+  },
+  {
+    "id": "gun_crossbow",
+    "type": "GUNMOD",
+    "name": { "str": "rail-mounted crossbow" },
+    "description": "A kit to attach a pair of crossbow arms and a firing rail to the barrel of a long firearm.  It allows crossbow bolts to be fired.",
+    "weight": "1450 g",
+    "volume": "500 ml",
+    "price": "500 USD",
+    "price_postapoc": "15 USD",
+    "install_time": "30 m",
+    "material": [ "steel", "wood" ],
+    "symbol": ":",
+    "color": "light_red",
+    "location": "rail",
+    "mod_targets": [ "shotgun", "rifle", "crossbow" ],
+    "gun_data": {
+      "ammo": [ "bolt" ],
+      "skill": "rifle",
+      "range": 8,
+      "ranged_damage": { "damage_type": "stab", "amount": 3 },
+      "dispersion": 180,
+      "durability": 10,
+      "clip_size": 1
+    },
+    "dispersion_modifier": 60,
+    "min_skills": [ [ "weapon", 2 ], [ "rifle", 1 ] ],
+    "flags": [ "PRIMITIVE_RANGED_WEAPON", "NON_FOULING" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "bolt": 1 } } ]
+  },
+  {
+    "id": "makeshift_bayonet",
+    "copy-from": "spike",
+    "type": "GENERIC",
+    "name": { "str": "makeshift bayonet" },
+    "description": "A makeshift version of a bayonet that consists of a mere spike with some string.",
+    "longest_side": "12 cm",
+    "integral_longest_side": "12 cm",
+    "gunmod_data": {
+      "location": "underbarrel",
+      "mod_targets": [ "shotgun", "rifle", "smg", "launcher", "crossbow" ],
+      "is_bayonet": true,
+      "blacklist_mod": [ "knife_combat_army", "knife_combat", "enfield_bayonet", "knife_combat_marine", "makeshift_bayonet", "sword_bayonet" ],
+      "install_time": "5 m"
+    },
+    "extend": { "flags": [ "PUMP_RAIL_COMPATIBLE" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "PROF_SKATER",
+    "name": { "str": "Skater" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false
   }
 ]

@@ -200,7 +200,7 @@ bool cleanup_at_end()
     }
 
     //Reset any offset due to driving
-    g->set_driving_view_offset( point_zero );
+    g->set_driving_view_offset( point_rel_ms::zero );
 
     //clear all sound channels
     sfx::fade_audio_channel( sfx::channel::any, 300 );
@@ -267,27 +267,33 @@ void monmove()
     avatar &u = get_avatar();
 
     for( monster &critter : g->all_monsters() ) {
+        if( !m.inbounds( critter.pos_abs() ) ) {
+            continue;
+        }
+        const tripoint_bub_ms critter_pos = critter.pos_bub( m );
+
         // Critters in impassable tiles get pushed away, unless it's not impassable for them
-        if( !critter.is_dead() && m.impassable( critter.pos_bub() ) &&
-            !critter.can_move_to( critter.pos_bub() ) ) {
+        if( !critter.is_dead() && ( m.impassable( critter_pos ) &&
+                                    !m.get_impassable_field_at( critter_pos ).has_value() ) &&
+            !critter.can_move_to( critter_pos ) ) {
             dbg( D_ERROR ) << "game:monmove: " << critter.name()
-                           << " can't move to its location!  (" << critter.posx()
-                           << ":" << critter.posy() << ":" << critter.posz() << "), "
-                           << m.tername( critter.pos_bub() );
+                           << " can't move to its location!  (" << critter_pos.x()
+                           << ":" << critter_pos.y() << ":" << critter_pos.z() << "), "
+                           << m.tername( critter_pos );
             add_msg_debug( debugmode::DF_MONSTER, "%s can't move to its location!  (%d,%d,%d), %s",
                            critter.name(),
-                           critter.posx(), critter.posy(), critter.posz(), m.tername( critter.pos_bub() ) );
+                           critter_pos.x(), critter_pos.y(), critter_pos.z(), m.tername( critter_pos ) );
             bool okay = false;
-            for( const tripoint_bub_ms &dest : m.points_in_radius( critter.pos_bub(), 3 ) ) {
+            for( const tripoint_bub_ms &dest : m.points_in_radius( critter_pos, 3 ) ) {
                 if( critter.can_move_to( dest ) && g->is_empty( dest ) ) {
-                    critter.setpos( dest );
+                    critter.setpos( m, dest );
                     okay = true;
                     break;
                 }
             }
             if( !okay ) {
                 // die of "natural" cause (overpopulation is natural)
-                critter.die( nullptr );
+                critter.die( &m, nullptr );
             }
         }
 
@@ -321,7 +327,7 @@ void monmove()
         if( !critter.is_dead() &&
             u.has_active_bionic( bio_alarm ) &&
             u.get_power_level() >= bio_alarm->power_trigger &&
-            rl_dist( u.pos(), critter.pos() ) <= 5 &&
+            rl_dist( u.pos_abs(), critter.pos_abs() ) <= 5 &&
             !critter.is_hallucination() ) {
             u.mod_power_level( -bio_alarm->power_trigger );
             add_msg( m_warning, _( "Your motion alarm goes off!" ) );
@@ -397,7 +403,7 @@ void overmap_npc_move()
             continue;
         }
         npc *npc_to_add = elem.get();
-        if( ( !npc_to_add->is_active() || rl_dist( u.pos(), npc_to_add->pos() ) > SEEX * 2 ) &&
+        if( ( !npc_to_add->is_active() || rl_dist( u.pos_bub(), npc_to_add->pos_bub() ) > SEEX * 2 ) &&
             npc_to_add->mission == NPC_MISSION_TRAVELLING ) {
             travelling_npcs.push_back( npc_to_add );
         }
@@ -406,15 +412,15 @@ void overmap_npc_move()
     for( npc *&elem : travelling_npcs ) {
         if( elem->has_omt_destination() ) {
             if( !elem->omt_path.empty() ) {
-                if( rl_dist( elem->omt_path.back(), elem->global_omt_location() ) > 2 ) {
+                if( rl_dist( elem->omt_path.back(), elem->pos_abs_omt() ) > 2 ) {
                     // recalculate path, we got distracted doing something else probably
                     elem->omt_path.clear();
-                } else if( elem->omt_path.back() == elem->global_omt_location() ) {
+                } else if( elem->omt_path.back() == elem->pos_abs_omt() ) {
                     elem->omt_path.pop_back();
                 }
             }
             if( elem->omt_path.empty() ) {
-                elem->omt_path = overmap_buffer.get_travel_path( elem->global_omt_location(), elem->goal,
+                elem->omt_path = overmap_buffer.get_travel_path( elem->pos_abs_omt(), elem->goal,
                                  overmap_path_params::for_npc() );
                 if( elem->omt_path.empty() ) { // goal is unreachable, or already reached goal, reset it
                     elem->goal = npc::no_goal_point;
@@ -483,11 +489,9 @@ bool do_turn()
         }
     }
 
-    // Make sure players cant defy gravity by standing still, Looney tunes style.
-    u.gravity_check();
-
     // If you're inside a wall or something and haven't been telefragged, let's get you out.
-    if( m.impassable( u.pos_bub() ) && !m.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, u.pos_bub() ) ) {
+    if( ( m.impassable( u.pos_bub() ) && !m.impassable_field_at( u.pos_bub() ) ) &&
+        !m.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, u.pos_bub() ) ) {
         u.stagger();
     }
 
@@ -538,7 +542,7 @@ bool do_turn()
 
     // Process NPC sound events before they move or they hear themselves talking
     for( npc &guy : g->all_npcs() ) {
-        if( rl_dist( guy.pos(), u.pos() ) < MAX_VIEW_DISTANCE ) {
+        if( rl_dist( guy.pos_bub(), u.pos_bub() ) < MAX_VIEW_DISTANCE ) {
             sounds::process_sound_markers( &guy );
         }
     }
@@ -555,11 +559,12 @@ bool do_turn()
     if( !u.has_effect( effect_sleep ) || g->uquit == QUIT_WATCH ) {
         if( u.get_moves() > 0 || g->uquit == QUIT_WATCH ) {
             while( u.get_moves() > 0 || g->uquit == QUIT_WATCH ) {
+                m.process_falling();
                 g->cleanup_dead();
                 g->mon_info_update();
                 // Process any new sounds the player caused during their turn.
                 for( npc &guy : g->all_npcs() ) {
-                    if( rl_dist( guy.pos(), u.pos() ) < MAX_VIEW_DISTANCE ) {
+                    if( rl_dist( guy.pos_bub(), u.pos_bub() ) < MAX_VIEW_DISTANCE ) {
                         sounds::process_sound_markers( &guy );
                     }
                 }
@@ -621,7 +626,7 @@ bool do_turn()
         }
     }
 
-    if( g->driving_view_offset.x != 0 || g->driving_view_offset.y != 0 ) {
+    if( g->driving_view_offset.x() != 0 || g->driving_view_offset.y() != 0 ) {
         // Still have a view offset, but might not be driving anymore,
         // or the option has been deactivated,
         // might also happen when someone dives from a moving car.
@@ -633,10 +638,10 @@ bool do_turn()
     scent_map &scent = get_scent();
     // No-scent debug mutation has to be processed here or else it takes time to start working
     if( !u.has_flag( STATIC( json_character_flag( "NO_SCENT" ) ) ) ) {
-        scent.set( u.pos(), u.scent, u.get_type_of_scent() );
-        overmap_buffer.set_scent( u.global_omt_location(),  u.scent );
+        scent.set( u.pos_bub(), u.scent, u.get_type_of_scent() );
+        overmap_buffer.set_scent( u.pos_abs_omt(),  u.scent );
     }
-    scent.update( u.pos(), m );
+    scent.update( u.pos_bub(), m );
 
     // We need floor cache before checking falling 'n stuff
     m.build_floor_caches();

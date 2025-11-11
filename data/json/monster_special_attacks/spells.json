@@ -183,7 +183,7 @@
   {
     "type": "SPELL",
     "id": "hive_raptor_spawn",
-    "name": { "str": "Summon Raptor" },
+    "name": { "str": "Spawn Raptor" },
     "description": "Summons a zombie-spawn raptor without killing the zombie.",
     "flags": [ "HOSTILE_SUMMON", "RANDOM_DAMAGE", "PERMANENT", "NO_EXPLOSION_SFX" ],
     "valid_targets": [ "ground", "self" ],
@@ -194,6 +194,47 @@
     "shape": "blast",
     "effect": "summon",
     "effect_str": "mon_spawn_raptor"
+  },
+  {
+    "type": "SPELL",
+    "id": "hive_raptor_spawn_eoc",
+    "name": { "str": "Spawn Raptor EOC" },
+    "description": ".",
+    "flags": [ "HOSTILE_SUMMON", "NO_PROJECTILE", "RANDOM_TARGET", "NO_EXPLOSION_SFX" ],
+    "effect": "effect_on_condition",
+    "valid_targets": [ "self" ],
+    "base_casting_time": 10,
+    "min_range": 1,
+    "min_aoe": 3,
+    "shape": "blast",
+    "effect_str": "EOC_hive_raptor_spawn",
+    "extra_effects": [ { "id": "hive_raptor_spawn", "hit_self": true } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_hive_raptor_spawn",
+    "condition": { "one_in_chance": 40 },
+    "effect": [
+      { "u_cast_spell": { "id": "hive_hulk_explode" } },
+      { "message": "The <npc_name> is torn apart by the creature's violent escape!" }
+    ]
+  },
+  {
+    "id": "hive_hulk_explode",
+    "type": "SPELL",
+    "name": { "str": "Hive Hulk Suicide" },
+    "description": "Nothing to see here.",
+    "valid_targets": [ "self" ],
+    "flags": [ "NO_EXPLOSION_SFX" ],
+    "effect": "attack",
+    "shape": "blast",
+    "min_damage": 400,
+    "max_damage": 400,
+    "min_range": 4,
+    "max_range": 4,
+    "min_aoe": 1,
+    "max_aoe": 1,
+    "damage_type": "pure"
   },
   {
     "type": "SPELL",
@@ -543,37 +584,9 @@
     "max_field_intensity": 2
   },
   {
-    "type": "SPELL",
-    "id": "spell_mutagenic_sting",
-    "name": { "str": "Mutagenic Sting" },
-    "description": "Yugg attack which causes random mutation.",
-    "effect": "attack",
-    "shape": "blast",
-    "valid_targets": [ "hostile" ],
-    "min_range": 24,
-    "max_range": 24,
-    "sound_description": "ssszziiipp",
-    "damage_type": "biological",
-    "min_damage": 0,
-    "extra_effects": [ { "id": "spell_mutagenic_sting_selector" } ]
-  },
-  {
-    "id": "spell_mutagenic_sting_selector",
-    "type": "SPELL",
-    "name": "Mutagenic Sting Selector",
-    "description": "The spell fires the EOC for the yugg mutagenic sting.  It's a bug if you have it.",
-    "message": "",
-    "valid_targets": [ "hostile" ],
-    "flags": [ "NO_FAIL", "SILENT", "NO_HANDS", "NO_LEGS" ],
-    "effect": "effect_on_condition",
-    "effect_str": "EOC_random_mutate",
-    "shape": "blast",
-    "max_level": 1
-  },
-  {
     "type": "effect_on_condition",
     "id": "EOC_random_mutate",
-    "condition": { "and": [ { "math": [ "_damage_taken", ">", "0" ] }, "u_is_npc", { "math": [ "2", "<", "rand(6)" ] } ] },
+    "condition": { "and": [ { "math": [ "_proj_damage + _damage > 0" ] }, "has_beta", "npc_is_character" ] },
     "effect": [
       { "set_string_var": "<random_category>", "target_var": { "context_val": "dart_mutation_category" }, "parse_tags": true },
       { "npc_mutate_category": { "context_val": "dart_mutation_category" }, "use_vitamins": false }
@@ -669,7 +682,7 @@
     "id": "EOC_shifting_mass_attack",
     "condition": { "not": { "u_has_worn_with_flag": "PORTAL_PROOF" } },
     "effect": [
-      { "math": [ "u_val('fatigue')", "=", "min(u_val('fatigue') + ps_str + 20, 1200)" ] },
+      { "math": [ "u_val('fatigue') = min(u_val('fatigue') + ps_str + 20, 1200)" ] },
       { "math": [ "u_val('stamina')", "*=", "ps_str + 50" ] },
       { "math": [ "u_sleep_deprivation", "+=", "time('1 minutes')" ] }
     ]
@@ -699,7 +712,7 @@
         "decay_start": "24 hours"
       },
       { "math": [ "u_pain()", "+=", "3" ] },
-      { "math": [ "u_madness", "=", "0" ] },
+      { "math": [ "u_madness = 0" ] },
       {
         "u_message": "Your mind lurches, the shapes and figures dance across your vision, you feel like your head is going to explode."
       }
@@ -768,10 +781,10 @@
     "shape": "cone",
     "min_range": 4,
     "max_range": 4,
-    "//": "Duration is 3-5 hours, can't seem to write it in hours, had to write it in moves which is terrible",
+    "//": "Duration is 3-5 hours.",
     "min_duration": 1080000,
     "max_duration": 1800000,
-    "flags": [ "RANDOM_DURATION" ],
+    "flags": [ "RANDOM_DURATION", "NO_BLOCK_MITIGATION", "DODGEABLE", "NON_MAGICAL" ],
     "effect_str": "skunk_spray"
   },
   {
@@ -797,7 +810,7 @@
     "name": { "str": "Unstable Fire Ant Suicide" },
     "description": "Nothing to see here.",
     "valid_targets": [ "self" ],
-    "flags": [ "NO_EXPLOSION_SFX" ],
+    "flags": [ "NO_EXPLOSION_SFX", "NON_MAGICAL" ],
     "effect": "attack",
     "shape": "blast",
     "min_damage": 50,
@@ -835,6 +848,7 @@
     "min_damage": 20,
     "max_damage": 40,
     "damage_type": "cut",
+    "flags": [ "NON_MAGICAL" ],
     "min_range": 6,
     "max_range": 6,
     "min_aoe": 120,
@@ -1169,7 +1183,7 @@
           "case": 0,
           "effect": [
             { "u_message": "Your reflection feasts directly on your essence." },
-            { "math": [ "u_val('fatigue')", "=", "min(u_val('fatigue') + portal_dungeon_reflect_strength, 1200)" ] },
+            { "math": [ "u_val('fatigue') = min(u_val('fatigue') + portal_dungeon_reflect_strength, 1200)" ] },
             { "math": [ "portal_dungeon_reflect_strength", "+=", "3" ] }
           ]
         },
@@ -1177,7 +1191,7 @@
           "case": 2,
           "effect": [
             { "u_message": "Your reflection uses your bond to feast on your essence." },
-            { "math": [ "u_val('fatigue')", "=", "min(u_val('fatigue') + portal_dungeon_reflect_strength, 1200)" ] },
+            { "math": [ "u_val('fatigue') = min(u_val('fatigue') + portal_dungeon_reflect_strength, 1200)" ] },
             { "math": [ "portal_dungeon_reflect_strength", "++" ] }
           ]
         },
@@ -1203,42 +1217,36 @@
                 {
                   "case": 5,
                   "effect": {
-                    "run_eocs": {
-                      "id": "portal_storm_reflection_summon_guilt",
-                      "condition": {
-                        "and": [
-                          { "math": [ "portal_dungeon_level", ">", "0" ] },
-                          { "math": [ "monsters_nearby('mon_guilt', 'location': dungeon_loc)", "<", "1" ] }
-                        ]
-                      },
-                      "effect": {
-                        "u_spawn_monster": "mon_guilt",
-                        "real_count": 1,
-                        "min_radius": 2,
-                        "max_radius": 4,
-                        "spawn_message": "Something deep inside you is manifested physically."
-                      }
+                    "if": {
+                      "and": [
+                        { "math": [ "portal_dungeon_level > 0" ] },
+                        { "math": [ "monsters_nearby('mon_guilt', 'location': dungeon_loc) < 1" ] }
+                      ]
+                    },
+                    "then": {
+                      "u_spawn_monster": "mon_guilt",
+                      "real_count": 1,
+                      "min_radius": 2,
+                      "max_radius": 4,
+                      "spawn_message": "Something deep inside you is manifested physically."
                     }
                   }
                 },
                 {
                   "case": 8,
                   "effect": {
-                    "run_eocs": {
-                      "id": "portal_storm_reflection_summon_sloth",
-                      "condition": {
-                        "and": [
-                          { "math": [ "portal_dungeon_level", ">", "0" ] },
-                          { "math": [ "monsters_nearby('mon_sloth', 'location': dungeon_loc)", "<", "1" ] }
-                        ]
-                      },
-                      "effect": {
-                        "u_spawn_monster": "mon_sloth",
-                        "real_count": 1,
-                        "min_radius": 2,
-                        "max_radius": 4,
-                        "spawn_message": "Something deep inside you is manifested physically."
-                      }
+                    "if": {
+                      "and": [
+                        { "math": [ "portal_dungeon_level > 0" ] },
+                        { "math": [ "monsters_nearby('mon_sloth', 'location': dungeon_loc) < 1" ] }
+                      ]
+                    },
+                    "then": {
+                      "u_spawn_monster": "mon_sloth",
+                      "real_count": 1,
+                      "min_radius": 2,
+                      "max_radius": 4,
+                      "spawn_message": "Something deep inside you is manifested physically."
                     }
                   }
                 }
@@ -1398,7 +1406,7 @@
     "type": "effect_on_condition",
     "id": "EOC_sloth_attack",
     "effect": [
-      { "math": [ "portal_dungeon_slow_strength", "=", "max(portal_dungeon_slow_strength - 1, -75)" ] },
+      { "math": [ "portal_dungeon_slow_strength = max(portal_dungeon_slow_strength - 1, -75)" ] },
       { "u_add_effect": "slowed_time", "duration": [ "4 hours", "6 hours" ] }
     ]
   },
@@ -1423,7 +1431,7 @@
     "type": "effect_on_condition",
     "id": "EOC_guilt_attack",
     "effect": [
-      { "math": [ "portal_dungeon_carry_strength", "=", "max(portal_dungeon_carry_strength - 1, -75)" ] },
+      { "math": [ "portal_dungeon_carry_strength = max(portal_dungeon_carry_strength - 1, -75)" ] },
       { "u_add_effect": "strengthened_gravity", "duration": [ "4 hours", "6 hours" ] }
     ]
   },
@@ -1461,7 +1469,7 @@
     "effect": [
       { "u_message": "The terrifying visage of the <npc_name> paralyzes you.", "type": "bad" },
       { "u_add_effect": "fearparalyze", "duration": 5 },
-      { "turn_cost": "4 s" }
+      { "turn_cost": { "math": [ "4 * u_speed() / 100" ] } }
     ],
     "false_effect": { "u_message": "You manage to avoid staring at the horrendous <npc_name>." }
   },

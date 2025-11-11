@@ -137,7 +137,7 @@
       { "item": "string_36", "count": [ 1, 4 ], "prob": 60 },
       { "item": "string_36", "count": [ 1, 4 ], "prob": 30 },
       { "item": "string_36", "count": [ 1, 4 ], "prob": 10 },
-      { "item": "duct_tape", "prob": 30, "charges": [ 25, 400 ] },
+      { "group": "duct_tape_roll_part", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "item": "plastic_straw", "prob": 70, "count": [ 1, 6 ] },
@@ -160,7 +160,7 @@
       { "item": "marble", "prob": 3, "charges": [ 0, 5 ] },
       { "item": "metal_RPG_die", "prob": 1 },
       { "item": "aluminum_foil", "prob": 25 },
-      { "item": "wrapper_foil", "prob": 12, "count": [ 5, 40 ], "container-item": "wrapper_foil_roll" },
+      { "item": "wrapper_foil", "prob": 12, "count": [ 5, 40 ], "entry-wrapper": "wrapper_foil_roll" },
       { "item": "nuts_bolts", "prob": 20, "charges": [ 1, 4 ] },
       { "item": "plastic_shopping_bag", "prob": 30, "count": [ 0, 8 ] },
       {
@@ -307,7 +307,7 @@
       { "item": "solder_wire", "prob": 30 },
       { "group": "superglue", "prob": 40 },
       { "item": "knitting_needles", "prob": 40 },
-      { "item": "duct_tape", "prob": 40, "charges": [ 5, 160 ] },
+      { "group": "duct_tape_roll_part", "prob": 40 },
       { "item": "wax_paraffin", "prob": 10 },
       { "item": "zipper_short_plastic", "prob": 35 },
       { "item": "zipper_short_plastic", "prob": 15 },
@@ -347,7 +347,7 @@
       { "group": "tools_common", "count": 2, "damage": [ 0, 4 ], "prob": 30 },
       { "group": "superglue", "prob": 40 },
       { "item": "boxcutter", "prob": 35, "damage": [ 0, 4 ] },
-      { "item": "duct_tape", "prob": 35, "charges": [ 5, 200 ] },
+      { "group": "duct_tape_roll_part", "prob": 35 },
       {
         "item": "flashlight",
         "prob": 10,
@@ -425,7 +425,7 @@
       { "item": "candle", "count": [ 1, 2 ], "prob": 35, "charges": [ 70, -1 ] },
       { "item": "corkscrew", "prob": 30 },
       { "group": "adhesive_bandages_box_used", "prob": 30 },
-      { "item": "duct_tape", "prob": 30, "charges": [ 100, 400 ] },
+      { "group": "duct_tape_roll_part", "prob": 30 },
       { "group": "superglue", "prob": 30 },
       { "item": "light_battery_cell", "count": 4, "prob": 50, "charges": 100 },
       { "item": "deck_of_cards", "prob": 40 },
@@ -555,6 +555,7 @@
       { "group": "big_canned_food", "prob": 10, "count": [ 0, 2 ] },
       { "group": "dry_goods", "prob": 30, "count": [ 0, 3 ] },
       { "group": "preserved_food", "prob": 20, "count": [ 0, 2 ] },
+      { "group": "baking_soda_box", "prob": 30, "count": [ 0, 2 ] },
       { "item": "garlic", "prob": 23, "count": [ 0, 3 ] },
       { "item": "onion", "prob": 23, "count": [ 0, 3 ] },
       { "item": "potato", "prob": 15, "count": [ 0, 12 ] },
@@ -583,7 +584,7 @@
       { "item": "hotplate", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "hotplate_induction", "prob": 1, "damage": [ 0, 4 ] },
       {
-        "collection": [ { "item": "charcoal", "prob": 70 }, { "item": "char_smoker", "prob": 100, "damage": [ 0, 4 ] } ],
+        "collection": [ { "group": "charcoal_bag_part", "prob": 70 }, { "item": "char_smoker", "prob": 100, "damage": [ 0, 4 ] } ],
         "prob": 5
       },
       {
@@ -1450,6 +1451,13 @@
     "//": "This group was created by a fool and may contain errors.",
     "container-item": "bottle_glass_seasoning",
     "entries": [ { "item": "garlic_powder", "container-item": "null", "count": [ 10, 100 ] } ]
+  },
+  {
+    "type": "item_group",
+    "id": "baking_soda_box",
+    "subtype": "collection",
+    "container-item": "box_small",
+    "entries": [ { "item": "chem_baking_soda", "container-item": "null", "count": [ 1, 2 ] } ]
   },
   {
     "type": "item_group",

@@ -117,6 +117,7 @@ enum class spell_target : int {
     none,
     item,
     field,
+    vehicle,
     num_spell_targets
 };
 
@@ -759,10 +760,12 @@ class known_magic
         // gets the spell associated with the spell_id to be edited
         spell &get_spell( const spell_id &sp );
         // opens up a ui that the Character can choose a spell from
-        // returns the index of the spell in the vector of spells
-        int select_spell( Character &guy );
+        // returns the selected spell
+        spell &select_spell( Character &guy );
         // get all known spells
         std::vector<spell *> get_spells();
+        // Last spell casted
+        spell_id last_spell = spell_id::NULL_ID(); // NOLINT(cata-serialize)
         // directly get the character known spells
         std::map<spell_id, spell> &get_spellbook() {
             return spellbook;
@@ -840,7 +843,7 @@ std::set<tripoint_bub_ms> spell_effect_cone( const override_parameters &params,
 std::set<tripoint_bub_ms> spell_effect_line( const override_parameters &params,
         const tripoint_bub_ms &source, const tripoint_bub_ms &target );
 
-void spawn_ethereal_item( const spell &sp, Creature &, const tripoint_bub_ms & );
+void spawn_ethereal_item( const spell &sp, Creature &, const tripoint_bub_ms &center );
 void recover_energy( const spell &sp, Creature &, const tripoint_bub_ms &target );
 void spawn_summoned_monster( const spell &sp, Creature &caster, const tripoint_bub_ms &target );
 void spawn_summoned_vehicle( const spell &sp, Creature &caster, const tripoint_bub_ms &target );

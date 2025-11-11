@@ -142,7 +142,8 @@
           "y": [ 8, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 20,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "car_chassis",
@@ -150,7 +151,8 @@
           "y": [ 7, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 40,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "motorcycle_chassis",
@@ -158,7 +160,8 @@
           "y": [ 7, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 30,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "quad_bike_chassis",
@@ -166,7 +169,8 @@
           "y": [ 7, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 10,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         }
       ],
       "place_monsters": [
@@ -235,7 +239,8 @@
           "y": [ 8, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 10,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "car_chassis",
@@ -243,7 +248,8 @@
           "y": [ 7, 15 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 20,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "motorcycle_chassis",
@@ -251,7 +257,8 @@
           "y": [ 7, 10 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 15,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         },
         {
           "vehicle": "quad_bike_chassis",
@@ -259,7 +266,8 @@
           "y": [ 7, 10 ],
           "rotation": [ 0, 90, 180, 270 ],
           "chance": 5,
-          "fuel": 0
+          "fuel": 0,
+          "status": 1
         }
       ],
       "place_monsters": [

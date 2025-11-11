@@ -22,7 +22,8 @@
     "min_cycle_recoil": 540,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p226mag_12rd_357sig" ] } ],
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 8 },
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ]
   },
   {
     "id": "glock_31",
@@ -63,6 +64,7 @@
     "min_cycle_recoil": 540,
     "weapon_category": [ "AUTOMATIC_PISTOLS" ],
     "pocket_data": [ { "magazine_well": "250 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p320mag_13rd_357sig" ] } ],
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail", 1 ], [ "sights", 1 ], [ "stock mount", 1 ] ],
     "melee_damage": { "bash": 8 }
   }
 ]

@@ -15,20 +15,7 @@
     "type": "MONSTER_FACTION",
     "name": "attack_player_only",
     "//": "Should be friendly to everything, this faction only attacks and is attacked by the player/NPCs",
-    "friendly": [
-      "slime",
-      "zombie",
-      "animal",
-      "mutant",
-      "insect",
-      "bot",
-      "nether",
-      "spider",
-      "stag_beetle",
-      "small_animal",
-      "plant",
-      "triffid"
-    ],
+    "friendly": [ "slime", "zombie", "animal", "mutant", "insect", "bot", "nether", "spider", "small_animal", "plant", "triffid" ],
     "by_mood": [ "attack_player_only" ],
     "hate": [ "player", "human" ]
   },
@@ -523,46 +510,33 @@
     "name": "ant",
     "base_faction": "insect",
     "friendly": [ "aphid" ],
-    "neutral": [ "stag_beetle_larva" ],
     "hate": [ "acid_ant", "fire_ant" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "acid_ant",
     "base_faction": "insect",
-    "neutral": [ "aphid", "stag_beetle_larva" ],
+    "neutral": [ "aphid" ],
     "hate": [ "ant", "fire_ant" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "fire_ant",
     "base_faction": "insect",
-    "neutral": [ "aphid", "stag_beetle_larva" ],
+    "neutral": [ "aphid" ],
     "hate": [ "ant", "acid_ant" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "aphid",
     "base_faction": "insect",
-    "neutral": [ "ant", "acid_ant", "fire_ant", "stag_beetle_larva" ]
+    "neutral": [ "ant", "acid_ant", "fire_ant" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "crayfish",
     "base_faction": "insect",
     "hate": [ "fish" ]
-  },
-  {
-    "type": "MONSTER_FACTION",
-    "name": "stag_beetle",
-    "friendly": [ "attack_player_only" ],
-    "base_faction": "insect"
-  },
-  {
-    "type": "MONSTER_FACTION",
-    "name": "stag_beetle_larva",
-    "base_faction": "stag_beetle",
-    "neutral": [ "ant", "acid_ant", "fire_ant", "aphid" ]
   },
   {
     "type": "MONSTER_FACTION",

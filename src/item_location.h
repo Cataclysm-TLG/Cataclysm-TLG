@@ -13,6 +13,7 @@ class JsonObject;
 class JsonOut;
 class item;
 class item_pocket;
+class map;
 class map_cursor;
 class vehicle_cursor;
 class talker;
@@ -68,9 +69,8 @@ class item_location
         type where_recursive() const;
 
         /** Returns the position where the item is found */
-        // TODO: fix point types (remove position in favour of pos_bub)
-        tripoint position() const;
-        tripoint_bub_ms pos_bub() const;
+        tripoint_bub_ms pos_bub( const map &here ) const;
+        tripoint_abs_ms pos_abs() const;
 
         /** Describes the item location
          *  @param ch if set description is relative to character location */
@@ -126,6 +126,11 @@ class item_location
         bool has_parent() const;
 
         /**
+        * Returns whether the item location is inside an e-device)
+        */
+        bool is_efile() const;
+
+        /**
         * Returns available volume capacity where this item is located.
         */
         units::volume volume_capacity() const;
@@ -156,7 +161,7 @@ class item_location
         /**
          * Overflow items into parent pockets recursively
          */
-        void overflow();
+        void overflow( map &here );
 
         /**
          * returns whether the item can be reloaded with the specified item.
@@ -164,6 +169,13 @@ class item_location
          * @param now whether the currently contained ammo/magazine should be taken into account
          */
         bool can_reload_with( const item_location &ammo, bool now ) const;
+
+        /**
+        * returns the item's level of the specified quality.
+        * @param quality the name of quality to check the level of
+        * @param boiling true if the item is required to be empty to have the boiling quality
+        */
+        int get_quality( const std::string &quality, bool strict ) const;
 
     private:
         class impl;

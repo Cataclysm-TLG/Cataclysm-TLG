@@ -174,9 +174,9 @@ TEST_CASE( "fd_acid_falls_down", "[field]" )
 
     m.add_field( p, fd_acid, 3 );
 
-    REQUIRE_FALSE( m.valid_move( p, p + tripoint_below ) );
+    REQUIRE_FALSE( m.valid_move( p, p + tripoint::below ) );
     REQUIRE( m.get_field( p, fd_acid ) );
-    REQUIRE_FALSE( m.get_field( p + tripoint_below, fd_acid ) );
+    REQUIRE_FALSE( m.get_field( p + tripoint::below, fd_acid ) );
 
     calendar::turn += 1_turns;
     m.process_fields();
@@ -186,7 +186,7 @@ TEST_CASE( "fd_acid_falls_down", "[field]" )
     // remove floor under the acid field
     m.ter_set( p, ter_t_open_air );
     m.build_floor_cache( 0 );
-    REQUIRE( m.valid_move( p, p + tripoint_below ) );
+    REQUIRE( m.valid_move( p, p + tripoint::below ) );
 
     calendar::turn += 1_turns;
     m.process_fields();
@@ -197,7 +197,7 @@ TEST_CASE( "fd_acid_falls_down", "[field]" )
         INFO( "acid field is dropped by exactly one point" );
         field_entry *acid_here = m.get_field( p, fd_acid );
         CHECK( ( !acid_here || !acid_here->is_field_alive() ) );
-        CHECK( m.get_field( p + tripoint_below, fd_acid ) );
+        CHECK( m.get_field( p + tripoint::below, fd_acid ) );
     }
 
     fields_test_cleanup();
@@ -210,7 +210,7 @@ TEST_CASE( "fire_spreading", "[field][!mayfail]" )
     weather_clear.with_windspeed( 0 );
 
     const tripoint_bub_ms p{ 33, 33, 0 };
-    const tripoint_bub_ms far_p = p + tripoint_east * 3;
+    const tripoint_bub_ms far_p = p + tripoint::east * 3;
 
     map &m = get_map();
 
@@ -232,21 +232,21 @@ TEST_CASE( "fire_spreading", "[field][!mayfail]" )
     };
 
     SECTION( "fire spreads on fd_web" ) {
-        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint_east; p0 += tripoint_east ) {
+        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint::east; p0 += tripoint::east ) {
             m.add_field( p0, fd_web, 1 );
         }
         // note: time limit here was chosen arbitrarily. It could be too low or too high.
         check_spreading( 5_minutes );
     }
     SECTION( "fire spreads on flammable items" ) {
-        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint_east; p0 += tripoint_east ) {
+        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint::east; p0 += tripoint::east ) {
             m.add_item( p0, item( "test_2x4" ) );
         }
         // note: time limit here was chosen arbitrarily. It could be too low or too high.
         check_spreading( 30_minutes );
     }
     SECTION( "fire spreads on flammable terrain" ) {
-        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint_east; p0 += tripoint_east ) {
+        for( tripoint_bub_ms p0 = p; p0 != far_p + tripoint::east; p0 += tripoint::east ) {
             REQUIRE( ter_t_tree_walnut->has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH ) );
             m.ter_set( p0, ter_t_tree_walnut );
         }
@@ -410,13 +410,14 @@ TEST_CASE( "fungal_haze_test", "[field]" )
 
 TEST_CASE( "player_in_field_test", "[field][player]" )
 {
+    map &here = get_map();
     fields_test_setup();
     clear_avatar();
     const tripoint_bub_ms p{ 33, 33, 0 };
 
     Character &dummy = get_avatar();
-    const tripoint_bub_ms prev_char_pos = dummy.pos_bub();
-    dummy.setpos( p );
+    const tripoint_bub_ms prev_char_pos = dummy.pos_bub( here );
+    dummy.setpos( here, p );
 
     map &m = get_map();
 
@@ -443,7 +444,7 @@ TEST_CASE( "player_in_field_test", "[field][player]" )
     }
 
     clear_avatar();
-    dummy.setpos( prev_char_pos );
+    dummy.setpos( here, prev_char_pos );
     fields_test_cleanup();
 }
 
@@ -488,7 +489,7 @@ TEST_CASE( "player_double_effect_field_test", "[field][player]" )
     Character &dummy = get_avatar();
     map &m = get_map();
 
-    dummy.setpos( p );
+    dummy.setpos( m, p );
     m.add_field( p, field_fd_test, 1 );
 
     m.creature_in_field( dummy );
@@ -512,7 +513,7 @@ TEST_CASE( "player_single_effect_field_test_head", "[field][player]" )
     item head_armor( "test_hazmat_hat" );
     dummy.wear_item( head_armor );
 
-    dummy.setpos( p );
+    dummy.setpos( m, p );
     m.add_field( p, field_fd_test, 1 );
 
     m.creature_in_field( dummy );
@@ -536,7 +537,7 @@ TEST_CASE( "player_single_effect_field_test_torso", "[field][player]" )
     item torso_armor( "test_hazmat_shirt" );
     dummy.wear_item( torso_armor );
 
-    dummy.setpos( p );
+    dummy.setpos( m, p );
     m.add_field( p, field_fd_test, 1 );
 
     m.creature_in_field( dummy );
@@ -562,7 +563,7 @@ TEST_CASE( "player_single_effect_field_test_all", "[field][player]" )
     item head_armor( "test_hazmat_hat" );
     dummy.wear_item( head_armor );
 
-    dummy.setpos( p );
+    dummy.setpos( m, p );
     m.add_field( p, field_fd_test, 1 );
 
     m.creature_in_field( dummy );

@@ -363,12 +363,6 @@
       },
       {
         "text": "<BOSS_intro_question>",
-        "topic": "BOSS_Lapin_01_Story1",
-        "condition": { "npc_has_trait": "BOSS_Lapin_01" },
-        "switch": true
-      },
-      {
-        "text": "<BOSS_intro_question>",
         "topic": "BOSS_NC_FARMER_Story1",
         "condition": { "npc_has_trait": "BOSS_NC_FARMER_01" },
         "switch": true

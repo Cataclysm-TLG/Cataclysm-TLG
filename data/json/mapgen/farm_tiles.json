@@ -43,7 +43,7 @@
       "palettes": [ "farm_lots" ],
       "place_vehicles": [ { "vehicle": "farm_vehicles", "x": [ 4, 18 ], "y": [ 4, 18 ], "chance": 3, "rotation": [ 90, 270 ] } ],
       "place_monsters": [
-        { "monster": "GROUP_FARM_PESTS", "x": [ 11, 22 ], "y": [ 11, 22 ], "density": 0.02 },
+        { "monster": "GROUP_FARM_PESTS", "x": [ 11, 22 ], "y": [ 11, 22 ], "density": 0.01 },
         { "monster": "GROUP_CROWS", "x": [ 11, 22 ], "y": [ 11, 22 ], "density": 0.01 }
       ]
     }

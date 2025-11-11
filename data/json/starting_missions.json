@@ -569,7 +569,7 @@
         "om_terrain": "helipad_nw",
         "reveal_radius": 10,
         "om_special": "military helipad",
-        "search_range": 70,
+        "search_range": 120,
         "min_distance": 25,
         "z": 0
       }

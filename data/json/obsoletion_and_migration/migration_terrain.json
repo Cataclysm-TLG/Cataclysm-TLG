@@ -23,5 +23,20 @@
     "type": "vehicle_part_migration",
     "from": "stowed_big_portable_freezer",
     "to": "stowed_chest_minifreezer"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_workbench_with_recharger",
+    "to": "ap_veh_tools_kitchen"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "workbench_with_recharger",
+    "to": "workbench"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_furn": "f_compact_ASRG_containment",
+    "to_furn": "f_generator_broken"
   }
 ]

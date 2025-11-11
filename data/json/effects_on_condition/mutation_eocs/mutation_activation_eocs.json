@@ -10,12 +10,12 @@
     "condition": {
       "and": [
         { "expects_vars": [ "prep_time", "spell_to_cast", "message_success", "message_fail" ] },
-        { "math": [ "u_val('stamina')", ">", "_energy_amount" ] }
+        { "math": [ "u_val('stamina') > _energy_amount" ] }
       ]
     },
     "effect": [
       { "turn_cost": { "context_val": "prep_time" } },
-      { "math": [ "u_val('stamina')", "-=", "_energy_amount" ] },
+      { "math": [ "u_val('stamina') -= _energy_amount" ] },
       { "run_eocs": [ "EOC_GENERIC_SPELL_MUTATION_ACT" ] }
     ],
     "false_effect": [ { "u_message": { "context_val": "message_fail" }, "type": "bad" } ]
@@ -139,6 +139,38 @@
           "spell_to_cast": "spell_raptor_leap",
           "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
           "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_WHIPPING_TONGUE_PULL",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": "600",
+          "prep_time": "1",
+          "spell_to_cast": "spell_whipping_tongue_pull",
+          "message_success": { "i18n": true, "str": "Your tongue launches out to snag your target." },
+          "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_HARPOON_TONGUE_STAB",
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": "600",
+          "prep_time": "1",
+          "spell_to_cast": "spell_harpoon_tongue_stab",
+          "message_success": { "i18n": true, "str": "Your tongue launches out to spear your target." },
+          "message_fail": { "i18n": true, "str": "You are too tired to catch anything with your tongue." }
         }
       }
     ]

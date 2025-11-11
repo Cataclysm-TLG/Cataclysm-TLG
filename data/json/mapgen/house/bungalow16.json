@@ -6,7 +6,7 @@
     "method": "json",
     "object": {
       "palettes": [
-        "domestic_general_and_variant_palette",
+        "domestic_general_construction_and_variant_palette",
         "standard_domestic_lino_bathroom",
         "standard_domestic_landscaping_palette",
         "parametrized_carpets_palette"
@@ -84,11 +84,14 @@
           { "item": "SUS_wardrobe_womens", "chance": 50, "repeat": [ 1, 2 ] }
         ],
         "]": { "item": "nightstand", "chance": 40 },
-        "c": { "item": "guns_pistol_common", "chance": 50 },
+        "c": { "item": "guns_pistol_common", "chance": 40 },
         "(": { "item": "table_foyer", "chance": 50, "repeat": [ 1, 2 ] }
       },
-      "place_nested": [ { "chunks": [ "rolling_trash_can_1x1" ], "x": 5, "y": 1 } ],
-      "place_loot": [ { "item": "television", "x": 4, "y": 6, "chance": 100 } ]
+      "place_nested": [
+        { "chunks": [ "rolling_trash_can_1x1" ], "x": 0, "y": 1 },
+        { "chunks": [ [ "null", 80 ], [ "carcrash_10x10_rand", 20 ] ], "x": [ 2, 12 ], "y": 0 }
+      ],
+      "place_loot": [ { "item": "television", "x": 4, "y": 6, "chance": 90 } ]
     }
   },
   {

@@ -36,17 +36,18 @@ enum class description_target : int {
     vehicle
 };
 
-static const Creature *seen_critter( const tripoint &p )
+static const Creature *seen_critter( const tripoint_bub_ms &p )
 {
     const Creature *critter = get_creature_tracker().creature_at( p, true );
-    if( critter != nullptr && get_player_view().sees( *critter ) ) {
+    map &here = get_map();
+    if( critter != nullptr && get_player_view().sees( here, *critter ) ) {
         return critter;
     }
 
     return nullptr;
 }
 
-void game::extended_description( const tripoint &p )
+void game::extended_description( const tripoint_bub_ms &p )
 {
     ui_adaptor ui;
     const int top = 3;
@@ -59,9 +60,9 @@ void game::extended_description( const tripoint &p )
         const int bottom = TERMY;
         width = right - left;
         const int height = bottom - top;
-        w_head = catacurses::newwin( top, TERMX, point_zero );
+        w_head = catacurses::newwin( top, TERMX, point::zero );
         w_main = catacurses::newwin( height, width, point( left, top ) );
-        ui.position( point_zero, point( TERMX, TERMY ) );
+        ui.position( point::zero, point( TERMX, TERMY ) );
     } );
     ui.mark_resize();
 
@@ -85,7 +86,7 @@ void game::extended_description( const tripoint &p )
 
     ui.on_redraw( [&]( const ui_adaptor & ) {
         werase( w_head );
-        mvwprintz( w_head, point_zero, c_white,
+        mvwprintz( w_head, point::zero, c_white,
                    _( "[%s] describe creatures, [%s] describe furniture, "
                       "[%s] describe terrain, [%s] describe vehicle/appliance, [%s] close." ),
                    ctxt.get_desc( "CREATURE" ), ctxt.get_desc( "FURNITURE" ),
@@ -100,6 +101,7 @@ void game::extended_description( const tripoint &p )
 
         std::string desc;
         // Allow looking at invisible tiles - player may want to examine hallucinations etc.
+        map &here = get_map();
         switch( cur_target ) {
             case description_target::creature: {
                 const Creature *critter = seen_critter( p );
@@ -111,7 +113,7 @@ void game::extended_description( const tripoint &p )
             }
             break;
             case description_target::furniture:
-                if( !u.sees( p ) || !m.has_furn( p ) ) {
+                if( !u.sees( here, p ) || !m.has_furn( p ) ) {
                     desc = _( "You do not see any furniture here." );
                 } else {
                     const furn_id fid = m.furn( p );
@@ -123,7 +125,7 @@ void game::extended_description( const tripoint &p )
                 }
                 break;
             case description_target::terrain:
-                if( !u.sees( p ) ) {
+                if( !u.sees( here, p ) ) {
                     desc = _( "You can't see the terrain here." );
                 } else {
                     const ter_id tid = m.ter( p );
@@ -136,7 +138,7 @@ void game::extended_description( const tripoint &p )
                 break;
             case description_target::vehicle:
                 const optional_vpart_position vp = m.veh_at( p );
-                if( !u.sees( p ) || !vp ) {
+                if( !u.sees( here, p ) || !vp ) {
                     desc = _( "You can't see vehicles or appliances here." );
                 } else {
                     desc = vp.extended_description();
@@ -152,7 +154,7 @@ void game::extended_description( const tripoint &p )
         }
 
         werase( w_main );
-        fold_and_print_from( w_main, point_zero, width, 0, c_light_gray, desc );
+        fold_and_print_from( w_main, point::zero, width, 0, c_light_gray, desc );
         wnoutrefresh( w_main );
     } );
 

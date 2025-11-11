@@ -66,6 +66,7 @@ enum class event_type : int {
     character_wakes_up,
     character_wields_item,
     character_wears_item,
+    character_takeoff_item,
     character_armor_destroyed,
     consumes_marloss_item,
     crosses_marloss_threshold,
@@ -189,7 +190,7 @@ struct event_spec_character_item {
     };
 };
 
-static_assert( static_cast<int>( event_type::num_event_types ) == 105,
+static_assert( static_cast<int>( event_type::num_event_types ) == 106,
                "This static_assert is to remind you to add a specialization for your new "
                "event_type below" );
 
@@ -425,9 +426,11 @@ struct event_spec<event_type::character_radioactively_mutates> : event_spec_char
 
 template<>
 struct event_spec<event_type::character_ranged_attacks_character> {
-    static constexpr std::array<std::pair<const char *, cata_variant_type>, 4> fields = {{
+    static constexpr std::array<std::pair<const char *, cata_variant_type>, 6> fields = {{
             { "attacker", cata_variant_type::character_id },
             { "weapon", cata_variant_type::itype_id },
+            { "ammo", cata_variant_type::itype_id },
+            { "is_throw", cata_variant_type::bool_ },
             { "victim", cata_variant_type::character_id },
             { "victim_name", cata_variant_type::string },
         }
@@ -436,9 +439,11 @@ struct event_spec<event_type::character_ranged_attacks_character> {
 
 template<>
 struct event_spec<event_type::character_ranged_attacks_monster> {
-    static constexpr std::array<std::pair<const char *, cata_variant_type>, 3> fields = {{
+    static constexpr std::array<std::pair<const char *, cata_variant_type>, 5> fields = {{
             { "attacker", cata_variant_type::character_id },
             { "weapon", cata_variant_type::itype_id },
+            { "ammo", cata_variant_type::itype_id },
+            { "is_throw", cata_variant_type::bool_ },
             { "victim_type", cata_variant_type::mtype_id },
         }
     };
@@ -466,9 +471,11 @@ struct event_spec<event_type::character_starts_activity> {
 
 template<>
 struct event_spec<event_type::character_takes_damage> {
-    static constexpr std::array<std::pair<const char *, cata_variant_type>, 2> fields = {{
+    static constexpr std::array<std::pair<const char *, cata_variant_type>, 4> fields = {{
             { "character", cata_variant_type::character_id },
             { "damage", cata_variant_type::int_ },
+            { "bodypart", cata_variant_type::body_part },
+            { "pain", cata_variant_type::int_ }
         }
     };
 };
@@ -529,6 +536,8 @@ struct event_spec<event_type::character_butchered_corpse> {
 template<>
 struct event_spec<event_type::character_wears_item> : event_spec_character_item {};
 
+template<>
+struct event_spec<event_type::character_takeoff_item> : event_spec_character_item {};
 template<>
 struct event_spec<event_type::character_armor_destroyed> : event_spec_character_item {};
 

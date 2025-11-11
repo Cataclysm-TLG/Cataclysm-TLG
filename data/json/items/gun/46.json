@@ -16,7 +16,7 @@
     "material": [ "steel", "plastic" ],
     "symbol": "(",
     "color": "dark_gray",
-    "range": 2,
+    "range": 7,
     "ammo": [ "46" ],
     "dispersion": 260,
     "durability": 8,
@@ -26,7 +26,6 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],

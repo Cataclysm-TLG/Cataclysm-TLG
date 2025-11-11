@@ -41,8 +41,8 @@
     "default_faction": "lab_mutant",
     "bodytype": "human",
     "species": [ "MUTANT" ],
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "75000 ml",
+    "weight": "74000 g",
     "hp": 150,
     "speed": 100,
     "material": [ "flesh" ],
@@ -79,10 +79,9 @@
     "fear_triggers": [ "HURT", "FIRE" ],
     "stomach_size": 1300,
     "death_drops": "mon_mutant_experimental_death_drops",
-    "upgrades": { "half_life": 36, "into_group": "GROUP_MUTANT_EVOLVED" },
+    "upgrades": { "half_life": 144, "into_group": "GROUP_MUTANT_EVOLVED" },
     "regenerates": 1,
     "regen_morale": true,
-    "zombify_into": "mon_meat_cocoon_small",
     "flags": [ "SEES", "HEARS", "SMELLS", "HAS_MIND", "CAN_OPEN_DOORS", "WARM", "BASHES", "EATS" ],
     "armor": { "bash": 5, "cut": 5, "bullet": 4, "electric": 1 }
   },
@@ -127,7 +126,6 @@
     ],
     "death_drops": "mon_mutant_evolved_death_drops",
     "regenerates": 3,
-    "zombify_into": "mon_meat_cocoon_large",
     "extend": {
       "flags": [ "SMELLS", "KEENNOSE", "PUSH_MON", "PUSH_VEH", "CAN_OPEN_DOORS" ],
       "anger_triggers": [ "PLAYER_CLOSE", "PLAYER_WEAK", "HURT" ]
@@ -164,12 +162,11 @@
     "stomach_size": 1500,
     "path_settings": { "max_dist": 20, "avoid_sharp": true, "avoid_traps": true, "avoid_dangerous_fields": true },
     "families": [ "prof_intro_biology", "prof_physiology" ],
-    "harvest": "mutant_human",
+    "harvest": "mutant_human_antler",
     "dissect": "dissect_cattle_sample_large",
     "death_drops": "mon_mutant_experimental_death_drops",
     "anger_triggers": [ "HOSTILE_SEEN", "PLAYER_CLOSE", "FRIEND_ATTACKED" ],
     "fear_triggers": [ "HURT", "FIRE" ],
-    "zombify_into": "mon_meat_cocoon_med",
     "flags": [
       "SEES",
       "HEARS",
@@ -332,7 +329,7 @@
     "type": "MONSTER",
     "name": { "str": "shelled mutant" },
     "description": "An enormous mutant hidden beneath a gray segmented shell, crawling on a carpet of innumerable tentacles covered with suckers.  They hold three thicker, branching limbs high on their front end, each dotted with dozens of unblinking eyeballs.",
-    "copy-from": "mon_mutant_antler",
+    "copy-from": "mon_mutant_arthropod",
     "color": "dark_gray",
     "bodytype": "blob",
     "volume": "375 L",
@@ -361,9 +358,8 @@
     "stomach_size": 1100,
     "harvest": "mutant_human",
     "dissect": "dissect_gastropod_sample_large",
-    "zombify_into": "mon_meat_cocoon_large",
     "delete": { "flags": [ "HIT_AND_RUN" ], "fear_triggers": [ "FIRE" ] },
     "extend": { "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NOHEAD", "STUN_IMMUNE", "PATH_AVOID_FIRE" ] },
-    "armor": { "bash": 22, "cut": 45, "stab": 30, "heat": 20, "bullet": 70, "electric": 6 }
+    "armor": { "bash": 22, "cut": 45, "stab": 30, "heat": 8, "bullet": 70, "electric": 6, "acid": 3 }
   }
 ]

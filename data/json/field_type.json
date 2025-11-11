@@ -1288,7 +1288,7 @@
     "outdoor_age_speedup": "6 minutes",
     "dirty_transparency_cache": true,
     "priority": 8,
-    "half_life": "35 minutes",
+    "half_life": "525 turns",
     "phase": "gas",
     "accelerated_decay": true,
     "display_field": true,

@@ -58,16 +58,6 @@
         "om_terrains": [ "s_lightindustry_10", "s_lightindustry_scen_10" ]
       },
       { "id": "faction_base_helipad_0", "description": "Military Helipad Base", "om_terrains": [ "helipad_nw" ] },
-      {
-        "id": "faction_base_outpost_normal_0",
-        "description": "Normal Military Outpost Base",
-        "om_terrains": [ "outpost" ]
-      },
-      {
-        "id": "faction_base_outpost_cross_0",
-        "description": "Cross Military Outpost Base",
-        "om_terrains": [ "outpost_cross" ]
-      },
       { "id": "faction_base_lighthouse_0", "description": "Lighthouse Base", "om_terrains": [ "lighthouse_ground" ] },
       {
         "id": "faction_base_pottery_cottage_0",
@@ -298,7 +288,6 @@
       { "id": "tinder", "description": " Craft: Tinder" },
       { "id": "meat_cooked", "description": " Cook: Meat, Cooked" },
       { "id": "fish_cooked", "description": " Cook: Fish, Cooked" },
-      { "id": "vegetable_cooked", "description": " Cook: vegetable, Cooked" },
       { "id": "boiled_egg", "description": " Cook: Egg, Boiled" },
       { "id": "starch", "description": " Cook: Starch" },
       { "id": "water_clean", "description": " Boil: Water" },
@@ -424,7 +413,6 @@
     "building_type": "SMITH",
     "recipes": [
       { "id": "copper_knife", "description": " Craft: Knife, Copper" },
-      { "id": "sword_crude", "description": " Craft: Sword, Crude" },
       { "id": "pot_copper", "description": " Craft: Pot, Copper" },
       { "id": "copper_ax", "description": " Craft: Axe, Copper" },
       { "id": "spear_copper", "description": " Craft: Spear, Copper" },

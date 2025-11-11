@@ -136,7 +136,24 @@
     "reproduction": { "baby_monster": "mon_bear_cub", "baby_count": 1, "baby_timer": 700 },
     "//": "220 days gestation period, the mother and cubs remain together for 16-17 months.",
     "baby_flags": [ "SPRING" ],
-    "special_attacks": [ [ "EAT_FOOD", 20 ], { "type": "bite", "cooldown": 15, "infection_chance": 44 }, [ "BROWSE", 40 ] ],
+    "grab_strength": 25,
+    "special_attacks": [
+      [ "EAT_FOOD", 20 ],
+      { "type": "bite", "cooldown": 15, "infection_chance": 44 },
+      [ "BROWSE", 40 ],
+      {
+        "id": "bite_grab",
+        "move_cost": 150,
+        "cooldown": 3,
+        "accuracy": 5,
+        "infection_chance": 2,
+        "min_mul": 1.0,
+        "max_mul": 2.0
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
+    ],
     "flags": [
       "SEES",
       "HEARS",
@@ -308,7 +325,7 @@
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED", "HURT" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "zombify_into": "mon_zpig_brute",
-    "special_attacks": [ [ "EAT_FOOD", 20 ], [ "EAT_CARRION", 60 ] ],
+    "special_attacks": [ [ "EAT_FOOD", 20 ], [ "EAT_CARRION", 60 ], [ "SMASH", 11 ], { "id": "impale" } ],
     "flags": [
       "SEES",
       "HEARS",
@@ -503,7 +520,22 @@
     "dodge": 2,
     "vision_night": 10,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "special_attacks": [ [ "scratch", 10 ], { "type": "leap", "cooldown": 5, "max_range": 5 } ],
+    "grab_strength": 45,
+    "special_attacks": [
+      [ "scratch", 10 ],
+      { "type": "leap", "cooldown": 5, "max_range": 5 },
+      {
+        "id": "bite_grab",
+        "move_cost": 188,
+        "cooldown": 2,
+        "accuracy": 5,
+        "infection_chance": 2,
+        "min_mul": 1.0,
+        "max_mul": 2.0
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" }
+    ],
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "HURT", "PLAYER_CLOSE", "FRIEND_ATTACKED", "PLAYER_NEAR_BABY" ],
     "fear_triggers": [ "SOUND" ],
     "zombify_into": "mon_ziger",
@@ -602,7 +634,7 @@
     "reproduction": { "baby_monster": "mon_cow_calf", "baby_count": 1, "baby_timer": 343 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_cow", "biosig_timer": 1 },
-    "special_attacks": [ [ "GRAZE", 20 ], [ "EAT_CROP", 60 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 60 }, [ "GRAZE", 20 ], [ "EAT_CROP", 60 ] ],
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
     "flags": [
       "SEES",
@@ -781,6 +813,7 @@
       "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
       "pet": "The %s happily wags its tail while you pat its head."
     },
+    "upgrades": { "half_life": 100, "into_group": "GROUP_DOG_EVOLVED" },
     "flags": [
       "ANIMAL",
       "DOGFOOD",
@@ -822,7 +855,7 @@
     "vision_night": 4,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "harvest": "dog_tiny_with_skull",
-    "upgrades": { "age_grow": 42, "into": "mon_dog" },
+    "upgrades": { "age_grow": 42, "into_group": "GROUP_DOG_EVOLVED" },
     "extend": { "flags": [ "NO_BREED", "SMALL_HIDER" ] },
     "delete": { "flags": [ "CORNERED_FIGHTER" ], "zombify_into": "mon_zombie_dog" }
   },
@@ -843,7 +876,8 @@
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "extend": { "special_attacks": [ [ "LUNGE", 5 ] ] },
-    "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_CLOSE" ],
+    "upgrades": { "half_life": 100, "into_group": "GROUP_DOG_TRAINED_EVOLVED" },
+    "anger_triggers": [ "HURT", "FRIEND_ATTACKED", "FRIEND_DIED", "PLAYER_CLOSE", "SOUND" ],
     "petfood": {
       "food": [ "DOGFOOD" ],
       "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
@@ -869,6 +903,7 @@
     "stomach_size": 350,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
+    "upgrades": { "half_life": 100, "into_group": "GROUP_DOG_BIG_EVOLVED" },
     "reproduction": { "baby_monster": "mon_dog_big_baby", "baby_count": 4, "baby_timer": 270 },
     "//": "1-4 puppies & 270 days per-litter for size small canines"
   },
@@ -885,7 +920,7 @@
     "melee_dice_sides": 2,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
-    "upgrades": { "age_grow": 42, "into": "mon_dog_big" }
+    "upgrades": { "age_grow": 42, "into_group": "GROUP_DOG_BIG_EVOLVED" }
   },
   {
     "id": "mon_dog_big_trained",
@@ -907,6 +942,7 @@
     "stomach_size": 350,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
+    "upgrades": { "half_life": 100, "into_group": "GROUP_DOG_BIG_TRAINED_EVOLVED" },
     "reproduction": { "baby_monster": "mon_dog_big_baby", "baby_count": 4, "baby_timer": 270 },
     "//": "1-4 puppies & 270 days per-litter for size small canines"
   },
@@ -1127,9 +1163,9 @@
     "bodytype": "horse",
     "categories": [ "WILDLIFE" ],
     "species": [ "MAMMAL" ],
-    "volume": "550000 ml",
-    "weight": "550 kg",
-    "hp": 90,
+    "volume": "475000 ml",
+    "weight": "450 kg",
+    "hp": 260,
     "speed": 260,
     "attack_cost": 230,
     "material": [ "flesh" ],
@@ -1154,7 +1190,7 @@
     "reproduction": { "baby_monster": "mon_horse_foal", "baby_count": 1, "baby_timer": 360 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 2 },
-    "special_attacks": [ [ "EAT_CROP", 100 ], [ "GRAZE", 50 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 49 }, [ "EAT_CROP", 100 ], [ "GRAZE", 50 ] ],
     "zombify_into": "mon_zombie_horse",
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
     "flags": [
@@ -1248,8 +1284,8 @@
     "bodytype": "horse",
     "categories": [ "WILDLIFE" ],
     "species": [ "MAMMAL" ],
-    "volume": "386 L",
-    "weight": "386 kg",
+    "volume": "550 L",
+    "weight": "550 kg",
     "hp": 320,
     "speed": 190,
     "material": [ "flesh" ],
@@ -1272,12 +1308,12 @@
     "zombify_into": "mon_zoose",
     "baby_flags": [ "AUTUMN" ],
     "reproduction": { "baby_monster": "mon_moose_calf", "baby_count": 1, "baby_timer": 240 },
-    "upgrades": { "half_life": 90, "into": "mon_tusked_moose" },
+    "upgrades": { "half_life": 300, "into": "mon_tusked_moose" },
     "harvest": "moose_with_skull",
     "dissect": "dissect_cattle_sample_large",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 8 },
-    "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 60 }, [ "EAT_CROP", 60 ], [ "GRAZE", 50 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "PET_MOUNTABLE", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
     "armor": { "bash": 5, "cut": 6, "bullet": 8, "electric": 1 }
   },
@@ -1328,8 +1364,8 @@
     "bodytype": "horse",
     "categories": [ "WILDLIFE" ],
     "species": [ "MAMMAL" ],
-    "volume": "386000 ml",
-    "weight": "462 kg",
+    "volume": "660 L",
+    "weight": "660 kg",
     "hp": 480,
     "speed": 160,
     "attack_cost": 110,
@@ -1623,7 +1659,7 @@
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED" ],
     "fear_triggers": [ "SOUND", "PLAYER_CLOSE" ],
     "zombify_into": "mon_zombie_pig",
-    "special_attacks": [ [ "EAT_FOOD", 20 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 22 }, [ "EAT_FOOD", 20 ] ],
     "flags": [
       "SEES",
       "HEARS",
@@ -1743,7 +1779,7 @@
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "vision_night": 5,
     "stomach_size": 200,
-    "upgrades": { "half_life": 30, "into": "mon_raccoon_mutant" },
+    "upgrades": { "half_life": 120, "into": "mon_raccoon_mutant" },
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "BROWSE", 50 ], [ "EAT_CARRION", 60 ] ],
     "anger_triggers": [ "FRIEND_ATTACKED", "HURT" ],
@@ -1780,7 +1816,7 @@
     "dissect": "dissect_rat_sample_single",
     "families": [ "prof_intro_biology", "prof_physiology" ],
     "special_attacks": [ [ "EAT_FOOD", 60 ], [ "BROWSE", 50 ], [ "EAT_CARRION", 60 ] ],
-    "upgrades": { "half_life": 42, "into_group": "GROUP_RATKIN_EVOLVED" },
+    "upgrades": { "half_life": 70, "into_group": "GROUP_RATKIN_EVOLVED" },
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "anger_triggers": [ "PLAYER_WEAK", "FRIEND_ATTACKED", "FRIEND_DIED" ],
     "flags": [ "SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "PATH_AVOID_DANGER", "STUMBLES", "EATS", "SMALL_HIDER" ]
@@ -1904,7 +1940,7 @@
     "//": "Timer copied from sheep",
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
     "baby_flags": [ "SPRING" ],
-    "special_attacks": [ [ "EAT_CROP", 100 ], [ "GRAZE", 60 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 12 }, [ "EAT_CROP", 100 ], [ "GRAZE", 60 ] ],
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
     "zombify_into": "mon_zombie_goat",
     "flags": [
@@ -2052,7 +2088,7 @@
     "bodytype": "horse",
     "categories": [ "WILDLIFE" ],
     "species": [ "MAMMAL" ],
-    "volume": "889 L",
+    "volume": "250 L",
     "weight": "240 kg",
     "hp": 120,
     "speed": 300,
@@ -2080,7 +2116,7 @@
     "reproduction": { "baby_monster": "mon_reindeer_fawn", "baby_count": 5, "baby_timer": 340 },
     "biosignature": { "biosig_item": "feces_manure", "biosig_timer": 12 },
     "baby_flags": [ "WINTER", "AUTUMN" ],
-    "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
+    "special_attacks": [ { "id": "smash", "throw_strength": 37 }, [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
     "flags": [ "SEES", "HEARS", "SMELLS", "ANIMAL", "PATH_AVOID_DANGER", "WARM", "CORNERED_FIGHTER", "EATS" ],
     "armor": { "bash": 3, "cut": 5, "bullet": 6, "electric": 1 }
   },
@@ -2100,7 +2136,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "dodge": 4,
     "path_settings": { "max_dist": 10, "avoid_dangerous_fields": true, "avoid_sharp": true },
-    "harvest": "mammal_fur",
+    "harvest": "deer_with_skull",
     "dissect": "dissect_cattle_sample_single",
     "special_attacks": [ [ "EAT_CROP", 60 ], [ "GRAZE", 60 ] ],
     "upgrades": { "age_grow": 500, "into": "mon_reindeer" },

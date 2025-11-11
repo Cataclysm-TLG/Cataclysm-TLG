@@ -126,7 +126,15 @@
         "text": "<chitchat_player_responses>",
         "topic": "TALK_DONE",
         "switch": true,
+        "condition": { "not": { "u_has_trait": "PSYCHOPATH" } },
         "effect": [ "morale_chat_activity", { "npc_add_effect": "asked_to_socialize", "duration": 7000 } ]
+      },
+      {
+        "text": "<chitchat_player_responses>",
+        "topic": "TALK_DONE",
+        "switch": true,
+        "condition": { "u_has_trait": "PSYCHOPATH" },
+        "effect": [ { "npc_add_effect": "asked_to_socialize", "duration": 7000 } ]
       }
     ]
   }

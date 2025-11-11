@@ -97,7 +97,7 @@
     "type": "vehicle_part",
     "id": "ap_arc_furnace",
     "name": { "str": "arc furnace" },
-    "looks_like": "f_arc_furnace",
+    "looks_like": "f_arcfurnace_empty",
     "color": "blue",
     "categories": [ "utility" ],
     "description": "An arc furnace designed to burn a powdery mix of coke and limestone to create calcium carbide.  Plugged in and ready to go.",
@@ -647,7 +647,7 @@
     "type": "vehicle_part",
     "id": "ap_ground_solar_panel",
     "flags": [ "SOLAR_PANEL", "OBSTACLE", "APPLIANCE" ],
-    "description": "A solar panel, mounted on a frame and ready to power other appliances.",
+    "description": "Four solar panels arrayed together to provide energy when exposed to direct sunlight.",
     "item": "ground_solar_panel",
     "copy-from": "solar_panel",
     "//": "4 times the panels, 1.2x matching the above appliance",
@@ -661,10 +661,11 @@
       }
     },
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 8, 32 ] },
-      { "item": "steel_chunk", "count": [ 8, 32 ] },
-      { "item": "scrap", "count": [ 8, 32 ] },
-      { "item": "solar_cell", "count": [ 4, 16 ] }
+      { "item": "steel_chunk", "count": [ 2, 16 ] },
+      { "item": "scrap", "count": [ 2, 16 ] },
+      { "item": "solar_cell", "count": [ 1, 16 ] },
+      { "item": "tempered_glass_shard", "charges": [ 4, 36 ] },
+      { "item": "plastic_chunk", "count": [ 1, 6 ] }
     ],
     "variants": [ { "symbols": "#", "symbols_broken": "x" } ]
   },
@@ -684,7 +685,7 @@
     "id": "ap_solar_panel_v2",
     "name": { "str": "small advanced solar panel" },
     "flags": [ "SOLAR_PANEL", "OBSTACLE", "APPLIANCE" ],
-    "description": "A  small, high-performance solar panel, mounted on a frame and ready to power other appliances.",
+    "description": "A small, high-performance solar panel, mounted on a frame and ready to power other appliances.",
     "copy-from": "solar_panel_v2",
     "proportional": { "epower": 1.2 },
     "requirements": { "removal": { "time": "3 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
@@ -696,6 +697,7 @@
     "copy-from": "solar_panel_v2",
     "flags": [ "SOLAR_PANEL", "OBSTACLE", "APPLIANCE" ],
     "item": "ground_solar_panel_v2",
+    "description": "Four high-performance solar panels arrayed together to provide energy when exposed to direct sunlight.",
     "//": "4 times from 4 more panels, 1.2 times as is done above",
     "proportional": { "epower": 4.8 },
     "requirements": {
@@ -707,10 +709,11 @@
       }
     },
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 8, 16 ] },
-      { "item": "steel_chunk", "count": [ 8, 16 ] },
-      { "item": "scrap", "count": [ 8, 16 ] },
-      { "item": "solar_cell_v2", "count": [ 4, 24 ] }
+      { "item": "steel_chunk", "count": [ 2, 16 ] },
+      { "item": "scrap", "count": [ 2, 16 ] },
+      { "item": "solar_cell_v2", "count": [ 4, 24 ] },
+      { "item": "tempered_glass_shard", "charges": [ 4, 36 ] },
+      { "item": "plastic_chunk", "count": [ 1, 6 ] }
     ]
   },
   {
@@ -727,42 +730,139 @@
   {
     "type": "vehicle_part",
     "id": "ap_wind_turbine",
-    "location": "structure",
+    "name": { "str": "wind turbine" },
+    "categories": [ "energy" ],
     "flags": [ "WIND_TURBINE", "OBSTACLE", "APPLIANCE" ],
-    "description": "A mounted wind turbine, ready to power other appliances.",
-    "copy-from": "wind_turbine",
-    "requirements": { "removal": { "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
+    "color": "yellow",
+    "broken_color": "yellow",
+    "damage_modifier": 10,
+    "durability": 15,
+    "description": "A structure supporting a set of sails rotating around a central axle which may be moved by wind to generate electricity.",
+    "epower": "1 W",
+    "item": "wind_turbine",
+    "location": "structure",
+    "//": "20 cm weld per quadrant of damage",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 1 ] ],
+        "time": "15 m",
+        "using": [ [ "repair_welding_standard", 2 ], [ "soldering_standard", 4 ] ]
+      }
+    },
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 1, 2 ] },
+      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "scrap", "count": [ 2, 6 ] },
+      { "item": "e_scrap", "count": [ 2, 4 ] },
+      { "item": "splinter", "count": [ 2, 8 ] },
+      { "item": "cable", "charges": [ 80, 115 ] },
+      { "item": "nail", "charges": [ 2, 6 ] }
+    ],
+    "damage_reduction": { "all": 8 },
     "variants": [ { "symbols": "T", "symbols_broken": "X" } ]
   },
   {
     "type": "vehicle_part",
     "id": "ap_xl_wind_turbine",
+    "name": { "str": "large wind turbine" },
+    "looks_like": "wind_turbine",
+    "categories": [ "energy" ],
+    "color": "yellow",
+    "broken_color": "yellow",
+    "damage_modifier": 10,
+    "durability": 70,
+    "description": "A sturdy structure supporting a large set of sails rotating around a central axle which may be moved by wind to generate electricity.",
+    "epower": "3 W",
+    "item": "xl_wind_turbine",
     "location": "structure",
+    "power": "-3000 W",
+    "//": "30 cm weld per quadrant of damage",
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "removal": { "skills": [ [ "mechanics", 3 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "repair": {
+        "skills": [ [ "mechanics", 3 ] ],
+        "time": "20 m",
+        "using": [ [ "repair_welding_standard", 3 ], [ "soldering_standard", 10 ] ]
+      }
+    },
     "flags": [ "WIND_TURBINE", "OBSTACLE", "APPLIANCE" ],
-    "description": "A large mounted wind turbine, ready to power other appliances.",
-    "copy-from": "xl_wind_turbine",
-    "requirements": { "removal": { "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
+    "breaks_into": [
+      { "item": "steel_lump", "count": [ 1, 2 ] },
+      { "item": "steel_chunk", "count": [ 3, 6 ] },
+      { "item": "scrap", "count": [ 10, 20 ] },
+      { "item": "e_scrap", "count": [ 8, 16 ] },
+      { "item": "splinter", "count": [ 25, 50 ] },
+      { "item": "cable", "charges": [ 300, 500 ] },
+      { "item": "nail", "charges": [ 8, 15 ] },
+      { "item": "nuts_bolts", "charges": [ 4, 7 ] }
+    ],
+    "damage_reduction": { "all": 9 },
     "variants": [ { "symbols": "Y", "symbols_broken": "X" } ]
   },
   {
     "type": "vehicle_part",
     "id": "ap_water_wheel",
+    "name": { "str": "water wheel" },
+    "categories": [ "energy" ],
+    "color": "yellow",
+    "broken_color": "yellow",
+    "damage_modifier": 10,
+    "durability": 50,
+    "description": "A set of paddles which can be moved by flowing water to turn an axle and generate power.",
+    "epower": "80 W",
+    "item": "water_wheel",
     "location": "structure",
     "flags": [ "WATER_WHEEL", "OBSTACLE", "APPLIANCE" ],
-    "description": "A mounted water wheel, ready to power other appliances.",
-    "copy-from": "water_wheel",
-    "requirements": { "removal": { "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
-    "variants": [ { "symbols": "x", "symbols_broken": "x" } ]
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "30 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "10 m", "using": [ [ "rope_natural_short", 1 ] ] }
+    },
+    "breaks_into": [
+      { "item": "splinter", "count": [ 40, 60 ] },
+      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "scrap", "count": [ 6, 15 ] },
+      { "item": "cable", "charges": [ 90, 180 ] },
+      { "item": "nail", "charges": [ 21, 35 ] },
+      { "item": "nuts_bolts", "charges": [ 3, 6 ] }
+    ],
+    "damage_reduction": { "all": 15, "stab": 6, "cut": 8 },
+    "variants": [ { "symbols": "*", "symbols_broken": "x" } ]
   },
   {
     "type": "vehicle_part",
     "id": "ap_xl_water_wheel",
+    "name": { "str": "large water wheel" },
+    "looks_like": "water_wheel",
+    "categories": [ "energy" ],
+    "color": "yellow",
+    "broken_color": "yellow",
+    "damage_modifier": 10,
+    "durability": 80,
+    "description": "A large set of paddles which can be moved by flowing water to turn an axle and generate power.",
+    "epower": "180 W",
+    "item": "xl_water_wheel",
     "location": "structure",
     "flags": [ "WATER_WHEEL", "OBSTACLE", "APPLIANCE" ],
-    "description": "A mounted large water wheel, ready to power other appliances.",
-    "copy-from": "xl_water_wheel",
-    "requirements": { "removal": { "time": "15 m", "using": [ [ "vehicle_wrench_2", 1 ] ] } },
-    "variants": [ { "symbols": "x", "symbols_broken": "x" } ]
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "removal": { "skills": [ [ "mechanics", 4 ] ], "time": "60 m", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
+      "repair": { "skills": [ [ "mechanics", 5 ] ], "time": "15 m", "using": [ [ "rope_natural_short", 2 ] ] }
+    },
+    "breaks_into": [
+      { "item": "splinter", "count": [ 60, 100 ] },
+      { "item": "steel_lump", "count": [ 1, 3 ] },
+      { "item": "steel_chunk", "count": [ 4, 9 ] },
+      { "item": "scrap", "count": [ 20, 35 ] },
+      { "item": "cable", "charges": [ 225, 400 ] },
+      { "item": "nail", "charges": [ 80, 130 ] },
+      { "item": "nuts_bolts", "charges": [ 5, 12 ] }
+    ],
+    "damage_reduction": { "all": 16, "stab": 6, "cut": 8 },
+    "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
   {
     "type": "vehicle_part",
@@ -823,6 +923,48 @@
       { "item": "scrap", "count": [ 6, 9 ] }
     ],
     "durability": 120,
+    "requirements": { "removal": { "time": "6 m" } },
+    "variants": [ { "symbols": "B", "symbols_broken": "#" } ]
+  },
+  {
+    "type": "vehicle_part",
+    "id": "ap_battery_motorbike",
+    "name": { "str": "motorbike grid battery" },
+    "categories": [ "energy" ],
+    "looks_like": "battery_motorbike",
+    "color": "red",
+    "flags": [ "OBSTACLE", "APPLIANCE" ],
+    "description": "A motorbike battery wired into a static power grid.",
+    "item": "battery_motorbike",
+    "breaks_into": [
+      { "item": "lead", "count": [ 149, 159 ] },
+      { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
+      { "item": "plastic_chunk", "count": [ 2, 3 ] },
+      { "item": "scrap", "count": [ 0, 1 ] },
+      { "item": "shredded_rubber", "charges": [ 1, 2 ] }
+    ],
+    "durability": 100,
+    "requirements": { "removal": { "time": "6 m" } },
+    "variants": [ { "symbols": "B", "symbols_broken": "#" } ]
+  },
+  {
+    "type": "vehicle_part",
+    "id": "ap_battery_motorbike_small",
+    "name": { "str": "small motorbike grid battery" },
+    "categories": [ "energy" ],
+    "looks_like": "battery_motorbike_small",
+    "color": "red",
+    "flags": [ "OBSTACLE", "APPLIANCE" ],
+    "description": "A small motorbike battery wired into a static power grid.",
+    "item": "battery_motorbike_small",
+    "breaks_into": [
+      { "item": "lead", "count": [ 69, 79 ] },
+      { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
+      { "item": "plastic_chunk" },
+      { "item": "scrap", "count": [ 0, 1 ] },
+      { "item": "shredded_rubber", "charges": [ 0, 1 ] }
+    ],
+    "durability": 30,
     "requirements": { "removal": { "time": "6 m" } },
     "variants": [ { "symbols": "B", "symbols_broken": "#" } ]
   },
@@ -913,44 +1055,6 @@
     "damage_reduction": { "all": 5 },
     "requirements": { "removal": { "time": "6 m" } },
     "variants": [ { "symbols": "o", "symbols_broken": "#" } ]
-  },
-  {
-    "type": "vehicle_part",
-    "id": "ap_active_backup_generator",
-    "name": { "str": "active backup generator" },
-    "looks_like": "f_active_backup_generator",
-    "categories": [ "energy" ],
-    "color": "green_white",
-    "broken_color": "blue",
-    "location": "structure",
-    "damage_modifier": 80,
-    "durability": 400,
-    "description": "A ubiquitous piece of compact machinery meant for running anything from the bathroom lights to electric stoves and other necessities when grid electricity is unavailable.",
-    "//1": "BIZARRE FIELD NAMES HERE! Weird stuff happening! Epower determines how fast it is converted, power determines the ratio of diesel(mL) to battery charges output. In other words, *power* is *fuel efficiency*.",
-    "//2": "On a normal vehicle 250mL of diesel in an I4 with a truck alternator (what the active backup gen uses) should provide ~1692 charges (kW?) of power in about 24 minutes based on a test setup. That's a little less than 7W power, rounded up as I assume a larger dedicated generator is more efficient.",
-    "power": "7 W",
-    "//3": "7.5 kW alternator value, minus power consumption of the engine",
-    "epower": "7300 W",
-    "//4": "This value doesn't seem to do anything for the appliance version? Let's keep it commented out for future reference.",
-    "//energy_consumption": "1000 W",
-    "m2c": 5,
-    "//5": "Actually accepts any diesel-type fuel but does NOT account for their relative fuel values! For diesel this is not a huge deal, only a few % inaccuracy, but for e.g. gas turbines this would be very bad!",
-    "fuel_type": "diesel",
-    "//6": "Appliance engine does NOT accept having these fields.",
-    "//fuel_options": [ "diesel", "biodiesel", "lamp_oil", "motor_oil", "jp8" ],
-    "//damaged_power_factor": 0.25,
-    "item": "active_backup_generator",
-    "requirements": {
-      "repair": {
-        "skills": [ [ "mechanics", 4 ] ],
-        "time": "60 m",
-        "using": [ [ "repair_welding_standard", 5 ], [ "soldering_standard", 5 ] ]
-      }
-    },
-    "flags": [ "ENGINE", "E_DIESEL_FUEL", "OBSTACLE", "COVERED", "APPLIANCE", "REACTOR", "FLUIDTANK" ],
-    "breaks_into": [ { "item": "scrap", "count": [ 4, 16 ] }, { "item": "steel_chunk", "count": [ 1, 6 ] } ],
-    "damage_reduction": { "all": 60 },
-    "variants": [ { "symbols": "0", "symbols_broken": "#" } ]
   },
   {
     "id": "app_microwave",

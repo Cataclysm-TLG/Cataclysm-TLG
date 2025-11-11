@@ -66,7 +66,9 @@
     "id": "button",
     "type": "requirement",
     "//": "All kinds of clothing buttons.",
-    "components": [ [ [ "button_plastic", 1 ], [ "button_wood", 1 ], [ "button_steel", 1 ], [ "button_bronze", 1 ] ] ]
+    "components": [
+      [ [ "button_plastic", 1 ], [ "button_wood", 1 ], [ "button_bone", 1 ], [ "button_steel", 1 ], [ "button_bronze", 1 ] ]
+    ]
   },
   {
     "id": "strap_small",
@@ -110,6 +112,7 @@
         [ "huckleberries", 1 ],
         [ "mulberries", 1 ],
         [ "elderberries", 1 ],
+        [ "chokeberries", 1 ],
         [ "blackberries", 1 ],
         [ "cherries", 1 ],
         [ "grapes", 1 ],
@@ -134,31 +137,13 @@
     "id": "fastener_large",
     "type": "requirement",
     "//": "All kinds of fasteners for jacket-sized soft objects.",
-    "components": [
-      [
-        [ "zipper_long_plastic", 1 ],
-        [ "button", 9, "LIST" ],
-        [ "touch_fastener", 6 ],
-        [ "snapfastener_steel", 9 ],
-        [ "string_6", 6 ],
-        [ "cordage_6_leather", 6 ]
-      ]
-    ]
+    "components": [ [ [ "zipper_long_plastic", 1 ], [ "button", 9, "LIST" ], [ "touch_fastener", 6 ], [ "snapfastener_steel", 9 ] ] ]
   },
   {
     "id": "fastener_small",
     "type": "requirement",
     "//": "All kinds of fasteners for footwear-sized soft objects, including pockets.",
-    "components": [
-      [
-        [ "button", 3, "LIST" ],
-        [ "zipper_short_plastic", 1 ],
-        [ "snapfastener_steel", 3 ],
-        [ "touch_fastener", 2 ],
-        [ "string_6", 2 ],
-        [ "cordage_6_leather", 2 ]
-      ]
-    ]
+    "components": [ [ [ "button", 3, "LIST" ], [ "zipper_short_plastic", 1 ], [ "snapfastener_steel", 3 ], [ "touch_fastener", 2 ] ] ]
   },
   {
     "id": "fastener_shoes",
@@ -179,16 +164,7 @@
     "id": "clasps",
     "type": "requirement",
     "//": "All kinds of fasteners for strapped-on objects like belts, per single strap.",
-    "components": [
-      [
-        [ "button", 1, "LIST" ],
-        [ "snapfastener_steel", 2 ],
-        [ "buckle_steel", 1 ],
-        [ "touch_fastener", 2 ],
-        [ "string_6", 2 ],
-        [ "cordage_6_leather", 2 ]
-      ]
-    ]
+    "components": [ [ [ "button", 1, "LIST" ], [ "snapfastener_steel", 2 ], [ "buckle_steel", 1 ], [ "touch_fastener", 2 ] ] ]
   },
   {
     "id": "plastic_molding",
@@ -386,21 +362,21 @@
     "type": "requirement",
     "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "components": [ [ [ "tanned_hide", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+    "components": [ [ [ "sheet_leather", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
   },
   {
     "id": "tailoring_leather_patchwork",
     "type": "requirement",
     "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "components": [ [ [ "sheet_leather", 1 ], [ "tanned_hide", 1 ], [ "sheet_leather_patchwork", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+    "components": [ [ [ "sheet_leather", 1 ], [ "sheet_leather_patchwork", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
   },
   {
     "id": "tailoring_leather_patchwork_simple",
     "type": "requirement",
     "//": "275g per unit. Crafting leather items, per 296 g of leather; 21 g + excessive weight of material is wasted, producing leather patches as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.  Used for simpler items where precision cutting is less important.",
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "components": [ [ [ "sheet_leather", 1 ], [ "tanned_hide", 1 ], [ "sheet_leather_patchwork", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
+    "components": [ [ [ "sheet_leather", 1 ], [ "sheet_leather_patchwork", 1 ] ], [ [ "filament", 7, "LIST" ] ] ]
   },
   {
     "id": "tailoring_leather_small",

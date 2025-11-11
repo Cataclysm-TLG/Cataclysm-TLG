@@ -126,7 +126,7 @@ Identifier      | Description
 `type`          | Indicates the JSON object is a `SPELL`.
 `name`          | Name of the spell that shows in game.
 `description`   | Description of the spell that shows in game.
-`valid_targets` | Targets affected by the spell.  If a valid target is not included, you cannot cast the spell on that target.  Additionally, if the valid target is not specified, the spell aoe will not affect it.  Can be `ally`, `field`, `ground`, `hostile`, `item`, `none` or `self`.
+`valid_targets` | Targets affected by the spell.  If a valid target is not included, you cannot cast the spell on that target.  Additionally, if the valid target is not specified, the spell aoe will not affect it.  Can be `ally`, `field`, `ground`, `hostile`, `item`, `none`, `vehicle` or `self`.
 `effect`        | Hardcoded spell behaviors, roughly speaking spell "type".  See the list below.
 `shape`         | The shape of the spell's area of effect.  See the list below.
 
@@ -656,7 +656,31 @@ There are two possible syntaxes.  The first is by defining an enchantment object
     "modified_bodyparts": [ { "gain": "test_corvid_beak" }, { "lose": "torso" } ],
     "mutations": [ "GILLS", "MEMBRANE", "AMPHIBIAN", "WAYFARER", "WILDSHAPE:FISH" ],
     "ench_effects": [ { "effect": "invisibility", "intensity": 1 } ],
-    "melee_damage_bonus": [ { "type": "bash", "add": 10 } ]
+    "melee_damage_bonus": [ // adds this amount of damage to attack; adding damage adds flat number to attacks, multiplier multiplies existing damage after adding
+    { "type": "bash", "add": 10 }, // add 10 would straight add 10 damage of this type to each attack
+    { "type": "cut", "add": -3 }, // add -3 would decrease any cut damage up to zero
+    { "type": "heat", "multiply": 0.5 }, // 0.5 would mean damage be increased by 50%
+    { "type": "acid", "multiply": -0.5 }, // -0.5 would mean 50% decrease of damage
+    { "type": "necrotic", "add": 10, "multiply": 0.1 }, // any damage_type is supported
+    { "type": "biological", "add": { "math": [ "Nemesis_iteration * -1" ] } } // supports math and stuff, works for both character/npcs and monsters. multiple `melee_damage_bonus`es of the same type do stack
+    ],
+    "incoming_damage_mod": [ // any incoming damage would be modified by this value
+      { "type": "bash", "add": 10 }, // adding would increase the taken damage (hurt more!)
+      { "type": "stab", "add": -8 }, // negative adding would subtract damage taken by this amount
+      { "type": "cut", "multiply": -0.5 }, // multiplication would multiply entire damage; -0.5 would result in 50% of damage being removed
+      { "type": "bullet", "add": 1 }, // `"multiply": 1` would double all incoming bullet damage
+      { "type": "electric", "add": { "math": [ "rand(3) * -1" ] } }, // supports math and stuff, works for both character/npcs and monsters. multiple `incoming_damage_mod`es of the same type do stack
+      { "type": "acid", "add": 1, "multiply": 1 } // damage is subtracted before your physical armor (chain mail or similar), best works for decreasing incoming damage, as if character has additional layer of armor
+    ],
+    "incoming_damage_mod_post_absorbed": [ // works exactly same as incoming_damage_mod, but is applied after your physical armor (chain mail or similar), so best works for adding damage, as if character is specifically suseptible to this type of damage
+      { "type": "bash", "add": 10 },
+      { "type": "stab", "add": -8 },
+      { "type": "cut", "multiply": -0.5 },
+      { "type": "bullet", "add": 1 },
+      { "type": "electric", "add": { "math": [ "rand(3) * -1" ] } },
+      { "type": "acid", "add": 1, "multiply": 1 }
+    ],
+    
     "intermittent_activation": {
       "effects": [
         {
@@ -667,16 +691,20 @@ There are two possible syntaxes.  The first is by defining an enchantment object
         }
       ]
     }
-    "special_vision": [   // defines creatures (monsters or NPC) you can see in some irregular ways, mainly thermal or supernatural
+    "special_vision": [   // defines creatures (monsters or NPC) you can see in some irregular ways, thermal, supernatural, you name it
       {
         "condition": { "and": [ { "npc_has_flag": "ELECTRIC" }, "u_see_npc" ] },   // this need to return true to see the critter; u is character, npc is critter being watched
         "distance": 20, // how far special_vision is applied. for technical reasons special_vision do not stack, having multiple special_visions of the same nature will not result in special_visions of bigger distance
+        "precise": true,  // if true, you can aim the critter as if it's visible, if false, your ability to aim it would be limited.  Default false
+        "ignores_aiming_cone": true, // if true, aiming the gun do not obscure sensing the creature.  Default false
         "descriptions": [ // if condition is true, this will assign a dedicated id (used for tiles) and text, depending on text_condition
           { 
             "id": "infrared_creature_tiny", 
-            "text_condition": { "math": [ "n_val('size') == 1" ] }, // be sure to not use condition that can change in between moves (like any math with random result, `rand(1)` etc); 
+            "text_condition": { "math": [ "n_val('size') == 1" ] }, // optional condition for this specific id to be used. Default true.  Be sure to not use condition that can change in between moves (like any math with random result, `rand(1)` etc); 
                         // while text with tags is stored and re-evaluated only when cursor changes its position, tiles are re-evaluated every frame, even on pause
-            "text": "Message 1."
+            "text": "Message 1.",
+            "symbol": "@",  // symbol, that would be used in ascii.  Optional, default is `?`
+            "color": "c_magenta" // color of symbol, that would be used in ascii.  Optional, default is `c_red`
           },
           {
             "id": "infrared_creature_small",
@@ -700,8 +728,8 @@ There are two possible syntaxes.  The first is by defining an enchantment object
           },
           {
             "id": "infrared_creature_medium",
-            "text_condition": { "math": [ "true" ] }, // descriptions are read in order they are in json, adding dummy condition that always return true can be used as a fallback if none previous condition matches;
-            "text": "Last message." // otherwise default description is `You sense a creature here.`, and default id is `infrared_creature`
+             "text": "Last message."  // descriptions are read in order they are in json, adding dummy condition that always return true can be used as a fallback if none previous condition matches;
+             // otherwise default description is `You sense a creature here.`, and default id is `infrared_creature`
           }
         ]
       }
@@ -833,15 +861,7 @@ The following is a list of possible enchantment `values`:
 
 Character status value  | Description
 ---                     |---
-`ARMOR_ACID`            | Negative values give armor against the damage, positive values make you accept more damage of this type.
-`ARMOR_BASH`            | 
-`ARMOR_BIO`             | 
-`ARMOR_BULLET`          | 
-`ARMOR_COLD`            | 
-`ARMOR_CUT`             | 
-`ARMOR_ELEC`            | 
-`ARMOR_HEAT`            | 
-`ARMOR_STAB`            | 
+`ARMOR_ALL`             | Gives this amount of protection against any damage type except one with "no_resist": true. For more precise changes use incoming_damage_mod or item_armor_bonus
 `ATTACK_NOISE`          | Affects the amount of noise you make while melee attacking.
 `ATTACK_SPEED`          | Affects attack speed of item, even if it's not the one you're wielding, and throwing cost (capped at 25 moves). `"add": 10` adds 10 moves to each attack (makes it longer), `"add": -10` makes each attack faster for 10 moves; `"multiply": 1` doubles the speed of each attack
 `AVOID_FRIENDRY_FIRE`   | Flat chance for your character to avoid friendry fire if there is a friend in the line of fire. From 0.0 (no chance) to 1.0 (never frindly fire).
@@ -865,15 +885,6 @@ Character status value  | Description
 `DODGE_CHANCE`          | Modifies the probability to dodge an attack. Default is 0, so better to use `add`
 `EFFECTIVE_HEALTH_MOD`  | If this is anything other than zero (which it defaults to) you will use it instead of your actual health mod.
 `EQUIPMENT_DAMAGE_CHANCE` | Modifies the likelihood that weapons and armor take durability damage.  Since it's a percent, using 'multiply' is recommended.  Positive values increase likelihood of damage while negative values decrease likelihood.  `multiply`: -1 and below result in indestructible equipment.
-`EXTRA_ACID`            | EXTRA_TYPE increases received damage of the selected type.
-`EXTRA_BASH`            | 
-`EXTRA_BIO`             | 
-`EXTRA_BULLET`          | 
-`EXTRA_COLD`            | 
-`EXTRA_CUT`             | 
-`EXTRA_ELEC`            | 
-`EXTRA_HEAT`            | 
-`EXTRA_STAB`            | 
 `EXTRA_ELEC_PAIN`       | Multiplier on electric damage received, the result is applied as extra pain.
 `EVASION`               | Flat chance for your character to dodge incoming attacks regardless of other modifiers.  From 0.0 (no evasion chance) to 1.0 (100% evasion chance).
 `FALL_DAMAGE`           | Affects the amount of fall damage you take.
@@ -902,7 +913,6 @@ Character status value  | Description
 `METABOLISM`            | Multiplier for `metabolic_rate_base`, which respond for default bmi rate; Formula for basic bmi is `metabolic_rate_base * ( (weight_in_kg / 10 ) + (6.25 * height) - (5 * age) + 5 )`; Since it's a percent, using `multiply` is recommended; Since metabolism is directly connected to weariness, at this moment decreasing it makes you more weary the less metabolism you have; zero metabolism (`multiply: -1`) is handled separately, and makes you never wear
 `MOD_HEALTH`            | If this is anything other than zero (which it defaults to) you will to mod your health to a max/min of `MOD_HEALTH_CAP` every half hour.
 `MOD_HEALTH_CAP`        | If this is anything other than zero (which it defaults to) you will cap your `MOD_HEALTH` gain/loss at this every half hour.
-`MOTION_VISION_RANGE`   | Reveals all monsters as a red `?` within the specified radius.
 `MOVE_COST`             | 
 `MUT_INSTABILITY_MOD`   | Modifies your instability score, which affects the chance to get bad mutation (scales with amount of good mutations you have, capping at 67%, check `Character::roll_bad_mutation` for more information). `add: 1` would be equal to having 1 good mutation more, increasing the chance to get bad mutation, `add: -1` would be like you have one good mutation less, decreasing the chance to get bad mutation.
 `MUT_ADDITIONAL_OPTIONS`| Whenever the character mutates, they may pick from the initially rolled mutation and x additional options given by the mutation value.  These options will be clustered around the initially picked mutation based on their relative point values.  IE, if a character initially rolls a negative mutation, the additional options will likely also be negative mutations.  High enough enchantment values will allow picking from every possible mutation.
@@ -938,10 +948,6 @@ Character status value  | Description
 `SCENT_MASK`            | Amount added to your scent target scent value (default 500, assigned by `scent_intensity` mutation field); `"add": 100` makes character a bit more smelly
 `SHOUT_NOISE`           | Changes how loud your shouts are (default 10)
 `SHOUT_NOISE_STR_MULT`  | Modifies the `shout_multiplier`, that affect how much your strength affects noise level (default 2, meaning one point of strength adds 2 units of noise )
-`SIGHT_RANGE_ELECTRIC`  | How many tiles away is_electric() creatures are visible from.
-`SIGHT_RANGE_FAE`       | How many tiles away creatures with the FAE_CREATURE monster flag or FAERIECREATURE trait are visible from.
-`SIGHT_RANGE_NETHER`    | How many tiles away is_nether() creatures are visible from.
-`SIGHT_RANGE_MINDS`     | How many tiles away humans or creatures with the HAS_MIND flag are visible from.
 `SKILL_RUST_RESIST`     | when `add`, chance / 100 to resist skill rust; when `multiply`, multiplier for skill rust amount - the smaller, the less experience you will rust
 `SLEEPY`                | The higher this the easier you fall asleep.
 `SOCIAL_INTIMIDATE`     | Affects your ability to intimidate.
@@ -965,15 +971,6 @@ Character status value  | Description
 
 Enchanted item value | Description
 ---                  |---
-`ITEM_ARMOR_ACID`    | 
-`ITEM_ARMOR_BASH`    | 
-`ITEM_ARMOR_BIO`     | 
-`ITEM_ARMOR_BULLET`  | 
-`ITEM_ARMOR_COLD`    | 
-`ITEM_ARMOR_CUT`     | 
-`ITEM_ARMOR_ELEC`    | 
-`ITEM_ARMOR_HEAT`    | 
-`ITEM_ARMOR_STAB`    | 
 `ITEM_ATTACK_SPEED`  | 
 
 ### Enchantments on monsters
@@ -981,15 +978,6 @@ A small subset of enchantments can be applied to monsters via effects. These are
 
 Character status value  | Description
 ---                     |---
-`ARMOR_ACID`            | Negative values give armor against the damage, positive values make the monster accept more damage of this type.
-`ARMOR_BASH`            | 
-`ARMOR_BIO`             | 
-`ARMOR_BULLET`          | 
-`ARMOR_COLD`            | 
-`ARMOR_CUT`             | 
-`ARMOR_ELEC`            | 
-`ARMOR_HEAT`            | 
-`ARMOR_STAB`            | 
 `REGEN_HP`              | Affects the rate the monster recovers hp.
 `VISION_RANGE`          | Affects monster vision range, both day and night one.
 `SPEED`                 | Affects the base speed of the monster.
@@ -998,11 +986,11 @@ Character status value  | Description
 ### Enchantment value examples
 
 ```C++
-  { "value": "ARMOR_ELEC", "add": -20 }       // subtracts 20 points of incoming electrical damage
+  { "incoming_damage_mod": [ { "type": "electric", "add": -20 } ] },      // subtracts 20 points of incoming electrical damage
   { "value": "ATTACK_SPEED", "add": -60 }     // subtracts 60 attack moves, making the attacker faster
-  { "value": "ARMOR_COLD", "multiply": -0.4 } // subtracts 40% of incoming cold damage
-  { "value": "ARMOR_HEAT", "multiply": 0.4 }  // increases damage taken from fire by 40%
-  { "value": "ARMOR_CUT", "add": 2 }          // increases incoming cut damage by 2
-  { "value": "ARMOR_BIO", "multiply": -1.4 }  // subtracts 100 percent of incoming biological damage, heals for the remaining 40%
-  { "value": "ARMOR_ACID", "multiply": 1.4 }  // increases incoming acid damage by 140%
+  { "incoming_damage_mod": [ { "type": "cold", "multiply": -0.4 } ] } // subtracts 40% of incoming cold damage
+  { "incoming_damage_mod": [ { "type": "heat", "multiply": 0.4 } ] } // increases damage taken from fire by 40%
+  { "incoming_damage_mod": [ { "type": "cut", "add": 2 } ] } // increases incoming cut damage by 2
+  { "incoming_damage_mod": [ { "type": "biological", "multiply": -1.4 } ] } // subtracts 100 percent of incoming biological damage
+  { "incoming_damage_mod": [ { "type": "acid", "multiply": 1.4 } ] } // increases incoming acid damage by 140%
 ```

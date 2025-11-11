@@ -25,7 +25,7 @@ static const skill_id skill_throw( "throw" );
 
 TEST_CASE( "throwing_distance_test", "[throwing], [balance]" )
 {
-    const standard_npc thrower( "Thrower", tripoint( 60, 60, 0 ), {}, 4, 10, 10, 10, 10 );
+    const standard_npc thrower( "Thrower", { 60, 60, 0 }, {}, 4, 10, 10, 10, 10 );
     item grenade( "grenade" );
     CHECK( thrower.throw_range( grenade ) >= 30 );
     CHECK( thrower.throw_range( grenade ) <= 35 );
@@ -51,7 +51,8 @@ static std::ostream &operator<<( std::ostream &stream, const throw_test_pstats &
            " PER: " << pstats.per << " SKL: " << pstats.skill_lvl;
 }
 
-static void reset_player( Character &you, const throw_test_pstats &pstats, const tripoint &pos )
+static void reset_player( Character &you, const throw_test_pstats &pstats,
+                          const tripoint_bub_ms &pos )
 {
     clear_character( you );
     CHECK( !you.in_vehicle );
@@ -93,7 +94,7 @@ static void test_throwing_player_versus(
 
     max_throws = std::max( min_throws, max_throws );
     do {
-        reset_player( you, pstats, player_start.raw() );
+        reset_player( you, pstats, player_start );
         you.set_moves( 1000 );
         you.set_stamina( you.get_stamina_max() );
 
@@ -102,7 +103,7 @@ static void test_throwing_player_versus(
         mon.set_moves( 0 );
 
         dealt_projectile_attack atk = you.throw_item( mon.pos_bub(), it );
-        data.hits.add( atk.hit_critter != nullptr );
+        data.hits.add( atk.last_hit_critter != nullptr );
         data.dmg.add( atk.dealt_dam.total_damage() );
 
         if( data.hits.n() >= min_throws ) {
@@ -248,7 +249,7 @@ static void test_player_kills_monster(
         int num_items = 0;
         int last_range = -1;
 
-        reset_player( you, pstats, player_start.raw() );
+        reset_player( you, pstats, player_start );
 
         monster &mon = spawn_test_monster( mon_id, monster_start, false );
         mon.set_moves( 0 );
@@ -257,13 +258,13 @@ static void test_player_kills_monster(
 
             ++turns;
             mon.process_turn();
-            mon.set_dest( you.get_location() );
+            mon.set_dest( you.pos_abs() );
             while( mon.get_moves() > 0 ) {
                 mon.move();
             }
 
             // zombie made it to player, we're done with this iteration
-            if( ( last_range = rl_dist( you.get_location(), mon.get_location() ) ) <= dist_thresh ) {
+            if( ( last_range = rl_dist( you.pos_abs(), mon.pos_abs() ) ) <= dist_thresh ) {
                 break;
             }
 

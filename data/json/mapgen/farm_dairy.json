@@ -33,14 +33,11 @@
         ".$............................................$."
       ],
       "palettes": [ "farm_dairy_palette" ],
-      "monsters": { ".": { "monster": "GROUP_ZOMBIE_BOVINE", "chance": 2, "density": 0.0005 } },
-      "nested": {
-      "$": { "chunks": [ [ "1x1_bash", 2 ], [ "null", 98 ] ] }
-      },
-      "place_monsters": [
-        { "monster": "GROUP_COWS_DAIRY", "x": [ 1, 10 ], "y": [ 1, 9 ], "density": 0.1 },
-        { "monster": "GROUP_COWS_DAIRY", "x": [ 25, 33 ], "y": [ 1, 11 ], "density": 0.1 },
-        { "monster": "GROUP_FARM_PESTS", "x": [ 10, 18 ], "y": [ 1, 11 ], "density": 0.1 }
+      "monsters": { ".": { "monster": "GROUP_ZOMBIE_BOVINE", "chance": 2, "density": 0.0007 } },
+      "nested": { "$": { "chunks": [ [ "1x1_bash", 2 ], [ "null", 98 ] ] } },
+      "place_monster": [
+        { "group": "GROUP_COWS", "x": [ 8, 9 ], "y": [ 21, 23 ], "repeat": [ 0, 2 ], "chance": 20 },
+        { "group": "GROUP_FARM_PESTS", "x": [ 10, 18 ], "y": [ 1, 11 ], "repeat": [ 0, 2 ], "chance": 30 }
       ]
     }
   },
@@ -114,7 +111,7 @@
         ".$$$$$$$$$$$$$$$$$fffffff$$$$$$$$$$$$$$$$$$$$$$.",
         "................................................"
       ],
-      "palettes": [ "farm_dairy_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "farm_dairy_palette" ],
       "terrain": {
         "'": "t_door_o",
         "%": "t_milking_machine",
@@ -128,10 +125,10 @@
         "S": "t_thconc_floor",
         "H": "t_thconc_floor",
         " ": "t_thconc_floor",
-        "s": "t_linoleum_white",
-        "b": "t_linoleum_white",
-        "&": "t_linoleum_white",
-        "~": "t_linoleum_white",
+        "s": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
+        "b": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
+        "&": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
+        "~": { "param": "linoleum_color", "fallback": "t_linoleum_white" },
         "_": "t_floor",
         "a": "t_region_soil",
         "|": "t_wall_w",
@@ -189,17 +186,17 @@
         { "item": "clothing_work_set", "x": 9, "y": 17, "chance": 90 }
       ],
       "place_item": [
-        { "item": "cattlefodder_large", "x": 37, "y": 15, "amount": [ 0, 1 ] },
-        { "item": "cattlefodder_large", "x": 38, "y": 6, "amount": [ 0, 1 ] },
-        { "item": "cattlefodder_medium", "x": 38, "y": 10, "amount": [ 0, 2 ] },
-        { "item": "cattlefodder_medium", "x": 38, "y": 13, "amount": [ 0, 2 ] },
-        { "item": "cattlefodder", "x": 39, "y": 5, "amount": [ 0, 4 ] },
-        { "item": "cattlefodder", "x": 39, "y": 8, "amount": [ 0, 4 ] },
+        { "item": "cattlefodder_large", "x": 37, "y": 15, "amount": [ 0, 2 ] },
+        { "item": "cattlefodder_large", "x": 38, "y": 6, "amount": [ 0, 2 ] },
+        { "item": "cattlefodder_medium", "x": 38, "y": 10, "amount": [ 0, 4 ] },
+        { "item": "cattlefodder_medium", "x": 38, "y": 13, "amount": [ 0, 4 ] },
+        { "item": "cattlefodder", "x": 39, "y": 5, "amount": [ 0, 6 ] },
+        { "item": "cattlefodder", "x": 39, "y": 8, "amount": [ 0, 6 ] },
         { "item": "cattlefodder_medium", "x": 39, "y": 17, "amount": [ 0, 2 ] },
         { "item": "livestock_scale", "x": 28, "y": 4 }
       ],
       "place_vehicles": [
-        { "vehicle": "cube_van_cheap", "x": 7, "y": 4, "chance": 50, "fuel": 300, "status": -1, "rotation": 0 },
+        { "vehicle": "cube_van_cheap", "x": 7, "y": 4, "chance": 40, "fuel": 300, "status": -1, "rotation": 0 },
         { "vehicle": "quad_bike", "x": 15, "y": 6, "chance": 30, "fuel": 200, "status": -1, "rotation": 0 },
         { "vehicle": "bicycle", "x": 13, "y": 8, "chance": 80, "fuel": 0, "status": 0, "rotation": 0 }
       ]

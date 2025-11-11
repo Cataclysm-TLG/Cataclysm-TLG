@@ -625,7 +625,7 @@
       },
       "place_monster": [
         {
-          "monster": [ "mon_broken_cyborg", "mon_zombie_electric", "mon_crawler" ],
+          "monster": [ "mon_broken_cyborg", "mon_zombie_electric", "mon_zombie" ],
           "x": [ 1, 4 ],
           "y": [ 19, 21 ],
           "chance": 90
@@ -701,8 +701,7 @@
       },
       "place_monster": [
         { "monster": [ [ "mon_zombie_brute", 60 ], [ "mon_mi_go", 30 ] ], "x": 12, "y": 12 },
-        { "monster": "mon_kreck", "x": 2, "y": 2, "chance": 30 },
-        { "monster": [ [ "mon_crawler", 60 ], [ "mon_shoggoth", 30 ] ], "x": 2, "y": 7 },
+        { "monster": [ [ "mon_shoggoth", 30 ] ], "x": 2, "y": 7 },
         { "monster": "mon_zombie_scientist", "x": [ 10, 14 ], "y": [ 16, 18 ], "chance": 50, "pack_size": [ 1, 3 ] }
       ]
     }

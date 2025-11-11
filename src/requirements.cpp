@@ -19,6 +19,8 @@
 #include "debug.h"
 #include "debug_menu.h"
 #include "enum_traits.h"
+#include "flexbuffer_json.h"
+#include "game_constants.h"
 #include "generic_factory.h"
 #include "inventory.h"
 #include "item.h"
@@ -31,6 +33,7 @@
 #include "point.h"
 #include "string_formatter.h"
 #include "translations.h"
+#include "units.h"
 #include "value_ptr.h"
 #include "visitable.h"
 
@@ -158,9 +161,9 @@ std::string tool_comp::to_string( const int batch, const int ) const
         //~ %1$s: tool name, %2$d: charge requirement
         return string_format( npgettext( "requirement", "%1$s (%2$d charge)", "%1$s (%2$d charges)",
                                          charge_total ),
-                              item::tname( type, 1, tname::item_name ), charge_total );
+                              item::tname( type, 1, tname::base_item_name ), charge_total );
     } else {
-        return item::tname( type, std::abs( count ), tname::item_name );
+        return item::tname( type, std::abs( count ), tname::base_item_name );
     }
 }
 
@@ -176,16 +179,16 @@ std::string item_comp::to_string( const int batch, const int avail ) const
             return string_format( npgettext( "requirement", "%2$d %1$s (have infinite)",
                                              "%2$d %1$s (have infinite)",
                                              c ),
-                                  item_temp.tname( 1, tname::item_name ), c );
+                                  item_temp.tname( 1, tname::base_item_name ), c );
         } else if( avail > 0 ) {
             //~ %1$s: item name, %2$d: charge requirement, %3%d: available charges
             return string_format( npgettext( "requirement", "%2$d %1$s (have %3$d)",
                                              "%2$d %1$s (have %3$d)", c ),
-                                  item_temp.tname( 1, tname::item_name ), c, avail );
+                                  item_temp.tname( 1, tname::base_item_name ), c, avail );
         } else {
             //~ %1$s: item name, %2$d: charge requirement
             return string_format( npgettext( "requirement", "%2$d %1$s", "%2$d %1$s", c ),
-                                  item_temp.tname( 1, tname::item_name ), c );
+                                  item_temp.tname( 1, tname::base_item_name ), c );
         }
     } else {
         if( avail == item::INFINITE_CHARGES ) {
@@ -193,16 +196,16 @@ std::string item_comp::to_string( const int batch, const int avail ) const
             return string_format( npgettext( "requirement", "%2$d %1$s (have infinite)",
                                              "%2$d %1$s (have infinite)",
                                              c ),
-                                  item_temp.tname( c, tname::item_name ), c );
+                                  item_temp.tname( c, tname::base_item_name ), c );
         } else if( avail > 0 ) {
             //~ %1$s: item name, %2$d: required count, %3%d: available count
             return string_format( npgettext( "requirement", "%2$d %1$s (have %3$d)",
                                              "%2$d %1$s (have %3$d)", c ),
-                                  item_temp.tname( c, tname::item_name ), c, avail );
+                                  item_temp.tname( c, tname::base_item_name ), c, avail );
         } else {
             //~ %1$s: item name, %2$d: required count
             return string_format( npgettext( "requirement", "%2$d %1$s", "%2$d %1$s", c ),
-                                  item_temp.tname( c, tname::item_name ), c );
+                                  item_temp.tname( c, tname::base_item_name ), c );
         }
     }
 }
@@ -1042,17 +1045,30 @@ bool requirement_data::check_enough_materials( const read_only_visitable &crafti
         const std::function<bool( const item & )> &filter, int batch ) const
 {
     bool retval = true;
+    units::volume total_component_volume = 0_ml;
     for( const auto &component_choices : components ) {
         bool atleast_one_available = false;
+        units::volume volume_of_this_comp_choice = 0_ml;
         for( const item_comp &comp : component_choices ) {
             if( check_enough_materials( comp, crafting_inv, filter, batch ) ) {
+                // the worst case scenario is used to tally volume
+                volume_of_this_comp_choice = std::max( volume_of_this_comp_choice,
+                                                       comp.type->volume * comp.count * batch );
                 atleast_one_available = true;
             }
         }
+        total_component_volume += volume_of_this_comp_choice;
         if( !atleast_one_available ) {
             retval = false;
         }
     }
+
+    // This will be the volume of the resulting in-progress craft item (see item::volume), so we don't want to exceed it.
+    // TODO: Feedback? Some sort of indicator to the player that resulting volume is why it can't be crafted
+    if( total_component_volume > MAX_ITEM_VOLUME ) {
+        retval = false;
+    }
+
     return retval;
 }
 
@@ -1323,7 +1339,7 @@ requirement_data requirement_data::continue_requirements( const std::vector<item
             std::vector<item *> del;
             craft_components.visit_items( [&comp, &qty, &del]( item * e, item * ) {
                 std::list<item> used;
-                if( e->use_charges( comp.type, qty, used, tripoint_zero ) ) {
+                if( e->use_charges( comp.type, qty, used, tripoint_bub_ms::zero ) ) {
                     del.push_back( e );
                 }
                 return qty > 0 ? VisitResponse::SKIP : VisitResponse::ABORT;

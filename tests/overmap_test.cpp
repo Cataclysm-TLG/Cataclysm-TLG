@@ -8,6 +8,7 @@
 #include "common_types.h"
 #include "coordinates.h"
 #include "enums.h"
+#include "game.h"
 #include "game_constants.h"
 #include "global_vars.h"
 #include "map.h"
@@ -53,6 +54,7 @@ TEST_CASE( "set_and_get_overmap_scents", "[overmap]" )
 
 TEST_CASE( "default_overmap_generation_always_succeeds", "[overmap][slow]" )
 {
+    overmap_buffer.clear();
     int overmaps_to_construct = 10;
     for( const point_abs_om &candidate_addr : closest_points_first( point_abs_om(), 10 ) ) {
         // Skip populated overmaps.
@@ -72,7 +74,6 @@ TEST_CASE( "default_overmap_generation_always_succeeds", "[overmap][slow]" )
             break;
         }
     }
-    overmap_buffer.clear();
 }
 
 TEST_CASE( "default_overmap_generation_has_non_mandatory_specials_at_origin", "[overmap][slow]" )
@@ -82,6 +83,7 @@ TEST_CASE( "default_overmap_generation_has_non_mandatory_specials_at_origin", "[
     overmap_special mandatory;
     overmap_special optional;
 
+    overmap_buffer.clear();
     // Get some specific overmap specials so we can assert their presence later.
     // This should probably be replaced with some custom specials created in
     // memory rather than tying this test to these, but it works for now...
@@ -124,7 +126,6 @@ TEST_CASE( "default_overmap_generation_has_non_mandatory_specials_at_origin", "[
 
     INFO( "Failed to place optional special on origin " );
     CHECK( found_optional == true );
-    overmap_buffer.clear();
 }
 
 TEST_CASE( "is_ot_match", "[overmap][terrain]" )
@@ -221,7 +222,7 @@ TEST_CASE( "mutable_overmap_placement", "[overmap][slow]" )
     for( int j = 0; j < num_overmaps; ++j ) {
         // overmap objects are really large, so we don't want them on the
         // stack.  Use unique_ptr and put it on the heap
-        std::unique_ptr<overmap> om = std::make_unique<overmap>( point_abs_om( point_zero ) );
+        std::unique_ptr<overmap> om = std::make_unique<overmap>( point_abs_om::zero );
         om_direction::type dir = om_direction::type::north;
 
         int successes = 0;
@@ -263,24 +264,37 @@ TEST_CASE( "overmap_terrain_coverage", "[overmap][slow]" )
     std::unordered_map<oter_type_id, omt_stats> stats;
     point_abs_omt origin;
     map &main_map = get_map();
-
-    for( int i = 0; i < 10; ++i ) {
-        std::unordered_map<oter_type_id, omt_stats> loop_stats;
-        for( const point_abs_omt &p : closest_points_first( origin, 0, 3 * OMAPX - 1 ) ) {
-            // We need to avoid OMTs that overlap with the 'main' map, so we start at a
-            // non-zero minimum radius and ensure that the 'main' map is inside that
-            // minimum radius.
-            if( main_map.inbounds( tripoint_abs_ms( project_to<coords::ms>( p ), 0 ) ) ) {
+    point_abs_om overmap_origin = project_to<coords::om>( main_map.get_abs_sub().xy() );
+    g->place_player_overmap( { project_to<coords::omt>( overmap_origin + ( 6 * point::north_west ) ), 0 } );
+    // Don't inherit overmap state from initialization or previous tests.
+    overmap_buffer.clear();
+    for( int i = 0; i < 7; ++i ) {
+        // First we just touch all the overmaps in an area to cause them to generate.
+        for( const point_abs_om &om_cur : closest_points_first( overmap_origin, 0, 3 ) ) {
+            point_abs_omt omt_start = project_to<coords::omt>( om_cur );
+            overmap_buffer.ter( { omt_start, 0 } );
+        }
+        // Then we scan the generated overmaps.
+        for( const point_abs_om &om_cur : closest_points_first( overmap_origin, 0, 5 ) ) {
+            point_abs_omt omt_start = project_to<coords::omt>( om_cur );
+            // In the two rows of overmaps outside the central area, special placement logic.
+            // Can trigger additional overmap placement, this checcks to see if an overmap
+            // Has already been placed, and skips it if it hasn't.
+            // This insures we can scan all the overmaps we generate.
+            if( overmap_buffer.ter_existing( { omt_start, 0 } ) == oter_id() ) {
                 continue;
             }
-            for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; ++z ) {
-                tripoint_abs_omt tp( p, z );
-                oter_type_id id = overmap_buffer.ter( tp )->get_type_id();
-                auto iter_bool = stats.emplace( id, tp );
-                ++iter_bool.first->second.count;
-                // Just the first time we see a oter_type, stash it here to run mapgen on it.
-                if( iter_bool.second ) {
-                    loop_stats.emplace( id, tp );
+            point_abs_omt omt_end = omt_start + ( point::south_east * OMAPX );
+            for( point_abs_omt p = omt_start; p.y() < omt_end.y(); p.y()++ ) {
+                for( p.x() = omt_start.x(); p.x() < omt_end.x(); p.x()++ ) {
+                    REQUIRE( !main_map.inbounds( tripoint_abs_ms( project_to<coords::ms>( p ), 0 ) ) );
+                    for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; ++z ) {
+                        tripoint_abs_omt tp( p, z );
+                        oter_type_id id = overmap_buffer.ter( tp )->get_type_id();
+                        auto iter_bool = stats.emplace( id, tp );
+                        iter_bool.first->second.last_observed = tp;
+                        ++iter_bool.first->second.count;
+                    }
                 }
             }
         }
@@ -313,7 +327,7 @@ TEST_CASE( "overmap_terrain_coverage", "[overmap][slow]" )
             CAPTURE( msg );
             REQUIRE( msg.empty() );
         }
-        overmap_buffer.clear();
+        overmap_buffer.reset();
     }
 
     std::unordered_set<oter_type_id> done;

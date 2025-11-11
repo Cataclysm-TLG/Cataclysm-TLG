@@ -84,13 +84,14 @@ directed_path<point> greedy_path( const point &source, const point &dest, const 
                 const int n = map_index( p );
                 const om_direction::type dir = static_cast<om_direction::type>( dirs[n] );
                 res.nodes.emplace_back( p, dir );
-                p += om_direction::displace( dir );
+                p += om_direction::displace( dir ).raw(); // Abusing omt operations requires type stripping.
             }
             res.nodes.emplace_back( p );
             return res;
         }
         for( om_direction::type dir : om_direction::all ) {
-            const point p = mn.pos + om_direction::displace( dir );
+            const point p = mn.pos + om_direction::displace(
+                                dir ).raw(); // Abusing omt operations requires type stripping.
             const int n = map_index( p );
             // don't allow out of bounds or already traversed tiles
             if( !inbounds( p ) || closed[n] ) {
@@ -135,28 +136,28 @@ const tripoint &direction_to_tripoint( direction dir )
 {
     switch( dir ) {
         case direction::NORTHEAST:
-            return tripoint_north_east;
+            return tripoint::north_east;
         case direction::EAST:
-            return tripoint_east;
+            return tripoint::east;
         case direction::SOUTHEAST:
-            return tripoint_south_east;
+            return tripoint::south_east;
         case direction::SOUTH:
-            return tripoint_south;
+            return tripoint::south;
         case direction::SOUTHWEST:
-            return tripoint_south_west;
+            return tripoint::south_west;
         case direction::WEST:
-            return tripoint_west;
+            return tripoint::west;
         case direction::NORTHWEST:
-            return tripoint_north_west;
+            return tripoint::north_west;
         case direction::NORTH:
-            return tripoint_north;
+            return tripoint::north;
         case direction::ABOVECENTER:
-            return tripoint_above;
+            return tripoint::above;
         case direction::BELOWCENTER:
-            return tripoint_below;
+            return tripoint::below;
         default:
             debugmsg( "Unexpected direction: %d", static_cast<int>( dir ) );
-            return tripoint_zero;
+            return tripoint::zero;
     }
 }
 
@@ -419,7 +420,7 @@ simple_path<tripoint_abs_omt> find_overmap_path( const tripoint_abs_omt &source,
     }
     std::unordered_map<node_address, navigation_node, node_address_hasher> known_nodes;
     std::priority_queue<scored_address, std::vector<scored_address>, std::greater<>> open_set;
-    const node_address start( tripoint_zero );
+    const node_address start( tripoint::zero );
     known_nodes.emplace( start, navigation_node{0, static_cast<int16_t>( start_score.node_cost ), static_cast<int8_t>( direction::CENTER ), start_score.allow_z_change} );
     open_set.push( scored_address{ start, 0 } );
     const point_abs_omt source_point = source.xy();

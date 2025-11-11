@@ -242,7 +242,7 @@ static void drop_at_feet( Character &you, const std::string &id )
     REQUIRE( found );
     item_location loc( you, found );
     you.set_moves( 100 );
-    you.drop( loc, you.pos() );
+    you.drop( loc, you.pos_bub() );
     you.activity.do_turn( you );
 
     REQUIRE( get_map().i_at( you.pos_bub() ).size() == size_before + 1 );
@@ -253,11 +253,11 @@ static void pick_up_from_feet( Character &you, const std::string &id )
     map_stack items = get_map().i_at( you.pos_bub() );
     size_t size_before = items.size();
 
-    item *found = retrieve_item( map_cursor( you.get_location() ), id );
+    item *found = retrieve_item( map_cursor( you.pos_abs() ), id );
     REQUIRE( found );
 
     you.set_moves( 100 );
-    const std::vector<item_location> target_items = { item_location( map_cursor( you.get_location() ), found ) };
+    const std::vector<item_location> target_items = { item_location( map_cursor( you.pos_abs() ), found ) };
     you.assign_activity( pickup_activity_actor( target_items, { 0 }, you.pos_bub(), false ) );
     you.activity.do_turn( you );
 
@@ -269,7 +269,7 @@ static void wear_from_feet( Character &you, const std::string &id )
     map_stack items = get_map().i_at( you.pos_bub() );
     size_t size_before = items.size();
 
-    item *found = retrieve_item( map_cursor( you.get_location() ), id );
+    item *found = retrieve_item( map_cursor( you.pos_abs() ), id );
     REQUIRE( found );
 
     you.wear_item( *found, false );
@@ -283,7 +283,7 @@ static void wield_from_feet( Character &you, const std::string &id )
     map_stack items = get_map().i_at( you.pos_bub() );
     size_t size_before = items.size();
 
-    item *found = retrieve_item( map_cursor( you.get_location() ), id );
+    item *found = retrieve_item( map_cursor( you.pos_abs() ), id );
     REQUIRE( found );
 
     you.wield( *found );
@@ -322,7 +322,7 @@ static item &item_at( Character &you, const std::string &id, const inventory_loc
 {
     switch( loc ) {
         case GROUND: {
-            item *found = retrieve_item( map_cursor( you.get_location() ), id );
+            item *found = retrieve_item( map_cursor( you.pos_abs() ), id );
             REQUIRE( found );
             return *found;
         }
@@ -749,12 +749,13 @@ static void merge_invlet_test( avatar &dummy, inventory_location from )
 
 TEST_CASE( "Inventory_letter_test", "[.invlet]" )
 {
+    map &here = get_map();
     avatar &dummy = get_avatar();
     const tripoint_bub_ms spot( 60, 60, 0 );
     clear_map();
-    dummy.setpos( spot );
-    get_map().ter_set( spot, ter_id( "t_dirt" ) );
-    get_map().furn_set( spot, furn_id( "f_null" ) );
+    dummy.setpos( here, spot );
+    here.ter_set( spot, ter_id( "t_dirt" ) );
+    here.furn_set( spot, furn_id( "f_null" ) );
 
     invlet_test_autoletter_off( "Picking up items from the ground", dummy, GROUND, INVENTORY );
     invlet_test_autoletter_off( "Wearing items from the ground", dummy, GROUND, WORN );

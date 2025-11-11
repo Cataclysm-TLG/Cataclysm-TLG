@@ -393,7 +393,7 @@
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
-    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "skewer_bone", 1 ] ] ]
+    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "skewer_bone", 1 ], [ "antler_piece", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -499,7 +499,7 @@
     ],
     "components": [
       [ [ "stick", 10 ], [ "2x4", 5 ] ],
-      [ [ "leather", 64 ], [ "sheet_leather_patchwork", 8 ], [ "tanned_hide", 8 ] ],
+      [ [ "leather", 64 ], [ "sheet_leather_patchwork", 8 ], [ "sheet_leather", 8 ] ],
       [ [ "filament", 40, "LIST" ] ]
     ]
   },
@@ -521,11 +521,7 @@
       { "proficiency": "prof_closures", "required": false, "time_multiplier": 1.5 },
       { "proficiency": "prof_closures_waterproofing" }
     ],
-    "components": [
-      [ [ "stick", 10 ] ],
-      [ [ "sheet_leather_patchwork", 24 ], [ "sheet_leather", 24 ], [ "tanned_hide", 24 ] ],
-      [ [ "filament", 500, "LIST" ] ]
-    ]
+    "components": [ [ [ "stick", 10 ] ], [ [ "sheet_leather_patchwork", 24 ], [ "sheet_leather", 24 ] ], [ [ "filament", 500, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -547,7 +543,7 @@
     ],
     "components": [
       [ [ "stick", 3 ], [ "2x4", 2 ] ],
-      [ [ "leather", 4 ], [ "tanned_hide", 1 ] ],
+      [ [ "leather", 4 ], [ "sheet_leather", 1 ] ],
       [ [ "damaged_shelter_kit", 1 ] ],
       [ [ "filament", 5, "LIST" ] ]
     ]
@@ -572,7 +568,7 @@
     ],
     "components": [
       [ [ "stick", 6 ] ],
-      [ [ "leather", 16 ], [ "sheet_leather", 4 ], [ "sheet_leather_patchwork", 4 ], [ "tanned_hide", 4 ] ],
+      [ [ "leather", 16 ], [ "sheet_leather_patchwork", 4 ], [ "sheet_leather", 4 ] ],
       [ [ "large_damaged_shelter_kit", 1 ] ],
       [ [ "filament", 100, "LIST" ] ]
     ]
@@ -649,22 +645,6 @@
       { "proficiency": "prof_welding" }
     ],
     "components": [ [ [ "pipe", 8 ] ], [ [ "sheet_metal", 2 ] ], [ [ "sheet_metal_small", 4 ] ], [ [ "pipe_fittings", 4 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "workbench_with_recharger",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_PARTS",
-    "skill_used": "fabrication",
-    "difficulty": 2,
-    "time": "15 m",
-    "reversible": true,
-    "decomp_learn": 1,
-    "autolearn": true,
-    "using": [ [ "welding_standard", 5 ] ],
-    "proficiencies": [ { "proficiency": "prof_metalworking" } ],
-    "components": [ [ [ "workbench", 1 ] ], [ [ "battery_charger", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -756,7 +736,7 @@
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
     "difficulty": 3,
-    "time": "30 m",
+    "time": "120 m",
     "reversible": true,
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carpentry_basic" } ],
@@ -834,7 +814,7 @@
     "time": "10 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "nail", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "nail", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "bucket", 1 ] ] ]
   },
   {
@@ -848,7 +828,7 @@
     "time": "15 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "55gal_drum", 1 ] ] ]
   },
   {
@@ -862,7 +842,7 @@
     "time": "15 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ], [ "spear_rebar", -1 ] ] ],
+    "tools": [ [ [ "spike", -1 ], [ "sharp_rock", -1 ], [ "rebar", -1 ] ] ],
     "components": [ [ [ "30gal_drum", 1 ] ] ]
   },
   {
@@ -1086,7 +1066,6 @@
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "//": "Tin can be melted by fire, but you need something to contain and work with it. Hence the press.",
     "result": "pot_copper",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
@@ -1094,27 +1073,25 @@
     "difficulty": 2,
     "time": "1 h 30 m",
     "autolearn": true,
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "tools": [ [ [ "press", -1 ] ], [ [ "surface_heat", 10, "LIST" ] ] ],
+    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "press", -1 ] ] ],
     "components": [ [ [ "copper_scrap_equivalent", 3, "LIST" ] ], [ [ "tin", 30 ] ] ]
   },
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "//": "Alternative to the press explained above: this electroplates the tin using an electrolysis kit.",
     "result": "pot_copper",
     "id_suffix": "by_electrolysis",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "chemistry",
     "difficulty": 4,
-    "book_learn": [ [ "textbook_chemistry", 4 ], [ "textbook_fabrication", 4 ], [ "welding_book", 4 ] ],
     "time": "1 h 30 m",
-    "autolearn": true,
-    "//1": "Handling acids requires some knowledge.",
-    "proficiencies": [ { "proficiency": "prof_intro_chemistry" } ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "tools": [ [ [ "electrolysis_kit", 10 ] ], [ [ "surface_heat", 10, "LIST" ] ] ],
+    "book_learn": [ [ "textbook_chemistry", 4 ], [ "textbook_fabrication", 4 ], [ "welding_book", 4 ] ],
+    "qualities": [ { "id": "HAMMER", "level": 2 } ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "press", -1 ] ] ],
     "components": [
       [ [ "copper_scrap_equivalent", 3, "LIST" ] ],
       [ [ "tin", 30 ] ],
@@ -1650,6 +1627,7 @@
     "components": [
       [
         [ "bone_sturdy", 1, "LIST" ],
+        [ "antler_piece", 1 ],
         [ "stick", 1 ],
         [ "broom", 1 ],
         [ "pool_cue", 1 ],
@@ -1669,7 +1647,7 @@
     "time": "1 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "bone_sturdy", 1, "LIST" ] ] ]
+    "components": [ [ [ "bone_sturdy", 1, "LIST" ], [ "antler", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1927,7 +1905,7 @@
     "autolearn": true,
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "components": [ [ [ "sheet_leather_patchwork", 1 ], [ "tanned_hide", 1 ], [ "sheet_fur_patchwork", 1 ], [ "tanned_pelt", 1 ] ] ]
+    "components": [ [ [ "sheet_leather_patchwork", 1 ], [ "sheet_leather", 1 ], [ "sheet_fur_patchwork", 1 ], [ "tanned_pelt", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1954,10 +1932,7 @@
     "time": "5 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ],
-      [ [ "raw_leather", 1 ], [ "raw_tainted_leather", 1 ], [ "raw_hleather", 1 ], [ "raw_demihumanleather", 1 ] ]
-    ]
+    "components": [ [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ], [ [ "raw_leather", 1 ], [ "raw_hleather", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -2012,10 +1987,7 @@
     "time": "5 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ],
-      [ [ "raw_fur", 1 ], [ "raw_hfur", 1 ], [ "raw_tainted_fur", 1 ] ]
-    ]
+    "components": [ [ [ "salt_water", 1 ], [ "saline", 2 ], [ "salt", 2 ] ], [ [ "raw_fur", 1 ], [ "raw_hfur", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -2165,7 +2137,7 @@
     "book_learn": [ [ "scots_tailor", 3 ], [ "scots_cookbook", 7 ] ],
     "using": [ [ "sewing_standard", 20 ] ],
     "components": [
-      [ [ "large_stomach_sealed", 1 ], [ "tanned_hide", 2 ], [ "leather", 16 ], [ "tanned_pelt", 2 ], [ "fur", 16 ] ],
+      [ [ "large_stomach_sealed", 1 ], [ "sheet_leather", 2 ], [ "leather", 16 ], [ "tanned_pelt", 2 ], [ "fur", 16 ] ],
       [ [ "stick", 1 ], [ "2x4", 1 ] ],
       [ [ "cotton_patchwork", 3 ] ],
       [ [ "adhesive", 1, "LIST" ], [ "medical_tape", 50 ] ]
@@ -2243,7 +2215,8 @@
     "reversible": true,
     "time": "1 s",
     "autolearn": true,
-    "components": [ [ [ "washboard", 1 ] ], [ [ "sponge", 1 ], [ "cotton_patchwork", 1 ], [ "brush", 1 ], [ "dish_towel", 1 ] ] ]
+    "components": [ [ [ "washboard", 1 ] ], [ [ "sponge", 1 ], [ "cotton_patchwork", 1 ], [ "brush", 1 ], [ "dish_towel", 1 ] ] ],
+    "flags": [ "BLIND_EASY" ]
   },
   {
     "type": "recipe",
@@ -2576,7 +2549,7 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
-    "difficulty": 3,
+    "difficulty": 4,
     "time": "10 h",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 3 }, { "id": "GRIND", "level": 2 } ],
@@ -2592,11 +2565,10 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "fabrication",
-    "difficulty": 2,
+    "difficulty": 4,
     "time": "6 h",
     "autolearn": true,
-    "using": [ [ "forging_standard", 45 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "DIG", "level": 2 } ],
+    "using": [ [ "forging_standard", 45 ], [ "metal_casting_large", -1, "LIST" ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [ [ [ "scrap_bronze", 90 ] ] ]
@@ -2920,7 +2892,7 @@
     "components": [
       [ [ "2x4", 2 ] ],
       [ [ "nails", 12, "LIST" ] ],
-      [ [ "sheet_leather_patchwork", 2 ], [ "tanned_hide", 2 ], [ "sheet_fur_patchwork", 2 ], [ "tanned_pelt", 2 ] ]
+      [ [ "sheet_leather_patchwork", 2 ], [ "sheet_leather", 2 ], [ "sheet_fur_patchwork", 2 ], [ "tanned_pelt", 2 ] ]
     ]
   },
   {

@@ -56,19 +56,7 @@
     "vision_levels": "always_full",
     "see_cost": "opaque",
     "travel_cost_type": "impassable",
-    "flags": [ "NO_ROTATE" ]
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "deep_rock",
-    "//": "Ugly placeholder solution to differentiate between subway tunnels, remove if per-special connection subtyping is implemented.",
-    "name": "solid rock",
-    "looks_like": "empty_rock",
-    "sym": "%",
-    "color": "dark_gray",
-    "vision_levels": "always_full",
-    "see_cost": "opaque",
-    "travel_cost_type": "impassable",
+    "uniform_terrain": "t_soil",
     "flags": [ "NO_ROTATE" ]
   },
   {
@@ -268,7 +256,7 @@
       "cabin_5",
       "cabin_6",
       "cabin_7",
-      "cabin_lapin",
+      "cabin_8",
       "bandit_cabin",
       "cabin_prepper"
     ],
@@ -292,7 +280,7 @@
       "cabin_roof_5",
       "cabin_roof_6",
       "cabin_roof_7",
-      "cabin_roof_lapin",
+      "cabin_roof_8",
       "bandit_cabin_roof"
     ],
     "vision_levels": "roof_or_air",
@@ -533,29 +521,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [
-      "bandit_farm_3",
-      "bandit_farm_3_roof",
-      "bandit_farm_2",
-      "bandit_farm_2_roof",
-      "bandit_farm_1",
-      "bandit_farm_6",
-      "bandit_farm_5",
-      "bandit_farm_4",
-      "bandit_farm_9",
-      "bandit_farm_8",
-      "bandit_farm_7"
-    ],
-    "vision_levels": "isolated_building",
-    "name": "farm",
-    "sym": "#",
-    "color": "brown",
-    "see_cost": "high",
-    "//": "RISK_LOW due to risk and safety being based on NPCs perception of what the area may contain",
-    "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
-  },
-  {
-    "type": "overmap_terrain",
     "id": "debug_ramps",
     "name": "ramp testing area",
     "see_cost": "none",
@@ -642,8 +607,7 @@
     "name": "incomplete cabin roof",
     "sym": "+",
     "color": "light_green",
-    "see_cost": "none",
-    "flags": [ "RISK_LOW", "SOURCE_SAFETY" ]
+    "see_cost": "none"
   },
   {
     "type": "overmap_terrain",
@@ -664,7 +628,8 @@
     "sym": ".",
     "color": "blue",
     "see_cost": "none",
-    "mondensity": 2
+    "mondensity": 2,
+    "flags": [ "WATER" ]
   },
   {
     "type": "overmap_terrain",
@@ -674,7 +639,8 @@
     "sym": ".",
     "color": "light_blue",
     "see_cost": "none",
-    "mondensity": 1
+    "mondensity": 1,
+    "flags": [ "WATER" ]
   },
   {
     "type": "overmap_terrain",

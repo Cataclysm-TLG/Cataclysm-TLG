@@ -21,7 +21,7 @@
         "max_contains_volume": "9 L",
         "max_contains_weight": "10 kg",
         "max_item_length": "133 cm",
-        "moves": 150,
+        "moves": 120,
         "volume_encumber_modifier": 0.4
       }
     ],
@@ -32,7 +32,7 @@
   {
     "id": "baldric_holster",
     "type": "ARMOR",
-    "name": { "str": "baldric holster" },
+    "name": { "str": "baldric holsters" },
     "description": "A leather harness which can hold up to six pistol-sized guns in total, available for quick drawing.  Historically, similar harnesses were used by pirates to carry multiple loaded flintlock pistols at once, as reloading them is a lengthy process.  Activate to holster/draw a gun.",
     "weight": "1320 g",
     "volume": "3 L",
@@ -133,7 +133,7 @@
         "max_contains_volume": "400 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "20 cm",
-        "moves": 150
+        "moves": 175
       }
     ],
     "use_action": { "type": "holster" },
@@ -171,7 +171,7 @@
         "max_contains_volume": "7 L",
         "max_contains_weight": "5 kg",
         "max_item_length": "200 cm",
-        "moves": 50,
+        "moves": 125,
         "flag_restriction": [ "SHEATH_BOW" ]
       }
     ],
@@ -201,7 +201,7 @@
         "max_contains_volume": "8 L",
         "max_contains_weight": "8200 g",
         "max_item_length": "120 cm",
-        "moves": 30
+        "moves": 50
       }
     ],
     "use_action": { "type": "holster" },
@@ -325,7 +325,7 @@
         "max_contains_volume": "855 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "38 cm",
-        "moves": 30
+        "moves": 50
       },
       {
         "pocket_type": "CONTAINER",
@@ -352,7 +352,7 @@
           "460": 18,
           "500": 18
         },
-        "moves": 20
+        "moves": 25
       }
     ],
     "use_action": { "type": "holster" },
@@ -375,7 +375,7 @@
         "max_contains_volume": "490 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "250 mm",
-        "moves": 30
+        "moves": 40
       }
     ],
     "use_action": { "type": "holster" },
@@ -405,7 +405,7 @@
         "max_contains_volume": "650 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "250 mm",
-        "moves": 30,
+        "moves": 40,
         "volume_encumber_modifier": 0.3
       },
       {
@@ -413,7 +413,7 @@
         "max_item_length": "240 mm",
         "max_contains_volume": "750 ml",
         "max_contains_weight": "2 kg",
-        "moves": 40,
+        "moves": 50,
         "flag_restriction": [ "MAG_COMPACT" ],
         "volume_encumber_modifier": 0.3
       }
@@ -442,7 +442,7 @@
         "max_contains_volume": "400 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "165 mm",
-        "moves": 210
+        "moves": 175
       }
     ],
     "use_action": { "type": "holster" },
@@ -477,7 +477,7 @@
         "max_contains_volume": "600 ml",
         "max_contains_weight": "1 kg",
         "max_item_length": "20 cm",
-        "moves": 240,
+        "moves": 150,
         "volume_encumber_modifier": 0.4
       },
       {
@@ -485,7 +485,7 @@
         "max_item_length": "240 mm",
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
-        "moves": 60,
+        "moves": 75,
         "flag_restriction": [ "MAG_COMPACT" ],
         "volume_encumber_modifier": 0.2
       }
@@ -518,7 +518,7 @@
         "max_contains_volume": "1000 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "30 cm",
-        "moves": 70
+        "moves": 65
       },
       {
         "magazine_well": "350 ml",
@@ -528,7 +528,7 @@
         "max_contains_volume": "1000 ml",
         "max_contains_weight": "2 kg",
         "max_item_length": "30 cm",
-        "moves": 70
+        "moves": 65
       }
     ],
     "use_action": { "type": "holster" },
@@ -708,8 +708,8 @@
         "min_item_volume": "500 ml",
         "max_contains_volume": "1500 ml",
         "max_contains_weight": "5 kg",
-        "max_item_length": "525 mm",
-        "moves": 70
+        "max_item_length": "550 mm",
+        "moves": 75
       }
     ],
     "use_action": { "type": "holster" },
@@ -745,8 +745,8 @@
         "min_item_volume": "500 ml",
         "max_contains_volume": "1500 ml",
         "max_contains_weight": "5500 g",
-        "max_item_length": "525 mm",
-        "moves": 70
+        "max_item_length": "550 mm",
+        "moves": 75
       }
     ],
     "use_action": { "type": "holster" },

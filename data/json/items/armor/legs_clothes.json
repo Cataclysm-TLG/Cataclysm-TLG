@@ -122,7 +122,7 @@
   {
     "id": "fishing_waders",
     "type": "ARMOR",
-    "name": { "str": "pair of fishing waders", "str_pl": "pairs of fishing waders" },
+    "name": { "str": "fishing waders", "str_pl": "pairs of fishing waders" },
     "description": "Waterproof plastic fishing waders with a single large front pocket.",
     "weight": "1360 g",
     "volume": "9500 ml",
@@ -215,7 +215,7 @@
     "color": "dark_gray",
     "warmth": 5,
     "material_thickness": 0.5,
-    "flags": [ "VARSIZE", "SKINTIGHT" ],
+    "flags": [ "VARSIZE", "SKINTIGHT", "RAINPROOF" ],
     "armor": [
       {
         "coverage": 75,
@@ -392,7 +392,7 @@
     "id": "kilt_utility",
     "type": "ARMOR",
     "name": { "str": "utility kilt" },
-    "description": "Common among American nerds and rivetheads, the utility kilt is a durabable canvas kilt with a large front pocket.",
+    "description": "Common among American nerds and rivetheads, the utility kilt is a durable canvas kilt with a large front pocket.",
     "weight": "500 g",
     "volume": "1500 ml",
     "price": "35 USD",
@@ -1011,7 +1011,7 @@
     ],
     "warmth": 25,
     "material_thickness": 0.75,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": [ 15, 17 ],
@@ -1079,7 +1079,7 @@
     "warmth": 70,
     "material_thickness": 1,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER" ],
+    "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": [ 6, 10 ],
@@ -1526,7 +1526,7 @@
     "color": "brown",
     "warmth": 10,
     "material_thickness": 0.6,
-    "flags": [ "VARSIZE" ],
+    "flags": [ "VARSIZE", "RAINPROOF" ],
     "armor": [
       {
         "encumbrance": 8,

@@ -63,7 +63,7 @@ TEST_CASE( "light_and_fine_detail_vision_mod", "[character][sight][light][vision
         calendar::turn = calendar::turn_zero + 9_hours + 30_minutes;
         // Build map cache including lightmap
         here.build_map_cache( 0, false );
-        REQUIRE( g->is_in_sunlight( dummy.pos() ) );
+        REQUIRE( g->is_in_sunlight( dummy.pos_bub() ) );
         // ambient_light_at is ~100.0 at this time of day (this fails if lightmap cache is not built)
         REQUIRE( here.ambient_light_at( dummy.pos_bub() ) == Approx( 100.0f ).margin( 1 ) );
 
@@ -87,16 +87,16 @@ TEST_CASE( "light_and_fine_detail_vision_mod", "[character][sight][light][vision
     SECTION( "midnight with a new moon" ) {
         // yes, surprisingly, we need to test for this
         calendar::turn = calendar::turn_zero;
-        tripoint const z_shift = GENERATE( tripoint_above, tripoint_zero );
-        dummy.setpos( dummy.pos() + z_shift ); // This implicitly rebuilds the light map.
+        tripoint const z_shift = GENERATE( tripoint::above, tripoint::zero );
+        dummy.setpos( dummy.pos_bub() + z_shift ); // This implicitly rebuilds the light map.
         CAPTURE( z_shift );
-        REQUIRE_FALSE( g->is_in_sunlight( dummy.pos() ) );
+        REQUIRE_FALSE( g->is_in_sunlight( dummy.pos_bub() ) );
         REQUIRE( here.ambient_light_at( dummy.pos_bub() ) == Approx( LIGHT_AMBIENT_MINIMAL ) );
 
         // 7.3 is LIGHT_AMBIENT_MINIMAL, a dark cloudy night, unlit indoors
         CHECK( dummy.fine_detail_vision_mod() == Approx( 7.3f ) );
 
-        dummy.setpos( dummy.pos() - z_shift );
+        dummy.setpos( dummy.pos_bub() - z_shift, false );
     }
 
     SECTION( "blindfolded" ) {
@@ -116,9 +116,10 @@ TEST_CASE( "npc_light_and_fine_detail_vision_mod", "[character][npc][sight][ligh
 
     clear_avatar();
     clear_map();
-    tripoint const u_shift = GENERATE( tripoint_zero, tripoint_above );
+    tripoint const u_shift = GENERATE( tripoint::zero, tripoint::above );
     CAPTURE( u_shift );
-    u.setpos( u.pos() + u_shift );
+    // Allow player to float for purpose of purely testing this and not factoring in terrain potentially blocking vision etc
+    u.setpos( u.pos_bub() + u_shift, false );
     scoped_weather_override weather_clear( WEATHER_CLEAR );
 
     time_point time_dst;
@@ -136,11 +137,11 @@ TEST_CASE( "npc_light_and_fine_detail_vision_mod", "[character][npc][sight][ligh
     set_time( time_dst );
     REQUIRE( u.fine_detail_vision_mod() == expected_vision );
     SECTION( "NPC on same z-level" ) {
-        n.setpos( u.pos() + tripoint_east );
+        n.setpos( u.pos_bub() + tripoint::east );
         CHECK( n.fine_detail_vision_mod() == u.fine_detail_vision_mod() );
     }
     SECTION( "NPC on a different z-level" ) {
-        n.setpos( u.pos() + tripoint_above );
+        n.setpos( u.pos_bub() + tripoint::above );
         // light map is not calculated outside the player character's z-level
         // even if fov_3d_z_range > 0, and building light map on multiple levels
         // could be expensive, so make NPCs able to see things in this case to
@@ -170,11 +171,11 @@ TEST_CASE( "character_sight_limits", "[character][sight][vision]" )
     GIVEN( "it is midnight with a new moon" ) {
         calendar::turn = calendar::turn_zero;
         here.build_map_cache( 0, false );
-        REQUIRE_FALSE( g->is_in_sunlight( dummy.pos() ) );
+        REQUIRE_FALSE( g->is_in_sunlight( dummy.pos_bub() ) );
 
-        THEN( "sight limit is 60 tiles away" ) {
+        THEN( "sight limit is" << MAX_VIEW_DISTANCE << "tiles away" ) {
             dummy.recalc_sight_limits();
-            CHECK( dummy.unimpaired_range() == 60 );
+            CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
         }
     }
 
@@ -219,10 +220,10 @@ TEST_CASE( "character_sight_limits", "[character][sight][vision]" )
             dummy.wear_item( item( "glasses_eye" ) );
             REQUIRE( dummy.worn_with_flag( flag_FIX_NEARSIGHT ) );
 
-            THEN( "unimpaired sight, with 60 tiles of range" ) {
+            THEN( "unimpaired sight, with " << MAX_VIEW_DISTANCE << " tiles of range" ) {
                 dummy.recalc_sight_limits();
                 CHECK_FALSE( dummy.sight_impaired() );
-                CHECK( dummy.unimpaired_range() == 60 );
+                CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
             }
         }
     }
@@ -281,7 +282,7 @@ TEST_CASE( "ursine_vision", "[character][ursine][vision]" )
             THEN( "unimpaired sight, with 7 tiles of range" ) {
                 dummy.recalc_sight_limits();
                 CHECK_FALSE( dummy.sight_impaired() );
-                CHECK( dummy.unimpaired_range() == 60 );
+                CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
                 CHECK( dummy.sight_range( light_here ) == 7 );
             }
         }
@@ -295,7 +296,7 @@ TEST_CASE( "ursine_vision", "[character][ursine][vision]" )
             THEN( "unimpaired sight, with 8 tiles of range" ) {
                 dummy.recalc_sight_limits();
                 CHECK_FALSE( dummy.sight_impaired() );
-                CHECK( dummy.unimpaired_range() == 60 );
+                CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
                 CHECK( dummy.sight_range( light_here ) == 8 );
             }
         }
@@ -309,7 +310,7 @@ TEST_CASE( "ursine_vision", "[character][ursine][vision]" )
             THEN( "unimpaired sight, with 27 tiles of range" ) {
                 dummy.recalc_sight_limits();
                 CHECK_FALSE( dummy.sight_impaired() );
-                CHECK( dummy.unimpaired_range() == 60 );
+                CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
                 CHECK( dummy.sight_range( light_here ) == 18 );
             }
         }
@@ -318,7 +319,7 @@ TEST_CASE( "ursine_vision", "[character][ursine][vision]" )
             calendar::turn = calendar::turn_zero + 9_hours + 30_minutes;
             here.build_map_cache( 0, false );
             light_here = here.ambient_light_at( dummy.pos_bub() );
-            REQUIRE( g->is_in_sunlight( dummy.pos() ) );
+            REQUIRE( g->is_in_sunlight( dummy.pos_bub() ) );
             REQUIRE( light_here == Approx( 100.0f ).margin( 1 ) );
 
             THEN( "impaired sight, with 12 tiles of range" ) {
@@ -336,7 +337,7 @@ TEST_CASE( "ursine_vision", "[character][ursine][vision]" )
                 THEN( "unimpaired sight, with 87 tiles of range" ) {
                     dummy.recalc_sight_limits();
                     CHECK_FALSE( dummy.sight_impaired() );
-                    CHECK( dummy.unimpaired_range() == 60 );
+                    CHECK( dummy.unimpaired_range() == MAX_VIEW_DISTANCE );
                     CHECK( dummy.sight_range( light_here ) == 87 );
                 }
             }

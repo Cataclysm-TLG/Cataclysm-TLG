@@ -49,7 +49,7 @@
       [ [ "link_sheet", 35 ] ],
       [ [ "chain_link", 917 ] ],
       [ [ "wire", 7 ] ],
-      [ [ "fur", 42 ], [ "tanned_pelt", 7 ], [ "leather", 42 ], [ "tanned_hide", 7 ] ]
+      [ [ "fur", 42 ], [ "tanned_pelt", 7 ], [ "leather", 42 ], [ "sheet_leather", 7 ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_chain_armour" },
@@ -137,7 +137,7 @@
     "difficulty": 4,
     "time": "6 h 30 m",
     "using": [ [ "sewing_standard", 75 ], [ "clasps", 4 ] ],
-    "components": [ [ [ "bone", 39 ], [ "bone_human", 39 ], [ "bone_demihuman", 39 ] ], [ [ "boiled_leather_armor_suit", 3 ] ] ],
+    "components": [ [ [ "bone", 39 ], [ "bone_human", 39 ] ], [ [ "boiled_leather_armor_suit", 3 ] ] ],
     "extend": { "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_carving" } ] }
   },
   {

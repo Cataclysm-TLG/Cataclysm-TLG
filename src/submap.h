@@ -20,10 +20,11 @@
 #include "compatibility.h"
 #include "computer.h"
 #include "construction.h"
-#include "coordinate_constants.h"
 #include "field.h"
 #include "game_constants.h"
 #include "item.h"
+#include "map_scale_constants.h"
+#include "mapdata.h"
 #include "mapgen.h"
 #include "mdarray.h"
 #include "point.h"
@@ -47,7 +48,7 @@ struct spawn_point {
     std::optional<std::string> name;
     spawn_data data;
     explicit spawn_point( const mtype_id &T = mtype_id::NULL_ID(), int C = 0,
-                          point_sm_ms P = point_sm_ms_zero,
+                          point_sm_ms P = point_sm_ms::zero,
                           int FAC = -1, int MIS = -1, bool F = false,
                           const std::optional<std::string> &N = std::nullopt, const spawn_data &SD = spawn_data() ) :
         pos( P ), count( C ), type( T ), faction_id( FAC ),
@@ -142,6 +143,17 @@ class submap
                 return uniform_ter;
             }
             return m->ter[p.x()][p.y()];
+        }
+
+        int compute_coverage( const point_sm_ms &p ) const {
+            int coverage = 0;
+            const auto &f = m ? m->frn[p.x()][p.y()] : furn_str_id::NULL_ID();
+            const auto &t = m ? m->ter[p.x()][p.y()] : uniform_ter;
+            if( f != furn_str_id::NULL_ID() && f->coverage > 0 ) {
+                coverage += f->coverage;
+            }
+            coverage += t->coverage;
+            return coverage;
         }
 
         void set_ter( const point_sm_ms &p, ter_id terr ) {

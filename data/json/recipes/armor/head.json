@@ -685,7 +685,7 @@
     "using": [ [ "blacksmithing_standard", 48 ], [ "steel_standard", 12 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 16 ], [ "tanned_pelt", 2 ], [ "leather", 16 ], [ "tanned_hide", 2 ] ], [ [ "cotton_patchwork", 16 ] ] ],
+    "components": [ [ [ "fur", 16 ], [ "tanned_pelt", 2 ], [ "leather", 16 ], [ "sheet_leather", 2 ] ], [ [ "cotton_patchwork", 16 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -701,7 +701,7 @@
     "using": [ [ "blacksmithing_standard", 36 ], [ "steel_standard", 9 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 11 ], [ "tanned_pelt", 2 ], [ "leather", 11 ], [ "tanned_hide", 2 ] ], [ [ "cotton_patchwork", 11 ] ] ]
+    "components": [ [ [ "fur", 11 ], [ "tanned_pelt", 2 ], [ "leather", 11 ], [ "sheet_leather", 2 ] ], [ [ "cotton_patchwork", 11 ] ] ]
   },
   {
     "result": "xl_helmet_kabuto",
@@ -711,7 +711,7 @@
     "using": [ [ "blacksmithing_standard", 64 ], [ "steel_standard", 16 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 20 ], [ "tanned_pelt", 3 ], [ "leather", 20 ], [ "tanned_hide", 3 ] ], [ [ "cotton_patchwork", 20 ] ] ]
+    "components": [ [ [ "fur", 20 ], [ "tanned_pelt", 3 ], [ "leather", 20 ], [ "sheet_leather", 3 ] ], [ [ "cotton_patchwork", 20 ] ] ]
   },
   {
     "result": "leather_helmet",
@@ -943,7 +943,7 @@
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_kevlar_fabric", 4 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
     "components": [
-      [ [ "leather", 8 ], [ "tanned_hide", 1 ] ],
+      [ [ "leather", 8 ], [ "sheet_leather", 1 ] ],
       [ [ "cotton_patchwork", 4 ] ],
       [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ],
       [ [ "duct_tape", 100 ] ]
@@ -963,7 +963,7 @@
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_kevlar_fabric", 2 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
     "components": [
-      [ [ "leather", 6 ], [ "tanned_hide", 1 ] ],
+      [ [ "leather", 6 ], [ "sheet_leather", 1 ] ],
       [ [ "cotton_patchwork", 2 ] ],
       [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ],
       [ [ "duct_tape", 75 ] ]
@@ -1038,7 +1038,7 @@
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_kevlar_fabric", 5 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
     "components": [
-      [ [ "leather", 14 ], [ "tanned_hide", 3 ] ],
+      [ [ "leather", 14 ], [ "sheet_leather", 3 ] ],
       [ [ "cotton_patchwork", 6 ] ],
       [ [ "scrap", 2 ] ],
       [ [ "hood_rain", 2 ], [ "plastic_sheet_small", 4 ], [ "hood_gut", 2 ] ],

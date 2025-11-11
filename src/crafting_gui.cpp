@@ -988,6 +988,16 @@ static recipe_subset filter_recipes( const recipe_subset &available_recipes,
                                        recipe_subset::search_type::quality_result, progress_callback );
                     break;
 
+                case 'v':
+                    filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
+                                       recipe_subset::search_type::covers, progress_callback );
+                    break;
+
+                case 'e':
+                    filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
+                                       recipe_subset::search_type::layer, progress_callback );
+                    break;
+
                 case 'd':
                     filtered_recipes = filtered_recipes.reduce( qry_filter_str.substr( 2 ),
                                        recipe_subset::search_type::description_result, progress_callback );
@@ -1021,7 +1031,7 @@ static recipe_subset filter_recipes( const recipe_subset &available_recipes,
                 case 'r': {
                     recipe_subset result;
                     for( const itype *e : item_controller->all() ) {
-                        if( wildcard_match( e->nname( 1 ), qry_filter_str.substr( 2 ) ) ) {
+                        if( lcmatch( e->nname( 1 ), qry_filter_str.substr( 2 ) ) ) {
                             result.include( recipe_subset( available_recipes,
                                                            available_recipes.recipes_that_produce( e->get_id() ) ) );
                         }
@@ -1100,13 +1110,15 @@ static const std::vector<SearchPrefix> prefixes = {
     { 's', to_translation( "food handling" ), to_translation( "<color_cyan>any skill</color> used to craft" ) },
     { 'Q', to_translation( "fine bolt turning" ), to_translation( "<color_cyan>quality</color> required to craft" ) },
     { 't', to_translation( "soldering iron" ), to_translation( "<color_cyan>tool</color> required to craft" ) },
-    { 'm', to_translation( "yes" ), to_translation( "<color_cyan>memorized</color> or not (hides nested)" ) },
+    { 'm', to_translation( "yes" ), to_translation( "recipe <color_cyan>memorized</color> or not" ) },
     { 'P', to_translation( "Blacksmithing" ), to_translation( "<color_cyan>proficiency</color> used to craft" ) },
     { 'l', to_translation( "5" ), to_translation( "<color_cyan>difficulty</color> of the recipe as a number or range" ) },
-    { 'r', to_translation( "buttermilk" ), to_translation( "recipe's (<color_cyan>by</color>)<color_cyan>products</color>; use * as wildcard" ) },
     { 'a', to_translation( "brisk" ), to_translation( "recipe's <color_cyan>activity level</color>" ) },
     { 'C', to_translation( "armor" ), to_translation( "<color_cyan>category</color> of the resulting item" ) },
-    { 'S', to_translation( "food_snack" ), to_translation( "<color_cyan>subcategory</color> of the resulting item" ) }
+    { 'S', to_translation( "food_snack" ), to_translation( "<color_cyan>subcategory</color> of the resulting item" ) },
+    { 'r', to_translation( "buttermilk" ), to_translation( "recipe's (<color_cyan>by</color>)<color_cyan>products</color>" ) },
+    { 'v', to_translation( "head" ), to_translation( "<color_cyan>body part</color> the result covers" ) },
+    { 'e', to_translation( "close to skin" ), to_translation( "<color_cyan>layer</color> the result covers" ) }
 };
 
 static const translation filter_help_start = to_translation(
@@ -1477,7 +1489,7 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
         // Draw borders
         wattron( w_data, BORDER_COLOR );
         mvwhline( w_data, point( 1, dataHeight - 1 ), LINE_OXOX, width - 2 );
-        mvwvline( w_data, point_zero, LINE_XOXO, dataHeight - 1 );
+        mvwvline( w_data, point::zero, LINE_XOXO, dataHeight - 1 );
         mvwvline( w_data, point( width - 1, 0 ), LINE_XOXO, dataHeight - 1 );
         mvwaddch( w_data, point( 0, dataHeight - 1 ), LINE_XXOO ); // |_
         mvwaddch( w_data, point( width - 1, dataHeight - 1 ), LINE_XOOX ); // _|
@@ -1575,14 +1587,14 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
             werase( w_iteminfo );
             if( cur_recipe->is_practice() ) {
                 const std::string desc = practice_recipe_description( *cur_recipe, *crafter );
-                fold_and_print( w_iteminfo, point_zero, item_info_width, c_light_gray, desc );
+                fold_and_print( w_iteminfo, point::zero, item_info_width, c_light_gray, desc );
                 scrollbar().offset_x( item_info_width - 1 ).offset_y( 0 ).content_size( 1 ).viewport_size( getmaxy(
                             w_iteminfo ) ).apply( w_iteminfo );
                 wnoutrefresh( w_iteminfo );
             } else if( cur_recipe->is_nested() ) {
                 std::string desc = cur_recipe->description.translated() + "\n\n";;
                 desc += list_nested( *crafter, cur_recipe, available_recipes );
-                fold_and_print( w_iteminfo, point_zero, item_info_width, c_light_gray, desc );
+                fold_and_print( w_iteminfo, point::zero, item_info_width, c_light_gray, desc );
                 scrollbar().offset_x( item_info_width - 1 ).offset_y( 0 ).content_size( 1 ).viewport_size( getmaxy(
                             w_iteminfo ) ).apply( w_iteminfo );
                 wnoutrefresh( w_iteminfo );
@@ -2026,8 +2038,14 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
         } else if( action == "TOGGLE_RECIPE_UNREAD" && selection_ok( current, line, true ) ) {
             const recipe_id rcp = current[line]->ident();
             if( uistate.read_recipes.count( rcp ) ) {
+                for( const recipe_id nested_rcp : rcp->nested_category_data ) {
+                    uistate.read_recipes.erase( nested_rcp );
+                }
                 uistate.read_recipes.erase( rcp );
             } else {
+                for( const recipe_id nested_rcp : rcp->nested_category_data ) {
+                    uistate.read_recipes.insert( nested_rcp );
+                }
                 uistate.read_recipes.insert( rcp );
             }
             recalc_unread = highlight_unread_recipes;
@@ -2035,6 +2053,15 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
         } else if( action == "MARK_ALL_RECIPES_READ" ) {
             bool current_list_has_unread = false;
             for( const recipe *const rcp : current ) {
+                for( const recipe_id nested_rcp : rcp->nested_category_data ) {
+                    if( !uistate.read_recipes.count( nested_rcp->ident() ) ) {
+                        current_list_has_unread = true;
+                        break;
+                    }
+                    if( current_list_has_unread ) {
+                        break;
+                    }
+                }
                 if( !uistate.read_recipes.count( rcp->ident() ) ) {
                     current_list_has_unread = true;
                     break;
@@ -2057,10 +2084,16 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
             if( query_yn( query_str ) ) {
                 if( current_list_has_unread ) {
                     for( const recipe *const rcp : current ) {
+                        for( const recipe_id nested_rcp : rcp->nested_category_data ) {
+                            uistate.read_recipes.insert( nested_rcp->ident() );
+                        }
                         uistate.read_recipes.insert( rcp->ident() );
                     }
                 } else {
                     for( const recipe *const rcp : available_recipes ) {
+                        for( const recipe_id nested_rcp : rcp->nested_category_data ) {
+                            uistate.read_recipes.insert( nested_rcp->ident() );
+                        }
                         uistate.read_recipes.insert( rcp->ident() );
                     }
                 }
@@ -2472,7 +2505,7 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_subtabs(
     int width = getmaxx( w );
 
     wattron( w, BORDER_COLOR );
-    mvwvline( w, point_zero, LINE_XOXO, getmaxy( w ) );  // |
+    mvwvline( w, point::zero, LINE_XOXO, getmaxy( w ) );  // |
     mvwvline( w, point( width - 1, 0 ), LINE_XOXO, getmaxy( w ) );  // |
     wattroff( w, BORDER_COLOR );
 
@@ -2522,7 +2555,7 @@ static std::map<size_t, inclusive_rectangle<point>> draw_recipe_subtabs(
         case BATCH:
             werase( w );
             wattron( w, BORDER_COLOR );
-            mvwvline( w, point_zero, LINE_XOXO, 3 ); // |
+            mvwvline( w, point::zero, LINE_XOXO, 3 ); // |
             mvwvline( w, point( width - 1, 0 ), LINE_XOXO, 3 ); // |
             wattroff( w, BORDER_COLOR );
             break;

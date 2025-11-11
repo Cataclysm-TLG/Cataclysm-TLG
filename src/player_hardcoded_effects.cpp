@@ -105,6 +105,7 @@ static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
 static const json_character_flag json_flag_BIONIC_LIMB( "BIONIC_LIMB" );
 static const json_character_flag json_flag_BLEEDSLOW( "BLEEDSLOW" );
 static const json_character_flag json_flag_BLEEDSLOW2( "BLEEDSLOW2" );
+static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
 static const json_character_flag json_flag_PAIN_IMMUNE( "PAIN_IMMUNE" );
 static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
@@ -166,7 +167,7 @@ static void eff_fun_fake_common_cold( Character &u, effect & )
     }
 
     avatar &you = get_avatar(); // No NPCs for now.
-    if( rl_dist( u.pos(), you.pos() ) <= 1 ) {
+    if( rl_dist( u.pos_bub(), you.pos_bub() ) <= 1 ) {
         you.get_sick( false );
     }
 }
@@ -177,7 +178,7 @@ static void eff_fun_fake_flu( Character &u, effect & )
     }
 
     avatar &you = get_avatar(); // No NPCs for now.
-    if( rl_dist( u.pos(), you.pos() ) <= 1 ) {
+    if( rl_dist( u.pos_bub(), you.pos_bub() ) <= 1 ) {
         you.get_sick( true );
     }
 }
@@ -305,6 +306,12 @@ static void eff_fun_rat( Character &u, effect &it )
 }
 static void eff_fun_bleed( Character &u, effect &it )
 {
+    map &here = get_map();
+
+    if( u.has_flag( json_flag_CANNOT_TAKE_DAMAGE ) ) {
+        return;
+    }
+
     // Presuming that during the first-aid process you're putting pressure
     // on the wound or otherwise suppressing the flow. (Kits contain either
     // QuikClot or bandages per the recipe.)
@@ -351,7 +358,7 @@ static void eff_fun_bleed( Character &u, effect &it )
                 }
                 suffer_string = iter->second;
             }
-            u.bleed();
+            u.bleed( here );
             bodypart_id bp = it.get_bp();
             // piece together the final displayed message here instead of inline, for readability's sake
             // format the chosen string with the relevant variables to make it human-readable, then translate everything we have so far
@@ -426,7 +433,7 @@ static void eff_fun_hallu( Character &u, effect &it )
             int loudness = 20 + u.str_cur - u.int_cur;
             loudness = ( loudness > 5 ? loudness : 5 );
             loudness = ( loudness < 30 ? loudness : 30 );
-            sounds::sound( u.pos(), loudness, sounds::sound_t::speech, _( random_entry_ref( npc_hallu ) ),
+            sounds::sound( u.pos_bub(), loudness, sounds::sound_t::speech, _( random_entry_ref( npc_hallu ) ),
                            false, "speech",
                            loudness < 15 ? ( u.male ? "NPC_m" : "NPC_f" ) : ( u.male ? "NPC_m_loud" : "NPC_f_loud" ) );
         }
@@ -442,7 +449,7 @@ static void eff_fun_hallu( Character &u, effect &it )
         u.add_miss_reason( _( "Dancing fractals distract you." ), 2 );
         u.mod_str_bonus( -1 );
         if( u.is_avatar() && one_in( 50 ) ) {
-            g->spawn_hallucination( u.pos() + tripoint( rng( -10, 10 ), rng( -10, 10 ), 0 ) );
+            g->spawn_hallucination( u.pos_bub() + tripoint( rng( -10, 10 ), rng( -10, 10 ), 0 ) );
         }
     } else if( dur == comedownTime ) {
         if( one_in( 42 ) ) {
@@ -586,6 +593,9 @@ static void eff_fun_frostbite( Character &u, effect &it )
 
 static void eff_fun_teleglow( Character &u, effect &it )
 {
+    map &here = get_map();
+    const tripoint_bub_ms pos = u.pos_bub( here );
+
     // Default we get around 300 duration points per teleport (possibly more
     // depending on the source).
     // TODO: Include a chance to teleport to the nether realm.
@@ -596,14 +606,13 @@ static void eff_fun_teleglow( Character &u, effect &it )
     }
     const time_duration dur = it.get_duration();
     Character &player_character = get_player_character();
-    map &here = get_map();
     if( dur > 10_hours ) {
         // 20 teleports (no decay; in practice at least 21)
         if( one_in( 6000 - ( ( dur - 600_minutes ) / 1_minutes ) ) ) {
             if( !u.is_npc() ) {
                 add_msg( _( "Glowing lights surround you, and you teleport." ) );
             }
-            teleport::teleport( u );
+            teleport::teleport_creature( u );
             get_event_bus().send<event_type::teleglow_teleports>( u.getID() );
             if( one_in( 10 ) ) {
                 // Set ourselves up for removal
@@ -632,13 +641,13 @@ static void eff_fun_teleglow( Character &u, effect &it )
         // 12 teleports
         if( one_in( 24000 - ( dur - 360_minutes ) / 4_turns ) ) {
             creature_tracker &creatures = get_creature_tracker();
-            tripoint_bub_ms dest( 0, 0, u.posz() );
+            tripoint_bub_ms dest( 0, 0, pos.z() );
             int &x = dest.x();
             int &y = dest.y();
             int tries = 0;
             do {
-                x = u.posx() + rng( -4, 4 );
-                y = u.posy() + rng( -4, 4 );
+                x = pos.x() + rng( -4, 4 );
+                y = pos.y() + rng( -4, 4 );
                 tries++;
                 if( tries >= 10 ) {
                     break;
@@ -653,7 +662,7 @@ static void eff_fun_teleglow( Character &u, effect &it )
                 for( const MonsterGroupResult &mgr : spawn_details ) {
                     g->place_critter_at( mgr.name, dest );
                 }
-                if( uistate.distraction_hostile_spotted && player_character.sees( dest ) ) {
+                if( uistate.distraction_hostile_spotted && player_character.sees( here, dest ) ) {
                     g->cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far,
                                                         _( "A monster appears nearby!" ) );
                     add_msg( m_warning, _( "A portal opens nearby, and a monster crawls through!" ) );
@@ -918,14 +927,11 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
     }
     if( one_in( 900 / intense ) && !u.in_sleep_state() ) {
         // level 1 symptoms are cold limbs, pale skin, and weakness
-        switch( dice( 1, 9 ) ) {
+        switch( dice( 1, 8 ) ) {
             case 1:
-                u.add_msg_if_player( m_bad, _( "Your hands feel unusually cold." ) );
+                u.add_msg_if_player( m_bad, _( "Your extremities feel unusually cold." ) );
                 u.mod_part_temp_conv( bodypart_id( "hand_l" ), -4_C_delta );
                 u.mod_part_temp_conv( bodypart_id( "hand_r" ), -4_C_delta );
-                break;
-            case 2:
-                u.add_msg_if_player( m_bad, _( "Your feet feel unusually cold." ) );
                 u.mod_part_temp_conv( bodypart_id( "foot_l" ), -4_C_delta );
                 u.mod_part_temp_conv( bodypart_id( "foot_r" ), -4_C_delta );
                 break;
@@ -933,13 +939,13 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
                 u.add_msg_if_player( m_bad, _( "Your skin looks very pale." ) );
                 break;
             case 4:
-                u.add_msg_if_player( m_bad, _( "You feel weak.  Where has your strength gone?" ) );
+                u.add_msg_if_player( m_bad, _( "You feel weak." ) );
                 break;
             case 5:
-                u.add_msg_if_player( m_bad, _( "You feel feeble.  A gust of wind could make you stumble." ) );
+                u.add_msg_if_player( m_bad, _( "You really want to just sit and do nothing for a while." ) );
                 break;
             case 6:
-                u.add_msg_if_player( m_bad, _( "There is an overwhelming aura of tiredness inside of you." ) );
+                u.add_msg_if_player( m_bad, _( "You're having trouble catching your breath." ) );
                 u.mod_fatigue( intense * 3 );
                 break;
             case 7: // 7-9 empty for variability, as messages stack on higher intensity
@@ -952,24 +958,24 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
         if( intense > 1 ) {
             switch( dice( 1, 9 ) ) {
                 case 1:
-                    u.add_msg_if_player( m_bad, _( "Rest is what you want.  Rest is what you need." ) );
+                    u.add_msg_if_player( m_bad, _( "" ) );
                     break;
                 case 2:
-                    u.add_msg_if_player( m_bad, _( "You feel dizzy and can't coordinate the movement of your feet." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel dizzy!" ) );
                     u.add_effect( effect_stunned, rng( 1_minutes, 2_minutes ) );
                     break;
                 case 3:
-                    u.add_msg_if_player( m_bad, _( "Your muscles are quivering." ) );
+                    u.add_msg_if_player( m_bad, _( "Your weakness gives way to tremors." ) );
                     u.add_effect( effect_shakes, rng( 4_minutes, 8_minutes ) );
                     break;
                 case 4:
-                    u.add_msg_if_player( m_bad, _( "You crave for ice.  The dirt under your feet looks tasty too." ) );
+                    u.add_msg_if_player( m_bad, _( "You have the strangest craving for ice." ) );
                     break;
                 case 5:
-                    u.add_msg_if_player( m_bad, _( "Your whole mouth is sore, and your tongue is swollen." ) );
+                    u.add_msg_if_player( m_bad, _( "Your whole mouth feels sore, and your tongue is swollen." ) );
                     break;
                 case 6:
-                    u.add_msg_if_player( m_bad, _( "You feel lightheaded.  A migraine follows." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel lightheaded, and a headache pounds in your temples." ) );
                     u.mod_pain( intense * 9 );
                     break;
                 case 7: // 7-9 empty for variability, as messages stack on higher intensity
@@ -985,7 +991,7 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
                     u.add_msg_if_player( m_bad, _( "Your legs are restless.  The urge to move them is so strong." ) );
                     break;
                 case 2:
-                    u.add_msg_if_player( m_bad, _( "You feel like you could sleep on a rock." ) );
+                    u.add_msg_if_player( m_bad, _( "You feel drained of life, you just want to lie down." ) );
                     u.mod_fatigue( intense * 3 );
                     break;
                 case 3:
@@ -1098,7 +1104,7 @@ static void eff_fun_sleep( Character &u, effect &it )
     bool woke_up = false;
     int tirednessVal = rng( 5, 200 ) + rng( 0, std::abs( u.get_fatigue() * 2 * 5 ) );
     if( !u.is_blind() && !u.has_effect( effect_narcosis ) &&
-        !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_bionic( bio_sleep_shutdown ) ) {
+        !u.has_active_mutation( trait_CHLOROMORPH ) && !u.has_active_bionic( bio_sleep_shutdown ) ) {
         // People who can see while sleeping are acclimated to the light.
         if( !u.has_flag( json_flag_SEESLEEP ) ) {
             if( u.has_trait( trait_HEAVYSLEEPER2 ) && !u.has_trait( trait_HIBERNATE ) ) {
@@ -1182,6 +1188,9 @@ static void eff_fun_sleep( Character &u, effect &it )
 
 void Character::hardcoded_effects( effect &it )
 {
+    map &here = get_map();
+    const tripoint_bub_ms pos = pos_bub( here );
+
     if( const ma_buff *buff = ma_buff::from_effect( it ) ) {
         if( buff->is_valid_character( *this ) ) {
             buff->apply_character( *this );
@@ -1222,7 +1231,6 @@ void Character::hardcoded_effects( effect &it )
     int intense = it.get_intensity();
     const bodypart_id &bp = it.get_bp();
     bool sleeping = has_effect( effect_sleep );
-    map &here = get_map();
     Character &player_character = get_player_character();
     creature_tracker &creatures = get_creature_tracker();
     if( id == effect_formication ) {
@@ -1230,11 +1238,11 @@ void Character::hardcoded_effects( effect &it )
         if( x_in_y( intense, 600 + 300 * get_int() ) && !has_effect( effect_narcosis ) ) {
             if( !is_npc() ) {
                 //~ %s is bodypart in accusative.
-                add_msg( m_warning, _( "You start scratching your %s!" ),
+                add_msg( m_warning, _( "You start scratching your %s." ),
                          body_part_name_accusative( bp ) );
             } else {
                 //~ 1$s is NPC name, 2$s is bodypart in accusative.
-                add_msg_if_player_sees( pos(), _( "%1$s starts scratching their %2$s!" ), get_name(),
+                add_msg_if_player_sees( pos, _( "%1$s starts scratching their %2$s." ), get_name(),
                                         body_part_name_accusative( bp ) );
             }
             mod_moves( -to_moves<int>( 1_seconds ) * 1.5 );
@@ -1252,11 +1260,11 @@ void Character::hardcoded_effects( effect &it )
     } else if( id == effect_attention ) {
         if( to_turns<int>( dur ) != 0 && one_in( 100000 / to_turns<int>( dur ) ) &&
             one_in( 100000 / to_turns<int>( dur ) ) && one_in( 250 ) ) {
-            tripoint_bub_ms dest( 0, 0, posz() );
+            tripoint_bub_ms dest( 0, 0, pos.z() );
             int tries = 0;
             do {
-                dest.x() = posx() + rng( -4, 4 );
-                dest.y() = posy() + rng( -4, 4 );
+                dest.x() = pos.x() + rng( -4, 4 );
+                dest.y() = pos.y() + rng( -4, 4 );
                 tries++;
             } while( creatures.creature_at( dest ) && tries < 10 );
             if( tries < 10 ) {
@@ -1268,7 +1276,7 @@ void Character::hardcoded_effects( effect &it )
                 for( const MonsterGroupResult &mgr : spawn_details ) {
                     g->place_critter_at( mgr.name, dest );
                 }
-                if( uistate.distraction_hostile_spotted && player_character.sees( dest ) ) {
+                if( uistate.distraction_hostile_spotted && player_character.sees( here, dest ) ) {
                     g->cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far,
                                                         _( "A monster appears nearby!" ) );
                     add_msg_if_player( m_warning, _( "A portal opens nearby, and a monster crawls through!" ) );
@@ -1301,7 +1309,7 @@ void Character::hardcoded_effects( effect &it )
         }
     } else if( id == effect_tindrift ) {
         add_msg_if_player( m_bad, _( "You are beset with a vision of a prowling beast." ) );
-        for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 6 ) ) {
+        for( const tripoint_bub_ms &dest : here.points_in_radius( pos, 6 ) ) {
             if( here.is_cornerfloor( dest ) ) {
                 here.add_field( dest, fd_tindalos_rift, 3 );
                 add_msg_if_player( m_info, _( "Your surroundings are permeated with a foul scent." ) );
@@ -1528,12 +1536,10 @@ void Character::hardcoded_effects( effect &it )
                         add_msg_if_player( _( "Your internal chronometer went off and you haven't slept a wink." ) );
                         activity.set_to_null();
                     } else if( ( !( has_trait( trait_HEAVYSLEEPER ) ||
-                                    has_trait( trait_HEAVYSLEEPER2 ) ||
-                                    has_bionic( bio_sleep_shutdown ) ) &&
+                                    has_trait( trait_HEAVYSLEEPER2 ) ) &&
                                  dice( 2, 15 ) < volume ) ||
                                ( has_trait( trait_HEAVYSLEEPER ) && dice( 3, 15 ) < volume ) ||
-                               ( has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < volume ) ||
-                               has_bionic( bio_sleep_shutdown ) ) {
+                               ( has_trait( trait_HEAVYSLEEPER2 ) && dice( 6, 15 ) < volume ) ) {
                         // Secure the flag before wake_up() clears the effect
                         bool slept_through = has_effect( effect_slept_through_alarm );
                         wake_up();
@@ -1559,14 +1565,14 @@ void Character::hardcoded_effects( effect &it )
                     it.mod_duration( 10_minutes );
                 } else if( dur == 2_turns ) {
                     // let the sound code handle the wake-up part
-                    sounds::sound( pos(), 16, sounds::sound_t::alarm, _( "beep-beep-beep!" ), false, "tool",
+                    sounds::sound( pos, 16, sounds::sound_t::alarm, _( "beep-beep-beep!" ), false, "tool",
                                    "alarm_clock" );
                 }
             }
         } else {
             if( dur == 1_turns ) {
                 if( player_character.has_alarm_clock() ) {
-                    sounds::sound( player_character.pos(), 16, sounds::sound_t::alarm,
+                    sounds::sound( player_character.pos_bub( here ), 16, sounds::sound_t::alarm,
                                    _( "beep-beep-beep!" ), false, "tool", "alarm_clock" );
                     const std::string alarm = _( "Your alarm is going off." );
                     g->cancel_activity_or_ignore_query( distraction_type::noise, alarm );
@@ -1624,18 +1630,21 @@ void Character::hardcoded_effects( effect &it )
                                            _( "Your %s suddenly jerks in an unexpected direction!" ), _( limb ) ) );
                     if( limb == "arm" ) {
                         mod_dex_bonus( -8 );
+                        release_grapple();
                         recoil = MAX_RECOIL;
                     } else if( limb == "hand" ) {
+                        release_grapple();
                         if( is_armed() && can_drop( *get_wielded_item() ).success() ) {
                             if( dice( 4, 4 ) > get_dex() ) {
                                 cancel_activity();  //Prevent segfaults from activities trying to access missing item
                                 put_into_vehicle_or_drop( *this, item_drop_reason::tumbling, { remove_weapon() } );
                             } else {
-                                add_msg_if_player( m_neutral, _( "However, you manage to keep hold of your weapon." ) );
+                                add_msg_if_player( m_neutral, _( "You manage to keep hold of your %s." ),
+                                                   get_wielded_item()->tname() );
                             }
                         }
-                    } else if( limb == "leg" ) {
-                        if( dice( 4, 4 ) > get_dex() && !is_on_ground() ) {
+                    } else if( limb == "leg" && !is_on_ground() ) {
+                        if( dice( 4, 4 ) > get_dex() ) {
                             schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
                         } else {
                             add_msg_if_player( m_neutral, _( "However, you manage to keep your footing." ) );
@@ -1645,7 +1654,7 @@ void Character::hardcoded_effects( effect &it )
                 // Atonic seizure (a.k.a. drop seizure)
                 if( one_turn_in( 2_days / mod ) && !has_effect( effect_valium ) ) {
                     add_msg_if_player( m_bad,
-                                       _( "You suddenly lose all muscle tone, and can't support your own weight!" ) );
+                                       _( "Your strength suddenly fails you, you can't even support your own weight!" ) );
                     schedule_effect( effect_motor_seizure, rng( 1_seconds, 2_seconds ) );
                     if( !is_on_ground() ) {
                         schedule_effect( effect_downed, rng( 5_seconds, 10_seconds ) );
@@ -1659,7 +1668,6 @@ void Character::hardcoded_effects( effect &it )
                     add_msg_if_player( m_bad, _( "You have a splitting headache." ) );
                     mod_pain( 12 );
                 }
-
                 break;
         }
     }

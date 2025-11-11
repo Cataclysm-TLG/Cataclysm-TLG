@@ -5,84 +5,98 @@
     "text": [
       {
         "id": "many_years_old_news_1",
-        "text": "ATOMIC DEREGULATION!  President Toffer announced to a mixed crowd today that he had signed an executive order to deregulate public use of radioactive compounds, allowing more widespread use of low-grade radioactive compounds in home appliances.  \"Plutonium is the greenest energy we have,\" he told an assembled press.  \"It's time we got over our fear and moved into the light.\""
+        "name": "THE BATTLE OF LOS ANGELES",
+        "text": "THE BATTLE OF LOS ANGELES  February 25, 1942.  Five deaths are now attributed to the sudden appearance of what have been dubbed \"foo fighters,\" in the skies over Los Angeles as terrified citizens, fearing a followup to the unthinkable tragedy at Pearl Harbor, flew into a panic that led to three fatal car accidents and two heart attacks; But it's not what we fear, says Navy Secretary Frank Knox.  Despite the air raid alarm and blackout order, and despite widely reported sightings of strange lights in the western sky under fire from anti-air batteries, the Navy wishes to assure the public that it was all a false alarm.  As for the identity of the mysterious aircraft, early reports suggest they may have been nothing more than weather balloons, blown off course and illuminated not by their own lights, but merely reflecting those on the ground."
       },
       {
         "id": "many_years_old_news_2",
+        "name": "CELEBRATED PHYSICIST GOES MISSING",
         "text": "CELEBRATED PHYSICIST GOES MISSING.  Dr. Amy Takatoshi, a celebrated quantum physicist at MIT dubbed by some as \"the next Hawking\" has gone missing shortly before a press conference that was expected to be the announcement of her newest research results, rumored to be in the field of teleportation."
       },
       {
+        "id": "many_years_old_news_3",
+        "name": "FLYING SAUCER OVER ROSWELL?",
+        "text": "FLYING SAUCER OVER ROSWELL?  July 8, 1947.  At noon today, the intelligence office of the 509th Bombardment group at Roswell Army Air Field announced that the field has come into possession of an unidentified aircraft, the wreckage of which was recovered from a ranch field in Corona, New Mexico following a brief engagement with American fighter craft.  Despite the alarming nature of the incident, the army gives every assurance that this was not some enemy invasion, but rather a case of justifiable wartime paranoia over what turned out to be nothing more than an unmanned weather balloon."
+      },
+      {
         "id": "many_years_old_news_4",
-        "text": "EDITORIAL: THE UN SHOULD PUT ON ITS BIG-BOY PANTS.  So, driven by decreasing regulation of radioactive materials in the US and China, the UN is pushing hard again for nuclear disarmament.  What a tired old litany this has become.  With deregulation, we've been able to slate three new green nuclear reactors in the Eastern US alone, bringing greenhouse-gas free power to millions of people.  Whatever happened to the UN's focus on global warming?  This is a classic situation of the world painting the USA as villains no matter what we do."
+        "name": "EDITORIAL: THE UN SHOULD PUT ON ITS BIG-BOY PANTS",
+        "text": "EDITORIAL: THE UN SHOULD PUT ON ITS BIG-BOY PANTS  Driven by decreasing regulation of radioactive materials in the US and China, the UN is pushing hard again for nuclear disarmament.  What a tired old litany this has become.  With deregulation, we've been able to slate three new green nuclear reactors in the Eastern US alone, bringing greenhouse-gas free power to millions of people.  Whatever happened to the UN's focus on global warming?  This is a classic situation of the world painting the USA as villains no matter what we do."
       },
       {
         "id": "many_years_old_news_5",
-        "text": "US IGNORES UN DEMANDS: The US ambassador to the UN today turned down UN requests to begin mutual nuclear disarmament of China, the US and North Korea.  \"We have a right to defend ourselves,\" insisted the ambassador.  \"We'll back down when they do\"."
+        "name": "US IGNORES UN DEMANDS",
+        "text": "US IGNORES UN DEMANDS  The US ambassador to the UN today turned down UN requests to begin mutual nuclear disarmament of China, the US and North Korea.  \"We have a right to defend ourselves,\" insisted the ambassador.  \"We'll back down when they do\"."
       },
       {
         "id": "many_years_old_news_6",
-        "text": "DISASTER IN THE SARITANIA MINES!  A copper mine west of Saritania, a small town in Vermont, collapsed Wednesday, killing an estimated thirty miners in the disaster.  Local officials could not be reached for comment, despite the mine being Saritania's primary industry.  An anonymous but credible source did contact our offices, claiming that the Saritania Mine was in fact an underground military facility, and that the disaster was a cover-up for a failed experiment.  These allegations were not addressed by officials."
+        "name": "DISASTER IN THE SARITANIA MINES",
+        "text": "DISASTER IN THE SARITANIA MINES  A copper mine west of Saritania, a small town in Vermont, collapsed Wednesday, killing an estimated thirty miners in the disaster.  Local officials could not be reached for comment, despite the mine being Saritania's primary industry.  An anonymous but credible source did contact our offices, claiming that the Saritania Mine was in fact an underground military facility, and that the disaster was a cover-up for a failed experiment.  These allegations were not addressed by officials."
       },
       {
         "id": "many_years_old_news_7",
+        "name": "ALIENS AMONG US!",
         "text": "ALIENS AMONG US!  Janine Galfrizowich, of Martha's Vineyard, wrote in to our Paranormal Investigation Staff with this cryptic gem.  \"They're always watching, always watching from the shadows.  Stealing my avocados and watching!  They took my neighbor and made him into one of them!\"  Our journalists are trying to track Mrs Galfrizowich down, but it is clear enough that this ties into the well known Avocado Conspiracy (see issue 24, volume 7)."
       },
       {
         "id": "many_years_old_news_8",
+        "name": "EDITORIAL: MORE HOMES NEED GUNS",
         "text": "EDITORIAL: MORE HOMES NEED GUNS.  While visiting a friend recently, our conversation turned to gun control, and I was shocked to learn that my close friend didn't own a firearm.  In this day and age, not having a deadly weapon in your home shows an appalling lack of personal safety, and I told him so.  Weapons that can kill a man, or several men, in an instant - sometimes even accidentally - are our only hope against other people armed similarly.  I see a utopia of honest citizens keeping each other honest by being armed to the teeth."
       },
       {
         "id": "many_years_old_news_9",
-        "text": "EDITORIAL: LET ME BUY MY DANG PLUTONIUM.  President Toffer made a bold and unpopular move last month with nuclear regulation changes.  I, for one, couldn't be more excited.  By now, we know very well what the risks of radioactive materials are, and can take the measures to protect ourselves.  Our citizens deserve the right to make the informed choice to purchase atomic powered tools should they wish, and in this era of fossil fuel and global warming concerns, what could be more appropriate than powering a home with a radioisotope thermal generator?"
+        "name": "RHODE ISLAND RATBOY",
+        "text": "RHODE ISLAND RATBOY  For the third month in a row, embattled police in Warwick, Rhode Island have been fielding calls about the so-called \"ratboy\".  Callers report seeing this hunched, hairy figure at night, rummaging through trash cans, squeezing in and out of storm drains, and even attempting to gain entry to people's homes, though to date none of these alleged encounters have resulted in any violence or further mischief.  Authorities are calling the puzzling incidents a case of mass hysteria, and remind residents to keep their doors locked and to call in any sightings of unaccompanied children out on the street at odd hours."
       },
       {
         "id": "many_years_old_news_10",
-        "text": "EDITORIAL: ALIENS ARE BACK IN A BIG WAY.  We've all seen that autopsy video that's making the rounds.  I'm not going to say if I believe it's real or not (I will say \"I want to believe\" though!) but regardless of the truth, one thing is clear: the public mind is completely addicted to aliens in the biggest way I've seen since ET was popular.  What's brought little green men back into the public eye?  It's anyone's guess, but personally I think it's a concerning sign that we're culturally digging in to a second Cold War."
+        "name": "EDITORIAL: ALIENS ARE BACK IN A BIG WAY",
+        "text": "EDITORIAL: ALIENS ARE BACK IN A BIG WAY  We've all seen that autopsy video that's making the rounds.  I'm not going to say if I believe it's real or not (I will say \"I want to believe\" though!) but regardless of the truth, one thing is clear: the public mind is completely addicted to aliens in the biggest way I've seen since ET was popular.  What's brought little green men back into the public eye?  It's anyone's guess, but personally I think it's a concerning sign that we're culturally digging in to a second Cold War."
       },
       {
         "id": "many_years_old_news_11",
-        "text": "POPULAR 'ALIEN AUTOPSY' DEBUNKED.  A widely circulated video, making the rounds everywhere from FriendFace to television news, has been debunked as a fake.  This extremely realistic and graphic alien autopsy shows an insect-like creature being dismantled by Japanese researchers, who comment on its anatomy in Japanese throughout the video.  Early observations that the creature was suspiciously similar to those described in the popular works of horror author HP Lovecraft were not sufficient to dislodge the video's viral status.  Yesterday, on the popular social media website Eddit, a 'making of' video was posted, clearly exposing the work as the final film project of a small group of students at UCLA."
+        "name": "POPULAR 'ALIEN AUTOPSY' DEBUNKED",
+        "text": "POPULAR 'ALIEN AUTOPSY' DEBUNKED  Following the explosively popular debut of an alleged \"alien autopsy\" on network television last week, experts have stepped forward to dismiss claims that the feature was anything more than a publicity stunt.  Early observations that the \"alien\", a multi-legged pink monster, was suspiciously similar to those dreamed up by horror author HP Lovecraft were not sufficient to dissuade conspiracy theorists.  Fortunately for the rest of us, our own investigation has revealed that the film was nothing more than a promotional clip for a canceled film adaptation of Lovecraft's The Whisperer in Darkness.  The FCC has announced that it is opening its own investigation into the matter with the aim of determining whether the network has gone too far for the sake of what it now claims was purely entertainment."
       },
       {
         "id": "many_years_old_news_12",
-        "text": "STUDENT MISSING: A high school student vanished yesterday evening in the forest near Wayland.  The 17-year-old student Brett Dong was last seen with his friends in the camp.  \"Brett said that he was gonna get some firewood but he never came back,\" said his classmate, Jianxiang Wang.  The search is underway."
+        "name": "STUDENT MISSING",
+        "text": "STUDENT MISSING: A high school student vanished yesterday evening in the forest near Wayland.  The 17-year-old student Brett Dong went on a camping trip with his friends, who called emergency services when they realized he was no longer with them.  \"Brett said that he was gonna get some firewood but he never came back,\" said his classmate, Jianxiang Wang.  The search is underway, and authorities have provided a tip line, asking that anyone who may have been in the area call in to report any suspicious sightings."
       },
       {
         "id": "many_years_old_news_13",
-        "text": "STILL SEARCHING: The search for Brett Dong, the high school student who went missing three days ago, is still ongoing.  \"He could have played in the soccer game against Weston High School yesterday,\" Brett's sorrowful teammate said, \"[…] we've never stopped praying.\"  Despite the best efforts of the County Search & Rescue, Brett had still not been located at the time of this report."
+        "name": "RESEARCH VESSEL RECOVERED WITH NO HANDS ON BOARD",
+        "text": "RESEARCH VESSEL RECOVERED WITH NO HANDS ON BOARD  United States Navy Research Vessel Sally Ride went missing last week during what should of been a routine mapping mission off the sea of Japan.  She sported a crew of 20 and carried 24 research personnel, none of whom were recovered yesterday when the vessel was found adrift off the coast of Argentina approximately ten thousand miles away.  The Navy did not respond to requests for comment on how this was possible, nor did it offer any speculation as to the fate of those missing."
       },
       {
         "id": "many_years_old_news_14",
-        "text": "RUMORS DENIED: Allegations from search parties hunting for Brett Dong, that a civilian research facility just outside Wayland is a front for a government facility researching dangerous technologies, were addressed during a press conference earlier today.  \"I have to clarify that not only have we never done such research,\" said the officer on the press conference.  \"These allegations are absurd.  Teleportation and aliens only exist in sci-fi films, and the US certainly doesn't have the funds to build these extensive underground networks people are talking about.  I can't believe I even have to tell you this.  I don't know what those kids saw that put these ideas in their heads, but they're going through an awful lot with the loss of their friend.\""
+        "name": "NEW TYPE OF AI, OR CLEVER HOAX?",
+        "text": "NEW TYPE OF AI, OR CLEVER HOAX?  Rumors of a new type of generative AI have been confounded by as yet uncomfirmed speculation that some texts appearing online are apparently being unconsciously written by human beings who report having no memory of doing so. \"It's like something is writing through me without fully understanding human language,\" one online commenter said."
       },
       {
         "id": "many_years_old_news_15",
-        "text": "TANK SUIT!  In a press conference on Tuesday, General Ariel Dabrowski was proud to unveil the new military \"tank suit\", a powered exoskeleton capable of resisting small arms fire and most heavy weapons.  \"Tank suits have been used in limited deployment in Afghanistan for several months now,\" General Dabrowski informed the gathered press.  \"We're proud to be at a point where we can formally introduce them to the public.  These suits are just the first stage in a new generation of mechanized infantry.\""
-      },
-      {
-        "id": "many_years_old_news_16",
-        "text": "EDISON AUTOMOTIVES UNVEILS NEW SOLAR CAR.  \"These miracles of technology wouldn't be possible without the deregulations pioneered by President Toffer,\" said billionaire tech mogul Elton Moosek about his company's newest innovation.  \"Access to radioactive compounds and military-grade fuel cells has made this possible.  At this rate, we'll be flying solar sail spacecraft within my lifetime.\""
-      },
-      {
-        "id": "many_years_old_news_17",
-        "text": "REAL AI IN THE PALM OF YOUR HAND.  [Photograph: Dania Tang holds a new-generation heuristic processor, weighing a mere seventy grams.]  Engineers at MIT, working in conjunction with a funding grant from entrepreneur Elton Moosek, have unveiled a next-generation deep learning heuristic processor.  \"I'm hesitant to call it an artificial intelligence,\" spokesperson Dania Tang said of the new device, \"but it's the closest we've yet achieved.  It's able to instantly analyze dozens of possible outcomes of a future action and choose the best one, much like a human uses deductive reasoning.\"  Under a new startup, MindStone, the processors are reputedly already being contracted for military use."
+        "name": "SECRET SERVICE RAIDS GAME PUBLISHER",
+        "text": "A role-playing game and board game company was raided by secret service and documents seized due to alleged cybersecurity concerns.  An outcry among the fans of \"Cryptid Conspiracies: The Role-Playing Game,\" touted as the most realistic and researched look at modern conspiracy theory, has been met with no response at this time."
       },
       {
         "id": "many_years_old_news_18",
+        "name": "GENERAL PROMOTED ONBOARD OLD IRONSIDES",
         "text": {
-          "str": "GENERAL PROMOTED ONBOARD OLD IRONSIDES.  The USS Constitution was the site of a promotion ceremony held by the Massachusetts National Guard at the Charlestown Navy Yard.  Col. Ariel Dabrowski was promoted to the rank of brigadier general in the Massachusetts National Guard in front of a crowd massed on the deck of the historic ship.  General Carlsberg officiated the promotion ceremony, and Maj. Gen. Michael Baker administered the oath of office.",
+          "str": "GENERAL PROMOTED ONBOARD OLD IRONSIDES  The USS Constitution was the site of a promotion ceremony held by the Massachusetts National Guard at the Charlestown Navy Yard.  Col. Ariel Dabrowski was promoted to the rank of brigadier general in the Massachusetts National Guard in front of a crowd massed on the deck of the historic ship.  General Carlsberg officiated the promotion ceremony, and Maj. Gen. Michael Baker administered the oath of office.",
           "//NOLINT(cata-text-style)": "intentional format"
         }
       },
       {
         "id": "many_years_old_news_19",
+        "name": "THE FACE BEHIND THE 'UNCANNY' MASK",
         "text": {
-          "str": "THE FACE BEHIND THE 'UNCANNY' MASK.  Everyone knows about James Hawthorne, projected to become America's newest and fastest rising billionaire by next month as stock value in his tech startup, Uncanny, grows at unprecedented speeds.  We decided to explore the names behind the rise you might not have heard.  Dr. Marc Silverstein, an MIT-trained researcher formerly involved with Leapfrog Industries, has been along for the ride the whole time, and has come out nearly as wealthy as Hawthorne himself.  Though impressively reclusive, we managed to snag some pretty interesting information about Dr. S.  Could he be the real mind behind the rise?  How much does James depend on his right-hand scientist?  Details on page 12.",
+          "str": "THE FACE BEHIND THE 'UNCANNY' MASK  Everyone knows about James Hawthorne, projected to become America's newest and fastest rising billionaire by next month as stock value in his tech startup, Uncanny, grows at unprecedented speeds.  We decided to explore the names behind the rise you might not have heard.  Dr. Marc Silverstein, an MIT-trained researcher formerly involved with Leapfrog Industries, has been along for the ride the whole time, and has come out nearly as wealthy as Hawthorne himself.  Though impressively reclusive, we managed to snag some pretty interesting information about Dr. S.  Could he be the real mind behind the rise?  How much does James depend on his right-hand scientist?  Details on page 12.",
           "//NOLINT(cata-text-style)": "intentional format"
         }
       },
       {
         "id": "many_years_old_news_20",
+        "name": "FORMER RCI DIVISION PURCHASED BY FOREIGN INVESTORS",
         "text": {
           "str": "FORMER RCI DIVISION PURCHASED BY FOREIGN INVESTORS.  A former division of Rivet and Crimp Industries, a major subcontractor for national defense manufacturers, has recently been purchased by Taiwanese American tech billionaire Henry Gau.  CEO of Formosa OptoTech, Gau is known for his close relationship with Chinese suppliers and manufacturers. Branding the company Rivtech, the company will focus on competing in the US Next Generation Squad Weapons trial.  Rivet and Crimp Industries's former weapons manufactory division is previously known for manufacturing a pump-action grenade launcher entrant in the M32 Multiple Grenade Launcher Trial, embroiling RCI and tech partner Javelin Systems in a bitter, expensive legal battle.",
           "//NOLINT(cata-text-style)": "intentional format"

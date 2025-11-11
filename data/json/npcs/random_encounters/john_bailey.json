@@ -135,7 +135,7 @@
     "type": "item_group",
     "id": "john_bailey_quiver",
     "subtype": "collection",
-    "entries": [ { "item": "arrow_cf", "count": 18 } ]
+    "entries": [ { "item": "arrow_cf", "count": 12 } ]
   },
   {
     "type": "talk_topic",
@@ -150,7 +150,7 @@
       "effect": [
         { "u_add_var": "u_met_John_Bailey", "value": "yes" },
         { "npc_first_topic": "TALK_RC_John_Bailey_1a" },
-        { "math": [ "n_zkc_john", "=", "2 * time_since('cataclysm', 'unit': 'days')" ] },
+        { "math": [ "n_zkc_john = 2 * time_since('cataclysm', 'unit': 'days')" ] },
         { "math": [ "n_zkc_john", "+=", "rand(10)" ] }
       ]
     },

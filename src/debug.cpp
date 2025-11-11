@@ -314,11 +314,11 @@ static void debug_error_prompt(
 
     std::string formatted_report =
         string_format( // developer-facing error report. INTENTIONALLY UNTRANSLATED!
-            " DEBUG    : %s\n\n"
-            " FUNCTION : %s\n"
-            " FILE     : %s\n"
-            " LINE     : %s\n"
-            " VERSION  : %s\n",
+            " DEBUG : %s\n\n"
+            " REPORTING FUNCTION : %s\n"
+            " C++ SOURCE FILE    : %s\n"
+            " LINE               : %s\n"
+            " VERSION            : %s\n",
             text, funcname, filename, line, getVersionString()
         );
 
@@ -366,7 +366,7 @@ static void debug_error_prompt(
                                 );
     ui.on_redraw( [&]( const ui_adaptor & ) {
         catacurses::erase();
-        fold_and_print( catacurses::stdscr, point_zero, getmaxx( catacurses::stdscr ), c_light_red,
+        fold_and_print( catacurses::stdscr, point::zero, getmaxx( catacurses::stdscr ), c_light_red,
                         "%s", message );
         wnoutrefresh( catacurses::stdscr );
     } );
@@ -704,7 +704,7 @@ void DebugFile::init( DebugOutput output_mode, const std::string &filename )
                 }
             }
             file = std::make_shared<std::ofstream>(
-                       fs::u8path( filename ), std::ios::out | std::ios::app );
+                       std::filesystem::u8path( filename ), std::ios::out | std::ios::app );
             *file << "\n\n-----------------------------------------\n";
             *file << get_time() << " : Starting log.";
             DebugLog( D_INFO, D_MAIN ) << "Cataclysm TLG version " << getVersionString();

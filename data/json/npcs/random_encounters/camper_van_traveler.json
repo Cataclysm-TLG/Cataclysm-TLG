@@ -74,7 +74,7 @@
           ]
         },
         "effect": [
-          { "math": [ "npc_randomize_dialogue_direction", "=", "rand(4)" ] },
+          { "math": [ "npc_randomize_dialogue_direction = rand(3)" ] },
           { "npc_add_var": "dialogue_camper_van_traveler_gave_directions", "value": "yes" }
         ],
         "switch": true

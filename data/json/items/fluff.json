@@ -71,7 +71,7 @@
   {
     "type": "TOOL_ARMOR",
     "id": "pom_poms",
-    "name": { "str": "pair of pom poms", "str_pl": "pairs of pom poms" },
+    "name": { "str": "pom poms", "str_pl": "pairs of pom poms" },
     "category": "other",
     "weight": "150 g",
     "color": "red",
@@ -1404,7 +1404,7 @@
     "color": "light_gray",
     "sided": true,
     "material_thickness": 2,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
+    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS" ],
     "armor": [ { "encumbrance": 45, "coverage": 10, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ],
     "melee_damage": { "bash": 16 }
   },
@@ -1563,7 +1563,7 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE" ]
+    "flags": [ "NO_SALVAGE", "MISSION_ITEM" ]
   },
   {
     "id": "glass_apple",
@@ -1579,7 +1579,7 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE" ]
+    "flags": [ "NO_SALVAGE", "MISSION_ITEM" ]
   },
   {
     "id": "glass_boat",
@@ -1594,7 +1594,7 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE" ]
+    "flags": [ "NO_SALVAGE", "MISSION_ITEM" ]
   },
   {
     "type": "GENERIC",

@@ -42,7 +42,7 @@ int get_remaining_charges( const std::string &tool_id )
     } );
     int remaining_charges = 0;
     for( const item *instance : items ) {
-        remaining_charges += instance->ammo_remaining();
+        remaining_charges += instance->ammo_remaining( );
     }
     return remaining_charges;
 }
@@ -68,6 +68,8 @@ bool character_has_item_with_var_val( const Character &they, const std::string &
 
 void clear_character( Character &dummy, bool skip_nutrition )
 {
+    map &here = get_map();
+
     dummy.set_body();
     dummy.normalize(); // In particular this clears martial arts style
 
@@ -144,8 +146,8 @@ void clear_character( Character &dummy, bool skip_nutrition )
 
     dummy.cash = 0;
 
-    const tripoint spot( 60, 60, 0 );
-    dummy.setpos( spot );
+    const tripoint_bub_ms spot( 60, 60, 0 );
+    dummy.setpos( here, spot );
     dummy.clear_values();
     dummy.magic = pimpl<known_magic>();
     dummy.forget_all_recipes();
@@ -218,12 +220,15 @@ void equip_shooter( npc &shooter, const std::vector<std::string> &apparel )
     }
 }
 
-void process_activity( Character &dummy )
+void process_activity( Character &dummy, bool pass_time )
 {
     do {
         dummy.mod_moves( dummy.get_speed() );
         while( dummy.get_moves() > 0 && dummy.activity ) {
             dummy.activity.do_turn( dummy );
+            if( pass_time ) {
+                calendar::turn += 1_seconds;
+            }
         }
     } while( dummy.activity );
 }

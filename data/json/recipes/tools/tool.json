@@ -48,83 +48,6 @@
     ]
   },
   {
-    "type": "recipe",
-    "activity_level": "ACTIVE_EXERCISE",
-    "result": "polesaw_off",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "mechanics",
-    "difficulty": 4,
-    "time": "5 h",
-    "reversible": true,
-    "decomp_learn": 4,
-    "//": "80cm weld",
-    "book_learn": [ [ "book_icef", 3 ], [ "textbook_mechanics", 3 ], [ "textbook_carpentry", 3 ] ],
-    "using": [ [ "welding_standard", 80 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
-      { "proficiency": "prof_welding" }
-    ],
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [
-      [ [ "1cyl_combustion_small", 1 ] ],
-      [ [ "metal_tank_little", 1 ] ],
-      [ [ "chain", 1 ] ],
-      [ [ "scrap", 5 ] ],
-      [ [ "pipe", 2 ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "ACTIVE_EXERCISE",
-    "result": "chainsaw_off",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "mechanics",
-    "difficulty": 4,
-    "time": "5 h",
-    "reversible": true,
-    "decomp_learn": 4,
-    "//": "75cm weld",
-    "book_learn": [ [ "book_icef", 3 ], [ "textbook_mechanics", 3 ], [ "textbook_carpentry", 3 ] ],
-    "using": [ [ "welding_standard", 75 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
-      { "proficiency": "prof_welding" }
-    ],
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "1cyl_combustion_small", 1 ] ], [ [ "metal_tank_little", 1 ] ], [ [ "chain", 1 ] ], [ [ "scrap", 3 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "MODERATE_EXERCISE",
-    "result": "jackhammer",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "mechanics",
-    "difficulty": 5,
-    "time": "6 h",
-    "reversible": true,
-    "decomp_learn": 5,
-    "//": "80cm weld",
-    "book_learn": [ [ "textbook_mechanics", 5 ], [ "textbook_carpentry", 5 ], [ "book_icef", 6 ] ],
-    "using": [ [ "welding_standard", 80 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_welding_basic", "skill_penalty": 0.5 },
-      { "proficiency": "prof_welding" }
-    ],
-    "qualities": [ { "id": "HAMMER", "level": 3 }, { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [
-      [ [ "1cyl_combustion", 1 ], [ "1cyl_combustion_small", 1 ] ],
-      [ [ "metal_tank_little", 1 ] ],
-      [ [ "rebar", 2 ], [ "steel_chunk", 4 ] ],
-      [ [ "scrap", 3 ] ]
-    ]
-  },
-  {
     "result": "g_shovel",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
@@ -197,7 +120,11 @@
     "time": "5 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "nails", 1, "LIST" ], [ "crude_bronze_nail", 1 ] ] ]
+    "components": [
+      [ [ "stick", 2 ] ],
+      [ [ "nails", 1, "LIST" ], [ "crude_bronze_nail", 1 ] ],
+      [ [ "cordage_36", 1 ], [ "string_36", 1 ], [ "cordage_36_leather", 1 ] ]
+    ]
   },
   {
     "result": "shed_stick",
@@ -366,9 +293,8 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [ [ [ "scrap_bronze", 5 ] ] ]
   },
   {
@@ -524,7 +450,7 @@
     ],
     "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
     "using": [ [ "sewing_standard", 100 ], [ "cordage", 2 ] ],
-    "components": [ [ [ "leather", 30 ], [ "tanned_hide", 5 ], [ "fur", 30 ], [ "tanned_pelt", 5 ] ], [ [ "wire", 2 ] ] ]
+    "components": [ [ [ "leather", 30 ], [ "sheet_leather", 5 ], [ "fur", 30 ], [ "tanned_pelt", 5 ] ], [ [ "wire", 2 ] ] ]
   },
   {
     "result": "jack",
@@ -952,7 +878,7 @@
     "reversible": true,
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 10, "LIST" ], [ "forge", 10 ], [ "oxy_torch", 2 ] ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
     "components": [ [ [ "copper_scrap_equivalent", 2, "LIST" ] ] ]
   },
   {
@@ -1221,7 +1147,7 @@
       { "proficiency": "prof_toolsmithing" }
     ],
     "using": [ [ "forging_scrap", 2 ] ],
-    "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 }, { "id": "CHISEL", "level": 3 } ],
+    "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
     "components": [ [ [ "scrap", 2 ] ] ]
@@ -1242,7 +1168,7 @@
       { "proficiency": "prof_toolsmithing" }
     ],
     "using": [ [ "forging_scrap", 2 ] ],
-    "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 }, { "id": "CHISEL", "level": 2 } ],
+    "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
     "components": [ [ [ "scrap_bronze", 2 ] ] ]

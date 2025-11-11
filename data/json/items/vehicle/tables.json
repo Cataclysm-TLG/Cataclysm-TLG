@@ -15,6 +15,7 @@
     "category": "veh_parts",
     "price": "200 USD",
     "price_postapoc": "1 USD",
+    "use_action": { "type": "deploy_furn", "furn_type": "f_table_fancy" },
     "melee_damage": { "bash": 6 }
   },
   {
@@ -23,6 +24,7 @@
     "name": { "str": "wooden table" },
     "description": "A crude wooden table.",
     "weight": "10071 g",
+    "use_action": { "type": "deploy_furn", "furn_type": "f_table" },
     "copy-from": "v_table"
   },
   {
@@ -37,17 +39,7 @@
     "material": [ "wood", "steel" ],
     "price": "120 USD",
     "copy-from": "v_table",
+    "use_action": { "type": "deploy_furn", "furn_type": "f_workbench" },
     "melee_damage": { "bash": 8 }
-  },
-  {
-    "type": "GENERIC",
-    "id": "workbench_with_recharger",
-    "name": { "str": "workbench with battery recharger", "str_pl": "workbenches with battery rechargers" },
-    "description": "A sturdy metal workbench, perfect for crafting large and heavy things.  It also has a built-in battery charger for your phone.",
-    "weight": "20370 g",
-    "flags": [ "TRADER_AVOID" ],
-    "price": "400 USD",
-    "price_postapoc": "1 USD",
-    "copy-from": "workbench"
   }
 ]

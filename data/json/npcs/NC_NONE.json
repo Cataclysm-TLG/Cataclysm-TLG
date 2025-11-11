@@ -66,9 +66,8 @@
       [ "knife_combat", 3 ],
       [ "knife_KABAR", 1 ],
       [ "spear_wood", 6 ],
-      [ "spear_knife_proper", 1 ],
-      [ "spear_steel_crude", 1 ],
-      [ "spear_pipe", 1 ]
+      [ "spear_knife", 1 ],
+      [ "spear_steel", 1 ]
     ]
   },
   {
@@ -123,7 +122,6 @@
       [ "hoe", 5 ],
       [ "cavalry_sabre", 1 ],
       [ "katana", 1 ],
-      [ "katana_inferior", 1 ],
       [ "kukri", 1 ]
     ]
   },

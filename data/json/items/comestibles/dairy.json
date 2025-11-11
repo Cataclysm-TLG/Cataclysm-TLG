@@ -133,6 +133,7 @@
     "material": [ "milk" ],
     "volume": "15 ml",
     "flags": [ "NO_AUTO_CONSUME" ],
+    "use_action": [ "BLECH" ],
     "fun": -1,
     "vitamins": [ [ "milk_allergen", 1 ] ]
   },
@@ -413,7 +414,6 @@
     "material": [ "powder", "milk" ],
     "primary_material": "powder",
     "volume": "62 ml",
-    "cooks_like": "milk",
     "flags": [ "EDIBLE_FROZEN" ],
     "vitamins": [ [ "vitC", 1 ], [ "calcium", 7 ], [ "milk_allergen", 1 ] ],
     "fun": -5,

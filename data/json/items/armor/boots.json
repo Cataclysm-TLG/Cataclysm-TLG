@@ -2,7 +2,7 @@
   {
     "id": "bastsandals",
     "type": "ARMOR",
-    "name": { "str": "pair of cord sandals", "str_pl": "pairs of cord sandals" },
+    "name": { "str": "cord sandals", "str_pl": "pairs of cord sandals" },
     "description": "Lightweight sandals made from wound cord.  They offer little in the way of protection, but keep you cool during warmer months.",
     "weight": "68 g",
     "volume": "250 ml",
@@ -45,7 +45,7 @@
   {
     "id": "boots",
     "type": "ARMOR",
-    "name": { "str": "pair of boots", "str_pl": "pairs of boots" },
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
     "description": "A relatively lightweight pair of leather boots.",
     "weight": "1060 g",
     "volume": "2500 ml",
@@ -88,7 +88,7 @@
   {
     "id": "xl_boots",
     "type": "ARMOR",
-    "name": { "str": "pair of boots", "str_pl": "pairs of boots" },
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
     "copy-from": "boots",
     "proportional": { "weight": 1.25, "volume": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -98,7 +98,7 @@
     "type": "ARMOR",
     "copy-from": "boots",
     "looks_like": "boots",
-    "name": { "str": "pair of boots", "str_pl": "pairs of boots" },
+    "name": { "str": "boots", "str_pl": "pairs of boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -106,7 +106,7 @@
     "id": "boots_bunker",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of turnout boots", "str_pl": "pairs of turnout boots" },
+    "name": { "str": "turnout boots", "str_pl": "pairs of turnout boots" },
     "description": "A pair of steel-toed rubber boots, the sort worn by firefighters.",
     "weight": "1930 g",
     "volume": "3500 ml",
@@ -166,7 +166,7 @@
     "id": "boots_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of chitinous boots", "str_pl": "pairs of chitinous boots" },
+    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
     "description": "Apart from the fasteners and the bits holding the material together, these boots are made entirely from arthropod exoskeleton.",
     "weight": "1620 g",
     "volume": "4250 ml",
@@ -201,7 +201,7 @@
   {
     "id": "xl_boots_chitin",
     "type": "ARMOR",
-    "name": { "str": "pair of chitinous boots", "str_pl": "pairs of chitinous boots" },
+    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
     "copy-from": "boots_chitin",
     "proportional": { "weight": 1.25, "volume": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -211,7 +211,7 @@
     "type": "ARMOR",
     "copy-from": "boots_chitin",
     "looks_like": "boots_chitin",
-    "name": { "str": "pair of chitinous boots", "str_pl": "pairs of chitinous boots" },
+    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -219,7 +219,7 @@
     "id": "boots_acidchitin",
     "copy-from": "boots_chitin",
     "type": "ARMOR",
-    "name": { "str": "pair of biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
+    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
     "description": "Boots crafted from glassy-looking arthropod exoskeleton.  The material is a little more brittle, but might withstand fire and acid better than the regular stuff.",
     "price_postapoc": "17 USD 50 cent",
     "material": [ "acidchitin" ],
@@ -228,7 +228,7 @@
   {
     "id": "xl_boots_acidchitin",
     "type": "ARMOR",
-    "name": { "str": "pair of biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
+    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
     "copy-from": "boots_acidchitin",
     "proportional": { "weight": 1.25, "volume": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -237,7 +237,7 @@
     "id": "xs_boots_acidchitin",
     "type": "ARMOR",
     "copy-from": "boots_acidchitin",
-    "name": { "str": "pair of biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
+    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -245,7 +245,7 @@
     "id": "boots_combat",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of combat boots", "str_pl": "pairs of combat boots" },
+    "name": { "str": "combat boots", "str_pl": "pairs of combat boots" },
     "//": "These are not punk rock boots, they're a vague example of typical US army temperate weather boot. Rockers wear boots or steel-toed boots.",
     "description": "Solid but surprisingly lightweight boots made from a combination of suede and nylon duck.  Possibly the most important part of a service member's uniform.",
     "weight": "1060 g",
@@ -298,7 +298,7 @@
     "id": "foot_protectors_eod",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of EOD foot protectors", "str_pl": "pairs of EOD foot protectors" },
+    "name": { "str": "EOD foot protectors", "str_pl": "pairs of EOD foot protectors" },
     "description": "Armored foot protectors constructed from steel and Nomex for use by explosive ordnance disposal technicians.",
     "weight": "1220 g",
     "volume": "3 L",
@@ -337,7 +337,7 @@
   {
     "id": "boots_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of fur boots", "str_pl": "pairs of fur boots" },
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
     "description": "Leather boots, lined with fur for warmth.",
     "weight": "1890 g",
     "volume": "4500 ml",
@@ -388,7 +388,7 @@
   {
     "id": "xl_boots_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of fur boots", "str_pl": "pairs of fur boots" },
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
     "copy-from": "boots_fur",
     "proportional": { "weight": 1.15, "volume": 1.15 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -397,14 +397,14 @@
     "id": "xs_boots_fur",
     "type": "ARMOR",
     "copy-from": "boots_fur",
-    "name": { "str": "pair of fur boots", "str_pl": "pairs of fur boots" },
+    "name": { "str": "fur boots", "str_pl": "pairs of fur boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "boots_faux_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
     "description": "Boots made of durable nylon duck with faux fur lining for warmth.",
     "weight": "1890 g",
     "volume": "4500 ml",
@@ -455,7 +455,7 @@
   {
     "id": "xl_boots_faux_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
     "copy-from": "boots_faux_fur",
     "proportional": { "weight": 1.15, "volume": 1.15 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -464,14 +464,14 @@
     "id": "xs_boots_faux_fur",
     "type": "ARMOR",
     "copy-from": "boots_faux_fur",
-    "name": { "str": "pair of faux fur boots", "str_pl": "pairs of faux fur boots" },
+    "name": { "str": "faux fur boots", "str_pl": "pairs of faux fur boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "boots_hiking",
     "type": "ARMOR",
-    "name": { "str": "pair of hiking boots", "str_pl": "pairs of hiking boots" },
+    "name": { "str": "hiking boots", "str_pl": "pairs of hiking boots" },
     "description": "Tough yet light leather boots, intended for outdoor activity.",
     "weight": "1100 g",
     "volume": "2500 ml",
@@ -515,7 +515,7 @@
     "id": "boots_plate",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of armored boots", "str_pl": "pairs of armored boots" },
+    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
     "description": "Leather boots armor-plated with squares of sheet metal.",
     "weight": "2200 g",
     "volume": "3250 ml",
@@ -562,7 +562,7 @@
   {
     "id": "xl_boots_plate",
     "type": "ARMOR",
-    "name": { "str": "pair of armored boots", "str_pl": "pairs of armored boots" },
+    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
     "copy-from": "boots_plate",
     "proportional": { "weight": 1.25, "volume": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -571,14 +571,14 @@
     "id": "xs_boots_plate",
     "type": "ARMOR",
     "copy-from": "boots_plate",
-    "name": { "str": "pair of armored boots", "str_pl": "pairs of armored boots" },
+    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "boots_rubber",
     "type": "ARMOR",
-    "name": { "str": "pair of rubber boots", "str_pl": "pairs of rubber boots" },
+    "name": { "str": "rubber boots", "str_pl": "pairs of rubber boots" },
     "description": "A pair of rubber work boots, often used while cleaning with caustic materials.",
     "weight": "980 g",
     "volume": "3500 ml",
@@ -619,7 +619,7 @@
     "id": "boots_steel",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of steeltoed boots", "str_pl": "pairs of steeltoed boots" },
+    "name": { "str": "steeltoed boots", "str_pl": "pairs of steeltoed boots" },
     "description": "Heavy boots made of chemical-resistant treated leather with steel toecaps.  Great for the jobsite or for stomping the undead",
     "weight": "2220 g",
     "volume": "3 L",
@@ -671,7 +671,7 @@
     "id": "sneakers_steel",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of steeltoed sneakers", "str_pl": "pairs of steeltoed sneakers" },
+    "name": { "str": "steeltoed sneakers", "str_pl": "pairs of steeltoed sneakers" },
     "description": "A descendant of the classic steeltoed boot, this modern footwear has become popular amongst working class people over the last couple of decades.",
     "weight": "900 g",
     "volume": "1500 ml",
@@ -725,7 +725,7 @@
     "id": "boots_western",
     "copy-from": "boots",
     "type": "ARMOR",
-    "name": { "str": "pair of western boots", "str_pl": "pairs of western boots" },
+    "name": { "str": "western boots", "str_pl": "pairs of western boots" },
     "description": "Stiff leather cowboy boots with pointed toes and a low heel.  The wide cuffs could be used as ad hoc pockets, or maybe even holsters.",
     "price_postapoc": "7 USD 50 cent",
     "material": [ "leather_treated" ],
@@ -769,7 +769,7 @@
   {
     "id": "boots_winter",
     "type": "ARMOR",
-    "name": { "str": "pair of winter boots", "str_pl": "pairs of winter boots" },
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
     "description": "Wool-lined boots designed for warmth.",
     "weight": "1640 g",
     "volume": "3500 ml",
@@ -818,7 +818,7 @@
   {
     "id": "xl_boots_winter",
     "type": "ARMOR",
-    "name": { "str": "pair of winter boots", "str_pl": "pairs of winter boots" },
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
     "copy-from": "boots_winter",
     "proportional": { "weight": 1.3, "volume": 1.3 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -827,14 +827,14 @@
     "id": "xs_boots_winter",
     "type": "ARMOR",
     "copy-from": "boots_winter",
-    "name": { "str": "pair of winter boots", "str_pl": "pairs of winter boots" },
+    "name": { "str": "winter boots", "str_pl": "pairs of winter boots" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "cleats",
     "type": "ARMOR",
-    "name": { "str": "pair of cleats", "str_pl": "pairs of cleats" },
+    "name": { "str": "cleats", "str_pl": "pairs of cleats" },
     "description": "Sport shoes with hard undersides and studs on the bottom designed to dig into grass.",
     "weight": "860 g",
     "volume": "1500 ml",
@@ -883,7 +883,7 @@
   {
     "id": "golf_shoes",
     "type": "ARMOR",
-    "name": { "str": "pair of golf shoes", "str_pl": "pairs of golf shoes" },
+    "name": { "str": "golf shoes", "str_pl": "pairs of golf shoes" },
     "description": "Snug sport shoes with hard ridges on the bottom.",
     "weight": "820 g",
     "volume": "1500 ml",
@@ -931,7 +931,7 @@
   {
     "id": "clogs",
     "type": "ARMOR",
-    "name": { "str": "pair of wooden clogs", "str_pl": "pairs of wooden clogs" },
+    "name": { "str": "wooden clogs", "str_pl": "pairs of wooden clogs" },
     "description": "Known as klompen in the Netherlands and sabots in France, these wooden shoes have endured through the ages due to their simple design and durability.",
     "weight": "916 g",
     "volume": "1250 ml",
@@ -972,7 +972,7 @@
   {
     "id": "clownshoes",
     "type": "ARMOR",
-    "name": { "str": "pair of clown shoes", "str_pl": "pairs of clown shoes" },
+    "name": { "str": "clown shoes", "str_pl": "pairs of clown shoes" },
     "description": "Gigantic shoes fit for a clown.  They would be very difficult to run in, and fighting in them seems like a terrible idea.",
     "weight": "1140 g",
     "volume": "3500 ml",
@@ -1015,7 +1015,7 @@
   {
     "id": "dress_shoes",
     "type": "ARMOR",
-    "name": { "str": "pair of dress shoes", "str_pl": "pairs of dress shoes" },
+    "name": { "str": "dress shoes", "str_pl": "pairs of dress shoes" },
     "description": "Fancy leather shoes, not designed for running.",
     "weight": "870 g",
     "volume": "1500 ml",
@@ -1058,7 +1058,7 @@
   {
     "id": "flip_flops",
     "type": "ARMOR",
-    "name": { "str": "pair of flip-flops", "str_pl": "pairs of flip-flops" },
+    "name": { "str": "flip-flops", "str_pl": "pairs of flip-flops" },
     "description": "Simple sandals.  Somewhat difficult to run in.",
     "weight": "62 g",
     "volume": "850 ml",
@@ -1089,7 +1089,7 @@
   {
     "id": "flip_flops_exp",
     "type": "ARMOR",
-    "name": { "str": "pair of expensive flip-flops", "str_pl": "pairs of expensive flip-flops" },
+    "name": { "str": "expensive flip-flops", "str_pl": "pairs of expensive flip-flops" },
     "description": "These flip-flops are branded with a designer logo.  It does not make them any easier to run in.",
     "weight": "170 g",
     "volume": "850 ml",
@@ -1122,7 +1122,7 @@
   {
     "id": "footrags",
     "type": "ARMOR",
-    "name": { "str": "pair of foot rags", "str_pl": "pairs of foot rags" },
+    "name": { "str": "foot rags", "str_pl": "pairs of foot rags" },
     "description": "Rags tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "56 g",
     "volume": "250 ml",
@@ -1148,7 +1148,7 @@
   {
     "id": "footrags_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of fur foot wraps", "str_pl": "pairs of fur foot wraps" },
+    "name": { "str": "fur foot wraps", "str_pl": "pairs of fur foot wraps" },
     "description": "Fur pelts tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "135 g",
     "volume": "500 ml",
@@ -1174,7 +1174,7 @@
   {
     "id": "footrags_faux_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of faux fur foot wraps", "str_pl": "pairs of faux fur foot wraps" },
+    "name": { "str": "faux fur foot wraps", "str_pl": "pairs of faux fur foot wraps" },
     "description": "Faux fur patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "135 g",
     "volume": "500 ml",
@@ -1200,7 +1200,7 @@
   {
     "id": "footrags_leather",
     "type": "ARMOR",
-    "name": { "str": "pair of leather foot wraps", "str_pl": "pairs of leather foot wraps" },
+    "name": { "str": "leather foot wraps", "str_pl": "pairs of leather foot wraps" },
     "description": "Leather patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "120 g",
     "volume": "500 ml",
@@ -1226,7 +1226,7 @@
   {
     "id": "footrags_wool",
     "type": "ARMOR",
-    "name": { "str": "pair of wool foot wraps", "str_pl": "pairs of wool foot wraps" },
+    "name": { "str": "wool foot wraps", "str_pl": "pairs of wool foot wraps" },
     "description": "Felt patches tied around your feet.  Not much of an improvement over being barefoot, but still better than nothing.",
     "weight": "56 g",
     "volume": "250 ml",
@@ -1252,7 +1252,7 @@
   {
     "id": "footrags_nomex",
     "type": "ARMOR",
-    "name": { "str": "pair of Nomex foot wraps", "str_pl": "pairs of Nomex foot wraps" },
+    "name": { "str": "Nomex foot wraps", "str_pl": "pairs of Nomex foot wraps" },
     "description": "Strips of fireproof fabric that can be tied around the feet.  These leave a lot to be desired, but they might be better than nothing.",
     "weight": "56 g",
     "volume": "250 ml",
@@ -1278,7 +1278,7 @@
   {
     "id": "geta",
     "type": "ARMOR",
-    "name": { "str": "pair of geta", "str_pl": "pairs of geta" },
+    "name": { "str": "geta", "str_pl": "pairs of geta" },
     "description": "A pair of Japanese clogs consisting of solid wooden soles and toe straps to hold them on.",
     "weight": "460 g",
     "volume": "1 L",
@@ -1316,7 +1316,7 @@
   {
     "id": "heels",
     "type": "ARMOR",
-    "name": { "str": "pair of heels", "str_pl": "pairs of heels" },
+    "name": { "str": "heels", "str_pl": "pairs of heels" },
     "description": "A pair of high heeled shoes, impractical for running or fighting.",
     "weight": "640 g",
     "volume": "750 ml",
@@ -1354,7 +1354,7 @@
   {
     "id": "knee_high_boots",
     "type": "ARMOR",
-    "name": { "str": "pair of knee-high boots", "str_pl": "pairs of knee-high boots" },
+    "name": { "str": "knee-high boots", "str_pl": "pairs of knee-high boots" },
     "description": "Boots with a cuff that extends up to the knee.  Their heels are sensibly low, but still don't look terribly suited to running away from monsters during the end of the world.",
     "weight": "1520 g",
     "volume": "3750 ml",
@@ -1412,7 +1412,7 @@
   {
     "id": "motor_police_boots",
     "type": "ARMOR",
-    "name": { "str": "pair of motorcycle police boots", "str_pl": "pairs of motorcycle police boots" },
+    "name": { "str": "motorcycle police boots", "str_pl": "pairs of motorcycle police boots" },
     "description": "Custom-made knee-high leather boots issued to motor officers.  Warm, durable and quite tough.",
     "weight": "1520 g",
     "volume": "3750 ml",
@@ -1467,7 +1467,7 @@
   {
     "id": "leathersandals",
     "type": "ARMOR",
-    "name": { "str": "pair of leather sandals", "str_pl": "pairs of leather sandals" },
+    "name": { "str": "leather sandals", "str_pl": "pairs of leather sandals" },
     "description": "Sturdy leather hiking sandals with a heel strap, suitable for outdoor adventuring in warm weather.",
     "weight": "675 g",
     "//": "weight is based on an average of between 1 and 2 lbs for various hiking sandals IRL.",
@@ -1508,7 +1508,7 @@
   {
     "id": "lowtops",
     "type": "ARMOR",
-    "name": { "str": "pair of lowtop tennis shoes", "str_pl": "pairs of lowtop tennis shoes" },
+    "name": { "str": "lowtop tennis shoes", "str_pl": "pairs of lowtop tennis shoes" },
     "description": "Lightweight shoes made of cloth and rubber.",
     "weight": "114 g",
     "volume": "750 ml",
@@ -1550,7 +1550,7 @@
   {
     "id": "mocassins",
     "type": "ARMOR",
-    "name": { "str": "pair of moccasins", "str_pl": "pairs of moccasins" },
+    "name": { "str": "moccasins", "str_pl": "pairs of moccasins" },
     "description": "A type of traditional Native American footwear sewn out of leather.",
     "weight": "230 g",
     "volume": "500 ml",
@@ -1588,7 +1588,7 @@
   {
     "id": "mocassins_fur",
     "type": "ARMOR",
-    "name": { "str": "pair of moccasins", "str_pl": "pairs of moccasins" },
+    "name": { "str": "moccasins", "str_pl": "pairs of moccasins" },
     "description": "A type of traditional Native American footwear sewn out of fur.",
     "weight": "230 g",
     "volume": "500 ml",
@@ -1627,7 +1627,7 @@
     "id": "motorbike_boots",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of motorcycle boots", "str_pl": "pairs of motorcycle boots" },
+    "name": { "str": "motorcycle boots", "str_pl": "pairs of motorcycle boots" },
     "description": "A pair of durable boots used by dirt bikers and motorcyclists.",
     "weight": "2125 g",
     "volume": "2 L",
@@ -1675,7 +1675,7 @@
   {
     "id": "roller_blades",
     "type": "ARMOR",
-    "name": { "str": "pair of rollerblades", "str_pl": "pairs of rollerblades" },
+    "name": { "str": "rollerblades", "str_pl": "pairs of rollerblades" },
     "description": "A pair of inline skates.  Very fast on flat floors, but they make it hard to move on rough terrain, take hits, or dodge effectively.",
     "weight": "1640 g",
     "volume": "3750 ml",
@@ -1725,7 +1725,7 @@
   {
     "id": "rollerskates",
     "type": "ARMOR",
-    "name": { "str": "pair of rollerskates", "str_pl": "pairs of rollerskates" },
+    "name": { "str": "rollerskates", "str_pl": "pairs of rollerskates" },
     "description": "An old-fashioned pair of leather rollerskates with steel frames.  While quite fast on flat floors, they make it difficult to take hits or to move on rough terrain.",
     "weight": "2720 g",
     "volume": "3 L",
@@ -1778,7 +1778,7 @@
   {
     "id": "shoes_birchbark",
     "type": "ARMOR",
-    "name": { "str": "pair of birchbark shoes", "str_pl": "pairs of birchbark shoes" },
+    "name": { "str": "birchbark shoes", "str_pl": "pairs of birchbark shoes" },
     "description": "Simple shoes woven from strips of flexible bark from a birch tree.  They're not especially comfortable, but might be better than going barefoot.",
     "weight": "345 g",
     "volume": "500 ml",
@@ -1816,7 +1816,7 @@
   {
     "id": "shoes_bowling",
     "type": "ARMOR",
-    "name": { "str": "pair of bowling shoes", "str_pl": "pairs of bowling shoes" },
+    "name": { "str": "bowling shoes", "str_pl": "pairs of bowling shoes" },
     "description": "A pair of flat-soled shoes for use in bowling alleys.",
     "weight": "840 g",
     "volume": "1500 ml",
@@ -1863,7 +1863,7 @@
   {
     "id": "slippers",
     "type": "ARMOR",
-    "name": { "str": "pair of slippers", "str_pl": "pairs of slippers" },
+    "name": { "str": "slippers", "str_pl": "pairs of slippers" },
     "description": "Soft indoor shoes that keep your feet warm.  They're not great for much else.",
     "weight": "70 g",
     "volume": "250 ml",
@@ -1911,7 +1911,7 @@
   {
     "id": "shoes_slip_on",
     "type": "ARMOR",
-    "name": { "str": "pair of slip-on shoes", "str_pl": "pairs of slip-on shoes" },
+    "name": { "str": "slip-on shoes", "str_pl": "pairs of slip-on shoes" },
     "description": "Lightweight cloth shoes with no ties, meant to be worn without socks.",
     "weight": "420 g",
     "volume": "1200 ml",
@@ -1945,7 +1945,7 @@
   {
     "id": "sneakers",
     "type": "ARMOR",
-    "name": { "str": "pair of sneakers", "str_pl": "pairs of sneakers" },
+    "name": { "str": "sneakers", "str_pl": "pairs of sneakers" },
     "description": "Athletic shoes, designed for running.",
     "weight": "840 g",
     "volume": "1500 ml",
@@ -1986,7 +1986,7 @@
   {
     "id": "straw_sandals",
     "type": "ARMOR",
-    "name": { "str": "pair of straw sandals", "str_pl": "pairs of straw sandals" },
+    "name": { "str": "straw sandals", "str_pl": "pairs of straw sandals" },
     "description": "Sandals made from straw cordage.  Not very comfortable, but can keep your feet safe.",
     "weight": "70 g",
     "volume": "500 ml",
@@ -2026,7 +2026,7 @@
   {
     "id": "thigh_high_boots",
     "type": "ARMOR",
-    "name": { "str": "pair of thigh-high boots", "str_pl": "pairs of thigh-high boots" },
+    "name": { "str": "thigh-high boots", "str_pl": "pairs of thigh-high boots" },
     "description": "High-heeled boots that extend all the way up past the knees, these are the sort of thing you would have seen on a stripper or at a halloween party.",
     "weight": "1540 g",
     "volume": "4250 ml",
@@ -2091,7 +2091,7 @@
   {
     "id": "roller_shoes_off",
     "type": "ARMOR",
-    "name": { "str": "pair of heelys (off)", "str_pl": "pairs of heelys (off)" },
+    "name": { "str": "heelys (off)", "str_pl": "pairs of heelys (off)" },
     "description": "A pair of sneakers with integrated wheels hidden in their very thick soles.  Currently the wheels are retracted, making these almost normal lace-up athletic shoes.",
     "weight": "840 g",
     "volume": "1500 ml",
@@ -2139,7 +2139,7 @@
   {
     "id": "roller_shoes_on",
     "type": "ARMOR",
-    "name": { "str": "pair of heelys (on)", "str_pl": "pairs of heelys (on)" },
+    "name": { "str": "heelys (on)", "str_pl": "pairs of heelys (on)" },
     "description": "A pair of sneakers with integrated wheels, currently the wheels are out, allowing you to swiftly roll around on flat terrain.  You should probably pop them back in before you try fighting or going off-road.",
     "weight": "840 g",
     "volume": "1500 ml",
@@ -2195,7 +2195,7 @@
     "id": "platemail_sollerets",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "pair of plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
     "description": "Also known as sabatons, these steel boot covers are meant to be strapped on over a pair of shoes.",
     "weight": "1801 g",
     "volume": "500 ml",
@@ -2233,7 +2233,7 @@
     "id": "platemail_sollerets_xl",
     "type": "ARMOR",
     "copy-from": "platemail_sollerets",
-    "name": { "str": "pair of plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -2241,14 +2241,14 @@
     "id": "platemail_sollerets_xs",
     "type": "ARMOR",
     "copy-from": "platemail_sollerets",
-    "name": { "str": "pair of plate sollerets", "str_pl": "pairs of plate sollerets" },
+    "name": { "str": "plate sollerets", "str_pl": "pairs of plate sollerets" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "nomex_socks",
     "type": "ARMOR",
-    "name": { "str": "pair of flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
     "description": "A snug-fitting pair of stockings made from thin and lightweight Nomex fabric.",
     "weight": "200 g",
     "volume": "750 ml",
@@ -2291,7 +2291,7 @@
   {
     "id": "xlnomex_socks",
     "type": "ARMOR",
-    "name": { "str": "pair of flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
     "weight": "300 g",
     "volume": "1000 ml",
     "copy-from": "nomex_socks",
@@ -2301,14 +2301,14 @@
     "id": "xsnomex_socks",
     "type": "ARMOR",
     "copy-from": "nomex_socks",
-    "name": { "str": "pair of flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
+    "name": { "str": "flame-resistant socks", "str_pl": "pairs of flame-resistant socks" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "socks",
     "type": "ARMOR",
-    "name": { "str": "pair of socks", "str_pl": "pairs of socks" },
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
     "description": "Socks.  Put 'em on your feet.",
     "weight": "32 g",
     "volume": "250 ml",
@@ -2349,7 +2349,7 @@
   {
     "id": "xlsocks",
     "type": "ARMOR",
-    "name": { "str": "pair of socks", "str_pl": "pairs of socks" },
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
     "weight": "58 g",
     "volume": "250 ml",
     "copy-from": "socks",
@@ -2359,14 +2359,14 @@
     "id": "xssocks",
     "type": "ARMOR",
     "copy-from": "socks",
-    "name": { "str": "pair of socks", "str_pl": "pairs of socks" },
+    "name": { "str": "socks", "str_pl": "pairs of socks" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "socks_ankle",
     "type": "ARMOR",
-    "name": { "str": "pair of ankle socks", "str_pl": "pairs of ankle socks" },
+    "name": { "str": "ankle socks", "str_pl": "pairs of ankle socks" },
     "description": "Short socks, commonly used for sports.  These are designed to protect your feet from friction, not temperature.",
     "weight": "25 g",
     "volume": "200 ml",
@@ -2406,7 +2406,7 @@
   {
     "id": "socks_bag",
     "type": "ARMOR",
-    "name": { "str": "pair of bag socks", "str_pl": "pairs of bag socks" },
+    "name": { "str": "bag socks", "str_pl": "pairs of bag socks" },
     "description": "A pair of disposable plastic bags, adapted to be used as socks.",
     "weight": "6 g",
     "volume": "250 ml",
@@ -2459,7 +2459,7 @@
   {
     "id": "socks_bowling",
     "type": "ARMOR",
-    "name": { "str": "pair of disposable bowling socks", "str_pl": "pairs of disposable bowling socks" },
+    "name": { "str": "disposable bowling socks", "str_pl": "pairs of disposable bowling socks" },
     "description": "Cheap socks designed to be worn once and then thrown away.  They keep your feet clean, but are too thin to give any protection.",
     "weight": "20 g",
     "volume": "250 ml",
@@ -2477,7 +2477,7 @@
   {
     "id": "socks_wool",
     "type": "ARMOR",
-    "name": { "str": "pair of wool socks", "str_pl": "pairs of wool socks" },
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
     "description": "Warm socks made of wool.",
     "weight": "44 g",
     "volume": "250 ml",
@@ -2518,7 +2518,7 @@
   {
     "id": "xlsocks_wool",
     "type": "ARMOR",
-    "name": { "str": "pair of wool socks", "str_pl": "pairs of wool socks" },
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
     "weight": "77 g",
     "volume": "500 ml",
     "copy-from": "socks_wool",
@@ -2528,14 +2528,14 @@
     "id": "xssocks_wool",
     "type": "ARMOR",
     "copy-from": "socks_wool",
-    "name": { "str": "pair of wool socks", "str_pl": "pairs of wool socks" },
+    "name": { "str": "wool socks", "str_pl": "pairs of wool socks" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "stockings",
     "type": "ARMOR",
-    "name": { "str": "pair of thigh socks", "str_pl": "pairs of thigh socks" },
+    "name": { "str": "thigh socks", "str_pl": "pairs of thigh socks" },
     "description": "Long socks that reach above the knees.",
     "weight": "90 g",
     "volume": "250 ml",
@@ -2562,7 +2562,7 @@
   {
     "id": "stockings_tent_legs",
     "type": "ARMOR",
-    "name": { "str": "pair of tentacle socks", "str_pl": "pairs of tentacle socks" },
+    "name": { "str": "tentacle socks", "str_pl": "pairs of tentacle socks" },
     "description": "Six long cotton tubes sized to fit over tentacles and help protect them from the cold.",
     "weight": "300 g",
     "volume": "1500 ml",
@@ -2588,7 +2588,7 @@
   {
     "id": "tabi_dress",
     "type": "ARMOR",
-    "name": { "str": "pair of tabi", "str_pl": "pairs of tabi" },
+    "name": { "str": "tabi", "str_pl": "pairs of tabi" },
     "description": "A pair of black tabi, as worn with traditional Japanese clothes.",
     "weight": "50 g",
     "volume": "250 ml",
@@ -2629,7 +2629,7 @@
   {
     "id": "tabi_gi",
     "type": "ARMOR",
-    "name": { "str": "pair of gi tabi", "str_pl": "pairs of gi tabi" },
+    "name": { "str": "gi tabi", "str_pl": "pairs of gi tabi" },
     "description": "A pair of white tabi, as used by martial arts practitioners.",
     "weight": "50 g",
     "volume": "250 ml",

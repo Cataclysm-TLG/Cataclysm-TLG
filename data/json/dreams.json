@@ -649,7 +649,7 @@
     "type": "dream",
     "messages": [
       "You weave between the zombies' legs, too small for them to catch.  The gas station isn't far now, with all its soda and chips and- UGH, dream…",
-      "Once you finish your tasty dinner of seeds, you look around for your drink, but you already ate it."
+      "You dream of running down familiar streets and rooftops, mentally mapping out every escape route as you go."
     ],
     "category": "MOUSE",
     "strength": 3
@@ -665,7 +665,10 @@
   },
   {
     "type": "dream",
-    "messages": [ "You are terrified by a dream of becoming an ape hybrid.", "You blissfully recall days spent lounging in the sun." ],
+    "messages": [
+      "You dream of tearing into your prey, and the sweet taste of raw flesh.",
+      "You blissfully recall days spent lounging in the sun."
+    ],
     "category": "LIZARD",
     "strength": 4
   },
@@ -682,7 +685,7 @@
     "type": "dream",
     "messages": [
       "You wonder if your nest will be good enough.",
-      "Your dream of soaring over the landscape becomes a nightmare when you find yourself with arms and a glider!"
+      "You dream of cracking seeds with your beak and swallowing them dry."
     ],
     "category": "BIRD",
     "strength": 4
@@ -722,10 +725,9 @@
     "type": "dream",
     "messages": [
       "Boing!  and you've pounced another yummy critter.",
-      "Your nightmare of sentient rats turns successful, as you grab their King and shake it apart!",
       "You leap from rooftop to rooftop, effortlessly avoiding your pursuers while making your way to safety.",
-      "You sneak into a house, only to discover a full, intact cupboard of canned tuna!",
-      "You dream of a whole field where only lush catnip grows, and you blissfully roll around in it."
+      "You sneak into a house, only to discover a full, intact cupboard of cat food!",
+      "You dream of the crack of bone and the taste of raw meat."
     ],
     "category": "FELINE",
     "strength": 4
@@ -734,9 +736,7 @@
     "type": "dream",
     "messages": [
       "You dream of the hunt, the feed, and your pack.",
-      "You lead the pack on a glorious hunt, knowing that they will all have your back as you have theirs!",
-      "Oh, you should really patrol your territory again, maybe expand.",
-      "You dream of a rival pack of hairless bipeds intruding upon your territory.  After a fierce battle, their leader lays lifeless on the ground.",
+      "Your mouth waters as you dream of eating dog food.",
       "You howl loud and long, ecstatic after securing a whole cache of supplies.",
       "After recruiting a new packmate, you expand your spacious den to accommodate them."
     ],
@@ -747,7 +747,7 @@
     "type": "dream",
     "messages": [
       "You dream of jumping the gate and leading your herd to freedom.",
-      "You bellow on a knoll against the sky, having feasted on the apple time cider.",
+      "You dream of defending the herd from a pack of predators.",
       "The herd moves along and you with them, finding greener pastures."
     ],
     "category": "CATTLE",
@@ -767,8 +767,7 @@
     "type": "dream",
     "messages": [
       "You feel smug, knowing that the Queen is dependent on you.",
-      "You relax and enjoy the humming adulation of all your followers.",
-      "You dream of a weirdly shaped plant, whose nectar surpassed your every wish…"
+      "You relax and enjoy the humming adulation of all your followers."
     ],
     "category": "INSECT",
     "strength": 4
@@ -776,15 +775,11 @@
   {
     "type": "dream",
     "messages": [
-      "You dream of bees fighting over your sweet nectar.  Mmm.",
-      "How grand it would be to sink your roots deep into the soil as the seasons pass you by.",
-      "You dream of a gigantic knot of roots, beating like a heart.",
-      "You have a disturbing dream of termites chewing all over your body.",
+      "You dream of the sun shining down on your leaves.",
+      "You dream of rotten food, decomposed until it's almost mush.",
       "You dream of sharing your roots with a vast forest, all plants provided for as the canopy grows ever upwards.",
-      "A family of caterpillars munches away at your leaves.",
       "Fire rages around you, licking at your bark and engulfing the saplings and bushes near your roots.  The once chatty forest is quiet in its wake.",
-      "You dream of communing with an ancient pine.  Trees are the true survivors of this world, it tells you.",
-      "A rather attractive triffid offers you a bouquet of ape heads.  How thoughtful!"
+      "You dream of communing with an ancient pine.  Trees are the true survivors of this world, it tells you."
     ],
     "category": "PLANT",
     "strength": 4

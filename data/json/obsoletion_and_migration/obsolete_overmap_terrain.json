@@ -33,7 +33,32 @@
       "farm_lot_wire_turn_v_open_north": "farmland_straight_north",
       "farm_lot_wire_turn_v_open_east": "farmland_straight_east",
       "farm_lot_wire_turn_v_open_south": "farmland_straight_south",
-      "farm_lot_wire_turn_v_open_west": "farmland_straight_west"
+      "farm_lot_wire_turn_v_open_west": "farmland_straight_west",
+      "megastore_parking": "omt_obsolete",
+      "rock": "empty_rock",
+      "slimepit_top": "slimepit_z0_north",
+      "slimepit_bottom": "slimepit_z-1_north",
+      "slimepit": "slimepit_z-2_north",
+      "slimepit_down": "slimepit_z0_north",
+      "cabin_lapin": "cabin_8",
+      "cabin_roof_lapin": "cabin_roof_8",
+      "cabin_lapin_north": "cabin_8_north",
+      "cabin_roof_lapin_north": "cabin_roof_8_north",
+      "cabin_lapin_east": "cabin_8_east",
+      "cabin_roof_lapin_east": "cabin_roof_8_east",
+      "cabin_lapin_south": "cabin_8_south",
+      "cabin_roof_lapin_south": "cabin_roof_8_south",
+      "cabin_lapin_west": "cabin_8_west",
+      "cabin_roof_lapin_west": "cabin_roof_8_west",
+      "bandit_farm_5_north": "sand_pit_M",
+      "bandit_farm_6_north": "sand_pit_E",
+      "bandit_farm_4_north": "sand_pit_W",
+      "bandit_farm_3_north": "sand_pit_NE",
+      "bandit_farm_2_north": "sand_pit_N",
+      "bandit_farm_1_north": "sand_pit_NW",
+      "bandit_farm_9_north": "sand_pit_SE",
+      "bandit_farm_7_north": "sand_pit_SW",
+      "bandit_farm_8_north": "sand_pit_S"
     }
   }
 ]

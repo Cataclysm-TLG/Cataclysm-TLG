@@ -1680,8 +1680,8 @@ Fault fixes are methods to fix faults, the fixes can optionally add other faults
   "faults_removed": [ "fault_gun_dirt", "fault_gun_blackpowder" ], // faults removed when fix is applied
   "faults_added": [ "fault_gun_unlubricated" ], // faults added when fix is applied
   "skills": { "mechanics": 1 }, // skills required to apply fix
-  "set_variables": { "dirt": "0" }, // sets the variables on the item when fix is applied
-  "adjust_variables_multiply": { "dirt": ".8" }, // adjusts the variables on the item when fix is applied using MULTIPLICATION
+  "set_variables": { "dirt": 0, "pos": { "tripoint": [ 0, 1, 0 ] }, "name": { "str": "blorg" } }, // sets the variables on the item when fix is applied
+  "adjust_variables_multiply": { "dirt": 0.8 }, // adjusts the variables on the item when fix is applied using MULTIPLICATION
   "requirements": [ [ "gun_cleaning", 1 ] ], // requirements array, see below
   "mod_damage": 1000, // damage to modify on item when fix is applied, can be negative to repair
   "mod_degradation": 50, // degradation to modify on item when fix is applied, can be negative to reduce degradation
@@ -1824,8 +1824,8 @@ In monster groups, within the `"monsters"` array, you can define `"group"` objec
 | `cost_multiplier` | (_optional_) How many monsters each monster in this definition should count as, if spawning a limited number of monsters.  (default: 1)
 | `pack_size`       | (_optional_) The minimum and maximum number of monsters in this group that should spawn together.  (default: `[1,1]`)
 | `conditions`      | (_optional_) Conditions limit when monsters spawn. Valid options: `SUMMER`, `WINTER`, `AUTUMN`, `SPRING`, `DAY`, `NIGHT`, `DUSK`, `DAWN`. Multiple Time-of-day conditions (`DAY`, `NIGHT`, `DUSK`, `DAWN`) will be combined together so that any of those conditions makes the spawn valid. Multiple Season conditions (`SUMMER`, `WINTER`, `AUTUMN`, `SPRING`) will be combined together so that any of those conditions makes the spawn valid.
-| `starts`          | (_optional_) This entry becomes active after this time.  Specified using time units.  (**multiplied by the evolution scaling factor**)
-| `ends`            | (_optional_) This entry becomes inactive after this time.  Specified using time units.  (**multiplied by the evolution scaling factor**)
+| `starts`          | (_optional_) This entry becomes active after this much time multiplied by the evolution scaling factor.  Specified using time units (See [Time duration](#time-duration)).
+| `ends`            | (_optional_) This entry becomes inactive after this much time multiplied by the evolution scaling factor.  Specified using time units (See [Time duration](#time-duration)).
 | `spawn_data`      | (_optional_) Any properties that the monster only has when spawned in this group. `ammo` defines how much of which ammo types the monster spawns with. Only applies to "monster" type entries.
 | `event`           | (_optional_) If present, this entry can only spawn during the specified event. See the `holiday` enum for possible values. Defaults to `none`. (Ex: `"event": "halloween"`)
 
@@ -1963,7 +1963,8 @@ Professions are specified as JSON object with "type" member set to "profession":
     "id": "profession_example",                                // Unique ID for the profession
     "name": { "male": "Groom", "female": "Bride" },            // String, either a single gender neutral (i.e. "Survivor") or object with members "male" and "female"
     "description": "This is an example profession.",           // In-game description
-    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points.
+    "points": 0,                                               // Point cost of profession. Positive values cost points and negative values grant points. Has no effect as of 0.G
+    "starting_cash": 500000,                                   // (optional) Int value for the starting bank balance.
     "npc_background": "BG_survival_story_LAB",                 // (optional) BG_trait_group ID, provides list of background stories. (see BG_trait_groups.json)
     "addictions": [ { "intensity": 10, "type": "nicotine" } ], // (optional) Array of addictions. Requires "type" as the string ID of the addiction (see JSON_FLAGS.md) and "intensity"
     "skills": [ { "name": "archery", "level": 2 } ],           // (optional) Array of starting skills. Requires "name" as the string ID of the skill (see skills.json) and "level", which is a value added to the skill level after character creation
@@ -1994,6 +1995,7 @@ Professions are specified as JSON object with "type" member set to "profession":
     "CBMs": [ "bio_fuel_cell_blood" ],                         // (optional) Array of starting implanted CMBs
     "traits": [ "PROF_CHURL", "ILLITERATE" ],                  // (optional) Array of starting traits/mutations. For further information, see mutations.json and MUTATIONS.md. Note: "trait" is also supported, used for a single trait/mutation ID (legacy!)
     "requirement": "achievement_survive_28_days",              // (optional) String of an achievement ID required to unlock this profession
+    "effect_on_conditions": [ "scenario_assassin_conv" ],      // (optional) eoc id, inline eoc, or multiple of them, that would run when scenario starts
     "spells": [                                                // (optional) Array of starting spell IDs the character knows upon creation. For further information, see MAGIC.md
       { "id": "magic_missile", "level": 4 },
       { "id": "summon_undead", "level": 5 },
@@ -3120,6 +3122,7 @@ See [MUTATIONS.md](MUTATIONS.md)
     "funnel_radius": 200, // millimeters. The higher the more rain it will capture.
     "comfort": 0, // Same property affecting furniture and terrain
     "floor_bedding_warmth": -500, // Same property affecting furniture and terrain. Also affects how comfortable a resting place this is(affects healing). Vanilla values should not exceed 1000.
+    "eocs": [ "EOC_COOL_EOC_TRAP" ], // array of eocs to trigger, only usable with "action": "eocs". The alpha talker is the creature that triggered the trap and the trap's location is passed as a context variable trap_location for use with ranged traps. Items can't currently trigger eoc traps.
     "spell_data": { "id": "bear_trap" }, // data required for trapfunc::spell()
     "trigger_weight": "200 g", // If an item with this weight or more is thrown onto the trap, it triggers. Defaults to 500 grams.
     "drops": [ "beartrap" ], // ID of item spawned when disassembled
@@ -3334,7 +3337,8 @@ Examples:
 
 #### The following optional fields are specific to ROTORs.
 ```c++
-"rotor_diameter": 15,         // Rotor diameter in meters.  Larger rotors provide more lift.
+"rotor_diameter": 15,         // Rotor diameter in meters.  Larger rotors provide more lift. This also determines the size of the rotor during collisions.
+"bonus": 5,                   // Adds additional rotor diameter during lift calculations. This does not affect rotor collision. This is useful for things like ducted fans or vtol engines that have good lift but smaller danger zones.
 ```
 
 #### The following optional fields are specific to WORKBENCHes.
@@ -3616,7 +3620,6 @@ See [GAME_BALANCE.md](GAME_BALANCE.md)'s `MELEE_WEAPONS` section for the criteri
   "dispersion": 0,        // Inaccuracy of ammo, measured in 100ths of Minutes Of Angle (MOA)
   "shot_counter": 5,      // Increases amount of shots produced by gun by this amount. `"shot_counter": 5` means each shot will be counted as 6 shots (1 you actually perform + 5). Designed for using in suppressor mod breakage and for stuff like replaceable barrels, but not used anywhere at this moment
   "projectile_count": 5,  // Amount of pellets, that the ammo will shot, like in shotgun-like weapon. If used, `"shot_damage"` should be specified
-  "multi_projectile_effects": true,  // (Optional) Boolean, default false. If the projectile_count is greater than 1, determines if the extra projectiles will also trigger any ammo effects. (For more on ammo effects see below)
   "shot_damage": { "damage_type": "bullet", "amount": 15 },  // (Optional) Specifies the damage caused by a single projectile fired from this round. If present, projectile_count must also be specified. Syntax is the same as `"damage"`
   "critical_multiplier": 4,  // If the hit is a critical hit, all ranged damage dealt will be multiplied by this
   "shot_spread": 100,     // (Optional) Specifies the additional dispersion of single projectiles. Only meaningful if shot_count is present.
@@ -3960,6 +3963,7 @@ Books can be defined like this:
 "fun" : -2,           // Morale bonus/penalty for reading
 "skill" : "computer", // Skill raised
 "chapters" : 4,       // Number of chapters (for fun only books), each reading "consumes" a chapter. Books with no chapters left are less fun (because the content is already known to the character).
+"generic": false,     // This book counts chapters by item instance instead of by type (this book represents a generic variety of books, like "book of essays")
 "required_level" : 2,  // Minimum skill level required to learn
 "martial_art": "style_mma", // Martial art learned from this book; incompatible with `skill`
 "proficiencies": [    // Having this book mitigate lack of proficiency, required for crafting 
@@ -4389,6 +4393,9 @@ Alternately, every item (book, tool, armor, even food) can be used as a gunmod i
 "revert_to": "torch_done", // Transforms into item when charges are expended
 "revert_msg": "The torch fades out.", // Message, that would be printed, when revert_to is used
 "sub": "hotplate",         // optional; this tool has the same functions as another tool
+"etransfer_rate": "30 MB"  // units::ememory, electronic transfer rate per second supported by this e-device
+"e_port": "USB-A",         // String defining connection type for fast file transfer; NOTE: if you want to use this for general connections, make a more general system, this is *only* for electronic devices that handle files
+"e_port_banned": ["USB-A"],  // String array defining banned connection types; see above
 "variables": {
   "vehicle_name": "Wheelchair",         // this tool is a foldable vehicle, that could bypass the default foldability rules; this is the name of the vehicle that would be unfolded 
   "folded_parts": "folded_parts_syntax" // this is the parts that this vehice has -it uses it's own syntax, different from `"type": "vehicle"`, so better to read the examples in `unfoldable.json`
@@ -4547,29 +4554,30 @@ The contents of use_action fields can either be a string indicating a built-in f
 
 ```C++
 "use_action": {
-    "type": "transform",  // The type of method, in this case one that transforms the item.
-    "target": "gasoline_lantern_on", // The item to transform to.
-    "variant_type": "condom_plain", // (Optional) Defaults to `<any>`. Specific variant type to set for the transformed item. Special string `<any>` will pick a random variant from all available variants, based on the variant's defined weight.
-    "active": true,       // Whether the item is active once transformed.
-    "ammo_scale": 0,    // For use when an item automatically transforms into another when its ammo drops to 0, or to allow guns to transform with 0 ammo.
-    "msg": "You turn the lamp on.", // Message to display when activated.
-    "need_fire": 1,                 // Whether fire is needed to activate.
-    "need_fire_msg": "You need a lighter!", // Message to display if there is no fire.
-    "need_charges": 1,                      // Number of charges the item needs to transform.
-    "need_charges_msg": "The lamp is empty.", // Message to display if there aren't enough charges.
-    "need_empty": true,                       // Whether the item must be empty to be transformed; false by default.
-    "need_worn": true,                        // Whether the item must be worn to be transformed; false by default.
-    "need_wielding": true,                    // Whether the item must be wielded to be transformed; false by default.
-    "qualities_needed": { "WRENCH_FINE": 1 }, // Tool qualities needed, e.g. "fine bolt turning 1".
-    "target_charges": 3, // Number of charges the transformed item has.
-    "rand_target_charges": [10, 15, 25], // Randomize the charges the transformed item has. This example has a 50% chance of rng(10, 15) charges and a 50% chance of rng(15, 25). (The endpoints are included.)
-    "ammo_qty": 3,              // If zero or positive set remaining ammo of transformed item to this.
-    "random_ammo_qty": [1, 5],  // If this has values, set remaining ammo of transformed item to one of them chosen at random.
-    "ammo_type": "tape",        // If both this and ammo_qty are specified then set transformed item to this specific ammo.
-    "container": "jar",  // Container holding the target item.
-    "sealed": true,      // Whether the transformed container is sealed; true by default.
-    "menu_text": "Lower visor"      // (Optional) Text displayed in the activation screen, defaults to "Turn on".
-    "moves" : 500         // Moves required to transform the item in excess of a normal action.
+  "type": "transform",                      // The type of method, in this case one that transforms the item
+  "target": "gasoline_lantern_on",          // The item to transform to
+  "target_group": "twisted_geometry",       // If used, target is a random item from itemgroup
+  "variant_type": "condom_plain",           // (optional) Defaults to `<any>`. Specific variant type to set for the transformed item. Special string `<any>` will pick a random variant from all available variants, based on the variant's defined weight
+  "active": true,                           // Whether the item is active once transformed
+  "ammo_scale": 0,                          // For use when an item automatically transforms into another when its ammo drops to 0, or to allow guns to transform with 0 ammo
+  "msg": "You turn the lamp on.",           // Message to display when activated
+  "need_fire": 1,                           // Whether fire is needed to activate
+  "need_fire_msg": "You need a lighter!",   // Message to display if there is no fire
+  "need_charges": 1,                        // Number of charges the item needs to transform
+  "need_charges_msg": "The lamp is empty.", // Message to display if there aren't enough charges
+  "need_empty": true,                       // Whether the item must be empty to be transformed; false by default
+  "need_worn": true,                        // Whether the item must be worn to be transformed, cast spells, or use EOCs; false by default
+  "need_wielding": true,                    // Whether the item must be wielded to be transformed, cast spells, or use EOCs; false by default
+  "qualities_needed": { "WRENCH_FINE": 1 }, // Tool qualities needed, e.g. "fine bolt turning 1"
+  "target_charges": 3,                      // Number of charges the transformed item has
+  "rand_target_charges": [ 10, 15, 25 ],    // Randomize the charges the transformed item has. This example has a 50% chance of rng(10, 15) charges and a 50% chance of rng(15, 25) (endpoints are included)
+  "ammo_qty": 3,                            // If zero or positive set remaining ammo of transformed item to this
+  "random_ammo_qty": [ 1, 5 ],              // If this has values, set remaining ammo of transformed item to one of them chosen at random
+  "ammo_type": "tape",                      // If both this and ammo_qty are specified then set transformed item to this specific ammo
+  "container": "jar",                       // Container holding the target item
+  "sealed": true,                           // Whether the transformed container is sealed; true by default
+  "menu_text": "Lower visor",               // (optional) Text displayed in the activation screen. Defaults to "Turn on"
+  "moves": 500                              // Moves required to transform the item in excess of a normal action
 },
 "use_action": {
     "type": "explosion", // An item that explodes when it runs out of charges.
@@ -5083,7 +5091,7 @@ Examples from the actual definitions:
     "looks_like": "chair",
     "color": "white",
     "move_cost_mod": 2,
-    "keg_capacity": 240,
+    "keg_capacity": "60 L",
     "deployed_item": "plastic_sheet",
     "light_emitted": 5,
     "required_str": 18,
@@ -5143,17 +5151,13 @@ Fixed string, must be `furniture` to identify the JSON object as such.
 
 Same as for terrain, see below in the chapter "Common to furniture and terrain".
 
-#### `move_cost_mod`
-
-Movement cost modifier (`-10` = impassable, `0` = no change). This is added to the movecost of the underlying terrain.
-
 #### `keg_capacity`
 
-Determines capacity of some furnitures with liquid storage that have hardcoded interactions. Value is per 250mL (e.g. `"keg_capacity": 8,` = 2L)
+(Optional) Determines capacity of some furnitures with liquid storage that have hardcoded interactions.
 
 #### `deployed_item`
 
-Item id string used to create furniture. Allows player to interact with the furniture to 'take it down' (transform it to item form).
+(Optional) Item id string used to create furniture. Allows player to interact with the furniture to 'take it down' (transform it to item form).
 
 #### `lockpick_result`
 
@@ -5165,7 +5169,7 @@ Item id string used to create furniture. Allows player to interact with the furn
 
 #### `light_emitted`
 
-How much light the furniture produces.  10 will light the tile it's on brightly, 15 will light that tile and the tiles around it brightly, as well as slightly lighting the tiles two tiles away from the source.
+(Optional) How much light the furniture produces.  10 will light the tile it's on brightly, 15 will light that tile and the tiles around it brightly, as well as slightly lighting the tiles two tiles away from the source.
 For examples: An overhead light is 120, a utility light, 240, and a console, 10.
 
 #### `boltcut`
@@ -5353,17 +5357,13 @@ Fixed string, must be "terrain" to identify the JSON object as such.
 
 Same as for furniture, see below in the chapter "Common to furniture and terrain".
 
-#### `move_cost`
-
-Move cost to move through. A value of 0 means it's impassable (e.g. wall). You should not use negative values. The positive value is multiple of 50 move points, e.g. value 2 means the player uses 2\*50 = 100 move points when moving across the terrain.
-
 #### `heat_radiation`
 
-Heat emitted for a terrain. A value of 0 means no fire (i.e, same as not having it). A value of 1 equals a fire of intensity of 1.
+(Optional) Heat emitted for a terrain. A value of 0 means no fire (i.e, same as not having it). A value of 1 equals a fire of intensity of 1.
 
 #### `light_emitted`
 
-How much light the terrain emits. 10 will light the tile it's on brightly, 15 will light that tile and the tiles around it brightly, as well as slightly lighting the tiles two tiles away from the source.
+(Optional) How much light the terrain emits. 10 will light the tile it's on brightly, 15 will light that tile and the tiles around it brightly, as well as slightly lighting the tiles two tiles away from the source.
 For examples: An overhead light is 120, a utility light, 240, and a console, 10.
 
 #### `lockpick_result`
@@ -5581,6 +5581,12 @@ PAVEMENT_MARKING     MULCHFLOOR
 RAIL                 METALFLOOR
 COUNTER              WOODFLOOR
 CANVAS_WALL          INDOORFLOOR
+MUD                  PAVEMENT_ZEBRA
+DIRTMOUND            CLAYMOUND
+SANDMOUND            SANDGLASS
+SANDPILE             BRICKFLOOR
+MARBLEFLOOR          BEACH_FORMATIONS
+GRAVELPILE           LIXATUBE
 ```
 
 `WALL` is implied by the flags `WALL` and `CONNECT_WITH_WALL`.
@@ -5616,9 +5622,13 @@ Implicit groups can be removed be using tilde `~` as prefix of the group name.
 
 ASCII symbol of the object as it appears in the game. The symbol string must be exactly one character long. This can also be an array of 4 strings, which define the symbol during the different seasons. The first entry defines the symbol during spring. If it's not an array, the same symbol is used all year round.
 
+#### `move_cost_mod`
+
+Move cost to move through. A value of 0 means it's impassable (e.g. wall). You should not use negative values. The positive value is multiple of 50 move points, e.g. value 2 means the player uses 2\*50 = 100 move points when moving across the terrain.
+
 #### `comfort`
 
-How comfortable this terrain/furniture is. Impact ability to fall asleep on it.
+(Optional) How comfortable this terrain/furniture is. Impact ability to fall asleep on it.
     uncomfortable = -999,
     neutral = 0,
     slightly_comfortable = 3,
@@ -5627,15 +5637,15 @@ How comfortable this terrain/furniture is. Impact ability to fall asleep on it.
 
 #### `floor_bedding_warmth`
 
-Bonus warmth offered by this terrain/furniture when used to sleep. Also affects how comfortable a resting place this is(affects healing). Vanilla values should not exceed 1000.
+(Optional) Bonus warmth offered by this terrain/furniture when used to sleep. Also affects how comfortable a resting place this is(affects healing). Vanilla values should not exceed 1000.
 
 #### `fall_damage_reduction`
 
-Flat damage reduction or increase if negative number. Like falling on a bush or soft chair or mattress or sofa.
+(Optional) Flat damage reduction or increase if negative number. Like falling on a bush or soft chair or mattress or sofa.
 
 #### `bonus_fire_warmth_feet`
 
-Increase warmth received on feet from nearby fire  (default = 300)
+(Optional) Increase warmth received on feet from nearby fire  (default = 300)
 
 #### `looks_like`
 
@@ -5649,7 +5659,7 @@ Color of the object as it appears in the game. "color" defines the foreground co
 
 #### `coverage`
 
-The coverage percentage of a furniture piece of terrain. <30 won't cover from sight. (Does not interact with projectiles, gunfire, or other attacks. Only line of sight.)
+(Optional) The coverage percentage of a furniture piece of terrain. <30 won't cover from sight. (Does not interact with projectiles, gunfire, or other attacks. Only line of sight.)
 
 #### `max_volume`
 
@@ -6265,6 +6275,7 @@ Fields can exist on top of terrain/furniture, and support different intensity le
     "decay_amount_factor": 2, // The field's rain decay amount is divided by this when processing the field, the rain decay is a function of the weather type's precipitation class: very_light = 5s, light = 15s, heavy = 45 s
     "half_life": "3 minutes", // If above 0 the field will disappear after two half-lifes on average
     "underwater_age_speedup": "25 minutes", // Increase the field's age by this time every tick if it's on a terrain with the SWIMMABLE flag
+    "linear_half_life": "true", // If true the half life decay is converted to a non-random, linear wait based on the defined half_life time. 
     "outdoor_age_speedup": "20 minutes", // Increase the field's age by this duration if it's on an outdoor tile
     "accelerated_decay": true, // If the field should use a more simple decay calculation, used for cosmetic fields like gibs
     "percent_spread": 90, // The field must succeed on a `rng( 1, 100 - local windpower ) > percent_spread` roll to spread. The field must have a non-zero spread percent and the GAS phase to be eligible to spread in the first place

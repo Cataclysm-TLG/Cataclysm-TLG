@@ -59,7 +59,7 @@
         "o": "f_bookcase",
         "t": "f_table"
       },
-      "vendingmachines": { "V": { "lootable": true } },
+      "vendingmachines": { "V": {  } },
       "toilets": { "T": {  } },
       "items": {
         "e": { "item": "SUS_fridge_breakroom", "chance": 55, "repeat": [ 2, 3 ] },
@@ -189,7 +189,7 @@
         "o": "f_bookcase",
         "t": "f_table"
       },
-      "vendingmachines": { "V": { "lootable": true } },
+      "vendingmachines": { "V": {  } },
       "toilets": { "T": {  } },
       "items": {
         "e": { "item": "SUS_fridge_breakroom", "chance": 55, "repeat": [ 2, 3 ] },

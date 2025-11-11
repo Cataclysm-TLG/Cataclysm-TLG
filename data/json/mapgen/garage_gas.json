@@ -70,11 +70,9 @@
         "S": "f_sink"
       },
       "gaspumps": { "&": {  } },
+      "items": { "t": { "item": "SUS_toilet", "chance": 50 } },
       "toilets": { "t": {  } },
-      "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 31, "y": 6, "lootable": true },
-        { "item_group": "vending_drink", "x": 32, "y": 6, "lootable": true }
-      ],
+      "place_vendingmachines": [ { "item_group": "vending_food", "x": 31, "y": 6 }, { "item_group": "vending_drink", "x": 32, "y": 6 } ],
       "place_loot": [
         { "group": "magazines", "x": 26, "y": 10, "chance": 60, "repeat": [ 0, 5 ] },
         { "group": "magazines", "x": 26, "y": 13, "chance": 60, "repeat": [ 0, 5 ] },

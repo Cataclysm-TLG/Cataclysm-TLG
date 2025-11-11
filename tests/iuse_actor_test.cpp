@@ -38,12 +38,12 @@ static const itype_id itype_light_battery_cell( "light_battery_cell" );
 
 static const mtype_id mon_manhack( "mon_manhack" );
 
-static monster *find_adjacent_monster( const tripoint &pos )
+static monster *find_adjacent_monster( const tripoint_bub_ms &pos )
 {
-    tripoint target = pos;
+    tripoint_bub_ms target = pos;
     creature_tracker &creatures = get_creature_tracker();
-    for( target.x = pos.x - 1; target.x <= pos.x + 1; target.x++ ) {
-        for( target.y = pos.y - 1; target.y <= pos.y + 1; target.y++ ) {
+    for( target.x() = pos.x() - 1; target.x() <= pos.x() + 1; target.x()++ ) {
+        for( target.y() = pos.y() - 1; target.y() <= pos.y() + 1; target.y()++ ) {
             if( target == pos ) {
                 continue;
             }
@@ -67,7 +67,7 @@ TEST_CASE( "manhack", "[iuse_actor][manhack]" )
 
     REQUIRE( player_character.has_item( *test_item ) );
 
-    monster *new_manhack = find_adjacent_monster( player_character.pos() );
+    monster *new_manhack = find_adjacent_monster( player_character.pos_bub() );
     REQUIRE( new_manhack == nullptr );
 
     player_character.invoke_item( &*test_item );
@@ -76,7 +76,7 @@ TEST_CASE( "manhack", "[iuse_actor][manhack]" )
         return it.typeId() == itype_bot_manhack;
     } ) );
 
-    new_manhack = find_adjacent_monster( player_character.pos() );
+    new_manhack = find_adjacent_monster( player_character.pos_bub() );
     REQUIRE( new_manhack != nullptr );
     REQUIRE( new_manhack->type->id == mon_manhack );
     g->clear_zombies();
@@ -95,7 +95,7 @@ TEST_CASE( "tool_transform_when_activated", "[iuse][tool][transform]" )
         // Charge the battery
         const int bat_charges = bat_cell.ammo_capacity( ammo_battery );
         bat_cell.ammo_set( bat_cell.ammo_default(), bat_charges );
-        REQUIRE( bat_cell.ammo_remaining() == bat_charges );
+        REQUIRE( bat_cell.ammo_remaining( ) == bat_charges );
 
         // Put battery in flashlight
         REQUIRE( flashlight.has_pocket_type( pocket_type::MAGAZINE_WELL ) );
@@ -108,7 +108,7 @@ TEST_CASE( "tool_transform_when_activated", "[iuse][tool][transform]" )
             const use_function *use = flashlight.type->get_use( "transform" );
             REQUIRE( use != nullptr );
             const iuse_transform *actor = dynamic_cast<const iuse_transform *>( use->get_actor_ptr() );
-            actor->use( dummy, flashlight, dummy->pos() );
+            actor->use( dummy, flashlight, dummy->pos_bub() );
 
             THEN( "it becomes active" ) {
                 CHECK( flashlight.active );
@@ -140,18 +140,18 @@ static void cut_up_yields( const std::string &target )
     const std::map<material_id, int> &target_materials = cut_up_target.made_of();
     const float mat_total = cut_up_target.type->mat_portion_total == 0 ? 1 :
                             cut_up_target.type->mat_portion_total;
-    units::mass smallest_yield_mass = units::mass_max;
+    units::mass smallest_yield_mass = units::mass::max();
     for( const auto &mater : target_materials ) {
         if( const std::optional<itype_id> item_id = mater.first->salvaged_into() ) {
             units::mass portioned_weight = item_id->obj().weight * ( mater.second / mat_total );
             smallest_yield_mass = std::min( smallest_yield_mass, portioned_weight );
         }
     }
-    REQUIRE( smallest_yield_mass != units::mass_max );
+    REQUIRE( smallest_yield_mass != units::mass::max() );
 
     units::mass cut_up_target_mass = cut_up_target.weight();
     item &spawned_item = here.add_item_or_charges( guy.pos_bub(), cut_up_target );
-    item_location item_loc( map_cursor( guy.pos_bub() ), &spawned_item );
+    item_location item_loc( map_cursor( guy.pos_abs() ), &spawned_item );
 
     REQUIRE( smallest_yield_mass <= cut_up_target_mass );
 

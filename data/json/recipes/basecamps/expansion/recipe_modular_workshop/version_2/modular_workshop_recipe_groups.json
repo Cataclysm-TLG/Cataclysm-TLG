@@ -54,7 +54,6 @@
     "recipes": [
       { "id": "casting_mold", "description": " Craft: Casting Mold (for metal)" },
       { "id": "copper_knife", "description": " Craft: Knife, Copper" },
-      { "id": "sword_crude", "description": " Craft: Sword, Crude" },
       { "id": "pot_copper", "description": " Craft: Pot, Copper" },
       { "id": "chisel", "description": " Craft: Metalworking Chisel" },
       { "id": "hammer", "description": " Craft: Hammer" },
@@ -167,7 +166,7 @@
       { "id": "cured_pelt", "description": " Hideworking: Cured Pelt" },
       { "id": "tanning_hide", "description": " Hideworking: Tanning Hide" },
       { "id": "tanning_pelt", "description": " Hideworking: Tanning Pelt" },
-      { "id": "tanned_hide", "description": " Hideworking: Tanned Hide" },
+      { "id": "sheet_leather", "description": " Hideworking: Tanned Hide" },
       { "id": "leather", "description": " Hideworking: Leather" }
     ]
   }

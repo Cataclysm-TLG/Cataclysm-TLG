@@ -6,7 +6,7 @@
     "categories": [ "hull" ],
     "color": "light_cyan",
     "damage_modifier": 70,
-    "description": "A sheet of glass that lets you see outside the vehicle.",
+    "description": "A sheet of laminated glass that lets you see outside the vehicle.",
     "durability": 70,
     "flags": [ "WINDSHIELD", "OBSTACLE", "WINDOW" ],
     "item": "tempered_glass_sheet",

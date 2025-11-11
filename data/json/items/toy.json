@@ -911,7 +911,7 @@
       "description": "Hug the imperfect doll.",
       "effect_on_conditions": [ "EOC_queue_unvitrified_return" ]
     },
-    "flags": [ "SLEEP_AID", "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT", "TRADER_AVOID" ]
+    "flags": [ "SLEEP_AID", "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT", "TRADER_AVOID", "MISSION_ITEM" ]
   },
   {
     "id": "imperfect_doll_legs",
@@ -924,7 +924,7 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT" ]
+    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT", "MISSION_ITEM" ]
   },
   {
     "id": "imperfect_doll_arms",
@@ -937,7 +937,7 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "cyan",
-    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT" ]
+    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT", "MISSION_ITEM" ]
   },
   {
     "id": "imperfect_doll_features",
@@ -950,6 +950,24 @@
     "price_postapoc": "0 cent",
     "symbol": "i",
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT" ]
+    "flags": [ "NO_SALVAGE", "INTEGRATED", "ZERO_WEIGHT", "MISSION_ITEM" ]
+  },
+  {
+    "id": "scythe_toy",
+    "type": "GENERIC",
+    "symbol": "/",
+    "color": "light_gray",
+    "name": { "str": "plastic scythe" },
+    "description": "A cheap plastic toy made to look like the Grim Reaper's scythe.  Let the harvest begin.",
+    "weight": "586 g",
+    "volume": "3550 ml",
+    "longest_side": "150 cm",
+    "price": "30 USD",
+    "price_postapoc": "5 cent",
+    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "uneven" },
+    "material": [ "plastic" ],
+    "flags": [ "NONCONDUCTIVE", "FRAGILE_MELEE", "POLEARM", "SHEATH_SPEAR", "REACH_ATTACK" ],
+    "weapon_category": [ "HOOKING_WEAPONRY", "POLEARMS" ],
+    "melee_damage": { "bash": 1 }
   }
 ]

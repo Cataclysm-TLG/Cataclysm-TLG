@@ -22,16 +22,13 @@
     "modes": [ [ "DEFAULT", "semi-auto", 1 ], [ "AUTO", "auto", 4 ] ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bayonet lug", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
       [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
+      [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "akmag30", "akmag10", "akmag20", "akmag40", "akdrum75" ] } ],
@@ -104,16 +101,13 @@
     "built_in_mods": [ "inter_bayonet" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
-      [ "rail", 1 ],
-      [ "sights", 1 ],
+      [ "rail mount", 1 ],
+      [ "sights mount", 1 ],
       [ "sling", 1 ],
+      [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "stock accessory", 2 ],
-      [ "underbarrel", 1 ]
+      [ "underbarrel mount", 1 ]
     ],
     "flags": [ "RELOAD_ONE" ],
     "weapon_category": [ "AUTOMATIC_RIFLES" ],
@@ -149,16 +143,13 @@
     "min_cycle_recoil": 1832,
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bayonet lug", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
-      [ "muzzle", 1 ],
       [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
+      [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "stock accessory", 2 ],
       [ "underbarrel mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "akmag30", "akmag10", "akmag20", "akmag40", "akdrum75" ] } ],
@@ -187,14 +178,12 @@
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail mount", 1 ],
       [ "sights mount", 1 ],
       [ "sling", 1 ],
-      [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "stock mount", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "akmag30", "akmag10", "akmag20", "akmag40", "akdrum75" ] } ],
     "melee_damage": { "bash": 8 }
@@ -222,13 +211,15 @@
     "min_cycle_recoil": 1350,
     "reload": 420,
     "valid_mod_locations": [
-      [ "grip", 1 ],
+      [ "barrel", 1 ],
+      [ "brass catcher", 1 ],
+      [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "stock", 1 ],
-      [ "stock accessory", 2 ],
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
       [ "underbarrel", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "akmag10", "akmag20", "akmag30", "akmag40", "akdrum75" ] } ],
@@ -344,17 +335,15 @@
     "default_mods": [ "folding_stock", "muzzle_brake" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
-      [ "bayonet lug", 1 ],
       [ "brass catcher", 1 ],
-      [ "grip", 1 ],
       [ "mechanism", 2 ],
       [ "muzzle", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
-      [ "underbarrel", 1 ],
-      [ "stock accessory", 2 ],
-      [ "stock", 1 ]
+      [ "stock accessory", 1 ],
+      [ "stock mount", 1 ],
+      [ "underbarrel", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bren2_762mag30", "bren2_762mag10" ] } ],
     "melee_damage": { "bash": 12 }

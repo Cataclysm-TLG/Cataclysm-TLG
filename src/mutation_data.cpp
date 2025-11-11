@@ -152,19 +152,8 @@ static mut_attack load_mutation_attack( const JsonObject &jo )
 
     jo.read( "chance", ret.chance );
 
-    if( jo.has_array( "base_damage" ) ) {
-        ret.base_damage = load_damage_instance( jo.get_array( "base_damage" ) );
-    } else if( jo.has_object( "base_damage" ) ) {
-        JsonObject jo_dam = jo.get_object( "base_damage" );
-        ret.base_damage = load_damage_instance( jo_dam );
-    }
-
-    if( jo.has_array( "strength_damage" ) ) {
-        ret.strength_damage = load_damage_instance( jo.get_array( "strength_damage" ) );
-    } else if( jo.has_object( "strength_damage" ) ) {
-        JsonObject jo_dam = jo.get_object( "strength_damage" );
-        ret.strength_damage = load_damage_instance( jo_dam );
-    }
+    optional( jo, false, "base_damage", ret.base_damage );
+    optional( jo, false, "strength_damage", ret.strength_damage );
 
     if( ret.attack_text_u.empty() || ret.attack_text_npc.empty() ) {
         jo.throw_error( "Attack message unset" );
@@ -310,6 +299,7 @@ void mutation_branch::load( const JsonObject &jo, const std::string_view src )
     optional( jo, was_loaded, "visibility", visibility, 0 );
     optional( jo, was_loaded, "ugliness", ugliness, 0 );
     optional( jo, was_loaded, "starting_trait", startingtrait, false );
+    optional( jo, was_loaded, "random_at_chargen", random_at_chargen, true );
     optional( jo, was_loaded, "mixed_effect", mixed_effect, false );
     optional( jo, was_loaded, "active", activated, false );
     optional( jo, was_loaded, "starts_active", starts_active, false );

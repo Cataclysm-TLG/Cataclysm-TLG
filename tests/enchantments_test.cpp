@@ -66,7 +66,7 @@ static void test_generic_ench( avatar &p, enchant_test enc_test )
     clear_map();
     monster &zombie = spawn_test_monster( "mon_zombie", spot );
 
-    p.on_hit( &zombie, bodypart_id( "torso" ), 0.0, nullptr );
+    p.on_hit( &get_map(),  & zombie, bodypart_id( "torso" ), 0.0, nullptr );
 
     CHECK( zombie.has_effect( effect_blind ) );
 }
@@ -221,7 +221,7 @@ static int test_melee_attack_attack_speed( Character &guy, Creature &mon )
         add_msg( "attack %i: attack cost: %i, total amount of moves: %i", i, prev_attack - guy.get_moves(),
                  guy.get_moves() );
         guy.set_stamina( guy.get_stamina_max() ); //Reset reset!
-        guy.set_sleepiness( 0 );
+        guy.set_fatigue( 0 );
         i++;
     }
 
@@ -233,9 +233,9 @@ TEST_CASE( "Enchantment_ATTACK_SPEED_test", "[magic][enchantments]" )
     clear_map();
     Character &guy = get_player_character();
     clear_avatar();
-    g->place_critter_at( pseudo_debug_mon, tripoint_south );
+    g->place_critter_at( pseudo_debug_mon, tripoint_bub_ms::zero + tripoint::south );
     creature_tracker &creatures = get_creature_tracker();
-    Creature &mon = *creatures.creature_at<Creature>( tripoint_south );
+    Creature &mon = *creatures.creature_at<Creature>( tripoint_bub_ms::zero + tripoint::south );
     int moves_spent_on_attacks = 0;
 
 
@@ -279,7 +279,7 @@ static int test_melee_attack_attack_stamina( Character &guy, Creature &mon )
         add_msg( "attack %i: stamina cost: %i, current amount of stamina: %i", i,
                  stamina_prev - guy.get_stamina(),
                  guy.get_stamina() );
-        guy.set_sleepiness( 0 );
+        guy.set_fatigue( 0 );
         i++;
     }
 
@@ -292,9 +292,9 @@ TEST_CASE( "Enchantment_MELEE_STAMINA_CONSUMPTION_test", "[magic][enchantments]"
     clear_map();
     Character &guy = get_player_character();
     clear_avatar();
-    g->place_critter_at( pseudo_debug_mon, tripoint_south );
+    g->place_critter_at( pseudo_debug_mon, tripoint_bub_ms::zero + tripoint::south );
     creature_tracker &creatures = get_creature_tracker();
-    Creature &mon = *creatures.creature_at<Creature>( tripoint_south );
+    Creature &mon = *creatures.creature_at<Creature>( tripoint_bub_ms::zero + tripoint::south );
     int stamina_init = 0;
     int stamina_current = 0;
     int stamina_spent = 0;

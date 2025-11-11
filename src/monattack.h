@@ -19,7 +19,6 @@ bool shriek_stun( monster *z );
 bool howl( monster *z );
 bool rattle( monster *z );
 bool acid( monster *z );
-bool acid_accurate( monster *z );
 bool acid_barf( monster *z );
 bool shockstorm( monster *z );
 bool pull_metal_aoe( monster *z );
@@ -91,7 +90,6 @@ bool grenadier( monster *z );
 bool grenadier_elite( monster *z );
 bool doot( monster *z );
 bool zombie_fuse( monster *z );
-bool dsa_drone_scan( monster *z );
 bool blow_whistle( monster *z );
 bool graze( monster *z );
 

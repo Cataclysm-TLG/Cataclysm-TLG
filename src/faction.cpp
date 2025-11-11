@@ -29,8 +29,11 @@
 #include "json_error.h"
 #include "line.h"
 #include "localized_comparator.h"
+#include "map.h"
+#include "memory_fast.h"
 #include "mission_companion.h"
 #include "mtype.h"
+#include "monfaction.h"
 #include "npc.h"
 #include "output.h"
 #include "overmapbuffer.h"
@@ -338,9 +341,9 @@ std::string faction::food_supply_text()
         return pgettext( "Faction food", "Scraping By" );
     }
     if( val >= 3 ) {
-        return pgettext( "Faction food", "Malnourished" );
+        return pgettext( "Faction food", "Very Low" );
     }
-    return pgettext( "Faction food", "Starving" );
+    return pgettext( "Faction food", "Depleted" );
 }
 
 nc_color faction::food_supply_color()
@@ -373,7 +376,7 @@ std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type 
         }
     }
     if( stored_vits.empty() ) {
-        return std::pair<nc_color, std::string>( !is_toxin ? c_red : c_green, _( "None present (NONE)" ) );
+        return std::pair<nc_color, std::string>( !is_toxin ? c_red : c_green, _( "None present." ) );
     }
     std::vector<std::pair<vitamin_id, double>> vitamins;
     // Iterate the map's content into a sortable container...
@@ -389,19 +392,19 @@ std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type 
     }
     // Sort to find the worst-case scenario, lowest relative_intake is first
     std::sort( vitamins.begin(), vitamins.end(), []( const auto & x, const auto & y ) {
-        return x.second > y.second;
+        return x.second < y.second;
     } );
     const double worst_intake = vitamins.at( 0 ).second;
     std::string vit_name = vitamins.at( 0 ).first.obj().name();
-    std::string msg = is_toxin ? _( "(TRACE)" ) : _( "(PLENTY)" );
+    std::string msg = is_toxin ? _( "(Safe)" ) : _( "(Plenty)" );
     if( worst_intake <= 0.3 ) {
-        msg = is_toxin ? _( "(POISON)" ) : _( "(LACK)" );
-        return std::pair<nc_color, std::string>( c_red, string_format( _( "%1$s %2$s" ), vit_name,
+        msg = is_toxin ? _( "(Warning)" ) : _( "(Lacking)" );
+        return std::pair<nc_color, std::string>( c_yellow, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
     if( worst_intake <= 1.0 ) {
-        msg = is_toxin ? _( "(DANGER)" ) : _( "(MEAGER)" );
-        return std::pair<nc_color, std::string>( c_yellow, string_format( _( "%1$s %2$s" ), vit_name,
+        msg = is_toxin ? _( "(Danger)" ) : _( "(Meager)" );
+        return std::pair<nc_color, std::string>( c_red, string_format( _( "%1$s %2$s" ), vit_name,
                 msg ) );
     }
     return std::pair<nc_color, std::string>( c_green, string_format( _( "%1$s %2$s" ), vit_name,
@@ -567,7 +570,7 @@ void basecamp::faction_display( const catacurses::window &fac_w, const int width
     int y = 2;
     const nc_color col = c_white;
     Character &player_character = get_player_character();
-    const tripoint_abs_omt player_abspos = player_character.global_omt_location();
+    const tripoint_abs_omt player_abspos = player_character.pos_abs_omt();
     tripoint_abs_omt camp_pos = camp_omt_pos();
     std::string direction = direction_name( direction_from( player_abspos, camp_pos ) );
     mvwprintz( fac_w, point( width, ++y ), c_light_gray, _( "Press enter to rename this camp" ) );
@@ -576,14 +579,14 @@ void basecamp::faction_display( const catacurses::window &fac_w, const int width
     }
     mvwprintz( fac_w, point( width, ++y ), col, _( "Location: %s" ), camp_pos.to_string() );
     faction *yours = player_character.get_faction();
-    std::string food_text = string_format( _( "Food Supply: %s %d kilocalories" ),
+    std::string food_text = string_format( _( "Food Supply: %s (%d kcal)" ),
                                            yours->food_supply_text(), yours->food_supply.kcal() );
     nc_color food_col = yours->food_supply_color();
     mvwprintz( fac_w, point( width, ++y ), food_col, food_text );
     std::pair<nc_color, std::string> vitamins = yours->vitamin_stores( vitamin_type::VITAMIN );
-    mvwprintz( fac_w, point( width, ++y ), vitamins.first, _( "Worst vitamin:" ) + vitamins.second );
+    mvwprintz( fac_w, point( width, ++y ), vitamins.first, _( "Lowest vitamin: " ) + vitamins.second );
     std::pair<nc_color, std::string> toxins = yours->vitamin_stores( vitamin_type::TOXIN );
-    mvwprintz( fac_w, point( width, ++y ), toxins.first, _( "Worst toxin:" ) + toxins.second );
+    mvwprintz( fac_w, point( width, ++y ), toxins.first, _( "Toxin levels: " ) + toxins.second );
     std::string bldg = next_upgrade( base_camps::base_dir, 1 );
     std::string bldg_full = _( "Next Upgrade: " ) + bldg;
     mvwprintz( fac_w, point( width, ++y ), col, bldg_full );
@@ -619,11 +622,13 @@ std::string npc::get_current_status() const
 
 int npc::faction_display( const catacurses::window &fac_w, const int width ) const
 {
+    const map &here = get_map();
+
     int retval = 0;
     int y = 2;
     const nc_color col = c_white;
     Character &player_character = get_player_character();
-    const tripoint_abs_omt player_abspos = player_character.global_omt_location();
+    const tripoint_abs_omt player_abspos = player_character.pos_abs_omt();
 
     //get NPC followers, status, direction, location, needs, weapon, etc.
     mvwprintz( fac_w, point( width, ++y ), c_light_gray, _( "Press enter to talk to this follower " ) );
@@ -657,7 +662,7 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
         fold_and_print( fac_w, point( width, ++y ), getmaxx( fac_w ) - width - 2, col, mission_eta );
     }
 
-    tripoint_abs_omt guy_abspos = global_omt_location();
+    tripoint_abs_omt guy_abspos = pos_abs_omt();
     basecamp *temp_camp = nullptr;
     if( assigned_camp ) {
         std::optional<basecamp *> bcp = overmap_buffer.find_camp( ( *assigned_camp ).xy() );
@@ -684,21 +689,22 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
     bool u_has_radio = player_character.cache_has_item_with_flag( json_flag_TWO_WAY_RADIO, true );
     bool guy_has_radio = cache_has_item_with_flag( json_flag_TWO_WAY_RADIO, true );
     // is the NPC even in the same area as the player?
-    if( rl_dist( player_abspos, global_omt_location() ) > 3 ||
-        ( rl_dist( player_character.pos(), pos() ) > SEEX * 2 || !player_character.sees( pos_bub() ) ) ) {
+    if( rl_dist( player_abspos, pos_abs_omt() ) > 3 ||
+        ( rl_dist( player_character.pos_abs(), pos_abs() ) > SEEX * 2 ||
+          !player_character.sees( here, pos_bub( here ) ) ) ) {
         if( u_has_radio && guy_has_radio ) {
-            if( !( player_character.pos().z >= 0 && pos().z >= 0 ) &&
-                !( player_character.pos().z == pos().z ) ) {
+            if( !( player_character.posz() >= 0 && posz() >= 0 ) &&
+                !( player_character.posz() == posz() ) ) {
                 //Early exit
                 can_see = _( "Not within radio range" );
                 see_color = c_light_red;
             } else {
                 // TODO: better range calculation than just elevation.
                 const int base_range = 200;
-                float send_elev_boost = ( 1 + ( player_character.pos().z * 0.1 ) );
-                float recv_elev_boost = ( 1 + ( pos().z * 0.1 ) );
-                if( ( square_dist( player_character.global_sm_location(),
-                                   global_sm_location() ) <= base_range * send_elev_boost * recv_elev_boost ) ) {
+                float send_elev_boost = ( 1 + ( player_character.posz() * 0.1 ) );
+                float recv_elev_boost = ( 1 + ( posz() * 0.1 ) );
+                if( ( square_dist( player_character.pos_abs_sm(),
+                                   pos_abs_sm() ) <= base_range * send_elev_boost * recv_elev_boost ) ) {
                     //Direct radio contact, both of their elevation are in effect
                     retval = 2;
                     can_see = _( "Within radio range" );
@@ -710,9 +716,9 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
                     const int radio_tower_boost = 5;
                     // find camps that are near player or npc
                     const std::vector<camp_reference> &camps_near_player = overmap_buffer.get_camps_near(
-                                player_character.global_sm_location(), send_range * radio_tower_boost );
+                                player_character.pos_abs_sm(), send_range * radio_tower_boost );
                     const std::vector<camp_reference> &camps_near_npc = overmap_buffer.get_camps_near(
-                                global_sm_location(), recv_range * radio_tower_boost );
+                                pos_abs_sm(), recv_range * radio_tower_boost );
                     bool camp_to_npc = false;
                     bool camp_to_camp = false;
                     for( const camp_reference &i : camps_near_player ) {
@@ -720,7 +726,7 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
                             continue;
                         }
                         if( camp_to_camp ||
-                            square_dist( i.abs_sm_pos, global_sm_location() ) <= recv_range * radio_tower_boost ) {
+                            square_dist( i.abs_sm_pos, pos_abs_sm() ) <= recv_range * radio_tower_boost ) {
                             //one radio tower relay
                             camp_to_npc = true;
                             break;
@@ -749,10 +755,10 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
             can_see = _( "You do not have a radio" );
             see_color = c_light_red;
         } else if( !guy_has_radio && u_has_radio ) {
-            can_see = _( "Follower does not have a radio" );
+            can_see = _( "Your follower does not have a radio" );
             see_color = c_light_red;
         } else {
-            can_see = _( "Both you and follower need a radio" );
+            can_see = _( "Both you and your follower need a radio" );
             see_color = c_light_red;
         }
     } else {
@@ -762,7 +768,7 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
     }
     // TODO: NPCS on mission contactable same as traveling
     if( has_companion_mission() ) {
-        can_see = _( "Press enter to recall from their mission." );
+        can_see = _( "Press enter to recall from their mission" );
         see_color = c_light_red;
     }
     mvwprintz( fac_w, point( width, ++y ), see_color, "%s", can_see );
@@ -1069,8 +1075,6 @@ void faction_manager::display() const
             if( name.has_value() ) {
                 if( !name->empty() ) {
                     lore.emplace_back( elem, name->translated() );
-                } else {
-                    lore.emplace_back( elem, elem.str() );
                 }
             }
         }

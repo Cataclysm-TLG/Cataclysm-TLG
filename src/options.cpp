@@ -4,6 +4,7 @@
 #include <climits>
 #include <clocale>
 #include <iterator>
+#include <limits>
 #include <stdexcept>
 
 #include "cached_options.h"
@@ -195,7 +196,10 @@ static const std::map<std::string, std::pair<std::string, std::map<std::string, 
 &get_migrated_options()
 {
     static const std::map<std::string, std::pair<std::string, std::map<std::string, std::string>>> opt
-    = { {"DELETE_WORLD", { "WORLD_END", { {"no", "keep" }, {"yes", "delete"} } } } };
+    = {
+        {"DELETE_WORLD", { "WORLD_END", { {"no", "keep" }, {"yes", "delete"} } } },
+        {"MONSTER_UPGRADE_FACTOR", { "EVOLUTION_INVERSE_MULTIPLIER", {} }} //TODO: Remove after stable after world option reserialising is added, value migration done in migrateOptionValue instead
+    };
     return opt;
 }
 
@@ -324,14 +328,14 @@ void options_manager::add_external( const std::string &sNameIn, const std::strin
             thisOpt.bDefault = false;
             break;
         case cOpt::CVT_INT:
-            thisOpt.iMin = INT_MIN;
-            thisOpt.iMax = INT_MAX;
+            thisOpt.iMin = std::numeric_limits<int>::lowest();
+            thisOpt.iMax = std::numeric_limits<int>::max();
             thisOpt.iDefault = 0;
             thisOpt.iSet = 0;
             break;
         case cOpt::CVT_FLOAT:
-            thisOpt.fMin = FLT_MIN;
-            thisOpt.fMax = FLT_MAX;
+            thisOpt.fMin = std::numeric_limits<float>::lowest();
+            thisOpt.fMax = std::numeric_limits<float>::max();
             thisOpt.fDefault = 0;
             thisOpt.fSet = 0;
             thisOpt.fStep = 1;
@@ -1706,9 +1710,15 @@ void options_manager::add_options_general()
              true, COPT_NO_SOUND_HIDE
            );
 
+
+        std::vector<id_and_option> const soundpacks = build_soundpacks_list();
         add( "SOUNDPACKS", page_id, to_translation( "Choose soundpack" ),
              to_translation( "Choose the soundpack you want to use.  Requires restart." ),
-             build_soundpacks_list(), "basic", COPT_NO_SOUND_HIDE
+             soundpacks, std::any_of( soundpacks.begin(), soundpacks.end(),
+        []( const id_and_option & option ) {
+            return option.first == "CC-Sounds";
+        } )  ? "CC-Sounds" : "basic",
+        COPT_NO_SOUND_HIDE
            ); // populate the options dynamically
 
         get_option( "SOUNDPACKS" ).setPrerequisite( "SOUND_ENABLED" );
@@ -1734,6 +1744,9 @@ void options_manager::add_options_general()
 
         get_option( "AMBIENT_SOUND_VOLUME" ).setPrerequisite( "SOUND_ENABLED" );
     } );
+
+    add_empty_line();
+
 }
 
 void options_manager::add_options_interface()
@@ -1752,33 +1765,19 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "measurement_unit", to_translation( "Measurement Units" ),
                                           to_translation( "Options regarding measurement units." ) ),
     [&]( const std::string & page_id ) {
+        add( "UNIT_SYSTEM", page_id, to_translation( "Unit System" ),
+             to_translation( "Switch between metric and imperial units for speed, weight, volume, and distance." ),
+        {
+            { "imperial", to_translation( "Imperial (mph, lbs, quarts)" ) },
+            { "metric", to_translation( "Metric (km/h, kg, liters)" ) }
+        },
+        ( SystemLocale::UseMetricSystem().value_or( false ) ? "metric" : "imperial" ) );
+
         add( "USE_CELSIUS", page_id, to_translation( "Temperature units" ),
              to_translation( "Switch between Fahrenheit, Celsius, and Kelvin." ),
         { { "fahrenheit", to_translation( "Fahrenheit" ) }, { "celsius", to_translation( "Celsius" ) }, { "kelvin", to_translation( "Kelvin" ) } },
         "fahrenheit"
            );
-
-        add( "USE_METRIC_SPEEDS", page_id, to_translation( "Speed units" ),
-             to_translation( "Switch between mph, km/h, and tiles/turn." ),
-        { { "mph", to_translation( "mph" ) }, { "km/h", to_translation( "km/h" ) }, { "t/t", to_translation( "tiles/turn" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "km/h" : "mph" )
-           );
-
-        add( "USE_METRIC_WEIGHTS", page_id, to_translation( "Mass units" ),
-             to_translation( "Switch between lbs and kg." ),
-        { { "lbs", to_translation( "lbs" ) }, { "kg", to_translation( "kg" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "kg" : "lbs" )
-           );
-
-        add( "VOLUME_UNITS", page_id, to_translation( "Volume units" ),
-             to_translation( "Switch between the cups (c), liters (L), and quarts (qt)." ),
-        { { "c", to_translation( "Cup" ) }, { "l", to_translation( "Liter" ) }, { "qt", to_translation( "Quart" ) } },
-        "l"
-           );
-        add( "DISTANCE_UNITS", page_id, to_translation( "Distance units" ),
-             to_translation( "Switch between metric and imperial distance units." ),
-        { { "metric", to_translation( "Metric" ) }, { "imperial", to_translation( "Imperial" ) } },
-        ( SystemLocale::UseMetricSystem().value_or( false ) ? "metric" : "imperial" ) );
 
         add( "24_HOUR", page_id, to_translation( "Time format" ),
              to_translation( "12h: AM/PM, e.g. 7:31 AM - Military: 24h Military, e.g. 0731 - 24h: Normal 24h, e.g. 7:31" ),
@@ -1831,9 +1830,6 @@ void options_manager::add_options_interface()
         add( "SHOW_DRUG_VARIANTS", page_id, to_translation( "Show drug brand names" ),
              to_translation( "If true, show brand names for drugs, instead of generic functional names - 'Adderall', instead of 'prescription stimulant'." ),
              false );
-        add( "SHOW_GUN_VARIANTS", page_id, to_translation( "Show gun brand names" ),
-             to_translation( "If true, show brand names for guns, instead of generic functional names - 'm4a1' or 'h&k416a5' instead of 'NATO assault rifle'." ),
-             true );
         add( "AMMO_IN_NAMES", page_id, to_translation( "Add ammo to weapon/magazine names" ),
              to_translation( "If true, the default ammo is added to weapon and magazine names.  For example \"Mosin-Nagant M44 (4/5)\" becomes \"Mosin-Nagant M44 (4/5 7.62x54mm)\"." ),
              true
@@ -1884,24 +1880,9 @@ void options_manager::add_options_interface()
              true
            );
 
-        add( "QUERY_DISASSEMBLE", page_id, to_translation( "Query on item disassembly" ),
-             to_translation( "If true, will query before disassembling items." ),
-             true
-           );
-
-        add( "QUERY_DECONSTRUCT", page_id, to_translation( "Query on terrain/furniture deconstruction" ),
-             to_translation( "If true, will query before deconstructing terrain/furniture." ),
-             true
-           );
-
         add( "QUERY_KEYBIND_REMOVAL", page_id, to_translation( "Query on keybinding removal" ),
              to_translation( "If true, will query before removing a keybinding from a hotkey." ),
              true
-           );
-
-        add( "CLOSE_ADV_INV", page_id, to_translation( "Close advanced inventory on move all" ),
-             to_translation( "If true, will close the advanced inventory when the move all items command is used." ),
-             false
            );
 
         add( "OPEN_DEFAULT_ADV_INV", page_id,
@@ -2168,6 +2149,10 @@ void options_manager::add_options_interface()
     add_option_group( "interface", Group( "mouse_cont_opts", to_translation( "Mouse Control Options" ),
                                           to_translation( "Options regarding mouse control." ) ),
     [&]( const std::string & page_id ) {
+        add( "ENABLE_MOUSE", page_id, to_translation( "Enable mouse" ),
+             to_translation( "Enable input from mouse." ),
+             true, COPT_NO_HIDE
+           );
         add( "ENABLE_JOYSTICK", page_id, to_translation( "Enable joystick" ),
              to_translation( "If true, enable input from joystick." ),
              true, COPT_CURSES_HIDE
@@ -2183,6 +2168,7 @@ void options_manager::add_options_interface()
             { "hidekb", to_translation( "HideKB" ) }
         },
         "show", COPT_CURSES_HIDE );
+        get_option( "HIDE_CURSOR" ).setPrerequisite( "ENABLE_MOUSE" );
 
         add( "EDGE_SCROLL", page_id, to_translation( "Edge scrolling" ),
         to_translation( "Edge scrolling with the mouse." ), {
@@ -2192,6 +2178,7 @@ void options_manager::add_options_interface()
             { 10, to_translation( "Fast" ) },
         },
         30, 30, COPT_CURSES_HIDE );
+        get_option( "EDGE_SCROLL" ).setPrerequisite( "ENABLE_MOUSE" );
     } );
 
 }
@@ -2396,6 +2383,11 @@ void options_manager::add_options_graphics()
              build_tilesets_list(), "MshockXottoplus", COPT_CURSES_HIDE
            ); // populate the options dynamically
 
+        add( "CREATURE_OVERLAY_ICONS", page_id, to_translation( "Show overlay icons over creatures" ),
+             to_translation( "If true, show overlay icons over creatures such as effects, move mode and whether creatures can see the player." ),
+             true, COPT_CURSES_HIDE
+           );
+
         add( "SWAP_ZOOM", page_id, to_translation( "Zoom Threshold" ),
              to_translation( "Choose when you should swap tileset (lower is more zoomed out)." ),
              1, 4, 2, COPT_CURSES_HIDE
@@ -2406,6 +2398,7 @@ void options_manager::add_options_graphics()
         get_option( "USE_DISTANT_TILES" ).setPrerequisite( "USE_TILES" );
         get_option( "DISTANT_TILES" ).setPrerequisite( "USE_DISTANT_TILES" );
         get_option( "SWAP_ZOOM" ).setPrerequisite( "USE_DISTANT_TILES" );
+        get_option( "CREATURE_OVERLAY_ICONS" ).setPrerequisite( "USE_TILES" );
 
         add( "USE_OVERMAP_TILES", page_id, to_translation( "Use tiles to display overmap" ),
              to_translation( "If true, replaces some TTF-rendered text with tiles for overmap display." ),
@@ -2425,7 +2418,7 @@ void options_manager::add_options_graphics()
 
         add( "OVERMAP_TILES", page_id, to_translation( "Choose overmap tileset" ),
              to_translation( "Choose the overmap tileset you want to use." ),
-             om_tilesets, "ChibiUltica", COPT_CURSES_HIDE
+             om_tilesets, "MshockXottoplus", COPT_CURSES_HIDE
            ); // populate the options dynamically
 
         get_option( "OVERMAP_TILES" ).setPrerequisite( "USE_OVERMAP_TILES" );
@@ -2713,10 +2706,10 @@ void options_manager::add_options_world_default()
              0.0, 100.0, 4.0, 0.01
            );
 
-        add( "MONSTER_UPGRADE_FACTOR", page_id,
+        add( "EVOLUTION_INVERSE_MULTIPLIER", page_id,
              to_translation( "Monster evolution slowdown" ),
-             to_translation( "A scaling factor that determines the time between monster upgrades.  A higher number means slower evolution.  Set to 0.00 to turn off monster upgrades." ),
-             0.0, 100, 4.0, 0.01
+             to_translation( "A multiplier for the time between monster upgrades.  For example a value of 2.00 would cause evolution to occur at half speed.  Set to 0.00 to turn off monster upgrades." ),
+             0.0, 100, 1.0, 0.01
            );
     } );
 
@@ -2780,24 +2773,6 @@ void options_manager::add_options_debug()
 
     add_empty_line();
 
-    add( "DEBUG_DIFFICULTIES", "debug", to_translation( "Show values for character creation" ),
-         to_translation( "In character creation will show the underlying value that is used to determine difficulty." ),
-         false
-       );
-
-    add_empty_line();
-
-    add( "FOV_3D_Z_RANGE", "debug", to_translation( "Vertical range of 3D field of vision" ),
-         to_translation(
-             "How many levels up and down the 3D field of vision reaches.  (This many levels up, this many levels down.)  "
-             "3D vision of the full height of the world can slow the game down a lot.  Seeing fewer Z-levels is faster.  "
-             "Setting this to 0 disables vertical vision.  In tiles mode this also affects how many levels up and down are "
-             "drawn on screen, and setting this to 0 displays only one level below with colored blocks instead." ),
-         0, OVERMAP_LAYERS, 4
-       );
-
-    add_empty_line();
-
     add_option_group( "debug", Group( "occlusion_opts", to_translation( "Occlusion Options" ),
                                       to_translation( "Options regarding occlusion." ) ),
     [&]( const std::string & page_id ) {
@@ -2805,7 +2780,7 @@ void options_manager::add_options_debug()
         to_translation( "Draw walls normal (Off), retracted/transparent (On), or automatically retracting/transparent near player (Auto)." ), {
             { 0, to_translation( "Off" ) }, { 1, to_translation( "On" ) },
             { 2, to_translation( "Auto" ) }
-        }, 2, 2
+        }, 0, 2
            );
 
         add( "PREVENT_OCCLUSION_TRANSP", page_id, to_translation( "Prevent occlusion via transparency" ),
@@ -3219,7 +3194,7 @@ static void draw_borders_external(
 static void draw_borders_internal( const catacurses::window &w, std::set<int> &vert_lines )
 {
     wattron( w, BORDER_COLOR );
-    mvwhline( w, point_zero, LINE_OXOX, getmaxx( w ) ); // -
+    mvwhline( w, point::zero, LINE_OXOX, getmaxx( w ) ); // -
     for( const int &x : vert_lines ) {
         mvwaddch( w, point( x, 0 ), LINE_OXXX ); // -.-
     }
@@ -3564,7 +3539,7 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
 
         const PageItem &curr_item = page_items[iCurrentLine];
         std::string tooltip = curr_item.fmt_tooltip( curr_item.group, cOPTIONS );
-        fold_and_print( w_options_tooltip, point_zero, iMinScreenWidth - 2, c_white, tooltip );
+        fold_and_print( w_options_tooltip, point::zero, iMinScreenWidth - 2, c_white, tooltip );
 
         if( ingame && iCurrentPage == iWorldOptPage ) {
             mvwprintz( w_options_tooltip, point( 3, 5 ), c_light_red, "%s", _( "Note: " ) );
@@ -3953,6 +3928,17 @@ std::string options_manager::migrateOptionName( const std::string &name ) const
 std::string options_manager::migrateOptionValue( const std::string &name,
         const std::string &val ) const
 {
+    //TODO: Remove after stable after world option reserialising is added
+    if( name == "MONSTER_UPGRADE_FACTOR" ) {
+        const float new_value = std::stof( val ) / 4.0f;
+        std::ostringstream ssTemp;
+        ssTemp.imbue( std::locale::classic() );
+        ssTemp.precision( 2 );
+        ssTemp.setf( std::ios::fixed, std::ios::floatfield );
+        ssTemp << new_value;
+        return ssTemp.str();
+    }
+
     const auto iter = get_migrated_options().find( name );
     if( iter == get_migrated_options().end() ) {
         return val;
@@ -3972,6 +3958,7 @@ void options_manager::update_options_cache()
     prevent_occlusion_transp = ::get_option<bool>( "PREVENT_OCCLUSION_TRANSP" );
     prevent_occlusion_min_dist = ::get_option<float>( "PREVENT_OCCLUSION_MIN_DIST" );
     prevent_occlusion_max_dist = ::get_option<float>( "PREVENT_OCCLUSION_MAX_DIST" );
+    show_creature_overlay_icons = ::get_option<bool>( "CREATURE_OVERLAY_ICONS" );
 
     // if the tilesets are identical don't duplicate
     use_far_tiles = ::get_option<bool>( "USE_DISTANT_TILES" ) ||
@@ -3980,8 +3967,9 @@ void options_manager::update_options_cache()
     log_from_top = ::get_option<std::string>( "LOG_FLOW" ) == "new_top";
     message_ttl = ::get_option<int>( "MESSAGE_TTL" );
     message_cooldown = ::get_option<int>( "MESSAGE_COOLDOWN" );
-    fov_3d_z_range = ::get_option<int>( "FOV_3D_Z_RANGE" );
     keycode_mode = ::get_option<std::string>( "SDL_KEYBOARD_MODE" ) == "keycode";
+    cata::options::mouse.enabled = ::get_option<bool>( "ENABLE_MOUSE" );
+    cata::options::mouse.hidekb = ::get_option<std::string>( "HIDE_CURSOR" ) == "hidekb";
     use_pinyin_search = ::get_option<bool>( "USE_PINYIN_SEARCH" );
 
     cata::options::damage_indicators.clear();

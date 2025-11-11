@@ -494,7 +494,6 @@
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
         "covers": [ "head" ],
         "coverage": 100,
-        "cover_vitals": 65,
         "encumbrance": 1,
         "specifically_covers": [ "head_throat" ]
       }
@@ -735,6 +734,42 @@
         "covers": [ "mouth" ],
         "coverage": 40,
         "encumbrance": 5
+      }
+    ],
+    "melee_damage": { "stab": 14 }
+  },
+  {
+    "id": "integrated_barbed_tongue",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "barbed tongue" },
+    "description": "Though this tongue fits neatly within the mouth, it can extend to an astonishing length.  Sharp chitin barbs like a grotesque parody of a cat's tongue line the surface, and the barb at the tip looks more like a whaler's harpoon than something that belongs in a mouth.",
+    "weight": "800 g",
+    "volume": "1200 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "sclerotin", "flesh" ],
+    "symbol": ";",
+    "color": "brown",
+    "warmth": 2,
+    "flags": [
+      "INTEGRATED",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "PADDED",
+      "NO_SALVAGE",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
+    "techniques": [ "TONGUE_STAB" ],
+    "armor": [
+      {
+        "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 3 } ],
+        "covers": [ "mouth" ],
+        "coverage": 10,
+        "encumbrance": 3
       }
     ],
     "melee_damage": { "stab": 14 }
@@ -1513,7 +1548,7 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str_sp": "protective lenses" },
-    "description": "Highly protective lenses which seal off your eyes from danger, routing your tear ducts to your mouth.",
+    "description": "Highly protective lenses which can retract into frames bolted right into the user's skull.  They provide near-total protection for the eyes and even function underwater.",
     "weight": "180 g",
     "volume": "250 ml",
     "price": "0 cent",
@@ -1524,17 +1559,19 @@
     "color": "dark_gray",
     "warmth": 0,
     "material_thickness": 1.5,
-    "environmental_protection": 10,
+    "environmental_protection": 15,
+    "qualities": [ [ "GLARE", 1 ] ],
     "flags": [
       "INTEGRATED",
       "UNBREAKABLE",
       "SKINTIGHT",
-      "SOFT",
       "WATER_FRIENDLY",
       "SUN_GLASSES",
       "NO_REPAIR",
       "SWIM_GOGGLES",
-      "NO_SALVAGE"
+      "PADDED",
+      "NO_SALVAGE",
+      "FLASH_PROTECTION"
     ],
     "armor": [
       {
@@ -1544,9 +1581,36 @@
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 1,
-        "rigid_layer_only": true,
-        "cover_vitals": 90
+        "encumbrance": 5,
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "integrated_lidless_eyes",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str_sp": "ocular scales" },
+    "description": "Transparent scales seal the corneas behind a firm but flexible lens.  It's enough to keep water and most irritants at bay, and it would be very difficult to sneak up on one who sleeps with their eyes open.",
+    "weight": "50 g",
+    "volume": "25 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "to_hit": -2,
+    "material": [ "scales" ],
+    "symbol": "[",
+    "color": "light_gray",
+    "warmth": 0,
+    "material_thickness": 0.2,
+    "environmental_protection": 10,
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "PADDED", "SWIM_GOGGLES", "NO_SALVAGE" ],
+    "armor": [
+      {
+        "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.2 } ],
+        "covers": [ "eyes" ],
+        "coverage": 100,
+        "encumbrance": 0,
+        "rigid_layer_only": true
       }
     ]
   },
@@ -1644,7 +1708,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 2 } ],
@@ -1660,7 +1724,7 @@
     "id": "integrated_fingertip_razors",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str_sp": "Fingertip Razors" },
+    "name": { "str_sp": "fingertip razors" },
     "description": "Small steel blades peek from beneath the fingernails, like a manicure from hell.",
     "weight": "80 g",
     "volume": "100 ml",
@@ -1680,9 +1744,10 @@
       "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
-      "NATURAL_WEAPON"
+      "NATURAL_WEAPON",
+      "CONDUCTIVE"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.4 } ],
@@ -1720,7 +1785,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_CLAW" ],
+    "techniques": [ "TEC_CLAW", "tec_paws_large_claw" ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 3 } ],
@@ -1757,7 +1822,7 @@
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
-    "techniques": [ "TEC_TENTACLE_RAKE_NATURAL" ],
+    "techniques": [ "TEC_CLAW", "TEC_TENTACLE_RAKE_NATURAL" ],
     "armor": [
       {
         "material": [ { "type": "chitin", "covered_by_mat": 100, "thickness": 3 } ],

@@ -16,7 +16,7 @@ point point::from_string( const std::string &s )
     is >> result;
     if( !is ) {
         debugmsg( "Could not convert string '" + s + "' to point" );
-        return point_zero;
+        return point::zero;
     }
     return result;
 }
@@ -71,7 +71,7 @@ tripoint tripoint::from_string( const std::string &s )
     is >> result;
     if( !is ) {
         debugmsg( "Could not convert string '" + s + "' to tripoint" );
-        return tripoint_zero;
+        return tripoint::zero;
     }
     return result;
 }
@@ -104,16 +104,18 @@ std::ostream &operator<<( std::ostream &os, const tripoint &pos )
 std::istream &operator>>( std::istream &is, point &pos )
 {
     char c;
-    is.get( c ) &&c == '(' &&is >> pos.x &&is.get( c ) &&c == ',' &&is >> pos.y &&
-                                is.get( c ) &&c == ')';
+    static_cast<void>( is.get( c ) && c == '(' && is >> pos.x && is.get( c ) && c == ',' &&
+                       is >> pos.y &&
+                       is.get( c ) && c == ')' );
     return is;
 }
 
 std::istream &operator>>( std::istream &is, tripoint &pos )
 {
     char c;
-    is.get( c ) &&c == '(' &&is >> pos.x &&is.get( c ) &&c == ',' &&is >> pos.y &&
-                                is.get( c ) &&c == ',' &&is >> pos.z &&is.get( c ) &&c == ')';
+    static_cast<void>( is.get( c ) && c == '(' && is >> pos.x && is.get( c ) && c == ',' &&
+                       is >> pos.y &&
+                       is.get( c ) && c == ',' && is >> pos.z && is.get( c ) && c == ')' );
     return is;
 }
 
@@ -166,7 +168,7 @@ std::vector<point> closest_points_first( const point &center, int min_dist, int 
     int x_init = std::max( min_dist, 1 );
     point p( x_init, 1 - x_init );
 
-    point d( point_east );
+    point d( point::east );
 
     for( int i = 0; i < n; i++ ) {
         result.push_back( center + p );

@@ -31,7 +31,7 @@
         "s;                    4s",
         "ss                    ss"
       ],
-      "palettes": [ "parametrized_walls_palette" ],
+      "palettes": [ "parametrized_linoleum_palette", "parametrized_walls_palette" ],
       "terrain": {
         ";": "t_region_groundcover_urban",
         "H": "t_region_groundcover_urban",
@@ -50,9 +50,9 @@
         "=": "t_door_c",
         "-": "t_wall_glass",
         ".": "t_floor",
-        "S": "t_linoleum_gray",
-        "w": "t_linoleum_gray",
-        "t": "t_linoleum_gray",
+        "S": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "w": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "t": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
         "*": "t_thconc_floor",
         "Q": "t_thconc_floor",
         "Y": "t_thconc_floor",
@@ -110,10 +110,7 @@
         { "item": "cash_register_random", "x": 18, "y": [ 8, 10 ], "chance": 100 }
       ],
       "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 2, 21 ], "y": [ 2, 21 ], "repeat": [ 1, 4 ] } ],
-      "place_vendingmachines": [
-        { "item_group": "vending_food", "x": 4, "y": 6, "lootable": true },
-        { "item_group": "vending_drink", "x": 18, "y": 6, "lootable": true }
-      ]
+      "place_vendingmachines": [ { "item_group": "vending_food", "x": 4, "y": 6 }, { "item_group": "vending_drink", "x": 18, "y": 6 } ]
     }
   },
   {

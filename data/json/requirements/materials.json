@@ -44,20 +44,20 @@
   {
     "id": "antler",
     "type": "requirement",
-    "//": "Will I ever add more antler types? Who knows.",
+    "//": "A whole entire antler.",
     "components": [ [ [ "antler", 1 ] ] ]
   },
   {
     "id": "bone_edible",
     "type": "requirement",
     "//": "Any kind of non-poisonous bones, human or not.",
-    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ], [ "bone_demihuman", 1 ] ] ]
+    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ] ] ]
   },
   {
     "id": "bone_sturdy",
     "type": "requirement",
     "//": "Any kind of bones, human or not.  Tainted bones are too brittle and won't work for this purpose.",
-    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ], [ "bone_demihuman", 1 ] ] ]
+    "components": [ [ [ "bone", 1 ], [ "bone_human", 1 ] ] ]
   },
   {
     "id": "bone_any",
@@ -278,7 +278,7 @@
     "id": "fabric_leather_hide",
     "type": "requirement",
     "//": "Materials used for crafting leather clothing.",
-    "components": [ [ [ "leather", 8 ], [ "sheet_leather_patchwork", 1 ], [ "tanned_hide", 1 ] ] ]
+    "components": [ [ [ "leather", 8 ], [ "sheet_leather_patchwork", 1 ], [ "sheet_leather", 1 ] ] ]
   },
   {
     "id": "fabric_leather_fur_hide",
@@ -288,7 +288,7 @@
       [
         [ "leather", 8 ],
         [ "fur", 8 ],
-        [ "tanned_hide", 1 ],
+        [ "sheet_leather", 1 ],
         [ "tanned_pelt", 1 ],
         [ "sheet_leather_patchwork", 1 ],
         [ "sheet_fur_patchwork", 1 ]
@@ -445,15 +445,15 @@
     "//": "Materials for fletching arrows.",
     "components": [
       [
-        [ "feather", 10 ],
-        [ "duct_tape", 40 ],
-        [ "cardboard", 10 ],
+        [ "feather", 2 ],
+        [ "duct_tape", 10 ],
+        [ "cardboard", 1 ],
         [ "bag_plastic", 1 ],
-        [ "bag_plastic_small", 4 ],
+        [ "bag_plastic_small", 1 ],
         [ "bottle_plastic_small", 1 ],
         [ "plastic_chunk", 1 ],
-        [ "aluminum_foil", 40 ],
-        [ "cash_card", 2 ]
+        [ "aluminum_foil", 10 ],
+        [ "cash_card", 1 ]
       ]
     ]
   },

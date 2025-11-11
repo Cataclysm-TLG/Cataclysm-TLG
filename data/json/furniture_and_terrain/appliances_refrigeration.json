@@ -203,6 +203,7 @@
     "//": "22 kwh, but since you open it and use it, 1.2 as much",
     "//2": "listed capacity is 99L, but internal dimensions are 117L. 100 L for round number.",
     "item": "chest_minifreezer",
+    "location": "center",
     "size": "150 L",
     "breaks_into": [ { "group": "chest_minifreezer_destroyed" } ],
     "flags": [ "CARGO", "OBSTACLE", "FREEZER", "COVERED", "ENABLED_DRAINS_EPOWER", "APPLIANCE", "CTRL_ELECTRONIC" ],

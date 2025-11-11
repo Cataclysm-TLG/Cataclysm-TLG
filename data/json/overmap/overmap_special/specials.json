@@ -240,7 +240,7 @@
     "locations": [ "land" ],
     "city_distance": [ 4, -1 ],
     "occurrences": [ 0, 1 ],
-    "flags": [ "CLASSIC", "WILDERNESS" ]
+    "flags": [ "CLASSIC", "WILDERNESS", "WATER" ]
   },
   {
     "type": "overmap_special",
@@ -300,9 +300,9 @@
     ],
     "locations": [ "forest" ],
     "city_distance": [ 12, -1 ],
-    "occurrences": [ 30, 100 ],
+    "occurrences": [ 10, 100 ],
     "priority": 1,
-    "flags": [ "CLASSIC", "FARM", "OVERMAP_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
+    "flags": [ "CLASSIC", "FARM", "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
   },
   {
     "type": "overmap_special",
@@ -722,17 +722,14 @@
   },
   {
     "type": "overmap_special",
-    "id": "Cabin_Lapin",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "cabin_lapin_north" },
-      { "point": [ 0, 0, 1 ], "overmap": "cabin_roof_lapin_north" }
-    ],
+    "id": "Cabin_8",
+    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "cabin_8_north" }, { "point": [ 0, 0, 1 ], "overmap": "cabin_roof_8_north" } ],
     "connections": [ { "point": [ 0, -1, 0 ], "terrain": "forest_trail", "connection": "forest_trail" } ],
     "locations": [ "forest" ],
     "city_distance": [ 25, -1 ],
-    "occurrences": [ 50, 100 ],
-    "//": "Inflated chance, effective rate ~40%",
-    "flags": [ "WILDERNESS", "OVERMAP_UNIQUE", "MAN_MADE" ]
+    "city_sizes": [ 0, 20 ],
+    "occurrences": [ 0, 1 ],
+    "flags": [ "CLASSIC", "WILDERNESS", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -945,20 +942,8 @@
     "id": "military_outpost",
     "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "outpost_north" }, { "point": [ 0, 0, 1 ], "overmap": "outpost_roof_north" } ],
     "locations": [ "field", "forest_without_trail" ],
-    "city_distance": [ 15, -1 ],
-    "occurrences": [ 5, 100 ],
-    "flags": [ "MILITARY", "OVERMAP_UNIQUE", "WILDERNESS", "MAN_MADE" ]
-  },
-  {
-    "type": "overmap_special",
-    "id": "military_outpost_cross",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "outpost_cross_north" },
-      { "point": [ 0, 0, 1 ], "overmap": "outpost_cross_roof_north" }
-    ],
-    "locations": [ "field", "forest_without_trail" ],
-    "city_distance": [ 15, -1 ],
-    "occurrences": [ 5, 100 ],
+    "city_distance": [ 0, 10 ],
+    "occurrences": [ 10, 100 ],
     "flags": [ "MILITARY", "OVERMAP_UNIQUE", "WILDERNESS", "MAN_MADE" ]
   },
   {
@@ -979,7 +964,7 @@
     "city_distance": [ 30, -1 ],
     "city_sizes": [ -1, 4 ],
     "occurrences": [ 10, 100 ],
-    "flags": [ "MILITARY", "OVERMAP_UNIQUE", "MAN_MADE" ]
+    "flags": [ "MILITARY", "GLOBALLY_UNIQUE", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -1085,7 +1070,7 @@
     "city_distance": [ 5, 25 ],
     "occurrences": [ 80, 100 ],
     "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 50, 80 ], "radius": [ 6, 20 ] },
-    "flags": [ "OVERMAP_UNIQUE", "MAN_MADE" ]
+    "flags": [ "WASP", "OVERMAP_UNIQUE", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -1106,7 +1091,7 @@
     "city_distance": [ 5, 25 ],
     "occurrences": [ 80, 100 ],
     "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 50, 100 ], "radius": [ 6, 20 ] },
-    "flags": [ "OVERMAP_UNIQUE", "MAN_MADE" ]
+    "flags": [ "WASP", "OVERMAP_UNIQUE", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -1500,16 +1485,18 @@
     "city_sizes": [ 0, 12 ],
     "occurrences": [ 33, 100 ],
     "rotate": false,
-    "flags": [ "WILDERNESS", "OVERMAP_UNIQUE" ]
+    "flags": [ "SPIDER", "WILDERNESS", "OVERMAP_UNIQUE" ]
   },
   {
     "type": "overmap_special",
     "id": "Slime Pit",
-    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "slimepit_top" }, { "point": [ 0, 0, -1 ], "overmap": "slimepit_bottom" } ],
+    "overmaps": [
+      { "point": [ 0, 0, 0 ], "overmap": "slimepit_z0_north" },
+      { "point": [ 0, 0, -1 ], "overmap": "slimepit_z-1_north" },
+      { "point": [ 0, 0, -2 ], "overmap": "slimepit_z-2_north" }
+    ],
     "locations": [ "wilderness", "agricultural" ],
-    "city_distance": [ 3, 30 ],
     "occurrences": [ 0, 3 ],
-    "rotate": false,
     "spawns": { "group": "GROUP_GOO", "population": [ 100, 200 ], "radius": [ 2, 10 ] },
     "flags": [ "SLIME", "WILDERNESS" ]
   },
@@ -2548,29 +2535,6 @@
   },
   {
     "type": "overmap_special",
-    "id": "bandit_work_camp",
-    "overmaps": [
-      { "point": [ 0, 0, 0 ], "overmap": "bandit_farm_5_north" },
-      { "point": [ -1, 0, 0 ], "overmap": "bandit_farm_6_north" },
-      { "point": [ 1, 0, 0 ], "overmap": "bandit_farm_4_north" },
-      { "point": [ 0, -1, 0 ], "overmap": "bandit_farm_2_north" },
-      { "point": [ -1, -1, 0 ], "overmap": "bandit_farm_3_north" },
-      { "point": [ 1, -1, 0 ], "overmap": "bandit_farm_1_north" },
-      { "point": [ 0, 1, 0 ], "overmap": "bandit_farm_8_north" },
-      { "point": [ -1, 1, 0 ], "overmap": "bandit_farm_9_north" },
-      { "point": [ 1, 1, 0 ], "overmap": "bandit_farm_7_north" },
-      { "point": [ 0, -1, 1 ], "overmap": "bandit_farm_2_roof_north" },
-      { "point": [ -1, -1, 1 ], "overmap": "bandit_farm_3_roof_north" }
-    ],
-    "locations": [ "field" ],
-    "city_distance": [ 20, -1 ],
-    "city_sizes": [ 4, -1 ],
-    "occurrences": [ 10, 100 ],
-    "priority": 1,
-    "flags": [ "CLASSIC", "WILDERNESS", "OVERMAP_UNIQUE", "SAFE_AT_WORLDGEN", "MAN_MADE" ]
-  },
-  {
-    "type": "overmap_special",
     "id": "sai",
     "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "sai_north" }, { "point": [ 0, -1, 0 ], "locations": [ "land", "road" ] } ],
     "connections": [ { "point": [ 0, -1, 0 ], "terrain": "road", "connection": "local_road" } ],
@@ -2578,18 +2542,6 @@
     "city_distance": [ -1, 2 ],
     "city_sizes": [ 8, -1 ],
     "occurrences": [ 0, 2 ],
-    "flags": [ "CLASSIC", "URBAN", "MAN_MADE" ]
-  },
-  {
-    "type": "overmap_special",
-    "id": "solar_farm",
-    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "solar_farm_north" } ],
-    "connections": [ { "point": [ 0, 1, 0 ], "terrain": "road", "connection": "local_road", "existing": true } ],
-    "locations": [ "land" ],
-    "city_distance": [ -1, 2 ],
-    "city_sizes": [ 4, -1 ],
-    "occurrences": [ 0, 2 ],
-    "spawns": { "group": "GROUP_SMALL_STATION", "population": [ 4, 10 ], "radius": [ 0, 0 ] },
     "flags": [ "CLASSIC", "URBAN", "MAN_MADE" ]
   },
   {
@@ -2979,9 +2931,9 @@
     ],
     "connections": [ { "point": [ 0, 2, 0 ], "terrain": "road", "connection": "local_road" } ],
     "locations": [ "field" ],
-    "city_distance": [ 5, -1 ],
-    "occurrences": [ 0, 3 ],
-    "flags": [ "CLASSIC", "FARM", "MAN_MADE" ]
+    "city_distance": [ 10, -1 ],
+    "occurrences": [ 1, 5 ],
+    "flags": [ "CLASSIC", "FARM", "MAN_MADE", "OVERMAP_UNIQUE" ]
   },
   {
     "type": "overmap_special",
@@ -3070,7 +3022,7 @@
     "locations": [ "land" ],
     "city_distance": [ 0, 10 ],
     "city_sizes": [ 6, -1 ],
-    "occurrences": [ 85, 100 ],
+    "occurrences": [ 40, 100 ],
     "flags": [ "OVERMAP_UNIQUE", "CLASSIC", "MAN_MADE" ]
   },
   {
@@ -3119,7 +3071,7 @@
     "connections": [ { "point": [ 1, -1, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 0, 0 ] } ],
     "locations": [ "land" ],
     "city_distance": [ 15, 50 ],
-    "occurrences": [ 60, 100 ],
+    "occurrences": [ 40, 100 ],
     "flags": [ "OVERMAP_UNIQUE", "CLASSIC", "MAN_MADE" ]
   },
   {
@@ -3169,7 +3121,7 @@
     "locations": [ "land" ],
     "city_distance": [ 0, 10 ],
     "city_sizes": [ 6, -1 ],
-    "occurrences": [ 70, 100 ],
+    "occurrences": [ 40, 100 ],
     "flags": [ "OVERMAP_UNIQUE", "CLASSIC", "MAN_MADE" ]
   },
   {
@@ -3265,8 +3217,8 @@
     ],
     "connections": [ { "point": [ 1, -1, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 0, 0 ] } ],
     "locations": [ "land" ],
-    "city_distance": [ 20, 60 ],
-    "occurrences": [ 15, 100 ],
+    "city_distance": [ 15, 60 ],
+    "occurrences": [ 40, 100 ],
     "flags": [ "OVERMAP_UNIQUE", "CLASSIC", "MAN_MADE" ]
   },
   {
@@ -3543,9 +3495,25 @@
     ],
     "connections": [ { "point": [ 0, 0, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 0, 0 ] } ],
     "locations": [ "forest", "field" ],
-    "city_distance": [ 5, 50 ],
-    "occurrences": [ 0, 3 ],
+    "city_distance": [ 8, 50 ],
+    "occurrences": [ 0, 2 ],
     "flags": [ "CLASSIC", "MAN_MADE" ]
+  },
+  {
+    "type": "overmap_special",
+    "id": "church_rural 1",
+    "overmaps": [
+      { "point": [ 1, 0, 0 ], "overmap": "rural_church_parking_massacre_north" },
+      { "point": [ 2, 0, 0 ], "overmap": "rural_church_massacre_north" },
+      { "point": [ 2, 0, -1 ], "overmap": "rural_church_basement_north" },
+      { "point": [ 2, 0, 1 ], "overmap": "rural_church_steeple_north" },
+      { "point": [ 2, 0, 2 ], "overmap": "rural_church_steeple_roof_north" }
+    ],
+    "connections": [ { "point": [ 0, 0, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 0, 0 ] } ],
+    "locations": [ "forest", "field" ],
+    "city_distance": [ 8, 50 ],
+    "occurrences": [ 10, 100 ],
+    "flags": [ "CLASSIC", "MAN_MADE", "OVERMAP_UNIQUE" ]
   },
   {
     "type": "overmap_special",
@@ -4367,8 +4335,8 @@
     "city_distance": [ 5, 40 ],
     "city_sizes": [ 6, -1 ],
     "occurrences": [ 70, 100 ],
-    "//": "Inflated chance, effective rate ~40%",
-    "flags": [ "CLASSIC", "OVERMAP_UNIQUE", "MAN_MADE" ]
+    "//": "Incredibly rare, there are actually no food irradiation plants in New England IRL.",
+    "flags": [ "CLASSIC", "GLOBALLY_UNIQUE", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -4440,7 +4408,7 @@
       { "point": [ 1, -1, 0 ], "terrain": "road", "connection": "local_road" }
     ],
     "locations": [ "land" ],
-    "city_distance": [ 5, -1 ],
+    "city_distance": [ 10, -1 ],
     "city_sizes": [ 4, -1 ],
     "occurrences": [ 0, 2 ],
     "flags": [ "CLASSIC", "MAN_MADE" ]
@@ -5965,7 +5933,7 @@
     "city_sizes": [ 4, -1 ],
     "priority": 1,
     "occurrences": [ 45, 100 ],
-    "//": "Inflated chance, in effect ~10%",
+    "eoc": { "id": "EOC_MIL_BASE_GENERATE", "condition": { "u_has_trait": "MILITARY_BASE_SPAWN" } },
     "flags": [ "MILITARY", "GLOBALLY_UNIQUE", "MAN_MADE", "SAFE_AT_WORLDGEN" ]
   },
   {
@@ -6130,7 +6098,7 @@
       { "point": [ 3, 2, 1 ], "overmap": "fort_4c_1_north" }
     ],
     "locations": [ "field", "forest_without_trail" ],
-    "city_distance": [ 0, 100 ],
+    "city_distance": [ 2, 100 ],
     "city_sizes": [ 0, 12 ],
     "occurrences": [ 5, 100 ],
     "flags": [ "CLASSIC", "GLOBALLY_UNIQUE", "MAN_MADE", "WILDERNESS" ]
@@ -6219,18 +6187,6 @@
     "city_sizes": [ 8, -1 ],
     "occurrences": [ 1, 10 ],
     "flags": [ "CLASSIC", "URBAN", "MAN_MADE", "GLOBALLY_UNIQUE" ]
-  },
-  {
-    "type": "overmap_special",
-    "id": "basement_hidden_lab_entrance",
-    "overmaps": [ { "point": [ 0, 0, -1 ], "overmap": "basement_hidden_lab_stairs" } ],
-    "connections": [ { "point": [ 0, 0, -1 ], "connection": "hidden_lab_basement", "terrain": "basement", "existing": true } ],
-    "rotate": false,
-    "locations": [ "potential_basement_lab_entrance" ],
-    "//": "Low chance to find a matching location, so always try to place it",
-    "occurrences": [ 99, 100 ],
-    "priority": 1,
-    "flags": [ "LAB", "OVERMAP_UNIQUE", "MAN_MADE" ]
   },
   {
     "type": "overmap_special",
@@ -6810,6 +6766,19 @@
     "connections": [ { "point": [ 1, 3, 0 ], "terrain": "road", "connection": "local_road", "from": [ 1, 2, 0 ] } ],
     "locations": [ "land" ],
     "occurrences": [ 1, 3 ],
+    "flags": [ "CLASSIC", "MAN_MADE" ]
+  },
+  {
+    "type": "overmap_special",
+    "id": "billboard",
+    "overmaps": [
+      { "point": [ 0, 0, 0 ], "overmap": "billboard_0_north" },
+      { "point": [ 0, 0, 1 ], "overmap": "billboard_1_north" },
+      { "point": [ 0, 0, 2 ], "overmap": "billboard_2_north" }
+    ],
+    "connections": [ { "point": [ 1, 0, 0 ], "terrain": "road", "connection": "local_road", "existing": true } ],
+    "locations": [ "land" ],
+    "occurrences": [ 2, 8 ],
     "flags": [ "CLASSIC", "MAN_MADE" ]
   }
 ]

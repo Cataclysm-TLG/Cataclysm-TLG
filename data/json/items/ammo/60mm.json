@@ -1,0 +1,33 @@
+[
+  {
+    "id": "60mm_shell_m720a1",
+    "type": "AMMO",
+    "name": { "str": "M720A1 60mm mortar shell", "str_pl": "M720A1 60mm mortar shells" },
+    "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.",
+    "weight": "1700 g",
+    "volume": "680 ml",
+    "longest_side": "376 mm",
+    "price": "400 USD",
+    "price_postapoc": "10 USD",
+    "flags": [ "IRREPLACEABLE_CONSUMABLE" ],
+    "material": [ { "type": "steel", "portion": 80 }, { "type": "powder", "portion": 20 } ],
+    "symbol": "=",
+    "color": "dark_gray",
+    "count": 1,
+    "stack_size": 1,
+    "ammo_type": "mortar_60mm",
+    "effects": [ "SPECIAL_COOKOFF", "NEVER_MISFIRES", "EXPLOSIVE_60mmHE" ]
+  },
+  {
+    "id": "60mm_shell_m768",
+    "copy-from": "60mm_shell_m720a1",
+    "type": "AMMO",
+    "name": { "str": "M768 60mm mortar shell", "str_pl": "M768 60mm mortar shells" },
+    "description": "A high explosive cartridge with a tapered nose and fins at the base.  It is designed to be fired from a mortar and used at long range against troops or light vehicles.  The M768 is a modern update to the older, less effective M720A1.",
+    "weight": "1655 g",
+    "price": "600 USD",
+    "price_postapoc": "12 USD",
+    "extend": { "effects": [ "EXPLOSIVE_60mmHE2" ] },
+    "delete": { "effects": [ "EXPLOSIVE_60mmHE" ] }
+  }
+]

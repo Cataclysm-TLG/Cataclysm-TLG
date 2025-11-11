@@ -6,7 +6,7 @@
     "name": { "str_sp": "vegetable broth" },
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -20,7 +20,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT" ],
-    "fun": 1,
+    "fun": 2,
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
   {
@@ -28,13 +28,10 @@
     "id": "broth_meat",
     "looks_like": "water",
     "name": { "str_sp": "meat broth" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "demihuman %s" } }
-    ],
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } } ],
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -48,7 +45,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT" ],
-    "fun": 1,
+    "fun": 2,
     "vitamins": [ [ "vitC", "1 mg" ], [ "iron", "1 mg" ], [ "calcium", "19 mg" ], [ "meat_allergen", 1 ] ]
   },
   {
@@ -56,19 +53,16 @@
     "id": "broth_bone",
     "looks_like": "broth",
     "name": { "str_sp": "bone broth" },
-    "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "demihuman %s" } }
-    ],
+    "conditional_names": [ { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "human %s" } } ],
     "weight": "253 g",
     "color": "yellow",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
     "quench": 30,
-    "calories": 41,
-    "description": "A tasty and nutritious broth made from bones, with added vinegar to extract more calcium.",
+    "calories": 5,
+    "description": "A broth made from boiling bones, with vinegar added to extract more calcium.",
     "price": "3 USD 50 cent",
     "price_postapoc": "25 cent",
     "material": [ "bone" ],
@@ -77,7 +71,7 @@
     "charges": 2,
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE", "NO_SALVAGE" ],
-    "fun": 10,
+    "fun": 2,
     "vitamins": [ [ "calcium", 7 ], [ "iron", "200 μg" ], [ "meat_allergen", 1 ] ]
   },
   {
@@ -87,7 +81,7 @@
     "name": { "str_sp": "vegetable soup" },
     "weight": "254 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -102,7 +96,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 4 ], [ "calcium", 1 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 1
+    "fun": 3
   },
   {
     "type": "COMESTIBLE",
@@ -111,7 +105,7 @@
     "name": { "str_sp": "three sisters stew" },
     "weight": "207 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -126,7 +120,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 4 ], [ "calcium", 1 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 2
+    "fun": 4
   },
   {
     "type": "COMESTIBLE",
@@ -135,12 +129,11 @@
     "name": { "str_sp": "meat soup" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "sap soup" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "goblin soup" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "mutant %s" } }
     ],
     "weight": "253 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -155,7 +148,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 36 ], [ "calcium", 3 ], [ "iron", 13 ], [ "meat_allergen", 1 ] ],
-    "fun": 1
+    "fun": 4
   },
   {
     "type": "COMESTIBLE",
@@ -164,7 +157,7 @@
     "name": { "str_sp": "fish soup" },
     "weight": "265 g",
     "color": "light_gray",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -188,7 +181,7 @@
     "name": { "str_sp": "curry" },
     "weight": "263 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -213,7 +206,7 @@
     "conditional_names": [ { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "creature curry" } } ],
     "weight": "262 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -228,7 +221,7 @@
     "charges": 1,
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 30 ], [ "calcium", 5 ], [ "iron", 28 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 8
+    "fun": 6
   },
   {
     "type": "COMESTIBLE",
@@ -238,7 +231,7 @@
     "conditional_names": [ { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "Mirkwood soup" } } ],
     "weight": "250 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -253,7 +246,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 9 ], [ "iron", 3 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 1
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
@@ -263,7 +256,7 @@
     "conditional_names": [ { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "Mirkwood soup" } } ],
     "weight": "250 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -278,7 +271,7 @@
     "phase": "liquid",
     "flags": [ "EATEN_HOT", "USE_EAT_VERB" ],
     "vitamins": [ [ "vitC", 9 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ], [ "egg_allergen", 1 ] ],
-    "fun": 1
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
@@ -287,7 +280,7 @@
     "name": { "str_sp": "hellfire stew" },
     "weight": "250 g",
     "color": "brown",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "FOOD",
     "symbol": "o",
@@ -310,7 +303,7 @@
     "name": { "str_sp": "chicken noodle soup" },
     "weight": "261 g",
     "color": "light_gray",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -335,7 +328,7 @@
     "name": { "str_sp": "mushroom soup" },
     "weight": "266 g",
     "color": "light_gray",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -359,7 +352,7 @@
     "name": { "str_sp": "blood soup" },
     "weight": "266 g",
     "color": "brown",
-    "spoils_in": "2 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -384,7 +377,7 @@
     "name": { "str_sp": "tomato soup" },
     "weight": "242 g",
     "color": "red",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_food",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -409,7 +402,7 @@
     "name": { "str_sp": "chicken and dumplings" },
     "weight": "263 g",
     "color": "light_gray",
-    "spoils_in": "6 days 16 hours",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -434,7 +427,7 @@
     "name": { "str_sp": "Cullen skink" },
     "weight": "261 g",
     "color": "white",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -458,7 +451,7 @@
     "name": { "str_sp": "lobster stew" },
     "weight": "261 g",
     "color": "red",
-    "spoils_in": "5 days",
+    "spoils_in": "3 days 12 hours",
     "container": "can_medium",
     "comestible_type": "DRINK",
     "symbol": "~",
@@ -482,7 +475,7 @@
     "name": { "str_sp": "instant chicken noodle soup" },
     "weight": "170 g",
     "color": "white",
-    "spoils_in": "12 hours",
+    "spoils_in": "3 days 12 hours",
     "comestible_type": "DRINK",
     "container": "cup_plastic",
     "symbol": "~",
@@ -528,7 +521,7 @@
     "name": { "str_sp": "instant spring vegetable soup" },
     "weight": "170 g",
     "color": "red",
-    "spoils_in": "12 hours",
+    "spoils_in": "3 days 12 hours",
     "comestible_type": "DRINK",
     "container": "cup_plastic",
     "symbol": "~",

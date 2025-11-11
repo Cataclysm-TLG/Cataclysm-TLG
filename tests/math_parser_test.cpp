@@ -18,6 +18,19 @@ TEST_CASE( "math_parser_parsing", "[math_parser]" )
     dialogue d( std::make_unique<talker>(), std::make_unique<talker>() );
     math_exp testexp;
 
+    std::locale const &oldloc = std::locale();
+    on_out_of_scope reset_loc( [&oldloc]() {
+        std::locale::global( oldloc );
+        char *discard [[maybe_unused]] = std::setlocale( LC_ALL, oldloc.name().c_str() );
+    } );
+    try {
+        std::locale::global( std::locale( "de_DE.UTF-8" ) );
+        char *discard [[maybe_unused]] = std::setlocale( LC_ALL, "de_DE.UTF-8" );
+    } catch( std::runtime_error &e ) {
+        WARN( "couldn't set locale for math_parser test: " << e.what() );
+    }
+    CAPTURE( std::setlocale( LC_ALL, nullptr ), std::locale().name(), std::to_string( 1.2 ) );
+
     CHECK_FALSE( testexp.parse( "" ) );
     CHECK( testexp.eval( d ) == Approx( 0.0 ) );
     CHECK( testexp.parse( "50" ) );
@@ -135,16 +148,6 @@ TEST_CASE( "math_parser_parsing", "[math_parser]" )
     CHECK( std::isnan( testexp.eval( d ) ) );
 
     // locale-independent decimal point
-    std::locale const &oldloc = std::locale();
-    on_out_of_scope reset_loc( [&oldloc]() {
-        std::locale::global( oldloc );
-    } );
-    try {
-        std::locale::global( std::locale( "de_DE.UTF-8" ) );
-    } catch( std::runtime_error &e ) {
-        WARN( "couldn't set locale for math_parser test: " << e.what() );
-    }
-    CAPTURE( std::setlocale( LC_ALL, nullptr ), std::locale().name() );
     CHECK( testexp.parse( "2 * 1.5" ) );
     CHECK( testexp.eval( d ) == Approx( 3 ) );
 
@@ -172,9 +175,9 @@ TEST_CASE( "math_parser_parsing", "[math_parser]" )
     CHECK( testexp.eval( d ) == Approx( 6 ) );
     CHECK( testexp.parse( "_test_diag_([1,1+1,3], 'blorg': [3+1,5,6])" ) );  // array kwarg
     CHECK( testexp.eval( d ) == Approx( 21 ) );
-    CHECK( testexp.parse( "_test_str_len_(['1','2'], 'test_str_arr': ['one','two'])" ) );  // str array
+    CHECK( testexp.parse( "_test_str_len_(['1','2'], '1': ['one','two'])" ) );  // str array
     CHECK( testexp.eval( d ) == Approx( 8 ) );
-    CHECK( testexp.parse( "_test_diag_([1,2,3], 'blorg': [4,5,_test_diag_([6,7,8], 'blarg':[9])])" ) );  // yo dawg
+    CHECK( testexp.parse( "_test_diag_([1,2,3], 'blorg': [4,5,_test_diag_([6,7,8], '2':[9])])" ) );  // yo dawg
     CHECK( testexp.eval( d ) == Approx( 45 ) );
     CHECK( testexp.parse( "_test_diag_([[0,-1],[2,0],[3,4]])" ) );  // nested arrays
     CHECK( testexp.parse( "_test_diag_([[0,-1],[2,0],[3,(3+1)]])" ) );
@@ -243,7 +246,14 @@ TEST_CASE( "math_parser_parsing", "[math_parser]" )
         CHECK_FALSE( testexp.parse( "_test_diag_(1?'a':1:'b':2)" ) ); // no kwargs in ternaries
         CHECK_FALSE( testexp.parse( "sin('1':'2')" ) ); // no kwargs in math functions (yet?)
         CHECK( testexp.parse( "_test_str_len_('fail')" ) );  // expected array at runtime
-        CHECK( testexp.eval( d ) == 0 );
+        bool expected_array = false;
+        try {
+            testexp.eval( d );
+        } catch( math::runtime_error const &ex ) {
+            std::string_view what( ex.what() );
+            expected_array = what.find( "Expected array" ) != std::string_view::npos;
+        }
+        CHECK( expected_array );
         CHECK_FALSE( testexp.parse( "'1':'2'" ) );
         CHECK_FALSE( testexp.parse( "2 2*2" ) ); // stray space inside variable name
         CHECK_FALSE( testexp.parse( "2+++2" ) );
@@ -260,10 +270,6 @@ TEST_CASE( "math_parser_parsing", "[math_parser]" )
         CHECK_FALSE( testexp.parse( "_test_diag_('1':0=0?1:2)" ) );
         CHECK_FALSE( testexp.parse( "_test_diag_('1':a=2)" ) );
     } );
-
-    // make sure there were no bad error messages
-    CHECK( dmsg.find( "Unexpected" ) == std::string::npos );
-    CHECK( dmsg.find( "That's all we know" ) == std::string::npos );
 }
 
 // NOLINTNEXTLINE(readability-function-cognitive-complexity): false positive
@@ -310,6 +316,7 @@ TEST_CASE( "math_parser_dialogue_integration", "[math_parser]" )
         CHECK_FALSE( testexp.parse( "u_val( 3 )" ) ); // this function doesn't support numbers
         CHECK_FALSE( testexp.parse( "u_val(myval)" ) ); // this function doesn't support variables
         CHECK_FALSE( testexp.parse( "val( 'stamina' )" ) ); // invalid scope for this function
+        CHECK_FALSE( testexp.parse( "_test_str_len_([]) = 2" ) ); // dialogue function cannot assign
     } );
     CHECK( testexp.parse( "u_val('stamina')" ) );
     CHECK( testexp.eval( d ) == get_avatar().get_stamina() );
@@ -346,4 +353,5 @@ TEST_CASE( "math_parser_dialogue_integration", "[math_parser]" )
     CHECK( testexp.parse( "u_val('stamina') = 459" ) );
     testexp.eval( d );
     CHECK( get_avatar().get_stamina() == 459 );
+
 }

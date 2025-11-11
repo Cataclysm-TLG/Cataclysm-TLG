@@ -232,7 +232,7 @@ void gates::open_gate( const tripoint_bub_ms &pos )
         }
     }
 
-    if( get_player_view().sees( pos ) ) {
+    if( get_player_view().sees( here, pos ) ) {
         if( open ) {
             add_msg( gate.open_message );
         } else if( close ) {
@@ -295,7 +295,7 @@ void doors::close_door( map &m, Creature &who, const tripoint_bub_ms &closep )
             }
             Character *ch = who.as_character();
             if( ch && veh->can_close( closable, *ch ) ) {
-                veh->close( closable );
+                veh->close( m, closable );
                 //~ %1$s - vehicle name, %2$s - part name
                 who.add_msg_if_player( _( "You close the %1$s's %2$s." ), veh->name, veh->part( closable ).name() );
                 didit = true;
@@ -385,7 +385,7 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
     const tripoint_bub_ms displace = pos.value();
     //knockback trajectory requires the line be flipped
     const tripoint_bub_ms kbp( -displace.x() + x * 2, -displace.y() + y * 2, displace.z() );
-    const bool can_see = u.sees( kbp );
+    const bool can_see = u.sees( m, kbp );
     creature_tracker &creatures = get_creature_tracker();
     Character *npc_or_player = creatures.creature_at<Character>( p, false );
     if( npc_or_player != nullptr ) {
@@ -402,7 +402,7 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
         }
         // TODO: make the npc angry?
         npc_or_player->hitall( bash_dmg, 0, nullptr );
-        g->knockback( kbp.raw(), p.raw(), std::max( 1, bash_dmg / 10 ), -1, 1 );
+        g->knockback( kbp, p, std::max( 1, bash_dmg / 10 ), -1, 1 );
         // TODO: perhaps damage/destroy the gate
         // if the npc was really big?
         if( creatures.creature_at<Character>( p, false ) != nullptr ) {
@@ -421,7 +421,7 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
             critter.die_in_explosion( nullptr );
         } else {
             critter.apply_damage( nullptr, bodypart_id( "torso" ), bash_dmg );
-            critter.check_dead_state();
+            critter.check_dead_state( &m );
         }
         if( !critter.is_dead() && critter.get_size() >= creature_size::huge ) {
             // big critters simply prevent the gate from closing
@@ -431,7 +431,7 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
         }
         if( !critter.is_dead() ) {
             // Still alive? Move the critter away so the door can close
-            g->knockback( kbp.raw(), p.raw(), std::max( 1, bash_dmg / 10 ), -1, 1 );
+            g->knockback( kbp, p, std::max( 1, bash_dmg / 10 ), -1, 1 );
             if( creatures.creature_at( p ) ) {
                 return false;
             }
@@ -467,8 +467,8 @@ bool doors::forced_door_closing( const tripoint_bub_ms &p,
         }
     }
 
-    m.ter_set( point( x, y ), door_type );
-    if( m.has_flag( ter_furn_flag::TFLAG_NOITEM, point( x, y ) ) ) {
+    m.ter_set( point_bub_ms( x, y ), door_type );
+    if( m.has_flag( ter_furn_flag::TFLAG_NOITEM, point_bub_ms( x, y ) ) ) {
         map_stack items = m.i_at( point_bub_ms( x, y ) );
         for( map_stack::iterator it = items.begin(); it != items.end(); ) {
             if( it->made_of( phase_id::LIQUID ) ) {

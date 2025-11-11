@@ -41,14 +41,14 @@
         "L": { "item": "oa_ig_rd_lockers", "chance": 90 }
       },
       "place_vehicles": [
-        { "vehicle": "flatbed_truck", "x": 8, "y": 9, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 14, "y": 7, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 8, "y": 15, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 14, "y": 13, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 8, "y": 21, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 14, "y": 19, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 37, "y": 21, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 43, "y": 19, "rotation": 0, "chance": 10 }
+        { "vehicle": "flatbed_truck", "x": 8, "y": 9, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 14, "y": 7, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 8, "y": 15, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 14, "y": 13, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 8, "y": 21, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 14, "y": 19, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 37, "y": 21, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 43, "y": 19, "rotation": 0, "chance": 5 }
       ],
       "place_monsters": [
         { "monster": "DUMP_ANIMALS", "x": 12, "y": 12, "chance": 6 },
@@ -134,23 +134,23 @@
         "2": { "item": "trash", "chance": 10 },
         "3": { "item": "oa_ig_rd_metal_trash", "chance": 10 },
         "W": { "item": "allclothes", "chance": 5 },
-        "D": { "item": "allclothes", "chance": 5 },
+        "D": { "item": "allclothes_damaged", "chance": 5 },
         "r": { "item": "oa_ig_rd_metal_trash", "chance": 15 },
         "R": { "item": "oa_ig_rd_metal_trash", "chance": 15 },
         "w": { "item": "oa_ig_rd_metal_trash", "chance": 45 }
       },
       "place_vehicles": [
-        { "vehicle": "flatbed_truck", "x": 8, "y": 3, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 14, "y": 1, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 8, "y": 9, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 14, "y": 7, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 15, "y": 16, "rotation": 0, "chance": 100 },
-        { "vehicle": "flatbed_truck", "x": 20, "y": 20, "rotation": 0, "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": 14, "y": 20, "rotation": 180, "chance": 100 },
-        { "vehicle": "flatbed_truck", "x": 37, "y": 3, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 43, "y": 1, "rotation": 0, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 37, "y": 9, "rotation": 180, "chance": 10 },
-        { "vehicle": "flatbed_truck", "x": 43, "y": 7, "rotation": 0, "chance": 10 }
+        { "vehicle": "flatbed_truck", "x": 8, "y": 3, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 14, "y": 1, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 8, "y": 9, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 14, "y": 7, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 15, "y": 16, "rotation": 0, "chance": 20 },
+        { "vehicle": "flatbed_truck", "x": 20, "y": 20, "rotation": 0, "chance": 20 },
+        { "vehicle": "oa_vg_wreck", "x": 14, "y": 20, "rotation": 180, "chance": 20 },
+        { "vehicle": "flatbed_truck", "x": 37, "y": 3, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 43, "y": 1, "rotation": 0, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 37, "y": 9, "rotation": 180, "chance": 5 },
+        { "vehicle": "flatbed_truck", "x": 43, "y": 7, "rotation": 0, "chance": 5 }
       ],
       "place_monsters": [
         { "monster": "DUMP_ANIMALS", "x": 12, "y": 12, "chance": 6 },
@@ -201,29 +201,155 @@
         "g": { "item": "oa_ig_rd_glass_trash", "chance": 10 },
         "G": { "item": "oa_ig_rd_glass_trash", "chance": 5 },
         "W": { "item": "allclothes", "chance": 5 },
-        "D": { "item": "allclothes", "chance": 5 },
+        "D": { "item": "allclothes_damaged", "chance": 5 },
         "p": { "item": "trash", "chance": 5 },
         "a": { "item": "oa_ig_ash_pile", "chance": 40 }
       },
       "place_vehicles": [
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 14 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 }
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 14 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        }
       ],
       "place_monsters": [
         { "monster": "DUMP_ANIMALS", "x": 12, "y": 12, "chance": 6 },
@@ -278,24 +404,150 @@
         "a": { "item": "oa_ig_ash_pile", "chance": 40 }
       },
       "place_vehicles": [
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 10, 14 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 34, 38 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 },
-        { "vehicle": "oa_vg_wreck", "x": [ 58, 62 ], "y": [ 9, 12 ], "rotation": [ 0, 90, 180, 270 ], "chance": 100 }
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 10, 14 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 34, 38 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        },
+        {
+          "vehicle": "oa_vg_wreck",
+          "x": [ 58, 62 ],
+          "y": [ 9, 12 ],
+          "rotation": [ 0, 90, 180, 270 ],
+          "chance": 80,
+          "status": 1
+        }
       ],
       "place_monsters": [
         { "monster": "DUMP_ANIMALS", "x": 12, "y": 12, "chance": 6 },

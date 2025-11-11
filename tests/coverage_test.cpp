@@ -22,12 +22,12 @@ static const flag_id json_flag_FILTHY( "FILTHY" );
 
 static const mtype_id mon_manhack( "mon_manhack" );
 
+static const sub_bodypart_str_id sub_body_part_eyes_right( "eyes_right" );
+
 static const int num_iters = 10000;
 static constexpr tripoint_bub_ms dude_pos( HALF_MAPSIZE_X + 4, HALF_MAPSIZE_Y, 0 );
 static constexpr tripoint_bub_ms mon_pos( HALF_MAPSIZE_X + 3, HALF_MAPSIZE_Y, 0 );
 static constexpr tripoint_bub_ms badguy_pos( HALF_MAPSIZE_X + 1, HALF_MAPSIZE_Y, 0 );
-
-static const sub_bodypart_str_id sub_body_part_eyes_right( "eyes_right" );
 
 static void check_near( const std::string &subject, float actual, const float expected,
                         const float tolerance )
@@ -49,8 +49,10 @@ static void check_not_near( const std::string &subject, float actual, const floa
 
 static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk = false )
 {
-    monster zed( mon_manhack, mon_pos.raw() );
-    standard_npc dude( "TestCharacter", dude_pos.raw(), {}, 0, 8, 8, 8, 8 );
+    map &here = get_map();
+
+    monster zed( mon_manhack, mon_pos );
+    standard_npc dude( "TestCharacter", dude_pos, {}, 0, 8, 8, 8, 8 );
     item cloth( clothing_id );
     if( infect_risk ) {
         cloth.set_flag( json_flag_FILTHY );
@@ -59,7 +61,7 @@ static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( dude, true );
-        dude.setpos( dude_pos );
+        dude.setpos( here, dude_pos );
         dude.wear_item( cloth, false );
         dude.add_effect( effect_sleep, 1_hours );
         if( zed.melee_attack( dude, 10000.0f ) ) {
@@ -85,8 +87,10 @@ static float get_avg_melee_dmg( const std::string &clothing_id, bool infect_risk
 
 static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
 {
-    monster zed( mon_manhack, mon_pos.raw() );
-    standard_npc dude( "TestCharacter", dude_pos.raw(), {}, 0, 8, 8, 8, 8 );
+    map &here = get_map();
+
+    monster zed( mon_manhack, mon_pos );
+    standard_npc dude( "TestCharacter", dude_pos, {}, 0, 8, 8, 8, 8 );
     if( infect_risk ) {
         cloth.set_flag( json_flag_FILTHY );
     }
@@ -94,7 +98,7 @@ static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( dude, true );
-        dude.setpos( dude_pos );
+        dude.setpos( here, dude_pos );
         dude.wear_item( cloth, false );
         dude.add_effect( effect_sleep, 1_hours );
         if( zed.melee_attack( dude, 10000.0f ) ) {
@@ -120,11 +124,12 @@ static float get_avg_melee_dmg( item cloth, bool infect_risk = false )
 
 static float get_avg_bullet_dmg( const std::string &clothing_id )
 {
+    map &here = get_map();
     clear_map();
     std::unique_ptr<standard_npc> badguy = std::make_unique<standard_npc>( "TestBaddie",
-                                           badguy_pos.raw(), std::vector<std::string>(), 0, 8, 8, 8, 8 );
+                                           badguy_pos, std::vector<std::string>(), 0, 8, 8, 8, 8 );
     std::unique_ptr<standard_npc> dude = std::make_unique<standard_npc>( "TestCharacter",
-                                         dude_pos.raw(), std::vector<std::string>(), 0, 8, 8, 8, 8 );
+                                         dude_pos, std::vector<std::string>(), 0, 8, 8, 8, 8 );
     item cloth( clothing_id );
     projectile proj;
     proj.speed = 1000;
@@ -137,12 +142,13 @@ static float get_avg_bullet_dmg( const std::string &clothing_id )
     int num_hits = 0;
     for( int i = 0; i < num_iters; i++ ) {
         clear_character( *dude, true );
-        dude->setpos( dude_pos );
+        dude->setpos( here, dude_pos );
         dude->wear_item( cloth, false );
         dude->add_effect( effect_sleep, 1_hours );
-        dealt_projectile_attack atk = projectile_attack( proj, badguy_pos, dude_pos, dispersion_sources(),
-                                      &*badguy );
-        dude->deal_projectile_attack( &*badguy, atk, false );
+        dealt_projectile_attack atk;
+        projectile_attack( atk, proj, badguy_pos, dude_pos, dispersion_sources(),
+                           &*badguy );
+        dude->deal_projectile_attack( &here,  & *badguy, atk, atk.missed_by, false );
         if( atk.missed_by < 1.0 ) {
             num_hits++;
         }
@@ -189,12 +195,12 @@ TEST_CASE( "Ranged_coverage_vs_bullet", "[coverage] [ranged]" )
 {
     SECTION( "Full melee and ranged coverage vs. ranged attack" ) {
         const float dmg = get_avg_bullet_dmg( "test_hazmat_suit" );
-        check_near( "Average damage", dmg, 15.4f, 0.2f );
+        check_near( "Average damage", dmg, 16.4f, 0.2f );
     }
 
     SECTION( "No ranged coverage vs. ranged attack" ) {
         const float dmg = get_avg_bullet_dmg( "test_hazmat_suit_noranged" );
-        check_near( "Average damage", dmg, 17.2f, 0.2f );
+        check_near( "Average damage", dmg, 18.4f, 0.2f );
     }
 }
 
@@ -284,7 +290,7 @@ TEST_CASE( "Off_Limb_Ghost_ablative_vest", "[coverage]" )
         item full = item( "test_ghost_vest" );
         full.force_insert_item( item( "test_plate_skirt_super" ), pocket_type::CONTAINER );
 
-        standard_npc dude( "TestCharacter", dude_pos.raw(), {}, 0, 8, 8, 8, 8 );
+        standard_npc dude( "TestCharacter", dude_pos, {}, 0, 8, 8, 8, 8 );
         dude.wear_item( full, false );
         damage_instance du_full = damage_instance( damage_bullet, 100.0f );
         dude.absorb_hit( weakpoint_attack(), bodypart_id( "leg_l" ), du_full );

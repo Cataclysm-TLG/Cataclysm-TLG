@@ -1,5 +1,10 @@
 [
   {
+    "name": "GROUP_SNAIL_FROM_ITEM",
+    "type": "monstergroup",
+    "monsters": [ { "monster": "mon_snail_forest", "weight": 100 } ]
+  },
+  {
     "type": "monstergroup",
     "name": "GROUP_CROW_MUTANT",
     "monsters": [ { "monster": "mon_crow_mutant_small", "weight": 650 }, { "monster": "mon_crow_mutant", "weight": 350 } ]
@@ -7,7 +12,34 @@
   {
     "name": "GROUP_CENTIPEDE_ADULT",
     "type": "monstergroup",
-    "monsters": [ { "monster": "mon_centipede_giant", "weight": 900 }, { "monster": "mon_centipede_mom", "weight": 100 } ]
+    "monsters": [
+      { "monster": "mon_centipede_giant", "weight": 85 },
+      { "monster": "mon_centipede_mom", "weight": 10 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
+  },
+  {
+    "name": "GROUP_BULLFROG_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [ { "monster": "mon_bullfrog", "weight": 25 }, { "monster": "mon_big_bullfrog", "weight": 75 } ]
+  },
+  {
+    "name": "GROUP_BIG_BULLFROG_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_big_bullfrog", "weight": 20 },
+      { "monster": "mon_giant_frog", "weight": 75 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
+  },
+  {
+    "name": "GROUP_GIANT_FROG_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_giant_frog", "weight": 40 },
+      { "monster": "mon_megafrog", "weight": 55 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
   },
   {
     "name": "GROUP_CENTIPEDE_GIANT",
@@ -47,5 +79,49 @@
     "type": "monstergroup",
     "default": "mon_big_rat",
     "monsters": [ { "monster": "mon_big_rat", "weight": 320 }, { "monster": "mon_tunnel_rat", "weight": 180 } ]
+  },
+  {
+    "name": "GROUP_DOG_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_BIG_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_big", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_loper", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_TRAINED_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_trained", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mongrel", "weight": 5, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 }
+    ]
+  },
+  {
+    "name": "GROUP_DOG_BIG_TRAINED_EVOLVED",
+    "type": "monstergroup",
+    "default": "mon_dog",
+    "monsters": [
+      { "monster": "mon_dog_big_trained", "weight": 50, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_thrasher", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_mauler", "weight": 3, "cost_multiplier": 0 },
+      { "monster": "mon_dog_mutant_loper", "weight": 3, "cost_multiplier": 0 }
+    ]
   }
 ]

@@ -343,6 +343,12 @@
   },
   {
     "type": "ammunition_type",
+    "id": "mortar_60mm",
+    "name": "60 mm mortar cartridge",
+    "default": "60mm_shell_m720a1"
+  },
+  {
+    "type": "ammunition_type",
     "id": "sling-ready_grenade",
     "name": "sling-ready grenades",
     "default": "sling-ready_molotov"
@@ -721,12 +727,6 @@
   },
   {
     "type": "ammunition_type",
-    "id": "homebrew_rocket",
-    "name": "homebrew rocket",
-    "default": "spiked_rocket"
-  },
-  {
-    "type": "ammunition_type",
     "id": "atgm",
     "name": "152mm anti-tank guided missile",
     "default": "atgm_heat"
@@ -826,6 +826,12 @@
     "id": "graphite",
     "name": "graphite",
     "default": "graphite"
+  },
+  {
+    "type": "ammunition_type",
+    "id": "quill_ink",
+    "name": "quill ink",
+    "default": "quill_ink"
   },
   {
     "type": "ammunition_type",

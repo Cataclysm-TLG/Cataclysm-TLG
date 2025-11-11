@@ -2,12 +2,7 @@
   {
     "type": "palette",
     "id": "boat_rental_palette",
-    "parameters": {
-      "wall": {
-        "type": "ter_str_id",
-        "default": { "distribution": [ [ "t_wall_wood", 1 ], [ "t_wall_log", 1 ], [ "t_wall_b", 1 ], [ "t_wall_g", 1 ] ] }
-      }
-    },
+    "palettes": [ "parametrized_walls_palette" ],
     "terrain": {
       "4": "t_gutter_downspout",
       "s": "t_concrete",
@@ -26,7 +21,6 @@
       "X": "t_floor",
       "w": "t_window",
       "+": "t_door_c",
-      "|": { "param": "wall", "fallback": "t_wall_log" },
       "_": [ [ "t_region_soil", 20 ], [ "t_region_groundcover", 3 ] ],
       "-": "t_region_shrub_decorative"
     },
@@ -65,9 +59,10 @@
         { "chance": 75, "item": "swimmer_wetsuit", "repeat": [ 1, 4 ] },
         { "chance": 55, "item": "swimmer_shoes", "repeat": [ 1, 4 ] },
         { "chance": 45, "item": "swimmer_gloves", "repeat": [ 1, 4 ] }
-      ]
+      ],
+      "t": { "item": "SUS_toilet", "chance": 50 }
     },
-    "vendingmachines": { "D": { "item_group": "vending_drink", "lootable": true }, "F": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "D": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "toilets": { "t": {  } }
   },
   {

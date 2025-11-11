@@ -4,8 +4,9 @@
     "id": "bee_balm",
     "name": { "str_sp": "bee balm" },
     "description": "A snow-white flower also known as wild bergamot.  Smells faintly of mint.",
+    "//": "red variety as theres no data on Monarda fistulosa, but this is similar enough - <https://pmc.ncbi.nlm.nih.gov/articles/PMC7356345/table/plants-09-00691-t002/>",
     "comestible_type": "FOOD",
-    "calories": 2,
+    "calories": 1,
     "fun": -5,
     "weight": "10 g",
     "to_hit": -3,
@@ -15,7 +16,8 @@
     "volume": "20 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "vitamins": [ [ "vegetable_allergen", 1 ] ]
+    "flags": [ "RABBIT", "CATTLE" ],
+    "vitamins": [ [ "vegetable_allergen", 1 ], [ "vitC", "136 μg" ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -34,7 +36,7 @@
     "healthy": -1,
     "symbol": ",",
     "looks_like": "potato",
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "RAT", "MOUSE" ],
     "vitamins": [ [ "calcium", 14 ], [ "iron", 1 ], [ "vegetable_allergen", 1 ] ],
     "fun": -3
   },
@@ -54,7 +56,7 @@
     "description": "This aromatic rhizome can be eaten as is in an emergency, but it is much better used for making beverages.  Its taste is pleasant but it is also tough and stringy.",
     "comestible_type": "FOOD",
     "symbol": ",",
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "RAT" ],
     "vitamins": [ [ "calcium", 10 ], [ "iron", 8 ], [ "vegetable_allergen", 1 ] ],
     "fun": -3
   },
@@ -74,7 +76,7 @@
     "comestible_type": "FOOD",
     "healthy": -1,
     "symbol": ",",
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "RAT" ],
     "material": [ "vegetable" ],
     "vitamins": [ [ "calcium", 1 ], [ "iron", 8 ], [ "vitC", 2 ], [ "vegetable_allergen", 1 ] ],
     "fun": -2
@@ -93,6 +95,7 @@
     "spoils_in": "3 days",
     "description": "Also called ramps, this delicate leafy vegetable is healthy and a tasty ingredient for many dishes.",
     "symbol": ",",
+    "//": "no flags like CATTLE because most wildlife actually hate the onion smell",
     "flags": [ "RAW" ],
     "material": [ "vegetable" ],
     "vitamins": [ [ "vitC", 10 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ],
@@ -113,7 +116,7 @@
     "price_postapoc": "50 cent",
     "material": [ "vegetable" ],
     "volume": "180 ml",
-    "flags": [ "EATEN_HOT", "SMOKABLE", "RAW" ],
+    "flags": [ "EATEN_HOT", "SMOKABLE", "RAW", "CATTLE", "RABBIT", "MOUSE", "RAT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "134700 μg" ], [ "iron", "1100 μg" ], [ "calcium", "71 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -134,7 +137,8 @@
     "material": [ "vegetable" ],
     "volume": "1632 ml",
     "fun": -2,
-    "flags": [ "SMOKABLE", "RAW", "CATTLE" ],
+    "//": "Actually, not recommended for rats and mice to eat in big quantities because gas but no way to implement that yet, very minor detail though",
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "332800 μg" ], [ "iron", "12900 μg" ], [ "calcium", "364 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -155,7 +159,7 @@
     "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -2,
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "25600 μg" ], [ "iron", "300 μg" ], [ "calcium", "28 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -174,7 +178,7 @@
     "price": "80 cent",
     "material": [ "vegetable" ],
     "volume": "250 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", 2 ], [ "calcium", 4 ], [ "iron", 2 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -195,7 +199,7 @@
     "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -2,
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -216,7 +220,8 @@
     "volume": "146 ml",
     "longest_side": "19 cm",
     "fun": 1,
-    "flags": [ "SMOKABLE", "RAW" ],
+    "//": "Carrots are somewhat high in sugar and should only be eaten sparingly by rabbits but there is no way to implement that yet",
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "4200 μg" ], [ "iron", "200 μg" ], [ "calcium", "23800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -236,7 +241,7 @@
     "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -12,
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "RABBIT" ],
     "vitamins": [ [ "iron", 8 ], [ "vegetable_allergen", 1 ] ]
   },
   {
@@ -254,7 +259,7 @@
     "price_postapoc": "10 cent",
     "material": [ "vegetable" ],
     "volume": "500 ml",
-    "flags": [ "SMOKABLE", "FREEZERBURN" ],
+    "flags": [ "SMOKABLE", "FREEZERBURN", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", 94 ], [ "calcium", 9 ], [ "iron", 12 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -274,7 +279,7 @@
     "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -8,
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "RABBIT", "CATTLE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "calcium", 5 ], [ "iron", 5 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -302,7 +307,8 @@
     "material": [ "vegetable" ],
     "volume": "146 ml",
     "longest_side": "19 cm",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "//": "It appears that celery is energy-negative for rodents",
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "29700 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -341,7 +347,8 @@
     "material": [ "vegetable" ],
     "volume": "70 ml",
     "smoking_result": "dry_chili",
-    "flags": [ "FREEZERBURN", "RAW", "SMOKABLE" ],
+    "//": "Birds can eat spicy stuff easily due to their inability to taste spiciness",
+    "flags": [ "FREEZERBURN", "RAW", "SMOKABLE", "BIRD" ],
     "vitamins": [ [ "vitC", "64700 μg" ], [ "iron", "500 μg" ], [ "calcium", "6300 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -2
   },
@@ -373,7 +380,8 @@
     "material": [ "vegetable" ],
     "volume": "275 ml",
     "longest_side": "22 cm",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "//": "No data on cows finding cucumbers super tasty",
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "8400 μg" ], [ "iron", "800 μg" ], [ "calcium", "48200 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -406,7 +414,7 @@
     "material": [ "vegetable" ],
     "volume": "250 ml",
     "fun": -4,
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "RAT", "MOUSE" ],
     "//": "Dahlia roots contain an incredible amount of vitamin B6. This isn't a vitamin tracked in Cataclysm, but be careful of vitamin overdose when eating dahlia in real life.",
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
   },
@@ -428,7 +436,7 @@
     "volume": "250 ml",
     "fun": -2,
     "smoking_result": "dry_vegetable",
-    "flags": [ "RAW", "SMOKABLE" ],
+    "flags": [ "RAW", "SMOKABLE", "RAT", "MOUSE" ],
     "vitamins": [ [ "vitC", "10600 μg" ], [ "iron", "900 μg" ], [ "calcium", "79800 μg" ], [ "vegetable_allergen", 1 ] ]
   },
   {
@@ -458,7 +466,7 @@
     "copy-from": "carrot",
     "color": "white",
     "description": "These are often wild carrots, but beware of poisonous lookalikes.  In any case, the root is tough and is not as tasty as a real raw carrot.",
-    "flags": [ "FORAGE_POISON", "RAW", "SMOKABLE" ],
+    "extend": { "flags": [ "FORAGE_POISON" ] },
     "price": "30 cent",
     "price_postapoc": "16 cent",
     "fun": -2,
@@ -579,7 +587,7 @@
     "price_postapoc": "132 cent",
     "material": [ "vegetable" ],
     "volume": "1850 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "14 mg" ], [ "iron", "2100 μg" ], [ "calcium", "91 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -599,7 +607,7 @@
     "price_postapoc": "20 cent",
     "material": [ "vegetable" ],
     "volume": "250 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "2 mg" ], [ "iron", "300 μg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -618,6 +626,7 @@
     "symbol": ",",
     "material": [ "vegetable" ],
     "volume": "250 ml",
+    "flags": [ "CATTLE", "RABBIT" ],
     "price": "0 cent",
     "price_postapoc": "10 cent",
     "vitamins": [ [ "vegetable_allergen", 1 ] ]
@@ -645,29 +654,6 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "plant_sac",
-    "name": { "str": "fungal fluid sac" },
-    "weight": "270 g",
-    "color": "light_green",
-    "spoils_in": "3 days 8 hours",
-    "//": "wild vegetables as a reference",
-    "//2": "Legacy note: This is no longer a plant item drop, it only comes from fungaloids.",
-    "comestible_type": "FOOD",
-    "symbol": "%",
-    "quench": 18,
-    "healthy": -1,
-    "calories": 35,
-    "description": "A fluid bladder from a fungus-based lifeform.  Not very nutritious, but safe to eat.",
-    "price": "0 cent",
-    "price_postapoc": "10 cent",
-    "material": [ "vegetable" ],
-    "volume": "250 ml",
-    "flags": [ "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_vegetable",
-    "vitamins": [ [ "vegetable_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
     "id": "potato",
     "name": { "str": "raw potato", "str_pl": "raw potatoes" },
     "weight": "213 g",
@@ -683,7 +669,7 @@
     "material": [ "vegetable" ],
     "volume": "232 ml",
     "fun": -3,
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "42 mg" ], [ "iron", "1700 μg" ], [ "calcium", "25600 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -703,7 +689,7 @@
     "material": [ "vegetable" ],
     "volume": "190 ml",
     "fun": -1,
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RAT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "32900 μg" ], [ "iron", "1100 μg" ], [ "calcium", "5400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -724,7 +710,7 @@
     "volume": "2062 ml",
     "fun": -1,
     "flags": [ "RAW", "INEDIBLE" ],
-    "vitamins": [ [ "vitC", "102 mg" ], [ "iron", "9200 μg" ], [ "calcium", "237600 μg" ], [ "vegetable_allergen", 1 ] ],
+    "vitamins": [ [ "vitC", "153 mg" ], [ "iron", "13800 μg" ], [ "calcium", "356400 μg" ], [ "vegetable_allergen", 1 ] ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -737,10 +723,11 @@
     "price": "64 cent",
     "calories": 73,
     "quench": 5,
-    "volume": "500 ml",
+    "//": "Some volume and weight are lost as pulp.",
+    "volume": "343 ml",
     "weight": "283 g",
     "price_postapoc": "60 cent",
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "RAT", "MOUSE", "CATTLE", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "25500 μg" ], [ "iron", "2300 μg" ], [ "calcium", "59400 μg" ] ],
     "melee_damage": { "bash": 0 }
@@ -760,7 +747,8 @@
     "material": [ "vegetable" ],
     "volume": "140 ml",
     "fun": -2,
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "//": "Lots of negative results for cattle, apparently very much not good for them",
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", 30 ], [ "calcium", 2 ], [ "iron", 3 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -773,14 +761,14 @@
     "spoils_in": "1 day 6 hours",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "calories": 41,
+    "calories": 31,
     "description": "A handful of freshly-picked yellow dandelions.  In their current raw state they are quite bitter.",
     "price": "15 cent",
     "price_postapoc": "12 cent",
     "material": [ "vegetable" ],
     "volume": "107 ml",
     "fun": -12,
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "RABBIT", "CATTLE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", 23 ], [ "calcium", 11 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -800,7 +788,8 @@
     "material": [ "vegetable" ],
     "volume": "117 ml",
     "fun": -12,
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "//": "Apparently toxic to rabbits",
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", 1 ], [ "calcium", 23 ], [ "iron", 10 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -862,7 +851,7 @@
     "material": [ "vegetable" ],
     "volume": "75 ml",
     "fun": -10,
-    "flags": [ "SMOKABLE" ],
+    "flags": [ "SMOKABLE", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "4 mg" ], [ "iron", "1 mg" ], [ "calcium", "13 mg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -939,7 +928,7 @@
     "price_postapoc": "50 cent",
     "material": [ "tomato" ],
     "volume": "150 ml",
-    "flags": [ "SMOKABLE" ],
+    "flags": [ "SMOKABLE", "RABBIT", "CATTLE", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "16900 μg" ], [ "iron", "300 μg" ], [ "calcium", "12300 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -954,49 +943,59 @@
   },
   {
     "type": "COMESTIBLE",
-    "id": "vegetable",
-    "name": { "str_sp": "plant marrow" },
+    "id": "triffid_meat",
+    "name": { "str_sp": "triffid flesh" },
     "weight": "119 g",
     "color": "green",
     "spoils_in": "3 days 8 hours",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "calories": 34,
-    "description": "A nutrient-rich chunk of plant matter, could be eaten raw or cooked.",
-    "price": "6 USD",
-    "price_postapoc": "50 cent",
+    "quench": 4,
+    "calories": 25,
+    "description": "A dense chunk of rubbery plant matter.  Though flexible and succulent, it's far too fibrous for a person to eat.",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
     "material": [ "vegetable" ],
-    "flags": [ "TRADER_AVOID", "SMOKABLE", "RAW" ],
-    "smoking_result": "dry_vegetable",
+    "flags": [ "TRADER_AVOID", "INEDIBLE", "CATTLE", "RABBIT" ],
     "volume": "250 ml",
-    "//": "average of broccoli, cabbage, carrot, cattail_stalk, celery, chili_pepper, cucumber, lettuce, onion, pumpkin, raw_dandelion, rhubarb, sugar_beet, tomato, zucchini",
-    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ]
+    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ], [ "mutant_toxin", 8 ] ]
   },
   {
     "type": "COMESTIBLE",
     "id": "vegetable_tainted",
     "//": "Note: Legacy item ID, this is not actually a vegetable at all anymore.",
     "category": "other",
-    "name": { "str": "alien fungus chunk" },
-    "copy-from": "vegetable",
+    "name": { "str": "fungal chunk" },
+    "copy-from": "mushroom",
     "looks_like": "mushroom",
     "spoils_in": "40 hours",
     "use_action": [ "POISON" ],
-    "description": "A chunk of fungal matter from some sort of alien mushroom creature.  Eating unfamiliar mushrooms is a bad idea.",
+    "description": "A chunk of fungal matter.  Eating unfamiliar mushrooms is a bad idea.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "smoking_result": "dry_vegetable_tainted"
+    "smoking_result": "dry_vegetable_tainted",
+    "flags": [ "FUNGAL_VECTOR" ]
   },
   {
     "type": "COMESTIBLE",
     "id": "vegetable_wild",
     "name": { "str_sp": "wild vegetables" },
-    "copy-from": "vegetable",
+    "weight": "119 g",
+    "color": "green",
+    "spoils_in": "3 days 8 hours",
+    "comestible_type": "FOOD",
+    "symbol": "%",
+    "calories": 28,
+    "price": "0 cent",
+    "price_postapoc": "10 cent",
+    "material": [ "vegetable" ],
     "description": "An assortment of edible-looking wild plants.  Most are quite bitter-tasting.  Some are inedible until cooked.",
     "//": "In real life many root vegetables are mildly toxic until cooked",
     "fun": -10,
-    "price_postapoc": "10 cent",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ]
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "volume": "250 ml",
+    "vitamins": [ [ "vitC", 36 ], [ "calcium", 4 ], [ "iron", 4 ], [ "vegetable_allergen", 1 ] ],
+    "smoking_result": "dry_vegetable"
   },
   {
     "type": "COMESTIBLE",
@@ -1014,7 +1013,7 @@
     "material": [ "vegetable" ],
     "volume": "180 ml",
     "longest_side": "22 cm",
-    "flags": [ "EATEN_HOT", "SMOKABLE" ],
+    "flags": [ "EATEN_HOT", "SMOKABLE", "CATTLE", "MOUSE", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "35100 μg" ], [ "iron", "700 μg" ], [ "calcium", "31400 μg" ], [ "vegetable_allergen", 1 ] ]
   },
@@ -1067,7 +1066,7 @@
     "volume": "62 ml",
     "fun": -10,
     "use_action": [ "POISON" ],
-    "//": "Fiddleheads that haven't been boiled can make you sick.",
+    "//": "Fiddleheads that haven't been boiled can make you sick.  As they are poisonous here, they will get no CATTLE or RABBIT flag as the poison should not get nullified.",
     "vitamins": [ [ "vitC", 6 ], [ "calcium", 4 ], [ "vegetable_allergen", 1 ] ]
   },
   {
@@ -1075,7 +1074,7 @@
     "id": "young_leaves",
     "name": { "str": "handful of young leaves", "str_pl": "handfuls of young leaves" },
     "weight": "20 g",
-    "flags": [ "FREEZERBURN", "RAW" ],
+    "flags": [ "FREEZERBURN", "RAW", "CATTLE", "RABBIT" ],
     "color": "light_green",
     "spoils_in": "1 day",
     "comestible_type": "FOOD",
@@ -1107,7 +1106,7 @@
     "id": "japanese_knotweed_stem",
     "name": { "str_sp": "Japanese knotweed stems" },
     "weight": "60 g",
-    "flags": [ "FREEZERBURN", "RAW" ],
+    "flags": [ "FREEZERBURN", "RAW", "RABBIT", "CATTLE" ],
     "color": "light_green",
     "spoils_in": "2 days",
     "comestible_type": "FOOD",
@@ -1138,7 +1137,7 @@
     "price_postapoc": "20 cent",
     "material": [ "vegetable" ],
     "volume": "221 ml",
-    "flags": [ "SMOKABLE", "RAW" ],
+    "flags": [ "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
     "smoking_result": "dry_vegetable",
     "fun": -5,
     "vitamins": [ [ "vitC", "95700 μg" ], [ "iron", "400 μg" ], [ "calcium", "11900 μg" ], [ "vegetable_allergen", 1 ] ]
@@ -1190,7 +1189,7 @@
     "fun": -5,
     "description": "A vegetable from the gourd family, bottle gourds were brought to the Americas by the first Native American settlers crossing the Bering strait.  It can be further prepared to produce a hard, watertight shell, usable as a biodegradable liquid container.  Eating it doesn't look worth it.",
     "volume": "4500 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "RAW", "CATTLE", "RABBIT", "RAT" ],
     "smoking_result": "dry_bottle_gourd",
     "vitamins": [ [ "iron", "1 mg" ], [ "calcium", "95890 μg" ] ]
   },
@@ -1211,7 +1210,8 @@
     "description": "A normal and healthy purple eggplant.  Needs to be disassembled before being useful for cooking.",
     "healthy": -1,
     "symbol": "e",
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "SMOKABLE", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
+    "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "12100 μg" ], [ "iron", "1300 μg" ], [ "calcium", "49300 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -8
   },
@@ -1232,7 +1232,8 @@
     "healthy": -1,
     "symbol": "e",
     "looks_like": "eggplant",
-    "flags": [ "RAW" ],
+    "flags": [ "RAW", "SMOKABLE", "CATTLE", "RABBIT", "RAT", "MOUSE" ],
+    "smoking_result": "dry_vegetable",
     "vitamins": [ [ "vitC", "60500 μg" ], [ "iron", "650 μg" ], [ "calcium", "24650 μg" ], [ "vegetable_allergen", 1 ] ],
     "fun": -5
   },
@@ -1283,7 +1284,7 @@
     "price_postapoc": 10,
     "material": [ "vegetable" ],
     "volume": "250 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "CATTLE", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -1302,7 +1303,7 @@
     "price_postapoc": 10,
     "material": [ "vegetable" ],
     "volume": "250 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "CATTLE", "RABBIT" ],
     "smoking_result": "kombu",
     "vitamins": [ [ "calcium", 3 ], [ "iron", 3 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   },
@@ -1321,7 +1322,7 @@
     "price_postapoc": 10,
     "material": [ "vegetable" ],
     "volume": "250 ml",
-    "flags": [ "FREEZERBURN", "SMOKABLE" ],
+    "flags": [ "FREEZERBURN", "SMOKABLE", "CATTLE", "RABBIT" ],
     "smoking_result": "dry_vegetable",
     "vitamins": [ [ "calcium", 2 ], [ "iron", 4 ], [ "vitC", 1 ], [ "vegetable_allergen", 1 ] ]
   }

@@ -63,7 +63,7 @@
         "description": "Monsters are much easier to deal with.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 0.8 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 8 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 2 }
         ]
       },
       {
@@ -72,7 +72,7 @@
         "description": "Monsters evolve and spawn slower.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 0.9 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 6 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 1.5 }
         ]
       },
       {
@@ -81,7 +81,7 @@
         "description": "Monsters evolve at a slower rate.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 5 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 1.25 }
         ]
       },
       {
@@ -90,7 +90,7 @@
         "description": "The default monster hunting experience.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 1 }
         ]
       },
       {
@@ -99,7 +99,7 @@
         "description": "Monsters spawn 50% more.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 1.5 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 4 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 0.94 }
         ]
       },
       {
@@ -108,7 +108,7 @@
         "description": "Monsters spawn more and evolve faster.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 2 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3.5 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 0.88 }
         ]
       },
       {
@@ -117,7 +117,7 @@
         "description": "Monsters evolve quickly and spawn 3x more.",
         "options": [
           { "option": "SPAWN_DENSITY", "type": "float", "val": 3 },
-          { "option": "MONSTER_UPGRADE_FACTOR", "type": "float", "val": 3 }
+          { "option": "EVOLUTION_INVERSE_MULTIPLIER", "type": "float", "val": 0.75 }
         ]
       }
     ]

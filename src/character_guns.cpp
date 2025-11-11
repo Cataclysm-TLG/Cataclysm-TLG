@@ -65,13 +65,13 @@ void find_ammo_helper( T &src, const item &obj, bool empty, Output out, bool nes
         }
 
         // Do not consider empty mags unless specified
-        if( node->is_magazine() && !node->ammo_remaining() && !empty ) {
+        if( node->is_magazine() && !node->ammo_remaining( ) && !empty ) {
             return VisitResponse::SKIP;
         }
 
         if( node->has_flag( flag_SPEEDLOADER ) && obj.magazine_integral() ) {
             // Can't reload with empty speedloaders
-            if( !node->ammo_remaining() ) {
+            if( !node->ammo_remaining( ) ) {
                 return VisitResponse::SKIP;
             }
             // All speedloaders are accepted.
@@ -110,6 +110,8 @@ std::vector<const item *> Character::get_ammo( const ammotype &at ) const
 
 std::vector<item_location> Character::find_ammo( const item &obj, bool empty, int radius ) const
 {
+    map &here = get_map();
+
     std::vector<item_location> res;
 
     find_ammo_helper( const_cast<Character &>( *this ), obj, empty, std::back_inserter( res ), true );
@@ -118,7 +120,7 @@ std::vector<item_location> Character::find_ammo( const item &obj, bool empty, in
         for( map_cursor &cursor : map_selector( pos_bub(), radius ) ) {
             find_ammo_helper( cursor, obj, empty, std::back_inserter( res ), false );
         }
-        for( vehicle_cursor &cursor : vehicle_selector( pos_bub(), radius ) ) {
+        for( vehicle_cursor &cursor : vehicle_selector( here, pos_bub( here ), radius ) ) {
             find_ammo_helper( cursor, obj, empty, std::back_inserter( res ), false );
         }
     }
@@ -180,7 +182,7 @@ void Character::gunmod_add( item &gun, item &mod )
     itype_id mod_type = mod.typeId();
     std::string mod_name = mod.tname();
 
-    if( !wield( gun ) ) {
+    if( !is_wielding( gun ) && !wield( gun ) ) {
         add_msg_if_player( _( "You can't wield the %1$s." ), gun.tname() );
         return;
     }

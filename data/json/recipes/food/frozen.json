@@ -22,7 +22,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 2 ],
-        [ "peanutbutter_imitation", 2 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -51,7 +50,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 2 ],
-        [ "peanutbutter_imitation", 2 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
         [ "candy3", 1 ],
@@ -85,7 +83,6 @@
       [
         [ "chocolate", 2 ],
         [ "peanutbutter", 2 ],
-        [ "peanutbutter_imitation", 2 ],
         [ "syrup", 1 ],
         [ "candy", 2 ],
         [ "candy2", 2 ],
@@ -115,7 +112,6 @@
       [
         [ "chocolate", 2 ],
         [ "peanutbutter", 2 ],
-        [ "peanutbutter_imitation", 2 ],
         [ "syrup", 1 ],
         [ "candy", 2 ],
         [ "candy2", 2 ],
@@ -170,7 +166,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -204,7 +199,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -245,7 +239,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -282,7 +275,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -363,7 +355,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],
@@ -435,7 +426,6 @@
       [
         [ "chocolate", 1 ],
         [ "peanutbutter", 1 ],
-        [ "peanutbutter_imitation", 1 ],
         [ "syrup", 1 ],
         [ "candy", 1 ],
         [ "candy2", 1 ],

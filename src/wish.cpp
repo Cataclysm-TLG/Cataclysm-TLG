@@ -299,27 +299,27 @@ void debug_menu::wishmutate( Character *you )
             const bool profession = mdata.profession;
             // Manual override for the threshold-gaining
             if( threshold || profession ) {
-                if( you->has_trait( mstr ) ) {
+                if( you->has_permanent_trait( mstr ) ) {
                     do {
                         you->remove_mutation( mstr );
                         rc++;
-                    } while( you->has_trait( mstr ) && rc < 10 );
+                    } while( you->has_permanent_trait( mstr ) && rc < 10 );
                 } else {
                     do {
                         you->set_mutation( mstr );
                         rc++;
-                    } while( !you->has_trait( mstr ) && rc < 10 );
+                    } while( !you->has_permanent_trait( mstr ) && rc < 10 );
                 }
-            } else if( you->has_trait( mstr ) ) {
+            } else if( you->has_permanent_trait( mstr ) ) {
                 do {
                     you->remove_mutation( mstr );
                     rc++;
-                } while( you->has_trait( mstr ) && rc < 10 );
+                } while( you->has_permanent_trait( mstr ) && rc < 10 );
             } else {
                 do {
                     you->mutate_towards( mstr );
                     rc++;
-                } while( !you->has_trait( mstr ) && rc < 10 );
+                } while( !you->has_permanent_trait( mstr ) && rc < 10 );
             }
             cb.msg = string_format( _( "%s Mutation changes: %d" ), mstr.c_str(), rc );
             uistate.wishmutate_selected = wmenu.selected;
@@ -402,7 +402,7 @@ void debug_menu::wishbionics( Character *you )
 
                     you->perform_install( bio, upbio_uid, difficulty, success, level, "NOT_MED",
                                           bio->canceled_mutations,
-                                          you->pos() );
+                                          you->pos_bub() );
                 }
                 break;
             }
@@ -810,8 +810,7 @@ void debug_menu::wishmonstergroup_mon_selection( mongroup &group )
     }
 }
 
-
-void debug_menu::wishmonster( const std::optional<tripoint> &p )
+void debug_menu::wishmonster( const std::optional<tripoint_bub_ms> &p )
 {
     std::vector<const mtype *> mtypes;
 
@@ -841,9 +840,9 @@ void debug_menu::wishmonster( const std::optional<tripoint> &p )
         wmenu.query();
         if( wmenu.ret >= 0 ) {
             const mtype_id &mon_type = mtypes[ wmenu.ret ]->id;
-            if( std::optional<tripoint> spawn = p ? p : g->look_around() ) {
+            if( std::optional<tripoint_bub_ms> spawn = p ? p.value() : g->look_around() ) {
                 int num_spawned = 0;
-                for( const tripoint &destination : closest_points_first( *spawn, cb.group ) ) {
+                for( const tripoint_bub_ms &destination : closest_points_first( *spawn, cb.group ) ) {
                     monster *const mon = g->place_critter_at( mon_type, destination );
                     if( !mon ) {
                         continue;
@@ -1088,12 +1087,12 @@ class wish_item_callback: public uilist_callback
 
 void debug_menu::wishitem( Character *you )
 {
-    wishitem( you, tripoint( -1, -1, -1 ) );
+    wishitem( you, tripoint_bub_ms( -1, -1, -1 ) );
 }
 
-void debug_menu::wishitem( Character *you, const tripoint &pos )
+void debug_menu::wishitem( Character *you, const tripoint_bub_ms &pos )
 {
-    if( you == nullptr && pos.x <= 0 ) {
+    if( you == nullptr && pos.x() <= 0 ) {
         debugmsg( "game::wishitem(): invalid parameters" );
         return;
     }
@@ -1171,7 +1170,7 @@ void debug_menu::wishitem( Character *you, const tripoint &pos )
         }
         bool did_amount_prompt = false;
         while( wmenu.ret >= 0 ) {
-            item granted = wishitem_produce( *std::get<1>( opts[wmenu.ret] ), cb.flags, cb.incontainer ) ;
+            item granted = wishitem_produce( *std::get<1>( opts[wmenu.ret] ), cb.flags, cb.incontainer );
             const itype_variant_data *variant = std::get<2>( opts[wmenu.ret] );
             if( variant != nullptr && granted.has_itype_variant( false ) ) {
                 std::string variant_id = variant->id;
@@ -1201,7 +1200,7 @@ void debug_menu::wishitem( Character *you, const tripoint &pos )
                         you->i_add( granted, stashable_copy_num, true, nullptr, nullptr, true, false );
                     }
                     you->invalidate_crafting_inventory();
-                } else if( pos.x >= 0 && pos.y >= 0 ) {
+                } else if( pos.x() >= 0 && pos.y() >= 0 ) {
                     get_map().add_item_or_charges( pos, granted );
                     wmenu.ret = -1;
                 }
@@ -1222,11 +1221,6 @@ void debug_menu::wishitem( Character *you, const tripoint &pos )
             }
         }
     } while( wmenu.ret >= 0 );
-}
-
-void debug_menu::wishitem( Character *you, const tripoint_bub_ms &pos )
-{
-    debug_menu::wishitem( you, pos.raw() );
 }
 
 void debug_menu::wishskill( Character *you, bool change_theory )

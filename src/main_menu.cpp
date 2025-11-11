@@ -273,7 +273,7 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
         main_menu_sub_button_map.emplace_back( rec, std::pair<int, int> { sel, y } );
     }
     if( static_cast<size_t>( height ) != sub_opts.size() ) {
-        draw_scrollbar( w_sub, sel2, height, sub_opts.size(), point_south, c_white,
+        draw_scrollbar( w_sub, sel2, height, sub_opts.size(), point::south, c_white,
                         false );
     }
     wnoutrefresh( w_sub );
@@ -313,7 +313,7 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
             case holiday::easter:
                 break;
             case holiday::halloween:
-                fold_and_print_from( w_open, point_zero, 30, 0, c_white, halloween_spider() );
+                fold_and_print_from( w_open, point::zero, 30, 0, c_white, halloween_spider() );
                 fold_and_print_from( w_open, point( getmaxx( w_open ) - 25, offset.y - 8 ),
                                      25, 0, c_white, halloween_graves() );
                 break;
@@ -544,9 +544,9 @@ void main_menu::display_text( const std::string &text, const std::string &title,
     const auto vFolded = foldstring( text, width );
     int iLines = vFolded.size();
 
-    fold_and_print_from( w_text, point_zero, width, selected, c_light_gray, text );
+    fold_and_print_from( w_text, point::zero, width, selected, c_light_gray, text );
 
-    draw_scrollbar( w_border, selected, height, iLines, point_south, BORDER_COLOR, true );
+    draw_scrollbar( w_border, selected, height, iLines, point::south, BORDER_COLOR, true );
     wnoutrefresh( w_border );
     wnoutrefresh( w_text );
 }
@@ -1031,6 +1031,14 @@ bool main_menu::load_game( std::string const &worldname, save_t const &savegame 
     world_generator->save_last_world_info();
     world_generator->set_active_world( world );
 
+    if( !world_generator->get_world( worldname )->has_compression_enabled() ) {
+        if( query_yn(
+                _( "This save does not have compression enabled.  Save compression is now mandatory, enable it?" ) ) ) {
+            world_generator->get_world( worldname )->set_compression_enabled( true );
+        }
+        return false;
+    }
+
     try {
         g->setup();
     } catch( const std::exception &err ) {
@@ -1049,7 +1057,7 @@ bool main_menu::load_game( std::string const &worldname, save_t const &savegame 
 static std::optional<std::chrono::seconds> get_playtime_from_save( const WORLD *world,
         const save_t &save )
 {
-    cata_path playtime_file = world->folder_path_path() / ( save.base_path() + ".pt" );
+    cata_path playtime_file = world->folder_path() / ( save.base_path() + ".pt" );
     std::optional<std::chrono::seconds> pt_seconds;
     if( file_exist( playtime_file ) ) {
         read_from_file( playtime_file, [&pt_seconds]( std::istream & fin ) {
@@ -1126,7 +1134,7 @@ void main_menu::world_tab( const std::string &worldname )
     uilist mmenu( string_format( _( "Manage world \"%s\"" ), worldname ), {} );
     mmenu.border_color = c_white;
     int opt_val = 0;
-    std::array<char, 5> hotkeys = { 'm', 's', 't', 'd', 'r' };
+    std::array<char, 6> hotkeys = { 'm', 's', 't', 'c', 'd', 'r' };
     for( const std::string &it : vWorldSubItems ) {
         mmenu.entries.emplace_back( opt_val, true, hotkeys[opt_val],
                                     remove_color_tags( shortcut_text( c_white, it ) ) );

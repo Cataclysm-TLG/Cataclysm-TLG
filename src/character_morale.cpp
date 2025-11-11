@@ -24,14 +24,7 @@
 class item;
 struct itype;
 
-static const efftype_id effect_took_prozac( "took_prozac" );
-static const efftype_id effect_took_xanax( "took_xanax" );
-
-static const itype_id itype_foodperson_mask( "foodperson_mask" );
-static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
-
 static const morale_type morale_perm_fpmode_on( "morale_perm_fpmode_on" );
-static const morale_type morale_perm_noface( "morale_perm_noface" );
 static const morale_type morale_perm_nomad( "morale_perm_nomad" );
 
 static const trait_id trait_CENOBITE( "CENOBITE" );
@@ -49,7 +42,7 @@ void Character::apply_persistent_morale()
 {
     // Nomads get a morale penalty if they stay near the same overmap tiles too long.
     if( has_trait( trait_NOMAD ) || has_trait( trait_NOMAD2 ) || has_trait( trait_NOMAD3 ) ) {
-        const tripoint_abs_omt ompos = global_omt_location();
+        const tripoint_abs_omt ompos = pos_abs_omt();
         float total_time = 0.0f;
         // Check how long we've stayed in any overmap tile within 5 of us.
         const int max_dist = 5;
@@ -71,16 +64,16 @@ void Character::apply_persistent_morale()
         float max_time;
         if( has_trait( trait_NOMAD ) ) {
             max_unhappiness = 20;
-            min_time = to_moves<float>( 12_hours );
-            max_time = to_moves<float>( 1_days );
+            min_time = to_moves<float>( 5_days );
+            max_time = to_moves<float>( 10_days );
         } else if( has_trait( trait_NOMAD2 ) ) {
             max_unhappiness = 40;
-            min_time = to_moves<float>( 4_hours );
-            max_time = to_moves<float>( 8_hours );
+            min_time = to_moves<float>( 60_hours );
+            max_time = to_moves<float>( 5_days );
         } else { // traid_NOMAD3
             max_unhappiness = 60;
-            min_time = to_moves<float>( 1_hours );
-            max_time = to_moves<float>( 2_hours );
+            min_time = to_moves<float>( 1_days );
+            max_time = to_moves<float>( 2_days );
         }
         // The penalty starts at 1 at min_time and scales up to max_unhappiness at max_time.
         const float t = ( total_time - min_time ) / ( max_time - min_time );
@@ -101,6 +94,14 @@ void Character::add_morale( const morale_type &type, int bonus, int max_bonus,
                             bool capped, const itype *item_type )
 {
     morale->add( type, bonus, max_bonus, duration, decay_start, capped, item_type );
+    if( get_morale_level() <= -25 ) {
+        // These two values are used to ding your lifestyle score. Stress is bad for you!
+        set_value( "got_to_low_morale", "true" );
+    }
+    if( get_morale_level() <= -50 ) {
+        // These two values are used to ding your lifestyle score. Stress is bad for you!
+        set_value( "got_to_very_low_morale", "true" );
+    }
 }
 
 int Character::has_morale( const morale_type &type ) const
@@ -136,7 +137,7 @@ void Character::check_and_recover_morale()
 
     worn.check_and_recover_morale( test_morale );
 
-    for( const trait_id &mut : get_mutations() ) {
+    for( const trait_id &mut : get_functioning_mutations() ) {
         test_morale.on_mutation_gain( mut );
     }
 

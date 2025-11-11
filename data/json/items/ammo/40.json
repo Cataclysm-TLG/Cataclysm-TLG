@@ -18,7 +18,7 @@
     "stack_size": 40,
     "ammo_type": "40",
     "casing": "40_casing",
-    "range": 14,
+    "range": 16,
     "//": ".400in 165gr Speer TMJ 4410, 8.59gr Hodgdon HS-6",
     "damage": {
       "damage_type": "bullet",

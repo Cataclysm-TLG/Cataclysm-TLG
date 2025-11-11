@@ -16,7 +16,6 @@
 #include "character.h"
 #include "city.h"
 #include "colony.h"
-#include "coordinate_constants.h"
 #include "coordinates.h"
 #include "creature.h"
 #include "debug.h"
@@ -56,6 +55,8 @@ static const efftype_id effect_snow_glare( "snow_glare" );
 static const flag_id json_flag_RAINPROOF( "RAINPROOF" );
 static const flag_id json_flag_RAIN_PROTECT( "RAIN_PROTECT" );
 static const flag_id json_flag_SUN_GLASSES( "SUN_GLASSES" );
+static const flag_id json_flag_SUN_SHADE( "SUN_SHADE" );
+static const flag_id json_flag_WATERPROOF( "WATERPROOF" );
 
 static const itype_id itype_water( "water" );
 
@@ -75,7 +76,9 @@ static const trait_id trait_FEATHERS( "FEATHERS" );
 bool is_creature_outside( const Creature &target )
 {
     map &here = get_map();
-    return here.is_outside( tripoint_bub_ms( target.posx(), target.posy(), here.get_abs_sub().z() ) ) &&
+    const tripoint_bub_ms pos = target.pos_bub( here );
+
+    return here.is_outside( tripoint_bub_ms( pos.xy(), here.get_abs_sub().z() ) ) &&
            here.get_abs_sub().z() >= 0;
 }
 
@@ -99,9 +102,10 @@ void glare( const weather_type_id &w )
 {
     Character &player_character = get_player_character();//todo npcs, also
     //General prerequisites for glare
-    if( g->is_sheltered( player_character.pos() ) ||
+    if( g->is_sheltered( player_character.pos_bub() ) ||
         player_character.in_sleep_state() ||
         player_character.worn_with_flag( json_flag_SUN_GLASSES ) ||
+        player_character.worn_with_flag( json_flag_SUN_SHADE ) ||
         player_character.has_flag( json_flag_GLARE_RESIST ) ||
         player_character.is_blind() ) {
         return;
@@ -138,7 +142,7 @@ void glare( const weather_type_id &w )
 
 float incident_sunlight( const weather_type_id &wtype, const time_point &t )
 {
-    return std::max<float>( 0.0f, sun_light_at( t ) + wtype->light_modifier );
+    return std::max<float>( 0.0f, sun_light_at( t ) * wtype->light_multiplier + wtype->light_modifier );
 }
 
 float incident_sun_irradiance( const weather_type_id &wtype, const time_point &t )
@@ -228,7 +232,9 @@ void retroactively_fill_from_funnel( item &it, const trap &tr, const time_point 
 
     // Technically 0.0 division is OK, but it will be cleaner without it
     if( data.rain_amount > 0 ) {
-        const int rain = roll_remainder( 1.0 / tr.funnel_turns_per_charge( data.rain_amount ) );
+        const double turns = to_turns<double>( end - start );
+        const double charges_per_turn = 1.0 / tr.funnel_turns_per_charge( data.rain_amount );
+        const int rain = roll_remainder( charges_per_turn * turns );
         it.add_rain_to_container( rain );
         // add_msg_debug( "Retroactively adding %d water from turn %d to %d", rain, startturn, endturn);
     }
@@ -265,6 +271,8 @@ void item::add_rain_to_container( int charges )
     }
 }
 
+// Surface_area_mm2 is roughly 282690 for a funnel (funnel_radius is currently 300 in traps.json)
+// Rain is 0.5 for drizzle, 1.5 for light, 2.0 for heavy.
 double funnel_charges_per_turn( const double surface_area_mm2, const double rain_depth_mm_per_hour )
 {
     // 1mm rain on 1m^2 == 1 liter water == 1000ml
@@ -282,11 +290,20 @@ double funnel_charges_per_turn( const double surface_area_mm2, const double rain
     static const double charge_ml = static_cast<double>( to_gram( water.weight() ) ) /
                                     water.charges;
 
+    // Drizzle 0.5 = 141345
+    // Light 1.5 = 424035
     const double vol_mm3_per_hour = surface_area_mm2 * rain_depth_mm_per_hour;
+
+    // Turns per hour is 3600 (turn = second)
+    // Drizzle = 39.26
+    // Light = 117.79
     const double vol_mm3_per_turn = vol_mm3_per_hour / to_turns<int>( 1_hours );
 
     const double ml_to_mm3 = 1000;
-    const double charges_per_turn = vol_mm3_per_turn / ( charge_ml * ml_to_mm3 );
+
+    // Drizzle = 0.00015704
+    // Light = 0.00047116
+    const float charges_per_turn = vol_mm3_per_turn / ( charge_ml * ml_to_mm3 );
 
     return charges_per_turn;
 }
@@ -318,29 +335,44 @@ double trap::funnel_turns_per_charge( double rain_depth_mm_per_hour ) const
  */
 static void fill_funnels( int rain_depth_mm_per_hour, const trap &tr )
 {
-    const double turns_per_charge = tr.funnel_turns_per_charge( rain_depth_mm_per_hour );
+    const double turns_per_charge_d = tr.funnel_turns_per_charge( rain_depth_mm_per_hour );
+
     map &here = get_map();
     // Give each funnel on the map a chance to collect the rain.
     const std::vector<tripoint_bub_ms> &funnel_locs = here.trap_locations( tr.loadid );
     for( const tripoint_bub_ms &loc : funnel_locs ) {
         units::volume maxcontains = 0_ml;
-        if( one_in( turns_per_charge ) ) {
-            // FIXME:
-            //add_msg("%d mm/h %d tps %.4f: fill",int(calendar::turn),rain_depth_mm_per_hour,turns_per_charge);
-            // This funnel has collected some rain! Put the rain in the largest
-            // container here which is either empty or contains some water
-            map_stack items = here.i_at( loc );
-            auto container = items.end();
-            for( auto candidate_container = items.begin(); candidate_container != items.end();
-                 ++candidate_container ) {
-                if( candidate_container->is_funnel_container( maxcontains ) ) {
-                    container = candidate_container;
-                }
+        map_stack items = here.i_at( loc );
+        auto container = items.end();
+        for( auto candidate_container = items.begin(); candidate_container != items.end();
+             ++candidate_container ) {
+            if( candidate_container->is_funnel_container( maxcontains ) ) {
+                container = candidate_container;
             }
+        }
 
-            if( container != items.end() ) {
-                container->add_rain_to_container( 1 );
+        if( container != items.end() && turns_per_charge_d > 0.0 ) {
+            int whole = static_cast<int>( std::floor( turns_per_charge_d ) );
+            double frac = turns_per_charge_d - whole;
+
+            // If turns_per_charge < 1, always fill (multiple charges per turn possible)
+            if( turns_per_charge_d < 1.0 ) {
+                int count = static_cast<int>( std::ceil( 1.0 / turns_per_charge_d ) );
+                for( int i = 0; i < count; i++ ) {
+                    container->add_rain_to_container( 1 );
+                }
                 container->set_age( 0_turns );
+            } else {
+                // Base chance: one charge every 'whole' turns
+                if( one_in( whole ) ) {
+                    container->add_rain_to_container( 1 );
+                    container->set_age( 0_turns );
+                }
+                // Fractional chance to add an *extra* charge
+                if( frac > 0.0 && x_in_y( frac, 1.0 ) ) {
+                    container->add_rain_to_container( 1 );
+                    container->set_age( 0_turns );
+                }
             }
         }
     }
@@ -361,46 +393,66 @@ static void fill_water_collectors( int mmPerHour )
  * Main routine for wet effects caused by weather.
  * Drenching the player is applied after checks against worn and held items.
  *
- * The warmth of armor is considered when determining how much drench happens per tick.
- *
  * Note that this is not the only place where drenching can happen.
  * For example, moving or swimming into water tiles will also cause drenching.
  * @see fill_water_collectors
  * @see map::decay_fields_and_scent
  * @see player::drench
  */
+
 void wet_character( Character &target, int amount )
 {
+    // This function was originally designed to run every 6 seconds, so maintian that rate.
+    if( amount <= 0 || !calendar::once_every( 6_seconds ) ) {
+        return;
+    }
     item_location weapon = target.get_wielded_item();
-    if( amount <= 0 || target.has_trait( trait_FEATHERS ) ||
-        ( weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ||
-        ( !one_in( 50 ) && target.worn_with_flag( json_flag_RAINPROOF ) ) ) {
+    if( ( !target.is_prone() && weapon && weapon->has_flag( json_flag_RAIN_PROTECT ) ) ) {
         return;
     }
-    // Coarse correction to get us back to previously intended soaking rate.
-    if( !calendar::once_every( 6_seconds ) ) {
-        return;
-    }
-    std::map<bodypart_id, std::vector<const item *>> clothing_map;
-    for( const bodypart_id &bp : target.get_all_body_parts() ) {
-        clothing_map.emplace( bp, std::vector<const item *>() );
-    }
-    std::map<bodypart_id, int> warmth_bp = target.worn.warmth( target );
-    const int warmth_delay = warmth_bp[body_part_torso] * 0.8 +
-                             warmth_bp[body_part_head] * 0.2;
-    if( rng( 0, 100 - amount + warmth_delay ) > 10 ) {
-        // Thick clothing slows down (but doesn't cap) soaking
-        return;
-    }
-
-    // Start drenching the upper half of the body
     body_part_set drenched_parts = target.get_drenching_body_parts( true, true, false );
-    // When the head is 50% saturated begin drenching the legs as well
-    if( target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
+    if( target.is_prone() ||
+        target.get_part_wetness_percentage( target.get_root_body_part() ) >= 0.5f ) {
         drenched_parts = target.get_drenching_body_parts();
     }
+    // If it's raining or snowing, our feet will also get wet.
+    std::vector<bodypart_id> ground_parts = target.get_ground_contact_bodyparts( false );
+    for( const bodypart_id &bp : ground_parts ) {
+        drenched_parts.set( bp.id() );
+    }
 
-    target.drench( amount, drenched_parts, false );
+    // Start by assuming full exposure, then scale down via clothing.
+    std::map<bodypart_id, float> exposure;
+    for( const bodypart_id &bp : target.get_all_body_parts() ) {
+        exposure[bp] = 1.0f;
+    }
+    target.worn.bodypart_wet_protection( false, exposure, target.get_all_body_parts() );
+
+    // Group body parts with the same drench amount for slightly fewer drench() calls.
+    std::map<int, body_part_set> wet_groups;
+    for( const bodypart_id &bp : target.get_all_body_parts() ) {
+        if( !drenched_parts.test( bp.id() ) ) {
+            continue;
+        }
+        const float exposure_factor = exposure[bp];
+        if( exposure_factor <= 0.0f ) {
+            continue;
+        }
+        int reduced_amount = static_cast<int>( amount * exposure_factor );
+        if( reduced_amount < 1 ) {
+            continue;
+        }
+
+        // Prevent tiny amounts from quickly adding up
+        if( rng( 0, amount ) < reduced_amount ) {
+            continue;
+        }
+        wet_groups[reduced_amount].set( bp.id() );
+    }
+    // Apply drench once per group
+    for( const auto &pair : wet_groups ) {
+        target.drench( pair.first, pair.second, false );
+    }
 }
 
 void weather_sound( const translation &sound_message, const std::string &sound_effect )
@@ -457,8 +509,10 @@ void handle_weather_effects( const weather_type_id &w )
             wetness = 60;
         }
         here.decay_fields_and_scent( decay_time );
-        // Coarse correction to get us back to previously intended soaking rate.
-        if( calendar::once_every( 6_seconds ) && is_creature_outside( target ) ) {
+        const bool no_roof_above = here.has_flag( ter_furn_flag::TFLAG_NO_FLOOR,
+                                   target.pos_bub() + tripoint::above );
+        // This runs every 6 seconds for legacy reasons.
+        if( calendar::once_every( 6_seconds ) && is_creature_outside( target ) && no_roof_above ) {
             wet_character( target, wetness );
         }
     }
@@ -789,7 +843,7 @@ int get_local_windpower( int windpower, const oter_id &omter, const tripoint_abs
         return 0;
     }
     rl_vec2d windvec = convert_wind_to_coord( winddirection );
-    const tripoint_bub_ms triblocker( get_map().bub_from_abs( location ) + point( windvec.x,
+    const tripoint_bub_ms triblocker( get_map().get_bub( location ) + point( windvec.x,
                                       windvec.y ) );
     // Over map terrain may modify the effect of wind.
     if( ( omter->get_type_id() == oter_type_forest ) ||
@@ -868,7 +922,7 @@ rl_vec2d convert_wind_to_coord( const int angle )
     return rl_vec2d( 0, 0 );
 }
 
-bool warm_enough_to_plant( const tripoint &pos )
+bool warm_enough_to_plant( const tripoint_bub_ms &pos )
 {
     // semi-appropriate temperature for most plants
     return get_weather().get_temperature( pos ) >= units::from_fahrenheit( 50 );
@@ -901,7 +955,7 @@ void weather_manager::update_weather()
     if( weather_id == WEATHER_NULL || calendar::turn >= nextweather ) {
         w_point &w = *weather_precise;
         const weather_generator &weather_gen = get_cur_weather_gen();
-        w = weather_gen.get_weather( player_character.get_location(), calendar::turn,
+        w = weather_gen.get_weather( player_character.pos_abs(), calendar::turn,
                                      g->get_seed() );
         weather_type_id old_weather = weather_id;
         std::string eternal_weather_option = get_option<std::string>( "ETERNAL_WEATHER" );
@@ -936,7 +990,7 @@ void weather_manager::update_weather()
             for( int i = -OVERMAP_DEPTH; i <= OVERMAP_HEIGHT; i++ ) {
                 here.set_transparency_cache_dirty( i );
             }
-            here.set_seen_cache_dirty( tripoint_bub_ms_zero );
+            here.set_seen_cache_dirty( tripoint_bub_ms::zero );
         }
         if( weather_id != old_weather ) {
             effect_on_conditions::process_reactivate();
@@ -950,7 +1004,7 @@ void weather_manager::set_nextweather( time_point t )
     update_weather();
 }
 
-units::temperature weather_manager::get_temperature( const tripoint &location )
+units::temperature weather_manager::get_temperature( const tripoint_bub_ms &location )
 {
     if( forced_temperature ) {
         return *forced_temperature;
@@ -962,7 +1016,7 @@ units::temperature weather_manager::get_temperature( const tripoint &location )
     }
 
     //underground temperature = average New England temperature = 43F/6C
-    units::temperature temp = location.z < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
+    units::temperature temp = location.z() < 0 ? AVERAGE_ANNUAL_TEMPERATURE : temperature;
 
     if( !g->new_game ) {
         units::temperature_delta temp_mod;

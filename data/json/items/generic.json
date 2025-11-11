@@ -548,8 +548,8 @@
     "name": { "str": "bundle of rebar", "str_pl": "bundles of rebar" },
     "description": "Ten rods of rebar securely tied together for easier transport.  Disassemble to untie them.",
     "//": "total volume is equal to 10 rebars, assuming uniformity and tight stacking",
-    "volume": "1600 ml",
-    "weight": "12500 g",
+    "weight": "12690 g",
+    "volume": "1590 ml",
     "longest_side": "80 cm",
     "price": "750 USD",
     "price_postapoc": "2 USD 50 cent",
@@ -564,9 +564,9 @@
     "name": { "str": "bundle of pipes", "str_pl": "bundles of pipes" },
     "description": "Ten pipes securely tied together for easier transport.  Disassemble to untie them.",
     "//": "Total volume is equal to 10 pipes, assuming uniformity and tight stacking. Total weight is equal to 10 pipes + 2 short ropes, as per the crafting recipe.",
-    "volume": "3700 ml",
-    "weight": "6432 g",
-    "longest_side": "60 cm",
+    "weight": "14860 g",
+    "longest_side": "76 cm",
+    "volume": "24270 ml",
     "price": "380 USD",
     "price_postapoc": "1 USD",
     "material": [ "steel" ],
@@ -729,32 +729,6 @@
   },
   {
     "type": "TOOL",
-    "id": "usb_drive",
-    "symbol": ",",
-    "color": "white",
-    "name": { "str": "USB drive" },
-    "description": "A USB thumb drive.  Useful for holding software.",
-    "price": "12 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "plastic", "aluminum" ],
-    "weight": "4536 mg",
-    "volume": "4 ml",
-    "longest_side": "5 cm",
-    "pocket_data": [
-      { "pocket_type": "SOFTWARE", "max_contains_volume": "1 L", "max_contains_weight": "1 kg" },
-      {
-        "pocket_type": "EBOOK",
-        "rigid": true,
-        "max_contains_volume": "1 ml",
-        "max_contains_weight": "1 g",
-        "weight_multiplier": 0.0
-      }
-    ],
-    "to_hit": { "grip": "bad", "length": "hand", "surface": "any", "balance": "clumsy" },
-    "//": "Based on https://www.amazon.com/dp/B015CH1PJU"
-  },
-  {
-    "type": "TOOL",
     "id": "usb_drive_nano",
     "symbol": ",",
     "color": "white",
@@ -870,6 +844,7 @@
         "//1": "It's specifically not rigid because volume of candlestick and candle should be additive.",
         "max_contains_weight": "500 g",
         "max_contains_volume": "550 ml",
+        "max_item_length": "300 mm",
         "item_restriction": [ "candle", "candle_lit" ],
         "transparent": true
       }
@@ -1037,16 +1012,15 @@
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "rebar" },
-    "description": "A rod of rebar, makes a nice melee weapon, and could be handy in constructing tougher walls and such.",
+    "description": "A rod of rebar.  It's too thin, too floppy, and too heavy to be much use as a weapon.",
     "category": "spare_parts",
     "price": "75 USD",
     "price_postapoc": "25 cent",
     "material": [ "steel" ],
-    "weight": "1245 g",
+    "weight": "1260 g",
     "volume": "159 ml",
     "longest_side": "80 cm",
-    "to_hit": -1,
-    "qualities": [ [ "HAMMER", 1 ] ],
+    "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "clumsy" },
     "melee_damage": { "bash": 10 }
   },
   {
@@ -1082,7 +1056,7 @@
     "type": "GENERIC",
     "id": "drum_skin",
     "name": { "str": "drum skin" },
-    "copy-from": "tanned_hide",
+    "copy-from": "sheet_leather",
     "weight": "10 g",
     "description": "The tanned hide of an animal repurposed to become the head on a percussion drum."
   },
@@ -1917,7 +1891,7 @@
     "id": "glass_tinted",
     "symbol": ".",
     "color": "dark_gray",
-    "name": { "str": "pair of tinted glass lenses", "str_pl": "pairs of tinted glass lenses" },
+    "name": { "str": "tinted glass lenses", "str_pl": "pairs of tinted glass lenses" },
     "category": "spare_parts",
     "description": "A pair of small, darkened glass lenses, like the ones used in sunglasses.",
     "price": "10 USD",
@@ -2149,75 +2123,13 @@
     "category": "spare_parts",
     "symbol": ";",
     "color": "light_gray",
-    "name": { "str_sp": "clockworks" },
-    "description": "A small assortment of gears and other clockwork gubbins.",
+    "name": { "str_sp": "clockwork" },
+    "description": "An assortment of miniscule gears and other clockwork gubbins.",
     "price": "2 USD",
     "price_postapoc": "10 cent",
     "material": [ "steel" ],
     "weight": "50 g",
     "volume": "50 ml"
-  },
-  {
-    "type": "GENERIC",
-    "id": "memory_card",
-    "name": { "str": "memory card" },
-    "description": "A memory card, can be used to store data.",
-    "looks_like": "mobile_memory_card",
-    "weight": "1 g",
-    "volume": "1 ml",
-    "symbol": ",",
-    "color": "white",
-    "price": "10 USD",
-    "price_postapoc": "10 cent",
-    "material": [ "plastic" ],
-    "ascii_picture": "memory_card",
-    "flags": [ "MC_MOBILE" ],
-    "pocket_data": [
-      {
-        "pocket_type": "EBOOK",
-        "rigid": true,
-        "max_contains_volume": "1 ml",
-        "max_contains_weight": "1 g",
-        "weight_multiplier": 0.0
-      }
-    ]
-  },
-  {
-    "type": "GENERIC",
-    "id": "memory_card_unread",
-    "copy-from": "memory_card",
-    "name": { "str": "memory card (unread)", "str_pl": "memory cards (unread)" },
-    "description": "A memory card, can be used to store data.  Looks like it has been in use, might be worth taking a look.",
-    "memory_card": {
-      "data_chance": 0.875,
-      "on_read_convert_to": "memory_card",
-      "photos_chance": 0.33,
-      "photos_amount": 30,
-      "songs_chance": 0.33,
-      "songs_amount": 15,
-      "recipes_chance": 0.33,
-      "recipes_amount": 3,
-      "recipes_categories": [ "CC_AMMO", "CC_ARMOR", "CC_CHEM", "CC_ELECTRONIC", "CC_FOOD", "CC_WEAPON" ],
-      "recipes_level_max": 5
-    },
-    "pocket_data": [  ]
-  },
-  {
-    "type": "GENERIC",
-    "id": "memory_card_science",
-    "copy-from": "memory_card",
-    "name": { "str": "memory card (CLASSIFIED)", "str_pl": "memory cards (CLASSIFIED)" },
-    "description": "A memory card, can be used to store data.  This one has an ominous label warning that it contains classified information.",
-    "memory_card": {
-      "data_chance": 1.0,
-      "on_read_convert_to": "memory_card",
-      "recipes_chance": 1.0,
-      "recipes_amount": 3,
-      "recipes_categories": [ "CC_CHEM" ],
-      "recipes_level_min": 6,
-      "secret_recipes": true
-    },
-    "pocket_data": [  ]
   },
   {
     "type": "GENERIC",
@@ -3027,6 +2939,7 @@
     "volume": "15 ml",
     "category": "drugs",
     "emits": [ "emit_tobacco_trail" ],
+    "revert_to": "cigar_butt",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {
@@ -3074,6 +2987,7 @@
     "volume": "4 ml",
     "category": "drugs",
     "emits": [ "emit_tobacco_trail" ],
+    "revert_to": "cig_butt",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {
@@ -3121,6 +3035,7 @@
     "volume": "4 ml",
     "category": "drugs",
     "emits": [ "emit_joint_trail" ],
+    "revert_to": "joint_roach",
     "use_action": [
       { "type": "firestarter", "moves": 200, "moves_slow": 2000 },
       {

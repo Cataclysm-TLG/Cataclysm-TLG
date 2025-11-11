@@ -624,20 +624,20 @@
       {
         "covers": [ "torso" ],
         "coverage": 95,
-        "encumbrance": 40,
+        "encumbrance": 38,
         "material": [
           { "type": "iron", "covered_by_mat": 70, "thickness": 1.8 },
-          { "type": "leather", "covered_by_mat": 100, "thickness": 2.2 }
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "rigid_layer_only": true
       },
       {
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 90,
-        "encumbrance": 40,
+        "encumbrance": 36,
         "material": [
           { "type": "iron", "covered_by_mat": 70, "thickness": 1.8 },
-          { "type": "leather", "covered_by_mat": 100, "thickness": 2.2 }
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_upper_r", "arm_upper_l" ],
         "rigid_layer_only": true
@@ -646,16 +646,16 @@
         "covers": [ "arm_l", "arm_r" ],
         "coverage": 90,
         "encumbrance": 0,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.2 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 } ],
         "specifically_covers": [ "arm_elbow_l", "arm_elbow_r", "arm_shoulder_l", "arm_shoulder_r" ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 85,
-        "encumbrance": 40,
+        "encumbrance": 36,
         "material": [
           { "type": "iron", "covered_by_mat": 40, "thickness": 1.8 },
-          { "type": "leather", "covered_by_mat": 100, "thickness": 2.2 }
+          { "type": "leather", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_upper_l", "leg_upper_r" ],
         "rigid_layer_only": true
@@ -664,7 +664,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 85,
         "encumbrance": 0,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.2 } ],
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.6 } ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_knee_l", "leg_knee_r" ]
       }
     ],
@@ -711,11 +711,11 @@
     "armor": [
       {
         "encumbrance": 14,
-        "coverage": 85,
+        "coverage": 75,
         "covers": [ "torso" ],
         "volume_encumber_modifier": 0.3,
         "material": [
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 2 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 }
         ],
         "rigid_layer_only": true
@@ -724,43 +724,51 @@
         "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
         "volume_encumber_modifier": 0,
         "encumbrance": 4,
-        "coverage": 70,
+        "coverage": 65,
         "material": [
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.75 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 5 }
+          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.5 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
         ],
-        "specifically_covers": [
-          "arm_elbow_l",
-          "arm_elbow_r",
-          "arm_upper_l",
-          "arm_upper_r",
-          "arm_shoulder_l",
-          "arm_shoulder_r",
-          "leg_hip_l",
-          "leg_hip_r"
-        ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r", "leg_upper_l", "leg_upper_r" ],
         "rigid_layer_only": true
       },
       {
-        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
+        "covers": [ "leg_l", "leg_r" ],
         "volume_encumber_modifier": 0,
-        "encumbrance": 6,
-        "coverage": 80,
+        "coverage": 30,
+        "material": [ { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 } ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
+        "rigid_layer_only": true
+      },
+      {
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 3,
+        "coverage": 90,
         "material": [
           { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.75 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 5 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 5 }
         ],
-        "specifically_covers": [ "arm_lower_l", "arm_lower_r", "leg_lower_l", "leg_lower_r", "leg_knee_l", "leg_knee_r" ],
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ],
         "rigid_layer_only": true
       },
       {
         "covers": [ "foot_l", "foot_r" ],
-        "volume_encumber_modifier": 0,
-        "encumbrance": 5,
+        "encumbrance": 2,
         "coverage": 75,
         "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
         "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_ankle_r", "foot_ankle_l" ],
         "layers": [ "BELTED" ],
+        "rigid_layer_only": true
+      },
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "encumbrance": 3,
+        "coverage": 90,
+        "material": [
+          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.75 },
+          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 5 }
+        ],
+        "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_elbow_l", "arm_elbow_r" ],
         "rigid_layer_only": true
       }
     ],

@@ -295,7 +295,7 @@
     "weapon_override": "GODCO_tom_wield",
     "traits": [
       { "trait": "FASTREADER" },
-      { "trait": "SLOWRUNNER" },
+      { "trait": "PONDEROUS1" },
       { "group": "NPC_starting_traits" },
       { "group": "Appearance_demographics" },
       { "trait": "NO_BASH" },
@@ -433,7 +433,7 @@
     "weapon_override": "GODCO_theresa_wield",
     "proficiencies": [ "prof_knitting", "prof_knitting_speed" ],
     "traits": [
-      { "trait": "SLOWRUNNER" },
+      { "trait": "PONDEROUS1" },
       { "trait": "BADHEARING" },
       { "trait": "BADKNEES" },
       { "trait": "FLIMSY" },
@@ -975,7 +975,7 @@
     "type": "item_group",
     "id": "GODCO_sonia_carried",
     "subtype": "collection",
-    "entries": [ { "item": "smart_phone", "ammo-item": "battery", "charges": 120 }, { "group": "snacks", "count": [ 1, 2 ] } ]
+    "entries": [ { "group": "civilian_phones", "ammo-item": "battery", "charges": 120 }, { "group": "snacks", "count": [ 1, 2 ] } ]
   },
   {
     "type": "item_group",
@@ -1137,7 +1137,7 @@
     "subtype": "collection",
     "entries": [
       { "item": "screwdriver" },
-      { "item": "duct_tape" },
+      { "group": "duct_tape_roll_part" },
       { "item": "welder" },
       { "item": "goggles_welding" },
       { "item": "solar_cell" }
@@ -1165,7 +1165,7 @@
     "type": "item_group",
     "id": "GODCO_olwen_carried",
     "subtype": "collection",
-    "entries": [ { "item": "laptop" }, { "item": "duct_tape" }, { "item": "lemonlime" } ]
+    "entries": [ { "item": "laptop" }, { "group": "duct_tape_roll_part" }, { "item": "lemonlime" } ]
   },
   {
     "type": "item_group",
@@ -1297,7 +1297,7 @@
     "type": "item_group",
     "id": "GODCO_russell_sell",
     "subtype": "collection",
-    "entries": [ { "item": "tanned_hide", "count": [ 10, 12 ] }, { "item": "tanned_pelt", "count": [ 8, 10 ] } ]
+    "entries": [ { "item": "sheet_leather", "count": [ 10, 12 ] }, { "item": "tanned_pelt", "count": [ 8, 10 ] } ]
   },
   {
     "type": "item_group",

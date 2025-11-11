@@ -335,7 +335,7 @@
       "k": "f_utility_shelf",
       "O": "f_crate_c",
       "N": [ "f_machinery_heavy", "f_machinery_electronic", "f_machinery_light" ],
-      "X": "f_generator_broken",
+      "X": [ [ "f_generator_broken", 25 ], [ "f_diesel_generator", 5 ], [ "f_12000_gasoline_generator", 5 ] ],
       "D": "f_dumpster"
     },
     "items": {
@@ -354,9 +354,10 @@
       "O": [
         { "item": "supplies_electronics", "chance": 20, "repeat": [ 1, 2 ] },
         { "item": "mechanics", "chance": 20, "repeat": [ 1, 2 ] }
-      ]
+      ],
+      "T": { "item": "SUS_toilet", "chance": 50 }
     },
-    "vendingmachines": { "8": { "item_group": "vending_drink", "lootable": true }, "9": { "item_group": "vending_food", "lootable": true } },
+    "vendingmachines": { "8": { "item_group": "vending_drink" }, "9": { "item_group": "vending_food" } },
     "vehicles": {
       "Á": { "vehicle": "parkinglotbasic", "chance": 33, "rotation": 270 },
       "É": { "vehicle": "parkinglotbasic", "chance": 33, "rotation": 90 }

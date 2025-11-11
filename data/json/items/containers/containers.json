@@ -317,9 +317,9 @@
     "id": "bag_paper_powder",
     "type": "GENERIC",
     "category": "container",
-    "name": { "str": "small powder paper bag" },
+    "name": { "str": "small paper bag" },
     "looks_like": "bag_plastic",
-    "description": "A small but sturdy paper bag.  Rock solid when packed full with powder.",
+    "description": "A sturdy paper bag, just about the right size for packing a lunch in.",
     "ascii_picture": "bag_paper_powder",
     "weight": "5 g",
     "volume": "10 ml",
@@ -329,27 +329,27 @@
     "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "2500 ml", "max_contains_weight": "2 kg", "moves": 200 } ],
     "material": [ "paper" ],
     "symbol": ")",
-    "color": "white",
-    "flags": [ "COLLAPSE_CONTENTS" ]
+    "color": "brown",
+    "flags": [ "COLLAPSE_CONTENTS", "TINDER" ]
   },
   {
     "id": "bag_paper_powder_bulk",
     "type": "GENERIC",
     "category": "container",
-    "name": { "str": "large powder paper bag" },
+    "name": { "str": "large paper bag" },
     "looks_like": "bag_plastic",
-    "description": "A large paper bag, for bulk storage and transport of powdered goods.",
+    "description": "A big bag made of sturdy paper, great for everything from collecting yard waste to bulk storage of construction materials.",
     "ascii_picture": "bag_paper_powder",
     "weight": "20 g",
     "volume": "40 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": -2,
-    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "10000 ml", "max_contains_weight": "15 kg", "moves": 200 } ],
+    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "40000 ml", "max_contains_weight": "15 kg", "moves": 200 } ],
     "material": [ "paper" ],
     "symbol": ")",
     "color": "white",
-    "flags": [ "COLLAPSE_CONTENTS" ]
+    "flags": [ "COLLAPSE_CONTENTS", "TINDER" ]
   },
   {
     "id": "bag_zipper",
@@ -443,21 +443,21 @@
     "volume": "5500 ml",
     "//1": "This is ~85% of the package volume from the amazon listing, with the assumption that the player would be squishing it harder to condense the volume.",
     "price": "30 USD",
-    "price_postapoc": "10 cent",
+    "price_postapoc": "0 cent",
     "to_hit": { "grip": "none", "length": "hand", "surface": "any", "balance": "clumsy" },
-    "material": [ "plastic" ],
+    "material": [ "vinyl" ],
     "symbol": ")",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "100 L",
-        "max_contains_weight": "100 kg",
+        "max_contains_volume": "96 L",
+        "max_contains_weight": "120 kg",
         "max_item_length": "200 cm",
         "moves": 400
       }
     ],
     "color": "dark_gray",
-    "flags": [ "NO_SALVAGE" ],
+    "flags": [ "NO_SALVAGE", "TRADER_AVOID" ],
     "//2": "Based on https://www.amazon.com/dp/B0BYPB5DMW"
   },
   {
@@ -2804,7 +2804,7 @@
         "watertight": true,
         "rigid": true,
         "transparent": true,
-        "item_restriction": [ "smart_phone", "smart_phone_flashlight", "smartphone_music" ]
+        "item_restriction": [ "smart_phone", "smart_phone_flashlight", "smartphone_music", "smart_phone_locked", "smart_phone_locked_flashlight" ]
       }
     ]
   },
@@ -4339,7 +4339,7 @@
     "volume": "1730 ml",
     "price": "9 USD",
     "price_postapoc": "1 USD",
-    "material": [ "cotton" ],
+    "material": [ "nylon" ],
     "symbol": "p",
     "color": "dark_gray",
     "pocket_data": [
@@ -4371,7 +4371,7 @@
         "pocket_type": "CONTAINER",
         "max_contains_volume": "1 L",
         "max_contains_weight": "1 kg",
-        "item_restriction": [ "duct_tape", "medical_tape", "toilet_paper" ],
+        "item_restriction": [ "duct_tape", "medical_tape" ],
         "volume_multiplier": 0.75
       }
     ],

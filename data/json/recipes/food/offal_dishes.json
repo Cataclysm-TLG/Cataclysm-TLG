@@ -15,7 +15,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "raw brain weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "brain", 1 ], [ "human_brain", 1 ], [ "demihuman_brain", 1 ] ] ]
+    "components": [ [ [ "brain", 1 ], [ "human_brain", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -34,7 +34,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "raw lung weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "lung", 1 ], [ "human_lung", 1 ], [ "demihuman_lung", 1 ] ] ]
+    "components": [ [ [ "lung", 1 ], [ "human_lung", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -43,7 +43,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "raw lung weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "mutant_lung", 1 ], [ "mutant_bug_lungs", 1 ] ] ]
+    "components": [ [ [ "mutant_lung", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -53,7 +53,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "raw heart weighs 45g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "heart", 1 ], [ "human_heart", 1 ], [ "demihuman_heart", 1 ] ] ]
+    "components": [ [ [ "heart", 1 ], [ "human_heart", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -72,7 +72,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "raw kidney weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "kidney", 1 ], [ "human_kidney", 1 ], [ "demihuman_kidney", 1 ] ] ]
+    "components": [ [ [ "kidney", 1 ], [ "human_kidney", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -92,7 +92,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "sweetbread weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "sweetbread", 1 ], [ "human_sweetbread", 1 ], [ "demihuman_sweetbread", 1 ] ] ]
+    "components": [ [ [ "sweetbread", 1 ], [ "human_sweetbread", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -102,7 +102,7 @@
     "qualities": [ { "id": "COOK", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 4, "LIST" ] ] ],
     "//": "sweetbread weighs 56g, per scrap of meat standard this is 4u heat",
-    "components": [ [ [ "liver", 1 ], [ "human_liver", 1 ], [ "demihuman_liver", 1 ], [ "canned_liver", 1 ] ] ]
+    "components": [ [ [ "liver", 1 ], [ "human_liver", 1 ], [ "canned_liver", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -406,7 +406,7 @@
     "tools": [ [ [ "surface_heat", 7, "LIST" ] ] ],
     "//": "sweetbread: 4u, additional stuff: 3u",
     "components": [
-      [ [ "sweetbread", 1 ], [ "human_sweetbread", 1 ], [ "demihuman_sweetbread", 1 ] ],
+      [ [ "sweetbread", 1 ], [ "human_sweetbread", 1 ] ],
       [ [ "water_clean", 2 ] ],
       [ [ "vinegar", 1 ] ],
       [ [ "salt", 2 ] ]

@@ -275,7 +275,7 @@
     "coverage": 70,
     "concealment": 70,
     "required_str": 8,
-    "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE", "PLACE_ITEM", "ORGANIC", "BLOCKSDOOR", "MOUNTABLE" ],
+    "flags": [ "TRANSPARENT", "CONTAINER", "FLAMMABLE", "PLACE_ITEM", "ORGANIC", "BLOCKSDOOR", "MOUNTABLE", "NO_SELF_CONNECT" ],
     "deconstruct": {
       "items": [ { "item": "2x4", "count": 6 }, { "item": "wood_panel", "count": [ 0, 1 ] }, { "item": "nail", "charges": [ 6, 8 ] } ]
     },
@@ -341,7 +341,7 @@
     "close": "f_gunsafe_c",
     "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "MOUNTABLE" ],
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -368,7 +368,7 @@
     "open": "f_gunsafe_o",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -397,7 +397,7 @@
     "examine_action": "locked_object_pickable",
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -424,7 +424,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -452,7 +452,7 @@
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "examine_action": "gunsafe_el",
     "bash": {
-      "str_min": 40,
+      "str_min": 50,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -614,7 +614,7 @@
     "move_cost_mod": -1,
     "coverage": 70,
     "concealment": 70,
-    "required_str": 8,
+    "required_str": -1,
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "PLACE_ITEM", "BLOCKSDOOR", "MOUNTABLE", "SEALED", "PICKABLE" ],
     "rotates_to": "INDOORFLOOR",
     "lockpick_result": "f_rack",
@@ -732,7 +732,7 @@
     "open": "f_safe_o",
     "examine_action": "open_safe",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -760,7 +760,7 @@
     "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
     "examine_action": "safe",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -787,7 +787,7 @@
     "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "MOUNTABLE" ],
     "close": "f_safe_c",
     "bash": {
-      "str_min": 40,
+      "str_min": 60,
       "str_max": 200,
       "sound": "screeching metal!",
       "sound_fail": "whump!",
@@ -864,7 +864,7 @@
     "coverage": 85,
     "concealment": 85,
     "required_str": 9,
-    "flags": [ "CONTAINER", "FLAMMABLE", "PLACE_ITEM", "ORGANIC", "BLOCKSDOOR", "MOUNTABLE", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "FLAMMABLE", "PLACE_ITEM", "ORGANIC", "BLOCKSDOOR", "MOUNTABLE", "SMALL_HIDE", "NO_SELF_CONNECT" ],
     "deconstruct": {
       "items": [ { "item": "2x4", "count": 20 }, { "item": "nail", "charges": [ 16, 24 ] }, { "item": "pipe", "count": 2 } ]
     },
@@ -1025,7 +1025,7 @@
     "required_str": -1,
     "flags": [ "NOITEM", "SEALED", "ALLOW_FIELD_EFFECT", "TRANSPARENT", "FLAMMABLE", "CONTAINER", "LIQUIDCONT" ],
     "examine_action": "keg",
-    "keg_capacity": 500,
+    "keg_capacity": "125 L",
     "deconstruct": {
       "items": [
         { "item": "2x4", "count": 18 },
@@ -1058,7 +1058,7 @@
     "description": "A secure wooden case at about waist-height, with glass panelling on top.  Useful for storing valuable things while still showing them off.  Not actually as secure as it looks, as the display windows are easily broken.",
     "symbol": "#",
     "color": "light_cyan",
-    "move_cost_mod": 2,
+    "move_cost_mod": -1,
     "coverage": 38,
     "concealment": 38,
     "required_str": 9,
@@ -1086,7 +1086,7 @@
     "description": "A secure wooden case at about waist-height, with glass panelling on top.  Useful for storing valuable things while still showing them off.  Not actually as secure as it looks, as the display windows are easily broken.  This one has had its lock picked and is open.",
     "symbol": "#",
     "color": "light_cyan",
-    "move_cost_mod": 2,
+    "move_cost_mod": -1,
     "coverage": 38,
     "concealment": 38,
     "required_str": 9,
@@ -1111,7 +1111,7 @@
     "description": "A secure wooden case at about waist-height, with glass panelling on top.  Would be useful for storing valuable things while still showing them off, if the glass hadn't been shattered.  Careful not to cut yourself when looting.",
     "symbol": "#",
     "color": "light_gray",
-    "move_cost_mod": 2,
+    "move_cost_mod": -1,
     "coverage": 38,
     "concealment": 38,
     "required_str": 9,
@@ -1312,10 +1312,10 @@
     "flags": [ "CONTAINER", "LIQUIDCONT", "NOITEM", "SEALED", "TRANSPARENT" ],
     "deconstruct": { "items": [ { "item": "metal_tank", "count": 4 }, { "item": "water_faucet", "count": 1 } ] },
     "examine_action": "keg",
-    "keg_capacity": 1200,
+    "keg_capacity": "300 L",
     "bash": {
-      "str_min": 10,
-      "str_max": 20,
+      "str_min": 25,
+      "str_max": 100,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [ { "item": "scrap", "count": [ 8, 32 ] }, { "item": "water_faucet", "prob": 50 } ]
@@ -1336,10 +1336,10 @@
     "flags": [ "CONTAINER", "LIQUIDCONT", "NOITEM", "SEALED" ],
     "deconstruct": { "items": [ { "item": "sheet_metal", "count": 24 }, { "item": "water_faucet", "count": 1 } ] },
     "examine_action": "keg",
-    "keg_capacity": 6000,
+    "keg_capacity": "1500 L",
     "bash": {
-      "str_min": 16,
-      "str_max": 32,
+      "str_min": 30,
+      "str_max": 120,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [ { "item": "scrap", "count": [ 40, 160 ] }, { "item": "water_faucet", "prob": 50 } ]
@@ -1467,8 +1467,8 @@
       ]
     },
     "bash": {
-      "str_min": 8,
-      "str_max": 45,
+      "str_min": 40,
+      "str_max": 100,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
@@ -1495,11 +1495,11 @@
     "required_str": -1,
     "flags": [ "NOITEM", "SEALED", "ALLOW_FIELD_EFFECT", "TRANSPARENT", "FLAMMABLE", "CONTAINER", "LIQUIDCONT", "EASY_DECONSTRUCT" ],
     "examine_action": "keg",
-    "keg_capacity": 45,
+    "keg_capacity": "11250 ml",
     "deconstruct": { "items": [ { "item": "churn", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
-      "str_max": 50,
+      "str_min": 30,
+      "str_max": 75,
       "sound": "smash!",
       "sound_fail": "whump.",
       "items": [
@@ -1527,7 +1527,7 @@
     "max_volume": "1000 L",
     "flags": [ "CONTAINER", "SEALED", "BLOCKSDOOR", "MOUNTABLE" ],
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1561,7 +1561,7 @@
       "prying_data": { "difficulty": 4, "prying_level": 1, "noisy": true, "failure": "The lid is sealed more tightly than you thought." }
     },
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1588,7 +1588,7 @@
     "max_volume": "1000 L",
     "flags": [ "CONTAINER", "PLACE_ITEM", "NO_SIGHT", "HIDE_PLACE", "BLOCKSDOOR", "MOUNTABLE", "SMALL_HIDE" ],
     "bash": {
-      "str_min": 30,
+      "str_min": 60,
       "str_max": 150,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1617,8 +1617,8 @@
       "items": [ { "item": "wood_panel", "count": 5 }, { "item": "hinge", "count": 2 }, { "item": "nail", "charges": [ 6, 10 ] } ]
     },
     "bash": {
-      "str_min": 12,
-      "str_max": 40,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "smash!",
       "sound_fail": "wham!",
       "items": [ { "item": "2x4", "count": [ 1, 5 ] }, { "item": "hinge", "count": 2 }, { "item": "nail", "charges": [ 2, 10 ] } ]
@@ -1642,8 +1642,8 @@
     "max_volume": "68208 ml",
     "deconstruct": { "items": [ { "item": "foot_locker", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
-      "str_max": 40,
+      "str_min": 20,
+      "str_max": 60,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
@@ -1673,7 +1673,7 @@
     "max_volume": "67669 ml",
     "deconstruct": { "items": [ { "item": "foot_locker_aluminum", "count": 1 } ] },
     "bash": {
-      "str_min": 12,
+      "str_min": 16,
       "str_max": 40,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
@@ -1700,7 +1700,7 @@
     "required_str": -1,
     "flags": [ "CONTAINER", "PLACE_ITEM", "LIQUIDCONT", "NOITEM", "SEALED", "EASY_DECONSTRUCT" ],
     "examine_action": "keg",
-    "keg_capacity": 6540,
+    "keg_capacity": "1635 L",
     "deconstruct": { "items": [ { "item": "432gal_drum_rubber", "count": 1 } ] },
     "bash": {
       "str_min": 90,

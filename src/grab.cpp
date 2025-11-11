@@ -4,7 +4,6 @@
 #include <cstdlib>
 
 #include "avatar.h"
-#include "coordinate_constants.h"
 #include "debug.h"
 #include "map.h"
 #include "messages.h"
@@ -19,7 +18,9 @@
 
 bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 {
-    const optional_vpart_position grabbed_vehicle_vp = m.veh_at( u.pos_bub() + u.grab_point );
+    map &here = get_map();
+
+    const optional_vpart_position grabbed_vehicle_vp = here.veh_at( u.pos_bub( here ) + u.grab_point );
     if( !grabbed_vehicle_vp ) {
         add_msg( m_info, _( "No vehicle at grabbed point." ) );
         u.grab( object_type::NONE );
@@ -31,13 +32,13 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         return false;
     }
     const int grabbed_part = grabbed_vehicle_vp->part_index();
-    if( monster *mon = grabbed_vehicle->get_harnessed_animal() ) {
+    if( monster *mon = grabbed_vehicle->get_harnessed_animal( here ) ) {
         add_msg( m_info, _( "You cannot move this vehicle whilst your %s is harnessed!" ),
                  mon->get_name() );
         u.grab( object_type::NONE );
         return false;
     }
-    const vehicle *veh_under_player = veh_pointer_or_null( m.veh_at( u.pos_bub() ) );
+    const vehicle *veh_under_player = veh_pointer_or_null( here.veh_at( u.pos_bub( here ) ) );
     if( grabbed_vehicle == veh_under_player ) {
         u.grab_point = - dp;
         return false;
@@ -76,7 +77,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     //vehicle movement: strength check. very strong humans can move about 2,000 kg in a wheelbarrow.
     int mc = 0;
     // worst case scenario strength required to move vehicle.
-    const int max_str_req = grabbed_vehicle->total_mass() / 10_kilogram;
+    const int max_str_req = grabbed_vehicle->total_mass( here ) / 10_kilogram;
     // actual strength required to move vehicle.
     int str_req = 0;
     // ARM_STR governs dragging heavy things
@@ -84,10 +85,10 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
 
     //if vehicle is rollable we modify str_req based on a function of movecost per wheel.
     const auto &wheel_indices = grabbed_vehicle->wheelcache;
-    if( grabbed_vehicle->valid_wheel_config() ) {
+    if( grabbed_vehicle->valid_wheel_config( here ) ) {
         str_req = max_str_req / 10;
         //determine movecost for terrain touching wheels
-        const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub();
+        const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub( here );
         for( int p : wheel_indices ) {
             const tripoint_bub_ms wheel_pos = vehpos + grabbed_vehicle->part( p ).precalc[0];
             const int mapcost = m.move_cost( wheel_pos, grabbed_vehicle );
@@ -100,10 +101,10 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
         } else {
             str_req = max_str_req / 10;
             //determine movecost for terrain touching wheels
-            const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub();
+            const tripoint_bub_ms vehpos = grabbed_vehicle->pos_bub( here );
             for( int p : wheel_indices ) {
                 const tripoint_bub_ms wheel_pos = vehpos + grabbed_vehicle->part( p ).precalc[0];
-                const int mapcost = m.move_cost( wheel_pos, grabbed_vehicle );
+                const int mapcost = here.move_cost( wheel_pos, grabbed_vehicle );
                 mc += str_req * mapcost / wheel_indices.size();
             }
             //set strength check threshold
@@ -114,19 +115,20 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
                 str_req = mc / wheel_indices.size() + 1;
             }
             //finally, adjust by the off-road coefficient (always 1.0 on a road, as low as 0.1 off road.)
-            str_req /= grabbed_vehicle->k_traction( get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
+            str_req /= grabbed_vehicle->k_traction( here, here.vehicle_wheel_traction( *grabbed_vehicle ) );
             // If it would be easier not to use the wheels, don't use the wheels.
             str_req = std::min( str_req, max_str_req );
         }
         //finally, adjust by the off-road coefficient (always 1.0 on a road, as low as 0.1 off road.)
-        str_req /= grabbed_vehicle->k_traction( get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
+        str_req /= grabbed_vehicle->k_traction( here,
+                                                get_map().vehicle_wheel_traction( *grabbed_vehicle ) );
         // If it would be easier not to use the wheels, don't use the wheels.
         str_req = std::min( str_req, max_str_req );
     } else {
         str_req = max_str_req;
         //if vehicle has no wheels str_req make a noise. since it has no wheels assume it has the worst off roading possible (0.1)
         if( str_req <= str ) {
-            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
+            sounds::sound( grabbed_vehicle->pos_bub( here ), str_req * 2, sounds::sound_t::movement,
                            _( "a scraping noise." ), true, "misc", "scraping" );
         }
     }
@@ -136,7 +138,7 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     if( str_req <= str ) {
         if( str_req == max_str_req ) {
             //if vehicle has no wheels, make a noise.
-            sounds::sound( grabbed_vehicle->pos_bub(), str_req * 2, sounds::sound_t::movement,
+            sounds::sound( grabbed_vehicle->pos_bub( here ), str_req * 2, sounds::sound_t::movement,
                            _( "a scraping noise." ), true, "misc", "scraping" );
         }
         //calculate exertion factor and movement penalty
@@ -165,63 +167,68 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     const auto get_move_dir = [&]( const tripoint_rel_ms & dir, const tripoint_rel_ms & from ) {
         tileray mdir;
 
-        mdir.init( dir.xy().raw() );
+        mdir.init( dir.xy() );
         units::angle turn = normalize( mdir.dir() - grabbed_vehicle->face.dir() );
         if( grabbed_vehicle->is_on_ramp && turn == 180_degrees ) {
             add_msg( m_bad, _( "The %s can't be turned around while on a ramp." ), grabbed_vehicle->name );
-            return tripoint_rel_ms_zero;
+            return tripoint_rel_ms::zero;
         }
         grabbed_vehicle->turn( turn );
         grabbed_vehicle->face = tileray( grabbed_vehicle->turn_dir );
-        grabbed_vehicle->precalc_mounts( 1, mdir.dir(), grabbed_vehicle->pivot_point() );
+        grabbed_vehicle->precalc_mounts( 1, mdir.dir(), grabbed_vehicle->pivot_point( here ) );
         grabbed_vehicle->pos -= grabbed_vehicle->pivot_displacement().raw();
 
         // Grabbed part has to stay at distance 1 to the player
         // and in roughly the same direction.
-        const tripoint_bub_ms new_part_pos = grabbed_vehicle->pos_bub() +
+        const tripoint_bub_ms new_part_pos = grabbed_vehicle->pos_bub( here ) +
                                              grabbed_vehicle->part( grabbed_part ).precalc[ 1 ];
-        const tripoint_bub_ms expected_pos = u.pos_bub() + dp + from;
+        const tripoint_bub_ms expected_pos = u.pos_bub( here ) + dp + from;
         const tripoint_rel_ms actual_dir = tripoint_rel_ms( ( expected_pos - new_part_pos ).xy(), 0 );
 
         // Set player location to illegal value so it can't collide with vehicle.
-        const tripoint player_prev = u.pos();
-        u.setpos( tripoint_zero );
+        const tripoint_abs_ms player_prev = u.pos_abs( );
+        u.setpos( here, tripoint_bub_ms::zero, false );
         std::vector<veh_collision> colls;
-        const bool failed = grabbed_vehicle->collision( colls, actual_dir, true );
+        const bool failed = grabbed_vehicle->collision( here, colls, actual_dir, true );
         u.setpos( player_prev );
         if( !colls.empty() ) {
             blocker_name = colls.front().target_name;
         }
-        return failed ? tripoint_rel_ms_zero : actual_dir;
+
+        return failed ? tripoint_rel_ms::invalid : actual_dir;
     };
 
     // First try the move as intended
     // But if that fails and the move is a zig-zag, try to recover:
     // Try to place the vehicle in the position player just left rather than "flattening" the zig-zag
     tripoint_rel_ms final_dp_veh = get_move_dir( dp_veh, next_grab );
-    if( final_dp_veh == tripoint_rel_ms_min && zigzag ) {
+    if( final_dp_veh == tripoint_rel_ms::invalid && zigzag ) {
         final_dp_veh = get_move_dir( - prev_grab, - dp );
         next_grab = - dp;
     }
 
-    if( final_dp_veh == tripoint_rel_ms_zero ) {
+    if( final_dp_veh == tripoint_rel_ms::invalid ) {
         add_msg( _( "The %s collides with %s." ), grabbed_vehicle->name, blocker_name );
         u.grab_point = prev_grab;
         return true;
     }
 
-    u.grab_point = next_grab;
+    //if grab was already released, do not set grab again
+    if( u.grab_point != tripoint_rel_ms::zero ) {
+        u.grab_point = next_grab;
+    }
 
-    m.displace_vehicle( *grabbed_vehicle, final_dp_veh );
-    m.rebuild_vehicle_level_caches();
+    here.displace_vehicle( *grabbed_vehicle, final_dp_veh );
+    here.rebuild_vehicle_level_caches();
 
     if( grabbed_vehicle ) {
-        m.level_vehicle( *grabbed_vehicle );
+        here.level_vehicle( *grabbed_vehicle );
         grabbed_vehicle->check_falling_or_floating();
         if( grabbed_vehicle->is_falling ) {
             add_msg( _( "You let go of the %1$s as it starts to fall." ), grabbed_vehicle->disp_name() );
             u.grab( object_type::NONE );
-            m.set_seen_cache_dirty( grabbed_vehicle->pos_bub() );
+            u.grab_point = tripoint_rel_ms::zero;
+            here.set_seen_cache_dirty( grabbed_vehicle->pos_bub( here ) );
             return true;
         }
     } else {
@@ -232,8 +239,8 @@ bool game::grabbed_veh_move( const tripoint_rel_ms &dp )
     for( int p : wheel_indices ) {
         if( one_in( 2 ) ) {
             vehicle_part &vp_wheel = grabbed_vehicle->part( p );
-            tripoint_bub_ms wheel_p = grabbed_vehicle->bub_part_pos( vp_wheel );
-            grabbed_vehicle->handle_trap( wheel_p, vp_wheel );
+            tripoint_bub_ms wheel_p = grabbed_vehicle->bub_part_pos( here, vp_wheel );
+            grabbed_vehicle->handle_trap( &here, wheel_p, vp_wheel );
         }
     }
 

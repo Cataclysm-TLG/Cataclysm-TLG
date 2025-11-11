@@ -27,6 +27,15 @@
   },
   {
     "type": "activity_type",
+    "id": "ACT_E_FILE",
+    "activity_level": "NO_EXERCISE",
+    "verb": "managing files",
+    "rooted": true,
+    "based_on": "time",
+    "auto_needs": true
+  },
+  {
+    "type": "activity_type",
     "id": "ACT_EBOOKSAVE",
     "activity_level": "NO_EXERCISE",
     "verb": "taking pictures of books",
@@ -1145,5 +1154,12 @@
     "verb": "infusing saline",
     "based_on": "time",
     "do_turn_eoc": "SALINE_INFUSION_eff"
+  },
+  {
+    "id": "ACT_MORTAR_AIMING",
+    "type": "activity_type",
+    "activity_level": "NO_EXERCISE",
+    "based_on": "speed",
+    "verb": "aiming the artillery"
   }
 ]

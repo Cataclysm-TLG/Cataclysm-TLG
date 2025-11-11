@@ -1480,13 +1480,7 @@
     "components": [
       [ [ "chem_saltpetre", 50 ] ],
       [ [ "water_clean", 1 ] ],
-      [
-        [ "chem_ethanol", 83 ],
-        [ "chem_methanol", 83 ],
-        [ "ether", 83 ],
-        [ "denat_alcohol", 83 ],
-        [ "methed_alcohol", 83 ]
-      ],
+      [ [ "chem_ethanol", 83 ], [ "chem_methanol", 83 ], [ "ether", 83 ], [ "denat_alcohol", 83 ] ],
       [ [ "charcoal", 64 ] ]
     ]
   },
@@ -1663,7 +1657,7 @@
     ],
     "qualities": [ { "id": "BOIL", "level": 2 }, { "id": "DISTILL", "level": 1 } ],
     "tools": [ [ [ "water_boiling_heat", 25, "LIST" ] ] ],
-    "components": [ [ [ "methed_alcohol", 1000 ] ] ]
+    "components": [ [ [ "denat_alcohol", 1000 ] ] ]
   },
   {
     "type": "recipe",

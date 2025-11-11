@@ -162,7 +162,7 @@ void game::list_missions()
                 }
             }
             if( miss->has_target() ) {
-                const tripoint_abs_omt pos = u.global_omt_location();
+                const tripoint_abs_omt pos = u.pos_abs_omt();
                 // TODO: target does not contain a z-component, targets are assumed to be on z=0
                 mvwprintz( w_missions, point( 41, ++y ), c_white, _( "Target: %s   You: %s" ),
                            miss->get_target().to_string(), pos.to_string() );

@@ -528,6 +528,7 @@ TEST_CASE( "spell_area_of_effect", "[magic][spell][aoe]" )
 TEST_CASE( "spell_effect_-_target_attack", "[magic][spell][effect][target_attack]" )
 {
     // World setup
+    map &here = get_map();
     clear_map();
 
     // Locations for avatar and monster
@@ -542,7 +543,7 @@ TEST_CASE( "spell_effect_-_target_attack", "[magic][spell][effect][target_attack
     // Avatar/spellcaster
     avatar &dummy = get_avatar();
     clear_character( dummy );
-    dummy.setpos( dummy_loc );
+    dummy.setpos( here, dummy_loc );
     REQUIRE( dummy.pos_bub() == dummy_loc );
     REQUIRE( creatures.creature_at( dummy_loc ) );
     REQUIRE( g->num_creatures() == 1 );
@@ -583,17 +584,19 @@ TEST_CASE( "spell_effect_-_target_attack", "[magic][spell][effect][target_attack
 // spell_effect::spawn_summoned_monster
 TEST_CASE( "spell_effect_-_summon", "[magic][spell][effect][summon]" )
 {
+    map &here = get_map();
+
     clear_map();
 
     // Avatar/spellcaster and summoned mummy locations
-    const tripoint dummy_loc = { 60, 60, 0 };
+    const tripoint_bub_ms dummy_loc = { 60, 60, 0 };
     const tripoint_bub_ms mummy_loc = { 61, 60, 0 };
 
     avatar &dummy = get_avatar();
     creature_tracker &creatures = get_creature_tracker();
     clear_character( dummy );
-    dummy.setpos( dummy_loc );
-    REQUIRE( dummy.pos() == dummy_loc );
+    dummy.setpos( here, dummy_loc );
+    REQUIRE( dummy.pos_bub() == dummy_loc );
     REQUIRE( creatures.creature_at( dummy_loc ) );
     REQUIRE( g->num_creatures() == 1 );
 
@@ -607,7 +610,7 @@ TEST_CASE( "spell_effect_-_summon", "[magic][spell][effect][summon]" )
     CHECK( g->num_creatures() == 2 );
 
     //kill the ghost
-    creatures.creature_at( mummy_loc )->die( nullptr );
+    creatures.creature_at( mummy_loc )->die( &here, nullptr );
     g->cleanup_dead();
 
     //a corpse was not created
@@ -625,7 +628,7 @@ TEST_CASE( "spell_effect_-_summon", "[magic][spell][effect][summon]" )
     CHECK( g->num_creatures() == 2 );
 
     //kill the mummy
-    creatures.creature_at( mummy_loc )->die( nullptr );
+    creatures.creature_at( mummy_loc )->die( &here, nullptr );
     g->cleanup_dead();
 
     //a corpse was created

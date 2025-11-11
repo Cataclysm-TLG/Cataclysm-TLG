@@ -83,9 +83,9 @@
         "                                                @    ,,,  ,,, d                                 ",
         "                                                     ,,,  ,,,   @                               "
       ],
-      "sealed_item": { "#": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 5 } },
+      "sealed_item": { "#": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 1 } },
       "terrain": {
-        "│": "t_hole",
+        "│": "t_open_air",
         " ": [ [ "t_region_groundcover", 99 ], [ "t_region_shrub", 1 ] ],
         ",": [ [ "t_region_soil", 200 ], [ "t_region_groundcover", 5 ] ],
         ";": [ [ "t_dirtfloor_no_roof", 80 ], [ "t_region_soil", 20 ] ],
@@ -150,6 +150,7 @@
         "M": "f_bathtub",
         "O": "f_locker",
         "x": "f_utility_shelf",
+        "J": "f_active_backup_generator",
         "y": "f_air_conditioner"
       },
       "item": {
@@ -178,7 +179,7 @@
         { "item": "salt_lick", "x": 31, "y": 42, "chance": 100 },
         { "item": "salt_lick", "x": [ 14, 15 ], "y": [ 34, 35 ], "chance": 100, "repeat": 3 }
       ],
-      "place_items": [ { "item": "tools_toolbox", "x": 48, "y": 33, "chance": 100 } ],
+      "place_items": [ { "item": "tools_toolbox", "x": 48, "y": 33, "chance": 60 } ],
       "signs": { "s": { "signage": "St. John Dairy.  555-0199 Daily Farm Tours" } },
       "traps": { "q": "tr_beartrap" },
       "monster": {
@@ -193,8 +194,7 @@
         "z": { "field": "fd_blood", "intensity": 1, "age": 10 },
         "M": { "field": "fd_blood", "intensity": 1, "age": 10 },
         "q": { "field": "fd_blood", "intensity": 1, "age": 10 }
-      },
-      "vehicles": { "J": { "vehicle": "portable_generator", "rotation": 90, "chance": 100, "fuel": 40, "status": 1 } }
+      }
     }
   },
   {
@@ -242,10 +242,10 @@
       "place_monster": [ { "monster": "mon_zombie_fat", "name": "Brenda", "x": 25, "y": 20 } ],
       "items": {
         "q": [
-          { "item": "tools_earthworking", "chance": 65 },
+          { "item": "tools_earthworking", "chance": 45 },
           { "item": "mechanics", "chance": 40 },
           { "item": "home_hw", "chance": 50 },
-          { "item": "tools_common", "chance": 50 },
+          { "item": "tools_common", "chance": 30 },
           { "item": "fertilizers", "chance": 60 }
         ]
       },
@@ -284,8 +284,14 @@
         "...........||||oo||||||oo||||||||o|||...........",
         "................................................"
       ],
-      "palettes": [ "standard_domestic_palette", "standard_domestic_lino_bathroom" ],
-      "terrain": { ":": "t_open_air_rooved", ".": "t_open_air", "|": "t_wall_wood", "'": "t_linoleum_gray", "-": "t_railing" },
+      "palettes": [ "parametrized_linoleum_palette", "standard_domestic_palette", "standard_domestic_lino_bathroom" ],
+      "terrain": {
+        ":": "t_open_air_rooved",
+        ".": "t_open_air",
+        "|": "t_wall_wood",
+        "'": { "param": "linoleum_color", "fallback": "t_linoleum_gray" },
+        "-": "t_railing"
+      },
       "place_monster": [ { "monster": "mon_zombie_crawler", "name": "Mark", "x": 25, "y": 20 } ],
       "place_fields": [
         { "field": "fd_blood", "intensity": 1, "age": 10, "x": 31, "y": [ 14, 16 ], "repeat": [ 1, 2 ] },

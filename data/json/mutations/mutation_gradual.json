@@ -8,6 +8,9 @@
     "mixed_effect": true,
     "time": 3600,
     "processed_eocs": [ "EOC_AM_BECOME_MUTANT" ],
+    "random_at_chargen": false,
+    "starting_trait": false,
+    "valid": false,
     "cancels": [
       "MUTATING_GRADUAL_BATRACHIAN",
       "MUTATING_GRADUAL_AVIAN",
@@ -189,6 +192,7 @@
     "description": "Something is happening to you, it's turning you into a monster.  You will be prompted to choose a mutation line and will thereafter gradually gain its traits over time.",
     "points": 5,
     "valid": false,
-    "starting_trait": true
+    "starting_trait": true,
+    "random_at_chargen": false
   }
 ]

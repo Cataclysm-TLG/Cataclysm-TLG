@@ -208,7 +208,7 @@ struct field_type {
         bool has_elec = false;
         bool has_fume = false;
         description_affix desc_affix = description_affix::DESCRIPTION_AFFIX_NUM;
-        map_bash_info bash_info;
+        std::optional<map_fd_bash_info> bash_info;
 
         // Name of whatever substance makes up the field, can be used in splash attacks or other messaging.
         std::string substance_name = "liquid";
@@ -227,6 +227,7 @@ struct field_type {
         bool display_items = true;
         bool display_field = false;
         bool legacy_make_rubble = false;
+        bool linear_half_life = false;
         field_type_str_id wandering_field;
         std::string looks_like;
 

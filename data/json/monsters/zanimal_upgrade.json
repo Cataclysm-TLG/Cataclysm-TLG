@@ -3,7 +3,7 @@
     "id": "mon_dog_skeleton",
     "type": "MONSTER",
     "name": { "str": "skeletal dog" },
-    "description": "This undead canine has shed all of its skin, revealing a carapace of fused bones and ribs.  This walking suit of bone seems to be controlled by a net of veins and sinews which pulse with glistening black goo.",
+    "description": "This undead canine has shed all of its skin, revealing a carapace of fused bones and ribs.  This walking suit of bone seems to be controlled by a net of veins and sinews which pulse with putrid blood.",
     "default_faction": "zombie",
     "bodytype": "dog",
     "species": [ "ZOMBIE" ],
@@ -30,8 +30,8 @@
     "harvest": "doggy_bones",
     "special_attacks": [ { "id": "bite_grab", "attack_upper": false, "cooldown": 5 }, { "id": "scratch_grab_required", "max_mul": 1.5 } ],
     "death_drops": "mon_dog_death_drops",
-    "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY" ],
+    "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "WARM", "REVIVES", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 1 }
   },
   {
@@ -40,7 +40,7 @@
     "name": { "str": "barghest" },
     "copy-from": "mon_dog_zombie_rot",
     "harvest": "zombie_dog",
-    "description": "A zombie dog grown to nearly the size of a horse.  Daggerlike teeth jut from its gaping maw at every angle, and its broad back ripples with unnatural arrangements of glistening muscle.",
+    "description": "A zombie dog grown larger than most men.  Daggerlike teeth jut from its gaping maw at every angle, and its broad back ripples with unnatural arrangements of glistening muscle.",
     "volume": "108500 ml",
     "weight": "120 kg",
     "diff": 2,
@@ -51,13 +51,13 @@
       "melee_skill": 2,
       "melee_dice": 1,
       "melee_dice_sides": 5,
-      "melee_damage": 2,
+      "melee_damage": [ { "damage_type": "cut", "amount": 2 } ],
       "melee_cut": 2,
       "vision_night": 1,
       "armor": { "bash": 6, "cut": 4, "bullet": 4, "electric": 1 }
     },
     "bleed_rate": 50,
-    "upgrades": { "half_life": 42, "into": "mon_dog_zombie_hulk" },
+    "upgrades": { "half_life": 168, "into": "mon_dog_zombie_hulk" },
     "grab_strength": 30,
     "special_attacks": [
       { "id": "scratch_grab_required", "max_mul": 1.5 },
@@ -104,7 +104,8 @@
         "max_mul": 2.0
       },
       { "id": "drag_followup" },
-      { "id": "scratch_grab_required" }
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
     ],
     "extend": { "flags": [ "DESTROYS" ] },
     "armor": { "bash": 8, "cut": 10, "bullet": 10, "electric": 4 }
@@ -116,8 +117,8 @@
     "harvest": "doggy_bones",
     "name": { "str": "bone-plated canine", "str_pl": "bone-plated canine" },
     "description": "A four-legged creature covered in fused bony plates.  Its shape recalls a big dog or perhaps a wolf, though the original anatomy is largely hidden by its burdensome armor.",
-    "volume": "62500 ml",
-    "weight": "81500 g",
+    "volume": "75000 ml",
+    "weight": "74000 g",
     "hp": 190,
     "speed": 80,
     "melee_skill": 5,
@@ -151,7 +152,7 @@
     "relative": {
       "melee_dice": 1,
       "melee_dice_sides": 5,
-      "melee_damage": 2,
+      "melee_damage": { "damage_type": "cut", "amount": 2 },
       "vision_night": 1,
       "armor": { "bash": 4, "cut": 6, "bullet": 5 }
     },
@@ -180,7 +181,7 @@
     "id": "mon_wolf_skeleton",
     "type": "MONSTER",
     "name": { "str": "skeletal wolf", "str_pl": "skeletal wolves" },
-    "description": "This undead canine has shed all of its skin, revealing a carapace of fused bones and ribs.  Devoid entirely of flesh, this walking suit of bone seems to be controlled by a net of veins and sinews which pulse with glistening black goo.",
+    "description": "This undead canine has shed all of its skin, revealing a carapace of fused bones and ribs.  Devoid entirely of flesh, this walking suit of bone seems to be controlled by a net of veins and sinews which pulse with each beat of its rotten heart.",
     "looks_like": "mon_dog_skeleton",
     "default_faction": "zombie",
     "bodytype": "dog",
@@ -207,8 +208,8 @@
     "bleed_rate": 50,
     "vision_night": 3,
     "harvest": "puppy_bones",
-    "upgrades": { "half_life": 42, "into": "mon_dog_skeleton_brute" },
-    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "POISON", "FILTHY" ],
+    "upgrades": { "half_life": 168, "into": "mon_dog_skeleton_brute" },
+    "flags": [ "SEES", "HEARS", "NO_BREATHE", "REVIVES", "WARM", "POISON", "FILTHY", "BASHES" ],
     "armor": { "cut": 15, "stab": 30, "acid": 3, "bullet": 12, "electric": 3 }
   },
   {
@@ -232,10 +233,13 @@
     "harvest": "puppy_bones",
     "grab_strength": 35,
     "special_attacks": [
-      { "id": "bite_grab", "move_cost": 150, "cooldown": 5, "min_mul": 1, "max_mul": 1.8 },
-      { "id": "scratch", "cooldown": 10, "min_mul": 1, "max_mul": 1.8 }
+      { "id": "scratch", "cooldown": 10, "min_mul": 1, "max_mul": 1.8 },
+      { "id": "bite_grab", "move_cost": 150, "cooldown": 5, "min_mul": 1.0, "max_mul": 1.8 },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
     ],
-    "flags": [ "SEES", "HEARS", "GRABS", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "GRABS", "REVIVES", "WARM", "NO_BREATHE", "POISON", "FILTHY" ],
     "armor": { "bash": 2, "cut": 17, "stab": 30, "acid": 3, "bullet": 32, "electric": 3 }
   },
   {
@@ -254,10 +258,23 @@
     "dodge": 3,
     "bleed_rate": 50,
     "harvest": "zombie_animal_acid",
+    "grab_strength": 45,
     "special_attacks": [
       [ "ACID_BARF", 10 ],
-      { "id": "bite_grab", "move_cost": 150, "cooldown": 3, "min_mul": 0.75, "max_mul": 1.5 },
-      { "id": "scratch" }
+      [ "ACID_BARF", 10 ],
+      [ "scratch", 10 ],
+      {
+        "id": "bite_grab",
+        "move_cost": 150,
+        "cooldown": 3,
+        "accuracy": 5,
+        "infection_chance": 8,
+        "min_mul": 0.75,
+        "max_mul": 1.5
+      },
+      { "id": "drag_followup" },
+      { "id": "scratch_grab_required" },
+      { "id": "bite_grab_required" }
     ],
     "extend": { "flags": [ "ACIDPROOF", "ACID_BLOOD" ] },
     "death_function": { "message": "The %s's body leaks acid.", "effect": { "id": "death_acid", "hit_self": true } }
@@ -268,8 +285,8 @@
     "name": { "str": "acidic zombie horse" },
     "copy-from": "mon_zombie_horse",
     "description": "The abdomen of this once majestic horse has grown rotund to the point you can see through the skin, at the reservoir of caustic bile inside.  Its neck is equally enlarged as well as slightly longer than normal.",
-    "diff": 3,
-    "hp": 75,
+    "diff": 5,
+    "hp": 150,
     "speed": 195,
     "attack_cost": 195,
     "color": "light_gray_yellow",
@@ -300,28 +317,28 @@
     "copy-from": "mon_zombie_horse",
     "description": "A zombified horse without skin, its overgrown, bloody musculature clear for all to see.  Some muscles occasionally tear from their tendons as it barrels towards its target, flailing around like a loose hose before weaving back into place.",
     "diff": 5,
-    "hp": 90,
+    "hp": 200,
     "color": "red",
     "melee_dice": 4,
     "melee_damage": [ { "damage_type": "cut", "amount": 7 } ],
     "harvest": "zombie_animal",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
     "regenerates": 9,
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "NO_BREATHE", "REVIVES" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "WARM", "BASHES", "NO_BREATHE", "REVIVES" ]
   },
   {
     "id": "mon_zombie_horse_black",
     "type": "MONSTER",
     "name": { "str": "scorched zombie horse" },
     "copy-from": "mon_zombie_horse",
-    "description": "This undead horse has a charred hide as black as soot, the underside of which is littered with gashes and holes.  Pillars of choking black smoke pour from the wounds, smothering everything that draws near.",
-    "diff": 4,
-    "hp": 75,
+    "description": "This undead horse has a charred hide as black as soot, the underside of which is littered with gashes and holes.  Pillars of choking smoke pour from the wounds, smothering everything that draws near.",
+    "diff": 6,
+    "hp": 125,
     "color": "blue_white",
     "dodge": 3,
     "emit_fields": [ { "emit_id": "emit_smoke_stream", "delay": "1 s" } ],
     "death_function": { "effect": { "id": "death_smokeburst", "hit_self": true }, "message": "The %s explodes!" },
-    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "POISON", "HARDTOSHOOT", "NO_BREATHE", "REVIVES" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "BASHES", "WARM", "POISON", "HARDTOSHOOT", "NO_BREATHE", "REVIVES" ]
   },
   {
     "id": "mon_zombie_horse_pale",
@@ -329,8 +346,8 @@
     "name": { "str": "skeletal zombie horse" },
     "copy-from": "mon_zombie_horse",
     "description": "With plates of asymmetrical bone tissue overlapping its body, this ignoble steed needs no rider for you to fear its approach.  Completing its ghoulish look is an overgrown skull which, judging by the flattened and battered forehead, has become its main weapon.",
-    "diff": 5,
-    "hp": 90,
+    "diff": 6,
+    "hp": 225,
     "color": "white",
     "melee_dice": 4,
     "melee_damage": [ { "damage_type": "cut", "amount": 8 } ],
@@ -338,7 +355,7 @@
     "families": [ "prof_intro_biology", "prof_wp_zombie", "prof_wp_skeleton" ],
     "harvest": "puppy_bones",
     "special_attacks": [ { "id": "smash", "throw_strength": 91, "cooldown": 30 } ],
-    "flags": [ "SEES", "HEARS", "BASHES", "GROUP_BASH", "HARDTOSHOOT", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
+    "flags": [ "SEES", "HEARS", "BASHES", "GROUP_BASH", "WARM", "HARDTOSHOOT", "REVIVES", "NO_BREATHE", "POISON", "FILTHY" ],
     "armor": { "bash": 5, "electric": 2, "cut": 16, "stab": 30, "acid": 2, "bullet": 24 }
   },
   {
@@ -394,7 +411,7 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "bleed_rate": 20,
     "vision_night": 7,
-    "harvest": "zombie_thorny",
+    "harvest": "zombie_thorny_antler",
     "attack_effs": [ { "id": "paralyzepoison", "duration": 33 } ],
     "//grab": "Let's say the thorns make it half again as grabby",
     "grab_strength": 45,
@@ -406,6 +423,7 @@
       "SMELLS",
       "STUMBLES",
       "BASHES",
+      "WARM",
       "GROUP_BASH",
       "POISON",
       "NO_BREATHE",

@@ -75,7 +75,8 @@
       "sloc_office_tower_rooftop",
       "sloc_office_tower_2_rooftop",
       "sloc_cathedral_rooftop",
-      "sloc_convention_center_rooftop"
+      "sloc_convention_center_rooftop",
+      "sloc_mansion_basement"
     ],
     "start_name": "In Large Building",
     "flags": [ "CITY_START", "LONE_START" ]
@@ -637,13 +638,14 @@
     "id": "patient",
     "name": "Challenge - Abandoned",
     "points": -8,
-    "description": "Sickly and frail, you have spent most of your life in the patient's ward of various hospitals.  When your current one was evacuated, you were considered a lost cause and left behind.  You awaken to the sound of movement around the hospital.",
+    "description": "Accident or illness left you under intensive care.  When your hospital was overrun, you were considered a lost cause and left behind.  You awaken to the sound of movement around the hospital.",
     "allowed_locs": [ "sloc_hospital" ],
     "start_name": "Hospital",
     "forced_traits": [ "FLIMSY2" ],
     "forbidden_traits": [ "TOUGH", "DISRESISTANT" ],
     "professions": [ "unemployed", "patient", "veteran", "bionic_patient" ],
     "requirement": "achievement_reach_hospital",
+    "reveal_locale": false,
     "flags": [ "CHALLENGE", "CITY_START", "LONE_START" ]
   },
   {
@@ -826,6 +828,7 @@
     "id": "overrun",
     "name": "Challenge - Overrun",
     "points": 3,
+    "forced_traits": [ "MILITARY_BASE_SPAWN" ],
     "description": "Despite all the soldiers, guns, and minefields, the military base you were in was overrun by the dead.  Everyone was ordered to fall back to the armory, but during all the chaos you got lost and you are now stuck in the warehouse by yourself.  You are not sure if anyone made it to the armory, or if you are the last one alive.",
     "start_name": "Military Base Warehouse",
     "allowed_locs": [ "sloc_military_base_warehouse" ],
@@ -902,9 +905,8 @@
     "name": "Challenge - Mansion Escape",
     "points": -5,
     "description": "You were living the high life when the world ended, surrounded by riches and eating well every day.  Now you've woken up, alone and drugged, in a room of your mansion that you don't recognize.  As you fight to remain conscious, you hear heavy footsteps nearby.  Time to get the hell out of here.",
-    "allowed_locs": [ "sloc_mansion_basement", "sloc_enclosed_mansion_panic_room", "sloc_enclosed_mansion_sex_lair" ],
+    "allowed_locs": [ "sloc_enclosed_mansion_panic_room", "sloc_enclosed_mansion_sex_lair" ],
     "start_name": "Mansion",
-    "surround_groups": [ [ "GROUP_MANSION_START", 70.0 ] ],
     "eoc": [ "scenario_paralyzepoison", "scenario_mansion_pursuit" ],
     "flags": [ "CHALLENGE", "LONE_START" ],
     "professions": [

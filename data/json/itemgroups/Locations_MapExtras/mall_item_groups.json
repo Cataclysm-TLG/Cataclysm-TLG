@@ -82,7 +82,6 @@
       [ "pom_poms", 40 ],
       [ "backpack", 40 ],
       [ "backpack_denim", 5 ],
-      { "item": "backpack_giant", "prob": 1 },
       [ "pockknife", 5 ],
       [ "wristwatch", 20 ],
       [ "teleumbrella", 5 ],
@@ -228,7 +227,6 @@
       [ "leather", 10 ],
       [ "fur", 7 ],
       [ "sheet_leather", 20 ],
-      [ "tanned_hide", 20 ],
       [ "tanned_pelt", 20 ]
     ]
   },
@@ -260,14 +258,13 @@
       { "item": "portable_game", "prob": 20, "charges": 100 },
       [ "antenna", 25 ],
       { "group": "ammo_any_batteries_full", "prob": 50 },
-      { "item": "mp3", "prob": 40, "charges": 100 },
-      [ "usb_drive", 10 ],
+      { "item": "mp3", "prob": 30, "charges": 100 },
+      { "group": "new_phones", "prob": 90 },
+      { "group": "new_usb_drives", "prob": 10 },
+      { "group": "new_memory_cards", "prob": 10 },
       [ "manual_electronics", 20 ],
       [ "cable", 60 ],
-      { "item": "cell_phone", "prob": 60, "charges": 150 },
-      { "item": "smart_phone", "prob": 60, "charges": 120 },
       [ "wristwatch", 60 ],
-      [ "memory_card", 10 ],
       [ "fitness_band", 5 ]
     ]
   },
@@ -290,7 +287,7 @@
       { "item": "candle", "prob": 50, "charges": 100 },
       [ "scissors", 30 ],
       [ "soap", 45 ],
-      [ "moisturizer", 45 ],
+      { "item": "moisturizer", "prob": 60, "charges": [ 1, -1 ], "container-item": "bottle_plastic_small" },
       { "item": "tailors_kit", "prob": 25, "charges": 400 },
       { "item": "shavingkit", "prob": 20, "charges": 10 },
       { "item": "elec_hairtrimmer", "prob": 20, "charges": 50 },

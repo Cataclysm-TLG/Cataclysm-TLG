@@ -12,6 +12,7 @@
 #include <utility>
 #include <vector>
 
+#include "coords_fwd.h"
 #include "enums.h"
 #include "item_pocket.h"
 #include "ret_val.h"
@@ -24,6 +25,7 @@ class JsonOut;
 class item;
 class item_location;
 class iteminfo_query;
+class map;
 struct iteminfo;
 struct tripoint;
 
@@ -35,13 +37,21 @@ class item_contents
         explicit item_contents( const std::vector<pocket_data> &pockets );
 
         /**
-          * returns an item_location and pointer to the best pocket that can contain the item @it
-          * checks all items contained in every pocket
-          * only checks CONTAINER pocket type
-          */
+         * Return an item_location and a pointer to the best pocket that can contain the item @it.
+         * if param allow_nested=true Check all items contained in every pocket of CONTAINER pocket type,
+         * otherwise, only check this item contents' pockets.
+         * @param it the item that function will find the best pocket that can contain it
+         * @param this_loc location of it
+         * @param avoid item that will be avoided in recursive lookup item pocket
+         * @param allow_sealed allow use sealed pocket
+         * @param ignore_settings ignore pocket setting
+         * @param nested whether the current call is nested (used recursively).
+         * @param ignore_rigidity ignore pocket rigid
+         * @param allow_nested whether nested pockets should be checked
+         */
         std::pair<item_location, item_pocket *> best_pocket( const item &it, item_location &this_loc,
                 const item *avoid = nullptr, bool allow_sealed = false, bool ignore_settings = false,
-                bool nested = false, bool ignore_rigidity = false );
+                bool nested = false, bool ignore_rigidity = false, bool allow_nested = true );
 
         units::length max_containable_length( bool unrestricted_pockets_only = false ) const;
         units::length min_containable_length() const;
@@ -62,20 +72,21 @@ class item_contents
          * physical pockets.
          * @param it the item being put in
          * @param ignore_pkt_settings whether to ignore pocket autoinsert settings
+         * @param ignore_non_container_pocket ignore magazine pockets, such as weapon magazines
          * @param remaining_parent_volume if we are nesting things without concern for rigidity we need to be careful about overfilling pockets
          * this tracks the remaining volume of any parent pockets
          */
         ret_val<void> can_contain( const item &it, bool ignore_pkt_settings = true,
-                                   bool is_pick_up_inv = false,
+                                   bool ignore_non_container_pocket = false,
                                    units::volume remaining_parent_volume = 10000000_ml ) const;
         ret_val<void> can_contain( const item &it, int &copies_remaining, bool ignore_pkt_settings = true,
-                                   bool is_pick_up_inv = false,
+                                   bool ignore_non_container_pocket = false,
                                    units::volume remaining_parent_volume = 10000000_ml ) const;
         ret_val<void> can_contain_rigid( const item &it, bool ignore_pkt_settings = true,
-                                         bool is_pick_up_inv = false ) const;
+                                         bool ignore_non_container_pocket = false ) const;
         ret_val<void> can_contain_rigid( const item &it, int &copies_remaining,
                                          bool ignore_pkt_settings = true,
-                                         bool is_pick_up_inv = false ) const;
+                                         bool ignore_non_container_pocket = false ) const;
         bool can_contain_liquid( bool held_or_ground ) const;
 
         bool contains_no_solids() const;
@@ -113,10 +124,14 @@ class item_contents
         /** returns a list of pointers to all top-level items */
         std::list<const item *> all_items_top( pocket_type pk_type ) const;
 
-        /** returns a list of pointers to all top-level items that are not mods */
+        /** returns a list of pointers to all top-level items in standard pockets */
         std::list<item *> all_items_top();
-        /** returns a list of pointers to all top-level items that are not mods */
+        /** returns a list of pointers to all top-level items in standard pockets */
         std::list<const item *> all_items_top() const;
+        /** returns a list of pointers to all top-level items in container-like pockets */
+        std::list<item *> all_items_container_top();
+        /** returns a list of pointers to all top-level items in container-like pockets */
+        std::list<const item *> all_items_container_top() const;
 
         /** returns a list of pointers to all visible or remembered content items that are not mods */
         std::list<item *> all_known_contents();
@@ -139,6 +154,9 @@ class item_contents
 
         std::vector<item *> ebooks();
         std::vector<const item *> ebooks() const;
+
+        std::vector<item *> efiles();
+        std::vector<const item *> efiles() const;
 
         std::vector<item *> cables();
         std::vector<const item *> cables() const;
@@ -281,9 +299,10 @@ class item_contents
 
         item_pocket *contained_where( const item &contained );
         void on_pickup( Character &guy, item *avoid = nullptr );
-        bool spill_contents( const tripoint &pos );
-        // spill items that don't fit in the container
-        void overflow( const tripoint &pos, const item_location &loc );
+        bool spill_contents( const tripoint_bub_ms &pos );
+        bool spill_contents( map *here, const tripoint_bub_ms &pos );
+        /** Spill items that don't fit in the container. */
+        void overflow( map &here, const tripoint_bub_ms &pos, const item_location &loc );
         void clear_items();
         // clears all items from magazine type pockets
         void clear_magazines();
@@ -302,7 +321,8 @@ class item_contents
         // heats up the contents if they have temperature
         void heat_up();
         // returns amount of ammo consumed
-        int ammo_consume( int qty, const tripoint &pos, float fuel_efficiency = -1.0 );
+        int ammo_consume( int qty, const tripoint_bub_ms &pos, float fuel_efficiency = -1.0 );
+        int ammo_consume( int qty, map *here, const tripoint_bub_ms &pos, float fuel_efficiency = -1.0 );
         item *magazine_current();
         std::set<ammotype> ammo_types() const;
         int ammo_capacity( const ammotype &ammo ) const;
@@ -341,11 +361,12 @@ class item_contents
          * Is part of the recursive call of item::process. see that function for additional comments
          * NOTE: this destroys the items that get processed
          */
-        void process( map &here, Character *carrier, const tripoint &pos, float insulation = 1,
+        void process( map &here, Character *carrier, const tripoint_bub_ms &pos, float insulation = 1,
                       temperature_flag flag = temperature_flag::NORMAL, float spoil_multiplier_parent = 1.0f,
                       bool watertight_container = false );
 
-        void leak( map &here, Character *carrier, const tripoint &pos, item_pocket *pocke = nullptr );
+        void leak( map &here, Character *carrier, const tripoint_bub_ms &pos,
+                   item_pocket *pocke = nullptr );
 
         bool item_has_uses_recursive() const;
         bool stacks_with( const item_contents &rhs, int depth = 0, int maxdepth = 2 ) const;

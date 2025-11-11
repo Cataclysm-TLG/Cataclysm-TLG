@@ -52,9 +52,11 @@
 #include "translations.h"
 #include "ui.h"
 #include "units.h"
+#include "vpart_position.h"
 
 static const ammo_effect_str_id ammo_effect_MAGIC( "MAGIC" );
 
+static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
 static const json_character_flag json_flag_NO_PSIONICS( "NO_PSIONICS" );
 static const json_character_flag json_flag_NO_SPELLCASTING( "NO_SPELLCASTING" );
 static const json_character_flag json_flag_SILENT_SPELL( "SILENT_SPELL" );
@@ -81,6 +83,8 @@ static std::string target_to_string( spell_target data )
             return pgettext( "Valid spell target", "item" );
         case spell_target::field:
             return pgettext( "Valid spell target", "field" );
+        case spell_target::vehicle:
+            return pgettext( "Valid spell target", "vehicle" );
         case spell_target::num_spell_targets:
             break;
     }
@@ -102,6 +106,7 @@ std::string enum_to_string<spell_target>( spell_target data )
         case spell_target::none: return "none";
         case spell_target::item: return "item";
         case spell_target::field: return "field";
+        case spell_target::vehicle: return "vehicle";
         case spell_target::num_spell_targets: break;
     }
     cata_fatal( "Invalid valid_target" );
@@ -968,6 +973,8 @@ std::string spell::damage_string( const Character &caster ) const
 
 std::optional<tripoint_bub_ms> spell::select_target( Creature *source )
 {
+    const map &here = get_map();
+
     tripoint_bub_ms target = source->pos_bub();
     bool target_is_valid = false;
     if( range( *source ) > 0 && !is_valid_target( spell_target::none ) &&
@@ -980,16 +987,14 @@ std::optional<tripoint_bub_ms> spell::select_target( Creature *source )
                 if( !trajectory.empty() ) {
                     target = trajectory.back();
                     target_is_valid = is_valid_target( source_avatar, target );
-                    if( !( is_valid_target( spell_target::ground ) || source_avatar.sees( target ) ) ) {
+                    if( !( is_valid_target( spell_target::ground ) || source_avatar.sees( here, target ) ) ) {
                         target_is_valid = false;
                     }
                 } else {
                     target_is_valid = false;
                 }
                 if( !target_is_valid ) {
-                    if( query_yn( _( "Stop targeting?  Time spent will be lost." ) ) ) {
-                        return std::nullopt;
-                    }
+                    return std::nullopt;
                 }
             } while( !target_is_valid );
         } else if( source->is_npc() ) {
@@ -1117,7 +1122,7 @@ std::vector<tripoint_bub_ms> spell::targetable_locations( const Character &sourc
         }
 
         if( !select_ground ) {
-            if( !source.sees( query ) ) {
+            if( !source.sees( here, query ) ) {
                 // can't target a critter you can't see
                 continue;
             }
@@ -1278,6 +1283,13 @@ bool spell::is_spell_class( const trait_id &mid ) const
 
 bool spell::can_cast( const Character &guy ) const
 {
+    if( guy.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        return false;
+    }
+    if( has_flag( spell_flag::NON_MAGICAL ) ) {
+        return true;
+    };
+
     if( guy.has_flag( json_flag_NO_SPELLCASTING ) && !has_flag( spell_flag::PSIONIC ) ) {
         return false;
     }
@@ -1291,7 +1303,7 @@ bool spell::can_cast( const Character &guy ) const
     }
 
     if( !type->spell_components.is_empty() &&
-        !type->spell_components->can_make_with_inventory( guy.crafting_inventory( guy.pos(), 0, false ),
+        !type->spell_components->can_make_with_inventory( guy.crafting_inventory( guy.pos_bub(), 0, false ),
                 return_true<item> ) ) {
         return false;
     }
@@ -1307,7 +1319,7 @@ void spell::use_components( Character &guy ) const
     const requirement_data &spell_components = type->spell_components.obj();
     // if we're here, we're assuming the Character has the correct components (using can_cast())
     inventory map_inv;
-    map_inv.form_from_map( guy.pos(), 0, &guy, true, false );
+    map_inv.form_from_map( guy.pos_bub(), 0, &guy, true, false );
     for( const std::vector<item_comp> &comp_vec : spell_components.get_components() ) {
         guy.consume_items( guy.select_item_component( comp_vec, 1, map_inv ), 1 );
     }
@@ -1683,6 +1695,9 @@ bool spell::is_valid_target( const Creature &caster, const tripoint_bub_ms &p ) 
         valid = valid && target_by_monster_id( p );
         valid = valid && target_by_species_id( p );
         valid = valid && ignore_by_species_id( p );
+    } else if( get_map().veh_at( p ) ) {
+        valid = is_valid_target( spell_target::vehicle ) ||
+                is_valid_target( spell_target::ground );
     } else {
         valid = is_valid_target( spell_target::ground );
     }
@@ -1985,7 +2000,7 @@ dealt_projectile_attack spell::get_projectile_attack( const tripoint_bub_ms &tar
 
     dealt_projectile_attack atk;
     atk.end_point = target;
-    atk.hit_critter = &hit_critter;
+    atk.last_hit_critter = &hit_critter;
     atk.proj = bolt;
     atk.missed_by = 0.0;
 
@@ -2506,7 +2521,7 @@ std::vector<spell> Character::spells_known_of_class( const trait_id &spell_class
     return ret;
 }
 
-static void reflesh_favorite( uilist *menu, std::vector<spell *> known_spells )
+static void refresh_favorite( uilist *menu, std::vector<spell *> known_spells )
 {
     for( uilist_entry &entry : menu->entries ) {
         if( get_player_character().magic->is_favorite( known_spells[entry.retval]->id() ) ) {
@@ -2563,7 +2578,7 @@ class spellcasting_callback : public uilist_callback
                 scroll_pos += action == "SCROLL_DOWN_SPELL_MENU" ? 1 : -1;
             } else if( action == "SCROLL_FAVORITE" ) {
                 get_player_character().magic->toggle_favorite( known_spells[entnum]->id() );
-                reflesh_favorite( menu, known_spells );
+                refresh_favorite( menu, known_spells );
             }
             return false;
         }
@@ -2881,13 +2896,13 @@ void spellcasting_callback::spell_info_text( const spell &sp, int width )
     if( sp.has_components() ) {
         if( !sp.components().get_components().empty() ) {
             for( const std::string &line : sp.components().get_folded_components_list(
-                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos(), 0, false ), return_true<item> ) ) {
+                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos_bub(), 0, false ), return_true<item> ) ) {
                 info_txt.emplace_back( line );
             }
         }
         if( !( sp.components().get_tools().empty() && sp.components().get_qualities().empty() ) ) {
             for( const std::string &line : sp.components().get_folded_tools_list(
-                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos(), 0, false ) ) ) {
+                     width - 2, c_light_gray, pc.crafting_inventory( pc.pos_bub(), 0, false ) ) ) {
                 info_txt.emplace_back( line );
             }
         }
@@ -2964,7 +2979,7 @@ int known_magic::get_invlet( const spell_id &sp, std::set<int> &used_invlets )
     return 0;
 }
 
-int known_magic::select_spell( Character &guy )
+spell &known_magic::select_spell( Character &guy )
 {
     // max width of spell names
     const int max_spell_name_length = get_spellname_max_width();
@@ -3035,13 +3050,17 @@ int known_magic::select_spell( Character &guy )
         spell_menu.addentry( static_cast<int>( i ), known_spells[i]->can_cast( guy ),
                              get_invlet( known_spells[i]->id(), used_invlets ), known_spells[i]->name() );
     }
-    reflesh_favorite( &spell_menu, known_spells );
+    refresh_favorite( &spell_menu, known_spells );
 
     spell_menu.query( true, -1, true );
 
     casting_ignore = static_cast<spellcasting_callback *>( spell_menu.callback )->casting_ignore;
-
-    return spell_menu.ret;
+    if( spell_menu.ret < 0 ) {
+        static spell null_spell_reference( spell_id::NULL_ID() );
+        return null_spell_reference;
+    }
+    spell *selected_spell = known_spells[spell_menu.ret];
+    return *selected_spell;
 }
 
 void known_magic::on_mutation_gain( const trait_id &mid, Character &guy )

@@ -12,8 +12,6 @@
 #include <vector>
 
 #include "cata_utility.h"
-#include "condition.h"
-#include "debug.h"
 #include "dialogue.h"
 #include "dialogue_helpers.h"
 #include "math_parser_diag.h"
@@ -92,40 +90,29 @@ struct func_jmath {
     jmath_func_id id;
 };
 
-struct func_diag_proto {
-    std::string_view token;
-    char scope = 'g';
-    pdiag_func f{};
-    std::vector<thingie> args;
-    diag_kwargs kwargs;
-
-    explicit func_diag_proto( std::string_view token_, char scope_, pdiag_func f_,
-                              std::vector<thingie> &args_, diag_kwargs &kwargs_ )
-        : token( token_ ), scope( scope_ ), f( f_ ), args( args_ ), kwargs( kwargs_ ) {}
-};
 struct func_diag {
-    using eval_f = diag_eval_dbl_f;
-    using ass_f = diag_assign_dbl_f;
-    explicit func_diag( eval_f &fe_, ass_f &fa_ ) : fe( fe_ ), fa( fa_ ) {}
+    using eval_f = dialogue_func::fe_t;
+    using ass_f = dialogue_func::fa_t;
+    explicit func_diag( eval_f const &fe_, ass_f const &fa_, char s, std::vector<thingie> p,
+                        std::map<std::string, thingie> k );
 
-    double eval( const_dialogue const &d ) const {
-        if( fe ) {
-            return fe( d );
-        }
-        debugmsg( "Unexpected eval called on function that cannot evaluate" );
-        return 0;
-    }
+    double eval( const_dialogue const &d ) const;
 
-    void assign( dialogue &d, double val ) const {
-        if( fa ) {
-            fa( d, val );
-            return;
-        }
-        debugmsg( "Unexpected assign called on function that cannot assign" );
-    }
+    void assign( dialogue &d, double val ) const;
 
     eval_f fe;
     ass_f fa;
+    char scope;
+    mutable std::vector<diag_value> params;
+    mutable diag_kwargs kwargs;
+
+    std::vector<thingie> params_dyn;
+    std::map<std::string, thingie> kwargs_dyn;
+
+    template<bool at_runtime>
+    void _update_diag_args( const_dialogue const *d = nullptr ) const;
+    template<bool at_runtime>
+    void _update_diag_kwargs( const_dialogue const *d = nullptr ) const;
 };
 
 struct var {
@@ -181,7 +168,7 @@ struct thingie {
     constexpr double eval( const_dialogue const &d ) const;
 
     using impl_t =
-        std::variant<double, std::string, oper, ass_oper, func, func_jmath, func_diag, func_diag_proto, var, kwarg, ternary, array>;
+        std::variant<double, std::string, oper, ass_oper, func, func_jmath, func_diag, var, kwarg, ternary, array>;
     impl_t data;
 };
 
@@ -211,7 +198,7 @@ constexpr double thingie::eval( const_dialogue const &d ) const
         },
         []( ass_oper const & /* v */ ) -> double
         {
-            debugmsg( "Cannot use assignment operators from eval context" );
+            throw math::runtime_error( "Cannot use assignment operators from eval context" );
             return 0.0;
         },
         [&d]( auto const & v ) -> double
@@ -221,7 +208,7 @@ constexpr double thingie::eval( const_dialogue const &d ) const
                 return v.eval( d );
             } else
             {
-                debugmsg( "math called eval() on unexpected node without eval()" );
+                throw math::internal_error( "math called eval() on unexpected node without eval()" );
                 return 0.0;
             }
         },

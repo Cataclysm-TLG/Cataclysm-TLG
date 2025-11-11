@@ -15,7 +15,7 @@
     "id": "froglegs",
     "copy-from": "flesh",
     "type": "COMESTIBLE",
-    "name": { "str": "pair of frog legs", "str_pl": "pairs of frog legs" },
+    "name": { "str": "frog legs", "str_pl": "pairs of frog legs" },
     "description": "A raw pair of frog legs.  Tastes like chicken when cooked or smoked.",
     "//": "Nutrition information from USDA",
     "weight": "100 g",
@@ -32,7 +32,7 @@
     "id": "froglegs_cooked",
     "copy-from": "froglegs",
     "type": "COMESTIBLE",
-    "name": { "str": "pair of cooked frog legs", "str_pl": "pairs of cooked frog legs" },
+    "name": { "str": "cooked frog legs", "str_pl": "pairs of cooked frog legs" },
     "parasites": 0,
     "spoils_in": "1 day",
     "flags": [ "EATEN_HOT" ],
@@ -42,7 +42,7 @@
     "id": "froglegs_smoked",
     "copy-from": "froglegs_cooked",
     "type": "COMESTIBLE",
-    "name": { "str": "pair of smoked frog legs", "str_pl": "pairs of smoked frog legs" },
+    "name": { "str": "smoked frog legs", "str_pl": "pairs of smoked frog legs" },
     "color": "brown",
     "spoils_in": "42 days",
     "price_postapoc": "2 USD",
@@ -285,19 +285,22 @@
   {
     "id": "animal_blood",
     "type": "COMESTIBLE",
-    "copy-from": "meat",
     "name": { "str_sp": "animal blood" },
     "description": "Blood extracted from a living creature.",
     "weight": "262 g",
     "volume": "250 ml",
-    "parasites": 0,
     "material": "blood",
     "comestible_type": "DRINK",
+    "spoils_in": "1 day",
     "looks_like": "blood",
+    "calories": 210,
+    "parasites": 64,
+    "fun": -15,
     "symbol": "~",
     "charges": 1,
     "phase": "liquid",
-    "delete": { "flags": [ "SMOKABLE" ] }
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ] ],
+    "flags": [ "TRADER_AVOID", "RAW", "PREDATOR_FUN" ]
   },
   {
     "id": "porkbelly",
@@ -395,15 +398,6 @@
     "material": [ "hflesh" ]
   },
   {
-    "id": "demihuman_meat_scrap",
-    "type": "COMESTIBLE",
-    "copy-from": "meat_scrap",
-    "looks_like": "meat_scrap",
-    "name": { "str": "scrap of demihuman flesh", "str_pl": "scraps of demihuman flesh" },
-    "description": "A tiny scrap of raw demihuman flesh.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "mutant_meat",
     "type": "COMESTIBLE",
     "copy-from": "meat",
@@ -412,26 +406,30 @@
     "description": "Raw meat from a heavily mutated animal.",
     "looks_like": "meat",
     "cooks_like": "mutant_meat_cooked",
-    "proportional": { "price": 0.2, "calories": 0.5 },
+    "proportional": { "price": 0.2, "calories": 0.5, "parasites": 0.75 },
     "vitamins": [ [ "vitC", 2 ], [ "calcium", 1 ], [ "iron", 6 ], [ "mutant_toxin", 25 ], [ "meat_allergen", 1 ] ],
     "flags": [ "SMOKABLE", "BAD_TASTE", "RAW", "PREDATOR_FUN" ]
   },
   {
     "id": "mutant_blood",
     "type": "COMESTIBLE",
-    "copy-from": "mutant_meat",
     "name": { "str_sp": "mutant blood" },
     "description": "Blood extracted from a heavily mutated creature.",
     "weight": "262 g",
     "volume": "250 ml",
-    "comestible_type": "DRINK",
-    "parasites": 0,
-    "looks_like": "blood",
-    "symbol": "~",
     "material": "blood",
+    "color": "red",
+    "comestible_type": "DRINK",
+    "looks_like": "blood",
+    "calories": 210,
+    "fun": -15,
+    "parasites": 48,
+    "symbol": "~",
     "charges": 1,
     "phase": "liquid",
-    "delete": { "flags": [ "SMOKABLE" ] }
+    "spoils_in": "1 day",
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ] ],
+    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
   },
   {
     "id": "mutant_meat_scrap",
@@ -441,7 +439,7 @@
     "description": "A tiny scrap of raw meat from a heavily mutated animal.  It smells unappealing, to say the least.",
     "looks_like": "meat_scrap",
     "cooks_like": "mutant_meat_scrap_cooked",
-    "proportional": { "price_postapoc": 0.2, "calories": 0.5 },
+    "proportional": { "price_postapoc": 0.2, "calories": 0.5, "parasites": 0.75 },
     "vitamins": [ [ "mutant_toxin", 2 ], [ "meat_allergen", 1 ] ],
     "delete": { "flags": [ "SMOKABLE" ] }
   },
@@ -465,20 +463,22 @@
   {
     "id": "mutant_human_blood",
     "type": "COMESTIBLE",
-    "copy-from": "mutant_human_flesh",
     "name": { "str_sp": "mutant human blood" },
     "description": "Blood extracted from a heavily mutated human.",
-    "comestible_type": "DRINK",
     "weight": "262 g",
     "volume": "250 ml",
-    "parasites": 0,
-    "looks_like": "blood",
+    "material": "blood",
+    "color": "red",
+    "comestible_type": "DRINK",
+    "looks_like": "hblood",
+    "calories": 210,
+    "fun": -15,
     "symbol": "~",
-    "material": "hblood",
     "charges": 1,
     "phase": "liquid",
-    "delete": { "flags": [ "SMOKABLE" ] },
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
+    "spoils_in": "1 day",
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "mutant_toxin", 25 ], [ "human_flesh_vitamin", 1 ] ],
+    "flags": [ "TRADER_AVOID", "RAW", "BAD_TASTE", "PREDATOR_FUN" ]
   },
   {
     "id": "mutant_human_cooked",
@@ -750,7 +750,8 @@
     "proportional": { "parasites": 0.5 },
     "price_postapoc": "25 cent",
     "delete": { "flags": [ "SMOKABLE" ] },
-    "relative": { "vitamins": [ [ "iron", 4 ] ], "fun": -5 }
+    "vitamins": [ [ "calcium", 2 ], [ "iron", 16 ], [ "meat_allergen", 1 ] ],
+    "relative": { "fun": -5 }
   },
   {
     "id": "offal_cooked",
@@ -858,7 +859,6 @@
     "name": { "str_sp": "meat jerky" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "jerk jerky" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "talking animal jerky" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "monster jerky" } }
     ],
     "description": "Salty dried meat that lasts for a long time, but will make you thirsty.",
@@ -921,7 +921,6 @@
     "name": { "str_sp": "smoked meat" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "smoked sucker" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "smoked Narnian" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
     ],
     "description": "Tasty meat that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
@@ -999,15 +998,6 @@
     "vitamins": [ [ "vitC", 9 ], [ "calcium", 0 ], [ "iron", 14 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "id": "demihuman_lung",
-    "type": "COMESTIBLE",
-    "copy-from": "lung",
-    "looks_like": "lung",
-    "name": { "str": "piece of raw demihuman lung", "str_pl": "pieces of raw demihuman lung" },
-    "description": "A portion of lung from a demihuman being.  It's spongy and pink, and spoils very quickly.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "lung_cooked",
     "type": "COMESTIBLE",
     "copy-from": "lung",
@@ -1066,15 +1056,6 @@
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 3 ], [ "iron", 14 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "id": "demihuman_heart",
-    "type": "COMESTIBLE",
-    "copy-from": "heart",
-    "looks_like": "heart",
-    "name": { "str": "piece of raw demihuman heart", "str_pl": "pieces of raw demihuman heart" },
-    "description": "A portion of heart from a demihuman being.  It's tough but not that chewy, and it spoils very quickly.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "heart_cooked",
     "type": "COMESTIBLE",
     "copy-from": "heart",
@@ -1124,18 +1105,6 @@
     "delete": { "flags": [ "RAW" ] }
   },
   {
-    "id": "mutant_bug_lungs",
-    "type": "COMESTIBLE",
-    "copy-from": "lung",
-    "name": { "str": "piece of raw mutant lung", "str_pl": "pieces of raw mutant lung" },
-    "snippet_category": "mutant_bug_lung_desc",
-    "description": "You're pretty sure this is lung tissue.",
-    "looks_like": "lung",
-    "proportional": { "price_postapoc": 0.1, "calories": 0.65 },
-    "vitamins": [ [ "vitC", 9 ], [ "calcium", 0 ], [ "iron", 14 ], [ "mutant_toxin", 25 ], [ "meat_allergen", 1 ] ],
-    "extend": { "flags": [ "BAD_TASTE" ] }
-  },
-  {
     "id": "liver",
     "type": "COMESTIBLE",
     "copy-from": "lung",
@@ -1156,15 +1125,6 @@
     "description": "A piece of liver from a human, which appears to have been extracted too crudely to ever be useful as a transplant.",
     "material": [ "hflesh" ],
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 1 ], [ "iron", 28 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
-  },
-  {
-    "id": "demihuman_liver",
-    "type": "COMESTIBLE",
-    "copy-from": "liver",
-    "looks_like": "liver",
-    "name": { "str": "piece of raw demihuman liver", "str_pl": "pieces of raw demihuman liver" },
-    "description": "A chunk of liver from a demihuman being.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
   },
   {
     "id": "liver_cooked",
@@ -1223,14 +1183,6 @@
     "vitamins": [ [ "iron", 17 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "id": "demihuman_marrow",
-    "type": "COMESTIBLE",
-    "copy-from": "bone_marrow",
-    "name": { "str": "portion of raw demihuman bone marrow", "str_pl": "portions of raw demihuman bone marrow" },
-    "description": "Soft, spongy marrow tissue from a demihuman bone.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "mutant_marrow",
     "type": "COMESTIBLE",
     "copy-from": "bone_marrow",
@@ -1272,15 +1224,6 @@
     "description": "A chunk of brain from a human.  Eating this may cause kuru, but you probably won't live long enough to care about that anyway.",
     "material": [ "hflesh" ],
     "vitamins": [ [ "vitC", 3 ], [ "calcium", 0 ], [ "iron", 10 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
-  },
-  {
-    "id": "demihuman_brain",
-    "type": "COMESTIBLE",
-    "copy-from": "brain",
-    "looks_like": "brain",
-    "name": { "str": "piece of raw demihuman brain", "str_pl": "pieces of raw demihuman brain" },
-    "description": "A chunk of brain from a demihuman being.  Don't prion diseases cross species barriers?",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
   },
   {
     "id": "brain_cooked",
@@ -1339,15 +1282,6 @@
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 1 ], [ "iron", 25 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "id": "demihuman_kidney",
-    "type": "COMESTIBLE",
-    "copy-from": "kidney",
-    "looks_like": "kidney",
-    "name": { "str": "piece of raw demihuman kidney", "str_pl": "pieces of raw demihuman kidney" },
-    "description": "This is probably a piece of kidney extracted from a demihuman being.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "kidney_cooked",
     "type": "COMESTIBLE",
     "copy-from": "kidney",
@@ -1404,15 +1338,6 @@
     "vitamins": [ [ "vitC", 11 ], [ "calcium", 0 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
-    "id": "demihuman_sweetbread",
-    "type": "COMESTIBLE",
-    "copy-from": "sweetbread",
-    "looks_like": "sweetbread",
-    "name": { "str": "piece of raw demihuman sweetbread", "str_pl": "pieces of raw demihuman sweetbread" },
-    "description": "The consistency of this chunk of organ suggests possibly a thymus or pancreas equivalent.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
     "id": "sweetbread_cooked",
     "type": "COMESTIBLE",
     "copy-from": "sweetbread",
@@ -1425,24 +1350,25 @@
     "delete": { "flags": [ "RAW" ] }
   },
   {
-    "type": "COMESTIBLE",
     "id": "blood",
-    "name": { "str_sp": "blood" },
-    "copy-from": "human_flesh",
+    "type": "COMESTIBLE",
+    "name": { "str_sp": "human blood" },
+    "description": "Blood extracted from a human being.",
     "weight": "262 g",
+    "volume": "250 ml",
     "color": "red",
+    "material": "blood",
     "container": "bag_iv",
     "comestible_type": "DRINK",
+    "looks_like": "hblood",
+    "spoils_in": "1 day",
+    "calories": 210,
+    "fun": -15,
     "symbol": "~",
-    "price_postapoc": "10 cent",
-    "description": "Blood extracted from a human being.",
-    "price": "0 cent",
-    "material": [ "hblood" ],
-    "volume": "250 ml",
     "charges": 1,
     "phase": "liquid",
-    "delete": { "flags": [ "SMOKABLE" ] },
-    "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
+    "vitamins": [ [ "calcium", 4 ], [ "iron", 5 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
+    "flags": [ "TRADER_AVOID", "RAW", "PREDATOR_FUN" ]
   },
   {
     "type": "COMESTIBLE",
@@ -1480,6 +1406,8 @@
     "price_postapoc": "2 USD",
     "//": "*May* have been commercially traded.",
     "material": [ "flesh" ],
+    "use_action": [ "BLECH" ],
+    "flags": [ "NO_AUTO_CONSUME" ],
     "volume": "62 ml",
     "vitamins": [ [ "meat_allergen", 1 ] ],
     "fun": -18
@@ -1574,14 +1502,14 @@
     "snippet_category": "arm_zed_desc",
     "color": "red",
     "symbol": "%",
-    "material": [ "flesh" ],
+    "material": [ "hflesh" ],
     "weight": "3767 g",
     "volume": "4500 ml",
     "comestible_type": "FOOD",
     "use_action": [ "POISON" ],
     "calories": 278,
     "fun": -20,
-    "vitamins": [ [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
     "spoils_in": "2 days",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -1596,14 +1524,14 @@
     "snippet_category": "leg_zed_desc",
     "color": "red",
     "symbol": "%",
-    "material": [ "flesh" ],
+    "material": [ "hflesh" ],
     "weight": "11071 g",
     "volume": "12 L",
     "comestible_type": "FOOD",
     "use_action": [ "POISON" ],
     "calories": 399,
     "fun": -20,
-    "vitamins": [ [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ],
     "spoils_in": "2 days",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -1614,15 +1542,17 @@
     "type": "COMESTIBLE",
     "copy-from": "meat_tainted",
     "name": { "str_sp": "tainted blood" },
-    "description": "Blood that's obviously unhealthy.  You could drink it, but it will poison you.",
+    "description": "Foul blood that's rapidly getting worse.  Separated from its owner, it seems intent on congealing into a disgusting jelly as fast as possible.  You could drink it, but it will poison you.",
     "weight": "262 g",
     "volume": "250 ml",
     "comestible_type": "DRINK",
     "looks_like": "blood",
+    "calories": 105,
     "symbol": "~",
     "material": "blood",
     "charges": 1,
     "phase": "liquid",
+    "spoils_in": "12 hours",
     "delete": { "flags": [ "SMOKABLE" ] }
   },
   {
@@ -1764,7 +1694,7 @@
     "spoils_in": "6 hours",
     "use_action": [ "POISON" ],
     "price_postapoc": "10 cent",
-    "description": "A carefully folded poisonous raw skin harvested from an unnatural creature.  You can cure it for storage and tanning.",
+    "description": "A ghastly skin marred by decay.  It sloughs apart like wet newspaper when handled, and the smell is intolerable.",
     "price": "0 cent"
   },
   {
@@ -1786,19 +1716,9 @@
     "id": "raw_hleather",
     "copy-from": "raw_leather",
     "name": { "str_sp": "raw human skin" },
-    "description": "A carefully folded raw skin harvested from a human.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
+    "description": "The flayed hide of a human being.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
     "material": [ "hflesh" ],
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "raw_demihumanleather",
-    "copy-from": "raw_leather",
-    "name": { "str_sp": "raw demihuman skin" },
-    "description": "A carefully folded raw skin harvested from a demihuman.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -1813,7 +1733,7 @@
     "symbol": ",",
     "quench": -20,
     "calories": 350,
-    "description": "A carefully folded raw skin harvested from a fur-bearing animal.  It still has the fur attached.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
+    "description": "A raw skin harvested from a fur-bearing animal.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
     "price": "3 USD 30 cent",
     "price_postapoc": "1 USD",
     "material": [ "fur", "flesh" ],
@@ -1828,7 +1748,7 @@
     "copy-from": "raw_fur",
     "spoils_in": "6 hours",
     "use_action": [ "POISON" ],
-    "description": "A carefully folded raw skin harvested from a fur-bearing unnatural creature.  It still has the fur attached and is poisonous.  You can cure it for storage and tanning.",
+    "description": "A rotting pelt from some long-dead furry creature.  It's already too far gone to be tanned, and rapidly getting worse.",
     "price": "0 cent"
   },
   {
@@ -1836,7 +1756,7 @@
     "id": "raw_hfur",
     "copy-from": "raw_fur",
     "name": { "str_sp": "raw human pelt" },
-    "description": "A carefully folded raw skin harvested from a fur-bearing mutant human.  It still has the fur attached.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
+    "description": "A raw skin harvested from a fur-bearing mutant human.  It still has the fur attached.  You can cure it for storage and tanning, or eat it if you're desperate enough.",
     "material": [ "fur", "hflesh" ],
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
@@ -1857,7 +1777,7 @@
     "material": [ "flesh" ],
     "volume": "500 ml",
     "fun": -25,
-    "vitamins": [ [ "mutagen_beast", 220, 320 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
     "flags": [ "PREDATOR_FUN" ]
   },
   {
@@ -1865,18 +1785,18 @@
     "comestible_type": "FOOD",
     "id": "jabberwock_heart",
     "name": { "str": "putrid heart" },
-    "weight": "4535 g",
+    "weight": "1535 g",
     "color": "black_red",
     "symbol": "%",
     "healthy": -10,
     "calories": 347,
-    "description": "A thick, hulking mass of flesh that's easily the size of your head, superficially resembling a mammalian heart and covered in ribbed grooves.  It's still full of whatever passes for blood in jabberwocks, and is heavy in your hands.  After everything you've seen lately, you can't help but remember old sayings about eating the hearts of your enemies…",
+    "description": "A cartliginous knot of flesh the size of a small pumpkin, superficially resembling a mammalian heart and covered in ribbed grooves.  It's still full of whatever passes for blood in jabberwocks, and is heavy in your hands.  After everything you've seen lately, you can't help but remember old sayings about eating the hearts of your enemies…",
     "price": "65 USD",
     "price_postapoc": "5 USD",
     "material": [ "flesh" ],
     "volume": "1 L",
     "fun": -25,
-    "vitamins": [ [ "mutagen_beast", 220, 320 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "mutagen_beast", 300 ], [ "meat_allergen", 1 ] ],
     "flags": [ "PREDATOR_FUN" ]
   },
   {
@@ -1889,123 +1809,12 @@
     "symbol": "%",
     "healthy": -1,
     "calories": 217,
-    "description": "A huge strip of muscle - all that remains of a putrid heart that has been sliced open and drained of blood.  It could be eaten if you're hungry, but looks *disgusting*.",
+    "description": "A red-black strip of muscle - all that remains of a putrid heart that has been sliced open and drained of blood.  It could be eaten if you're hungry, but looks *disgusting*.",
     "price": "10 USD",
     "price_postapoc": "25 cent",
     "material": [ "flesh" ],
     "volume": "250 ml",
     "fun": -30,
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "id": "demihuman_stomach",
-    "copy-from": "stomach",
-    "type": "COMESTIBLE",
-    "name": { "str": "demihuman stomach" },
-    "description": "The stomach of an intelligent demihuman.  It is surprisingly durable.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "id": "demihuman_stomach_large",
-    "copy-from": "stomach_large",
-    "type": "COMESTIBLE",
-    "name": { "str": "large demihuman stomach" },
-    "description": "The stomach of a large humanoid creature.  It is surprisingly durable.",
-    "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5, "calories": 2.0 },
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
-    "id": "demihuman_fat",
-    "copy-from": "fat",
-    "type": "COMESTIBLE",
-    "name": { "str": "chunk of demihuman fat", "str_pl": "chunks of demihuman fat" },
-    "description": "Raw fat harvested from a demihuman body.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "demihuman_tallow",
-    "name": { "str_sp": "demihuman tallow" },
-    "copy-from": "tallow",
-    "description": "A smooth white block of cleaned and rendered demihuman fat.  It will remain edible for a very long time, and can be used as an ingredient in many foods and projects.",
-    "price": "5 USD",
-    "//": "*May* have been commercially traded.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "demihuman_lard",
-    "name": { "str_sp": "demihuman lard" },
-    "copy-from": "lard",
-    "description": "A smooth white block of dry-rendered demihuman fat.  It will remain edible for a very long time, and can be used as an ingredient in many foods and projects.",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] }
-  },
-  {
-    "id": "demihuman_flesh",
-    "copy-from": "meat",
-    "type": "COMESTIBLE",
-    "cooks_like": "demihuman_cooked",
-    "name": { "str_sp": "demihuman flesh" },
-    "description": "Raw meat butchered from a demihuman body.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "id": "demihuman_blood",
-    "type": "COMESTIBLE",
-    "copy-from": "demihuman_flesh",
-    "name": { "str_sp": "demihuman blood" },
-    "description": "Blood extracted from a demihuman.",
-    "weight": "262 g",
-    "volume": "250 ml",
-    "comestible_type": "DRINK",
-    "parasites": 0,
-    "looks_like": "blood",
-    "symbol": "~",
-    "material": "blood",
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "charges": 1,
-    "phase": "liquid",
-    "delete": { "flags": [ "SMOKABLE" ] }
-  },
-  {
-    "id": "demihuman_cooked",
-    "copy-from": "demihuman_flesh",
-    "type": "COMESTIBLE",
-    "name": { "str_sp": "cooked mongrel" },
-    "description": "A cooked slice of something close to being a real person.  Tastes like long pig.",
-    "proportional": { "price": 1.5 },
-    "parasites": 0,
-    "fun": 0,
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "delete": { "flags": [ "RAW" ] }
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "demihuman_stomach_boiled",
-    "copy-from": "stomach_boiled",
-    "name": { "str": "boiled demihuman stomach" },
-    "calories": 240,
-    "description": "A boiled stomach from a demihuman, nothing else.  It looks all but appetizing.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
-    "vitamins": [ [ "meat_allergen", 1 ] ]
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "small_demihuman_stomach_boiled",
-    "copy-from": "small_stomach_boiled",
-    "name": { "str": "boiled demihuman stomach" },
-    "description": "A small boiled stomach from a demihuman, nothing else.  It looks all but appetizing.",
-    "material": [ "flesh" ],
-    "extend": { "flags": [ "STRICT_HUMANITARIANISM" ] },
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
   {
@@ -2015,7 +1824,6 @@
     "name": { "str_sp": "fried meat" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "fried fool" } },
-      { "type": "FLAG", "condition": "STRICT_HUMANITARIANISM", "name": { "str_sp": "fried familiar" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
     ],
     "description": "Delicious oil-fried meat.",
@@ -2030,7 +1838,7 @@
     "type": "COMESTIBLE",
     "id": "meat_mi-go",
     "category": "other",
-    "name": { "str": "chunk of mi-go meat", "str_pl": "chunks of mi-go meat" },
+    "name": { "str": "chunk of mi-go flesh", "str_pl": "chunks of mi-go flesh" },
     "weight": "238 g",
     "color": "pink",
     "spoils_in": "90 days",
@@ -2039,12 +1847,12 @@
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 0,
-    "description": "A piece of mi-go meat that's obviously alien, given its pink color, odd odor, and strange texture.  It would not be advisable to try to eat it.",
+    "description": "A piece of spongelike pink flesh.  It's nearly as hard as wood at its core, with an armored crust lining the exterior.  The smell suggests it is definitely not edible.",
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "material": [ "mi-go_flesh" ],
     "volume": "250 ml",
-    "fun": -10,
+    "fun": -30,
     "flags": [ "TRADER_AVOID", "NUTRIENT_OVERRIDE" ]
   },
   {
@@ -2052,31 +1860,12 @@
     "type": "COMESTIBLE",
     "copy-from": "meat_mi-go",
     "name": { "str_sp": "mi-go ichor" },
-    "description": "Goo from inside a mi-go, perhaps some kind of blood?  It's obviously alien, given its pink color and strange, nostril-stinging odor.  It would not be advisable to try to eat it.",
+    "description": "Goo from inside a mi-go, perhaps some kind of blood?  It's obviously alien, given its pink color and strange, nostril-stinging odor.  It would not be advisable to try to drink it.",
     "comestible_type": "DRINK",
     "looks_like": "blood",
     "symbol": "~",
     "material": "mi-go_blood",
     "charges": 1,
     "phase": "liquid"
-  },
-  {
-    "type": "COMESTIBLE",
-    "id": "bone_mi-go",
-    "category": "other",
-    "name": { "str": "mi-go bone" },
-    "weight": "350 g",
-    "color": "light_green",
-    "use_action": [ "POISON" ],
-    "comestible_type": "FOOD",
-    "symbol": "%",
-    "calories": 0,
-    "description": "An unrecognized structural element from inside a mi-go.  It's strong and springy, somewhat like cartilage, but a bit stiffer.  It's also a deep green color, and might possibly serve a scaffolding role, like bone.",
-    "price": "0 cent",
-    "price_postapoc": "0 cent",
-    "material": [ "mi-go_bone" ],
-    "volume": "250 ml",
-    "fun": -10,
-    "flags": [ "NO_SALVAGE" ]
   }
 ]

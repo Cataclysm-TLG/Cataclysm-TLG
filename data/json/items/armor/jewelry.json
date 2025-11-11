@@ -27,7 +27,7 @@
   {
     "id": "bead_ear",
     "type": "ARMOR",
-    "name": { "str": "pair of beaded earrings", "str_pl": "pairs of beaded earrings" },
+    "name": { "str": "beaded earrings", "str_pl": "pairs of beaded earrings" },
     "description": "A simple pair of earrings made of string and wooden beads.",
     "weight": "600 mg",
     "volume": "1 ml",
@@ -216,7 +216,7 @@
   {
     "id": "copper_earring",
     "type": "ARMOR",
-    "name": { "str": "pair of copper earrings", "str_pl": "pairs of copper earrings" },
+    "name": { "str": "copper earrings", "str_pl": "pairs of copper earrings" },
     "description": "A pair of copper earrings.",
     "weight": "8 g",
     "volume": "1 ml",
@@ -298,8 +298,8 @@
     "sided": true,
     "armor": [
       {
-        "encumbrance": 20,
-        "coverage": 0,
+        "encumbrance": 0,
+        "coverage": 20,
         "covers": [ "hand_l", "hand_r" ],
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ]
       }
@@ -541,7 +541,8 @@
     "symbol": "[",
     "color": "white",
     "use_action": [ "MEDITATE" ],
-    "flags": [ "NO_WEAR_EFFECT" ]
+    "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
+    "flags": [ "NO_WEAR_EFFECT", "BELTED", "UNRESTRICTED", "SOFT" ]
   },
   {
     "id": "wooden_hair_beads",
@@ -1288,7 +1289,7 @@
   {
     "id": "fur_cat_ears",
     "type": "ARMOR",
-    "name": { "str": "pair of fuzzy cat ears", "str_pl": "pairs of fuzzy cat ears" },
+    "name": { "str": "fuzzy cat ears", "str_pl": "pairs of fuzzy cat ears" },
     "description": "A fuzzy pair of brownish cat ears on a headband.  It does nothing, but there's no reason not to look good even if no one's looking.",
     "weight": "100 g",
     "volume": "100 ml",
@@ -1303,7 +1304,7 @@
     "id": "faux_fur_cat_ears",
     "type": "ARMOR",
     "copy-from": "fur_cat_ears",
-    "name": { "str": "pair of faux fur cat ears", "str_pl": "pairs of faux fur cat ears" },
+    "name": { "str": "faux fur cat ears", "str_pl": "pairs of faux fur cat ears" },
     "description": "A fuzzy pair of garishly colored cat ears on a headband.  It does nothing, but there's no reason not to look good even if no one's looking.",
     "material": [ "faux_fur" ],
     "color": "pink"
@@ -1358,7 +1359,7 @@
   {
     "id": "leather_cat_ears",
     "type": "ARMOR",
-    "name": { "str": "pair of leather cat ears", "str_pl": "pairs of leather cat ears" },
+    "name": { "str": "leather cat ears", "str_pl": "pairs of leather cat ears" },
     "description": "A shiny pair of black cat ears on a headband.  It does nothing, but there's no reason not to look good even if no one's looking.",
     "weight": "100 g",
     "volume": "100 ml",
@@ -1387,7 +1388,7 @@
   {
     "id": "gold_earring",
     "type": "ARMOR",
-    "name": { "str": "pair of gold earrings", "str_pl": "pairs of gold earrings" },
+    "name": { "str": "gold earrings", "str_pl": "pairs of gold earrings" },
     "description": "A pair of shiny gold earrings.",
     "weight": "18 mg",
     "volume": "1 ml",
@@ -1402,7 +1403,7 @@
   {
     "id": "silver_earring",
     "type": "ARMOR",
-    "name": { "str": "pair of silver earrings", "str_pl": "pairs of silver earrings" },
+    "name": { "str": "silver earrings", "str_pl": "pairs of silver earrings" },
     "description": "A pair of shiny silver earrings.",
     "weight": "10 mg",
     "volume": "1 ml",
