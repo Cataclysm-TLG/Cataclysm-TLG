@@ -495,7 +495,7 @@
     "ugliness": 8,
     "visibility": 8,
     "description": "Your broad, pointed ears are like radar dishes.  You can hear even the slightest sounds at great distance, and are less likely to be deafened by loud noises.",
-    "types": [ "HEARING" ],
+    "types": [ "HEARING", "EARS" ],
     "//": "A bat mutant is a bit better at hearing overall than someone with GOODHEARING and a CBM.",
     "flags": [ "HEARING_PROTECTION", "SAFECRACK_NO_TOOL" ],
     "prereqs": [ "GOODHEARING" ],
