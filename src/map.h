@@ -822,7 +822,7 @@ class map
         optional_vpart_position veh_at( const tripoint_bub_ms &p ) const;
         vehicle *veh_at_internal( const tripoint_bub_ms &p, int &part_num );
         const vehicle *veh_at_internal( const tripoint_bub_ms &p, int &part_num ) const;
-        // Put player on vehicle at x,y
+        // Put character on vehicle at this point.
         void board_vehicle( const tripoint_bub_ms &p, Character *pl );
         // Remove given passenger from given vehicle part.
         // If dead_passenger, then null passenger is acceptable.

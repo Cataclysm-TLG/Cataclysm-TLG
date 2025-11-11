@@ -46,6 +46,7 @@
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cut( "cut" );
 
+static const efftype_id effect_airborne( "airborne" );
 static const efftype_id effect_bleed( "bleed" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_pet( "pet" );
@@ -75,6 +76,8 @@ static const ter_str_id ter_t_railroad_track_v( "t_railroad_track_v" );
 static const ter_str_id ter_t_railroad_track_v_on_tie( "t_railroad_track_v_on_tie" );
 
 static const trait_id trait_DEFT( "DEFT" );
+
+static const json_character_flag json_flag_LEVITATION( "LEVITATION" );
 
 static const std::string part_location_structure( "structure" );
 
@@ -853,11 +856,16 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
     // Disable vehicle/critter collisions when bashing floor
     // TODO: More elegant code
     const bool is_veh_collision = !bash_floor && ovp && &ovp->vehicle() != this;
-    const bool is_body_collision = !bash_floor && critter != nullptr;
+    bool is_body_collision = !bash_floor && critter != nullptr;
 
     veh_collision ret;
     ret.type = veh_coll_nothing;
     ret.part = part;
+
+    // Airborne critters aren't impacted by non-OBSTACLE parts.
+    if( !ovp.obstacle_at_part() && is_body_collision && ( critter->has_effect_with_flag( json_flag_LEVITATION ) || ( critter->is_monster() && critter->as_monster()->flies() ) ) ) {
+        is_body_collision = false;
+    }
 
     // Vehicle collisions are a special case. just return the collision.
     // The map takes care of the dynamic stuff.
@@ -2202,6 +2210,9 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
         Creature *rider = r.psg;
         if( rider == nullptr ) {
             debugmsg( "throw passenger: empty passenger at part %d", ps );
+            continue;
+        }
+        if( rider->has_effect( effect_airborne ) ) {
             continue;
         }
 
