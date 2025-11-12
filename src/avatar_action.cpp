@@ -185,6 +185,9 @@ static bool check_water_affect_items( avatar &you )
     menu.query();
     if( menu.ret != 1 ) {
         you.add_msg_if_player( _( "You back away from the water." ) );
+        // End any ongoing activities so we don't get stuck in an infinite loop when e.g. farming.
+        you.activity.set_to_null();
+        you.cancel_activity();
         return false;
     }
 
