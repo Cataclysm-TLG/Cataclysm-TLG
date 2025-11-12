@@ -4576,6 +4576,7 @@ void map::crush( const tripoint_bub_ms &p )
         vp->vehicle().damage( *this, vp->part_index(), rng( 100, 1000 ), damage_bash, false );
     }
 }
+
 void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                  const bool hit_items, double dispersion )
 {
@@ -4622,10 +4623,11 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     int veh_coverage = 0;
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, true ).has_value();
+        const bool is_quarterpanel =  vp->part_with_feature( VPFLAG_HALF_BOARD, false, true ).has_value();
+        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false, false ).has_value();
         if( is_obstacle ) {
             veh_coverage = 100;
-        } else if( is_obstacle ) {
+        } else if( is_quarterpanel ) {
             veh_coverage = 60;
         } else if( !is_aisle ) {
             veh_coverage = 45;
@@ -4684,7 +4686,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     // Check again so we can skip if the result was zero.
     if( coverage > 0 || ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER ) ) {
         int coverage_roll = rng( 1, 100 );
-        if( ( coverage > 0 && coverage_roll < coverage ) ||
+        if( ( coverage > 0 && coverage_roll <= coverage ) ||
             ter( p )->has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER ) ) {
             furn_id furniture = furn( p );
             ter_id terrain = ter( p );
