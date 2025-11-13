@@ -1190,8 +1190,9 @@ class map
         /** Causes a collapse at p, such as from destroying a wall */
         void collapse_at( const tripoint_bub_ms &p, bool silent, bool was_supporting = false,
                           bool destroy_pos = true );
-        /** Tries to smash the items at the given tripoint. Used by the explosion code */
-        void smash_items( const tripoint_bub_ms &p, int power, const std::string &cause_message );
+        /** Tries to smash the items at the given tripoint. Used by vehicle tires and explosion code */
+        void smash_items( const tripoint_bub_ms &p, int power, const std::string &cause_message,
+                          vehicle_part *vp_wheel = nullptr, vehicle *veh = nullptr );
         /** Manually smash one item at the given tripoint, as with a weapon. */
         void manually_smash_items( const tripoint_bub_ms &p, int power, bool hit_all, bash_params &params,
                                    bool crystalline_only );
