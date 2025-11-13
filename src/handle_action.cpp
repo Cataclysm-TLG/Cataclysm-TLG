@@ -688,7 +688,8 @@ static void grab()
             add_msg( _( "You can't grab %s." ), creatures.creature_at( grabp )->disp_name() );
             return;
         }
-        int grab_strength = 1 + you.get_arm_str() + you.get_skill_level( skill_unarmed );
+        // Max grab strength is 100, so cap it.
+        int grab_strength = std::min( 100, 1 + you.get_arm_str() + static_cast<int>( you.get_skill_level( skill_unarmed ) ) );
         Creature *rawcreature = creatures.creature_at( grabp );
         std::shared_ptr<Creature> victimptr( rawcreature, []( Creature * ) {} );
 

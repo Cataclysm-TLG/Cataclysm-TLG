@@ -12295,35 +12295,56 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
         // or maybe even just redraw the changed tiles
         bool seen = is_u || u.sees( here, *c ); // To avoid redrawing when not seen
         tdir.advance();
-        pt.x() = pos.x() + tdir.dx();
-        pt.y() = pos.y() + tdir.dy();
+        pt.x() += tdir.dx();
+        pt.y() += tdir.dy();
         float force = 0.0f;
-
         if( monster *const mon_ptr = creatures.creature_at<monster>( pt ) ) {
             monster &critter = *mon_ptr;
-            // Approximate critter's "stopping power" with its max hp
-            force = std::min<float>( 1.5f * critter.type->hp, flvel );
-            const int damage = rng( force, force * 2.0f ) / 6;
-            c->impact( damage, pt );
-            // Multiply zed damage by 6 because no body parts
-            const int zed_damage = std::max( 0,
-                                             ( damage - critter.get_armor_type( damage_bash, bodypart_id( "torso" ) ) ) * 6 );
-            // TODO: Pass the "flinger" here - it's not the flung critter that deals damage
-            critter.apply_damage( c, bodypart_id( "torso" ), zed_damage );
-            critter.check_dead_state( &here );
-            if( !critter.is_dead() ) {
-                thru = false;
+            if( !c->is_monster() || ( c->is_monster() && c->as_monster() != &critter ) ) {
+                if( flvel >= 30.f ) {
+                    // Critter size determines how much resistance it offers.
+                    force = std::min<float>( critter.enum_size() * 30.f, flvel );
+                    const int damage = rng( force, force * 2.0f ) / 6;
+                    // zed_damage uses flvel because they take damage based on c's velocity, not their own size.
+                    int zed_damage = rng( flvel, flvel * 2.0f ) / 6;
+                    c->impact( damage, pt );
+                    zed_damage = std::max( 0, ( zed_damage - critter.get_armor_type( damage_bash, bodypart_id( "torso" ) ) ) );
+                    // TODO: Pass the "flinger" here - it's not the flung critter that deals damage
+                    critter.apply_damage( c, bodypart_id( "torso" ), zed_damage );
+                }
+                critter.check_dead_state( &here );
+                if( !critter.is_dead() ) {
+                    thru = false;
+                }
+            }
+        } else if( Character *const guy_ptr = creatures.creature_at<Character>( pt ) ) {
+            Character &guy = *guy_ptr;
+            if( c->is_monster() || ( !c->is_monster() && c->as_character() != &guy ) ) {
+                if( flvel >= 30.f ) {
+                    force = std::min<float>( guy.enum_size() * 30.f, flvel );
+                    const int damage = rng( force, force * 2.0f ) / 6;
+                    // guy_damage uses flvel because they take damage based on c's velocity, not their own size.
+                    int guy_damage = rng( flvel, flvel * 2.0f ) / 6;
+                    c->impact( damage, pt );
+                    guy_damage = std::max( 0, ( guy_damage - guy.get_armor_type( damage_bash, bodypart_id( "torso" ) ) ) );
+                    // TODO: Pass the "flinger" here - it's not the flung critter that deals damage
+                    guy.apply_damage( c, bodypart_id( "torso" ), guy_damage );
+                }
+                guy.check_dead_state( &here );
+                if( !guy.is_dead_state() ) {
+                    thru = false;
+                }
             }
         } else if( here.impassable( pt ) ) {
             if( !here.veh_at( pt ).obstacle_at_part() ) {
-                force = std::min<float>( here.bash_strength( pt ), flvel );
+                force = std::min<float>( rng( here.bash_resistance( pt ), here.bash_strength( pt ) ), flvel );
             } else {
                 // No good way of limiting force here
                 // Keep it 1 less than maximum to make the impact hurt
                 // but to keep the target flying after it
                 force = flvel - 1;
             }
-            const int damage = rng( force, force * 2.0f ) / 9;
+            const int damage = rng( force, force * 2.0f ) / 6;
             c->impact( damage, pt );
             if( here.is_bashable( pt ) ) {
                 // Only go through if we successfully make the tile passable
@@ -12364,8 +12385,9 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
             // although at lower velocity
             break;
         }
+        add_msg( _( "range = %s" ), range );
         range--;
-        if( range == 1 ) {
+        if( range <= 1 ) {
             c->remove_effect( effect_airborne );
         }
         if( animate && ( seen || u.sees( here, *c ) ) ) {
@@ -12382,9 +12404,9 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
         if( thru && here.is_open_air( pos ) ) {
             here.creature_on_trap( *c, false );
         } else {
-            // Fall on ground
+            // Land. Divide by 9 instead of 6 as hitting the ground is gentler than hitting other stuff.
             int force = rng( flvel, flvel * 2 ) / 9;
-            if( controlled ) {
+            if( controlled || flvel < 30 ) {
                 force = std::max( force / 2 - 5, 0 );
             }
             if( force > 0 ) {
