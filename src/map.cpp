@@ -2370,7 +2370,8 @@ int map::move_cost_internal( const furn_t &furniture, const ter_t &terrain, cons
             return 0;
         } else if( vp.part_with_feature( VPFLAG_AISLE, true ) ) {
             return 2;
-        } else if( !vp.part_with_feature( VPFLAG_ROOF, true ) && !vp.part_with_feature( VPFLAG_SEAT, false ) ) {
+        } else if( !vp.part_with_feature( VPFLAG_ROOF, true ) &&
+                   !vp.part_with_feature( VPFLAG_SEAT, false ) ) {
             return 4;
         } else {
             return 8;
@@ -2506,7 +2507,8 @@ bool map::passable_ter_furn( const tripoint_bub_ms &p ) const
     return move_cost_ter_furn( p ) != 0;
 }
 
-int map::combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to, const int modifier, const bool flying, const bool via_ramp, const bool ignore_fields ) const
+int map::combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to,
+                            const int modifier, const bool flying, const bool via_ramp, const bool ignore_fields ) const
 {
     static constexpr std::array<int, 5> mults = { 0, 50, 71, 100, 100 };
     const int cost1 = move_cost( from, ignore_fields );

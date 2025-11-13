@@ -58,9 +58,7 @@
     "type": "item_group",
     "id": "REFUGEE_Guneet_wield",
     "subtype": "distribution",
-    "entries": [
-      { "item": "kirpan", "container-item": "sheath" }
-    ]
+    "entries": [ { "item": "kirpan", "container-item": "sheath" } ]
   },
   {
     "type": "talk_topic",

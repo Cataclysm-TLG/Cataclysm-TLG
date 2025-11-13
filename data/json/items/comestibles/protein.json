@@ -24,7 +24,7 @@
     "calories": 100,
     "quench": 40,
     "fun": -1,
-    "vitamins": [ ],
+    "vitamins": [  ],
     "flags": [ "EATEN_COLD" ]
   },
   {

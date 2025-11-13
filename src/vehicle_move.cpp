@@ -863,7 +863,9 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
     ret.part = part;
 
     // Airborne critters aren't impacted by non-OBSTACLE parts.
-    if( !ovp.obstacle_at_part() && is_body_collision && ( critter->has_effect_with_flag( json_flag_LEVITATION ) || ( critter->is_monster() && critter->as_monster()->flies() ) ) ) {
+    if( !ovp.obstacle_at_part() && is_body_collision &&
+        ( critter->has_effect_with_flag( json_flag_LEVITATION ) || ( critter->is_monster() &&
+                critter->as_monster()->flies() ) ) ) {
         is_body_collision = false;
     }
 

@@ -620,7 +620,8 @@ class map
         *
         * @return The cost in turns to move out of tripoint `from` and into `to`
         */
-        int combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int modifier = 0, bool flying = false, bool via_ramp = false, bool ignore_fields = false ) const;
+        int combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int modifier = 0,
+                               bool flying = false, bool via_ramp = false, bool ignore_fields = false ) const;
 
         /**
          * Returns true if a creature could walk from `from` to `to` in one step.

@@ -5180,7 +5180,7 @@ void practice_pilot_proficiencies( Character &p, bool boating, bool skating )
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
     } else if( !boating && !skating && !p.has_proficiency( proficiency_prof_driver ) ) {
         p.practice_proficiency( proficiency_prof_driver, 1_seconds );
-    }    
+    }
 }
 
 std::vector<vehicle_part *> vehicle::lights()

@@ -583,12 +583,13 @@ void npc::load_npc_template( const string_id<npc_template> &ident )
     death_eocs = tguy.death_eocs;
 }
 
-float npc::generate_weight_percent() {
-    float sample1 = rng_float(0.0f, 1.0f);
-    float sample2 = rng_float(0.0f, 1.0f);
-    float sample3 = rng_float(0.0f, 1.0f);
+float npc::generate_weight_percent()
+{
+    float sample1 = rng_float( 0.0f, 1.0f );
+    float sample2 = rng_float( 0.0f, 1.0f );
+    float sample3 = rng_float( 0.0f, 1.0f );
 
-    float avg = (sample1 + sample2 + sample3) / 3.0f;
+    float avg = ( sample1 + sample2 + sample3 ) / 3.0f;
     float weight_percent = 0.5f + avg * 0.7f;
 
     return weight_percent;
@@ -692,11 +693,11 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     float base_weight = generate_weight_percent();
 
     // Calculate a bias factor [0.0 .. 1.0], 0 at day 0, 1 at day 180+
-    float bias = std::min(days_since_cata, 180) / 180.0f;
+    float bias = std::min( days_since_cata, 180 ) / 180.0f;
     // Bias the weight down towards 0.5 linearly based on days_since_cata.
-    float weight_percent = base_weight * (1.0f - bias) + 0.5f * bias;
+    float weight_percent = base_weight * ( 1.0f - bias ) + 0.5f * bias;
     // Clamp again to be safe.
-    weight_percent = std::clamp(weight_percent, 0.5f, 1.2f);
+    weight_percent = std::clamp( weight_percent, 0.5f, 1.2f );
     set_stored_kcal( weight_percent * get_healthy_kcal() );
 
     starting_weapon( myclass );
@@ -1971,14 +1972,23 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
     }
 
     std::string speak_sound = _( "saying" );
-    if( has_trait( trait_HISS ) ) speak_sound = _( "hissing" );
-    else if( has_trait( trait_GROWL ) ) speak_sound = _( "growling" );
-    else if( has_trait( trait_SNARL ) ) speak_sound = _( "snarling" );
-    else if( has_trait( trait_SHOUT2 ) ) speak_sound = _( "screaming" );
-    else if( has_trait( trait_CROAK ) )  speak_sound = _( "croaking" );
-    else if( has_trait( trait_SCREECH ) ) speak_sound = _( "screeching" );
-    else if( has_trait( trait_SHOUT3 ) )  speak_sound = _( "howling" );
-    else if( has_bionic( bio_voice ) )  speak_sound = _( "droning" );
+    if( has_trait( trait_HISS ) ) {
+        speak_sound = _( "hissing" );
+    } else if( has_trait( trait_GROWL ) ) {
+        speak_sound = _( "growling" );
+    } else if( has_trait( trait_SNARL ) ) {
+        speak_sound = _( "snarling" );
+    } else if( has_trait( trait_SHOUT2 ) ) {
+        speak_sound = _( "screaming" );
+    } else if( has_trait( trait_CROAK ) ) {
+        speak_sound = _( "croaking" );
+    } else if( has_trait( trait_SCREECH ) ) {
+        speak_sound = _( "screeching" );
+    } else if( has_trait( trait_SHOUT3 ) ) {
+        speak_sound = _( "howling" );
+    } else if( has_bionic( bio_voice ) ) {
+        speak_sound = _( "droning" );
+    }
 
     if( player_character.is_deaf() && !player_character.is_blind() ) {
         add_msg_if_player_sees( *this, m_warning, _( "%1$s says something but you can't hear it!" ),
@@ -1994,7 +2004,8 @@ void npc::say( const std::string &line, const sounds::sound_t spriority ) const
         return;
     }
 
-    std::string sound = string_format( _( "%1$s %2$s, \"%3$s\"" ), get_name(), speak_sound, formatted_line );
+    std::string sound = string_format( _( "%1$s %2$s, \"%3$s\"" ), get_name(), speak_sound,
+                                       formatted_line );
 
     // Sound happens even if we can't hear it
     if( spriority == sounds::sound_t::order || spriority == sounds::sound_t::alert ) {

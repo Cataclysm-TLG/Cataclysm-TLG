@@ -130,14 +130,12 @@
     "difficulty": 1,
     "time": "5 m",
     "autolearn": true,
-    "proficiencies": [
-      { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 }
-    ],
+    "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 } ],
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
     "byproducts": [ [ "stick", 1 ] ],
     "components": [ [ [ "spear_steel", 1 ] ] ]
   },
-    {
+  {
     "result": "spear_short_bronze",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
@@ -147,9 +145,7 @@
     "difficulty": 1,
     "time": "5 m",
     "autolearn": true,
-    "proficiencies": [
-      { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 }
-    ],
+    "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 1.5, "skill_penalty": 0 } ],
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
     "byproducts": [ [ "stick", 1 ] ],
     "components": [ [ [ "spear_bronze", 1 ] ] ]

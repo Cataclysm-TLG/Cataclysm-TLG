@@ -1129,14 +1129,23 @@ void game::chat()
         return;
     }
     std::string shout_sound = _( "yell" );
-    if( player_character.has_trait( trait_HISS ) ) shout_sound = _( "hiss" );
-    else if( player_character.has_trait( trait_GROWL ) ) shout_sound = _( "growl" );
-    else if( player_character.has_trait( trait_SNARL ) ) shout_sound = _( "snarl" );
-    else if( player_character.has_trait( trait_SHOUT2 ) ) shout_sound = _( "scream" );
-    else if( player_character.has_trait( trait_CROAK ) )  shout_sound = _( "croak" );
-    else if( player_character.has_trait( trait_SCREECH ) ) shout_sound = _( "screech" );
-    else if( player_character.has_trait( trait_SHOUT3 ) )  shout_sound = _( "howl" );
-    else if( player_character.has_bionic( bio_voice ) )  shout_sound = _( "drone" );
+    if( player_character.has_trait( trait_HISS ) ) {
+        shout_sound = _( "hiss" );
+    } else if( player_character.has_trait( trait_GROWL ) ) {
+        shout_sound = _( "growl" );
+    } else if( player_character.has_trait( trait_SNARL ) ) {
+        shout_sound = _( "snarl" );
+    } else if( player_character.has_trait( trait_SHOUT2 ) ) {
+        shout_sound = _( "scream" );
+    } else if( player_character.has_trait( trait_CROAK ) ) {
+        shout_sound = _( "croak" );
+    } else if( player_character.has_trait( trait_SCREECH ) ) {
+        shout_sound = _( "screech" );
+    } else if( player_character.has_trait( trait_SHOUT3 ) ) {
+        shout_sound = _( "howl" );
+    } else if( player_character.has_bionic( bio_voice ) ) {
+        shout_sound = _( "drone" );
+    }
 
     switch( nmenu.ret ) {
         case NPC_CHAT_TALK: {
@@ -1732,14 +1741,23 @@ std::string dialogue::dynamic_line( const talk_topic &the_topic )
     } else if( topic == "TALK_SHOUT" ) {
         actor( false )->shout();
         std::string shout_sound = _( "yell" );
-        if( actor( false )->has_trait( trait_HISS ) ) shout_sound = _( "hiss" );
-        else if( actor( false )->has_trait( trait_GROWL ) ) shout_sound = _( "growl" );
-        else if( actor( false )->has_trait( trait_SNARL ) ) shout_sound = _( "snarl" );
-        else if( actor( false )->has_trait( trait_SHOUT2 ) ) shout_sound = _( "scream" );
-        else if( actor( false )->has_trait( trait_CROAK ) )  shout_sound = _( "croak" );
-        else if( actor( false )->has_trait( trait_SCREECH ) ) shout_sound = _( "screech" );
-        else if( actor( false )->has_trait( trait_SHOUT3 ) )  shout_sound = _( "howl" );
-        else if( actor( false )->has_bionic( bio_voice ) )  shout_sound = _( "drone" );
+        if( actor( false )->has_trait( trait_HISS ) ) {
+            shout_sound = _( "hiss" );
+        } else if( actor( false )->has_trait( trait_GROWL ) ) {
+            shout_sound = _( "growl" );
+        } else if( actor( false )->has_trait( trait_SNARL ) ) {
+            shout_sound = _( "snarl" );
+        } else if( actor( false )->has_trait( trait_SHOUT2 ) ) {
+            shout_sound = _( "scream" );
+        } else if( actor( false )->has_trait( trait_CROAK ) ) {
+            shout_sound = _( "croak" );
+        } else if( actor( false )->has_trait( trait_SCREECH ) ) {
+            shout_sound = _( "screech" );
+        } else if( actor( false )->has_trait( trait_SHOUT3 ) ) {
+            shout_sound = _( "howl" );
+        } else if( actor( false )->has_bionic( bio_voice ) ) {
+            shout_sound = _( "drone" );
+        }
         if( actor( false )->is_deaf() ) {
             return string_format( _( "&You %s, but can't hear yourself." ), shout_sound );
         } else {

@@ -606,33 +606,37 @@ int melee_actor::do_grab( monster &z, Creature *target, bodypart_id bp_id ) cons
             target->add_effect( grab_data.grab_effect, 1_days, bp_id, true, eff_grab_strength );
             const optional_vpart_position vp = here.veh_at( target->pos_bub() );
             vehicle *const veh = veh_pointer_or_null( vp );
-                // If there's a vehicle, and the target is in the vehicle, and the grabber is not in the vehicle,
-                // and the grabber is not flying, and there's no seatbelt, the target may be pulled off of the vehicle.
-                if( veh && !z.flies() && foe->in_vehicle && !here.has_vehicle_floor( z.pos_bub() ) && !vp->part_with_feature( VPFLAG_SEATBELT, true ).has_value() ) {
-                    float vehicle_velocity = veh->velocity / 100;
-                    float driver_ability = foe->get_skill_level( skill_driving ) + std::max( foe->get_str(), foe->get_dex() );
-                    if( veh->has_engine_type( fuel_type_muscle, true ) ) {
-                        driver_ability += foe->get_skill_level( skill_swimming );
-                        driver_ability += foe->get_proficiency_bonus( "athlete",
-                                                proficiency_bonus_type::strength );
-                    }
-                    if( rng( 0, vehicle_velocity ) + driver_ability < rng( 0, eff_grab_strength ) ) {
-                        add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s beat driver ability %2s at %3s mph.", eff_grab_strength, driver_ability, vehicle_velocity );
-                        here.unboard_vehicle( target->pos_bub(), false );
-                        foe->add_msg_if_player( m_bad, _( "You are yanked out of your seat!" ) );
-                        foe->add_effect( effect_airborne, 1_seconds );
-                        foe->add_effect( effect_downed, 3_seconds );
-                        foe->mod_moves( -to_moves<int>( 1_seconds ) );
-                        int force = static_cast<int>( vehicle_velocity ) * rng_float( 0.5, 1.25 );
-                        if( force > 15 ) {
-                            foe->impact( force, target->pos_bub() );
-                        }
-                        add_msg_debug( debugmode::DF_MATTACK, "Impact from falling from moving vehicle at %1s.", force );
-                    } else {
-                        add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s lost to driver ability %2s at %3s mph.", eff_grab_strength, driver_ability, vehicle_velocity );
-                        foe->add_msg_if_player( m_good, _( "You manage to stay in your seat!" ) );
-                    }
+            // If there's a vehicle, and the target is in the vehicle, and the grabber is not in the vehicle,
+            // and the grabber is not flying, and there's no seatbelt, the target may be pulled off of the vehicle.
+            if( veh && !z.flies() && foe->in_vehicle && !here.has_vehicle_floor( z.pos_bub() ) &&
+                !vp->part_with_feature( VPFLAG_SEATBELT, true ).has_value() ) {
+                float vehicle_velocity = veh->velocity / 100;
+                float driver_ability = foe->get_skill_level( skill_driving ) + std::max( foe->get_str(),
+                                       foe->get_dex() );
+                if( veh->has_engine_type( fuel_type_muscle, true ) ) {
+                    driver_ability += foe->get_skill_level( skill_swimming );
+                    driver_ability += foe->get_proficiency_bonus( "athlete",
+                                      proficiency_bonus_type::strength );
                 }
+                if( rng( 0, vehicle_velocity ) + driver_ability < rng( 0, eff_grab_strength ) ) {
+                    add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s beat driver ability %2s at %3s mph.",
+                                   eff_grab_strength, driver_ability, vehicle_velocity );
+                    here.unboard_vehicle( target->pos_bub(), false );
+                    foe->add_msg_if_player( m_bad, _( "You are yanked out of your seat!" ) );
+                    foe->add_effect( effect_airborne, 1_seconds );
+                    foe->add_effect( effect_downed, 3_seconds );
+                    foe->mod_moves( -to_moves<int>( 1_seconds ) );
+                    int force = static_cast<int>( vehicle_velocity ) * rng_float( 0.5, 1.25 );
+                    if( force > 15 ) {
+                        foe->impact( force, target->pos_bub() );
+                    }
+                    add_msg_debug( debugmode::DF_MATTACK, "Impact from falling from moving vehicle at %1s.", force );
+                } else {
+                    add_msg_debug( debugmode::DF_MATTACK, "Grab strength %1s lost to driver ability %2s at %3s mph.",
+                                   eff_grab_strength, driver_ability, vehicle_velocity );
+                    foe->add_msg_if_player( m_good, _( "You manage to stay in your seat!" ) );
+                }
+            }
         } else {
             // Monsters don't have limb scores, no need to target limbs. For now, monsters don't get special code for being yanked out of a moving vehicle.
             target->add_effect( grab_data.grab_effect, 1_days, bodypart_str_id::NULL_ID().id(), true,

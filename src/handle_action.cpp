@@ -689,7 +689,8 @@ static void grab()
             return;
         }
         // Max grab strength is 100, so cap it.
-        int grab_strength = std::min( 100, 1 + you.get_arm_str() + static_cast<int>( you.get_skill_level( skill_unarmed ) ) );
+        int grab_strength = std::min( 100,
+                                      1 + you.get_arm_str() + static_cast<int>( you.get_skill_level( skill_unarmed ) ) );
         Creature *rawcreature = creatures.creature_at( grabp );
         std::shared_ptr<Creature> victimptr( rawcreature, []( Creature * ) {} );
 
@@ -2812,12 +2813,13 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_CONTROL_VEHICLE:
             if( player_character.is_mounted() ) {
                 player_character.dismount();
-            } 
-            else if( player_character.has_trait( trait_WAYFARER ) ) {
+            } else if( player_character.has_trait( trait_WAYFARER ) ) {
                 add_msg( m_info, _( "You refuse to take control of this vehicle." ) );
             } else {
                 map &here = get_map();
-                if( here.veh_at( player_character.pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) && !player_character.in_vehicle && !player_character.has_effect( effect_downed ) && !player_character.has_effect_with_flag( json_flag_GRAB ) ) {
+                if( here.veh_at( player_character.pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) &&
+                    !player_character.in_vehicle && !player_character.has_effect( effect_downed ) &&
+                    !player_character.has_effect_with_flag( json_flag_GRAB ) ) {
                     here.board_vehicle( player_character.pos_bub(), player_character.as_character() );
                 }
                 control_vehicle();

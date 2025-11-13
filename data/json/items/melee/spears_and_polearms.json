@@ -381,7 +381,7 @@
     "weapon_category": [ "BLUDGEONS", "HOOKING_WEAPONRY" ],
     "melee_damage": { "bash": 13, "stab": 7 }
   },
-    {
+  {
     "type": "GENERIC",
     "id": "sharpened_pipe",
     "symbol": "/",

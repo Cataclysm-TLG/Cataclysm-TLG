@@ -670,7 +670,9 @@
     "cancels": [ "MET_RAT", "GOURMAND" ],
     "types": [ "METABOLISM" ],
     "category": [ "FISH", "BIRD", "ELFA", "TROGLOBITE", "CHIROPTERAN", "GASTROPOD", "CEPHALOPOD", "RAPTOR" ],
-    "enchantments": [ { "values": [ { "value": "METABOLISM", "multiply": -0.15 }, { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.1 } ] } ]
+    "enchantments": [
+      { "values": [ { "value": "METABOLISM", "multiply": -0.15 }, { "value": "STOMACH_SIZE_MULTIPLIER", "multiply": -0.1 } ] }
+    ]
   },
   {
     "type": "mutation",

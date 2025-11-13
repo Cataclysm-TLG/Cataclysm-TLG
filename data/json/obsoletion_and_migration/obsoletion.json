@@ -305,7 +305,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "BEAK_HUM",
     "name": { "str": "Hummingbird Beak" },
@@ -335,7 +335,7 @@
     "random_at_chargen": false,
     "valid": false
   },
-    {
+  {
     "type": "mutation",
     "id": "WATERSLEEPER",
     "name": { "str": "Aquatic Sleeper" },
