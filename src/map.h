@@ -582,11 +582,9 @@ class map
         * 0         | Impassable. Use `passable`/`impassable` to check for this.
         * n > 0     | x*n turns to move past this
         */
-        int move_cost( const tripoint_bub_ms &p, const vehicle *ignored_vehicle = nullptr,
-                       bool ignore_fields = false ) const;
-        int move_cost( const point_bub_ms &p, const vehicle *ignored_vehicle = nullptr,
-                       bool ignore_fields = false ) const {
-            return move_cost( tripoint_bub_ms( p, abs_sub.z() ), ignored_vehicle, ignore_fields );
+        int move_cost( const tripoint_bub_ms &p, bool ignore_fields = false ) const;
+        int move_cost( const point_bub_ms &p, bool ignore_fields = false ) const {
+            return move_cost( tripoint_bub_ms( p, abs_sub.z() ), ignore_fields );
         }
         bool impassable( const tripoint_bub_ms &p ) const;
         bool impassable( const point_bub_ms &p ) const {
@@ -622,10 +620,7 @@ class map
         *
         * @return The cost in turns to move out of tripoint `from` and into `to`
         */
-        int combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to,
-                               const vehicle *ignored_vehicle = nullptr,
-                               int modifier = 0, bool flying = false, bool via_ramp = false,
-                               bool ignore_fields = false ) const;
+        int combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to, int modifier = 0, bool flying = false, bool via_ramp = false, bool ignore_fields = false ) const;
 
         /**
          * Returns true if a creature could walk from `from` to `to` in one step.

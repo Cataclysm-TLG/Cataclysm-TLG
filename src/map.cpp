@@ -2363,12 +2363,15 @@ int map::move_cost_internal( const furn_t &furniture, const ter_t &terrain, cons
         return 0;
     }
 
+    // TODO: This should be creature size-aware and more variable. Stepping past a bike is not the same as crawling through a sedan.
     if( veh != nullptr ) {
         const vpart_position vp( const_cast<vehicle &>( *veh ), vpart );
         if( vp.obstacle_at_part() ) {
             return 0;
         } else if( vp.part_with_feature( VPFLAG_AISLE, true ) ) {
             return 2;
+        } else if( !vp.part_with_feature( VPFLAG_ROOF, true ) && !vp.part_with_feature( VPFLAG_SEAT, false ) ) {
+            return 4;
         } else {
             return 8;
         }
@@ -2421,8 +2424,7 @@ bool map::is_open_air( const tripoint_bub_ms &p ) const
 
 // Move cost: 3D
 
-int map::move_cost( const tripoint_bub_ms &p, const vehicle *ignored_vehicle,
-                    const bool ignore_fields ) const
+int map::move_cost( const tripoint_bub_ms &p, const bool ignore_fields ) const
 {
     // To save all of the bound checks and submaps fetching, we extract it
     // here instead of using furn(), field_at() and ter().
@@ -2441,7 +2443,7 @@ int map::move_cost( const tripoint_bub_ms &p, const vehicle *ignored_vehicle,
     const ter_t &terrain = current_submap->get_ter( l ).obj();
     const field &field = current_submap->get_field( l );
     const optional_vpart_position vp = veh_at( p );
-    vehicle *const veh = ( !vp || &vp->vehicle() == ignored_vehicle ) ? nullptr : &vp->vehicle();
+    vehicle *const veh = ( !vp ) ? nullptr : &vp->vehicle();
     const int part = veh ? vp->part_index() : -1;
 
     return move_cost_internal( furniture, terrain, ( !ignore_fields ? field : nofield ), veh, part );
@@ -2464,7 +2466,7 @@ bool map::passable_through( const tripoint_bub_ms &p ) const
 
 bool map::passable_skip_fields( const tripoint_bub_ms &p ) const
 {
-    return move_cost( p, static_cast<const vehicle *>( nullptr ), true ) != 0;
+    return move_cost( p, true ) != 0;
 }
 
 int map::move_cost_ter_furn( const tripoint_bub_ms &p ) const
@@ -2504,13 +2506,11 @@ bool map::passable_ter_furn( const tripoint_bub_ms &p ) const
     return move_cost_ter_furn( p ) != 0;
 }
 
-int map::combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to,
-                            const vehicle *ignored_vehicle,
-                            const int modifier, const bool flying, const bool via_ramp, const bool ignore_fields ) const
+int map::combined_movecost( const tripoint_bub_ms &from, const tripoint_bub_ms &to, const int modifier, const bool flying, const bool via_ramp, const bool ignore_fields ) const
 {
     static constexpr std::array<int, 5> mults = { 0, 50, 71, 100, 100 };
-    const int cost1 = move_cost( from, ignored_vehicle, ignore_fields );
-    const int cost2 = move_cost( to, ignored_vehicle, ignore_fields );
+    const int cost1 = move_cost( from, ignore_fields );
+    const int cost2 = move_cost( to, ignore_fields );
     size_t match = 0;
     if( from.x() != to.x() ) {
         match += 1;

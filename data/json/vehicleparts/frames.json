@@ -211,6 +211,7 @@
         "INITIAL_PART",
         "SEAT",
         "NONBELTABLE",
+        "AISLE",
         "SEAT_REQUIRES_BALANCE",
         "BOARDABLE",
         "ENGINE",
