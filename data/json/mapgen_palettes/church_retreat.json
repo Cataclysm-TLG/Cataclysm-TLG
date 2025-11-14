@@ -73,7 +73,7 @@
         [ "f_boulder_large", 1 ]
       ]
     },
-    "sealed_item": { "o": { "item": { "item": "seed_potato_raw" }, "furniture": "f_plant_seedling", "chance": 100 } },
+    "sealed_item": { "o": { "item": { "item": "seed_potato_raw" }, "furniture": "f_plant_seedling", "chance": 30 } },
     "toilets": { "T": {  } },
     "item": {
       "3": [
