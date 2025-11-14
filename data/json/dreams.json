@@ -707,7 +707,12 @@
   },
   {
     "type": "dream",
-    "messages": [ "You vividly dream of sharing a kill with your pack.", "A fond memory of throating some prey animal bubbles up." ],
+    "messages": [
+      "You vividly dream of sharing a kill with your pack.",
+      "A fond memory of throating some prey animal bubbles up.",
+      "You dream of death, always at your heels, and your flesh changing to escape it.",
+      "You taste the blood of another, and know that it will be yours."
+    ],
     "category": "BEAST",
     "strength": 4
   },
@@ -716,6 +721,7 @@
     "messages": [
       "You wonder if you could find one of those 'salmon runs', or if they were just a legend…",
       "Ah, the wolf-slaying dream again.  That's a good one…",
+      "You dream of ravens calling as you pad away from the remains of a kill.",
       "In the dream, you fatten yourself up with all the food you can find to prepare for your next winter hibernation."
     ],
     "category": "URSINE",
@@ -766,8 +772,9 @@
   {
     "type": "dream",
     "messages": [
-      "You feel smug, knowing that the Queen is dependent on you.",
-      "You relax and enjoy the humming adulation of all your followers."
+      "You dream of your wings carrying you through the night sky, and the comforting presence of moon and stars above.",
+      "Your sleep is utterly dreamless for a time.",
+      "You dream in smells more vivid than sight ever was."
     ],
     "category": "INSECT",
     "strength": 4
@@ -788,7 +795,10 @@
     "type": "dream",
     "messages": [
       "Your vivid dream of your pseudopods calcifying into rigid structures terrifies you.",
-      "Ah, the painting-the-planet dream again.  Maybe if you assimilated more…"
+      "You were once many cells living as one, now you are one living as many.",
+      "You dream of being in two places at once, and four, and yet you are all a greater whole.",
+      "You dream of a vast dark ocean.  The thought of returning to it seems…undesirable.",
+      "You are acutely aware that most of you is sleeping, leaving you to contemplate your situation as you rest."
     ],
     "category": "SLIME",
     "strength": 4
@@ -797,6 +807,7 @@
     "type": "dream",
     "messages": [
       "The years seem to fly past as you dream of carving great underground fastnesses.",
+      "You dream of being swaddled safe in the embrace of the soil.",
       "You have a horrible nightmare of being caught out in the sunlight."
     ],
     "category": "TROGLOBITE",
@@ -804,7 +815,12 @@
   },
   {
     "type": "dream",
-    "messages": [ "Mmm.  The shellfish dream again.  Yum!", "You dream of recruiting a cult of fishfolk to serve your needs." ],
+    "messages": [
+      "Mmm.  The shellfish dream again.  Yum!",
+      "You dream of recruiting a cult of fishfolk to serve your needs.",
+      "You dream of something flashing in the distant dark, and you understand every word.",
+      "You creep along, your flexile body transforming shape and color to remain hidden."
+    ],
     "category": "CEPHALOPOD",
     "strength": 4
   },
@@ -813,7 +829,9 @@
     "messages": [
       "You excitedly web up an interloper and prepare to feast… nope, dream.",
       "You relax in your web; it's not vibrating, so dinner hasn't arrived yet.",
-      "Your dreams of having to live without a web frighten you."
+      "You dream of a mate, and a dance, and a mother devoured by her own young.",
+      "You startle as the shadow of a bird passes over your web, but it's only a dream.",
+      "Your fangs sink into your prey, which struggles as your many legs embrace it."
     ],
     "category": "SPIDER",
     "strength": 4
@@ -821,8 +839,9 @@
   {
     "type": "dream",
     "messages": [
-      "The Fury is so big!  It's GONNA GET YOAAAAAH!  *pant* only a dream.",
-      "You find your paws twitching.  There's a cave.  You should go."
+      "Something chases you through a maze of unfamiliar tunnels.  At last, it has you cornered, so you turn around and show it your teeth…",
+      "You lie in a pile with your brothers and sisters.  Someone keeps moving around, nearly waking you up.",
+      "Your warren is wiped out, your family lost.  It'll be OK, as long as you survive."
     ],
     "category": "RAT",
     "strength": 4
@@ -830,9 +849,11 @@
   {
     "type": "dream",
     "messages": [
-      "You dream of the peaceful world you'll give humankind.  Because no one else can.",
-      "You crush those who would disagree with the leadership.  Humanity must be united; independence will get you all killed!",
-      "There are underground Faults in the world.  Faults you should remedy."
+      "The world can be whole again, and only you have the courage to make it so.",
+      "You feel nothing but disgust as you dream of strangling your old self.",
+      "You dream of washing your hands and face.",
+      "You crush those who would disagree with your leadership.",
+      "You are perfect, and in your dreams, a million others just like you kneel before your superiority."
     ],
     "category": "ALPHA",
     "strength": 4
@@ -841,6 +862,8 @@
     "type": "dream",
     "messages": [
       "You pant, terrified at the thought of that FUNGUS destroying your home!",
+      "Your heart is moved to breaking at the thought of all the lives lost, and the struggle yet to come.",
+      "Regret haunts your dreams, for your past wrongs real or imagined.",
       "You wish others could understand, and join your struggle…"
     ],
     "category": "ELFA",
@@ -849,8 +872,9 @@
   {
     "type": "dream",
     "messages": [
-      "There is so much that you never imagined, the slime, the legs, and eyestalks but the shell was worth it.",
-      "You'll always be home, once you take this last step."
+      "You dream of an endless spiral you can't help but follow.",
+      "Your skin tastes the slime of another, and you follow the trail.",
+      "You dream of laying eggs in the soft soil."
     ],
     "category": "GASTROPOD",
     "strength": 4
@@ -858,21 +882,31 @@
   {
     "type": "dream",
     "messages": [
-      "You'd never considered that frogs were generalist predators before this point in your life…",
-      "On land and in the water, you control all that you can reach, and your tongue has quite the reach."
+      "Your mouth grows wider and wider, there's nothing you can't devour…",
+      "You dream of still waters, rain, and a chorus of voices raised in song.",
+      "On land and in the water, you control all that your tongue can reach."
     ],
     "category": "BATRACHIAN",
     "strength": 4
   },
   {
     "type": "dream",
-    "messages": [ "Your body flows slightly faster than you expected… oh, just a dream.", "FIGHT.  FEED.  FORWARD." ],
+    "messages": [
+      "Your body flows slightly faster than you expected… oh, just a dream.",
+      "FIGHT.  FEED.  FORWARD.",
+      "An unstoppable hunger like a black hole devours you from within."
+    ],
     "category": "CHIMERA",
     "strength": 4
   },
   {
     "type": "dream",
-    "messages": [ "Oh.  No, that 'rex' thing was only a myth.", "You stir, saddened that your beautiful hatchlings were only a dream." ],
+    "messages": [
+      "Your prey stares you down, unaware that your mate has already flanked it.",
+      "You stir, saddened that your beautiful hatchlings were only a dream.",
+      "You dream of a world one hundred million years gone.",
+      "Your dreams are simple.  Movement among the leaves, your heart pounding as you leap through the air, satisfaction when your claws find purchase."
+    ],
     "category": "RAPTOR",
     "strength": 4
   },
@@ -892,9 +926,9 @@
   {
     "type": "dream",
     "messages": [
-      "You dream of pinching zombies with your claws.",
+      "You dream of crushing zombies with your pincer.",
       "You have a vivid dream of shedding your carapace.  It feels good.",
-      "You dream of tearing apart some hapless fish with your pincers."
+      "You sit at the bottom of the sea, staring without thought at all the world passing by overhead."
     ],
     "category": "CRUSTACEAN",
     "strength": 4
