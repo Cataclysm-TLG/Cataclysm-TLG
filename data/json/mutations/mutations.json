@@ -1833,6 +1833,7 @@
       "LIZARD",
       "RAPTOR",
       "CRUSTACEAN",
+      "TROGLOBITE",
       "CHIROPTERAN"
     ],
     "cancels": [ "VANITY" ]
@@ -6455,6 +6456,7 @@
       "CHIMERA",
       "SPIDER",
       "CRUSTACEAN",
+      "TROGLOBITE",
       "CHIROPTERAN"
     ]
   },
@@ -6469,7 +6471,7 @@
     "types": [ "ATTRACTIVENESS" ],
     "prereqs": [ "DEFORMED" ],
     "changes_to": [ "DEFORMED3" ],
-    "category": [ "CHIMERA", "GASTROPOD", "SLIME", "INSECT", "SPIDER", "BATRACHIAN", "CHIROPTERAN" ]
+    "category": [ "CHIMERA", "GASTROPOD", "SLIME", "INSECT", "CRUSTACEAN", "SPIDER", "BATRACHIAN", "CHIROPTERAN", "TROGLOBITE" ]
   },
   {
     "type": "mutation",
