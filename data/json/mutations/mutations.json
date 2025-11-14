@@ -1807,12 +1807,11 @@
     "points": -1,
     "visibility": 1,
     "ugliness": 2,
-    "description": "You're not much to look at.  People who care about such things will react poorly to you.",
+    "description": "You're not much to look at.  People who care about such things may react less favorably toward you.",
     "starting_trait": true,
     "types": [ "ATTRACTIVENESS" ],
     "changes_to": [ "DEFORMED" ],
     "category": [
-      "RAPTOR",
       "FELINE",
       "LUPINE",
       "BATRACHIAN",
@@ -1826,8 +1825,13 @@
       "GASTROPOD",
       "SLIME",
       "RAT",
+      "RABBIT",
       "CHIMERA",
+      "MOUSE",
+      "BIRD",
       "SPIDER",
+      "LIZARD",
+      "RAPTOR",
       "CRUSTACEAN",
       "CHIROPTERAN"
     ],
@@ -6438,18 +6442,16 @@
     "changes_to": [ "DEFORMED2" ],
     "category": [
       "FISH",
-      "CATTLE",
       "INSECT",
       "CEPHALOPOD",
-      "FELINE",
-      "LUPINE",
       "BATRACHIAN",
       "BEAST",
-      "URSINE",
       "PLANT",
       "GASTROPOD",
       "SLIME",
       "RAT",
+      "LIZARD",
+      "RAPTOR",
       "CHIMERA",
       "SPIDER",
       "CRUSTACEAN",
@@ -6467,7 +6469,7 @@
     "types": [ "ATTRACTIVENESS" ],
     "prereqs": [ "DEFORMED" ],
     "changes_to": [ "DEFORMED3" ],
-    "category": [ "BEAST", "URSINE", "PLANT", "GASTROPOD", "SLIME", "RAT", "CHIMERA", "CRUSTACEAN" ]
+    "category": [ "CHIMERA", "GASTROPOD", "SLIME", "INSECT", "SPIDER", "BATRACHIAN", "CHIROPTERAN" ]
   },
   {
     "type": "mutation",
@@ -6479,8 +6481,8 @@
     "description": "Your visage is disgusting and liable to induce vomiting.  People will not want to interact with you unless they have a very good reason to.",
     "types": [ "ATTRACTIVENESS" ],
     "prereqs": [ "DEFORMED2" ],
-    "threshreq": [ "THRESH_SLIME", "THRESH_RAT", "THRESH_CHIMERA" ],
-    "category": [ "SLIME", "RAT", "CHIMERA" ]
+    "threshreq": [ "THRESH_SLIME", "THRESH_CHIMERA", "THRESH_GASTROPOD", "THRESH_INSECT" ],
+    "category": [ "SLIME", "CHIMERA", "GASTROPOD", "INSECT" ]
   },
   {
     "type": "mutation",
@@ -6518,7 +6520,7 @@
     "points": 4,
     "visibility": 10,
     "ugliness": -10,
-    "description": "You are incredibly beautiful.  People cannot help themselves due to your charms, and will do whatever they can to please you.",
+    "description": "You possess an unearthly beauty.  Most people cannot help themselves due to your charms, and will do whatever they can to please you.",
     "types": [ "ATTRACTIVENESS" ],
     "prereqs": [ "BEAUTIFUL2" ],
     "category": [ "ELFA" ],
