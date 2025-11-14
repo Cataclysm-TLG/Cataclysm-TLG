@@ -1286,29 +1286,39 @@ void Character::hardcoded_effects( effect &it )
         }
     } else if( id == effect_meth ) {
         if( intense == 1 ) {
-            add_miss_reason( _( "The bees have started escaping your teeth." ), 2 );
+            add_miss_reason( _( "Everything feels like it's sped up, and you're being left behind." ), 2 );
             if( one_in( 900 ) ) {
-                add_msg_if_player( m_bad, _( "You feel paranoid.  They're watching you." ) );
+                add_msg_if_player( m_bad, _( "You feel paranoid.  Is someone watching you?" ) );
                 mod_pain( 1 );
                 mod_fatigue( dice( 1, 6 ) );
             } else if( one_in( 3000 ) ) {
                 add_msg_if_player( m_bad,
-                                   _( "You feel like you need less teeth.  You pull one out, and it is rotten to the core." ) );
+                                   _( "You can't stop clenching your jaw." ) );
                 mod_pain( 1 );
             } else if( one_in( 3000 ) ) {
-                add_msg_if_player( m_bad, _( "You notice a large abscess.  You pick at it." ) );
+                if( one_in( 10 ) ) {
+                add_msg_if_player( m_bad, _( "The bugs are back." ) );
+                } else {
+                add_msg_if_player( m_bad, _( "It feels like there are tiny bugs crawling over your body." ) );
+                }
                 const bodypart_id &itch = random_body_part( true );
-                schedule_effect( effect_formication, 60_minutes, itch );
+                schedule_effect( effect_formication, 60_minutes * rng_float( 0.75f, 1.25f ), itch );
                 mod_pain( 1 );
             } else if( one_in( 3000 ) ) {
                 add_msg_if_player( m_bad,
-                                   _( "You feel so sick, like you've been poisoned, but you need more.  So much more." ) );
+                                   _( "You taste bile and your vision throbs." ) );
                 vomit();
                 mod_fatigue( dice( 1, 6 ) );
             }
         }
     } else if( id == effect_tindrift ) {
-        add_msg_if_player( m_bad, _( "You are beset with a vision of a prowling beast." ) );
+        if( rng( 0, 4 ) < 4 ) {
+            add_msg_if_player( m_bad, _( "You are beset by a vision of a prowling beast." ) );
+        } else if( int_cur < 14 ) {
+            add_msg_if_player( m_bad, _( "Something is tracking you from a direction you can't perceive." ) );
+        } else {
+            add_msg_if_player( m_bad, _( "Something stalks you across the angles of spacetime.  It will come from the corners!" ) );
+        }
         for( const tripoint_bub_ms &dest : here.points_in_radius( pos, 6 ) ) {
             if( here.is_cornerfloor( dest ) ) {
                 here.add_field( dest, fd_tindalos_rift, 3 );
@@ -1352,19 +1362,49 @@ void Character::hardcoded_effects( effect &it )
         }
     } else if( id == effect_tapeworm ) {
         if( one_in( 3072 ) ) {
-            add_msg_if_player( m_bad, _( "Your bowels ache." ) );
+            int msg = rng( 1, 3 );
+            if( msg == 1 ) {
+                add_msg_if_player( m_bad, _( "Your bowels ache." ) );
+            } else if( msg == 2 ) {
+                add_msg_if_player( m_bad, _( "You feel woozy." ) );
+            } else if( msg == 3 ) {
+                add_msg_if_player( m_bad, _( "You feel a general malaise." ) );
+            }
         }
     } else if( id == effect_bloodworms ) {
         if( one_in( 3072 ) ) {
-            add_msg_if_player( m_bad, _( "Your veins itch." ) );
+            int msg = rng( 1, 3 );
+            if( msg == 1 ) {
+                add_msg_if_player( m_bad, _( "You feel woozy." ) );
+            } else if( msg == 2 ) {
+                add_msg_if_player( m_bad, _( "Your muscles are tight and sore." ) );
+            } else if( msg == 3 ) {
+                add_msg_if_player( m_bad, _( "You feel a general malaise." ) );
+            }
         }
     } else if( id == effect_paincysts ) {
         if( one_in( 3072 ) ) {
-            add_msg_if_player( m_bad, _( "Your muscles feel like they're knotted and tired." ) );
+            int msg = rng( 1, 3 );
+            if( msg == 1 ) {
+                add_msg_if_player( m_bad, _( "Your muscles are tight and sore." ) );
+            } else if( msg == 2 ) {
+                add_msg_if_player( m_bad, _( "Your muscles feel like they're knotted and tired." ) );
+            } else if( msg == 3 ) {
+                add_msg_if_player( m_bad, _( "You feel a general malaise." ) );
+            }
         }
     } else if( id == effect_tetanus ) {
         if( one_in( 1536 ) ) {
-            add_msg_if_player( m_bad, _( "Your muscles are tight and sore." ) );
+            int msg = rng( 1, 3 );
+            if( msg == 1 ) {
+                add_msg_if_player( m_bad, _( "Your muscles are tight and sore." ) );
+            } else if( msg == 2 ) {
+                add_msg_if_player( m_bad, _( "Your muscles feel like they're knotted and tired." ) );
+            } else if( msg == 3 ) {                
+                add_msg_if_player( m_bad, _( "You can't stop clenching your jaw." ) );
+            } else if( msg == 4 ) {                
+                add_msg_if_player( m_bad, _( "You feel a general malaise." ) );
+            }
         }
         // to do: make muscle spasms not as dangerous if you have bionic limbs
         if( !has_effect( effect_valium ) ) {
