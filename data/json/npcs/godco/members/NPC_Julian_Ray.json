@@ -114,7 +114,7 @@
     "dynamic_line": {
       "u_has_var": "general_meeting_godco_joinee",
       "value": "yes",
-      "yes": [ "If you have complaints, please don't tell anyone.", "You're still staying here, joinee?", "Need anything, joinee?" ],
+      "yes": [ "If you have complaints, please don't tell anyone.", "You're still staying here?", "Need anything?" ],
       "no": [ "Need anything?", "Go on…" ]
     },
     "responses": [ { "text": "I'd better get going.", "topic": "TALK_DONE" } ]
@@ -133,7 +133,7 @@
     "id": "TALK_GODCO_Julian_Join",
     "dynamic_line": "Aight, here are the rules: don't commit sins, don't litter, and try not to die.  Have some mutual respect, capiche?",
     "responses": [
-      { "text": "Got it.", "topic": "TALK_GODCO_Julian_Joinee", "effect": { "u_set_fac_relation": "share public goods" } },
+      { "text": "Got it.", "topic": "TALK_GODCO_Julian_Joinee", "effect":[ { "u_add_var": "general_meeting_godco_joinee", "value": "yes" }, { "u_set_fac_relation": "share public goods" } ] },
       { "text": "Actually, I had better go.", "topic": "TALK_DONE" }
     ]
   },

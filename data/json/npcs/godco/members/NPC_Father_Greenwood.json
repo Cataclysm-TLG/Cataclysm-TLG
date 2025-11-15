@@ -17,7 +17,6 @@
         "condition": {
           "and": [
             { "not": { "u_has_effect": "godco_confessed" } },
-            { "not": { "u_has_trait": "KILLER" } },
             { "not": { "u_has_trait": "PSYCHOPATH" } }
           ]
         },
