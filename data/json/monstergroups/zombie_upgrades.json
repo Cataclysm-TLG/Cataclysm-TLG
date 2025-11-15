@@ -33,6 +33,29 @@
   },
   {
     "type": "monstergroup",
+    "name": "GROUP_DECAYED_UPGRADE",
+    "default": "mon_zombie_crawler",
+    "//": "Upgrades from decayed zombie.  Should represent an arrested process that tries (and maybe fails) to make use of the condition of the corpse.",
+    "monsters": [
+      { "monster": "mon_zombie_crawler", "weight": 30 },
+      { "monster": "mon_skeleton", "weight": 80 },
+      { "monster": "mon_zombie_gasbag_immobile", "weight": 15 },
+      { "monster": "mon_zombie_gasbag_crawler", "weight": 15 },
+      { "monster": "mon_zombie_necro_boomer", "weight": 15 },
+      { "monster": "mon_zombie_smoker", "weight": 30 },
+      { "monster": "mon_zombie_gasbag", "weight": 110 },
+      { "monster": "mon_zombie_acidic", "weight": 60 },
+      { "monster": "mon_zombie_necro", "weight": 30 },
+      { "monster": "mon_zombie_necro_boomer", "weight": 20 },
+      { "monster": "mon_boomer", "weight": 30 },
+      { "monster": "mon_zombie_hollow", "weight": 5 },
+      { "monster": "mon_zombie_regenerating", "weight": 10 },
+      { "monster": "mon_zombie_pupa", "weight": 10 },
+      { "monster": "mon_zombie_pupa_decoy", "weight": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
     "name": "GROUP_ZOMBIE_CRAWLER_UPGRADE",
     "default": "mon_zombie_crawler",
     "//": "crawling zombie upgrades",

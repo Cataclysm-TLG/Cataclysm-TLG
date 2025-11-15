@@ -352,7 +352,7 @@
     "id": "mon_zombie_rot",
     "type": "MONSTER",
     "name": { "str": "decayed zombie" },
-    "description": "A once-dead human corpse.  Its discolored, swollen flesh is riddled with festering wounds and open sores.",
+    "description": "A once-dead human corpse in a particularly advanced state of decay.  Its flesh sloughs away in patches and the swarm of insects crawling in and out of it are nearly as revolting as the smell.",
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
@@ -378,7 +378,7 @@
     "death_drops": "default_zombie_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_rot_fungal",
-    "upgrades": { "half_life": 128, "into": "mon_devourer" },
+    "upgrades": { "half_life": 120, "into_group": "GROUP_DECAYED_UPGRADE" },
     "flags": [
       "SEES",
       "HEARS",

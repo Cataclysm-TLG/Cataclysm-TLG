@@ -577,42 +577,6 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "bot_science_bot",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "skill_used": "electronics",
-    "skills_required": [ [ "mechanics", 6 ], [ "computer", 5 ] ],
-    "reversible": true,
-    "decomp_learn": 8,
-    "book_learn": [ [ "schematics_sciencebot", 7 ] ],
-    "difficulty": 5,
-    "time": "1 h",
-    "using": [ [ "soldering_standard", 20 ] ],
-    "qualities": [
-      { "id": "SCREW", "level": 1 },
-      { "id": "SCREW_FINE", "level": 1 },
-      { "id": "WRENCH", "level": 2 },
-      { "id": "WRENCH_FINE", "level": 1 }
-    ],
-    "components": [
-      [ [ "ai_module", 1 ] ],
-      [ [ "memory_module", 1 ] ],
-      [ [ "medium_storage_battery", 1 ] ],
-      [ [ "spidery_legs_small", 1 ] ],
-      [ [ "sensor_module", 1 ] ],
-      [ [ "pathfinding_module", 1 ] ],
-      [ [ "identification_module", 1 ] ],
-      [ [ "power_supply", 3 ] ],
-      [ [ "geiger_off", 1 ] ],
-      [ [ "tazer", 2 ] ],
-      [ [ "scrap", 6 ] ],
-      [ [ "plut_cell", 1 ] ],
-      [ [ "steel_chunk", 6 ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "bot_antimateriel",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",

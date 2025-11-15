@@ -348,7 +348,7 @@
         }
       ],
       "set": [ { "square": "radiation", "amount": [ 100, 120 ], "x": 0, "y": 0, "x2": 23, "y2": 23 } ],
-      "monster": { ",": { "monster": "mon_irradiated_wanderer_1", "chance": 10 } }
+      "monster": { ",": { "monster": "mon_zombie_hazmat", "chance": 10 } }
     }
   },
   {

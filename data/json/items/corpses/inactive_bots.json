@@ -584,33 +584,6 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "id": "bot_science_bot",
-    "looks_like": "broken_science_bot",
-    "type": "TOOL",
-    "name": { "str": "inactive lab defense bot" },
-    "description": "An inactive experimental robot plundered from a science lab.  It resembles a human-sized spider and was designed to deploy manhacks.  Using this item involves placing it on the ground and turning it on.  If reprogrammed and rewired successfully, the robot will race towards enemies and deploy a variety of experimental devices.",
-    "weight": "100000 g",
-    "volume": "65000 ml",
-    "price": "800 USD",
-    "price_postapoc": "15 USD",
-    "to_hit": -3,
-    "material": [ "steel" ],
-    "symbol": ";",
-    "color": "light_green",
-    "use_action": {
-      "type": "place_monster",
-      "monster_id": "mon_science_bot",
-      "friendly_msg": "The lab defense bot shudders briefly and skitters away.",
-      "hostile_msg": "The lab defense bot raises its front legs and shines a multitude of colored lights in your face!",
-      "//": "Not as lethal as a secubot but far more fiddly and complex with its implied assembly and sub-deployment systems",
-      "difficulty": 6,
-      "moves": 100,
-      "skills": [ "electronics", "computer" ]
-    },
-    "flags": [ "SINGLE_USE" ],
-    "melee_damage": { "bash": 8 }
-  },
-  {
     "id": "bot_turret_searchlight",
     "type": "TOOL",
     "name": { "str": "inactive milspec searchlight" },
