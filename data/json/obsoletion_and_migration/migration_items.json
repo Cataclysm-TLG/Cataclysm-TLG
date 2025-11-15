@@ -3047,5 +3047,15 @@
     "type": "MIGRATION",
     "id": "makeshift_halberd",
     "replace": "makeshift_glaive"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "broken_science_bot",
+    "replace": "broken_skitterbot"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bot_science_bot",
+    "replace": "bot_skitterbot"
   }
 ]

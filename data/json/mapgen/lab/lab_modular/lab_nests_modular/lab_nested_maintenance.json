@@ -609,7 +609,7 @@
       ],
       "palettes": [ "lab_common_palette", "lab_maintenance_palette" ],
       "place_loot": [
-        { "item": "broken_science_bot", "x": 4, "y": 0, "chance": 100 },
+        { "item": "broken_skitterbot", "x": 4, "y": 0, "chance": 100 },
         { "item": "broken_grenade_hack", "x": 8, "y": 0, "chance": 100 }
       ]
     }

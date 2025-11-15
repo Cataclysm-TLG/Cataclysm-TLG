@@ -611,7 +611,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "PULL_METAL_AOE", mattack::pull_metal_aoe );
     add_hardcoded_attack( "RESURRECT", mattack::resurrect );
     add_hardcoded_attack( "SMASH", mattack::smash );
-    add_hardcoded_attack( "SCIENCE", mattack::science );
     add_hardcoded_attack( "GROWPLANTS", mattack::growplants );
     add_hardcoded_attack( "GROW_VINE", mattack::grow_vine );
     add_hardcoded_attack( "VINE", mattack::vine );
@@ -637,11 +636,7 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "TAZER", mattack::tazer );
     add_hardcoded_attack( "SEARCHLIGHT", mattack::searchlight );
     add_hardcoded_attack( "SPEAKER", mattack::speaker );
-    add_hardcoded_attack( "FLAMETHROWER", mattack::flamethrower );
     add_hardcoded_attack( "COPBOT", mattack::copbot );
-    add_hardcoded_attack( "CHICKENBOT", mattack::chickenbot );
-    add_hardcoded_attack( "MULTI_ROBOT", mattack::multi_robot );
-    add_hardcoded_attack( "RATKING", mattack::ratking );
     add_hardcoded_attack( "GENERATOR", mattack::generator );
     add_hardcoded_attack( "UPGRADE", mattack::upgrade );
     add_hardcoded_attack( "FLESH_GOLEM", mattack::flesh_golem );
@@ -652,7 +647,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "BLOW_WHISTLE", mattack::blow_whistle );
     add_hardcoded_attack( "DARKMAN", mattack::darkman );
     add_hardcoded_attack( "SLIMESPRING", mattack::slimespring );
-    add_hardcoded_attack( "EVOLVE_KILL_STRIKE", mattack::evolve_kill_strike );
     add_hardcoded_attack( "TINDALOS_TELEPORT", mattack::tindalos_teleport );
     add_hardcoded_attack( "FLESH_TENDRIL", mattack::flesh_tendril );
     add_hardcoded_attack( "BIO_OP_BIOJUTSU", mattack::bio_op_random_biojutsu );
@@ -665,8 +659,6 @@ void MonsterGenerator::init_attack()
     add_hardcoded_attack( "GRENADIER_ELITE", mattack::grenadier_elite );
     add_hardcoded_attack( "RIOTBOT", mattack::riotbot );
     add_hardcoded_attack( "STRETCH_ATTACK", mattack::stretch_attack );
-    add_hardcoded_attack( "DOOT", mattack::doot );
-    add_hardcoded_attack( "ZOMBIE_FUSE", mattack::zombie_fuse );
 }
 
 void MonsterGenerator::init_defense()
