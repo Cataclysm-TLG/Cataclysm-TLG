@@ -73,6 +73,7 @@
     "material": [ "fruit" ],
     "use_action": [ "BLECH" ],
     "flags": [ "NO_AUTO_CONSUME" ],
+    "vitamins": [ [ "vitC", 0 ] ],
     "volume": "62 ml",
     "fun": -17
   },
