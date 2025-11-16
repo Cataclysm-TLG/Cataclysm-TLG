@@ -43,7 +43,15 @@
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "tools": [ [ [ "char_smoker", 100 ] ] ],
-    "components": [ [ [ "log", 1 ] ], [ [ "butter", 30 ], [ "raw_butter", 30 ], [ "edible_lard", 4, "LIST" ] ] ]
+    "components": [
+      [ [ "log", 1 ] ],
+      [
+        [ "any_butter_or_oil", 16, "LIST" ],
+        [ "edible_shortening", 4, "LIST" ],
+        [ "lamp_oil", 400 ],
+        [ "motor_oil", 400 ]
+      ]
+    ]
   },
   {
     "type": "recipe",
@@ -75,7 +83,15 @@
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "tools": [ [ [ "char_smoker", 100 ] ] ],
-    "components": [ [ [ "log", 1 ] ], [ [ "butter", 30 ], [ "edible_lard", 4, "LIST" ] ] ]
+    "components": [
+      [ [ "log", 1 ] ],
+      [
+        [ "any_butter_or_oil", 20, "LIST" ],
+        [ "edible_shortening", 5, "LIST" ],
+        [ "lamp_oil", 500 ],
+        [ "motor_oil", 500 ]
+      ]
+    ]
   },
   {
     "type": "recipe",
@@ -92,7 +108,16 @@
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
     "tools": [ [ [ "char_smoker", 100 ] ] ],
-    "components": [ [ [ "log", 1 ] ], [ [ "rock", 1 ] ], [ [ "butter", 30 ], [ "edible_lard", 4, "LIST" ] ] ]
+    "components": [
+      [ [ "log", 1 ] ],
+      [ [ "rock", 1 ] ],
+      [
+        [ "any_butter_or_oil", 20, "LIST" ],
+        [ "edible_shortening", 5, "LIST" ],
+        [ "lamp_oil", 500 ],
+        [ "motor_oil", 500 ]
+      ]
+    ]
   },
   {
     "type": "recipe",
@@ -369,7 +394,7 @@
     "components": [
       [ [ "2x4", 1 ] ],
       [
-        [ "any_tallow", 4, "LIST" ],
+        [ "edible_shortening", 4, "LIST" ],
         [ "cooking_oil", 48 ],
         [ "cooking_oil2", 48 ],
         [ "lamp_oil", 500 ],
@@ -683,7 +708,7 @@
     "components": [
       [ [ "stick_long", 1 ] ],
       [
-        [ "any_tallow", 2, "LIST" ],
+        [ "edible_shortening", 2, "LIST" ],
         [ "cooking_oil", 16 ],
         [ "cooking_oil2", 16 ],
         [ "lamp_oil", 250 ],
@@ -816,7 +841,7 @@
     "components": [
       [ [ "stick_long", 1 ] ],
       [
-        [ "any_tallow", 2, "LIST" ],
+        [ "edible_shortening", 2, "LIST" ],
         [ "cooking_oil", 16 ],
         [ "cooking_oil2", 16 ],
         [ "lamp_oil", 250 ],
@@ -843,7 +868,7 @@
     "components": [
       [ [ "q_staff", 1 ] ],
       [
-        [ "any_tallow", 2, "LIST" ],
+        [ "edible_shortening", 2, "LIST" ],
         [ "cooking_oil", 16 ],
         [ "cooking_oil2", 16 ],
         [ "lamp_oil", 250 ],

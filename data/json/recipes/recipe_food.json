@@ -1606,7 +1606,7 @@
     ],
     "components": [
       [ [ "meat_red", 2, "LIST" ], [ "meat_liver", 10, "LIST" ] ],
-      [ [ "edible_fat", 1, "LIST" ], [ "edible_tallow_lard", 4, "LIST" ] ],
+      [ [ "edible_fat", 1, "LIST" ], [ "edible_shortening", 4, "LIST" ] ],
       [
         [ "salt", 4 ],
         [ "soysauce", 2 ],
@@ -1637,7 +1637,7 @@
     "components": [
       [ [ "meat_red", 1, "LIST" ] ],
       [ [ "edible_blood", 2, "LIST" ] ],
-      [ [ "edible_fat", 1, "LIST" ], [ "edible_tallow_lard", 4, "LIST" ] ],
+      [ [ "edible_fat", 1, "LIST" ], [ "edible_shortening", 4, "LIST" ] ],
       [
         [ "salt", 4 ],
         [ "soysauce", 2 ],
@@ -1676,7 +1676,7 @@
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_knife_skills" }, { "proficiency": "prof_preservation" } ],
     "components": [
       [ [ "meat_red", 2, "LIST" ], [ "can_chicken", 2 ] ],
-      [ [ "edible_fat", 1, "LIST" ], [ "edible_tallow_lard", 4, "LIST" ] ],
+      [ [ "edible_fat", 1, "LIST" ], [ "edible_shortening", 4, "LIST" ] ],
       [
         [ "salt", 4 ],
         [ "soysauce", 2 ],
@@ -1713,7 +1713,7 @@
     ],
     "components": [
       [ [ "meat_red", 2, "LIST" ], [ "meat_liver", 10, "LIST" ] ],
-      [ [ "edible_fat", 1, "LIST" ], [ "edible_tallow_lard", 4, "LIST" ] ],
+      [ [ "edible_fat", 1, "LIST" ], [ "edible_shortening", 4, "LIST" ] ],
       [
         [ "salt", 4 ],
         [ "soysauce", 2 ],
@@ -3573,33 +3573,22 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "pemmican",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
+    "result": "akutaq_fruit",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_OTHER",
     "skill_used": "cooking",
-    "difficulty": 5,
-    "charges": 4,
-    "time": "45 m",
+    "difficulty": 2,
+    "time": "10 m",
     "batch_time_factors": [ 80, 1 ],
-    "autolearn": true,
     "book_learn": [ [ "cookbook_native", 1 ] ],
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 40, "LIST" ] ] ],
-    "//": "meat = 20u, fat = 15u, vegetable/fruit = 4u, give or take",
+    "qualities": [ { "id": "CONTAIN", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "edible_tallow_lard", 2, "LIST" ], [ "ghee", 2 ] ],
+      [ [ "edible_shortening", 1, "LIST" ] ],
       [
-        [ "jerky", 2 ],
-        [ "dry_meat", 2 ],
-        [ "meat_smoked", 2 ],
-        [ "dry_fish", 2 ],
-        [ "fish_smoked", 2 ],
-        [ "dry_lobster", 2 ],
-        [ "lobster_smoked", 2 ]
+        [ "sugar", 10 ]
       ],
       [
         [ "dry_fruit", 2 ],
-        [ "juice_pulp", 4 ],
         [ "strawberries", 1 ],
         [ "blueberries", 1 ],
         [ "cherries", 1 ],
@@ -3614,6 +3603,56 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
+    "result": "akutaq",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_OTHER",
+    "skill_used": "cooking",
+    "difficulty": 2,
+    "time": "10 m",
+    "batch_time_factors": [ 80, 1 ],
+    "book_learn": [ [ "cookbook_native", 1 ] ],
+    "qualities": [ { "id": "CONTAIN", "level": 1 } ],
+    "components": [
+      [ [ "edible_shortening", 1, "LIST" ] ],
+      [
+        [ "sugar", 10 ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "pemmican",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_MEAT",
+    "skill_used": "cooking",
+    "difficulty": 5,
+    "charges": 4,
+    "time": "45 m",
+    "batch_time_factors": [ 80, 1 ],
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "tools": [ [ [ "surface_heat", 40, "LIST" ] ] ],
+    "//": "meat = 20u, fat = 15u, vegetable/fruit = 4u, give or take",
+    "components": [
+      [ [ "edible_shortening", 2, "LIST" ] ],
+      [
+        [ "jerky", 2 ],
+        [ "dry_meat", 2 ],
+        [ "meat_smoked", 2 ],
+        [ "dry_fish", 2 ],
+        [ "fish_smoked", 2 ],
+        [ "dry_lobster", 2 ],
+        [ "lobster_smoked", 2 ]
+      ],
+      [
+        [ "dry_fruit", 2 ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
     "result": "pemmican_vegetable",
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
@@ -3622,11 +3661,11 @@
     "charges": 4,
     "time": "45 m",
     "batch_time_factors": [ 80, 1 ],
-    "autolearn": true,
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
-      [ [ "edible_tallow_lard", 2, "LIST" ], [ "ghee", 2 ] ],
+      [ [ "edible_shortening", 2, "LIST" ] ],
       [
         [ "jerky", 2 ],
         [ "dry_meat", 2 ],
@@ -3650,13 +3689,12 @@
     "charges": 4,
     "time": "40 m",
     "batch_time_factors": [ 80, 1 ],
-    "autolearn": true,
-    "book_learn": [ [ "cookbook_native", 1 ] ],
+    "book_learn": [ [ "cookbook_native", 1 ], [ "survival_book", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 36, "LIST" ] ] ],
     "//": "meat = 20u, fat = 15u, give or take",
     "components": [
-      [ [ "edible_tallow_lard", 2, "LIST" ], [ "ghee", 2 ] ],
+      [ [ "edible_shortening", 2, "LIST" ] ],
       [
         [ "jerky", 2 ],
         [ "dry_meat", 2 ],
@@ -4307,7 +4345,7 @@
     "components": [
       [ [ "syrup", 1 ] ],
       [ [ "meat_red", 3, "LIST" ], [ "can_chicken", 3 ] ],
-      [ [ "edible_fat", 1, "LIST" ], [ "edible_tallow_lard", 4, "LIST" ] ],
+      [ [ "edible_fat", 1, "LIST" ], [ "edible_shortening", 1, "LIST" ] ],
       [
         [ "salt", 10 ],
         [ "soysauce", 1 ],
@@ -7025,7 +7063,7 @@
         [ "dry_meat", 1 ],
         [ "can_chicken", 1 ]
       ],
-      [ [ "edible_tallow_lard", 2, "LIST" ] ],
+      [ [ "any_butter_or_oil", 2, "LIST" ] ],
       [ [ "flour_any", 2, "LIST" ], [ "cornmeal", 1 ] ],
       [ [ "mushroom", 2 ], [ "dry_mushroom", 2 ] ]
     ]
@@ -7222,7 +7260,7 @@
       [ [ "flour_any", 12, "LIST" ] ],
       [ [ "eggs_bird", 1, "LIST" ] ],
       [ [ "jam_fruit", 9 ] ],
-      [ [ "edible_tallow_lard", 1, "LIST" ], [ "any_butter_or_oil", 1, "LIST" ] ]
+      [ [ "any_butter_or_oil", 1, "LIST" ] ]
     ]
   },
   {
@@ -8300,7 +8338,7 @@
     "components": [
       [ [ "oatmeal", 1 ], [ "flour_any", 5, "LIST" ], [ "buckwheat", 1 ] ],
       [ [ "dry_fruit", 1 ] ],
-      [ [ "edible_tallow_lard", 2, "LIST" ] ],
+      [ [ "edible_shortening", 2, "LIST" ] ],
       [ [ "sugar_standard", 1, "LIST" ] ]
     ]
   },

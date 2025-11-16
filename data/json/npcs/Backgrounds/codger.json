@@ -60,9 +60,7 @@
     "id": "BGSS_CODGER_STORY5",
     "type": "talk_topic",
     "dynamic_line": "A gorram moose!  Livin' in the ol' ranger station!  It near gored Rusty, but he fired up that 18 gauge and blew a big hole in its hide.  Ol' 18 gauge went headin' for the hills but we tracked him down.  Moose went down like a bag o' potatoes, but a real big bag iff'n y'catch m'drift.",
-    "responses": [
-      { "text": "I see.", "topic": "BGSS_CODGER_STORY6" }
-    ]
+    "responses": [ { "text": "I see.", "topic": "BGSS_CODGER_STORY6" } ]
   },
   {
     "id": "BGSS_CODGER_STORY6",
@@ -71,9 +69,6 @@
       "gendered_line": "Anyway, long story short, I were headin' back up to Mount Greenwood to check on th'old ranger station again when I heard them bombs fallin and choppers flyin.  Decided to camp out there to see it all through, but it didn't ever end, now, did it?  So here I am.",
       "relevant_genders": [ "npc" ]
     },
-    "responses": [
-      { "text": "That's quite the story.", "topic": "TALK_FRIEND_CONVERSATION" },
-      { "text": "…", "topic": "TALK_DONE" }
-    ]
+    "responses": [ { "text": "That's quite the story.", "topic": "TALK_FRIEND_CONVERSATION" }, { "text": "…", "topic": "TALK_DONE" } ]
   }
 ]
