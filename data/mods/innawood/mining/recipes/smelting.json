@@ -170,9 +170,9 @@
     "batch_time_factors": [ 90, 4 ],
     "autolearn": true,
     "book_learn": [ [ "recipe_bullets", 2 ], [ "textbook_fabrication", 2 ], [ "welding_book", 2 ] ],
-    "//": "Galena has around 86% yield of lead, yield here is just over 82%, due to one output weighing 300 grams.  Silver output is around double the expected 2% yield due to minimum of 300 grams.  Output volume is still oversize.",
-    "result_mult": 21,
-    "byproducts": [ [ "silver_small" ] ],
+    "//": "Galena has around 86% yield of lead by weight, and around 2% of silver.",
+    "result_mult": 594,
+    "byproducts": [ [ "silver_small", 30 ] ],
     "using": [ [ "forging_standard", 3 ] ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [ [ [ "chunk_galena", 1 ] ] ]
