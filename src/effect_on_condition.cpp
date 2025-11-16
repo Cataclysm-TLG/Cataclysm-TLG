@@ -252,7 +252,7 @@ void effect_on_conditions::queue_effect_on_condition( time_duration duration,
 static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_condition_id> &eoc_vector,
                           dialogue &d )
 {
-    static int reentrancy_depth = 0;
+    static std::size_t reentrancy_depth = 0;
     ++reentrancy_depth;
 
     std::vector<queued_eocs::storage_iter> &eocs_to_queue = []() ->
