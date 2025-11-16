@@ -359,7 +359,7 @@
     "//": "Materials for glazing pottery",
     "components": [
       [
-        [ "edible_tallow", 1, "LIST" ],
+        [ "edible_shortening", 1, "LIST" ],
         [ "cooking_oil", 8 ],
         [ "cooking_oil2", 8 ],
         [ "wax", 1 ],

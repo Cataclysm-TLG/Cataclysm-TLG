@@ -705,13 +705,13 @@
     "symbol": "%",
     "quench": -2,
     "calories": 440,
-    "description": "A concentrated mixture of fat and protein, first said to have been used as a nutritious high-energy food by the Querecho and Teya people of what is Texas today.  Composed of meat, tallow, and edible berries, it provides excellent nutrition in an easy to carry form.",
+    "description": "Shredded dehydrated meat with bits of dried fruit for flavor, held together and protected from moisture in a brick of solid fat.  This survival food was first created by indigenous Americans and still remains one of the best sources of shelf-stable travel-ready calories.",
     "price": "6 USD",
     "price_postapoc": "3 USD 50 cent",
     "material": [ "flesh", "fruit" ],
     "volume": "120 ml",
     "vitamins": [ [ "vitC", 3 ], [ "calcium", 5 ], [ "iron", 21 ], [ "meat_allergen", 1 ], [ "fruit_allergen", 1 ] ],
-    "fun": 3
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
@@ -729,13 +729,13 @@
     "symbol": "%",
     "quench": -2,
     "calories": 440,
-    "description": "A concentrated mixture of fat and protein, first said to have been used as a nutritious high-energy food by the Querecho and Teya people of what is Texas today.  Composed of meat, tallow, and edible plants or mushrooms, it provides excellent nutrition in an easy to carry form.",
+    "description": "Shredded dehydrated meat with bits of dried vegetable or mushroom for flavor, held together and protected from moisture in a brick of solid fat.  This survival food was first created by indigenous Americans and still remains one of the best sources of shelf-stable travel-ready calories.",
     "price": "5 USD 99 cent",
     "price_postapoc": "3 USD 50 cent",
     "material": [ "flesh", "vegetable" ],
     "volume": "120 ml",
     "vitamins": [ [ "vitC", 3 ], [ "calcium", 5 ], [ "iron", 21 ], [ "meat_allergen", 1 ], [ "vegetable_allergen", 1 ] ],
-    "fun": 3
+    "fun": 2
   },
   {
     "type": "COMESTIBLE",
@@ -753,7 +753,7 @@
     "symbol": "%",
     "quench": -3,
     "calories": 400,
-    "description": "A concentrated mixture of fat and protein, first said to have been used as a nutritious high-energy food by the Querecho and Teya people of what is Texas today.  Composed of meat and tallow, it provides excellent nutrition in an easy to carry form.  Contains no fruits or veggies.",
+    "description": "Shredded dehydrated meat, held together and protected from moisture in a brick of solid fat.  This survival food was first created by indigenous Americans and still remains one of the best sources of shelf-stable travel-ready calories.",
     "price": "5 USD",
     "price_postapoc": "3 USD",
     "material": [ "flesh" ],

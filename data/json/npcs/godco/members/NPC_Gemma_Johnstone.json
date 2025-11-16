@@ -153,7 +153,13 @@
     "type": "talk_topic",
     "id": "TALK_GODCO_Gemma_Joinee",
     "dynamic_line": "You are most welcome here.  In the good old days we would've held a ceremony for you.  Oh well, times have changed.  Accept this blanket, you may choose either bed by the window.  If you're hungry, you can go see Simon for a meal, up to one per day.",
-    "speaker_effect": { "effect": [ { "u_set_fac_relation": "share public goods" }, { "u_spawn_item": "blanket" }, { "u_add_var": "general_meeting_godco_joinee", "value": "yes" } ] },
+    "speaker_effect": {
+      "effect": [
+        { "u_set_fac_relation": "share public goods" },
+        { "u_spawn_item": "blanket" },
+        { "u_add_var": "general_meeting_godco_joinee", "value": "yes" }
+      ]
+    },
     "responses": [ { "text": "Thank you.  See you around, Gemma.", "topic": "TALK_DONE" } ]
   },
   {

@@ -1323,6 +1323,8 @@
       [ "powder_eggs", 10 ],
       { "group": "egg_bird_unfert_carton_egg_10" },
       [ "cooking_oil", 20 ],
+      { "item": "cooking_oil_coconut", "prob": 3 },
+      { "item": "shortening_vegetable", "prob": 3 },
       { "item": "apple", "prob": 5, "custom-flags": [ "IRRADIATED" ] },
       { "item": "banana", "prob": 5, "custom-flags": [ "IRRADIATED" ] },
       { "item": "strawberries", "prob": 5, "custom-flags": [ "IRRADIATED" ] },

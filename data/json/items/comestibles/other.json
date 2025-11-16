@@ -1126,7 +1126,7 @@
     "type": "COMESTIBLE",
     "id": "snail_garden",
     "category": "food",
-    "name": { "str": "snail" },
+    "name": { "str": "garden snail" },
     "weight": "15 g",
     "color": "brown",
     "use_action": [ "POISON" ],
@@ -1199,5 +1199,55 @@
     "volume": "500 ml",
     "symbol": "B",
     "color": "yellow"
+  },
+    {
+    "type": "COMESTIBLE",
+    "id": "akutaq",
+    "looks_like": "icecream",
+    "name": { "str_sp": "akutaq" },
+    "conditional_names": [
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "survivor sundae" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "abominable akutaq" } }
+    ],
+    "weight": "65 g",
+    "color": "white",
+    "spoils_in": "90 days",
+    "comestible_type": "FOOD",
+    "symbol": "%",
+    "quench": -2,
+    "calories": 686,
+    "description": "Also called Inuit or Alaskan ice cream, this is a dense mix of solid fat and sugar that makes for a sweet dessert reminiscent of cake frosting.  It is a traditional food of people throughout the arctic, providing a massive amount of energy to fuel a difficult lifestyle in grueling conditions.",
+    "price": "3 USD",
+    "price_postapoc": "10 cent",
+    "material": [ "sugar" ],
+    "volume": "260 ml",
+    "vitamins": [ [ "junk_allergen", 1 ] ],
+    "fun": 3,
+    "flags": [ "EATEN_COLD" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "akutaq_fruit",
+    "looks_like": "icecream",
+    "name": { "str_sp": "akutaq with fruit" },
+    "conditional_names": [
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "survivor sundae with fruit" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "abominable akutaq with fruit" } }
+    ],
+    "weight": "70 g",
+    "color": "white",
+    "spoils_in": "14 days",
+    "comestible_type": "FOOD",
+    "symbol": "%",
+    "quench": -2,
+    "calories": 686,
+    "description": "Also called Inuit or Alaskan ice cream, this is a dense mix of solid fat, fruit, and sugar that makes for a sweet dessert reminiscent of cake frosting.  It is a traditional food of people throughout the arctic, providing a massive amount of energy to fuel a difficult lifestyle in grueling conditions.",
+    "price": "2 USD",
+    "price_postapoc": "50 cent",
+    "material": [ "sugar" ],
+    "volume": "300 ml",
+    "vitamins": [ [ "junk_allergen", 1 ], [ "fruit_allergen", 1 ] ],
+    "fun": 5,
+    "flags": [ "EATEN_COLD" ]
   }
 ]

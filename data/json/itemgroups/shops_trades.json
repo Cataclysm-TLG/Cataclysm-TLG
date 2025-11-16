@@ -4,6 +4,8 @@
     "type": "item_group",
     "items": [
       [ "cooking_oil", 15 ],
+      { "item": "cooking_oil_coconut", "prob": 5 },
+      { "item": "tallow", "prob": 5 },
       [ "mag_fabrication", 15 ],
       [ "manual_fabrication", 5 ],
       [ "mag_survival", 10 ],

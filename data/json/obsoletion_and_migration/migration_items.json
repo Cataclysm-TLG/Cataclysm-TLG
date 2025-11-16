@@ -3057,5 +3057,10 @@
     "type": "MIGRATION",
     "id": "bot_science_bot",
     "replace": "bot_skitterbot"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tallow_tainted",
+    "replace": "tallow"
   }
 ]

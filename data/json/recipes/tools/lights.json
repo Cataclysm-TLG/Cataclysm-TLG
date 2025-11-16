@@ -11,10 +11,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
     "flags": [ "FULL_MAGAZINE" ],
     "tools": [ [ [ "lighter", 5 ], [ "ref_lighter", 5 ], [ "surface_heat", 2, "LIST" ] ] ],
-    "components": [
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 8, "LIST" ], [ "edible_lard", 8, "LIST" ] ],
-      [ [ "cordage_short", 1, "LIST" ] ]
-    ]
+    "components": [ [ [ "wax_any", 2, "LIST" ], [ "edible_shortening", 8, "LIST" ] ], [ [ "cordage_short", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
