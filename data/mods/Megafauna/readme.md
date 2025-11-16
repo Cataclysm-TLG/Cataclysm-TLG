@@ -1,7 +1,7 @@
 **Description**
 Through the portals rupturing reality in the cataclysm, you were sucked into a world yet untouched by humans. Here you encounter massive animals that seem almost out of place, but eerily familiar at the same time. You know this megafauna went extinct just around the time your ancestors first set foot on this land some 10.000 years ago. Distant memories of these Pleistocenic animals rest deep in your conscious. 
 
-Adds 17 lorefriendly megafauna species especially suited for innawood playthroughs. Features all-time favorites like Woolly Mammoths, Mastodons and Sabre-toothed Cats. Hunt them ruthlessly like our ancestors did, or befriend and try to domesticate them. But beware you don't get eaten or trampled before.
+Adds 17 lorefriendly megafauna species especially suited for innawood playthroughs. Features all-time favorites like Woolly Mammoths, Mastodons and saber-toothed Cats. Hunt them ruthlessly like our ancestors did, or befriend and try to domesticate them. But beware you don't get eaten or trampled before.
 
 At the same time, species introduced in modern times are removed! E.g.: wild boars, cows, cats, dogs, ... 
 
@@ -19,7 +19,7 @@ This mod is still work-in-progress, but a basic set of 21 new Pleistocene-era an
 **full list of new animals**
 - woolly mammoths
 - mastodons
-- sabre toothed cat
+- saber toothed cat
 - dire wolf
 - american cave lion
 - giant short faced bear
@@ -52,7 +52,7 @@ This mod is still work-in-progress, but a basic set of 21 new Pleistocene-era an
 
 *eggs* (chicken, ducks, geese) = Auks; ducks and geese are still in.
 
-*pet* (dogs, cats) = bobcats, dire wolves and sabre cats are tamable pets, a few other tameable creatures can be petted as well.
+*pet* (dogs, cats) = bobcats, dire wolves and saber cats are tamable pets, a few other tameable creatures can be petted as well.
 
 
 **Development Notes/ToDo**
@@ -98,14 +98,14 @@ Add new monsters to monster groups/implement spawn:
 - flesh out behaviour (like scent_tracked)
 
 *Additional/Future*
-Think of cool stuff to do with animal products, like sabrecat teeth or mammoth tusks (i.e., adjust/make new harvest groups)
+Think of cool stuff to do with animal products, like sabercat teeth or mammoth tusks (i.e., adjust/make new harvest groups)
 In any case, think about if recipes need to be adjusted for anything.
 [done]Think about how some of these could fill gaps for farming, like peccaries as substitute for pig/boars, or anything woolly for... wool.
 [done]Maybe some flavourful special attacks
 
 Think of specials that could fit:
     - mammoth graveyard
-    - special sabrecat and cave lion caves
+    - special sabercat and cave lion caves
     - watering holes with lots of animals-
     - giant sloth burrows
     - rocky islands for auks
@@ -113,7 +113,7 @@ Think of specials that could fit:
 
 Mutations/Mutagen line fitting the setting:
     - Mammoth (look at mastodon in Aftershock?)
-    - Sabre Cat
+    - saber Cat
     - Glyptodon/Armadillo
     - Ground sloth
 
