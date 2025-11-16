@@ -252,8 +252,25 @@ void effect_on_conditions::queue_effect_on_condition( time_duration duration,
 static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_condition_id> &eoc_vector,
                           dialogue &d )
 {
-    static std::vector<std::pair<queued_eoc *, queued_eocs::storage_iter>> eocs_to_queue;
-    eocs_to_queue.clear();
+    static std::size_t reentrancy_depth = 0;
+    ++reentrancy_depth;
+
+    std::vector<queued_eocs::storage_iter> &eocs_to_queue = []() ->
+    std::vector<queued_eocs::storage_iter>& {
+        static std::list<std::vector<queued_eocs::storage_iter>> cached_queues;
+        while( cached_queues.size() < reentrancy_depth )
+        {
+            cached_queues.emplace_back();
+        }
+        auto it = cached_queues.begin();
+        std::advance( it, reentrancy_depth - 1 );
+        return *it;
+    }();
+
+    on_out_of_scope cleanup{ [&] {
+            --reentrancy_depth;
+            eocs_to_queue.clear();
+        } };
 
     while( !eoc_queue.empty() &&
            eoc_queue.top().time <= calendar::turn ) {
@@ -269,12 +286,12 @@ static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_conditio
         if( top.eoc->type == eoc_type::RECURRING ) {
             if( activated ) { // It worked so add it back
                 it->time = calendar::turn + next_recurrence( top.eoc, d );
-                eocs_to_queue.emplace_back( &( *it ), it );
+                eocs_to_queue.emplace_back( it );
             } else {
                 if( !top.eoc->check_deactivate(
                         nested_d ) ) { // It failed but shouldn't be deactivated so add it back
                     it->time = calendar::turn + next_recurrence( top.eoc, d );
-                    eocs_to_queue.emplace_back( &( *it ), it );
+                    eocs_to_queue.emplace_back( it );
                 } else { // It failed and should be deactivated for now
                     eoc_vector.push_back( top.eoc );
                     eoc_queue.list.erase( it );
@@ -284,10 +301,8 @@ static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_conditio
             eoc_queue.list.erase( it );
         }
     }
-    for( auto &[ptr, iter] : eocs_to_queue ) {
-        if( iter != eoc_queue.list.end() && &( *iter ) == ptr ) {
-            eoc_queue.queue.emplace( iter );
-        }
+    for( queued_eocs::storage_iter &q_eoc : eocs_to_queue ) {
+        eoc_queue.queue.emplace( q_eoc );
     }
 }
 
