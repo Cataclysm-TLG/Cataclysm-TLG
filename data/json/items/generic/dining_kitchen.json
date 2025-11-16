@@ -1506,7 +1506,15 @@
     "weight": "11388 g",
     "volume": "30 L",
     "longest_side": "35 cm",
-    "pocket_data": [ { "max_contains_volume": "2 L", "max_contains_weight": "2100 g", "watertight": true, "rigid": true } ],
+    "pocket_data": [
+      {
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "2100 g",
+        "watertight": true,
+        "open_container": true,
+        "rigid": true
+      }
+    ],
     "extend": { "qualities": [ [ "OVEN", 1 ] ] },
     "melee_damage": { "bash": 8 }
   },
