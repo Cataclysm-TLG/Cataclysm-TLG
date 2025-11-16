@@ -269,7 +269,15 @@
     "material": [ "clay" ],
     "symbol": ")",
     "color": "brown",
-    "pocket_data": [ { "max_contains_volume": "2 L", "max_contains_weight": "2100 g", "watertight": true, "rigid": true } ],
+    "pocket_data": [
+      {
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "2100 g",
+        "watertight": true,
+        "open_container": true,
+        "rigid": true
+      }
+    ],
     "qualities": [ [ "COOK", 3 ], [ "BOIL", 2 ], [ "CONTAIN", 1 ], [ "CHEM", 1 ] ],
     "use_action": [ "HEAT_ALL_ITEMS" ],
     "flags": [ "ALLOWS_REMOTE_USE" ],
@@ -303,7 +311,15 @@
     "material": [ "clay" ],
     "symbol": ")",
     "color": "brown",
-    "pocket_data": [ { "max_contains_volume": "750 ml", "max_contains_weight": "2 kg", "watertight": true, "rigid": true } ],
+    "pocket_data": [
+      {
+        "max_contains_volume": "750 ml",
+        "max_contains_weight": "2 kg",
+        "watertight": true,
+        "open_container": true,
+        "rigid": true
+      }
+    ],
     "qualities": [ [ "BOIL", 1 ] ],
     "use_action": [ "HEAT_LIQUID_ITEMS" ],
     "melee_damage": { "bash": 1 }
