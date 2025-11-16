@@ -1297,9 +1297,9 @@ void Character::hardcoded_effects( effect &it )
                 mod_pain( 1 );
             } else if( one_in( 3000 ) ) {
                 if( one_in( 10 ) ) {
-                    add_msg_if_player( m_bad, _( "The bugs are back." ) );
+                add_msg_if_player( m_bad, _( "The bugs are back." ) );
                 } else {
-                    add_msg_if_player( m_bad, _( "It feels like there are tiny bugs crawling over your body." ) );
+                add_msg_if_player( m_bad, _( "It feels like there are tiny bugs crawling over your body." ) );
                 }
                 const bodypart_id &itch = random_body_part( true );
                 schedule_effect( effect_formication, 60_minutes * rng_float( 0.75f, 1.25f ), itch );
@@ -1317,8 +1317,7 @@ void Character::hardcoded_effects( effect &it )
         } else if( int_cur < 14 ) {
             add_msg_if_player( m_bad, _( "Something is tracking you from a direction you can't perceive." ) );
         } else {
-            add_msg_if_player( m_bad,
-                               _( "Something stalks you across the angles of spacetime.  It will come from the corners!" ) );
+            add_msg_if_player( m_bad, _( "Something stalks you across the angles of spacetime.  It will come from the corners!" ) );
         }
         for( const tripoint_bub_ms &dest : here.points_in_radius( pos, 6 ) ) {
             if( here.is_cornerfloor( dest ) ) {
@@ -1401,9 +1400,9 @@ void Character::hardcoded_effects( effect &it )
                 add_msg_if_player( m_bad, _( "Your muscles are tight and sore." ) );
             } else if( msg == 2 ) {
                 add_msg_if_player( m_bad, _( "Your muscles feel like they're knotted and tired." ) );
-            } else if( msg == 3 ) {
+            } else if( msg == 3 ) {                
                 add_msg_if_player( m_bad, _( "You can't stop clenching your jaw." ) );
-            } else if( msg == 4 ) {
+            } else if( msg == 4 ) {                
                 add_msg_if_player( m_bad, _( "You feel a general malaise." ) );
             }
         }
