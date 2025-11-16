@@ -16,7 +16,7 @@
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "components": [
       [ [ "scrap", 4 ] ],
-      [ [ "lead", 3200 ] ],
+      [ [ "lead", 1600 ] ],
       [ [ "chem_sulphuric_acid", 13 ] ],
       [ [ "water", 2 ], [ "water_clean", 2 ] ],
       [ [ "clay_lump", 5 ] ]

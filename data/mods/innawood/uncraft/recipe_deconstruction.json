@@ -5,7 +5,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "chem_sulphuric_acid", 13 ] ], [ [ "lead", 2247 ] ], [ [ "ceramic_shard", 3 ] ] ]
+    "components": [ [ [ "chem_sulphuric_acid", 13 ] ], [ [ "lead", 1123 ] ], [ [ "ceramic_shard", 3 ] ] ]
   },
   {
     "result": "heavy_dry_cell",
