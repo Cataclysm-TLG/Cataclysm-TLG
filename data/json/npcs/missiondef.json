@@ -34,8 +34,8 @@
     "id": "MISSION_GET_INHALER",
     "type": "mission_definition",
     "name": { "str": "Find Inhaler" },
-    "goal": "MGOAL_FIND_ITEM",
-    "item": "inhaler",
+    "goal": "MGOAL_CONDITION",
+    "goal_condition": { "math": [ "u_charge_count('inhaler') >= 1"] },
     "difficulty": 2,
     "value": 150000,
     "urgent": true,
@@ -43,13 +43,13 @@
     "deadline": [ "2 days", "3 days" ],
     "dialogue": {
       "describe": "I'm… short… of breath…",
-      "offer": "I'm asthmatic.  I need you to get an inhaler for me…",
-      "accepted": "Oh, thank god, thank you so much!  I won't last more than a couple of days, so hurry…",
-      "rejected": "What?!  Please, <ill_die> without your help!",
-      "advice": "There's a town nearby.  Check pharmacies; it'll be behind the counter.",
-      "inquire": "Find any inhaler yet?",
-      "success": "Oh thank god!  I'll be right as rain in no time.",
-      "success_lie": "What?!  You're lying, I can tell!  Ugh, forget it!",
+      "offer": "I have asthma.  I need you to get an inhaler for me…",
+      "accepted": "Thank you!  This attack is really bad… I'm not sure how long I can live… like this… ",
+      "rejected": "What?!  Please, <ill_die> without… your help!",
+      "advice": "Make sure it still has… some charges left…",
+      "inquire": "Have you… got… an inhaler?",
+      "success": "Alright, as long as I have one of these, I should be fine.",
+      "success_lie": "You're lying… I can tell!  Ugh, forget it!",
       "failure": "How am I not dead already?!"
     },
     "start": {
@@ -60,7 +60,7 @@
         { "clear_npc_rule": "investigate_noises" }
       ]
     },
-    "end": { "effect": [ "stop_guard", { "set_npc_rule": "investigate_noises" }, { "u_sell_item": "inhaler" }, "npc_thankful" ] },
+    "end": { "effect": [ { "u_sell_item": "inhaler" }, "stop_guard", { "set_npc_rule": "investigate_noises" }, "npc_thankful" ] },
     "fail": { "effect": "npc_die" }
   },
   {
@@ -71,30 +71,47 @@
     "difficulty": 2,
     "value": 150000,
     "urgent": true,
-    "goal_condition": { "or": [ { "u_has_item": "antibiotics" }, { "u_has_item": "strong_antibiotic" }, { "u_has_item": "panacea" } ] },
-    "origins": [ "ORIGIN_OPENER_NPC" ],
-    "deadline": "1 day",
+    "goal_condition": {
+      "u_has_items_sum": [
+        { "item": "antibiotics", "amount": 1 },
+        { "item": "strong_antibiotic", "amount": 1 },
+        { "item": "panacea", "amount": 1 }
+      ]
+    },
+    "origins": [ "ORIGIN_OPENER_NPC", "ORIGIN_ANY_NPC" ],
+    "deadline": [ "1 day", "2 days" ],
     "dialogue": {
       "describe": "This infection is bad, <very> bad…",
-      "offer": "I'm infected.  Badly.  I need you to get some good antibiotics for me…",
-      "accepted": "Oh, thank god, thank you so much!  I won't last more than a couple of days, so hurry…",
+      "offer": "I have an infected wound.  I need you to get some antibiotics for me…",
+      "accepted": "Oh, thank you, thank you so much!  I probably don't have long, so hurry…",
       "rejected": "What?!  Please, <ill_die> without your help!",
-      "advice": "There's a town nearby.  Check pharmacies; it'll be behind the counter, either antibiotics or broad-spectrum antibiotics will do.",
+      "advice": "Maybe check a pharmacy, behind the counter, or there might be some in somebody's bathroom.",
       "inquire": "Find any antibiotics yet?",
-      "success": "Oh thank god!  I'll be right as rain in no time.",
+      "success": "Yes!  I'll be right as rain in no time.",
       "success_lie": "What?!  You're lying, I can tell!  Ugh, forget it!",
       "failure": "How am I not dead already?!"
     },
     "start": {
       "effect": [
         { "npc_add_effect": "infection", "duration": "PERMANENT" },
-        { "npc_remove_item_with": "antibiotics" },
         "assign_guard",
         { "clear_npc_rule": "investigate_noises" }
       ]
     },
     "end": {
-      "effect": [ { "npc_lose_effect": "infection" }, "stop_guard", { "set_npc_rule": "investigate_noises" }, "npc_thankful" ]
+      "effect": [
+        { "npc_lose_effect": "infection" },
+        {
+          "u_consume_item_sum": [
+            { "item": "antibiotics", "amount": 1 },
+            { "item": "strong_antibiotic", "amount": 1 },
+            { "item": "panacea", "amount": 1 }
+          ]
+        },
+        "stop_guard",
+        { "set_npc_rule": "investigate_noises" },
+        "npc_thankful"
+      ]
     },
     "fail": { "effect": "npc_die" }
   },
@@ -794,13 +811,37 @@
       "describe": "It's hard to tell who actually has the skills to survive these days…",
       "offer": "It's hard surviving out here on our own, and we'd probably have a better chance working together.  Problem is, I don't really know you and what you're capable of.  You might have what it takes, or you might not.  Either way, I'm going to need some proof.  Come back in a few days and I'll gladly follow you.  It's basically a win-win for me: either you come back and I'll know you've got what it takes, or you don't and I'll know that I was right not to follow you.",
       "accepted": "I'll see you then… or I won't, and then I'll know I made the right decision.",
-      "rejected": "Ya, it was a long shot I admit.",
+      "rejected": "Yeah, it was a long shot I admit.",
       "advice": "Don't die.  If you're asking me for advice, that doesn't bode well for you.",
       "inquire": "Well, you're not dead… yet.",
       "success": "I'll be honest, I wasn't really expecting to see you again.  A promise is a promise, I'll follow you now!",
       "success_lie": "I know time is relative and all that.",
       "failure": "I'm not quite sure how you failed to survive AND are talking to me."
     }
+  },
+  {
+    "id": "MISSION_JOIN_YOU",
+    "type": "mission_definition",
+    "name": { "str": "Let Somebody Join" },
+    "goal": "MGOAL_CONDITION",
+    "goal_condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 0" ] },
+    "difficulty": 1,
+    "value": 0,
+    "urgent": true,
+    "has_generic_rewards": false,
+    "origins": [ "ORIGIN_OPENER_NPC", "ORIGIN_ANY_NPC" ],
+    "dialogue": {
+      "describe": "Another survivor!",
+      "offer": "We should travel together.",
+      "accepted": "We can keep each other safe.",
+      "rejected": "Ugh, forget it then, I'll figure something out on my own.",
+      "advice": "It's crazy out there, nobody's going to make it on their own.",
+      "inquire": "Well…?",
+      "success": "Great!  I'm with you.",
+      "success_lie": "Wait, were you being sarcastic?",
+      "failure": "Ugh, forget it then, I'll figure something out on my own."
+    },
+    "start": { "effect": "follow" }
   },
   {
     "id": "MISSION_LEARN_ABOUT_CATTAIL_JELLY",
