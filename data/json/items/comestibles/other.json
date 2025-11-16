@@ -1200,7 +1200,7 @@
     "symbol": "B",
     "color": "yellow"
   },
-    {
+  {
     "type": "COMESTIBLE",
     "id": "akutaq",
     "looks_like": "icecream",
@@ -1232,7 +1232,11 @@
     "name": { "str_sp": "akutaq with fruit" },
     "conditional_names": [
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "survivor sundae with fruit" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "abominable akutaq with fruit" } }
+      {
+        "type": "COMPONENT_ID_SUBSTRING",
+        "condition": "mutant",
+        "name": { "str_sp": "abominable akutaq with fruit" }
+      }
     ],
     "weight": "70 g",
     "color": "white",
