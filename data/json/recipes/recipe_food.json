@@ -2723,29 +2723,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "dandelionburdock_tea",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "copy-from": "herbal_tea_from_tea_bag",
-    "difficulty": 1,
-    "flags": [ "NO_MORALE_OK" ],
-    "book_learn": {
-      "pocket_survival": { "skill_level": 1 },
-      "survival_book": { "skill_level": 1 },
-      "textbook_survival": { "skill_level": 1 },
-      "manual_survival": { "skill_level": 1 },
-      "mag_survival": { "skill_level": 1 },
-      "family_cookbook": { "skill_level": 1 },
-      "cookbook_daintydishes": { "skill_level": 2, "recipe_name": "Royal Penny Tea" }
-    },
-    "qualities": [ { "id": "BOIL", "level": 1 }, { "id": "CUT", "level": 1 } ],
-    "tools": [ [ [ "water_boiling_heat", 2, "LIST" ] ] ],
-    "proficiencies": [ { "proficiency": "prof_forage_cooking" } ],
-    "components": [ [ [ "raw_dandelion", 1 ] ], [ [ "raw_burdock", 1 ] ], [ [ "water", 1 ], [ "water_clean", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "chicory_coffee",
     "category": "CC_FOOD",

@@ -3062,5 +3062,10 @@
     "type": "MIGRATION",
     "id": "tallow_tainted",
     "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "dandelionburdock_tea",
+    "replace": "dandelion_tea"
   }
 ]
