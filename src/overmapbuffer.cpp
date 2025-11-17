@@ -219,7 +219,15 @@ void overmapbuffer::fix_npcs( overmap &new_overmap )
             // bounding box for new_overmap in omt coords
             const half_open_rectangle<point_abs_omt> om_bounds( project_to<coords::omt>( loc ),
                     project_to<coords::omt>( loc + point( 1, 1 ) ) ); // NOLINT(cata-use-named-point-constants)
-            const tripoint_abs_omt adjusted_omt_pos( clamp( npc_omt_pos.xy(), om_bounds ),  npc_omt_pos.z() );
+            const point_abs_omt minp = om_bounds.p_min;
+            const point_abs_omt maxp = om_bounds.p_max - point( 1, 1 ); // Half-open rectangle.
+
+            const point_abs_omt clamped_xy(
+                std::clamp( npc_omt_pos.x(), minp.x(), maxp.x() ),
+                std::clamp( npc_omt_pos.y(), minp.y(), maxp.y() )
+            );
+
+            const tripoint_abs_omt adjusted_omt_pos( clamped_xy, npc_omt_pos.z() );
             np.spawn_at_omt( adjusted_omt_pos );
             new_overmap.npcs.push_back( ptr );
             continue;
