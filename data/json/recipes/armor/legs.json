@@ -455,7 +455,7 @@
     "subcategory": "CSC_ARMOR_LEGS",
     "skill_used": "fabrication",
     "difficulty": 7,
-    "time": "190 m",
+    "time": "20 h",
     "book_learn": [ [ "textbook_armwest", 6 ] ],
     "using": [ [ "blacksmithing_standard", 28 ], [ "steel_standard", 7 ], [ "strap_small", 4 ], [ "clasps", 4 ] ],
     "proficiencies": [
@@ -471,7 +471,7 @@
     "result": "platemail_leg_guards_xs",
     "type": "recipe",
     "copy-from": "platemail_leg_guards",
-    "time": "190 m",
+    "time": "16 h",
     "using": [ [ "blacksmithing_standard", 20 ], [ "steel_standard", 5 ], [ "strap_small", 3 ], [ "clasps", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "swage", -1 ] ] ]
@@ -480,7 +480,7 @@
     "result": "platemail_leg_guards_xl",
     "type": "recipe",
     "copy-from": "platemail_leg_guards",
-    "time": "3 h 30 m",
+    "time": "24 h",
     "using": [ [ "blacksmithing_standard", 36 ], [ "steel_standard", 9 ], [ "strap_small", 4 ], [ "clasps", 4 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "swage", -1 ] ] ]
@@ -493,7 +493,7 @@
     "subcategory": "CSC_ARMOR_LEGS",
     "skill_used": "fabrication",
     "difficulty": 6,
-    "time": "160 m",
+    "time": "12 h",
     "book_learn": [ [ "textbook_armwest", 5 ] ],
     "using": [ [ "blacksmithing_standard", 24 ], [ "steel_standard", 4 ], [ "strap_small", 8 ], [ "clasps", 2 ] ],
     "proficiencies": [
@@ -972,14 +972,14 @@
     "result": "chainmail_skirt_xs",
     "type": "recipe",
     "copy-from": "chainmail_skirt",
-    "time": "3 h",
+    "time": "2 h 20 m",
     "using": [ [ "armor_chainmail_assembling", 3 ], [ "strap_small", 1 ], [ "clasps", 2 ] ]
   },
   {
     "result": "chainmail_skirt_xl",
     "type": "recipe",
     "copy-from": "chainmail_skirt",
-    "time": "3 h 23 m",
+    "time": "3 h 20 m",
     "using": [ [ "armor_chainmail_assembling", 5 ], [ "strap_small", 4 ], [ "clasps", 2 ] ]
   },
   {
