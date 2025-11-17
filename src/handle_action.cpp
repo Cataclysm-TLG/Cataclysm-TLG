@@ -2427,6 +2427,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                 }
 
                 if( get_option<bool>( "AUTO_FEATURES" ) && get_option<bool>( "AUTO_MOPPING" ) &&
+                    !player_character.get_mon_visible().has_dangerous_creature_in_proximity &&
                     weapon && weapon->has_flag( json_flag_MOP ) ) {
                     const bool is_blind = player_character.is_blind();
                     for( const tripoint_bub_ms &point : here.points_in_radius( player_character.pos_bub(), 1 ) ) {
