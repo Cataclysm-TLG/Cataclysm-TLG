@@ -6538,8 +6538,6 @@
     "description": "Your face and jaw have begun… changing.  Masks and such fit OK, but you're noticeably mutated.",
     "types": [ "MUZZLE" ],
     "changes_to": [
-      "BEAK",
-      "PROBOSCIS",
       "MINOTAUR",
       "MUZZLE_RAPTOR",
       "MUZZLE",
@@ -6549,11 +6547,8 @@
       "RABBIT_NOSE"
     ],
     "category": [
-      "BIRD",
-      "CEPHALOPOD",
       "FELINE",
       "RAPTOR",
-      "INSECT",
       "CATTLE",
       "BEAST",
       "LUPINE",
@@ -8009,7 +8004,7 @@
     "prereqs": [ "CHITIN", "THICKSKIN" ],
     "cancels": [ "CHITIN2", "CHITIN2_MOLTED", "CRUSTACEAN_CARAPACE", "CRUSTACEAN_CARAPACE_MOLTED" ],
     "changes_to": [ "SHELL2" ],
-    "category": [ "CEPHALOPOD", "GASTROPOD" ],
+    "category": [ "GASTROPOD" ],
     "wet_protection": [ { "part": "torso", "ignored": 26 } ],
     "integrated_armor": [ "integrated_shell" ],
     "restricts_gear": [ "torso" ],
@@ -8030,7 +8025,7 @@
     "changes_to": [ "SHELL3" ],
     "prereqs": [ "SHELL" ],
     "threshreq": [ "THRESH_CEPHALOPOD", "THRESH_GASTROPOD" ],
-    "category": [ "CEPHALOPOD", "GASTROPOD" ],
+    "category": [ "GASTROPOD" ],
     "wet_protection": [ { "part": "torso", "ignored": 26 } ],
     "active": true,
     "integrated_armor": [ "integrated_shell2" ],
@@ -9455,7 +9450,7 @@
     "types": [ "SKIN" ],
     "changes_to": [ "CAMO2" ],
     "category": [ "CEPHALOPOD" ],
-    "enchantments": [ { "values": [ { "value": "STEALTH_MODIFIER", "add": 20 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STEALTH_MODIFIER", "add": -10 } ] } ]
   },
   {
     "type": "mutation",
