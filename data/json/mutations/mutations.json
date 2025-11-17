@@ -9450,7 +9450,7 @@
     "types": [ "SKIN" ],
     "changes_to": [ "CAMO2" ],
     "category": [ "CEPHALOPOD" ],
-    "enchantments": [ { "values": [ { "value": "STEALTH_MODIFIER", "add": -5 } ] } ]
+    "enchantments": [ { "values": [ { "value": "STEALTH_MODIFIER", "add": -10 } ] } ]
   },
   {
     "type": "mutation",
