@@ -369,7 +369,7 @@
     "tool_ammo": [ "battery" ]
   },
   {
-    "id": "eggs_ferment",
+    "id": "eggs_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting eggs jar" },
@@ -382,16 +382,9 @@
     "material": [ "glass", "egg" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "pickled_egg",
-      "container": "jar_glass_sealed",
-      "target_charges": 10,
-      "msg": "You examine the batch and see that the pickling solution has done its job, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The eggs are not done yet."
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "pickled_egg", "container": "jar_glass_sealed", "target_charges": 10 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -416,7 +409,7 @@
     "tool_ammo": [ "esbit" ]
   },
   {
-    "id": "flask_yeast",
+    "id": "flask_yeast_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str_sp": "sealed yeast culture" },
@@ -429,18 +422,9 @@
     "material": [ "glass", "powder" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "yeast",
-      "msg": "You open the jar and harvest the culture.",
-      "container": "jar_glass_sealed",
-      "target_charges": 50,
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 43200,
-      "not_ready_msg": "The yeast isn't done culturing yet.",
-      "//": "12 hours"
-    },
-    "flags": [ "TRADER_AVOID" ],
+    "countdown_interval": "12 hours",
+    "transform_into": { "target": "yeast", "container": "jar_glass_sealed", "target_charges": 50 },
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -784,7 +768,7 @@
     "melee_damage": { "bash": 10 }
   },
   {
-    "id": "pickles_ferment",
+    "id": "pickles_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting pickle jar" },
@@ -797,17 +781,9 @@
     "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "pickle",
-      "container": "jar_glass_sealed",
-      "target_charges": 2,
-      "msg": "You test the batch, and it tastes good, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The pickles are not done fermenting yet.",
-      "//": "2 1/3 days, from the suggested recipe of 1 rl week"
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "pickle", "container": "jar_glass_sealed", "target_charges": 8 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 8 }
   },
   {
@@ -870,7 +846,7 @@
     "melee_damage": { "bash": 5 }
   },
   {
-    "id": "sauerkraut_ferment",
+    "id": "sauerkraut_ferment_active",
     "type": "ITEM",
     "category": "food",
     "name": { "str": "fermenting sauerkraut jar" },
@@ -883,17 +859,9 @@
     "material": [ "glass", "vegetable" ],
     "symbol": "%",
     "color": "white",
-    "use_action": {
-      "target": "sauerkraut",
-      "container": "jar_glass_sealed",
-      "target_charges": 2,
-      "msg": "You test the batch, and it tastes good, so you seal the jar up for storage.",
-      "moves": 50,
-      "type": "delayed_transform",
-      "transform_age": 201600,
-      "not_ready_msg": "The sauerkraut isn't done fermenting yet.",
-      "//": "2 1/3 days, from the suggested recipe of 1 rl week"
-    },
+    "countdown_interval": "56 hours",
+    "transform_into": { "target": "sauerkraut", "container": "jar_glass_sealed", "target_charges": 2 },
+    "flags": [ "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 4 }
   },
   {
