@@ -919,7 +919,12 @@ static void haul()
             if( haulable_items != player_character.haul_list ) {
                 player_character.suppress_autohaul = true;
             }
-            player_character.start_hauling( haulable_items );
+            // Only start hauling if items were selected; stop if all items were deselected
+            if( !haulable_items.empty() ) {
+                player_character.start_hauling( haulable_items );
+            } else if( player_character.is_hauling() ) {
+                player_character.stop_hauling();
+            }
         }
         break;
         case 3:
