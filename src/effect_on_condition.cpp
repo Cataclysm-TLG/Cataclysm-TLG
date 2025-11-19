@@ -263,7 +263,7 @@ static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_conditio
         static std::list<std::vector<queued_eocs::storage_iter>> cached_queues;
         if( reentrancy_depth < 0 )
         {
-            debugmsg( "How can we unrecurse more than we recurse?" );
+            debugmsg( "EOC: reentrancy depth < 0, something has gone horribly wrong." );
         }
         while( cached_queues.size() < static_cast<size_t>( reentrancy_depth ) )
         {
