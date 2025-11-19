@@ -252,25 +252,8 @@ void effect_on_conditions::queue_effect_on_condition( time_duration duration,
 static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_condition_id> &eoc_vector,
                           dialogue &d )
 {
-    static int reentrancy_depth = 0;
-    ++reentrancy_depth;
-
-    std::vector<queued_eocs::storage_iter> &eocs_to_queue = []() ->
-    std::vector<queued_eocs::storage_iter>& {
-        static std::list<std::vector<queued_eocs::storage_iter>> cached_queues;
-        while( cached_queues.size() < reentrancy_depth )
-        {
-            cached_queues.emplace_back();
-        }
-        auto it = cached_queues.begin();
-        std::advance( it, reentrancy_depth - 1 );
-        return *it;
-    }();
-
-    on_out_of_scope cleanup{ [&] {
-            --reentrancy_depth;
-            eocs_to_queue.clear();
-        } };
+    static std::vector<queued_eocs::storage_iter> eocs_to_queue;
+    eocs_to_queue.clear();
 
     while( !eoc_queue.empty() &&
            eoc_queue.top().time <= calendar::turn ) {
