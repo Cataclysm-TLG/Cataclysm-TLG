@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <iterator>
 #include <list>
 #include <memory>
 #include <unordered_map>
@@ -11,6 +12,7 @@
 
 #include "avatar.h"
 #include "calendar.h"
+#include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "cata_variant.h"
 #include "character.h"
@@ -252,13 +254,18 @@ void effect_on_conditions::queue_effect_on_condition( time_duration duration,
 static void process_eocs( queued_eocs &eoc_queue, std::vector<effect_on_condition_id> &eoc_vector,
                           dialogue &d )
 {
-    static std::size_t reentrancy_depth = 0;
+    static int reentrancy_depth = 0;
     ++reentrancy_depth;
 
-    std::vector<queued_eocs::storage_iter> &eocs_to_queue = []() ->
-    std::vector<queued_eocs::storage_iter>& {
+    // Have to use a typedef because astyle does not settle on the spacing for the & when inline.
+    using queue_t = std::vector<queued_eocs::storage_iter> &;
+    queue_t eocs_to_queue = []() -> queue_t {
         static std::list<std::vector<queued_eocs::storage_iter>> cached_queues;
-        while( cached_queues.size() < reentrancy_depth )
+        if( reentrancy_depth < 0 )
+        {
+            debugmsg( "EOC: reentrancy depth < 0, something has gone horribly wrong." );
+        }
+        while( cached_queues.size() < static_cast<size_t>( reentrancy_depth ) )
         {
             cached_queues.emplace_back();
         }
