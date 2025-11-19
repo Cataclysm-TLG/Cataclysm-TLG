@@ -69,27 +69,6 @@
     ]
   },
   {
-    "name": "GROUP_REINDEER",
-    "type": "monstergroup",
-    "monsters": [
-      { "monster": "mon_reindeer", "weight": 150, "cost_multiplier": 2 },
-      {
-        "monster": "mon_reindeer_fawn",
-        "weight": 25,
-        "pack_size": [ 1, 3 ],
-        "ends": "28 days",
-        "conditions": [ "AUTUMN", "WINTER", "SPRING" ]
-      },
-      {
-        "monster": "mon_reindeer_fawn",
-        "weight": 12,
-        "pack_size": [ 1, 3 ],
-        "starts": "28 days",
-        "conditions": [ "AUTUMN", "WINTER", "SPRING" ]
-      }
-    ]
-  },
-  {
     "name": "GROUP_DEER_MUT_SPIDERS",
     "type": "monstergroup",
     "//": "Mutant deer are better prepared to protect/escape with their spawn than normal deer, so, contrary to normal wildlife, their spawn becomes more common as time goes on.",
