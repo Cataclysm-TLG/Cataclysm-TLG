@@ -23,7 +23,7 @@
     "type": "MONSTER_FACTION",
     "name": "human",
     "neutral": [ "mech_bot", "passive_machine" ],
-    "by_mood": [ "isolated_artisans", "yrax" ]
+    "by_mood": [ "yrax" ]
   },
   {
     "type": "MONSTER_FACTION",
@@ -80,21 +80,20 @@
     "name": "small_animal",
     "base_faction": "animal",
     "friendly": [ "attack_player_only" ],
-    "neutral": [ "zombie", "fish", "isolated_artisans", "nether", "animal", "yrax", "passive_machine" ],
+    "neutral": [ "zombie", "fish", "nether", "animal", "yrax", "passive_machine" ],
     "by_mood": [ "cat", "bear", "fox", "big_cat", "dog", "wolf", "dog_small" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "herbivore",
     "base_faction": "animal",
-    "neutral": [ "small_animal", "fish", "isolated_artisans", "yrax", "passive_machine" ],
-    "by_mood": [ "herbivore_domestic" ]
+    "neutral": [ "small_animal", "fish", "yrax", "passive_machine", "herbivore_domestic" ]
   },
   {
     "type": "MONSTER_FACTION",
     "name": "herbivore_domestic",
     "base_faction": "herbivore",
-    "by_mood": [ "herbivore" ]
+    "neutral": [ "herbivore" ]
   },
   {
     "type": "MONSTER_FACTION",
@@ -394,7 +393,6 @@
       "corvid",
       "ratkin",
       "lab_mutant",
-      "isolated_artisans",
       "yrax",
       "mi-go",
       "seweranha",
@@ -611,19 +609,11 @@
   },
   {
     "type": "MONSTER_FACTION",
-    "name": "isolated_artisans",
-    "base_faction": "human",
-    "neutral": [ "fish", "small_animal", "herbivore", "passive_machine" ],
-    "by_mood": [ "animal", "nether", "human" ],
-    "hate": [ "zombie", "fungus", "triffid", "mi-go" ]
-  },
-  {
-    "type": "MONSTER_FACTION",
     "name": "mi-go",
     "base_faction": "nether",
     "neutral": [ "fish", "yrax", "small_animal", "slime", "passive_machine" ],
     "by_mood": [ "nether" ],
-    "hate": [ "zombie", "triffid", "fungus", "isolated_artisans" ]
+    "hate": [ "zombie", "triffid", "fungus" ]
   },
   {
     "type": "MONSTER_FACTION",
