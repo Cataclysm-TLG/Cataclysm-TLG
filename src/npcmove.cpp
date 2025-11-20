@@ -1144,7 +1144,9 @@ void npc::act_on_danger_assessment()
                 add_msg_debug( debugmode::DF_NPC_COMBATAI, "%s still wants to reposition, but they just tried.",
                                name );
             }
-            mem_combat.panic *= ( mem_combat.assess_enemy / ( mem_combat.assess_ally + 0.5f ) );
+            // Changed from *= to += to prevent exponential panic growth (linear scaling instead)
+            mem_combat.panic += std::max( 0, static_cast<int>(
+                                              ( mem_combat.assess_enemy / ( mem_combat.assess_ally + 0.5f ) ) - 1.0f ) );
             mem_combat.panic += std::min(
                                     rng( 1, 3 ) + ( get_pain() / 5 ) - personality.bravery, 1 );
 
