@@ -127,6 +127,7 @@
     "flags": [ "BELTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "pocket_data": [
       {
+        "holster": true,
         "magazine_well": "200 ml",
         "pocket_type": "CONTAINER",
         "min_item_volume": "100 ml",
