@@ -66,22 +66,6 @@ jobs:
             ext: zip
             content: application/zip
             sound: 1
-          - name: Windows Tiles x64
-            mxe: x86_64
-            libbacktrace: 1
-            artifact: windows-tiles-x64
-            os: ubuntu-latest
-            ext: zip
-            content: application/zip
-            sound: 0
-          - name: Windows Tiles Sounds x64
-            mxe: x86_64
-            libbacktrace: 1
-            artifact: windows-tiles-sounds-x64
-            os: ubuntu-latest
-            ext: zip
-            content: application/zip
-            sound: 1
           - name: Linux Tiles x64
             os: ubuntu-22.04
             mxe: none
