@@ -653,7 +653,6 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "thermal_socks_on",
-      "active": true,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -709,7 +708,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "thermal_suit_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -765,7 +764,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "thermal_gloves_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -821,7 +820,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "thermal_mask_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -901,7 +900,7 @@
       "type": "transform",
       "msg": "You turn the headlamp on.",
       "target": "wearable_light_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The headlamp's batteries are dead."
     },
@@ -1061,7 +1060,7 @@
       "msg": "You open the headlamp's cover.",
       "menu_text": "Open cover",
       "target": "wearable_atomic_light",
-      "active": true
+       
     }
   },
   {
@@ -1212,7 +1211,7 @@
       "menu_text": "Turn on headlamps",
       "msg": "\"Activating illumination.\"",
       "target": "helmet_eod_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "\"Illumination disabled, low power.\""
     },
@@ -1258,7 +1257,7 @@
       "type": "transform",
       "msg": "An LED light in the %s flickers on.",
       "target": "dimensional_anchor_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "It seems like this device needs power."
     },
@@ -1298,7 +1297,7 @@
       "type": "transform",
       "msg": "The %s emits a low-pitched clicking alarm as its mounted LED light flashes yellow.",
       "target": "broken_dimensional_anchor",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "It seems like this device needs power."
     }
@@ -1323,7 +1322,7 @@
       "type": "transform",
       "msg": "Initiating\nRunning suit integrity diagnostics…\nAll systems operational.",
       "target": "phase_immersion_suit_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "Warning: Operating on minimal power.  Protection compromised."
     },
@@ -1528,7 +1527,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "rebreather_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     },
@@ -1586,7 +1585,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "rebreather_xl_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     },
@@ -1650,7 +1649,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "rebreather_xs_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     },
@@ -2241,7 +2240,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "goggles_nv_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -2297,7 +2296,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "goggles_ir_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's batteries are dead."
     },
@@ -2423,7 +2422,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "mask_h2osurvivor_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     },
@@ -2488,7 +2487,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "mask_h2osurvivor_xl_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     }
@@ -2506,7 +2505,7 @@
       "type": "transform",
       "msg": "You activate your %s.",
       "target": "mask_h2osurvivor_xs_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The %s's filter is used up."
     },
@@ -2827,7 +2826,7 @@
       "type": "transform",
       "msg": "You turn the earmuffs on.",
       "target": "powered_earmuffs_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The earmuff's batteries are dead."
     },
@@ -2913,7 +2912,7 @@
       "type": "transform",
       "msg": "You turn the earplugs on.",
       "target": "powered_earplugs_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The earplugs' batteries are dead."
     },
@@ -3361,7 +3360,7 @@
         "type": "transform",
         "msg": "You turn the blanket's heating elements on.",
         "target": "electric_blanket_on",
-        "active": true,
+         ,
         "need_charges": 1,
         "need_charges_msg": "The blanket's batteries are dead."
       },
@@ -3501,7 +3500,7 @@
       "type": "transform",
       "msg": "You turn the flight helmet on.",
       "target": "flight_helmet_on",
-      "active": true,
+       ,
       "need_charges": 1,
       "need_charges_msg": "The helmet's batteries are dead."
     },

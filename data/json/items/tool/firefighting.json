@@ -101,7 +101,7 @@
       "target_timer": "3 seconds",
       "menu_text": "Pull plug",
       "msg": "You pull the plug on the extinguisher grenade.",
-      "active": true,
+       ,
       "type": "transform"
     },
     "flags": [ "ACT_IN_FIRE", "BOMB", "GRENADE" ],

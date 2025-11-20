@@ -47,7 +47,7 @@
             { "turn_cost": 0.8 },
             { "u_make_sound": "With a roar, the chainsaw screams to life!", "type": "combat", "volume": 20 },
             { "u_message": "With a roar, the chainsaw screams to life!" },
-            { "transform_item": "chainsaw_on", "active": true },
+            { "transform_item": "chainsaw_on",   },
             { "sound_effect": "chainsaw_on", "id": "chainsaw_cord" },
             { "sound_effect": "chainsaw_on", "id": "chainsaw_start" }
           ],

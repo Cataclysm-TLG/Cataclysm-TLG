@@ -7970,7 +7970,7 @@ bool item::process_decay( Character *carrier, int decay_hours,
         time_duration decay_countdown = time_duration::from_seconds( item_counter ) + time_delta *
                                         rng_normal( 0.9, 1.1 );
         if( decay_countdown >= time_duration::from_hours( decay_hours ) ) {
-            convert( *type->revert_to, carrier );
+            type->transform_into.value().transform( carrier, *this, true );
             return true;
         }
         item_counter = to_seconds<int>( decay_countdown );
@@ -13371,7 +13371,7 @@ bool item::process_temperature_rot( float insulation, const tripoint_bub_ms &pos
     time_point time = last_temp_check;
     item_internal::scoped_goes_bad_cache _cache( this );
     const bool process_rot = goes_bad() && spoil_modifier != 0;
-    const bool decays = has_flag( flag_DECAYS ) && type->revert_to;
+    const bool decays = has_flag( flag_DECAYS ) && type->transform_into;
     const bool decays_in_air = !watertight_container && has_flag( flag_DECAYS_IN_AIR ) &&
                                type->transform_into;
     int64_t decay_hours = ( decays || decays_in_air ) ? get_property_int64_t( "decay_hours" ) :
