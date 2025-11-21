@@ -1484,7 +1484,7 @@
       { "name": "stinking gas", "sym": ".", "dangerous": false, "transparent": true, "concentration": 1,
         "effects": [
           {
-            "effect_id": "nauseated",
+            "effect_id": "nausea",
             "intensity": 1,
             "min_duration": "1 minutes",
             "max_duration": "4 minutes",
