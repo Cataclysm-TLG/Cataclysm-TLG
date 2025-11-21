@@ -165,6 +165,22 @@
     ]
   },
   {
+    "result": "anvil_bronze",
+    "type": "recipe",
+    "activity_level": "ACTIVE_EXERCISE",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "fabrication",
+    "difficulty": 4,
+    "time": "6 h",
+    "autolearn": true,
+    "using": [ [ "forging_standard", 45 ] ],
+    "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
+    "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "DIGGING", "level": 2 } ],
+    "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
+    "components": [ [ [ "scrap_bronze", 90 ] ] ]
+  },
+  {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "mop",
