@@ -2685,5 +2685,10 @@
     "id": "NO_DRENCH",
     "type": "json_flag",
     "//": "This character can't get wet."
+  },
+  {
+    "id": "VERMINOUS",
+    "//": "This character is immune to sewer gas and doesn't mind wearing filthy gear.",
+    "type": "json_flag"
   }
 ]

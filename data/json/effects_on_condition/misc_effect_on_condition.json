@@ -189,29 +189,32 @@
     "type": "effect_on_condition",
     "id": "sewer_morale_debuff",
     "global": false,
-    "recurrence": [ "20 minutes", "1 hour" ],
+    "recurrence": [ "3 minutes", "30 minutes" ],
     "condition": {
-      "or": [
+      "and": [ 
+      { "not": { "u_has_flag": "VERMINOUS" } },
+      { "or": [
         { "u_at_om_location": "sewer" },
         { "u_at_om_location": "pump_station_3" },
         { "u_at_om_location": "pump_station_4" },
         { "u_at_om_location": "pump_station_5" }
-      ]
+      ] }
+    ]
     },
     "effect": [
       { "u_message": "<SEWER_MORALE_DEBUFF>", "snippet": true },
       {
         "if": { "u_has_trait": "SQUEAMISH" },
         "then": [
-          { "u_add_morale": "morale_hates_sewer", "bonus": -20, "max_bonus": -40, "duration": "1 hour", "decay_start": "1 hour" }
+          { "u_add_morale": "morale_hates_sewer", "bonus": -20, "max_bonus": -40, "duration": "30 minutes", "decay_start": "30 minutes" }
         ],
         "else": [
           {
             "u_add_morale": "morale_dislikes_sewer",
             "bonus": -10,
             "max_bonus": -20,
-            "duration": "1 hour",
-            "decay_start": "1 hour"
+            "duration": "30 minutes",
+            "decay_start": "30 minutes"
           }
         ]
       }
@@ -220,12 +223,12 @@
   {
     "id": "morale_hates_sewer",
     "type": "morale_type",
-    "text": "Hates being in sewer"
+    "text": "Revolted by sewage"
   },
   {
     "id": "morale_dislikes_sewer",
     "type": "morale_type",
-    "text": "Dislikes being in sewer"
+    "text": "Disgusting by sewage"
   },
   {
     "type": "effect_on_condition",

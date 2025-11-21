@@ -1479,25 +1479,34 @@
   {
     "id": "fd_swamp_gas",
     "type": "field_type",
-    "substance_name": "swamp gas",
+    "substance_name": "stinking gas",
     "intensity_levels": [
-      { "name": "swamp gas", "sym": ".", "dangerous": true, "translucency": 5, "concentration": 1 },
+      { "name": "stinking gas", "sym": ".", "dangerous": false, "transparent": true, "concentration": 1,
+        "effects": [
+          {
+            "effect_id": "nausea",
+            "intensity": 1,
+            "min_duration": "1 minutes",
+            "max_duration": "4 minutes",
+            "immune_inside_vehicle": true,
+            "message": "The horrible stench makes you sick to your stomach.",
+            "message_type": "bad"
+          }
+        ] },
       { "//": "repeat last entry" },
       { "//": "repeat last entry" }
     ],
     "decay_amount_factor": 5,
     "gas_absorption_factor": "80m",
     "percent_spread": 25,
-    "outdoor_age_speedup": "1 minutes",
-    "dirty_transparency_cache": true,
+    "outdoor_age_speedup": "40 seconds",
     "has_fume": true,
-    "immunity_data": { "body_part_env_resistance": [ [ "mouth", 15 ] ] },
+    "immunity_data": { "flags": [ "VERMINOUS" ], "body_part_env_resistance": [ [ "mouth", 6 ] ] },
     "priority": 8,
-    "half_life": "15 minutes",
+    "half_life": "5 minutes",
     "phase": "gas",
-    "display_items": false,
-    "display_field": true,
-    "looks_like": "fd_nuke_gas"
+    "display_items": true,
+    "display_field": false
   },
   {
     "id": "fd_fog",

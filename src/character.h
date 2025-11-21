@@ -3515,8 +3515,10 @@ class Character : public Creature, public visitable
             const itype_id &,
             std::map<recipe_id, std::pair<nutrients, nutrients>> &rec_cache,
             const cata::flat_set<flag_id> &extra_flags = {} ) const;
+
         /** Returns allergy type or morale_type::NULL_ID() if not allergic for this character */
         morale_type allergy_type( const item &food ) const;
+
         nutrients compute_effective_nutrients( const item & ) const;
         /** Returns true if the character is wearing something on the entered body part. Ignores INTEGRATED */
         bool wearing_something_on( const bodypart_id &bp ) const;
@@ -3529,6 +3531,9 @@ class Character : public Creature, public visitable
         int shoe_type_count( const itype_id &it ) const;
         /** Returns true if the player is wearing something on their feet that is not SKINTIGHT */
         bool is_wearing_shoes( const side &check_side = side::BOTH ) const;
+
+        // Adjusted squeamish penalty for traits and other issues.
+        int get_squeamish_penalty( const bodypart_id &bp ) const;
 
         /** Returns true if the player is not wearing anything that covers the soles of their feet,
             ignoring INTEGRATED */

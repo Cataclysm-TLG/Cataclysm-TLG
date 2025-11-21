@@ -1171,12 +1171,15 @@ void player_morale::update_constrained_penalty()
 
 void player_morale::update_squeamish_penalty()
 {
+    Character &you = get_player_character();
     int penalty = 0;
     for( const std::pair<const bodypart_id, body_part_data> &bpt : body_parts ) {
         if( bpt.second.filthy > 0 ) {
-            penalty += bpt.first->squeamish_penalty;
+            penalty += you.get_squeamish_penalty( bpt.first );
         }
     }
-    penalty += 2 * std::min( static_cast<int>( no_body_part.filthy ), 3 );
+    if( penalty > 0 ) {
+        penalty += 2 * std::min( static_cast<int>( no_body_part.filthy ), 3 );
+    }
     set_permanent( morale_perm_filthy, -penalty );
 }
