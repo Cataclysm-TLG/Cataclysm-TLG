@@ -364,30 +364,6 @@
                   { "item": "sparkling", "container-item": "bottle_plastic", "count": [ 1, 6 ], "sealed": false }
                 ],
                 "prob": 10
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_peach", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_peach",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 10
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_pomegranate", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_pomegranate",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 10
               }
             ],
             "prob": 45
@@ -414,9 +390,7 @@
               { "item": "zeroorange", "count": [ 1, 6 ], "prob": 15 },
               { "item": "zerotropical", "count": [ 1, 6 ], "prob": 15 },
               { "item": "zeromdew", "count": [ 1, 6 ], "prob": 10 },
-              { "item": "sparkling", "count": [ 1, 6 ], "prob": 20 },
-              { "item": "sparkling_peach", "count": [ 1, 6 ], "prob": 20 },
-              { "item": "sparkling_pomegranate", "count": [ 1, 6 ], "prob": 20 }
+              { "item": "sparkling", "count": [ 1, 6 ], "prob": 20 }
             ],
             "prob": 10
           },
@@ -432,14 +406,7 @@
               { "item": "zeroorange", "charges": [ 1, -1 ], "prob": 5, "container-item": "bottle_twoliter" },
               { "item": "zerotropical", "charges": [ 1, -1 ], "prob": 5, "container-item": "bottle_twoliter" },
               { "item": "zeromdew", "charges": [ 1, -1 ], "prob": 5, "container-item": "bottle_twoliter" },
-              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
-              { "item": "sparkling_peach", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
-              {
-                "item": "sparkling_pomegranate",
-                "charges": [ 1, -1 ],
-                "prob": 10,
-                "container-item": "bottle_twoliter"
-              }
+              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" }
             ],
             "prob": 10
           }
@@ -680,30 +647,6 @@
                   { "item": "sparkling", "container-item": "bottle_plastic", "count": [ 1, 6 ], "sealed": false }
                 ],
                 "prob": 15
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_peach", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_peach",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 15
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_pomegranate", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_pomegranate",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 15
               }
             ],
             "prob": 30
@@ -726,9 +669,7 @@
               { "item": "zeroorange", "count": [ 1, 6 ], "prob": 10 },
               { "item": "zerotropical", "count": [ 1, 6 ], "prob": 10 },
               { "item": "zeromdew", "count": [ 1, 6 ], "prob": 5 },
-              { "item": "sparkling", "count": [ 1, 6 ], "prob": 15 },
-              { "item": "sparkling_peach", "count": [ 1, 6 ], "prob": 15 },
-              { "item": "sparkling_pomegranate", "count": [ 1, 6 ], "prob": 15 }
+              { "item": "sparkling", "count": [ 1, 6 ], "prob": 15 }
             ],
             "prob": 8
           },
@@ -744,14 +685,7 @@
               { "item": "zeroorange", "charges": [ 1, -1 ], "prob": 15, "container-item": "bottle_twoliter" },
               { "item": "zerotropical", "charges": [ 1, -1 ], "prob": 15, "container-item": "bottle_twoliter" },
               { "item": "zeromdew", "charges": [ 1, -1 ], "prob": 55, "container-item": "bottle_twoliter" },
-              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
-              { "item": "sparkling_peach", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
-              {
-                "item": "sparkling_pomegranate",
-                "charges": [ 1, -1 ],
-                "prob": 10,
-                "container-item": "bottle_twoliter"
-              }
+              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" }
             ],
             "prob": 15
           }
@@ -1254,30 +1188,6 @@
                   { "item": "sparkling", "container-item": "bottle_plastic", "count": [ 1, 6 ], "sealed": false }
                 ],
                 "prob": 15
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_peach", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_peach",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 15
-              },
-              {
-                "collection": [
-                  { "item": "sparkling_pomegranate", "charges": 1, "container-item": "bottle_plastic", "prob": 50, "sealed": false },
-                  {
-                    "item": "sparkling_pomegranate",
-                    "container-item": "bottle_plastic",
-                    "count": [ 1, 6 ],
-                    "sealed": false
-                  }
-                ],
-                "prob": 15
               }
             ],
             "prob": 10
@@ -1305,9 +1215,7 @@
               { "item": "zeroorange", "count": [ 0, 6 ], "prob": 10 },
               { "item": "zerotropical", "count": [ 0, 6 ], "prob": 10 },
               { "item": "zeromdew", "count": [ 1, 6 ], "prob": 5 },
-              { "item": "sparkling", "count": [ 1, 6 ], "prob": 15 },
-              { "item": "sparkling_peach", "count": [ 1, 6 ], "prob": 15 },
-              { "item": "sparkling_pomegranate", "count": [ 1, 6 ], "prob": 15 }
+              { "item": "sparkling", "count": [ 1, 6 ], "prob": 15 }
             ],
             "prob": 10
           },
@@ -1323,14 +1231,7 @@
               { "item": "zeroorange", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
               { "item": "zerotropical", "charges": [ 1, -1 ], "prob": 10, "container-item": "bottle_twoliter" },
               { "item": "zeromdew", "charges": [ 1, -1 ], "prob": 5, "container-item": "bottle_twoliter" },
-              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 15, "container-item": "bottle_twoliter" },
-              { "item": "sparkling_peach", "charges": [ 1, -1 ], "prob": 15, "container-item": "bottle_twoliter" },
-              {
-                "item": "sparkling_pomegranate",
-                "charges": [ 1, -1 ],
-                "prob": 15,
-                "container-item": "bottle_twoliter"
-              }
+              { "item": "sparkling", "charges": [ 1, -1 ], "prob": 15, "container-item": "bottle_twoliter" }
             ],
             "prob": 15
           }

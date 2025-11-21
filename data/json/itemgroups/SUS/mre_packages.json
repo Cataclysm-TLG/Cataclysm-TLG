@@ -104,9 +104,7 @@
       {
         "distribution": [
           { "item": "instant_coffee", "count": 1, "container-item": "bag_zipper" },
-          { "item": "lemonade_powder", "count": 1, "container-item": "bag_zipper" },
-          { "item": "orangeade_powder", "count": 1, "container-item": "bag_zipper" },
-          { "item": "grapeade_powder", "count": 1, "container-item": "bag_zipper" }
+          { "item": "lemonade_powder", "count": 1, "container-item": "bag_zipper" }
         ]
       }
     ]

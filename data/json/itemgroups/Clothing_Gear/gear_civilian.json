@@ -286,7 +286,6 @@
     "id": "npc_hacker",
     "items": [
       [ "energy_drink", 55 ],
-      [ "energy_drink_atomic", 12 ],
       [ "mag_computer", 45 ],
       [ "mag_electronics", 25 ],
       [ "colamdew", 50 ],
