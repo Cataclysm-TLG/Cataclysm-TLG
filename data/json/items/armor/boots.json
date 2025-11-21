@@ -517,7 +517,7 @@
     "category": "armor",
     "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
     "description": "Leather boots armor-plated with squares of sheet metal.",
-    "weight": "2200 g",
+    "weight": "2460 g",
     "volume": "3250 ml",
     "price": "50 USD",
     "price_postapoc": "6 USD",
@@ -541,7 +541,7 @@
         "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
         "material": [
           { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 }
+          { "type": "steel", "covered_by_mat": 90, "thickness": 2.0 }
         ],
         "encumbrance": 32,
         "coverage": 100
