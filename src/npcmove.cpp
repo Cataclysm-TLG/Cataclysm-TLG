@@ -2745,7 +2745,7 @@ int npc::confident_throw_range( const item &thrown, Creature *target ) const
 bool npc::wont_hit_friend( const tripoint_bub_ms &tar, const item &it, bool throwing ) const
 {
     if( !throwing && it.is_gun() && it.empty() ) {
-        return true;    // Prevent calling nullptr ammo_data
+        return false;    // Empty gun is not safe to shoot, prevents nullptr ammo_data
     }
 
     if( throwing && rl_dist( pos_bub(), tar ) == 1 ) {
