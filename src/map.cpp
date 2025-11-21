@@ -6017,7 +6017,7 @@ void map::process_items_in_vehicle( vehicle &cur_veh, submap &current_submap )
 bool map::sees_some_items( const tripoint_bub_ms &p, const Creature &who ) const
 {
     // Can only see items if there are any items.
-    return has_items( p ) && could_see_items( p, who.pos_bub() );
+    return has_items( p ) && could_see_items( p, who );
 }
 
 bool map::sees_some_items( const tripoint_bub_ms &p, const tripoint_bub_ms &from ) const
@@ -6027,6 +6027,18 @@ bool map::sees_some_items( const tripoint_bub_ms &p, const tripoint_bub_ms &from
 
 bool map::could_see_items( const tripoint_bub_ms &p, const Creature &who ) const
 {
+    static const std::string container_string( "CONTAINER" );
+    const bool container = has_flag_ter_or_furn( container_string, p );
+    const bool sealed = has_flag_ter_or_furn( ter_furn_flag::TFLAG_SEALED, p );
+    if( sealed && container ) {
+        // never see inside of sealed containers
+        return false;
+    }
+    // NPCs can see inside non-sealed containers from any visible distance
+    // This allows them to path to and pick up items from furniture like fridges
+    if( who.is_npc() && container && !sealed ) {
+        return true;
+    }
     return could_see_items( p, who.pos_bub() );
 }
 
