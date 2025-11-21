@@ -279,7 +279,7 @@ struct body_part_type {
         float bmi_encumbrance_scalar = 0;
         float smash_efficiency = 0.5f;
 
-        //Morale parameters
+        // Morale parameters
         float hot_morale_mod = 0.0f;
         float cold_morale_mod = 0.0f;
         float stylish_bonus = 0.0f;
@@ -476,6 +476,7 @@ class bodypart
         float get_wetness_percentage() const;
 
         int get_encumbrance_threshold() const;
+
         // Check if we're above our encumbrance limit
         bool is_limb_overencumbered() const;
         bool has_conditional_flag( const json_character_flag &flag ) const;

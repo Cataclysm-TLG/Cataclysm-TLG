@@ -16,8 +16,8 @@
       "z": "t_metal_floor",
       "Z": "t_metal_floor",
       "6": "t_metal_floor",
-      "~": "t_sewage",
-      "_": [ [ "t_moss", 2 ], [ "t_dirtmound", 4 ], [ "t_sewage", 4 ] ],
+      "~": "t_sewage_underground",
+      "_": [ [ "t_moss", 2 ], [ "t_dirtmound", 4 ], [ "t_sewage_underground", 4 ] ],
       "-": "t_bridge",
       "#": "t_grate",
       "<": "t_ladder_up",
@@ -27,6 +27,7 @@
     "traps": { "?": [ "tr_cot" ] },
     "furniture": {
       "r": "f_utility_shelf",
+      "~": [ [ "f_null", 200 ], [ "f_sewer_gas", 1 ] ],
       "/": "f_rubble",
       "O": "f_55gal_firebarrel",
       "B": "f_cardboard_box",

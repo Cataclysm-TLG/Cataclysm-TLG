@@ -390,7 +390,8 @@
     "type": "emit",
     "field": "fd_swamp_gas",
     "intensity": 1,
-    "chance": 15
+    "chance": 55,
+    "qty": 3
   },
   {
     "id": "emit_fog_plume",

@@ -273,7 +273,8 @@
       "SCHIZOPHRENIC",
       "TOLERANCE",
       "TREE_COMMUNION",
-      "VANITY"
+      "VANITY",
+      "VERMIN"
     ],
     "description": "Your mind and brain chemistry are not mutated."
   },
@@ -4328,7 +4329,7 @@
     "name": { "str": "Saprovore" },
     "points": 2,
     "description": "Your digestive system is specialized to allow you to consume decaying material.  You can eat rotten food, albeit for less nutrition than usual.",
-    "category": [ "TROGLOBITE", "CHIMERA", "GASTROPOD", "MOUSE" ],
+    "category": [ "TROGLOBITE", "CHIMERA", "GASTROPOD", "INSECT" ],
     "flags": [ "IMMUNE_SPOIL" ]
   },
   {
@@ -9077,7 +9078,8 @@
     "name": { "str": "Squeamish" },
     "points": -1,
     "starting_trait": true,
-    "description": "You can't even think about putting filthy clothes on yourself, especially from zombies' corpses."
+    "cancels": [ "VERMINOUS" ],
+    "description": "You're finicky, maybe even germophobic.  You can't willingly wear filthy items, and certain foods may be especially upsetting to you."
   },
   {
     "type": "mutation",
@@ -9271,6 +9273,17 @@
     ],
     "enchantments": [ "ench_quadruped_movement_half" ],
     "category": [ "RABBIT" ]
+  },
+  {
+    "type": "mutation",
+    "id": "VERMINOUS",
+    "name": { "str": "Verminous" },
+    "points": 1,
+    "description": "You're accustomed to filth, and don't mind being covered in or surrounded by it.  This does not confer any resistance to illness or infection.",
+    "cancels": [ "SQUEAMISH" ],
+    "category": [ "RAT", "INSECT", "GASTROPOD", "TROGLOBITE" ],
+    "prereqs": [ "EATDEAD", "EATPOISON", "SAPROVORE" ],
+    "flags": [ "VERMINOUS" ]
   },
   {
     "type": "mutation",

@@ -2517,15 +2517,6 @@
   },
   {
     "type": "effect_type",
-    "id": "rat",
-    "name": [ "Ratting" ],
-    "desc": [ "You feel nauseated and rat-like." ],
-    "max_intensity": 100,
-    "base_mods": { "int_mod": [ -0.5 ], "str_mod": [ -0.2 ], "per_mod": [ -0.4 ] },
-    "scaling_mods": { "int_mod": [ -0.5 ], "str_mod": [ -0.2 ], "per_mod": [ -0.4 ] }
-  },
-  {
-    "type": "effect_type",
     "id": "pblue",
     "base_mods": { "rad_chance": [ 600 ], "rad_min": [ -1 ] },
     "max_duration": 10800,

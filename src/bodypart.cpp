@@ -34,6 +34,10 @@ const bodypart_str_id body_part_leg_r( "leg_r" );
 const bodypart_str_id body_part_mouth( "mouth" );
 const bodypart_str_id body_part_torso( "torso" );
 
+static const json_character_flag json_flag_VERMINOUS( "VERMINOUS" );
+
+static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
+
 side opposite_side( side s )
 {
     switch( s ) {

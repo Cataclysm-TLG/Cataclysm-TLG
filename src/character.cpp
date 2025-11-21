@@ -353,6 +353,7 @@ static const json_character_flag json_flag_STOP_SLEEP_DEPRIVATION( "STOP_SLEEP_D
 static const json_character_flag json_flag_SUPER_CLAIRVOYANCE( "SUPER_CLAIRVOYANCE" );
 static const json_character_flag json_flag_TOUGH_FEET( "TOUGH_FEET" );
 static const json_character_flag json_flag_UNCANNY_DODGE( "UNCANNY_DODGE" );
+static const json_character_flag json_flag_VERMINOUS( "VERMINOUS" );
 static const json_character_flag json_flag_WALK_UNDERWATER( "WALK_UNDERWATER" );
 static const json_character_flag json_flag_WATCH( "WATCH" );
 static const json_character_flag json_flag_WEBBED_FEET( "WEBBED_FEET" );
@@ -506,6 +507,7 @@ static const trait_id trait_SLIMESPAWNER( "SLIMESPAWNER" );
 static const trait_id trait_SLIMY( "SLIMY" );
 static const trait_id trait_SPINES( "SPINES" );
 static const trait_id trait_SPIRITUAL( "SPIRITUAL" );
+static const trait_id trait_SQUEAMISH( "SQUEAMISH" );
 static const trait_id trait_STRONGBACK( "STRONGBACK" );
 static const trait_id trait_SUNLIGHT_DEPENDENT( "SUNLIGHT_DEPENDENT" );
 static const trait_id trait_THORNS( "THORNS" );
@@ -4383,6 +4385,17 @@ void Character::calc_discomfort()
             add_effect( effect_chafing, 1_turns, bp, true, 1 );
         }
     }
+}
+
+int Character::get_squeamish_penalty( const bodypart_id &bp ) const
+{
+    int penalty = bp->squeamish_penalty;
+    if( has_flag( json_flag_VERMINOUS ) ) {
+        penalty = 0;
+    } else if( has_trait( trait_SQUEAMISH ) ) {
+        penalty = static_cast<int>( round( penalty * 1.5 ) );
+    }
+    return penalty;
 }
 
 void Character::calc_encumbrance()
