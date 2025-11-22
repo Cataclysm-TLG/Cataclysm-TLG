@@ -169,7 +169,7 @@
     "id": "gauntlets_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "chitinous gauntlets", "str_pl": "pairs of chitinous gauntlets" },
+    "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
     "description": "A pair of gauntlets made from arthropod exoskeleton.  Though intricately articulated and padded by unsclerotized material, they do not cover the tips of the fingers.",
     "weight": "760 g",
     "volume": "1750 ml",
@@ -181,7 +181,7 @@
     "looks_like": "leather_gauntlets",
     "color": "green",
     "warmth": 5,
-    "material_thickness": 4,
+    "material_thickness": 3,
     "flags": [ "STURDY", "DURABLE_MELEE", "NORMAL", "OUTER", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
@@ -203,7 +203,7 @@
   {
     "id": "xl_gauntlets_chitin",
     "type": "ARMOR",
-    "name": { "str": "chitinous gauntlets", "str_pl": "pairs of chitinous gauntlets" },
+    "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
     "copy-from": "gauntlets_chitin",
     "proportional": { "weight": 1.5, "volume": 1.5 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -212,7 +212,7 @@
     "id": "xs_gauntlets_chitin",
     "type": "ARMOR",
     "copy-from": "gauntlets_chitin",
-    "name": { "str": "chitinous gauntlets", "str_pl": "pairs of chitinous gauntlets" },
+    "name": { "str": "chitin gauntlets", "str_pl": "pairs of chitin gauntlets" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },

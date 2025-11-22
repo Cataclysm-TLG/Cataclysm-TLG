@@ -3132,5 +3132,50 @@
     "type": "MIGRATION",
     "id": "sparkling_pomegranate",
     "replace": "sparkling"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_plate",
+    "replace": "boots_steel"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xl_boots_plate",
+    "replace": "xl_boots"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "xs_boots_plate",
+    "replace": "xs_boots"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "boots_chitin",
+    "replace": "chitin_sollerets"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_chitin_xl",
+    "replace": "chitin_sollerets_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_chitin_xs",
+    "replace": "chitin_sollerets_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin",
+    "replace": "acidchitin_sollerets"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin_xl",
+    "replace": "acidchitin_sollerets_xl"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "boots_acidchitin_xs",
+    "replace": "acidchitin_sollerets_xs"
   }
 ]

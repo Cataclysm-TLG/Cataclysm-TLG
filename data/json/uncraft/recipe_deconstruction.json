@@ -5346,7 +5346,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 m",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "components": [ [ [ "scrap_aluminum", 1 ], [ "splinter", 2 ] ] ]
+    "components": [ [ [ "splinter", 3 ] ] ]
   },
   {
     "result": "jerrycan_big",

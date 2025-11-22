@@ -601,7 +601,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HEAD",
-    "name": "chitinous helmets",
+    "name": "chitin helmets",
     "description": "Recipes related to constructing durable helmets from chitin.",
     "skill_used": "tailor",
     "nested_category_data": [
@@ -620,7 +620,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
-    "name": "chitinous armor",
+    "name": "chitin armor",
     "description": "Recipes related to constructing durable armor from chitin that covers the body.",
     "skill_used": "tailor",
     "nested_category_data": [
@@ -639,7 +639,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_ARMS",
-    "name": "chitinous arm guards",
+    "name": "chitin arm guards",
     "description": "Recipes related to constructing durable armguards from chitin.",
     "skill_used": "tailor",
     "nested_category_data": [
@@ -658,8 +658,8 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_LEGS",
-    "name": "chitinous leg guards",
-    "description": "Recipes related to constructing durable leg guards from chitin.",
+    "name": "chitin greaves",
+    "description": "Recipes related to constructing durable shin guards from chitin.",
     "skill_used": "tailor",
     "nested_category_data": [
       "legguard_chitin",
@@ -677,7 +677,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HANDS",
-    "name": "chitinous gauntlets",
+    "name": "chitin gauntlets",
     "description": "Recipes related to constructing durable gauntlets from chitin.",
     "skill_used": "tailor",
     "nested_category_data": [
@@ -691,21 +691,21 @@
     "difficulty": 4
   },
   {
-    "id": "nested_chitinous_boots",
+    "id": "nested_chitin_sollerets",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_FEET",
-    "name": "chitinous boots",
-    "description": "Recipes related to constructing durable boots from chitin.",
+    "name": "chitin sollerets",
+    "description": "Recipes related to constructing durable boot covers from chitin.",
     "skill_used": "tailor",
     "nested_category_data": [
-      "boots_chitin",
-      "xs_boots_chitin",
-      "xl_boots_chitin",
-      "boots_acidchitin",
-      "xs_boots_acidchitin",
-      "xl_boots_acidchitin"
+      "chitin_sollerets",
+      "chitin_sollerets_xs",
+      "chitin_sollerets_xl",
+      "acidchitin_sollerets",
+      "acidchitin_sollerets_xs",
+      "acidchitin_sollerets_xl"
     ],
     "difficulty": 4
   },

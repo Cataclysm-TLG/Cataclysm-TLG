@@ -110,7 +110,7 @@
     "looks_like": "legguard_hard",
     "color": "green",
     "warmth": 10,
-    "material_thickness": 4,
+    "material_thickness": 3,
     "environmental_protection": 2,
     "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "ALLOWS_TAIL" ],
     "armor": [
@@ -150,7 +150,7 @@
     "name": { "str": "biosilicified chitin greaves", "str_pl": "pairs of biosilicified greaves" },
     "description": "A pair of leg guards crafted from the carefully cleaned and pruned biosilicified exoskeletons of acidic ants.  Acid-resistant but brittle.",
     "material": [ "acidchitin" ],
-    "melee_damage": { "bash": 5 },
+    "melee_damage": { "bash": 4 },
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
