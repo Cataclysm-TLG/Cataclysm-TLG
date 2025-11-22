@@ -293,7 +293,11 @@ void Item_factory::finalize_pre( itype &obj )
             }
         }
     }
-
+    for( const auto &e : obj.use_methods ) {
+        if( e.first == "GUN_REPAIR" ) {
+            obj.ammo_scale.emplace( e.first, 0 );
+        }
+    }
     if( obj.mod ) {
         std::string func = obj.gunmod ? "GUNMOD_ATTACH" : "TOOLMOD_ATTACH";
         emplace_usage( obj.use_methods, func );
