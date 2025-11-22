@@ -5408,11 +5408,11 @@ std::optional<int> gun_repair( Character *p, item *it )
 {
     const std::string startdurability = it->durability_indicator( true );
     sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
-    p->practice( skill_traps, 10 );
     p->mod_moves( -to_moves<int>( 300_seconds ) );
     // TODO: Move this to a proper activity with a proper failure/damage chance.
     if( p->get_skill_level( skill_traps ) + p->dex_cur + p->per_cur + rng( 0, 10 ) - it->damage_level() > 24 ) {
         it->mod_damage( -itype::damage_scale );
+        p->practice( skill_traps, 4 );
         const std::string msg = it->damage_level() == 0
                                 ? _( "You repair your %s completely!  ( %s-> %s)" )
                                 : _( "You repair your %s!  ( %s-> %s)" );
