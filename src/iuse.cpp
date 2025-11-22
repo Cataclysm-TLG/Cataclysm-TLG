@@ -5355,9 +5355,6 @@ std::optional<int> iuse::talking_doll( Character *p, item *it, const tripoint_bu
 
 std::optional<int> iuse::gun_repair( Character *p, item *it, const tripoint_bub_ms & )
 {
-    if( !it->ammo_sufficient( p ) ) {
-        return std::nullopt;
-    }
     if( p->cant_do_underwater() ) {
         return std::nullopt;
     }
