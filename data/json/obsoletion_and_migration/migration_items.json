@@ -3177,5 +3177,15 @@
     "type": "MIGRATION",
     "id": "boots_acidchitin_xs",
     "replace": "acidchitin_sollerets_xs"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "small_repairkit",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "large_repairkit",
+    "replace": "heavy_battery_cell"
   }
 ]

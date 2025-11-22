@@ -339,10 +339,13 @@ static const proficiency_id proficiency_prof_lockpicking_expert( "prof_lockpicki
 
 static const quality_id qual_AXE( "AXE" );
 static const quality_id qual_GLARE( "GLARE" );
+static const quality_id qual_HAMMER_FINE( "HAMMER_FINE" );
 static const quality_id qual_HOTPLATE( "HOTPLATE" );
 static const quality_id qual_LOCKPICK( "LOCKPICK" );
 static const quality_id qual_PRY( "PRY" );
+static const quality_id qual_SCREW( "SCREW" );
 static const quality_id qual_SCREW_FINE( "SCREW_FINE" );
+static const quality_id qual_VISE( "VISE" );
 
 static const skill_id skill_computer( "computer" );
 static const skill_id skill_cooking( "cooking" );
@@ -5361,48 +5364,65 @@ std::optional<int> iuse::gun_repair( Character *p, item *it, const tripoint_bub_
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }
-    /** @EFFECT_MECHANICS >1 allows gun repair */
-    if( p->get_skill_level( skill_mechanics ) < 2 ) {
-        p->add_msg_if_player( m_info, _( "You need a mechanics skill of 2 to use this repair kit." ) );
-        return std::nullopt;
-    }
-    item_location loc = game_menus::inv::titled_filter_menu( []( const item_location & loc ) {
-        return loc->is_firearm() && !loc->has_flag( flag_NO_REPAIR );
-    }, get_avatar(), _( "Select the firearm to repair:" ) );
-    if( !loc ) {
-        p->add_msg_if_player( m_info, _( "You don't have that item!" ) );
-        return std::nullopt;
-    }
-    return ::gun_repair( p, it, loc );
-}
-
-std::optional<int> gun_repair( Character *p, item *, item_location &loc )
-{
-    item &fix = *loc;
     if( p->fine_detail_vision_mod() > 4 ) {
         p->add_msg_if_player( m_info, _( "You can't see to do that!" ) );
         return std::nullopt;
     }
-    if( fix.damage() <= fix.degradation() ) {
-        const char *msg = fix.damage_level() > 0 ?
-                          _( "You can't improve your %s any more, considering the degradation." ) :
-                          _( "You can't improve your %s any more this way." );
-        p->add_msg_if_player( m_info, msg, fix.tname() );
+    if( it->damage() <= it->degradation() ) {
+        const char *msg = it->damage_level() > 0 ?
+                          _( "You can't improve your %s any further, considering the degradation." ) :
+                          _( "You can't improve your %s any further this way." );
+        p->add_msg_if_player( m_info, msg, it->tname() );
         return std::nullopt;
     }
-    const std::string startdurability = fix.durability_indicator( true );
+    /** @EFFECT_TRAPS >1 allows gun repair */
+    if( p->get_skill_level( skill_traps ) < 2 ) {
+        p->add_msg_if_player( m_info, _( "You need a devices skill of 2 to repair firearms." ) );
+        return std::nullopt;
+    }
+    const inventory &cinv = p->crafting_inventory();
+    bool has_tools = true;
+    if( !cinv.has_quality( qual_SCREW_FINE ) ) {
+        p->add_msg_if_player( m_warning, _( "You need an item with %s of 1 or more to repair this item." ),
+                                qual_SCREW_FINE.obj().name );
+        has_tools = false;
+    }
+    if( !cinv.has_quality( qual_HAMMER_FINE ) ) {
+        p->add_msg_if_player( m_warning, _( "You need an item with %s of 1 or more to repair this item." ),
+                                qual_HAMMER_FINE.obj().name );
+        has_tools = false;
+    }
+    map &here = get_map();
+    if( it->damage_level() > 2 && ( !cinv.has_quality( qual_VISE, 3 ) || !here.has_nearby_table( p->pos_bub(), PICKUP_RANGE ) ) ) {
+        p->add_msg_if_player( m_warning, _( "The damage is extensive, you will need a flat work surface and an item with %s of 3 or more to make repairs." ),
+                                qual_VISE.obj().name );
+        has_tools = false;
+    }
+    if( !has_tools ) {
+        return std::nullopt;
+    }
+    return::gun_repair( p, it );
+}
+
+std::optional<int> gun_repair( Character *p, item *it )
+{
+    const std::string startdurability = it->durability_indicator( true );
     sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
-    p->practice( skill_mechanics, 10 );
-    p->mod_moves( -to_moves<int>( 20_seconds ) );
-
-    fix.mod_damage( -itype::damage_scale );
-
-    const std::string msg = fix.damage_level() == 0
-                            ? _( "You repair your %s completely!  ( %s-> %s)" )
-                            : _( "You repair your %s!  ( %s-> %s)" );
-    p->add_msg_if_player( m_good, msg, fix.tname( 1, false ), startdurability,
-                          fix.durability_indicator( true ) );
-    return 1;
+    p->practice( skill_traps, 10 );
+    p->mod_moves( -to_moves<int>( 300_seconds ) );
+    // TODO: Move this to a proper activity with a proper failure/damage chance.
+    if( p->get_skill_level( skill_traps ) + p->dex_cur + p->per_cur + rng( 0, 10 ) - it->damage_level() > 24 ) {
+        it->mod_damage( -itype::damage_scale );
+        const std::string msg = it->damage_level() == 0
+                                ? _( "You repair your %s completely!  ( %s-> %s)" )
+                                : _( "You repair your %s!  ( %s-> %s)" );
+        p->add_msg_if_player( m_good, msg, it->tname( 1, false ), startdurability,
+                            it->durability_indicator( true ) );
+        return 0;
+    } else {
+        p->add_msg_if_player( m_good, _( "You fail to make any progress on your repairs." ) );
+        return 0;
+    }
 }
 
 std::optional<int> iuse::gunmod_attach( Character *p, item *it, const tripoint_bub_ms & )

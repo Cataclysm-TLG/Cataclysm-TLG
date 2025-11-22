@@ -242,7 +242,7 @@ std::optional<std::string> can_smoke( const Character &you );
 
 void remove_radio_mod( item &it, Character &p );
 // used for unit testing iuse::gun_repair
-std::optional<int> gun_repair( Character *p, item *it, item_location &loc );
+std::optional<int> gun_repair( Character *p, item *it );
 
 // Helper for clothes washing
 struct washing_requirements {

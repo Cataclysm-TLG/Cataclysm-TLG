@@ -110,9 +110,7 @@
       { "group": "guns_shotgun_common", "prob": 50 },
       { "group": "guns_survival", "prob": 100 },
       { "item": "flaregun", "prob": 25 },
-      { "item": "large_repairkit", "prob": 5, "charges": [ 0, 500 ] },
-      { "item": "signal_flare", "prob": 20 },
-      { "item": "small_repairkit", "prob": 5, "charges": [ 0, 500 ] }
+      { "item": "signal_flare", "prob": 20 }
     ]
   },
   {
@@ -706,7 +704,7 @@
       [ "glowstick_dead", 15 ],
       { "item": "cash_card", "prob": 5, "charges": [ 5, 5000 ] },
       [ "id_science", 3 ],
-      [ "sandbox_kit", 5 ],
+      [ "pail_plastic", 5 ],
       [ "ear_spool", 15 ],
       { "item": "lighter", "prob": 35, "charges": [ 0, 15 ], "damage": [ 0, 4 ] },
       [ "funnel", 25 ],
@@ -1419,16 +1417,7 @@
       [ "apron_leather", 2 ],
       [ "chem_aluminium_sulphate", 20 ],
       [ "plunger_toilet", 10 ],
-      [ "plunger_futuristic", 5 ],
-      { "item": "bio_tools", "prob": 2 },
-      { "item": "bio_flashlight", "prob": 2 },
-      { "item": "bio_lighter", "prob": 2 },
-      { "item": "bio_magnet", "prob": 2 },
-      { "item": "bio_power_storage", "prob": 2 },
-      { "item": "bio_purifier", "prob": 2 },
-      { "item": "bio_heatsink", "prob": 2 },
-      { "item": "bio_blood_filter", "prob": 2 },
-      { "item": "bio_meteorologist", "prob": 2 }
+      [ "plunger_futuristic", 5 ]
     ]
   },
   {
@@ -2235,7 +2224,7 @@
       [ "scots_cookbook", 1 ],
       [ "scots_tailor", 1 ],
       [ "eclipse_glasses", 1 ],
-      [ "sandbox_kit", 1 ],
+      [ "pail_plastic", 1 ],
       [ "dnd_handbook", 2 ],
       [ "balloon", 5 ],
       { "item": "scissors_wavy", "prob": 7 },

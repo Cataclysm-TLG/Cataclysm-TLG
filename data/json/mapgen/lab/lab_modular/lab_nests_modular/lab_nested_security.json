@@ -246,7 +246,7 @@
         }
       },
       "place_monster": [ { "monster": "mon_zombie_labsecurity", "x": 3, "y": 4, "chance": 20, "pack_size": [ 1, 2 ] } ],
-      "place_loot": [ { "item": "large_repairkit", "x": 1, "y": 3, "chance": 90 } ],
+      "place_loot": [ { "group": "tools_common", "x": 1, "y": 3, "chance": 60 } ],
       "items": {
         "J": { "item": "gun_cases", "chance": 70, "repeat": [ 0, 2 ] },
         "Q": { "item": "cop_armory", "chance": 70 },
@@ -281,7 +281,7 @@
         }
       },
       "place_monster": [ { "monster": "mon_zombie_labsecurity", "x": 3, "y": 4, "chance": 20, "pack_size": [ 1, 2 ] } ],
-      "place_loot": [ { "item": "large_repairkit", "x": 4, "y": 3, "chance": 90 } ],
+      "place_loot": [ { "group": "tools_common", "x": 4, "y": 3, "chance": 60 } ],
       "items": {
         "J": { "item": "gun_cases", "chance": 70, "repeat": [ 0, 2 ] },
         "Q": { "item": "cop_armory", "chance": 70 },

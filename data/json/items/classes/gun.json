@@ -8,6 +8,7 @@
     "name": { "str": "base gun" },
     "symbol": "(",
     "color": "light_gray",
+    "use_action": [ "GUN_REPAIR" ],
     "faults": [
       "fault_gun_blackpowder",
       "fault_gun_dirt",
@@ -19,23 +20,26 @@
     "ranged_damage": { "damage_type": "bullet", "amount": 0 }
   },
   {
-    "abstract": "underbarrel_base",
+    "abstract": "smg_base",
+    "copy-from": "gun_base",
     "type": "GUN",
-    "reload_noise_volume": 10,
-    "//": "this is the default handling for anything with a stock",
-    "handling": 20,
-    "name": { "str": "base underbarrel gun" },
-    "symbol": "(",
-    "color": "light_gray",
-    "faults": [
-      "fault_gun_blackpowder",
-      "fault_gun_dirt",
-      "fault_gun_chamber_spent",
-      "fault_fail_to_feed",
-      "fault_stovepipe",
-      "fault_double_feed"
-    ],
-    "ranged_damage": { "damage_type": "bullet", "amount": 0 }
+    "range": 5,
+    "name": { "str": "base SMG" },
+    "flags": [ "ALLOWS_BODY_BLOCK" ],
+    "skill": "smg"
+  },
+  {
+    "abstract": "launcher_base",
+    "copy-from": "gun_base",
+    "type": "GUN",
+    "name": { "str": "base launcher" },
+    "skill": "launcher",
+    "modes": [ [ "DEFAULT", "single", 1, "NPC_AVOID" ] ],
+    "//": "default handling for anything without a recoil stock",
+    "handling": 10,
+    "valid_mod_locations": [ [ "barrel", 1 ], [ "sights", 1 ], [ "sling", 1 ] ],
+    "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS" ],
+    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
   },
   {
     "abstract": "flamethrower_base",
@@ -51,19 +55,6 @@
     "ammo_to_fire": 100,
     "faults": [  ],
     "use_action": { "type": "firestarter" }
-  },
-  {
-    "abstract": "launcher_base",
-    "copy-from": "gun_base",
-    "type": "GUN",
-    "name": { "str": "base launcher" },
-    "skill": "launcher",
-    "modes": [ [ "DEFAULT", "single", 1, "NPC_AVOID" ] ],
-    "//": "default handling for anything without a recoil stock",
-    "handling": 10,
-    "valid_mod_locations": [ [ "barrel", 1 ], [ "sights", 1 ], [ "sling", 1 ] ],
-    "flags": [ "RELOAD_ONE", "RELOAD_EJECT", "NEVER_JAMS" ],
-    "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ]
   },
   {
     "abstract": "pistol_base",
@@ -292,12 +283,22 @@
     ]
   },
   {
-    "abstract": "smg_base",
-    "copy-from": "gun_base",
+    "abstract": "underbarrel_base",
     "type": "GUN",
-    "range": 5,
-    "name": { "str": "base SMG" },
-    "flags": [ "ALLOWS_BODY_BLOCK" ],
-    "skill": "smg"
+    "reload_noise_volume": 10,
+    "//": "this is the default handling for anything with a stock",
+    "handling": 20,
+    "name": { "str": "base underbarrel gun" },
+    "symbol": "(",
+    "color": "light_gray",
+    "faults": [
+      "fault_gun_blackpowder",
+      "fault_gun_dirt",
+      "fault_gun_chamber_spent",
+      "fault_fail_to_feed",
+      "fault_stovepipe",
+      "fault_double_feed"
+    ],
+    "ranged_damage": { "damage_type": "bullet", "amount": 0 }
   }
 ]

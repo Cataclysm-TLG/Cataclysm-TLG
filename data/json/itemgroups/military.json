@@ -455,7 +455,6 @@
       { "item": "50ss", "prob": 2 },
       { "item": "50match", "prob": 1 },
       { "item": "50_mk211", "prob": 1 },
-      { "item": "small_repairkit", "prob": 10 },
       { "item": "50_incendiary", "prob": 2 },
       { "item": "water_clean", "prob": 90 },
       { "item": "knuckle_brass", "prob": 10 },

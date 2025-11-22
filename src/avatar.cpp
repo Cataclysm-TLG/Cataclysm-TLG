@@ -1440,8 +1440,8 @@ bool avatar::invoke_item( item *used, const tripoint_bub_ms &pt, int pre_obtain_
                              res.str() );
     }
     if( has_relic ) {
-        umenu.addentry_desc( MENU_AUTOASSIGN, true, MENU_AUTOASSIGN, _( "Use relic" ),
-                             _( "Activate this relic." ) );
+        umenu.addentry_desc( MENU_AUTOASSIGN, true, MENU_AUTOASSIGN, _( "Use artifact" ),
+                             _( "Activate this artifact." ) );
     }
 
     umenu.desc_enabled = std::any_of( umenu.entries.begin(),

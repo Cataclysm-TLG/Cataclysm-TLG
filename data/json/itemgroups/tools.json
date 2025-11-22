@@ -4,53 +4,18 @@
     "type": "item_group",
     "//": "Tools commonly used by blacksmiths",
     "items": [
-      [ "anvil", 30 ],
+      [ "anvil", 35 ],
       [ "anvil_crude", 10 ],
-      [ "chisel", 90 ],
+      [ "chisel", 80 ],
       [ "crucible", 30 ],
       [ "swage", 60 ],
       [ "drift", 70 ],
       [ "metal_file", 90 ],
-      [ "hotcut", 90 ],
+      [ "hotcut", 80 ],
       [ "metalworking_tongs", 90 ],
-      [ "hammer", 90 ],
-      [ "sandpaper", 90 ]
-    ]
-  },
-  {
-    "id": "tools_simple_blacksmith",
-    "type": "item_group",
-    "//": "Tools commonly used by amateur blacksmiths. A subset of blacksmiths tools",
-    "items": [ { "group": "basic_metalworking_a", "prob": 40 }, { "group": "basic_metalworking_b", "prob": 60 } ]
-  },
-  {
-    "id": "basic_metalworking_a",
-    "type": "item_group",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_large",
-    "entries": [
-      { "item": "anvil", "count": 1 },
-      { "item": "chisel", "count": 1 },
-      { "item": "metal_file", "count": 1 },
-      { "item": "hotcut", "count": 1 },
-      { "item": "metalworking_tongs", "count": 1 },
-      { "item": "hammer", "count": 1 },
-      { "item": "sandpaper", "count": 1 }
-    ]
-  },
-  {
-    "id": "basic_metalworking_b",
-    "type": "item_group",
-    "subtype": "collection",
-    "//": "This group was created automatically and may contain errors.",
-    "container-item": "box_large",
-    "entries": [
-      { "item": "anvil", "count": 1 },
-      { "item": "metal_file", "count": 1 },
-      { "item": "metalworking_tongs", "count": 1 },
-      { "item": "hammer", "count": 1 },
-      { "item": "sandpaper", "count": 1 }
+      [ "hammer", 80 ],
+      [ "sandpaper", 80 ],
+      [ "bench_vise", 30 ]
     ]
   },
   {
@@ -210,7 +175,8 @@
       { "item": "reciprocating_saw", "prob": 20, "charges": [ 0, 500 ] },
       { "item": "cordless_impact_wrench", "prob": 10, "charges": [ 0, 500 ] },
       { "item": "cordless_drill", "prob": 20, "charges": [ 0, 500 ] },
-      { "item": "corded_powerdrill", "prob": 20 }
+      { "item": "corded_powerdrill", "prob": 20 },
+      [ "bench_vise", 30 ]
     ]
   },
   {
@@ -244,7 +210,7 @@
       [ "shovel_snow_plastic", 15 ],
       [ "hose_garden", 20 ],
       [ "big_pliers", 10 ],
-      [ "bench_vise", 15 ]
+      [ "bench_vise", 20 ]
     ]
   },
   {
@@ -267,6 +233,7 @@
       [ "knife_folding", 25 ],
       [ "knife_hunting", 10 ],
       { "group": "knife_rambo_cont", "prob": 10 },
+      { "item": "rubber_spray_can", "prob": 10, "charges": [ 0, 10 ] },
       [ "knife_swissarmy", 10 ],
       { "item": "mess_kit", "prob": 20 },
       [ "multitool", 10 ],
@@ -352,7 +319,7 @@
       [ "pin_reamer", 30 ],
       [ "clamp", 10 ],
       [ "sandpaper", 90 ],
-      [ "bench_vise", 15 ]
+      [ "bench_vise", 20 ]
     ]
   },
   {
@@ -630,7 +597,6 @@
     "items": [
       { "group": "tools_common", "prob": 50 },
       { "group": "tools_blacksmith", "prob": 50 },
-      { "item": "large_repairkit", "prob": 50, "charges": [ 0, 500 ] },
       [ "puller", 100 ],
       [ "press", 100 ]
     ]
@@ -898,7 +864,7 @@
       [ "clamp", 10 ],
       [ "wrench", 10 ],
       [ "socket_wrench_set", 10 ],
-      [ "bench_vise", 15 ],
+      [ "bench_vise", 25 ],
       { "group": "writing_utensils", "prob": 5 }
     ]
   },

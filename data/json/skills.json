@@ -42,7 +42,7 @@
     "type": "skill",
     "id": "traps",
     "name": { "str": "devices" },
-    "description": "Your skill in setting, detecting, disabling, and crafting fine devices like security systems, traps, locks and explosives.  This skill does not affect the evasion of traps that are triggered.",
+    "description": "Your skill in setting, detecting, disabling, repairing, and crafting fine devices like security systems, traps, locks, some firearm components, and explosives.  This skill does not affect the evasion of traps that are triggered.",
     "companion_survival_rank_factor": 1,
     "display_category": "display_interaction",
     "sort_rank": 23000,
