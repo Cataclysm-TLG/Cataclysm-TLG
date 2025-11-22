@@ -690,7 +690,7 @@
     "id": "helmet_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "chitinous helmet" },
+    "name": { "str": "chitin helmet" },
     "description": "A helmet made from the exoskeletons of insects.  Covers the entire head; very light and durable.",
     "weight": "1447 g",
     "volume": "2500 ml",
@@ -732,7 +732,7 @@
       { "covers": [ "eyes" ], "rigid_layer_only": true, "coverage": 60, "encumbrance": 12 }
     ],
     "warmth": 5,
-    "material_thickness": 4,
+    "material_thickness": 3,
     "environmental_protection": 4,
     "flags": [ "WATERPROOF", "STURDY", "OUTER" ],
     "melee_damage": { "bash": 1 }
@@ -741,7 +741,7 @@
     "id": "xl_helmet_chitin",
     "type": "ARMOR",
     "copy-from": "helmet_chitin",
-    "name": { "str": "chitinous helmet" },
+    "name": { "str": "chitin helmet" },
     "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
@@ -750,7 +750,7 @@
     "type": "ARMOR",
     "copy-from": "helmet_chitin",
     "looks_like": "helmet_chitin",
-    "name": { "str": "chitinous helmet" },
+    "name": { "str": "chitin helmet" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "flags": [ "WATERPROOF", "STURDY", "UNDERSIZE", "PREFIX_XS", "OUTER", "NORMAL" ]
   },

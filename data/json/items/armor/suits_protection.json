@@ -47,7 +47,7 @@
     "id": "armor_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "chitinous armor" },
+    "name": { "str": "chitin armor" },
     "description": "Lightweight leg and body armor made from the exoskeletons of giant arthropods.",
     "weight": "2632 g",
     "volume": "5800 ml",
@@ -60,7 +60,7 @@
     "color": "brown",
     "warmth": 10,
     "longest_side": "60 cm",
-    "material_thickness": 4,
+    "material_thickness": 3,
     "flags": [ "STURDY", "OUTER", "ALLOWS_TAIL" ],
     "armor": [
       { "covers": [ "torso" ], "coverage": 90, "encumbrance": 11 },
@@ -77,7 +77,7 @@
   {
     "id": "xl_armor_chitin",
     "type": "ARMOR",
-    "name": { "str": "chitinous armor" },
+    "name": { "str": "chitin armor" },
     "copy-from": "armor_chitin",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
@@ -87,7 +87,7 @@
     "type": "ARMOR",
     "copy-from": "armor_chitin",
     "looks_like": "armor_chitin",
-    "name": { "str": "chitinous armor" },
+    "name": { "str": "chitin armor" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "flags": [ "STURDY", "OUTER", "UNDERSIZE", "PREFIX_XS" ]
   },

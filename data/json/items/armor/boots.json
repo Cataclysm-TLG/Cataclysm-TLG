@@ -163,81 +163,108 @@
     "melee_damage": { "bash": 3 }
   },
   {
-    "id": "boots_chitin",
+    "id": "chitin_sollerets",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
-    "description": "Apart from the fasteners and the bits holding the material together, these boots are made entirely from arthropod exoskeleton.",
-    "weight": "1620 g",
-    "volume": "4250 ml",
-    "price": "135 USD",
-    "price_postapoc": "12 USD 50 cent",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
+    "description": "A pair of bizarre-looking boot covers made from overlapping layers of giant arthropod shell.",
+    "weight": "900 g",
+    "volume": "500 ml",
+    "price_postapoc": "3 USD",
     "to_hit": -1,
-    "material": [ "chitin" ],
+    "material": [ { "type": "chitin", "portion": 9 }, { "type": "leather", "portion": 1 } ],
     "symbol": "[",
-    "looks_like": "boots",
     "color": "brown",
-    "warmth": 5,
-    "material_thickness": 4,
-    "environmental_protection": 3,
-    "flags": [ "STURDY", "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
+    "flags": [ "STURDY", "BELTED" ],
     "armor": [
       {
         "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l", "foot_toes_l", "foot_toes_r" ],
-        "encumbrance": 30,
-        "coverage": 95
-      },
-      { "coverage": 75, "covers": [ "foot_l", "foot_r" ], "specifically_covers": [ "foot_ankle_l", "foot_ankle_r" ] },
-      {
-        "coverage": 100,
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_sole_l", "foot_sole_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "leather", "covered_by_mat": 1, "thickness": 2.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 90
       }
     ],
     "melee_damage": { "bash": 3 }
   },
   {
-    "id": "xl_boots_chitin",
+    "id": "chitin_sollerets_xl",
     "type": "ARMOR",
-    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
-    "copy-from": "boots_chitin",
-    "proportional": { "weight": 1.25, "volume": 1.25 },
+    "copy-from": "chitin_sollerets",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "xs_boots_chitin",
+    "id": "chitin_sollerets_xs",
     "type": "ARMOR",
-    "copy-from": "boots_chitin",
-    "looks_like": "boots_chitin",
-    "name": { "str": "chitinous boots", "str_pl": "pairs of chitinous boots" },
+    "copy-from": "chitin_sollerets",
+    "name": { "str": "chitin sollerets", "str_pl": "pairs of chitin sollerets" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "boots_acidchitin",
-    "copy-from": "boots_chitin",
+    "id": "acidchitin_sollerets",
     "type": "ARMOR",
-    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
-    "description": "Boots crafted from glassy-looking arthropod exoskeleton.  The material is a little more brittle, but might withstand fire and acid better than the regular stuff.",
-    "price_postapoc": "17 USD 50 cent",
-    "material": [ "acidchitin" ],
+    "category": "armor",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
+    "description": "A pair of bizarre-looking boot covers made from overlapping layers of giant arthropod shell.  The material seems unusually hard, with an almost glassy sheen.",
+    "weight": "1200 g",
+    "volume": "500 ml",
+    "price_postapoc": "3 USD",
+    "to_hit": -1,
+    "material": [ { "type": "acidchitin", "portion": 9 }, { "type": "leather", "portion": 1 } ],
+    "symbol": "[",
+    "color": "green",
+    "flags": [ "STURDY", "BELTED" ],
+    "armor": [
+      {
+        "covers": [ "foot_l", "foot_r" ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [
+          { "type": "acidchitin", "covered_by_mat": 100, "thickness": 3.0 },
+          { "type": "leather", "covered_by_mat": 1, "thickness": 2.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 90
+      }
+    ],
     "melee_damage": { "bash": 4 }
   },
   {
-    "id": "xl_boots_acidchitin",
+    "id": "acidchitin_sollerets_xl",
     "type": "ARMOR",
-    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
-    "copy-from": "boots_acidchitin",
-    "proportional": { "weight": 1.25, "volume": 1.25 },
+    "copy-from": "acidchitin_sollerets",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
+    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "xs_boots_acidchitin",
+    "id": "acidchitin_sollerets_xs",
     "type": "ARMOR",
-    "copy-from": "boots_acidchitin",
-    "name": { "str": "biosilicified chitin boots", "str_pl": "pairs of biosilicified chitin boots" },
+    "copy-from": "acidchitin_sollerets",
+    "name": { "str": "biosilicified chitin sollerets", "str_pl": "pairs of biosilicified chitin sollerets" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
@@ -512,70 +539,6 @@
     "melee_damage": { "bash": 2 }
   },
   {
-    "id": "boots_plate",
-    "type": "ARMOR",
-    "category": "armor",
-    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
-    "description": "Leather boots armor-plated with squares of sheet metal.",
-    "weight": "2460 g",
-    "volume": "3250 ml",
-    "price": "50 USD",
-    "price_postapoc": "6 USD",
-    "to_hit": -2,
-    "symbol": "[",
-    "looks_like": "boots_steel",
-    "color": "light_gray",
-    "warmth": 20,
-    "environmental_protection": 1,
-    "flags": [ "VARSIZE", "RAINPROOF", "NORMAL", "OUTER" ],
-    "armor": [
-      {
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ],
-        "material": [ { "type": "leather_treated", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "encumbrance": 0,
-        "coverage": 98
-      },
-      {
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
-        "material": [
-          { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "steel", "covered_by_mat": 90, "thickness": 2.0 }
-        ],
-        "encumbrance": 32,
-        "coverage": 100
-      },
-      {
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
-        "material": [
-          { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 },
-          { "type": "rubber", "covered_by_mat": 100, "thickness": 6.0 }
-        ],
-        "encumbrance": 0,
-        "coverage": 100
-      }
-    ],
-    "melee_damage": { "bash": 3, "cut": 1 }
-  },
-  {
-    "id": "xl_boots_plate",
-    "type": "ARMOR",
-    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
-    "copy-from": "boots_plate",
-    "proportional": { "weight": 1.25, "volume": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "xs_boots_plate",
-    "type": "ARMOR",
-    "copy-from": "boots_plate",
-    "name": { "str": "armored boots", "str_pl": "pairs of armored boots" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
     "id": "boots_rubber",
     "type": "ARMOR",
     "name": { "str": "rubber boots", "str_pl": "pairs of rubber boots" },
@@ -619,7 +582,7 @@
     "id": "boots_steel",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "steeltoed boots", "str_pl": "pairs of steeltoed boots" },
+    "name": { "str": "steel-toed boots", "str_pl": "pairs of steel-toed boots" },
     "description": "Heavy boots made of chemical-resistant treated leather with steel toecaps.  Great for the jobsite or for stomping the undead",
     "weight": "2220 g",
     "volume": "3 L",
@@ -671,7 +634,7 @@
     "id": "sneakers_steel",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "steeltoed sneakers", "str_pl": "pairs of steeltoed sneakers" },
+    "name": { "str": "steel-toed sneakers", "str_pl": "pairs of steel-toed sneakers" },
     "description": "A descendant of the classic steeltoed boot, this modern footwear has become popular amongst working class people over the last couple of decades.",
     "weight": "900 g",
     "volume": "1500 ml",
