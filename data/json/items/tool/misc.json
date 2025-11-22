@@ -1018,10 +1018,10 @@
     "melee_damage": { "bash": 6 }
   },
   {
-    "id": "sandbox_kit",
+    "id": "pail_plastic",
     "type": "TOOL",
-    "name": { "str": "sandbox kit" },
-    "description": "A plastic bucket holding a small spade and rake, perfect for building sand castles!",
+    "name": { "str": "plastic pail" },
+    "description": "A small plastic bucket, the kind of thing a child might have built sandcastles with.",
     "weight": "250 g",
     "volume": "1050 ml",
     "price": "3 USD",

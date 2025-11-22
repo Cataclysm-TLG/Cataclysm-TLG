@@ -546,7 +546,6 @@
     "required_skills": [ [ "fabrication", 0 ] ],
     "time": "20 m",
     "pre_special": "check_empty",
-    "tools": [ [ [ "sandbox_kit", -1 ] ] ],
     "components": [ [ [ "material_sand", 8 ] ], [ [ "water", 2 ], [ "water_clean", 2 ], [ "salt_water", 2 ] ] ],
     "post_terrain": "f_sand_castle"
   },

@@ -102,7 +102,7 @@
   {
     "type": "item_action",
     "id": "GUN_REPAIR",
-    "name": { "str": "Repair a gun" }
+    "name": { "str": "Repair this firearm" }
   },
   {
     "type": "item_action",

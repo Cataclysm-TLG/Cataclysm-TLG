@@ -97,7 +97,6 @@
       [ "holster", 25 ],
       [ "bandana", 20 ],
       [ "balaclava", 10 ],
-      [ "small_repairkit", 20 ],
       [ "grapnel", 5 ],
       [ "misc_repairkit", 15 ],
       { "group": "tools_toolbox", "prob": 20 },

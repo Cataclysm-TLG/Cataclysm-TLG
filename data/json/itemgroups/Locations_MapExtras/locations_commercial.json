@@ -104,12 +104,13 @@
       { "item": "candle", "prob": 25, "charges": [ 0, 100 ] },
       [ "hammer", 20 ],
       [ "screwdriver", 20 ],
+      { "item": "rigid_plastic_sheet", "prob": 1 },
       { "item": "lighter", "prob": 25, "charges": [ 0, 100 ] },
       { "item": "rubber_spray_can", "prob": 5, "charges": 10 },
       [ "pockknife", 15 ],
       [ "metal_file", 15 ],
       [ "pin_reamer", 10 ],
-      [ "sandbox_kit", 5 ],
+      [ "pail_plastic", 5 ],
       { "distribution": [ { "group": "full_survival_kit" }, { "group": "used_survival_kit" } ], "prob": 5 },
       { "group": "writing_utensils", "prob": 40 }
     ]
@@ -2160,6 +2161,7 @@
       { "group": "clothing_outdoor_torso", "prob": 7 },
       { "group": "clothing_outdoor_pants", "prob": 7 },
       { "group": "farming_tools", "prob": 5 },
+      { "item": "rigid_plastic_sheet", "prob": 1 },
       { "item": "rubber_spray_can", "prob": 2, "charges": [ 0, 10 ] },
       { "group": "farming_seeds", "prob": 20 },
       { "item": "rock", "prob": 5 },
