@@ -245,7 +245,7 @@
     "symbol": "[",
     "looks_like": "mouthpiece",
     "color": "white",
-    "material_thickness": 0.01,
+    "material_thickness": 2,
     "flags": [ "SKINTIGHT" ],
     "armor": [ { "encumbrance": 10, "coverage": 10, "covers": [ "mouth" ] } ]
   },
@@ -263,7 +263,7 @@
     "symbol": "[",
     "looks_like": "scarf",
     "color": "white",
-    "material_thickness": 0.01,
+    "material_thickness": 0.05,
     "environmental_protection": 1,
     "flags": [ "SUPER_FANCY", "OUTER", "OVERSIZE" ],
     "armor": [

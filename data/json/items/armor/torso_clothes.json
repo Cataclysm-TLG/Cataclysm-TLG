@@ -548,7 +548,7 @@
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 5,
-    "material_thickness": 0.01,
+    "material_thickness": 0.08,
     "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [ { "coverage": 80, "covers": [ "torso" ] } ]
   },

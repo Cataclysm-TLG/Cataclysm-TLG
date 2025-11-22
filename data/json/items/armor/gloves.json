@@ -362,7 +362,7 @@
   {
     "id": "gloves_bag",
     "type": "ARMOR",
-    "name": { "str": "bag gloves", "str_pl": "pairs of bag gloves" },
+    "name": { "str": "bag mitts", "str_pl": "pairs of bag mitts" },
     "description": "A pair of disposable plastic bags, adapted to be used as gloves.",
     "weight": "6 g",
     "volume": "250 ml",
@@ -373,7 +373,7 @@
     "symbol": "[",
     "looks_like": "gloves_wraps",
     "color": "light_blue",
-    "material_thickness": 0.01,
+    "material_thickness": 0.02,
     "warmth": 2,
     "flags": [ "WATERPROOF", "UNRESTRICTED", "OVERSIZE", "MITTS", "OUTER", "SOFT", "FRAGILE", "RAINPROOF" ],
     "armor": [ { "encumbrance": 12, "coverage": 98, "covers": [ "hand_l", "hand_r" ] } ]
@@ -660,7 +660,7 @@
     "symbol": "[",
     "looks_like": "gloves_light",
     "color": "white",
-    "material_thickness": 0.01,
+    "material_thickness": 0.02,
     "environmental_protection": 2,
     "flags": [ "RAINPROOF", "WATERPROOF", "SKINTIGHT", "FRAGILE", "NO_REPAIR" ],
     "armor": [ { "encumbrance": 1, "coverage": 98, "covers": [ "hand_l", "hand_r" ] } ]

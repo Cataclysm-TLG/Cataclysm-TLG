@@ -1950,7 +1950,7 @@
       { "fuel": 1, "smoke": 3, "burn": 0.2 },
       { "fuel": 1, "smoke": 4, "burn": 0.3 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 7, "heat": 2, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 7, "heat": 1, "bullet": 1 },
     "repair_difficulty": 3
   },
   {

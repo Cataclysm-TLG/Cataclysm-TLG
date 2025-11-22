@@ -239,7 +239,7 @@
     "looks_like": "boxer_briefs",
     "color": "light_gray",
     "warmth": 5,
-    "material_thickness": 0.01,
+    "material_thickness": 0.1,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [
       { "coverage": 100, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_hip_l", "leg_hip_r" ] },
@@ -844,7 +844,7 @@
     "looks_like": "leggings",
     "color": "dark_gray",
     "warmth": 3,
-    "material_thickness": 0.05,
+    "material_thickness": 0.02,
     "flags": [ "SKINTIGHT", "NO_SALVAGE" ],
     "armor": [ { "coverage": 100, "covers": [ "foot_l", "foot_r", "leg_r", "leg_l" ] } ]
   },
@@ -862,7 +862,7 @@
     "looks_like": "longshirt",
     "color": "dark_gray",
     "warmth": 4,
-    "material_thickness": 0.05,
+    "material_thickness": 0.1,
     "flags": [ "VARSIZE", "SKINTIGHT", "WATER_FRIENDLY" ],
     "armor": [ { "coverage": 100, "covers": [ "torso" ] } ]
   },
