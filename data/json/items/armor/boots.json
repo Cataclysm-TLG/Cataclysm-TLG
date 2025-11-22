@@ -2379,7 +2379,7 @@
     "symbol": "[",
     "looks_like": "socks",
     "color": "light_blue",
-    "material_thickness": 0.05,
+    "material_thickness": 0.02,
     "flags": [ "WATERPROOF", "OVERSIZE", "UNRESTRICTED", "SOFT", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
@@ -2434,7 +2434,7 @@
     "color": "white",
     "warmth": 2,
     "flags": [ "SKINTIGHT", "FRAGILE" ],
-    "material_thickness": 0.05,
+    "material_thickness": 0.02,
     "armor": [ { "encumbrance": 2, "coverage": 80, "covers": [ "foot_l", "foot_r" ] } ]
   },
   {
