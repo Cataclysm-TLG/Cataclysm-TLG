@@ -2434,7 +2434,7 @@
     "color": "white",
     "warmth": 2,
     "flags": [ "SKINTIGHT", "FRAGILE" ],
-    "material_thickness": 0.01,
+    "material_thickness": 0.05,
     "armor": [ { "encumbrance": 2, "coverage": 80, "covers": [ "foot_l", "foot_r" ] } ]
   },
   {

@@ -239,7 +239,7 @@
     "looks_like": "boxer_briefs",
     "color": "light_gray",
     "warmth": 5,
-    "material_thickness": 0.01,
+    "material_thickness": 0.1,
     "flags": [ "VARSIZE", "SKINTIGHT" ],
     "armor": [
       { "coverage": 100, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_hip_l", "leg_hip_r" ] },
