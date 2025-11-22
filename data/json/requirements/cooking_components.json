@@ -1324,7 +1324,7 @@
   {
     "id": "soda_pop",
     "type": "requirement",
-    "//": "Soda's and such. Anything carbonated that isn't alcoholic or an energy drink.",
+    "//": "Sodas and such. Anything carbonated that isn't alcoholic or an energy drink.",
     "components": [
       [
         [ "cola", 1 ],
@@ -1333,8 +1333,7 @@
         [ "lemonlime", 1 ],
         [ "orangesoda", 1 ],
         [ "purple_drink", 1 ],
-        [ "rootbeer", 1 ],
-        [ "spezi", 1 ]
+        [ "rootbeer", 1 ]
       ]
     ]
   },
@@ -1345,7 +1344,6 @@
     "components": [
       [
         [ "oj", 1 ],
-        [ "oj_fresh", 1 ],
         [ "lemonade", 1 ],
         [ "apple_cider", 1 ],
         [ "cranberry_juice", 1 ],

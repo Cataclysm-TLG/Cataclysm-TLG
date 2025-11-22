@@ -2920,26 +2920,6 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "atomic_coffee",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_DRINKS",
-    "flags": [ "NO_MORALE_OK" ],
-    "skill_used": "cooking",
-    "time": "20 m",
-    "autolearn": true,
-    "batch_time_factors": [ 80, 4 ],
-    "tools": [ [ [ "water_boiling_heat", 4, "LIST" ] ] ],
-    "//": "now that it's just very strong coffee it doesn't need to be atomic-exclusive anymore",
-    "components": [
-      [ [ "coffee_raw", 2 ], [ "coffee_syrup", 2 ] ],
-      [ [ "caffeine", 2 ] ],
-      [ [ "sugar_standard", 1, "LIST" ] ],
-      [ [ "water", 1 ], [ "water_clean", 1 ] ]
-    ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
     "result": "coffee_substitute",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
@@ -3216,7 +3196,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "oj_fresh",
+    "result": "oj",
     "byproducts": [ [ "juice_pulp", 16 ] ],
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
@@ -3284,44 +3264,6 @@
   {
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
-    "result": "orangeade",
-    "id_suffix": "from_mix",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_DRINKS",
-    "skill_used": "cooking",
-    "time": "30 s",
-    "autolearn": true,
-    "components": [ [ [ "orangeade_powder", 1 ] ], [ [ "water_clean", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "grapeade",
-    "id_suffix": "from_mix",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_DRINKS",
-    "skill_used": "cooking",
-    "time": "30 s",
-    "autolearn": true,
-    "components": [ [ [ "grapeade_powder", 1 ] ], [ [ "water_clean", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "spezi",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_DRINKS",
-    "skill_used": "cooking",
-    "difficulty": 1,
-    "time": "30 s",
-    "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
-    "components": [ [ [ "orangesoda", 1 ] ], [ [ "cola", 1 ] ] ],
-    "charges": 2
-  },
-  {
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
     "result": "crispycran",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_DRINKS",
@@ -3383,7 +3325,7 @@
     "time": "30 s",
     "autolearn": true,
     "flags": [ "BLIND_HARD" ],
-    "components": [ [ [ "oj", 1 ], [ "oj_fresh", 1 ], [ "cranberry_juice", 1 ] ], [ [ "vodka", 1 ] ] ]
+    "components": [ [ [ "oj", 1 ], [ "cranberry_juice", 1 ], [ "lemonade", 1 ] ], [ [ "vodka", 1 ] ] ]
   },
   {
     "type": "recipe",

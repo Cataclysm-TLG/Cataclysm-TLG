@@ -5,7 +5,6 @@
     "subtype": "distribution",
     "entries": [
       { "item": "energy_drink", "prob": 55 },
-      { "item": "energy_drink_atomic", "prob": 12 },
       { "item": "mag_computer", "prob": 45 },
       { "item": "mag_electronics", "prob": 25 },
       { "item": "colamdew", "prob": 50 },

@@ -843,7 +843,6 @@
       [ "mag_news", 40 ],
       [ "news_regional", 35 ],
       [ "coffee", 55 ],
-      [ "atomic_coffee", 10 ],
       [ "tea", 35 ]
     ]
   },
@@ -1883,8 +1882,7 @@
       { "group": "salty_snacks", "prob": 300 },
       [ "water_clean", 100 ],
       [ "water_mineral", 100 ],
-      [ "coffee", 100 ],
-      [ "atomic_coffee", 100 ]
+      [ "coffee", 100 ]
     ]
   },
   {

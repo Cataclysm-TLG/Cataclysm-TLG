@@ -71,32 +71,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "drink_shirleytemple",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "skill_used": "cooking",
-    "time": "30 s",
-    "batch_time_factors": [ 50, 4 ],
-    "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
-    "components": [ [ [ "lemonlime", 1 ], [ "lemonade", 1 ], [ "oj", 1 ], [ "oj_fresh", 1 ] ], [ [ "grenadine_syrup", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "NO_EXERCISE",
-    "result": "drink_royrogers",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "skill_used": "cooking",
-    "time": "30 s",
-    "batch_time_factors": [ 50, 4 ],
-    "autolearn": true,
-    "flags": [ "BLIND_HARD" ],
-    "components": [ [ [ "cola", 1 ] ], [ [ "grenadine_syrup", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "result": "drink_virgin_mary",
     "category": "CC_*",
@@ -261,7 +235,7 @@
     "flags": [ "BLIND_HARD" ],
     "components": [
       [ [ "tequila", 1 ], [ "rum", 1 ], [ "vodka", 1 ] ],
-      [ [ "oj", 1 ], [ "oj_fresh", 1 ], [ "pineapple_juice", 2 ] ],
+      [ [ "oj", 1 ], [ "pineapple_juice", 2 ] ],
       [ [ "grenadine_syrup", 1 ] ]
     ]
   },

@@ -3067,5 +3067,70 @@
     "type": "MIGRATION",
     "id": "dandelionburdock_tea",
     "replace": "dandelion_tea"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spezi",
+    "replace": "cola"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rootbeer_brewed",
+    "replace": "rootbeer"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "atomic_coffee",
+    "replace": "coffee"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "energy_drink_atomic",
+    "replace": "colamdew"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "drink_royrogers",
+    "replace": "cola"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "drink_shirleytemple",
+    "replace": "lemonlime"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "orangeade",
+    "replace": "lemonade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "orangeade_powder",
+    "replace": "lemonade_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "grapeade_powder",
+    "replace": "lemonade_powder"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "grapeade",
+    "replace": "lemonade"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "oj_fresh",
+    "replace": "oj"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sparkling_peach",
+    "replace": "sparkling"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sparkling_pomegranate",
+    "replace": "sparkling"
   }
 ]
