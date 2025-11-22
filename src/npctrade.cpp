@@ -58,13 +58,19 @@ std::list<item> npc_trading::transfer_items( trade_selector::select_t &stuff, Ch
         }
         // spill contained, unwanted items
         if( f_wants && gift.is_container() ) {
+            // Collect items to remove to avoid iterator invalidation
+            std::vector<item *> items_to_remove;
             for( item *it : gift.get_contents().all_items_top() ) {
                 int const price =
                     trading_price( giver, receiver, { item_location{ giver, it }, 1 } );
                 if( !f_wants( item_location{ ip.first, it }, price ) ) {
                     giver.i_add_or_drop( *it, 1, ip.first.get_item() );
-                    gift.remove_item( *it );
+                    items_to_remove.push_back( it );
                 }
+            }
+            // Remove unwanted items after iteration completes
+            for( item *it : items_to_remove ) {
+                gift.remove_item( *it );
             }
         }
 
