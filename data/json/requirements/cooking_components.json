@@ -716,7 +716,7 @@
         [ "salted_fish", 2 ],
         [ "fish_canned", 2 ],
         [ "can_salmon", 2 ],
-        [ "fish_scrap", 10 ],
+        [ "fish_scrap", 20 ],
         [ "can_tuna", 2 ]
       ]
     ]
