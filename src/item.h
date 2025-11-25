@@ -2054,6 +2054,9 @@ class item : public visitable
         /**Does this item have the specified vitamin*/
         bool has_vitamin( const vitamin_id &vitamin ) const;
 
+        /**How much of the specified vitamin is there?*/
+        int get_vitamin_amount( const vitamin_id &vitamin ) const;
+
         /**Does this item have the specified fault*/
         bool has_fault( const fault_id &fault ) const;
 

@@ -160,6 +160,8 @@ static const trait_id trait_ANTIWHEAT( "ANTIWHEAT" );
 static const trait_id trait_CARNIVORE( "CARNIVORE" );
 static const trait_id trait_EATDEAD( "EATDEAD" );
 static const trait_id trait_EATHEALTH( "EATHEALTH" );
+static const trait_id trait_EATPOISON( "EATPOISON" );
+static const trait_id trait_EATPOISON_WEAK( "EATPOISON_WEAK" );
 static const trait_id trait_GOURMAND( "GOURMAND" );
 static const trait_id trait_HERBIVORE( "HERBIVORE" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
@@ -201,6 +203,7 @@ static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
 static const vitamin_id vitamin_junk_allergen( "junk_allergen" );
 static const vitamin_id vitamin_meat_allergen( "meat_allergen" );
 static const vitamin_id vitamin_milk_allergen( "milk_allergen" );
+static const vitamin_id vitamin_mutant_toxin( "mutant_toxin" );
 static const vitamin_id vitamin_nut_allergen( "nut_allergen" );
 static const vitamin_id vitamin_vegetable_allergen( "vegetable_allergen" );
 static const vitamin_id vitamin_wheat_allergen( "wheat_allergen" );
@@ -783,6 +786,16 @@ float Character::metabolic_rate() const
     return modifier * metabolic_rate_base();
 }
 
+int Character::safe_mutant_toxin_level() const
+{
+    int amount = 99;
+    if( has_trait( trait_EATPOISON_WEAK ) ) {
+        amount = 132;
+    } else if( has_trait( trait_EATPOISON ) ) {
+        amount = 398;
+    }
+}
+
 morale_type Character::allergy_type( const item &food ) const
 {
     using allergy_tuple = std::tuple<trait_id, vitamin_id, morale_type>;
@@ -937,6 +950,13 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
                 _( "You cannot bring yourself to consume human flesh." ) );
     }
 
+    if( food.get_vitamin_amount( vitamin_mutant_toxin ) > safe_mutant_toxin_level() ) {
+        if( query_yn( _( "A noxious chemical stench makes you think twice.  Do you really want to eat this?" ) ) ) {
+        } else {
+        return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
+                _( "You decide against it." ) );
+        }
+    }
 
     if( has_trait( trait_SQUEAMISH ) && food.has_flag( flag_HEMOVORE_FUN ) &&
         !has_flag( json_flag_HEMOVORE ) && !has_trait( trait_CARNIVORE ) &&

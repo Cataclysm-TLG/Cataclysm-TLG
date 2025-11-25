@@ -3580,7 +3580,7 @@ bool npc::will_accept_from_player( const item &it ) const
         return false;
     }
 
-    if( is_minion() || get_player_character().has_trait( trait_DEBUG_MIND_CONTROL ) ||
+    if( is_player_ally() || get_player_character().has_trait( trait_DEBUG_MIND_CONTROL ) ||
         it.has_flag( flag_NPC_SAFE ) ) {
         return true;
     }

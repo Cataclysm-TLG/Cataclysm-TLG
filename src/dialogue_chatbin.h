@@ -139,7 +139,7 @@ struct dialogue_chatbin_snippets {
         to_translation( "I don't <swear> trust you enough to eat THIS…" );
     translation snip_consume_cant_consume =
         to_translation( "It doesn't look like a good idea to consume this…" );
-    translation snip_consume_rotten = to_translation( "This is rotten!  I won't eat that." );
+    translation snip_consume_rotten = to_translation( "No, it's rotten!" );
     translation snip_consume_eat = to_translation( "Thanks, that hit the spot." );
     translation snip_consume_need_item = to_translation( "I need a %s to consume that!" );
     translation snip_consume_med = to_translation( "Thanks, I feel better already." );

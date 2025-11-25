@@ -3516,6 +3516,9 @@ class Character : public Creature, public visitable
             std::map<recipe_id, std::pair<nutrients, nutrients>> &rec_cache,
             const cata::flat_set<flag_id> &extra_flags = {} ) const;
 
+        /** The amount of mutant toxin we can eat in one day without getting sick. */
+        int safe_mutant_toxin_level() const;
+
         /** Returns allergy type or morale_type::NULL_ID() if not allergic for this character */
         morale_type allergy_type( const item &food ) const;
 
