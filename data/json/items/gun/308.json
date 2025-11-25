@@ -441,7 +441,7 @@
     "price": "3200 USD",
     "price_postapoc": "60 USD",
     "to_hit": -1,
-    "material": [ "steel", "plastic" ],
+    "material": [ "steel", "aluminum", "plastic" ],
     "symbol": "(",
     "color": "dark_gray",
     "ammo": [ "308" ],
