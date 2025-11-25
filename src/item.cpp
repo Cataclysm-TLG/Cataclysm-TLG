@@ -7489,7 +7489,7 @@ int item::get_vitamin_amount( const vitamin_id &v ) const
             }
         }
     }
-    return false;
+    return 0;
 }
 
 item &item::set_fault( const fault_id &fault_id )

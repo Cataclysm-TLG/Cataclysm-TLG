@@ -791,7 +791,8 @@ int Character::safe_mutant_toxin_level() const
     int amount = 99;
     if( has_trait( trait_EATPOISON_WEAK ) ) {
         amount = 132;
-    } else if( has_trait( trait_EATPOISON ) ) {
+    }
+    if( has_trait( trait_EATPOISON ) ) {
         amount = 398;
     }
     return amount;
@@ -951,7 +952,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
                 _( "You cannot bring yourself to consume human flesh." ) );
     }
 
-    if( food.get_vitamin_amount( vitamin_mutant_toxin ) > safe_mutant_toxin_level() ) {
+    if( food.has_vitamin( vitamin_mutant_toxin ) && food.get_vitamin_amount( vitamin_mutant_toxin ) > safe_mutant_toxin_level() ) {
         if( query_yn( _( "A noxious chemical stench makes you think twice.  Do you really want to eat this?" ) ) ) {
         } else {
         return ret_val<edible_rating>::make_failure( ALLERGY,
