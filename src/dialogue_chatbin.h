@@ -135,8 +135,6 @@ struct dialogue_chatbin_snippets {
     translation snip_bye = to_translation( "Bye." );
 
     // talk from talker_npc.cpp(can use snippets in json)
-    translation snip_consume_cant_accept =
-        to_translation( "I don't <swear> trust you enough to eat THIS…" );
     translation snip_consume_cant_consume =
         to_translation( "It doesn't look like a good idea to consume this…" );
     translation snip_consume_rotten = to_translation( "No, it's rotten!" );

@@ -447,7 +447,6 @@ void npc_template::load( const JsonObject &jsobj, const std::string_view src )
     jsobj.read( "snip_bleeding_badly", tem.snippets.snip_bleeding_badly );
     jsobj.read( "snip_lost_blood", tem.snippets.snip_lost_blood );
     jsobj.read( "snip_bye", tem.snippets.snip_bye );
-    jsobj.read( "snip_consume_cant_accept", tem.snippets.snip_consume_cant_accept );
     jsobj.read( "snip_consume_cant_consume", tem.snippets.snip_consume_cant_consume );
     jsobj.read( "snip_consume_rotten", tem.snippets.snip_consume_rotten );
     jsobj.read( "snip_consume_eat", tem.snippets.snip_consume_eat );

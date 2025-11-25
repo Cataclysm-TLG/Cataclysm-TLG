@@ -794,6 +794,7 @@ int Character::safe_mutant_toxin_level() const
     } else if( has_trait( trait_EATPOISON ) ) {
         amount = 398;
     }
+    return amount;
 }
 
 morale_type Character::allergy_type( const item &food ) const
@@ -953,7 +954,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
     if( food.get_vitamin_amount( vitamin_mutant_toxin ) > safe_mutant_toxin_level() ) {
         if( query_yn( _( "A noxious chemical stench makes you think twice.  Do you really want to eat this?" ) ) ) {
         } else {
-        return ret_val<edible_rating>::make_failure( INEDIBLE_MUTATION,
+        return ret_val<edible_rating>::make_failure( ALLERGY,
                 _( "You decide against it." ) );
         }
     }
@@ -1002,6 +1003,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
 ret_val<edible_rating> Character::will_eat( const item &food, bool interactive ) const
 {
     ret_val<edible_rating> ret = can_eat( food );
+
     if( !ret.success() ) {
         if( interactive ) {
             add_msg_if_player( m_info, "%s", ret.c_str() );
@@ -1027,6 +1029,10 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
         if( !saprophage && !saprovore ) {
             add_consequence( _( "This is rotten and smells awful!" ), ROTTEN );
         }
+    }
+
+    if( food.get_vitamin_amount( vitamin_mutant_toxin ) > safe_mutant_toxin_level() ) {
+            add_consequence( _( "This is rotten and smells awful!" ), ALLERGY );
     }
 
     const bool carnivore = has_trait( trait_CARNIVORE );
