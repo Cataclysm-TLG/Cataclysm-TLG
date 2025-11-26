@@ -3782,5 +3782,10 @@
     "type": "MIGRATION",
     "id": "solarpack_on",
     "replace": "backpack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "brick_kiln",
+    "replace": "kiln"
   }
 ]
