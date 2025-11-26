@@ -23,7 +23,6 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "60 m",
-    "//": "Time has gotten shorter but is double requirement time due to making a pair",
     "autolearn": true,
     "byproducts": [ [ "scrap_cotton", 3 ] ],
     "using": [ [ "tailoring_cotton_patchwork", 1 ] ]
@@ -53,33 +52,32 @@
     "skill_used": "tailor",
     "difficulty": 5,
     "skills_required": [ [ "fabrication", 3 ] ],
-    "time": "390 m",
+    "time": "10 h",
     "autolearn": true,
     "book_learn": [ [ "textbook_arthropod", 4 ] ],
-    "byproducts": [ [ "scrap_leather", 4 ] ],
     "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_closures" },
       { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_leatherworking" },
       { "proficiency": "prof_articulation" }
     ],
-    "using": [ [ "armor_chitin", 3 ], [ "tailoring_leather_small", 2 ] ]
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_chitin", 6 ], [ "filament", 4 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "xs_armguard_chitin",
     "type": "recipe",
     "copy-from": "armguard_chitin",
-    "time": "390 m",
-    "byproducts": [ [ "scrap_leather", 4 ] ],
-    "using": [ [ "armor_chitin", 2 ], [ "tailoring_leather_small", 1 ] ]
+    "time": "8 h",
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_chitin", 4 ], [ "filament", 2 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "xl_armguard_chitin",
     "type": "recipe",
     "copy-from": "armguard_chitin",
-    "time": "440 m",
-    "byproducts": [ [ "scrap_leather", 4 ] ],
-    "using": [ [ "armor_chitin", 4 ], [ "tailoring_leather_small", 3 ] ]
+    "time": "12 h",
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_chitin", 8 ], [ "filament", 8 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "armguard_acidchitin",
@@ -90,33 +88,32 @@
     "skill_used": "tailor",
     "difficulty": 6,
     "skills_required": [ [ "fabrication", 3 ], [ "chemistry", 2 ] ],
-    "time": "390 m",
+    "time": "12 h",
     "autolearn": true,
     "book_learn": [ [ "textbook_arthropod", 5 ] ],
-    "byproducts": [ [ "scrap_leather", 4 ] ],
-    "using": [ [ "armor_acidchitin", 3 ], [ "tailoring_leather_small", 2 ] ],
     "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_closures" },
       { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_leatherworking" },
       { "proficiency": "prof_articulation" }
-    ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_acidchitin", 6 ], [ "filament", 4 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "xs_armguard_acidchitin",
     "type": "recipe",
     "copy-from": "armguard_acidchitin",
-    "time": "390 m",
-    "byproducts": [ [ "scrap_leather", 4 ] ],
-    "using": [ [ "armor_acidchitin", 2 ], [ "tailoring_leather_small", 1 ] ]
+    "time": "10 h",
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_acidchitin", 4 ], [ "filament", 2 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "xl_armguard_acidchitin",
     "type": "recipe",
     "copy-from": "armguard_acidchitin",
-    "time": "440 m",
-    "byproducts": [ [ "scrap_leather", 4 ] ],
-    "using": [ [ "armor_acidchitin", 4 ], [ "tailoring_leather_small", 3 ] ]
+    "time": "14 h",
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "using": [ [ "armor_acidchitin", 8 ], [ "filament", 8 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
   },
   {
     "result": "armguard_hard",
