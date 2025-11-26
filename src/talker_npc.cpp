@@ -40,18 +40,14 @@
 #include "translations.h"
 #include "units.h"
 #include "units_utility.h"
+#include "vitamin.h"
 
 static const efftype_id effect_lying_down( "lying_down" );
 static const efftype_id effect_narcosis( "narcosis" );
 static const efftype_id effect_npc_suspend( "npc_suspend" );
 static const efftype_id effect_sleep( "sleep" );
 
-static const itype_id itype_foodperson_mask( "foodperson_mask" );
-static const itype_id itype_foodperson_mask_on( "foodperson_mask_on" );
-
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
-static const trait_id trait_PROF_CHURL( "PROF_CHURL" );
-static const trait_id trait_PROF_FOODP( "PROF_FOODP" );
 static const trait_id trait_SAPROVORE( "SAPROVORE" );
 
 std::string talker_npc_const::distance_to_goal() const
@@ -180,24 +176,7 @@ std::vector<std::string> talker_npc::get_topics( bool radio_contact ) const
             add_topics.emplace_back( "TALK_MUTE" );
         }
     }
-    if( player_character.has_trait( trait_PROF_CHURL ) ) {
-        if( add_topics.back() == me_npc->chatbin.talk_mug ||
-            add_topics.back() == me_npc->chatbin.talk_stranger_aggressive ) {
-            me_npc->make_angry();
-            add_topics.emplace_back( "TALK_CHURL_ANGRY" );
-        } else if( ( me_npc->op_of_u.trust >= 0 ) && ( me_npc->op_of_u.anger <= 0 ) &&
-                   ( me_npc->int_cur >= 9 ) ) {
-            add_topics.emplace_back( "TALK_CHURL_TRADE" );
-        } else {
-            add_topics.emplace_back( "TALK_CHURL" );
-        }
-    }
 
-    if( me_npc->has_trait( trait_PROF_FOODP ) &&
-        !( me_npc->is_wearing( itype_foodperson_mask_on ) ||
-           me_npc->is_wearing( itype_foodperson_mask ) ) ) {
-        add_topics.emplace_back( "TALK_NPC_NOFACE" );
-    }
     me_npc->decide_needs();
 
     return add_topics;
@@ -335,7 +314,7 @@ static consumption_result try_consume( npc &p, item &it, std::string &reason )
     }
 
     if( !p.will_accept_from_player( it ) ) {
-        reason = p.chat_snippets().snip_consume_cant_accept.translated();
+        reason = p.chat_snippets().snip_consume_cant_consume.translated();
         return REFUSED;
     }
 
@@ -468,13 +447,19 @@ std::string talker_npc::give_item_to( const bool to_use )
                 }
             }
         } else {
-            reason += " " + string_format( me_npc->chat_snippets().snip_give_weapon_weak.translated() +
-                                           _( "(new weapon value: %.1f vs %.1f)." ), new_weapon_value, cur_weapon_value );
+            add_msg_debug( debugmode::DF_TALKER, "New weapon value %.1f is lower than current value %.1f", new_weapon_value, cur_weapon_value );
+            if( query_yn( _( "I think my %1s is better, do you really want me to use the %2s?" ), weap.tname(), given.tname() ) ) {
+                me_npc->wield( given );
+                reason = me_npc->chat_snippets().snip_give_wield.translated();
+                taken = true;
+            } else {
+                reason = string_format( _( "I'll keep using my %s then." ), weap.tname() );
+            }
         }
-    } else {//allow_use is false so try to carry instead
+    } else { // allow_use is false so try to carry instead.
         if( me_npc->can_pickVolume( given ) && me_npc->can_pickWeight( given ) ) {
             reason = me_npc->chat_snippets().snip_give_carry.translated();
-            // set the item given to be favorited so it's not dropped automatically
+            // Set the item given to be favorited so it's not dropped automatically.
             given.set_favorite( true );
             taken = true;
             me_npc->i_add( given );

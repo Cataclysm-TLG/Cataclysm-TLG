@@ -160,6 +160,8 @@ static const trait_id trait_ANTIWHEAT( "ANTIWHEAT" );
 static const trait_id trait_CARNIVORE( "CARNIVORE" );
 static const trait_id trait_EATDEAD( "EATDEAD" );
 static const trait_id trait_EATHEALTH( "EATHEALTH" );
+static const trait_id trait_EATPOISON( "EATPOISON" );
+static const trait_id trait_EATPOISON_WEAK( "EATPOISON_WEAK" );
 static const trait_id trait_GOURMAND( "GOURMAND" );
 static const trait_id trait_HERBIVORE( "HERBIVORE" );
 static const trait_id trait_HIBERNATE( "HIBERNATE" );
@@ -937,7 +939,6 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
                 _( "You cannot bring yourself to consume human flesh." ) );
     }
 
-
     if( has_trait( trait_SQUEAMISH ) && food.has_flag( flag_HEMOVORE_FUN ) &&
         !has_flag( json_flag_HEMOVORE ) && !has_trait( trait_CARNIVORE ) &&
         !food.is_medication() && !has_effect( effect_hunger_near_starving ) &&
@@ -982,6 +983,7 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
 ret_val<edible_rating> Character::will_eat( const item &food, bool interactive ) const
 {
     ret_val<edible_rating> ret = can_eat( food );
+
     if( !ret.success() ) {
         if( interactive ) {
             add_msg_if_player( m_info, "%s", ret.c_str() );

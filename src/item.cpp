@@ -7474,6 +7474,24 @@ bool item::has_vitamin( const vitamin_id &v ) const
     return false;
 }
 
+int item::get_vitamin_amount( const vitamin_id &v ) const
+{
+    if( !is_comestible() ) {
+        return 0;
+    }
+    const nutrients food_item = default_character_compute_effective_nutrients( *this );
+    for( auto const& [vit_id, amount] : food_item.vitamins() ) {
+        if( vit_id == v ) {
+            if( amount > 0 ) {
+                return amount;
+            } else {
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
 item &item::set_fault( const fault_id &fault_id )
 {
     faults.insert( fault_id );
