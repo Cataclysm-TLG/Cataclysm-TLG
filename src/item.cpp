@@ -7476,7 +7476,7 @@ bool item::has_vitamin( const vitamin_id &v ) const
 
 int item::get_vitamin_amount( const vitamin_id &v ) const
 {
-    if( !this->is_comestible() ) {
+    if( !is_comestible() ) {
         return 0;
     }
     const nutrients food_item = default_character_compute_effective_nutrients( *this );

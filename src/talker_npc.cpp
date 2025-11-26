@@ -50,8 +50,6 @@ static const efftype_id effect_sleep( "sleep" );
 static const trait_id trait_DEBUG_MIND_CONTROL( "DEBUG_MIND_CONTROL" );
 static const trait_id trait_SAPROVORE( "SAPROVORE" );
 
-static const vitamin_id vitamin_mutant_toxin( "mutant_toxin" );
-
 std::string talker_npc_const::distance_to_goal() const
 {
     // TODO: this ignores the z-component
@@ -330,11 +328,6 @@ static consumption_result try_consume( npc &p, item &it, std::string &reason )
             if( to_eat.rotten() && !p.as_character()->has_trait( trait_SAPROVORE ) ) {
                 //TODO: once npc needs are operational again check npc hunger state and allow eating if desperate
                 reason = p.chat_snippets().snip_consume_rotten.translated();
-                return REFUSED;
-            }
-
-            if( to_eat.get_vitamin_amount( vitamin_mutant_toxin ) > !p.as_character()->safe_mutant_toxin_level() ) {
-                reason = p.chat_snippets().snip_consume_cant_consume.translated();
                 return REFUSED;
             }
 
