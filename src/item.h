@@ -2769,7 +2769,7 @@ class item : public visitable
          */
         int get_free_mod_locations( const gunmod_location &location ) const;
         /**
-         * Does it require gunsmithing tools to repair.
+         * Does it use (for now) a bespoke system to repair?
          */
         bool is_firearm() const;
         /**
