@@ -3271,9 +3271,10 @@ bool repair_item_actor::can_repair_target( Character &pl, const item &fix, bool 
         }
         return false;
     }
+    // TODO: fix this
     if( fix.is_firearm() ) {
         if( print_msg ) {
-            pl.add_msg_if_player( m_info, _( "That requires gunsmithing tools." ) );
+            pl.add_msg_if_player( m_info, _( "Try activating that to repair it." ) );
         }
         return false;
     }

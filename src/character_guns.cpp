@@ -32,6 +32,8 @@
 static const itype_id itype_large_repairkit( "large_repairkit" );
 static const itype_id itype_small_repairkit( "small_repairkit" );
 
+static const limb_score_id limb_score_manip( "manip" );
+
 static const trait_id trait_DEBUG_HS( "DEBUG_HS" );
 
 template <typename T, typename Output>
@@ -149,13 +151,15 @@ std::pair<int, int> Character::gunmod_installation_odds( const item_location &gu
     roll = std::min( static_cast<double>( chances ), 5.0 ) / 6.0 * 100;
     // focus is either a penalty or bonus of at most +/-10%
     roll += ( std::min( std::max( get_focus(), 140 ), 60 ) - 100 ) / 4;
-    // dexterity and intelligence give +/-2% for each point above or below 12
-    roll += ( get_dex() - 12 ) * 2;
-    roll += ( get_int() - 12 ) * 2;
+    // dexterity and intelligence give +/-2% for each point above or below 10
+    roll += ( get_dex() - 10 ) * 2;
+    roll += ( get_int() - 10 ) * 2;
     // each level of damage to the base gun reduces success by 10%
     roll -= gun->damage_level() * 10;
     roll = std::min( std::max( roll, 0 ), 100 );
 
+    // Manipulation helps, conferring a small bonus if it's high enough.
+    roll *= static_cast<float>( std::round( ( get_limb_score( limb_score_manip ) + 0.1f ) ) );
     // risk of causing damage on failure increases with less durable guns
     risk = ( 100 - roll ) * ( ( 10.0 - std::min( gun->type->gun->durability, 9 ) ) / 10.0 );
 
@@ -199,7 +203,6 @@ void Character::gunmod_add( item &gun, item &mod )
     }
 
     item &moved_mod = *mods.front();
-    // any (optional) tool charges that are used during installation
     auto odds = gunmod_installation_odds( wielded_gun, moved_mod );
     int roll = odds.first;
     int risk = odds.second;
@@ -225,28 +228,8 @@ void Character::gunmod_add( item &gun, item &mod )
         std::vector<std::function<void()>> actions;
 
         prompt.addentry( -1, true, 'w',
-                         string_format( _( "Try without tools (%i%%) risking damage (%i%%)" ), roll, risk ) );
+                         string_format( _( "Attempt (%i%%) risking damage (%i%%)" ), roll, risk ) );
         actions.emplace_back( [&] {} );
-
-        prompt.addentry( -1, has_charges( itype_small_repairkit, 100 ), 'f',
-                         string_format( _( "Use 100 charges of firearm repair kit (%i%%)" ), std::min( roll * 2, 100 ) ) );
-
-        actions.emplace_back( [&] {
-            tool = "small_repairkit";
-            qty = 100;
-            roll *= 2; // firearm repair kit improves success...
-            risk /= 2; // ...and reduces the risk of damage upon failure
-        } );
-
-        prompt.addentry( -1, has_charges( itype_large_repairkit, 25 ), 'g',
-                         string_format( _( "Use 25 charges of gunsmith repair kit (%i%%)" ), std::min( roll * 3, 100 ) ) );
-
-        actions.emplace_back( [&] {
-            tool = "large_repairkit";
-            qty = 25;
-            roll *= 3; // gunsmith repair kit improves success markedly...
-            risk = 0;  // ...and entirely prevents damage upon failure
-        } );
 
         prompt.query();
         if( prompt.ret < 0 ) {
