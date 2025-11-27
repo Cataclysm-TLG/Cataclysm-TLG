@@ -58,7 +58,11 @@
       "bandit_farm_1_north": "sand_pit_NW",
       "bandit_farm_9_north": "sand_pit_SE",
       "bandit_farm_7_north": "sand_pit_SW",
-      "bandit_farm_8_north": "sand_pit_S"
+      "bandit_farm_8_north": "sand_pit_S",
+      "lumbermill_0_0_ocu": "lumbermill_0_0",
+      "lumbermill_0_1_ocu": "lumbermill_0_1",
+      "lumbermill_1_0_ocu": "lumbermill_1_0",
+      "lumbermill_1_1_ocu": "lumbermill_1_1"
     }
   }
 ]

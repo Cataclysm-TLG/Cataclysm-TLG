@@ -1062,16 +1062,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": [ "lumbermill_0_0_ocu", "lumbermill_0_1_ocu", "lumbermill_1_0_ocu", "lumbermill_1_1_ocu" ],
-    "vision_levels": "isolated_building",
-    "see_cost": "high",
-    "name": "lumbermill",
-    "sym": "L",
-    "color": "i_green",
-    "flags": [ "SOURCE_CONSTRUCTION", "SOURCE_FABRICATION" ]
-  },
-  {
-    "type": "overmap_terrain",
     "id": [
       "hive_edge_00",
       "hive_edge_10",
