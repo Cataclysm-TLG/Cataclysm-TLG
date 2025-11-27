@@ -469,7 +469,6 @@
     "description": "Obsoleted trait.",
     "random_at_chargen": false
   },
-  
   {
     "type": "mutation",
     "id": "TOUGH_MEDICAL",
