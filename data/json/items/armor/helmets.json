@@ -1330,7 +1330,7 @@
       }
     ],
     "warmth": 20,
-    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "OUTER", "CUSHION_FALL" ],
+    "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_SHADE", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
   },
   {
