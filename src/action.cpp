@@ -404,8 +404,6 @@ std::string action_ident( action_id act )
             return "open_options";
         case ACTION_AUTOPICKUP:
             return "open_autopickup";
-        case ACTION_AUTONOTES:
-            return "open_autonotes";
         case ACTION_SAFEMODE:
             return "open_safemode";
         case ACTION_COLOR:
@@ -459,7 +457,6 @@ bool can_action_change_worldstate( const action_id act )
         case ACTION_KEYBINDINGS:
         case ACTION_OPTIONS:
         case ACTION_AUTOPICKUP:
-        case ACTION_AUTONOTES:
         case ACTION_SAFEMODE:
         case ACTION_COLOR:
         case ACTION_WORLD_MODS:
