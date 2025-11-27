@@ -2985,10 +2985,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             get_auto_pickup().show();
             break;
 
-        case ACTION_AUTONOTES:
-            get_auto_notes_settings().show_gui();
-            break;
-
         case ACTION_SAFEMODE:
             get_safemode().show();
             break;
