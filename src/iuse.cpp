@@ -408,8 +408,6 @@ static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_human_blood_vitamin( "human_blood_vitamin" );
 static const vitamin_id vitamin_redcells( "redcells" );
 
-static const weather_type_id weather_portal_storm( "portal_storm" );
-
 // how many characters per turn of radio
 static constexpr int RADIO_PER_TURN = 25;
 
@@ -2748,13 +2746,6 @@ std::optional<int> iuse::emf_passive_on( Character *, item *, const tripoint_bub
 
     creature_tracker &creatures = get_creature_tracker();
     map &here = get_map();
-    // can't get a reading during a portal storm
-    if( get_weather().weather_id == weather_portal_storm ) {
-        sounds::sound( pos, 6, sounds::sound_t::alarm, _( "BEEEEE-CHHHHHHH-eeEEEEEEE-CHHHHHHHHHHHH" ), true,
-                       "tool", "emf_detector" );
-        // skip continuing to check for locations
-        return 1;
-    }
 
     for( const tripoint_bub_ms &loc : closest_points_first( pos, max ) ) {
         const Creature *critter = creatures.creature_at( loc );

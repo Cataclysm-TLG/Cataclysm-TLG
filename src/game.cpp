@@ -1663,47 +1663,6 @@ bool game::cancel_activity_or_ignore_query( const distraction_type type, const s
     }
 }
 
-bool game::portal_storm_query( const distraction_type type, const std::string &text )
-{
-    if( u.has_distant_destination() ) {
-        if( cancel_auto_move( u, text ) ) {
-            return true;
-        } else {
-            u.set_destination( u.get_auto_move_route(), player_activity( ACT_TRAVELLING ) );
-            return false;
-        }
-    }
-    if( !u.activity || u.activity.is_distraction_ignored( type ) ) {
-        return false;
-    }
-
-    static const std::vector<nc_color> color_list = {
-        c_light_red, c_red, c_green, c_light_green,
-        c_blue, c_light_blue, c_yellow
-    };
-    const nc_color color = random_entry( color_list );
-
-    query_popup()
-    .context( "YES_QUERY" )
-    .message( "%s", text )
-    .option( "YES0" )
-    .option( "YES1" )
-    .option( "YES2" )
-    .default_color( color )
-    .query();
-
-    // ensure it never happens again during this activity - shouldn't be an issue anyway
-    u.activity.ignore_distraction( type );
-    for( player_activity &activity : u.backlog ) {
-        activity.ignore_distraction( type );
-    }
-
-    ui_manager::redraw();
-    refresh_display();
-
-    return false;
-}
-
 bool game::cancel_activity_query( const std::string &text )
 {
     if( u.has_destination() ) {

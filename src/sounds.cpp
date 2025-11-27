@@ -1218,7 +1218,6 @@ void sfx::do_ambient()
             channel::outdoors_clear_env,
             channel::outdoors_sunny_env,
             channel::outdoors_cloudy_env,
-            channel::outdoors_portal_storm_env
         };
         std::set<channel> active_channels;
         for( const channel &ch : outdoor_channels ) {
@@ -1276,11 +1275,6 @@ void sfx::do_ambient()
                                                 channel::outdoors_snow_env, 1000 );
                     break;
                 case weather_sound_category::silent:
-                    break;
-                case weather_sound_category::portal_storm:
-                    play_ambient_variant_sound( "environment", "WEATHER_PORTAL_STORM", seas_str,
-                                                indoors, night, heard_volume,
-                                                channel::outdoors_portal_storm_env, 1000 );
                     break;
                 case weather_sound_category::clear:
                     play_ambient_variant_sound( "environment", "WEATHER_CLEAR", seas_str,

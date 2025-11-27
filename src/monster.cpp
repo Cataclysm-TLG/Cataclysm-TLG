@@ -1584,14 +1584,6 @@ Creature::Attitude monster::attitude_to( const Creature &other ) const
 
 monster_attitude monster::attitude( const Character *u ) const
 {
-    // override for the Personal Portal Storms Mod
-    // if the monster is a nether portal monster and the character is an NPC then ignore
-    if( u != nullptr && faction == monfaction_nether_player_hate && u->is_npc() &&
-        get_option<bool>( "PORTAL_STORM_IGNORE_NPC" ) ) {
-        // portal storm creatures ignore NPCs no matter what with this mod on
-        return MATT_FPASSIVE;
-    }
-
     if( friendly != 0 ) {
         if( has_effect( effect_docile ) ) {
             return MATT_FPASSIVE;

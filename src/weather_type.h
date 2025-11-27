@@ -47,7 +47,6 @@ enum weather_sound_category : int {
     flurries,
     snowstorm,
     snow,
-    portal_storm,
     clear,
     sunny,
     cloudy,
