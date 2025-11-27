@@ -88,14 +88,8 @@
   },
   {
     "type": "palette",
-    "id": "trail_large_den_fox_gray_palette",
-    "monster": { "A": { "monster": "mon_fox_gray", "chance": 100 }, "a": { "monster": "mon_fox_gray", "chance": 5 } },
-    "terrain": { "d": "t_den_large" }
-  },
-  {
-    "type": "palette",
-    "id": "trail_large_den_fox_red_palette",
-    "monster": { "A": { "monster": "mon_fox_red", "chance": 100 }, "a": { "monster": "mon_fox_red", "chance": 5 } },
+    "id": "trail_large_den_fox_palette",
+    "monster": { "A": { "monster": "mon_fox", "chance": 100 }, "a": { "monster": "mon_fox", "chance": 5 } },
     "terrain": { "d": "t_den_large" }
   },
   {

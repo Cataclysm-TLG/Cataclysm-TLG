@@ -270,12 +270,6 @@
         "description": "A large plush fox.  It isn't realistic enough to trick a zombie into going after it, but it's very cute and makes a comforting bedtime companion."
       },
       {
-        "id": "toy_plush_rfox",
-        "name": { "str": "red fox plushie" },
-        "description": "A large plush red fox.  It isn't realistic enough to trick a zombie into going after it, but it's very cute and makes a comforting bedtime companion.",
-        "weight": 1
-      },
-      {
         "id": "toy_plush_moose",
         "name": { "str": "moose plushie" },
         "description": "A cuddly plushie of the mighty moose, with soft brown fur, floppy ears, and big antlers.  It has a special huggability feature that makes it delightfully squishy, perfect for comforting cuddles.",
@@ -297,12 +291,6 @@
         "id": "toy_plush_balde",
         "name": { "str": "bald eagle plushie" },
         "description": "A cuddly and majestic bald eagle plushie with soft, brown and white cotton faux feathers, a hooked, soft beak, and a patriotic expression.  It has a pair of special eyes that glow as brightly as the stars and stripes of Old Glory, the perfect partner to fend off your enemies in the Cataclysm.",
-        "weight": 1
-      },
-      {
-        "id": "toy_plush_gfox",
-        "name": { "str": "gray fox plushie" },
-        "description": "A large and cute plush gray fox, with soft, gray fur and big, bat-like ears.  It has a special scent that mimics the wild and earthy aroma of the New England wilderness.",
         "weight": 1
       },
       {

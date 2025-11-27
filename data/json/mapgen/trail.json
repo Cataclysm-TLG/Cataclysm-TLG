@@ -372,8 +372,7 @@
               [ "trail_small_den_groundhog_palette", 500 ],
               [ "trail_small_den_hare_palette", 5 ],
               [ "trail_large_den_empty_palette", 10 ],
-              [ "trail_large_den_fox_gray_palette", 2 ],
-              [ "trail_large_den_fox_red_palette", 2 ],
+              [ "trail_large_den_fox_palette", 2 ],
               [ "trail_large_den_bear_palette", 200 ]
             ]
           }
