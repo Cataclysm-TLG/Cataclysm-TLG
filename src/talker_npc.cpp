@@ -447,8 +447,10 @@ std::string talker_npc::give_item_to( const bool to_use )
                 }
             }
         } else {
-            add_msg_debug( debugmode::DF_TALKER, "New weapon value %.1f is lower than current value %.1f", new_weapon_value, cur_weapon_value );
-            if( query_yn( _( "I think my %1s is better, do you really want me to use the %2s?" ), weap.tname(), given.tname() ) ) {
+            add_msg_debug( debugmode::DF_TALKER, "New weapon value %.1f is lower than current value %.1f",
+                           new_weapon_value, cur_weapon_value );
+            if( query_yn( _( "I think my %1s is better, do you really want me to use the %2s?" ), weap.tname(),
+                          given.tname() ) ) {
                 me_npc->wield( given );
                 reason = me_npc->chat_snippets().snip_give_wield.translated();
                 taken = true;

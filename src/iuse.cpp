@@ -5372,18 +5372,20 @@ std::optional<int> iuse::gun_repair( Character *p, item *it, const tripoint_bub_
     bool has_tools = true;
     if( !cinv.has_quality( qual_SCREW_FINE ) ) {
         p->add_msg_if_player( m_warning, _( "You need an item with %s of 1 or more to repair this item." ),
-                                qual_SCREW_FINE.obj().name );
+                              qual_SCREW_FINE.obj().name );
         has_tools = false;
     }
     if( !cinv.has_quality( qual_HAMMER_FINE ) ) {
         p->add_msg_if_player( m_warning, _( "You need an item with %s of 1 or more to repair this item." ),
-                                qual_HAMMER_FINE.obj().name );
+                              qual_HAMMER_FINE.obj().name );
         has_tools = false;
     }
     map &here = get_map();
-    if( it->damage_level() > 2 && ( !cinv.has_quality( qual_VISE, 3 ) || !here.has_nearby_table( p->pos_bub(), PICKUP_RANGE ) ) ) {
-        p->add_msg_if_player( m_warning, _( "The damage is extensive, you will need a flat work surface and an item with %s of 3 or more to make repairs." ),
-                                qual_VISE.obj().name );
+    if( it->damage_level() > 2 && ( !cinv.has_quality( qual_VISE, 3 ) ||
+                                    !here.has_nearby_table( p->pos_bub(), PICKUP_RANGE ) ) ) {
+        p->add_msg_if_player( m_warning,
+                              _( "The damage is extensive, you will need a flat work surface and an item with %s of 3 or more to make repairs." ),
+                              qual_VISE.obj().name );
         has_tools = false;
     }
     if( !has_tools ) {
@@ -5398,14 +5400,15 @@ std::optional<int> gun_repair( Character *p, item *it )
     sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
     p->mod_moves( -to_moves<int>( 300_seconds ) );
     // TODO: Move this to a proper activity with a proper failure/damage chance.
-    if( p->get_skill_level( skill_traps ) + p->dex_cur + p->per_cur + rng( 0, 10 ) - it->damage_level() > 24 ) {
+    if( p->get_skill_level( skill_traps ) + p->dex_cur + p->per_cur + rng( 0,
+            10 ) - it->damage_level() > 24 ) {
         it->mod_damage( -itype::damage_scale );
         p->practice( skill_traps, 4 );
         const std::string msg = it->damage_level() == 0
                                 ? _( "You repair your %s completely!  ( %s-> %s)" )
                                 : _( "You repair your %s!  ( %s-> %s)" );
         p->add_msg_if_player( m_good, msg, it->tname( 1, false ), startdurability,
-                            it->durability_indicator( true ) );
+                              it->durability_indicator( true ) );
         return 0;
     } else {
         p->add_msg_if_player( m_good, _( "You fail to make any progress on your repairs." ) );
