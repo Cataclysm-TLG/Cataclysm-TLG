@@ -1481,7 +1481,12 @@
     "type": "field_type",
     "substance_name": "stinking gas",
     "intensity_levels": [
-      { "name": "stinking gas", "sym": ".", "dangerous": false, "transparent": true, "concentration": 1,
+      {
+        "name": "stinking gas",
+        "sym": ".",
+        "dangerous": false,
+        "transparent": true,
+        "concentration": 1,
         "effects": [
           {
             "effect_id": "nausea",
@@ -1492,7 +1497,8 @@
             "message": "The horrible stench makes you sick to your stomach.",
             "message_type": "bad"
           }
-        ] },
+        ]
+      },
       { "//": "repeat last entry" },
       { "//": "repeat last entry" }
     ],

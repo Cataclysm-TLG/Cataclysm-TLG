@@ -6538,27 +6538,8 @@
     "ugliness": 3,
     "description": "Your face and jaw have begun… changing.  Masks and such fit OK, but you're noticeably mutated.",
     "types": [ "MUZZLE" ],
-    "changes_to": [
-      "MINOTAUR",
-      "MUZZLE_RAPTOR",
-      "MUZZLE",
-      "MUZZLE_BEAR",
-      "MUZZLE_LONG",
-      "MUZZLE_RAT",
-      "RABBIT_NOSE"
-    ],
-    "category": [
-      "FELINE",
-      "RAPTOR",
-      "CATTLE",
-      "BEAST",
-      "LUPINE",
-      "URSINE",
-      "LIZARD",
-      "RAT",
-      "RABBIT",
-      "MOUSE"
-    ]
+    "changes_to": [ "MINOTAUR", "MUZZLE_RAPTOR", "MUZZLE", "MUZZLE_BEAR", "MUZZLE_LONG", "MUZZLE_RAT", "RABBIT_NOSE" ],
+    "category": [ "FELINE", "RAPTOR", "CATTLE", "BEAST", "LUPINE", "URSINE", "LIZARD", "RAT", "RABBIT", "MOUSE" ]
   },
   {
     "type": "mutation",

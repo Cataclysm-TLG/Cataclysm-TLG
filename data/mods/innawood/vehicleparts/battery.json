@@ -11,10 +11,7 @@
     "durability": 12,
     "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.  Contained in a clay shell.",
     "folded_volume": "6250 ml",
-    "breaks_into": [
-      { "item": "lead", "count": [ 900, 1100 ] },
-      { "item": "ceramic_shard", "count": [ 1, 3 ] }
-    ],
+    "breaks_into": [ { "item": "lead", "count": [ 900, 1100 ] }, { "item": "ceramic_shard", "count": [ 1, 3 ] } ],
     "requirements": {
       "install": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
       "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "qualities": [ { "id": "WRENCH", "level": 1 } ] },
