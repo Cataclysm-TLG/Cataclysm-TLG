@@ -4986,6 +4986,9 @@ void item::repair_info( std::vector<iteminfo> &info, const iteminfo_query *parts
     if( !parts->test( iteminfo_parts::DESCRIPTION_REPAIREDWITH ) ) {
         return;
     }
+    if( is_firearm() ) {
+        return;
+    }
     insert_separation_line( info );
     const std::vector<itype_id> rep = sorted_lex( repaired_with() );
     if( !rep.empty() ) {
