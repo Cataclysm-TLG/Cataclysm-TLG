@@ -1152,13 +1152,6 @@
     "spell_data": { "id": "portal_dungeon_entrance" }
   },
   {
-    "type": "SPELL",
-    "id": "portal_dungeon_entrance",
-    "name": "portal dungeon entrance",
-    "copy-from": "trap_base",
-    "effect_str": "EOC_PORTAL_STORM_DUNGEON"
-  },
-  {
     "type": "trap",
     "id": "tr_portal_dungeon_exit",
     "name": "hole to outside",
@@ -1168,13 +1161,6 @@
     "spell_data": { "id": "portal_dungeon_exit" }
   },
   {
-    "type": "SPELL",
-    "id": "portal_dungeon_exit",
-    "name": "portal dungeon exit",
-    "copy-from": "trap_base",
-    "effect_str": "EOC_PORTAL_STORM_DUNGEON_EXIT"
-  },
-  {
     "type": "trap",
     "id": "tr_portal_dungeon_next_level",
     "name": "Swirling vortex",
@@ -1182,13 +1168,6 @@
     "copy-from": "tr_swirling_vortex",
     "action": "spell",
     "spell_data": { "id": "portal_dungeon_next_level" }
-  },
-  {
-    "type": "SPELL",
-    "id": "portal_dungeon_next_level",
-    "name": "portal dungeon next level",
-    "copy-from": "trap_base",
-    "effect_str": "EOC_PORTAL_STORM_DUNGEON_NEXT_LEVEL"
   },
   {
     "type": "trap",

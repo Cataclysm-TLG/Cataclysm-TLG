@@ -26,11 +26,7 @@
     "time": "8 h",
     "autolearn": true,
     "book_learn": [ [ "textbook_arthropod", 4 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_articulation" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "armor_chitin", 3 ], [ "filament", 4 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
@@ -62,11 +58,7 @@
     "time": "10 h",
     "autolearn": true,
     "book_learn": [ [ "textbook_arthropod", 5 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_articulation" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "armor_acidchitin", 3 ], [ "filament", 4 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },

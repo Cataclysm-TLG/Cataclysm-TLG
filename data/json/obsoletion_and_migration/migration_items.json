@@ -3148,7 +3148,7 @@
     "id": "xs_boots_plate",
     "replace": "xs_boots"
   },
-    {
+  {
     "type": "MIGRATION",
     "id": "boots_chitin",
     "replace": "chitin_sollerets"
@@ -3187,5 +3187,20 @@
     "type": "MIGRATION",
     "id": "large_repairkit",
     "replace": "heavy_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "escape_stone",
+    "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "calming_stone",
+    "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "unstable_rift",
+    "replace": "pebble"
   }
 ]

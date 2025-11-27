@@ -1879,12 +1879,7 @@
     "type": "item_group",
     "id": "ic_merch_vending",
     "//": "for cs_internet_cafe",
-    "items": [
-      { "group": "salty_snacks", "prob": 300 },
-      [ "water_clean", 100 ],
-      [ "water_mineral", 100 ],
-      [ "coffee", 100 ]
-    ]
+    "items": [ { "group": "salty_snacks", "prob": 300 }, [ "water_clean", 100 ], [ "water_mineral", 100 ], [ "coffee", 100 ] ]
   },
   {
     "type": "item_group",

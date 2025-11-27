@@ -191,22 +191,30 @@
     "global": false,
     "recurrence": [ "3 minutes", "30 minutes" ],
     "condition": {
-      "and": [ 
-      { "not": { "u_has_flag": "VERMINOUS" } },
-      { "or": [
-        { "u_at_om_location": "sewer" },
-        { "u_at_om_location": "pump_station_3" },
-        { "u_at_om_location": "pump_station_4" },
-        { "u_at_om_location": "pump_station_5" }
-      ] }
-    ]
+      "and": [
+        { "not": { "u_has_flag": "VERMINOUS" } },
+        {
+          "or": [
+            { "u_at_om_location": "sewer" },
+            { "u_at_om_location": "pump_station_3" },
+            { "u_at_om_location": "pump_station_4" },
+            { "u_at_om_location": "pump_station_5" }
+          ]
+        }
+      ]
     },
     "effect": [
       { "u_message": "<SEWER_MORALE_DEBUFF>", "snippet": true },
       {
         "if": { "u_has_trait": "SQUEAMISH" },
         "then": [
-          { "u_add_morale": "morale_hates_sewer", "bonus": -20, "max_bonus": -40, "duration": "30 minutes", "decay_start": "30 minutes" }
+          {
+            "u_add_morale": "morale_hates_sewer",
+            "bonus": -20,
+            "max_bonus": -40,
+            "duration": "30 minutes",
+            "decay_start": "30 minutes"
+          }
         ],
         "else": [
           {

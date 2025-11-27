@@ -122,7 +122,6 @@ enum class channel : int {
     exterior_engine_sound,
     interior_engine_sound,
     radio,
-    outdoors_portal_storm_env,
     outdoors_clear_env,
     outdoors_cloudy_env,
     outdoors_sunny_env,

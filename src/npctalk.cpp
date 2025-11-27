@@ -5228,10 +5228,7 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
             g->cancel_activity_or_ignore_query( distraction_type::eoc, "" );
         }
         if( popup_w_interrupt_query_msg ) {
-            if( interrupt_type.evaluate( d ) == "portal_storm_popup" ) {
-                g->portal_storm_query( distraction_type::portal_storm_popup,
-                                       translated_message );
-            } else if( interrupt_type.evaluate( d ) == "default" ) {
+            if( interrupt_type.evaluate( d ) == "default" ) {
                 debugmsg( "Interrupt query called in json without proper interrupt type." );
             }
             // Would probably need an else-if for every possible distraction type, like this:

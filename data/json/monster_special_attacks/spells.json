@@ -1264,21 +1264,6 @@
   },
   {
     "type": "SPELL",
-    "id": "mon_reflection_revive",
-    "name": { "str": "Reflection Revive" },
-    "description": "Revives the reflection.",
-    "valid_targets": [ "self", "ground" ],
-    "max_level": 1,
-    "flags": [ "SILENT", "NO_HANDS", "NO_LEGS", "NO_EXPLOSION_SFX" ],
-    "base_casting_time": 75,
-    "min_range": 15,
-    "max_range": 15,
-    "shape": "blast",
-    "effect": "effect_on_condition",
-    "effect_str": "EOC_PORTAL_STORM_DUNGEON_REFLECTION_RESPAWN"
-  },
-  {
-    "type": "SPELL",
     "id": "mon_XEDRA_officer_banish",
     "name": { "str": "Officer banish" },
     "description": "Stops the haunting.",
@@ -1291,33 +1276,6 @@
     "shape": "blast",
     "effect": "effect_on_condition",
     "effect_str": "EOC_HAUNTING_QUEUE_STOP"
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_PORTAL_STORM_DUNGEON_REFLECTION_RESPAWN",
-    "effect": [ { "run_eocs": "EOC_PORTAL_STORM_DUNGEON_REFLECTION_SPAWN", "time_in_future": [ "30 seconds", "1 minutes" ] } ]
-  },
-  {
-    "type": "SPELL",
-    "id": "mon_tainted_shadow_revive",
-    "name": { "str": "Tainted Shadow Revive" },
-    "description": "Revives the tainted shadow.",
-    "valid_targets": [ "self", "ground" ],
-    "max_level": 1,
-    "flags": [ "SILENT", "NO_HANDS", "NO_LEGS", "NO_EXPLOSION_SFX" ],
-    "base_casting_time": 75,
-    "min_range": 15,
-    "max_range": 15,
-    "shape": "blast",
-    "effect": "effect_on_condition",
-    "effect_str": "EOC_PORTAL_STORM_SHADOW_RESPAWN"
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_PORTAL_STORM_SHADOW_RESPAWN",
-    "condition": { "x_in_y_chance": { "x": 8, "y": 10 } },
-    "effect": [ { "run_eocs": "EOC_PORTAL_STORM_SHADOW_SPAWN", "time_in_future": [ "30 seconds", "1 minutes" ] } ],
-    "false_effect": [ { "u_lose_trait": "TAINTED_SHADOW" } ]
   },
   {
     "id": "hallu_touch_suicide",

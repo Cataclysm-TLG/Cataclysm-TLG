@@ -71,7 +71,6 @@ std::string enum_to_string<distraction_type>( distraction_type data )
         case distraction_type::asthma: return "asthma";
         case distraction_type::motion_alarm: return "motion_alarm";
         case distraction_type::weather_change: return "weather_change";
-        case distraction_type::portal_storm_popup: return "portal_storm_popup";
         case distraction_type::eoc: return "eoc";
         case distraction_type::dangerous_field: return "dangerous_field";
         case distraction_type::hunger: return "hunger";
