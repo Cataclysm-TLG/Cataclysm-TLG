@@ -2678,6 +2678,7 @@
     "id": "REPLICA_EQUIPMENT",
     "type": "json_flag",
     "info": "This item is only a <info>shoddy replica</info>, and is <bad>far less effective</bad> than the real thing.",
+    "craft_inherit": true,
     "conflicts": [ "STURDY", "DURABLE_MELEE" ],
     "item_prefix": "replica "
   },
