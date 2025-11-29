@@ -286,7 +286,7 @@ static bool amphetamine_effect( Character &u, addiction &add )
             u.in_sleep_state() ? "addict_amphetamine_mild_asleep" : "addict_amphetamine_mild_awake";
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_speed, -25, -20 * in );
+        u.add_morale( morale_craving_speed, -25, -4 * in );
         ret = true;
     } else if( one_in( 10 ) && dice( 2, 80 ) < in &&
                ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
