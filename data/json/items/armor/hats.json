@@ -439,7 +439,7 @@
     "material_thickness": 4,
     "environmental_protection": 1,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "RAINPROOF", "PADDED" ],
+    "flags": [ "RAINPROOF", "PADDED", "OUTER", "NORMAL" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
@@ -533,7 +533,7 @@
     "material_thickness": 4,
     "techniques": [ "WBLOCK_1" ],
     "environmental_protection": 1,
-    "flags": [ "RAINPROOF", "PADDED", "SUN_SHADE" ],
+    "flags": [ "RAINPROOF", "PADDED", "SUN_SHADE", "OUTER", "NORMAL" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],

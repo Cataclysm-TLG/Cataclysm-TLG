@@ -642,7 +642,7 @@
     "id": "legguard_hard",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "plastic leg guards", "str_pl": "pairs of plastic leg guards" },
+    "name": { "str": "plastic shin guards", "str_pl": "pairs of plastic shin guards" },
     "description": "A pair of polyurethane leg guards with neoprene backing.  These were used in sport, policing, and even on some job sites.",
     "weight": "625 g",
     "volume": "3 L",
@@ -660,7 +660,7 @@
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
-        "encumbrance": 12,
+        "encumbrance": 8,
         "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
         "material": [
           { "type": "plastic", "covered_by_mat": 70, "thickness": 1.5 },
