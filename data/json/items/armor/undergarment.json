@@ -476,7 +476,7 @@
     "type": "ARMOR",
     "name": { "str": "leather corset (loose)", "str_pl": "leather corsets (loose)" },
     "description": "A leather corset with the strings loosened.  Has no pockets, but its thick material provides good protection from harm.  Use it to wear it tighter and close to the skin.",
-    "material_thickness": 3,
+    "material_thickness": 2,
     "environmental_protection": 1,
     "use_action": { "type": "transform", "msg": "You wrap your corset tighter.", "target": "corset", "menu_text": "Wrap tighter" },
     "delete": { "flags": [ "SKINTIGHT" ] },
