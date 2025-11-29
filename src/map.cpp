@@ -161,6 +161,7 @@ static const item_group_id Item_spawn_data_default_zombie_clothes( "default_zomb
 static const item_group_id Item_spawn_data_default_zombie_items( "default_zombie_items" );
 
 static const itype_id itype_battery( "battery" );
+static const itype_id itype_glass_shard( "glass_shard" );
 static const itype_id itype_nail( "nail" );
 
 static const json_character_flag json_flag_FOOT( "LIMB_FOOT" );
@@ -4052,6 +4053,134 @@ void map::smash_items( const tripoint_bub_ms &p, const int power, const std::str
     }
 }
 
+void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool hit_all, bash_params &params )
+{
+    if( !has_items( p ) || has_flag_ter_or_furn( ter_furn_flag::TFLAG_PLANT, p ) ) {
+        return;
+    }
+
+    // Keep track of how many items have been damaged, and what the first one is
+    bool item_was_damaged = false;
+    bool done = false;
+    int items_damaged = 0;
+    int items_destroyed = 0;
+    std::string damaged_item_name;
+
+    std::vector<item> contents;
+    map_stack items = i_at( p );
+
+    for( auto i = items.begin(); i != items.end(); ) {
+        if( done ) {
+            i++;
+            break;
+        }
+        if( i->made_of( phase_id::LIQUID ) ) {
+            i++;
+            continue;
+        }
+        if( i->is_corpse() ) {
+            i++;
+            continue;
+        }
+        if( i->has_flag( flag_UNBREAKABLE ) ) {
+            i++;
+            continue;
+        }
+
+        const float material_factor = i->chip_resistance( true );
+        if( power < material_factor ) {
+            i++;
+            continue;
+        }
+
+        // The volume check here pretty much only influences very large items
+        const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
+        float damage_chance = power / volume_factor;
+
+            params.did_bash = true;
+            params.bashed_solid = true;
+        const bool by_charges = i->count_by_charges();
+        // See if they were damaged
+        if( by_charges ) {
+            damage_chance *= std::max( 1, i->charges_per_volume( 250_ml ) );
+            while( ( damage_chance > material_factor ||
+                     x_in_y( damage_chance, material_factor ) ) &&
+                   i->charges > 0 ) {
+                i->charges--;
+                damage_chance -= material_factor;
+                item_was_damaged = true;
+            }
+        } else {
+            while( ( damage_chance > material_factor || x_in_y( damage_chance, material_factor ) ) &&
+                   ( i->damage() < i->max_damage() ) ) {
+                i->inc_damage();
+                damage_chance -= material_factor;
+                item_was_damaged = true;
+            }
+        }
+
+        // If an item was damaged, increment the counter and set it as most recently damaged.
+        if( item_was_damaged ) {
+            // If this is the first item to be damaged, store its name in damaged_item_name.
+            if( items_damaged == 0 ) {
+                damaged_item_name = i->tname();
+            }
+            // Increment the counter, and reset the flag.
+            items_damaged++;
+            item_was_damaged = false;
+        }
+
+        // Remove them if they were damaged too much
+        if( i->damage() == i->max_damage() || ( by_charges && i->charges == 0 ) ) {
+            // But save the contents, except for irremovable gunmods
+            for( item *elem : i->all_items_top() ) {
+                if( !elem->is_irremovable() ) {
+                    contents.emplace_back( *elem );
+                }
+            }
+            if( i->made_of( material_glass ) ) {
+            int glass_amount = i->volume() / 250_ml;
+            float glass_fraction = glass_amount / static_cast<float>( i->type->mat_portion_total );
+            glass_amount = rng( 0, static_cast<int>( glass_amount * glass_fraction ) );
+            if( glass_amount > 0 ) {
+                spawn_item( p, itype_glass_shard, 1, glass_amount );
+            }
+            sounds::sound( p, 12, sounds::sound_t::combat, _( "glass shattering." ), false,
+                        "smash_success", "smash_glass_contents" );
+            }
+            i = i_rem( p, i );
+            items_destroyed++;
+        } else {
+            i++;
+        }
+        if( !hit_all ) {
+            done = true;
+        }
+    }
+
+    // Let the player know that the item was damaged if they can see it.
+    map &bubble_map = reality_bubble();
+
+    if( items_destroyed > 1 ) {
+        add_msg_if_player_sees( bubble_map.get_bub( get_abs( p ) ), m_bad,
+                                _( "The impact destroys several items!" ) );
+    } else if( items_destroyed == 1 && items_damaged == 1 ) {
+        add_msg_if_player_sees( bubble_map.get_bub( get_abs( p ) ), m_bad,
+                                _( "The impact destroys the %s!" ), damaged_item_name );
+    } else if( items_damaged > 1 ) {
+        add_msg_if_player_sees( bubble_map.get_bub( get_abs( p ) ), m_bad,
+                                _( "The impact damages several items." ) );
+    } else if( items_damaged == 1 ) {
+        add_msg_if_player_sees( bubble_map.get_bub( get_abs( p ) ), m_bad,
+                                _( "The impact damages the %s." ), damaged_item_name );
+    }
+
+    for( const item &it : contents ) {
+        add_item_or_charges( p, it );
+    }
+}
+
+
 ter_str_id map::get_roof( const tripoint_bub_ms &p, const bool allow_air ) const
 {
     // This function should not be called from the 2D mode
@@ -4413,7 +4542,7 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     // Don't bash items inside terrain/furniture with SEALED flag
     if( !bashed_sealed ) {
-        bash_items( p, bsh );
+        manually_smash_items( p, str, false, bsh );
     }
     // Don't bash the vehicle doing the bashing
     const vehicle *veh = veh_pointer_or_null( veh_at( p ) );

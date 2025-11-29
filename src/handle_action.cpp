@@ -1193,7 +1193,13 @@ avatar::smash_result avatar::smash( tripoint_bub_ms &smashp )
         }
 
     } else {
-        add_msg( _( "There's nothing there to smash!" ) );
+        if( !here.has_items( smashp ) ) {
+            add_msg( _( "There's nothing there to smash!" ) );
+        } else {
+            sounds::sound( smashp, 8, sounds::sound_t::combat, _( "thump!" ),
+                               false, "smash_fail", "default" );
+            g->draw_async_anim( smashp, "bash_ineffective" );
+        }
     }
 
     return ret;
