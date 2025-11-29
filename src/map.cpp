@@ -4053,7 +4053,8 @@ void map::smash_items( const tripoint_bub_ms &p, const int power, const std::str
     }
 }
 
-void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool hit_all, bash_params &params )
+void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool hit_all,
+                                bash_params &params )
 {
     if( !has_items( p ) || has_flag_ter_or_furn( ter_furn_flag::TFLAG_PLANT, p ) ) {
         return;
@@ -4097,8 +4098,8 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
         float damage_chance = power / volume_factor;
 
-            params.did_bash = true;
-            params.bashed_solid = true;
+        params.did_bash = true;
+        params.bashed_solid = true;
         const bool by_charges = i->count_by_charges();
         // See if they were damaged
         if( by_charges ) {
@@ -4139,14 +4140,14 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
                 }
             }
             if( i->made_of( material_glass ) ) {
-            int glass_amount = i->volume() / 250_ml;
-            float glass_fraction = glass_amount / static_cast<float>( i->type->mat_portion_total );
-            glass_amount = rng( 0, static_cast<int>( glass_amount * glass_fraction ) );
-            if( glass_amount > 0 ) {
-                spawn_item( p, itype_glass_shard, 1, glass_amount );
-            }
-            sounds::sound( p, 12, sounds::sound_t::combat, _( "glass shattering." ), false,
-                        "smash_success", "smash_glass_contents" );
+                int glass_amount = i->volume() / 250_ml;
+                float glass_fraction = glass_amount / static_cast<float>( i->type->mat_portion_total );
+                glass_amount = rng( 0, static_cast<int>( glass_amount * glass_fraction ) );
+                if( glass_amount > 0 ) {
+                    spawn_item( p, itype_glass_shard, 1, glass_amount );
+                }
+                sounds::sound( p, 12, sounds::sound_t::combat, _( "glass shattering." ), false,
+                               "smash_success", "smash_glass_contents" );
             }
             i = i_rem( p, i );
             items_destroyed++;
