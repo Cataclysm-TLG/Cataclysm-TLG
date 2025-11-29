@@ -8,13 +8,8 @@
     "skill_used": "chemistry",
     "difficulty": 4,
     "skills_required": [ "tailor", 3 ],
-    "time": "1 h",
+    "time": "3 h",
     "book_learn": [
-      [ "textbook_tailor", 4 ],
-      [ "tailor_portfolio", 5 ],
-      [ "textbook_survival", 3 ],
-      [ "trappers_companion", 3 ],
-      [ "survival_book", 3 ],
       [ "textbook_armwest", 6 ],
       [ "textbook_armschina", 6 ]
     ],

@@ -36,7 +36,50 @@
     "warmth": 8,
     "material_thickness": 0.3,
     "flags": [ "RAINPROOF", "BELTED", "SUN_SHADE" ],
-    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 100, "covers": [ "head" ] } ]
+    "armor": [ { "encumbrance_modifiers": [ "NONE" ], "coverage": 95, "covers": [ "head" ] } ]
+  },
+  {
+    "id": "hood_leather",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "leather hood" },
+    "description": "A cowl made to fit over the head, leaving only the face exposed.  It is quite thick and may be of some use in combat.",
+    "weight": "658 g",
+    "volume": "1600 ml",
+    "price": "40 USD",
+    "price_postapoc": "5 USD",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "hood_rain",
+    "color": "brown",
+    "warmth": 15,
+    "material_thickness": 2,
+    "flags": [ "WATER_FRIENDLY", "STURDY", "BELTED", "SUN_SHADE", "RAINPROOF" ],
+    "armor": [
+      {
+        "encumbrance": 12,
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ]
+      },
+      { "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
+    ]
+  },
+  {
+    "id": "hood_leather_xl",
+    "type": "ARMOR",
+    "copy-from": "hood_leather",
+    "name": { "str": "leather hood" },
+    "proportional": { "weight": 1.25, "volume": 1.3, "price": 1.25 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "hood_leather_xs",
+    "type": "ARMOR",
+    "copy-from": "hood_leather",
+    "name": { "str": "leather hood" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "nomex_hood",

@@ -10,7 +10,7 @@
     "price": "580 USD",
     "price_postapoc": "40 USD",
     "to_hit": -1,
-    "material": [ "vinyl", "kevlar", "leather_treated" ],
+    "material": [ "vinyl", "nylon", "kevlar" ],
     "symbol": "[",
     "looks_like": "hood_rain",
     "color": "brown",
@@ -22,13 +22,19 @@
       {
         "material": [
           { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
-          { "type": "leather_treated", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "head" ],
-        "coverage": 95,
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
         "encumbrance": [ 18, 18 ]
-      }
+      },
+      { "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ], "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
     ]
   },
   {
@@ -42,26 +48,30 @@
     "price": "580 USD",
     "price_postapoc": "40 USD",
     "to_hit": -1,
-    "material": [ "nomex", "kevlar", "leather_treated" ],
+    "material": [ "nomex", "cotton", "kevlar" ],
     "symbol": "[",
     "looks_like": "hood_rain",
     "color": "light_gray",
     "warmth": 20,
     "environmental_protection": 3,
-    "techniques": [ "WBLOCK_1" ],
     "flags": [ "VARSIZE", "RAINPROOF", "STURDY", "SUN_SHADE", "BELTED" ],
     "armor": [
       {
         "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "cotton", "covered_by_mat": 95, "thickness": 0.2 },
-          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
-          { "type": "leather_treated", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "head" ],
-        "coverage": 95,
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
         "encumbrance": [ 20, 20 ]
-      }
+      },
+      {         "material": [
+          { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "cotton", "covered_by_mat": 95, "thickness": 0.5 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
+        ], "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
     ]
   },
   {
@@ -75,7 +85,7 @@
     "price": "580 USD",
     "price_postapoc": "35 USD",
     "to_hit": -1,
-    "material": [ "kevlar", "fur" ],
+    "material": [ "vinyl", "nylon", "kevlar", "fur" ],
     "symbol": "[",
     "looks_like": "hood_survivor",
     "color": "light_gray",
@@ -86,12 +96,25 @@
       {
         "material": [
           { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
           { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
         ],
         "covers": [ "head" ],
-        "coverage": 95,
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
         "encumbrance": [ 22, 22 ]
+      },
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ],
+        "coverage": 50
       }
     ]
   },
@@ -147,19 +170,32 @@
     "id": "hood_wsurvivor_nofur",
     "type": "ARMOR",
     "name": { "str": "faux fur winter survivor hood" },
-    "description": "A customized armored Kevlar hood.  Warm thanks to the faux-fur lining.",
+    "description": "A customized armored hood, chemical-resistant and padded with Kevlar.  It's also warm thanks to the faux fur lining.",
     "copy-from": "hood_wsurvivor",
-    "material": [ "kevlar", "faux_fur" ],
+    "material": [ "vinyl", "nylon", "kevlar", "faux_fur" ],
     "armor": [
       {
         "material": [
           { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
           { "type": "faux_fur", "covered_by_mat": 95, "thickness": 2.5 }
         ],
         "covers": [ "head" ],
-        "coverage": 95,
+        "specifically_covers": [ "head_crown", "head_ear_l", "head_ear_r", "head_nape" ],
+        "coverage": 100,
         "encumbrance": [ 9, 9 ]
+      },
+            {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
+          { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
+          { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 },
+          { "type": "fur", "covered_by_mat": 95, "thickness": 2.5 }
+        ],
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ],
+        "coverage": 50
       }
     ],
     "symbol": "[",

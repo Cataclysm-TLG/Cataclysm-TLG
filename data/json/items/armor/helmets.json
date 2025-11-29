@@ -1027,19 +1027,19 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "leather helmet" },
-    "description": "A thick leather helmet that provides excellent protection for the head.",
+    "description": "A helmet made of shaped and hardened leather.",
     "weight": "658 g",
     "volume": "2 L",
     "price": "140 USD",
     "price_postapoc": "20 USD",
-    "material": [ "leather" ],
+    "material": [ "leather_boiled" ],
     "symbol": "[",
     "looks_like": "hat_hard",
     "color": "brown",
-    "warmth": 10,
-    "material_thickness": 4.5,
+    "warmth": 12,
+    "material_thickness": 2.5,
     "techniques": [ "WBLOCK_1" ],
-    "flags": [ "VARSIZE", "WATER_FRIENDLY", "STURDY", "OUTER" ],
+    "flags": [ "VARSIZE", "WATER_FRIENDLY", "STURDY", "OUTER", "NORMAL", "PADDED" ],
     "armor": [
       {
         "encumbrance": 32,
@@ -1049,7 +1049,8 @@
         "rigid_layer_only": true
       },
       { "coverage": 90, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ], "rigid_layer_only": true }
-    ]
+    ],
+    "melee_damage": { "bash": 3 }
   },
   {
     "id": "leather_helmet_xl",
