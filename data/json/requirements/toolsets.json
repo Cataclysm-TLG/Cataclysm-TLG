@@ -119,11 +119,20 @@
   {
     "id": "redsmithing_standard",
     "type": "requirement",
-    "//": "Includes forging resources as well as tools needed for melting copper or bronze and cleaning up the final product after. Per forging_standard energy cost balanced for one steel chunk.",
+    "//": "Includes forging resources as well as tools needed for melting copper or bronze and cleaning up the final product after.",
     "tools": [
       [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ],
       [ [ "forge", 13 ], [ "oxy_torch", 13 ] ],
       [ [ "metal_file_any", 1, "LIST" ] ]
+    ]
+  },
+  {
+    "id": "redsmithing_simple",
+    "type": "requirement",
+    "//": "Includes forging resources as well as tools needed for melting copper or bronze, but this assumes we need no grinding.",
+    "tools": [
+      [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ],
+      [ [ "forge", 13 ], [ "oxy_torch", 13 ] ]
     ]
   },
   {
@@ -215,7 +224,6 @@
     "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 } ],
     "tools": [
       [ [ "forge", 4 ], [ "oxy_torch", 4 ] ],
-      [ [ "metal_file_any", 1, "LIST" ] ],
       [ [ "metalworking_tongs_any", 1, "LIST" ] ]
     ]
   },
