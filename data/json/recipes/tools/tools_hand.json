@@ -116,7 +116,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ], [ "bronze_tiny", 3 ] ],
+    "using": [ [ "redsmithing_simple", 2 ], [ "metal_casting", -1 ], [ "bronze_tiny", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -140,8 +140,8 @@
       { "proficiency": "prof_toolsmithing" },
       { "proficiency": "prof_redsmithing" }
     ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "bronze_tiny", 3 ] ],
-    "qualities": [ { "id": "ANVIL", "level": 1 }, { "id": "HAMMER", "level": 2 }, { "id": "GRIND", "level": 2 } ],
+    "using": [ [ "redsmithing_simple", 2 ], [ "bronze_tiny", 3 ] ],
+    "qualities": [ { "id": "ANVIL", "level": 1 }, { "id": "HAMMER", "level": 2 } ],
     "components": [ [ [ "nail", 1 ], [ "crude_bronze_nail", 1 ], [ "bronze_nail", 1 ], [ "nuts_bolts", 1 ] ] ]
   },
   {
