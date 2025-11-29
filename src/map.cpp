@@ -3964,7 +3964,7 @@ void map::smash_items( const tripoint_bub_ms &p, const int power, const std::str
             continue;
         }
 
-        // The volume check here pretty much only influences corpses and very large items
+        // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
         float damage_chance = 10.0f * power / volume_factor;
         // Example:
