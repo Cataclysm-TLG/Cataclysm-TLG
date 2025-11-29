@@ -87,14 +87,14 @@ static bool alcohol_diazepam_add( Character &u, int in, bool is_alcohol )
         u.mod_daily_health( -1, -in * 10 );
         ret = true;
     }
-    if( one_in( 20 ) && rng( 0, 20 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
+    if( one_in( 40 ) && rng( 0, 30 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
         const std::string msg_1 =
             is_alcohol ?
             ( u.in_sleep_state() ? "addict_alcohol_mild_asleep" : "addict_alcohol_mild_awake" ) :
             ( u.in_sleep_state() ? "addict_diazepam_mild_asleep" : "addict_diazepam_mild_awake" );
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg_1 ).value_or( translation() ).translated() );
-        u.add_morale( morale_type, -35, -10 * in );
+        u.add_morale( morale_type, -35, -4 * in );
         ret = true;
         if( u.in_sleep_state() ) {
             if( is_alcohol ) {
@@ -103,14 +103,14 @@ static bool alcohol_diazepam_add( Character &u, int in, bool is_alcohol )
                 last_dia_dream = calendar::turn;
             }
         }
-    } else if( rng( 8, 300 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
+    } else if( rng( 8, 600 ) < in && ( !u.in_sleep_state() || !recent_dream ) ) {
         const std::string msg_2 =
             is_alcohol ?
             ( u.in_sleep_state() ? "addict_alcohol_strong_asleep" : "addict_alcohol_strong_awake" ) :
             ( u.in_sleep_state() ? "addict_diazepam_strong_asleep" : "addict_diazepam_strong_awake" );
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg_2 ).value_or( translation() ).translated() );
-        u.add_morale( morale_type, -35, -10 * in );
+        u.add_morale( morale_type, -35, -4 * in );
         u.add_effect( effect_shakes, 5_minutes );
         ret = true;
         if( u.in_sleep_state() ) {
@@ -144,7 +144,7 @@ static bool crack_coke_add( Character &u, int in, int stim, bool is_crack )
     const std::string & snippet ) {
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( snippet ).value_or( translation() ).translated() );
-        u.add_morale( morale_type, -20, -15 * in );
+        u.add_morale( morale_type, -20, -4 * in );
         ret = true;
         if( u.in_sleep_state() ) {
             if( is_crack ) {
@@ -157,7 +157,7 @@ static bool crack_coke_add( Character &u, int in, int stim, bool is_crack )
 
     u.mod_int_bonus( -1 );
     u.mod_per_bonus( -1 );
-    if( one_in( 900 - 30 * in ) && ( !u.in_sleep_state() || !recent_dream ) ) {
+    if( one_in( 1000 - 20 * in ) && ( !u.in_sleep_state() || !recent_dream ) ) {
         run_addict_eff( u, in, is_crack, cur_msg );
     }
     if( dice( 2, 80 ) <= in && ( !u.in_sleep_state() || !recent_dream ) ) {
@@ -176,7 +176,7 @@ static bool nicotine_effect( Character &u, addiction &add )
     static time_point last_dream = calendar::turn_zero;
     const int in = std::min( 20, add.intensity );
     const int current_stim = u.get_stim();
-    if( one_in( 2000 - 20 * in ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
+    if( one_in( 3000 - 20 * in ) && ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
         }
@@ -188,7 +188,7 @@ static bool nicotine_effect( Character &u, addiction &add )
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
         u.add_morale( morale_craving_nicotine, -15, -3 * in );
-        if( one_in( 800 - 50 * in ) ) {
+        if( one_in( 800 - 30 * in ) ) {
             u.mod_fatigue( 1 );
         }
         if( current_stim > -5 * in && one_in( 400 - 20 * in ) ) {
@@ -232,10 +232,10 @@ static bool opioid_effect( Character &u, addiction &add )
     if( u.get_pain() < in * 2 ) {
         u.mod_pain( 1 );
     }
-    if( one_in( 1200 - 30 * in ) ) {
-        u.mod_daily_health( -1, -in * 30 );
+    if( one_in( 1200 - 10 * in ) ) {
+        u.mod_daily_health( -1, -in * 20 );
     }
-    if( one_in( 20 ) && dice( 2, 20 ) < in &&
+    if( one_in( 40 ) && dice( 2, 30 ) < in &&
         ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
@@ -244,9 +244,9 @@ static bool opioid_effect( Character &u, addiction &add )
             u.in_sleep_state() ? "addict_opioid_mild_asleep" : "addict_opioid_mild_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opioid, -40, -10 * in );
+        u.add_morale( morale_craving_opioid, -40, -4 * in );
         u.add_effect( effect_shakes, 2_minutes + in * 30_seconds );
-    } else if( one_in( 20 ) && dice( 2, 30 ) < in &&
+    } else if( one_in( 40 ) && dice( 2, 30 ) < in &&
                ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
@@ -255,7 +255,7 @@ static bool opioid_effect( Character &u, addiction &add )
             u.in_sleep_state() ? "addict_opioid_strong_asleep" : "addict_opioid_strong_awake";
         u.add_msg_if_player( m_bad,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_opioid, -30, -10 * in );
+        u.add_morale( morale_craving_opioid, -30, -4 * in );
     } else if( one_in( 50 ) && dice( 3, 50 ) < in ) {
         u.vomit();
     }
@@ -265,7 +265,7 @@ static bool opioid_effect( Character &u, addiction &add )
 static bool amphetamine_effect( Character &u, addiction &add )
 {
     static time_point last_dream = calendar::turn_zero;
-    const int in = std::min( 20, add.intensity );
+    const int in = std::min( add.intensity, 20 );
     const int current_stim = u.get_stim();
     bool ret = false;
     u.mod_int_bonus( -1 );
@@ -288,7 +288,7 @@ static bool amphetamine_effect( Character &u, addiction &add )
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
         u.add_morale( morale_craving_speed, -25, -20 * in );
         ret = true;
-    } else if( one_in( 10 ) && dice( 2, 80 ) < in &&
+    } else if( one_in( 20 ) && dice( 2, 80 ) < in &&
                ( !u.in_sleep_state() || calendar::turn - last_dream > 2_hours ) ) {
         if( u.in_sleep_state() ) {
             last_dream = calendar::turn;
@@ -297,7 +297,7 @@ static bool amphetamine_effect( Character &u, addiction &add )
             u.in_sleep_state() ? "addict_amphetamine_strong_asleep" : "addict_amphetamine_strong_awake";
         u.add_msg_if_player( m_warning,
                              SNIPPET.random_from_category( msg ).value_or( translation() ).translated() );
-        u.add_morale( morale_craving_speed, -25, -20 * in );
+        u.add_morale( morale_craving_speed, -25, -4 * in );
         u.add_effect( effect_shakes, in * 2_minutes );
         ret = true;
     } else if( one_in( 50 ) && dice( 2, 100 ) < in &&
@@ -312,7 +312,7 @@ static bool amphetamine_effect( Character &u, addiction &add )
         u.mod_moves( -( u.in_sleep_state() ? 6000 : 300 ) );
         u.wake_up();
         ret = true;
-    } else if( !u.has_effect( effect_hallu ) && one_in( 20 ) && 8 + dice( 2, 80 ) < in ) {
+    } else if( !u.has_effect( effect_hallu ) && one_in( 40 ) && 8 + dice( 2, 80 ) < in ) {
         u.add_effect( effect_hallu, 6_hours );
         ret = true;
     }
