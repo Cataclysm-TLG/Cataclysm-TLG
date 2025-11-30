@@ -3625,10 +3625,8 @@
     "integrated_armor": [ "integrated_claws" ],
     "description": "You have claws on the ends of your fingers.  If you aren't wearing gloves, you'll be able to make barehanded attacks with these.",
     "types": [ "CLAWS" ],
-    "prereqs": [ "NAILS" ],
     "changes_to": [ "CLAWS_RETRACT" ],
-    "category": [ "BEAST", "URSINE", "FELINE", "RAPTOR" ],
-    "//": "No Lupine, wolf claws aren't long or sharp enough."
+    "category": [ "BEAST", "URSINE", "FELINE", "RAPTOR" ]
   },
   {
     "type": "mutation",
@@ -3638,7 +3636,6 @@
     "active": true,
     "description": "You have claws on the ends of your fingers, and can extend or retract them as desired.  Gloves will still get in the way, though.",
     "types": [ "CLAWS" ],
-    "prereqs": [ "CLAWS" ],
     "category": [ "FELINE" ],
     "transform": { "target": "CLAWS_RETRACT_active", "msg_transform": "You extend your claws.", "active": false, "moves": 10 },
     "cost": 0
@@ -3651,6 +3648,7 @@
     "active": true,
     "valid": false,
     "ugliness": 1,
+    "types": [ "CLAWS" ],
     "integrated_armor": [ "integrated_claws" ],
     "description": "Sharp claws are extending from the end of your fingers.",
     "transform": { "target": "CLAWS_RETRACT", "msg_transform": "You retract your claws.", "active": false, "moves": 10 },
@@ -5120,15 +5118,15 @@
     "id": "SAPIOVORE",
     "name": { "str": "Sapiovore" },
     "points": 1,
-    "description": "The hairless apes make as good eating as any other meat.",
+    "description": "What's left of humanity is merely prey.  If they can't outrun you, there's no sense feeling bad about eating them.",
     "social_modifiers": { "persuade": -20, "lie": -20, "intimidate": 6 },
     "purifiable": false,
     "types": [ "HUMAN_EMPATHY" ],
     "prereqs": [ "CARNIVORE", "CARNIVORE_FAKE" ],
     "prereqs2": [ "PRED3", "PRED4" ],
-    "threshreq": [ "THRESH_BEAST", "THRESH_RAPTOR", "THRESH_CHIMERA", "THRESH_URSINE", "THRESH_LIZARD", "THRESH_SPIDER" ],
+    "threshreq": [ "THRESH_BEAST", "THRESH_RAPTOR", "THRESH_FELINE", "THRESH_CHIMERA", "THRESH_URSINE", "THRESH_LIZARD", "THRESH_SPIDER" ],
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
-    "category": [ "BEAST", "RAPTOR", "CHIMERA", "URSINE", "LIZARD", "SPIDER" ],
+    "category": [ "BEAST", "RAPTOR", "FELINE", "CHIMERA", "URSINE", "LIZARD", "SPIDER" ],
     "flags": [ "SAPIOVORE" ]
   },
   {
@@ -7043,7 +7041,7 @@
     "restricts_gear": [ "hand_l", "hand_r" ],
     "craft_skill_bonus": [ [ "electronics", -2 ], [ "tailor", -2 ], [ "mechanics", -2 ] ],
     "types": [ "HANDS" ],
-    "prereqs": [ "NAILS", "CLAWS", "CLAWS_RETRACT" ],
+    "prereqs": [ "NAILS", "CLAWS", "CLAWS_RETRACT", "CLAWS_RETRACT_active" ],
     "flags": [ "QUADRUPED_CROUCH" ],
     "changes_to": [ "PAWS_LARGE" ],
     "triggers": [
