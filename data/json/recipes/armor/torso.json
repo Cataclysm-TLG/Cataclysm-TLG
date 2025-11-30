@@ -2666,11 +2666,7 @@
     "skill_used": "tailor",
     "difficulty": 5,
     "time": "10 h",
-    "book_learn": [
-      [ "textbook_armwest", 4 ],
-      [ "textbook_armschina", 4 ],
-      [ "textbook_mesoam", 4 ]
-    ],
+    "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
     "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 5 ] ],
     "using": [ [ "tailoring_leather_patchwork", 7 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
