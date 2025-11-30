@@ -983,6 +983,36 @@ void Character::start_craft( craft_command &command, const std::optional<tripoin
         pgettext( "in progress craft", "You start working on the %s." ),
         pgettext( "in progress craft", "<npcname> starts working on the %s." ),
         craft.tname() );
+
+    const int batch_size = craft.get_making_batch_size();
+    // Characters assisting or watching should gain experience...
+    for( Character *helper : get_crafting_helpers() ) {
+        // If the Character can understand what you are doing, they gain more exp
+        if( helper->get_skill_level( making.skill_used ) >= making.difficulty ) {
+            if( batch_size > 1 ) {
+                if( is_avatar() ) {
+                    add_msg( m_info, _( "%s assists with crafting…" ), helper->get_name() );
+                } else {
+                    add_msg_if_player_sees( pos_bub(), m_info, _( "%s assists with crafting…" ), helper->get_name() );
+                }
+            }
+            if( batch_size == 1 ) {
+                if( is_avatar() ) {
+                    add_msg( m_info, _( "%s could assist you with a batch…" ), helper->get_name() );
+                } else {
+                    add_msg_if_player_sees( pos_bub(), m_info, _( "%1s could assist %2s with a batch…" ),
+                                            helper->get_name(), get_name() );
+                }
+            }
+        } else {
+            if( is_avatar() ) {
+                add_msg( m_info, _( "%s watches you craft…" ), helper->get_name() );
+            } else {
+                add_msg_if_player_sees( pos_bub(), m_info, _( "%1s watches %2s crafts…" ), helper->get_name(),
+                                        get_name() );
+            }
+        }
+    }
 }
 
 bool Character::craft_skill_gain( const item &craft, const int &num_practice_ticks )
@@ -998,39 +1028,15 @@ bool Character::craft_skill_gain( const item &craft, const int &num_practice_tic
     }
 
     const int skill_cap = making.get_skill_cap();
-    const int batch_size = craft.get_making_batch_size();
     // Characters assisting or watching should gain experience...
     for( Character *helper : get_crafting_helpers() ) {
         // If the Character can understand what you are doing, they gain more exp
         if( helper->get_skill_level( making.skill_used ) >= making.difficulty ) {
             helper->practice( making.skill_used, roll_remainder( num_practice_ticks / 2.0 ),
                               skill_cap );
-            if( batch_size > 1 && one_in( 300 ) ) {
-                if( is_avatar() ) {
-                    add_msg( m_info, _( "%s assists with crafting…" ), helper->get_name() );
-                } else {
-                    add_msg_if_player_sees( pos_bub(), m_info, _( "%s assists with crafting…" ), helper->get_name() );
-                }
-            }
-            if( batch_size == 1 && one_in( 300 ) ) {
-                if( is_avatar() ) {
-                    add_msg( m_info, _( "%s could assist you with a batch…" ), helper->get_name() );
-                } else {
-                    add_msg_if_player_sees( pos_bub(), m_info, _( "%1s could assist %2s with a batch…" ),
-                                            helper->get_name(), get_name() );
-                }
-            }
         } else {
             helper->practice( making.skill_used, roll_remainder( num_practice_ticks / 10.0 ),
                               skill_cap );
-            if( one_in( 300 ) ) {
-                if( is_avatar() ) {
-                    add_msg( m_info, _( "%s watches you craft…" ), helper->get_name() );
-                } else {
-                    add_msg_if_player_sees( pos_bub(), m_info, _( "%1s watches %2s crafts…" ), helper->get_name(),
-                                            get_name() );
-                }
-            }
         }
     }
 
