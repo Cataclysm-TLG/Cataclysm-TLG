@@ -39,8 +39,8 @@
     "material": [ "rdx" ],
     "symbol": ";",
     "color": "light_gray",
-    "use_action": [ "C4" ],
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE", "FIRE_SAFE_EXPLOSIVE" ]
+    "use_action": { "target": "c4armed", "set_timer": true, "menu_text": "Activate", "type": "transform" },
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "c4armed",
@@ -58,7 +58,7 @@
     "color": "light_gray",
     "countdown_action": { "type": "explosion", "explosion": { "power": 2800 } },
     "countdown_interval": "6 seconds",
-    "flags": [ "NPC_THROW_NOW" ]
+    "flags": [ "NPC_THROW_NOW", "SPAWN_ACTIVE" ]
   },
   {
     "id": "dynamite",
