@@ -173,11 +173,6 @@
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
       },
       {
-        "text": "Are you interested in buying any processed lumber?",
-        "topic": "TALK_EVAC_MERCHANT_DEAL_NEGOTIATE",
-        "condition": { "u_has_mission": "MISSION_LUMBERMILL_SET_TRADE_ROUTE" }
-      },
-      {
         "text": "Does this center need any metal?",
         "topic": "TALK_EVAC_MERCHANT_DEAL_NEGOTIATE",
         "condition": { "u_has_mission": "MISSION_SCRAPPER_SET_TRADE_ROUTE" }
