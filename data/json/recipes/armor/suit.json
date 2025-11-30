@@ -9,10 +9,7 @@
     "difficulty": 4,
     "skills_required": [ "tailor", 3 ],
     "time": "3 h",
-    "book_learn": [
-      [ "textbook_armwest", 6 ],
-      [ "textbook_armschina", 6 ]
-    ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_armschina", 6 ] ],
     "using": [ [ "sewing_standard", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_articulation" },
@@ -40,27 +37,25 @@
     "skills_required": [ [ "fabrication", 3 ] ],
     "time": "12 h",
     "autolearn": true,
-    "book_learn": [ [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ], [ "textbook_arthropod", 6 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_articulation" },
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_leatherworking_basic" }
-    ],
+    "book_learn": [ [ "textbook_arthropod", 6 ] ],
+    "proficiencies": [ { "proficiency": "prof_articulation" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_closures" } ],
+    "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "armor_chitin", 72 ] ]
   },
   {
     "result": "armor_chitin_xs",
     "type": "recipe",
     "copy-from": "armor_chitin",
-    "time": "9 h",
+    "time": "10 h",
+    "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "armor_chitin", 54 ] ]
   },
   {
     "result": "xl_armor_chitin",
     "type": "recipe",
     "copy-from": "armor_chitin",
-    "time": "16 h",
+    "time": "14 h",
+    "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "armor_chitin", 96 ] ]
   },
   {
@@ -76,12 +71,7 @@
     "autolearn": true,
     "book_learn": [ [ "textbook_arthropod", 7 ] ],
     "using": [ [ "cordage", 2 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_articulation" },
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_leatherworking_basic" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_articulation" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_closures" } ],
     "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "components": [ [ [ "acidchitin_piece", 72 ] ] ]
   },

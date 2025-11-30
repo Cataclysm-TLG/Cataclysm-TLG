@@ -27,7 +27,7 @@
     "reversible": { "time": "5 m" },
     "using": [ [ "tailoring_cotton_patchwork_simple", 8 ] ]
   },
-    {
+  {
     "result": "leather_cuirass",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",

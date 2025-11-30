@@ -30,11 +30,16 @@
         "coverage": 100,
         "encumbrance": [ 18, 18 ]
       },
-      { "material": [
+      {
+        "material": [
           { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
           { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
-        ], "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
+        ],
+        "coverage": 50,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ]
+      }
     ]
   },
   {
@@ -67,11 +72,16 @@
         "coverage": 100,
         "encumbrance": [ 20, 20 ]
       },
-      {         "material": [
+      {
+        "material": [
           { "type": "nomex", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "cotton", "covered_by_mat": 95, "thickness": 0.5 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 1.0 }
-        ], "coverage": 50, "covers": [ "head" ], "specifically_covers": [ "head_forehead" ] }
+        ],
+        "coverage": 50,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_forehead" ]
+      }
     ]
   },
   {
@@ -186,7 +196,7 @@
         "coverage": 100,
         "encumbrance": [ 9, 9 ]
       },
-            {
+      {
         "material": [
           { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 },
           { "type": "nylon", "covered_by_mat": 95, "thickness": 0.4 },
