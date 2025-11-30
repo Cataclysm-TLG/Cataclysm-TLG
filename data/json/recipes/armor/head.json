@@ -531,10 +531,7 @@
     "difficulty": 5,
     "skills_required": [ "chemistry", 4 ],
     "time": "5 h",
-    "book_learn": [
-      [ "textbook_armwest", 6 ],
-      [ "textbook_armschina", 6 ]
-    ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_armschina", 6 ] ],
     "using": [ [ "tailoring_leather_patchwork", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_articulation" },
@@ -593,10 +590,7 @@
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "book_learn": [ [ "textbook_arthropod", 5 ] ],
     "using": [ [ "armor_chitin", 12 ], [ "strap_small", 4 ], [ "sewing_standard", 8 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_closures" }
-    ]
+    "proficiencies": [ { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_closures" } ]
   },
   {
     "result": "helmet_chitin_xs",
@@ -794,7 +788,6 @@
       { "proficiency": "prof_carving" }
     ]
   },
-  
   {
     "result": "hood_leather",
     "type": "recipe",
@@ -928,10 +921,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_nylon_patchwork", 2 ], [ "tailoring_kevlar_fabric", 4 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "faux_fur", 8 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ]
-    ],
+    "components": [ [ [ "faux_fur", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -947,11 +937,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_patchwork", 1 ], [ "tailoring_kevlar_fabric", 3 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "faux_fur", 6 ] ],
-      [ [ "cotton_patchwork", 4 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ]
-    ],
+    "components": [ [ [ "faux_fur", 6 ] ], [ [ "cotton_patchwork", 4 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
     "byproducts": [ [ "scrap_faux_fur", 3 ] ]
   },
   {
@@ -961,11 +947,7 @@
     "time": "8 h",
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_nylon_patchwork", 4 ], [ "tailoring_kevlar_fabric", 6 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "faux_fur", 10 ] ],
-      [ [ "cotton_patchwork", 8 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ]
-    ],
+    "components": [ [ [ "faux_fur", 10 ] ], [ [ "cotton_patchwork", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
     "byproducts": [ [ "scrap_faux_fur", 5 ] ]
   },
   {
@@ -995,9 +977,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_nylon_patchwork", 2 ], [ "tailoring_kevlar_fabric", 4 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ]
-    ],
+    "components": [ [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -1012,9 +992,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_patchwork", 1 ], [ "tailoring_kevlar_fabric", 2 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ]
-    ]
+    "components": [ [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
   },
   {
     "result": "hood_wsurvivor",
@@ -1029,10 +1007,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_nylon_patchwork", 2 ], [ "tailoring_kevlar_fabric", 4 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "fur", 8 ], [ "tanned_pelt", 1 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ]
-    ],
+    "components": [ [ [ "fur", 8 ], [ "tanned_pelt", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_furriery" },
       { "proficiency": "prof_millinery" },
@@ -1048,10 +1023,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_patchwork", 1 ], [ "tailoring_kevlar_fabric", 3 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "fur", 6 ], [ "tanned_pelt", 1 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ]
-    ]
+    "components": [ [ [ "fur", 6 ], [ "tanned_pelt", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
   },
   {
     "result": "hood_wsurvivor_xl",
@@ -1060,10 +1032,7 @@
     "time": "6 h 45 m",
     "using": [ [ "sewing_aramids", 40 ], [ "tailoring_nylon_patchwork", 4 ], [ "tailoring_kevlar_fabric", 5 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "fur", 10 ], [ "tanned_pelt", 2 ] ],
-      [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ]
-    ]
+    "components": [ [ [ "fur", 10 ], [ "tanned_pelt", 2 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
   },
   {
     "result": "hood_survivor_xl",
@@ -1078,9 +1047,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_nylon_patchwork", 4 ], [ "tailoring_kevlar_fabric", 5 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [
-      [ [ "hood_rain", 2 ], [ "plastic_sheet_small", 4 ], [ "hood_gut", 2 ] ]
-    ],
+    "components": [ [ [ "hood_rain", 2 ], [ "plastic_sheet_small", 4 ], [ "hood_gut", 2 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },

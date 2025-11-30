@@ -5124,7 +5124,15 @@
     "types": [ "HUMAN_EMPATHY" ],
     "prereqs": [ "CARNIVORE", "CARNIVORE_FAKE" ],
     "prereqs2": [ "PRED3", "PRED4" ],
-    "threshreq": [ "THRESH_BEAST", "THRESH_RAPTOR", "THRESH_FELINE", "THRESH_CHIMERA", "THRESH_URSINE", "THRESH_LIZARD", "THRESH_SPIDER" ],
+    "threshreq": [
+      "THRESH_BEAST",
+      "THRESH_RAPTOR",
+      "THRESH_FELINE",
+      "THRESH_CHIMERA",
+      "THRESH_URSINE",
+      "THRESH_LIZARD",
+      "THRESH_SPIDER"
+    ],
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "category": [ "BEAST", "RAPTOR", "FELINE", "CHIMERA", "URSINE", "LIZARD", "SPIDER" ],
     "flags": [ "SAPIOVORE" ]

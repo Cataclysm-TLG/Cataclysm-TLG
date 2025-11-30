@@ -6,11 +6,11 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
-    "difficulty": 4,
+    "difficulty": 6,
     "skills_required": [ [ "fabrication", 3 ] ],
     "time": "10 h",
     "autolearn": true,
-    "book_learn": [ [ "textbook_arthropod", 3 ] ],
+    "book_learn": [ [ "textbook_arthropod", 5 ] ],
     "reversible": true,
     "using": [ [ "armor_chitin", 8 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
@@ -43,18 +43,14 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
-    "difficulty": 5,
+    "difficulty": 7,
     "skills_required": [ [ "fabrication", 3 ], [ "chemistry", 2 ] ],
-    "time": "12 h",
+    "time": "10 h",
     "autolearn": true,
-    "book_learn": [ [ "textbook_arthropod", 4 ] ],
+    "book_learn": [ [ "textbook_arthropod", 6 ] ],
     "reversible": true,
     "using": [ [ "armor_acidchitin", 8 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_chitinworking" },
-      { "proficiency": "prof_articulation" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
     "components": [ [ [ "cordage_superior", 1, "LIST" ] ] ]
   },
@@ -62,7 +58,7 @@
     "result": "xs_gauntlets_acidchitin",
     "type": "recipe",
     "copy-from": "gauntlets_acidchitin",
-    "time": "12 h",
+    "time": "9 h",
     "using": [ [ "armor_acidchitin", 6 ], [ "strap_small", 1 ], [ "clasps", 1 ] ],
     "components": [ [ [ "cordage_superior", 2, "LIST" ] ] ]
   },
@@ -70,7 +66,7 @@
     "result": "xl_gauntlets_acidchitin",
     "type": "recipe",
     "copy-from": "gauntlets_acidchitin",
-    "time": "13 h 30 m",
+    "time": "12 h",
     "using": [ [ "armor_acidchitin", 12 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
     "components": [ [ [ "cordage_superior", 2, "LIST" ] ] ]
@@ -82,9 +78,9 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_HANDS",
     "skill_used": "tailor",
-    "difficulty": 2,
+    "difficulty": 5,
     "time": "9 h",
-    "autolearn": true,
+    "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
     "using": [ [ "sewing_standard", 12 ], [ "tailoring_leather_small", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
@@ -96,14 +92,14 @@
     "result": "leather_gauntlets_xs",
     "type": "recipe",
     "copy-from": "leather_gauntlets",
-    "time": "9 h",
+    "time": "8 h",
     "using": [ [ "sewing_standard", 9 ], [ "tailoring_leather_small", 3 ] ]
   },
   {
     "result": "leather_gauntlets_xl",
     "type": "recipe",
     "copy-from": "leather_gauntlets",
-    "time": "10 h 10 m",
+    "time": "10 h",
     "using": [ [ "sewing_standard", 16 ], [ "tailoring_leather_small", 6 ] ]
   },
   {

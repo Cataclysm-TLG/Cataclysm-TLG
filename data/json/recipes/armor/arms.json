@@ -57,7 +57,7 @@
     "book_learn": [ [ "textbook_arthropod", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_chitin", 6 ], [ "filament", 4 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_chitin", 6 ], [ "filament", 4 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "xs_armguard_chitin",
@@ -65,7 +65,7 @@
     "copy-from": "armguard_chitin",
     "time": "6 h",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_chitin", 4 ], [ "filament", 2 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_chitin", 4 ], [ "filament", 2 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "xl_armguard_chitin",
@@ -73,7 +73,7 @@
     "copy-from": "armguard_chitin",
     "time": "10 h",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_chitin", 8 ], [ "filament", 8 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_chitin", 8 ], [ "filament", 8 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "armguard_acidchitin",
@@ -82,14 +82,14 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "tailor",
-    "difficulty": 6,
+    "difficulty": 7,
     "skills_required": [ [ "fabrication", 3 ], [ "chemistry", 2 ] ],
     "time": "12 h",
     "autolearn": true,
-    "book_learn": [ [ "textbook_arthropod", 5 ] ],
+    "book_learn": [ [ "textbook_arthropod", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chitinworking" }, { "proficiency": "prof_articulation" } ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_acidchitin", 6 ], [ "filament", 4 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_acidchitin", 6 ], [ "filament", 4 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "xs_armguard_acidchitin",
@@ -97,7 +97,7 @@
     "copy-from": "armguard_acidchitin",
     "time": "10 h",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_acidchitin", 4 ], [ "filament", 2 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_acidchitin", 4 ], [ "filament", 2 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "xl_armguard_acidchitin",
@@ -105,7 +105,7 @@
     "copy-from": "armguard_acidchitin",
     "time": "14 h",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "armor_acidchitin", 8 ], [ "filament", 8 ], [ "strap_small", 8 ], [ "clasps", 8 ] ]
+    "using": [ [ "armor_acidchitin", 8 ], [ "filament", 8 ], [ "strap_small", 4 ], [ "clasps", 4 ] ]
   },
   {
     "result": "armguard_hard",
@@ -148,15 +148,15 @@
     "skill_used": "tailor",
     "difficulty": 5,
     "time": "6 h",
-    "book_learn": [
-      [ "textbook_armwest", 4 ],
-      [ "textbook_armschina", 4 ],
-      [ "textbook_mesoam", 4 ]
-    ],
+    "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
     "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 5 ] ],
     "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" },
-      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 } ]
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 }
+    ]
   },
   {
     "result": "leather_arm_guards_xs",
@@ -164,6 +164,7 @@
     "copy-from": "leather_arm_guards",
     "time": "5 h",
     "byproducts": [ [ "leather", 6 ], [ "scrap_leather", 1 ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "tailoring_leather_patchwork", 3 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {
@@ -172,6 +173,7 @@
     "copy-from": "leather_arm_guards",
     "time": "8 h",
     "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 1 ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "tailoring_leather_patchwork", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {
@@ -393,12 +395,39 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_ARMS",
     "skill_used": "tailor",
-    "difficulty": 2,
-    "time": "180 m",
-    "autolearn": true,
-    "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 2 ] ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
+    "difficulty": 4,
+    "time": "3 h",
+    "book_learn": [ [ "textbook_armwest", 3 ], [ "textbook_armschina", 3 ], [ "textbook_mesoam", 3 ] ],
+    "using": [ [ "tailoring_leather_patchwork", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 }
+    ]
+  },
+  {
+    "result": "leather_pauldrons_xs",
+    "type": "recipe",
+    "copy-from": "leather_pauldrons",
+    "time": "2 h",
+    "using": [ [ "tailoring_leather_patchwork", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 }
+    ]
+  },
+  {
+    "result": "leather_pauldrons_xl",
+    "type": "recipe",
+    "copy-from": "leather_pauldrons",
+    "time": "5 h",
+    "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "proficiencies": [
+      { "proficiency": "prof_leatherworking_basic" },
+      { "proficiency": "prof_leatherworking" },
+      { "proficiency": "prof_closures", "time_multiplier": 1.25, "skill_penalty": 0.15 }
+    ]
   },
   {
     "result": "chainmail_sleeves",
