@@ -196,6 +196,7 @@
         { "item": "cleaning", "x": [ 15, 15 ], "y": [ 21, 22 ], "chance": 60 }
       ],
       "monster": { " ": { "monster": "mon_zombie_living_wall", "chance": 10 } },
+      "place_monster": [ { "monster": "mon_talon_m202a1", "x": 18, "y": 19, "chance": 100 } ],
       "place_monsters": [
         { "monster": "GROUP_COLLAPSED_TOWER_BASEMENT", "x": [ 0, 23 ], "y": [ 0, 15 ], "density": 2.5 },
         { "monster": "GROUP_COLLAPSED_TOWER_BASEMENT", "x": [ 24, 47 ], "y": [ 0, 23 ], "density": 2.5 },
