@@ -1139,7 +1139,7 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "covers": [ "head" ],
         "coverage": 100,
@@ -1151,7 +1151,7 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "covers": [ "head" ],
         "coverage": 40,
@@ -1184,7 +1184,7 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "covers": [ "mouth" ],
         "coverage": 100,
@@ -1207,7 +1207,7 @@
     ],
     "use_action": { "type": "transform", "menu_text": "Raise visor", "target": "helmet_motor_raised", "msg": "You raise your visor." },
     "warmth": 30,
-    "environmental_protection": 1,
+    "environmental_protection": 2,
     "techniques": [ "WBLOCK_1" ],
     "flags": [ "WATERPROOF", "STURDY", "PADDED", "SUN_GLASSES", "OUTER", "NORMAL", "CUSHION_FALL" ],
     "melee_damage": { "bash": 2 }
@@ -1234,7 +1234,7 @@
           { "type": "hard_plastic_transp", "covered_by_mat": 40, "thickness": 2.0 },
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "encumbrance": 32,
         "coverage": 100,
@@ -1246,7 +1246,7 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "covers": [ "head" ],
         "encumbrance": 0,
@@ -1258,10 +1258,10 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 16 }
         ],
         "covers": [ "mouth" ],
-        "coverage": 100,
+        "coverage": 90,
         "specifically_covers": [ "mouth_chin" ],
         "encumbrance": 4,
         "rigid_layer_only": true
@@ -1270,10 +1270,10 @@
         "material": [
           { "type": "plastic", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "epoxy", "covered_by_mat": 100, "thickness": 0.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 16 }
+          { "type": "plastic_pad", "covered_by_mat": 50, "thickness": 16 }
         ],
         "covers": [ "mouth" ],
-        "coverage": 50,
+        "coverage": 90,
         "specifically_covers": [ "mouth_cheeks", "mouth_lips" ],
         "encumbrance": 2,
         "rigid_layer_only": true
