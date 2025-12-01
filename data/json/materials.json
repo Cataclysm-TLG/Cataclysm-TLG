@@ -1750,7 +1750,7 @@
       { "fuel": 0.4, "smoke": 3, "burn": 0.003 },
       { "fuel": 1, "smoke": 5, "burn": 0.008 }
     ],
-    "resist": { "bash": 0.6, "cut": 0.3, "acid": 8, "heat": 1, "bullet": 0.3 },
+    "resist": { "bash": 0.5, "cut": 0.15, "acid": 8, "heat": 1, "bullet": 0.15 },
     "repair_difficulty": 5
   },
   {
