@@ -25,6 +25,7 @@
 #include "event_bus.h"
 #include "explosion.h"
 #include "faction.h"
+#include "field.h"
 #include "field_type.h"
 #include "game.h"
 #include "game_constants.h"
@@ -3990,9 +3991,31 @@ void monster::hear_sound( const tripoint_bub_ms &source, const int vol, const in
         return;
     }
 
-    int tmp_provocative = provocative || volume >= normal_roll( 30, 5 );
-    // already following a more interesting sound
-    if( provocative_sound && !tmp_provocative && wandf > 0 ) {
+    /* Prevent zombies from conga-lining into burning buildings.
+       TODO: There are probably other sounds they should ignore. An explosion is interesting, a car crash
+       is interesting, a house falling over is not interesting, because it doesn't obviously imply that
+       people must be there. */
+    bool probably_a_fire = false;
+    map &here = get_map();
+    for( const tripoint_bub_ms &pt : here.points_in_radius( source, 1, 1 ) ) {
+        const field_entry *fire_fld = here.get_field( pt, fd_fire );
+        // Only large, uncontained fires cause sounds to be ignored.
+        // TODO: Exempt some times of sounds.
+        if( fire_fld && fire_fld->get_field_intensity() > 1 &&
+            !here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_FIRE_CONTAINER, pt ) ) {
+            probably_a_fire = true;
+            break;
+        }
+    }
+
+    int tmp_provocative = !probably_a_fire && ( provocative || volume >= normal_roll( 30, 5 ) );
+
+    // Not interesting sound, nothing to do here.
+    if( !tmp_provocative ) {
+        return;
+    }
+    // Already following a more interesting sound.
+    if( provocative_sound && wandf > 0 ) {
         return;
     }
 
