@@ -366,7 +366,7 @@ class armor_inventory_preset: public inventory_selector_preset
                     continue;
                 }
                 const damage_type_id &dtid = dt.id;
-                append_cell( [ this, dtid ]( const item_location &loc ) {
+                append_cell( [ this, dtid ]( const item_location & loc ) {
                     Character &you = get_player_character();
                     double weighted_sum = 0.0;
                     double total_weight = 0.0;
@@ -390,7 +390,7 @@ class armor_inventory_preset: public inventory_selector_preset
                     return get_decimal_string( average_resist );
                 }, to_upper_case( dt.name.translated() ) );
 
-                }
+            }
 
             append_cell( [ this ]( const item_location & loc ) {
                 return get_number_string( loc->get_env_resist() );
