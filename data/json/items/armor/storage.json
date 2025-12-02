@@ -246,7 +246,7 @@
     "id": "backpack_denim",
     "type": "ARMOR",
     "name": { "str": "denim backpack" },
-    "description": "A denim backpack.  Solid storage for few encumbrance.  The texture feels nice.",
+    "description": "A backpack made out of soft but durable denim.",
     "//": "It's modeled as our normal backpack but made of 16.5 oz denim.",
     "weight": "560 g",
     "volume": "2 L",
