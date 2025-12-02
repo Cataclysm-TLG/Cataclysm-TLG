@@ -16,7 +16,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -36,7 +36,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_thconc_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -56,7 +56,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_rock_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -76,7 +76,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_thconc_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -96,7 +96,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_rock_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -116,7 +116,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_thconc_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -135,7 +135,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_rock_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {
@@ -154,7 +154,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_thconc_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 4 ] }, { "item": "scrap", "count": [ 3, 6 ] } ]
     }
   },
   {

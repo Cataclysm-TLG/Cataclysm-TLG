@@ -140,7 +140,7 @@
       ],
       [ [ "wire", 6 ], [ "rope_6", 6 ], [ "vine_6", 6 ], [ "rope_makeshift_6", 6 ] ],
       [ [ "chain", 1 ], [ "rope_natural", 1, "LIST" ] ],
-      [ [ "rebar", 2 ], [ "steel_chunk", 4 ] ],
+      [ [ "rebar", 2 ], [ "steel_fragment", 4 ] ],
       [ [ "rock", 40 ] ]
     ]
   },
@@ -179,7 +179,7 @@
       ],
       [ [ "wire", 6 ], [ "rope_6", 6 ], [ "vine_6", 6 ], [ "rope_makeshift_6", 6 ] ],
       [ [ "chain", 1 ], [ "rope_natural", 1, "LIST" ] ],
-      [ [ "rebar", 2 ], [ "steel_chunk", 4 ] ],
+      [ [ "rebar", 2 ], [ "steel_fragment", 4 ] ],
       [ [ "rock", 40 ] ]
     ]
   },
@@ -377,7 +377,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [
       [ [ "stick", 1 ], [ "2x4", 1 ] ],
-      [ [ "steel_chunk", 1 ], [ "steel_lump", 1 ] ],
+      [ [ "steel_fragment", 1 ], [ "steel_chunk", 1 ] ],
       [ [ "cordage_short", 2, "LIST" ], [ "filament", 20, "LIST" ] ]
     ]
   },
@@ -801,7 +801,7 @@
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "components": [ [ [ "sheet_metal", 1 ] ] ],
-    "byproducts": [ [ "steel_chunk", 6 ] ]
+    "byproducts": [ [ "steel_fragment", 6 ] ]
   },
   {
     "type": "recipe",
@@ -977,7 +977,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "components": [
       [ [ "element", 8 ], [ "crude_heating_element", 12 ] ],
-      [ [ "steel_lump", 1 ], [ "steel_chunk", 4 ], [ "scrap", 12 ] ],
+      [ [ "steel_chunk", 1 ], [ "steel_fragment", 4 ], [ "scrap", 12 ] ],
       [ [ "cable", 4 ] ],
       [ [ "power_supply", 1 ] ],
       [ [ "fire_brick", 8 ] ]
@@ -1172,7 +1172,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "components": [
       [ [ "pilot_light", 1 ] ],
-      [ [ "steel_lump", 3 ], [ "steel_chunk", 12 ], [ "scrap", 36 ] ],
+      [ [ "steel_chunk", 3 ], [ "steel_fragment", 12 ], [ "scrap", 36 ] ],
       [ [ "metal_tank_little", 1 ] ],
       [ [ "pipe", 3 ] ],
       [ [ "pipe_fittings", 2 ] ]
@@ -1376,7 +1376,7 @@
     ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "components": [
-      [ [ "steel_lump", 5 ], [ "steel_chunk", 20 ], [ "scrap", 60 ] ],
+      [ [ "steel_chunk", 5 ], [ "steel_fragment", 20 ], [ "scrap", 60 ] ],
       [ [ "metal_tank", 1 ] ],
       [ [ "pipe", 6 ] ],
       [ [ "pipe_fittings", 4 ] ]
@@ -1544,7 +1544,7 @@
         [ "integrated_electrokit", 150 ]
       ]
     ],
-    "components": [ [ [ "steel_chunk", 6 ], [ "scrap", 18 ] ], [ [ "pipe", 2 ] ] ]
+    "components": [ [ [ "steel_fragment", 6 ], [ "scrap", 18 ] ], [ [ "pipe", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1815,7 +1815,7 @@
       { "proficiency": "prof_welding" }
     ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "sheet_metal", 1 ] ], [ [ "steel_chunk", 3 ], [ "scrap", 9 ] ] ]
+    "components": [ [ [ "sheet_metal", 1 ] ], [ [ "steel_fragment", 3 ], [ "scrap", 9 ] ] ]
   },
   {
     "type": "recipe",
@@ -2526,7 +2526,7 @@
     "tools": [ [ [ "angle_grinder", 220 ] ], [ [ "drill_press_tool", 20 ] ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
     "components": [ [ [ "railroad_track_item_half", 1 ] ] ],
-    "byproducts": [ [ "steel_lump", 15 ] ]
+    "byproducts": [ [ "steel_chunk", 15 ] ]
   },
   {
     "result": "anvil_bronze",

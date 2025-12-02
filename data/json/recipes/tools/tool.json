@@ -757,8 +757,8 @@
     "components": [
       [ [ "simple_crank", 1 ], [ "foot_crank", 1 ] ],
       [ [ "scrap", 8 ] ],
-      [ [ "steel_chunk", 4 ] ],
-      [ [ "steel_lump", 2 ] ]
+      [ [ "steel_fragment", 4 ] ],
+      [ [ "steel_chunk", 2 ] ]
     ]
   },
   {
@@ -835,7 +835,7 @@
     "reversible": true,
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "steel_chunk", 1 ], [ "steel_lump", 1 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ], [ "steel_chunk", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1325,7 +1325,7 @@
       [ [ "circsaw_off", 1 ] ],
       [ [ "1cyl_combustion_small", 1 ] ],
       [ [ "metal_tank_little", 1 ] ],
-      [ [ "steel_chunk", 6 ], [ "steel_lump", 2 ] ]
+      [ [ "steel_fragment", 6 ], [ "steel_chunk", 2 ] ]
     ]
   },
   {
@@ -1507,7 +1507,7 @@
     "time": "30 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "steel_chunk", 1 ], [ "scrap", 10 ] ], [ [ "clockworks", 2 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ], [ "scrap", 10 ] ], [ [ "clockworks", 2 ] ] ]
   },
   {
     "type": "recipe",

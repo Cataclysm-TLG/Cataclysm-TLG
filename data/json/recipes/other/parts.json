@@ -10,7 +10,7 @@
     "reversible": { "time": "1 s" },
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "steel_chunk", 1 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -723,7 +723,7 @@
       { "proficiency": "prof_welding" }
     ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "frame", 4 ] ], [ [ "steel_chunk", 4 ], [ "scrap", 12 ] ] ]
+    "components": [ [ [ "frame", 4 ] ], [ [ "steel_fragment", 4 ], [ "scrap", 12 ] ] ]
   },
   {
     "type": "recipe",
@@ -862,7 +862,7 @@
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
     "components": [
       [ [ "pipe", 6 ] ],
-      [ [ "steel_chunk", 4 ], [ "scrap", 12 ] ],
+      [ [ "steel_fragment", 4 ], [ "scrap", 12 ] ],
       [ [ "wire", 3 ] ],
       [ [ "cable", 10 ] ],
       [ [ "pipe_fittings", 4 ] ]

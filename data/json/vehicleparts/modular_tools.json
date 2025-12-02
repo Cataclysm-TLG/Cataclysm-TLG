@@ -87,8 +87,8 @@
     "abstract": "veh_tools_part_abstract",
     "type": "vehicle_part",
     "breaks_into": [
-      { "count": [ 4, 6 ], "item": "steel_lump" },
       { "count": [ 4, 6 ], "item": "steel_chunk" },
+      { "count": [ 4, 6 ], "item": "steel_fragment" },
       { "count": [ 4, 6 ], "item": "scrap" }
     ],
     "broken_color": "light_cyan",

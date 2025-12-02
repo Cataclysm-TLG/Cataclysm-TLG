@@ -137,7 +137,7 @@
       { "item": "slag", "count": [ 0, 3 ] },
       { "item": "scrap_tin", "count": [ 0, 1 ] },
       { "item": "scrap_aluminum", "count": [ 0, 1 ] },
-      { "item": "scrap_copper", "count": [ 0, 1 ] }
+      { "item": "copper_fragment", "count": [ 0, 1 ] }
     ],
     "pre_flags": "RUBBLE",
     "pre_terrain": "f_wreckage",

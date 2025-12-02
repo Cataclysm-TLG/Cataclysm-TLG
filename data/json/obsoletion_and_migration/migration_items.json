@@ -3212,5 +3212,25 @@
     "type": "MIGRATION",
     "id": "pulverizer",
     "replace": "hammer_sledge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "steel_lump",
+    "replace": "steel_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_copper",
+    "replace": "copper_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "chunk_cast_iron",
+    "replace": "iron_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lump_cast_iron",
+    "replace": "iron_chunk"
   }
 ]

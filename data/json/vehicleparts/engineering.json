@@ -97,8 +97,8 @@
     "description": "A pair of forklift arms.  If it is in your line of sight and within two tiles of another vehicle, you will automatically use it when you want to jack up the other vehicle to change its wheels.  To use it to lift a heavy component like an engine that you are installing or removing, the crane must have line of sight to where it is going and it must be within four tiles of it.",
     "size": "12500 ml",
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ],
     "qualities": [ [ "LIFT", 2 ], [ "JACK", 6 ] ],
@@ -133,8 +133,8 @@
     "description": "A large metal disc, powered by the vehicle's engines.  Use the vehicle controls to turn it on or off.  When turned on, it will stop the vehicle unless it has a strong engine.  When turned on, it will dig a shallow pit in dirt.  Mount it on the edge of your vehicle.",
     "power": "-70000 W",
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ],
     "transform_terrain": { "pre_flags": [ "DIGGABLE" ], "post_terrain": "t_pit_shallow" },

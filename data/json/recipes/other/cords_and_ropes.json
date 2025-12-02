@@ -725,6 +725,6 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
     "using": [ [ "blacksmithing_simple", 3 ] ],
-    "components": [ [ [ "chain", 5 ] ], [ [ "scrap", 5 ], [ "steel_chunk", 5 ], [ "steel_lump", 5 ] ] ]
+    "components": [ [ [ "chain", 5 ] ], [ [ "scrap", 5 ], [ "steel_fragment", 5 ], [ "steel_chunk", 5 ] ] ]
   }
 ]

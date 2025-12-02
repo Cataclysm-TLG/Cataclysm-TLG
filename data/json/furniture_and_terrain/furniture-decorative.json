@@ -60,7 +60,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "items": [ { "item": "steel_chunk", "count": [ 5, 10 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 5, 10 ] } ]
     },
     "flags": [ "TRANSPARENT", "MOUNTABLE", "SHORT" ]
   },
@@ -81,7 +81,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 3 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 3 ] } ]
     },
     "flags": [ "TRANSPARENT", "SHORT" ]
   },
@@ -202,7 +202,7 @@
     "deconstruct": {
       "items": [
         { "item": "pipe", "count": 6 },
-        { "item": "steel_chunk", "count": [ 2, 6 ] },
+        { "item": "steel_fragment", "count": [ 2, 6 ] },
         { "item": "pipe_fittings", "count": [ 1, 3 ] },
         { "item": "wire", "count": 10 }
       ]

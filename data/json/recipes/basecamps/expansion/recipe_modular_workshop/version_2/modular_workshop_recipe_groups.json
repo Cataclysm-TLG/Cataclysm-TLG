@@ -38,13 +38,13 @@
     "id": "fbmw_2_blacksmith_recipes_2",
     "building_type": "SMITH",
     "recipes": [
-      { "id": "scrap_copper", "description": " Craft: Copper, Scrap" },
+      { "id": "copper_fragment", "description": " Craft: Copper, Scrap" },
       { "id": "charcoal_npc", "description": " Craft: Charcoal" },
       { "id": "spike", "description": " Craft: Spike" },
       { "id": "caltrops_glass", "description": " Craft: Glass Caltrops" },
-      { "id": "steel_chunk", "description": " Craft: Steel, Chunk" },
+      { "id": "steel_fragment", "description": " Craft: Steel, Chunk" },
       { "id": "anvil_crude", "description": " Craft: Small Anvil" },
-      { "id": "steel_lump", "description": " Craft: Steel, Lump" }
+      { "id": "steel_chunk", "description": " Craft: Steel, Lump" }
     ]
   },
   {

@@ -449,7 +449,7 @@
     "time": "10 m",
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "steel_chunk", 1 ], [ "scrap", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "steel_fragment", 1 ], [ "scrap", 2 ] ] ]
   },
   {
     "type": "recipe",

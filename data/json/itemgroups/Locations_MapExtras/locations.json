@@ -463,14 +463,14 @@
       { "item": "chain", "prob": 10 },
       { "item": "chain_30", "prob": 3, "damage": [ 0, 4 ] },
       { "item": "chain_30", "prob": 3 },
-      [ "steel_chunk", 30 ],
+      [ "steel_fragment", 30 ],
       { "item": "spring", "prob": 20 },
       { "item": "spring", "prob": 20, "damage": [ 0, 4 ] },
-      [ "steel_lump", 30 ],
+      [ "steel_chunk", 30 ],
       { "item": "frame", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "hdframe", "prob": 20, "damage": [ 0, 4 ] },
       { "item": "cu_pipe", "prob": 20, "damage": [ 0, 4 ] },
-      [ "scrap_copper", 62 ]
+      [ "copper_fragment", 62 ]
     ]
   },
   {
@@ -518,8 +518,8 @@
     "//": "for the steel mill in the well, steel mill",
     "items": [
       { "item": "scrap", "prob": 50, "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "prob": 50, "count": [ 1, 2 ] },
       { "item": "steel_chunk", "prob": 50, "count": [ 1, 2 ] },
-      { "item": "steel_lump", "prob": 50, "count": [ 1, 2 ] },
       [ "chain", 35 ],
       [ "chain_30", 15 ],
       [ "rebar", 35 ],
@@ -534,8 +534,8 @@
     "id": "steel_mill_foundry",
     "//": "for the foundry in the steel mill",
     "items": [
-      { "item": "steel_lump", "prob": 5, "count": [ 1, 3 ] },
-      { "item": "steel_chunk", "prob": 15, "count": [ 1, 5 ] },
+      { "item": "steel_chunk", "prob": 5, "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "prob": 15, "count": [ 1, 5 ] },
       { "item": "scrap", "prob": 70, "count": [ 1, 10 ] },
       [ "chain", 35 ],
       [ "chain_30", 10 ],
@@ -850,8 +850,8 @@
       [ "can_medium", 65 ],
       [ "can_medium", 65 ],
       { "item": "scrap", "prob": 50, "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "prob": 50, "count": [ 1, 2 ] },
       { "item": "steel_chunk", "prob": 50, "count": [ 1, 2 ] },
-      { "item": "steel_lump", "prob": 50, "count": [ 1, 2 ] },
       [ "jerrycan_big", 25 ],
       { "item": "jumper_cable_heavy", "prob": 20 },
       { "item": "jumper_cable", "prob": 30 },
@@ -1051,7 +1051,7 @@
       { "item": "primitive_adze", "prob": 50, "damage": [ 0, 4 ] },
       { "item": "needle_bone", "prob": 50, "damage": [ 0, 4 ] },
       { "item": "needle_wood", "prob": 50, "damage": [ 0, 4 ] },
-      { "item": "steel_chunk", "prob": 50, "damage": [ 0, 4 ] },
+      { "item": "steel_fragment", "prob": 50, "damage": [ 0, 4 ] },
       { "item": "loincloth_fur", "prob": 10, "damage": [ 0, 4 ] },
       { "item": "distaff_spindle", "prob": 50, "damage": [ 0, 4 ] },
       { "item": "carding_paddles", "prob": 50, "damage": [ 0, 4 ] },

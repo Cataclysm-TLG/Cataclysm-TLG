@@ -601,7 +601,7 @@
       [ [ "cu_pipe", 3 ] ],
       [ [ "motor_micro", 1 ] ],
       [ [ "sheet_metal_small", 5 ] ],
-      [ [ "scrap", 12 ], [ "steel_chunk", 4 ] ]
+      [ [ "scrap", 12 ], [ "steel_fragment", 4 ] ]
     ]
   },
   {
@@ -638,7 +638,7 @@
       [ [ "chem_potassium_hydroxide", 7 ], [ "lye_powder", 2 ] ],
       [ [ "duct_tape", 1 ] ],
       [ [ "water_clean", 1 ] ],
-      [ [ "steel_chunk", 1 ], [ "scrap", 2 ] ]
+      [ [ "steel_fragment", 1 ], [ "scrap", 2 ] ]
     ]
   },
   {
@@ -661,7 +661,7 @@
       [ [ "chem_potassium_hydroxide", 20 ], [ "lye_powder", 4 ] ],
       [ [ "duct_tape", 5 ] ],
       [ [ "water_clean", 3 ] ],
-      [ [ "steel_chunk", 3 ], [ "scrap", 6 ] ]
+      [ [ "steel_fragment", 3 ], [ "scrap", 6 ] ]
     ]
   },
   {
@@ -683,7 +683,7 @@
       [ [ "zinc_metal", 24 ] ],
       [ [ "carbon_electrode", 1 ] ],
       [ [ "duct_tape", 5 ] ],
-      [ [ "steel_chunk", 3 ], [ "scrap", 6 ] ]
+      [ [ "steel_fragment", 3 ], [ "scrap", 6 ] ]
     ]
   },
   {
@@ -706,7 +706,7 @@
       [ [ "chem_potassium_hydroxide", 82 ], [ "lye_powder", 22 ] ],
       [ [ "duct_tape", 20 ] ],
       [ [ "water_clean", 12 ] ],
-      [ [ "steel_chunk", 12 ], [ "scrap", 24 ] ]
+      [ [ "steel_fragment", 12 ], [ "scrap", 24 ] ]
     ]
   },
   {
@@ -728,7 +728,7 @@
       [ [ "zinc_metal", 96 ] ],
       [ [ "carbon_electrode", 4 ] ],
       [ [ "duct_tape", 20 ] ],
-      [ [ "steel_chunk", 12 ], [ "scrap", 24 ] ]
+      [ [ "steel_fragment", 12 ], [ "scrap", 24 ] ]
     ]
   },
   {
@@ -751,7 +751,7 @@
       [ [ "chem_potassium_hydroxide", 170 ], [ "lye_powder", 34 ] ],
       [ [ "duct_tape", 40 ] ],
       [ [ "water_clean", 25 ] ],
-      [ [ "steel_chunk", 25 ], [ "scrap", 50 ] ]
+      [ [ "steel_fragment", 25 ], [ "scrap", 50 ] ]
     ]
   },
   {
@@ -773,7 +773,7 @@
       [ [ "zinc_metal", 200 ] ],
       [ [ "carbon_electrode", 8 ] ],
       [ [ "duct_tape", 40 ] ],
-      [ [ "steel_chunk", 25 ], [ "scrap", 50 ] ]
+      [ [ "steel_fragment", 25 ], [ "scrap", 50 ] ]
     ]
   },
   {

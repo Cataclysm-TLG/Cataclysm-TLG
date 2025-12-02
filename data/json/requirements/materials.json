@@ -87,7 +87,7 @@
     "id": "copper_scrap_equivalent",
     "type": "requirement",
     "//": "Material used for equivalence between one unit of scrap copper and corresponding amount of elemental copper.",
-    "components": [ [ [ "scrap_copper", 1 ], [ "copper", 50 ] ] ]
+    "components": [ [ [ "copper_fragment", 1 ], [ "copper", 50 ] ] ]
   },
   {
     "id": "liquid_rubber",
@@ -405,21 +405,21 @@
     "id": "steel_standard",
     "type": "requirement",
     "//": "Materials for use when forging items from steel",
-    "components": [ [ [ "steel_lump", 1 ], [ "steel_chunk", 4 ] ] ]
+    "components": [ [ [ "steel_chunk", 1 ], [ "steel_fragment", 4 ] ] ]
   },
   {
     "id": "mixed_steel",
     "type": "requirement",
     "//": "Materials for use in scrap armor",
     "components": [
-      [ [ "scrap", 50 ], [ "budget_steel_chunk", 4 ], [ "budget_steel_lump", 1 ], [ "steel_chunk", 4 ], [ "steel_lump", 1 ] ]
+      [ [ "scrap", 50 ], [ "budget_steel_fragment", 4 ], [ "budget_steel_chunk", 1 ], [ "steel_fragment", 4 ], [ "steel_chunk", 1 ] ]
     ]
   },
   {
     "id": "steel_tiny",
     "type": "requirement",
     "//": "Materials for use when forging atypically small items from steel",
-    "components": [ [ [ "steel_chunk", 1 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ] ] ]
   },
   {
     "id": "bronze_tiny",

@@ -583,8 +583,8 @@
       "str_min_supported": 200,
       "bash_below": true,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_fragment", "count": [ 3, 12 ] },
         { "item": "scrap", "count": [ 9, 36 ] }
       ]
     }
@@ -610,8 +610,8 @@
       "str_min_supported": 200,
       "bash_below": true,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_fragment", "count": [ 3, 12 ] },
         { "item": "scrap", "count": [ 9, 36 ] }
       ]
     }
@@ -749,8 +749,8 @@
       "str_min_supported": 200,
       "bash_below": true,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_fragment", "count": [ 3, 12 ] },
         { "item": "scrap", "count": [ 9, 36 ] }
       ]
     }

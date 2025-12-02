@@ -83,7 +83,7 @@
     "autolearn": true,
     "components": [
       [ [ "amplifier", 4 ], [ "makeshift_transformer", 8 ] ],
-      [ [ "steel_chunk", 2 ], [ "scrap", 6 ] ],
+      [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ],
       [ [ "lightstrip_inactive", 4 ], [ "light_bulb", 4 ] ],
       [ [ "cable", 10 ] ]
     ]
@@ -103,7 +103,7 @@
     "autolearn": true,
     "components": [
       [ [ "amplifier", 4 ], [ "makeshift_transformer", 8 ] ],
-      [ [ "steel_chunk", 2 ], [ "scrap", 6 ] ],
+      [ [ "steel_fragment", 2 ], [ "scrap", 6 ] ],
       [ [ "lightstrip_inactive", 4 ], [ "light_bulb", 4 ] ],
       [ [ "cable", 10 ] ]
     ]

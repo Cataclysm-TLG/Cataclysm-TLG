@@ -488,8 +488,8 @@
       "str_min_supported": 200,
       "bash_below": true,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_fragment", "count": [ 3, 12 ] },
         { "item": "scrap", "count": [ 9, 36 ] }
       ]
     }
@@ -514,8 +514,8 @@
       "str_min_supported": 200,
       "bash_below": true,
       "items": [
-        { "item": "steel_lump", "count": [ 1, 4 ] },
-        { "item": "steel_chunk", "count": [ 3, 12 ] },
+        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_fragment", "count": [ 3, 12 ] },
         { "item": "scrap", "count": [ 9, 36 ] }
       ]
     }
@@ -590,7 +590,7 @@
       "ter_set": "t_open_air",
       "str_min_supported": 100,
       "bash_below": true,
-      "items": [ { "item": "steel_chunk", "count": [ 5, 11 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 5, 11 ] } ]
     }
   },
   {
@@ -1525,7 +1525,7 @@
       "sound_fail": "clang!",
       "items": [
         { "item": "scrap", "count": [ 4, 16 ] },
-        { "item": "steel_chunk", "count": [ 1, 6 ] },
+        { "item": "steel_fragment", "count": [ 1, 6 ] },
         { "item": "cobalt_60", "count": [ 1, 5 ] },
         { "item": "lead", "count": [ 12, 18 ] }
       ]

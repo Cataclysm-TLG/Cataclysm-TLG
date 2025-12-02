@@ -17,7 +17,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ], [ "makeshift_transformer", 2 ] ],
       [ [ "lightstrip_inactive", 1 ], [ "light_bulb", 1 ] ],
-      [ [ "steel_lump", 1 ] ],
+      [ [ "steel_chunk", 1 ] ],
       [ [ "pipe_fittings", 1 ] ],
       [ [ "pipe", 2 ] ]
     ]
@@ -40,7 +40,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ], [ "makeshift_transformer", 2 ] ],
       [ [ "floodlight", 1 ] ],
-      [ [ "steel_lump", 1 ] ],
+      [ [ "steel_chunk", 1 ] ],
       [ [ "pipe_fittings", 1 ] ],
       [ [ "pipe", 2 ] ]
     ]
