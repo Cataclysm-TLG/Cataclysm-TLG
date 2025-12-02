@@ -87,6 +87,7 @@
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 1 ], [ "pocket_survival", 1 ], [ "book_archery", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
+    "tools": [ [ [ "fire", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
