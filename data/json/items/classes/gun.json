@@ -179,6 +179,7 @@
     "name": { "str": "rifle with manual actions", "str_pl": "rifles with manual actions" },
     "//": "Manual actions exclude the magazine location preventing installation of belt-feed adaptors",
     "faults": [ "fault_gun_blackpowder", "fault_gun_dirt" ],
+    "extend": { "flags": [ "RELOAD_ONE", "NO_TURRET" ] },
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],

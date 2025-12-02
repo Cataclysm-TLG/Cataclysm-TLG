@@ -3202,5 +3202,15 @@
     "type": "MIGRATION",
     "id": "unstable_rift",
     "replace": "pebble"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "louverture",
+    "replace": "mace"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "pulverizer",
+    "replace": "hammer_sledge"
   }
 ]
