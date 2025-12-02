@@ -31,8 +31,7 @@
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,
-    "time_to_learn": "10 h",
-    "//": "The 'closures' part of the name is historical."
+    "time_to_learn": "10 h"
   },
   {
     "type": "proficiency",
@@ -50,7 +49,7 @@
     "id": "prof_cobbling",
     "category": "prof_tailoring",
     "name": { "str": "Cobbling" },
-    "description": "Like a magical elf, you've learned how to construct footwear by hand.",
+    "description": "You've learned how to construct footwear by hand.",
     "can_learn": true,
     "time_to_learn": "10 h",
     "default_time_multiplier": 2,
@@ -85,7 +84,7 @@
     "id": "prof_millinery",
     "category": "prof_tailoring",
     "name": { "str": "Millinery" },
-    "description": "Like a solitary mouse, you've learned how to construct hats by hand.",
+    "description": "You've learned how to construct hats and other shaped headwear by hand.",
     "can_learn": true,
     "default_time_multiplier": 2,
     "default_skill_penalty": 0.25,

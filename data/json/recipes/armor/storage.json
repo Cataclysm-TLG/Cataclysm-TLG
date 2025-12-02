@@ -764,7 +764,7 @@
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_plasticworking" }
     ],
-    "components": [ [ [ "ragpouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
+    "components": [ [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
   },
   {
     "result": "xs_tacvest",
@@ -772,7 +772,7 @@
     "copy-from": "tacvest",
     "time": "6 h",
     "using": [ [ "tailoring_nylon_patchwork", 3 ], [ "plastic_molding", 2 ], [ "fastener_small", 6 ] ],
-    "components": [ [ [ "ragpouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
+    "components": [ [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
   },
   {
     "result": "xl_tacvest",
@@ -780,7 +780,7 @@
     "copy-from": "tacvest",
     "time": "13 h 30 m",
     "using": [ [ "tailoring_nylon_patchwork", 7 ], [ "plastic_molding", 3 ], [ "fastener_small", 6 ] ],
-    "components": [ [ [ "ragpouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
+    "components": [ [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ], [ "chestrig", 1 ] ] ]
   },
   {
     "result": "duffelbag",
@@ -2277,18 +2277,16 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_STORAGE",
     "skill_used": "tailor",
-    "difficulty": 4,
+    "difficulty": 5,
     "time": "18 h",
     "autolearn": true,
     "reversible": { "time": "1 h" },
-    "using": [ [ "tailoring_leather_small", 28 ], [ "fastener_large", 3 ] ],
+    "using": [ [ "tailoring_nylon_patchwork", 28 ], [ "fastener_large", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
-      { "proficiency": "prof_closures_waterproofing" },
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_leatherworking" }
+      { "proficiency": "prof_closures_waterproofing" }
     ],
-    "components": [ [ [ "strap_large", 2, "LIST" ] ], [ [ "leather_pouch", 2 ] ] ]
+    "components": [ [ [ "strap_large", 2, "LIST" ] ], [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ] ] ]
   },
   {
     "result": "backpack_hiking",
@@ -2297,16 +2295,14 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_STORAGE",
     "skill_used": "tailor",
-    "difficulty": 4,
+    "difficulty": 5,
     "time": "14 h",
     "autolearn": true,
     "reversible": { "time": "1 h" },
-    "using": [ [ "tailoring_leather_patchwork", 8 ], [ "fastener_large", 1 ] ],
+    "using": [ [ "tailoring_nylon_patchwork", 22 ], [ "fastener_large", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
-      { "proficiency": "prof_closures_waterproofing" },
-      { "proficiency": "prof_leatherworking_basic" },
-      { "proficiency": "prof_leatherworking" }
+      { "proficiency": "prof_closures_waterproofing" }
     ],
     "components": [ [ [ "strap_large", 2, "LIST" ] ] ]
   },
