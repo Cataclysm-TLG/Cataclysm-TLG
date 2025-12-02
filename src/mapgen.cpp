@@ -58,6 +58,7 @@
 #include "memory_fast.h"
 #include "mission.h"
 #include "mongroup.h"
+#include "mtype.h"
 #include "npc.h"
 #include "omdata.h"
 #include "options.h"
@@ -7136,18 +7137,22 @@ void map::place_spawns( const mongroup_id &group, const int chance,
         int tries = 10;
         point_bub_ms p;
 
-        // Pick a spot for the spawn
+        // Pick a spot for the spawn.
         do {
             p = { rng( p1.x(), p2.x() ), rng( p1.y(), p2.y() ) };
             tries--;
         } while( impassable( p ) && tries > 0 );
 
-        // Pick a monster type
-        std::vector<MonsterGroupResult> spawn_details =
-            MonsterGroupManager::GetResultFromGroup( group, &num );
+        // Pick a monster type.
+        std::vector<MonsterGroupResult> spawn_details = MonsterGroupManager::GetResultFromGroup( group, &num );
+
         for( const MonsterGroupResult &mgr : spawn_details ) {
+            // Non-flying monsters cannot spawn in open air.
+            if( !mgr.name->has_flag( mon_flag_FLIES ) && is_open_air( { p, abs_sub.z() } ) ) {
+                continue;
+            }
             add_spawn( mgr.name, mgr.pack_size, { p, abs_sub.z() },
-                       friendly, -1, mission_id, name, mgr.data );
+                    friendly, -1, mission_id, name, mgr.data );
         }
     }
 }
@@ -7258,14 +7263,15 @@ std::vector<item *> map::place_items(
     // spawn rates < 1 are handled in item_group
     const int spawn_count = roll_remainder( chance / 100.0f );
     for( int i = 0; i < spawn_count; i++ ) {
-        // Might contain one item or several that belong together like guns & their ammo
+        // Might contain one item or several that belong together like guns & their ammo.
         int tries = 0;
         auto is_valid_terrain = [this, ongrass]( const tripoint_bub_ms & p ) {
             const ter_t &terrain = ter( p ).obj();
+            // Don't place items in open air, places that can't hold items, impassable terrain, etc.
             return terrain.movecost == 0 &&
                    !terrain.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) &&
                    !ongrass &&
-                   !terrain.has_flag( ter_furn_flag::TFLAG_FLAT );
+                   !terrain.has_flag( ter_furn_flag::TFLAG_FLAT ) && !is_open_air( p );
         };
 
         tripoint_bub_ms p;
