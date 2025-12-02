@@ -57,7 +57,6 @@
     "clip_size": 14,
     "blackpowder_tolerance": 56,
     "reload_noise": "chik chik.",
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -96,7 +95,6 @@
     "clip_size": 6,
     "blackpowder_tolerance": 56,
     "//proportional": { "reload": 1.5 },
-    "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "45colt": 6 } } ],
     "melee_damage": { "bash": 8 }
   },
@@ -105,16 +103,8 @@
     "copy-from": "pistol_revolver",
     "looks_like": "sw_619",
     "type": "GUN",
-    "name": { "str_sp": ".45/.410 shotshell revolver" },
-    "description": "A stainless steel 5 shot revolver, capable of firing .410 shells or 45 Colt cartridges.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "taurus_judge",
-        "name": { "str": "Taurus Judge revolver" },
-        "description": "Marketed for home defense, the Taurus Judge is a 5 shot cylinder revolver, capable of firing .410 shotshells or .45 Colt cartridges out of its 3 inch barrel.  While it doesn't compete ballistically with a proper rifle, or even a full length revolver, it's still a handy handgun against the undead and soon to be."
-      }
-    ],
+    "name": { "str_sp": "Taurus Judge revolver" },
+    "description": "Marketed for home defense, the Taurus Judge is a 5 shot cylinder revolver, capable of firing .410 shotshells or .45 Colt cartridges out of its 3 inch barrel.  While it doesn't compete ballistically with a proper rifle, it's still a handy weapon against the living and the dead.",
     "weight": "822 g",
     "volume": "563 ml",
     "longest_side": "274 mm",
@@ -124,7 +114,6 @@
     "price_postapoc": "20 USD",
     "to_hit": -2,
     "ammo": [ "410shot", "45colt" ],
-    "flags": [ "NO_TURRET", "ALLOWS_BODY_BLOCK" ],
     "dispersion": 280,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "clip_size": 5,

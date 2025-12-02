@@ -11,7 +11,7 @@
     "price": "2595 USD",
     "price_postapoc": "15 USD",
     "material": [ "steel", "wood" ],
-    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "RELOAD_ONE", "EASY_CLEAN", "NO_TURRET" ],
     "skill": "rifle",
     "ammo": [ "3006" ],
     "weight": "4200 g",
