@@ -366,10 +366,31 @@ class armor_inventory_preset: public inventory_selector_preset
                     continue;
                 }
                 const damage_type_id &dtid = dt.id;
-                append_cell( [ this, dtid ]( const item_location & loc ) {
-                    return get_decimal_string( loc->resist( dtid ) );
+                append_cell( [ this, dtid ]( const item_location &loc ) {
+                    Character &you = get_player_character();
+                    double weighted_sum = 0.0;
+                    double total_weight = 0.0;
+                    // TODO: Move from bps to sbps so we can fix items like high heels skewing averages.
+                    for( const bodypart_id &bp : you.get_all_body_parts() ) {
+                        if( !loc->covers( bp ) ) {
+                            continue;
+                        }
+                        int hitsize = bp->hit_size;
+                        // Ensure every part still counts, even eyes etc.
+                        const double weight = ( hitsize > 0 ) ? hitsize : 1;
+                        const double resist = loc->resist( dtid, false, bp );
+                        weighted_sum += resist * weight;
+                        total_weight += weight;
+                    }
+                    double average_resist = 0.0;
+                    if( total_weight > 0.0 ) {
+                        average_resist = weighted_sum / total_weight;
+                    }
+
+                    return get_decimal_string( average_resist );
                 }, to_upper_case( dt.name.translated() ) );
-            }
+
+                }
 
             append_cell( [ this ]( const item_location & loc ) {
                 return get_number_string( loc->get_env_resist() );
