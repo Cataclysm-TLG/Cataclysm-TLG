@@ -1588,8 +1588,8 @@
       "sound_fail": "clang!",
       "ter_set": "t_window_empty",
       "items": [
-        { "item": "steel_lump", "prob": 25 },
-        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "prob": 25 },
+        { "item": "steel_fragment", "count": [ 1, 4 ] },
         { "item": "scrap", "count": [ 1, 5 ] }
       ]
     },
@@ -2248,8 +2248,8 @@
       "sound_fail": "clang!",
       "ter_set": "t_metal_floor",
       "items": [
-        { "item": "steel_lump", "prob": 55 },
-        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "prob": 55 },
+        { "item": "steel_fragment", "count": [ 1, 4 ] },
         { "item": "scrap", "count": [ 1, 5 ] },
         { "item": "tempered_glass_shard", "charges": [ 19, 29 ] }
       ]
@@ -2277,8 +2277,8 @@
       "sound_fail": "clang!",
       "ter_set": "t_metal_floor",
       "items": [
-        { "item": "steel_lump", "prob": 55 },
-        { "item": "steel_chunk", "count": [ 1, 4 ] },
+        { "item": "steel_chunk", "prob": 55 },
+        { "item": "steel_fragment", "count": [ 1, 4 ] },
         { "item": "scrap", "count": [ 1, 5 ] },
         { "item": "tempered_glass_shard", "charges": [ 19, 29 ] }
       ]

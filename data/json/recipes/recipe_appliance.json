@@ -118,7 +118,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ] ],
       [ [ "lightstrip_inactive", 1 ], [ "light_bulb", 1 ] ],
-      [ [ "steel_chunk", 1 ] ],
+      [ [ "steel_fragment", 1 ] ],
       [ [ "scrap", 3 ] ]
     ]
   },
@@ -141,7 +141,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ] ],
       [ [ "lightstrip_inactive", 1 ], [ "light_bulb", 1 ] ],
-      [ [ "steel_lump", 1 ] ],
+      [ [ "steel_chunk", 1 ] ],
       [ [ "pipe_fittings", 1 ] ],
       [ [ "pipe", 2 ] ]
     ]
@@ -165,7 +165,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ] ],
       [ [ "floodlight", 1 ] ],
-      [ [ "steel_lump", 1 ] ],
+      [ [ "steel_chunk", 1 ] ],
       [ [ "pipe_fittings", 1 ] ],
       [ [ "pipe", 2 ] ]
     ]
@@ -189,7 +189,7 @@
       [ [ "cable", 2 ] ],
       [ [ "amplifier", 1 ] ],
       [ [ "directed_floodlight", 1 ] ],
-      [ [ "steel_lump", 1 ] ],
+      [ [ "steel_chunk", 1 ] ],
       [ [ "pipe_fittings", 1 ] ],
       [ [ "pipe", 2 ] ]
     ]

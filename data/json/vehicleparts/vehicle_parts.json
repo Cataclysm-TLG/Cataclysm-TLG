@@ -4,8 +4,8 @@
     "id": "ig_vp_frame",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ]
   },
@@ -14,8 +14,8 @@
     "id": "ig_vp_prison_bench",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_lump", "count": [ 3, 6 ] },
       { "item": "steel_chunk", "count": [ 3, 6 ] },
+      { "item": "steel_fragment", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 2, 4 ] },
       { "item": "chain", "count": [ 1, 4 ] }
     ]
@@ -25,8 +25,8 @@
     "id": "ig_vp_hdframe",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ]
   },
@@ -47,8 +47,8 @@
     "id": "ig_vp_sheet_metal",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_lump", "count": [ 3, 4 ] },
-      { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_chunk", "count": [ 3, 4 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 8, 10 ] }
     ]
   },
@@ -57,8 +57,8 @@
     "id": "ig_vp_steel_plate",
     "subtype": "collection",
     "entries": [
-      { "item": "steel_lump", "count": [ 4, 7 ] },
-      { "item": "steel_chunk", "count": [ 5, 6 ] },
+      { "item": "steel_chunk", "count": [ 4, 7 ] },
+      { "item": "steel_fragment", "count": [ 5, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ]
   },
@@ -153,8 +153,8 @@
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 3, 5 ] },
       { "item": "steel_chunk", "count": [ 3, 5 ] },
+      { "item": "steel_fragment", "count": [ 3, 5 ] },
       { "item": "scrap", "count": [ 4, 8 ] },
       { "item": "splinter", "count": [ 5, 9 ] }
     ],
@@ -267,7 +267,7 @@
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "5 m", "using": [ [ "repair_welding_standard", 1 ] ] }
     },
     "flags": [ "MOUNTABLE", "NO_COVER" ],
-    "breaks_into": [ { "item": "steel_chunk", "count": [ 0, 1 ] }, { "item": "scrap", "count": [ 3, 7 ] } ],
+    "breaks_into": [ { "item": "steel_fragment", "count": [ 0, 1 ] }, { "item": "scrap", "count": [ 3, 7 ] } ],
     "damage_reduction": { "all": 5 },
     "variants": [ { "symbols": "^", "symbols_broken": "#" } ]
   },
@@ -346,8 +346,8 @@
     "flags": [ "AISLE", "BOARDABLE", "CARGO" ],
     "breaks_into": [
       { "item": "sheet_metal_small", "count": [ 0, 1 ] },
-      { "item": "steel_lump", "count": [ 1, 2 ] },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_chunk", "count": [ 1, 2 ] },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "scrap", "count": [ 4, 8 ] }
     ],
     "damage_reduction": { "all": 28 },
@@ -414,8 +414,8 @@
     "flags": [ "AISLE", "BOARDABLE", "CARGO", "CARGO_PASSABLE", "LOCKABLE_CARGO", "COVERED" ],
     "breaks_into": [
       { "item": "sheet_metal_small", "count": [ 1, 3 ] },
-      { "item": "steel_lump", "count": [ 2, 4 ] },
-      { "item": "steel_chunk", "count": [ 2, 8 ] },
+      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 8 ] },
       { "item": "scrap", "count": [ 11, 17 ] }
     ],
     "damage_reduction": { "all": 28 },
@@ -525,8 +525,8 @@
     },
     "breaks_into": [
       { "item": "RAM", "prob": 10 },
-      { "item": "steel_lump", "count": [ 0, 2 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_chunk", "count": [ 0, 2 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 5, 12 ] },
       { "item": "e_scrap", "count": [ 2, 5 ] },
       { "item": "plastic_chunk", "count": [ 3, 6 ] },
@@ -562,8 +562,8 @@
     },
     "flags": [ "BATTERY_MOUNT", "NO_COVER" ],
     "breaks_into": [
-      { "item": "steel_lump", "prob": 50 },
-      { "item": "steel_chunk", "count": [ 1, 2 ] },
+      { "item": "steel_chunk", "prob": 50 },
+      { "item": "steel_fragment", "count": [ 1, 2 ] },
       { "item": "scrap", "count": [ 0, 3 ] }
     ],
     "damage_reduction": { "all": 8, "bash": 10 },
@@ -644,8 +644,8 @@
     },
     "flags": [ "REACTOR" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 6, 11 ] },
       { "item": "steel_chunk", "count": [ 6, 11 ] },
+      { "item": "steel_fragment", "count": [ 6, 11 ] },
       { "item": "scrap", "count": [ 6, 11 ] }
     ],
     "damage_reduction": { "all": 50 },
@@ -696,11 +696,11 @@
     },
     "flags": [ "CARGO", "OBSTACLE", "WASHING_MACHINE", "COVERED", "ENABLED_DRAINS_EPOWER" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 8, 13 ] },
       { "item": "steel_chunk", "count": [ 8, 13 ] },
+      { "item": "steel_fragment", "count": [ 8, 13 ] },
       { "item": "scrap", "count": [ 8, 13 ] },
       { "item": "hose", "prob": 50 },
-      { "item": "scrap_copper", "prob": 15 },
+      { "item": "copper_fragment", "prob": 15 },
       { "item": "cable", "charges": [ 1, 3 ] },
       { "item": "copper", "charges": [ 7, 30 ] }
     ],
@@ -734,11 +734,11 @@
     },
     "flags": [ "CARGO", "OBSTACLE", "DISHWASHER", "COVERED", "ENABLED_DRAINS_EPOWER" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 8, 13 ] },
       { "item": "steel_chunk", "count": [ 8, 13 ] },
+      { "item": "steel_fragment", "count": [ 8, 13 ] },
       { "item": "scrap", "count": [ 8, 13 ] },
       { "item": "hose", "prob": 50 },
-      { "item": "scrap_copper", "prob": 15 },
+      { "item": "copper_fragment", "prob": 15 },
       { "item": "cable", "charges": [ 1, 3 ] },
       { "item": "copper", "charges": [ 7, 30 ] }
     ],
@@ -767,11 +767,11 @@
     },
     "flags": [ "CARGO", "OBSTACLE", "AUTOCLAVE", "COVERED", "ENABLED_DRAINS_EPOWER" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 8, 13 ] },
       { "item": "steel_chunk", "count": [ 8, 13 ] },
+      { "item": "steel_fragment", "count": [ 8, 13 ] },
       { "item": "scrap", "count": [ 8, 13 ] },
       { "item": "hose", "prob": 50 },
-      { "item": "scrap_copper", "prob": 15 },
+      { "item": "copper_fragment", "prob": 15 },
       { "item": "cable", "charges": [ 1, 3 ] },
       { "item": "copper", "charges": [ 7, 30 ] }
     ],
@@ -1008,8 +1008,8 @@
       { "item": "pipe", "prob": 25 },
       { "item": "sheet_metal", "prob": 5 },
       { "item": "sheet_metal_small", "count": [ 5, 14 ] },
-      { "item": "steel_lump", "count": [ 1, 3 ] },
-      { "item": "steel_chunk", "count": [ 7, 12 ] },
+      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "count": [ 7, 12 ] },
       { "item": "scrap", "count": [ 15, 30 ] }
     ],
     "workbench": { "multiplier": 1.2, "mass": 300000, "volume": "30 L" },
@@ -1250,8 +1250,8 @@
     },
     "flags": [ "CONTROLS", "NEED_LEG", "INOPERABLE_SMALL", "NO_COVER" ],
     "breaks_into": [
-      { "item": "steel_lump" },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_chunk" },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "scrap", "count": [ 1, 3 ] },
       { "item": "cable", "charges": [ 0, 4 ] }
     ],
@@ -1359,8 +1359,8 @@
     "flags": [ "CTRL_ELECTRONIC", "ENABLED_DRAINS_EPOWER", "SPACE_HEATER" ],
     "emissions": [ "emit_heater_vehicle" ],
     "breaks_into": [
-      { "item": "steel_lump" },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_chunk" },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "scrap", "count": [ 1, 3 ] },
       { "item": "element", "count": [ 0, 2 ] }
     ],
@@ -1384,8 +1384,8 @@
     "flags": [ "CTRL_ELECTRONIC", "ENABLED_DRAINS_EPOWER", "SPACE_HEATER" ],
     "emissions": [ "emit_hot_air2_stream" ],
     "breaks_into": [
-      { "item": "steel_lump" },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_chunk" },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "scrap", "count": [ 1, 3 ] },
       { "item": "element", "prob": 80 }
     ],
@@ -1402,8 +1402,8 @@
     "extend": { "flags": [ "NO_INSTALL_HIDDEN" ] },
     "requirements": { "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "qualities": [ { "id": "SAW_M", "level": 2 } ] } },
     "breaks_into": [
-      { "item": "steel_lump", "prob": 70 },
-      { "item": "steel_chunk", "count": [ 1, 2 ] },
+      { "item": "steel_chunk", "prob": 70 },
+      { "item": "steel_fragment", "count": [ 1, 2 ] },
       { "item": "scrap", "count": [ 1, 3 ] }
     ]
   },
@@ -1427,8 +1427,8 @@
     "emissions": [ "emit_cooler_vehicle" ],
     "exhaust": [ "emit_heater_vehicle" ],
     "breaks_into": [
-      { "item": "steel_lump" },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_chunk" },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "scrap", "count": [ 1, 3 ] },
       { "item": "cable", "charges": [ 2, 10 ] }
     ],
@@ -1503,8 +1503,8 @@
     },
     "flags": [ "MUFFLER", "NO_COVER" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 1, 3 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 4, 9 ] }
     ],
     "damage_reduction": { "all": 9 },
@@ -1693,7 +1693,7 @@
     },
     "flags": [ "SOLAR_PANEL" ],
     "breaks_into": [
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 2, 4 ] },
       { "item": "solar_cell", "count": [ 1, 4 ] },
       { "item": "tempered_glass_shard", "charges": [ 4, 18 ] },
@@ -1722,7 +1722,7 @@
     },
     "breaks_into": [
       { "item": "wire", "count": [ 2, 4 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 2, 4 ] },
       { "item": "solar_cell", "count": [ 1, 4 ] },
       { "item": "tempered_glass_shard", "charges": [ 4, 18 ] },
@@ -1750,7 +1750,7 @@
       }
     },
     "breaks_into": [
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 2, 4 ] },
       { "item": "solar_cell_v2", "count": [ 1, 6 ] }
     ]
@@ -1777,7 +1777,7 @@
     },
     "breaks_into": [
       { "item": "wire", "count": [ 2, 4 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 2, 4 ] },
       { "item": "solar_cell_v2", "count": [ 1, 6 ] }
     ],
@@ -1888,7 +1888,7 @@
     },
     "flags": [ "HORN", "NO_COVER" ],
     "breaks_into": [
-      { "item": "steel_chunk", "prob": 50 },
+      { "item": "steel_fragment", "prob": 50 },
       { "item": "scrap", "count": [ 0, 2 ] },
       { "item": "plastic_chunk", "count": [ 1, 2 ] }
     ],
@@ -1943,8 +1943,8 @@
     },
     "flags": [ "BOARDABLE", "CARGO", "COVERED", "HUGE_OK" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 12, 19 ] },
-      { "item": "steel_chunk", "count": [ 7, 12 ] },
+      { "item": "steel_chunk", "count": [ 12, 19 ] },
+      { "item": "steel_fragment", "count": [ 7, 12 ] },
       { "item": "scrap", "count": [ 14, 25 ] },
       { "item": "rope_6", "count": [ 0, 2 ] },
       { "item": "string_36", "count": [ 10, 25 ] },
@@ -1982,8 +1982,8 @@
     },
     "flags": [ "BOARDABLE", "CARGO", "COVERED", "CAPTURE_MONSTER_VEH", "HUGE_OK", "BED", "BELTABLE" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 6, 8 ] },
       { "item": "steel_chunk", "count": [ 6, 8 ] },
+      { "item": "steel_fragment", "count": [ 6, 8 ] },
       { "item": "scrap", "count": [ 6, 8 ] }
     ],
     "damage_reduction": { "all": 30 },
@@ -1999,7 +1999,7 @@
     "size": "50 L",
     "item": "animal_locker",
     "flags": [ "CARGO", "COVERED", "CAPTURE_MONSTER_VEH", "OBSTACLE" ],
-    "breaks_into": [ { "item": "steel_chunk", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 3, 4 ] } ]
+    "breaks_into": [ { "item": "steel_fragment", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 3, 4 ] } ]
   },
   {
     "type": "vehicle_part",
@@ -2023,7 +2023,7 @@
     "flags": [ "INTERNAL", "RECHARGE", "NO_COVER" ],
     "folded_volume": "2 L",
     "breaks_into": [
-      { "item": "steel_chunk", "count": [ 0, 2 ] },
+      { "item": "steel_fragment", "count": [ 0, 2 ] },
       { "item": "scrap", "count": [ 1, 2 ] },
       { "item": "cable", "charges": [ 1, 3 ] }
     ],
@@ -2184,8 +2184,8 @@
     "requirements": { "removal": { "time": "5 s" } },
     "flags": [ "NO_INSTALL_HIDDEN", "UNMOUNT_ON_DAMAGE", "TOW_CABLE", "NO_COVER" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 5, 10 ] },
-      { "item": "steel_chunk", "count": [ 7, 14 ] },
+      { "item": "steel_chunk", "count": [ 5, 10 ] },
+      { "item": "steel_fragment", "count": [ 7, 14 ] },
       { "item": "scrap", "count": [ 17, 34 ] },
       { "item": "grip_hook", "prob": 80 },
       { "item": "cable", "charges": [ 1, 3 ] }
@@ -2346,7 +2346,7 @@
       }
     },
     "flags": [ "CONTROLS", "REMOTE_CONTROLS", "NO_COVER" ],
-    "breaks_into": [ { "item": "motor_tiny" }, { "item": "steel_chunk", "count": [ 1, 3 ] }, { "item": "scrap", "count": [ 1, 3 ] } ],
+    "breaks_into": [ { "item": "motor_tiny" }, { "item": "steel_fragment", "count": [ 1, 3 ] }, { "item": "scrap", "count": [ 1, 3 ] } ],
     "variants": [ { "symbols": "$", "symbols_broken": "$" } ]
   },
   {
@@ -2462,7 +2462,7 @@
     "flags": [ "REMOTE_CONTROLS", "OBSTACLE", "CABLE_PORTS", "NO_COVER" ],
     "breaks_into": [
       { "item": "motor_tiny", "count": [ 1, 3 ] },
-      { "item": "steel_chunk", "count": [ 1, 3 ] },
+      { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "e_scrap", "count": [ 1, 5 ] }
     ],
     "variants": [ { "symbols": "&", "symbols_broken": "x" } ]
@@ -2698,8 +2698,8 @@
     },
     "flags": [ "TRANSFORM_TERRAIN", "PLOW", "EXTRA_DRAG" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 7 ] },
-      { "item": "steel_chunk", "count": [ 21, 40 ] },
+      { "item": "steel_chunk", "count": [ 4, 7 ] },
+      { "item": "steel_fragment", "count": [ 21, 40 ] },
       { "item": "scrap", "count": [ 108, 215 ] },
       { "item": "nuts_bolts", "count": [ 7, 15 ] },
       { "item": "pipe_fittings", "prob": 30 },
@@ -2825,8 +2825,8 @@
     },
     "flags": [ "REAPER", "PROTRUSION", "EXTRA_DRAG" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 3, 5 ] },
-      { "item": "steel_chunk", "count": [ 4, 8 ] },
+      { "item": "steel_chunk", "count": [ 3, 5 ] },
+      { "item": "steel_fragment", "count": [ 4, 8 ] },
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 15, 30 ] },
       { "item": "nuts_bolts", "count": [ 3, 6 ] },
@@ -2872,8 +2872,8 @@
       { "item": "cable", "charges": [ 3, 6 ] },
       { "item": "e_scrap", "count": [ 4, 10 ] },
       { "item": "plastic_chunk", "count": [ 1, 3 ] },
-      { "item": "steel_lump", "count": [ 3, 5 ] },
-      { "item": "steel_chunk", "count": [ 4, 8 ] },
+      { "item": "steel_chunk", "count": [ 3, 5 ] },
+      { "item": "steel_fragment", "count": [ 4, 8 ] },
       { "item": "sheet_metal_small", "count": [ 3, 6 ] },
       { "item": "scrap", "count": [ 15, 30 ] },
       { "item": "nuts_bolts", "count": [ 3, 6 ] },
@@ -2931,7 +2931,7 @@
       { "item": "e_scrap", "count": [ 1, 2 ] },
       { "item": "plastic_chunk", "count": [ 1, 2 ] },
       { "item": "bearing", "count": [ 1, 3 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 6, 12 ] },
       { "item": "nuts_bolts", "count": [ 3, 6 ] }
     ],
@@ -3031,7 +3031,7 @@
     "item": "cannon_3in_ordnance",
     "color": "dark_gray",
     "broken_color": "dark_gray",
-    "breaks_into": [ { "item": "scrap", "count": 72 }, { "item": "steel_chunk", "count": 30 }, { "item": "steel_lump", "count": 10 } ],
+    "breaks_into": [ { "item": "scrap", "count": 72 }, { "item": "steel_fragment", "count": 30 }, { "item": "steel_chunk", "count": 10 } ],
     "requirements": {
       "install": { "time": "100 s", "skills": [ [ "mechanics", 3 ], [ "launcher", 1 ] ] },
       "removal": { "time": "50 s", "skills": [ [ "mechanics", 2 ] ] }

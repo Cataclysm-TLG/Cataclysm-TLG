@@ -87,7 +87,7 @@
       { "proficiency": "prof_blacksmithing" },
       { "proficiency": "prof_toolsmithing" }
     ],
-    "components": [ [ [ "steel_chunk", 1 ] ], [ [ "flint", 1 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ] ], [ [ "flint", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -176,7 +176,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_toolsmithing" } ],
     "using": [ [ "forging_standard", 3 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "steel_chunk", 3 ] ], [ [ "nails", 1, "LIST" ], [ "nuts_bolts", 1 ] ] ]
+    "components": [ [ [ "steel_fragment", 3 ] ], [ [ "nails", 1, "LIST" ], [ "nuts_bolts", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -535,7 +535,7 @@
       { "proficiency": "prof_toolsmithing" }
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "scrap", 9 ], [ "steel_chunk", 2 ] ] ]
+    "components": [ [ [ "scrap", 9 ], [ "steel_fragment", 2 ] ] ]
   },
   {
     "type": "recipe",

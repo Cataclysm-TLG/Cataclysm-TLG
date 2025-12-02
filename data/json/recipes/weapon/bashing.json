@@ -254,7 +254,7 @@
     "autolearn": true,
     "using": [ [ "blacksmithing_simple", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" } ],
-    "components": [ [ [ "chain", 2 ] ], [ [ "scrap", 1 ], [ "steel_chunk", 1 ], [ "steel_lump", 1 ] ] ]
+    "components": [ [ [ "chain", 2 ] ], [ [ "scrap", 1 ], [ "steel_fragment", 1 ], [ "steel_chunk", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -473,7 +473,7 @@
     "using": [ [ "blacksmithing_simple", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "steel_chunk", 1 ], [ "scrap", 5 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ], [ "scrap", 5 ] ] ]
   },
   {
     "result": "xl_knuckle_steel_forged",
@@ -483,7 +483,7 @@
     "using": [ [ "blacksmithing_simple", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "steel_chunk", 2 ], [ "scrap", 7 ] ] ]
+    "components": [ [ [ "steel_fragment", 2 ], [ "scrap", 7 ] ] ]
   },
   {
     "result": "xs_knuckle_steel_forged",
@@ -493,7 +493,7 @@
     "using": [ [ "blacksmithing_simple", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "steel_chunk", 1 ], [ "scrap", 3 ] ] ]
+    "components": [ [ [ "steel_fragment", 1 ], [ "scrap", 3 ] ] ]
   },
   {
     "type": "recipe",

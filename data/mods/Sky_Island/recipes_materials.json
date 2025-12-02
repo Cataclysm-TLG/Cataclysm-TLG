@@ -130,7 +130,7 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "scrap_copper",
+    "result": "copper_fragment",
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "category": "CC_WARP",
@@ -357,7 +357,7 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "steel_chunk",
+    "result": "steel_fragment",
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "category": "CC_WARP",
@@ -373,7 +373,7 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "steel_lump",
+    "result": "steel_chunk",
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "category": "CC_WARP",

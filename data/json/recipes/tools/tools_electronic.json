@@ -333,7 +333,7 @@
       [ [ "motor_tiny", 1 ] ],
       [ [ "power_supply", 1 ] ],
       [ [ "cable", 5 ] ],
-      [ [ "scrap", 1 ], [ "steel_chunk", 1 ] ]
+      [ [ "scrap", 1 ], [ "steel_fragment", 1 ] ]
     ]
   },
   {
@@ -641,7 +641,7 @@
       [ [ "UPS_OFF", 1 ] ],
       [ [ "medium_storage_battery", 1 ] ],
       [ [ "cable", 12 ] ],
-      [ [ "rebar", 2 ], [ "steel_chunk", 4 ] ],
+      [ [ "rebar", 2 ], [ "steel_fragment", 4 ] ],
       [ [ "scrap", 3 ] ]
     ]
   },

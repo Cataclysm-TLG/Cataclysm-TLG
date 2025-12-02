@@ -4,13 +4,13 @@
     "id": "wreckage",
     "items": [
       [ "chain", 20 ],
-      [ "steel_chunk", 30 ],
+      [ "steel_fragment", 30 ],
       [ "spring", 50 ],
-      [ "steel_lump", 30 ],
+      [ "steel_chunk", 30 ],
       [ "frame", 20 ],
       [ "hdframe", 20 ],
       [ "cu_pipe", 25 ],
-      [ "scrap_copper", 62 ],
+      [ "copper_fragment", 62 ],
       [ "rock", 40 ],
       [ "survnote", 1 ]
     ]
@@ -20,7 +20,7 @@
     "id": "looted_store",
     "items": [
       [ "scrap", 10 ],
-      [ "scrap_copper", 2 ],
+      [ "copper_fragment", 2 ],
       [ "rock", 1 ],
       [ "ceramic_shard", 2 ],
       [ "protest_flag", 1 ],
@@ -64,14 +64,14 @@
     "id": "metal_wreckage",
     "items": [
       [ "chain", 20 ],
-      [ "steel_chunk", 30 ],
+      [ "steel_fragment", 30 ],
       [ "spring", 50 ],
-      [ "steel_lump", 30 ],
+      [ "steel_chunk", 30 ],
       [ "pipe", 30 ],
       [ "frame", 20 ],
       [ "hdframe", 20 ],
       [ "cu_pipe", 25 ],
-      [ "scrap_copper", 62 ],
+      [ "copper_fragment", 62 ],
       { "item": "sheet_metal", "prob": 5 },
       { "item": "sheet_metal_small", "prob": 5, "count": [ 2, 4 ] }
     ]
@@ -82,9 +82,9 @@
     "subtype": "distribution",
     "entries": [
       { "item": "chain", "prob": 10 },
-      { "item": "steel_chunk", "prob": 30 },
+      { "item": "steel_fragment", "prob": 30 },
       { "item": "spring", "prob": 5 },
-      { "item": "steel_lump", "prob": 30 },
+      { "item": "steel_chunk", "prob": 30 },
       { "item": "steel_plate", "prob": 30 },
       { "item": "hard_plate", "prob": 30 },
       { "item": "frame", "prob": 20 },
@@ -156,8 +156,8 @@
       [ "box_large_folded", 3 ],
       [ "box_oversize_folded", 3 ],
       [ "string_36", 3 ],
-      [ "steel_lump", 3 ],
       [ "steel_chunk", 3 ],
+      [ "steel_fragment", 3 ],
       { "item": "scrap", "prob": 3 },
       { "item": "glass_shard", "prob": 3, "charges": [ 1, 5 ] },
       [ "wire_barbed", 3 ],
@@ -303,8 +303,8 @@
     "items": [
       { "item": "glass_shard", "prob": 30, "charges": [ 1, 60 ] },
       [ "scrap", 50 ],
-      [ "steel_lump", 30 ],
       [ "steel_chunk", 30 ],
+      [ "steel_fragment", 30 ],
       [ "frame", 20 ],
       [ "rigid_plastic_sheet", 2 ],
       [ "chain", 10 ],
@@ -342,13 +342,13 @@
       { "item": "nail", "prob": 2, "count": [ 0, 1 ], "charges": [ 3, 15 ] },
       { "item": "wire", "prob": 3, "count": [ 2, 6 ], "damage-min": 0, "damage-max": 3 },
       { "item": "charcoal", "prob": 3, "charges": [ 3, 7 ] },
-      { "item": "scrap_copper", "prob": 2, "count": [ 2, 4 ], "damage-min": 0, "damage-max": 3 },
+      { "item": "copper_fragment", "prob": 2, "count": [ 2, 4 ], "damage-min": 0, "damage-max": 3 },
       { "item": "sheet_metal", "prob": 2, "count": [ 1, 4 ], "damage-min": 0, "damage-max": 3 },
       { "item": "sheet_metal_small", "prob": 2, "count": [ 1, 4 ], "damage-min": 0, "damage-max": 3 },
       { "item": "spike", "prob": 5, "count": [ 2, 4 ], "damage-min": 0, "damage-max": 3 },
       { "item": "hinge", "prob": 2, "count": [ 1, 2 ], "damage-min": 0, "damage-max": 3 },
-      { "item": "steel_lump", "prob": 5, "count": [ 2, 5 ] },
-      { "item": "steel_chunk", "prob": 5, "count": [ 5, 10 ] }
+      { "item": "steel_chunk", "prob": 5, "count": [ 2, 5 ] },
+      { "item": "steel_fragment", "prob": 5, "count": [ 5, 10 ] }
     ]
   },
   {

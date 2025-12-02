@@ -378,7 +378,7 @@
     "using": [ [ "forging_standard", 10 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "5l_copper", 2 ], [ "1l_copper", 10 ], [ "scrap_copper", 360 ] ] ]
+    "components": [ [ [ "5l_copper", 2 ], [ "1l_copper", 10 ], [ "copper_fragment", 360 ] ] ]
   },
   {
     "result": "5l_copper",
@@ -393,7 +393,7 @@
     "using": [ [ "forging_standard", 5 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "1l_copper", 5 ], [ "scrap_copper", 180 ] ] ]
+    "components": [ [ [ "1l_copper", 5 ], [ "copper_fragment", 180 ] ] ]
   },
   {
     "result": "1l_copper",
@@ -408,12 +408,12 @@
     "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "book_learn": [ [ "metal_casting_book", 2 ] ],
-    "components": [ [ [ "scrap_copper", 36 ] ] ]
+    "components": [ [ [ "copper_fragment", 36 ] ] ]
   },
   {
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
-    "result": "scrap_copper",
+    "result": "copper_fragment",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "fabrication",
@@ -1192,7 +1192,7 @@
     "components": [ [ [ "fur", 1 ] ] ]
   },
   {
-    "result": "steel_chunk",
+    "result": "steel_fragment",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
@@ -1208,7 +1208,7 @@
     "components": [ [ [ "scrap", 5 ] ] ]
   },
   {
-    "result": "steel_lump",
+    "result": "steel_chunk",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
@@ -1629,7 +1629,7 @@
     "autolearn": [ [ "fabrication", 0 ] ]
   },
   {
-    "result": "budget_steel_chunk",
+    "result": "budget_steel_fragment",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
@@ -1645,7 +1645,7 @@
     "byproduct_group": [ { "item": "slag", "count": 5 } ]
   },
   {
-    "result": "budget_steel_lump",
+    "result": "budget_steel_chunk",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "id_suffix": "from_scrap",
@@ -1662,7 +1662,7 @@
     "byproduct_group": [ { "item": "slag", "count": 20 } ]
   },
   {
-    "result": "budget_steel_lump",
+    "result": "budget_steel_chunk",
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_*",
@@ -1675,7 +1675,7 @@
     "autolearn": true,
     "using": [ [ "forging_standard", 4 ] ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "budget_steel_chunk", 4 ] ] ]
+    "components": [ [ [ "budget_steel_fragment", 4 ] ] ]
   },
   {
     "result": "plastic_sheet",

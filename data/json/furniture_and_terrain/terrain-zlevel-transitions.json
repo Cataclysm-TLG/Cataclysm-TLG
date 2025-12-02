@@ -188,7 +188,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_floor",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
     }
   },
   {
@@ -207,7 +207,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_open_air_rooved",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
     }
   },
   {
@@ -225,7 +225,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "ter_set": "t_ladder_down",
-      "items": [ { "item": "steel_chunk", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
+      "items": [ { "item": "steel_fragment", "count": [ 1, 6 ] }, { "item": "scrap", "count": [ 3, 12 ] } ]
     }
   },
   {

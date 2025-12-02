@@ -47,7 +47,7 @@
       "sound_fail_vol": 12,
       "items": [
         { "item": "cu_pipe", "count": [ 0, 2 ] },
-        { "item": "scrap_copper", "count": [ 0, 2 ] },
+        { "item": "copper_fragment", "count": [ 0, 2 ] },
         { "item": "pipe_fittings", "count": [ 0, 2 ] },
         { "item": "ceramic_shard", "count": [ 2, 6 ] },
         { "item": "glass_shard", "count": [ 8, 16 ] }
@@ -132,12 +132,12 @@
       "sound_fail": "clang!",
       "items": [
         { "item": "scrap", "count": [ 2, 7 ] },
-        { "item": "steel_chunk", "count": [ 0, 3 ] },
+        { "item": "steel_fragment", "count": [ 0, 3 ] },
         { "item": "sheet_metal", "count": [ 2, 6 ] },
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 0, 2 ] },
         { "item": "cu_pipe", "count": [ 1, 4 ] },
-        { "item": "scrap_copper", "count": [ 0, 2 ] },
+        { "item": "copper_fragment", "count": [ 0, 2 ] },
         { "item": "water_faucet", "count": [ 0, 1 ] },
         { "item": "material_aluminium_ingot", "count": 2 }
       ]
@@ -167,12 +167,12 @@
       "sound_fail": "clang!",
       "items": [
         { "item": "scrap", "count": [ 4, 14 ] },
-        { "item": "steel_chunk", "count": [ 1, 6 ] },
+        { "item": "steel_fragment", "count": [ 1, 6 ] },
         { "item": "sheet_metal", "count": [ 4, 12 ] },
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 1, 4 ] },
         { "item": "cu_pipe", "count": [ 1, 8 ] },
-        { "item": "scrap_copper", "count": [ 1, 4 ] },
+        { "item": "copper_fragment", "count": [ 1, 4 ] },
         { "item": "water_faucet", "count": [ 0, 1 ] },
         { "item": "material_aluminium_ingot", "count": 4 }
       ]
@@ -200,7 +200,7 @@
       "sound_fail": "clang!",
       "items": [
         { "item": "scrap", "count": [ 2, 7 ] },
-        { "item": "steel_chunk", "count": [ 0, 3 ] },
+        { "item": "steel_fragment", "count": [ 0, 3 ] },
         { "item": "sheet_metal_small", "count": [ 8, 12 ] },
         { "item": "sheet_metal", "count": [ 1, 2 ] },
         { "item": "cable", "charges": [ 1, 15 ] },

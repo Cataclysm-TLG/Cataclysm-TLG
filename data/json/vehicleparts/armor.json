@@ -123,8 +123,8 @@
     },
     "flags": [ "ARMOR" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ],
     "damage_reduction": { "all": 56 },
@@ -158,8 +158,8 @@
     },
     "flags": [ "ARMOR", "SHARP" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 1, 2 ] },
-      { "item": "steel_chunk", "count": [ 2, 4 ] },
+      { "item": "steel_chunk", "count": [ 1, 2 ] },
+      { "item": "steel_fragment", "count": [ 2, 4 ] },
       { "item": "scrap", "count": [ 5, 8 ] },
       { "item": "spike", "count": [ 1, 2 ] }
     ],
@@ -192,8 +192,8 @@
     },
     "flags": [ "ARMOR" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
-      { "item": "steel_chunk", "count": [ 5, 8 ] },
+      { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 5, 8 ] },
       { "item": "scrap", "count": [ 6, 12 ] }
     ],
     "damage_reduction": { "all": 70 },
@@ -224,8 +224,8 @@
     },
     "flags": [ "ARMOR", "NO_REPAIR" ],
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] },
       { "item": "ceramic_armor", "count": [ 0, 4 ] }
     ],

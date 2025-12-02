@@ -38,8 +38,8 @@
     "broken_color": "dark_gray",
     "durability": 750,
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ],
     "requirements": {
@@ -67,8 +67,8 @@
     "broken_color": "cyan",
     "durability": 860,
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] }
     ],
     "requirements": {
@@ -96,8 +96,8 @@
     "broken_color": "green",
     "durability": 875,
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] },
       { "item": "ceramic_armor", "count": [ 0, 4 ] }
     ],
@@ -128,8 +128,8 @@
     "durability": 775,
     "damage_modifier": 200,
     "breaks_into": [
-      { "item": "steel_lump", "count": [ 4, 6 ] },
       { "item": "steel_chunk", "count": [ 4, 6 ] },
+      { "item": "steel_fragment", "count": [ 4, 6 ] },
       { "item": "scrap", "count": [ 4, 6 ] },
       { "item": "spike", "count": [ 0, 2 ] }
     ],
@@ -267,7 +267,7 @@
     },
     "extend": { "flags": [ "SHARP", "NO_COVER" ] },
     "delete": { "flags": [ "OBSTACLE" ] },
-    "breaks_into": [ { "item": "steel_chunk", "prob": 50 } ]
+    "breaks_into": [ { "item": "steel_fragment", "prob": 50 } ]
   },
   {
     "type": "vehicle_part",
@@ -282,7 +282,7 @@
     "description": "A metal spike, welded to the vehicle, to increase injury when crashing into things.",
     "item": "spike",
     "folded_volume": "250 ml",
-    "breaks_into": [ { "item": "steel_chunk", "count": [ 1, 2 ] } ],
+    "breaks_into": [ { "item": "steel_fragment", "count": [ 1, 2 ] } ],
     "damage_reduction": { "all": 12 },
     "variants": [ { "symbols": ".", "symbols_broken": "x" } ]
   },

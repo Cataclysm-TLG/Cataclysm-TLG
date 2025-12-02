@@ -270,7 +270,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": 1,
-    "material": [ "superalloy", "rubber", "qt_steel" ],
+    "material": [ "superalloy", "rubber", "steel" ],
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 0,
@@ -292,7 +292,7 @@
       {
         "material": [
           { "type": "superalloy", "covered_by_mat": 100, "thickness": 4.0 },
-          { "type": "qt_steel", "covered_by_mat": 95, "thickness": 4.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 4.0 }
         ],
         "covers": [ "leg_bionic_treads" ],
         "specifically_covers": [ "bionic_treads_body" ],
@@ -303,7 +303,7 @@
       {
         "material": [
           { "type": "rubber", "covered_by_mat": 100, "thickness": 4.0 },
-          { "type": "qt_steel", "covered_by_mat": 100, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 100, "thickness": 1.0 }
         ],
         "covers": [ "leg_bionic_treads" ],
         "specifically_covers": [ "bionic_treads_treads" ],

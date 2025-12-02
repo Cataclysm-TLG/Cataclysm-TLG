@@ -334,8 +334,8 @@
         "nail",
         "wire",
         "rock",
-        "steel_chunk",
-        "steel_lump"
+        "steel_fragment",
+        "steel_chunk"
       ],
       "response": { "text": "Delivering <topic_item>.", "topic": "TALK_DELIVER_ASK" }
     },

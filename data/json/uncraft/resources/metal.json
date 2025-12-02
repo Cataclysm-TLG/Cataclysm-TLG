@@ -13,18 +13,18 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "1 h",
     "tools": [ [ [ "angle_grinder", 50 ] ] ],
-    "components": [ [ [ "lump_cast_iron", 39 ] ] ]
+    "components": [ [ [ "iron_chunk", 39 ] ] ]
   },
   {
-    "result": "lump_cast_iron",
+    "result": "iron_chunk",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
     "time": "15 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "chunk_cast_iron", 4 ] ] ]
+    "components": [ [ [ "iron_fragment", 4 ] ] ]
   },
   {
-    "result": "chunk_cast_iron",
+    "result": "iron_fragment",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
     "time": "5 m",

@@ -1211,7 +1211,7 @@
     "difficulty": 2
   },
   {
-    "id": "nested_steel_lump",
+    "id": "nested_steel_chunk",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -1219,7 +1219,7 @@
     "name": "lumps of steel",
     "description": "Recipes related to forging steel into different quality lumps.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "steel_lump", "budget_steel_lump", "budget_steel_lump_from_scrap" ],
+    "nested_category_data": [ "steel_chunk", "budget_steel_chunk", "budget_steel_chunk_from_scrap" ],
     "difficulty": 5
   },
   {

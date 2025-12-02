@@ -78,7 +78,7 @@
       [ [ "cu_pipe", 3 ] ],
       [ [ "motor_tiny", 1 ] ],
       [ [ "sheet_metal_small", 5 ] ],
-      [ [ "scrap", 12 ], [ "steel_chunk", 4 ] ]
+      [ [ "scrap", 12 ], [ "steel_fragment", 4 ] ]
     ]
   },
   {
@@ -115,7 +115,7 @@
       [ [ "chem_potassium_hydroxide", 7 ] ],
       [ [ "duct_tape", 1 ] ],
       [ [ "water_clean", 1 ] ],
-      [ [ "steel_chunk", 1 ], [ "scrap", 2 ] ]
+      [ [ "steel_fragment", 1 ], [ "scrap", 2 ] ]
     ]
   },
   {
@@ -137,7 +137,7 @@
       [ [ "chem_potassium_hydroxide", 20 ] ],
       [ [ "duct_tape", 5 ] ],
       [ [ "water_clean", 3 ] ],
-      [ [ "steel_chunk", 3 ], [ "scrap", 6 ] ]
+      [ [ "steel_fragment", 3 ], [ "scrap", 6 ] ]
     ]
   },
   {
@@ -159,7 +159,7 @@
       [ [ "chem_potassium_hydroxide", 82 ] ],
       [ [ "duct_tape", 20 ] ],
       [ [ "water_clean", 12 ] ],
-      [ [ "steel_chunk", 12 ], [ "scrap", 24 ] ]
+      [ [ "steel_fragment", 12 ], [ "scrap", 24 ] ]
     ]
   },
   {
@@ -181,7 +181,7 @@
       [ [ "chem_potassium_hydroxide", 170 ] ],
       [ [ "duct_tape", 40 ] ],
       [ [ "water_clean", 25 ] ],
-      [ [ "steel_chunk", 25 ], [ "scrap", 50 ] ]
+      [ [ "steel_fragment", 25 ], [ "scrap", 50 ] ]
     ]
   },
   {

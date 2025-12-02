@@ -18,7 +18,7 @@
     ],
     "tools": [ [ [ "swage", -1 ] ] ],
     "components": [
-      [ [ "steel_chunk", 6 ], [ "scrap", 18 ] ],
+      [ [ "steel_fragment", 6 ], [ "scrap", 18 ] ],
       [ [ "pipe", 2 ] ],
       [ [ "adhesive", 2, "LIST" ] ],
       [ [ "fur", 2 ], [ "leather", 2 ] ]
