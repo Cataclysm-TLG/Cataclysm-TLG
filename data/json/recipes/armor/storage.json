@@ -2281,7 +2281,7 @@
     "time": "18 h",
     "autolearn": true,
     "reversible": { "time": "1 h" },
-    "using": [ [ "tailoring_nylon_small", 28 ], [ "fastener_large", 3 ] ],
+    "using": [ [ "tailoring_nylon_patchwork", 28 ], [ "fastener_large", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" }
@@ -2299,7 +2299,7 @@
     "time": "14 h",
     "autolearn": true,
     "reversible": { "time": "1 h" },
-    "using": [ [ "tailoring_nylon_patchwork", 8 ], [ "fastener_large", 1 ] ],
+    "using": [ [ "tailoring_nylon_patchwork", 22 ], [ "fastener_large", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" }

@@ -542,7 +542,7 @@
         "description": "Tucked between your back and the backpack.",
         "ripoff": 3,
         "transparent": true
-      },
+      }
     ],
     "warmth": 10,
     "material_thickness": 2,
