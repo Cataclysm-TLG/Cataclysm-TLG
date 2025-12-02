@@ -1213,7 +1213,7 @@
   {
     "type": "material",
     "id": "iron",
-    "name": "Cast iron",
+    "name": "Iron",
     "density": 7.3,
     "specific_heat_liquid": 0.82,
     "specific_heat_solid": 0.45,
