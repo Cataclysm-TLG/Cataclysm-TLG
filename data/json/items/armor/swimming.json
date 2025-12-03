@@ -8,7 +8,7 @@
     "volume": "250 ml",
     "price": "10 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "looks_like": "panties",
     "color": "light_red",
@@ -25,7 +25,7 @@
     "volume": "250 ml",
     "price": "18 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "looks_like": "bra",
     "color": "light_red",
@@ -43,7 +43,7 @@
     "price": "52 USD 50 cent",
     "price_postapoc": "1 USD",
     "to_hit": -2,
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "looks_like": "longshirt",
     "color": "light_red",
@@ -65,7 +65,7 @@
     "volume": "250 ml",
     "price": "60 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "looks_like": "briefs",
@@ -82,7 +82,7 @@
     "volume": "250 ml",
     "price": "60 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "looks_like": "briefs",
     "symbol": "[",
     "color": "blue",
@@ -100,7 +100,7 @@
     "volume": "250 ml",
     "price": "25 USD",
     "price_postapoc": "10 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "looks_like": "hood_rain",
     "color": "blue",
@@ -127,7 +127,7 @@
     "price": "18 USD",
     "price_postapoc": "50 cent",
     "to_hit": 1,
-    "material": [ "cotton", "lycra" ],
+    "material": [ "cotton", "spandex" ],
     "symbol": "[",
     "looks_like": "shorts",
     "color": "blue",
@@ -147,7 +147,7 @@
     "volume": "1 L",
     "price": "68 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "neoprene", "lycra", "rubber" ],
+    "material": [ "neoprene", "spandex", "rubber" ],
     "symbol": "[",
     "looks_like": "boots_rubber",
     "color": "dark_gray",
@@ -168,7 +168,7 @@
           "foot_arch_l"
         ],
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 90, "thickness": 2.0 }
         ],
         "encumbrance": 10,
@@ -178,7 +178,7 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "rubber", "covered_by_mat": 100, "thickness": 1.0 }
         ],
@@ -227,7 +227,7 @@
           "foot_arch_l"
         ],
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 90, "thickness": 3.0 }
         ],
         "encumbrance": 20,
@@ -237,7 +237,7 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 100, "thickness": 2.0 },
           { "type": "rubber", "covered_by_mat": 100, "thickness": 2.0 }
         ],
@@ -328,13 +328,13 @@
     "price": "120 USD",
     "price_postapoc": "5 USD",
     "to_hit": -3,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
@@ -393,14 +393,14 @@
     "price": "100 USD",
     "price_postapoc": "5 USD",
     "to_hit": -3,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "looks_like": "wetsuit",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 }
         ],
         "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
@@ -457,7 +457,7 @@
     "volume": "1 L",
     "price": "45 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "hood_rain",
     "color": "dark_gray",
@@ -467,7 +467,7 @@
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "encumbrance_modifiers": [ "NONE" ],
@@ -505,7 +505,7 @@
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 }
         ],
         "encumbrance_modifiers": [ "RESTRICTS_NECK", "WELL_SUPPORTED" ],
@@ -540,14 +540,14 @@
     "price": "75 USD",
     "price_postapoc": "3 USD 50 cent",
     "to_hit": -2,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "jacket_light",
     "color": "dark_gray",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "encumbrance": 8,
@@ -556,7 +556,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "encumbrance": 8,
@@ -593,14 +593,14 @@
     "volume": "1500 ml",
     "price": "65 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "tshirt",
     "color": "dark_gray",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "encumbrance": 5,
@@ -609,7 +609,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -619,7 +619,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "coverage": 95,
@@ -657,14 +657,14 @@
     "price": "65 USD",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -2,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "longshirt",
     "color": "dark_gray",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "encumbrance": 7,
@@ -673,7 +673,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -711,14 +711,14 @@
     "price": "65 USD",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -3,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "looks_like": "pants",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -755,14 +755,14 @@
     "volume": "1 L",
     "price": "65 USD",
     "price_postapoc": "1 USD 50 cent",
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "looks_like": "shorts",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -772,7 +772,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -811,14 +811,14 @@
     "volume": "1500 ml",
     "price": "65 USD",
     "price_postapoc": "1 USD 50 cent",
-    "material": [ "neoprene", "lycra", "nylon" ],
+    "material": [ "neoprene", "spandex", "nylon" ],
     "symbol": "[",
     "color": "dark_gray",
     "looks_like": "wetsuit_shorts",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -828,7 +828,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 },
           { "type": "nylon", "covered_by_mat": 10, "thickness": 1.5 }
         ],
@@ -971,14 +971,14 @@
     "price": "100 USD",
     "price_postapoc": "5 USD",
     "to_hit": -3,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "wetsuit",
     "color": "pink",
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "torso" ],
@@ -988,7 +988,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "arm_l", "arm_r" ],
@@ -997,7 +997,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -1063,7 +1063,7 @@
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "torso" ],
@@ -1072,7 +1072,7 @@
       },
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 0.8 }
         ],
         "covers": [ "leg_l", "leg_r" ],
@@ -1239,7 +1239,7 @@
     "price": "30 USD",
     "price_postapoc": "1 USD",
     "to_hit": 1,
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "gloves_tactical",
     "color": "dark_gray",
@@ -1249,7 +1249,7 @@
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.2 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.2 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 1.5 }
         ],
         "covers": [ "hand_l", "hand_r" ],
@@ -1287,7 +1287,7 @@
     "armor": [
       {
         "material": [
-          { "type": "lycra", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "spandex", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "neoprene", "covered_by_mat": 80, "thickness": 3.0 }
         ],
         "covers": [ "hand_l", "hand_r" ],

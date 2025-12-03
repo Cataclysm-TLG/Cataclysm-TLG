@@ -117,7 +117,7 @@
     "//": "180GSM, .63mm thick",
     "price": "0 cent",
     "price_postapoc": "10 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": ",",
     "color": "light_blue",
     "flags": [ "NO_SALVAGE" ]

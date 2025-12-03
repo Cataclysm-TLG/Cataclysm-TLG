@@ -112,7 +112,7 @@
       { "item": "faux_fur_sheet", "count": [ 1, 20 ], "prob": 40 },
       { "item": "sheet_felt", "count": [ 1, 20 ], "prob": 40 },
       { "item": "canvas_sheet", "count": [ 1, 20 ], "prob": 35 },
-      { "item": "lycra_sheet", "count": [ 1, 20 ], "prob": 20 },
+      { "item": "spandex_sheet", "count": [ 1, 20 ], "prob": 20 },
       { "item": "nylon_sheet", "count": [ 1, 20 ], "prob": 20 },
       { "item": "nomex_sheet", "count": [ 1, 20 ], "prob": 5 },
       { "item": "kevlar_sheet", "count": [ 1, 20 ], "prob": 5 },

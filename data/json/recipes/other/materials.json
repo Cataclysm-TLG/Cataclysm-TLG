@@ -1742,7 +1742,7 @@
     "components": [ [ [ "felt_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "lycra_sheet_patchwork",
+    "result": "spandex_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",

@@ -3321,7 +3321,7 @@
   {
     "type": "MIGRATION",
     "id": "patch_lycra",
-    "replace": "lycra_patch"
+    "replace": "spandex_patch"
   },
   {
     "type": "MIGRATION",
@@ -3427,7 +3427,7 @@
     "type": "MIGRATION",
     "id": "lycra_patch",
     "replace": "spandex_patch"
-  },,
+  },
   {
     "type": "MIGRATION",
     "id": "lycra_sheet_patchwork",

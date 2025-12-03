@@ -2428,7 +2428,7 @@
     "volume": "250 ml",
     "price": "50 cent",
     "price_postapoc": "10 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "looks_like": "socks",
     "color": "white",

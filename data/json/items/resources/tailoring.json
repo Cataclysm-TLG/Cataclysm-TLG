@@ -304,7 +304,7 @@
     "color": "dark_gray"
   },
   {
-    "id": "lycra_sheet",
+    "id": "spandex_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "spandex sheet" },
@@ -314,7 +314,7 @@
     "//": "180 GSM fabric",
     "price": "50 USD",
     "price_postapoc": "25 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "=",
     "color": "dark_gray"
   },
@@ -350,8 +350,8 @@
     "color": "green"
   },
   {
-    "id": "lycra_sheet_patchwork",
-    "copy-from": "lycra_sheet",
+    "id": "spandex_sheet_patchwork",
+    "copy-from": "spandex_sheet",
     "type": "GENERIC",
     "name": { "str": "patchwork spandex sheet" },
     "description": "A sheet of highly elastic fabric sewn together from smaller patches.",

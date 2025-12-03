@@ -85,7 +85,7 @@
     "difficulty": 3,
     "time": "90 m",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_sheet", 5 ], [ "tailoring_lycra_sheet", 3 ] ],
+    "using": [ [ "tailoring_cotton_sheet", 5 ], [ "tailoring_spandex_sheet", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -93,13 +93,13 @@
     "type": "recipe",
     "copy-from": "binder_top",
     "time": "2 h",
-    "using": [ [ "tailoring_cotton_sheet", 8 ], [ "tailoring_lycra_sheet", 5 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 8 ], [ "tailoring_spandex_sheet", 5 ] ]
   },
   {
     "result": "xs_binder_top",
     "type": "recipe",
     "copy-from": "binder_top",
-    "using": [ [ "tailoring_cotton_sheet", 3 ], [ "tailoring_lycra_sheet", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 3 ], [ "tailoring_spandex_sheet", 2 ] ]
   },
   {
     "result": "bikini_top",
@@ -113,7 +113,7 @@
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics", "time_multiplier": 1.5, "skill_penalty": 0.15 } ],
-    "using": [ [ "sewing_standard", 10 ], [ "tailoring_lycra_sheet", 1 ] ]
+    "using": [ [ "sewing_standard", 10 ], [ "tailoring_spandex_sheet", 1 ] ]
   },
   {
     "result": "bikini_top_fur",
@@ -1036,7 +1036,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "2 h 45 m",
-    "using": [ [ "sewing_standard", 13 ], [ "fabric_lycra", 8 ] ],
+    "using": [ [ "sewing_standard", 13 ], [ "fabric_spandex", 8 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -1989,7 +1989,7 @@
     "difficulty": 3,
     "time": "1 h 30 m",
     "autolearn": true,
-    "using": [ [ "tailoring_lycra_sheet", 2 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -1997,7 +1997,7 @@
     "type": "recipe",
     "copy-from": "sports_bra",
     "time": "1 h 30 m",
-    "using": [ [ "tailoring_lycra_sheet", 1 ] ]
+    "using": [ [ "tailoring_spandex_sheet", 1 ] ]
   },
   {
     "result": "xlsports_bra",
@@ -2009,7 +2009,7 @@
     "difficulty": 3,
     "time": "1 h 40 m",
     "autolearn": true,
-    "using": [ [ "tailoring_lycra_sheet", 4 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -2038,7 +2038,7 @@
     "time": "5 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 2 ] ],
-    "using": [ [ "tailoring_lycra", 8 ] ]
+    "using": [ [ "tailoring_spandex", 8 ] ]
   },
   {
     "result": "dress_costume",
@@ -2052,7 +2052,7 @@
     "time": "5 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 2 ] ],
-    "using": [ [ "tailoring_lycra", 8 ] ]
+    "using": [ [ "tailoring_spandex", 8 ] ]
   },
   {
     "result": "dress_costume",
@@ -2066,7 +2066,7 @@
     "time": "5 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 2 ] ],
-    "using": [ [ "tailoring_lycra", 8 ] ]
+    "using": [ [ "tailoring_spandex", 8 ] ]
   },
   {
     "result": "dress_costume_skimpy",
@@ -2080,7 +2080,7 @@
     "time": "3 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 3 ] ],
-    "using": [ [ "tailoring_lycra", 6 ] ]
+    "using": [ [ "tailoring_spandex", 6 ] ]
   },
   {
     "result": "dress_costume_skimpy",
@@ -2094,7 +2094,7 @@
     "time": "3 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 3 ] ],
-    "using": [ [ "tailoring_lycra", 6 ] ]
+    "using": [ [ "tailoring_spandex", 6 ] ]
   },
   {
     "result": "dress_costume_skimpy",
@@ -2108,7 +2108,7 @@
     "time": "3 h",
     "reversible": true,
     "book_learn": [ [ "mag_animecon", 3 ] ],
-    "using": [ [ "tailoring_lycra", 6 ] ]
+    "using": [ [ "tailoring_spandex", 6 ] ]
   },
   {
     "result": "sweater",
@@ -2173,7 +2173,7 @@
     "difficulty": 3,
     "time": "2 h",
     "autolearn": true,
-    "using": [ [ "tailoring_lycra_sheet", 8 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 8 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -2292,7 +2292,7 @@
     "difficulty": 3,
     "time": "55 m",
     "autolearn": true,
-    "using": [ [ "tailoring_lycra_sheet", 4 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -2318,7 +2318,7 @@
     "difficulty": 2,
     "time": "3 h",
     "autolearn": true,
-    "using": [ [ "tailoring_lycra_sheet", 10 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {

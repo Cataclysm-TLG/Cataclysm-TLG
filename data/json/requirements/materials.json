@@ -174,8 +174,8 @@
       [
         [ "sheet_cotton_patch", 1 ],
         [ "sheet_cotton", 1 ],
-        [ "lycra_sheet", 1 ],
-        [ "lycra_sheet_patchwork", 1 ],
+        [ "spandex_sheet", 1 ],
+        [ "spandex_sheet_patchwork", 1 ],
         [ "nylon_sheet_patchwork", 1 ],
         [ "neoprene_sheet", 1 ],
         [ "neoprene_sheet_patchwork", 1 ],
@@ -216,8 +216,8 @@
         [ "sheet_cotton_patch", 1 ],
         [ "sheet_cotton", 1 ],
         [ "spandex_patch", 8 ],
-        [ "lycra_sheet_patchwork", 1 ],
-        [ "lycra_sheet", 1 ],
+        [ "spandex_sheet_patchwork", 1 ],
+        [ "spandex_sheet", 1 ],
         [ "nylon_patch", 8 ],
         [ "nylon_sheet_patchwork", 1 ],
         [ "nylon_sheet", 1 ],
@@ -321,10 +321,10 @@
     "components": [ [ [ "neoprene", 8 ], [ "neoprene_sheet_patchwork", 1 ], [ "neoprene_sheet", 1 ] ] ]
   },
   {
-    "id": "fabric_lycra",
+    "id": "fabric_spandex",
     "type": "requirement",
-    "//": "Materials used for crafting lycra clothing",
-    "components": [ [ [ "spandex_patch", 8 ], [ "lycra_sheet", 1 ], [ "lycra_sheet_patchwork", 1 ] ] ]
+    "//": "Materials used for crafting spandex clothing",
+    "components": [ [ [ "spandex_patch", 8 ], [ "spandex_sheet", 1 ], [ "spandex_sheet_patchwork", 1 ] ] ]
   },
   {
     "id": "filament",

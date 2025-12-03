@@ -117,7 +117,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "components": [ [ [ "lycra_sheet", 1 ], [ "lycra_sheet_patchwork", 1 ], [ "spandex_patch", 6 ] ] ],
+    "components": [ [ [ "spandex_sheet", 1 ], [ "spandex_sheet_patchwork", 1 ], [ "spandex_patch", 6 ] ] ],
     "using": [ [ "sewing_standard", 20 ] ]
   },
   {

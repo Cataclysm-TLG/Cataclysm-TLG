@@ -191,7 +191,7 @@
     "price": "815 USD",
     "price_postapoc": "5 USD",
     "to_hit": -1,
-    "material": [ "nomex", "kevlar", "lycra" ],
+    "material": [ "nomex", "kevlar", "spandex" ],
     "symbol": "[",
     "looks_like": "pants_cargo",
     "color": "dark_gray",

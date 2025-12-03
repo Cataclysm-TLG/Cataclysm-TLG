@@ -433,7 +433,7 @@
     "volume": "250 ml",
     "price": "30 USD",
     "price_postapoc": "5 USD",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "pocket_data": [
       {
         "magazine_well": "150 ml",
@@ -466,7 +466,7 @@
     "weight": "240 g",
     "volume": "750 ml",
     "price_postapoc": "5 USD",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "warmth": 5,
     "sided": false,
     "pocket_data": [

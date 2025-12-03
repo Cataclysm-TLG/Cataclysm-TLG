@@ -339,18 +339,18 @@
     "components": [ [ [ "leather", 1 ] ], [ [ "filament", 3, "LIST" ] ] ]
   },
   {
-    "id": "tailoring_lycra",
+    "id": "tailoring_spandex",
     "type": "requirement",
     "//": "30g per unit. Crafting spandex items, per 33 g of spandex; 3 g + excessive weight of material is wasted, producing spandex scraps as byproducts.  Time needed is usually 60 minutes per unit if hand-stitching.",
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
+    "components": [ [ [ "spandex_sheet", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
   },
   {
-    "id": "tailoring_lycra_sheet",
+    "id": "tailoring_spandex_sheet",
     "type": "requirement",
     "//": "30g per unit. Crafting possibly-patchwork spandex items, per 33 g of spandex; 3 g + excessive weight of material is wasted, producing spandex scraps as byproducts.  Time needed is usually 90 minutes per unit if hand-stitching (most of the time actually needed goes into making a patchwork sheet).",
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "lycra_sheet", 1 ], [ "lycra_sheet_patchwork", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
+    "components": [ [ [ "spandex_sheet", 1 ], [ "spandex_sheet_patchwork", 1 ] ], [ [ "thread_nomex", 5 ] ] ]
   },
   {
     "id": "tailoring_spandex_patch",
