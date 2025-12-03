@@ -11,8 +11,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_kevlar_fabric", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls", 1 ] ] ],
-    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_polymerworking" } ],
-    "byproducts": [ [ "scrap_kevlar", 17 ] ]
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_polymerworking" } ]
   },
   {
     "result": "lsurvivor_suit_xs",
@@ -20,7 +19,6 @@
     "copy-from": "lsurvivor_suit",
     "time": "11 h",
     "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
-    "byproducts": [ [ "scrap_kevlar", 22 ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
   },
   {
@@ -29,7 +27,6 @@
     "copy-from": "lsurvivor_suit",
     "time": "13 h",
     "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
-    "byproducts": [ [ "scrap_kevlar", 25 ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
   },
   {
@@ -49,8 +46,7 @@
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_polymerworking" }
-    ],
-    "byproducts": [ [ "scrap_kevlar", 22 ] ]
+    ]
   },
   {
     "result": "survivor_suit_xs",
@@ -59,7 +55,6 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "10 h",
     "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
-    "byproducts": [ [ "scrap_kevlar", 18 ] ],
     "tools": [ [ [ "rubber_spray_can", 10 ] ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
   },
@@ -70,7 +65,6 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "19 h",
     "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
-    "byproducts": [ [ "scrap_kevlar", 25 ] ],
     "tools": [ [ [ "rubber_spray_can", 18 ] ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
   },

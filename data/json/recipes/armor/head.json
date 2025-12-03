@@ -140,7 +140,7 @@
     "time": "2 h",
     "autolearn": true,
     "using": [ [ "tailoring_leather_patchwork", 2 ] ],
-    "byproducts": [ [ "leather", 4 ], [ "scrap_leather", 1 ] ],
+    "byproducts": [ [ "leather", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -267,8 +267,7 @@
       { "proficiency": "prof_plasticworking" },
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_furriery" }
-    ],
-    "byproducts": [ [ "scrap_faux_fur", 4 ] ]
+    ]
   },
   {
     "result": "glasses_safety",
@@ -351,7 +350,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork", 3 ] ],
-    "byproducts": [ [ "cotton_patchwork", 2 ], [ "scrap_cotton", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 2 ] ]
   },
   {
     "result": "hat_cotton",
@@ -364,7 +363,7 @@
     "time": "1 h 30m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork", 3 ] ],
-    "byproducts": [ [ "cotton_patchwork", 5 ], [ "scrap_cotton", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 5 ] ]
   },
   {
     "result": "maid_hat",
@@ -412,8 +411,7 @@
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_furriery" }
-    ],
-    "byproducts": [ [ "scrap_faux_fur", 4 ] ]
+    ]
   },
   {
     "result": "hat_hard",
@@ -780,7 +778,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "skull_canis", 1 ] ] ],
     "using": [ [ "tailoring_leather_patchwork", 2 ] ],
-    "byproducts": [ [ "leather", 3 ], [ "scrap_leather", 1 ], [ "meal_bone", 1 ] ],
+    "byproducts": [ [ "leather", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -927,8 +925,7 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_plasticworking" },
       { "proficiency": "prof_polymerworking" }
-    ],
-    "byproducts": [ [ "scrap_cotton", 3 ], [ "scrap_faux_fur", 3 ] ]
+    ]
   },
   {
     "result": "hood_wsurvivor_nofur_xs",
@@ -937,8 +934,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_patchwork", 1 ], [ "tailoring_kevlar_fabric", 3 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 6 ] ], [ [ "cotton_patchwork", 4 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
-    "byproducts": [ [ "scrap_faux_fur", 3 ] ]
+    "components": [ [ [ "faux_fur", 6 ] ], [ [ "cotton_patchwork", 4 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
   },
   {
     "result": "hood_wsurvivor_nofur_xl",
@@ -947,8 +943,7 @@
     "time": "8 h",
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_nylon_patchwork", 4 ], [ "tailoring_kevlar_fabric", 6 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 10 ] ], [ [ "cotton_patchwork", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
-    "byproducts": [ [ "scrap_faux_fur", 5 ] ]
+    "components": [ [ [ "faux_fur", 10 ] ], [ [ "cotton_patchwork", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
   },
   {
     "result": "hood_rain",

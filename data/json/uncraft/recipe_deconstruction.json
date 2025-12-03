@@ -1689,7 +1689,13 @@
     "time": "6 h 40 m",
     "using": [ [ "soldering_standard", 5 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "motor", 2 ] ], [ [ "power_supply", 6 ] ], [ [ "cable", 4 ] ], [ [ "steel_chunk", 6 ] ], [ [ "steel_fragment", 6 ] ] ]
+    "components": [
+      [ [ "motor", 2 ] ],
+      [ [ "power_supply", 6 ] ],
+      [ [ "cable", 4 ] ],
+      [ [ "steel_chunk", 6 ] ],
+      [ [ "steel_fragment", 6 ] ]
+    ]
   },
   {
     "result": "cable",
@@ -1980,17 +1986,9 @@
     "result": "cotton_patchwork",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
-    "time": "1 m",
+    "time": "2 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "scrap_cotton", 4 ] ] ]
-  },
-  {
-    "result": "scrap_cotton",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "thread", 1 ] ] ]
+    "components": [ [ [ "thread", 4 ] ] ]
   },
   {
     "result": "sheet_canvas_patchwork",
@@ -2012,17 +2010,9 @@
     "result": "canvas_patch",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
-    "time": "1 m",
+    "time": "2 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "scrap_canvas", 4 ] ] ]
-  },
-  {
-    "result": "scrap_canvas",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "thread_canvas", 1 ] ] ]
+    "components": [ [ [ "thread_canvas", 4 ] ] ]
   },
   {
     "result": "sheet_denim",
@@ -2039,22 +2029,6 @@
     "time": "10 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "denim_patch", 8 ] ] ]
-  },
-  {
-    "result": "felt_patch",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "scrap_felt", 4 ] ] ]
-  },
-  {
-    "result": "scrap_felt",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "wool_staple", 1 ] ] ]
   },
   {
     "result": "sheet_faux_fur_patchwork",
@@ -2124,18 +2098,9 @@
     "result": "nomex",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
-    "time": "1 m",
+    "time": "2 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "scrap_nomex", 4 ] ] ]
-  },
-  {
-    "result": "scrap_nomex",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "35 m",
-    "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "thread_nomex", 2 ] ] ],
-    "//": "Thread is odd so we're just kind of giving you some whole pieces of thread, when it shouldn't be near that, but we need a source."
+    "components": [ [ [ "thread_nomex", 8 ] ] ]
   },
   {
     "result": "sheet_leather",
@@ -3452,7 +3417,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "6 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 1 ] ], [ [ "scrap_cotton", 26 ] ] ],
+    "components": [ [ [ "sheet_cotton", 1 ] ] ],
     "flags": [ "BLIND_EASY" ]
   },
   {
@@ -4634,17 +4599,9 @@
     "result": "kevlar_patch",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
-    "time": "2 m",
+    "time": "4 m",
     "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "scrap_kevlar", 4 ] ] ]
-  },
-  {
-    "result": "scrap_kevlar",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "thread_kevlar", 2 ] ] ]
+    "components": [ [ [ "thread_kevlar", 8 ] ] ]
   },
   {
     "result": "office_letter_opener",
@@ -4708,7 +4665,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 4 ] ], [ [ "scrap_kevlar", 4 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 4 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4716,7 +4673,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 16 ] ], [ [ "scrap_kevlar", 16 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 16 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {

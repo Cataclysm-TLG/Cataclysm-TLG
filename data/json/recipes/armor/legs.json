@@ -91,7 +91,7 @@
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics", "time_multiplier": 1.25, "skill_penalty": 0.15 } ],
     "using": [ [ "tailoring_lycra_patchwork", 1 ] ],
-    "byproducts": [ [ "lycra_patch", 1 ], [ "scrap_lycra", 1 ] ]
+    "byproducts": [ [ "lycra_patch", 1 ] ]
   },
   {
     "result": "boy_shorts",
@@ -104,8 +104,7 @@
     "time": "2 h",
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "using": [ [ "tailoring_cotton_patchwork", 2 ] ],
-    "byproducts": [ [ "scrap_cotton", 28 ] ]
+    "using": [ [ "tailoring_cotton_patchwork", 2 ] ]
   },
   {
     "result": "xsboy_shorts",
@@ -125,7 +124,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton", 3 ] ],
-    "byproducts": [ [ "cotton_patchwork", 6 ], [ "scrap_cotton", 3 ] ]
+    "byproducts": [ [ "cotton_patchwork", 6 ] ]
   },
   {
     "result": "boxer_shorts",
@@ -152,8 +151,7 @@
     "difficulty": 3,
     "time": "6 h",
     "book_learn": [ [ "textbook_tailor", 2 ], [ "tailor_portfolio", 2 ] ],
-    "using": [ [ "tailoring_cotton_patchwork", 15 ] ],
-    "byproducts": [ [ "scrap_cotton", 5 ] ]
+    "using": [ [ "tailoring_cotton_patchwork", 15 ] ]
   },
   {
     "result": "briefs",
@@ -166,8 +164,7 @@
     "time": "2 h",
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "using": [ [ "tailoring_cotton", 1 ] ],
-    "byproducts": [ [ "scrap_cotton", 5 ] ]
+    "using": [ [ "tailoring_cotton", 1 ] ]
   },
   {
     "result": "chaps_leather",
@@ -185,7 +182,7 @@
       { "proficiency": "prof_closures" }
     ],
     "using": [ [ "tailoring_leather_patchwork", 4 ], [ "button", 5 ] ],
-    "byproducts": [ [ "leather", 6 ], [ "scrap_leather", 1 ] ]
+    "byproducts": [ [ "leather", 6 ] ]
   },
   {
     "result": "hakama",
@@ -213,14 +210,14 @@
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures" } ],
     "using": [ [ "tailoring_lycra_patchwork", 1 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "lycra_patch", 2 ], [ "scrap_lycra", 2 ] ]
+    "byproducts": [ [ "lycra_patch", 2 ] ]
   },
   {
     "result": "hot_pants_fur",
     "type": "recipe",
     "copy-from": "hot_pants",
     "using": [ [ "tailoring_lycra_patchwork", 1 ], [ "tailoring_fur", 1 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "fur", 1 ], [ "scrap_fur", 3 ], [ "scrap_lycra", 2 ] ]
+    "byproducts": [ [ "fur", 1 ] ]
   },
   {
     "result": "hot_pants_leather",
@@ -246,7 +243,7 @@
     "book_learn": [ [ "textbook_tailor", 3 ], [ "tailor_portfolio", 5 ], [ "manual_tailor", 3 ], [ "survival_book", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ],
     "using": [ [ "tailoring_denim_patchwork", 8 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "denim_patch", 6 ], [ "scrap_denim", 15 ] ]
+    "byproducts": [ [ "denim_patch", 6 ] ]
   },
   {
     "result": "jeans_mod",
@@ -276,7 +273,7 @@
     "book_learn": [ [ "textbook_tailor", 3 ], [ "tailor_portfolio", 5 ], [ "manual_tailor", 3 ], [ "survival_book", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ],
     "using": [ [ "tailoring_cotton_patchwork", 7 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "scrap_cotton", 10 ], [ "cotton_patchwork", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 2 ] ]
   },
   {
     "result": "skirt_leather",
@@ -304,8 +301,7 @@
     "time": "3 h",
     "book_learn": [ [ "textbook_tailor", 2 ], [ "tailor_portfolio", 2 ], [ "manual_tailor", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ],
-    "using": [ [ "tailoring_denim_patchwork", 4 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "scrap_denim", 8 ] ]
+    "using": [ [ "tailoring_denim_patchwork", 4 ], [ "fastener_small", 1 ] ]
   },
   {
     "result": "kilt_leather",
@@ -421,7 +417,7 @@
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 2 ], [ "manual_tailor", 2 ] ],
     "using": [ [ "tailoring_lycra_patchwork", 6 ] ],
-    "byproducts": [ [ "lycra_patch", 5 ], [ "scrap_lycra", 9 ] ],
+    "byproducts": [ [ "lycra_patch", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
@@ -504,7 +500,6 @@
     "skill_used": "fabrication",
     "time": "15 m",
     "autolearn": true,
-    "byproducts": [ [ "scrap_carpet", 8 ] ],
     "components": [
       [ [ "y_carpet", 1 ], [ "r_carpet", 1 ], [ "p_carpet", 1 ], [ "g_carpet", 1 ] ],
       [ [ "cordage", 4, "LIST" ], [ "duct_tape", 50 ] ]
@@ -520,7 +515,6 @@
     "skill_used": "fabrication",
     "time": "15 m",
     "autolearn": true,
-    "byproducts": [ [ "scrap_carpet", 10 ] ],
     "components": [
       [ [ "y_carpet", 1 ], [ "r_carpet", 1 ], [ "p_carpet", 1 ], [ "g_carpet", 1 ] ],
       [ [ "cordage", 2, "LIST" ], [ "duct_tape", 25 ] ]
@@ -728,7 +722,7 @@
     "time": "6 h",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "tailor_portfolio", 3 ], [ "recipe_fauxfur", 2 ] ],
     "using": [ [ "tailoring_faux_fur_patchwork", 2 ], [ "tailoring_cotton", 14 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "faux_fur", 6 ], [ "cotton_patchwork", 5 ], [ "scrap_faux_fur", 3 ] ],
+    "byproducts": [ [ "faux_fur", 6 ], [ "cotton_patchwork", 5 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -746,7 +740,7 @@
     "time": "8 h",
     "autolearn": true,
     "using": [ [ "tailoring_leather_patchwork", 4 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "leather", 7 ], [ "scrap_leather", 7 ] ],
+    "byproducts": [ [ "leather", 7 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -846,7 +840,7 @@
     "time": "20 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
     "using": [ [ "tailoring_denim_patchwork", 4 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "denim_patch", 6 ], [ "scrap_denim", 14 ] ],
+    "byproducts": [ [ "denim_patch", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ]
   },
   {
@@ -860,7 +854,7 @@
     "autolearn": true,
     "using": [ [ "sewing_standard", 10 ] ],
     "flags": [ "NO_RESIZE" ],
-    "byproducts": [ [ "denim_patch", 4 ], [ "scrap_denim", 8 ] ],
+    "byproducts": [ [ "denim_patch", 4 ] ],
     "components": [ [ [ "jeans", 1 ] ] ]
   },
   {
@@ -915,8 +909,7 @@
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 2 ], [ "manual_tailor", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ],
-    "using": [ [ "tailoring_lycra_patchwork", 3 ] ],
-    "byproducts": [ [ "scrap_lycra", 2 ] ]
+    "using": [ [ "tailoring_lycra_patchwork", 3 ] ]
   },
   {
     "result": "chainmail_chausses",
@@ -1018,7 +1011,7 @@
     "difficulty": 5,
     "time": "6 h",
     "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
-    "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 5 ] ],
+    "byproducts": [ [ "leather", 2 ] ],
     "using": [ [ "tailoring_leather_patchwork", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   },
@@ -1027,7 +1020,7 @@
     "type": "recipe",
     "copy-from": "leather_leg_guards",
     "time": "5 h",
-    "byproducts": [ [ "leather", 6 ], [ "scrap_leather", 1 ] ],
+    "byproducts": [ [ "leather", 6 ] ],
     "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {
@@ -1035,7 +1028,7 @@
     "type": "recipe",
     "copy-from": "leather_leg_guards",
     "time": "8 h",
-    "byproducts": [ [ "leather", 2 ], [ "scrap_leather", 1 ] ],
+    "byproducts": [ [ "leather", 2 ] ],
     "using": [ [ "tailoring_leather_patchwork", 6 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {

@@ -23,7 +23,7 @@
     "difficulty": 2,
     "time": "10 m",
     "qualities": [ { "id": "PRY", "level": 1 } ],
-    "components": [ [ [ "wheel_skate", 8 ] ], [ [ "scrap_leather", 6 ] ], [ [ "scrap", 20 ] ], [ [ "bearing", 8 ] ] ]
+    "components": [ [ [ "wheel_skate", 8 ] ], [ [ "scrap", 20 ] ], [ [ "bearing", 8 ] ] ]
   },
   {
     "result": "footrags_faux_fur",
@@ -40,6 +40,6 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sole_rubber", 2 ] ], [ [ "string_36", 2 ] ], [ [ "cotton_patchwork", 18 ] ], [ [ "scrap_cotton", 12 ] ] ]
+    "components": [ [ [ "sole_rubber", 2 ] ], [ [ "string_36", 2 ] ], [ [ "cotton_patchwork", 18 ] ] ]
   }
 ]
