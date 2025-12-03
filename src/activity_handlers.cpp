@@ -1093,8 +1093,9 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         * We harvest a min of 250ml blood at a time, so ensure the creature is big enough.
         * Blood volume is around ~7% of body weight. Most animals are around 1g/ml, so it doesn't
         * matter if we use volume or weight here. 7% of 4 liters gets us about 250ml of blood.
+        * Also obviously don't give blood if we bled the corpse already.
         */
-        if( entry.type == harvest_drop_blood && corpse_item->volume() < 4000_ml ) {
+        if( entry.type == harvest_drop_blood && ( corpse_item->volume() < 4000_ml || corpse_item->has_flag( flag_BLED ) ) ) {
             roll = 0;
         }
 
