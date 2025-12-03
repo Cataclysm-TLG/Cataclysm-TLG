@@ -31,8 +31,8 @@
   {
     "id": "baldric",
     "type": "ARMOR",
-    "name": { "str": "longsword scabbard" },
-    "description": "A leather scabbard, big enough for anything up to a longsword, or even a bit larger than that.  Designed to be worn at the waist, secured to the sturdy leather belt.  Activate to sheath/draw a sword.",
+    "name": { "str": "baldric" },
+    "description": "A heavy leather belt looped over one shoulder with an open scabbard at the hip which can hold most reasonably-sized swords.",
     "weight": "1625 g",
     "volume": "2 L",
     "price": "75 USD",
@@ -76,7 +76,7 @@
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath sword", "holster_msg": "You sheath your %s" },
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "STURDY" ],
-    "armor": [ { "encumbrance": 2, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
+    "armor": [ { "encumbrance": 2, "coverage": 5, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "leg_sheath6",
