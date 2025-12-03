@@ -3232,5 +3232,75 @@
     "type": "MIGRATION",
     "id": "lump_cast_iron",
     "replace": "iron_chunk"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_cotton",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_nomex",
+    "replace": "thread_nomex"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_kevlar",
+    "replace": "thread_kevlar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_neoprene",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_nylon",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_canvas",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_felt",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_leather",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_fur",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_faux_fur",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_lycra",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_carpet",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_denim",
+    "replace": "thread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bigframe_pack",
+    "replace": "frame_pack"
   }
 ]
