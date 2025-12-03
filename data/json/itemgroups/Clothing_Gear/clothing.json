@@ -1302,7 +1302,7 @@
       { "item": "cane_toy", "variant": "cane_toy_wizard", "prob": 2 },
       { "item": "cane_toy", "variant": "cane_toy_sinister", "prob": 2 },
       [ "scythe_toy", 2 ],
-      [ "bodysuit_lycra", 5 ]
+      [ "bodysuit_spandex", 5 ]
     ]
   },
   {
@@ -1996,7 +1996,7 @@
       { "item": "jumpsuit", "prob": 3 },
       { "item": "jumpsuit_long", "prob": 1 },
       { "item": "denim_overalls", "prob": 10 },
-      { "item": "bodysuit_lycra", "prob": 5 },
+      { "item": "bodysuit_spandex", "prob": 5 },
       { "item": "pants_hiking", "prob": 1 },
       { "item": "pants_cargo", "prob": 5 },
       { "item": "shorts", "prob": 5 },
@@ -2968,7 +2968,7 @@
       [ "balaclava_skull", 1 ],
       [ "mask_skull", 1 ],
       { "item": "jumpsuit_long", "prob": 3 },
-      [ "bodysuit_lycra", 3 ],
+      [ "bodysuit_spandex", 3 ],
       [ "bikini_top", 10 ],
       [ "bikini_bottom", 10 ]
     ]
@@ -3429,7 +3429,7 @@
     "subtype": "distribution",
     "items": [
       { "item": "bondage_suit", "prob": 10 },
-      { "item": "bodysuit_lycra", "prob": 10 },
+      { "item": "bodysuit_spandex", "prob": 10 },
       { "item": "yukata", "prob": 20 },
       { "item": "leotard", "prob": 40 },
       { "item": "motorbike_armor", "prob": 15 },

@@ -24,15 +24,15 @@
     "flags": [ "VARSIZE", "SKINTIGHT" ]
   },
   {
-    "id": "bodysuit_lycra",
+    "id": "bodysuit_spandex",
     "type": "ARMOR",
-    "name": { "str": "Lycra bodysuit" },
+    "name": { "str": "spandex bodysuit" },
     "description": "A tight-fitting spandex bodysuit which covers the whole body from neck to toe.",
     "weight": "408 g",
     "volume": "2 L",
     "price": "45 USD",
     "price_postapoc": "80 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "color": "blue",
     "warmth": 15,
@@ -50,48 +50,48 @@
       {
         "id": "samus_zero_suit_blue",
         "name": { "str": "futuristic blue bodysuit" },
-        "description": "This Spandex bodysuit is colored neon blue and has a bright pink symbol on the back.  Perfect for hunting space pirates and parasitic aliens.",
+        "description": "This spandex bodysuit is colored neon blue and has a bright pink symbol on the back.  Perfect for hunting space pirates and parasitic aliens.",
         "color": "cyan",
         "weight": 25
       },
       {
         "id": "superhero_suit_blue",
-        "name": { "str": "blue Spandex bodysuit" },
-        "description": "A Spandex suit predominantly colored blue, invoking the likeness of a comic book hero.",
+        "name": { "str": "blue spandex bodysuit" },
+        "description": "A spandex suit predominantly colored blue, invoking the likeness of a comic book hero.",
         "color": "blue",
         "weight": 25
       },
       {
         "id": "superhero_suit_red",
-        "name": { "str": "red Spandex bodysuit" },
-        "description": "A Spandex suit predominantly colored red, invoking the likeness of a comic book anti-hero.",
+        "name": { "str": "red spandex bodysuit" },
+        "description": "A spandex suit predominantly colored red, invoking the likeness of a comic book anti-hero.",
         "color": "dark_gray",
         "weight": 20
       },
       {
         "id": "superhero_suit_green",
-        "name": { "str": "green Spandex bodysuit" },
-        "description": "A Spandex suit predominantly colored green, invoking the likeness of a comic book character.",
+        "name": { "str": "green spandex bodysuit" },
+        "description": "A spandex suit predominantly colored green, invoking the likeness of a comic book character.",
         "color": "green",
         "weight": 15
       },
       {
         "id": "superhero_suit_purple",
-        "name": { "str": "purple Spandex bodysuit" },
-        "description": "A Spandex suit predominantly colored purple, invoking the likeness of a comic book character.",
+        "name": { "str": "purple spandex bodysuit" },
+        "description": "A spandex suit predominantly colored purple, invoking the likeness of a comic book character.",
         "color": "magenta",
         "weight": 15
       },
       {
         "id": "superhero_suit_pink",
-        "name": { "str": "pink Spandex bodysuit" },
-        "description": "A Spandex suit predominantly colored pink, invoking the likeness of a comic book heroine.",
+        "name": { "str": "pink spandex bodysuit" },
+        "description": "A spandex suit predominantly colored pink, invoking the likeness of a comic book heroine.",
         "color": "light_red",
         "weight": 15
       },
       {
         "id": "bondage_suit",
-        "name": { "str": "Lycra catsuit" },
+        "name": { "str": "spandex catsuit" },
         "description": "A skin-tight bodysuit, all in black.",
         "color": "dark_gray",
         "weight": 20
@@ -99,14 +99,14 @@
       {
         "id": "skeleton_suit",
         "name": { "str": "skeleton bodysuit" },
-        "description": "This Spandex bodysuit is colored jet-black and has a skeleton design printed on it.",
+        "description": "This spandex bodysuit is colored jet-black and has a skeleton design printed on it.",
         "color": "dark_gray",
         "weight": 15
       },
       {
         "id": "flag_suit",
         "name": { "str": "flag bodysuit" },
-        "description": "This Lycra bodysuit is printed with an American flag pattern.",
+        "description": "This spandex bodysuit is printed with an American flag pattern.",
         "color": "light_red",
         "weight": 5
       }
@@ -571,7 +571,7 @@
     "price": "2500 USD",
     "price_postapoc": "10 USD",
     "to_hit": -3,
-    "material": [ "lycra", "cotton", "faux_fur" ],
+    "material": [ "spandex", "cotton", "faux_fur" ],
     "symbol": "[",
     "color": "light_gray",
     "armor": [
@@ -705,7 +705,7 @@
     "price": "2500 USD",
     "price_postapoc": "10 USD",
     "to_hit": -3,
-    "material": [ "lycra", "cotton" ],
+    "material": [ "spandex", "cotton" ],
     "symbol": "[",
     "color": "light_gray",
     "armor": [
@@ -807,7 +807,7 @@
     "volume": "500 ml",
     "price": "25 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 15,

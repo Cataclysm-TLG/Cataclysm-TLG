@@ -269,7 +269,7 @@
     "subtype": "distribution",
     "entries": [
       { "item": "jumpsuit_long", "prob": 30 },
-      { "item": "bodysuit_lycra", "prob": 30 },
+      { "item": "bodysuit_spandex", "prob": 30 },
       { "item": "suit", "prob": 10 },
       { "item": "tux", "prob": 10 },
       { "item": "fursuit", "prob": 20 },

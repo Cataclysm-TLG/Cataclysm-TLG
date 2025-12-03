@@ -140,7 +140,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "15 m",
-    "components": [ [ [ "lycra_sheet", 6 ] ] ]
+    "components": [ [ [ "spandex_sheet", 6 ] ] ]
   },
   {
     "result": "vest_faux_fur",
@@ -158,7 +158,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 2 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 2 ] ] ]
   },
   {
     "result": "xssports_bra",
@@ -167,7 +167,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 1 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 1 ] ] ]
   },
   {
     "result": "xlsports_bra",
@@ -176,7 +176,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 2 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 2 ] ] ]
   },
   {
     "result": "thermal_shirt",
@@ -185,7 +185,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "2 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 6 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 6 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur",
@@ -221,7 +221,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 3 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 3 ] ] ]
   },
   {
     "result": "unitard",
@@ -230,7 +230,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "lycra_sheet_patchwork", 9 ] ] ]
+    "components": [ [ [ "spandex_sheet_patchwork", 9 ] ] ]
   },
   {
     "result": "jacket_light",

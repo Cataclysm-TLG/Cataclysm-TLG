@@ -403,7 +403,7 @@
       { "item": "sheet_cotton", "count": [ 1, 2 ], "prob": 4 },
       { "item": "sheet_felt", "prob": 2 },
       { "item": "canvas_sheet", "prob": 2 },
-      { "item": "lycra_sheet", "prob": 3 },
+      { "item": "spandex_sheet", "prob": 3 },
       { "item": "nylon_sheet", "prob": 2 },
       { "item": "nomex_sheet", "prob": 4 },
       { "item": "kevlar_sheet", "prob": 4 }

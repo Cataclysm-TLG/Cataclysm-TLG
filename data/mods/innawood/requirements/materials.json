@@ -10,9 +10,9 @@
         [ "cotton_sheet_patchwork", 1 ],
         [ "cotton_sheet", 1 ],
         [ "fibercloth_sheet", 1 ],
-        [ "lycra_sheet", 1 ],
-        [ "lycra_sheet_patchwork", 1 ],
-        [ "lycra_patch", 8 ],
+        [ "spandex_sheet", 1 ],
+        [ "spandex_sheet_patchwork", 1 ],
+        [ "spandex_patch", 8 ],
         [ "nylon", 1 ],
         [ "sheet_nylon_patchwork", 1 ],
         [ "sheet_nylon", 1 ],
@@ -37,8 +37,8 @@
         [ "cotton_sheet_patchwork", 1 ],
         [ "cotton_sheet", 1 ],
         [ "fibercloth_sheet", 1 ],
-        [ "lycra_patch", 8 ],
-        [ "lycra_sheet", 1 ],
+        [ "spandex_patch", 8 ],
+        [ "spandex_sheet", 1 ],
         [ "nylon", 8 ],
         [ "sheet_nylon_patchwork", 1 ],
         [ "sheet_nylon", 1 ],
@@ -76,7 +76,7 @@
       [
         [ "cotton_patch", 1 ],
         [ "fibercloth_patch", 1 ],
-        [ "lycra_patch", 1 ],
+        [ "spandex_patch", 1 ],
         [ "nylon", 1 ],
         [ "leather", 1 ],
         [ "nomex", 1 ],
@@ -88,7 +88,7 @@
     "id": "fabric_standard_permeable_small",
     "type": "requirement",
     "//": "Materials used for crafting or repairing woven fabrics",
-    "components": [ [ [ "cotton_patch", 1 ], [ "fibercloth_patch", 1 ], [ "lycra_patch", 8 ], [ "nylon", 8 ], [ "nomex", 8 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "fibercloth_patch", 1 ], [ "spandex_patch", 8 ], [ "nylon", 8 ], [ "nomex", 8 ] ] ]
   },
   {
     "id": "fabric_standard_nostretch_small",

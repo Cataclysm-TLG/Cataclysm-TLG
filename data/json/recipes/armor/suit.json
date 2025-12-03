@@ -1034,7 +1034,7 @@
     "difficulty": 4,
     "time": "2 h",
     "book_learn": [ [ "mag_animecon", 1 ] ],
-    "using": [ [ "tailoring_lycra_sheet", 20 ] ],
+    "using": [ [ "tailoring_spandex_sheet", 20 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {

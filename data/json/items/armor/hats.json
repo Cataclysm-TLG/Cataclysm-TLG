@@ -1050,7 +1050,7 @@
     "volume": "2 L",
     "price": "40 USD",
     "price_postapoc": "50 cent",
-    "material": [ "lycra" ],
+    "material": [ "spandex" ],
     "symbol": "^",
     "color": "light_blue",
     "warmth": 8,

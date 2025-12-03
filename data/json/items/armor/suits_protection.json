@@ -1939,7 +1939,7 @@
     "volume": "7500 ml",
     "price": "45000 USD",
     "price_postapoc": "20 USD",
-    "material": [ "neoprene", "lycra" ],
+    "material": [ "neoprene", "spandex" ],
     "symbol": "[",
     "looks_like": "jumpsuit",
     "color": "dark_gray",

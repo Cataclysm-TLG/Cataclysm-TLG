@@ -1422,7 +1422,7 @@
           {
             "distribution": [
               { "item": "bondage_suit", "prob": 65, "damage": [ 1, 4 ] },
-              { "item": "bodysuit_lycra", "variant": "bondage_suit", "prob": 45, "damage": [ 1, 4 ] }
+              { "item": "bodysuit_spandex", "variant": "bondage_suit", "prob": 45, "damage": [ 1, 4 ] }
             ]
           },
           {
