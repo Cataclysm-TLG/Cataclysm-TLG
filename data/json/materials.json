@@ -418,9 +418,9 @@
     "repaired_with": "chitin_piece",
     "salvaged_into": "chitin_piece",
     "burn_data": [
-      { "fuel": 0, "smoke": 0, "burn": 0.0001 },
-      { "fuel": 0.2, "smoke": 3, "burn": 0.005, "volume_per_turn": "200 ml" },
-      { "fuel": 0.35, "smoke": 5, "burn": 0.015, "volume_per_turn": "200 ml" }
+      { "fuel": 0.5, "smoke": 1, "burn": 0.03, "volume_per_turn": "250 ml" },
+      { "fuel": 1, "smoke": 3, "burn": 0.04, "volume_per_turn": "750 ml" },
+      { "fuel": 2, "smoke": 10, "burn": 0.05, "volume_per_turn": "1250 ml" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
     "resist": { "bash": 2.5, "cut": 4, "acid": 2, "heat": 0, "bullet": 1.4 },
@@ -1450,19 +1450,18 @@
     "cut_dmg_verb": "sliced",
     "acid_dmg_verb": "burned",
     "burn_data": [
-      { "fuel": 0.05, "smoke": 1, "burn": 0.001, "volume_per_turn": "200 ml" },
-      { "fuel": 0.1, "smoke": 3, "burn": 0.002, "volume_per_turn": "500 ml" },
-      { "fuel": 0.2, "smoke": 10, "burn": 0.004, "volume_per_turn": "1 L" }
+      { "fuel": 0.5, "smoke": 1, "burn": 0.03, "volume_per_turn": "200 ml" },
+      { "fuel": 1, "smoke": 3, "burn": 0.04, "volume_per_turn": "500 ml" },
+      { "fuel": 2, "smoke": 10, "burn": 0.05, "volume_per_turn": "1 L" }
     ],
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
     "resist": { "bash": 2, "cut": 2, "acid": 1, "heat": 0, "bullet": 1 }
   },
   {
     "type": "material",
-    "id": "lycra",
-    "name": "Lycra",
-    "//": "AKA Spandex. These values assume there's another material blended in such as polyester.",
-    "//1": "This stuff should max out at 1mm in a wetsuit, but is generally much thinner, as in women's tights.",
+    "id": "spandex",
+    "name": "spandex",
+    "//": "This stuff should max out at 1mm in a wetsuit, but is generally much thinner, as in women's tights.",
     "density": 1.2,
     "specific_heat_liquid": 1.7,
     "specific_heat_solid": 1.7,
@@ -1470,19 +1469,18 @@
     "soft": true,
     "chip_resist": 2,
     "breathability": "MOISTURE_WICKING",
-    "repaired_with": "lycra_patch",
-    "salvaged_into": "lycra_patch",
+    "repaired_with": "spandex_patch",
+    "salvaged_into": "spandex_patch",
     "dmg_adj": [ "ripped", "torn", "shredded", "tattered" ],
     "bash_dmg_verb": "ripped",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "burned",
-    "//2": "Nylon/polyester reacts poorly to flame (it melts) but is hard to light. Doesn't break down easily unless exposed to a high-intensity fire.",
     "burn_data": [
-      { "fuel": 0.05, "smoke": 1, "burn": 0.01 },
-      { "fuel": 0.05, "smoke": 2, "burn": 0.03 },
-      { "fuel": 0.15, "smoke": 5, "burn": 0.5 }
+      { "fuel": 0.05, "smoke": 1, "burn": 0.02 },
+      { "fuel": 0.05, "smoke": 2, "burn": 0.04 },
+      { "fuel": 0.15, "smoke": 5, "burn": 0.6 }
     ],
-    "resist": { "bash": 1, "cut": 1, "acid": 9, "heat": 2, "bullet": 1 },
+    "resist": { "bash": 1, "cut": 1, "acid": 9, "heat": 1, "bullet": 1 },
     "repair_difficulty": 3
   },
   {
@@ -3068,76 +3066,6 @@
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
     "wind_resist": 100,
     "resist": { "bash": 0.5, "cut": 0.1, "bullet": 0.1, "acid": 0, "heat": 0 }
-  },
-  {
-    "type": "material",
-    "id": "mut_fur",
-    "name": "Mutant Fur",
-    "density": 1.1,
-    "specific_heat_liquid": 0.02,
-    "specific_heat_solid": 0.02,
-    "latent_heat": 333,
-    "soft": true,
-    "chip_resist": 8,
-    "breathability": "POOR",
-    "dmg_adj": [ "ripped", "torn", "shredded", "tattered" ],
-    "bash_dmg_verb": "ripped",
-    "cut_dmg_verb": "sliced",
-    "acid_dmg_verb": "burned",
-    "burn_data": [
-      { "fuel": 0.6, "smoke": 1, "burn": 0.02 },
-      { "fuel": 1, "smoke": 1, "burn": 0.04 },
-      { "fuel": 1, "smoke": 1, "burn": 0.06 }
-    ],
-    "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 0.5, "cut": 0.31, "acid": 1, "heat": 1, "bullet": 0.25 }
-  },
-  {
-    "type": "material",
-    "id": "mut_wood",
-    "name": "Mutant Wood",
-    "density": 0.85,
-    "specific_heat_liquid": 1.7,
-    "specific_heat_solid": 1.7,
-    "latent_heat": 273,
-    "chip_resist": 10,
-    "breathability": "AVERAGE",
-    "dmg_adj": [ "scratched", "chipped", "cracked", "splintered" ],
-    "bash_dmg_verb": "splintered",
-    "cut_dmg_verb": "gouged",
-    "acid_dmg_verb": "burned",
-    "burn_data": [
-      { "fuel": 1, "smoke": 1, "burn": 0.01, "volume_per_turn": "200 ml" },
-      { "fuel": 2, "smoke": 1, "burn": 0.02, "volume_per_turn": "825 ml" },
-      { "fuel": 3, "smoke": 1, "burn": 0.03 }
-    ],
-    "burn_products": [ [ "ash", 0.018 ] ],
-    "fuel_data": { "energy": "1000 kJ" },
-    "resist": { "bash": 3, "cut": 2, "acid": 4, "heat": 1, "bullet": 2 }
-  },
-  {
-    "type": "material",
-    "id": "mut_bone",
-    "name": "Mutant Bone",
-    "density": 1.4,
-    "specific_heat_liquid": 1.2,
-    "specific_heat_solid": 1.2,
-    "latent_heat": 200,
-    "rotting": true,
-    "chip_resist": 8,
-    "wind_resist": 90,
-    "dmg_adj": [ "scratched", "cut", "cracked", "shattered" ],
-    "bash_dmg_verb": "cracked",
-    "cut_dmg_verb": "chipped",
-    "acid_dmg_verb": "burned",
-    "vitamins": [ [ "calcium", 2 ] ],
-    "burn_data": [
-      { "fuel": 0, "smoke": 0, "burn": 0.0003 },
-      { "fuel": 0.2, "smoke": 3, "burn": 0.01, "volume_per_turn": "250 ml" },
-      { "fuel": 0.35, "smoke": 5, "burn": 0.02, "volume_per_turn": "250 ml" }
-    ],
-    "burn_products": [ [ "corpse_ash", 0.035 ] ],
-    "resist": { "bash": 2, "cut": 3, "acid": 7, "heat": 1, "bullet": 1 }
   },
   {
     "type": "material",

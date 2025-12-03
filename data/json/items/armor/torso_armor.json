@@ -652,7 +652,7 @@
     "id": "motorbike_armor",
     "type": "ARMOR",
     "name": { "str": "motorcycle armor" },
-    "description": "A light jacket made of a stretch mesh covered in plastic pads meant for motorcyclists.  Made to be much more comfortable to wear than leather alternatives, but the underlying Lycra isn't protective at all.",
+    "description": "A light jacket made of a stretch mesh covered in plastic pads meant for motorcyclists.  Made to be much more comfortable to wear than leather alternatives, but the underlying spandex isn't protective at all.",
     "weight": "1066 g",
     "volume": "2 L",
     "price": "150 USD",

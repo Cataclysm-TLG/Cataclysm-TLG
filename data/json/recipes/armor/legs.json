@@ -91,7 +91,7 @@
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics", "time_multiplier": 1.25, "skill_penalty": 0.15 } ],
     "using": [ [ "tailoring_lycra_sheet", 1 ] ],
-    "byproducts": [ [ "lycra_patch", 1 ] ]
+    "byproducts": [ [ "spandex_patch", 1 ] ]
   },
   {
     "result": "boy_shorts",
@@ -210,7 +210,7 @@
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" }, { "proficiency": "prof_closures" } ],
     "using": [ [ "tailoring_lycra_sheet", 1 ], [ "fastener_small", 1 ] ],
-    "byproducts": [ [ "lycra_patch", 2 ] ]
+    "byproducts": [ [ "spandex_patch", 2 ] ]
   },
   {
     "result": "hot_pants_fur",
@@ -417,7 +417,7 @@
     "autolearn": true,
     "book_learn": [ [ "mag_tailor", 2 ], [ "manual_tailor", 2 ] ],
     "using": [ [ "tailoring_lycra_sheet", 6 ] ],
-    "byproducts": [ [ "lycra_patch", 5 ] ],
+    "byproducts": [ [ "spandex_patch", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {

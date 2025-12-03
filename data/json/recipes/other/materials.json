@@ -1751,7 +1751,7 @@
     "time": "60 m",
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "lycra_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
+    "components": [ [ [ "spandex_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
     "result": "nylon_sheet_patchwork",

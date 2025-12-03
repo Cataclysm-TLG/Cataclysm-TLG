@@ -1630,8 +1630,8 @@
     "//": "for cs_sex_shop, suits, dresses and large clothing",
     "items": [
       [ "bondage_suit", 10 ],
-      { "item": "bodysuit_lycra", "variant": "bondage_suit", "prob": 10 },
-      [ "bodysuit_lycra", 5 ],
+      { "item": "bodysuit_spandex", "variant": "bondage_suit", "prob": 10 },
+      [ "bodysuit_spandex", 5 ],
       [ "leotard", 5 ],
       [ "unitard", 5 ],
       [ "santa_shorts", 1 ],

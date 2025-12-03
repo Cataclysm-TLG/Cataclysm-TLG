@@ -107,11 +107,11 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "id": "lycra_patch",
+    "id": "spandex_patch",
     "type": "TOOL",
     "category": "spare_parts",
-    "name": { "str": "Lycra patch", "str_pl": "Lycra patches" },
-    "description": "A six-inch square patch of synthetic fabric blended with stretchy Lycra fibers.  It could be used to make flexible yet strong clothing.  Stylish, but bad for the environment; at least you're recycling it.",
+    "name": { "str": "spandex patch", "str_pl": "spandex patches" },
+    "description": "A six-inch square patch of synthetic fabric blended with stretchy spandex fibers.  It could be used to make flexible yet strong clothing.  Stylish, but bad for the environment; at least you're recycling it.",
     "weight": "4 g",
     "volume": "15 ml",
     "//": "180GSM, .63mm thick",
