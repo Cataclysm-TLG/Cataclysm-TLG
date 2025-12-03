@@ -67,7 +67,7 @@
         { "item": "nuts_bolts", "charges": [ 2, 8 ] },
         { "item": "splinter", "count": [ 5, 35 ] },
         { "item": "sheet_cotton", "count": [ 6, 10 ] },
-        { "item": "cotton_patchwork", "count": [ 2, 7 ] }
+        { "item": "cotton_patch", "count": [ 2, 7 ] }
       ]
     }
   },
@@ -90,7 +90,7 @@
       "items": [
         { "item": "pipe", "count": 4 },
         { "item": "sheet_cotton", "count": 6 },
-        { "item": "cotton_patchwork", "count": 4 },
+        { "item": "cotton_patch", "count": 4 },
         { "item": "seatbelt" },
         { "item": "plastic_chunk", "count": 10 },
         { "item": "spring", "count": 3 }
@@ -106,7 +106,7 @@
         { "item": "pipe", "count": [ 0, 2 ] },
         { "item": "scrap", "count": [ 2, 10 ] },
         { "item": "sheet_cotton", "count": [ 2, 5 ] },
-        { "item": "cotton_patchwork", "count": [ 5, 8 ] },
+        { "item": "cotton_patch", "count": [ 5, 8 ] },
         { "item": "plastic_chunk", "count": [ 1, 7 ] },
         { "item": "seatbelt" }
       ]
@@ -158,7 +158,7 @@
       "items": [
         { "item": "wooden_post_short", "count": 6 },
         { "item": "sheet_cotton", "count": 10 },
-        { "item": "cotton_patchwork", "count": 5 },
+        { "item": "cotton_patch", "count": 5 },
         { "item": "nuts_bolts", "charges": 16 },
         { "item": "spring", "count": 2 },
         { "item": "splinter", "count": [ 1, 25 ] }
@@ -176,7 +176,7 @@
         { "item": "splinter", "count": [ 5, 35 ] },
         { "item": "scrap", "count": [ 0, 6 ] },
         { "item": "sheet_cotton", "count": [ 5, 8 ] },
-        { "item": "cotton_patchwork", "count": [ 1, 6 ] }
+        { "item": "cotton_patch", "count": [ 1, 6 ] }
       ]
     }
   },
@@ -233,7 +233,7 @@
         { "item": "steel_fragment", "count": 1 },
         { "item": "scrap", "count": [ 3, 20 ] },
         { "item": "sheet_cotton", "count": [ 0, 1 ] },
-        { "item": "cotton_patchwork", "count": [ 3, 10 ] }
+        { "item": "cotton_patch", "count": [ 3, 10 ] }
       ]
     }
   },
@@ -544,7 +544,7 @@
     "fall_damage_reduction": 4,
     "required_str": -1,
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "CAN_SIT" ],
-    "deconstruct": { "items": [ { "item": "cotton_patchwork", "count": 40 }, { "item": "steel_fragment", "count": 10 } ] },
+    "deconstruct": { "items": [ { "item": "cotton_patch", "count": 40 }, { "item": "steel_fragment", "count": 10 } ] },
     "bash": {
       "str_min": 9,
       "str_max": 25,

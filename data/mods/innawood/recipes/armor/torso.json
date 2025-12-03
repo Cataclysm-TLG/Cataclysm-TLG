@@ -25,7 +25,7 @@
     "time": "45 m",
     "autolearn": true,
     "reversible": { "time": "5 m" },
-    "using": [ [ "tailoring_cotton_patchwork_simple", 8 ] ]
+    "using": [ [ "tailoring_cotton_patch_simple", 8 ] ]
   },
   {
     "result": "leather_cuirass",
@@ -38,7 +38,7 @@
     "time": "10 h",
     "autolearn": true,
     "byproducts": [ [ "leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 7 ] ],
+    "using": [ [ "tailoring_leather_sheet", 7 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   }
 ]

@@ -511,7 +511,7 @@
       [ [ "bucket_5gal", 1 ] ],
       [ [ "material_sand", 2500 ] ],
       [ [ "material_gravel", 1000 ] ],
-      [ [ "cotton_patchwork", 4 ], [ "wire_mesh", 4 ] ]
+      [ [ "cotton_patch", 4 ], [ "wire_mesh", 4 ] ]
     ]
   },
   {

@@ -1817,17 +1817,17 @@
     "description": "Recipes related to sewing together patchwork fabrics.",
     "skill_used": "tailor",
     "nested_category_data": [
-      "sheet_cotton_patchwork",
-      "sheet_faux_fur_patchwork",
-      "sheet_fur_patchwork",
-      "sheet_leather_patchwork",
+      "sheet_cotton_patch",
+      "faux_fur_sheet_patchwork",
+      "fur_sheet_patchwork",
+      "leather_sheet_patchwork",
       "sheet_felt_patchwork",
-      "sheet_neoprene_patchwork",
-      "sheet_nomex_patchwork",
-      "sheet_lycra_patchwork",
-      "sheet_nylon_patchwork",
-      "sheet_denim_patchwork",
-      "sheet_canvas_patchwork"
+      "neoprene_sheet_patchwork",
+      "nomex_sheet_patchwork",
+      "lycra_sheet_patchwork",
+      "nylon_sheet_patchwork",
+      "denim_sheet_patchwork",
+      "canvas_sheet_patchwork"
     ],
     "difficulty": 1
   },

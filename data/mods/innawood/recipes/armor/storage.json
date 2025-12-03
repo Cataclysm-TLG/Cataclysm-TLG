@@ -11,7 +11,7 @@
     "time": "3 h",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "tailoring_leather_patchwork_simple", 26 ], [ "fastener_large", 6 ] ],
+    "using": [ [ "tailoring_leather_sheet_simple", 26 ], [ "fastener_large", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
@@ -30,7 +30,7 @@
     "time": "1 h",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork_simple", 1 ] ]
+    "using": [ [ "tailoring_cotton_patch_simple", 1 ] ]
   },
   {
     "result": "stone_pouch",
@@ -44,7 +44,7 @@
     "time": "3 h",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "strap_large", 1 ], [ "tailoring_cotton_patchwork_simple", 5 ], [ "fastener_small", 2 ] ],
+    "using": [ [ "strap_large", 1 ], [ "tailoring_cotton_patch_simple", 5 ], [ "fastener_small", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ]
   },
   {
@@ -58,7 +58,7 @@
     "time": "3 h",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "strap_large", 1 ], [ "tailoring_leather_patchwork_simple", 6 ], [ "fastener_small", 2 ] ],
+    "using": [ [ "strap_large", 1 ], [ "tailoring_leather_sheet_simple", 6 ], [ "fastener_small", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_leatherworking_basic" } ]
   },
   {
@@ -72,7 +72,7 @@
     "time": "3 h",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "strap_large", 3 ], [ "tailoring_leather_patchwork_simple", 5 ] ],
+    "using": [ [ "strap_large", 3 ], [ "tailoring_leather_sheet_simple", 5 ] ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
@@ -92,7 +92,7 @@
     "time": "45 m",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "tailoring_leather_patchwork_simple", 2 ] ],
+    "using": [ [ "tailoring_leather_sheet_simple", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ],
     "components": [ [ [ "strap_large", 1, "LIST" ] ], [ [ "clasps", 1, "LIST" ] ] ]
   }

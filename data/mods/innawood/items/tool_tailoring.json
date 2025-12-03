@@ -110,7 +110,7 @@
     "flags": [ "ALLOWS_REMOTE_USE" ]
   },
   {
-    "id": "sheet_fibercloth",
+    "id": "fibercloth_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "fibercloth sheet" },
@@ -124,7 +124,7 @@
     "color": "green"
   },
   {
-    "id": "fibercloth_patchwork",
+    "id": "fibercloth_patch",
     "type": "TOOL",
     "category": "spare_parts",
     "name": { "str": "fibercloth patch", "str_pl": "fibercloth patches" },
@@ -137,11 +137,7 @@
     "symbol": ",",
     "color": "green",
     "use_action": [
-      {
-        "type": "heal",
-        "move_cost": 200,
-        "used_up_item": { "id": "fibercloth_patchwork", "quantity": 1, "flags": [ "FILTHY" ] }
-      },
+      { "type": "heal", "move_cost": 200, "used_up_item": { "id": "fibercloth_patch", "quantity": 1, "flags": [ "FILTHY" ] } },
       "WASH_HARD_ITEMS"
     ],
     "flags": [ "NO_SALVAGE" ]

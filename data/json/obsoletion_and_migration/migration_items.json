@@ -357,7 +357,7 @@
   {
     "type": "MIGRATION",
     "id": "disinrag",
-    "replace": "cotton_patchwork"
+    "replace": "cotton_patch"
   },
   {
     "type": "MIGRATION",
@@ -2736,7 +2736,7 @@
   {
     "id": "leather_hide",
     "type": "MIGRATION",
-    "replace": "sheet_leather"
+    "replace": "leather_sheet"
   },
   {
     "id": "muzzle_brake_mod",
@@ -2951,7 +2951,7 @@
   {
     "type": "MIGRATION",
     "id": "raw_demihumanleather",
-    "replace": "sheet_leather"
+    "replace": "leather_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3302,5 +3302,95 @@
     "type": "MIGRATION",
     "id": "bigframe_pack",
     "replace": "frame_pack"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cotton_patchwork",
+    "replace": "cotton_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nylon",
+    "replace": "nylon_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nylon",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_lycra",
+    "replace": "lycra_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_lycra_patchwork",
+    "replace": "lycra_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_denim",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_denim_patchwork",
+    "replace": "denim_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_leather_patchwork",
+    "replace": "leather_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_fur_patchwork",
+    "replace": "fur_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "tanned_pelt",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_faux_fur_patchwork",
+    "replace": "faux_fur_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_canvas_patchwork",
+    "replace": "canvas_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_leather",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_faux_fur",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_canvas",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nomex",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_nomex_patchwork",
+    "replace": "nomex_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_neoprene_patchwork",
+    "replace": "neoprene_sheet_patchwork"
   }
 ]

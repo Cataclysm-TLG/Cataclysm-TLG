@@ -86,7 +86,7 @@
     "time": "10 m",
     "autolearn": true,
     "using": [ [ "filament", 50 ], [ "cordage_short", 1 ] ],
-    "components": [ [ [ "cotton_patchwork", 2 ], [ "fibercloth_patchwork", 2 ] ] ]
+    "components": [ [ [ "cotton_patch", 2 ], [ "fibercloth_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -99,6 +99,6 @@
     "time": "50 m",
     "autolearn": true,
     "using": [ [ "filament", 300 ], [ "cordage", 1 ] ],
-    "components": [ [ [ "cotton_patchwork", 12 ], [ "fibercloth_patchwork", 12 ] ] ]
+    "components": [ [ [ "cotton_patch", 12 ], [ "fibercloth_patch", 12 ] ] ]
   }
 ]

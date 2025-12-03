@@ -1151,7 +1151,7 @@
       { "item": "can_drink", "prob": 60 },
       { "item": "flyer", "prob": 30 },
       { "item": "box_small", "prob": 30 },
-      { "item": "cotton_patchwork", "prob": 20 },
+      { "item": "cotton_patch", "prob": 20 },
       { "item": "bag_plastic", "prob": 20 },
       { "item": "bag_zipper", "prob": 3 },
       { "item": "bag_zipper_gallon", "prob": 1 },
@@ -1412,7 +1412,7 @@
     "items": [
       { "group": "ammo_pocket_batteries_full", "prob": 10 },
       { "item": "radio", "prob": 10, "charges": [ 0, 100 ] },
-      [ "cotton_patchwork", 30 ],
+      [ "cotton_patch", 30 ],
       [ "dress_shoes", 20 ],
       [ "longshirt", 30 ],
       [ "polo_shirt", 30 ],
@@ -1438,7 +1438,7 @@
     "items": [
       { "group": "ammo_pocket_batteries_full", "prob": 10 },
       { "item": "radio", "prob": 10, "charges": [ 0, 100 ] },
-      [ "cotton_patchwork", 30 ],
+      [ "cotton_patch", 30 ],
       [ "jack", 20 ],
       [ "jack_small", 30 ],
       { "item": "flashlight", "prob": 20, "charges": [ 0, 300 ] },
@@ -1478,7 +1478,7 @@
     "//": "for cs_tire_shop",
     "items": [
       { "item": "radio", "prob": 30, "charges": [ 0, 100 ] },
-      [ "cotton_patchwork", 30 ],
+      [ "cotton_patch", 30 ],
       { "item": "cell_phone", "prob": 20, "charges": [ 0, 150 ] },
       [ "mag_mechanics", 20 ],
       [ "manual_mechanics", 10 ],
@@ -1499,7 +1499,7 @@
     "items": [
       { "group": "ammo_pocket_batteries_full", "prob": 10 },
       { "item": "radio", "prob": 10, "charges": [ 0, 100 ] },
-      [ "cotton_patchwork", 30 ],
+      [ "cotton_patch", 30 ],
       [ "jack", 20 ],
       [ "jack_small", 30 ],
       { "item": "flashlight", "prob": 20, "charges": [ 0, 300 ] },
@@ -1531,7 +1531,7 @@
     "items": [
       { "group": "ammo_any_batteries_full", "prob": 10 },
       { "item": "radio", "prob": 10, "charges": [ 0, 100 ] },
-      [ "cotton_patchwork", 30 ],
+      [ "cotton_patch", 30 ],
       [ "jack", 20 ],
       [ "jack_small", 30 ],
       { "item": "flashlight", "prob": 20, "charges": [ 0, 300 ] },
@@ -1934,7 +1934,7 @@
       [ "hacksaw", 5 ],
       [ "gloves_rubber", 25 ],
       [ "apron_plastic", 15 ],
-      { "item": "cotton_patchwork", "prob": 10, "custom-flags": [ "FILTHY" ] },
+      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
       [ "bag_plastic", 20 ],
       [ "string_6", 5 ]
     ]
@@ -1953,8 +1953,8 @@
       [ "towel", 20 ],
       { "item": "soap", "prob": 10, "charges": [ 1, 10 ] },
       [ "gloves_medical", 20 ],
-      [ "cotton_patchwork", 15 ],
-      { "item": "cotton_patchwork", "prob": 2, "custom-flags": [ "FILTHY" ] },
+      [ "cotton_patch", 15 ],
+      { "item": "cotton_patch", "prob": 2, "custom-flags": [ "FILTHY" ] },
       [ "bag_plastic", 20 ],
       [ "jerky", 40 ]
     ]
@@ -2075,10 +2075,10 @@
       { "item": "tailors_kit", "prob": 9, "charges": [ 0, -1 ] },
       { "item": "electric_spinwheel", "prob": 9 },
       [ "knitting_needles", 15 ],
-      [ "sheet_kevlar_layered", 10 ],
+      [ "kevlar_sheet_layered", 10 ],
       [ "leather", 10 ],
-      [ "sheet_leather", 10 ],
-      [ "cotton_patchwork", 20 ],
+      [ "leather_sheet", 10 ],
+      [ "cotton_patch", 20 ],
       [ "needle_curved", 10 ],
       [ "nomex", 10 ],
       [ "neoprene", 5 ],

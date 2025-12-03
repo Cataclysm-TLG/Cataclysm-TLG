@@ -15,7 +15,7 @@
       { "item": "steel_fragment", "prob": 30 },
       { "item": "spring", "prob": 50 },
       { "item": "steel_chunk", "prob": 30 },
-      { "item": "sheet_kevlar_layered", "prob": 10 },
+      { "item": "kevlar_sheet_layered", "prob": 10 },
       { "item": "ceramic_armor", "prob": 15 },
       { "item": "motor", "prob": 2 },
       { "group": "ammo_heavy_batteries_full", "prob": 50 },

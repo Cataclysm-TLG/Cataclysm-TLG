@@ -23,8 +23,8 @@
       { "item": "glass_shard", "prob": 10, "count": [ 1, 8 ] },
       [ "wire", 5 ],
       [ "splinter", 10 ],
-      [ "cotton_patchwork", 15 ],
-      { "item": "cotton_patchwork", "prob": 10, "custom-flags": [ "FILTHY" ] },
+      [ "cotton_patch", 15 ],
+      { "item": "cotton_patch", "prob": 10, "custom-flags": [ "FILTHY" ] },
       [ "plastic_shopping_bag", 10 ]
     ]
   },
@@ -226,8 +226,8 @@
       [ "string_6", 50 ],
       [ "leather", 10 ],
       [ "fur", 7 ],
-      [ "sheet_leather", 20 ],
-      [ "tanned_pelt", 20 ]
+      [ "leather_sheet", 20 ],
+      [ "fur_sheet", 20 ]
     ]
   },
   {

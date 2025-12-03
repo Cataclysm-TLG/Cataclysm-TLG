@@ -91,11 +91,11 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "id": "nylon",
+    "id": "nylon_patch",
     "type": "TOOL",
     "category": "spare_parts",
-    "name": { "str": "synthetic fabric patch", "str_pl": "synthetic fabric patches" },
-    "description": "A six-inch square patch of synthetic fabric.  Unlike you and other natural materials, it won't degrade much with age.  Maybe that's less of a bad thing now.",
+    "name": { "str": "nylon patch", "str_pl": "nylon patches" },
+    "description": "A palm-sized square of synthetic fabric.",
     "weight": "5750 mg",
     "volume": "5 ml",
     "//": ".25mm thick, 288GSM",

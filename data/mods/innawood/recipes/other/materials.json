@@ -118,7 +118,7 @@
     "components": [ [ [ "glass_shard", 2 ] ], [ [ "chem_sulphur", 1 ] ], [ [ "scrap", 1 ] ], [ [ "charcoal", 1 ] ] ]
   },
   {
-    "result": "sheet_fibercloth",
+    "result": "fibercloth_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -133,7 +133,7 @@
     "components": [ [ [ "plant_fibre", 5 ] ] ]
   },
   {
-    "result": "sheet_fibercloth",
+    "result": "fibercloth_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",

@@ -356,13 +356,7 @@
     "difficulty": 1,
     "time": "22 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "sheet_cotton", 7 ] ],
-      [ [ "cotton_patchwork", 4 ] ],
-      [ [ "sheet", 4 ] ],
-      [ [ "spring", 4 ] ],
-      [ [ "wire", 20 ] ]
-    ]
+    "components": [ [ [ "sheet_cotton", 7 ] ], [ [ "cotton_patch", 4 ] ], [ [ "sheet", 4 ] ], [ [ "spring", 4 ] ], [ [ "wire", 20 ] ] ]
   },
   {
     "result": "character_sheet",
@@ -464,7 +458,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "6 h",
-    "components": [ [ [ "sheet_nylon_patchwork", 1972 ] ] ],
+    "components": [ [ [ "nylon_sheet_patchwork", 1972 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -551,7 +545,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 10 ] ], [ [ "sheet_fur_patchwork", 10 ] ], [ [ "thread", 150 ] ] ],
+    "components": [ [ [ "sheet_cotton", 10 ] ], [ [ "fur_sheet_patchwork", 10 ] ], [ [ "thread", 150 ] ] ],
     "//": "This recipe is based off of the blanket recipe above it, with half of the cotton sheets being replaced by patchwork fur sheets."
   },
   {
@@ -599,7 +593,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 2 ] ], [ [ "cotton_patchwork", 4 ] ], [ [ "down_feather", 50 ] ] ]
+    "components": [ [ [ "sheet_cotton", 2 ] ], [ [ "cotton_patch", 4 ] ], [ [ "down_feather", 50 ] ] ]
   },
   {
     "result": "well_pump",

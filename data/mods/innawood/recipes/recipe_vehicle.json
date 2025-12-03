@@ -80,7 +80,7 @@
     "using": [ [ "sewing_standard", 100 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 8 ], [ "sheet_leather", 1 ], [ "fur", 8 ], [ "tanned_pelt", 1 ] ],
+      [ [ "leather", 8 ], [ "leather_sheet", 1 ], [ "fur", 8 ], [ "fur_sheet", 1 ] ],
       [ [ "2x4", 4 ] ],
       [ [ "rope_superior_short", 2, "LIST" ] ]
     ]

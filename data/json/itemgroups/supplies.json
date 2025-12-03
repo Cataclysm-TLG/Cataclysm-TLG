@@ -47,9 +47,9 @@
     "//": "Fabric sheets used for tailoring.",
     "items": [
       { "item": "sheet_cotton", "prob": 200 },
-      { "item": "sheet_neoprene", "prob": 10 },
-      { "item": "sheet_leather", "prob": 50 },
-      { "item": "tanned_pelt", "prob": 50 }
+      { "item": "neoprene_sheet", "prob": 10 },
+      { "item": "leather_sheet", "prob": 50 },
+      { "item": "fur_sheet", "prob": 50 }
     ]
   },
   {
@@ -262,7 +262,7 @@
       [ "can_drink", 60 ],
       [ "flyer", 30 ],
       [ "box_small", 30 ],
-      [ "cotton_patchwork", 20 ],
+      [ "cotton_patch", 20 ],
       [ "bag_plastic", 20 ],
       [ "news_regional", 15 ],
       [ "mag_news", 15 ]

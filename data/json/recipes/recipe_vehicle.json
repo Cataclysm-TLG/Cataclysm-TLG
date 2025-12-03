@@ -241,7 +241,7 @@
     "using": [ [ "sewing_standard", 100 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 16 ], [ "sheet_leather", 2 ], [ "fur", 16 ], [ "tanned_pelt", 2 ] ],
+      [ [ "leather", 16 ], [ "leather_sheet", 2 ], [ "fur", 16 ], [ "fur_sheet", 2 ] ],
       [ [ "cordage_superior", 2, "LIST" ] ]
     ]
   },
@@ -259,7 +259,7 @@
     "using": [ [ "sewing_standard", 100 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 8 ], [ "sheet_leather", 1 ], [ "fur", 8 ], [ "tanned_pelt", 1 ] ],
+      [ [ "leather", 8 ], [ "leather_sheet", 1 ], [ "fur", 8 ], [ "fur_sheet", 1 ] ],
       [ [ "2x4", 4 ] ],
       [ [ "rope_superior_short", 2, "LIST" ] ]
     ]
@@ -292,9 +292,9 @@
       [ [ "pipe", 4 ], [ "scrap", 20 ], [ "steel_fragment", 6 ], [ "steel_chunk", 3 ] ],
       [ [ "pipe", 2 ] ],
       [ [ "chain", 2 ], [ "hd_tow_cable", 1 ] ],
-      [ [ "spring", 2 ], [ "sheet_leather", 2 ] ],
+      [ [ "spring", 2 ], [ "leather_sheet", 2 ] ],
       [ [ "nuts_bolts", 6 ] ],
-      [ [ "rope_superior_short", 2, "LIST" ], [ "sheet_canvas", 4 ], [ "sheet_canvas_patchwork", 4 ] ]
+      [ [ "rope_superior_short", 2, "LIST" ], [ "canvas_sheet", 4 ], [ "canvas_sheet_patchwork", 4 ] ]
     ]
   },
   {
@@ -1423,7 +1423,7 @@
       [ [ "power_supply", 1 ] ],
       [ [ "pipe_fittings", 2 ] ],
       [ [ "pipe", 2 ] ],
-      [ [ "wire_mesh", 1 ], [ "cotton_patchwork", 1 ] ],
+      [ [ "wire_mesh", 1 ], [ "cotton_patch", 1 ] ],
       [ [ "metal_tank_little", 1 ], [ "jerrycan_big", 1 ], [ "jerrycan", 1 ] ]
     ]
   },

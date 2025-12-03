@@ -5,7 +5,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "2 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "scrap", 4 ] ], [ [ "cotton_patchwork", 4 ] ] ]
+    "components": [ [ [ "scrap", 4 ] ], [ [ "cotton_patch", 4 ] ] ]
   },
   {
     "result": "cudgel_spiked",

@@ -3,5 +3,10 @@
     "id": "bottle_plastic_tiny",
     "type": "MIGRATION",
     "replace": "clay_canister"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fibercloth_patchwork",
+    "replace": "fibercloth_patch"
   }
 ]

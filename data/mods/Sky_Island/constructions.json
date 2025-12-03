@@ -32,7 +32,7 @@
     "required_skills": [ [ "fabrication", 4 ], [ "tailor", 4 ] ],
     "time": "60 m",
     "qualities": [ [ { "id": "HAMMER", "level": 2 } ], [ { "id": "SAW_W", "level": 1 } ] ],
-    "components": [ [ [ "2x4", 10 ] ], [ [ "nail", 10 ] ], [ [ "cotton_patchwork", 100 ] ] ],
+    "components": [ [ [ "2x4", 10 ] ], [ [ "nail", 10 ] ], [ [ "cotton_patch", 100 ] ] ],
     "pre_special": "check_empty",
     "post_terrain": "f_sofa",
     "activity_level": "MODERATE_EXERCISE"

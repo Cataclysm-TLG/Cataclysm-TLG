@@ -128,8 +128,8 @@
     "book_learn": [ [ "textbook_survival", 1 ] ],
     "using": [
       [ "sewing_standard", 13 ],
-      [ "tailoring_leather_patchwork", 3 ],
-      [ "tailoring_fur_patchwork", 2 ],
+      [ "tailoring_leather_sheet", 3 ],
+      [ "tailoring_fur_sheet", 2 ],
       [ "fastener_shoes", 2 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ]
@@ -148,8 +148,8 @@
     "time": "12 h",
     "using": [
       [ "sewing_standard", 9 ],
-      [ "tailoring_leather_patchwork", 2 ],
-      [ "tailoring_fur_patchwork", 3 ],
+      [ "tailoring_leather_sheet", 2 ],
+      [ "tailoring_fur_sheet", 3 ],
       [ "fastener_shoes", 1 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ]
@@ -162,8 +162,8 @@
     "copy-from": "boots_fur",
     "using": [
       [ "sewing_standard", 16 ],
-      [ "tailoring_leather_patchwork", 4 ],
-      [ "tailoring_fur_patchwork", 4 ],
+      [ "tailoring_leather_sheet", 4 ],
+      [ "tailoring_fur_sheet", 4 ],
       [ "fastener_shoes", 3 ],
       [ "shoe_rubber", 2 ],
       [ "adhesive_rubber", 2 ]
@@ -184,8 +184,8 @@
     "book_learn": [ [ "recipe_fauxfur", 1 ] ],
     "using": [
       [ "sewing_standard", 13 ],
-      [ "tailoring_nylon_patchwork", 3 ],
-      [ "tailoring_faux_fur_patchwork", 2 ],
+      [ "tailoring_nylon_sheet", 3 ],
+      [ "tailoring_faux_fur_sheet", 2 ],
       [ "fastener_shoes", 2 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ]
@@ -204,8 +204,8 @@
     "time": "12 h",
     "using": [
       [ "sewing_standard", 9 ],
-      [ "tailoring_nylon_patchwork", 2 ],
-      [ "tailoring_faux_fur_patchwork", 3 ],
+      [ "tailoring_nylon_sheet", 2 ],
+      [ "tailoring_faux_fur_sheet", 3 ],
       [ "fastener_shoes", 1 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ]
@@ -218,8 +218,8 @@
     "copy-from": "boots_faux_fur",
     "using": [
       [ "sewing_standard", 16 ],
-      [ "tailoring_nylon_patchwork", 4 ],
-      [ "tailoring_faux_fur_patchwork", 4 ],
+      [ "tailoring_nylon_sheet", 4 ],
+      [ "tailoring_faux_fur_sheet", 4 ],
       [ "fastener_shoes", 3 ],
       [ "shoe_rubber", 2 ],
       [ "adhesive_rubber", 2 ]
@@ -237,7 +237,7 @@
     "skills_required": [ "fabrication", 4 ],
     "time": "30 h",
     "autolearn": true,
-    "using": [ [ "tailoring_kevlar_fabric", 18 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 18 ], [ "fastener_small", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -258,7 +258,7 @@
     "type": "recipe",
     "copy-from": "boots_survivor",
     "time": "24 h",
-    "using": [ [ "tailoring_kevlar_fabric", 16 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 16 ], [ "fastener_small", 6 ] ],
     "components": [
       [ [ "filament_durable", 80, "LIST" ] ],
       [ [ "thread_kevlar", 14 ] ],
@@ -271,7 +271,7 @@
     "type": "recipe",
     "copy-from": "boots_survivor",
     "time": "24 h",
-    "using": [ [ "tailoring_kevlar_fabric", 24 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 24 ], [ "fastener_small", 6 ] ],
     "components": [
       [ [ "filament_durable", 120, "LIST" ] ],
       [ [ "thread_kevlar", 18 ] ],
@@ -294,7 +294,7 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" }
     ],
-    "using": [ [ "tailoring_leather_patchwork", 5 ] ]
+    "using": [ [ "tailoring_leather_sheet", 5 ] ]
   },
   {
     "result": "boots_winter",
@@ -307,7 +307,7 @@
     "time": "12 h",
     "autolearn": true,
     "using": [
-      [ "tailoring_felt_patchwork", 4 ],
+      [ "tailoring_felt_sheet", 4 ],
       [ "plastic_molding", 4 ],
       [ "waterproofing_plastic_sheets", 2 ],
       [ "fastener_shoes", 2 ],
@@ -326,7 +326,7 @@
     "copy-from": "boots_winter",
     "time": "12 h",
     "using": [
-      [ "tailoring_felt_patchwork", 3 ],
+      [ "tailoring_felt_sheet", 3 ],
       [ "plastic_molding", 3 ],
       [ "waterproofing_plastic_sheets", 1 ],
       [ "fastener_shoes", 1 ],
@@ -340,7 +340,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "copy-from": "boots_winter",
     "using": [
-      [ "tailoring_felt_patchwork", 6 ],
+      [ "tailoring_felt_sheet", 6 ],
       [ "plastic_molding", 5 ],
       [ "waterproofing_plastic_sheets", 2 ],
       [ "fastener_shoes", 3 ],
@@ -360,7 +360,7 @@
     "skills_required": [ "fabrication", 5 ],
     "time": "36 h",
     "autolearn": true,
-    "using": [ [ "tailoring_kevlar_fabric", 14 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 14 ], [ "fastener_small", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -383,7 +383,7 @@
     "type": "recipe",
     "copy-from": "boots_wsurvivor",
     "time": "30 h",
-    "using": [ [ "tailoring_kevlar_fabric", 12 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 12 ], [ "fastener_small", 6 ] ],
     "components": [
       [ [ "filament_durable", 80, "LIST" ] ],
       [ [ "thread_kevlar", 14 ] ],
@@ -403,7 +403,7 @@
     "skills_required": [ "fabrication", 5 ],
     "time": "36 h",
     "autolearn": true,
-    "using": [ [ "tailoring_kevlar_fabric", 14 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 14 ], [ "fastener_small", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -426,7 +426,7 @@
     "type": "recipe",
     "copy-from": "boots_wsurvivor",
     "time": "30 h",
-    "using": [ [ "tailoring_kevlar_fabric", 12 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 12 ], [ "fastener_small", 6 ] ],
     "components": [
       [ [ "filament_durable", 80, "LIST" ] ],
       [ [ "thread_kevlar", 14 ] ],
@@ -442,7 +442,7 @@
     "difficulty": 8,
     "skills_required": [ "fabrication", 6 ],
     "time": "54 h",
-    "using": [ [ "tailoring_kevlar_fabric", 14 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 14 ], [ "fastener_small", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -467,7 +467,7 @@
     "difficulty": 8,
     "skills_required": [ "fabrication", 6 ],
     "time": "54 h",
-    "using": [ [ "tailoring_kevlar_fabric", 14 ], [ "fastener_small", 6 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 14 ], [ "fastener_small", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -557,7 +557,7 @@
     "difficulty": 1,
     "time": "20 m",
     "book_learn": [ [ "tailor_japanese", 2 ] ],
-    "using": [ [ "tailoring_cotton", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 2 ] ]
   },
   {
     "result": "footrags",
@@ -569,7 +569,7 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork_simple", 2 ] ],
+    "using": [ [ "tailoring_cotton_sheet_simple", 2 ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -582,7 +582,7 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_nomex_patchwork", 2 ] ],
+    "using": [ [ "tailoring_nomex_sheet", 2 ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -595,7 +595,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "sheet_fur_patchwork", 2 ], [ "tanned_pelt", 2 ] ] ],
+    "components": [ [ [ "fur_sheet_patchwork", 2 ], [ "fur_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -607,7 +607,7 @@
     "skill_used": "tailor",
     "time": "1 m 30 s",
     "autolearn": true,
-    "components": [ [ [ "sheet_faux_fur_patchwork", 2 ] ] ],
+    "components": [ [ [ "faux_fur_sheet_patchwork", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -620,7 +620,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "sheet_leather_patchwork", 2 ] ] ],
+    "components": [ [ [ "leather_sheet_patchwork", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -651,7 +651,7 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" }
     ],
-    "using": [ [ "tailoring_leather_patchwork", 3 ] ]
+    "using": [ [ "tailoring_leather_sheet", 3 ] ]
   },
   {
     "result": "mocassins",
@@ -665,7 +665,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_leatherworking_basic" } ],
     "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 4 ] ]
+    "using": [ [ "tailoring_leather_sheet", 4 ] ]
   },
   {
     "result": "mocassins_fur",
@@ -683,7 +683,7 @@
       { "proficiency": "prof_furriery" }
     ],
     "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "using": [ [ "tailoring_fur_patchwork", 4 ] ]
+    "using": [ [ "tailoring_fur_sheet", 4 ] ]
   },
   {
     "result": "nomex_socks",
@@ -696,7 +696,7 @@
     "time": "24 m",
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ],
     "book_learn": [ [ "textbook_fireman", 6 ], [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ] ],
-    "using": [ [ "tailoring_nomex_patchwork", 7 ] ],
+    "using": [ [ "tailoring_nomex_sheet", 7 ] ],
     "byproducts": [ [ "nomex", 1 ] ]
   },
   {
@@ -704,7 +704,7 @@
     "type": "recipe",
     "copy-from": "nomex_socks",
     "time": "24 m",
-    "using": [ [ "tailoring_nomex_patchwork", 5 ] ]
+    "using": [ [ "tailoring_nomex_sheet", 5 ] ]
   },
   {
     "result": "xlnomex_socks",
@@ -717,7 +717,7 @@
     "time": "37 m",
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ],
     "book_learn": [ [ "textbook_fireman", 6 ], [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ] ],
-    "using": [ [ "tailoring_nomex_patchwork", 10 ] ]
+    "using": [ [ "tailoring_nomex_sheet", 10 ] ]
   },
   {
     "result": "shoes_birchbark",
@@ -743,15 +743,15 @@
     "skill_used": "tailor",
     "time": "1 h",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 1 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ]
   },
   {
     "result": "xssocks",
     "type": "recipe",
     "copy-from": "socks",
     "time": "1 h",
-    "using": [ [ "tailoring_cotton_patchwork", 1 ] ],
-    "byproducts": [ [ "cotton_patchwork", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ],
+    "byproducts": [ [ "cotton_patch", 2 ] ]
   },
   {
     "result": "xlsocks",
@@ -762,8 +762,8 @@
     "skill_used": "tailor",
     "time": "1 h 12 m",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 2 ] ],
-    "byproducts": [ [ "cotton_patchwork", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 2 ] ],
+    "byproducts": [ [ "cotton_patch", 2 ] ]
   },
   {
     "result": "socks_bag",
@@ -813,8 +813,8 @@
     "skill_used": "tailor",
     "time": "1 h",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton", 1 ] ],
-    "byproducts": [ [ "cotton_patchwork", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ],
+    "byproducts": [ [ "cotton_patch", 2 ] ]
   },
   {
     "result": "stockings",
@@ -826,8 +826,8 @@
     "difficulty": 1,
     "time": "2 h",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 3 ] ],
-    "byproducts": [ [ "cotton_patchwork", 3 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 3 ] ],
+    "byproducts": [ [ "cotton_patch", 3 ] ]
   },
   {
     "result": "straw_sandals",
@@ -886,36 +886,21 @@
       { "proficiency": "prof_elastics" },
       { "proficiency": "prof_cobbling" }
     ],
-    "using": [
-      [ "tailoring_neoprene_patchwork", 7 ],
-      [ "shoe_rubber", 1 ],
-      [ "adhesive_rubber", 1 ],
-      [ "tailoring_nylon_patchwork", 10 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 7 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 10 ] ]
   },
   {
     "result": "xs_wetsuit_booties",
     "type": "recipe",
     "copy-from": "wetsuit_booties",
     "time": "5 h",
-    "using": [
-      [ "tailoring_neoprene_patchwork", 6 ],
-      [ "shoe_rubber", 1 ],
-      [ "adhesive_rubber", 1 ],
-      [ "tailoring_nylon_patchwork", 8 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 6 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 8 ] ]
   },
   {
     "result": "xl_wetsuit_booties",
     "type": "recipe",
     "copy-from": "wetsuit_booties",
     "time": "8 h",
-    "using": [
-      [ "tailoring_neoprene_patchwork", 9 ],
-      [ "shoe_rubber", 2 ],
-      [ "adhesive_rubber", 2 ],
-      [ "tailoring_nylon_patchwork", 15 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 9 ], [ "shoe_rubber", 2 ], [ "adhesive_rubber", 2 ], [ "tailoring_nylon_sheet", 15 ] ]
   },
   {
     "result": "wetsuit_booties_thick",
@@ -929,12 +914,7 @@
       { "proficiency": "prof_elastics" },
       { "proficiency": "prof_cobbling" }
     ],
-    "using": [
-      [ "tailoring_neoprene_patchwork", 12 ],
-      [ "shoe_rubber", 1 ],
-      [ "adhesive_rubber", 1 ],
-      [ "tailoring_nylon_patchwork", 20 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 12 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 20 ] ]
   },
   {
     "result": "xs_wetsuit_booties_thick",
@@ -942,24 +922,14 @@
     "copy-from": "wetsuit_booties_thick",
     "difficulty": 4,
     "time": "6 h",
-    "using": [
-      [ "tailoring_neoprene_patchwork", 10 ],
-      [ "shoe_rubber", 1 ],
-      [ "adhesive_rubber", 1 ],
-      [ "tailoring_nylon_patchwork", 16 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 10 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 16 ] ]
   },
   {
     "result": "xl_wetsuit_booties_thick",
     "type": "recipe",
     "copy-from": "wetsuit_booties_thick",
     "time": "12 h",
-    "using": [
-      [ "tailoring_neoprene_patchwork", 16 ],
-      [ "shoe_rubber", 2 ],
-      [ "adhesive_rubber", 2 ],
-      [ "tailoring_nylon_patchwork", 30 ]
-    ]
+    "using": [ [ "tailoring_neoprene_sheet", 16 ], [ "shoe_rubber", 2 ], [ "adhesive_rubber", 2 ], [ "tailoring_nylon_sheet", 30 ] ]
   },
   {
     "result": "roller_blades",
@@ -1010,7 +980,7 @@
     "autolearn": false,
     "using": [
       [ "tailoring_leather_small", 11 ],
-      [ "tailoring_kevlar_fabric", 15 ],
+      [ "tailoring_kevlar_sheet", 15 ],
       [ "fastener_shoes", 2 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ],
@@ -1035,14 +1005,14 @@
     "time": "12 h",
     "autolearn": false,
     "using": [
-      [ "tailoring_cotton_patchwork", 27 ],
-      [ "tailoring_kevlar_fabric", 36 ],
+      [ "tailoring_cotton_sheet", 27 ],
+      [ "tailoring_kevlar_sheet", 36 ],
       [ "fastener_shoes", 2 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ],
       [ "sewing_aramids", 5 ]
     ],
-    "byproducts": [ [ "cotton_patchwork", 4 ] ],
+    "byproducts": [ [ "cotton_patch", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_closures" }, { "proficiency": "prof_polymerworking" } ]
   },
   {
@@ -1073,7 +1043,7 @@
     "difficulty": 7,
     "time": "14 h",
     "autolearn": false,
-    "using": [ [ "tailoring_nomex_patchwork", 43 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ] ],
+    "using": [ [ "tailoring_nomex_sheet", 43 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ] ],
     "proficiencies": [
       { "proficiency": "prof_cobbling" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -1099,7 +1069,7 @@
       [ "fastener_shoes", 2 ],
       [ "shoe_rubber", 1 ],
       [ "adhesive_rubber", 1 ],
-      [ "tailoring_nylon_patchwork", 16 ]
+      [ "tailoring_nylon_sheet", 16 ]
     ],
     "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_closures" } ]
   },
@@ -1113,7 +1083,7 @@
     "difficulty": 2,
     "time": "4 h",
     "autolearn": true,
-    "using": [ [ "sewing_standard", 6 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_patchwork", 12 ] ],
+    "using": [ [ "sewing_standard", 6 ], [ "shoe_rubber", 1 ], [ "adhesive_rubber", 1 ], [ "tailoring_nylon_sheet", 12 ] ],
     "proficiencies": [ { "proficiency": "prof_cobbling" } ]
   }
 ]

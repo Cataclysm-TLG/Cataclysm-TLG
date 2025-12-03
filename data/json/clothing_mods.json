@@ -34,7 +34,7 @@
     "type": "clothing_mod",
     "id": "kevlar_padded",
     "flag": "kevlar_padded",
-    "item": "sheet_kevlar_layered",
+    "item": "kevlar_sheet_layered",
     "implement_prompt": "Pad with Kevlar",
     "destroy_prompt": "Destroy Kevlar padding",
     "mod_value": [

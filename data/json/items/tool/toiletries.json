@@ -122,7 +122,7 @@
     "melee_damage": { "bash": 3 }
   },
   {
-    "id": "cotton_patchwork",
+    "id": "cotton_patch",
     "type": "TOOL",
     "category": "spare_parts",
     "name": { "str": "cotton patch", "str_pl": "cotton patches" },
@@ -137,7 +137,7 @@
     "qualities": [ [ "SIEVE", 1 ], [ "STRAIN", 2 ] ],
     "color": "white",
     "use_action": [
-      { "type": "heal", "move_cost": 200, "used_up_item": { "id": "cotton_patchwork", "quantity": 1, "flags": [ "FILTHY" ] } },
+      { "type": "heal", "move_cost": 200, "used_up_item": { "id": "cotton_patch", "quantity": 1, "flags": [ "FILTHY" ] } },
       "WASH_HARD_ITEMS"
     ],
     "flags": [ "NO_SALVAGE", "TINDER" ]

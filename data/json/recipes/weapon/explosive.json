@@ -201,7 +201,7 @@
     "autolearn": true,
     "using": [ [ "accelerant_liquid", 500 ] ],
     "components": [
-      [ [ "cotton_patchwork", 1 ] ],
+      [ [ "cotton_patch", 1 ] ],
       [
         [ "bottle_glass", 1 ],
         [ "jar_glass_sealed", 1 ],

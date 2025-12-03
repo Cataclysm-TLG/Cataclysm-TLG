@@ -867,12 +867,12 @@
     "time": "60 m",
     "autolearn": true,
     "reversible": true,
-    "using": [ [ "tailoring_cotton_patchwork", 12 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 12 ] ]
   },
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "sheet_kevlar_patchwork",
+    "result": "kevlar_sheet_patchwork",
     "difficulty": 3,
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
@@ -885,7 +885,7 @@
     "components": [ [ [ "kevlar_patch", 8 ] ] ]
   },
   {
-    "result": "sheet_kevlar",
+    "result": "kevlar_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -900,7 +900,7 @@
     "components": [ [ [ "thread_kevlar", 100 ] ] ]
   },
   {
-    "result": "sheet_kevlar",
+    "result": "kevlar_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -917,7 +917,7 @@
     "components": [ [ [ "thread_kevlar", 100 ] ] ]
   },
   {
-    "result": "sheet_kevlar",
+    "result": "kevlar_sheet",
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "category": "CC_OTHER",
@@ -958,7 +958,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ],
     "using": [ [ "glue_strong", 450 ] ],
-    "components": [ [ [ "sheet_kevlar", 16 ], [ "sheet_kevlar_layered", 1 ] ] ]
+    "components": [ [ [ "kevlar_sheet", 16 ], [ "kevlar_sheet_layered", 1 ] ] ]
   },
   {
     "result": "sheet_cotton",
@@ -1008,7 +1008,7 @@
     "components": [ [ [ "thread", 50 ] ] ]
   },
   {
-    "result": "sheet_cotton_patchwork",
+    "result": "sheet_cotton_patch",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1017,10 +1017,10 @@
     "time": "60 m",
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "cotton_patchwork", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
+    "components": [ [ [ "cotton_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_canvas",
+    "result": "canvas_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -1035,7 +1035,7 @@
     "components": [ [ [ "thread_canvas", 80 ] ], [ [ "wax_any", 1, "LIST" ] ] ]
   },
   {
-    "result": "sheet_canvas",
+    "result": "canvas_sheet",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
@@ -1051,7 +1051,7 @@
     "components": [ [ [ "thread_canvas", 80 ] ], [ [ "wax_any", 1, "LIST" ] ] ]
   },
   {
-    "result": "sheet_canvas",
+    "result": "canvas_sheet",
     "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "category": "CC_OTHER",
@@ -1067,7 +1067,7 @@
     "components": [ [ [ "thread_canvas", 80 ] ], [ [ "wax_any", 1, "LIST" ] ] ]
   },
   {
-    "result": "sheet_denim_patchwork",
+    "result": "denim_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1079,7 +1079,7 @@
     "components": [ [ [ "denim_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_canvas_patchwork",
+    "result": "canvas_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1103,7 +1103,7 @@
     "components": [ [ [ "filament_canvas", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_neoprene_patchwork",
+    "result": "neoprene_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1115,7 +1115,7 @@
     "components": [ [ [ "neoprene", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_nomex_patchwork",
+    "result": "nomex_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1129,7 +1129,7 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "sheet_leather",
+    "result": "leather_sheet",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
     "skill_used": "survival",
@@ -1137,12 +1137,12 @@
     "time": "36 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "tanned_pelt", 1 ] ] ]
+    "components": [ [ [ "fur_sheet", 1 ] ] ]
   },
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "sheet_leather",
+    "result": "leather_sheet",
     "id_suffix": "from_pieces",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
@@ -1675,7 +1675,7 @@
     "time": "5 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "COOK", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "cotton_patchwork", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "cotton_patch", -1 ] ] ],
     "components": [ [ [ "bag_plastic", 1 ], [ "bag_plastic_small", 1 ] ] ]
   },
   {
@@ -1690,11 +1690,11 @@
     "time": "5 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "COOK", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "cotton_patchwork", -1 ] ] ],
+    "tools": [ [ [ "surface_heat", 5, "LIST" ] ], [ [ "cotton_patch", -1 ] ] ],
     "components": [ [ [ "plastic_sheet_small", 8 ] ] ]
   },
   {
-    "result": "sheet_faux_fur_patchwork",
+    "result": "faux_fur_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1706,7 +1706,7 @@
     "components": [ [ [ "faux_fur", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_fur_patchwork",
+    "result": "fur_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1718,7 +1718,7 @@
     "components": [ [ [ "fur", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_leather_patchwork",
+    "result": "leather_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1742,7 +1742,7 @@
     "components": [ [ [ "felt_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_lycra_patchwork",
+    "result": "lycra_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1754,7 +1754,7 @@
     "components": [ [ [ "lycra_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
-    "result": "sheet_nylon_patchwork",
+    "result": "nylon_sheet_patchwork",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_*",
@@ -1763,7 +1763,7 @@
     "time": "60 m",
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "nylon", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
+    "components": [ [ [ "nylon_patch", 8 ] ], [ [ "filament", 15, "LIST" ] ] ]
   },
   {
     "result": "material_aluminium_ingot",

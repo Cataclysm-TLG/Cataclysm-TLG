@@ -35,7 +35,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "25 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_canvas", 6 ] ], [ [ "thread_canvas", 40 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "canvas_sheet", 6 ] ], [ [ "thread_canvas", 40 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "dry_bag",
@@ -45,7 +45,7 @@
     "difficulty": 3,
     "time": "35 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_lycra_patchwork", 18 ] ], [ [ "button_plastic", 1 ] ], [ [ "plastic_sheet_small", 9 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 18 ] ], [ [ "button_plastic", 1 ] ], [ [ "plastic_sheet_small", 9 ] ] ]
   },
   {
     "result": "dry_bag_large",
@@ -55,7 +55,7 @@
     "difficulty": 3,
     "time": "35 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_lycra_patchwork", 9 ] ], [ [ "button_plastic", 1 ] ], [ [ "plastic_sheet_small", 38 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 9 ] ], [ [ "button_plastic", 1 ] ], [ [ "plastic_sheet_small", 38 ] ] ]
   },
   {
     "result": "gas_mask_pouch",
@@ -65,6 +65,6 @@
     "difficulty": 1,
     "time": "2 m 30 s",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "strap_cotton", 1 ] ], [ [ "snapfastener_steel", 2 ] ], [ [ "sheet_nylon", 3 ] ], [ [ "nylon", 11 ] ] ]
+    "components": [ [ [ "strap_cotton", 1 ] ], [ [ "snapfastener_steel", 2 ] ], [ [ "nylon_sheet", 3 ] ], [ [ "nylon_patch", 11 ] ] ]
   }
 ]
