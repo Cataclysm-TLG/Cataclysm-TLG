@@ -3438,4 +3438,9 @@
     "id": "lycra_sheet",
     "replace": "spandex_sheet"
   },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton_patch",
+    "replace": "cotton_sheet_patchwork"
+  }
 ]

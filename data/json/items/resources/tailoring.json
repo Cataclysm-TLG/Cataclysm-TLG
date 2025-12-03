@@ -197,7 +197,7 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_cotton_patch",
+    "id": "cotton_sheet_patchwork",
     "copy-from": "sheet_cotton",
     "type": "GENERIC",
     "name": { "str": "patchwork cotton sheet" },
