@@ -236,8 +236,7 @@
     "autolearn": true,
     "book_learn": [ [ "manual_tailor", 1 ], [ "textbook_survival", 1 ], [ "pocket_survival", 1 ], [ "recipe_fauxfur", 1 ] ],
     "using": [ [ "tailoring_faux_fur_small", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
-    "byproducts": [ [ "scrap_faux_fur", 3 ] ]
+    "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ]
   },
   {
     "result": "xs_gloves_faux_fur",
@@ -277,8 +276,7 @@
       [ [ "faux_fur", 4 ] ],
       [ [ "kevlar_patch", 8 ] ],
       [ [ "gloves_tactical", 1 ], [ "gloves_faux_fur", 1 ], [ "gloves_light", 1 ] ]
-    ],
-    "byproducts": [ [ "scrap_faux_fur", 5 ] ]
+    ]
   },
   {
     "result": "gloves_wsurvivor_nofur_xs",
@@ -292,8 +290,7 @@
       [ [ "kevlar_patch", 6 ] ],
       [ [ "gloves_tactical", 1 ], [ "xs_gloves_faux_fur", 1 ], [ "xs_gloves_light", 1 ] ]
     ],
-    "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
-    "byproducts": [ [ "scrap_faux_fur", 4 ] ]
+    "tools": [ [ [ "rubber_spray_can", 2 ] ] ]
   },
   {
     "result": "gloves_wsurvivor_nofur_xl",
@@ -308,8 +305,7 @@
       [ [ "kevlar_patch", 12 ] ],
       [ [ "gloves_tactical", 1 ], [ "xl_gloves_faux_fur", 1 ], [ "xl_gloves_light", 1 ] ]
     ],
-    "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
-    "byproducts": [ [ "scrap_faux_fur", 4 ] ]
+    "tools": [ [ [ "rubber_spray_can", 4 ] ] ]
   },
   {
     "result": "gloves_leather",

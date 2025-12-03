@@ -239,8 +239,7 @@
     "flags": [ "BED", "BOARDABLE", "CARGO", "MOUNTABLE", "NONBELTABLE" ],
     "breaks_into": [
       { "item": "sheet_cotton", "count": [ 0, 2 ] },
-      { "item": "cotton_patchwork", "count": [ 0, 5 ] },
-      { "item": "scrap_cotton", "count": [ 9, 50 ] },
+      { "item": "cotton_patchwork", "count": [ 0, 10 ] },
       { "item": "spring", "count": [ 0, 1 ] },
       { "item": "wire", "count": [ 0, 2 ] },
       { "item": "scrap", "count": [ 3, 8 ] }
@@ -1632,11 +1631,7 @@
       "repair": { "skills": [ [ "tailor", 1 ] ], "time": "150 s", "using": [ [ "sewing_standard", 50 ], [ "fabric_standard", 1 ] ] }
     },
     "flags": [ "OPENABLE", "OPENCLOSE_INSIDE", "OPAQUE", "CURTAIN", "MULTISQUARE", "NEEDS_WINDOW", "SIMPLE_PART" ],
-    "breaks_into": [
-      { "item": "sheet_cotton", "count": [ 1, 3 ] },
-      { "item": "cotton_patchwork", "count": [ 5, 11 ] },
-      { "item": "scrap_cotton", "count": [ 8, 19 ] }
-    ],
+    "breaks_into": [ { "item": "sheet_cotton", "count": [ 1, 3 ] }, { "item": "cotton_patchwork", "count": [ 5, 11 ] } ],
     "variants": [ { "symbols": "\"", "symbols_broken": "0" } ]
   },
   {
@@ -1662,11 +1657,7 @@
       "repair": { "skills": [ [ "tailor", 1 ] ], "time": "150 s", "using": [ [ "sewing_standard", 50 ], [ "fabric_standard", 1 ] ] }
     },
     "flags": [ "OPENABLE", "OPAQUE", "OPENCLOSE_INSIDE", "CURTAIN", "MULTISQUARE", "SIMPLE_PART" ],
-    "breaks_into": [
-      { "item": "sheet_cotton", "count": [ 1, 3 ] },
-      { "item": "cotton_patchwork", "count": [ 5, 11 ] },
-      { "item": "scrap_cotton", "count": [ 8, 19 ] }
-    ],
+    "breaks_into": [ { "item": "sheet_cotton", "count": [ 1, 3 ] }, { "item": "cotton_patchwork", "count": [ 5, 11 ] } ],
     "variants": [ { "symbols": "\"", "symbols_broken": "0" } ]
   },
   {

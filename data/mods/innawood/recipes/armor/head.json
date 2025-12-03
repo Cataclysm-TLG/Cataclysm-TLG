@@ -12,7 +12,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "skull_canis", 1 ] ] ],
     "using": [ [ "tailoring_leather_patchwork_simple", 2 ] ],
-    "byproducts": [ [ "leather", 3 ], [ "scrap_leather", 1 ], [ "meal_bone", 1 ] ],
+    "byproducts": [ [ "leather", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },

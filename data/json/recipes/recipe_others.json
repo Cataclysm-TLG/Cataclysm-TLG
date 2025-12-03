@@ -2857,7 +2857,7 @@
     "time": "120 m",
     "autolearn": true,
     "using": [ [ "sewing_standard", 10 ] ],
-    "byproducts": [ [ "splinter", 6 ], [ "scrap_leather", 5 ] ],
+    "byproducts": [ [ "splinter", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
     "components": [
       [ [ "2x4", 2 ] ],
