@@ -64,7 +64,7 @@
     ],
     "warmth": 6,
     "material_thickness": 2,
-    "flags": [ "BELTED" ],
+    "flags": [ "BELTED", "OVERSIZE" ],
     "armor": [ { "encumbrance": [ 2, 25 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -245,7 +245,7 @@
     ],
     "warmth": 9,
     "material_thickness": 3,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 4,
@@ -307,7 +307,7 @@
     ],
     "warmth": 6,
     "material_thickness": 1.1,
-    "flags": [ "BELTED" ],
+    "flags": [ "BELTED", "OVERSIZE" ],
     "armor": [ { "encumbrance": [ 3, 25 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -815,7 +815,7 @@
       }
     ],
     "material_thickness": 1,
-    "flags": [ "WATER_FRIENDLY", "BELTED", "PALS_LARGE" ],
+    "flags": [ "WATER_FRIENDLY", "BELTED", "PALS_LARGE", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 2,
@@ -1025,7 +1025,7 @@
       }
     ],
     "material_thickness": 0.5,
-    "flags": [ "BELTED", "WATER_FRIENDLY", "PALS_MEDIUM" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "PALS_MEDIUM", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": 1, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -1054,7 +1054,7 @@
       }
     ],
     "material_thickness": 0.1,
-    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [
       {
         "encumbrance": 1,
@@ -1248,7 +1248,7 @@
       }
     ],
     "material_thickness": 0.1,
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "UNRESTRICTED" ],
     "armor": [
       {
         "encumbrance": 1,
@@ -1451,7 +1451,7 @@
     ],
     "material_thickness": 1,
     "warmth": 2,
-    "flags": [ "VARSIZE", "WATER_FRIENDLY", "BELTED" ],
+    "flags": [ "WATER_FRIENDLY", "BELTED", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -1459,54 +1459,6 @@
         "coverage": 70,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l", "leg_upper_r", "leg_upper_l" ]
-      }
-    ],
-    "variant_type": "generic",
-    "variants": [
-      {
-        "id": "black_leg_bag",
-        "name": { "str": "drop leg bag" },
-        "description": "A black bag that can be worn on the thighs and hips using adjustable buckled straps.  Commonly used by motorcycle riders.",
-        "weight": 50
-      },
-      {
-        "id": "brown_leg_bag",
-        "name": { "str": "drop leg bag" },
-        "description": "A khaki bag that can be worn on the thighs and hips using adjustable buckled straps.  Works nicely with a pair of khaki pants.",
-        "color": "brown",
-        "weight": 30
-      },
-      {
-        "id": "purple_leg_bag",
-        "name": { "str": "drop leg bag" },
-        "description": "A purple bag that can be worn on the thighs and hips using adjustable buckled straps.  Perfect for the ladies that want a cooler way of carrying their personal items.",
-        "color": "magenta",
-        "weight": 10
-      },
-      {
-        "id": "camo_leg_bag",
-        "name": { "str": "camo drop leg bag" },
-        "description": "A green bag with camouflage print that can be worn on the thighs and hips using adjustable buckled straps.  For those that have a military heart.",
-        "color": "green",
-        "weight": 5
-      },
-      {
-        "id": "steampunk_leg_bag",
-        "name": { "str": "steampunk drop leg bag" },
-        "description": "A black and dark gold bag that can be worn on the thighs and hips using adjustable buckled straps, with a steampunk design and chains all over it.  Perfect for a wide variety of costumes.",
-        "weight": 3
-      },
-      {
-        "id": "skull_leg_bag",
-        "name": { "str": "skull drop leg bag" },
-        "description": "A jet-black bag that can be worn on the thighs and hips using adjustable buckled straps, with skulls and spikes all over it.  Perfect for a rider of the apocalypse.",
-        "symbol": "S",
-        "weight": 2
-      },
-      {
-        "id": "flag_leg_bag",
-        "name": { "str": "founders' leg bag" },
-        "description": "A garishly colored red, white, and blue bag that can be worn on the thighs and hips using adjustable buckled straps, with the stylized depiction of George Washington's face gazing sternly from the side.  Perfect for carrying the dreams of the founding fathers wherever you go."
       }
     ]
   },
@@ -1655,7 +1607,7 @@
     ],
     "warmth": 5,
     "material_thickness": 0.2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [ { "encumbrance": [ 2, 9 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -1836,7 +1788,7 @@
     ],
     "warmth": 10,
     "material_thickness": 2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "use_action": [ { "type": "attach_molle", "size": 6 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -1927,7 +1879,7 @@
     ],
     "warmth": 10,
     "material_thickness": 2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "use_action": [ { "type": "attach_molle", "size": 8 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -2018,7 +1970,7 @@
     ],
     "warmth": 12,
     "material_thickness": 2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "use_action": [ { "type": "attach_molle", "size": 10 }, { "type": "detach_molle" } ],
     "armor": [
       {
@@ -2052,7 +2004,7 @@
       }
     ],
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       {
         "encumbrance": 1,
@@ -2090,7 +2042,7 @@
     "material_thickness": 2,
     "properties": { "creature_size_capacity": "SMALL" },
     "use_action": [ "CAPTURE_MONSTER_ACT" ],
-    "flags": [ "BELTED", "WATERPROOF" ],
+    "flags": [ "BELTED", "WATERPROOF", "OVERSIZE" ],
     "armor": [ { "encumbrance": 35, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ]
   },
   {
@@ -2305,7 +2257,7 @@
     ],
     "warmth": 8,
     "material_thickness": 0.2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 10, 50 ], "coverage": 80, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
@@ -2336,7 +2288,7 @@
     ],
     "warmth": 2,
     "material_thickness": 0.2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [
       {
         "encumbrance": 1,
@@ -2352,7 +2304,6 @@
     "id": "slingpack",
     "type": "ARMOR",
     "name": { "str": "sling pack" },
-    "//": "Depends on if you're getting a cheap school version or something more like a range bag.",
     "description": "A simple single-sling backpack.  Easier to access than a normal backpack, but can't comfortably hold as much.",
     "weight": "566 g",
     "volume": "2100 ml",
@@ -2592,7 +2543,7 @@
     ],
     "warmth": 8,
     "material_thickness": 2,
-    "flags": [ "BELTED", "WATERPROOF" ],
+    "flags": [ "BELTED", "WATERPROOF", "OVERSIZE" ],
     "armor": [ { "encumbrance": [ 3, 25 ], "coverage": 80, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -2674,7 +2625,7 @@
       }
     ],
     "material_thickness": 2,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": [ 5, 20 ], "coverage": 50, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -2800,7 +2751,7 @@
     ],
     "warmth": 0,
     "material_thickness": 0,
-    "flags": [ "BELTED", "WATER_FRIENDLY", "TARDIS", "OVERSIZE", "WATCH", "THERMOMETER" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "TARDIS", "OVERSIZE", "WATCH", "THERMOMETER", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": [ 0, 0 ], "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
@@ -2828,7 +2779,7 @@
     ],
     "warmth": 8,
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 8, 42 ], "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
@@ -3073,7 +3024,7 @@
     ],
     "warmth": 2,
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": [ 3, 5 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
     "melee_damage": { "bash": 1 }
   },
@@ -3103,7 +3054,7 @@
       }
     ],
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [
       {
         "encumbrance": 0,
@@ -3169,7 +3120,7 @@
     ],
     "warmth": 5,
     "material_thickness": 1,
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 30, 35 ], "coverage": 70, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
@@ -3198,7 +3149,7 @@
     ],
     "warmth": 5,
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 10, 25 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
@@ -3228,7 +3179,7 @@
     ],
     "warmth": 5,
     "material_thickness": 1,
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
     "armor": [
       { "encumbrance": [ 10, 50 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
