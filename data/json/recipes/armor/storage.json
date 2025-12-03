@@ -2276,11 +2276,12 @@
     "autolearn": true,
     "reversible": { "time": "1 h" },
     "using": [ [ "tailoring_nylon_patchwork", 28 ], [ "fastener_large", 3 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_closures_waterproofing" }
-    ],
-    "components": [ [ [ "strap_large", 2, "LIST" ] ], [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ], [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ] ] ]
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ],
+    "components": [
+      [ [ "strap_large", 2, "LIST" ] ],
+      [ [ "dump_pouch", 2 ], [ "leather_pouch", 2 ] ],
+      [ [ "chestpouch", 4 ], [ "legpouch_large", 2 ] ]
+    ]
   },
   {
     "result": "backpack_hiking",
@@ -2294,10 +2295,7 @@
     "autolearn": true,
     "reversible": { "time": "1 h" },
     "using": [ [ "tailoring_nylon_patchwork", 22 ], [ "fastener_large", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_closures_waterproofing" }
-    ],
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ],
     "components": [ [ [ "strap_large", 2, "LIST" ] ] ]
   },
   {

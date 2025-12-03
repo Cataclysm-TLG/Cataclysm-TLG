@@ -1689,7 +1689,13 @@
     "time": "6 h 40 m",
     "using": [ [ "soldering_standard", 5 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "motor", 2 ] ], [ [ "power_supply", 6 ] ], [ [ "cable", 4 ] ], [ [ "steel_chunk", 6 ] ], [ [ "steel_fragment", 6 ] ] ]
+    "components": [
+      [ [ "motor", 2 ] ],
+      [ [ "power_supply", 6 ] ],
+      [ [ "cable", 4 ] ],
+      [ [ "steel_chunk", 6 ] ],
+      [ [ "steel_fragment", 6 ] ]
+    ]
   },
   {
     "result": "cable",
