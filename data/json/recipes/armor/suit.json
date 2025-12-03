@@ -135,7 +135,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_faux_fur_patchwork", 14 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
-    "byproducts": [ [ "faux_fur", 2 ], [ "scrap_faux_fur", 6 ] ]
+    "byproducts": [ [ "faux_fur", 2 ] ]
   },
   {
     "result": "armor_faux_farmor_xs",
@@ -143,7 +143,7 @@
     "copy-from": "armor_faux_farmor",
     "time": "8 h",
     "using": [ [ "tailoring_faux_fur_patchwork", 11 ] ],
-    "byproducts": [ [ "faux_fur", 5 ], [ "scrap_faux_fur", 5 ] ]
+    "byproducts": [ [ "faux_fur", 5 ] ]
   },
   {
     "result": "xl_armor_faux_farmor",
@@ -151,7 +151,7 @@
     "copy-from": "armor_faux_farmor",
     "time": "9 h",
     "using": [ [ "tailoring_faux_fur_patchwork", 16 ] ],
-    "byproducts": [ [ "faux_fur", 6 ], [ "scrap_faux_fur", 12 ] ]
+    "byproducts": [ [ "faux_fur", 6 ] ]
   },
   {
     "result": "leather_armor_suit",
@@ -674,7 +674,6 @@
     "autolearn": true,
     "using": [ [ "tailoring_denim_patchwork", 16 ], [ "strap_large", 2 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "byproducts": [ [ "scrap_denim", 20 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" } ]
   },
   {
@@ -1036,8 +1035,7 @@
     "time": "2 h",
     "book_learn": [ [ "mag_animecon", 1 ] ],
     "using": [ [ "tailoring_lycra_patchwork", 20 ] ],
-    "proficiencies": [ { "proficiency": "prof_elastics" } ],
-    "byproducts": [ [ "scrap_lycra", 3 ] ]
+    "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
     "result": "sleeping_bag_improvised",

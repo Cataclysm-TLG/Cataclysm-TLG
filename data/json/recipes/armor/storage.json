@@ -136,8 +136,7 @@
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
       { "proficiency": "prof_plasticworking" }
-    ],
-    "byproducts": [ [ "scrap_lycra", 9 ] ]
+    ]
   },
   {
     "result": "fanny",
@@ -257,8 +256,7 @@
     "difficulty": 4,
     "time": "6 h",
     "autolearn": true,
-    "using": [ [ "tailoring_canvas_patchwork", 14 ], [ "fastener_large", 1 ], [ "fastener_small", 4 ] ],
-    "byproducts": [ [ "scrap_canvas", 28 ] ]
+    "using": [ [ "tailoring_canvas_patchwork", 14 ], [ "fastener_large", 1 ], [ "fastener_small", 4 ] ]
   },
   {
     "result": "chestrig",
@@ -434,8 +432,7 @@
     "time": "8 h",
     "autolearn": true,
     "using": [ [ "tailoring_canvas_patchwork", 8 ], [ "fastener_large", 1 ], [ "plastic_molding", 2 ] ],
-    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ],
-    "byproducts": [ [ "scrap_canvas", 24 ] ]
+    "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ]
   },
   {
     "result": "baldric",
@@ -552,8 +549,7 @@
     "time": "1 h",
     "autolearn": true,
     "using": [ [ "tailoring_lycra_patchwork", 4 ] ],
-    "proficiencies": [ { "proficiency": "prof_elastics" } ],
-    "byproducts": [ [ "scrap_lycra", 2 ] ]
+    "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
     "result": "bbholster",
@@ -567,8 +563,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "using": [ [ "tailoring_lycra_patchwork", 8 ] ],
-    "proficiencies": [ { "proficiency": "prof_elastics" } ],
-    "byproducts": [ [ "scrap_lycra", 6 ] ]
+    "proficiencies": [ { "proficiency": "prof_elastics" } ]
   },
   {
     "result": "bindle",
@@ -1971,8 +1966,7 @@
     "autolearn": true,
     "using": [ [ "sewing_standard", 120 ], [ "tailoring_lycra_patchwork", 10 ], [ "fastener_small", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_closures_waterproofing" } ],
-    "components": [ [ [ "lycra_patch", 50 ] ], [ [ "dry_bag", 1 ] ], [ [ "plastic_sheet", 4 ] ], [ [ "duct_tape", 120 ] ] ],
-    "byproducts": [ [ "scrap_lycra", 9 ] ]
+    "components": [ [ [ "lycra_patch", 50 ] ], [ [ "dry_bag", 1 ] ], [ [ "plastic_sheet", 4 ] ], [ [ "duct_tape", 120 ] ] ]
   },
   {
     "result": "survivor_vest",

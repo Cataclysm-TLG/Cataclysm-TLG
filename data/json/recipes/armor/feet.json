@@ -195,8 +195,7 @@
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_furriery" }
-    ],
-    "byproducts": [ [ "scrap_faux_fur", 10 ] ]
+    ]
   },
   {
     "result": "xs_boots_faux_fur",
@@ -558,7 +557,6 @@
     "difficulty": 1,
     "time": "20 m",
     "book_learn": [ [ "tailor_japanese", 2 ] ],
-    "byproducts": [ [ "scrap_cotton", 4 ] ],
     "using": [ [ "tailoring_cotton", 2 ] ]
   },
   {
@@ -610,8 +608,7 @@
     "time": "1 m 30 s",
     "autolearn": true,
     "components": [ [ [ "sheet_faux_fur_patchwork", 2 ] ] ],
-    "flags": [ "BLIND_HARD" ],
-    "byproducts": [ [ "scrap_faux_fur", 6 ] ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "result": "footrags_leather",
@@ -746,8 +743,7 @@
     "skill_used": "tailor",
     "time": "1 h",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 1 ] ],
-    "byproducts": [ [ "scrap_cotton", 3 ] ]
+    "using": [ [ "tailoring_cotton_patchwork", 1 ] ]
   },
   {
     "result": "xssocks",
@@ -755,7 +751,7 @@
     "copy-from": "socks",
     "time": "1 h",
     "using": [ [ "tailoring_cotton_patchwork", 1 ] ],
-    "byproducts": [ [ "scrap_cotton", 1 ], [ "cotton_patchwork", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 2 ] ]
   },
   {
     "result": "xlsocks",
@@ -767,7 +763,7 @@
     "time": "1 h 12 m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork", 2 ] ],
-    "byproducts": [ [ "scrap_cotton", 2 ], [ "cotton_patchwork", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 2 ] ]
   },
   {
     "result": "socks_bag",
@@ -1046,7 +1042,7 @@
       [ "adhesive_rubber", 1 ],
       [ "sewing_aramids", 5 ]
     ],
-    "byproducts": [ [ "cotton_patchwork", 4 ], [ "scrap_cotton", 3 ], [ "scrap_kevlar", 14 ] ],
+    "byproducts": [ [ "cotton_patchwork", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_cobbling" }, { "proficiency": "prof_closures" }, { "proficiency": "prof_polymerworking" } ]
   },
   {
@@ -1065,8 +1061,7 @@
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
       { "proficiency": "prof_closures" }
-    ],
-    "byproducts": [ [ "scrap_leather", 2 ] ]
+    ]
   },
   {
     "result": "boots_bunker",

@@ -49,7 +49,7 @@
     "time": "80 m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork_simple", 33 ] ],
-    "byproducts": [ [ "cotton_patchwork", 6 ], [ "scrap_cotton", 2 ] ]
+    "byproducts": [ [ "cotton_patchwork", 6 ] ]
   },
   {
     "result": "gum_blanket",
@@ -79,7 +79,7 @@
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "cotton_ball", 150 ] ], [ [ "sheet_felt", 33 ] ], [ [ "filament", 200, "LIST" ] ] ],
     "//1": "Cotton balls act as the warm filling material for the quilt. 5L / 25mL per cotton ball = 200 cotton balls as an upper limit",
-    "byproducts": [ [ "felt_patch", 6 ], [ "scrap_felt", 2 ] ]
+    "byproducts": [ [ "felt_patch", 6 ] ]
   },
   {
     "result": "quilt_patchwork",
@@ -95,11 +95,11 @@
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "cotton_ball", 150 ], [ "gambeson_batting", 75 ] ],
-      [ [ "sheet_felt", 33 ], [ "sheet_felt_patchwork", 33 ], [ "scrap_felt", 264 ] ],
+      [ [ "sheet_felt", 33 ], [ "sheet_felt_patchwork", 33 ] ],
       [ [ "filament", 165, "LIST" ] ]
     ],
     "//": "Patchwork quilts are quicker to make because the crafter is primarily concerned about warmth, not beauty. Similar filling calculation as the quilt recipe.",
-    "byproducts": [ [ "felt_patch", 6 ], [ "scrap_felt", 2 ] ]
+    "byproducts": [ [ "felt_patch", 6 ] ]
   },
   {
     "result": "electric_blanket",
@@ -120,7 +120,7 @@
       [ [ "cable", 10 ] ],
       [ [ "amplifier", 1 ] ]
     ],
-    "byproducts": [ [ "sheet_nylon_patchwork", 6 ], [ "scrap_nylon", 2 ] ]
+    "byproducts": [ [ "sheet_nylon_patchwork", 6 ] ]
   },
   {
     "result": "gold_ring",
@@ -269,8 +269,7 @@
     "time": "85 m",
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork_simple", 33 ] ],
-    "components": [ [ [ "down_feather", 160 ] ] ],
-    "byproducts": [ [ "scrap_cotton", 2 ] ]
+    "components": [ [ [ "down_feather", 160 ] ] ]
   },
   {
     "result": "fur_blanket",
@@ -286,7 +285,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_cotton_patchwork_simple", 33 ], [ "tailoring_fur_patchwork_simple", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "byproducts": [ [ "cotton_patchwork", 6 ], [ "scrap_cotton", 2 ], [ "fur", 3 ] ]
+    "byproducts": [ [ "cotton_patchwork", 6 ], [ "fur", 3 ] ]
   },
   {
     "result": "fur_cat_tail",
@@ -320,8 +319,7 @@
       [ [ "faux_fur", 4 ] ],
       [ [ "cordage", 1, "LIST" ] ],
       [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ]
-    ],
-    "byproducts": [ [ "scrap_faux_fur", 2 ] ]
+    ]
   },
   {
     "result": "fur_collar",
@@ -351,8 +349,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
     "tools": [ [ [ "soldering_standard", 10, "LIST" ], [ "surface_heat", 10, "LIST" ] ] ],
-    "components": [ [ [ "faux_fur", 2 ] ], [ [ "scrap", 1 ] ] ],
-    "byproducts": [ [ "scrap_faux_fur", 3 ] ]
+    "components": [ [ [ "faux_fur", 2 ] ], [ [ "scrap", 1 ] ] ]
   },
   {
     "result": "leather_cat_tail",

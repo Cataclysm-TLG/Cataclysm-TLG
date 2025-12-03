@@ -56,7 +56,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ], [ "cotton_patchwork", 4 ], [ "scrap_cotton", 8 ] ] ],
+    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ], [ "cotton_patchwork", 4 ] ] ],
     "using": [ [ "sewing_standard", 10 ], [ "fastener_small", 2 ] ]
   },
   {
@@ -96,11 +96,9 @@
         [ "sheet_kevlar", 1 ],
         [ "sheet_kevlar_patchwork", 1 ],
         [ "kevlar_patch", 6 ],
-        [ "scrap_kevlar", 20 ],
         [ "sheet_nomex", 1 ],
         [ "sheet_nomex_patchwork", 1 ],
-        [ "nomex", 6 ],
-        [ "scrap_nomex", 20 ]
+        [ "nomex", 6 ]
       ]
     ],
     "using": [ [ "sewing_aramids", 20 ] ]
@@ -120,8 +118,7 @@
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
     "components": [ [ [ "sheet_lycra", 1 ], [ "sheet_lycra_patchwork", 1 ], [ "lycra_patch", 6 ] ] ],
-    "using": [ [ "sewing_standard", 20 ] ],
-    "byproducts": [ [ "scrap_lycra", 6 ] ]
+    "using": [ [ "sewing_standard", 20 ] ]
   },
   {
     "id": "prac_quilting",
