@@ -251,7 +251,7 @@
     "components": [
       [ [ "scrap_bronze", 4 ] ],
       [ [ "stick_long", 1 ] ],
-      [ [ "cotton_patchwork", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
+      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
     ]
   },
   {
@@ -355,7 +355,7 @@
     "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
@@ -396,7 +396,7 @@
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [
-      [ [ "cotton_patchwork", 1 ], [ "duct_tape", 50 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
+      [ [ "cotton_patch", 1 ], [ "duct_tape", 50 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
       [ [ "spike", 1 ] ]
     ]
   },
@@ -461,7 +461,7 @@
     "proficiencies": [ { "proficiency": "prof_carving", "skill_penalty": 0 } ],
     "components": [
       [ [ "long_pole", 1 ] ],
-      [ [ "cotton_patchwork", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
+      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
       [ [ "duct_tape", 20 ], [ "filament", 20, "LIST" ] ]
     ]
   },
@@ -484,7 +484,7 @@
     ],
     "components": [
       [ [ "long_pole", 1 ] ],
-      [ [ "cotton_patchwork", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
+      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
       [ [ "duct_tape", 20 ], [ "cordage_short", 1, "LIST" ], [ "filament", 50, "LIST" ] ],
       [ [ "copper_scrap_equivalent", 2, "LIST" ] ]
     ]

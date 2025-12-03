@@ -9,7 +9,7 @@
     "difficulty": 6,
     "time": "12 h",
     "autolearn": true,
-    "using": [ [ "tailoring_kevlar_fabric", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_polymerworking" } ]
   },
@@ -18,7 +18,7 @@
     "type": "recipe",
     "copy-from": "lsurvivor_suit",
     "time": "11 h",
-    "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
   },
   {
@@ -26,7 +26,7 @@
     "type": "recipe",
     "copy-from": "lsurvivor_suit",
     "time": "13 h",
-    "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
   },
   {
@@ -39,7 +39,7 @@
     "difficulty": 6,
     "time": "16 h",
     "autolearn": true,
-    "using": [ [ "tailoring_kevlar_fabric", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 20 ], [ "fabric_nylon", 2 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "components": [ [ [ "technician_coveralls", 1 ] ] ],
     "tools": [ [ [ "rubber_spray_can", 12 ] ] ],
     "proficiencies": [
@@ -54,7 +54,7 @@
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
     "time": "10 h",
-    "using": [ [ "tailoring_kevlar_fabric", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 35 ], [ "fabric_nylon", 1 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "tools": [ [ [ "rubber_spray_can", 10 ] ] ],
     "components": [ [ [ "technician_coveralls_xs", 1 ] ] ]
   },
@@ -64,7 +64,7 @@
     "copy-from": "survivor_suit",
     "activity_level": "LIGHT_EXERCISE",
     "time": "19 h",
-    "using": [ [ "tailoring_kevlar_fabric", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
+    "using": [ [ "tailoring_kevlar_sheet", 50 ], [ "fabric_nylon", 3 ], [ "fastener_large", 1 ], [ "clasps", 8 ] ],
     "tools": [ [ [ "rubber_spray_can", 18 ] ] ],
     "components": [ [ [ "technician_coveralls_xl", 1 ] ] ]
   },
@@ -122,7 +122,7 @@
       { "proficiency": "prof_polymerworking" }
     ],
     "components": [
-      [ [ "nylon", 10 ] ],
+      [ [ "nylon_patch", 10 ] ],
       [ [ "duct_tape", 200 ] ],
       [ [ "legrig", 1 ], [ "ragpouch", 6 ], [ "leather_pouch", 4 ], [ "dump_pouch", 2 ] ],
       [ [ "purse", 2 ], [ "fanny", 2 ], [ "mbag", 2 ] ]
@@ -140,8 +140,8 @@
     "time": "12 h 20 m",
     "autolearn": true,
     "using": [
-      [ "tailoring_kevlar_fabric", 20 ],
-      [ "tailoring_cotton_patchwork", 10 ],
+      [ "tailoring_kevlar_sheet", 20 ],
+      [ "tailoring_cotton_sheet", 10 ],
       [ "fabric_nomex", 2 ],
       [ "fastener_large", 1 ],
       [ "clasps", 8 ]
@@ -160,8 +160,8 @@
     "copy-from": "fsurvivor_suit",
     "time": "12 h 20 m",
     "using": [
-      [ "tailoring_kevlar_fabric", 35 ],
-      [ "tailoring_cotton_patchwork", 8 ],
+      [ "tailoring_kevlar_sheet", 35 ],
+      [ "tailoring_cotton_sheet", 8 ],
       [ "fabric_nomex", 1 ],
       [ "fastener_large", 1 ],
       [ "clasps", 8 ]
@@ -175,8 +175,8 @@
     "copy-from": "fsurvivor_suit",
     "time": "14 h 18 m",
     "using": [
-      [ "tailoring_kevlar_fabric", 50 ],
-      [ "tailoring_cotton_patchwork", 12 ],
+      [ "tailoring_kevlar_sheet", 50 ],
+      [ "tailoring_cotton_sheet", 12 ],
       [ "fabric_nomex", 3 ],
       [ "fastener_large", 1 ],
       [ "clasps", 12 ]

@@ -11,9 +11,9 @@
       [ [ "zipper_short_plastic", 3 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "snapfastener_steel", 5 ] ],
-      [ [ "sheet_nylon", 16 ] ],
-      [ [ "nylon", 18 ] ],
-      [ [ "cotton_patchwork", 4 ] ]
+      [ [ "nylon_sheet", 16 ] ],
+      [ [ "nylon_patch", 18 ] ],
+      [ [ "cotton_patch", 4 ] ]
     ]
   },
   {
@@ -32,10 +32,10 @@
       [ [ "zipper_short_plastic", 1 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "snapfastener_steel", 5 ] ],
-      [ [ "sheet_nylon", 20 ] ],
+      [ [ "nylon_sheet", 20 ] ],
       [ [ "sheet_cotton", 4 ] ],
-      [ [ "nylon", 10 ] ],
-      [ [ "cotton_patchwork", 8 ] ]
+      [ [ "nylon_patch", 10 ] ],
+      [ [ "cotton_patch", 8 ] ]
     ]
   },
   {
@@ -55,8 +55,8 @@
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patchwork", 5 ] ],
-      [ [ "sheet_faux_fur_patchwork", 5 ] ],
+      [ [ "sheet_cotton_patch", 5 ] ],
+      [ [ "faux_fur_sheet_patchwork", 5 ] ],
       [ [ "zipper_long_plastic", 3 ] ],
       [ [ "faux_fur", 3 ] ]
     ]
@@ -70,8 +70,8 @@
     "time": "14 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patchwork", 4 ] ],
-      [ [ "sheet_faux_fur_patchwork", 4 ] ],
+      [ [ "sheet_cotton_patch", 4 ] ],
+      [ [ "faux_fur_sheet_patchwork", 4 ] ],
       [ [ "zipper_long_plastic", 2 ] ],
       [ [ "faux_fur", 2 ] ]
     ]
@@ -85,8 +85,8 @@
     "time": "20 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patchwork", 5 ] ],
-      [ [ "sheet_faux_fur_patchwork", 5 ] ],
+      [ [ "sheet_cotton_patch", 5 ] ],
+      [ [ "faux_fur_sheet_patchwork", 5 ] ],
       [ [ "zipper_long_plastic", 4 ] ],
       [ [ "faux_fur", 4 ] ]
     ]
@@ -99,8 +99,8 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patchwork", 5 ] ],
-      [ [ "sheet_faux_fur_patchwork", 5 ] ],
+      [ [ "sheet_cotton_patch", 5 ] ],
+      [ [ "faux_fur_sheet_patchwork", 5 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "faux_fur", 2 ] ]
     ]
@@ -113,8 +113,8 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patchwork", 4 ] ],
-      [ [ "sheet_faux_fur_patchwork", 4 ] ],
+      [ [ "sheet_cotton_patch", 4 ] ],
+      [ [ "faux_fur_sheet_patchwork", 4 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "faux_fur", 2 ] ]
     ]
@@ -127,8 +127,8 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patchwork", 6 ] ],
-      [ [ "sheet_faux_fur_patchwork", 6 ] ],
+      [ [ "sheet_cotton_patch", 6 ] ],
+      [ [ "faux_fur_sheet_patchwork", 6 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "faux_fur", 2 ] ]
     ]
@@ -140,7 +140,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "15 m",
-    "components": [ [ [ "sheet_lycra", 6 ] ] ]
+    "components": [ [ [ "lycra_sheet", 6 ] ] ]
   },
   {
     "result": "vest_faux_fur",
@@ -149,7 +149,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "sheet_faux_fur_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sports_bra",
@@ -158,7 +158,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 2 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 2 ] ] ]
   },
   {
     "result": "xssports_bra",
@@ -167,7 +167,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 1 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 1 ] ] ]
   },
   {
     "result": "xlsports_bra",
@@ -176,7 +176,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 2 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 2 ] ] ]
   },
   {
     "result": "thermal_shirt",
@@ -185,7 +185,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "2 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 6 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 6 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur",
@@ -194,7 +194,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "sheet_faux_fur_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur_xs",
@@ -203,7 +203,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "sheet_faux_fur_patchwork", 3 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet_patchwork", 3 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur_xl",
@@ -212,7 +212,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "sheet_faux_fur_patchwork", 8 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet_patchwork", 8 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "under_armor",
@@ -221,7 +221,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 3 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 3 ] ] ]
   },
   {
     "result": "unitard",
@@ -230,7 +230,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "sheet_lycra_patchwork", 9 ] ] ]
+    "components": [ [ [ "lycra_sheet_patchwork", 9 ] ] ]
   },
   {
     "result": "jacket_light",
@@ -238,7 +238,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "4 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "zipper_long_plastic", 1 ] ], [ [ "sheet_cotton", 5 ] ], [ [ "cotton_patchwork", 5 ] ] ]
+    "components": [ [ [ "zipper_long_plastic", 1 ] ], [ [ "sheet_cotton", 5 ] ], [ [ "cotton_patch", 5 ] ] ]
   },
   {
     "result": "blazer",

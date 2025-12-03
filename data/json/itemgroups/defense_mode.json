@@ -69,7 +69,7 @@
     "id": "defense_caravan_components",
     "subtype": "collection",
     "items": [
-      { "item": "cotton_patchwork" },
+      { "item": "cotton_patch" },
       { "item": "fur" },
       { "item": "leather" },
       { "group": "superglue" },

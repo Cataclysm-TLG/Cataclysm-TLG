@@ -11,7 +11,7 @@
     "autolearn": true,
     "result_mult": 3,
     "components": [
-      [ [ "cotton_patchwork", 3 ], [ "medical_gauze", 1 ], [ "fibercloth_patchwork", 3 ] ],
+      [ [ "cotton_patch", 3 ], [ "medical_gauze", 1 ], [ "fibercloth_patch", 3 ] ],
       [ [ "duct_tape", 20 ], [ "medical_tape", 5 ] ],
       [
         [ "disinfectant", 5 ],
@@ -34,7 +34,7 @@
     "time": "5 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "fibercloth_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "fibercloth_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 2, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 2 ], [ "broom", 2 ], [ "2x4", 2 ], [ "pool_cue", 2 ], [ "mop", 2 ] ]
     ]
@@ -51,7 +51,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 5 ], [ "fibercloth_patchwork", 5 ], [ "medical_gauze", 2 ] ],
+      [ [ "cotton_patch", 5 ], [ "fibercloth_patch", 5 ], [ "medical_gauze", 2 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 50 ], [ "medical_tape", 25 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "mop", 1 ] ]
     ]
@@ -68,7 +68,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 2 ], [ "fibercloth_patchwork", 2 ], [ "medical_gauze", 1 ] ],
+      [ [ "cotton_patch", 2 ], [ "fibercloth_patch", 2 ], [ "medical_gauze", 1 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 25 ], [ "medical_tape", 10 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ] ]
     ]
@@ -85,7 +85,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "fibercloth_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "fibercloth_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 2 ], [ "broom", 2 ], [ "2x4", 2 ], [ "pool_cue", 2 ], [ "mop", 2 ] ]
     ]
@@ -102,7 +102,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "fibercloth_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "fibercloth_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 2, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 4 ], [ "broom", 4 ], [ "2x4", 4 ], [ "pool_cue", 4 ], [ "mop", 4 ] ]
     ]
@@ -119,7 +119,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 5 ], [ "fibercloth_patchwork", 10 ], [ "medical_gauze", 2 ] ],
+      [ [ "cotton_patch", 5 ], [ "fibercloth_patch", 10 ], [ "medical_gauze", 2 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ] ]
     ]
@@ -182,7 +182,7 @@
     "autolearn": true,
     "result_mult": 8,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_fibercloth", 1 ] ] ]
+    "components": [ [ [ "cotton_sheet", 1 ], [ "fibercloth_sheet", 1 ] ] ]
   },
   {
     "result": "bandages_makeshift",
@@ -195,6 +195,6 @@
     "autolearn": true,
     "result_mult": 1,
     "flags": [ "BLIND_EASY" ],
-    "components": [ [ [ "cotton_patchwork", 1 ], [ "fibercloth_patchwork", 1 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "fibercloth_patch", 1 ] ] ]
   }
 ]

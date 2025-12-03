@@ -6,7 +6,7 @@
     "color": "light_gray",
     "name": { "str": "grass yarn" },
     "category": "spare_parts",
-    "description": "Primitive yarn made from coarse plant fibers like straw or grass.  Too thick to sew with, but could be woven into a crude sheet of fabric.",
+    "description": "Primitive yarn made from coarse plant fibers like straw or grass.  It's too thick to sew with, but could be woven into a crude sheet of fabric.",
     "price": "10 cent",
     "material": [ "dry_plant" ],
     "weight": "100 g",
@@ -17,7 +17,7 @@
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "wool staple" },
-    "description": "A natural cluster of wool fibers.  Could be processed into felt patches or yarn.",
+    "description": "A natural cluster of wool fibers.  It could be processed into felt patches or spun into yarn.",
     "weight": "200 g",
     "volume": "500 ml",
     "price": "0 cent",
@@ -33,7 +33,7 @@
     "symbol": ",",
     "color": "brown",
     "name": { "str": "fur patch", "str_pl": "fur patches" },
-    "description": "A small bolt of fur from an animal, roughly six inches square.  Can be made into patchwork fur sheets or used to repair fur fabric.",
+    "description": "A small piece of preserved fur from an animal, roughly six inches square.",
     "price": "10 USD",
     "price_postapoc": "10 cent",
     "material": [ "fur", "leather" ],
@@ -49,7 +49,7 @@
     "color": "pink",
     "name": { "str": "faux fur patch", "str_pl": "faux fur patches" },
     "price_postapoc": "10 cent",
-    "description": "A small bolt of garishly-colored faux fur, roughly six inches square.  Can be made into patchwork faux fur sheets or used to repair faux fur fabric.",
+    "description": "A small piece of faux fur, roughly six inches square.",
     "flags": [ "NO_SALVAGE" ],
     "material": [ "faux_fur" ]
   },
@@ -90,7 +90,7 @@
     "symbol": ",",
     "color": "light_gray",
     "name": { "str": "Nomex patch", "str_pl": "Nomex patches" },
-    "description": "A six-inch square patch of Nomex fire-resistant fabric.",
+    "description": "A six-inch square patch of fire-resistant Nomex fabric.",
     "price": "40 USD",
     "price_postapoc": "20 cent",
     "material": [ "nomex" ],
@@ -116,9 +116,9 @@
   },
   {
     "type": "GENERIC",
-    "id": "sheet_leather",
+    "id": "leather_sheet",
     "name": { "str": "leather sheet" },
-    "description": "A sheet of leather.  Can be cut up or used as is.",
+    "description": "A sheet of tanned animal hide.",
     "category": "spare_parts",
     "material": [ "leather" ],
     "weight": "296 g",
@@ -130,10 +130,10 @@
   },
   {
     "type": "GENERIC",
-    "id": "sheet_leather_patchwork",
+    "id": "leather_sheet_patchwork",
     "name": { "str": "patchwork leather sheet" },
-    "description": "A sheet of leather sewn together from patches.  Can be cut up or used as is.",
-    "copy-from": "sheet_leather"
+    "description": "A sheet of leather sewn together from smaller patches.",
+    "copy-from": "leather_sheet"
   },
   {
     "type": "GENERIC",
@@ -153,11 +153,11 @@
   },
   {
     "type": "GENERIC",
-    "id": "tanned_pelt",
+    "id": "fur_sheet",
     "symbol": ",",
     "color": "brown",
     "name": { "str": "tanned pelt" },
-    "description": "A folded sheet of fur made from carefully tanned animal pelt.  Can be cut up or used as is.",
+    "description": "A sheet of tanned animal pelt with the fur intact.",
     "price": "50 USD",
     "price_postapoc": "5 USD",
     "material": [ "fur" ],
@@ -167,11 +167,11 @@
   },
   {
     "type": "GENERIC",
-    "id": "sheet_fur_patchwork",
+    "id": "fur_sheet_patchwork",
     "symbol": ",",
     "color": "brown",
     "name": { "str": "patchwork fur sheet" },
-    "description": "A 12-inch by 24-inch sheet of fur sewn together from patches.  Can be cut up or used as is.",
+    "description": "A sheet of fur stitched together from smaller pieces of tanned animal pelt.",
     "price": "25 USD",
     "price_postapoc": "2 USD 50 cent",
     "material": [ "fur" ],
@@ -184,7 +184,7 @@
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "cotton sheet" },
-    "description": "A 12-inch by 24-inch sheet of cotton fabric, suitable for making clothing.  You can use it to stop bleeding, but it would be better to actually make some bandages.",
+    "description": "A sheet of cotton fabric.  It can be used to stop bleeding, but it would be better to actually make some bandages.",
     "weight": "38 g",
     "volume": "47 ml",
     "//": "Medium weight cotton fabric with a GSM of 203",
@@ -197,21 +197,22 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_cotton_patchwork",
+    "id": "sheet_cotton_patch",
     "copy-from": "sheet_cotton",
     "type": "GENERIC",
     "name": { "str": "patchwork cotton sheet" },
-    "description": "A 12-inch by 24-inch sheet of cotton sewn together from patches of various clothing parts.  Suitable for making clothing if you lack proper material sheets.",
+    "description": "A sheet of cotton fabric sewn together from smaller pieces.  It can be used to stop bleeding, but it would be better to actually make some bandages.",
+    "use_action": { "type": "heal", "bandages_power": 1, "bleed": 8, "move_cost": 6000 },
     "//density": ".80 grams per mL, 203 GSM",
     "price": "2 USD",
     "price_postapoc": "20 cent"
   },
   {
-    "id": "sheet_faux_fur",
+    "id": "faux_fur_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "faux fur sheet" },
-    "description": "A 12-inch by 24-inch sheet of colorful faux fur, suitable for making clothing.",
+    "description": "A sheet of synthetic fur.",
     "weight": "372 g",
     "volume": "465 ml",
     "//": "Based on 2000gsm faux fur",
@@ -222,12 +223,11 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_faux_fur_patchwork",
-    "copy-from": "sheet_faux_fur",
+    "id": "faux_fur_sheet_patchwork",
+    "copy-from": "faux_fur_sheet",
     "type": "GENERIC",
     "name": { "str": "patchwork faux fur sheet" },
-    "description": "A 12-inch by 24-inch sheet of faux fur sewn together from mismatched patches.  Suitable for making clothing if you lack proper material sheets, but the bright, clashing colors might end up making you look like a diseased Muppet.",
-    "//": "12 inches by 24 inches with GSM of 2000",
+    "description": "A sheet of synthetic fur sewn together from smaller pieces.",
     "price": "10 USD",
     "price_postapoc": "50 cent"
   },
@@ -236,7 +236,7 @@
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "felt sheet" },
-    "description": "A 12-inch by 24-inch sheet of felt, suitable for making clothing.",
+    "description": "A sheet of fabric made from combed wool.",
     "weight": "28 g",
     "volume": "145 ml",
     "flags": [ "TINDER" ],
@@ -252,18 +252,17 @@
     "copy-from": "sheet_felt",
     "type": "GENERIC",
     "name": { "str": "patchwork felt sheet" },
-    "description": "A 12-inch by 24-inch sheet of felt sewn together from patches.  Suitable for making clothing if you lack proper material sheets.",
-    "//": "150GSM felt",
+    "description": "A sheet of fabric stitched together from smaller pieces of combed wool.",
     "flags": [ "TINDER" ],
     "price": "5 USD",
     "price_postapoc": "50 cent"
   },
   {
-    "id": "sheet_kevlar",
+    "id": "kevlar_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "Kevlar sheet" },
-    "description": "A 12-inch by 24-inch sheet of loose-woven Kevlar synthetic fabric, suitable for making durable cut and stab resistant clothing.  While protective, this kind of Kevlar is not suitable for making ballistic gear due to the difference in weave tightness.",
+    "description": "A sheet of loosely-woven Kevlar fabric.  This variety lacks in ballistic protection, but would be great for making cut-resistant garments.",
     "weight": "26 g",
     "volume": "51 ml",
     "//": "values taken from Duponts chemical reference. 144 GSM",
@@ -274,18 +273,18 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_kevlar_patchwork",
+    "id": "kevlar_sheet_patchwork",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "patchwork Kevlar sheet" },
-    "description": "A 12-inch by 24-inch sheet of fabric sewn together from Kevlar patches, suitable for making durable cut and stab resistant clothing.  This would be out of the question for ballistic Kevlar but the simpler, looser weave of this variety means it is fine to use if you lack proper material sheets.",
+    "description": "A sheet of loosely-woven Kevlar fabric stitched together from smaller patches of the stuff.  This variety lacks in ballistic protection, but would be great for making cut-resistant garments.",
     "weight": "26 g",
     "volume": "51 ml",
     "//": "values taken from Duponts chemical reference. 144 GSM",
     "price": "9 USD",
     "price_postapoc": "50 cent",
     "material": [ "kevlar" ],
-    "looks_like": "sheet_kevlar",
+    "looks_like": "kevlar_sheet",
     "symbol": "=",
     "color": "dark_gray"
   },
@@ -294,7 +293,7 @@
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "Kevlar patch", "str_pl": "Kevlar patches" },
-    "description": "A 6-inch square patch of loose-woven Kevlar, suitable for repairing cut and stab resistant clothing or reassembling into a patchwork sheet for sewing.",
+    "description": "A palm-sized square of loosely-woven Kevlar fabric.  This variety lacks in ballistic protection, but would be great for making cut-resistant garments.",
     "weight": "3250 mg",
     "volume": "5 ml",
     "//": "values taken from Duponts chemical reference. 144 GSM",
@@ -305,11 +304,11 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_lycra",
+    "id": "lycra_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "Lycra sheet" },
-    "description": "A sheet of synthetic fabric blended with stretchy Lycra fibers, suitable for making flexible, yet strong clothing.",
+    "description": "A sheet of synthetic fabric blended with stretchy Lycra fibers, also known as Spandex.",
     "weight": "33 g",
     "volume": "117 ml",
     "//": "180 GSM fabric",
@@ -320,11 +319,11 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_kevlar_layered",
+    "id": "kevlar_sheet_layered",
     "type": "TOOL",
     "category": "spare_parts",
     "name": { "str": "ballistic Kevlar panel" },
-    "description": "A small, 16-layer thick ballistic Kevlar panel.  This kind of Kevlar is precision-made by machine and features an extremely tight weave which cannot be replicated by hand.  Due to this, any damage incurred to your ballistic armor will necessitate complete replacement with a new panel.  It is not as effective as loose-woven Kevlar at stopping stab wounds, but it has no equal against the threat posed by firearms.",
+    "description": "A small 16-layer thick ballistic Kevlar panel.  This kind of Kevlar is precision-made by machine and features an extremely tight weave which cannot be replicated by hand.  Due to this, any damage incurred to your ballistic armor will necessitate complete replacement with a new panel.  It is not as effective as loose-woven Kevlar at stopping stab wounds, but it has no equal against the threat posed by firearms.",
     "weight": "428 g",
     "volume": "818 ml",
     "//": "12 inch by 24 inch sheets, 16 layers thick. Values actually nearly identically matched panels available for purchase.",
@@ -352,8 +351,8 @@
     "color": "green"
   },
   {
-    "id": "sheet_lycra_patchwork",
-    "copy-from": "sheet_lycra",
+    "id": "lycra_sheet_patchwork",
+    "copy-from": "lycra_sheet",
     "type": "GENERIC",
     "name": { "str": "patchwork Lycra sheet" },
     "description": "A 12-inch by 24-inch sheet of fabric sewn together from Lycra patches.  Suitable for making flexible, yet strong clothing if you lack proper material sheets.",
@@ -362,7 +361,7 @@
     "price_postapoc": "50 cent"
   },
   {
-    "id": "sheet_neoprene",
+    "id": "neoprene_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "neoprene sheet" },
@@ -377,8 +376,8 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_neoprene_patchwork",
-    "copy-from": "sheet_neoprene",
+    "id": "neoprene_sheet_patchwork",
+    "copy-from": "neoprene_sheet",
     "type": "GENERIC",
     "name": { "str": "patchwork neoprene sheet" },
     "description": "A sheet of neoprene sewn together from patches, with waterproofed seams.  Suitable for making underwater gear if you lack proper material sheets.",
@@ -387,7 +386,7 @@
     "price_postapoc": "60 cent"
   },
   {
-    "id": "sheet_nomex",
+    "id": "nomex_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "Nomex sheet" },
@@ -402,8 +401,8 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_nomex_patchwork",
-    "copy-from": "sheet_nomex",
+    "id": "nomex_sheet_patchwork",
+    "copy-from": "nomex_sheet",
     "type": "GENERIC",
     "name": { "str": "patchwork Nomex sheet" },
     "description": "A sheet of Nomex synthetic fabric, sewn together from patches using Nomex thread.  Suitable for making heat-resistant clothing if you lack proper material sheets.",
@@ -412,11 +411,11 @@
     "price_postapoc": "80 cent"
   },
   {
-    "id": "sheet_nylon",
+    "id": "nylon_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
-    "name": { "str": "synthetic fabric sheet" },
-    "description": "A sheet of synthetic fabric, suitable for making clothing.",
+    "name": { "str": "nylon sheet" },
+    "description": "A sheet of synthetic fabric.",
     "weight": "54 g",
     "volume": "48 ml",
     "//": ".25mm thick, 288 GSM (nylon 6,6 ranges 250-300 gsm)",
@@ -428,11 +427,11 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_nylon_patchwork",
-    "copy-from": "sheet_nylon",
+    "id": "nylon_sheet_patchwork",
+    "copy-from": "nylon_sheet",
     "type": "GENERIC",
-    "name": { "str_sp": "patchwork synthetic fabric sheet" },
-    "description": "A sheet of fabric, sewn together from synthetic fabric patches in a patchwork fashion.  Suitable for making most clothing, though it's much less time-efficient than if using proper material sheets.",
+    "name": { "str_sp": "patchwork nylon sheet" },
+    "description": "A sheet of synthetic fabric sewn together from smaller pieces.",
     "//": ".25mm thick, 288 GSM (nylon 6,6 ranges 250-300 gsm)",
     "//1": "1x2' sheet is 1858 cm^2 and at 288 gsm gives listed weight; density of 1.14g/cm^3 suggests about .25 mm thickness per sheet",
     "price": "10 USD",
@@ -493,7 +492,7 @@
     "stack_size": 200
   },
   {
-    "id": "sheet_denim",
+    "id": "denim_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "denim sheet" },
@@ -524,7 +523,7 @@
     "category": "spare_parts"
   },
   {
-    "id": "sheet_denim_patchwork",
+    "id": "denim_sheet_patchwork",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "patchwork denim sheet" },
@@ -538,7 +537,7 @@
     "color": "dark_gray"
   },
   {
-    "id": "sheet_canvas",
+    "id": "canvas_sheet",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "canvas sheet" },
@@ -590,7 +589,7 @@
     "category": "spare_parts"
   },
   {
-    "id": "sheet_canvas_patchwork",
+    "id": "canvas_sheet_patchwork",
     "type": "GENERIC",
     "category": "spare_parts",
     "name": { "str": "patchwork canvas sheet" },

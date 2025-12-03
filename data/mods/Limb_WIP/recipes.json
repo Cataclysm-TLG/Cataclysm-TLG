@@ -18,7 +18,7 @@
     ],
     "components": [
       [ [ "nail", 16 ] ],
-      [ [ "cotton_patchwork", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
+      [ [ "cotton_patch", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
     ]
   },
   {
@@ -40,7 +40,7 @@
     ],
     "components": [
       [ [ "nail", 16 ] ],
-      [ [ "cotton_patchwork", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
+      [ [ "cotton_patch", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
     ]
   },
   {
@@ -55,7 +55,7 @@
     "skills_required": [ [ "tailor", 3 ] ],
     "time": "1539 m",
     "book_learn": [ [ "textbook_armwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 14 ], [ "steel_standard", 3 ], [ "tailoring_leather_patchwork", 3 ] ],
+    "using": [ [ "blacksmithing_standard", 14 ], [ "steel_standard", 3 ], [ "tailoring_leather_sheet", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
     "proficiencies": [
@@ -78,7 +78,7 @@
     "skills_required": [ [ "tailor", 3 ] ],
     "time": "1539 m",
     "book_learn": [ [ "textbook_armwest", 6 ] ],
-    "using": [ [ "blacksmithing_standard", 14 ], [ "steel_standard", 3 ], [ "tailoring_leather_patchwork", 3 ] ],
+    "using": [ [ "blacksmithing_standard", 14 ], [ "steel_standard", 3 ], [ "tailoring_leather_sheet", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
     "proficiencies": [
@@ -137,7 +137,7 @@
     ],
     "components": [
       [ [ "nail", 20 ] ],
-      [ [ "cotton_patchwork", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
+      [ [ "cotton_patch", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
     ]
   },
   {
@@ -159,7 +159,7 @@
     ],
     "components": [
       [ [ "nail", 20 ] ],
-      [ [ "cotton_patchwork", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
+      [ [ "cotton_patch", 2 ], [ "cotton_ball", 4 ], [ "straw_pile", 2 ], [ "withered", 7 ], [ "pine_bough", 5 ] ]
     ]
   },
   {

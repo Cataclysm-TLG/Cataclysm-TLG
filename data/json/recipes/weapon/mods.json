@@ -783,7 +783,7 @@
     "time": "1 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "rope_natural_short", 1, "LIST" ], [ "cotton_patchwork", 3 ], [ "cordage", 6, "LIST" ] ] ]
+    "components": [ [ [ "rope_natural_short", 1, "LIST" ], [ "cotton_patch", 3 ], [ "cordage", 6, "LIST" ] ] ]
   },
   {
     "result": "shoulder_strap",
@@ -795,7 +795,7 @@
     "difficulty": 3,
     "time": "2 h",
     "autolearn": true,
-    "using": [ [ "tailoring_nylon_patchwork", 3 ] ],
+    "using": [ [ "tailoring_nylon_sheet", 3 ] ],
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "//": "This should be using plastic sliders, but we don't have any.",
     "components": [ [ [ "scrap", 2 ] ], [ [ "plastic_chunk", 2 ] ] ]
@@ -909,7 +909,7 @@
     "reversible": true,
     "autolearn": true,
     "using": [ [ "sewing_standard", 4 ] ],
-    "components": [ [ [ "cotton_patchwork", 4 ] ] ]
+    "components": [ [ [ "cotton_patch", 4 ] ] ]
   },
   {
     "type": "recipe",

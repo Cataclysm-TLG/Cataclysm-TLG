@@ -1015,7 +1015,7 @@
     "type": "GENERIC",
     "id": "drum_skin",
     "name": { "str": "drum skin" },
-    "copy-from": "sheet_leather",
+    "copy-from": "leather_sheet",
     "weight": "10 g",
     "description": "The tanned hide of an animal repurposed to become the head on a percussion drum."
   },

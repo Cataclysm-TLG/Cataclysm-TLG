@@ -35,7 +35,7 @@
       { "prob": 75, "group": "prussian_blue_bottle_plastic_pill_supplement_10" },
       { "group": "full_1st_aid", "prob": 30 },
       { "item": "gloves_medical", "prob": 20 },
-      { "item": "cotton_patchwork", "prob": 30, "custom-flags": [ "FILTHY" ] },
+      { "item": "cotton_patch", "prob": 30, "custom-flags": [ "FILTHY" ] },
       { "group": "drugs_emergency", "prob": 30 },
       { "group": "drugs_heal_simple", "prob": 20 },
       { "group": "drugs_analgesic", "prob": 10 }

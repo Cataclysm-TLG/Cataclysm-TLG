@@ -20,7 +20,7 @@
     "components": [
       [ [ "2x4", 4 ] ],
       [ [ "wooden_post_short", 6 ] ],
-      [ [ "cotton_patchwork", 35 ], [ "sheet_cotton", 5 ], [ "sheet_cotton_patchwork", 5 ], [ "sheet", 1 ] ],
+      [ [ "cotton_patch", 35 ], [ "sheet_cotton", 5 ], [ "sheet_cotton_patch", 5 ], [ "sheet", 1 ] ],
       [ [ "nuts_bolts", 12 ] ]
     ]
   },

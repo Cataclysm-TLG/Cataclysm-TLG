@@ -477,7 +477,7 @@
     "time": "8 m",
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "cotton_patchwork", 1 ] ], [ [ "2x4", 1 ], [ "stick", 1 ], [ "broom", 1 ], [ "mop", 1 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ] ], [ [ "2x4", 1 ], [ "stick", 1 ], [ "broom", 1 ], [ "mop", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -922,7 +922,7 @@
     ],
     "using": [ [ "blacksmithing_basic", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "cotton_patchwork", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ] ]
+    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1182,7 +1182,7 @@
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "leather", 1 ],
         [ "fur", 1 ],
@@ -1440,7 +1440,7 @@
     "components": [
       [ [ "material_aluminium_ingot", 1 ] ],
       [ [ "filament", 100, "LIST" ] ],
-      [ [ "cotton_patchwork", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
+      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
     ]
   },
   {

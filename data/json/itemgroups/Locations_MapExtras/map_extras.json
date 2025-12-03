@@ -201,7 +201,7 @@
     "subtype": "distribution",
     "id": "map_extra_casings",
     "entries": [
-      { "item": "cotton_patchwork", "custom-flags": [ "FILTHY" ] },
+      { "item": "cotton_patch", "custom-flags": [ "FILTHY" ] },
       { "item": "cigar_butt" },
       { "item": "cig_butt" },
       { "item": "can_drink" }

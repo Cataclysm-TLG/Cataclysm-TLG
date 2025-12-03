@@ -26,7 +26,7 @@
     "time": "6 h",
     "autolearn": true,
     "byproducts": [ [ "leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   },
   {
@@ -40,7 +40,7 @@
     "time": "6 h",
     "autolearn": true,
     "byproducts": [ [ "leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },

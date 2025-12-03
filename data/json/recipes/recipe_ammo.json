@@ -410,7 +410,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "arrow_wood", 1 ] ],
-      [ [ "cotton_patchwork", 1, "NO_RECOVER" ] ],
+      [ [ "cotton_patch", 1, "NO_RECOVER" ] ],
       [
         [ "lamp_oil", 50, "NO_RECOVER" ],
         [ "motor_oil", 50, "NO_RECOVER" ],
@@ -690,7 +690,7 @@
         [ "splinter", 2 ],
         [ "pinecone", 2 ],
         [ "pine_bough", 1 ],
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "paper", 5 ],
         [ "cardboard", 1 ],
         [ "rolling_paper", 30 ],
@@ -731,7 +731,7 @@
     "components": [
       [
         [ "pine_bough", 1 ],
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "paper", 5 ],
         [ "cardboard", 1 ],
         [ "rolling_paper", 30 ],

@@ -50,7 +50,7 @@
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
     "components": [
       [ [ "super_glue", 1 ] ],
-      [ [ "cotton_patchwork", 8 ], [ "fibercloth_patchwork", 8 ], [ "sheet_cotton", 1 ], [ "sheet_fibercloth", 1 ] ],
+      [ [ "cotton_patch", 8 ], [ "fibercloth_patch", 8 ], [ "cotton_sheet", 1 ], [ "fibercloth_sheet", 1 ] ],
       [ [ "plastic_chunk", 1 ] ]
     ]
   },
@@ -193,7 +193,7 @@
     "using": [ [ "cordage", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_carving" } ],
-    "components": [ [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "cotton_patchwork", 4 ], [ "fibercloth_patchwork", 4 ] ] ]
+    "components": [ [ [ "stick", 1 ], [ "2x4", 1 ] ], [ [ "cotton_patch", 4 ], [ "fibercloth_patch", 4 ] ] ]
   },
   {
     "type": "recipe",

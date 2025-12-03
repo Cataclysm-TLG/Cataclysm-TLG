@@ -15,7 +15,7 @@
     "components": [
       [ [ "camera", 1 ] ],
       [
-        [ "cotton_patchwork", 2 ],
+        [ "cotton_patch", 2 ],
         [ "leather", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
@@ -39,7 +39,7 @@
     "components": [
       [ [ "camera_pro", 1 ] ],
       [
-        [ "cotton_patchwork", 2 ],
+        [ "cotton_patch", 2 ],
         [ "leather", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
@@ -154,7 +154,7 @@
       [ [ "knife_butcher", 1 ] ],
       [ [ "knife_carving", 1 ] ],
       [ [ "knife_meat_cleaver", 1 ] ],
-      [ [ "leather", 2 ], [ "cotton_patchwork", 2 ] ],
+      [ [ "leather", 2 ], [ "cotton_patch", 2 ] ],
       [ [ "cordage_short", 2, "LIST" ] ]
     ]
   },
@@ -450,7 +450,7 @@
     ],
     "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
     "using": [ [ "sewing_standard", 100 ], [ "cordage", 2 ] ],
-    "components": [ [ [ "leather", 30 ], [ "sheet_leather", 5 ], [ "fur", 30 ], [ "tanned_pelt", 5 ] ], [ [ "wire", 2 ] ] ]
+    "components": [ [ [ "leather", 30 ], [ "leather_sheet", 5 ], [ "fur", 30 ], [ "fur_sheet", 5 ] ], [ [ "wire", 2 ] ] ]
   },
   {
     "result": "jack",
@@ -720,7 +720,7 @@
       [ [ "pipe", 2 ] ],
       [ [ "hd_pipe", 2 ] ],
       [ [ "sheet_metal_small", 2 ] ],
-      [ [ "cotton_patchwork", 2 ] ],
+      [ [ "cotton_patch", 2 ] ],
       [ [ "metal_tank", 1 ] ],
       [ [ "nitrogen_membrane_filter", 1 ] ],
       [ [ "cable", 10 ] ],
@@ -924,7 +924,7 @@
     "autolearn": true,
     "using": [ [ "flammable_liquid", 100 ] ],
     "components": [
-      [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ] ],
+      [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ],
       [ [ "stick", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "torch_done", 1 ] ]
     ],
     "flags": [ "BLIND_HARD" ]

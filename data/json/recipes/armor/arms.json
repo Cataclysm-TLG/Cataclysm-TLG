@@ -12,7 +12,7 @@
     "reversible": true,
     "using": [ [ "cordage_short", 2 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "2x4", 1 ] ], [ [ "cotton_patchwork", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
   },
   {
     "result": "arm_warmers",
@@ -24,21 +24,21 @@
     "difficulty": 1,
     "time": "60 m",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 1 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ]
   },
   {
     "result": "xs_arm_warmers",
     "type": "recipe",
     "copy-from": "arm_warmers",
     "time": "50 m",
-    "using": [ [ "tailoring_cotton_patchwork", 1 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 1 ] ]
   },
   {
     "result": "xl_arm_warmers",
     "type": "recipe",
     "copy-from": "arm_warmers",
     "time": "70 m",
-    "using": [ [ "tailoring_cotton_patchwork", 2 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 2 ] ]
   },
   {
     "result": "armguard_chitin",
@@ -115,7 +115,7 @@
     "skills_required": [ [ "tailor", 2 ] ],
     "time": "260 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 4 ], [ "tailor_portfolio", 3 ] ],
-    "using": [ [ "plastic_molding", 2 ], [ "tailoring_neoprene_patchwork", 2 ] ],
+    "using": [ [ "plastic_molding", 2 ], [ "tailoring_neoprene_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" }, { "proficiency": "prof_plasticworking" } ]
   },
   {
@@ -123,7 +123,7 @@
     "type": "recipe",
     "copy-from": "armguard_hard",
     "time": "260 m",
-    "using": [ [ "plastic_molding", 1 ], [ "tailoring_neoprene_patchwork", 1 ] ]
+    "using": [ [ "plastic_molding", 1 ], [ "tailoring_neoprene_sheet", 1 ] ]
   },
   {
     "result": "xl_armguard_hard",
@@ -131,7 +131,7 @@
     "copy-from": "armguard_hard",
     "time": "290 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 4 ], [ "tailor_portfolio", 3 ] ],
-    "using": [ [ "plastic_molding", 3 ], [ "tailoring_neoprene_patchwork", 3 ] ]
+    "using": [ [ "plastic_molding", 3 ], [ "tailoring_neoprene_sheet", 3 ] ]
   },
   {
     "result": "leather_arm_guards",
@@ -144,7 +144,7 @@
     "time": "6 h",
     "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
     "byproducts": [ [ "leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
@@ -159,7 +159,7 @@
     "time": "5 h",
     "byproducts": [ [ "leather", 6 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "tailoring_leather_patchwork", 3 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
+    "using": [ [ "tailoring_leather_sheet", 3 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {
     "result": "leather_arm_guards_xl",
@@ -168,7 +168,7 @@
     "time": "8 h",
     "byproducts": [ [ "leather", 2 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
-    "using": [ [ "tailoring_leather_patchwork", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
+    "using": [ [ "tailoring_leather_sheet", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
   {
     "result": "carpet_arm_guards",
@@ -287,7 +287,7 @@
     "difficulty": 3,
     "time": "280 m",
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 4 ], [ "tailor_portfolio", 3 ] ],
-    "using": [ [ "tailoring_cotton_patchwork", 4 ], [ "tailoring_neoprene_patchwork", 3 ] ],
+    "using": [ [ "tailoring_cotton_sheet", 4 ], [ "tailoring_neoprene_sheet", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ]
   },
   {
@@ -295,7 +295,7 @@
     "type": "recipe",
     "copy-from": "armguard_soft",
     "time": "280 m",
-    "using": [ [ "tailoring_cotton_patchwork", 3 ], [ "tailoring_neoprene_patchwork", 3 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 3 ], [ "tailoring_neoprene_sheet", 3 ] ]
   },
   {
     "result": "xl_armguard_soft",
@@ -303,7 +303,7 @@
     "copy-from": "armguard_soft",
     "time": "315 m",
     "byproducts": [ [ "neoprene", 2 ] ],
-    "using": [ [ "tailoring_cotton_patchwork", 5 ], [ "tailoring_neoprene_patchwork", 4 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 5 ], [ "tailoring_neoprene_sheet", 4 ] ]
   },
   {
     "result": "elbow_pads",
@@ -316,8 +316,8 @@
     "skills_required": [ [ "tailor", 1 ] ],
     "time": "120 m",
     "autolearn": true,
-    "byproducts": [ [ "cotton_patchwork", 2 ] ],
-    "using": [ [ "plastic_molding", 1 ], [ "tailoring_cotton_patchwork", 2 ] ],
+    "byproducts": [ [ "cotton_patch", 2 ] ],
+    "using": [ [ "plastic_molding", 1 ], [ "tailoring_cotton_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_plasticworking" } ]
   },
   {
@@ -330,7 +330,7 @@
     "difficulty": 1,
     "time": "330 m",
     "autolearn": true,
-    "using": [ [ "tailoring_cotton_patchwork", 11 ] ]
+    "using": [ [ "tailoring_cotton_sheet", 11 ] ]
   },
   {
     "result": "stockings_tent_arms",
@@ -358,7 +358,7 @@
     "time": "180 m",
     "autolearn": true,
     "byproducts": [ [ "leather", 2 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 2 ] ],
+    "using": [ [ "tailoring_leather_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   },
   {
@@ -385,7 +385,7 @@
     "difficulty": 4,
     "time": "3 h",
     "book_learn": [ [ "textbook_armwest", 3 ], [ "textbook_armschina", 3 ], [ "textbook_mesoam", 3 ] ],
-    "using": [ [ "tailoring_leather_patchwork", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -397,7 +397,7 @@
     "type": "recipe",
     "copy-from": "leather_pauldrons",
     "time": "2 h",
-    "using": [ [ "tailoring_leather_patchwork", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 2 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -409,7 +409,7 @@
     "type": "recipe",
     "copy-from": "leather_pauldrons",
     "time": "5 h",
-    "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -586,7 +586,7 @@
     "time": "12 h",
     "book_learn": [ [ "textbook_armwest", 5 ] ],
     "using": [
-      [ "tailoring_canvas_patchwork", 3 ],
+      [ "tailoring_canvas_sheet", 3 ],
       [ "blacksmithing_standard", 8 ],
       [ "steel_standard", 2 ],
       [ "fastener_small", 2 ],
@@ -607,7 +607,7 @@
     "copy-from": "brigandine_arm_guards",
     "time": "14 h",
     "using": [
-      [ "tailoring_canvas_patchwork", 4 ],
+      [ "tailoring_canvas_sheet", 4 ],
       [ "blacksmithing_standard", 12 ],
       [ "steel_standard", 3 ],
       [ "fastener_small", 2 ],
@@ -622,7 +622,7 @@
     "copy-from": "brigandine_arm_guards",
     "time": "12 h",
     "using": [
-      [ "tailoring_canvas_patchwork", 2 ],
+      [ "tailoring_canvas_sheet", 2 ],
       [ "blacksmithing_standard", 8 ],
       [ "steel_standard", 2 ],
       [ "fastener_small", 2 ],

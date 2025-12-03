@@ -49,7 +49,7 @@
       [ [ "link_sheet", 35 ] ],
       [ [ "chain_link", 917 ] ],
       [ [ "wire", 7 ] ],
-      [ [ "fur", 42 ], [ "tanned_pelt", 7 ], [ "leather", 42 ], [ "sheet_leather", 7 ] ]
+      [ [ "fur", 42 ], [ "fur_sheet", 7 ], [ "leather", 42 ], [ "leather_sheet", 7 ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_chain_armour" },
@@ -68,9 +68,9 @@
     "time": "12 h 30 m",
     "autolearn": true,
     "using": [
-      [ "tailoring_leather_patchwork", 55 ],
+      [ "tailoring_leather_sheet", 55 ],
       [ "armor_kevlar_layered", 24 ],
-      [ "tailoring_cotton_patchwork", 143 ],
+      [ "tailoring_cotton_sheet", 143 ],
       [ "clasps", 4 ]
     ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" }, { "proficiency": "prof_closures" } ],
@@ -87,7 +87,7 @@
     "time": "4 h 30 m",
     "byproducts": [ [ "leather", 21 ] ],
     "using": [ [ "sewing_standard", 30 ], [ "clasps", 4 ] ],
-    "components": [ [ [ "boiled_leather_armor_suit", 3 ] ], [ [ "cotton_patchwork", 18 ] ] ],
+    "components": [ [ [ "boiled_leather_armor_suit", 3 ] ], [ [ "cotton_patch", 18 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_closures" },
@@ -115,7 +115,7 @@
       [ "textbook_armschina", 6 ]
     ],
     "reversible": true,
-    "using": [ [ "tailoring_leather_patchwork", 55 ], [ "tailoring_cotton_patchwork", 55 ], [ "surface_heat", 60 ], [ "clasps", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 55 ], [ "tailoring_cotton_sheet", 55 ], [ "surface_heat", 60 ], [ "clasps", 4 ] ],
     "qualities": [ { "id": "COOK", "level": 3 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
@@ -181,7 +181,7 @@
       [ "textbook_armwest", 6 ],
       [ "textbook_armschina", 6 ]
     ],
-    "using": [ [ "tailoring_leather_patchwork", 29 ], [ "clasps", 4 ] ],
+    "using": [ [ "tailoring_leather_sheet", 29 ], [ "clasps", 4 ] ],
     "tools": [ [ [ "surface_heat", 60, "LIST" ] ] ],
     "components": [
       [ [ "water", 30 ], [ "water_clean", 30 ] ],
@@ -226,7 +226,7 @@
     "autolearn": true,
     "using": [ [ "clasps", 4 ] ],
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "duct_tape", 350 ] ], [ [ "plastic_sheet", 9 ] ], [ [ "cotton_patchwork", 70 ] ] ],
+    "components": [ [ [ "duct_tape", 350 ] ], [ [ "plastic_sheet", 9 ] ], [ [ "cotton_patch", 70 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" }, { "proficiency": "prof_closures" } ]
   },
   {
@@ -303,7 +303,7 @@
     "difficulty": 4,
     "time": "6 h",
     "autolearn": true,
-    "using": [ [ "tailoring_leather_patchwork", 4 ], [ "clasps", 2 ] ],
+    "using": [ [ "tailoring_leather_sheet", 4 ], [ "clasps", 2 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_closures" },

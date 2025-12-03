@@ -11,7 +11,7 @@
     "autolearn": true,
     "result_mult": 1,
     "components": [
-      [ [ "cotton_patchwork", 1 ] ],
+      [ [ "cotton_patch", 1 ] ],
       [ [ "duct_tape", 25 ], [ "medical_tape", 2 ] ],
       [ [ "disinfectant", 5 ], [ "thyme_oil", 1 ], [ "chem_ethanol", 250 ], [ "denat_alcohol", 250 ] ]
     ]
@@ -30,7 +30,7 @@
     "components": [
       [
         [ "sheet_cotton", 1 ],
-        [ "sheet_cotton_patchwork", 1 ],
+        [ "sheet_cotton_patch", 1 ],
         [ "bandages_makeshift", 2 ],
         [ "bandages_makeshift_boiled", 2 ],
         [ "bandages_makeshift_bleached", 2 ]
@@ -50,7 +50,7 @@
     "//": "using brute force, so not very precise, but still relatively fast;  can't make str requirement for the recipe; so assume relatively weak character tries to rip it",
     "//2": "Too simple to learn any tailoring or healthcare.",
     "result_mult": 2,
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ] ] ]
+    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ] ]
   },
   {
     "result": "medical_gauze_makeshift",
@@ -63,7 +63,7 @@
     "flags": [ "BLIND_EASY", "NO_MORALE_OK" ],
     "//2": "Too simple to learn any tailoring or healthcare.",
     "components": [
-      [ [ "cotton_patchwork", 1 ], [ "denim_patch", 1 ], [ "toilet_paper", 1 ] ],
+      [ [ "cotton_patch", 1 ], [ "denim_patch", 1 ], [ "toilet_paper", 1 ] ],
       [ [ "duct_tape", 25 ], [ "medical_tape", 2 ] ]
     ]
   },
@@ -79,7 +79,7 @@
     "flags": [ "BLIND_EASY", "NO_MORALE_OK" ],
     "result_mult": 3,
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patchwork", 1 ] ] ]
+    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ] ]
   },
   {
     "result": "bandages_makeshift_bleached",
@@ -323,7 +323,7 @@
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "//": "This is just a container, a tube pushed into your mouth, and knowing how to get a good flow rate without killing yourself or waking up in the middle of your chest surgery. Suitable only for inhalative anesthetics. See https://github.com/CleverRaven/Cataclysm-DDA/pull/44899 ",
-    "components": [ [ [ "jar_3l_glass_sealed", 1 ] ], [ [ "hose", 1 ], [ "makeshift_hose", 1 ] ], [ [ "cotton_patchwork", 2 ] ] ]
+    "components": [ [ [ "jar_3l_glass_sealed", 1 ] ], [ [ "hose", 1 ], [ "makeshift_hose", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -351,7 +351,7 @@
     "time": "5 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 2, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 2 ], [ "broom", 2 ], [ "2x4", 2 ], [ "pool_cue", 2 ], [ "mop", 2 ] ]
     ]
@@ -368,7 +368,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 5 ], [ "medical_gauze", 2 ] ],
+      [ [ "cotton_patch", 5 ], [ "medical_gauze", 2 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 50 ], [ "medical_tape", 25 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "mop", 1 ] ]
     ]
@@ -385,7 +385,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 2 ], [ "medical_gauze", 1 ] ],
+      [ [ "cotton_patch", 2 ], [ "medical_gauze", 1 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 25 ], [ "medical_tape", 10 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ] ]
     ]
@@ -402,7 +402,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 2 ], [ "broom", 2 ], [ "2x4", 2 ], [ "pool_cue", 2 ], [ "mop", 2 ] ]
     ]
@@ -419,7 +419,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 10 ], [ "medical_gauze", 4 ] ],
+      [ [ "cotton_patch", 10 ], [ "medical_gauze", 4 ] ],
       [ [ "cordage", 2, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 4 ], [ "broom", 4 ], [ "2x4", 4 ], [ "pool_cue", 4 ], [ "mop", 4 ] ]
     ]
@@ -436,7 +436,7 @@
     "time": "2 m",
     "autolearn": true,
     "components": [
-      [ [ "cotton_patchwork", 5 ], [ "medical_gauze", 2 ] ],
+      [ [ "cotton_patch", 5 ], [ "medical_gauze", 2 ] ],
       [ [ "cordage", 1, "LIST" ], [ "duct_tape", 100 ], [ "medical_tape", 50 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ] ]
     ]

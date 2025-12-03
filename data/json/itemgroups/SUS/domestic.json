@@ -299,7 +299,7 @@
       { "item": "xacto", "prob": 35, "damage": [ 0, 4 ] },
       { "item": "yarn", "prob": 30, "charges": [ 60, 200 ] },
       { "item": "razor_blade", "count": [ 1, 4 ], "prob": 30 },
-      { "item": "cotton_patchwork", "count": [ 3, 4 ], "prob": 50 },
+      { "item": "cotton_patch", "count": [ 3, 4 ], "prob": 50 },
       { "item": "rubber_spray_can", "prob": 3, "charges": [ 0, 10 ] },
       { "item": "thread", "prob": 30 },
       { "item": "thread", "prob": 30 },
@@ -529,7 +529,7 @@
     "subtype": "collection",
     "entries": [
       { "item": "detergent", "prob": 40, "charges": [ 1, 40 ], "container-item": "box_small" },
-      { "item": "cotton_patchwork", "count": [ 1, 3 ] },
+      { "item": "cotton_patch", "count": [ 1, 3 ] },
       { "item": "dish_towel", "prob": 7, "count": [ 1, 6 ], "damage": [ 0, 2 ] },
       { "item": "brush", "prob": 20, "damage": [ 0, 2 ] },
       { "item": "sponge", "prob": 40, "damage": [ 0, 2 ] },

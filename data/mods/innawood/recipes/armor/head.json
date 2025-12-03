@@ -11,7 +11,7 @@
     "autolearn": true,
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "skull_canis", 1 ] ] ],
-    "using": [ [ "tailoring_leather_patchwork_simple", 2 ] ],
+    "using": [ [ "tailoring_leather_sheet_simple", 2 ] ],
     "byproducts": [ [ "leather", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },

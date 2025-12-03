@@ -216,7 +216,7 @@
     "components": [
       [ [ "flashlight", 1 ] ],
       [
-        [ "cotton_patchwork", 2 ],
+        [ "cotton_patch", 2 ],
         [ "leather", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
@@ -240,7 +240,7 @@
     "components": [
       [ [ "heavy_flashlight", 1 ] ],
       [
-        [ "cotton_patchwork", 4 ],
+        [ "cotton_patch", 4 ],
         [ "leather", 4 ],
         [ "duct_tape", 20 ],
         [ "medical_tape", 40 ],
@@ -270,7 +270,7 @@
       [ [ "wire", 2 ] ],
       [ [ "lens", 1 ], [ "lens_small", 1 ] ],
       [
-        [ "cotton_patchwork", 4 ],
+        [ "cotton_patch", 4 ],
         [ "leather", 4 ],
         [ "duct_tape", 20 ],
         [ "medical_tape", 40 ],
@@ -291,7 +291,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [
       [ [ "scrap", 1 ] ],
-      [ [ "cotton_patchwork", 1 ], [ "cordage_superior_short", 1, "LIST" ] ],
+      [ [ "cotton_patch", 1 ], [ "cordage_superior_short", 1, "LIST" ] ],
       [ [ "bottle_glass", 1 ], [ "flask_glass", 1 ], [ "jar_glass_sealed", 1 ] ],
       [ [ "clay_teapot", 1 ], [ "jug_clay", 1 ], [ "can_food", 1 ], [ "can_drink", 1 ], [ "canister_empty", 1 ] ]
     ]
@@ -312,7 +312,7 @@
     "components": [
       [ [ "water", 1 ], [ "water_clean", 1 ] ],
       [ [ "clay_lump", 3 ] ],
-      [ [ "cotton_patchwork", 1 ], [ "cordage_superior_short", 1, "LIST" ] ]
+      [ [ "cotton_patch", 1 ], [ "cordage_superior_short", 1, "LIST" ] ]
     ]
   },
   {
@@ -328,7 +328,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "components": [
       [ [ "scrap", 1 ] ],
-      [ [ "cotton_patchwork", 1 ], [ "cordage_superior_short", 1, "LIST" ] ],
+      [ [ "cotton_patch", 1 ], [ "cordage_superior_short", 1, "LIST" ] ],
       [ [ "bottle_glass", 1 ], [ "flask_glass", 1 ], [ "jar_glass_sealed", 1 ] ],
       [ [ "clay_teapot", 1 ], [ "jug_clay", 1 ], [ "can_food", 1 ], [ "can_drink", 1 ], [ "canister_empty", 1 ] ]
     ]

@@ -33,7 +33,7 @@
     "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "leather", 1 ],
         [ "fur", 1 ],
@@ -70,7 +70,7 @@
     "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "leather", 1 ],
         [ "fur", 1 ],
@@ -95,7 +95,7 @@
     "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "leather", 1 ],
         [ "fur", 1 ],
@@ -120,7 +120,7 @@
     "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
     "components": [
       [
-        [ "cotton_patchwork", 1 ],
+        [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
         [ "leather", 1 ],
         [ "fur", 1 ],
@@ -360,7 +360,7 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "glass_shard_large", 1 ] ], [ [ "cotton_patchwork", 1 ], [ "duct_tape", 10 ] ] ]
+    "components": [ [ [ "glass_shard_large", 1 ] ], [ [ "cotton_patch", 1 ], [ "duct_tape", 10 ] ] ]
   },
   {
     "type": "recipe",
