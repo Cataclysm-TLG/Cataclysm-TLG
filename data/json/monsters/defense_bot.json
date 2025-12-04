@@ -22,6 +22,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "modular_m16a4",
@@ -78,6 +79,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m202_flash",
@@ -133,6 +135,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 8,
         "move_cost": 80,
         "gun_type": "firework_cannon",
@@ -178,6 +181,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "modular_m16a4",
