@@ -130,11 +130,7 @@
     "id": "Zomborg_CBM_harvest_charging_tools",
     "type": "item_group",
     "subtype": "distribution",
-    "entries": [
-      { "item": "bio_ethanol", "prob": 50 },
-      { "item": "bio_fuel_cell_gasoline", "prob": 50 },
-      { "item": "bio_torsionratchet", "prob": 200 }
-    ]
+    "entries": [ { "item": "bio_cable", "prob": 100 }, { "item": "bio_torsionratchet", "prob": 200 } ]
   },
   {
     "id": "Zomborg_CBM_harvest_expensive_combat_systems",
