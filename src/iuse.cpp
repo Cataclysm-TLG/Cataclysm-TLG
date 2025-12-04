@@ -5002,7 +5002,7 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
             !critter->dodge_check( hit_roll ) ) {
             blind = true;
             if( critter->in_species( species_ROBOT ) ) {
-                critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
+                critter->add_effect( effect_blind, rng( 5_seconds, 10_seconds ) );
             } else {
                 critter->add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
             }

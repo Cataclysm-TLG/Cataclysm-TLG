@@ -23,6 +23,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "hk_mp5",
@@ -112,6 +113,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m2browning",
@@ -173,6 +175,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m249",
@@ -234,6 +237,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m240",
@@ -297,6 +301,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "pseudo_m203",
