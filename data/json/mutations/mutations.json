@@ -1500,12 +1500,14 @@
   {
     "type": "mutation",
     "id": "MEATARIAN",
-    "name": { "str": "Hates Vegetables" },
+    "name": { "str": "Fiber Intolerance" },
     "points": -2,
     "description": "You have problems with eating vegetables.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
     "valid": false,
     "starting_trait": true,
     "vitamins_absorb_multi": [ [ "vegetable", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
+    "changes_to": [ "CARNIVORE" ],
+    "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ],
     "cancels": [ "HERBIVORE", "RUMINANT", "GRAZER" ]
   },
   {
@@ -1521,7 +1523,7 @@
   {
     "type": "mutation",
     "id": "ANTIFRUIT",
-    "name": { "str": "Hates Fruit" },
+    "name": { "str": "Fruit Intolerance" },
     "points": -3,
     "description": "Eating fruits always causes your stomach to ache.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
     "valid": false,
@@ -1552,12 +1554,13 @@
   {
     "type": "mutation",
     "id": "ANTIWHEAT",
-    "name": { "str": "Grain Intolerance" },
+    "name": { "str": "Gluten Intolerance" },
     "points": -2,
     "description": "You have a rare allergy that prevents you from eating wheat.  It's possible for you to eat wheat-based products, but you will suffer morale penalties and obtain less nutrition from them.",
     "vitamins_absorb_multi": [ [ "wheat", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
     "starting_trait": true,
-    "category": [ "CHIROPTERAN" ]
+    "changes_to": [ "CARNIVORE" ],
+    "category": [ "CHIROPTERAN", "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ]
   },
   {
     "type": "mutation",
@@ -7305,6 +7308,8 @@
     "description": "Your body's ability to digest fruits, vegetables, grains and nuts is severely hampered.  You've largely lost your taste for everything but meat, but your nutritional needs have largely adjusted to suit your new lifestyle.",
     "types": [ "DIET" ],
     "cancels": [ "VEGAN" ],
+    "prereqs": [ "MEATARIAN" ],
+    "prereqs2": [ "ANTIWHEAT" ],
     "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ],
     "vitamin_rates": [ [ "vitC", 900 ] ]
   },
