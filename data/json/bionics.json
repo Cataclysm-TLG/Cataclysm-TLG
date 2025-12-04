@@ -562,8 +562,8 @@
     "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
-      { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 3 } ] },
-      { "condition": "ALWAYS", "values": [ { "value": "DEXTERITY", "add": -1 } ] }
+      { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "DEXTERITY", "add": -1 } ] }
     ],
     "act_cost": "4 J",
     "react_cost": "4 J",
@@ -687,8 +687,8 @@
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
     "occupied_bodyparts": [ [ "head", 1 ] ],
     "enchantments": [
-      { "condition": "ACTIVE", "values": [ { "value": "PERCEPTION", "add": 3 } ] },
-      { "condition": "ALWAYS", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
+      { "condition": "ACTIVE", "values": [ { "value": "PERCEPTION", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
     ],
     "flags": [ "BIONIC_NPC_USABLE" ],
     "act_cost": "4 J",
@@ -962,8 +962,8 @@
     "occupied_bodyparts": [ [ "head", 6 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
-      { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 3 } ] },
-      { "condition": "ALWAYS", "values": [ { "value": "INTELLIGENCE", "add": -1 } ] }
+      { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "INTELLIGENCE", "add": -1 } ] }
     ],
     "act_cost": "4 J",
     "react_cost": "4 J",
@@ -1388,8 +1388,8 @@
     "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
-      { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 3 } ] },
-      { "condition": "ALWAYS", "values": [ { "value": "STRENGTH", "add": -1 } ] }
+      { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "STRENGTH", "add": -1 } ] }
     ],
     "act_cost": "4 J",
     "react_cost": "4 J",
