@@ -2,7 +2,7 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "urban_35_1", "urban_35_2" ], [ "urban_35_3", "urban_35_4" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_1", "hospital_mission_rescue_pilot_2" ], [ "hospital_mission_rescue_pilot_3", "hospital_mission_rescue_pilot_4" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -129,7 +129,7 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "urban_35_5", "urban_35_6", "urban_35_34" ], [ "urban_35_7", "urban_35_8", "urban_35_35" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_5", "hospital_mission_rescue_pilot_6", "hospital_mission_rescue_pilot_34" ], [ "hospital_mission_rescue_pilot_7", "hospital_mission_rescue_pilot_8", "hospital_mission_rescue_pilot_35" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -259,7 +259,7 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "urban_35_9", "urban_35_10" ], [ "urban_35_11", "urban_35_12" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_9", "hospital_mission_rescue_pilot_10" ], [ "hospital_mission_rescue_pilot_11", "hospital_mission_rescue_pilot_12" ] ],
     "//": "patient floor",
     "weight": 250,
     "object": {
@@ -368,7 +368,7 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "urban_35_13", "urban_35_14" ], [ "urban_35_15", "urban_35_16" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_13", "hospital_mission_rescue_pilot_14" ], [ "hospital_mission_rescue_pilot_15", "hospital_mission_rescue_pilot_16" ] ],
     "//": "patient floor",
     "weight": 250,
     "object": {
@@ -480,7 +480,7 @@
     "type": "mapgen",
     "method": "json",
     "//": "surgical floor",
-    "om_terrain": [ [ "urban_35_17", "urban_35_18" ], [ "urban_35_19", "urban_35_20" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_17", "hospital_mission_rescue_pilot_18" ], [ "hospital_mission_rescue_pilot_19", "hospital_mission_rescue_pilot_20" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -591,7 +591,7 @@
     "type": "mapgen",
     "method": "json",
     "//": "maternity floor",
-    "om_terrain": [ [ "urban_35_21", "urban_35_22" ], [ "urban_35_23", "urban_35_24" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_21", "hospital_mission_rescue_pilot_22" ], [ "hospital_mission_rescue_pilot_23", "hospital_mission_rescue_pilot_24" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -714,7 +714,7 @@
     "type": "mapgen",
     "method": "json",
     "//": "admin and cafe floor",
-    "om_terrain": [ [ "urban_35_25", "urban_35_26" ], [ "urban_35_27", "urban_35_28" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_25", "hospital_mission_rescue_pilot_26" ], [ "hospital_mission_rescue_pilot_27", "hospital_mission_rescue_pilot_28" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -769,7 +769,7 @@
         "................................................"
       ],
       "palettes": [ "hospital_2" ],
-      "place_vehicles": [ { "vehicle": "helicopters_no_wreck", "x": 10, "y": 6, "chance": 75, "rotation": 270 } ],
+      "place_vehicles": [ { "vehicle": "Medevac1", "x": 10, "y": 6, "chance": 100, "rotation": 270 } ],
       "furniture": { "7": "f_bed" },
       "items": {
         "p": [
@@ -812,10 +812,9 @@
         ]
       },
       "place_monsters": [
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 5, 22 ], "density": 0.5 },
         { "monster": "GROUP_ZOMBIE", "x": [ 25, 43 ], "y": [ 16, 22 ], "density": 0.1 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 25, 30 ], "y": [ 5, 14 ], "density": 0.3 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 25, 31 ], "density": 0.5 },
+        { "monster": "GROUP_ZOMBIE", "x": [ 25, 30 ], "y": [ 5, 14 ], "density": 0.2 },
+        { "monster": "GROUP_ZOMBIE", "x": [ 1, 22 ], "y": [ 25, 31 ], "density": 0.4 },
         { "monster": "GROUP_ZOMBIE", "x": [ 25, 43 ], "y": [ 25, 31 ], "density": 0.1 }
       ]
     }
@@ -823,7 +822,7 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "urban_35_29", "urban_35_30" ], [ "urban_35_31", "urban_35_32" ] ],
+    "om_terrain": [ [ "hospital_mission_rescue_pilot_29", "hospital_mission_rescue_pilot_30" ], [ "hospital_mission_rescue_pilot_31", "hospital_mission_rescue_pilot_32" ] ],
     "weight": 250,
     "object": {
       "fill_ter": "t_flat_roof",
@@ -893,17 +892,13 @@
         "L": [ { "item": "jackets", "chance": 50 }, { "item": "bags", "chance": 50 } ],
         "r": [ { "item": "tools_mechanic", "chance": 40 }, { "item": "tools_common", "chance": 80 } ]
       },
-      "furniture": { "1": "f_water_purifier", "G": "f_generator_broken" },
-      "place_monsters": [
-        { "monster": "GROUP_ZOMBIE", "x": [ 3, 20 ], "y": [ 5, 20 ], "density": 0.06 },
-        { "monster": "GROUP_ZOMBIE", "x": [ 3, 20 ], "y": [ 25, 30 ], "density": 0.06 }
-      ]
+      "furniture": { "1": "f_water_purifier", "G": "f_generator_broken" }
     }
   },
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ "urban_35_33" ],
+    "om_terrain": [ "hospital_mission_rescue_pilot_33" ],
     "weight": 250,
     "object": {
       "fill_ter": "t_flat_roof",

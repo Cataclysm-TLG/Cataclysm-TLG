@@ -238,7 +238,7 @@
     "type": "GENERIC",
     "category": "weapons",
     "name": { "str": "survival knife", "str_pl": "survival knives" },
-    "description": "This large knife looks scary at first, but its hollow handle, the compass built into its pommel, and the saw teeth along the spine reveal that it's more of a cheap toy for wannabe survivalists.",
+    "description": "This large knife looks scary at first, but its hollow handle, the compass built into its pommel, and the saw teeth along the spine reveal that it's more of a novelty for wannabe survivalists.",
     "weight": "422 g",
     "volume": "344 ml",
     "longest_side": "36 cm",
