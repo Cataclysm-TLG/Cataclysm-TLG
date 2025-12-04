@@ -3442,5 +3442,50 @@
     "type": "MIGRATION",
     "id": "sheet_cotton_patch",
     "replace": "cotton_sheet_patchwork"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_lampoil",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_fuel_cell_gasoline",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_ethanol",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_ethanol",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_fuel_cell_gasoline",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_lampoil",
+    "to": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_ethanol_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_oil_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_gasoline_tank",
+    "replace": "wristwatch"
   }
 ]
