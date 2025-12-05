@@ -59,7 +59,7 @@
     "type": "item_group",
     "id": "NC_MOTORHEAD_vest",
     "subtype": "distribution",
-    "entries": [ { "item": "null", "prob": 50 }, { "item": "kevlar", "prob": 50 } ]
+    "entries": [ { "item": "null", "prob": 50 }, { "item": "ballistic_vest_concealable", "prob": 50 } ]
   },
   {
     "type": "item_group",

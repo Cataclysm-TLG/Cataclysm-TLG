@@ -141,7 +141,7 @@
       [ [ "awl_steel", 1 ] ],
       [ [ "needle_curved", 1 ] ],
       [ [ "splinter", 3 ], [ "bone", 2 ] ],
-      [ [ "leather", 2 ] ]
+      [ [ "leather_patch", 2 ] ]
     ]
   },
   {

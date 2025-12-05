@@ -795,7 +795,7 @@
       { "item": "boots_combat", "prob": 10 },
       { "item": "gloves_tactical", "prob": 10 },
       { "item": "jumpsuit", "prob": 20 },
-      { "item": "kevlar", "prob": 10 },
+      { "item": "ballistic_vest_concealable", "prob": 10 },
       { "item": "officer_uniform", "prob": 5 },
       { "item": "combo_cover", "prob": 5 },
       { "group": "military_ballistic_vest", "prob": 40 },

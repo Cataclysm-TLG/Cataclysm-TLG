@@ -88,7 +88,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_blacksmithing" } ],
     "qualities": [ { "id": "ANVIL", "level": 3 }, { "id": "HAMMER", "level": 3 }, { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "tongs", -1 ] ], [ [ "hotcut", -1 ] ] ],
-    "components": [ [ [ "scrap", 2 ] ], [ [ "splinter", 5 ], [ "bone", 2 ] ], [ [ "leather", 2 ] ] ]
+    "components": [ [ [ "scrap", 2 ] ], [ [ "splinter", 5 ], [ "bone", 2 ] ], [ [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",

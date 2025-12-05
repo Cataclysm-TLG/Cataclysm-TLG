@@ -5,6 +5,6 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "20 m",
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "thread", 15 ] ], [ [ "sheet_cotton", 2 ] ], [ [ "cotton_patch", 2 ] ] ]
+    "components": [ [ [ "thread", 15 ] ], [ [ "cotton_sheet", 2 ] ], [ [ "cotton_patch", 2 ] ] ]
   }
 ]

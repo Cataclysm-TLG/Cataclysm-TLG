@@ -3331,7 +3331,7 @@
   {
     "type": "MIGRATION",
     "id": "sheet_lycra_patchwork",
-    "replace": "spandex_sheet_patchwork"
+    "replace": "spandex_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3341,17 +3341,17 @@
   {
     "type": "MIGRATION",
     "id": "sheet_denim_patchwork",
-    "replace": "denim_sheet_patchwork"
+    "replace": "denim_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_leather_patchwork",
-    "replace": "leather_sheet_patchwork"
+    "replace": "leather_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_fur_patchwork",
-    "replace": "fur_sheet_patchwork"
+    "replace": "fur_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3361,12 +3361,12 @@
   {
     "type": "MIGRATION",
     "id": "sheet_faux_fur_patchwork",
-    "replace": "faux_fur_sheet_patchwork"
+    "replace": "faux_fur_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_canvas_patchwork",
-    "replace": "canvas_sheet_patchwork"
+    "replace": "canvas_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3391,17 +3391,17 @@
   {
     "type": "MIGRATION",
     "id": "sheet_nomex_patchwork",
-    "replace": "nomex_sheet_patchwork"
+    "replace": "nomex_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_neoprene_patchwork",
-    "replace": "neoprene_sheet_patchwork"
+    "replace": "neoprene_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_nylon_patchwork",
-    "replace": "nylon_sheet_patchwork"
+    "replace": "nylon_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3411,12 +3411,17 @@
   {
     "type": "MIGRATION",
     "id": "sheet_kevlar_patchwork",
-    "replace": "kevlar_sheet_patchwork"
+    "replace": "kevlar_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_cotton_patchwork",
-    "replace": "cotton_sheet_patchwork"
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton",
+    "replace": "cotton_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3431,7 +3436,7 @@
   {
     "type": "MIGRATION",
     "id": "lycra_sheet_patchwork",
-    "replace": "spandex_sheet_patchwork"
+    "replace": "spandex_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3441,7 +3446,7 @@
   {
     "type": "MIGRATION",
     "id": "sheet_cotton_patch",
-    "replace": "cotton_sheet_patchwork"
+    "replace": "cotton_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3487,5 +3492,95 @@
     "type": "MIGRATION",
     "id": "internal_gasoline_tank",
     "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cotton_sheet_patchwork",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "felt_sheet_patchwork",
+    "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex_sheet_patchwork",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spandex_sheet_patchwork",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar_sheet_patchwork",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nylon_sheet_patchwork",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather_sheet_patchwork",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur_sheet_patchwork",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur_sheet_patchwork",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "canvas_sheet_patchwork",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "denim_sheet_patchwork",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather",
+    "replace": "leather_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur",
+    "replace": "fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex",
+    "replace": "nomex_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "neoprene",
+    "replace": "neoprene_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur",
+    "replace": "faux_fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar",
+    "replace": "ballistic_vest_concealable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rigid_kevlar_plate",
+    "replace": "kevlar_plate"
   }
 ]

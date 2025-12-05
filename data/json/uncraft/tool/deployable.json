@@ -9,7 +9,7 @@
       [ [ "sheet_metal_small", 2 ] ],
       [ [ "steel_fragment", 3 ] ],
       [ [ "scrap", 17 ] ],
-      [ [ "sheet_cotton", 1 ] ],
+      [ [ "cotton_sheet", 1 ] ],
       [ [ "cotton_patch", 7 ] ]
     ]
   },

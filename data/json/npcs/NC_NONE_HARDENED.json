@@ -47,7 +47,7 @@
     "subtype": "distribution",
     "entries": [
       { "group": "military_ballistic_vest", "prob": 25 },
-      { "item": "kevlar", "prob": 25 },
+      { "item": "ballistic_vest_concealable", "prob": 25 },
       { "item": "chestguard_hard", "prob": 10 },
       { "group": "survivorzed_tops", "prob": 10 }
     ]

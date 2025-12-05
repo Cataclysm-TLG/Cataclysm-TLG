@@ -239,7 +239,7 @@
     "time": "12 s",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 1 ] ] ]
   },
   {
     "result": "jacket_leather",
@@ -247,7 +247,7 @@
     "time": "10 m",
     "activity_level": "LIGHT_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 18 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 18 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "rad_badge",
@@ -271,7 +271,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 1 ] ], [ [ "plastic_chunk", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ] ], [ [ "plastic_chunk", 1 ] ] ]
   },
   {
     "result": "faux_fur_cat_ears",
@@ -279,7 +279,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 1 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 1 ] ] ]
   },
   {
     "result": "fur_cat_tail",
@@ -287,7 +287,7 @@
     "time": "2 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 1 ] ], [ [ "plastic_chunk", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ] ], [ [ "plastic_chunk", 1 ] ] ]
   },
   {
     "result": "faux_fur_cat_tail",
@@ -295,7 +295,7 @@
     "time": "2 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 1 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 1 ] ] ]
   },
   {
     "result": "fur_collar",
@@ -303,7 +303,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ] ] ]
   },
   {
     "result": "faux_fur_collar",
@@ -311,7 +311,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 1 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 1 ] ] ]
   },
   {
     "result": "gartersheath",
@@ -327,7 +327,7 @@
     "time": "1 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 1 ] ] ]
   },
   {
     "result": "leather_cat_tail",
@@ -335,7 +335,7 @@
     "time": "2 m",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 1 ] ] ]
   },
   {
     "result": "alarmclock",
@@ -523,7 +523,7 @@
     "time": "20 s",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "fur", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ] ] ]
   },
   {
     "result": "bikini_top_leather",
@@ -531,7 +531,7 @@
     "time": "20 s",
     "activity_level": "NO_EXERCISE",
     "qualities": [ { "id": "CUT_FINE", "level": 1 } ],
-    "components": [ [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 1 ] ] ]
   },
   {
     "result": "blade",
@@ -548,7 +548,7 @@
     "skill_used": "tailor",
     "time": "3 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 8 ] ], [ [ "scrap", 2 ] ], [ [ "sole_rubber", 2 ] ] ]
+    "components": [ [ [ "leather_patch", 8 ] ], [ [ "scrap", 2 ] ], [ [ "sole_rubber", 2 ] ] ]
   },
   {
     "result": "sneakers_steel",
@@ -558,7 +558,7 @@
     "time": "4 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "leather", 2 ] ],
+      [ [ "leather_patch", 2 ] ],
       [ [ "plastic_chunk", 2 ] ],
       [ [ "cotton_patch", 3 ] ],
       [ [ "scrap", 2 ] ],
@@ -578,7 +578,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "20 s",
-    "components": [ [ [ "leather", 1 ] ], [ [ "splinter", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "splinter", 1 ] ] ]
   },
   {
     "result": "broken_EMP_hack",
@@ -1933,7 +1933,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "12 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 11 ] ] ]
+    "components": [ [ [ "cotton_sheet", 11 ] ] ]
   },
   {
     "result": "national_flag",
@@ -1941,7 +1941,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet", 7 ] ], [ [ "sheet_cotton", 6 ] ] ]
+    "components": [ [ [ "lycra_sheet", 6 ] ] ]
   },
   {
     "result": "pride_flag",
@@ -1949,7 +1949,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet", 7 ] ], [ [ "sheet_cotton", 6 ] ] ]
+    "components": [ [ [ "lycra_sheet", 6 ] ] ]
   },
   {
     "result": "american_flag",
@@ -1957,7 +1957,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet", 7 ] ], [ [ "sheet_cotton", 6 ] ] ]
+    "components": [ [ [ "lycra_sheet", 6 ] ] ]
   },
   {
     "result": "state_flag",
@@ -1965,32 +1965,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet", 7 ] ], [ [ "sheet_cotton", 6 ] ] ]
-  },
-  {
-    "result": "sheet_cotton_patch",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "10 s",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "cotton_patch", 8 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "result": "cotton_patch",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "2 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "thread", 4 ] ] ]
-  },
-  {
-    "result": "canvas_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "10 s",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "canvas_patch", 8 ] ] ]
+    "components": [ [ [ "lycra_sheet", 6 ] ] ]
   },
   {
     "result": "canvas_sheet",
@@ -2017,23 +1992,15 @@
     "components": [ [ [ "denim_patch", 8 ] ] ]
   },
   {
-    "result": "denim_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "10 s",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_patch", 8 ] ] ]
-  },
-  {
-    "result": "faux_fur_sheet_patchwork",
+    "result": "faux_fur_sheet",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 8 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 8 ] ] ]
   },
   {
-    "result": "sheet_felt_patchwork",
+    "result": "felt_sheet",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "1 m",
@@ -2041,55 +2008,7 @@
     "components": [ [ [ "felt_patch", 8 ] ] ]
   },
   {
-    "result": "fur_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 8 ] ] ]
-  },
-  {
-    "result": "leather_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 8 ] ] ]
-  },
-  {
-    "result": "spandex_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "spandex_patch", 8 ] ] ]
-  },
-  {
-    "result": "nylon_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "nylon_patch", 8 ] ] ]
-  },
-  {
-    "result": "neoprene_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "neoprene", 8 ] ] ]
-  },
-  {
-    "result": "nomex_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "1 m",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "nomex", 8 ] ] ]
-  },
-  {
-    "result": "nomex",
+    "result": "nomex_patch",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "2 m",
@@ -2102,7 +2021,7 @@
     "time": "2 m",
     "activity_level": "LIGHT_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 8 ] ] ]
+    "components": [ [ [ "leather_patch", 8 ] ] ]
   },
   {
     "result": "fur_sheet",
@@ -2110,7 +2029,7 @@
     "time": "2 m",
     "activity_level": "LIGHT_EXERCISE",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 8 ] ] ]
+    "components": [ [ [ "fur_patch", 8 ] ] ]
   },
   {
     "result": "eink_tablet_pc",
@@ -2208,7 +2127,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 4 ] ], [ [ "string_6", 3 ] ] ]
+    "components": [ [ [ "leather_patch", 4 ] ], [ [ "string_6", 3 ] ] ]
   },
   {
     "result": "glass",
@@ -2414,7 +2333,7 @@
     "result": "knife_butcher",
     "time": "10 m",
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "spike", 1 ], [ "steel_fragment", 4 ], [ "scrap", 20 ] ], [ [ "leather", 1 ], [ "fur", 1 ] ] ]
+    "components": [ [ [ "spike", 1 ], [ "steel_fragment", 4 ], [ "scrap", 20 ] ], [ [ "leather_patch", 1 ], [ "fur_patch", 1 ] ] ]
   },
   {
     "type": "uncraft",
@@ -3346,7 +3265,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 3 ] ] ],
+    "components": [ [ [ "cotton_sheet", 3 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3356,7 +3275,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 3 ] ] ],
+    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "cotton_patch", 4 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3366,7 +3285,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 3 ] ], [ [ "button_plastic", 2 ] ] ],
+    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "button_plastic", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3376,7 +3295,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 3 ] ], [ [ "button_plastic", 11 ] ] ],
+    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "cotton_patch", 4 ] ], [ [ "button_plastic", 11 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3386,7 +3305,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 4 ] ], [ [ "button_plastic", 11 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "cotton_patch", 4 ] ], [ [ "button_plastic", 11 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3396,7 +3315,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 3 ] ], [ [ "button_plastic", 11 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "cotton_patch", 4 ] ], [ [ "button_plastic", 11 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -3405,7 +3324,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "6 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 1 ] ] ],
+    "components": [ [ [ "cotton_sheet", 1 ] ] ],
     "flags": [ "BLIND_EASY" ]
   },
   {
@@ -3875,7 +3794,7 @@
     "activity_level": "NO_EXERCISE",
     "skill_used": "fabrication",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 25 ] ], [ [ "thread", 16 ] ] ],
+    "components": [ [ [ "cotton_sheet", 25 ] ], [ [ "thread", 16 ] ] ],
     "flags": [ "BLIND_EASY" ]
   },
   {
@@ -3884,7 +3803,7 @@
     "activity_level": "NO_EXERCISE",
     "skill_used": "fabrication",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "leather", 50 ] ], [ [ "thread", 8 ] ] ],
+    "components": [ [ [ "leather_patch", 50 ] ], [ [ "thread", 8 ] ] ],
     "flags": [ "BLIND_EASY" ]
   },
   {
@@ -4574,16 +4493,6 @@
     "components": [ [ [ "kevlar_patch", 8 ] ] ]
   },
   {
-    "result": "kevlar_sheet_patchwork",
-    "type": "uncraft",
-    "activity_level": "LIGHT_EXERCISE",
-    "time": "1 m",
-    "skill_used": "tailor",
-    "difficulty": 1,
-    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_patch", 8 ] ] ]
-  },
-  {
     "result": "kevlar_patch",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
@@ -4607,7 +4516,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 6 ] ] ]
+    "components": [ [ [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "bag_garbage",
@@ -4653,7 +4562,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 4 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather_patch", 4 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4661,7 +4570,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 16 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather_patch", 16 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4669,7 +4578,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather", 16 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "leather_patch", 16 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4677,7 +4586,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "nomex", 24 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "nomex_patch", 24 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4685,7 +4594,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur", 8 ] ], [ [ "leather", 10 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur_patch", 8 ] ], [ [ "leather_patch", 10 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4693,7 +4602,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur", 6 ] ], [ [ "leather", 8 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur_patch", 6 ] ], [ [ "leather_patch", 8 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4701,7 +4610,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "3 m",
-    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur", 10 ] ], [ [ "leather", 12 ] ] ],
+    "components": [ [ [ "sole_rubber", 1 ] ], [ [ "fur_patch", 10 ] ], [ [ "leather_patch", 12 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4709,7 +4618,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "24 s",
-    "components": [ [ [ "sheet_cotton", 1 ] ], [ [ "cotton_patch", 8 ] ] ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 8 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -4717,7 +4626,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "24 s",
-    "components": [ [ [ "sheet_cotton", 1 ] ], [ [ "cotton_patch", 4 ] ] ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 4 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -4725,7 +4634,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "24 s",
-    "components": [ [ [ "fur", 3 ] ] ],
+    "components": [ [ [ "fur_patch", 3 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -4733,7 +4642,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "24 s",
-    "components": [ [ [ "faux_fur", 3 ] ] ],
+    "components": [ [ [ "faux_fur_patch", 3 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -4749,7 +4658,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "60 s",
-    "components": [ [ [ "sheet_cotton_patch", 4 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "cotton_patch", 1 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4757,7 +4666,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "1 m",
-    "components": [ [ [ "sheet_cotton_patch", 4 ] ], [ [ "button_plastic", 3 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "cotton_patch", 2 ] ], [ [ "button_plastic", 3 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4767,7 +4676,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton_patch", 4 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4777,7 +4686,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 2 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
+    "components": [ [ [ "denim_sheet", 2 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4787,7 +4696,7 @@
     "skill_used": "tailor",
     "time": "45 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 1 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
+    "components": [ [ [ "denim_sheet", 1 ] ], [ [ "button_plastic", 1 ] ], [ [ "zipper_short_plastic", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4797,7 +4706,7 @@
     "skill_used": "tailor",
     "time": "2 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 4 ] ], [ [ "button_steel", 5 ] ] ],
+    "components": [ [ [ "denim_sheet", 4 ] ], [ [ "button_steel", 5 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4807,7 +4716,7 @@
     "skill_used": "tailor",
     "time": "1 m 30 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 3 ] ], [ [ "button_steel", 5 ] ] ],
+    "components": [ [ [ "denim_sheet", 3 ] ], [ [ "button_steel", 5 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4817,7 +4726,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 2 ] ], [ [ "button_steel", 5 ] ] ],
+    "components": [ [ [ "denim_sheet", 2 ] ], [ [ "button_steel", 5 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4827,7 +4736,7 @@
     "skill_used": "tailor",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 1 ] ], [ [ "button_plastic", 1 ] ] ],
+    "components": [ [ [ "denim_sheet", 1 ] ], [ [ "button_plastic", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4837,7 +4746,7 @@
     "skill_used": "tailor",
     "time": "5 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 6 ] ] ],
+    "components": [ [ [ "denim_sheet", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4847,7 +4756,7 @@
     "skill_used": "tailor",
     "time": "5 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 2 ] ], [ [ "denim_patch", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ],
+    "components": [ [ [ "denim_sheet", 2 ] ], [ [ "denim_patch", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4857,7 +4766,7 @@
     "skill_used": "tailor",
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "denim_sheet_patchwork", 6 ] ] ],
+    "components": [ [ [ "denim_sheet", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -4865,7 +4774,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "30 m",
-    "components": [ [ [ "leather", 16 ] ], [ [ "leather_sheet", 8 ] ] ],
+    "components": [ [ [ "leather_patch", 16 ] ], [ [ "leather_sheet", 8 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -4873,7 +4782,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 m",
-    "components": [ [ [ "sheet_cotton", 1 ] ], [ [ "sheet_cotton_patch", 2 ] ], [ [ "fur", 8 ] ] ],
+    "components": [ [ [ "cotton_sheet", 4 ] ], [ [ "fur_patch", 8 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ]
   },
   {
@@ -4917,28 +4826,12 @@
     "components": [ [ [ "material_aluminium_ingot", 3 ] ] ]
   },
   {
-    "result": "sheet_cotton",
+    "result": "cotton_sheet",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "cotton_patch", 8 ] ] ]
-  },
-  {
-    "result": "faux_fur_sheet",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "30 s",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 8 ] ] ]
-  },
-  {
-    "result": "sheet_felt",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "time": "30 s",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "felt_patch", 8 ] ] ]
   },
   {
     "result": "spandex_sheet",
@@ -4954,7 +4847,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "neoprene", 8 ] ] ]
+    "components": [ [ [ "nomex_patch", 8 ] ] ]
   },
   {
     "result": "nomex_sheet",
@@ -4962,7 +4855,7 @@
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "nomex", 8 ] ] ]
+    "components": [ [ [ "nomex_patch", 8 ] ] ]
   },
   {
     "result": "nylon_sheet",
@@ -5062,7 +4955,7 @@
     "difficulty": 1,
     "time": "10 s",
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "scrap_aluminum", 4 ] ], [ [ "leather", 2 ] ] ]
+    "components": [ [ [ "scrap_aluminum", 4 ] ], [ [ "leather_patch", 2 ] ] ]
   },
   {
     "result": "tent_kit",
@@ -5275,7 +5168,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "30 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 1 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "material_aluminium_ingot", 29 ] ], [ [ "sheet_cotton", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
+    "components": [ [ [ "material_aluminium_ingot", 29 ] ], [ [ "cotton_sheet", 1 ] ], [ [ "cotton_patch", 2 ] ] ]
   },
   {
     "result": "stethoscope",
@@ -5564,7 +5457,7 @@
     "components": [
       [ [ "plank_short", 2 ] ],
       [ [ "nuts_bolts", 12 ] ],
-      [ [ "sheet_cotton", 3 ] ],
+      [ [ "cotton_sheet", 3 ] ],
       [ [ "cotton_patch", 6 ] ],
       [ [ "splinter", 22 ] ]
     ]
@@ -5592,7 +5485,7 @@
     "time": "60 m",
     "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SAW_W", "level": 2 }, { "id": "SCREW", "level": 1 } ],
     "components": [
-      [ [ "sheet_cotton", 13 ] ],
+      [ [ "cotton_sheet", 13 ] ],
       [ [ "cotton_patch", 6 ] ],
       [ [ "wooden_post_short", 6 ] ],
       [ [ "wood_block", 4 ] ],
@@ -5622,7 +5515,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "45 m",
     "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "leather", 6 ] ], [ [ "steel_fragment", 29 ] ], [ [ "scrap", 2 ] ] ]
+    "components": [ [ [ "leather_patch", 6 ] ], [ [ "steel_fragment", 29 ] ], [ [ "scrap", 2 ] ] ]
   },
   {
     "result": "chair_folding",
@@ -5950,7 +5843,7 @@
     "skill_used": "tailor",
     "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 20 ] ], [ [ "thread_kevlar", 80 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 20 ] ], [ [ "thread_kevlar", 80 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5960,7 +5853,7 @@
     "skill_used": "tailor",
     "time": "10 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 15 ] ], [ [ "thread_kevlar", 50 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 15 ] ], [ [ "thread_kevlar", 50 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5970,7 +5863,7 @@
     "skill_used": "tailor",
     "time": "20 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 50 ] ], [ [ "thread_kevlar", 150 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 50 ] ], [ [ "thread_kevlar", 150 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5980,7 +5873,7 @@
     "skill_used": "tailor",
     "time": "20 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 40 ] ], [ [ "thread_kevlar", 130 ] ], [ [ "nylon_sheet_patchwork", 10 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 40 ] ], [ [ "thread_kevlar", 130 ] ], [ [ "nylon_sheet", 10 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5990,7 +5883,7 @@
     "skill_used": "tailor",
     "time": "90 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 180 ] ], [ [ "thread_kevlar", 500 ] ], [ [ "denim_sheet_patchwork", 40 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 180 ] ], [ [ "thread_kevlar", 500 ] ], [ [ "denim_sheet", 40 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -6000,7 +5893,7 @@
     "skill_used": "tailor",
     "time": "8 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 4 ] ], [ [ "thread_kevlar", 15 ] ], [ [ "denim_sheet_patchwork", 2 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 15 ] ], [ [ "denim_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -6010,12 +5903,7 @@
     "skill_used": "tailor",
     "time": "32 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "kevlar_sheet_patchwork", 22 ] ],
-      [ [ "thread_kevlar", 65 ] ],
-      [ [ "nomex_sheet_patchwork", 22 ] ],
-      [ [ "spandex_sheet_patchwork", 6 ] ]
-    ],
+    "components": [ [ [ "kevlar_sheet", 22 ] ], [ [ "thread_kevlar", 65 ] ], [ [ "nomex_sheet", 22 ] ], [ [ "spandex_sheet", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -6025,12 +5913,7 @@
     "skill_used": "tailor",
     "time": "36 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [
-      [ [ "kevlar_sheet_patchwork", 20 ] ],
-      [ [ "thread_kevlar", 60 ] ],
-      [ [ "nomex_sheet_patchwork", 20 ] ],
-      [ [ "spandex_sheet_patchwork", 6 ] ]
-    ],
+    "components": [ [ [ "kevlar_sheet", 20 ] ], [ [ "thread_kevlar", 60 ] ], [ [ "nomex_sheet", 20 ] ], [ [ "spandex_sheet", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -6040,7 +5923,7 @@
     "skill_used": "tailor",
     "time": "60 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet_patchwork", 30 ] ], [ [ "thread_kevlar", 90 ] ], [ [ "nomex_sheet_patchwork", 30 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 30 ] ], [ [ "thread_kevlar", 90 ] ], [ [ "nomex_sheet", 30 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

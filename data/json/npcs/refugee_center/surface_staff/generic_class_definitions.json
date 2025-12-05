@@ -35,7 +35,10 @@
         ],
         "prob": 100
       },
-      { "distribution": [ { "item": "kevlar", "prob": 80 }, { "item": "tacvest", "prob": 40 } ], "prob": 70 },
+      {
+        "distribution": [ { "item": "ballistic_vest_concealable", "prob": 80 }, { "item": "tacvest", "prob": 40 } ],
+        "prob": 70
+      },
       {
         "distribution": [
           { "item": "glasses_safety", "prob": 20 },

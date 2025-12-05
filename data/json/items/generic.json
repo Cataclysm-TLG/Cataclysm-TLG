@@ -3128,7 +3128,7 @@
   },
   {
     "type": "GENERIC",
-    "id": "neoprene",
+    "id": "neoprene_patch",
     "symbol": ",",
     "color": "dark_gray",
     "name": { "str": "neoprene patch", "str_pl": "neoprene patches" },

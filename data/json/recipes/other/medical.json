@@ -29,8 +29,7 @@
     "result_mult": 2,
     "components": [
       [
-        [ "sheet_cotton", 1 ],
-        [ "sheet_cotton_patch", 1 ],
+        [ "cotton_sheet", 1 ],
         [ "bandages_makeshift", 2 ],
         [ "bandages_makeshift_boiled", 2 ],
         [ "bandages_makeshift_bleached", 2 ]
@@ -50,7 +49,7 @@
     "//": "using brute force, so not very precise, but still relatively fast;  can't make str requirement for the recipe; so assume relatively weak character tries to rip it",
     "//2": "Too simple to learn any tailoring or healthcare.",
     "result_mult": 2,
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ] ]
+    "components": [ [ [ "cotton_sheet", 1 ] ] ]
   },
   {
     "result": "medical_gauze_makeshift",
@@ -79,7 +78,7 @@
     "flags": [ "BLIND_EASY", "NO_MORALE_OK" ],
     "result_mult": 3,
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ] ]
+    "components": [ [ [ "cotton_sheet", 1 ] ] ]
   },
   {
     "result": "bandages_makeshift_bleached",

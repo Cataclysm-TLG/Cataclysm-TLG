@@ -398,7 +398,7 @@
       [ "vest_leather_mod", 8 ],
       [ "stab_vest", 8 ],
       [ "soft_3a_vest", 5 ],
-      [ "kevlar", 10 ],
+      [ "ballistic_vest_concealable", 10 ],
       [ "chainmail_junk_vest", 1 ],
       [ "chainmail_vest", 1 ],
       [ "chestguard_hard", 10 ],

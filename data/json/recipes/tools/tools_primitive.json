@@ -398,7 +398,7 @@
     "time": "5 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "material_sand", 1 ] ], [ [ "leather", 1 ] ] ]
+    "components": [ [ [ "material_sand", 1 ] ], [ [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",

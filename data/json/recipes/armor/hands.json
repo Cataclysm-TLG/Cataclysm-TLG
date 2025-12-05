@@ -273,7 +273,7 @@
     "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
-      [ [ "faux_fur", 4 ] ],
+      [ [ "faux_fur_patch", 4 ] ],
       [ [ "kevlar_patch", 8 ] ],
       [ [ "gloves_tactical", 1 ], [ "gloves_faux_fur", 1 ], [ "gloves_light", 1 ] ]
     ]
@@ -286,7 +286,7 @@
     "using": [ [ "sewing_standard", 37 ], [ "tailoring_kevlar_sheet", 1 ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
-      [ [ "faux_fur", 3 ] ],
+      [ [ "faux_fur_patch", 3 ] ],
       [ [ "kevlar_patch", 6 ] ],
       [ [ "gloves_tactical", 1 ], [ "xs_gloves_faux_fur", 1 ], [ "xs_gloves_light", 1 ] ]
     ],
@@ -301,7 +301,7 @@
     "components": [
       [ [ "duct_tape", 120 ] ],
       [ [ "duct_tape", 80 ] ],
-      [ [ "faux_fur", 6 ] ],
+      [ [ "faux_fur_patch", 6 ] ],
       [ [ "kevlar_patch", 12 ] ],
       [ [ "gloves_tactical", 1 ], [ "xl_gloves_faux_fur", 1 ], [ "xl_gloves_light", 1 ] ]
     ],
@@ -437,7 +437,7 @@
     "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
-      [ [ "leather", 4 ] ],
+      [ [ "leather_patch", 4 ] ],
       [ [ "kevlar_patch", 8 ] ],
       [ [ "gloves_leather", 1 ], [ "leather_gauntlets", 1 ], [ "gloves_tactical", 1 ], [ "gloves_light", 1 ] ]
     ]
@@ -451,7 +451,7 @@
     "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
-      [ [ "leather", 3 ] ],
+      [ [ "leather_patch", 3 ] ],
       [ [ "kevlar_patch", 6 ] ],
       [
         [ "xs_gloves_leather", 1 ],
@@ -588,7 +588,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "fur", 6 ] ] ],
+    "components": [ [ [ "fur_patch", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -601,7 +601,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "leather", 6 ] ] ],
+    "components": [ [ [ "leather_patch", 6 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -639,8 +639,8 @@
     "tools": [ [ [ "rubber_spray_can", 3 ] ] ],
     "components": [
       [ [ "duct_tape", 80 ] ],
-      [ [ "leather", 4 ] ],
-      [ [ "fur", 4 ] ],
+      [ [ "leather_patch", 4 ] ],
+      [ [ "fur_patch", 4 ] ],
       [ [ "kevlar_patch", 8 ] ],
       [
         [ "gloves_fur", 1 ],
@@ -660,8 +660,8 @@
     "tools": [ [ [ "rubber_spray_can", 2 ] ] ],
     "components": [
       [ [ "duct_tape", 60 ] ],
-      [ [ "leather", 3 ] ],
-      [ [ "fur", 3 ] ],
+      [ [ "leather_patch", 3 ] ],
+      [ [ "fur_patch", 3 ] ],
       [ [ "kevlar_patch", 6 ] ],
       [
         [ "xs_gloves_fur", 1 ],
@@ -681,8 +681,8 @@
     "tools": [ [ [ "rubber_spray_can", 4 ] ] ],
     "components": [
       [ [ "duct_tape", 120 ] ],
-      [ [ "leather", 6 ] ],
-      [ [ "fur", 6 ] ],
+      [ [ "leather_patch", 6 ] ],
+      [ [ "fur_patch", 6 ] ],
       [ [ "kevlar_patch", 12 ] ],
       [
         [ "xl_gloves_fur", 1 ],
@@ -715,7 +715,7 @@
     ],
     "components": [
       [ [ "duct_tape", 120 ] ],
-      [ [ "leather", 6 ] ],
+      [ [ "leather_patch", 6 ] ],
       [ [ "kevlar_patch", 12 ] ],
       [
         [ "xl_gloves_leather", 1 ],

@@ -22,7 +22,7 @@
       [ "holster", 5 ],
       [ "bandolier_shotgun", 15 ],
       [ "torso_bandolier_shotgun", 8 ],
-      [ "kevlar", 20 ],
+      [ "ballistic_vest_concealable", 20 ],
       [ "pockknife", 10 ],
       [ "legpouch_large", 5 ],
       [ "mask_bal", 10 ],
@@ -306,7 +306,7 @@
     "subtype": "distribution",
     "//": "armor that a civilian might have.",
     "entries": [
-      { "item": "kevlar", "prob": 20 },
+      { "item": "ballistic_vest_concealable", "prob": 20 },
       { "item": "soft_3a_vest", "prob": 15 },
       { "item": "stab_vest", "prob": 15 },
       { "item": "chestguard_hard", "prob": 5 },

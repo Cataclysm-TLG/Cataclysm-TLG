@@ -22,7 +22,7 @@
         [ "latex", 2 ],
         [ "gum", 20 ],
         [ "neoprene_sheet", 11 ],
-        [ "neoprene", 1 ]
+        [ "neoprene_patch", 1 ]
       ]
     ]
   },
@@ -49,7 +49,7 @@
         [ "latex", 2 ],
         [ "gum", 20 ],
         [ "neoprene_sheet", 11 ],
-        [ "neoprene", 1 ]
+        [ "neoprene_patch", 1 ]
       ]
     ]
   },

@@ -56,7 +56,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "components": [ [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ], [ "cotton_patch", 4 ] ] ],
+    "components": [ [ [ "cotton_sheet", 1 ], [ "cotton_patch", 4 ] ] ],
     "using": [ [ "sewing_standard", 10 ], [ "fastener_small", 2 ] ]
   },
   {
@@ -91,16 +91,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "components": [
-      [
-        [ "kevlar_sheet", 1 ],
-        [ "kevlar_sheet_patchwork", 1 ],
-        [ "kevlar_patch", 6 ],
-        [ "nomex_sheet", 1 ],
-        [ "nomex_sheet_patchwork", 1 ],
-        [ "nomex", 6 ]
-      ]
-    ],
+    "components": [ [ [ "kevlar_sheet", 1 ], [ "kevlar_patch", 6 ], [ "nomex_sheet", 1 ], [ "nomex_patch", 6 ] ] ],
     "using": [ [ "sewing_aramids", 20 ] ]
   },
   {
@@ -117,7 +108,7 @@
     "practice_data": { "min_difficulty": 1, "max_difficulty": 2, "skill_limit": 3 },
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ] ],
-    "components": [ [ [ "spandex_sheet", 1 ], [ "spandex_sheet_patchwork", 1 ], [ "spandex_patch", 6 ] ] ],
+    "components": [ [ [ "spandex_sheet", 1 ], [ "spandex_patch", 6 ] ] ],
     "using": [ [ "sewing_standard", 20 ] ]
   },
   {
@@ -135,7 +126,7 @@
     "autolearn": [ [ "tailor", 2 ] ],
     "book_learn": [ [ "mag_tailor", 1 ], [ "manual_tailor", 1 ], [ "textbook_armwest", 1 ] ],
     "qualities": [ { "id": "SEW", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 2 ] ], [ [ "gambeson_batting", 2 ] ] ],
+    "components": [ [ [ "cotton_sheet", 2 ] ], [ [ "gambeson_batting", 2 ] ] ],
     "using": [ [ "filament_canvas", 20 ] ],
     "byproducts": [ [ "cotton_patch", 6 ], [ "gambeson_batting", 2 ] ]
   },
@@ -173,7 +164,7 @@
     "autolearn": [ [ "tailor", 3 ] ],
     "book_learn": [ [ "dieselpunk_tailor", 2 ], [ "manual_tailor", 2 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 } ],
-    "components": [ [ [ "leather", 6 ], [ "leather_sheet", 1 ] ] ],
+    "components": [ [ [ "leather_patch", 6 ], [ "leather_sheet", 1 ] ] ],
     "using": [ [ "sewing_standard", 30 ] ]
   },
   {

@@ -356,7 +356,7 @@
     "difficulty": 1,
     "time": "22 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 7 ] ], [ [ "cotton_patch", 4 ] ], [ [ "sheet", 4 ] ], [ [ "spring", 4 ] ], [ [ "wire", 20 ] ] ]
+    "components": [ [ [ "cotton_sheet", 7 ] ], [ [ "cotton_patch", 4 ] ], [ [ "sheet", 4 ] ], [ [ "spring", 4 ] ], [ [ "wire", 20 ] ] ]
   },
   {
     "result": "character_sheet",
@@ -458,7 +458,7 @@
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "6 h",
-    "components": [ [ [ "nylon_sheet_patchwork", 1972 ] ] ],
+    "components": [ [ [ "nylon_sheet", 225 ] ] ],
     "qualities": [ { "id": "CUT", "level": 1 } ]
   },
   {
@@ -528,7 +528,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "15 s",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 3 ] ], [ [ "zipper_short_plastic", 1 ] ] ]
+    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "zipper_short_plastic", 1 ] ] ]
   },
   {
     "result": "blanket",
@@ -536,7 +536,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 20 ] ], [ [ "thread", 150 ] ] ],
+    "components": [ [ [ "cotton_sheet", 20 ] ], [ [ "thread", 150 ] ] ],
     "//": "This recipe somehow manages to lose cotton while creating mass out of thin air. Honestly remarkable, but for me it means I have to look into the weight for thread later on"
   },
   {
@@ -545,7 +545,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 10 ] ], [ [ "fur_sheet_patchwork", 10 ] ], [ [ "thread", 150 ] ] ],
+    "components": [ [ [ "cotton_sheet", 10 ] ], [ [ "fur_sheet", 10 ] ], [ [ "thread", 150 ] ] ],
     "//": "This recipe is based off of the blanket recipe above it, with half of the cotton sheets being replaced by patchwork fur sheets."
   },
   {
@@ -554,7 +554,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_felt", 20 ] ], [ [ "thread", 150 ] ], [ [ "cotton_ball", 100 ] ] ]
+    "components": [ [ [ "felt_sheet", 20 ] ], [ [ "thread", 150 ] ], [ [ "cotton_ball", 100 ] ] ]
   },
   {
     "result": "quilt_patchwork",
@@ -562,7 +562,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_felt_patchwork", 20 ] ], [ [ "thread", 100 ] ], [ [ "gambeson_batting", 50 ] ] ]
+    "components": [ [ [ "felt_sheet", 20 ] ], [ [ "thread", 100 ] ], [ [ "gambeson_batting", 50 ] ] ]
   },
   {
     "result": "crackpipe",
@@ -593,7 +593,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "2 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "sheet_cotton", 2 ] ], [ [ "cotton_patch", 4 ] ], [ [ "down_feather", 50 ] ] ]
+    "components": [ [ [ "cotton_sheet", 2 ] ], [ [ "cotton_patch", 4 ] ], [ [ "down_feather", 50 ] ] ]
   },
   {
     "result": "well_pump",

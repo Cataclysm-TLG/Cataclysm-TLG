@@ -498,7 +498,7 @@
       { "item": "steel_chunk", "count": [ 8, 13 ] },
       { "item": "steel_fragment", "count": [ 8, 13 ] },
       { "item": "scrap", "count": [ 8, 13 ] },
-      { "item": "sheet_cotton", "count": [ 5, 10 ] },
+      { "item": "cotton_sheet", "count": [ 5, 10 ] },
       { "item": "pipe", "count": [ 0, 1 ] },
       { "item": "hd_pipe", "count": [ 1, 2 ] },
       { "item": "sheet_metal_small", "count": [ 1, 2 ] },

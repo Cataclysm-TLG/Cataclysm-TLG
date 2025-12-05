@@ -7,7 +7,7 @@
     "difficulty": 3,
     "time": "2 m",
     "qualities": [ { "id": "SAW_M_FINE", "level": 1 } ],
-    "components": [ [ [ "link_sheet", 3 ] ], [ [ "leather", 3 ] ], [ [ "chain_link", 70 ] ] ]
+    "components": [ [ [ "link_sheet", 3 ] ], [ [ "leather_patch", 3 ] ], [ [ "chain_link", 70 ] ] ]
   },
   {
     "result": "leather_harness_dog",
@@ -17,7 +17,7 @@
     "difficulty": 1,
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "leather", 3 ] ] ]
+    "components": [ [ [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "rubber_harness_dog",
@@ -27,6 +27,6 @@
     "difficulty": 1,
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 8 ] ], [ [ "plastic_sheet_small", 8 ] ] ]
+    "components": [ [ [ "cotton_sheet", 8 ] ], [ [ "plastic_sheet_small", 8 ] ] ]
   }
 ]
