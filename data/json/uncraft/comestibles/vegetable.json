@@ -74,7 +74,7 @@
     "result": "cattlefodder_medium",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
-    "time": "30 s",
+    "time": "20 s",
     "components": [ [ [ "cattlefodder", 7 ] ] ]
   },
   {
