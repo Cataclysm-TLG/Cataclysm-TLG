@@ -3,7 +3,7 @@
     "id": "backpack",
     "type": "ARMOR",
     "name": { "str": "backpack" },
-    "description": "A small backpack.  Good storage for a little encumbrance.",
+    "description": "A nylon backpack with a zipper pocket.",
     "weight": "633 g",
     "volume": "2 L",
     "price": "39 USD",
@@ -11,7 +11,7 @@
     "material": [ "nylon" ],
     "symbol": "[",
     "looks_like": "ragpouch",
-    "color": "green",
+    "color": "dark_gray",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -85,8 +85,8 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "50 L",
-        "max_contains_weight": "50 kg",
+        "max_contains_volume": "35 L",
+        "max_contains_weight": "40 kg",
         "max_item_length": "60 cm",
         "magazine_well": "12 L",
         "moves": 450
@@ -224,7 +224,7 @@
       {
         "pocket_type": "CONTAINER",
         "max_contains_volume": "25 L",
-        "max_contains_weight": "30 kg",
+        "max_contains_weight": "35 kg",
         "max_item_length": "40 cm",
         "moves": 300
       },
@@ -326,8 +326,8 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "55 L",
-        "max_contains_weight": "70 kg",
+        "max_contains_volume": "35 L",
+        "max_contains_weight": "40 kg",
         "max_item_length": "70 cm",
         "magazine_well": "10 L",
         "moves": 300
@@ -471,8 +471,8 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "65 L",
-        "max_contains_weight": "70 kg",
+        "max_contains_volume": "45 L",
+        "max_contains_weight": "50 kg",
         "max_item_length": "75 cm",
         "magazine_well": "10 L",
         "moves": 300
@@ -913,11 +913,12 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "35 L",
-        "max_contains_weight": "60 kg",
-        "max_item_length": "55 cm",
+        "max_contains_volume": "60 L",
+        "max_contains_weight": "90 kg",
+        "max_item_length": "65 cm",
+        "watertight": true,
         "magazine_well": "5 L",
-        "moves": 300
+        "moves": 450
       },
       {
         "//": "items slipped under the top of a duffelbag not well secured",
@@ -939,7 +940,7 @@
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 5,
+        "encumbrance": 10,
         "volume_encumber_modifier": 0.25,
         "coverage": 100,
         "covers": [ "torso" ],
@@ -1026,7 +1027,8 @@
     ],
     "material_thickness": 0.5,
     "flags": [ "BELTED", "WATER_FRIENDLY", "PALS_MEDIUM", "OVERSIZE", "UNRESTRICTED" ],
-    "armor": [ { "encumbrance": 1, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ],
+    "armor": [ { "encumbrance": 1, 
+        "volume_encumber_modifier": 0.3, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -1288,7 +1290,7 @@
     "armor": [
       {
         "encumbrance": 1,
-        "volume_encumber_modifier": 0.15,
+        "volume_encumber_modifier": 0.18,
         "coverage": 50,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
@@ -1562,7 +1564,8 @@
     "flags": [ "BELTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 1,
+        "encumbrance": 1, 
+        "volume_encumber_modifier": 0.2,
         "coverage": 25,
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ]
@@ -1608,7 +1611,7 @@
     "warmth": 5,
     "material_thickness": 0.2,
     "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE" ],
-    "armor": [ { "encumbrance": [ 2, 9 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
+    "armor": [ { "encumbrance": [ 2, 14 ], "coverage": 60, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ]
   },
   {
     "id": "makeshift_sling",
@@ -2770,7 +2773,7 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "50 L",
+        "max_contains_volume": "30 L",
         "max_contains_weight": "80 kg",
         "max_item_length": "150 cm",
         "magazine_well": "10 L",

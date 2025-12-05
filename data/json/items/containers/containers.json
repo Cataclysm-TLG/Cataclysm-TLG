@@ -1647,7 +1647,7 @@
     "price": "100 USD",
     "price_postapoc": "2 USD 50 cent",
     "to_hit": -1,
-    "material": [ "cotton", "plastic" ],
+    "material": [ "nylon", "vinyl" ],
     "symbol": ")",
     "color": "dark_gray",
     "pocket_data": [
@@ -1664,8 +1664,8 @@
       "armor": [
         {
           "material": [
-            { "type": "cotton", "covered_by_mat": 100, "thickness": 1.0 },
-            { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 }
+            { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+            { "type": "vinyl", "covered_by_mat": 100, "thickness": 0.4 }
           ],
           "coverage": 30,
           "covers": [ "torso" ],
@@ -1673,7 +1673,7 @@
         }
       ]
     },
-    "flags": [ "BELTED", "COLLAPSE_CONTENTS" ],
+    "flags": [ "BELTED", "COLLAPSE_CONTENTS", "OVERSIZE" ],
     "melee_damage": { "bash": 1 }
   },
   {
