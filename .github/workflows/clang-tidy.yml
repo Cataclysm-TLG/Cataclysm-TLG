@@ -1,14 +1,14 @@
 name: Clang-tidy 17
 
-// on:
-//  push:
-//    branches:
-//    - master
+# on:
+#  push:
+#    branches:
+#    - master
 
-//  pull_request:
-//    branches:
-//    - master
-//    types: [opened, reopened, synchronize, ready_for_review]
+#  pull_request:
+#    branches:
+#    - master
+#    types: [opened, reopened, synchronize, ready_for_review]
 
 # We only care about the latest revision of a PR, so cancel all previous instances.
 concurrency:
