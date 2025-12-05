@@ -60,7 +60,7 @@
     "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
     "components": [
       [ [ "soap", 1 ], [ "liquid_soap", 1 ] ],
-      [ [ "water", 3 ] ],
+      [ [ "water", 3 ], [ "clean_water", 3 ] ],
       [
         [ "cotton_patch", 1 ],
         [ "fur_patch", 1 ],

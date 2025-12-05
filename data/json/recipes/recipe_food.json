@@ -102,7 +102,7 @@
     "flags": [ "NO_MORALE_OK" ],
     "//": "See pur_tablets item definition for documentation and discussion",
     "autolearn": true,
-    "components": [ [ [ "water_murky", 4 ] ], [ [ "pur_tablets", 1 ] ] ]
+    "components": [ [ [ "water_murky", 4 ], [ "water", 4 ] ], [ [ "pur_tablets", 1 ] ] ]
   },
   {
     "type": "recipe",
