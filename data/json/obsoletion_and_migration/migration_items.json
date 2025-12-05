@@ -3592,10 +3592,5 @@
     "type": "MIGRATION",
     "id": "sheet_felt",
     "replace": "felt_sheet"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "rigid_kevlar_plate",
-    "replace": "kevlar_plate"
   }
 ]
