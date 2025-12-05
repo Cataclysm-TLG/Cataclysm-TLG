@@ -1,12 +1,12 @@
 name: "Push translation template"
 
-concurrency: push_transifex
+# concurrency: push_transifex
 
-on:
-  workflow_run:
-    workflows: ["Experimental Release"]
-    types:
-      - completed
+# on:
+#  workflow_run:
+#   workflows: ["Experimental Release"]
+#   types:
+#     - completed
 
 
 permissions:
