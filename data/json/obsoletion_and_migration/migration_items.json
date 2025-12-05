@@ -3415,6 +3415,11 @@
   },
   {
     "type": "MIGRATION",
+    "id": "sheet_kevlar",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
     "id": "sheet_cotton_patchwork",
     "replace": "cotton_sheet"
   },
@@ -3577,6 +3582,16 @@
     "type": "MIGRATION",
     "id": "kevlar",
     "replace": "ballistic_vest_concealable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rigid_kevlar_plate",
+    "replace": "kevlar_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_felt",
+    "replace": "felt_sheet"
   },
   {
     "type": "MIGRATION",
