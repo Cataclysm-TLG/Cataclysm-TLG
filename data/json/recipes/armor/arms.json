@@ -143,7 +143,7 @@
     "difficulty": 5,
     "time": "6 h",
     "book_learn": [ [ "textbook_armwest", 4 ], [ "textbook_armschina", 4 ], [ "textbook_mesoam", 4 ] ],
-    "byproducts": [ [ "leather", 2 ] ],
+    "byproducts": [ [ "leather_patch", 2 ] ],
     "using": [ [ "tailoring_leather_sheet", 4 ], [ "clasps", 4 ], [ "strap_small", 4 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "proficiencies": [
@@ -157,7 +157,7 @@
     "type": "recipe",
     "copy-from": "leather_arm_guards",
     "time": "5 h",
-    "byproducts": [ [ "leather", 6 ] ],
+    "byproducts": [ [ "leather_patch", 6 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "tailoring_leather_sheet", 3 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
@@ -166,7 +166,7 @@
     "type": "recipe",
     "copy-from": "leather_arm_guards",
     "time": "8 h",
-    "byproducts": [ [ "leather", 2 ] ],
+    "byproducts": [ [ "leather_patch", 2 ] ],
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "using": [ [ "tailoring_leather_sheet", 5 ], [ "clasps", 4 ], [ "strap_small", 4 ] ]
   },
@@ -302,7 +302,7 @@
     "type": "recipe",
     "copy-from": "armguard_soft",
     "time": "315 m",
-    "byproducts": [ [ "neoprene", 2 ] ],
+    "byproducts": [ [ "nomex_patch", 2 ] ],
     "using": [ [ "tailoring_cotton_sheet", 5 ], [ "tailoring_neoprene_sheet", 4 ] ]
   },
   {
@@ -357,7 +357,7 @@
     "difficulty": 2,
     "time": "180 m",
     "autolearn": true,
-    "byproducts": [ [ "leather", 2 ] ],
+    "byproducts": [ [ "leather_patch", 2 ] ],
     "using": [ [ "tailoring_leather_sheet", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   },

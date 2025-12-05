@@ -172,22 +172,20 @@
     "//": "Materials used for crafting or repairing clothing or sheeting, etc.",
     "components": [
       [
-        [ "sheet_cotton_patch", 1 ],
-        [ "sheet_cotton", 1 ],
+        [ "cotton_sheet", 1 ],
         [ "spandex_sheet", 1 ],
-        [ "spandex_sheet_patchwork", 1 ],
-        [ "nylon_sheet_patchwork", 1 ],
         [ "neoprene_sheet", 1 ],
-        [ "neoprene_sheet_patchwork", 1 ],
-        [ "nomex_sheet_patchwork", 1 ],
+        [ "kevlar_sheet", 1 ],
         [ "nomex_sheet", 1 ],
         [ "nylon_sheet", 1 ],
+        [ "leather_sheet", 1 ],
         [ "cotton_patch", 8 ],
+        [ "kevlar_patch", 8 ],
         [ "spandex_patch", 8 ],
         [ "nylon_patch", 8 ],
-        [ "leather", 8 ],
-        [ "nomex", 8 ],
-        [ "neoprene", 8 ]
+        [ "leather_patch", 8 ],
+        [ "nomex_patch", 8 ],
+        [ "neoprene_patch", 8 ]
       ]
     ]
   },
@@ -200,9 +198,9 @@
         [ "cotton_patch", 1 ],
         [ "spandex_patch", 1 ],
         [ "nylon_patch", 1 ],
-        [ "leather", 1 ],
-        [ "nomex", 1 ],
-        [ "neoprene", 1 ]
+        [ "leather_patch", 1 ],
+        [ "nomex_patch", 1 ],
+        [ "neoprene_patch", 1 ]
       ]
     ]
   },
@@ -213,16 +211,12 @@
     "components": [
       [
         [ "cotton_patch", 8 ],
-        [ "sheet_cotton_patch", 1 ],
-        [ "sheet_cotton", 1 ],
+        [ "cotton_sheet", 1 ],
         [ "spandex_patch", 8 ],
-        [ "spandex_sheet_patchwork", 1 ],
         [ "spandex_sheet", 1 ],
         [ "nylon_patch", 8 ],
-        [ "nylon_sheet_patchwork", 1 ],
         [ "nylon_sheet", 1 ],
-        [ "nomex", 8 ],
-        [ "nomex_sheet_patchwork", 1 ],
+        [ "nomex_patch", 8 ],
         [ "nomex_sheet", 1 ]
       ]
     ]
@@ -231,7 +225,7 @@
     "id": "fabric_standard_permeable_small",
     "type": "requirement",
     "//": "Materials used for crafting or repairing woven fabrics",
-    "components": [ [ [ "cotton_patch", 1 ], [ "spandex_patch", 8 ], [ "nylon_patch", 8 ], [ "nomex", 8 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "spandex_patch", 8 ], [ "nylon_patch", 8 ], [ "nomex_patch", 8 ] ] ]
   },
   {
     "id": "fabric_standard_nostretch",
@@ -240,13 +234,10 @@
     "components": [
       [
         [ "cotton_patch", 8 ],
-        [ "sheet_cotton_patch", 1 ],
-        [ "sheet_cotton", 1 ],
+        [ "cotton_sheet", 1 ],
         [ "nylon_patch", 8 ],
-        [ "nylon_sheet_patchwork", 1 ],
         [ "nylon_sheet", 1 ],
-        [ "nomex", 8 ],
-        [ "nomex_sheet_patchwork", 1 ],
+        [ "nomex_patch", 8 ],
         [ "nomex_sheet", 1 ]
       ]
     ]
@@ -255,76 +246,67 @@
     "id": "fabric_standard_nostretch_small",
     "type": "requirement",
     "//": "Materials used for crafting or repairing non-form fitting clothing",
-    "components": [ [ [ "cotton_patch", 1 ], [ "nylon_patch", 1 ], [ "nomex", 1 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "nylon_patch", 1 ], [ "nomex_patch", 1 ] ] ]
   },
   {
     "id": "fabric_felt",
     "type": "requirement",
     "//": "Materials used for crafting felt clothing",
-    "components": [ [ [ "felt_patch", 8 ], [ "sheet_felt_patchwork", 1 ], [ "sheet_felt", 1 ] ] ]
+    "components": [ [ [ "felt_patch", 8 ], [ "felt_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_fauxfur",
     "type": "requirement",
     "//": "Materials used for faux fur clothing",
-    "components": [ [ [ "faux_fur", 8 ], [ "faux_fur_sheet_patchwork", 1 ], [ "faux_fur_sheet", 1 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 8 ], [ "faux_fur_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_fur",
     "type": "requirement",
     "//": "Materials used for crafting fur clothing",
-    "components": [ [ [ "fur", 8 ], [ "fur_sheet_patchwork", 1 ], [ "fur_sheet", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_fur_pelt",
     "type": "requirement",
     "//": "Materials used for crafting fur clothing",
-    "components": [ [ [ "fur", 8 ], [ "fur_sheet_patchwork", 1 ], [ "fur_sheet", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_leather_hide",
     "type": "requirement",
     "//": "Materials used for crafting leather clothing.",
-    "components": [ [ [ "leather", 8 ], [ "leather_sheet_patchwork", 1 ], [ "leather_sheet", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 8 ], [ "leather_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_leather_fur_hide",
     "type": "requirement",
     "//": "Materials used for crafting leather clothing where fur is or should be an option (can be scraped off with a cutting tool for example), when tanned hides/pelts are available it seems to roughly be a 1:8 ratio",
-    "components": [
-      [
-        [ "leather", 8 ],
-        [ "fur", 8 ],
-        [ "leather_sheet", 1 ],
-        [ "fur_sheet", 1 ],
-        [ "leather_sheet_patchwork", 1 ],
-        [ "fur_sheet_patchwork", 1 ]
-      ]
-    ]
+    "components": [ [ [ "leather_patch", 8 ], [ "fur_patch", 8 ], [ "leather_sheet", 1 ], [ "fur_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_nomex",
     "type": "requirement",
     "//": "Materials used for crafting Nomex clothing",
-    "components": [ [ [ "nomex", 8 ], [ "nomex_sheet_patchwork", 1 ], [ "nomex_sheet", 1 ] ] ]
+    "components": [ [ [ "nomex_patch", 8 ], [ "nomex_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_nylon",
     "type": "requirement",
     "//": "Materials used for crafting nylon clothing",
-    "components": [ [ [ "nylon_patch", 8 ], [ "nylon_sheet_patchwork", 1 ], [ "nylon_sheet", 1 ] ] ]
+    "components": [ [ [ "nylon_patch", 8 ], [ "nylon_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_neoprene",
     "type": "requirement",
     "//": "Materials used for crafting neoprene clothing",
-    "components": [ [ [ "neoprene", 8 ], [ "neoprene_sheet_patchwork", 1 ], [ "neoprene_sheet", 1 ] ] ]
+    "components": [ [ [ "neoprene_patch", 8 ], [ "neoprene_sheet", 1 ] ] ]
   },
   {
     "id": "fabric_spandex",
     "type": "requirement",
     "//": "Materials used for crafting spandex clothing",
-    "components": [ [ [ "spandex_patch", 8 ], [ "spandex_sheet", 1 ], [ "spandex_sheet_patchwork", 1 ] ] ]
+    "components": [ [ [ "spandex_patch", 8 ], [ "spandex_sheet", 1 ] ] ]
   },
   {
     "id": "filament",

@@ -337,7 +337,7 @@
       { "item": "meat_smoked", "prob": 10 },
       { "item": "meat_smoked", "prob": 10 },
       { "item": "bone", "prob": 10 },
-      { "item": "fur", "prob": 10 }
+      { "item": "fur_patch", "prob": 10 }
     ]
   },
   {

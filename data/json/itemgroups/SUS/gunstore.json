@@ -117,7 +117,7 @@
       { "item": "tac_helmet", "prob": 5 },
       { "item": "helmet_army", "prob": 5 },
       { "item": "knee_pads", "prob": 20 },
-      { "item": "kevlar", "prob": 5 },
+      { "item": "ballistic_vest_concealable", "prob": 5 },
       { "item": "elbow_pads", "prob": 20 },
       { "item": "nylon_holster", "prob": 25 },
       { "item": "holster", "prob": 20 },

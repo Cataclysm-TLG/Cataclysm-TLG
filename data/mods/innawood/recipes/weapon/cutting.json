@@ -17,8 +17,8 @@
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]

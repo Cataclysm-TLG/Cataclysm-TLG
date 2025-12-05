@@ -576,14 +576,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [
-      [
-        [ "sheet_cotton_patch", 1 ],
-        [ "sheet_cotton", 1 ],
-        [ "fur_sheet_patchwork", 1 ],
-        [ "fur_sheet", 1 ],
-        [ "leather_sheet", 1 ],
-        [ "leather_sheet_patchwork", 6 ]
-      ],
+      [ [ "cotton_sheet", 1 ], [ "fur_sheet", 1 ], [ "leather_sheet", 1 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "pointy_stick", 1 ], [ "mop", 1 ] ]
     ],
     "flags": [ "BLIND_HARD" ]

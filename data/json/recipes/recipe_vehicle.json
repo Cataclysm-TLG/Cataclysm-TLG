@@ -241,7 +241,7 @@
     "using": [ [ "sewing_standard", 100 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 16 ], [ "leather_sheet", 2 ], [ "fur", 16 ], [ "fur_sheet", 2 ] ],
+      [ [ "leather_patch", 16 ], [ "leather_sheet", 2 ], [ "fur_patch", 16 ], [ "fur_sheet", 2 ] ],
       [ [ "cordage_superior", 2, "LIST" ] ]
     ]
   },
@@ -259,7 +259,7 @@
     "using": [ [ "sewing_standard", 100 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 8 ], [ "leather_sheet", 1 ], [ "fur", 8 ], [ "fur_sheet", 1 ] ],
+      [ [ "leather_patch", 8 ], [ "leather_sheet", 1 ], [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ],
       [ [ "2x4", 4 ] ],
       [ [ "rope_superior_short", 2, "LIST" ] ]
     ]
@@ -294,7 +294,7 @@
       [ [ "chain", 2 ], [ "hd_tow_cable", 1 ] ],
       [ [ "spring", 2 ], [ "leather_sheet", 2 ] ],
       [ [ "nuts_bolts", 6 ] ],
-      [ [ "rope_superior_short", 2, "LIST" ], [ "canvas_sheet", 4 ], [ "canvas_sheet_patchwork", 4 ] ]
+      [ [ "rope_superior_short", 2, "LIST" ], [ "canvas_sheet", 4 ] ]
     ]
   },
   {

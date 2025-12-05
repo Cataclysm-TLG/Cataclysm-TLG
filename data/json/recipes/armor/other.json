@@ -77,7 +77,7 @@
     "//": "Based off of the quickest internet suggestions, which utilize sewing machines.",
     "autolearn": [ [ "tailor", 2 ] ],
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [ [ [ "cotton_ball", 150 ] ], [ [ "sheet_felt", 33 ] ], [ [ "filament", 200, "LIST" ] ] ],
+    "components": [ [ [ "cotton_ball", 150 ] ], [ [ "felt_sheet", 33 ] ], [ [ "filament", 200, "LIST" ] ] ],
     "//1": "Cotton balls act as the warm filling material for the quilt. 5L / 25mL per cotton ball = 200 cotton balls as an upper limit",
     "byproducts": [ [ "felt_patch", 6 ] ]
   },
@@ -93,11 +93,7 @@
     "time": "10 h",
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 }, { "id": "FABRIC_CUT", "level": 1 } ],
-    "components": [
-      [ [ "cotton_ball", 150 ], [ "gambeson_batting", 75 ] ],
-      [ [ "sheet_felt", 33 ], [ "sheet_felt_patchwork", 33 ] ],
-      [ [ "filament", 165, "LIST" ] ]
-    ],
+    "components": [ [ [ "cotton_ball", 150 ], [ "gambeson_batting", 75 ] ], [ [ "felt_sheet", 33 ] ], [ [ "filament", 165, "LIST" ] ] ],
     "//": "Patchwork quilts are quicker to make because the crafter is primarily concerned about warmth, not beauty. Similar filling calculation as the quilt recipe.",
     "byproducts": [ [ "felt_patch", 6 ] ]
   },
@@ -120,7 +116,7 @@
       [ [ "cable", 10 ] ],
       [ [ "amplifier", 1 ] ]
     ],
-    "byproducts": [ [ "nylon_sheet_patchwork", 6 ] ]
+    "byproducts": [ [ "nylon_patch", 6 ] ]
   },
   {
     "result": "gold_ring",
@@ -285,7 +281,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_cotton_sheet_simple", 33 ], [ "tailoring_fur_sheet_simple", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
-    "byproducts": [ [ "cotton_patch", 6 ], [ "fur", 3 ] ]
+    "byproducts": [ [ "cotton_patch", 6 ], [ "fur_patch", 3 ] ]
   },
   {
     "result": "fur_cat_tail",
@@ -300,7 +296,11 @@
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
-    "components": [ [ [ "fur", 4 ] ], [ [ "cordage", 1, "LIST" ] ], [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ] ]
+    "components": [
+      [ [ "fur_patch", 4 ] ],
+      [ [ "cordage", 1, "LIST" ] ],
+      [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ]
+    ]
   },
   {
     "result": "faux_fur_cat_tail",
@@ -316,7 +316,7 @@
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
     "components": [
-      [ [ "faux_fur", 4 ] ],
+      [ [ "faux_fur_patch", 4 ] ],
       [ [ "cordage", 1, "LIST" ] ],
       [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ]
     ]
@@ -334,7 +334,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
     "tools": [ [ [ "soldering_standard", 10, "LIST" ], [ "surface_heat", 10, "LIST" ] ] ],
-    "components": [ [ [ "fur", 2 ] ], [ [ "scrap", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 2 ] ], [ [ "scrap", 1 ] ] ]
   },
   {
     "result": "faux_fur_collar",
@@ -349,7 +349,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
     "tools": [ [ [ "soldering_standard", 10, "LIST" ], [ "surface_heat", 10, "LIST" ] ] ],
-    "components": [ [ [ "faux_fur", 2 ] ], [ [ "scrap", 1 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 2 ] ], [ [ "scrap", 1 ] ] ]
   },
   {
     "result": "leather_cat_tail",
@@ -364,7 +364,11 @@
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
-    "components": [ [ [ "leather", 4 ] ], [ [ "cordage", 1, "LIST" ] ], [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ] ]
+    "components": [
+      [ [ "leather_patch", 4 ] ],
+      [ [ "cordage", 1, "LIST" ] ],
+      [ [ "plastic_chunk", 10 ], [ "plastic_bottles_4l", 1, "LIST" ] ]
+    ]
   },
   {
     "result": "leather_collar",
@@ -379,7 +383,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "tools": [ [ [ "soldering_standard", 10, "LIST" ], [ "surface_heat", 10, "LIST" ] ] ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "scrap", 1 ] ] ]
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "scrap", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -616,7 +620,7 @@
     "book_learn": [ [ "textbook_survival", 1 ], [ "trappers_companion", 3 ], [ "survival_book", 2 ], [ "pocket_survival", 1 ] ],
     "using": [ [ "tailoring_cotton_sheet", 17 ], [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
-    "components": [ [ [ "fur_sheet_patchwork", 3 ], [ "fur_sheet", 3 ], [ "wool_staple", 12 ] ] ],
+    "components": [ [ [ "fur_sheet", 3 ], [ "wool_staple", 12 ] ] ],
     "byproducts": [ [ "cotton_patch", 1 ] ]
   },
   {
@@ -633,7 +637,7 @@
     "using": [ [ "sewing_standard", 160 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ],
     "components": [
-      [ [ "leather", 6 ], [ "leather_sheet", 1 ], [ "leather_belt", 1 ] ],
+      [ [ "leather_patch", 6 ], [ "leather_sheet", 1 ], [ "leather_belt", 1 ] ],
       [ [ "duct_tape", 100 ] ],
       [ [ "sheath", 1 ] ],
       [ [ "legrig", 1 ], [ "tool_belt", 1 ], [ "dump_pouch", 1 ], [ "leather_pouch", 4 ] ],

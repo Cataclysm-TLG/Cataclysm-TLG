@@ -54,7 +54,7 @@
     "type": "item_group",
     "id": "NC_ANCILLA_BARKEEP_wield",
     "subtype": "collection",
-    "items": [ { "item": "sheet_cotton" } ]
+    "items": [ { "item": "cotton_sheet" } ]
   },
   {
     "type": "item_group",

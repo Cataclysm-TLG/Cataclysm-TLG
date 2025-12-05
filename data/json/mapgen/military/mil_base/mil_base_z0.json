@@ -479,7 +479,7 @@
         { "item": "helmet_army", "x": [ 43, 44 ], "y": 65, "chance": 75, "repeat": [ 0, 150 ] },
         { "item": "tac_helmet", "x": 42, "y": 65, "chance": 75, "repeat": [ 0, 50 ] },
         { "item": "gloves_tactical", "x": 41, "y": 65, "chance": 75, "repeat": [ 0, 150 ] },
-        { "item": "kevlar", "x": 40, "y": 65, "chance": 75, "repeat": [ 0, 100 ] },
+        { "item": "ballistic_vest_concealable", "x": 40, "y": 65, "chance": 75, "repeat": [ 0, 100 ] },
         {
           "item": "ballistic_vest_esapi",
           "variant": "us_ballistic_vest",

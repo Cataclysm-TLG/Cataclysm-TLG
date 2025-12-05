@@ -82,7 +82,7 @@
     "type": "proficiency",
     "id": "prof_basketweaving",
     "category": "prof_misc_craft",
-    "name": { "str": "Basketweaving" },
+    "name": { "str": "Wickerworking" },
     "description": "Forming coarse fibers into shapes.",
     "can_learn": true,
     "default_time_multiplier": 2.5,

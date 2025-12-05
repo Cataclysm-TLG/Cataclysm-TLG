@@ -702,7 +702,7 @@
     "to_hit": -3,
     "material": [ "thermo_resin", "plastic_pad" ],
     "symbol": "[",
-    "looks_like": "kevlar",
+    "looks_like": "ballistic_vest_concealable",
     "color": "dark_gray",
     "warmth": 20,
     "longest_side": "60 cm",

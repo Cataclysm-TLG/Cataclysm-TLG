@@ -312,20 +312,6 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "id": "tailoring_pattern_set",
-    "type": "GENERIC",
-    "category": "tools",
-    "name": { "str": "tailoring pattern set" },
-    "description": "A large set of tailoring patterns made from paper.  They're useful for making any kind of cloth or leather items from scratch, but are necessary for more advanced projects.",
-    "weight": "1000 g",
-    "volume": "833 ml",
-    "price": "40 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "paper" ],
-    "symbol": ";",
-    "color": "yellow"
-  },
-  {
     "id": "kevlar_shears",
     "type": "TOOL",
     "name": { "str": "Kevlar shears", "str_pl": "pairs of Kevlar shears" },

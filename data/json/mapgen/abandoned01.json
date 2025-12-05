@@ -30,7 +30,7 @@
     "id": "cabin_suicide_shirt",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "hoodie", 30 ], [ "kevlar", 10 ], [ "longshirt", 40 ], [ "undershirt", 20 ] ]
+    "items": [ [ "hoodie", 30 ], [ "ballistic_vest_concealable", 10 ], [ "longshirt", 40 ], [ "undershirt", 20 ] ]
   },
   {
     "id": "cabin_suicide_over",

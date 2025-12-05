@@ -40,7 +40,7 @@
     "type": "item_group",
     "id": "security_armor",
     "subtype": "distribution",
-    "items": [ { "collection": [ { "item": "tacvest" }, { "item": "kevlar" } ] }, { "item": "level_3_vest" } ]
+    "items": [ { "collection": [ { "item": "tacvest" }, { "item": "ballistic_vest_concealable" } ] }, { "item": "level_3_vest" } ]
   },
   {
     "id": "mon_zombie_labsecurity_death_drops",

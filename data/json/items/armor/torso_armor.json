@@ -12,7 +12,7 @@
     "to_hit": -1,
     "material": [ "paper" ],
     "symbol": "O",
-    "looks_like": "kevlar",
+    "looks_like": "ballistic_vest_concealable",
     "color": "light_gray",
     "warmth": 10,
     "longest_side": "60 cm",

@@ -133,7 +133,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic", "time_multiplier": 2 } ],
-    "components": [ [ [ "leather", 5 ] ], [ [ "spring", 1 ] ], [ [ "weights", 10, "LIST" ] ] ]
+    "components": [ [ [ "leather_patch", 5 ] ], [ [ "spring", 1 ] ], [ [ "weights", 10, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -239,7 +239,7 @@
       { "proficiency": "prof_carving", "skill_penalty": 0 },
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
     ],
-    "components": [ [ [ "log", 1 ] ], [ [ "scrap", 20 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "log", 1 ] ], [ [ "scrap", 20 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -294,7 +294,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -582,7 +582,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0.15 } ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 4 ] ], [ [ "scrap", 8 ] ] ]
+    "components": [ [ [ "leather_patch", 4 ] ], [ [ "scrap", 8 ] ] ]
   },
   {
     "result": "xl_cestus",
@@ -591,7 +591,7 @@
     "time": "30 m",
     "using": [ [ "sewing_standard", 5 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 6 ] ], [ [ "scrap", 10 ] ] ]
+    "components": [ [ [ "leather_patch", 6 ] ], [ [ "scrap", 10 ] ] ]
   },
   {
     "result": "xs_cestus",
@@ -600,7 +600,7 @@
     "time": "30 m",
     "using": [ [ "sewing_standard", 5 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 3 ] ], [ [ "scrap", 6 ] ] ]
+    "components": [ [ [ "leather_patch", 3 ] ], [ [ "scrap", 6 ] ] ]
   },
   {
     "type": "recipe",
@@ -715,7 +715,7 @@
         [ "lamp_oil", 250 ],
         [ "motor_oil", 250 ]
       ],
-      [ [ "fur", 2 ], [ "leather", 2 ] ],
+      [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ],
       [ [ "duct_tape", 20 ], [ "filament", 20, "LIST" ] ]
     ]
   },
@@ -738,7 +738,7 @@
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "staff_pipe",
@@ -793,7 +793,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "type": "recipe",

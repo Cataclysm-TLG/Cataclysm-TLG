@@ -358,7 +358,7 @@
     "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
-      [ [ "leather", 1 ], [ "fur", 1 ], [ "cordage_short", 2, "LIST" ] ],
+      [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ] ],
       [ [ "scrap_bronze", 10 ] ],
       [ [ "stick", 1 ], [ "2x4", 1 ] ]
     ]
@@ -783,7 +783,7 @@
     "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
-      [ [ "leather", 2 ], [ "fur", 2 ], [ "cordage_short", 4, "LIST" ] ],
+      [ [ "leather_patch", 2 ], [ "fur_patch", 2 ], [ "cordage_short", 4, "LIST" ] ],
       [ [ "scrap_bronze", 12 ] ],
       [ [ "stick", 4 ], [ "2x4", 2 ] ]
     ]
@@ -922,7 +922,10 @@
     ],
     "using": [ [ "blacksmithing_basic", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ] ]
+    "components": [
+      [ [ "filament", 100, "LIST" ] ],
+      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -941,7 +944,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1058,7 +1061,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur", 1 ], [ "leather", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1077,7 +1080,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur", 1 ], [ "leather", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1140,7 +1143,7 @@
     "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
-      [ [ "leather", 1 ], [ "fur", 1 ], [ "cordage_short", 2, "LIST" ] ],
+      [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ] ],
       [ [ "scrap_bronze", 6 ] ],
       [ [ "stick", 1 ], [ "2x4", 1 ] ]
     ]
@@ -1164,7 +1167,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "result": "bronze_brush_axe",
@@ -1184,8 +1187,8 @@
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ]
       ],
@@ -1362,7 +1365,7 @@
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
-      [ [ "leather", 2 ], [ "fur", 2 ], [ "cordage_short", 4, "LIST" ] ],
+      [ [ "leather_patch", 2 ], [ "fur_patch", 2 ], [ "cordage_short", 4, "LIST" ] ],
       [ [ "scrap_bronze", 10 ] ],
       [ [ "stick", 4 ], [ "2x4", 2 ] ]
     ]
@@ -1440,7 +1443,7 @@
     "components": [
       [ [ "material_aluminium_ingot", 1 ] ],
       [ [ "filament", 100, "LIST" ] ],
-      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
+      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]
   },
   {

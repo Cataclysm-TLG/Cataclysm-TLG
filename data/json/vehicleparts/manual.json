@@ -92,7 +92,7 @@
       "repair": { "skills": [ [ "mechanics", 1 ] ], "time": "6 m", "using": [ [ "adhesive", 2 ] ] }
     },
     "flags": [ "CONTROL_ANIMAL", "NO_COVER" ],
-    "breaks_into": [ { "item": "leather", "count": [ 1, 2 ] } ],
+    "breaks_into": [ { "item": "leather_patch", "count": [ 1, 2 ] } ],
     "variants": [ { "symbols": "W", "symbols_broken": "X" } ]
   }
 ]

@@ -44,7 +44,13 @@
         [ "ammonia_hydroxide", 1 ],
         [ "bleach", 1 ]
       ],
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ]
+      [
+        [ "cotton_patch", 1 ],
+        [ "fur_patch", 1 ],
+        [ "faux_fur_patch", 1 ],
+        [ "felt_patch", 1 ],
+        [ "cotton_ball", 2 ]
+      ]
     ]
   },
   {
@@ -55,7 +61,13 @@
     "tools": [ [ [ "pipe_cleaner", -1 ] ], [ [ "water_boiling_heat", 2, "LIST" ] ] ],
     "components": [
       [ [ "soapy_water", 3 ] ],
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ]
+      [
+        [ "cotton_patch", 1 ],
+        [ "fur_patch", 1 ],
+        [ "faux_fur_patch", 1 ],
+        [ "felt_patch", 1 ],
+        [ "cotton_ball", 2 ]
+      ]
     ]
   },
   {
@@ -63,7 +75,7 @@
     "type": "requirement",
     "//": "Requires a rod/wire and cloth patch or similar item.",
     "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
-    "components": [ [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "fur_patch", 1 ], [ "faux_fur_patch", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ] ]
   },
   {
     "id": "gun_lubrication",
@@ -72,7 +84,7 @@
     "qualities": [  ],
     "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
     "components": [
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ],
+      [ [ "cotton_patch", 1 ], [ "fur_patch", 1 ], [ "faux_fur_patch", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ],
       [ [ "lamp_oil", 5 ], [ "cooking_oil", 1 ], [ "cooking_oil2", 1 ], [ "motor_oil", 5 ] ]
     ]
   },
