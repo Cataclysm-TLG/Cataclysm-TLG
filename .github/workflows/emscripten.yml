@@ -1,32 +1,32 @@
 name: Emscripten build
 
-on:
-  push:
-    branches:
-    - master
-    paths-ignore:
-    - 'android/**'
-    - 'build-data/osx/**'
-    - 'doc/**'
-    - 'doxygen_doc/**'
-    - 'lang/**'
-    - 'lgtm/**'
-    - 'tools/**'
-    - '!tools/format/**'
-    - 'utilities/**'
-  pull_request:
-    branches:
-    - master
-    paths-ignore:
-    - 'android/**'
-    - 'build-data/osx/**'
-    - 'doc/**'
-    - 'doxygen_doc/**'
-    - 'lang/**'
-    - 'lgtm/**'
-    - 'tools/**'
-    - '!tools/format/**'
-    - 'utilities/**'
+# on:
+# push:
+#   branches:
+#   - master
+#   paths-ignore:
+#   - 'android/**'
+#   - 'build-data/osx/**'
+#   - 'doc/**'
+#   - 'doxygen_doc/**'
+#   - 'lang/**'
+#   - 'lgtm/**'
+#   - 'tools/**'
+#   - '!tools/format/**'
+#   - 'utilities/**'
+# pull_request:
+#   branches:
+#   - master
+#   paths-ignore:
+#   - 'android/**'
+#   - 'build-data/osx/**'
+#   - 'doc/**'
+#   - 'doxygen_doc/**'
+#   - 'lang/**'
+#   - 'lgtm/**'
+#   - 'tools/**'
+#   - '!tools/format/**'
+#   - 'utilities/**'
 
 # We only care about the latest revision of a PR, so cancel previous instances.
 concurrency:

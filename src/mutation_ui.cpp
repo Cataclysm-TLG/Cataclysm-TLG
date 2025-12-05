@@ -303,38 +303,11 @@ void avatar::power_mutations()
                         type = has_base_trait( active[i] ) ? c_red : c_light_red;
                     }
                 }
-                // TODO: track resource(s) used and specify
                 mvwputch( wBio, point( second_column, list_start_y + i - scroll_position ),
                           type, td.key );
                 std::string mut_desc;
-                std::string resource_unit;
-                int number_of_resource = 0;
-                if( md.hunger ) {
-                    resource_unit += _( " kcal" );
-                    number_of_resource++;
-                }
-                if( md.thirst ) {
-                    if( number_of_resource > 0 ) {
-                        //~ Resources consumed by a mutation: "kcal & thirst & fatigue"
-                        resource_unit += _( " &" );
-                    }
-                    resource_unit += _( " thirst" );
-                    number_of_resource++;
-                }
-                if( md.fatigue ) {
-                    if( number_of_resource > 0 ) {
-                        //~ Resources consumed by a mutation: "kcal & thirst & fatigue"
-                        resource_unit += _( " &" );
-                    }
-                    resource_unit += _( " fatigue" );
-                }
                 mut_desc += mutation_name( md.id );
-                if( md.cost > 0 && md.cooldown > 0_turns ) {
-                    mut_desc += string_format( _( " - %d%s / %s" ),
-                                               md.cost, resource_unit, to_string_clipped( md.cooldown ) );
-                } else if( md.cost > 0 ) {
-                    mut_desc += string_format( _( " - %d%s" ), md.cost, resource_unit );
-                } else if( md.cooldown > 0_turns ) {
+                if( md.cooldown > 0_turns ) {
                     mut_desc += string_format( _( " - %s" ), to_string_clipped( md.cooldown ) );
                 }
                 if( td.powered ) {
@@ -439,7 +412,7 @@ void avatar::power_mutations()
                                 deactivate_mutation( mut_id );
                                 // Action done, leave screen
                                 exit = true;
-                            } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
+                            } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.45f ) &&
                                        ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                        ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
                                 add_msg_if_player( m_neutral,
@@ -613,7 +586,7 @@ void avatar::power_mutations()
                                     deactivate_mutation( mut_id );
                                     // Action done, leave screen
                                     exit = true;
-                                } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.8f ) &&
+                                } else if( ( !mut_data.hunger || get_kcal_percent() >= 0.5f ) &&
                                            ( !mut_data.thirst || get_thirst() <= 400 ) &&
                                            ( !mut_data.fatigue || get_fatigue() <= 400 ) ) {
                                     add_msg_if_player( m_neutral,
