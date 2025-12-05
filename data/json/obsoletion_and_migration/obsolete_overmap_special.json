@@ -16,7 +16,7 @@
   },
   {
     "type": "overmap_special_migration",
-    "id": "bandit_work_camp",
-    "new_id": "sand_pit"
+    "id": "Occupied Lumbermill",
+    "new_id": "Lumbermill"
   }
 ]
