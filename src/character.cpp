@@ -5858,7 +5858,7 @@ void Character::check_needs_extremes()
                     } else if( get_kcal_percent() < 0.25f ) {
                         category = "emaciated";
                     } else if( get_kcal_percent() < 0.5f ) {
-                        category = "malnutrition";
+                        category = "malnourished";
                     } else if( get_kcal_percent() < 0.8f ) {
                         category = "low_cal";
                     }
@@ -5868,7 +5868,7 @@ void Character::check_needs_extremes()
                     } else if( get_kcal_percent() < 0.25f ) {
                         category = "empty_emaciated";
                     } else if( get_kcal_percent() < 0.5f ) {
-                        category = "empty_malnutrition";
+                        category = "empty_malnourished";
                     } else if( get_kcal_percent() < 0.8f ) {
                         category = "empty_low_cal";
                     }
