@@ -24,7 +24,6 @@
     "bonus_per": { "rng": [ -2, 2 ] },
     "worn_override": "REFUGEE_Guneet_worn",
     "carry_override": "REFUGEE_Guneet_carried",
-    "weapon_override": "REFUGEE_Guneet_wield",
     "traits": [
       { "group": "NPC_starting_traits" },
       { "group": "Appearance_SouthAsian" },
@@ -45,6 +44,8 @@
       { "item": "tshirt" },
       { "item": "jeans" },
       { "item": "turban" },
+      { "item": "backpack" },
+      { "item": "kirpan", "container-item": "sheath" },
       { "item": "sneakers" }
     ]
   },
@@ -53,12 +54,6 @@
     "id": "REFUGEE_Guneet_carried",
     "subtype": "collection",
     "entries": [ { "item": "portable_game" } ]
-  },
-  {
-    "type": "item_group",
-    "id": "REFUGEE_Guneet_wield",
-    "subtype": "distribution",
-    "entries": [ { "item": "kirpan", "container-item": "sheath" } ]
   },
   {
     "type": "talk_topic",
