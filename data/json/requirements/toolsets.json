@@ -147,77 +147,26 @@
   {
     "id": "metal_casting_small",
     "type": "requirement",
-    "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_small_improvised", -1, "LIST" ], [ "metal_casting_small_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting",
-    "type": "requirement",
-    "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_improvised", -1, "LIST" ], [ "metal_casting_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting_small_proper",
-    "type": "requirement",
     "//": "A small prefab clay mold.",
     "tools": [ [ [ "casting_mold_small", -1 ] ] ]
   },
   {
-    "id": "metal_casting_proper",
+    "id": "metal_casting",
     "type": "requirement",
     "//": "A reasonably-sized prefab clay mold.",
     "tools": [ [ [ "casting_mold", -1 ] ] ]
   },
   {
-    "id": "metal_casting_improvised",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold.",
-    "tools": [ [ [ "box_medium_wood", -1 ], [ "box_medium_metal", -1 ] ], [ [ "material_sand", 90 ] ] ]
-  },
-  {
-    "id": "metal_casting_small_improvised",
-    "type": "requirement",
-    "//": "A reasonably-sized box to contain sand for use as a mold.",
-    "tools": [
-      [
-        [ "box_small_wood", -1 ],
-        [ "box_medium_wood", -1 ],
-        [ "box_small_metal", -1 ],
-        [ "box_medium_metal", -1 ],
-        [ "toolbox_workshop_empty", -1 ]
-      ],
-      [ [ "material_sand", 30 ] ]
-    ]
-  },
-  {
     "id": "metal_casting_long",
     "type": "requirement",
-    "//": "A long box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_large_improvised", -1, "LIST" ], [ "metal_casting_long_proper", -1, "LIST" ] ] ]
+    "//": "A prefab clay mold.",
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ]
   },
   {
     "id": "metal_casting_large",
     "type": "requirement",
-    "//": "A large box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_large_improvised", -1, "LIST" ], [ "metal_casting_large_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting_long_proper",
-    "type": "requirement",
-    "//": "A long box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "casting_mold_long", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_large_proper",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold, or a prefab clay mold.",
+    "//": "A prefab clay mold.",
     "tools": [ [ [ "casting_mold_large", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_large_improvised",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold.",
-    "tools": [ [ [ "box_large_wood", -1 ], [ "box_large_metal", -1 ] ], [ [ "material_sand", 300 ] ] ]
   },
   {
     "id": "blacksmithing_simple",

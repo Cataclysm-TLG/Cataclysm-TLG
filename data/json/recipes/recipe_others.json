@@ -907,9 +907,10 @@
     "result": "pipe_cleaner",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "mechanics",
+    "skill_used": "fabrication",
     "difficulty": 1,
     "time": "2 m",
+    "autolearn": true,
     "reversible": true,
     "book_learn": [
       [ "manual_shotgun", 0 ],
@@ -917,10 +918,13 @@
       [ "manual_smg", 0 ],
       [ "manual_pistol", 0 ],
       [ "recipe_bullets", 0 ],
-      [ "textbook_mechanics", 1 ],
-      [ "decoy_elfa", 1 ],
-      [ "mag_mechanics", 2 ],
-      [ "mag_rifle", 2 ]
+      [ "textbook_mechanics", 0 ],
+      [ "decoy_elfa", 0 ],
+      [ "mag_mechanics", 0 ],
+      [ "mag_rifle", 0 ],
+      [ "mag_pistol", 0 ],
+      [ "mag_shotgun", 0 ],
+      [ "mag_smg", 0 ]
     ],
     "components": [ [ [ "wire", 2 ], [ "cable", 2 ] ], [ [ "yarn", 1 ], [ "cotton_ball", 1 ], [ "wool_staple", 1 ] ] ]
   },
