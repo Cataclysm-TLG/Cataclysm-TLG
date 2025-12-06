@@ -2794,32 +2794,12 @@ void Character::process_turn()
     }
 
     // Persist grabs as long as our target is adjacent.
-    // Question: Why don't we check monsters here?
-    if( grab_1.victim != nullptr && !grab_1.victim->is_monster() ) {
-        bool remove = false;
+    if( grab_1.victim != nullptr ) {
         if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
-            remove = true;
+            release_grapple();
         }
-        if( has_effect( effect_incorporeal ) ) {
-            remove = true;
-        }
-        if( remove ) {
-            for( const effect &eff : grab_1.victim->get_effects_with_flag( json_flag_GRAB ) ) {
-                const efftype_id effid = eff.get_id();
-                add_msg_debug( debugmode::DF_CHARACTER, "Orphan grab found and removed from %s.",
-                               grab_1.victim->disp_name() );
-                if( eff.get_intensity() == grab_1.grab_strength ) {
-                    grab_1.victim->remove_effect( effid );
-                    // For now, GRAB_FILTER is only for a character's grab_1, so we can just remove it.
-                    // This may need to be revisited when multigrabs are added.
-                    for( const effect &youeff : get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
-                        const efftype_id youeffid = youeff.get_id();
-                        remove_effect( youeffid );
-                    }
-                    grab_1.clear();
-                    break;
-                }
-            }
+        if( has_effect( effect_incorporeal ) || grab_1.victim->has_effect( effect_incorporeal ) ) {
+            release_grapple();
         }
     }
 
@@ -11545,7 +11525,6 @@ void Character::process_effects()
         remove_effect( effect_blood_spiders );
         remove_effect( effect_brainworms );
         remove_effect( effect_paincysts );
-        add_msg_if_player( m_good, _( "Something writhes inside of you as it dies." ) );
     }
     if( has_flag( json_flag_ACIDBLOOD ) && ( has_effect( effect_dermatik ) ||
             has_effect( effect_bloodworms ) ||
@@ -11558,7 +11537,6 @@ void Character::process_effects()
     }
     if( has_trait( trait_EATHEALTH ) && has_effect( effect_tapeworm ) ) {
         remove_effect( effect_tapeworm );
-        add_msg_if_player( m_good, _( "Your bowels gurgle as something inside them dies." ) );
     }
     if( has_flag( json_flag_INFECTION_IMMUNE ) && ( has_effect( effect_bite ) ||
             has_effect( effect_infected ) ||
@@ -11567,7 +11545,9 @@ void Character::process_effects()
         remove_effect( effect_infected );
         remove_effect( effect_recover );
     }
-
+    if( ( has_effect( effect_winded ) || in_sleep_state() ) && has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        release_grapple();
+    }
     // Clear hardcoded bonuses from last turn
     // Recalculated in process_one_effect
     str_bonus_hardcoded = 0;
