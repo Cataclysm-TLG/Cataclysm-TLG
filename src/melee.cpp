@@ -114,10 +114,6 @@ static const efftype_id effect_venom_player2( "venom_player2" );
 static const efftype_id effect_venom_weaken( "venom_weaken" );
 static const efftype_id effect_winded( "winded" );
 
-static const itype_id itype_fur( "fur" );
-static const itype_id itype_leather( "leather" );
-static const itype_id itype_sheet_cotton( "sheet_cotton" );
-
 static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
 static const json_character_flag json_flag_CANNOT_MOVE( "CANNOT_MOVE" );
 static const json_character_flag json_flag_CANNOT_TAKE_DAMAGE( "CANNOT_TAKE_DAMAGE" );
@@ -244,29 +240,7 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     itype_id big_comp = itype_id::NULL_ID();
     // Fragile items that fall apart easily when used as a weapon due to poor construction quality
     if( shield->has_flag( flag_FRAGILE_MELEE ) ) {
-        const float fragile_factor = 6.0f;
-        int weak_chip = INT_MAX;
-        units::volume big_vol = 0_ml;
-
-        // Items that should have no bearing on durability
-        const std::set<itype_id> blacklist = { itype_sheet_cotton, itype_leather, itype_fur };
-
-        for( item_components::type_vector_pair &tvp : shield->components ) {
-            if( blacklist.count( tvp.first ) > 0 ) {
-                continue;
-            }
-            for( item &comp : tvp.second ) {
-                if( weak_chip > comp.chip_resistance() ) {
-                    weak_chip = comp.chip_resistance();
-                    weak_comp = comp.typeId();
-                }
-                if( comp.volume() > big_vol ) {
-                    big_vol = comp.volume();
-                    big_comp = comp.typeId();
-                }
-            }
-        }
-        material_factor = ( weak_chip < INT_MAX ? weak_chip : shield->chip_resistance() ) / fragile_factor;
+        material_factor = ( shield->chip_resistance( true ) ) / 6.0f; // 6.0f is a magic number carried over from DDA. Adjust it for more or less overall fragility.
     } else {
         material_factor = shield->chip_resistance();
     }
