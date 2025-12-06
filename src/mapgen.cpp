@@ -7144,7 +7144,8 @@ void map::place_spawns( const mongroup_id &group, const int chance,
         } while( impassable( p ) && tries > 0 );
 
         // Pick a monster type.
-        std::vector<MonsterGroupResult> spawn_details = MonsterGroupManager::GetResultFromGroup( group, &num );
+        std::vector<MonsterGroupResult> spawn_details = MonsterGroupManager::GetResultFromGroup( group,
+                &num );
 
         for( const MonsterGroupResult &mgr : spawn_details ) {
             // Non-flying monsters cannot spawn in open air.
@@ -7152,7 +7153,7 @@ void map::place_spawns( const mongroup_id &group, const int chance,
                 continue;
             }
             add_spawn( mgr.name, mgr.pack_size, { p, abs_sub.z() },
-                    friendly, -1, mission_id, name, mgr.data );
+                       friendly, -1, mission_id, name, mgr.data );
         }
     }
 }

@@ -2954,16 +2954,17 @@ void monster::die( map *here, Creature *nkiller )
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
             // Is our grabber around?
             for( const tripoint_bub_ms loc : surrounding ) {
-                Creature *someone = creatures.creature_at( loc );
-                if( someone && someone->has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
-                    add_msg_debug( debugmode::DF_MATTACK, "Grabber found: %s", someone->disp_name() );
-                    grabber = someone;
+                Character *guy = creatures.creature_at<Character>( loc );
+                if( guy && guy->grab_1.victim && guy->grab_1.victim.get() == static_cast<Creature *>( this ) ) {
+                    add_msg_debug( debugmode::DF_MONSTER, "Dying monster found grabbing character: %s",
+                                   guy->disp_name() );
+                    grabber = guy;
                     break;
                 }
             }
             if( grabber == nullptr ) {
                 remove_effect( grab.get_id() );
-                add_msg_debug( debugmode::DF_MATTACK, "Orphan grab found and removed from dead monster" );
+                add_msg_debug( debugmode::DF_MONSTER, "Orphan grab found and removed from dead monster" );
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
