@@ -357,6 +357,7 @@
     "subtype": "collection",
     "entries": [
       { "item": "e_tool", "prob": 60 },
+      { "item": "pipe_cleaner", "prob": 1 },
       { "item": "mask_gas", "prob": 20, "charges": [ 0, 100 ] },
       { "item": "two_way_radio", "prob": 60, "charges": [ 0, 100 ] },
       { "group": "infantry_knives", "prob": 80 }
@@ -646,6 +647,7 @@
       { "item": "winter_gloves_army", "prob": 20 },
       { "item": "tank_top", "variant": "tank_top_camo", "prob": 70 },
       { "group": "eod_armor", "prob": 15 },
+      { "item": "pipe_cleaner", "prob": 10 },
       { "group": "ammo_pocket_batteries_full", "prob": 40 },
       { "item": "radio", "prob": 10, "charges": [ 10, 95 ] },
       { "item": "boots_combat", "prob": 50 },
