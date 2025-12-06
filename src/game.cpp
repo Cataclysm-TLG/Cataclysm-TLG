@@ -12248,10 +12248,10 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
     tripoint_bub_ms pt = pos;
     creature_tracker &creatures = get_creature_tracker();
     c->add_effect( effect_airborne, 1_turns );
-        if( !c->is_monster() && c->has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
-            // I'm afraid you're going to have to put down the zombie dog before you go flying.
-            c->as_character()->release_grapple();
-        }
+    if( !c->is_monster() && c->has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        // I'm afraid you're going to have to put down the zombie dog before you go flying.
+        c->as_character()->release_grapple();
+    }
     while( range > 0 ) {
         c->underwater = false;
         // TODO: Check whenever it is actually in the viewport

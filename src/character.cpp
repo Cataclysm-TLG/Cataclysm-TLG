@@ -11545,7 +11545,8 @@ void Character::process_effects()
         remove_effect( effect_infected );
         remove_effect( effect_recover );
     }
-    if( ( has_effect( effect_winded ) || in_sleep_state() ) && has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+    if( ( has_effect( effect_winded ) || in_sleep_state() ) &&
+        has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
         release_grapple();
     }
     // Clear hardcoded bonuses from last turn
