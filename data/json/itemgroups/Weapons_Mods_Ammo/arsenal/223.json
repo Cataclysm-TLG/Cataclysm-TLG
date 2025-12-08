@@ -50,7 +50,7 @@
     "id": "nested_m27_assault_rifle_no_ammo",
     "type": "item_group",
     "subtype": "collection",
-    "items": [ { "item": "modular_m27_assault_rifle" }, { "group": "stanag_mags", "count": [ 1, 3 ] } ]
+    "items": [ { "item": "modular_m27_assault_rifle", "variant": "modular_m27iar" }, { "group": "stanag_mags", "count": [ 1, 3 ] } ]
   },
   {
     "id": "stanag_mags",
