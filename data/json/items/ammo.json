@@ -1368,23 +1368,6 @@
     "use_action": [ "RPGDIE" ]
   },
   {
-    "id": "scrap_bronze",
-    "type": "GENERIC",
-    "category": "spare_parts",
-    "name": { "str": "chunk of bronze", "str_pl": "chunks of bronze" },
-    "description": "Some decent-sized chunks of scrap bronze, for fashioning some old-school items.",
-    "weight": "300 g",
-    "volume": "38 ml",
-    "//": "300g / 8.8g/ml = ~34.1ml. Add 10% to take an uneven chunk into account = 37.5ml rounded upwards to 38ml.",
-    "price": "1 USD 69 cent",
-    "price_postapoc": "1 USD",
-    "to_hit": -2,
-    "material": [ "bronze" ],
-    "symbol": ",",
-    "color": "yellow",
-    "melee_damage": { "bash": 1 }
-  },
-  {
     "type": "AMMO",
     "id": "glowstick_juice",
     "name": { "str_sp": "glowstick juice" },

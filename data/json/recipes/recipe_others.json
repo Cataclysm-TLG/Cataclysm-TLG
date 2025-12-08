@@ -2555,10 +2555,20 @@
     "difficulty": 4,
     "time": "6 h",
     "autolearn": true,
-    "using": [ [ "forging_standard", 45 ], [ "metal_casting_large", -1, "LIST" ] ],
+    "using": [ [ "forging_standard", 45 ] ],
+    "qualities": [
+      {
+        "id": "HAMMER",
+        "level": 1
+      },
+      {
+        "id": "DIG",
+        "level": 2
+      }
+    ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "scrap_bronze", 90 ] ] ]
+    "components": [ [ [ "bronze_fragment", 90 ] ] ]
   },
   {
     "type": "recipe",

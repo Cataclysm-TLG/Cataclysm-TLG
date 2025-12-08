@@ -124,7 +124,7 @@
     "book_learn": [ [ "mag_survival", 1 ], [ "atomic_survival", 1 ], [ "textbook_carpentry", 2 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "using": [ [ "redsmithing_standard", 2 ] ],
-    "tools": [ [ "casting_mold_small", -1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "components": [
       [ [ "stick", 1 ], [ "2x4", 1 ] ],

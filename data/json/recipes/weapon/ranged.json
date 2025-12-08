@@ -1475,12 +1475,12 @@
       { "proficiency": "prof_carving" }
     ],
     "using": [ [ "redsmithing_standard", 2 ] ],
-    "tools": [ [ "casting_mold_small", -1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],
       [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ], [ "filament", 100, "LIST" ] ],
-      [ [ "scrap_bronze", 2 ] ],
+      [ [ "bronze_fragment", 2 ] ],
       [ [ "stick_long", 1 ] ],
       [ [ "fletching", 2, "LIST" ] ]
     ]

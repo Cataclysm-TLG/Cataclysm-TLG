@@ -297,7 +297,7 @@
     "time": "1 h",
     "tools": [ [ [ "angle_grinder", 50 ] ] ],
     "//": "Slight loss from rounding",
-    "components": [ [ [ "scrap_bronze", 24 ] ] ]
+    "components": [ [ [ "bronze_fragment", 24 ] ] ]
   },
   {
     "result": "10l_aluminum",

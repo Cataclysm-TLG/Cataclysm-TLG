@@ -3592,5 +3592,10 @@
     "type": "MIGRATION",
     "id": "sheet_felt",
     "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_bronze",
+    "replace": "bronze_fragment"
   }
 ]

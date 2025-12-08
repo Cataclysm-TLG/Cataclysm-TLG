@@ -31,7 +31,7 @@
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_armschina", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "using": [ [ "redsmithing_standard", 5 ] ],
-    "tools": [ [ "casting_mold_long", -1 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -42,7 +42,7 @@
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 5 ] ]
+      [ [ "bronze_fragment", 5 ] ]
     ]
   },
   {
@@ -69,7 +69,7 @@
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "using": [ [ "redsmithing_standard", 4 ] ],
-    "tools": [ [ "casting_mold_long", -1 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -80,7 +80,7 @@
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 4 ] ]
+      [ [ "bronze_fragment", 4 ] ]
     ]
   },
   {
@@ -95,7 +95,7 @@
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "using": [ [ "redsmithing_standard", 5 ] ],
-    "tools": [ [ "casting_mold_long", -1 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -106,7 +106,7 @@
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 5 ] ]
+      [ [ "bronze_fragment", 5 ] ]
     ]
   },
   {
@@ -121,7 +121,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "using": [ [ "redsmithing_standard", 4 ] ],
-    "tools": [ [ "casting_mold_long", -1 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -132,7 +132,7 @@
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 4 ] ]
+      [ [ "bronze_fragment", 4 ] ]
     ]
   },
   {

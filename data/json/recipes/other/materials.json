@@ -299,7 +299,7 @@
     "autolearn": false,
     "using": [ [ "forging_standard", 10 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
-    "components": [ [ [ "5l_bronze", 2 ], [ "1l_bronze", 10 ], [ "scrap_bronze", 260 ] ] ],
+    "components": [ [ [ "5l_bronze", 2 ], [ "1l_bronze", 10 ], [ "bronze_fragment", 260 ] ] ],
     "book_learn": [ [ "alloy_book", 2 ], [ "bronze_book", 2 ], [ "bronze_mag", 3 ] ]
   },
   {
@@ -314,7 +314,7 @@
     "autolearn": false,
     "using": [ [ "forging_standard", 5 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
-    "components": [ [ [ "1l_bronze", 5 ], [ "scrap_bronze", 130 ] ] ],
+    "components": [ [ [ "1l_bronze", 5 ], [ "bronze_fragment", 130 ] ] ],
     "book_learn": [ [ "alloy_book", 2 ], [ "bronze_book", 2 ], [ "bronze_mag", 3 ] ]
   },
   {
@@ -330,11 +330,11 @@
     "using": [ [ "forging_standard", 1 ], [ "bronzesmithing_tools", 1 ] ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "//": "There is a slight loss here, but rounding up would mean you could create more magically.",
-    "components": [ [ [ "scrap_bronze", 26 ] ] ],
+    "components": [ [ [ "bronze_fragment", 26 ] ] ],
     "book_learn": [ [ "alloy_book", 2 ], [ "bronze_book", 2 ], [ "bronze_mag", 3 ] ]
   },
   {
-    "result": "scrap_bronze",
+    "result": "bronze_fragment",
     "type": "recipe",
     "activity_level": "ACTIVE_EXERCISE",
     "category": "CC_OTHER",
@@ -1537,7 +1537,7 @@
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "//": "The idea is that you make bas-relief prints including the holes in the clay, pour then break the clay to get the buttons and file them down.",
-    "components": [ [ [ "scrap_bronze", 1 ] ], [ [ "clay_lump", 1 ] ] ]
+    "components": [ [ [ "bronze_fragment", 1 ] ], [ [ "clay_lump", 1 ] ] ]
   },
   {
     "result": "cannonball_4lb",

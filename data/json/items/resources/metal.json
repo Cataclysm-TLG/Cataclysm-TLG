@@ -481,6 +481,23 @@
     "color": "yellow"
   },
   {
+    "id": "bronze_fragment",
+    "type": "GENERIC",
+    "category": "spare_parts",
+    "name": { "str": "bronze fragment", "str_pl": "bronze fragments" },
+    "description": "A small piece of copper alloyed with another metal such as aluminum or tin.",
+    "weight": "300 g",
+    "volume": "38 ml",
+    "//": "300g / 8.8g/ml = ~34.1ml. Add 10% to take an uneven chunk into account = 37.5ml rounded upwards to 38ml.",
+    "price": "1 USD 69 cent",
+    "price_postapoc": "1 USD",
+    "to_hit": -2,
+    "material": [ "bronze" ],
+    "symbol": ",",
+    "color": "yellow",
+    "melee_damage": { "bash": 1 }
+  },
+  {
     "id": "1l_bronze",
     "type": "GENERIC",
     "category": "spare_parts",

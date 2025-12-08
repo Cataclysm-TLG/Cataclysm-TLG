@@ -2107,7 +2107,7 @@
     "time": "9 h 10 m",
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 5 ] ],
     "using": [ [ "forging_standard", 3 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
+    "components": [ [ [ "bronze_fragment", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [ { "proficiency": "prof_armorsmithing" }, { "proficiency": "prof_redsmithing" } ]
   },
   {
@@ -2116,7 +2116,7 @@
     "copy-from": "helmet_corinthian",
     "time": "9 h 10 m",
     "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_corinthian",
@@ -2124,7 +2124,7 @@
     "copy-from": "helmet_corinthian",
     "time": "10 h 20 m",
     "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
+    "components": [ [ [ "bronze_fragment", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "helmet_bronze",
@@ -2138,7 +2138,7 @@
     "autolearn": true,
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
     "using": [ [ "forging_standard", 3 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
+    "components": [ [ [ "bronze_fragment", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [ { "proficiency": "prof_armorsmithing" }, { "proficiency": "prof_redsmithing" } ]
   },
   {
@@ -2147,7 +2147,7 @@
     "copy-from": "helmet_bronze",
     "time": "9 h 10 m",
     "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_bronze",
@@ -2155,7 +2155,7 @@
     "copy-from": "helmet_bronze",
     "time": "10 h 20 m",
     "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
+    "components": [ [ [ "bronze_fragment", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "helmet_armet",

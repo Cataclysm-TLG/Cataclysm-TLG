@@ -1027,8 +1027,15 @@
     ],
     "material_thickness": 0.5,
     "flags": [ "BELTED", "WATER_FRIENDLY", "PALS_MEDIUM", "OVERSIZE", "UNRESTRICTED" ],
-    "armor": [ { "encumbrance": 1, 
-        "volume_encumber_modifier": 0.3, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ],
+    "armor": [
+      {
+        "encumbrance": 1,
+        "volume_encumber_modifier": 0.3,
+        "coverage": 100,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_waist" ]
+      }
+    ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -1564,7 +1571,7 @@
     "flags": [ "BELTED", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 1, 
+        "encumbrance": 1,
         "volume_encumber_modifier": 0.2,
         "coverage": 25,
         "covers": [ "foot_l", "foot_r" ],

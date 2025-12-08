@@ -178,7 +178,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "DIGGING", "level": 2 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "scrap_bronze", 90 ] ] ]
+    "components": [ [ [ "bronze_fragment", 90 ] ] ]
   },
   {
     "type": "recipe",

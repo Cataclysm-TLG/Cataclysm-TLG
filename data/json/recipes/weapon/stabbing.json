@@ -250,7 +250,7 @@
     "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "scrap_bronze", 4 ] ],
+      [ [ "bronze_fragment", 4 ] ],
       [ [ "stick_long", 1 ] ],
       [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]
@@ -272,7 +272,7 @@
     ],
     "using": [ [ "redsmithing_standard", 1 ] ],
     "tools": [ [ [ "casting_mold_small", -1 ] ] ],
-    "components": [ [ [ "scrap_bronze", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
+    "components": [ [ [ "bronze_fragment", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -383,7 +383,7 @@
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "cordage_short", 2, "LIST" ] ],
-      [ [ "scrap_bronze", 2 ] ],
+      [ [ "bronze_fragment", 2 ] ],
       [ [ "leather_patch", 1 ], [ "fur_patch", 1 ] ],
       [ [ "adhesive", 2, "LIST" ] ]
     ]
