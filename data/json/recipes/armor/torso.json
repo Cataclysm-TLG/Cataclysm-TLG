@@ -2534,7 +2534,7 @@
     "autolearn": true,
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
     "using": [ [ "forging_standard", 12 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 22 ] ] ],
+    "components": [ [ [ "bronze_fragment", 22 ] ] ],
     "proficiencies": [ { "proficiency": "prof_armorsmithing" }, { "proficiency": "prof_redsmithing" } ]
   },
   {
@@ -2543,7 +2543,7 @@
     "copy-from": "bronze_cuirass",
     "time": "9 h 40 m",
     "using": [ [ "forging_standard", 8 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 15 ] ] ]
+    "components": [ [ [ "bronze_fragment", 15 ] ] ]
   },
   {
     "result": "bronze_cuirass_xl",
@@ -2551,7 +2551,7 @@
     "copy-from": "bronze_cuirass",
     "time": "11 h",
     "using": [ [ "forging_standard", 18 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 32 ] ] ]
+    "components": [ [ [ "bronze_fragment", 32 ] ] ]
   },
   {
     "result": "load_bearing_vest_sling",

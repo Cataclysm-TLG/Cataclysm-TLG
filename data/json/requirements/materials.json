@@ -420,7 +420,7 @@
     "id": "bronze_tiny",
     "type": "requirement",
     "//": "Materials for use when forging atypically small items from bronze",
-    "components": [ [ [ "scrap_bronze", 1 ] ] ]
+    "components": [ [ [ "bronze_fragment", 1 ] ] ]
   },
   {
     "id": "rock_flaking_any",

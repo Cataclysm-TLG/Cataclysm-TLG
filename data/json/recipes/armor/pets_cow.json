@@ -261,7 +261,7 @@
     "time": "28 h 45 m",
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
     "using": [ [ "forging_standard", 144 ], [ "bronzesmithing_tools", 12 ] ],
-    "components": [ [ [ "scrap_bronze", 72 ] ], [ [ "leather_armor_cow", 1 ] ] ],
+    "components": [ [ [ "bronze_fragment", 72 ] ], [ [ "leather_armor_cow", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic", "time_multiplier": 1.1, "skill_penalty": 0.15 },
       { "proficiency": "prof_closures", "time_multiplier": 1.1 },

@@ -246,10 +246,11 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "scrap_bronze", 4 ] ],
+      [ [ "bronze_fragment", 4 ] ],
       [ [ "stick_long", 1 ] ],
       [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]
@@ -269,8 +270,9 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
-    "components": [ [ [ "scrap_bronze", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
+    "using": [ [ "redsmithing_standard", 1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
+    "components": [ [ [ "bronze_fragment", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -352,7 +354,8 @@
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -375,11 +378,12 @@
     "time": "6 h 30 m",
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "cordage_short", 2, "LIST" ] ],
-      [ [ "scrap_bronze", 2 ] ],
+      [ [ "bronze_fragment", 2 ] ],
       [ [ "leather_patch", 1 ], [ "fur_patch", 1 ] ],
       [ [ "adhesive", 2, "LIST" ] ]
     ]
@@ -476,7 +480,8 @@
     "time": "1 h",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -530,7 +535,8 @@
     "time": "30 m",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },

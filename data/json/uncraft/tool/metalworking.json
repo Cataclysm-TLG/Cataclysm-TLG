@@ -29,7 +29,7 @@
     "activity_level": "MODERATE_EXERCISE",
     "time": "50 m",
     "tools": [ [ [ "angle_grinder", 45 ] ] ],
-    "components": [ [ [ "scrap_bronze", 86 ] ] ]
+    "components": [ [ [ "bronze_fragment", 86 ] ] ]
   },
   {
     "result": "anvil_heavy",

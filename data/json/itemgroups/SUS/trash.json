@@ -338,7 +338,7 @@
       { "item": "pipe", "prob": 5 },
       { "item": "nuts_bolts", "prob": 10, "charges": [ 1, 15 ] },
       { "item": "scrap", "prob": 5, "count": [ 1, 2 ] },
-      { "item": "scrap_bronze", "prob": 2 },
+      { "item": "bronze_fragment", "prob": 2 },
       { "item": "scrap_brass", "prob": 2 },
       { "item": "scrap_tin", "prob": 4 },
       { "item": "scrap_aluminum", "prob": 4 },

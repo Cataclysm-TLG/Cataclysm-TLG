@@ -983,7 +983,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_articulation" }
     ],
-    "components": [ [ [ "scrap_bronze", 12 ] ] ]
+    "components": [ [ [ "bronze_fragment", 12 ] ] ]
   },
   {
     "result": "bronze_greaves_xs",
@@ -991,7 +991,7 @@
     "copy-from": "bronze_greaves",
     "time": "8 h",
     "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 3 ], [ "clasps", 3 ] ],
-    "components": [ [ [ "scrap_bronze", 9 ] ] ]
+    "components": [ [ [ "bronze_fragment", 9 ] ] ]
   },
   {
     "result": "bronze_greaves_xl",
@@ -999,7 +999,7 @@
     "copy-from": "bronze_greaves",
     "time": "9 h",
     "using": [ [ "forging_standard", 8 ], [ "bronzesmithing_tools", 1 ], [ "strap_small", 4 ], [ "clasps", 4 ] ],
-    "components": [ [ [ "scrap_bronze", 16 ] ] ]
+    "components": [ [ [ "bronze_fragment", 16 ] ] ]
   },
   {
     "result": "leather_leg_guards",

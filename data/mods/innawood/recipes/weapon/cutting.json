@@ -23,7 +23,7 @@
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 4 ] ]
+      [ [ "bronze_fragment", 4 ] ]
     ]
   }
 ]

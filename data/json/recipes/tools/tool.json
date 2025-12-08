@@ -293,9 +293,10 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "scrap_bronze", 5 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ] ]
   },
   {
     "result": "steel_pan",
@@ -878,7 +879,8 @@
     "reversible": true,
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [ [ [ "copper_scrap_equivalent", 2, "LIST" ] ] ]
   },
   {
@@ -1167,7 +1169,7 @@
     "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
-    "components": [ [ [ "scrap_bronze", 2 ] ] ]
+    "components": [ [ [ "bronze_fragment", 2 ] ] ]
   },
   {
     "type": "recipe",
