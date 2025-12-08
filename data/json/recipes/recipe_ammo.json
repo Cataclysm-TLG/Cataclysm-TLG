@@ -264,7 +264,8 @@
     "time": "90 m",
     "book_learn": [ [ "textbook_mesoam", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],

@@ -145,30 +145,6 @@
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ], [ [ "forge", 13 ], [ "oxy_torch", 13 ] ] ]
   },
   {
-    "id": "metal_casting_small",
-    "type": "requirement",
-    "//": "A small prefab clay mold.",
-    "tools": [ [ [ "casting_mold_small", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting",
-    "type": "requirement",
-    "//": "A reasonably-sized prefab clay mold.",
-    "tools": [ [ [ "casting_mold", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_long",
-    "type": "requirement",
-    "//": "A prefab clay mold.",
-    "tools": [ [ [ "casting_mold_long", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_large",
-    "type": "requirement",
-    "//": "A prefab clay mold.",
-    "tools": [ [ [ "casting_mold_large", -1 ] ] ]
-  },
-  {
     "id": "blacksmithing_simple",
     "type": "requirement",
     "//": "Includes forging resources as well as tools needed for the simplest blacksmithing tasks. Per forging_standard energy cost balanced for one steel chunk.",

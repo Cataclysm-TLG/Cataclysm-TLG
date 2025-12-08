@@ -116,7 +116,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "using": [ [ "redsmithing_simple", 2 ], [ "metal_casting", -1 ], [ "bronze_tiny", 3 ] ],
+    "using": [ [ "redsmithing_simple", 2 ], [ "casting_mold", -1 ], [ "bronze_tiny", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -174,7 +174,7 @@
     "time": "125 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_toolsmithing" } ],
-    "using": [ [ "forging_standard", 3 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "forging_standard", 3 ], [ "casting_mold", -1 ] ],
     "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "GRIND", "level": 2 } ],
     "components": [ [ [ "steel_fragment", 3 ] ], [ [ "nails", 1, "LIST" ], [ "nuts_bolts", 1 ] ] ]
   },
@@ -217,7 +217,7 @@
     "time": "45 m",
     "autolearn": true,
     "book_learn": [ [ "textbook_fabrication", 3 ], [ "textbook_weparabic", 5 ], [ "bronze_book", 4 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold_small", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -330,7 +330,7 @@
     "time": "2 h",
     "book_learn": [ [ "bronze_book", 4 ] ],
     "autolearn": true,
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold_small", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -355,7 +355,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_toolsmithing" }
     ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ] ],
@@ -374,7 +374,7 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ] ],
     "autolearn": true,
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold_small", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -394,7 +394,7 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ] ],
     "autolearn": true,
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold", -1 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -780,7 +780,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_toolsmithing" }
     ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "leather_patch", 2 ], [ "fur_patch", 2 ], [ "cordage_short", 4, "LIST" ] ],
@@ -1140,7 +1140,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_toolsmithing" }
     ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "leather_patch", 1 ], [ "fur_patch", 1 ], [ "cordage_short", 2, "LIST" ] ],
@@ -1181,7 +1181,7 @@
     "book_learn": [ [ "bronze_book", 5 ] ],
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ], [ "casting_mold", -1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [
@@ -1361,9 +1361,9 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_toolsmithing" }
     ],
-    "using": [ [ "redsmithing_standard", 10 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 10 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
+    "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ], [ [ "casting_mold", -1 ] ] ],
     "components": [
       [ [ "leather_patch", 2 ], [ "fur_patch", 2 ], [ "cordage_short", 4, "LIST" ] ],
       [ [ "scrap_bronze", 10 ] ],
@@ -1746,7 +1746,7 @@
     "difficulty": 5,
     "time": "5 h",
     "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 2 ] ],
     "book_learn": [ [ "textbook_fabrication", 3 ], [ "manual_mechanics", 3 ], [ "manual_fabrication", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -1759,6 +1759,6 @@
       { "id": "CHISEL", "level": 3 },
       { "id": "DRILL", "level": 2 }
     ],
-    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
+    "tools": [ [ [ "hotcut_any", 1, "LIST" ] ], [ [ "casting_mold", -1 ] ] ]
   }
 ]

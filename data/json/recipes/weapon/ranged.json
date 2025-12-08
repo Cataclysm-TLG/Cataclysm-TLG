@@ -1474,7 +1474,8 @@
       { "proficiency": "prof_fletching" },
       { "proficiency": "prof_carving" }
     ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ "casting_mold_small", -1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 20, "LIST" ] ],

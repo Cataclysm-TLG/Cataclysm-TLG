@@ -30,7 +30,8 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_armschina", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 5 ] ],
+    "tools": [ [ "casting_mold_long", -1 ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -67,7 +68,8 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ "casting_mold_long", -1 ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -92,7 +94,8 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 5 ] ],
+    "tools": [ [ "casting_mold_long", -1 ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -117,7 +120,8 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ "casting_mold_long", -1 ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
