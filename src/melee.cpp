@@ -240,7 +240,8 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     itype_id big_comp = itype_id::NULL_ID();
     // Fragile items that fall apart easily when used as a weapon due to poor construction quality
     if( shield->has_flag( flag_FRAGILE_MELEE ) ) {
-        material_factor = ( shield->chip_resistance( true ) ) / 6.0f; // 6.0f is a magic number carried over from DDA. Adjust it for more or less overall fragility.
+        material_factor = ( shield->chip_resistance( true ) ) /
+                          6.0f; // 6.0f is a magic number carried over from DDA. Adjust it for more or less overall fragility.
     } else {
         material_factor = shield->chip_resistance();
     }
