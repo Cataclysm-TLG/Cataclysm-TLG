@@ -102,7 +102,7 @@ jobs:
             ccache_key: linux-llvm-13
 
           - compiler: clang++
-            os: macos-13
+            os: macos-14
             cmake: 0
             native: osx
             pch: 0
