@@ -102,14 +102,14 @@ jobs:
             ccache_key: linux-llvm-13
 
           - compiler: clang++
-            os: macos-14
+            os: macos-15
             cmake: 0
             native: osx
             pch: 0
             tiles: 1
             sound: 1
             localize: 1
-            title: Clang 14, macOS 12, Tiles, Sound, x64 and arm64 Universal Binary
+            title: Clang 14, macOS 15, Tiles, Sound, x64 and arm64 Universal Binary
             ccache_limit: 10G
             ccache_key: macos-llvm-14-universal-break1
 
