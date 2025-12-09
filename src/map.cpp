@@ -4532,27 +4532,40 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
     if( !inbounds( p ) ) {
         return bsh;
     }
+    bool smash_furn = false;
+    bool smashed_sealed = false;
+    bool smash_noitem = false;
 
-    bool bashed_sealed = false;
     if( has_flag( ter_furn_flag::TFLAG_SEALED, p ) ) {
         bash_ter_furn( p, bsh );
-        bashed_sealed = true;
+        smashed_sealed = true;
+    }
+
+    if( has_flag( ter_furn_flag::TFLAG_NOITEM, p ) ) {
+        smash_noitem = true;
     }
 
     bash_field( p, bsh );
 
-    // Don't bash items inside terrain/furniture with SEALED flag
-    if( !bashed_sealed ) {
+    const furn_t &furnid = furn( p ).obj();
+
+    if( has_furn( p ) && furnid.bash ) {
+        smash_furn = true;
+    }
+
+    // Don't smash items if there's smashable furniture here. Don't smash items in SEALED or NOITEM tiles.
+    if( !smashed_sealed && !smash_furn && !smash_noitem ) {
         manually_smash_items( p, str, false, bsh );
     }
-    // Don't bash the vehicle doing the bashing
+
+    // Don't smash the vehicle doing the smashing.
     const vehicle *veh = veh_pointer_or_null( veh_at( p ) );
     if( veh != nullptr && veh != bashing_vehicle ) {
         bash_vehicle( p, bsh );
     }
 
     // If we still didn't bash anything solid (a vehicle) or a tile with SEALED flag, bash ter/furn
-    if( !bsh.bashed_solid && !bashed_sealed ) {
+    if( !bsh.bashed_solid && !smashed_sealed ) {
         bash_ter_furn( p, bsh );
     }
 
