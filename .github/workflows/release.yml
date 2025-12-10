@@ -41,8 +41,6 @@ jobs:
           echo "tag_name=cataclysm-tlg-1.0-${{ steps.get-timestamp.outputs.time }}" >> $GITHUB_OUTPUT
           echo "release_name=Cataclysm-TLG 1.0 ${{ steps.get-timestamp.outputs.time }}" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
-      - name: Install Text::CSV Perl module (non-interactive)
-        run: cpan -T Text::CSV
       - run: |
           gh release create ${{ steps.generate_env_vars.outputs.tag_name }} --generate-notes --prerelease --title "${{ steps.generate_env_vars.outputs.release_name }}" --target "$(git log -1 --format='%H')"
 
@@ -223,8 +221,9 @@ jobs:
       - name: Install build dependencies (mac)
         if: runner.os == 'macOS'
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes brew install gettext ccache parallel dylibbundler
-          pip3 install dmgbuild biplist
+          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes brew install gettext ccache parallel dylibbundler pipx
+          pipx install dmgbuild
+          pipx install biplist
       - name: install macports (mac)
         if: runner.os == 'macOS' && matrix.tiles == 1
         uses: melusina-org/setup-macports@v1
