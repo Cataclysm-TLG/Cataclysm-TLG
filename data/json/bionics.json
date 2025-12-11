@@ -690,7 +690,7 @@
       { "condition": "ACTIVE", "values": [ { "value": "PERCEPTION", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
     ],
-    "flags": [ "BIONIC_NPC_USABLE" ],
+    "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
     "act_cost": "4 J",
     "react_cost": "4 J",
     "time": "1 s"
