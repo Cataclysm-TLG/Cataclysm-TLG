@@ -350,6 +350,13 @@
         "switch": true
       },
       {
+        "text": "What were you doing before all of this?",
+        "//": "This is a unique background story that should not be given out randomly.",
+        "topic": "BGSS_RESCUE_PILOT_1_STORY1",
+        "condition": { "and": [ { "npc_has_trait": "BGSS_Rescue_Pilot_1" } ] },
+        "switch": true
+      },
+      {
         "text": "<BOSS_intro_question>",
         "topic": "BOSS_No_Others_01_Story1",
         "condition": { "npc_has_trait": "BOSS_No_Others_01" },
