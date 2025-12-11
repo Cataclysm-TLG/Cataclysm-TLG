@@ -495,13 +495,14 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
                          obstacle_cache[target.x()][target.y()].density;  // Fraction of the tile blocked. 1.0f = all, 0.0f = none.
         float attenuation =
             obstacle_cache[target.x()][target.y()].velocity; // Fraction of velocity retained for blocked fragments.
-
         if( coverage > 0.0f ) {
-            int partial_damage = static_cast<int>( damage * coverage );
+            int partial_damage = static_cast<int>( damage * coverage * rng_float( cloud.density, 1.0f ) );
             if( optional_vpart_position vp = m->veh_at( target ) ) {
                 vp->vehicle().damage( m[0], vp->part_index(), partial_damage );
             } else {
-                m->bash( target, partial_damage, true );
+                if( rng_float( 0.f, 1.f ) > coverage ) {
+                    m->bash( target, partial_damage, true );
+                }
             }
             passing_fraction = 1.0f - coverage;
             blocked_fraction = coverage;
