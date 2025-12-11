@@ -1214,7 +1214,7 @@
     "looks_like": "goggles_welding",
     "color": "light_blue",
     "warmth": 10,
-    "environmental_protection": 16,
+    "environmental_protection": 10,
     "flags": [ "WATER_FRIENDLY", "WATERPROOF", "SWIM_GOGGLES", "SKINTIGHT", "OVERSIZE" ],
     "armor": [
       {
