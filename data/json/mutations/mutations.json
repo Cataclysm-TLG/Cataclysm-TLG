@@ -2070,27 +2070,23 @@
     "id": "ELFA_NV",
     "name": { "str": "Fey Vision" },
     "points": 3,
-    "description": "The shadows don't seem as dark now.  Activate to toggle NV-visible areas on or off.",
+    "description": "The shadows don't seem as dark now.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFAEYES" ],
     "changes_to": [ "ELFA_FNV" ],
     "threshreq": [ "THRESH_ELFA" ],
-    "category": [ "ELFA" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "ELFA" ]
   },
   {
     "type": "mutation",
     "id": "ELFA_FNV",
     "name": { "str": "Fey Nightsight" },
     "points": 5,
-    "description": "You can see almost perfectly in the dark.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see almost perfectly in the dark.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFA_NV" ],
     "category": [ "ELFA" ],
-    "threshreq": [ "THRESH_ELFA" ],
-    "active": true,
-    "starts_active": true
+    "threshreq": [ "THRESH_ELFA" ]
   },
   {
     "type": "mutation",
@@ -2110,12 +2106,10 @@
     "id": "FEL_NV",
     "name": { "str": "Feline Vision" },
     "points": 4,
-    "description": "Your optic nerves and brain caught up with your eyes.  Now you can see pretty well at night.  Activate to toggle NV-visible areas on or off.",
+    "description": "Your optic nerves and brain caught up with your eyes.  Now you can see pretty well at night.",
     "types": [ "VISION" ],
     "prereqs": [ "FEL_EYE" ],
-    "category": [ "FELINE" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "FELINE" ]
   },
   {
     "type": "mutation",
@@ -3628,6 +3622,7 @@
     "integrated_armor": [ "integrated_claws" ],
     "description": "You have claws on the ends of your fingers.  If you aren't wearing gloves, you'll be able to make barehanded attacks with these.",
     "types": [ "CLAWS" ],
+    "prereqs": [ "NAILS" ],
     "changes_to": [ "CLAWS_RETRACT" ],
     "category": [ "BEAST", "URSINE", "FELINE", "RAPTOR" ]
   },
@@ -3640,6 +3635,8 @@
     "description": "You have claws on the ends of your fingers, and can extend or retract them as desired.  Gloves will still get in the way, though.",
     "types": [ "CLAWS" ],
     "category": [ "FELINE" ],
+    "prereqs": [ "CLAWS" ],
+    "prevented_by": [ "CLAWS_RETRACT_active" ],
     "transform": { "target": "CLAWS_RETRACT_active", "msg_transform": "You extend your claws.", "active": false, "moves": 10 },
     "cost": 0
   },
@@ -3647,15 +3644,18 @@
     "type": "mutation",
     "id": "CLAWS_RETRACT_active",
     "name": { "str": "Extended Claws" },
-    "copy-from": "CLAWS_RETRACT",
+    "points": 2,
     "active": true,
     "valid": false,
     "ugliness": 1,
     "types": [ "CLAWS" ],
+    "prereqs": [ "CLAWS" ],
     "integrated_armor": [ "integrated_claws" ],
+    "prevented_by": [ "CLAWS_RETRACT" ],
     "description": "Sharp claws are extending from the end of your fingers.",
     "transform": { "target": "CLAWS_RETRACT", "msg_transform": "You retract your claws.", "active": false, "moves": 10 },
-    "cost": 0
+    "cost": 0,
+    "category": [ "FELINE" ]
   },
   {
     "type": "mutation",
@@ -6382,7 +6382,7 @@
     "ugliness": 2,
     "description": "You have a pair of stubby little wings projecting from your shoulderblades.  They can be wiggled at will, but are useless.",
     "types": [ "WINGS" ],
-    "changes_to": [ "WINGS_INSECT" ],
+    "changes_to": [ "WINGS_INSECT", "WINGS_INSECT_active" ],
     "category": [ "INSECT", "CHIMERA" ]
   },
   {
