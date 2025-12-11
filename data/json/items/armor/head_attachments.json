@@ -93,7 +93,7 @@
     "material": [ "plastic" ],
     "symbol": "[",
     "color": "light_gray",
-    "material_thickness": 0.1,
+    "material_thickness": 1,
     "flags": [ "HELMET_MANDIBLE_GUARD_STRAPPED", "CANT_WEAR" ],
     "armor": [ { "coverage": 60, "covers": [ "mouth" ], "specifically_covers": [ "mouth_chin" ] } ]
   },
