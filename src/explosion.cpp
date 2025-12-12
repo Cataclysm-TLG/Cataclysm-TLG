@@ -511,6 +511,9 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
 
         if( damage > 0 && critter && !critter->is_dead_state() ) {
             std::poisson_distribution<> d( cloud.density );
+            
+            // TODO: Instead of dividing by 2 here, divide density's effects by 2 across the board, as it was written with 1m cube in mind and not 2 1m cubes stacked vertically
+
             int hits = d( rng_get_engine() ) / 2;
             double size = critter->ranged_target_size() * 10;
             double size_1 = rng_float( 1.0, 6.0 - size );
