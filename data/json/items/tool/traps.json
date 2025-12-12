@@ -221,9 +221,9 @@
   {
     "id": "landmine",
     "type": "TOOL",
-    "name": { "str": "land mine" },
+    "name": { "str": "M14 land mine" },
     "category": "traps",
-    "description": "A military anti-personnel fragmentation mine that is triggered when stepped on.",
+    "description": "A pressure-activated explosive device colloquially known as a \"toepopper.\"  These small land mines were once only found along the Korean demilitarized zone, but were quite controversially deployed en masse across the United States in an attempt to deter the inexorable advance of the walking dead.",
     "weight": "2360 g",
     "volume": "500 ml",
     "price": "50 USD",
