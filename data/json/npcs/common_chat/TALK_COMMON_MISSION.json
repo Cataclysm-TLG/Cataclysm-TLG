@@ -92,7 +92,6 @@
     "responses": [
       { "text": "Not a problem.", "topic": "TALK_NONE" },
       { "text": "Got any advice?", "topic": "TALK_MISSION_ADVICE" },
-      { "text": "Can you share some equipment?", "topic": "TALK_SHARE_EQUIPMENT" },
       { "text": "I'll be back soon!", "topic": "TALK_DONE" }
     ]
   },
