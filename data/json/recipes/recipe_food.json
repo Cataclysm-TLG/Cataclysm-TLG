@@ -3547,7 +3547,7 @@
     "tools": [ [ [ "surface_heat", 40, "LIST" ] ] ],
     "//": "meat = 20u, fat = 15u, vegetable/fruit = 4u, give or take",
     "components": [
-      [ [ "edible_shortening", 2, "LIST" ] ],
+      [ [ "any_shortening", 6, "LIST" ] ],
       [
         [ "jerky", 2 ],
         [ "dry_meat", 2 ],
@@ -3575,7 +3575,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
-      [ [ "edible_shortening", 2, "LIST" ] ],
+      [ [ "any_shortening", 6, "LIST" ] ],
       [
         [ "jerky", 2 ],
         [ "dry_meat", 2 ],
@@ -3604,7 +3604,7 @@
     "tools": [ [ [ "surface_heat", 36, "LIST" ] ] ],
     "//": "meat = 20u, fat = 15u, give or take",
     "components": [
-      [ [ "edible_shortening", 2, "LIST" ] ],
+      [ [ "any_shortening", 6, "LIST" ] ],
       [
         [ "jerky", 2 ],
         [ "dry_meat", 2 ],
@@ -8248,7 +8248,7 @@
     "components": [
       [ [ "oatmeal", 1 ], [ "flour_any", 5, "LIST" ], [ "buckwheat", 1 ] ],
       [ [ "dry_fruit", 1 ] ],
-      [ [ "edible_shortening", 2, "LIST" ] ],
+      [ [ "any_shortening", 6, "LIST" ] ],
       [ [ "sugar_standard", 1, "LIST" ] ]
     ]
   },

@@ -1209,7 +1209,7 @@
       { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "survivor sundae" } },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "abominable akutaq" } }
     ],
-    "weight": "65 g",
+    "weight": "60 g",
     "color": "white",
     "spoils_in": "90 days",
     "comestible_type": "FOOD",
@@ -1220,7 +1220,7 @@
     "price": "3 USD",
     "price_postapoc": "10 cent",
     "material": [ "sugar" ],
-    "volume": "260 ml",
+    "volume": "60 ml",
     "vitamins": [ [ "junk_allergen", 1 ] ],
     "fun": 3,
     "flags": [ "EATEN_COLD" ]

@@ -47,7 +47,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 16, "LIST" ],
-        [ "edible_shortening", 4, "LIST" ],
+        [ "any_shortening", 16, "LIST" ],
         [ "lamp_oil", 400 ],
         [ "motor_oil", 400 ]
       ]
@@ -87,7 +87,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 20, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
@@ -113,7 +113,7 @@
       [ [ "rock", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 20, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
