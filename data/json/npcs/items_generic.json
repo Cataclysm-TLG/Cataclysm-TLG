@@ -563,7 +563,7 @@
       [ "gasbomb", 1 ],
       [ "gasoline_lantern", 5 ],
       [ "geiger_off", 3 ],
-      [ "ghee", 2 ],
+      { "item": "ghee", "prob": 1, "charges": [ 1, 30 ], "container-item": "jar_glass_sealed", "sealed": false },
       [ "gin", 5 ],
       [ "glassblowing_book", 1 ],
       [ "glasses_bal", 5 ],

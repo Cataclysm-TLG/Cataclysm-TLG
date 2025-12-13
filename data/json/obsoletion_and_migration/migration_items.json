@@ -2966,12 +2966,12 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_lard",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "demihuman_flesh",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -2981,7 +2981,7 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_cooked",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -2996,17 +2996,17 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_stomach",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "small_demihuman_stomach",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "demihuman_fat",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -3597,5 +3597,30 @@
     "type": "MIGRATION",
     "id": "scrap_bronze",
     "replace": "bronze_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lard",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_lard",
+    "replace": "mutant_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_human_lard",
+    "replace": "mutant_human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "human_lard",
+    "replace": "human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cooking_oil2",
+    "replace": "cooking_oil"
   }
 ]

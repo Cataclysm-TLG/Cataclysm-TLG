@@ -348,9 +348,8 @@
     "//": "Materials for glazing pottery",
     "components": [
       [
-        [ "edible_shortening", 1, "LIST" ],
+        [ "any_shortening", 8, "LIST" ],
         [ "cooking_oil", 8 ],
-        [ "cooking_oil2", 8 ],
         [ "wax", 1 ],
         [ "lamp_oil", 200 ],
         [ "motor_oil", 200 ],

@@ -47,7 +47,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 16, "LIST" ],
-        [ "edible_shortening", 4, "LIST" ],
+        [ "any_shortening", 4, "LIST" ],
         [ "lamp_oil", 400 ],
         [ "motor_oil", 400 ]
       ]
@@ -87,7 +87,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 5, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
@@ -113,7 +113,7 @@
       [ [ "rock", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 5, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
@@ -393,13 +393,7 @@
     ],
     "components": [
       [ [ "2x4", 1 ] ],
-      [
-        [ "edible_shortening", 4, "LIST" ],
-        [ "cooking_oil", 48 ],
-        [ "cooking_oil2", 48 ],
-        [ "lamp_oil", 500 ],
-        [ "motor_oil", 500 ]
-      ]
+      [ [ "any_shortening", 48, "LIST" ], [ "cooking_oil", 48 ], [ "lamp_oil", 500 ], [ "motor_oil", 500 ] ]
     ]
   },
   {
@@ -708,13 +702,7 @@
     "//": "Bokken is a single piece of wood, and the stout branch just isn't large enough.",
     "components": [
       [ [ "stick_long", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ],
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ],
       [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ],
       [ [ "duct_tape", 20 ], [ "filament", 20, "LIST" ] ]
     ]
@@ -842,13 +830,7 @@
     "//2": "Max experience set because waiting for oil to soak in isn't really teaching you anything.  Remove this when crafting time reduced to only carving time.",
     "components": [
       [ [ "stick_long", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ]
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ]
     ]
   },
   {
@@ -869,13 +851,7 @@
     "//2": "Max experience set because waiting for oil to soak in isn't really teaching you anything.  Remove this when crafting time reduced to only carving time.",
     "components": [
       [ [ "q_staff", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ]
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ]
     ]
   },
   {
