@@ -541,7 +541,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 10 ], [ "water_clean", 10 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 4, "LIST" ], [ "vinegar", 5 ], [ "pine_bough", 10 ] ],
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 12, "LIST" ], [ "vinegar", 5 ], [ "pine_bough", 10 ] ],
       [ [ "salt", 20 ] ]
     ]
   },
@@ -555,7 +555,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 8 ], [ "water_clean", 8 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ], [ "vinegar", 4 ], [ "pine_bough", 8 ] ],
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ], [ "vinegar", 4 ], [ "pine_bough", 8 ] ],
       [ [ "salt", 15 ] ]
     ]
   },
@@ -569,7 +569,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 14 ], [ "water_clean", 14 ] ],
-      [ [ "wax_any", 3, "LIST" ], [ "any_tallow", 6, "LIST" ], [ "vinegar", 8 ], [ "pine_bough", 14 ] ],
+      [ [ "wax_any", 3, "LIST" ], [ "any_tallow", 18, "LIST" ], [ "vinegar", 8 ], [ "pine_bough", 14 ] ],
       [ [ "salt", 25 ] ]
     ]
   },
@@ -1201,7 +1201,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "nomex_patch", 4 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1221,7 +1221,7 @@
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "nomex_patch", 3 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 2, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
     ]
   },
   {
@@ -1233,7 +1233,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "nomex_patch", 6 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1411,7 +1411,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 2 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1433,7 +1433,7 @@
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1447,7 +1447,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 3 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1467,7 +1467,7 @@
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1485,7 +1485,7 @@
     "using": [ [ "sewing_standard", 8 ], [ "tailoring_leather_sheet", 1 ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1497,7 +1497,7 @@
     "using": [ [ "sewing_standard", 13 ], [ "tailoring_leather_sheet", 3 ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1544,7 +1544,7 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1564,7 +1564,7 @@
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1577,7 +1577,7 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1968,9 +1968,7 @@
     "time": "1 h 5 m",
     "autolearn": true,
     "using": [ [ "tailoring_leather_sheet", 1 ] ],
-    "components": [
-      [ [ "any_tallow", 1, "LIST" ], [ "cooking_oil", 8 ], [ "cooking_oil2", 8 ], [ "lamp_oil", 200 ], [ "motor_oil", 200 ] ]
-    ],
+    "components": [ [ [ "any_tallow", 8, "LIST" ], [ "cooking_oil", 8 ], [ "lamp_oil", 200 ], [ "motor_oil", 200 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
