@@ -1148,6 +1148,17 @@ std::string monster::extended_description() const
         } else {
             ss += "Lifespan end time: n/a <color_yellow>(indefinite)</color>";
         }
+
+        const std::vector<std::reference_wrapper<const effect>> all_effects = get_effects();
+        if( !all_effects.empty() ) {
+            tmp.emplace_back( "Applied effects:" );
+            for( const effect &eff : all_effects ) {
+                const std::string is_permanent = eff.is_permanent() ? "(permanent)" : "";
+                tmp.emplace_back( string_format( "%s (%s) %s", eff.get_id().c_str(),
+                                                 to_string_writable( eff.get_duration() ).c_str(),
+                                                 is_permanent.c_str() ) );
+            }
+        }
     }
 
     return replace_colors( ss );
