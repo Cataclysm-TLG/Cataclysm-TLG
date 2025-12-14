@@ -82,10 +82,10 @@
     "toilets": { "T": {  } },
     "vendingmachines": { "V": { "item_group": "vending_drink" }, "F": { "item_group": "vending_food" } },
     "vehicles": {
-      "v": { "vehicle": "cars_only", "chance": 10, "rotation": 90 },
-      "^": { "vehicle": "cars_only", "chance": 10, "rotation": 270 },
-      "w": { "vehicle": "cars_only", "chance": 30, "rotation": 90 },
-      "˘": { "vehicle": "cars_only", "chance": 30, "rotation": 270 }
+      "v": { "vehicle": "cars_only", "chance": 5, "rotation": 90 },
+      "^": { "vehicle": "cars_only", "chance": 5, "rotation": 270 },
+      "w": { "vehicle": "cars_only", "chance": 15, "rotation": 90 },
+      "˘": { "vehicle": "cars_only", "chance": 15, "rotation": 270 }
     },
     "gaspumps": { "G": { "fuel": "gasoline" } }
   },
@@ -305,9 +305,9 @@
       "palettes": [ "speedway_palette" ],
       "terrain": { "!": "t_guardrail" },
       "place_vehicles": [
-        { "vehicle": "car_sports", "x": 91, "y": 117, "rotation": 0, "chance": 20 },
-        { "vehicle": "car_sports", "x": 91, "y": [ 125, 126 ], "rotation": 0, "chance": 20 },
-        { "vehicle": "car_sports", "x": 91, "y": 134, "rotation": 0, "chance": 20 }
+        { "vehicle": "car_sports", "x": 91, "y": 117, "rotation": 0, "chance": 10 },
+        { "vehicle": "car_sports", "x": 91, "y": [ 125, 126 ], "rotation": 0, "chance": 10 },
+        { "vehicle": "car_sports", "x": 91, "y": 134, "rotation": 0, "chance": 10 }
       ]
     }
   },
