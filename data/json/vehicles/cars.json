@@ -2250,7 +2250,7 @@
       { "x": -2, "y": 1, "chance": 50, "item_groups": [ "spare_tire_kit_small_jack" ] }
     ]
   },
-    {
+  {
     "id": "suv_electric_solars",
     "type": "vehicle",
     "name": "Electric SUV",

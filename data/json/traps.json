@@ -574,7 +574,7 @@
     "flags": [ "ECHOLOCATION_DETECTABLE", "PIT", "SONAR_DETECTABLE" ],
     "symbol": "0",
     "visibility": -1,
-    "avoidance": 8,
+    "avoidance": 99,
     "difficulty": 99,
     "action": "pit",
     "vehicle_data": { "damage": 500 }
@@ -589,7 +589,7 @@
     "flags": [ "ECHOLOCATION_DETECTABLE", "PIT", "SONAR_DETECTABLE" ],
     "symbol": "0",
     "visibility": -1,
-    "avoidance": 8,
+    "avoidance": 99,
     "difficulty": 99,
     "action": "pit_spikes",
     "vehicle_data": { "damage": 500 }
