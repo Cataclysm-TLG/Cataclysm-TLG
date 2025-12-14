@@ -387,12 +387,12 @@
   {
     "id": "EXPLOSIVE_60mmHE",
     "type": "ammo_effect",
-    "explosion": { "power": 1050, "shrapnel": 500 }
+    "explosion": { "power": 1050, "shrapnel": { "casing_mass": 1000, "fragment_mass": 0.08 } }
   },
   {
     "id": "EXPLOSIVE_60mmHE2",
     "type": "ammo_effect",
-    "explosion": { "power": 1258, "shrapnel": 430 }
+    "explosion": { "power": 1258, "shrapnel": { "casing_mass": 1000, "fragment_mass": 0.08 } }
   },
   {
     "id": "FLASHBANG",
