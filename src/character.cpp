@@ -7944,7 +7944,9 @@ tripoint_bub_ms Character::adjacent_tile() const
         const ter_id target_ter = here.ter( p );
         const bool trap_visible = curtrap.can_see( p, *this );
         const bool known_dangerous_trap = trap_visible && !curtrap.is_benign();
-        const bool see_pit_below = ( ( target_ter == ter_t_pit || target_ter == ter_t_pit_spiked || target_ter == ter_t_pit_glass ) || ( trap_visible && curtrap.has_flag( json_flag_PIT ) ) ) && !has_effect( effect_in_pit );
+        const bool see_pit_below = ( ( target_ter == ter_t_pit || target_ter == ter_t_pit_spiked ||
+                                       target_ter == ter_t_pit_glass ) || ( trap_visible && curtrap.has_flag( json_flag_PIT ) ) ) &&
+                                   !has_effect( effect_in_pit );
         // If we don't known a trap here, the spot "appears" to be good, so consider it.
         // Same if we know a benign trap (as it's not dangerous), or we're in a pit and it's a pit.
         if( known_dangerous_trap || see_pit_below ) {

@@ -10835,7 +10835,8 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
         }
     } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest ) {
         const bool pit_there = trap_there.has_flag( json_flag_PIT );
-        const bool pit_is_harmless = u.has_effect( effect_in_pit ) || u.has_effect_with_flag( json_flag_LEVITATION );
+        const bool pit_is_harmless = u.has_effect( effect_in_pit ) ||
+                                     u.has_effect_with_flag( json_flag_LEVITATION );
         if( !pit_there || !pit_is_harmless ) {
             harmful_stuff.push_back( tr.name() );
             if( harmful_stuff.size() == max ) {

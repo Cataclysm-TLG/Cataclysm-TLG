@@ -494,7 +494,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
                          obstacle_cache[target.x()][target.y()].density;  // Fraction of the tile blocked. 1.0f = all, 0.0f = none.
         float attenuation =
             obstacle_cache[target.x()][target.y()].velocity; // Fraction of velocity retained for blocked fragments.
-        if( coverage > 0.0f && rng_float( 0.f, 1.f ) > coverage  ) {
+        if( coverage > 0.0f && rng_float( 0.f, 1.f ) > coverage ) {
             int partial_damage = static_cast<int>( damage * coverage * rng_float( cloud.density, 1.0f ) );
             if( optional_vpart_position vp = m->veh_at( target ) ) {
                 vp->vehicle().damage( m[0], vp->part_index(), partial_damage );
@@ -511,7 +511,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
 
         if( damage > 0 && critter && !critter->is_dead_state() ) {
             std::poisson_distribution<> d( cloud.density );
-            
+
             // TODO: Instead of dividing by 2 here, divide density's effects by 2 across the board, as it was written with 1m cube in mind and not 2 1m cubes stacked vertically
 
             int hits = d( rng_get_engine() ) / 2;
@@ -525,7 +525,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
             float mid = ( lower_bound + upper_bound ) / 2;
             float range = ( upper_bound - lower_bound ) / 2;
 
-            hits = rng( static_cast<int>(mid - range / 2), static_cast<int>(mid + range / 2) );
+            hits = rng( static_cast<int>( mid - range / 2 ), static_cast<int>( mid + range / 2 ) );
             hits = std::max( 0, hits );
             dealt_projectile_attack frag;
             frag.proj = proj;
@@ -535,7 +535,7 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
 
             for( int i = 0; i < hits; ++i ) {
                 // Skew the missed_by because shrapnel was behaving too much like aimed shots instead of random destruction.
-                float base_rng = rng_float(0.0f, 1.0f);
+                float base_rng = rng_float( 0.0f, 1.0f );
                 float min_rng = 0.05f;
                 float max_rng = 1.0f;
                 float skew = 0.12f;
@@ -543,13 +543,13 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
                 frag.missed_by = min_rng + ( max_rng - min_rng ) * std::pow( base_rng, skew );
                 critter->deal_projectile_attack( m, mutable_source, frag, frag.missed_by, false );
 
-                 add_msg_debug( debugmode::DF_EXPLOSION,
+                add_msg_debug( debugmode::DF_EXPLOSION,
                                "Shrapnel hit %s at %d m/s at a distance of %d",
                                critter->disp_name(),
                                frag.proj.speed,
                                static_cast<int>( std::round(
                                                      trig_dist_z_adjust( src, target ) ) ) );
-                 add_msg_debug( debugmode::DF_EXPLOSION,
+                add_msg_debug( debugmode::DF_EXPLOSION,
                                "Shrapnel dealt %d damage", frag.dealt_dam.total_damage() );
 
                 if( critter->is_dead_state() ) {
