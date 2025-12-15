@@ -962,7 +962,7 @@
     "name": "Home Mechanic",
     "description": "You've always loved cars, and there's nothing like getting under the hood and fixing it yourself.  You've kept ahold of some handy tools for the job, and at least now you'll never want for parts.",
     "npc_background": "BG_survival_story_WORKER_SELFEMP",
-    "proficiencies": [ "prof_metalworking", "prof_welding_basic", "prof_elec_soldering", "prof_driver" ],
+    "proficiencies": [ "prof_metalworking", "prof_welding_basic", "prof_elec_soldering" ],
     "points": 2,
     "skills": [ { "level": 4, "name": "mechanics" }, { "level": 4, "name": "driving" } ],
     "items": {
@@ -1156,7 +1156,6 @@
     "description": "You were a promising cyclist with a bright career in front of you before this all happened.  Perhaps you'll never get to participate in the grand tours now, but as the saying goes, life is like riding a bicycle: you've got to keep moving.",
     "npc_background": "BG_survival_story_SPORTS",
     "points": 4,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 5, "name": "driving" }, { "level": 3, "name": "dodge" } ],
     "items": {
       "both": {
@@ -3043,7 +3042,6 @@
     "description": "You made a living driving kids to and from school, a career choice you regretted almost every day.  None of the brats were at their normal stops, and the noise of your bus quickly attracted hordes of zombies.  You escaped, but now you've gotten lost.  At least you're getting a break from the hellish screams of children, though you're starting to hear new ones…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "points": 3,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 5, "name": "driving" }, { "level": 1, "name": "speech" } ],
     "vehicle": "schoolbus",
     "items": {
@@ -4802,7 +4800,7 @@
     "description": "You love to skate!  You've probably spent more time on a skateboard than off.  Things have gotten pretty bad, but at least the cops aren't telling you where you can't roll.",
     "npc_background": "BG_survival_story_TEENAGER_TOUGH",
     "points": 1,
-    "proficiencies": [ "prof_driver", "prof_skating" ],
+    "proficiencies": [ "prof_skating" ],
     "skills": [ { "level": 4, "name": "dodge" }, { "level": 3, "name": "driving" }, { "level": 2, "name": "swimming" } ],
     "items": {
       "both": {
@@ -5371,7 +5369,6 @@
     "description": "You were living the high life, spending your parents' money without a care in the world.  At one of your usual crazy parties, the guests became hungry for more than drugs and booze, but you still have a chance to use the last symbol of your luxurious life - your sports car - and get far away.",
     "npc_background": "BG_survival_story_ECCENTRIC",
     "points": 2,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 3, "name": "driving" }, { "level": 2, "name": "speech" } ],
     "vehicle": "car_sports",
     "items": {
