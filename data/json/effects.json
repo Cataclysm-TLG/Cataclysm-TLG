@@ -3377,7 +3377,7 @@
   {
     "type": "effect_type",
     "id": "drunk",
-    "name": [ "Tipsy", "Drunk", "Trashed", "Wasted", "Dead Drunk" ],
+    "name": [ "Buzzed", "Tipsy", "Drunk", "Wasted", "Dead Drunk" ],
     "desc": [
       "You drank some alcohol.  You feel warm inside.",
       "You drank alcohol.  Party on!",
