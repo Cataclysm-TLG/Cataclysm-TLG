@@ -3097,8 +3097,9 @@ bool mattack::searchlight( monster *z )
                 t = pos;
             }
         }
-
-        here.add_field( t, field_type_id( "fd_spotlight" ), 1 );
+        if( here.concealment( t ) < z->eye_level() ) {
+            here.add_field( t, field_type_id( "fd_spotlight" ), 1 );
+        }
     }
 
     return true;
