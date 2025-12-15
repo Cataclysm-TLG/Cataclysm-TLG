@@ -59,6 +59,7 @@ static const itype_id fuel_type_battery( "battery" );
 static const itype_id fuel_type_muscle( "muscle" );
 
 static const limb_score_id limb_score_manip( "manip" );
+static const limb_score_id limb_score_reaction( "reaction" );
 static const limb_score_id limb_score_vision( "vision" );
 
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
@@ -1441,6 +1442,7 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     bool is_non_proficient = false;
     float effective_driver_skill = driver.get_skill_level( skill_driving );
     float vehicle_proficiency;
+    float reaction_penalty = 0.f;
     // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
     bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
                   ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
@@ -1452,31 +1454,26 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_boat_pilot );
     }
-
+        // Driving skill, perception, and dexterity control our ability to drive. These are modified here by limb scores.
+        float effective_per = driver.get_per() * std::min( 1.f, driver.get_limb_score( limb_score_vision ) );
+        float effective_dex = driver.get_dex() * std::min( 1.f, driver.get_limb_score( limb_score_manip ) );
     bool non_prof_fumble = false;
     float non_prof_penalty = 0;
     //If you lack the appropriate piloting proficiency, increase handling penalty, and roll chance to fumble while steering
     if( is_non_proficient ) {
         effective_driver_skill *= vehicle_proficiency;
-        non_prof_penalty = std::max( 0.0f,
-                                     ( 1.0f - vehicle_proficiency ) * 10.0f -
-                                     ( driver.get_dex() + driver.get_per() ) * 0.25f );
-        non_prof_fumble = one_in( vehicle_proficiency * 12.0f +
-                                  ( driver.get_dex() + driver.get_per() ) * 0.5f + 6.0f );
-        // Penalties mitigated by proficiency progress, and dex/per stats.
-        // - Unskilled pilot at Per/Dex 4: 1-in-8 chance to fumble while turning
-        // - Unskilled pilot at Per/Dex 8: 1-in-10
-        // - Unskilled pilot at Per/Dex 12: 1-in-12
-        // - 50% Skill at Per/Dex 4: 1-in-14 chance
-        // - 50% Skill at Per/Dex 8: 1-in-16 chance
-        // - 50% Skill at Per/Dex 12: 1-in-18 chance
+        non_prof_penalty = std::max( 0.0f, ( 1.0f - vehicle_proficiency ) * 10.0f - ( effective_dex + effective_per ) * 0.25f );
+        non_prof_fumble = one_in( vehicle_proficiency * 12.0f + ( effective_dex + effective_per ) * 0.5f + 6.0f );
     }
     if( z != 0 && is_rotorcraft( here ) ) {
         driver.set_moves( std::min( driver.get_moves(), 0 ) );
         thrust( here, 0, z );
     }
     units::angle turn_delta = vehicles::steer_increment * trn;
-    const float handling_diff = handling_difficulty( here ) + non_prof_penalty;
+    if( driver.get_limb_score( limb_score_reaction ) < 0.75f ) {
+        reaction_penalty = std::clamp( ( ( 1.f - driver.get_limb_score( limb_score_reaction ) ) * 5.f ), 0.f, 5.f );
+    }
+    const float handling_diff = handling_difficulty( here ) + non_prof_penalty + reaction_penalty;
     if( turn_delta != 0_degrees ) {
         float eff = steering_effectiveness( here );
         if( eff == -2 ) {
@@ -1499,11 +1496,6 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
         // If you've got more moves than speed, it's most likely time stop
         // Let's get rid of that
         driver.set_moves( std::min( driver.get_moves(), driver.get_speed() ) );
-
-        // Driving skill, perception, and dexterity control our ability to drive. These are modified here by limb scores.
-        float effective_per = driver.get_per() * std::min( 1.f, driver.get_limb_score( limb_score_vision ) );
-        float effective_dex = driver.get_dex() * std::min( 1.f, driver.get_limb_score( limb_score_manip ) );
-
         float skill = std::min( 10.0f, effective_driver_skill +
                                 ( effective_dex + effective_per ) / 10.0f );
         float penalty = rng_float( 0.0f, handling_diff ) - skill;
@@ -1516,7 +1508,6 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
             // At 10 skill, with a perfect vehicle, we could turn up to 3 times per turn
             cost = std::max( driver.get_speed(), 100 ) * ( 1.0f - ( -penalty / 10.0f ) * 2 / 3 );
         }
-
         // Chance to fumble steering when in a non-proficient vehicle, or in difficult conditions
         if( non_prof_fumble || penalty > skill || ( penalty > 0 && cost > 400 ) ) {
             int fumble_roll = rng( 0, 6 );
@@ -1546,9 +1537,7 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
                 driver.add_msg_if_player( m_warning, _( "It takes you a long time to steer the vehicle!" ) );
             }
         }
-
         turn( turn_delta );
-
         // At most 3 turns per turn, because otherwise it looks really weird and jumpy
         driver.mod_moves( -std::max( cost, driver.get_speed() / 3 + 1 ) );
     }
@@ -1560,10 +1549,9 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     // TODO: Actually check if we're on land on water (or disable water-skidding)
     if( skidding && trn != 0 && valid_wheel_config( here ) ) {
         ///\EFFECT_DEX increases chance of regaining control of a vehicle
-
         ///\EFFECT_DRIVING increases chance of regaining control of a vehicle
         if( handling_diff * rng( 1, 10 ) <
-            driver.dex_cur + effective_driver_skill * 2 ) {
+            effective_dex + effective_driver_skill * 2 ) {
             driver.add_msg_if_player( _( "You regain control of the %s." ), name );
             driver.practice( skill_driving, velocity / 5 );
             velocity = static_cast<int>( forward_velocity() );
