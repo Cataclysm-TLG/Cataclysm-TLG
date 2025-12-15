@@ -251,8 +251,8 @@
     "type": "profession",
     "subtype": "hobby",
     "id": "car_fan",
-    "name": "Driving",
-    "description": "You're comfortable handing pretty much anything with wheels.",
+    "name": "Offroad Driving",
+    "description": "Whether you're into dirtbikes, ATVs, or dune buggies, you have experience driving on terrain that isn't well-suited to wheels.",
     "points": 1,
     "proficiencies": [ "prof_driver" ]
   },

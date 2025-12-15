@@ -5051,6 +5051,8 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
 {
     double st = strain( here );
     bool skating = false;
+    bool offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
+                  ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
     for( const auto &fuel_pr : fuel_usage() ) {
         const itype_id &ft = fuel_pr.first;
         if( idling && ft == fuel_type_battery ) {
@@ -5111,11 +5113,11 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
                 Character *passenger = get_passenger( boarded );
                 if( passenger != nullptr ) {
                     if( passenger == driver ) {
-                        practice_pilot_proficiencies( *driver, in_deep_water, skating );
+                        practice_pilot_proficiencies( *driver, in_deep_water, skating, offroad );
                     }
                     // Passengers can learn 20% as fast through observing the driver.
                     else if( one_in( 5 ) ) {
-                        practice_pilot_proficiencies( *passenger, in_deep_water, skating );
+                        practice_pilot_proficiencies( *passenger, in_deep_water, skating, offroad );
                     }
                 }
             }
@@ -5172,13 +5174,13 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
     }
 }
 
-void practice_pilot_proficiencies( Character &p, bool boating, bool skating )
+void practice_pilot_proficiencies( Character &p, bool boating, bool skating, bool offroad )
 {
     if( skating && !boating && !p.has_proficiency( proficiency_prof_skating ) ) {
         p.practice_proficiency( proficiency_prof_skating, 1_seconds );
     } else if( boating && !skating && !p.has_proficiency( proficiency_prof_boat_pilot ) ) {
         p.practice_proficiency( proficiency_prof_boat_pilot, 1_seconds );
-    } else if( !boating && !skating && !p.has_proficiency( proficiency_prof_driver ) ) {
+    } else if( !boating && !skating && offroad && !p.has_proficiency( proficiency_prof_driver ) ) {
         p.practice_proficiency( proficiency_prof_driver, 1_seconds );
     }
 }

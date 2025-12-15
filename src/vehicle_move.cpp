@@ -58,6 +58,9 @@ static const itype_id fuel_type_animal( "animal" );
 static const itype_id fuel_type_battery( "battery" );
 static const itype_id fuel_type_muscle( "muscle" );
 
+static const limb_score_id limb_score_manip( "manip" );
+static const limb_score_id limb_score_vision( "vision" );
+
 static const proficiency_id proficiency_prof_boat_pilot( "prof_boat_pilot" );
 static const proficiency_id proficiency_prof_driver( "prof_driver" );
 static const proficiency_id proficiency_prof_skating( "prof_skating" );
@@ -1438,8 +1441,11 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     bool is_non_proficient = false;
     float effective_driver_skill = driver.get_skill_level( skill_driving );
     float vehicle_proficiency;
+    // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
+    bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
+                  ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
     // Check if you're piloting on land or water, and reduce effective driving skill proportional to relevant proficiencies (10% Boat Proficiency = 10% driving skill on water)
-    if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water ) {
+    if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water && is_offroad ) {
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_driver );
     } else if( !driver.has_proficiency( proficiency_prof_boat_pilot ) && in_deep_water ) {
@@ -1494,13 +1500,12 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
         // Let's get rid of that
         driver.set_moves( std::min( driver.get_moves(), driver.get_speed() ) );
 
-        ///\EFFECT_DEX reduces chance of losing control of vehicle when turning
+        // Driving skill, perception, and dexterity control our ability to drive. These are modified here by limb scores.
+        float effective_per = driver.get_per() * std::min( 1.f, driver.get_limb_score( limb_score_vision ) );
+        float effective_dex = driver.get_dex() * std::min( 1.f, driver.get_limb_score( limb_score_manip ) );
 
-        ///\EFFECT_PER reduces chance of losing control of vehicle when turning
-
-        ///\EFFECT_DRIVING reduces chance of losing control of vehicle when turning
         float skill = std::min( 10.0f, effective_driver_skill +
-                                ( driver.get_dex() + driver.get_per() ) / 10.0f );
+                                ( effective_dex + effective_per ) / 10.0f );
         float penalty = rng_float( 0.0f, handling_diff ) - skill;
 
         int cost;
