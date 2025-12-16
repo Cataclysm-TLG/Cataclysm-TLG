@@ -507,31 +507,145 @@
       { "prob": 10, "group": "fries_box_small_1_inf" },
       { "prob": 10, "group": "cheese_fries_box_small_1_inf" },
       { "prob": 10, "group": "onion_rings_box_small_1_inf" },
+      {        "distribution": [
       { "item": "milkshake", "charges": [ 1, -1 ], "prob": 10 },
       { "item": "milkshake_fastfood", "charges": [ 1, -1 ], "prob": 10 },
       { "item": "frozen_lemonade", "charges": [ 1, -1 ], "prob": 10 },
-      { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 },
-      { "prob": 10, "group": "pizza_meat_box_small_1_inf" },
-      { "prob": 10, "group": "pizza_vegetable_box_small_1_inf" },
-      { "prob": 10, "group": "pizza_cheese_box_small_1_inf" },
-      { "prob": 10, "group": "pizza_supreme_box_small_1_inf" },
-      { "prob": 10, "group": "nachosv_bag_plastic_1_inf" },
-      { "prob": 10, "group": "nachosmc_bag_plastic_1_inf" },
-      { "prob": 10, "group": "nachosc_bag_plastic_1_inf" },
-      { "item": "spaghetti_bolognese", "prob": 10, "count": [ 1, 3 ] },
-      { "prob": 10, "group": "cheeseburger_wrapper_1_inf" },
-      { "prob": 10, "group": "hamburger_wrapper_1_inf" },
-      { "prob": 10, "group": "fish_fried_box_small_1_inf" },
-      { "prob": 10, "group": "fish_sandwich_wrapper_1_inf" },
-      { "prob": 10, "group": "lobster_roll_wrapper_1_inf" },
-      { "prob": 10, "group": "sloppyjoe_wrapper_1_inf" },
-      { "prob": 10, "group": "sandwich_t_wrapper_1_inf" },
-      { "prob": 10, "group": "junk_burrito_bag_plastic_1_inf" },
-      { "prob": 10, "group": "chili_can_medium_1_inf" },
-      { "prob": 10, "group": "hotdogs_cooked_wrapper_1_inf" },
-      { "prob": 5, "group": "hotdogs_newyork_wrapper_1_inf" },
-      { "prob": 5, "group": "crab_cakes_box_small_1_inf" },
-      { "prob": 3, "group": "stuffed_clams_box_small_1_inf" },
+      { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 }
+              ], "prob": 10 },
+      {
+        "distribution": [
+          { "item": "vegetable_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },
+          { "item": "blt", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "wrapper" },
+          { "item": "protein_shake", "charges": [ 1, -1 ], "prob": 5 },
+          { "item": "fries", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "box_small" },
+          {
+            "item": "cheese_fries",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "onion_rings",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          { "item": "milkshake", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "milkshake_fastfood", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "frozen_lemonade", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 },
+          {
+            "item": "pizza_meat",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "pizza_vegetable",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "pizza_cheese",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "pizza_supreme",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "cheeseburger",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "hamburger",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "fish_fried",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "fish_sandwich",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "sloppyjoe",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "sandwich_t",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "junk_burrito",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "bag_plastic"
+          },
+          { "item": "chili", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "can_medium" },
+          {
+            "item": "hotdogs_cooked",
+            "count": [ 1, -1 ],
+            "prob": 10,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "hotdogs_newyork",
+            "count": [ 1, -1 ],
+            "prob": 5,
+            "container-item": "null",
+            "entry-wrapper": "wrapper"
+          },
+          {
+            "item": "crab_cakes",
+            "count": [ 1, -1 ],
+            "prob": 5,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          },
+          {
+            "item": "stuffed_clams",
+            "count": [ 1, -1 ],
+            "prob": 3,
+            "container-item": "null",
+            "entry-wrapper": "box_small"
+          }
+        ],
+        "prob": 10
+      },
       {
         "distribution": [
           {
