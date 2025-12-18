@@ -2036,7 +2036,6 @@
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "30 m", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
     "folded_volume": "250 ml",
-    "flags": [ "NO_COVER" ],
     "breaks_into": "ig_vp_device",
     "copy-from": "recharge_station"
   },
