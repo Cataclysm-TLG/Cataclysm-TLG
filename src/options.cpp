@@ -2245,26 +2245,14 @@ void options_manager::add_options_graphics()
 
     add_empty_line();
 
-    add_option_group( "graphics", Group( "ascii_opts", to_translation( "ASCII Graphic Options" ),
-                                         to_translation( "Options regarding ASCII graphic." ) ),
+    add_option_group( "graphics", Group( "ascii_opts", to_translation( "Title Screen Options" ),
+                                         to_translation( "Options regarding the title screen display." ) ),
     [&]( const std::string & page_id ) {
         add( "ENABLE_ASCII_TITLE", page_id,
              to_translation( "Enable ASCII art on the title screen" ),
              to_translation( "If true, shows an ASCII graphic on the title screen.  If false, shows a text-only title screen." ),
              true
            );
-        add( "SEASONAL_TITLE", page_id, to_translation( "Use seasonal title screen" ),
-             to_translation( "If true, the title screen will use the art appropriate for the season." ),
-             true
-           );
-
-        get_option( "SEASONAL_TITLE" ).setPrerequisite( "ENABLE_ASCII_TITLE" );
-
-        add( "ALT_TITLE", page_id, to_translation( "Alternative title screen frequency" ),
-             to_translation( "Set the probability of the alternate title screen appearing." ), 0, 100, 10
-           );
-
-        get_option( "ALT_TITLE" ).setPrerequisite( "ENABLE_ASCII_TITLE" );
     } );
 
     add_empty_line();
@@ -2345,14 +2333,6 @@ void options_manager::add_options_graphics()
            );
     } );
 #endif // TILES
-
-    add_empty_line();
-
-    add( "ENABLE_ASCII_ART", "graphics",
-         to_translation( "Enable ASCII art in item and monster descriptions" ),
-         to_translation( "If true, item and monster description will show a picture of the object in ASCII art when available." ),
-         true, COPT_NO_HIDE
-       );
 
     add_empty_line();
 

@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".357 SIG FMJ" },
     "description": "Jacketed .357 SIG ammunition.  Based on a 10mm Auto case necked down to a .355 inch bullet, the .357 SIG round is a high velocity pistol cartridge, giving it a flatter trajectory than many handgun rounds.",
-    "ascii_picture": "357sig_fmj",
     "weight": "15 g",
     "volume": "132 ml",
     "longest_side": "29 mm",

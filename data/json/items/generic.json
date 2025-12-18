@@ -3066,7 +3066,6 @@
     "symbol": "$",
     "color": "yellow",
     "name": { "str": "cash card" },
-    "ascii_picture": "cashcard",
     "description": "A yellow plastic card used to electronically store money.  It holds up to 2 million dollars.",
     "price": "10 USD",
     "extend": { "flags": [ "NO_UNLOAD", "NO_RELOAD", "TRADER_AVOID" ] },

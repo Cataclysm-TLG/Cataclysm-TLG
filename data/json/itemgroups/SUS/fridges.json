@@ -507,12 +507,15 @@
       { "prob": 10, "group": "fries_box_small_1_inf" },
       { "prob": 10, "group": "cheese_fries_box_small_1_inf" },
       { "prob": 10, "group": "onion_rings_box_small_1_inf" },
-      {        "distribution": [
-      { "item": "milkshake", "charges": [ 1, -1 ], "prob": 10 },
-      { "item": "milkshake_fastfood", "charges": [ 1, -1 ], "prob": 10 },
-      { "item": "frozen_lemonade", "charges": [ 1, -1 ], "prob": 10 },
-      { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 }
-              ], "prob": 10 },
+      {
+        "distribution": [
+          { "item": "milkshake", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "milkshake_fastfood", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "frozen_lemonade", "charges": [ 1, -1 ], "prob": 10 },
+          { "item": "milkshake_deluxe", "charges": [ 1, -1 ], "prob": 5 }
+        ],
+        "prob": 10
+      },
       {
         "distribution": [
           { "item": "vegetable_salad", "count": [ 1, -1 ], "prob": 10, "container-item": "null", "entry-wrapper": "bowl_plastic" },

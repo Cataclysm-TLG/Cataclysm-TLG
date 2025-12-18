@@ -485,13 +485,9 @@ std::string PATH_INFO::title( const holiday current_holiday )
         return _( "Cataclysm: The Last Generation" );
     }
 
-    if( x_in_y( get_option<int>( "ALT_TITLE" ), 100 ) ) {
+    if( x_in_y( 5, 100 ) ) {
         theme_extension = ".alt1";
         theme_fallback = datadir_value + "title/" + "en.alt1";
-    }
-
-    if( !get_option<bool>( "SEASONAL_TITLE" ) ) {
-        return find_translated_file( theme_basepath, theme_extension, theme_fallback );
     }
 
     switch( current_holiday ) {

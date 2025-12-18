@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".38 Special FMJ" },
     "description": ".38 Special ammunition with a 130gr FMJ bullet.  From its inception, the .38 Special round has been known for its accuracy and low recoil.  Because it was initially a black powder cartridge, .38 Special is very low pressure.",
-    "ascii_picture": "38_special",
     "weight": "13 g",
     "volume": "113 ml",
     "longest_side": "40 mm",

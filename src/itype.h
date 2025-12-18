@@ -697,7 +697,6 @@ struct itype_variant_data {
     std::string id;
     translation alt_name;
     translation alt_description;
-    ascii_art_id art;
     std::optional<std::string> alt_sym;
     std::optional<nc_color> alt_color = std::nullopt;
 
@@ -1319,7 +1318,6 @@ struct itype {
 
         std::string snippet_category;
 
-        ascii_art_id picture_id;
 
         /** If set via JSON forces item category to this (preventing automatic assignment) */
         item_category_id category_force;

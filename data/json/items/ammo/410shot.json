@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".410 slug" },
     "description": "A .410 shotshell loaded with a 110gr slug.  Decent for hunting medium game or possibly self-defense.",
-    "ascii_picture": "410shot_000",
     "weight": "27 g",
     "volume": "170 ml",
     "longest_side": "70 mm",

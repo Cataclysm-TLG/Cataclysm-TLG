@@ -300,7 +300,6 @@ struct mtype {
         // Note that this can be anything, and is not necessarily beneficial to the monster
         mon_action_defend sp_defense;
     private:
-        ascii_art_id picture_id;
         mon_flag_id_set flags;
         std::set<mon_flag_str_id> pre_flags_; // used only for initial loading
     public:
@@ -548,7 +547,6 @@ struct mtype {
         itype_id get_meat_itype() const;
         int get_meat_chunks_count() const;
         std::string get_description() const;
-        ascii_art_id get_picture_id() const;
         std::string get_footsteps() const;
         void set_strategy();
         void add_goal( const std::string &goal_id );

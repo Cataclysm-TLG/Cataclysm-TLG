@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".45 ACP FMJ" },
     "description": ".45 ACP ammunition with a 230gr FMJ bullet.  Due to a reputation for effectiveness, the .45 ACP round has been common for over a century.",
-    "ascii_picture": "45_jhp",
     "weight": "21 g",
     "volume": "112 ml",
     "longest_side": "32 mm",

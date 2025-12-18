@@ -225,8 +225,7 @@
       {
         "id": "modular_m27iar",
         "name": { "str": "M27 IAR carbine" },
-        "description": "A H&K416 carbine outfitted with a heavier barrel to enable higher amounts of suppressive fire while retaining a good degree of mobility.",
-        "ascii_picture": "m27_iar"
+        "description": "A H&K416 carbine outfitted with a heavier barrel to enable higher amounts of suppressive fire while retaining a good degree of mobility."
       },
       {
         "id": "modular_m38dmr",
@@ -264,7 +263,6 @@
     "type": "GUN",
     "name": { "str": "FN SCAR-L" },
     "description": "A highly accurate and modular assault rifle specially designed for the United States Special Operations Command.  The 'L' in its name stands for light, as it uses the lightweight .223 round.",
-    "ascii_picture": "scar-L",
     "weight": "3490 g",
     "volume": "4957 ml",
     "longest_side": "798 mm",
@@ -372,7 +370,6 @@
     "type": "GUN",
     "name": { "str": "M249 machine gun" },
     "description": "The M249 is a mountable machine gun used by the US military and SWAT teams.  Quite inaccurate and difficult to control, the M249 is designed to fire many rounds very quickly.",
-    "ascii_picture": "m249_saw",
     "weight": "7500 g",
     "volume": "10610 ml",
     "longest_side": "1035 mm",
@@ -444,7 +441,6 @@
     "copy-from": "rifle_auto",
     "name": { "str": "M4 carbine" },
     "description": "A popular carbine, long used by the US military.  Though accurate, small, and lightweight, it is infamous for its unreliability when not properly maintained.  It is chambered in 5.56x45mm and accepts STANAG magazines.",
-    "ascii_picture": "modular_m4a1",
     "weight": "880 g",
     "volume": "1760 ml",
     "longest_side": "470 mm",
@@ -456,8 +452,7 @@
       {
         "id": "modular_m4a1",
         "name": { "str": "M4A1 carbine" },
-        "description": "A popular carbine, long used by the US military.  Though accurate, small, and lightweight, it is infamous for its unreliability when not properly maintained.",
-        "ascii_picture": "modular_m4a1"
+        "description": "A popular carbine, long used by the US military.  Though accurate, small, and lightweight, it is infamous for its unreliability when not properly maintained."
       },
       {
         "id": "m4_cqbr",
@@ -694,7 +689,6 @@
     "type": "GUN",
     "name": { "str": "Ruger Mini-14 carbine" },
     "description": "A small, lightweight semi-auto carbine designed for civilian and police use.  Its superb accuracy and low recoil makes it more suitable than full-auto rifles for some situations.",
-    "ascii_picture": "mini-14",
     "weight": "3180 g",
     "volume": "2900 ml",
     "longest_side": "977 mm",
