@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".44 Magnum FMJ" },
     "description": "Jacketed .44 Magnum ammunition with a 240gr bullet.  The .44 Magnum round is one of the most powerful handgun cartridges available.  It has excellent stopping power but suffers from extremely high recoil for a handgun round.",
-    "ascii_picture": "44fmj",
     "weight": "25 g",
     "volume": "87 ml",
     "longest_side": "41 mm",
@@ -63,7 +62,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".44 Magnum JHP" },
     "description": "Jacketed .44 Magnum ammunition with a 240gr hollowpoint bullet.  The .44 Magnum round is one of the most powerful handgun cartridges available.  It has excellent stopping power but suffers from extremely high recoil for a handgun round.",
-    "ascii_picture": "44magnum",
     "relative": { "damage": { "damage_type": "bullet", "amount": 4, "armor_penetration": -8 } }
   },
   {

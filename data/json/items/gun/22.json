@@ -66,7 +66,6 @@
         "description": "The oldest and longest-produced shoulder firearm in the world.  Though it fires the weak .22 round, it is highly accurate and damaging, and has essentially no recoil."
       }
     ],
-    "ascii_picture": "marlin_39a",
     "weight": "2948 g",
     "volume": "2180 ml",
     "longest_side": "1029 mm",
@@ -157,7 +156,6 @@
     "reload_noise_volume": 10,
     "name": { "str": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
-    "ascii_picture": "sm_pipe_gun",
     "weight": "1953 g",
     "volume": "1610 ml",
     "longest_side": "1000 mm",
@@ -199,7 +197,6 @@
         "description": "A combination of negligible recoil, high customization, and inexpensive ammunition made the Ruger 10/22 a popular choice among enthusiasts and small game hunters.  Even though it fires the weak .22 round, it's perfectly capable of killing."
       }
     ],
-    "ascii_picture": "ruger1022",
     "weight": "2270 g",
     "volume": "2120 ml",
     "longest_side": "942 mm",
@@ -306,7 +303,6 @@
         "description": "The GSG firefly is a .22 semi-automatic handgun.  While the GSG Firefly started off as the SIG Mosquito, after the Mosquito ceased production, German Sport Guns picked it up and renamed it to the Firefly."
       }
     ],
-    "ascii_picture": "sig_mosquito",
     "weight": "720 g",
     "volume": "467 ml",
     "longest_side": "214 mm",
@@ -352,7 +348,6 @@
         "description": "A modest offering from the Smith and Wesson (S&W) gun company, this is a medium sized pistol that fires the .22 LR cartridge.  Featuring an integrated rail for optics mounting, it was a popular .22 handgun amongst target shooters."
       }
     ],
-    "ascii_picture": "sw_22a",
     "weight": "975 g",
     "volume": "560 ml",
     "longest_side": "259 mm",
@@ -580,7 +575,6 @@
         "description": "This gun is essentially a shortened 10/22, feeding from the same magazines.  While it does feature a shorter barrel and a lack of a stock, it is a fair bit lighter, and comes included with a bipod to more steadily plink away at the undead."
       }
     ],
-    "ascii_picture": "ruger1022",
     "weight": "1418 g",
     "volume": "1358 ml",
     "longest_side": "509 mm",
@@ -681,7 +675,6 @@
     "type": "GUN",
     "name": { "str_sp": ".22 six-shooter" },
     "description": "A revolver chambered in .22 LR, with 6 shots and a 6.5 inch barrel.",
-    "ascii_picture": "redhawk",
     "weight": "947 g",
     "volume": "442 ml",
     "longest_side": "318 mm",
@@ -715,7 +708,6 @@
     "type": "GUN",
     "name": { "str_sp": "large .22 six-shooter" },
     "description": "A revolver chambered in .22 LR, with 6 shots and a 9 inch barrel.",
-    "ascii_picture": "redhawk",
     "weight": "1046 g",
     "volume": "456 ml",
     "longest_side": "386 mm",
@@ -760,8 +752,6 @@
         "description": "A modern .22 LR lever-action rifle, the Rio Bravo features an 18\" barrel with 15 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  The mechanical origins date back decades, being based off of Rossi's R92 series of rifles which themselves were based off of the Winchester 1892."
       }
     ],
-    "//": "Stats from https://rossiusa.com/rifles/lever-action-rifles/313-rio-bravo-wood-matte-black-22-lr-18-in",
-    "ascii_picture": "marlin_39a",
     "weight": "2345 g",
     "volume": "2101 ml",
     "longest_side": "931 mm",
@@ -810,8 +800,6 @@
         "description": "A modern .22 LR lever-action rifle, the Henry Golden Boy features an 20\" octagonal barrel with 16 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  It fairly resembles the original Henry Model 1860 with its brass colored receiver, though with wooden furniture at the front, and without a doubt using modern manufacturing."
       }
     ],
-    "//": "Stats from https://www.henryusa.com/rifles/golden-boy/",
-    "ascii_picture": "marlin_39a",
     "weight": "3062 g",
     "volume": "2116 ml",
     "longest_side": "979 mm",

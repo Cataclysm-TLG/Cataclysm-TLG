@@ -316,7 +316,6 @@
     "type": "TOOL",
     "name": { "str": "Kevlar shears", "str_pl": "pairs of Kevlar shears" },
     "description": "A pair of heavy-duty shears suitable for cutting particularly tough materials, from polyaramid fabrics to tough plastics and thin metals.  The blades feature flat shearing edges and fine serrations.",
-    "ascii_picture": "scissors",
     "weight": "113 g",
     "volume": "145 ml",
     "price": "35 USD",

@@ -2032,10 +2032,6 @@ void Item_factory::check_definitions() const
             }
         }
 
-        if( !type->picture_id.is_empty() && !type->picture_id.is_valid() ) {
-            msg +=  "item has unknown ascii_picture.";
-        }
-
         int mag_pocket_number = 0;
         for( const pocket_data &data : type->pockets ) {
             if( data.type == pocket_type::MAGAZINE ||
@@ -2828,7 +2824,6 @@ void itype_variant_data::load( const JsonObject &jo )
     if( jo.has_string( "color" ) ) {
         alt_color = color_from_string( jo.get_string( "color" ) );
     }
-    optional( jo, false, "ascii_picture", art );
     optional( jo, false, "weight", weight, 1 );
     optional( jo, false, "append", append );
     optional( jo, false, "expand_snippets", expand_snippets );
@@ -4141,7 +4136,6 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "insulation", def.insulation_factor );
     assign( jo, "solar_efficiency", def.solar_efficiency );
     optional( jo, false, "fall_damage_reduction", def.fall_damage_reduction, 0 );
-    assign( jo, "ascii_picture", def.picture_id );
     assign( jo, "repairs_with", def.repairs_with );
     assign( jo, "ememory_size", def.ememory_size );
 

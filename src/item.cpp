@@ -20,7 +20,6 @@
 
 #include "activity_handlers.h"
 #include "ammo.h"
-#include "ascii_art.h"
 #include "avatar.h"
 #include "bionics.h"
 #include "bodygraph.h"
@@ -5847,28 +5846,6 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 }
 
-void item::ascii_art_info( std::vector<iteminfo> &info, const iteminfo_query * /* parts */,
-                           int  /* batch */,
-                           bool /* debug */ ) const
-{
-    if( is_null() ) {
-        return;
-    }
-
-    if( get_option<bool>( "ENABLE_ASCII_ART" ) ) {
-        ascii_art_id art = type->picture_id;
-        if( has_itype_variant() && itype_variant().art.is_valid() ) {
-            art = itype_variant().art;
-        }
-        if( art.is_valid() ) {
-            insert_separation_line( info );
-            for( const std::string &line : art->picture ) {
-                info.emplace_back( "DESCRIPTION", line );
-            }
-        }
-    }
-}
-
 std::string item::crafting_applications() const
 {
     Character &you = get_player_character();
@@ -6022,7 +5999,6 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
         } else if( blockname == "footer" ) {
 
             final_info( info, parts, batch, debug );
-            ascii_art_info( info, parts, batch, debug );
 
         } else {
 

@@ -52,7 +52,6 @@
     "price": "25 USD",
     "price_postapoc": "12 USD 50 cent",
     "material": [ "paper", "cardboard" ],
-    "ascii_picture": "manual_first_aid",
     "symbol": "?",
     "color": "green",
     "skill": "firstaid",

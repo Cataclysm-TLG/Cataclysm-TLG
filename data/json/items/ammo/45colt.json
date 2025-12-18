@@ -120,7 +120,6 @@
     "name": { "str_sp": ".45 Colt +P JHP" },
     "description": "Jacketed .45 Colt ammunition with a 225gr hollow point bullet, loaded much hotter than regular loads for this cartridge.  Hollowpoints in this venerable caliber were issued by the occasional police department looking for extra lethality before the '97 North Hollywood shootout.  Since then they were mostly used for home defense, and now by the post-apocalyptic cowboy.",
     "//": "Winchester Silvertip.",
-    "ascii_picture": "45colt_jhp",
     "relative": { "damage": { "damage_type": "bullet", "amount": 2, "armor_penetration": -2 } }
   },
   {

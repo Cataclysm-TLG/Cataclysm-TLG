@@ -13,7 +13,6 @@
     "id": "8mm_caseless",
     "type": "AMMO",
     "name": { "str_sp": "8x40mm FMJ" },
-    "ascii_picture": "8mm_caseless",
     "description": "An 8x40mm caseless cartridge with a rectangular shape, consisting of a jacketed 127gr bullet housed inside of an advanced propellant body.  Upon firing, the body will be consumed, leaving nothing behind in the chamber.  Proprietary ammunition for Rivtech 8x40 caseless guns.",
     "weight": "12 g",
     "volume": "150 ml",

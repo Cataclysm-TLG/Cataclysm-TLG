@@ -12,7 +12,6 @@
 #include "ammo.h"
 #include "ammo_effect.h"
 #include "anatomy.h"
-#include "ascii_art.h"
 #include "behavior.h"
 #include "bionics.h"
 #include "bodygraph.h"
@@ -299,7 +298,6 @@ void DynamicDataLoader::initialize()
     add( "hit_range", &Creature::load_hit_range );
     add( "scent_type", &scent_type::load_scent_type );
     add( "disease_type", &disease_type::load_disease_type );
-    add( "ascii_art", &ascii_art::load_ascii_art );
 
     // json/colors.json would be listed here, but it's loaded before the others (see init_colors())
     // Non Static Function Access
@@ -638,7 +636,6 @@ void DynamicDataLoader::unload_data()
     ammo_effects::reset();
     ammunition_type::reset();
     anatomy::reset();
-    ascii_art::reset();
     behavior::reset();
     body_part_type::reset();
     butchery_requirements::reset();

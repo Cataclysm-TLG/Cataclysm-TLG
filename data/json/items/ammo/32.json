@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": ".32 ACP FMJ" },
     "description": "A jacketed .32 ACP cartridge loaded with a 71 grain bullet.  .32 ACP was once a popular handgun cartridge in the 20th century.  It lacks power compared to .380 Auto and 9x19mm.",
-    "ascii_picture": "32_acp",
     "weight": "8 g",
     "volume": "116 ml",
     "longest_side": "25 mm",
