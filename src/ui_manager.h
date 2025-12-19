@@ -215,6 +215,7 @@ class ui_adaptor
         static void redraw();
         static void redraw_invalidated();
         static void screen_resized();
+        static size_t ui_stack_size();
     private:
         static void invalidation_consistency_and_optimization();
 
