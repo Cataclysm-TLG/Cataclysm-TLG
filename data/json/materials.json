@@ -55,7 +55,8 @@
       { "fuel": 0.1, "smoke": 5, "burn": 0.001 },
       { "fuel": 0.2, "smoke": 8, "burn": 0.006 },
       { "fuel": 0.6, "smoke": 15, "burn": 0.02 }
-    ]
+    ],
+    "resist": { "bash": 1, "cut": 1.25, "acid": 10, "heat": 6, "bullet": 3 }
   },
   {
     "type": "material",
@@ -392,14 +393,14 @@
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "cut",
     "acid_dmg_verb": "corroded",
-    "resist": { "bash": 1, "cut": 2, "acid": 10, "heat": 10, "bullet": 2 }
+    "resist": { "bash": 0.4, "cut": 0.6, "acid": 10, "heat": 10, "bullet": 2 }
   },
   {
     "type": "material",
     "id": "damaged_ceramic",
     "name": "Compromised Ceramic",
     "copy-from": "ceramic",
-    "resist": { "bash": 1, "cut": 1, "acid": 10, "heat": 10, "bullet": 0.8 }
+    "resist": { "bash": 0.2, "cut": 0.5, "acid": 10, "heat": 10, "bullet": 0.8 }
   },
   {
     "type": "material",
@@ -2047,7 +2048,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 1.75, "cut": 7.5, "acid": 7, "heat": 3, "bullet": 4.5 },
+    "resist": { "bash": 1.75, "cut": 7.5, "acid": 7, "heat": 3, "bullet": 4 },
     "repair_difficulty": 2
   },
   {
@@ -2066,7 +2067,7 @@
     "cut_dmg_verb": "scratched",
     "acid_dmg_verb": "corroded",
     "burn_products": [ [ "scrap", 0.5 ] ],
-    "resist": { "bash": 6, "cut": 6, "acid": 7, "heat": 3, "bullet": 3 },
+    "resist": { "bash": 6, "cut": 6, "acid": 7, "heat": 3, "bullet": 5.8 },
     "repair_difficulty": 4
   },
   {
@@ -2665,7 +2666,7 @@
     ],
     "burn_products": [ [ "ash", 0.018 ] ],
     "fuel_data": { "energy": "1000 kJ" },
-    "resist": { "bash": 3, "cut": 2, "acid": 4, "heat": 1, "bullet": 2 },
+    "resist": { "bash": 1.3, "cut": 1, "acid": 4, "heat": 1, "bullet": 0.75 },
     "repair_difficulty": 3
   },
   {

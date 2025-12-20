@@ -281,7 +281,87 @@
     "material_thickness": 25,
     "non_functional": "destroyed_large_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 4,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "wood_esapi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "wooden ballistic plate" },
+    "description": "A sheet of wood cut into an irregular hexagon, slightly concave.  It would fit in a plate carrier, and while by no means capable of stopping gunfire, it may still hold up against other threats.",
+    "weight": "620 g",
+    "volume": "770 ml",
+    "longest_side": "32 cm",
+    "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wood" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 4,
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 6,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "paper_esapi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "paper ballistic plate" },
+    "description": "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the front or back of the torso.  This could be used in a plate carrier in lieu of an ESAPI plate, though it probably won't stand up to much.",
+    "weight": "890 g",
+    "volume": "920 ml",
+    "longest_side": "32 cm",
+    "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "paper" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 8,
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 3,
+        "coverage": 45,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "fiberglass_esapi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "fiberglass ballistic plate" },
+    "description": "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate for the torso.  In a pinch, this could be used in a plate carrier to provide a modicum of protection.",
+    "weight": "890 g",
+    "volume": "920 ml",
+    "longest_side": "32 cm",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "fiberglass" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 6,
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
     "armor": [
       {
         "encumbrance": 3,
@@ -297,8 +377,7 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "soft stab panel" },
-    "//": "based on https://www.highcomarmor.com/product/trooper-hcspike3/",
-    "description": "A soft armor insert designed to protect against stab wounds.  While it's not great protection, it incurs no additional encumbrance.  This is intended to be inserted into a ballistic vest, and can't be worn on its own.",
+    "description": "A soft armor insert designed to protect against stab wounds.  This is intended to be inserted into a ballistic vest, and can't be worn on its own.",
     "weight": "500 g",
     "volume": "300 ml",
     "longest_side": "16 cm",
@@ -339,15 +418,14 @@
     "repairs_with": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "material_thickness": 3,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2.5 }
+          { "type": "steel", "covered_by_mat": 100, "thickness": 2 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 }
         ],
-        "encumbrance": 4,
+        "encumbrance": 8,
         "coverage": 45,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
@@ -372,12 +450,12 @@
     "repairs_with": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "material_thickness": 6.35,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
+    "//3": "Should be closer to 6mm steel, but thickness needs to be fixed first or the protection values become astronomical.",
     "armor": [
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 6.35 } ],
-        "encumbrance": 4,
+        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 3 }, { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "encumbrance": 10,
         "coverage": 45,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
@@ -408,7 +486,7 @@
           { "type": "steel", "covered_by_mat": 90, "thickness": 1.8 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "encumbrance": 5,
+        "encumbrance": 7,
         "coverage": 45,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
@@ -436,7 +514,7 @@
           { "type": "steel", "covered_by_mat": 100, "thickness": 2.3 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 }
         ],
-        "encumbrance": 4,
+        "encumbrance": 8,
         "coverage": 45,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
@@ -459,7 +537,7 @@
     "material": [ "thermo_resin" ],
     "symbol": ",",
     "color": "light_gray",
-    "material_thickness": 14,
+    "material_thickness": 8,
     "damage_verb": "makes a crunch, something has shifted",
     "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE" ],
     "armor": [
@@ -505,7 +583,7 @@
     "id": "scrap_esbi_plate",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "scrap ESBI plate" },
+    "name": { "str": "scrap ballistic side plate" },
     "description": "A flat piece of salvaged steel, crudely cut and bent into the shape of an ESBI ballistic plate.",
     "weight": "488 g",
     "//3": "15.24cm x 20.32cm x 0.2cm",
@@ -524,7 +602,7 @@
           { "type": "steel", "covered_by_mat": 90, "thickness": 1.8 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 1 }
         ],
-        "encumbrance": 3,
+        "encumbrance": 4,
         "coverage": 35,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
@@ -538,8 +616,8 @@
     "copy-from": "scrap_esbi_plate",
     "looks_like": "scrap_esbi_plate",
     "repairs_like": "platemail_cuirass",
-    "name": { "str": "mild ESBI plate" },
-    "description": "A hexagonal piece of steel forged into a side plate and padded with synthetic fabric.",
+    "name": { "str": "steel ballistic side plate" },
+    "description": "A hexagonal piece of steel forged into a side insert for a plate carrier and padded with synthetic fabric.",
     "weight": "1300 g",
     "volume": "262 ml",
     "longest_side": "20 cm",
@@ -552,7 +630,87 @@
           { "type": "steel", "covered_by_mat": 100, "thickness": 2.3 },
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.2 }
         ],
+        "encumbrance": 5,
+        "coverage": 35,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+    {
+    "id": "wood_esbi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "wooden ballistic side plate" },
+    "description": "A sheet of wood cut into a small irregular hexagon.  It would fit in the side pockets of a plate carrier, and while by no means capable of stopping gunfire, it may still hold up against other threats.",
+    "weight": "620 g",
+    "volume": "770 ml",
+    "longest_side": "32 cm",
+    "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "wood" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 4,
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
         "encumbrance": 3,
+        "coverage": 35,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "paper_esbi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "paper ballistic side plate" },
+    "description": "A great many layers of paper stacked and laminated together with a generous portion of glue to form an armor plate for the sides of the torso.  This could be used in a plate carrier in lieu of an ESBI plate, though it probably won't stand up to much.",
+    "weight": "890 g",
+    "volume": "920 ml",
+    "longest_side": "32 cm",
+    "//": "ESAPI Medium are 24.13cm x 31.75cm and 2.5cm thick",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "paper" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 8,
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 2,
+        "coverage": 35,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "rigid_layer_only": true
+      }
+    ]
+  },
+  {
+    "id": "fiberglass_esbi_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "fiberglass ballistic side plate" },
+    "description": "Several layers of woven fiberglass stacked and laminated together with epoxy to form an armor plate shaped for the side of the torso.  In a pinch, this could be used in a plate carrier to provide a modicum of protection.",
+    "weight": "890 g",
+    "volume": "920 ml",
+    "longest_side": "32 cm",
+    "price": "600 USD",
+    "price_postapoc": "1 USD",
+    "material": [ "fiberglass" ],
+    "symbol": ",",
+    "color": "dark_gray",
+    "material_thickness": 6,
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
+    "armor": [
+      {
+        "encumbrance": 2,
         "coverage": 35,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
@@ -754,7 +912,7 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
-        "encumbrance": 8,
+        "encumbrance": 7,
         "coverage": 90,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
@@ -840,7 +998,7 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
-        "encumbrance": 12,
+        "encumbrance": 10,
         "coverage": 98,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
@@ -904,7 +1062,7 @@
           { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
-        "encumbrance": 11,
+        "encumbrance": 10,
         "coverage": 98,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
