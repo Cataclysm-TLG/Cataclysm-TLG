@@ -1094,8 +1094,6 @@ static void draw_points( const catacurses::window &w, pool_type pool, const avat
             mvwprintz( w, point( pMsg_length + 2, 3 ), c_green, " (+%d)", std::abs( netPointCost ) );
         }
     }
-    //print_colored_text( w, point( 2, 4 ), color, c_light_gray,
-    //                    player_difficulty::getInstance().difficulty_to_string( u ) );
 }
 
 template <class Compare>
