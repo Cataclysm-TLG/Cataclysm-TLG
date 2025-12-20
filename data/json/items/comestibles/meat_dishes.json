@@ -240,7 +240,7 @@
     "name": { "str_sp": "cracklins" },
     "copy-from": "cracklins",
     "material": [ "hflesh" ],
-    "vitamins": [ [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -256,7 +256,7 @@
     "name": { "str_sp": "cracklins" },
     "copy-from": "cracklins",
     "material": [ "hflesh" ],
-    "vitamins": [ [ "mutant_toxin", 52 ], [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "mutant_toxin", 52 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
