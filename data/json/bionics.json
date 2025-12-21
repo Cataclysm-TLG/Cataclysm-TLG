@@ -1493,7 +1493,7 @@
       [ "foot_l", 1 ],
       [ "foot_r", 1 ]
     ],
-    "act_cost": 50
+    "act_cost": 1000
   },
   {
     "id": "bio_tools",
