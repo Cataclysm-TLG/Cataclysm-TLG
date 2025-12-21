@@ -1849,7 +1849,7 @@
     "color": "white",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "techniques": [ "SHARKTEETH_BITE", "SHARKTEETH_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PROVIDES_TECHNIQUES", "PADDED", "NATURAL_WEAPON" ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 5 } ],
@@ -2382,7 +2382,7 @@
     "material": [ "titanium_alloy" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "SOFT", "ALLOWS_NATURAL_ATTACKS", "TRANSPARENT", "PERSONAL", "CUSHION_FALL" ],
+    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "ALLOWS_NATURAL_ATTACKS", "TRANSPARENT", "PERSONAL", "CUSHION_FALL" ],
     "armor": [
       {
         "material": [ { "type": "titanium_alloy_implant", "covered_by_mat": 100, "thickness": 1.5 } ],
