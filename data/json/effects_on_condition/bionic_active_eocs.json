@@ -21,7 +21,7 @@
     "effect": [ { "u_message": "You cannot activate Time Dilation while mounted.", "type": "info" }, { "run_eocs": "refund_power" } ],
     "false_effect": [
       { "u_message": "You activate your Time Dilation.", "type": "info" },
-      { "turn_cost": { "math": [ "u_val('power') / -energy('100 kJ')" ] } },
+      { "turn_cost": { "math": [ "0", "-", "10" ] } },
       { "math": [ "u_val('power') = 0" ] },
       { "u_message": "Your speed suddenly increases!", "type": "good" },
       {
