@@ -22,6 +22,7 @@
     "false_effect": [
       { "u_message": "You activate your Time Dilation.", "type": "info" },
       { "turn_cost": { "math": [ "0", "-", "10" ] } },
+      { "math": [ "u_val('power') = u_val('power')" ] },
       { "math": [ "u_val('power') = 0" ] },
       { "u_message": "Your speed suddenly increases!", "type": "good" },
       {
