@@ -454,7 +454,10 @@
     "//3": "Should be closer to 6mm steel, but thickness needs to be fixed first or the protection values become astronomical.",
     "armor": [
       {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 3 }, { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 } ],
+        "material": [
+          { "type": "steel", "covered_by_mat": 100, "thickness": 3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 }
+        ],
         "encumbrance": 10,
         "coverage": 45,
         "covers": [ "torso" ],
@@ -638,7 +641,7 @@
       }
     ]
   },
-    {
+  {
     "id": "wood_esbi_plate",
     "type": "ARMOR",
     "category": "armor",

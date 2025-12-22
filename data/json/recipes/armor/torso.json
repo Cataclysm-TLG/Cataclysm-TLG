@@ -1106,7 +1106,7 @@
     "reversible": true,
     "using": [ [ "sewing_standard", 30 ], [ "tailoring_denim_sheet", 8 ], [ "button", 5 ] ]
   },
-    {
+  {
     "result": "wood_esapi_plate",
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
@@ -1120,7 +1120,7 @@
     "qualities": [ { "id": "SAW_W", "level": 1 }, { "id": "CUT", "level": 2 }, { "id": "FILE", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 2 } ]
   },
-      {
+  {
     "result": "wood_esbi_plate",
     "type": "recipe",
     "activity_level": "MODERATE_EXERCISE",
