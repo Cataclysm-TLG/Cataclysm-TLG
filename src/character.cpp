@@ -615,7 +615,7 @@ Character::Character() :
     // 55 Mcal or 55k kcal
     healthy_calories = 55000000;
     base_cardio_acc = 1000;
-    // this makes sure characters start with normal bmi
+    // This makes sure characters start with normal BMI.
     stored_calories = healthy_calories - 1000000;
     initialize_stomach_contents();
 
@@ -633,7 +633,7 @@ Character::Character() :
     scent = 500;
     male = true;
     prof = profession::has_initialized() ? profession::generic() :
-           nullptr; //workaround for a potential structural limitation, see player::create
+           nullptr; // Workaround for a potential structural limitation, see player::create.
     start_location = start_location_sloc_shelter_a;
     moves = 100;
     oxygen = 0;
@@ -655,7 +655,7 @@ Character::Character() :
         vitamin_levels[ v.first ] = 0;
         daily_vitamins[v.first] = { 0,0 };
     }
-    // Only call these if game is initialized
+    // Only call these if game is initialized.
     if( !!g && json_flag::is_ready() ) {
         recalc_sight_limits();
         trait_flag_cache.clear();
@@ -7466,9 +7466,12 @@ int Character::get_cardiofit() const
         return 2 * get_cardio_acc_base();
     }
 
-    if( has_bionic( bio_synlungs ) ) {
-        // If you have the synthetic lungs bionic your cardioacc is forced to a specific value
+    if( has_active_bionic( bio_synlungs ) ) {
+        // If you have the synthetic lungs bionic and they're active, your cardiofit is forced to a specific value.
         return 3 * get_cardio_acc_base();
+    } else if( has_bionic( bio_synlungs ) ) {
+        // If they're not active, your cardiofit is forced to the worst possible value.
+        return 0.2 * get_cardio_acc_base();
     }
 
     const int cardio_base = get_cardio_acc();

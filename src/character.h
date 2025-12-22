@@ -4197,6 +4197,8 @@ class Character : public Creature, public visitable
         int thirst;
         int stamina;
 
+        // Cardio accumulator. Cardio begins at 1000 (slightly below average) and can range up to about 3500 for a human.
+        // The lowest expected score is somewhere around ~200.
         int cardio_acc;
         int base_cardio_acc;
 
