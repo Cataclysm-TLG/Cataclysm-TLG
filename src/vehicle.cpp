@@ -5052,7 +5052,7 @@ void vehicle::consume_fuel( map &here, int load, bool idling )
     double st = strain( here );
     bool skating = false;
     bool offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
-                  ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
+                   ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
     for( const auto &fuel_pr : fuel_usage() ) {
         const itype_id &ft = fuel_pr.first;
         if( idling && ft == fuel_type_battery ) {

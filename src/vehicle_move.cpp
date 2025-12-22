@@ -1445,7 +1445,7 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     float reaction_penalty = 0.f;
     // This is a very rough check to try to figure out if we're offroad and should be training offroad driving proficiency.
     bool is_offroad = !( is_flying || in_deep_water || wheelcache.empty() ) &&
-                  ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
+                      ( here.vehicle_wheel_traction( *this ) < wheel_area() * 0.80f );
     // Check if you're piloting on land or water, and reduce effective driving skill proportional to relevant proficiencies (10% Boat Proficiency = 10% driving skill on water)
     if( !driver.has_proficiency( proficiency_prof_driver ) && !in_deep_water && is_offroad ) {
         is_non_proficient = true;
@@ -1454,16 +1454,19 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
         is_non_proficient = true;
         vehicle_proficiency = driver.get_proficiency_practice( proficiency_prof_boat_pilot );
     }
-        // Driving skill, perception, and dexterity control our ability to drive. These are modified here by limb scores.
-        float effective_per = driver.get_per() * std::min( 1.f, driver.get_limb_score( limb_score_vision ) );
-        float effective_dex = driver.get_dex() * std::min( 1.f, driver.get_limb_score( limb_score_manip ) );
+    // Driving skill, perception, and dexterity control our ability to drive. These are modified here by limb scores.
+    float effective_per = driver.get_per() * std::min( 1.f,
+                          driver.get_limb_score( limb_score_vision ) );
+    float effective_dex = driver.get_dex() * std::min( 1.f, driver.get_limb_score( limb_score_manip ) );
     bool non_prof_fumble = false;
     float non_prof_penalty = 0;
     //If you lack the appropriate piloting proficiency, increase handling penalty, and roll chance to fumble while steering
     if( is_non_proficient ) {
         effective_driver_skill *= vehicle_proficiency;
-        non_prof_penalty = std::max( 0.0f, ( 1.0f - vehicle_proficiency ) * 10.0f - ( effective_dex + effective_per ) * 0.25f );
-        non_prof_fumble = one_in( vehicle_proficiency * 12.0f + ( effective_dex + effective_per ) * 0.5f + 6.0f );
+        non_prof_penalty = std::max( 0.0f,
+                                     ( 1.0f - vehicle_proficiency ) * 10.0f - ( effective_dex + effective_per ) * 0.25f );
+        non_prof_fumble = one_in( vehicle_proficiency * 12.0f + ( effective_dex + effective_per ) * 0.5f +
+                                  6.0f );
     }
     if( z != 0 && is_rotorcraft( here ) ) {
         driver.set_moves( std::min( driver.get_moves(), 0 ) );
@@ -1471,7 +1474,8 @@ void vehicle::pldrive( map &here, Character &driver, const int trn, const int ac
     }
     units::angle turn_delta = vehicles::steer_increment * trn;
     if( driver.get_limb_score( limb_score_reaction ) < 0.75f ) {
-        reaction_penalty = std::clamp( ( ( 1.f - driver.get_limb_score( limb_score_reaction ) ) * 5.f ), 0.f, 5.f );
+        reaction_penalty = std::clamp( ( ( 1.f - driver.get_limb_score( limb_score_reaction ) ) * 5.f ),
+                                       0.f, 5.f );
     }
     const float handling_diff = handling_difficulty( here ) + non_prof_penalty + reaction_penalty;
     if( turn_delta != 0_degrees ) {

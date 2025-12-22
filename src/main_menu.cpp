@@ -314,7 +314,7 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
         case holiday::halloween:
             fold_and_print_from( w_open, point::zero, 30, 0, c_white, halloween_spider() );
             fold_and_print_from( w_open, point( getmaxx( w_open ) - 25, offset.y - 8 ),
-                                    25, 0, c_white, halloween_graves() );
+                                 25, 0, c_white, halloween_graves() );
             break;
         case holiday::thanksgiving:
         case holiday::christmas:
