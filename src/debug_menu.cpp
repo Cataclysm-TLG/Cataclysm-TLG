@@ -1965,7 +1965,7 @@ static void character_edit_needs_menu( Character &you )
 
     const auto &vits = vitamin::all();
     for( const auto &v : vits ) {
-        smenu.addentry( -1, true, 0, _( "%s: daily %d, overall %d" ), v.second.name(),
+        smenu.addentry( -1, true, 0, _( "%s: today: %d, overall: %d" ), v.second.name(),
                         you.get_daily_vitamin( v.first ), you.vitamin_get( v.first ) );
     }
 
@@ -2367,7 +2367,7 @@ static void character_edit_menu()
 
     enum {
         D_DESC, D_SKILLS, D_THEORY, D_PROF, D_STATS, D_SPELLS, D_ITEMS, D_DELETE_ITEMS, D_DROP_ITEMS, D_ITEM_WORN,
-        D_HP, D_STAMINA, D_MORALE, D_PAIN, D_NEEDS, D_NORMALIZE_BODY, D_HEALTHY, D_STATUS, D_MISSION_ADD, D_MISSION_EDIT,
+        D_HP, D_STAMINA, D_MORALE, D_PAIN, D_NEEDS, D_NORMALIZE_BODY, D_FITNESS, D_STATUS, D_MISSION_ADD, D_MISSION_EDIT,
         D_TELE, D_MUTATE, D_BIONICS, D_CLASS, D_ATTITUDE, D_OPINION, D_PERSONALITY, D_ADD_EFFECT, D_ASTHMA, D_PRINT_VARS,
         D_WRITE_EOCS, D_KILL_XP, D_CHECK_TEMP, D_EDIT_VARS, D_FACTION, D_ALPHA_EOC, D_BETA_EOC
     };
@@ -2385,8 +2385,8 @@ static void character_edit_menu()
     nmenu.addentry( D_HP, true, 'h', "%s", _( "Set hit points" ) );
     nmenu.addentry( D_STAMINA, true, 'S', "%s", _( "Set stamina" ) );
     nmenu.addentry( D_MORALE, true, 'o', "%s", _( "Set morale" ) );
-    nmenu.addentry( D_PAIN, true, 'p', "%s", _( "Cause pain" ) );
-    nmenu.addentry( D_HEALTHY, true, 'a', "%s", _( "Set health" ) );
+    nmenu.addentry( D_PAIN, true, 'p', "%s", _( "Add/remove pain" ) );
+    nmenu.addentry( D_FITNESS, true, 'a', "%s", _( "Lifestyle and Fitness" ) );
     nmenu.addentry( D_NEEDS, true, 'n', "%s", _( "Set needs" ) );
     nmenu.addentry( D_NORMALIZE_BODY, true, 'N', "%s", _( "Normalize body stats" ) );
     nmenu.addentry( D_MUTATE, true, 'u', "%s", _( "Mutate" ) );
@@ -2563,25 +2563,32 @@ static void character_edit_menu()
         case D_BIONICS:
             wishbionics( &you );
             break;
-        case D_HEALTHY: {
+        case D_FITNESS: {
             uilist smenu;
-            smenu.addentry( 0, true, 'h', "%s: %d", _( "Health" ), you.get_lifestyle() );
-            smenu.addentry( 1, true, 'm', "%s: %d", _( "Health modifier" ), you.get_daily_health() );
-            smenu.addentry( 2, true, 'r', "%s: %d", _( "Radiation" ), you.get_rad() );
+            smenu.addentry( 0, true, 'h', "%s: %d", _( "Lifestyle" ), you.get_lifestyle() );
+            smenu.addentry( 1, true, 'm', "%s: %d", _( "Lifestyle modifier" ), you.get_daily_health() );
+            smenu.addentry( 2, true, 'f', "Cardio accumulator: %2s, Overall cardio: %1s", you.get_cardiofit(),
+                            you.get_cardio_acc() );
+            smenu.addentry( 3, true, 'r', "%s: %d", _( "Radiation" ), you.get_rad() );
             smenu.query();
             int value;
             switch( smenu.ret ) {
                 case 0:
-                    if( query_int( value, _( "Set the value to?  Currently: %d" ), you.get_lifestyle() ) ) {
+                    if( query_int( value, _( "Set lifestyle to?  Currently: %d" ), you.get_lifestyle() ) ) {
                         you.set_lifestyle( value );
                     }
                     break;
                 case 1:
-                    if( query_int( value, _( "Set the value to?  Currently: %d" ), you.get_daily_health() ) ) {
+                    if( query_int( value, _( "Set lifestyle modifier to?  Currently: %d" ), you.get_daily_health() ) ) {
                         you.set_daily_health( value );
                     }
                     break;
                 case 2:
+                    if( query_int( value, _( "Set cardio accumulator to?  Currently: %d" ), you.get_cardio_acc() ) ) {
+                        you.set_cardio_acc( value );
+                    }
+                    break;
+                case 3:
                     if( query_int( value, _( "Set the value to?  Currently: %d" ), you.get_rad() ) ) {
                         you.set_rad( value );
                     }
