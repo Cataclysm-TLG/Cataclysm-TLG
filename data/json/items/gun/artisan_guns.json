@@ -3,7 +3,7 @@
     "id": "obrez",
     "copy-from": "mosin91_30",
     "type": "GUN",
-    "name": { "str": "Obrez rifle" },
+    "name": { "str": "Obrez pistol" },
     "description": "A cut-down, modified Mosin-Nagant.  It has a short barrel and the stock has been cut down and fitted with a mace head, with new low profile front and rear sights added.  The sides of the firearm have been reinforced with metal to withstand a beating.",
     "weight": "3000 g",
     "volume": "2220 ml",
@@ -23,9 +23,10 @@
     "valid_mod_locations": [ [ "mechanism", 2 ], [ "sling", 1 ], [ "underbarrel mount", 1 ] ],
     "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "uneven" },
     "qualities": [ [ "HAMMER", 1 ] ],
-    "extend": { "flags": [ "DURABLE_MELEE" ] },
-    "weapon_category": [ "MACES" ],
-    "melee_damage": { "bash": 30 }
+    "extend": { "flags": [ "DURABLE_MELEE", "ALLOWS_BODY_BLOCK" ] },
+    "delete": { "flags": [ "FIRE_TWOHAND" ],
+    "weapon_category": [ "BLUDGEONS" ],
+    "melee_damage": { "bash": 10 }
   },
   {
     "id": "pressin",
@@ -47,6 +48,6 @@
     "flags": [ "DURABLE_MELEE", "ALLOWS_BODY_BLOCK", "NO_TURRET", "EASY_CLEAN" ],
     "weapon_category": [ "AUTOMATIC_PISTOLS", "SHIVS" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "32": 2 } } ],
-    "melee_damage": { "stab": 16 }
+    "melee_damage": { "stab": 8 }
   }
 ]
