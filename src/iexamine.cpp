@@ -2013,7 +2013,7 @@ void iexamine::bulletin_board( Character &you, const tripoint_bub_ms &examp )
             //     temp_camp->handle_takeover_by( you.get_faction()->id, plunder );
             //     return;
             // }
-            you.add_msg_if_player( _( "You don't run this camp, the board is useless to you." ) );
+            you.add_msg_if_player( _( "You don't run this settlement, the board is useless to you." ) );
             return;
         }
 
@@ -2031,7 +2031,7 @@ void iexamine::bulletin_board( Character &you, const tripoint_bub_ms &examp )
             temp_camp->handle_mission( mission_key.cur_key.id );
         }
     } else {
-        you.add_msg_if_player( _( "This bulletin board is not inside a camp." ) );
+        you.add_msg_if_player( _( "This bulletin board is not inside a settlement." ) );
     }
 }
 
