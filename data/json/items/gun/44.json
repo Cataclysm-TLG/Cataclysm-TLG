@@ -261,7 +261,7 @@
     "variants": [
       {
         "id": "rossi_r92_44_16",
-        "name": { "str": "Rossi R92 16\"", "str_pl": "Rossi R92s 16\"" },
+        "name": { "str": "Rossi R92 16\" rifle" },
         "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features all-black furniture, a 16\" barrel, and 8 rounds of .44 Magnum, along with a large lever loop."
       }
     ],
@@ -306,7 +306,7 @@
     "variants": [
       {
         "id": "rossi_r92_44_16",
-        "name": { "str": "Rossi R92 20\"", "str_pl": "Rossi R92s 20\"" },
+        "name": { "str": "Rossi R92 20\" rifle" },
         "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features all-black furniture, a 20\" barrel, and 10 rounds of .44 Magnum."
       }
     ],

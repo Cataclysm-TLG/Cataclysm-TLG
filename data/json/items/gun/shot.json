@@ -672,7 +672,7 @@
     "variants": [
       {
         "id": "streetsweeper",
-        "name": { "str": "Cobray Streetsweeper" },
+        "name": { "str": "Cobray Streetsweeper shotgun" },
         "description": "Less shotgun and more comically oversized revolver, the Cobray Streetsweeper sold poorly before it was deemed a destructive device.  The cylinder is driven by a clockspring, cannot be indexed by hand, and must be ejected with an ejector rod.  Its unique design allows for all 12 shells to be fired in under 3 seconds, as demonstrated by the ATF technical branch."
       }
     ],
@@ -760,7 +760,7 @@
     "variants": [
       {
         "id": "dp_12",
-        "name": { "str": "DP-12" },
+        "name": { "str": "DP-12 shotgun" },
         "description": "A bullpup, 12-gauge, pump-action, double-barrelled mouthful of a shotgun.  Each barrel feeds from its own magazine, making the weapon actually two firearms in a single frame, and, while each barrel has its own associated trigger, the presence of a single pump to actuate both mechanisms means that it cannot be used precisely.  This, however, isn't to say that the weapon isn't fit for the service of shooting zombies at point blank ranges."
       }
     ],
@@ -1009,7 +1009,7 @@
     "variants": [
       {
         "id": "srm_1216",
-        "name": { "str": "SRM Arms Model 1216" },
+        "name": { "str": "SRM Arms Model 1216 shotgun" },
         "description": "A delayed blowback semi-automatic shotgun feeding from detachable 16-round rotary magazines."
       }
     ],

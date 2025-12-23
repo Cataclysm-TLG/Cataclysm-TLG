@@ -171,7 +171,7 @@
     "copy-from": "rifle_semi",
     "looks_like": "modular_ar15",
     "type": "GUN",
-    "name": { "str": "FS2000" },
+    "name": { "str": "FS2000 carbine" },
     "description": "A sleek bullpup carbine designed by FN Herstal, complete with an integrated sight accessory rail.  The forward ejecting action and ambidextrous controls make firing comfortable for both left and right-handed shooting.  The whole rifle is well sealed from mud and dust for reliability, but this makes it incompatible with many aftermarket magazines.",
     "weight": "3319 g",
     "volume": "7986 ml",
@@ -261,7 +261,7 @@
     "id": "scar_l",
     "copy-from": "rifle_semi",
     "type": "GUN",
-    "name": { "str": "FN SCAR-L" },
+    "name": { "str": "FN SCAR-L rifle" },
     "description": "A highly accurate and modular assault rifle specially designed for the United States Special Operations Command.  The 'L' in its name stands for light, as it uses the lightweight .223 round.",
     "weight": "3490 g",
     "volume": "4957 ml",
@@ -740,7 +740,7 @@
     "variants": [
       {
         "id": "sig553",
-        "name": { "str": "SIG SG 556" },
+        "name": { "str": "SIG SG 556 rifle" },
         "description": "The SG 556 is a civilian model of the Swiss SIG SG 550 series, manufactured in New Hampshire.  It lacks any automatic fire capability and has a 16 inch barrel, but still retains a folding stock, with the feature of feeding from STANAG magazines instead of the SG 550 series magazines."
       }
     ],
@@ -806,7 +806,7 @@
     "variants": [
       {
         "id": "steyr_aug",
-        "name": { "str": "Steyr AUG" },
+        "name": { "str": "Steyr AUG carbine" },
         "description": "The Steyr AUG is an Austrian assault rifle that uses a bullpup design.  It is used in the armed forces and police forces of many nations, and enjoys low recoil and high accuracy."
       }
     ],
@@ -847,7 +847,7 @@
     "variants": [
       {
         "id": "zpapm90",
-        "name": { "str": "ZPAP M90" },
+        "name": { "str": "ZPAP M90 rifle" },
         "description": "A Serbian-made AK pattern rifle made by Zastava in 5.56x45mm NATO.  To avoid import restrictions, Zastava USA has added a number of American-made parts."
       }
     ],
