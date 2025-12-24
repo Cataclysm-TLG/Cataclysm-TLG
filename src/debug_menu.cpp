@@ -1962,7 +1962,7 @@ static void character_edit_needs_menu( Character &you )
     smenu.addentry( 10, true, 'W', "%s: %d", _( "Weariness tracker" ),
                     you.activity_history.debug_get_tracker() );
     smenu.addentry( 8, true, 'a', _( "Reset all basic needs" ) );
-    smenu.addentry( 9, true, 'e', _( "Empty stomach and guts" ) );
+    smenu.addentry( 9, true, 'e', _( "Empty stomach and gut" ) );
 
     const auto &vits = vitamin::all();
     for( const auto &v : vits ) {
@@ -2005,8 +2005,8 @@ static void character_edit_needs_menu( Character &you )
             break;
 
         case 5:
-            if( query_int( value, false, _( "Set fatigue to?  Currently: %d" ), you.get_sleepiness() ) ) {
-                you.set_sleepiness( value );
+            if( query_int( value, false, _( "Set fatigue to?  Currently: %d" ), you.get_fatigue() ) ) {
+                you.set_fatigue( value );
             }
             break;
 
@@ -3236,16 +3236,11 @@ static void debug_menu_force_temperature()
     if( tempmenu.ret == 0 ) {
         forced_temp.reset();
     } else {
-        string_input_popup pop;
-
-        auto ask = [&pop]( const std::string & unit, std::optional<float> current ) {
-            int ret = pop.title( string_format( _( "Set temperature to?  [%s]" ), unit ) )
-                      .width( 20 )
-                      .text( current ? std::to_string( *current ) : "" )
-                      .only_digits( true )
-                      .query_int();
-
-            return pop.canceled() ? current : std::optional<float>( static_cast<float>( ret ) );
+        auto ask = []( const std::string & unit, std::optional<float> current ) {
+            int ret = !!current ? static_cast<int>( std::round( *current ) ) :
+                      static_cast<int>( std::round( get_weather().temperature.value() ) );
+            return query_int( ret, !!current, _( "Set temperature to?  [%s]" ), unit ) ?
+                   std::optional<float>( static_cast<float>( ret ) ) : current;
         };
 
         std::optional<float> current;
