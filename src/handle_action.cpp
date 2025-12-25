@@ -696,7 +696,7 @@ static void grab()
         // Max grab strength is 100, so cap it.
         int grab_strength = std::min( 100,
                                       1 + static_cast<int>( std::round( ( grapple_grip * ( you.get_arm_str() + static_cast<int>
-                                              ( you.get_skill_level( skill_unarmed ) + you.get_skill_level( skill_melee ) ) ) ) ) ) );
+                                              ( you.get_skill_level( skill_unarmed ) + you.get_skill_level( skill_melee ) + you.enum_size() ) ) ) ) ) );
         Creature *rawcreature = creatures.creature_at( grabp );
         std::shared_ptr<Creature> victimptr( rawcreature, []( Creature * ) {} );
 
