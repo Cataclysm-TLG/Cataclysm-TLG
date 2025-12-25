@@ -8,7 +8,7 @@
     "known_by_u": true,
     "size": 1,
     "power": 100,
-    "fac_food_supply": { "calories": 0, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
     "consumes_food": true,
     "wealth": 0,
     "relations": {
@@ -35,7 +35,7 @@
     "known_by_u": false,
     "size": 1,
     "power": 100,
-    "fac_food_supply": { "calories": 0, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
     "wealth": 0,
     "relations": {
       "your_followers": { "kill on sight": true, "knows your voice": true },
@@ -63,7 +63,7 @@
     "power": 100,
     "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
     "//2": "Expect to see these values a lot.",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 100000000,
     "currency": "RobofacCoin",
     "price_rules": [ { "group": "NC_ROBOFAC_gear", "markup": 2 } ],
@@ -96,7 +96,7 @@
     "size": 70,
     "power": 100,
     "//": "No food supply, they eat off of robofac's",
-    "fac_food_supply": { "calories": 0, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
     "wealth": 75000,
     "currency": "RobofacCoin",
     "relations": {
@@ -123,7 +123,7 @@
     "size": 100,
     "power": 100,
     "//": "FIXME: No camp! One character spawns at the refugee center but can't eat out of their stores",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 100000000,
     "relations": {
       "old_guard": {
@@ -163,7 +163,7 @@
     "power": 100,
     "//": "(only) 30 days worth of food for 100 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
     "//2": "Their canonical starvation is not yet implemented.",
-    "fac_food_supply": { "calories": 9000000000, "vitamins": { "iron": 288000, "calcium": 288000, "vitC": 288000 } },
+    "fac_food_supply": [ [ 0, { "calories": 9000000000, "vitamins": { "iron": 288000, "calcium": 288000, "vitC": 288000 } } ] ],
     "wealth": 75000000,
     "currency": "FMCNote",
     "price_rules": [
@@ -251,7 +251,7 @@
     "size": 5,
     "power": 0,
     "//": "No camp, on purpose! These guys will literally starve.",
-    "fac_food_supply": { "calories": 0, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
     "wealth": 100,
     "relations": {
       "lobby_beggars": {
@@ -311,7 +311,7 @@
     "known_by_u": false,
     "size": 100,
     "power": 100,
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 10000000,
     "currency": "FMCNote",
     "price_rules": [ { "item": "money_strap_FMCNote", "fixed_adj": 0 }, { "item": "money_bundle_FMCNote", "fixed_adj": 0 } ],
@@ -342,7 +342,7 @@
     "size": 100,
     "power": 100,
     "//": "No camp, on purpose! The pilgrim group should probably be full marloss, and not need to eat?",
-    "fac_food_supply": { "calories": 0, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 0, "vitamins": {  } } ] ],
     "wealth": 25000,
     "relations": {
       "marloss": {
@@ -366,7 +366,7 @@
     "known_by_u": false,
     "size": 1,
     "power": 1,
-    "fac_food_supply": { "calories": 1, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 1, "vitamins": {  } } ] ],
     "lone_wolf_faction": true,
     "wealth": 1,
     "relations": {
@@ -388,7 +388,7 @@
     "size": 100,
     "power": 100,
     "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 2500000,
     "relations": {
       "lobby_beggars": { "knows your voice": true },
@@ -412,7 +412,7 @@
     "known_by_u": false,
     "size": 100,
     "power": 100,
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 45000000,
     "relations": {
       "hells_raiders": {
@@ -452,7 +452,7 @@
     "known_by_u": false,
     "size": 1,
     "power": 1,
-    "fac_food_supply": { "calories": 1, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 1, "vitamins": {  } } ] ],
     "wealth": 1,
     "relations": {
       "slaves": {
@@ -490,7 +490,7 @@
     "power": 10,
     "currency": "signed_chit",
     "//": "FOUR camps.",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 75000,
     "relations": {
       "free_merchants": {
@@ -563,7 +563,7 @@
     "size": 25,
     "power": 20,
     "currency": "icon",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 82500,
     "relations": {
       "gods_community": {
@@ -655,7 +655,7 @@
     "size": 3,
     "power": 3,
     "//": "FIXME: Currently no camps! Spawns via % chance in a bit of nested mapgen, then moves to an existing lighthouse (with no way to know which lighthouse during mapgen!). Will probably need some dynamic camp placement to support.",
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 20000,
     "relations": {
       "free_merchants": { "knows your voice": true },
@@ -676,7 +676,7 @@
     "size": 100,
     "power": 100,
     "//": "7 days worth of food for 10 people, at 3000kcal/day and *half* RDA of iron/calcium/vitC",
-    "fac_food_supply": { "calories": 210000000, "vitamins": { "iron": 3360, "calcium": 3360, "vitC": 3360 } },
+    "fac_food_supply": [ [ 0, { "calories": 210000000, "vitamins": { "iron": 3360, "calcium": 3360, "vitC": 3360 } } ] ],
     "wealth": 45000000,
     "relations": {
       "hells_raiders": {
@@ -707,7 +707,7 @@
     "known_by_u": false,
     "size": 100,
     "power": 100,
-    "fac_food_supply": { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } },
+    "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
     "wealth": 25000000,
     "currency": "FlatCoin",
     "price_rules": [
@@ -791,7 +791,7 @@
     "known_by_u": false,
     "size": 3,
     "power": 3,
-    "fac_food_supply": { "calories": 115200, "vitamins": {  } },
+    "fac_food_supply": [ [ 0, { "calories": 115200, "vitamins": {  } } ] ],
     "wealth": 20000,
     "relations": {
       "free_merchants": { "knows your voice": true },

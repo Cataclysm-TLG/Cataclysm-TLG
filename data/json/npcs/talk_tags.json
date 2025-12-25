@@ -2050,13 +2050,11 @@
     "//": "NPCs say this after trying to eat from a basecamp larder with no food.",
     "text": [
       "Hey, <name_g>, we're out of food.",
-      "Hey, the larder is empty!  We're going to starve.",
+      "If you're holding out, now's the time to say so.  The larder's out of food.",
+      "Hey, the larder is empty!  We're going to starve if we don't fix that.",
       "There's no food in the larder!",
-      "<name_g>, we're empty on chow.",
-      "Larder is a little bare.  Really bare in fact.",
-      "Larder is empty, completely cleared out.",
-      "We need more food in the basecamp larder; it's empty.",
-      "Uhm, <name_g>, I don't meant to criticize, but we should focus on distributing some food into the basecamp larder."
+      "The larder is a little bare.  Really bare in fact.",
+      "The larder is empty, completely cleared out."
     ]
   },
   {
