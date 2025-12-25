@@ -578,7 +578,7 @@ void basecamp::faction_display( const catacurses::window &fac_w, const int width
     }
     mvwprintz( fac_w, point( width, ++y ), col, _( "Location: %s" ), camp_pos.to_string() );
     faction *yours = player_character.get_faction();
-    std::string food_text = string_format( _( "Food Supply: %s %d kilocalories" ),
+    std::string food_text = string_format( _( "Food Supply: %s (%d kcal)" ),
                                            yours->food_supply_text(), yours->food_supply().kcal() );
     nc_color food_col = yours->food_supply_color();
     mvwprintz( fac_w, point( width, ++y ), food_col, food_text );
@@ -784,12 +784,19 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
 
     const std::pair <std::string, nc_color> condition = hp_description();
     mvwprintz( fac_w, point( width, ++y ), condition.second, _( "Condition: " ) + condition.first );
-    const std::pair <std::string, nc_color> hunger_pair = display::hunger_text_color( *this );
+    std::pair<std::string, nc_color> hunger_pair = display::weight_text_color( *this );
+    // These display as light gray normally, because this function is primarily for the @ screen.
+    if( hunger_pair.first == _( "Normal" ) ||
+        hunger_pair.first == _( "Overweight" ) ||
+        hunger_pair.first == _( "Underweight" ) ) {
+        hunger_pair.second = c_white;
+    }
     const std::pair <std::string, nc_color> thirst_pair = display::thirst_text_color( *this );
     const std::pair <std::string, nc_color> fatigue_pair = display::fatigue_text_color( *this );
     const std::string nominal = pgettext( "needs", "Nominal" );
+    // TODO: switch this back to hunger once hunger's a thing.
     mvwprintz( fac_w, point( width, ++y ), hunger_pair.second,
-               _( "Hunger: " ) + ( hunger_pair.first.empty() ? nominal : hunger_pair.first ) );
+               _( "Weight: " ) + ( hunger_pair.first.empty() ? nominal : hunger_pair.first ) );
     mvwprintz( fac_w, point( width, ++y ), thirst_pair.second,
                _( "Thirst: " ) + ( thirst_pair.first.empty() ? nominal : thirst_pair.first ) );
     mvwprintz( fac_w, point( width, ++y ), fatigue_pair.second,
