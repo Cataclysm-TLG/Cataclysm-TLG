@@ -688,6 +688,8 @@ character_id Character::getID() const
 
 void Character::swap_character( Character &other )
 {
+    // TODO: Once NPCs can grapple, maintain and move target and grabber statuses.
+    release_grapple();
     npc tmp_npc;
     Character &tmp = tmp_npc;
     tmp = std::move( other );
