@@ -2580,7 +2580,8 @@ static void character_edit_menu()
                     }
                     break;
                 case 2:
-                    if( query_int( value, false, _( "Set cardio accumulator to?  Currently: %d" ), you.get_cardio_acc() ) ) {
+                    if( query_int( value, false, _( "Set cardio accumulator to?  Currently: %d" ),
+                                   you.get_cardio_acc() ) ) {
                         you.set_cardio_acc( value );
                     }
                     break;
