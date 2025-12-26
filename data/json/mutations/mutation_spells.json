@@ -194,7 +194,7 @@
     "id": "ink_gland_spray_primer",
     "type": "SPELL",
     "name": { "str": "Blinding spray primer" },
-    "description": "Blinds a random nearby enemy for a short duration and up an ink_gland_ink status charge",
+    "description": "Blinds a random nearby enemy for a short duration and uses up an ink_gland_ink status charge",
     "effect": "effect_on_condition",
     "effect_str": "EOC_ink_grand_spray",
     "shape": "blast",
@@ -251,13 +251,13 @@
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX", "DODGEABLE", "NON_MAGICAL" ],
     "effect": "pull_target",
     "shape": "blast",
-    "min_range": 5,
-    "max_range": 5
+    "min_range": 4,
+    "max_range": 4
   },
   {
     "type": "SPELL",
     "id": "spell_harpoon_tongue_stab",
-    "name": "Whipping Tongue",
+    "name": "Harpoon Tongue Stab",
     "description": "Your tongue launches out to snag your target.",
     "valid_targets": [ "ally", "hostile" ],
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX", "DODGEABLE", "NON_MAGICAL" ],
@@ -265,21 +265,21 @@
     "shape": "blast",
     "min_damage": 5,
     "max_damage": 15,
-    "min_range": 5,
-    "max_range": 5,
+    "min_range": 4,
+    "max_range": 4,
     "damage_type": "stab",
     "extra_effects": [ { "id": "spell_harpoon_tongue_pull", "hit_self": false, "max_level": 5 } ]
   },
   {
     "type": "SPELL",
     "id": "spell_harpoon_tongue_pull",
-    "name": "Whipping Tongue",
+    "name": "Harpoon Tongue Pull",
     "description": "Your tongue launches out to snag your target.",
     "valid_targets": [ "ally", "hostile" ],
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX" ],
     "effect": "pull_target",
     "shape": "blast",
-    "min_range": 5,
-    "max_range": 5
+    "min_range": 4,
+    "max_range": 4
   }
 ]
