@@ -47,6 +47,8 @@ ColorModulatedGeometryRenderer::ColorModulatedGeometryRenderer( const SDL_Render
     tex = CreateTextureFromSurface( renderer, alt_surf );
     alt_surf.reset();
 
+    SetTextureBlendMode( tex, SDL_BLENDMODE_BLEND );
+
     // Test to make sure color modulation is supported by renderer
     bool tex_enable = !SetTextureColorMod( tex, 0, 0, 0 );
     if( !tex_enable ) {
