@@ -251,8 +251,8 @@
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX", "DODGEABLE", "NON_MAGICAL" ],
     "effect": "pull_target",
     "shape": "blast",
-    "min_range": 4,
-    "max_range": 4
+    "min_range": 5,
+    "max_range": 5
   },
   {
     "type": "SPELL",
@@ -265,8 +265,8 @@
     "shape": "blast",
     "min_damage": 5,
     "max_damage": 15,
-    "min_range": 4,
-    "max_range": 4,
+    "min_range": 5,
+    "max_range": 5,
     "damage_type": "stab",
     "extra_effects": [ { "id": "spell_harpoon_tongue_pull", "hit_self": false, "max_level": 5 } ]
   },
@@ -279,7 +279,7 @@
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "RANDOM_DAMAGE", "NO_EXPLOSION_SFX" ],
     "effect": "pull_target",
     "shape": "blast",
-    "min_range": 4,
-    "max_range": 4
+    "min_range": 5,
+    "max_range": 5
   }
 ]
