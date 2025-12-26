@@ -1325,8 +1325,7 @@
     "bindings": [
       { "input_method": "keyboard_char", "key": "BACKTAB" },
       { "input_method": "keyboard_code", "key": "TAB", "mod": [ "shift" ] },
-      { "input_method": "mouse", "key": "SCROLL_UP" },
-      { "input_method": "keyboard_any", "key": "PPAGE" }
+      { "input_method": "mouse", "key": "SCROLL_UP" }
     ]
   },
   {
@@ -1336,8 +1335,7 @@
     "name": "Next target",
     "bindings": [
       { "input_method": "keyboard_any", "key": "TAB" },
-      { "input_method": "mouse", "key": "SCROLL_DOWN" },
-      { "input_method": "keyboard_any", "key": "NPAGE" }
+      { "input_method": "mouse", "key": "SCROLL_DOWN" }
     ]
   },
   {
