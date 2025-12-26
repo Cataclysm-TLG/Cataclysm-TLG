@@ -1181,7 +1181,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
 
         const int required = gun.ammo_required();
         if( gun.ammo_consume( required, here, pos_bub( here ), this ) != required ) {
-            debugmsg( "Unexpected shortage of ammo whilst firing %s", gun.tname() );
+            debugmsg( "Unexpected shortage of ammo while firing %s", gun.tname() );
             break;
         }
 
@@ -1190,7 +1190,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
             const units::energy energ_req = gun.get_gun_energy_drain();
             const units::energy drained = gun.energy_consume( energ_req, &here, pos_bub( here ), this );
             if( drained < energ_req ) {
-                debugmsg( "Unexpected shortage of energy whilst firing %s. Required: %i J, drained: %i J",
+                debugmsg( "Unexpected shortage of energy while firing %s. Required: %i J, drained: %i J",
                           gun.tname(), units::to_joule( energ_req ), units::to_joule( drained ) );
                 break;
             }
@@ -3098,10 +3098,8 @@ void target_ui::init_window_and_input()
     ctxt.register_action( "zoom_out" );
     ctxt.register_action( "zoom_in" );
     ctxt.register_action( "TOGGLE_MOVE_CURSOR_VIEW" );
-    if( fov_3d_z_range > 0 ) {
-        ctxt.register_action( "LEVEL_UP" );
-        ctxt.register_action( "LEVEL_DOWN" );
-    }
+    ctxt.register_action( "LEVEL_UP" );
+    ctxt.register_action( "LEVEL_DOWN" );
     if( mode == TargetMode::Fire || mode == TargetMode::TurretManual || ( mode == TargetMode::Reach &&
             ( relevant && relevant->is_gun() ) && you->get_aim_types( *relevant ).size() > 1 ) ) {
         ctxt.register_action( "SWITCH_MODE" );
@@ -3135,6 +3133,10 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
 {
     std::optional<tripoint_bub_ms> mouse_pos;
     const auto shift_view_or_cursor = [this]( const tripoint_rel_ms & delta ) {
+        const tripoint_bub_ms next =  tripoint_bub_ms( dst.raw() + delta.raw() );
+        if( dist_fn( next ) > range ) {
+            return;
+        }
         if( this->shifting_view ) {
             this->set_view_offset( this->you->view_offset + delta );
         } else if( this->shifting_view_temp ) {
@@ -3223,7 +3225,7 @@ bool target_ui::set_cursor_pos( const tripoint_bub_ms &new_pos )
             }
             if( dist_fn( valid_pos ) > range ) {
                 auto dist_fn_unrounded = [this]( const tripoint_bub_ms & p ) {
-                    return trig_dist_z_adjust( src, p );
+                    return static_cast<int>( std::round( trig_dist_z_adjust( src, p ) ) );
                 };
 
                 bool found = false;
