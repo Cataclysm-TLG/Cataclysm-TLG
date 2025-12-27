@@ -3351,7 +3351,7 @@ class Character : public Creature, public visitable
 
         /** Modifies the movement cost and returns a list of effects */
         std::vector<run_cost_effect> run_cost_effects( float &movecost ) const;
-        /** Returns the player's modified base movement cost */
+        /** Returns the character's modified base movement cost */
         int run_cost( int base_cost, bool diag = false ) const;
 
         const pathfinding_settings &get_pathfinding_settings() const override;
