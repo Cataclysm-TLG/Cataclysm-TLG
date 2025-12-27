@@ -9,8 +9,7 @@
     "price": "400 USD",
     "price_postapoc": "20 USD",
     "material": [ "steel" ],
-    "flags": [ "NO_COVER", "CARGO", "OBSTACLE", "FLAT_SURF", "WORKBENCH" ],
-    "workbench": { "multiplier": 1.1, "mass": 150000, "volume": "20 L" },
+    "flags": [ "NO_COVER" ],
     "symbol": "&",
     "color": "light_cyan"
   },
