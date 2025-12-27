@@ -840,22 +840,22 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "encumbrance": 13,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
         "volume_encumber_modifier": 0.3
       },
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "encumbrance": 0,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
         "volume_encumber_modifier": 0
@@ -909,7 +909,7 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 7,
@@ -966,11 +966,11 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.3 },
           { "type": "kevlar", "covered_by_mat": 95, "thickness": 2 }
         ],
         "encumbrance": 11,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ]
       }
     ]
@@ -995,17 +995,17 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "encumbrance": 10,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
       },
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "//": "encumbrance handled above",
@@ -1059,17 +1059,17 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "encumbrance": 10,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ]
       },
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "//": "encumbrance handled above",
@@ -1091,7 +1091,7 @@
     "price": "5000 USD",
     "price_postapoc": "60 USD",
     "to_hit": { "grip": "bad", "length": "short", "surface": "any", "balance": "uneven" },
-    "material": [ "ceramic", "nylon" ],
+    "material": [ "nylon", "ceramic" ],
     "symbol": "[",
     "looks_like": "ballistic_vest_concealable",
     "color": "yellow",
@@ -1103,12 +1103,12 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "ceramic", "covered_by_mat": 90, "thickness": 6.4 },
           { "type": "ceramic", "covered_by_mat": 30, "thickness": 6.4 }
         ],
         "encumbrance": 17,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "rigid_layer_only": true
       }
@@ -1133,11 +1133,11 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 }
         ],
         "encumbrance": 13,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "volume_encumber_modifier": 0.25
       }
@@ -1162,12 +1162,12 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 95, "thickness": 4.4 },
           { "type": "steel", "covered_by_mat": 85, "thickness": 1.5 }
         ],
         "encumbrance": 25,
-        "coverage": 98,
+        "coverage": 95,
         "covers": [ "torso" ],
         "volume_encumber_modifier": 0.25,
         "rigid_layer_only": true
@@ -1193,7 +1193,7 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 3,
@@ -1223,7 +1223,7 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 2,
@@ -1252,7 +1252,7 @@
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 1.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 1,
