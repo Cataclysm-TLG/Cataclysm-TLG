@@ -852,6 +852,7 @@
     "points": 2,
     "description": "Your body has grown accustomed to physical trauma.  You get a 20% bonus to all hit points.",
     "types": [ "DURABILITY" ],
+    "prereqs": [ "TOUGH" ],
     "changes_to": [ "TOUGH3" ],
     "category": [ "MEDICAL" ],
     "threshreq": [ "THRESH_MEDICAL" ],
