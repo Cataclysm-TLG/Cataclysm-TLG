@@ -3868,7 +3868,8 @@ bool mattack::flesh_tendril( monster *z )
         return false;
     }
 
-    const int distance_to_target = static_cast<int>( std::round( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) ) );
+    const int distance_to_target = static_cast<int>( std::round( trig_dist_z_adjust( z->pos_bub(),
+                                   target->pos_bub() ) ) );
 
     // the monster summons stuff to fight you
     if( distance_to_target > 3 && one_in( 12 ) ) {

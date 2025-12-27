@@ -1693,8 +1693,9 @@ bool Creature::grapple_drag( Creature *c )
     float odds = units::to_kilogram( c->get_weight() ) / ( str * your_size );
     // Allies will try to move with you if they can, making things easier.
     // TODO: Make NPCs able to drag the player.
-    
-    if( ch && c->is_npc() && ( c->as_npc()->is_walking_with() || c->as_npc()->is_player_ally() ) && !c->in_sleep_state() ) {
+
+    if( ch && c->is_npc() && ( c->as_npc()->is_walking_with() || c->as_npc()->is_player_ally() ) &&
+        !c->in_sleep_state() ) {
         int target_movecost = ch->run_cost( 100, false );
         if( target_movecost < 200 ) {
             odds *= target_movecost / 200.f;
