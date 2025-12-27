@@ -10998,9 +10998,9 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
 {
     map &here = get_map();
     return g->get_creatures_if( [this, range, melee, &here]( const Creature & critter ) -> bool {
-        // The call to map.sees is to make sure that even if we can see it through walls
-        // Via a mutation or cbm we only attack targets with a line of sight
-        bool can_see = ( ( sees( here, critter ) || sees_with_specials( critter ) ) && here.sees( pos_bub( here ), critter.pos_bub( here ), 100 ) );
+        //the call to map.sees is to make sure that even if we can see it through walls
+        //via a mutation or cbm we only attack targets with a line of sight
+        bool can_see = ( ( sees( here, critter ) || sees_with_specials( critter ) ) && !here.find_clear_path( pos_bub( here ), critter.pos_bub( here ), true ).empty() );
         if( can_see && melee )  //handles the case where we can see something with glass in the way for melee attacks
         {
 
