@@ -1308,30 +1308,27 @@ int monster::sight_range( const float light_level ) const
     constexpr float MONSTER_VISION_THRESHOLD = 4.0f;
     static const float default_daylight = default_daylight_level();
 
-    int base_range = 1;
+    int range = 1;
 
     if( light_level <= MONSTER_VISION_THRESHOLD ) {
-        base_range = type->vision_night;
+        range = type->vision_night;
     } else if( light_level >= default_daylight ) {
-        base_range = type->vision_day;
+        range = type->vision_day;
     } else {
         float ratio = MONSTER_VISION_THRESHOLD / light_level;
         if( ratio >= 1.f ) {
-            base_range = type->vision_night;
+            range = type->vision_night;
         } else {
             // Approximate -ln(ratio) using quadratic polynomial approx of pow(1 - r, 0.85).
             float one_minus_r = 1.0f - ratio;
-            constexpr float p0 = 0.0f;
             constexpr float p1 = 1.108f;
             constexpr float p2 = -0.108f;
-            float pow_approx = std::max( 0.0f, p0 + p1 * one_minus_r + p2 * one_minus_r * one_minus_r );
-            float neg_log_approx = pow_approx;
-            base_range = static_cast<int>( std::round( neg_log_approx / MONSTER_LIGHT_ATTENUATION ) );
-            base_range = std::max( base_range, 1 );
+            float pow_approx = std::max( 0.0f, p1 * one_minus_r + p2 * one_minus_r * one_minus_r );
+            range = static_cast<int>( std::round( pow_approx / MONSTER_LIGHT_ATTENUATION ) );
+            range = std::max( range, 1 );
         }
     }
-
-    return calculate_by_enchantment( base_range, enchant_vals::mod::VISION_RANGE, true );
+    return calculate_by_enchantment( range, enchant_vals::mod::VISION_RANGE, true );
 }
 
 int monster::eye_level() const
