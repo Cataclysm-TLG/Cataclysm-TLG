@@ -11091,9 +11091,21 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             u.burn_move_stamina( 0.50 * ( previous_moves - u.get_moves() ) );
         }
     }
-    // Try and fail to drag someone with us.
+    // Try and to drag someone with us.
     if( u.grab_1.victim != nullptr ) {
-        if( u.grab_1.victim.get() && !u.grapple_drag( u.grab_1.victim.get() ) ) {
+        Creature* victim_ptr = u.grab_1.victim.get();
+        if( victim_ptr != nullptr ) {
+            if( victim_ptr->is_dead_state() ) {
+                u.grab_1.victim = nullptr;
+                return false;
+            }
+            if( u.is_adjacent( victim_ptr, true ) ) {
+                if( !u.grapple_drag( victim_ptr ) ) {
+                    return false;
+                }
+            }
+        } else {
+            u.grab_1.victim = nullptr;
             return false;
         }
     }
