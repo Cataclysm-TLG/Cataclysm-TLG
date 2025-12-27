@@ -1300,23 +1300,35 @@ bool monster::can_act() const
 
 int monster::sight_range( const float light_level ) const
 {
-    // Non-aquatic monsters can't see much when submerged
     if( !can_see() || effect_cache[VISION_IMPAIRED] ||
         ( underwater && !swims() && !has_flag( mon_flag_AQUATIC ) && !digging() ) ) {
         return 1;
     }
+    constexpr float MONSTER_LIGHT_ATTENUATION = 0.05f;
+    constexpr float MONSTER_VISION_THRESHOLD = 4.0f;
     static const float default_daylight = default_daylight_level();
-    if( light_level == 0 ) {
-        return calculate_by_enchantment( type->vision_night, enchant_vals::mod::VISION_RANGE, true );
+
+    int range = 1;
+
+    if( light_level <= MONSTER_VISION_THRESHOLD ) {
+        range = type->vision_night;
     } else if( light_level >= default_daylight ) {
-        return calculate_by_enchantment( type->vision_day, enchant_vals::mod::VISION_RANGE, true );
+        range = type->vision_day;
+    } else {
+        float ratio = MONSTER_VISION_THRESHOLD / light_level;
+        if( ratio >= 1.f ) {
+            range = type->vision_night;
+        } else {
+            // Approximate -ln(ratio) using quadratic polynomial approx of pow(1 - r, 0.85).
+            float one_minus_r = 1.0f - ratio;
+            constexpr float p1 = 1.108f;
+            constexpr float p2 = -0.108f;
+            float pow_approx = std::max( 0.0f, p1 * one_minus_r + p2 * one_minus_r * one_minus_r );
+            range = static_cast<int>( std::round( pow_approx / MONSTER_LIGHT_ATTENUATION ) );
+            range = std::max( range, 1 );
+        }
     }
-    int range = ( light_level * type->vision_day + ( default_daylight - light_level ) *
-                  type->vision_night ) / default_daylight;
-
-    range = calculate_by_enchantment( range, enchant_vals::mod::VISION_RANGE, true );
-
-    return range;
+    return calculate_by_enchantment( range, enchant_vals::mod::VISION_RANGE, true );
 }
 
 int monster::eye_level() const

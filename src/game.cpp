@@ -11093,7 +11093,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     }
     // Try and to drag someone with us.
     if( u.grab_1.victim != nullptr ) {
-        Creature* victim_ptr = u.grab_1.victim.get();
+        Creature *victim_ptr = u.grab_1.victim.get();
         if( victim_ptr != nullptr ) {
             if( victim_ptr->is_dead_state() ) {
                 u.grab_1.victim = nullptr;
