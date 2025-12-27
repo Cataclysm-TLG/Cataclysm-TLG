@@ -724,5 +724,18 @@
     "copy-from": "BOSS_No_Others_01",
     "name": { "str": "Other Survivors Story" },
     "description": "Brigitte LaCroix 01."
+  },
+  {
+    "type": "mutation",
+    "//": "This is a unique background story trait that should not be given out randomly.",
+    "id": "BGSS_Rescue_Pilot_1",
+    "name": { "str": "Survivor Story" },
+    "points": 0,
+    "description": "This NPC could tell you about how they survived the Cataclysm.",
+    "player_display": false,
+    "valid": false,
+    "purifiable": false,
+    "types": [ "BACKGROUND_SURVIVAL_STORY" ],
+    "flags": [ "BG_SURVIVAL_STORY" ]
   }
 ]
