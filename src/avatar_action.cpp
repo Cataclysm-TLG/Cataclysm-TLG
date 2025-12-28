@@ -49,7 +49,6 @@
 #include "options.h"
 #include "output.h"
 #include "pimpl.h"
-#include "player_activity.h"
 #include "popup.h"
 #include "point.h"
 #include "projectile.h"

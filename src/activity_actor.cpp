@@ -3978,10 +3978,8 @@ void consume_activity_actor::finish( player_activity &act, Character & )
     }
 
     if( !avatar_action::eat_here( player_character ) && reprompt_consume_menu ) {
-        uistate.open_menu = []() {
-            avatar_action::eat_or_use( get_avatar(),
-                                       game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
-        };
+        avatar_action::eat_or_use( player_character,
+                                   game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
     }
 }
 
@@ -7663,10 +7661,8 @@ void firstaid_activity_actor::finish( player_activity &act, Character &who )
     act.values.clear();
 
     if( who.is_avatar() ) {
-        uistate.open_menu = []() {
-            avatar_action::eat_or_use( get_avatar(),
-                                       game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
-        };
+        avatar_action::eat_or_use( *who.as_avatar(),
+                                   game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
     }
 }
 

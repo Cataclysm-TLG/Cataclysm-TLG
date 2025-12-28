@@ -398,6 +398,10 @@ void uistatedata::serialize( JsonOut &json ) const
     json.member( "distraction_oxygen", distraction_oxygen );
     json.member( "distraction_withdrawal", distraction_withdrawal );
     json.member( "numpad_navigation", numpad_navigation );
+
+    json.member( "consume_menu_uistate" );
+    consume_uistate.serialize( json );
+
     json.member( "input_history" );
     json.start_object();
     for( const auto &e : input_history ) {
