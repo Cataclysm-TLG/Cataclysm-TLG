@@ -128,13 +128,11 @@ static const activity_id ACT_CHOP_TREE( "ACT_CHOP_TREE" );
 static const activity_id ACT_CHURN( "ACT_CHURN" );
 static const activity_id ACT_CLEAR_RUBBLE( "ACT_CLEAR_RUBBLE" );
 static const activity_id ACT_CONSUME( "ACT_CONSUME" );
-static const activity_id ACT_CONSUME_MEDS_MENU( "ACT_CONSUME_MEDS_MENU" );
 static const activity_id ACT_CRACKING( "ACT_CRACKING" );
 static const activity_id ACT_CRAFT( "ACT_CRAFT" );
 static const activity_id ACT_DISABLE( "ACT_DISABLE" );
 static const activity_id ACT_DISASSEMBLE( "ACT_DISASSEMBLE" );
 static const activity_id ACT_DROP( "ACT_DROP" );
-static const activity_id ACT_EAT_MENU( "ACT_EAT_MENU" );
 static const activity_id ACT_EBOOKSAVE( "ACT_EBOOKSAVE" );
 static const activity_id ACT_E_FILE( "ACT_E_FILE" );
 static const activity_id ACT_FIRSTAID( "ACT_FIRSTAID" );
@@ -3919,26 +3917,21 @@ void consume_activity_actor::start( player_activity &act, Character &guy )
 {
     int moves = 0;
     Character &player_character = get_player_character();
+    //TODO: why use both `player_character` and `guy`?
+    auto player_will_eat = [this, &moves, &player_character, &guy]( const item & it ) {
+        ret_val<edible_rating> ret = player_character.will_eat( it, true );
+        if( !ret.success() ) {
+            canceled = true;
+            uistate.consume_uistate.clear();
+        } else {
+            moves = to_moves<int>( guy.get_consume_time( it ) );
+        }
+    };
+
     if( consume_location ) {
-        ret_val<edible_rating> ret = player_character.will_eat( *consume_location, true );
-        if( !ret.success() ) {
-            canceled = true;
-            consume_menu_selections = std::vector<int>();
-            consume_menu_selected_items.clear();
-            consume_menu_filter.clear();
-        } else {
-            moves = to_moves<int>( guy.get_consume_time( *consume_location ) );
-        }
+        player_will_eat( *consume_location );
     } else if( !consume_item.is_null() ) {
-        ret_val<edible_rating> ret = player_character.will_eat( consume_item, true );
-        if( !ret.success() ) {
-            canceled = true;
-            consume_menu_selections = std::vector<int>();
-            consume_menu_selected_items.clear();
-            consume_menu_filter.clear();
-        } else {
-            moves = to_moves<int>( guy.get_consume_time( consume_item ) );
-        }
+        player_will_eat( consume_item );
     } else {
         debugmsg( "Item/location to be consumed should not be null." );
         canceled = true;
@@ -3955,13 +3948,7 @@ void consume_activity_actor::finish( player_activity &act, Character & )
     // too late; we've already consumed).
     act.interruptable = false;
 
-    // Consuming an item may cause various effects, including cancelling our activity.
-    // Back up these values since this activity actor might be destroyed.
-    std::vector<int> temp_selections = consume_menu_selections;
-    const std::vector<item_location> temp_selected_items = consume_menu_selected_items;
-    const std::string temp_filter = consume_menu_filter;
     item_location consume_loc = consume_location;
-    activity_id new_act = type;
 
     avatar &player_character = get_avatar();
     if( !canceled ) {
@@ -3977,31 +3964,22 @@ void consume_activity_actor::finish( player_activity &act, Character & )
         }
     }
 
+    /*
+    At this point, this consume_activity_actor may have been cancelled
+    and a new activity (e.g. firstaid_activity_actor) assigned.
+    */
     if( act.id() == ACT_CONSUME ) {
+        // only set to null if there isn't a new activity
         act.set_to_null();
     }
 
     if( act.id() == ACT_FIRSTAID && consume_loc ) {
-        act.targets.clear();
-        act.targets.push_back( consume_loc );
+        uistate.consume_uistate.consume_menu_selected_items = { consume_loc };
     }
 
-    if( !temp_selections.empty() || !temp_selected_items.empty() || !temp_filter.empty() ) {
-        if( act.is_null() ) {
-            player_character.assign_activity( new_act );
-            player_character.activity.values = temp_selections;
-            player_character.activity.targets = temp_selected_items;
-            player_character.activity.str_values = { temp_filter, "true" };
-        } else {
-            // Warning: this can add a redundant menu activity to the backlog.
-            // It will prevent deleting the smart pointer of the selected item_location
-            // if the backlog is not sanitized.
-            player_activity eat_menu( new_act );
-            eat_menu.values = temp_selections;
-            eat_menu.targets = temp_selected_items;
-            eat_menu.str_values = { temp_filter, "true" };
-            player_character.backlog.push_back( eat_menu );
-        }
+    if( !avatar_action::eat_here( player_character ) && reprompt_consume_menu ) {
+        avatar_action::eat_or_use( player_character,
+                                   game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
     }
 }
 
@@ -4011,11 +3989,8 @@ void consume_activity_actor::serialize( JsonOut &jsout ) const
 
     jsout.member( "consume_location", consume_location );
     jsout.member( "consume_item", consume_item );
-    jsout.member( "consume_menu_selections", consume_menu_selections );
-    jsout.member( "consume_menu_selected_items", consume_menu_selected_items );
-    jsout.member( "consume_menu_filter", consume_menu_filter );
     jsout.member( "canceled", canceled );
-    jsout.member( "type", type );
+    jsout.member( "reprompt_consume_menu", reprompt_consume_menu );
 
     jsout.end_object();
 }
@@ -4029,11 +4004,19 @@ std::unique_ptr<activity_actor> consume_activity_actor::deserialize( JsonValue &
 
     data.read( "consume_location", actor.consume_location );
     data.read( "consume_item", actor.consume_item );
-    data.read( "consume_menu_selections", actor.consume_menu_selections );
-    data.read( "consume_menu_selected_items", actor.consume_menu_selected_items );
-    data.read( "consume_menu_filter", actor.consume_menu_filter );
     data.read( "canceled", actor.canceled );
-    data.read( "type", actor.type );
+    if( data.has_member( "reprompt_consume_menu" ) ) {
+        data.read( "reprompt_consume_menu", actor.reprompt_consume_menu );
+    }
+    //Remove obsolete reads after 0.J
+    std::vector<int> obsolete_consume_menu_selections;
+    std::vector < item_location > obsolete_cconsume_menu_selected_items;
+    std::string obsolete_cconsume_menu_filter;
+    activity_id obsolete_type;
+    data.read( "consume_menu_selections", obsolete_consume_menu_selections );
+    data.read( "consume_menu_selected_items", obsolete_cconsume_menu_selected_items );
+    data.read( "consume_menu_filter", obsolete_cconsume_menu_filter );
+    data.read( "type", obsolete_type );
 
     return actor.clone();
 }
@@ -7677,21 +7660,9 @@ void firstaid_activity_actor::finish( player_activity &act, Character &who )
     act.set_to_null();
     act.values.clear();
 
-    // Return to first eat or consume meds menu activity in the backlog.
-    for( player_activity &backlog_act : who.backlog ) {
-        if( backlog_act.id() == ACT_EAT_MENU ||
-            backlog_act.id() == ACT_CONSUME_MEDS_MENU ) {
-            backlog_act.auto_resume = true;
-            break;
-        }
-    }
-    // Clear the backlog of any activities that will not auto resume.
-    for( auto iter = who.backlog.begin(); iter != who.backlog.end(); ) {
-        if( !iter->auto_resume ) {
-            iter = who.backlog.erase( iter );
-        } else {
-            ++iter;
-        }
+    if( who.is_avatar() ) {
+        avatar_action::eat_or_use( *who.as_avatar(),
+                                   game_menus::inv::consume( uistate.consume_uistate.consume_menu_comestype ) );
     }
 }
 
