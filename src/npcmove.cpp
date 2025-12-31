@@ -2521,7 +2521,7 @@ npc_action npc::address_needs( float danger )
             return npc_noop;
         }
     }
-    //Hallucinations have a chance of disappearing each turn
+    // Hallucinations have a chance of disappearing each turn.
     if( is_hallucination() && one_in( 25 ) ) {
         die( &here, nullptr );
     }
@@ -4637,17 +4637,36 @@ bool npc::consume_food_from_camp()
     }
 
     // Handle food
-    int current_kcals = get_stored_kcal() + stomach.get_calories() + guts.get_calories();
+    int stomach_kcal = stomach.get_calories();
+    int gut_kcal = guts.get_calories();
+    int current_kcal = get_stored_kcal() + gut_kcal + stomach_kcal;
     int kcal_threshold = get_healthy_kcal() * 19 / 20;
-    if( get_hunger() > 0 && current_kcals < kcal_threshold && bcp->allowed_access_by( *this ) ) {
+    if( get_hunger() > 0 && current_kcal < kcal_threshold && bcp->allowed_access_by( *this ) ) {
         // Try to eat a bit more than the bare minimum so that we're not eating every 5 minutes
         // but also don't try to eat a week's worth of food in one sitting
-        int desired_kcals = std::min( static_cast<int>( base_metabolic_rate ), std::max( 0,
-                                      kcal_threshold + 100 - current_kcals ) );
-        int kcals_to_eat = std::min( desired_kcals, bcp->get_owner()->food_supply().kcal() );
+        int desired_kcal = std::min( static_cast<int>( base_metabolic_rate ), std::max( 0,
+                                     kcal_threshold + 100 - current_kcal ) );
+        int stomach_room = 15000 - stomach_kcal;
+        int gut_room = 15000 - gut_kcal;
 
-        if( kcals_to_eat > 0 ) {
-            bcp->feed_workers( *this, bcp->camp_food_supply( -kcals_to_eat ) );
+
+        // Stomach and gut kcal will overflow at 20,000. feed_workers doesn't really model
+        // stomach volume very well, so that's not helpful for preventing overeating. Here we
+        // kludge a fix in just to keep that from happening.
+        // TODO: Make feed_workers properly guess a stomach volume and have that prevent overflow
+        // instead of this.
+        int safe_kcal_cap = std::min( stomach_room, gut_room );
+
+        if( safe_kcal_cap <= 0 ) {
+            return false;
+        }
+
+        desired_kcal = std::min( desired_kcal, safe_kcal_cap );
+
+        int kcal_to_eat = std::min( desired_kcal, bcp->get_owner()->food_supply().kcal() );
+
+        if( kcal_to_eat > 0 ) {
+            bcp->feed_workers( *this, bcp->camp_food_supply( -kcal_to_eat ) );
 
             return true;
         } else {
