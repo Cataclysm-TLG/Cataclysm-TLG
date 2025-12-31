@@ -701,11 +701,6 @@
   },
   {
     "type": "item_action",
-    "id": "RADGLOVE",
-    "name": { "str": "Measure radiation" }
-  },
-  {
-    "type": "item_action",
     "id": "RADIOCAR",
     "name": { "str": "…" }
   },
