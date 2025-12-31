@@ -153,7 +153,7 @@
     "id": "car_light_minus_battery_cell",
     "copy-from": "battery_car",
     "type": "vehicle_part",
-    "name": { "str": "ultra-light battery" },
+    "name": { "str": "watch battery" },
     "item": "light_minus_battery_cell",
     "location": "on_battery_mount",
     "requirements": {
@@ -182,22 +182,6 @@
     "flags": [ "BATTERY", "NEEDS_HANDHELD_BATTERY_MOUNT", "NO_REPAIR", "NO_COVER" ]
   },
   {
-    "id": "car_light_plus_battery_cell",
-    "copy-from": "battery_car",
-    "type": "vehicle_part",
-    "name": { "str": "light battery (high-capacity)" },
-    "item": "light_plus_battery_cell",
-    "location": "on_battery_mount",
-    "requirements": {
-      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "using": [  ] },
-      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "using": [  ] }
-    },
-    "durability": 20,
-    "folded_volume": "35 ml",
-    "breaks_into": [ { "item": "e_scrap", "prob": 10 } ],
-    "flags": [ "BATTERY", "NEEDS_HANDHELD_BATTERY_MOUNT", "NO_REPAIR", "NO_COVER" ]
-  },
-  {
     "id": "car_medium_battery_cell",
     "copy-from": "battery_car",
     "type": "vehicle_part",
@@ -214,26 +198,10 @@
     "flags": [ "BATTERY", "NEEDS_HANDHELD_BATTERY_MOUNT", "NO_REPAIR", "NO_COVER" ]
   },
   {
-    "id": "car_medium_plus_battery_cell",
-    "copy-from": "battery_car",
-    "type": "vehicle_part",
-    "name": { "str": "medium battery (high-capacity)" },
-    "item": "medium_plus_battery_cell",
-    "location": "on_battery_mount",
-    "requirements": {
-      "install": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "using": [  ] },
-      "removal": { "skills": [ [ "mechanics", 0 ] ], "time": "50 s", "using": [  ] }
-    },
-    "durability": 30,
-    "folded_volume": "525 ml",
-    "breaks_into": [ { "item": "light_plus_battery_cell", "count": [ 0, 3 ] }, { "item": "scrap", "count": [ 1, 4 ] } ],
-    "flags": [ "BATTERY", "NEEDS_HANDHELD_BATTERY_MOUNT", "NO_REPAIR", "NO_COVER" ]
-  },
-  {
     "id": "car_heavy_battery_cell",
     "copy-from": "battery_car",
     "type": "vehicle_part",
-    "name": { "str": "heavy battery" },
+    "name": { "str": "tool battery" },
     "item": "heavy_battery_cell",
     "location": "on_battery_mount",
     "requirements": {
@@ -249,7 +217,7 @@
     "id": "car_heavy_plus_battery_cell",
     "copy-from": "battery_car",
     "type": "vehicle_part",
-    "name": { "str": "heavy battery (high-capacity)" },
+    "name": { "str": "heavy tool battery" },
     "item": "heavy_plus_battery_cell",
     "location": "on_battery_mount",
     "requirements": {

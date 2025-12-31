@@ -3125,13 +3125,13 @@ void item::deserialize( const JsonObject &data )
     archive.allow_omitted_members();
     data.copy_visited_members( archive );
 
-    //*** ITEM MIGRATION (remove in O.I) ***
+    // *** ITEM MIGRATION (remove once caught up to DDA 0.I) ***
     if( data.has_object( "contents" ) ) {
         item_contents read_contents;
         data.read( "contents", read_contents );
         contents.read_mods( read_contents );
         update_modified_pockets();
-        contents.combine( read_contents, false, true, false, true );
+        contents.combine( *this, read_contents, false, true, false, true );
 
         //migrate SOFTWARE pocket
         auto pockets_e_legacy = []( item_pocket const & pocket ) {
