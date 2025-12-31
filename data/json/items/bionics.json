@@ -457,7 +457,7 @@
     "type": "BIONIC_ITEM",
     "name": { "str": "Radiation Biomonitor CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A set of tiny implanted sensors which can diagnose the presence and severity of acute radiation poisoning.  They are also able to detect ionizing radiation within the user's environment.",
+    "description": "A set of tiny implanted sensors which can diagnose the presence and severity of acute radiation syndrome.  They are also able to detect ionizing radiation within the user's environment.",
     "price": "3500 USD",
     "price_postapoc": "30 USD",
     "weight": "150 g",
