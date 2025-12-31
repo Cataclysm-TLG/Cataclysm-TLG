@@ -3652,5 +3652,15 @@
     "type": "MIGRATION",
     "id": "light_disposable_cell",
     "replace": "light_battery_cell"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "wearable_big_light",
+    "replace": "wearable_light"
+  },
+    {
+    "type": "MIGRATION",
+    "id": "wearable_big_light_on",
+    "replace": "wearable_light_on"
   }
 ]
