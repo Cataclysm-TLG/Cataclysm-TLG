@@ -14395,7 +14395,7 @@ bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
     // If insufficient available charges, shut down the tool.
     if( ( type->tool->power_draw > 0_W || type->tool->turns_per_charge > 0 ) &&
         ( ( uses_energy() && energy_remaining( carrier ) < energy_per_second() ) ||
-          ( !uses_energy() && ammo_remaining( carrier, true ) == 0 ) ) ) {
+          ( !uses_energy() && ammo_remaining( carrier ) == 0 ) ) ) {
         if( carrier && has_flag( flag_USE_UPS ) ) {
             carrier->add_msg_if_player( m_info, _( "You need a UPS to run the %s!" ), tname() );
         }

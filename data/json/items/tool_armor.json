@@ -933,7 +933,6 @@
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "OVERSIZE", "BELTED", "ALLOWS_NATURAL_ATTACKS", "WATER_BREAK", "ELECTRONIC" ],
     "weight": "520 g",
     "volume": "500 ml",
-    "charges_per_use": 1,
     "ammo": "battery",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "20 W" } ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 50 } } ],
@@ -965,7 +964,6 @@
     ],
     "weight": "520 g",
     "volume": "500 ml",
-    "charges_per_use": 1,
     "ammo": "battery",
     "use_action": [ "CAMERA", { "type": "link_up", "cable_length": 3, "charge_rate": "50 W" } ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } } ],
@@ -2252,7 +2250,7 @@
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT" ],
-        "default_magazine": "lght_battery_cell"
+        "default_magazine": "light_battery_cell"
       }
     ],
     "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "eyes" ], "rigid_layer_only": true } ]

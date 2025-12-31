@@ -918,7 +918,7 @@
     "description": "A car battery wired into a static power grid.",
     "item": "battery_car",
     "breaks_into": [
-      { "item": "lead", "charges": [ 1680, 2380 ] },
+      { "item": "lead", "count": [ 1680, 2380 ] },
       { "item": "chem_sulphuric_acid", "count": [ 5, 8 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 14, 20 ] },
       { "item": "scrap", "count": [ 2, 3 ] },
