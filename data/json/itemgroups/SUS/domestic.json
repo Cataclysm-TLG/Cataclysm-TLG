@@ -353,12 +353,7 @@
       { "group": "superglue", "prob": 40 },
       { "item": "boxcutter", "prob": 35, "damage": [ 0, 4 ] },
       { "group": "duct_tape_roll_part", "prob": 35 },
-      {
-        "item": "flashlight",
-        "prob": 10,
-        "charges": [ 100, 300 ],
-        "damage": [ 0, 4 ]
-      },
+      { "item": "flashlight", "prob": 10, "charges": [ 100, 300 ], "damage": [ 0, 4 ] },
       { "item": "flashlight", "prob": 10, "charges": [ 100, 300 ] },
       { "item": "toothbrush_plain", "custom-flags": [ "FILTHY" ], "prob": 80 },
       { "item": "bottle_opener", "prob": 35, "damage": [ 0, 4 ] },

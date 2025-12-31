@@ -13,11 +13,11 @@
     "symbol": "?",
     "looks_like": "textbook_anarch",
     "color": "green",
-    "skill": "driving",
     "max_level": 3,
     "intelligence": 6,
     "time": "30 m",
-    "fun": 2
+    "read_skill": "driving",
+    "read_fun": 2
   },
   {
     "id": "mag_cars",
@@ -33,11 +33,11 @@
     "symbol": "?",
     "looks_like": "mag_glam",
     "color": "pink",
-    "skill": "driving",
     "max_level": 1,
     "intelligence": 2,
     "time": "8 m",
-    "fun": 1
+    "read_skill": "driving",
+    "read_fun": 1
   },
   {
     "id": "manual_driving",
@@ -53,10 +53,10 @@
     "symbol": "?",
     "looks_like": "manual_gun",
     "color": "green",
-    "skill": "driving",
     "max_level": 3,
     "intelligence": 5,
-    "time": "16 m"
+    "time": "16 m",
+    "read_skill": "driving"
   },
   {
     "id": "textbook_anarch",
@@ -72,10 +72,10 @@
     "symbol": "?",
     "looks_like": "decoy_anarch",
     "color": "green",
-    "skill": "driving",
     "max_level": 4,
     "intelligence": 9,
     "time": "45 m",
-    "fun": 1
+    "read_skill": "driving",
+    "read_fun": 1
   }
 ]

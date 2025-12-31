@@ -112,11 +112,11 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "dark_gray",
-    "ammo": [ "charcoal", "coal" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "charcoal": 500, "coal": 2500 } } ],
     "sub": "forge",
     "flags": [ "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "bash": 9 }
+    "melee_damage": { "bash": 9 },
+    "tool_ammo": [ "charcoal", "coal" ]
   },
   {
     "id": "char_kiln",
@@ -231,10 +231,10 @@
     "material": [ "steel", "plastic" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": [ "battery" ],
     "flags": [ "ALLOWS_REMOTE_USE", "WATER_BREAK", "ELECTRONIC" ],
     "use_action": { "type": "link_up", "cable_length": 2, "charge_rate": "1400 W" },
-    "melee_damage": { "bash": 8 }
+    "melee_damage": { "bash": 8 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "kiln_done",
@@ -572,7 +572,6 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "dark_gray",
-    "ammo": [ "propane" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "GAS_TANK" ], "default_magazine": "large_propane_tank" } ],
     "sub": "forge",
     "flags": [ "ALLOWS_REMOTE_USE" ],
@@ -591,7 +590,7 @@
     "material": "clay",
     "symbol": "~",
     "color": "light_gray",
-    "ammo": [ "crude_lamp_oil" ],
+    "tool_ammo": [ "crude_lamp_oil" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "watertight": true, "open_container": true, "ammo_restriction": { "crude_lamp_oil": 500 } }
     ],
@@ -612,7 +611,7 @@
     "material": [ "plastic", "steel" ],
     "symbol": "g",
     "color": "dark_gray",
-    "ammo": [ "butane" ],
+    "tool_ammo": [ "butane" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "GAS_TANK" ], "default_magazine": "butane_can" } ],
     "charges_per_use": 1,
     "qualities": [ [ "TORCH_FINE", 2 ] ],

@@ -16,24 +16,6 @@
     "melee_damage": { "bash": 4 }
   },
   {
-    "type": "TOOL",
-    "id": "minireactor",
-    "name": { "str": "minireactor" },
-    "description": "A small, portable plutonium reactor.  Handle with great care!",
-    "weight": "27215 g",
-    "to_hit": -4,
-    "color": "light_cyan",
-    "symbol": ":",
-    "material": [ "superalloy", "ceramic" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "plutonium": 10000 }, "rigid": true } ],
-    "volume": "100 L",
-    "category": "veh_parts",
-    "price": "900 USD",
-    "price_postapoc": "50 USD",
-    "ammo": [ "plutonium" ],
-    "melee_damage": { "bash": 7 }
-  },
-  {
     "type": "GENERIC",
     "id": "mountable_cooler",
     "name": { "str": "vehicle cooler" },
@@ -264,9 +246,9 @@
     "category": "veh_parts",
     "color": "green",
     "symbol": "Y",
-    "ammo": "battery",
     "use_action": [ { "type": "link_up", "cable_length": 3, "charge_rate": "5500 W" } ],
     "price": "1000 USD",
-    "price_postapoc": "10 USD"
+    "price_postapoc": "10 USD",
+    "tool_ammo": "battery"
   }
 ]

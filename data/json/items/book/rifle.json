@@ -13,11 +13,11 @@
     "symbol": "?",
     "looks_like": "mag_guns",
     "color": "pink",
-    "skill": "rifle",
     "max_level": 1,
     "intelligence": 5,
     "time": "8 m",
-    "fun": 1
+    "read_skill": "rifle",
+    "read_fun": 1
   },
   {
     "id": "manual_rifle",
@@ -33,10 +33,10 @@
     "symbol": "?",
     "looks_like": "mag_guns",
     "color": "green",
-    "skill": "rifle",
     "max_level": 3,
     "intelligence": 4,
-    "time": "18 m"
+    "time": "18 m",
+    "read_skill": "rifle"
   },
   {
     "id": "retool_instructions",
@@ -52,9 +52,9 @@
     "symbol": "?",
     "looks_like": "mag_guns",
     "color": "pink",
-    "skill": "rifle",
     "max_level": 1,
     "intelligence": 5,
-    "time": "8 m"
+    "time": "8 m",
+    "read_skill": "rifle"
   }
 ]

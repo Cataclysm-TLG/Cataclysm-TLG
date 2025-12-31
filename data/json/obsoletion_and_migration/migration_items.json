@@ -3653,14 +3653,24 @@
     "id": "light_disposable_cell",
     "replace": "light_battery_cell"
   },
-    {
+  {
     "type": "MIGRATION",
     "id": "wearable_big_light",
     "replace": "wearable_light"
   },
-    {
+  {
     "type": "MIGRATION",
     "id": "wearable_big_light_on",
     "replace": "wearable_light_on"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "foldable_aisle",
+    "to": "wooden_aisle"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "minireactor",
+    "to": "minifridge"
   }
 ]

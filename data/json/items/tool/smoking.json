@@ -13,7 +13,6 @@
     "material": [ "steel" ],
     "symbol": "!",
     "color": "white",
-    "ammo": [ "battery" ],
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "charges_per_use": 1,
     "power_draw": "7500 mW",
@@ -25,7 +24,8 @@
         "flag_restriction": [ "BATTERY_LIGHT" ],
         "default_magazine": "light_battery_cell"
       }
-    ]
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "crackpipe",

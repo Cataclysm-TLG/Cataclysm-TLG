@@ -16,14 +16,14 @@
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 22 } } ],
     "charges_per_use": 1,
     "flags": [ "WATER_BREAK" ],
-    "ammo": [ "battery" ],
     "use_action": {
       "target": "plastic_jack_o_lantern_lit",
       "msg": "You flip the switch in the jack-o'-lantern.",
       "active": true,
       "menu_text": "Light",
       "type": "transform"
-    }
+    },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "plastic_jack_o_lantern_lit",
@@ -128,7 +128,6 @@
     "copy-from": "inflatable_decoration",
     "name": { "str": "inflatable dragon" },
     "description": "A battery-powered inflatable dragon from the Halloween before the end.  It might be fun to display it somewhere.",
-    "ammo": "battery",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -137,7 +136,8 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "use_action": { "type": "cast_spell", "spell_id": "dragon_inflatable", "no_fail": true, "level": 1 }
+    "use_action": { "type": "cast_spell", "spell_id": "dragon_inflatable", "no_fail": true, "level": 1 },
+    "tool_ammo": "battery"
   },
   {
     "id": "inflatable_ghost",
@@ -145,7 +145,6 @@
     "copy-from": "inflatable_decoration",
     "name": { "str": "inflatable ghost" },
     "description": "A battery-powered inflatable ghost from the Halloween before the end.  It might be fun to display it somewhere.",
-    "ammo": "battery",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -154,7 +153,8 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "use_action": { "type": "cast_spell", "spell_id": "ghost_inflatable", "no_fail": true, "level": 1 }
+    "use_action": { "type": "cast_spell", "spell_id": "ghost_inflatable", "no_fail": true, "level": 1 },
+    "tool_ammo": "battery"
   },
   {
     "id": "fog_machine",
@@ -162,7 +162,6 @@
     "copy-from": "inflatable_decoration",
     "name": { "str": "fog machine" },
     "description": "A battery-powered fog machine.  It would be great for setting ambience.",
-    "ammo": "battery",
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
@@ -171,6 +170,7 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "use_action": { "type": "cast_spell", "spell_id": "fog_machine", "no_fail": true, "level": 1 }
+    "use_action": { "type": "cast_spell", "spell_id": "fog_machine", "no_fail": true, "level": 1 },
+    "tool_ammo": "battery"
   }
 ]
