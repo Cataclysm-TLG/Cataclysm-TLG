@@ -102,9 +102,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_soldering_iron",
-    "entries": [
-      { "item": "light_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "soldering_iron_portable" }
-    ]
+    "entries": [ { "item": "soldering_iron_portable", "charges": 150 } ]
   },
   {
     "type": "item_group",
@@ -149,7 +147,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_powered_earmuffs",
-    "entries": [ { "item": "light_minus_battery_cell", "ammo-item": "battery", "charges": 50, "container-item": "powered_earmuffs" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 50, "container-item": "powered_earmuffs" } ]
   },
   {
     "type": "item_group",
@@ -5069,7 +5067,7 @@
     "type": "profession",
     "id": "miner",
     "name": "Miner",
-    "description": "You're a miner, not a minor!  Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
+    "description": "Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "points": 1,
     "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" } ],
@@ -5091,7 +5089,7 @@
           { "group": "charged_smart_phone" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "jackhammer", "charges": 0 },
-          { "item": "light_minus_disposable_cell", "charges": 100 },
+          { "item": "light_battery_cell", "charges": 100 },
           { "group": "hat_hard_flashlight" }
         ]
       },
