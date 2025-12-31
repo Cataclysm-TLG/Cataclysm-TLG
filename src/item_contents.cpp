@@ -300,9 +300,9 @@ bool pocket_favorite_callback::key( const input_context &ctxt, const input_event
         string_input_popup popup;
         popup.title( string_format( _( "Enter Priority (current priority %d)" ),
                                     selected_pocket->settings.priority() ) );
-        const int ret = popup.query_int().value();
-        if( popup.confirmed() ) {
-            selected_pocket->settings.set_priority( ret );
+        auto ret = popup.query_int();
+        if( popup.confirmed() && ret.has_value() ) {
+            selected_pocket->settings.set_priority( ret.value() );
             selected_pocket->settings.set_was_edited();
         }
         return true;
