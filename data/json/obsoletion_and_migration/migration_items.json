@@ -3642,5 +3642,15 @@
     "type": "vehicle_part_migration",
     "from": "car_medium_plus_battery_cell",
     "to": "battery_car"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_plus_battery_cell",
+    "replace": "light_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_disposable_cell",
+    "replace": "light_battery_cell"
   }
 ]

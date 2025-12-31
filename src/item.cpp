@@ -657,7 +657,7 @@ item &item::convert( const itype_id &new_type, Character *carrier )
         }
     }
     temp.update_modified_pockets();
-    temp.contents.combine( contents, true );
+    temp.contents.combine( *this, contents, true );
     contents = temp.contents;
     current_phase = new_type->phase;
     if( count_by_charges() != new_type->count_by_charges() ) {
@@ -15677,7 +15677,7 @@ void item::favorite_settings_menu()
 
 void item::combine( const item_contents &read_input, bool convert )
 {
-    contents.combine( read_input, convert );
+    contents.combine( *this, read_input, convert );
 }
 
 bool is_preferred_component( const item &component )

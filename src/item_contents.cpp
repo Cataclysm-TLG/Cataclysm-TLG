@@ -670,7 +670,7 @@ void item_contents::read_mods( const item_contents &read_input )
     }
 }
 
-void item_contents::combine( const item_contents &read_input, const bool convert,
+void item_contents::combine( const item &owner, const item_contents &read_input, const bool convert,
                              const bool into_bottom, bool restack_charges, bool ignore_contents )
 {
     std::list<item_pocket> mismatched_pockets;
@@ -728,8 +728,8 @@ void item_contents::combine( const item_contents &read_input, const bool convert
                                                  into_bottom, restack_charges, ignore_contents );
                 if( !inserted.success() ) {
                     uninserted_items.push_back( *it );
-                    debugmsg( "error: item %s cannot fit into pocket while loading: %s",
-                              it->typeId().str(), inserted.str() );
+                    debugmsg( "error: item %1s cannot fit into pocket of %2s while loading: %3s",
+                              it->typeId().str(), owner.tname(), inserted.str() );
                 }
             }
 
@@ -752,7 +752,7 @@ void item_contents::combine( const item_contents &read_input, const bool convert
             if( !inserted.success() ) {
                 uninserted_items.push_back( *it );
                 debugmsg( "error: item %s cannot fit into any pocket while loading: %s",
-                          it->typeId().str(), inserted.str() );
+                          it->typeId().str(), owner.tname(), inserted.str() );
             }
         }
     }

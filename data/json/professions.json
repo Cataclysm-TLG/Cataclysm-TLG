@@ -3700,7 +3700,6 @@
           { "item": "mag_animecon" },
           { "item": "cheeseburger" },
           { "group": "charged_smart_phone" },
-          { "group": "starter_wallet_full" },
           { "item": "eink_tablet_pc", "charges": 150 },
           {
             "item": "light_minus_battery_cell",
@@ -5025,7 +5024,6 @@
           { "item": "wristwatch" },
           { "item": "camera_bag" },
           { "group": "charged_smart_phone" },
-          { "group": "starter_wallet_full" },
           { "item": "camera_pro", "charges": 300 },
           { "item": "pants" }
         ]
@@ -5181,10 +5179,8 @@
           { "item": "touristmap" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" },
-          { "group": "starter_rich_wallet_full" },
           { "item": "camera", "charges": 300 },
           { "item": "tshirt" },
-          { "item": "tshirt_cropped" },
           { "item": "pants" }
         ]
       },

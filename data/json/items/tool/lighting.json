@@ -899,10 +899,9 @@
         "msg": "You turn the smart lamp on.",
         "active": true,
         "need_charges": 1,
-        "need_charges_msg": "The smart lamp batteries are dead.",
+        "need_charges_msg": "The smart lamp's battery is dead.",
         "type": "transform"
-      },
-      { "type": "link_up", "cable_length": 3, "charge_rate": "6 W" }
+      }
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 33 } } ],
     "flags": [ "ALLOWS_REMOTE_USE", "RADIO_ACTIVATION", "RADIO_INVOKE_PROC", "RADIOSIGNAL_2", "WATER_BREAK", "ELECTRONIC" ],
