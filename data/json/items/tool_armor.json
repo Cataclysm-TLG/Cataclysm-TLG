@@ -2503,36 +2503,6 @@
     "environmental_protection": 16
   },
   {
-    "id": "rad_monitor",
-    "type": "TOOL_ARMOR",
-    "category": "clothing",
-    "symbol": "[",
-    "color": "dark_gray",
-    "name": { "str": "radiation biomonitor" },
-    "description": "A small, battery-powered biometric safety device worn on the wrist.  Activate to check your current level of radiation exposure.",
-    "price": "600 USD",
-    "price_postapoc": "10 USD",
-    "material": [ "plastic", "aluminum" ],
-    "weight": "150 g",
-    "volume": "150 ml",
-    "to_hit": -1,
-    "charges_per_use": 1,
-    "use_action": [ "RADGLOVE" ],
-    "sided": true,
-    "material_thickness": 0.1,
-    "flags": [ "BELTED", "FRAGILE", "ALLOWS_NATURAL_ATTACKS", "WATER_FRIENDLY", "OVERSIZE" ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_minus_battery_cell"
-      }
-    ],
-    "armor": [ { "coverage": 50, "covers": [ "hand_l", "hand_r" ], "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ] } ],
-    "tool_ammo": "battery"
-  },
-  {
     "id": "hairpin",
     "type": "TOOL_ARMOR",
     "category": "clothing",

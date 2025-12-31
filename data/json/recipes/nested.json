@@ -2852,7 +2852,18 @@
     "name": "makeshift ballistic plates",
     "description": "Recipes related to constructing makeshift ESAPI and ESBI plates.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "scrap_esapi_plate", "scrap_esbi_plate", "steel_esapi_plate", "steel_esbi_plate", "wood_esapi_plate", "wood_esbi_plate", "fiberglass_esapi_plate", "fiberglass_esbi_plate", "paper_esapi_plate", "paper_esbi_plate" ],
+    "nested_category_data": [
+      "scrap_esapi_plate",
+      "scrap_esbi_plate",
+      "steel_esapi_plate",
+      "steel_esbi_plate",
+      "wood_esapi_plate",
+      "wood_esbi_plate",
+      "fiberglass_esapi_plate",
+      "fiberglass_esbi_plate",
+      "paper_esapi_plate",
+      "paper_esbi_plate"
+    ],
     "difficulty": 5
   }
 ]

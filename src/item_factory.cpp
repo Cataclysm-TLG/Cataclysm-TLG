@@ -1876,7 +1876,6 @@ void Item_factory::init()
     add_iuse( "POST_UP", &iuse::post_up );
     add_iuse( "PROZAC", &iuse::prozac );
     add_iuse( "PURIFY_SMART", &iuse::purify_smart );
-    add_iuse( "RADGLOVE", &iuse::radglove );
     add_iuse( "RADIOCAR", &iuse::radiocar );
     add_iuse( "RADIOCARON", &iuse::radiocaron );
     add_iuse( "RADIOCONTROL", &iuse::radiocontrol );

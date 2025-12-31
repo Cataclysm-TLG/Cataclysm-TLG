@@ -1333,10 +1333,7 @@
     "id": "NEXT_TARGET",
     "category": "TARGET",
     "name": "Next target",
-    "bindings": [
-      { "input_method": "keyboard_any", "key": "TAB" },
-      { "input_method": "mouse", "key": "SCROLL_DOWN" }
-    ]
+    "bindings": [ { "input_method": "keyboard_any", "key": "TAB" }, { "input_method": "mouse", "key": "SCROLL_DOWN" } ]
   },
   {
     "type": "keybinding",

@@ -836,10 +836,10 @@
   {
     "id": "bio_geiger",
     "type": "bionic",
-    "name": { "str": "Integrated Dosimeter" },
-    "description": "Small radiation sensors have been surgically implanted throughout your body, allowing you to analyze your level of absorbed radiation.  They will also alert you whenever exposed to environmental radiation.",
+    "name": { "str": "Radiation Biomonitor" },
+    "description": "Tiny sensors implanted in your body are able to detect acute radiation syndrome through a gamma-H2AX assay, cross-checking blood cell counts to rapidly inform you of the severity of your exposure.  A separate sensor also scans your immediate environment to alert you to the presence of ionizing radiation.",
     "occupied_bodyparts": [ [ "torso", 2 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
-    "act_cost": "100 J"
+    "act_cost": "10 kJ"
   },
   {
     "id": "bio_gills",

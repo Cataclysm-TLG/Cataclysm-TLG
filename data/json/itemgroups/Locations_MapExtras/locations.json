@@ -1963,7 +1963,6 @@
       { "item": "extinguisher", "prob": 20, "charges": 100 },
       { "item": "radio", "prob": 20, "charges": [ 0, 100 ] },
       { "item": "geiger_off", "prob": 8, "charges": [ 0, 100 ] },
-      { "item": "rad_monitor", "prob": 4, "charges": [ 0, 50 ] },
       { "item": "UPS_OFF", "prob": 5, "charges": [ 0, 1000 ] },
       [ "flyer", 10 ],
       [ "hazmat_suit", 5 ],
