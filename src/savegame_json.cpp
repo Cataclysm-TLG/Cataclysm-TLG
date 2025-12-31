@@ -3125,13 +3125,13 @@ void item::deserialize( const JsonObject &data )
     archive.allow_omitted_members();
     data.copy_visited_members( archive );
 
-    //*** ITEM MIGRATION (remove in O.I) ***
+    // *** ITEM MIGRATION (remove once caught up to DDA 0.I) ***
     if( data.has_object( "contents" ) ) {
         item_contents read_contents;
         data.read( "contents", read_contents );
         contents.read_mods( read_contents );
         update_modified_pockets();
-        contents.combine( read_contents, false, true, false, true );
+        contents.combine( *this, read_contents, false, true, false, true );
 
         //migrate SOFTWARE pocket
         auto pockets_e_legacy = []( item_pocket const & pocket ) {
@@ -3728,11 +3728,17 @@ void faction::deserialize( const JsonObject &jo )
     jo.read( "size", size );
     jo.read( "power", power );
     if( jo.has_int( "food_supply" ) ) {
+        int calories;
         // Legacy kcal value found, migrate to calories
-        jo.read( "food_supply", food_supply.calories );
-        food_supply.calories *= 1000;
+        jo.read( "food_supply", calories );
+        calories *= 1000;
+        add_kcal( calories, calendar::turn_zero );
+    } else if( jo.has_object( "fac_food_supply" ) ) {
+        std::map<time_point, nutrients> legacy_food;
+        jo.read( "fac_food_supply", legacy_food[calendar::turn_zero] );
+        add_to_food_supply( legacy_food );
     } else {
-        jo.read( "fac_food_supply", food_supply );
+        jo.read( "fac_food_supply", _food_supply );
     }
     if( !jo.read( "wealth", wealth ) ) {
         wealth = 100;
@@ -3755,7 +3761,16 @@ void faction::serialize( JsonOut &json ) const
     json.member( "known_by_u", known_by_u );
     json.member( "size", size );
     json.member( "power", power );
-    json.member( "fac_food_supply", food_supply );
+    // pruned version of the food supply
+    cata::list<std::pair<time_point, nutrients>> pruned_food_supply = _food_supply;
+    for( auto it = pruned_food_supply.begin(); it != pruned_food_supply.end(); ) {
+        if( it->first != calendar::turn_zero && it->first < calendar::turn ) {
+            it = pruned_food_supply.erase( it );
+        } else {
+            ++it;
+        }
+    }
+    json.member( "fac_food_supply", pruned_food_supply );
     json.member( "wealth", wealth );
     json.member( "opinion_of", opinion_of );
     json.member( "relations" );

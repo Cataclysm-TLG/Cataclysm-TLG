@@ -852,6 +852,7 @@
     "points": 2,
     "description": "Your body has grown accustomed to physical trauma.  You get a 20% bonus to all hit points.",
     "types": [ "DURABILITY" ],
+    "prereqs": [ "TOUGH" ],
     "changes_to": [ "TOUGH3" ],
     "category": [ "MEDICAL" ],
     "threshreq": [ "THRESH_MEDICAL" ],
@@ -1500,12 +1501,14 @@
   {
     "type": "mutation",
     "id": "MEATARIAN",
-    "name": { "str": "Hates Vegetables" },
+    "name": { "str": "Fiber Intolerance" },
     "points": -2,
     "description": "You have problems with eating vegetables.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
     "valid": false,
     "starting_trait": true,
     "vitamins_absorb_multi": [ [ "vegetable", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
+    "changes_to": [ "CARNIVORE" ],
+    "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ],
     "cancels": [ "HERBIVORE", "RUMINANT", "GRAZER" ]
   },
   {
@@ -1521,7 +1524,7 @@
   {
     "type": "mutation",
     "id": "ANTIFRUIT",
-    "name": { "str": "Hates Fruit" },
+    "name": { "str": "Fruit Intolerance" },
     "points": -3,
     "description": "Eating fruits always causes your stomach to ache.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
     "valid": false,
@@ -1552,12 +1555,13 @@
   {
     "type": "mutation",
     "id": "ANTIWHEAT",
-    "name": { "str": "Grain Intolerance" },
+    "name": { "str": "Gluten Intolerance" },
     "points": -2,
     "description": "You have a rare allergy that prevents you from eating wheat.  It's possible for you to eat wheat-based products, but you will suffer morale penalties and obtain less nutrition from them.",
     "vitamins_absorb_multi": [ [ "wheat", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
     "starting_trait": true,
-    "category": [ "CHIROPTERAN" ]
+    "changes_to": [ "CARNIVORE" ],
+    "category": [ "CHIROPTERAN", "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ]
   },
   {
     "type": "mutation",
@@ -2067,27 +2071,23 @@
     "id": "ELFA_NV",
     "name": { "str": "Fey Vision" },
     "points": 3,
-    "description": "The shadows don't seem as dark now.  Activate to toggle NV-visible areas on or off.",
+    "description": "The shadows don't seem as dark now.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFAEYES" ],
     "changes_to": [ "ELFA_FNV" ],
     "threshreq": [ "THRESH_ELFA" ],
-    "category": [ "ELFA" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "ELFA" ]
   },
   {
     "type": "mutation",
     "id": "ELFA_FNV",
     "name": { "str": "Fey Nightsight" },
     "points": 5,
-    "description": "You can see almost perfectly in the dark.  Activate to toggle NV-visible areas on or off.",
+    "description": "You can see almost perfectly in the dark.",
     "types": [ "VISION" ],
     "prereqs": [ "ELFA_NV" ],
     "category": [ "ELFA" ],
-    "threshreq": [ "THRESH_ELFA" ],
-    "active": true,
-    "starts_active": true
+    "threshreq": [ "THRESH_ELFA" ]
   },
   {
     "type": "mutation",
@@ -2107,12 +2107,10 @@
     "id": "FEL_NV",
     "name": { "str": "Feline Vision" },
     "points": 4,
-    "description": "Your optic nerves and brain caught up with your eyes.  Now you can see pretty well at night.  Activate to toggle NV-visible areas on or off.",
+    "description": "Your optic nerves and brain caught up with your eyes.  Now you can see pretty well at night.",
     "types": [ "VISION" ],
     "prereqs": [ "FEL_EYE" ],
-    "category": [ "FELINE" ],
-    "active": true,
-    "starts_active": true
+    "category": [ "FELINE" ]
   },
   {
     "type": "mutation",
@@ -3625,6 +3623,7 @@
     "integrated_armor": [ "integrated_claws" ],
     "description": "You have claws on the ends of your fingers.  If you aren't wearing gloves, you'll be able to make barehanded attacks with these.",
     "types": [ "CLAWS" ],
+    "prereqs": [ "NAILS" ],
     "changes_to": [ "CLAWS_RETRACT" ],
     "category": [ "BEAST", "URSINE", "FELINE", "RAPTOR" ]
   },
@@ -3637,6 +3636,8 @@
     "description": "You have claws on the ends of your fingers, and can extend or retract them as desired.  Gloves will still get in the way, though.",
     "types": [ "CLAWS" ],
     "category": [ "FELINE" ],
+    "prereqs": [ "CLAWS" ],
+    "prevented_by": [ "CLAWS_RETRACT_active" ],
     "transform": { "target": "CLAWS_RETRACT_active", "msg_transform": "You extend your claws.", "active": false, "moves": 10 },
     "cost": 0
   },
@@ -3644,15 +3645,18 @@
     "type": "mutation",
     "id": "CLAWS_RETRACT_active",
     "name": { "str": "Extended Claws" },
-    "copy-from": "CLAWS_RETRACT",
+    "points": 2,
     "active": true,
     "valid": false,
     "ugliness": 1,
     "types": [ "CLAWS" ],
+    "prereqs": [ "CLAWS" ],
     "integrated_armor": [ "integrated_claws" ],
+    "prevented_by": [ "CLAWS_RETRACT" ],
     "description": "Sharp claws are extending from the end of your fingers.",
     "transform": { "target": "CLAWS_RETRACT", "msg_transform": "You retract your claws.", "active": false, "moves": 10 },
-    "cost": 0
+    "cost": 0,
+    "category": [ "FELINE" ]
   },
   {
     "type": "mutation",
@@ -6379,7 +6383,7 @@
     "ugliness": 2,
     "description": "You have a pair of stubby little wings projecting from your shoulderblades.  They can be wiggled at will, but are useless.",
     "types": [ "WINGS" ],
-    "changes_to": [ "WINGS_INSECT" ],
+    "changes_to": [ "WINGS_INSECT", "WINGS_INSECT_active" ],
     "category": [ "INSECT", "CHIMERA" ]
   },
   {
@@ -7305,6 +7309,8 @@
     "description": "Your body's ability to digest fruits, vegetables, grains and nuts is severely hampered.  You've largely lost your taste for everything but meat, but your nutritional needs have largely adjusted to suit your new lifestyle.",
     "types": [ "DIET" ],
     "cancels": [ "VEGAN" ],
+    "prereqs": [ "MEATARIAN" ],
+    "prereqs2": [ "ANTIWHEAT" ],
     "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN", "BEAST" ],
     "vitamin_rates": [ [ "vitC", 900 ] ]
   },

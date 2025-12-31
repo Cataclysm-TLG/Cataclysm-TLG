@@ -885,48 +885,16 @@
     "components": [ [ [ "fat", 1 ], [ "mutant_fat", 1 ], [ "human_fat", 1 ], [ "mutant_human_fat", 1 ] ] ]
   },
   {
-    "id": "edible_tallow",
+    "id": "any_tallow",
     "type": "requirement",
     "//": "Any type of edible tallow.",
     "components": [ [ [ "tallow", 1 ], [ "mutant_tallow", 1 ], [ "human_tallow", 1 ], [ "mutant_human_tallow", 1 ] ] ]
   },
   {
-    "id": "any_tallow",
-    "type": "requirement",
-    "//": "Any type of tallow.",
-    "components": [ [ [ "edible_tallow", 1, "LIST" ] ] ]
-  },
-  {
-    "id": "edible_lard",
-    "type": "requirement",
-    "//": "Lard that is safe for consumption.",
-    "components": [ [ [ "lard", 1 ], [ "mutant_lard", 1 ], [ "human_lard", 1 ], [ "mutant_human_lard", 1 ] ] ]
-  },
-  {
-    "id": "edible_tallow_lard",
-    "type": "requirement",
-    "//": "Any type of edible rendered fat.",
-    "components": [ [ [ "edible_tallow", 1, "LIST" ], [ "edible_lard", 1, "LIST" ] ] ]
-  },
-  {
-    "id": "edible_shortening",
+    "id": "any_shortening",
     "type": "requirement",
     "//": "Edible shelf-stable fat, solid at room temperature.",
-    "components": [
-      [
-        [ "edible_tallow", 1, "LIST" ],
-        [ "edible_lard", 1, "LIST" ],
-        [ "shortening_vegetable", 1 ],
-        [ "cooking_oil_coconut", 1 ],
-        [ "ghee", 4 ]
-      ]
-    ]
-  },
-  {
-    "id": "edible_tallow_lard",
-    "type": "requirement",
-    "//": "Any type of edible rendered fat.",
-    "components": [ [ [ "edible_tallow", 1, "LIST" ], [ "edible_lard", 1, "LIST" ] ] ]
+    "components": [ [ [ "any_tallow", 1, "LIST" ], [ "shortening_vegetable", 1 ], [ "cooking_oil_coconut", 1 ], [ "ghee", 1 ] ] ]
   },
   {
     "id": "edible_blood",
@@ -944,21 +912,13 @@
     "id": "any_butter_or_oil",
     "type": "requirement",
     "//": "For when a recipe calls for either cooking oil or butter, like many baking recipes do.",
-    "components": [
-      [
-        [ "edible_shortening", 1, "LIST" ],
-        [ "cooking_oil", 1 ],
-        [ "cooking_oil2", 1 ],
-        [ "raw_butter", 1 ],
-        [ "butter", 1 ]
-      ]
-    ]
+    "components": [ [ [ "any_shortening", 1, "LIST" ], [ "cooking_oil", 1 ], [ "raw_butter", 1 ], [ "butter", 1 ] ] ]
   },
   {
     "id": "fry_oil",
     "type": "requirement",
     "//": "For when a recipe calls for deep frying, and the food absorbs some oil. Clarafied butter or ghee can be used to deep fry, but butter's smoke point is too low without clarification",
-    "components": [ [ [ "edible_shortening", 1, "LIST" ], [ "cooking_oil", 1 ], [ "cooking_oil2", 1 ] ] ]
+    "components": [ [ [ "any_shortening", 1, "LIST" ], [ "cooking_oil", 1 ] ] ]
   },
   {
     "id": "seasoning_mild",

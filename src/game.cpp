@@ -3278,7 +3278,7 @@ bool game::load( const save_t &name )
                     u.set_save_id( name.decoded_name() );
 
                     if( world_generator->active_world->has_compression_enabled() ) {
-                        std::optional<zzip> z = zzip::load( ( save_file_path + ".zzip" ).get_unrelative_path() );
+                        std::optional<zzip> z = zzip::load( ( save_file_path + zzip_suffix ).get_unrelative_path() );
                         abort = !z.has_value() ||
                         !read_from_zzip_optional( z.value(), save_file_path.get_unrelative_path().filename(),
                         [this]( std::string_view sv ) {
@@ -3571,7 +3571,7 @@ bool game::save_player_data()
         std::stringstream save;
         serialize_json( save );
         std::filesystem::path save_path = ( playerfile + SAVE_EXTENSION +
-                                            ".zzip" ).get_unrelative_path();
+                                            zzip_suffix ).get_unrelative_path();
         std::filesystem::path tmp_path = save_path;
         tmp_path.concat( ".tmp" ); // NOLINT(cata-u8-path)
         std::optional<zzip> z = zzip::load( save_path );
@@ -10833,12 +10833,15 @@ std::vector<std::string> game::get_dangerous_tile( const tripoint_bub_ms &dest_l
                 return harmful_stuff;
             }
         }
-    } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest &&
-               !u.has_effect_with_flag( json_flag_LEVITATION ) && ( !u.has_effect( effect_in_pit ) &&
-                       trap_there.has_flag( json_flag_PIT ) ) ) {
-        harmful_stuff.push_back( tr.name() );
-        if( harmful_stuff.size() == max ) {
-            return harmful_stuff;
+    } else if( tr.can_see( dest_loc, u ) && !tr.is_benign() && !veh_dest ) {
+        const bool pit_there = trap_there.has_flag( json_flag_PIT );
+        const bool pit_is_harmless = u.has_effect( effect_in_pit ) ||
+                                     u.has_effect_with_flag( json_flag_LEVITATION );
+        if( !pit_there || !pit_is_harmless ) {
+            harmful_stuff.push_back( tr.name() );
+            if( harmful_stuff.size() == max ) {
+                return harmful_stuff;
+            }
         }
     }
 
@@ -11088,9 +11091,21 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             u.burn_move_stamina( 0.50 * ( previous_moves - u.get_moves() ) );
         }
     }
-    // Try and fail to drag someone with us.
+    // Try and to drag someone with us.
     if( u.grab_1.victim != nullptr ) {
-        if( u.grab_1.victim.get() && !u.grapple_drag( u.grab_1.victim.get() ) ) {
+        Creature *victim_ptr = u.grab_1.victim.get();
+        if( victim_ptr != nullptr ) {
+            if( victim_ptr->is_dead_state() ) {
+                u.grab_1.victim = nullptr;
+                return false;
+            }
+            if( u.is_adjacent( victim_ptr, true ) ) {
+                if( !u.grapple_drag( victim_ptr ) ) {
+                    return false;
+                }
+            }
+        } else {
+            u.grab_1.victim = nullptr;
             return false;
         }
     }
@@ -12248,6 +12263,10 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
     tripoint_bub_ms pt = pos;
     creature_tracker &creatures = get_creature_tracker();
     c->add_effect( effect_airborne, 1_turns );
+    if( !c->is_monster() && c->has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        // I'm afraid you're going to have to put down the zombie dog before you go flying.
+        c->as_character()->release_grapple();
+    }
     while( range > 0 ) {
         c->underwater = false;
         // TODO: Check whenever it is actually in the viewport
@@ -13501,10 +13520,8 @@ void game::display_scent()
     if( use_tiles ) {
         display_toggle_overlay( ACTION_DISPLAY_SCENT );
     } else {
-        int div;
-        bool got_value = query_int( div, _( "Set the Scent Map sensitivity to (0 to cancel)?" ) );
-        if( !got_value || div < 1 ) {
-            add_msg( _( "Never mind." ) );
+        int div = 0;
+        if( !query_int( div, false, _( "Set scent map sensitivity to?" ) ) || div != 0 ) {
             return;
         }
         shared_ptr_fast<game::draw_callback_t> scent_cb = make_shared_fast<game::draw_callback_t>( [&]() {

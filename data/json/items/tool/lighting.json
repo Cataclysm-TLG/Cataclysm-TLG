@@ -148,7 +148,6 @@
     "symbol": ";",
     "color": "green",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
     "use_action": [
       {
         "type": "transform",
@@ -160,16 +159,10 @@
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "20 W" }
     ],
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "ALLOWS_REMOTE_USE", "WATER_BREAK" ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_minus_battery_cell"
-      }
-    ],
-    "melee_damage": { "bash": 1 }
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "RADIO_INVOKE_PROC", "ALLOWS_REMOTE_USE", "WATER_BREAK" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 58 } } ],
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "electric_lantern_on",
@@ -188,23 +181,23 @@
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "20 W" }
     ],
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "RADIO_MODABLE", "RADIO_INVOKE_PROC", "LIGHT_15", "TRADER_AVOID", "ALLOWS_REMOTE_USE" ]
   },
   {
     "id": "flashlight",
     "type": "TOOL",
     "name": { "str": "flashlight (off)", "str_pl": "flashlights (off)" },
     "description": "A typical household flashlight with a plastic handle, powered by batteries.",
-    "material": [ "plastic", "aluminum" ],
+    "//": "https://www.amazon.com/dp/B0CFLGMKQM",
+    "material": [ { "type": "aluminum", "portion": 1 }, { "type": "plastic", "portion": 9 } ],
     "symbol": ";",
     "color": "blue",
-    "weight": "280 g",
-    "volume": "270 ml",
-    "longest_side": "14 cm",
-    "price": "5 USD",
-    "price_postapoc": "1 USD",
+    "weight": "140 g",
+    "volume": "121 ml",
+    "longest_side": "136 mm",
+    "price": "9 USD",
+    "price_postapoc": "15 cent",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
     "flags": [ "BELT_CLIP", "WATER_BREAK_ACTIVE", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ],
     "use_action": {
       "type": "transform",
@@ -218,17 +211,18 @@
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_disposable_cell"
+        "flag_restriction": [ "BATTERY_LIGHT" ],
+        "default_magazine": "light_battery_cell"
       }
-    ]
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "flashlight_on",
     "copy-from": "flashlight",
     "type": "TOOL",
     "name": { "str": "flashlight (on)", "str_pl": "flashlights (on)" },
-    "power_draw": "10 W",
+    "power_draw": "1560 mW",
     "revert_to": "flashlight",
     "use_action": {
       "menu_text": "Turn off",
@@ -244,7 +238,7 @@
     "type": "TOOL",
     "name": { "str": "mini diving flashlight (off)", "str_pl": "mini diving flashlights (off)" },
     "description": "A small waterproof flashlight with an aluminum handle, powered by batteries.  Can be attached to some diving masks and hoods.",
-    "//": "Based on this: https://www.amazon.com/ORCATORCH-Underwater-Rotatable-Batteries-Included/dp/B07BDKRFJG?th=1",
+    "//": "Based on this: https://www.amazon.com/dp/B07BDKRFJG; Sinlge 18650 instead of two AAs",
     "material": [ "plastic", "aluminum" ],
     "looks_like": "flashlight",
     "symbol": ";",
@@ -255,7 +249,6 @@
     "price": "5 USD",
     "price_postapoc": "1 USD",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
     "flags": [ "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ],
     "use_action": {
       "type": "transform",
@@ -269,10 +262,11 @@
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_disposable_cell"
+        "flag_restriction": [ "BATTERY_MEDIUM" ],
+        "default_magazine": "medium_battery_cell"
       }
-    ]
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "diving_flashlight_small_on",
@@ -307,7 +301,6 @@
     "price": "5 USD",
     "price_postapoc": "1 USD",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
     "flags": [ "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ],
     "use_action": {
       "type": "transform",
@@ -321,10 +314,11 @@
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_disposable_cell"
+        "flag_restriction": [ "BATTERY_LIGHT" ],
+        "default_magazine": "light_battery_cell"
       }
-    ]
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "diving_flashlight_small_hipower_on",
@@ -348,7 +342,7 @@
     "type": "TOOL",
     "name": { "str": "high-power mini diving flashlight (off)", "str_pl": "high-power mini diving flashlights (off)" },
     "description": "A waterproof variable power flashlight with a plastic handle, powered by batteries.  Can be attached to some diving masks and hoods and onto a proprietary wrist mount.",
-    "//": "Based on this: https://www.amazon.com/Aqualite-Tauchlampe-schwarz-Lumen-12516/dp/B00DI5GMOM",
+    "//": "Based on this: https://www.amazon.com/dp/B00DI5GMOM",
     "material": [ "plastic" ],
     "looks_like": "flashlight",
     "symbol": ";",
@@ -359,8 +353,7 @@
     "price": "5 USD",
     "price_postapoc": "1 USD",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
-    "flags": [ "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT", "WRIST_MOUNT_ATTACHMENT" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT", "WRIST_MOUNT_ATTACHMENT" ],
     "use_action": [
       {
         "type": "transform",
@@ -378,14 +371,8 @@
         "charge_rate": "20 W"
       }
     ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      }
-    ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 35 } } ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "diving_flashlight_variable_on_hi",
@@ -412,7 +399,16 @@
         "charge_rate": "20 W"
       }
     ],
-    "flags": [ "LIGHT_500", "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
+    "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
+      "LIGHT_500",
+      "CHARGEDIM",
+      "TRADER_AVOID",
+      "BELT_CLIP",
+      "HELMET_HEAD_ATTACHMENT",
+      "HEAD_STRAP_MOUNT"
+    ]
   },
   {
     "id": "diving_flashlight_variable_on_med",
@@ -442,7 +438,16 @@
         "charge_rate": "20 W"
       }
     ],
-    "flags": [ "LIGHT_200", "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
+    "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
+      "LIGHT_200",
+      "CHARGEDIM",
+      "TRADER_AVOID",
+      "BELT_CLIP",
+      "HELMET_HEAD_ATTACHMENT",
+      "HEAD_STRAP_MOUNT"
+    ]
   },
   {
     "id": "diving_flashlight_variable_on_low",
@@ -469,7 +474,16 @@
         "charge_rate": "20 W"
       }
     ],
-    "flags": [ "LIGHT_80", "CHARGEDIM", "TRADER_AVOID", "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ]
+    "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
+      "LIGHT_80",
+      "CHARGEDIM",
+      "TRADER_AVOID",
+      "BELT_CLIP",
+      "HELMET_HEAD_ATTACHMENT",
+      "HEAD_STRAP_MOUNT"
+    ]
   },
   {
     "id": "gasoline_lantern",
@@ -484,7 +498,6 @@
     "material": [ "glass", "steel" ],
     "symbol": ";",
     "color": "yellow",
-    "ammo": [ "gasoline" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "watertight": true, "ammo_restriction": { "gasoline": 500 } } ],
     "charges_per_use": 1,
     "use_action": {
@@ -497,7 +510,8 @@
       "type": "transform"
     },
     "flags": [ "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "gasoline" ]
   },
   {
     "id": "gasoline_lantern_on",
@@ -533,7 +547,6 @@
     "symbol": ";",
     "color": "light_blue",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "glowstick_juice": 1400 }, "rigid": true } ],
-    "ammo": "glowstick_juice",
     "use_action": {
       "target": "glowstick_lit",
       "msg": "You activate the glowstick.",
@@ -541,7 +554,8 @@
       "menu_text": "Activate",
       "type": "transform"
     },
-    "flags": [ "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
+    "tool_ammo": "glowstick_juice"
   },
   {
     "id": "glowstick_dead",
@@ -590,7 +604,6 @@
     "price": "4 USD",
     "price_postapoc": "1 USD",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "flare_nitrate": 300 }, "rigid": true } ],
-    "ammo": "flare_nitrate",
     "use_action": {
       "menu_text": "Strike the striker",
       "type": "transform",
@@ -598,7 +611,8 @@
       "active": true,
       "msg": "You strike your flare and light it."
     },
-    "flags": [ "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD" ],
+    "tool_ammo": "flare_nitrate"
   },
   {
     "id": "handflare_lit",
@@ -631,31 +645,32 @@
     "type": "TOOL",
     "name": { "str": "heavy-duty flashlight (off)", "str_pl": "heavy-duty flashlights (off)" },
     "description": "A heavy-duty aluminum LED flashlight, often used by security guards.  It even works underwater, and it's not bad for smacking hooligans.",
-    "weight": "450 g",
-    "volume": "470 ml",
-    "longest_side": "37 cm",
-    "price": "9 USD 50 cent",
-    "price_postapoc": "2 USD",
-    "material": [ "aluminum" ],
+    "weight": "720 g",
+    "volume": "4267 ml",
+    "longest_side": "25 cm",
+    "price": "46 USD",
+    "price_postapoc": "15 cent",
+    "material": [ { "type": "aluminum", "portion": 8 }, { "type": "plastic", "portion": 2 } ],
     "symbol": ";",
     "color": "blue",
     "charges_per_use": 1,
-    "ammo": [ "battery" ],
-    "flags": [ "BELT_CLIP" ],
-    "use_action": {
-      "type": "transform",
-      "msg": "You turn the heavy-duty flashlight on.",
-      "target": "heavy_flashlight_on",
-      "active": true,
-      "need_charges": 1,
-      "need_charges_msg": "The heavy-duty flashlight's batteries are dead."
-    },
+    "tool_ammo": [ "battery" ],
+    "use_action": [
+      {
+        "type": "transform",
+        "msg": "You turn the heavy-duty flashlight on.",
+        "target": "heavy_flashlight_on",
+        "active": true,
+        "need_charges": 1,
+        "need_charges_msg": "The heavy-duty flashlight's battery is dead."
+      }
+    ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_disposable_cell"
+        "flag_restriction": [ "BATTERY_MEDIUM" ],
+        "default_magazine": "medium_battery_cell"
       }
     ],
     "melee_damage": { "bash": 8 }
@@ -665,74 +680,67 @@
     "copy-from": "heavy_flashlight",
     "type": "TOOL",
     "name": { "str": "heavy-duty flashlight (on)", "str_pl": "heavy-duty flashlights (on)" },
-    "power_draw": "15 W",
+    "power_draw": "6 W",
     "revert_to": "heavy_flashlight",
-    "use_action": {
-      "ammo_scale": 0,
-      "menu_text": "Turn off",
-      "type": "transform",
-      "msg": "You turn the heavy-duty flashlight off.",
-      "target": "heavy_flashlight"
-    },
-    "flags": [ "LIGHT_500", "CHARGEDIM", "BELT_CLIP" ]
-  },
-  {
-    "abstract": "lightstrip_base",
-    "type": "TOOL",
-    "name": { "str": "lightstrip base" },
-    "weight": "27 g",
-    "volume": "50 ml",
-    "price": "5 USD",
-    "price_postapoc": "25 cent",
-    "to_hit": 2,
-    "material": [ "plastic", "aluminum" ],
-    "symbol": ";",
-    "melee_damage": { "bash": 1 }
+    "use_action": [
+      {
+        "ammo_scale": 0,
+        "menu_text": "Turn off",
+        "type": "transform",
+        "msg": "You turn the heavy-duty flashlight off.",
+        "target": "heavy_flashlight"
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [ "BATTERY_MEDIUM" ],
+        "default_magazine": "medium_battery_cell"
+      }
+    ],
+    "flags": [ "LIGHT_500", "CHARGEDIM" ]
   },
   {
     "id": "lightstrip",
     "type": "TOOL",
-    "name": { "str": "lightstrip" },
-    "copy-from": "lightstrip_base",
-    "description": "A light-emitting circuit that has been wired directly to a battery.  It provides some weak light and can't be turned off until the battery dies.",
+    "name": { "str": "LED strip" },
+    "copy-from": "lightstrip_inactive",
     "color": "green",
-    "power_draw": "1 W",
+    "symbol": ";",
+    "power_draw": "5 W",
     "revert_to": "lightstrip_inactive",
-    "revert_msg": "The lightstrip dies.",
-    "flags": [ "LIGHT_4", "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
-    "pocket_data": [
+    "revert_msg": "The LED strip fades away.",
+    "flags": [ "LIGHT_200", "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
+    "use_action": [
       {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      }
+        "target": "lightstrip_inactive",
+        "msg": "You turn off the LED strip.",
+        "active": true,
+        "need_charges": 1,
+        "type": "transform"
+      },
+      { "type": "link_up", "cable_length": 10, "charge_rate": "5 W" }
     ]
   },
   {
-    "//": "This doesn't make too much sense, flavor-wise, but it's the best I can come up with.  Put it on the todo list.",
     "id": "lightstrip_inactive",
     "type": "TOOL",
-    "name": { "str": "lightstrip (inactive)", "str_pl": "lightstrips (inactive)" },
-    "copy-from": "lightstrip_base",
-    "description": "A light-emitting circuit that can be wired directly to a battery.  It provides some weak light and can't be turned off until the battery dies.",
+    "name": { "str": "LED strip (inactive)", "str_pl": "LED strips (inactive)" },
+    "description": "25 feet of colorful LED strip, that are often used as house lights or on some holidays.",
+    "weight": "158 g",
+    "volume": "70 ml",
+    "price": "10 USD",
+    "price_postapoc": "2 cent",
+    "symbol": ";",
+    "material": [ { "type": "plastic", "portion": 1 }, { "type": "aluminum", "portion": 9 } ],
     "color": "white",
-    "ammo": [ "battery" ],
-    "use_action": {
-      "target": "lightstrip",
-      "msg": "You irreversibly activate the lightstrip.",
-      "active": true,
-      "need_charges": 1,
-      "type": "transform"
-    },
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
-      }
-    ]
+    "//": "25 feet (7.5 m) + 1.5 meters for plug",
+    "use_action": [
+      { "target": "lightstrip", "msg": "You turn on the LED strip.", "active": true, "need_charges": 1, "type": "transform" },
+      { "type": "link_up", "cable_length": 9, "charge_rate": "5 W" }
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "oil_lamp",
@@ -747,7 +755,6 @@
     "material": [ "glass", "iron" ],
     "symbol": ";",
     "color": "yellow",
-    "ammo": [ "lamp_oil" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "watertight": true, "ammo_restriction": { "lamp_oil": 750 } } ],
     "charges_per_use": 1,
     "use_action": {
@@ -760,7 +767,8 @@
       "type": "transform"
     },
     "flags": [ "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "lamp_oil" ]
   },
   {
     "id": "oil_lamp_on",
@@ -794,7 +802,6 @@
     "material": [ "clay" ],
     "symbol": ";",
     "color": "brown",
-    "ammo": [ "crude_lamp_oil", "lamp_oil" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "watertight": true, "ammo_restriction": { "crude_lamp_oil": 250, "lamp_oil": 250 } } ],
     "charges_per_use": 1,
     "use_action": {
@@ -807,7 +814,8 @@
       "type": "transform"
     },
     "flags": [ "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "crude_lamp_oil", "lamp_oil" ]
   },
   {
     "id": "oil_lamp_clay_on",
@@ -844,7 +852,6 @@
     "color": "red",
     "material": [ "copper", "glass" ],
     "charges_per_use": 1,
-    "ammo": [ "weldgas" ],
     "use_action": {
       "type": "transform",
       "msg": "You light the %s.",
@@ -853,7 +860,8 @@
       "need_charges": 1,
       "need_charges_msg": "The %s must be attached to a gas cylinder to light."
     },
-    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "weldtank", "tinyweldtank" ] } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "weldtank", "tinyweldtank" ] } ],
+    "tool_ammo": [ "weldgas" ]
   },
   {
     "id": "oxylamp_on",
@@ -873,15 +881,15 @@
     "type": "TOOL",
     "name": { "str": "reading light" },
     "description": "A little clip-on LED light, meant for reading books in the dark.",
-    "weight": "90 g",
-    "volume": "100 ml",
-    "price": "1 USD",
-    "price_postapoc": "1 USD",
+    "//": "https://www.amazon.com/dp/B08GG42WXY",
+    "weight": "64 g",
+    "volume": "150 ml",
+    "price": "24 USD",
+    "price_postapoc": "1 cent",
     "material": [ "plastic", "aluminum" ],
     "symbol": ";",
     "color": "white",
-    "flags": [ "WATER_BREAK" ],
-    "ammo": [ "battery" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK" ],
     "charges_per_use": 1,
     "use_action": {
       "target": "reading_light_on",
@@ -891,14 +899,8 @@
       "need_charges_msg": "The reading light winks out.",
       "type": "transform"
     },
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_minus_disposable_cell"
-      }
-    ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 13 } } ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "reading_light_on",
@@ -906,7 +908,7 @@
     "type": "TOOL",
     "name": { "str": "reading light (active)", "str_pl": "reading lights (active)" },
     "description": "A little clip-on LED light, meant for reading books in the dark.  This one is turned on.",
-    "power_draw": "1 W",
+    "power_draw": "46 mW",
     "revert_to": "reading_light",
     "use_action": {
       "ammo_scale": 0,
@@ -915,41 +917,46 @@
       "menu_text": "Turn off",
       "type": "transform"
     },
-    "flags": [ "LIGHT_15", "CHARGEDIM" ]
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "LIGHT_15", "CHARGEDIM" ]
   },
   {
     "id": "smart_lamp",
     "type": "TOOL",
     "name": { "str": "smart lamp (off)", "str_pl": "smart lamps (off)" },
     "description": "A smart lamp that can be activated remotely.",
-    "weight": "400 g",
-    "volume": "500 ml",
-    "price": "5 USD",
-    "price_postapoc": "1 USD",
-    "to_hit": -1,
+    "//": "https://www.amazon.com/dp/B0CM3RKR5Z",
+    "weight": "297 g",
+    "volume": "1851 ml",
+    "price": "30 USD",
+    "price_postapoc": "1 cent",
+    "to_hit": { "grip": "bad", "length": "hand", "surface": "any", "balance": "uneven" },
     "material": [ "plastic", "aluminum" ],
     "symbol": "&",
     "color": "blue",
-    "ammo": [ "battery" ],
     "charges_per_use": 1,
-    "use_action": {
-      "target": "smart_lamp_on",
-      "msg": "You turn the smart lamp on.",
-      "active": true,
-      "need_charges": 1,
-      "need_charges_msg": "The smart lamp batteries are dead.",
-      "type": "transform"
-    },
-    "flags": [ "ALLOWS_REMOTE_USE", "RADIO_ACTIVATION", "RADIO_INVOKE_PROC", "RADIOSIGNAL_2", "WATER_BREAK", "ELECTRONIC" ],
-    "pocket_data": [
+    "use_action": [
       {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_battery_cell"
+        "target": "smart_lamp_on",
+        "msg": "You turn the smart lamp on.",
+        "active": true,
+        "need_charges": 1,
+        "need_charges_msg": "The smart lamp's battery is dead.",
+        "type": "transform"
       }
     ],
-    "melee_damage": { "bash": 1 }
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 33 } } ],
+    "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
+      "ALLOWS_REMOTE_USE",
+      "RADIO_ACTIVATION",
+      "RADIO_INVOKE_PROC",
+      "RADIOSIGNAL_2",
+      "WATER_BREAK",
+      "ELECTRONIC"
+    ],
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "smart_lamp_on",
@@ -957,7 +964,7 @@
     "type": "TOOL",
     "name": { "str": "smart lamp (on)", "str_pl": "smart lamps (on)" },
     "description": "A smart lamp which can be deactivated remotely.  Currently it is turned on.",
-    "power_draw": "10 W",
+    "power_draw": "1321 mW",
     "revert_to": "smart_lamp",
     "use_action": [
       {
@@ -969,6 +976,8 @@
       }
     ],
     "flags": [
+      "NO_UNLOAD",
+      "NO_RELOAD",
       "ALLOWS_REMOTE_USE",
       "RADIO_ACTIVATION",
       "RADIO_INVOKE_PROC",
@@ -1053,7 +1062,6 @@
     "material": [ "glass", "steel" ],
     "symbol": ";",
     "color": "yellow",
-    "ammo": [ "propane" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "watertight": true, "item_restriction": [ "small_propane_tank" ] } ],
     "charges_per_use": 1,
     "use_action": {
@@ -1065,7 +1073,8 @@
       "type": "transform"
     },
     "flags": [ "ALLOWS_REMOTE_USE" ],
-    "melee_damage": { "bash": 1 }
+    "melee_damage": { "bash": 1 },
+    "tool_ammo": [ "propane" ]
   },
   {
     "id": "propane_lantern_on",

@@ -16,7 +16,7 @@
       [ [ "camera", 1 ] ],
       [
         [ "cotton_patch", 2 ],
-        [ "leather", 2 ],
+        [ "leather_patch", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
         [ "medical_tape", 20 ]
@@ -40,7 +40,7 @@
       [ [ "camera_pro", 1 ] ],
       [
         [ "cotton_patch", 2 ],
-        [ "leather", 2 ],
+        [ "leather_patch", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
         [ "medical_tape", 20 ]
@@ -154,7 +154,7 @@
       [ [ "knife_butcher", 1 ] ],
       [ [ "knife_carving", 1 ] ],
       [ [ "knife_meat_cleaver", 1 ] ],
-      [ [ "leather", 2 ], [ "cotton_patch", 2 ] ],
+      [ [ "leather_patch", 2 ], [ "cotton_patch", 2 ] ],
       [ [ "cordage_short", 2, "LIST" ] ]
     ]
   },
@@ -293,9 +293,10 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
+    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "scrap_bronze", 5 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ] ]
   },
   {
     "result": "steel_pan",
@@ -450,7 +451,7 @@
     ],
     "book_learn": [ [ "textbook_tailor", 4 ], [ "manual_tailor", 5 ], [ "tailor_portfolio", 4 ] ],
     "using": [ [ "sewing_standard", 100 ], [ "cordage", 2 ] ],
-    "components": [ [ [ "leather", 30 ], [ "leather_sheet", 5 ], [ "fur", 30 ], [ "fur_sheet", 5 ] ], [ [ "wire", 2 ] ] ]
+    "components": [ [ [ "leather_patch", 30 ], [ "leather_sheet", 5 ], [ "fur_patch", 30 ], [ "fur_sheet", 5 ] ], [ [ "wire", 2 ] ] ]
   },
   {
     "result": "jack",
@@ -878,7 +879,8 @@
     "reversible": true,
     "autolearn": true,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "components": [ [ [ "copper_scrap_equivalent", 2, "LIST" ] ] ]
   },
   {
@@ -923,10 +925,7 @@
     "time": "2 m",
     "autolearn": true,
     "using": [ [ "flammable_liquid", 100 ] ],
-    "components": [
-      [ [ "sheet_cotton", 1 ], [ "sheet_cotton_patch", 1 ] ],
-      [ [ "stick", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "torch_done", 1 ] ]
-    ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "stick", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "torch_done", 1 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -1170,7 +1169,7 @@
     "qualities": [ { "id": "ANVIL", "level": 2 }, { "id": "HAMMER", "level": 2 }, { "id": "CHISEL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "//": "Specifically avoids blacksmithing requirement groups so that it's craftable without itself - substitutes metal fileset for metalworking chisel.",
-    "components": [ [ [ "scrap_bronze", 2 ] ] ]
+    "components": [ [ [ "bronze_fragment", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -1287,7 +1286,7 @@
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SEW", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
     "using": [ [ "glue_waterproof", 12 ] ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "filament", 40, "LIST" ] ] ]
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "filament", 40, "LIST" ] ] ]
   },
   {
     "result": "masonrysaw_off",

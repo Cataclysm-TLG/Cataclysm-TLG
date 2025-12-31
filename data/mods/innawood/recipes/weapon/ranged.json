@@ -222,7 +222,12 @@
     ],
     "autolearn": true,
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 } ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "scrap", 1 ] ], [ [ "cordage_superior", 3, "LIST" ] ], [ [ "leather", 1 ] ] ]
+    "components": [
+      [ [ "2x4", 2 ], [ "stick", 4 ] ],
+      [ [ "scrap", 1 ] ],
+      [ [ "cordage_superior", 3, "LIST" ] ],
+      [ [ "leather_patch", 1 ] ]
+    ]
   },
   {
     "type": "recipe",

@@ -408,7 +408,6 @@
     "responses": [
       { "text": "Consider it done.  But I also wanted to ask…", "topic": "TALK_BONE_SEER" },
       { "text": "Where should I start?", "topic": "TALK_MISSION_ADVICE_SEER" },
-      { "text": "Can you share some equipment to aid me in this?", "topic": "TALK_SHARE_EQUIPMENT_SEER" },
       { "text": "I'm off then.", "topic": "TALK_DONE" }
     ]
   },
@@ -417,12 +416,6 @@
     "type": "talk_topic",
     "dynamic_line": "The shambling corpses we see all around move in discord.  Their song can be used, but for an Acolyte, this would be needlessly hard.  Be sure to carve an unspoiled living creature.",
     "responses": [ { "text": "So, a creature that isn't a zombie, or a monster.  Got it.", "topic": "TALK_NONE" } ]
-  },
-  {
-    "id": "TALK_SHARE_EQUIPMENT_SEER",
-    "type": "talk_topic",
-    "dynamic_line": "The path to enlightenment is for you to walk.  For me to aid you would ultimately impede your progress and muddle your song.",
-    "responses": [ { "text": "I see.  Very well then.", "topic": "TALK_NONE" } ]
   },
   {
     "id": "TALK_SUGGEST_FOLLOW_SEER",

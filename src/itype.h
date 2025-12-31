@@ -697,7 +697,6 @@ struct itype_variant_data {
     std::string id;
     translation alt_name;
     translation alt_description;
-    ascii_art_id art;
     std::optional<std::string> alt_sym;
     std::optional<nc_color> alt_color = std::nullopt;
 
@@ -1198,6 +1197,9 @@ struct conditional_name {
     // Name to apply (i.e. "Luigi lasagne" or "smoked mutant"). Can use %s which will
     // be replaced by the item's normal name and/or preceding conditional names.
     translation name;
+
+    bool was_loaded = false;
+    void deserialize( const JsonObject &jo );
 };
 
 class islot_milling
@@ -1319,7 +1321,6 @@ struct itype {
 
         std::string snippet_category;
 
-        ascii_art_id picture_id;
 
         /** If set via JSON forces item category to this (preventing automatic assignment) */
         item_category_id category_force;
@@ -1470,6 +1471,8 @@ struct itype {
         units::money price_post = -1_cent;
 
         int m_to_hit = -2;  // To-hit bonus for melee combat; -5 to 5 is reasonable
+        // If true, uses numerically assigned instead of derived to-hit.
+        bool using_legacy_to_hit = false;
 
         unsigned light_emission = 0;   // Exactly the same as item_tags LIGHT_*, this is for lightmap.
 

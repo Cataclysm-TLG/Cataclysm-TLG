@@ -224,8 +224,8 @@
       { "item": "tailors_kit", "prob": 50, "charges": 400 },
       [ "thread", 10 ],
       [ "string_6", 50 ],
-      [ "leather", 10 ],
-      [ "fur", 7 ],
+      [ "leather_patch", 10 ],
+      [ "fur_patch", 7 ],
       [ "leather_sheet", 20 ],
       [ "fur_sheet", 20 ]
     ]

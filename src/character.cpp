@@ -615,7 +615,7 @@ Character::Character() :
     // 55 Mcal or 55k kcal
     healthy_calories = 55000000;
     base_cardio_acc = 1000;
-    // this makes sure characters start with normal bmi
+    // This makes sure characters start with normal BMI.
     stored_calories = healthy_calories - 1000000;
     initialize_stomach_contents();
 
@@ -633,7 +633,7 @@ Character::Character() :
     scent = 500;
     male = true;
     prof = profession::has_initialized() ? profession::generic() :
-           nullptr; //workaround for a potential structural limitation, see player::create
+           nullptr; // Workaround for a potential structural limitation, see player::create.
     start_location = start_location_sloc_shelter_a;
     moves = 100;
     oxygen = 0;
@@ -655,7 +655,7 @@ Character::Character() :
         vitamin_levels[ v.first ] = 0;
         daily_vitamins[v.first] = { 0,0 };
     }
-    // Only call these if game is initialized
+    // Only call these if game is initialized.
     if( !!g && json_flag::is_ready() ) {
         recalc_sight_limits();
         trait_flag_cache.clear();
@@ -688,6 +688,8 @@ character_id Character::getID() const
 
 void Character::swap_character( Character &other )
 {
+    // TODO: Once NPCs can grapple, maintain and move target and grabber statuses.
+    release_grapple();
     npc tmp_npc;
     Character &tmp = tmp_npc;
     tmp = std::move( other );
@@ -2794,32 +2796,12 @@ void Character::process_turn()
     }
 
     // Persist grabs as long as our target is adjacent.
-    // Question: Why don't we check monsters here?
-    if( grab_1.victim != nullptr && !grab_1.victim->is_monster() ) {
-        bool remove = false;
+    if( grab_1.victim != nullptr ) {
         if( square_dist( grab_1.victim->pos_bub(), pos_bub() ) != 1 ) {
-            remove = true;
+            release_grapple();
         }
-        if( has_effect( effect_incorporeal ) ) {
-            remove = true;
-        }
-        if( remove ) {
-            for( const effect &eff : grab_1.victim->get_effects_with_flag( json_flag_GRAB ) ) {
-                const efftype_id effid = eff.get_id();
-                add_msg_debug( debugmode::DF_CHARACTER, "Orphan grab found and removed from %s.",
-                               grab_1.victim->disp_name() );
-                if( eff.get_intensity() == grab_1.grab_strength ) {
-                    grab_1.victim->remove_effect( effid );
-                    // For now, GRAB_FILTER is only for a character's grab_1, so we can just remove it.
-                    // This may need to be revisited when multigrabs are added.
-                    for( const effect &youeff : get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
-                        const efftype_id youeffid = youeff.get_id();
-                        remove_effect( youeffid );
-                    }
-                    grab_1.clear();
-                    break;
-                }
-            }
+        if( has_effect( effect_incorporeal ) || grab_1.victim->has_effect( effect_incorporeal ) ) {
+            release_grapple();
         }
     }
 
@@ -5858,7 +5840,7 @@ void Character::check_needs_extremes()
                     } else if( get_kcal_percent() < 0.25f ) {
                         category = "emaciated";
                     } else if( get_kcal_percent() < 0.5f ) {
-                        category = "malnutrition";
+                        category = "malnourished";
                     } else if( get_kcal_percent() < 0.8f ) {
                         category = "low_cal";
                     }
@@ -5868,7 +5850,7 @@ void Character::check_needs_extremes()
                     } else if( get_kcal_percent() < 0.25f ) {
                         category = "empty_emaciated";
                     } else if( get_kcal_percent() < 0.5f ) {
-                        category = "empty_malnutrition";
+                        category = "empty_malnourished";
                     } else if( get_kcal_percent() < 0.8f ) {
                         category = "empty_low_cal";
                     }
@@ -7486,9 +7468,12 @@ int Character::get_cardiofit() const
         return 2 * get_cardio_acc_base();
     }
 
-    if( has_bionic( bio_synlungs ) ) {
-        // If you have the synthetic lungs bionic your cardioacc is forced to a specific value
+    if( has_active_bionic( bio_synlungs ) ) {
+        // If you have the synthetic lungs bionic and they're active, your cardiofit is forced to a specific value.
         return 3 * get_cardio_acc_base();
+    } else if( has_bionic( bio_synlungs ) ) {
+        // If they're not active, your cardiofit is forced to the worst possible value.
+        return 0.2 * get_cardio_acc_base();
     }
 
     const int cardio_base = get_cardio_acc();
@@ -7962,13 +7947,14 @@ tripoint_bub_ms Character::adjacent_tile() const
         }
         const trap &curtrap = here.tr_at( p );
         const ter_id target_ter = here.ter( p );
+        const bool trap_visible = curtrap.can_see( p, *this );
+        const bool known_dangerous_trap = trap_visible && !curtrap.is_benign();
+        const bool see_pit_below = ( ( target_ter == ter_t_pit || target_ter == ter_t_pit_spiked ||
+                                       target_ter == ter_t_pit_glass ) || ( trap_visible && curtrap.has_flag( json_flag_PIT ) ) ) &&
+                                   !has_effect( effect_in_pit );
         // If we don't known a trap here, the spot "appears" to be good, so consider it.
         // Same if we know a benign trap (as it's not dangerous), or we're in a pit and it's a pit.
-        if( !curtrap.can_see( p, *this ) ||
-            curtrap.is_benign() ||
-            ( ( target_ter == ter_t_pit || target_ter == ter_t_pit_spiked || target_ter == ter_t_pit_glass ||
-                curtrap.has_flag( json_flag_PIT ) ) && has_effect( effect_in_pit ) ) ) {
-        } else {
+        if( known_dangerous_trap || see_pit_below ) {
             continue;
         }
         // Only consider tile if unoccupied, passable and has no traps
@@ -11545,7 +11531,6 @@ void Character::process_effects()
         remove_effect( effect_blood_spiders );
         remove_effect( effect_brainworms );
         remove_effect( effect_paincysts );
-        add_msg_if_player( m_good, _( "Something writhes inside of you as it dies." ) );
     }
     if( has_flag( json_flag_ACIDBLOOD ) && ( has_effect( effect_dermatik ) ||
             has_effect( effect_bloodworms ) ||
@@ -11558,7 +11543,6 @@ void Character::process_effects()
     }
     if( has_trait( trait_EATHEALTH ) && has_effect( effect_tapeworm ) ) {
         remove_effect( effect_tapeworm );
-        add_msg_if_player( m_good, _( "Your bowels gurgle as something inside them dies." ) );
     }
     if( has_flag( json_flag_INFECTION_IMMUNE ) && ( has_effect( effect_bite ) ||
             has_effect( effect_infected ) ||
@@ -11567,7 +11551,10 @@ void Character::process_effects()
         remove_effect( effect_infected );
         remove_effect( effect_recover );
     }
-
+    if( ( has_effect( effect_winded ) || in_sleep_state() ) &&
+        has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        release_grapple();
+    }
     // Clear hardcoded bonuses from last turn
     // Recalculated in process_one_effect
     str_bonus_hardcoded = 0;

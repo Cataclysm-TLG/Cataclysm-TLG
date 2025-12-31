@@ -16,6 +16,7 @@
 /build-start-time
 /cache/
 /cmake-build-debug/
+/CMakeFiles/
 /config/
 /data/*.template
 /data/cache/
@@ -46,6 +47,8 @@ cataclysm
 cataclysm-vcpkg
 cataclysmdda-*
 chkjson*
+cmake
+DartConfiguration.tcl
 debug.log
 logg.txt
 json_formatter

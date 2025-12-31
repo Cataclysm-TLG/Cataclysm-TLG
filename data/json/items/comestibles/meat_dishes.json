@@ -217,15 +217,15 @@
     "type": "COMESTIBLE",
     "id": "cracklins",
     "name": { "str_sp": "cracklins" },
-    "weight": "42 g",
+    "weight": "40 g",
     "color": "brown",
     "spoils_in": "7 days",
     "container": "bag_plastic_small",
     "comestible_type": "FOOD",
     "symbol": "%",
     "quench": -2,
-    "calories": 270,
-    "description": "Also known as pork rinds or chicharrones, these are bits of edible fat and skin that have been fried until they are crispy and delicious.",
+    "calories": 260,
+    "description": "Crispy bits of connective tissue and skin that were allowed to fry in animal fat as it was rendered.  These are also known as scratchings, chicharrones, or rinds.",
     "price": "42 cent",
     "volume": "25 ml",
     "price_postapoc": "125 cent",
@@ -240,7 +240,7 @@
     "name": { "str_sp": "cracklins" },
     "copy-from": "cracklins",
     "material": [ "hflesh" ],
-    "vitamins": [ [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
     "type": "COMESTIBLE",
@@ -256,7 +256,7 @@
     "name": { "str_sp": "cracklins" },
     "copy-from": "cracklins",
     "material": [ "hflesh" ],
-    "vitamins": [ [ "mutant_toxin", 52 ], [ "meat_allergen", 1 ] ]
+    "vitamins": [ [ "mutant_toxin", 52 ], [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
   {
     "type": "COMESTIBLE",

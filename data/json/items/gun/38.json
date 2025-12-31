@@ -7,7 +7,6 @@
     "name": { "str": "2 Shot Special pistol" },
     "//": "Volume+barrel length based off a Bond Arms derringer. with extra length in the barrel.",
     "description": "A crudely made double barrel pistol firing .38 Special ammo.  Unfortunately, the name is less about the double barrels and more about the number of shots you'll get before it breaks down on you.",
-    "ascii_picture": "2_shot_special",
     "weight": "750 g",
     "volume": "414 ml",
     "longest_side": "475 mm",
@@ -150,7 +149,6 @@
     "type": "GUN",
     "name": { "str_sp": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
-    "ascii_picture": "ps_pipe_gun",
     "weight": "2114 g",
     "volume": "1610 ml",
     "longest_side": "100 cm",
@@ -259,7 +257,6 @@
     "type": "GUN",
     "name": { "str_sp": "S&W 619 revolver" },
     "description": "A seven-round .357 revolver sold by Smith & Wesson.  Can also fire .38 Special.  It features a fixed rear sight and a reinforced frame.",
-    "ascii_picture": "sw_610",
     "weight": "1280 g",
     "volume": "760 ml",
     "//1": "took 5mm off `longest_side` so it can fit regular holsters",
@@ -301,7 +298,6 @@
     "type": "GUN",
     "name": { "str_sp": "7-shot .357 revolver" },
     "description": "A revolver chambered in .357, with a 4 inch barrel and adjustable sights.",
-    "ascii_picture": "sw_610",
     "weight": "1142 g",
     "volume": "760 ml",
     "longest_side": "242 mm",
@@ -432,7 +428,7 @@
     "variants": [
       {
         "id": "uberti_1873",
-        "name": { "str": "Uberti 1873" },
+        "name": { "str": "Uberti 1873 rifle" },
         "description": "The 1873 is a rifle platform developed all the way in, unsurprisingly, 1873.  This one is a fairly faithful Uberti reproduction, although the original 1873s pre-dated .357 Magnum, and even .38 Special.  This one has a case-hardened finish, wood furniture, and octagonal barrel."
       }
     ],
@@ -476,7 +472,7 @@
     "variants": [
       {
         "id": "rossi_r92_357_20",
-        "name": { "str": "Rossi R92 20\"", "str_pl": "Rossi R92s 20\"" },
+        "name": { "str": "Rossi R92 20\" rifle" },
         "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features wooden furniture, a 20\" barrel, and 10 rounds of .357 Magnum or .38 Special."
       }
     ],
@@ -520,7 +516,7 @@
     "variants": [
       {
         "id": "rossi_r92_357_16",
-        "name": { "str": "Rossi R92 16\"", "str_pl": "Rossi R92s 16\"" },
+        "name": { "str": "Rossi R92 16\" rifle" },
         "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features wooden furniture, a 16\" barrel, and 8 rounds of .357 Magnum or .38 Special."
       }
     ],

@@ -93,7 +93,7 @@
     "material": [ "plastic" ],
     "symbol": "[",
     "color": "light_gray",
-    "material_thickness": 0.1,
+    "material_thickness": 1,
     "flags": [ "HELMET_MANDIBLE_GUARD_STRAPPED", "CANT_WEAR" ],
     "armor": [ { "coverage": 60, "covers": [ "mouth" ], "specifically_covers": [ "mouth_chin" ] } ]
   },
@@ -221,7 +221,6 @@
     "color": "dark_gray",
     "to_hit": -3,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -236,7 +235,7 @@
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
         "flag_restriction": [ "BATTERY_LIGHT" ],
-        "default_magazine": "light_plus_battery_cell"
+        "default_magazine": "light_battery_cell"
       }
     ],
     "relic_data": { "passive_effects": [ { "id": "nvg_normal" } ] },
@@ -244,7 +243,8 @@
     "armor": [
       { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
       { "covers": [ "head" ], "encumbrance": 8, "coverage": 70, "specifically_covers": [ "head_forehead" ] }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "military_nvg_on",
@@ -280,7 +280,6 @@
     "color": "dark_gray",
     "to_hit": -3,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -295,7 +294,7 @@
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
         "flag_restriction": [ "BATTERY_MEDIUM" ],
-        "default_magazine": "medium_plus_battery_cell"
+        "default_magazine": "medium_battery_cell"
       }
     ],
     "relic_data": { "passive_effects": [ { "id": "nvg_good" } ] },
@@ -308,7 +307,8 @@
         "coverage": 80,
         "specifically_covers": [ "head_forehead", "head_crown" ]
       }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "advanced_gpnvg_on",
@@ -347,7 +347,6 @@
     "color": "dark_gray",
     "to_hit": -3,
     "charges_per_use": 1,
-    "ammo": "battery",
     "use_action": {
       "type": "transform",
       "msg": "You activate your %s.",
@@ -362,7 +361,7 @@
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
         "flag_restriction": [ "BATTERY_MEDIUM" ],
-        "default_magazine": "medium_plus_battery_cell"
+        "default_magazine": "medium_battery_cell"
       }
     ],
     "relic_data": { "passive_effects": [ { "id": "nvg_good" }, { "id": "THERMAL_VISION_GOOD" } ] },
@@ -375,7 +374,8 @@
         "coverage": 70,
         "specifically_covers": [ "head_forehead", "head_crown" ]
       }
-    ]
+    ],
+    "tool_ammo": "battery"
   },
   {
     "id": "enhanced_nvg_on",

@@ -22,7 +22,7 @@
       [ "holster", 5 ],
       [ "bandolier_shotgun", 15 ],
       [ "torso_bandolier_shotgun", 8 ],
-      [ "kevlar", 20 ],
+      [ "ballistic_vest_concealable", 20 ],
       [ "pockknife", 10 ],
       [ "legpouch_large", 5 ],
       [ "mask_bal", 10 ],
@@ -113,8 +113,9 @@
     "items": [
       { "item": "EOD_hotstick", "prob": 50 },
       { "item": "multitool", "container-item": "sheath", "prob": 30 },
-      { "item": "light_disposable_cell", "prob": 30, "count": [ 1, 8 ] },
-      { "item": "light_minus_disposable_cell", "prob": 20, "count": [ 1, 6 ] },
+      { "item": "light_battery_cell", "prob": 30, "count": [ 1, 8 ] },
+      { "item": "medium_battery_cell", "prob": 20 },
+      { "item": "heavy_battery_cell", "prob": 20 },
       { "item": "cordless_drill", "prob": 30 },
       { "item": "rope_30", "prob": 50 },
       { "item": "pliers", "prob": 50 },
@@ -233,7 +234,6 @@
     "items": [
       [ "wrapped_rad_badge", 80 ],
       { "item": "geiger_off", "prob": 20, "charges": [ 0, 100 ] },
-      { "item": "rad_monitor", "prob": 10, "charges": [ 0, 100 ] },
       { "item": "oxygen_tank", "prob": 10, "charges": [ 4, -1 ] },
       { "item": "smoxygen_tank", "prob": 15, "charges": [ 2, -1 ] },
       [ "UPS_OFF", 2 ],
@@ -306,7 +306,7 @@
     "subtype": "distribution",
     "//": "armor that a civilian might have.",
     "entries": [
-      { "item": "kevlar", "prob": 20 },
+      { "item": "ballistic_vest_concealable", "prob": 20 },
       { "item": "soft_3a_vest", "prob": 15 },
       { "item": "stab_vest", "prob": 15 },
       { "item": "chestguard_hard", "prob": 5 },

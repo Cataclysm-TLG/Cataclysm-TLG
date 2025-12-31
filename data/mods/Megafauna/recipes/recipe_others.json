@@ -19,7 +19,7 @@
     ],
     "components": [
       [ [ "large_bone", 8 ], [ "mammoth_tusk", 2 ] ],
-      [ [ "leather", 64 ], [ "leather_sheet_patchwork", 8 ], [ "leather_sheet", 8 ], [ "fur_sheet", 8 ] ],
+      [ [ "leather_patch", 64 ], [ "leather_sheet", 8 ], [ "fur_sheet", 8 ] ],
       [ [ "filament", 40, "LIST" ] ]
     ]
   },
@@ -43,7 +43,7 @@
     ],
     "components": [
       [ [ "large_bone", 24 ], [ "mammoth_tusk", 6 ] ],
-      [ [ "leather", 192 ], [ "leather_sheet_patchwork", 24 ], [ "leather_sheet", 24 ], [ "fur_sheet", 24 ] ],
+      [ [ "leather_patch", 192 ], [ "leather_sheet", 24 ], [ "fur_sheet", 24 ] ],
       [ [ "filament", 120, "LIST" ] ]
     ]
   }

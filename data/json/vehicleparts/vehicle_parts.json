@@ -238,7 +238,7 @@
     },
     "flags": [ "BED", "BOARDABLE", "CARGO", "MOUNTABLE", "NONBELTABLE" ],
     "breaks_into": [
-      { "item": "sheet_cotton", "count": [ 0, 2 ] },
+      { "item": "cotton_sheet", "count": [ 0, 2 ] },
       { "item": "cotton_patch", "count": [ 0, 10 ] },
       { "item": "spring", "count": [ 0, 1 ] },
       { "item": "wire", "count": [ 0, 2 ] },
@@ -371,18 +371,6 @@
     },
     "breaks_into": [ { "item": "splinter", "count": [ 7, 9 ] }, { "item": "nail", "charges": [ 5, 10 ] } ],
     "damage_reduction": { "all": 16 }
-  },
-  {
-    "type": "vehicle_part",
-    "id": "foldable_aisle",
-    "copy-from": "wooden_aisle",
-    "name": { "str": "collapsible wooden aisle" },
-    "looks_like": "t_floor",
-    "description": "A collapsible aisle.",
-    "folded_volume": "12500 ml",
-    "item": "foldwoodframe",
-    "breaks_into": [ { "item": "splinter", "count": [ 7, 11 ] }, { "item": "nail", "charges": [ 5, 10 ] } ],
-    "flags": [ "AISLE", "BOARDABLE", "CARGO" ]
   },
   {
     "type": "vehicle_part",
@@ -607,48 +595,6 @@
     "breaks_into": [ { "item": "black_box" } ],
     "damage_reduction": { "all": 80 },
     "variants": [ { "symbols": ";", "symbols_broken": "*" } ]
-  },
-  {
-    "type": "vehicle_part",
-    "id": "minireactor",
-    "name": { "str": "minireactor" },
-    "categories": [ "energy" ],
-    "color": "light_green",
-    "broken_color": "red",
-    "damage_modifier": 80,
-    "durability": 580,
-    "description": "A small nuclear reactor.  When loaded with plutonium cells and turned on, will generate a lot of electrical power.",
-    "power": "100 W",
-    "//": "Here it is a multiplier on power efficiency - 1 unit of plutonium is 100 units of battery",
-    "epower": "149200 W",
-    "fuel_type": "plut_cell",
-    "item": "minireactor",
-    "location": "fuel_source",
-    "requirements": {
-      "install": {
-        "skills": [ [ "mechanics", 6 ] ],
-        "time": "30 m",
-        "using": [ [ "welding_standard", 5 ], [ "vehicle_bolt_install", 1 ] ]
-      },
-      "removal": {
-        "skills": [ [ "mechanics", 4 ] ],
-        "time": "30 m",
-        "using": [ [ "vehicle_weld_removal", 1 ], [ "vehicle_wrench_2", 1 ] ]
-      },
-      "repair": {
-        "skills": [ [ "mechanics", 7 ] ],
-        "time": "60 m",
-        "using": [ [ "repair_welding_standard", 5 ], [ "repair_welding_alloys", 2 ], [ "vehicle_wrench_2", 1 ], [ "vehicle_screw", 1 ] ]
-      }
-    },
-    "flags": [ "REACTOR" ],
-    "breaks_into": [
-      { "item": "steel_chunk", "count": [ 6, 11 ] },
-      { "item": "steel_fragment", "count": [ 6, 11 ] },
-      { "item": "scrap", "count": [ 6, 11 ] }
-    ],
-    "damage_reduction": { "all": 50 },
-    "variants": [ { "symbols": "O", "symbols_broken": "#" } ]
   },
   {
     "type": "vehicle_part",
@@ -1130,7 +1076,7 @@
       "repair": { "skills": [ [ "mechanics", 7 ] ], "time": "60 m", "using": [ [ "adhesive", 3 ] ] }
     },
     "flags": [ "FLOATS", "BOARDABLE", "NO_COVER" ],
-    "breaks_into": [ { "item": "rigid_kevlar_plate", "count": [ 1, 3 ] } ],
+    "breaks_into": [ { "item": "kevlar_plate", "count": [ 1, 3 ] } ],
     "damage_reduction": { "all": 14 },
     "variants": [ { "symbols": "o", "symbols_broken": "x" } ]
   },
@@ -1631,7 +1577,7 @@
       "repair": { "skills": [ [ "tailor", 1 ] ], "time": "150 s", "using": [ [ "sewing_standard", 50 ], [ "fabric_standard", 1 ] ] }
     },
     "flags": [ "OPENABLE", "OPENCLOSE_INSIDE", "OPAQUE", "CURTAIN", "MULTISQUARE", "NEEDS_WINDOW", "SIMPLE_PART" ],
-    "breaks_into": [ { "item": "sheet_cotton", "count": [ 1, 3 ] }, { "item": "cotton_patch", "count": [ 5, 11 ] } ],
+    "breaks_into": [ { "item": "cotton_sheet", "count": [ 1, 3 ] }, { "item": "cotton_patch", "count": [ 5, 11 ] } ],
     "variants": [ { "symbols": "\"", "symbols_broken": "0" } ]
   },
   {
@@ -1657,7 +1603,7 @@
       "repair": { "skills": [ [ "tailor", 1 ] ], "time": "150 s", "using": [ [ "sewing_standard", 50 ], [ "fabric_standard", 1 ] ] }
     },
     "flags": [ "OPENABLE", "OPAQUE", "OPENCLOSE_INSIDE", "CURTAIN", "MULTISQUARE", "SIMPLE_PART" ],
-    "breaks_into": [ { "item": "sheet_cotton", "count": [ 1, 3 ] }, { "item": "cotton_patch", "count": [ 5, 11 ] } ],
+    "breaks_into": [ { "item": "cotton_sheet", "count": [ 1, 3 ] }, { "item": "cotton_patch", "count": [ 5, 11 ] } ],
     "variants": [ { "symbols": "\"", "symbols_broken": "0" } ]
   },
   {
@@ -2036,7 +1982,6 @@
       "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "30 m", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
     },
     "folded_volume": "250 ml",
-    "flags": [ "NO_COVER" ],
     "breaks_into": "ig_vp_device",
     "copy-from": "recharge_station"
   },
@@ -2498,7 +2443,7 @@
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "6 m", "using": [ [ "adhesive", 2 ] ] }
     },
     "flags": [ "FUNNEL" ],
-    "breaks_into": [ { "item": "leather", "count": [ 1, 2 ] } ],
+    "breaks_into": [ { "item": "leather_patch", "count": [ 1, 2 ] } ],
     "variants": [ { "symbols": "V", "symbols_broken": "*" } ]
   },
   {

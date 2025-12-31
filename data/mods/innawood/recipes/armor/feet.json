@@ -46,6 +46,6 @@
       { "proficiency": "prof_furriery" }
     ],
     "book_learn": [ [ "textbook_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "using": [ [ "tailoring_fur_patchwork_simple", 2 ] ]
+    "using": [ [ "tailoring_fur_simple", 2 ] ]
   }
 ]

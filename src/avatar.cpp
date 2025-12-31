@@ -1505,9 +1505,9 @@ void avatar::update_cardio_acc()
     const int cardio_accum = get_cardio_acc();
     int adjustment = 0;
     if( cardio_accum > cardio_goal ) {
-        adjustment = -std::sqrt( cardio_accum - cardio_goal );
+        adjustment = static_cast<int>( std::round( -std::sqrt( cardio_accum - cardio_goal ) ) );
     } else if( cardio_goal > cardio_accum ) {
-        adjustment = std::sqrt( cardio_goal - cardio_accum );
+        adjustment = static_cast<int>( std::round( std::sqrt( cardio_goal - cardio_accum ) ) );
     }
 
     // Set a large sane upper limit to cardio fitness. This could be done

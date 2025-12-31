@@ -167,7 +167,7 @@
     "components": [ [ [ "meal_chitin_piece", 30 ] ], [ [ "lye", 4 ], [ "lye_potassium", 6 ] ], [ [ "any_strong_acid", 1, "LIST" ] ] ]
   },
   {
-    "result": "scrap_bronze",
+    "result": "bronze_fragment",
     "type": "recipe",
     "activity_level": "ACTIVE_EXERCISE",
     "category": "CC_OTHER",

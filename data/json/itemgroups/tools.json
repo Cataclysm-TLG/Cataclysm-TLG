@@ -781,7 +781,7 @@
     "container-item": "rc_car_box",
     "items": [
       { "item": "radiocontrol" },
-      { "item": "light_minus_battery_cell", "charges": 50, "count": 3 },
+      { "item": "light_battery_cell", "charges": 50, "count": 3 },
       { "item": "radio_car" },
       { "item": "bubblewrap", "count": 2 },
       { "item": "screwdriver" }
@@ -856,7 +856,7 @@
       { "item": "camera_pro", "prob": 1, "charges": [ 0, 150 ] },
       { "item": "camera_pro", "container-item": "camera_bag", "prob": 1, "charges": [ 0, 150 ] },
       [ "element", 5 ],
-      [ "light_battery_cell", 10 ],
+      { "group": "batteries" },
       [ "goggles_welding", 20 ],
       { "item": "sm_extinguisher", "prob": 10, "charges": 10 },
       { "group": "tools_toolbox", "prob": 5 },

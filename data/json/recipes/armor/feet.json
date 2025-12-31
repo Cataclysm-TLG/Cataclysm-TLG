@@ -375,7 +375,7 @@
       [ [ "thread_kevlar", 16 ] ],
       [ [ "sheet_metal_small", 4 ] ],
       [ [ "boots", 1 ], [ "boots_steel", 1 ] ],
-      [ [ "fur", 8 ] ]
+      [ [ "fur_patch", 8 ] ]
     ]
   },
   {
@@ -389,7 +389,7 @@
       [ [ "thread_kevlar", 14 ] ],
       [ [ "sheet_metal_small", 2 ] ],
       [ [ "xs_boots", 1 ] ],
-      [ [ "fur", 6 ] ]
+      [ [ "fur_patch", 6 ] ]
     ]
   },
   {
@@ -418,7 +418,7 @@
       [ [ "thread_kevlar", 16 ] ],
       [ [ "sheet_metal_small", 2 ] ],
       [ [ "boots", 1 ], [ "boots_steel", 1 ] ],
-      [ [ "faux_fur", 8 ] ]
+      [ [ "faux_fur_patch", 8 ] ]
     ]
   },
   {
@@ -432,7 +432,7 @@
       [ [ "thread_kevlar", 14 ] ],
       [ [ "sheet_metal_small", 2 ] ],
       [ [ "xs_boots", 1 ] ],
-      [ [ "faux_fur", 6 ] ]
+      [ [ "faux_fur_patch", 6 ] ]
     ]
   },
   {
@@ -457,7 +457,7 @@
       [ [ "thread_kevlar", 18 ] ],
       [ [ "sheet_metal_small", 2 ] ],
       [ [ "xl_boots", 1 ] ],
-      [ [ "fur", 12 ] ]
+      [ [ "fur_patch", 12 ] ]
     ]
   },
   {
@@ -482,7 +482,7 @@
       [ [ "thread_kevlar", 18 ] ],
       [ [ "sheet_metal_small", 4 ] ],
       [ [ "xl_boots", 1 ] ],
-      [ [ "faux_fur", 12 ] ]
+      [ [ "faux_fur_patch", 12 ] ]
     ]
   },
   {
@@ -595,7 +595,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "fur_sheet_patchwork", 2 ], [ "fur_sheet", 2 ] ] ],
+    "components": [ [ [ "fur_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -607,7 +607,7 @@
     "skill_used": "tailor",
     "time": "1 m 30 s",
     "autolearn": true,
-    "components": [ [ [ "faux_fur_sheet_patchwork", 2 ] ] ],
+    "components": [ [ [ "faux_fur_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -620,7 +620,7 @@
     "time": "1 m 30 s",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "leather_sheet_patchwork", 2 ] ] ],
+    "components": [ [ [ "leather_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -633,7 +633,7 @@
     "time": "1 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "sheet_felt_patchwork", 2 ] ] ],
+    "components": [ [ [ "felt_sheet", 2 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -697,7 +697,7 @@
     "proficiencies": [ { "proficiency": "prof_polymerworking" } ],
     "book_learn": [ [ "textbook_fireman", 6 ], [ "textbook_tailor", 5 ], [ "tailor_portfolio", 5 ] ],
     "using": [ [ "tailoring_nomex_sheet", 7 ] ],
-    "byproducts": [ [ "nomex", 1 ] ]
+    "byproducts": [ [ "nomex_patch", 1 ] ]
   },
   {
     "result": "xsnomex_socks",
@@ -1052,7 +1052,7 @@
       { "proficiency": "prof_polymerworking" }
     ],
     "components": [ [ [ "thread_nomex", 10 ] ], [ [ "chunk_rubber", 10 ] ] ],
-    "byproducts": [ [ "nomex", 3 ] ]
+    "byproducts": [ [ "nomex_patch", 3 ] ]
   },
   {
     "result": "sneakers",

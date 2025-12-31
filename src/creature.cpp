@@ -1671,13 +1671,43 @@ void Creature::longpull( const std::string &name, const tripoint_bub_ms &p )
 
 bool Creature::grapple_drag( Creature *c )
 {
+    if( !has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        return false;
+    }
     const Character *ch = as_character();
     const monster *mon = as_monster();
-    const int str = ch != nullptr ? ch->get_str() : mon != nullptr ? mon->get_grab_strength() : 10;
+    float str = 0.f;
+    if( !is_monster() && ch != nullptr && ch->grab_1.victim != nullptr ) {
+        str = static_cast<float>( ch->grab_1.grab_strength );
+    } else if( mon != nullptr ) {
+        str = static_cast<float>( mon->get_grab_strength() );
+    } else {
+        return false;
+    }
+    // Somehow we lost the grab.  Bail out.
+    if( str < 1.f ) {
+        return false;
+    }
     // Medium is 3.
     int your_size = static_cast<std::underlying_type_t<creature_size>>( get_size() );
-    const int odds = units::to_kilogram( c->get_weight() ) / ( str * your_size );
-    if( one_in( clamp<int>( odds * odds, 1, 1000 ) ) ) {
+    float odds = units::to_kilogram( c->get_weight() ) / ( str * your_size );
+    // Allies will try to move with you if they can, making things easier.
+    // TODO: Make NPCs able to drag the player.
+
+    if( ch && c->is_npc() && ( c->as_npc()->is_walking_with() || c->as_npc()->is_player_ally() ) &&
+        !c->in_sleep_state() ) {
+        int target_movecost = ch->run_cost( 100, false );
+        if( target_movecost < 200 ) {
+            odds *= target_movecost / 200.f;
+        }
+    }
+    if( mon && c->as_monster()->is_pet() ) {
+        odds /= 2.f;
+    }
+    float threshold = ( odds + 0.25f ) * ( odds + 0.25f );
+    threshold = std::clamp( threshold, 1.0f, 1000.0f );
+
+    if( x_in_y( 1.0, threshold ) ) {
         return true;
     } else {
         add_msg_if_player( m_bad, _( "You strain to drag %s." ),
@@ -1687,7 +1717,6 @@ bool Creature::grapple_drag( Creature *c )
         }
         return false;
     }
-    return false;
 }
 
 bool Creature::stumble_invis( const Creature &player, const bool stumblemsg )

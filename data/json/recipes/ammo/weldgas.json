@@ -81,7 +81,7 @@
     "components": [
       [ [ "scrap", 1 ] ],
       [ [ "flour_any", 1, "LIST" ], [ "paper", 3 ] ],
-      [ [ "material_limestone", 1 ], [ "chem_manganese_dioxide", 1 ], [ "light_disposable_cell", 1 ] ],
+      [ [ "material_limestone", 1 ], [ "chem_manganese_dioxide", 1 ], [ "light_battery_cell", 1 ] ],
       [
         [ "rosin", 5 ],
         [ "bone_glue", 1 ],
@@ -199,7 +199,7 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_intro_chemistry" }
     ],
-    "components": [ [ [ "scrap_bronze", 1 ] ], [ [ "detergent", 7 ] ] ]
+    "components": [ [ [ "bronze_fragment", 1 ] ], [ [ "detergent", 7 ] ] ]
   },
   {
     "type": "recipe",

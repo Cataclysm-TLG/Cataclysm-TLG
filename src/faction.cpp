@@ -63,7 +63,7 @@ faction_template::faction_template()
     respects_u = 0;
     trusts_u = 0;
     known_by_u = true;
-    food_supply.calories = 0;
+    _food_supply.clear();
     wealth = 0;
     size = 0;
     power = 0;
@@ -133,13 +133,12 @@ faction_template::faction_template( const JsonObject &jsobj )
     , id( faction_id( jsobj.get_string( "id" ) ) )
     , size( jsobj.get_int( "size" ) )
     , power( jsobj.get_int( "power" ) )
-    , food_supply()
     , wealth( jsobj.get_int( "wealth" ) )
 {
     jsobj.get_member( "description" ).read( desc );
     optional( jsobj, false, "consumes_food", consumes_food, false );
     optional( jsobj, false, "price_rules", price_rules, faction_price_rules_reader {} );
-    jsobj.read( "fac_food_supply", food_supply, true );
+    jsobj.read( "fac_food_supply", _food_supply, true );
     if( jsobj.has_string( "currency" ) ) {
         jsobj.read( "currency", currency, true );
         price_rules.emplace_back( currency, 1, 0 );
@@ -327,10 +326,10 @@ std::string fac_wealth_text( int val, int size )
     return pgettext( "Faction wealth", "Destitute" );
 }
 
-std::string faction::food_supply_text()
+std::string faction::food_supply_text() const
 {
     //Convert to how many days you can support the population
-    int val = food_supply.kcal() / ( size * 288 );
+    int val = food_supply().kcal() / ( size * 288 );
     if( val >= 30 ) {
         return pgettext( "Faction food", "Overflowing" );
     }
@@ -346,9 +345,9 @@ std::string faction::food_supply_text()
     return pgettext( "Faction food", "Depleted" );
 }
 
-nc_color faction::food_supply_color()
+nc_color faction::food_supply_color() const
 {
-    int val = food_supply.kcal() / ( size * 288 );
+    int val = food_supply().kcal() / ( size * 288 );
     if( val >= 30 ) {
         return c_green;
     } else if( val >= 14 ) {
@@ -365,8 +364,8 @@ nc_color faction::food_supply_color()
 std::pair<nc_color, std::string> faction::vitamin_stores( vitamin_type vit_type )
 {
     bool is_toxin = vit_type == vitamin_type::TOXIN;
-    const double days_of_food = food_supply.kcal() / 3000.0;
-    std::map<vitamin_id, int> stored_vits = food_supply.vitamins();
+    const double days_of_food = food_supply().kcal() / 3000.0;
+    std::map<vitamin_id, int> stored_vits = food_supply().vitamins();
     // First, pare down our search to only the relevant type
     for( auto it = stored_vits.cbegin(); it != stored_vits.cend(); ) {
         if( it->first->type() != vit_type ) {
@@ -580,7 +579,7 @@ void basecamp::faction_display( const catacurses::window &fac_w, const int width
     mvwprintz( fac_w, point( width, ++y ), col, _( "Location: %s" ), camp_pos.to_string() );
     faction *yours = player_character.get_faction();
     std::string food_text = string_format( _( "Food Supply: %s (%d kcal)" ),
-                                           yours->food_supply_text(), yours->food_supply.kcal() );
+                                           yours->food_supply_text(), yours->food_supply().kcal() );
     nc_color food_col = yours->food_supply_color();
     mvwprintz( fac_w, point( width, ++y ), food_col, food_text );
     std::pair<nc_color, std::string> vitamins = yours->vitamin_stores( vitamin_type::VITAMIN );
@@ -785,12 +784,19 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
 
     const std::pair <std::string, nc_color> condition = hp_description();
     mvwprintz( fac_w, point( width, ++y ), condition.second, _( "Condition: " ) + condition.first );
-    const std::pair <std::string, nc_color> hunger_pair = display::hunger_text_color( *this );
+    std::pair<std::string, nc_color> hunger_pair = display::weight_text_color( *this );
+    // These display as light gray normally, because this function is primarily for the @ screen.
+    if( hunger_pair.first == _( "Normal" ) ||
+        hunger_pair.first == _( "Overweight" ) ||
+        hunger_pair.first == _( "Underweight" ) ) {
+        hunger_pair.second = c_white;
+    }
     const std::pair <std::string, nc_color> thirst_pair = display::thirst_text_color( *this );
     const std::pair <std::string, nc_color> fatigue_pair = display::fatigue_text_color( *this );
     const std::string nominal = pgettext( "needs", "Nominal" );
+    // TODO: switch this back to hunger once hunger's a thing.
     mvwprintz( fac_w, point( width, ++y ), hunger_pair.second,
-               _( "Hunger: " ) + ( hunger_pair.first.empty() ? nominal : hunger_pair.first ) );
+               _( "Weight: " ) + ( hunger_pair.first.empty() ? nominal : hunger_pair.first ) );
     mvwprintz( fac_w, point( width, ++y ), thirst_pair.second,
                _( "Thirst: " ) + ( thirst_pair.first.empty() ? nominal : thirst_pair.first ) );
     mvwprintz( fac_w, point( width, ++y ), fatigue_pair.second,

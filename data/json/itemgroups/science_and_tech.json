@@ -77,7 +77,6 @@
       { "item": "soldering_iron_portable", "prob": 70, "charges": [ 0, 50 ] },
       [ "solder_wire", 70 ],
       { "item": "geiger_off", "prob": 8, "charges": [ 0, 100 ] },
-      { "item": "rad_monitor", "prob": 2, "charges": [ 0, 50 ] },
       [ "teleporter", 10 ],
       [ "RTG_coffee", 2 ],
       [ "canister_goo", 8 ],

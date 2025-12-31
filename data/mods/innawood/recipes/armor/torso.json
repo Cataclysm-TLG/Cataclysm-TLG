@@ -37,7 +37,7 @@
     "difficulty": 5,
     "time": "10 h",
     "autolearn": true,
-    "byproducts": [ [ "leather", 2 ] ],
+    "byproducts": [ [ "leather_patch", 2 ] ],
     "using": [ [ "tailoring_leather_sheet", 7 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_leatherworking" } ]
   }

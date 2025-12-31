@@ -14,7 +14,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "casting_mold", -1 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "scrap_bronze", 1 ] ] ]
+    "components": [ [ [ "bronze_fragment", 1 ] ] ]
   },
   {
     "type": "recipe",

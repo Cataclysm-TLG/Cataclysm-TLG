@@ -741,7 +741,7 @@
     "autolearn": true,
     "book_learn": [ [ "mag_archery", 1 ], [ "manual_archery", 1 ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 1 ] ], [ [ "bone_glue", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ] ], [ [ "bone_glue", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -1323,7 +1323,7 @@
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" } ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "SEW", "level": 1 } ],
-    "components": [ [ [ "filament", 20, "LIST" ], [ "sling", 1 ] ], [ [ "leather", 3 ], [ "fur", 3 ] ] ]
+    "components": [ [ [ "filament", 20, "LIST" ], [ "sling", 1 ] ], [ [ "leather_patch", 3 ], [ "fur_patch", 3 ] ] ]
   },
   {
     "type": "recipe",

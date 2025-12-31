@@ -246,12 +246,13 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "scrap_bronze", 4 ] ],
+      [ [ "bronze_fragment", 4 ] ],
       [ [ "stick_long", 1 ] ],
-      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather", 2 ], [ "fur", 2 ] ]
+      [ [ "cotton_patch", 2 ], [ "felt_patch", 2 ], [ "leather_patch", 2 ], [ "fur_patch", 2 ] ]
     ]
   },
   {
@@ -269,8 +270,9 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
-    "components": [ [ [ "scrap_bronze", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
+    "using": [ [ "redsmithing_standard", 1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
+    "components": [ [ [ "bronze_fragment", 2 ] ], [ [ "spear_shaft", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -291,7 +293,7 @@
     "using": [ [ "blacksmithing_basic", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -338,7 +340,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "filament", 100, "LIST" ] ], [ [ "long_pole", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -352,7 +354,8 @@
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 1 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 1 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
@@ -375,12 +378,13 @@
     "time": "6 h 30 m",
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" }, { "proficiency": "prof_bladesmith" } ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "components": [
       [ [ "cordage_short", 2, "LIST" ] ],
-      [ [ "scrap_bronze", 2 ] ],
-      [ [ "leather", 1 ], [ "fur", 1 ] ],
+      [ [ "bronze_fragment", 2 ] ],
+      [ [ "leather_patch", 1 ], [ "fur_patch", 1 ] ],
       [ [ "adhesive", 2, "LIST" ] ]
     ]
   },
@@ -419,7 +423,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur", 1 ], [ "leather", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -461,7 +465,7 @@
     "proficiencies": [ { "proficiency": "prof_carving", "skill_penalty": 0 } ],
     "components": [
       [ [ "long_pole", 1 ] ],
-      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
+      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather_patch", 1 ], [ "fur_patch", 1 ] ],
       [ [ "duct_tape", 20 ], [ "filament", 20, "LIST" ] ]
     ]
   },
@@ -476,7 +480,8 @@
     "time": "1 h",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -484,7 +489,7 @@
     ],
     "components": [
       [ [ "long_pole", 1 ] ],
-      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather", 1 ], [ "fur", 1 ] ],
+      [ [ "cotton_patch", 1 ], [ "felt_patch", 1 ], [ "leather_patch", 1 ], [ "fur_patch", 1 ] ],
       [ [ "duct_tape", 20 ], [ "cordage_short", 1, "LIST" ], [ "filament", 50, "LIST" ] ],
       [ [ "copper_scrap_equivalent", 2, "LIST" ] ]
     ]
@@ -530,7 +535,8 @@
     "time": "30 m",
     "reversible": true,
     "book_learn": [ [ "bronze_book", 3 ], [ "bronze_mag", 3 ] ],
-    "using": [ [ "redsmithing_standard", 2 ], [ "metal_casting_small", -1 ] ],
+    "using": [ [ "redsmithing_standard", 2 ] ],
+    "tools": [ [ [ "casting_mold_small", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_redsmithing" },
@@ -628,7 +634,7 @@
     "book_learn": [ [ "manual_knives", 4 ], [ "recipe_melee", 5 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -737,7 +743,7 @@
       { "proficiency": "prof_bladesmith" }
     ],
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
-    "components": [ [ [ "leather", 1 ], [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ], [ "wire", 2 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
@@ -795,7 +801,12 @@
     "using": [ [ "soldering_standard", 10 ], [ "adhesive", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" }, { "proficiency": "prof_shock_weapons" } ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "components": [ [ [ "fencing_foil_sharpened", 1 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ], [ [ "tazer", 1 ] ], [ [ "cable", 10 ] ] ]
+    "components": [
+      [ [ "fencing_foil_sharpened", 1 ] ],
+      [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ],
+      [ [ "tazer", 1 ] ],
+      [ [ "cable", 10 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -812,7 +823,12 @@
     "using": [ [ "soldering_standard", 10 ], [ "adhesive", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" }, { "proficiency": "prof_shock_weapons" } ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
-    "components": [ [ [ "fencing_epee_sharpened", 1 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ], [ [ "tazer", 1 ] ], [ [ "cable", 10 ] ] ]
+    "components": [
+      [ [ "fencing_epee_sharpened", 1 ] ],
+      [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ],
+      [ [ "tazer", 1 ] ],
+      [ [ "cable", 10 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -829,7 +845,12 @@
     "using": [ [ "soldering_standard", 10 ], [ "adhesive", 1 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" }, { "proficiency": "prof_shock_weapons" } ],
-    "components": [ [ [ "fencing_sabre_sharpened", 1 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ], [ [ "tazer", 1 ] ], [ [ "cable", 10 ] ] ]
+    "components": [
+      [ [ "fencing_sabre_sharpened", 1 ] ],
+      [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ],
+      [ [ "tazer", 1 ] ],
+      [ [ "cable", 10 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -863,7 +884,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "result": "knuckle_skewer",

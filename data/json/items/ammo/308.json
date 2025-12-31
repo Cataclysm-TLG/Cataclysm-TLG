@@ -4,7 +4,6 @@
     "type": "AMMO",
     "name": { "str_sp": "7.62x51mm M80" },
     "description": "A 7.62x51mm NATO round with a 147gr FMJ bullet.  It is a powerful rifle cartridge commonly used by hunters and military snipers because of its high accuracy and long range.",
-    "ascii_picture": "308",
     "weight": "18 g",
     "volume": "158 ml",
     "longest_side": "71 mm",
@@ -100,7 +99,6 @@
     "type": "AMMO",
     "name": { "str_sp": "7.62x51mm NATO tracer" },
     "description": "An M62 tracer round.  Traditional practice is to load one of these for every four normal rounds to help keep the weapon they are fired from on target.  They have the potential to ignite flammable surfaces on impact.",
-    "ascii_picture": "762_51_incendiary",
     "extend": { "effects": [ "INCENDIARY" ] }
   },
   {
@@ -109,7 +107,6 @@
     "type": "AMMO",
     "name": { "str_sp": "7.62x51mm NATO M993" },
     "description": "An armor piercing 7.62x51mm round with a 126gr, tungsten carbide core projectile.  It offers significantly better armor penetration than standard ball rounds at the cost of worse wounding potential in soft tissue.",
-    "ascii_picture": "762_51_m993",
     "relative": { "damage": { "damage_type": "bullet", "amount": -3, "armor_penetration": 8 } }
   },
   {

@@ -33,7 +33,7 @@
       [ [ "zipper_long_plastic", 1 ] ],
       [ [ "snapfastener_steel", 5 ] ],
       [ [ "nylon_sheet", 20 ] ],
-      [ [ "sheet_cotton", 4 ] ],
+      [ [ "cotton_sheet", 4 ] ],
       [ [ "nylon_patch", 10 ] ],
       [ [ "cotton_patch", 8 ] ]
     ]
@@ -44,7 +44,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "5 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "sheet_cotton", 3 ] ], [ [ "thread", 10 ] ] ]
+    "components": [ [ [ "cotton_sheet", 3 ] ], [ [ "thread", 10 ] ] ]
   },
   {
     "result": "coat_faux_fur",
@@ -55,10 +55,10 @@
     "time": "15 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patch", 5 ] ],
-      [ [ "faux_fur_sheet_patchwork", 5 ] ],
+      [ [ "cotton_sheet", 5 ] ],
+      [ [ "faux_fur_sheet", 5 ] ],
       [ [ "zipper_long_plastic", 3 ] ],
-      [ [ "faux_fur", 3 ] ]
+      [ [ "faux_fur_patch", 3 ] ]
     ]
   },
   {
@@ -70,10 +70,10 @@
     "time": "14 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patch", 4 ] ],
-      [ [ "faux_fur_sheet_patchwork", 4 ] ],
+      [ [ "cotton_sheet", 4 ] ],
+      [ [ "faux_fur_sheet", 4 ] ],
       [ [ "zipper_long_plastic", 2 ] ],
-      [ [ "faux_fur", 2 ] ]
+      [ [ "faux_fur_patch", 2 ] ]
     ]
   },
   {
@@ -85,10 +85,10 @@
     "time": "20 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [
-      [ [ "sheet_cotton_patch", 5 ] ],
-      [ [ "faux_fur_sheet_patchwork", 5 ] ],
+      [ [ "cotton_sheet", 5 ] ],
+      [ [ "faux_fur_sheet", 5 ] ],
       [ [ "zipper_long_plastic", 4 ] ],
-      [ [ "faux_fur", 4 ] ]
+      [ [ "faux_fur_patch", 4 ] ]
     ]
   },
   {
@@ -99,10 +99,10 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patch", 5 ] ],
-      [ [ "faux_fur_sheet_patchwork", 5 ] ],
+      [ [ "cotton_sheet", 5 ] ],
+      [ [ "faux_fur_sheet", 5 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
-      [ [ "faux_fur", 2 ] ]
+      [ [ "faux_fur_patch", 2 ] ]
     ]
   },
   {
@@ -113,10 +113,10 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patch", 4 ] ],
-      [ [ "faux_fur_sheet_patchwork", 4 ] ],
+      [ [ "cotton_sheet", 4 ] ],
+      [ [ "faux_fur_sheet", 4 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
-      [ [ "faux_fur", 2 ] ]
+      [ [ "faux_fur_patch", 2 ] ]
     ]
   },
   {
@@ -127,10 +127,10 @@
     "difficulty": 2,
     "time": "30 m",
     "components": [
-      [ [ "sheet_cotton_patch", 6 ] ],
-      [ [ "faux_fur_sheet_patchwork", 6 ] ],
+      [ [ "cotton_sheet", 6 ] ],
+      [ [ "faux_fur_sheet", 6 ] ],
       [ [ "zipper_long_plastic", 1 ] ],
-      [ [ "faux_fur", 2 ] ]
+      [ [ "faux_fur_patch", 2 ] ]
     ]
   },
   {
@@ -149,7 +149,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "faux_fur_sheet_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sports_bra",
@@ -158,7 +158,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 2 ] ] ]
+    "components": [ [ [ "spandex_sheet", 2 ] ] ]
   },
   {
     "result": "xssports_bra",
@@ -167,7 +167,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 1 ] ] ]
+    "components": [ [ [ "spandex_sheet", 1 ] ] ]
   },
   {
     "result": "xlsports_bra",
@@ -176,7 +176,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "4 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 2 ] ] ]
+    "components": [ [ [ "spandex_sheet", 2 ] ] ]
   },
   {
     "result": "thermal_shirt",
@@ -185,7 +185,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "2 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 6 ] ] ]
+    "components": [ [ [ "spandex_sheet", 6 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur",
@@ -194,7 +194,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "faux_fur_sheet_patchwork", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet", 6 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur_xs",
@@ -203,7 +203,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "faux_fur_sheet_patchwork", 3 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet", 3 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "sleeveless_longcoat_faux_fur_xl",
@@ -212,7 +212,7 @@
     "skill_used": "tailor",
     "difficulty": 1,
     "time": "20 m",
-    "components": [ [ [ "faux_fur_sheet_patchwork", 8 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
+    "components": [ [ [ "faux_fur_sheet", 8 ] ], [ [ "zipper_long_plastic", 1 ] ] ]
   },
   {
     "result": "under_armor",
@@ -221,7 +221,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 3 ] ] ]
+    "components": [ [ [ "spandex_sheet", 3 ] ] ]
   },
   {
     "result": "unitard",
@@ -230,7 +230,7 @@
     "skill_used": "tailor",
     "difficulty": 2,
     "time": "5 m",
-    "components": [ [ [ "spandex_sheet_patchwork", 9 ] ] ]
+    "components": [ [ [ "spandex_sheet", 9 ] ] ]
   },
   {
     "result": "jacket_light",
@@ -238,7 +238,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "4 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "zipper_long_plastic", 1 ] ], [ [ "sheet_cotton", 5 ] ], [ [ "cotton_patch", 5 ] ] ]
+    "components": [ [ [ "zipper_long_plastic", 1 ] ], [ [ "cotton_sheet", 5 ] ], [ [ "cotton_patch", 5 ] ] ]
   },
   {
     "result": "blazer",
@@ -246,6 +246,6 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "4 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "felt_patch", 38 ] ], [ [ "sheet_felt", 20 ] ], [ [ "button_plastic", 5 ] ] ]
+    "components": [ [ [ "felt_patch", 38 ] ], [ [ "felt_sheet", 20 ] ], [ [ "button_plastic", 5 ] ] ]
   }
 ]

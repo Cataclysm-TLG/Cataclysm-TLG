@@ -167,7 +167,7 @@
       { "id": "tanning_hide", "description": " Hideworking: Tanning Hide" },
       { "id": "tanning_pelt", "description": " Hideworking: Tanning Pelt" },
       { "id": "leather_sheet", "description": " Hideworking: Tanned Hide" },
-      { "id": "leather", "description": " Hideworking: Leather" }
+      { "id": "leather_patch", "description": " Hideworking: Leather" }
     ]
   }
 ]

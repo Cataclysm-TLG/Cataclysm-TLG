@@ -77,7 +77,6 @@
     "material": [ "bone" ],
     "symbol": ";",
     "color": "white",
-    "ammo": [ "thread" ],
     "sub": "sewing_kit",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "thread": 200 } } ],
     "charges_per_use": 1,
@@ -105,7 +104,8 @@
       "cost_scaling": 0.1,
       "move_cost": 1300
     },
-    "flags": [ "ALLOWS_REMOTE_USE" ]
+    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "tool_ammo": [ "thread" ]
   },
   {
     "id": "needle_curved",
@@ -119,7 +119,6 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": [ "thread" ],
     "sub": "sewing_kit",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "thread": 200 } } ],
     "charges_per_use": 1,
@@ -133,7 +132,8 @@
       "cost_scaling": 0.1,
       "move_cost": 1200
     },
-    "flags": [ "ALLOWS_REMOTE_USE" ]
+    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "tool_ammo": [ "thread" ]
   },
   {
     "id": "needle_wood",
@@ -147,7 +147,6 @@
     "material": [ "wood" ],
     "symbol": ";",
     "color": "brown",
-    "ammo": [ "thread" ],
     "sub": "sewing_kit",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "thread": 200 } } ],
     "charges_per_use": 1,
@@ -161,7 +160,8 @@
       "cost_scaling": 0.1,
       "move_cost": 1500
     },
-    "flags": [ "ALLOWS_REMOTE_USE" ]
+    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "tool_ammo": [ "thread" ]
   },
   {
     "id": "needle_steel",
@@ -175,7 +175,6 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": [ "thread" ],
     "sub": "sewing_kit",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "thread": 200 } } ],
     "charges_per_use": 1,
@@ -203,7 +202,8 @@
       "cost_scaling": 0.1,
       "move_cost": 1000
     },
-    "flags": [ "ALLOWS_REMOTE_USE" ]
+    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "tool_ammo": [ "thread" ]
   },
   {
     "id": "sewing_kit",
@@ -312,25 +312,10 @@
     "flags": [ "NO_SALVAGE" ]
   },
   {
-    "id": "tailoring_pattern_set",
-    "type": "GENERIC",
-    "category": "tools",
-    "name": { "str": "tailoring pattern set" },
-    "description": "A large set of tailoring patterns made from paper.  They're useful for making any kind of cloth or leather items from scratch, but are necessary for more advanced projects.",
-    "weight": "1000 g",
-    "volume": "833 ml",
-    "price": "40 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "paper" ],
-    "symbol": ";",
-    "color": "yellow"
-  },
-  {
     "id": "kevlar_shears",
     "type": "TOOL",
     "name": { "str": "Kevlar shears", "str_pl": "pairs of Kevlar shears" },
     "description": "A pair of heavy-duty shears suitable for cutting particularly tough materials, from polyaramid fabrics to tough plastics and thin metals.  The blades feature flat shearing edges and fine serrations.",
-    "ascii_picture": "scissors",
     "weight": "113 g",
     "volume": "145 ml",
     "price": "35 USD",
@@ -360,9 +345,9 @@
     "material": [ "plastic", "steel" ],
     "symbol": ";",
     "color": "light_gray",
-    "ammo": [ "battery" ],
     "use_action": [ { "type": "link_up", "cable_length": 2, "charge_rate": "1800 W" } ],
-    "melee_damage": { "bash": 2 }
+    "melee_damage": { "bash": 2 },
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "tailors_kit",
@@ -377,7 +362,6 @@
     "material": [ "plastic", "steel" ],
     "symbol": ";",
     "color": "red",
-    "ammo": [ "thread" ],
     "sub": "sewing_kit",
     "charges_per_use": 1,
     "qualities": [ [ "SEW", 4 ], [ "SEW_CURVED", 1 ], [ "KNIT", 1 ], [ "LEATHER_AWL", 2 ], [ "CUT", 2 ], [ "FABRIC_CUT", 2 ] ],
@@ -408,6 +392,7 @@
         "move_cost": 800
       }
     ],
-    "flags": [ "ALLOWS_REMOTE_USE" ]
+    "flags": [ "ALLOWS_REMOTE_USE" ],
+    "tool_ammo": [ "thread" ]
   }
 ]

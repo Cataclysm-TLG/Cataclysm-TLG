@@ -90,26 +90,19 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_cell_phone",
-    "entries": [ { "item": "light_plus_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "cell_phone" } ]
+    "entries": [ { "item": "cell_phone", "charges": 150 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_laptop",
-    "entries": [ { "item": "medium_plus_battery_cell", "ammo-item": "battery", "charges": 600, "container-item": "laptop" } ]
+    "entries": [ { "item": "laptop", "charges": 600 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_soldering_iron",
-    "entries": [
-      {
-        "item": "light_plus_battery_cell",
-        "ammo-item": "battery",
-        "charges": 150,
-        "container-item": "soldering_iron_portable"
-      }
-    ]
+    "entries": [ { "item": "soldering_iron_portable", "charges": 150 } ]
   },
   {
     "type": "item_group",
@@ -130,37 +123,37 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_flashlight",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "flashlight" } ]
+    "entries": [ { "item": "flashlight", "charges": 300 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_heavy_flashlight",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "heavy_flashlight" } ]
+    "entries": [ { "item": "heavy_flashlight", "charges": 300 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_mp3",
-    "entries": [ { "item": "light_plus_battery_cell", "ammo-item": "battery", "charges": 150, "container-item": "mp3" } ]
+    "entries": [ { "item": "mp3", "charges": 150 } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_two_way_radio",
-    "entries": [ { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 300, "container-item": "two_way_radio" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_powered_earmuffs",
-    "entries": [ { "item": "light_minus_battery_cell", "ammo-item": "battery", "charges": 50, "container-item": "powered_earmuffs" } ]
+    "entries": [ { "item": "light_battery_cell", "ammo-item": "battery", "charges": 50, "container-item": "powered_earmuffs" } ]
   },
   {
     "type": "item_group",
     "subtype": "collection",
     "id": "charged_tazer",
-    "entries": [ { "item": "medium_disposable_cell", "ammo-item": "battery", "charges": 1200, "container-item": "tazer" } ]
+    "entries": [ { "item": "medium_battery_cell", "ammo-item": "battery", "charges": 1200, "container-item": "tazer" } ]
   },
   {
     "type": "item_group",
@@ -962,7 +955,7 @@
     "name": "Home Mechanic",
     "description": "You've always loved cars, and there's nothing like getting under the hood and fixing it yourself.  You've kept ahold of some handy tools for the job, and at least now you'll never want for parts.",
     "npc_background": "BG_survival_story_WORKER_SELFEMP",
-    "proficiencies": [ "prof_metalworking", "prof_welding_basic", "prof_elec_soldering", "prof_driver" ],
+    "proficiencies": [ "prof_metalworking", "prof_welding_basic", "prof_elec_soldering" ],
     "points": 2,
     "skills": [ { "level": 4, "name": "mechanics" }, { "level": 4, "name": "driving" } ],
     "items": {
@@ -1156,7 +1149,6 @@
     "description": "You were a promising cyclist with a bright career in front of you before this all happened.  Perhaps you'll never get to participate in the grand tours now, but as the saying goes, life is like riding a bicycle: you've got to keep moving.",
     "npc_background": "BG_survival_story_SPORTS",
     "points": 4,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 5, "name": "driving" }, { "level": 3, "name": "dodge" } ],
     "items": {
       "both": {
@@ -3043,7 +3035,6 @@
     "description": "You made a living driving kids to and from school, a career choice you regretted almost every day.  None of the brats were at their normal stops, and the noise of your bus quickly attracted hordes of zombies.  You escaped, but now you've gotten lost.  At least you're getting a break from the hellish screams of children, though you're starting to hear new ones…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "points": 3,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 5, "name": "driving" }, { "level": 1, "name": "speech" } ],
     "vehicle": "schoolbus",
     "items": {
@@ -3092,7 +3083,7 @@
           { "item": "police_belt" },
           { "item": "boots" },
           { "item": "whistle" },
-          { "item": "kevlar" },
+          { "item": "ballistic_vest_concealable" },
           { "item": "baton" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" },
@@ -3135,7 +3126,7 @@
           { "item": "cig" },
           { "item": "elbow_pads" },
           { "item": "slingpack" },
-          { "item": "kevlar" },
+          { "item": "ballistic_vest_concealable" },
           { "item": "balaclava" },
           { "item": "knee_pads" },
           { "item": "beret" },
@@ -3321,12 +3312,7 @@
           { "item": "caff_gum" },
           { "item": "memory_card" },
           { "item": "usb_drive" },
-          {
-            "item": "light_plus_battery_cell",
-            "ammo-item": "battery",
-            "charges": 150,
-            "container-item": "portable_game"
-          },
+          { "item": "portable_game", "charges": 150 },
           { "item": "pants" },
           { "group": "charged_smart_phone" },
           { "group": "charged_laptop" }
@@ -3712,12 +3698,7 @@
           { "item": "mag_animecon" },
           { "item": "cheeseburger" },
           { "group": "charged_smart_phone" },
-          {
-            "item": "light_plus_battery_cell",
-            "ammo-item": "battery",
-            "charges": 150,
-            "container-item": "eink_tablet_pc"
-          },
+          { "item": "eink_tablet_pc", "charges": 150 },
           {
             "item": "light_minus_battery_cell",
             "ammo-item": "battery",
@@ -4802,7 +4783,7 @@
     "description": "You love to skate!  You've probably spent more time on a skateboard than off.  Things have gotten pretty bad, but at least the cops aren't telling you where you can't roll.",
     "npc_background": "BG_survival_story_TEENAGER_TOUGH",
     "points": 1,
-    "proficiencies": [ "prof_driver", "prof_skating" ],
+    "proficiencies": [ "prof_skating" ],
     "skills": [ { "level": 4, "name": "dodge" }, { "level": 3, "name": "driving" }, { "level": 2, "name": "swimming" } ],
     "items": {
       "both": {
@@ -5041,7 +5022,7 @@
           { "item": "wristwatch" },
           { "item": "camera_bag" },
           { "group": "charged_smart_phone" },
-          { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera_pro" },
+          { "item": "camera_pro", "charges": 300 },
           { "item": "pants" }
         ]
       },
@@ -5086,7 +5067,7 @@
     "type": "profession",
     "id": "miner",
     "name": "Miner",
-    "description": "You're a miner, not a minor!  Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
+    "description": "Your canteen is dry, your jackhammer is out of gas, and you're on your last pair of batteries for your mining helmet…",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "points": 1,
     "skills": [ { "level": 2, "name": "mechanics" }, { "level": 2, "name": "swimming" } ],
@@ -5108,7 +5089,7 @@
           { "group": "charged_smart_phone" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "jackhammer", "charges": 0 },
-          { "item": "light_minus_disposable_cell", "charges": 100 },
+          { "item": "light_battery_cell", "charges": 100 },
           { "group": "hat_hard_flashlight" }
         ]
       },
@@ -5196,7 +5177,7 @@
           { "item": "touristmap" },
           { "item": "wristwatch" },
           { "group": "charged_smart_phone" },
-          { "item": "light_disposable_cell", "ammo-item": "battery", "charges": 300, "container-item": "camera" },
+          { "item": "camera", "charges": 300 },
           { "item": "tshirt" },
           { "item": "pants" }
         ]
@@ -5371,7 +5352,6 @@
     "description": "You were living the high life, spending your parents' money without a care in the world.  At one of your usual crazy parties, the guests became hungry for more than drugs and booze, but you still have a chance to use the last symbol of your luxurious life - your sports car - and get far away.",
     "npc_background": "BG_survival_story_ECCENTRIC",
     "points": 2,
-    "proficiencies": [ "prof_driver" ],
     "skills": [ { "level": 3, "name": "driving" }, { "level": 2, "name": "speech" } ],
     "vehicle": "car_sports",
     "items": {
@@ -5500,7 +5480,7 @@
           { "item": "boots_combat" },
           { "item": "wristwatch" },
           { "item": "gloves_tactical" },
-          { "item": "flight_helmet", "ammo-item": "light_plus_battery_cell", "charges": 150 },
+          { "item": "flight_helmet", "ammo-item": "light_battery_cell", "charges": 150 },
           { "item": "mil_flight_suit" },
           { "item": "chestrig" },
           { "group": "loaded_webbing_belt" },

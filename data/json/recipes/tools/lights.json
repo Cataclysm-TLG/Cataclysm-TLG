@@ -11,7 +11,7 @@
     "qualities": [ { "id": "CONTAIN", "level": 1 } ],
     "flags": [ "FULL_MAGAZINE" ],
     "tools": [ [ [ "lighter", 5 ], [ "ref_lighter", 5 ], [ "surface_heat", 2, "LIST" ] ] ],
-    "components": [ [ [ "wax_any", 2, "LIST" ], [ "edible_shortening", 8, "LIST" ] ], [ [ "cordage_short", 1, "LIST" ] ] ]
+    "components": [ [ [ "wax_any", 2, "LIST" ], [ "any_shortening", 24, "LIST" ] ], [ [ "cordage_short", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -217,7 +217,7 @@
       [ [ "flashlight", 1 ] ],
       [
         [ "cotton_patch", 2 ],
-        [ "leather", 2 ],
+        [ "leather_patch", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
         [ "medical_tape", 20 ]
@@ -241,7 +241,7 @@
       [ [ "heavy_flashlight", 1 ] ],
       [
         [ "cotton_patch", 4 ],
-        [ "leather", 4 ],
+        [ "leather_patch", 4 ],
         [ "duct_tape", 20 ],
         [ "medical_tape", 40 ],
         [ "cordage", 1, "LIST" ]
@@ -271,7 +271,7 @@
       [ [ "lens", 1 ], [ "lens_small", 1 ] ],
       [
         [ "cotton_patch", 4 ],
-        [ "leather", 4 ],
+        [ "leather_patch", 4 ],
         [ "duct_tape", 20 ],
         [ "medical_tape", 40 ],
         [ "cordage", 1, "LIST" ]

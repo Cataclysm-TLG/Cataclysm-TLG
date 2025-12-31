@@ -113,7 +113,6 @@
         "description": "Possibly the most popular pistol in existence, the Glock 19 can be summed up as being fundamentally a more compact brother to the full-sized Glock 17 pistol.  Sporting a mainly polymer-based design, the Glock 19 is often derided for its plastic construction which lends the handgun a deceptively flimsy feel.  Even so, the Glock 19 remains both a remarkably reliable firearm and a quite shootable gun in its own right."
       }
     ],
-    "ascii_picture": "glock_19",
     "weight": "600 g",
     "volume": "386 ml",
     "longest_side": "211 mm",
@@ -148,7 +147,6 @@
     "type": "GUN",
     "name": { "str": "H&K MP5A2 SMG" },
     "description": "The Heckler & Koch MP5 is one of the most widely-used submachine guns in the world, and has been adopted by special police forces and militaries alike.  Its high degree of accuracy and low recoil are universally praised.",
-    "ascii_picture": "hk_mp5a2",
     "weight": "2726 g",
     "volume": "3932 ml",
     "longest_side": "682 mm",
@@ -193,7 +191,6 @@
     "type": "GUN",
     "name": { "str": "H&K MP5SD SMG" },
     "description": "The H&K MP5SD offers subsonic performance in almost the same footprint as the H&K MP5, retaining its handiness.  The large suppressor cuts down on muzzle flash greatly, aiding in night operations.  It has also seen some popularity with SWAT teams, as it lowers the risk of fire and explosions in illegal laboratories.  With body armor in more common use, the MP5SD has waned in popularity among special forces due to its decreased terminal performance.",
-    "ascii_picture": "hk_mp5sd",
     "weight": "3230 g",
     "volume": "3499 ml",
     "longest_side": "666 mm",
@@ -208,7 +205,6 @@
     "copy-from": "hk_mp5",
     "name": { "str": "H&K MP5K-PDW SMG" },
     "description": "The Heckler & Koch MP5 is one of the most widely-used submachine guns in the world, and has been adopted by special police forces and militaries alike.  Its high degree of accuracy and low recoil are universally praised.  The MP5K-PDW model features a shorter barrel, a built-in foregrip, and a side folding stock for vehicle or aircraft crew use.",
-    "ascii_picture": "hk_mp5-pdw",
     "weight": "2292 g",
     "volume": "2601 ml",
     "//": "Forward grip's 68g & 119ml deducted",
@@ -570,7 +566,6 @@
         "description": "A more modern version of Beretta's popular 92 series of handguns, the 90-two performs largely the same.  The main difference is a sleeker, almost futuristic-looking design owed in large part to the polymer underbarrel rail cover."
       }
     ],
-    "ascii_picture": "beretta_m9",
     "to_hit": -2,
     "material": [ "steel", "aluminum" ],
     "symbol": "(",
@@ -632,7 +627,6 @@
     "name": { "str": "pipe rifle" },
     "//": "Despite its quality, it IS a small rifle, although not as effective as a genuine pistol carbine.",
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
-    "ascii_picture": "ps_pipe_gun",
     "weight": "2114 g",
     "volume": "1610 ml",
     "longest_side": "100 cm",
@@ -871,7 +865,6 @@
         "description": "Commonly seen tucked away in the holsters of police officers, certain military professionals, and civilian shooters, this is a larger, older, service-oriented version of the popular Glock 19.  Similarly firing the 9x19mm cartridge and using higher capacity magazines, it performs largely the same, but due to the longer magazine well, it can't fit magazines shorter than the standard 17-round ones."
       }
     ],
-    "ascii_picture": "glock_17",
     "weight": "630 g",
     "volume": "427 ml",
     "longest_side": "233 mm",
@@ -913,7 +906,6 @@
         "description": "A selective-fire variation on the Glock 17, originally designed for Austria's EKO Cobra unit.  It has compensator cuts along its barrel to make recoil more manageable."
       }
     ],
-    "ascii_picture": "glock_18c",
     "weight": "620 g",
     "price": "1000 USD",
     "price_postapoc": "25 USD",

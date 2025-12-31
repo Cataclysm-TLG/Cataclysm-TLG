@@ -44,7 +44,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -122,7 +123,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -168,7 +170,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -289,7 +292,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -421,7 +425,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -499,7 +504,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -537,7 +543,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -612,7 +619,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -684,7 +692,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,
@@ -816,7 +825,8 @@
           "and": [
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
-            { "not": { "u_has_flag": "grab_filter" } }
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } }
           ]
         },
         "require_targeting_player": false,

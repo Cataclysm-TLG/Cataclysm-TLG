@@ -159,7 +159,6 @@ std::optional<int> pickaxe( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> play_game( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> portable_game( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> portal( Character *, item *, const tripoint_bub_ms & );
-std::optional<int> radglove( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> radio_mod( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> radio_off( Character *, item *, const tripoint_bub_ms & );
 std::optional<int> radio_on( Character *, item *, const tripoint_bub_ms & );

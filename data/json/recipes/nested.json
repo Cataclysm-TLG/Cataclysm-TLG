@@ -149,23 +149,6 @@
     "difficulty": 3
   },
   {
-    "id": "nested_atomic_battery",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "name": "atomic batteries",
-    "description": "Recipes related to constructing complex atomic battery cells.",
-    "skill_used": "electronics",
-    "nested_category_data": [
-      "light_minus_atomic_battery_cell",
-      "light_atomic_battery_cell",
-      "medium_atomic_battery_cell",
-      "heavy_atomic_battery_cell"
-    ],
-    "difficulty": 6
-  },
-  {
     "id": "nested_standard_battery",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
@@ -174,7 +157,7 @@
     "name": "standard batteries",
     "description": "Recipes related to constructing standard rechargeable batteries.",
     "skill_used": "electronics",
-    "nested_category_data": [ "UPS_OFF", "medium_battery_cell", "medium_plus_battery_cell", "heavy_battery_cell", "heavy_plus_battery_cell" ],
+    "nested_category_data": [ "UPS_OFF", "medium_battery_cell", "heavy_battery_cell", "heavy_plus_battery_cell" ],
     "difficulty": 3
   },
   {
@@ -190,30 +173,6 @@
     "difficulty": 3
   },
   {
-    "id": "nested_dry_battery",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "name": "dry batteries",
-    "description": "Recipes related to constructing basic dry-cell batteries.",
-    "skill_used": "electronics",
-    "nested_category_data": [ "light_dry_cell", "medium_dry_cell", "heavy_dry_cell" ],
-    "difficulty": 3
-  },
-  {
-    "id": "nested_disposable_battery",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "name": "standard disposable batteries",
-    "description": "Recipes related to constructing standard disposable batteries.",
-    "skill_used": "electronics",
-    "nested_category_data": [ "light_minus_disposable_cell", "light_disposable_cell", "medium_disposable_cell", "heavy_disposable_cell" ],
-    "difficulty": 4
-  },
-  {
     "id": "nested_all_battery",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
@@ -224,7 +183,6 @@
     "skill_used": "electronics",
     "nested_category_data": [
       "nested_atomic_battery",
-      "nested_disposable_battery",
       "nested_dry_battery",
       "nested_standard_battery",
       "nested_storage_battery",
@@ -1808,26 +1766,27 @@
     "difficulty": 6
   },
   {
-    "id": "nested_sheet_patchwork",
+    "id": "nested_sheet",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
-    "name": "patchwork fabrics",
-    "description": "Recipes related to sewing together patchwork fabrics.",
+    "name": "fabric sheets",
+    "description": "Recipes related to sewing fabric sheets out of patches",
     "skill_used": "tailor",
     "nested_category_data": [
-      "sheet_cotton_patch",
-      "faux_fur_sheet_patchwork",
-      "fur_sheet_patchwork",
-      "leather_sheet_patchwork",
-      "sheet_felt_patchwork",
-      "neoprene_sheet_patchwork",
-      "nomex_sheet_patchwork",
-      "spandex_sheet_patchwork",
-      "nylon_sheet_patchwork",
-      "denim_sheet_patchwork",
-      "canvas_sheet_patchwork"
+      "cotton_sheet_from_patches",
+      "faux_fur_sheet",
+      "fur_sheet",
+      "leather_sheet",
+      "felt_sheet",
+      "neoprene_sheet",
+      "nomex_sheet",
+      "spandex_sheet",
+      "nylon_sheet",
+      "denim_sheet",
+      "canvas_sheet_from_patches",
+      "kevlar_sheet"
     ],
     "difficulty": 1
   },
@@ -2893,7 +2852,18 @@
     "name": "makeshift ballistic plates",
     "description": "Recipes related to constructing makeshift ESAPI and ESBI plates.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "scrap_esapi_plate", "steel_esapi_plate", "scrap_esbi_plate", "steel_esbi_plate" ],
+    "nested_category_data": [
+      "scrap_esapi_plate",
+      "scrap_esbi_plate",
+      "steel_esapi_plate",
+      "steel_esbi_plate",
+      "wood_esapi_plate",
+      "wood_esbi_plate",
+      "fiberglass_esapi_plate",
+      "fiberglass_esbi_plate",
+      "paper_esapi_plate",
+      "paper_esbi_plate"
+    ],
     "difficulty": 5
   }
 ]

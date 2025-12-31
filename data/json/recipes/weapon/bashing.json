@@ -47,7 +47,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 16, "LIST" ],
-        [ "edible_shortening", 4, "LIST" ],
+        [ "any_shortening", 16, "LIST" ],
         [ "lamp_oil", 400 ],
         [ "motor_oil", 400 ]
       ]
@@ -87,7 +87,7 @@
       [ [ "log", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 20, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
@@ -113,7 +113,7 @@
       [ [ "rock", 1 ] ],
       [
         [ "any_butter_or_oil", 20, "LIST" ],
-        [ "edible_shortening", 5, "LIST" ],
+        [ "any_shortening", 20, "LIST" ],
         [ "lamp_oil", 500 ],
         [ "motor_oil", 500 ]
       ]
@@ -133,7 +133,7 @@
     "qualities": [ { "id": "HAMMER", "level": 1 } ],
     "using": [ [ "sewing_standard", 10 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic", "time_multiplier": 2 } ],
-    "components": [ [ [ "leather", 5 ] ], [ [ "spring", 1 ] ], [ [ "weights", 10, "LIST" ] ] ]
+    "components": [ [ [ "leather_patch", 5 ] ], [ [ "spring", 1 ] ], [ [ "weights", 10, "LIST" ] ] ]
   },
   {
     "type": "recipe",
@@ -239,7 +239,7 @@
       { "proficiency": "prof_carving", "skill_penalty": 0 },
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
     ],
-    "components": [ [ [ "log", 1 ] ], [ [ "scrap", 20 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "log", 1 ] ], [ [ "scrap", 20 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -294,7 +294,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "drift", -1 ] ] ],
-    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather", 2 ], [ "duct_tape", 4 ] ] ]
+    "components": [ [ [ "long_pole", 1 ] ], [ [ "leather_patch", 2 ], [ "duct_tape", 4 ] ] ]
   },
   {
     "type": "recipe",
@@ -393,13 +393,7 @@
     ],
     "components": [
       [ [ "2x4", 1 ] ],
-      [
-        [ "edible_shortening", 4, "LIST" ],
-        [ "cooking_oil", 48 ],
-        [ "cooking_oil2", 48 ],
-        [ "lamp_oil", 500 ],
-        [ "motor_oil", 500 ]
-      ]
+      [ [ "any_shortening", 48, "LIST" ], [ "cooking_oil", 48 ], [ "lamp_oil", 500 ], [ "motor_oil", 500 ] ]
     ]
   },
   {
@@ -582,7 +576,7 @@
     "using": [ [ "sewing_standard", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0.15 } ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 4 ] ], [ [ "scrap", 8 ] ] ]
+    "components": [ [ [ "leather_patch", 4 ] ], [ [ "scrap", 8 ] ] ]
   },
   {
     "result": "xl_cestus",
@@ -591,7 +585,7 @@
     "time": "30 m",
     "using": [ [ "sewing_standard", 5 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 6 ] ], [ [ "scrap", 10 ] ] ]
+    "components": [ [ [ "leather_patch", 6 ] ], [ [ "scrap", 10 ] ] ]
   },
   {
     "result": "xs_cestus",
@@ -600,7 +594,7 @@
     "time": "30 m",
     "using": [ [ "sewing_standard", 5 ] ],
     "qualities": [ { "id": "HAMMER", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "leather", 3 ] ], [ [ "scrap", 6 ] ] ]
+    "components": [ [ [ "leather_patch", 3 ] ], [ [ "scrap", 6 ] ] ]
   },
   {
     "type": "recipe",
@@ -708,14 +702,8 @@
     "//": "Bokken is a single piece of wood, and the stout branch just isn't large enough.",
     "components": [
       [ [ "stick_long", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ],
-      [ [ "fur", 2 ], [ "leather", 2 ] ],
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ],
+      [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ],
       [ [ "duct_tape", 20 ], [ "filament", 20, "LIST" ] ]
     ]
   },
@@ -738,7 +726,7 @@
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "staff_pipe",
@@ -769,9 +757,10 @@
       { "proficiency": "prof_redsmithing" },
       { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
-    "using": [ [ "redsmithing_standard", 3 ], [ "metal_casting", -1 ] ],
+    "using": [ [ "redsmithing_standard", 3 ] ],
+    "tools": [ [ [ "casting_mold", -1 ] ] ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "scrap_bronze", 3 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "bronze_fragment", 3 ] ] ]
   },
   {
     "type": "recipe",
@@ -793,7 +782,7 @@
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "type": "recipe",
@@ -841,13 +830,7 @@
     "//2": "Max experience set because waiting for oil to soak in isn't really teaching you anything.  Remove this when crafting time reduced to only carving time.",
     "components": [
       [ [ "stick_long", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ]
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ]
     ]
   },
   {
@@ -868,13 +851,7 @@
     "//2": "Max experience set because waiting for oil to soak in isn't really teaching you anything.  Remove this when crafting time reduced to only carving time.",
     "components": [
       [ [ "q_staff", 1 ] ],
-      [
-        [ "edible_shortening", 2, "LIST" ],
-        [ "cooking_oil", 16 ],
-        [ "cooking_oil2", 16 ],
-        [ "lamp_oil", 250 ],
-        [ "motor_oil", 250 ]
-      ]
+      [ [ "any_shortening", 16, "LIST" ], [ "cooking_oil", 16 ], [ "lamp_oil", 250 ], [ "motor_oil", 250 ] ]
     ]
   },
   {

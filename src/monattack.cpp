@@ -3097,8 +3097,9 @@ bool mattack::searchlight( monster *z )
                 t = pos;
             }
         }
-
-        here.add_field( t, field_type_id( "fd_spotlight" ), 1 );
+        if( here.concealment( t ) < z->eye_level() ) {
+            here.add_field( t, field_type_id( "fd_spotlight" ), 1 );
+        }
     }
 
     return true;
@@ -3857,7 +3858,7 @@ bool mattack::flesh_tendril( monster *z )
     Creature *target = z->attack_target();
 
     if( target == nullptr || !z->sees( here, *target ) ) {
-        if( one_in( 70 ) ) {
+        if( one_in( 280 ) ) {
             add_msg( _( "The floor trembles underneath your feet." ) );
             z->mod_moves( -to_moves<int>( 2_seconds ) );
             sounds::sound( z->pos_bub(), MAX_VIEW_DISTANCE, sounds::sound_t::alert, _( "a deafening roar!" ),
@@ -3867,7 +3868,8 @@ bool mattack::flesh_tendril( monster *z )
         return false;
     }
 
-    const int distance_to_target = rl_dist( z->pos_abs(), target->pos_abs() );
+    const int distance_to_target = static_cast<int>( std::round( trig_dist_z_adjust( z->pos_bub(),
+                                   target->pos_bub() ) ) );
 
     // the monster summons stuff to fight you
     if( distance_to_target > 3 && one_in( 12 ) ) {
@@ -3886,9 +3888,9 @@ bool mattack::flesh_tendril( monster *z )
     }
 
     if( ( distance_to_target == 2 || distance_to_target == 3 ) && one_in( 4 ) ) {
-        //it pulls you towards itself and then knocks you away
+        // It pulls you towards itself and then knocks you away.
         bool pulled = z->type->special_attacks.at( "ranged_pull" )->call( *z );
-        if( pulled && one_in( 4 ) ) {
+        if( pulled && one_in( 6 ) ) {
             sounds::sound( z->pos_bub(), MAX_VIEW_DISTANCE, sounds::sound_t::alarm, _( "a deafening roar!" ),
                            false, "shout",
                            "roar" );

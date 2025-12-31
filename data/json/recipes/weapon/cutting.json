@@ -16,7 +16,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -30,18 +30,19 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_armschina", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 5 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 5 ] ]
+      [ [ "bronze_fragment", 5 ] ]
     ]
   },
   {
@@ -67,18 +68,19 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 4 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 4 ] ]
+      [ [ "bronze_fragment", 4 ] ]
     ]
   },
   {
@@ -92,18 +94,19 @@
     "time": "3 h",
     "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 5 ], [ "textbook_weapwest", 5 ] ],
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 5 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 5 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 5 ] ]
+      [ [ "bronze_fragment", 5 ] ]
     ]
   },
   {
@@ -117,18 +120,19 @@
     "time": "3 h",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
-    "using": [ [ "redsmithing_standard", 4 ], [ "metal_casting_long", -1 ] ],
+    "using": [ [ "redsmithing_standard", 4 ] ],
+    "tools": [ [ [ "casting_mold_long", -1 ] ] ],
     "components": [
       [
         [ "cotton_patch", 1 ],
         [ "felt_patch", 1 ],
-        [ "leather", 1 ],
-        [ "fur", 1 ],
+        [ "leather_patch", 1 ],
+        [ "fur_patch", 1 ],
         [ "duct_tape", 50 ],
         [ "cordage_short", 2, "LIST" ],
         [ "filament", 100, "LIST" ]
       ],
-      [ [ "scrap_bronze", 4 ] ]
+      [ [ "bronze_fragment", 4 ] ]
     ]
   },
   {
@@ -150,7 +154,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ], [ "drift", -1 ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -347,7 +351,7 @@
     "using": [ [ "blacksmithing_standard", 20 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -381,7 +385,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ], [ [ "wire", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -400,7 +404,7 @@
       { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0.15 }
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
@@ -421,7 +425,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -485,7 +489,7 @@
     "using": [ [ "blacksmithing_basic", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -506,7 +510,7 @@
     "using": [ [ "blacksmithing_basic", 24 ], [ "steel_standard", 6 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur", 1 ], [ "leather", 1 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ], [ [ "fur_patch", 1 ], [ "leather_patch", 1 ] ] ]
   },
   {
     "type": "recipe",
@@ -527,7 +531,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ], [ "drift", -1 ] ] ],
-    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "2x4", 2 ], [ "stick", 4 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -546,7 +550,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -566,7 +570,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -586,7 +590,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -606,7 +610,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -626,7 +630,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -646,7 +650,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -666,7 +670,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -686,7 +690,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 1 ] ], [ [ "wire", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 1 ] ], [ [ "wire", 2 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -706,7 +710,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -726,7 +730,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 20 ], [ "steel_standard", 5 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -785,7 +789,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ], [ "drift", -1 ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -806,7 +810,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -827,7 +831,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur", 2 ], [ "leather", 2 ] ] ]
+    "components": [ [ [ "stick_long", 1 ] ], [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ] ]
   },
   {
     "type": "recipe",
@@ -886,7 +890,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   },
   {
@@ -906,7 +910,7 @@
     ],
     "using": [ [ "blacksmithing_standard", 20 ], [ "steel_standard", 5 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "leather", 2 ] ], [ [ "wire", 4 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ], [ [ "wire", 4 ] ] ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ]
   }
 ]

@@ -789,7 +789,7 @@
     "components": [
       [ [ "pipe", 4 ] ],
       [ [ "spring", 2 ] ],
-      [ [ "leather", 12 ], [ "fur", 12 ], [ "leather_sheet", 3 ], [ "fur_sheet", 3 ] ],
+      [ [ "leather_patch", 12 ], [ "fur_patch", 12 ], [ "leather_sheet", 3 ], [ "fur_sheet", 3 ] ],
       [ [ "pipe_fittings", 4 ] ],
       [ [ "nylon_patch", 8 ] ]
     ]
@@ -837,7 +837,7 @@
     "components": [
       [ [ "pipe", 4 ] ],
       [ [ "spring", 2 ] ],
-      [ [ "leather", 12 ], [ "fur", 12 ], [ "leather_sheet", 3 ], [ "fur_sheet", 3 ] ],
+      [ [ "leather_patch", 12 ], [ "fur_patch", 12 ], [ "leather_sheet", 3 ], [ "fur_sheet", 3 ] ],
       [ [ "pipe_fittings", 4 ] ],
       [ [ "nylon_patch", 8 ] ]
     ]
@@ -915,13 +915,7 @@
     "components": [
       [ [ "antenna", 1 ] ],
       [ [ "pilot_light", 1 ] ],
-      [
-        [ "light_minus_battery_cell", 1 ],
-        [ "light_minus_disposable_cell", 1 ],
-        [ "light_battery_cell", 1 ],
-        [ "light_disposable_cell", 1 ],
-        [ "light_plus_battery_cell", 1 ]
-      ],
+      [ [ "light_minus_battery_cell", 1 ], [ "light_minus_disposable_cell", 1 ], [ "light_battery_cell", 1 ] ],
       [ [ "amplifier", 1 ] ],
       [ [ "cable", 2 ] ]
     ]

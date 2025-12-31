@@ -157,6 +157,8 @@ static const json_character_flag json_flag_NO_PSIONICS( "NO_PSIONICS" );
 static const json_character_flag json_flag_NO_SPELLCASTING( "NO_SPELLCASTING" );
 static const json_character_flag json_flag_SUBTLE_SPELL( "SUBTLE_SPELL" );
 
+static const limb_score_id limb_score_grip( "grip" );
+
 static const material_id material_glass( "glass" );
 
 static const quality_id qual_CUT( "CUT" );
@@ -688,9 +690,14 @@ static void grab()
             add_msg( _( "You can't grab %s." ), creatures.creature_at( grabp )->disp_name() );
             return;
         }
+        // Bound grip's effect to >=50% as grappling isn't just about hands.
+        // TODO: Mutations and MA should increase grapple_grip.
+        float grapple_grip = std::max( 0.5f, you.get_limb_score( limb_score_grip ) );
         // Max grab strength is 100, so cap it.
         int grab_strength = std::min( 100,
-                                      1 + you.get_arm_str() + static_cast<int>( you.get_skill_level( skill_unarmed ) ) );
+                                      1 + static_cast<int>( std::round( ( grapple_grip * ( you.get_arm_str() + static_cast<int>
+                                              ( you.get_skill_level( skill_unarmed ) + you.get_skill_level( skill_melee ) +
+                                                you.enum_size() ) ) ) ) ) );
         Creature *rawcreature = creatures.creature_at( grabp );
         std::shared_ptr<Creature> victimptr( rawcreature, []( Creature * ) {} );
 

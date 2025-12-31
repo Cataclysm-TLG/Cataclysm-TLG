@@ -137,6 +137,7 @@ static const addiction_id addiction_nicotine( "nicotine" );
 static const ammotype ammo_battery( "battery" );
 
 static const bionic_id bio_shock( "bio_shock" );
+static const bionic_id bio_synlungs( "bio_synlungs" );
 static const bionic_id bio_tools( "bio_tools" );
 
 static const construction_str_id construction_constr_clear_rubble( "constr_clear_rubble" );
@@ -249,10 +250,6 @@ static const furn_str_id furn_f_translocator_buoy( "f_translocator_buoy" );
 static const harvest_drop_type_id harvest_drop_blood( "blood" );
 
 static const itype_id itype_advanced_ecig( "advanced_ecig" );
-static const itype_id itype_afs_atomic_smartphone( "afs_atomic_smartphone" );
-static const itype_id itype_afs_atomic_smartphone_music( "afs_atomic_smartphone_music" );
-static const itype_id itype_afs_atomic_wraitheon_music( "afs_atomic_wraitheon_music" );
-static const itype_id itype_afs_wraitheon_smartphone( "afs_wraitheon_smartphone" );
 static const itype_id itype_apparatus( "apparatus" );
 static const itype_id itype_arcade_machine( "arcade_machine" );
 static const itype_id itype_atomic_coffeepot( "atomic_coffeepot" );
@@ -3503,7 +3500,7 @@ std::optional<int> iuse::c4( Character *p, item *it, const tripoint_bub_ms & )
     int time = 0;
     bool got_value = false;
     if( p->is_avatar() ) {
-        got_value = query_int( time, _( "Set the timer to how many seconds (0 to cancel)?" ) );
+        got_value = query_int( time, false, _( "Set the timer to how many seconds (0 to cancel)?" ) );
         if( !got_value || time <= 0 ) {
             p->add_msg_if_player( _( "Never mind." ) );
             return std::nullopt;
@@ -3647,7 +3644,7 @@ std::optional<int> iuse::firecracker( Character *p, item *it, const tripoint_bub
 std::optional<int> iuse::mininuke( Character *p, item *it, const tripoint_bub_ms & )
 {
     int time;
-    bool got_value = query_int( time, _( "Set the timer to ___ turns (0 to cancel)?" ) );
+    bool got_value = query_int( time, false, _( "Set the timer to ___ turns (0 to cancel)?" ) );
     if( !got_value || time <= 0 ) {
         p->add_msg_if_player( _( "Never mind." ) );
         return std::nullopt;
@@ -3848,9 +3845,7 @@ std::optional<int> iuse::mp3( Character *p, item *it, const tripoint_bub_ms & )
     // TODO: avoid item id hardcoding to make this function usable for pure json-defined devices.
     if( !it->ammo_sufficient( p ) ) {
         p->add_msg_if_player( m_info, _( "The device's batteries are dead." ) );
-    } else if( p->has_active_item( itype_mp3_on ) || p->has_active_item( itype_smartphone_music ) ||
-               p->has_active_item( itype_afs_atomic_smartphone_music ) ||
-               p->has_active_item( itype_afs_atomic_wraitheon_music ) ) {
+    } else if( p->has_active_item( itype_mp3_on ) || p->has_active_item( itype_smartphone_music ) ) {
         p->add_msg_if_player( m_info, _( "You are already listening to music!" ) );
     } else {
         p->add_msg_if_player( m_info, _( "You put in the earbuds and start listening to music." ) );
@@ -3858,10 +3853,6 @@ std::optional<int> iuse::mp3( Character *p, item *it, const tripoint_bub_ms & )
             it->convert( itype_mp3_on, p ).active = true;
         } else if( it->typeId() == itype_smart_phone ) {
             it->convert( itype_smartphone_music, p ).active = true;
-        } else if( it->typeId() == itype_afs_atomic_smartphone ) {
-            it->convert( itype_afs_atomic_smartphone_music, p ).active = true;
-        } else if( it->typeId() == itype_afs_wraitheon_smartphone ) {
-            it->convert( itype_afs_atomic_wraitheon_music, p ).active = true;
         }
         p->mod_moves( -200 );
     }
@@ -3964,12 +3955,6 @@ std::optional<int> iuse::mp3_deactivate( Character *p, item *it, const tripoint_
     } else if( it->typeId() == itype_smartphone_music ) {
         p->add_msg_if_player( _( "The phone turns off." ) );
         it->convert( itype_smart_phone, p ).active = false;
-    } else if( it->typeId() == itype_afs_atomic_smartphone_music ) {
-        p->add_msg_if_player( _( "The phone turns off." ) );
-        it->convert( itype_afs_atomic_smartphone, p ).active = false;
-    } else if( it->typeId() == itype_afs_atomic_wraitheon_music ) {
-        p->add_msg_if_player( _( "The phone turns off." ) );
-        it->convert( itype_afs_wraitheon_smartphone, p ).active = false;
     }
     p->mod_moves( -200 );
     music::deactivate_music_id( music::music_id::mp3 );
@@ -4315,7 +4300,25 @@ std::optional<int> iuse::fitness_check( Character *p, item *it, const tripoint_b
         p->add_msg_if_player( m_info, _( "You don't know what you're looking at." ) );
         return std::nullopt;
     } else {
-        //What else should block using f-band?
+        // These devices aren't totally precise, but if we just apply random noise every use,
+        // the player could spam the thing and get an idea of the midpoint. So we update the RNG
+        // every in-game hour to keep 'em guessing.
+        time_duration since_start = calendar::turn - calendar::start_of_game;
+        int game_minutes = to_minutes<int>( since_start );
+        int time_slice_hourly = game_minutes / 60;
+        size_t hash_val_hourly = std::hash<int> {}( time_slice_hourly );
+        float normalized_hourly = ( hash_val_hourly % 1000 ) / 1000.0f;
+        // Map to noise factor range [0.85, 1.15].
+        float hourly_noise_factor = 0.85f + 0.3f * normalized_hourly;
+
+        // kcal burned's noise factor gets updated daily instead of hourly.
+        int game_days = to_days<int>( since_start );
+        int time_slice_daily = game_days;
+        size_t hash_val_daily = std::hash<int> {}( time_slice_daily );
+        float normalized_daily = ( hash_val_daily % 1000 ) / 1000.0f; // 0.0 to ~0.999
+        // Map to noise factor range [0.85, 1.15].
+        float daily_noise_factor = 0.85f + 0.3f * normalized_daily;
+
         std::string msg;
         msg.append( "***  " );
         msg.append( string_format( _( "You check your health metrics on your %s." ), it->tname( 1,
@@ -4323,12 +4326,14 @@ std::optional<int> iuse::fitness_check( Character *p, item *it, const tripoint_b
         msg.append( "  ***\n\n" );
         const int bpm = p->heartrate_bpm();
         msg.append( "-> " );
-        msg.append( string_format( _( "Your heart rate is %i bpm." ), bpm ) );
+        msg.append( string_format( _( "Heart rate: %i BPM." ), bpm ) );
         if( bpm > 179 ) {
             msg.append( "\n" );
             msg.append( "-> " );
-            msg.append( _( "WARNING!  Slow down!  Your pulse is getting too high, champion!" ) );
+            msg.append( _( "WARNING!  Slow down!  Your pulse is getting too high!" ) );
         }
+
+        // Exercise.
         const std::string exercise = p->activity_level_str();
         msg.append( "\n" );
         msg.append( "-> " );
@@ -4343,17 +4348,80 @@ std::optional<int> iuse::fitness_check( Character *p, item *it, const tripoint_b
         } else {
             msg.append( _( "You are too active!  Avoid overexertion for your safety and health." ) );
         }
+
+        // kcal consumed.
+        // todo: Have intelligence and maybe traits play a role in this so we don't have perfect information.
         msg.append( "\n" );
         msg.append( "-> " );
-        msg.append( string_format( _( "You consumed %d kcal today and %d kcal yesterday." ),
+        msg.append( string_format( _( "You consumed an estimated %d kcal today and %d kcal yesterday." ),
                                    p->as_avatar()->get_daily_ingested_kcal( false ),
                                    p->as_avatar()->get_daily_ingested_kcal( true ) ) );
         msg.append( "\n" );
         msg.append( "-> " );
-        msg.append( string_format( _( "You burned %d kcal today and %d kcal yesterday." ),
-                                   p->as_avatar()->get_daily_spent_kcal( false ),
-                                   p->as_avatar()->get_daily_spent_kcal( true ) ) );
-        //TODO add whatever else makes sense (steps, sleep quality, health level approximation?)
+
+        // kcal burned.
+        std::string kcals_burned_yesterday;
+        std::string kcals_burned_today;
+        int kcals_burned_today_estimate = static_cast<int>( std::round(
+                                              p->as_avatar()->get_daily_spent_kcal( false ) * daily_noise_factor ) );
+        int kcals_burned_yesterday_estimate = p->as_avatar()->get_daily_spent_kcal( true );
+        if( kcals_burned_yesterday_estimate <= 0 ) {
+            // 0 is only possible on a brand new character, so multiply bmr by 1.25 to fudge it.
+            kcals_burned_yesterday_estimate = static_cast<int>( p->base_bmr() * 1.25f );
+        }
+        kcals_burned_yesterday_estimate = static_cast<int>( std::round( kcals_burned_yesterday_estimate *
+                                          daily_noise_factor ) );
+        msg.append( string_format( _( "You burned an estimated %d kcal today and %d kcal yesterday." ),
+                                   kcals_burned_today_estimate, kcals_burned_yesterday_estimate ) );
+        msg.append( "\n" );
+        msg.append( "-> " );
+
+        // Sleep deprivation.
+        std::string sleep_deprivation_level;
+        int sleep_deprivation_estimate = static_cast<int>( std::round( p->get_sleep_deprivation() *
+                                         hourly_noise_factor ) );
+
+        if( sleep_deprivation_estimate < SLEEP_DEPRIVATION_HARMLESS ) {
+            sleep_deprivation_level = _( "Excellent." );
+        } else if( sleep_deprivation_estimate < SLEEP_DEPRIVATION_MINOR ) {
+            sleep_deprivation_level = _( "Fair." );
+        } else if( sleep_deprivation_estimate < SLEEP_DEPRIVATION_SERIOUS ) {
+            sleep_deprivation_level = _( "Poor." );
+        } else if( sleep_deprivation_estimate < SLEEP_DEPRIVATION_MAJOR ) {
+            sleep_deprivation_level = _( "Very Poor." );
+        } else {
+            sleep_deprivation_level = _( "Terrible." );
+        }
+        msg.append( string_format( _( "Estimated sleep quality: %s" ),
+                                   sleep_deprivation_level ) );
+        msg.append( "\n" );
+        msg.append( "-> " );
+
+        // Cardio fitness.
+        const int cardio = static_cast<int>( std::round( p->get_cardiofit() * hourly_noise_factor ) );
+        const int base = p->get_cardio_acc_base();
+
+        std::string cardio_level;
+        if( cardio < base * 0.9 ) {
+            cardio_level = _( "Very poor" );
+        } else if( cardio < base * 1.1 ) {
+            cardio_level = _( "Below average" );
+        } else if( cardio < base * 1.5 ) {
+            cardio_level = _( "Average" );
+        } else if( cardio < base * 2.2 ) {
+            cardio_level = _( "Good" );
+        } else if( cardio <= base * 3.0 ) {
+            cardio_level = _( "Excellent" );
+        } else {
+            cardio_level = _( "Elite" );
+        }
+        msg.append( string_format(
+                        _( "Estimated overall cardio fitness: %s." ),
+                        cardio_level ) );
+        if( p->has_active_bionic( bio_synlungs ) ) {
+            msg.append( "\n-> " );
+            msg.append( _( "Performance enhanced by synthetic respiratory support." ) );
+        }
         p->add_msg_if_player( m_neutral, msg );
         popup( msg );
     }
@@ -5002,7 +5070,7 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
             !critter->dodge_check( hit_roll ) ) {
             blind = true;
             if( critter->in_species( species_ROBOT ) ) {
-                critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
+                critter->add_effect( effect_blind, rng( 5_seconds, 10_seconds ) );
             } else {
                 critter->add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
             }
@@ -5301,34 +5369,6 @@ std::optional<int> iuse::stimpack( Character *p, item *it, const tripoint_bub_ms
     return 1;
 }
 
-std::optional<int> iuse::radglove( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( p->get_item_position( it ) >= -1 ) {
-        p->add_msg_if_player( m_info,
-                              _( "You must wear the radiation biomonitor before you can activate it." ) );
-        return std::nullopt;
-    } else if( !it->ammo_sufficient( p ) ) {
-        p->add_msg_if_player( m_info, _( "The radiation biomonitor needs batteries to function." ) );
-        return std::nullopt;
-    } else {
-        p->add_msg_if_player( _( "You activate your radiation biomonitor." ) );
-        if( p->get_rad() >= 1 ) {
-            p->add_msg_if_player( m_warning, _( "You are currently irradiated." ) );
-            p->add_msg_player_or_say( m_info,
-                                      _( "Your radiation level: %d mSv." ),
-                                      _( "It says here that my radiation level is %d mSv." ),
-                                      p->get_rad() );
-        } else {
-            p->add_msg_player_or_say( m_info,
-                                      _( "You aren't currently irradiated." ),
-                                      _( "It says I'm not irradiated." ) );
-        }
-        p->add_msg_if_player( _( "Have a nice day!" ) );
-    }
-
-    return 1;
-}
-
 std::optional<int> iuse::talking_doll( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( !it->ammo_sufficient( p ) ) {
@@ -5400,10 +5440,14 @@ std::optional<int> gun_repair( Character *p, item *it )
     sounds::sound( p->pos_bub(), 8, sounds::sound_t::activity, "crunch", true, "tool", "repair_kit" );
     p->mod_moves( -to_moves<int>( 300_seconds ) );
     // TODO: Move this to a proper activity with a proper failure/damage chance.
-    if( p->get_skill_level( skill_traps ) + p->dex_cur + p->per_cur + rng( 0,
+    skill_id repair_skill = skill_traps;
+    if( it->has_flag( flag_USE_UPS ) ) {
+        repair_skill = skill_electronics;
+    }
+    if( p->get_skill_level( repair_skill ) + p->dex_cur + p->per_cur + rng( 0,
             10 ) - it->damage_level() > 24 ) {
         it->mod_damage( -itype::damage_scale );
-        p->practice( skill_traps, 4 );
+        p->practice( repair_skill, 4 );
         const std::string msg = it->damage_level() == 0
                                 ? _( "You repair your %s completely!  ( %s-> %s)" )
                                 : _( "You repair your %s!  ( %s-> %s)" );
@@ -5474,6 +5518,11 @@ std::optional<int> iuse::toolmod_attach( Character *p, item *it, const tripoint_
 
         // can't mod non-tool, or a tool with existing mods, or a battery currently installed
         if( !e.is_tool() || !e.toolmods().empty() || e.magazine_current() ) {
+            return false;
+        }
+
+        // can't mod integrated tools
+        if( e.has_flag( flag_INTEGRATED ) ) {
             return false;
         }
 

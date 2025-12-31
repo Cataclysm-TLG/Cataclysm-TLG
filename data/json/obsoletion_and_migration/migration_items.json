@@ -2966,12 +2966,12 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_lard",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "demihuman_flesh",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -2981,7 +2981,7 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_cooked",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -2996,17 +2996,17 @@
   {
     "type": "MIGRATION",
     "id": "demihuman_stomach",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "small_demihuman_stomach",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
     "id": "demihuman_fat",
-    "replace": "lard"
+    "replace": "tallow"
   },
   {
     "type": "MIGRATION",
@@ -3331,7 +3331,7 @@
   {
     "type": "MIGRATION",
     "id": "sheet_lycra_patchwork",
-    "replace": "spandex_sheet_patchwork"
+    "replace": "spandex_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3341,17 +3341,17 @@
   {
     "type": "MIGRATION",
     "id": "sheet_denim_patchwork",
-    "replace": "denim_sheet_patchwork"
+    "replace": "denim_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_leather_patchwork",
-    "replace": "leather_sheet_patchwork"
+    "replace": "leather_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_fur_patchwork",
-    "replace": "fur_sheet_patchwork"
+    "replace": "fur_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3361,12 +3361,12 @@
   {
     "type": "MIGRATION",
     "id": "sheet_faux_fur_patchwork",
-    "replace": "faux_fur_sheet_patchwork"
+    "replace": "faux_fur_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_canvas_patchwork",
-    "replace": "canvas_sheet_patchwork"
+    "replace": "canvas_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3391,17 +3391,17 @@
   {
     "type": "MIGRATION",
     "id": "sheet_nomex_patchwork",
-    "replace": "nomex_sheet_patchwork"
+    "replace": "nomex_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_neoprene_patchwork",
-    "replace": "neoprene_sheet_patchwork"
+    "replace": "neoprene_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_nylon_patchwork",
-    "replace": "nylon_sheet_patchwork"
+    "replace": "nylon_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3411,12 +3411,22 @@
   {
     "type": "MIGRATION",
     "id": "sheet_kevlar_patchwork",
-    "replace": "kevlar_sheet_patchwork"
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_kevlar",
+    "replace": "kevlar_sheet"
   },
   {
     "type": "MIGRATION",
     "id": "sheet_cotton_patchwork",
-    "replace": "cotton_sheet_patchwork"
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_cotton",
+    "replace": "cotton_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3431,7 +3441,7 @@
   {
     "type": "MIGRATION",
     "id": "lycra_sheet_patchwork",
-    "replace": "spandex_sheet_patchwork"
+    "replace": "spandex_sheet"
   },
   {
     "type": "MIGRATION",
@@ -3441,6 +3451,231 @@
   {
     "type": "MIGRATION",
     "id": "sheet_cotton_patch",
-    "replace": "cotton_sheet_patchwork"
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_lampoil",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_fuel_cell_gasoline",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_ethanol",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_ethanol",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_fuel_cell_gasoline",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_lampoil",
+    "to": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_ethanol_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_oil_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "internal_gasoline_tank",
+    "replace": "wristwatch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cotton_sheet_patchwork",
+    "replace": "cotton_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "felt_sheet_patchwork",
+    "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex_sheet_patchwork",
+    "replace": "nomex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "spandex_sheet_patchwork",
+    "replace": "spandex_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar_sheet_patchwork",
+    "replace": "kevlar_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nylon_sheet_patchwork",
+    "replace": "nylon_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather_sheet_patchwork",
+    "replace": "leather_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur_sheet_patchwork",
+    "replace": "fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur_sheet_patchwork",
+    "replace": "faux_fur_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "canvas_sheet_patchwork",
+    "replace": "canvas_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "denim_sheet_patchwork",
+    "replace": "denim_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "leather",
+    "replace": "leather_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "fur",
+    "replace": "fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "nomex",
+    "replace": "nomex_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "neoprene",
+    "replace": "neoprene_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "faux_fur",
+    "replace": "faux_fur_patch"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "kevlar",
+    "replace": "ballistic_vest_concealable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rigid_kevlar_plate",
+    "replace": "kevlar_plate"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "sheet_felt",
+    "replace": "felt_sheet"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scrap_bronze",
+    "replace": "bronze_fragment"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "lard",
+    "replace": "tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_lard",
+    "replace": "mutant_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "mutant_human_lard",
+    "replace": "mutant_human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "human_lard",
+    "replace": "human_tallow"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "cooking_oil2",
+    "replace": "cooking_oil"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_fridge",
+    "to": "ap_apartment_fridge"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "ap_freezer",
+    "to": "ap_chest_freezer"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "car_light_plus_battery_cell",
+    "to": "battery_car"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "car_medium_plus_battery_cell",
+    "to": "battery_car"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_plus_battery_cell",
+    "replace": "light_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "light_disposable_cell",
+    "replace": "light_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wearable_big_light",
+    "replace": "wearable_light"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wearable_big_light_on",
+    "replace": "wearable_light_on"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "foldable_aisle",
+    "to": "wooden_aisle"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "minireactor",
+    "to": "minifridge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rad_monitor",
+    "replace": "wristwatch"
   }
 ]

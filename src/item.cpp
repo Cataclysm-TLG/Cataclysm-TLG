@@ -20,7 +20,6 @@
 
 #include "activity_handlers.h"
 #include "ammo.h"
-#include "ascii_art.h"
 #include "avatar.h"
 #include "bionics.h"
 #include "bodygraph.h"
@@ -658,7 +657,7 @@ item &item::convert( const itype_id &new_type, Character *carrier )
         }
     }
     temp.update_modified_pockets();
-    temp.contents.combine( contents, true );
+    temp.contents.combine( *this, contents, true );
     contents = temp.contents;
     current_phase = new_type->phase;
     if( count_by_charges() != new_type->count_by_charges() ) {
@@ -5847,28 +5846,6 @@ void item::final_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     }
 }
 
-void item::ascii_art_info( std::vector<iteminfo> &info, const iteminfo_query * /* parts */,
-                           int  /* batch */,
-                           bool /* debug */ ) const
-{
-    if( is_null() ) {
-        return;
-    }
-
-    if( get_option<bool>( "ENABLE_ASCII_ART" ) ) {
-        ascii_art_id art = type->picture_id;
-        if( has_itype_variant() && itype_variant().art.is_valid() ) {
-            art = itype_variant().art;
-        }
-        if( art.is_valid() ) {
-            insert_separation_line( info );
-            for( const std::string &line : art->picture ) {
-                info.emplace_back( "DESCRIPTION", line );
-            }
-        }
-    }
-}
-
 std::string item::crafting_applications() const
 {
     Character &you = get_player_character();
@@ -6022,7 +5999,6 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
         } else if( blockname == "footer" ) {
 
             final_info( info, parts, batch, debug );
-            ascii_art_info( info, parts, batch, debug );
 
         } else {
 
@@ -11072,14 +11048,28 @@ int item::ammo_remaining( ) const
     return ammo_remaining( nullptr );
 }
 
+bool item::uses_energy() const
+{
+    if( is_vehicle_battery() ) {
+        return true;
+    }
+    const item *mag = magazine_current();
+    if( mag && mag->uses_energy() ) {
+        return true;
+    }
+    return has_flag( flag_USES_BIONIC_POWER ) ||
+           has_flag( flag_USE_UPS ) ||
+           ( is_magazine() && ammo_capacity( ammo_battery ) > 0 );
+}
+
 units::energy item::energy_remaining( const Character *carrier ) const
 {
-    units::energy ret = 0_kJ;
+    return energy_remaining( carrier, false );
+}
 
-    // Future energy based batteries
-    if( is_vehicle_battery() ) {
-        ret += energy;
-    }
+units::energy item::energy_remaining( const Character *carrier, bool ignoreExternalSources ) const
+{
+    units::energy ret = 0_kJ;
 
     // Magazine in the item
     const item *mag = magazine_current();
@@ -11087,18 +11077,27 @@ units::energy item::energy_remaining( const Character *carrier ) const
         ret += mag->energy_remaining( carrier );
     }
 
-    // Power from bionic
-    if( carrier != nullptr && has_flag( flag_USES_BIONIC_POWER ) ) {
-        ret += carrier->get_power_level();
-    }
+    if( !ignoreExternalSources ) {
 
-    // Extra power from UPS
-    if( carrier != nullptr && has_flag( flag_USE_UPS ) ) {
-        ret += carrier->available_ups();
-    }
+        // Future energy based batteries
+        if( is_vehicle_battery() ) {
+            ret += energy;
+        }
+
+        // Power from bionic
+        if( carrier != nullptr && has_flag( flag_USES_BIONIC_POWER ) ) {
+            ret += carrier->get_power_level();
+        }
+
+        // Extra power from UPS
+        if( carrier != nullptr && has_flag( flag_USE_UPS ) ) {
+            ret += carrier->available_ups();
+        }
+    };
 
     // Battery(ammo) contained within
     if( is_magazine() ) {
+        ret += energy;
         for( const item *e : contents.all_items_top( pocket_type::MAGAZINE ) ) {
             if( e->typeId() == itype_battery ) {
                 ret += units::from_kilojoule( static_cast<std::int64_t>( e->charges ) );
@@ -11314,8 +11313,22 @@ units::energy item::energy_consume( units::energy qty, map *here, const tripoint
     if( is_battery() || fuel_efficiency >= 0 ) {
         int consumed_kj = contents.ammo_consume( units::to_kilojoule( qty ), here, pos, fuel_efficiency );
         qty -= units::from_kilojoule( static_cast<std::int64_t>( consumed_kj ) );
-        // fix negative quantity
-        if( qty < 0_J ) {
+        // Either we're out of juice or truncating the value above means we didn't drain quite enough.
+        // In the latter case at least this will bump up energy enough to satisfy the remainder,
+        // if not it will drain the item all the way.
+        // TODO: reconsider what happens with fuel burning, right now this stashes
+        // the remainder of energy from burning the fuel in the item in question,
+        // which potentially allows it to burn less fuel next time.
+        // Do we want an implicit 1kJ battery in the generator to smooth things out?
+        if( qty > energy ) {
+            int64_t residual_drain = contents.ammo_consume( 1, pos, fuel_efficiency );
+            energy += units::from_kilojoule( residual_drain );
+        }
+        if( qty > energy ) {
+            qty -= energy;
+            energy = 0_J;
+        } else {
+            energy -= qty;
             qty = 0_J;
         }
     }
@@ -11335,13 +11348,6 @@ units::energy item::energy_consume( units::energy qty, map *here, const tripoint
         units::energy bio_used = std::min( carrier->get_power_level(), qty );
         carrier->mod_power_level( -bio_used );
         qty -= bio_used;
-    }
-
-    // If consumption is not integer kJ we need to consume one extra battery charge to "round up".
-    // Should happen only if battery powered and energy per shot is not integer kJ.
-    if( qty > 0_kJ && is_battery() ) {
-        int consumed_kj = contents.ammo_consume( 1, pos );
-        qty -= units::from_kilojoule( static_cast<std::int64_t>( consumed_kj ) );
     }
 
     return wanted_energy - qty;
@@ -14372,13 +14378,26 @@ bool item::process_wet( Character *carrier, const tripoint_bub_ms & /*pos*/ )
     return true;
 }
 
+units::energy item::energy_per_second() const
+{
+    units::energy energy_to_burn;
+    if( type->tool->turns_per_charge > 0 ) {
+        energy_to_burn += units::from_kilojoule( std::max<int64_t>( ammo_required(),
+                          1 ) ) / type->tool->turns_per_charge;
+    } else if( type->tool->power_draw > 0_mW ) {
+        energy_to_burn += type->tool->power_draw * 1_seconds;
+    }
+    return energy_to_burn;
+}
+
 bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
 {
     // If insufficient available charges, shut down the tool.
-    if( ( type->tool->turns_per_charge > 0 || type->tool->power_draw > 0_W ) &&
-        ammo_remaining( carrier ) == 0 ) {
+    if( ( type->tool->power_draw > 0_W || type->tool->turns_per_charge > 0 ) &&
+        ( ( uses_energy() && energy_remaining( carrier ) < energy_per_second() ) ||
+          ( !uses_energy() && ammo_remaining( carrier ) == 0 ) ) ) {
         if( carrier && has_flag( flag_USE_UPS ) ) {
-            carrier->add_msg_if_player( m_info, _( "You need an UPS to run the %s!" ), tname() );
+            carrier->add_msg_if_player( m_info, _( "You need a UPS to run the %s!" ), tname() );
         }
         if( carrier ) {
             carrier->add_msg_if_player( m_info, _( "The %s ran out of energy!" ), tname() );
@@ -14391,20 +14410,19 @@ bool item::process_tool( Character *carrier, const tripoint_bub_ms &pos )
         }
     }
 
-    int energy = 0;
-    if( type->tool->turns_per_charge > 0 &&
-        to_turn<int>( calendar::turn ) % type->tool->turns_per_charge == 0 ) {
-        energy = std::max( ammo_required(), 1 );
-    } else if( type->tool->power_draw > 0_W ) {
-        // kJ (battery unit) per second
-        energy = units::to_kilowatt( type->tool->power_draw );
-        // energy_bat remainder results in chance at additional charge/discharge
-        const int kw_in_mw = units::to_milliwatt( 1_kW );
-        energy += x_in_y( units::to_milliwatt( type->tool->power_draw ) % kw_in_mw, kw_in_mw ) ? 1 : 0;
-    }
+    if( energy_remaining( carrier ) > 0_J ) {
+        energy_consume( energy_per_second(), pos, carrier );
+    } else {
+        // Non-electrical charge consumption.
+        int charges_to_use = 0;
+        if( type->tool->turns_per_charge > 0 &&
+            to_turn<int>( calendar::turn ) % type->tool->turns_per_charge == 0 ) {
+            charges_to_use = std::max( ammo_required(), 1 );
+        }
 
-    if( energy > 0 ) {
-        ammo_consume( energy, pos, carrier );
+        if( charges_to_use > 0 ) {
+            ammo_consume( charges_to_use, pos, carrier );
+        }
     }
 
     type->tick( carrier, *this, pos );
@@ -15682,7 +15700,7 @@ void item::favorite_settings_menu()
 
 void item::combine( const item_contents &read_input, bool convert )
 {
-    contents.combine( read_input, convert );
+    contents.combine( *this, read_input, convert );
 }
 
 bool is_preferred_component( const item &component )

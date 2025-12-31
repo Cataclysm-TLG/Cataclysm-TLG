@@ -1181,7 +1181,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
 
         const int required = gun.ammo_required();
         if( gun.ammo_consume( required, here, pos_bub( here ), this ) != required ) {
-            debugmsg( "Unexpected shortage of ammo whilst firing %s", gun.tname() );
+            debugmsg( "Unexpected shortage of ammo while firing %s", gun.tname() );
             break;
         }
 
@@ -1190,7 +1190,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
             const units::energy energ_req = gun.get_gun_energy_drain();
             const units::energy drained = gun.energy_consume( energ_req, &here, pos_bub( here ), this );
             if( drained < energ_req ) {
-                debugmsg( "Unexpected shortage of energy whilst firing %s. Required: %i J, drained: %i J",
+                debugmsg( "Unexpected shortage of energy while firing %s. Required: %i J, drained: %i J",
                           gun.tname(), units::to_joule( energ_req ), units::to_joule( drained ) );
                 break;
             }
@@ -3098,10 +3098,8 @@ void target_ui::init_window_and_input()
     ctxt.register_action( "zoom_out" );
     ctxt.register_action( "zoom_in" );
     ctxt.register_action( "TOGGLE_MOVE_CURSOR_VIEW" );
-    if( fov_3d_z_range > 0 ) {
-        ctxt.register_action( "LEVEL_UP" );
-        ctxt.register_action( "LEVEL_DOWN" );
-    }
+    ctxt.register_action( "LEVEL_UP" );
+    ctxt.register_action( "LEVEL_DOWN" );
     if( mode == TargetMode::Fire || mode == TargetMode::TurretManual || ( mode == TargetMode::Reach &&
             ( relevant && relevant->is_gun() ) && you->get_aim_types( *relevant ).size() > 1 ) ) {
         ctxt.register_action( "SWITCH_MODE" );
@@ -3134,7 +3132,14 @@ void target_ui::init_window_and_input()
 bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_redraw )
 {
     std::optional<tripoint_bub_ms> mouse_pos;
+
+    const int old_z = dst.z();
+
     const auto shift_view_or_cursor = [this]( const tripoint_rel_ms & delta ) {
+        const tripoint_bub_ms next =  tripoint_bub_ms( dst.raw() + delta.raw() );
+        if( dist_fn( next ) > range ) {
+            return;
+        }
         if( this->shifting_view ) {
             this->set_view_offset( this->you->view_offset + delta );
         } else if( this->shifting_view_temp ) {
@@ -3147,13 +3152,13 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
     };
 
     if( action == "MOUSE_MOVE" || action == "TIMEOUT" ) {
-        // Shift pos and/or view via edge scrolling
+        // Shift pos and/or view via edge scrolling.
         tripoint_rel_ms edge_scroll = g->mouse_edge_scrolling_terrain( ctxt );
         if( edge_scroll == tripoint_rel_ms::zero ) {
             skip_redraw = true;
         } else {
             if( action == "MOUSE_MOVE" ) {
-                edge_scroll.raw() *= 2; // TODO: Make *= etc. available to relative coordinates.
+                edge_scroll.raw() *= 2;
             }
             if( snap_to_target ) {
                 set_cursor_pos( dst + edge_scroll );
@@ -3162,15 +3167,14 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
             }
         }
     } else if( const std::optional<tripoint_rel_ms> delta = ctxt.get_direction_rel_ms( action ) ) {
-        // Shift view/cursor with directional keys
+        // Shift view/cursor with directional keys.
         shift_view_or_cursor( delta.value() );
     } else if( action == "SELECT" &&
                ( mouse_pos = ctxt.get_coordinates( g->w_terrain, g->ter_view_p.raw().xy() ) ) ) {
-        // Set pos by clicking with mouse
+        // Set pos by clicking with mouse.
         mouse_pos->z() = you->posz() + you->view_offset.z();
         set_cursor_pos( *mouse_pos );
     } else if( action == "LEVEL_UP" || action == "LEVEL_DOWN" ) {
-        // Shift view/cursor up/down one z level
         tripoint_rel_ms delta = tripoint_rel_ms(
                                     0,
                                     0,
@@ -3190,6 +3194,18 @@ bool target_ui::handle_cursor_movement( const std::string &action, bool &skip_re
         }
     } else {
         return false;
+    }
+
+    if( dst.z() != old_z ) {
+        map &here = get_map();
+        const int old_levz = here.get_abs_sub().z();
+        const int min_levz = std::max( old_levz - fov_3d_z_range, -OVERMAP_DEPTH );
+        const int max_levz = std::min( old_levz + fov_3d_z_range, OVERMAP_HEIGHT );
+        int clamped_z = std::clamp( dst.z(), min_levz, max_levz );
+
+        here.invalidate_map_cache( clamped_z );
+        here.build_map_cache( clamped_z );
+        here.invalidate_visibility_cache();
     }
 
     return true;
@@ -3223,7 +3239,7 @@ bool target_ui::set_cursor_pos( const tripoint_bub_ms &new_pos )
             }
             if( dist_fn( valid_pos ) > range ) {
                 auto dist_fn_unrounded = [this]( const tripoint_bub_ms & p ) {
-                    return trig_dist_z_adjust( src, p );
+                    return static_cast<int>( std::round( trig_dist_z_adjust( src, p ) ) );
                 };
 
                 bool found = false;

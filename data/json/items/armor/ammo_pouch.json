@@ -1001,7 +1001,7 @@
         "max_contains_weight": "3800 g",
         "max_item_length": "23 cm",
         "moves": 50,
-        "volume_encumber_modifier": 0.2
+        "volume_encumber_modifier": 0.4
       }
     ],
     "material_thickness": 0.5,
@@ -1276,7 +1276,7 @@
     "to_hit": -3,
     "material": [ "kevlar_layered", "nylon" ],
     "symbol": "[",
-    "looks_like": "kevlar",
+    "looks_like": "ballistic_vest_concealable",
     "color": "light_gray",
     "warmth": 20,
     "material_thickness": 5,

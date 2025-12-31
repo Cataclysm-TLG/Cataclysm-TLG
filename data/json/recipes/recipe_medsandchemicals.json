@@ -625,7 +625,7 @@
       [ [ "chem_muriatic_acid", 1 ] ],
       [ [ "scrap", 6 ] ],
       [ [ "chem_hydrogen_peroxide", 10 ] ],
-      [ [ "any_blood", 2, "LIST" ], [ "leather", 5 ] ],
+      [ [ "any_blood", 2, "LIST" ], [ "leather_patch", 5 ] ],
       [ [ "paper", 5 ] ]
     ],
     "charges": 10
@@ -975,7 +975,7 @@
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
     "tools": [ [ [ "surface_heat", 18, "LIST" ] ] ],
     "components": [
-      [ [ "edible_shortening", 4, "LIST" ], [ "cooking_oil", 14 ], [ "cooking_oil2", 14 ] ],
+      [ [ "any_shortening", 14, "LIST" ], [ "cooking_oil", 14 ] ],
       [ [ "lye", 1 ], [ "lye_powder", 11 ] ],
       [ [ "water", 2 ], [ "water_clean", 2 ], [ "salt_water", 2 ] ]
     ],
@@ -997,7 +997,7 @@
     "proficiencies": [ { "proficiency": "prof_intro_chemistry" }, { "proficiency": "prof_inorganic_chemistry" } ],
     "tools": [ [ [ "surface_heat", 18, "LIST" ] ] ],
     "components": [
-      [ [ "edible_shortening", 4, "LIST" ], [ "cooking_oil", 14 ], [ "cooking_oil2", 14 ] ],
+      [ [ "any_shortening", 14, "LIST" ], [ "cooking_oil", 14 ] ],
       [ [ "lye_potassium", 1 ], [ "chem_potassium_hydroxide", 55 ] ],
       [ [ "salt_water", 2 ] ]
     ],
@@ -1019,7 +1019,7 @@
     "tools": [ [ [ "surface_heat", 18, "LIST" ] ] ],
     "charges": 10,
     "components": [
-      [ [ "edible_shortening", 4, "LIST" ], [ "cooking_oil", 14 ], [ "cooking_oil2", 14 ] ],
+      [ [ "any_shortening", 14, "LIST" ], [ "cooking_oil", 14 ] ],
       [ [ "lye_potassium", 1 ], [ "chem_potassium_hydroxide", 55 ] ],
       [ [ "water", 2 ], [ "water_clean", 2 ] ]
     ],

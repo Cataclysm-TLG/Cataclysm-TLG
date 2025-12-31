@@ -382,7 +382,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         tripoint_bub_ms target_c = target;
         std::vector<tripoint_bub_ms> t_copy = trajectory;
         double spread = 0;
-        // calculate dispersion from shot_spread
+        // Calculate dispersion from shot_spread.
         if( proj.shot_spread > 0 ) {
             double sample = rng_normal( -proj.shot_spread, proj.shot_spread );
             sample = sample >= 0 ? sample : -sample;
@@ -403,7 +403,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                     target_c.y() = source.y() + sgn( dy );
                 }
                 t_copy = here->find_clear_path( first_p, target_c );
-                // point-blank tile should be the same
+                // Point-blank tile should be the same.
                 t_copy.insert( t_copy.begin(), first_p );
                 t_copy.insert( t_copy.begin(), source );
                 if( !no_overshoot && range < extend_to_range ) {
@@ -418,14 +418,14 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                            proj.shot_spread, spread, max_spread,
                            target_arg.to_string_writable(), target_c.to_string_writable() );
         }
-        // Range can be 0
+        // Range can be 0.
         size_t traj_len = t_copy.size();
         while( traj_len > 0 && rl_dist( source, t_copy[traj_len - 1] ) > proj_arg.range ) {
             --traj_len;
         }
 
         const float projectile_skip_multiplier = 0.1f;
-        // Randomize the skip so that bursts look nicer
+        // Randomize the skip so that bursts look nicer.
         int projectile_skip_calculation = range * projectile_skip_multiplier;
         int projectile_skip_current_frame = rng( 0, projectile_skip_calculation );
         bool has_momentum = true;
@@ -609,7 +609,10 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         first = false;
     }
 
-    // TODO: Move this outside now that we have hit point in return values?
+    // We need to store bounce targets safely.
+    std::vector<Creature *> bounce_targets;
+
+    // /Check for bounce effect and gather valid bounce targets first.
     if( proj.proj_effects.count( ammo_effect_BOUNCE ) ) {
         Creature *mon_ptr = g->get_creature_if( [&]( const Creature & z ) {
             if( &z == origin ) {
@@ -619,7 +622,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             if( static_cast<int>( std::round( trig_dist_z_adjust( z.pos_bub( *here ), tp ) ) ) <= 4 &&
                 here->clear_path( z.pos_bub( *here ), tp, 4, 1, 100 ) && ( z.pos_bub( *here ) != tp ) ) {
                 // Don't hit targets that have already been hit
-                for( auto it : attack.targets_hit ) {
+                for( const auto &it : attack.targets_hit ) {
                     if( &z == it.first ) {
                         return false;
                     }
@@ -629,20 +632,39 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             return false;
         } );
         if( mon_ptr ) {
-            Creature &z = *mon_ptr;
-            add_msg( _( "The attack bounced to %s!" ), z.disp_name() );
-            projectile_attack( attack, proj, here, tp, z.pos_bub(), dispersion, origin, in_veh );
-            // TODO: Refine to handle overlapping maps
-            if( here == &reality_bubble() ) {
-                sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
-                                         sfx::get_heard_volume( z.pos_bub() ), sfx::get_heard_angle( z.pos_bub() ) );
-            }
+            bounce_targets.push_back( mon_ptr );
         }
     }
+
+    // Now safely process all bounce targets
+    for( Creature *z : bounce_targets ) {
+        if( !z || z->is_dead_state() ) {
+            continue; // Skip invalid or dead creatures.
+        }
+
+        add_msg( _( "The attack bounced to %s!" ), z->disp_name() );
+
+        // Perform the projectile attack on the bounce target.
+        projectile_attack( attack, proj, here, tp, z->pos_bub(), dispersion, origin, in_veh );
+
+        // Play sound if applicable.
+        if( here == &reality_bubble() ) {
+            sfx::play_variant_sound( "fire_gun", "bio_lightning_tail",
+                                     sfx::get_heard_volume( z->pos_bub() ),
+                                     sfx::get_heard_angle( z->pos_bub() ) );
+        }
+    }
+
+    // Now apply anger/morale effects to nearby creatures after all projectile attacks are resolved.
     for( Creature *critter : here->get_creatures_in_radius( tp, 5 ) ) {
+        if( !critter || critter->is_dead_state() ) {
+            continue;
+        }
+
         if( critter->sees( *here, tp ) ) {
             if( critter->is_monster() ) {
                 monster &mon = *critter->as_monster();
+
                 if( mon.type->has_anger_trigger( mon_trigger::HURT ) ||
                     mon.type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
                     mon.type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ) {
@@ -653,6 +675,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 } else if( mon.type->has_fear_trigger( mon_trigger::HURT ) ) {
                     mon.morale -= 10;
                 }
+
                 if( mon.type->has_fear_trigger( mon_trigger::HOSTILE_CLOSE ) ||
                     mon.type->has_fear_trigger( mon_trigger::HOSTILE_SEEN ) ) {
                     mon.morale -= 10;

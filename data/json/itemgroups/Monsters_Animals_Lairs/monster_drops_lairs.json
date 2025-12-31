@@ -142,7 +142,6 @@
       { "item": "cleansuit", "prob": 10 },
       { "item": "coat_lab", "prob": 20 },
       { "item": "glasses_eye", "prob": 30 },
-      { "item": "rad_monitor", "prob": 10, "charges": [ 2, 20 ] },
       { "item": "geiger_off", "prob": 10, "charges": [ 10, 95 ] },
       { "item": "tool_belt", "prob": 15 },
       { "item": "panties", "prob": 20 },

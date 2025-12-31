@@ -2074,6 +2074,10 @@ class Character : public Creature, public visitable
         /** Returns the amount of software `type' that are in the inventory */
         int count_softwares( const itype_id &id );
 
+        /** Returns whether the character has software on a device with a desired number of charges */
+        bool has_software( const itype_id &software_id, int min_charges = 0,
+                           const itype_id &device_id = itype_id::NULL_ID() ) const;
+
         /** Returns nearby items which match the provided predicate */
         std::vector<item_location> nearby( const std::function<bool( const item *, const item * )> &func,
                                            int radius = 1 ) const;
@@ -3351,7 +3355,7 @@ class Character : public Creature, public visitable
 
         /** Modifies the movement cost and returns a list of effects */
         std::vector<run_cost_effect> run_cost_effects( float &movecost ) const;
-        /** Returns the player's modified base movement cost */
+        /** Returns the character's modified base movement cost */
         int run_cost( int base_cost, bool diag = false ) const;
 
         const pathfinding_settings &get_pathfinding_settings() const override;
@@ -4197,6 +4201,8 @@ class Character : public Creature, public visitable
         int thirst;
         int stamina;
 
+        // Cardio accumulator. Cardio begins at 1000 (slightly below average) and can range up to about 3500 for a human.
+        // The lowest expected score is somewhere around ~200.
         int cardio_acc;
         int base_cardio_acc;
 

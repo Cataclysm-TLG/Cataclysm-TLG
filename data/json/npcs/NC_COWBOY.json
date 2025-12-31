@@ -80,7 +80,7 @@
     "type": "item_group",
     "id": "NC_COWBOY_vest",
     "subtype": "distribution",
-    "entries": [ { "item": "null", "prob": 20 }, { "item": "kevlar", "prob": 50 } ]
+    "entries": [ { "item": "null", "prob": 20 }, { "item": "ballistic_vest_concealable", "prob": 50 } ]
   },
   {
     "type": "item_group",

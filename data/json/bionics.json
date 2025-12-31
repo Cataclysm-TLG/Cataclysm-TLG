@@ -416,7 +416,7 @@
     "id": "bio_blood_anal",
     "type": "bionic",
     "name": { "str": "Blood Analysis" },
-    "description": "Small sensors have been surgically implanted in your heart, allowing you to analyze your blood.  This will detect many illnesses, drugs, and other conditions.",
+    "description": "Small sensors have been surgically implanted around your kidneys, allowing you to analyze your blood.  This will detect many illnesses, drugs, and other conditions.",
     "occupied_bodyparts": [ [ "torso", 4 ] ],
     "act_cost": "100 J"
   },
@@ -424,7 +424,7 @@
     "id": "bio_blood_filter",
     "type": "bionic",
     "name": { "str": "Blood Filter" },
-    "description": "A filtration system near your heart allows you to actively filter out chemical impurities, primarily drugs.  It will have limited impact on viruses.  Note that it is not a targeted filter; ALL drugs in your system will be affected.",
+    "description": "A filtration system near your liver allows you to actively filter out chemical impurities, primarily drugs.  It will have limited impact on viruses.  Note that it is not a targeted filter; ALL drugs in your system will be affected.",
     "occupied_bodyparts": [ [ "torso", 5 ] ],
     "activated_eocs": [ "EOC_bio_blood_filter" ],
     "act_cost": "600 J"
@@ -537,42 +537,12 @@
     "id": "bio_cqb",
     "type": "bionic",
     "name": { "str": "Close Quarters Battle" },
-    "description": "Bionic processors and databanks, loaded with martial arts combat programs, are surgically integrated into your nervous system.  While active, the CQB module will improve your hand-to-hand combat skills, but prevents you from improving them through combat experience.",
+    "description": "Your nervous system is wired to a combat controller program pre-loaded with its own melee protocols.  While active, your actions in melee combat will be guided by the implant, which has above-average skill and its own martial art style, but you will not learn from this experience.",
     "occupied_bodyparts": [ [ "head", 3 ] ],
     "act_cost": "20 J",
     "react_cost": "20 J",
     "time": "1 s",
-    "known_ma_styles": [
-      "style_aikido",
-      "style_barbaran",
-      "style_biojutsu",
-      "style_bojutsu",
-      "style_boxing",
-      "style_capoeira",
-      "style_crane",
-      "style_dragon",
-      "style_eskrima",
-      "style_fencing",
-      "style_judo",
-      "style_karate",
-      "style_kickboxing",
-      "style_krav_maga",
-      "style_leopard",
-      "style_medievalpole",
-      "style_muay_thai",
-      "style_ninjutsu",
-      "style_niten",
-      "style_pankration",
-      "style_silat",
-      "style_snake",
-      "style_sojutsu",
-      "style_swordsmanship",
-      "style_taekwondo",
-      "style_tai_chi",
-      "style_tiger",
-      "style_wingchun",
-      "style_zui_quan"
-    ],
+    "known_ma_styles": [ "style_biojutsu" ],
     "flags": [ "BIONIC_TOGGLED" ]
   },
   {
@@ -588,12 +558,15 @@
     "id": "bio_dex_enhancer",
     "type": "bionic",
     "name": { "str": "Wired Reflexes" },
-    "description": "Your reaction time has been greatly enhanced with bionic nerve stimulators, giving you a +2 bonus to dexterity.",
+    "description": "Implanted nerve stimulators grant you a +2 bonus to dexterity while this bionic is active, but a -1 penalty when it is not.",
     "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] } ],
-    "act_cost": "5 J",
-    "react_cost": "5 J",
+    "enchantments": [
+      { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "DEXTERITY", "add": -1 } ] }
+    ],
+    "act_cost": "4 J",
+    "react_cost": "4 J",
     "time": "1 s"
   },
   {
@@ -697,32 +670,6 @@
     "flags": [ "BIONIC_GUN" ]
   },
   {
-    "id": "bio_ethanol",
-    "type": "bionic",
-    "name": { "str": "Ethanol Burner" },
-    "description": "You burn alcohol as fuel in an extremely efficient reaction.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
-    "fuel_options": [ "alcohol" ],
-    "fuel_efficiency": 0.5,
-    "exothermic_power_gen": true,
-    "time": "1 s",
-    "flags": [ "BIONIC_POWER_SOURCE", "BIONIC_SHOCKPROOF", "BIONIC_TOGGLED" ],
-    "passive_pseudo_items": [ "internal_ethanol_tank" ]
-  },
-  {
-    "id": "bio_lampoil",
-    "type": "bionic",
-    "name": { "str": "Oil Generator" },
-    "description": "Slowly generates bionic power out of kerosene or motor oil.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
-    "fuel_options": [ "lamp_oil", "motor_oil" ],
-    "fuel_efficiency": 0.35,
-    "exothermic_power_gen": true,
-    "time": "5 s",
-    "flags": [ "BIONIC_POWER_SOURCE", "BIONIC_SHOCKPROOF", "BIONIC_TOGGLED" ],
-    "passive_pseudo_items": [ "internal_oil_tank" ]
-  },
-  {
     "id": "bio_evap",
     "type": "bionic",
     "name": { "str": "Aero-Evaporator" },
@@ -735,20 +682,31 @@
   {
     "id": "bio_eye_enhancer",
     "type": "bionic",
-    "name": { "str": "Diamond Cornea" },
-    "description": "Your vision is greatly enhanced, giving you a +2 bonus to perception.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
-    "enchantments": [ { "values": [ { "value": "PERCEPTION", "add": 2 } ] } ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "name": { "str": "Thalamic Buffer" },
+    "description": "A microcomputer wired to the thalamus that assists the brain in sorting and prioritizing sensory input.  It grants +2 perception when active, but -1 when not.",
+    "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
+    "occupied_bodyparts": [ [ "head", 1 ] ],
+    "enchantments": [
+      { "condition": "ACTIVE", "values": [ { "value": "PERCEPTION", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
+    ],
+    "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
+    "act_cost": "4 J",
+    "react_cost": "4 J",
+    "time": "1 s"
   },
   {
     "id": "bio_eye_optic",
     "type": "bionic",
-    "name": { "str": "Telescopic Eyes" },
-    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They cure most vision problems and allow the user to treat any ranged weapon as if it had a scope.",
+    "name": { "str": "Bionic Eyes" },
+    "description": "The eyes have been entirely replaced by a pair of implanted cameras which provide clear, high-resolution vision and come with a built-in zoom that allows the user to see long distances and treat all ranged weapons as though they had a scope.  If unpowered, the user will be completely blind.",
     "occupied_bodyparts": [ [ "eyes", 2 ] ],
-    "flags": [ "ENHANCED_VISION" ],
+    "flags": [ "ENHANCED_VISION", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
     "cant_remove_reason": "The CBM has completely replaced %1$s eyes now.  Removing them would leave %2$s blind.",
+    "enchantments": [ { "condition": "INACTIVE", "ench_effects": [ { "effect": "blind", "intensity": 1 } ] } ],
+    "act_cost": "2 J",
+    "react_cost": "2 J",
+    "time": "1 s",
     "canceled_mutations": [
       "HYPEROPIC",
       "MYOPIC",
@@ -878,10 +836,10 @@
   {
     "id": "bio_geiger",
     "type": "bionic",
-    "name": { "str": "Integrated Dosimeter" },
-    "description": "Small radiation sensors have been surgically implanted throughout your body, allowing you to analyze your level of absorbed radiation.  They will also alert you whenever exposed to environmental radiation.",
+    "name": { "str": "Radiation Biomonitor" },
+    "description": "Tiny sensors implanted in your body are able to detect acute radiation syndrome through a gamma-H2AX assay, cross-checking blood cell counts to rapidly inform you of the severity of your exposure.  A separate sensor also scans your immediate environment to alert you to the presence of ionizing radiation.",
     "occupied_bodyparts": [ [ "torso", 2 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
-    "act_cost": "100 J"
+    "act_cost": "10 kJ"
   },
   {
     "id": "bio_gills",
@@ -999,13 +957,16 @@
     "id": "bio_int_enhancer",
     "type": "bionic",
     "name": { "str": "Cerebral Booster" },
-    "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence.",
+    "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence when this implant is active, and a -1 penalty when it is not.",
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
     "occupied_bodyparts": [ [ "head", 6 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] } ],
-    "act_cost": "5 J",
-    "react_cost": "5 J",
+    "enchantments": [
+      { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "INTELLIGENCE", "add": -1 } ] }
+    ],
+    "act_cost": "4 J",
+    "react_cost": "4 J",
     "time": "1 s"
   },
   {
@@ -1423,12 +1384,15 @@
     "id": "bio_str_enhancer",
     "type": "bionic",
     "name": { "str": "Muscle Augmentation" },
-    "description": "Your muscular system has been surgically enhanced with myomer fibers, giving you a +2 bonus to strength.",
+    "description": "Your muscules have been surgically enhanced with synthetic myomer fibers, giving you a +2 bonus to strength when this implant is active and a -1 penalty when it is not.",
     "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] } ],
-    "act_cost": "5 J",
-    "react_cost": "5 J",
+    "enchantments": [
+      { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "STRENGTH", "add": -1 } ] }
+    ],
+    "act_cost": "4 J",
+    "react_cost": "4 J",
     "time": "1 s"
   },
   {
@@ -1665,20 +1629,6 @@
     "description": "Nanotubes surgically embedded in the palm of your hand will pump any available fluid out of a dead body, cleanse it of impurities and convert it into drinkable water.  You must, however, have a container to store the water in.",
     "occupied_bodyparts": [ [ "arm_l", 3 ], [ "hand_l", 1 ] ],
     "act_cost": "20 kJ"
-  },
-  {
-    "id": "bio_fuel_cell_gasoline",
-    "type": "bionic",
-    "name": { "str": "Gasoline Fuel Cell" },
-    "description": "A small gasoline fuel cell fixed to your scapula.  Despite its limited energy output compared to other fuel cells, this device still produces a significant amount of heat dissipated through a heat exhaust protruding from your back.  A diffuse network of bio-plastic bladders has been meshed with your circulatory system and serves as a fuel tank.",
-    "occupied_bodyparts": [ [ "torso", 8 ] ],
-    "encumbrance": [ [ "torso", 5 ] ],
-    "fuel_options": [ "gasoline" ],
-    "fuel_efficiency": 0.25,
-    "exothermic_power_gen": true,
-    "time": "1 s",
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_POWER_SOURCE" ],
-    "passive_pseudo_items": [ "internal_gasoline_tank" ]
   },
   {
     "id": "bio_syringe",

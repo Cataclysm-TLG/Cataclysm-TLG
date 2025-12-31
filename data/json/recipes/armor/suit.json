@@ -21,7 +21,7 @@
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "water", 10 ], [ "water_clean", 10 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 8, "LIST" ], [ "vinegar", 10 ], [ "pine_bough", 20 ] ],
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 24, "LIST" ], [ "vinegar", 10 ], [ "pine_bough", 20 ] ],
       [ [ "salt", 50 ] ],
       [ [ "leather_armor_suit", 1 ] ]
     ]
@@ -105,7 +105,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_fur_sheet", 14 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
-    "byproducts": [ [ "fur", 2 ] ]
+    "byproducts": [ [ "fur_patch", 2 ] ]
   },
   {
     "result": "armor_farmor_xs",
@@ -113,7 +113,7 @@
     "copy-from": "armor_farmor",
     "time": "8 h",
     "using": [ [ "tailoring_fur_sheet", 11 ] ],
-    "byproducts": [ [ "fur", 5 ] ]
+    "byproducts": [ [ "fur_patch", 5 ] ]
   },
   {
     "result": "xl_armor_farmor",
@@ -121,7 +121,7 @@
     "copy-from": "armor_farmor",
     "time": "9 h",
     "using": [ [ "tailoring_fur_sheet", 16 ] ],
-    "byproducts": [ [ "fur", 6 ] ]
+    "byproducts": [ [ "fur_patch", 6 ] ]
   },
   {
     "result": "armor_faux_farmor",
@@ -135,7 +135,7 @@
     "autolearn": true,
     "using": [ [ "tailoring_faux_fur_sheet", 14 ] ],
     "proficiencies": [ { "proficiency": "prof_leatherworking_basic" }, { "proficiency": "prof_furriery" } ],
-    "byproducts": [ [ "faux_fur", 2 ] ]
+    "byproducts": [ [ "faux_fur_patch", 2 ] ]
   },
   {
     "result": "armor_faux_farmor_xs",
@@ -143,7 +143,7 @@
     "copy-from": "armor_faux_farmor",
     "time": "8 h",
     "using": [ [ "tailoring_faux_fur_sheet", 11 ] ],
-    "byproducts": [ [ "faux_fur", 5 ] ]
+    "byproducts": [ [ "faux_fur_patch", 5 ] ]
   },
   {
     "result": "xl_armor_faux_farmor",
@@ -151,7 +151,7 @@
     "copy-from": "armor_faux_farmor",
     "time": "9 h",
     "using": [ [ "tailoring_faux_fur_sheet", 16 ] ],
-    "byproducts": [ [ "faux_fur", 6 ] ]
+    "byproducts": [ [ "faux_fur_patch", 6 ] ]
   },
   {
     "result": "leather_armor_suit",
@@ -243,15 +243,15 @@
     "subcategory": "CSC_ARMOR_SUIT",
     "skill_used": "fabrication",
     "difficulty": 9,
-    "time": "9 h 20 m",
+    "time": "19 h 20 m",
     "book_learn": [ [ "textbook_armeast", 8 ] ],
     "using": [
       [ "blacksmithing_standard", 64 ],
       [ "steel_standard", 16 ],
       [ "fabric_standard_nostretch", 10 ],
-      [ "tailoring_leather_sheet", 6 ]
+      [ "tailoring_leather_sheet", 8 ]
     ],
-    "qualities": [ { "id": "CHISEL", "level": 3 } ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "LEATHER_AWL", "level": 1 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic", "time_multiplier": 1.1, "skill_penalty": 0.15 },
@@ -266,19 +266,29 @@
     "result": "armor_samurai_xs",
     "type": "recipe",
     "copy-from": "armor_samurai",
-    "time": "2 h",
-    "using": [ [ "sewing_standard", 19 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "components": [ [ [ "sheet_metal_small", 14 ] ], [ [ "leather_armor_suit_xs", 1 ] ] ]
+    "time": "16 h",
+    "using": [
+      [ "blacksmithing_standard", 32 ],
+      [ "steel_standard", 8 ],
+      [ "fabric_standard_nostretch", 5 ],
+      [ "tailoring_leather_sheet", 4 ]
+    ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "tools": [ [ [ "swage", -1 ] ] ]
   },
   {
     "result": "armor_samurai_xl",
     "type": "recipe",
     "copy-from": "armor_samurai",
-    "time": "2 h 15 m",
-    "using": [ [ "sewing_standard", 38 ] ],
-    "qualities": [ { "id": "HAMMER", "level": 3 } ],
-    "components": [ [ [ "sheet_metal_small", 24 ] ], [ [ "leather_armor_suit_xl", 1 ] ] ]
+    "time": "20 h",
+    "using": [
+      [ "blacksmithing_standard", 96 ],
+      [ "steel_standard", 20 ],
+      [ "fabric_standard_nostretch", 15 ],
+      [ "tailoring_leather_sheet", 12 ]
+    ],
+    "qualities": [ { "id": "CHISEL", "level": 3 }, { "id": "LEATHER_AWL", "level": 1 } ],
+    "tools": [ [ [ "swage", -1 ] ] ]
   },
   {
     "result": "platemail_suit",
@@ -660,7 +670,7 @@
     "time": "25 m",
     "reversible": true,
     "autolearn": true,
-    "using": [ [ "tailoring_felt_sheet_simple", 36 ] ]
+    "using": [ [ "tailoring_felt_sheet", 20 ] ]
   },
   {
     "result": "denim_overalls",
@@ -698,7 +708,7 @@
       [ [ "kevlar_sheet_layered", 8 ] ],
       [ [ "duct_tape", 200 ] ],
       [
-        [ "kevlar", 1 ],
+        [ "ballistic_vest_concealable", 1 ],
         [ "ballistic_vest_light", 1 ],
         [ "ballistic_vest_esapi", 1 ],
         [ "kevlar_sheet_layered", 24 ]
@@ -716,7 +726,7 @@
       [ [ "kevlar_sheet_layered", 6 ] ],
       [ [ "duct_tape", 150 ] ],
       [
-        [ "kevlar", 1 ],
+        [ "ballistic_vest_concealable", 1 ],
         [ "ballistic_vest_light", 1 ],
         [ "ballistic_vest_esapi", 1 ],
         [ "kevlar_sheet_layered", 18 ]
@@ -734,7 +744,7 @@
       [ [ "kevlar_sheet_layered", 12 ] ],
       [ [ "duct_tape", 300 ] ],
       [
-        [ "kevlar", 2 ],
+        [ "ballistic_vest_concealable", 2 ],
         [ "ballistic_vest_light", 2 ],
         [ "ballistic_vest_esapi", 2 ],
         [ "kevlar_sheet_layered", 30 ]
@@ -899,7 +909,7 @@
     "using": [ [ "sewing_standard", 30 ], [ "soldering_standard", 60 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" }, { "proficiency": "prof_closures" } ],
     "components": [
-      [ [ "sheet_cotton", 36 ], [ "sheet_cotton_patch", 36 ], [ "union_suit", 1 ] ],
+      [ [ "cotton_sheet", 36 ], [ "union_suit", 1 ] ],
       [ [ "element", 12 ], [ "crude_heating_element", 18 ] ],
       [ [ "cable", 20 ] ]
     ]

@@ -392,7 +392,7 @@
       "sound": "metal screeching!",
       "sound_fail": "clang!",
       "items": [
-        { "item": "leather", "count": [ 1, 4 ] },
+        { "item": "leather_patch", "count": [ 1, 4 ] },
         { "item": "2x4", "count": [ 1, 2 ] },
         { "item": "scrap", "count": [ 0, 6 ] },
         { "item": "wire", "count": [ 1, 3 ] }

@@ -21,7 +21,7 @@
       [ [ "steel_fragment", 6 ], [ "scrap", 18 ] ],
       [ [ "pipe", 2 ] ],
       [ [ "adhesive", 2, "LIST" ] ],
-      [ [ "fur", 2 ], [ "leather", 2 ] ]
+      [ [ "fur_patch", 2 ], [ "leather_patch", 2 ] ]
     ]
   }
 ]

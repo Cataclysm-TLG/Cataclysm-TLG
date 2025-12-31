@@ -70,7 +70,7 @@
       { "item": "jacket_jean", "prob": 20 },
       { "item": "bunker_coat", "prob": 10 },
       { "item": "jacket_windbreaker", "prob": 10 },
-      { "item": "kevlar", "prob": 5 }
+      { "item": "ballistic_vest_concealable", "prob": 5 }
     ]
   },
   {

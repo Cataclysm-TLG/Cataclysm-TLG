@@ -44,7 +44,13 @@
         [ "ammonia_hydroxide", 1 ],
         [ "bleach", 1 ]
       ],
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ]
+      [
+        [ "cotton_patch", 1 ],
+        [ "fur_patch", 1 ],
+        [ "faux_fur_patch", 1 ],
+        [ "felt_patch", 1 ],
+        [ "cotton_ball", 2 ]
+      ]
     ]
   },
   {
@@ -55,7 +61,13 @@
     "tools": [ [ [ "pipe_cleaner", -1 ] ], [ [ "water_boiling_heat", 2, "LIST" ] ] ],
     "components": [
       [ [ "soapy_water", 3 ] ],
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ]
+      [
+        [ "cotton_patch", 1 ],
+        [ "fur_patch", 1 ],
+        [ "faux_fur_patch", 1 ],
+        [ "felt_patch", 1 ],
+        [ "cotton_ball", 2 ]
+      ]
     ]
   },
   {
@@ -63,7 +75,7 @@
     "type": "requirement",
     "//": "Requires a rod/wire and cloth patch or similar item.",
     "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
-    "components": [ [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ] ]
+    "components": [ [ [ "cotton_patch", 1 ], [ "fur_patch", 1 ], [ "faux_fur_patch", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ] ]
   },
   {
     "id": "gun_lubrication",
@@ -72,8 +84,8 @@
     "qualities": [  ],
     "tools": [ [ [ "pipe_cleaner", -1 ] ] ],
     "components": [
-      [ [ "cotton_patch", 1 ], [ "fur", 1 ], [ "faux_fur", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ],
-      [ [ "lamp_oil", 5 ], [ "cooking_oil", 1 ], [ "cooking_oil2", 1 ], [ "motor_oil", 5 ] ]
+      [ [ "cotton_patch", 1 ], [ "fur_patch", 1 ], [ "faux_fur_patch", 1 ], [ "felt_patch", 1 ], [ "cotton_ball", 2 ] ],
+      [ [ "lamp_oil", 5 ], [ "cooking_oil", 1 ], [ "motor_oil", 5 ] ]
     ]
   },
   {
@@ -131,81 +143,6 @@
     "type": "requirement",
     "//": "Includes forging resources as well as tools needed for melting copper or bronze, but this assumes we need no grinding.",
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ], [ [ "forge", 13 ], [ "oxy_torch", 13 ] ] ]
-  },
-  {
-    "id": "metal_casting_small",
-    "type": "requirement",
-    "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_small_improvised", -1, "LIST" ], [ "metal_casting_small_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting",
-    "type": "requirement",
-    "//": "A small box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_improvised", -1, "LIST" ], [ "metal_casting_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting_small_proper",
-    "type": "requirement",
-    "//": "A small prefab clay mold.",
-    "tools": [ [ [ "casting_mold_small", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_proper",
-    "type": "requirement",
-    "//": "A reasonably-sized prefab clay mold.",
-    "tools": [ [ [ "casting_mold", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_improvised",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold.",
-    "tools": [ [ [ "box_medium_wood", -1 ], [ "box_medium_metal", -1 ] ], [ [ "material_sand", 90 ] ] ]
-  },
-  {
-    "id": "metal_casting_small_improvised",
-    "type": "requirement",
-    "//": "A reasonably-sized box to contain sand for use as a mold.",
-    "tools": [
-      [
-        [ "box_small_wood", -1 ],
-        [ "box_medium_wood", -1 ],
-        [ "box_small_metal", -1 ],
-        [ "box_medium_metal", -1 ],
-        [ "toolbox_workshop_empty", -1 ]
-      ],
-      [ [ "material_sand", 30 ] ]
-    ]
-  },
-  {
-    "id": "metal_casting_long",
-    "type": "requirement",
-    "//": "A long box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_large_improvised", -1, "LIST" ], [ "metal_casting_long_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting_large",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "metal_casting_large_improvised", -1, "LIST" ], [ "metal_casting_large_proper", -1, "LIST" ] ] ]
-  },
-  {
-    "id": "metal_casting_long_proper",
-    "type": "requirement",
-    "//": "A long box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "casting_mold_long", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_large_proper",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold, or a prefab clay mold.",
-    "tools": [ [ [ "casting_mold_large", -1 ] ] ]
-  },
-  {
-    "id": "metal_casting_large_improvised",
-    "type": "requirement",
-    "//": "A large box to contain sand for use as a mold.",
-    "tools": [ [ [ "box_large_wood", -1 ], [ "box_large_metal", -1 ] ], [ [ "material_sand", 300 ] ] ]
   },
   {
     "id": "blacksmithing_simple",

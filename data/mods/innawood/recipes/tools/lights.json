@@ -167,7 +167,7 @@
       [ [ "flashlight", 1 ] ],
       [
         [ "cotton_patch", 2 ],
-        [ "leather", 2 ],
+        [ "leather_patch", 2 ],
         [ "cordage", 1, "LIST" ],
         [ "duct_tape", 10 ],
         [ "medical_tape", 20 ]

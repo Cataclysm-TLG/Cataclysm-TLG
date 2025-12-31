@@ -4,25 +4,26 @@
     "type": "TOOL",
     "name": { "str": "electric firestarter" },
     "description": "A crudely-made electric firestarter, which can function as an inefficient lighter.",
+    "//": "ultra light battery seems to not have enough power to generate this amount of heat",
     "weight": "14 g",
     "volume": "50 ml",
-    "price": "1 USD",
+    "price": "0 USD",
     "price_postapoc": "10 cent",
     "material": [ "steel" ],
     "symbol": ",",
     "color": "light_gray",
-    "ammo": [ "battery" ],
-    "charges_per_use": 5,
+    "charges_per_use": 1,
     "use_action": { "type": "firestarter" },
     "flags": [ "FIRESTARTER" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_ULTRA_LIGHT" ],
+        "flag_restriction": [ "BATTERY_LIGHT", "BATTERY_MEDIUM" ],
         "default_magazine": "light_battery_cell"
       }
-    ]
+    ],
+    "tool_ammo": [ "battery" ]
   },
   {
     "id": "fire_drill",
@@ -36,12 +37,12 @@
     "material": [ "wood" ],
     "symbol": ",",
     "color": "brown",
-    "ammo": [ "notch" ],
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "notched_plank", "notched_stick" ] } ],
     "use_action": { "type": "firestarter", "moves": 30000, "moves_slow": 60000 },
     "qualities": [ [ "DRILL_ROCK", 1 ] ],
-    "flags": [ "FIRESTARTER", "REQUIRES_TINDER" ]
+    "flags": [ "FIRESTARTER", "REQUIRES_TINDER" ],
+    "tool_ammo": [ "notch" ]
   },
   {
     "id": "fire_drill_large",
@@ -55,12 +56,12 @@
     "material": [ "wood", "stone" ],
     "symbol": ",",
     "color": "brown",
-    "ammo": [ "notch" ],
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "notched_plank", "notched_stick" ] } ],
     "use_action": { "type": "firestarter", "moves": 6000, "moves_slow": 15000 },
     "qualities": [ [ "DRILL_ROCK", 1 ] ],
-    "flags": [ "FIRESTARTER", "REQUIRES_TINDER" ]
+    "flags": [ "FIRESTARTER", "REQUIRES_TINDER" ],
+    "tool_ammo": [ "notch" ]
   },
   {
     "id": "flint_steel",
@@ -224,7 +225,6 @@
     "material": [ "aluminum" ],
     "symbol": ",",
     "color": "light_gray",
-    "ammo": [ "lamp_oil" ],
     "charges_per_use": 1,
     "pocket_data": [
       {
@@ -247,7 +247,8 @@
       },
       { "type": "firestarter", "moves": 50 }
     ],
-    "flags": [ "FIRESTARTER" ]
+    "flags": [ "FIRESTARTER" ],
+    "tool_ammo": [ "lamp_oil" ]
   },
   {
     "id": "ref_lighter_on",
@@ -261,7 +262,6 @@
     "material": [ "aluminum" ],
     "symbol": ",",
     "color": "light_gray",
-    "ammo": [ "lamp_oil" ],
     "charges_per_use": 1,
     "pocket_data": [
       {
@@ -284,7 +284,8 @@
         "type": "transform"
       }
     ],
-    "flags": [ "FIRE", "FIRESTARTER", "LIGHT_8", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH" ]
+    "flags": [ "FIRE", "FIRESTARTER", "LIGHT_8", "FLAMING", "TRADER_AVOID", "WATER_EXTINGUISH" ],
+    "tool_ammo": [ "lamp_oil" ]
   },
   {
     "id": "ref_lighter_butane",
@@ -299,11 +300,11 @@
     "material": [ "aluminum", "plastic" ],
     "symbol": ",",
     "color": "white",
-    "ammo": [ "butane" ],
     "charges_per_use": 1,
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "butane_can" ] } ],
     "use_action": { "type": "firestarter", "moves": 50, "moves_slow": 500 },
-    "flags": [ "FIRESTARTER" ]
+    "flags": [ "FIRESTARTER" ],
+    "tool_ammo": [ "butane" ]
   },
   {
     "id": "tinderbox",
@@ -317,7 +318,6 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "light_gray",
-    "ammo": [ "tinder" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "tinder": 50 } } ],
     "use_action": {
       "target": "tinderbox_on",
@@ -328,7 +328,8 @@
       "need_charges": 1,
       "need_charges_msg": "The ember carrier is out of tinder.",
       "type": "transform"
-    }
+    },
+    "tool_ammo": [ "tinder" ]
   },
   {
     "id": "tinderbox_on",
@@ -342,7 +343,6 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "light_gray",
-    "ammo": [ "tinder" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "tinder": 50 } } ],
     "turns_per_charge": 600,
     "revert_to": "tinderbox",
@@ -356,7 +356,8 @@
         "type": "transform"
       }
     ],
-    "flags": [ "FIRESTARTER" ]
+    "flags": [ "FIRESTARTER" ],
+    "tool_ammo": [ "tinder" ]
   },
   {
     "id": "small_lighter",

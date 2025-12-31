@@ -23,6 +23,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "hk_mp5",
@@ -108,10 +109,11 @@
     "vision_night": 3,
     "weakpoint_sets": [ "wps_turret" ],
     "revert_to_itype": "bot_antimateriel",
-    "starting_ammo": { "50bmg": 300 },
+    "starting_ammo": { "50bmg": 50 },
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m2browning",
@@ -169,10 +171,11 @@
     "vision_night": 3,
     "weakpoint_sets": [ "wps_turret" ],
     "revert_to_itype": "bot_rifleturret",
-    "starting_ammo": { "556": 500 },
+    "starting_ammo": { "556": 200 },
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m249",
@@ -230,10 +233,11 @@
     "vision_night": 3,
     "weakpoint_sets": [ "wps_turret" ],
     "revert_to_itype": "bot_crows_m240",
-    "starting_ammo": { "762_51": 500 },
+    "starting_ammo": { "762_51": 150 },
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m240",
@@ -297,6 +301,7 @@
     "special_attacks": [
       {
         "type": "gun",
+        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "pseudo_m203",

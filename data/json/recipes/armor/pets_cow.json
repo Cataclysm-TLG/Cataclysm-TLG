@@ -49,7 +49,7 @@
       [ [ "link_sheet", 42 ] ],
       [ [ "chain_link", 1100 ] ],
       [ [ "wire", 8 ] ],
-      [ [ "fur", 50 ], [ "fur_sheet", 8 ], [ "leather", 50 ], [ "leather_sheet", 8 ] ]
+      [ [ "fur_patch", 50 ], [ "fur_sheet", 8 ], [ "leather_patch", 50 ], [ "leather_sheet", 8 ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_chain_armour" },
@@ -85,7 +85,7 @@
     "skill_used": "tailor",
     "difficulty": 3,
     "time": "5 h 30 m",
-    "byproducts": [ [ "leather", 25 ] ],
+    "byproducts": [ [ "leather_patch", 25 ] ],
     "using": [ [ "sewing_standard", 36 ], [ "clasps", 5 ] ],
     "components": [ [ [ "boiled_leather_armor_suit", 3 ] ], [ [ "cotton_patch", 21 ] ] ],
     "proficiencies": [
@@ -120,7 +120,7 @@
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "water", 36 ], [ "water_clean", 36 ] ],
-      [ [ "wax_any", 7, "LIST" ], [ "any_tallow", 28, "LIST" ], [ "vinegar", 36 ], [ "pine_bough", 66 ] ],
+      [ [ "wax_any", 7, "LIST" ], [ "any_tallow", 82, "LIST" ], [ "vinegar", 36 ], [ "pine_bough", 66 ] ],
       [ [ "salt", 180 ] ]
     ],
     "proficiencies": [
@@ -151,7 +151,7 @@
     "difficulty": 4,
     "time": "7 h 45 m",
     "autolearn": true,
-    "byproducts": [ [ "leather", 7 ] ],
+    "byproducts": [ [ "leather_patch", 7 ] ],
     "using": [ [ "sewing_standard", 41 ], [ "clasps", 5 ] ],
     "components": [ [ [ "bone_sturdy", 46, "LIST" ] ], [ [ "leather_armor_cow", 1 ] ] ],
     "proficiencies": [
@@ -185,7 +185,7 @@
     "tools": [ [ [ "surface_heat", 60, "LIST" ] ] ],
     "components": [
       [ [ "water", 36 ], [ "water_clean", 36 ] ],
-      [ [ "wax_any", 7, "LIST" ], [ "any_tallow", 28, "LIST" ], [ "vinegar", 36 ], [ "pine_bough", 72 ] ],
+      [ [ "wax_any", 7, "LIST" ], [ "any_tallow", 82, "LIST" ], [ "vinegar", 36 ], [ "pine_bough", 72 ] ],
       [ [ "salt", 180 ] ],
       [ [ "bone_sturdy", 45, "LIST" ] ]
     ],
@@ -261,7 +261,7 @@
     "time": "28 h 45 m",
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
     "using": [ [ "forging_standard", 144 ], [ "bronzesmithing_tools", 12 ] ],
-    "components": [ [ [ "scrap_bronze", 72 ] ], [ [ "leather_armor_cow", 1 ] ] ],
+    "components": [ [ [ "bronze_fragment", 72 ] ], [ [ "leather_armor_cow", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic", "time_multiplier": 1.1, "skill_penalty": 0.15 },
       { "proficiency": "prof_closures", "time_multiplier": 1.1 },

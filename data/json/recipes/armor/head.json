@@ -110,8 +110,7 @@
         [ "bandages_makeshift", 2 ],
         [ "bandages_makeshift_bleached", 2 ],
         [ "bandages_makeshift_boiled", 2 ],
-        [ "sheet_cotton_patch", 1 ],
-        [ "sheet_cotton", 1 ]
+        [ "cotton_sheet", 1 ]
       ]
     ],
     "flags": [ "BLIND_EASY", "NO_RESIZE" ]
@@ -140,7 +139,7 @@
     "time": "2 h",
     "autolearn": true,
     "using": [ [ "tailoring_leather_sheet", 2 ] ],
-    "byproducts": [ [ "leather", 4 ] ],
+    "byproducts": [ [ "leather_patch", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -243,7 +242,7 @@
     "book_learn": [ [ "mag_animecon", 3 ] ],
     "using": [ [ "sewing_standard", 10 ] ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
-    "components": [ [ [ "fur", 2 ] ], [ [ "plastic_chunk", 3 ] ] ],
+    "components": [ [ [ "fur_patch", 2 ] ], [ [ "plastic_chunk", 3 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_plasticworking" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -262,7 +261,7 @@
     "book_learn": [ [ "mag_animecon", 3 ] ],
     "using": [ [ "sewing_standard", 10 ] ],
     "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ],
-    "components": [ [ [ "faux_fur", 2 ] ], [ [ "plastic_chunk", 3 ] ] ],
+    "components": [ [ [ "faux_fur_patch", 2 ] ], [ [ "plastic_chunk", 3 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_plasticworking" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -492,7 +491,7 @@
     "using": [ [ "blacksmithing_standard", 40 ], [ "steel_standard", 10 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -507,7 +506,7 @@
     "time": "12 h",
     "using": [ [ "blacksmithing_standard", 28 ], [ "steel_standard", 7 ] ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_barbute",
@@ -517,7 +516,7 @@
     "using": [ [ "blacksmithing_standard", 60 ], [ "steel_standard", 15 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 6 ], [ "leather", 5 ] ] ]
+    "components": [ [ [ "fur_patch", 6 ], [ "leather_patch", 5 ] ] ]
   },
   {
     "result": "leather_helmet",
@@ -542,7 +541,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 10 ], [ "water_clean", 10 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 4, "LIST" ], [ "vinegar", 5 ], [ "pine_bough", 10 ] ],
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 12, "LIST" ], [ "vinegar", 5 ], [ "pine_bough", 10 ] ],
       [ [ "salt", 20 ] ]
     ]
   },
@@ -556,7 +555,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 8 ], [ "water_clean", 8 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ], [ "vinegar", 4 ], [ "pine_bough", 8 ] ],
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ], [ "vinegar", 4 ], [ "pine_bough", 8 ] ],
       [ [ "salt", 15 ] ]
     ]
   },
@@ -570,7 +569,7 @@
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [
       [ [ "water", 14 ], [ "water_clean", 14 ] ],
-      [ [ "wax_any", 3, "LIST" ], [ "any_tallow", 6, "LIST" ], [ "vinegar", 8 ], [ "pine_bough", 14 ] ],
+      [ [ "wax_any", 3, "LIST" ], [ "any_tallow", 18, "LIST" ], [ "vinegar", 8 ], [ "pine_bough", 14 ] ],
       [ [ "salt", 25 ] ]
     ]
   },
@@ -619,7 +618,7 @@
     "using": [ [ "sewing_standard", 18 ], [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 8 ], [ "fur_sheet", 1 ] ] ],
+    "components": [ [ [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -635,7 +634,7 @@
     "using": [ [ "sewing_standard", 13 ], [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
-    "components": [ [ [ "fur", 6 ], [ "fur_sheet", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 6 ], [ "fur_sheet", 1 ] ] ]
   },
   {
     "result": "xl_helmet_conical",
@@ -645,7 +644,7 @@
     "using": [ [ "sewing_standard", 23 ], [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 8 ], [ "fur_sheet", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ] ]
   },
   {
     "result": "helmet_acidchitin",
@@ -696,7 +695,7 @@
     "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -712,7 +711,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_galea",
@@ -722,7 +721,7 @@
     "using": [ [ "blacksmithing_standard", 12 ], [ "steel_standard", 3 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 5 ], [ "leather", 5 ] ] ]
+    "components": [ [ [ "fur_patch", 5 ], [ "leather_patch", 5 ] ] ]
   },
   {
     "result": "helmet_kabuto",
@@ -737,7 +736,10 @@
     "using": [ [ "blacksmithing_standard", 48 ], [ "steel_standard", 12 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 16 ], [ "fur_sheet", 2 ], [ "leather", 16 ], [ "leather_sheet", 2 ] ], [ [ "cotton_patch", 16 ] ] ],
+    "components": [
+      [ [ "fur_patch", 16 ], [ "fur_sheet", 2 ], [ "leather_patch", 16 ], [ "leather_sheet", 2 ] ],
+      [ [ "cotton_patch", 16 ] ]
+    ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -753,7 +755,10 @@
     "using": [ [ "blacksmithing_standard", 36 ], [ "steel_standard", 9 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 11 ], [ "fur_sheet", 2 ], [ "leather", 11 ], [ "leather_sheet", 2 ] ], [ [ "cotton_patch", 11 ] ] ]
+    "components": [
+      [ [ "fur_patch", 11 ], [ "fur_sheet", 2 ], [ "leather_patch", 11 ], [ "leather_sheet", 2 ] ],
+      [ [ "cotton_patch", 11 ] ]
+    ]
   },
   {
     "result": "xl_helmet_kabuto",
@@ -763,7 +768,10 @@
     "using": [ [ "blacksmithing_standard", 64 ], [ "steel_standard", 16 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 20 ], [ "fur_sheet", 3 ], [ "leather", 20 ], [ "leather_sheet", 3 ] ], [ [ "cotton_patch", 20 ] ] ]
+    "components": [
+      [ [ "fur_patch", 20 ], [ "fur_sheet", 3 ], [ "leather_patch", 20 ], [ "leather_sheet", 3 ] ],
+      [ [ "cotton_patch", 20 ] ]
+    ]
   },
   {
     "result": "helmet_skull",
@@ -778,7 +786,7 @@
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "skull_canis", 1 ] ] ],
     "using": [ [ "tailoring_leather_sheet", 2 ] ],
-    "byproducts": [ [ "leather", 3 ] ],
+    "byproducts": [ [ "leather_patch", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_leatherworking_basic" },
       { "proficiency": "prof_leatherworking" },
@@ -828,7 +836,7 @@
     "using": [ [ "blacksmithing_standard", 56 ], [ "steel_standard", 14 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -844,7 +852,7 @@
     "using": [ [ "blacksmithing_standard", 40 ], [ "steel_standard", 10 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "platemail_great_helm_xl",
@@ -854,7 +862,7 @@
     "using": [ [ "blacksmithing_standard", 84 ], [ "steel_standard", 21 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 6 ], [ "leather", 6 ] ] ]
+    "components": [ [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "sheet_metal_helmet",
@@ -885,7 +893,7 @@
     "book_learn": [ [ "textbook_fireman", 7 ] ],
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_cotton_sheet", 2 ], [ "tailoring_kevlar_sheet", 4 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "nomex_sheet", 4 ], [ "nomex_sheet_patchwork", 4 ], [ "nomex_hood", 1 ] ] ],
+    "components": [ [ [ "nomex_sheet", 4 ], [ "nomex_hood", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_millinery" }, { "proficiency": "prof_polymerworking" } ]
   },
   {
@@ -895,7 +903,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_cotton_sheet", 1 ], [ "tailoring_kevlar_sheet", 3 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "nomex_sheet", 3 ], [ "nomex_sheet_patchwork", 3 ], [ "nomex_hood", 1 ] ] ]
+    "components": [ [ [ "nomex_sheet", 3 ], [ "nomex_hood", 1 ] ] ]
   },
   {
     "result": "hood_fsurvivor_xl",
@@ -904,7 +912,7 @@
     "time": "6 h 45 m",
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_cotton_sheet", 4 ], [ "tailoring_kevlar_sheet", 6 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "nomex_sheet", 6 ], [ "nomex_sheet_patchwork", 6 ], [ "nomex_hood", 1 ] ] ]
+    "components": [ [ [ "nomex_sheet", 6 ], [ "nomex_hood", 1 ] ] ]
   },
   {
     "result": "hood_wsurvivor_nofur",
@@ -919,7 +927,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_nylon_sheet", 2 ], [ "tailoring_kevlar_sheet", 4 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
+    "components": [ [ [ "faux_fur_patch", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -934,7 +942,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_sheet", 1 ], [ "tailoring_kevlar_sheet", 3 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 6 ] ], [ [ "cotton_patch", 4 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 6 ] ], [ [ "cotton_patch", 4 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
   },
   {
     "result": "hood_wsurvivor_nofur_xl",
@@ -943,7 +951,7 @@
     "time": "8 h",
     "using": [ [ "sewing_aramids", 30 ], [ "tailoring_nylon_sheet", 4 ], [ "tailoring_kevlar_sheet", 6 ] ],
     "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "faux_fur", 10 ] ], [ [ "cotton_patch", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
+    "components": [ [ [ "faux_fur_patch", 10 ] ], [ [ "cotton_patch", 8 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ] ] ]
   },
   {
     "result": "hood_rain",
@@ -1002,7 +1010,7 @@
     "autolearn": true,
     "using": [ [ "sewing_aramids", 20 ], [ "tailoring_nylon_sheet", 2 ], [ "tailoring_kevlar_sheet", 4 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 8 ], [ "fur_sheet", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ],
+    "components": [ [ [ "fur_patch", 8 ], [ "fur_sheet", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_furriery" },
       { "proficiency": "prof_millinery" },
@@ -1018,7 +1026,7 @@
     "time": "6 h",
     "using": [ [ "sewing_aramids", 15 ], [ "tailoring_nylon_sheet", 1 ], [ "tailoring_kevlar_sheet", 3 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 6 ], [ "fur_sheet", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 6 ], [ "fur_sheet", 1 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
   },
   {
     "result": "hood_wsurvivor_xl",
@@ -1027,7 +1035,7 @@
     "time": "6 h 45 m",
     "using": [ [ "sewing_aramids", 40 ], [ "tailoring_nylon_sheet", 4 ], [ "tailoring_kevlar_sheet", 5 ] ],
     "qualities": [ { "id": "LEATHER_AWL", "level": 1 }, { "id": "FABRIC_CUT", "level": 2 } ],
-    "components": [ [ [ "fur", 10 ], [ "fur_sheet", 2 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
+    "components": [ [ [ "fur_patch", 10 ], [ "fur_sheet", 2 ] ], [ [ "hood_rain", 1 ], [ "plastic_sheet_small", 2 ], [ "hood_gut", 1 ] ] ]
   },
   {
     "result": "hood_survivor_xl",
@@ -1118,7 +1126,7 @@
     "time": "1 h",
     "book_learn": [ [ "mag_animecon", 3 ] ],
     "using": [ [ "sewing_standard", 10 ], [ "plastic_molding", 3 ] ],
-    "components": [ [ [ "leather", 2 ] ] ],
+    "components": [ [ [ "leather_patch", 2 ] ] ],
     "proficiencies": [ { "proficiency": "prof_plasticworking" }, { "proficiency": "prof_leatherworking_basic" } ]
   },
   {
@@ -1192,8 +1200,8 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "nomex", 4 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "nomex_patch", 4 ], [ "nomex_hood", 1 ] ],
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1212,8 +1220,8 @@
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "nomex", 3 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 2, "LIST" ] ]
+      [ [ "nomex_patch", 3 ], [ "nomex_hood", 1 ] ],
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
     ]
   },
   {
@@ -1224,8 +1232,8 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "nomex", 6 ], [ "nomex_hood", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "nomex_patch", 6 ], [ "nomex_hood", 1 ] ],
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1403,7 +1411,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 2 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1425,7 +1433,7 @@
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1439,7 +1447,7 @@
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
       [ [ "sheet_metal_small", 3 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1459,7 +1467,7 @@
     "tools": [ [ [ "surface_heat", 20, "LIST" ] ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1477,7 +1485,7 @@
     "using": [ [ "sewing_standard", 8 ], [ "tailoring_leather_sheet", 1 ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1489,7 +1497,7 @@
     "using": [ [ "sewing_standard", 13 ], [ "tailoring_leather_sheet", 3 ] ],
     "components": [
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1536,7 +1544,7 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 4, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 12, "LIST" ] ]
     ],
     "proficiencies": [
       { "proficiency": "prof_closures_waterproofing" },
@@ -1556,7 +1564,7 @@
     "components": [
       [ [ "glasses_bal", 1 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 3, "LIST" ] ]
+      [ [ "wax_any", 1, "LIST" ], [ "any_tallow", 9, "LIST" ] ]
     ]
   },
   {
@@ -1569,7 +1577,7 @@
     "components": [
       [ [ "glasses_bal", 2 ], [ "rigid_plastic_sheet", 1 ], [ "survivor_goggles", 1 ] ],
       [ [ "mask_gas", 1 ], [ "mask_bunker", 1 ], [ "mask_gas_half", 1 ], [ "mask_gas_xs", 1 ], [ "mask_gas_xl", 1 ] ],
-      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 6, "LIST" ] ]
+      [ [ "wax_any", 2, "LIST" ], [ "any_tallow", 18, "LIST" ] ]
     ]
   },
   {
@@ -1908,7 +1916,7 @@
         [ "fitover_sunglasses", 1 ]
       ],
       [ [ "polycarbonate_chunk", 4 ], [ "glasses_bal", 2 ] ],
-      [ [ "leather", 3 ] ],
+      [ [ "leather_patch", 3 ] ],
       [ [ "kevlar_sheet_layered", 2 ] ]
     ],
     "proficiencies": [
@@ -1960,9 +1968,7 @@
     "time": "1 h 5 m",
     "autolearn": true,
     "using": [ [ "tailoring_leather_sheet", 1 ] ],
-    "components": [
-      [ [ "any_tallow", 1, "LIST" ], [ "cooking_oil", 8 ], [ "cooking_oil2", 8 ], [ "lamp_oil", 200 ], [ "motor_oil", 200 ] ]
-    ],
+    "components": [ [ [ "any_tallow", 8, "LIST" ], [ "cooking_oil", 8 ], [ "lamp_oil", 200 ], [ "motor_oil", 200 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_millinery" },
       { "proficiency": "prof_leatherworking_basic" },
@@ -2099,7 +2105,7 @@
     "time": "9 h 10 m",
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 5 ] ],
     "using": [ [ "forging_standard", 3 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 7 ] ], [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "bronze_fragment", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [ { "proficiency": "prof_armorsmithing" }, { "proficiency": "prof_redsmithing" } ]
   },
   {
@@ -2108,7 +2114,7 @@
     "copy-from": "helmet_corinthian",
     "time": "9 h 10 m",
     "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 5 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_corinthian",
@@ -2116,7 +2122,7 @@
     "copy-from": "helmet_corinthian",
     "time": "10 h 20 m",
     "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 10 ] ], [ [ "fur", 6 ], [ "leather", 6 ] ] ]
+    "components": [ [ [ "bronze_fragment", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "helmet_bronze",
@@ -2130,7 +2136,7 @@
     "autolearn": true,
     "book_learn": [ [ "bronze_book", 4 ], [ "textbook_armwest", 4 ], [ "recipe_melee", 4 ] ],
     "using": [ [ "forging_standard", 3 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 7 ] ], [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "bronze_fragment", 7 ] ], [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [ { "proficiency": "prof_armorsmithing" }, { "proficiency": "prof_redsmithing" } ]
   },
   {
@@ -2139,7 +2145,7 @@
     "copy-from": "helmet_bronze",
     "time": "9 h 10 m",
     "using": [ [ "forging_standard", 2 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 5 ] ], [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "bronze_fragment", 5 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_bronze",
@@ -2147,7 +2153,7 @@
     "copy-from": "helmet_bronze",
     "time": "10 h 20 m",
     "using": [ [ "forging_standard", 4 ], [ "bronzesmithing_tools", 1 ] ],
-    "components": [ [ [ "scrap_bronze", 10 ] ], [ [ "fur", 6 ], [ "leather", 6 ] ] ]
+    "components": [ [ [ "bronze_fragment", 10 ] ], [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "helmet_armet",
@@ -2162,7 +2168,7 @@
     "using": [ [ "blacksmithing_standard", 48 ], [ "steel_standard", 12 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -2183,7 +2189,7 @@
     "using": [ [ "blacksmithing_standard", 40 ], [ "steel_standard", 10 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -2337,7 +2343,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 4 ], [ "leather", 4 ] ] ],
+    "components": [ [ [ "fur_patch", 4 ], [ "leather_patch", 4 ] ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -2353,7 +2359,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
-    "components": [ [ [ "fur", 3 ], [ "leather", 3 ] ] ]
+    "components": [ [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
   },
   {
     "result": "xl_helmet_nasal",
@@ -2363,7 +2369,7 @@
     "using": [ [ "blacksmithing_standard", 4 ], [ "steel_standard", 1 ] ],
     "qualities": [ { "id": "CHISEL", "level": 3 } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
-    "components": [ [ [ "fur", 6 ], [ "leather", 6 ] ] ]
+    "components": [ [ [ "fur_patch", 6 ], [ "leather_patch", 6 ] ] ]
   },
   {
     "result": "turban_helmet",

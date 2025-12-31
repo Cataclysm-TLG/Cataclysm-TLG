@@ -138,23 +138,22 @@
   },
   {
     "type": "snippet",
-    "category": "empty_malnutrition",
+    "category": "empty_malnourished",
     "text": [
       "You feel weak due to malnutrition.",
-      "Your body feels starved of essential nutrients, leaving you feeling weak and sick.",
-      "You feel a persistent ache in your bones, a sign of severe malnutrition.",
-      "You feel a constant sense of fatigue, your body struggling to function."
+      "You have got to get something to eat.",
+      "You feel sluggish and you can't stop thinking about food.",
+      "You feel achey and tired."
     ]
   },
   {
     "type": "snippet",
-    "category": "malnutrition",
+    "category": "malnourished",
     "text": [
-      "Despite having something in your stomach, you still feel like you haven't eaten in days…",
-      "You feel a persistent sense of hunger, even after eating.",
-      "Your body feels weak and frail, a sign of severe malnutrition.",
-      "You feel a constant sense of fatigue, your body struggling to function.",
-      "You feel a persistent ache in your bones, a sign of severe malnutrition."
+      "Despite having something in your stomach, you're still craving more.",
+      "You can tell you're not getting enough to eat lately.",
+      "Your thoughts keep drifting back to food.",
+      "You feel achey and tired."
     ]
   },
   {

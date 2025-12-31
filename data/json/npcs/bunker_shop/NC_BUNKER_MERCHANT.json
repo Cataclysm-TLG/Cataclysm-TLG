@@ -32,7 +32,7 @@
   {
     "type": "item_group",
     "id": "NC_BUNKER_MERCHANT_coat",
-    "items": [ [ "hoodie", 50 ], [ "kevlar", 50 ] ]
+    "items": [ [ "hoodie", 50 ], [ "ballistic_vest_concealable", 50 ] ]
   },
   {
     "type": "item_group",

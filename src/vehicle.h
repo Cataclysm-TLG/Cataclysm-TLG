@@ -74,7 +74,7 @@ class vehicle_part_with_feature_range;
 
 void handbrake( map &here );
 
-void practice_pilot_proficiencies( Character &p, bool boating, bool skating );
+void practice_pilot_proficiencies( Character &p, bool boating, bool skating, bool offroad );
 
 namespace catacurses
 {

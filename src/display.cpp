@@ -618,64 +618,30 @@ std::pair<std::string, nc_color> display::weight_text_color( const Character &u 
     const float bmi = u.get_bmi_fat();
     std::string weight_string;
     nc_color weight_color = c_light_gray;
-    if( get_option<bool>( "CRAZY" ) ) {
-        if( bmi > character_weight_category::morbidly_obese + 10.0f ) {
-            weight_string = translate_marker( "AW HELL NAH" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::morbidly_obese + 5.0f ) {
-            weight_string = translate_marker( "DAYUM" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::morbidly_obese ) {
-            weight_string = translate_marker( "Fluffy" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::very_obese ) {
-            weight_string = translate_marker( "Husky" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::obese ) {
-            weight_string = translate_marker( "Healthy" );
-            weight_color = c_light_red;
-        } else if( bmi > character_weight_category::overweight ) {
-            weight_string = translate_marker( "Big" );
-            weight_color = c_yellow;
-        } else if( bmi > character_weight_category::normal ) {
-            weight_string = translate_marker( "Normal" );
-            weight_color = c_light_gray;
-        } else if( bmi > character_weight_category::underweight ) {
-            weight_string = translate_marker( "Bean Pole" );
-            weight_color = c_yellow;
-        } else if( bmi > character_weight_category::emaciated ) {
-            weight_string = translate_marker( "Emaciated" );
-            weight_color = c_light_red;
-        } else {
-            weight_string = translate_marker( "Spooky Scary Skeleton" );
-            weight_color = c_red;
-        }
+    if( bmi > character_weight_category::morbidly_obese ) {
+        weight_string = translate_marker( "Morbidly Obese" );
+        weight_color = c_red;
+    } else if( bmi > character_weight_category::very_obese ) {
+        weight_string = translate_marker( "Very Obese" );
+        weight_color = c_red;
+    } else if( bmi > character_weight_category::obese ) {
+        weight_string = translate_marker( "Obese" );
+        weight_color = c_light_red;
+    } else if( bmi > character_weight_category::overweight ) {
+        weight_string = translate_marker( "Overweight" );
+        weight_color = c_light_gray;
+    } else if( bmi > character_weight_category::normal ) {
+        weight_string = translate_marker( "Normal" );
+        weight_color = c_light_gray;
+    } else if( bmi > character_weight_category::underweight ) {
+        weight_string = translate_marker( "Underweight" );
+        weight_color = c_yellow;
+    } else if( bmi > character_weight_category::emaciated ) {
+        weight_string = translate_marker( "Emaciated" );
+        weight_color = c_light_red;
     } else {
-        if( bmi > character_weight_category::morbidly_obese ) {
-            weight_string = translate_marker( "Morbidly Obese" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::very_obese ) {
-            weight_string = translate_marker( "Very Obese" );
-            weight_color = c_red;
-        } else if( bmi > character_weight_category::obese ) {
-            weight_string = translate_marker( "Obese" );
-            weight_color = c_light_red;
-        } else if( bmi > character_weight_category::overweight ) {
-            weight_string = translate_marker( "Overweight" );
-            weight_color = c_light_gray;
-        } else if( bmi > character_weight_category::normal ) {
-            weight_string = translate_marker( "Normal" );
-            weight_color = c_light_gray;
-        } else if( bmi > character_weight_category::underweight ) {
-            weight_string = translate_marker( "Underweight" );
-            weight_color = c_yellow;
-        } else if( bmi > character_weight_category::emaciated ) {
-            weight_string = translate_marker( "Emaciated" );
-            weight_color = c_light_red;
-        } else {
-            weight_string = translate_marker( "Skeletal" );
-            weight_color = c_red;
-        }
+        weight_string = translate_marker( "Skeletal" );
+        weight_color = c_red;
     }
     return std::make_pair( _( weight_string ), weight_color );
 }

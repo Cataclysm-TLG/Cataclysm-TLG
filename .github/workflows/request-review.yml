@@ -1,9 +1,9 @@
 name: Auto request review
 
 
-on:
-  pull_request_target:
-    types: [opened, synchronize, ready_for_review, reopened]
+# on:
+#  pull_request_target:
+#   types: [opened, synchronize, ready_for_review, reopened]
 
 
 concurrency:

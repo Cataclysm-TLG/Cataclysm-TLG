@@ -1204,7 +1204,6 @@
     "price_postapoc": "1 USD",
     "to_hit": -1,
     "material": [ "plastic", "steel" ],
-    "ascii_picture": "wristwatch",
     "symbol": "[",
     "color": "dark_gray",
     "sided": true,
@@ -1249,8 +1248,7 @@
     "copy-from": "badge_abstract",
     "type": "ARMOR",
     "name": { "str": "deputy badge" },
-    "description": "A tarnished silver star gives an air of authority to the wearer.",
-    "ascii_picture": "badge_deputy"
+    "description": "A tarnished silver star gives an air of authority to the wearer."
   },
   {
     "id": "badge_detective",

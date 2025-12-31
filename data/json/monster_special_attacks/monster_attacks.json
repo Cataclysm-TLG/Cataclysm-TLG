@@ -141,7 +141,7 @@
     "cooldown": 15,
     "move_cost": 150,
     "hitsize_min": 1,
-    "range": 5,
+    "range": 4,
     "grab": true,
     "condition": {
       "and": [

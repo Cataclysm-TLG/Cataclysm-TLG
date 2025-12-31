@@ -1127,24 +1127,28 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     }
 
     if( draw_overlays ) {
-        // Draw path for auto-travel
         for( const tripoint_abs_omt &pos : you.omt_path ) {
             if( pos.z() == center_pos.z() ) {
-                draw_from_id_string( "highlight", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0,
-                                     0, lit_level::LIT,
-                                     false );
+                draw_from_id_string(
+                    "highlight",
+                    tripoint_bub_ms( global_omt_to_draw_position( pos ) ),
+                    0, 0, lit_level::LIT, false
+                );
             }
         }
 
         if( g->follower_path_to_show ) {
             for( const tripoint_abs_omt &pos : g->follower_path_to_show->omt_path ) {
                 if( pos.z() == center_pos.z() ) {
-                    draw_from_id_string( "highlight", tripoint_bub_ms( global_omt_to_draw_position( center_pos ) ), 0,
-                                         0, lit_level::LIT,
-                                         false );
+                    draw_from_id_string(
+                        "highlight",
+                        tripoint_bub_ms( global_omt_to_draw_position( pos ) ),
+                        0, 0, lit_level::LIT, false
+                    );
                 }
             }
         }
+
 
         // only draw in full tiles so it doesn't get cut off
         const std::optional<std::pair<tripoint_abs_omt, std::string>> mission_arrow =

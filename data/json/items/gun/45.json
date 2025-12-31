@@ -65,7 +65,6 @@
         "description": "Developed as a lower-cost successor to H&K's own MP5, the Universal Machine Pistol is a closed-bolt, simple blowback sub-machine gun constructed of lightweight polymer.  In order to make it more attractive to American police departments, it was offered in .40 S&W and .45 ACP as well as the ubiquitous 9x19mm, all using the same receiver.  This was meant to simplify manufacturing, but it also means the user can change the caliber with the right parts and magazine."
       }
     ],
-    "ascii_picture": "hk_ump",
     "weight": "1100 g",
     "volume": "4401 ml",
     "longest_side": "426 mm",
@@ -123,7 +122,6 @@
         "description": "The M45A1 supplanted earlier M45 MEUSOC pistols in use by Force Recon elements of Marine Expeditionary Units.  Where the original M45 pistols were gutted M1911A1s hand-fitted by USMC armorers, the updated M45A1s are hardly different from any other commercial 1911 design, save for their dual recoil springs.  Most were replaced in 2016 with Glock 19s due to logistics issues."
       }
     ],
-    "ascii_picture": "m1911",
     "weight": "1120 g",
     "volume": "454 ml",
     "longest_side": "245 mm",
@@ -197,7 +195,6 @@
     "reload_noise_volume": 10,
     "name": { "str": "pipe rifle" },
     "description": "A home-made rifle.  It is simply a pipe attached to a stock, with a hammer to strike the single round it holds.",
-    "ascii_picture": "ps_pipe_gun",
     "weight": "2114 g",
     "volume": "1610 ml",
     "longest_side": "100 cm",
@@ -496,7 +493,6 @@
         "description": "A full-sized version of the highly successful Glock.  This model is chambered in .45 ACP."
       }
     ],
-    "ascii_picture": "glock_20",
     "weight": "835 g",
     "volume": "490 ml",
     "longest_side": "209 mm",
