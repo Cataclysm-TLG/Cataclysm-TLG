@@ -4143,6 +4143,9 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     }
 
     optional( jo, true, "weapon_category", def.weapon_category, auto_flags_reader<weapon_category_id> {} );
+    optional( jo, def.was_loaded, "melee_damage", def.melee );
+    optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
+    optional( jo, def.was_loaded, "explosion", def.explosion );
 
     optional( jo, def.was_loaded, "melee_damage", def.melee );
     optional( jo, def.was_loaded, "thrown_damage", def.thrown_damage );
