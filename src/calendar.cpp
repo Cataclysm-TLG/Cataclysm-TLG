@@ -33,7 +33,7 @@ static lat_long location = { 42.36_degrees, -71.06_degrees };
 
 time_point calendar::start_of_cataclysm = calendar::turn_zero;
 time_point calendar::fall_of_civilization = calendar::turn_zero + 20_days;
-time_point calendar::start_of_game = fall_of_civilization;
+time_point calendar::start_of_game = calendar::fall_of_civilization;
 time_point calendar::turn = calendar::turn_zero;
 season_type calendar::initial_season = SPRING;
 
