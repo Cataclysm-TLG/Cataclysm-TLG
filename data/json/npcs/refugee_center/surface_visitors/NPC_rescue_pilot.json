@@ -8,7 +8,7 @@
     "attitude": 0,
     "mission": 7,
     "chat": "TALK_RESCUE_PILOT",
-    "faction": "no_faction",
+    "faction": "wasteland_scavengers",
     "mission_offered": "MISSION_RESCUE_PILOT_HOSPITAL"
   },
   {
@@ -20,15 +20,16 @@
     "traits": [
       { "trait": "BGSS_Rescue_Pilot_1" },
       { "trait": "NOMAD" },
-      { "trait": "EXTROVERT" },
+      { "trait": "SOCIAL1" },
       { "trait": "WAKEFUL" },
       { "trait": "PONDEROUS1" },
+      { "trait": "personality_brave_plus" },
       { "group": "Appearance_demographics" }
     ],
-    "bonus_str": { "rng": [ -2, 1 ] },
-    "bonus_dex": { "rng": [ 0, 3 ] },
+    "bonus_str": { "rng": [ -2, 2 ] },
+    "bonus_dex": { "rng": [ 0, 4 ] },
     "bonus_int": { "rng": [ -1, 2 ] },
-    "bonus_per": { "rng": [ 1, 4 ] },
+    "bonus_per": { "rng": [ 1, 6 ] },
     "worn_override": "NC_RESCUE_PILOT_worn",
     "carry_override": "NC_RESCUE_PILOT_carry",
     "weapon_override": "NC_RESCUE_PILOT_wield",
@@ -55,9 +56,10 @@
       { "item": "sunglasses" },
       { "item": "socks_wool" },
       { "item": "leather_belt" },
+      { "item": "mbag" },
       { "item": "bandana_head" },
       { "item": "knife_hunting", "container-item": "sheath" },
-      { "item": "tank_top", "variant": "tank_top_camo" },
+      { "item": "tank_top" },
       { "item": "gloves_leather" }
     ]
   },
@@ -89,9 +91,39 @@
       "no": "Hello there.  Glad to see an unfamiliar face around here."
     },
     "responses": [
-      { "text": "Who are you?", "topic": "TALK_RESCUE_PILOT_WHO" },
-      { "text": "Do you need anything?", "topic": "TALK_RESCUE_PILOT_HELP" },
-      { "text": "Well, bye.", "topic": "TALK_DONE" }
+      { "text": "Who are you?", "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } }, "topic": "TALK_RESCUE_PILOT_WHO" },
+      { "text": "Do you need anything?", "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } }, "topic": "TALK_RESCUE_PILOT_HELP" },
+      {
+        "text": "About that helicopter…",
+        "condition": {
+          "and": [
+            { "not": { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" } },
+            { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }
+          ]
+        },
+        "topic": "TALK_RESCUE_PILOT_DANGER"
+      },
+      { 
+        "text": "Alright, let's get moving.",
+        "condition": {
+          "and": [
+            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
+            { "not": { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" } }
+          ]
+        },
+        "success": { "effect": [ "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ], "topic": "TALK_DONE" }
+      },
+      { 
+        "text": "Wait here for now.",
+        "condition": {
+          "and": [
+            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
+            { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" }
+          ]
+        },
+        "success": { "effect": [ "stop_following", { "npc_lose_var": "rescue_pilot_temporary_follower" } ], "topic": "TALK_DONE" }
+      },
+      { "text": "I have to get going.", "topic": "TALK_DONE" }
     ]
   },
   {
@@ -134,54 +166,21 @@
     "id": "TALK_RESCUE_PILOT_HELP",
     "type": "talk_topic",
     "dynamic_line": "Well here's the thing: I'm a pilot, and I want to get airborne again.  I dunno if there's anyone left to find or help or whatever out there, but I don't like being grounded like this.  If you can help get me back to my bird, I'll fly you anywhere you want to go.  Problem is, it's up on a roof and I can't reach it by myself.  I'm not really equipped for that kind of thing.",
+
     "responses": [
-      { "text": "Where did you leave your ride?", "topic": "TALK_RESCUE_PILOT_DANGER" },
-      { "text": "I'll have to think about it.", "topic": "TALK_RESCUE_PILOT" }
+      { "text": "Where did you leave your ride?", "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }, "topic": "TALK_RESCUE_PILOT_DANGER" },
+      { "text": "I'll have to think about it.", "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }, "topic": "TALK_RESCUE_PILOT" }
     ]
   },
-    {
+  {
     "id": "TALK_RESCUE_PILOT_DANGER",
     "type": "talk_topic",
     "dynamic_line": "Unless the army got to it, and let's just say I don't think there's much chance of that, it'll be parked up on the roof of the hospital I was working with.  Hopefully I don't have to explain to you how dangerous that place probably is by now.",
     "responses": [
-      { "text": "I'll try to get us there, just tell me where to go.", "topic": "TALK_MISSION_ACCEPTED", "effect": [ "assign_mission", "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ] },
+      { "text": "I'll try to get us there, just tell me where to go.", "topic": "TALK_DONE", "effect": [ "assign_mission", "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ] },
       { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
     ]
   },
-  {
-    "id": "TALK_RESCUE_PILOT_FOLLOW",
-    "type": "talk_topic",
-    "dynamic_line": "Alright, lead the way.",
-    "responses": [
-      {
-                    "condition": {
-          "and": [
-            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
-            { "not": { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" } }
-          ]
-        },
-        "text": "OK.",
-        "success": { "effect": [ "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ], "topic": "TALK_DONE" }
-      }
-    ]
-  },
-    {
-    "id": "TALK_RESCUE_PILOT_STOP_FOLLOWING",
-    "type": "talk_topic",
-    "dynamic_line": "I'll wait here then.",
-    "responses": [
-      {
-                    "condition": {
-          "and": [
-            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
-            { "not": { "npc_has_var": "rescue_pilot_temporary_follower", "value": "no" } }
-          ]
-        },
-        "text": "OK.",
-        "success": { "effect": [ "stop_following", { "npc_lose_var": "rescue_pilot_temporary_follower" } ], "topic": "TALK_DONE" }
-      }
-    ]
-  },  
   {
     "id": "MISSION_RESCUE_PILOT_HOSPITAL",
     "type": "mission_definition",
@@ -225,19 +224,6 @@
     "difficulty": 0,
     "value": 0,
     "start": {
-      "assign_mission_target": {
-        "//": "om_special is a no-op here - we are already there. It is here to suppress a false linter positive.",
-        "om_terrain": "hospital_mission_rescue_pilot_25",
-        "om_special": "hospital_mission_rescue_pilot",
-        "origin_npc": true,
-        "reveal_radius": 1,
-        "min_distance": 10,
-        "search_range": 80,
-        "z": 5
-      },
-      "update_mapgen": { "place_npcs": [ { "class": "NC_RESCUE_PILOT", "x": 0, "y": 0, "target": true } ] }
-    },
-    "end": {
       "effect": [
         "follow"
       ]

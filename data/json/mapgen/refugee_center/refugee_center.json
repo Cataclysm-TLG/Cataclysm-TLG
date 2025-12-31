@@ -315,6 +315,7 @@
         { "class": "scavenger_merc", "x": 48, "y": 5 },
         { "class": "guard", "x": 39, "y": 4, "unique_id": "GUARD1" },
         { "class": "guard", "x": 36, "y": 7, "unique_id": "GUARD2" },
+        { "class": "rescue_pilot", "x": 40, "y": 17 },
         { "class": "arsonist", "x": 38, "y": 19 },
         { "class": "old_guard_rep", "x": 47, "y": 10 },
         { "class": "guard", "x": 45, "y": 3, "unique_id": "GUARD3" },
