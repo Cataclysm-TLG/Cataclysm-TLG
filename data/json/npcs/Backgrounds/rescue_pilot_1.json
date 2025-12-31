@@ -1,0 +1,58 @@
+[
+  {
+    "id": "BGSS_RESCUE_PILOT_1_STORY1",
+    "type": "talk_topic",
+    "dynamic_line": {
+      "gendered_line": "I was a SAR pilot - that's Search And Rescue.  I used to help out with lost hikers, mostly.  Pick 'em up and fly 'em back to the hospital, or if someone got hurt out in the boonies, you know.",
+      "relevant_genders": [ "npc" ]
+    },
+    "responses": [
+      { "text": "What about when things went bad?", "topic": "BGSS_RESCUE_PILOT_1_STORY2" },
+      { "text": "<done_conversation_section>", "topic": "TALK_FRIEND_CONVERSATION" },
+      { "text": "<end_talking>", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "BGSS_RESCUE_PILOT_1_STORY2",
+    "type": "talk_topic",
+    "dynamic_line": {
+      "gendered_line": "Well when the riots got worse, or I guess before that, we were all run pretty ragged.  Lots of car crashes, uh, violence, which is weird thinking about it now.  The hospitals were filling up, but not 'cause of a pandemic, not like COVID anyway.  Everybody was just running wild, beating on each other, shootouts.  The hospital looked like Fallujah or something, everyone all banged up, bleeding out in the waiting rooms.  Then there wasn't any more room, and they didn't have time to start burying dead people before they started getting back up…  So the army rolled in with like, jeeps and a tank and everything.  Took over the whole operation.  A lot more people died.",
+      "relevant_genders": [ "npc" ]
+    },
+    "responses": [
+      { "text": "I can see where this is going.", "topic": "BGSS_RESCUE_PILOT_1_STORY3" },
+      { "text": "<done_conversation_section>", "topic": "TALK_FRIEND_CONVERSATION" },
+      { "text": "<end_talking>", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "BGSS_RESCUE_PILOT_1_STORY3",
+    "type": "talk_topic",
+    "dynamic_line": {
+      "gendered_line": "Yeah, for sure.  They mostly weren't any better.  It was just like…I thought I knew what hate was, you know?  But it was demonic, how people started acting, and I don't say that lightly.  I just wish we'd realized sooner that it wasn't them, it was…I don't know, something that got into everybody, brought all the zombies back to life.  Demonic, like I said.",
+      "relevant_genders": [ "npc" ]
+    },
+    "responses": [
+      {
+        "text": "[Spiritual] Demonic is a good word for it.",
+        "topic": "BGSS_RESCUE_PILOT_1_STORY4",
+        "condition": { "and": [ { "u_has_trait": "SPIRITUAL" } ] }
+      },
+      { "text": "You think it's a spiritual thing?", "topic": "BGSS_RESCUE_PILOT_1_STORY4" },
+      { "text": "<done_conversation_section>", "topic": "TALK_FRIEND_CONVERSATION" },
+      { "text": "<end_talking>", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "BGSS_RESCUE_PILOT_1_STORY4",
+    "type": "talk_topic",
+    "dynamic_line": {
+      "gendered_line": "I don't really know what I believe.  It's too sad to think about.  I just wanted to help people, and I wonder, how many of the crazies out there were just like me before it got to them?  A lot of them - the zombies, too - they must have been good people, once.  It's too bad.  Too bad…",
+      "relevant_genders": [ "npc" ]
+    },
+    "responses": [
+      { "text": "<done_conversation_section>", "topic": "TALK_FRIEND_CONVERSATION" },
+      { "text": "<end_talking>", "topic": "TALK_DONE" }
+    ]
+  }
+]

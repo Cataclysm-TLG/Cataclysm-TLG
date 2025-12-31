@@ -513,6 +513,20 @@
   {
     "type": "mapgen",
     "method": "json",
+    "nested_mapgen_id": "military_casings_1x1",
+    "object": {
+      "mapgensize": [ 1, 1 ],
+      "place_item": [
+        { "item": "223_casing", "x": 0, "y": 0, "chance": 70, "repeat": [ 1, 4 ] },
+        { "item": "308_casing", "x": 0, "y": 0, "chance": 20, "repeat": [ 1, 3 ] },
+        { "item": "9mm_casing", "x": 0, "y": 0, "chance": 6, "repeat": [ 1, 3 ] },
+        { "item": "50_casing", "x": 0, "y": 0, "chance": 2, "repeat": [ 1, 2 ] }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
     "nested_mapgen_id": "rolling_trash_can_1x1",
     "object": {
       "mapgensize": [ 1, 1 ],

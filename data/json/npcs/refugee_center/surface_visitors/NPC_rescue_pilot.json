@@ -1,0 +1,277 @@
+[
+  {
+    "type": "npc",
+    "id": "rescue_pilot",
+    "//": "Appears in the refugee center as a partner for hire.",
+    "name_suffix": "Pilot",
+    "class": "NC_RESCUE_PILOT",
+    "attitude": 0,
+    "mission": 7,
+    "chat": "TALK_RESCUE_PILOT",
+    "faction": "wasteland_scavengers",
+    "mission_offered": "MISSION_RESCUE_PILOT_HOSPITAL"
+  },
+  {
+    "type": "npc_class",
+    "id": "NC_RESCUE_PILOT",
+    "name": { "str": "Rescue Pilot" },
+    "job_description": "I just want to fly.",
+    "common": false,
+    "traits": [
+      { "trait": "BGSS_Rescue_Pilot_1" },
+      { "trait": "NOMAD" },
+      { "trait": "SOCIAL1" },
+      { "trait": "WAKEFUL" },
+      { "trait": "PONDEROUS1" },
+      { "trait": "personality_brave_plus" },
+      { "group": "Appearance_demographics" }
+    ],
+    "bonus_str": { "rng": [ -2, 2 ] },
+    "bonus_dex": { "rng": [ 0, 4 ] },
+    "bonus_int": { "rng": [ -1, 2 ] },
+    "bonus_per": { "rng": [ 1, 6 ] },
+    "worn_override": "NC_RESCUE_PILOT_worn",
+    "carry_override": "NC_RESCUE_PILOT_carry",
+    "weapon_override": "NC_RESCUE_PILOT_wield",
+    "skills": [
+      { "skill": "ALL", "level": { "mul": [ { "one_in": 3 }, { "sum": [ { "dice": [ 2, 2 ] }, { "rng": [ 0, -4 ] } ] } ] } },
+      { "skill": "driving", "bonus": { "rng": [ 3, 7 ] } },
+      { "skill": "melee", "bonus": { "rng": [ 0, 1 ] } },
+      { "skill": "mechanics", "bonus": { "rng": [ 1, 2 ] } },
+      { "skill": "firstaid", "bonus": { "rng": [ 1, 2 ] } },
+      { "skill": "survival", "bonus": { "rng": [ 1, 2 ] } }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_RESCUE_PILOT_worn",
+    "subtype": "collection",
+    "items": [
+      { "item": "vest" },
+      { "item": "jeans" },
+      { "item": "briefs" },
+      { "item": "jacket_jean" },
+      { "item": "polo_shirt" },
+      { "item": "boots_hiking" },
+      { "item": "sunglasses" },
+      { "item": "socks_wool" },
+      { "item": "leather_belt" },
+      { "item": "mbag" },
+      { "item": "bandana_head" },
+      { "item": "knife_hunting", "container-item": "sheath" },
+      { "item": "tank_top" },
+      { "item": "gloves_leather" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_RESCUE_PILOT_carry",
+    "subtype": "collection",
+    "items": [ { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] }, { "group": "any_MRE", "count": 2 } ]
+  },
+  {
+    "type": "item_group",
+    "id": "NC_RESCUE_PILOT_wield",
+    "subtype": "collection",
+    "items": [ { "item": "golf_club" } ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT",
+    "type": "talk_topic",
+    "dynamic_line": {
+      "u_is_wearing": "badge_marshal",
+      "yes": { "gendered_line": "Hello there, Marshal.  Have you got a minute?", "relevant_genders": [ "npc" ] },
+      "no": "Hello there.  Glad to see an unfamiliar face around here."
+    },
+    "responses": [
+      {
+        "text": "Who are you?",
+        "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } },
+        "topic": "TALK_RESCUE_PILOT_WHO"
+      },
+      {
+        "text": "Do you need anything?",
+        "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } },
+        "topic": "TALK_RESCUE_PILOT_HELP"
+      },
+      {
+        "text": "About that helicopter…",
+        "condition": {
+          "and": [
+            { "not": { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" } },
+            { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }
+          ]
+        },
+        "topic": "TALK_RESCUE_PILOT_DANGER"
+      },
+      {
+        "text": "Alright, let's get moving.",
+        "condition": {
+          "and": [
+            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
+            { "not": { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" } }
+          ]
+        },
+        "success": {
+          "effect": [ "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ],
+          "topic": "TALK_DONE"
+        }
+      },
+      {
+        "text": "Wait here for now.",
+        "condition": {
+          "and": [
+            { "u_has_mission": "MISSION_RESCUE_PILOT_HOSPITAL" },
+            { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" }
+          ]
+        },
+        "success": { "effect": [ "stop_following", { "npc_lose_var": "rescue_pilot_temporary_follower" } ], "topic": "TALK_DONE" }
+      },
+      { "text": "I have to get going.", "topic": "TALK_DONE" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_WHO",
+    "type": "talk_topic",
+    "dynamic_line": "Well up until recently I was a search and rescue pilot.  Now I guess I'm more of a pedestrian.",
+    "responses": [
+      { "text": "A pilot?", "topic": "TALK_RESCUE_PILOT_WHO_2" },
+      { "text": "Nevermind that for now.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_WHO_2",
+    "type": "talk_topic",
+    "dynamic_line": "Yeah, I was flying medevac, for all the good it did.  There wound up being nowhere to take anyone.",
+    "responses": [
+      { "text": "What happened?", "topic": "TALK_RESCUE_PILOT_WHO_3" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_WHO_3",
+    "type": "talk_topic",
+    "dynamic_line": "Well at first they had me flying people out the mountains to a hospital, but then things started to get too bad in the city and, well, you know what happened with the army and all of that.",
+    "responses": [
+      { "text": "Not really.  What happened with the army?", "topic": "TALK_RESCUE_PILOT_ARMY" },
+      { "text": "Right.", "topic": "TALK_RESCUE_PILOT_WHO_4" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_ARMY",
+    "type": "talk_topic",
+    "dynamic_line": "Oh, you don't remember?  I wouldn't worry too much, seems a lot of people lost a week or two around the time the bombs fell.  Long story short, the army--well, not just them, it was the guard and the police, whoever really.  Order kind of fell apart and some of the guys cracked, started shooting at each other or the evacuees.  That was right around the time the dead started walking…a lot of people really couldn't handle that.  Anyway most the refugee camps…the FEMA camps, the evac shelters…most of 'em turned into death traps pretty quick.  I'm surprised these folk here are getting on as well as they are.",
+    "responses": [
+      { "text": "How did you wind up here?", "topic": "TALK_RESCUE_PILOT_WHO_4" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_WHO_4",
+    "type": "talk_topic",
+    "dynamic_line": "I wound up getting chased out of town myself, had to leave my ride behind and just run.  Yusuke, the mut--uh, the furry guy who hangs out with the folks in the lobby, he found me, brought me back here.",
+    "responses": [
+      { "text": "What about your helicopter?", "topic": "TALK_RESCUE_PILOT_HELP" },
+      { "text": "Are you part of Yusuke's group?", "topic": "TALK_RESCUE_PILOT_YUSUKE" },
+      { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_YUSUKE",
+    "type": "talk_topic",
+    "dynamic_line": "Nah.  I owe Yusuke for getting me someplace safe, but I'm not trying to set up camp here and most of these people don't want outsiders sticking around anyway.  I just need to get my helicopter back.",
+    "responses": [
+      { "text": "Let's talk about that helicopter.", "topic": "TALK_RESCUE_PILOT_HELP" },
+      { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_HELP",
+    "type": "talk_topic",
+    "dynamic_line": "Well here's the thing: I'm a pilot, and I want to get airborne again.  I dunno if there's anyone left to find or help or whatever out there, but I don't like being grounded like this.  If you can help get me back to my bird, I'll fly you anywhere you want to go.  Problem is, it's up on a roof and I can't reach it by myself.  I'm not really equipped for that kind of thing.",
+    "responses": [
+      {
+        "text": "Where did you leave your ride?",
+        "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" },
+        "topic": "TALK_RESCUE_PILOT_DANGER"
+      },
+      {
+        "text": "I'll have to think about it.",
+        "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" },
+        "topic": "TALK_RESCUE_PILOT"
+      }
+    ]
+  },
+  {
+    "id": "TALK_RESCUE_PILOT_DANGER",
+    "type": "talk_topic",
+    "dynamic_line": "Unless the army got to it, and let's just say I don't think there's much chance of that, it'll be parked up on the roof of the hospital I was working with.  Hopefully I don't have to explain to you how dangerous that place probably is by now.",
+    "responses": [
+      {
+        "text": "I'll try to get us there, just tell me where to go.",
+        "topic": "TALK_DONE",
+        "effect": [ "assign_mission", "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ]
+      },
+      { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
+    ]
+  },
+  {
+    "id": "MISSION_RESCUE_PILOT_HOSPITAL",
+    "type": "mission_definition",
+    "name": { "str": "Get to the Chopper" },
+    "description": "The rescue pilot at the refugee center says there's probably still a working helicopter on the roof of a hospital.  If you bring them there, they'll be happy to fly you anywhere you want to go.",
+    "goal": "MGOAL_GO_TO",
+    "destination": "hospital_mission_rescue_pilot_25",
+    "difficulty": 5,
+    "value": 5000,
+    "start": {
+      "assign_mission_target": {
+        "om_terrain": "hospital_mission_rescue_pilot_25",
+        "om_special": "hospital_mission_rescue_pilot",
+        "reveal_radius": 1,
+        "min_distance": 10,
+        "search_range": 800,
+        "z": 5
+      }
+    },
+    "end": { "effect": [ { "add_mission": "MISSION_RESCUE_PILOT_JOIN" } ] },
+    "origins": [ "ORIGIN_SECONDARY" ],
+    "has_generic_rewards": false,
+    "dialogue": {
+      "describe": "That chopper's still up there.",
+      "offer": "It's like I said: take me to it, and I'll fly you anywhere you want to go from now on.  It's not like I got anywhere else to be.",
+      "accepted": "Great.  I guess I'll hang back until we're ready, just let me know when you want me to come with.",
+      "rejected": "I don't blame you.  The offer stands though, in case you decide to stop being so sensible.",
+      "advice": "I'm coming with you, but it might be easier to clear a path up there on your own first.  Just give the word and I'll hang back.",
+      "inquire": "Yeah?",
+      "success": "We made it!  Just let me check out the bird real quick.",
+      "success_lie": "What good does this do us?",
+      "failure": "I should have figured…"
+    }
+  },
+  {
+    "id": "MISSION_RESCUE_PILOT_JOIN",
+    "type": "mission_definition",
+    "name": { "str": "Talk to the Rescue Pilot" },
+    "description": "You've made it to the helipad, you probably ought to talk to the pilot.",
+    "goal": "MGOAL_TALK_TO_NPC",
+    "difficulty": 0,
+    "value": 0,
+    "start": { "effect": [ "follow" ] },
+    "origins": [ "ORIGIN_SECONDARY" ],
+    "urgent": true,
+    "has_generic_rewards": false,
+    "dialogue": {
+      "describe": "…",
+      "offer": "You held up your end, so I guess I'm with you now.  Like I said, I can fly this or any other helicopter, I'll take you anywhere you want to go.",
+      "accepted": "Great, I'm with you.",
+      "rejected": "Hey, that's fine.  Thanks for taking me up here.",
+      "advice": "Uh, advice?  I say we get the hell out of here as fast as we possibly can.",
+      "inquire": "Well?",
+      "success": "Just let me know what you need.",
+      "success_lie": "…",
+      "failure": "…"
+    }
+  }
+]
