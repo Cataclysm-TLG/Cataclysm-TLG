@@ -5369,34 +5369,6 @@ std::optional<int> iuse::stimpack( Character *p, item *it, const tripoint_bub_ms
     return 1;
 }
 
-std::optional<int> iuse::radglove( Character *p, item *it, const tripoint_bub_ms & )
-{
-    if( p->get_item_position( it ) >= -1 ) {
-        p->add_msg_if_player( m_info,
-                              _( "You must wear the radiation biomonitor before you can activate it." ) );
-        return std::nullopt;
-    } else if( !it->ammo_sufficient( p ) ) {
-        p->add_msg_if_player( m_info, _( "The radiation biomonitor needs batteries to function." ) );
-        return std::nullopt;
-    } else {
-        p->add_msg_if_player( _( "You activate your radiation biomonitor." ) );
-        if( p->get_rad() >= 1 ) {
-            p->add_msg_if_player( m_warning, _( "You are currently irradiated." ) );
-            p->add_msg_player_or_say( m_info,
-                                      _( "Your radiation level: %d mSv." ),
-                                      _( "It says here that my radiation level is %d mSv." ),
-                                      p->get_rad() );
-        } else {
-            p->add_msg_player_or_say( m_info,
-                                      _( "You aren't currently irradiated." ),
-                                      _( "It says I'm not irradiated." ) );
-        }
-        p->add_msg_if_player( _( "Have a nice day!" ) );
-    }
-
-    return 1;
-}
-
 std::optional<int> iuse::talking_doll( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( !it->ammo_sufficient( p ) ) {

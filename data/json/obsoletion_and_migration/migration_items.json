@@ -3672,5 +3672,10 @@
     "type": "vehicle_part_migration",
     "from": "minireactor",
     "to": "minifridge"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "rad_monitor",
+    "replace": "wristwatch"
   }
 ]
