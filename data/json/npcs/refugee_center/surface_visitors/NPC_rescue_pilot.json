@@ -67,20 +67,13 @@
     "type": "item_group",
     "id": "NC_RESCUE_PILOT_carry",
     "subtype": "collection",
-    "items": [
-      { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-      { "group": "any_MRE", "count": 2 }
-    ]
+    "items": [ { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] }, { "group": "any_MRE", "count": 2 } ]
   },
   {
     "type": "item_group",
     "id": "NC_RESCUE_PILOT_wield",
     "subtype": "collection",
-    "items": [
-      {
-        "item": "golf_club"
-      }
-    ]
+    "items": [ { "item": "golf_club" } ]
   },
   {
     "id": "TALK_RESCUE_PILOT",
@@ -91,8 +84,16 @@
       "no": "Hello there.  Glad to see an unfamiliar face around here."
     },
     "responses": [
-      { "text": "Who are you?", "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } }, "topic": "TALK_RESCUE_PILOT_WHO" },
-      { "text": "Do you need anything?", "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } }, "topic": "TALK_RESCUE_PILOT_HELP" },
+      {
+        "text": "Who are you?",
+        "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } },
+        "topic": "TALK_RESCUE_PILOT_WHO"
+      },
+      {
+        "text": "Do you need anything?",
+        "condition": { "not": { "u_has_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" } },
+        "topic": "TALK_RESCUE_PILOT_HELP"
+      },
       {
         "text": "About that helicopter…",
         "condition": {
@@ -103,7 +104,7 @@
         },
         "topic": "TALK_RESCUE_PILOT_DANGER"
       },
-      { 
+      {
         "text": "Alright, let's get moving.",
         "condition": {
           "and": [
@@ -111,9 +112,12 @@
             { "not": { "npc_has_var": "rescue_pilot_temporary_follower", "value": "yes" } }
           ]
         },
-        "success": { "effect": [ "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ], "topic": "TALK_DONE" }
+        "success": {
+          "effect": [ "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ],
+          "topic": "TALK_DONE"
+        }
       },
-      { 
+      {
         "text": "Wait here for now.",
         "condition": {
           "and": [
@@ -130,46 +134,73 @@
     "id": "TALK_RESCUE_PILOT_WHO",
     "type": "talk_topic",
     "dynamic_line": "Well up until recently I was a search and rescue pilot.  Now I guess I'm more of a pedestrian.",
-    "responses": [ { "text": "A pilot?", "topic": "TALK_RESCUE_PILOT_WHO_2" }, { "text": "Nevermind that for now.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "A pilot?", "topic": "TALK_RESCUE_PILOT_WHO_2" },
+      { "text": "Nevermind that for now.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_WHO_2",
     "type": "talk_topic",
     "dynamic_line": "Yeah, I was flying medevac, for all the good it did.  There wound up being nowhere to take anyone.",
-    "responses": [ { "text": "What happened?", "topic": "TALK_RESCUE_PILOT_WHO_3" }, { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "What happened?", "topic": "TALK_RESCUE_PILOT_WHO_3" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_WHO_3",
     "type": "talk_topic",
     "dynamic_line": "Well at first they had me flying people out the mountains to a hospital, but then things started to get too bad in the city and, well, you know what happened with the army and all of that.",
-    "responses": [ { "text": "Not really.  What happened with the army?", "topic": "TALK_RESCUE_PILOT_ARMY" }, { "text": "Right.", "topic": "TALK_RESCUE_PILOT_WHO_4" }, { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "Not really.  What happened with the army?", "topic": "TALK_RESCUE_PILOT_ARMY" },
+      { "text": "Right.", "topic": "TALK_RESCUE_PILOT_WHO_4" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_ARMY",
     "type": "talk_topic",
     "dynamic_line": "Oh, you don't remember?  I wouldn't worry too much, seems a lot of people lost a week or two around the time the bombs fell.  Long story short, the army--well, not just them, it was the guard and the police, whoever really.  Order kind of fell apart and some of the guys cracked, started shooting at each other or the evacuees.  That was right around the time the dead started walking…a lot of people really couldn't handle that.  Anyway most the refugee camps…the FEMA camps, the evac shelters…most of 'em turned into death traps pretty quick.  I'm surprised these folk here are getting on as well as they are.",
-    "responses": [ { "text": "How did you wind up here?", "topic": "TALK_RESCUE_PILOT_WHO_4" }, { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "How did you wind up here?", "topic": "TALK_RESCUE_PILOT_WHO_4" },
+      { "text": "Let's change the subject.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_WHO_4",
     "type": "talk_topic",
     "dynamic_line": "I wound up getting chased out of town myself, had to leave my ride behind and just run.  Yusuke, the mut--uh, the furry guy who hangs out with the folks in the lobby, he found me, brought me back here.",
-    "responses": [ { "text": "What about your helicopter?", "topic": "TALK_RESCUE_PILOT_HELP" }, { "text": "Are you part of Yusuke's group?", "topic": "TALK_RESCUE_PILOT_YUSUKE" }, { "text": "I see.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "What about your helicopter?", "topic": "TALK_RESCUE_PILOT_HELP" },
+      { "text": "Are you part of Yusuke's group?", "topic": "TALK_RESCUE_PILOT_YUSUKE" },
+      { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_YUSUKE",
     "type": "talk_topic",
     "dynamic_line": "Nah.  I owe Yusuke for getting me someplace safe, but I'm not trying to set up camp here and most of these people don't want outsiders sticking around anyway.  I just need to get my helicopter back.",
-    "responses": [ { "text": "Let's talk about that helicopter.", "topic": "TALK_RESCUE_PILOT_HELP" }, { "text": "I see.", "topic": "TALK_RESCUE_PILOT" } ]
+    "responses": [
+      { "text": "Let's talk about that helicopter.", "topic": "TALK_RESCUE_PILOT_HELP" },
+      { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
+    ]
   },
   {
     "id": "TALK_RESCUE_PILOT_HELP",
     "type": "talk_topic",
     "dynamic_line": "Well here's the thing: I'm a pilot, and I want to get airborne again.  I dunno if there's anyone left to find or help or whatever out there, but I don't like being grounded like this.  If you can help get me back to my bird, I'll fly you anywhere you want to go.  Problem is, it's up on a roof and I can't reach it by myself.  I'm not really equipped for that kind of thing.",
-
     "responses": [
-      { "text": "Where did you leave your ride?", "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }, "topic": "TALK_RESCUE_PILOT_DANGER" },
-      { "text": "I'll have to think about it.", "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" }, "topic": "TALK_RESCUE_PILOT" }
+      {
+        "text": "Where did you leave your ride?",
+        "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" },
+        "topic": "TALK_RESCUE_PILOT_DANGER"
+      },
+      {
+        "text": "I'll have to think about it.",
+        "effect": { "u_add_var": "general_meeting_u_heard_rescue_pilot_mission", "value": "yes" },
+        "topic": "TALK_RESCUE_PILOT"
+      }
     ]
   },
   {
@@ -177,7 +208,11 @@
     "type": "talk_topic",
     "dynamic_line": "Unless the army got to it, and let's just say I don't think there's much chance of that, it'll be parked up on the roof of the hospital I was working with.  Hopefully I don't have to explain to you how dangerous that place probably is by now.",
     "responses": [
-      { "text": "I'll try to get us there, just tell me where to go.", "topic": "TALK_DONE", "effect": [ "assign_mission", "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ] },
+      {
+        "text": "I'll try to get us there, just tell me where to go.",
+        "topic": "TALK_DONE",
+        "effect": [ "assign_mission", "follow_only", { "npc_add_var": "rescue_pilot_temporary_follower", "value": "yes" } ]
+      },
       { "text": "I see.", "topic": "TALK_RESCUE_PILOT" }
     ]
   },
@@ -223,11 +258,7 @@
     "goal": "MGOAL_TALK_TO_NPC",
     "difficulty": 0,
     "value": 0,
-    "start": {
-      "effect": [
-        "follow"
-      ]
-    },
+    "start": { "effect": [ "follow" ] },
     "origins": [ "ORIGIN_SECONDARY" ],
     "urgent": true,
     "has_generic_rewards": false,

@@ -2,7 +2,10 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_1", "hospital_mission_rescue_pilot_2" ], [ "hospital_mission_rescue_pilot_3", "hospital_mission_rescue_pilot_4" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_1", "hospital_mission_rescue_pilot_2" ],
+      [ "hospital_mission_rescue_pilot_3", "hospital_mission_rescue_pilot_4" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -129,7 +132,10 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_5", "hospital_mission_rescue_pilot_6", "hospital_mission_rescue_pilot_34" ], [ "hospital_mission_rescue_pilot_7", "hospital_mission_rescue_pilot_8", "hospital_mission_rescue_pilot_35" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_5", "hospital_mission_rescue_pilot_6", "hospital_mission_rescue_pilot_34" ],
+      [ "hospital_mission_rescue_pilot_7", "hospital_mission_rescue_pilot_8", "hospital_mission_rescue_pilot_35" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -185,9 +191,14 @@
       ],
       "palettes": [ "hospital_2" ],
       "furniture": { "А": "f_locker", "Ŧ": "f_rubble" },
-      "terrain": { "=": "t_pavement", "¶": "t_strconc_wall", 
-      "∞": "t_wall_w", 
-      "¤": "t_laminated_glass", "≠": "t_pavement", "ʭ": "t_linoleum_white" },
+      "terrain": {
+        "=": "t_pavement",
+        "¶": "t_strconc_wall",
+        "∞": "t_wall_w",
+        "¤": "t_laminated_glass",
+        "≠": "t_pavement",
+        "ʭ": "t_linoleum_white"
+      },
       "items": {
         "x": { "item": "beauty", "chance": 20, "repeat": [ 1, 2 ] },
         "P": { "item": "vitamin_shop", "chance": 20, "repeat": [ 1, 2 ] },
@@ -224,20 +235,22 @@
           { "item": "hospital_medical_items", "chance": 20, "repeat": [ 1, 2 ] }
         ]
       },
-      "nested": { "=": { "chunks": [ [ "null", 70 ], [ "pile_bodybag_corpses", 30 ] ] },
-      "¶": { "chunks": [ [ "1x1_bash", 60 ], [ "null", 40 ] ] },
-      "∞": { "chunks": [ [ "1x1_bash", 60 ], [ "null", 40 ] ] },
-      "¤": { "chunks": [ [ "1x1_bash", 70 ], [ "null", 30 ] ] },
-      "≠": { "chunks": [ [ "military_casings_1x1", 30 ], [ "null", 70 ] ] },
-      "ʭ": { "chunks": [ [ "military_casings_1x1", 30 ], [ "null", 70 ] ] },
-      "v": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "U": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "C": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "t": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "h": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "s": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "k": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
-      "j": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] } },
+      "nested": {
+        "=": { "chunks": [ [ "null", 70 ], [ "pile_bodybag_corpses", 30 ] ] },
+        "¶": { "chunks": [ [ "1x1_bash", 60 ], [ "null", 40 ] ] },
+        "∞": { "chunks": [ [ "1x1_bash", 60 ], [ "null", 40 ] ] },
+        "¤": { "chunks": [ [ "1x1_bash", 70 ], [ "null", 30 ] ] },
+        "≠": { "chunks": [ [ "military_casings_1x1", 30 ], [ "null", 70 ] ] },
+        "ʭ": { "chunks": [ [ "military_casings_1x1", 30 ], [ "null", 70 ] ] },
+        "v": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "U": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "C": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "t": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "h": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "s": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "k": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] },
+        "j": { "chunks": [ [ "1x1_bash", 5 ], [ "null", 95 ] ] }
+      },
       "computers": {
         "6": {
           "name": "Centrifuge",
@@ -276,7 +289,10 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_9", "hospital_mission_rescue_pilot_10" ], [ "hospital_mission_rescue_pilot_11", "hospital_mission_rescue_pilot_12" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_9", "hospital_mission_rescue_pilot_10" ],
+      [ "hospital_mission_rescue_pilot_11", "hospital_mission_rescue_pilot_12" ]
+    ],
     "//": "patient floor",
     "weight": 250,
     "object": {
@@ -385,7 +401,10 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_13", "hospital_mission_rescue_pilot_14" ], [ "hospital_mission_rescue_pilot_15", "hospital_mission_rescue_pilot_16" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_13", "hospital_mission_rescue_pilot_14" ],
+      [ "hospital_mission_rescue_pilot_15", "hospital_mission_rescue_pilot_16" ]
+    ],
     "//": "patient floor",
     "weight": 250,
     "object": {
@@ -497,7 +516,10 @@
     "type": "mapgen",
     "method": "json",
     "//": "surgical floor",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_17", "hospital_mission_rescue_pilot_18" ], [ "hospital_mission_rescue_pilot_19", "hospital_mission_rescue_pilot_20" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_17", "hospital_mission_rescue_pilot_18" ],
+      [ "hospital_mission_rescue_pilot_19", "hospital_mission_rescue_pilot_20" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -608,7 +630,10 @@
     "type": "mapgen",
     "method": "json",
     "//": "maternity floor",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_21", "hospital_mission_rescue_pilot_22" ], [ "hospital_mission_rescue_pilot_23", "hospital_mission_rescue_pilot_24" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_21", "hospital_mission_rescue_pilot_22" ],
+      [ "hospital_mission_rescue_pilot_23", "hospital_mission_rescue_pilot_24" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -731,7 +756,10 @@
     "type": "mapgen",
     "method": "json",
     "//": "admin and cafe floor",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_25", "hospital_mission_rescue_pilot_26" ], [ "hospital_mission_rescue_pilot_27", "hospital_mission_rescue_pilot_28" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_25", "hospital_mission_rescue_pilot_26" ],
+      [ "hospital_mission_rescue_pilot_27", "hospital_mission_rescue_pilot_28" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_linoleum_white",
@@ -839,7 +867,10 @@
   {
     "type": "mapgen",
     "method": "json",
-    "om_terrain": [ [ "hospital_mission_rescue_pilot_29", "hospital_mission_rescue_pilot_30" ], [ "hospital_mission_rescue_pilot_31", "hospital_mission_rescue_pilot_32" ] ],
+    "om_terrain": [
+      [ "hospital_mission_rescue_pilot_29", "hospital_mission_rescue_pilot_30" ],
+      [ "hospital_mission_rescue_pilot_31", "hospital_mission_rescue_pilot_32" ]
+    ],
     "weight": 250,
     "object": {
       "fill_ter": "t_flat_roof",
