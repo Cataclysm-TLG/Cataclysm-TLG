@@ -1884,19 +1884,12 @@ static bool consume_med( item &target, Character &you )
 
     if( req_tool->tool ) {
         if( !( you.has_amount( tool_type, 1 ) &&
-            you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
+               you.has_charges( tool_type, req_tool->tool->charges_per_use ) ) ) {
             you.add_msg_if_player( m_info,
-                _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
+                                   _( "You need a %s to consume that!" ), req_tool->nname( 1 ) );
             return false;
         }
-
-        const int one_in_val = req_tool->tool->charges_per_use_one_in;
-
-        if( one_in_val < 2 ) {
-            you.use_charges( tool_type, req_tool->tool->charges_per_use );
-        } else if( one_in( one_in_val ) ) {
-            you.use_charges( tool_type, req_tool->tool->charges_per_use );
-        }
+        you.use_charges( tool_type, req_tool->tool->charges_per_use );
     }
 
     int amount_used = 1;

@@ -18,7 +18,6 @@
     "name": { "str": "laptop" },
     "material": [ { "type": "aluminum", "portion": 75 }, { "type": "plastic", "portion": 25 } ],
     "charges_per_use": 1,
-    "charges_per_use_one_in": 8,
     "etransfer_rate": "30 MB",
     "e_port": "laptop",
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "CAN_USE_IN_DARK" ],
@@ -32,7 +31,6 @@
     "material": [ { "type": "aluminum", "portion": 5 }, { "type": "plastic", "portion": 5 } ],
     "tool_ammo": [ "battery" ],
     "charges_per_use": 1,
-    "charges_per_use_one_in": 5,
     "etransfer_rate": "30 MB",
     "e_port": "phone",
     "flags": [
@@ -53,7 +51,6 @@
     "type": "TOOL",
     "name": { "str": "e-ink tablet" },
     "charges_per_use": 1,
-    "charges_per_use_one_in": 8,
     "etransfer_rate": "30 MB",
     "e_port": "tablet",
     "e_ports_banned": [ "USB-A" ],
@@ -134,7 +131,6 @@
     "symbol": ";",
     "color": "light_gray",
     "charges_per_use": 1,
-    "charges_per_use_one_in": 10,
     "use_action": [
       {
         "target": "cell_phone_flashlight",
@@ -435,7 +431,6 @@
     "color": "green",
     "flags": [ "WATER_BREAK" ],
     "charges_per_use": 1,
-    "charges_per_use_one_in": 10,
     "use_action": [ "GEIGER" ],
     "pocket_data": [
       {
@@ -623,7 +618,6 @@
     "symbol": ";",
     "color": "dark_gray",
     "use_action": [ "MP3", { "type": "link_up", "cable_length": 2, "charge_rate": "5 W" } ],
-    "charges_per_use_one_in": 8,
     "charges_per_use": 1,
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK_ACTIVE", "ELECTRONIC" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 50 } } ],
@@ -708,7 +702,6 @@
     "symbol": ";",
     "color": "yellow",
     "charges_per_use": 1,
-    "charges_per_use_one_in": 8,
     "use_action": {
       "type": "transform",
       "msg": "You turn the EMF detector on.",

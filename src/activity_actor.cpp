@@ -7238,7 +7238,7 @@ void firstaid_activity_actor::finish( player_activity &act, Character &who )
             it.remove_item();
         }
     } else if( used_tool->is_tool() ) {
-        if( used_tool->type->charges_to_use() ) {
+        if( used_tool->type->charges_to_use() > 0 ) {
             it->activation_consume( charges_consumed, it.pos_bub( here ), &who );
         }
     }

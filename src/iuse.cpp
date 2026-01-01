@@ -9081,6 +9081,7 @@ std::optional<int> iuse::measure_resonance( Character *p, item *it, const tripoi
     // Different messages for different resonance levels? Dangerous resonance levels are in suffer::from_artifact_resonance
     popup( _( "Detected resonance approximately equal to %i units." ), detected_resonance );
 
+
     p->consume_charges( *it, it->type->charges_to_use() );
     p->mod_moves( -to_moves<int>( 2_minutes ) );
 

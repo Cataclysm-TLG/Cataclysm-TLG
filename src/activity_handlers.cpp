@@ -1927,7 +1927,6 @@ void activity_handlers::start_fire_finish( player_activity *act, Character *you 
         act->set_to_null();
         return;
     }
-
     it.activation_consume( 1, you->pos_bub(), you );
 
     you->practice( skill_survival, act->index, 5 );
@@ -4009,7 +4008,10 @@ void activity_handlers::spellcasting_finish( player_activity *act, Character *yo
             if( !act->targets.empty() ) {
                 item *it = act->targets.front().get_item();
                 if( it && !it->has_flag( flag_USE_PLAYER_ENERGY ) ) {
-                    you->consume_charges( *it, it->type->charges_to_use() );
+                    int consumed = it->type->charges_to_use();
+                    if( consumed > 0 ) {
+                        you->consume_charges( *it, consumed );
+                    }
                 }
             }
             get_event_bus().send<event_type::spellcasting_finish>( you->getID(), true, sp,
