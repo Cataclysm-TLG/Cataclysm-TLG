@@ -6186,7 +6186,7 @@
     "type": "profession",
     "id": "bionic_patient",
     "name": "Bionic Patient",
-    "description": "When the diagnosis came back positive, you signed up for a series of experimental bionic surgeries that saved your life.  Now you're healthier than you ever were before, thanks to a suite of bionic systems powered by your own metabolic functions.  Make the most of your second chance at life.",
+    "description": "When the diagnosis came back positive, you signed up for a series of experimental bionic surgeries that saved your life.  The problem is, they needed power, and now the power's out.  Find a new place to charge your batteries or you might wind up worse off than before.",
     "points": 5,
     "CBMs": [
       "bio_leukocyte",
