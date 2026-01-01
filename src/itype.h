@@ -111,6 +111,7 @@ struct islot_tool {
     int def_charges = 0;
     int charge_factor = 1;
     int charges_per_use = 0;
+    int charges_per_use_one_in = 1;
     int turns_per_charge = 0;
     units::power power_draw = 0_W;
 

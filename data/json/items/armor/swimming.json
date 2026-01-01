@@ -1353,6 +1353,19 @@
         "specifically_covers": [ "mouth_cheeks", "mouth_chin", "mouth_nose" ],
         "rigid_layer_only": true
       }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "45 ml",
+        "max_contains_weight": "48 g",
+        "max_item_length": "10 cm",
+        "moves": 250,
+        "description": "Strap for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "inherits_flags": false
+      }
     ]
   },
   {
@@ -1403,6 +1416,19 @@
         "specifically_covers": [ "mouth_cheeks", "mouth_chin" ],
         "coverage": 100,
         "encumbrance": 10
+      }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "volume_encumber_modifier": 0,
+        "max_contains_volume": "45 ml",
+        "max_contains_weight": "48 g",
+        "max_item_length": "10 cm",
+        "moves": 250,
+        "description": "Strap for a flashlight attachment.",
+        "flag_restriction": [ "HELMET_HEAD_ATTACHMENT" ],
+        "inherits_flags": false
       }
     ]
   }

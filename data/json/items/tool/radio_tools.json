@@ -9,6 +9,7 @@
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "material": [ "plastic" ],
     "charges_per_use": 1,
+    "charges_per_use_one_in": 5,
     "turns_per_charge": 5,
     "weight": "670 g",
     "volume": "500 ml",
@@ -109,6 +110,7 @@
     "color": "light_gray",
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "charges_per_use": 1,
+    "charges_per_use_one_in": 10,
     "use_action": [ "RADIO_OFF", { "type": "link_up", "cable_length": 3, "charge_rate": "5 W" } ],
     "pocket_data": [
       {
@@ -149,6 +151,7 @@
     "symbol": ";",
     "color": "green",
     "charges_per_use": 1,
+    "charges_per_use_one_in": 10,
     "flags": [ "TWO_WAY_RADIO", "WATER_BREAK", "ELECTRONIC" ],
     "use_action": [ { "type": "link_up", "cable_length": 3, "charge_rate": "5 W" } ],
     "pocket_data": [
@@ -177,7 +180,8 @@
     "color": "yellow",
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "charges_per_use": 1,
-    "turns_per_charge": 10,
+    "charges_per_use_one_in": 5,
+    "turns_per_charge": 5,
     "use_action": [ "REMOTEVEH" ],
     "tick_action": "REMOTEVEH_TICK",
     "pocket_data": [
