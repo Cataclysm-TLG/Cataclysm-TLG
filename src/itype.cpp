@@ -147,7 +147,14 @@ int itype::charges_default() const
 int itype::charges_to_use() const
 {
     if( tool ) {
-        return tool->charges_per_use;
+        const int one_in_val = tool->charges_per_use_one_in;
+        if( one_in_val < 2 ) {
+            return tool->charges_per_use;
+        }
+        if( one_in( one_in_val ) ) {
+            return tool->charges_per_use;
+        }
+        return 0;
     } else if( comestible ) {
         return 1;
     }

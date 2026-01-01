@@ -3677,5 +3677,65 @@
     "type": "MIGRATION",
     "id": "rad_monitor",
     "replace": "wristwatch"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "bottle_plastic_tiny_glue",
+    "type": "MIGRATION",
+    "replace": "bottle_plastic_superglue"
+  },
+  {
+    "id": "diving_flashlight_variable_on_low",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable_on_med",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable_on_hi",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_variable",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "diving_flashlight_small_hipower_on",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_small_on",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight_on"
+  },
+  {
+    "id": "diving_flashlight_small_hipower",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "diving_flashlight_small",
+    "type": "MIGRATION",
+    "replace": "diving_flashlight"
+  },
+  {
+    "id": "gas_charger_on",
+    "type": "MIGRATION",
+    "replace": "UPS_ON"
+  },
+  {
+    "id": "gas_charger",
+    "type": "MIGRATION",
+    "replace": "UPS_off"
   }
 ]

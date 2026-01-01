@@ -3770,7 +3770,7 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint_bub_ms &p
         foe->on_attacked( *p );
     }
 
-    return 20;
+    return 1;
 }
 
 std::optional<int> iuse::tazer2( Character *p, item *it, const tripoint_bub_ms &pos )
