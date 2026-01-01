@@ -198,7 +198,6 @@
     "price": "9 USD",
     "price_postapoc": "15 cent",
     "charges_per_use": 1,
-    "charges_per_use_one_in": 8,
     "flags": [ "BELT_CLIP", "WATER_BREAK_ACTIVE", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ],
     "use_action": {
       "type": "transform",
@@ -225,6 +224,7 @@
     "name": { "str": "flashlight (on)", "str_pl": "flashlights (on)" },
     "power_draw": "750 mW",
     "revert_to": "flashlight",
+    "charges_per_use": 0,
     "use_action": {
       "menu_text": "Turn off",
       "type": "transform",
@@ -249,7 +249,6 @@
     "price": "5 USD",
     "price_postapoc": "1 USD",
     "charges_per_use": 1,
-    "charges_per_use_one_in": 8,
     "flags": [ "BELT_CLIP", "HELMET_HEAD_ATTACHMENT", "HEAD_STRAP_MOUNT" ],
     "use_action": {
       "type": "transform",
@@ -455,7 +454,6 @@
     "symbol": ";",
     "color": "blue",
     "charges_per_use": 1,
-    "charges_per_use_one_in": 3,
     "tool_ammo": [ "battery" ],
     "use_action": [
       {
