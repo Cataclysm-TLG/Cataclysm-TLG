@@ -367,7 +367,7 @@
     "id": "mon_zombie_slag_hulk",
     "type": "MONSTER",
     "name": { "str": "Slag Hulk" },
-    "description": "Several people died beneath a cascade of molten slag, their bodies shriveling and contorting together under the unimaginable heat.  The metal cracked and cooled, but they did not stay dead.  Still largely encased in their mineral prison, revivified muscle and bone now drag the lumpen mass along on four ungainly limbs that must have once been bodies.",
+    "description": "Several workers died beneath a cascade of molten slag, their bodies shriveling and contorting together under the unimaginable heat.  The metal cracked and cooled, but they did not stay dead.  Still largely encased in their mineral prison, revivified muscle and bone now drag the lumpen mass along on four ungainly limbs that must have once been human beings.",
     "default_faction": "zombie",
     "bodytype": "pig",
     "species": [ "ZOMBIE", "HUMAN" ],
