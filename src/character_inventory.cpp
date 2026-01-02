@@ -809,6 +809,7 @@ bool Character::dispose_item( item_location &&obj, const std::string &prompt )
     uilist menu;
     menu.text = prompt.empty() ? string_format( _( "Dispose of %s" ), obj->tname() ) : prompt;
     std::vector<dispose_option> opts;
+    
 
     const bool bucket = obj->will_spill() && !obj->is_container_empty();
 
@@ -823,8 +824,9 @@ bool Character::dispose_item( item_location &&obj, const std::string &prompt )
             }
 
             mod_moves( -item_handling_cost( *obj ) );
-            this->i_add( *obj, true, &*obj, &*obj );
+            item it = *obj;
             obj.remove_item();
+            this->i_add( it, true );
             return true;
         }
     } );
