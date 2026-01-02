@@ -1626,13 +1626,6 @@ void options_manager::add_options_general()
 
     add_empty_line();
 
-    add( "TURN_DURATION", "general", to_translation( "Realtime turn progression" ),
-         to_translation( "If higher than 0, monsters will take periodic gameplay turns.  This value is the delay between each turn, in seconds.  Works best with Safe Mode disabled.  0 = disabled.  If you can manage to successfully play for any length of time like this, please post it on Youtube or the Discord." ),
-         0.0, 10.0, 0.0, 0.05
-       );
-
-    add_empty_line();
-
     add_option_group( "general", Group( "auto_save_opts", to_translation( "Autosave Options" ),
                                         to_translation( "Options regarding autosave." ) ),
     [&]( const std::string & page_id ) {

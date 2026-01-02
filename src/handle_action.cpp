@@ -210,26 +210,6 @@ class user_turn
             user_turn_start = std::chrono::steady_clock::now();
         }
 
-        bool has_timeout_elapsed() {
-            return moves_elapsed() > 100;
-        }
-
-        int moves_elapsed() {
-            const float turn_duration = get_option<float>( "TURN_DURATION" );
-            // Magic number 0.005 chosen due to option menu's 2 digit precision and
-            // the option menu UI rounding <= 0.005 down to "0.00" in the display.
-            // This conditional will catch values (e.g. 0.003) that the options menu
-            // would round down to "0.00" in the options menu display. This prevents
-            // the user from being surprised by floating point rounding near zero.
-            if( turn_duration <= 0.005 ) {
-                return 0;
-            }
-            std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-            std::chrono::milliseconds elapsed_ms =
-                std::chrono::duration_cast<std::chrono::milliseconds>( now - user_turn_start );
-            return elapsed_ms.count() / ( 10.0 * turn_duration );
-        }
-
         bool async_anim_timeout() {
             std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
             std::chrono::milliseconds elapsed_ms =
@@ -302,7 +282,7 @@ input_context game::get_player_input( std::string &action )
 
             SCT.advanceAllSteps();
 
-            //Check for creatures on all drawing positions and offset if necessary
+            // Check for creatures on all drawing positions and offset if necessary.
             for( auto iter = SCT.vSCT.rbegin(); iter != SCT.vSCT.rend(); ++iter ) {
                 const direction oCurDir = iter->getDirection();
                 const int width = utf8_width( iter->getText() );
@@ -364,7 +344,7 @@ input_context game::get_player_input( std::string &action )
     } else {
         ctxt.set_timeout( 125 );
         while( handle_mouseview( ctxt, action ) ) {
-            if( action == "TIMEOUT" && current_turn.has_timeout_elapsed() ) {
+            if( action == "TIMEOUT" ) {
                 break;
             }
         }
@@ -380,11 +360,11 @@ static void rcdrive( const point_rel_ms &d )
     diag_value const *car_location = player_character.maybe_get_value( "remote_controlling" );
 
     if( !car_location ) {
-        //no turned radio car found
+        // No turned radio car found.
         add_msg( m_warning, _( "No radio car connected." ) );
         return;
     }
-    // FIXME: migrate to abs
+    // FIXME: migrate to abs.
     tripoint_bub_ms c{ car_location->tripoint().raw() };
 
     auto rc_pairs = here.get_rc_items( c );
@@ -409,7 +389,7 @@ static void rcdrive( const point_rel_ms &d )
         return;
     } else if( !here.add_item_or_charges( dest, *rc_car ).is_null() ) {
         tripoint_bub_ms src( c );
-        //~ Sound of moving a remote controlled car
+        // ~ Sound of moving a remote controlled car
         sounds::sound( src, 6, sounds::sound_t::movement, _( "zzz…" ), true, "misc", "rc_car_drives" );
         player_character.mod_moves( -to_moves<int>( 1_seconds ) * 0.5 );
         here.i_rem( src, rc_car );
@@ -3367,9 +3347,6 @@ bool game::handle_action()
         if( !do_regular_action( act, player_character, mouse_target ) ) {
             return false;
         }
-    }
-    if( act != ACTION_TIMEOUT ) {
-        player_character.mod_moves( -current_turn.moves_elapsed() );
     }
     gamemode->post_action( act );
 
