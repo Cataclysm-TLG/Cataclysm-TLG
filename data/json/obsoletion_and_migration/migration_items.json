@@ -3737,5 +3737,15 @@
     "id": "gas_charger",
     "type": "MIGRATION",
     "replace": "UPS_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "medium_disposable_cell",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "heavy_disposable_cell",
+    "replace": "heavy_battery_cell"
   }
 ]
