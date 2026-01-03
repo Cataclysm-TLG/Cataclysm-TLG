@@ -4102,7 +4102,7 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
         float damage_chance = power / volume_factor;
 
-        if( i->is_soft() ) {
+        if( i->is_soft() && damage_chance > 0.f ) {
             damage_chance /= 5.f;
         }
 
