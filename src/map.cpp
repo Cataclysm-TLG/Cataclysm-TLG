@@ -4054,7 +4054,7 @@ void map::smash_items( const tripoint_bub_ms &p, const int power, const std::str
 }
 
 void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool hit_all,
-                                bash_params &params )
+                                bash_params &params, bool crystalline_only )
 {
     if( !has_items( p ) || has_flag_ter_or_furn( ter_furn_flag::TFLAG_PLANT, p ) ) {
         return;
@@ -4074,6 +4074,10 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         if( done ) {
             i++;
             break;
+        }
+        if( crystalline_only && !i->made_of( material_glass ) ) {
+            i++;
+            continue;
         }
         if( i->made_of( phase_id::LIQUID ) ) {
             i++;
@@ -4097,6 +4101,10 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
         float damage_chance = power / volume_factor;
+
+        if( i->is_soft() ) {
+            damage_chance /= 5.f;
+        }
 
         params.did_bash = true;
         params.bashed_solid = true;
@@ -4524,7 +4532,7 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
 
 bash_params map::bash( const tripoint_bub_ms &p, const int str,
                        bool silent, bool destroy, bool bash_floor,
-                       const vehicle *bashing_vehicle )
+                       const vehicle *bashing_vehicle, bool crystalline_only )
 {
     bash_params bsh{
         str, silent, destroy, bash_floor, static_cast<float>( rng_float( 0, 1.0f ) ), false, false, false, false

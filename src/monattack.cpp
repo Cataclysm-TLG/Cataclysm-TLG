@@ -689,7 +689,7 @@ bool mattack::shriek_stun( monster *z )
         return false;
     }
 
-    int dist = rl_dist( z->pos_bub(), target->pos_bub() );
+    int dist = static_cast<int>( std::round( trig_dist_z_adjust( z->pos_bub(), target->pos_bub() ) ) );
     // Currently the cone is 2D, so don't use it for 3D attacks
     if( dist > 7 ||
         z->posz() != target->posz() ||
@@ -708,8 +708,8 @@ bool mattack::shriek_stun( monster *z )
             continue;
         }
         // Affect the target
-        // Small bash to every square, silent to not flood message box
-        here.bash( cone, 4, true );
+        // Small bash to every square, silent to not flood message box. Only affects glass/crystal items.
+        here.bash( cone, 4, true, false, false, nullptr, true );
 
         // If a monster is there, chance for stun
         Creature *target = creatures.creature_at( cone );
