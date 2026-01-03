@@ -4563,7 +4563,7 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     // Don't smash items if there's smashable furniture here. Don't smash items in SEALED or NOITEM tiles.
     if( !smashed_sealed && !smash_furn && !smash_noitem ) {
-        manually_smash_items( p, str, false, bsh );
+        manually_smash_items( p, str, false, bsh, crystalline_only );
     }
 
     // Don't smash the vehicle doing the smashing.
