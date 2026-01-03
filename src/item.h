@@ -1822,6 +1822,11 @@ class item : public visitable
          */
         bool is_soft() const;
 
+        /**
+         * Is this item made of rigid crystal e.g. glass?  Used for damage from sonic attacks.
+         */
+        bool is_crystalline() const;
+
         // is any bit of the armor rigid
         bool is_rigid() const;
         // is any bit of the armor comfortable
