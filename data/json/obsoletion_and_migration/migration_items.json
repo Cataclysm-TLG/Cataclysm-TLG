@@ -3747,5 +3747,10 @@
     "type": "MIGRATION",
     "id": "heavy_disposable_cell",
     "replace": "heavy_battery_cell"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "turtleneck_shirt_rolled",
+    "replace": "turtleneck_shirt"
   }
 ]
