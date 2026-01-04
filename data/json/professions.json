@@ -411,6 +411,21 @@
   },
   {
     "type": "profession_item_substitutions",
+    "item": "bowhat",
+    "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "tophat" ] }, { "present": [ "VEGAN", "WOOLALLERGY" ], "new": [ "beret" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "tophat",
+    "sub": [ { "present": [ "VEGAN" ], "new": [ "porkpie" ] }, { "present": [ "VEGAN", "WOOLALLERGY" ], "new": [ "beret" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
+    "item": "porkpie",
+    "sub": [ { "present": [ "WOOLALLERGY" ], "new": [ "tophat" ] }, { "present": [ "VEGAN", "WOOLALLERGY" ], "new": [ "beret" ] } ]
+  },
+  {
+    "type": "profession_item_substitutions",
     "item": "pants_leather",
     "sub": [ { "present": [ "VEGAN" ], "new": [ "jeans_skinny" ] } ]
   },

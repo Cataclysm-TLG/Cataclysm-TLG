@@ -546,7 +546,7 @@
     "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "cotton_sheet", 10 ] ], [ [ "fur_sheet", 10 ] ], [ [ "thread", 150 ] ] ],
-    "//": "This recipe is based off of the blanket recipe above it, with half of the cotton sheets being replaced by patchwork fur sheets."
+    "//": "This recipe is based off of the blanket recipe above it, with half of the cloth sheets being replaced by patchwork fur sheets."
   },
   {
     "result": "quilt",

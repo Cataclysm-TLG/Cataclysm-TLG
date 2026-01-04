@@ -74,7 +74,7 @@
       [ "clasps", 5 ]
     ],
     "proficiencies": [ { "proficiency": "prof_polymerworking" }, { "proficiency": "prof_closures" } ],
-    "//": "recipe composition is off of the item composition due to not wanting to require 280 cotton sheets for this."
+    "//": "recipe composition is off of the item composition due to not wanting to require 280 cloth sheets for this."
   },
   {
     "result": "leather_armor_cow",

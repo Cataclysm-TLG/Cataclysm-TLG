@@ -1285,7 +1285,7 @@
     "id": "jacket_light",
     "type": "ARMOR",
     "name": { "str": "light jacket" },
-    "description": "A thin cotton jacket with a hood.  It's good for brisk weather, not so much for rain.",
+    "description": "A thin jacket with a hood.  It's good for brisk weather, not so much for rain.",
     "weight": "227 g",
     "volume": "2250 ml",
     "price": "45 USD",
@@ -1367,20 +1367,32 @@
     "id": "jacket_varsity",
     "type": "ARMOR",
     "name": { "str": "varsity jacket" },
-    "description": "A cotton varsity jacket, the type that the jocks in a highschool or a college would wear.",
+    "description": "A letterman jacket, the type that the jocks in a highschool or a college would wear.",
     "weight": "700 g",
     "volume": "1500 ml",
     "price": "60 USD",
     "price_postapoc": "1 USD",
-    "material": [ "cotton" ],
+    "material": [ "wool", "vinyl" ],
     "symbol": "[",
     "warmth": 15,
     "material_thickness": 0.5,
     "flags": [ "VARSIZE", "POCKETS", "OUTER", "RAINPROOF" ],
     "armor": [
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ], "coverage": 90, "encumbrance": [ 14, 18 ] },
-      { "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ], "coverage": 90 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 98, "encumbrance": [ 14, 14 ] }
+      {
+        "material": [ { "type": "wool", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [ "torso" ],
+        "coverage": 95,
+        "encumbrance": [ 14, 18 ]
+      },
+      {
+        "material": [
+          { "type": "vinyl", "covered_by_mat": 95, "thickness": 0.2 },
+          { "type": "wool", "covered_by_mat": 100, "thickness": 0.9 }
+        ],
+        "covers": [ "arm_l", "arm_r" ],
+        "coverage": 98,
+        "encumbrance": [ 14, 14 ]
+      }
     ],
     "pocket_data": [
       {
@@ -1403,7 +1415,7 @@
     "id": "gi",
     "type": "ARMOR",
     "name": { "str_sp": "gi" },
-    "description": "A durable cotton jacket used as the top half of a uniform in many Japanese martial arts.",
+    "description": "A durable cloth jacket used as the top half of a uniform in many Japanese martial arts.",
     "weight": "1000 g",
     "volume": "1500 ml",
     "price": "50 USD",
@@ -1425,12 +1437,12 @@
       {
         "id": "gi_karate",
         "name": { "str": "gi" },
-        "description": "A durable cotton jacket used as the top half of a uniform in many Japanese martial arts."
+        "description": "A durable cloth jacket used as the top half of a uniform in many Japanese martial arts."
       },
       {
         "id": "gi_dobok",
         "name": { "str": "dobok" },
-        "description": "A distinctive cotton jacket worn by practitioners of the Korean art of Taekwando.  It's lightweight, but sturdy enough to go to the mat."
+        "description": "A distinctive cloth jacket worn by practitioners of the Korean art of Taekwando.  It's lightweight, but sturdy enough to go to the mat."
       }
     ]
   },
