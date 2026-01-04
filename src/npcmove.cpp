@@ -4666,7 +4666,8 @@ bool npc::consume_food_from_camp()
         int kcal_to_eat = std::min( desired_kcal, bcp->get_owner()->food_supply().kcal() );
 
         if( kcal_to_eat > 0 ) {
-            bcp->feed_workers( *this, bcp->camp_food_supply( -kcal_to_eat ) );
+            nutrients meal = bcp->camp_food_supply( -kcal_to_eat );
+            bcp->feed_workers( *this, -meal );
 
             return true;
         } else {
