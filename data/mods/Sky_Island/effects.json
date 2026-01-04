@@ -83,5 +83,12 @@
     "max_intensity": 2,
     "int_dur_factor": "10 s",
     "remove_message": "You fully materialize.  You're not invisible anymore!"
+  },
+  {
+    "type": "effect_type",
+    "id": "effect_sky_island_momentary_flight",
+    "name": [ "" ],
+    "desc": [ "" ],
+    "flags": [ "LEVITATION" ]
   }
 ]
