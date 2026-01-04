@@ -629,7 +629,7 @@
     "type": "TOOL",
     "name": { "str": "mp3 player (on)", "str_pl": "mp3 players (on)" },
     "description": "Small enough to fit in your pocket, this device includes a pair of earbuds that allow you to listen to music without anyone else hearing.",
-    "power_draw": "80 mw",
+    "power_draw": "80 mW",
     "revert_to": "mp3",
     "tick_action": [ "MP3_ON" ],
     "use_action": [ "MP3_DEACTIVATE", { "type": "link_up", "cable_length": 2, "charge_rate": "5 W" } ],

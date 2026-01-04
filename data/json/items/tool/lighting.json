@@ -480,7 +480,7 @@
     "copy-from": "heavy_flashlight",
     "type": "TOOL",
     "name": { "str": "heavy-duty flashlight (on)", "str_pl": "heavy-duty flashlights (on)" },
-    "power_draw": "4 W",
+    "power_draw": "5 W",
     "revert_to": "heavy_flashlight",
     "use_action": [
       {
