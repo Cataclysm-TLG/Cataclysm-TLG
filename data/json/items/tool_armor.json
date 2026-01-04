@@ -2607,7 +2607,7 @@
     "id": "turtleneck_shirt",
     "type": "TOOL_ARMOR",
     "name": { "str": "turtleneck shirt" },
-    "description": "A tasteful cotton turtleneck shirt, thick for a shirt, thin for a sweater, and completely lacking storage.",
+    "description": "A tasteful shirt with a high rolled collar.  It's too thin to be called a sweater.",
     "category": "clothing",
     "weight": "300 g",
     "volume": "2000 ml",
@@ -2620,45 +2620,10 @@
     "warmth": 20,
     "material_thickness": 0.5,
     "environmental_protection": 1,
-    "use_action": {
-      "target": "turtleneck_shirt_rolled",
-      "menu_text": "Roll neck",
-      "msg": "You adjust the neck and collar of the turtleneck shirt.",
-      "type": "transform"
-    },
-    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS" ],
+    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS", "COLLAR" ],
     "armor": [
-      { "encumbrance": 2, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r", "mouth" ] },
-      { "encumbrance": 0, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
-    ]
-  },
-  {
-    "id": "turtleneck_shirt_rolled",
-    "type": "TOOL_ARMOR",
-    "name": { "str": "turtleneck shirt (rolled)", "str_pl": "turtleneck shirts (rolled)" },
-    "description": "This turtleneck shirt's neck is rolled out of the way of the mouth.",
-    "category": "clothing",
-    "weight": "300 g",
-    "volume": "2000 ml",
-    "price": "20 USD",
-    "price_postapoc": "50 cent",
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "sweater",
-    "color": "white",
-    "warmth": 20,
-    "material_thickness": 0.5,
-    "environmental_protection": 1,
-    "use_action": {
-      "target": "turtleneck_shirt",
-      "menu_text": "Unroll neck",
-      "msg": "You adjust the neck and collar of the turtleneck shirt.",
-      "type": "transform"
-    },
-    "flags": [ "VARSIZE", "FANCY", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [
-      { "encumbrance": 2, "coverage": 100, "covers": [ "torso", "arm_l", "arm_r" ] },
-      { "encumbrance": 0, "coverage": 100, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
+      { "encumbrance": 2, "coverage": 98, "covers": [ "torso", "arm_l", "arm_r" ] },
+      { "encumbrance": 0, "coverage": 95, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] }
     ]
   },
   {

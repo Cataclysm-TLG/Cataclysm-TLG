@@ -181,7 +181,7 @@
     "type": "ARMOR",
     "category": "armor",
     "name": { "str": "cloth-padded sleeves", "str_pl": "pairs of cloth-padded sleeves" },
-    "description": "The sleeves of a thick cotton shirt, with a bunch of cloth sewn in to act as extra padding.",
+    "description": "The sleeves of a thick shirt, with a bunch of cloth sewn in to act as extra padding.",
     "weight": "400 g",
     "volume": "1500 ml",
     "price_postapoc": "1 USD",

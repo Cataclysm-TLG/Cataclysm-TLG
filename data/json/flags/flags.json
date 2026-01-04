@@ -1656,7 +1656,8 @@
   },
   {
     "id": "NO_SALVAGE",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "This item cannot be deconstructed."
   },
   {
     "id": "NO_STERILE",

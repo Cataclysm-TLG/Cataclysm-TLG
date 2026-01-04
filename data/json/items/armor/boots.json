@@ -1290,7 +1290,7 @@
     "symbol": "[",
     "looks_like": "dress_shoes",
     "color": "dark_gray",
-    "flags": [ "VARSIZE", "FANCY", "NORMAL", "OUTER" ],
+    "flags": [ "VARSIZE", "FANCY", "NORMAL", "OUTER", "NO_SALVAGE" ],
     "armor": [
       {
         "covers": [ "foot_l", "foot_r" ],
@@ -2526,7 +2526,7 @@
     "id": "stockings_tent_legs",
     "type": "ARMOR",
     "name": { "str": "tentacle socks", "str_pl": "pairs of tentacle socks" },
-    "description": "Six long cotton tubes sized to fit over tentacles and help protect them from the cold.",
+    "description": "Six long cloth tubes sized to fit over tentacles and help protect them from the cold.",
     "weight": "300 g",
     "volume": "1500 ml",
     "price": "12 USD",

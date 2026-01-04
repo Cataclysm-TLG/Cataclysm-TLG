@@ -572,7 +572,7 @@
   },
   {
     "type": "material",
-    "//": "similar to layered kevlar, cotton sewn in a way to extend its protectiveness. stopgap material for gambesons until material protection is more thoroughly reworked.",
+    "//": "similar to layered kevlar, cloth sewn in a way to extend its protectiveness. stopgap material for gambesons until material protection is more thoroughly reworked.",
     "id": "cotton_quilted",
     "name": "Quilted Cellulose",
     "copy-from": "cotton",
@@ -1461,7 +1461,7 @@
   {
     "type": "material",
     "id": "spandex",
-    "name": "spandex",
+    "name": "Spandex",
     "//": "This stuff should max out at 1mm in a wetsuit, but is generally much thinner, as in women's tights.",
     "density": 1.2,
     "specific_heat_liquid": 1.7,
