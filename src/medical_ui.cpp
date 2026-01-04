@@ -13,7 +13,11 @@
 #include "effect.h"
 #include "flag.h"
 #include "game.h"
+#include "game_constants.h"
+#include "game_inventory.h"
 #include "input_context.h"
+#include "input_enums.h"
+#include "item_location.h"
 #include "output.h"
 #include "ui_manager.h"
 #include "weather.h"
@@ -970,7 +974,9 @@ void Character::disp_medical()
         } else if( action == "APPLY" ) {
             avatar *a = this->as_avatar();
             if( a ) {
-                avatar_action::use_item( *a );
+                item_location loc = game_menus::inv::consume( "MED" );
+                avatar_action::eat( *a, loc );
+                break; // Close Medical Menu so that consume menu can work properly
             } else {
                 popup( _( "Applying not implemented for NPCs." ) );
             }
