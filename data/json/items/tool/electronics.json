@@ -629,7 +629,7 @@
     "type": "TOOL",
     "name": { "str": "mp3 player (on)", "str_pl": "mp3 players (on)" },
     "description": "Small enough to fit in your pocket, this device includes a pair of earbuds that allow you to listen to music without anyone else hearing.",
-    "power_draw": "1 W",
+    "power_draw": "80 mW",
     "revert_to": "mp3",
     "tick_action": [ "MP3_ON" ],
     "use_action": [ "MP3_DEACTIVATE", { "type": "link_up", "cable_length": 2, "charge_rate": "5 W" } ],
@@ -727,8 +727,7 @@
     "type": "TOOL",
     "name": { "str": "EMF detector (on)", "str_pl": "EMF detectors (on)" },
     "description": "This device detects and reads out different wave lengths.  It is currently on, humming and beeping with proximity.  It is sensitive enough you could use it to get a sense of direction.",
-    "//": "lasts 12 hours with backlight off",
-    "power_draw": "500 W",
+    "power_draw": "200 mW",
     "revert_to": "emf_detector",
     "use_action": {
       "type": "transform",
@@ -811,7 +810,7 @@
     "type": "TOOL",
     "name": { "str": "smartphone - music", "str_pl": "smartphones - music" },
     "description": "This phone is playing music, steadily raising your morale.  You can't hear anything else while you're listening.",
-    "power_draw": "300 mW",
+    "power_draw": "210 mW",
     "revert_to": "smart_phone",
     "use_action": [
       "E_FILE_DEVICE",
@@ -828,7 +827,7 @@
     "copy-from": "smart_phone",
     "type": "TOOL",
     "name": { "str": "smartphone - Flashlight", "str_pl": "smartphones - Flashlight" },
-    "power_draw": "1500 mW",
+    "power_draw": "2 W",
     "revert_to": "smart_phone",
     "use_action": [
       "E_FILE_DEVICE",
@@ -837,7 +836,7 @@
       {
         "ammo_scale": 0,
         "target": "smart_phone",
-        "msg": "You deactivate the flashlight app.",
+        "msg": "You deactivate the flashlight.",
         "menu_text": "Turn off flashlight",
         "type": "transform"
       },
@@ -890,7 +889,7 @@
     "copy-from": "smart_phone_locked",
     "type": "TOOL",
     "name": { "str": "smartphone (locked) - Flashlight", "str_pl": "smartphones (locked) - Flashlight" },
-    "power_draw": "1500 mW",
+    "power_draw": "2 W",
     "revert_to": "smart_phone_locked",
     "use_action": [
       {

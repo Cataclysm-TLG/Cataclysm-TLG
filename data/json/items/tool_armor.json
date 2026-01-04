@@ -1155,7 +1155,7 @@
     "copy-from": "helmet_eod",
     "name": { "str": "EOD helmet (on)", "str_pl": "EOD helmets (on)" },
     "extend": { "flags": [ "LIGHT_350", "CHARGEDIM", "TRADER_AVOID", "TWO_WAY_RADIO" ] },
-    "power_draw": "10 W",
+    "power_draw": "1 W",
     "revert_to": "helmet_eod",
     "use_action": { "type": "transform", "menu_text": "Turn off headlamps", "msg": "\"Disabling illumination.\"", "target": "helmet_eod" }
   },
