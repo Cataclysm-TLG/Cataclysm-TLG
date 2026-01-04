@@ -421,14 +421,6 @@
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "1 kW" }
     ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_HEAVY" ],
-        "default_magazine": "heavy_battery_cell"
-      }
-    ],
     "melee_damage": { "bash": 12 },
     "tool_ammo": [ "battery" ]
   },
@@ -627,14 +619,6 @@
         "type": "transform"
       },
       { "type": "link_up", "cable_length": 2, "charge_rate": "500 W" }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "MAGAZINE_WELL",
-        "rigid": true,
-        "flag_restriction": [ "BATTERY_MEDIUM" ],
-        "default_magazine": "medium_battery_cell"
-      }
     ],
     "melee_damage": { "bash": 8 },
     "tool_ammo": [ "battery" ]

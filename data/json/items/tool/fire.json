@@ -4,7 +4,6 @@
     "type": "TOOL",
     "name": { "str": "electric firestarter" },
     "description": "A crudely-made electric firestarter, which can function as an inefficient lighter.",
-    "//": "ultra light battery seems to not have enough power to generate this amount of heat",
     "weight": "14 g",
     "volume": "50 ml",
     "price": "0 USD",
