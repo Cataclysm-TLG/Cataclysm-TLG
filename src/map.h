@@ -1179,7 +1179,8 @@ class map
         /** Tries to smash the items at the given tripoint. Used by the explosion code */
         void smash_items( const tripoint_bub_ms &p, int power, const std::string &cause_message );
         /** Manually smash one item at the given tripoint, as with a weapon. */
-        void manually_smash_items( const tripoint_bub_ms &p, int power, bool hit_all, bash_params &params, bool crystalline_only );
+        void manually_smash_items( const tripoint_bub_ms &p, int power, bool hit_all, bash_params &params,
+                                   bool crystalline_only );
         /**
          * Returns a pair where first is whether anything was smashed and second is if it was destroyed.
          *

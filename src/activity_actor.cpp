@@ -2847,10 +2847,11 @@ int ebooksave_activity_actor::required_charges(
 void ebooksave_activity_actor::start_scanning_next_book( player_activity &act )
 {
     while( !books.empty() && !books.back() ) {
-        add_msg_debug( debugmode::DF_ACT_EBOOK, "Skipping unavailable book at %s",
-                       books.back().describe() );
+        add_msg_debug( debugmode::DF_ACT_EBOOK,
+                       "Skipping unavailable book" );
         books.pop_back();
     }
+
     if( books.empty() ) {
         act.moves_left = 0;
         return;
