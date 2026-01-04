@@ -332,7 +332,7 @@
       "friendly_msg": "You activate the talking doll on the mannequin.",
       "hostile_msg": "Your mannequin seems to have a mind of its own!  If you see this, an error has occurred.",
       "difficulty": 0,
-      "need_charges": 100,
+      "need_charges": 1,
       "moves": 20
     },
     "melee_damage": { "bash": 4 }
