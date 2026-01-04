@@ -809,7 +809,7 @@ bool Character::dispose_item( item_location &&obj, const std::string &prompt )
     uilist menu;
     menu.text = prompt.empty() ? string_format( _( "Dispose of %s" ), obj->tname() ) : prompt;
     std::vector<dispose_option> opts;
-    
+
 
     const bool bucket = obj->will_spill() && !obj->is_container_empty();
 
