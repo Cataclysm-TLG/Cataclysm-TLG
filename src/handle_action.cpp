@@ -3215,6 +3215,7 @@ bool game::handle_action()
             }
         }
 
+#if defined(TILES)
         if( gamepad::is_active() ) {
             gamepad::direction dir = gamepad::get_left_stick_direction();
             if( dir != gamepad::direction::NONE ) {
@@ -3228,6 +3229,7 @@ bool game::handle_action()
                 }
             }
         }
+#endif
 
         if( act == ACTION_ACTIONMENU ) {
             if( uquit == QUIT_WATCH ) {
