@@ -1954,7 +1954,7 @@ comp_list basecamp::start_multi_mission( const mission_id &miss_id,
                 popup( _( "You don't have enough food stored to feed your companion for this task." ) );
                 return result;
             } else {
-                popup( _( "You don't have enough food stored to feed a larger work crew." ) );
+                popup( _( "You don't have enough food stored to feed an entire work crew." ) );
                 break;
             }
         }
@@ -3774,7 +3774,10 @@ void basecamp::finish_return( npc &comp, const bool fixed_time, const std::strin
     validate_assignees();
 
     // Missions that are not fixed_time can try to draw more food than is in the food supply
-    feed_workers( comp, camp_food_supply( -need_food ) );
+    if( need_food > 0 ) {
+        nutrients meal = camp_food_supply( -need_food );
+        feed_workers( comp, -meal );
+    }
     if( has_water() ) {
         comp.set_thirst( 0 );
     }
