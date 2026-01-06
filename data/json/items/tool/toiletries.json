@@ -120,7 +120,7 @@
     "id": "cotton_patch",
     "type": "TOOL",
     "category": "spare_parts",
-    "name": { "str": "cloth patch", "str_pl": "loth patches" },
+    "name": { "str": "cloth patch", "str_pl": "cloth patches" },
     "description": "A 6-inch square patch of fabric, suitable for repairing and tailoring clothing.",
     "weight": "5 g",
     "volume": "6 ml",
