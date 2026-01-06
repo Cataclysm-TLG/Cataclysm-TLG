@@ -73,8 +73,27 @@ void item_components::add( item &new_it )
 {
     comp_iterator it = comps.find( new_it.typeId() );
     if( it != comps.end() ) {
-        if( it->first->count_by_charges() ) {
-            it->second.front().charges += new_it.charges;
+        if( new_it.count_by_charges() ) {
+            // Split charges into multiple stacks of max size stack_max.
+            int charges_to_add = new_it.charges;
+            while( charges_to_add > 0 ) {
+                int to_add = std::min( charges_to_add, new_it.type->stack_max );
+                // Check if the last stack has room.
+                if( !it->second.empty() && it->second.back().charges < new_it.type->stack_max ) {
+                    int room = new_it.type->stack_max - it->second.back().charges;
+                    int add_here = std::min( room, to_add );
+                    it->second.back().charges += add_here;
+                    charges_to_add -= add_here;
+                    to_add -= add_here;
+                }
+                // If there are still charges left to add, add a new stack.
+                if( to_add > 0 ) {
+                    item stack = new_it;
+                    stack.charges = to_add;
+                    it->second.push_back( stack );
+                    charges_to_add -= to_add;
+                }
+            }
         } else {
             it->second.push_back( new_it );
         }
@@ -82,6 +101,7 @@ void item_components::add( item &new_it )
         comps[new_it.typeId()] = { new_it };
     }
 }
+
 
 ret_val<item> item_components::remove( itype_id it_id )
 {
