@@ -58,33 +58,6 @@
   {
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
-    "result": "hallula",
-    "category": "CC_FOOD",
-    "subcategory": "CSC_FOOD_BREAD",
-    "skill_used": "cooking",
-    "difficulty": 3,
-    "charges": 16,
-    "time": "30 m",
-    "batch_time_factors": [ 50, 5 ],
-    "book_learn": [ [ "family_cookbook", 1 ], [ "baking_book", 2 ], [ "cookbook", 2 ] ],
-    "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_baking" }, { "proficiency": "prof_baking_bread" } ],
-    "qualities": [ { "id": "OVEN", "level": 2 } ],
-    "tools": [ [ [ "surface_heat", 9, "LIST" ] ] ],
-    "//1": "flour: 6u, oil: 2u, sugar: 1u",
-    "components": [
-      [ [ "flour_any", 6, "LIST" ] ],
-      [ [ "yeast", 3 ] ],
-      [ [ "sugar", 2 ] ],
-      [ [ "salt", 2 ] ],
-      [ [ "water_clean", 2 ] ],
-      [ [ "any_butter_or_oil", 4, "LIST" ], [ "any_shortening", 1, "LIST" ] ]
-    ],
-    "//": "I'm not sure whether this should also be rewritten to use a portion of charges, or scaled up so that the smallest component in the recipe becomes a single charge.",
-    "//2": "Since milk is only used sparingly in the creation of hallula, to give it a glazed appearance, Cataclysm practicality suggests omitting it."
-  },
-  {
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
     "result": "crackers",
     "category": "CC_FOOD",
     "subcategory": "CSC_FOOD_BREAD",
@@ -233,5 +206,70 @@
       [ [ "any_peanutbutter", 1, "LIST" ] ],
       [ [ "toast", 1 ] ]
     ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "flatbread",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_BREAD",
+    "skill_used": "cooking",
+    "difficulty": 1,
+    "time": "15 m",
+    "charges": 2,
+    "batch_time_factors": [ 50, 4 ],
+    "autolearn": true,
+    "book_learn": [ [ "cookbook_indian", 1 ], [ "cookbook", 1 ] ],
+    "qualities": [ { "id": "COOK", "level": 2 } ],
+    "tools": [ [ [ "surface_heat", 11, "LIST" ] ] ],
+    "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_baking" } ],
+    "//": "flour = 11u",
+    "components": [ [ [ "flour", 11 ], [ "bread_flour", 11 ] ], [ [ "water_clean", 2 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "frybread",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_BREAD",
+    "skill_used": "cooking",
+    "difficulty": 1,
+    "time": "15 m",
+    "charges": 5,
+    "batch_time_factors": [ 50, 4 ],
+    "autolearn": true,
+    "book_learn": [ [ "cookbook_native", 1 ] ],
+    "qualities": [ { "id": "COOK", "level": 2 } ],
+    "//": "11u for flour and 2u for oil",
+    "tools": [ [ [ "surface_heat", 13, "LIST" ] ] ],
+    "components": [
+      [ [ "flour", 11 ], [ "bread_flour", 11 ], [ "flour_wheat_free", 11 ] ],
+      [ [ "water_clean", 2 ] ],
+      [ [ "any_butter_or_oil", 4, "LIST" ] ],
+      [ [ "salt", 1 ] ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "activity_level": "LIGHT_EXERCISE",
+    "result": "bread",
+    "category": "CC_FOOD",
+    "subcategory": "CSC_FOOD_BREAD",
+    "skill_used": "cooking",
+    "difficulty": 2,
+    "charges": 10,
+    "time": "20 m",
+    "batch_time_factors": [ 50, 4 ],
+    "book_learn": [
+      [ "family_cookbook", 1 ],
+      [ "baking_book", 1 ],
+      [ "cookbook", 2 ],
+      [ "cookbook_italian", 3 ],
+      [ "atomic_survival", 6 ]
+    ],
+    "qualities": [ { "id": "OVEN", "level": 1 } ],
+    "tools": [ [ [ "surface_heat", 22, "LIST" ] ] ],
+    "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_baking" }, { "proficiency": "prof_baking_bread" } ],
+    "components": [ [ [ "flour", 22 ], [ "bread_flour", 5 ] ], [ [ "yeast", 1 ] ], [ [ "water_clean", 2 ] ], [ [ "sugar", 4 ] ] ]
   }
 ]
