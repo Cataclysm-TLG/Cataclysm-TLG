@@ -8669,7 +8669,10 @@ bool item::count_by_charges() const
 
 int item::count() const
 {
-    return count_by_charges() ? charges : 1;
+    if( count_by_charges() && type->stack_max != 1 ) {
+        return charges;
+    }
+    return 1;
 }
 
 bool item::craft_has_charges() const
