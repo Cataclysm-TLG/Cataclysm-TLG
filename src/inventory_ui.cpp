@@ -382,6 +382,10 @@ void uistatedata::serialize( JsonOut &json ) const
     json.member( "overmap_debug_weather", overmap_debug_weather );
     json.member( "overmap_visible_weather", overmap_visible_weather );
     json.member( "overmap_debug_mongroup", overmap_debug_mongroup );
+    json.member( "overmap_fast_travel", overmap_fast_travel );
+    json.member( "overmap_fast_scroll", overmap_fast_scroll );
+    json.member( "tileset_zoom", tileset_zoom );
+    json.member( "overmap_tileset_zoom", overmap_tileset_zoom );
     json.member( "distraction_noise", distraction_noise );
     json.member( "distraction_pain", distraction_pain );
     json.member( "distraction_attack", distraction_attack );
@@ -460,6 +464,10 @@ void uistatedata::deserialize( const JsonObject &jo )
     jo.read( "overmap_debug_weather", overmap_debug_weather );
     jo.read( "overmap_visible_weather", overmap_visible_weather );
     jo.read( "overmap_debug_mongroup", overmap_debug_mongroup );
+    jo.read( "overmap_fast_travel", overmap_fast_travel );
+    jo.read( "overmap_fast_scroll", overmap_fast_scroll );
+    jo.read( "tileset_zoom", tileset_zoom );
+    jo.read( "overmap_tileset_zoom", overmap_tileset_zoom );
     jo.read( "distraction_noise", distraction_noise );
     jo.read( "distraction_pain", distraction_pain );
     jo.read( "distraction_attack", distraction_attack );
