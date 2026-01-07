@@ -580,18 +580,6 @@ struct vehicle_part {
          * this part.
          */
         item_group::ItemList pieces_for_broken_part() const;
-
-        /* probably should be private, but I'm too lazy to write setters and getters */
-        bool is_fake = false; // NOLINT(cata-serialize)
-        bool is_active_fake = false; // NOLINT(cata-serialize)
-        int fake_part_to = -1; // NOLINT(cata-serialize)
-        int fake_protrusion_on = -1; // NOLINT(cata-serialize)
-        bool has_fake = false; // NOLINT(cata-serialize)
-        int fake_part_at = -1; // NOLINT(cata-serialize)
-
-        bool is_real_or_active_fake() const {
-            return !is_fake || is_active_fake;
-        }
 };
 
 class turret_data
@@ -934,7 +922,7 @@ class vehicle
         void suspend_refresh();
         void enable_refresh();
         //Refresh all caches and re-locate all parts
-        void refresh( bool remove_fakes = true );
+        void refresh();
 
         // Refresh active_item cache for vehicle parts
         void refresh_active_item_cache();
@@ -981,7 +969,7 @@ class vehicle
         // Vehicle parts list - all the parts on a single tile
         int print_part_list( const catacurses::window &win, int y1, int max_y, int width,
                              int p,
-                             int hl = -1, bool detail = false, bool include_fakes = true ) const;
+                             int hl = -1, bool detail = false ) const;
 
         // Vehicle parts descriptions - descriptions for all the parts on a single tile
         void print_vparts_descs( const catacurses::window &win, int max_y, int width, int p,
@@ -1126,8 +1114,7 @@ class vehicle
         bool remove_part( vehicle_part &vp, RemovePartHandler &handler );
 
         void part_removal_cleanup( map &here );
-        // inner look for part_removal_cleanup.  returns true if a part is removed
-        // also called by remove_fake_parts
+        // Inner look for part_removal_cleanup.  Returns true if a part is removed.
         bool do_remove_part_actual( map *here );
 
         // remove a vehicle specified by a list of part indices
@@ -1174,8 +1161,6 @@ class vehicle
         // TODO: maybe not include broken ones? Have a separate function for that?
         // TODO: rename to just `parts()` and rename the data member to `parts_`.
         vehicle_part_range get_all_parts() const;
-        // Yields a range containing all parts including fake ones that only map cares about
-        vehicle_part_with_fakes_range get_all_parts_with_fakes( bool with_inactive = false ) const;
         /**
          * Yields a range of parts of this vehicle that each have the given feature
          * and are available: not broken, removed, or part of a carried vehicle.
@@ -1214,8 +1199,7 @@ class vehicle
         /**@}*/
 
         // returns the list of indices of parts at certain position (not accounting frame direction)
-        std::vector<int> parts_at_relative( const point_rel_ms &dp, bool use_cache,
-                                            bool include_fake = false ) const;
+        std::vector<int> parts_at_relative( const point_rel_ms &dp, bool use_cache ) const;
 
         /**
         *  Returns index of part at mount point \p pt which has given \p f flag
@@ -1223,32 +1207,27 @@ class vehicle
         *  @param pt only returns parts from this mount point
         *  @param f required flag in part's vpart_info flags collection
         *  @param unbroken if true also requires the part to be !is_broken
-        *  @param include_fake if true fake parts are included
         *  @returns part index or -1
         */
-        int part_with_feature( const point_rel_ms &pt, const std::string &f, bool unbroken,
-                               bool include_fake = false ) const;
+        int part_with_feature( const point_rel_ms &pt, const std::string &f, bool unbroken ) const;
         /**
         *  Returns part index at mount point \p pt which has given \p f flag
         *  @note uses relative_parts cache
         *  @param pt only returns parts from this mount point
         *  @param f required flag in part's vpart_info flags collection
         *  @param unbroken if true also requires the part to be !is_broken()
-        *  @param include_fake if true fake parts are included
         *  @returns part index or -1
         */
-        int part_with_feature( const point_rel_ms &pt, vpart_bitflags f, bool unbroken,
-                               bool include_fake = false ) const;
+        int part_with_feature( const point_rel_ms &pt, vpart_bitflags f, bool unbroken ) const;
         /**
         *  Returns \p p or part index at mount point \p pt which has given \p f flag
         *  @note uses relative_parts cache
         *  @param p index of part to start searching from
         *  @param f required flag in part's vpart_info flags collection
         *  @param unbroken if true also requires the part to be !is_broken()
-        *  @param include_fake if true fake parts are included
         *  @returns part index or -1
         */
-        int part_with_feature( int p, vpart_bitflags f, bool unbroken, bool include_fake = false ) const;
+        int part_with_feature( int p, vpart_bitflags f, bool unbroken ) const;
         /**
         *  Returns index of part at mount point \p pt which has given \p f flag
         *  and is_available(), or -1 if no such part or it's not is_available()
@@ -1404,8 +1383,7 @@ class vehicle
 
         // Seek a vehicle part which obstructs tile with given coordinates relative to vehicle position
         int part_at( const point_rel_ms &dp ) const;
-        int part_displayed_at( const point_rel_ms &dp, bool include_fake = false,
-                               bool below_roof = true, bool roof = true ) const;
+        int part_displayed_at( const point_rel_ms &dp, bool below_roof = true, bool roof = true ) const;
         int roof_at_part( int p ) const;
 
         // Finds index of a given vehicle_part in parts vector, compared by address
@@ -1414,12 +1392,10 @@ class vehicle
 
         // @param dp mount point to check
         // @param rotate symbol is rotated using vehicle facing, or north facing if false
-        // @param include_fake if true fake parts are included
         // @param below_roof if true parts below roof are included
         // @param roof if true roof parts are included
         // @returns filled vpart_display struct or default constructed if no part displayed
         vpart_display get_display_of_tile( const point_rel_ms &dp, bool rotate = true,
-                                           bool include_fake = true,
                                            bool below_roof = true, bool roof = true ) const;
 
         // Get all printable fuel types
@@ -2044,8 +2020,7 @@ class vehicle
         bool assign_seat( vehicle_part &pt, const npc &who );
 
         // Update the set of occupied points and return a reference to it
-        const std::set<tripoint_abs_ms> &get_points( bool force_refresh = false,
-                bool no_fake = false ) const;
+        const std::set<tripoint_abs_ms> &get_points( bool force_refresh = false ) const;
 
         // calculate the new projected points for all vehicle parts to move to
         void part_project_points( const tripoint_rel_ms &dp );
@@ -2198,7 +2173,7 @@ class vehicle
         // Called by map.cpp to make sure the real position of each zone_data is accurate
         bool refresh_zones();
 
-        bounding_box get_bounding_box( bool use_precalc = true, bool no_fake = false );
+        bounding_box get_bounding_box( bool use_precalc = true);
         // Retroactively pass time spent outside bubble
         // Funnels, solar panels
         void update_time( map &here, const time_point &update_to );
@@ -2231,26 +2206,13 @@ class vehicle
         // For a given mount point, returns its adjacency info
         vpart_edge_info get_edge_info( const point_rel_ms &mount ) const;
 
-        // Removes fake parts from the parts vector
-        void remove_fake_parts( map &here, bool cleanup = true );
-        bool should_enable_fake( const tripoint_rel_ms &fake_precalc, const tripoint_rel_ms &parent_precalc,
-                                 const tripoint_rel_ms &neighbor_precalc ) const;
     public:
         // Number of parts contained in this vehicle
         int part_count() const;
-        // Number of real parts in this vehicle, iterates parts to count
-        int part_count_real() const;
-        // Number of real parts in this vehicle, returns parts.size() - fake_parts.size()
-        int part_count_real_cached() const;
 
         // Returns the vehicle_part with the given part number
         vehicle_part &part( int part_num );
         const vehicle_part &part( int part_num ) const;
-        // get the parent part of a fake part or return part_num otherwise
-        int get_non_fake_part( int part_num ) const;
-        // Updates active state on all fake_mounts based on whether they can fill a gap
-        // map.cpp calls this in displace_vehicle
-        void update_active_fakes();
 
         /**
         * Generate the corresponding item from this vehicle part. It includes
@@ -2300,7 +2262,6 @@ class vehicle
         std::vector<int> planters; // NOLINT(cata-serialize)
         std::vector<int> accessories; // NOLINT(cata-serialize)
         std::vector<int> cable_ports; // NOLINT(cata-serialize)
-        std::vector<int> fake_parts; // NOLINT(cata-serialize)
         std::vector<int> control_req_parts; // NOLINT(cata-serialize)
 
         // config values
