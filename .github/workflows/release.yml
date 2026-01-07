@@ -108,7 +108,7 @@ jobs:
             os: macos-15
             mxe: none
             tiles: 1
-            sound: 0
+            sound: 1
             artifact: osx-tiles-universal
             ext: dmg
             content: application/x-apple-diskimage
@@ -257,7 +257,7 @@ jobs:
       - name: Build CTLG (linux)
         if: runner.os == 'Linux' && matrix.mxe == 'none' && matrix.android == 'none' && !matrix.wasm
         run: |
-          make -j$((`nproc`+0)) TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} PCH=0 bindist
+          make -j$((`nproc`+0)) TILES=${{ matrix.tiles }} SOUND=${{ matrix.sound }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} PCH=0 bindist
           mv cataclysm-tlg-1.0.tar.gz ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.tar.gz
       - name: Build Ctlg (WebAssembly)
         if: matrix.wasm
@@ -286,7 +286,7 @@ jobs:
       - name: Build Ctlg (osx)
         if: runner.os == 'macOS'
         run: |
-          make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 FRAMEWORK=1 UNIVERSAL_BINARY=1 dmgdist
+          make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.sound }} RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 FRAMEWORK=1 UNIVERSAL_BINARY=1 dmgdist
           mv Cataclysm.dmg ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
       - name: Set up JDK 8 (android)
         if: runner.os == 'Linux' && matrix.android != 'none' && matrix.mxe == 'none'
