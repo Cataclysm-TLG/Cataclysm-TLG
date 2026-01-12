@@ -4960,10 +4960,6 @@ static void draw_gamepad_radial_menu()
         return;
     }
 
-    if( input_context::input_context_stack.empty() ) {
-        return;
-    }
-
     input_context *ctxt = input_context::input_context_stack.back();
     if( !ctxt ) {
         return;
@@ -5275,16 +5271,16 @@ static void CheckMessages()
     }
 
     // Copy the current input context
-    if( !input_context::input_context_stack.empty() ) {
-        input_context *new_input_context = *--input_context::input_context_stack.end();
-        if( new_input_context && *new_input_context != touch_input_context ) {
+    input_context *new_input_context = input_context::input_context_stack.back();
+    if( new_input_context && *new_input_context != touch_input_context ) {
 
         // If we were in an allow_text_entry input context, and text input is still active, and we're auto-managing keyboard, hide it.
         if( touch_input_context.allow_text_entry &&
-            !android_wants_text_input( *new_input_context ) &&
-            IsTextInputActive( ::window.get() ) &&
+            !new_input_context->allow_text_entry &&
+            !is_string_input( *new_input_context ) &&
+            SDL_IsTextInputActive() &&
             get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-            focus_aware_stop_text_input();
+            StopTextInput();
         }
 
         touch_input_context = *new_input_context;

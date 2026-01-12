@@ -1,16 +1,14 @@
 #pragma once
 
 #include <functional>
+#include <list>
 #include <map>
+#include <memory>
 #include <optional>
 #include <set>
 #include <string>
 #include <string_view>
 #include <vector>
-
-#if defined(__ANDROID__) || defined(TILES)
-#include <list>
-#endif
 
 #include "action.h"
 #include "input_enums.h"
@@ -51,18 +49,26 @@ class input_context_stack_impl
 
 };
 
-
 class input_context
 {
+        friend class keybindings_ui;
+
+        // We use a shared_ptr to an intermediate handle object to resolve lifecycle issues with the
+        // input_context_stack. Each input_context will own a handle which holds a raw pointer back
+        // to the input_context. We store a weak_ptr to the handle in the input_context_stack. The
+        // destructor for input_context will safely destruct the handle, input_context_stack will
+        // lazily reap dead weak_ptrs on the next access.
+        std::shared_ptr<input_context_handle> handle{ new input_context_handle{this} };
+
     public:
 #if defined(__ANDROID__) || defined(TILES)
         // Whatever's on top is our current input context.
-        static std::list<input_context *> input_context_stack;
+        static input_context_stack_impl input_context_stack;
 #endif
-        input_context() : category( "default" ), registered_any_input( false ),
+        input_context() : registered_any_input( false ), category( "default" ),
             coordinate_input_received( false ), handling_coordinate_input( false ) {
 #if defined(__ANDROID__) || defined(TILES)
-            input_context_stack.push_back( this );
+            input_context_stack.push( handle );
 #endif
 #if defined(__ANDROID__)
             allow_text_entry = false;
@@ -77,7 +83,7 @@ class input_context
               coordinate_input_received( false ), handling_coordinate_input( false ),
               preferred_keyboard_mode( preferred_keyboard_mode ) {
 #if defined(__ANDROID__) || defined(TILES)
-            input_context_stack.push_back( this );
+            input_context_stack.push( handle );
 #endif
 #if defined(__ANDROID__)
             allow_text_entry = false;
@@ -94,7 +100,7 @@ class input_context
                 explicit scoped_activation( input_context &ctx ) {
                     ( void )ctx;
 #if defined(__ANDROID__) || defined(TILES)
-                    input_context_stack.push( ctx.handle );
+        virtual ~input_context() = default;
 #endif
                 }
                 ~scoped_activation() {
