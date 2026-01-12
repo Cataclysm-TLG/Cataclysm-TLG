@@ -1056,18 +1056,18 @@ class vehicle
 
         // install a part of type \p type at mount \p dp
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type );
+        int install_part( const point_rel_ms &dp, const vpart_id &type );
 
         // install a part of type \p type at mount \p dp with \p base (std::move -ing it)
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base );
+        int install_part( const point_rel_ms &dp, const vpart_id &type, item &&base );
 
-        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base,
+        int install_part( const point_rel_ms &dp, const vpart_id &type, item &&base,
                           std::vector<item> &installed_with );
 
         // install the given part \p vp (std::move -ing it)
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( map &here, const point_rel_ms &dp, vehicle_part &&vp );
+        int install_part( const point_rel_ms &dp, vehicle_part &&vp );
 
         struct rackable_vehicle {
             std::string name;
@@ -1115,7 +1115,7 @@ class vehicle
 
         void part_removal_cleanup( map &here );
         // Inner look for part_removal_cleanup.  Returns true if a part is removed.
-        bool do_remove_part_actual( map *here );
+        bool do_remove_part_actual();
 
         // remove a vehicle specified by a list of part indices
         bool remove_carried_vehicle( map &here, const std::vector<int> &carried_parts,

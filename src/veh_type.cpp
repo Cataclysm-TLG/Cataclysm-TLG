@@ -1404,8 +1404,7 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
     std::map<point_rel_ms, std::list<const vehicle_part *>> vp_map;
     int mount_min_y = 123;
     int mount_max_y = -123;
-    // Form a map of existing real parts
-    // get_all_parts() gets all non-fake parts
+    // Form a map of existing parts
     // The parts are already in installation order
     for( const vpart_reference &vpr : veh.get_all_parts() ) {
         const vehicle_part &p = vpr.part();
@@ -1423,11 +1422,11 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
     for( int x = mount_max_x; x >= mount_min_x; x-- ) {
         std::string row;
         for( int y = mount_min_y; y <= mount_max_y; y++ ) {
-            if( veh.part_displayed_at( point_rel_ms( x, y ), false, true, true ) == -1 ) {
+            if( veh.part_displayed_at( point_rel_ms( x, y ), false, true ) == -1 ) {
                 row += " ";
                 continue;
             }
-            const vpart_display &c = veh.get_display_of_tile( point_rel_ms( x, y ), false, false, true, true );
+            const vpart_display &c = veh.get_display_of_tile( point_rel_ms( x, y ), false, false, true );
             row += utf32_to_utf8( c.symbol );
         }
         json.write( row );
@@ -1501,9 +1500,6 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
     json.member( "items" );
     json.start_array();
     for( const vpart_reference &vp : veh.get_any_parts( "CARGO" ) ) {
-        if( vp.part().is_fake ) {
-            continue;
-        }
         const vehicle_stack &stack = veh.get_items( vp.part() );
         if( !stack.empty() ) {
             json.start_object();
@@ -1540,7 +1536,6 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
  */
 void vehicles::finalize_prototypes()
 {
-    map &here = get_map(); // TODO: Determine if this is good enough.
     vehicle_prototype_factory.finalize();
     for( const vehicle_prototype &const_proto : vehicles::get_all_prototypes() ) {
         vehicle_prototype &proto = const_cast<vehicle_prototype &>( const_proto );
@@ -1566,7 +1561,7 @@ void vehicles::finalize_prototypes()
                 continue;
             }
 
-            const int part_idx = blueprint.install_part( here, pt.pos, pt.part );
+            const int part_idx = blueprint.install_part( pt.pos, pt.part );
             if( part_idx < 0 ) {
                 debugmsg( "init_vehicles: '%s' part '%s'(%d) can't be installed to %d,%d",
                           blueprint.name, pt.part.c_str(),

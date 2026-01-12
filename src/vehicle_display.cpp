@@ -56,10 +56,9 @@ std::string vpart_display::get_tileset_id() const
     return res;
 }
 
-vpart_display vehicle::get_display_of_tile( const point_rel_ms &dp, bool rotate, bool include_fake,
-        bool below_roof, bool roof ) const
+vpart_display vehicle::get_display_of_tile( const point_rel_ms &dp, bool rotate, bool below_roof, bool roof ) const
 {
-    const int part_idx = part_displayed_at( dp, include_fake, below_roof, roof );
+    const int part_idx = part_displayed_at( dp, below_roof, roof );
     if( part_idx == -1 ) {
         return {};
     }
@@ -144,19 +143,16 @@ vpart_display vehicle::get_display_of_tile( const point_rel_ms &dp, bool rotate,
  */
 int vehicle::print_part_list( const catacurses::window &win, int y1,
                               const int max_y, int width,
-                              int p, int hl /*= -1*/, bool detail, bool include_fakes ) const
+                              int p, int hl /*= -1*/, bool detail ) const
 {
     if( p < 0 || p >= static_cast<int>( parts.size() ) ) {
         return y1;
     }
-    std::vector<int> pl = this->parts_at_relative( parts[p].mount, true, include_fakes );
+    std::vector<int> pl = this->parts_at_relative( parts[p].mount, true );
     int y = y1;
     for( size_t i = 0; i < pl.size(); i++ ) {
         const vehicle_part &vp = parts[pl[i]];
         const vpart_info &vpi = vp.info();
-        if( !vp.is_real_or_active_fake() ) {
-            continue;
-        }
         if( y >= max_y ) {
             mvwprintz( win, point( 1, y ), c_yellow, _( "More parts here…" ) );
             ++y;

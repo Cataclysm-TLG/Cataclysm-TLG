@@ -142,7 +142,7 @@ bool repair_part( map &here, vehicle &veh, vehicle_part &pt, Character &who )
         const std::string variant = pt.variant;
         here.spawn_items( who.pos_bub( here ), pt.pieces_for_broken_part() );
         veh.remove_part( pt );
-        const int partnum = veh.install_part( here, mount, vpid, std::move( base ) );
+        const int partnum = veh.install_part( mount, vpid, std::move( base ) );
         if( partnum >= 0 ) {
             vehicle_part &vp = veh.part( partnum );
             vp.direction = direction;

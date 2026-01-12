@@ -1354,7 +1354,7 @@ int monster::eye_level() const
         const vehicle &veh = vp->vehicle();
         const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
-        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+        for( int idx : veh.parts_at_relative( rel, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
             const vpart_info &vpi_here = vp_here.info();
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&

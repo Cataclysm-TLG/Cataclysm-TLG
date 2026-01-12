@@ -1700,7 +1700,7 @@ void construct::done_vehicle( const tripoint_bub_ms &p, Character & )
     const item &base = components.front();
 
     veh->name = name;
-    const int partnum = veh->install_part( here, point_rel_ms::zero, vpart_from_item( base.typeId() ),
+    const int partnum = veh->install_part( point_rel_ms::zero, vpart_from_item( base.typeId() ),
                                            item( base ) );
     veh->part( partnum ).set_flag( vp_flag::unsalvageable_flag );
 

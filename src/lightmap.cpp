@@ -1066,7 +1066,7 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
     // from happening due to mirrors becoming visible due to processing order.
     // Cameras are also handled here, so that we only need to get through all vehicle parts once
     int cam_control = -1;
-    for( const vpart_reference &vp : veh->get_all_parts_with_fakes() ) {
+    for( const vpart_reference &vp : veh->get_all_parts() ) {
         if( vp.part().removed || vp.part().is_broken() || !vp.info().has_flag( VPFLAG_EXTENDS_VISION ) ) {
             continue;
         }

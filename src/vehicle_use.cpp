@@ -1261,7 +1261,6 @@ void vehicle::lock( int part_index )
 bool vehicle::can_close( int part_index, Character &who )
 {
     creature_tracker &creatures = get_creature_tracker();
-    part_index = get_non_fake_part( part_index );
     std::vector<std::vector<int>> openable_parts = find_lines_of_parts( part_index, "OPENABLE" );
     if( openable_parts.empty() ) {
         std::vector<int> base_element;
@@ -1270,7 +1269,7 @@ bool vehicle::can_close( int part_index, Character &who )
     }
     for( const std::vector<int> &vec : openable_parts ) {
         for( int partID : vec ) {
-            // Check the part for collisions, then if there's a fake part present check that too.
+            // Check the part for collisions.
             while( partID >= 0 ) {
                 const Creature *const mon = creatures.creature_at( abs_part_pos( parts[partID] ) );
                 if( mon ) {
@@ -1284,11 +1283,7 @@ bool vehicle::can_close( int part_index, Character &who )
                     }
                     return false;
                 }
-                if( parts[partID].has_fake && parts[parts[partID].fake_part_at].is_active_fake ) {
-                    partID = parts[partID].fake_part_at;
-                } else {
-                    partID = -1;
-                }
+                partID = -1;
             }
         }
     }
@@ -1297,7 +1292,7 @@ bool vehicle::can_close( int part_index, Character &who )
 
 void vehicle::open_all_at( map &here, int p )
 {
-    for( const int elem : parts_at_relative( parts[p].mount, true, true ) ) {
+    for( const int elem : parts_at_relative( parts[p].mount, true ) ) {
         const vehicle_part &vp = parts[elem];
         if( vp.info().has_flag( VPFLAG_OPENABLE ) ) {
             // Note that this will open multi-square and non-multipart parts in the tile. This
@@ -1322,11 +1317,6 @@ void vehicle::open_or_close( map &here, const int part_index, const bool opening
             unlock( parti );
         }
         prt.open = opening;
-        if( prt.is_fake ) {
-            parts.at( prt.fake_part_to ).open = opening;
-        } else if( prt.has_fake ) {
-            parts.at( prt.fake_part_at ).open = opening;
-        }
     };
     //find_lines_of_parts() doesn't return the part_index we passed, so we set it on its own
     part_open_or_close( part_index, opening );
@@ -1360,11 +1350,6 @@ void vehicle::lock_or_unlock( const int part_index, const bool locking )
     const auto part_lock_or_unlock = [&]( const int parti, const bool locking ) {
         vehicle_part &prt = parts.at( parti );
         prt.locked = locking;
-        if( prt.is_fake ) {
-            parts.at( prt.fake_part_to ).locked = locking;
-        } else if( prt.has_fake ) {
-            parts.at( prt.fake_part_at ).locked = locking;
-        }
     };
     //find_lines_of_parts() doesn't return the part_index we passed, so we set it on its own
     part_lock_or_unlock( part_index, locking );
@@ -1894,8 +1879,8 @@ void vehicle::build_interact_menu( veh_menu &menu, map *here, const tripoint_bub
         .skip_locked_check()
         .hotkey( "EXAMINE_VEHICLE" )
         .on_submit( [this, vp] {
-            const vpart_position non_fake( *this, get_non_fake_part( vp.part_index() ) );
-            const point_rel_ms start_pos = non_fake.mount_pos().rotate( 2 );
+            const vpart_position non_fake( *this, vp.part_index() );
+            const point_rel_ms start_pos = vp.mount_pos().rotate( 2 );
             g->exam_vehicle( *this, start_pos );
         } );
 
