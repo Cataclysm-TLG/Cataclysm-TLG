@@ -6434,7 +6434,7 @@
     "id": "drone_op",
     "name": "Drone Operator",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
-    "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have a… RC car?",
+    "description": "You had a job programming machines such as automatic street cleaners, newsbots, and pizza delivery drones.  Bionic implants helped you control them remotely.  Now all the drones carry guns instead of pizza.  At least you still have an… RC car?",
     "points": 1,
     "CBMs": [ "bio_cable", "bio_power_storage", "bio_remote" ],
     "skills": [ { "level": 2, "name": "computer" } ],

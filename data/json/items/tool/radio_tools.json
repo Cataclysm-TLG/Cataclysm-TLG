@@ -9,7 +9,7 @@
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "material": [ "plastic" ],
     "charges_per_use": 1,
-    "turns_per_charge": 5,
+    "turns_per_charge": 60,
     "weight": "670 g",
     "volume": "500 ml",
     "price": "60 USD",
@@ -51,8 +51,8 @@
       {
         "pocket_type": "MAGAZINE_WELL",
         "rigid": true,
-        "flag_restriction": [ "BATTERY_ULTRA_LIGHT" ],
-        "default_magazine": "light_minus_disposable_cell"
+        "flag_restriction": [ "BATTERY_LIGHT" ],
+        "default_magazine": "light_battery_cell"
       }
     ],
     "tool_ammo": [ "battery" ]
@@ -63,7 +63,7 @@
     "type": "TOOL",
     "name": { "str": "RC car (on)", "str_pl": "RC cars (on)" },
     "description": "A remote-controlled toy car.  It is turned on and draining its batteries just like a real electric car!  Use a remote control to drive it around.",
-    "turns_per_charge": 5,
+    "turns_per_charge": 60,
     "revert_to": "radio_car",
     "use_action": [ "RADIOCARON" ],
     "tick_action": [
@@ -126,8 +126,9 @@
     "type": "TOOL",
     "name": { "str": "radio (on)", "str_pl": "radios (on)" },
     "description": "A portable radio that is turned on and continually draining its batteries.  It is playing the broadcast being sent from any nearby radio towers.",
-    "power_draw": "500 mW",
+    "power_draw": "150 mW",
     "revert_to": "radio",
+    "charges_per_use": 0,
     "use_action": [
       "RADIO_ON",
       { "type": "link_up", "menu_text": "Plug in / Unplug", "ammo_scale": 0, "cable_length": 3, "charge_rate": "5 W" },
@@ -177,7 +178,7 @@
     "color": "yellow",
     "flags": [ "WATER_BREAK", "ELECTRONIC" ],
     "charges_per_use": 1,
-    "turns_per_charge": 5,
+    "turns_per_charge": 60,
     "use_action": [ "REMOTEVEH" ],
     "tick_action": "REMOTEVEH_TICK",
     "pocket_data": [
