@@ -223,6 +223,9 @@ bool trapfunc::beartrap( const tripoint_bub_ms &p, Creature *c, item * )
             }
         }
         c->check_dead_state( &here );
+    } else {        // The player threw a rock at it or something.
+        sounds::sound( p, 8, sounds::sound_t::activity, _( "Clank!" ), false, "trap", "snare" );
+        here.add_item( p, item( "beartrap", calendar::turn_zero ) );
     }
     return true;
 }
