@@ -2117,26 +2117,26 @@
   {
     "id": "BATTERY_ULTRA_LIGHT",
     "type": "json_flag",
-    "info": "This item fits in items that use ultra-light batteries.",
-    "name": "ultra-light battery"
+    "info": "This fits in items that use watch batteries.",
+    "name": "watch battery"
   },
   {
     "id": "BATTERY_LIGHT",
     "type": "json_flag",
-    "info": "This item fits in items that use light batteries.",
-    "name": "light battery"
+    "info": "This fits in items that use dry cell batteries.",
+    "name": "dry cell battery"
   },
   {
     "id": "BATTERY_MEDIUM",
     "type": "json_flag",
-    "info": "This item fits in items that use medium batteries.",
-    "name": "medium battery"
+    "info": "This fits in items that use lithium batteries.",
+    "name": "lithium battery"
   },
   {
     "id": "BATTERY_HEAVY",
     "type": "json_flag",
-    "info": "This item fits in items that use heavy batteries.",
-    "name": "heavy battery"
+    "info": "This fits in items that use tool batteries.",
+    "name": "tool battery"
   },
   {
     "id": "METHANOL_TANK",
