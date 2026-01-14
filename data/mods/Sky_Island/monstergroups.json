@@ -103,7 +103,6 @@
       { "monster": "mon_zombear_skeleton", "weight": 10 },
       { "monster": "mon_zoose_thorny", "weight": 5 },
       { "monster": "mon_dog_skeleton_brute", "weight": 50 },
-      { "monster": "mon_devourer", "weight": 25 },
       { "monster": "mon_zombullfrog", "weight": 10 },
       { "monster": "mon_zombie_survivor_elite", "weight": 15 },
       { "monster": "mon_zombie_spitter", "weight": 75 },
