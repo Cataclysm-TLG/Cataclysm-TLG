@@ -3757,5 +3757,10 @@
     "type": "MIGRATION",
     "id": "hallula",
     "replace": "bread"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "medium_plus_battery_cell",
+    "replace": "medium_battery_cell"
   }
 ]
