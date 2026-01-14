@@ -958,7 +958,6 @@ static void eff_fun_redcells_anemia( Character &u, effect &it )
         if( intense > 1 ) {
             switch( dice( 1, 9 ) ) {
                 case 1:
-                    u.add_msg_if_player( m_bad, _( "" ) );
                     break;
                 case 2:
                     u.add_msg_if_player( m_bad, _( "You feel dizzy!" ) );
