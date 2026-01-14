@@ -1252,7 +1252,7 @@ bool vehicle::is_structural_part_removed() const
 ret_val<void> vehicle::can_mount( const point_rel_ms &dp, const vpart_info &vpi ) const
 {
     const std::vector<int> parts_in_square = parts_at_relative( dp,
-            /* use_cache = */ false);
+            /* use_cache = */ false );
 
     if( parts_in_square.empty() ) {
         // First part in an empty square MUST be a structural part or be an appliance
@@ -1518,24 +1518,26 @@ bool vehicle::is_appliance() const
     return has_tag( flag_APPLIANCE );
 }
 
-int vehicle::install_part( const point_rel_ms &dp, const vpart_id &type )
+int vehicle::install_part( map &here, const point_rel_ms &dp, const vpart_id &type )
 {
-    return install_part( dp, type, item( type.obj().base_item ) );
+    return install_part( here, dp, type, item( type.obj().base_item ) );
 }
 
-int vehicle::install_part( const point_rel_ms &dp, const vpart_id &type, item &&base )
+
+int vehicle::install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base )
 {
-    return install_part( dp, vehicle_part( type, std::move( base ) ) );
+    return install_part( here, dp, vehicle_part( type, std::move( base ) ) );
 }
 
-int vehicle::install_part( const point_rel_ms &dp, const vpart_id &type, item &&base,
+int vehicle::install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base,
                            std::vector<item> &installed_with )
 {
-    return install_part( dp, vehicle_part( type, std::move( base ), installed_with ) );
+    return install_part( here,  dp, vehicle_part( type, std::move( base ), installed_with ) );
 }
 
-int vehicle::install_part( const point_rel_ms &dp, vehicle_part &&vp )
+int vehicle::install_part( map &here, const point_rel_ms &dp, vehicle_part &&vp )
 {
+    (void)here; // Silence the compiler warning.
     const vpart_info &vpi = vp.info();
     const ret_val<void> valid_mount = can_mount( dp, vpi );
     if( !valid_mount.success() ) {
@@ -2713,7 +2715,8 @@ std::optional<vpart_reference> vpart_position::cargo() const
     return part_with_feature( VPFLAG_CARGO, true );
 }
 
-std::optional<vpart_reference> vpart_position::part_with_feature( const std::string &f, bool unbroken ) const
+std::optional<vpart_reference> vpart_position::part_with_feature( const std::string &f,
+        bool unbroken ) const
 {
     const int i = vehicle().part_with_feature( mount_pos(), f, unbroken );
     if( i < 0 ) {
@@ -2722,7 +2725,8 @@ std::optional<vpart_reference> vpart_position::part_with_feature( const std::str
     return vpart_reference( vehicle(), i );
 }
 
-std::optional<vpart_reference> vpart_position::part_with_feature( const vpart_bitflags f, bool unbroken ) const
+std::optional<vpart_reference> vpart_position::part_with_feature( const vpart_bitflags f,
+        bool unbroken ) const
 {
     const int i = vehicle().part_with_feature( part_index(), f, unbroken );
     if( i < 0 ) {
@@ -2835,7 +2839,8 @@ int vehicle::part_with_feature( const point_rel_ms &pt, vpart_bitflags f, bool u
     return -1;
 }
 
-int vehicle::part_with_feature( const point_rel_ms &pt, const std::string &flag, bool unbroken ) const
+int vehicle::part_with_feature( const point_rel_ms &pt, const std::string &flag,
+                                bool unbroken ) const
 {
     for( const int p : parts_at_relative( pt, /* use_cache = */ false ) ) {
         const vehicle_part &vp_here = this->part( p );
@@ -6567,7 +6572,6 @@ void vehicle::refresh()
 
     // NB: using the _old_ pivot point, don't recalc here, we only do that when moving!
     precalc_mounts( 0, pivot_rotation[0], pivot_anchor[0] );
-    // update the fakes, and then repopulate the cache
     check_environmental_effects = true;
     insides_dirty = true;
     zones_dirty = true;
@@ -7597,7 +7601,6 @@ int vehicle::damage_direct( map &here, vehicle_part &vp, int dmg, const damage_t
         coeff_air_changed = true;
 
         // refresh cache in case the broken part has changed the status
-        // do not remove fakes parts in case external vehicle part references get invalidated
         refresh();
     }
 

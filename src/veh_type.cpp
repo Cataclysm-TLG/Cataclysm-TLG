@@ -1536,6 +1536,7 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
  */
 void vehicles::finalize_prototypes()
 {
+    map &here = get_map();
     vehicle_prototype_factory.finalize();
     for( const vehicle_prototype &const_proto : vehicles::get_all_prototypes() ) {
         vehicle_prototype &proto = const_cast<vehicle_prototype &>( const_proto );
@@ -1561,7 +1562,7 @@ void vehicles::finalize_prototypes()
                 continue;
             }
 
-            const int part_idx = blueprint.install_part( pt.pos, pt.part );
+            const int part_idx = blueprint.install_part( here, pt.pos, pt.part );
             if( part_idx < 0 ) {
                 debugmsg( "init_vehicles: '%s' part '%s'(%d) can't be installed to %d,%d",
                           blueprint.name, pt.part.c_str(),

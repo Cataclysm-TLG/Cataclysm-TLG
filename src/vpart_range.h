@@ -109,7 +109,7 @@ class generic_vehicle_part_range
         // Templated because see top of file.
         template<typename T = ::vehicle>
         size_t part_count() const {
-                return static_cast<const T &>( vehicle_.get() ).part_count();
+            return static_cast<const T &>( vehicle_.get() ).part_count();
 
         }
 

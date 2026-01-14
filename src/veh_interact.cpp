@@ -3119,7 +3119,7 @@ void veh_interact::complete_vehicle( map &here, Character &you )
             }
 
             you.invalidate_crafting_inventory();
-            const int partnum = veh.install_part( d, part_id, std::move( base ), installed_with );
+            const int partnum = veh.install_part( here, d, part_id, std::move( base ), installed_with );
             if( partnum < 0 ) {
                 debugmsg( "complete_vehicle install part fails dx=%d dy=%d id=%s",
                           d.x(), d.y(), part_id.c_str() );

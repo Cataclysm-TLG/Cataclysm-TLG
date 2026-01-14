@@ -1056,18 +1056,18 @@ class vehicle
 
         // install a part of type \p type at mount \p dp
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( const point_rel_ms &dp, const vpart_id &type );
+        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type );
 
         // install a part of type \p type at mount \p dp with \p base (std::move -ing it)
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( const point_rel_ms &dp, const vpart_id &type, item &&base );
+        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base );
 
-        int install_part( const point_rel_ms &dp, const vpart_id &type, item &&base,
+        int install_part( map &here, const point_rel_ms &dp, const vpart_id &type, item &&base,
                           std::vector<item> &installed_with );
 
         // install the given part \p vp (std::move -ing it)
         // @return installed part index or -1 if can_mount(...) failed
-        int install_part( const point_rel_ms &dp, vehicle_part &&vp );
+        int install_part( map &here, const point_rel_ms &dp, vehicle_part &&vp );
 
         struct rackable_vehicle {
             std::string name;
@@ -2173,7 +2173,7 @@ class vehicle
         // Called by map.cpp to make sure the real position of each zone_data is accurate
         bool refresh_zones();
 
-        bounding_box get_bounding_box( bool use_precalc = true);
+        bounding_box get_bounding_box( bool use_precalc = true );
         // Retroactively pass time spent outside bubble
         // Funnels, solar panels
         void update_time( map &here, const time_point &update_to );

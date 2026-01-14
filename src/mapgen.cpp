@@ -7538,7 +7538,7 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
                         const ret_val<void> valid_mount = first_veh->can_mount( target_point, vpi );
                         if( valid_mount.success() ) {
                             // make a copy so we don't interfere with veh_to_add->remove_part below
-                            first_veh->install_part( target_point, vehicle_part( *vp ) );
+                            first_veh->install_part( *this, target_point, vehicle_part( *vp ) );
                         }
                         // ignore parts that would make invalid vehicle configuration
                     }
