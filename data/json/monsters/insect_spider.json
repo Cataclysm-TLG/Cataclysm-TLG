@@ -2153,7 +2153,6 @@
     "vision_day": 6,
     "vision_night": 6,
     "harvest": "incubator_mammal_deer",
-    "dissect": "dissect_medical_sample_single",
     "special_attacks": [
       [ "PARROT", 6 ],
       {
