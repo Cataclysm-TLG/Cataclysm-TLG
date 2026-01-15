@@ -1281,7 +1281,7 @@
     "parent": "mouth",
     "opposite": "sub_limb_debug",
     "side": 0,
-    "name": "lips"
+    "name": "mouth"
   },
   {
     "id": "mouth_nose",

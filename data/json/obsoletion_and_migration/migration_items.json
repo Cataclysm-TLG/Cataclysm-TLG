@@ -3654,6 +3654,31 @@
     "replace": "light_battery_cell"
   },
   {
+    "id": "light_minus_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "light_minus_battery_cell"
+  },
+  {
+    "id": "light_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "light_battery_cell"
+  },
+  {
+    "id": "medium_atomic_battery_cell",
+    "type": "MIGRATION",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "id": "medium_dry_cell",
+    "type": "MIGRATION",
+    "replace": "medium_battery_cell"
+  },
+  {
+    "id": "heavy_dry_cell",
+    "type": "MIGRATION",
+    "replace": "heavy_battery_cell"
+  },
+  {
     "type": "MIGRATION",
     "id": "wearable_big_light",
     "replace": "wearable_light"
