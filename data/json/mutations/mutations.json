@@ -3644,6 +3644,7 @@
   {
     "type": "mutation",
     "id": "CLAWS_RETRACT_active",
+    "copy-from": "CLAWS_RETRACT",
     "name": { "str": "Extended Claws" },
     "points": 2,
     "active": true,
