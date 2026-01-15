@@ -52,7 +52,7 @@ static const flag_id json_flag_TELEPORT_LOCK( "TELEPORT_LOCK" );
 static bool TestForVehicleTeleportCollision( vehicle &veh, map &here, map *dest,
         const tripoint_abs_ms &dp )
 {
-    for( const vpart_reference &part : veh.get_all_parts_with_fakes( true ) ) {
+    for( const vpart_reference &part : veh.get_all_parts() ) {
         tripoint_rel_ms rel_pos = part.pos_bub( here ) - veh.pos_bub( here );
         if( !dest->inbounds( dp + rel_pos ) ) {
             dest->load( project_to<coords::sm>( dp + rel_pos ), false );
@@ -446,7 +446,8 @@ bool teleport::teleport_vehicle( vehicle &veh, const tripoint_abs_ms &dp )
     const std::set<int> &parts_to_move = {};
     smzs = veh.advance_precalc_mounts( dst_offset, &here, src, tripoint_rel_ms( 0, 0, 0 ), 0,
                                        true, parts_to_move );
-    veh.update_active_fakes();
+                                       
+    veh.refresh();
 
     if( src_submap != dst_submap ) {
         dst_submap->ensure_nonuniform();

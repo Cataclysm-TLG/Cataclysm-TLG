@@ -480,7 +480,7 @@ void map::add_vehicle_to_cache( vehicle *veh )
     }
 
     // Get parts
-    for( const vpart_reference &vpr : veh->get_all_parts_with_fakes() ) {
+    for( const vpart_reference &vpr : veh->get_all_parts() ) {
         if( vpr.part().removed ) {
             continue;
         }
@@ -1605,7 +1605,6 @@ bool map::displace_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const bool 
     veh.shed_loose_parts( trinary::SOME, this, &dst );
     smzs = veh.advance_precalc_mounts( dst_offset, this, src, dp, ramp_offset,
                                        adjust_pos, parts_to_move );
-    veh.update_active_fakes();
 
     if( src_submap != dst_submap ) {
         dst_submap->ensure_nonuniform();
@@ -4776,8 +4775,8 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     int veh_coverage = 0;
     if( const optional_vpart_position vp = veh_at( p ) ) {
         const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_quarterpanel =  vp->part_with_feature( VPFLAG_HALF_BOARD, false, true ).has_value();
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false, false ).has_value();
+        const bool is_quarterpanel =  vp->part_with_feature( VPFLAG_HALF_BOARD, false ).has_value();
+        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false ).has_value();
         if( is_obstacle ) {
             veh_coverage = 100;
         } else if( is_quarterpanel ) {
@@ -8009,7 +8008,7 @@ int map::concealment( const tripoint_bub_ms &p ) const
         const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
         bool is_opaque = false;
-        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+        for( int idx : veh.parts_at_relative( rel, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
             const vpart_info &vpi_here = vp_here.info();
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
@@ -8049,7 +8048,7 @@ int map::coverage( const tripoint_bub_ms &p ) const
         const vehicle &veh = vp->vehicle();
         const point_rel_ms rel = vp->mount_pos();
         bool all_no_cover = true;
-        for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+        for( int idx : veh.parts_at_relative( rel, true ) ) {
             const vehicle_part &vp_here = veh.part( idx );
             const vpart_info &vpi_here = vp_here.info();
             if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
@@ -10053,7 +10052,7 @@ void map::build_obstacle_cache(
                 const vehicle &veh = vp->vehicle();
                 const point_rel_ms rel = vp->mount_pos();
                 bool all_no_cover = true;
-                for( int idx : veh.parts_at_relative( rel, true, true ) ) {
+                for( int idx : veh.parts_at_relative( rel, true ) ) {
                     const vehicle_part &vp_here = veh.part( idx );
                     const vpart_info &vpi_here = vp_here.info();
                     if( !vpi_here.has_flag( "NO_COVER" ) && vpi_here.location != "on_roof" &&
@@ -10240,7 +10239,7 @@ void map::do_vehicle_caching( int z )
         return;
     }
     for( vehicle *v : ch->vehicle_list ) {
-        for( const vpart_reference &vp : v->get_all_parts_with_fakes() ) {
+        for( const vpart_reference &vp : v->get_all_parts() ) {
             const tripoint_bub_ms part_pos = v->bub_part_pos( *this, vp.part() );
             if( !inbounds( part_pos.xy() ) ) {
                 continue;
@@ -10912,7 +10911,7 @@ void map::scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &bl
     VehicleList vehs = get_vehicles();
     for( wrapped_vehicle &wrapped_veh : vehs ) {
         vehicle &veh = *( wrapped_veh.v );
-        for( const vpart_reference &vp : veh.get_all_parts_with_fakes() ) {
+        for( const vpart_reference &vp : veh.get_all_parts() ) {
             if( !vp.has_feature( VPFLAG_OBSTACLE ) &&
                 ( !vp.has_feature( VPFLAG_OPENABLE ) || !vp.part().open ) ) {
                 continue;

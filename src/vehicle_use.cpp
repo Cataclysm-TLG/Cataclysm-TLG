@@ -1297,7 +1297,7 @@ bool vehicle::can_close( int part_index, Character &who )
 
 void vehicle::open_all_at( map &here, int p )
 {
-    for( const int elem : parts_at_relative( parts[p].mount, true, true ) ) {
+    for( const int elem : parts_at_relative( parts[p].mount, true ) ) {
         const vehicle_part &vp = parts[elem];
         if( vp.info().has_flag( VPFLAG_OPENABLE ) ) {
             // Note that this will open multi-square and non-multipart parts in the tile. This

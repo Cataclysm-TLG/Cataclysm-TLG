@@ -433,7 +433,7 @@ shared_ptr_fast<ui_adaptor> veh_interact::create_or_get_ui_adaptor( map &here )
             werase( w_parts );
             veh->print_part_list( w_parts, 0, getmaxy( w_parts ) - 1, getmaxx( w_parts ), cpart,
                                   highlight_part,
-                                  true, false );
+                                  true );
             wnoutrefresh( w_parts );
 
             werase( w_msg );
