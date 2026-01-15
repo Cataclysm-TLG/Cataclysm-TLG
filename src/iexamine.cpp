@@ -1526,7 +1526,7 @@ void iexamine::chainfence( Character &you, const tripoint_bub_ms &examp )
 
         if( you.has_proficiency( proficiency_prof_parkour ) ) {
             add_msg( _( "You vault over the obstacle with ease." ) );
-            move_cost = 100; // Not tall enough to warrant spider-climbing, so only relevant trait.
+            move_cost = 150; // Not tall enough to warrant spider-climbing, so only relevant trait.
         } else {
             add_msg( _( "You vault over the obstacle." ) );
             move_cost = 300; // Most common move cost for barricades pre-change.
@@ -1541,14 +1541,14 @@ void iexamine::chainfence( Character &you, const tripoint_bub_ms &examp )
     } else if( you.has_trait( trait_ARACHNID_ARMS_OK ) &&
                !you.wearing_fitting_on( bodypart_id( "torso" ) ) ) {
         add_msg( _( "Climbing this obstacle is trivial for one such as you." ) );
-        move_cost = 75; // Yes, faster than walking.  6-8 limbs are impressive.
+        move_cost = 100;
     } else if( you.has_trait( trait_INSECT_ARMS_OK ) &&
                !you.wearing_fitting_on( bodypart_id( "torso" ) ) ) {
-        add_msg( _( "You quickly scale the fence." ) );
-        move_cost = 90;
+        add_msg( _( "You quickly skitter over the obstacle." ) );
+        move_cost = 100;
     } else if( you.has_proficiency( proficiency_prof_parkour ) ) {
         add_msg( _( "This obstacle is no match for your freerunning abilities." ) );
-        move_cost = 100;
+        move_cost = 200;
     } else {
         move_cost = you.has_trait( trait_BADKNEES ) ? 800 : 400;
         if( g->slip_down( game::climb_maneuver::over_obstacle, climbing_aid_furn_CLIMBABLE ) ) {
