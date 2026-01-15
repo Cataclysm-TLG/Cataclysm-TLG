@@ -2199,17 +2199,10 @@ bool vehicle::do_remove_part_actual( map *here )
     for( std::vector<vehicle_part>::iterator it = parts.end(); it != parts.begin(); /*noop*/ ) {
         --it;
         vehicle_part &vp = *it;
-        if( vp.removed || vp.is_fake ) {
-            // We are first stripping out removed parts and marking
-            // their corresponding real parts as "not fake" so they are regenerated,
-            // and then removing any parts that have been marked as removed.
-            // This is assured by iterating from the end to the beginning as
-            // fake parts are always at the end of the parts vector.
-            if( vp.is_fake ) {
-                parts[vp.fake_part_to].has_fake = false;
-            } else {
+        if( vp.removed ) {
+            // We are first stripping out removed parts and then
+            // removing any parts that have been marked as removed.
                 get_items( vp ).clear();
-            }
             if( vp.is_real_or_active_fake() ) {
                 const tripoint_bub_ms pt = bub_part_pos( *here, vp );
                 here->clear_vehicle_point_from_cache( this, pt );
