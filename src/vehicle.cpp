@@ -1948,8 +1948,8 @@ bool vehicle::merge_appliance_into_grid( map *here, vehicle &veh_target )
     veh_target.shift_if_needed( *here );
     veh_target.pos -= veh_target.pivot_anchor[0];
 
-    bounding_box vehicle_box = get_bounding_box( false, true );
-    bounding_box target_vehicle_box = veh_target.get_bounding_box( false, true );
+    bounding_box vehicle_box = get_bounding_box( false );
+    bounding_box target_vehicle_box = veh_target.get_bounding_box( false );
     const tripoint_bub_ms veh_pos = pos_bub( *here );
     const tripoint_bub_ms target_pos = veh_target.pos_bub( *here );
     const point_bub_ms min = { std::min( veh_pos.x() + vehicle_box.p1.x(), target_pos.x() + target_vehicle_box.p1.x() ),
@@ -2662,9 +2662,7 @@ std::vector<int> vehicle::parts_at_relative( const point_rel_ms &dp, const bool 
         const auto &iter = relative_parts.find( dp );
         if( iter != relative_parts.end() ) {
                 for( const int vp : iter->second ) {
-                    if( !parts.at( vp ).is_fake ) {
                         res.push_back( vp );
-                    }
                 }
         }
     }
@@ -3597,7 +3595,7 @@ units::mass vehicle::unloaded_mass() const
 {
     units::mass m_total = 0_gram;
     for( const vpart_reference &vp : get_all_parts() ) {
-        if( vp.part().removed || vp.part().is_fake ) {
+        if( vp.part().removed ) {
             continue;
         }
         m_total += vp.part().base.weight();
@@ -4356,7 +4354,7 @@ double vehicle::coeff_air_drag() const
     // find the first instance of each item and compare against the ideal configuration.
     std::vector<drag_column> drag( width );
     for( int p : structure_indices ) {
-        if( parts[ p ].removed || parts[ p ].is_fake ) {
+        if( parts[ p ].removed ) {
             continue;
         }
         int col = parts[ p ].mount.y() - mount_min.y();
@@ -5645,9 +5643,6 @@ std::map<vpart_reference, float> vehicle::search_connected_batteries( map &here 
         const float efficiency = pair.second;
         for( const int part_idx : veh->batteries ) {
             const vpart_reference vpr( *veh, part_idx );
-            if( vpr.part().is_fake ) {
-                continue;
-            }
             result.emplace( vpr, efficiency );
         }
     }
@@ -6621,23 +6616,19 @@ vpart_edge_info vehicle::get_edge_info( const point_rel_ms &mount ) const
     int r_index = -1;
     bool left_side = false;
     bool right_side = false;
-    if( relative_parts.find( forward ) != relative_parts.end() &&
-        !parts.at( relative_parts.at( forward ).front() ).is_fake ) {
+    if( relative_parts.find( forward ) != relative_parts.end() ) {
         f_index = relative_parts.at( forward ).front();
     }
-    if( relative_parts.find( aft ) != relative_parts.end() &&
-        !parts.at( relative_parts.at( aft ).front() ).is_fake ) {
+    if( relative_parts.find( aft ) != relative_parts.end() ) {
         a_index = relative_parts.at( aft ).front();
     }
-    if( relative_parts.find( left ) != relative_parts.end() &&
-        !parts.at( relative_parts.at( left ).front() ).is_fake ) {
+    if( relative_parts.find( left ) != relative_parts.end() ) {
         l_index = relative_parts.at( left ).front();
         if( parts.at( relative_parts.at( left ).front() ).info().has_flag( "PROTRUSION" ) ) {
             left_side = true;
         }
     }
-    if( relative_parts.find( right ) != relative_parts.end() &&
-        !parts.at( relative_parts.at( right ).front() ).is_fake ) {
+    if( relative_parts.find( right ) != relative_parts.end() ) {
         r_index = relative_parts.at( right ).front();
         if( parts.at( relative_parts.at( right ).front() ).info().has_flag( "PROTRUSION" ) ) {
             right_side = true;
@@ -7835,7 +7826,7 @@ bool vehicle::restore_folded_parts( const item &it )
                 continue;
             }
             vehicle_part &pt = parts[part_idx];
-            if( pt.removed || pt.is_fake ) {
+            if( pt.removed ) {
                 continue;
             }
             const int start_damage = pt.base.damage();
@@ -7860,8 +7851,7 @@ bool vehicle::restore_folded_parts( const item &it )
     return true;
 }
 
-const std::set<tripoint_abs_ms> &vehicle::get_points( const bool force_refresh,
-        const bool no_fake ) const
+const std::set<tripoint_abs_ms> &vehicle::get_points( const bool force_refresh ) const
 {
     if( force_refresh || occupied_cache_pos != pos_abs() ||
         occupied_cache_direction != face.dir() ) {
@@ -7869,9 +7859,6 @@ const std::set<tripoint_abs_ms> &vehicle::get_points( const bool force_refresh,
         occupied_cache_direction = face.dir();
         occupied_points.clear();
         for( const std::pair<const point_rel_ms, std::vector<int>> &part_location : relative_parts ) {
-            if( no_fake && part( part_location.second.front() ).is_fake ) {
-                continue;
-            }
             occupied_points.insert( abs_part_pos( part_location.second.front() ) );
         }
     }
@@ -7888,7 +7875,7 @@ void vehicle::part_project_points( const tripoint_rel_ms &dp )
         }
 
         const vpart_info &info = vp.info();
-        if( !vp.is_fake && info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
+        if( info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
             continue;
         }
         // Coordinates of where part will go due to movement (dx/dy/dz)
@@ -8165,7 +8152,7 @@ void vehicle::calc_mass_center( map &here, bool use_precalc ) const
     units::mass m_total = 0_gram;
     for( const vpart_reference &vp : get_all_parts() ) {
         const size_t i = vp.part_index();
-        if( vp.part().removed || vp.part().is_fake ) {
+        if( vp.part().removed ) {
             continue;
         }
 
@@ -8235,7 +8222,7 @@ int vehicle::get_passenger_count( bool hostile ) const
     return count;
 }
 
-bounding_box vehicle::get_bounding_box( bool use_precalc, bool no_fake )
+bounding_box vehicle::get_bounding_box( bool use_precalc )
 {
     int min_x = INT_MAX;
     int max_x = INT_MIN;
@@ -8246,7 +8233,7 @@ bounding_box vehicle::get_bounding_box( bool use_precalc, bool no_fake )
 
     precalc_mounts( 0, turn_dir, point_rel_ms::zero );
 
-    for( const tripoint_abs_ms &p : get_points( true, no_fake ) ) {
+    for( const tripoint_abs_ms &p : get_points( true ) ) {
         point_rel_ms pt;
         if( use_precalc ) {
             const int i_use = 0;
@@ -8294,8 +8281,7 @@ int vehicle::get_non_fake_part( const int part_num ) const
                   part_num, disp_name(), parts.size() );
         return -1;
     }
-    const vehicle_part &vp = parts[part_num];
-    return vp.is_fake ? vp.fake_part_to : part_num;
+    return part_num;
 }
 
 vehicle_part_range vehicle::get_all_parts() const
@@ -8308,24 +8294,11 @@ int vehicle::part_count() const
     return static_cast<int>( parts.size() );
 }
 
-int vehicle::part_count_real() const
-{
-    return std::count_if( parts.begin(), parts.end(),
-    []( const vehicle_part & vp ) {
-        return !vp.is_fake;
-    } );
-}
-
-int vehicle::part_count_real_cached() const
-{
-    return static_cast<int>( parts.size() - fake_parts.size() );
-}
-
 std::vector<std::reference_wrapper<const vehicle_part>> vehicle::real_parts() const
 {
     std::vector<std::reference_wrapper<const vehicle_part>> ret;
     for( const vehicle_part &vp : parts ) {
-        if( vp.removed || vp.is_fake ) {
+        if( vp.removed ) {
             continue;
         }
         ret.emplace_back( std::ref( vp ) );

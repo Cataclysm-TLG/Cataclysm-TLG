@@ -2031,8 +2031,7 @@ class vehicle
         bool assign_seat( vehicle_part &pt, const npc &who );
 
         // Update the set of occupied points and return a reference to it
-        const std::set<tripoint_abs_ms> &get_points( bool force_refresh = false,
-                bool no_fake = false ) const;
+        const std::set<tripoint_abs_ms> &get_points( bool force_refresh = false ) const;
 
         // calculate the new projected points for all vehicle parts to move to
         void part_project_points( const tripoint_rel_ms &dp );
@@ -2185,7 +2184,7 @@ class vehicle
         // Called by map.cpp to make sure the real position of each zone_data is accurate
         bool refresh_zones();
 
-        bounding_box get_bounding_box( bool use_precalc = true, bool no_fake = false );
+        bounding_box get_bounding_box( bool use_precalc = true );
         // Retroactively pass time spent outside bubble
         // Funnels, solar panels
         void update_time( map &here, const time_point &update_to );
@@ -2221,10 +2220,6 @@ class vehicle
     public:
         // Number of parts contained in this vehicle
         int part_count() const;
-        // Number of real parts in this vehicle, iterates parts to count
-        int part_count_real() const;
-        // Number of real parts in this vehicle, returns parts.size() - fake_parts.size()
-        int part_count_real_cached() const;
 
         // Returns the vehicle_part with the given part number
         vehicle_part &part( int part_num );

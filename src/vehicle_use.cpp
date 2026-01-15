@@ -1322,11 +1322,6 @@ void vehicle::open_or_close( map &here, const int part_index, const bool opening
             unlock( parti );
         }
         prt.open = opening;
-        if( prt.is_fake ) {
-            parts.at( prt.fake_part_to ).open = opening;
-        } else if( prt.has_fake ) {
-            parts.at( prt.fake_part_at ).open = opening;
-        }
     };
     //find_lines_of_parts() doesn't return the part_index we passed, so we set it on its own
     part_open_or_close( part_index, opening );
@@ -1360,11 +1355,6 @@ void vehicle::lock_or_unlock( const int part_index, const bool locking )
     const auto part_lock_or_unlock = [&]( const int parti, const bool locking ) {
         vehicle_part &prt = parts.at( parti );
         prt.locked = locking;
-        if( prt.is_fake ) {
-            parts.at( prt.fake_part_to ).locked = locking;
-        } else if( prt.has_fake ) {
-            parts.at( prt.fake_part_at ).locked = locking;
-        }
     };
     //find_lines_of_parts() doesn't return the part_index we passed, so we set it on its own
     part_lock_or_unlock( part_index, locking );

@@ -755,7 +755,7 @@ bool vehicle::collision( map &here, std::vector<veh_collision> &colls,
         }
 
         const vpart_info &info = vp.info();
-        if( !vp.is_fake && info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
+        if( info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
             continue;
         }
         empty = false;
