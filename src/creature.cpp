@@ -960,6 +960,10 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
+    if( !can_squeeze_to( target.pos_bub() ) ) {
+        return false;
+    }
+
     // Explicitly check for Z difference > 1
     if( std::abs( posz() - target->posz() ) > 1 ) {
 
