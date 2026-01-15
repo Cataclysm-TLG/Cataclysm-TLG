@@ -433,7 +433,7 @@ shared_ptr_fast<ui_adaptor> veh_interact::create_or_get_ui_adaptor( map &here )
             werase( w_parts );
             veh->print_part_list( w_parts, 0, getmaxy( w_parts ) - 1, getmaxx( w_parts ), cpart,
                                   highlight_part,
-                                  true, false );
+                                  true );
             wnoutrefresh( w_parts );
 
             werase( w_msg );
@@ -3350,7 +3350,7 @@ void veh_interact::complete_vehicle( map &here, Character &you )
                                appliance_removal || vpi.location == "structure",
                                appliance_removal || vpi.has_flag( VPFLAG_CABLE_PORTS ) || vpi.has_flag( VPFLAG_BATTERY ) );
 
-            if( veh.part_count_real() <= 1 ) {
+            if( veh.part_count() <= 1 ) {
                 you.add_msg_if_player( _( "You completely dismantle the %s." ), veh.name );
                 you.activity.set_to_null();
                 // destroy vehicle clears the cache

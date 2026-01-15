@@ -86,9 +86,9 @@ std::vector<vpart_reference> veh_shape::parts_under_cursor() const
 {
     std::vector<vpart_reference> res;
     // TODO: tons of methods getting parts from vehicle but all of them seem inadequate?
-    for( int part_idx = 0; part_idx < veh.part_count_real(); part_idx++ ) {
+    for( int part_idx = 0; part_idx < veh.part_count(); part_idx++ ) {
         const vehicle_part &p = veh.part( part_idx );
-        if( veh.bub_part_pos( here, p ) == get_cursor_pos() && !p.is_fake ) {
+        if( veh.bub_part_pos( here, p ) == get_cursor_pos() ) {
             res.emplace_back( veh, part_idx );
         }
     }

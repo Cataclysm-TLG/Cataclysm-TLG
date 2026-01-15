@@ -750,12 +750,12 @@ bool vehicle::collision( map &here, std::vector<veh_collision> &colls,
     part_project_points( dp );
     for( int p = 0; p < part_count(); p++ ) {
         const vehicle_part &vp = parts.at( p );
-        if( vp.removed || !vp.is_real_or_active_fake() ) {
+        if( vp.removed ) {
             continue;
         }
 
         const vpart_info &info = vp.info();
-        if( !vp.is_fake && info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
+        if( info.location != part_location_structure && !info.has_flag( VPFLAG_ROTOR ) ) {
             continue;
         }
         empty = false;
@@ -2267,9 +2267,8 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
             if( psg ) {
                 psg->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_bash, dmg ) );
                 psg->add_msg_player_or_npc( m_bad,
-                                            _( "You take %d damage by the power of the impact!" ),
-                                            _( "<npcname> takes %d damage by the power of the "
-                                               "impact!" ), dmg );
+                                            _( "You take %d damage from the impact!" ),
+                                            _( "<npcname> takes %d damage from the impact!" ), dmg );
             } else {
                 pet->apply_damage( nullptr, bodypart_id( "torso" ), dmg );
             }
@@ -2313,43 +2312,4 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
     }
 
     return coll_turn;
-}
-
-bool vehicle::should_enable_fake( const tripoint_rel_ms &fake_precalc,
-                                  const tripoint_rel_ms &parent_precalc,
-                                  const tripoint_rel_ms &neighbor_precalc ) const
-{
-    // if parent's pos is diagonal to neighbor, but fake isn't, fake can fill a gap opened
-    tripoint abs_parent_neighbor_diff = ( parent_precalc - neighbor_precalc ).raw().abs();
-    tripoint abs_fake_neighbor_diff = ( fake_precalc - neighbor_precalc ).raw().abs();
-    return ( abs_parent_neighbor_diff.x == 1 && abs_parent_neighbor_diff.y == 1 ) &&
-           ( ( abs_fake_neighbor_diff.x == 1 && abs_fake_neighbor_diff.y == 0 ) ||
-             ( abs_fake_neighbor_diff.x == 0 && abs_fake_neighbor_diff.y == 1 ) );
-}
-
-void vehicle::update_active_fakes()
-{
-    for( const int fake_index : fake_parts ) {
-        vehicle_part &part_fake = parts.at( fake_index );
-        if( part_fake.removed ) {
-            continue;
-        }
-        const vehicle_part &part_real = parts.at( part_fake.fake_part_to );
-        const tripoint_rel_ms &fake_precalc = part_fake.precalc[0];
-        const tripoint_rel_ms &real_precalc = part_real.precalc[0];
-        const vpart_edge_info &real_edge = edges[part_real.mount];
-        const bool is_protrusion = part_real.info().has_flag( "PROTRUSION" );
-
-        if( real_edge.forward != -1 ) {
-            const tripoint_rel_ms &forward = parts.at( real_edge.forward ).precalc[0];
-            part_fake.is_active_fake = should_enable_fake( fake_precalc, real_precalc, forward );
-        }
-        if( real_edge.back != -1 && ( !part_fake.is_active_fake || real_edge.forward == -1 ) ) {
-            const tripoint_rel_ms &back = parts.at( real_edge.back ).precalc[0];
-            part_fake.is_active_fake = should_enable_fake( fake_precalc, real_precalc, back );
-        }
-        if( is_protrusion && part_fake.fake_protrusion_on >= 0 ) {
-            part_fake.is_active_fake = parts.at( part_fake.fake_protrusion_on ).is_active_fake;
-        }
-    }
 }
