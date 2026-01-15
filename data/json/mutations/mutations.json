@@ -1238,7 +1238,7 @@
     "points": -1,
     "description": "You gained an awful lot of weight before the Cataclysm.  Whatever the reason, now that mobility is key to survival, your oversized figure presents an additional danger.  You need to lose weight or die trying.",
     "purifiable": false,
-    "starting_trait": true,
+    "starting_trait": false,
     "player_display": false,
     "valid": false,
     "cancels": [ "XS" ]
