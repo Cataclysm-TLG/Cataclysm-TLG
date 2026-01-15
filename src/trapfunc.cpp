@@ -27,6 +27,7 @@
 #include "make_static.h"
 #include "map.h"
 #include "map_iterator.h"
+#include "map_scale_constants.h"
 #include "mapdata.h"
 #include "mapgen_functions.h"
 #include "messages.h"
@@ -96,6 +97,8 @@ static const ter_str_id ter_t_pit( "t_pit" );
 static const ter_str_id ter_t_rock_blue( "t_rock_blue" );
 static const ter_str_id ter_t_rock_green( "t_rock_green" );
 static const ter_str_id ter_t_rock_red( "t_rock_red" );
+static const ter_str_id ter_t_water_dp( "t_water_dp" );
+static const ter_str_id ter_t_water_sh( "t_water_sh" );
 
 static const trait_id trait_INFRESIST( "INFRESIST" );
 
@@ -140,6 +143,47 @@ bool trapfunc::bubble( const tripoint_bub_ms &p, Creature *c, item * )
     }
     sounds::sound( p, 18, sounds::sound_t::alarm, _( "Pop!" ), false, "trap", "bubble_wrap" );
     get_map().remove_trap( p );
+    return true;
+}
+
+bool trapfunc::thin_ice( const tripoint_bub_ms &p, Creature *c, item * )
+{
+    map &here = get_map();
+
+    if( c == nullptr ) {
+        return false;
+    }
+    // tiny animals aren't affected specially
+    if( c->get_size() == creature_size::tiny ) {
+        return false;
+    }
+
+    // Determine whether this tile is shallow or deep ice
+    const bool shallow = here.has_flag_ter( ter_furn_flag::TFLAG_ICE_SHALLOW, p );
+
+    if( shallow ) {
+        c->add_msg_player_or_npc( m_bad, _( "The ice cracks beneath you and you fall into shallow water!" ),
+                                  _( "The ice beneath <npcname> cracks and they fall into shallow water!" ) );
+        here.ter_set( p, ter_t_water_sh );
+        here.remove_trap( p );
+        Character *you = dynamic_cast<Character *>( c );
+        if( you != nullptr ) {
+            g->water_affect_items( *you );
+            you->add_msg_if_player( m_bad, _( "You're wet and cold from the water." ) );
+        }
+    } else {
+        c->add_msg_player_or_npc( m_bad, _( "The ice cracks beneath you and you plunge into deep water!" ),
+                                  _( "The ice beneath <npcname> cracks and they plunge into deep water!" ) );
+        here.ter_set( p, ter_t_water_dp );
+        here.remove_trap( p );
+        Character *you = dynamic_cast<Character *>( c );
+        if( you != nullptr ) {
+            you->set_underwater( true );
+            g->water_affect_items( *you );
+            you->add_msg_if_player( m_bad, _( "You are underwater and struggling to stay afloat!" ) );
+        }
+    }
+
     return true;
 }
 
@@ -1630,6 +1674,7 @@ const trap_function &trap_function_from_string( const std::string &function_name
             { "pit", trapfunc::pit },
             { "pit_spikes", trapfunc::pit_spikes },
             { "pit_glass", trapfunc::pit_glass },
+            { "thin_ice", trapfunc::thin_ice },
             { "lava", trapfunc::lava },
             { "portal", trapfunc::portal },
             { "boobytrap", trapfunc::boobytrap },
