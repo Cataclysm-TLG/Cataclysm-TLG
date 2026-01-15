@@ -1501,9 +1501,6 @@ void vehicle_prototype::save_vehicle_as_prototype( const vehicle &veh,
     json.member( "items" );
     json.start_array();
     for( const vpart_reference &vp : veh.get_any_parts( "CARGO" ) ) {
-        if( vp.part().is_fake ) {
-            continue;
-        }
         const vehicle_stack &stack = veh.get_items( vp.part() );
         if( !stack.empty() ) {
             json.start_object();

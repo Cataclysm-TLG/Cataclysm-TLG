@@ -7469,9 +7469,6 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
          part != frame_indices.end(); part++ ) {
         const tripoint_bub_ms p = veh_to_add->bub_part_pos( *this, *part );
 
-        if( veh_to_add->part( *part ).is_fake ) {
-            continue;
-        }
         //Don't spawn anything in water
         if( has_flag_ter( ter_furn_flag::TFLAG_DEEP_WATER, p ) && !can_float ) {
             return nullptr;
@@ -7517,8 +7514,7 @@ std::unique_ptr<vehicle> map::add_vehicle_to_map(
                     // to a different address after install_part()
                     std::vector<vehicle_part *> first_veh_parts = first_veh->get_parts_at( map_pos, "",
                             part_status_flag:: any );
-                    // This happens if this location is occupied by a fake part.
-                    if( first_veh_parts.empty() || first_veh_parts.front()->is_fake ) {
+                    if( first_veh_parts.empty() ) {
                         continue;
                     }
                     if( !inbounds( map_pos ) ) {
