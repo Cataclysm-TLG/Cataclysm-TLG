@@ -32,6 +32,7 @@
     "id": "EOC_LOSE_MUTATING_GRADUAL",
     "effect": [
       { "u_message": "The everpresent churning in your tortured flesh finally ceases.  Is it over?" },
+      { "u_lose_trait": "MUTATING_GRADUAL_ABSTRACT" },
       { "u_lose_trait": "MUTATING_GRADUAL_BATRACHIAN" },
       { "u_lose_trait": "MUTATING_GRADUAL_BIRD" },
       { "u_lose_trait": "MUTATING_GRADUAL_CATTLE" },
@@ -86,8 +87,7 @@
     "effect": [
       {
         "if": { "math": [ "u_has_trait(u_MUTATING_GRADUAL_threshold)" ] },
-        "then": { "u_message": "You are new born, complete." },
-        "else": [ { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
+        "then": [ { "u_message": "You are new born, complete." }, { "run_eocs": "EOC_LOSE_MUTATING_GRADUAL" } ]
       }
     ]
   },
