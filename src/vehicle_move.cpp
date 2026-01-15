@@ -750,7 +750,7 @@ bool vehicle::collision( map &here, std::vector<veh_collision> &colls,
     part_project_points( dp );
     for( int p = 0; p < part_count(); p++ ) {
         const vehicle_part &vp = parts.at( p );
-        if( vp.removed || !vp.is_real_or_active_fake() ) {
+        if( vp.removed ) {
             continue;
         }
 
@@ -2267,9 +2267,8 @@ units::angle map::shake_vehicle( vehicle &veh, const int velocity_before,
             if( psg ) {
                 psg->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_bash, dmg ) );
                 psg->add_msg_player_or_npc( m_bad,
-                                            _( "You take %d damage by the power of the impact!" ),
-                                            _( "<npcname> takes %d damage by the power of the "
-                                               "impact!" ), dmg );
+                                            _( "You take %d damage from the impact!" ),
+                                            _( "<npcname> takes %d damage from the impact!" ), dmg );
             } else {
                 pet->apply_damage( nullptr, bodypart_id( "torso" ), dmg );
             }

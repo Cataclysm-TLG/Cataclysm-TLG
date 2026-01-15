@@ -1261,7 +1261,6 @@ void vehicle::lock( int part_index )
 bool vehicle::can_close( int part_index, Character &who )
 {
     creature_tracker &creatures = get_creature_tracker();
-    part_index = get_non_fake_part( part_index );
     std::vector<std::vector<int>> openable_parts = find_lines_of_parts( part_index, "OPENABLE" );
     if( openable_parts.empty() ) {
         std::vector<int> base_element;
@@ -1284,11 +1283,7 @@ bool vehicle::can_close( int part_index, Character &who )
                     }
                     return false;
                 }
-                if( parts[partID].has_fake && parts[parts[partID].fake_part_at].is_active_fake ) {
-                    partID = parts[partID].fake_part_at;
-                } else {
                     partID = -1;
-                }
             }
         }
     }
@@ -1884,8 +1879,8 @@ void vehicle::build_interact_menu( veh_menu &menu, map *here, const tripoint_bub
         .skip_locked_check()
         .hotkey( "EXAMINE_VEHICLE" )
         .on_submit( [this, vp] {
-            const vpart_position non_fake( *this, get_non_fake_part( vp.part_index() ) );
-            const point_rel_ms start_pos = non_fake.mount_pos().rotate( 2 );
+            const vpart_position part_pos( *this, vp.part_index() );
+            const point_rel_ms start_pos = part_pos.mount_pos().rotate( 2 );
             g->exam_vehicle( *this, start_pos );
         } );
 

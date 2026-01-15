@@ -581,17 +581,6 @@ struct vehicle_part {
          */
         item_group::ItemList pieces_for_broken_part() const;
 
-        /* probably should be private, but I'm too lazy to write setters and getters */
-        bool is_fake = false; // NOLINT(cata-serialize)
-        bool is_active_fake = false; // NOLINT(cata-serialize)
-        int fake_part_to = -1; // NOLINT(cata-serialize)
-        int fake_protrusion_on = -1; // NOLINT(cata-serialize)
-        bool has_fake = false; // NOLINT(cata-serialize)
-        int fake_part_at = -1; // NOLINT(cata-serialize)
-
-        bool is_real_or_active_fake() const {
-            return !is_fake || is_active_fake;
-        }
 };
 
 class turret_data
@@ -2224,8 +2213,6 @@ class vehicle
         // Returns the vehicle_part with the given part number
         vehicle_part &part( int part_num );
         const vehicle_part &part( int part_num ) const;
-        // get the parent part of a fake part or return part_num otherwise
-        int get_non_fake_part( int part_num ) const;
 
         /**
         * Generate the corresponding item from this vehicle part. It includes

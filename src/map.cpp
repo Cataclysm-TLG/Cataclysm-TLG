@@ -855,7 +855,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             if( coll.type == veh_coll_veh ) {
                 continue;
             }
-            int part_num = veh.get_non_fake_part( coll.part );
+            int part_num = coll.part;
 
             const point_rel_ms &collision_point = veh.part( coll.part ).mount;
             const int coll_dmg = coll.imp;
@@ -1176,8 +1176,8 @@ float map::vehicle_vehicle_collision( vehicle &veh, vehicle &veh2,
         if( &veh2 != static_cast<vehicle *>( veh_veh_coll.target ) ) {
             continue;
         }
-        int coll_part = veh.get_non_fake_part( veh_veh_coll.part );
-        int target_part = veh2.get_non_fake_part( veh_veh_coll.target_part );
+        int coll_part = veh_veh_coll.part;
+        int target_part = veh_veh_coll.target_part;
 
         int coll_parm = veh.part_with_feature( coll_part, VPFLAG_ARMOR, true );
         if( coll_parm < 0 ) {
