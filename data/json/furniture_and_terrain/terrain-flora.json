@@ -2207,7 +2207,7 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_tree",
-      "items": [ { "item": "wax", "count": [ 3, 6 ] }, { "item": "honeycomb", "count": [ 3, 6 ] } ]
+      "items": [ { "item": "wax", "count": [ 2, 4 ] }, { "item": "honeycomb", "count": [ 3, 6 ] } ]
     }
   },
   {
