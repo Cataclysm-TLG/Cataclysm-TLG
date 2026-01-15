@@ -180,17 +180,16 @@ void scent_map::update( const tripoint_bub_ms &center, map &m )
         return;
     }
 
-    // note: the next four intermediate matrices need to be at least
-    // [2*SCENT_RADIUS+3][2*SCENT_RADIUS+1] in size to hold enough data
-    // The code I'm modifying used [MAPSIZE_X]. I'm staying with that to avoid new bugs.
+    //the block and reduce scent properties are folded into a single scent_transfer value here
+    //block=0 reduce=1 normal=5
+    scent_array<char> scent_transfer;
 
-    // These two matrices are transposed so that x addresses are contiguous in memory
-    scent_array<int> sum_3_scent_y;
-    scent_array<int> squares_used_y;
+    std::array < std::array < int, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > new_scent;
+    std::array < std::array < int, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > sum_3_scent_y;
+    std::array < std::array < char, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > squares_used_y;
 
-    // these are for caching flag lookups
-    scent_array<bool> blocks_scent; // currently only ter_furn_flag::TFLAG_NO_SCENT blocks scent
-    scent_array<bool> reduces_scent;
+    diagonal_blocks( &blocked_cache )[MAPSIZE_X][MAPSIZE_Y] = m.access_cache(
+                center.z() ).vehicle_obstructed_cache;
 
     // for loop constants
     const int scentmap_minx = center.x() - SCENT_RADIUS;

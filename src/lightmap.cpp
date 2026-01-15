@@ -109,6 +109,7 @@ bool map::build_transparency_cache( const int zlev )
         return false;
     }
 
+    std::set<tripoint> vehicles_processed;
     // if true, all submaps are invalid (can use batch init)
     bool rebuild_all = map_cache.transparency_cache_dirty.all();
 
@@ -858,6 +859,7 @@ template<int xx, int xy, int yx, int yy, typename T, typename Out,
          T( *accumulate )( const T &, const T &, const int & )>
 void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
                 const cata::mdarray<T, point_bub_ms> &input_array,
+                const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
                 const point_bub_ms &offset, int offsetDistance,
                 T numerator = VISIBILITY_FULL,
                 int row = 1, float start = 1.0f, float end = 0.0f,
@@ -870,10 +872,28 @@ template<int xx, int xy, int yx, int yy, typename T, typename Out,
          T( *accumulate )( const T &, const T &, const int & )>
 void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
                 const cata::mdarray<T, point_bub_ms> &input_array,
+                const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
                 const point_bub_ms &offset, const int offsetDistance, const T numerator,
                 const int row, float start, const float end, T cumulative_transparency )
 {
     constexpr quadrant quad = quadrant_from_x_y( -xx - xy, -yx - yy );
+
+    const auto check_blocked = [ =, &blocked_array]( const point & p ) {
+        switch( quad ) {
+            case quadrant::NW:
+                return blocked_array[p.x][p.y].nw;
+                break;
+            case quadrant::NE:
+                return blocked_array[p.x][p.y].ne;
+                break;
+            case quadrant::SE:
+                return ( p.x < MAPSIZE_X - 1 && p.y < MAPSIZE_Y - 1 && blocked_array[p.x + 1][p.y + 1].nw );
+                break;
+            case quadrant::SW:
+                return ( p.x > 1 && p.y < MAPSIZE_Y - 1 && blocked_array[p.x - 1][p.y + 1].ne );
+                break;
+        }
+    };
     float newStart = 0.0f;
     float radius = static_cast<float>( MAX_VIEW_DISTANCE ) - offsetDistance;
     if( start < end ) {
@@ -902,6 +922,9 @@ void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
             } else if( end > trailingEdge ) {
                 break;
             }
+            if( check_blocked( current ) ) {
+                continue;
+            }
             if( !started_row ) {
                 started_row = true;
                 current_transparency = input_array[ current.x ][ current.y ];
@@ -926,7 +949,7 @@ void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
             // Only cast recursively if previous span was not opaque.
             if( check( current_transparency, last_intensity ) ) {
                 castLight<xx, xy, yx, yy, T, Out, calc, check, update_output, accumulate>(
-                    output_cache, input_array, offset, offsetDistance,
+                    output_cache, input_array, blocked_array, offset, offsetDistance,
                     numerator, distance + 1, start, trailingEdge,
                     accumulate( cumulative_transparency, current_transparency, distance ) );
             }
@@ -960,33 +983,35 @@ template<typename T, typename Out, T( *calc )( const T &, const T &, const int &
          T( *accumulate )( const T &, const T &, const int & )>
 void castLightAll( cata::mdarray<Out, point_bub_ms> &output_cache,
                    const cata::mdarray<T, point_bub_ms> &input_array,
+                   const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
                    const point_bub_ms &offset, int offsetDistance, T numerator )
 {
     castLight<0, 1, 1, 0, T, Out, calc, check, update_output, accumulate>(
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
     castLight<1, 0, 0, 1, T, Out, calc, check, update_output, accumulate>(
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
 
     castLight < 0, -1, 1, 0, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
     castLight < -1, 0, 0, 1, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
 
     castLight < 0, 1, -1, 0, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
     castLight < 1, 0, 0, -1, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
 
     castLight < 0, -1, -1, 0, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
     castLight < -1, 0, 0, -1, T, Out, calc, check, update_output, accumulate > (
-        output_cache, input_array, offset, offsetDistance, numerator );
+        output_cache, input_array, blocked_array, offset, offsetDistance, numerator );
 }
 
 template void castLightAll<float, four_quadrants, sight_calc, sight_check,
                            update_light_quadrants, accumulate_transparency>(
                                cata::mdarray<four_quadrants, point_bub_ms> &output_cache,
                                const cata::mdarray<float, point_bub_ms> &input_array,
+                               const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
                                const point_bub_ms &offset, int offsetDistance, float numerator );
 
 template void
@@ -995,6 +1020,7 @@ castLightAll<fragment_cloud, fragment_cloud, shrapnel_calc, shrapnel_check,
 (
     cata::mdarray<fragment_cloud, point_bub_ms> &output_cache,
     const cata::mdarray<fragment_cloud, point_bub_ms> &input_array,
+    const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
     const point_bub_ms &offset, int offsetDistance, fragment_cloud numerator );
 
 /**
@@ -1017,6 +1043,7 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
     mdarray &transparency_cache = map_cache.vision_transparency_cache;
     mdarray &seen_cache = map_cache.seen_cache;
     mdarray &camera_cache = map_cache.camera_cache;
+    diagonal_blocks( &blocked_cache )[MAPSIZE_X][MAPSIZE_Y] = map_cache.vehicle_obscured_cache;
     mdarray &out_cache = camera ? camera_cache : seen_cache;
 
     constexpr float light_transparency_solid = LIGHT_TRANSPARENCY_SOLID;
@@ -1030,12 +1057,14 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
     array_of_grids_of<const float> transparency_caches;
     array_of_grids_of<float> seen_caches;
     array_of_grids_of<const bool> floor_caches;
+    array_of_grids_of<const diagonal_blocks> blocked_caches;
     vertical_direction directions_to_cast = vertical_direction::BOTH;
     for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; z++ ) {
         level_cache &cur_cache = get_cache( z );
         transparency_caches[z + OVERMAP_DEPTH] = &cur_cache.vision_transparency_cache;
         seen_caches[z + OVERMAP_DEPTH] = camera ? &cur_cache.camera_cache : &cur_cache.seen_cache;
         floor_caches[z + OVERMAP_DEPTH] = &cur_cache.floor_cache;
+        blocked_caches[z + OVERMAP_DEPTH] = &cur_cache.vehicle_obscured_cache;
         if( !cumulative ) {
             std::uninitialized_fill_n(
                 &( *seen_caches[z + OVERMAP_DEPTH] )[0][0], map_dimensions, light_transparency_solid );
@@ -1050,7 +1079,7 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
     }
 
     cast_zlight<float, sight_calc, sight_check, accumulate_transparency>(
-        seen_caches, transparency_caches, floor_caches, origin, penalty, 1.0,
+        seen_caches, transparency_caches, floor_caches, blocked_caches, origin, penalty, 1.0,
         directions_to_cast );
     seen_cache_process_ledges( seen_caches, floor_caches, std::nullopt );
 
@@ -1116,7 +1145,7 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
         // The naive solution of making the mirrors act like a second player
         // at an offset appears to give reasonable results though.
         castLightAll<float, float, sight_calc, sight_check, update_light, accumulate_transparency>(
-            *mocache, transparency_cache, mirror_pos.xy(), offsetDistance );
+            *mocache, transparency_cache, blocked_cache, mirror_pos.xy(), offsetDistance );
     }
 }
 
@@ -1235,37 +1264,37 @@ void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
     if( north ) {
         castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     }
 
     if( east ) {
         castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     }
 
     if( south ) {
         castLight<1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     }
 
     if( west ) {
         castLight<0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     }
 }
 
@@ -1281,31 +1310,31 @@ void map::apply_directional_light( const tripoint_bub_ms &p, int direction, floa
     if( direction == 90 ) {
         castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     } else if( direction == 0 ) {
         castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     } else if( direction == 270 ) {
         castLight<1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     } else if( direction == 180 ) {
         castLight<0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
         castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
-                      lm, transparency_cache, p2, 0, luminance );
+                      lm, transparency_cache, blocked_cache, p2, 0, luminance );
     }
 }
 
