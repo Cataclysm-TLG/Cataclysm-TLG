@@ -222,6 +222,10 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
     tripoint_bub_ms dest_loc;
     const tripoint_bub_ms you_pos = you.pos_bub( here );
 
+    if( here.obstructed_by_vehicle_rotation( you_pos, dest_loc ) ) {
+        return false;
+    }
+
     if( d.z() == 0 && ( you.has_effect( effect_stunned ) || you.has_effect( effect_psi_stunned ) ) ) {
         dest_loc.x() = rng( you_pos.x() - 1, you_pos.x() + 1 );
         dest_loc.y() = rng( you_pos.y() - 1, you_pos.y() + 1 );

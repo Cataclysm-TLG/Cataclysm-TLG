@@ -569,7 +569,9 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         // Hallucinations are imaginations of the player character, npcs or monsters don't hallucinate.
         return false;
     }
-
+    if( here.obscured_by_vehicle_rotation( pos_bub(), critter.pos_bub() ) ) {
+        return false;
+    }
     // Creature has stumbled into an invisible player and is now aware of them.
     // REVIEW: Why is this only done for the player?
     if( has_effect( effect_stumbled_into_invisible ) &&
@@ -582,7 +584,6 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     auto visible = []( const Character * ch ) {
         return ch == nullptr || !ch->is_invisible();
     };
-
     // Can always see adjacent monsters on the same level, or vertically adjacent if there's LoS.
     if( target_range < 2 && posz() == critter.posz() ) {
         return true;

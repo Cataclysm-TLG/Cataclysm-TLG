@@ -7968,7 +7968,7 @@ tripoint_bub_ms Character::adjacent_tile() const
             }
         }
 
-        if( dangerous_fields == 0 ) {
+        if( dangerous_fields == 0 && !here.obstructed_by_vehicle_rotation( pos_bub(), p ) ) {
             ret.push_back( p );
         }
     }

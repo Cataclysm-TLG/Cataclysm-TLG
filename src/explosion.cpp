@@ -271,7 +271,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         // Iterate over all neighbors. Bash all of them, propagate to some
         for( size_t i = 0; i < max_index; i++ ) {
             tripoint_bub_ms dest( pt + tripoint_rel_ms( x_offset[i], y_offset[i], z_offset[i] ) );
-            if( closed.count( dest ) != 0 || !m->inbounds( dest ) ) {
+            if( closed.count( dest ) != 0 || !m->inbounds( dest ) || m->obstructed_by_vehicle_rotation( pt, dest ) ) {
                 continue;
             }
 

@@ -512,6 +512,24 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 cur_missed_by = std::max( rng_float( 0.1, 1.5 - aim.missed_by ) /
                                           critter->ranged_target_size(), 0.4 );
             }
+            if( here->obstructed_by_vehicle_rotation( prev_point, tp ) ) {
+                // We're firing through an impassible gap in a rotated vehicle, randomly hit one of the two walls.
+                tripoint_bub_ms rand = tp;
+                if( one_in( 2 ) ) {
+                    rand.x() = prev_point.x();
+                } else {
+                    rand.y() = prev_point.y();
+                }
+                if( in_veh == nullptr || veh_pointer_or_null( here->veh_at( rand ) ) != in_veh ) {
+                    here->shoot( rand, source, proj, false, aim.dispersion );
+                    if( proj.impact.total_damage() <= 0 ) {
+                        // If the projectile stops here, move it back a square so it doesn't end up inside the vehicle.
+                        traj_len = i - 1;
+                        tp = prev_point;
+                        break;
+                    }
+                }
+            }
 
             if( critter != nullptr && cur_missed_by < 1.0 ) {
                 if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh &&
