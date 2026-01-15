@@ -388,6 +388,7 @@ static const morale_type morale_cold( "morale_cold" );
 static const morale_type morale_hot( "morale_hot" );
 
 static const move_mode_id move_mode_prone( "prone" );
+static const move_mode_id move_mode_run( "run" );
 static const move_mode_id move_mode_walk( "walk" );
 
 static const mtype_id mon_player_blob( "mon_player_blob" );
@@ -10759,7 +10760,7 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
                               1 );
         run_cost_effect_mul( obstacle_mult, _( "Obstacle Muts." ) );
 
-        if( has_proficiency( proficiency_prof_parkour ) && !is_prone() ) {
+        if( has_proficiency( proficiency_prof_parkour ) && is_running() ) {
             run_cost_effect_mul( 0.5, _( "Parkour" ) );
         }
 
