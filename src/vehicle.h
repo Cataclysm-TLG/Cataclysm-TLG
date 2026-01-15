@@ -1396,7 +1396,8 @@ class vehicle
         // @param below_roof if true parts below roof are included
         // @param roof if true roof parts are included
         // @returns filled vpart_display struct or default constructed if no part displayed
-        vpart_display get_display_of_tile( const point_rel_ms &dp, bool rotate = true, bool below_roof = true, bool roof = true ) const;
+        vpart_display get_display_of_tile( const point_rel_ms &dp, bool rotate = true,
+                                           bool below_roof = true, bool roof = true ) const;
 
         // Get all printable fuel types
         std::vector<itype_id> get_printable_fuel_types( map &here ) const;

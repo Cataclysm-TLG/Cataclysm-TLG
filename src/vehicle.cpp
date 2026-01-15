@@ -962,8 +962,8 @@ void vehicle::smash( map &m, float hp_percent_loss_min, float hp_percent_loss_ma
                         handler_ptr = std::make_unique<MapgenRemovePartHandler>( m );
                     }
                 }
-                
-                    remove_part( vp2, *handler_ptr );
+
+                remove_part( vp2, *handler_ptr );
             }
         }
     }
@@ -1537,7 +1537,7 @@ int vehicle::install_part( map &here, const point_rel_ms &dp, const vpart_id &ty
 
 int vehicle::install_part( map &here, const point_rel_ms &dp, vehicle_part &&vp )
 {
-    (void)here;
+    ( void )here;
     const vpart_info &vpi = vp.info();
     const ret_val<void> valid_mount = can_mount( dp, vpi );
     if( !valid_mount.success() ) {
@@ -2199,9 +2199,9 @@ bool vehicle::do_remove_part_actual( map *here )
         if( vp.removed ) {
             // We are first stripping out removed parts and then
             // removing any parts that have been marked as removed.
-                get_items( vp ).clear();
-                const tripoint_bub_ms pt = bub_part_pos( *here, vp );
-                here->clear_vehicle_point_from_cache( this, pt );
+            get_items( vp ).clear();
+            const tripoint_bub_ms pt = bub_part_pos( *here, vp );
+            here->clear_vehicle_point_from_cache( this, pt );
             it = parts.erase( it );
             changed = true;
         }
@@ -2649,17 +2649,17 @@ std::vector<int> vehicle::parts_at_relative( const point_rel_ms &dp, const bool 
     std::vector<int> res;
     if( !use_cache ) {
 
-            for( const vpart_reference &vp : get_all_parts() ) {
-                if( vp.mount_pos() == dp && !vp.part().removed ) {
-                    res.push_back( static_cast<int>( vp.part_index() ) );
-                }
+        for( const vpart_reference &vp : get_all_parts() ) {
+            if( vp.mount_pos() == dp && !vp.part().removed ) {
+                res.push_back( static_cast<int>( vp.part_index() ) );
             }
+        }
     } else {
         const auto &iter = relative_parts.find( dp );
         if( iter != relative_parts.end() ) {
-                for( const int vp : iter->second ) {
-                        res.push_back( vp );
-                }
+            for( const int vp : iter->second ) {
+                res.push_back( vp );
+            }
         }
     }
     return res;
@@ -2851,7 +2851,8 @@ int vehicle::part_with_feature( const point_rel_ms &pt, vpart_bitflags f, bool u
     return -1;
 }
 
-int vehicle::part_with_feature( const point_rel_ms &pt, const std::string &flag, bool unbroken ) const
+int vehicle::part_with_feature( const point_rel_ms &pt, const std::string &flag,
+                                bool unbroken ) const
 {
     for( const int p : parts_at_relative( pt, /* use_cache = */ false ) ) {
         const vehicle_part &vp_here = this->part( p );

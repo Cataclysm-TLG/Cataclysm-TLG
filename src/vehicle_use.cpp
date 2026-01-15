@@ -1283,7 +1283,7 @@ bool vehicle::can_close( int part_index, Character &who )
                     }
                     return false;
                 }
-                    partID = -1;
+                partID = -1;
             }
         }
     }

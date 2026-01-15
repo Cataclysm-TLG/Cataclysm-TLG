@@ -446,7 +446,7 @@ bool teleport::teleport_vehicle( vehicle &veh, const tripoint_abs_ms &dp )
     const std::set<int> &parts_to_move = {};
     smzs = veh.advance_precalc_mounts( dst_offset, &here, src, tripoint_rel_ms( 0, 0, 0 ), 0,
                                        true, parts_to_move );
-                                       
+
     veh.refresh();
 
     if( src_submap != dst_submap ) {
