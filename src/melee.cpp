@@ -1083,6 +1083,7 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
     int t = 0;
     map &here = get_map();
     std::vector<tripoint_bub_ms> path = line_to( pos_bub(), p, t, 0 );
+    tripoint_bub_ms last_point = pos_bub();
     path.pop_back(); // Last point is our critter
     for( const tripoint_bub_ms &path_point : path ) {
         // Possibly hit some unintended target instead
@@ -1103,6 +1104,18 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
             }
             critter = inter;
             break;
+            } else if( here.obstructed_by_vehicle_rotation( last_point, path_point ) ) {
+            tripoint_bub_ms rand = path_point;
+            if( one_in( 2 ) ) {
+                rand.x = last_point.x;
+            } else {
+                rand.y = last_point.y;
+            }
+
+            here.bash( rand, get_arm_str() + weapon.damage_melee( damage_bash ) );
+            handle_melee_wear( get_wielded_item() );
+            mod_moves( -move_cost );
+            return;
         } else if( here.impassable( path_point ) &&
                    // Fences etc. Spears can stab through those
                    !( ( weapon.has_flag( flag_SPEAR ) &&
@@ -1117,6 +1130,20 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
                                here.ter( path_point ).obj().name() );
             return;
         }
+                last_point = path_point;
+    }
+
+    if( here.obstructed_by_vehicle_rotation( last_point, p ) ) {
+        tripoint_bub_ms rand = p;
+        if( one_in( 2 ) ) {
+            rand.x() = last_point.x();
+        } else {
+            rand.y() = last_point.y();
+        }
+        here.bash( rand, get_arm_str() + weapon.damage_melee( damage_bash ) );
+        handle_melee_wear( get_wielded_item() );
+        mod_moves( -move_cost );
+        return;
     }
 
     if( critter == nullptr ) {

@@ -105,9 +105,18 @@ static void scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt
                               rng( -distance,
                                    distance ) ) );
         const std::vector<tripoint_bub_ms> traj = line_to( z.pos_bub( *here ), tarp );
-
+        tripoint_bub_ms prev_point = z.pos_bub();
         for( size_t j = 0; j < traj.size(); j++ ) {
             tarp = traj[j];
+            bool obstructed = false;
+            if( here->obstructed_by_vehicle_rotation( prev_point, tarp ) ) {
+                if( one_in( 2 ) ) {
+                    tarp.x() = prev_point.x();
+                } else {
+                    tarp.y() = prev_point.y();
+                }
+                obstructed = true;
+            }
             if( one_in( 2 ) && z.bloodType().id() ) {
                 here->add_splatter( z.bloodType(), tarp );
             } else {
@@ -127,6 +136,11 @@ static void scatter_chunks( map *here, const itype_id &chunk_name, int chunk_amt
                     break;
                 }
             }
+            // Don't lower j until after it's used in bashing.
+            if( obstructed ) {
+                j--;
+            }
+            prev_point = tarp;
         }
         if( drop_chunks ) {
             for( int i = placed_chunks; i < chunk_amt && i < placed_chunks + pile_size; i++ ) {
