@@ -7064,10 +7064,10 @@ void map::add_splatter_trail( const field_type_id &type, const tripoint_bub_ms &
         remainder--;
         if( obstructed_by_vehicle_rotation( last_point, elem ) ) {
             if( one_in( 2 ) ) {
-                elem.x = last_point.x;
+                elem.x() = last_point.x();
                 add_splatter( type, elem, remainder );
             } else {
-                elem.y = last_point.y;
+                elem.y() = last_point.y();
                 add_splatter( type, elem, remainder );
             }
             return;
@@ -8382,7 +8382,7 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint_bub_ms & new_point ) {
         if( new_point == t ) {
             const int cost = move_cost( new_point );
-            if( ( cost < cost_min || cost > cost_max ) obstructed_by_vehicle_rotation( last_point, new_point ) ) {
+            if( ( cost < cost_min || cost > cost_max ) || obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
             }
             return false;
@@ -10370,6 +10370,8 @@ void map::do_vehicle_caching( int z )
     if( !ch ) {
         return;
     }
+    ch->vehicle_obscured_cache.fill( diagonal_blocks{} );
+    ch->vehicle_obstructed_cache.fill( diagonal_blocks{} );
     for( vehicle *v : ch->vehicle_list ) {
         for( const vpart_reference &vp : v->get_all_parts() ) {
             const tripoint_bub_ms part_pos = v->bub_part_pos( *this, vp.part() );

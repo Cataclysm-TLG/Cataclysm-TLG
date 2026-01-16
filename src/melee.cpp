@@ -1107,9 +1107,9 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
             } else if( here.obstructed_by_vehicle_rotation( last_point, path_point ) ) {
             tripoint_bub_ms rand = path_point;
             if( one_in( 2 ) ) {
-                rand.x = last_point.x;
+                rand.x() = last_point.x();
             } else {
-                rand.y = last_point.y;
+                rand.y() = last_point.y();
             }
 
             here.bash( rand, get_arm_str() + weapon.damage_melee( damage_bash ) );

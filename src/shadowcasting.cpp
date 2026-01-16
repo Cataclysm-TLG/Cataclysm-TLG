@@ -169,7 +169,8 @@ void cast_horizontal_zlight_segment(
     const tripoint_bub_ms &offset, const int offset_distance,
     const T numerator )
 {
-    constexpr quadrant quad = quadrant_from_x_y( xx + xy, yx + yy );
+    
+    quadrant quad = quadrant_from_x_y( xx_transform + xy_transform, yx_transform + yy_transform );
 
     const auto check_blocked = [ =, &blocked_caches]( const tripoint & p ) -> bool{
         switch( quad )

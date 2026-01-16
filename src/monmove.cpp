@@ -299,12 +299,6 @@ bool monster::can_reach_to( const tripoint_bub_ms &p ) const
     return true;
 }
 
-bool monster::can_squeeze_to( const tripoint_bub_ms &p ) const
-{
-    map &here = get_map();
-    return !here.obstructed_by_vehicle_rotation( pos_bub(), p );
-}
-
 bool monster::can_move_to( const tripoint_bub_ms &p ) const
 {
     return can_reach_to( p ) && will_move_to( p ) && know_danger_at( p );

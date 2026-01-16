@@ -12296,9 +12296,9 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
             next_forced = pt;
             force_next = true;
             if( one_in( 2 ) ) {
-                pt.x = prev_point.x;
+                pt.x() = prev_point.x();
             } else {
-                pt.y = prev_point.y;
+                pt.y() = prev_point.y();
             }
         }
 

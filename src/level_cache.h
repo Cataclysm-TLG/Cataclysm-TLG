@@ -60,10 +60,10 @@ struct level_cache {
 
         // true when light entering a tile diagonally is blocked by the walls of a turned vehicle. The direction is the direction that the light must be travelling.
         // check the nw value of x+1, y+1 to find the se value of a tile and the ne of x-1, y+1 for sw
-        diagonal_blocks vehicle_obscured_cache[MAPSIZE_X][MAPSIZE_Y];
+        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obscured_cache;
 
         // same as above but for obstruction rather than light
-        diagonal_blocks vehicle_obstructed_cache[MAPSIZE_X][MAPSIZE_Y];
+        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obstructed_cache;
 
         // materialized  (transparency_cache[i][j] > LIGHT_TRANSPARENCY_SOLID)
         // doesn't consider fields (i.e. if tile is covered in thick smoke, it's still

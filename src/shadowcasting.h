@@ -30,6 +30,13 @@ enum class quadrant : int {
     default_ = NE
 };
 
+constexpr quadrant quadrant_from_x_y( int x, int y )
+{
+    return ( x > 0 ) ?
+           ( ( y > 0 ) ? quadrant::NW : quadrant::SW ) :
+           ( ( y > 0 ) ? quadrant::NE : quadrant::SE );
+}
+
 enum class vertical_direction {
     UP,
     DOWN,
@@ -122,7 +129,7 @@ template<typename T, typename Out, T( *calc )( const T &, const T &, const int &
          T( *accumulate )( const T &, const T &, const int & )>
 void castLightAll( cata::mdarray<Out, point_bub_ms> &output_cache,
                    const cata::mdarray<T, point_bub_ms> &input_array,
-                   const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+                   const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
                    const point_bub_ms &offset, int offsetDistance = 0,
                    T numerator = 1.0 );
 

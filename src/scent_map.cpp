@@ -179,7 +179,8 @@ void scent_map::update( const tripoint_bub_ms &center, map &m )
     } else if( player_last_moved + 1000_turns < calendar::turn ) {
         return;
     }
-
+    int target_z = center.z();
+    const level_cache &map_cache = m.get_cache_ref( target_z );
     //the block and reduce scent properties are folded into a single scent_transfer value here
     //block=0 reduce=1 normal=5
     scent_array<char> scent_transfer;
@@ -188,8 +189,7 @@ void scent_map::update( const tripoint_bub_ms &center, map &m )
     std::array < std::array < int, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > sum_3_scent_y;
     std::array < std::array < char, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > squares_used_y;
 
-    diagonal_blocks( &blocked_cache )[MAPSIZE_X][MAPSIZE_Y] = m.access_cache(
-                center.z() ).vehicle_obstructed_cache;
+    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = map_cache.vehicle_obstructed_cache;
 
     // for loop constants
     const int scentmap_minx = center.x() - SCENT_RADIUS;

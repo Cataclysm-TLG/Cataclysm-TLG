@@ -304,6 +304,8 @@ void map::spread_gas( field_entry &cur, const tripoint_bub_ms &p, int percent_sp
         const tripoint_bub_ms down = p + tripoint_rel_ms::below;
         if( gas_can_spread_to( cur, p, down ) && valid_move( p, down, true, true ) ) {
             maptile down_tile = maptile_at_internal( down );
+            gas_spread_to( cur, down_tile, down );
+            return;
         }
     }
 

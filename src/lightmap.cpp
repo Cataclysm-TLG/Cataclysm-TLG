@@ -842,16 +842,6 @@ bool map::pl_sees( const tripoint_bub_ms &t, const int max_range ) const
              map_cache.sm[t.x()][t.y()] > 0.0 );
 }
 
-// For a direction vector defined by x, y, return the quadrant that's the
-// source of that direction.  Assumes x != 0 && y != 0
-// NOLINTNEXTLINE(cata-xy)
-static constexpr quadrant quadrant_from_x_y( int x, int y )
-{
-    return ( x > 0 ) ?
-           ( ( y > 0 ) ? quadrant::NW : quadrant::SW ) :
-           ( ( y > 0 ) ? quadrant::NE : quadrant::SE );
-}
-
 template<int xx, int xy, int yx, int yy, typename T, typename Out,
          T( *calc )( const T &, const T &, const int & ),
          bool( *check )( const T &, const T & ),
@@ -859,7 +849,7 @@ template<int xx, int xy, int yx, int yy, typename T, typename Out,
          T( *accumulate )( const T &, const T &, const int & )>
 void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
                 const cata::mdarray<T, point_bub_ms> &input_array,
-                const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
                 const point_bub_ms &offset, int offsetDistance,
                 T numerator = VISIBILITY_FULL,
                 int row = 1, float start = 1.0f, float end = 0.0f,
@@ -872,11 +862,11 @@ template<int xx, int xy, int yx, int yy, typename T, typename Out,
          T( *accumulate )( const T &, const T &, const int & )>
 void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
                 const cata::mdarray<T, point_bub_ms> &input_array,
-                const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
                 const point_bub_ms &offset, const int offsetDistance, const T numerator,
                 const int row, float start, const float end, T cumulative_transparency )
 {
-    constexpr quadrant quad = quadrant_from_x_y( -xx - xy, -yx - yy );
+    quadrant quad = quadrant_from_x_y( -xx - xy, -yx - yy );
 
     const auto check_blocked = [ =, &blocked_array]( const point & p ) {
         switch( quad ) {
@@ -983,7 +973,7 @@ template<typename T, typename Out, T( *calc )( const T &, const T &, const int &
          T( *accumulate )( const T &, const T &, const int & )>
 void castLightAll( cata::mdarray<Out, point_bub_ms> &output_cache,
                    const cata::mdarray<T, point_bub_ms> &input_array,
-                   const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+                   const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
                    const point_bub_ms &offset, int offsetDistance, T numerator )
 {
     castLight<0, 1, 1, 0, T, Out, calc, check, update_output, accumulate>(
@@ -1011,8 +1001,9 @@ template void castLightAll<float, four_quadrants, sight_calc, sight_check,
                            update_light_quadrants, accumulate_transparency>(
                                cata::mdarray<four_quadrants, point_bub_ms> &output_cache,
                                const cata::mdarray<float, point_bub_ms> &input_array,
-                               const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+                               const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
                                const point_bub_ms &offset, int offsetDistance, float numerator );
+
 
 template void
 castLightAll<fragment_cloud, fragment_cloud, shrapnel_calc, shrapnel_check,
@@ -1020,7 +1011,7 @@ castLightAll<fragment_cloud, fragment_cloud, shrapnel_calc, shrapnel_check,
 (
     cata::mdarray<fragment_cloud, point_bub_ms> &output_cache,
     const cata::mdarray<fragment_cloud, point_bub_ms> &input_array,
-    const diagonal_blocks( &blocked_array )[MAPSIZE_X][MAPSIZE_Y],
+    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_array,
     const point_bub_ms &offset, int offsetDistance, fragment_cloud numerator );
 
 /**
@@ -1043,7 +1034,7 @@ void map::build_seen_cache( const tripoint_bub_ms &origin, const int target_z, i
     mdarray &transparency_cache = map_cache.vision_transparency_cache;
     mdarray &seen_cache = map_cache.seen_cache;
     mdarray &camera_cache = map_cache.camera_cache;
-    diagonal_blocks( &blocked_cache )[MAPSIZE_X][MAPSIZE_Y] = map_cache.vehicle_obscured_cache;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = map_cache.vehicle_obstructed_cache;
     mdarray &out_cache = camera ? camera_cache : seen_cache;
 
     constexpr float light_transparency_solid = LIGHT_TRANSPARENCY_SOLID;
@@ -1225,6 +1216,7 @@ void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
         cache.transparency_cache;
     cata::mdarray<float, point_bub_ms> &light_source_buffer =
         cache.light_source_buffer;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = cache.vehicle_obstructed_cache;
 
     const point_bub_ms p2( p.xy() );
 
@@ -1306,6 +1298,7 @@ void map::apply_directional_light( const tripoint_bub_ms &p, int direction, floa
     cata::mdarray<four_quadrants, point_bub_ms> &lm = cache.lm;
     cata::mdarray<float, point_bub_ms> &transparency_cache =
         cache.transparency_cache;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = cache.vehicle_obstructed_cache;
 
     if( direction == 90 ) {
         castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
@@ -1353,6 +1346,7 @@ void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, 
     cata::mdarray<four_quadrants, point_bub_ms> &lm = cache.lm;
     cata::mdarray<float, point_bub_ms> &transparency_cache =
         cache.transparency_cache;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = cache.vehicle_obstructed_cache;
 
     const units::angle wangle = wideangle / 2.0;
     // Normalize so oangle is between 0 and 360 degrees
@@ -1384,42 +1378,42 @@ void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, 
             case 0:
                 castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
                 break;
             case 1:
                 castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
                 break;
             case 2:
                 castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, -cot( end_angle ), -cot( start_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -cot( end_angle ), -cot( start_angle ) );
                 break;
             case 3:
                 castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, -tan( start_angle ), -tan( end_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -tan( start_angle ), -tan( end_angle ) );
                 break;
             case 4:
                 castLight < 0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency >(
-                              lm, transparency_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
                 break;
             case 5:
                 castLight < 1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency >(
-                              lm, transparency_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
                 break;
             case 6:
                 castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, -cot( end_angle ), -cot( start_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -cot( end_angle ), -cot( start_angle ) );
                 break;
             case 7:
                 castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
                           update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, p2, 0, luminance, 1, -tan( start_angle ), -tan( end_angle ) );
+                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -tan( start_angle ), -tan( end_angle ) );
                 break;
         }
         i++;

@@ -2022,7 +2022,7 @@ bool monster::melee_attack( Creature &target, float accuracy )
         return true;
     }
     if( !can_squeeze_to( target.pos_bub() ) ) {
-        return;
+        return false;
     }
 
     Character &player_character = get_player_character();
