@@ -1260,6 +1260,9 @@ class vehicle
         */
         int avail_linkable_part( const point_rel_ms &pt, bool to_ports ) const;
 
+        int obstacle_at_position( const point_bub_ms &pos ) const;
+        int opaque_at_position( const point_bub_ms &pos ) const;
+
         /**
          *  Check if vehicle has at least one unbroken part with specified flag
          *  @param flag Specified flag to search parts for
@@ -1370,10 +1373,9 @@ class vehicle
         // Translate mount coordinates "p" into tile coordinates "q" using given pivot direction and anchor
         void coord_translate( const units::angle &dir, const point_rel_ms &pivot, const point_rel_ms &p,
                               tripoint_rel_ms &q ) const;
-        // Translate mount coordinates "p" into tile coordinates "q" using given tileray and anchor
-        // should be faster than previous call for repeated translations
-        void coord_translate( tileray tdir, const point_rel_ms &pivot, const point_rel_ms &p,
-                              tripoint_rel_ms &q ) const;
+        // Translate rotated tile coordinates "p" into mount coordinates "q" using given pivot direction and anchor
+        void coord_translate_reverse( units::angle dir, const point_rel_ms &pivot, const tripoint_rel_ms &p,
+                                      point_rel_ms &q ) const;
 
         tripoint_bub_ms mount_to_tripoint( map *here,  const point_rel_ms &mount ) const;
         tripoint_abs_ms mount_to_tripoint_abs( const point_rel_ms &mount ) const;
@@ -1381,6 +1383,9 @@ class vehicle
                                            const point_rel_ms &offset ) const;
         tripoint_abs_ms mount_to_tripoint_abs( const point_rel_ms &mount,
                                                const point_rel_ms &offset ) const;
+
+        //Translate tile coordinates into mount coordinates
+        tripoint_rel_ms tripoint_to_mount( const tripoint_abs_ms &p ) const;
 
         // Seek a vehicle part which obstructs tile with given coordinates relative to vehicle position
         int part_at( const point_rel_ms &dp ) const;
@@ -1581,6 +1586,8 @@ class vehicle
          * Mark mass caches and pivot cache as dirty
          */
         void invalidate_mass();
+
+        static int angle_to_increment( units::angle dir );
 
         // get the total mass of vehicle, including cargo and passengers
         units::mass total_mass( map &here ) const;
@@ -2165,6 +2172,17 @@ class vehicle
         void build_bike_rack_menu( map &here, veh_menu &menu, int part );
         void build_interact_menu( veh_menu &menu, map *here, const tripoint_bub_ms &p, bool with_pickup );
         void interact_with( map *here, const tripoint_bub_ms &p, bool with_pickup = false );
+
+        //Check if a movement is blocked, must be adjacent points
+        bool allowed_move( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+
+        //Check if light is blocked, must be adjacent points
+        bool allowed_light( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+
+        //Checks if the conditional holds for tiles that can be skipped due to rotation
+        bool check_rotated_intervening( const point_rel_ms &from, const point_rel_ms &to, bool( *check )( const vehicle *,
+                                        const point_rel_ms & ) ) const;
+
 
         std::string disp_name() const;
 

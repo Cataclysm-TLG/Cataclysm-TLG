@@ -2949,6 +2949,40 @@ bool vehicle::has_part( const tripoint_abs_ms &pos, const std::string &flag, boo
     return false;
 }
 
+int vehicle::obstacle_at_position( const point_rel_ms &pos ) const
+{
+    int i = part_with_feature( pos, "OBSTACLE", true );
+
+    if( i == -1 ) {
+        return -1;
+    }
+
+    auto ref = parts[i];
+
+    if( ref.info().has_flag( VPFLAG_OPENABLE ) && ref.open ) {
+        return -1;
+    }
+
+    return i;
+}
+
+int vehicle::opaque_at_position( const point_rel_ms &pos ) const
+{
+    int i = part_with_feature( pos, "OPAQUE", true );
+
+    if( i == -1 ) {
+        return -1;
+    }
+
+    auto ref = parts[i];
+
+    if( ref.info().has_flag( VPFLAG_OPENABLE ) && ref.open ) {
+        return -1;
+    }
+
+    return i;
+}
+
 // NOLINTNEXTLINE(readability-make-member-function-const)
 std::vector<vehicle_part *> vehicle::get_parts_at( map *here, const tripoint_bub_ms &pos,
         const std::string &flag,
@@ -3380,23 +3414,92 @@ point_rel_ms vehicle::coord_translate( const point_rel_ms &p ) const
     return q.xy();
 }
 
+const struct {
+    float gradient;
+    bool flipH;
+    bool flipV;
+    bool swapXY;
+} rotation_info[24] = {
+    {static_cast<float>( tan( units::to_radians( 0_degrees ) ) ),  false, false,   false}, //0 degrees
+    {static_cast<float>( tan( units::to_radians( 15_degrees ) ) ), false, false,   false},
+    {static_cast<float>( tan( units::to_radians( 30_degrees ) ) ), false, false,   false},
+    {static_cast<float>( -tan( units::to_radians( 45_degrees ) ) ), true,  false, true}, //45 degrees
+    {static_cast<float>( -tan( units::to_radians( 30_degrees ) ) ), true,  false, true},
+    {static_cast<float>( -tan( units::to_radians( 15_degrees ) ) ), true,  false, true},
+    {static_cast<float>( tan( units::to_radians( 0_degrees ) ) ),  true,  false,   true}, //90 degrees
+    {static_cast<float>( tan( units::to_radians( 15_degrees ) ) ), true,  false,   true},
+    {static_cast<float>( tan( units::to_radians( 30_degrees ) ) ), true,  false,   true},
+    {static_cast<float>( tan( units::to_radians( 45_degrees ) ) ), true,  false,   true}, //135 degrees
+    {static_cast<float>( -tan( units::to_radians( 30_degrees ) ) ), true,  true,  false},
+    {static_cast<float>( -tan( units::to_radians( 15_degrees ) ) ), true,  true,  false},
+    {static_cast<float>( tan( units::to_radians( 0_degrees ) ) ),  true,  true,    false}, //180 degrees
+    {static_cast<float>( tan( units::to_radians( 15_degrees ) ) ), true,  true,    false},
+    {static_cast<float>( tan( units::to_radians( 30_degrees ) ) ), true,  true,    false},
+    {static_cast<float>( -tan( units::to_radians( 45_degrees ) ) ), false, true,  true}, //225 degrees
+    {static_cast<float>( -tan( units::to_radians( 30_degrees ) ) ), false, true,  true},
+    {static_cast<float>( -tan( units::to_radians( 15_degrees ) ) ), false, true,  true},
+    {static_cast<float>( tan( units::to_radians( 0_degrees ) ) ),  false,  true,   true}, //270 degrees
+    {static_cast<float>( tan( units::to_radians( 15_degrees ) ) ), false,  true,   true},
+    {static_cast<float>( tan( units::to_radians( 30_degrees ) ) ), false,  true,   true},
+    {static_cast<float>( tan( units::to_radians( 45_degrees ) ) ), false,  true,   true}, //315 degrees
+    {static_cast<float>( -tan( units::to_radians( 30_degrees ) ) ), false,  false, false},
+    {static_cast<float>( -tan( units::to_radians( 15_degrees ) ) ), false,  false, false},
+};
+
 void vehicle::coord_translate( const units::angle &dir, const point_rel_ms &pivot,
                                const point_rel_ms &p,
                                tripoint_rel_ms &q ) const
 {
-    tileray tdir( dir );
-    tdir.advance( p.x() - pivot.x() );
-    q.x() = tdir.dx() + tdir.ortho_dx( p.y() - pivot.y() );
-    q.y() = tdir.dy() + tdir.ortho_dy( p.y() - pivot.y() );
+
+    int increment = angle_to_increment( dir );
+    point_rel_ms relative = p - pivot;
+    float skew = std::trunc( relative.x * rotation_info[increment].gradient );
+
+    q.x() = relative.x();
+    q.y() = relative.y() + skew;
+
+    if( rotation_info[increment].swapXY ) {
+        auto swap = q.x();
+        q.x() = q.y();
+        q.y() = swap;
+    }
+    if( rotation_info[increment].flipH ) {
+        q.x() = -q.x();
+    }
+    if( rotation_info[increment].flipV ) {
+        q.y() = -q.y();
+    }
 }
 
-void vehicle::coord_translate( tileray tdir, const point_rel_ms &pivot, const point_rel_ms &p,
-                               tripoint_rel_ms &q ) const
+void vehicle::coord_translate_reverse( units::angle dir, const point_rel_ms &pivot, const tripoint_rel_ms &p,
+                                       point_rel_ms &q ) const
 {
-    tdir.clear_advance();
-    tdir.advance( p.x() - pivot.x() );
-    q.x() = tdir.dx() + tdir.ortho_dx( p.y() - pivot.y() );
-    q.y() = tdir.dy() + tdir.ortho_dy( p.y() - pivot.y() );
+    int increment = angle_to_increment( dir );
+
+    q.x() = p.x();
+    q.y() = p.y();
+
+
+    if( rotation_info[increment].flipV ) {
+        q.y() = -q.y();
+    }
+
+    if( rotation_info[increment].flipH ) {
+        q.x() = -q.x();
+    }
+
+    if( rotation_info[increment].swapXY ) {
+        auto swap = q.x();
+        q.x() = q.y();
+        q.y() = swap;
+    }
+
+    float skew = std::trunc( q.x() * rotation_info[increment].gradient );
+
+    q.y() -= skew;
+
+    q += pivot;
+
 }
 
 tripoint_bub_ms vehicle::mount_to_tripoint( map *here, const point_rel_ms &mount ) const
@@ -3425,6 +3528,29 @@ tripoint_abs_ms vehicle::mount_to_tripoint_abs( const point_rel_ms &mount,
     return pos_abs() + mnt_translated;
 }
 
+point_rel_ms vehicle::tripoint_to_mount(
+    const tripoint_abs_ms &p,
+    const point_rel_ms &offset ) const
+{
+    const tripoint_rel_ms rel = p - pos_abs();
+
+    point_rel_ms mount_with_offset;
+    coord_translate_reverse(
+        pivot_rotation[0], pivot_anchor[0], rel, mount_with_offset
+    );
+
+    return mount_with_offset - offset;
+}
+
+int vehicle::angle_to_increment( units::angle dir )
+{
+    int increment = ( std::lround( to_degrees( dir ) ) % 360 ) / 15;
+    if( increment < 0 ) {
+        increment += 360 / 15;
+    }
+    return increment;
+}
+
 void vehicle::precalc_mounts( int idir, const units::angle &dir,
                               const point_rel_ms &pivot )
 {
@@ -3439,7 +3565,7 @@ void vehicle::precalc_mounts( int idir, const units::angle &dir,
         }
         auto q = mount_to_precalc.find( p.mount );
         if( q == mount_to_precalc.end() ) {
-            coord_translate( tdir, pivot, p.mount, p.precalc[idir] );
+            coord_translate( dir, pivot, p.mount, p.precalc[idir] );
             mount_to_precalc.insert( { p.mount, p.precalc[idir]} );
         } else {
             p.precalc[idir] = q->second;
@@ -3447,6 +3573,60 @@ void vehicle::precalc_mounts( int idir, const units::angle &dir,
     }
     pivot_anchor[idir] = pivot;
     pivot_rotation[idir] = dir;
+}
+
+bool vehicle::check_rotated_intervening( const point_rel_ms &from, const point_rel_ms &to,
+        bool( *check )( const vehicle *, const point_rel_ms & ) ) const
+{
+    point_rel_ms delta = to - from;
+    if( abs( delta.x() ) <= 1 && abs( delta.y() ) <= 1 ) { //Just a normal move
+        return true;
+    }
+
+    if( !( ( abs( delta.x() ) == 2 && abs( delta.y() ) == 1 ) || ( abs( delta.x() ) == 1 &&
+            abs( delta.y() ) == 2 ) ) ) { //Check that we're moving like a knight
+        debugmsg( "Unexpected movement in rotated vehicle vector:%d,%d", delta.x(), delta.y() );
+        return false;
+    }
+
+    if( abs( delta.x() ) == 2 ) { //Mostly horizontal move
+        point_rel_ms t1 = from + point_rel_ms( delta.x() / 2, delta.y() );
+        if( check( this, t1 ) ) {
+            return true;
+        }
+
+        point_rel_ms t2 = from + point_rel_ms( delta.x() / 2, 0 );
+        if( check( this, t2 ) ) {
+            return true;
+        }
+
+    } else { //Mostly vertical move
+        point_rel_ms t1 = from + point_rel_ms( delta.x, delta.y / 2 );
+        if( check( this, t1 ) ) {
+            return true;
+        }
+
+        point_rel_ms t2 = from + point_rel_ms( 0, delta.y / 2 );
+        if( check( this, t2 ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool vehicle::allowed_light( const point_bub_ms &from, const point_bub_ms &to ) const
+{
+    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_bub_ms & p ) {
+        return ( veh->opaque_at_position( p ) == -1 );
+    } );
+}
+
+bool vehicle::allowed_move( const point_bub_ms &from, const point_bub_ms &to ) const
+{
+    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_bub_ms & p ) {
+        return ( veh->obstacle_at_position( p ) == -1 );
+    } );
 }
 
 std::vector<int> vehicle::boarded_parts() const
