@@ -219,8 +219,8 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
     }
 
     const bool is_riding = you.is_mounted();
-    tripoint_bub_ms dest_loc;
-    const tripoint_bub_ms you_pos = you.pos_bub( here );
+    const tripoint_bub_ms you_pos = you.pos_bub();
+    tripoint_bub_ms dest_loc = you_pos + d;
 
     if( here.obstructed_by_vehicle_rotation( you_pos, dest_loc ) ) {
         return false;
