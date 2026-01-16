@@ -550,6 +550,7 @@
     "//": "cooked red meat.",
     "components": [
       [
+        [ "meat_cooked", 1 ],
         [ "meat_fatty_cooked", 1 ],
         [ "meat_scrap_cooked", 10 ],
         [ "mutant_meat_cooked", 1 ],
