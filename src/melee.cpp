@@ -1104,7 +1104,7 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
             }
             critter = inter;
             break;
-            } else if( here.obstructed_by_vehicle_rotation( last_point, path_point ) ) {
+        } else if( here.obstructed_by_vehicle_rotation( last_point, path_point ) ) {
             tripoint_bub_ms rand = path_point;
             if( one_in( 2 ) ) {
                 rand.x() = last_point.x();
@@ -1130,7 +1130,7 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost )
                                here.ter( path_point ).obj().name() );
             return;
         }
-                last_point = path_point;
+        last_point = path_point;
     }
 
     if( here.obstructed_by_vehicle_rotation( last_point, p ) ) {

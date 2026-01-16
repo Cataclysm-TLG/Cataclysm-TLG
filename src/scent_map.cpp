@@ -189,7 +189,8 @@ void scent_map::update( const tripoint_bub_ms &center, map &m )
     std::array < std::array < int, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > sum_3_scent_y;
     std::array < std::array < char, 3 + SCENT_RADIUS * 2 >, 1 + SCENT_RADIUS * 2 > squares_used_y;
 
-    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = map_cache.vehicle_obstructed_cache;
+    const cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache =
+        map_cache.vehicle_obstructed_cache;
 
     // for loop constants
     const int scentmap_minx = center.x() - SCENT_RADIUS;
@@ -235,7 +236,7 @@ void scent_map::update( const tripoint_bub_ms &center, map &m )
                 squares_used -= 4;
                 total -= 4 * grscent[abs.x + 1][abs.y + 1];
             }
-                        if( blocked_cache[abs.x][abs.y].ne && scent_transfer[abs.x - 1][abs.y + 1] == 5 ) {
+            if( blocked_cache[abs.x][abs.y].ne && scent_transfer[abs.x - 1][abs.y + 1] == 5 ) {
                 squares_used -= 4;
                 total -= 4 * grscent[abs.x - 1][abs.y + 1];
             }

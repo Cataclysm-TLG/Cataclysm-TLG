@@ -5085,7 +5085,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                     add_msg( _( "The %s flops around and dies!" ), targ->name() );
                 }
             }
-                        tp = traj[i];
+            tp = traj[i];
         }
     } else if( npc *const targ = creatures.creature_at<npc>( tp ) ) {
         if( stun > 0 ) {
@@ -5160,7 +5160,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                      stun );
         }
         for( size_t i = 1; i < traj.size(); i++ ) {
-           if( here.impassable( traj[i] ) ||
+            if( here.impassable( traj[i] ) ||
                 here.obstructed_by_vehicle_rotation( tp, traj[i] ) ) { // oops, we hit a wall!
                 u.setpos( here, traj[i - 1] );
                 force_remaining = traj.size() - i;
@@ -6640,7 +6640,8 @@ void game::peek()
         }
     }
 
-    if( here.impassable( new_pos ) || here.obstructed_by_vehicle_rotation( u.pos_bub(), u.pos_bub() + *p ) ) {
+    if( here.impassable( new_pos ) ||
+        here.obstructed_by_vehicle_rotation( u.pos_bub(), u.pos_bub() + *p ) ) {
         return;
     }
     peek( new_pos );
@@ -12279,7 +12280,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
         // TODO: Check whenever it is actually in the viewport
         // or maybe even just redraw the changed tiles
         bool seen = is_u || u.sees( here, *c ); // To avoid redrawing when not seen
-                if( force_next ) {
+        if( force_next ) {
             pt = next_forced;
             force_next = false;
         } else {

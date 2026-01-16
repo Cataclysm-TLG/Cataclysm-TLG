@@ -224,7 +224,8 @@ std::array<std::pair<tripoint_bub_ms, maptile>, 8> map::get_neighbors( const tri
     };
 }
 
-bool map::gas_can_spread_to( field_entry &cur, const tripoint_bub_ms &src, const tripoint_bub_ms &dst )
+bool map::gas_can_spread_to( field_entry &cur, const tripoint_bub_ms &src,
+                             const tripoint_bub_ms &dst )
 {
     maptile dst_tile = maptile_at( dst );
     const field_entry *tmpfld = dst_tile.get_field().find_field( cur.get_field_type() );
@@ -233,7 +234,7 @@ bool map::gas_can_spread_to( field_entry &cur, const tripoint_bub_ms &src, const
         const ter_t &ter = dst_tile.get_ter_t();
         const furn_t &frn = dst_tile.get_furn_t();
         return !obstructed_by_vehicle_rotation( src, dst ) && ( ter_furn_movecost( ter, frn ) > 0 ||
-               ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_PERMEABLE ) );
+                ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_PERMEABLE ) );
     }
     return false;
 }

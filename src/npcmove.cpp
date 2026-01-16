@@ -3465,7 +3465,8 @@ static std::optional<tripoint_bub_ms> nearest_passable( const tripoint_bub_ms &p
     const tripoint_bub_ms & r ) {
         return rl_dist( closest_to, l ) < rl_dist( closest_to, r );
     } );
-    auto iter = std::find_if( candidates.begin(), candidates.end(), [&here, &p]( const tripoint_bub_ms & pt ) {
+    auto iter = std::find_if( candidates.begin(), candidates.end(), [&here,
+    &p]( const tripoint_bub_ms & pt ) {
         return here.passable_through( pt ) && !here.obstructed_by_vehicle_rotation( p, pt );
     } );
     if( iter != candidates.end() ) {

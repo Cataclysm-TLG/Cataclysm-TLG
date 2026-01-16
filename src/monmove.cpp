@@ -1536,8 +1536,8 @@ tripoint_bub_ms monster::scent_move()
         // Add some randomness to make creatures zigzag towards the source
         for( const tripoint_bub_ms &dest : here.points_in_radius( direction, 1 ) ) {
             if( here.valid_move( pos_bub(), dest, can_bash, true ) &&
-            ( ( can_move_to( dest ) && !here.obstructed_by_vehicle_rotation( pos_bub(), dest ) ) ||
-              ( dest == player_character.pos_bub() ) ||
+                ( ( can_move_to( dest ) && !here.obstructed_by_vehicle_rotation( pos_bub(), dest ) ) ||
+                  ( dest == player_character.pos_bub() ) ||
                   ( can_bash && here.bash_rating( bash_estimate(), dest ) > 0 ) ) ) {
                 smoves.push_back( dest );
             }

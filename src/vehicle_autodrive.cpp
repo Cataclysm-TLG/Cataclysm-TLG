@@ -649,7 +649,7 @@ vehicle_profile vehicle::autodrive_controller::compute_profile( map &here,
         orientation facing ) const
 {
     vehicle_profile ret;
-     auto angle = to_angle( facing );
+    auto angle = to_angle( facing );
     tileray tdir( angle );
     ret.tdir = tdir;
     std::map<int, std::pair<int, int>> extent_map;
