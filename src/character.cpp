@@ -10994,9 +10994,20 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
         bool can_see = ( ( sees( here, critter ) || sees_with_specials( critter ) ) && here.sees( pos_bub( here ), critter.pos_bub( here ), 100 ) );
         if( can_see && melee )  //handles the case where we can see something with glass in the way for melee attacks
         {
+
             std::vector<tripoint_bub_ms> path = here.find_clear_path( pos_bub( here ),
                     critter.pos_bub( here ) );
+            tripoint_bub_ms prev_point = pos_bub();
             for( const tripoint_bub_ms &point : path ) {
+
+
+            if( here.obstructed_by_vehicle_rotation( prev_point, point ) ) {
+                //Blocked by a rotated vehicle's walls
+                return false;
+            }
+
+            prev_point = point;
+
                 if( here.impassable( point ) && point != critter.pos_bub() &&
                     !( weapon.has_flag( flag_SPEAR ) && // Fences etc. Spears can stab through those
                        here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE,
