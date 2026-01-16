@@ -10285,13 +10285,9 @@ void map::build_floor_caches()
         build_floor_cache( z );
     }
 }
-
 static void vehicle_caching_internal( level_cache &zch, const vpart_reference &vp, vehicle *v )
 {
-    // TODO: Check if this is actually reasonable. Probably need to feed the map in.
-    // The guess is that the reality bubble should be affected, but that needs to be checked as well.
-    map &here =
-        reality_bubble();
+    map &here = reality_bubble();
     auto &outside_cache = zch.outside_cache;
     auto &transparency_cache = zch.transparency_cache;
     auto &floor_cache = zch.floor_cache;
@@ -10301,7 +10297,10 @@ static void vehicle_caching_internal( level_cache &zch, const vpart_reference &v
     const size_t part = vp.part_index();
     const tripoint_bub_ms part_pos =  v->bub_part_pos( here, vp.part() );
 
-    bool vehicle_is_opaque = vp.has_feature( VPFLAG_OPAQUE ) && !vp.part().is_broken();
+    bool has_opaque = vp.has_feature( VPFLAG_OPAQUE );
+    bool is_broken = vp.part().is_broken();
+
+    bool vehicle_is_opaque = has_opaque && !is_broken;
 
     if( vehicle_is_opaque ) {
         int dpart = v->part_with_feature( part, VPFLAG_OPENABLE, true );
@@ -10320,42 +10319,43 @@ static void vehicle_caching_internal( level_cache &zch, const vpart_reference &v
         floor_cache[part_pos.x()][part_pos.y()] = true;
     }
 
-    point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
-    if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+   point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
+    if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
         obscured_cache[part_pos.x()][part_pos.y()].nw = true;
     }
-    if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+    if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
         obstructed_cache[part_pos.x()][part_pos.y()].nw = true;
     }
 
     t = v->tripoint_to_mount( part_pos + point::north_east ).xy();
-    if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+    if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
         obscured_cache[part_pos.x()][part_pos.y()].ne = true;
     }
-    if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+    if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
         obstructed_cache[part_pos.x()][part_pos.y()].ne = true;
     }
 
     if( part_pos.x() > 0 && part_pos.y() < MAPSIZE_Y - 1 ) {
         t = v->tripoint_to_mount( part_pos + point::south_west ).xy();
-        if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+        if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
             obscured_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
         }
-        if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+        if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
             obstructed_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
         }
     }
 
     if( part_pos.x() < MAPSIZE_X - 1 && part_pos.y() < MAPSIZE_Y - 1 ) {
         t = v->tripoint_to_mount( part_pos + point::south_east ).xy();
-        if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+        if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
             obscured_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
         }
-        if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
+        if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
             obstructed_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
         }
     }
 }
+
 
 static void vehicle_caching_internal_above( level_cache &zch_above, const vpart_reference &vp,
         vehicle *v )
@@ -10392,6 +10392,7 @@ void map::do_vehicle_caching( int z )
     }
 }
 
+
 void map::build_map_cache( const int zlev, bool skip_lightmap )
 {
     const int minz = zlevels ? -OVERMAP_DEPTH : zlev;
@@ -10404,11 +10405,18 @@ void map::build_map_cache( const int zlev, bool skip_lightmap )
         bool floor_cache_was_dirty = build_floor_cache( z );
         seen_cache_dirty |= floor_cache_was_dirty;
         seen_cache_dirty |= get_cache( z ).seen_cache_dirty;
-        diagonal_blocks fill = {false, false};
-        std::uninitialized_fill_n( &( get_cache( z ).vehicle_obscured_cache[0][0] ), MAPSIZE_X * MAPSIZE_Y,
-                                   fill );
-        std::uninitialized_fill_n( &( get_cache( z ).vehicle_obstructed_cache[0][0] ),
-                                   MAPSIZE_X * MAPSIZE_Y, fill );
+        constexpr diagonal_blocks empty_diagonal_block{ false, false };
+
+        auto &cache = get_cache(z);
+
+        std::fill(&cache.vehicle_obscured_cache[0][0],
+                &cache.vehicle_obscured_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                empty_diagonal_block);
+
+        std::fill(&cache.vehicle_obstructed_cache[0][0],
+                &cache.vehicle_obstructed_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                empty_diagonal_block);
+
     }
     // needs a separate pass as it changes the caches on neighbour z-levels (e.g. floor_cache);
     // otherwise such changes might be overwritten by main cache-building logic

@@ -2968,7 +2968,7 @@ int vehicle::obstacle_at_position( const point_rel_ms &pos ) const
 
 int vehicle::opaque_at_position( const point_rel_ms &pos ) const
 {
-    int i = part_with_feature( pos, "OPAQUE", true );
+    int i = part_with_feature( pos, VPFLAG_OPAQUE, true );
 
     if( i == -1 ) {
         return -1;
@@ -3533,12 +3533,11 @@ tripoint_rel_ms vehicle::tripoint_to_mount( const tripoint_bub_ms &p ) const
 {
     const tripoint_rel_ms translated = p - pos_bub( get_map() );
 
-    tripoint_rel_ms mount_with_offset;
-    point_rel_ms temp_point = mount_with_offset.xy();
-    coord_translate_reverse( pivot_rotation[0], pivot_anchor[0], translated, temp_point );
-
-    return mount_with_offset;
+    point_rel_ms mount_xy;
+    coord_translate_reverse( pivot_rotation[0], pivot_anchor[0], translated, mount_xy );
+    return tripoint_rel_ms{ mount_xy.x(), mount_xy.y(), translated.z() };
 }
+
 
 int vehicle::angle_to_increment( units::angle dir )
 {
@@ -3583,7 +3582,12 @@ bool vehicle::check_rotated_intervening( const point_rel_ms &from, const point_r
 
     if( !( ( abs( delta.x() ) == 2 && abs( delta.y() ) == 1 ) || ( abs( delta.x() ) == 1 &&
             abs( delta.y() ) == 2 ) ) ) { //Check that we're moving like a knight
-        debugmsg( "Unexpected movement in rotated vehicle vector:%d,%d", delta.x(), delta.y() );
+debugmsg(
+    "Unexpected movement in rotated vehicle vector: from %d,%d to %d,%d delta %d,%d",
+    from.x(), from.y(),
+    to.x(), to.y(),
+    delta.x(), delta.y()
+);
         return false;
     }
 
