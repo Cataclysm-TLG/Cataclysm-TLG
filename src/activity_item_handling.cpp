@@ -701,7 +701,7 @@ std::vector<tripoint_bub_ms> route_adjacent( const Character &you, const tripoin
 
     for( const tripoint_bub_ms &tp : here.points_in_radius( dest, 1 ) ) {
         if( tp != you.pos_bub() && here.passable_through( tp ) &&
-        !here.obstructed_by_vehicle_rotation( dest, tp ) ) {
+            !here.obstructed_by_vehicle_rotation( dest, tp ) ) {
             passable_tiles.emplace( tp );
         }
     }

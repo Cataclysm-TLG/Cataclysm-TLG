@@ -6,6 +6,7 @@
 
 #include "cuboid_rectangle.h"
 #include "fragment_cloud.h" // IWYU pragma: keep
+#include "level_cache.h"
 #include "line.h"
 #include "list.h"
 #include "point.h"
@@ -169,27 +170,24 @@ void cast_horizontal_zlight_segment(
     const tripoint_bub_ms &offset, const int offset_distance,
     const T numerator )
 {
-    
+
     quadrant quad = quadrant_from_x_y( xx_transform + xy_transform, yx_transform + yy_transform );
 
-    const auto check_blocked = [ =, &blocked_caches]( const tripoint & p ) -> bool{
+    const auto check_blocked_shadow = [ =, &blocked_caches]( const tripoint_bub_ms & p ) -> bool {
         switch( quad )
         {
             case quadrant::NW:
-                return ( *blocked_caches[p.z + OVERMAP_DEPTH] )[p.x][p.y].nw;
-                break;
+                return ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x()][p.y()].nw;
             case quadrant::NE:
-                return ( *blocked_caches[p.z + OVERMAP_DEPTH] )[p.x][p.y].ne;
-                break;
+                return ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x()][p.y()].ne;
             case quadrant::SE:
-                return ( p.x < MAPSIZE_X - 1 && p.y < MAPSIZE_Y - 1 &&
-                         ( *blocked_caches[p.z + OVERMAP_DEPTH] )[p.x + 1][p.y + 1].nw );
-                break;
+                return ( p.x() < MAPSIZE_X - 1 && p.y() < MAPSIZE_Y - 1 &&
+                         ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x() + 1][p.y() + 1].nw );
             case quadrant::SW:
-                return ( p.x > 1 && p.y < MAPSIZE_Y - 1 &&
-                         ( *blocked_caches[p.z + OVERMAP_DEPTH] )[p.x - 1][p.y + 1].ne );
-                break;
+                return ( p.x() > 1 && p.y() < MAPSIZE_Y - 1 &&
+                         ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x() - 1][p.y() + 1].ne );
         }
+        return false;
     };
     const int radius = MAX_VIEW_DISTANCE - offset_distance;
 
@@ -324,10 +322,10 @@ void cast_horizontal_zlight_segment(
                     const int dist = rl_dist( tripoint_rel_ms::zero, delta ) + offset_distance;
                     last_intensity = calc( numerator, this_span->cumulative_value, dist );
 
-                if( check_blocked( current ) ) {
-                    vehicle_blocked = true;
-                    break;
-                }
+                    if( check_blocked_shadow( current ) ) {
+                        vehicle_blocked = true;
+                        break;
+                    }
 
                     if( !floor_block ) {
                         ( *output_caches[z_index] )[current.x()][current.y()] =
@@ -415,6 +413,26 @@ void cast_vertical_zlight_segment(
             T( LIGHT_TRANSPARENCY_OPEN_AIR )
         }
     };
+
+
+    quadrant quad = quadrant_from_x_y( x_transform, y_transform );
+
+    const auto check_blocked_shadow = [ =, &blocked_caches]( const tripoint_bub_ms & p ) -> bool {
+        switch( quad )
+        {
+            case quadrant::NW:
+                return ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x()][p.y()].nw;
+            case quadrant::NE:
+                return ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x()][p.y()].ne;
+            case quadrant::SE:
+                return ( p.x() < MAPSIZE_X - 1 && p.y() < MAPSIZE_Y - 1 &&
+                         ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x() + 1][p.y() + 1].nw );
+            case quadrant::SW:
+                return ( p.x() > 1 && p.y() < MAPSIZE_Y - 1 &&
+                         ( *blocked_caches[p.z() + OVERMAP_DEPTH] )[p.x() - 1][p.y() + 1].ne );
+        }
+        return false;
+    };
     // At each "depth", a.k.a. distance from the origin, we iterate once over the list of spans,
     // possibly splitting them.
     for( int distance = 1; distance <= radius; distance++ ) {
@@ -452,7 +470,6 @@ void cast_vertical_zlight_segment(
                     // So continue to the next span.
                     break;
                 }
-                bool vehicle_blocked = false;
                 bool started_span = false;
                 for( delta.x() = 0; delta.x() <= distance; delta.x()++ ) {
                     current.x() = offset.x() + delta.x() * x_transform;
@@ -502,10 +519,9 @@ void cast_vertical_zlight_segment(
                     const int dist = rl_dist( tripoint_rel_ms::zero, delta ) + offset_distance;
                     last_intensity = calc( numerator, this_span->cumulative_value, dist );
 
-                if( check_blocked( current ) ) {
-                    vehicle_blocked = true;
-                    break;
-                }
+                    if( check_blocked_shadow( current ) ) {
+                        break;
+                    }
 
                     if( !floor_block ) {
                         ( *output_caches[z_index] )[current.x()][current.y()] =
@@ -567,6 +583,7 @@ void cast_zlight(
     const array_of_grids_of<T> &output_caches,
     const array_of_grids_of<const T> &input_arrays,
     const array_of_grids_of<const bool> &floor_caches,
+    const array_of_grids_of<const diagonal_blocks> &blocked_caches,
     const tripoint_bub_ms &origin, const int offset_distance, const T numerator,
     vertical_direction dir )
 {
@@ -708,6 +725,7 @@ template void cast_zlight<float, sight_calc, sight_check, accumulate_transparenc
 template void cast_zlight<fragment_cloud, shrapnel_calc, shrapnel_check, accumulate_fragment_cloud>(
     const array_of_grids_of<fragment_cloud> &output_caches,
     const array_of_grids_of<const fragment_cloud> &input_arrays,
-    const array_of_grids_of<const bool> &floor_caches, const array_of_grids_of<const diagonal_blocks> &blocked_caches,
+    const array_of_grids_of<const bool> &floor_caches,
+    const array_of_grids_of<const diagonal_blocks> &blocked_caches,
     const tripoint_bub_ms &origin, int offset_distance, fragment_cloud numerator,
     vertical_direction dir );

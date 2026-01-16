@@ -1260,8 +1260,8 @@ class vehicle
         */
         int avail_linkable_part( const point_rel_ms &pt, bool to_ports ) const;
 
-        int obstacle_at_position( const point_bub_ms &pos ) const;
-        int opaque_at_position( const point_bub_ms &pos ) const;
+        int obstacle_at_position( const point_rel_ms &pos ) const;
+        int opaque_at_position( const point_rel_ms &pos ) const;
 
         /**
          *  Check if vehicle has at least one unbroken part with specified flag
@@ -1384,8 +1384,8 @@ class vehicle
         tripoint_abs_ms mount_to_tripoint_abs( const point_rel_ms &mount,
                                                const point_rel_ms &offset ) const;
 
-        //Translate tile coordinates into mount coordinates
-        tripoint_rel_ms tripoint_to_mount( const tripoint_abs_ms &p ) const;
+        // Translate tile coordinates into mount coordinates.
+        tripoint_rel_ms tripoint_to_mount( const tripoint_bub_ms &p ) const;
 
         // Seek a vehicle part which obstructs tile with given coordinates relative to vehicle position
         int part_at( const point_rel_ms &dp ) const;
@@ -2174,14 +2174,15 @@ class vehicle
         void interact_with( map *here, const tripoint_bub_ms &p, bool with_pickup = false );
 
         //Check if a movement is blocked, must be adjacent points
-        bool allowed_move( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+        bool allowed_move( const point_rel_ms &from, const point_rel_ms &to ) const;
 
         //Check if light is blocked, must be adjacent points
-        bool allowed_light( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+        bool allowed_light( const point_rel_ms &from, const point_rel_ms &to ) const;
 
         //Checks if the conditional holds for tiles that can be skipped due to rotation
-        bool check_rotated_intervening( const point_rel_ms &from, const point_rel_ms &to, bool( *check )( const vehicle *,
-                                        const point_rel_ms & ) ) const;
+        bool check_rotated_intervening( const point_rel_ms &from, const point_rel_ms &to,
+                                        bool( *check )( const vehicle *,
+                                                const point_rel_ms & ) ) const;
 
 
         std::string disp_name() const;

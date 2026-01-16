@@ -11001,12 +11001,12 @@ std::vector<Creature *> Character::get_targetable_creatures( const int range, bo
             for( const tripoint_bub_ms &point : path ) {
 
 
-            if( here.obstructed_by_vehicle_rotation( prev_point, point ) ) {
-                //Blocked by a rotated vehicle's walls
-                return false;
-            }
+                if( here.obstructed_by_vehicle_rotation( prev_point, point ) ) {
+                    //Blocked by a rotated vehicle's walls
+                    return false;
+                }
 
-            prev_point = point;
+                prev_point = point;
 
                 if( here.impassable( point ) && point != critter.pos_bub() &&
                     !( weapon.has_flag( flag_SPEAR ) && // Fences etc. Spears can stab through those

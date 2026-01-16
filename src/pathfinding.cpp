@@ -297,15 +297,16 @@ int map::cost_to_pass( const tripoint_bub_ms &cur, const tripoint_bub_ms &p,
         return climb_cost;
     }
 
-    
+
     if( cur_veh &&
-        !cur_veh->allowed_move( cur_veh->tripoint_to_mount( cur ), cur_veh->tripoint_to_mount( p ) ) ) {
+        !cur_veh->allowed_move( cur_veh->tripoint_to_mount( cur ).xy(),
+                                cur_veh->tripoint_to_mount( p ).xy() ) ) {
         //Trying to squeeze through a vehicle hole, skip this movement but don't close the tile as other paths may lead to it
         return PF_IMPASSABLE;
     }
 
     if( veh && veh != cur_veh &&
-        !veh->allowed_move( veh->tripoint_to_mount( cur ), veh->tripoint_to_mount( p ) ) ) {
+        !veh->allowed_move( veh->tripoint_to_mount( cur ).xy(), veh->tripoint_to_mount( p ).xy() ) ) {
         //Same as above but moving into rather than out of a vehicle
         return PF_IMPASSABLE;
     }
@@ -469,10 +470,6 @@ std::vector<tripoint_bub_ms> map::route( const tripoint_bub_ms &f,
 
         const pathfinding_cache &pf_cache = get_pathfinding_cache_ref( cur.z() );
         const PathfindingFlags cur_special = pf_cache.special[cur.x()][cur.y()];
-
-        // These might need to be in route() instead.
-        int cur_part;
-        const vehicle *cur_veh = veh_at_internal( cur, cur_part );
 
         // 7 3 5
         // 1 . 2

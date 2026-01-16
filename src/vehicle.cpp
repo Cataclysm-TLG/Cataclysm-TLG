@@ -3453,7 +3453,7 @@ void vehicle::coord_translate( const units::angle &dir, const point_rel_ms &pivo
 
     int increment = angle_to_increment( dir );
     point_rel_ms relative = p - pivot;
-    float skew = std::trunc( relative.x * rotation_info[increment].gradient );
+    float skew = std::trunc( relative.x() * rotation_info[increment].gradient );
 
     q.x() = relative.x();
     q.y() = relative.y() + skew;
@@ -3471,7 +3471,8 @@ void vehicle::coord_translate( const units::angle &dir, const point_rel_ms &pivo
     }
 }
 
-void vehicle::coord_translate_reverse( units::angle dir, const point_rel_ms &pivot, const tripoint_rel_ms &p,
+void vehicle::coord_translate_reverse( units::angle dir, const point_rel_ms &pivot,
+                                       const tripoint_rel_ms &p,
                                        point_rel_ms &q ) const
 {
     int increment = angle_to_increment( dir );
@@ -3528,18 +3529,15 @@ tripoint_abs_ms vehicle::mount_to_tripoint_abs( const point_rel_ms &mount,
     return pos_abs() + mnt_translated;
 }
 
-point_rel_ms vehicle::tripoint_to_mount(
-    const tripoint_abs_ms &p,
-    const point_rel_ms &offset ) const
+tripoint_rel_ms vehicle::tripoint_to_mount( const tripoint_bub_ms &p ) const
 {
-    const tripoint_rel_ms rel = p - pos_abs();
+    const tripoint_rel_ms translated = p - pos_bub( get_map() );
 
-    point_rel_ms mount_with_offset;
-    coord_translate_reverse(
-        pivot_rotation[0], pivot_anchor[0], rel, mount_with_offset
-    );
+    tripoint_rel_ms mount_with_offset;
+    point_rel_ms temp_point = mount_with_offset.xy();
+    coord_translate_reverse( pivot_rotation[0], pivot_anchor[0], translated, temp_point );
 
-    return mount_with_offset - offset;
+    return mount_with_offset;
 }
 
 int vehicle::angle_to_increment( units::angle dir )
@@ -3601,12 +3599,12 @@ bool vehicle::check_rotated_intervening( const point_rel_ms &from, const point_r
         }
 
     } else { //Mostly vertical move
-        point_rel_ms t1 = from + point_rel_ms( delta.x, delta.y / 2 );
+        point_rel_ms t1 = from + point_rel_ms( delta.x(), delta.y() / 2 );
         if( check( this, t1 ) ) {
             return true;
         }
 
-        point_rel_ms t2 = from + point_rel_ms( 0, delta.y / 2 );
+        point_rel_ms t2 = from + point_rel_ms( 0, delta.y() / 2 );
         if( check( this, t2 ) ) {
             return true;
         }
@@ -3615,16 +3613,16 @@ bool vehicle::check_rotated_intervening( const point_rel_ms &from, const point_r
     return false;
 }
 
-bool vehicle::allowed_light( const point_bub_ms &from, const point_bub_ms &to ) const
+bool vehicle::allowed_light( const point_rel_ms &from, const point_rel_ms &to ) const
 {
-    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_bub_ms & p ) {
+    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_rel_ms & p ) {
         return ( veh->opaque_at_position( p ) == -1 );
     } );
 }
 
-bool vehicle::allowed_move( const point_bub_ms &from, const point_bub_ms &to ) const
+bool vehicle::allowed_move( const point_rel_ms &from, const point_rel_ms &to ) const
 {
-    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_bub_ms & p ) {
+    return check_rotated_intervening( from, to, []( const vehicle * veh, const point_rel_ms & p ) {
         return ( veh->obstacle_at_position( p ) == -1 );
     } );
 }

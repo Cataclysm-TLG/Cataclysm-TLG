@@ -7826,7 +7826,8 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                         lowest_concealment = 0;
                         return false;
                     }
-                    if( obscured_by_vehicle_rotation( tripoint_bub_ms( last_point, T.z() ), tripoint_bub_ms( new_point, T.z() ) ) ) {
+                    if( obscured_by_vehicle_rotation( tripoint_bub_ms( last_point, T.z() ), tripoint_bub_ms( new_point,
+                                                      T.z() ) ) ) {
                         return false;
                     }
                     if( lowest_concealment < 0 ) {
@@ -8338,7 +8339,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
             }
 
             const int cost = this->move_cost( new_point );
-            if( ( cost < cost_min || cost > cost_max ) || obstructed_by_vehicle_rotation( tripoint_bub_ms( last_point, t.z() ), tripoint_bub_ms( new_point,
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( tripoint_bub_ms( last_point, t.z() ), tripoint_bub_ms( new_point,
                                                 t.z() ) ) ) {
                 is_clear = false;
                 return false;
@@ -8382,7 +8384,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint_bub_ms & new_point ) {
         if( new_point == t ) {
             const int cost = move_cost( new_point );
-            if( ( cost < cost_min || cost > cost_max ) || obstructed_by_vehicle_rotation( last_point, new_point ) ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
             }
             return false;
@@ -8390,13 +8393,15 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
 
         if( new_point.z() == last_point.z() ) {
             const int cost = move_cost( new_point );
-            if( ( cost < cost_min || cost > cost_max ) || obstructed_by_vehicle_rotation( last_point, new_point ) ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
                 return false;
             }
         } else {
             const int cost = move_cost( new_point );
-            if( ( cost < cost_min || cost > cost_max ) || obstructed_by_vehicle_rotation( last_point, new_point ) ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
                 return false;
             }
@@ -8437,14 +8442,14 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
 
 
 bool map::obstructed_by_vehicle_rotation( const tripoint_bub_ms &from,
-                                          const tripoint_bub_ms &to ) const
+        const tripoint_bub_ms &to ) const
 {
     if( !inbounds( from ) || !inbounds( to ) ) {
         return false;
     }
 
     if( from.z() != to.z() ) {
-        const tripoint flattened( from.xy(), to.z() );
+        const tripoint_bub_ms flattened( from.x(), from.y(), to.z() );
         if( obstructed_by_vehicle_rotation( flattened, to ) ) {
             return true;
         }
@@ -8470,7 +8475,8 @@ bool map::obstructed_by_vehicle_rotation( const tripoint_bub_ms &from,
 }
 
 
-bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const
+bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from,
+                                        const tripoint_bub_ms &to ) const
 {
     if( !inbounds( from ) || !inbounds( to ) ) {
         return false;
@@ -8478,7 +8484,7 @@ bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from, const tripo
 
     if( from.z() != to.z() ) {
         //Split it into two checks, one for each z level
-        tripoint_bub_ms flattened = {from.xy(), to.z()};
+        const tripoint_bub_ms flattened( from.x(), from.y(), to.z() );
         if( obscured_by_vehicle_rotation( flattened, to ) ) {
             return true;
         }
@@ -10314,38 +10320,38 @@ static void vehicle_caching_internal( level_cache &zch, const vpart_reference &v
         floor_cache[part_pos.x()][part_pos.y()] = true;
     }
 
-    point_bub_ms t = v->tripoint_to_mount( part_pos + point::north_west );
-    if( !v->allowed_light( t, vp.mount() ) ) {
+    point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
+    if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
         obscured_cache[part_pos.x()][part_pos.y()].nw = true;
     }
-    if( !v->allowed_move( t, vp.mount() ) ) {
+    if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
         obstructed_cache[part_pos.x()][part_pos.y()].nw = true;
     }
 
-    t = v->tripoint_to_mount( part_pos + point::north_east );
-    if( !v->allowed_light( t, vp.mount() ) ) {
+    t = v->tripoint_to_mount( part_pos + point::north_east ).xy();
+    if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
         obscured_cache[part_pos.x()][part_pos.y()].ne = true;
     }
-    if( !v->allowed_move( t, vp.mount() ) ) {
+    if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
         obstructed_cache[part_pos.x()][part_pos.y()].ne = true;
     }
 
     if( part_pos.x() > 0 && part_pos.y() < MAPSIZE_Y - 1 ) {
-        t = v->tripoint_to_mount( part_pos + point::south_west );
-        if( !v->allowed_light( t, vp.mount() ) ) {
+        t = v->tripoint_to_mount( part_pos + point::south_west ).xy();
+        if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
             obscured_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
         }
-        if( !v->allowed_move( t, vp.mount() ) ) {
+        if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
             obstructed_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
         }
     }
 
     if( part_pos.x() < MAPSIZE_X - 1 && part_pos.y() < MAPSIZE_Y - 1 ) {
-        t = v->tripoint_to_mount( part_pos + point::south_east );
-        if( !v->allowed_light( t, vp.mount() ) ) {
+        t = v->tripoint_to_mount( part_pos + point::south_east ).xy();
+        if( !v->allowed_light( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
             obscured_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
         }
-        if( !v->allowed_move( t, vp.mount() ) ) {
+        if( !v->allowed_move( t, rebase_rel( vp.pos_bub( here ) ).xy() ) ) {
             obstructed_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
         }
     }
@@ -10398,7 +10404,7 @@ void map::build_map_cache( const int zlev, bool skip_lightmap )
         bool floor_cache_was_dirty = build_floor_cache( z );
         seen_cache_dirty |= floor_cache_was_dirty;
         seen_cache_dirty |= get_cache( z ).seen_cache_dirty;
-                diagonal_blocks fill = {false, false};
+        diagonal_blocks fill = {false, false};
         std::uninitialized_fill_n( &( get_cache( z ).vehicle_obscured_cache[0][0] ), MAPSIZE_X * MAPSIZE_Y,
                                    fill );
         std::uninitialized_fill_n( &( get_cache( z ).vehicle_obstructed_cache[0][0] ),
@@ -11025,12 +11031,12 @@ void map::scent_blockers( std::array<std::array<char, MAPSIZE_X>, MAPSIZE_Y> &sc
         // We need to generate the x/y coordinates, because we can't get them "for free"
         const point_sm_ms p = lp + coords::project_to<coords::ms>( gp.xy() );
         if( sm->get_ter( lp ).obj().has_flag( block ) ) {
-        scent_transfer[p.x()][p.y()] = 0;
+            scent_transfer[p.x()][p.y()] = 0;
         } else if( sm->get_ter( lp ).obj().has_flag( reduce ) ||
                    sm->get_furn( lp ).obj().has_flag( reduce ) ) {
-scent_transfer[p.x()][p.y()] = 1;
+            scent_transfer[p.x()][p.y()] = 1;
         } else {
-scent_transfer[p.x()][p.y()] = 5;
+            scent_transfer[p.x()][p.y()] = 5;
         }
 
         return ITER_CONTINUE;
