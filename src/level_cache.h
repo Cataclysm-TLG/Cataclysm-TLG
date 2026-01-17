@@ -16,6 +16,12 @@
 
 class vehicle;
 
+//This is included in the global namespace rather than within level_cache as c++ doesn't allow forward declarations within a namespace
+struct diagonal_blocks {
+    bool nw;
+    bool ne;
+};
+
 struct level_cache {
     public:
         // Zeros all relevant values
@@ -51,6 +57,13 @@ struct level_cache {
         // stores cached transparency of the tiles
         // units: "transparency" (see LIGHT_TRANSPARENCY_OPEN_AIR)
         cata::mdarray<float, point_bub_ms>transparency_cache;
+
+        // true when light entering a tile diagonally is blocked by the walls of a turned vehicle. The direction is the direction that the light must be travelling.
+        // check the nw value of x+1, y+1 to find the se value of a tile and the ne of x-1, y+1 for sw
+        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obscured_cache;
+
+        // same as above but for obstruction rather than light
+        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obstructed_cache;
 
         // materialized  (transparency_cache[i][j] > LIGHT_TRANSPARENCY_SOLID)
         // doesn't consider fields (i.e. if tile is covered in thick smoke, it's still

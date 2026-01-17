@@ -5032,7 +5032,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             add_msg( _( "%s was stunned!" ), targ->name() );
         }
         for( size_t i = 1; i < traj.size(); i++ ) {
-            if( here.impassable( traj[i].xy() ) ) {
+            if( here.impassable( traj[i].xy() ) || m.obstructed_by_vehicle_rotation( tp, traj[i] ) ) {
                 targ->setpos( here, traj[i - 1] );
                 force_remaining = traj.size() - i;
                 if( stun != 0 ) {
@@ -5085,6 +5085,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                     add_msg( _( "The %s flops around and dies!" ), targ->name() );
                 }
             }
+            tp = traj[i];
         }
     } else if( npc *const targ = creatures.creature_at<npc>( tp ) ) {
         if( stun > 0 ) {
@@ -5092,7 +5093,8 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             add_msg( _( "%s was stunned!" ), targ->get_name() );
         }
         for( size_t i = 1; i < traj.size(); i++ ) {
-            if( here.impassable( traj[i].xy() ) ) { // oops, we hit a wall!
+            if( here.impassable( traj[i].xy() ) ||
+                here.obstructed_by_vehicle_rotation( tp, traj[i] ) ) {
                 targ->setpos( here, traj[i - 1] );
                 force_remaining = traj.size() - i;
                 if( stun != 0 ) {
@@ -5158,7 +5160,8 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                      stun );
         }
         for( size_t i = 1; i < traj.size(); i++ ) {
-            if( here.impassable( traj[i] ) ) { // oops, we hit a wall!
+            if( here.impassable( traj[i] ) ||
+                here.obstructed_by_vehicle_rotation( tp, traj[i] ) ) { // oops, we hit a wall!
                 u.setpos( here, traj[i - 1] );
                 force_remaining = traj.size() - i;
                 if( stun != 0 ) {
@@ -5193,6 +5196,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
                 break;
             } else if( creatures.creature_at( traj[i] ) ) {
                 u.setpos( here, traj[i - 1] );
+                tp = traj[i];
                 force_remaining = traj.size() - i;
                 if( stun != 0 ) {
                     if( u.has_effect( effect_stunned ) ) {
@@ -5226,6 +5230,7 @@ void game::knockback( std::vector<tripoint_bub_ms> &traj, int stun, int dam_mult
             } else {
                 u.setpos( here,  traj[i] );
             }
+            tp = traj[i];
         }
     }
 }
@@ -6635,10 +6640,10 @@ void game::peek()
         }
     }
 
-    if( here.impassable( new_pos ) ) {
+    if( here.impassable( new_pos ) ||
+        here.obstructed_by_vehicle_rotation( u.pos_bub(), u.pos_bub() + *p ) ) {
         return;
     }
-
     peek( new_pos );
 }
 
@@ -12201,6 +12206,9 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
 {
     map &here = get_map();
     tripoint_bub_ms pos = c->pos_bub( here );
+    tripoint_bub_ms prev_point = pos;
+    bool force_next = false;
+    tripoint_bub_ms next_forced;
 
     if( c == nullptr ) {
         debugmsg( "game::fling_creature invoked on null target" );
@@ -12272,10 +12280,26 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
         // TODO: Check whenever it is actually in the viewport
         // or maybe even just redraw the changed tiles
         bool seen = is_u || u.sees( here, *c ); // To avoid redrawing when not seen
-        tdir.advance();
-        pt.x() += tdir.dx();
-        pt.y() += tdir.dy();
+        if( force_next ) {
+            pt = next_forced;
+            force_next = false;
+        } else {
+            tdir.advance();
+            pt.x() = c->pos_bub().x() + tdir.dx();
+            pt.y() = c->pos_bub().y() + tdir.dy();
+        }
         float force = 0.0f;
+        if( here.obstructed_by_vehicle_rotation( prev_point, pt ) ) {
+            //We process the intervening tile on this iteration and then the current tile on the next
+            next_forced = pt;
+            force_next = true;
+            if( one_in( 2 ) ) {
+                pt.x() = prev_point.x();
+            } else {
+                pt.y() = prev_point.y();
+            }
+        }
+
         if( monster *const mon_ptr = creatures.creature_at<monster>( pt ) ) {
             monster &critter = *mon_ptr;
             if( !c->is_monster() || ( c->is_monster() && c->as_monster() != &critter ) ) {
@@ -12367,7 +12391,11 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
             // although at lower velocity
             break;
         }
-        range--;
+        //Vehicle wall tiles don't count for range
+        if( !force_next ) {
+            range--;
+        }
+        prev_point = pt;
         if( range <= 1 ) {
             c->remove_effect( effect_airborne );
         }

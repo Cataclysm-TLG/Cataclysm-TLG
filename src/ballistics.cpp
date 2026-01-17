@@ -238,6 +238,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                         const weakpoint_attack &wp_attack )
 {
     const bool do_animation = get_option<bool>( "ANIMATION_PROJECTILES" );
+    bool skip_hit = false;
 
     double range = std::round( trig_dist_z_adjust( source, target_arg ) );
 
@@ -487,7 +488,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
             }
 
             monster *mon = dynamic_cast<monster *>( critter );
-            int distance = rl_dist( source, tp );
+            int distance = square_dist( source, tp );
             // ignore non-point-blank digging targets (since they are underground)
             if( mon != nullptr && mon->digging() &&
                 distance > 1 ) {
@@ -495,9 +496,14 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 mon = nullptr;
             }
 
+            // We will need to skip the point blank hit if we're diagonally obstructed.
+            if( here->obstructed_by_vehicle_rotation( source, tp ) ) {
+                skip_hit = true;
+            }
+
             // Reset hit critter from the last iteration
             attack.last_hit_critter = nullptr;
-
+            bool did_shoot = false;
             // If we shot us a monster...
             // TODO: add size effects to accuracy
             // If there's a monster in the path of our bullet, and either our aim was true,
@@ -513,7 +519,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                                           critter->ranged_target_size(), 0.4 );
             }
 
-            if( critter != nullptr && cur_missed_by < 1.0 ) {
+            if( !skip_hit && critter != nullptr && cur_missed_by < 1.0 ) {
                 if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh &&
                     critter->is_avatar() ) {
                     // Turret either was aimed by the player (who is now ducking) and shoots from above
@@ -562,7 +568,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 }
             } else if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh ) {
                 // Don't do anything, especially don't call map::shoot as this would damage the vehicle
-            } else {
+            } else if( !did_shoot ) {
                 if( proj.count > 1 && distance > 1 ) {
                     multishot = true;
                     proj.multishot = true;

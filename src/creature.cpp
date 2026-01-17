@@ -569,7 +569,9 @@ bool Creature::sees( const map &here, const Creature &critter ) const
         // Hallucinations are imaginations of the player character, npcs or monsters don't hallucinate.
         return false;
     }
-
+    if( here.obscured_by_vehicle_rotation( pos_bub(), critter.pos_bub() ) ) {
+        return false;
+    }
     // Creature has stumbled into an invisible player and is now aware of them.
     // REVIEW: Why is this only done for the player?
     if( has_effect( effect_stumbled_into_invisible ) &&
@@ -582,7 +584,6 @@ bool Creature::sees( const map &here, const Creature &critter ) const
     auto visible = []( const Character * ch ) {
         return ch == nullptr || !ch->is_invisible();
     };
-
     // Can always see adjacent monsters on the same level, or vertically adjacent if there's LoS.
     if( target_range < 2 && posz() == critter.posz() ) {
         return true;
@@ -959,6 +960,10 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
         return false;
     }
 
+    if( !can_squeeze_to( target->pos_bub() ) ) {
+        return false;
+    }
+
     // Explicitly check for Z difference > 1
     if( std::abs( posz() - target->posz() ) > 1 ) {
 
@@ -985,6 +990,12 @@ bool Creature::is_adjacent( const Creature *target, const bool allow_z_levels ) 
     const tripoint_bub_ms above{ down.xy(), up.z()};
     return ( !here.has_floor( up ) || here.ter( up )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) ) &&
            ( !here.has_floor( above ) || here.ter( above )->has_flag( ter_furn_flag::TFLAG_GOES_DOWN ) );
+}
+
+bool Creature::can_squeeze_to( const tripoint_bub_ms &p ) const
+{
+    map &here = get_map();
+    return !here.obstructed_by_vehicle_rotation( pos_bub(), p );
 }
 
 int Creature::deal_melee_attack( Creature *source, int hitroll )

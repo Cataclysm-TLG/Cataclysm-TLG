@@ -1315,7 +1315,8 @@ static bool sinkhole_safety_roll( Character &you, const itype_id &itemname, cons
 
     std::vector<tripoint_bub_ms> safe;
     for( const tripoint_bub_ms &tmp : here.points_in_radius( you.pos_bub(), 1 ) ) {
-        if( here.passable_through( tmp ) && here.tr_at( tmp ) != tr_pit ) {
+        if( here.passable_through( tmp ) && here.tr_at( tmp ) != tr_pit &&
+            !here.obstructed_by_vehicle_rotation( you.pos_bub(), tmp ) ) {
             safe.push_back( tmp );
         }
     }

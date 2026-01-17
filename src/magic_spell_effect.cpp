@@ -147,14 +147,16 @@ static bool between_or_on( const point_rel_ms &a0, const point_rel_ms &a1, const
 // Builds line until obstructed or outside of region bound by near and far lines. Stores result in set
 static void build_line( spell_detail::line_iterable line, const tripoint_bub_ms &source,
                         const point_rel_ms &delta, const point_rel_ms &delta_perp,
-                        bool ( *test )( const tripoint_bub_ms & ),
+                        bool ( *test )( const tripoint_bub_ms &, const tripoint_bub_ms & ),
                         std::set<tripoint_bub_ms> &result )
 {
+    tripoint_bub_ms last_point = source;
     while( between_or_on( point_rel_ms::zero, delta, delta_perp, line.get() ) ) {
-        if( !test( source + line.get() ) ) {
+        if( !test( source + line.get(), last_point ) ) {
             break;
         }
         result.emplace( source + line.get() );
+        last_point = source + line.get();
         line.next();
     }
 }
@@ -224,7 +226,7 @@ void spell_effect::pain_split( const spell &sp, Creature &caster, const tripoint
 static bool in_spell_aoe( const tripoint_bub_ms &start, const tripoint_bub_ms &end,
                           const int &radius, const bool ignore_walls )
 {
-    if( rl_dist( start, end ) > radius ) {
+    if( static_cast<int>( std::round( trig_dist_z_adjust( start, end ) ) ) > radius ) {
         return false;
     }
     if( ignore_walls ) {
@@ -234,11 +236,14 @@ static bool in_spell_aoe( const tripoint_bub_ms &start, const tripoint_bub_ms &e
         return true;
     }
     map &here = get_map();
+    tripoint_bub_ms last_point = start;
     const std::vector<tripoint_bub_ms> trajectory = line_to( start, end );
     for( const tripoint_bub_ms &pt : trajectory ) {
-        if( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) {
+        if( ( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) ||
+            here.obstructed_by_vehicle_rotation( pt, last_point ) ) {
             return false;
         }
+        last_point = pt;
     }
     return true;
 }
@@ -267,6 +272,7 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
     const units::angle start_angle = initial_angle - half_width;
     const units::angle end_angle = initial_angle + half_width;
     std::set<tripoint_bub_ms> end_points;
+    tripoint_bub_ms last_point = source;
     for( units::angle angle = start_angle; angle <= end_angle; angle += 1_degrees ) {
         for( int range = 1; range <= params.range; range++ ) {
             tripoint potential;
@@ -284,11 +290,13 @@ static std::set<tripoint_bub_ms> spell_effect_cone_range_override(
         for( const tripoint_bub_ms &ep : end_points ) {
             std::vector<tripoint_bub_ms> trajectory = line_to( source, ep );
             for( const tripoint_bub_ms &tp : trajectory ) {
-                if( here.coverage( tp ) == 0 || rng( 1, 100 ) > here.coverage( tp ) ) {
+                if( here.obstructed_by_vehicle_rotation( tp, last_point ) || here.coverage( tp ) == 0 ||
+                    rng( 1, 100 ) > here.coverage( tp ) ) {
                     targets.emplace( tp );
                 } else {
                     break;
                 }
+                last_point = tp;
             }
         }
     }
@@ -304,14 +312,16 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_cone( const override_parame
     return spell_effect_cone_range_override( params, source, target );
 }
 
-static bool test_always_true( const tripoint_bub_ms & )
+static bool test_always_true( const tripoint_bub_ms &, const tripoint_bub_ms & )
 {
     return true;
 }
 
-static bool test_coverage( const tripoint_bub_ms &p )
+static bool test_coverage( const tripoint_bub_ms &p, const tripoint_bub_ms &prev )
 {
-    return get_map().coverage( p ) == 0 || rng( 1, 100 ) > get_map().coverage( p );
+    map &here = get_map();
+    return here.coverage( p ) == 0 || rng( 1, 100 ) > here.coverage( p ) ||
+           here.obstructed_by_vehicle_rotation( prev, p );
 }
 
 std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parameters &params,
@@ -340,7 +350,8 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
     // is delta aligned with, cw, or ccw of primary axis
     int delta_side = spell_detail::side_of( point_rel_ms::zero, axis_delta, delta );
 
-    bool ( *test )( const tripoint_bub_ms & ) = params.ignore_walls ? test_always_true : test_coverage;
+    bool ( *test )( const tripoint_bub_ms &,
+                    const tripoint_bub_ms & ) = params.ignore_walls ? test_always_true : test_coverage;
 
     // Canonical path from source to target, offset to local space
     std::vector<point_rel_ms> path_to_target = line_to( point_rel_ms::zero, delta );
@@ -359,25 +370,29 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
     // Add cw and ccw legs
     if( delta_side == 0 ) { // delta is already axis aligned, only need straight lines
         // cw leg
+        point_rel_ms prev_point;
         for( const point_rel_ms &p : line_to( point_rel_ms::zero, unit_cw_perp_axis * cw_len ) ) {
             base_line.reset( p );
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
 
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
         }
         // ccw leg
+        prev_point = point_rel_ms::zero;
         for( const point_rel_ms &p : line_to( point_rel_ms::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
 
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
+            prev_point = p;
         }
     } else if( delta_side == 1 ) { // delta is cw of primary axis
         // ccw leg is behind perp axis
+        point_rel_ms prev_point;
         for( const point_rel_ms &p : line_to( point_rel_ms::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
 
@@ -385,12 +400,14 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
             while( spell_detail::side_of( point_rel_ms::zero, delta_perp, base_line.get() ) == 1 ) {
                 base_line.next();
             }
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
+            prev_point = p;
         }
         // cw leg is before perp axis
+        prev_point = point_rel_ms::zero;
         for( const point_rel_ms &p : line_to( point_rel_ms::zero, unit_cw_perp_axis * cw_len ) ) {
             base_line.reset( p );
 
@@ -399,12 +416,14 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
                 base_line.prev();
             }
             base_line.next();
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
+            prev_point = p;
         }
     } else if( delta_side == -1 ) { // delta is ccw of primary axis
+        point_rel_ms prev_point;
         // ccw leg is before perp axis
         for( const point_rel_ms &p : line_to( point_rel_ms::zero, unit_cw_perp_axis * -ccw_len ) ) {
             base_line.reset( p );
@@ -414,7 +433,7 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
                 base_line.prev();
             }
             base_line.next();
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
@@ -427,10 +446,11 @@ std::set<tripoint_bub_ms> spell_effect::spell_effect_line( const override_parame
             while( spell_detail::side_of( point_rel_ms::zero, delta_perp, base_line.get() ) == 1 ) {
                 base_line.next();
             }
-            if( !test( source + p ) ) {
+            if( !test( source + p, source + prev_point ) ) {
                 break;
             }
             spell_detail::build_line( base_line, source, delta, delta_perp, test, result );
+            prev_point = p;
         }
     }
 
@@ -449,9 +469,10 @@ std::set<tripoint_bub_ms> calculate_spell_effect_area( const spell &sp,
     if( sp.shape() == spell_shape::blast && !sp.has_flag( spell_flag::NO_PROJECTILE ) ) {
         map &here = get_map();
         std::vector<tripoint_bub_ms> trajectory = line_to( caster.pos_bub(), target );
+        tripoint_bub_ms prev_point = caster.pos_bub();
         for( std::vector<tripoint_bub_ms>::iterator iter = trajectory.begin(); iter != trajectory.end();
              iter++ ) {
-            if( here.impassable( *iter ) ) {
+            if( here.impassable( *iter ) || here.obstructed_by_vehicle_rotation( prev_point, *iter ) ) {
                 if( iter != trajectory.begin() ) {
                     epicenter = *( iter - 1 );
                 } else {
@@ -459,6 +480,7 @@ std::set<tripoint_bub_ms> calculate_spell_effect_area( const spell &sp,
                 }
                 break;
             }
+            prev_point = *iter;
         }
     }
 
@@ -905,7 +927,8 @@ int area_expander::run( const tripoint_bub_ms &center )
             node &best = area[best_index];
             const tripoint_bub_ms &pt = best.position + point( x_offset[ i ], y_offset[ i ] );
 
-            if( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) {
+            if( ( here.coverage( pt ) > 0 && rng( 1, 100 ) < here.coverage( pt ) ) ||
+                here.obstructed_by_vehicle_rotation( best.position, pt ) ) {
                 continue;
             }
 

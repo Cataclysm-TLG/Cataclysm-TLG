@@ -224,15 +224,17 @@ std::array<std::pair<tripoint_bub_ms, maptile>, 8> map::get_neighbors( const tri
     };
 }
 
-bool map::gas_can_spread_to( field_entry &cur, const maptile &dst )
+bool map::gas_can_spread_to( field_entry &cur, const tripoint_bub_ms &src,
+                             const tripoint_bub_ms &dst )
 {
-    const field_entry *tmpfld = dst.get_field().find_field( cur.get_field_type() );
+    maptile dst_tile = maptile_at( dst );
+    const field_entry *tmpfld = dst_tile.get_field().find_field( cur.get_field_type() );
     // Candidates are existing weaker fields or navigable/flagged tiles with no field.
     if( tmpfld == nullptr || tmpfld->get_field_intensity() < cur.get_field_intensity() ) {
-        const ter_t &ter = dst.get_ter_t();
-        const furn_t &frn = dst.get_furn_t();
-        return ter_furn_movecost( ter, frn ) > 0 ||
-               ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_PERMEABLE );
+        const ter_t &ter = dst_tile.get_ter_t();
+        const furn_t &frn = dst_tile.get_furn_t();
+        return !obstructed_by_vehicle_rotation( src, dst ) && ( ter_furn_movecost( ter, frn ) > 0 ||
+                ter_furn_has_flag( ter, frn, ter_furn_flag::TFLAG_PERMEABLE ) );
     }
     return false;
 }
@@ -301,8 +303,8 @@ void map::spread_gas( field_entry &cur, const tripoint_bub_ms &p, int percent_sp
     // TODO: Make fall and rise chances parameters to enable heavy/light gas
     if( p.z() > -OVERMAP_DEPTH ) {
         const tripoint_bub_ms down = p + tripoint_rel_ms::below;
-        maptile down_tile = maptile_at_internal( down );
-        if( gas_can_spread_to( cur, down_tile ) && valid_move( p, down, true, true ) ) {
+        if( gas_can_spread_to( cur, p, down ) && valid_move( p, down, true, true ) ) {
+            maptile down_tile = maptile_at_internal( down );
             gas_spread_to( cur, down_tile, down );
             return;
         }
@@ -319,7 +321,7 @@ void map::spread_gas( field_entry &cur, const tripoint_bub_ms &p, int percent_sp
          count != neighs.size();
          i = ( i + 1 ) % neighs.size(), count++ ) {
         const auto &neigh = neighs[i];
-        if( gas_can_spread_to( cur, neigh.second ) ) {
+        if( gas_can_spread_to( cur, p, neigh.first ) ) {
             spread.push_back( i );
         }
     }
@@ -352,8 +354,8 @@ void map::spread_gas( field_entry &cur, const tripoint_bub_ms &p, int percent_sp
         }
     } else if( p.z() < OVERMAP_HEIGHT ) {
         const tripoint_bub_ms up = p + tripoint_rel_ms::above;
-        maptile up_tile = maptile_at_internal( up );
-        if( gas_can_spread_to( cur, up_tile ) && valid_move( p, up, true, true ) ) {
+        if( gas_can_spread_to( cur, p, up ) && valid_move( p, up, true, true ) ) {
+            maptile up_tile = maptile_at_internal( up );
             gas_spread_to( cur, up_tile, up );
         }
     }
@@ -664,6 +666,9 @@ static void field_processor_fd_electricity( const tripoint_bub_ms &p, field_entr
     bool valid_candidates = false;
     for( const tripoint_bub_ms &dst : points_in_radius( p, 1 ) ) {
         if( !pd.here.inbounds( dst ) ) {
+            continue;
+        }
+        if( pd.here.obstructed_by_vehicle_rotation( p, dst ) ) {
             continue;
         }
         // Skip tiles with intense fields
@@ -2213,8 +2218,9 @@ void map::propagate_field( const tripoint_bub_ms &center, const field_type_id &t
                     closed.insert( pt );
                     continue;
                 }
-
-                open.emplace( static_cast<float>( rl_dist( center, pt ) ), pt );
+                if( !obstructed_by_vehicle_rotation( gp.second, pt ) ) {
+                    open.emplace( static_cast<float>( rl_dist( center, pt ) ), pt );
+                }
             }
         }
     }

@@ -4729,7 +4729,26 @@ void map::crush( const tripoint_bub_ms &p )
     }
 }
 
-void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+int map::calculate_vehicle_coverage( const tripoint_bub_ms &pt ) const
+{
+    int coverage = 0;
+    if( const optional_vpart_position vp = veh_at( pt ) ) {
+        const bool is_obstacle = vp->obstacle_at_part().has_value();
+        const bool is_quarterpanel = vp->part_with_feature( VPFLAG_HALF_BOARD, false ).has_value();
+        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false ).has_value();
+        if( is_obstacle ) {
+            coverage = 100;
+        } else if( is_quarterpanel ) {
+            coverage = 60;
+        } else if( !is_aisle ) {
+            coverage = 45;
+        }
+    }
+    return coverage;
+}
+
+
+void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                  const bool hit_items, double dispersion )
 {
     // TODO: make bashing better a destroying, worse at penetrating
@@ -4762,7 +4781,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     const bool ignite = ammo_effects.count( ammo_effect_IGNITE );
     const bool laser = ammo_effects.count( ammo_effect_LASER );
 
-    int dist = rl_dist( source, p );
+    int dist = static_cast<int>( std::round( trig_dist_z_adjust( source, p ) ) );
     // Manually check coverage sources as coverage() isn't smart enough.
     int furn_coverage = 0;
     if( furn( p ) != f_null ) {
@@ -4774,38 +4793,100 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     }
     int veh_coverage = 0;
     if( const optional_vpart_position vp = veh_at( p ) ) {
-        const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_quarterpanel =  vp->part_with_feature( VPFLAG_HALF_BOARD, false ).has_value();
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false ).has_value();
-        if( is_obstacle ) {
-            veh_coverage = 100;
-        } else if( is_quarterpanel ) {
-            veh_coverage = 60;
-        } else if( !is_aisle ) {
-            veh_coverage = 45;
-        }
+        veh_coverage = calculate_vehicle_coverage( p );
     }
-    // Prevent vehicle turrets and creatures in vehicles from shooting their own vehicles.
-    // TODO: Multi-Z level vehicles.
-    if( veh_at( p ) ) {
-        bool same_vehicle = &veh_at( source )->vehicle() == &veh_at( p )->vehicle();
-        if( same_vehicle ) {
+    const point_rel_ms delta = source.xy() - p.xy();
+    const point_rel_ms step( sgn( delta.x() ), sgn( delta.y() ) );
+    const tripoint_bub_ms prev = p - step;
+    if( obstructed_by_vehicle_rotation( source, p ) ) {
+        const tripoint_bub_ms side1 = { source.x() - delta.x(), source.y(), source.z() };
+        const tripoint_bub_ms side2 = { source.x(), source.y() - delta.y(), source.z() };
+
+        if( veh_at( side1 ) && veh_at( side2 ) ) {
+            if( one_in( 2 ) ) {
+                p = side1;
+            } else {
+                p = side2;
+            }
+        } else if( veh_at( side1 ) ) {
+            p = side1;
+        } else if( veh_at( side2 ) ) {
+            p = side2;
+        } else {
+            debugmsg( "map::shoot: projectile obstructed by vehicle rotation but could not find vehicle." );
+        }
+
+        // Recalculate coverage values for updated p
+        if( const optional_vpart_position vp = veh_at( p ) ) {
+            veh_coverage = calculate_vehicle_coverage( p );
+        } else {
             veh_coverage = 0;
+        }
+
+        if( furn( p ) != f_null ) {
+            furn_coverage = furn( p )->coverage;
+        } else {
+            furn_coverage = 0;
+        }
+
+        if( ter( p ) != t_null ) {
+            ter_coverage = ter( p )->coverage;
+        } else {
+            ter_coverage = 0;
+        }
+    } else if( obstructed_by_vehicle_rotation( prev, p ) ) {
+        const point_rel_ms delta_2 = p.xy() - prev.xy();
+        if( std::abs( delta_2.x() ) == 1 && std::abs( delta_2.y() ) == 1 ) {
+            const tripoint_bub_ms side1 = { prev.x() + delta_2.x(), prev.y(), prev.z() };
+            const tripoint_bub_ms side2 = { prev.x(), prev.y() + delta_2.y(), prev.z() };
+            if( veh_at( side1 ) && veh_at( side2 ) ) {
+                if( one_in( 2 ) ) {
+                    p = side1;
+                } else {
+                    p = side2;
+                }
+            } else if( veh_at( side1 ) ) {
+                p = side1;
+            } else if( veh_at( side2 ) ) {
+                p = side2;
+            } else {
+                debugmsg( "map::shoot: projectile obstructed by vehicle rotation but could not find vehicle." );
+            }
+        } else {
+            debugmsg( "map::shoot: obstructed_by_vehicle_rotation returned true for non-diagonal step." );
+        }
+
+        // Recalculate coverage values for updated p
+        if( const optional_vpart_position vp = veh_at( p ) ) {
+            veh_coverage = calculate_vehicle_coverage( p );
+        } else {
+            veh_coverage = 0;
+        }
+
+        if( furn( p ) != f_null ) {
+            furn_coverage = furn( p )->coverage;
+        } else {
+            furn_coverage = 0;
+        }
+
+        if( ter( p ) != t_null ) {
+            ter_coverage = ter( p )->coverage;
+        } else {
+            ter_coverage = 0;
         }
     }
     int coverage = std::max( { veh_coverage, furn_coverage, ter_coverage } );
-
     bool veh_hit = false;
     bool furn_hit = false;
     bool ter_hit = false;
-
     if( veh_coverage == coverage && coverage != 0 ) {
         veh_hit = true;
     } else if( furn_coverage == coverage && coverage != 0 ) {
         furn_hit = true;
-    } else {
+    } else if( ter_coverage == coverage && coverage != 0 ) {
         ter_hit = true;
     }
+
     /** hit_items is true if we specifically targeted this tile and our ammo is a type that can
     * damage items. Checking it here means we can intentionally shoot a piece of cover point blank
     * and actually hit it if we want to do so for some reason.
@@ -4845,7 +4926,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
             // Did we hit the ter/furn/veh?
             hit_something = true;
             bool laser_passthrough = false;
-            if( ter_hit || furn_hit ) {
+            if( ter_hit || furn_hit || veh_hit ) {
                 // Does the ter/furn have shoot data? If so, it will run this lambda first.
                 const auto shoot_furn_ter = [&]( const map_data_common_t &data ) {
                     if( !data.shoot ) {
@@ -4965,7 +5046,23 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
 
     // Now, smash items on that tile.
     // dam / 3, because bullets aren't all that good at destroying items...
-    smash_items( p, dam / 3, damage_message );
+    const auto &items_on_tile = i_at( p );
+    units::volume total_volume = 0_ml;
+
+    for( const item &it : items_on_tile ) {
+        total_volume += it.volume();
+    }
+
+    int chance = 150000 / std::max( 1, static_cast<int>( total_volume.value() ) );
+
+    // Cap max denominator at 100 to ensure minimum 1% chance
+    if( chance > 100 ) {
+        chance = 100;
+    }
+
+    if( one_in( chance ) ) {
+        smash_items( p, dam / 3, damage_message );
+    }
 }
 
 bool map::hit_with_acid( const tripoint_bub_ms &p )
@@ -7056,15 +7153,27 @@ void map::add_splatter_trail( const field_type_id &type, const tripoint_bub_ms &
     if( !type.id() ) {
         return;
     }
-    const auto trail = line_to( from, to );
+    auto trail = line_to( from, to );
     int remainder = trail.size();
-    for( const tripoint_bub_ms &elem : trail ) {
+    tripoint_bub_ms last_point = from;
+    for( tripoint_bub_ms &elem : trail ) {
         add_splatter( type, elem );
         remainder--;
+        if( obstructed_by_vehicle_rotation( last_point, elem ) ) {
+            if( one_in( 2 ) ) {
+                elem.x() = last_point.x();
+                add_splatter( type, elem, remainder );
+            } else {
+                elem.y() = last_point.y();
+                add_splatter( type, elem, remainder );
+            }
+            return;
+        }
         if( impassable( elem ) ) { // Blood splatters stop at walls.
             add_splatter( type, elem, remainder );
             return;
         }
+        last_point = elem;
     }
 }
 
@@ -7792,9 +7901,10 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
 
     // 2D Bresenham
     if( F.z() == T.z() ) {
+        point_bub_ms last_point = F.xy();
         bresenham( F.xy(), T.xy(), offset,
                    [this, f_transparent, &visible, &T, &F, &found_concealment,
-              &lowest_concealment, &allow_cached]( const point_bub_ms & new_point ) {
+              &lowest_concealment, &allow_cached, &last_point]( const point_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
             if( new_point.x() == F.x() && new_point.y() == F.y() ) {
                 return true;
@@ -7802,6 +7912,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             if( new_point.x() == T.x() && new_point.y() == T.y() ) {
                 return false;
             }
+
             tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
             point_bub_ms T_point( T.x(), T.y() );
             point_bub_ms F_point( F.x(), F.y() );
@@ -7813,6 +7924,27 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                         lowest_concealment = 0;
                         return false;
                     }
+                    int concealment_1 = 0;
+                    int concealment_2 = 0;
+                    if( obstructed_by_vehicle_rotation( F, T ) ) {
+                        const tripoint_rel_ms delta = F - T;
+                        const tripoint_rel_ms step( sgn( delta.x() ), sgn( delta.y() ), delta.z() );
+                        const tripoint_bub_ms prev = F - step;
+                        const tripoint_rel_ms delta_2 = T - prev;
+                        if( std::abs( delta_2.x() ) == 1 && std::abs( delta_2.y() ) == 1 ) {
+                            const tripoint_bub_ms side1 = { prev.x() + delta_2.x(), prev.y(), prev.z() };
+                            const tripoint_bub_ms side2 = { prev.x(), prev.y() + delta_2.y(), prev.z() };
+                            if( veh_at( side1 ) ) {
+                                concealment_1 = concealment( side1 );
+                            }
+                            if( veh_at( side2 ) ) {
+                                concealment_2 = concealment( side2 );
+                            }
+                        } else {
+                            debugmsg( "map::sees_full: obstructed_by_vehicle_rotation returned true for non-diagonal step." );
+                        }
+                    }
+                    found_concealment = std::max( { concealment_1, concealment_2, concealment( tp ) } );
                     if( lowest_concealment < 0 ) {
                         lowest_concealment = found_concealment;
                         return true;
@@ -7827,6 +7959,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             if( !( this->*f_transparent )( tp ) ) {
                 visible = false;
             }
+            last_point = new_point;
             return true;
         } );
         // 3D Bresenham
@@ -8306,18 +8439,22 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
             return false; // Out of range!
         }
         bool is_clear = true;
+        point_bub_ms last_point = f.xy();
         bresenham( f.xy(), t.xy(), 0,
-        [this, &is_clear, cost_min, cost_max, &t]( const point_bub_ms & new_point ) {
+        [this, &is_clear, cost_min, cost_max, &t, &last_point]( const point_bub_ms & new_point ) {
             // Exit before checking the last square, it's still reachable even if it is an obstacle.
             if( new_point.x() == t.x() && new_point.y() == t.y() ) {
                 return false;
             }
 
             const int cost = this->move_cost( new_point );
-            if( cost < cost_min || cost > cost_max ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( tripoint_bub_ms( last_point, t.z() ), tripoint_bub_ms( new_point,
+                                                t.z() ) ) ) {
                 is_clear = false;
                 return false;
             }
+            last_point = new_point;
             return true;
         } );
         return is_clear;
@@ -8356,7 +8493,8 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
     [this, &is_clear, cost_min, cost_max, t, &last_point]( const tripoint_bub_ms & new_point ) {
         if( new_point == t ) {
             const int cost = move_cost( new_point );
-            if( cost < cost_min || cost > cost_max ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
             }
             return false;
@@ -8364,13 +8502,15 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
 
         if( new_point.z() == last_point.z() ) {
             const int cost = move_cost( new_point );
-            if( cost < cost_min || cost > cost_max ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
                 return false;
             }
         } else {
             const int cost = move_cost( new_point );
-            if( cost < cost_min || cost > cost_max ) {
+            if( ( cost < cost_min || cost > cost_max ) ||
+                obstructed_by_vehicle_rotation( last_point, new_point ) ) {
                 is_clear = false;
                 return false;
             }
@@ -8407,6 +8547,75 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
         return true;
     } );
     return is_clear;
+}
+
+
+bool map::obstructed_by_vehicle_rotation( const tripoint_bub_ms &from,
+        const tripoint_bub_ms &to ) const
+{
+    if( !inbounds( from ) || !inbounds( to ) ) {
+        return false;
+    }
+
+    if( from.z() != to.z() ) {
+        const tripoint_bub_ms flattened( from.x(), from.y(), to.z() );
+        if( obstructed_by_vehicle_rotation( flattened, to ) ) {
+            return true;
+        }
+    }
+
+    const point_rel_ms delta = to.xy() - from.xy();
+    const auto &cache = get_cache( from.z() ).vehicle_obstructed_cache;
+
+    if( delta == point_rel_ms::north_west ) {
+        return cache[from.x()][from.y()].nw;
+    }
+    if( delta == point_rel_ms::north_east ) {
+        return cache[from.x()][from.y()].ne;
+    }
+    if( delta == point_rel_ms::south_west ) {
+        return cache[to.x()][to.y()].ne;
+    }
+    if( delta == point_rel_ms::south_east ) {
+        return cache[to.x()][to.y()].nw;
+    }
+
+    return false;
+}
+
+
+bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from,
+                                        const tripoint_bub_ms &to ) const
+{
+    if( !inbounds( from ) || !inbounds( to ) ) {
+        return false;
+    }
+
+    if( from.z() != to.z() ) {
+        //Split it into two checks, one for each z level
+        const tripoint_bub_ms flattened( from.x(), from.y(), to.z() );
+        if( obscured_by_vehicle_rotation( flattened, to ) ) {
+            return true;
+        }
+    }
+
+    const point_rel_ms delta = to.xy() - from.xy();
+    const auto &cache = get_cache( from.z() ).vehicle_obstructed_cache;
+
+    if( delta == point_rel_ms::north_west ) {
+        return cache[from.x()][from.y()].nw;
+    }
+    if( delta == point_rel_ms::north_east ) {
+        return cache[from.x()][from.y()].ne;
+    }
+    if( delta == point_rel_ms::south_west ) {
+        return cache[to.x()][to.y()].ne;
+    }
+    if( delta == point_rel_ms::south_east ) {
+        return cache[to.x()][to.y()].nw;
+    }
+
+    return false;
 }
 
 bool map::accessible_items( const tripoint_bub_ms &t ) const
@@ -10185,21 +10394,22 @@ void map::build_floor_caches()
         build_floor_cache( z );
     }
 }
-
 static void vehicle_caching_internal( level_cache &zch, const vpart_reference &vp, vehicle *v )
 {
-    // TODO: Check if this is actually reasonable. Probably need to feed the map in.
-    // The guess is that the reality bubble should be affected, but that needs to be checked as well.
-    map &here =
-        reality_bubble();
+    map &here = reality_bubble();
     auto &outside_cache = zch.outside_cache;
     auto &transparency_cache = zch.transparency_cache;
     auto &floor_cache = zch.floor_cache;
+    auto &obscured_cache = zch.vehicle_obscured_cache;
+    auto &obstructed_cache = zch.vehicle_obstructed_cache;
 
     const size_t part = vp.part_index();
     const tripoint_bub_ms part_pos =  v->bub_part_pos( here, vp.part() );
 
-    bool vehicle_is_opaque = vp.has_feature( VPFLAG_OPAQUE ) && !vp.part().is_broken();
+    bool has_opaque = vp.has_feature( VPFLAG_OPAQUE );
+    bool is_broken = vp.part().is_broken();
+
+    bool vehicle_is_opaque = has_opaque && !is_broken;
 
     if( vehicle_is_opaque ) {
         int dpart = v->part_with_feature( part, VPFLAG_OPENABLE, true );
@@ -10217,7 +10427,44 @@ static void vehicle_caching_internal( level_cache &zch, const vpart_reference &v
     if( vp.has_feature( VPFLAG_BOARDABLE ) && !vp.part().is_broken() ) {
         floor_cache[part_pos.x()][part_pos.y()] = true;
     }
+
+    point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
+    if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+        obscured_cache[part_pos.x()][part_pos.y()].nw = true;
+    }
+    if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+        obstructed_cache[part_pos.x()][part_pos.y()].nw = true;
+    }
+
+    t = v->tripoint_to_mount( part_pos + point::north_east ).xy();
+    if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+        obscured_cache[part_pos.x()][part_pos.y()].ne = true;
+    }
+    if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+        obstructed_cache[part_pos.x()][part_pos.y()].ne = true;
+    }
+
+    if( part_pos.x() > 0 && part_pos.y() < MAPSIZE_Y - 1 ) {
+        t = v->tripoint_to_mount( part_pos + point::south_west ).xy();
+        if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+            obscured_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
+        }
+        if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+            obstructed_cache[part_pos.x() - 1][part_pos.y() + 1].ne = true;
+        }
+    }
+
+    if( part_pos.x() < MAPSIZE_X - 1 && part_pos.y() < MAPSIZE_Y - 1 ) {
+        t = v->tripoint_to_mount( part_pos + point::south_east ).xy();
+        if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+            obscured_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
+        }
+        if( !v->allowed_move( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
+            obstructed_cache[part_pos.x() + 1][part_pos.y() + 1].nw = true;
+        }
+    }
 }
+
 
 static void vehicle_caching_internal_above( level_cache &zch_above, const vpart_reference &vp,
         vehicle *v )
@@ -10238,10 +10485,12 @@ void map::do_vehicle_caching( int z )
     if( !ch ) {
         return;
     }
+    ch->vehicle_obscured_cache.fill( diagonal_blocks{} );
+    ch->vehicle_obstructed_cache.fill( diagonal_blocks{} );
     for( vehicle *v : ch->vehicle_list ) {
         for( const vpart_reference &vp : v->get_all_parts() ) {
             const tripoint_bub_ms part_pos = v->bub_part_pos( *this, vp.part() );
-            if( !inbounds( part_pos.xy() ) ) {
+            if( !inbounds( part_pos.xy() ) || vp.part().removed ) {
                 continue;
             }
             vehicle_caching_internal( get_cache( part_pos.z() ), vp, v );
@@ -10251,6 +10500,7 @@ void map::do_vehicle_caching( int z )
         }
     }
 }
+
 
 void map::build_map_cache( const int zlev, bool skip_lightmap )
 {
@@ -10264,6 +10514,18 @@ void map::build_map_cache( const int zlev, bool skip_lightmap )
         bool floor_cache_was_dirty = build_floor_cache( z );
         seen_cache_dirty |= floor_cache_was_dirty;
         seen_cache_dirty |= get_cache( z ).seen_cache_dirty;
+        constexpr diagonal_blocks empty_diagonal_block{ false, false };
+
+        auto &cache = get_cache( z );
+
+        std::fill( &cache.vehicle_obscured_cache[0][0],
+                   &cache.vehicle_obscured_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                   empty_diagonal_block );
+
+        std::fill( &cache.vehicle_obstructed_cache[0][0],
+                   &cache.vehicle_obstructed_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                   empty_diagonal_block );
+
     }
     // needs a separate pass as it changes the caches on neighbour z-levels (e.g. floor_cache);
     // otherwise such changes might be overwritten by main cache-building logic
@@ -10877,8 +11139,7 @@ void map::function_over( const tripoint_bub_ms &start, const tripoint_bub_ms &en
     }
 }
 
-void map::scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &blocks_scent,
-                          std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &reduces_scent,
+void map::scent_blockers( std::array<std::array<char, MAPSIZE_X>, MAPSIZE_Y> &scent_transfer,
                           const point_bub_ms &min, const point_bub_ms &max )
 {
     ter_furn_flag reduce = ter_furn_flag::TFLAG_REDUCE_SCENT;
@@ -10887,15 +11148,12 @@ void map::scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &bl
         // We need to generate the x/y coordinates, because we can't get them "for free"
         const point_sm_ms p = lp + coords::project_to<coords::ms>( gp.xy() );
         if( sm->get_ter( lp ).obj().has_flag( block ) ) {
-            blocks_scent[p.x()][p.y()] = true;
-            reduces_scent[p.x()][p.y()] = false;
+            scent_transfer[p.x()][p.y()] = 0;
         } else if( sm->get_ter( lp ).obj().has_flag( reduce ) ||
                    sm->get_furn( lp ).obj().has_flag( reduce ) ) {
-            blocks_scent[p.x()][p.y()] = false;
-            reduces_scent[p.x()][p.y()] = true;
+            scent_transfer[p.x()][p.y()] = 1;
         } else {
-            blocks_scent[p.x()][p.y()] = false;
-            reduces_scent[p.x()][p.y()] = false;
+            scent_transfer[p.x()][p.y()] = 5;
         }
 
         return ITER_CONTINUE;
@@ -10917,8 +11175,8 @@ void map::scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &bl
                 continue;
             }
             const tripoint_bub_ms part_pos = vp.pos_bub( *this );
-            if( local_bounds.contains( part_pos.xy() ) ) {
-                reduces_scent[part_pos.x()][part_pos.y()] = true;
+            if( local_bounds.contains( part_pos.xy() ) && scent_transfer[part_pos.x()][part_pos.y()] == 5 ) {
+                scent_transfer[part_pos.x()][part_pos.y()] = 1;
             }
         }
     }

@@ -551,6 +551,9 @@ class map
 
         const_maptile maptile_at( const tripoint_bub_ms &p ) const;
         maptile maptile_at( const tripoint_bub_ms &p );
+
+        /** Figure out the coverage provided by vehicle parts in a tile (absolute, not relative to shooter's position) */
+        int calculate_vehicle_coverage( const tripoint_bub_ms &p ) const;
     private:
         // Versions of the above that don't do bounds checks
         const_maptile maptile_at_internal( const tripoint_bub_ms &p ) const;
@@ -562,7 +565,7 @@ class map
                          const time_duration &outdoor_age_speedup, scent_block &sblk,
                          const oter_id &om_ter );
         void create_hot_air( const tripoint_bub_ms &p, int intensity );
-        bool gas_can_spread_to( field_entry &cur, const maptile &dst );
+        bool gas_can_spread_to( field_entry &cur, const tripoint_bub_ms &src, const tripoint_bub_ms &dst );
         void gas_spread_to( field_entry &cur, maptile &dst, const tripoint_bub_ms &p );
         int burn_body_part( Character &you, field_entry &cur, const bodypart_id &bp, int scale );
     public:
@@ -698,6 +701,16 @@ class map
          */
         bool clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, int range,
                          int cost_min, int cost_max ) const;
+
+        /**
+         * Checks if a rotated vehicle is blocking diagonal movement, tripoints must be adjacent
+         */
+        bool obstructed_by_vehicle_rotation( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
+
+        /**
+         * Checks if a rotated vehicle is blocking diagonal vision, tripoints must be adjacent
+         */
+        bool obscured_by_vehicle_rotation( const tripoint_bub_ms &from, const tripoint_bub_ms &to ) const;
 
         /**
          * Populates a vector of points that are reachable within a number of steps from a
@@ -1169,7 +1182,7 @@ class map
         /** Keeps bashing a square until there is no more furniture */
         void destroy_furn( const tripoint_bub_ms &, bool silent = false );
         void crush( const tripoint_bub_ms &p );
-        void shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+        void shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                     bool hit_items, double dispersion );
         /** Checks if a square should collapse, returns the X for the one_in(X) collapse chance */
         int collapse_check( const tripoint_bub_ms &p ) const;
@@ -1643,8 +1656,7 @@ class map
          * Build the map of scent-resistant tiles.
          * Should be way faster than if done in `game.cpp` using public map functions.
          */
-        void scent_blockers( std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &blocks_scent,
-                             std::array<std::array<bool, MAPSIZE_X>, MAPSIZE_Y> &reduces_scent,
+        void scent_blockers( std::array<std::array<char, MAPSIZE_X>, MAPSIZE_Y> &scent_transfer,
                              const point_bub_ms &min, const point_bub_ms &max );
 
         // Computers

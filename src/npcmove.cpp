@@ -244,19 +244,27 @@ static bool clear_shot_reach( const tripoint_bub_ms &from, const tripoint_bub_ms
                               bool check_ally = true )
 {
     std::vector<tripoint_bub_ms> path = line_to( from, to );
+    tripoint_bub_ms target_point = path.back();
     path.pop_back();
+    map &here = get_map();
+    if( path.empty() ) {
+        return true;
+    }
+    tripoint_bub_ms &last_point = path[0];
     creature_tracker &creatures = get_creature_tracker();
     for( const tripoint_bub_ms &p : path ) {
         Creature *inter = creatures.creature_at( p );
         if( check_ally && inter != nullptr ) {
             return false;
         }
-        if( get_map().impassable( p ) ) {
+        if( here.impassable( p ) ) {
+            return false;
+        } else if( here.obstructed_by_vehicle_rotation( last_point, p ) ) {
             return false;
         }
+        last_point = p;
     }
-
-    return true;
+    return !here.obstructed_by_vehicle_rotation( last_point, target_point );
 }
 
 tripoint_bub_ms npc::good_escape_direction( bool include_pos )
@@ -2972,6 +2980,12 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
         move_pause();
     }
     creature_tracker &creatures = get_creature_tracker();
+
+    if( here.obstructed_by_vehicle_rotation( pos_bub(), p ) ) {
+        move_pause();
+        return;
+    }
+
     bool attacking = false;
     if( creatures.creature_at<monster>( p ) ) {
         attacking = true;
@@ -3451,9 +3465,9 @@ static std::optional<tripoint_bub_ms> nearest_passable( const tripoint_bub_ms &p
     const tripoint_bub_ms & r ) {
         return rl_dist( closest_to, l ) < rl_dist( closest_to, r );
     } );
-    auto iter = std::find_if( candidates.begin(), candidates.end(),
-    [&here]( const tripoint_bub_ms & pt ) {
-        return here.passable_through( pt );
+    auto iter = std::find_if( candidates.begin(), candidates.end(), [&here,
+    &p]( const tripoint_bub_ms & pt ) {
+        return here.passable_through( pt ) && !here.obstructed_by_vehicle_rotation( p, pt );
     } );
     if( iter != candidates.end() ) {
         return *iter;
@@ -3744,14 +3758,16 @@ void npc::pick_up_item()
         update_path( *dest );
     }
 
-    const int dist_to_pickup = rl_dist( pos_bub(), wanted_item_pos );
-    if( dist_to_pickup > 1 && !path.empty() ) {
+    const int dist_to_pickup = square_dist( pos_bub(), wanted_item_pos );
+    bool cant_reach = dist_to_pickup > 1 ||
+                      get_map().obstructed_by_vehicle_rotation( pos_bub(), wanted_item_pos );
+    if( cant_reach && !path.empty() ) {
         add_msg_debug( debugmode::DF_NPC, "Moving; [%s] => [%s]",
                        pos_bub().to_string_writable(), path[0].to_string_writable() );
 
         move_to_next();
         return;
-    } else if( dist_to_pickup > 1 && path.empty() ) {
+    } else if( cant_reach && path.empty() ) {
         add_msg_debug( debugmode::DF_NPC, "Can't find path" );
         // This can happen, always do something
         fetching_item = false;

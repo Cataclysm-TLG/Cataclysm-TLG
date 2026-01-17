@@ -741,7 +741,8 @@ std::optional<int> iuse::fungicide( Character *p, item *, const tripoint_bub_ms 
             if( dest == p->pos_bub() ) {
                 continue;
             }
-            if( here.passable( dest ) && x_in_y( spore_count, 8 ) ) {
+            if( here.passable( dest ) && !here.obstructed_by_vehicle_rotation( p->pos_bub(), dest ) &&
+                x_in_y( spore_count, 8 ) ) {
                 if( monster *const mon_ptr = creatures.creature_at<monster>( dest ) ) {
                     monster &critter = *mon_ptr;
                     if( !critter.type->in_species( species_FUNGUS ) ) {

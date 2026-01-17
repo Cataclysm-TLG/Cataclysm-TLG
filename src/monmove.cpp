@@ -1009,7 +1009,7 @@ void monster::move()
 
     for( const tripoint_bub_ms &dest : here.points_in_radius( pos_bub(), 1 ) ) {
         if( dest != pos_bub() ) {
-            if( can_move_to( dest ) &&
+            if( can_move_to( dest ) && can_squeeze_to( dest ) &&
                 creatures.creature_at( dest, true ) == nullptr ) {
                 try_to_move = true;
                 break;
@@ -1228,7 +1228,7 @@ void monster::move()
             // Try to shove vehicle out of the way
             shove_vehicle( destination, tripoint_bub_ms( candidate ) );
             // Bail out if we can't move there and we can't bash.
-            if( !pathed && !can_move_to( candidate ) ) {
+            if( !pathed && ( !can_move_to( candidate ) || !can_squeeze_to( candidate ) ) ) {
                 if( !can_bash || has_flag( json_flag_CANNOT_ATTACK ) ) {
                     continue;
                 }
@@ -1536,7 +1536,8 @@ tripoint_bub_ms monster::scent_move()
         // Add some randomness to make creatures zigzag towards the source
         for( const tripoint_bub_ms &dest : here.points_in_radius( direction, 1 ) ) {
             if( here.valid_move( pos_bub(), dest, can_bash, true ) &&
-                ( can_move_to( dest ) || ( dest == player_character.pos_bub() ) ||
+                ( ( can_move_to( dest ) && !here.obstructed_by_vehicle_rotation( pos_bub(), dest ) ) ||
+                  ( dest == player_character.pos_bub() ) ||
                   ( can_bash && here.bash_rating( bash_estimate(), dest ) > 0 ) ) ) {
                 smoves.push_back( dest );
             }
@@ -1897,6 +1898,9 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     if( critter != nullptr && !step_on_critter ) {
         return false;
     }
+    if( !can_squeeze_to( destination ) ) {
+        return false;
+    }
 
     // Make sure that we can move there, unless force is true.
     if( !force && !can_move_to( destination ) ) {
@@ -2158,7 +2162,7 @@ bool monster::push_to( const tripoint_bub_ms &p, const int boost, const size_t d
 
         // Pushing into cars/windows etc. is harder
         const int movecost_penalty = here.move_cost( dest ) - 2;
-        if( movecost_penalty <= -2 ) {
+        if( movecost_penalty <= -2 || here.obstructed_by_vehicle_rotation( p, dest ) ) {
             // Can't push into unpassable terrain
             continue;
         }

@@ -271,7 +271,8 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         // Iterate over all neighbors. Bash all of them, propagate to some
         for( size_t i = 0; i < max_index; i++ ) {
             tripoint_bub_ms dest( pt + tripoint_rel_ms( x_offset[i], y_offset[i], z_offset[i] ) );
-            if( closed.count( dest ) != 0 || !m->inbounds( dest ) ) {
+            if( closed.count( dest ) != 0 || !m->inbounds( dest ) ||
+                m->obstructed_by_vehicle_rotation( pt, dest ) ) {
                 continue;
             }
 
@@ -455,6 +456,9 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
     std::unique_ptr<local_caches> caches = std::make_unique<local_caches>();
     cata::mdarray<fragment_cloud, point_bub_ms> &obstacle_cache = caches->obstacle_cache;
     cata::mdarray<fragment_cloud, point_bub_ms> &visited_cache = caches->visited_cache;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache = m->access_cache(
+                src.z() ).vehicle_obstructed_cache;
+
 
     // TODO: Calculate range based on max effective range for projectiles.
     // Basically bisect between 0 and map diameter using shrapnel_calc().
@@ -473,7 +477,8 @@ static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
 
     castLightAll<fragment_cloud, fragment_cloud, shrapnel_calc, shrapnel_check,
                  update_fragment_cloud, accumulate_fragment_cloud>
-                 ( visited_cache, obstacle_cache, src.xy(), 0, initial_cloud );
+                 ( visited_cache, obstacle_cache, blocked_cache, src.xy(),
+                   0, initial_cloud );
 
     creature_tracker &creatures = get_creature_tracker();
     Creature *mutable_source = source == nullptr ? nullptr : creatures.creature_at( source->pos_abs() );

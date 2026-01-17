@@ -215,8 +215,9 @@ bool leap_actor::call( monster &z ) const
         bool blocked_path = false;
         // check if monster has a clear path to the proposed point
         std::vector<tripoint_bub_ms> line = here.find_clear_path( z.pos_bub(), dest );
+        tripoint_bub_ms prev_point = z.pos_bub();
         for( tripoint_bub_ms &i : line ) {
-            if( here.impassable( i ) ) {
+            if( here.impassable( i ) || here.obstructed_by_vehicle_rotation( prev_point, i ) ) {
                 add_msg_debug( debugmode::DF_MATTACK, "Path blocked, candidate discarded" );
                 blocked_path = true;
                 break;
@@ -226,6 +227,7 @@ bool leap_actor::call( monster &z ) const
                 blocked_path = true;
                 break;
             }
+            prev_point = i;
         }
         if( blocked_path ) {
             continue;

@@ -810,7 +810,8 @@ action_id handle_action_menu( map &here )
     // Check if we can perform one of our actions on nearby terrain. If so,
     // display that action at the top of the list.
     for( const tripoint_bub_ms &pos : here.points_in_radius( player_character.pos_bub(), 1 ) ) {
-        if( pos != player_character.pos_bub() ) {
+        if( pos != player_character.pos_bub() &&
+            !here.obstructed_by_vehicle_rotation( player_character.pos_bub(), pos ) ) {
             // Check for actions that work on nearby tiles
             if( can_interact_at( ACTION_OPEN, here, pos ) ) {
                 action_weightings[ACTION_OPEN] = 200;
@@ -1206,7 +1207,12 @@ std::optional<tripoint_bub_ms> choose_adjacent( const tripoint_bub_ms &pos,
         }
         return std::pair<bool, std::optional<tripoint_rel_ms>>( false, std::nullopt );
     } );
+
     if( dir ) {
+        map &here = get_map();
+        if( here.obstructed_by_vehicle_rotation( get_avatar().pos_bub( here ), *dir + pos ) ) {
+            return std::nullopt;
+        }
         return pos + *dir;
     } else {
         return std::nullopt;
@@ -1242,7 +1248,7 @@ std::optional<tripoint_bub_ms> choose_adjacent_highlight( map &here, const tripo
     std::vector<tripoint_bub_ms> valid;
     if( allowed ) {
         for( const tripoint_bub_ms &pos : here.points_in_radius( pos, 1 ) ) {
-            if( allowed( pos ) ) {
+            if( allowed( pos ) && !here.obstructed_by_vehicle_rotation( get_avatar().pos_bub( here ), pos ) ) {
                 valid.emplace_back( pos );
             }
         }

@@ -2426,15 +2426,16 @@ int RAS_time( const Character &p, const item_location &loc )
 
 static void cycle_action( item &weap, const itype_id &ammo, map *here, const tripoint_bub_ms &pos )
 {
-    // eject casings and linkages in random direction avoiding walls using player position as fallback
+    // Eject casings and linkages in random direction avoiding walls using player position as fallback.
     std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, 1 );
     tiles.erase( tiles.begin() );
-    tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&]( const tripoint_bub_ms & e ) {
-        return !here->passable( e );
+    tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&pos,
+    &here]( const tripoint_bub_ms & e ) {
+        return !here->passable( e ) || here->obstructed_by_vehicle_rotation( pos, e );
     } ), tiles.end() );
     tripoint_bub_ms eject{ tiles.empty() ? pos : random_entry( tiles ) };
 
-    // for turrets try and drop casings or linkages directly to any CARGO part on the same tile
+    // For turrets try and drop casings or linkages directly to any CARGO part on the same tile.
     const std::optional<vpart_reference> ovp_cargo = weap.has_flag( flag_VEHICLE )
             ? here->veh_at( pos ).cargo()
             : std::nullopt;
