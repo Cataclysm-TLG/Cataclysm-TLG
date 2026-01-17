@@ -3780,6 +3780,11 @@
   },
   {
     "type": "MIGRATION",
+    "id": "turtleneck_rolled",
+    "replace": "turtleneck"
+  },
+  {
+    "type": "MIGRATION",
     "id": "hallula",
     "replace": "bread"
   },

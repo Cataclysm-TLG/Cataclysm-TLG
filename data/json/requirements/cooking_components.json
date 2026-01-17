@@ -16,8 +16,7 @@
         [ "cornbread", 1 ],
         [ "biscuit", 1 ],
         [ "hardtack", 1 ],
-        [ "crackers", 1 ],
-        [ "hallula", 1 ]
+        [ "crackers", 1 ]
       ]
     ]
   },
@@ -31,8 +30,7 @@
         [ "wastebread", 1 ],
         [ "sourdough_bread", 1 ],
         [ "brioche", 1 ],
-        [ "brown_bread", 1 ],
-        [ "hallula", 1 ],
+        [ "brown_bread", 1 ]
         [ "snack_bread", 1 ]
       ]
     ]
@@ -682,7 +680,6 @@
         [ "hardtack", 1 ],
         [ "wastebread", 1 ],
         [ "sourdough_bread", 1 ],
-        [ "hallula", 1 ],
         [ "brioche", 1 ],
         [ "flour", 2 ],
         [ "cornmeal", 2 ],
@@ -748,7 +745,6 @@
         [ "wastebread", 1 ],
         [ "sourdough_bread", 1 ],
         [ "brioche", 1 ],
-        [ "hallula", 1 ],
         [ "flour", 2 ],
         [ "cornmeal", 2 ],
         [ "milk_powder", 1 ],
