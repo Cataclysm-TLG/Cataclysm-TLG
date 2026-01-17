@@ -2349,7 +2349,7 @@ void veh_interact::display_veh( map &here )
     //Iterate over structural parts so we only hit each square once
     for( const int structural_part_idx : veh->all_parts_at_location( "structure" ) ) {
         const vehicle_part &vp = veh->part( structural_part_idx );
-        const vpart_display vd = veh->get_display_of_tile( vp.mount, false, false );
+        const vpart_display vd = veh->get_display_of_tile( vp.mount, false, true );
         const point_rel_ms q = ( vp.mount + dd ).rotate( 3 );
 
         if( q != point_rel_ms::zero ) { // cursor is not on this part
