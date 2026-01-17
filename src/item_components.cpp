@@ -73,14 +73,24 @@ void item_components::add( item &new_it )
 {
     comp_iterator it = comps.find( new_it.typeId() );
     if( it != comps.end() ) {
-        if( new_it.count_by_charges() ) {
+        if( it->first->count_by_charges() ) {
+            const int max_stack = new_it.type->stack_max;
+            if( max_stack <= 0 ) {
+                // Old behavior: just dump charges into one stack. Include a guard if it's ever empty.
+                if( it->second.empty() ) {
+                    it->second.push_back( new_it );
+                } else {
+                    it->second.front().charges += new_it.charges;
+                }
+                return;
+            }
             // Split charges into multiple stacks of max size stack_max.
             int charges_to_add = new_it.charges;
             while( charges_to_add > 0 ) {
-                int to_add = std::min( charges_to_add, new_it.type->stack_max );
+                int to_add = std::min( charges_to_add, max_stack );
                 // Check if the last stack has room.
-                if( !it->second.empty() && it->second.back().charges < new_it.type->stack_max ) {
-                    int room = new_it.type->stack_max - it->second.back().charges;
+                if( !it->second.empty() && it->second.back().charges < max_stack ) {
+                    int room = max_stack - it->second.back().charges;
                     int add_here = std::min( room, to_add );
                     it->second.back().charges += add_here;
                     charges_to_add -= add_here;
@@ -101,7 +111,6 @@ void item_components::add( item &new_it )
         comps[new_it.typeId()] = { new_it };
     }
 }
-
 
 ret_val<item> item_components::remove( itype_id it_id )
 {
