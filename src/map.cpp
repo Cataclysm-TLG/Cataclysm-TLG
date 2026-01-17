@@ -4729,7 +4729,26 @@ void map::crush( const tripoint_bub_ms &p )
     }
 }
 
-void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+int map::calculate_vehicle_coverage( const tripoint_bub_ms &pt ) const
+{
+    int coverage = 0;
+    if( const optional_vpart_position vp = veh_at( pt ) ) {
+        const bool is_obstacle = vp->obstacle_at_part().has_value();
+        const bool is_quarterpanel = vp->part_with_feature( VPFLAG_HALF_BOARD, false ).has_value();
+        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false ).has_value();
+        if( is_obstacle ) {
+            coverage = 100;
+        } else if( is_quarterpanel ) {
+            coverage = 60;
+        } else if( !is_aisle ) {
+            coverage = 45;
+        }
+    }
+    return coverage;
+}
+
+
+void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                  const bool hit_items, double dispersion )
 {
     // TODO: make bashing better a destroying, worse at penetrating
@@ -4762,7 +4781,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     const bool ignite = ammo_effects.count( ammo_effect_IGNITE );
     const bool laser = ammo_effects.count( ammo_effect_LASER );
 
-    int dist = rl_dist( source, p );
+    int dist = static_cast<int>( std::round( trig_dist_z_adjust( source, p ) ) );
     // Manually check coverage sources as coverage() isn't smart enough.
     int furn_coverage = 0;
     if( furn( p ) != f_null ) {
@@ -4774,38 +4793,100 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
     }
     int veh_coverage = 0;
     if( const optional_vpart_position vp = veh_at( p ) ) {
-        const bool is_obstacle = vp->obstacle_at_part().has_value();
-        const bool is_quarterpanel =  vp->part_with_feature( VPFLAG_HALF_BOARD, false ).has_value();
-        const bool is_aisle = vp->part_with_feature( VPFLAG_AISLE, false ).has_value();
-        if( is_obstacle ) {
-            veh_coverage = 100;
-        } else if( is_quarterpanel ) {
-            veh_coverage = 60;
-        } else if( !is_aisle ) {
-            veh_coverage = 45;
-        }
+        veh_coverage = calculate_vehicle_coverage( p );
     }
-    // Prevent vehicle turrets and creatures in vehicles from shooting their own vehicles.
-    // TODO: Multi-Z level vehicles.
-    if( veh_at( p ) ) {
-        bool same_vehicle = &veh_at( source )->vehicle() == &veh_at( p )->vehicle();
-        if( same_vehicle ) {
+    const point_rel_ms delta = source.xy() - p.xy();
+    const point_rel_ms step( sgn( delta.x() ), sgn( delta.y() ) );
+    const tripoint_bub_ms prev = p - step;
+    if( obstructed_by_vehicle_rotation( source, p ) ) {
+        const tripoint_bub_ms side1 = { source.x() - delta.x(), source.y(), source.z() };
+        const tripoint_bub_ms side2 = { source.x(), source.y() - delta.y(), source.z() };
+
+        if( veh_at( side1 ) && veh_at( side2 ) ) {
+            if( one_in( 2 ) ) {
+                p = side1;
+            } else {
+                p = side2;
+            }
+        } else if( veh_at( side1 ) ) {
+            p = side1;
+        } else if( veh_at( side2 ) ) {
+            p = side2;
+        } else {
+            debugmsg( "map::shoot: projectile obstructed by vehicle rotation but could not find vehicle." );
+        }
+        
+        // Recalculate coverage values for updated p
+        if( const optional_vpart_position vp = veh_at( p ) ) {
+            veh_coverage = calculate_vehicle_coverage( p );
+        } else {
             veh_coverage = 0;
+        }
+
+        if( furn( p ) != f_null ) {
+            furn_coverage = furn( p )->coverage;
+        } else {
+            furn_coverage = 0;
+        }
+
+        if( ter( p ) != t_null ) {
+            ter_coverage = ter( p )->coverage;
+        } else {
+            ter_coverage = 0;
+        }
+    } else if( obstructed_by_vehicle_rotation( prev, p ) ) {
+        const point_rel_ms delta_2 = p.xy() - prev.xy();
+        if( std::abs( delta_2.x() ) == 1 && std::abs( delta_2.y() ) == 1 ) {
+            const tripoint_bub_ms side1 = { prev.x() + delta_2.x(), prev.y(), prev.z() };
+            const tripoint_bub_ms side2 = { prev.x(), prev.y() + delta_2.y(), prev.z() };
+            if( veh_at( side1 ) && veh_at( side2 ) ) {
+                if( one_in( 2 ) ) {
+                    p = side1;
+                } else {
+                    p = side2;
+                }
+            } else if( veh_at( side1 ) ) {
+                p = side1;
+            } else if( veh_at( side2 ) ) {
+                p = side2;
+            } else {
+                debugmsg( "map::shoot: projectile obstructed by vehicle rotation but could not find vehicle." );
+            }
+        } else {
+            debugmsg( "map::shoot: obstructed_by_vehicle_rotation returned true for non-diagonal step." );
+        }
+
+        // Recalculate coverage values for updated p
+        if( const optional_vpart_position vp = veh_at( p ) ) {
+            veh_coverage = calculate_vehicle_coverage( p );
+        } else {
+            veh_coverage = 0;
+        }
+
+        if( furn( p ) != f_null ) {
+            furn_coverage = furn( p )->coverage;
+        } else {
+            furn_coverage = 0;
+        }
+
+        if( ter( p ) != t_null ) {
+            ter_coverage = ter( p )->coverage;
+        } else {
+            ter_coverage = 0;
         }
     }
     int coverage = std::max( { veh_coverage, furn_coverage, ter_coverage } );
-
     bool veh_hit = false;
     bool furn_hit = false;
     bool ter_hit = false;
-
     if( veh_coverage == coverage && coverage != 0 ) {
         veh_hit = true;
     } else if( furn_coverage == coverage && coverage != 0 ) {
         furn_hit = true;
-    } else {
+    } else if( ter_coverage == coverage && coverage != 0 ) {
         ter_hit = true;
     }
+
     /** hit_items is true if we specifically targeted this tile and our ammo is a type that can
     * damage items. Checking it here means we can intentionally shoot a piece of cover point blank
     * and actually hit it if we want to do so for some reason.
@@ -4845,7 +4926,7 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
             // Did we hit the ter/furn/veh?
             hit_something = true;
             bool laser_passthrough = false;
-            if( ter_hit || furn_hit ) {
+            if( ter_hit || furn_hit || veh_hit ) {
                 // Does the ter/furn have shoot data? If so, it will run this lambda first.
                 const auto shoot_furn_ter = [&]( const map_data_common_t &data ) {
                     if( !data.shoot ) {
@@ -4965,7 +5046,23 @@ void map::shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projec
 
     // Now, smash items on that tile.
     // dam / 3, because bullets aren't all that good at destroying items...
-    smash_items( p, dam / 3, damage_message );
+    const auto &items_on_tile = i_at( p );
+    units::volume total_volume = 0_ml;
+
+    for( const item &it : items_on_tile ) {
+        total_volume += it.volume();
+    }
+
+    int chance = 150000 / std::max( 1, static_cast<int>( total_volume.value() ) );
+
+    // Cap max denominator at 100 to ensure minimum 1% chance
+    if( chance > 100 ) {
+        chance = 100;
+    }
+
+    if( one_in( chance ) ) {
+        smash_items( p, dam / 3, damage_message );
+    }
 }
 
 bool map::hit_with_acid( const tripoint_bub_ms &p )
@@ -10319,7 +10416,7 @@ static void vehicle_caching_internal( level_cache &zch, const vpart_reference &v
         floor_cache[part_pos.x()][part_pos.y()] = true;
     }
 
-   point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
+    point_rel_ms t = v->tripoint_to_mount( part_pos + point::north_west ).xy();
     if( !v->allowed_light( t, v->tripoint_to_mount( vp.pos_bub( here ) ).xy() ) ) {
         obscured_cache[part_pos.x()][part_pos.y()].nw = true;
     }
@@ -10407,15 +10504,15 @@ void map::build_map_cache( const int zlev, bool skip_lightmap )
         seen_cache_dirty |= get_cache( z ).seen_cache_dirty;
         constexpr diagonal_blocks empty_diagonal_block{ false, false };
 
-        auto &cache = get_cache(z);
+        auto &cache = get_cache( z );
 
-        std::fill(&cache.vehicle_obscured_cache[0][0],
-                &cache.vehicle_obscured_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
-                empty_diagonal_block);
+        std::fill( &cache.vehicle_obscured_cache[0][0],
+                   &cache.vehicle_obscured_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                   empty_diagonal_block );
 
-        std::fill(&cache.vehicle_obstructed_cache[0][0],
-                &cache.vehicle_obstructed_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
-                empty_diagonal_block);
+        std::fill( &cache.vehicle_obstructed_cache[0][0],
+                   &cache.vehicle_obstructed_cache[0][0] + MAPSIZE_X * MAPSIZE_Y,
+                   empty_diagonal_block );
 
     }
     // needs a separate pass as it changes the caches on neighbour z-levels (e.g. floor_cache);

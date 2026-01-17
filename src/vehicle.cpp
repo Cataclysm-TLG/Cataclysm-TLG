@@ -3582,12 +3582,12 @@ bool vehicle::check_rotated_intervening( const point_rel_ms &from, const point_r
 
     if( !( ( abs( delta.x() ) == 2 && abs( delta.y() ) == 1 ) || ( abs( delta.x() ) == 1 &&
             abs( delta.y() ) == 2 ) ) ) { //Check that we're moving like a knight
-debugmsg(
-    "Unexpected movement in rotated vehicle vector: from %d,%d to %d,%d delta %d,%d",
-    from.x(), from.y(),
-    to.x(), to.y(),
-    delta.x(), delta.y()
-);
+        debugmsg(
+            "Unexpected movement in rotated vehicle vector: from %d,%d to %d,%d delta %d,%d",
+            from.x(), from.y(),
+            to.x(), to.y(),
+            delta.x(), delta.y()
+        );
         return false;
     }
 

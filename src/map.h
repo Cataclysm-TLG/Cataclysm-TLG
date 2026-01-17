@@ -551,6 +551,9 @@ class map
 
         const_maptile maptile_at( const tripoint_bub_ms &p ) const;
         maptile maptile_at( const tripoint_bub_ms &p );
+
+        /** Figure out the coverage provided by vehicle parts in a tile (absolute, not relative to shooter's position) */
+        int calculate_vehicle_coverage( const tripoint_bub_ms &p ) const;
     private:
         // Versions of the above that don't do bounds checks
         const_maptile maptile_at_internal( const tripoint_bub_ms &p ) const;
@@ -1179,7 +1182,7 @@ class map
         /** Keeps bashing a square until there is no more furniture */
         void destroy_furn( const tripoint_bub_ms &, bool silent = false );
         void crush( const tripoint_bub_ms &p );
-        void shoot( const tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
+        void shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &proj,
                     bool hit_items, double dispersion );
         /** Checks if a square should collapse, returns the X for the one_in(X) collapse chance */
         int collapse_check( const tripoint_bub_ms &p ) const;

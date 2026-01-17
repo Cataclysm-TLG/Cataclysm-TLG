@@ -175,47 +175,49 @@ void cast_horizontal_zlight_segment(
 
     quadrant quad = quadrant_from_x_y( xx_transform + xy_transform, yx_transform + yy_transform );
 
-const auto check_blocked_shadow = [ =, &blocked_caches]( const tripoint_bub_ms & p ) -> bool {
-    const int z_idx = p.z() + OVERMAP_DEPTH;
-    const int x = p.x();
-    const int y = p.y();
+    const auto check_blocked_shadow = [ =, &blocked_caches]( const tripoint_bub_ms & p ) -> bool {
+        const int z_idx = p.z() + OVERMAP_DEPTH;
+        const int x = p.x();
+        const int y = p.y();
 
-    // Check bounds first
-    bool in_bounds = ( z_idx >= 0 && z_idx < static_cast<int>(blocked_caches.size()) ) &&
-                     ( x >= 0 && x < MAPSIZE_X ) &&
-                     ( y >= 0 && y < MAPSIZE_Y );
+        // Check bounds first
+        bool in_bounds = ( z_idx >= 0 && z_idx < static_cast<int>( blocked_caches.size() ) ) &&
+        ( x >= 0 && x < MAPSIZE_X ) &&
+        ( y >= 0 && y < MAPSIZE_Y );
 
-    if( !in_bounds ) {
-        return false;
-    }
-
-    switch( quad ) {
-        case quadrant::NW: {
-            bool blocked = ( *blocked_caches[z_idx] )[x][y].nw;
-            return blocked;
-        }
-        case quadrant::NE: {
-            bool blocked = ( *blocked_caches[z_idx] )[x][y].ne;
-            return blocked;
-        }
-        case quadrant::SE: {
-            if( x >= MAPSIZE_X - 1 || y >= MAPSIZE_Y - 1 ) {
-                return false;
-            }
-            bool blocked = ( *blocked_caches[z_idx] )[x + 1][y + 1].nw;
-            return blocked;
-        }
-        case quadrant::SW: {
-            if( x <= 1 || y >= MAPSIZE_Y - 1 ) {
-                return false;
-            }
-            bool blocked = ( *blocked_caches[z_idx] )[x - 1][y + 1].ne;
-            return blocked;
-        }
-        default:
+        if( !in_bounds )
+        {
             return false;
-    }
-};
+        }
+
+        switch( quad )
+        {
+            case quadrant::NW: {
+                bool blocked = ( *blocked_caches[z_idx] )[x][y].nw;
+                return blocked;
+            }
+            case quadrant::NE: {
+                bool blocked = ( *blocked_caches[z_idx] )[x][y].ne;
+                return blocked;
+            }
+            case quadrant::SE: {
+                if( x >= MAPSIZE_X - 1 || y >= MAPSIZE_Y - 1 ) {
+                    return false;
+                }
+                bool blocked = ( *blocked_caches[z_idx] )[x + 1][y + 1].nw;
+                return blocked;
+            }
+            case quadrant::SW: {
+                if( x <= 1 || y >= MAPSIZE_Y - 1 ) {
+                    return false;
+                }
+                bool blocked = ( *blocked_caches[z_idx] )[x - 1][y + 1].ne;
+                return blocked;
+            }
+            default:
+                return false;
+        }
+    };
 
     const int radius = MAX_VIEW_DISTANCE - offset_distance;
 
