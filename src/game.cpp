@@ -12288,9 +12288,6 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
             pt.x() = c->pos_bub().x() + tdir.dx();
             pt.y() = c->pos_bub().y() + tdir.dy();
         }
-        tdir.advance();
-        pt.x() += tdir.dx();
-        pt.y() += tdir.dy();
         float force = 0.0f;
         if( here.obstructed_by_vehicle_rotation( prev_point, pt ) ) {
             //We process the intervening tile on this iteration and then the current tile on the next

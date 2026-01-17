@@ -2215,6 +2215,9 @@ void inventory_selector::add_nearby_items( int radius, bool add_efiles )
         const tripoint_bub_ms &center = u.pos_bub();
         map &here = get_map();
         for( const tripoint_bub_ms &pos : closest_points_first( center, radius ) ) {
+            if( here.obstructed_by_vehicle_rotation( center, pos ) ) {
+                continue;
+            }
             if( square_dist( center, pos ) <= 1 ) {
                 add_map_items( tripoint_bub_ms( pos ) );
                 add_vehicle_items( tripoint_bub_ms( pos ) );

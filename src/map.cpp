@@ -4815,7 +4815,7 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         } else {
             debugmsg( "map::shoot: projectile obstructed by vehicle rotation but could not find vehicle." );
         }
-        
+
         // Recalculate coverage values for updated p
         if( const optional_vpart_position vp = veh_at( p ) ) {
             veh_coverage = calculate_vehicle_coverage( p );
@@ -7912,6 +7912,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             if( new_point.x() == T.x() && new_point.y() == T.y() ) {
                 return false;
             }
+
             tripoint_bub_ms tp( new_point.x(), new_point.y(), T.z() );
             point_bub_ms T_point( T.x(), T.y() );
             point_bub_ms F_point( F.x(), F.y() );
@@ -7923,10 +7924,27 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
                         lowest_concealment = 0;
                         return false;
                     }
-                    if( obscured_by_vehicle_rotation( tripoint_bub_ms( last_point, T.z() ), tripoint_bub_ms( new_point,
-                                                      T.z() ) ) ) {
-                        return false;
+                    int concealment_1 = 0;
+                    int concealment_2 = 0;
+                    if( obstructed_by_vehicle_rotation( F, T ) ) {
+                        const tripoint_rel_ms delta = F - T;
+                        const tripoint_rel_ms step( sgn( delta.x() ), sgn( delta.y() ), delta.z() );
+                        const tripoint_bub_ms prev = F - step;
+                        const tripoint_rel_ms delta_2 = T - prev;
+                        if( std::abs( delta_2.x() ) == 1 && std::abs( delta_2.y() ) == 1 ) {
+                            const tripoint_bub_ms side1 = { prev.x() + delta_2.x(), prev.y(), prev.z() };
+                            const tripoint_bub_ms side2 = { prev.x(), prev.y() + delta_2.y(), prev.z() };
+                            if( veh_at( side1 ) ) {
+                                concealment_1 = concealment( side1 );
+                            }
+                            if( veh_at( side2 ) ) {
+                                concealment_2 = concealment( side2 );
+                            }
+                        } else {
+                            debugmsg( "map::sees_full: obstructed_by_vehicle_rotation returned true for non-diagonal step." );
+                        }
                     }
+                    found_concealment = std::max( { concealment_1, concealment_2, concealment( tp ) } );
                     if( lowest_concealment < 0 ) {
                         lowest_concealment = found_concealment;
                         return true;
@@ -7953,9 +7971,6 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
             // Skip starting position, stop before checking target tile.
             if( new_point == F ) {
                 return true;
-            }
-            if( obscured_by_vehicle_rotation( last_point, new_point ) ) {
-                return false;
             }
             // Exit before checking the last square only if it's not a vertical transition.
             if( new_point == T && last_point.z() == T.z() ) {
@@ -8026,9 +8041,6 @@ bool map::has_line_of_sight_IR( const tripoint_bub_ms &from, const tripoint_bub_
     [this, eye_level, &visible, &to, &last_point]( const tripoint_bub_ms & new_point ) {
         // Exit before checking the last square if not a vertical transition
         if( new_point == to && last_point.z() == to.z() ) {
-            return false;
-        }
-        if( obscured_by_vehicle_rotation( last_point, new_point ) ) {
             return false;
         }
 

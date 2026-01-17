@@ -1179,8 +1179,8 @@ enchant_cache::special_vision enchant_cache::get_vision( const const_dialogue &d
         return {};
     }
 
-    const double distance = rl_dist_exact( d.const_actor( true )->pos_abs(),
-                                           d.const_actor( false )->pos_abs() );
+    const int distance = rl_dist_exact( d.const_actor( true )->pos_abs(),
+                                        d.const_actor( false )->pos_abs() );
 
     for( const special_vision &struc : special_vision_vector ) {
         if( struc.ignores_aiming_cone && struc.range >= distance && struc.condition( d ) ) {
