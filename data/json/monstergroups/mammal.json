@@ -59,6 +59,7 @@
     "type": "monstergroup",
     "monsters": [
       { "monster": "mon_deer", "weight": 150, "cost_multiplier": 2 },
+      { "monster": "mon_deer_sick", "weight": 50 },
       { "monster": "mon_deer_fawn", "weight": 25, "ends": "28 days", "conditions": [ "SPRING", "SUMMER", "AUTUMN" ] },
       {
         "monster": "mon_deer_fawn",
@@ -114,6 +115,7 @@
     "type": "monstergroup",
     "monsters": [
       { "monster": "mon_horse", "weight": 150, "cost_multiplier": 2 },
+      { "monster": "mon_horse_lame", "weight": 40, "cost_multiplier": 2 },
       { "monster": "mon_horse_foal", "weight": 50, "ends": "124 days" },
       { "monster": "mon_horse_foal", "weight": 25, "starts": "124 days" }
     ]
