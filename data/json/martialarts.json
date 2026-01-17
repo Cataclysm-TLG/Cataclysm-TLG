@@ -1307,7 +1307,7 @@
       {
         "id": "buff_sojutsu_static",
         "name": "Sōjutsu Stance",
-        "description": "Your training grants better defense while using a polearm.\n\n+1 block attempt, +2 blocking effectiveness.",
+        "description": "Your training grants better defense while using a spear.\n\n+1 block attempt, +2 blocking effectiveness.",
         "melee_allowed": true,
         "bonus_blocks": 1,
         "flat_bonuses": [ { "stat": "block_effectiveness", "scale": 2.0 } ]
@@ -1329,7 +1329,7 @@
       }
     ],
     "techniques": [ "tec_sojutsu_feint", "tec_sojutsu_shove", "tec_sojutsu_trip", "tec_sojutsu_jab" ],
-    "weapon_category": [ "POLEARMS" ]
+    "weapon_category": [ "SPEARS" ]
   },
   {
     "type": "martial_art",
