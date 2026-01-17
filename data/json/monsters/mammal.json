@@ -1131,7 +1131,7 @@
     "categories": [ "WILDLIFE" ],
     "species": [ "MAMMAL" ],
     "volume": "475000 ml",
-    "weight": "450 kg",
+    "weight": "500 kg",
     "hp": 260,
     "speed": 260,
     "attack_cost": 230,
@@ -1160,6 +1160,7 @@
     "special_attacks": [ { "id": "smash", "throw_strength": 49 }, [ "EAT_CROP", 100 ], [ "GRAZE", 50 ] ],
     "zombify_into": "mon_zombie_horse",
     "petfood": { "food": [ "CATTLEFOOD" ], "feed": "The %s seems to like you!  It lets you pat its head and seems friendly." },
+    "mountable_weight_ratio": 0.35,    
     "flags": [
       "SEES",
       "HEARS",
