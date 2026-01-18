@@ -166,6 +166,7 @@ static const ammotype ammo_battery( "battery" );
 
 static const anatomy_id anatomy_human_anatomy( "human_anatomy" );
 
+static const bionic_id bio_armor_torso( "bio_armor_torso" );
 static const bionic_id bio_gills( "bio_gills" );
 static const bionic_id bio_ground_sonar( "bio_ground_sonar" );
 static const bionic_id bio_memory( "bio_memory" );
@@ -2881,6 +2882,9 @@ void Character::calc_all_parts_hp( float hp_mod, float hp_adjustment, int str_ma
 
         if( has_trait( trait_GLASSJAW ) && part.first == body_part_head ) {
             new_max *= 0.8;
+        }
+        if( has_bionic( bio_armor_torso ) && part.first == body_part_torso ) {
+            new_max *= 1.09;
         }
 
         new_max = std::max( 1, new_max );
