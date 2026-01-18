@@ -203,7 +203,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
     constexpr int MIN_Z = -10;
     constexpr int MAX_Z = 10;
 
-    // CRATER RAMP: cache final EMPTY_SPACE floor tiles
+    // Cache EMPTY_SPACE floor tiles so we know where to try to draw ramps.
     std::set<tripoint_bub_ms> crater_tiles;
     auto record_if_empty_space = [&]( const tripoint_bub_ms & tp ) {
         if( m->inbounds( tp ) &&
@@ -413,7 +413,8 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                                              dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state( m );
-            add_msg_debug( debugmode::DF_EXPLOSION, "Blast hits %s for %d damage", critter->disp_name(), actual_dmg );
+            add_msg_debug( debugmode::DF_EXPLOSION, "Blast hits %s for %d damage", critter->disp_name(),
+                           actual_dmg );
             continue;
         }
 
