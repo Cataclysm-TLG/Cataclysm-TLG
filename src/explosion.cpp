@@ -222,8 +222,9 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
     std::map<tripoint_bub_ms, float> dist_map;
     open.emplace( 0.0f, p );
     dist_map[p] = 0.0f;
-    // Add some randomness to make it look cooler.
+    // Find all points to blast.
     while( !open.empty() ) {
+        // Add some randomness to make it look cooler.
         const float distance = open.top().first * rng_float( 1.0f, 1.2f );
         const tripoint_bub_ms pt = open.top().second;
         open.pop();
@@ -412,6 +413,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                                              dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state( m );
+            add_msg_debug( debugmode::DF_EXPLOSION, "Blast hits %s for %d damage", critter->disp_name(), actual_dmg );
             continue;
         }
 
@@ -430,6 +432,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         static const std::array<blastable_part, 6> blast_parts = { {
                 { bodypart_id( "torso" ), 2.0f, 3.0f, 0.5f },
                 { bodypart_id( "head" ),  2.0f, 3.0f, 0.5f },
+                // Hit limbs harder so it hurts more without being totally deadly.
                 { bodypart_id( "leg_l" ), 2.0f, 3.5f, 0.4f },
                 { bodypart_id( "leg_r" ), 2.0f, 3.5f, 0.4f },
                 { bodypart_id( "arm_l" ), 2.0f, 3.5f, 0.4f },
@@ -438,10 +441,17 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         };
 
         for( const blastable_part &blp : blast_parts ) {
-            const int part_dam = rng( force * blp.low_mul, force * blp.high_mul );
-            const damage_instance dmg_instance =
-                damage_instance( damage_bash, part_dam, 0, blp.armor_mul );
-            pl->deal_damage( mutable_source, blp.bp, dmg_instance );
+            const std::string hit_part_name = body_part_name_accusative( blp.bp );
+            // FIXME: Hardcoded damage type
+            const damage_instance dmg_instance = damage_instance( damage_bash, part_dam, 0, blp.armor_mul );
+            const dealt_damage_instance result = pl->deal_damage( mutable_source, blp.bp, dmg_instance );
+            const int res_dmg = result.total_damage();
+
+            add_msg_debug( debugmode::DF_EXPLOSION, "%s for %d raw, %d actual", hit_part_name, part_dam,
+                           res_dmg );
+            if( res_dmg > 0 ) {
+                pl->add_msg_if_player( m_bad, _( "Your %s is hit for %d damage!" ), hit_part_name, res_dmg );
+            }
         }
     }
 }
