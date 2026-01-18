@@ -442,6 +442,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         };
 
         for( const blastable_part &blp : blast_parts ) {
+            const int part_dam = rng( force * blp.low_mul, force * blp.high_mul );
             const std::string hit_part_name = body_part_name_accusative( blp.bp );
             // FIXME: Hardcoded damage type
             const damage_instance dmg_instance = damage_instance( damage_bash, part_dam, 0, blp.armor_mul );
