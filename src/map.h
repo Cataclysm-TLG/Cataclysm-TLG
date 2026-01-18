@@ -2137,6 +2137,10 @@ class map
         void process_items();
         // All active items connected to the power_grid with their connection points.
         std::vector<item_reference> item_network_connections( vehicle *power_grid );
+
+        // Places some ramps out of any craters we make in explosion::do_blast.
+        void finalize_crater_ramps( const std::set<tripoint_bub_ms> &crater_tiles, int base_z );
+
     private:
         // Iterates over every item on the map, passing each item to the provided function.
         void process_items_in_submap( submap &current_submap, const tripoint_rel_sm &gridp );

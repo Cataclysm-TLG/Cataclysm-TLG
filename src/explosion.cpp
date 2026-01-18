@@ -200,7 +200,20 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
     static constexpr std::array<int, 10> z_offset = { 0, 0,  0, 0,  0,  0,  0, 0, 1, -1 };
     const size_t max_index = 10;
 
+    constexpr int MIN_Z = -10;
+    constexpr int MAX_Z = 10;
+
+    // CRATER RAMP: cache final EMPTY_SPACE floor tiles
+    std::set<tripoint_bub_ms> crater_tiles;
+    auto record_if_empty_space = [&]( const tripoint_bub_ms & tp ) {
+        if( m->inbounds( tp ) &&
+            m->ter( tp )->has_flag( "EMPTY_SPACE" ) ) {
+            crater_tiles.insert( tp );
+        }
+    };
+
     m->bash( p, fire ? power : ( 2 * power ), true, false, false );
+    record_if_empty_space( p );
 
     std::priority_queue< std::pair<float, tripoint_bub_ms>, std::vector< std::pair<float, tripoint_bub_ms> >, pair_greater_cmp_first >
     open;
@@ -209,9 +222,8 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
     std::map<tripoint_bub_ms, float> dist_map;
     open.emplace( 0.0f, p );
     dist_map[p] = 0.0f;
-    // Find all points to blast
+    // Add some randomness to make it look cooler.
     while( !open.empty() ) {
-        // Add some random factor to effective distance to make it look cooler
         const float distance = open.top().first * rng_float( 1.0f, 1.2f );
         const tripoint_bub_ms pt = open.top().second;
         open.pop();
@@ -226,6 +238,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         if( force <= 1.0f ) {
             continue;
         }
+
         if( m->coverage( pt ) > 0 && pt != p ) {
             const ter_id ter_here = m->ter( pt );
             const ter_t &ter_obj = ter_here.obj();
@@ -252,8 +265,8 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
             }
             force *= 1 - attenuation / 100;
         }
+        // Don't propagate further.
         if( ( m->impassable( pt ) && pt != p ) || force == 0 ) {
-            // Don't propagate further
             continue;
         }
 
@@ -268,7 +281,7 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         }
 
         empty_neighbors = std::max( 1, empty_neighbors );
-        // Iterate over all neighbors. Bash all of them, propagate to some
+        // Iterate over all neighbors. Bash all of them, propagate to some.
         for( size_t i = 0; i < max_index; i++ ) {
             tripoint_bub_ms dest( pt + tripoint_rel_ms( x_offset[i], y_offset[i], z_offset[i] ) );
             if( closed.count( dest ) != 0 || !m->inbounds( dest ) ||
@@ -282,16 +295,22 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                 const float bash_force = !fire ?
                                          force + ( 2 * force / empty_neighbors ) :
                                          force / 2;
+
                 if( z_offset[i] == 0 ) {
-                    // Horizontal - no floor bashing
+                    // Horizontal - no floor bashing.
                     m->bash( dest, bash_force, true, false, false, nullptr );
+                    record_if_empty_space( dest );
                 } else if( z_offset[i] > 0 ) {
-                    // Should actually bash through the floor first, but that's not really possible yet
-                    m->bash( dest, bash_force, true, false, true, nullptr );
-                } else if( !m->valid_move( pt, dest, false, true ) ) {
-                    // Only bash through floor if it doesn't exist
-                    // Bash the current tile's floor, not the one's below
-                    m->bash( pt, bash_force, true, false, true, nullptr );
+                    // Bash upward through floor.
+                    if( dest.z() <= MAX_Z ) {
+                        m->bash( dest, bash_force, true, false, true, nullptr );
+                        record_if_empty_space( dest );
+                    }
+                } else {
+                    if( pt.z() > MIN_Z ) {
+                        m->bash( pt, bash_force, true, false, true, nullptr );
+                        record_if_empty_space( pt );
+                    }
                 }
             }
 
@@ -301,7 +320,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                 if( !m->valid_move( pt, dest, false, true ) ) {
                     continue;
                 }
-
                 next_dist += zlev_dist;
             }
 
@@ -312,7 +330,19 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         }
     }
 
-    // Draw the explosion, but only if the explosion center is within the reality bubble
+    // Finalize crater geometry after blast completes.
+    if( !crater_tiles.empty() ) {
+        std::map<int, std::set<tripoint_bub_ms>> crater_tiles_by_z;
+        for( const auto &pt : crater_tiles ) {
+            crater_tiles_by_z[pt.z()].insert( pt );
+        }
+
+        for( auto it = crater_tiles_by_z.begin(); it != crater_tiles_by_z.end(); ++it ) {
+            m->finalize_crater_ramps( it->second, it->first );
+        }
+    }
+
+    // Draw the explosion, but only if the explosion center is within the reality bubble.
     map &bubble_map = reality_bubble();
     if( bubble_map.inbounds( m->get_abs( p ) ) ) {
         std::map<tripoint_bub_ms, nc_color> explosion_colors;
@@ -345,7 +375,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
     for( const tripoint_bub_ms &pt : closed ) {
         const float force = power * std::pow( distance_factor, dist_map.at( pt ) );
         if( force < 1.0f ) {
-            // Too weak to matter
             continue;
         }
 
@@ -362,7 +391,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         }
 
         if( const optional_vpart_position vp = m->veh_at( pt ) ) {
-            // TODO: Make this weird unit used by vehicle::damage more sensible
             vp->vehicle().damage( m[0], vp->part_index(), force,
                                   fire ? damage_heat : damage_bash, false );
         }
@@ -384,12 +412,9 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
                                              dmg * 3 ) );
             critter->apply_damage( mutable_source, bodypart_id( "torso" ), actual_dmg );
             critter->check_dead_state( m );
-            add_msg_debug( debugmode::DF_EXPLOSION, "Blast hits %s for %d damage", critter->disp_name(),
-                           actual_dmg );
             continue;
         }
 
-        // Print messages for all NPCs
         if( bubble_map.inbounds( pt_abs ) ) {
             pl->add_msg_player_or_npc( m_bad, _( "You're caught in the explosion!" ),
                                        _( "<npcname> is caught in the explosion!" ) );
@@ -405,7 +430,6 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
         static const std::array<blastable_part, 6> blast_parts = { {
                 { bodypart_id( "torso" ), 2.0f, 3.0f, 0.5f },
                 { bodypart_id( "head" ),  2.0f, 3.0f, 0.5f },
-                // Hit limbs harder so that it hurts more without being much more deadly
                 { bodypart_id( "leg_l" ), 2.0f, 3.5f, 0.4f },
                 { bodypart_id( "leg_r" ), 2.0f, 3.5f, 0.4f },
                 { bodypart_id( "arm_l" ), 2.0f, 3.5f, 0.4f },
@@ -415,20 +439,13 @@ static void do_blast( map *m, const Creature *source, const tripoint_bub_ms &p, 
 
         for( const blastable_part &blp : blast_parts ) {
             const int part_dam = rng( force * blp.low_mul, force * blp.high_mul );
-            const std::string hit_part_name = body_part_name_accusative( blp.bp );
-            // FIXME: Hardcoded damage type
-            const damage_instance dmg_instance = damage_instance( damage_bash, part_dam, 0, blp.armor_mul );
-            const dealt_damage_instance result = pl->deal_damage( mutable_source, blp.bp, dmg_instance );
-            const int res_dmg = result.total_damage();
-
-            add_msg_debug( debugmode::DF_EXPLOSION, "%s for %d raw, %d actual", hit_part_name, part_dam,
-                           res_dmg );
-            if( res_dmg > 0 ) {
-                pl->add_msg_if_player( m_bad, _( "Your %s is hit for %d damage!" ), hit_part_name, res_dmg );
-            }
+            const damage_instance dmg_instance =
+                damage_instance( damage_bash, part_dam, 0, blp.armor_mul );
+            pl->deal_damage( mutable_source, blp.bp, dmg_instance );
         }
     }
 }
+
 
 static std::vector<tripoint_bub_ms> shrapnel( map *m, const Creature *source,
         const tripoint_bub_ms &src, int power,
