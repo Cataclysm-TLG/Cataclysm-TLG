@@ -198,10 +198,12 @@ static const ter_str_id ter_t_floor_wax( "t_floor_wax" );
 static const ter_str_id ter_t_gas_pump( "t_gas_pump" );
 static const ter_str_id ter_t_gas_pump_smashed( "t_gas_pump_smashed" );
 static const ter_str_id ter_t_grass( "t_grass" );
+static const ter_str_id ter_t_grass_dead( "t_grass_dead" );
 static const ter_str_id ter_t_open_air( "t_open_air" );
 static const ter_str_id ter_t_reb_cage( "t_reb_cage" );
 static const ter_str_id ter_t_rock_floor( "t_rock_floor" );
 static const ter_str_id ter_t_rootcellar( "t_rootcellar" );
+static const ter_str_id ter_t_soil( "t_soil" );
 static const ter_str_id ter_t_stump( "t_stump" );
 static const ter_str_id ter_t_tree_birch( "t_tree_birch" );
 static const ter_str_id ter_t_tree_birch_harvested( "t_tree_birch_harvested" );
@@ -910,7 +912,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
         for( const tripoint_abs_ms &p : veh.get_points() ) {
             const tripoint_bub_ms pos = get_bub( p );
             const ter_id &pter = ter( pos );
-            if( pter == ter_t_dirt || pter == ter_t_grass ) {
+            if( pter == ter_t_dirt || pter == ter_t_grass || pter == ter_t_grass_dead ) {
                 ter_set( pos, ter_t_dirtmound );
             }
         }
@@ -4578,6 +4580,110 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     return bsh;
 }
+
+void map::finalize_crater_ramps( const std::set<tripoint_bub_ms> &crater_tiles, int base_z )
+{
+    constexpr int MIN_Z = -10;
+    constexpr int MAX_Z = 10;
+
+    if( base_z < MIN_Z || base_z > MAX_Z ) {
+        return;
+    }
+
+    static const std::array<tripoint_rel_ms, 4> dirs = {
+        tripoint_rel_ms::north,
+        tripoint_rel_ms::south,
+        tripoint_rel_ms::west,
+        tripoint_rel_ms::east
+    };
+
+    struct ter_change {
+        tripoint_bub_ms p;
+        ter_str_id ter;
+    };
+
+    std::vector<ter_change> changes;
+
+    for( const tripoint_bub_ms &hole : crater_tiles ) {
+        if( !inbounds( hole ) || hole.z() != base_z ) {
+            continue;
+        }
+
+        if( !ter( hole )->has_flag( "EMPTY_SPACE" ) ) {
+            continue;
+        }
+
+        for( const tripoint_rel_ms &d : dirs ) {
+            const tripoint_bub_ms wall_z0  = hole + d;
+
+            // wall_zm1 is one below wall_z0
+            int below_z = wall_z0.z() - 1;
+
+            if( below_z < MIN_Z ) {
+                continue;
+            }
+
+            const tripoint_bub_ms wall_zm1 = tripoint_bub_ms( wall_z0.x(), wall_z0.y(), below_z );
+
+            if( !inbounds( wall_z0 ) || !inbounds( wall_zm1 ) ) {
+                continue;
+            }
+
+            if( !ter( wall_z0 )->has_flag( ter_furn_flag::TFLAG_DIGGABLE ) ) {
+                continue;
+            }
+
+            if( ter( wall_zm1 ) != ter_t_soil ) {
+                continue;
+            }
+
+            if( ter( wall_zm1 )->has_flag( ter_furn_flag::TFLAG_RAMP ) ) {
+                continue;
+            }
+
+            // The high side of the ramp is placed one tile away from the edge with a component on both Z levels.
+            const tripoint_bub_ms outer_z0  = wall_z0  + d;
+            int outer_below_z = outer_z0.z() - 1;
+
+            if( outer_below_z < MIN_Z ) {
+                continue;
+            }
+
+            const tripoint_bub_ms outer_zm1 = tripoint_bub_ms( outer_z0.x(), outer_z0.y(), outer_below_z );
+
+            if( !inbounds( outer_z0 ) || !inbounds( outer_zm1 ) ) {
+                continue;
+            }
+
+            if( !ter( outer_z0 )->has_flag( ter_furn_flag::TFLAG_DIGGABLE ) ) {
+                continue;
+            }
+
+            if( ter( outer_zm1 ) != ter_t_soil ) {
+                continue;
+            }
+
+            if( ter( outer_zm1 )->has_flag( ter_furn_flag::TFLAG_RAMP ) ) {
+                continue;
+            }
+
+            // Place ramps only when we're sure we can place both components on both levels.
+            changes.push_back( { wall_zm1, ter_str_id( "t_earth_ramp_up_low" ) } );
+            changes.push_back( { wall_z0, ter_str_id( "t_earth_ramp_down_low" ) } );
+
+            changes.push_back( { outer_zm1, ter_str_id( "t_earth_ramp_up_high" ) } );
+            changes.push_back( { outer_z0, ter_str_id( "t_earth_ramp_down_high" ) } );
+        }
+    }
+
+    // Apply changes last to avoid feedback during analysis.
+    for( const ter_change &chg : changes ) {
+        if( inbounds( chg.p ) ) {
+            ter_set( chg.p, chg.ter );
+        }
+    }
+}
+
 
 void map::bash_items( const tripoint_bub_ms &p, bash_params &params )
 {
