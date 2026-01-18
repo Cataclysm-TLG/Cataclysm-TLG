@@ -84,9 +84,6 @@
           "CRUSTACEAN_CARAPACE",
           "CRUSTACEAN_CARAPACE_MOLTED",
           "bio_deformity",
-          "bio_armor_head",
-          "bio_armor_legs",
-          "bio_armor_torso",
           "bio_armor_eyes",
           "bio_blindfold",
           "bio_face_mask"
@@ -163,7 +160,7 @@
         "order": 3000
       },
       {
-        "id": [ "bio_blade", "bio_blaster", "bio_emp_armgun", "bio_dis_acid", "bio_evap", "bio_ads", "bio_armor_arms" ],
+        "id": [ "bio_blade", "bio_blaster", "bio_emp_armgun", "bio_dis_acid", "bio_evap", "bio_ads" ],
         "order": 3250
       },
       {
