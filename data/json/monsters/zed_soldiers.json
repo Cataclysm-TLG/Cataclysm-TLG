@@ -475,7 +475,7 @@
     "vision_night": 3,
     "luminance": 4,
     "harvest": "zombie_humanoid",
-    "dissect": "dissect_mon_broken_cyborg",
+    "dissect": "dissect_mon_broken_cyborg_advanced",
     "special_attacks": [ { "id": "bio_op_takedown", "cooldown": 20 } ],
     "special_when_hit": [ "ZAPBACK", 75 ],
     "death_drops": "mon_zombie_bio_op_death_drops",

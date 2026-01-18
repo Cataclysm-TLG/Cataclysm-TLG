@@ -125,6 +125,40 @@
     ]
   },
   {
+    "id": "cyborg_advanced_harvest",
+    "type": "item_group",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "bio_dis_shock", "prob": 1 },
+      { "item": "bio_dis_acid", "prob": 1 },
+      { "item": "bio_drain", "prob": 1 },
+      { "item": "bio_noise", "prob": 1 },
+      { "item": "bio_power_weakness", "prob": 1 },
+      { "item": "bio_itchy", "prob": 1 },
+      { "item": "bio_nostril", "prob": 1 },
+      { "item": "bio_thumbs", "prob": 1 },
+      { "item": "bio_spasm", "prob": 1 },
+      { "item": "bio_shakes", "prob": 1 },
+      { "item": "bio_leaky", "prob": 1 },
+      { "item": "bio_sleepy", "prob": 1 },
+      { "item": "bio_deformity", "prob": 1 },
+      { "item": "bio_voice", "prob": 1 },
+      { "item": "bio_pokedeye", "prob": 1 },
+      { "item": "bio_ankles", "prob": 1 },
+      { "item": "bio_trip", "prob": 1 },
+      { "item": "bio_stiff", "prob": 1 },
+      { "item": "bio_glowy", "prob": 1 },
+      { "item": "bio_sleep_shutdown", "prob": 1 },
+      { "item": "bio_faulty_electromagnetic_leak", "prob": 1 },
+      { "item": "bio_faulty_grossfood", "prob": 1 },
+      { "item": "bio_radleak", "prob": 1 },
+      { "group": "bionics_common", "prob": 10 },
+      { "group": "bionics_mil", "prob": 5 },
+      { "item": "bio_power_storage_mkII", "prob": 2 },
+      { "item": "bio_power_storage", "prob": 2 }
+    ]
+  },
+  {
     "type": "item_group",
     "id": "turret_speaker",
     "items": [

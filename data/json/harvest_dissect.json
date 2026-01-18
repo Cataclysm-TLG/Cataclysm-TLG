@@ -749,5 +749,30 @@
         "max": 5
       }
     ]
+  },
+  {
+    "id": "dissect_mon_broken_cyborg_advanced",
+    "type": "harvest",
+    "message": "You search for any salvageable hardware in what's left of the cyborg.",
+    "entries": [
+      {
+        "drop": "bio_power_storage",
+        "type": "bionic",
+        "flags": [ "FILTHY", "NO_STERILE", "NO_PACKED" ],
+        "faults": [ "fault_bionic_salvaged" ],
+        "base_num": [ 0, 2 ],
+        "scale_num": [ 0.1, 0.6 ],
+        "max": 5
+      },
+      {
+        "drop": "cyborg_advanced_harvest",
+        "type": "bionic_group",
+        "flags": [ "FILTHY", "NO_STERILE", "NO_PACKED" ],
+        "faults": [ "fault_bionic_salvaged" ],
+        "base_num": [ 0, 2 ],
+        "scale_num": [ 0.1, 0.6 ],
+        "max": 5
+      }
+    ]
   }
 ]
