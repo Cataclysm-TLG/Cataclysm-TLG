@@ -1425,7 +1425,7 @@ class item : public visitable
          * @return the state of the armor
          */
         armor_status damage_armor_durability( damage_unit &du, damage_unit &premitigated,
-                                              const bodypart_id &bp,
+                                              const bodypart_id &bp, const Character *you, 
                                               double enchant_multiplier = 1 );
 
         /**
@@ -2154,7 +2154,7 @@ class item : public visitable
          * For testing only a single body part, use @ref covers instead. This function allows you
          * to get the whole covering data in one call.
          */
-        body_part_set get_covered_body_parts() const;
+        body_part_set get_covered_body_parts( const Character *you = nullptr ) const;
         /**
         * Bitset of all covered body parts, from a specific side.
         *
@@ -2166,17 +2166,17 @@ class item : public visitable
         *
         * @param s Specifies the side. Will be ignored for non-sided items.
         */
-        body_part_set get_covered_body_parts( side s ) const;
+       body_part_set get_covered_body_parts(const side s, const Character *you = nullptr) const;
 
         /**
          * returns a vector of all the sub_body_parts of this item
          */
-        std::vector<sub_bodypart_id> get_covered_sub_body_parts() const;
+        std::vector<sub_bodypart_id> get_covered_sub_body_parts( const Character *you = nullptr ) const;
 
         /**
          * returns a vector of all the sub_body_parts of this item accounting for a specific side
          */
-        std::vector<sub_bodypart_id> get_covered_sub_body_parts( side s ) const;
+        std::vector<sub_bodypart_id> get_covered_sub_body_parts( side s, const Character *you = nullptr ) const;
 
         /**
          * returns true if the item has armor and if it has sub location coverage

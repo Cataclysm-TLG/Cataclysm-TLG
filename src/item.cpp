@@ -1031,49 +1031,71 @@ std::optional<side> item::covers_overlaps( const item &rhs ) const
     }
 }
 
-std::vector<sub_bodypart_id> item::get_covered_sub_body_parts() const
+std::vector<sub_bodypart_id> item::get_covered_sub_body_parts( const Character *you ) const
 {
-    return get_covered_sub_body_parts( get_side() );
+    return get_covered_sub_body_parts( get_side(), you );
 }
 
-std::vector<sub_bodypart_id> item::get_covered_sub_body_parts( const side s ) const
+std::vector<sub_bodypart_id> item::get_covered_sub_body_parts(const side s, const Character *you) const
 {
     std::vector<sub_bodypart_id> res;
     std::unordered_set<sub_bodypart_id> seen;
 
-    iterate_covered_sub_body_parts_internal( s, [&]( const sub_bodypart_id & bp ) {
-        if( seen.insert( bp ).second ) {
-            res.push_back( bp );
+    iterate_covered_sub_body_parts_internal(s, [&](const sub_bodypart_id &sbp) {
+        if (seen.insert(sbp).second) {
+            res.push_back(sbp);
         }
 
-        for( const sub_bodypart_str_id &similar : bp->similar_bodyparts ) {
+        for (const sub_bodypart_str_id &similar : sbp->similar_bodyparts) {
             sub_bodypart_id similar_id = similar.id();
-            if( seen.insert( similar_id ).second ) {
-                res.push_back( similar_id );
+            if (seen.insert(similar_id).second) {
+                res.push_back(similar_id);
             }
         }
-    } );
+    });
+
+    if (you != nullptr) {
+        // We can't get sbps for some reason, so filter by looking for their parent parts.
+        std::vector<sub_bodypart_id> filtered;
+        for (const sub_bodypart_id &sbp : res) {
+            if (you->has_part(sbp->parent)) {
+                filtered.push_back(sbp);
+            }
+        }
+        res = std::move(filtered);
+    }
 
     return res;
 }
 
-
-body_part_set item::get_covered_body_parts() const
+body_part_set item::get_covered_body_parts( const Character *you ) const
 {
-    return get_covered_body_parts( get_side() );
+    return get_covered_body_parts( get_side(), you );
 }
 
-body_part_set item::get_covered_body_parts( const side s ) const
+body_part_set item::get_covered_body_parts(const side s, const Character *you ) const
 {
     body_part_set res;
 
-    iterate_covered_body_parts_internal( s, [&]( const bodypart_str_id & bp ) {
-        res.set( bp );
+    iterate_covered_body_parts_internal(s, [&](const bodypart_str_id &bp) {
+        res.set(bp);
 
-        for( const bodypart_str_id &similar : bp->similar_bodyparts ) {
-            res.set( similar );
+        for (const bodypart_str_id &similar : bp->similar_bodyparts) {
+            res.set(similar);
         }
-    } );
+    });
+
+    if (you != nullptr) {
+        std::vector<bodypart_str_id> to_reset;
+        for (const bodypart_str_id &bp : res) {
+            if (!you->has_part(bp)) {
+                to_reset.push_back(bp);
+            }
+        }
+        for (const bodypart_str_id &bp : to_reset) {
+            res.reset(bp);
+        }
+    }
 
     return res;
 }
@@ -9043,7 +9065,7 @@ int item::repairable_levels() const
 }
 
 item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &premitigated,
-        const bodypart_id &bp,
+        const bodypart_id &bp, const Character *you,
         double enchant_multiplier )
 {
     //Energy shields aren't damaged by attacks but do get their health variable reduced.  They are also only
@@ -9079,9 +9101,16 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
     // Scale chance of article taking damage based on the number of parts it covers.
     // Large articles are able to take more punishment before being destroyed.
     // TODO: Make this not recount analagous parts.
-    int num_parts_covered = get_covered_body_parts().count();
+    int num_parts_covered = 1;
+    if( you != nullptr ) {
+        num_parts_covered = get_covered_body_parts( you ).count();
+    } else {
+        // This function should never be called without Character, but here's a guard in case they die or something mid-attack.
+        num_parts_covered = get_covered_body_parts().count();
+    }
+    // Clamp num_parts_covered to avoid very high or low chances here.
     // Acid spreads out to cover the surface of the item, ignoring this mitigation.
-    if( !one_in( num_parts_covered ) && !du.type->env ) {
+    if( !one_in( std::clamp(num_parts_covered, 2, 5) ) && !du.type->env ) {
         return armor_status::UNDAMAGED;
     }
     // Don't damage armor as much when bypassed by armor piercing, both for balance and because most of these
@@ -9089,18 +9118,21 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
     const float post_mitigated_dmg = du.amount;
     if( post_mitigated_dmg > armors_own_resist ) {
         // Figure out chance of damage relative to the damage we took.
-        float damaged_chance = ( 0.11 * ( post_mitigated_dmg / ( armors_own_resist + 2 ) ) + 0.1 ) *
+        float damaged_chance = ( 0.11f * ( post_mitigated_dmg / ( armors_own_resist + 2 ) ) + 0.1f ) *
                                enchant_multiplier;
         // Soft items are protected from bash damage in much the same way the PLASTIC flag protects monsters.
         if( du.type == damage_bash && is_soft() ) {
-            damaged_chance *= 0.66;
+            damaged_chance *= 0.66f;
         }
         // A large caliber blew a huge hole in our vest. Our plate mail got completely shredded open.
-        if( damaged_chance >= 1.0 ) {
+        if( damaged_chance >= 1.0f ) {
             return mod_damage( itype::damage_scale ) ? armor_status::DESTROYED : armor_status::DAMAGED;
         }
         // The attack got through, but not entirely.
-        if( one_in( 1 / ( 1 - damaged_chance ) ) ) {
+        if( has_flag( flag_STURDY ) ) {
+            damaged_chance *= 0.5f;
+        }
+        if( rng_float(0.0f, 1.0f) > damaged_chance ) {
             return armor_status::UNDAMAGED;
         }
     } else {
