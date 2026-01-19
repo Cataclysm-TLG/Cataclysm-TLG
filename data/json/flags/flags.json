@@ -2718,5 +2718,12 @@
     "type": "json_flag",
     "//": "Terrain / Furniture flag used in Construction pre_flags field",
     "name": "Wired Wall"
+  },
+  {
+    "id": "PHASE_BACK",
+    "type": "json_flag",
+    "//": "Terrain / Furniture flag",
+    "name": "Phase back",
+    "info": "This terrain will phase back to its original terrain when no longer modified."
   }
 ]
