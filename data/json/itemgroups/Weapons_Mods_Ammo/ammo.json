@@ -860,7 +860,6 @@
     "subtype": "distribution",
     "entries": [
       { "item": "light_battery_cell", "prob": 25, "charges": [ 0, 100 ] },
-      { "item": "light_minus_battery_cell", "prob": 12, "charges": [ 0, 50 ] },
       { "item": "light_battery_cell", "prob": 9, "charges": [ 0, 150 ] },
       { "item": "light_battery_cell", "prob": 50, "charges": [ 0, 300 ] }
     ]
@@ -870,7 +869,6 @@
     "id": "ammo_light_batteries_full",
     "items": [
       { "item": "light_battery_cell", "prob": 25, "charges": 100 },
-      { "item": "light_minus_battery_cell", "prob": 12, "charges": 50 },
       { "item": "light_battery_cell", "prob": 9, "charges": 150 },
       { "item": "light_battery_cell", "prob": 50, "charges": 300 }
     ]
