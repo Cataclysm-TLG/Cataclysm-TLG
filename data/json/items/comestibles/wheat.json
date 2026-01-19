@@ -137,7 +137,6 @@
     "price_postapoc": "10 cent",
     "material": [ "wheat", "powder" ],
     "volume": "24 ml",
-    "//": "240 ml is equivalent to 1 cup of flour.  10 charges is roughly equivalent to a cup of flour for American recipes.",
     "flags": [ "EDIBLE_FROZEN", "RAW" ],
     "vitamins": [ [ "iron", 3 ], [ "wheat_allergen", 1 ] ],
     "fun": -5

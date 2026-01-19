@@ -295,13 +295,13 @@ bool trapfunc::board( const tripoint_bub_ms &p, Creature *c, item * )
     // Weight of 150kg+ is guaranteed to break the trap, linear chance as weight increases.
     if( x_in_y( c->get_weight() / 1_kilogram, 150 ) ) {
         // Destroy trap.
-        here.remove_trap( p );
         if( !c->is_avatar() ) {
             add_msg_if_player_sees( p, _( "%s destroys a %s as they move over it!" ),
                                     c->disp_name( false, true ), here.tr_at( p ).name() );
         } else {
             add_msg( _( "You destroy the %s as you step on it!" ), here.tr_at( p ).name() );
         }
+        here.remove_trap( p );
     } else if( x_in_y( 40, 100 ) ) {
         // 40% chance disarm trap
         here.tr_at( p ).on_disarmed( here, p );
