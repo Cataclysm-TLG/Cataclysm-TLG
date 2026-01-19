@@ -247,10 +247,8 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     }
     int damage_chance = static_cast<int>( ( stat_factor * material_factor /
                                             ( wear_multiplier * enchant_multiplier ) ) );
-    // DURABLE_MELEE items are made to hit stuff and they do it well, so they're considered to be a lot tougher
-    // than other weapons made of the same materials.
     if( shield->has_flag( flag_DURABLE_MELEE ) ) {
-        damage_chance *= 4;
+        damage_chance *= 2;
     }
 
     if( damage_chance > 0 && !one_in( damage_chance ) ) {
@@ -2251,8 +2249,11 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Do we block with a weapon? Handle melee wear but leave bp the same.
     if( !( unarmed || force_unarmed || worn_shield || armed_body_block ) && allow_weapon_blocking ) {
         thing_blocked_with = shield->tname();
-        // TODO: Change this depending on damage blocked.
-        float wear_modifier = 1.0f;
+        // Scaling modifier from incoming damage. 
+        float base_wear = 0.1f;
+        float normalized = std::clamp( dam.total_damage() / 100.f, 0.f, 1.f);
+        float wear_modifier = base_wear + ( 2.0f - base_wear ) * std::sqrt( normalized );
+        wear_modifier = std::clamp( wear_modifier, 0.f, 2.0f );
         if( source != nullptr && source->is_hallucination() ) {
             wear_modifier = 0.0f;
         }
@@ -2267,7 +2268,7 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
 
             if( source != nullptr && !source->is_hallucination() ) {
                 for( damage_unit &du : dam.damage_units ) {
-                    shield->damage_armor_durability( du, du, bp_hit, calculate_by_enchantment( 1,
+                    shield->damage_armor_durability( du, du, bp_hit, this, calculate_by_enchantment( 1,
                                                      enchant_vals::mod::EQUIPMENT_DAMAGE_CHANCE ) );
                 }
             }
