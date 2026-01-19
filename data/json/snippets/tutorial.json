@@ -37,7 +37,7 @@
       },
       {
         "id": "LESSON_PICKUP",
-        "text": "You just stepped on a space with one or more items.  If you wish to pick it up, press <keybind:pickup>.  To select the tile directly underneath you, press <keybind:pause>.\n\nIn the <color_light_cyan>Pickup</color> menu, press:\n<keybind:RIGHT> to select the items you wish to pick up\n<keybind:LEFT> to deselect\n<keybind:CONFIRM> to confirm\n\nNote that you don't need to stand directly on the space with items to pick them up, you can pick them up when standing near them.\n\nIf the item is too big to fit in any of your pockets, or is a weapon that you want to wield, you can press <keybind:wield> to wield it from the ground or from the <color_light_cyan>Pickup</color> menu.\n\nTo continue the tutorial, please pick up the <color_light_cyan>baseball bat</color> you're standing on and move to the door to the south."
+        "text": "You just stepped on a space with one or more items.  If you wish to pick it up, press <keybind:pickup>.  To select the tile directly underneath you, press <keybind:pause>.\n\nIn the <color_light_cyan>Pickup</color> menu, press:\n<keybind:RIGHT> to select the items you wish to pick up\n<keybind:LEFT> to deselect\n<keybind:CONFIRM> to confirm\n\nNote that you don't need to stand directly on the space with items to pick them up, you can pick them up when standing near them.\n\nIf the item is too big to fit in any of your pockets, or is a weapon that you want to wield, you can press <keybind:wield> to wield it from the ground or from the <color_light_cyan>Pickup</color> menu.\n\nTo continue the tutorial, please <color_light_cyan>wield</color> the baseball bat you're standing on and move to the door to the south."
       },
       {
         "id": "LESSON_EXAMINE",
@@ -177,7 +177,7 @@
       },
       {
         "id": "LESSON_FLASHLIGHT",
-        "text": "There is a <color_light_cyan>flashlight</color> and a <color_light_cyan>light disposable battery</color> lying on the rack.  Flashlights are very useful tools as they allow you to see in the dark.\n\nTo continue the tutorial, please reload the flashlight by pressing <keybind:reload_item>.  Take it with you and move to the stairs."
+        "text": "There is a <color_light_cyan>flashlight</color> and a <color_light_cyan>dry cell battery</color> lying on the rack.  Flashlights are very useful tools as they allow you to see in the dark.\n\nTo continue the tutorial, please reload the flashlight by pressing <keybind:reload_item>.  Take it with you and move to the stairs."
       },
       {
         "id": "LESSON_REMOTE_USE",
