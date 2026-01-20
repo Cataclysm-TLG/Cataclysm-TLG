@@ -1029,33 +1029,34 @@ std::vector<sub_bodypart_id> item::get_covered_sub_body_parts( const Character *
     return get_covered_sub_body_parts( get_side(), you );
 }
 
-std::vector<sub_bodypart_id> item::get_covered_sub_body_parts(const side s, const Character *you) const
+std::vector<sub_bodypart_id> item::get_covered_sub_body_parts( const side s,
+        const Character *you ) const
 {
     std::vector<sub_bodypart_id> res;
     std::unordered_set<sub_bodypart_id> seen;
 
-    iterate_covered_sub_body_parts_internal(s, [&](const sub_bodypart_id &sbp) {
-        if (seen.insert(sbp).second) {
-            res.push_back(sbp);
+    iterate_covered_sub_body_parts_internal( s, [&]( const sub_bodypart_id & sbp ) {
+        if( seen.insert( sbp ).second ) {
+            res.push_back( sbp );
         }
 
-        for (const sub_bodypart_str_id &similar : sbp->similar_bodyparts) {
+        for( const sub_bodypart_str_id &similar : sbp->similar_bodyparts ) {
             sub_bodypart_id similar_id = similar.id();
-            if (seen.insert(similar_id).second) {
-                res.push_back(similar_id);
+            if( seen.insert( similar_id ).second ) {
+                res.push_back( similar_id );
             }
         }
-    });
+    } );
 
-    if (you != nullptr) {
+    if( you != nullptr ) {
         // We can't get sbps for some reason, so filter by looking for their parent parts.
         std::vector<sub_bodypart_id> filtered;
-        for (const sub_bodypart_id &sbp : res) {
-            if (you->has_part(sbp->parent)) {
-                filtered.push_back(sbp);
+        for( const sub_bodypart_id &sbp : res ) {
+            if( you->has_part( sbp->parent ) ) {
+                filtered.push_back( sbp );
             }
         }
-        res = std::move(filtered);
+        res = std::move( filtered );
     }
 
     return res;
@@ -1066,27 +1067,27 @@ body_part_set item::get_covered_body_parts( const Character *you ) const
     return get_covered_body_parts( get_side(), you );
 }
 
-body_part_set item::get_covered_body_parts(const side s, const Character *you ) const
+body_part_set item::get_covered_body_parts( const side s, const Character *you ) const
 {
     body_part_set res;
 
-    iterate_covered_body_parts_internal(s, [&](const bodypart_str_id &bp) {
-        res.set(bp);
+    iterate_covered_body_parts_internal( s, [&]( const bodypart_str_id & bp ) {
+        res.set( bp );
 
-        for (const bodypart_str_id &similar : bp->similar_bodyparts) {
-            res.set(similar);
+        for( const bodypart_str_id &similar : bp->similar_bodyparts ) {
+            res.set( similar );
         }
-    });
+    } );
 
-    if (you != nullptr) {
+    if( you != nullptr ) {
         std::vector<bodypart_str_id> to_reset;
-        for (const bodypart_str_id &bp : res) {
-            if (!you->has_part(bp)) {
-                to_reset.push_back(bp);
+        for( const bodypart_str_id &bp : res ) {
+            if( !you->has_part( bp ) ) {
+                to_reset.push_back( bp );
             }
         }
-        for (const bodypart_str_id &bp : to_reset) {
-            res.reset(bp);
+        for( const bodypart_str_id &bp : to_reset ) {
+            res.reset( bp );
         }
     }
 
@@ -8454,7 +8455,7 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
 
     // Min and max timer values (assuming refrigerator-temp corpse).
     int min_turns = to_turns<int>( 6_hours );
-    int max_turns = to_turns<int>( 48_hours );
+    int max_turns = to_turns<int>( 36_hours );
 
     if( revive_timer_str.empty() ) {
         int timer_turns = rng( min_turns, max_turns );
@@ -9155,7 +9156,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
     }
     // Clamp num_parts_covered to avoid very high or low chances here.
     // Acid spreads out to cover the surface of the item, ignoring this mitigation.
-    if( !one_in( std::clamp(num_parts_covered, 2, 5) ) && !du.type->env ) {
+    if( !one_in( std::clamp( num_parts_covered, 2, 5 ) ) && !du.type->env ) {
         return armor_status::UNDAMAGED;
     }
     // Don't damage armor as much when bypassed by armor piercing, both for balance and because most of these
@@ -9177,7 +9178,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
         if( has_flag( flag_STURDY ) ) {
             damaged_chance *= 0.5f;
         }
-        if( rng_float(0.0f, 1.0f) > damaged_chance ) {
+        if( rng_float( 0.0f, 1.0f ) > damaged_chance ) {
             return armor_status::UNDAMAGED;
         }
     } else {

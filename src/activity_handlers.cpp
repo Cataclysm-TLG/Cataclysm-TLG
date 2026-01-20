@@ -803,23 +803,23 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
     switch( corpse.size ) {
         // Time (roughly) in turns to cut up the corpse
         case creature_size::tiny:
-            time_to_cut = 150;
+            time_to_cut = 600; // 10 minutes
             break;
         case creature_size::small:
-            time_to_cut = 300;
+            time_to_cut = 1200; // 20 minutes
             break;
         case creature_size::medium:
-            time_to_cut = 450;
+            time_to_cut = 1800; // 30 minutes
             break;
         case creature_size::large:
-            time_to_cut = 600;
+            time_to_cut = 2400; // 40 minutes
             break;
         case creature_size::huge:
-            time_to_cut = 1800;
+            time_to_cut = 3600; // 1 hour
             break;
         default:
             debugmsg( "ERROR: Invalid creature_size on %s", corpse.nname() );
-            time_to_cut = 450; // default to medium
+            time_to_cut = 1800; // Default to medium/30 min.
             break;
     }
 
@@ -829,6 +829,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
     switch( action ) {
         case butcher_type::QUICK:
         case butcher_type::BLEED:
+            time_to_cut /= 2;
             break;
         case butcher_type::FULL:
             if( !corpse_item.has_flag( flag_FIELD_DRESS ) || corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) ) {
@@ -839,7 +840,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             break;
         case butcher_type::FIELD_DRESS:
         case butcher_type::SKIN:
-            time_to_cut *= 2;
+            time_to_cut *= 1.5;
             break;
         case butcher_type::QUARTER:
             break;
@@ -1118,9 +1119,8 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 roll /= 4;
             } else if( entry.type == harvest_drop_bone ) { // NOLINT(bugprone-branch-clone)
                 roll /= 2;
-            } else if( corpse_item->get_mtype()->size >= creature_size::medium &&
-                       entry.type == harvest_drop_skin ) {
-                roll /= 2;
+            } else if( entry.type == harvest_drop_skin ) {
+                roll = 0; // You're hacking it apart, no pelt for you.
             } else if( entry.type == harvest_drop_offal ) {
                 roll /= 5;
             } else {
@@ -1168,7 +1168,7 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
                 roll = ( roll / 2 ) + rng( roll / 2, roll );
             }
         }
-        // unskillfull field dressing may damage the skin, meat, and other parts
+        // Unskillfull field dressing may damage the skin, meat, and other parts.
         if( ( action == butcher_type::FULL || action == butcher_type::QUICK ) &&
             corpse_item->has_flag( flag_FIELD_DRESS_FAILED ) ) {
             if( entry.type == harvest_drop_offal ) {

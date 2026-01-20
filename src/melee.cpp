@@ -2249,9 +2249,9 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Do we block with a weapon? Handle melee wear but leave bp the same.
     if( !( unarmed || force_unarmed || worn_shield || armed_body_block ) && allow_weapon_blocking ) {
         thing_blocked_with = shield->tname();
-        // Scaling modifier from incoming damage. 
+        // Scaling modifier from incoming damage.
         float base_wear = 0.1f;
-        float normalized = std::clamp( dam.total_damage() / 100.f, 0.f, 1.f);
+        float normalized = std::clamp( dam.total_damage() / 100.f, 0.f, 1.f );
         float wear_modifier = base_wear + ( 2.0f - base_wear ) * std::sqrt( normalized );
         wear_modifier = std::clamp( wear_modifier, 0.f, 2.0f );
         if( source != nullptr && source->is_hallucination() ) {
