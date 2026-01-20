@@ -815,7 +815,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             time_to_cut = 2400; // 40 minutes
             break;
         case creature_size::huge:
-            time_to_cut = 3600; // 1 hour
+            time_to_cut = 5400; // 90 minutes
             break;
         default:
             debugmsg( "ERROR: Invalid creature_size on %s", corpse.nname() );
@@ -839,13 +839,14 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
             }
             break;
         case butcher_type::FIELD_DRESS:
+            time_to_cut /= 4;
         case butcher_type::SKIN:
             time_to_cut *= 1.5;
             break;
         case butcher_type::QUARTER:
             break;
         case butcher_type::DISSECT:
-            time_to_cut *= 6;
+            time_to_cut *= 1.5;
             break;
         case butcher_type::NUM_TYPES:
             debugmsg( "ERROR: Invalid butcher_type" );
