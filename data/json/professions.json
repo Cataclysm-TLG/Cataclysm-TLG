@@ -3445,7 +3445,7 @@
       "both": { "entries": [ { "item": "socks" }, { "item": "knit_scarf" }, { "group": "charged_smart_phone" } ] },
       "male": { "entries": [ { "item": "briefs" }, { "item": "tux" }, { "item": "dress_shoes" } ] },
       "female": {
-        "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "dress" }, { "item": "purse", "custom-flags": [ "auto_wield" ] } ]
+        "entries": [ { "item": "bra" }, { "item": "panties" }, { "item": "dress" }, { "item": "heels" }, { "item": "purse", "custom-flags": [ "auto_wield" ] } ]
       }
     },
     "age_lower": 16
