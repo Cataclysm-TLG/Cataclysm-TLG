@@ -5809,9 +5809,7 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
     if( g->new_game ) {
         return false;
     }
-    if( it.has_flag( flag_FIELD_DRESS ) || it.has_flag( flag_FIELD_DRESS_FAILED ) ||
-        it.has_flag( flag_QUARTERED ) ) {
-        // Failed reanimation due to corpse being butchered
+    if( !it.can_revive() ) {
         return false;
     }
 
@@ -10016,16 +10014,6 @@ static void butcher_submenu( const std::vector<map_stack::iterator> &corpses, in
                                           "skin, hide, pelt, etc., so don't use it if you want to "
                                           "harvest them later." ),
                                        msgFactor ) );
-    // smenu.addentry_col( static_cast<int>( butcher_type::DISMEMBER ),
-    //                     is_enabled( butcher_type::DISMEMBER ),
-    //                     'm', _( "Dismember corpse" )
-    //                     + progress_str( butcher_type::DISMEMBER ),
-    //                     time_or_disabledreason( butcher_type::DISMEMBER ),
-    //                     string_format( "%s  %s",
-    //                                    _( "If you're aiming to just destroy a body outright and don't "
-    //                                       "care about harvesting it, dismembering it will hack it apart "
-    //                                       "in a very short amount of time but yields little to no usable flesh." ),
-    //                                    msgFactor ) );
     smenu.addentry_col( static_cast<int>( butcher_type::DISSECT ),
                         is_enabled( butcher_type::DISSECT ),
                         'd', _( "Dissect corpse" )

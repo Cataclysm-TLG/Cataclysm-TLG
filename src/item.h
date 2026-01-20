@@ -357,7 +357,7 @@ class item : public visitable
          * the return value can differ on successive calls.
          * @param pos The location of the item (see REVIVE_SPECIAL flag).
          */
-        bool ready_to_revive( map &here, const tripoint_bub_ms &pos ) const;
+        bool ready_to_revive( map &here, const tripoint_bub_ms &pos );
 
         bool is_money() const;
     private:
