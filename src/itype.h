@@ -1228,13 +1228,13 @@ class islot_milling
 
 struct memory_card_info {
     float data_chance;
-    itype_id on_read_convert_to;
+    itype_id on_read_convert_to;  // NOLINT(cata-serialize)
 
-    float photos_chance;
-    int photos_amount;
+    float photos_chance;  // NOLINT(cata-serialize)
+    int photos_amount;  // NOLINT(cata-serialize)
 
-    float songs_chance;
-    int songs_amount;
+    float songs_chance;  // NOLINT(cata-serialize)
+    int songs_amount; // NOLINT(cata-serialize)
 
     float recipes_chance;
     int recipes_amount;
@@ -1242,6 +1242,9 @@ struct memory_card_info {
     int recipes_level_max;
     std::set<crafting_category_id> recipes_categories;
     bool secret_recipes;
+
+    bool was_loaded = false;
+    void deserialize( const JsonObject &jo );
 };
 
 struct item_melee_damage {
@@ -1411,6 +1414,9 @@ struct itype {
         // itemgroup used to generate the recipes within nanofabricator templates.
         item_group_id nanofab_template_group;
 
+        // list of traits.
+        string_id<Trait_group> trait_group;
+        
         // used for corpses placed by mapgen
         mtype_id source_monster = mtype_id::NULL_ID();
     private:
@@ -1521,9 +1527,6 @@ struct itype {
         // Should the item explode when lit on fire
         bool explode_in_fire = false;
 
-        // used for generic_factory for copy-from
-        bool was_loaded = false;
-
         // Expand snippets in the description and save the description on the object
         bool expand_snippets = false;
 
@@ -1623,6 +1626,19 @@ struct itype {
 
         // returns true if it is one of the outcomes of cutting
         bool is_basic_component() const;
+
+        //TO-DO: remove all of these
+        void set_qualities_from_json( const JsonObject &jo, const std::string &member, itype &def );
+        void extend_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
+        void delete_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
+        void relative_qualities_from_json( const JsonObject &jo, std::string_view member, itype &def );
+        void set_techniques_from_json( const JsonObject &jo, const std::string_view &member, itype &def );
+        void extend_techniques_from_json( const JsonObject &jo, std::string_view member, itype &def );
+        void delete_techniques_from_json( const JsonObject &jo, std::string_view member, itype &def );
+
+        // used for generic_factory for copy-from
+        bool was_loaded = false;
+        void load( const JsonObject &jo, std::string_view src );
 };
 
 void load_charge_removal_blacklist( const JsonObject &jo, std::string_view src );
