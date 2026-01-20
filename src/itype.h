@@ -1415,7 +1415,7 @@ struct itype {
 
         // list of traits.
         string_id<Trait_group> trait_group;
-        
+
         // used for corpses placed by mapgen
         mtype_id source_monster = mtype_id::NULL_ID();
     private:
