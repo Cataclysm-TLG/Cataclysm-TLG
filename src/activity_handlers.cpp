@@ -829,7 +829,7 @@ int butcher_time_to_cut( Character &you, const item &corpse_item, const butcher_
     switch( action ) {
         case butcher_type::QUICK:
         case butcher_type::BLEED:
-            time_to_cut /= 2;
+            time_to_cut /= 4;
             break;
         case butcher_type::FULL:
             if( !corpse_item.has_flag( flag_FIELD_DRESS ) || corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) ) {
