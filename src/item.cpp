@@ -8439,7 +8439,7 @@ bool item::can_revive() const
               has_flag( flag_FROZEN ) );
 }
 
-bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos ) const
+bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos )
 {
     if( !can_revive() ) {
         return false;
@@ -8447,31 +8447,83 @@ bool item::ready_to_revive( map &here, const tripoint_bub_ms &pos ) const
     if( here.veh_at( pos ) ) {
         return false;
     }
-    if( !calendar::once_every( 1_seconds ) ) {
+
+    // Read revive timer stored as string.
+    std::string revive_timer_str = get_var( "revive_timer_turns", "" );
+    time_duration revive_timer = 0_seconds;
+
+    // Min and max timer values (assuming refrigerator-temp corpse).
+    int min_turns = to_turns<int>( 6_hours );
+    int max_turns = to_turns<int>( 48_hours );
+
+    if( revive_timer_str.empty() ) {
+        int timer_turns = rng( min_turns, max_turns );
+        revive_timer = time_duration::from_turns( timer_turns );
+        set_var( "revive_timer_turns", std::to_string( timer_turns ) );
+    } else {
+        int timer_turns = 0;
+        bool need_to_set = false;
+        try {
+            timer_turns = std::stoi( revive_timer_str );
+            if( timer_turns < min_turns || timer_turns > max_turns ) {
+                timer_turns = rng( min_turns, max_turns );
+                need_to_set = true;
+            }
+        } catch( const std::exception & ) {
+            timer_turns = rng( min_turns, max_turns );
+            need_to_set = true;
+        }
+        revive_timer = time_duration::from_turns( timer_turns );
+        if( need_to_set ) {
+            set_var( "revive_timer_turns", std::to_string( timer_turns ) );
+        }
+    }
+
+    time_duration elapsed = calendar::turn - birthday();
+
+    /* If we're not cold, we can revive when the timer is half over. This allows
+    refrigeration to slow revival without a lot of fuss when temperatures change. */
+    if( !has_flag( flag_COLD ) ) {
+        if( elapsed < revive_timer / 2 ) {
+            return false;
+        }
+    } else {
+        // We are cold, so we have to wait until the timer is all the way done.
+        if( elapsed < revive_timer ) {
+            return false;
+        }
+    }
+
+    // Physical damage slows revival.
+    float damage_factor = 0.125f;
+    time_duration damage_adjusted = revive_timer * ( 1.0f + damage_level() * damage_factor );
+
+    if( elapsed < damage_adjusted ) {
         return false;
     }
-    int age_in_hours = to_hours<int>( age() );
-    age_in_hours -= static_cast<int>( static_cast<float>( burnt ) / ( volume() / 250_ml ) );
-    if( damage_level() > 0 ) {
-        age_in_hours /= ( damage_level() + 1 );
-    }
-    int rez_factor = 48 - age_in_hours;
-    if( age_in_hours > 6 && ( rez_factor <= 0 || one_in( rez_factor ) ) ) {
-        // If we're a special revival zombie, wait to get up until the player is nearby.
-        const bool isReviveSpecial = has_flag( flag_REVIVE_SPECIAL );
-        if( isReviveSpecial ) {
-            const int distance = rl_dist( pos, get_player_character().pos_bub() );
-            if( distance > 3 ) {
-                return false;
-            }
-            if( !one_in( distance + 1 ) ) {
-                return false;
-            }
-        }
 
-        return true;
+    // Burnt zombies revive faster.
+    float burn_factor = 0.5f;
+    float burn_ratio = std::min( 1.0f, float( burnt ) / ( volume() / 250_ml ) );
+    time_duration burn_adjusted = damage_adjusted * ( 1.0f - burn_ratio * burn_factor );
+
+    if( elapsed < burn_adjusted ) {
+        return false;
     }
-    return false;
+
+    // REVIVE_SPECIAL is used by dormant zombies.
+    const bool isReviveSpecial = has_flag( flag_REVIVE_SPECIAL );
+    if( isReviveSpecial ) {
+        const int distance = rl_dist( pos, get_player_character().pos_bub() );
+        if( distance > 3 ) {
+            return false;
+        }
+        if( !one_in( distance + 1 ) ) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool item::is_money() const
@@ -13531,25 +13583,24 @@ void item::process_relic( Character *carrier, const tripoint_bub_ms &pos )
 
 bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms &pos )
 {
-    // some corpses rez over time
     if( corpse == nullptr || damage() >= max_damage() ) {
         return false;
     }
 
     if( corpse->has_flag( mon_flag_DORMANT ) ) {
-        //if dormant, ensure trap still exists.
+        // If dormant, ensure trap still exists.
         const trap *trap_here = &here.tr_at( pos );
         if( trap_here->is_null() ) {
-            // if there isn't a trap, we need to add one again.
+            // If there isn't a trap, we need to add one again.
             here.trap_set( pos, trap_id( "tr_dormant_corpse" ) );
         } else if( trap_here->loadid != trap_id( "tr_dormant_corpse" ) ) {
-            // if there is a trap, but it isn't the right one, we need to revive the zombie manually.
+            // If there is a trap, but it isn't the right one, we need to revive the zombie manually.
             return g->revive_corpse( pos, *this, 3 );
         }
         return false;
     }
 
-    // handle human corpses rising as zombies
+    // Handle human corpses rising as zombies.
     if( corpse->id == mtype_id::NULL_ID() && !has_var( "zombie_form" ) &&
         !mon_human->zombify_into.is_empty() ) {
         set_var( "zombie_form", mon_human->zombify_into.c_str() );
@@ -13558,27 +13609,23 @@ bool item::process_corpse( map &here, Character *carrier, const tripoint_bub_ms 
     if( !ready_to_revive( here, pos ) ) {
         return false;
     }
-    if( rng( 0, volume() / 250_ml ) > burnt &&
-        g->revive_corpse( pos, *this ) ) {
-        if( carrier == nullptr ) {
-            if( corpse->in_species( species_ROBOT ) ) {
-                add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
-            } else {
-                add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
-            }
+    if( carrier == nullptr ) {
+        if( corpse->in_species( species_ROBOT ) ) {
+            add_msg_if_player_sees( pos, m_warning, _( "A nearby robot has repaired itself and stands up!" ) );
         } else {
-            if( corpse->in_species( species_ROBOT ) ) {
-                carrier->add_msg_if_player( m_warning,
-                                            _( "A robot you're carrying has started moving!" ) );
-            } else {
-                carrier->add_msg_if_player( m_warning,
-                                            _( "A corpse you're carrying has started moving!" ) );
-            }
+            add_msg_if_player_sees( pos, m_warning, _( "A nearby corpse rises from the dead!" ) );
         }
-        // Destroy this corpse item
+        return true;
+    } else {
+        if( corpse->in_species( species_ROBOT ) ) {
+            carrier->add_msg_if_player( m_warning,
+                                        _( "A robot you're carrying has started moving!" ) );
+        } else {
+            carrier->add_msg_if_player( m_warning,
+                                        _( "A corpse you're carrying has started moving!" ) );
+        }
         return true;
     }
-
     return false;
 }
 
