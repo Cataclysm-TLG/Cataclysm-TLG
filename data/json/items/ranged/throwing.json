@@ -119,7 +119,7 @@
     "volume": "3058 ml",
     "weight": "1000 g",
     "longest_side": "43 cm",
-    "to_hit": -1,
+    "to_hit": { "grip": "weapon", "length": "short", "surface": "line", "balance": "uneven" },
     "weapon_category": [ "HAND_AXES" ],
     "thrown_damage": [ { "damage_type": "bash", "amount": 6 }, { "damage_type": "cut", "amount": 16 } ],
     "melee_damage": { "bash": 10, "cut": 17 }
