@@ -10,14 +10,14 @@
     "description": "A vegetable from the gourd family, bottle gourds were brought to the Americas by the first Native American settlers crossing the Bering strait.  This one has been dried for processing into a watertight container.",
     "volume": "1250 ml",
     "container": "bag_plastic",
-    "flags": [ "INEDIBLE" ]
+    "flags": [ "INEDIBLE", "NO_TEMP" ]
   },
   {
     "id": "gum",
     "type": "COMESTIBLE",
     "comestible_type": "FOOD",
     "name": { "str_sp": "chewing gum" },
-    "description": "Sugar-free chewing gum.",
+    "description": "That gum you liked is probably not going to come back in style.",
     "category": "food",
     "weight": "3 g",
     "volume": "2 ml",
@@ -26,7 +26,7 @@
     "symbol": "*",
     "color": "pink",
     "fun": 2,
-    "flags": [ "NO_INGEST" ],
+    "flags": [ "NO_INGEST", "NO_TEMP" ],
     "use_action": [ "CHEW" ]
   },
   {
@@ -36,7 +36,7 @@
     "name": { "str": "slime glob" },
     "weight": "238 g",
     "color": "dark_gray",
-    "use_action": [ "POISON" ],
+    "flag": [ "INEDIBLE" ],
     "comestible_type": "FOOD",
     "symbol": "%",
     "calories": 174,
