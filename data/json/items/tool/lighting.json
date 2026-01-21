@@ -243,7 +243,7 @@
   {
     "id": "diving_flashlight",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "diving flashlight (off)", "str_pl": "diving flashlights (off)" },
     "description": "A little waterproof light.  It can easily be clipped to a belt or a helmet, or to some diving masks.",
     "material": [ "plastic", "aluminum" ],
@@ -279,7 +279,7 @@
     "id": "diving_flashlight_on",
     "copy-from": "diving_flashlight",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "diving flashlight (on)", "str_pl": "diving flashlights (on)" },
     "looks_like": "flashlight_on",
     "power_draw": "575 mW",

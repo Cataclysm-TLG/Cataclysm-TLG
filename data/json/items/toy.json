@@ -942,7 +942,7 @@
   },
   {
     "id": "scythe_toy",
-    "type": "GENERIC",
+    "type": "ITEM",
     "symbol": "/",
     "color": "light_gray",
     "name": { "str": "plastic scythe" },

@@ -887,7 +887,8 @@
   },
   {
     "id": "shock_staff",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "powered quarterstaff", "str_pl": "powered quarterstaves" },
     "copy-from": "i_staff",
     "description": "An ironshod quarterstaff that has a high-voltage stun gun built into the handle.  The stun gun is wired to the metal caps at either end of the staff, allowing you to zap a dangerous opponent should beating them senseless with it prove too hazardous.",
@@ -919,7 +920,8 @@
   },
   {
     "id": "shocktonfa_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "tactical tonfa (off)", "str_pl": "tactical tonfas (off)" },
     "description": "A reinforced plastic tonfa; the core is filled with capacitors and a high-yield rechargeable storage battery.  When a switch on the handle is pressed, a high-voltage current is transmitted to the two electrodes mounted in the end of the tonfa, and by extension to anyone unfortunate enough to be in contact with them.  It also has a nifty flashlight, which is off at the moment.",
@@ -951,7 +953,8 @@
   {
     "id": "shocktonfa_on",
     "copy-from": "shocktonfa_off",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "tactical tonfa (on)", "str_pl": "tactical tonfas (on)" },
     "description": "A reinforced plastic tonfa; the core is filled with capacitors and a high-yield rechargeable storage battery.  When a switch on the handle is pressed, a high-voltage current is transmitted to the two electrodes mounted in the end of the weapon, and by extension to anyone unfortunate enough to be in contact with them.  The integral flashlight is turned on, continually draining power and lighting the surrounding area.",
     "power_draw": "15 W",

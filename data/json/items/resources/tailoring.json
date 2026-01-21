@@ -254,7 +254,7 @@
   {
     "id": "kevlar_sheet_layered",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "ballistic Kevlar panel" },
     "description": "16 layers of ballistic Kevlar sheets quilted together into a soft, flexible panel.  This kind of Kevlar is precision-made by machine and features an extremely tight and uniform weave which cannot be replicated by hand.",
@@ -271,7 +271,7 @@
   {
     "id": "kevlar_plate",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "Kevlar plate" },
     "description": "A compressed panel of layered Kevlar fabric saturated with epoxy or other adhesive to make it stiff as a board.",
@@ -333,7 +333,7 @@
   {
     "id": "gambeson_batting",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "gambeson batting", "str_pl": "clumps of gambeson batting" },
     "description": "A pile of shredded fabric, dry grass, hair or other cheap materials which could be used to stuff the fabric layers of a gambeson to create armor more cheaply and easily than properly layering and quilting the entire product.",

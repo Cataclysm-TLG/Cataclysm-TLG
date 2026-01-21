@@ -331,7 +331,7 @@
   },
   {
     "id": "glass_shard_trap",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "deployables",
     "symbol": ",",
     "color": "light_cyan",

@@ -1,7 +1,8 @@
 [
   {
     "id": "tazer",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "category": "weapons",
     "name": { "str": "stun gun" },
     "description": "A high-powered stun gun.  Use this item to attempt to electrocute an adjacent enemy, temporarily paralyzing them.",
@@ -676,7 +677,8 @@
   },
   {
     "id": "spray_can",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "spraypaint" },
     "description": "An aerosol spray can used to store paint under pressure.  Activate it to make graffiti on the floor.",
     "weight": "340 g",
@@ -694,7 +696,8 @@
   },
   {
     "id": "rubber_spray_can",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "rubber sealant spray" },
     "description": "An aerosol spray can that contains (if there's any left) quick-drying liquid butyl rubber, which can be sprayed onto fabric and other materials to make them waterproof, or onto surfaces like spraypaint.",
     "weight": "340 g",
@@ -711,7 +714,7 @@
   },
   {
     "id": "bottle_plastic_superglue",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "container",
     "name": { "str": "superglue bottle" },
     "looks_like": "bottle_plastic_tiny",
@@ -738,7 +741,8 @@
   },
   {
     "id": "stepladder",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "wooden stepladder (folded)" },
     "description": "A single-story wooden A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "weight": "20000 g",
@@ -1043,7 +1047,8 @@
   },
   {
     "id": "pail_plastic",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "plastic pail" },
     "description": "A small plastic bucket, the kind of thing a child might have built sandcastles with.",
     "weight": "250 g",
@@ -1097,7 +1102,8 @@
   },
   {
     "id": "aluminum_stepladder",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "name": { "str": "aluminum stepladder (folded)" },
     "description": "A single-story aluminum A-frame ladder, collapsed for transport or storage.  Activate it to set it up.",
     "looks_like": "stepladder",

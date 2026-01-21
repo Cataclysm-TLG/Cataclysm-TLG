@@ -698,7 +698,7 @@
   {
     "id": "mininuke",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "weapons",
     "name": { "str": "SADM mininuke" },
     "//": "This is based on the B54 Mod 1, all other man-portable nuclear weapons have far too high a yield.",
@@ -729,7 +729,7 @@
     "id": "mininuke_act",
     "copy-from": "mininuke",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "active SADM mininuke" },
     "description": "The nuclear bomb looks no different from the outside, yet you know that the device is armed and counting down.  You should probably get far, far away from it.",
     "price": "0 cent",

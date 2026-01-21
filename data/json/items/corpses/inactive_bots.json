@@ -946,7 +946,7 @@
     "melee_damage": { "bash": 8 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "broken_balloon_sniper_drone",
     "symbol": ",",
     "color": "yellow",

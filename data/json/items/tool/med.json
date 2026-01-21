@@ -160,7 +160,7 @@
   },
   {
     "id": "medical_gauze_makeshift",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "drugs",
     "name": { "str": "makeshift gauze patch", "str_pl": "makeshift gauze patches" },
     "description": "A palm-sized square of absorbent material with adhesive tape along the edges, designed for easy application.  It's neither professional nor sterile, but maybe this isn't the time to be choosy.",
@@ -373,7 +373,7 @@
   {
     "id": "scissors_medical",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "medical scissors", "str_pl": "pairs of medical scissors" },
     "description": "A pair of medical scissors, typically used by nurses or paramedics to cut bandages or fabric.",
     "weight": "50 g",

@@ -3684,7 +3684,8 @@
   },
   {
     "id": "lanyard",
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "ARMOR" ],
     "category": "clothing",
     "symbol": "[",
     "color": "white",

@@ -250,7 +250,7 @@
   {
     "id": "kiln_done",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "tools",
     "name": { "str": "finished charcoal kiln" },
     "description": "A charcoal kiln that has finished burning.  Disassemble it to get the charcoal.",
@@ -266,7 +266,7 @@
   {
     "id": "kiln_full",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "tools",
     "name": { "str": "filled charcoal kiln" },
     "description": "A kiln filled with wood which will become charcoal after a slow period of burning.",
@@ -290,7 +290,7 @@
   },
   {
     "id": "kiln_lit",
-    "type": "GENERIC",
+    "type": "ITEM",
     "category": "tools",
     "name": { "str": "lit charcoal kiln" },
     "description": "A kiln full of wood that has been lit; better drop it!",
@@ -315,7 +315,7 @@
   {
     "id": "link_sheet",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "chainmail sheet" },
     "description": "A sheet of riveted chainmail.  With some skill, several of these sheets could be connected to make effective armor.",
@@ -390,7 +390,7 @@
   {
     "id": "tongs",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "kitchen tongs", "str_pl": "pairs of kitchen tongs" },
     "description": "A pair of long, metal tongs.  They are commonly used for cooking.",
     "weight": "167 g",
@@ -418,7 +418,7 @@
   {
     "id": "metalworking_tongs",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "flatjaw tongs", "str_pl": "pairs of flatjaw tongs" },
     "description": "A pair of flatjaw tongs.  They are commonly used for metalworking, fabrication, or forging recipes.",
     "weight": "730 g",
@@ -612,7 +612,7 @@
   {
     "id": "clay_blowtorch",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "blow lamp" },
     "//": "the Earilest form of Blowtorch that was essentially a very short clay pitcher with a wick and a copper tube to blow through. was capable of melting tin and copper",
     "description": "A very early version of a blow torch. Made with a clay bowl that holds a wick and metal tube, it is used by blowing through it to create a precise flame hot enough to weld soft metals like copper and gold. Mainly used for jewelry.",
@@ -635,7 +635,7 @@
   {
     "id": "fine_blowtorch",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "name": { "str": "jeweler's blowtorch" },
     "description": "A small butane blow torch with a pipe to blow into. Used by jewelers to weld soft metals like gold and copper together.",
     "weight": "350 g",

@@ -29,7 +29,8 @@
     "to_hit": -2
   },
   {
-    "type": "TOOL",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
     "id": "glass_shard_large",
     "symbol": ",",
     "color": "light_cyan",

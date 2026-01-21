@@ -260,7 +260,7 @@
     "melee_damage": { "bash": 19 }
   },
   {
-    "type": "GENERIC",
+    "type": "ITEM",
     "id": "chain_30",
     "category": "spare_parts",
     "name": { "str": "long steel chain" },

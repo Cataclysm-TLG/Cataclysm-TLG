@@ -97,7 +97,7 @@
   {
     "id": "nylon_patch",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "nylon patch", "str_pl": "nylon patches" },
     "description": "A palm-sized square of synthetic fabric.",
@@ -114,7 +114,7 @@
   {
     "id": "spandex_patch",
     "type": "ITEM",
-"subtypes": [ "TOOL" ],
+    "subtypes": [ "TOOL" ],
     "category": "spare_parts",
     "name": { "str": "spandex patch", "str_pl": "spandex patches" },
     "description": "A six-inch square patch of synthetic fabric blended with stretchy spandex fibers.  It could be used to make flexible yet strong clothing.  Stylish, but bad for the environment; at least you're recycling it.",
