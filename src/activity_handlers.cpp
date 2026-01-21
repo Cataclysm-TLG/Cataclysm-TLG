@@ -612,6 +612,12 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
         act.targets.pop_back();
         return;
     }
+    if( action == butcher_type::BLEED && ( corpse_item.has_flag( flag_FROZEN ) ) ) {
+        you.add_msg_if_player( m_info,
+                               _( "The corpse is frozen solid, the blood won't drain in this state." ) );
+        act.targets.pop_back();
+        return;
+    }
 
     if( action == butcher_type::DISSECT && ( corpse_item.has_flag( flag_QUARTERED ) ||
             corpse_item.has_flag( flag_FIELD_DRESS_FAILED ) || corpse_item.has_flag( flag_PULPED ) ||
