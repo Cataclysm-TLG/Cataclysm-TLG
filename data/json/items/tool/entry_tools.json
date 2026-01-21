@@ -62,7 +62,7 @@
     "longest_side": "50 cm",
     "price": "50 USD",
     "price_postapoc": "5 USD",
-    "to_hit": { "grip": "weapon", "length": "short", "surface": "point", "balance": "neutral" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "point", "balance": "uneven" },
     "material": [ "steel", "aluminum" ],
     "symbol": ";",
     "color": "dark_gray",
