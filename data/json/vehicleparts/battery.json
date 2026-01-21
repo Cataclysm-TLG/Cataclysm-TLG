@@ -12,7 +12,7 @@
     "description": "A battery for storing electrical power, and discharging it to power electrical devices built into the vehicle.",
     "folded_volume": "10 L",
     "breaks_into": [
-      { "item": "lead", "count": [ 1680, 2380 ] },
+      { "item": "lead", "count": [ 450, 900 ] },
       { "item": "chem_sulphuric_acid", "count": [ 5, 8 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 14, 20 ] },
       { "item": "scrap", "count": [ 2, 3 ] },
@@ -36,7 +36,7 @@
     "durability": 100,
     "folded_volume": "1500 ml",
     "breaks_into": [
-      { "item": "lead", "count": [ 252, 357 ] },
+      { "item": "lead", "count": [ 85, 175 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk", "count": [ 2, 3 ] },
       { "item": "scrap", "count": [ 0, 1 ] },
@@ -52,7 +52,7 @@
     "durability": 30,
     "folded_volume": "750 ml",
     "breaks_into": [
-      { "item": "lead", "count": [ 126, 178 ] },
+      { "item": "lead", "count": [ 45, 90 ] },
       { "item": "chem_sulphuric_acid", "count": [ 0, 1 ], "container-item": "null" },
       { "item": "plastic_chunk" },
       { "item": "scrap", "count": [ 0, 1 ] },
